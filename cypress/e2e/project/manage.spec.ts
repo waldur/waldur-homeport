@@ -40,6 +40,9 @@ type InputType = 'input' | 'textarea' | 'date';
 const getField = (field: string, type: InputType = 'input') => {
   if (type === 'date') {
     return cy.get('.modal input.flatpickr-input');
+  } else if (type === 'textarea' && field === 'description') {
+    // Description field uses MarkdownEditor which renders with .editable-area class
+    return cy.get('.modal .editable-area');
   } else {
     return cy.get(`.modal ${type}[name="${field}"]`);
   }
@@ -55,6 +58,9 @@ const updateField = (
 
   if (type === 'date') {
     cy.selectFlatpickrDate('.modal form input.flatpickr-input', value);
+  } else if (type === 'textarea' && field === 'description') {
+    // MarkdownEditor requires different interaction
+    getField(field, type).clear().type(value);
   } else {
     getField(field, type).clear().type(value);
   }
@@ -127,10 +133,12 @@ describe('Project manage', { testIsolation: false }, () => {
       closeEditDialog();
       // Ensure that description field is present
       openEditDialog('Description');
-      getField('description', 'textarea').should(
-        'have.value',
-        project.description,
-      );
+      // For MarkdownEditor, check text content instead of value
+      if (project.description) {
+        getField('description', 'textarea').should('contain.text', project.description);
+      } else {
+        getField('description', 'textarea').should('be.visible');
+      }
       closeEditDialog();
     });
   });

@@ -54,6 +54,10 @@ export const FIELD_TYPES: Array<{ value: OptionFieldTypeEnum; label: string }> =
       value: 'time',
       label: 'Time',
     },
+    {
+      value: 'conditional_cascade',
+      label: 'Conditional Cascade',
+    },
   ];
 
 export const OPTION_FORM_ID = 'OptionDialog';

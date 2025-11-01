@@ -40,15 +40,23 @@ const formatAttributes = (props): OrderCreateRequest['attributes'] => {
   }
   const serializer = getFormSerializer(props.offering.type);
   const attributes = serializer(props.formData.attributes, props.offering);
-  let newAttributes = {} as OrderCreateRequest['attributes'];
+  const newAttributes = {} as OrderCreateRequest['attributes'];
+
   for (const [key, value] of Object.entries(attributes)) {
-    newAttributes = {
-      ...newAttributes,
-      [key]:
-        typeof value === 'object' && !Array.isArray(value)
-          ? value['value']
-          : value,
-    };
+    // Check if this is a conditional_cascade field
+    const optionConfig = props.offering.options?.options?.[key];
+    const isConditionalCascade = optionConfig?.type === 'conditional_cascade';
+
+    if (isConditionalCascade) {
+      // For conditional cascade fields, keep the whole object
+      newAttributes[key] = value;
+    } else if (typeof value === 'object' && !Array.isArray(value)) {
+      // For regular select fields, extract the value property
+      newAttributes[key] = value['value'];
+    } else {
+      // For primitive values, use as-is
+      newAttributes[key] = value;
+    }
   }
   return newAttributes;
 };

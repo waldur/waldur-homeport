@@ -15677,7 +15677,8 @@
         ],
         "paths": [
           "administration/agreements/UserAgreementCreateDialog.tsx",
-          "administration/agreements/UserAgreementsExpandableRow.tsx"
+          "administration/agreements/UserAgreementsExpandableRow.tsx",
+          "core/TruncatedMarkdown.tsx"
         ]
       },
       "jsx_context": {
@@ -15701,7 +15702,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
@@ -16269,6 +16270,7 @@
         "title",
         "unknown",
         "generic_element",
+        "function_call",
         "label"
       ],
       "components": [
@@ -16284,6 +16286,7 @@
         "Tabs",
         "PublicDashboardHero",
         "FormGroup",
+        "Card",
         "Component"
       ],
       "is_user_facing": true,
@@ -16376,6 +16379,7 @@
           "marketplace/offerings/details/PublicOfferingComponentsTable.tsx",
           "marketplace/offerings/list/OfferingsList.tsx",
           "marketplace/offerings/update/components/ComponentsSection.tsx",
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx",
           "marketplace/offerings/update/options/OptionForm.tsx",
           "marketplace/orders/details/OrderDetailsQuickBody.tsx",
           "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
@@ -16434,7 +16438,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 50
+      "usage_count": 51
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -20614,9 +20618,10 @@
         "PublicDashboardHero",
         "AsyncActionDialog",
         "Panel",
-        "Tabs",
         "Col",
         "Row",
+        "TruncatedMarkdown",
+        "Tabs",
         "CommentSection",
         "WizardForm",
         "ActionDialog",
@@ -20777,6 +20782,7 @@
           "project/course-accounts/Step2PreviewAndCreate.tsx",
           "project/details/ProjectDetailsDialog.tsx",
           "project/import/Step5PreviewAndImport.tsx",
+          "project/manage/EditFieldDialog.tsx",
           "project/manage/ProjectGeneral.tsx",
           "proposals/CallsAvailableOfferingsPage.tsx",
           "proposals/PublicCallExpandableRow.tsx",
@@ -20816,6 +20822,7 @@
           "PublicOfferingCardTitle",
           "td",
           "Panel",
+          "TruncatedMarkdown",
           "WizardForm",
           "h3",
           "CommentSection",
@@ -20840,7 +20847,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 94
+      "usage_count": 95
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -27084,6 +27091,7 @@
           "list",
           "update",
           "endpoints",
+          "options",
           "partitions",
           "plans",
           "change-limits",
@@ -27172,6 +27180,7 @@
           "marketplace/offerings/list/OfferingsList.tsx",
           "marketplace/offerings/update/components/ComponentsSection.tsx",
           "marketplace/offerings/update/endpoints/AddEndpointDialog.tsx",
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx",
           "marketplace/offerings/update/overview/OverviewSection.tsx",
           "marketplace/offerings/update/partitions/OfferingPartitionsSection.tsx",
           "marketplace/offerings/update/plans/PlanComponentsTable.tsx",
@@ -27293,7 +27302,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 132
+      "usage_count": 133
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -29926,10 +29935,12 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "unknown",
+        "function_call"
       ],
       "components": [
-        "FormGroup"
+        "FormGroup",
+        "Card"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -29948,16 +29959,19 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "admin"
+          "admin",
+          "marketplace"
         ],
         "feature_areas": [
-          "providers"
+          "providers",
+          "options"
         ],
         "component_types": [
           "form"
         ],
         "paths": [
-          "administration/providers/ProviderForm.tsx"
+          "administration/providers/ProviderForm.tsx",
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
         ]
       },
       "jsx_context": {
@@ -29978,12 +29992,12 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 5
+        "max_nesting_level": 7
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -63564,6 +63578,7 @@
         ],
         "paths": [
           "core/TruncatedDescription.tsx",
+          "core/TruncatedMarkdown.tsx",
           "marketplace/resources/details/ResourceShowMoreComponents.tsx",
           "marketplace/resources/details/ServiceProviderCommentWarningBar.tsx",
           "navigation/header/announcements/AnnouncementBar.tsx"
@@ -63589,7 +63604,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -63660,6 +63675,82 @@
       },
       "usage_count": 2
     }
+  },
+  "Internal": {
+    "message": "Internal",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Badge",
+        "Panel",
+        "Col"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general",
+          "support",
+          "project_management"
+        ],
+        "feature_areas": [
+          "core",
+          "comments",
+          "project"
+        ],
+        "component_types": [
+          "component",
+          "card"
+        ],
+        "paths": [
+          "core/TruncatedMarkdown.tsx",
+          "issues/comments/IssueCommentItem.tsx",
+          "project/ProjectDashboard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge",
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
   },
   "There are no results for this keyword.": {
     "message": "There are no results for this keyword.",
@@ -118710,70 +118801,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Internal": {
-    "message": "Internal",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 8,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "support"
-        ],
-        "feature_areas": [
-          "comments"
-        ],
-        "component_types": [
-          "card"
-        ],
-        "paths": [
-          "issues/comments/IssueCommentItem.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This action modifies application state. Use clear, actionable language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "Comments": {
     "message": "Comments",
     "context": {
@@ -132178,6 +132205,148 @@
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Select {label}": {
+    "message": "Select {label}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "select_field"
+      ],
+      "components": [
+        "Select",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "label": {
+          "type": "string"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "common"
+        ],
+        "component_types": [
+          "field"
+        ],
+        "paths": [
+          "marketplace/common/ConditionalCascadeField.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Select"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: label. Variable types: string."
+    ]
+  },
+  "Please select {parent} first": {
+    "message": "Please select {parent} first",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "select_field"
+      ],
+      "components": [
+        "Select",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "parent": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "common"
+        ],
+        "component_types": [
+          "field"
+        ],
+        "paths": [
+          "marketplace/common/ConditionalCascadeField.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Select"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: parent. Variable types: unknown."
     ]
   },
   "Text has been copied": {
@@ -165059,6 +165228,1037 @@
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Step {index}": {
+    "message": "Step {index}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "index": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h6"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: index. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Internal field name (e.g., country)": {
+    "message": "Internal field name (e.g., country)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 35,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Display label (e.g., Country)": {
+    "message": "Display label (e.g., Country)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Depends on": {
+    "message": "Depends on",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Make this step dependent on previous selection": {
+    "message": "Make this step dependent on previous selection",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 46,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Select dependency": {
+    "message": "Select dependency",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "select_field"
+      ],
+      "components": [
+        "Select",
+        "Field"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Select"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Choices": {
+    "message": "Choices",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "JSON array of choice objects with value and label properties": {
+    "message": "JSON array of choice objects with value and label properties",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 60,
+        "wordCount": 10,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "[{\"value\": \"us\", \"label\": \"United States\"}, {\"value\": \"eu\", \"label\": \"European Union\"}]": {
+    "message": "[{\"value\": \"us\", \"label\": \"United States\"}, {\"value\": \"eu\", \"label\": \"European Union\"}]",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 87,
+        "wordCount": 10,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "\"value\": \"us\", \"label\": \"United States\"": {
+          "type": "string"
+        },
+        "\"value\": \"eu\", \"label\": \"European Union\"": {
+          "type": "string"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: \"value\": \"us\", \"label\": \"United States\", \"value\": \"eu\", \"label\": \"European Union\". Variable types: string.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Choices Map": {
+    "message": "Choices Map",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "JSON object mapping parent values to choice arrays": {
+    "message": "JSON object mapping parent values to choice arrays",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 50,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Example:\n{\"parent_value_1\": [{\"value\": \"child_1\", \"label\": \"Child 1\"}], \"parent_value_2\": [{\"value\": \"child_2\", \"label\": \"Child 2\"}]}": {
+    "message": "Example:\n{\"parent_value_1\": [{\"value\": \"child_1\", \"label\": \"Child 1\"}], \"parent_value_2\": [{\"value\": \"child_2\", \"label\": \"Child 2\"}]}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 133,
+        "wordCount": 13,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": true,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "\"parent_value_1\": [{\"value\": \"child_1\", \"label\": \"Child 1\"": {
+          "type": "string"
+        },
+        "\"value\": \"child_2\", \"label\": \"Child 2\"": {
+          "type": "string"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: \"parent_value_1\": [{\"value\": \"child_1\", \"label\": \"Child 1\", \"value\": \"child_2\", \"label\": \"Child 2\". Variable types: string.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Add step": {
+    "message": "Add step",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Button"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Button"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 3
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Cascade Configuration": {
+    "message": "Cascade Configuration",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Configure the steps and dependencies for the conditional cascade": {
+    "message": "Configure the steps and dependencies for the conditional cascade",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 64,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "options"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/options/ConditionalCascadeConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
   "Are you sure you want to delete option {name}?": {
@@ -244671,6 +245871,216 @@
       "usage_count": 1
     }
   },
+  "Edit description": {
+    "message": "Edit description",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "EditButton",
+        "EditGeneralInfoButton",
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management",
+          "general"
+        ],
+        "feature_areas": [
+          "project",
+          "general"
+        ],
+        "component_types": [
+          "component",
+          "form"
+        ],
+        "paths": [
+          "project/ProjectDashboard.tsx",
+          "proposals/update/general/CallGeneralSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "EditButton",
+          "EditGeneralInfoButton"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Staff Notes": {
+    "message": "Staff Notes",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "Panel",
+        "Col",
+        "TruncatedMarkdown",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "project"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/ProjectDashboard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Panel",
+          "TruncatedMarkdown"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Edit staff notes": {
+    "message": "Edit staff notes",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "EditButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "project"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "project/ProjectDashboard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "EditButton"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Project cost": {
     "message": "Project cost",
     "context": {
@@ -246768,6 +248178,140 @@
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "End date (optional)": {
+    "message": "End date (optional)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "project"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "project/ProjectRecoveryModal.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Set an expiration date for the recovered project": {
+    "message": "Set an expiration date for the recovered project",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 48,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "project"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "project/ProjectRecoveryModal.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Basic Recovery Available": {
@@ -253446,6 +254990,75 @@
         "max_nesting_level": 10
       },
       "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Staff notes": {
+    "message": "Staff notes",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "unknown",
+        "label"
+      ],
+      "components": [
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "manage"
+        ],
+        "component_types": [
+          "dialog",
+          "component"
+        ],
+        "paths": [
+          "project/manage/EditFieldDialog.tsx",
+          "project/manage/ProjectGeneral.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -273185,69 +274798,6 @@
       "is_user_facing": true,
       "text_characteristics": {
         "length": 9,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "general"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/update/general/CallGeneralSection.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "EditGeneralInfoButton"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    }
-  },
-  "Edit description": {
-    "message": "Edit description",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "EditGeneralInfoButton",
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 16,
         "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
