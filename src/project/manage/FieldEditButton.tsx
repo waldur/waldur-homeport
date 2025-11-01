@@ -24,7 +24,13 @@ export const FieldEditButton = (props: EditProjectProps) => {
     dispatch(
       props.name === 'end_date'
         ? openModalDialog(EditEndDateDialog, { resolve: props, size: 'lg' })
-        : openModalDialog(EditFieldDialog, { resolve: props, size: 'sm' }),
+        : openModalDialog(EditFieldDialog, {
+            resolve: props,
+            size:
+              props.name === 'staff_notes' || props.name === 'description'
+                ? 'lg'
+                : 'sm',
+          }),
     );
   };
 

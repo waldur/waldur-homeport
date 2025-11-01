@@ -15,11 +15,12 @@ export const formatPlan = (plan: PlanFormData) => ({
 });
 
 export const formatOption = (option: OptionFormData) => {
-  const { type, choices, ...rest } = option;
+  const { type, choices, cascade_config, ...rest } = option;
   const item: OptionField = {
     type: type.value as OptionFieldTypeEnum,
     ...rest,
   };
+
   // Split comma-separated list, strip spaces, omit empty items
   if (choices) {
     item.choices = choices
@@ -28,6 +29,12 @@ export const formatOption = (option: OptionFormData) => {
       .filter((s) => s.length > 0)
       .sort();
   }
+
+  // Handle cascade_config for conditional_cascade type
+  if (cascade_config && item.type === 'conditional_cascade') {
+    item.cascade_config = cascade_config;
+  }
+
   return item;
 };
 

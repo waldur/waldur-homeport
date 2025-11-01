@@ -32,6 +32,11 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             key: 'slug',
             value: project.slug || 'N/A',
           },
+          user.is_staff && {
+            label: translate('Staff notes'),
+            key: 'staff_notes',
+            value: project.staff_notes || 'N/A',
+          },
           {
             label: translate('Owner'),
             key: 'customer_name',

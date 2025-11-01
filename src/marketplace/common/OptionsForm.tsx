@@ -31,6 +31,7 @@ import { getCustomer } from '@waldur/workspace/selectors';
 import { FormGroup } from '../offerings/FormGroup';
 import { Offering } from '../types';
 
+import { ConditionalCascadeField } from './ConditionalCascadeField';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { DeployFormData } from './types';
 
@@ -158,6 +159,13 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
         getOptionValue: (option) => option.backend_id,
         placeholder: translate('Select instance...'),
         isMulti: true,
+      };
+      break;
+
+    case 'conditional_cascade':
+      OptionField = ConditionalCascadeField;
+      params = {
+        field: option,
       };
       break;
   }

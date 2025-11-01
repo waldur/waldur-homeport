@@ -11,6 +11,7 @@ import { DisplayNameField } from '../../DisplayNameField';
 import { FormGroup } from '../../FormGroup';
 import { InternalNameField } from '../../InternalNameField';
 
+import { ConditionalCascadeConfiguration } from './ConditionalCascadeConfiguration';
 import { FIELD_TYPES, OPTION_FORM_ID } from './constants';
 
 const selector = getFormValues(OPTION_FORM_ID);
@@ -71,6 +72,9 @@ export const OptionForm = ({ resourceType }) => {
         <FormGroup label={translate('Default value')}>
           <Field name="default" type="text" component={InputField} />
         </FormGroup>
+      )}
+      {type === 'conditional_cascade' && (
+        <ConditionalCascadeConfiguration name="cascade_config" />
       )}
       {resourceType === 'options' ? (
         <FormGroup>

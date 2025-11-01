@@ -17,6 +17,25 @@ import { formatOption } from '../../store/utils';
 import { OPTION_FORM_ID, FIELD_TYPES } from './constants';
 import { OptionForm } from './OptionForm';
 
+const serializeCascadeConfig = (cascadeConfig) => {
+  if (!cascadeConfig?.steps) return cascadeConfig;
+
+  return {
+    ...cascadeConfig,
+    steps: cascadeConfig.steps.map((step) => ({
+      ...step,
+      choices:
+        typeof step.choices === 'object'
+          ? JSON.stringify(step.choices)
+          : step.choices,
+      choices_map:
+        typeof step.choices_map === 'object'
+          ? JSON.stringify(step.choices_map)
+          : step.choices_map,
+    })),
+  };
+};
+
 export const EditOptionDialog = connect<{}, {}, { resolve: { option } }>(
   (_, ownProps) => ({
     initialValues: {
@@ -27,6 +46,9 @@ export const EditOptionDialog = connect<{}, {}, { resolve: { option } }>(
       choices: Array.isArray(ownProps.resolve.option.choices)
         ? ownProps.resolve.option.choices.join(', ')
         : ownProps.resolve.option.choices,
+      cascade_config: ownProps.resolve.option.cascade_config
+        ? serializeCascadeConfig(ownProps.resolve.option.cascade_config)
+        : undefined,
     },
   }),
 )(
