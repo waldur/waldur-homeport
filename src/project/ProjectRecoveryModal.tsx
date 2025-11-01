@@ -1,7 +1,7 @@
 import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Form } from 'react-final-form';
+import { Field, Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   Project,
@@ -11,7 +11,9 @@ import {
 
 import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { SubmitButton } from '@waldur/form';
+import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -37,7 +39,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
     dispatch(closeModalDialog());
   };
 
-  const handleRecover = async () => {
+  const handleRecover = async (values: any) => {
     try {
       const body: ProjectRecoveryRequest = {};
 
@@ -47,6 +49,10 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
         roleRecoveryOption === 'send_invitations_to_previous_members'
       ) {
         body.send_invitations_to_previous_members = true;
+      }
+
+      if (values.end_date) {
+        body.end_date = values.end_date;
       }
 
       const response = await projectsRecover({
@@ -242,6 +248,21 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
                 )}
               </div>
             )}
+
+            <div className="mb-4">
+              <FormGroup
+                label={translate('End date (optional)')}
+                description={translate(
+                  'Set an expiration date for the recovered project',
+                )}
+              >
+                <Field
+                  name="end_date"
+                  component={DateField as any}
+                  placeholder="YYYY-MM-DD"
+                />
+              </FormGroup>
+            </div>
 
             {!hasTerminationMetadata && (
               <Alert variant="info">
