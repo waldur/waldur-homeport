@@ -24,6 +24,7 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   money: (value) => defaultCurrency(value),
   date: (value) => formatDate(value),
   time: (value) => formatTime(value),
+  conditional_cascade: (value) => value,
 };
 
 export const OptionValue = ({
