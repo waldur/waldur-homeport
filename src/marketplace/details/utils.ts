@@ -43,12 +43,14 @@ const formatAttributes = (props): OrderCreateRequest['attributes'] => {
   const newAttributes = {} as OrderCreateRequest['attributes'];
 
   for (const [key, value] of Object.entries(attributes)) {
-    // Check if this is a conditional_cascade field
     const optionConfig = props.offering.options?.options?.[key];
-    const isConditionalCascade = optionConfig?.type === 'conditional_cascade';
 
-    if (isConditionalCascade) {
+    if (optionConfig?.type === 'conditional_cascade') {
       // For conditional cascade fields, keep the whole object
+      newAttributes[key] = value;
+    } else if (optionConfig?.type === 'component_multiplier') {
+      // For component multiplier fields, store the original user input
+      // The multiplication will be handled by backend during order processing
       newAttributes[key] = value;
     } else if (typeof value === 'object' && !Array.isArray(value)) {
       // For regular select fields, extract the value property

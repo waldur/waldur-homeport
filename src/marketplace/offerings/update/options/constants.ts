@@ -58,6 +58,10 @@ export const FIELD_TYPES: Array<{ value: OptionFieldTypeEnum; label: string }> =
       value: 'conditional_cascade',
       label: 'Conditional Cascade',
     },
+    {
+      value: 'component_multiplier',
+      label: 'Component Multiplier',
+    },
   ];
 
 export const OPTION_FORM_ID = 'OptionDialog';

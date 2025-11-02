@@ -78,7 +78,10 @@ export const AddOptionDialog = reduxForm<
         }
         closeButton
       >
-        <OptionForm resourceType={props.resolve.type} />
+        <OptionForm
+          resourceType={props.resolve.type}
+          offering={props.resolve.offering}
+        />
       </ModalDialog>
     </form>
   );

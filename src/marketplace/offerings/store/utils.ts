@@ -15,7 +15,13 @@ export const formatPlan = (plan: PlanFormData) => ({
 });
 
 export const formatOption = (option: OptionFormData) => {
-  const { type, choices, cascade_config, ...rest } = option;
+  const {
+    type,
+    choices,
+    cascade_config,
+    component_multiplier_config,
+    ...rest
+  } = option;
   const item: OptionField = {
     type: type.value as OptionFieldTypeEnum,
     ...rest,
@@ -33,6 +39,11 @@ export const formatOption = (option: OptionFormData) => {
   // Handle cascade_config for conditional_cascade type
   if (cascade_config && item.type === 'conditional_cascade') {
     item.cascade_config = cascade_config;
+  }
+
+  // Handle component_multiplier_config for component_multiplier type
+  if (component_multiplier_config && item.type === 'component_multiplier') {
+    item.component_multiplier_config = component_multiplier_config;
   }
 
   return item;

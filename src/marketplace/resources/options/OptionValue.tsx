@@ -25,6 +25,7 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   date: (value) => formatDate(value),
   time: (value) => formatTime(value),
   conditional_cascade: (value) => value,
+  component_multiplier: (value) => value,
 };
 
 export const OptionValue = ({

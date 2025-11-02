@@ -109,7 +109,10 @@ export const EditOptionDialog = connect<{}, {}, { resolve: { option } }>(
           }
           closeButton
         >
-          <OptionForm resourceType={props.resolve.type} />
+          <OptionForm
+            resourceType={props.resolve.type}
+            offering={props.resolve.offering}
+          />
         </ModalDialog>
       </form>
     );
