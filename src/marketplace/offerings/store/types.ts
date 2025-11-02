@@ -1,4 +1,4 @@
-import { CascadeConfig } from 'waldur-js-client';
+import { CascadeConfig, ComponentMultiplierConfig } from 'waldur-js-client';
 
 import { Option } from '@waldur/marketplace/common/registry';
 
@@ -20,6 +20,7 @@ export interface OptionFormData {
   type: Option;
   choices: string;
   cascade_config?: CascadeConfig;
+  component_multiplier_config?: ComponentMultiplierConfig;
 }
 
 export type OfferingLimits = Record<string, { min: number; max: number }>;
