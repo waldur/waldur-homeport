@@ -160,6 +160,10 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
         ? (this.props.hoverShadow.table ?? true)
         : this.props.hoverShadow;
 
+    if (this.props.hideIfEmpty && !this.hasRows()) {
+      return null;
+    }
+
     return (
       <FilterContextProvider
         {...this.props}

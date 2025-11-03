@@ -11450,6 +11450,7 @@
           "options",
           "plans",
           "mass-actions",
+          "offering-users",
           "marketplace-checklist",
           "checklists",
           "project",
@@ -11508,6 +11509,7 @@
           "marketplace/resources/actions/EditResourceEndDateDialog.tsx",
           "marketplace/resources/actions/MoveResourceDialog.tsx",
           "marketplace/resources/mass-actions/MultiMoveDialog.tsx",
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx",
           "marketplace-checklist/AnswerFormDialog.tsx",
           "marketplace-checklist/checklists/ChecklistStatusDialog.tsx",
           "openstack/openstack-tenant/actions/UpdatePortDialog.tsx",
@@ -11546,7 +11548,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 53
+      "usage_count": 54
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -105666,11 +105668,14 @@
       "primary_ui_type": "title",
       "ui_types": [
         "generic_element",
+        "unknown",
         "label",
         "title"
       ],
       "components": [
         "ActionItem",
+        "ModalDialog",
+        "Form",
         "WizardFormContainer"
       ],
       "is_user_facing": true,
@@ -105690,20 +105695,24 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "general"
+          "general",
+          "marketplace"
         ],
         "feature_areas": [
           "invitations",
+          "offering-users",
           "proposals",
           "review"
         ],
         "component_types": [
           "page",
-          "component",
-          "dialog"
+          "dialog",
+          "component"
         ],
         "paths": [
           "invitations/UserPermissionRequestReviewButton.tsx",
+          "marketplace/service-providers/offering-users/AnswerReviewAction.tsx",
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx",
           "proposals/proposal/create/ProgressSteps.tsx",
           "proposals/round/proposals/ProposalExpandableRow.tsx",
           "proposals/round/review/EditRoundReviewDialog.tsx",
@@ -105713,6 +105722,7 @@
       "jsx_context": {
         "tags": [
           "ActionItem",
+          "ModalDialog",
           "WizardFormContainer"
         ],
         "conditional_render": false
@@ -105728,14 +105738,16 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
+        "has_validation": true,
+        "max_nesting_level": 10
       },
-      "usage_count": 5
+      "usage_count": 7
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Comment": {
@@ -105745,13 +105757,15 @@
       "ui_types": [
         "title",
         "generic_element",
-        "label"
+        "label",
+        "unknown"
       ],
       "components": [
         "TextField",
         "FormContainer",
         "Field",
         "ExpandableContainer",
+        "FormGroup",
         "ModalDialog",
         "Col",
         "Row"
@@ -105781,6 +105795,7 @@
           "invitations",
           "feedback",
           "service-providers",
+          "offering-users",
           "marketplace-remote",
           "create-review",
           "resource-usage"
@@ -105796,6 +105811,7 @@
           "issues/feedback/SupportFeedbackListExpandableRow.tsx",
           "marketplace/service-providers/OfferingUsersExpandableRow.tsx",
           "marketplace/service-providers/ProviderOfferingUserUpdateDialog.tsx",
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx",
           "marketplace-remote/ReviewDialog.tsx",
           "proposals/proposal/create-review/CommentFormDialog.tsx",
           "reporting/resource-usage/ResourceUsageList.tsx",
@@ -105806,7 +105822,8 @@
       "jsx_context": {
         "tags": [
           "TextField",
-          "Field"
+          "Field",
+          "FormGroup"
         ],
         "conditional_render": false
       },
@@ -105824,7 +105841,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 10
+      "usage_count": 11
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -150912,6 +150929,7 @@
         "feature_areas": [
           "images",
           "usage",
+          "offering-users",
           "create",
           "configuration"
         ],
@@ -150922,6 +150940,7 @@
         "paths": [
           "marketplace/offerings/images/CreateImageDialog.tsx",
           "marketplace/resources/usage/ResourceUsageForm.tsx",
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx",
           "project/create/DescriptionGroup.tsx",
           "proposals/proposal/create/ProjectDetailsStep.tsx",
           "proposals/update/configuration/Step4FinalConfig.tsx"
@@ -150948,7 +150967,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -201043,6 +201062,410 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Question": {
+    "message": "Question",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title",
+        "unknown"
+      ],
+      "components": [
+        "Table",
+        "ExpandableContainer",
+        "ModalDialog",
+        "Form",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "general",
+          "project_management",
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "service-providers",
+          "offering-users",
+          "questions",
+          "metadata",
+          "apps"
+        ],
+        "component_types": [
+          "component",
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "marketplace/service-providers/OfferingUsersExpandableRow.tsx",
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx",
+          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx",
+          "project/metadata/MetadataByProjectExpandableRow.tsx",
+          "project/metadata/ProjectsMetadataByAnswer.tsx",
+          "rancher/cluster/apps/ApplicationDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table",
+          "h6",
+          "FormGroup",
+          "th"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 6
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Answer": {
+    "message": "Answer",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title",
+        "unknown",
+        "generic_element",
+        "function_call"
+      ],
+      "components": [
+        "Table",
+        "ExpandableContainer",
+        "ModalDialog",
+        "Form",
+        "Field",
+        "FormGroup",
+        "Stack",
+        "ToggleButton",
+        "ToggleButtonGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "general",
+          "project_management",
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "service-providers",
+          "offering-users",
+          "marketplace-checklist",
+          "questions",
+          "metadata",
+          "apps"
+        ],
+        "component_types": [
+          "component",
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "marketplace/service-providers/OfferingUsersExpandableRow.tsx",
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx",
+          "marketplace-checklist/AnswerFormDialog.tsx",
+          "marketplace-checklist/checklists/questions/QuestionGuidanceForm.tsx",
+          "project/metadata/MetadataByAnswerExpandableRow.tsx",
+          "project/metadata/MetadataByProjectExpandableRow.tsx",
+          "project/metadata/MetadataGroupBy.tsx",
+          "rancher/cluster/apps/ApplicationDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table",
+          "h6",
+          "Field",
+          "FormGroup",
+          "ToggleButton",
+          "th"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 8
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Needs review": {
+    "message": "Needs review",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [
+        "Table",
+        "ExpandableContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "project_management"
+        ],
+        "feature_areas": [
+          "service-providers",
+          "metadata"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/service-providers/OfferingUsersExpandableRow.tsx",
+          "project/metadata/MetadataByAnswerExpandableRow.tsx",
+          "project/metadata/MetadataByProjectExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Compliance metadata": {
+    "message": "Compliance metadata",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Table",
+        "ExpandableContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "service-providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/service-providers/OfferingUsersExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Answers": {
+    "message": "Answers",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element",
+        "unknown"
+      ],
+      "components": [
+        "Table",
+        "ExpandableContainer",
+        "Accordion",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "project_management",
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "service-providers",
+          "metadata",
+          "apps"
+        ],
+        "component_types": [
+          "component",
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/service-providers/OfferingUsersExpandableRow.tsx",
+          "project/metadata/MetadataByAnswerExpandableRow.tsx",
+          "project/metadata/MetadataByProjectExpandableRow.tsx",
+          "rancher/cluster/apps/ApplicationDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 4
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "No end date": {
     "message": "No end date",
     "context": {
@@ -205122,6 +205545,132 @@
       "usage_count": 1
     }
   },
+  "Review submitted.": {
+    "message": "Review submitted.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "offering-users"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to submit review": {
+    "message": "Unable to submit review",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "offering-users"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Answer submitted.": {
     "message": "Answer submitted.",
     "context": {
@@ -205506,98 +206055,6 @@
     },
     "translator_notes": [
       "Contains variables: n. Variable types: unknown.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Answer": {
-    "message": "Answer",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "generic_element",
-        "function_call",
-        "title",
-        "unknown"
-      ],
-      "components": [
-        "Field",
-        "FormGroup",
-        "ModalDialog",
-        "Stack",
-        "Table",
-        "ExpandableContainer",
-        "ToggleButton",
-        "ToggleButtonGroup"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 6,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general",
-          "project_management",
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "marketplace-checklist",
-          "questions",
-          "metadata",
-          "apps"
-        ],
-        "component_types": [
-          "dialog",
-          "form",
-          "component"
-        ],
-        "paths": [
-          "marketplace-checklist/AnswerFormDialog.tsx",
-          "marketplace-checklist/checklists/questions/QuestionGuidanceForm.tsx",
-          "project/metadata/MetadataByAnswerExpandableRow.tsx",
-          "project/metadata/MetadataByProjectExpandableRow.tsx",
-          "project/metadata/MetadataGroupBy.tsx",
-          "rancher/cluster/apps/ApplicationDetailsDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field",
-          "FormGroup",
-          "Table",
-          "ToggleButton",
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 8
-      },
-      "usage_count": 6
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -208864,86 +209321,6 @@
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Question": {
-    "message": "Question",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "unknown",
-        "title"
-      ],
-      "components": [
-        "FormGroup",
-        "Table",
-        "ExpandableContainer"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 8,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general",
-          "project_management",
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "questions",
-          "metadata",
-          "apps"
-        ],
-        "component_types": [
-          "form",
-          "component",
-          "dialog"
-        ],
-        "paths": [
-          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx",
-          "project/metadata/MetadataByProjectExpandableRow.tsx",
-          "project/metadata/ProjectsMetadataByAnswer.tsx",
-          "rancher/cluster/apps/ApplicationDetailsDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FormGroup",
-          "Table",
-          "th"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 8
-      },
-      "usage_count": 4
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Type your question here...": {
@@ -256623,147 +257000,6 @@
     "translator_notes": [
       "Contains variables: question. Variable types: unknown.",
       "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Needs review": {
-    "message": "Needs review",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title"
-      ],
-      "components": [
-        "Table",
-        "ExpandableContainer"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 12,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "project_management"
-        ],
-        "feature_areas": [
-          "metadata"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "project/metadata/MetadataByAnswerExpandableRow.tsx",
-          "project/metadata/MetadataByProjectExpandableRow.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Table"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language."
-    ]
-  },
-  "Answers": {
-    "message": "Answers",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element",
-        "unknown"
-      ],
-      "components": [
-        "Table",
-        "ExpandableContainer",
-        "Accordion",
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "project_management",
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "metadata",
-          "apps"
-        ],
-        "component_types": [
-          "component",
-          "dialog"
-        ],
-        "paths": [
-          "project/metadata/MetadataByAnswerExpandableRow.tsx",
-          "project/metadata/MetadataByProjectExpandableRow.tsx",
-          "rancher/cluster/apps/ApplicationDetailsDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Table"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Group by:": {
