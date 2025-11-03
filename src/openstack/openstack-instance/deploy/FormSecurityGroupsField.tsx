@@ -1,5 +1,5 @@
 import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
-import { useCallback, useMemo } from 'react';
+import { useCallback, useMemo, useEffect } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -94,16 +94,47 @@ export const FormSecurityGroupsField = ({
     [offering.scope_uuid],
   );
 
+  // Get the current value from the form state to check if default needs to be set.
+  const securityGroups = useSelector((state) =>
+    orderFormSelector(state, 'attributes.security_groups'),
+  );
+
+  useEffect(() => {
+    // Pre-fetch and set the default security group only if the field
+    // has not been initialized yet (i.e., its value is undefined).
+    // This prevents overwriting a user's selection (e.g., an empty array `[]`)
+    // on subsequent renders or navigations.
+    if (securityGroups !== undefined) {
+      return;
+    }
+
+    openstackSecurityGroupsList({
+      query: {
+        tenant_uuid: offering.scope_uuid,
+        name: 'default',
+        page_size: 1,
+      },
+    })
+      .then((response) => response.data)
+      .then((defaultGroupList) => {
+        // If a default group is found, set it as the form value.
+        // Otherwise, initialize with an empty array to mark the field as initialized.
+        const valueToSet =
+          defaultGroupList && defaultGroupList.length > 0
+            ? defaultGroupList
+            : [];
+        change('attributes.security_groups', valueToSet);
+      })
+      .catch(() => {
+        // In case of an error, initialize with an empty array
+        // to avoid repeated attempts on subsequent renders.
+        change('attributes.security_groups', []);
+      });
+  }, [offering.scope_uuid, change, securityGroups]);
+
   const tableProps = useTable({
     table: 'deploy-security-groups',
     fetchData: createFetcher(openstackSecurityGroupsList),
-    onFetch: (rows, _, firstFetch) => {
-      if (!firstFetch || !rows?.length) return;
-      const defaultItem = rows.find((row) => row?.name === 'default');
-      if (defaultItem) {
-        change('attributes.security_groups', [defaultItem]);
-      }
-    },
     queryField: 'name',
     filter,
     staleTime: 3 * 60 * 1000,

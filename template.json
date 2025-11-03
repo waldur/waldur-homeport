@@ -11498,7 +11498,6 @@
           "marketplace/offerings/update/attributes/EditCategoryDialog.tsx",
           "marketplace/offerings/update/components/ChangeStorageModeDialog.tsx",
           "marketplace/offerings/update/components/EditComponentDialog.tsx",
-          "marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx",
           "marketplace/offerings/update/integration/EditVarsDialog.tsx",
           "marketplace/offerings/update/integration/ScriptEditorHeader.tsx",
           "marketplace/offerings/update/options/EditOptionDialog.tsx",
@@ -11547,7 +11546,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 54
+      "usage_count": 53
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -126087,372 +126086,6 @@
       "usage_count": 1
     }
   },
-  "HEAppE URL": {
-    "message": "HEAppE URL",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 10,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "marketplace"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/UserLexisLInkPluginOptionsForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "HEAppE username": {
-    "message": "HEAppE username",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 15,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "marketplace"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/UserLexisLInkPluginOptionsForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "HEAppE cluster ID": {
-    "message": "HEAppE cluster ID",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "marketplace"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/UserLexisLInkPluginOptionsForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "HEAppE local base path": {
-    "message": "HEAppE local base path",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 22,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "marketplace"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/UserLexisLInkPluginOptionsForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "HEAppE password": {
-    "message": "HEAppE password",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 15,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "marketplace"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/UserLexisLInkSecretOptionsForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "HEAppE cluster password": {
-    "message": "HEAppE cluster password",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 23,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "marketplace"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/UserLexisLInkSecretOptionsForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 2
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
   "Anonymized": {
     "message": "Anonymized",
     "context": {
@@ -142463,6 +142096,71 @@
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 0
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "LEXIS integration": {
+    "message": "LEXIS integration",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title",
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "offerings",
+          "integration"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/OfferingEditUIView.tsx",
+          "marketplace/offerings/update/integration/LexisLinkIntegrationSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
       },
       "usage_count": 2
     },
@@ -158857,267 +158555,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Edit LEXIS link integration options": {
-    "message": "Edit LEXIS link integration options",
-    "context": {
-      "primary_ui_type": "action_button",
-      "ui_types": [
-        "action_button"
-      ],
-      "components": [
-        "ActionButton"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 35,
-        "wordCount": 5,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "integration"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/integration/EditLexisLinkIntegrationButton.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ActionButton"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This text appears on a button. Keep it short and action-oriented.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Offering LEXIS link options have been updated successfully.": {
-    "message": "Offering LEXIS link options have been updated successfully.",
-    "context": {
-      "primary_ui_type": "success_message",
-      "ui_types": [
-        "success_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 59,
-        "wordCount": 8,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "integration"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a success message. Use positive, confirming language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Unable to update offering LEXIS link options.": {
-    "message": "Unable to update offering LEXIS link options.",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 45,
-        "wordCount": 7,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "integration"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Update LEXIS link options": {
-    "message": "Update LEXIS link options",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 25,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "integration"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace/offerings/update/integration/EditLexisLinkIntegrationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ModalDialog"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
-    ]
-  },
   "Unsaved changes": {
     "message": "Unsaved changes",
     "context": {
@@ -161715,6 +161152,318 @@
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
     ]
+  },
+  "HEAppE URL": {
+    "message": "HEAppE URL",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LexisLinkIntegrationSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "HEAppE username": {
+    "message": "HEAppE username",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LexisLinkIntegrationSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "HEAppE cluster ID": {
+    "message": "HEAppE cluster ID",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LexisLinkIntegrationSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "HEAppE local base path": {
+    "message": "HEAppE local base path",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LexisLinkIntegrationSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "HEAppE password": {
+    "message": "HEAppE password",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LexisLinkIntegrationSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "HEAppE cluster password": {
+    "message": "HEAppE cluster password",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LexisLinkIntegrationSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Auto approve in service provider projects": {
     "message": "Auto approve in service provider projects",
