@@ -1,1 +1,1 @@
-yarn i18n:extract && yarn lint-staged
+yarn lint-staged
