@@ -19,6 +19,10 @@ import { translate } from '@waldur/i18n';
 import { Offering, Plan } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
+import {
+  getProject as currentProjectSelector,
+  getCustomer as currentCustomerSelector,
+} from '@waldur/workspace/selectors';
 
 import { getOrderFormComponent } from '../common/registry';
 import { DeployFormData, Limits } from '../common/types';
@@ -72,6 +76,9 @@ export const BaseDeployPage = ({
   const customer = useSelector(orderCustomerSelector);
   const project = useSelector(orderProjectSelector);
 
+  const currentCustomer = useSelector(currentCustomerSelector);
+  const currentProject = useSelector(currentProjectSelector);
+
   const isProjectInactive = useMemo(() => {
     if (project?.end_date) {
       const endDate = parseDate(project?.end_date);
@@ -117,6 +124,9 @@ export const BaseDeployPage = ({
       );
       if (projectFilter?.value) {
         initialValues.project = projectFilter.value;
+      } else if (currentProject) {
+        initialValues.customer = currentCustomer;
+        initialValues.project = currentProject;
       }
     }
 
