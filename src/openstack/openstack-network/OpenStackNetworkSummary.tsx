@@ -29,6 +29,11 @@ export const OpenStackNetworkSummary = (
       />
 
       <Component label={translate('MTU')} value={formatDefault(resource.mtu)} />
+      <Component
+        label={translate('Backend ID')}
+        value={resource.backend_id || 'N/A'}
+        hasCopy={!!resource.backend_id}
+      />
     </>
   );
 };

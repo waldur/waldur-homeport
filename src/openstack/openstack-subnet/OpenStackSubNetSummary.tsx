@@ -14,6 +14,7 @@ export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
         label={translate('CIDR')}
         value={formatDefault(resource.cidr)}
         valueClass="ellipsis"
+        hasCopy={!!formatDefault(resource.cidr)}
       />
 
       <Component
@@ -25,8 +26,13 @@ export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
       <Component
         label={translate('Gateway IP')}
         value={formatDefault(resource.gateway_ip)}
+        hasCopy={!!resource.gateway_ip}
       />
-
+      <Component
+        label={translate('Backend ID')}
+        value={resource.backend_id || 'N/A'}
+        hasCopy={!!resource.backend_id}
+      />
       <Component
         label={translate('Enabled default gateway')}
         value={resource.is_connected ? translate('Yes') : translate('No')}

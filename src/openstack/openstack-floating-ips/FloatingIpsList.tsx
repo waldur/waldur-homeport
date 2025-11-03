@@ -43,6 +43,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
         'instance_name',
         'project_uuid',
         'port_fixed_ips',
+        'backend_id',
       ],
     }),
     [resourceScope],
@@ -59,6 +60,7 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Floating IP'),
           render: ({ row }) => <>{row.name}</>,
+          copyField: (row) => row.name || '',
         },
         {
           title: translate('State'),
@@ -73,6 +75,10 @@ export const FloatingIpsList: FunctionComponent<{ resourceScope }> = ({
                 : 'N/A'}
             </>
           ),
+          copyField: (row) =>
+            row.port_fixed_ips && row.port_fixed_ips.length > 0
+              ? row.port_fixed_ips.map((fip) => fip.ip_address).join(', ')
+              : '',
         },
         {
           title: translate('Instance'),

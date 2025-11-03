@@ -46,6 +46,7 @@ export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
         'description',
         'created',
         'is_external',
+        'backend_id',
         'type',
         'segmentation_id',
         'mtu',
