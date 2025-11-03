@@ -7,6 +7,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { usePermission } from '@waldur/permissions/hooks';
 import { useNotify } from '@waldur/store/hooks';
@@ -17,8 +18,6 @@ import { ParsedAnswer } from '../metadata/ParsedAnswer';
 import { FieldEditButton } from './FieldEditButton';
 import { MetadataEditButton } from './MetadataEditButton';
 
-// Server error message if no checklist configured for the project
-const NO_CHECKLIST_CONFIGURED_MSG = 'No checklist configured for this object';
 const METADATA_LOAD_ERROR_MSG = translate('Unable to load full metadata.');
 
 interface ProjectMetadataProps {
@@ -36,7 +35,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
       projectsChecklistRetrieve({ path: { uuid: project.uuid } })
         .then((response) => response.data)
         .catch((err) => {
-          if (err.detail !== NO_CHECKLIST_CONFIGURED_MSG) {
+          if (err.detail !== CHECKLIST_NO_CONFIGURED_MSG) {
             showErrorResponse(err, METADATA_LOAD_ERROR_MSG);
           }
           throw err;
@@ -87,7 +86,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
         />
 
         {error &&
-        (error as any)?.detail !== NO_CHECKLIST_CONFIGURED_MSG &&
+        (error as any)?.detail !== CHECKLIST_NO_CONFIGURED_MSG &&
         !isLoading ? (
           <FormTable.Item
             value={
