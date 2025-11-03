@@ -47,6 +47,7 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
         'allowed_address_pairs',
         'security_groups',
         'project_uuid',
+        'backend_id',
       ],
 
       o: ['network_name'],
@@ -72,14 +73,20 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
                 : 'N/A'}
             </>
           ),
+          copyField: (row) =>
+            row.fixed_ips && row.fixed_ips.length > 0
+              ? row.fixed_ips.map((fip) => fip.ip_address).join(', ')
+              : '',
         },
         {
           title: translate('MAC address'),
           render: ({ row }) => <>{row.mac_address || 'N/A'}</>,
+          copyField: (row) => row.mac_address || '',
         },
         {
           title: translate('Network name'),
           render: ({ row }) => <>{row.network_name || 'N/A'}</>,
+          copyField: (row) => row.network_name || '',
         },
         {
           title: translate('Status'),

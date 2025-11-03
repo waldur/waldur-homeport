@@ -19,6 +19,11 @@ export const OpenstackPortSummary: FC<ResourceSummaryProps> = ({
         label={translate('Device owner')}
         value={row.device_owner || 'N/A'}
       />
+      <Component
+        label={translate('Backend ID')}
+        value={row.backend_id || 'N/A'}
+        hasCopy={!!row.backend_id}
+      />
 
       <Component
         label={translate('Allowed address pairs')}

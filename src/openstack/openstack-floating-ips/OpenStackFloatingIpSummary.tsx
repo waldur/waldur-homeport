@@ -7,10 +7,14 @@ export const OpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
   const Component = props.formTableItem ? FormTable.Item : Field;
   return (
     <>
-      <Component label={translate('Address')} value={resource.address} />
       <Component
         label={translate('Runtime state')}
         value={resource.runtime_state}
+      />
+      <Component
+        label={translate('Backend ID')}
+        value={resource.backend_id || 'N/A'}
+        hasCopy={!!resource.backend_id}
       />
     </>
   );
