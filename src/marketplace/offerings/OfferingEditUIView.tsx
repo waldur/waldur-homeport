@@ -60,6 +60,11 @@ const UserManagementSection = lazyComponent(() =>
     default: module.UserManagementSection,
   })),
 );
+const LexisLinkIntegrationSection = lazyComponent(() =>
+  import('./update/integration/LexisLinkIntegrationSection').then((module) => ({
+    default: module.LexisLinkIntegrationSection,
+  })),
+);
 const TosManagementSection = lazyComponent(() =>
   import('./update/tos/TosManagementSection').then((module) => ({
     default: module.TosManagementSection,
@@ -209,6 +214,13 @@ const getTabs = (offering: Offering): PageBarTab[] => {
               key: 'user-management',
               component: UserManagementSection,
               title: translate('User management'),
+            }
+          : null,
+        isFeatureVisible(MarketplaceFeatures.lexis_links)
+          ? {
+              key: 'lexis-link-integration',
+              component: LexisLinkIntegrationSection,
+              title: translate('LEXIS integration'),
             }
           : null,
         provisioningConfigForm ||
