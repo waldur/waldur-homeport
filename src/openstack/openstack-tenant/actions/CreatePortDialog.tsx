@@ -163,6 +163,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         ...formData,
         fixed_ips,
         port_security_enabled: formData.port_security_enabled || false,
+        target_tenant: resource.url,
       };
 
       try {
