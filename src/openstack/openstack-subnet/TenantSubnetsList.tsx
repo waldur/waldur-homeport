@@ -44,6 +44,7 @@ export const TenantSubnetsList: FunctionComponent<{ resourceScope }> = ({
         'disable_gateway',
         'ip_version',
         'project_uuid',
+        'backend_id',
       ],
     }),
     [resourceScope],
