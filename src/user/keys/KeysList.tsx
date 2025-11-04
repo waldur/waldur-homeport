@@ -47,12 +47,14 @@ export const KeysList: FunctionComponent<{ user; hasActionBar? }> = ({
       title: translate('Title'),
       render: ({ row }) => row.name,
       export: 'name',
+      copyField: (row) => row.name,
     },
     {
       visible: false,
       title: translate('Public key'),
       render: null,
       export: 'public_key',
+      copyField: (row) => row.public_key,
     },
     {
       title: translate('Type'),
