@@ -5,7 +5,12 @@ import { Field, reduxForm } from 'redux-form';
 import { marketplaceOfferingTermsOfServiceCreate } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
-import { StringField, SubmitButton, SelectField } from '@waldur/form';
+import {
+  StringField,
+  SubmitButton,
+  SelectField,
+  NumberField,
+} from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
@@ -27,11 +32,16 @@ export const AddTosDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
   form: TOS_FORM_ID,
   initialValues: {
     add_as: 'markdown',
+    grace_period_days: 60,
   },
 })((props) => {
   const dispatch = useDispatch();
   const addAsValue = useSelector(
     (state: any) => state.form[TOS_FORM_ID]?.values?.add_as || 'markdown',
+  );
+  const requiresReconsentValue = useSelector(
+    (state: any) =>
+      state.form[TOS_FORM_ID]?.values?.requires_reconsent || false,
   );
 
   const update = useCallback(
@@ -48,6 +58,10 @@ export const AddTosDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
           body.terms_of_service = formData.terms_of_service;
         } else {
           body.terms_of_service_link = formData.terms_of_service_link;
+        }
+
+        if (formData.requires_reconsent && formData.grace_period_days) {
+          body.grace_period_days = formData.grace_period_days;
         }
 
         await marketplaceOfferingTermsOfServiceCreate({ body });
@@ -131,6 +145,26 @@ export const AddTosDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
             label={translate('Requires re-consent')}
           />
         </div>
+
+        {requiresReconsentValue && (
+          <FormGroup
+            label={translate('Grace period (days)')}
+            help={translate(
+              'Number of days before outdated consents are automatically revoked. Only applies when requires re-consent is enabled.',
+            )}
+            helpEnd
+            description={translate(
+              'After this period expires, user consents for outdated terms will be automatically revoked.',
+            )}
+          >
+            <Field
+              name="grace_period_days"
+              component={NumberField}
+              min={0}
+              parse={(value) => (value === '' ? undefined : Number(value))}
+            />
+          </FormGroup>
+        )}
       </ModalDialog>
     </form>
   );
