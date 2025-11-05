@@ -36,7 +36,7 @@ export const UserToken = ({ token }) => {
           <Button
             variant="primary"
             size="sm"
-            className="px-3"
+            className="px-3 h-30px"
             onClick={onClick}
           >
             <CopyIcon />
