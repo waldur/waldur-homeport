@@ -976,6 +976,18 @@ export const SettingsDescription = [
         default: 30,
         type: 'integer',
       },
+      {
+        key: 'ONBOARDING_WICO_API_URL',
+        description: translate('WirtschaftsCompass API server URL'),
+        default: 'https://api.wirtschaftscompass.at/',
+        type: 'url_field',
+      },
+      {
+        key: 'ONBOARDING_WICO_TOKEN',
+        description: translate('WirtschaftsCompass API token'),
+        default: '',
+        type: 'secret_field',
+      },
     ],
   },
 ];
