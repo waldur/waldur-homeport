@@ -16,20 +16,37 @@ const CodeBlock: FunctionComponent<PropsWithChildren> = ({ children }) => (
   </div>
 );
 
-export const CodePreview = ({ template, context }) => (
-  <Markdown
-    options={{
-      renderRule(next, node, _, state) {
-        if (node.type === RuleType.codeBlock) {
-          return (
-            <CodeBlock key={state.key}>{String.raw`${node.text}`}</CodeBlock>
-          );
-        }
+export const CodePreview = ({ template, context }) => {
+  const formattedTemplate = formatTemplate(template, context);
 
-        return next();
-      },
-    }}
-  >
-    {formatTemplate(template, context)}
-  </Markdown>
-);
+  const normalizedTemplate = formattedTemplate.replace(
+    /```(\w+\s+)?([^`\n]+)```/g,
+    (_match, _lang, content) => {
+      return '\n```\n' + content.trim() + '\n```\n';
+    },
+  );
+
+  return (
+    <Markdown
+      className="md-content"
+      options={{
+        overrides: {
+          br: {
+            component: 'br',
+          },
+        },
+        renderRule(next, node, _, state) {
+          if (node.type === RuleType.codeBlock) {
+            return (
+              <CodeBlock key={state.key}>{String.raw`${node.text}`}</CodeBlock>
+            );
+          }
+
+          return next();
+        },
+      }}
+    >
+      {normalizedTemplate}
+    </Markdown>
+  );
+};
