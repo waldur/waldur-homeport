@@ -7,6 +7,7 @@ import {
   getCredentialsForm,
   showBackendId,
 } from '@waldur/marketplace/common/registry';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 
 import {
   DefaultOfferingEditPanel,
@@ -37,6 +38,10 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
     });
   }
 
+  // When an offering has no scope, do not display the scope_state for Marketplace.Slurm type
+  const hideScopeState =
+    !props.offering.scope_state && props.offering.type === SITE_AGENT_PLUGIN;
+
   return (
     <FormTable.Card
       title={TITLE}
@@ -44,7 +49,9 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
       className="card-bordered mb-7"
     >
       <FormTable>
-        <OfferingScopeState state={props.offering.scope_state || 'missing'} />
+        {!hideScopeState && (
+          <OfferingScopeState state={props.offering.scope_state || 'missing'} />
+        )}
         {CredentialsForm ? (
           <CredentialsForm
             offering={props.offering}
