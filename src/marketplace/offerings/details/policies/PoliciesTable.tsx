@@ -1,10 +1,11 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
+import { CheckIcon, QuestionIcon, XIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { Badge } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Tip } from '@waldur/core/Tooltip';
 import { policyPeriodOptions } from '@waldur/customer/cost-policies/utils';
 import { translate } from '@waldur/i18n';
 import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
@@ -88,7 +89,19 @@ export const PoliciesTable: FC<TableProps> = ({ columns, ...props }) => {
             ),
         },
         {
-          title: translate('Has fired'),
+          title: (
+            <>
+              {translate('Action triggered')}{' '}
+              <Tip
+                id="action-triggered-tooltip"
+                label={translate(
+                  "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
+                )}
+              >
+                <QuestionIcon size={18} />
+              </Tip>
+            </>
+          ),
           render: ({ row }) =>
             !row.has_fired ? (
               <Badge
