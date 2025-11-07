@@ -149,6 +149,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'DISABLED_OFFERING_TYPES',
+        description: translate('List of offering types disabled for creation and selection.'),
+        default: [],
+        type: 'list_field',
+      },
+      {
         key: 'ENABLE_ORDER_START_DATE',
         description: translate('Allow setting start date to control when resource creation order is processed.'),
         default: false,
