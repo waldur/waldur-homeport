@@ -1,3 +1,4 @@
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
@@ -8,6 +9,7 @@ import {
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { ProjectLink } from '@waldur/project/ProjectLink';
 import { createFetcher } from '@waldur/table/api';
@@ -75,7 +77,19 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
           ),
         },
         {
-          title: translate('Has fired'),
+          title: (
+            <>
+              {translate('Action triggered')}{' '}
+              <Tip
+                id="action-triggered-tooltip"
+                label={translate(
+                  "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
+                )}
+              >
+                <QuestionIcon size={18} />
+              </Tip>
+            </>
+          ),
           render: ({ row }) => <BooleanBadge value={row.has_fired} />,
         },
         {

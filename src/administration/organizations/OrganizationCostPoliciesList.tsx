@@ -1,3 +1,4 @@
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -10,6 +11,7 @@ import {
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Tip } from '@waldur/core/Tooltip';
 import { CostPolicyActions } from '@waldur/customer/cost-policies/CostPolicyActions';
 import { CostPolicyCreateButton } from '@waldur/customer/cost-policies/CostPolicyCreateButton';
 import { getCostPolicyActionOptions } from '@waldur/customer/cost-policies/utils';
@@ -74,7 +76,19 @@ export const OrganizationCostPoliciesList: FC = () => {
           ),
         },
         {
-          title: translate('Has fired'),
+          title: (
+            <>
+              {translate('Action triggered')}{' '}
+              <Tip
+                id="action-triggered-tooltip"
+                label={translate(
+                  "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
+                )}
+              >
+                <QuestionIcon size={18} />
+              </Tip>
+            </>
+          ),
           render: ({ row }) => <BooleanBadge value={row.has_fired} />,
         },
         {
