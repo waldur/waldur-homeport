@@ -1,7 +1,9 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 
+import { AccordionCard } from '@waldur/core/AccordionCard';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
@@ -12,6 +14,7 @@ import { translate } from '@waldur/i18n';
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
 import { Proposal, ProposalReview } from '../types';
 
+import { ComplianceSummary } from './create/ComplianceSummary';
 import { ProjectDetailsSummary } from './create/ProjectDetailsSummary';
 import { ProposalDecisionResult } from './create/ProposalDecisionResult';
 import { ProposalDetailsOverviewStep } from './create/ProposalDetailsOverviewStep';
@@ -35,7 +38,17 @@ export const ProposalDetails = ({
   refetch,
 }: ProposalDetails) => {
   const { state } = useCurrentStateAndParams();
-  const formSteps = createProposalSteps;
+
+  // Calculate steps based on proposal compliance status (same logic as submission step)
+  const proposalHasCompliance = proposal.compliance_status !== null;
+
+  const formSteps = useMemo(() => {
+    const fakeCallForSteps = proposalHasCompliance
+      ? { compliance_checklist: 'exists' }
+      : undefined;
+    const steps = createProposalSteps(fakeCallForSteps);
+    return steps;
+  }, [proposalHasCompliance]);
 
   const {
     canPerformDecisionActions,
@@ -59,10 +72,20 @@ export const ProposalDetails = ({
         )}
         <ProposalDetailsOverviewStep id="step-general" params={{ proposal }} />
         <ProjectDetailsSummary proposal={proposal} reviews={reviews} />
+        {proposalHasCompliance && (
+          <div id="step-compliance">
+            <ComplianceSummary proposal={proposal} />
+          </div>
+        )}
         <ResourceRequestsSummary proposal={proposal} reviews={reviews} />
-        <div id="step-team">
+        <AccordionCard
+          id="step-team"
+          title={translate('Project team')}
+          subtitle={translate('Team members and their roles in the project.')}
+          defaultOpen={!proposalHasCompliance}
+        >
           <ProposalUsersListSummary scope={proposal} reviews={reviews} />
-        </div>
+        </AccordionCard>
       </SidebarLayout.Body>
       <SidebarLayout.Sidebar transparent>
         <Panel title={translate('Progress')} cardBordered className="mb-5">

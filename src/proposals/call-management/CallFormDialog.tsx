@@ -5,6 +5,7 @@ import { connect, useSelector } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
 import {
   callManagingOrganisationsList,
+  checklistsAdminList,
   proposalProtectedCallsCreate,
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
@@ -17,8 +18,10 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { SubmitButton } from '@waldur/form';
 import { FormContainer } from '@waldur/form/FormContainer';
 import MarkdownEditor from '@waldur/form/MarkdownEditor';
+import { SelectField } from '@waldur/form/SelectField';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -28,6 +31,7 @@ interface FormData {
   name: string;
   description: string;
   manager: string;
+  compliance_checklist?: string;
 }
 
 export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
@@ -55,6 +59,20 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
 
       staleTime: 60 * 1000,
     });
+
+    // Query proposal compliance checklists
+    const {
+      data: complianceChecklists,
+      isLoading: loadingChecklists,
+      error: errorChecklists,
+    } = useQuery({
+      queryKey: ['ComplianceChecklists'],
+      queryFn: () =>
+        checklistsAdminList({
+          query: { checklist_type: 'proposal_compliance' },
+        }).then((response) => response.data),
+      staleTime: 5 * 60 * 1000,
+    });
     const isEdit = Boolean(props.resolve.call?.uuid);
 
     useEffect(() => {
@@ -65,14 +83,23 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
 
     const processRequest = React.useCallback(
       (values: FormData, dispatch) => {
+        // Transform compliance_checklist from SelectField format {value, label} to just UUID
+        const requestBody = {
+          ...values,
+          compliance_checklist:
+            (values.compliance_checklist as any)?.value ||
+            values.compliance_checklist ||
+            null,
+        };
+
         let action;
         if (isEdit) {
           action = proposalProtectedCallsPartialUpdate({
-            body: values,
+            body: requestBody,
             path: { uuid: props.resolve.call.uuid },
           });
         } else {
-          action = proposalProtectedCallsCreate({ body: values });
+          action = proposalProtectedCallsCreate({ body: requestBody });
         }
 
         return action
@@ -109,9 +136,9 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
       [props.resolve, router],
     );
 
-    if (loadingManager) {
+    if (loadingManager || loadingChecklists) {
       return <LoadingSpinner />;
-    } else if (errorManager) {
+    } else if (errorManager || errorChecklists) {
       return (
         <LoadingErred
           message={translate('Unable to prepare the form.')}
@@ -119,6 +146,12 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
         />
       );
     }
+
+    const checklistOptions =
+      complianceChecklists?.map((checklist) => ({
+        value: checklist.uuid,
+        label: checklist.name,
+      })) || [];
     return (
       <form onSubmit={props.handleSubmit(processRequest)}>
         <ModalDialog
@@ -161,6 +194,21 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
                 name="external_url"
                 required
                 validate={required}
+              />
+            )}
+
+            {isExperimentalUiComponentsVisible() && (
+              <SelectField
+                label={translate('Compliance checklist')}
+                name="compliance_checklist"
+                options={checklistOptions}
+                isClearable={true}
+                placeholder={translate(
+                  'Select compliance checklist (optional)',
+                )}
+                help_text={translate(
+                  'Optional checklist that proposal submitters must complete for compliance evaluation. Can be changed only before any proposals are submitted.',
+                )}
               />
             )}
           </FormContainer>

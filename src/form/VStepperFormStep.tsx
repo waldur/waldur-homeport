@@ -30,12 +30,15 @@ export interface VStepperFormStepProps {
 
 interface StepCardProps {
   title: string;
+  subtitle?: string;
   actions?: React.ReactNode;
   id?: string;
   loading?: boolean;
   className?: string;
   disabled?: boolean;
   disabledTooltip?: string;
+  collapsible?: boolean;
+  defaultOpen?: boolean;
   refetch?(): void;
   refetching?: boolean;
 }
@@ -56,7 +59,14 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
         {props.disabled && <div className="step-blocker" />}
         <Card.Header className="gap-2">
           <div className="d-flex align-items-center me-2">
-            <h4 className="mb-0">{props.title}</h4>
+            <div>
+              <h4 className="mb-0">{props.title}</h4>
+              {props.subtitle && (
+                <small className="fs-6 fw-normal d-block mt-2">
+                  {props.subtitle}
+                </small>
+              )}
+            </div>
             {props.refetch && (
               <div className="ms-2">
                 <RefreshButton

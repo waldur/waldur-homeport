@@ -10,6 +10,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ChecklistsTableActions } from '../ChecklistsTableActions';
 import { CHECKLIST_TABLE_ID } from '../constants';
+import { checklistTypeOptions } from '../utils';
 
 import { ChecklistExpandableRow } from './ChecklistExpandableRow';
 import { ChecklistRowActions } from './ChecklistRowActions';
@@ -32,6 +33,15 @@ export const ChecklistsTable: FC<TableWithPortal> = ({ portal }) => {
         {
           title: translate('Category'),
           render: ({ row }) => renderFieldOrDash(row.category_name),
+        },
+        {
+          title: translate('Checklist type'),
+          render: ({ row }) => {
+            const option = checklistTypeOptions.find(
+              (opt) => opt.value === row.checklist_type,
+            );
+            return renderFieldOrDash(option?.label);
+          },
         },
         {
           title: translate('Questions'),

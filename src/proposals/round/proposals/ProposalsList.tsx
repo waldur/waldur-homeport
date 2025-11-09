@@ -4,6 +4,7 @@ import { proposalProposalsList, ProtectedRound } from 'waldur-js-client';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { ComplianceStatusBadge } from '@waldur/proposals/proposal/ComplianceStatusBadge';
 import { ProposalBadge } from '@waldur/proposals/proposal/ProposalBadge';
 import { Call } from '@waldur/proposals/types';
 import { createFetcher } from '@waldur/table/api';
@@ -30,6 +31,9 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
     fetchData: createFetcher(proposalProposalsList),
     queryField: 'name',
   });
+
+  // Check if call has compliance checklist configured
+  const hasComplianceChecklist = Boolean(props.call?.compliance_checklist);
 
   return (
     <Table
@@ -63,6 +67,17 @@ export const ProposalsList: FC<RoundProposalsListProps> = (props) => {
           title: translate('State'),
           render: ({ row }) => <ProposalBadge state={row.state} />,
         },
+        // Conditionally add compliance column if call has compliance checklist
+        ...(hasComplianceChecklist
+          ? [
+              {
+                title: translate('Compliance'),
+                render: ({ row }) => (
+                  <ComplianceStatusBadge status={row.compliance_status} />
+                ),
+              },
+            ]
+          : []),
       ]}
       title={translate('Proposals')}
       hasQuery

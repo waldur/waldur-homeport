@@ -100,7 +100,7 @@ export const useProposalDecisionActions = (
   };
 };
 
-export const proposalFormDataSelector = (state) =>
+const proposalFormDataSelector = (state) =>
   (getFormValues(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) || {}) as any;
 
 export const useSubmitProposalResourcesFromTemplates = (

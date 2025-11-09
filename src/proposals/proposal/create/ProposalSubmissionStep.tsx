@@ -1,30 +1,27 @@
-import { useMutation } from '@tanstack/react-query';
+import { useMutation, useQuery } from '@tanstack/react-query';
 import { get } from 'lodash-es';
 import { createRef, FC, useCallback, useMemo, useRef } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { change } from 'redux-form';
+import { Form } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import {
   proposalProposalsAttachDocument,
+  proposalProposalsChecklistRetrieve,
   proposalProposalsSubmit,
+  proposalProposalsSubmitAnswers,
   proposalProposalsUpdateProjectDetails,
   ProposalReview,
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
 import { isEmpty } from '@waldur/core/utils';
-import { Form } from '@waldur/form/Form';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { PROPOSAL_UPDATE_SUBMISSION_FORM_ID } from '@waldur/proposals/constants';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
-import {
-  proposalFormDataSelector,
-  useSubmitProposalResourcesFromTemplates,
-} from './utils';
+import { useSubmitProposalResourcesFromTemplates } from './utils';
 
 const attachDocuments = async (proposal_uuid, supporting_documentation) => {
   if (supporting_documentation) {
@@ -43,25 +40,83 @@ const attachDocuments = async (proposal_uuid, supporting_documentation) => {
   }
 };
 
-const validate = (values) => {
-  const errors: Record<string, any> = {};
-  if (!values.users || values.users?.length === 0) {
-    errors.users = 'At least one user is required';
+const submitComplianceAnswers = async (
+  proposal_uuid,
+  formData,
+  checklistData,
+) => {
+  // Extract compliance answers from form data and submit them
+  const complianceAnswers = [];
+
+  Object.keys(formData).forEach((key) => {
+    if (key.startsWith('compliance_')) {
+      const questionUuid = key.replace('compliance_', '');
+      let answerData = formData[key];
+
+      // Format single_select answers as arrays for backend
+      // Backend expects single_select as ["uuid"] not "uuid"
+      if (answerData && typeof answerData === 'string') {
+        // Check if this is a single_select question by finding it in checklistData
+        const questionUuid = key.replace('compliance_', '');
+        const isSelectQuestion = checklistData?.questions?.some(
+          (q) => q.uuid === questionUuid && q.question_type === 'single_select',
+        );
+
+        if (isSelectQuestion) {
+          answerData = [answerData]; // Convert "uuid" to ["uuid"] for backend
+        }
+      }
+
+      complianceAnswers.push({
+        question_uuid: questionUuid,
+        answer_data: answerData,
+      });
+    }
+  });
+
+  if (complianceAnswers.length > 0) {
+    try {
+      await proposalProposalsSubmitAnswers({
+        path: { uuid: proposal_uuid },
+        body: complianceAnswers,
+      });
+    } catch {
+      // Don't throw - compliance errors shouldn't block main proposal saving
+    }
   }
-  if (!values.resources || values.resources?.length === 0) {
-    errors.resources = 'At least one resource is required';
-  }
-  return errors;
 };
 
 export const ProposalSubmissionStep: FC<{
   proposal;
+  call?;
   reviews?: ProposalReview[];
   refetch;
 }> = ({ proposal, reviews, refetch }) => {
   const dispatch = useDispatch();
-  const initialValues = useMemo(
-    () => ({
+  const proposal_uuid = proposal.uuid;
+
+  // Query the proposal checklist to see if it has questions
+  const { data: checklistData } = useQuery({
+    queryKey: ['ProposalChecklist', proposal_uuid],
+    queryFn: () =>
+      proposalProposalsChecklistRetrieve({ path: { uuid: proposal_uuid } })
+        .then((response) => response.data)
+        .catch((err) => {
+          // If 400 with "No checklist configured", return null
+          if (
+            err.response?.status === 400 &&
+            err.response?.data?.detail?.includes('No checklist configured')
+          ) {
+            return null;
+          }
+          throw err;
+        }),
+    refetchOnWindowFocus: false,
+    staleTime: 60 * 1000,
+  });
+
+  const initialValues = useMemo(() => {
+    const baseValues = {
       name: proposal.name,
       description: proposal.description,
       project_summary: proposal.project_summary,
@@ -72,41 +127,68 @@ export const ProposalSubmissionStep: FC<{
       resources: [],
       resources_init: [], // Temporary field to hold current resource requests
       users: [],
-    }),
-    [proposal],
-  );
-  const proposal_uuid = proposal.uuid;
+    };
 
-  const formSteps = createProposalSteps;
+    // Add compliance answers to initial values if available
+    if (checklistData?.questions) {
+      checklistData.questions.forEach((question) => {
+        const fieldName = `compliance_${question.uuid}`;
+        let answerData = question.existing_answer?.answer_data || null;
+
+        // Transform single_select arrays to single values for UI display
+        if (
+          question.question_type === 'single_select' &&
+          Array.isArray(answerData) &&
+          answerData.length > 0
+        ) {
+          answerData = answerData[0]; // Convert ["uuid"] to "uuid" for SelectField
+        }
+
+        baseValues[fieldName] = answerData;
+      });
+    }
+
+    return baseValues;
+  }, [proposal, checklistData]);
+
+  // Only add compliance step if checklist has questions
+  const shouldAddComplianceStep =
+    checklistData &&
+    checklistData.questions &&
+    checklistData.questions.length > 0;
+
+  // Calculate steps based on whether proposal has meaningful compliance checklist
+  const formSteps = useMemo(() => {
+    // Only create compliance step if checklist has questions
+    const fakeCallForSteps = shouldAddComplianceStep
+      ? { compliance_checklist: 'exists' }
+      : undefined;
+    return createProposalSteps(fakeCallForSteps);
+  }, [shouldAddComplianceStep]);
 
   const stepRefs = useRef([]);
-  stepRefs.current = formSteps.map(
-    (_, i) => stepRefs.current[i] ?? createRef(),
-  );
-
-  const formData = useSelector(proposalFormDataSelector);
+  // Recalculate step refs when steps change (e.g., when compliance step is added)
+  stepRefs.current = useMemo(() => {
+    return formSteps.map((_, i) => stepRefs.current[i] ?? createRef());
+  }, [formSteps]);
 
   const { save: saveResources } =
     useSubmitProposalResourcesFromTemplates(proposal);
 
   const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
-    mutationFn: async () => {
+    mutationFn: async (formValues: any) => {
       try {
         await saveResources();
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
-          body: formData,
+          body: formValues,
         });
-        await attachDocuments(proposal_uuid, formData.supporting_documentation);
-        dispatch(showSuccess(translate('Proposal updated successfully')));
-        // clear formData.supporting_documentation from redux-form store to prevent file upload on next submit/switchToTeam
-        dispatch(
-          change(
-            PROPOSAL_UPDATE_SUBMISSION_FORM_ID,
-            'supporting_documentation',
-            {},
-          ),
+        await submitComplianceAnswers(proposal_uuid, formValues, checklistData);
+        await attachDocuments(
+          proposal_uuid,
+          formValues.supporting_documentation,
         );
+        dispatch(showSuccess(translate('Proposal updated successfully')));
         if (refetch) refetch();
       } catch (error) {
         dispatch(showErrorResponse(error, translate('Something went wrong')));
@@ -115,7 +197,7 @@ export const ProposalSubmissionStep: FC<{
   });
 
   const submitForm = useCallback(
-    async (formValues, dispatch) => {
+    async (formValues: any) => {
       try {
         await waitForConfirmation(
           dispatch,
@@ -131,6 +213,7 @@ export const ProposalSubmissionStep: FC<{
           path: { uuid: proposal_uuid },
           body: formValues,
         });
+        await submitComplianceAnswers(proposal_uuid, formValues, checklistData);
         await attachDocuments(
           proposal_uuid,
           formValues.supporting_documentation,
@@ -145,62 +228,58 @@ export const ProposalSubmissionStep: FC<{
     [proposal, proposal_uuid],
   );
 
-  const completedSteps = useMemo(() => {
-    const result = stepRefs.current.map(() => false);
-    stepRefs.current.forEach((_, i) => {
-      let completed = false;
-      if (formSteps[i].required && formSteps[i].requiredFields?.length) {
-        completed = formSteps[i].requiredFields.every((fieldName) => {
-          const field = get(formData, fieldName);
-          return typeof field === 'object' ? !isEmpty(field) : Boolean(field);
-        });
-      } else {
-        completed = true;
-      }
-      result[i] = completed;
-    });
-    return result;
-  }, [formData, stepRefs.current, formSteps]);
-
   return (
     <Form
-      form={PROPOSAL_UPDATE_SUBMISSION_FORM_ID}
       onSubmit={submitForm}
       initialValues={initialValues}
-      validate={validate}
-      shouldValidate={() => true}
-    >
-      {(formProps) => (
-        <SidebarLayout.Container>
-          <SidebarLayout.Body>
-            {formSteps.map((step, i) => (
-              <div ref={stepRefs.current[i]} key={step.id}>
-                <step.component
-                  id={step.id}
-                  title={step.label}
-                  params={{
-                    proposal,
-                    refetch,
-                    change: formProps.change,
-                    reviews,
-                  }}
-                />
-              </div>
-            ))}
-          </SidebarLayout.Body>
+      render={({ handleSubmit, submitting, form, values }) => {
+        const completedSteps = formSteps.map((step) => {
+          if (step.required && step.requiredFields?.length) {
+            return step.requiredFields.every((fieldName) => {
+              const field = get(values, fieldName);
+              return typeof field === 'object'
+                ? !isEmpty(field)
+                : Boolean(field);
+            });
+          }
+          return true;
+        });
 
-          <SidebarLayout.Sidebar transparent>
-            <ProposalSidebar
-              steps={formSteps}
-              saveAsDraft={saveAsDraft}
-              isSaving={isSaving}
-              editable={proposal.state === 'draft'}
-              submitting={formProps.submitting}
-              completedSteps={completedSteps}
-            />
-          </SidebarLayout.Sidebar>
-        </SidebarLayout.Container>
-      )}
-    </Form>
+        return (
+          <form onSubmit={handleSubmit}>
+            <SidebarLayout.Container>
+              <SidebarLayout.Body>
+                {formSteps.map((step, i) => (
+                  <div ref={stepRefs.current[i]} key={step.id}>
+                    <step.component
+                      id={step.id}
+                      title={step.label}
+                      params={{
+                        proposal,
+                        refetch,
+                        reviews,
+                        form,
+                        values,
+                      }}
+                    />
+                  </div>
+                ))}
+              </SidebarLayout.Body>
+
+              <SidebarLayout.Sidebar transparent>
+                <ProposalSidebar
+                  steps={formSteps}
+                  saveAsDraft={() => saveAsDraft(values)}
+                  isSaving={isSaving}
+                  editable={proposal.state === 'draft'}
+                  submitting={submitting}
+                  completedSteps={completedSteps}
+                />
+              </SidebarLayout.Sidebar>
+            </SidebarLayout.Container>
+          </form>
+        );
+      }}
+    />
   );
 };

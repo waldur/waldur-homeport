@@ -66,7 +66,14 @@ export const ProposalManagePage = () => {
       proposal?.call_uuid
         ? proposalPublicCallsRetrieve({
             path: { uuid: proposal.call_uuid },
-            query: { field: ['uuid', 'customer_uuid'] },
+            query: {
+              field: [
+                'uuid',
+                'customer_uuid',
+                'compliance_checklist',
+                'compliance_checklist_name',
+              ] as any,
+            },
           }).then((res) => res.data)
         : null,
     refetchOnWindowFocus: false,
@@ -145,6 +152,7 @@ export const ProposalManagePage = () => {
       {proposal.state === 'draft' && isEditPage && hasPermissionToSubmit ? (
         <ProposalSubmissionStep
           proposal={proposal}
+          call={call}
           refetch={refetch}
           reviews={submittedReviews}
         />

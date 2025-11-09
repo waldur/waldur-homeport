@@ -27,6 +27,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
     <>
       <Panel title={translate('Progress')} cardBordered className="mb-5">
         <FormSteps
+          key={`steps-${props.steps.length}`}
           steps={props.steps}
           completedSteps={props.completedSteps}
           errors={errors}
@@ -44,13 +45,12 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
               Object.keys(errors).length
                 ? [
                     translate(
-                      'Complete all required sections: {sections} and {lastSection} to proceed.',
+                      'Complete all required sections to proceed: {sections}',
                       {
-                        sections: [
-                          translate('Project details'),
-                          translate('Resource requests'),
-                        ].join(', '),
-                        lastSection: translate('Project team'),
+                        sections: props.steps
+                          .filter((step) => step.required)
+                          .map((step) => step.label)
+                          .join(', '),
                       },
                     ),
                   ]

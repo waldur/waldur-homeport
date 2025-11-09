@@ -1,13 +1,18 @@
+import { useQuery } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { pick } from 'lodash-es';
 import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { proposalProtectedCallsPartialUpdate } from 'waldur-js-client';
+import {
+  proposalProtectedCallsPartialUpdate,
+  checklistsAdminList,
+} from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
 import {
   NumberField,
+  SelectField,
   SubmitButton,
   StringField,
   FieldError,
@@ -27,6 +32,7 @@ interface FormData {
   name: string;
   description: string;
   fixed_duration_in_days?: number | null;
+  compliance_checklist?: string;
 }
 
 interface Props {
@@ -36,6 +42,17 @@ interface Props {
 export const EditGeneralInfoDialog = ({ resolve }: Props) => {
   const dispatch = useDispatch();
   const initialValues = pick(resolve.call, resolve.name);
+
+  // Query compliance checklists if editing compliance_checklist field
+  const { data: complianceChecklists } = useQuery({
+    queryKey: ['ComplianceChecklists'],
+    queryFn: () =>
+      checklistsAdminList({
+        query: { checklist_type: 'proposal_compliance' },
+      }).then((response) => response.data),
+    enabled: resolve.name === 'compliance_checklist',
+    staleTime: 5 * 60 * 1000,
+  });
 
   const processRequest = useCallback(
     async (values: FormData) => {
@@ -56,6 +73,12 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
 
       if (resolve.name === 'fixed_duration_in_days') {
         body.fixed_duration_in_days = values.fixed_duration_in_days || null;
+      } else if (resolve.name === 'compliance_checklist') {
+        // Transform compliance_checklist from SelectField format to UUID
+        body.compliance_checklist =
+          (values.compliance_checklist as any)?.value ||
+          values.compliance_checklist ||
+          null;
       } else {
         body[resolve.name] = values[resolve.name];
       }
@@ -188,6 +211,29 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                       ) : null
                     }
                   />
+                </FormGroup>
+              )}
+              {resolve.name === 'compliance_checklist' && (
+                <FormGroup label={translate('Compliance checklist')}>
+                  <Field
+                    name="compliance_checklist"
+                    component={SelectField as any}
+                    options={
+                      complianceChecklists?.map((checklist) => ({
+                        value: checklist.uuid,
+                        label: checklist.name,
+                      })) || []
+                    }
+                    isClearable={true}
+                    placeholder={translate(
+                      'Select compliance checklist (optional)',
+                    )}
+                  />
+                  <div className="form-text text-muted">
+                    {translate(
+                      'Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.',
+                    )}
+                  </div>
                 </FormGroup>
               )}
             </FormContainer>

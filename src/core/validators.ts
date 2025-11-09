@@ -37,9 +37,6 @@ export const requiredArray = (value) =>
     ? undefined
     : translate('This field is required.');
 
-export const number = (value) =>
-  !value || !isNaN(value) ? undefined : translate('Must be a number.');
-
 export const lessThanOrEqual = (n) => (value: number) =>
   value && value > n ? translate('Must be {n} or less.', { n }) : undefined;
 
