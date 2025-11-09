@@ -1,5 +1,6 @@
 import { proposalProposalsResourcesList } from 'waldur-js-client';
 
+import { AccordionCard } from '@waldur/core/AccordionCard';
 import { translate } from '@waldur/i18n';
 import {
   Proposal,
@@ -31,38 +32,47 @@ export const ResourceRequestsSummary = ({
     }),
   });
 
+  // Check if proposal has compliance - collapse panels only if compliance exists
+  const hasCompliance = !!proposal?.compliance_status;
+
   return (
-    <Table<ProposalResource>
-      {...tableProps}
+    <AccordionCard
       id="step-resource-requests"
       title={translate('Resource requests')}
-      columns={[
-        {
-          title: translate('Offering'),
-          render: ({ row }) => <>{row.requested_offering.offering_name}</>,
-        },
-        {
-          title: translate('Provider'),
-          render: ({ row }) => <>{row.requested_offering.provider_name}</>,
-        },
-        {
-          title: translate('Category'),
-          render: ({ row }) => (
-            <>{renderFieldOrDash(row.requested_offering.category_name)}</>
-          ),
-        },
-      ]}
-      hideRefresh
-      expandableRow={ResourceRequestExpandableRow}
-      minHeight="auto"
-      footer={
-        <FieldReviewComments
-          reviews={reviews}
-          fieldName="comment_resource_requests"
-          space={0}
-          className="mt-5"
-        />
-      }
-    />
+      subtitle={translate('Resources requested for this proposal.')}
+      defaultOpen={!hasCompliance}
+    >
+      <Table<ProposalResource>
+        {...tableProps}
+        title={null}
+        columns={[
+          {
+            title: translate('Offering'),
+            render: ({ row }) => <>{row.requested_offering.offering_name}</>,
+          },
+          {
+            title: translate('Provider'),
+            render: ({ row }) => <>{row.requested_offering.provider_name}</>,
+          },
+          {
+            title: translate('Category'),
+            render: ({ row }) => (
+              <>{renderFieldOrDash(row.requested_offering.category_name)}</>
+            ),
+          },
+        ]}
+        hideRefresh
+        expandableRow={ResourceRequestExpandableRow}
+        minHeight="auto"
+        footer={
+          <FieldReviewComments
+            reviews={reviews}
+            fieldName="comment_resource_requests"
+            space={0}
+            className="mt-5"
+          />
+        }
+      />
+    </AccordionCard>
   );
 };

@@ -1,6 +1,6 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 
+import { AccordionCard } from '@waldur/core/AccordionCard';
 import { TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
@@ -20,12 +20,17 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
   proposal,
   reviews,
   onAddCommentClick,
-}) => (
-  <Card className="card-bordered" id="step-project">
-    <Card.Header>
-      <Card.Title>{translate('Project details')}</Card.Title>
-    </Card.Header>
-    <Card.Body>
+}) => {
+  // Check if proposal has compliance - collapse panels only if compliance exists
+  const hasCompliance = !!proposal?.compliance_status;
+
+  return (
+    <AccordionCard
+      id="step-project"
+      title={translate('Project details')}
+      subtitle={translate('Basic information about your research project.')}
+      defaultOpen={!hasCompliance}
+    >
       <CommentSection
         label={translate('Name')}
         valueField="name"
@@ -137,6 +142,6 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
           <DocumentationFiles files={proposal.supporting_documentation} />
         </CommentSection>
       )}
-    </Card.Body>
-  </Card>
-);
+    </AccordionCard>
+  );
+};

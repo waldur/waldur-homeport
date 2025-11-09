@@ -10,6 +10,7 @@ import {
 
 interface AccordionCardProps extends PropsWithChildren {
   title: ReactNode;
+  subtitle?: string;
   id?: string;
   className?: string;
   titleClassName?: string;
@@ -18,7 +19,7 @@ interface AccordionCardProps extends PropsWithChildren {
   size?: 'sm';
 }
 
-const CustomToggle = ({ eventKey, title, titleClassName }) => {
+const CustomToggle = ({ eventKey, title, subtitle, titleClassName }) => {
   const { activeEventKey } = useContext(AccordionContext);
   const decoratedOnClick = useAccordionButton(eventKey);
 
@@ -30,7 +31,14 @@ const CustomToggle = ({ eventKey, title, titleClassName }) => {
       className={!isOpen && 'border-0'}
       onClick={decoratedOnClick}
     >
-      <h4 className={classNames('mb-0', titleClassName)}>{title}</h4>
+      <div>
+        <h4 className={classNames('mb-0', titleClassName)}>{title}</h4>
+        {subtitle && (
+          <small className="fs-6 fw-normal d-block mt-2 text-muted">
+            {subtitle}
+          </small>
+        )}
+      </div>
       <div className={'card-toolbar' + (isOpen ? ' active' : '')}>
         <CaretDownIcon weight="bold" size={20} className="rotate-180" />
       </div>
@@ -53,6 +61,7 @@ export const AccordionCard: FC<AccordionCardProps> = (props) => {
         <CustomToggle
           eventKey="0"
           title={props.title}
+          subtitle={props.subtitle}
           titleClassName={props.titleClassName}
         />
 

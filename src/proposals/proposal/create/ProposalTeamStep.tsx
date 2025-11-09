@@ -1,3 +1,4 @@
+import { AccordionCard } from '@waldur/core/AccordionCard';
 import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { TeamSection } from '@waldur/proposals/team/TeamSection';
@@ -8,14 +9,23 @@ export const ProposalTeamStep = (props: VStepperFormStepProps) => {
   const change = props.params?.change;
   const reviews: ProposalReview[] = props.params?.reviews;
 
+  // Check if proposal has compliance - collapse panels only if compliance exists
+  const hasCompliance = !!proposal?.compliance_status;
+
   return (
-    <TeamSection
+    <AccordionCard
       id={props.id}
-      scope={proposal}
-      roleTypes={['proposal']}
       title={translate('Project team')}
-      change={change}
-      reviews={reviews}
-    />
+      subtitle={translate('Team members and their roles in the project.')}
+      defaultOpen={!hasCompliance}
+    >
+      <TeamSection
+        scope={proposal}
+        roleTypes={['proposal']}
+        title={null}
+        change={change}
+        reviews={reviews}
+      />
+    </AccordionCard>
   );
 };

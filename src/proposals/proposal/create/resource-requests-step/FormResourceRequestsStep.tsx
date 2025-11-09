@@ -1,14 +1,12 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
-import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
+import { useEffect, useState, useMemo } from 'react';
 import {
   proposalProposalsResourcesList,
   proposalPublicCallsRetrieve,
   RequestedResource,
 } from 'waldur-js-client';
 
+import { AccordionCard } from '@waldur/core/AccordionCard';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
@@ -32,19 +30,13 @@ import { ResourceRequestExpandableRow } from './ResourceRequestExpandableRow';
 import { ResourceRequestItemActions } from './ResourceRequestItemActions';
 import { ResourceRequestTemplates } from './ResourceRequestTemplates';
 
-const mapStateToFilter = createSelector(
-  getFormValues('ProposalResourcesFilter'),
-  (filters: any) => {
-    const result: Record<string, any> = {};
-    if (filters?.offering) {
-      result.offering_uuid = filters.offering.offering_uuid;
-    }
-    return result;
-  },
-);
+// Simplified filter state - remove Redux Form dependency
 
 export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params.proposal;
+
+  // Check if proposal has compliance - collapse panels only if compliance exists
+  const hasCompliance = !!proposal?.compliance_status;
   const change = props.params?.change;
   const reviews: ProposalReview[] = props.params?.reviews;
   const onAddCommentClick = props.params?.onAddCommentClick;
@@ -71,7 +63,7 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
     staleTime: 60 * 1000,
   });
 
-  const filter = useSelector(mapStateToFilter);
+  const filter = useMemo(() => ({}), []); // Stable filter object to prevent re-render loops
 
   const tableProps = useTable({
     table: 'ProposalResourcesList',
@@ -101,7 +93,12 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   }, [resourceRequests, call]);
 
   return (
-    <div id={props.id}>
+    <AccordionCard
+      id={props.id}
+      title={translate('Resource requests')}
+      subtitle={translate('Resources requested for your project.')}
+      defaultOpen={!hasCompliance}
+    >
       {call?.resource_templates?.length && !readOnlyMode ? (
         <ResourceRequestTemplates
           call={call}
@@ -189,6 +186,6 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
           }
         />
       )}
-    </div>
+    </AccordionCard>
   );
 };

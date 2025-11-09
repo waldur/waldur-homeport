@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { Call } from '@waldur/proposals/types';
 
 import { EditGeneralInfoButton } from '../general/EditGeneralInfoButton';
@@ -26,6 +27,13 @@ const configRows = [
     title: translate('Edit fixed duration for granted projects (in days)'),
   },
   {
+    label: translate('Compliance checklist'),
+    key: 'compliance_checklist',
+    getValue: (call) =>
+      call.compliance_checklist_name || translate('Not configured'),
+    title: translate('Edit compliance checklist for proposal evaluation'),
+  },
+  {
     label: translate('Reviewer identity visible to submitters'),
     key: 'reviewer_identity_visible_to_submitters',
     getValue: (call) =>
@@ -44,6 +52,12 @@ const configRows = [
 ];
 
 export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
+  // Filter compliance checklist configuration based on experimental UI toggle
+  const filteredConfigRows = configRows.filter(
+    (row) =>
+      row.key !== 'compliance_checklist' || isExperimentalUiComponentsVisible(),
+  );
+
   return (
     <>
       <FormTable.Card
@@ -51,7 +65,7 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
         className="card-bordered mb-5"
       >
         <FormTable>
-          {configRows.map((row) => (
+          {filteredConfigRows.map((row) => (
             <FormTable.Item
               label={row.label}
               value={row.getValue(props.call)}
