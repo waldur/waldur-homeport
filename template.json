@@ -2071,6 +2071,64 @@
       "usage_count": 1
     }
   },
+  "List of offering types disabled for creation and selection.": {
+    "message": "List of offering types disabled for creation and selection.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 59,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Allow setting start date to control when resource creation order is processed.": {
     "message": "Allow setting start date to control when resource creation order is processed.",
     "context": {
@@ -10415,6 +10473,122 @@
       "usage_count": 1
     }
   },
+  "WirtschaftsCompass API server URL": {
+    "message": "WirtschaftsCompass API server URL",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 33,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "WirtschaftsCompass API token": {
+    "message": "WirtschaftsCompass API token",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "User agreements": {
     "message": "User agreements",
     "context": {
@@ -17388,6 +17562,7 @@
         "ActionButton",
         "DialogActionButton",
         "AsyncActionButton",
+        "WizardFinalFormContainer",
         "WizardFormContainer"
       ],
       "is_user_facing": true,
@@ -17518,6 +17693,7 @@
           "ActionButton",
           "DialogActionButton",
           "AsyncActionButton",
+          "WizardFinalFormContainer",
           "WizardFormContainer"
         ],
         "conditional_render": true
@@ -25498,8 +25674,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Has fired": {
-    "message": "Has fired",
+  "Action triggered": {
+    "message": "Action triggered",
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
@@ -25510,7 +25686,7 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 9,
+        "length": 16,
         "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
@@ -25560,15 +25736,86 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 9
+        "has_validation": false,
+        "max_nesting_level": 10
       },
       "usage_count": 3
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.": {
+    "message": "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [
+        "Tip"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 117,
+        "wordCount": 17,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin",
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "organizations",
+          "cost-policies",
+          "policies"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "administration/organizations/OrganizationCostPoliciesList.tsx",
+          "customer/cost-policies/CostPoliciesList.tsx",
+          "marketplace/offerings/details/policies/PoliciesTable.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Tip"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
   "Credit": {
@@ -41676,7 +41923,7 @@
         "generic_element"
       ],
       "components": [
-        "ModalDialog",
+        "WizardFinalFormContainer",
         "ProjectCreateButton",
         "NoResult"
       ],
@@ -41718,7 +41965,7 @@
       },
       "jsx_context": {
         "tags": [
-          "ModalDialog",
+          "WizardFinalFormContainer",
           "ProjectCreateButton"
         ],
         "conditional_render": false
@@ -41732,7 +41979,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 8
@@ -41741,6 +41988,7 @@
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -59163,6 +59411,7 @@
           "broadcasts/BroadcastSaveAsTemplateDialog.tsx",
           "error/InvalidObjectPage.tsx",
           "error/InvalidRoutePage.tsx",
+          "form/WizardFinalForm.tsx",
           "form/WizardForm.tsx",
           "maintenance/create/MaintenanceSaveAsTemplateDialog.tsx",
           "marketplace/offerings/import/WizardButtons.tsx",
@@ -59191,7 +59440,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 9
+      "usage_count": 10
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -65695,7 +65944,8 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "select_field"
       ],
       "components": [
         "AsyncSelectField",
@@ -65703,7 +65953,8 @@
         "ModalDialog",
         "Field",
         "FormGroup",
-        "AsyncPaginate"
+        "AsyncPaginate",
+        "Select"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -65755,7 +66006,8 @@
         "tags": [
           "AsyncSelectField",
           "Field",
-          "AsyncPaginate"
+          "AsyncPaginate",
+          "Select"
         ],
         "conditional_render": true
       },
@@ -74011,8 +74263,7 @@
         "title"
       ],
       "components": [
-        "StringField",
-        "Component"
+        "StringField"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -74032,12 +74283,10 @@
       "file_context": {
         "domains": [
           "customer_management",
-          "infrastructure",
           "user_management"
         ],
         "feature_areas": [
           "details",
-          "openstack-floating-ips",
           "affiliations"
         ],
         "component_types": [
@@ -74049,14 +74298,12 @@
           "customer/details/CustomerDetailsPanel.tsx",
           "customer/details/EditFieldDialog.tsx",
           "customer/import/utils.ts",
-          "openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx",
           "user/affiliations/OrganizationsList.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "StringField",
-          "Component"
+          "StringField"
         ],
         "conditional_render": true
       },
@@ -74074,7 +74321,7 @@
         "has_validation": false,
         "max_nesting_level": 4
       },
-      "usage_count": 5
+      "usage_count": 4
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -83634,6 +83881,7 @@
           "customer/payment-profiles/PaymentProfileCreateDialog.tsx",
           "customer/payments/PaymentCreateDialog.tsx",
           "form/FloatingSubmitButton.tsx",
+          "form/WizardFinalFormContainer.tsx",
           "form/WizardFormContainer.tsx",
           "invitations/GroupinvitationButtons.tsx",
           "invoices/list/MarkAsPaidDialog.tsx",
@@ -83684,7 +83932,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 27
+      "usage_count": 28
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -85699,15 +85947,15 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "property_value"
       ],
       "components": [
         "FileUploadField",
         "FormContainer",
         "ModalDialog",
         "ImageUploadField",
-        "Field",
-        "FormGroup"
+        "Field"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -85738,14 +85986,15 @@
           "marketplace-checklist"
         ],
         "component_types": [
-          "dialog"
+          "dialog",
+          "list"
         ],
         "paths": [
           "customer/payments/PaymentCreateDialog.tsx",
           "customer/payments/PaymentUpdateDialog.tsx",
           "invoices/list/MarkAsPaidDialog.tsx",
           "marketplace/offerings/actions/UpdateOfferingMediaDialog.tsx",
-          "marketplace-checklist/AnswerFormDialog.tsx"
+          "marketplace-checklist/QuestionAnswerField.tsx"
         ]
       },
       "jsx_context": {
@@ -97570,13 +97819,14 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "select_field"
       ],
       "components": [
         "Field",
         "FinalField",
         "BaseSelect",
-        "FormGroup"
+        "Select"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -97616,7 +97866,8 @@
         "tags": [
           "Field",
           "FinalField",
-          "BaseSelect"
+          "BaseSelect",
+          "Select"
         ],
         "conditional_render": true
       },
@@ -97632,7 +97883,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 5
+        "max_nesting_level": 10
       },
       "usage_count": 4
     },
@@ -98568,6 +98819,7 @@
           "dialog"
         ],
         "paths": [
+          "form/WizardFinalFormContainer.tsx",
           "form/WizardFormContainer.tsx",
           "marketplace/offerings/import/WizardButtons.tsx",
           "marketplace/resources/import/ResourceImportDialog.tsx",
@@ -98595,7 +98847,7 @@
         "has_validation": true,
         "max_nesting_level": 4
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -158470,6 +158722,7 @@
         "ResourceActionDialog",
         "Table",
         "SummaryField",
+        "Component",
         "FormGroup",
         "Field",
         "ModalDialog"
@@ -158504,6 +158757,9 @@
           "import",
           "list",
           "usage",
+          "openstack-floating-ips",
+          "openstack-network",
+          "openstack-subnet",
           "openstack-tenant",
           "manage",
           "summary",
@@ -158529,6 +158785,10 @@
           "marketplace/resources/list/utils.tsx",
           "marketplace/resources/usage/ResourceMetaInfo.tsx",
           "marketplace/resources/usage/ResourceUsageForm.tsx",
+          "openstack/openstack-floating-ips/OpenStackFloatingIpSummary.tsx",
+          "openstack/openstack-network/OpenStackNetworkSummary.tsx",
+          "openstack/openstack-subnet/OpenStackSubNetSummary.tsx",
+          "openstack/openstack-tenant/OpenstackPortSummary.tsx",
           "openstack/openstack-tenant/TenantFlavorsList.tsx",
           "openstack/openstack-tenant/TenantImagesList.tsx",
           "project/manage/EditFieldDialog.tsx",
@@ -158545,6 +158805,7 @@
           "Table",
           "b",
           "SummaryField",
+          "Component",
           "FormGroup",
           "Field"
         ],
@@ -158564,7 +158825,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 20
+      "usage_count": 24
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -161536,6 +161797,58 @@
       "usage_count": 1
     }
   },
+  "Automatically approves orders in service provider projects without manual approval": {
+    "message": "Automatically approves orders in service provider projects without manual approval",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 82,
+        "wordCount": 10,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Resource termination date is required": {
     "message": "Resource termination date is required",
     "context": {
@@ -161556,6 +161869,58 @@
         "startsWithCapital": true,
         "hasNumbers": false,
         "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "When enabled, uses default and maximal offset settings below to control date selection": {
+    "message": "When enabled, uses default and maximal offset settings below to control date selection",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 86,
+        "wordCount": 13,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
         "isAllCaps": false
       },
       "variables": {},
@@ -161640,6 +162005,58 @@
       "usage_count": 1
     }
   },
+  "Used when termination date is required - sets default date selection": {
+    "message": "Used when termination date is required - sets default date selection",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 68,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Maximal resource termination offset in days": {
     "message": "Maximal resource termination offset in days",
     "context": {
@@ -161692,6 +162109,58 @@
       "usage_count": 1
     }
   },
+  "Used when termination date is required - limits maximum selectable date": {
+    "message": "Used when termination date is required - limits maximum selectable date",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 71,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Latest date for resource termination": {
     "message": "Latest date for resource termination",
     "context": {
@@ -161704,6 +162173,58 @@
       "text_characteristics": {
         "length": 36,
         "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Absolute latest date allowed for resource termination regardless of offset settings": {
+    "message": "Absolute latest date allowed for resource termination regardless of offset settings",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 83,
+        "wordCount": 11,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -161796,6 +162317,58 @@
       "usage_count": 1
     }
   },
+  "Enables downscaling operations for resources created from this offering": {
+    "message": "Enables downscaling operations for resources created from this offering",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 71,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Supports pausing": {
     "message": "Supports pausing",
     "context": {
@@ -161808,6 +162381,58 @@
       "text_characteristics": {
         "length": 16,
         "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Enables pausing/unpausing operations for resources created from this offering": {
+    "message": "Enables pausing/unpausing operations for resources created from this offering",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 77,
+        "wordCount": 9,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -161900,6 +162525,58 @@
       "usage_count": 1
     }
   },
+  "Minimum number of team members required in project to provision resources": {
+    "message": "Minimum number of team members required in project to provision resources",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 73,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Required team role for resource provisioning": {
     "message": "Required team role for resource provisioning",
     "context": {
@@ -161952,174 +162629,18 @@
       "usage_count": 1
     }
   },
-  "If set to True, users will be able to upload purchase orders": {
-    "message": "If set to True, users will be able to upload purchase orders",
+  "Specific team role required for users to provision resources from this offering": {
+    "message": "Specific team role required for users to provision resources from this offering",
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "unknown",
       "ui_types": [
-        "label"
+        "property_value"
       ],
       "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 60,
+        "length": 79,
         "wordCount": 12,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
-  "If set to True, users will be required to upload purchase orders": {
-    "message": "If set to True, users will be required to upload purchase orders",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 64,
-        "wordCount": 12,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
-  "If set to True, pricing and components tab would be concealed": {
-    "message": "If set to True, pricing and components tab would be concealed",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 61,
-        "wordCount": 11,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
-  "Maximal number of offering resources allowed per project": {
-    "message": "Maximal number of offering resources allowed per project",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "label"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 56,
-        "wordCount": 8,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -162160,8 +162681,8 @@
       "usage_count": 1
     }
   },
-  "Create orders when options of related resources are changed": {
-    "message": "Create orders when options of related resources are changed",
+  "Enable purchase order upload": {
+    "message": "Enable purchase order upload",
     "context": {
       "primary_ui_type": "label",
       "ui_types": [
@@ -162170,8 +162691,476 @@
       "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 59,
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Shows purchase order upload dialog during order approval process": {
+    "message": "Shows purchase order upload dialog during order approval process",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 64,
         "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Require purchase order upload": {
+    "message": "Require purchase order upload",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Makes purchase order upload mandatory when \"Enable purchase order upload\" is active": {
+    "message": "Makes purchase order upload mandatory when \"Enable purchase order upload\" is active",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 83,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Conceal billing data": {
+    "message": "Conceal billing data",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Hides pricing and components tabs in offering details to conceal billing information": {
+    "message": "Hides pricing and components tabs in offering details to conceal billing information",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 84,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Maximal resource count per project": {
+    "message": "Maximal resource count per project",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Limits the maximum number of resources from this offering allowed per project": {
+    "message": "Limits the maximum number of resources from this offering allowed per project",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 77,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Create orders on resource option change": {
+    "message": "Create orders on resource option change",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 39,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Automatically creates new orders when configuration options of related resources are modified": {
+    "message": "Automatically creates new orders when configuration options of related resources are modified",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 93,
+        "wordCount": 12,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -176945,6 +177934,219 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Grace period (days)": {
+    "message": "Grace period (days)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "tos"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/update/tos/AddTosDialog.tsx",
+          "marketplace/offerings/update/tos/TosEditDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Number of days before outdated consents are automatically revoked. Only applies when requires re-consent is enabled.": {
+    "message": "Number of days before outdated consents are automatically revoked. Only applies when requires re-consent is enabled.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 116,
+        "wordCount": 16,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "tos"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/update/tos/AddTosDialog.tsx",
+          "marketplace/offerings/update/tos/TosEditDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "After this period expires, user consents for outdated terms will be automatically revoked.": {
+    "message": "After this period expires, user consents for outdated terms will be automatically revoked.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 90,
+        "wordCount": 13,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "tos"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/update/tos/AddTosDialog.tsx",
+          "marketplace/offerings/update/tos/TosEditDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Delete ToS": {
     "message": "Delete ToS",
     "context": {
@@ -180260,6 +181462,7 @@
       "ui_types": [
         "title",
         "unknown",
+        "label",
         "generic_element"
       ],
       "components": [
@@ -180300,6 +181503,7 @@
           "marketplace/orders/details/OrderMetadataTab.tsx",
           "project/ProjectManageContainer.tsx",
           "project/ProjectsListWithTabs.tsx",
+          "project/create/ProjectCreateDialog.tsx",
           "resource/summary/ResourceSummaryBase.tsx"
         ]
       },
@@ -180323,7 +181527,7 @@
         "has_validation": true,
         "max_nesting_level": 5
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -183205,6 +184409,132 @@
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "True": {
+    "message": "True",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "resources"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "marketplace/resources/KeyValueTable.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "td"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "False": {
+    "message": "False",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "resources"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "marketplace/resources/KeyValueTable.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "td"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
       },
       "usage_count": 1
     },
@@ -201205,12 +202535,13 @@
         "component_types": [
           "component",
           "dialog",
+          "list",
           "form"
         ],
         "paths": [
           "marketplace/service-providers/OfferingUsersExpandableRow.tsx",
           "marketplace/service-providers/offering-users/AnswerReviewDialog.tsx",
-          "marketplace-checklist/AnswerFormDialog.tsx",
+          "marketplace-checklist/QuestionAnswerField.tsx",
           "marketplace-checklist/checklists/questions/QuestionGuidanceForm.tsx",
           "project/metadata/MetadataByAnswerExpandableRow.tsx",
           "project/metadata/MetadataByProjectExpandableRow.tsx",
@@ -205854,207 +207185,6 @@
     },
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Must be between {n} and {m}.": {
-    "message": "Must be between {n} and {m}.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "function_call"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 28,
-        "wordCount": 6,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {
-        "n": {
-          "type": "unknown"
-        },
-        "m": {
-          "type": "unknown"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "marketplace-checklist"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace-checklist/AnswerFormDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "Contains variables: n, m. Variable types: unknown.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Must be greater than or equal to {n}.": {
-    "message": "Must be greater than or equal to {n}.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "function_call"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 37,
-        "wordCount": 8,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {
-        "n": {
-          "type": "unknown"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "marketplace-checklist"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace-checklist/AnswerFormDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "Contains variables: n. Variable types: unknown.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Must be less than or equal to {n}.": {
-    "message": "Must be less than or equal to {n}.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "function_call"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 34,
-        "wordCount": 8,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {
-        "n": {
-          "type": "unknown"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "marketplace-checklist"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "marketplace-checklist/AnswerFormDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "Contains variables: n. Variable types: unknown.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -211494,6 +212624,204 @@
       },
       "usage_count": 1
     }
+  },
+  "Must be between {n} and {m}.": {
+    "message": "Must be between {n} and {m}.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 6,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "n": {
+          "type": "unknown"
+        },
+        "m": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "marketplace-checklist"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "marketplace-checklist/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: n, m. Variable types: unknown."
+    ]
+  },
+  "Must be greater than or equal to {n}.": {
+    "message": "Must be greater than or equal to {n}.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 37,
+        "wordCount": 8,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "marketplace-checklist"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "marketplace-checklist/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: n. Variable types: unknown."
+    ]
+  },
+  "Must be less than or equal to {n}.": {
+    "message": "Must be less than or equal to {n}.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 8,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "marketplace-checklist"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "marketplace-checklist/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: n. Variable types: unknown."
+    ]
   },
   "Reviewed by": {
     "message": "Reviewed by",
@@ -251582,6 +252910,120 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
+  "Project info": {
+    "message": "Project info",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "project/create/ProjectCreateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Project has been created.": {
+    "message": "Project has been created.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "project/create/ProjectCreateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Error while assigning credit to the project.": {
     "message": "Error while assigning credit to the project.",
     "context": {
@@ -251644,8 +253086,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Project has been created.": {
-    "message": "Project has been created.",
+  "Project metadata submitted.": {
+    "message": "Project metadata submitted.",
     "context": {
       "primary_ui_type": "success_message",
       "ui_types": [
@@ -251654,8 +253096,8 @@
       "components": [],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 25,
-        "wordCount": 4,
+        "length": 27,
+        "wordCount": 3,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -251703,6 +253145,68 @@
     },
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Error while submitting project metadata": {
+    "message": "Error while submitting project metadata",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 39,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "project/create/ProjectCreateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -251776,7 +253280,7 @@
         "generic_element"
       ],
       "components": [
-        "ModalDialog"
+        "WizardFinalFormContainer"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -251809,7 +253313,7 @@
       },
       "jsx_context": {
         "tags": [
-          "ModalDialog"
+          "WizardFinalFormContainer"
         ],
         "conditional_render": false
       },
@@ -251822,14 +253326,15 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 6
+        "max_nesting_level": 4
       },
       "usage_count": 1
     },
     "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -251956,6 +253461,138 @@
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Unable to load questions.": {
+    "message": "Unable to load questions.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "LoadingErred",
+        "WizardFinalForm"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "project/create/Step2Metadata.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "LoadingErred"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "There is no checklist.": {
+    "message": "There is no checklist.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "WizardFinalForm"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "project/create/Step2Metadata.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
       },
       "usage_count": 1
     },

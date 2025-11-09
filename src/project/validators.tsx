@@ -14,11 +14,12 @@ const checkPattern = (value: string) => {
 };
 
 const checkDuplicate = (value, props) =>
-  props.customer?.projects.find(
+  props.customer?.projects &&
+  props.customer.projects.find(
     (project) => project.name === value && project.uuid !== props.project_uuid,
   )
     ? translate('Name is duplicated. Choose other name.')
     : undefined;
 
-export const validateProjectName = (value, _, props) =>
+export const validateProjectName = (value, props) =>
   checkDuplicate(value, props) || checkPattern(value);
