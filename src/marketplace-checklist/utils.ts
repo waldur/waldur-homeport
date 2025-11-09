@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import {
   ChecklistOperators,
   ChecklistTypeEnum,
@@ -24,6 +25,9 @@ export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
   { label: translate('Date'), value: 'date' },
   { label: translate('File'), value: 'file' },
 ];
+
+export const isQuestionSelectType = (questionType) =>
+  ['single_select', 'multi_select'].includes(questionType);
 
 export const questionConditionOperatorOptions: Array<{
   label;
@@ -67,3 +71,33 @@ export const CHECKLIST_FLAGS = {
   questionFormVisibility: true,
   questionFormTriggers: false,
 };
+
+export const useQuestionNumberValidator = (question) =>
+  useMemo(
+    () => (value) => {
+      const v = Number(value);
+      if ((!v && v !== 0) || question.question_type !== 'number')
+        return undefined;
+      const max = question.max_value ? Number(question.max_value) : null;
+      const min = question.min_value ? Number(question.min_value) : null;
+
+      if (min !== null && max !== null) {
+        if (v < min || v > max) {
+          return translate('Must be between {n} and {m}.', {
+            n: Number(min),
+            m: Number(max),
+          });
+        }
+      } else if (min !== null && v < min) {
+        return translate('Must be greater than or equal to {n}.', {
+          n: Number(min),
+        });
+      } else if (max !== null && v > max) {
+        return translate('Must be less than or equal to {n}.', {
+          n: Number(max),
+        });
+      }
+      return undefined;
+    },
+    [question],
+  );

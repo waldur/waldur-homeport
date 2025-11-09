@@ -1,37 +1,27 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useMemo, useState } from 'react';
-import { Form } from 'react-final-form';
 import {
+  AnswerSubmitRequest,
   KindEnum,
+  Project,
   projectCreditsCreate,
   projectsCreate,
+  projectsSubmitAnswers,
+  QuestionAdmin,
 } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
 import { formatISODate } from '@waldur/core/dateUtils';
-import { fetchCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
-import { SubmitButton } from '@waldur/form';
+import { ProgressStep } from '@waldur/core/ProgressSteps';
+import { WizardFinalFormContainer } from '@waldur/form/WizardFinalFormContainer';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 import { Customer } from '@waldur/workspace/types';
 
-import { CreditGroup } from './CreditGroup';
-import { DescriptionGroup } from './DescriptionGroup';
-import { EndDateGroup } from './EndDateGroup';
-import { ImageGroup } from './ImageGroup';
-import { IndustryGroup } from './IndustryGroup';
-import { KindGroup } from './KindGroup';
-import { NameGroup } from './NameGroup';
-import { OecdCodeGroup } from './OecdCodeGroup';
-import { OrganizationGroup } from './OrganizationGroup';
-import { SlugGroup } from './SlugGroup';
-import { StartDateGroup } from './StartDateGroup';
-import { TypeGroup } from './TypeGroup';
+import { Step1ProjectInfo } from './Step1ProjectInfo';
+import { Step2Metadata } from './Step2Metadata';
 
 interface ProjectCreateDialogProps {
   customer?: Customer;
@@ -51,62 +41,69 @@ interface ProjectFormData {
   image?: File | Blob;
   project_credit?: string;
   kind?: KindEnum;
+  // Metadata section
+  metadata?: Record<string, any>;
+  questions?: QuestionAdmin[];
 }
 
+const WizardForms = [Step1ProjectInfo, Step2Metadata];
+
+const steps: ProgressStep[] = [
+  {
+    key: 'general',
+    label: translate('Project info'),
+    completed: false,
+  },
+  {
+    key: 'metadata',
+    label: translate('Metadata'),
+    completed: false,
+  },
+];
+
 export const ProjectCreateDialog = ({
-  customer: _customer,
+  customer,
   refetch,
 }: ProjectCreateDialogProps) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
   const router = useRouter();
 
-  const [selectedCustomer, setSelectedCustomer] = useState<Customer>(_customer);
-
-  // Fetch customer projects
-  const {
-    data: projects,
-    isLoading,
-    error,
-    refetch: refetchProjects,
-  } = useQuery({
-    queryKey: ['CustomerProjects', selectedCustomer?.uuid],
-    queryFn: () =>
-      !selectedCustomer
-        ? null
-        : selectedCustomer?.projects
-          ? Promise.resolve(selectedCustomer.projects)
-          : fetchCustomerProjects(selectedCustomer.uuid),
-    staleTime: 5 * 60 * 1000,
-  });
-
-  const customer = useMemo(
-    () => (selectedCustomer ? { ...selectedCustomer, projects } : undefined),
-    [selectedCustomer, projects],
-  );
+  // Store the project if it saved, to avoid resubmitting it if there is any other errors
+  const [savedProject, setSavedProject] = useState<Project>(null);
 
   const onSubmit = async (formData: ProjectFormData) => {
     try {
-      const response = await projectsCreate({
-        body: {
-          name: formData.name,
-          slug: formData.slug,
-          description: formData.description,
-          end_date: formData.end_date
-            ? formatISODate(formData.end_date)
-            : undefined,
-          start_date: formData.start_date
-            ? formatISODate(formData.start_date)
-            : undefined,
-          customer: formData.customer.url,
-          type: formData.type?.url,
-          oecd_fos_2007_code: formData.oecd_fos_2007_code?.value,
-          is_industry: formData.is_industry,
-          kind: formData.kind,
-          image: fileSerializer(formData.image),
-        },
-        ...formDataOptions,
-      });
+      let response: { data: Project; error: any } = savedProject
+        ? { data: savedProject, error: undefined }
+        : null;
+      if (!savedProject) {
+        response = await projectsCreate({
+          body: {
+            name: formData.name,
+            slug: formData.slug,
+            description: formData.description,
+            end_date: formData.end_date
+              ? formatISODate(formData.end_date)
+              : undefined,
+            start_date: formData.start_date
+              ? formatISODate(formData.start_date)
+              : undefined,
+            customer: formData.customer.url,
+            type: formData.type?.url,
+            oecd_fos_2007_code: formData.oecd_fos_2007_code?.value,
+            is_industry: formData.is_industry,
+            kind: formData.kind,
+            image: fileSerializer(formData.image),
+          },
+          ...formDataOptions,
+        });
+        showSuccess(translate('Project has been created.'));
+
+        setSavedProject(response.data);
+      }
+      let error;
+      // Project credit
       if (!response.error && formData.project_credit) {
         try {
           await projectCreditsCreate({
@@ -115,77 +112,89 @@ export const ProjectCreateDialog = ({
               value: formData.project_credit,
             },
           });
-        } catch (e) {
+        } catch (err) {
+          error = err;
           showErrorResponse(
-            e,
+            err,
             translate('Error while assigning credit to the project.'),
           );
         }
       }
-      if (refetch) {
-        await refetch();
+      // Project metadata
+      if (!response.error && Object.keys(formData.metadata || {}).length) {
+        const metadataBody: AnswerSubmitRequest[] = [];
+        let hasFileAnswer;
+        Object.keys(formData.metadata).forEach((key) => {
+          const answer = formData.metadata[key];
+          const question = formData.questions.find((q) => q.uuid === key);
+          if (answer && question.question_type === 'file') {
+            hasFileAnswer = true;
+          }
+          metadataBody.push({
+            question_uuid: question.uuid,
+            answer_data: answer ?? null,
+          });
+        });
+        try {
+          await projectsSubmitAnswers({
+            path: { uuid: response.data.uuid },
+            body: metadataBody,
+            ...(hasFileAnswer ? formDataOptions : {}),
+          });
+          showSuccess(translate('Project metadata submitted.'));
+        } catch (err) {
+          error = err;
+          showErrorResponse(
+            err,
+            translate('Error while submitting project metadata'),
+          );
+        }
       }
-      showSuccess(translate('Project has been created.'));
-      closeDialog();
-      router.stateService.go('project.dashboard', {
-        uuid: response.data.uuid,
-      });
+      if (!error) {
+        if (refetch) {
+          await refetch();
+        }
+        closeDialog();
+        router.stateService.go('project.dashboard', {
+          uuid: response.data.uuid,
+        });
+      }
     } catch (e) {
       showErrorResponse(e, translate('Unable to create project.'));
     }
   };
 
-  return (
-    <Form
-      onSubmit={onSubmit}
-      initialValues={{ customer }}
-      render={({ handleSubmit, submitting, invalid, dirty, values }) => (
-        <form onSubmit={handleSubmit}>
-          <ModalDialog
-            title={translate('Create project')}
-            subtitle={translate(
-              'Provide the required information to set up a new project.',
-            )}
-            iconNode={<PlusCircleIcon weight="bold" />}
-            iconColor="success"
-            footer={
-              <>
-                <CloseDialogButton className="flex-equal" />
-                <SubmitButton
-                  disabled={invalid || !dirty || isLoading || Boolean(error)}
-                  submitting={submitting}
-                  label={translate('Create')}
-                  className="btn btn-primary flex-equal"
-                />
-              </>
-            }
-          >
-            <div className="size-lg">
-              <OrganizationGroup
-                onChange={setSelectedCustomer}
-                isDisabled={!!_customer}
-              />
-              <NameGroup
-                customer={values?.customer}
-                loading={isLoading}
-                error={error}
-                refetch={refetchProjects}
-              />
-              <SlugGroup />
-              <DescriptionGroup create />
-              <IndustryGroup />
-              <OecdCodeGroup />
-              <KindGroup create />
+  // Check if Customer has project metadata checklist configured
+  const [selectedCustomer, setSelectedCustomer] = useState(customer);
+  const WizardStepsData = useMemo(() => {
+    if (selectedCustomer?.project_metadata_checklist) {
+      return { steps, wizardForms: WizardForms };
+    }
+    return { steps: [steps[0]], wizardForms: [WizardForms[0]] };
+  }, [selectedCustomer]);
 
-              <TypeGroup create />
-              <StartDateGroup create />
-              <EndDateGroup create />
-              <CreditGroup customer={values?.customer || customer} />
-              <ImageGroup create />
-            </div>
-          </ModalDialog>
-        </form>
+  return (
+    <WizardFinalFormContainer
+      onSubmit={onSubmit}
+      submitLabel={translate('Create')}
+      steps={WizardStepsData.steps}
+      wizardForms={WizardStepsData.wizardForms}
+      title={translate('Create project')}
+      subtitle={translate(
+        'Provide the required information to set up a new project.',
       )}
+      initialValues={{ customer }}
+      data={{
+        initialCustomer: customer,
+        selectedCustomer,
+        setSelectedCustomer,
+      }}
+      modalProps={{
+        headerClassName: 'pb-2',
+        bodyClassName: 'h-500px',
+        iconNode: <PlusCircleIcon weight="bold" />,
+        iconColor: 'success',
+      }}
     />
   );
 };

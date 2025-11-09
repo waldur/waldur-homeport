@@ -18,21 +18,34 @@ export const OrganizationGroup = ({
 }: OrganizationGroupProps) => (
   <FormGroup label={translate('Organization')} required>
     <Field
-      component={Select as any}
       name="customer"
       validate={required}
-      placeholder={translate('Select...')}
-      loadOptions={(query, prevOptions, page) =>
-        organizationAutocomplete(query, prevOptions, page, {
-          field: ['uuid', 'name', 'url', 'customer_unallocated_credit'],
-          o: 'name',
-        })
-      }
-      getOptionLabel={(option) => option.name}
-      getOptionValue={(option) => option.url}
-      noOptionsMessage={() => translate('No organizations')}
-      isDisabled={isDisabled}
-      onChange={onChange}
+      render={(fieldProps) => (
+        <Select
+          {...fieldProps}
+          placeholder={translate('Select...')}
+          loadOptions={(query, prevOptions, page) =>
+            organizationAutocomplete(query, prevOptions, page, {
+              field: [
+                'uuid',
+                'name',
+                'url',
+                'customer_unallocated_credit',
+                'project_metadata_checklist',
+              ],
+              o: 'name',
+            })
+          }
+          getOptionLabel={(option) => option.name}
+          getOptionValue={(option) => option.url}
+          noOptionsMessage={() => translate('No organizations')}
+          isDisabled={isDisabled}
+          onChange={(value) => {
+            fieldProps.input.onChange(value);
+            onChange(value);
+          }}
+        />
+      )}
     />
   </FormGroup>
 );

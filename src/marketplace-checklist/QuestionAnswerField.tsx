@@ -1,0 +1,85 @@
+import { ComponentType } from 'react';
+import { Field } from 'react-final-form';
+import { QuestionAdmin, QuestionTypeEnum } from 'waldur-js-client';
+
+import {
+  FileUploadField,
+  NumberField,
+  SelectField,
+  StringField,
+  TextField,
+} from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { DateField } from '@waldur/form/DateField';
+import { translate } from '@waldur/i18n';
+import {
+  isQuestionSelectType,
+  useQuestionNumberValidator,
+} from '@waldur/marketplace-checklist/utils';
+
+const questionComponent: Record<QuestionTypeEnum, ComponentType> = {
+  text_input: StringField,
+  text_area: TextField,
+  boolean: AwesomeCheckboxField,
+  number: NumberField,
+  date: DateField,
+  single_select: SelectField,
+  multi_select: SelectField,
+  file: FileUploadField,
+};
+
+type OwnProps = {
+  question: QuestionAdmin;
+  name: string;
+} & Record<string, any>;
+
+export const QuestionAnswerField = ({ question, name, ...props }: OwnProps) => {
+  const type = question.question_type;
+  const isSelectType = isQuestionSelectType(type);
+  const numberValidator = useQuestionNumberValidator(question);
+
+  return (
+    <Field
+      name={name}
+      placeholder={
+        ['text_input', 'text_area'].includes(type)
+          ? translate('Answer')
+          : type === 'number'
+            ? '0'
+            : undefined
+      }
+      component={(questionComponent[type] || StringField) as any}
+      {...(isSelectType
+        ? {
+            options: question.question_options,
+            getOptionValue: (opt) => opt.uuid,
+            simpleValue: true,
+            isMulti: type === 'multi_select',
+            isClearable: !question.required,
+          }
+        : {})}
+      {...(type === 'file'
+        ? {
+            showFileName: true,
+            buttonLabel: translate('Browse'),
+          }
+        : {})}
+      validate={type === 'number' ? numberValidator : undefined}
+      format={(value) => {
+        if (type === 'single_select' && value) return value[0];
+        if (type === 'multi_select' && !value?.length) return [];
+        return value;
+      }}
+      parse={(value) =>
+        [null, undefined, '', []].includes(value)
+          ? null
+          : type === 'number'
+            ? Number(value)
+            : type === 'single_select'
+              ? [value]
+              : value
+      }
+      {...props}
+    />
+  );
+};
