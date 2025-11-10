@@ -1,3 +1,4 @@
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -6,6 +7,7 @@ import { marketplaceProviderOfferingsCreateOfferingComponent } from 'waldur-js-c
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -50,12 +52,19 @@ export const AddComponentDialog = reduxForm<
     <form onSubmit={props.handleSubmit(update)}>
       <ModalDialog
         title={translate('Add component')}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        iconColor="success"
+        closeButton
         footer={
-          <SubmitButton
-            disabled={props.invalid}
-            submitting={props.submitting}
-            label={translate('Create')}
-          />
+          <>
+            <CloseDialogButton className="min-w-125px" />
+            <SubmitButton
+              label={translate('Confirm')}
+              submitting={props.submitting}
+              disabled={props.invalid}
+              className="btn btn-primary min-w-125px"
+            />
+          </>
         }
       >
         <ComponentForm offering={props.resolve.offering} />

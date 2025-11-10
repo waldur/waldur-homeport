@@ -6,11 +6,13 @@ import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 export const ComponentBooleanLimitField: FunctionComponent = () => (
-  <FormGroup>
+  <FormGroup space={5}>
     <Field
       name="is_boolean"
       component={AwesomeCheckboxField}
       label={translate('Allow to enable/disable component only')}
+      size="sm"
+      alignMiddle
     />
   </FormGroup>
 );

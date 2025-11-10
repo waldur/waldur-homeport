@@ -55,7 +55,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
             className="align-self-center ms-2"
             label={props.help}
           >
-            <QuestionIcon weight="bold" size={20} className="text-muted" />
+            <QuestionIcon weight="bold" size={16} className="text-muted" />
           </Tip>
         )}
       </div>

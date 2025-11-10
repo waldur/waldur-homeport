@@ -8,7 +8,9 @@ export const FormGroupWithError = (inputProps) => (
   <FormGroup
     label={inputProps.label}
     help={inputProps.description}
+    helpEnd
     required={inputProps.required}
+    space={5}
   >
     <Form.Control
       {...inputProps.input}

@@ -47,12 +47,18 @@ export function getLimitPeriods(): LimitPeriodOption[] {
 interface ComponentLimitPeriodFieldProps {
   limitPeriod: LimitPeriodOption;
   readOnly?: boolean;
+  spaceless?: boolean;
 }
 
 export const ComponentLimitPeriodField: FunctionComponent<
   ComponentLimitPeriodFieldProps
 > = (props) => (
-  <FormGroup label={translate('Limit period')}>
+  <FormGroup
+    label={translate('Limit period')}
+    spaceless
+    help={props.limitPeriod?.description}
+    helpEnd
+  >
     <Field
       name="limit_period"
       component={(fieldProps) =>
@@ -68,9 +74,5 @@ export const ComponentLimitPeriodField: FunctionComponent<
         )
       }
     />
-
-    {props.limitPeriod && (
-      <div className="help-text mt-2">{props.limitPeriod.description}</div>
-    )}
   </FormGroup>
 );

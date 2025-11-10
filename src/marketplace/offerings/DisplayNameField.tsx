@@ -20,6 +20,8 @@ export const DisplayNameField: FunctionComponent<DisplayNameFieldProps> = (
     label={translate('Display name')}
     required={true}
     help={translate('Label that is visible to users in Marketplace.')}
+    helpEnd
+    space={5}
   >
     <Field
       component={InputField}

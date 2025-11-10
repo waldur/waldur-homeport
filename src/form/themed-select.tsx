@@ -51,7 +51,7 @@ export const FilterSelectClearIndicator = (props: ClearIndicatorProps) => {
 
 const SelectDropdownIndicator = (props: DropdownIndicatorProps) => (
   <components.DropdownIndicator {...props}>
-    <CaretDownIcon size={16} weight="bold" />
+    <CaretDownIcon size={20} weight="bold" />
   </components.DropdownIndicator>
 );
 

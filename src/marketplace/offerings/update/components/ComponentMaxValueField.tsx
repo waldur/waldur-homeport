@@ -1,15 +1,14 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
+import { NumberField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
-import { OptionalNumberField } from './OptionalNumberField';
-
 export const ComponentMaxValueField: React.FC = () => (
-  <FormGroup label={translate('Maximum allowed value')}>
+  <FormGroup label={translate('Max value')} spaceless>
     <Field
-      component={OptionalNumberField}
+      component={NumberField}
       name="max_value"
       parse={(value) => Number(value)}
     />

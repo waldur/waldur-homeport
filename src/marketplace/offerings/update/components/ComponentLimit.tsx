@@ -1,6 +1,8 @@
+import { Col, Row } from 'react-bootstrap';
 import { formValues } from 'redux-form';
 import { BillingTypeEnum } from 'waldur-js-client';
 
+import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
 import { ComponentBooleanDefaultLimitField } from './ComponentBooleanDefaultLimitField';
 import { ComponentBooleanLimitField } from './ComponentBooleanLimitField';
 import { ComponentLimitAmountField } from './ComponentLimitAmountField';
@@ -34,39 +36,57 @@ export const ComponentLimit = enhance(
     if (billingType == 'limit') {
       if (props.isBoolean) {
         return (
-          <>
+          <ComponentAccountingTypeWrapper>
             <ComponentBooleanLimitField />
             <ComponentBooleanDefaultLimitField />
-          </>
+          </ComponentAccountingTypeWrapper>
         );
       } else {
         return (
-          <>
+          <ComponentAccountingTypeWrapper>
             <ComponentBooleanLimitField />
-            <ComponentMinValueField />
-            <ComponentMaxValueField />
-            <ComponentLimitPeriodField
-              limitPeriod={props.limitPeriod}
-              readOnly={props.readOnly}
-            />
-          </>
+            <Row className="g-5">
+              <Col xs>
+                <ComponentMinValueField />
+              </Col>
+              <Col xs>
+                <ComponentMaxValueField />
+              </Col>
+              <Col xs={5}>
+                <ComponentLimitPeriodField
+                  limitPeriod={props.limitPeriod}
+                  readOnly={props.readOnly}
+                  spaceless
+                />
+              </Col>
+            </Row>
+          </ComponentAccountingTypeWrapper>
         );
       }
     } else if (billingType == 'usage') {
       if (typeof props.limitAmount === 'number') {
         return (
-          <>
+          <ComponentAccountingTypeWrapper>
             <ComponentLimitEnableField />
-            <ComponentLimitPeriodField
-              limitPeriod={props.limitPeriod}
-              readOnly={props.readOnly}
-            />
-
-            <ComponentLimitAmountField />
-          </>
+            <Row className="g-5">
+              <Col xs={6}>
+                <ComponentLimitPeriodField
+                  limitPeriod={props.limitPeriod}
+                  readOnly={props.readOnly}
+                />
+              </Col>
+              <Col xs={6}>
+                <ComponentLimitAmountField />
+              </Col>
+            </Row>
+          </ComponentAccountingTypeWrapper>
         );
       } else {
-        return <ComponentLimitEnableField />;
+        return (
+          <ComponentAccountingTypeWrapper>
+            <ComponentLimitEnableField />
+          </ComponentAccountingTypeWrapper>
+        );
       }
     }
     return null;
