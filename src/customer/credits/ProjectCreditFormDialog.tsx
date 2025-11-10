@@ -105,7 +105,7 @@ export const ProjectCreditFormDialog = connect<
           }
         >
           <FormContainer submitting={props.submitting} className="size-lg">
-            <OrganizationProjectSelectField disabled={isEdit} />
+            <OrganizationProjectSelectField disabled={isEdit} legacyField />
             {isLoading ? (
               <LoadingSpinner />
             ) : error ? (

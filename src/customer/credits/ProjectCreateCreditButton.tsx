@@ -33,8 +33,8 @@ export const ProjectCreateCreditButton = ({ refetch }) => {
           showSuccess(translate('Credit has been created.'));
         } catch (e) {
           showErrorResponse(e, translate('Unable to create a credit'));
-          if (e.response && e.response.status === 400) {
-            throw new SubmissionError(e.response.data);
+          if (e && e.response.status === 400) {
+            throw new SubmissionError(e);
           }
         }
       },

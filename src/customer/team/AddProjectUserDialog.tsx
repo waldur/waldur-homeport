@@ -75,7 +75,7 @@ export const AddProjectUserDialog = reduxForm<
       >
         <FormContainer submitting={submitting}>
           <UserGroup permission={resolve.customer} />
-          <OrganizationProjectSelectField />
+          <OrganizationProjectSelectField legacyField />
           <RoleGroup types={['project']} />
           <ExpirationTimeGroup disabled={submitting} />
         </FormContainer>
