@@ -137,23 +137,6 @@
           background-color: $bg-tertiary;
         }
       }
-
-      &--is-selected {
-        // Add border-top only for the first selected option in a group
-        &:not(:first-child) {
-          &:not(
-            .metronic-select__option--is-selected
-              + .metronic-select__option--is-selected
-          ) {
-            border-top: 1px solid $border-color;
-          }
-        }
-
-        // Add border-top only for the first unselected option after a group
-        + :not(.metronic-select__option--is-selected) {
-          border-top: 1px solid $border-color;
-        }
-      }
     }
 
     &:not(.metronic-select__menu-list--is-multi) {

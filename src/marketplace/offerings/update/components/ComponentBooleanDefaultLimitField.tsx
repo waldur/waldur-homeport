@@ -6,13 +6,15 @@ import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 export const ComponentBooleanDefaultLimitField: FunctionComponent = () => (
-  <FormGroup>
+  <FormGroup space={5}>
     <Field
       name="default_limit"
       component={AwesomeCheckboxField}
       label={translate('Enable by default')}
       parse={Boolean}
       normalize={(v) => (v ? 1 : 0)}
+      size="sm"
+      alignMiddle
     />
   </FormGroup>
 );

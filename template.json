@@ -17432,7 +17432,6 @@
           "admin",
           "actions",
           "policies",
-          "update",
           "endpoints",
           "options",
           "plans",
@@ -17477,7 +17476,6 @@
           "marketplace/offerings/actions/OfferingCreateDialog.tsx",
           "marketplace/offerings/details/CreateOfferingUserButton.tsx",
           "marketplace/offerings/details/policies/PolicyCreateDialog.tsx",
-          "marketplace/offerings/update/components/AddComponentDialog.tsx",
           "marketplace/offerings/update/endpoints/AddEndpointDialog.tsx",
           "marketplace/offerings/update/options/AddOptionDialog.tsx",
           "marketplace/offerings/update/plans/AddPlanDialog.tsx",
@@ -17537,7 +17535,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 50
+      "usage_count": 49
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -18259,6 +18257,7 @@
           "plan",
           "images",
           "import",
+          "update",
           "integration",
           "tos",
           "mass-actions",
@@ -18290,6 +18289,7 @@
           "marketplace/details/plan/AddPrepaidPeriodDialog.tsx",
           "marketplace/offerings/images/CreateImageDialog.tsx",
           "marketplace/offerings/import/WizardButtons.tsx",
+          "marketplace/offerings/update/components/AddComponentDialog.tsx",
           "marketplace/offerings/update/integration/EditFieldDialog.tsx",
           "marketplace/offerings/update/integration/EditScriptLanguageDialog.tsx",
           "marketplace/offerings/update/tos/AddTosDialog.tsx",
@@ -18327,7 +18327,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 26
+      "usage_count": 27
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -29874,6 +29874,7 @@
           "providers",
           "import",
           "join-organization",
+          "modal",
           "course-accounts",
           "support"
         ],
@@ -29891,6 +29892,7 @@
           "invitations/join-organization/submission.tsx",
           "marketplace/resources/list/ResourceStateFilter.tsx",
           "marketplace/service-providers/ProviderOfferingUsersFilter.tsx",
+          "modal/ModalRoot.tsx",
           "project/course-accounts/ProjectCourseAccountsList.tsx",
           "project/course-accounts/Step2PreviewAndCreate.tsx",
           "project/import/Step5PreviewAndImport.tsx",
@@ -29920,7 +29922,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 11
+      "usage_count": 12
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
@@ -44842,6 +44844,7 @@
           "marketplace/service-providers/ServiceProviderManagement.tsx",
           "modal/CloseDialogButton.tsx",
           "modal/DeleteConfirmationDialog.tsx",
+          "modal/ModalRoot.tsx",
           "rancher/cluster/WorkloadActions.tsx",
           "table/TableFilterActions.tsx",
           "table/TableFilterItem.tsx",
@@ -44875,7 +44878,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 24
+      "usage_count": 25
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -156078,6 +156081,69 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Accounting type settings": {
+    "message": "Accounting type settings",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "update"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace/offerings/update/components/ComponentAccountingTypeWrapper.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
   "Enable by default": {
     "message": "Enable by default",
     "context": {
@@ -156822,8 +156888,8 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
-  "Maximum allowed value": {
-    "message": "Maximum allowed value",
+  "Max value": {
+    "message": "Max value",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -156834,8 +156900,8 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 21,
-        "wordCount": 3,
+        "length": 9,
+        "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -156849,23 +156915,26 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "marketplace"
+          "marketplace",
+          "general"
         ],
         "feature_areas": [
-          "update"
+          "update",
+          "questions"
         ],
         "component_types": [
           "form"
         ],
         "paths": [
-          "marketplace/offerings/update/components/ComponentMaxValueField.tsx"
+          "marketplace/offerings/update/components/ComponentMaxValueField.tsx",
+          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "FormGroup"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -156878,13 +156947,15 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 5
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Ensure this field has no more than 30 characters.": {
@@ -156939,8 +157010,8 @@
       "usage_count": 1
     }
   },
-  "Minimum allowed value": {
-    "message": "Minimum allowed value",
+  "Min value": {
+    "message": "Min value",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -156951,8 +157022,8 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 21,
-        "wordCount": 3,
+        "length": 9,
+        "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -156966,23 +157037,26 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "marketplace"
+          "marketplace",
+          "general"
         ],
         "feature_areas": [
-          "update"
+          "update",
+          "questions"
         ],
         "component_types": [
           "form"
         ],
         "paths": [
-          "marketplace/offerings/update/components/ComponentMinValueField.tsx"
+          "marketplace/offerings/update/components/ComponentMinValueField.tsx",
+          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "FormGroup"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -156995,13 +157069,15 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 5
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Pre-paid component": {
@@ -157013,7 +157089,8 @@
       ],
       "components": [
         "Field",
-        "FormGroup"
+        "FormGroup",
+        "ComponentAccountingTypeWrapper"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -157062,7 +157139,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 5
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -157072,20 +157149,22 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Minimal prepaid duration": {
-    "message": "Minimal prepaid duration",
+  "Min duration": {
+    "message": "Min duration",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
         "function_call"
       ],
       "components": [
-        "FormGroup"
+        "FormGroup",
+        "Col",
+        "Row"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 24,
-        "wordCount": 3,
+        "length": 12,
+        "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -157129,7 +157208,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 5
+        "max_nesting_level": 7
       },
       "usage_count": 1
     },
@@ -157138,20 +157217,22 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Maximal prepaid duration": {
-    "message": "Maximal prepaid duration",
+  "Max duration": {
+    "message": "Max duration",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
         "function_call"
       ],
       "components": [
-        "FormGroup"
+        "FormGroup",
+        "Col",
+        "Row"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 24,
-        "wordCount": 3,
+        "length": 12,
+        "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -157195,7 +157276,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 5
+        "max_nesting_level": 7
       },
       "usage_count": 1
     },
@@ -157212,7 +157293,9 @@
         "function_call"
       ],
       "components": [
-        "FormGroup"
+        "FormGroup",
+        "Col",
+        "Row"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -157261,7 +157344,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 5
+        "max_nesting_level": 7
       },
       "usage_count": 1
     },
@@ -157725,125 +157808,6 @@
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Set value": {
-    "message": "Set value",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 9,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "marketplace/offerings/update/components/OptionalNumberField.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
-  "Reset value": {
-    "message": "Reset value",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Button",
-        "InputGroup"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 11,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "update"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/components/OptionalNumberField.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Button"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Endpoint has been added successfully.": {
@@ -209389,138 +209353,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Min value": {
-    "message": "Min value",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "FormGroup"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 9,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "questions"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FormGroup"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 5
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Max value": {
-    "message": "Max value",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "FormGroup"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 9,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "questions"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FormGroup"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 5
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "This section is only for single select and multi select questions.": {
     "message": "This section is only for single select and multi select questions.",
     "context": {
@@ -212345,6 +212177,67 @@
       },
       "usage_count": 1
     }
+  },
+  "Closing dialog": {
+    "message": "Closing dialog",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "modal"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "modal/ModalRoot.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language."
+    ]
   },
   "You have entered data in form. When dialog is closed form data would be lost.": {
     "message": "You have entered data in form. When dialog is closed form data would be lost.",

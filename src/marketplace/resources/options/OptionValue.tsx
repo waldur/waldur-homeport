@@ -5,7 +5,6 @@ import { formatDate, formatTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { translate } from '@waldur/i18n';
-import { isEmpty } from '@waldur/marketplace/offerings/update/components/OptionalNumberField';
 
 const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   integer: (value) => value,
@@ -27,6 +26,9 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   conditional_cascade: (value) => value,
   component_multiplier: (value) => value,
 };
+
+const isEmpty = (value) =>
+  value === '' || value === null || typeof value === 'undefined';
 
 export const OptionValue = ({
   option,

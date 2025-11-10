@@ -6,13 +6,15 @@ import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 export const ComponentLimitEnableField: React.FC = () => (
-  <FormGroup>
+  <FormGroup space={5}>
     <Field
       component={AwesomeCheckboxField}
       label={translate('Enable limit')}
       name="limit_amount"
       format={(v) => v !== null && typeof v != 'undefined'}
       parse={(v) => (v ? 0 : null)}
+      size="sm"
+      alignMiddle
     />
   </FormGroup>
 );

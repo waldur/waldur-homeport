@@ -23,7 +23,7 @@ export const getAccountingTypeOptions = () => [
 export const ComponentAccountingTypeField: React.FC<
   ComponentAccountingTypeFieldProps
 > = (props) => (
-  <FormGroup label={translate('Accounting type')} required={true}>
+  <FormGroup label={translate('Accounting type')} required={true} space={5}>
     <Field
       name="billing_type"
       validate={required}

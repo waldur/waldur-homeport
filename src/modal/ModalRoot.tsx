@@ -8,7 +8,7 @@ import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 import { type RootState } from '@waldur/store/reducers';
 
-import { closeModalDialog } from './actions';
+import { closeModalDialog, waitForConfirmation } from './actions';
 
 import './ModalRoot.css';
 
@@ -29,16 +29,25 @@ export const ModalRoot: FunctionComponent = () => {
   const isDirtyForm = useSelector((state: RootState) =>
     formId ? isDirty(formId)(state) : false,
   );
-  const onHide = () => {
-    if (
-      isDirtyForm &&
-      !confirm(
-        translate(
-          'You have entered data in form. When dialog is closed form data would be lost.',
-        ),
-      )
-    ) {
-      return;
+  const onHide = async () => {
+    if (isDirtyForm) {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Closing dialog'),
+          translate(
+            'You have entered data in form. When dialog is closed form data would be lost.',
+          ),
+          {
+            size: 'sm',
+            positiveButton: translate('OK'),
+            negativeButton: translate('Cancel'),
+            positiveButtonVariant: 'warning',
+          },
+        );
+      } catch {
+        return;
+      }
     }
     dispatch(closeModalDialog());
   };
