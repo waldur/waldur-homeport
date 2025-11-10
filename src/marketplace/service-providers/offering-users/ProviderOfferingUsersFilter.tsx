@@ -10,12 +10,11 @@ import {
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
+import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { ProviderAutocomplete } from '../orders/ProviderAutocomplete';
-
-import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
+import { PROVIDER_OFFERING_USERS_FORM_ID } from '../constants';
 
 interface ProviderOfferingUsersFilterProps {
   hasOrganizationColumn?: boolean;

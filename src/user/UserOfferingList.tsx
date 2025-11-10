@@ -9,7 +9,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
 import { PROVIDER_OFFERING_USERS_FORM_ID } from '@waldur/marketplace/service-providers/constants';
-import { ProviderOfferingUsersFilter } from '@waldur/marketplace/service-providers/ProviderOfferingUsersFilter';
+import { ProviderOfferingUsersFilter } from '@waldur/marketplace/service-providers/offering-users/ProviderOfferingUsersFilter';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';

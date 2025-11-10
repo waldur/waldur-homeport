@@ -2,7 +2,22 @@ import { FormLabel, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 
-export const MetadataGroupBy = ({ value, onChange }) => {
+interface GroupByButton {
+  value: string;
+  label: string;
+}
+
+interface MetadataGroupByProps {
+  value;
+  onChange;
+  buttons: GroupByButton[];
+}
+
+export const MetadataGroupBy = ({
+  value,
+  onChange,
+  buttons,
+}: MetadataGroupByProps) => {
   return (
     <>
       <FormLabel className="mb-0">{translate('Group by:')}</FormLabel>
@@ -12,22 +27,17 @@ export const MetadataGroupBy = ({ value, onChange }) => {
         value={value}
         onChange={onChange}
       >
-        <ToggleButton
-          id="tbg-answer"
-          value="answer"
-          variant="tertiary"
-          size="sm"
-        >
-          {translate('Answer')}
-        </ToggleButton>
-        <ToggleButton
-          id="tbg-project"
-          value="project"
-          variant="tertiary"
-          size="sm"
-        >
-          {translate('Project')}
-        </ToggleButton>
+        {buttons.map((button) => (
+          <ToggleButton
+            key={button.value}
+            id={'tbg-' + button.value}
+            value={button.value}
+            variant="tertiary"
+            size="sm"
+          >
+            {button.label}
+          </ToggleButton>
+        ))}
       </ToggleButtonGroup>
     </>
   );

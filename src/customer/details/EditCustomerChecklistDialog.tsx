@@ -51,11 +51,10 @@ export const EditCustomerChecklistDialog = connect<
     const { isLoading, error, data, refetch } = useQuery({
       queryKey: ['checklistsAdminMetadata'],
       queryFn: () =>
-        getAllPages((page) => checklistsAdminList({ query: { page } })).then(
-          (checklists) =>
-            checklists.filter(
-              (item) => item.checklist_type === 'project_metadata',
-            ),
+        getAllPages((page) =>
+          checklistsAdminList({
+            query: { page, checklist_type: 'project_metadata' },
+          }),
         ),
       staleTime: 3 * 60 * 1000,
     });

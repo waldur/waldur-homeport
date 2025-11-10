@@ -48,9 +48,11 @@ export type SdkFunction<
  * @param options - Default options for the fetcher.
  */
 
-export function createFetcher<QueryPayload = any, PathPayload = any>(
-  sdkFunction: SdkFunction<QueryPayload, PathPayload>,
-  options?: FetcherOptions<QueryPayload, PathPayload>,
+export function createFetcher<F extends SdkFunction<any, any, any>>(
+  sdkFunction: F,
+  options?: F extends SdkFunction<infer Q, infer P, any>
+    ? FetcherOptions<Q, P>
+    : never,
 ): Fetcher {
   return (request: TableRequest) => {
     const {

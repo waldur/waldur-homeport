@@ -70,6 +70,10 @@ export const ProjectsListWithTabs = () => {
               <MetadataGroupBy
                 value={metadataGroupBy}
                 onChange={setMetadataGroupBy}
+                buttons={[
+                  { value: 'answer', label: translate('Answer') },
+                  { value: 'project', label: translate('Project') },
+                ]}
               />
             ),
             activeKeys: ['metadata'],

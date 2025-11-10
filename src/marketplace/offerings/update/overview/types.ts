@@ -1,4 +1,4 @@
-import { Offering } from 'waldur-js-client';
+import { Checklist, Offering } from 'waldur-js-client';
 
 export interface Attribute {
   key: string;
@@ -14,6 +14,11 @@ export interface EditOfferingProps {
   refetch(): void;
   attribute?: Attribute;
   disabled?: boolean;
+}
+export interface EditOfferingChecklistProps {
+  offering: Offering;
+  checklist?: Checklist;
+  refetch(): void;
 }
 
 export type MediaType = 'thumbnail' | 'image';
