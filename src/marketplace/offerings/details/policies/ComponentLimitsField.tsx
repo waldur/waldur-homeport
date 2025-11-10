@@ -14,13 +14,18 @@ interface ComponentLimitsFieldProps
   components: OfferingComponent[];
 }
 
-const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
+export const useComponentLimitsArrayFieldFunctions = (
+  fields,
+  components: OfferingComponent[],
+  fieldName: string = 'type',
+  findKey: 'type' | 'uuid' = 'type',
+) => {
   const availableComponentsFilter = (item) => {
     let res = true;
     if (fields.length > 0) {
       fields.forEach((_, i) => {
         const comp = fields.value[i];
-        if (comp && comp.type === item.type) {
+        if (comp && comp[fieldName] === item[findKey]) {
           res = false;
         }
       });
@@ -40,6 +45,13 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
   };
 
   const removeRow = (index) => fields.length > 1 && fields.remove(index);
+
+  return { addRow, removeRow, getAvailableOptions };
+};
+
+const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
+  const { addRow, removeRow, getAvailableOptions } =
+    useComponentLimitsArrayFieldFunctions(fields, components);
 
   return (
     <>
@@ -93,7 +105,7 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                             aria-label="Remove"
                           >
                             <span className="svg-icon svg-icon-2">
-                              <TrashIcon />
+                              <TrashIcon weight="bold" />
                             </span>
                           </Button>
                         </td>

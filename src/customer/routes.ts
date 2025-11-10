@@ -363,4 +363,19 @@ export const states: StateDeclaration[] = [
       priority: 137,
     },
   },
+
+  {
+    name: 'organization-component-policies',
+    url: 'component-policies/',
+    parent: 'organization',
+    component: lazyComponent(() =>
+      import('./component-policies/ComponentPoliciesList').then((module) => ({
+        default: module.ComponentPoliciesList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Component policies'),
+      permissions: [isOwnerOrStaff],
+    },
+  },
 ];

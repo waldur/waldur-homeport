@@ -14353,6 +14353,7 @@
           "roles",
           "issue-templates",
           "broadcasts",
+          "component-policies",
           "cost-policies",
           "details",
           "payment-profiles",
@@ -14410,6 +14411,7 @@
           "administration/service-desk/issue-templates/IssueTemplateForm.tsx",
           "broadcasts/BroadcastSendButton.tsx",
           "broadcasts/BroadcastTemplateDeleteButton.tsx",
+          "customer/component-policies/ComponentPolicyDeleteButton.tsx",
           "customer/cost-policies/CostPolicyDeleteButton.tsx",
           "customer/details/AccessSubnetDeleteButton.tsx",
           "customer/details/CustomerCallManagerPanel.tsx",
@@ -14492,7 +14494,7 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 71
+      "usage_count": 72
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -14628,6 +14630,7 @@
           "roles",
           "issue-templates",
           "broadcasts",
+          "component-policies",
           "cost-policies",
           "details",
           "team",
@@ -14671,6 +14674,7 @@
           "administration/roles/RoleDeleteButton.tsx",
           "administration/service-desk/issue-templates/IssueTemplateDeleteAction.tsx",
           "broadcasts/BroadcastTemplateDeleteButton.tsx",
+          "customer/component-policies/ComponentPolicyDeleteButton.tsx",
           "customer/cost-policies/CostPolicyDeleteButton.tsx",
           "customer/details/AccessSubnetDeleteButton.tsx",
           "customer/details/CustomerManageContainer.tsx",
@@ -14739,7 +14743,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 48
+      "usage_count": 49
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -17410,6 +17414,7 @@
           "auto-provisioning-rules",
           "organizations",
           "providers",
+          "component-policies",
           "cost-policies",
           "credits",
           "list",
@@ -17451,6 +17456,7 @@
           "administration/auto-provisioning-rules/RuleFormDialog.tsx",
           "administration/organizations/OrganizationGroupForm.tsx",
           "administration/providers/ProviderCard.tsx",
+          "customer/component-policies/ComponentPolicyFormDialog.tsx",
           "customer/cost-policies/CostPolicyEditButton.tsx",
           "customer/cost-policies/CostPolicyFormDialog.tsx",
           "customer/credits/EditCreditButton.tsx",
@@ -17529,7 +17535,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 51
+      "usage_count": 52
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -17597,6 +17603,7 @@
           "quick-shortcuts",
           "remote-offering-sync",
           "issue-templates",
+          "component-policies",
           "cost-policies",
           "create",
           "credits",
@@ -17637,6 +17644,7 @@
           "administration/quick-shortcuts/QuickShortcutForm.tsx",
           "administration/remote-offering-sync/RemoteSyncFormDialog.tsx",
           "administration/service-desk/issue-templates/IssueTemplateForm.tsx",
+          "customer/component-policies/ComponentPolicyFormDialog.tsx",
           "customer/cost-policies/CostPolicyFormDialog.tsx",
           "customer/create/CustomerCreateDialog.tsx",
           "customer/credits/CreditFormDialog.tsx",
@@ -17711,7 +17719,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 49
+      "usage_count": 50
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -19063,7 +19071,8 @@
         "Table",
         "ActionItem",
         "ActionsDropdownComponent",
-        "FormGroup"
+        "FormGroup",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -19203,6 +19212,7 @@
         "Tabs",
         "VStepperFormStepCard",
         "FormGroup",
+        "AccordionCard",
         "SelectField"
       ],
       "is_user_facing": true,
@@ -20799,6 +20809,7 @@
         "Row",
         "TruncatedMarkdown",
         "Tabs",
+        "AccordionCard",
         "CommentSection",
         "WizardForm",
         "ActionDialog",
@@ -21948,6 +21959,7 @@
         "Field",
         "ModelCard1",
         "ProjectLink",
+        "AccordionCard",
         "NavItem"
       ],
       "is_user_facing": true,
@@ -25630,6 +25642,7 @@
         ],
         "feature_areas": [
           "organizations",
+          "component-policies",
           "cost-policies",
           "policies",
           "actions"
@@ -25640,6 +25653,7 @@
         ],
         "paths": [
           "administration/organizations/OrganizationCostPoliciesList.tsx",
+          "customer/component-policies/ComponentPoliciesList.tsx",
           "customer/cost-policies/CostPoliciesList.tsx",
           "marketplace/offerings/details/policies/PoliciesTable.tsx",
           "resource/actions/AsyncActionItem.tsx"
@@ -25665,7 +25679,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -27286,7 +27300,7 @@
         "DetailsField",
         "Card",
         "AsyncActionDialog",
-        "VStepperFormStepCard",
+        "AccordionCard",
         "CommentSection",
         "ActionDialog",
         "Component"
@@ -29945,7 +29959,8 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "unknown",
+        "property_value"
       ],
       "components": [
         "DropdownButton"
@@ -29976,7 +29991,8 @@
           "card"
         ],
         "paths": [
-          "administration/providers/ProviderCard.tsx"
+          "administration/providers/ProviderCard.tsx",
+          "proposals/update/configuration/CallConfiguration.tsx"
         ]
       },
       "jsx_context": {
@@ -29999,7 +30015,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
@@ -30123,6 +30139,7 @@
           "join-organization",
           "modal",
           "course-accounts",
+          "proposal",
           "support"
         ],
         "component_types": [
@@ -30143,6 +30160,7 @@
           "project/course-accounts/ProjectCourseAccountsList.tsx",
           "project/course-accounts/Step2PreviewAndCreate.tsx",
           "project/import/Step5PreviewAndImport.tsx",
+          "proposals/proposal/ComplianceStatusBadge.tsx",
           "user/support/DangerActionDialog.tsx"
         ]
       },
@@ -30169,7 +30187,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 12
+      "usage_count": 13
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
@@ -55214,10 +55232,9 @@
         "Component",
         "ModalDialog",
         "Table",
-        "Field",
-        "VStepperFormStepCard",
+        "FormGroup",
+        "AccordionCard",
         "CommentSection",
-        "Card",
         "Accordion"
       ],
       "is_user_facing": true,
@@ -55276,7 +55293,7 @@
           "Component",
           "ModalDialog",
           "Table",
-          "Field",
+          "FormGroup",
           "CommentSection"
         ],
         "conditional_render": true
@@ -55710,8 +55727,8 @@
       "primary_ui_type": "title",
       "ui_types": [
         "generic_element",
-        "title",
-        "unknown"
+        "unknown",
+        "title"
       ],
       "components": [
         "CheckoutPricingRow",
@@ -55744,6 +55761,7 @@
         ],
         "feature_areas": [
           "booking",
+          "component-policies",
           "cost-policies",
           "details",
           "policies",
@@ -55751,11 +55769,13 @@
         ],
         "component_types": [
           "component",
+          "field",
           "list",
           "form"
         ],
         "paths": [
           "booking/BookingCheckoutSummary.tsx",
+          "customer/component-policies/ComponentLimitsField.tsx",
           "customer/cost-policies/CostPoliciesList.tsx",
           "customer/cost-policies/CostPolicyForm.tsx",
           "marketplace/offerings/details/PublicOfferingComponentsTable.tsx",
@@ -55767,6 +55787,7 @@
       "jsx_context": {
         "tags": [
           "CheckoutPricingRow",
+          "td",
           "Table",
           "SelectField",
           "FormGroup",
@@ -55788,7 +55809,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 7
+      "usage_count": 8
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -64546,7 +64567,7 @@
         "component_types": [],
         "paths": [
           "core/validators.ts",
-          "customer/cost-policies/CostPolicyForm.tsx"
+          "customer/cost-policies/utils.ts"
         ]
       },
       "jsx_context": {
@@ -64568,58 +64589,6 @@
         "max_nesting_level": 0
       },
       "usage_count": 2
-    }
-  },
-  "Must be a number.": {
-    "message": "Must be a number.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "core/validators.ts"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
     }
   },
   "Must be {n} or less.": {
@@ -65069,6 +65038,1323 @@
       },
       "usage_count": 2
     }
+  },
+  "Component": {
+    "message": "Component",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "title"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "offerings",
+          "policies",
+          "plans",
+          "details"
+        ],
+        "component_types": [
+          "field",
+          "list",
+          "form"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentLimitsField.tsx",
+          "marketplace/offerings/PriceList.tsx",
+          "marketplace/offerings/details/policies/ComponentLimitsField.tsx",
+          "marketplace/offerings/update/plans/DiscountsTable.tsx",
+          "marketplace/orders/details/OrderComponentsTable.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "td",
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 5
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Limit": {
+    "message": "Limit",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "title",
+        "property_value",
+        "function_call"
+      ],
+      "components": [
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace",
+          "project_management",
+          "general"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "aggregate-limits",
+          "details",
+          "policies",
+          "project",
+          "plan-usage"
+        ],
+        "component_types": [
+          "field",
+          "dialog",
+          "component",
+          "list"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentLimitsField.tsx",
+          "marketplace/aggregate-limits/AggregateLimitDetailsDialog.tsx",
+          "marketplace/aggregate-limits/utils.ts",
+          "marketplace/offerings/details/PlanUsageList.tsx",
+          "marketplace/offerings/details/policies/ComponentLimitsField.tsx",
+          "marketplace/orders/details/LimitsSection.tsx",
+          "project/utils.ts",
+          "reporting/plan-usage/PlanUsageList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "td",
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 8
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Select component...": {
+    "message": "Select component...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "Fragment"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "policies"
+        ],
+        "component_types": [
+          "field"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentLimitsField.tsx",
+          "marketplace/offerings/details/policies/ComponentLimitsField.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "When component limits reaches": {
+    "message": "When component limits reaches",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "customer/component-policies/ComponentLimitsField.tsx",
+          "marketplace/offerings/details/policies/ComponentLimitsField.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    }
+  },
+  "Component limits": {
+    "message": "Component limits",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPoliciesList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Has fired": {
+    "message": "Has fired",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPoliciesList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Options": {
+    "message": "Options",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title",
+        "generic_element",
+        "unknown"
+      ],
+      "components": [
+        "Table",
+        "Field",
+        "ExpandableContainer",
+        "KeyValueButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "details",
+          "list",
+          "options"
+        ],
+        "component_types": [
+          "list",
+          "component",
+          "card"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPoliciesList.tsx",
+          "marketplace/resources/details/fetchData.tsx",
+          "marketplace/resources/list/ExpandableResourceSummary.tsx",
+          "marketplace/resources/options/ResourceOptionsCard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table",
+          "Field",
+          "KeyValueButton"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 4
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Component policies": {
+    "message": "Component policies",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element",
+        "property_value"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "customer"
+        ],
+        "component_types": [
+          "list",
+          "component"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPoliciesList.tsx",
+          "customer/routes.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
+    }
+  },
+  "Are you sure you want to delete the component usage policy?": {
+    "message": "Are you sure you want to delete the component usage policy?",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "dialog_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 59,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": true,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyDeleteButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This is a question. Ensure question format is appropriate in your language."
+    ]
+  },
+  "Then": {
+    "message": "Then",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "SelectField",
+        "FormContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "cost-policies",
+          "policies"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyForm.tsx",
+          "customer/cost-policies/CostPolicyForm.tsx",
+          "marketplace/offerings/details/policies/PolicyCreateForm.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup",
+          "SelectField"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Select action to take when the condition is met...": {
+    "message": "Select action to take when the condition is met...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "SelectField",
+        "FormContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 50,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "cost-policies",
+          "policies"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyForm.tsx",
+          "customer/cost-policies/CostPolicyForm.tsx",
+          "marketplace/offerings/details/policies/PolicyCreateForm.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field",
+          "SelectField"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "External user emails": {
+    "message": "External user emails",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "StringField",
+        "FormContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "cost-policies"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyForm.tsx",
+          "customer/cost-policies/CostPolicyForm.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup",
+          "StringField"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)": {
+    "message": "Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "StringField",
+        "FormContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 86,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": true,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "cost-policies"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyForm.tsx",
+          "customer/cost-policies/CostPolicyForm.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field",
+          "StringField"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Policy has been updated.": {
+    "message": "Policy has been updated.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Policy has been created.": {
+    "message": "Policy has been created.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to update policy.": {
+    "message": "Unable to update policy.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to create policy.": {
+    "message": "Unable to create policy.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message",
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "component-policies",
+          "policies"
+        ],
+        "component_types": [
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyFormDialog.tsx",
+          "marketplace/offerings/details/policies/CostPolicyCreateButton.tsx",
+          "marketplace/offerings/details/policies/UsagePolicyCreateButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Edit component usage policy": {
+    "message": "Edit component usage policy",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 27,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "New component usage policy": {
+    "message": "New component usage policy",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "component-policies"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "customer/component-policies/ComponentPolicyFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "Organization credit": {
     "message": "Organization credit",
@@ -66437,351 +67723,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Then": {
-    "message": "Then",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element",
-        "unknown"
-      ],
-      "components": [
-        "SelectField",
-        "FormContainer",
-        "FormGroup"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 4,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "customer_management",
-          "marketplace"
-        ],
-        "feature_areas": [
-          "cost-policies",
-          "policies"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "customer/cost-policies/CostPolicyForm.tsx",
-          "marketplace/offerings/details/policies/PolicyCreateForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "SelectField",
-          "FormGroup"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Select action to take when the condition is met...": {
-    "message": "Select action to take when the condition is met...",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "SelectField",
-        "FormContainer",
-        "Field",
-        "FormGroup"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 50,
-        "wordCount": 9,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "customer_management",
-          "marketplace"
-        ],
-        "feature_areas": [
-          "cost-policies",
-          "policies"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "customer/cost-policies/CostPolicyForm.tsx",
-          "marketplace/offerings/details/policies/PolicyCreateForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "SelectField",
-          "Field"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "External user emails": {
-    "message": "External user emails",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "StringField",
-        "FormContainer"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 20,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "customer_management"
-        ],
-        "feature_areas": [
-          "cost-policies"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "customer/cost-policies/CostPolicyForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "StringField"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 8
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)": {
-    "message": "Enter email addresses separated by commas (e.g., user1@example.com, user2@example.com)",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "StringField",
-        "FormContainer"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 86,
-        "wordCount": 9,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": true,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "customer_management"
-        ],
-        "feature_areas": [
-          "cost-policies"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "customer/cost-policies/CostPolicyForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "StringField"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 8
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Invalid email: {email}": {
-    "message": "Invalid email: {email}",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 22,
-        "wordCount": 3,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {
-        "email": {
-          "type": "email"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "customer_management"
-        ],
-        "feature_areas": [
-          "cost-policies"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "customer/cost-policies/CostPolicyForm.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "Contains variables: email. Variable types: email."
-    ]
-  },
   "Edit policy": {
     "message": "Edit policy",
     "context": {
@@ -67488,6 +68429,71 @@
     "translator_notes": [
       "Contains variables: count. Variable types: number.",
       "Variable contains numbers. Consider plural handling in your language."
+    ]
+  },
+  "Invalid email: {email}": {
+    "message": "Invalid email: {email}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 3,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "email": {
+          "type": "email"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "customer_management"
+        ],
+        "feature_areas": [
+          "cost-policies"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "customer/cost-policies/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: email. Variable types: email."
     ]
   },
   "Organization has been created.": {
@@ -93928,6 +94934,7 @@
         "ExpandableEventField",
         "ExpandableContainer",
         "Table",
+        "AccordionCard",
         "ModalDialog",
         "Component"
       ],
@@ -94001,7 +95008,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 8
       },
       "usage_count": 8
     },
@@ -127610,94 +128617,6 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
-  "Limit": {
-    "message": "Limit",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title",
-        "property_value",
-        "unknown",
-        "function_call"
-      ],
-      "components": [
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 5,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "project_management",
-          "general"
-        ],
-        "feature_areas": [
-          "aggregate-limits",
-          "details",
-          "policies",
-          "project",
-          "plan-usage"
-        ],
-        "component_types": [
-          "dialog",
-          "component",
-          "list",
-          "field"
-        ],
-        "paths": [
-          "marketplace/aggregate-limits/AggregateLimitDetailsDialog.tsx",
-          "marketplace/aggregate-limits/utils.ts",
-          "marketplace/offerings/details/PlanUsageList.tsx",
-          "marketplace/offerings/details/policies/ComponentLimitsField.tsx",
-          "marketplace/orders/details/LimitsSection.tsx",
-          "project/utils.ts",
-          "reporting/plan-usage/PlanUsageList.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th",
-          "td"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
-      },
-      "usage_count": 7
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "Usage and limits details for {object}": {
     "message": "Usage and limits details for {object}",
     "context": {
@@ -135478,13 +136397,14 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 5
       },
       "usage_count": 5
     },
     "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Attach file": {
@@ -143897,84 +144817,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Component": {
-    "message": "Component",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title",
-        "unknown"
-      ],
-      "components": [
-        "Table"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 9,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "offerings",
-          "policies",
-          "plans",
-          "details"
-        ],
-        "component_types": [
-          "list",
-          "field",
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/PriceList.tsx",
-          "marketplace/offerings/details/policies/ComponentLimitsField.tsx",
-          "marketplace/offerings/update/plans/DiscountsTable.tsx",
-          "marketplace/orders/details/OrderComponentsTable.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "td",
-          "th"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
-      },
-      "usage_count": 4
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "Measured unit": {
     "message": "Measured unit",
     "context": {
@@ -149842,192 +150684,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Select component...": {
-    "message": "Select component...",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "Field",
-        "Fragment"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 19,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "policies"
-        ],
-        "component_types": [
-          "field"
-        ],
-        "paths": [
-          "marketplace/offerings/details/policies/ComponentLimitsField.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "When component limits reaches": {
-    "message": "When component limits reaches",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 29,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "marketplace/offerings/details/policies/ComponentLimitsField.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
-  "Unable to create policy.": {
-    "message": "Unable to create policy.",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message",
-        "property_value"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 24,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "policies"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/details/policies/CostPolicyCreateButton.tsx",
-          "marketplace/offerings/details/policies/UsagePolicyCreateButton.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
   "Usage policies": {
     "message": "Usage policies",
     "context": {
@@ -151148,8 +151804,7 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element",
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "TextField",
@@ -151157,7 +151812,7 @@
         "ModalDialog",
         "Field",
         "FormGroup",
-        "VStepperFormStepCard",
+        "AccordionCard",
         "WizardForm"
       ],
       "is_user_facing": true,
@@ -190045,84 +190700,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Options": {
-    "message": "Options",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title",
-        "generic_element",
-        "unknown"
-      ],
-      "components": [
-        "Field",
-        "ExpandableContainer",
-        "KeyValueButton"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "details",
-          "list",
-          "options"
-        ],
-        "component_types": [
-          "component",
-          "list",
-          "card"
-        ],
-        "paths": [
-          "marketplace/resources/details/fetchData.tsx",
-          "marketplace/resources/list/ExpandableResourceSummary.tsx",
-          "marketplace/resources/options/ResourceOptionsCard.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field",
-          "KeyValueButton"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "Resource metadata": {
     "message": "Resource metadata",
     "context": {
@@ -202551,11 +203128,13 @@
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "title"
+        "title",
+        "unknown"
       ],
       "components": [
         "Table",
-        "ExpandableContainer"
+        "ExpandableContainer",
+        "Badge"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -202575,11 +203154,13 @@
       "file_context": {
         "domains": [
           "marketplace",
-          "project_management"
+          "project_management",
+          "general"
         ],
         "feature_areas": [
           "service-providers",
-          "metadata"
+          "metadata",
+          "proposal"
         ],
         "component_types": [
           "component"
@@ -202587,12 +203168,14 @@
         "paths": [
           "marketplace/service-providers/OfferingUsersExpandableRow.tsx",
           "project/metadata/MetadataByAnswerExpandableRow.tsx",
-          "project/metadata/MetadataByProjectExpandableRow.tsx"
+          "project/metadata/MetadataByProjectExpandableRow.tsx",
+          "proposals/proposal/ComplianceStatusBadge.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Table"
+          "Table",
+          "Badge"
         ],
         "conditional_render": false
       },
@@ -202610,7 +203193,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -208014,13 +208597,15 @@
           "general"
         ],
         "feature_areas": [
-          "analytics"
+          "analytics",
+          "proposals"
         ],
         "component_types": [
           "list"
         ],
         "paths": [
-          "marketplace-checklist/analytics/ComplianceByCategoryTable.tsx"
+          "marketplace-checklist/analytics/ComplianceByCategoryTable.tsx",
+          "proposals/round/proposals/ProposalsList.tsx"
         ]
       },
       "jsx_context": {
@@ -208043,7 +208628,7 @@
         "has_validation": false,
         "max_nesting_level": 7
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language."
@@ -209513,13 +210098,15 @@
   "Checklist type": {
     "message": "Checklist type",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "title",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "title"
       ],
       "components": [
         "FormGroup",
-        "ModalDialog"
+        "ModalDialog",
+        "Table"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -209544,15 +210131,18 @@
           "checklists"
         ],
         "component_types": [
-          "dialog"
+          "dialog",
+          "list"
         ],
         "paths": [
-          "marketplace-checklist/checklists/ChecklistFormDialog.tsx"
+          "marketplace-checklist/checklists/ChecklistFormDialog.tsx",
+          "marketplace-checklist/checklists/ChecklistsTable.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "FormGroup"
+          "FormGroup",
+          "Table"
         ],
         "conditional_render": false
       },
@@ -209570,9 +210160,10 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -262449,6 +263040,231 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Compliance checklist": {
+    "message": "Compliance checklist",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "generic_element",
+        "unknown",
+        "label"
+      ],
+      "components": [
+        "SelectField",
+        "FormContainer",
+        "ModalDialog",
+        "AccordionCard",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "call-management",
+          "create",
+          "general"
+        ],
+        "component_types": [
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "proposals/call-management/CallFormDialog.tsx",
+          "proposals/proposal/create/ComplianceSummary.tsx",
+          "proposals/proposal/create/ProposalComplianceStepExpanded.tsx",
+          "proposals/proposal/create/steps.ts",
+          "proposals/update/configuration/CallConfiguration.tsx",
+          "proposals/update/general/EditGeneralInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "SelectField",
+          "AccordionCard",
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 6
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Select compliance checklist (optional)": {
+    "message": "Select compliance checklist (optional)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "SelectField",
+        "FormContainer",
+        "ModalDialog",
+        "Field",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 38,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "call-management",
+          "general"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "proposals/call-management/CallFormDialog.tsx",
+          "proposals/update/general/EditGeneralInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "SelectField",
+          "Field"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Optional checklist that proposal submitters must complete for compliance evaluation. Can be changed only before any proposals are submitted.": {
+    "message": "Optional checklist that proposal submitters must complete for compliance evaluation. Can be changed only before any proposals are submitted.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "SelectField",
+        "FormContainer",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 140,
+        "wordCount": 19,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "call-management"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "proposals/call-management/CallFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "SelectField"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Accepted proposals": {
     "message": "Accepted proposals",
     "context": {
@@ -265062,6 +265878,140 @@
       "usage_count": 1
     }
   },
+  "N/A": {
+    "message": "N/A",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Badge"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 3,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": true
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "proposal"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "proposals/proposal/ComplianceStatusBadge.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language."
+    ]
+  },
+  "{percentage}% complete": {
+    "message": "{percentage}% complete",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Badge"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "percentage": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "proposal"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "proposals/proposal/ComplianceStatusBadge.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 2
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: percentage. Variable types: unknown."
+    ]
+  },
   "Applicant": {
     "message": "Applicant",
     "context": {
@@ -265273,6 +266223,153 @@
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language."
     ]
+  },
+  "Project team": {
+    "message": "Project team",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "unknown",
+        "label",
+        "generic_element"
+      ],
+      "components": [
+        "AccordionCard",
+        "TeamSection",
+        "FormTable",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "proposal",
+          "create",
+          "steps",
+          "proposals"
+        ],
+        "component_types": [
+          "component",
+          "form",
+          "page"
+        ],
+        "paths": [
+          "proposals/proposal/ProposalDetails.tsx",
+          "proposals/proposal/create/ProposalTeamStep.tsx",
+          "proposals/proposal/create/steps.ts",
+          "proposals/proposal/create-review/steps/ReviewTeamStep.tsx",
+          "proposals/proposal/create-review/steps/steps.ts",
+          "proposals/round/proposals/ShowReviewCommentsAction.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard",
+          "TeamSection"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 6
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Team members and their roles in the project.": {
+    "message": "Team members and their roles in the project.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 44,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "proposal",
+          "create"
+        ],
+        "component_types": [
+          "component",
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/ProposalDetails.tsx",
+          "proposals/proposal/create/ProposalTeamStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    }
   },
   "Proposal details overview": {
     "message": "Proposal details overview",
@@ -265963,6 +267060,131 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Unable to load compliance checklist.": {
+    "message": "Unable to load compliance checklist.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 36,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ComplianceSummary.tsx",
+          "proposals/proposal/create/ProposalComplianceStepExpanded.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Compliance questions answered during proposal submission.": {
+    "message": "Compliance questions answered during proposal submission.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 57,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ComplianceSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    }
+  },
   "Submission": {
     "message": "Submission",
     "context": {
@@ -266082,19 +267304,20 @@
       "usage_count": 1
     }
   },
-  "Import project": {
-    "message": "Import project",
+  "Project details": {
+    "message": "Project details",
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "label",
       "ui_types": [
-        "action_button"
+        "unknown",
+        "label"
       ],
       "components": [
-        "ActionButton"
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 14,
+        "length": 15,
         "wordCount": 2,
         "hasVariables": false,
         "hasMarkup": false,
@@ -266118,14 +267341,17 @@
           "form"
         ],
         "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx"
+          "proposals/proposal/create/ProjectDetailsStep.tsx",
+          "proposals/proposal/create/ProjectDetailsSummary.tsx",
+          "proposals/proposal/create/steps.ts",
+          "proposals/proposal/create-review/steps/steps.ts"
         ]
       },
       "jsx_context": {
         "tags": [
-          "ActionButton"
+          "AccordionCard"
         ],
-        "conditional_render": true
+        "conditional_render": false
       },
       "action_types": [
         "unknown"
@@ -266138,14 +267364,79 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 5
       },
-      "usage_count": 1
+      "usage_count": 4
     },
     "translator_notes": [
-      "This text appears on a button. Keep it short and action-oriented.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Basic information about your research project.": {
+    "message": "Basic information about your research project.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 46,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProjectDetailsStep.tsx",
+          "proposals/proposal/create/ProjectDetailsSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Enter a name...": {
@@ -266153,11 +267444,12 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "Field",
-        "VStepperFormStepCard"
+        "FormGroup",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -266214,87 +267506,17 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Short title for the project, which explains the project goal as much as possible.": {
-    "message": "Short title for the project, which explains the project goal as much as possible.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown",
-        "generic_element"
-      ],
-      "components": [
-        "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 81,
-        "wordCount": 14,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field",
-          "CommentSection"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
   "Enter a summary...": {
     "message": "Enter a summary...",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "Field",
-        "VStepperFormStepCard"
+        "FormGroup",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -266351,144 +267573,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Brief description of the project.": {
-    "message": "Brief description of the project.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown",
-        "generic_element"
-      ],
-      "components": [
-        "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 33,
-        "wordCount": 5,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field",
-          "CommentSection"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Explanation of the scientific case of the project for which the resources are intended to be used.": {
-    "message": "Explanation of the scientific case of the project for which the resources are intended to be used.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 98,
-        "wordCount": 17,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field",
-          "CommentSection"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 2
-    }
-  },
   "Project for civilian purpose?": {
     "message": "Project for civilian purpose?",
     "context": {
@@ -266497,11 +267581,11 @@
         "generic_element"
       ],
       "components": [
-        "AwesomeCheckboxField",
         "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
+        "FormGroup",
+        "AccordionCard",
+        "AwesomeCheckboxField",
+        "CommentSection"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -266535,6 +267619,7 @@
       },
       "jsx_context": {
         "tags": [
+          "Field",
           "AwesomeCheckboxField"
         ],
         "conditional_render": false
@@ -266550,81 +267635,15 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
+        "has_validation": true,
+        "max_nesting_level": 6
       },
       "usage_count": 2
     },
     "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This is a question. Ensure question format is appropriate in your language."
     ]
-  },
-  "Mark if the project has a civilian purpose.": {
-    "message": "Mark if the project has a civilian purpose.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "AwesomeCheckboxField",
-        "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 43,
-        "wordCount": 8,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "AwesomeCheckboxField"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 2
-    }
   },
   "Research field (OECD code)": {
     "message": "Research field (OECD code)",
@@ -266635,10 +267654,9 @@
         "generic_element"
       ],
       "components": [
-        "Field",
-        "VStepperFormStepCard",
-        "ReadOnlyFormControl",
-        "Card"
+        "FormGroup",
+        "AccordionCard",
+        "ReadOnlyFormControl"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -266672,79 +267690,7 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
-          "ReadOnlyFormControl"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 9
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Select the main research field for the project.": {
-    "message": "Select the main research field for the project.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown",
-        "generic_element"
-      ],
-      "components": [
-        "Field",
-        "VStepperFormStepCard",
-        "ReadOnlyFormControl",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 47,
-        "wordCount": 8,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field",
+          "FormGroup",
           "ReadOnlyFormControl"
         ],
         "conditional_render": true
@@ -266778,11 +267724,11 @@
         "generic_element"
       ],
       "components": [
-        "AwesomeCheckboxField",
         "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
+        "FormGroup",
+        "AccordionCard",
+        "AwesomeCheckboxField",
+        "CommentSection"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -266816,6 +267762,7 @@
       },
       "jsx_context": {
         "tags": [
+          "Field",
           "AwesomeCheckboxField"
         ],
         "conditional_render": false
@@ -266831,81 +267778,15 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
+        "has_validation": true,
+        "max_nesting_level": 6
       },
       "usage_count": 2
     },
     "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This is a question. Ensure question format is appropriate in your language."
     ]
-  },
-  "Select if the project proposal contains confidential information.": {
-    "message": "Select if the project proposal contains confidential information.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "AwesomeCheckboxField",
-        "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 65,
-        "wordCount": 8,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "AwesomeCheckboxField"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 7
-      },
-      "usage_count": 2
-    }
   },
   "Project duration in days": {
     "message": "Project duration in days",
@@ -266916,10 +267797,9 @@
         "generic_element"
       ],
       "components": [
-        "Field",
-        "VStepperFormStepCard",
-        "CommentSection",
-        "Card"
+        "FormGroup",
+        "AccordionCard",
+        "CommentSection"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -266953,7 +267833,7 @@
       },
       "jsx_context": {
         "tags": [
-          "Field",
+          "FormGroup",
           "CommentSection"
         ],
         "conditional_render": false
@@ -266983,11 +267863,12 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "Field",
-        "VStepperFormStepCard"
+        "FormGroup",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -267044,140 +267925,6 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "Expected project duration in days once resources have been granted. {extra_msg}": {
-    "message": "Expected project duration in days once resources have been granted. {extra_msg}",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Field",
-        "VStepperFormStepCard"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 79,
-        "wordCount": 11,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {
-        "extra_msg": {
-          "type": "unknown"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "Contains variables: extra_msg. Variable types: unknown.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "This field set automatically based on the call's fixed duration.": {
-    "message": "This field set automatically based on the call's fixed duration.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value"
-      ],
-      "components": [
-        "Field",
-        "VStepperFormStepCard"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 64,
-        "wordCount": 10,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create"
-        ],
-        "component_types": [
-          "form"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Field"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    }
-  },
   "Upload supporting documentation": {
     "message": "Upload supporting documentation",
     "context": {
@@ -267186,8 +267933,8 @@
         "unknown"
       ],
       "components": [
-        "Field",
-        "VStepperFormStepCard"
+        "FormGroup",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -267220,7 +267967,7 @@
       },
       "jsx_context": {
         "tags": [
-          "Field"
+          "FormGroup"
         ],
         "conditional_render": false
       },
@@ -267235,29 +267982,30 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 6
       },
       "usage_count": 1
-    }
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
-  "Upload additional documents, which support the proposal and help to review it.": {
-    "message": "Upload additional documents, which support the proposal and help to review it.",
+  "Short title for the project, which explains the project goal as much as possible.": {
+    "message": "Short title for the project, which explains the project goal as much as possible.",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
-        "Field",
-        "VStepperFormStepCard",
         "CommentSection",
-        "Card"
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 78,
-        "wordCount": 12,
+        "length": 81,
+        "wordCount": 14,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -267280,16 +268028,14 @@
           "form"
         ],
         "paths": [
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
           "proposals/proposal/create/ProjectDetailsSummary.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Field",
           "CommentSection"
         ],
-        "conditional_render": true
+        "conditional_render": false
       },
       "action_types": [
         "unknown"
@@ -267303,38 +268049,34 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 5
       },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
+      "usage_count": 1
+    }
   },
-  "Project details": {
-    "message": "Project details",
+  "Brief description of the project.": {
+    "message": "Brief description of the project.",
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown",
-        "function_call",
-        "label"
+        "generic_element"
       ],
       "components": [
-        "Card"
+        "CommentSection",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 15,
-        "wordCount": 2,
+        "length": 33,
+        "wordCount": 5,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
         "isExclamation": false,
-        "isSentence": false,
+        "isSentence": true,
         "startsWithCapital": true,
         "hasNumbers": false,
-        "hasSpecialChars": false,
+        "hasSpecialChars": true,
         "isAllCaps": false
       },
       "variables": {},
@@ -267349,17 +268091,14 @@
           "form"
         ],
         "paths": [
-          "proposals/proposal/create/ProjectDetailsSummary.tsx",
-          "proposals/proposal/create/ProposalSidebar.tsx",
-          "proposals/proposal/create/steps.ts",
-          "proposals/proposal/create-review/steps/steps.ts"
+          "proposals/proposal/create/ProjectDetailsSummary.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "FloatingSubmitButton"
+          "CommentSection"
         ],
-        "conditional_render": true
+        "conditional_render": false
       },
       "action_types": [
         "unknown"
@@ -267373,13 +268112,264 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 4
+        "max_nesting_level": 5
       },
-      "usage_count": 4
-    },
-    "translator_notes": [
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
+      "usage_count": 1
+    }
+  },
+  "Explanation of the scientific case of the project for which the resources are intended to be used.": {
+    "message": "Explanation of the scientific case of the project for which the resources are intended to be used.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "CommentSection",
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 98,
+        "wordCount": 17,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProjectDetailsSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "CommentSection"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Mark if the project has a civilian purpose.": {
+    "message": "Mark if the project has a civilian purpose.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AwesomeCheckboxField",
+        "CommentSection",
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 43,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProjectDetailsSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AwesomeCheckboxField"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Select the main research field for the project.": {
+    "message": "Select the main research field for the project.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ReadOnlyFormControl",
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 47,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProjectDetailsSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ReadOnlyFormControl"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    }
+  },
+  "Select if the project proposal contains confidential information.": {
+    "message": "Select if the project proposal contains confidential information.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AwesomeCheckboxField",
+        "CommentSection",
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 65,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProjectDetailsSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AwesomeCheckboxField"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
   },
   "Expected project duration in days once resources have been granted.": {
     "message": "Expected project duration in days once resources have been granted.",
@@ -267390,7 +268380,7 @@
       ],
       "components": [
         "CommentSection",
-        "Card"
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -267439,7 +268429,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 6
+        "max_nesting_level": 5
       },
       "usage_count": 1
     }
@@ -267453,7 +268443,7 @@
       ],
       "components": [
         "CommentSection",
-        "Card"
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -267502,12 +268492,271 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Upload additional documents, which support the proposal and help to review it.": {
+    "message": "Upload additional documents, which support the proposal and help to review it.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "CommentSection",
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 78,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProjectDetailsSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "CommentSection"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Additional questions may appear based on your answers.": {
+    "message": "Additional questions may appear based on your answers.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 54,
+        "wordCount": 8,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProposalComplianceStepExpanded.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Proposal not available.": {
+    "message": "Proposal not available.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProposalComplianceStepExpanded.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 3
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Enter your answer...": {
+    "message": "Enter your answer...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "placeholder"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ProposalComplianceStepExpanded.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Your proposal has been successfully accepted.": {
@@ -268282,8 +269531,8 @@
       "Variable contains numbers. Consider plural handling in your language."
     ]
   },
-  "Complete all required sections: {sections} and {lastSection} to proceed.": {
-    "message": "Complete all required sections: {sections} and {lastSection} to proceed.",
+  "Complete all required sections to proceed: {sections}": {
+    "message": "Complete all required sections to proceed: {sections}",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -268294,13 +269543,13 @@
       ],
       "is_user_facing": true,
       "text_characteristics": {
-        "length": 72,
-        "wordCount": 9,
+        "length": 53,
+        "wordCount": 7,
         "hasVariables": true,
         "hasMarkup": false,
         "isQuestion": false,
         "isExclamation": false,
-        "isSentence": true,
+        "isSentence": false,
         "startsWithCapital": true,
         "hasNumbers": false,
         "hasSpecialChars": true,
@@ -268308,9 +269557,6 @@
       },
       "variables": {
         "sections": {
-          "type": "unknown"
-        },
-        "lastSection": {
           "type": "unknown"
         }
       },
@@ -268351,165 +269597,7 @@
       "usage_count": 1
     },
     "translator_notes": [
-      "Contains variables: sections, lastSection. Variable types: unknown.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Resource requests": {
-    "message": "Resource requests",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "function_call",
-        "generic_element",
-        "label",
-        "unknown"
-      ],
-      "components": [
-        "Table",
-        "FormTable",
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create",
-          "proposals"
-        ],
-        "component_types": [
-          "form",
-          "page"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProposalSidebar.tsx",
-          "proposals/proposal/create/ResourceRequestsSummary.tsx",
-          "proposals/proposal/create/steps.ts",
-          "proposals/proposal/create-review/steps/steps.ts",
-          "proposals/round/proposals/ShowReviewCommentsAction.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FloatingSubmitButton",
-          "Table"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 9
-      },
-      "usage_count": 5
-    },
-    "translator_notes": [
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Project team": {
-    "message": "Project team",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "property_value",
-        "generic_element",
-        "label",
-        "unknown"
-      ],
-      "components": [
-        "FloatingSubmitButton",
-        "TeamSection",
-        "FormTable",
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 12,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "create",
-          "steps",
-          "proposals"
-        ],
-        "component_types": [
-          "form",
-          "page"
-        ],
-        "paths": [
-          "proposals/proposal/create/ProposalSidebar.tsx",
-          "proposals/proposal/create/ProposalTeamStep.tsx",
-          "proposals/proposal/create/steps.ts",
-          "proposals/proposal/create-review/steps/ReviewTeamStep.tsx",
-          "proposals/proposal/create-review/steps/steps.ts",
-          "proposals/round/proposals/ShowReviewCommentsAction.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FloatingSubmitButton",
-          "TeamSection"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 9
-      },
-      "usage_count": 6
-    },
-    "translator_notes": [
+      "Contains variables: sections. Variable types: unknown.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -268629,13 +269717,14 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This is a question. Ensure question format is appropriate in your language."
     ]
   },
@@ -268702,6 +269791,144 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Resource requests": {
+    "message": "Resource requests",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "unknown",
+        "label"
+      ],
+      "components": [
+        "AccordionCard",
+        "FormTable",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create",
+          "resource-requests-step",
+          "proposals"
+        ],
+        "component_types": [
+          "form",
+          "page"
+        ],
+        "paths": [
+          "proposals/proposal/create/ResourceRequestsSummary.tsx",
+          "proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx",
+          "proposals/proposal/create/steps.ts",
+          "proposals/proposal/create-review/steps/steps.ts",
+          "proposals/round/proposals/ShowReviewCommentsAction.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 5
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Resources requested for this proposal.": {
+    "message": "Resources requested for this proposal.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 38,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/ResourceRequestsSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    }
+  },
   "PDF, PNG/JPG/JPEG, DOC/DOCX/ODT (max. 25 MB)": {
     "message": "PDF, PNG/JPG/JPEG, DOC/DOCX/ODT (max. 25 MB)",
     "context": {
@@ -268764,6 +269991,71 @@
       "usage_count": 1
     }
   },
+  "Resources requested for your project.": {
+    "message": "Resources requested for your project.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 37,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "resource-requests-step"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AccordionCard"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "No resources available in the current project.": {
     "message": "No resources available in the current project.",
     "context": {
@@ -268772,7 +270064,8 @@
         "generic_element"
       ],
       "components": [
-        "Table"
+        "Table",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -268838,7 +270131,8 @@
         "generic_element"
       ],
       "components": [
-        "Table"
+        "Table",
+        "AccordionCard"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -275991,6 +277285,61 @@
       "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
+  "Edit compliance checklist for proposal evaluation": {
+    "message": "Edit compliance checklist for proposal evaluation",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 49,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "proposals/update/configuration/CallConfiguration.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
   "Reviewer identity visible to submitters": {
     "message": "Reviewer identity visible to submitters",
     "context": {
@@ -277614,6 +278963,74 @@
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.": {
+    "message": "Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "FormContainer",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 113,
+        "wordCount": 17,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "proposals/update/general/EditGeneralInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },
