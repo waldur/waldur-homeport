@@ -4,9 +4,10 @@ import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
+import { composeValidators, required } from '@waldur/core/validators';
 import { NumberField, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { validateNonNegative } from '@waldur/marketplace/common/utils';
 import { useComponentLimitsArrayFieldFunctions } from '@waldur/marketplace/offerings/details/policies/ComponentLimitsField';
 
 import { policyPeriodOptions } from '../cost-policies/utils';
@@ -65,9 +66,13 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                         <Field
                           name={`${component}.limit`}
                           component={NumberField as any}
-                          validate={required}
+                          validate={composeValidators(
+                            required,
+                            validateNonNegative,
+                          )}
                           placeholder="0"
                           unit={details?.measured_unit}
+                          min={0}
                         />
                       </td>
                       <td>
