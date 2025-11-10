@@ -1,14 +1,21 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { CheckIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect } from 'react';
+import { checklistsAdminRetrieve } from 'waldur-js-client';
 
+import { CheckOrX } from '@waldur/core/CheckOrX';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
+import { getUUID } from '@waldur/core/utils';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 
 import { OfferingSectionProps } from '../types';
 
+import { EditChecklistButton } from './EditChecklistButton';
 import { EditGettingStartedButton } from './EditGettingStartedButton';
 import { EditOverviewButton } from './EditOverviewButton';
 import { OfferingLocationButton } from './OfferingLocationButton';
@@ -72,6 +79,26 @@ const attributes: Attribute[] = [
 ];
 
 export const OverviewSection: FC<OfferingSectionProps> = (props) => {
+  const {
+    isLoading,
+    error,
+    data: checklist,
+    refetch,
+  } = useQuery({
+    queryKey: ['offeringChecklist', props.offering.uuid],
+    queryFn: () =>
+      props.offering.has_compliance_requirements
+        ? checklistsAdminRetrieve({
+            path: { uuid: getUUID(props.offering.compliance_checklist) },
+          }).then((response) => response.data)
+        : null,
+    staleTime: 3 * 60 * 1000,
+  });
+
+  useEffect(() => {
+    refetch();
+  }, [props.offering.compliance_checklist, refetch]);
+
   return (
     <FormTable.Card
       title={translate('General')}
@@ -124,11 +151,9 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
           key="location"
           label={translate('Location')}
           value={
-            props.offering.latitude && props.offering.longitude ? (
-              <CheckIcon weight="bold" className="text-info" />
-            ) : (
-              <XIcon weight="bold" className="text-danger" />
-            )
+            <CheckOrX
+              value={props.offering.latitude && props.offering.longitude}
+            />
           }
           description={translate('Specify where the offering is hosted.')}
           actions={
@@ -163,13 +188,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
         <FormTable.Item
           key="logo"
           label={translate('Logo')}
-          value={
-            props.offering.thumbnail ? (
-              <CheckIcon weight="bold" className="text-info" />
-            ) : (
-              <XIcon weight="bold" className="text-danger" />
-            )
-          }
+          value={<CheckOrX value={props.offering.thumbnail} />}
           description={translate(
             'Upload an image to represent the offering visually.',
           )}
@@ -185,13 +204,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
         <FormTable.Item
           key="image"
           label={translate('Image')}
-          value={
-            props.offering.image ? (
-              <CheckIcon weight="bold" className="text-info" />
-            ) : (
-              <XIcon weight="bold" className="text-danger" />
-            )
-          }
+          value={<CheckOrX value={props.offering.image} />}
           description={translate('Upload a background image for the offering.')}
           actions={
             <OfferingMediaButton
@@ -205,19 +218,54 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
         <FormTable.Item
           key="getting_started"
           label={translate('Getting started instructions')}
-          value={
-            props.offering.getting_started ? (
-              <CheckIcon weight="bold" className="text-info" />
-            ) : (
-              <XIcon weight="bold" className="text-danger" />
-            )
-          }
+          value={<CheckOrX value={props.offering.getting_started} />}
           description={translate(
             'Provide steps to help users begin using the offering.',
           )}
           actions={
             <EditGettingStartedButton
               offering={props.offering}
+              refetch={props.refetch}
+            />
+          }
+        />
+
+        <FormTable.Item
+          label={translate('Compliance checklist')}
+          value={
+            props.offering.has_compliance_requirements ? (
+              <>
+                {!checklist && (
+                  <CheckIcon weight="bold" className="text-info" />
+                )}
+                {isLoading ? (
+                  <LoadingSpinnerIcon />
+                ) : error ? (
+                  <LoadingErred
+                    loadData={refetch}
+                    className="d-inline-flex flex-center gap-4 ms-4"
+                  />
+                ) : checklist ? (
+                  <>
+                    {checklist.name}
+                    <span className="text-muted ms-2">
+                      (
+                      {translate('{count} questions', {
+                        count: checklist.questions_count,
+                      })}
+                      )
+                    </span>
+                  </>
+                ) : null}
+              </>
+            ) : (
+              'N/A'
+            )
+          }
+          actions={
+            <EditChecklistButton
+              offering={props.offering}
+              checklist={checklist}
               refetch={props.refetch}
             />
           }

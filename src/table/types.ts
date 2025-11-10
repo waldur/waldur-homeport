@@ -233,6 +233,7 @@ export interface TableProps<RowType = any> extends TableState {
   standaloneActionsInTable?: boolean;
   hideClearFilters?: boolean;
   hideRefresh?: boolean;
+  hideTitle?: boolean;
   hideIfEmpty?: boolean;
   portal?: TablePortal;
 }

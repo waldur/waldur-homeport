@@ -6,24 +6,26 @@ import { marketplaceOfferingUsersList } from 'waldur-js-client';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { OfferingUserRowActions } from '@waldur/marketplace/offerings/actions/OfferingUserRowActions';
+import { UserImportButton } from '@waldur/marketplace/offerings/import-users/UserImportButton';
+import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
+import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { OfferingUserRowActions } from '../offerings/actions/OfferingUserRowActions';
-import { UserImportButton } from '../offerings/import-users/UserImportButton';
-import { OfferingUserStateField } from '../OfferingUserStateField';
-import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
+import { PROVIDER_OFFERING_USERS_FORM_ID } from '../constants';
 
-import { PROVIDER_OFFERING_USERS_FORM_ID } from './constants';
 import { CreateProviderOfferingUserButton } from './CreateProviderOfferingUserButton';
 import { OfferingUsersExpandableRow } from './OfferingUsersExpandableRow';
 import { ProviderOfferingUsersFilter } from './ProviderOfferingUsersFilter';
 
-export const ProviderOfferingUsersListComponent: FunctionComponent<{
-  provider?;
-  hasOrganizationColumn?: boolean;
-}> = ({ provider, hasOrganizationColumn }) => {
+export const ProviderOfferingUsersListComponent: FunctionComponent<
+  Partial<TableWithPortal> & {
+    provider?;
+    hasOrganizationColumn?: boolean;
+  }
+> = ({ provider, hasOrganizationColumn, portal }) => {
   const filterValues = useSelector(
     getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
   ) as { offering?; provider?; state?: Array<{ value: any }> };
@@ -115,6 +117,10 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
           hasOrganizationColumn={hasOrganizationColumn}
         />
       }
+      portal={portal}
+      hasActionBar={!portal}
+      cardBordered={!portal}
+      fullWidth={!!portal}
       tableActions={
         <>
           <UserImportButton refetch={tableProps.fetch} provider={provider} />
@@ -135,11 +141,4 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<{
       expandableRow={provider ? OfferingUsersExpandableRow : undefined}
     />
   );
-};
-
-export const ProviderOfferingUsersList = ({ provider }) => {
-  if (!provider) {
-    return <CustomerResourcesListPlaceholder />;
-  }
-  return <ProviderOfferingUsersListComponent provider={provider} />;
 };

@@ -298,6 +298,22 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'marketplace-provider-compliance',
+    parent: 'marketplace-provider',
+    url: 'compliance/',
+    component: lazyComponent(() =>
+      import('./service-providers/compliance/ProviderComplianceTable').then(
+        (module) => ({
+          default: module.ProviderComplianceTable,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Compliance'),
+    },
+  },
+
+  {
     name: 'provider-marketplace',
     abstract: true,
     parent: 'marketplace-provider',
@@ -352,11 +368,11 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-vendor-offering-users',
     url: 'offering-users/',
     component: lazyComponent(() =>
-      import('./service-providers/ProviderOfferingUsersList').then(
-        (module) => ({
-          default: module.ProviderOfferingUsersList,
-        }),
-      ),
+      import(
+        './service-providers/offering-users/ProviderOfferingUsersWithTabs'
+      ).then((module) => ({
+        default: module.ProviderOfferingUsersWithTabs,
+      })),
     ),
     parent: 'provider-marketplace',
     data: {

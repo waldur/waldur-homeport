@@ -219,27 +219,29 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               )}
             >
               <Row className="card-toolbar g-0 gap-4 w-100">
-                {!this.props.standalone && (
+                {this.showTitle() && (
                   <Col xs className="order-0">
                     <Card.Title>
-                      <div className="me-2">
-                        <span
-                          className={classNames(
-                            'h3',
-                            this.props.titleClassName,
+                      {!this.props.hideTitle && (
+                        <div className="me-2">
+                          <span
+                            className={classNames(
+                              'h3',
+                              this.props.titleClassName,
+                            )}
+                          >
+                            {this.props.title ||
+                              this.props.alterTitle ||
+                              (this.props.verboseName &&
+                                titleCase(this.props.verboseName))}
+                          </span>
+                          {Boolean(this.props.subtitle) && (
+                            <small className="fs-6 fw-normal d-block mt-2">
+                              {this.props.subtitle}
+                            </small>
                           )}
-                        >
-                          {this.props.title ||
-                            this.props.alterTitle ||
-                            (this.props.verboseName &&
-                              titleCase(this.props.verboseName))}
-                        </span>
-                        {Boolean(this.props.subtitle) && (
-                          <small className="fs-6 fw-normal d-block mt-2">
-                            {this.props.subtitle}
-                          </small>
-                        )}
-                      </div>
+                        </div>
+                      )}
                       {!this.props.hideRefresh &&
                         !this.props.portal?.refresh && (
                           <TableRefreshButton {...this.props} />
@@ -440,7 +442,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
             xs
             className={classNames(
               'order-2 order-sm-2 mw-lg-325px',
-              !this.props.standalone && 'ms-auto',
+              this.showTitle() && 'ms-auto',
             )}
           >
             {this.props.hasQuery && (
@@ -555,6 +557,13 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
     this.setState({
       showFilterMenuToggle: show ?? !this.state.showFilterMenuToggle,
     });
+  }
+
+  showTitle() {
+    return (
+      !this.props.standalone &&
+      (!this.props.hideTitle || !this.props.hideRefresh)
+    );
   }
 
   hasRows() {

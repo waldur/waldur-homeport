@@ -6,6 +6,10 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import {
+  providerOfferingsAutocomplete,
+  userAutocomplete,
+} from '@waldur/marketplace/common/autocompletes';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -16,11 +20,6 @@ import {
   showSuccess,
 } from '@waldur/store/notify';
 import { useUser } from '@waldur/workspace/hooks';
-
-import {
-  providerOfferingsAutocomplete,
-  userAutocomplete,
-} from '../common/autocompletes';
 
 interface OwnProps {
   resolve: {

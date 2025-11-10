@@ -6,6 +6,7 @@ import {
 
 import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { BooleanIconBadge } from '@waldur/project/metadata/BooleanIconBadge';
 import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
 import { Field } from '@waldur/resource/summary';
@@ -14,9 +15,7 @@ import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { isExperimentalUiComponentsVisible } from '../utils';
-
-import { AnswerRowActions } from './offering-users/AnswerRowActions';
+import { AnswerRowActions } from './AnswerRowActions';
 
 export const OfferingUsersExpandableRow = ({
   row: offeringUser,

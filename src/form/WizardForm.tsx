@@ -24,6 +24,7 @@ export interface WizardFormStepProps
   submitLabel: string;
   submitDisabled?: boolean;
   submitTooltip?: ReactNode;
+  submitDisabledInvalid?: boolean;
   actions?: ReactNode | FC<{ formValues }>;
   steps: ProgressStep[];
   step: number;
@@ -83,7 +84,11 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
               <SubmitButton
                 submitting={props.submitting}
                 label={props.submitLabel}
-                invalid={props.submitDisabled || loading}
+                invalid={
+                  props.submitDisabled ||
+                  loading ||
+                  (props.submitDisabledInvalid && props.invalid)
+                }
                 className="btn-icon-right min-w-125px"
                 children={
                   loading ? (
