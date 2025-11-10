@@ -36,6 +36,17 @@ export const NumberField: FunctionComponent<NumberFieldProps> = ({
       ),
     );
 
+  const isInvalid = (v) => {
+    const value = Number(v);
+    if (!isNaN(value)) {
+      const min = Number(rest.min ?? -Infinity);
+      const max = Number(rest.max ?? Infinity);
+      const clampedValue = clamp(value, min, max);
+      return clampedValue !== value ? clampedValue : false;
+    }
+    return false;
+  };
+
   return (
     <InputGroup className="input-group-number">
       <Form.Control
@@ -46,6 +57,13 @@ export const NumberField: FunctionComponent<NumberFieldProps> = ({
         )}
         type="number"
         placeholder={placeholder}
+        onBlur={() => {
+          const v = isInvalid(input.value);
+          if (v !== false) {
+            input.onChange(v);
+          }
+        }}
+        isInvalid={isInvalid(input.value) !== false}
         {...rest}
       />
       <div className="input-group-addons">
