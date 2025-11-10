@@ -28,7 +28,11 @@ import { ProjectCostField } from '@waldur/project/ProjectCostField';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CostPolicyFormData, CostPolicyType } from './types';
-import { getCostPolicyActionOptions, policyPeriodOptions } from './utils';
+import {
+  getCostPolicyActionOptions,
+  policyPeriodOptions,
+  validateEmails,
+} from './utils';
 
 interface CostPolicyFormProps
   extends Partial<InjectedFormProps<CostPolicyFormData>> {
@@ -268,16 +272,4 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
       </Form.Group>
     </FormContainer>
   );
-};
-
-const validateEmails = (value: string) => {
-  if (!value) return translate('This field is required.');
-  const emailRegex = /^[a-zA-Z0-9_.+-]+@[a-zA-Z0-9-]+\.[a-zA-Z0-9-.]+$/;
-  const emails = value.split(',').map((email) => email.trim());
-  for (const email of emails) {
-    if (email && !emailRegex.test(email)) {
-      return translate('Invalid email: {email}', { email });
-    }
-  }
-  return undefined;
 };
