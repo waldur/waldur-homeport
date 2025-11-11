@@ -1,7 +1,7 @@
-import { useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { connect, useDispatch } from 'react-redux';
-import { reduxForm, SubmissionError } from 'redux-form';
+import { Form as FinalForm, Field } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import {
   supportTemplatesCreate,
   supportTemplatesCreateAttachments,
@@ -13,8 +13,8 @@ import {
 import { IssueTemplateTypeOptions } from '@waldur/administration/utils';
 import { formDataOptions } from '@waldur/core/api';
 import { ACCEPTED_FILE_TYPES } from '@waldur/core/constants';
+import { required } from '@waldur/core/validators';
 import {
-  FormContainer,
   SelectField,
   StringField,
   SubmitButton,
@@ -26,228 +26,239 @@ import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
 import { Attachment, AttachmentUploading } from '@waldur/form/upload/types';
 import { UploadContainer } from '@waldur/form/upload/UploadContainer';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
-import {
-  closeModalDialog,
-  openModalDialog,
-  waitForConfirmation,
-} from '@waldur/modal/actions';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 
-export const IssueTemplateForm = connect<
-  {},
-  {},
-  { resolve: { issueTemplate?; refetch } }
->((_, ownProps) => ({
-  initialValues: ownProps.resolve?.issueTemplate
-    ? { ...ownProps.resolve.issueTemplate }
-    : undefined,
-}))(
-  reduxForm<FormData, { resolve: { issueTemplate?; refetch } }>({
-    form: 'AdminIssueTemplateForm',
-  })((props) => {
-    const dispatch = useDispatch();
-    const isEdit = Boolean(props.resolve.issueTemplate?.uuid);
+interface IssueTemplateFormProps {
+  resolve: { issueTemplate?; refetch };
+}
 
-    useEffect(() => {
-      if (isEdit && props.resolve.issueTemplate?.attachments) {
-        const formattedAttachments =
-          props.resolve.issueTemplate.attachments.map((attachment) => ({
-            file: attachment.file,
-            file_size: attachment.file_size || 0,
-            file_name: attachment.file_name || attachment.name,
-            mime_type: attachment.mime_type || 'application/octet-stream',
-            created: attachment.created || new Date().toISOString(),
-            uuid: attachment.uuid,
-          }));
+export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
+  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
+  const { showSuccess, showErrorResponse } = useNotify();
+  const isEdit = Boolean(resolve.issueTemplate?.uuid);
 
-        setAttachments(formattedAttachments);
-      }
-    }, [isEdit, props.resolve.issueTemplate]);
+  const [pendingFiles, setPendingFiles] = useState<AttachmentUploading[]>([]);
+  const [attachments, setAttachments] = useState<Attachment[]>([]);
 
-    const [pendingFiles, setPendingFiles] = useState<AttachmentUploading[]>([]);
-    const [attachments, setAttachments] = useState<Attachment[]>([]);
-
-    const onDrop = (files: File[]) => {
-      setPendingFiles((prev) =>
-        files
-          .map<AttachmentUploading>((f) => ({
-            key: f.size,
-            file: f,
-            name: f.name,
-            progress: null,
-            error: null,
-          }))
-          .concat(prev),
+  useEffect(() => {
+    if (isEdit && resolve.issueTemplate?.attachments) {
+      const formattedAttachments = resolve.issueTemplate.attachments.map(
+        (attachment) => ({
+          file: attachment.file,
+          file_size: attachment.file_size || 0,
+          file_name: attachment.file_name || attachment.name,
+          mime_type: attachment.mime_type || 'application/octet-stream',
+          created: attachment.created || new Date().toISOString(),
+          uuid: attachment.uuid,
+        }),
       );
-    };
 
-    const cancelFile = useCallback(
-      (file: File) => {
-        setPendingFiles((prev) => prev.filter((f) => f.key !== file.size));
-      },
-      [setPendingFiles],
+      setAttachments(formattedAttachments);
+    }
+  }, [isEdit, resolve.issueTemplate]);
+
+  const onDrop = (files: File[]) => {
+    setPendingFiles((prev) =>
+      files
+        .map<AttachmentUploading>((f) => ({
+          key: f.size,
+          file: f,
+          name: f.name,
+          progress: null,
+          error: null,
+        }))
+        .concat(prev),
     );
+  };
 
-    const removeAttachment = useCallback(
-      async (attachment: Attachment) => {
-        if (!attachment.uuid) {
-          cancelFile(attachment.file as File);
-          return;
-        }
+  const cancelFile = useCallback(
+    (file: File) => {
+      setPendingFiles((prev) => prev.filter((f) => f.key !== file.size));
+    },
+    [setPendingFiles],
+  );
 
-        try {
-          await waitForConfirmation(
-            dispatch,
-            translate('Confirmation'),
-            translate(
-              'Are you sure you want to remove {doc_name}?',
-              { doc_name: <strong>{attachment.file_name}</strong> },
-              formatJsxTemplate,
-            ),
-            { forDeletion: true },
-          );
-        } catch {
-          return;
-        }
-
-        try {
-          await supportTemplatesDeleteAttachments({
-            path: { uuid: props.resolve.issueTemplate.uuid },
-            body: { attachment_ids: [attachment.uuid] },
-          });
-          dispatch(showSuccess(translate('Document has been removed.')));
-          props.resolve.refetch();
-          setAttachments((prev) =>
-            prev.filter((a) => a.uuid !== attachment.uuid),
-          );
-          const response = await supportTemplatesRetrieve({
-            path: { uuid: props.resolve.issueTemplate.uuid },
-          });
-          reopenEditDialog(response.data, props.resolve.refetch, dispatch);
-        } catch (e) {
-          dispatch(
-            showErrorResponse(e, translate('Unable to remove document.')),
-          );
-        }
-      },
-      [dispatch, props.resolve, cancelFile],
-    );
-
-    const attachFiles = async (templateUuid) => {
-      if (!pendingFiles.length) return;
+  const removeAttachment = useCallback(
+    async (attachment: Attachment) => {
+      if (!attachment.uuid) {
+        cancelFile(attachment.file as File);
+        return;
+      }
 
       try {
-        await Promise.all(
-          pendingFiles.map(async (file) => {
-            await supportTemplatesCreateAttachments({
-              path: { uuid: templateUuid },
-              body: {
-                attachments: [file.file],
-              },
-              ...formDataOptions,
-            });
-
-            setPendingFiles((prev) => prev.filter((f) => f.key !== file.key));
-            setAttachments((prev) => [
-              ...prev,
-              {
-                file: file.file,
-                file_size: file.file.size,
-                file_name: file.file.name,
-                mime_type: file.file.type,
-                created: new Date().toISOString(),
-              },
-            ]);
-          }),
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirmation'),
+          translate(
+            'Are you sure you want to remove {doc_name}?',
+            { doc_name: <strong>{attachment.file_name}</strong> },
+            formatJsxTemplate,
+          ),
+          { forDeletion: true },
         );
-        showSuccess(translate('Documents have been attached.'));
+      } catch {
+        return;
+      }
+
+      try {
+        await supportTemplatesDeleteAttachments({
+          path: { uuid: resolve.issueTemplate.uuid },
+          body: { attachment_ids: [attachment.uuid] },
+        });
+        showSuccess(translate('Document has been removed.'));
+        resolve.refetch();
+        setAttachments((prev) =>
+          prev.filter((a) => a.uuid !== attachment.uuid),
+        );
+        const response = await supportTemplatesRetrieve({
+          path: { uuid: resolve.issueTemplate.uuid },
+        });
+        reopenEditDialog(response.data, resolve.refetch, dispatch);
+      } catch (e) {
+        showErrorResponse(e, translate('Unable to remove document.'));
+      }
+    },
+    [dispatch, resolve, cancelFile, showSuccess, showErrorResponse],
+  );
+
+  const attachFiles = async (templateUuid) => {
+    if (!pendingFiles.length) return;
+
+    try {
+      await Promise.all(
+        pendingFiles.map(async (file) => {
+          await supportTemplatesCreateAttachments({
+            path: { uuid: templateUuid },
+            body: {
+              attachments: [file.file],
+            },
+            ...formDataOptions,
+          });
+
+          setPendingFiles((prev) => prev.filter((f) => f.key !== file.key));
+          setAttachments((prev) => [
+            ...prev,
+            {
+              file: file.file,
+              file_size: file.file.size,
+              file_name: file.file.name,
+              mime_type: file.file.type,
+              created: new Date().toISOString(),
+            },
+          ]);
+        }),
+      );
+      showSuccess(translate('Documents have been attached.'));
+    } catch (error) {
+      showErrorResponse(
+        error,
+        translate(
+          'An error occurred while attaching documents. Please try again.',
+        ),
+      );
+      throw error;
+    }
+  };
+
+  const submitForm = useCallback(
+    async (values) => {
+      try {
+        const action = isEdit
+          ? supportTemplatesUpdate({
+              body: values,
+              path: { uuid: resolve.issueTemplate.uuid },
+            })
+          : supportTemplatesCreate({ body: values });
+
+        const response = await action;
+        const templateUuid = response.data.uuid;
+
+        await attachFiles(templateUuid);
+        resolve.refetch();
+        showSuccess(
+          isEdit
+            ? translate('The issue template has been updated.')
+            : translate('New issue template has been created.'),
+        );
+        closeDialog();
       } catch (error) {
         showErrorResponse(
           error,
-          translate(
-            'An error occurred while attaching documents. Please try again.',
-          ),
+          isEdit
+            ? translate('Unable to update issue template.')
+            : translate('Unable to create issue template.'),
         );
-        throw error;
       }
+    },
+    [resolve, attachFiles, isEdit, showSuccess, showErrorResponse, closeDialog],
+  );
+
+  const initialValues = useMemo(() => {
+    if (isEdit && resolve.issueTemplate) {
+      return {
+        name: resolve.issueTemplate.name || '',
+        issue_type: resolve.issueTemplate.issue_type || '',
+        description: resolve.issueTemplate.description || '',
+      };
+    }
+    return {
+      name: '',
+      issue_type: '',
+      description: '',
     };
+  }, [isEdit, resolve.issueTemplate]);
 
-    const processRequest = useCallback(
-      async (values, dispatch) => {
-        try {
-          const action = isEdit
-            ? supportTemplatesUpdate({
-                body: values,
-                path: { uuid: props.resolve.issueTemplate.uuid },
-              })
-            : supportTemplatesCreate({ body: values });
-
-          const response = await action;
-          const templateUuid = response.data.uuid;
-
-          await attachFiles(templateUuid);
-          props.resolve.refetch();
-          dispatch(
-            showSuccess(
+  return (
+    <FinalForm onSubmit={submitForm} initialValues={initialValues}>
+      {({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
               isEdit
-                ? translate('The issue template has been updated.')
-                : translate('New issue template has been created.'),
-            ),
-          );
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(
-              error,
-              isEdit
-                ? translate('Unable to update issue template.')
-                : translate('Unable to create issue template.'),
-            ),
-          );
-          if (error.response?.status === 400) {
-            throw new SubmissionError(error.response.data);
-          }
-        }
-      },
-      [props.resolve, attachFiles],
-    );
+                ? translate('Edit the issue template')
+                : translate('Create new issue template')
+            }
+            closeButton
+            footer={
+              <SubmitButton
+                disabled={invalid}
+                submitting={submitting}
+                label={isEdit ? translate('Update') : translate('Create')}
+              />
+            }
+          >
+            <FormGroup label={translate('Name')} required>
+              <Field
+                component={StringField as any}
+                name="name"
+                validate={required}
+              />
+            </FormGroup>
 
-    return (
-      <form onSubmit={props.handleSubmit(processRequest)}>
-        <ModalDialog
-          title={
-            isEdit
-              ? translate('Edit the issue template')
-              : translate('Create new issue template')
-          }
-          closeButton
-          footer={
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={isEdit ? translate('Update') : translate('Create')}
-            />
-          }
-        >
-          <FormContainer submitting={props.submitting}>
-            <StringField label={translate('Name')} name="name" required />
-            <SelectField
-              label={translate('Type')}
-              name="issue_type"
-              options={IssueTemplateTypeOptions}
-              required
-              getOptionValue={(option) => option.value}
-              getOptionLabel={(option) => option.label}
-              simpleValue
-              className="col-md-6"
-            />
+            <FormGroup label={translate('Type')} required>
+              <Field
+                component={SelectField as any}
+                name="issue_type"
+                options={IssueTemplateTypeOptions}
+                validate={required}
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                simpleValue
+              />
+            </FormGroup>
 
-            <TextField
-              label={translate('Description')}
-              name="description"
-              required
-            />
+            <FormGroup label={translate('Description')} required>
+              <Field
+                component={TextField as any}
+                name="description"
+                validate={required}
+              />
+            </FormGroup>
 
             <Form.Label>{translate('Attachments')}</Form.Label>
             <UploadContainer
@@ -270,12 +281,12 @@ export const IssueTemplateForm = connect<
                 <AttachmentItemPending {...itemProps} onCancel={cancelFile} />
               )}
             />
-          </FormContainer>
-        </ModalDialog>
-      </form>
-    );
-  }),
-);
+          </ModalDialog>
+        </form>
+      )}
+    </FinalForm>
+  );
+};
 
 const reopenEditDialog = (issueTemplate, refetch, dispatch) => {
   dispatch(

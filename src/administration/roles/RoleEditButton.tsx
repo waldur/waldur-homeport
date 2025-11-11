@@ -11,9 +11,9 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 import { getRoles } from './utils';
 
-const RoleEditDialog = lazyComponent(() =>
-  import('./RoleEditDialog').then((module) => ({
-    default: module.RoleEditDialog,
+const RoleFormDialog = lazyComponent(() =>
+  import('./RoleFormDialog').then((module) => ({
+    default: module.RoleFormDialog,
   })),
 );
 
@@ -22,7 +22,7 @@ export const RoleEditButton = ({ row, refetch }) => {
   const openRoleEditDialog = useCallback(
     () =>
       dispatch(
-        openModalDialog(RoleEditDialog, {
+        openModalDialog(RoleFormDialog, {
           resolve: {
             row,
           },
@@ -34,7 +34,7 @@ export const RoleEditButton = ({ row, refetch }) => {
           },
         }),
       ),
-    [dispatch],
+    [dispatch, row, refetch],
   );
 
   return (

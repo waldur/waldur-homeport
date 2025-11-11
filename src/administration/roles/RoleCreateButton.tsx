@@ -9,9 +9,9 @@ import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 
 import { getRoles } from './utils';
 
-const RoleCreateDialog = lazyComponent(() =>
-  import('./RoleCreateDialog').then((module) => ({
-    default: module.RoleCreateDialog,
+const RoleFormDialog = lazyComponent(() =>
+  import('./RoleFormDialog').then((module) => ({
+    default: module.RoleFormDialog,
   })),
 );
 
@@ -20,7 +20,7 @@ export const RoleCreateButton = ({ refetch }) => {
   const openRoleCreateDialog = useCallback(
     () =>
       dispatch(
-        openModalDialog(RoleCreateDialog, {
+        openModalDialog(RoleFormDialog, {
           submitFn: async (formData) => {
             await rolesCreate({ body: formData });
             ENV.roles = await getRoles();
@@ -29,7 +29,7 @@ export const RoleCreateButton = ({ refetch }) => {
           },
         }),
       ),
-    [dispatch],
+    [dispatch, refetch],
   );
 
   return <AddButton action={openRoleCreateDialog} />;

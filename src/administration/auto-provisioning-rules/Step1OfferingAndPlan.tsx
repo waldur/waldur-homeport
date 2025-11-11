@@ -1,8 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useEffect, useMemo } from 'react';
+import { FC, useEffect, useMemo, useState } from 'react';
 import { Col, FormLabel } from 'react-bootstrap';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { FormContainer, SelectField } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
@@ -29,6 +30,8 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
         const { category, offering, plan, limits, attributes } =
           wizardProps.formValues;
 
+        const [offeringError, setOfferingError] = useState(null);
+
         const offeringQuery = useQuery({
           queryKey: ['offering', offering?.uuid],
           queryFn: () =>
@@ -36,8 +39,17 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
               ? null
               : marketplacePublicOfferingsRetrieve({
                   path: { uuid: offering.uuid },
-                }).then((response) => response.data),
+                })
+                  .then((response) => {
+                    setOfferingError(null);
+                    return response.data;
+                  })
+                  .catch((er) => {
+                    setOfferingError(er);
+                    return null;
+                  }),
           staleTime: 3 * 60 * 1000,
+          retry: false,
         });
 
         useEffect(() => {
@@ -98,6 +110,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
               }
               getOptionValue={(option) => option.uuid}
               getOptionLabel={(option) => option.name}
+              isLoading={offeringQuery.isRefetching}
               isDisabled={!category}
               containerClassName="col-md-6"
               onChange={(v) => {
@@ -114,8 +127,15 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
                 }
               }}
             />
-            {offeringQuery.error ? (
-              <LoadingErred loadData={offeringQuery.refetch} />
+            {offeringError && !offeringQuery.isRefetching ? (
+              <LoadingErred
+                loadData={offeringQuery.refetch}
+                message={
+                  offeringError?.detail
+                    ? offeringError.detail
+                    : format(offeringError)
+                }
+              />
             ) : null}
             <Col>
               <FormLabel>{translate('Plan')}</FormLabel>

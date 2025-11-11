@@ -1,41 +1,46 @@
 import { FC } from 'react';
+import { Field } from 'react-final-form';
 
 import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField } from '@waldur/form';
+import { SelectField } from '@waldur/form';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { ROLE_TYPES } from '../../permissions/constants';
 
 import { PermissionField } from './PermissionField';
 
-export const RoleForm: FC<{ role?; submitting? }> = (props) => {
+export const RoleForm: FC<{ role? }> = (props) => {
   return (
-    <FormContainer submitting={props.submitting}>
-      <StringField
-        name="name"
-        label={translate('Name')}
-        validate={required}
-        required
-        disabled={props.role?.is_system_role}
-      />
+    <>
+      <FormGroup label={translate('Name')} required>
+        <Field
+          component={StringField as any}
+          name="name"
+          validate={required}
+          disabled={props.role?.is_system_role}
+        />
+      </FormGroup>
 
-      <SelectField
-        name="content_type"
-        label={translate('Type')}
-        validate={required}
-        required
-        disabled={props.role?.is_system_role}
-        options={ROLE_TYPES}
-        simpleValue
-      />
+      <FormGroup label={translate('Type')} required>
+        <Field
+          component={SelectField as any}
+          name="content_type"
+          validate={required}
+          disabled={props.role?.is_system_role}
+          options={ROLE_TYPES}
+          simpleValue
+        />
+      </FormGroup>
 
-      <PermissionField
-        name="permissions"
-        label={translate('Permissions')}
-        validate={required}
-        required
-      />
-    </FormContainer>
+      <FormGroup label={translate('Permissions')} required>
+        <Field
+          component={PermissionField as any}
+          name="permissions"
+          validate={required}
+        />
+      </FormGroup>
+    </>
   );
 };

@@ -1,21 +1,21 @@
+import { FC } from 'react';
 import { FormControl } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import { Field, Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { SelectField, SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { FormContainer } from '@waldur/form/FormContainer';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { StringField } from '@waldur/form/StringField';
 import { WideImageField } from '@waldur/form/WideImageField';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 
 import { getKeyTitle, SIDEBAR_STYLES } from './utils';
 
@@ -66,15 +66,22 @@ const ColorField = (props) => (
   </div>
 );
 
-export const ConfigurationEditDialog = reduxForm<
-  any,
-  { resolve: { item: { key; description; type } } }
->({
-  form: 'ConfigurationEditDialog',
-})((props) => {
-  const item = props.resolve.item;
-  const dispatch = useDispatch();
-  const callback = async (formData) => {
+interface ConfigurationEditDialogProps {
+  resolve: { item: { key; description; type }; initialValues?: any };
+}
+
+export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
+  resolve,
+}) => {
+  const item = resolve.item;
+  const { closeDialog } = useModal();
+  const { showSuccess, showErrorResponse } = useNotify();
+
+  const initialValues = resolve.initialValues || {
+    value: ENV.plugins.WALDUR_CORE[item.key],
+  };
+
+  const onSubmit = async (formData) => {
     try {
       const isFileRemoving =
         item.type === 'image_field' && formData.value === null;
@@ -90,95 +97,99 @@ export const ConfigurationEditDialog = reduxForm<
         });
 
       ENV.plugins.WALDUR_CORE[item.key] = formData.value;
-      dispatch(showSuccess(translate('Configuration has been updated.')));
-      dispatch(closeModalDialog());
+      showSuccess(translate('Configuration has been updated.'));
+      closeDialog();
       location.reload();
     } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to update configuration.')),
-      );
+      showErrorResponse(e, translate('Unable to update configuration.'));
     }
   };
 
   return (
-    <form onSubmit={props.handleSubmit(callback)}>
-      <ModalDialog
-        title={getKeyTitle(item.key)}
-        bodyClassName="pb-2"
-        footerClassName="border-0 pt-0 gap-2"
-        footer={
-          <>
-            <CloseDialogButton className="flex-grow-1" />
-            <SubmitButton
-              disabled={props.invalid || !props.dirty}
-              submitting={props.submitting}
-              label={translate('Confirm')}
-              className="btn btn-primary flex-grow-1"
-            />
-          </>
-        }
-      >
-        <FormContainer submitting={props.submitting}>
-          {item.type === 'html_field' ? (
-            <MonacoField
-              name="value"
-              language="html"
-              height={100}
-              label={item.description}
-            />
-          ) : item.type === 'dict_field' ? (
-            <MonacoField
-              name="value"
-              language="json"
-              format={(value) => {
-                if (!value) return '';
-                if (typeof value === 'object') {
-                  try {
-                    return JSON.stringify(value, null, 2);
-                  } catch {
-                    return '';
-                  }
-                }
-                return value;
-              }}
-              height={100}
-              label={item.description}
-            />
-          ) : item.type === 'text_field' ? (
-            <TextField name="value" label={item.description} />
-          ) : item.key === 'SIDEBAR_STYLE' ? (
-            <SelectField
-              name="value"
-              label={item.description}
-              options={SIDEBAR_STYLES}
-              simpleValue
-            />
-          ) : item.key === 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE' ? (
-            <SelectField
-              name="value"
-              label={item.description}
-              options={SUPPORT_BACKENDS}
-              simpleValue
-            />
-          ) : item.type === 'color_field' ? (
-            <ColorField name="value" label={item.description} />
-          ) : item.type === 'boolean' ? (
-            <AwesomeCheckboxField
-              name="value"
-              label={item.description}
-              hideLabel
-            />
-          ) : item.type === 'image_field' ? (
-            <WideImageField
-              name="value"
-              label={item.description}
-              initialValue={props.initialValues.value}
-            />
-          ) : (
-            <StringField name="value" label={item.description} />
-          )}
-        </FormContainer>
-      </ModalDialog>
-    </form>
+    <Form
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, invalid, dirty }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={getKeyTitle(item.key)}
+            bodyClassName="pb-2"
+            footer={
+              <>
+                <CloseDialogButton className="flex-grow-1" />
+                <SubmitButton
+                  disabled={invalid || !dirty}
+                  submitting={submitting}
+                  label={translate('Confirm')}
+                  className="btn btn-primary flex-grow-1"
+                />
+              </>
+            }
+          >
+            <FormGroup label={item.type !== 'boolean' && item.description}>
+              {item.type === 'html_field' ? (
+                <Field
+                  component={MonacoField as any}
+                  name="value"
+                  language="html"
+                  height={100}
+                />
+              ) : item.type === 'dict_field' ? (
+                <Field
+                  component={MonacoField as any}
+                  name="value"
+                  language="json"
+                  format={(value) => {
+                    if (!value) return '';
+                    if (typeof value === 'object') {
+                      try {
+                        return JSON.stringify(value, null, 2);
+                      } catch {
+                        return '';
+                      }
+                    }
+                    return value;
+                  }}
+                  height={100}
+                />
+              ) : item.type === 'text_field' ? (
+                <Field component={TextField as any} name="value" />
+              ) : item.key === 'SIDEBAR_STYLE' ? (
+                <Field
+                  component={SelectField as any}
+                  name="value"
+                  options={SIDEBAR_STYLES}
+                  simpleValue
+                />
+              ) : item.key === 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE' ? (
+                <Field
+                  component={SelectField as any}
+                  name="value"
+                  options={SUPPORT_BACKENDS}
+                  simpleValue
+                />
+              ) : item.type === 'color_field' ? (
+                <Field component={ColorField} name="value" />
+              ) : item.type === 'boolean' ? (
+                <Field
+                  component={AwesomeCheckboxField as any}
+                  name="value"
+                  label={item.description}
+                  hideLabel
+                />
+              ) : item.type === 'image_field' ? (
+                <Field
+                  component={WideImageField as any}
+                  name="value"
+                  initialValue={initialValues.value}
+                />
+              ) : (
+                <Field component={StringField as any} name="value" />
+              )}
+            </FormGroup>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};
