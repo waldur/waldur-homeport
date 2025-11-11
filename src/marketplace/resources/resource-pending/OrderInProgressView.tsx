@@ -34,9 +34,9 @@ const getSteps = (resource: Resource) => {
         formatDateTime(resource.order_in_progress.created),
       ].join(', '),
     ],
-
     completed: true,
   });
+
   const isStep2Completed = order.state !== 'pending-consumer';
   steps.push({
     label: isStep2Completed
@@ -52,6 +52,7 @@ const getSteps = (resource: Resource) => {
       : [translate('Pending organization approval')],
     completed: isStep2Completed,
   });
+
   const isStep3Completed = !['pending-consumer', 'pending-provider'].includes(
     order.state,
   );
@@ -72,6 +73,19 @@ const getSteps = (resource: Resource) => {
       : [translate('Pending provider approval')],
     completed: isStep3Completed,
   });
+
+  if (order.state === 'pending-start-date') {
+    steps.push({
+      label: translate('Scheduled'),
+      description: [
+        `${translate('Scheduled to start on')}: ${formatDateTime(
+          resource.creation_order.start_date,
+        )}`,
+      ],
+      completed: false, // This is the current, active step
+    });
+  }
+
   steps.push({
     label: getTranslatedOrderType(order.type),
     description: [
@@ -81,8 +95,12 @@ const getSteps = (resource: Resource) => {
         ).toLowerCase(),
       }),
     ],
-
-    completed: steps[steps.length - 1].completed && order.state !== 'executing',
+    // This logic correctly checks if the *previous* step is completed.
+    // If the 'Scheduled' step was added, its 'completed' is false, so this step will correctly be marked as not completed.
+    completed:
+      steps[steps.length - 1].completed &&
+      order.state !== 'executing' &&
+      order.state !== 'pending-start-date',
   });
 
   const isStep4Completed =
@@ -107,7 +125,6 @@ const getSteps = (resource: Resource) => {
               ? translate('Resource successfully terminated')
               : translate('Resource successfully updated'),
         ],
-
     completed: isStep4Completed,
     variant: order.state === 'done' ? 'primary' : 'danger',
   });
