@@ -7,7 +7,7 @@ export const useNotify = () => {
   return {
     showSuccess: (message, title?) => dispatch(showSuccess(message, title)),
     showError: (message) => dispatch(showError(message)),
-    showErrorResponse: (error, message) =>
+    showErrorResponse: (error, message = null) =>
       dispatch(showErrorResponse(error, message)),
   };
 };

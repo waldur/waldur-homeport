@@ -24,16 +24,6 @@ export const RuleEditButton: FC<RuleEditButtonProps> = ({ row, refetch }) => {
       dispatch(
         openModalDialog(RuleFormDialog, {
           resolve: { refetch, rule: row },
-          initialValues: {
-            name: row.name,
-            customer: {
-              url: row.customer,
-              name: row.customer_name,
-            },
-            project_role: row.project_role_display_name,
-            user_affiliations: row.user_affiliations?.join(', ') || '',
-            user_email_patterns: row.user_email_patterns?.join(' ') || '',
-          },
         }),
       ),
     [dispatch, row, refetch],

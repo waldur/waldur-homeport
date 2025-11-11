@@ -1,5 +1,5 @@
-import { useCallback } from 'react';
-import { reduxForm } from 'redux-form';
+import { FC, useCallback } from 'react';
+import { Form } from 'react-final-form';
 import {
   autoprovisioningRulesCreate,
   autoprovisioningRulesUpdate,
@@ -9,10 +9,10 @@ import {
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { useNotify } from '@waldur/store/hooks';
 
 import { RuleForm } from './RuleForm';
 
@@ -28,82 +28,106 @@ interface AutoProvisioningRuleForm {
   user_email_patterns: string;
 }
 
-export const RuleFormDialog = reduxForm<
-  AutoProvisioningRuleForm,
-  RuleFormDialogProps
->({
-  form: 'RuleForm',
-})((props) => {
-  const isEdit = props.resolve.rule;
+export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
+  const { closeDialog } = useModal();
+  const { showSuccess, showErrorResponse } = useNotify();
+  const isEdit = resolve.rule;
 
-  const submitFn = useCallback(
-    async (formData: AutoProvisioningRuleForm, dispatch) => {
+  const initialValues = isEdit
+    ? {
+        name: resolve.rule.name,
+        customer: {
+          url: resolve.rule.customer,
+          name: resolve.rule.customer_name,
+        },
+        project_role: resolve.rule.project_role_display_name,
+        user_affiliations: resolve.rule.user_affiliations?.join(', ') || '',
+        user_email_patterns: resolve.rule.user_email_patterns?.join(' ') || '',
+      }
+    : undefined;
+
+  const onSubmit = useCallback(
+    async (formData: AutoProvisioningRuleForm) => {
       const payload = {
         name: formData.name,
         customer: formData.customer.url,
         project_role_name: formData.project_role,
         creates_resource: false,
         user_affiliations: formData.user_affiliations
-          ? formData.user_affiliations
-              .split(',')
-              .map((item) => item.trim())
-              .filter(Boolean)
+          ? Array.isArray(formData.user_affiliations)
+            ? formData.user_affiliations.filter(Boolean)
+            : formData.user_affiliations
+                .split(',')
+                .map((item) => item.trim())
+                .filter(Boolean)
           : [],
         user_email_patterns: formData.user_email_patterns
-          ? formData.user_email_patterns
-              .split(' ')
-              .map((item) => item.trim())
-              .filter(Boolean)
+          ? Array.isArray(formData.user_email_patterns)
+            ? formData.user_email_patterns.filter(Boolean)
+            : formData.user_email_patterns
+                .split(' ')
+                .map((item) => item.trim())
+                .filter(Boolean)
           : [],
       };
 
       try {
         if (isEdit) {
           await autoprovisioningRulesUpdate({
-            path: { uuid: props.resolve.rule.uuid },
+            path: { uuid: resolve.rule.uuid },
             body: payload,
           });
-          dispatch(showSuccess(translate('Rule edited successfully')));
+          showSuccess(translate('Rule edited successfully'));
         } else {
           await autoprovisioningRulesCreate({
             body: payload,
           });
-          dispatch(
-            showSuccess(translate('Rule has been successfully created')),
-          );
+          showSuccess(translate('Rule has been successfully created'));
         }
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
+        if (resolve.refetch) await resolve.refetch();
+        closeDialog();
       } catch (error) {
-        dispatch(showErrorResponse(error));
+        showErrorResponse(error);
       }
     },
-    [props.resolve.rule, props.resolve.refetch],
+    [
+      resolve.rule,
+      resolve.refetch,
+      showSuccess,
+      showErrorResponse,
+      closeDialog,
+    ],
   );
 
   return (
-    <form onSubmit={props.handleSubmit(submitFn)}>
-      <ModalDialog
-        title={
-          isEdit
-            ? translate('Edit auto-provisioning rule')
-            : translate('Add auto-provisioning rule')
-        }
-        closeButton
-        footer={
-          <>
-            <CloseDialogButton className="min-w-125px" />
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={isEdit ? translate('Edit') : translate('Confirm')}
-              className="btn btn-primary min-w-125px"
-            />
-          </>
-        }
-      >
-        <RuleForm submitting={props.submitting} />
-      </ModalDialog>
-    </form>
+    <Form
+      onSubmit={onSubmit}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              isEdit
+                ? translate('Edit auto-provisioning rule')
+                : translate('Add auto-provisioning rule')
+            }
+            closeButton
+            footer={
+              <>
+                <CloseDialogButton className="min-w-125px" />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={isEdit ? translate('Edit') : translate('Confirm')}
+                  className="btn btn-primary min-w-125px"
+                />
+              </>
+            }
+          >
+            <RuleForm />
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};
