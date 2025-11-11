@@ -75,6 +75,13 @@ export const getResourceSummaryFields = ({
       value: <CreatedField resource={resource} />,
     },
     {
+      name: 'start_date',
+      label: translate('Start date'),
+      value: resource.creation_order?.start_date
+        ? formatDate(resource.creation_order.start_date)
+        : null,
+    },
+    {
       name: 'end_date',
       label: translate('Termination date'),
       value: resource.end_date ? formatDate(resource.end_date) : null,
