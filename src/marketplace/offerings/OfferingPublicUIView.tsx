@@ -9,15 +9,17 @@ import {
 } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { isEmpty } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { isValidAttribute } from '@waldur/marketplace/offerings/details/utils';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { Offering } from '../types';
+import { Category, Offering } from '../types';
 
 import { PUBLIC_OFFERING_DATA_QUERY_KEY } from './constants';
 import { OfferingViewHero } from './OfferingViewHero';
@@ -69,15 +71,32 @@ const PublicOfferingTermsOfService = lazyComponent(() =>
   })),
 );
 
-const getTabs = (offering?, hasActiveTos = false): PageBarTab[] => {
+const getTabs = (
+  offering?: Offering,
+  category?: Category,
+  hasActiveTos = false,
+): PageBarTab[] => {
   if (!offering) {
     // Return an empty array or placeholders until the offering is loaded
     return [];
   }
+
+  const hasValidAttributes = category
+    ? category.sections.length > 0 &&
+      !isEmpty(offering.attributes) &&
+      category.sections.some((section) =>
+        section.attributes.some(
+          (attr) =>
+            Object.prototype.hasOwnProperty.call(
+              offering.attributes,
+              attr.key,
+            ) && isValidAttribute(offering.attributes[attr.key]),
+        ),
+      )
+    : false;
+
   const showDescriptionTab =
-    offering?.full_description ||
-    offering?.description ||
-    offering?.attributes.length;
+    offering?.full_description || offering?.description || hasValidAttributes;
 
   const showGettingStartedTab = offering?.getting_started;
 
@@ -192,7 +211,7 @@ export const OfferingPublicUIView = () => {
   });
 
   const tabs = useMemo(
-    () => getTabs(data?.offering, data?.hasActiveTos),
+    () => getTabs(data?.offering, data?.category, data?.hasActiveTos),
     [data],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
