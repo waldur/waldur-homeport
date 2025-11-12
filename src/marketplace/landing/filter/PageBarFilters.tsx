@@ -67,15 +67,21 @@ export const PageBarFilters = () => {
               className="fw-bold"
             >
               {item.label}
-              <Badge variant="default" outline pill>
+              <Badge
+                variant="default"
+                outline
+                pill
+                rightIcon={
+                  <RemoveFilterBadgeButton
+                    onClick={() => removeFilter(item.name)}
+                  />
+                }
+              >
                 {item.getValueLabel
                   ? item.getValueLabel(item.value)
                   : typeof item.value === 'string'
                     ? item.value
                     : 'N/A'}
-                <RemoveFilterBadgeButton
-                  onClick={() => removeFilter(item.name)}
-                />
               </Badge>
             </Stack>
           ))}

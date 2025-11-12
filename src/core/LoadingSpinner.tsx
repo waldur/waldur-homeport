@@ -1,13 +1,18 @@
 import { SpinnerIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
-export const LoadingSpinnerIcon = ({ className }: { className? }) => (
-  <SpinnerIcon
-    className={'animation-spin text-primary' + (className || '')}
-    data-testid="spinner"
-    role="status"
-  />
-);
+export const LoadingSpinnerIcon = ({ className }: { className?: string }) => {
+  const textClass =
+    className && className.includes('text-') ? '' : 'text-primary';
+  return (
+    <SpinnerIcon
+      className={classNames('animation-spin', textClass, className)}
+      data-testid="spinner"
+      role="status"
+    />
+  );
+};
 
 interface LoadingSpinnerProps {
   helpText?: string;
@@ -18,7 +23,7 @@ export const LoadingSpinner: FunctionComponent<LoadingSpinnerProps> = ({
   helpText,
   className,
 }) => (
-  <div className={'text-center mb-5' + (className ? ' ' + className : '')}>
+  <div className={classNames('text-center mb-5', className)}>
     <h1>
       <LoadingSpinnerIcon />
     </h1>

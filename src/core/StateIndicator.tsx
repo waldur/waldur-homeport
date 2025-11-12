@@ -21,14 +21,18 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
   active,
   ...props
 }) => (
-  <Badge {...props}>
-    {props.label}{' '}
-    {active && (
-      <LoadingSpinnerIcon
-        className={
-          (props.light || props.outline ? 'text-' : 'badge-') + props.variant
-        }
-      />
-    )}
+  <Badge
+    rightIcon={
+      active ? (
+        <LoadingSpinnerIcon
+          className={
+            (props.light || props.outline ? 'text-' : 'badge-') + props.variant
+          }
+        />
+      ) : undefined
+    }
+    {...props}
+  >
+    {props.label}
   </Badge>
 );

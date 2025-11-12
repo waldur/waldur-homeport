@@ -50,13 +50,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
         {children}
       </Link>
       {showKind && row.kind !== 'default' && kind && kind.component && (
-        <Badge
-          variant={kind.color}
-          onlyIcon
-          pill
-          outline
-          className="align-middle"
-        >
+        <Badge variant={kind.color} onlyIcon pill outline>
           <Tip
             id={'tip-kind-' + row.uuid}
             label={translate('{name} project', { name: kind.label })}
@@ -73,7 +67,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
           </span>
         )}
       {row.is_removed && (
-        <Badge variant="light-danger" pill className="align-middle fs-8">
+        <Badge variant="danger" outline pill className="fs-8">
           {translate('Removed')}
         </Badge>
       )}

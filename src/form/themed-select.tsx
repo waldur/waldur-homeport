@@ -6,7 +6,7 @@ import {
 import classNames from 'classnames';
 import { uniqueId } from 'lodash-es';
 import { FC } from 'react';
-import { OverlayTrigger, Popover } from 'react-bootstrap';
+import { FormCheck, OverlayTrigger, Popover } from 'react-bootstrap';
 import BaseSelect, {
   ClearIndicatorProps,
   components,
@@ -22,8 +22,6 @@ import BaseWindowedSelect from 'react-windowed-select';
 import { BaseFieldProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import CheckboxEmptyIcon from '@waldur/table/CheckboxEmpty.svg';
-import CheckboxFillIcon from '@waldur/table/CheckboxFill.svg';
 import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
 import { useTheme } from '@waldur/theme/useTheme';
 
@@ -71,22 +69,23 @@ export const FilterSelectControl = ({ children, ...props }: ControlProps) => (
 export const MultiSelectOption = (props) => {
   return (
     <components.Option {...props}>
-      <span
-        className={
-          'svg-icon svg-icon-4 ' +
-          (props.isSelected ? 'svg-icon-primary' : 'svg-icon-transparent')
-        }
-      >
-        {props.isSelected ? <CheckboxFillIcon /> : <CheckboxEmptyIcon />}
-      </span>
+      <FormCheck
+        className="form-check form-check-custom form-check-sm lh-1 min-h-auto"
+        checked={props.isSelected}
+      />
       <label>{props.label}</label>
     </components.Option>
   );
 };
 const MultiSelectValue = (props: MultiValueProps) => (
-  <span className="badge">
+  <span className="badge has-right-icon">
     {props.children}
-    <RemoveFilterBadgeButton size={12} onClick={props.removeProps.onClick} />
+    <span className="right-icon">
+      <RemoveFilterBadgeButton
+        className="text-gray-400 text-hover-gray-500"
+        onClick={props.removeProps.onClick}
+      />
+    </span>
   </span>
 );
 

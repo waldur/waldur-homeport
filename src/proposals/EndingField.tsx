@@ -50,7 +50,6 @@ export const EndingField = ({
             onlyIcon
             size="sm"
             tooltip={translate('Fixed duration')}
-            className="w-20px h-20px p-1"
           >
             <LockIcon weight="bold" size={12} />
           </Badge>

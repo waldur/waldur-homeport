@@ -229,6 +229,7 @@ $button-variants: (
 // Components
 
 // Border Radiues
+$border-radius-xs: 4px !default;
 $border-radius-sm: 6px !default;
 $border-radius: 8px !default;
 $border-radius-lg: 8px !default;
@@ -270,12 +271,28 @@ $form-feedback-icon-invalid-color: $fg-error-secondary;
 $form-check-input-width: 1.539rem !default;
 $form-check-input-width-sm: 1.231rem !default;
 $form-check-input-bg-size: 70% 70% !default;
-$form-check-input-border-radius: 0.287em !default;
-$form-check-input-focus-box-shadow: 0 0 0 4px rgba($brand-300-rgb, 0.25) !default;
-$form-check-input-checked-bg-color: $brand-50 !default;
-$form-check-input-indeterminate-bg-color: $brand-50 !default;
+$form-check-input-bg-solid: $bg-quaternary !default; // Custom variable
+$form-check-input-border: 1px solid $border-primary !default;
+$form-check-input-border-radius: $border-radius-sm !default;
+$form-check-input-border-radius-sm: $border-radius-xs !default;
+$form-check-input-focus-border: $form-check-input-border !default;
+$form-check-input-focus-box-shadow:
+  0 0 0 2px $bg-primary,
+  0 0 0 4px $border-brand-solid !default;
+$form-check-input-checked-bg-color: $bg-brand-solid !default;
+$form-check-input-indeterminate-bg-color: $bg-brand-solid !default;
+
+$form-check-input-active-filter: none !default;
+
+$form-check-input-disabled-checked-bg-image: url("data:image/svg+xml,<svg width='12' height='9' viewBox='0 0 12 9' fill='none' xmlns='http://www.w3.org/2000/svg'><path d='M11 1.25L4.125 8.125L1 5' stroke='#{$fg-senary}' stroke-width='1.6666' stroke-linecap='round' stroke-linejoin='round'/></svg>"); // Custom variable
+$form-check-input-disabled-indeterminate-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 20 20'><path fill='none' stroke='#{$fg-senary}' stroke-linecap='round' stroke-linejoin='round' stroke-width='3' d='M6 10h8'/></svg>"); // Custom variable
+$form-check-radio-disabled-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='2' fill='#{$fg-senary}'/></svg>"); // Custom variable
+
+$form-check-input-disabled-opacity: 1 !default;
+$form-check-label-disabled-opacity: $form-check-input-disabled-opacity !default;
 
 // Switch
+$form-switch-color-solid: $fg-white !default;
 $form-switch-width: 3.386rem !default;
 $form-switch-height: 1.85rem !default; // Custom variable
 $form-switch-width-sm: 2.77rem !default; // Custom variable
@@ -301,10 +318,17 @@ $modal-md: 544px !default;
 $modal-sm: 400px !default;
 
 // Badges
-$badge-font-size: 1.08rem !default;
-$badge-font-size-sm: 0.92rem !default;
-$badge-font-size-lg: 1.08rem !default;
+$badge-font-size: 1.075rem !default;
+$badge-font-size-sm: 0.925rem !default;
+$badge-font-size-lg: 1.075rem !default;
 $badge-font-weight: 500 !default;
-$badge-padding-y: 0.285em !default;
-$badge-padding-y-sm: 0.34em !default; // Custom variable
-$badge-padding-y-lg: 0.43em !default; // Custom variable
+$badge-icon-size: 12px !default;
+$badge-icon-space: 4px !default;
+$badge-bullet-size: 6px !default;
+$badge-bullet-space: 6px !default;
+$badge-padding-y: 1px !default;
+$badge-padding-y-sm: 1px !default; // Custom variable
+$badge-padding-y-lg: 3px !default; // Custom variable
+$badge-padding-x: 9px !default;
+$badge-padding-x-sm: 7px !default; // Custom variable
+$badge-padding-x-lg: 11px !default; // Custom variable

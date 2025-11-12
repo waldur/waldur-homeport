@@ -1,4 +1,3 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import React, { FunctionComponent } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -11,7 +10,7 @@ import {
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
+import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { BackendIdTip } from '@waldur/core/Tooltip';
@@ -181,19 +180,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Requested downscaling'),
-      render: ({ row }) =>
-        !row.downscaled ? (
-          <Badge variant="danger" outline pill size="sm">
-            <XIcon size={12} className="text-danger me-2" />
-            {translate('No')}
-          </Badge>
-        ) : (
-          <Badge variant="success" outline pill size="sm">
-            <CheckIcon size={12} className="text-success me-2" />
-            {translate('Yes')}
-          </Badge>
-        ),
-
+      render: ({ row }) => <BooleanBadge value={row.downscaled} />,
       export: 'downscaled',
       keys: ['downscaled'],
       exportKeys: ['downscaled'],
@@ -202,19 +189,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Restrict member access'),
-      render: ({ row }) =>
-        !row.restrict_member_access ? (
-          <Badge variant="danger" outline pill size="sm">
-            <XIcon size={12} className="text-danger me-2" />
-            {translate('No')}
-          </Badge>
-        ) : (
-          <Badge variant="success" outline pill size="sm">
-            <CheckIcon size={12} className="text-success me-2" />
-            {translate('Yes')}
-          </Badge>
-        ),
-
+      render: ({ row }) => <BooleanBadge value={row.restrict_member_access} />,
       export: 'restrict_member_access',
       keys: ['restrict_member_access'],
       exportKeys: ['restrict_member_access'],
@@ -223,19 +198,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Requested pausing'),
-      render: ({ row }) =>
-        !row.paused ? (
-          <Badge variant="danger" outline pill size="sm">
-            <XIcon size={12} className="text-danger me-2" />
-            {translate('No')}
-          </Badge>
-        ) : (
-          <Badge variant="success" outline pill size="sm">
-            <CheckIcon size={12} className="text-success me-2" />
-            {translate('Yes')}
-          </Badge>
-        ),
-
+      render: ({ row }) => <BooleanBadge value={row.paused} />,
       export: 'paused',
       keys: ['paused'],
       exportKeys: ['paused'],
