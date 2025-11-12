@@ -953,6 +953,12 @@ export const SettingsDescription = [
     description: translate('Onboarding settings'),
     items: [
       {
+        key: 'ONBOARDING_COUNTRY',
+        description: translate('ISO 3166-1 alpha-2 country code for the deployment (e.g., \'EE\' for Estonia, \'AT\' for Austria). Used for onboarding and localization.'),
+        default: '',
+        type: 'text_field',
+      },
+      {
         key: 'ONBOARDING_VERIFICATION_EXPIRY_HOURS',
         description: translate('Number of hours after which onboarding verifications expire.'),
         default: 48,
@@ -991,6 +997,30 @@ export const SettingsDescription = [
       {
         key: 'ONBOARDING_WICO_TOKEN',
         description: translate('WirtschaftsCompass API token'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'ONBOARDING_BOLAGSVERKET_API_URL',
+        description: translate('Sweden Business Register API server URL'),
+        default: 'https://gw-accept2.api.bolagsverket.se/',
+        type: 'url_field',
+      },
+      {
+        key: 'ONBOARDING_BOLAGSVERKET_TOKEN_API_URL',
+        description: translate('Bolagsverket OAuth2 token server base URL'),
+        default: 'https://portal-accept2.api.bolagsverket.se/',
+        type: 'url_field',
+      },
+      {
+        key: 'ONBOARDING_BOLAGSVERKET_CLIENT_ID',
+        description: translate('Sweden Business Register API client identifier'),
+        default: '',
+        type: 'text_field',
+      },
+      {
+        key: 'ONBOARDING_BOLAGSVERKET_CLIENT_SECRET',
+        description: translate('Sweden Business Register API client secret'),
         default: '',
         type: 'secret_field',
       },
