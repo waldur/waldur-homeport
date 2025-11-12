@@ -1,8 +1,8 @@
-import { CheckIcon, QuestionIcon, XIcon } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
-import { Badge } from 'react-bootstrap';
 
+import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
@@ -102,24 +102,7 @@ export const PoliciesTable: FC<TableProps> = ({ columns, ...props }) => {
               </Tip>
             </>
           ),
-          render: ({ row }) =>
-            !row.has_fired ? (
-              <Badge
-                bg={null}
-                className="fs-8 fw-bolder lh-base badge-light-danger badge-pill"
-              >
-                <XIcon size={12} className="text-danger me-2" />
-                {translate('No')}
-              </Badge>
-            ) : (
-              <Badge
-                bg={null}
-                className="fs-8 fw-bolder lh-base badge-light-success badge-pill"
-              >
-                <CheckIcon size={12} className="text-success me-2" />
-                {translate('Yes')}
-              </Badge>
-            ),
+          render: ({ row }) => <BooleanBadge value={row.has_fired} />,
         },
       ]}
       title={translate('Policy')}

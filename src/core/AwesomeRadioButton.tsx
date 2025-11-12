@@ -1,7 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
-import { FormLabel } from 'react-bootstrap';
+import { Form, FormLabel } from 'react-bootstrap';
 
 import { FormField } from '@waldur/form/types';
 import { Choice } from '@waldur/marketplace/offerings/types';
@@ -12,12 +12,14 @@ interface AwesomeRadioButtonProps extends FormField {
   choices: Choice[];
   direction?: 'vertical' | 'horizontal';
   justify?: 'start' | 'center' | 'end' | 'between' | 'around';
+  size?: 'sm' | 'lg';
 }
 
 export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
   choices,
   direction = 'vertical',
   justify = 'start',
+  size,
   ...props
 }) => {
   // Use the input name for generating unique IDs for each radio button
@@ -50,33 +52,34 @@ export const AwesomeRadioButton: FunctionComponent<AwesomeRadioButtonProps> = ({
         {choices.map((choice, index) => {
           const choiceId = `${groupName}-${choice.value}-${index}`;
           return (
-            <div
+            <Form.Check
               key={choiceId}
-              className={classNames(
-                'form-check form-check-custom form-check-solid',
-                {
-                  // This replicates the old "center" behavior where items grow to fill space
-                  'flex-grow-1':
-                    direction === 'horizontal' && justify === 'center',
-                },
-              )}
+              type="radio"
+              id={choiceId}
+              className={classNames('form-check-custom form-check-start', {
+                // This replicates the old "center" behavior where items grow to fill space
+                'flex-grow-1':
+                  direction === 'horizontal' && justify === 'center',
+                [`form-check-${size}`]: !!size,
+              })}
             >
-              <input
-                {...props.input} // Spreads name, onBlur, onChange, etc.
-                className="form-check-input"
+              <Form.Check.Input
                 type="radio"
-                id={choiceId}
+                {...props.input} // Spreads name, onBlur, etc.
                 value={choice.value}
                 checked={props.input?.value === choice.value}
+                onChange={() => {
+                  props.input.onChange(choice.value);
+                }}
                 disabled={props.disabled}
               />
-              <label className="form-check-label" htmlFor={choiceId}>
-                <span className="fw-bold d-block">{choice.label}</span>
+              <Form.Check.Label htmlFor={choiceId}>
+                <span className="d-block">{choice.label}</span>
                 {Boolean(choice.description) && (
-                  <span className="text-muted">{choice.description}</span>
+                  <Form.Text>{choice.description}</Form.Text>
                 )}
-              </label>
-            </div>
+              </Form.Check.Label>
+            </Form.Check>
           );
         })}
       </div>

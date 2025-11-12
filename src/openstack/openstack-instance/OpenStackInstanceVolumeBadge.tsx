@@ -1,6 +1,6 @@
-import { Badge } from 'react-bootstrap';
 import { OpenStackNestedVolume } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
@@ -58,7 +58,7 @@ export const OpenStackInstanceVolumeBadge = ({
       autoWidth
       rootClose
     >
-      <Badge bg="gray-200" text="dark" className="cursor-pointer me-3 mb-1">
+      <Badge variant="default" outline className="cursor-pointer me-3 mb-1">
         <img src={openstackIcon} alt="openstack" width={15} className="me-2" />
         {volume.name} ({formatFilesize(volume.size)}, {volume.type_name})
       </Badge>

@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
-import { Badge } from 'react-bootstrap';
+
+import { Badge } from '@waldur/core/Badge';
 
 import { Quota } from './types';
 import { formatQuota } from './utils';
@@ -17,8 +18,8 @@ export const QuotaBadge = ({
 
   return (
     <Badge
-      bg="secondary"
-      text="dark"
+      variant="default"
+      outline
       className={'fw-normal ' + (className ?? '')}
     >
       {Boolean(image) && (

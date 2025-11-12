@@ -28324,7 +28324,6 @@
           "invitations",
           "details",
           "offerings",
-          "policies",
           "attributes",
           "list",
           "modal",
@@ -28359,12 +28358,10 @@
           "marketplace/details/OfferingResourcesFilter.tsx",
           "marketplace/offerings/OfferingViewHero.tsx",
           "marketplace/offerings/admin/AdminOfferingsFilter.tsx",
-          "marketplace/offerings/details/policies/PoliciesTable.tsx",
           "marketplace/offerings/update/attributes/utils.tsx",
           "marketplace/resources/list/AllResourcesFilter.tsx",
           "marketplace/resources/list/ProjectResourcesAllFilter.tsx",
           "marketplace/resources/list/ProviderResourcesFilter.tsx",
-          "marketplace/resources/list/ProviderResourcesList.tsx",
           "marketplace/resources/options/OptionValue.tsx",
           "modal/ConfirmationDialog.tsx",
           "openstack/openstack-network/OpenStackNetworkSummary.tsx",
@@ -28404,7 +28401,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 30
+      "usage_count": 28
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -34134,7 +34131,6 @@
           "invitations",
           "details",
           "offerings",
-          "policies",
           "attributes",
           "list",
           "modal",
@@ -34165,12 +34161,10 @@
           "marketplace/details/OfferingResourcesFilter.tsx",
           "marketplace/offerings/OfferingViewHero.tsx",
           "marketplace/offerings/admin/AdminOfferingsFilter.tsx",
-          "marketplace/offerings/details/policies/PoliciesTable.tsx",
           "marketplace/offerings/update/attributes/utils.tsx",
           "marketplace/resources/list/AllResourcesFilter.tsx",
           "marketplace/resources/list/ProjectResourcesAllFilter.tsx",
           "marketplace/resources/list/ProviderResourcesFilter.tsx",
-          "marketplace/resources/list/ProviderResourcesList.tsx",
           "marketplace/resources/options/OptionValue.tsx",
           "modal/ConfirmationDialog.tsx",
           "openstack/openstack-network/OpenStackNetworkSummary.tsx",
@@ -34209,7 +34203,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 27
+      "usage_count": 25
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -93248,6 +93242,103 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Add user": {
+    "message": "Add user",
+    "context": {
+      "primary_ui_type": "action_button",
+      "ui_types": [
+        "unknown",
+        "action_button",
+        "generic_element"
+      ],
+      "components": [
+        "Tip",
+        "Button",
+        "ActionButton",
+        "ModalDialog",
+        "ResourceActionDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "dashboard",
+          "general",
+          "marketplace",
+          "project_management",
+          "user_management"
+        ],
+        "feature_areas": [
+          "dashboard",
+          "create",
+          "permissions",
+          "service-providers",
+          "team",
+          "support"
+        ],
+        "component_types": [
+          "component",
+          "form",
+          "dialog",
+          "list"
+        ],
+        "paths": [
+          "dashboard/TeamWidget.tsx",
+          "invitations/actions/create/EmailsListGroup.tsx",
+          "marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx",
+          "marketplace/service-providers/OfferingPermissionCreateButton.tsx",
+          "project/team/AddUserDialog.tsx",
+          "user/support/AddRemoteUserDialog.tsx",
+          "user/support/UserTableActions.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Tip",
+          "Button",
+          "ActionButton",
+          "ModalDialog",
+          "ResourceActionDialog"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 7
+    },
+    "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Credit used": {
     "message": "Credit used",
     "context": {
@@ -109685,97 +109776,6 @@
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Add user": {
-    "message": "Add user",
-    "context": {
-      "primary_ui_type": "action_button",
-      "ui_types": [
-        "unknown",
-        "action_button",
-        "generic_element"
-      ],
-      "components": [
-        "Button",
-        "ActionButton",
-        "ModalDialog",
-        "ResourceActionDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 8,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general",
-          "marketplace",
-          "project_management",
-          "user_management"
-        ],
-        "feature_areas": [
-          "create",
-          "permissions",
-          "service-providers",
-          "team",
-          "support"
-        ],
-        "component_types": [
-          "form",
-          "dialog",
-          "list"
-        ],
-        "paths": [
-          "invitations/actions/create/EmailsListGroup.tsx",
-          "marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateButton.tsx",
-          "project/team/AddUserDialog.tsx",
-          "user/support/AddRemoteUserDialog.tsx",
-          "user/support/UserTableActions.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Button",
-          "ActionButton",
-          "ModalDialog",
-          "ResourceActionDialog"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
-      },
-      "usage_count": 6
-    },
-    "translator_notes": [
-      "This text appears on a button. Keep it short and action-oriented.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Too many empty fields": {

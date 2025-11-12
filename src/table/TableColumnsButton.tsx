@@ -15,13 +15,17 @@ import {
 import { CSS } from '@dnd-kit/utilities';
 import { DotsSixVerticalIcon, GearIcon } from '@phosphor-icons/react';
 import { FC, useMemo, useState } from 'react';
-import { Button, Dropdown, OverlayTrigger, Popover } from 'react-bootstrap';
+import {
+  Button,
+  Dropdown,
+  FormCheck,
+  OverlayTrigger,
+  Popover,
+} from 'react-bootstrap';
 
 import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
 
-import CheckboxIcon from './Checkbox.svg';
-import CheckboxEmptyIcon from './CheckboxEmpty.svg';
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableProps } from './types';
 
@@ -36,22 +40,20 @@ const SortableItem = (props) => {
 
   return (
     <div
-      className="dropdown-item"
+      className="dropdown-item d-flex align-items-center"
       ref={setNodeRef}
       style={style}
       {...attributes}
       {...listeners}
     >
-      <span className="svg-icon svg-icon-2 svg-icon-gray me-3">
-        <DotsSixVerticalIcon size={32} />
-      </span>{' '}
-      {/* eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions */}
-      <span
-        className="svg-icon svg-icon-2 svg-icon-transparent me-3"
-        onClick={props.onClick}
-      >
-        {props.isActive ? <CheckboxIcon /> : <CheckboxEmptyIcon />}
+      <span className="svg-icon svg-icon-4 svg-icon-gray">
+        <DotsSixVerticalIcon weight="bold" />
       </span>
+      <FormCheck
+        className="form-check form-check-custom form-check-sm min-h-auto svg-icon"
+        checked={props.isActive}
+        onChange={props.onClick}
+      />
       {props.title}
     </div>
   );
@@ -115,7 +117,7 @@ const ColumnsPopover = ({
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <div className="mh-300px overflow-auto">
+      <div className="mh-300px overflow-auto pb-2">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}
@@ -138,14 +140,18 @@ const ColumnsPopover = ({
         </DndContext>
 
         {hasActions && (
-          <Dropdown.Item onClick={() => toggleColumn(COLUMN_ACTIONS_KEY)}>
-            <span className="svg-icon svg-icon-2 svg-icon-transparent me-3">
-              {activeColumns[COLUMN_ACTIONS_KEY] ? (
-                <CheckboxIcon />
-              ) : (
-                <CheckboxEmptyIcon />
-              )}
-            </span>
+          <Dropdown.Item
+            onClick={() =>
+              toggleColumn(COLUMN_ACTIONS_KEY, { keys: [COLUMN_ACTIONS_KEY] })
+            }
+            className="d-flex align-items-center"
+          >
+            <FormCheck
+              key={activeColumns[COLUMN_ACTIONS_KEY]}
+              className="form-check form-check-custom form-check-sm min-h-auto svg-icon"
+              checked={activeColumns[COLUMN_ACTIONS_KEY]}
+              onChange={(e) => e.preventDefault()}
+            />
             {translate('Actions')}
           </Dropdown.Item>
         )}

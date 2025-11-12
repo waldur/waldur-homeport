@@ -9,11 +9,12 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Accordion, Badge, Button } from 'react-bootstrap';
+import { Accordion, Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 import { Field, change, formValueSelector } from 'redux-form';
 
+import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 
@@ -94,10 +95,14 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
   );
 };
 
-export const RemoveFilterBadgeButton = ({ onClick, size = 20 }) => (
+export const RemoveFilterBadgeButton = ({
+  onClick,
+  className = '',
+  size = 12,
+}) => (
   <button
     type="button"
-    className="text-btn text-gray-400 text-hover-gray-500 lh-0 ps-2"
+    className={classNames('text-btn', className)}
     onClick={onClick}
   >
     <XIcon weight="bold" size={size} />
@@ -120,16 +125,17 @@ export const TableSidebarFilterValues = ({
           style={!ellipsis ? { maxWidth: 'unset' } : undefined}
         >
           <Badge
-            bg=""
-            className="badge-outline-default badge-lg fw-bold fs-7 py-2"
+            variant="default"
+            outline
+            size="lg"
+            className="fs-7"
+            rightIcon={
+              !hideRemoveButton && (
+                <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+              )
+            }
           >
             {badgeValue(value)}
-            {!hideRemoveButton && (
-              <RemoveFilterBadgeButton
-                size={12}
-                onClick={() => remove(value, value)}
-              />
-            )}
           </Badge>
         </div>
       ) : null
@@ -138,33 +144,35 @@ export const TableSidebarFilterValues = ({
         {value.map((v, i) => (
           <Badge
             key={i}
-            bg=""
-            className="filter-value badge-outline-default badge-lg fw-bold fs-7 px-2"
+            variant="default"
+            outline
+            size="lg"
+            className="filter-value fs-7"
             style={!ellipsis ? { maxWidth: 'unset' } : undefined}
+            rightIcon={
+              !hideRemoveButton && (
+                <RemoveFilterBadgeButton onClick={() => remove(value, v)} />
+              )
+            }
           >
             {getValueLabel(v)}
-            {!hideRemoveButton && (
-              <RemoveFilterBadgeButton
-                size={12}
-                onClick={() => remove(value, v)}
-              />
-            )}
           </Badge>
         ))}
       </>
     ) : (
       <Badge
-        bg=""
-        className="filter-value badge-outline-default badge-lg fw-bold fs-7 py-2"
+        variant="default"
+        outline
+        size="lg"
+        className="filter-value fs-7"
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
+        rightIcon={
+          !hideRemoveButton && (
+            <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+          )
+        }
       >
         {getValueLabel(value)}
-        {!hideRemoveButton && (
-          <RemoveFilterBadgeButton
-            size={12}
-            onClick={() => remove(value, value)}
-          />
-        )}
       </Badge>
     )
   ) : null;

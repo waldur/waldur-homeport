@@ -3,7 +3,7 @@
 //
 
 .badge {
-  line-height: 0.9;
+  line-height: 20px;
 
   // Fixed size
   &.badge-circle,
@@ -31,15 +31,16 @@
 
   // Only contains an icon
   &.badge-icon {
-    padding: $badge-padding-y;
-    line-height: 0;
+    padding: calc($badge-padding-x - 4px);
+    line-height: 0 !important;
   }
 
   // Sizes
   &.badge-sm {
     min-width: $badge-size-sm;
     font-size: $badge-font-size-sm;
-    padding: $badge-padding-y-sm $badge-padding-x;
+    padding: $badge-padding-y-sm $badge-padding-x-sm;
+    line-height: 18px;
 
     &.badge-circle {
       width: $badge-size-sm;
@@ -47,14 +48,41 @@
     }
 
     &.badge-icon {
-      padding: $badge-padding-y-sm;
+      padding: calc($badge-padding-x-sm - 4px);
+    }
+
+    &.has-right-icon {
+      padding-right: calc(
+        $badge-padding-x-sm + $badge-icon-size + $badge-icon-space - 2px
+      );
+      .right-icon {
+        right: calc($badge-padding-x-sm - 2px);
+      }
+    }
+
+    &.has-left-icon {
+      padding-left: calc(
+        $badge-padding-x-sm + $badge-icon-size + $badge-icon-space - 2px
+      );
+      .left-icon {
+        left: calc($badge-padding-x-sm - 2px);
+      }
+    }
+
+    &.has-bullet {
+      padding-left: calc(
+        $badge-padding-x-sm + $badge-bullet-size + $badge-bullet-space
+      );
+      &::before {
+        left: $badge-padding-x-sm;
+      }
     }
   }
 
   &.badge-lg {
     min-width: $badge-size-lg;
     font-size: $badge-font-size-lg;
-    padding: $badge-padding-y-lg $badge-padding-x;
+    padding: $badge-padding-y-lg $badge-padding-x-lg;
 
     &.badge-circle {
       width: $badge-size-lg;
@@ -62,41 +90,94 @@
     }
 
     &.badge-icon {
-      padding: $badge-padding-y-lg;
+      padding: calc($badge-padding-x-lg - 4px);
+    }
+
+    &.has-right-icon {
+      padding-right: calc(
+        $badge-padding-x-lg + $badge-icon-size + $badge-icon-space - 2px
+      );
+      .right-icon {
+        right: calc($badge-padding-x-lg - 2px);
+      }
+    }
+
+    &.has-left-icon {
+      padding-left: calc(
+        $badge-padding-x-lg + $badge-icon-size + $badge-icon-space - 2px
+      );
+      .left-icon {
+        left: calc($badge-padding-x-lg - 2px);
+      }
+    }
+
+    &.has-bullet {
+      padding-left: calc(
+        $badge-padding-x-lg + $badge-bullet-size + $badge-bullet-space
+      );
+      &::before {
+        left: $badge-padding-x-lg;
+      }
     }
   }
 
-  &.has-bullet::before {
-    content: ' ';
-    display: inline-block;
-    background-color: $dark;
-    width: 6px;
-    height: 6px;
-    border-radius: 50%;
-    transform: translate(-50%, -20%);
-    margin-right: 3px;
+  &.has-bullet {
+    position: relative;
+    padding-left: calc(
+      $badge-padding-x + $badge-bullet-size + $badge-bullet-space
+    );
+
+    &::before {
+      content: ' ';
+      display: inline-block;
+      background-color: $dark;
+      width: $badge-bullet-size;
+      height: $badge-bullet-size;
+      border-radius: 50%;
+      left: $badge-padding-x;
+      line-height: 0;
+      position: absolute;
+      top: 50%;
+      transform: translateY(-50%);
+    }
   }
 
   &.has-left-icon {
     position: relative;
-    padding-left: 1.6em;
+    padding-left: calc(
+      $badge-padding-x + $badge-icon-size + $badge-icon-space - 2px
+    );
 
     .left-icon {
       position: absolute;
       transform: translateY(-50%);
-      left: 5px;
+      left: calc($badge-padding-x - 2px);
       top: 50%;
+      line-height: 0;
+
+      svg {
+        width: $badge-icon-size;
+        height: $badge-icon-size;
+      }
     }
   }
   &.has-right-icon {
     position: relative;
-    padding-right: 1.6em;
+    padding-right: calc(
+      $badge-padding-x + $badge-icon-size + $badge-icon-space - 2px
+    );
 
     .right-icon {
       position: absolute;
       transform: translateY(-50%);
-      right: 5px;
+      right: calc($badge-padding-x - 2px);
       top: 50%;
+      line-height: 0;
+
+      svg {
+        width: $badge-icon-size;
+        height: $badge-icon-size;
+      }
     }
   }
 }
