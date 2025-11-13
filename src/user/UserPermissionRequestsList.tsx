@@ -6,7 +6,6 @@ import { userPermissionRequestsList } from 'waldur-js-client';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
-import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -36,7 +35,6 @@ const mapStateToProps = createSelector(
 );
 
 export const UserPermissionRequestsList = () => {
-  useTitle(translate('Permission requests'));
   const filter = useSelector(mapStateToProps);
   const props = useTable({
     table: USER_PERMISSION_REQUESTS_TABLE_ID,
