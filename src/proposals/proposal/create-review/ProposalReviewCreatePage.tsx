@@ -57,7 +57,7 @@ const loadData = async (reviewUuid: string) => {
     }).then((response) => response.data),
     proposalPublicCallsRetrieve({
       path: { uuid: review.call_uuid },
-      query: { field: ['uuid', 'customer_uuid'] },
+      query: { field: ['uuid', 'customer_uuid', 'manager_uuid'] },
     }).then((res) => res.data),
   ];
   const [proposal, call] = await Promise.all(promises);

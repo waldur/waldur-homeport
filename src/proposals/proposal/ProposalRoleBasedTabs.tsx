@@ -1,16 +1,12 @@
 import { useRouter } from '@uirouter/react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { Proposal, ProposalReview, PublicCall } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import {
-  isOwnerOrStaff,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+import { userHasRole } from '@waldur/permissions/hasPermission';
+import { useUser } from '@waldur/workspace/hooks';
 
 export const ProposalRoleBasedTabs = ({
   proposal,
@@ -23,6 +19,7 @@ export const ProposalRoleBasedTabs = ({
   call: PublicCall;
 }) => {
   const router = useRouter();
+  const user = useUser();
   const goTo = (state: string) => {
     const params = {};
     if (
@@ -54,10 +51,13 @@ export const ProposalRoleBasedTabs = ({
     router.stateService.go(state, params);
   };
 
-  const isStaffOrOwnerOrManager = useSelector(
-    (state: RootState) =>
-      isOwnerOrStaff(state) || isServiceManagerSelector(state),
+  const userIsCallOrganizer = userHasRole(
+    user,
+    'CUSTOMER.CALL_ORGANIZER',
+    call?.manager_uuid,
   );
+  const userIsCallManager = userHasRole(user, 'CALL.MANAGER', call?.uuid);
+
   const showCallManagement = isFeatureVisible(
     MarketplaceFeatures.show_call_management_functionality,
   );
@@ -82,7 +82,7 @@ export const ProposalRoleBasedTabs = ({
           title={translate('Reviewer')}
         />
       ) : null}
-      {isStaffOrOwnerOrManager && showCallManagement && (
+      {(userIsCallManager || userIsCallOrganizer) && showCallManagement && (
         <Tab
           eventKey="call-management.proposal-details"
           title={translate('Call manager')}

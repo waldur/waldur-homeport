@@ -70,6 +70,7 @@ export const ProposalManagePage = () => {
               field: [
                 'uuid',
                 'customer_uuid',
+                'manager_uuid',
                 'compliance_checklist',
                 'compliance_checklist_name',
               ] as any,
