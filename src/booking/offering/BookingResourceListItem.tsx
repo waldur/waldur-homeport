@@ -189,7 +189,7 @@ export const BookingResourceListItem = ({
               <Button
                 variant="tertiary"
                 size="sm"
-                className={layout.diffHours < 1.1 ? 'py-1' : undefined}
+                className={classNames(layout.diffHours < 1.1 && 'py-1')}
                 onClick={onClickSeeMore}
               >
                 {translate('See more')}

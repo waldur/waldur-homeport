@@ -32,7 +32,7 @@ export const EditPlanDescriptionButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <PencilSimpleIcon size={18} /> {translate('Edit')}
+      <PencilSimpleIcon size={18} weight="bold" /> {translate('Edit')}
     </Dropdown.Item>
   );
 };

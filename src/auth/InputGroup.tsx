@@ -25,7 +25,11 @@ const PasswordField = ({ placeholder, input }) => {
         title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
       >
-        {showSecret ? <EyeSlashIcon size={20} /> : <EyeIcon size={20} />}
+        {showSecret ? (
+          <EyeSlashIcon size={20} weight="bold" />
+        ) : (
+          <EyeIcon size={20} weight="bold" />
+        )}
         &nbsp;
       </button>
     </div>

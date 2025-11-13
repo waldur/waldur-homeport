@@ -28,6 +28,7 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
 
   return loading ? (
     <Button variant="primary">
+      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
       <LoadingSpinnerIcon className="p-2" />
     </Button>
   ) : (

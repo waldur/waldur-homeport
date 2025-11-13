@@ -32,7 +32,7 @@ export const ClonePlanButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <CopyIcon size={18} /> {translate('Clone')}
+      <CopyIcon size={18} weight="bold" /> {translate('Clone')}
     </Dropdown.Item>
   );
 };

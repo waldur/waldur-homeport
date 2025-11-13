@@ -33,7 +33,7 @@ export const EditCategoryButton: FunctionComponent<{
     <ActionButton
       action={callback}
       title={translate('Edit category')}
-      iconNode={<PencilSimpleIcon />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
     />
   );
 };

@@ -25,7 +25,9 @@ const ICONS = {
   VMware: vmwareIcon,
 };
 
-export const ResourceIcon: FunctionComponent<ResourceIconProps> = (props) => (
+export const ResourceIconName: FunctionComponent<ResourceIconProps> = (
+  props,
+) => (
   <Tip
     id={`resourceIcon-${props.resource.uuid}`}
     label={formatResourceType(props.resource)}

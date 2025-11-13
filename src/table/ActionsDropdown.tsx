@@ -3,6 +3,7 @@ import {
   DotsThreeVerticalIcon,
   SpinnerIcon,
 } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FunctionComponent, PropsWithChildren, ReactNode } from 'react';
 import {
   Dropdown,
@@ -64,7 +65,7 @@ export const TableDropdownToggle = ({
       <Dropdown.Toggle
         variant={variant}
         size={size === 'md' ? undefined : size}
-        className={className + ' btn-icon-right no-arrow'}
+        className={classNames('btn-icon-right no-arrow', className)}
         disabled={disabled}
       >
         {label || translate('Actions')}
@@ -176,7 +177,11 @@ export const ActionsDropdown: FunctionComponent<
     {open ? (
       loading ? (
         <Dropdown.Item eventKey="1">
-          <SpinnerIcon size={20} className="animation-spin me-2" />
+          <SpinnerIcon
+            size={20}
+            className="animation-spin me-2"
+            weight="bold"
+          />
           {translate('Loading actions')}
         </Dropdown.Item>
       ) : error ? (

@@ -1,9 +1,10 @@
 import { StarIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { ReactNode } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
-import { ItemIcon } from '@waldur/navigation/workspace/context-selector/ItemIcon';
+import { ItemImage } from '@waldur/navigation/workspace/context-selector/ItemImage';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 
@@ -45,7 +46,7 @@ export const SearchItem = (props: SearchItemProps) => {
       }}
       aria-hidden={true}
     >
-      <ItemIcon
+      <ItemImage
         item={{ image: props.image, name: props.title }}
         className="me-4"
         circle
@@ -60,7 +61,7 @@ export const SearchItem = (props: SearchItemProps) => {
       <div className="ms-auto d-flex">
         {props.badge && <div>{props.badge}</div>}
         <button
-          className={'btn-fav' + (isFav ? ' show' : '')}
+          className={classNames('btn-fav', isFav && 'show')}
           onClick={(e) =>
             isFav
               ? props.removeFavorite(props.to, props.params, e)
@@ -79,7 +80,7 @@ export const SearchItem = (props: SearchItemProps) => {
           {isFav ? (
             <StarIcon size={20} weight="fill" className="text-warning" />
           ) : (
-            <StarIcon size={20} className="text-dark" />
+            <StarIcon size={20} className="text-dark" weight="bold" />
           )}
         </button>
       </div>

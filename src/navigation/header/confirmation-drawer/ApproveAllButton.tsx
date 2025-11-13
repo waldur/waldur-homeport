@@ -53,6 +53,7 @@ export const ApproveAllButton: React.FC<ApproveAllButtonProps> = (props) => {
   return (
     <Button variant="primary" onClick={handler} disabled={loading}>
       {loading ? (
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         <LoadingSpinnerIcon />
       ) : (
         <span className="svg-icon svg-icon-2">

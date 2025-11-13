@@ -33,7 +33,7 @@ const CellDescription = ({
     {description && (
       <>
         <Tip id="quota" label={description} className="aligned-tip">
-          <QuestionIcon />
+          <QuestionIcon weight="bold" />
         </Tip>{' '}
       </>
     )}

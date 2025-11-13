@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 import {
   ProgressBar as BsProgressBar,
@@ -23,10 +24,10 @@ export const ProgressBar: FC<ProgressBarProps> = ({
       <BsProgressBar
         now={now}
         max={max}
-        className={
-          'h-8px shadow-none w-100 mt-1' +
-          (variant ? ' bg-light' + variant : '')
-        }
+        className={classNames(
+          'h-8px shadow-none w-100 mt-1',
+          variant && `bg-light-${variant}`,
+        )}
         variant={variant}
       />
       {showValue && (

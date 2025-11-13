@@ -109,7 +109,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
               className="text-btn text-hover-primary"
               onClick={makePdf}
             >
-              <PrinterIcon size={20} />
+              <PrinterIcon size={20} weight="bold" />
             </button>
           </Tip>
         )}
@@ -120,7 +120,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
               className="text-btn text-hover-primary"
               onClick={() => exportData('csv')}
             >
-              <FileCsvIcon size={20} />
+              <FileCsvIcon size={20} weight="bold" />
             </button>
           </Tip>
         )}
@@ -131,7 +131,7 @@ export const EChartActions: FC<EChartActionsProps> = ({
               className="text-btn text-hover-primary"
               onClick={() => exportData('excel')}
             >
-              <FileXlsIcon size={20} />
+              <FileXlsIcon size={20} weight="bold" />
             </button>
           </Tip>
         )}

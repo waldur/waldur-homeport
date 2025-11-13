@@ -17,7 +17,7 @@ export const ActionsField: FC<ActionsFieldProps> = ({ onRemove }) => (
       className="d-flex align-items-center"
     >
       <span className="svg-icon svg-icon-2">
-        <TrashIcon />
+        <TrashIcon weight="bold" />
       </span>{' '}
       {translate('Delete')}
     </Button>

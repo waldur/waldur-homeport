@@ -13,11 +13,21 @@ interface NetworkStatisticsCardProps {
 
 const ChangeIndicator = ({ isIncrease, change }) => {
   return isIncrease ? (
-    <Badge variant="success" outline pill leftIcon={<ArrowUpIcon />}>
+    <Badge
+      variant="success"
+      outline
+      pill
+      leftIcon={<ArrowUpIcon weight="bold" />}
+    >
       {change}%
     </Badge>
   ) : (
-    <Badge variant="danger" outline pill leftIcon={<ArrowDownIcon />}>
+    <Badge
+      variant="danger"
+      outline
+      pill
+      leftIcon={<ArrowDownIcon weight="bold" />}
+    >
       {change}%
     </Badge>
   );

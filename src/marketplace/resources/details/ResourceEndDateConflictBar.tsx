@@ -12,6 +12,7 @@ export const ResourceEndDateConflictBar = () => {
   return (
     <div className="bar bg-body border-bottom h-60px">
       <div className="container-fluid w-100 d-flex align-items-center gap-2">
+        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
         <RadarIcon
           IconComponent={WarningCircleIcon}
           variant="warning"

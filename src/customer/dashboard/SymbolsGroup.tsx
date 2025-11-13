@@ -12,7 +12,6 @@ interface SymbolsGroupProps {
   imageKey?: string;
   length?: number;
   size?: number;
-  space?: 'sm' | 'xs';
   onClick?(): void;
 }
 
@@ -37,29 +36,26 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
   items,
   length,
   size = 35,
-  space,
   onClick,
 }) => (
   <div
-    className={
-      'symbol-group symbol-hover' + (space ? ` symbol-group-${space}` : '')
-    }
+    className="symbol-group symbol-hover"
     onClick={onClick}
     onKeyPress={(e) => e.key === 'Enter' && onClick()}
     role="button"
     tabIndex={0}
   >
     {items.slice(0, max).map((item: User, index: number) => (
-      <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
-        {item[imageKey] || item[nameKey] ? (
-          <Avatar
-            size={size}
-            src={item[imageKey]}
-            name={item[nameKey]}
-            circle
-          />
-        ) : (
-          <div className={`symbol symbol-circle symbol-${size}px`}>
+      <div key={index} className={`symbol symbol-circle symbol-${size}px`}>
+        <Tip key={index} label={item[nameKey]} id={`customer-${index}`}>
+          {item[imageKey] || item[nameKey] ? (
+            <Avatar
+              size={size}
+              src={item[imageKey]}
+              name={item[nameKey]}
+              circle
+            />
+          ) : (
             <div
               className={`symbol-label fs-4 fw-bold ${getSymbolColorClass(
                 index,
@@ -67,13 +63,13 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
             >
               {item[emailKey] ? item[emailKey][0].toUpperCase() : '?'}
             </div>
-          </div>
-        )}
-      </Tip>
+          )}
+        </Tip>
+      </div>
     ))}
     {(length ?? items.length) > max && (
       <div className={`symbol symbol-circle symbol-${size}px`}>
-        <div className="symbol-label fs-3 fw-bold bg-tertiary text-quaternary">
+        <div className="symbol-label fs-5 fw-bold bg-secondary text-primary-600">
           +{length ? Math.max(length - max, 0) : items.slice(max).length}
         </div>
       </div>

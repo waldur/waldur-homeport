@@ -1,4 +1,5 @@
 import { PlusIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback, useEffect, useRef } from 'react';
 import { Button, Col, Nav, Row, Tab } from 'react-bootstrap';
@@ -32,11 +33,7 @@ interface TabContentProps
 }
 
 const SectionTitle = ({ title, className = '' }) => (
-  <h6
-    className={
-      'text-gray-700 fw-bold mb-3 mx-5' + (className ? ` ${className}` : '')
-    }
-  >
+  <h6 className={classNames('text-gray-700 fw-bold mb-3 mx-5', className)}>
     {title}
   </h6>
 );

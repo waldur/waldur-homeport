@@ -9,7 +9,7 @@ export const ReviewApproveAction = ({ request, refetch, apiMethod }) =>
   request.state === 'pending' ? (
     <DialogActionButton
       title={translate('Approve')}
-      iconNode={<CheckIcon />}
+      iconNode={<CheckIcon weight="bold" />}
       resource={request}
       modalComponent={ReviewDialog}
       extraResolve={{

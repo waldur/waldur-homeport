@@ -144,7 +144,7 @@ export const IssueInfoButton = ({ issue }) => {
   return (
     <Button variant="secondary" onClick={callback}>
       <span className="svg-icon svg-icon-2">
-        <EyeIcon />
+        <EyeIcon weight="bold" />
       </span>
       {translate('Show details')}
     </Button>

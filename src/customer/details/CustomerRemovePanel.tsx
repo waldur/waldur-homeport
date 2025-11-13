@@ -63,7 +63,7 @@ export const CustomerRemovePanel: FunctionComponent = () => {
         <div>
           <Button onClick={removeCustomer} variant="danger">
             <span className="svg-icon svg-icon-2">
-              <TrashIcon />
+              <TrashIcon weight="bold" />
             </span>{' '}
             {translate('Remove organization')}
           </Button>

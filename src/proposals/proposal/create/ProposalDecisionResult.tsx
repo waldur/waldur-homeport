@@ -53,6 +53,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
       <Card.Body>
         <div className="d-flex align-items-center flex-wrap gap-4">
           <div className="d-flex align-items-center">
+            {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
             <RadarIcon
               IconComponent={
                 proposal.state === 'accepted' ? CheckCircleIcon : XCircleIcon

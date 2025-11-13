@@ -10,7 +10,7 @@ export const PaymentProofRenderer: FunctionComponent<{ row: Payment }> = ({
 }) =>
   row.proof ? (
     <a href={row.proof} target="_blank" rel="noopener noreferrer">
-      {translate('Proof document')} <ArrowSquareOutIcon />
+      {translate('Proof document')} <ArrowSquareOutIcon weight="bold" />
     </a>
   ) : (
     <>{DASH_ESCAPE_CODE}</>

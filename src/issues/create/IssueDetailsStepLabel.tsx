@@ -50,7 +50,7 @@ export const IssueDetailsStepLabel = () => {
             }
             id="tooltip"
           >
-            <InfoIcon />
+            <InfoIcon weight="bold" />
           </Tip>
         </span>
       )}

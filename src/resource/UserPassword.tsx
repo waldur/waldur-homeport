@@ -22,9 +22,9 @@ export const UserPassword: React.FC<UserPasswordProps> = (props) => {
         data-testid="toggle-password"
       >
         {showPassword ? (
-          <EyeSlashIcon size={17} data-testid="eye-slash" />
+          <EyeSlashIcon size={17} data-testid="eye-slash" weight="bold" />
         ) : (
-          <EyeIcon size={17} data-testid="eye" />
+          <EyeIcon size={17} data-testid="eye" weight="bold" />
         )}
         &nbsp;
       </button>

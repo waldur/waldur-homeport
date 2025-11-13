@@ -39,7 +39,7 @@ export const UserToken = ({ token }) => {
             className="px-3 h-30px"
             onClick={onClick}
           >
-            <CopyIcon />
+            <CopyIcon weight="bold" />
             {translate('Copy')}
           </Button>
         </InputGroup>

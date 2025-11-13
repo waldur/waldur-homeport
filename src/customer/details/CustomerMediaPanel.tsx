@@ -58,7 +58,7 @@ export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
                       >
                         {translate('Save')}
                         <span className="svg-icon svg-icon-5">
-                          <UploadSimpleIcon />
+                          <UploadSimpleIcon weight="bold" />
                         </span>
                       </Button>
                     ) : null

@@ -93,7 +93,7 @@ export const ColumnRow = ({ column, fields, index, name }) => {
 
       <td>
         <Button variant="danger" onClick={onRemove} aria-description="Delete">
-          <TrashIcon />
+          <TrashIcon weight="bold" />
         </Button>
       </td>
     </tr>

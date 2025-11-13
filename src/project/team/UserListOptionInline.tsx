@@ -53,14 +53,14 @@ export const UserListOptionInline: FC<UserListOptionInlineProps> = (props) => (
       <div style={{ display: 'flex', alignItems: 'center', gap: '5px' }}>
         {props.data.is_active === false && (
           <Tip label={translate('Inactive')} id="inactive-user-tooltip">
-            <ProhibitIcon />
+            <ProhibitIcon weight="bold" />
           </Tip>
         )}
         <Tip
           label={props.data.registration_method}
           id="registration-method-tooltip"
         >
-          <KeyIcon />
+          <KeyIcon weight="bold" />
         </Tip>
       </div>
     </div>

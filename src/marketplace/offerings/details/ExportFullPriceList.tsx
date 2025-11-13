@@ -75,6 +75,7 @@ export const ExportFullPriceList: FunctionComponent<
   return (
     <div className="exportFullPriceList">
       {loading ? (
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         <LoadingSpinnerIcon />
       ) : error ? (
         <>{translate('Unable to load full price list')}</>

@@ -78,14 +78,9 @@ export const MultiSelectOption = (props) => {
   );
 };
 const MultiSelectValue = (props: MultiValueProps) => (
-  <span className="badge has-right-icon">
+  <span className="badge">
     {props.children}
-    <span className="right-icon">
-      <RemoveFilterBadgeButton
-        className="text-gray-400 text-hover-gray-500"
-        onClick={props.removeProps.onClick}
-      />
-    </span>
+    <RemoveFilterBadgeButton size={12} onClick={props.removeProps.onClick} />
   </span>
 );
 

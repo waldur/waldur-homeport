@@ -34,7 +34,11 @@ export const SecretValueField: React.FC<SecretValueFieldProps> = (props) => {
         title={showSecret ? translate('Hide') : translate('Show')}
         onClick={onToggle}
       >
-        {!showSecret ? <EyeIcon size={18} /> : <EyeSlashIcon size={18} />}
+        {!showSecret ? (
+          <EyeIcon size={18} weight="bold" />
+        ) : (
+          <EyeSlashIcon size={18} weight="bold" />
+        )}
       </button>
     </div>
   );

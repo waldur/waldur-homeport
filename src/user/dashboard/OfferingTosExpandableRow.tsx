@@ -32,7 +32,7 @@ const NavItem = ({ title, eventKey, count, countLoading }) => (
   <Nav.Item className="text-nowrap">
     <Nav.Link eventKey={eventKey}>
       {title}
-      <Badge variant="default" outline pill className="ms-2">
+      <Badge onlyIcon variant="default" outline pill className="ms-2">
         {countLoading ? <LoadingSpinnerIcon /> : count || 0}
       </Badge>
     </Nav.Link>

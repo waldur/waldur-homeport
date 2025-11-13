@@ -11,7 +11,7 @@ export const WizardStepIndicator = ({ steps, activeStep, onSelect }) => (
         aria-hidden="true"
       >
         <div className="step svg-icon">
-          {stepIndex < activeStep ? <CheckIcon /> : stepIndex + 1}
+          {stepIndex < activeStep ? <CheckIcon weight="bold" /> : stepIndex + 1}
         </div>{' '}
         <div className="caption hidden-xs hidden-sm">{step}</div>
       </li>

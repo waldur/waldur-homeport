@@ -38,7 +38,7 @@ export const EditPlanQuotasButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <PencilSimpleIcon size={18} /> {translate('Edit quotas')}
+      <PencilSimpleIcon size={18} weight="bold" /> {translate('Edit quotas')}
     </Dropdown.Item>
   );
 };

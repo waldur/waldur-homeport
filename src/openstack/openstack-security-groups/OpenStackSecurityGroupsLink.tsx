@@ -26,7 +26,7 @@ export const OpenStackSecurityGroupsLink = ({ items }) => {
   return (
     <button className="btn btn-link btn-flush" onClick={handleOpenDialog}>
       {items.map((item) => item.name).join(', ')}
-      <QuestionIcon size={17} className="ms-1" />
+      <QuestionIcon size={17} className="ms-1" weight="bold" />
     </button>
   );
 };

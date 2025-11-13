@@ -25,7 +25,7 @@ export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
     <div className="copyToClipboard">
       <button className="text-btn" type="button" onClick={onClick}>
         <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
-          <CopyIcon />
+          <CopyIcon weight="bold" />
         </Tip>
       </button>
     </div>

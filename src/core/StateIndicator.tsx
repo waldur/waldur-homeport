@@ -26,7 +26,9 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
       active ? (
         <LoadingSpinnerIcon
           className={
-            (props.light || props.outline ? 'text-' : 'badge-') + props.variant
+            props.light || props.outline
+              ? `text-${props.variant}`
+              : `badge-${props.variant}`
           }
         />
       ) : undefined

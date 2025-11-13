@@ -22,6 +22,7 @@ export const InvitationCreateButton: FC<
       action={loadingProjects ? null : callback}
       title={translate('Invite by mail')}
       iconNode={
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         loadingProjects ? <LoadingSpinnerIcon /> : <AtIcon weight="bold" />
       }
       disabled={!canInvite}

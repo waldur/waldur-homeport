@@ -123,6 +123,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
                 }
                 label={
                   <div className="d-flex align-items-center">
+                    {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
                     <CountryFlagIcon
                       countryCode={
                         LanguageCountry[language.code] || language.code

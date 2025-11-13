@@ -1,4 +1,5 @@
 import { CaretRightIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
@@ -82,9 +83,10 @@ const WidgetItem = ({ item }: { item: ReportingWidget }) => (
               {item.data.map((info, i) => (
                 <p
                   key={i}
-                  className={
-                    'fs-6' + (i === item.data.length - 1 ? ' mb-0' : ' mb-2')
-                  }
+                  className={classNames(
+                    'fs-6',
+                    i === item.data.length - 1 ? 'mb-0' : 'mb-2',
+                  )}
                 >
                   {info.label}: {info.value}
                 </p>
@@ -93,7 +95,10 @@ const WidgetItem = ({ item }: { item: ReportingWidget }) => (
           )}
         </div>
         <div>
-          <CaretRightIcon className="icon-arrow display-5 fw-light text-dark" />
+          <CaretRightIcon
+            className="icon-arrow display-5 fw-light text-dark"
+            weight="bold"
+          />
         </div>
       </div>
     </Card.Body>

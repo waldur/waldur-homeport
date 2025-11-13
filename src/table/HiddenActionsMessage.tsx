@@ -17,6 +17,7 @@ export const HiddenActionsMessage: FunctionComponent<
 > = ({ toggleColumn, close }) => {
   return (
     <div className="d-flex gap-5 my-5 w-100">
+      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
       <RadarIcon
         IconComponent={WarningCircleIcon}
         variant="warning"

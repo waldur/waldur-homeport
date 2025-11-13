@@ -16,6 +16,6 @@ export const StaffOnlyIndicator = ({
     id={`staff-action-${uniqueId()}`}
     className={className}
   >
-    <IdentificationBadgeIcon size={22} />
+    <IdentificationBadgeIcon size={22} weight="bold" />
   </Tip>
 );

@@ -40,7 +40,7 @@ export const CallTabs = ({ call }: { call: Call }) => {
             >
               <Nav.Link disabled className="text-center min-w-60px d-flex">
                 {translate('Public')}
-                <QuestionIcon size={18} className="ms-1" />
+                <QuestionIcon size={18} className="ms-1" weight="bold" />
               </Nav.Link>
             </Tip>
           </Nav.Item>

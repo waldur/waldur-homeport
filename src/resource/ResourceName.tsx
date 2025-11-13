@@ -4,7 +4,7 @@ import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
-import { ResourceIcon } from './ResourceIcon';
+import { ResourceIconName } from './ResourceIconName';
 import { ResourceLink } from './ResourceLink';
 
 interface ResourceNameProps {
@@ -26,7 +26,7 @@ const ResourceWarning = (props: ResourceNameProps) =>
       label={translate('Provider does not comply with project policies')}
     >
       {' '}
-      <WarningIcon className="text-muted" />
+      <WarningIcon className="text-muted" weight="bold" />
     </Tip>
   ) : null;
 
@@ -43,11 +43,11 @@ export const ResourceName = (props: ResourceNameProps) =>
     <>
       <ResourceLink
         uuid={props.resource.marketplace_uuid}
-        label={<ResourceIcon resource={props.resource} />}
+        label={<ResourceIconName resource={props.resource} />}
       />
 
       <ResourceWarning resource={props.resource} />
     </>
   ) : (
-    <ResourceIcon resource={props.resource} />
+    <ResourceIconName resource={props.resource} />
   );

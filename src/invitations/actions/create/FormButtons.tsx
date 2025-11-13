@@ -35,7 +35,7 @@ export const FormButtons: FC<FormButtonsProps> = ({
     <>
       <Button variant="tertiary" className="w-150px" onClick={() => setStep(1)}>
         <div className="svg-icon svg-icon-2">
-          <CaretLeftIcon />
+          <CaretLeftIcon weight="bold" />
         </div>
         {translate('Go back')}
       </Button>

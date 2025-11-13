@@ -58,6 +58,7 @@ export const OfferingUsersWarningBar: FC = () => {
       <div className="container-fluid">
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
+            {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
             <RadarIcon
               IconComponent={WarningCircleIcon}
               variant="warning"

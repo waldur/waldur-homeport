@@ -73,7 +73,7 @@ const ShowPreviewButton = () => {
       disabled={!securityGroups?.length}
     >
       <span className="svg-icon svg-icon-2">
-        <EyeIcon />
+        <EyeIcon weight="bold" />
       </span>
       {translate('Preview')}
     </Button>

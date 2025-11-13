@@ -102,7 +102,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     className="d-flex align-items-center text-center min-w-60px opacity-50"
                   >
                     {translate('Public')}
-                    <QuestionIcon size={18} className="ms-1" />
+                    <QuestionIcon size={18} className="ms-1" weight="bold" />
                   </Nav.Link>
                 </Tip>
               </Nav.Item>

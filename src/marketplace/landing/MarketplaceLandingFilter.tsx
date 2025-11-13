@@ -1,4 +1,5 @@
 import { CaretDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { useCallback, useEffect, useState } from 'react';
 import { Button, Card, OverlayTrigger, Popover, Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
@@ -130,12 +131,16 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
     >
       <Button
         variant="tertiary"
-        className={'d-flex text-nowrap' + (show ? ' active' : '')}
+        className={classNames('d-flex text-nowrap', show && 'active')}
         onClick={() => setShow((v) => !v)}
       >
-        <FunnelSimpleIcon size={20} className="svg-icon" />
+        <FunnelSimpleIcon size={20} className="svg-icon" weight="bold" />
         {translate('Organization')} & {translate('Project')}
-        <CaretDownIcon size={18} className="svg-icon rotate-180 ms-2 me-0" />
+        <CaretDownIcon
+          size={18}
+          className="svg-icon rotate-180 ms-2 me-0"
+          weight="bold"
+        />
       </Button>
     </OverlayTrigger>
   );

@@ -66,7 +66,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
               if (loadingGroups) {
                 return (
                   <span className="svg-icon svg-icon-4 animation-spin me-2">
-                    <ArrowsClockwiseIcon />
+                    <ArrowsClockwiseIcon weight="bold" />
                   </span>
                 );
               } else if (errorGroups) {
@@ -82,7 +82,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
                       onClick={() => refetch()}
                     >
                       <span className="svg-icon svg-icon-4 me-2">
-                        <ArrowsClockwiseIcon />
+                        <ArrowsClockwiseIcon weight="bold" />
                       </span>
                     </Button>
                   </>

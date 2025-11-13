@@ -37,7 +37,7 @@ export const ReviewCloseButton: FC<ReviewCloseButtonProps> = ({
     <RowActionButton
       action={callback}
       title={translate('Complete review')}
-      iconNode={<CheckIcon />}
+      iconNode={<CheckIcon weight="bold" />}
       size="sm"
     />
   );

@@ -69,12 +69,12 @@ export const PublicDashboardHero: FC<
                   {/* Actions */}
                   {props.actions && (
                     <div
-                      className={
-                        (props.mobileBottomActions
-                          ? 'd-none d-sm-flex '
-                          : 'd-flex ') +
-                        'flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3'
-                      }
+                      className={classNames(
+                        props.mobileBottomActions
+                          ? 'd-none d-sm-flex'
+                          : 'd-flex',
+                        'flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3',
+                      )}
                     >
                       {props.actions}
                     </div>

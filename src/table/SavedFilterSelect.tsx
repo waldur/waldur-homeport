@@ -1,4 +1,5 @@
 import { FunnelIcon, TrashIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -26,7 +27,10 @@ import './SavedFilterSelect.scss';
 
 const Control = (props) => (
   <div className="d-flex align-items-center gap-2">
-    <components.Control {...props} className={props.className + ' flex-grow-1'}>
+    <components.Control
+      {...props}
+      className={classNames('flex-grow-1', props.className)}
+    >
       <span className="svg-icon svg-icon-2 svg-icon-gray-700 ms-3">
         <FunnelIcon weight="bold" />
       </span>

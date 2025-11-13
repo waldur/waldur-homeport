@@ -42,9 +42,10 @@ export const OrderSubmitButton = (props: OrderSummaryProps) => {
       type="submit"
       className="w-100"
     >
+      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
       {props.isSubmitting && <LoadingSpinnerIcon className="me-1" />}
       <span className="svg-icon svg-icon-2">
-        <ShoppingCartIcon />
+        <ShoppingCartIcon weight="bold" />
       </span>
       {translate('Create')}
     </Button>

@@ -160,7 +160,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
               }}
               title={translate('Remove')}
             >
-              <TrashIcon />
+              <TrashIcon weight="bold" />
             </Button>
           </InputGroup>
           {validationErrors[`${index}-start`] && (
@@ -178,7 +178,7 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
 
       <div className="mb-3">
         <Button size="sm" onClick={addPool}>
-          <PlusCircleIcon /> {translate('Add allocation pool')}
+          <PlusCircleIcon weight="bold" /> {translate('Add allocation pool')}
         </Button>
       </div>
 

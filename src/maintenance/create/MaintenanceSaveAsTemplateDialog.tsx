@@ -312,6 +312,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
               children={
                 isLoadingOfferings ? (
                   <span className="svg-icon svg-icon-2">
+                    {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
                     <LoadingSpinnerIcon />
                   </span>
                 ) : null

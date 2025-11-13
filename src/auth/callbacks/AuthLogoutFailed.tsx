@@ -22,7 +22,7 @@ export const AuthLogoutFailed: FunctionComponent = () => {
           onClick={AuthService.localLogout}
         >
           <span className="svg-icon svg-icon-2">
-            <SignOutIcon />
+            <SignOutIcon weight="bold" />
           </span>{' '}
           {translate('Perform local logout')}
         </button>

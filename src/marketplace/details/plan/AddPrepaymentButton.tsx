@@ -108,7 +108,7 @@ export const AddPrepaymentButton = ({
       onClick={() => handleAddPrepayment(component)}
     >
       <span className="svg-icon svg-icon-2">
-        <CalendarPlusIcon />
+        <CalendarPlusIcon weight="bold" />
       </span>
       {translate('Add prepayment')}
     </Button>

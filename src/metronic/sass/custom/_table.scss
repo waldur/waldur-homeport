@@ -166,10 +166,6 @@
       }
     }
 
-    > td > * {
-      vertical-align: middle;
-    }
-
     &:hover > td.has-filter {
       div.td-data:not(.with-copy div.td-data) {
         width: calc(100% - 40px); /* 32px of filter button + 8px of gap */

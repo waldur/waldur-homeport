@@ -125,7 +125,11 @@ export const UsageCard = ({ resource }) => {
             }
           >
             <span className="svg-icon svg-icon-2">
-              {mode === 'chart' ? <TableIcon /> : <ChartBarIcon />}
+              {mode === 'chart' ? (
+                <TableIcon weight="bold" />
+              ) : (
+                <ChartBarIcon weight="bold" />
+              )}
             </span>
           </Button>
         </div>

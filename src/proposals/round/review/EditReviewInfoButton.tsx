@@ -25,7 +25,7 @@ export const EditReviewInfoButton = ({ round, call, refetch }) => {
     <ActionButton
       action={callback}
       title={translate('Edit')}
-      iconNode={<PencilSimpleIcon />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
     />
   );
 };

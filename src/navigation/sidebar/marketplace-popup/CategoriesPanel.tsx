@@ -80,7 +80,7 @@ function CustomToggle({ item, eventKey }) {
       active={activeEventKey === eventKey}
     >
       <span className="svg-icon svg-icon-3 text-gray-700 rotate-90">
-        <CaretRightIcon />
+        <CaretRightIcon weight="bold" />
       </span>
     </CategoryListItem>
   );
@@ -132,7 +132,7 @@ export const CategoriesPanel: FunctionComponent<{
         </h6>
         {loading && (
           <span className="animation-spin text-gray-700 lh-1">
-            <ArrowsClockwiseIcon size={16} />
+            <ArrowsClockwiseIcon size={16} weight="bold" />
           </span>
         )}
       </div>

@@ -20,7 +20,7 @@ export const ChangeStorageModeButton: FC<OfferingSectionProps> = (props) => {
 
   return (
     <ActionButton
-      iconNode={<PencilSimpleIcon />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       title={translate('Change storage mode')}
       action={() => {
         openDialog(ChangeStorageModeDialog, {

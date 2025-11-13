@@ -79,11 +79,11 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
                 </div>
                 <span className="text-dark ms-4 svg-icon svg-icon-2">
                   {costTrend === -1 ? (
-                    <ArrowDownIcon size={20} />
+                    <ArrowDownIcon size={20} weight="bold" />
                   ) : costTrend === 1 ? (
-                    <ArrowUpIcon size={20} />
+                    <ArrowUpIcon size={20} weight="bold" />
                   ) : (
-                    <MinusIcon size={20} />
+                    <MinusIcon size={20} weight="bold" />
                   )}
                 </span>
               </div>

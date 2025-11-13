@@ -13,12 +13,12 @@ export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
       {
         key: 'email',
         label: translate('Email'),
-        iconClass: <EnvelopeSimpleIcon />,
+        iconClass: <EnvelopeSimpleIcon weight="bold" />,
       },
       {
         key: 'webhook',
         label: translate('Webhook'),
-        iconClass: <LinkSimpleIcon />,
+        iconClass: <LinkSimpleIcon weight="bold" />,
       },
     ],
 

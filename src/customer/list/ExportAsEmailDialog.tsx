@@ -137,7 +137,7 @@ const renderEmails = ({ fields }: any) => (
             onClick={() => fields.remove(index)}
           >
             <span className="svg-icon svg-icon-2">
-              <TrashIcon />
+              <TrashIcon weight="bold" />
             </span>
           </button>
         </Col>

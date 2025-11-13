@@ -44,7 +44,7 @@ export const RecentSearchItem = ({ item }) => {
         />
       )}
       <span className="fs-6 fw-semibold flex-grow-1">{item.title}</span>
-      <ArrowClockwiseIcon size={20} className="text-dark" />
+      <ArrowClockwiseIcon size={20} className="text-dark" weight="bold" />
     </Link>
   );
 };

@@ -13,7 +13,7 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
     <>
       {resource.restrict_member_access && (
         <Badge
-          leftIcon={<XCircleIcon />}
+          leftIcon={<XCircleIcon weight="bold" />}
           variant="danger"
           outline
           pill
@@ -24,7 +24,7 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
       )}
       {resource.paused && (
         <Badge
-          leftIcon={<PauseCircleIcon />}
+          leftIcon={<PauseCircleIcon weight="bold" />}
           variant="danger"
           outline
           pill
@@ -35,7 +35,7 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
       )}
       {resource.downscaled && (
         <Badge
-          leftIcon={<ArrowsInSimpleIcon />}
+          leftIcon={<ArrowsInSimpleIcon weight="bold" />}
           variant="danger"
           outline
           pill

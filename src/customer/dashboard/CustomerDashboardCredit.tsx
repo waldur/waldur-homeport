@@ -83,7 +83,7 @@ export const CustomerDashboardCredit = ({
         actions={[
           {
             label: translate('Details'),
-            icon: <EyeIcon />,
+            icon: <EyeIcon weight="bold" />,
             callback: viewDetails,
           },
         ]}

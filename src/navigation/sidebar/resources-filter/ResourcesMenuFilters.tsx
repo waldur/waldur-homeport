@@ -45,13 +45,11 @@ export const ResourcesMenuFilters = () => {
               className="filter-item justify-content-between"
             >
               <label className="fw-bold">{filterItem.label}</label>
-              <span className="badge badge-lg has-right-icon ellipsis">
+              <span className="badge ellipsis">
                 <span className="ellipsis overflow-hidden">
                   {filterItem.value?.abbreviation || filterItem.value?.name}
                 </span>
-                <span className="right-icon">
-                  <RemoveFilterBadgeButton onClick={clearFilters} />
-                </span>
+                <RemoveFilterBadgeButton size={12} onClick={clearFilters} />
               </span>
             </Stack>
           </Tip>

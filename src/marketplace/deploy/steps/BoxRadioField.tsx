@@ -2,6 +2,8 @@ import { CaretDownIcon, CheckIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { isEqual } from 'lodash-es';
 import React, { ReactNode, useCallback, useEffect, useState } from 'react';
+import { FormCheck } from 'react-bootstrap';
+import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Select } from '@waldur/form/themed-select';
@@ -82,12 +84,11 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
   if (vertical) {
     return (
       <div
-        className={
-          'form-check-boxes-wrapper vertical' +
-          (leftRadio ? ' left-radio' : '') +
-          (alignTop ? ' align-top' : '') +
-          (hoverable ? ' hoverable' : '')
-        }
+        className={classNames('form-check-boxes-wrapper vertical', {
+          'left-radio': leftRadio,
+          'align-top': alignTop,
+          hoverable,
+        })}
       >
         {choices.map((choice, index) => {
           const isChecked = [choice.value]
@@ -100,11 +101,10 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
           return (
             <div
               key={index}
-              className={
-                'form-check-box' +
-                (isChecked ? ' active' : '') +
-                (hasOptions ? ' flex-wrap' : '')
-              }
+              className={classNames('form-check-box', {
+                'flex-wrap': hasOptions,
+                active: isChecked,
+              })}
               onClick={() => onChange(selectedVersions[index].value)}
               role="radio"
               aria-checked={isChecked}
@@ -126,7 +126,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                       </ImagePlaceholder>
                     ) : (
                       <span className="display-6">
-                        <CheckIcon />
+                        <CheckIcon weight="bold" />
                       </span>
                     )}
                   </div>
@@ -164,13 +164,20 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   />
                 )}
                 <div className="form-check form-check-custom form-check-sm d-block">
-                  <input
-                    className="form-check-input flex-shrink-0"
+                  <FormCheck
+                    className="flex-shrink-0"
                     type="radio"
                     checked={isChecked}
                     onChange={() => onChange(selectedVersions[index].value)}
                     {...rest}
                   />
+                  {/* <input
+                    className="form-check-input flex-shrink-0"
+                    type="radio"
+                    checked={isChecked}
+                    onChange={() => onChange(selectedVersions[index].value)}
+                    {...rest}
+                  /> */}
                 </div>
               </div>
             </div>
@@ -182,7 +189,9 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
 
   return (
     <div
-      className={'form-check-boxes-wrapper' + (hoverable ? ' hoverable' : '')}
+      className={classNames('form-check-boxes-wrapper', {
+        hoverable: hoverable,
+      })}
     >
       {choices.map((choice, index) => {
         const isChecked = [choice.value]
@@ -195,7 +204,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
         return (
           <div
             key={index}
-            className={'form-check-box' + (isChecked ? ' active' : '')}
+            className={classNames('form-check-box', { active: isChecked })}
           >
             <label className="form-check-header">
               <div className="form-check-wrapper">
@@ -205,12 +214,19 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                   choice.label.toUpperCase().substring(0, 4)
                 ) : (
                   <span className="display-6">
-                    <CheckIcon />
+                    <CheckIcon weight="bold" />
                   </span>
                 )}
               </div>
-              <input
+              {/* <input
                 className="form-check-input"
+                type="radio"
+                checked={isChecked}
+                hidden
+                onChange={() => onChange(selectedVersions[index].value)}
+                {...rest}
+              /> */}
+              <FormCheckInput
                 type="radio"
                 checked={isChecked}
                 hidden
@@ -240,7 +256,7 @@ export const BoxRadioField: React.FC<BoxRadioFieldProps> = ({
                       </div>
                     </div>
                     <span className="fs-1 fw-light">
-                      <CaretDownIcon />
+                      <CaretDownIcon weight="bold" />
                     </span>
                   </div>
 

@@ -84,7 +84,7 @@ export const UserDashboard: FC = () => {
                   <div
                     className={`symbol-label ${!isLoadingInvitations && hasActiveInvitations ? 'bg-success' : 'bg-gray-300'}`}
                   >
-                    <SignInIcon size={32} color="white" />
+                    <SignInIcon size={32} color="white" weight="bold" />
                   </div>
                 </div>
                 <div>

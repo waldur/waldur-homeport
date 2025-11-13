@@ -79,7 +79,7 @@ const NotificationTabs = ({
               size="sm"
             >
               <span className="svg-icon svg-icon-2">
-                <ArrowCounterClockwiseIcon />
+                <ArrowCounterClockwiseIcon weight="bold" />
               </span>{' '}
               {translate('Reset to default')}
             </Button>

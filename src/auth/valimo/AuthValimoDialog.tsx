@@ -103,7 +103,7 @@ export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
             <CloseDialogButton />
             <SubmitButton invalid={invalid} submitting={submitting}>
               <span className="svg-icon svg-icon-2">
-                <SignInIcon />
+                <SignInIcon weight="bold" />
               </span>{' '}
               {translate('Sign in')}
             </SubmitButton>

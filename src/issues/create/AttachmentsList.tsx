@@ -9,7 +9,7 @@ export const AttachmentsList: FunctionComponent<{ attachments }> = ({
       <li key={index}>
         <a href={attachment.file} target="_blank" rel="noopener noreferrer">
           <span className="svg-icon svg-icon-2">
-            <CloudArrowDownIcon />
+            <CloudArrowDownIcon weight="bold" />
           </span>{' '}
           {attachment.name}
         </a>

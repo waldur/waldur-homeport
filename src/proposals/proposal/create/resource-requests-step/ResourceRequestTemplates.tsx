@@ -62,7 +62,7 @@ const TableTitle = ({ title }) => (
   <>
     {title}
     <Badge
-      leftIcon={<CubeIcon weight="bold" />}
+      leftIcon={<CubeIcon weight="bold" size={12} />}
       rightIcon={
         <Tip
           label={translate(
@@ -80,7 +80,7 @@ const TableTitle = ({ title }) => (
       size="lg"
       pill
       outline
-      className="ms-3"
+      className="align-middle pe-8 ps-7 ms-3"
     >
       {translate('Template based')}
     </Badge>
@@ -147,6 +147,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
         >
           <span className="svg-icon svg-icon-2">
             {isPending ? (
+              // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
               <LoadingSpinnerIcon />
             ) : (
               <CheckCircleIcon weight="bold" />

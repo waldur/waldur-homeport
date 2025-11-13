@@ -26,7 +26,7 @@ const SupportSubMenuItem = ({ title, onCopy }) =>
       <span className="menu-title">{title}</span>
       <span className="menu-badge">
         <button className="btn btn-active-icon-primary btn-flush ms-2">
-          <CopyIcon />
+          <CopyIcon weight="bold" />
         </button>
       </span>
     </span>

@@ -86,7 +86,7 @@ export const CostPoliciesListTable: FC<CostPoliciesListTableProps> = ({
                   "Shows whether this policy's action has been executed (for example, pausing or downscaling) after exceeding the limit.",
                 )}
               >
-                <QuestionIcon size={18} />
+                <QuestionIcon size={18} weight="bold" />
               </Tip>
             </>
           ),

@@ -9,6 +9,6 @@ export const BooleanField: FunctionComponent<BooleanFieldProps> = ({
   value,
 }) => (
   <span className="svg-icon svg-icon-5">
-    {value ? <CheckIcon /> : <MinusIcon />}
+    {value ? <CheckIcon weight="bold" /> : <MinusIcon weight="bold" />}
   </span>
 );

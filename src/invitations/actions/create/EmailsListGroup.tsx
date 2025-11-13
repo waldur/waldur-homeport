@@ -80,7 +80,7 @@ export const EmailsListGroup = ({
                         id="idTooltip"
                       >
                         {' '}
-                        <QuestionIcon />
+                        <QuestionIcon weight="bold" />
                       </Tip>
                     </td>
                   )}

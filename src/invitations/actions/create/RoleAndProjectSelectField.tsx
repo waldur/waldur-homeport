@@ -221,7 +221,7 @@ const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
         />
 
         <span className="svg-icon svg-icon-1 rotate-180 position-absolute mx-4 end-0 h-100 d-flex align-items-center">
-          <CaretDownIcon />
+          <CaretDownIcon weight="bold" />
         </span>
       </FormGroup>
       <RoleAndProjectSelectPopup

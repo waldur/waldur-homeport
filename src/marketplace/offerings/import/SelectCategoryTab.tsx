@@ -68,6 +68,7 @@ const FieldsListMapping = ({
                     <QuestionIcon
                       size={20}
                       className="text-gray-500 cursor-pointer text-hover-muted ms-2"
+                      weight="bold"
                     />
                   </Tip>
                 </td>

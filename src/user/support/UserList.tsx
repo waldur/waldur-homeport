@@ -71,7 +71,7 @@ const OrganizationRolesField = ({ row }: { row: User }) => {
           label={formatRole(permission.role_name)}
           id="customer-role"
         >
-          {permission.scope_name} <QuestionIcon />
+          {permission.scope_name} <QuestionIcon weight="bold" />
         </Tip>
         <br />
       </span>
@@ -96,7 +96,7 @@ const ProjectRolesField = ({ row }: { row: User }) => {
           })}
           id="project-role"
         >
-          {permission.scope_name} <QuestionIcon />
+          {permission.scope_name} <QuestionIcon weight="bold" />
         </Tip>
         <br />
       </span>

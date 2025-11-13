@@ -167,20 +167,20 @@ export const userHasProjectPermission = (permission) => (state) => {
 };
 
 export const projectKindOptions = (): Partial<
-  Record<KindEnum, { value: KindEnum; label; color; component }>
+  Record<KindEnum, { value: KindEnum; label; color; icon }>
 > => {
   const baseOptions = {
     default: {
       value: 'default' as KindEnum,
       label: translate('Regular'),
       color: 'default',
-      component: null,
+      icon: null,
     },
     course: {
       value: 'course' as KindEnum,
       label: translate('Course'),
       color: 'warning',
-      component: GraduationCapIcon,
+      icon: GraduationCapIcon,
     },
   };
 
@@ -191,7 +191,7 @@ export const projectKindOptions = (): Partial<
         value: 'public' as KindEnum,
         label: translate('Public'),
         color: 'blue',
-        component: GlobeSimpleIcon,
+        icon: GlobeSimpleIcon,
       },
     };
   }

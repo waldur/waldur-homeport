@@ -26,12 +26,12 @@ const parseHealthStatus = (status: string) => {
 
 const getStatusIcon = (isWorking: boolean, hasError: boolean) => {
   if (isWorking) {
-    return <CheckCircleIcon size={24} className="text-success" />;
+    return <CheckCircleIcon size={24} className="text-success" weight="bold" />;
   }
   return hasError ? (
-    <XCircleIcon size={24} className="text-danger" />
+    <XCircleIcon size={24} className="text-danger" weight="bold" />
   ) : (
-    <WarningCircleIcon size={24} className="text-warning" />
+    <WarningCircleIcon size={24} className="text-warning" weight="bold" />
   );
 };
 
@@ -107,9 +107,17 @@ export const HealthChecks = ({ healthInfoItems }: HealthChecksProps) => {
           <h3 className="mb-0">{translate('Health checks')}</h3>
           <div className="d-flex align-items-center">
             {allWorking ? (
-              <CheckCircleIcon size={20} className="text-success me-2" />
+              <CheckCircleIcon
+                size={20}
+                className="text-success me-2"
+                weight="bold"
+              />
             ) : (
-              <XCircleIcon size={20} className="text-danger me-2" />
+              <XCircleIcon
+                size={20}
+                className="text-danger me-2"
+                weight="bold"
+              />
             )}
             <span
               className={`fw-semibold ${allWorking ? 'text-success' : 'text-danger'}`}

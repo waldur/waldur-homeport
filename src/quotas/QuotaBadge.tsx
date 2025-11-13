@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useMemo } from 'react';
 
 import { Badge } from '@waldur/core/Badge';
@@ -20,7 +21,7 @@ export const QuotaBadge = ({
     <Badge
       variant="default"
       outline
-      className={'fw-normal ' + (className ?? '')}
+      className={classNames('fw-normal', className)}
     >
       {Boolean(image) && (
         <img src={image} alt="quota" width={15} className="me-2" />

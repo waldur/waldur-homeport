@@ -70,6 +70,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
           ellipsis && 'ellipsis',
         )}
       >
+        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
         <RadarIcon IconComponent={icon} variant={variant} size="sm" />
 
         <p

@@ -60,7 +60,7 @@ export const Field: FunctionComponent<FieldProps> = ({
         {props.tooltip && (
           <Tip label={props.tooltip} id="fieldHelpText">
             {' '}
-            <QuestionIcon size={17} />
+            <QuestionIcon size={17} weight="bold" />
           </Tip>
         )}
         {props.hasCopy && (

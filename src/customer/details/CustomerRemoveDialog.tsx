@@ -59,7 +59,7 @@ export const CustomerRemoveDialog = reduxForm<
         }
       >
         <div className="d-flex flex-center w-40px h-40px bg-light-danger rounded-circle mb-6">
-          <WarningCircleIcon size={22} className="text-danger" />
+          <WarningCircleIcon size={22} className="text-danger" weight="bold" />
         </div>
         <h3 className="fw-bold">{translate('Organization removal')}</h3>
         <p className="text-muted mb-8">

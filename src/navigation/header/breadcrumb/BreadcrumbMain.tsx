@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useContext } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
@@ -15,10 +16,10 @@ export const BreadcrumbMain = ({ mobile = false }: { mobile?: boolean }) => {
   if (mobile === isMd) {
     return (
       <div
-        className={
-          'breadcrumb-container d-flex align-items-center flex-grow-1' +
-          (mobile ? ' breadcrumb-mobile container' : '')
-        }
+        className={classNames(
+          'breadcrumb-container d-flex align-items-center flex-grow-1',
+          mobile && 'breadcrumb-mobile container',
+        )}
       >
         <Breadcrumbs />
       </div>

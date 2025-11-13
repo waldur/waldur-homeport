@@ -66,7 +66,7 @@ export const EndDateField = ({ resource }) => {
             />
           ) : resourceTerminationDate && projectEndDate ? (
             <Tip id="end-date-tooltip" label={tooltipContent}>
-              <QuestionIcon size={15} />
+              <QuestionIcon size={15} weight="bold" />
             </Tip>
           ) : null}
         </span>

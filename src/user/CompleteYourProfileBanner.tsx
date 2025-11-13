@@ -7,6 +7,7 @@ export const CompleteYourProfileBanner = () => (
   <div className="h-60px bg-body border-bottom">
     <div className="container-fluid d-flex align-items-center h-100">
       <div className="d-flex align-items-center">
+        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
         <RadarIcon
           IconComponent={WarningCircleIcon}
           variant="warning"

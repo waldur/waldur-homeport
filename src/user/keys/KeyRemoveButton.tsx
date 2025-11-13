@@ -39,7 +39,7 @@ export const KeyRemoveButton = ({ row, refetch }) => {
       title={translate('Remove')}
       action={action}
       disabled={pending}
-      iconNode={<TrashIcon />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
     />

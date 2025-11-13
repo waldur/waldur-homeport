@@ -1,6 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FC } from 'react';
+import { FormCheck } from 'react-bootstrap';
 
 import { Tip } from './Tooltip';
 
@@ -23,14 +24,14 @@ export const AwesomeCheckbox: FC<AwesomeCheckboxProps> = (props) => {
         props.className,
       )}
     >
-      <input
-        className="form-check-input"
+      <FormCheck
         type="checkbox"
-        disabled={props.disabled}
         checked={props.value}
+        disabled={props.disabled}
         onChange={(e: React.ChangeEvent<any>) =>
           props.onChange && props.onChange(e.target.checked)
         }
+        data-testid={props['data-testid']}
       />
 
       {(props.label || props.tooltip) && (
@@ -38,7 +39,7 @@ export const AwesomeCheckbox: FC<AwesomeCheckboxProps> = (props) => {
           {props.tooltip && (
             <>
               <Tip label={props.tooltip} id="tooltip">
-                <QuestionIcon />
+                <QuestionIcon weight="bold" />
               </Tip>{' '}
             </>
           )}

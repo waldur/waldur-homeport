@@ -43,7 +43,7 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
                           onClick={() => removeRow(i)}
                         >
                           <span className="svg-icon svg-icon-2">
-                            <TrashIcon />
+                            <TrashIcon weight="bold" />
                           </span>
                         </Button>
                       </td>

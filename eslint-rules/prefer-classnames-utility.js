@@ -3,10 +3,6 @@
  * Detects manual className string concatenation and suggests using classNames()
  */
 
-function isStringConcatenation(node) {
-  return node.type === 'BinaryExpression' && node.operator === '+';
-}
-
 function hasStringConcatenationInExpression(node) {
   if (node.type === 'BinaryExpression' && node.operator === '+') {
     return true;
@@ -106,23 +102,18 @@ export default {
 
               // Simple auto-fix for basic patterns
               const sourceCode = context.getSourceCode();
-              const expressionText = sourceCode.getText(expression);
 
               // Try to convert simple concatenation patterns
               if (
                 expression.type === 'BinaryExpression' &&
                 expression.operator === '+'
               ) {
-                const left = sourceCode.getText(expression.left);
-                const right = sourceCode.getText(expression.right);
-
                 // Pattern: 'base' + (condition ? ' extra' : '')
                 if (
                   expression.left.type === 'Literal' &&
                   expression.right.type === 'ConditionalExpression'
                 ) {
                   const baseClass = expression.left.value;
-                  const conditionalText = sourceCode.getText(expression.right);
 
                   // Simple conditional pattern
                   if (
@@ -160,10 +151,12 @@ export default {
           });
         }
 
-        // Also check for ternary expressions that could use classNames
+        // Check for ternary expressions that involve concatenation and could use classNames
+        // Skip simple ternary expressions with literal strings (they're fine as-is)
         if (
           expression.type === 'ConditionalExpression' &&
-          containsClassRelatedStrings(expression)
+          containsClassRelatedStrings(expression) &&
+          hasStringConcatenationInExpression(expression)
         ) {
           context.report({
             node: value,

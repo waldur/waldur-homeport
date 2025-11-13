@@ -35,7 +35,10 @@ export const ConnectionStatusIndicator = ({ status }) => {
               time: formatDateTime(status[i].last_request_timestamp),
             })}
           >
-            <CircleIcon className={getStatusClassName(status[i])} />
+            <CircleIcon
+              className={getStatusClassName(status[i])}
+              weight="bold"
+            />
           </Tip>
         ))}
       </Col>

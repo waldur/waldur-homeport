@@ -86,7 +86,7 @@ export const BroadcastSaveAsTemplateDialog = reduxForm<
               variant="secondary"
             >
               <span className="svg-icon svg-icon-2">
-                <ArrowLeftIcon />
+                <ArrowLeftIcon weight="bold" />
               </span>{' '}
               {translate('Back')}
             </Button>

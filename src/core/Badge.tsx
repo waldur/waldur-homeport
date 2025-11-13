@@ -23,7 +23,7 @@ interface OwnProps extends BadgeProps {
 
 const wrapTooltip = (label, children, props = {}) =>
   label ? (
-    <Tip label={label} id="state-indicator" {...props}>
+    <Tip label={label} id="tip-badge" {...props}>
       {children}
     </Tip>
   ) : (

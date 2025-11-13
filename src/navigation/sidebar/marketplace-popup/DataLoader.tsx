@@ -1,4 +1,5 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { CategoryGroup } from 'waldur-js-client';
 
@@ -121,10 +122,10 @@ export const DataLoader = ({
 
   return (
     <div
-      className={
-        'd-flex flex-column flex-lg-row h-100' +
-        (selectedCategory ? ' category-selected' : '')
-      }
+      className={classNames(
+        'd-flex flex-column flex-lg-row h-100',
+        selectedCategory && 'category-selected',
+      )}
     >
       {loadingCategories || loadingGroups ? (
         <div className="message-wrapper p-4">

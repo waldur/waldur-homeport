@@ -29,7 +29,7 @@ const VolumeTypeRow = ({ volumeType, onRemove, options }) => (
     <td>
       <Button variant="text-secondary" onClick={onRemove} size="sm">
         <span className="svg-icon svg-icon-2">
-          <TrashIcon />
+          <TrashIcon weight="bold" />
         </span>{' '}
         {translate('Remove')}
       </Button>

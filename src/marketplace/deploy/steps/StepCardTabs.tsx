@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React from 'react';
 import { Button } from 'react-bootstrap';
 
@@ -25,10 +26,10 @@ export const StepCardTabs: React.FC<StepCardTabsProps<TabSpec<any>>> = ({
           key={tabItem.key}
           variant="link"
           size="sm"
-          className={
-            'btn-color-dark btn-active-color-primary mx-3' +
-            (tab.key === tabItem.key ? ' active text-decoration-underline' : '')
-          }
+          className={classNames(
+            'btn-color-dark btn-active-color-primary mx-3',
+            tab.key === tabItem.key && 'active text-decoration-underline',
+          )}
           onClick={() => setTab(tabItem)}
         >
           {tabItem.title}

@@ -39,6 +39,7 @@ export const RemovedProjectWarningBar: FC = () => {
       <div className="container-fluid">
         <div className="d-flex justify-content-between align-items-center py-3">
           <div className="d-flex align-items-center">
+            {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
             <RadarIcon IconComponent={TrashIcon} variant="danger" size="sm" />
             <span className="ms-2 text-danger">
               <strong>{translate('Project Removed')}:</strong>{' '}

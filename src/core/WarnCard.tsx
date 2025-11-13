@@ -1,4 +1,5 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
@@ -15,10 +16,9 @@ export const WarnCard: FC<WarnCardProps> = ({
   description,
   className,
 }) => (
-  <Card
-    className={'card-bordered rounded-3' + (className ? ' ' + className : '')}
-  >
+  <Card className={classNames('card-bordered rounded-3', className)}>
     <Card.Body className="d-flex px-2">
+      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
       <RadarIcon
         IconComponent={WarningCircleIcon}
         variant="warning"

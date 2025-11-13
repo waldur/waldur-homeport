@@ -120,7 +120,7 @@ export const ShowReviewCommentsAction = (props) => {
   return (
     <ActionItem
       action={handleShowComments}
-      iconNode={<EyeIcon />}
+      iconNode={<EyeIcon weight="bold" />}
       title={translate('Show reviewer comments')}
       disabled={!showActionItem}
       tooltip={!showActionItem && translate('No comments available')}

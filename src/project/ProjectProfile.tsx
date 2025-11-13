@@ -31,7 +31,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
         {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
           project.is_industry && (
             <span className="svg-icon svg-icon-3 me-3">
-              <FactoryIcon />
+              <FactoryIcon weight="bold" />
             </span>
           )}
         {project.name}
