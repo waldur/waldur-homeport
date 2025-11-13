@@ -15,7 +15,7 @@ import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { NumberField, SelectField } from '@waldur/form';
+import { FileUploadField, NumberField, SelectField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { DateField } from '@waldur/form/DateField';
@@ -47,6 +47,7 @@ const questionComponent: Record<
   date: DateField,
   single_select: SelectField,
   multi_select: SelectField,
+  multiple_files: FileUploadField,
 };
 
 const FieldsListGroup = ({

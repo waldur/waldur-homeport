@@ -1,5 +1,6 @@
 import { UIView } from '@uirouter/react';
 
+import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { userHasCustomerPermission } from '@waldur/customer/utils';
@@ -351,6 +352,19 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'managed-projects',
+    abstract: true,
+    parent: 'marketplace-provider',
+    component: UIView,
+    url: '',
+    data: {
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL.ENABLED],
+      breadcrumb: () => translate('Managed projects'),
+      priority: 150,
+    },
+  },
+
+  {
     name: 'marketplace-vendor-offerings',
     url: 'offerings/?{state}',
     component: lazyComponent(() =>
@@ -580,6 +594,36 @@ export const states: StateDeclaration[] = [
     data: {
       feature: MarketplaceFeatures.show_call_management_functionality,
       breadcrumb: () => translate('Requests for offerings'),
+    },
+  },
+
+  {
+    name: 'marketplace-provider-managed-projects',
+    url: 'managed-projects/',
+    component: lazyComponent(() =>
+      import('@waldur/openportal/managed-projects/ManagedProjectsList').then(
+        (module) => ({ default: module.ManagedProjectsList }),
+      ),
+    ),
+    parent: 'managed-projects',
+    data: {
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL.ENABLED],
+      breadcrumb: () => translate('Externally managed projects'),
+    },
+  },
+
+  {
+    name: 'marketplace-provider-project-templates',
+    url: 'project-templates/',
+    component: lazyComponent(() =>
+      import('@waldur/openportal/project-templates/ProjectTemplateList').then(
+        (module) => ({ default: module.ProjectTemplateList }),
+      ),
+    ),
+    parent: 'managed-projects',
+    data: {
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL.ENABLED],
+      breadcrumb: () => translate('Available managed project templates'),
     },
   },
 

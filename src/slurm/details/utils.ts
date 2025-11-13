@@ -8,7 +8,7 @@ import {
 
 import { getAllPages } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
-import { getChartSpec, palette } from '@waldur/slurm/details/constants';
+import { palette } from '@waldur/slurm/details/constants';
 
 import { Period, Usage } from './types';
 
@@ -243,7 +243,20 @@ export const loadCharts = async (
       query: { page, allocation: allocationUrl },
     }),
   );
-  return getChartSpec().map((chart) => ({
+  return [
+    {
+      name: translate('CPU usage'),
+      field: 'cpu_usage',
+    },
+    {
+      name: translate('GPU usage'),
+      field: 'gpu_usage',
+    },
+    {
+      name: translate('RAM usage'),
+      field: 'ram_usage',
+    },
+  ].map((chart) => ({
     ...chart,
     options: getEChartOptions(chart, usages, userUsages),
   }));

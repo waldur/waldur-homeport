@@ -25,6 +25,7 @@ const questionComponent: Record<QuestionTypeEnum, ComponentType> = {
   date: DateField,
   single_select: SelectField,
   multi_select: SelectField,
+  multiple_files: FileUploadField,
   file: FileUploadField,
 };
 

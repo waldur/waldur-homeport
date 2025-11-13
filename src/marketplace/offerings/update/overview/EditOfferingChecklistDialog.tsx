@@ -6,7 +6,6 @@ import {
   checklistsAdminList,
   marketplaceProviderOfferingsUpdateComplianceChecklist,
 } from 'waldur-js-client';
-import { client as _heyApiClient } from 'waldur-js-client/client.gen';
 
 import { getAllPages } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';

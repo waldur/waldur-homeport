@@ -108,6 +108,10 @@ interface SupportConfiguration {
   ACTIVE_BACKEND_TYPE: 'atlassian' | 'zammad' | 'smax';
 }
 
+interface OpenPortalConfiguration {
+  ENABLED: boolean;
+}
+
 export interface PluginConfiguration {
   WALDUR_SUPPORT: Partial<SupportConfiguration>;
   WALDUR_AUTH_SAML2: Partial<SAML2AuthConfiguration>;
@@ -115,6 +119,7 @@ export interface PluginConfiguration {
   WALDUR_AUTH_VALIMO: Partial<ValimoAuthConfiguration>;
   WALDUR_CORE: CoreConfiguration;
   WALDUR_OPENSTACK: Partial<OpenStackConfiguration>;
+  WALDUR_OPENPORTAL: Partial<OpenPortalConfiguration>;
   WALDUR_MARKETPLACE_OPENSTACK: Partial<MarketplaceOpenStackTenantConfiguration>;
   WALDUR_RANCHER: RancherConfiguration;
   WALDUR_VMWARE: Partial<VMWareConfiguration>;

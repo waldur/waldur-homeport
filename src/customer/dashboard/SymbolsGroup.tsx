@@ -41,7 +41,7 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
   <div
     className="symbol-group symbol-hover"
     onClick={onClick}
-    onKeyPress={(e) => e.key === 'Enter' && onClick()}
+    onKeyDown={(e) => e.key === 'Enter' && onClick()}
     role="button"
     tabIndex={0}
   >
