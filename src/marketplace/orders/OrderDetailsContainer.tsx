@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import {
+  marketplaceOrdersOfferingRetrieve,
   marketplaceOrdersRetrieve,
   marketplacePluginsList,
-  marketplacePublicOfferingsRetrieve,
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -18,8 +18,8 @@ async function loadOrder(order_uuid: string) {
     path: { uuid: order_uuid },
   }).then((response) => response.data);
 
-  const offering = (await marketplacePublicOfferingsRetrieve({
-    path: { uuid: order.offering_uuid },
+  const offering = (await marketplaceOrdersOfferingRetrieve({
+    path: { uuid: order.uuid },
   }).then((response) => response.data)) as Offering;
 
   const plugins = await marketplacePluginsList().then(
