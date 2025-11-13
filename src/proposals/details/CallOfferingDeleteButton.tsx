@@ -50,7 +50,7 @@ export const CallOfferingDeleteButton = ({
       title={translate('Remove')}
       className="text-danger"
       action={openDialog}
-      iconNode={<TrashIcon />}
+      iconNode={<TrashIcon weight="bold" />}
       iconColor="danger"
       size="sm"
     />

@@ -9,8 +9,12 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+import enforceBadgeIconPatterns from './eslint-rules/enforce-badge-icon-patterns.js';
 import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
+import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
+import enforcePhosphorIconWeight from './eslint-rules/enforce-phosphor-icon-weight.js';
 import noTemplateInTranslate from './eslint-rules/no-template-in-translate.js';
+import preferClassnamesUtility from './eslint-rules/prefer-classnames-utility.js';
 
 const browserGlobals = {
   ...globals.browser,
@@ -36,7 +40,11 @@ export default tseslint
         'waldur-custom': {
           rules: {
             ...noTemplateInTranslate.rules,
+            'enforce-badge-icon-patterns': enforceBadgeIconPatterns,
             'enforce-button-variants': enforceButtonVariants,
+            'enforce-formcheck-components': enforceFormcheckComponents,
+            'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
+            'prefer-classnames-utility': preferClassnamesUtility,
           },
         },
       },
@@ -65,7 +73,11 @@ export default tseslint
 
         // Custom local rules
         'waldur-custom/no-template-in-translate': 'error',
+        'waldur-custom/enforce-badge-icon-patterns': 'error',
         'waldur-custom/enforce-button-variants': 'error',
+        'waldur-custom/enforce-formcheck-components': 'error',
+        'waldur-custom/enforce-phosphor-icon-weight': 'error',
+        'waldur-custom/prefer-classnames-utility': 'error',
 
         // React Hooks rules
         'react-hooks/rules-of-hooks': 'off',

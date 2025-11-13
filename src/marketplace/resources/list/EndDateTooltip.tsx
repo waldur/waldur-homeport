@@ -17,7 +17,7 @@ export const EndDateTooltip = ({ end_date }) => {
           date: formatDate(end_date),
         })}
       >
-        <ClockIcon />
+        <ClockIcon weight="bold" />
       </Tip>
     </>
   );

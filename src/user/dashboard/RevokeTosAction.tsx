@@ -21,7 +21,7 @@ export const RevokeTosAction = ({ tos, offering, refetch, offeringUuid }) => {
 
   return (
     <Dropdown.Item onClick={handleClick} className="text-danger">
-      <XIcon size={16} className="me-2" />
+      <XIcon size={16} className="me-2" weight="bold" />
       {translate('Revoke')}
     </Dropdown.Item>
   );

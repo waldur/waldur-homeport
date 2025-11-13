@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { capitalize, words } from 'lodash-es';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
@@ -34,7 +35,7 @@ export const FieldErrorMessage: FunctionComponent<FieldErrorProps> = ({
   center,
 }) => {
   return (
-    <span className={isOneLine(error) || center ? undefined : 'text-start'}>
+    <span className={classNames((isOneLine(error) || center) && 'text-start')}>
       {error
         ? Array.isArray(error)
           ? error.map((e, i) => <div key={i}>{e}</div>)

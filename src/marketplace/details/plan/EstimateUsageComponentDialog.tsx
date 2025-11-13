@@ -45,7 +45,7 @@ export const EstimateUsageComponentDialog: FC<OwnProps> = (props) => {
                 className="mx-1"
               >
                 {' '}
-                <QuestionIcon />
+                <QuestionIcon weight="bold" />
               </Tip>
               <span className="fw-normal fst-italic">
                 (

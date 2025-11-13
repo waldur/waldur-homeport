@@ -41,7 +41,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
           <Form.Label className="me-auto">
             {props.help && !props.helpEnd && (
               <Tip id="form-field-tooltip" label={props.help}>
-                <QuestionIcon />{' '}
+                <QuestionIcon weight="bold" />{' '}
               </Tip>
             )}
             {props.label}
@@ -61,7 +61,9 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
       </div>
     )}
     <div>{props.children}</div>
-    {props.description && <Form.Text>{props.description}</Form.Text>}
+    {props.description && (
+      <Form.Text className="text-muted">{props.description}</Form.Text>
+    )}
     {props.meta?.touched && props.meta?.error && (
       <FieldError error={props.meta.error} />
     )}

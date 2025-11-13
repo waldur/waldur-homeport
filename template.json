@@ -11650,9 +11650,8 @@
           "administration/notifications/NotificationUpdateDialog.tsx",
           "administration/providers/UpdateProviderDialog.tsx",
           "administration/remote-offering-sync/RemoteSyncFormDialog.tsx",
-          "administration/roles/RoleCreateDialog.tsx",
           "administration/roles/RoleDescriptionEditDialog.tsx",
-          "administration/roles/RoleEditDialog.tsx",
+          "administration/roles/RoleFormDialog.tsx",
           "administration/settings/CountrySelector.tsx",
           "broadcasts/BroadcastSaveAsTemplateDialog.tsx",
           "broadcasts/BroadcastTemplateCreateDialog.tsx",
@@ -11723,7 +11722,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 55
+      "usage_count": 54
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -12917,16 +12916,17 @@
       "primary_ui_type": "title",
       "ui_types": [
         "unknown",
-        "generic_element",
         "title",
+        "generic_element",
         "label",
         "property_value"
       ],
       "components": [
         "TableFilterItem",
-        "AsyncSelectField",
-        "FormContainer",
+        "FormGroup",
         "Table",
+        "FormContainer",
+        "AsyncSelectField",
         "ModalDialog",
         "ExpandableEventField",
         "ExpandableContainer",
@@ -12936,7 +12936,6 @@
         "Tab",
         "Tabs",
         "VStepperFormStepCard",
-        "FormGroup",
         "AsyncPaginate",
         "Button",
         "OverlayTrigger",
@@ -13087,16 +13086,16 @@
       "jsx_context": {
         "tags": [
           "TableFilterItem",
-          "AsyncSelectField",
+          "FormGroup",
           "Table",
           "th",
+          "AsyncSelectField",
           "p",
           "ExpandableEventField",
           "Field",
           "h6",
           "strong",
           "Tab",
-          "FormGroup",
           "AsyncPaginate",
           "Button",
           "SelectField"
@@ -16459,16 +16458,17 @@
       "components": [
         "Table",
         "TableFilterItem",
+        "FormGroup",
+        "Row",
+        "ModalDialog",
         "SelectField",
         "FormContainer",
-        "ModalDialog",
         "Field",
         "ExpandableContainer",
         "FormTable",
         "Tab",
         "Tabs",
         "PublicDashboardHero",
-        "FormGroup",
         "Card",
         "WizardForm",
         "Component"
@@ -16600,11 +16600,11 @@
         "tags": [
           "Table",
           "TableFilterItem",
-          "SelectField",
+          "FormGroup",
           "th",
+          "SelectField",
           "b",
           "Field",
-          "FormGroup",
           "td",
           "Component"
         ],
@@ -17235,7 +17235,7 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "ModalDialog"
@@ -17284,16 +17284,16 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 7
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Create new announcement": {
@@ -17301,7 +17301,7 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "ModalDialog"
@@ -17350,16 +17350,16 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 7
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Edit": {
@@ -17745,8 +17745,8 @@
         "generic_element"
       ],
       "components": [
-        "DateTimeField",
-        "FormContainer",
+        "FormGroup",
+        "Row",
         "ModalDialog",
         "Field"
       ],
@@ -17784,7 +17784,7 @@
       },
       "jsx_context": {
         "tags": [
-          "DateTimeField",
+          "FormGroup",
           "Field"
         ],
         "conditional_render": true
@@ -17798,7 +17798,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 9
@@ -17807,7 +17807,6 @@
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -17820,8 +17819,8 @@
         "generic_element"
       ],
       "components": [
-        "DateTimeField",
-        "FormContainer",
+        "FormGroup",
+        "Row",
         "ModalDialog",
         "Field"
       ],
@@ -17859,7 +17858,7 @@
       },
       "jsx_context": {
         "tags": [
-          "DateTimeField",
+          "FormGroup",
           "Field"
         ],
         "conditional_render": true
@@ -17873,7 +17872,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 9
@@ -17882,7 +17881,6 @@
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -17895,8 +17893,7 @@
         "generic_element"
       ],
       "components": [
-        "MarkdownEditor",
-        "FormContainer",
+        "FormGroup",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -17930,7 +17927,7 @@
       },
       "jsx_context": {
         "tags": [
-          "MarkdownEditor"
+          "FormGroup"
         ],
         "conditional_render": false
       },
@@ -17943,7 +17940,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 7
@@ -17952,7 +17949,6 @@
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -19629,15 +19625,15 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "unknown"
       ],
       "components": [
         "Field",
         "Col",
         "Row",
         "ExpandableContainer",
-        "CommaSeparatedListField",
-        "FormContainer"
+        "FormGroup"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -19673,7 +19669,7 @@
       "jsx_context": {
         "tags": [
           "Field",
-          "CommaSeparatedListField"
+          "FormGroup"
         ],
         "conditional_render": false
       },
@@ -19704,16 +19700,15 @@
       "primary_ui_type": "title",
       "ui_types": [
         "generic_element",
-        "title",
-        "unknown"
+        "unknown",
+        "title"
       ],
       "components": [
         "Field",
         "Col",
         "Row",
         "ExpandableContainer",
-        "CommaSeparatedListField",
-        "FormContainer",
+        "FormGroup",
         "Table",
         "FormTable",
         "UserEditRow"
@@ -19761,7 +19756,7 @@
       "jsx_context": {
         "tags": [
           "Field",
-          "CommaSeparatedListField",
+          "FormGroup",
           "Table",
           "UserEditRow"
         ],
@@ -19795,12 +19790,11 @@
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "generic_element",
+        "unknown",
         "title"
       ],
       "components": [
-        "StringField",
-        "FormContainer",
+        "FormGroup",
         "Table"
       ],
       "is_user_facing": true,
@@ -19836,7 +19830,7 @@
       },
       "jsx_context": {
         "tags": [
-          "StringField",
+          "FormGroup",
           "Table"
         ],
         "conditional_render": false
@@ -19871,8 +19865,8 @@
         "generic_element"
       ],
       "components": [
-        "StringField",
-        "FormContainer"
+        "Field",
+        "FormGroup"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -19905,7 +19899,7 @@
       },
       "jsx_context": {
         "tags": [
-          "StringField"
+          "Field"
         ],
         "conditional_render": false
       },
@@ -19939,9 +19933,8 @@
         "unknown"
       ],
       "components": [
-        "CommaSeparatedListField",
-        "FormContainer",
         "Field",
+        "FormGroup",
         "AccordionCard"
       ],
       "is_user_facing": true,
@@ -19979,7 +19972,6 @@
       },
       "jsx_context": {
         "tags": [
-          "CommaSeparatedListField",
           "Field"
         ],
         "conditional_render": false
@@ -20014,9 +20006,8 @@
         "unknown"
       ],
       "components": [
-        "CommaSeparatedListField",
-        "FormContainer",
         "Field",
+        "FormGroup",
         "AccordionCard"
       ],
       "is_user_facing": true,
@@ -20054,7 +20045,6 @@
       },
       "jsx_context": {
         "tags": [
-          "CommaSeparatedListField",
           "Field"
         ],
         "conditional_render": false
@@ -20089,9 +20079,8 @@
         "unknown"
       ],
       "components": [
-        "CommaSeparatedListField",
-        "FormContainer",
         "Field",
+        "FormGroup",
         "AccordionCard"
       ],
       "is_user_facing": true,
@@ -20129,7 +20118,6 @@
       },
       "jsx_context": {
         "tags": [
-          "CommaSeparatedListField",
           "Field"
         ],
         "conditional_render": false
@@ -20160,13 +20148,12 @@
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "generic_element",
+        "unknown",
         "title",
-        "unknown"
+        "generic_element"
       ],
       "components": [
-        "SelectField",
-        "FormContainer",
+        "FormGroup",
         "Table",
         "TableFilterItem",
         "Field",
@@ -20219,7 +20206,7 @@
       },
       "jsx_context": {
         "tags": [
-          "SelectField",
+          "FormGroup",
           "Table",
           "TableFilterItem",
           "Field"
@@ -20299,9 +20286,9 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
@@ -20309,7 +20296,7 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Rule has been successfully created": {
@@ -20362,9 +20349,9 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
@@ -20372,7 +20359,7 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Edit auto-provisioning rule": {
@@ -20380,7 +20367,7 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "ModalDialog"
@@ -20429,16 +20416,16 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 7
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Add auto-provisioning rule": {
@@ -20446,7 +20433,7 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "ModalDialog"
@@ -20495,16 +20482,16 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 7
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Creates resource": {
@@ -20718,7 +20705,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 10
@@ -20727,6 +20714,7 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -27311,8 +27299,8 @@
       "ui_types": [
         "generic_element",
         "title",
-        "label",
         "unknown",
+        "label",
         "function_call"
       ],
       "components": [
@@ -28324,6 +28312,7 @@
           "invitations",
           "details",
           "offerings",
+          "policies",
           "attributes",
           "list",
           "modal",
@@ -28358,10 +28347,12 @@
           "marketplace/details/OfferingResourcesFilter.tsx",
           "marketplace/offerings/OfferingViewHero.tsx",
           "marketplace/offerings/admin/AdminOfferingsFilter.tsx",
+          "marketplace/offerings/details/policies/PoliciesTable.tsx",
           "marketplace/offerings/update/attributes/utils.tsx",
           "marketplace/resources/list/AllResourcesFilter.tsx",
           "marketplace/resources/list/ProjectResourcesAllFilter.tsx",
           "marketplace/resources/list/ProviderResourcesFilter.tsx",
+          "marketplace/resources/list/ProviderResourcesList.tsx",
           "marketplace/resources/options/OptionValue.tsx",
           "modal/ConfirmationDialog.tsx",
           "openstack/openstack-network/OpenStackNetworkSummary.tsx",
@@ -28401,7 +28392,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 28
+      "usage_count": 30
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -34131,6 +34122,7 @@
           "invitations",
           "details",
           "offerings",
+          "policies",
           "attributes",
           "list",
           "modal",
@@ -34161,10 +34153,12 @@
           "marketplace/details/OfferingResourcesFilter.tsx",
           "marketplace/offerings/OfferingViewHero.tsx",
           "marketplace/offerings/admin/AdminOfferingsFilter.tsx",
+          "marketplace/offerings/details/policies/PoliciesTable.tsx",
           "marketplace/offerings/update/attributes/utils.tsx",
           "marketplace/resources/list/AllResourcesFilter.tsx",
           "marketplace/resources/list/ProjectResourcesAllFilter.tsx",
           "marketplace/resources/list/ProviderResourcesFilter.tsx",
+          "marketplace/resources/list/ProviderResourcesList.tsx",
           "marketplace/resources/options/OptionValue.tsx",
           "modal/ConfirmationDialog.tsx",
           "openstack/openstack-network/OpenStackNetworkSummary.tsx",
@@ -34203,7 +34197,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 25
+      "usage_count": 27
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -44718,71 +44712,6 @@
       "This appears in administrative interface. Use formal, technical language."
     ]
   },
-  "New role": {
-    "message": "New role",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 8,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin"
-        ],
-        "feature_areas": [
-          "roles"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "administration/roles/RoleCreateDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ModalDialog"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language."
-    ]
-  },
   "Are you sure you want to delete the role {name}?": {
     "message": "Are you sure you want to delete the role {name}?",
     "context": {
@@ -45185,13 +45114,11 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element",
-        "unknown"
+        "generic_element"
       ],
       "components": [
         "ActionItem",
-        "ModalDialog",
-        "Form"
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -45221,7 +45148,7 @@
         ],
         "paths": [
           "administration/roles/RoleEditButton.tsx",
-          "administration/roles/RoleEditDialog.tsx"
+          "administration/roles/RoleFormDialog.tsx"
         ]
       },
       "jsx_context": {
@@ -45242,14 +45169,15 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 9
+        "has_validation": true,
+        "max_nesting_level": 7
       },
       "usage_count": 2
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Permissions": {
@@ -45257,16 +45185,15 @@
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "generic_element",
-        "title",
-        "unknown"
+        "unknown",
+        "title"
       ],
       "components": [
-        "PermissionField",
-        "FormContainer",
+        "FormGroup",
         "Nav",
         "TableTabsContainer",
         "Card",
+        "FormContainer",
         "ModalDialog"
       ],
       "is_user_facing": true,
@@ -45311,7 +45238,7 @@
       },
       "jsx_context": {
         "tags": [
-          "PermissionField",
+          "FormGroup",
           "h6"
         ],
         "conditional_render": false
@@ -45336,6 +45263,72 @@
       "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "New role": {
+    "message": "New role",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "roles"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/roles/RoleFormDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -47982,7 +47975,7 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
@@ -47991,6 +47984,7 @@
       "This appears in administrative interface. Use formal, technical language.",
       "Contains variables: doc_name. Variable types: string.",
       "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This is a question. Ensure question format is appropriate in your language."
     ]
   },
@@ -48306,9 +48300,9 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
@@ -48316,7 +48310,7 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "New issue template has been created.": {
@@ -48369,9 +48363,9 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 0
       },
       "usage_count": 1
@@ -48379,7 +48373,7 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Unable to update issue template.": {
@@ -48432,7 +48426,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
@@ -48442,7 +48436,6 @@
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -48496,7 +48489,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
@@ -48506,7 +48499,6 @@
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -48564,16 +48556,16 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 7
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Create new issue template": {
@@ -48630,16 +48622,16 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 7
       },
       "usage_count": 1
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Attachments": {
@@ -48650,8 +48642,8 @@
         "unknown"
       ],
       "components": [
-        "FormContainer",
         "ModalDialog",
+        "FinalForm",
         "Card"
       ],
       "is_user_facing": true,
@@ -48707,7 +48699,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 5
+        "max_nesting_level": 8
       },
       "usage_count": 3
     },
@@ -48726,8 +48718,9 @@
       ],
       "components": [
         "UploadContainer",
-        "FormContainer",
-        "ModalDialog"
+        "ModalDialog",
+        "FinalForm",
+        "FormContainer"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -48777,16 +48770,15 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 10
       },
       "usage_count": 2
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -48840,7 +48832,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
@@ -48850,7 +48842,6 @@
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -48904,7 +48895,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
@@ -48914,7 +48905,6 @@
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -59013,21 +59003,25 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "general"
+          "general",
+          "marketplace"
         ],
         "feature_areas": [
           "maintenance",
+          "resource-pending",
           "proposals"
         ],
         "component_types": [
           "list",
-          "component"
+          "component",
+          "page"
         ],
         "paths": [
           "broadcasts/BroadcastFilter.tsx",
           "maintenance/MaintenanceList.tsx",
           "maintenance/types.ts",
           "maintenance/utils.ts",
+          "marketplace/resources/resource-pending/OrderInProgressView.tsx",
           "proposals/utils.ts"
         ]
       },
@@ -59049,10 +59043,11 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language."
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
   "Sent": {
@@ -93242,103 +93237,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "Add user": {
-    "message": "Add user",
-    "context": {
-      "primary_ui_type": "action_button",
-      "ui_types": [
-        "unknown",
-        "action_button",
-        "generic_element"
-      ],
-      "components": [
-        "Tip",
-        "Button",
-        "ActionButton",
-        "ModalDialog",
-        "ResourceActionDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 8,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "dashboard",
-          "general",
-          "marketplace",
-          "project_management",
-          "user_management"
-        ],
-        "feature_areas": [
-          "dashboard",
-          "create",
-          "permissions",
-          "service-providers",
-          "team",
-          "support"
-        ],
-        "component_types": [
-          "component",
-          "form",
-          "dialog",
-          "list"
-        ],
-        "paths": [
-          "dashboard/TeamWidget.tsx",
-          "invitations/actions/create/EmailsListGroup.tsx",
-          "marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx",
-          "marketplace/service-providers/OfferingPermissionCreateButton.tsx",
-          "project/team/AddUserDialog.tsx",
-          "user/support/AddRemoteUserDialog.tsx",
-          "user/support/UserTableActions.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Tip",
-          "Button",
-          "ActionButton",
-          "ModalDialog",
-          "ResourceActionDialog"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
-      },
-      "usage_count": 7
-    },
-    "translator_notes": [
-      "This text appears on a button. Keep it short and action-oriented.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "Credit used": {
     "message": "Credit used",
     "context": {
@@ -105163,6 +105061,7 @@
         ],
         "paths": [
           "invitations/InvitationStateFilter.tsx",
+          "invitations/PermissionRequestStateField.tsx",
           "invoices/list/InvoicesFilter.tsx",
           "marketplace/orders/OrderStates.ts",
           "marketplace/resources/resource-pending/OrderInProgressView.tsx",
@@ -105189,7 +105088,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 7
+      "usage_count": 8
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
@@ -109776,6 +109675,97 @@
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Add user": {
+    "message": "Add user",
+    "context": {
+      "primary_ui_type": "action_button",
+      "ui_types": [
+        "unknown",
+        "action_button",
+        "generic_element"
+      ],
+      "components": [
+        "Button",
+        "ActionButton",
+        "ModalDialog",
+        "ResourceActionDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general",
+          "marketplace",
+          "project_management",
+          "user_management"
+        ],
+        "feature_areas": [
+          "create",
+          "permissions",
+          "service-providers",
+          "team",
+          "support"
+        ],
+        "component_types": [
+          "form",
+          "dialog",
+          "list"
+        ],
+        "paths": [
+          "invitations/actions/create/EmailsListGroup.tsx",
+          "marketplace/offerings/details/permissions/OfferingPermissionCreateButton.tsx",
+          "marketplace/service-providers/OfferingPermissionCreateButton.tsx",
+          "project/team/AddUserDialog.tsx",
+          "user/support/AddRemoteUserDialog.tsx",
+          "user/support/UserTableActions.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Button",
+          "ActionButton",
+          "ModalDialog",
+          "ResourceActionDialog"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 6
+    },
+    "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Too many empty fields": {
@@ -125977,8 +125967,8 @@
       "ui_types": [
         "generic_element",
         "unknown",
-        "title",
-        "label"
+        "label",
+        "title"
       ],
       "components": [
         "DateField",
@@ -126041,6 +126031,7 @@
           "maintenance/create/Step3ReviewAndCreate.tsx",
           "marketplace/deploy/steps/OrderStartDateField.tsx",
           "marketplace/orders/details/OrderDetailsApprovalsTab.tsx",
+          "marketplace/resources/details/utils.tsx",
           "marketplace/service-providers/ProviderCampaignsList.tsx",
           "project/ProjectCard.tsx",
           "project/ProjectsList.tsx",
@@ -126082,7 +126073,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 17
+      "usage_count": 18
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -197361,6 +197352,67 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
+  "Scheduled to start on": {
+    "message": "Scheduled to start on",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "resource-pending"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "marketplace/resources/resource-pending/OrderInProgressView.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
   "Resource {type} process": {
     "message": "Resource {type} process",
     "context": {
@@ -249991,7 +250043,6 @@
         "unknown"
       ],
       "components": [
-        "Tip",
         "Badge"
       ],
       "is_user_facing": true,
@@ -250029,7 +250080,7 @@
       },
       "jsx_context": {
         "tags": [
-          "Tip"
+          "Badge"
         ],
         "conditional_render": true
       },
@@ -250045,7 +250096,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 9
       },
       "usage_count": 1
     },

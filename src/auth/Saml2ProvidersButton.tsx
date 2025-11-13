@@ -17,7 +17,7 @@ export const Saml2ProvidersButton = () => {
 
   return (
     <LoginButton
-      icon={<GlobeIcon />}
+      icon={<GlobeIcon weight="bold" />}
       label="eduGAIN"
       onClick={() => dispatch(openModalDialog(AuthSaml2Dialog))}
     />

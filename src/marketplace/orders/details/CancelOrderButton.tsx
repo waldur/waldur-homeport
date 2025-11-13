@@ -33,6 +33,7 @@ export const CancelOrderButton: FC<CancelOrderButtonProps> = (props) => {
   return (
     <>
       {loading ? (
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         <LoadingSpinnerIcon className="me-1" />
       ) : (
         <ActionItem

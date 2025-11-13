@@ -155,6 +155,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
         >
           <span className="svg-icon svg-icon-2">
             {executing ? (
+              // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
               <LoadingSpinnerIcon className="me-1" />
             ) : (
               <PlayIcon weight="bold" />

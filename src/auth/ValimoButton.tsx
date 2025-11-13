@@ -17,7 +17,7 @@ export const ValimoButton = () => {
   const dispatch = useDispatch();
   return (
     <LoginButton
-      icon={<DeviceMobileIcon />}
+      icon={<DeviceMobileIcon weight="bold" />}
       label={ENV.plugins.WALDUR_AUTH_VALIMO.LABEL}
       onClick={() => dispatch(openModalDialog(AuthValimoDialog))}
     />

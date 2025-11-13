@@ -5,6 +5,7 @@ import {
   PlusIcon,
   StarIcon,
 } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { debounce, isEqual, throttle } from 'lodash-es';
 import {
   FC,
@@ -291,7 +292,7 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         <>
           <button
             type="button"
-            className={COLUMN_FILTER_TOGGLE_CLASS + ' text-btn'}
+            className={classNames(COLUMN_FILTER_TOGGLE_CLASS, 'text-btn')}
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom"

@@ -92,7 +92,7 @@ export const SearchInput = ({
               data-bs-toggle="tooltip"
               title="Show more search options"
             >
-              <CaretDownIcon size={30} />
+              <CaretDownIcon size={30} weight="bold" />
             </Button>
           </div>
         )}

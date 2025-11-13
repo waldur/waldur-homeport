@@ -47,7 +47,7 @@ export const AwesomeCheckboxField: FunctionComponent<
     />
 
     {(tooltip || label || help_text) && (
-      <label className="form-check-label" htmlFor={'check-' + input.name}>
+      <Form.Check.Label htmlFor={'check-' + input.name}>
         {tooltip && !tooltipEnd && (
           <Tip id={'form-field-tooltip-' + input.name} label={tooltip}>
             <QuestionIcon weight="bold" size={20} className="text-muted" />{' '}
@@ -55,7 +55,7 @@ export const AwesomeCheckboxField: FunctionComponent<
         )}
         {label}
         {help_text && <p className="text-muted">{help_text}</p>}
-      </label>
+      </Form.Check.Label>
     )}
     {tooltip && tooltipEnd && (
       <Tip

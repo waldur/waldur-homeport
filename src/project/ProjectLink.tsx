@@ -6,7 +6,6 @@ import { Project } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { Link } from '@waldur/core/Link';
-import { Tip } from '@waldur/core/Tooltip';
 import { AtLeast } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
@@ -34,6 +33,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
 }) => {
   const options = projectKindOptions();
   const kind = options[row.kind] || options.default;
+  const Icon = kind.icon;
   return (
     <div className="d-flex align-items-center gap-1">
       <Link
@@ -49,25 +49,29 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
       >
         {children}
       </Link>
-      {showKind && row.kind !== 'default' && kind && kind.component && (
-        <Badge variant={kind.color} onlyIcon pill outline>
-          <Tip
-            id={'tip-kind-' + row.uuid}
-            label={translate('{name} project', { name: kind.label })}
-          >
-            <kind.component weight="bold" size={12} />
-          </Tip>
+      {showKind && row.kind !== 'default' && kind && Icon && (
+        // eslint-disable-next-line waldur-custom/enforce-badge-icon-patterns
+        <Badge
+          variant={kind.color}
+          onlyIcon
+          pill
+          outline
+          tooltip={translate('{name} project', { name: kind.label })}
+          tooltipProps={{ id: 'tip-kind-' + row.uuid }}
+        >
+          {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
+          <Icon weight="bold" size={12} />
         </Badge>
       )}
       {showIndustry &&
         isFeatureVisible(ProjectFeatures.show_industry_flag) &&
         row.is_industry && (
           <span className="svg-icon svg-icon-4">
-            <FactoryIcon />
+            <FactoryIcon weight="bold" />
           </span>
         )}
       {row.is_removed && (
-        <Badge variant="danger" outline pill className="fs-8">
+        <Badge variant="light-danger" pill className="align-middle fs-8">
           {translate('Removed')}
         </Badge>
       )}

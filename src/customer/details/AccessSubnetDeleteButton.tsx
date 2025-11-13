@@ -52,7 +52,7 @@ export const AccessSubnetDeleteButton = (
       title={translate('Remove')}
       action={openDialog}
       disabled={removing}
-      iconNode={<TrashIcon />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
     />

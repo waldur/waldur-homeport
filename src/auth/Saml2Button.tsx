@@ -10,7 +10,7 @@ export const Saml2Button = () => {
 
   return (
     <LoginButton
-      icon={<StudentIcon />}
+      icon={<StudentIcon weight="bold" />}
       label={ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_LABEL}
       onClick={() =>
         handleSaml2Login(ENV.plugins.WALDUR_AUTH_SAML2.IDENTITY_PROVIDER_URL)

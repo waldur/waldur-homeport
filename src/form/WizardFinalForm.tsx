@@ -75,6 +75,7 @@ export const WizardFinalForm: FC<WizardFormProps> = ({
                 children={
                   props.loading ? (
                     <span className="svg-icon svg-icon-2">
+                      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
                       <LoadingSpinnerIcon />
                     </span>
                   ) : props.step !== props.steps.length - 1 ? (

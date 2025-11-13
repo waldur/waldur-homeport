@@ -129,7 +129,7 @@ export const AggregateLimitWidget = ({
         id="aggregate-limit-tooltip"
         label={translate('You are viewing the chart in log scale mode.')}
       >
-        <QuestionIcon />
+        <QuestionIcon weight="bold" />
       </Tip>
     </>
   );
@@ -142,7 +142,7 @@ export const AggregateLimitWidget = ({
   const actions = [
     {
       label: translate('Details'),
-      icon: <EyeIcon />,
+      icon: <EyeIcon weight="bold" />,
       callback: viewDetails,
     },
   ];

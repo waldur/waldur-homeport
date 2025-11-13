@@ -21,7 +21,7 @@ export const TelemetryExampleButton = () => {
       className="btn-sm"
     >
       <span className="svg-icon svg-icon-2">
-        <EyeIcon />
+        <EyeIcon weight="bold" />
       </span>
       {translate('Show example')}
     </Button>

@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, useCallback } from 'react';
 import { Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
@@ -48,10 +49,10 @@ export const GroupInvitationCard: FC<{ row: GroupInvitation }> = ({
           value: invitation,
           metadata: (
             <div
-              className={
-                'fs-6 fw-semibold text-muted h-80px' +
-                (!description ? ' fst-italic' : '')
-              }
+              className={classNames(
+                'fs-6 fw-semibold text-muted h-80px',
+                !description && 'fst-italic',
+              )}
             >
               {description ? (
                 <TruncatedDescription

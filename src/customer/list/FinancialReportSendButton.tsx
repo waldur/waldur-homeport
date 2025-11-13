@@ -21,7 +21,7 @@ export const FinancialReportSendButton = () => {
       variant="tertiary"
     >
       <span className="svg-icon svg-icon-2">
-        <ShareIcon />
+        <ShareIcon weight="bold" />
       </span>{' '}
       {translate('Send')}
     </Button>

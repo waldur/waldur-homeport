@@ -29,7 +29,7 @@ export const InvoicesDropdown: FunctionComponent<
     title={
       <>
         <span className="svg-icon svg-icon-2">
-          <FileTextIcon />
+          <FileTextIcon weight="bold" />
         </span>{' '}
         {translate('Link invoice')}
       </>

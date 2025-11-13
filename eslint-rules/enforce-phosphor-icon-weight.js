@@ -54,7 +54,7 @@ function isInPhosphorImport(context, iconName) {
 
   // Look for the specific icon import
   const importRegex = new RegExp(
-    `import\\s*{[^}]*\\b${iconName}\\b[^}]*}\\s*from\\s*['"]@phosphor-icons\/react['"]`,
+    `import\\s*{[^}]*\\b${iconName}\\b[^}]*}\\s*from\\s*['"]@phosphor-icons/react['"]`,
   );
   return importRegex.test(text);
 }

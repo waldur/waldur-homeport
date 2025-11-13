@@ -1,10 +1,14 @@
 .form-switch.form-check-solid .form-check-input:checked {
-  background-color: $bg-brand-solid;
+  background-color: $brand;
+
+  &:disabled {
+    background-color: $brand-200;
+  }
 }
 
 .form-check-input {
   &:checked,
   &[type='checkbox']:indeterminate {
-    border-color: $bg-brand-solid;
+    border-color: $brand;
   }
 }

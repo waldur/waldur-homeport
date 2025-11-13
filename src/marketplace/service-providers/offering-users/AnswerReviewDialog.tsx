@@ -34,7 +34,7 @@ export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
       });
 
       showSuccess(translate('Review submitted.'));
-      resolve.refetch && resolve.refetch();
+      if (resolve.refetch) resolve.refetch();
       closeDialog();
     } catch (e) {
       showErrorResponse(e, translate('Unable to submit review'));

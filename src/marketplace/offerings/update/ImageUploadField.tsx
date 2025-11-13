@@ -51,7 +51,7 @@ export const ImageUploadField: FunctionComponent<FileUploadFieldProps> = (
               className="btn btn-sm btn-danger mb-2"
               title={translate('Remove')}
               action={() => props.input.onChange(null)}
-              iconNode={<TrashIcon />}
+              iconNode={<TrashIcon weight="bold" />}
             />
           )}
         </Col>

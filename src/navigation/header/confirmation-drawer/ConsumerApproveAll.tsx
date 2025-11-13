@@ -33,6 +33,7 @@ export const ConsumerApproveAll = ({ orders, refetch }) => {
   return (
     <Button variant="primary" onClick={() => mutate()} disabled={isLoading}>
       {isLoading ? (
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         <LoadingSpinnerIcon />
       ) : (
         <span className="svg-icon svg-icon-2">

@@ -15,7 +15,7 @@ export const PullSecurityGroupsAction: FC<TenantActionProps> = ({
 }) => (
   <AsyncActionButton
     title={translate('Synchronise')}
-    iconNode={<ArrowsClockwiseIcon />}
+    iconNode={<ArrowsClockwiseIcon weight="bold" />}
     resource={resource}
     validators={validators}
     apiMethod={(uuid) => openstackTenantsPullSecurityGroups({ path: { uuid } })}

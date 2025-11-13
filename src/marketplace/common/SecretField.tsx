@@ -14,9 +14,9 @@ export class SecretField extends Component<
       <>
         <button className="text-btn" type="button" onClick={this.toggle}>
           {this.state.showSecret ? (
-            <EyeSlashIcon size={20} />
+            <EyeSlashIcon size={20} weight="bold" />
           ) : (
-            <EyeIcon size={20} />
+            <EyeIcon size={20} weight="bold" />
           )}
         </button>{' '}
         {this.getValue()}

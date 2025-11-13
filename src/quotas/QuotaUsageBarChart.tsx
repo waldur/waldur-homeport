@@ -65,6 +65,7 @@ export const QuotaUsageBarChartDescription = ({ quota, hideLabel = false }) => (
             className="text-warning"
             size={16}
             data-testid="warning"
+            weight="bold"
           />
         </Tip>
       )}

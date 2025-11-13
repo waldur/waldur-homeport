@@ -57,15 +57,15 @@ function initCssVariables() {
   // Generate checkbox & radio bg
   document.documentElement.style.setProperty(
     '--checkbox-bg',
-    generateCheckboxSvgUrl('#fff'),
+    generateCheckboxSvgUrl(brand600),
   );
   document.documentElement.style.setProperty(
     '--checkbox-indeterminate-bg',
-    generateCheckboxIndeterminateSvgUrl('#fff'),
+    generateCheckboxIndeterminateSvgUrl(brand600),
   );
   document.documentElement.style.setProperty(
     '--radio-bg',
-    generateRadioSvgUrl('#fff'),
+    generateRadioSvgUrl(brand600),
   );
 }
 

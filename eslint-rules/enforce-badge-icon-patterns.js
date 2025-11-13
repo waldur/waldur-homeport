@@ -25,20 +25,83 @@ function isIconComponent(node) {
 }
 
 function hasTextContent(children) {
-  return children.some(
-    (child) =>
-      (child.type === 'JSXText' && child.value.trim()) ||
-      child.type === 'JSXExpressionContainer' ||
-      (child.type === 'JSXElement' && !isIconComponent(child)),
+  return children.some((child) => {
+    if (child.type === 'JSXText' && child.value.trim()) {
+      return true;
+    }
+    if (child.type === 'JSXExpressionContainer') {
+      // Check if the expression container contains non-icon content
+      const expr = child.expression;
+      if (expr.type === 'ConditionalExpression') {
+        // For ternary expressions, check if either branch contains non-icon content
+        return (
+          hasNonIconContent(expr.consequent) ||
+          hasNonIconContent(expr.alternate)
+        );
+      }
+      // For other expressions, consider them as text content unless they're simple icon references
+      return !isIconReference(expr);
+    }
+    if (child.type === 'JSXElement' && !isIconComponent(child)) {
+      return true;
+    }
+    return false;
+  });
+}
+
+function hasNonIconContent(node) {
+  if (!node) return false;
+  if (node.type === 'JSXElement') {
+    return !isIconComponent(node);
+  }
+  if (
+    node.type === 'Literal' &&
+    typeof node.value === 'string' &&
+    node.value.trim()
+  ) {
+    return true;
+  }
+  return false;
+}
+
+function isIconReference(node) {
+  // Check if this is a simple reference to an icon component
+  return (
+    node &&
+    ((node.type === 'Identifier' && node.name.endsWith('Icon')) ||
+      (node.type === 'JSXElement' && isIconComponent(node)))
   );
 }
 
 function countIcons(children) {
-  return children.filter(isIconComponent).length;
+  let count = 0;
+  children.forEach((child) => {
+    if (isIconComponent(child)) {
+      count++;
+    } else if (child.type === 'JSXExpressionContainer') {
+      const expr = child.expression;
+      if (expr.type === 'ConditionalExpression') {
+        // For ternary expressions, count as 1 if both branches are icons
+        if (
+          (expr.consequent &&
+            expr.consequent.type === 'JSXElement' &&
+            isIconComponent(expr.consequent)) ||
+          (expr.alternate &&
+            expr.alternate.type === 'JSXElement' &&
+            isIconComponent(expr.alternate))
+        ) {
+          count++;
+        }
+      } else if (expr.type === 'JSXElement' && isIconComponent(expr)) {
+        count++;
+      }
+    }
+  });
+  return count;
 }
 
 function hasIconProp(node, propName) {
-  return node.openingElement.attributes?.some(
+  return node.attributes?.some(
     (attr) => attr.type === 'JSXAttribute' && attr.name.name === propName,
   );
 }
@@ -55,13 +118,14 @@ export default {
     schema: [],
     messages: {
       useIconOnly:
-        'Badge with only icon children should use iconOnly prop instead of children.',
+        'Badge with only icon children should use onlyIcon prop instead of children.',
       useLeftIcon: 'Badge with text and leading icon should use leftIcon prop.',
       useRightIcon:
         'Badge with text and trailing icon should use rightIcon prop.',
-      noMixedIcons: 'Badge should not mix icon props with icon children.',
+      noMixedIcons:
+        'Badge should not mix leftIcon/rightIcon props with icon children.',
       redundantIconOnly:
-        'Badge with iconOnly prop should not have non-icon children.',
+        'Badge with onlyIcon prop should not have non-icon children.',
     },
   },
 
@@ -79,11 +143,11 @@ export default {
         const iconCount = countIcons(children);
         const hasText = hasTextContent(children);
 
-        const hasIconOnly = hasIconProp(node, 'iconOnly');
+        const hasIconOnly = hasIconProp(node, 'onlyIcon');
         const hasLeftIcon = hasIconProp(node, 'leftIcon');
         const hasRightIcon = hasIconProp(node, 'rightIcon');
 
-        // Case 1: Badge has iconOnly prop but also has text content
+        // Case 1: Badge has onlyIcon prop but also has text content
         if (hasIconOnly && hasText) {
           context.report({
             node,
@@ -92,8 +156,9 @@ export default {
           return;
         }
 
-        // Case 2: Badge has icon props but also icon children
-        if ((hasLeftIcon || hasRightIcon || hasIconOnly) && iconCount > 0) {
+        // Case 2: Badge has leftIcon/rightIcon props but also icon children
+        // Note: onlyIcon prop is meant to work WITH icon children, so exclude it from this check
+        if ((hasLeftIcon || hasRightIcon) && iconCount > 0) {
           context.report({
             node,
             messageId: 'noMixedIcons',
@@ -101,13 +166,13 @@ export default {
           return;
         }
 
-        // Case 3: Badge has only icon children but no iconOnly prop
+        // Case 3: Badge has only icon children but no onlyIcon prop
         if (iconCount > 0 && !hasText && !hasIconOnly) {
           context.report({
             node,
             messageId: 'useIconOnly',
             fix(fixer) {
-              return fixer.insertTextAfter(node.name, ' iconOnly');
+              return fixer.insertTextAfter(node.name, ' onlyIcon');
             },
           });
           return;
@@ -115,11 +180,6 @@ export default {
 
         // Case 4: Badge has text + icon children (should use leftIcon/rightIcon)
         if (iconCount > 0 && hasText && !hasLeftIcon && !hasRightIcon) {
-          const iconElements = children.filter(isIconComponent);
-          const textElements = children.filter(
-            (child) => !isIconComponent(child),
-          );
-
           // Determine if icon is at start or end
           const firstChild = children.find(
             (child) => child.type !== 'JSXText' || child.value.trim(),

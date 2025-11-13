@@ -30,7 +30,7 @@ export const RadarIcon: FC<RadarIconProps> = ({
       <IconComponent
         size={size === 'sm' ? 15 : 20}
         weight="bold"
-        className={'text-' + variant}
+        className={`text-${variant}`}
       />
     </div>
   </div>

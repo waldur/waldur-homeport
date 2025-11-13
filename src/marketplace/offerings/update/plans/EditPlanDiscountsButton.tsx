@@ -32,7 +32,7 @@ export const EditPlanDiscountsButton: FunctionComponent<{
   };
   return (
     <Dropdown.Item onClick={callback}>
-      <TagIcon size={18} /> {translate('Edit discounts')}
+      <TagIcon size={18} weight="bold" /> {translate('Edit discounts')}
     </Dropdown.Item>
   );
 };

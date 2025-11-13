@@ -31,7 +31,7 @@ const DeleteButton = ({ onClick }) => (
     onClick={onClick}
   >
     <span className="svg-icon svg-icon-2">
-      <TrashIcon />
+      <TrashIcon weight="bold" />
     </span>
   </Button>
 );

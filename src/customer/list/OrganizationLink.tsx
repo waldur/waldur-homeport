@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC, PropsWithChildren, useMemo } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 import { useSelector } from 'react-redux';
@@ -73,9 +74,10 @@ export const OrganizationLink: FC<PropsWithChildren<OwnProps>> = ({
     return (
       <button
         type="button"
-        className={
-          className + (buttonVariant ? 'btn btn-' + buttonVariant : '')
-        }
+        className={classNames(
+          className,
+          buttonVariant && `btn btn-${buttonVariant}`,
+        )}
         disabled
       >
         {children}

@@ -41,7 +41,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
               className="text-btn pe-3"
             >
               <Tip label={translate('Copy to clipboard')} id="copyToClipboard">
-                <CopyIcon size={20} />
+                <CopyIcon size={20} weight="bold" />
               </Tip>
             </button>
             {pair.address}
@@ -61,7 +61,7 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
           onClick={onRemove}
         >
           <span className="svg-icon svg-icon-2">
-            <TrashIcon />
+            <TrashIcon weight="bold" />
           </span>
         </Button>
       </td>

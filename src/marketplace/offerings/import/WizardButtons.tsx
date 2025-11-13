@@ -30,7 +30,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
       <ActionButton
         title={translate('Back')}
         action={goBack}
-        iconNode={<CaretLeftIcon />}
+        iconNode={<CaretLeftIcon weight="bold" />}
         disabled={submitting}
         className="min-w-125px"
       />

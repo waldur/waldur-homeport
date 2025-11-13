@@ -15,7 +15,7 @@ export const ErrorMessage: FallbackRender = (props) => (
       action={
         <Button onClick={() => location.reload()} variant="success">
           <span className="svg-icon svg-icon-2">
-            <ArrowsClockwiseIcon />
+            <ArrowsClockwiseIcon weight="bold" />
           </span>{' '}
           {translate('Reload')}
         </Button>

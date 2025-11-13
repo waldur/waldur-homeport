@@ -54,7 +54,7 @@ export const GLAuthConfigButton: FC<{
     <ActionButton
       action={callback}
       title={translate('View GLAuth configuration')}
-      iconNode={enabled && data && <EyeIcon />}
+      iconNode={enabled && data && <EyeIcon weight="bold" />}
       pending={isLoading}
       disabled={!enabled}
       tooltip={

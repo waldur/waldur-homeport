@@ -53,7 +53,7 @@ export const RemoveDocumentButton = (props) => {
     <RowActionButton
       action={callback}
       title={translate('Remove')}
-      iconNode={<TrashIcon />}
+      iconNode={<TrashIcon weight="bold" />}
       variant="danger"
       size="sm"
     />

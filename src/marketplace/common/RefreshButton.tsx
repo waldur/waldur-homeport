@@ -1,4 +1,5 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
+import classNames from 'classnames';
 import { Button } from 'react-bootstrap';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
@@ -20,15 +21,16 @@ export const RefreshButton = ({
   return (
     <Button
       variant="tertiary"
-      className={'min-w-100px' + (className ? ` ${className}` : '')}
+      className={classNames('min-w-100px', className)}
       size={size}
       onClick={!isLoading ? refetch : undefined}
     >
       {isLoading ? (
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         <LoadingSpinnerIcon />
       ) : (
         <span className={'svg-icon' + (size !== 'sm' ? ' svg-icon-2' : '')}>
-          <ArrowClockwiseIcon />
+          <ArrowClockwiseIcon weight="bold" />
         </span>
       )}
       {translate('Refresh')}

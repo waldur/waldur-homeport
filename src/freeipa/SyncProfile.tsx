@@ -48,7 +48,7 @@ export const SyncProfile: FunctionComponent<{
     >
       <Button variant="primary" className="ms-2" onClick={callback}>
         <span className="svg-icon svg-icon-2">
-          <ArrowsClockwiseIcon />
+          <ArrowsClockwiseIcon weight="bold" />
         </span>{' '}
         {translate('Sync profile')}
       </Button>

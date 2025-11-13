@@ -33,7 +33,7 @@ export const LexisLinkDeleteButton = ({ row, refetch }) => {
       title={translate('Remove')}
       action={openDialog}
       variant="danger"
-      iconNode={<TrashIcon />}
+      iconNode={<TrashIcon weight="bold" />}
       size="sm"
     />
   );

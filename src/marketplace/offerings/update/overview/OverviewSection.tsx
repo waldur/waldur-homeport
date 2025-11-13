@@ -239,6 +239,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
                   <CheckIcon weight="bold" className="text-info" />
                 )}
                 {isLoading ? (
+                  // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
                   <LoadingSpinnerIcon />
                 ) : error ? (
                   <LoadingErred

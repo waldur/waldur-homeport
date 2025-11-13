@@ -152,7 +152,7 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
       title={translate('Bulk import')}
       subtitle={translate(
         'Create offering users in bulk: download template {arrow} fill with your data {arrow} upload file',
-        { arrow: <ArrowRightIcon /> },
+        { arrow: <ArrowRightIcon weight="bold" /> },
         formatJsxTemplate,
       )}
       wizardForms={WizardForms}

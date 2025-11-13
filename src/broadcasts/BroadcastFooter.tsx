@@ -64,7 +64,7 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <FloppyDiskIcon />
+              <FloppyDiskIcon weight="bold" />
             </span>{' '}
             {translate('Save as draft')}
           </Button>
@@ -74,13 +74,13 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <FloppyDiskIcon />
+              <FloppyDiskIcon weight="bold" />
             </span>{' '}
             {translate('Save as a template')}
           </Button>
           <Button onClick={() => setStep(1)} disabled={disabled}>
             <span className="svg-icon svg-icon-2">
-              <ArrowRightIcon />
+              <ArrowRightIcon weight="bold" />
             </span>{' '}
             {translate('Select recipients')}
           </Button>
@@ -89,7 +89,7 @@ export const BroadcastFooter = ({
         <>
           <Button onClick={() => setStep(0)} variant="secondary">
             <span className="svg-icon svg-icon-2">
-              <ArrowLeftIcon />
+              <ArrowLeftIcon weight="bold" />
             </span>{' '}
             {translate('Back')}
           </Button>
@@ -100,7 +100,7 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <FloppyDiskIcon />
+              <FloppyDiskIcon weight="bold" />
             </span>{' '}
             {translate('Save as draft')}
           </Button>
@@ -110,7 +110,7 @@ export const BroadcastFooter = ({
             disabled={disabled}
           >
             <span className="svg-icon svg-icon-2">
-              <ShareIcon />
+              <ShareIcon weight="bold" />
             </span>{' '}
             {formValues.send_at
               ? translate('Schedule broadcast')

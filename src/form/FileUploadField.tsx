@@ -19,7 +19,7 @@ export const FileUploadField = ({
   className = 'btn btn-sm btn-primary',
   disabled,
   input,
-  iconNode = <UploadSimpleIcon />,
+  iconNode = <UploadSimpleIcon weight="bold" />,
 }: FileUploadFieldProps) => {
   const [fileName, setFileName] = useState<string | undefined>(undefined);
   const fileInputRef = useRef<HTMLInputElement>(null);

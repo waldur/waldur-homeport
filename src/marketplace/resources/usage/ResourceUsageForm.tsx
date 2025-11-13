@@ -400,7 +400,11 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
                                 component.billing_type,
                               )}
                             >
-                              <QuestionIcon size={18} className="ms-1" />
+                              <QuestionIcon
+                                size={18}
+                                className="ms-1"
+                                weight="bold"
+                              />
                             </Tip>
                           </Dropdown.Item>
                         ))}

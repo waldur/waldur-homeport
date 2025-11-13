@@ -46,6 +46,7 @@ export const RejectByConsumerButton: FC<
   return (
     <>
       {isLoading ? (
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         <LoadingSpinnerIcon className="me-1" />
       ) : (
         <ActionItem

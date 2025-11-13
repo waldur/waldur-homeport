@@ -10,7 +10,7 @@ export const ReviewRejectAction = ({ request, refetch, apiMethod }) =>
     <DialogActionButton
       title={translate('Reject')}
       variant="danger"
-      iconNode={<ProhibitIcon />}
+      iconNode={<ProhibitIcon weight="bold" />}
       resource={request}
       modalComponent={ReviewDialog}
       extraResolve={{

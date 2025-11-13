@@ -13,7 +13,7 @@ const validators = [validateState('OK')];
 export const PullFloatingIpsAction: FC<TenantActionProps> = ({ resource }) => (
   <AsyncActionButton
     title={translate('Synchronise')}
-    iconNode={<ArrowsClockwiseIcon />}
+    iconNode={<ArrowsClockwiseIcon weight="bold" />}
     resource={resource}
     validators={validators}
     apiMethod={(uuid) => openstackTenantsPullFloatingIps({ path: { uuid } })}

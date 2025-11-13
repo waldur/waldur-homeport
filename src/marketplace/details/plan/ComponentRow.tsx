@@ -36,7 +36,7 @@ export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
           {props.offeringComponent.name}
           <Tip label={props.offeringComponent.type} id="componentTypeTooltip">
             {' '}
-            <QuestionIcon />
+            <QuestionIcon weight="bold" />
           </Tip>
         </p>
       </td>

@@ -45,10 +45,10 @@ export const WidgetCard: FC<PropsWithChildren<WidgetCardProps>> = ({
         {left && <div className="me-4 flex-shrink-0">{left}</div>}
         <div className="d-flex flex-column flex-grow-1">
           <div
-            className={
-              'd-flex align-items-center gap-3 ' +
-              (actions?.length ? 'mb-1' : 'mb-2')
-            }
+            className={classNames(
+              'd-flex align-items-center gap-3 ',
+              actions?.length,
+            )}
           >
             <Card.Title as="div" className="fw-bold flex-grow-1 h4 mb-0">
               {cardTitle}

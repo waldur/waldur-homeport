@@ -1,16 +1,20 @@
+import classNames from 'classnames';
+
 import { Image } from '@waldur/core/Image';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 
 import { getItemAbbreviation } from './utils';
 
-export const ItemIcon = ({ item, circle = false, className = '' }) =>
+export const ItemImage = ({ item, circle = false, className = '' }) =>
   item.image ? (
     <Image src={item.image} size={40} circle={circle} classes={className} />
   ) : (
     <div
-      className={
-        `symbol symbol-40px ${className}` + (circle ? ' symbol-circle' : '')
-      }
+      className={classNames(
+        'symbol symbol-40px',
+        circle && 'symbol-circle',
+        className,
+      )}
     >
       <ImagePlaceholder
         width="40px"

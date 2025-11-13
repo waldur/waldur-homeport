@@ -23,7 +23,7 @@ const getOptionLabel = (option) => (
     {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
       option.is_industry && (
         <span className="svg-icon svg-icon-3 ms-3">
-          <FactoryIcon />
+          <FactoryIcon weight="bold" />
         </span>
       )}
   </div>

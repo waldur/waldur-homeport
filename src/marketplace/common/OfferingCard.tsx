@@ -85,7 +85,11 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) => {
                         })
                   }
                 >
-                  <QuestionIcon size={20} className="text-muted ms-1" />
+                  <QuestionIcon
+                    size={20}
+                    className="text-muted ms-1"
+                    weight="bold"
+                  />
                 </Tip>
               )}
               <div className="flex-grow-1 d-flex justify-content-end gap-2">

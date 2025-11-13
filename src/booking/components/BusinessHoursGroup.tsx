@@ -28,7 +28,7 @@ export const BusinessHoursGroup: FunctionComponent<BusinessHoursGroupProps> = ({
       className="col-xs-2 svg-icon svg-icon-2"
       htmlFor="react-select-startTime--value"
     >
-      <ClockIcon />
+      <ClockIcon weight="bold" />
     </Form.Label>
     <Select
       instanceId="startTime"

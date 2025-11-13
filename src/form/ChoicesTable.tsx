@@ -61,7 +61,7 @@ const PureChoicesTable: FC<ChoicesTableProps> = ({
               <td>
                 {choice.disabled ? (
                   <Tip id={choice.uuid} label={choice.disabledReason}>
-                    <ProhibitIcon />
+                    <ProhibitIcon weight="bold" />
                   </Tip>
                 ) : (
                   <input

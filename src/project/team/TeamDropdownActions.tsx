@@ -74,7 +74,11 @@ export const TeamDropdownActions = ({
       <Dropdown.Menu flip>
         {isLoading ? (
           <Dropdown.Item eventKey="1">
-            <SpinnerIcon size={20} className="animation-spin me-2" />
+            <SpinnerIcon
+              size={20}
+              className="animation-spin me-2"
+              weight="bold"
+            />
             {translate('Loading actions')}
           </Dropdown.Item>
         ) : isError ? (

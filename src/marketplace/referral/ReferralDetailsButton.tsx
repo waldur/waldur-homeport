@@ -32,7 +32,7 @@ export const ReferralDetailsButton: FunctionComponent<
   return (
     <ActionButton
       title={translate('Details')}
-      iconNode={<EyeIcon />}
+      iconNode={<EyeIcon weight="bold" />}
       action={() => dispatch(openReferralsDialog(props.offering))}
     />
   );

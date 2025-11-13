@@ -34,7 +34,7 @@ export const MultiSelectField: FunctionComponent<{ input; options }> = ({
                   label={option.help_text}
                   autoWidth={true}
                 >
-                  <QuestionIcon />
+                  <QuestionIcon weight="bold" />
                 </Tip>
               </div>
             )}

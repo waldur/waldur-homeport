@@ -8,14 +8,14 @@ import { requiredArray } from '@waldur/core/validators';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
-import { ResourceIcon } from '@waldur/resource/ResourceIcon';
+import { ResourceIconName } from '@waldur/resource/ResourceIconName';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 const NameField = ({ row }: { row: ImportableResource }) =>
   row.type ? (
-    <ResourceIcon
+    <ResourceIconName
       resource={{
         name: row.name,
         uuid: row.backend_id,

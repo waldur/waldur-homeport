@@ -98,7 +98,7 @@ export const ProposalDetails = ({
               onClick={handleApproveProposal}
               className="btn-icon w-100 mt-2"
             >
-              <CheckCircleIcon className="me-1" />
+              <CheckCircleIcon className="me-1" weight="bold" />
               {translate('Accept')}
             </Button>
             <Button
@@ -106,7 +106,7 @@ export const ProposalDetails = ({
               onClick={handleRejectProposal}
               className="btn-icon w-100 mt-2"
             >
-              <XCircleIcon className="me-1" />
+              <XCircleIcon className="me-1" weight="bold" />
               {translate('Reject')}
             </Button>
           </>

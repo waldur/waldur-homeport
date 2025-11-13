@@ -13,7 +13,7 @@ import { PureAzureResourceSummary } from '../AzureResourceSummary';
 const ValueWithTooltip = ({ value, tooltip }) => (
   <>
     <Tip id="compute-generation" label={tooltip}>
-      <QuestionIcon size={17} />
+      <QuestionIcon size={17} weight="bold" />
     </Tip>{' '}
     {value}
   </>

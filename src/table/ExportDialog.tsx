@@ -89,7 +89,7 @@ export const ExportDialog = connect<
                     className="ms-2"
                     id="tip-export-table-all-page"
                   >
-                    <QuestionIcon size={20} />
+                    <QuestionIcon size={20} weight="bold" />
                   </Tip>
                 </>
               }

@@ -151,7 +151,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
           >
             {translate('Remove')}
             <span className="svg-icon svg-icon-5">
-              <TrashIcon />
+              <TrashIcon weight="bold" />
             </span>
           </Button>
           {props.extraActions

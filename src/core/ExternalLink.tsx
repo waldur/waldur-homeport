@@ -17,7 +17,7 @@ export const ExternalLink: FunctionComponent<ExternalLinkProps> = (props) => (
   >
     {!props.iconless && (
       <span className="svg-icon svg-icon-2">
-        <ArrowSquareOutIcon />
+        <ArrowSquareOutIcon weight="bold" />
       </span>
     )}{' '}
     {props.label}

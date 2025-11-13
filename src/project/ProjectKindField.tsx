@@ -7,7 +7,7 @@ export const ProjectKindField = ({ row }) => {
   const options = projectKindOptions();
   const kind = options[row.kind] || options.default;
   return (
-    <Badge variant={kind.color} pill outline>
+    <Badge variant={kind.color} pill outline className="align-middle">
       {row.kind === 'public' ? translate('Global') : kind.label}
     </Badge>
   );

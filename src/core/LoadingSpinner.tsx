@@ -10,6 +10,7 @@ export const LoadingSpinnerIcon = ({ className }: { className?: string }) => {
       className={classNames('animation-spin', textClass, className)}
       data-testid="spinner"
       role="status"
+      weight="bold"
     />
   );
 };
@@ -25,6 +26,7 @@ export const LoadingSpinner: FunctionComponent<LoadingSpinnerProps> = ({
 }) => (
   <div className={classNames('text-center mb-5', className)}>
     <h1>
+      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
       <LoadingSpinnerIcon />
     </h1>
     {helpText && <p className="text-muted mt-3 mb-0">{helpText}</p>}

@@ -14,7 +14,7 @@ export const OrderAttachmentField = ({ required }) => (
     component={({ input }) => (
       <div className="d-flex justify-content-between">
         <FileUploadField
-          iconNode={<PaperclipIcon />}
+          iconNode={<PaperclipIcon weight="bold" />}
           input={input as any}
           accept="application/pdf"
           buttonLabel={translate('Attach file')}
@@ -35,7 +35,7 @@ export const OrderAttachmentField = ({ required }) => (
           <ActionButton
             title={translate('Remove')}
             action={() => input.onChange(null)}
-            iconNode={<XIcon />}
+            iconNode={<XIcon weight="bold" />}
           />
         )}
       </div>

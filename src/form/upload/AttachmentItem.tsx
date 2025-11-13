@@ -54,7 +54,7 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
         <>
           {attachment.file instanceof File ? (
             <div className="attachment-item__thumb">
-              <FileIcon size={iconSize} className="text-muted" />
+              <FileIcon size={iconSize} className="text-muted" weight="bold" />
             </div>
           ) : (
             <div className="attachment-item__thumb">

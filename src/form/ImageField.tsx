@@ -83,7 +83,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
       <div className="imagefield-upload-row">
         <div className="imagefield-avatar-box">
           {!input.value ? (
-            <ImageIcon size={32} color="forestgreen" />
+            <ImageIcon size={32} color="forestgreen" weight="bold" />
           ) : (
             <img style={style} ref={previewRef} alt="preview" />
           )}
@@ -100,11 +100,11 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
             {input.value ? (
               <>
                 <span>{translate('Replace')}</span>
-                <ArrowsClockwiseIcon size={20} />
+                <ArrowsClockwiseIcon size={20} weight="bold" />
               </>
             ) : (
               <>
-                <UploadSimpleIcon size={20} />
+                <UploadSimpleIcon size={20} weight="bold" />
                 <span>{translate('Upload')}</span>
               </>
             )}

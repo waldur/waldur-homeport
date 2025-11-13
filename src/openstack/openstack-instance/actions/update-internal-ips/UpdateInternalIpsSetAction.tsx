@@ -26,7 +26,7 @@ export const UpdateInternalIpsAction: FC<UpdateInternalIpsActionProps> = ({
 }) => (
   <DialogActionButton
     title={translate('Configure')}
-    iconNode={<WrenchIcon />}
+    iconNode={<WrenchIcon weight="bold" />}
     modalComponent={UpdateInternalIpsDialog}
     resource={resource}
     validators={validators}

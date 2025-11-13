@@ -22,7 +22,7 @@ export const SetManagementSecurityGroupButton = ({ clusterId }) => {
           clusterId,
         })
       }
-      iconNode={<BookOpenTextIcon />}
+      iconNode={<BookOpenTextIcon weight="bold" />}
     />
   );
 };

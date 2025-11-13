@@ -1,5 +1,6 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
@@ -68,11 +69,12 @@ export const ApproveByConsumerButton: FC<
     translate('You need approval to finish purchasing of services.'),
     <>
       {isLoading ? (
+        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
         <LoadingSpinnerIcon className="me-1" />
       ) : (
         <ActionItem
           as={as}
-          className={className + ' w-100'}
+          className={classNames(className, 'w-100')}
           title={translate('Approve')}
           action={callback}
           disabled={isLoading}

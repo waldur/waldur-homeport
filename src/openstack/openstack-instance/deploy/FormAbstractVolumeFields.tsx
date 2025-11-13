@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -175,10 +176,10 @@ export const FormAbstractVolumeFields = (
               )}
               {!props.hideQuotas && quota && (
                 <QuotaUsageBarChart
-                  className={
-                    'capacity-bar mb-2' +
-                    (!showTypeField && props.optional ? ' ms-4' : '')
-                  }
+                  className={classNames(
+                    'capacity-bar mb-2',
+                    !showTypeField && props.optional && 'ms-4',
+                  )}
                   quotas={[quota]}
                 />
               )}
