@@ -7,18 +7,25 @@ import { HeroButton } from './HeroButton';
 
 import './HeroColumn.css';
 
-export const HeroColumn = () => (
-  <div
-    className="hero-column"
-    style={{
-      backgroundImage: `url(${getIconUrl('hero_image')}), url(${DefaultHeroImage})`,
-    }}
-  >
-    <div className="hero-background">
-      <div className="hero-text">
-        <h1>{ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}</h1>
-        <HeroButton />
+export const HeroColumn = () => {
+  const customHeroImage = getIconUrl('hero_image');
+  const backgroundImage = customHeroImage
+    ? `url(${customHeroImage})`
+    : `url(${DefaultHeroImage})`;
+
+  return (
+    <div
+      className="hero-column"
+      style={{
+        backgroundImage,
+      }}
+    >
+      <div className="hero-background">
+        <div className="hero-text">
+          <h1>{ENV.plugins.WALDUR_CORE.SITE_DESCRIPTION}</h1>
+          <HeroButton />
+        </div>
       </div>
     </div>
-  </div>
-);
+  );
+};
