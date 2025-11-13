@@ -42,7 +42,7 @@ export const Link: FunctionComponent<LinkProps> = ({
           !(className || '').includes('btn') &&
           'text-anchor',
       )}
-      onKeyPress={(e) => e.key === 'Enter' && onClick(e)}
+      onKeyDown={(e) => e.key === 'Enter' && onClick(e)}
       role={onClick ? 'button' : undefined}
       {...rest}
     >

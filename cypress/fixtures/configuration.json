@@ -35,6 +35,9 @@
   "WALDUR_SUPPORT": {
     "ENABLED": true
   },
+  "WALDUR_OPENPORTAL": {
+    "ENABLED": false
+  },
   "LANGUAGES": [["en", "English"]],
   "FEATURES": {
     "support": {
