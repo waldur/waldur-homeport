@@ -63,3 +63,13 @@ export const hasPermission = (user: User, request: PermissionRequest) => {
     }
   }
 };
+
+export const userHasRole = (user: User, role: string, scope_uuid: string) => {
+  if (user?.is_staff) {
+    return true;
+  }
+  return user.permissions?.some(
+    (permission) =>
+      permission.role_name === role && permission.scope_uuid === scope_uuid,
+  );
+};
