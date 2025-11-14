@@ -119,8 +119,8 @@ export const EditProjectUserDialog = connect(
           <FormContainer submitting={submitting}>
             <UserGroup permission={resolve.customer} />
             <ProjectGroup project={resolve.project} />
-            <RoleGroup types={['project']} />
-            <ExpirationTimeGroup disabled={submitting} />
+            <RoleGroup types={['project']} legacyField />
+            <ExpirationTimeGroup disabled={submitting} legacyField />
           </FormContainer>
         </ModalDialog>
       </form>

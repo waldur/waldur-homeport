@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'react-final-form';
+import { Field as FinalField } from 'react-final-form';
 import { OptionProps, components } from 'react-select';
+import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { SelectField } from '@waldur/form/SelectField';
@@ -33,18 +34,23 @@ const RoleOption: FunctionComponent<OptionProps<Role>> = (props) => (
   </components.Option>
 );
 
-export const RoleGroup: FunctionComponent<{ types: RoleType[] }> = ({
-  types,
-}) => (
-  <FormGroup label={translate('Role')}>
-    <Field
-      name="role"
-      component={SelectField as any}
-      options={getRoles(types)}
-      getOptionLabel={(role: Role) => role.description || role.name}
-      getOptionValue={({ name }) => name}
-      validate={required}
-      components={{ Option: RoleOption }}
-    />
-  </FormGroup>
-);
+export const RoleGroup: FunctionComponent<{
+  types: RoleType[];
+  legacyField?: boolean;
+}> = ({ types, legacyField }) => {
+  const Component = (legacyField ? Field : FinalField) as any;
+
+  return (
+    <FormGroup label={translate('Role')}>
+      <Component
+        name="role"
+        component={SelectField as any}
+        options={getRoles(types)}
+        getOptionLabel={(role: Role) => role.description || role.name}
+        getOptionValue={({ name }) => name}
+        validate={required}
+        components={{ Option: RoleOption }}
+      />
+    </FormGroup>
+  );
+};
