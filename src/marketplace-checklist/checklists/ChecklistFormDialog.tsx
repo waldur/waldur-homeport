@@ -157,7 +157,6 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
                 getOptionLabel={(option) => option.name}
                 getOptionValue={(option) => option.uuid}
                 noOptionsMessage={() => translate('No categories found')}
-                validate={required}
                 isLoading={isLoading}
                 simpleValue
               />

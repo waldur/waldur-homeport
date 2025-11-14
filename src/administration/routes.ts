@@ -538,6 +538,22 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-onboarding',
+    url: 'onboarding/?tab',
+    parent: 'admin-organizations',
+    component: lazyComponent(() =>
+      import('./organizations/OrganizationOnboardingTabs').then((module) => ({
+        default: module.OrganizationOnboardingTabs,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Onboarding'),
+      permissions: [isStaff],
+      feature: MarketplaceFeatures.show_experimental_ui_components,
+    },
+  },
+
+  {
     name: 'admin-identity',
     url: 'identity/',
     parent: 'admin-settings',

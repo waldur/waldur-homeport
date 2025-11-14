@@ -7,6 +7,7 @@ import {
 export interface ChecklistQuestionForm {
   description: string; // Question
   question_type: QuestionTypeEnum;
+  required?: boolean;
   min_value?: string; // Number question type
   max_value?: string; // Number question type
   options?: string[]; // Select question type

@@ -18,6 +18,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Checklist management'),
       permissions: [isStaff],
+      priority: 100,
     },
   },
 ];

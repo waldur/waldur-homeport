@@ -1,0 +1,111 @@
+.wizard-step-indicator-vertical {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    position: relative;
+
+    &:not(:last-child)::after {
+      content: '';
+      position: absolute;
+      left: 12.5px;
+      top: 41px;
+      width: 2px;
+      height: calc(100% - 41px);
+      background-color: var(--bs-gray-200);
+    }
+
+    &.completed::after {
+      background-color: var(--bs-primary);
+    }
+
+    &.current::after {
+      background-color: var(--bs-gray-400);
+    }
+
+    .step-button {
+      display: flex;
+      align-items: flex-start;
+      gap: 1rem;
+      padding: 1rem 0;
+      width: 100%;
+      border: none;
+      background: transparent;
+      text-align: left;
+      transition: all 0.3s ease;
+
+      &:focus {
+        outline: 2px solid var(--bs-primary);
+        outline-offset: 2px;
+      }
+
+      &:disabled {
+        cursor: not-allowed;
+        opacity: 0.6;
+      }
+    }
+
+    .step {
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      background-color: var(--bs-gray-100);
+      flex-shrink: 0;
+      position: relative;
+      z-index: 1;
+      transition: all 0.3s ease;
+
+      svg,
+      i {
+        color: white !important;
+      }
+    }
+
+    &.completed .step {
+      background-color: var(--bs-primary);
+      color: white;
+
+      svg,
+      i {
+        color: white !important;
+      }
+    }
+
+    &.active .step {
+      svg,
+      i {
+        color: white !important;
+      }
+    }
+
+    .caption {
+      flex: 1;
+      padding-top: 0.25rem;
+
+      .step-label {
+        font-weight: 500;
+        font-size: 14px;
+        color: var(--bs-gray-700);
+        margin-bottom: 0.25rem;
+      }
+
+      .step-description {
+        font-size: 14px;
+        color: var(--bs-gray-500);
+        line-height: 1.4;
+      }
+    }
+
+    .step-button:not(:disabled):hover {
+      .step {
+        transform: scale(1.05);
+      }
+
+      .caption .step-label {
+        color: var(--bs-primary);
+      }
+    }
+  }
+}
