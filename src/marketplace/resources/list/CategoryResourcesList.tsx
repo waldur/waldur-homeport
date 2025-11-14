@@ -222,6 +222,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       title: translate('Termination date'),
       render: ({ row }) =>
         row.end_date ? formatDateTime(row.end_date) : 'N/A',
+      orderField: 'end_date',
       id: 'end_date',
       keys: ['end_date'],
       optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
