@@ -163,6 +163,7 @@ export const getResourceAllListColumns = (
       {
         title: translate('Termination date'),
         render: ResourceTerminationDateField,
+        orderField: 'end_date',
         id: 'end_date',
         keys: ['end_date', 'project_end_date'],
         optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
