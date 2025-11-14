@@ -84,7 +84,11 @@ export const CreateProviderOfferingUserDialog: FC<OwnProps> = ({
       type: 'async_select',
       loadOptions: (query, prevOptions, page) =>
         providerOfferingsAutocomplete(
-          { name: query, customer: provider.customer },
+          {
+            name: query,
+            customer: provider.customer,
+            can_create_offering_user: true,
+          },
           prevOptions,
           page,
         ),
