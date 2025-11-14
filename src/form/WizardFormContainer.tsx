@@ -7,7 +7,7 @@ import {
   useEffect,
   ReactNode,
 } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useStore } from 'react-redux';
 import { change, destroy, getFormValues } from 'redux-form';
 
 import { ProgressStep } from '@waldur/core/ProgressSteps';
@@ -23,6 +23,7 @@ interface WizardFormContainerProps {
   nextLabel?: string;
   steps: ProgressStep[];
   hideStepper?: boolean;
+  verticalLayout?: boolean;
   wizardForms: FC<WizardFormStepProps>[];
   initialValues?: any;
   actions?: WizardFormStepProps['actions'];
@@ -59,13 +60,14 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
 
   const [initialized, setInitialized] = useState(false);
   const dispatch = useDispatch<any>();
-  const formValues = useSelector((state) => getFormValues(form)(state) || {});
-  // Can not use enableReinitialize on reduxForm because of infinite render loop issue
-  const reinitialize = useCallback(() => {
-    if (initialized) return;
-    if (!props.initialValues) {
+  const store = useStore();
+
+  // Initialize form values once on mount
+  useEffect(() => {
+    if (initialized || !props.initialValues) {
       return;
     }
+    const formValues = getFormValues(form)(store.getState()) || {};
     uniq(
       Object.keys(props.initialValues).concat(Object.keys(formValues)),
     ).forEach((key) => {
@@ -76,7 +78,12 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
       }
     });
     setInitialized(true);
-  }, [initialized, setInitialized, dispatch, formValues]);
+  }, [initialized, props.initialValues, form, dispatch, store]);
+
+  // Dummy reinitialize function for backward compatibility
+  const reinitialize = useCallback(() => {
+    // Initialization is handled in useEffect above
+  }, []);
 
   // Destroy the form on close wizard
   useEffect(() => {
@@ -94,6 +101,7 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
     step,
     steps: props.steps,
     hideStepper: props.hideStepper,
+    verticalLayout: props.verticalLayout,
     initialValues: props.initialValues,
     actions: props.actions,
     data: props.data,

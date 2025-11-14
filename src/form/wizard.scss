@@ -25,4 +25,12 @@
       }
     }
   }
+
+  // Vertical layout styles
+  &.wizard-vertical {
+    .wizard-body-vertical {
+      display: block;
+      min-height: 320px;
+    }
+  }
 }

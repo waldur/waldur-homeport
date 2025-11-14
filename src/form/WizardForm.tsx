@@ -8,6 +8,7 @@ import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form';
 import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
+import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
 import { translate } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -31,6 +32,7 @@ export interface WizardFormStepProps
   onPrev(values: any): void;
   onStep?(step: number): void;
   hideStepper?: boolean;
+  verticalLayout?: boolean;
   validate?(values: any): any;
   data?: any;
   reinitialize(): void;
@@ -55,6 +57,98 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
 
   const [loading, setLoading] = useToggle(false);
 
+  const stepsWithCompletion = props.steps.map((step, i) => ({
+    ...step,
+    completed: i < props.step,
+  }));
+
+  const handleStepClick = (_step: ProgressStep, index: number) => {
+    if (!props.onStep || props.submitDisabled) return;
+    if (index > props.step) {
+      props.submit();
+      if (props.valid) {
+        props.onStep(index);
+      }
+    } else {
+      props.onStep(index);
+    }
+  };
+
+  // Vertical layout (non-modal)
+  if (props.verticalLayout) {
+    return (
+      <form
+        className="wizard wizard-vertical"
+        onSubmit={props.handleSubmit(props.onSubmit)}
+      >
+        <div className="d-flex gap-7">
+          {/* Left Sidebar with Stepper */}
+          {!props.hideStepper && (
+            <div className="flex-shrink-0" style={{ width: '300px' }}>
+              <VerticalProgressSteps
+                steps={stepsWithCompletion}
+                onClick={handleStepClick}
+              />
+            </div>
+          )}
+
+          {/* Main Content */}
+          <div className="flex-grow-1">
+            <div className="wizard-body-vertical">
+              {typeof props.children === 'function'
+                ? props.children({ ...props, formValues, setLoading })
+                : props.children}
+            </div>
+
+            {/* Footer buttons inside form container */}
+            <div className="d-flex justify-content-between mt-5 pt-5 border-top">
+              <Button
+                variant="outline btn-secondary"
+                onClick={() => props.onPrev(formValues)}
+                disabled={props.step === 0}
+                className="min-w-125px"
+              >
+                <span className="svg-icon svg-icon-4">
+                  <CaretLeftIcon weight="bold" />
+                </span>
+                {translate('Back')}
+              </Button>
+              <div className="d-flex gap-3">
+                <CloseDialogButton className="min-w-125px" />
+                {props.actions}
+                {typeof props.actions === 'function'
+                  ? props.actions({ formValues })
+                  : props.actions}
+                {wrapTooltip(
+                  props.submitTooltip,
+                  <SubmitButton
+                    submitting={props.submitting}
+                    label={props.submitLabel}
+                    invalid={props.submitDisabled || loading}
+                    className="btn-icon-right min-w-125px"
+                    children={
+                      loading ? (
+                        <span className="svg-icon svg-icon-2">
+                          {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
+                          <LoadingSpinnerIcon />
+                        </span>
+                      ) : props.step !== props.steps.length - 1 ? (
+                        <span className="svg-icon svg-icon-2">
+                          <CaretRightIcon weight="bold" />
+                        </span>
+                      ) : null
+                    }
+                  />,
+                )}
+              </div>
+            </div>
+          </div>
+        </div>
+      </form>
+    );
+  }
+
+  // Horizontal layout (modal)
   return (
     <form className="wizard" onSubmit={props.handleSubmit(props.onSubmit)}>
       <ModalDialog
@@ -115,17 +209,7 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
             <StepsList
               steps={props.steps}
               value={props.steps[props.step]}
-              onClick={(_, index) => {
-                if (!props.onStep || props.submitDisabled) return;
-                if (index > props.step) {
-                  props.submit();
-                  if (props.valid) {
-                    props.onStep(index);
-                  }
-                } else {
-                  props.onStep(index);
-                }
-              }}
+              onClick={handleStepClick}
             />
           )}
 

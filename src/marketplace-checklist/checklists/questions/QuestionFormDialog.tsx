@@ -101,6 +101,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
         description: formData.description,
         question_type: formData.question_type,
         review_answer_value: formData.review_answer_value,
+        required: formData.required || false,
       };
 
       if (formData.question_type === 'number') {

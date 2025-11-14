@@ -2,6 +2,7 @@ import { Field } from 'react-final-form';
 
 import { greaterThan, required } from '@waldur/core/validators';
 import { NumberField, SelectField, TextField } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormFieldError } from '@waldur/form/FormFieldError';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -39,6 +40,12 @@ export const QuestionGeneralForm = ({
           simpleValue
         />
       </FormGroup>
+
+      <Field
+        name="required"
+        component={AwesomeCheckboxField as any}
+        label={translate('Is required?')}
+      />
 
       {['single_select', 'multi_select'].includes(values.question_type) ? (
         <QuestionAnswerOptions />

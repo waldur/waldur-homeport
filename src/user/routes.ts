@@ -218,6 +218,21 @@ export const states: StateDeclaration[] = [
     parent: 'layout',
   },
   {
+    name: 'organizations-create',
+    url: '/organizations/create/',
+    component: lazyComponent(() =>
+      import('./organization-create/OrganizationCreatePage').then((module) => ({
+        default: module.OrganizationCreatePage,
+      })),
+    ),
+    parent: 'layout',
+    data: {
+      auth: true,
+      breadcrumb: () => translate('Create organization'),
+      feature: MarketplaceFeatures.show_experimental_ui_components,
+    },
+  },
+  {
     name: 'user-email-change',
     url: '/user_email_change/:token/',
     component: lazyComponent(() =>
