@@ -1,11 +1,7 @@
-import {
-  CaretDownIcon,
-  MagnifyingGlassIcon,
-  XIcon,
-} from '@phosphor-icons/react';
+import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { Button } from 'react-bootstrap';
 
+import { StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 import { SearchResult } from './useSearch';
@@ -15,20 +11,14 @@ interface SearchProps {
   query: string;
   show: boolean;
   setQuery;
-  hasFilters?: boolean;
   className?: string;
 }
-
-const hiddenStyle = {
-  display: 'none',
-};
 
 export const SearchInput = ({
   result,
   query,
   show,
   setQuery,
-  hasFilters,
   className,
 }: SearchProps) => {
   const isLoading = result.isLoading || result.isRefetching;
@@ -36,66 +26,31 @@ export const SearchInput = ({
   return (
     <div className={className}>
       <form className="w-100 position-relative" autoComplete="off">
-        <input style={hiddenStyle} type="text" name="fakeusernameremembered" />
-        <input
-          style={hiddenStyle}
-          type="password"
-          name="fakepasswordremembered"
-        />
-
-        <span className="position-absolute top-50 translate-middle-y ms-4">
-          <MagnifyingGlassIcon
-            weight="bold"
-            size={20}
-            className="text-gray-500"
-          />
-        </span>
-        <input
-          type="text"
-          className="search-input form-control placeholder-gray-400 ps-13 fs-4 h-40px"
-          name="search"
+        <StringField
+          className="search-input w-lg-325px"
           value={query}
           onChange={(event) => setQuery(event.target.value)}
           placeholder={translate('Search...')}
+          icon={<MagnifyingGlassIcon weight="bold" />}
         />
 
+        {/* Loading */}
         {show && isLoading ? (
-          <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-4">
+          <span className="position-absolute top-50 end-0 translate-middle-y lh-0 me-4 z-index-5">
             <span className="spinner-border h-15px w-15px align-middle text-gray-400" />
           </span>
         ) : null}
+        {/* Clear button */}
         <button
           type="button"
           className={classNames(
-            'btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-4',
+            'btn btn-flush btn-active-color-primary position-absolute top-50 end-0 translate-middle-y lh-0 me-4 z-index-5',
             !isLoading && query ? '' : 'd-none',
           )}
           onClick={() => setQuery('')}
         >
           <XIcon weight="bold" size={16} className="text-gray-400" />
         </button>
-
-        {/* Filters toggle */}
-        {hasFilters && (
-          <div
-            className={classNames(
-              'position-absolute top-50 end-0 translate-middle-y',
-              !isLoading && !query ? '' : 'd-none',
-            )}
-            data-kt-search-element="toolbar"
-          >
-            <Button
-              variant="text-primary"
-              data-kt-search-element="advanced-options-form-show"
-              size="sm"
-              className="btn-icon w-20px"
-              data-bs-toggle="tooltip"
-              title="Show more search options"
-            >
-              <CaretDownIcon size={30} weight="bold" />
-            </Button>
-          </div>
-        )}
       </form>
     </div>
   );

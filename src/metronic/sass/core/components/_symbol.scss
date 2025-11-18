@@ -23,8 +23,8 @@
     flex-shrink: 0;
     font-weight: 500;
     line-height: 1;
-    color: if(isDarkMode(), $primary-500, $primary);
-    background-color: if(isDarkMode(), $gray-100, $primary-50);
+    color: $text-quaternary;
+    background-color: $bg-tertiary;
     background-repeat: no-repeat;
     background-position: center center;
     background-size: cover;
@@ -101,17 +101,27 @@
   align-items: center;
   margin-left: 10px;
 
-  .symbol {
-    position: relative;
+  > * {
     z-index: 0;
-    margin-left: -10px;
-    border: 2px solid $body-bg;
-    transition: all 0.3s ease;
+    margin-left: -16px;
 
     &:hover {
-      transition: all 0.3s ease;
       z-index: 1;
     }
+  }
+
+  .symbol {
+    position: relative;
+    border: 2px solid $body-bg;
+    transition: all 0.3s ease;
+  }
+
+  &.symbol-group-sm > * {
+    margin-left: -12px;
+  }
+
+  &.symbol-group-xs > * {
+    margin-left: -8px;
   }
 
   &.symbol-hover {

@@ -83,12 +83,16 @@ export const AppFooter: FunctionComponent = () => {
   return (
     <div className="footer py-4 d-flex flex-lg-column">
       <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between fs-6">
-        <div className="text-dark order-2 order-md-1 icon-align">
-          <BackendHealthStatusIndicator />
+        <div className="text-dark fw-bold order-2 order-md-1 icon-align">
           {translate('Version')}: {ENV.buildId}
+          <BackendHealthStatusIndicator />
           {showUpgradeAvailable && (
-            <Tip id="upgrade-tooltip" label={translate('Update available')}>
-              <span className="ms-2 d-inline-block">
+            <Tip
+              id="upgrade-tooltip"
+              label={translate('Update available')}
+              className="ms-8px"
+            >
+              <span className="d-inline-block">
                 <ArrowCircleUpIcon
                   size={20}
                   color="#6B8E23"

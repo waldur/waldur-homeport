@@ -35,7 +35,7 @@ export const BackendHealthStatusIndicator: FC = () => {
   if (!value) return null;
 
   return (
-    <span className="me-2">
+    <span className="ms-8px">
       <button
         type="button"
         className="text-btn"

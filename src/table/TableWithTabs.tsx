@@ -115,7 +115,7 @@ export const TableWithTabs: FC<
           <Col sm="auto" className="ms-auto">
             <div
               ref={refToolbar}
-              className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3"
+              className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4"
             >
               {/* Portal destination */}
             </div>

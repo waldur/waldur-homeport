@@ -47,9 +47,10 @@ export const HooksList: FunctionComponent = () => {
       columns={[
         {
           title: translate('State'),
-          className: 'text-center all',
+          className: 'text-center',
           render: StateField,
           export: false,
+          width: '4%',
         },
         {
           title: translate('Method'),

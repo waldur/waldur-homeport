@@ -59,7 +59,7 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
   return (
     <>
       {showDefaultActions && (
-        <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3 flex-grow-1 flex-sm-grow-0">
+        <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4 flex-grow-1 flex-sm-grow-0">
           {/* Filter */}
           {['menu', 'sidebar'].includes(props.filterPosition) &&
             props.filters && (

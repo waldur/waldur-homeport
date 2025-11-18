@@ -58,7 +58,7 @@ const TableComponent = (
   return (
     <table
       className={classNames(
-        'table align-middle table-row-bordered fs-6 gy-0 gx-2 no-footer',
+        'table align-middle table-row-bordered fs-6 gy-0 gx-8px no-footer',
         {
           'table-expandable': Boolean(props.expandableRow),
           'table-hover': props.hoverable,
@@ -192,7 +192,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
               )}
             </div>
             {!this.props.standaloneActionsInTable && (
-              <div className="d-none d-sm-flex gap-3">
+              <div className="d-none d-sm-flex gap-4">
                 {this.props.tableActions}
               </div>
             )}
@@ -236,7 +236,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
                                 titleCase(this.props.verboseName))}
                           </span>
                           {Boolean(this.props.subtitle) && (
-                            <small className="fs-6 fw-normal d-block mt-2">
+                            <small className="fs-6 fw-normal d-block mt-4px">
                               {this.props.subtitle}
                             </small>
                           )}
@@ -408,7 +408,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
           this.props.multiSelectActions && (
             <Col
               xs="auto"
-              className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-3"
+              className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-4"
             >
               <Stack
                 direction="horizontal"
@@ -457,7 +457,7 @@ class TableClass<RowType = any> extends React.Component<TableProps<RowType>> {
         {/* Remaining table action buttons */}
         <Col sm="auto" className="order-3 order-sm-3 ms-auto">
           {this.showActionsColumn() && (
-            <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3">
+            <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4">
               <TableButtons
                 {...this.props}
                 showFilterMenuToggle={this.state.showFilterMenuToggle}

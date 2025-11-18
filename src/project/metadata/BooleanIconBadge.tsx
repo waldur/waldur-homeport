@@ -5,9 +5,9 @@ import { Badge } from '@waldur/core/Badge';
 export const BooleanIconBadge = ({ value }) => (
   <Badge variant={value ? 'pink' : 'default'} outline pill size="sm" onlyIcon>
     {value ? (
-      <WarningIcon weight="bold" size={12} className="text-pink" />
+      <WarningIcon weight="bold" size={12} />
     ) : (
-      <MinusIcon weight="bold" size={12} className="text-muted" />
+      <MinusIcon weight="bold" size={12} />
     )}
   </Badge>
 );

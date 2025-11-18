@@ -3,8 +3,6 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 
-import './ProgressSteps.scss';
-
 const DEFAULT_VARIANT = 'primary';
 
 export interface ProgressStep {
@@ -54,9 +52,10 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                   <div className="stepper-wrapper d-flex flex-column align-items-center">
                     <div
                       className={classNames(
-                        'stepper-icon w-25px h-25px',
-                        current ? `bg-${variant}` : '',
-                        current ? `ring-light-${variant} ring-4` : '',
+                        'stepper-icon',
+                        current && variant !== DEFAULT_VARIANT
+                          ? `bg-${variant} ring-${variant} ring-4`
+                          : '',
                         Boolean(onClick) && 'cursor-pointer',
                       )}
                       onClick={() => onClick(step, i)}
@@ -74,16 +73,13 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         <CircleIcon size={10} weight="fill" />
                       )}
                     </div>
-                    <div
-                      className={classNames(
-                        'stepper-line-area h-25px',
-                        bgClass,
-                      )}
-                    >
+                    <div className={classNames('stepper-line-area', bgClass)}>
                       <div
                         className={classNames(
                           'stepper-line',
-                          current && `bg-${variant}`,
+                          current &&
+                            variant !== DEFAULT_VARIANT &&
+                            `bg-${variant}`,
                         )}
                         style={{ width: 100 / steps.length + 'vw' }}
                       />
@@ -93,7 +89,9 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                       <div
                         className={classNames(
                           'stepper-title h3',
-                          current && `text-${variant}-700`,
+                          current &&
+                            variant !== DEFAULT_VARIANT &&
+                            `text-${variant}`,
                           step.labelClass,
                         )}
                       >
@@ -103,7 +101,9 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                         <div
                           className={classNames(
                             'stepper-desc',
-                            current && `text-${variant}`,
+                            current &&
+                              variant !== DEFAULT_VARIANT &&
+                              `text-${variant}-600`,
                           )}
                         >
                           {step.description.map((line, i) => (

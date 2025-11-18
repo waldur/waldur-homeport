@@ -33,7 +33,7 @@ const FullMarkdownModal: FC<FullMarkdownModalProps> = ({ resolve }) => {
           {resolve.showInternalBadge && (
             <>
               {' '}
-              <Badge variant="warning" light={true} outline={true}>
+              <Badge variant="warning" pill outline>
                 {translate('Internal')}
               </Badge>
             </>

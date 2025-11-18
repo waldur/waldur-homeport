@@ -1,0 +1,22 @@
+.tag {
+  background-color: $bg-primary;
+  color: $text-secondary;
+  border: 1px solid $border-primary;
+  border-radius: $border-radius-sm;
+  padding: 1px 8px;
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  font-size: $font-size-lg;
+  line-height: 20px;
+
+  &.tag-sm {
+    font-size: $font-size-sm;
+    line-height: 18px;
+  }
+
+  &.tag-lg {
+    padding-top: 3px;
+    padding-bottom: 3px;
+  }
+}

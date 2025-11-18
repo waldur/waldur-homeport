@@ -45,6 +45,37 @@
     height: 3.385rem;
     width: 3.385rem;
   }
+
+  &.btn-avatar {
+    width: 32px;
+    height: 32px;
+    color: $fg-quinary;
+    border-color: $border-primary !important;
+
+    @include svg-icon-color($fg-quinary);
+
+    &:hover {
+      @include svg-icon-color($fg-quaternary);
+    }
+    &:focus {
+      background-color: $bg-primary !important;
+      box-shadow: $ring-gray-100-lg !important;
+    }
+    &:disabled {
+      background-color: $bg-disabled !important;
+      border-color: $border-disabled !important;
+      @include svg-icon-color($fg-disabled);
+    }
+
+    &.btn-sm {
+      width: 24px;
+      height: 24px;
+    }
+    &.btn-lg {
+      width: 40px;
+      height: 40px;
+    }
+  }
 }
 
 .up-down-buttons {

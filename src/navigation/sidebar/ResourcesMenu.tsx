@@ -93,7 +93,7 @@ const RenderMenuItems = ({ items }) => {
             itemId={item.uuid}
             child
             badge={
-              <Badge bg="" pill className="badge">
+              <Badge bg="" pill>
                 {item.resource_count}
               </Badge>
             }

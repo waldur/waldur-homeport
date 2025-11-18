@@ -1,8 +1,10 @@
 import { ListIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 
 import { getIconUrl } from '@waldur/core/api';
+import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { Link } from '@waldur/core/Link';
 import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
 import { useUser } from '@waldur/workspace/hooks';
@@ -41,6 +43,8 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
 
   const hasSupport = useSelector(hasSupportSelector);
 
+  const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.lg });
+
   return (
     <div className="header align-items-stretch">
       <div className="container-fluid d-flex align-items-stretch justify-content-between">
@@ -74,14 +78,19 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
                 <h1 className="text-dark fw-boldest fs-2 my-1">{pageTitle}</h1>
               </div>
             ) : (
-              <SearchToggle />
+              !isSmallScr && <SearchToggle />
             )}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
-            {user && (hasBreadcrumbs || pageTitle) && <SearchToggle />}
-            {user && hasSupport && <QuickIssueDrawerToggle />}
-            {user && <ConfirmationDrawerToggle />}
-            <div className="d-flex align-items-center ms-1 ms-lg-3">
+            {Boolean(user) && (hasBreadcrumbs || pageTitle || isSmallScr) && (
+              <SearchToggle />
+            )}
+            {Boolean(user) && hasSupport && <QuickIssueDrawerToggle />}
+            {Boolean(user) && <ConfirmationDrawerToggle />}
+            {Boolean(user) && isSmallScr && (
+              <span className="h-40px border-end align-self-center ms-1" />
+            )}
+            <div className="d-flex align-items-center ms-3">
               <UserDropdownMenu />
             </div>
           </div>

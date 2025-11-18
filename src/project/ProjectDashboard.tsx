@@ -204,7 +204,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                 title={
                   <>
                     {translate('Staff Notes')}{' '}
-                    <Badge variant="warning" light={true} outline={true}>
+                    <Badge variant="warning" pill outline>
                       {translate('Internal')}
                     </Badge>
                   </>

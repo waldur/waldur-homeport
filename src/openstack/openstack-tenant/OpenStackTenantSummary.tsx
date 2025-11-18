@@ -1,6 +1,7 @@
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Badge, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
+import { Badge } from '@waldur/core/Badge';
 import { ENV } from '@waldur/core/config';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import FormTable from '@waldur/form/FormTable';
@@ -98,8 +99,8 @@ const QuotaBadges = ({
       ))}
       {quotas.length > max && (
         <Badge
-          bg="secondary"
-          text="dark"
+          variant="default"
+          outline
           className="cursor-pointer mb-1"
           onClick={() => setShowAll((prev) => !prev)}
         >

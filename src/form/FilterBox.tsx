@@ -1,18 +1,16 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useEffect, useRef } from 'react';
-import { Form, FormControlProps } from 'react-bootstrap';
+import { Form, FormControlProps, InputGroup } from 'react-bootstrap';
 
 interface FilterBoxProps extends FormControlProps {
   autoFocus?: boolean;
-  solid?: boolean;
   inputClassName?: string;
 }
 
 export const FilterBox: FC<FilterBoxProps> = ({
   className,
   autoFocus,
-  solid,
   inputClassName,
   ...props
 }: any) => {
@@ -26,21 +24,18 @@ export const FilterBox: FC<FilterBoxProps> = ({
     }
     inputRef?.current.focus();
   }, [inputRef, autoFocus]);
+
   return (
-    <div className={classNames('position-relative', className)}>
-      <span className="svg-icon svg-icon-2 svg-icon-gray-500 position-absolute top-50 translate-middle-y ms-4">
-        <MagnifyingGlassIcon weight="bold" size={20} />
-      </span>
+    <InputGroup className={classNames('has-icon', className)}>
+      <div className="input-group-icon">
+        <MagnifyingGlassIcon weight="bold" />
+      </div>
       <Form.Control
         type="text"
-        className={classNames(
-          solid && 'form-control-solid',
-          'ps-13 placeholder-gray-500 fs-4',
-          inputClassName,
-        )}
+        className={inputClassName}
         {...props}
         ref={inputRef}
       />
-    </div>
+    </InputGroup>
   );
 };

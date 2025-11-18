@@ -7,7 +7,7 @@ import {
 import { FunctionComponent } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import Pagination from '@waldur/table/Pagination';
 
 import { PAGE_SIZE_COMPACT } from './constants';
@@ -33,7 +33,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
 
   return props.resultCount > PAGE_SIZE_COMPACT ? (
     <>
-      <div className="table-pagination d-none d-md-block">
+      <div className="table-pagination d-none d-md-block px-5">
         <Row className="d-flex px-0 align-items-center">
           <Col
             sm="auto"
@@ -66,7 +66,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
           <Col sm="auto" lg={6} xl={3} className="order-3">
             <div className="d-flex align-items-center justify-content-end">
               {props.hasRows && (
-                <div className="text-dark text-nowrap fs-6 me-4">
+                <div className="text-muted text-nowrap fs-7 me-8">
                   {translate('{from}-{to} of {all} items', {
                     from,
                     to,
@@ -75,21 +75,25 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
                 </div>
               )}
               <div
-                className={'page-item me-1' + (prevDisabled ? ' disabled' : '')}
+                className={
+                  'page-item previous' + (prevDisabled ? ' disabled' : '')
+                }
               >
                 <button
                   type="button"
-                  className="page-link px-1"
+                  className="page-link"
                   disabled={prevDisabled}
                   onClick={() => props.gotoPage(props.currentPage - 1)}
                 >
                   <CaretLeftIcon size={20} weight="bold" />
                 </button>
               </div>
-              <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>
+              <div
+                className={'page-item next' + (nextDisabled ? ' disabled' : '')}
+              >
                 <button
                   type="button"
-                  className="page-link px-1"
+                  className="page-link"
                   disabled={nextDisabled}
                   onClick={() => props.gotoPage(props.currentPage + 1)}
                 >
@@ -114,11 +118,15 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
           </Button>
         </div>
         {props.hasRows && (
-          <div className="text-dark text-nowrap fs-6 me-4">
-            {translate('Page {page} of {total}', {
-              page: props.currentPage,
-              total: totalPages,
-            })}
+          <div className="text-secondary text-nowrap fs-5 mx-2">
+            {translate(
+              'Page {page} of {total}',
+              {
+                page: <b>{props.currentPage}</b>,
+                total: <b>{totalPages}</b>,
+              },
+              formatJsxTemplate,
+            )}
           </div>
         )}
         <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>

@@ -57,7 +57,7 @@ export const ConfirmationDrawerToggle: React.FC = () => {
   };
 
   return (
-    <div className="d-flex align-items-center ms-1 ms-lg-3">
+    <div className="d-flex align-items-center ms-1">
       <button
         id="pending-confirmations-toggle"
         type="button"

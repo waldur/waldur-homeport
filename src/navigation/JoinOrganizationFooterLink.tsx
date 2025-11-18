@@ -20,7 +20,7 @@ export const JoinOrganizationFooterLink = ({ loginPage = false }) => {
   return (
     <li className="menu-item" data-kt-menu-trigger="click">
       <Link
-        className="menu-link text-anchor px-2"
+        className="menu-link text-anchor px-8px"
         state="public.join-organization"
       >
         <span className="menu-icon">

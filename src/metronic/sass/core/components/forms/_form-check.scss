@@ -7,7 +7,11 @@
   .form-check-label {
     cursor: pointer;
     font-size: 1.075rem; // fs-6
-    color: $gray-700;
+    color: $text-secondary;
+  }
+
+  .form-text {
+    color: $text-quaternary;
   }
 
   // Input
@@ -16,6 +20,30 @@
     -webkit-appearance: none;
     -moz-appearance: none;
     appearance: none;
+
+    // Disabled state (unchecked)
+    &:disabled {
+      background-color: $bg-disabled_subtle !important;
+      border-color: $border-disabled !important;
+      pointer-events: none;
+
+      // Checked state
+      &:checked[type='checkbox'] {
+        background-image: $form-check-input-disabled-checked-bg-image;
+      }
+      &:indeterminate[type='checkbox'] {
+        background-image: $form-check-input-disabled-indeterminate-bg-image;
+      }
+      &:checked[type='radio'] {
+        background-image: $form-check-radio-disabled-checked-bg-image;
+      }
+
+      ~ .form-check-label,
+      ~ .form-check-label .form-text,
+      ~ .form-text {
+        color: $text-disabled !important;
+      }
+    }
   }
 
   // Custom
@@ -96,6 +124,10 @@
     .form-check-input {
       height: $form-check-input-width-sm;
       width: $form-check-input-width-sm;
+
+      &[type='checkbox'] {
+        border-radius: $form-check-input-border-radius-sm;
+      }
     }
   }
 
@@ -103,6 +135,14 @@
     .form-check-input {
       height: $form-check-input-width-lg;
       width: $form-check-input-width-lg;
+    }
+  }
+
+  &.form-check-start {
+    align-items: start;
+
+    &.form-check-sm .form-check-input {
+      margin-top: 2px;
     }
   }
 }
@@ -118,13 +158,14 @@
   }
   &.form-check-solid {
     .form-check-input {
-      background-color: $gray-100;
+      background-color: $bg-tertiary;
       height: $form-switch-height;
       background-image: escape-svg($form-switch-bg-image-solid);
       border-radius: $form-switch-border-radius;
+      transition: $form-check-transition;
 
       &:not(:checked) {
-        border: 1px solid $border-color;
+        border: 1px solid $border-secondary;
       }
 
       &:hover {
@@ -132,12 +173,18 @@
       }
       &:active,
       &:focus {
-        background-color: $gray-100;
+        background-color: $bg-tertiary;
+      }
+
+      // Focus state
+      &:focus {
+        box-shadow: $ring-primary-100;
       }
 
       &:disabled {
         opacity: unset;
         background-image: escape-svg($form-switch-bg-image-solid-disabled);
+        background-color: $bg-disabled !important;
       }
       &:checked {
         filter: none;
@@ -145,7 +192,7 @@
         background-image: escape-svg($form-switch-checked-bg-image-solid);
 
         &:disabled {
-          background-color: $brand-200;
+          background-color: $brand-200 !important;
           background-image: escape-svg(
             $form-switch-checked-bg-image-solid-disabled
           );

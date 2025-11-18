@@ -35,13 +35,21 @@
     @include svg-icon-color($gray-400);
   }
 
+  &:focus,
+  &:active,
   &:hover {
-    background-color: $brand-50;
+    background-color: $btn-secondary-bg;
+
+    i {
+      color: $text-brand-secondary;
+    }
+    .svg-icon {
+      @include svg-icon-color($text-brand-secondary);
+    }
   }
 
   &:focus,
   &:active {
-    background-color: $bg-primary;
-    box-shadow: $ring-gray-100;
+    box-shadow: $ring-primary-100;
   }
 }

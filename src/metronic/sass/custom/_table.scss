@@ -14,7 +14,7 @@
   }
 
   thead > tr {
-    background-color: $gray-50;
+    background-color: $bg-secondary;
 
     > th {
       font-size: 12px;
@@ -63,11 +63,11 @@
   &.table-expandable tr {
     &.expanded,
     &.expanded + tr {
-      background-color: $gray-50;
+      background-color: $bg-secondary;
 
       th.pinned,
       td.pinned {
-        background-color: $gray-50;
+        background-color: $bg-secondary;
       }
     }
     &.expanded + tr {
@@ -166,6 +166,11 @@
       }
     }
 
+    > td > *,
+    > td .td-data > * {
+      vertical-align: middle;
+    }
+
     &:hover > td.has-filter {
       div.td-data:not(.with-copy div.td-data) {
         width: calc(100% - 40px); /* 32px of filter button + 8px of gap */
@@ -190,7 +195,7 @@
     position: sticky;
     right: 0;
     z-index: 2;
-    background-color: if(isDarkMode(), $brand-50, $gray-50);
+    background-color: $bg-secondary;
   }
   td.pinned {
     background-color: $card-bg;
@@ -255,6 +260,13 @@
 
       .card-title {
         margin: 0;
+
+        .h3 {
+          line-height: 28px;
+        }
+        small {
+          line-height: 20px;
+        }
       }
     }
   }
@@ -393,25 +405,47 @@
   }
 
   .table-pagination {
-    padding-top: $card-py;
+    padding-top: $table-pagination-padding-y;
     border-top: 1px solid $border-color;
 
     .page-item {
       .page-link {
-        color: $gray-500;
+        color: $text-quaternary;
         width: 40px;
         height: 40px;
+        transition: $transition-base;
       }
-      .page-link:focus,
+      .page-link:focus {
+        background-color: $bg-primary_hover;
+        box-shadow: $ring-primary-200;
+      }
+      .page-link:active,
       .page-link:hover,
       &.active .page-link {
-        color: if(isDarkMode(), $brand-600, $brand);
-        background-color: if(isDarkMode(), $brand-50, $brand-100);
+        color: $text-secondary;
+        background-color: $bg-primary_hover;
+      }
+      &.disabled .page-link {
+        color: $fg-disabled;
+      }
+
+      &.next,
+      &.previous {
+        .page-link {
+          width: 28px;
+          height: 28px;
+          padding: 0;
+        }
       }
     }
 
+    // Page size selector
     .form-select {
       color: $dark;
+      -webkit-appearance: none;
+      -moz-appearance: none;
+      @include svg-bg-icon(arrow-bottom, $fg-quinary);
+      background-position: 100%;
 
       option {
         background-color: $body-bg;

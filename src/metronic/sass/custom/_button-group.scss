@@ -24,3 +24,21 @@
     content: none;
   }
 }
+
+.btn-group {
+  .btn-check + .btn:focus,
+  .btn-check:focus + .btn,
+  .btn:focus:not(.btn-active),
+  .btn-check:checked + .btn {
+    background-color: $bg-tertiary;
+    box-shadow: unset;
+  }
+  .btn-check:active + .btn,
+  .btn-check + .btn:active {
+    border-color: $border-primary;
+  }
+  .btn-check:disabled + .btn {
+    border-color: $border-primary;
+    color: $text-disabled;
+  }
+}

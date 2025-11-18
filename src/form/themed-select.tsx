@@ -21,8 +21,8 @@ import { AsyncPaginate as BaseAsyncPaginate } from 'react-select-async-paginate'
 import BaseWindowedSelect from 'react-windowed-select';
 import { BaseFieldProps } from 'redux-form';
 
+import { Tag } from '@waldur/core/Tag';
 import { translate } from '@waldur/i18n';
-import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
 import { useTheme } from '@waldur/theme/useTheme';
 
 const REACT_SELECT_MENU_PORTALING: Partial<SelectProps> = {
@@ -78,10 +78,7 @@ export const MultiSelectOption = (props) => {
   );
 };
 const MultiSelectValue = (props: MultiValueProps) => (
-  <span className="badge">
-    {props.children}
-    <RemoveFilterBadgeButton size={12} onClick={props.removeProps.onClick} />
-  </span>
+  <Tag onClear={props.removeProps.onClick}>{props.children}</Tag>
 );
 
 const MultiSelectLimitedValueContainer = (props) => {
@@ -116,7 +113,7 @@ const MultiSelectLimitedValueContainer = (props) => {
             </Popover>
           }
         >
-          <span className="badge">+{hiddenValues.length}</span>
+          <Tag>+{hiddenValues.length}</Tag>
         </OverlayTrigger>
       )}
 
