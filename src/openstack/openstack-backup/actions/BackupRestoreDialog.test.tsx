@@ -197,7 +197,7 @@ describe('BackupRestoreDialog', () => {
     // Check that all security groups are present in the dropdown
     fakeBackup.instance_security_groups.forEach((group) => {
       expect(
-        screen.getByText(group.name, { selector: 'span.badge' }),
+        screen.getByText(group.name, { selector: 'span.tag' }),
       ).toBeInTheDocument();
     });
   });

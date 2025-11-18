@@ -23,7 +23,7 @@ export const QuickIssueDrawerToggle: React.FC = () => {
   };
 
   return (
-    <div className="d-flex align-items-center ms-1 ms-lg-3">
+    <div className="d-flex align-items-center ms-1">
       <button
         id="quick-issue-toggle"
         type="button"

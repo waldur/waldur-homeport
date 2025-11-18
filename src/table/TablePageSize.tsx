@@ -16,11 +16,11 @@ export const TablePageSize: FunctionComponent<TablePageSizeProps> = (props) => {
   }
   return (
     <div className="d-flex align-items-center">
-      <label className="text-gray-500 text-nowrap">
+      <label className="text-muted text-nowrap fs-7">
         {translate('Rows per page')}:
       </label>
       <select
-        className="form-select form-select-sm form-select-transparent ps-2 pe-9"
+        className="form-select form-select-sm form-select-transparent ps-2 pe-5"
         onChange={(event) => {
           props.updatePageSize(parseInt(event.target.value, 10));
         }}

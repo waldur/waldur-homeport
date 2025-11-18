@@ -62,7 +62,7 @@ const TableTitle = ({ title }) => (
   <>
     {title}
     <Badge
-      leftIcon={<CubeIcon weight="bold" size={12} />}
+      leftIcon={<CubeIcon weight="bold" />}
       rightIcon={
         <Tip
           label={translate(
@@ -80,7 +80,7 @@ const TableTitle = ({ title }) => (
       size="lg"
       pill
       outline
-      className="align-middle pe-8 ps-7 ms-3"
+      className="ms-3"
     >
       {translate('Template based')}
     </Badge>

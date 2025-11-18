@@ -39,4 +39,14 @@ $rotate-transition: transform 0.3s ease;
       }
     }
   }
+
+  .rotate-active-#{$value} {
+    transition: $rotate-transition;
+    backface-visibility: hidden;
+    transform: rotateZ(#{$value}deg);
+
+    [direction='rtl'] & {
+      transform: rotateZ(-#{$value}deg);
+    }
+  }
 }

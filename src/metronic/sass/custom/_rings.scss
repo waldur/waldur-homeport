@@ -3,30 +3,38 @@
 //
 
 // Gray ring colors
-@each $color, $value in $grays {
+@each $name, $value in $grays {
   // Initial
-  .ring-gray-#{$color} {
+  .ring-gray-#{$name} {
     outline-color: $value !important;
   }
 }
 
 @each $name, $value in $theme-colors {
+  @if ($name == primary) {
+    $value: $brand;
+  }
+
   .ring-#{$name} {
-    outline: 1px solid $value;
+    outline: 1px solid $value !important;
   }
 
   .ring-light-#{$name} {
-    outline: 1px solid theme-light-color($name);
+    outline: 1px solid theme-light-color($name) !important;
   }
 }
 
 // Hover border colors
-@each $color, $value in $theme-colors {
-  .ring-hover-#{$color}:hover {
+@each $name, $value in $theme-colors {
+  @if ($name == primary) {
+    $value: $brand;
+  }
+
+  .ring-hover-#{$name}:hover {
     outline-color: $value !important;
   }
 
-  .ring-active-#{$color}.active {
+  .ring-active-#{$name}.active {
     outline-color: $value !important;
   }
 }

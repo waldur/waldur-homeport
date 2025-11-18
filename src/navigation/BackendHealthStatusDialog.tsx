@@ -25,7 +25,7 @@ export const BackendHealthStatusDialog: FunctionComponent = () => {
         </>
       }
       className="card card-table"
-      bodyClassName="card-body pb-0 min-h-275px pt-4"
+      bodyClassName="card-body pb-0 h-275px pt-4"
       footerClassName="border-0"
       footer={<CloseDialogButton label={translate('Done')} />}
     >

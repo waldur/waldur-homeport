@@ -6,6 +6,7 @@ import { Button, Col } from 'react-bootstrap';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Tip } from '@waldur/core/Tooltip';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
@@ -83,7 +84,7 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
           : null
       }
       right={
-        <Col xs="auto" className="d-flex align-items-center gap-3">
+        <Col xs="auto" className="d-flex align-items-center gap-2">
           {isLoading ? (
             <LoadingSpinner />
           ) : error ? (
@@ -107,15 +108,16 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
             (loadingAdd ? (
               <LoadingSpinner />
             ) : (
-              <div>
+              <Tip id="tip-add-avatar" label={translate('Add user')}>
                 <Button
                   variant="tertiary"
-                  className="btn-icon border-dashed border-2 btn-color-gray-400 btn-active-color-muted btn-circle w-40px h-40px"
+                  className="btn-icon border-dashed btn-avatar btn-circle"
                   onClick={onAddClick}
+                  size="lg"
                 >
-                  <PlusIcon size={18} weight="bold" />
+                  <PlusIcon size={16} weight="bold" />
                 </Button>
-              </div>
+              </Tip>
             ))}
         </Col>
       }

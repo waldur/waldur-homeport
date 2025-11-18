@@ -71,7 +71,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
           </span>
         )}
       {row.is_removed && (
-        <Badge variant="light-danger" pill className="align-middle fs-8">
+        <Badge variant="danger" outline pill className="fs-8">
           {translate('Removed')}
         </Badge>
       )}

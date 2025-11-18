@@ -62,9 +62,11 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
           />
         ) : (
           item.text
-        )}{' '}
+        )}
         {!item.hideDropdownArrow && (
-          <CaretDownIcon size={18} className="svg-icon" weight="bold" />
+          <span className="svg-icon svg-icon-4 svg-icon-gray-800 icon-align ms-8px">
+            <CaretDownIcon weight="bold" />
+          </span>
         )}
       </BreadcrumbItem>
     </OverlayTrigger>

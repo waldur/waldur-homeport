@@ -71,19 +71,6 @@
     &__value-container--is-multi {
       display: flex;
       gap: 6px;
-
-      .badge {
-        color: $text-secondary;
-        border: 1px solid $border-primary;
-        background-color: $bg-primary;
-        padding: 4px 8px;
-        border-radius: $border-radius-sm;
-        display: flex;
-        align-items: center;
-        font-size: $font-size-lg;
-        font-weight: 400;
-        line-height: 20px;
-      }
     }
   }
 

@@ -13,17 +13,11 @@ import { RuleCreateButton } from './RuleCreateButton';
 import { RuleExpandableRow } from './RuleExpandableRow';
 
 const BooleanIconBadge = ({ value }) => (
-  <Badge
-    variant={value ? 'success' : 'default'}
-    outline
-    pill
-    size="sm"
-    onlyIcon
-  >
+  <Badge variant={value ? 'success' : 'default'} outline pill onlyIcon>
     {value ? (
-      <CheckIcon weight="bold" size={12} className="text-success" />
+      <CheckIcon weight="bold" size={12} />
     ) : (
-      <MinusIcon weight="bold" size={12} className="text-muted" />
+      <MinusIcon weight="bold" size={12} />
     )}
   </Badge>
 );

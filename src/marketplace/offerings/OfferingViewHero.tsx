@@ -162,11 +162,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 size={20}
               />
 
-              <OfferingStateField
-                offering={offering}
-                mode="outline"
-                hasBullet
-              />
+              <OfferingStateField offering={offering} hasBullet />
             </div>
             <p className="text-muted fs-7 mb-0">
               {translate('By {organization}', {

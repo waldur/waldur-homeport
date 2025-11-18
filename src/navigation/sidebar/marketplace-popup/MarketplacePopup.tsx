@@ -119,7 +119,6 @@ export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
                 id="marketplaces-selector-search-box"
                 type="search"
                 placeholder={translate('Search an offering')}
-                inputClassName="placeholder-gray-700"
                 onChange={(e) => applyQuery(e.target.value)}
                 autoFocus
               />

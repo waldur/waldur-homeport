@@ -49,7 +49,7 @@ exports[`InternalIpsList > renders list 1`] = `
           class="order-3 order-sm-3 ms-auto col-sm-auto"
         >
           <div
-            class="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-3"
+            class="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4"
           >
             <button
               class="btn btn-tertiary"
@@ -87,7 +87,7 @@ exports[`InternalIpsList > renders list 1`] = `
           class="table-container table-hover-shadow"
         >
           <table
-            class="table align-middle table-row-bordered fs-6 gy-0 gx-2 no-footer"
+            class="table align-middle table-row-bordered fs-6 gy-0 gx-8px no-footer"
           >
             <colgroup>
               <col

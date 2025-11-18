@@ -77,6 +77,8 @@ export interface Column<RowType = any> {
   exportKeys?: string[];
   disabledClick?: boolean;
   ellipsis?: boolean;
+  /** In px or % */
+  width?: string;
 }
 
 export type DisplayMode = 'table' | 'grid';

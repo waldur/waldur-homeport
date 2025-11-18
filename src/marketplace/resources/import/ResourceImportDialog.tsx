@@ -154,7 +154,6 @@ export const ResourceImportDialog = connect<{}, {}, ImportDialogProps>(
                         id="import-resource-search-box"
                         type="search"
                         placeholder={translate('Search an offering')}
-                        inputClassName="placeholder-gray-700"
                         onChange={(e) => applyQuery(e.target.value)}
                         autoFocus
                       />

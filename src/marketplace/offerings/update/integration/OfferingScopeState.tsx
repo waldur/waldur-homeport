@@ -14,7 +14,7 @@ export const OfferingScopeState = ({ state }) => (
   <FormTable.Item
     label={translate('State')}
     value={
-      <Badge pill variant={variant[state] || 'secondary'}>
+      <Badge pill outline variant={variant[state] || 'secondary'}>
         {state.toLocaleUpperCase()}
       </Badge>
     }

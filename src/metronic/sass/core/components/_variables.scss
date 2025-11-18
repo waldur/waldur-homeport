@@ -47,6 +47,7 @@ $theme-colors: (
   'primary-600': $primary-600,
   'primary-700': $primary-700,
   'secondary': $secondary,
+  'tertiary': $bg-tertiary,
   'success': $success,
   'success-600': $success-600,
   'success-700': $success-700,
@@ -154,13 +155,19 @@ $theme-text-colors: (
   'primary-300': $primary-300,
   'primary-600': $primary-600,
   'primary-700': $primary-700,
-  'secondary': $secondary,
+  'primary-900': $primary-900,
+  'secondary': $text-secondary,
+  'quaternary': $text-quaternary,
   'light': $light,
   'success': if(isDarkMode(), $success-500, $success),
   'info': $info,
   'warning': if(isDarkMode(), $warning-500, $warning),
+  'warning-600': $warning-600,
+  'warning-900': $warning-900,
   'danger': if(isDarkMode(), $danger-500, $danger),
+  'danger-600': $danger-600,
   'danger-700': $danger-700,
+  'danger-900': $danger-900,
   'dark': $dark,
   'dark-always': $dark-always,
   'muted': $text-muted,
@@ -206,9 +213,9 @@ $spacers: (
     ),
   // 10.5px
   4: (
-      $spacer * 1,
+      $spacer * 0.154 * 6,
     ),
-  // 14px
+  // 12px
   5: (
       $spacer * 1.25,
     ),
@@ -271,7 +278,28 @@ $spacers: (
   // 65.5px
   20: (
       $spacer * 5,
-    ), // 69px
+    ),
+
+  // 69px
+  // Pixelated
+  2px: (
+      $spacer * 0.154,
+    ),
+  4px: (
+    $spacer * 0.154 * 2,
+  ),
+  6px: (
+    $spacer * 0.154 * 3,
+  ),
+  8px: (
+    $spacer * 0.154 * 4,
+  ),
+  10px: (
+    $spacer * 0.154 * 5,
+  ),
+  12px: (
+    $spacer * 0.154 * 6,
+  ),
 );
 
 // Position
@@ -454,7 +482,11 @@ $gutters: (
   // 31.5px
   10: (
       $spacer * 2.5,
-    ), // 35px
+    ),
+  // 35px
+  8px: (
+      $spacer * 0.154 * 4,
+    ),
 ) !default;
 
 // Container padding
@@ -767,8 +799,8 @@ $form-switch-height-lg: 2.75rem !default; // Custom variable
 $form-switch-padding-start: $form-switch-width + 0.5rem !default;
 $form-switch-padding-left: $form-switch-width + 0.5rem !default;
 $form-switch-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-color}'/></svg>") !default;
-$form-switch-bg-image-solid: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$form-switch-color-solid}" stroke="#{$border-color}" stroke-width="0.25"/></g></svg>') !default;
-$form-switch-bg-image-solid-disabled: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$gray-100}" stroke="#{$border-color}" stroke-width="0.25"/></g></svg>') !default; // Custom
+$form-switch-bg-image-solid: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$form-switch-color-solid}" stroke="#{$border-primary}" stroke-width="0.3"/></g></svg>') !default;
+$form-switch-bg-image-solid-disabled: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$fg-disabled_subtle}" stroke="#{$border-secondary}" stroke-width="0.3"/></g></svg>') !default; // Custom
 $form-switch-border-radius: $form-switch-width !default;
 
 $form-switch-focus-color: $input-focus-border-color !default;
@@ -777,8 +809,8 @@ $form-switch-focus-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.o
 $form-switch-checked-color: $component-active-color !default;
 $form-switch-checked-bg-color: $component-active-bg !default;
 $form-switch-checked-bg-image: url("data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='-4 -4 8 8'><circle r='3' fill='#{$form-switch-checked-color}'/></svg>") !default;
-$form-switch-checked-bg-image-solid: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$form-switch-color-solid}"/></g></svg>') !default; // Custom
-$form-switch-checked-bg-image-solid-disabled: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$gray-50}"/></g></svg>') !default; // Custom
+$form-switch-checked-bg-image-solid: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="2.9" fill="#{$form-switch-color-solid}" stroke="#fff8" stroke-width="0.6"/></g></svg>') !default; // Custom
+$form-switch-checked-bg-image-solid-disabled: url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" viewBox="-4 -4 8 8"><defs><filter id="shadow" x="-10%" y="-10%" width="120%" height="120%"><feDropShadow dx="0" dy="0.3" stdDeviation="0.4" flood-color="#101828" flood-opacity="0.05"/></filter></defs><g filter="url(#shadow)"><circle r="3.2" fill="#{$bg-primary}"/></g></svg>') !default; // Custom
 $form-switch-checked-bg-position: right center !default;
 
 $form-check-inline-margin-right: 1rem !default;
@@ -1054,6 +1086,8 @@ $zindex-values: (
   1: 1,
   2: 2,
   3: 3,
+  4: 4,
+  5: 5,
 ) !default;
 
 // Letter spacing
@@ -1260,20 +1294,20 @@ $menu: (
       ),
     ),
     icon: (
-      width: 2rem,
-      space: 0.5rem,
+      width: 1.54rem,
+      space: 0.616rem,
     ),
     bullet: (
       width: 1.25rem,
-      space: 0.5rem,
+      space: 0.616rem,
     ),
     badge: (
-      space: 0.5rem,
+      space: 0.616rem,
     ),
     arrow: (
-      height: 1rem,
-      width: 1rem,
-      space: 0.5rem,
+      height: 1.3rem,
+      width: 1.3rem,
+      space: 0.616rem,
     ),
   ),
 ) !default;

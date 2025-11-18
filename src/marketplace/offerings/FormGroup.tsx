@@ -61,9 +61,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
       </div>
     )}
     <div>{props.children}</div>
-    {props.description && (
-      <Form.Text className="text-muted">{props.description}</Form.Text>
-    )}
+    {props.description && <Form.Text>{props.description}</Form.Text>}
     {props.meta?.touched && props.meta?.error && (
       <FieldError error={props.meta.error} />
     )}

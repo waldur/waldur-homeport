@@ -100,7 +100,7 @@ export const TeamSection: FC<
         <Card.Title>
           <h3>{props.title}</h3>
         </Card.Title>
-        <div className="card-toolbar gap-3">
+        <div className="card-toolbar gap-4">
           {!props.readOnlyMode ? (
             <TeamDropdownActions
               refetchUsers={usersTable.fetch}

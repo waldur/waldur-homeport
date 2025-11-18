@@ -40,7 +40,7 @@ const SortableItem = (props) => {
 
   return (
     <div
-      className="dropdown-item"
+      className="dropdown-item d-flex align-items-center"
       ref={setNodeRef}
       style={style}
       {...attributes}
@@ -117,7 +117,7 @@ const ColumnsPopover = ({
           onChange={(e) => setQuery(e.target.value)}
         />
       </div>
-      <div className="mh-300px overflow-auto">
+      <div className="mh-300px overflow-auto pb-2">
         <DndContext
           sensors={sensors}
           collisionDetection={closestCenter}

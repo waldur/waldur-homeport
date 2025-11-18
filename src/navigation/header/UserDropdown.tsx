@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import Avatar from '@waldur/core/Avatar';
+import { Badge } from '@waldur/core/Badge';
 import { ENV } from '@waldur/core/config';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
@@ -19,7 +20,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
   return (
     <>
       <div
-        className="btn btn-active-light d-flex align-items-center gap-2 bg-hover-light py-2 px-2 px-md-3"
+        className="btn d-flex align-items-center gap-4 py-2 px-2"
         data-kt-menu-trigger="click"
         data-kt-menu-attach="parent"
         data-kt-menu-placement="bottom"
@@ -33,7 +34,7 @@ export const UserDropdownMenu: FunctionComponent = () => {
             <Avatar src={user.image} name={user.full_name} size={40} circle />
           )}
         </div>
-        <div className="d-none d-md-flex flex-column align-items-center justify-content-center me-2 mt-2">
+        <div className="d-none d-md-flex flex-column align-items-start justify-content-center">
           {!user?.is_staff && (
             <span className="text-muted fs-7 fw-semibold lh-1 mb-2">
               {translate('Hello')}
@@ -43,9 +44,15 @@ export const UserDropdownMenu: FunctionComponent = () => {
             {user ? user.first_name : translate('Guest')}
           </span>
           {user?.is_staff && (
-            <span className="badge badge-light-info fs-8 lh-1 mt-1 align-items-end">
+            <Badge
+              variant="purple"
+              size="sm"
+              className="align-items-end mt-1"
+              outline
+              pill
+            >
               {translate('Staff')}
-            </span>
+            </Badge>
           )}
         </div>
       </div>

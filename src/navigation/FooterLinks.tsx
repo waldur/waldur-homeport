@@ -56,7 +56,7 @@ export const FooterLinks = () => {
   }, []);
 
   return (
-    <ul className="menu menu-brand fw-bold order-1" data-kt-menu="true">
+    <ul className="menu menu-brand fw-bold order-1 gap-8px" data-kt-menu="true">
       {!AuthService.isAuthenticated() && (
         <>
           {isFeatureVisible(
@@ -64,7 +64,7 @@ export const FooterLinks = () => {
           ) && (
             <li className="menu-item" data-kt-menu-trigger="click">
               <Link
-                className="menu-link px-2"
+                className="menu-link px-8px"
                 state="calls-for-proposals-dashboard"
               >
                 {translate('Calls for proposals')}
@@ -74,7 +74,7 @@ export const FooterLinks = () => {
           {ENV.plugins.WALDUR_CORE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS && (
             <li className="menu-item" data-kt-menu-trigger="click">
               <Link
-                className="menu-link px-2"
+                className="menu-link px-8px"
                 state="public.marketplace-landing"
               >
                 {translate('Explore marketplace')}
@@ -87,12 +87,12 @@ export const FooterLinks = () => {
       {!!user && <JoinOrganizationFooterLink />}
 
       <li className="menu-item" data-kt-menu-trigger="click">
-        <Link className="menu-link px-2" state="about.privacy">
+        <Link className="menu-link px-8px" state="about.privacy">
           {translate('Privacy policy')}
         </Link>
       </li>
       <li className="menu-item" data-kt-menu-trigger="click">
-        <Link className="menu-link px-2" state="about.tos">
+        <Link className="menu-link px-8px" state="about.tos">
           {translate('Terms of service')}
         </Link>
       </li>
@@ -102,9 +102,9 @@ export const FooterLinks = () => {
           data-kt-menu-placement="top-end"
           className="menu-item"
         >
-          <div className="menu-link px-2">
+          <div className="menu-link px-8px">
             <span className="menu-title">{translate('Support')}</span>
-            <span className="menu-arrow" />
+            <span className="menu-arrow rotate-active-90" />
           </div>
           <div className="menu-sub menu-sub-dropdown p-2">
             <IssuesLink />

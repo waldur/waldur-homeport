@@ -185,35 +185,48 @@ export const TableHeader: FC<TableHeaderProps> = ({
     }
   }, [rows, toggledAll, toggled, toggleRow]);
 
-  const colsLen = useMemo(() => {
+  const visibleCols = useMemo<Column[]>(() => {
     return hasOptionalColumns
-      ? columnPositions.filter(
-          (id) => columnMap[id] && (columnMap[id].visible ?? true),
-        ).length
-      : columns.filter((column) => column.visible ?? true).length;
+      ? columnPositions
+          .filter((id) => columnMap[id] && (columnMap[id].visible ?? true))
+          .map((id) => columnMap[id])
+      : columns.filter((column) => column.visible ?? true);
   }, [hasOptionalColumns, columnPositions, columnMap, columns]);
 
   const colWidths = useMemo(() => {
-    if (colsLen <= 1) return { first: 100, other: 0 };
+    if (visibleCols.length <= 1) return { first: 100, other: 0 };
     const firstColMul = equalColWidth ? 1 : 2;
-    const first = Math.min(50, (100 / colsLen) * firstColMul);
+    const colsWithoutCustomWidth = visibleCols.filter(
+      (col) => !col.width,
+    ).length;
+    const first = Math.min(50, (100 / colsWithoutCustomWidth) * firstColMul);
     const remainingWidth = 100 - first;
-    const other = remainingWidth / (colsLen - 1);
+    const other = remainingWidth / (colsWithoutCustomWidth - 1);
     return { first, other };
-  }, [colsLen]);
+  }, [visibleCols]);
+
+  // The first column which has no custom width. Find it to make it wider.
+  const firstColIndex = visibleCols.findIndex((col) => !col.width);
 
   return (
     <>
       <colgroup>
         {fieldType || enableMultiSelect ? <col width="10px" /> : null}
         {expandableRow && <col width="10px" />}
-        {Array.from({ length: colsLen }).map((_, i) => (
+        {visibleCols.map((col, i) => (
           <col
             key={i}
-            style={{
-              width: (i === 0 ? colWidths.first : colWidths.other) + '%',
-              minWidth: i === 0 ? 200 : 150,
-            }}
+            style={
+              col.width
+                ? { width: col.width }
+                : {
+                    width:
+                      (i === firstColIndex
+                        ? colWidths.first
+                        : colWidths.other) + '%',
+                    minWidth: i === firstColIndex ? 200 : 150,
+                  }
+            }
           />
         ))}
       </colgroup>
