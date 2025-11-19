@@ -1,5 +1,12 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useLayoutEffect, useRef, useState } from 'react';
+import { debounce } from 'lodash-es';
+import {
+  FunctionComponent,
+  useCallback,
+  useLayoutEffect,
+  useRef,
+  useState,
+} from 'react';
 import { Button } from 'react-bootstrap';
 
 import { TabsList } from './TabsList';
@@ -35,17 +42,27 @@ export const Toolbar: FunctionComponent<OwnProps> = ({ actions }) => {
   const tabsScrollRef = useRef<HTMLDivElement>();
   const tabsWrapperRef = useRef<HTMLDivElement>();
   const [showScrollArrows, setShowScrollArrows] = useState(false);
-  useLayoutEffect(() => {
-    function updateSize() {
+
+  const updateSize = useCallback(
+    debounce(() => {
       if (!tabsWrapperRef.current || !tabsScrollRef.current) return;
       setShowScrollArrows(
         tabsWrapperRef.current.clientWidth > tabsScrollRef.current.clientWidth,
       );
-    }
+    }, 250),
+    [tabsScrollRef.current, tabsWrapperRef.current],
+  );
+
+  useLayoutEffect(() => {
     window.addEventListener('resize', updateSize);
     updateSize();
+
     return () => window.removeEventListener('resize', updateSize);
-  }, [tabsScrollRef.current, tabsWrapperRef.current]);
+  }, [
+    updateSize,
+    /* watch wrapper width to check arrows, on page loaded */
+    tabsWrapperRef.current?.clientWidth,
+  ]);
 
   return (
     <div className="toolbar">
