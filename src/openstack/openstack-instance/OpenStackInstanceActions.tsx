@@ -19,6 +19,7 @@ import { StartAction } from './actions/StartAction';
 import { StopAction } from './actions/StopAction';
 import { UpdateFloatingIpsAction } from './actions/update-floating-ips/UpdateFloatingIpsAction';
 import { UpdateSecurityGroupsAction } from './actions/update-security-groups/UpdateSecurityGroupsAction';
+import { UnlinkOpenStackInstanceAction } from './UnlinkOpenStackInstanceAction';
 
 export const OpenStackInstanceActions = (props) => (
   <>
@@ -46,6 +47,7 @@ export const OpenStackInstanceActions = (props) => (
     <ActionGroup title={translate('Staff actions')}>
       <MoveResourceAction {...props} />
       <UnlinkActionItem {...props} />
+      <UnlinkOpenStackInstanceAction {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Dangerous actions')}>
