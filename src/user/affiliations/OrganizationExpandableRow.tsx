@@ -28,10 +28,10 @@ export const NavItem = ({ title, eventKey, count, countLoading }) => (
     <Nav.Link eventKey={eventKey}>
       {title}
       <Badge
-        onlyIcon={countLoading}
         variant="default"
-        outline
         pill
+        outline
+        onlyIcon={countLoading}
         className="ms-2"
       >
         {countLoading ? <LoadingSpinnerIcon /> : count || 0}

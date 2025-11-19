@@ -171,7 +171,7 @@ export const getResourceAllListColumns = (
       },
       {
         title: translate('State'),
-        render: ({ row }) => <ResourceStateField resource={row} outline pill />,
+        render: ({ row }) => <ResourceStateField resource={row} pill outline />,
         filter: 'state',
         orderField: 'state',
         inlineFilter: (row) =>

@@ -15,18 +15,18 @@ const ChangeIndicator = ({ isIncrease, change }) => {
   return isIncrease ? (
     <Badge
       variant="success"
-      outline
-      pill
       leftIcon={<ArrowUpIcon weight="bold" />}
+      pill
+      outline
     >
       {change}%
     </Badge>
   ) : (
     <Badge
       variant="danger"
-      outline
-      pill
       leftIcon={<ArrowDownIcon weight="bold" />}
+      pill
+      outline
     >
       {change}%
     </Badge>

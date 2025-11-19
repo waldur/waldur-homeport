@@ -54,7 +54,7 @@ export const PlanResourcesTable: FC<OwnProps> = (props) => {
         {
           title: translate('State'),
           render: ({ row }) => (
-            <ResourceStateField resource={row} outline pill />
+            <ResourceStateField resource={row} pill outline />
           ),
           orderField: 'state',
         },

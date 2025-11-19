@@ -10,7 +10,7 @@ import { useTable } from '@waldur/table/useTable';
 const BadgesList = ({ items }) => (
   <>
     {items.map((c, index) => (
-      <Badge key={index} className="me-3" outline pill>
+      <Badge key={index} pill outline className="me-3">
         {c.name}
       </Badge>
     ))}

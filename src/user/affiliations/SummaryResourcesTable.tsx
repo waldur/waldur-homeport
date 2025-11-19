@@ -86,7 +86,7 @@ export const SummaryResourcesTable: FC<OwnProps> = ({ scope, context }) => {
         {
           title: translate('State'),
           render: ({ row }) => (
-            <ResourceStateField resource={row} outline pill />
+            <ResourceStateField resource={row} pill outline />
           ),
 
           orderField: 'state',

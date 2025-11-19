@@ -41,15 +41,15 @@ const RESOURCES_QUERY_ID = 'project-endible-resources';
 const StateField = ({ row, projectDate }: { row; projectDate: DateTime }) => {
   const date = parseDate(row.end_date);
   return date.hasSame(projectDate, 'day') ? (
-    <Badge variant="success" outline pill size="sm">
+    <Badge variant="success" size="sm" pill outline>
       {translate('Aligned')}
     </Badge>
   ) : date > projectDate ? (
-    <Badge variant="danger" outline pill size="sm">
+    <Badge variant="danger" size="sm" pill outline>
       {translate('After project')}
     </Badge>
   ) : (
-    <Badge variant="warning" outline pill size="sm">
+    <Badge variant="warning" size="sm" pill outline>
       {translate('Before project')}
     </Badge>
   );

@@ -28,7 +28,7 @@ const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
   };
   const color = statusColors[status] || 'secondary';
   return (
-    <Badge variant={color} outline pill>
+    <Badge variant={color} pill outline>
       {status}
     </Badge>
   );

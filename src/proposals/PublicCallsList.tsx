@@ -94,7 +94,7 @@ const CallColumns = [
     title: translate('Duration'),
     render: ({ row }) =>
       row.fixed_duration_in_days ? (
-        <Badge variant="blue" outline pill>
+        <Badge variant="blue" pill outline>
           {translate('Fixed - {n} days', {
             n: row.fixed_duration_in_days,
           })}

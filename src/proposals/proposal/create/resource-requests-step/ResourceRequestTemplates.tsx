@@ -62,6 +62,8 @@ const TableTitle = ({ title }) => (
   <>
     {title}
     <Badge
+      variant="info"
+      size="lg"
       leftIcon={<CubeIcon weight="bold" />}
       rightIcon={
         <Tip
@@ -76,8 +78,6 @@ const TableTitle = ({ title }) => (
           <QuestionIcon weight="bold" size={16} />
         </Tip>
       }
-      variant="info"
-      size="lg"
       pill
       outline
       className="ms-3"

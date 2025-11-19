@@ -71,7 +71,7 @@ export const MaintenanceList: FC<MaintenanceListProps> = (props) => {
           render: ({ row }) => {
             const state = getMaintenanceState(row.state);
             return (
-              <Badge variant={state.color} pill outline size="sm">
+              <Badge variant={state.color} size="sm" pill outline>
                 {state.label}
               </Badge>
             );

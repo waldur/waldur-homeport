@@ -37,8 +37,6 @@ export const RoundPageHero: FC<RoundPageHeroProps> = ({ round, call }) => {
               <h3 className="mb-0 me-2">{round.name}</h3>
               <Badge
                 variant={status.color}
-                outline
-                pill
                 size="sm"
                 leftIcon={
                   status.value === 'scheduled' ? (
@@ -49,6 +47,8 @@ export const RoundPageHero: FC<RoundPageHeroProps> = ({ round, call }) => {
                     <CheckIcon weight="bold" />
                   )
                 }
+                pill
+                outline
               >
                 {status.label}
               </Badge>

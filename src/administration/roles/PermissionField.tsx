@@ -34,8 +34,8 @@ const PermissionEntity = (props) => {
                   ? 'primary'
                   : 'danger'
             }
-            outline
             pill
+            outline
             className="mx-2"
           >
             {accessType === 'FULL_ACCESS'

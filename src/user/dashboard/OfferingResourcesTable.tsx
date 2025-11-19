@@ -60,7 +60,7 @@ export const OfferingResourcesTable: FC<OfferingResourcesTableProps> = memo(
         {
           title: translate('State'),
           render: ({ row }) => (
-            <ResourceStateField resource={row} outline pill />
+            <ResourceStateField resource={row} pill outline />
           ),
           orderField: 'state',
         },

@@ -34,7 +34,7 @@ export const ReviewHeader = ({
       title={proposal.name}
       slug={proposal.slug}
       badge={
-        <Badge variant={variant} outline pill>
+        <Badge variant={variant} pill outline>
           {formatReviewState(review.state)}
         </Badge>
       }

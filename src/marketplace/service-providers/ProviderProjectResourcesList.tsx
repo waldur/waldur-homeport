@@ -58,7 +58,7 @@ export const ProviderProjectResourcesList: FunctionComponent<{
         {
           title: translate('State'),
           render: ({ row }) => (
-            <ResourceStateField resource={row} outline pill />
+            <ResourceStateField resource={row} pill outline />
           ),
 
           orderField: 'state',

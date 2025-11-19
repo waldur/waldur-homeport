@@ -69,13 +69,13 @@ export const PageBarFilters = () => {
               {item.label}
               <Badge
                 variant="default"
-                outline
-                pill
                 rightIcon={
                   <RemoveFilterBadgeButton
                     onClick={() => removeFilter(item.name)}
                   />
                 }
+                pill
+                outline
               >
                 {item.getValueLabel
                   ? item.getValueLabel(item.value)

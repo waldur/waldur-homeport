@@ -54,7 +54,7 @@ export const ProviderComplianceTable: FC<ProviderComplianceTableProps> = (
           // FIX: use real data - not available on backend atm
           const state = { color: 'success', label: 'Active' };
           return (
-            <Badge variant={state.color} pill outline size="sm">
+            <Badge variant={state.color} size="sm" pill outline>
               {state.label}
             </Badge>
           );
