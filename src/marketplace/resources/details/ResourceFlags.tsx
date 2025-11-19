@@ -13,33 +13,33 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
     <>
       {resource.restrict_member_access && (
         <Badge
-          leftIcon={<XCircleIcon weight="bold" />}
           variant="danger"
-          outline
-          pill
           size="sm"
+          leftIcon={<XCircleIcon weight="bold" />}
+          pill
+          outline
         >
           {translate('Access restricted')}
         </Badge>
       )}
       {resource.paused && (
         <Badge
-          leftIcon={<PauseCircleIcon weight="bold" />}
           variant="danger"
-          outline
-          pill
           size="sm"
+          leftIcon={<PauseCircleIcon weight="bold" />}
+          pill
+          outline
         >
           {translate('Paused')}
         </Badge>
       )}
       {resource.downscaled && (
         <Badge
-          leftIcon={<ArrowsInSimpleIcon weight="bold" />}
           variant="danger"
-          outline
-          pill
           size="sm"
+          leftIcon={<ArrowsInSimpleIcon weight="bold" />}
+          pill
+          outline
         >
           {translate('Downscaled')}
         </Badge>

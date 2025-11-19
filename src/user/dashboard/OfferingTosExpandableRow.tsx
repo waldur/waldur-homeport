@@ -33,10 +33,10 @@ const NavItem = ({ title, eventKey, count, countLoading }) => (
     <Nav.Link eventKey={eventKey}>
       {title}
       <Badge
-        onlyIcon={countLoading}
         variant="default"
-        outline
         pill
+        outline
+        onlyIcon={countLoading}
         className="ms-2"
       >
         {countLoading ? <LoadingSpinnerIcon /> : count || 0}
@@ -161,9 +161,9 @@ export const OfferingTosExpandableRow: FC<OfferingTosExpandableRowProps> = ({
                               variant={
                                 tos.has_user_consent ? 'success' : 'default'
                               }
-                              outline
-                              pill
                               size="sm"
+                              pill
+                              outline
                             >
                               {tos.has_user_consent
                                 ? translate('Accepted')

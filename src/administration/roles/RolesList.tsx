@@ -27,7 +27,7 @@ export const RolesList = () => {
             <>
               {row.name}{' '}
               {row.is_system_role && (
-                <Badge outline pill className="ms-2">
+                <Badge pill outline className="ms-2">
                   {translate('System role')}
                 </Badge>
               )}

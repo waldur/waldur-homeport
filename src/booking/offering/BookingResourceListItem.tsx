@@ -169,7 +169,7 @@ export const BookingResourceListItem = ({
                     {parseDate(layout.schedule.end).toFormat("LLL dd',' HH:mm")}
                   </span>
                   {item.attributes.schedules.length > 1 && (
-                    <Badge className="my-1" outline pill>
+                    <Badge pill outline className="my-1">
                       {translate('+{count} more schedules', {
                         count: item.attributes.schedules.length - 1,
                       })}

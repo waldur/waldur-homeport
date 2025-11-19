@@ -111,8 +111,8 @@ export const KeycloakMembershipList: FunctionComponent<
           render: ({ row }) => (
             <Badge
               variant={getKeycloakMembershipRoleColor(row.group_role)}
-              outline
               pill
+              outline
             >
               {row.group_role}
             </Badge>
@@ -124,11 +124,11 @@ export const KeycloakMembershipList: FunctionComponent<
           title: translate('Status'),
           render: ({ row }) =>
             row.state === 'active' ? (
-              <Badge variant="success" outline pill>
+              <Badge variant="success" pill outline>
                 {translate('Active')}
               </Badge>
             ) : (
-              <Badge variant="warning" outline pill>
+              <Badge variant="warning" pill outline>
                 {translate('Pending')}
               </Badge>
             ),

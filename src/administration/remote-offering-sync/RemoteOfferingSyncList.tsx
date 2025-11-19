@@ -65,13 +65,13 @@ export const RemoteOfferingSyncList: FunctionComponent = () => {
           title: translate('State'),
           render: ({ row }) => (
             <Badge
-              outline
-              pill
               variant={
                 ['OK', 'Active'].includes(row.get_state_display)
                   ? 'primary'
                   : 'default'
               }
+              pill
+              outline
             >
               {row.get_state_display}
             </Badge>
@@ -80,7 +80,7 @@ export const RemoteOfferingSyncList: FunctionComponent = () => {
         {
           title: translate('Enabled'),
           render: ({ row }) => (
-            <Badge outline pill variant={row.is_active ? 'primary' : 'default'}>
+            <Badge variant={row.is_active ? 'primary' : 'default'} pill outline>
               {row.is_active ? translate('Yes') : translate('No')}
             </Badge>
           ),

@@ -76,7 +76,7 @@ export const ProjectCourseAccountsList = ({ admin = false }) => {
         {
           title: translate('State'),
           render: ({ row }) => (
-            <Badge outline pill variant={courseAccountState[row.state].color}>
+            <Badge variant={courseAccountState[row.state].color} pill outline>
               {courseAccountState[row.state].label}
             </Badge>
           ),

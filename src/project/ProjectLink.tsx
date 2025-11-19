@@ -53,9 +53,9 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
         // eslint-disable-next-line waldur-custom/enforce-badge-icon-patterns
         <Badge
           variant={kind.color}
-          onlyIcon
           pill
           outline
+          onlyIcon
           tooltip={translate('{name} project', { name: kind.label })}
           tooltipProps={{ id: 'tip-kind-' + row.uuid }}
         >
@@ -71,7 +71,7 @@ export const ProjectLink: FC<PropsWithChildren<OwnProps>> = ({
           </span>
         )}
       {row.is_removed && (
-        <Badge variant="danger" outline pill className="fs-8">
+        <Badge variant="danger" pill outline className="fs-8">
           {translate('Removed')}
         </Badge>
       )}

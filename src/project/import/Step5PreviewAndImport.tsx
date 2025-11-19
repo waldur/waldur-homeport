@@ -151,8 +151,8 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
             return (
               <Badge
                 variant={isOk && row.name ? 'success' : 'danger'}
-                outline
                 pill
+                outline
               >
                 {!row.name
                   ? translate('Missing name')

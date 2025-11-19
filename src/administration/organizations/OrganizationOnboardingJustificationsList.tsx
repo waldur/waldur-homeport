@@ -26,7 +26,7 @@ const DecisionBadge: FC<{ decision: ValidationDecisionEnum }> = ({
   };
   const color = decisionColors[decision] || 'secondary';
   return (
-    <Badge variant={color} outline pill>
+    <Badge variant={color} pill outline>
       {decision}
     </Badge>
   );

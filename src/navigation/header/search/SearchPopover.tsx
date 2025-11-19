@@ -382,7 +382,7 @@ export const SearchPopover = ({
               <Nav.Link eventKey="all">
                 {translate('All results')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" outline pill className="ms-2">
+                  <Badge variant="default" pill outline className="ms-2">
                     {result.data.resultsCount}
                   </Badge>
                 )}
@@ -392,7 +392,7 @@ export const SearchPopover = ({
               <Nav.Link eventKey="organizations">
                 {translate('Organizations')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" outline pill className="ms-2">
+                  <Badge variant="default" pill outline className="ms-2">
                     {result.data.customersCount}
                   </Badge>
                 )}
@@ -402,7 +402,7 @@ export const SearchPopover = ({
               <Nav.Link eventKey="projects">
                 {translate('Projects')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" outline pill className="ms-2">
+                  <Badge variant="default" pill outline className="ms-2">
                     {result.data.projectsCount}
                   </Badge>
                 )}
@@ -412,7 +412,7 @@ export const SearchPopover = ({
               <Nav.Link eventKey="resources">
                 {translate('Resources')}
                 {Boolean(result.data) && (
-                  <Badge variant="default" outline pill className="ms-2">
+                  <Badge variant="default" pill outline className="ms-2">
                     {result.data.resourcesCount}
                   </Badge>
                 )}

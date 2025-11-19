@@ -1,7 +1,6 @@
 import { useIsActive } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
-import { Badge } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';
 
@@ -39,9 +38,7 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
         <span className="menu-title">{props.title}</span>
         {Boolean(props.badge) && (
           <span className="menu-badge">
-            <Badge bg="" pill>
-              {props.badge}
-            </Badge>
+            <span className="badge badge-pill">{props.badge}</span>
           </span>
         )}
       </Link>

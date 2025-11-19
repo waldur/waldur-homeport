@@ -3,7 +3,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
 import { useMemo, useState } from 'react';
-import { Badge } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
   marketplaceGlobalCategoriesRetrieve,
@@ -93,9 +92,7 @@ const RenderMenuItems = ({ items }) => {
             itemId={item.uuid}
             child
             badge={
-              <Badge bg="" pill>
-                {item.resource_count}
-              </Badge>
+              <span className="badge badge-pill">{item.resource_count}</span>
             }
           >
             <RenderMenuItems items={item.categories} />

@@ -22,8 +22,8 @@ export const PermissionRequestStateField: FC<{ row }> = ({ row }) => {
     <Badge
       variant={status?.color || 'default'}
       leftIcon={status ? <status.icon weight="bold" /> : null}
-      outline
       pill
+      outline
     >
       {status?.label || row.state}
     </Badge>

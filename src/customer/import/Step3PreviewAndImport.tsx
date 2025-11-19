@@ -30,7 +30,7 @@ const statusMessages = {
 const StatusField = ({ row }) => {
   const validate = validateOrganizationCreation(row);
   return (
-    <Badge variant={validate.valid ? 'success' : 'danger'} outline pill>
+    <Badge variant={validate.valid ? 'success' : 'danger'} pill outline>
       {validate.valid ? translate('OK') : statusMessages[validate.errors[0]]}
     </Badge>
   );

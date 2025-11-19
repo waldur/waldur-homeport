@@ -23,7 +23,7 @@ const getStateBadgeVariant = (state: OfferingUserState) => {
 };
 
 export const OfferingUserStateField = ({ row }) => (
-  <Badge outline pill variant={getStateBadgeVariant(row.state)}>
+  <Badge variant={getStateBadgeVariant(row.state)} pill outline>
     {row.state}
   </Badge>
 );

@@ -61,13 +61,13 @@ const StatusField = ({
         status.status === 'erred' && <FieldErrorMessage error={status.error} />
       }
     >
-      <Badge variant={statusColors[status.status]} outline pill>
+      <Badge variant={statusColors[status.status]} pill outline>
         {statusMessages[status.status]}
       </Badge>
     </Tip>
   ) : (
     <Tip id={`tip-error-${row.uuid}`} label={validate.reason[0]}>
-      <Badge variant={validate.valid ? 'default' : 'danger'} outline pill>
+      <Badge variant={validate.valid ? 'default' : 'danger'} pill outline>
         {validate.valid
           ? translate('Ready')
           : statusMessages[validate.errors[0]]}

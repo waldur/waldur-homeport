@@ -34,9 +34,9 @@ const IssueInfoDialog = ({ issue }: { issue: Issue }) => {
           value={
             <Badge
               variant={{ Medium: 'warning', High: 'danger' }[issue.priority]}
-              outline
-              pill
               size="sm"
+              pill
+              outline
             >
               {issue.priority}
             </Badge>

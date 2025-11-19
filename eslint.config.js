@@ -10,6 +10,10 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 import enforceBadgeIconPatterns from './eslint-rules/enforce-badge-icon-patterns.js';
+import enforceBadgePropsConsistency from './eslint-rules/enforce-badge-props-consistency.js';
+import enforceBadgeDesignTokens from './eslint-rules/enforce-badge-design-tokens.js';
+import noManualIconColorsInBadges from './eslint-rules/no-manual-icon-colors-in-badges.js';
+import enforceBadgeRightIconPattern from './eslint-rules/enforce-badge-right-icon-pattern.js';
 import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
 import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
 import enforcePhosphorIconWeight from './eslint-rules/enforce-phosphor-icon-weight.js';
@@ -41,6 +45,10 @@ export default tseslint
           rules: {
             ...noTemplateInTranslate.rules,
             'enforce-badge-icon-patterns': enforceBadgeIconPatterns,
+            'enforce-badge-props-consistency': enforceBadgePropsConsistency,
+            'enforce-badge-design-tokens': enforceBadgeDesignTokens,
+            'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
+            'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
             'enforce-button-variants': enforceButtonVariants,
             'enforce-formcheck-components': enforceFormcheckComponents,
             'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
@@ -74,6 +82,10 @@ export default tseslint
         // Custom local rules
         'waldur-custom/no-template-in-translate': 'error',
         'waldur-custom/enforce-badge-icon-patterns': 'error',
+        'waldur-custom/enforce-badge-props-consistency': 'error',
+        'waldur-custom/enforce-badge-design-tokens': 'error',
+        'waldur-custom/no-manual-icon-colors-in-badges': 'error',
+        'waldur-custom/enforce-badge-right-icon-pattern': 'error',
         'waldur-custom/enforce-button-variants': 'error',
         'waldur-custom/enforce-formcheck-components': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',

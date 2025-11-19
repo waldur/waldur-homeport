@@ -47,9 +47,9 @@ export const UserDropdownMenu: FunctionComponent = () => {
             <Badge
               variant="purple"
               size="sm"
-              className="align-items-end mt-1"
-              outline
               pill
+              outline
+              className="align-items-end mt-1"
             >
               {translate('Staff')}
             </Badge>

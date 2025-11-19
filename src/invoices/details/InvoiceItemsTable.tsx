@@ -182,9 +182,9 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
           {!invoiceView && customer.agreement_number && (
             <Badge
               variant="default"
+              size="sm"
               pill
               outline
-              size="sm"
               className="fw-bold ms-2"
             >
               {translate('Agreement no:')} {customer.agreement_number}

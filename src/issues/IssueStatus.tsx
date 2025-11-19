@@ -10,9 +10,9 @@ const STATUS_COLORS = {
 export const IssueStatus = ({ status }) => (
   <Badge
     variant={STATUS_COLORS[status] || 'default'}
-    outline
-    pill
     size="sm"
+    pill
+    outline
     className="flex-shrink-0"
   >
     {status || 'N/A'}

@@ -45,10 +45,10 @@ export const EndingField = ({
           &nbsp;
           <Badge
             variant="blue"
-            outline
-            pill
-            onlyIcon
             size="sm"
+            pill
+            outline
+            onlyIcon
             tooltip={translate('Fixed duration')}
           >
             <LockIcon weight="bold" size={12} />

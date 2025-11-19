@@ -7,21 +7,15 @@ export const BooleanBadge = ({ value }) =>
   value ? (
     <Badge
       variant="success"
-      outline
-      pill
       size="sm"
       leftIcon={<CheckIcon weight="bold" />}
+      pill
+      outline
     >
       {translate('Yes')}
     </Badge>
   ) : (
-    <Badge
-      variant="danger"
-      outline
-      pill
-      size="sm"
-      leftIcon={<XIcon weight="bold" />}
-    >
+    <Badge variant="danger" leftIcon={<XIcon weight="bold" />} pill outline>
       {translate('No')}
     </Badge>
   );

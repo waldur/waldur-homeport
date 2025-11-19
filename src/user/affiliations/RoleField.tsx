@@ -7,7 +7,7 @@ import { RolePopover } from './RolePopover';
 
 export const RoleField = ({ row }) =>
   row.role_name ? (
-    <Badge variant={getRoleColor(row.role_name)} outline pill>
+    <Badge variant={getRoleColor(row.role_name)} pill outline>
       <RolePopover roleName={row.role_name} />
     </Badge>
   ) : (

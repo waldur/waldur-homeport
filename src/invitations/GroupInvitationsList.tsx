@@ -80,8 +80,8 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
               <Badge
                 variant="blue"
                 leftIcon={<GlobeSimpleIcon weight="bold" />}
-                outline
                 pill
+                outline
               >
                 {translate('Public')}
               </Badge>
@@ -89,8 +89,8 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
               <Badge
                 variant="default"
                 leftIcon={<LockIcon weight="bold" />}
-                outline
                 pill
+                outline
               >
                 {translate('Private')}
               </Badge>
@@ -105,8 +105,8 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
               <Badge
                 variant="success"
                 leftIcon={<CheckIcon weight="bold" />}
-                outline
                 pill
+                outline
               >
                 {translate('Active')}
               </Badge>
@@ -114,8 +114,8 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
               <Badge
                 variant="default"
                 leftIcon={<XIcon weight="bold" />}
-                outline
                 pill
+                outline
               >
                 {translate('Inactive')}
               </Badge>

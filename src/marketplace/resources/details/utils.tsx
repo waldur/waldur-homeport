@@ -67,7 +67,7 @@ export const getResourceSummaryFields = ({
     {
       name: 'status',
       label: translate('Status'),
-      value: <ResourceStateField resource={resource} outline pill size="sm" />,
+      value: <ResourceStateField resource={resource} pill outline size="sm" />,
     },
     {
       name: 'created',

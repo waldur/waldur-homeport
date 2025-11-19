@@ -79,7 +79,7 @@ const TableHeaderFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
               style={!props.ellipsis ? { maxWidth: 'unset' } : undefined}
             >
               {badgeValue(value) ? (
-                <Badge pill outline variant="default">
+                <Badge variant="default" pill outline>
                   {badgeValue(value)}
                 </Badge>
               ) : null}
@@ -129,14 +129,14 @@ export const TableSidebarFilterValues = ({
         >
           <Badge
             variant="default"
-            outline
             size="lg"
-            className="fs-7"
             rightIcon={
               !hideRemoveButton && (
                 <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
               )
             }
+            outline
+            className="fs-7"
           >
             {badgeValue(value)}
           </Badge>
@@ -148,15 +148,15 @@ export const TableSidebarFilterValues = ({
           <Badge
             key={i}
             variant="default"
-            outline
             size="lg"
-            className="filter-value fs-7"
-            style={!ellipsis ? { maxWidth: 'unset' } : undefined}
             rightIcon={
               !hideRemoveButton && (
                 <RemoveFilterBadgeButton onClick={() => remove(value, v)} />
               )
             }
+            outline
+            className="filter-value fs-7"
+            style={!ellipsis ? { maxWidth: 'unset' } : undefined}
           >
             {getValueLabel(v)}
           </Badge>
@@ -165,18 +165,17 @@ export const TableSidebarFilterValues = ({
     ) : (
       <Badge
         variant="default"
-        outline
         size="lg"
+        rightIcon={
+          !hideRemoveButton && (
+            <RemoveFilterBadgeButton onClick={() => remove(value, value)} />
+          )
+        }
+        outline
         className="filter-value fs-7"
         style={!ellipsis ? { maxWidth: 'unset' } : undefined}
       >
         {getValueLabel(value)}
-        {!hideRemoveButton && (
-          <RemoveFilterBadgeButton
-            size={12}
-            onClick={() => remove(value, value)}
-          />
-        )}
       </Badge>
     )
   ) : null;
