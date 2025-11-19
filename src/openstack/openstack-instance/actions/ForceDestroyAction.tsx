@@ -25,15 +25,17 @@ function validate(ctx: ActionContext<OpenStackInstance>): string {
 
 const validators = [validate, validateOpenStackInstanceManagePermission];
 
-export const ForceDestroyAction: ActionItemType = ({ resource, refetch }) => (
-  <DialogActionItem
-    title={translate('Force destroy')}
-    validators={validators}
-    modalComponent={ForceDestroyDialog}
-    className="text-danger"
-    resource={resource}
-    extraResolve={{ refetch }}
-    iconNode={<XIcon weight="bold" />}
-    iconColor="danger"
-  />
-);
+// Conceal force destroy action if OpenStack instance is not linked to marketplace resource
+export const ForceDestroyAction: ActionItemType = ({ resource, refetch }) =>
+  resource.marketplace_resource_uuid ? (
+    <DialogActionItem
+      title={translate('Force destroy')}
+      validators={validators}
+      modalComponent={ForceDestroyDialog}
+      className="text-danger"
+      resource={resource}
+      extraResolve={{ refetch }}
+      iconNode={<XIcon weight="bold" />}
+      iconColor="danger"
+    />
+  ) : null;
