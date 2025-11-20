@@ -4,6 +4,7 @@ import { Button, Card } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/config';
+import { required } from '@waldur/core/validators';
 import { DateField } from '@waldur/form/DateField';
 import { FormGroup } from '@waldur/form/FormGroup';
 import { StringField } from '@waldur/form/StringField';
@@ -88,6 +89,7 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
                           label={translate('First name')}
                           component={FormGroup}
                           required={true}
+                          validate={required}
                         >
                           <StringField />
                         </Field>
@@ -96,6 +98,7 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
                           label={translate('Last name')}
                           component={FormGroup}
                           required={true}
+                          validate={required}
                         >
                           <StringField />
                         </Field>
@@ -104,6 +107,7 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
                           label={translate('Birth date')}
                           component={FormGroup}
                           required={true}
+                          validate={required}
                         >
                           <DateField />
                         </Field>
@@ -114,6 +118,7 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
                         label={translate('Person identifier')}
                         component={FormGroup}
                         required={true}
+                        validate={required}
                         description={translate(
                           'Your personal identification number',
                         )}
