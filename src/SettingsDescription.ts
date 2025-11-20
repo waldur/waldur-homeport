@@ -1026,5 +1026,40 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('LLM inference settings'),
+    items: [
+      {
+        key: 'LLM_CHAT_ENABLED',
+        description: translate('Enable LLM-based chat feature and calls to the inference service.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'LLM_INFERENCES_BACKEND_TYPE',
+        description: translate('Type of LLM inference backend. For example: openai, ollama.'),
+        default: 'ollama',
+        type: 'string',
+      },
+      {
+        key: 'LLM_INFERENCES_API_URL',
+        description: translate('Base URL for LLM inference service API.'),
+        default: '',
+        type: 'url_field',
+      },
+      {
+        key: 'LLM_INFERENCES_API_TOKEN',
+        description: translate('API key for authenticating with the LLM inference service.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'LLM_INFERENCES_MODEL',
+        description: translate('Name of the LLM model to use for inference.'),
+        default: 'gemma3:27b',
+        type: 'string',
+      },
+    ],
+  },
 ];
 
