@@ -1,0 +1,25 @@
+.organization-review-status {
+  padding: 132px 2rem 2rem !important;
+
+  .icon-background {
+    position: absolute;
+    top: -10px;
+    left: 50%;
+    transform: translateX(-50%);
+    height: 270px;
+
+    g {
+      transform: translateY(110px);
+    }
+  }
+
+  .review-icon-wrapper {
+    width: 60px;
+    height: 60px;
+    border-radius: 50%;
+    background-color: var(--bs-gray-100);
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+  }
+}

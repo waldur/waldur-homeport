@@ -15,6 +15,7 @@ import {
 import { formDataOptions } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
+import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
@@ -27,6 +28,7 @@ import { OrganizationCreateStep1 } from './OrganizationCreateStep1';
 import { OrganizationCreateStep2 } from './OrganizationCreateStep2';
 import { OrganizationCreateStep3 } from './OrganizationCreateStep3';
 import { OrganizationCreateStep4 } from './OrganizationCreateStep4';
+import { OrganizationReviewStatus } from './OrganizationReviewStatus';
 import { fetchChecklistWithMetadata } from './utils';
 
 export const OrganizationCreatePage: FC = () => {
@@ -43,6 +45,10 @@ export const OrganizationCreatePage: FC = () => {
   // Store verification result for later steps
   const [_verificationData, setVerificationData] =
     useState<OnboardingVerification | null>(null);
+
+  // Track if submission is complete to show review status
+  const [submissionComplete, setSubmissionComplete] = useState(false);
+  const [submittedCompanyName, setSubmittedCompanyName] = useState<string>('');
 
   // Create a wrapper for Step 3 that auto-advances when manual mode
   const Step3Wrapper: FC<any> = (props) => {
@@ -235,14 +241,9 @@ export const OrganizationCreatePage: FC = () => {
             );
           }
 
-          showSuccess(
-            translate(
-              'Your request has been submitted for manual review. You will be notified once approved.',
-            ),
-          );
-
-          formProps.destroy();
-          router.stateService.go('profile.details');
+          // Show info about manual verification request instead of redirecting immediately
+          setSubmittedCompanyName(formData.name || '');
+          setSubmissionComplete(true);
         } else if (validation.status === 'verified') {
           // Auto-create customer if verified
           try {
@@ -280,16 +281,34 @@ export const OrganizationCreatePage: FC = () => {
         </div>
       </SidebarLayout.Header>
       <div className="container-xxl">
-        <WizardFormContainer
-          form={ORGANIZATION_ONBOARDING_FORM_ID}
-          title=""
-          onSubmit={createOnboardingVerification}
-          steps={steps}
-          wizardForms={wizardForms}
-          submitLabel={translate('Create')}
-          nextLabel={translate('Next')}
-          verticalLayout={true}
-        />
+        {submissionComplete ? (
+          <div className="d-flex gap-7">
+            <div className="flex-shrink-0" style={{ width: '300px' }}>
+              <VerticalProgressSteps
+                steps={steps.map((step) => ({ ...step, completed: true }))}
+              />
+            </div>
+            <div className="flex-grow-1">
+              <OrganizationReviewStatus
+                onGoToDashboard={() =>
+                  router.stateService.go('profile.details')
+                }
+                companyName={submittedCompanyName}
+              />
+            </div>
+          </div>
+        ) : (
+          <WizardFormContainer
+            form={ORGANIZATION_ONBOARDING_FORM_ID}
+            title=""
+            onSubmit={createOnboardingVerification}
+            steps={steps}
+            wizardForms={wizardForms}
+            submitLabel={translate('Create')}
+            nextLabel={translate('Next')}
+            verticalLayout={true}
+          />
+        )}
       </div>
     </>
   );

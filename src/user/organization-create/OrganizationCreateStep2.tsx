@@ -147,6 +147,7 @@ export const OrganizationCreateStep2: FunctionComponent<WizardFormStepProps> = (
                       placeholder={translate('e.g., Acme Corporation')}
                       maxLength={150}
                       validate={composeValidators(...getNameFieldValidators())}
+                      required={true}
                       component={FormGroup}
                     >
                       <StringField />
