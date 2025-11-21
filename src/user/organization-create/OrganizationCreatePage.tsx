@@ -2,86 +2,127 @@ import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import {
-  onboardingJustificationsAttachDocument,
-  onboardingJustificationsCreateJustification,
-  onboardingVerificationsCreateCustomer,
-  onboardingVerificationsRunValidation,
-  onboardingVerificationsStartVerification,
-  onboardingVerificationsSubmitAnswers,
-  OnboardingVerification,
-} from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
 import { useNotify } from '@waldur/store/hooks';
-import { useSetUser, useUser } from '@waldur/workspace/hooks';
 
 import { ORGANIZATION_ONBOARDING_FORM_ID } from '../constants';
 
+import { useAutoValidation, useChecklistCache } from './hooks';
 import { OrganizationCreateStep1 } from './OrganizationCreateStep1';
 import { OrganizationCreateStep2 } from './OrganizationCreateStep2';
 import { OrganizationCreateStep3 } from './OrganizationCreateStep3';
 import { OrganizationCreateStep4 } from './OrganizationCreateStep4';
 import { OrganizationReviewStatus } from './OrganizationReviewStatus';
-import { fetchChecklistWithMetadata } from './utils';
+import {
+  handleAutoIntentAnswers,
+  handleManualVerification,
+  handleVerificationStatus,
+} from './utils';
 
 export const OrganizationCreatePage: FC = () => {
-  const user = useUser();
-  const setUser = useSetUser();
-  const { showSuccess, showErrorResponse } = useNotify();
   const router = useRouter();
+  const { showSuccess, showErrorResponse } = useNotify();
 
   const selector = formValueSelector(ORGANIZATION_ONBOARDING_FORM_ID);
   const addMethod =
     useSelector((state) => selector(state, 'addMethod')) || 'manual';
   const isManual = addMethod === 'manual';
 
-  // Store verification result for later steps
-  const [_verificationData, setVerificationData] =
-    useState<OnboardingVerification | null>(null);
+  const { getChecklistData } = useChecklistCache();
+  const {
+    validationLoading,
+    validationResult,
+    verificationData,
+    runAutoValidation,
+  } = useAutoValidation(getChecklistData);
 
-  // Track if submission is complete to show review status
   const [submissionComplete, setSubmissionComplete] = useState(false);
   const [submittedCompanyName, setSubmittedCompanyName] = useState<string>('');
 
-  // Create a wrapper for Step 3 that auto-advances when manual mode
-  const Step3Wrapper: FC<any> = (props) => {
-    const currentAddMethod = useSelector((state) =>
-      selector(state, 'addMethod'),
-    );
-
-    // Auto-advance if manual mode
-    useEffect(() => {
-      if (currentAddMethod === 'manual' && props.onSubmit) {
-        const timer = setTimeout(() => {
-          props.onSubmit({}, null, {});
-        }, 100);
-        return () => clearTimeout(timer);
+  const handleStep2Submit = useCallback(
+    async (formData) => {
+      if (formData.addMethod === 'auto') {
+        await runAutoValidation(formData);
       }
-    }, [currentAddMethod, props.onSubmit]);
+    },
+    [runAutoValidation],
+  );
 
-    // If manual mode, return null to skip rendering
-    if (currentAddMethod === 'manual') {
-      return null;
-    }
+  // Create a wrapper for Step 3 that auto-advances when manual mode
+  const Step3Wrapper: FC<any> = useCallback(
+    (props) => {
+      const currentAddMethod = useSelector((state) =>
+        selector(state, 'addMethod'),
+      );
 
-    return <OrganizationCreateStep3 {...props} />;
-  };
+      // Auto-advance if manual mode
+      useEffect(() => {
+        if (currentAddMethod === 'manual' && props.onSubmit) {
+          const timer = setTimeout(() => {
+            props.onSubmit({}, null, {});
+          }, 100);
+          return () => clearTimeout(timer);
+        }
+      }, [currentAddMethod, props.onSubmit]);
+
+      // If manual mode, return null to skip rendering
+      if (currentAddMethod === 'manual') {
+        return null;
+      }
+
+      return (
+        <OrganizationCreateStep3
+          {...props}
+          validationResult={validationResult}
+          validationLoading={validationLoading}
+        />
+      );
+    },
+    [validationResult, validationLoading],
+  );
+
+  // Wrapper for Step 2 to handle auto-validation requests on submit
+  const Step2Wrapper: FC<any> = useCallback(
+    (props) => {
+      const customOnSubmit = async (formData, dispatch, formProps) => {
+        await handleStep2Submit(formData);
+        if (props.onSubmit) {
+          props.onSubmit(formData, dispatch, formProps);
+        }
+      };
+
+      return (
+        <OrganizationCreateStep2
+          {...props}
+          onSubmit={customOnSubmit}
+          getChecklistData={getChecklistData}
+        />
+      );
+    },
+    [handleStep2Submit, getChecklistData],
+  );
+
+  // Wrapper for Step 4 to pass checklist data
+  const Step4Wrapper: FC<any> = useCallback(
+    (props) => {
+      return (
+        <OrganizationCreateStep4
+          {...props}
+          getChecklistData={getChecklistData}
+        />
+      );
+    },
+    [getChecklistData],
+  );
 
   const wizardForms = useMemo(
-    () => [
-      OrganizationCreateStep1,
-      OrganizationCreateStep2,
-      Step3Wrapper,
-      OrganizationCreateStep4,
-    ],
-    [Step3Wrapper],
+    () => [OrganizationCreateStep1, Step2Wrapper, Step3Wrapper, Step4Wrapper],
+    [Step2Wrapper, Step3Wrapper, Step4Wrapper],
   );
 
   const steps: ProgressStep[] = useMemo(
@@ -121,151 +162,45 @@ export const OrganizationCreatePage: FC = () => {
   const createOnboardingVerification = useCallback(
     async (formData, _dispatch, formProps) => {
       try {
-        const country = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY;
         const isManual = formData.addMethod === 'manual';
+        let validation = isManual ? null : validationResult;
 
-        // ToDo: remove this workaround after implementing getting user's identifier via auth methods
-        const isAustriaCountry = country === 'AT';
-        const requestBody: any = {
-          country,
-          legal_person_identifier: formData.registration_code,
-          legal_name: formData.name,
-          is_manual_validation: isManual,
-        };
-
-        // Add temporary user identification data if provided
-        if (
-          isAustriaCountry &&
-          formData.temp_first_name &&
-          formData.temp_last_name &&
-          formData.temp_birth_date
-        ) {
-          requestBody.first_name = formData.temp_first_name;
-          requestBody.last_name = formData.temp_last_name;
-          requestBody.birth_date = formData.temp_birth_date;
-        } else if (formData.temp_person_identifier) {
-          requestBody.person_identifier = formData.temp_person_identifier;
-        }
-
-        // Step 1: Create verification instance
-        const verificationResponse =
-          await onboardingVerificationsStartVerification({
-            body: requestBody,
-          });
-
-        const verification = verificationResponse.data;
-        setVerificationData(verification);
-
-        const { allQuestions } = await fetchChecklistWithMetadata(country);
-
-        if (allQuestions.length > 0) {
-          const answers = [];
-
-          // Map form data to checklist answers using question_{uuid} field naming
-          allQuestions.forEach((question) => {
-            const fieldName = `question_${question.uuid}`;
-            const fieldValue = formData[fieldName];
-
-            if (
-              fieldValue !== undefined &&
-              fieldValue !== null &&
-              fieldValue !== ''
-            ) {
-              if (question.question_type === 'multi_select') {
-                if (Array.isArray(fieldValue) && fieldValue.length > 0) {
-                  answers.push({
-                    question_uuid: question.uuid,
-                    answer_data: fieldValue, // [uuid1, uuid2, ...]
-                  });
-                }
-              } else if (question.question_type === 'single_select') {
-                if (fieldValue) {
-                  answers.push({
-                    question_uuid: question.uuid,
-                    answer_data: [fieldValue], // [uuid]
-                  });
-                }
-              } else {
-                answers.push({
-                  question_uuid: question.uuid,
-                  answer_data: fieldValue,
-                });
-              }
-            }
-          });
-
-          if (answers.length > 0) {
-            await onboardingVerificationsSubmitAnswers({
-              path: { uuid: verification.uuid },
-              body: answers,
-            });
-          }
-        }
-
-        // Step 4: Run validation only if automatic method is chosen
-        let validation = verification;
-        if (!isManual) {
-          const validationResponse = await onboardingVerificationsRunValidation(
-            {
-              path: { uuid: verification.uuid },
-            },
+        if (isManual) {
+          validation = await handleManualVerification(
+            formData,
+            verificationData,
+            getChecklistData,
           );
-          validation = validationResponse.data;
-          setVerificationData(validation);
-          if (validation.status === 'verified') {
-            showSuccess(translate('Company verification successful!'));
-          }
+        } else {
+          await handleAutoIntentAnswers(formData, validation, getChecklistData);
         }
 
-        // Step 5: Handle different verification statuses
-        if (isManual || validation.status === 'escalated') {
-          // For manual validation or escalated automatic validation, create justification
-          const justificationResponse =
-            await onboardingJustificationsCreateJustification({
-              body: {
-                verification_uuid: validation.uuid,
-              },
-            });
-
-          const justification = justificationResponse.data;
-
-          if (formData.uploadedFiles && formData.uploadedFiles.length > 0) {
-            await Promise.all(
-              formData.uploadedFiles.map((fileItem) =>
-                onboardingJustificationsAttachDocument({
-                  path: { uuid: justification.uuid },
-                  body: { file: fileItem.file },
-                  ...formDataOptions,
-                }),
-              ),
-            );
-          }
-
-          // Show info about manual verification request instead of redirecting immediately
-          setSubmittedCompanyName(formData.name || '');
-          setSubmissionComplete(true);
-        } else if (validation.status === 'verified') {
-          // Auto-create customer if verified
-          try {
-            await onboardingVerificationsCreateCustomer({
-              path: { uuid: validation.uuid },
-            });
+        await handleVerificationStatus(validation, formData, {
+          onSuccess: () => {
             showSuccess(translate('Organization created!'));
             formProps.destroy();
             router.stateService.go('profile.details');
-          } catch (e) {
+          },
+          onReview: (companyName) => {
+            setSubmittedCompanyName(companyName);
+            setSubmissionComplete(true);
+          },
+          onError: (e) => {
             showErrorResponse(e, translate('Unable to create organization.'));
-          }
-        } else if (validation.status === 'failed') {
-          throw new Error(
-            validation.error_message || translate('Company validation failed.'),
-          );
-        }
+          },
+        });
       } catch (e) {
         showErrorResponse(e, translate('Unable to verify company.'));
       }
     },
-    [showSuccess, showErrorResponse, setUser, router, user],
+    [
+      showSuccess,
+      showErrorResponse,
+      router,
+      validationResult,
+      verificationData,
+      getChecklistData,
+    ],
   );
 
   return (

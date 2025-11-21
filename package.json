@@ -102,7 +102,7 @@
     "reselect": "^3.0.1",
     "source-map": "^0.7.4",
     "text-security": "^3.2.1",
-    "waldur-js-client": "^7.8.8-dev.8",
+    "waldur-js-client": "^7.8.8-dev.14",
     "yjs": "^13.5.22"
   },
   "devDependencies": {

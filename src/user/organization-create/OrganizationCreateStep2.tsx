@@ -3,12 +3,12 @@ import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, Field, formValueSelector } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
 import { ACCEPTED_FILE_TYPES } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import {
   composeValidators,
   getNameFieldValidators,
+  required,
 } from '@waldur/core/validators';
 import { StringField } from '@waldur/form';
 import { FormGroup } from '@waldur/form/FormGroup';
@@ -20,26 +20,45 @@ import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 
 import { ChecklistQuestionField } from './ChecklistQuestionField';
-import { fetchChecklistWithMetadata, QuestionWithMetadata } from './utils';
+import { QuestionWithMetadata } from './utils';
 
-export const OrganizationCreateStep2: FunctionComponent<WizardFormStepProps> = (
-  props,
-) => {
-  const [addMethod, setAddMethod] = useState<'auto' | 'manual'>('manual');
+interface OrganizationCreateStep2Props extends WizardFormStepProps {
+  getChecklistData?: () => Promise<{
+    allQuestions: any[];
+    customerQuestions: any[];
+    intentQuestions: any[];
+    checklistUuid: string;
+  }>;
+}
+
+export const OrganizationCreateStep2: FunctionComponent<
+  OrganizationCreateStep2Props
+> = (props) => {
+  const dispatch = useDispatch();
+
+  const selector = formValueSelector(props.form);
+  const formAddMethod = useSelector((state) => selector(state, 'addMethod'));
+  const uploadedFiles =
+    useSelector((state) => selector(state, 'uploadedFiles')) || [];
+
+  const [addMethod, setAddMethod] = useState<'auto' | 'manual'>(
+    formAddMethod || 'manual',
+  );
   const [checklistQuestions, setChecklistQuestions] = useState<
     QuestionWithMetadata[]
   >([]);
   const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-
-  // Get uploaded files from Redux Form state
-  const selector = formValueSelector(props.form);
-  const uploadedFiles =
-    useSelector((state) => selector(state, 'uploadedFiles')) || [];
+  const [checklistFetched, setChecklistFetched] = useState(false);
 
   useEffect(() => {
     dispatch(change(props.form, 'addMethod', addMethod));
   }, [addMethod, dispatch, props.form]);
+
+  useEffect(() => {
+    if (formAddMethod && formAddMethod !== addMethod) {
+      setAddMethod(formAddMethod);
+    }
+  }, [formAddMethod]);
 
   const updateUploadedFiles = useCallback(
     (files: AttachmentUploading[]) => {
@@ -71,12 +90,14 @@ export const OrganizationCreateStep2: FunctionComponent<WizardFormStepProps> = (
   );
 
   useEffect(() => {
+    if (checklistFetched) return;
+
     const fetchChecklist = async () => {
       setLoading(true);
       try {
-        const country = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY;
-        const { customerQuestions } = await fetchChecklistWithMetadata(country);
-        setChecklistQuestions(customerQuestions);
+        const data = await props.getChecklistData();
+        setChecklistQuestions(data.customerQuestions);
+        setChecklistFetched(true);
       } catch {
         setChecklistQuestions([]);
       } finally {
@@ -85,7 +106,7 @@ export const OrganizationCreateStep2: FunctionComponent<WizardFormStepProps> = (
     };
 
     fetchChecklist();
-  }, []);
+  }, [checklistFetched, props.getChecklistData]);
 
   return (
     <WizardForm {...props}>
@@ -223,6 +244,8 @@ export const OrganizationCreateStep2: FunctionComponent<WizardFormStepProps> = (
                   label={translate('Registration code')}
                   placeholder={translate('12345678')}
                   component={FormGroup}
+                  required
+                  validate={required}
                 >
                   <StringField />
                 </Field>

@@ -93,7 +93,7 @@ const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
   return (
     <ResourceSummaryResources
       resource={{
-        ...value.data,
+        ...(value?.data as object),
         end_date: row.end_date,
         parent_uuid: row.parent_uuid,
         parent_name: row.parent_name,
