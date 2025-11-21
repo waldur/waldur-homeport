@@ -1,4 +1,4 @@
-import { ArchiveBoxIcon } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { checklistsAdminDestroy } from 'waldur-js-client';
 
@@ -6,7 +6,7 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
-export const ChecklistArchiveAction = ({ row, refetch }) => {
+export const ChecklistDeleteAction = ({ row, refetch }) => {
   const dispatch = useDispatch();
   const openDialog = async () => {
     try {
@@ -14,12 +14,11 @@ export const ChecklistArchiveAction = ({ row, refetch }) => {
         dispatch,
         translate('Confirmation'),
         translate(
-          'Are you sure you want to archive the checklist {name}?',
+          'Are you sure you want to delete the checklist {name}? This action cannot be undone.',
           { name: <b>{row.name}</b> },
           formatJsxTemplate,
         ),
-        // FIX btn title
-        { forDeletion: true, negativeButton: translate('Archive') },
+        { forDeletion: true },
       );
     } catch {
       return;
@@ -29,9 +28,9 @@ export const ChecklistArchiveAction = ({ row, refetch }) => {
   };
   return (
     <ActionItem
-      title={translate('Archive')}
+      title={translate('Delete')}
       action={openDialog}
-      iconNode={<ArchiveBoxIcon weight="bold" />}
+      iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
       iconColor="danger"
     />

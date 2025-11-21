@@ -14,6 +14,7 @@ import { checklistTypeOptions } from '../utils';
 
 import { ChecklistExpandableRow } from './ChecklistExpandableRow';
 import { ChecklistRowActions } from './ChecklistRowActions';
+import { ChecklistsBulkRemoveButton } from './ChecklistsBulkRemoveButton';
 
 export const ChecklistsTable: FC<TableWithPortal> = ({ portal }) => {
   const tableProps = useTable({
@@ -58,6 +59,8 @@ export const ChecklistsTable: FC<TableWithPortal> = ({ portal }) => {
       tableActions={<ChecklistsTableActions refetch={tableProps.fetch} />}
       rowActions={ChecklistRowActions}
       expandableRow={ChecklistExpandableRow}
+      enableMultiSelect
+      multiSelectActions={ChecklistsBulkRemoveButton}
     />
   );
 };
