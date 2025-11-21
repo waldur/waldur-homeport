@@ -3,8 +3,8 @@ import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { CHECKLIST_FLAGS } from '../utils';
 
 import { AddQuestionAction } from './AddQuestionAction';
-import { ChecklistArchiveAction } from './ChecklistArchiveAction';
 import { ChecklistChangeStatusAction } from './ChecklistChangeStatusAction';
+import { ChecklistDeleteAction } from './ChecklistDeleteAction';
 import { ChecklistEditAction } from './ChecklistEditAction';
 
 export const ChecklistRowActions = ({ row, fetch }) => {
@@ -17,7 +17,7 @@ export const ChecklistRowActions = ({ row, fetch }) => {
         ChecklistEditAction,
         CHECKLIST_FLAGS.checklistActionChangeStatus &&
           ChecklistChangeStatusAction,
-        ChecklistArchiveAction,
+        ChecklistDeleteAction,
       ].filter(Boolean)}
     />
   );
