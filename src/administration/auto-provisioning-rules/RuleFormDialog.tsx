@@ -22,10 +22,11 @@ interface RuleFormDialogProps {
 
 interface AutoProvisioningRuleForm {
   name: string;
-  customer: Customer;
+  customer?: Customer;
   project_role: string;
   user_affiliations: string;
   user_email_patterns: string;
+  use_user_organization_as_customer_name: boolean;
 }
 
 export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
@@ -36,11 +37,12 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
   const initialValues = isEdit
     ? {
         name: resolve.rule.name,
-        customer: {
-          url: resolve.rule.customer,
-          name: resolve.rule.customer_name,
-        },
+        customer: resolve.rule.customer
+          ? { url: resolve.rule.customer, name: resolve.rule.customer_name }
+          : null,
         project_role: resolve.rule.project_role_display_name,
+        use_user_organization_as_customer_name:
+          resolve.rule.use_user_organization_as_customer_name,
         user_affiliations: resolve.rule.user_affiliations?.join(', ') || '',
         user_email_patterns: resolve.rule.user_email_patterns?.join(' ') || '',
       }
@@ -50,9 +52,11 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
     async (formData: AutoProvisioningRuleForm) => {
       const payload = {
         name: formData.name,
-        customer: formData.customer.url,
+        customer: formData.customer?.url ?? null,
         project_role_name: formData.project_role,
         creates_resource: false,
+        use_user_organization_as_customer_name:
+          formData.use_user_organization_as_customer_name,
         user_affiliations: formData.user_affiliations
           ? Array.isArray(formData.user_affiliations)
             ? formData.user_affiliations.filter(Boolean)
@@ -103,7 +107,13 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid }) => (
+      validate={(values) => {
+        const errors: any = {};
+        if (!values.use_user_organization_as_customer_name && !values.customer)
+          errors.customer = translate('This field is required.');
+        return errors;
+      }}
+      render={({ handleSubmit, submitting, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -124,7 +134,7 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
               </>
             }
           >
-            <RuleForm />
+            <RuleForm values={values} />
           </ModalDialog>
         </form>
       )}
