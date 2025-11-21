@@ -1,4 +1,5 @@
-.organization-review-status {
+.organization-review-status,
+.organization-validation-result {
   padding: 132px 2rem 2rem !important;
 
   .icon-background {
@@ -13,7 +14,8 @@
     }
   }
 
-  .review-icon-wrapper {
+  .review-icon-wrapper,
+  .validation-icon-wrapper {
     width: 60px;
     height: 60px;
     border-radius: 50%;

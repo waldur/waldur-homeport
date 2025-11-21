@@ -158,8 +158,8 @@ export const ResourcesMenu = ({ user }) => {
     if (!counters) return groupedCategories;
 
     return groupedCategories.sort((a, b) => {
-      const aCount = counters[a.uuid] || 0;
-      const bCount = counters[b.uuid] || 0;
+      const aCount = Number(counters[a.uuid]) || 0;
+      const bCount = Number(counters[b.uuid]) || 0;
       return bCount - aCount;
     });
   }, [categories, categoryGroups, counters]);

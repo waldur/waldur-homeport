@@ -1,30 +1,41 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/config';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 
 import { ChecklistQuestionField } from './ChecklistQuestionField';
-import { fetchChecklistWithMetadata, QuestionWithMetadata } from './utils';
+import { QuestionWithMetadata } from './utils';
 
-export const OrganizationCreateStep4: FunctionComponent<WizardFormStepProps> = (
-  props,
-) => {
+interface OrganizationCreateStep4Props extends WizardFormStepProps {
+  getChecklistData?: () => Promise<{
+    allQuestions: any[];
+    customerQuestions: any[];
+    intentQuestions: any[];
+    checklistUuid: string;
+  }>;
+}
+
+export const OrganizationCreateStep4: FunctionComponent<
+  OrganizationCreateStep4Props
+> = (props) => {
   const [checklistQuestions, setChecklistQuestions] = useState<
     QuestionWithMetadata[]
   >([]);
   const [loading, setLoading] = useState(false);
+  const [checklistFetched, setChecklistFetched] = useState(false);
 
   // Fetch checklist for country on mount
   useEffect(() => {
+    if (checklistFetched) return;
+
     const fetchChecklist = async () => {
       setLoading(true);
       try {
-        const country = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY;
-        const { intentQuestions } = await fetchChecklistWithMetadata(country);
-        setChecklistQuestions(intentQuestions);
+        const data = await props.getChecklistData();
+        setChecklistQuestions(data.intentQuestions);
+        setChecklistFetched(true);
       } catch {
         setChecklistQuestions([]);
       } finally {
@@ -33,7 +44,7 @@ export const OrganizationCreateStep4: FunctionComponent<WizardFormStepProps> = (
     };
 
     fetchChecklist();
-  }, []);
+  }, [checklistFetched, props.getChecklistData]);
 
   return (
     <WizardForm {...props}>
