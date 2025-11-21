@@ -4,6 +4,7 @@ import { Field } from 'react-final-form';
 import { required } from '@waldur/core/validators';
 import { SelectField } from '@waldur/form';
 import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
@@ -14,7 +15,7 @@ import { getProjectRoles } from '@waldur/permissions/utils';
 
 import { validateEmailPatterns } from './utils';
 
-export const RuleForm: FC = () => {
+export const RuleForm: FC<{ values }> = ({ values }) => {
   return (
     <>
       <FormGroup label={translate('Rule name')} required>
@@ -50,7 +51,24 @@ export const RuleForm: FC = () => {
         />
       </FormGroup>
 
-      <FormGroup label={translate('Organization')} required>
+      <FormGroup>
+        <Field
+          name="use_user_organization_as_customer_name"
+          component={AwesomeCheckboxField as any}
+          label={translate('Use user organization as customer name')}
+          tooltip={translate(
+            'If enabled, the customer name will be taken from the user’s organization provided by IdP.',
+          )}
+          tooltipEnd
+          alignMiddle
+          className="w-100"
+        />
+      </FormGroup>
+
+      <FormGroup
+        label={translate('Organization')}
+        required={!values.use_user_organization_as_customer_name}
+      >
         <AsyncSelectFieldFinal
           name="customer"
           loadOptions={(query, prevOptions, page) =>
@@ -60,7 +78,8 @@ export const RuleForm: FC = () => {
             })
           }
           getOptionValue={({ url }) => url}
-          validate={required}
+          // validate={/* Handled by Parent <Form> */}
+          isClearable
         />
       </FormGroup>
 

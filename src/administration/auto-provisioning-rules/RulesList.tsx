@@ -6,6 +6,7 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 
 import { RuleActions } from './RuleActions';
@@ -38,7 +39,7 @@ export const RulesList = () => {
         },
         {
           title: translate('Organization'),
-          render: ({ row }) => <>{row.customer_name}</>,
+          render: ({ row }) => renderFieldOrDash(row.customer_name),
         },
         {
           title: translate('Project role'),
