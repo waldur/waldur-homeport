@@ -91,3 +91,23 @@ export const calculateMonthsDifference = (
 
   return Math.round(end.diff(start, 'months').months);
 };
+
+export const formatUptime = (date) => {
+  const start = parseDate(date);
+  const now = DateTime.now();
+  const diff = now.diff(start, ['days', 'hours', 'minutes']).toObject();
+
+  const days = Math.floor(diff.days || 0);
+  const hours = Math.floor(diff.hours || 0);
+  const minutes = Math.floor(diff.minutes || 0);
+
+  if (days > 1000) {
+    return `${days}d`;
+  } else if (days > 0) {
+    return hours > 0 ? `${days}d ${hours}h` : `${days}d`;
+  } else if (hours > 0) {
+    return minutes > 0 ? `${hours}h ${minutes}m` : `${hours}h`;
+  } else {
+    return `${minutes}m`;
+  }
+};

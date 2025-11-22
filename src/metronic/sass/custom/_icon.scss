@@ -32,6 +32,16 @@
     }
   }
 
+  &.radar-icon-lg {
+    width: 42px;
+    height: 42px;
+
+    > div {
+      width: 32px;
+      height: 32px;
+    }
+  }
+
   &.icon-danger {
     border-color: rgba($danger-600, 0.1);
 

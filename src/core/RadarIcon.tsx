@@ -6,7 +6,7 @@ import { Variant } from 'react-bootstrap/types';
 interface RadarIconProps {
   IconComponent: Icon;
   variant?: Variant;
-  size?: 'sm';
+  size?: 'sm' | 'lg';
   className?: string;
   style?: CSSProperties;
 }
@@ -28,7 +28,7 @@ export const RadarIcon: FC<RadarIconProps> = ({
   >
     <div>
       <IconComponent
-        size={size === 'sm' ? 15 : 20}
+        size={size === 'sm' ? 15 : size === 'lg' ? 24 : 20}
         weight="bold"
         className={`text-${variant}`}
       />

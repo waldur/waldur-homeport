@@ -10,6 +10,7 @@ import './FormTable.scss';
 
 export interface FormTableItemProps {
   label?: ReactNode;
+  colon?: boolean;
   description?: ReactNode;
   value?: ReactNode;
   group?: boolean;
@@ -20,6 +21,7 @@ export interface FormTableItemProps {
   className?: string;
   descriptionClassName?: string;
   valueClass?: string;
+  actionsClass?: string;
   required?: boolean;
 }
 
@@ -60,6 +62,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
                   data-testid="warning"
                 />,
               )}
+            {props.colon && ':'}
           </div>
           <div
             className={classNames(
@@ -73,7 +76,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
       ) : i === 0 && props.label ? (
         <th className="title col-md-3" rowSpan={titleRowSpan}>
           {props.label}
-          {props.required && <span className="text-danger ms-1">*</span>}{' '}
+          {props.required && <span className="text-danger ms-1">*</span>}
           {Boolean(props.tooltip) &&
             wrapTooltip(
               props.tooltip,
@@ -93,6 +96,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
                 className="ms-2 text-warning mb-1"
               />,
             )}
+          {props.colon && ':'}
         </th>
       ) : null}
       {row || [false, 0].includes(row) ? (
@@ -105,7 +109,14 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
       ) : (
         <td className="value col-md" />
       )}
-      <td className="col-md-auto col-actions text-end">{actions}</td>
+      <td
+        className={classNames(
+          'col-md-auto col-actions text-end',
+          props.actionsClass,
+        )}
+      >
+        {actions}
+      </td>
     </tr>
   ));
 };
@@ -114,6 +125,7 @@ type FormTableCardProps = FC<
   PropsWithChildren<{
     title?: ReactNode;
     className?: string;
+    headerClassName?: string;
     refetch?(): void;
     loading?: boolean;
     actions?: ReactNode;
@@ -124,7 +136,7 @@ const FormTableCard: FormTableCardProps = (props) => {
   return (
     <Card className={classNames('form-table-card', props.className)}>
       {props.title && (
-        <Card.Header>
+        <Card.Header className={props.headerClassName}>
           <Card.Title>
             <h3>{props.title}</h3>
             {props.refetch && (
@@ -132,7 +144,9 @@ const FormTableCard: FormTableCardProps = (props) => {
             )}
           </Card.Title>
           {props.actions && (
-            <div className="card-toolbar gap-3">{props.actions}</div>
+            <div className="card-toolbar flex-grow-1 justify-content-end gap-3">
+              {props.actions}
+            </div>
           )}
         </Card.Header>
       )}

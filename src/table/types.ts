@@ -173,6 +173,7 @@ export interface TableProps<RowType = any> extends TableState {
   setDisplayMode?: (mode: DisplayMode) => void;
   gridItem?: React.ComponentType<{ row: RowType }>;
   gridSize?: ColProps;
+  gridSpace?: number;
   openFiltersDrawer?: (filters: React.ReactNode) => void;
   renderFiltersDrawer?: (filters: React.ReactNode) => void;
   dropdownActions?: ReactNode;
