@@ -360,6 +360,8 @@
   .table.table-expandable tr.expanded + tr,
   /* TABLE FULL IN CARD */
   &.full-width {
+    overflow: hidden;
+
     .table-filter {
       padding-left: 0;
       padding-right: 0;
@@ -442,6 +444,7 @@
     // Page size selector
     .form-select {
       color: $dark;
+      width: auto;
       -webkit-appearance: none;
       -moz-appearance: none;
       @include svg-bg-icon(arrow-bottom, $fg-quinary);

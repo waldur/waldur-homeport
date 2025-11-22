@@ -2,7 +2,7 @@
   background-color: $brand-50;
 }
 
-.progress .progress-bar {
+.progress .progress-bar:last-child {
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }

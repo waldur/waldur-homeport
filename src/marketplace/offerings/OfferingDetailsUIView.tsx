@@ -22,6 +22,11 @@ import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';
 import { OfferingViewHero } from './OfferingViewHero';
 
+const OfferingDashboard = lazyComponent(() =>
+  import('./details/dashboard/OfferingDashboard').then((module) => ({
+    default: module.OfferingDashboard,
+  })),
+);
 const OfferingBookingResourcesCalendarContainer = lazyComponent(() =>
   import(
     '@waldur/booking/offering/OfferingBookingResourcesCalendarContainer'
@@ -98,6 +103,11 @@ async function loadOfferingData(offering_uuid: string) {
 
 const getTabs = (offering: Offering): PageBarTab[] => {
   return [
+    {
+      title: translate('Dashboard'),
+      key: 'dashboard',
+      component: OfferingDashboard,
+    },
     offering.type === OFFERING_TYPE_BOOKING
       ? {
           title: translate('Bookings'),
