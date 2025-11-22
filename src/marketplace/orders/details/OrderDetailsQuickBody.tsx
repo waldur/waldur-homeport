@@ -11,10 +11,15 @@ export const OrderDetailsQuickBody = ({ order }) => {
       case 'Create':
         return translate('Provision new resource');
       case 'Update':
-        if (order.attributes.old_limits) {
-          return translate('Update limits for an existing resource');
+        // Match the processor logic for determining update type
+        if (order.attributes.action === 'renew') {
+          return translate('Renew prepaid resource');
+        } else if (order.attributes.old_limits) {
+          return translate('Update resource limits');
+        } else if (order.attributes.new_options) {
+          return translate('Update resource options');
         } else {
-          return translate('Update plan for an existing resource');
+          return translate('Switch resource plan');
         }
       case 'Terminate':
         return translate('Terminate an existing resource');

@@ -1,4 +1,5 @@
 import { useMemo } from 'react';
+import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
@@ -14,9 +15,9 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { CancelOrderButton } from '../details/CancelOrderButton';
 
-import { ApproveByProviderButton } from './ApproveByProviderButton';
 import { MarkAsDoneButton } from './MarkAsDoneButton';
 import { OrderConsumerActions } from './OrderConsumerActions';
+import { OrderProviderActions } from './OrderProviderActions';
 
 export const OrderActionsButton = ({
   order,
@@ -34,23 +35,11 @@ export const OrderActionsButton = ({
       [SUPPORT_OFFERING_TYPE, BASIC_OFFERING_TYPE].includes(
         order.offering_type,
       ) &&
-      ['executing', 'pending-consumer', 'pending-provider'].includes(
-        order.state,
-      ) &&
+      ['executing', 'pending-consumer'].includes(order.state) &&
       hasPermission(user, {
         permission: PermissionEnum.CANCEL_ORDER,
         customerId: order.customer_uuid,
         projectId: order.project_uuid,
-      })
-    );
-  }, [order, user]);
-
-  const showApproveByProviderButton = useMemo(() => {
-    return (
-      order.state === 'pending-provider' &&
-      hasPermission(user, {
-        permission: PermissionEnum.APPROVE_ORDER,
-        customerId: order.customer_uuid,
       })
     );
   }, [order, user]);
@@ -65,14 +54,16 @@ export const OrderActionsButton = ({
     );
   }, [order, user]);
 
+  if (order.state === 'pending-provider') {
+    return (
+      <OrderProviderActions order={order} refetch={loadData} as={Button} />
+    );
+  }
+
   return showCancelButton ||
-    showApproveByProviderButton ||
     showMarkAsDoneButton ||
     order.state === 'pending-consumer' ? (
     <ActionsDropdownComponent label={translate('Actions')} labeled={true}>
-      {showApproveByProviderButton && (
-        <ApproveByProviderButton row={order} refetch={loadData} />
-      )}
       {showMarkAsDoneButton && (
         <MarkAsDoneButton row={order} refetch={loadData} />
       )}

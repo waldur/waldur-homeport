@@ -2,6 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import {
   marketplaceOrdersList,
   MarketplaceOrdersListData,
+  OrderDetails,
   Resource,
 } from 'waldur-js-client';
 
@@ -19,6 +20,7 @@ import { ResourceOrderRowActions } from '../actions/ResourceOrdersRowActions';
 
 import { OrderStateCell } from './OrderStateCell';
 import { OrderTypeCell } from './OrderTypeCell';
+import { ResourceOrderExpandableRow } from './ResourceOrderExpandableRow';
 
 interface ResourceOrdersProps {
   resource: Resource;
@@ -40,7 +42,7 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
     fetchData: createFetcher(marketplaceOrdersList),
     filter,
   });
-  const columns: Column<Resource>[] = [
+  const columns: Column<OrderDetails>[] = [
     {
       title: translate('ID'),
       render: ({ row }) => (
@@ -83,6 +85,7 @@ export const ResourceOrders: FunctionComponent<ResourceOrdersProps> = (
       rowActions={({ row }) => (
         <ResourceOrderRowActions row={row} refetch={tableProps.fetch} />
       )}
+      expandableRow={ResourceOrderExpandableRow}
     />
   );
 };

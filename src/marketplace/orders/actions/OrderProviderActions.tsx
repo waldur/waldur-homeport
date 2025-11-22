@@ -24,23 +24,17 @@ export const OrderProviderActions = ({
   }
 
   const showApproveByProviderButton = useMemo(() => {
-    return (
-      order.state === 'pending-provider' &&
-      hasPermission(user, {
-        permission: PermissionEnum.APPROVE_ORDER,
-        customerId: order.provider_uuid,
-      })
-    );
+    return hasPermission(user, {
+      permission: PermissionEnum.APPROVE_ORDER,
+      customerId: order.provider_uuid,
+    });
   }, [order, user]);
 
   const showRejectByProviderButton = useMemo(() => {
-    return (
-      order.state === 'pending-provider' &&
-      hasPermission(user, {
-        permission: PermissionEnum.REJECT_ORDER,
-        customerId: order.provider_uuid,
-      })
-    );
+    return hasPermission(user, {
+      permission: PermissionEnum.REJECT_ORDER,
+      customerId: order.provider_uuid,
+    });
   }, [order, user]);
 
   return as === Button ? (
