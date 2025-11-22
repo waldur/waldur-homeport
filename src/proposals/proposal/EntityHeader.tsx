@@ -23,7 +23,7 @@ export const EntityHeader = ({
       <div className="ms-4">{badge}</div>
     </div>
     <p className="fs-6 text-muted mb-1">
-      Slug: {slug}{' '}
+      ID: {slug}{' '}
       <CopyToClipboardButton
         value={slug}
         onlyButton

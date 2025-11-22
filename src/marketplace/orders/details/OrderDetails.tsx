@@ -19,11 +19,12 @@ import { OrderActionsButton } from '../actions/OrderActionsButton';
 import { ErrorDetailsTab } from './ErrorDetailsTab';
 import { LimitsSection } from './LimitsSection';
 import { OrderAccordion } from './OrderAccordion';
-import { OrderDetailsApprovalsTab } from './OrderDetailsApprovalsTab';
 import { OrderDetailsHeaderBody } from './OrderDetailsHeaderBody';
 import { OrderDetailsHeaderTitle } from './OrderDetailsHeaderTitle';
 import { OrderDetailsQuickBody } from './OrderDetailsQuickBody';
 import { OrderMetadataTab } from './OrderMetadataTab';
+import { OrderReviewButton } from './OrderReviewButton';
+import { OrderSummaryTab } from './OrderSummaryTab';
 import { OutputTab } from './OutputTab';
 import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
@@ -35,12 +36,12 @@ const getOrderPageTabs = (data: {
 }): PageBarTab[] => {
   const limitParser = getFormLimitParser(data.order.offering_type);
   const limits = limitParser(data.order.limits);
-  return [
+  const tabs = [
     {
-      key: 'approvals',
-      title: translate('Approvals'),
+      key: 'summary',
+      title: translate('Order summary'),
       component: () => (
-        <OrderDetailsApprovalsTab order={data.order} offering={data.offering} />
+        <OrderSummaryTab order={data.order} offering={data.offering} />
       ),
     },
     {
@@ -56,16 +57,6 @@ const getOrderPageTabs = (data: {
       component: () => <UserSubmittedFieldsTab order={data.order} />,
     },
     {
-      key: 'output',
-      title: translate('Output'),
-      component: () => <OutputTab order={data.order} />,
-    },
-    {
-      key: 'error-details',
-      title: translate('Error details'),
-      component: () => <ErrorDetailsTab order={data.order} />,
-    },
-    {
       key: 'accounting',
       title: translate('Accounting'),
       component: () => (
@@ -79,7 +70,27 @@ const getOrderPageTabs = (data: {
         <LimitsSection components={data.offering.components} limits={limits} />
       ),
     },
-  ].filter(Boolean);
+  ];
+
+  // Only show Output tab if there is output
+  if (data.order.output) {
+    tabs.push({
+      key: 'output',
+      title: translate('Output'),
+      component: () => <OutputTab order={data.order} />,
+    });
+  }
+
+  // Only show Error details tab if there are errors
+  if (data.order.error_message) {
+    tabs.push({
+      key: 'error-details',
+      title: translate('Error details'),
+      component: () => <ErrorDetailsTab order={data.order} />,
+    });
+  }
+
+  return tabs.filter(Boolean);
 };
 
 interface OrderDetailsProps {
@@ -106,19 +117,34 @@ const PageHero = ({ data, isRefetching }) => (
           <OrderDetailsQuickBody order={data.order} />
           <OrderDetailsHeaderBody order={data.order} />
         </Stack>
-        <Stack direction="vertical" gap={3} className="align-items-end">
-          <RefreshButton
-            refetch={data.refetch}
-            isLoading={isRefetching}
-            size="sm"
-          />
+        {data.order.attachment && data.order.state === 'pending-provider' ? (
+          <Stack gap={3} className="align-items-end d-flex">
+            <RefreshButton
+              refetch={data.refetch}
+              isLoading={isRefetching}
+              size="sm"
+            />
+            <OrderReviewButton order={data.order} loadData={data.refetch} />
+          </Stack>
+        ) : (
+          <Stack
+            direction="vertical"
+            gap={3}
+            className="align-items-end d-flex"
+          >
+            <RefreshButton
+              refetch={data.refetch}
+              isLoading={isRefetching}
+              size="sm"
+            />
 
-          <OrderActionsButton
-            order={data.order}
-            offering={data.offering}
-            loadData={data.refetch}
-          />
-        </Stack>
+            <OrderActionsButton
+              order={data.order}
+              offering={data.offering}
+              loadData={data.refetch}
+            />
+          </Stack>
+        )}
       </Stack>
     }
   />

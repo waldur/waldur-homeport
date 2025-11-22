@@ -55,7 +55,7 @@ export const useMarketplacePublicTabs = () => {
       !isFeatureVisible(MarketplaceFeatures.catalogue_only) &&
         user && {
           title: translate('Orders'),
-          to: 'public.marketplace-orders',
+          to: 'auth-marketplace-orders',
         },
     ].filter(Boolean);
 

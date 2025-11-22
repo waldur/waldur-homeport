@@ -63,7 +63,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   const showMoreButton = onShowMore && isTruncated;
 
   return (
-    <div className="bar bg-body">
+    <div className="bar bg-body d-print-none">
       <div
         className={classNames(
           'container-fluid w-100 d-flex align-items-center gap-2',

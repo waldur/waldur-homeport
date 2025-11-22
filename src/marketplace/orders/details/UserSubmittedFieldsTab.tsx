@@ -1,19 +1,20 @@
-import { Card } from 'react-bootstrap';
-
+import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { KeyValueTable } from '@waldur/marketplace/resources/KeyValueTable';
 
 export const UserSubmittedFieldsTab = ({ order }) => {
   return (
-    <Card className="card-bordered">
-      <Card.Header className="custom-card-header custom-padding-zero">
-        <Card.Title>
-          <h3>{translate('User submitted fields')}</h3>
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <KeyValueTable items={order.attributes} />
-      </Card.Body>
-    </Card>
+    <FormTable.Card title={translate('User submitted fields')}>
+      <FormTable detailsMode>
+        {order.attributes &&
+          Object.entries(order.attributes).map(([key, value]) => (
+            <FormTable.Item
+              key={key}
+              label={key}
+              value={<FieldWithCopy value={value} />}
+            />
+          ))}
+      </FormTable>
+    </FormTable.Card>
   );
 };
