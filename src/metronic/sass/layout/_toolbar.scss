@@ -15,8 +15,14 @@
   left: 0;
   width: 100%;
   z-index: 10;
-  border-top: 1px solid var(--bs-border-color);
   border-bottom: 1px solid var(--bs-border-color);
+  height: var(--kt-extra-toolbar-height);
+
+  > * {
+    height: 100%;
+    align-items: center;
+    align-content: center;
+  }
 }
 
 // Desktop mode

@@ -6,9 +6,7 @@ import { OnboardingVerification } from 'waldur-js-client';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
-import Bg from '@waldur/navigation/header/search/Background.svg';
-import BgDark from '@waldur/navigation/header/search/BackgroundDark.svg';
-import { useTheme } from '@waldur/theme/useTheme';
+import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
 
 import './OrganizationReviewStatus.scss';
 
@@ -21,7 +19,6 @@ export const OrganizationCreateStep3: FunctionComponent<
   OrganizationCreateStep3Props
 > = (props) => {
   const { validationResult, validationLoading } = props;
-  const { theme } = useTheme();
 
   const getStatusIcon = () => {
     if (!validationResult) return null;
@@ -105,11 +102,7 @@ export const OrganizationCreateStep3: FunctionComponent<
       <div className="d-flex flex-column gap-5">
         <Card className="border-0 shadow-sm">
           <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">
-            {theme === 'dark' ? (
-              <BgDark className="icon-background" />
-            ) : (
-              <Bg className="icon-background" />
-            )}
+            <RadialBg className="icon-background" />
             {validationLoading ? (
               <>
                 <LoadingSpinner />

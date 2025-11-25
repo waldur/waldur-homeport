@@ -71,11 +71,11 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
         )}
       >
         {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-        <RadarIcon IconComponent={icon} variant={variant} size="sm" />
+        <RadarIcon IconComponent={icon} variant={variant} />
 
         <p
           ref={textRef}
-          className={classNames('text-start fs-7', ellipsis && 'ellipsis')}
+          className={classNames('text-start fs-6', ellipsis && 'ellipsis')}
         >
           <strong className="fw-bold">
             {label}

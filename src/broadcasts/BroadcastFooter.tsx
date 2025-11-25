@@ -4,7 +4,7 @@ import {
   FloppyDiskIcon,
   ShareIcon,
 } from '@phosphor-icons/react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -53,7 +53,7 @@ export const BroadcastFooter = ({
     );
 
   return (
-    <Modal.Footer className="border-0 pt-0 gap-2">
+    <>
       {step === 0 ? (
         <>
           <CloseDialogButton />
@@ -118,6 +118,6 @@ export const BroadcastFooter = ({
           </Button>
         </>
       )}
-    </Modal.Footer>
+    </>
   );
 };

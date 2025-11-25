@@ -225,6 +225,11 @@ $button-variants: (
   ),
 ) !default; // Custom variable
 
+// Body
+//
+// Settings for the `<body>` element.
+$body-bg: if(isDarkMode(), $gray-25, $white) !default;
+
 // -----------------------------
 // Components
 
@@ -298,9 +303,12 @@ $form-switch-height: 1.85rem !default; // Custom variable
 $form-switch-width-sm: 2.77rem !default; // Custom variable
 $form-switch-height-sm: 1.54rem !default; // Custom variable
 
-// Dropdown
-$gray-50: if(isDarkMode(), #161b26, #f9fafb);
-$gray-700: if(isDarkMode(), #ececed, #344054);
+// Dropdowns
+$dropdown-box-shadow: if(
+  isDarkMode(),
+  0px 0px 30px rgba(0, 0, 0, 0.3),
+  (0 12px 16px -4px rgba($gray-900, 0.1), 0 4px 6px -2px rgba($gray-900, 0.05%))
+) !default;
 $dropdown-item-padding-x: 16px;
 $dropdown-item-padding-y: 10px;
 $dropdown-link-hover-color: $gray-700;
@@ -316,6 +324,15 @@ $modal-inner-padding: 1.85rem !default;
 $modal-lg: 840px !default;
 $modal-md: 544px !default;
 $modal-sm: 400px !default;
+
+// Popovers
+$popover-bg: $body-bg !default;
+
+// Tooltips
+$tooltip-bg: $bg-primary-solid !default;
+$tooltip-color: $bg-primary !default;
+$tooltip-padding-y: 0.154rem * 4 !default;
+$tooltip-padding-x: 0.154rem * 6 !default;
 
 // Badges
 $badge-font-size: 1.075rem !default;
@@ -333,13 +350,21 @@ $badge-padding-x: 9px !default;
 $badge-padding-x-sm: 7px !default; // Custom variable
 $badge-padding-x-lg: 11px !default; // Custom variable
 
-// Pagination
+// Progress
+$progress-height: 8px;
+$progress-bg: if(
+  isDarkMode(),
+  $bg-brand-primary_alt !important,
+  $bg-brand-primary_alt
+);
+$progress-box-shadow: unset;
+$progress-bar-color: $white;
+$progress-bar-bg: $primary;
 
+// Pagination
 $pagination-item-height: 2.154rem !default; // Custom variable
 $pagination-item-space: 0.154rem !default; // Custom variable
 $pagination-item-space-tablet-and-mobile: 0.154rem !default; // Custom variable
 
 // Tables
-//
-
 $table-pagination-padding-y: 0.925rem;

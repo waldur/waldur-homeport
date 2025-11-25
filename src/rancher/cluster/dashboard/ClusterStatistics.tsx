@@ -3,12 +3,14 @@ import { Col, Nav, Row, Stack, Tab } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { useTheme } from '@waldur/theme/useTheme';
 
 import { NetworkStatisticsCard } from './NetworkStatisticsCard';
 import { PieChart } from './PieChart';
 import { StatisticsCard } from './StatisticsCard';
 
 const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
+  const { theme } = useTheme();
   return (
     <Stack direction="horizontal" gap={5}>
       <PieChart
@@ -20,7 +22,7 @@ const StatisticPieChartItem = ({ title, unit, total, value, color }) => {
           },
           {
             value: total - value,
-            itemStyle: { color: '#E4E7EC' },
+            itemStyle: { color: theme === 'dark' ? '#333741' : '#E4E7EC' },
           },
         ]}
       />

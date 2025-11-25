@@ -65,7 +65,7 @@ export const QuotaCell = ({
         units={units}
       />
 
-      <QuotaProgressBar percent={percent} className="mt-1" />
+      <QuotaProgressBar percent={percent} height={4} className="mt-1" />
     </div>
   );
 };

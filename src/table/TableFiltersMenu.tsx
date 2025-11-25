@@ -314,13 +314,15 @@ export const TableFiltersMenu: FC<TableFiltersMenuProps> = (props) => {
         <Tip id="table-add-filter-tip" label={translate('Add filter')}>
           <Button
             variant="tertiary"
-            className="btn-icon btn-add-filter w-40px h-40px"
+            className="btn-icon btn-add-filter"
             data-kt-menu-trigger="click"
             data-kt-menu-attach="parent"
             data-kt-menu-placement="bottom-start"
             data-cy="table-add-filter-button"
           >
-            <PlusIcon weight="bold" size={28} />
+            <span className="svg-icon svg-icon-2">
+              <PlusIcon weight="bold" />
+            </span>
           </Button>
           <div
             ref={menuEl}

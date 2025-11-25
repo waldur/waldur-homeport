@@ -13,18 +13,18 @@
       position: absolute;
       left: 0;
       top: 0;
-      height: 14px;
+      height: 8px;
       width: 100%;
       padding: 0 10px;
-      margin-top: 4px;
+      margin-top: 6px;
       overflow: hidden;
 
       .slider-line-bg {
         position: absolute;
         top: 0;
         left: 10px;
-        height: 14px;
-        background-color: var(--bs-light);
+        height: 8px;
+        background-color: var(--waldur-border-secondary);
         width: calc(100% - 20px);
         border-radius: 4px;
       }
@@ -33,8 +33,8 @@
         position: relative;
         top: 0;
         left: 0;
-        height: 14px;
-        background-color: var(--bs-primary);
+        height: 8px;
+        background-color: var(--waldur-border-brand-solid);
         border-radius: 4px;
       }
     }
@@ -75,7 +75,7 @@
     appearance: none;
     position: relative;
     background: transparent;
-    height: 14px;
+    height: 8px;
     width: 100%;
     margin-top: 4px;
     z-index: 1;
@@ -89,21 +89,20 @@
 
     &::-webkit-slider-thumb {
       appearance: none;
-      height: 20px;
-      width: 20px;
+      height: 24px;
+      width: 24px;
       border-radius: 50%;
-      background: var(--bs-white);
+      background: var(--waldur-bg-primary);
+      border: 1.5px solid var(--waldur-border-brand-solid);
       cursor: pointer;
-      box-shadow: 0 1px 3px 1px #0000005b;
-      transition: background 0.3s ease-in-out;
+      transition: box-shadow 0.2s;
     }
 
     &::-webkit-slider-thumb:hover {
-      box-shadow: var(--bs-dark) 0 0 0 2px;
+      box-shadow: 0 0 0 1px var(--waldur-border-brand-solid);
     }
 
     &::-webkit-slider-thumb:active {
-      box-shadow: var(--bs-dark) 0 0 0 1px;
       transition:
         box-shadow 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,
         left 350ms cubic-bezier(0.4, 0, 0.2, 1) 0ms,

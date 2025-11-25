@@ -1,6 +1,6 @@
 import { CaretRightIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   promotionsCampaignsCreate,
@@ -82,34 +82,34 @@ export const CampaignFooter = ({
     [dispatch],
   );
 
-  return (
-    <Modal.Footer className="border-0 pt-0 gap-2">
-      {step === 0 ? (
-        <Button onClick={() => setStep(1)}>
+  return step === 0 ? (
+    <Button
+      className="btn-icon-right"
+      onClick={() => setStep(1)}
+      disabled={disabled}
+    >
+      {translate('Continue')}
+      <span className="svg-icon svg-icon-2">
+        <CaretRightIcon weight="bold" />
+      </span>
+    </Button>
+  ) : (
+    <>
+      {!isUpdate ? (
+        <Button disabled={disabled} onClick={handleSubmit(saveAndSend)}>
           <span className="svg-icon svg-icon-2">
-            <CaretRightIcon weight="bold" />
-          </span>{' '}
-          {translate('Continue')}
+            <PaperPlaneTiltIcon weight="bold" />
+          </span>
+          {translate('Create a campaign')}
         </Button>
       ) : (
-        <>
-          {!isUpdate ? (
-            <Button disabled={disabled} onClick={handleSubmit(saveAndSend)}>
-              <span className="svg-icon svg-icon-2">
-                <PaperPlaneTiltIcon weight="bold" />
-              </span>{' '}
-              {translate('Create a campaign')}
-            </Button>
-          ) : (
-            <Button disabled={disabled} onClick={handleSubmit(saveAndUpdate)}>
-              <span className="svg-icon svg-icon-2">
-                <PaperPlaneTiltIcon weight="bold" />
-              </span>{' '}
-              {translate('Update a campaign')}
-            </Button>
-          )}
-        </>
+        <Button disabled={disabled} onClick={handleSubmit(saveAndUpdate)}>
+          <span className="svg-icon svg-icon-2">
+            <PaperPlaneTiltIcon weight="bold" />
+          </span>
+          {translate('Update a campaign')}
+        </Button>
       )}
-    </Modal.Footer>
+    </>
   );
 };

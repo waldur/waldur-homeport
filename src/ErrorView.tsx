@@ -8,11 +8,11 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
-import Bg from '@waldur/navigation/header/search/Background.svg';
 import '@waldur/navigation/header/search/NoResult.scss';
 
 import { lazyComponent } from './core/lazyComponent';
 import { openModalDialog } from './modal/actions';
+import { RadialBg } from './navigation/header/search/RadialBg';
 
 const ErrorTraceDialog = lazyComponent(() =>
   import('@waldur/ErrorTraceDialog').then((module) => ({
@@ -31,7 +31,7 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
 
   return (
     <div className="search-error">
-      <Bg className="background" />
+      <RadialBg className="background" />
       <div className="text-center d-flex flex-column align-items-center gap-6 pb-10 position-relative z-index-1">
         <div className="error-icon">
           <WarningCircleIcon weight="bold" size={24} />

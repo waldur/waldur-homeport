@@ -23,8 +23,9 @@ export const ResourceQuotaField = ({
   return progressBar ? (
     <ProgressBar
       now={percent}
-      showValue
       variant={percent > 66 ? 'danger' : percent > 33 ? 'warning' : undefined}
+      showValue
+      compact
     />
   ) : (
     <>

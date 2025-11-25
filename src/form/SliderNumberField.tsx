@@ -74,20 +74,20 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
             }
             disabled={props.disabled}
           >
-            <span className="svg-icon svg-icon-2">
+            <span className="svg-icon svg-icon-4">
               <PlusIcon weight="bold" />
             </span>
           </Button>
           <Button
             size="sm"
             variant="active-icon-primary"
-            className="minus-btn btn-icon btn-no-focus"
+            className="minus-btn btn-icon btn-no-focus icon-align"
             onClick={() =>
               change(Number(input.value) - 1 * Number(props.step || 1))
             }
             disabled={props.disabled}
           >
-            <span className="svg-icon svg-icon-2">
+            <span className="svg-icon svg-icon-4">
               <MinusIcon weight="bold" />
             </span>
           </Button>
