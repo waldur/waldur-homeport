@@ -9,12 +9,14 @@ import {
 interface ProgressBarProps extends BsProgressBarProps {
   unit?: string;
   showValue?: boolean;
+  compact?: boolean;
 }
 
 export const ProgressBar: FC<ProgressBarProps> = ({
   now,
   max = 100,
   showValue,
+  compact,
   unit = '%',
   variant,
 }) => {
@@ -24,17 +26,19 @@ export const ProgressBar: FC<ProgressBarProps> = ({
       <BsProgressBar
         now={now}
         max={max}
-        className={classNames(
-          'h-8px shadow-none w-100 mt-1',
-          variant && `bg-light-${variant}`,
-        )}
+        className={classNames('w-100 mt-1', variant && `bg-light-${variant}`)}
         variant={variant}
       />
       {showValue && (
-        <small className="d-block text-end text-gray-700">
+        <span
+          className={classNames(
+            'd-block text-end text-secondary',
+            compact ? 'fs-7' : 'fs-6 mt-2',
+          )}
+        >
           {max ? (Number.isInteger(value) ? value : value.toFixed(1)) : now}
           {unit}
-        </small>
+        </span>
       )}
     </Stack>
   );

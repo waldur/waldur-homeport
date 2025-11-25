@@ -32,7 +32,7 @@ export const QuotaSingleView = ({
         {units && ` ${units}`}
         {title && ` ${title}`}
       </span>
-      <QuotaProgressBar percent={percent} height={8} className="mt-2" />
+      <QuotaProgressBar percent={percent} className="mt-2" />
       <div className="d-flex justify-content-between gap-4 fs-6 mt-3">
         <div>
           <span className="fw-bold d-block mb-1">

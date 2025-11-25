@@ -1,13 +1,8 @@
-import {
-  ArrowLeftIcon,
-  ArrowRightIcon,
-  CaretLeftIcon,
-  CaretRightIcon,
-} from '@phosphor-icons/react';
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Button, Col, Row } from 'react-bootstrap';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { translate } from '@waldur/i18n';
 import Pagination from '@waldur/table/Pagination';
 
 import { PAGE_SIZE_COMPACT } from './constants';
@@ -110,33 +105,33 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
         <div className={'page-item me-1' + (prevDisabled ? ' disabled' : '')}>
           <Button
             variant="tertiary"
-            className="btn-icon w-35px h-35px"
+            className="btn-icon"
             disabled={prevDisabled}
             onClick={() => props.gotoPage(props.currentPage - 1)}
           >
-            <ArrowLeftIcon size={20} weight="bold" />
+            <span className="svg-icon svg-icon-2">
+              <CaretLeftIcon weight="bold" />
+            </span>
           </Button>
         </div>
         {props.hasRows && (
-          <div className="text-secondary text-nowrap fs-5 mx-2">
-            {translate(
-              'Page {page} of {total}',
-              {
-                page: <b>{props.currentPage}</b>,
-                total: <b>{totalPages}</b>,
-              },
-              formatJsxTemplate,
-            )}
+          <div className="text-secondary fw-bold text-nowrap fs-5 mx-2">
+            {translate('Page {page} of {total}', {
+              page: props.currentPage,
+              total: totalPages,
+            })}
           </div>
         )}
         <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>
           <Button
             variant="tertiary"
-            className="btn-icon w-35px h-35px"
+            className="btn-icon"
             disabled={nextDisabled}
             onClick={() => props.gotoPage(props.currentPage + 1)}
           >
-            <ArrowRightIcon size={20} weight="bold" />
+            <span className="svg-icon svg-icon-2">
+              <CaretRightIcon weight="bold" />
+            </span>
           </Button>
         </div>
       </div>

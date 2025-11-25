@@ -416,6 +416,7 @@
         width: 40px;
         height: 40px;
         transition: $transition-base;
+        @include svg-icon-color($fg-quinary);
       }
       .page-link:focus {
         background-color: $bg-primary_hover;
@@ -426,6 +427,7 @@
       &.active .page-link {
         color: $text-secondary;
         background-color: $bg-primary_hover;
+        @include svg-icon-color($fg-quaternary);
       }
       &.disabled .page-link {
         color: $fg-disabled;

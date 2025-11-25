@@ -1,8 +1,8 @@
 import { useState } from 'react';
-import { Modal } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 
 import { translate } from '@waldur/i18n';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { BroadcastFooter } from './BroadcastFooter';
 import { BroadcastForm } from './BroadcastForm';
@@ -33,23 +33,34 @@ export const BroadcastFormDialog = ({
       initialValues={initialValues}
       render={({ handleSubmit, submitting, errors, values, form }) => (
         <form onSubmit={handleSubmit}>
-          <Modal.Header closeButton className="without-border">
-            <h2 className="fw-bolder">
-              {isEdit
+          <ModalDialog
+            title={
+              isEdit
                 ? translate('Update a broadcast')
-                : translate('Create a broadcast')}
-            </h2>
-          </Modal.Header>
-          <BroadcastForm step={step} setStep={setStep} />
-          <BroadcastFooter
-            step={step}
-            setStep={setStep}
-            refetch={resolve.refetch}
-            form={form}
-            disabled={(errors && Object.keys(errors).length > 0) || submitting}
-            formValues={values}
-            uuid={resolve.uuid}
-          />
+                : translate('Create a broadcast')
+            }
+            footer={
+              <BroadcastFooter
+                step={step}
+                setStep={setStep}
+                refetch={resolve.refetch}
+                form={form}
+                disabled={
+                  (errors && Object.keys(errors).length > 0) || submitting
+                }
+                formValues={values}
+                uuid={resolve.uuid}
+              />
+            }
+          >
+            <BroadcastForm
+              step={step}
+              setStep={setStep}
+              isNextDisabled={
+                (errors && Object.keys(errors).length > 0) || submitting
+              }
+            />
+          </ModalDialog>
         </form>
       )}
     />

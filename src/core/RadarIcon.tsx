@@ -1,12 +1,13 @@
 import { Icon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { CSSProperties, FC } from 'react';
+import { CSSProperties, FC, isValidElement, ReactNode } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
 interface RadarIconProps {
-  IconComponent: Icon;
+  IconComponent: Icon | ReactNode;
   variant?: Variant;
-  size?: 'sm' | 'lg';
+  solid?: boolean;
+  size?: 'sm' | 'lg' | 'xl';
   className?: string;
   style?: CSSProperties;
 }
@@ -14,6 +15,7 @@ interface RadarIconProps {
 export const RadarIcon: FC<RadarIconProps> = ({
   IconComponent,
   variant = 'success',
+  solid,
   size,
   className,
   style,
@@ -21,17 +23,20 @@ export const RadarIcon: FC<RadarIconProps> = ({
   <div
     className={classNames(
       'radar-icon icon-' + variant,
+      solid && 'radar-icon-solid',
       size && `radar-icon-${size}`,
       className,
     )}
     style={style}
   >
     <div>
-      <IconComponent
-        size={size === 'sm' ? 15 : size === 'lg' ? 24 : 20}
-        weight="bold"
-        className={`text-${variant}`}
-      />
+      {isValidElement(IconComponent)
+        ? IconComponent
+        : renderIcon(IconComponent as Icon, variant)}
     </div>
   </div>
+);
+
+const renderIcon = (IconComponent: Icon, variant) => (
+  <IconComponent weight="bold" className={`text-${variant}`} />
 );

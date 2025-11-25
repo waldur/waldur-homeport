@@ -127,7 +127,7 @@ export const SoftwareCatalogDialog: FC<SoftwareCatalogDialogProps> = ({
           title: translate('Edit software catalog'),
           buttonLabel: translate('Update'),
           icon: <PencilSimpleIcon weight="bold" />,
-          iconColor: 'primary' as const,
+          iconColor: 'warning' as const,
         };
     }
   };

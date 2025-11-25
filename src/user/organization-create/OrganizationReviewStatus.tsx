@@ -3,9 +3,7 @@ import { FunctionComponent } from 'react';
 import { Button, Card } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import Bg from '@waldur/navigation/header/search/Background.svg';
-import BgDark from '@waldur/navigation/header/search/BackgroundDark.svg';
-import { useTheme } from '@waldur/theme/useTheme';
+import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
 
 import './OrganizationReviewStatus.scss';
 
@@ -17,8 +15,6 @@ interface OrganizationReviewStatusProps {
 export const OrganizationReviewStatus: FunctionComponent<
   OrganizationReviewStatusProps
 > = ({ onGoToDashboard, companyName }) => {
-  const { theme } = useTheme();
-
   const displayName = companyName || 'N/A';
   const submittedAt = new Date().toLocaleDateString(undefined, {
     year: 'numeric',
@@ -35,11 +31,7 @@ export const OrganizationReviewStatus: FunctionComponent<
   return (
     <Card className="border-0 shadow-sm">
       <Card.Body className="text-center position-relative overflow-hidden organization-review-status">
-        {theme === 'dark' ? (
-          <BgDark className="icon-background" />
-        ) : (
-          <Bg className="icon-background" />
-        )}
+        <RadialBg className="icon-background" />
 
         <div className="review-icon-wrapper mb-6">
           <ClockCountdownIcon

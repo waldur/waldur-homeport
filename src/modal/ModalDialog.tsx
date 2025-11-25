@@ -2,7 +2,8 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import Bg from '@waldur/navigation/header/search/Background.svg';
+import { RadarIcon } from '@waldur/core/RadarIcon';
+import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
 
 interface ModalDialogProps {
   title?: ReactNode;
@@ -64,20 +65,14 @@ export const ModalDialog: FC<ModalDialogProps> = ({
         <div className="flex-grow-1">
           {Boolean(iconNode) && (
             <>
-              <Bg className="icon-background" />
-              <div
-                className={classNames(
-                  'modal-icon mb-6',
-                  iconColor && `text-${iconColor}`,
-                  !iconColor
-                    ? 'bg-secondary'
-                    : iconColor === 'dark'
-                      ? `bg-gray-100`
-                      : `bg-light-${iconColor}`,
-                )}
-              >
-                {iconNode}
-              </div>
+              <RadialBg className="icon-background" />
+              <RadarIcon
+                IconComponent={iconNode}
+                variant={iconColor}
+                solid
+                size="lg"
+                className="modal-icon mb-6"
+              />
             </>
           )}
           <Modal.Title className="fw-bold">{title}</Modal.Title>

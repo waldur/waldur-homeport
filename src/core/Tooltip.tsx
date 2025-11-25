@@ -5,6 +5,7 @@ import { OverlayTrigger, OverlayTriggerProps, Tooltip } from 'react-bootstrap';
 
 export interface TipProps {
   label: React.ReactNode;
+  body?: React.ReactNode;
   id: string;
   placement?: OverlayTriggerProps['placement'];
   trigger?: OverlayTriggerProps['trigger'];
@@ -19,6 +20,7 @@ export interface TipProps {
 
 export const Tip: React.FC<PropsWithChildren<TipProps>> = ({
   label,
+  body,
   id,
   placement,
   trigger,
@@ -41,10 +43,12 @@ export const Tip: React.FC<PropsWithChildren<TipProps>> = ({
             `tooltip-${theme}`,
             autoWidth && 'tooltip-auto-width',
             tipClassName,
+            body && 'has-body',
           )}
           style={{ zIndex: 1180 }}
         >
-          {label}
+          <div className="tooltip-label">{label}</div>
+          {!!body && <div className="tooltip-body">{body}</div>}
         </Tooltip>
       }
       {...rest}

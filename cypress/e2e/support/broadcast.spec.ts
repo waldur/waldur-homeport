@@ -73,7 +73,7 @@ describe('Broadcast', () => {
         .click();
 
       // Verify the modal is open
-      cy.get('.modal-header h2').should('contain', 'Create a broadcast');
+      cy.get('.modal-header').should('contain', 'Create a broadcast');
 
       // Wait for form to load and find step navigation
       cy.get('.modal-body').should('be.visible');

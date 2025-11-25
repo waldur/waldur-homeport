@@ -6,6 +6,20 @@
 .tooltip {
   .tooltip-inner {
     box-shadow: $tooltip-box-shadow;
+    font-weight: 500;
+
+    .tooltip-body {
+      color: $text-placeholder_subtle;
+      font-weight: 400;
+      margin-top: 4px;
+    }
+  }
+
+  &.has-body {
+    .tooltip-inner {
+      text-align: start;
+      padding: $tooltip-padding-x;
+    }
   }
 
   &.tooltip-auto-width {

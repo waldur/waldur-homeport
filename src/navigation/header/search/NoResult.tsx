@@ -4,12 +4,10 @@ import { CSSProperties, FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+
+import { RadialBg } from './RadialBg';
 
 import './NoResult.scss';
-
-import Bg from './Background.svg';
-import BgDark from './BackgroundDark.svg';
 
 interface NoResultProps {
   title?: string;
@@ -32,8 +30,6 @@ export const NoResult: FC<NoResultProps> = ({
   className,
   style,
 }) => {
-  const { theme } = useTheme();
-
   return (
     <div
       className={classNames(
@@ -43,11 +39,7 @@ export const NoResult: FC<NoResultProps> = ({
       )}
       style={style}
     >
-      {theme === 'dark' ? (
-        <BgDark className="background" />
-      ) : (
-        <Bg className="background" />
-      )}
+      <RadialBg className="background" />
       <div className="text-center d-flex flex-column align-items-center gap-6 pb-10 position-relative z-index-1">
         <div className="search-icon">
           <MagnifyingGlassIcon weight="bold" size={24} />

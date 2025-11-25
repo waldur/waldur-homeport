@@ -24,7 +24,7 @@ export const CampaignCreateButton: FunctionComponent<{ refetch }> = ({
         resolve: {
           refetch,
         },
-        size: 'xl',
+        size: 'lg',
       }),
     );
   return (
