@@ -92,8 +92,7 @@ export const OfferingImportDialog = reduxForm<
         subtitle={translate(
           'Import offerings from remote organizations with configurable rules and mappings.',
         )}
-        headerClassName="border-0 pb-0"
-        bodyClassName="overflow-hidden border-0 min-h-400px"
+        bodyClassName="h-400px"
         footer={
           <WizardButtons
             isLastStep={isLastStep}

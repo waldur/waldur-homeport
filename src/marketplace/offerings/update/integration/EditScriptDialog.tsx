@@ -247,7 +247,6 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           closeButton
           onHide={closeDialog}
           bodyClassName="py-0"
-          hasFooterPadding
           extraClassName="editor-header gap-4 py-5"
           extra={
             !language ? (
@@ -291,7 +290,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                   <i className="text-muted">{translate('Nothing to show')}</i>
                 )}
               </AccordionCard>
-              <div className="d-flex justify-content-end gap-2">
+              <div className="d-flex justify-content-end gap-4">
                 <Button
                   variant="tertiary"
                   onClick={closeDialog}

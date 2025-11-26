@@ -161,7 +161,7 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
         payload: [], // This field will be filled in step 2, when the file is processed for sending to the server
       }}
       data={{ provider: props.resolve?.provider, status }}
-      modalProps={{ headerClassName: 'pb-1', bodyClassName: 'h-500px' }}
+      modalProps={{ bodyClassName: 'h-500px' }}
     />
   );
 };

@@ -5,11 +5,16 @@
 
 import * as echarts from 'echarts';
 
+import {
+  CHART_SPLIT_LINE_COLOR_DARK,
+  CHART_SPLIT_LINE_COLOR_LIGHT,
+} from '@waldur/dashboard/constants';
+
 function registerDarkTheme() {
   if (!echarts) {
     return;
   }
-  const contrastColor = '#eee';
+  const contrastColor = '#94969c'; // text-quaternary (dark)
   const axisCommon = function () {
     return {
       axisLine: {
@@ -29,10 +34,8 @@ function registerDarkTheme() {
       },
       splitLine: {
         lineStyle: {
-          type: 'dashed',
-          color: '#aaa',
+          color: CHART_SPLIT_LINE_COLOR_DARK,
         },
-        show: undefined,
       },
       splitArea: {
         areaStyle: {
@@ -151,7 +154,6 @@ function registerDarkTheme() {
       },
     },
   };
-  theme.categoryAxis.splitLine.show = false;
   echarts.registerTheme('dark-metronic', theme);
 }
 
@@ -162,6 +164,36 @@ function registerLightTheme() {
   if (!echarts) {
     return;
   }
+  const contrastColor = '#667085'; // text-quaternary (light)
+  const axisCommon = function () {
+    return {
+      axisLine: {
+        lineStyle: {
+          color: contrastColor,
+        },
+      },
+      axisTick: {
+        lineStyle: {
+          color: contrastColor,
+        },
+      },
+      axisLabel: {
+        textStyle: {
+          color: contrastColor,
+        },
+      },
+      splitLine: {
+        lineStyle: {
+          color: CHART_SPLIT_LINE_COLOR_LIGHT,
+        },
+      },
+      splitArea: {
+        areaStyle: {
+          color: contrastColor,
+        },
+      },
+    };
+  };
 
   const colorPalette = [
     '#c12e34',
@@ -196,6 +228,14 @@ function registerLightTheme() {
     },
 
     tooltip: {
+      axisPointer: {
+        lineStyle: {
+          color: contrastColor,
+        },
+        crossStyle: {
+          color: contrastColor,
+        },
+      },
       backgroundColor: 'rgba(0, 0, 0, 0.9)',
       textStyle: {
         color: '#fff',
@@ -205,20 +245,28 @@ function registerLightTheme() {
     dataZoom: {
       dataBackgroundColor: '#dedede',
       fillerColor: 'rgba(154,217,247,0.2)',
-      handleColor: '#005eaa',
+      handleColor: contrastColor,
+      textStyle: {
+        color: contrastColor,
+      },
     },
 
     timeline: {
       lineStyle: {
-        color: '#005eaa',
+        color: contrastColor,
       },
       controlStyle: {
         normal: {
-          color: '#005eaa',
-          borderColor: '#005eaa',
+          color: contrastColor,
+          borderColor: contrastColor,
         },
       },
     },
+
+    timeAxis: axisCommon(),
+    logAxis: axisCommon(),
+    valueAxis: axisCommon(),
+    categoryAxis: axisCommon(),
 
     candlestick: {
       itemStyle: {

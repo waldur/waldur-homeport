@@ -2,7 +2,7 @@ import { EChartsOption, MarkLineComponentOption, SeriesOption } from 'echarts';
 
 import { translate } from '@waldur/i18n';
 
-import { CHART_BAR_ROUNDING, LINE_CHART_COLOR } from './constants';
+import { CHART_BAR_ROUNDING, CHART_LINE_COLOR } from './constants';
 import { Chart, ChartData } from './types';
 
 type Value = string | number;
@@ -81,7 +81,7 @@ export const getLineChartOptions = (chart: Chart, hLines?: HLine[]) =>
     chart.data.map((item) => item.label),
     chart.data.map((item) => item.value),
     hLines,
-    LINE_CHART_COLOR,
+    CHART_LINE_COLOR,
   );
 
 export const getCostWidgetChartOptions = (

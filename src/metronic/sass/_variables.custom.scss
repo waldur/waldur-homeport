@@ -230,6 +230,12 @@ $button-variants: (
 // Settings for the `<body>` element.
 $body-bg: if(isDarkMode(), $gray-25, $white) !default;
 
+// Links
+//
+// Style anchor elements.
+$link-color: $text-brand-secondary !default;
+$link-hover-color: $text-brand-secondary !default;
+
 // -----------------------------
 // Components
 
@@ -238,6 +244,7 @@ $border-radius-xs: 4px !default;
 $border-radius-sm: 6px !default;
 $border-radius: 8px !default;
 $border-radius-lg: 8px !default;
+$border-radius-xl: 12px !default;
 
 // Card
 $card-py: 1.23rem !default;
@@ -321,6 +328,21 @@ $dropdown-link-active-bg: $gray-50;
 // Padding applied to the modal body
 $modal-inner-padding: 1.85rem !default;
 
+// Margin between elements in footer, must be lower than or equal to 2 * $modal-inner-padding
+$modal-footer-margin-between: 0.923rem !default;
+
+$modal-content-border-radius: $border-radius-xl !default;
+
+$modal-content-box-shadow:
+  0 12px 14px -4px rgba(#101828, 0.05),
+  0 6px 6px -4px rgba(#101828, 0.03) !default;
+$modal-content-box-shadow-xs:
+  0 12px 14px -4px rgba(#101828, 0.1),
+  0 6px 6px -4px rgba(#101828, 0.04) !default;
+$modal-content-box-shadow-sm-up:
+  0 20px 24px -4px rgba(#101828, 0.1),
+  0 8px 8px -4px rgba(#101828, 0.04) !default;
+
 $modal-lg: 840px !default;
 $modal-md: 544px !default;
 $modal-sm: 400px !default;
@@ -349,6 +371,13 @@ $badge-padding-y-lg: 3px !default; // Custom variable
 $badge-padding-x: 9px !default;
 $badge-padding-x-sm: 7px !default; // Custom variable
 $badge-padding-x-lg: 11px !default; // Custom variable
+
+// Breadcrumbs
+$breadcrumb-divider: url('data:image/svg+xml,<svg width="20" height="20" viewBox="0 0 20 20" fill="none" xmlns="http://www.w3.org/2000/svg"><line x1="6.26358" y1="18.4759" x2="14.0116" y2="1.86025" stroke="#{$fg-quinary}" stroke-width="1.66667" stroke-linecap="round" stroke-linejoin="round"/></svg>') !default;
+$breadcrumb-divider-color: $fg-quinary !default;
+$breadcrumb-item-padding-x: 0.923rem !default;
+$breadcrumb-color: $link-color !default; // Custom variable
+$breadcrumb-active-color: $text-quaternary !default;
 
 // Progress
 $progress-height: 8px;

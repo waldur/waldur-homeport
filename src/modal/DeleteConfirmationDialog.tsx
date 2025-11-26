@@ -41,7 +41,7 @@ export const DeleteConfirmationDialog: React.FC<
       title={title}
       iconNode={iconNode || <TrashIcon weight="bold" />}
       iconColor="danger"
-      bodyClassName="text-gray-500 pt-2"
+      bodyClassName="text-quaternary pt-8px"
       footer={
         <>
           <Button

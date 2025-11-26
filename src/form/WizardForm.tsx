@@ -201,7 +201,7 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
           </>
         }
         closeButton
-        hasHeaderPadding
+        headerClassName="pb-5"
         {...(modalProps || {})}
       >
         <div className="wizard-big wizard-body clearfix">

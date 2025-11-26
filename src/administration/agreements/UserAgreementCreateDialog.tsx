@@ -38,13 +38,11 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
           <ModalDialog
             title={translate('Create a user agreements')}
             footer={
-              <div className="mb-5 text-end">
-                <SubmitButton
-                  submitting={submitting}
-                  invalid={invalid}
-                  label={translate('Save')}
-                />
-              </div>
+              <SubmitButton
+                submitting={submitting}
+                invalid={invalid}
+                label={translate('Save')}
+              />
             }
           >
             <FormGroup label={translate('Agreement type')} required>

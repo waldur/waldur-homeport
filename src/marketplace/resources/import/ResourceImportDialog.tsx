@@ -92,7 +92,7 @@ export const ResourceImportDialog = connect<{}, {}, ImportDialogProps>(
               </span>
             </>
           }
-          bodyClassName="px-0 pt-6"
+          bodyClassName="px-0"
           footer={
             <>
               {step === 1 ? (

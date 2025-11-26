@@ -186,7 +186,7 @@ const FormModalComponent: FC<
               })
             : translate('Some conflicting resources are unselected')
         }
-        bodyClassName="pt-5 min-h-200px"
+        bodyClassName="h-200px"
         footer={
           <>
             {step === 1 ? (

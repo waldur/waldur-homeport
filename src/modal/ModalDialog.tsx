@@ -16,9 +16,6 @@ interface ModalDialogProps {
   bodyClassName?: string;
   headerClassName?: string;
   footerClassName?: string;
-  hasHeaderPadding?: boolean;
-  hasFooterPadding?: boolean;
-  hasFooterBorder?: boolean;
   children?: ReactNode;
   headerLess?: boolean;
   actions?: ReactNode;
@@ -29,7 +26,7 @@ interface ModalDialogProps {
 }
 
 export const ModalDialog: FC<ModalDialogProps> = ({
-  closeButton = false,
+  closeButton = true,
   title,
   subtitle,
   iconNode,
@@ -40,9 +37,6 @@ export const ModalDialog: FC<ModalDialogProps> = ({
   bodyClassName,
   headerClassName,
   footerClassName,
-  hasHeaderPadding,
-  hasFooterPadding,
-  hasFooterBorder,
   headerLess,
   actions,
   extra,
@@ -57,7 +51,6 @@ export const ModalDialog: FC<ModalDialogProps> = ({
         className={classNames(
           headerClassName,
           'without-border',
-          !hasHeaderPadding && 'pb-0',
           !title && 'without-border',
           iconNode && 'has-icon',
         )}
@@ -75,10 +68,10 @@ export const ModalDialog: FC<ModalDialogProps> = ({
               />
             </>
           )}
-          <Modal.Title className="fw-bold">{title}</Modal.Title>
-          {subtitle && (
-            <h6 className="text-gray-500 fw-normal mt-2 lh-base">{subtitle}</h6>
-          )}
+          <Modal.Title className="fw-bold" as="h3">
+            {title}
+          </Modal.Title>
+          {subtitle && <h6 className="modal-subtitle">{subtitle}</h6>}
         </div>
         {actions}
       </Modal.Header>
@@ -92,14 +85,7 @@ export const ModalDialog: FC<ModalDialogProps> = ({
       {children}
     </Modal.Body>
     {footer && (
-      <Modal.Footer
-        className={classNames(
-          footerClassName,
-          !hasFooterPadding && !hasFooterBorder && 'pt-0',
-          !hasFooterBorder && 'border-0',
-          'gap-2',
-        )}
-      >
+      <Modal.Footer className={classNames(footerClassName, 'border-0')}>
         {footer}
       </Modal.Footer>
     )}

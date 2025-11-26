@@ -48,7 +48,7 @@ describe('UserAgreementCreateDialog', () => {
       'Test agreement content',
     );
 
-    await userEvent.click(screen.getByRole('button'));
+    await userEvent.click(screen.getByText('Save'));
 
     await waitFor(() => {
       expect(userAgreementsCreate).toHaveBeenCalledWith({

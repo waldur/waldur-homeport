@@ -2,3 +2,50 @@
   -webkit-backdrop-filter: blur(3px); /* Fix blur for Safari*/
   backdrop-filter: blur(3px);
 }
+
+.modal-title {
+  line-height: 1.555;
+}
+.modal-subtitle {
+  color: $text-quaternary;
+  font-weight: 400;
+  margin-top: 8px;
+  line-height: 20px;
+}
+
+.modal-header {
+  padding-bottom: 0.616rem;
+}
+
+.btn-close {
+  background-image: url("data:image/svg+xml;charset=utf-8,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 16 16'%3E%3Cpath fill='#{$fg-quinary}' d='M.293.293a1 1 0 0 1 1.414 0L8 6.586 14.293.293a1 1 0 1 1 1.414 1.414L9.414 8l6.293 6.293a1 1 0 0 1-1.414 1.414L8 9.414l-6.293 6.293a1 1 0 0 1-1.414-1.414L6.586 8 .293 1.707a1 1 0 0 1 0-1.414'/%3E%3C/svg%3E");
+}
+
+.modal-body {
+  padding-top: $modal-inner-padding;
+
+  // Fix last field bottom margin
+  > :last-child,
+  > div > :last-child {
+    margin-bottom: 0 !important;
+  }
+}
+.modal-header ~ .modal-body {
+  padding-top: 0.923rem;
+}
+
+.modal-footer {
+  padding: 8px $modal-inner-padding $modal-inner-padding;
+  row-gap: $modal-footer-margin-between;
+  column-gap: $modal-footer-margin-between;
+
+  > * {
+    margin: unset;
+  }
+}
+
+.modal-lg {
+  .modal-footer .btn {
+    max-width: 148px;
+  }
+}

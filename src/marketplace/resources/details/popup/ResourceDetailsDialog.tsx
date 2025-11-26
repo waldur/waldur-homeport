@@ -18,7 +18,7 @@ export const ResourceDetailsDialog: FC<ActionDialogProps> = ({
       closeButton
       iconNode={<CopySimpleIcon weight="bold" />}
       iconColor="success"
-      bodyClassName="min-h-350px"
+      bodyClassName="h-350px"
     >
       <Tabs defaultActiveKey={1} unmountOnExit={true} className="nav-line-tabs">
         <Tab eventKey={1} title={translate('Details')}>

@@ -38,16 +38,14 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditOfferingProps }>(
           title={props.resolve.title}
           subtitle={props.resolve.description}
           headerLess={!props.resolve.title}
-          bodyClassName="pb-2"
-          footerClassName="border-0 pt-0 gap-2"
           footer={
             <>
-              <CloseDialogButton className="flex-grow-1" />
+              <CloseDialogButton className="flex-equal" />
               <SubmitButton
                 disabled={props.invalid || !props.dirty}
                 submitting={props.submitting}
                 label={translate('Confirm')}
-                className="btn btn-primary flex-grow-1"
+                className="btn btn-primary flex-equal"
               />
             </>
           }

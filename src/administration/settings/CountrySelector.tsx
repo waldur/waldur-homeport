@@ -97,9 +97,9 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
       title={translate('Available countries')}
       footer={
         <>
-          <CloseDialogButton className="flex-grow-1" />
+          <CloseDialogButton className="flex-equal" />
           <Button
-            className="btn btn-primary flex-grow-1"
+            className="btn btn-primary flex-equal"
             onClick={saveCountryOptions}
             disabled={!isDirty}
           >

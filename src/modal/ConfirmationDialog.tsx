@@ -71,7 +71,7 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       title={title}
       iconNode={iconNode || <WarningCircleIcon weight="bold" />}
       iconColor={type}
-      bodyClassName="text-gray-500 pt-2"
+      bodyClassName="text-quaternary"
       footer={
         <>
           {!onlyPositiveButton && (

@@ -92,7 +92,7 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
         });
       else
         await overrideSettings({
-          body: { [item.key]: formData.value },
+          body: { [item.key]: formData.value ?? '' },
           ...formDataOptions,
         });
 
@@ -113,20 +113,22 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={getKeyTitle(item.key)}
-            bodyClassName="pb-2"
             footer={
               <>
-                <CloseDialogButton className="flex-grow-1" />
+                <CloseDialogButton className="flex-equal" />
                 <SubmitButton
                   disabled={invalid || !dirty}
                   submitting={submitting}
                   label={translate('Confirm')}
-                  className="btn btn-primary flex-grow-1"
+                  className="btn btn-primary flex-equal"
                 />
               </>
             }
           >
-            <FormGroup label={item.type !== 'boolean' && item.description}>
+            <FormGroup
+              label={item.type !== 'boolean' && item.description}
+              spaceless
+            >
               {item.type === 'html_field' ? (
                 <Field
                   component={MonacoField as any}

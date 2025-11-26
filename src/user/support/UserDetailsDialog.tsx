@@ -42,7 +42,7 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
       )}
       iconNode={<UserGearIcon weight="bold" />}
       iconColor="success"
-      bodyClassName="min-h-425px"
+      bodyClassName="h-425px"
       closeButton
     >
       {loading ? (

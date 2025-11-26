@@ -2,13 +2,13 @@
 /* LABEL */
 .col-form-label,
 .form-label {
-  font-size: 1.075rem; // fs-6
+  font-size: $font-size-lg; // fs-6
   font-weight: 500; // fw-bold
   color: $text-secondary;
 }
 
 .form-text {
-  font-size: 1.075rem;
+  font-size: $font-size-lg;
   font-weight: 400;
   color: $text-tertiary;
   display: block;
@@ -89,7 +89,7 @@
 /* CHECKBOX */
 .form-check {
   &-label {
-    font-size: 1.075rem;
+    font-size: $font-size-lg;
   }
 }
 
