@@ -29,6 +29,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
 }) => {
   const user = useUser();
   const userIsSubmitter = user.uuid === proposal.created_by_uuid;
+  const isFinalState = ['accepted', 'rejected'].includes(proposal.state);
 
   const acceptedMessage = userIsSubmitter
     ? translate('Your proposal has been successfully accepted.')
@@ -52,18 +53,22 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
     <Card className="card-bordered">
       <Card.Body>
         <div className="d-flex align-items-center flex-wrap gap-4">
-          <div className="d-flex align-items-center">
-            {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-            <RadarIcon
-              IconComponent={
-                proposal.state === 'accepted' ? CheckCircleIcon : XCircleIcon
-              }
-              className="me-2"
-              variant={proposal.state === 'accepted' ? 'success' : 'danger'}
-            />
+          {isFinalState ? (
+            <div className="d-flex align-items-center">
+              {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
+              <RadarIcon
+                IconComponent={
+                  proposal.state === 'accepted' ? CheckCircleIcon : XCircleIcon
+                }
+                className="me-2"
+                variant={proposal.state === 'accepted' ? 'success' : 'danger'}
+              />
 
-            <p className="mb-0 fw-bold fs-6">{message}</p>
-          </div>
+              <p className="mb-0 fw-bold fs-6">{message}</p>
+            </div>
+          ) : (
+            <p className="mb-0 fw-bold fs-6">{translate('Review summary')}</p>
+          )}
           <div className="d-flex align-items-center flex-grow-1 flex-wrap gap-4">
             <RateStars value={overallScore} className="mb-2" />
             <span className="fs-6 text-gray-700">

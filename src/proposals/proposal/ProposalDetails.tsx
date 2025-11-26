@@ -64,10 +64,15 @@ export const ProposalDetails = ({
     return <LoadingErred loadData={refetch} />;
   }
 
+  const hasSubmittedReviews = useMemo(() => {
+    return reviews && Array.isArray(reviews) && reviews.length > 0;
+  }, [reviews]);
+
   return (
     <SidebarLayout.Container>
       <SidebarLayout.Body className="mb-10">
-        {['rejected', 'accepted'].includes(proposal.state) && (
+        {(['rejected', 'accepted'].includes(proposal.state) ||
+          (isCallManagerView && hasSubmittedReviews)) && (
           <ProposalDecisionResult proposal={proposal} reviews={reviews} />
         )}
         <ProposalDetailsOverviewStep id="step-general" params={{ proposal }} />
