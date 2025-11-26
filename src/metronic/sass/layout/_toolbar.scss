@@ -111,7 +111,7 @@
 
 $mobile-breadcrumb-height: get(
   $header-config,
-  default,
+  fixed,
   height,
   tablet-and-mobile
 );
@@ -139,16 +139,16 @@ $mobile-breadcrumb-height: get(
     // Fixed header & fixed toolbar modes
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed & {
       padding: 0;
-      top: get($header-config, default, height, tablet-and-mobile);
+      top: get($header-config, fixed, height, tablet-and-mobile);
       border-top: get($toolbar-config, border-top);
       border-bottom: get($toolbar-config, border-bottom);
     }
     // And with breadcrumb
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed
       .breadcrumb-mobile
-      + .content
+      ~ .content
       & {
-      top: get($header-config, default, height, tablet-and-mobile) +
+      top: get($header-config, fixed, height, tablet-and-mobile) +
         $mobile-breadcrumb-height;
     }
 
@@ -159,7 +159,7 @@ $mobile-breadcrumb-height: get(
     // And with breadcrumb
     .toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
       .breadcrumb-mobile
-      + .content
+      ~ .content
       & {
       top: calc(#{$mobile-breadcrumb-height} + var(--kt-pagebar-height));
     }
@@ -173,17 +173,17 @@ $mobile-breadcrumb-height: get(
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
       & {
       top: calc(
-        #{get($header-config, default, height, tablet-and-mobile)} +
+        #{get($header-config, fixed, height, tablet-and-mobile)} +
           var(--kt-pagebar-height)
       );
     }
     // And with breadcrumb
     .header-tablet-and-mobile-fixed.toolbar-tablet-and-mobile-fixed.outstanding-bar-enabled
       .breadcrumb-mobile
-      + .content
+      ~ .content
       & {
       top: calc(
-        #{get($header-config, default, height, tablet-and-mobile) +
+        #{get($header-config, fixed, height, tablet-and-mobile) +
           $mobile-breadcrumb-height} + var(--kt-pagebar-height)
       );
     }

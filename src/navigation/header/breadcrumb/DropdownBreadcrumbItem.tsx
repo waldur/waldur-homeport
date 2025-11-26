@@ -54,6 +54,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
         ellipsis={item.ellipsis}
         active={item.active}
         onClick={() => setShow((v) => !v)}
+        className="cursor-pointer"
       >
         {item.truncate && item.text.length > 4 ? (
           <TruncatedText
@@ -64,7 +65,7 @@ export const DropdownBreadcrumbItem = ({ item }: { item: IBreadcrumbItem }) => {
           item.text
         )}
         {!item.hideDropdownArrow && (
-          <span className="svg-icon svg-icon-4 svg-icon-gray-800 icon-align ms-8px">
+          <span className="svg-icon svg-icon-4 svg-icon-gray-600 icon-align ms-8px">
             <CaretDownIcon weight="bold" />
           </span>
         )}

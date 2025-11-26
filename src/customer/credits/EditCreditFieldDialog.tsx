@@ -70,16 +70,14 @@ export const EditCreditFieldDialog = connect<
       <form onSubmit={props.handleSubmit(onSubmit)}>
         <ModalDialog
           headerLess
-          bodyClassName="pb-2"
-          footerClassName="border-0 pt-0 gap-2"
           footer={
             <>
-              <CloseDialogButton className="flex-grow-1" />
+              <CloseDialogButton className="flex-equal" />
               <SubmitButton
                 disabled={props.invalid}
                 submitting={props.submitting}
                 label={translate('Confirm')}
-                className="btn btn-primary flex-grow-1"
+                className="btn btn-primary flex-equal"
               />
             </>
           }

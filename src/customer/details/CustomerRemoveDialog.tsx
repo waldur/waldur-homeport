@@ -47,30 +47,30 @@ export const CustomerRemoveDialog = reduxForm<
   return (
     <form onSubmit={props.handleSubmit(callback)}>
       <ModalDialog
-        headerLess
-        footerClassName="border-0 pt-0 gap-2"
+        title={translate('Organization removal')}
+        subtitle={
+          <>
+            {translate('Organization')}:{' '}
+            <strong>{props.resolve.customer.name}</strong>
+          </>
+        }
+        iconNode={<WarningCircleIcon weight="bold" />}
+        iconColor="danger"
         footer={
           <>
-            <CloseDialogButton className="flex-grow-1" />
-            <Button variant="danger" className="flex-grow-1" type="submit">
+            <CloseDialogButton className="flex-equal" />
+            <Button variant="danger" className="flex-equal" type="submit">
               {translate('Delete')}
             </Button>
           </>
         }
       >
-        <div className="d-flex flex-center w-40px h-40px bg-light-danger rounded-circle mb-6">
-          <WarningCircleIcon size={22} className="text-danger" weight="bold" />
-        </div>
-        <h3 className="fw-bold">{translate('Organization removal')}</h3>
-        <p className="text-muted mb-8">
-          {translate('Organization')}:{' '}
-          <strong>{props.resolve.customer.name}</strong>
-        </p>
         <FormContainer submitting={props.submitting}>
           <TextField
             name="reason"
             label={translate('Reason')}
             placeholder={translate('e.g. This organization is irrelevant')}
+            spaceless
           />
         </FormContainer>
       </ModalDialog>

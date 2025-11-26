@@ -30,7 +30,6 @@ export const ResourceCreateUsageDialog: FunctionComponent<
           ? translate('User usage report')
           : translate('Resource usage')) + ` "${props.resolve.resource_name}"`
       }
-      bodyClassName="pt-2"
     >
       {loading ? (
         <LoadingSpinner />

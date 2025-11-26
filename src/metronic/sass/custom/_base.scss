@@ -13,6 +13,8 @@
   }
 
   &.card-solid {
+    overflow: hidden;
+
     .card-header {
       margin: 0;
       padding-left: $card-px;

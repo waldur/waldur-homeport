@@ -52,7 +52,6 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
         subtitle={props.dialogSubtitle}
         iconNode={<TrashIcon weight="bold" />}
         iconColor="danger"
-        bodyClassName="text-gray-500 pt-2"
         footer={
           <>
             <Button
@@ -68,10 +67,9 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
           </>
         }
       >
-        <Form.Group className="my-5">
+        <Form.Group>
           <Form.Control
             as="textarea"
-            className="form-control-solid"
             rows={3}
             value={reason}
             onChange={(event) => setReason(event.target.value)}
@@ -84,7 +82,7 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
       title={props.dialogTitle}
       iconNode={<TrashIcon weight="bold" />}
       iconColor="danger"
-      bodyClassName="text-gray-500 pt-2"
+      bodyClassName="text-quaternary fs-6"
       footer={<CancelButton label={translate('OK')} />}
     >
       {props.fallbackMessage}

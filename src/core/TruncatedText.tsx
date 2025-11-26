@@ -3,7 +3,7 @@ import { useEffect, useRef, useState } from 'react';
 
 import { truncate } from '@waldur/core/utils';
 
-const LETTER_WITH = 6.5; // px
+const LETTER_WITH = 7.1; // px
 
 export const TruncatedText = ({ text, min = 4, padding = 0 }) => {
   const [_text, setText] = useState(text);
@@ -18,7 +18,9 @@ export const TruncatedText = ({ text, min = 4, padding = 0 }) => {
 
   useEffect(() => {
     window.addEventListener('resize', checkWidth);
-    checkWidth();
+    setTimeout(() => {
+      checkWidth();
+    }, 1000);
     return () => window.removeEventListener('resize', checkWidth);
   }, [checkWidth, ref?.current]);
 

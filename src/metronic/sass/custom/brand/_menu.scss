@@ -166,11 +166,11 @@
 .menu-show-bg-light-primary {
   .menu-item {
     @include menu-link-show-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
   }
 }
@@ -178,11 +178,11 @@
 .menu-here-bg-light-primary {
   .menu-item {
     @include menu-link-here-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
   }
 }
@@ -190,11 +190,11 @@
 .menu-hover-bg-light-primary {
   .menu-item {
     @include menu-link-hover-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
   }
 }
@@ -202,11 +202,11 @@
 .menu-active-bg-light-primary {
   .menu-item {
     @include menu-link-active-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
   }
 }
@@ -214,32 +214,32 @@
 .menu-state-bg-light-primary {
   .menu-item {
     @include menu-link-show-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
     @include menu-link-here-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
     @include menu-link-hover-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
     @include menu-link-active-state(
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-700,
-      $brand-50
+      $text-brand-primary,
+      $fg-tertiary,
+      $fg-tertiary,
+      $text-brand-primary,
+      $bg-brand-primary_alt
     );
   }
 }

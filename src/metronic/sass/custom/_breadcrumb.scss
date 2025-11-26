@@ -11,9 +11,17 @@
       flex-grow: 1;
     }
 
+    a {
+      color: $breadcrumb-color;
+    }
     &:hover a {
-      color: $brand;
       text-decoration: underline !important;
+    }
+
+    + .breadcrumb-item:before {
+      width: 20px;
+      height: 20px;
+      margin-right: $breadcrumb-item-padding-x;
     }
 
     .breadcrumb-back {

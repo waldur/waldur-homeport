@@ -44,7 +44,6 @@ export const OfferingDetailsDialog: React.FC<OfferingDetailsDialogProps> = (
     <ModalDialog
       title={translate('Offering details')}
       closeButton
-      hasFooterBorder
       bodyClassName="h-500px"
       footer={
         <OfferingDetailsLink

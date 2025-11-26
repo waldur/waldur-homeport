@@ -13,9 +13,10 @@
 
     // Base link
     .nav-link {
-      color: $gray-500;
+      color: $text-quaternary;
       font-weight: 600;
-      font-size: 14px;
+      font-size: $font-size-lg;
+      line-height: 20px;
       border: 0;
       border-bottom: 2px solid transparent;
       transition: $transition-link;

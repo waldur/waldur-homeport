@@ -13804,7 +13804,7 @@
           "Table",
           "th",
           "AsyncSelectField",
-          "p",
+          "ModalDialog",
           "ExpandableEventField",
           "Field",
           "h6",
@@ -22820,7 +22820,8 @@
         "Tip",
         "SelectField",
         "FormContainer",
-        "AsyncSelectField"
+        "AsyncSelectField",
+        "FormName"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -22887,7 +22888,6 @@
           "marketplace/offerings/utils.ts",
           "marketplace/routes.ts",
           "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx",
           "marketplace/service-providers/ProviderDetailsBody.tsx",
           "marketplace/service-providers/ProviderOfferingsList.tsx",
           "marketplace/service-providers/ServiceProvidersList.tsx",
@@ -22936,7 +22936,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 33
+      "usage_count": 32
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -25619,7 +25619,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 7
       },
       "usage_count": 7
     },
@@ -39347,13 +39347,13 @@
       "ui_types": [
         "unknown",
         "generic_element",
+        "label",
         "title"
       ],
       "components": [
         "ExpandableContainer",
         "ActionsDropdownComponent",
         "Field",
-        "WizardStepIndicator",
         "Table",
         "DropdownButton"
       ],
@@ -39389,7 +39389,6 @@
           "details",
           "actions",
           "list",
-          "service-providers",
           "openstack-backup",
           "openstack-instance",
           "openstack-server-groups",
@@ -39406,8 +39405,8 @@
           "list",
           "card",
           "button",
-          "form",
           "dialog",
+          "form",
           "component"
         ],
         "paths": [
@@ -39419,7 +39418,6 @@
           "marketplace/orders/actions/OrderActionsButton.tsx",
           "marketplace/orders/list/OrdersListExpandableRow.tsx",
           "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx",
           "openstack/openstack-backup/BackupsList.tsx",
           "openstack/openstack-instance/SetAllowedAddressPairsDialog.tsx",
           "openstack/openstack-security-groups/rule-editor/RulesHeader.tsx",
@@ -39445,7 +39443,6 @@
           "th",
           "ActionsDropdownComponent",
           "Field",
-          "WizardStepIndicator",
           "Table",
           "DropdownButton"
         ],
@@ -39465,7 +39462,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 26
+      "usage_count": 25
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -65022,7 +65019,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 2
       },
       "usage_count": 3
     },
@@ -65089,7 +65086,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 7
+        "max_nesting_level": 2
       },
       "usage_count": 1
     },
@@ -65101,14 +65098,13 @@
   "Select recipients": {
     "message": "Select recipients",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "label",
       "ui_types": [
         "unknown",
-        "generic_element"
+        "label"
       ],
       "components": [
-        "Button",
-        "WizardStepIndicator"
+        "Button"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -65133,8 +65129,7 @@
           "broadcasts"
         ],
         "component_types": [
-          "component",
-          "form"
+          "component"
         ],
         "paths": [
           "broadcasts/BroadcastFooter.tsx",
@@ -65143,8 +65138,7 @@
       },
       "jsx_context": {
         "tags": [
-          "Button",
-          "WizardStepIndicator"
+          "Button"
         ],
         "conditional_render": true
       },
@@ -65159,14 +65153,13 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
+        "has_validation": false,
+        "max_nesting_level": 2
       },
       "usage_count": 2
     },
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -65253,7 +65246,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 6
       },
       "usage_count": 10
     },
@@ -65322,7 +65315,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 8
+        "max_nesting_level": 3
       },
       "usage_count": 1
     },
@@ -65388,7 +65381,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 8
+        "max_nesting_level": 3
       },
       "usage_count": 1
     },
@@ -65402,12 +65395,9 @@
     "context": {
       "primary_ui_type": "label",
       "ui_types": [
-        "generic_element",
         "label"
       ],
-      "components": [
-        "WizardStepIndicator"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 14,
@@ -65424,24 +65414,16 @@
       },
       "variables": {},
       "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "broadcasts"
-        ],
-        "component_types": [
-          "form"
-        ],
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
         "paths": [
           "broadcasts/BroadcastForm.tsx",
           "maintenance/create/MaintenanceFormDialog.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [
-          "WizardStepIndicator"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -65455,14 +65437,11 @@
       "interaction_context": {
         "modifies_state": false,
         "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 5
+        "has_validation": false,
+        "max_nesting_level": 0
       },
       "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
+    }
   },
   "Template": {
     "message": "Template",
@@ -65636,7 +65615,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -65703,7 +65682,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -65868,7 +65847,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 7
       },
       "usage_count": 10
     },
@@ -65936,7 +65915,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 10
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -66095,7 +66074,8 @@
         "Col",
         "Row",
         "AsyncSelectField",
-        "FormContainer"
+        "FormContainer",
+        "FormName"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -66126,8 +66106,7 @@
         ],
         "paths": [
           "broadcasts/BroadcastForm.tsx",
-          "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx"
+          "marketplace/service-providers/CampaignForm.tsx"
         ]
       },
       "jsx_context": {
@@ -66151,7 +66130,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -66450,7 +66429,9 @@
       "ui_types": [
         "generic_element"
       ],
-      "components": [],
+      "components": [
+        "ModalDialog"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 18,
@@ -66482,7 +66463,7 @@
       },
       "jsx_context": {
         "tags": [
-          "h2"
+          "ModalDialog"
         ],
         "conditional_render": false
       },
@@ -66498,7 +66479,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 5
+        "max_nesting_level": 7
       },
       "usage_count": 1
     },
@@ -66513,7 +66494,9 @@
       "ui_types": [
         "generic_element"
       ],
-      "components": [],
+      "components": [
+        "ModalDialog"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 18,
@@ -66545,7 +66528,7 @@
       },
       "jsx_context": {
         "tags": [
-          "h2"
+          "ModalDialog"
         ],
         "conditional_render": false
       },
@@ -66561,7 +66544,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 5
+        "max_nesting_level": 7
       },
       "usage_count": 1
     },
@@ -85281,7 +85264,7 @@
       },
       "jsx_context": {
         "tags": [
-          "h3"
+          "ModalDialog"
         ],
         "conditional_render": false
       },
@@ -85297,7 +85280,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 4
+        "max_nesting_level": 6
       },
       "usage_count": 1
     },
@@ -115310,7 +115293,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 6
+        "max_nesting_level": 2
       },
       "usage_count": 2
     },
@@ -209724,6 +209707,7 @@
         "unknown"
       ],
       "components": [
+        "ModalDialog",
         "Button"
       ],
       "is_user_facing": true,
@@ -209759,7 +209743,7 @@
       },
       "jsx_context": {
         "tags": [
-          "h2",
+          "ModalDialog",
           "Button"
         ],
         "conditional_render": true
@@ -209776,7 +209760,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 6
       },
       "usage_count": 2
     },
@@ -210050,7 +210034,8 @@
         "unknown"
       ],
       "components": [
-        "Button"
+        "Button",
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -210086,7 +210071,7 @@
       "jsx_context": {
         "tags": [
           "Button",
-          "h2"
+          "ModalDialog"
         ],
         "conditional_render": true
       },
@@ -210102,7 +210087,7 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 10
+        "max_nesting_level": 6
       },
       "usage_count": 2
     },
@@ -210115,13 +210100,11 @@
   "Select type": {
     "message": "Select type",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "label",
       "ui_types": [
-        "generic_element"
+        "label"
       ],
-      "components": [
-        "WizardStepIndicator"
-      ],
+      "components": [],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 11,
@@ -210138,24 +210121,15 @@
       },
       "variables": {},
       "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "service-providers"
-        ],
-        "component_types": [
-          "form"
-        ],
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
         "paths": [
-          "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx"
+          "marketplace/service-providers/CampaignForm.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [
-          "WizardStepIndicator"
-        ],
+        "tags": [],
         "conditional_render": false
       },
       "action_types": [
@@ -210170,13 +210144,10 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 5
+        "max_nesting_level": 0
       },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language."
-    ]
+      "usage_count": 1
+    }
   },
   "Campaign name": {
     "message": "Campaign name",
@@ -210187,7 +210158,8 @@
       ],
       "components": [
         "StringField",
-        "FormContainer"
+        "FormContainer",
+        "FormName"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -210215,8 +210187,7 @@
           "form"
         ],
         "paths": [
-          "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx"
+          "marketplace/service-providers/CampaignForm.tsx"
         ]
       },
       "jsx_context": {
@@ -210239,7 +210210,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -210258,6 +210229,7 @@
       "components": [
         "SelectField",
         "FormContainer",
+        "FormName",
         "TableFilterItem"
       ],
       "is_user_facing": true,
@@ -210288,7 +210260,6 @@
         ],
         "paths": [
           "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx",
           "marketplace/service-providers/ProviderCampaignFilter.tsx"
         ]
       },
@@ -210313,7 +210284,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -210333,6 +210304,7 @@
         "SelectField",
         "FormContainer",
         "NumberField",
+        "FormName",
         "Select"
       ],
       "is_user_facing": true,
@@ -210363,7 +210335,6 @@
         ],
         "paths": [
           "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx",
           "marketplace/service-providers/ProviderCampaignTypeFilter.tsx"
         ]
       },
@@ -210389,7 +210360,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -210437,7 +210408,6 @@
         ],
         "paths": [
           "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx",
           "marketplace/service-providers/ProviderCampaignTypeFilter.tsx"
         ]
       },
@@ -210462,7 +210432,7 @@
         "has_validation": false,
         "max_nesting_level": 8
       },
-      "usage_count": 3
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -210478,7 +210448,8 @@
       ],
       "components": [
         "DateField",
-        "FormContainer"
+        "FormContainer",
+        "FormName"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -210506,8 +210477,7 @@
           "form"
         ],
         "paths": [
-          "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx"
+          "marketplace/service-providers/CampaignForm.tsx"
         ]
       },
       "jsx_context": {
@@ -210530,7 +210500,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -210547,7 +210517,8 @@
       ],
       "components": [
         "DateField",
-        "FormContainer"
+        "FormContainer",
+        "FormName"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -210575,8 +210546,7 @@
           "form"
         ],
         "paths": [
-          "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx"
+          "marketplace/service-providers/CampaignForm.tsx"
         ]
       },
       "jsx_context": {
@@ -210599,7 +210569,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -210616,7 +210586,8 @@
       ],
       "components": [
         "NumberField",
-        "FormContainer"
+        "FormContainer",
+        "FormName"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -210644,8 +210615,7 @@
           "form"
         ],
         "paths": [
-          "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx"
+          "marketplace/service-providers/CampaignForm.tsx"
         ]
       },
       "jsx_context": {
@@ -210668,7 +210638,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -210685,7 +210655,8 @@
       ],
       "components": [
         "AwesomeCheckboxField",
-        "FormContainer"
+        "FormContainer",
+        "FormName"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -210713,8 +210684,7 @@
           "form"
         ],
         "paths": [
-          "marketplace/service-providers/CampaignForm.tsx",
-          "marketplace/service-providers/CampaignUpdateForm.tsx"
+          "marketplace/service-providers/CampaignForm.tsx"
         ]
       },
       "jsx_context": {
@@ -210737,7 +210707,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 2
+      "usage_count": 1
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",

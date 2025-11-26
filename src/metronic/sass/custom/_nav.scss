@@ -17,6 +17,26 @@
       color: $gray-400 !important;
     }
   }
+
+  // Line tabs
+  &.nav-line-tabs {
+    row-gap: 1rem;
+
+    .nav-item {
+      // Active & Hover States
+      .nav-link.active,
+      &.show .nav-link,
+      .nav-link:hover:not(.disabled) {
+        border-bottom-color: $fg-brand-secondary;
+        color: $text-brand-primary;
+      }
+
+      .nav-link:focus {
+        outline: 0;
+        color: $text-brand-primary;
+      }
+    }
+  }
 }
 
 .btn-nav-item {
@@ -51,5 +71,43 @@
   &:focus,
   &:active {
     box-shadow: $ring-primary-100;
+  }
+}
+
+// Occupied space when tabs inside the table expandable container. Includes 300px of aside
+$tableSidesSpace: 495px;
+
+.tabs-container.tabs-scrollable {
+  width: 100%;
+
+  .expandable-container & {
+    width: calc(100vw - $tableSidesSpace);
+  }
+  [data-kt-aside-minimize='on'] .expandable-container & {
+    width: calc(
+      100vw - $tableSidesSpace + 226px
+    ); // 226px free on aside minimized
+  }
+
+  .nav-line-tabs {
+    flex-wrap: nowrap;
+    overflow-x: auto;
+    overflow-y: hidden;
+    padding-bottom: 1px;
+
+    .nav-item {
+      white-space: nowrap;
+    }
+  }
+}
+
+// Mobile screens
+@media (max-width: 992px) {
+  .tabs-container.tabs-scrollable {
+    .expandable-container & {
+      width: calc(
+        100vw - $tableSidesSpace + 300px + 30px
+      ); // 300px from aside hidden + 30px from container, space released
+    }
   }
 }

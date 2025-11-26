@@ -159,12 +159,6 @@ export function useAggregateLimitChart(
             return value;
           },
         },
-        splitLine: {
-          lineStyle: {
-            type: 'dashed',
-            opacity: 0.6,
-          },
-        },
       },
       dataZoom:
         components.length > 15
@@ -195,6 +189,7 @@ export function useAggregateLimitChart(
             focus: 'series',
           },
           itemStyle: {
+            // NOTE: There is a gap between the stacks due to borderRadius. There is currently no solution for this for now.
             borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
           },
           data: usageData,

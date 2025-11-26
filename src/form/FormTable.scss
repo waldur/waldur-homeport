@@ -16,7 +16,7 @@
 
   th,
   td {
-    font-size: 1.075rem;
+    font-size: 1.077rem;
     vertical-align: middle;
   }
 
@@ -50,6 +50,7 @@
     padding-top: 1rem;
     padding-bottom: 1rem;
     padding-right: 3px !important;
+    white-space: nowrap;
   }
 
   &.hide-actions {

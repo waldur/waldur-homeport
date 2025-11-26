@@ -89,7 +89,7 @@ export const WizardFinalForm: FC<WizardFormProps> = ({
           </>
         }
         closeButton
-        hasHeaderPadding
+        headerClassName="pb-5"
         {...(modalProps || {})}
       >
         <div className="wizard-big wizard-body clearfix">

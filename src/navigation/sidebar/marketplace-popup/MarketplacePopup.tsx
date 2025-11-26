@@ -94,8 +94,8 @@ export const MarketplacePopup = reduxForm<FormData, MarketplacePopupProps>({
         'Select an organization and project, then choose a category, an offering, and follow the prompts',
       )}
       closeButton
+      headerClassName="pb-4"
       bodyClassName="p-0 pb-4"
-      headerClassName="border-0 pb-4"
     >
       <div id="marketplaces-selector">
         <div className="px-7">

@@ -40,13 +40,33 @@ export const EChart: React.FC<ChartProps> = ({
     };
   }, []);
 
+  // Update chart with new theme
+  useEffect(() => {
+    if (!containerRef.current) return;
+
+    import('@waldur/echarts').then((module) => {
+      const echarts = module.default;
+
+      if (chartRef.current) {
+        chartRef.current.dispose();
+        chartRef.current = echarts.init(
+          containerRef.current,
+          `${theme}-metronic`,
+        );
+        renderChart();
+      } else {
+        drawChart();
+      }
+    });
+  }, [theme]);
+
   useEffect(() => {
     if (chartRef.current) {
       renderChart();
     } else if (!chartRef.current && !loading) {
       drawChart();
     }
-  }, [options, theme, loading]);
+  }, [options, loading]);
 
   const drawChart = () => {
     setLoading(true);

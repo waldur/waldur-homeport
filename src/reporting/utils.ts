@@ -1,7 +1,7 @@
 import { EChartsOption, graphic } from 'echarts';
 
 import { hexToRgb } from '@waldur/core/generateColors';
-import { LINE_CHART_COLOR } from '@waldur/dashboard/constants';
+import { CHART_LINE_COLOR } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 export const usageTableTabs = [
@@ -21,7 +21,7 @@ export const getUsageLineChartOptions = (
   dates: string[],
   values: (string | number)[],
 ): EChartsOption => {
-  const color = LINE_CHART_COLOR;
+  const color = CHART_LINE_COLOR;
   const rgb = hexToRgb(color);
   return {
     tooltip: {

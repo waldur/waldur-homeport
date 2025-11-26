@@ -58,7 +58,7 @@ export const DefaultLayoutConfig: ILayout = {
     layout: 'toolbar1',
     layouts: {
       toolbar1: {
-        height: '55px',
+        height: '60px',
         heightAndTabletMobileMode: '55px',
       },
       toolbar2: {
