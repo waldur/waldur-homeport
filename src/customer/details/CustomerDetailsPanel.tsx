@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CheckOrX } from '@waldur/core/CheckOrX';
 import { ENV } from '@waldur/core/config';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { getNativeNameVisible } from '@waldur/store/config';
@@ -83,6 +83,16 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
             ? props.customer.max_service_accounts
             : 'N/A',
         },
+        isFeatureVisible(
+          MarketplaceFeatures.show_experimental_ui_components,
+        ) && {
+          label: translate('Grace period (days)'),
+          description: translate(
+            'Number of extra days after project end date before resources are terminated',
+          ),
+          key: 'grace_period_days',
+          value: props.customer.grace_period_days,
+        },
         user?.is_staff && {
           label: translate('Display billing info in projects'),
           key: 'display_billing_info_in_projects',
@@ -129,12 +139,24 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
             <FormTable.Item
               key={row.key}
               label={row.label}
+              description={row.description}
               value={row.value || 'N/A'}
               actions={
-                props.canUpdate ? (
+                props.canUpdate &&
+                ([
+                  'max_service_accounts',
+                  'grace_period_days',
+                  'display_billing_info_in_projects',
+                  'agreement_number',
+                  'domain',
+                  'sponsor_number',
+                ].includes(row.key)
+                  ? user?.is_staff
+                  : true) ? (
                   <>
                     {[
                       'max_service_accounts',
+                      'grace_period_days',
                       'display_billing_info_in_projects',
                       'agreement_number',
                       'domain',
