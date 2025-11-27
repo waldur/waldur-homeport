@@ -1,8 +1,8 @@
 import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
-import { FC, useState } from 'react';
+import { FC, useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   Project,
   projectsRecover,
@@ -14,39 +14,32 @@ import { SubmitButton } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 import { getUser } from '@waldur/workspace/selectors';
 
 interface ProjectRecoveryModalProps {
-  resolve: {
-    project: Project;
-  };
+  resolve: { project: Project };
 }
 
 export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
   resolve: { project },
 }) => {
-  const dispatch = useDispatch();
   const { showSuccess, showErrorResponse } = useNotify();
+  const { closeDialog } = useModal();
   const user = useSelector(getUser);
-  const [roleRecoveryOption, setRoleRecoveryOption] = useState<string>('');
-
-  const handleClose = () => {
-    dispatch(closeModalDialog());
-  };
 
   const handleRecover = async (values: any) => {
     try {
       const body: ProjectRecoveryRequest = {};
 
-      if (roleRecoveryOption === 'restore_team_members') {
+      if (values.roleRecoveryOption === 'restore_team_members') {
         body.restore_team_members = true;
       } else if (
-        roleRecoveryOption === 'send_invitations_to_previous_members'
+        values.roleRecoveryOption === 'send_invitations_to_previous_members'
       ) {
         body.send_invitations_to_previous_members = true;
       }
@@ -82,7 +75,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
         }
       }
 
-      handleClose();
+      closeDialog();
       window.location.reload();
     } catch (error) {
       showErrorResponse(error, translate('Unable to recover project.'));
@@ -94,40 +87,43 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
     (project.termination_metadata as any)?.user_roles || [];
   const hasPreviousMembers = previousMembers.length > 0;
 
-  const roleRecoveryChoices = [
-    {
-      value: '',
-      label: translate('Do not restore team members'),
-      description: translate(
-        'Project will be recovered without restoring any team members',
-      ),
-    },
-    {
-      value: 'send_invitations_to_previous_members',
-      label: translate('Re-invite team members ({count} users)', {
-        count: previousMembers.length,
-      }),
-      description: translate('Send invitations to users with prior access'),
-    },
-    ...(user.is_staff
-      ? [
-          {
-            value: 'restore_team_members',
-            label: translate('Restore team members ({count} users)', {
-              count: previousMembers.length,
-            }),
-            description: translate(
-              'Automatically restore team members who had access before project deletion (staff only)',
-            ),
-          },
-        ]
-      : []),
-  ];
+  const roleRecoveryChoices = useMemo(
+    () => [
+      {
+        value: '',
+        label: translate('Do not restore team members'),
+        description: translate(
+          'Project will be recovered without restoring any team members',
+        ),
+      },
+      {
+        value: 'send_invitations_to_previous_members',
+        label: translate('Re-invite team members ({count} users)', {
+          count: previousMembers.length,
+        }),
+        description: translate('Send invitations to users with prior access'),
+      },
+      ...(user.is_staff
+        ? [
+            {
+              value: 'restore_team_members',
+              label: translate('Restore team members ({count} users)', {
+                count: previousMembers.length,
+              }),
+              description: translate(
+                'Automatically restore team members who had access before project deletion (staff only)',
+              ),
+            },
+          ]
+        : []),
+    ],
+    [user, previousMembers],
+  );
 
   return (
     <Form
       onSubmit={handleRecover}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit, submitting, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={translate('Recover Project')}
@@ -177,40 +173,23 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
 
             {hasPreviousMembers && (
               <div className="mb-4">
-                <AwesomeRadioButton
-                  label={translate(
-                    'Choose what should be restored along with the project:',
+                <Field
+                  name="roleRecoveryOption"
+                  defaultValue=""
+                  render={({ input }) => (
+                    <AwesomeRadioButton
+                      label={translate(
+                        'Choose what should be restored along with the project:',
+                      )}
+                      choices={roleRecoveryChoices}
+                      input={input as any}
+                    />
                   )}
-                  choices={roleRecoveryChoices}
-                  input={{
-                    name: 'roleRecoveryOption',
-                    value: roleRecoveryOption,
-                    onChange: (e) => setRoleRecoveryOption(e.target.value),
-                    onBlur: () => {},
-                    onFocus: () => {},
-                    onDragStart: () => {},
-                    onDrop: () => {},
-                  }}
-                  meta={{
-                    autofilled: false,
-                    asyncValidating: false,
-                    dirty: false,
-                    dispatch: (() => {}) as any,
-                    form: 'projectRecoveryForm',
-                    initial: '',
-                    invalid: false,
-                    pristine: true,
-                    submitting: false,
-                    submitFailed: false,
-                    touched: false,
-                    valid: true,
-                    visited: false,
-                  }}
                 />
 
-                {(roleRecoveryOption ===
+                {(values.roleRecoveryOption ===
                   'send_invitations_to_previous_members' ||
-                  roleRecoveryOption === 'restore_team_members') && (
+                  values.roleRecoveryOption === 'restore_team_members') && (
                   <div
                     className="border rounded p-3 mb-3 mt-3"
                     style={{ maxHeight: '200px', overflowY: 'auto' }}
