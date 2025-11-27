@@ -10,30 +10,37 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 type OwnProps = { resolve: { offering: Offering; config: string } };
 
 export const GLAuthConfigDialog: FC<OwnProps> = (props) => {
+  const hasValue =
+    props.resolve.config && typeof props.resolve.config === 'string';
+
   return (
     <ModalDialog
       title={translate('GLAuth configuration for {offering}', {
         offering: props.resolve.offering.name,
       })}
       actions={
-        <CopyToClipboard
-          value={props.resolve.config}
-          label={translate('Copy')}
-          className="btn-tertiary w-150px"
-        />
+        hasValue && (
+          <CopyToClipboard
+            value={props.resolve.config}
+            label={translate('Copy')}
+            className="btn-tertiary w-150px"
+          />
+        )
       }
       footer={
-        <CloseDialogButton
-          variant="primary"
-          label={translate('Close')}
-          className="w-150px"
-        />
+        <CloseDialogButton label={translate('Close')} className="w-150px" />
       }
     >
-      <MonacoField
-        input={{ onChange: null, value: props.resolve.config }}
-        readOnly
-      />
+      {hasValue ? (
+        <MonacoField
+          input={{ onChange: null, value: props.resolve.config }}
+          readOnly
+        />
+      ) : (
+        <p className="text-quaternary">
+          {translate('No configuration has been set.')}
+        </p>
+      )}
     </ModalDialog>
   );
 };
