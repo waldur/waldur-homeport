@@ -5,8 +5,8 @@ import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import {
+  proposalProtectedCallsAvailableComplianceChecklistsList,
   proposalProtectedCallsPartialUpdate,
-  checklistsAdminList,
 } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
@@ -45,12 +45,16 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
 
   // Query compliance checklists if editing compliance_checklist field
   const { data: complianceChecklists } = useQuery({
-    queryKey: ['ComplianceChecklists'],
+    queryKey: ['AvailableComplianceChecklists', resolve.call.customer_uuid],
     queryFn: () =>
-      checklistsAdminList({
-        query: { checklist_type: 'proposal_compliance' },
+      proposalProtectedCallsAvailableComplianceChecklistsList({
+        query: {
+          checklist_type: 'proposal_compliance',
+          customer_uuid: resolve.call.customer_uuid,
+        },
       }).then((response) => response.data),
-    enabled: resolve.name === 'compliance_checklist',
+    enabled:
+      resolve.name === 'compliance_checklist' && !!resolve.call?.customer_uuid,
     staleTime: 5 * 60 * 1000,
   });
 

@@ -5,7 +5,7 @@ import { connect, useSelector } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
 import {
   callManagingOrganisationsList,
-  checklistsAdminList,
+  proposalProtectedCallsAvailableComplianceChecklistsList,
   proposalProtectedCallsCreate,
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
@@ -60,17 +60,21 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
       staleTime: 60 * 1000,
     });
 
-    // Query proposal compliance checklists
+    const isExperimentalUiEnabled = isExperimentalUiComponentsVisible();
     const {
       data: complianceChecklists,
       isLoading: loadingChecklists,
       error: errorChecklists,
     } = useQuery({
-      queryKey: ['ComplianceChecklists'],
+      queryKey: ['AvailableComplianceChecklists', customer.uuid],
       queryFn: () =>
-        checklistsAdminList({
-          query: { checklist_type: 'proposal_compliance' },
+        proposalProtectedCallsAvailableComplianceChecklistsList({
+          query: {
+            checklist_type: 'proposal_compliance',
+            customer_uuid: customer.uuid,
+          },
         }).then((response) => response.data),
+      enabled: isExperimentalUiEnabled && !!customer?.uuid,
       staleTime: 5 * 60 * 1000,
     });
     const isEdit = Boolean(props.resolve.call?.uuid);
@@ -136,9 +140,9 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
       [props.resolve, router],
     );
 
-    if (loadingManager || loadingChecklists) {
+    if (loadingManager || (isExperimentalUiEnabled && loadingChecklists)) {
       return <LoadingSpinner />;
-    } else if (errorManager || errorChecklists) {
+    } else if (errorManager || (isExperimentalUiEnabled && errorChecklists)) {
       return (
         <LoadingErred
           message={translate('Unable to prepare the form.')}
@@ -148,10 +152,12 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
     }
 
     const checklistOptions =
-      complianceChecklists?.map((checklist) => ({
-        value: checklist.uuid,
-        label: checklist.name,
-      })) || [];
+      isExperimentalUiEnabled && complianceChecklists
+        ? complianceChecklists.map((checklist) => ({
+            value: checklist.uuid,
+            label: checklist.name,
+          }))
+        : [];
     return (
       <form onSubmit={props.handleSubmit(processRequest)}>
         <ModalDialog
