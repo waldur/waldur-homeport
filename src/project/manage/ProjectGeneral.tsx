@@ -3,10 +3,13 @@ import { Project } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { parseDate } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import FormTable, { FormTableItemProps } from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { StaffOnlyIndicator } from '../../customer/details/StaffOnlyIndicator';
 import { projectKindOptions } from '../utils';
 
 import { FieldEditButton } from './FieldEditButton';
@@ -62,6 +65,16 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             key: 'end_date',
             value: project.end_date || 'N/A',
           },
+          isFeatureVisible(
+            MarketplaceFeatures.show_experimental_ui_components,
+          ) && {
+            label: translate('Grace period (days)'),
+            description: translate(
+              'Number of extra days after project end date before resources are terminated. Overrides customer-level setting.',
+            ),
+            key: 'grace_period_days',
+            value: project.grace_period_days,
+          },
           {
             label: translate('Description'),
             key: 'description',
@@ -97,21 +110,35 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
 
       <FormTable.Card title={translate('Details')} className="card-bordered">
         <FormTable>
-          {rows.map((row) => (
-            <FormTable.Item
-              key={row.key}
-              label={row.label}
-              description={row.description}
-              value={row.value}
-              actions={
-                <FieldEditButton
-                  project={project}
-                  name={row.key}
-                  disabled={row.disabled}
-                />
-              }
-            />
-          ))}
+          {rows.map((row) => {
+            const isStaffOnlyEditField = [
+              'grace_period_days',
+              'slug',
+              'staff_notes',
+              'max_service_accounts',
+            ].includes(row.key);
+
+            return (
+              <FormTable.Item
+                key={row.key}
+                label={row.label}
+                description={row.description}
+                value={row.value}
+                actions={
+                  <>
+                    {isStaffOnlyEditField && <StaffOnlyIndicator />}
+                    {(!isStaffOnlyEditField || user.is_staff) && (
+                      <FieldEditButton
+                        project={project}
+                        name={row.key}
+                        disabled={row.disabled}
+                      />
+                    )}
+                  </>
+                }
+              />
+            );
+          })}
         </FormTable>
       </FormTable.Card>
     </>

@@ -8,6 +8,8 @@ import { organizationGroupsList } from 'waldur-js-client';
 import { getAllPages } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import {
   NumberField,
   SelectField,
@@ -249,6 +251,18 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 unit="%"
                 min={0}
                 max={200}
+              />
+            ) : props.resolve.name === 'grace_period_days' &&
+              isFeatureVisible(
+                MarketplaceFeatures.show_experimental_ui_components,
+              ) ? (
+              <NumberField
+                name="grace_period_days"
+                label={translate('Grace period (days)')}
+                description={translate(
+                  'Number of extra days after project end date before resources are terminated',
+                )}
+                min={0}
               />
             ) : null}
           </FormContainer>
