@@ -16,6 +16,7 @@ import { ResourceDetailsAction } from '../details/popup/ResourceDetailsAction';
 import { ReportUsageAction } from '../list/ReportUsageAction';
 import { ReportUserUsageAction } from '../list/ReportUserUsageAction';
 import { ShowUsageAction } from '../list/ShowUsageAction';
+import { ReallocateLimitsAction } from '../reallocate-limits/ReallocateLimitsAction';
 
 import { EditAction } from './EditAction';
 import { EditResourceEndDateByProviderAction } from './EditResourceEndDateByProviderAction';
@@ -30,6 +31,7 @@ export const ActionsList = [
   SubmitReportAction,
   ChangePlanAction,
   ChangeLimitsAction,
+  ReallocateLimitsAction,
   SetBackendIdAction,
   SetSlugAction,
   TerminateAction,
@@ -44,6 +46,7 @@ export const CustomerResourceActions = [
   EditAction,
   ChangePlanAction,
   ChangeLimitsAction,
+  ReallocateLimitsAction,
   EditResourceEndDateAction,
   SyncResourceAction,
   TerminateAction,

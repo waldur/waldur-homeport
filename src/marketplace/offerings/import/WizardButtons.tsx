@@ -14,6 +14,7 @@ interface WizardButtonsProps {
   isFirstStep: boolean;
   isLastStep: boolean;
   submitLabel?: string;
+  tooltip?: string;
 }
 
 export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
@@ -24,6 +25,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
   submitting,
   invalid,
   submitLabel,
+  tooltip,
 }) => (
   <>
     {!isFirstStep && (
@@ -50,6 +52,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         variant="primary"
         className="min-w-125px"
         disabled={invalid}
+        tooltip={tooltip}
       />
     )}
   </>
