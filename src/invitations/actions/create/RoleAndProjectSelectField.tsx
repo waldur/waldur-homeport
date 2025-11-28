@@ -7,12 +7,12 @@ import React, {
   useState,
 } from 'react';
 import { FormControl, FormGroup } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
+import { FieldRenderProps } from 'react-final-form';
 import { Project } from 'waldur-js-client';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { required } from '@waldur/core/validators';
-import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { Role } from '@waldur/permissions/types';
@@ -187,7 +187,7 @@ interface RoleAndProjectSelectFieldProps {
 }
 interface RoleAndProjectSelectProps
   extends Omit<RoleAndProjectSelectFieldProps, 'name'>,
-    FormField {}
+    FieldRenderProps<any, HTMLElement> {}
 
 const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {
   const { roles, customer, currentProject, placeholder } = props;
@@ -247,20 +247,24 @@ export const RoleAndProjectSelectField: React.FC<
   return !disabled ? (
     <Field
       name={name}
-      roles={roles}
-      customer={customer}
-      currentProject={currentProject}
-      component={RoleAndProjectSelect}
-      placeholder={translate('Select...')}
-      validate={[required]}
+      validate={required}
+      render={(fieldProps) => (
+        <RoleAndProjectSelect
+          {...fieldProps}
+          roles={roles}
+          customer={customer}
+          currentProject={currentProject}
+          placeholder={translate('Select...')}
+        />
+      )}
     />
   ) : (
     <Field
       name={name}
-      component={FormControl}
+      component={FormControl as any}
       placeholder={translate('Select...')}
       disabled={disabled}
-      validate={[required]}
+      validate={required}
     />
   );
 };

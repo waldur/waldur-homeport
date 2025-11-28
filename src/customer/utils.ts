@@ -12,7 +12,9 @@ import {
 
 export const userHasCustomerPermission = (permission) => (state) => {
   const user = getUser(state);
-  const customerId = getCustomerSelector(state).uuid;
+  const customer = getCustomerSelector(state);
+  if (!customer) return false;
+  const customerId = customer.uuid;
   return (
     hasPermission(user, {
       customerId,

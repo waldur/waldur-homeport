@@ -12,8 +12,9 @@ interface TextFieldProps extends FormField {
 }
 
 export const TextField: FunctionComponent<TextFieldProps> = (props) => {
+  // prettier-ignore
   // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  const { input, label, rows, hideLabel, validate, spaceless, solid, ...rest } =
+  const { input, label, rows, hideLabel, validate, spaceless, solid, meta, ...rest } =
     props;
 
   const storeScroll = useCallback((e) => {
@@ -28,6 +29,7 @@ export const TextField: FunctionComponent<TextFieldProps> = (props) => {
       style={props.style}
       placeholder="  "
       onScroll={storeScroll}
+      isInvalid={Boolean(meta?.error)}
       {...props.input}
       rows={rows ? rows : 5}
       {...rest}

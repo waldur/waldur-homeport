@@ -17,6 +17,7 @@ export interface FormField {
   description?: ReactNode;
   tooltip?: ReactNode;
   validate?: Validator | Validator[];
+  isInvalid?: boolean;
   disabled?: boolean;
   hideLabel?: boolean;
   normalize?: Normalizer;

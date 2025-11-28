@@ -1,12 +1,12 @@
 import { PlusIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback, useState } from 'react';
 import { Button, Form } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { ENV } from '@waldur/core/config';
 import { Tip } from '@waldur/core/Tooltip';
 import { usePagination } from '@waldur/core/usePagination';
-import { email, required } from '@waldur/core/validators';
+import { composeValidators, email, required } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { EmailField } from '@waldur/form/EmailField';
@@ -38,11 +38,10 @@ export const EmailsListGroup = ({
 
   const addRow = useCallback(() => {
     let emptyEmails = 0;
-    if (fields._isFieldArray) {
-      fields.forEach((_, i) => {
-        if (!fields.get(i)?.email) emptyEmails++;
-      });
-    }
+    fields.value?.forEach((row) => {
+      if (!row?.email) emptyEmails++;
+    });
+
     if (emptyEmails < 5) {
       if (project) fields.push({ project });
       else fields.push({});
@@ -54,7 +53,7 @@ export const EmailsListGroup = ({
   }, [fields, project, refreshPageOnAdd]);
 
   const removeRow = (index) => {
-    if (fields._isFieldArray) fields.remove(index);
+    fields.remove(index);
     refreshPageOnRemove();
   };
 
@@ -63,7 +62,7 @@ export const EmailsListGroup = ({
       <div id="emails-list-group">
         {fields.length > 0 && (
           <Form.Group>
-            <table className="table px-0 gy-2 mb-0">
+            <table className="table align-middle px-0 gy-2 mb-0">
               <thead>
                 <tr className="fs-6 fw-bold">
                   <td className="w-250px">{translate('Email')}</td>
@@ -98,9 +97,9 @@ export const EmailsListGroup = ({
                           <Field
                             name={`${user}.email`}
                             placeholder={translate('Enter email address')}
-                            required={true}
-                            component={EmailField}
-                            validate={[required, email]}
+                            required
+                            component={EmailField as any}
+                            validate={composeValidators(required, email)}
                           />
                         </td>
                         {isFeatureVisible(
@@ -110,7 +109,7 @@ export const EmailsListGroup = ({
                             <Field
                               name={`${user}.civil_number`}
                               placeholder={translate('e.g. EE123456789')}
-                              component={InputField}
+                              component={InputField as any}
                               disabled={disabled}
                               validate={
                                 isFeatureVisible(

@@ -33,7 +33,7 @@ const mapStateToFilter = createSelector(
   getFormValues(GROUP_INVITATIONS_FILTER_FORM_ID),
   (customer, filterValues) => ({
     ...filterValues,
-    customer_uuid: customer.uuid,
+    customer_uuid: customer?.uuid,
   }),
 );
 

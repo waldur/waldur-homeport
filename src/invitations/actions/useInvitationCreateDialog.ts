@@ -49,7 +49,18 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
       return new Promise((resolve, reject) => {
         try {
           if (!formData.rows?.length) return;
-          const promises = formData.rows.map((row) => {
+
+          // Filter out rows that don't have valid role_project data
+          const validRows = formData.rows.filter(
+            (row) => row.role_project && row.role_project.role && row.email,
+          );
+
+          if (validRows.length === 0) {
+            reject(new Error('No valid invitations to send'));
+            return;
+          }
+
+          const promises = validRows.map((row) => {
             let scope;
             if (row.role_project.role.content_type === 'project') {
               scope = row.role_project.project.url;
