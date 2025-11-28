@@ -1,10 +1,10 @@
+import arrayMutators from 'final-form-arrays';
 import { useCallback, useState } from 'react';
-import { reduxForm } from 'redux-form';
+import { Form } from 'react-final-form';
 
 import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-import { INVITATION_CREATE_FORM_ID } from '../constants';
 import { GroupInviteRow, InvitationContext } from '../types';
 import { useInvitationCreateDialog } from '../useInvitationCreateDialog';
 
@@ -19,18 +19,21 @@ interface OwnProps {
   resolve: InvitationContext;
 }
 
-export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
-  form: INVITATION_CREATE_FORM_ID,
-  enableReinitialize: false,
-  initialValues: { rows: [{}] },
-})(({ resolve, submitting, handleSubmit, change, valid }) => {
+const initialValues = { rows: [{}] };
+
+export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
   const { createInvitations, finish, roles, defaultRole, defaultProject } =
     useInvitationCreateDialog(resolve);
 
   const [step, setStep] = useState<1 | 2>(1);
 
+  const submit = useCallback(
+    (formData) => createInvitations(formData).then(() => finish()),
+    [createInvitations, finish],
+  );
+
   const populateRows = useCallback(
-    (items: EmailRolePairs) => {
+    (items: EmailRolePairs, change: (field: string, value: any) => void) => {
       const rows: GroupInviteRow[] = [];
       items.forEach((item) => {
         if (item.role === '') {
@@ -66,48 +69,50 @@ export const InvitationCreateDialog = reduxForm<{}, OwnProps>({
       });
       change('rows', rows);
     },
-    [change, defaultRole, defaultProject, roles],
+    [defaultRole, defaultProject, roles],
   );
-
-  const submit = useCallback(
-    (formData) => createInvitations(formData).then(() => finish()),
-    [createInvitations, setStep],
-  );
-
-  const disabled = submitting;
 
   return (
-    <form onSubmit={handleSubmit(submit)} className="invitation-create-dialog">
-      <ModalDialog
-        title={translate('Invite by email')}
-        subtitle={translate(
-          "We'll email them instructions and a link to accept the invitation.",
-        )}
-        footer={
-          <FormButtons
-            setStep={setStep}
-            step={step}
-            submitting={submitting}
-            valid={valid}
-          />
-        }
-      >
-        {step === 1 && resolve.enableBulkUpload ? (
-          <BulkUpload onImport={populateRows} />
-        ) : null}
-        <div className="min-h-400px">
-          {step === 1 ? (
-            <EmailsListGroupWrapper
-              roles={roles}
-              customer={resolve.customer}
-              project={resolve.project}
-              disabled={disabled}
-            />
-          ) : step === 2 ? (
-            <CustomMessageWrapper />
-          ) : null}
-        </div>
-      </ModalDialog>
-    </form>
+    <Form
+      onSubmit={submit}
+      initialValues={initialValues}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, valid, form }) => (
+        <form onSubmit={handleSubmit} className="invitation-create-dialog">
+          <ModalDialog
+            title={translate('Invite by email')}
+            subtitle={translate(
+              "We'll email them instructions and a link to accept the invitation.",
+            )}
+            footer={
+              <FormButtons
+                setStep={setStep}
+                step={step}
+                submitting={submitting}
+                valid={valid}
+              />
+            }
+          >
+            {step === 1 && resolve.enableBulkUpload ? (
+              <BulkUpload
+                onImport={(items) => populateRows(items, form.change)}
+              />
+            ) : null}
+            <div>
+              {step === 1 ? (
+                <EmailsListGroupWrapper
+                  roles={roles}
+                  customer={resolve.customer}
+                  project={resolve.project}
+                  disabled={submitting}
+                />
+              ) : step === 2 ? (
+                <CustomMessageWrapper />
+              ) : null}
+            </div>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

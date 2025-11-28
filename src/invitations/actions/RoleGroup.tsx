@@ -1,30 +1,31 @@
 import { FunctionComponent } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { required } from '@waldur/core/validators';
-import { FormGroup, SelectField } from '@waldur/form';
+import { SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Role } from '@waldur/permissions/types';
 
 export const RoleGroup: FunctionComponent<{ roles: Role[]; disabled }> = ({
   roles,
   disabled,
 }) => (
-  <Field
-    name="role"
-    component={FormGroup}
+  <FormGroup
     label={translate('Role')}
     description={translate(
       'For public invitations, only project-level roles can be selected.',
     )}
     required
-    validate={[required]}
-    options={roles}
-    getOptionLabel={(item) => item.description || item.name}
-    getOptionValue={(item) => item.uuid}
-    space={5}
-    isDisabled={disabled}
   >
-    <SelectField />
-  </Field>
+    <Field
+      name="role"
+      component={SelectField}
+      validate={required}
+      options={roles}
+      getOptionLabel={(item) => item.description || item.name}
+      getOptionValue={(item) => item.uuid}
+      isDisabled={disabled}
+    />
+  </FormGroup>
 );

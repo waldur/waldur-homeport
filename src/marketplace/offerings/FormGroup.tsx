@@ -23,6 +23,18 @@ interface FormGroupProps {
   id?: string;
 }
 
+const FormLabel = (props) => (
+  <Form.Label className="me-auto">
+    {props.help && !props.helpEnd && (
+      <Tip id="form-field-tooltip" label={props.help}>
+        <QuestionIcon weight="bold" />{' '}
+      </Tip>
+    )}
+    {props.label}
+    {props.required && <span className="text-danger"> *</span>}
+  </Form.Label>
+);
+
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
   space = 7,
   ...props
@@ -35,19 +47,9 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
     controlId={props.controlId}
     id={props.id}
   >
-    {Boolean(props.label || props.quickAction) && (
+    {props.quickAction || (props.help && props.helpEnd) ? (
       <div className="d-flex align-items-end">
-        {!!props.label && (
-          <Form.Label className="me-auto">
-            {props.help && !props.helpEnd && (
-              <Tip id="form-field-tooltip" label={props.help}>
-                <QuestionIcon weight="bold" />{' '}
-              </Tip>
-            )}
-            {props.label}
-            {props.required && <span className="text-danger"> *</span>}
-          </Form.Label>
-        )}
+        {!!props.label && <FormLabel {...props} />}
         {props.quickAction}
         {props.help && props.helpEnd && (
           <Tip
@@ -59,7 +61,9 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
           </Tip>
         )}
       </div>
-    )}
+    ) : props.label ? (
+      <FormLabel {...props} />
+    ) : null}
     <div>{props.children}</div>
     {props.description && <Form.Text>{props.description}</Form.Text>}
     {props.meta?.touched && props.meta?.error && (

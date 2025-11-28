@@ -34,6 +34,12 @@ export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
       .map((item) => item.trim());
     input.onChange(parsedValue);
   };
+  const handleBlur = () => {
+    const parsedValue = (input.value || []).filter(
+      (item) => !['', undefined, null].includes(item),
+    );
+    input.onChange(parsedValue);
+  };
 
   return (
     <Form.Control
@@ -42,6 +48,7 @@ export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
       placeholder={placeholder}
       value={value || ''}
       onChange={handleChange}
+      onBlur={handleBlur}
       {...rest}
     />
   );
