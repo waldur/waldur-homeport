@@ -72,6 +72,7 @@ export const MultiSelectOption = (props) => {
       <FormCheck
         className="form-check form-check-custom form-check-sm lh-1 min-h-auto"
         checked={props.isSelected}
+        readOnly
       />
       <label>{props.label}</label>
     </components.Option>

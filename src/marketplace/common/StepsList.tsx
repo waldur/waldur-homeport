@@ -25,7 +25,7 @@ export const StepsList: FC<StepsListProps> = (props) => {
       steps={steps}
       onClick={props.onClick}
       bgClass="bg-body"
-      className="mt-3 mb-3"
+      className="mt-4 mb-4"
     />
   );
 };
