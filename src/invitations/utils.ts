@@ -154,9 +154,7 @@ export function submitGroupRequest(token) {
       return res.data;
     })
     .catch((error) => {
-      if (error.response?.status === 404 || error.response?.status === 400) {
-        store.dispatch(showError(translate('Request is not valid.')));
-      } else if (error.response?.status === 500) {
+      if (error.response?.status === 500) {
         store.dispatch(
           showError(
             translate(
