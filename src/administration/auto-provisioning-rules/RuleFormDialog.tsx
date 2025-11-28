@@ -113,7 +113,7 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
           errors.customer = translate('This field is required.');
         return errors;
       }}
-      render={({ handleSubmit, submitting, invalid, values }) => (
+      render={({ handleSubmit, submitting, invalid, values, form }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -134,7 +134,7 @@ export const RuleFormDialog: FC<RuleFormDialogProps> = ({ resolve }) => {
               </>
             }
           >
-            <RuleForm values={values} />
+            <RuleForm values={values} change={form.change} />
           </ModalDialog>
         </form>
       )}

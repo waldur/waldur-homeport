@@ -15,7 +15,7 @@ import { getProjectRoles } from '@waldur/permissions/utils';
 
 import { validateEmailPatterns } from './utils';
 
-export const RuleForm: FC<{ values }> = ({ values }) => {
+export const RuleForm: FC<{ values; change }> = ({ values, change }) => {
   return (
     <>
       <FormGroup label={translate('Rule name')} required>
@@ -62,6 +62,7 @@ export const RuleForm: FC<{ values }> = ({ values }) => {
           tooltipEnd
           alignMiddle
           className="w-100"
+          onChange={() => change('customer', null)}
         />
       </FormGroup>
 
@@ -79,6 +80,7 @@ export const RuleForm: FC<{ values }> = ({ values }) => {
           }
           getOptionValue={({ url }) => url}
           // validate={/* Handled by Parent <Form> */}
+          isDisabled={values.use_user_organization_as_customer_name}
           isClearable
         />
       </FormGroup>
