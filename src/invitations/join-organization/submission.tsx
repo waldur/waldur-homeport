@@ -36,7 +36,7 @@ export const requestToAccessOrganization = (
     .catch(async (err) => {
       GroupInvitationTokenStorage.remove();
       if (err?.[0] && err?.[0].includes('Request has been created already')) {
-        dispatch(showErrorResponse(err, translate('Something went wrong')));
+        dispatch(showErrorResponse(err));
       } else {
         const formattedMessage = (
           <div>

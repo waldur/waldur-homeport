@@ -3,10 +3,14 @@ import { translate } from '@waldur/i18n';
 
 const formatErrorObject = (error) =>
   Object.keys(error)
-    .map(
-      (key) =>
-        `${key}: ${typeof error[key] === 'object' ? formatErrorObject(error[key]) : error[key]}`,
+    .map((key) =>
+      isNaN(Number(key))
+        ? `${key}: ${typeof error[key] === 'object' ? formatErrorObject(error[key]) : error[key]}`
+        : typeof error[key] === 'object'
+          ? formatErrorObject(error[key])
+          : error[key],
     )
+    .filter(Boolean)
     .join(', ');
 
 export const format = (error, parseResponse?) => {
@@ -37,7 +41,9 @@ export const format = (error, parseResponse?) => {
 
   if (!Object.prototype.hasOwnProperty.call(error, 'status')) {
     if (typeof error === 'object') {
-      return formatErrorObject(error);
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { response, ...errorRest } = error;
+      return formatErrorObject(errorRest);
     } else {
       return error;
     }
