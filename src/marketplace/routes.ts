@@ -358,7 +358,7 @@ export const states: StateDeclaration[] = [
     component: UIView,
     url: '',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL.ENABLED],
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
       breadcrumb: () => translate('Managed projects'),
       priority: 150,
     },
@@ -607,7 +607,7 @@ export const states: StateDeclaration[] = [
     ),
     parent: 'managed-projects',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL.ENABLED],
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
       breadcrumb: () => translate('Externally managed projects'),
     },
   },
@@ -622,7 +622,7 @@ export const states: StateDeclaration[] = [
     ),
     parent: 'managed-projects',
     data: {
-      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL.ENABLED],
+      permissions: [() => ENV.plugins.WALDUR_OPENPORTAL?.ENABLED],
       breadcrumb: () => translate('Available managed project templates'),
     },
   },
