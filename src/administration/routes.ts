@@ -608,4 +608,19 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Notifications'),
     },
   },
+
+  {
+    name: 'admin-onboarding-settings',
+    url: 'onboarding-settings/',
+    parent: 'admin-settings',
+    component: lazyComponent(() =>
+      import('./organizations/OnboardingSettings').then((module) => ({
+        default: module.OnboardingSettings,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Onboarding settings'),
+      feature: MarketplaceFeatures.show_experimental_ui_components,
+    },
+  },
 ];
