@@ -10,7 +10,7 @@ import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
 
 import { InvitationPolicyService } from './actions/InvitationPolicyService';
 
-const statesForResend = ['pending', 'expired'];
+const statesForResend = ['pending', 'expired', 'canceled'];
 
 const isAnyDisabled = (user, customer, project, rows) => {
   return rows.some((invitation) => {
@@ -43,7 +43,7 @@ const showTooltip = (user, customer, project, rows) => {
     }
     if (!hasAvailableState) {
       return translate(
-        'Only pending and expired invitations can be sent again.',
+        'Only pending, expired and canceled invitations can be sent again.',
       );
     }
   }

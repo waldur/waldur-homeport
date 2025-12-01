@@ -13,6 +13,7 @@ import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationP
 import { InvitationActions } from '@waldur/invitations/InvitationActions';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
+import { InvitationsMultiSelectActions } from '@waldur/invitations/InvitationsMultiSelectActions';
 import { formatInvitationState } from '@waldur/invitations/InvitationStateFilter';
 import { choices } from '@waldur/invitations/InvitationStateFilter';
 import { createFetcher } from '@waldur/table/api';
@@ -98,6 +99,8 @@ const InvitationsListComponent: FunctionComponent = () => {
       hasQuery={true}
       expandableRow={InvitationExpandableRow}
       filters={<InvitationsFilter />}
+      enableMultiSelect
+      multiSelectActions={InvitationsMultiSelectActions}
     />
   );
 };

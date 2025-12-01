@@ -16,7 +16,8 @@ const isAnyDisabled = (user, customer, project, rows) => {
       !InvitationPolicyService.canManageInvitation(
         { user, customer, project },
         invitation,
-      ) || invitation.state !== 'pending'
+      ) ||
+      (invitation.state !== 'pending' && invitation.state !== 'project')
     );
   });
 };
@@ -32,7 +33,10 @@ const showTooltip = (user, customer, project, rows) => {
       )
     ) {
       hasPermission = false;
-    } else if (invitation.state !== 'pending') {
+    } else if (
+      invitation.state !== 'pending' &&
+      invitation.state !== 'project'
+    ) {
       hasAvailableState = false;
     }
     if (!hasPermission) {
@@ -41,7 +45,7 @@ const showTooltip = (user, customer, project, rows) => {
       );
     }
     if (!hasAvailableState) {
-      return translate('Only pending invitations can be canceled.');
+      return translate('Only pending or planned invitations can be canceled.');
     }
   }
   return translate('Cancel all selected invitations.');

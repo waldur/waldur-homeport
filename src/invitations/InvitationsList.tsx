@@ -108,7 +108,6 @@ export const InvitationsList: FunctionComponent = () => {
         <InvitationActions invitation={row} refetch={props.fetch} />
       )}
       expandableRow={InvitationExpandableRow}
-      expandableRowClassName="has-multiselect"
       enableMultiSelect
       multiSelectActions={InvitationsMultiSelectActions}
     />
