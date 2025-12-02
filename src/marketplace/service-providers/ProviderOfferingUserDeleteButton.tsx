@@ -30,7 +30,7 @@ export const ProviderOfferingUserDeleteButton: FC<{
       ? props.provider.customer_uuid
       : props.offering
         ? props.offering.customer_uuid
-        : undefined,
+        : props.row.customer_uuid, // Use row's customer_uuid for admin context
   });
   const handleDelete = async () => {
     try {

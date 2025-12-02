@@ -33,6 +33,17 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
       })
     : true;
 
+  // In administration context (no provider), check permissions based on offering customer
+  const canUpdateOfferingUser = provider
+    ? hasPermission(user, {
+        permission: PermissionEnum.UPDATE_OFFERING_USER,
+        customerId: provider.customer_uuid,
+      })
+    : hasPermission(user, {
+        permission: PermissionEnum.UPDATE_OFFERING_USER,
+        customerId: row.customer_uuid, // Use the row's customer_uuid for admin context
+      });
+
   return (
     <ActionsDropdown
       row={row}
@@ -46,7 +57,7 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
               offering={offering}
               updateScope="username"
             />
-            {Boolean(provider) && (
+            {(Boolean(provider) || canUpdateOfferingUser) && (
               <>
                 <ProviderOfferingUserUpdateButton
                   {...props}

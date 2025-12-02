@@ -23,7 +23,7 @@ const ProviderOfferingUserUpdateDialog = lazyComponent(() =>
 
 export const ProviderOfferingUserUpdateButton: FC<
   ProviderOfferingUserUpdateDialogProps['resolve'] & {
-    provider: ServiceProvider;
+    provider?: ServiceProvider;
     offering?: PublicOfferingDetails;
   }
 > = (props) => {
@@ -35,7 +35,7 @@ export const ProviderOfferingUserUpdateButton: FC<
       ? props.provider.customer_uuid
       : props.offering
         ? props.offering.customer_uuid
-        : undefined,
+        : props.row.customer_uuid, // Use row's customer_uuid for admin context
   });
 
   const icon =

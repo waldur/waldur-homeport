@@ -58,14 +58,15 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
         },
       ]
     : [];
-  const stateColumn = provider
-    ? [
-        {
-          title: translate('Account state'),
-          render: OfferingUserStateField,
-        },
-      ]
-    : [];
+  const stateColumn =
+    provider || hasOrganizationColumn
+      ? [
+          {
+            title: translate('Account state'),
+            render: OfferingUserStateField,
+          },
+        ]
+      : [];
   const columns = [
     {
       title: translate('Offering'),

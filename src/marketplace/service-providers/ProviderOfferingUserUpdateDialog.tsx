@@ -26,7 +26,7 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { ServiceProvider } from '../types';
 
 const STATE_TRANSITIONS = {
-  'Creation requested': ['Creating', 'OK', 'Error creating'],
+  Requested: ['Creating', 'OK', 'Error creating'],
   Creating: [
     'OK',
     'Pending additional validation',
