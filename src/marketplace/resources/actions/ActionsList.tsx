@@ -24,6 +24,8 @@ import { EditResourceEndDateByStaffAction } from './EditResourceEndDateByStaffAc
 import { PullOrderAction } from './PullOrderAction';
 import { PullResourceAction } from './PullResourceAction';
 import { PullRobotAccounts } from './PullRobotAccounts';
+import { SetDownscaledAction } from './SetDownscaledAction';
+import { SetPausedAction } from './SetPausedAction';
 
 export const ActionsList = [
   EditAction,
@@ -70,6 +72,8 @@ export const StaffActions = [
   MoveResourceAction,
   SetSlugAction,
   EditResourceEndDateByStaffAction,
+  SetDownscaledAction,
+  SetPausedAction,
   // Resource sync actions
   PullResourceAction,
   PullOrderAction,
