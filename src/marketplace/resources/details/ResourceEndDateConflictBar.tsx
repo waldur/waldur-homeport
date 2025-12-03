@@ -1,7 +1,7 @@
 import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
 import { useToggle } from 'react-use';
 
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 
 export const ResourceEndDateConflictBar = () => {
@@ -13,7 +13,7 @@ export const ResourceEndDateConflictBar = () => {
     <div className="bar bg-body border-bottom h-60px">
       <div className="container-fluid w-100 d-flex align-items-center gap-2">
         {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-        <RadarIcon
+        <FeaturedIcon
           IconComponent={WarningCircleIcon}
           variant="warning"
           size="sm"

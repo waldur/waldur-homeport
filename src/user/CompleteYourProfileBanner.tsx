@@ -1,6 +1,6 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 
 export const CompleteYourProfileBanner = () => (
@@ -8,7 +8,7 @@ export const CompleteYourProfileBanner = () => (
     <div className="container-fluid d-flex align-items-center h-100">
       <div className="d-flex align-items-center">
         {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-        <RadarIcon
+        <FeaturedIcon
           IconComponent={WarningCircleIcon}
           variant="warning"
           className="me-2"

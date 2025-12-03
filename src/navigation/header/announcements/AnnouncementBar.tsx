@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 
 import { useTextTruncation } from './useTextTruncation';
@@ -71,7 +71,7 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
         )}
       >
         {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-        <RadarIcon IconComponent={icon} variant={variant} />
+        <FeaturedIcon IconComponent={icon} variant={variant} />
 
         <p
           ref={textRef}

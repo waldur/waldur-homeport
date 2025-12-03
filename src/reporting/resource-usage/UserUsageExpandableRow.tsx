@@ -166,7 +166,7 @@ export const UsageExpandableRow = ({
           />
         </Col>
         <Col sm={6} className="border-sm-start ps-md-9">
-          <Card className="card-bordered rounded-3">
+          <Card className="card-bordered">
             <Card.Body className="p-4">
               <div className="d-flex align-items-center justify-content-between gap-2 text-nowrap flex-wrap">
                 <div>

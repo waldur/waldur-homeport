@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/core/config';
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { setFilterQuery } from '@waldur/table/actions';
@@ -62,7 +62,7 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
       <div className="container-fluid d-flex align-items-center h-100">
         <div className="d-flex align-items-center">
           {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-          <RadarIcon
+          <FeaturedIcon
             IconComponent={WarningCircleIcon}
             variant="warning"
             className="me-2"

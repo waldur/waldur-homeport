@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { CSSProperties, FC, isValidElement, ReactNode } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
-interface RadarIconProps {
+interface FeaturedIconProps {
   IconComponent: Icon | ReactNode;
   variant?: Variant;
   solid?: boolean;
@@ -12,7 +12,7 @@ interface RadarIconProps {
   style?: CSSProperties;
 }
 
-export const RadarIcon: FC<RadarIconProps> = ({
+export const FeaturedIcon: FC<FeaturedIconProps> = ({
   IconComponent,
   variant = 'success',
   solid,
@@ -22,9 +22,9 @@ export const RadarIcon: FC<RadarIconProps> = ({
 }) => (
   <div
     className={classNames(
-      'radar-icon icon-' + variant,
-      solid && 'radar-icon-solid',
-      size && `radar-icon-${size}`,
+      'featured-icon icon-' + variant,
+      solid && 'featured-icon-solid',
+      size && `featured-icon-${size}`,
       className,
     )}
     style={style}
@@ -32,11 +32,11 @@ export const RadarIcon: FC<RadarIconProps> = ({
     <div>
       {isValidElement(IconComponent)
         ? IconComponent
-        : renderIcon(IconComponent as Icon, variant)}
+        : featuredIcon(IconComponent as Icon, variant)}
     </div>
   </div>
 );
 
-const renderIcon = (IconComponent: Icon, variant) => (
+const featuredIcon = (IconComponent: Icon, variant) => (
   <IconComponent weight="bold" className={`text-${variant}`} />
 );

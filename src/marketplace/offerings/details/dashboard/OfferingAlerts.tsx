@@ -8,7 +8,7 @@ import { FC } from 'react';
 import { Offering } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -65,7 +65,7 @@ const OfferingAlertItem: FC<{ row }> = ({ row }) => {
   return (
     <div className="d-flex gap-5 border-bottom pb-5">
       {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      <RadarIcon
+      <FeaturedIcon
         IconComponent={offeringAlertIcon[row.type].icon}
         size="lg"
         variant={offeringAlertIcon[row.type].variant}
