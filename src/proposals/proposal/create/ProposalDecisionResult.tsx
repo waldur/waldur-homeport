@@ -3,8 +3,8 @@ import { FC, useMemo } from 'react';
 import { Button, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { RadarIcon } from '@waldur/core/RadarIcon';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { Proposal, ProposalReview } from '@waldur/proposals/types';
@@ -56,7 +56,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
           {isFinalState ? (
             <div className="d-flex align-items-center">
               {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-              <RadarIcon
+              <FeaturedIcon
                 IconComponent={
                   proposal.state === 'accepted' ? CheckCircleIcon : XCircleIcon
                 }

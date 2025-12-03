@@ -8,7 +8,7 @@ import {
   marketplaceOfferingUsersList,
 } from 'waldur-js-client';
 
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -67,7 +67,7 @@ export const ServiceProviderCommentWarningBar: FC<
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
             {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-            <RadarIcon
+            <FeaturedIcon
               IconComponent={WarningCircleIcon}
               variant="warning"
               size="sm"

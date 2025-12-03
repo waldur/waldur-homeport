@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
 
 interface ModalDialogProps {
@@ -59,7 +59,7 @@ export const ModalDialog: FC<ModalDialogProps> = ({
           {Boolean(iconNode) && (
             <>
               <RadialBg className="icon-background" />
-              <RadarIcon
+              <FeaturedIcon
                 IconComponent={iconNode}
                 variant={iconColor}
                 solid

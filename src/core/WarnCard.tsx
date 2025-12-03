@@ -3,7 +3,7 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { RadarIcon } from './RadarIcon';
+import { FeaturedIcon } from './FeaturedIcon';
 
 interface WarnCardProps {
   title?: ReactNode;
@@ -19,7 +19,7 @@ export const WarnCard: FC<WarnCardProps> = ({
   <Card className={classNames('card-bordered rounded-3', className)}>
     <Card.Body className="d-flex px-2">
       {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      <RadarIcon
+      <FeaturedIcon
         IconComponent={WarningCircleIcon}
         variant="warning"
         className="me-2"

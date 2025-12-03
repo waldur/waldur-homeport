@@ -5,7 +5,7 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 import { PROVIDER_OFFERING_USERS_FORM_ID } from '@waldur/marketplace/service-providers/constants';
 import { router } from '@waldur/router';
@@ -59,7 +59,7 @@ export const OfferingUsersWarningBar: FC = () => {
         <div className="d-flex justify-content-between align-items-center">
           <div className="d-flex align-items-center">
             {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-            <RadarIcon
+            <FeaturedIcon
               IconComponent={WarningCircleIcon}
               variant="warning"
               size="sm"

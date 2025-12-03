@@ -20,6 +20,12 @@ import enforcePhosphorIconWeight from './eslint-rules/enforce-phosphor-icon-weig
 import noTemplateInTranslate from './eslint-rules/no-template-in-translate.js';
 import preferClassnamesUtility from './eslint-rules/prefer-classnames-utility.js';
 
+// Design system rules
+import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
+import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
+import enforceBorderRadiusTokens from './eslint-rules/enforce-border-radius-tokens.js';
+import enforceBreadcrumbColors from './eslint-rules/enforce-breadcrumb-colors.js';
+
 const browserGlobals = {
   ...globals.browser,
   AudioWorkletGlobalScope: false, // this is the default,
@@ -53,6 +59,12 @@ export default tseslint
             'enforce-formcheck-components': enforceFormcheckComponents,
             'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
             'prefer-classnames-utility': preferClassnamesUtility,
+
+            // Design system rules
+            'enforce-featured-icon': enforceFeaturedIcon,
+            'enforce-nav-tabs-pattern': enforceNavTabsPattern,
+            'enforce-border-radius-tokens': enforceBorderRadiusTokens,
+            'enforce-breadcrumb-colors': enforceBreadcrumbColors,
           },
         },
       },
@@ -90,6 +102,12 @@ export default tseslint
         'waldur-custom/enforce-formcheck-components': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
+
+        // Design system rules
+        'waldur-custom/enforce-featured-icon': 'error',
+        'waldur-custom/enforce-nav-tabs-pattern': 'error',
+        'waldur-custom/enforce-border-radius-tokens': 'error',
+        'waldur-custom/enforce-breadcrumb-colors': 'error',
 
         // React Hooks rules
         'react-hooks/rules-of-hooks': 'off',

@@ -1,7 +1,7 @@
 import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { RadarIcon } from '@waldur/core/RadarIcon';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
@@ -18,7 +18,7 @@ export const HiddenActionsMessage: FunctionComponent<
   return (
     <div className="d-flex gap-5 my-5 w-100">
       {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      <RadarIcon
+      <FeaturedIcon
         IconComponent={WarningCircleIcon}
         variant="warning"
         className="me-2"
