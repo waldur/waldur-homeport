@@ -309,6 +309,8 @@ export const UsersEnum = {
   user_deletion_succeeded: 'user_deletion_succeeded',
   user_details_update_succeeded: 'user_details_update_succeeded',
   user_has_been_created_by_staff: 'user_has_been_created_by_staff',
+  user_invitation_deleted: 'user_invitation_deleted',
+  user_invitation_updated: 'user_invitation_updated',
   user_password_updated: 'user_password_updated',
   user_password_updated_by_staff: 'user_password_updated_by_staff',
   user_update_succeeded: 'user_update_succeeded',
