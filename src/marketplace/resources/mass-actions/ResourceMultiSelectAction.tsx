@@ -9,7 +9,9 @@ import { MultiEditOptionsAction } from './MultiEditOptionsAction';
 import { MultiMoveAction } from './MultiMoveAction';
 import { MultiPullAction } from './MultiPullAction';
 import { MultiRestartAction } from './MultiRestartAction';
+import { MultiSetDownscaledAction } from './MultiSetDownscaledAction';
 import { MultiSetErredAction } from './MultiSetErredAction';
+import { MultiSetPausedAction } from './MultiSetPausedAction';
 import { MultiStartAction } from './MultiStartAction';
 import { MultiStopAction } from './MultiStopAction';
 import { MultiUnlinkAction } from './MultiUnlinkAction';
@@ -35,6 +37,8 @@ export const ResourceMultiSelectAction = ({
       {user.is_staff && (
         <>
           <DropdownDivider className="border-top m-0" />
+          <MultiSetDownscaledAction rows={rows} refetch={refetch} />
+          <MultiSetPausedAction rows={rows} refetch={refetch} />
           <MultiSetErredAction rows={rows} refetch={refetch} />
           <MultiUnlinkAction rows={rows} refetch={refetch} />
         </>
