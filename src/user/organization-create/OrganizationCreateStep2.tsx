@@ -42,7 +42,7 @@ export const OrganizationCreateStep2: FunctionComponent<
     useSelector((state) => selector(state, 'uploadedFiles')) || [];
 
   const [addMethod, setAddMethod] = useState<'auto' | 'manual'>(
-    formAddMethod || 'manual',
+    formAddMethod || 'auto',
   );
   const [checklistQuestions, setChecklistQuestions] = useState<
     QuestionWithMetadata[]
@@ -238,29 +238,16 @@ export const OrganizationCreateStep2: FunctionComponent<
                 </div>
               </div>
             ) : (
-              <>
-                <Field
-                  name="registration_code"
-                  label={translate('Registration code')}
-                  placeholder={translate('12345678')}
-                  component={FormGroup}
-                  required
-                  validate={required}
-                >
-                  <StringField />
-                </Field>
-
-                {!loading && checklistQuestions.length > 0 && (
-                  <div className="pt-4">
-                    {checklistQuestions.map((question) => (
-                      <ChecklistQuestionField
-                        key={question.uuid}
-                        question={question}
-                      />
-                    ))}
-                  </div>
-                )}
-              </>
+              <Field
+                name="registration_code"
+                label={translate('Registration code')}
+                placeholder={translate('12345678')}
+                component={FormGroup}
+                required
+                validate={required}
+              >
+                <StringField />
+              </Field>
             )}
           </Card.Body>
         </Card>
