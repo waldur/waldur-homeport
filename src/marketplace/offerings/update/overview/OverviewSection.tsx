@@ -23,7 +23,7 @@ import { OfferingMediaButton } from './OfferingMediaButton';
 import { SetAccessPolicyButton } from './SetAccessPolicyButton';
 import { Attribute } from './types';
 
-const attributes: Attribute[] = [
+const detailsAttributes: Attribute[] = [
   {
     key: 'name',
     title: translate('Name'),
@@ -67,6 +67,17 @@ const attributes: Attribute[] = [
       'Provide the URL users will use to access the offering.',
     ),
   },
+];
+
+const identifiersAttributes: Attribute[] = [
+  {
+    key: 'backend_id',
+    title: translate('Backend ID'),
+    type: 'string',
+    description: translate(
+      'Unique identifier for the backend system associated with this offering.',
+    ),
+  },
   {
     key: 'slug',
     title: translate('Slug'),
@@ -100,178 +111,228 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
   }, [props.offering.compliance_checklist, refetch]);
 
   return (
-    <FormTable.Card
-      title={translate('General')}
-      loading={props.loading}
-      refetch={props.refetch}
-      className="card-bordered"
-    >
-      <FormTable>
-        {attributes.map((attribute, attributeIndex) => (
-          <FormTable.Item
-            key={attributeIndex}
-            label={attribute.title}
-            value={
-              attribute.type === 'html' ? (
-                <FormattedHtml html={props.offering[attribute.key]} />
-              ) : (
-                props.offering[attribute.key] || 'N/A'
-              )
-            }
-            description={attribute.description}
-            actions={
-              <>
-                {props.offering.type === REMOTE_OFFERING_TYPE ? (
-                  <Tip
-                    label={translate(
-                      'Field is synchronised from the remote offering',
-                    )}
-                    id={`remote-offering-tip-${attribute.key}`}
-                  >
+    <>
+      <FormTable.Card
+        title={translate('General')}
+        loading={props.loading}
+        refetch={props.refetch}
+        className="card-bordered mb-5"
+      >
+        <FormTable>
+          {detailsAttributes.map((attribute, attributeIndex) => (
+            <FormTable.Item
+              key={attributeIndex}
+              label={attribute.title}
+              value={
+                attribute.type === 'html' ? (
+                  <FormattedHtml html={props.offering[attribute.key]} />
+                ) : (
+                  props.offering[attribute.key] || 'N/A'
+                )
+              }
+              description={attribute.description}
+              actions={
+                <>
+                  {props.offering.type === REMOTE_OFFERING_TYPE ? (
+                    <Tip
+                      label={translate(
+                        'Field is synchronised from the remote offering',
+                      )}
+                      id={`remote-offering-tip-${attribute.key}`}
+                    >
+                      <EditOverviewButton
+                        offering={props.offering}
+                        refetch={props.refetch}
+                        attribute={attribute}
+                        disabled={true}
+                      />
+                    </Tip>
+                  ) : (
                     <EditOverviewButton
                       offering={props.offering}
                       refetch={props.refetch}
                       attribute={attribute}
-                      disabled={true}
                     />
-                  </Tip>
-                ) : (
-                  <EditOverviewButton
-                    offering={props.offering}
-                    refetch={props.refetch}
-                    attribute={attribute}
-                  />
-                )}
-              </>
+                  )}
+                </>
+              }
+              warnTooltip={attribute.required && attribute.requiredMsg}
+            />
+          ))}
+          <FormTable.Item
+            key="location"
+            label={translate('Location')}
+            value={
+              <CheckOrX
+                value={props.offering.latitude && props.offering.longitude}
+              />
             }
-            warnTooltip={attribute.required && attribute.requiredMsg}
+            description={translate('Specify where the offering is hosted.')}
+            actions={
+              <OfferingLocationButton
+                offering={props.offering}
+                refetch={props.refetch}
+              />
+            }
           />
-        ))}
-        <FormTable.Item
-          key="location"
-          label={translate('Location')}
-          value={
-            <CheckOrX
-              value={props.offering.latitude && props.offering.longitude}
-            />
-          }
-          description={translate('Specify where the offering is hosted.')}
-          actions={
-            <OfferingLocationButton
-              offering={props.offering}
-              refetch={props.refetch}
-            />
-          }
-        />
 
-        <FormTable.Item
-          key="access_policies"
-          label={translate('Access policies')}
-          value={
-            props.offering.organization_groups?.length > 0
-              ? props.offering.organization_groups
-                  .map(({ name }) => name)
-                  .join(', ')
-              : 'N/A'
-          }
-          description={translate(
-            'Define the organization groups that are allowed to access the offering.',
-          )}
-          actions={
-            <SetAccessPolicyButton
-              offering={props.offering}
-              refetch={props.refetch}
-            />
-          }
-        />
+          <FormTable.Item
+            key="access_policies"
+            label={translate('Access policies')}
+            value={
+              props.offering.organization_groups?.length > 0
+                ? props.offering.organization_groups
+                    .map(({ name }) => name)
+                    .join(', ')
+                : 'N/A'
+            }
+            description={translate(
+              'Define the organization groups that are allowed to access the offering.',
+            )}
+            actions={
+              <SetAccessPolicyButton
+                offering={props.offering}
+                refetch={props.refetch}
+              />
+            }
+          />
 
-        <FormTable.Item
-          key="logo"
-          label={translate('Logo')}
-          value={<CheckOrX value={props.offering.thumbnail} />}
-          description={translate(
-            'Upload an image to represent the offering visually.',
-          )}
-          actions={
-            <OfferingMediaButton
-              offering={props.offering}
-              refetch={props.refetch}
-              mediaType="thumbnail"
-            />
-          }
-        />
+          <FormTable.Item
+            key="logo"
+            label={translate('Logo')}
+            value={<CheckOrX value={props.offering.thumbnail} />}
+            description={translate(
+              'Upload an image to represent the offering visually.',
+            )}
+            actions={
+              <OfferingMediaButton
+                offering={props.offering}
+                refetch={props.refetch}
+                mediaType="thumbnail"
+              />
+            }
+          />
 
-        <FormTable.Item
-          key="image"
-          label={translate('Image')}
-          value={<CheckOrX value={props.offering.image} />}
-          description={translate('Upload a background image for the offering.')}
-          actions={
-            <OfferingMediaButton
-              offering={props.offering}
-              refetch={props.refetch}
-              mediaType="image"
-            />
-          }
-        />
+          <FormTable.Item
+            key="image"
+            label={translate('Image')}
+            value={<CheckOrX value={props.offering.image} />}
+            description={translate(
+              'Upload a background image for the offering.',
+            )}
+            actions={
+              <OfferingMediaButton
+                offering={props.offering}
+                refetch={props.refetch}
+                mediaType="image"
+              />
+            }
+          />
 
-        <FormTable.Item
-          key="getting_started"
-          label={translate('Getting started instructions')}
-          value={<CheckOrX value={props.offering.getting_started} />}
-          description={translate(
-            'Provide steps to help users begin using the offering.',
-          )}
-          actions={
-            <EditGettingStartedButton
-              offering={props.offering}
-              refetch={props.refetch}
-            />
-          }
-        />
+          <FormTable.Item
+            key="getting_started"
+            label={translate('Getting started instructions')}
+            value={<CheckOrX value={props.offering.getting_started} />}
+            description={translate(
+              'Provide steps to help users begin using the offering.',
+            )}
+            actions={
+              <EditGettingStartedButton
+                offering={props.offering}
+                refetch={props.refetch}
+              />
+            }
+          />
 
-        <FormTable.Item
-          label={translate('Compliance checklist')}
-          value={
-            props.offering.has_compliance_requirements ? (
-              <>
-                {!checklist && (
-                  <CheckIcon weight="bold" className="text-info" />
-                )}
-                {isLoading ? (
-                  // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-                  <LoadingSpinnerIcon />
-                ) : error ? (
-                  <LoadingErred
-                    loadData={refetch}
-                    className="d-inline-flex flex-center gap-4 ms-4"
-                  />
-                ) : checklist ? (
-                  <>
-                    {checklist.name}
-                    <span className="text-muted ms-2">
-                      (
-                      {translate('{count} questions', {
-                        count: checklist.questions_count,
-                      })}
-                      )
-                    </span>
-                  </>
-                ) : null}
-              </>
-            ) : (
-              'N/A'
-            )
-          }
-          actions={
-            <EditChecklistButton
-              offering={props.offering}
-              checklist={checklist}
-              refetch={props.refetch}
+          <FormTable.Item
+            label={translate('Compliance checklist')}
+            value={
+              props.offering.has_compliance_requirements ? (
+                <>
+                  {!checklist && (
+                    <CheckIcon weight="bold" className="text-info" />
+                  )}
+                  {isLoading ? (
+                    // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
+                    <LoadingSpinnerIcon />
+                  ) : error ? (
+                    <LoadingErred
+                      loadData={refetch}
+                      className="d-inline-flex flex-center gap-4 ms-4"
+                    />
+                  ) : checklist ? (
+                    <>
+                      {checklist.name}
+                      <span className="text-muted ms-2">
+                        (
+                        {translate('{count} questions', {
+                          count: checklist.questions_count,
+                        })}
+                        )
+                      </span>
+                    </>
+                  ) : null}
+                </>
+              ) : (
+                'N/A'
+              )
+            }
+            actions={
+              <EditChecklistButton
+                offering={props.offering}
+                checklist={checklist}
+                refetch={props.refetch}
+              />
+            }
+          />
+        </FormTable>
+      </FormTable.Card>
+
+      <FormTable.Card
+        title={translate('Identifiers')}
+        className="card-bordered mb-5"
+      >
+        <FormTable>
+          <FormTable.Item
+            label={translate('UUID')}
+            value={props.offering.uuid}
+          />
+          {identifiersAttributes.map((attribute, attributeIndex) => (
+            <FormTable.Item
+              key={attributeIndex}
+              label={attribute.title}
+              value={props.offering[attribute.key] || 'N/A'}
+              description={attribute.description}
+              actions={
+                <>
+                  {props.offering.type === REMOTE_OFFERING_TYPE ? (
+                    <Tip
+                      label={translate(
+                        'Field is synchronised from the remote offering',
+                      )}
+                      id={`remote-offering-tip-${attribute.key}`}
+                    >
+                      <EditOverviewButton
+                        offering={props.offering}
+                        refetch={props.refetch}
+                        attribute={attribute}
+                        disabled={true}
+                      />
+                    </Tip>
+                  ) : (
+                    <EditOverviewButton
+                      offering={props.offering}
+                      refetch={props.refetch}
+                      attribute={attribute}
+                    />
+                  )}
+                </>
+              }
+              warnTooltip={attribute.required && attribute.requiredMsg}
             />
-          }
-        />
-      </FormTable>
-    </FormTable.Card>
+          ))}
+        </FormTable>
+      </FormTable.Card>
+    </>
   );
 };

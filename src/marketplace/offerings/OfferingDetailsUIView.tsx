@@ -59,9 +59,9 @@ const OfferingPermissionsList = lazyComponent(() =>
     default: module.OfferingPermissionsList,
   })),
 );
-const OfferingCustomersList = lazyComponent(() =>
-  import('./expandable/OfferingCustomersList').then((module) => ({
-    default: module.OfferingCustomersList,
+const OfferingCustomers = lazyComponent(() =>
+  import('./details/OfferingCustomers').then((module) => ({
+    default: module.OfferingCustomers,
   })),
 );
 const OfferingCostsChart = lazyComponent(() =>
@@ -87,6 +87,11 @@ const OfferingUsagePolicies = lazyComponent(() =>
 const OfferingEventsList = lazyComponent(() =>
   import('./expandable/OfferingEventsList').then((module) => ({
     default: module.OfferingEventsList,
+  })),
+);
+const SlurmPolicySection = lazyComponent(() =>
+  import('./update/policies/SlurmPolicySection').then((module) => ({
+    default: module.SlurmPolicySection,
   })),
 );
 
@@ -118,16 +123,54 @@ const getTabs = (offering: Offering): PageBarTab[] => {
     {
       title: translate('Resources'),
       key: 'resources',
-      component: OfferingResourcesList,
+      defaultKey: 'resources-list',
+      children: [
+        {
+          key: 'resources-list',
+          title: translate('Resources'),
+          component: OfferingResourcesList,
+          visible: true,
+        },
+        !isFeatureVisible(MarketplaceFeatures.catalogue_only) && {
+          key: 'orders',
+          title: translate('Orders'),
+          component: OfferingOrdersList,
+          visible: true,
+        },
+      ].filter(Boolean),
     },
-    !isFeatureVisible(MarketplaceFeatures.catalogue_only) && {
-      title: translate('Orders'),
-      key: 'orders',
-      component: OfferingOrdersList,
+    {
+      title: translate('Accounting'),
+      key: 'accounting',
+      defaultKey:
+        offering.type !== OFFERING_TYPE_BOOKING && offering.billable
+          ? 'plans'
+          : 'costs',
+      children: [
+        offering.type !== OFFERING_TYPE_BOOKING && offering.billable
+          ? {
+              key: 'plans',
+              title: translate('Plans'),
+              component: PlanUsageList,
+              visible: true,
+            }
+          : null,
+        {
+          key: 'costs',
+          title: translate('Costs'),
+          component: OfferingCostsChart,
+          visible: true,
+        },
+        offering.components.length > 0
+          ? {
+              key: 'component-usage',
+              title: translate('Component usage'),
+              component: OfferingUsageChart,
+              visible: true,
+            }
+          : null,
+      ].filter(Boolean),
     },
-    offering.type !== OFFERING_TYPE_BOOKING && offering.billable
-      ? { title: translate('Plans'), key: 'plans', component: PlanUsageList }
-      : null,
     {
       title: translate('Users'),
       key: 'users',
@@ -139,22 +182,10 @@ const getTabs = (offering: Offering): PageBarTab[] => {
       component: OfferingPermissionsList,
     },
     {
-      title: translate('Organizations'),
-      key: 'organizations',
-      component: OfferingCustomersList,
+      title: translate('Customers'),
+      key: 'customers',
+      component: OfferingCustomers,
     },
-    {
-      title: translate('Costs'),
-      key: 'costs',
-      component: OfferingCostsChart,
-    },
-    offering.components.length > 0
-      ? {
-          title: translate('Component usage'),
-          key: 'component-usage',
-          component: OfferingUsageChart,
-        }
-      : null,
     {
       title: translate('Policy'),
       key: 'policy',
@@ -164,13 +195,19 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           key: 'cost-policy',
           title: translate('Cost policy'),
           component: OfferingCostPolicies,
-          visible: false,
+          visible: true,
         },
         {
           key: 'usage-policy',
           title: translate('Usage policy'),
           component: OfferingUsagePolicies,
-          visible: false,
+          visible: true,
+        },
+        {
+          key: 'slurm-policy',
+          title: translate('SLURM policy'),
+          component: SlurmPolicySection,
+          visible: true,
         },
       ],
     },
