@@ -35,6 +35,7 @@ interface WizardFormContainerProps {
     headerClassName?: string;
     bodyClassName?: string;
   };
+  onCancel?(): void;
 }
 
 export const WizardFormContainer: FC<WizardFormContainerProps> = ({
@@ -108,5 +109,6 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
     reinitialize,
     validate: props.validate,
     modalProps: props.modalProps,
+    onCancel: props.onCancel,
   });
 };

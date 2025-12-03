@@ -1,6 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
 import { ProgressStep } from '@waldur/core/ProgressSteps';
@@ -8,6 +8,7 @@ import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { useNotify } from '@waldur/store/hooks';
 
 import { ORGANIZATION_ONBOARDING_FORM_ID } from '../constants';
@@ -26,6 +27,7 @@ import {
 
 export const OrganizationCreatePage: FC = () => {
   const router = useRouter();
+  const dispatch = useDispatch();
   const { showSuccess, showErrorResponse } = useNotify();
 
   const selector = formValueSelector(ORGANIZATION_ONBOARDING_FORM_ID);
@@ -159,6 +161,17 @@ export const OrganizationCreatePage: FC = () => {
     [isManual],
   );
 
+  const handleCancel = useCallback(async () => {
+    await waitForConfirmation(
+      dispatch,
+      translate('Cancel organization creation'),
+      translate(
+        'Are you sure you want to cancel? All entered data will be lost.',
+      ),
+    );
+    router.stateService.go('profile.details');
+  }, [dispatch, router]);
+
   const createOnboardingVerification = useCallback(
     async (formData, _dispatch, formProps) => {
       try {
@@ -242,6 +255,7 @@ export const OrganizationCreatePage: FC = () => {
             submitLabel={translate('Create')}
             nextLabel={translate('Next')}
             verticalLayout={true}
+            onCancel={handleCancel}
           />
         )}
       </div>
