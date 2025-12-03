@@ -37,6 +37,7 @@ export interface WizardFormStepProps
   data?: any;
   reinitialize(): void;
   modalProps?: Record<string, any>;
+  onCancel?(): void;
 }
 
 interface WizardFormProps extends WizardFormStepProps, InjectedFormProps {
@@ -114,7 +115,15 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
                 {translate('Back')}
               </Button>
               <div className="d-flex gap-3">
-                <CloseDialogButton className="min-w-125px" />
+                {props.onCancel && (
+                  <Button
+                    variant="tertiary"
+                    className="min-w-125px"
+                    onClick={props.onCancel}
+                  >
+                    {translate('Cancel')}
+                  </Button>
+                )}
                 {props.actions}
                 {typeof props.actions === 'function'
                   ? props.actions({ formValues })
