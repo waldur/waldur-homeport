@@ -27,6 +27,7 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
     table: 'OfferingUsersList',
     fetchData: createFetcher(marketplaceOfferingUsersList),
     filter,
+    queryField: 'query',
   });
   const columns = [
     {
@@ -78,6 +79,7 @@ export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
         />
       )}
       expandableRow={OfferingUsersExpandableRow}
+      hasQuery={true}
     />
   );
 };
