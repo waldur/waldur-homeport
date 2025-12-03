@@ -554,6 +554,24 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-onboarding-justification-details',
+    url: 'onboarding/justifications/:uuid/',
+    parent: 'admin-organizations',
+    component: lazyComponent(() =>
+      import('./organizations/OnboardingJustificationDetailsPage').then(
+        (module) => ({
+          default: module.OnboardingJustificationDetailsPage,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Justification details'),
+      skipBreadcrumb: true,
+      permissions: [isStaff],
+    },
+  },
+
+  {
     name: 'admin-identity',
     url: 'identity/',
     parent: 'admin-settings',
