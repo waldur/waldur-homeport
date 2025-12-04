@@ -24,11 +24,15 @@ export const ResourceComponentUserUsageTable = (props) => {
       billing_period_year: filterForm?.billing_period?.value.year,
       resource_uuid: props.resource.resource_uuid,
     };
+    if (props.offeringComponent?.type) {
+      result.type = props.offeringComponent.type;
+    }
     return result;
   }, [
     props.resource.resource_uuid,
     filterForm?.username,
     filterForm?.billing_period,
+    props.offeringComponent?.type,
   ]);
 
   const tableProps = useTable({
