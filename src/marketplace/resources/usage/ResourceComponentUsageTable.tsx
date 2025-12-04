@@ -15,8 +15,11 @@ export const ResourceComponentUsageTable = (props) => {
     const result: MarketplaceComponentUsagesListData['query'] = {
       resource_uuid: props.resource.resource_uuid,
     };
+    if (props.offeringComponent?.type) {
+      result.type = props.offeringComponent.type;
+    }
     return result;
-  }, [props.resource]);
+  }, [props.resource.resource_uuid, props.offeringComponent?.type]);
 
   const tableProps = useTable({
     table: 'ResourceUsageTable',
