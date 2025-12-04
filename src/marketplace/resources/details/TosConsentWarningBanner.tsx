@@ -1,7 +1,9 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
@@ -28,6 +30,17 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
 }) => {
   const user = useUser();
   const dispatch = useDispatch();
+  const { data: hasActiveTos = false } = useQuery({
+    queryKey: ['offering-active-tos', offering.uuid],
+    enabled: Boolean(offering?.uuid),
+    queryFn: async () => {
+      const response = await marketplaceOfferingTermsOfServiceList({
+        query: { offering_uuid: offering.uuid!, is_active: true },
+      });
+      return (response.data?.length || 0) > 0;
+    },
+    staleTime: 5 * 60 * 1000,
+  });
   const handleViewTos = () => {
     router.stateService.go('profile.tos-management').then(() => {
       setTimeout(() => {
@@ -46,10 +59,12 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
       !user.is_staff &&
       enforceConsent &&
       canCreateUser &&
+      hasActiveTos &&
       userHasConsent === false
     );
   }, [
     offering.plugin_options?.service_provider_can_create_offering_user,
+    hasActiveTos,
     userHasConsent,
   ]);
 
