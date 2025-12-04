@@ -36,6 +36,7 @@ interface WizardFormContainerProps {
     bodyClassName?: string;
   };
   onCancel?(): void;
+  skipSteps?: number[];
 }
 
 export const WizardFormContainer: FC<WizardFormContainerProps> = ({
@@ -47,15 +48,32 @@ export const WizardFormContainer: FC<WizardFormContainerProps> = ({
   const [step, setStep] = useState(0);
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
   const isLast = step === props.steps.length - 1;
+  const skipSteps = props.skipSteps || [];
+
   const nextStep = () => {
-    setStep(step + 1);
-    if (step + 1 > lastVisitedStep) {
-      setLastVisitedStep(step + 1);
+    let nextStepIndex = step + 1;
+    while (
+      skipSteps.includes(nextStepIndex) &&
+      nextStepIndex < props.steps.length
+    ) {
+      nextStepIndex++;
+    }
+    setStep(nextStepIndex);
+    if (nextStepIndex > lastVisitedStep) {
+      setLastVisitedStep(nextStepIndex);
     }
   };
-  const prevStep = () => setStep(step - 1);
+
+  const prevStep = () => {
+    let prevStepIndex = step - 1;
+    while (skipSteps.includes(prevStepIndex) && prevStepIndex >= 0) {
+      prevStepIndex--;
+    }
+    setStep(Math.max(0, prevStepIndex));
+  };
+
   const selectStep = (num: number) => {
-    if (num <= lastVisitedStep) setStep(num);
+    if (num <= lastVisitedStep && !skipSteps.includes(num)) setStep(num);
   };
   const _submitLabel = isLast ? submitLabel : nextLabel;
 
