@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
@@ -55,39 +55,6 @@ export const OrganizationCreatePage: FC = () => {
     [runAutoValidation],
   );
 
-  // Create a wrapper for Step 3 that auto-advances when manual mode
-  const Step3Wrapper: FC<any> = useCallback(
-    (props) => {
-      const currentAddMethod = useSelector((state) =>
-        selector(state, 'addMethod'),
-      );
-
-      // Auto-advance if manual mode
-      useEffect(() => {
-        if (currentAddMethod === 'manual' && props.onSubmit) {
-          const timer = setTimeout(() => {
-            props.onSubmit({}, null, {});
-          }, 100);
-          return () => clearTimeout(timer);
-        }
-      }, [currentAddMethod, props.onSubmit]);
-
-      // If manual mode, return null to skip rendering
-      if (currentAddMethod === 'manual') {
-        return null;
-      }
-
-      return (
-        <OrganizationCreateStep3
-          {...props}
-          validationResult={validationResult}
-          validationLoading={validationLoading}
-        />
-      );
-    },
-    [validationResult, validationLoading],
-  );
-
   // Wrapper for Step 2 to handle auto-validation requests on submit
   const Step2Wrapper: FC<any> = useCallback(
     (props) => {
@@ -107,6 +74,20 @@ export const OrganizationCreatePage: FC = () => {
       );
     },
     [handleStep2Submit, getChecklistData],
+  );
+
+  // Wrapper for Step 3 to pass validation data
+  const Step3Wrapper: FC<any> = useCallback(
+    (props) => {
+      return (
+        <OrganizationCreateStep3
+          {...props}
+          validationResult={validationResult}
+          validationLoading={validationLoading}
+        />
+      );
+    },
+    [validationResult, validationLoading],
   );
 
   // Wrapper for Step 4 to pass checklist data
@@ -256,6 +237,7 @@ export const OrganizationCreatePage: FC = () => {
             nextLabel={translate('Next')}
             verticalLayout={true}
             onCancel={handleCancel}
+            skipSteps={isManual ? [2] : []}
           />
         )}
       </div>
