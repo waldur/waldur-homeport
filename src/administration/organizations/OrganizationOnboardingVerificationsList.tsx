@@ -13,8 +13,8 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { OnboardingExpandableRow } from './OnboardingExpandableRow';
 import { OnboardingVerificationActions } from './OnboardingVerificationActions';
+import { OnboardingVerificationExpandableRow } from './OnboardingVerificationExpandableRow';
 
 const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
   status,
@@ -88,7 +88,7 @@ export const OrganizationOnboardingVerificationsList: FC = () => {
       ]}
       hasQuery
       rowActions={OnboardingVerificationActions}
-      expandableRow={OnboardingExpandableRow}
+      expandableRow={OnboardingVerificationExpandableRow}
     />
   );
 };

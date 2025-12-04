@@ -227,3 +227,12 @@ export const detectOS = () => {
   }
   return os;
 };
+
+export const decodeFileName = (fileName: string) => {
+  return decodeURIComponent(
+    fileName
+      .split('/')
+      .pop()
+      .replace(/_[^_]+\./, '.'),
+  );
+};

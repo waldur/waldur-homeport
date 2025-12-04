@@ -1,15 +1,16 @@
 import { FC } from 'react';
+import { OnboardingVerification } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
-export const OnboardingExpandableRow: FC = ({ row }: any) => {
+export const OnboardingVerificationExpandableRow: FC<{
+  row: OnboardingVerification;
+}> = ({ row }) => {
   const message = row.error_message;
   const traceback = row.error_traceback;
-  const supportingDocs = row.supporting_documentation;
-
-  if (!message && !traceback && !supportingDocs?.length) {
+  if (!message && !traceback) {
     return null;
   }
 

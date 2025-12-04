@@ -13,8 +13,8 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { OnboardingExpandableRow } from './OnboardingExpandableRow';
 import { OnboardingJustificationActions } from './OnboardingJustificationActions';
+import { OnboardingJustificationExpandableRow } from './OnboardingJustificationExpandableRow';
 
 const DecisionBadge: FC<{ decision: ValidationDecisionEnum }> = ({
   decision,
@@ -82,7 +82,7 @@ export const OrganizationOnboardingJustificationsList: FC = () => {
       hasQuery={true}
       showPageSizeSelector={true}
       rowActions={OnboardingJustificationActions}
-      expandableRow={OnboardingExpandableRow}
+      expandableRow={OnboardingJustificationExpandableRow}
     />
   );
 };
