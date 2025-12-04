@@ -105,12 +105,13 @@ const DynamicResourceSummary: FunctionComponent<{ row }> = ({ row }) => {
 
 export const ExpandableResourceSummary: FunctionComponent<{
   row: Resource;
-}> = ({ row }) => (
+  context?: 'provider' | 'customer';
+}> = ({ row, context = 'customer' }) => (
   <>
     {(row.is_limit_based || row.is_usage_based) &&
       !(row.resource_type || '').startsWith('OpenStack') && (
         <ExpandableContainer hasMultiSelect>
-          <ResourceComponentsSummary resource={row} />
+          <ResourceComponentsSummary resource={row} context={context} />
         </ExpandableContainer>
       )}
     {!row.scope ||

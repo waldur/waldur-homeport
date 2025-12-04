@@ -80,6 +80,10 @@ const ResourceField = ({ row }) => {
   );
 };
 
+const ProviderExpandableResourceSummary: FunctionComponent<{
+  row: Resource;
+}> = (props) => <ExpandableResourceSummary {...props} context="provider" />;
+
 const TableComponent: FunctionComponent<any> = (props) => {
   React.useEffect(() => {
     props.resetPagination();
@@ -251,7 +255,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       hasQuery={true}
       hasOptionalColumns
       showPageSizeSelector={true}
-      expandableRow={ExpandableResourceSummary}
+      expandableRow={ProviderExpandableResourceSummary}
       rowActions={({ row }) => (
         <ProviderResourceActions resource={row} refetch={props.fetch} />
       )}
