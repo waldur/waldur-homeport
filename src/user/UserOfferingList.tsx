@@ -9,6 +9,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
 import { PROVIDER_OFFERING_USERS_FORM_ID } from '@waldur/marketplace/service-providers/constants';
+import { OfferingUsersExpandableRow } from '@waldur/marketplace/service-providers/offering-users/OfferingUsersExpandableRow';
 import { ProviderOfferingUsersFilter } from '@waldur/marketplace/service-providers/offering-users/ProviderOfferingUsersFilter';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
@@ -80,6 +81,7 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
       hasQuery={true}
       hasActionBar={hasActionBar}
       filters={<ProviderOfferingUsersFilter hasOrganizationColumn={true} />}
+      expandableRow={OfferingUsersExpandableRow}
     />
   );
 };
