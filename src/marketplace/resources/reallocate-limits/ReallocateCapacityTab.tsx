@@ -11,11 +11,12 @@ import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { Limits } from '@waldur/marketplace/common/types';
 import { formatResourceShort } from '@waldur/marketplace/utils';
 
+import { FetchedData } from '../change-limits/utils';
+
 import { REALLOCATE_LIMITS_FORM_ID } from './constants';
 import { ResourceSelectionTable } from './ResourceSelectionTable';
 import { ResourceSelection } from './types';
 import { calculateFreedCapacity } from './utils';
-import { FetchedData } from './utils';
 
 interface ReallocateCapacityTabProps {
   context: {

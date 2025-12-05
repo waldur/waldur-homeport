@@ -8,6 +8,7 @@ import { MultiDestroyAction } from './MultiDestroyAction';
 import { MultiEditOptionsAction } from './MultiEditOptionsAction';
 import { MultiMoveAction } from './MultiMoveAction';
 import { MultiPullAction } from './MultiPullAction';
+import { MultiRenewAllocationsAction } from './MultiRenewAllocationsAction';
 import { MultiRestartAction } from './MultiRestartAction';
 import { MultiSetDownscaledAction } from './MultiSetDownscaledAction';
 import { MultiSetErredAction } from './MultiSetErredAction';
@@ -26,6 +27,7 @@ export const ResourceMultiSelectAction = ({
   const user = useUser();
   return (
     <DropdownButton variant="primary" title={translate('All actions')}>
+      <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
       <MultiEditOptionsAction rows={rows} refetch={refetch} />
       <MultiStopAction rows={rows} refetch={refetch} />
       <MultiStartAction rows={rows} refetch={refetch} />

@@ -189,6 +189,11 @@
     }
   }
 
+  tfoot > tr {
+    background-color: $bg-secondary;
+    border-top: 1px solid $border-color;
+  }
+
   // Pinned columns + Shadow
   th.pinned,
   td.pinned {

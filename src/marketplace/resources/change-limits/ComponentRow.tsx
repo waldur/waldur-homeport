@@ -1,10 +1,13 @@
 import { CaretDownIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Form, InputGroup } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+import { Field as FinalFormField } from 'react-final-form';
 import { useBoolean } from 'react-use';
 import { Field as FormField } from 'redux-form';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { composeValidators } from '@waldur/core/validators';
+import { NumberField } from '@waldur/form';
 import { Limits } from '@waldur/marketplace/common/types';
 import {
   parseIntField,
@@ -24,6 +27,9 @@ interface ComponentRowProps {
   limits: Limits;
   periods: string[];
   periodsCountToShow: number;
+  /** For nested fields */
+  parentName?: string;
+  finalForm?: boolean;
 }
 
 const CellWrapper: FC<any> = (props) => (
@@ -35,20 +41,12 @@ const CellWrapper: FC<any> = (props) => (
         onChange={(value) => props.input.onChange(value ? 1 : 0)}
       />
     ) : (
-      <InputGroup>
-        <Form.Control
-          type="number"
-          min={props.limits.min}
-          max={props.limits.max}
-          {...props.input}
-        />
-
-        {props.offeringComponent.measured_unit ? (
-          <InputGroup.Text>
-            {props.offeringComponent.measured_unit}
-          </InputGroup.Text>
-        ) : null}
-      </InputGroup>
+      <NumberField
+        input={props.input}
+        unit={props.offeringComponent.measured_unit}
+        min={props.limits.min}
+        max={props.limits.max}
+      />
     )}
   </Form.Group>
 );
@@ -59,9 +57,13 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   shouldConcealPrices,
   periods,
   periodsCountToShow,
+  parentName,
+  finalForm,
 }) => {
   const [toggled, setToggle] = useBoolean(false);
   const canExpand = component.prices.length > periodsCountToShow;
+
+  const FieldComponent: any = finalForm ? FinalFormField : FormField;
 
   return (
     <>
@@ -79,11 +81,15 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         </td>
         <td>{component.usage || 'N/A'}</td>
         <td>{component.limit || 'N/A'}</td>
-        <FormField
-          name={`limits.${component.type}`}
+        <FieldComponent
+          name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
           parse={parseIntField}
           format={formatIntField}
-          validate={getResourceComponentValidator(limits)}
+          validate={
+            finalForm
+              ? composeValidators(...getResourceComponentValidator(limits))
+              : getResourceComponentValidator(limits)
+          }
           min={0}
           component={CellWrapper}
           offeringComponent={component}

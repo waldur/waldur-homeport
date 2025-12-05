@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
+import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
 interface ChangedLimitFieldProps {
   changedLimit: number;
@@ -9,17 +9,15 @@ interface ChangedLimitFieldProps {
 export const ChangedLimitField: FunctionComponent<ChangedLimitFieldProps> = ({
   changedLimit,
 }) => {
-  if (changedLimit === 0) {
-    return <span className="text-muted">{changedLimit}</span>;
-  }
-
-  const variant = changedLimit < 0 ? 'danger' : 'success';
-  const displayValue =
-    changedLimit > 0 ? `+${changedLimit}` : String(changedLimit);
-
   return (
-    <Badge variant={variant} pill outline>
-      {displayValue}
-    </Badge>
+    <ChangesAmountBadge
+      changes={changedLimit}
+      badgePill
+      badgeOutline
+      keepDecimals
+      showSign
+      showOnZero
+      unit={null}
+    />
   );
 };

@@ -1,7 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import React, { FunctionComponent } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { Col, ColProps, Row } from 'react-bootstrap';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { Tip } from '@waldur/core/Tooltip';
@@ -20,8 +20,9 @@ interface FieldProps {
   valueClass?: string;
   hasCopy?: boolean;
   isStuck?: boolean;
-  labelCol?: number;
-  valueCol?: number;
+  labelCol?: number | 'auto';
+  valueCol?: number | 'auto';
+  xs?: ColProps['xs'];
   space?: number;
 }
 
@@ -38,6 +39,7 @@ export const Field: FunctionComponent<FieldProps> = ({
       )}
     >
       <Col
+        xs={props.xs}
         sm={props.isStuck ? 'auto' : props.labelCol || 3}
         className={classNames(
           'field-label text-gray-700 fw-bold',
@@ -53,6 +55,7 @@ export const Field: FunctionComponent<FieldProps> = ({
         )}
       </Col>
       <Col
+        xs={props.xs}
         sm={props.isStuck ? undefined : props.valueCol || 9}
         className={classNames('text-gray-500', props.valueClass)}
       >
