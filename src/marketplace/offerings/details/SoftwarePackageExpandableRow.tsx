@@ -31,15 +31,16 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
         if (!version.targets || version.targets.length === 0) return false;
 
         // Check if version has targets matching enabled cpu family/microarchitectures
-        return version.targets.some(
-          (target) =>
+        // Parse target_name which should be in format "cpu_family/microarchitecture"
+        return version.targets.some((target) => {
+          const [cpuFamily, microArch] = target.target_name?.split('/') || [];
+          return (
             (enabledCpuFamily.length === 0 ||
-              enabledCpuFamily.includes(target.cpu_family)) &&
+              enabledCpuFamily.includes(cpuFamily)) &&
             (enabledCpuMicroarchitectures.length === 0 ||
-              enabledCpuMicroarchitectures.includes(
-                target.cpu_microarchitecture,
-              )),
-        );
+              enabledCpuMicroarchitectures.includes(microArch))
+          );
+        });
       })
       .sort((a, b) => {
         // Sort by version string (latest to oldest)
@@ -70,15 +71,74 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
           value={
             <div className="mt-2">
               {filteredVersions.map((version) => (
-                <div key={version.uuid} className="mb-2 p-2 border rounded">
-                  <div className="fw-bold">
+                <div key={version.uuid} className="mb-3 p-3 border rounded">
+                  <div className="d-flex justify-content-between align-items-start mb-2">
+                    <div className="fw-bold text-primary fs-6">
+                      {version.version}
+                    </div>
+                    {version.release_date && (
+                      <small className="text-muted">
+                        {new Date(version.release_date).toLocaleDateString()}
+                      </small>
+                    )}
+                  </div>
+
+                  {version.targets && version.targets.length > 0 && (
+                    <div className="mt-2">
+                      <div className="fw-semibold text-muted small mb-1">
+                        {translate('Available Targets')}:
+                      </div>
+                      <div className="d-flex flex-wrap gap-1">
+                        {version.targets
+                          .filter((target) => {
+                            const [cpuFamily, microArch] =
+                              target.target_name?.split('/') || [];
+                            return (
+                              (enabledCpuFamily.length === 0 ||
+                                enabledCpuFamily.includes(cpuFamily)) &&
+                              (enabledCpuMicroarchitectures.length === 0 ||
+                                enabledCpuMicroarchitectures.includes(
+                                  microArch,
+                                ))
+                            );
+                          })
+                          .map((target) => (
+                            <span
+                              key={target.uuid}
+                              className="badge badge-light-secondary"
+                              title={target.target_type || 'Software target'}
+                            >
+                              {target.target_name ||
+                                `${target.target_type}/${target.target_subtype || 'unknown'}`}
+                            </span>
+                          ))}
+                      </div>
+                    </div>
+                  )}
+
+                  <div className="mt-2">
                     <CopyToClipboardContainer
-                      value={`module load ${version.version}`}
+                      value={`module load ${row.name}/${version.version}`}
                       maxWidth="none"
                     />
                   </div>
                 </div>
               ))}
+            </div>
+          }
+        />
+      )}
+
+      {row.extension_count > 0 && (
+        <Field
+          label={translate('Extensions')}
+          value={
+            <div className="text-info">
+              <i className="fa fa-puzzle-piece me-1" />
+              {translate(
+                '%s extension packages available',
+                row.extension_count,
+              )}
             </div>
           }
         />

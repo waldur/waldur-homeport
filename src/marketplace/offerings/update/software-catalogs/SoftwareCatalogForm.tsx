@@ -16,9 +16,19 @@ const ARCHITECTURE_OPTIONS = [
   { value: 'x86_64', label: 'x86_64 - Intel/AMD 64-bit architecture' },
 ];
 
-// Platform options with target counts
+// Platform options with target counts - expanded with Intel, AMD, and ARM specific variants
 const PLATFORM_OPTIONS = [
   { value: 'generic', label: 'generic - Generic platform optimization' },
+  // Intel-specific microarchitectures
+  { value: 'haswell', label: 'haswell - Intel Haswell and newer' },
+  {
+    value: 'skylake_avx512',
+    label: 'skylake_avx512 - Intel Skylake with AVX-512',
+  },
+  // AMD-specific microarchitectures
+  { value: 'zen2', label: 'zen2 - AMD Zen2 architecture' },
+  { value: 'zen3', label: 'zen3 - AMD Zen3 architecture' },
+  // ARM-specific microarchitectures
   { value: 'neoverse_n1', label: 'neoverse_n1 - ARM Neoverse N1 cores' },
   { value: 'neoverse_v1', label: 'neoverse_v1 - ARM Neoverse V1 cores' },
   { value: 'a64fx', label: 'a64fx - Fujitsu A64FX cores' },
@@ -71,7 +81,7 @@ export const SoftwareCatalogForm: FunctionComponent<{
               }
               getOptionValue={(option) => option.uuid}
               getOptionLabel={(option) =>
-                `${option.name} ${option.version} (${option.package_count} packages)`
+                `${option.name} ${option.version} (${option.package_count} packages) - ${option.catalog_type_display || option.catalog_type || 'Unknown type'}`
               }
               disabled={isEdit}
               noOptionsMessage={() => translate('No results found')}
@@ -81,7 +91,7 @@ export const SoftwareCatalogForm: FunctionComponent<{
                 isEdit && initialCatalog
                   ? {
                       ...initialCatalog,
-                      label: `${initialCatalog.name} ${initialCatalog.version}${initialCatalog.package_count ? ` (${initialCatalog.package_count} packages)` : ''}`,
+                      label: `${initialCatalog.name} ${initialCatalog.version}${initialCatalog.package_count ? ` (${initialCatalog.package_count} packages)` : ''} - ${initialCatalog.catalog_type_display || initialCatalog.catalog_type || 'Unknown type'}`,
                     }
                   : input.value
               }

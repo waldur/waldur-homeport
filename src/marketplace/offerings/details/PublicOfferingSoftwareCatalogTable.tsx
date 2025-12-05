@@ -97,7 +97,16 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
         },
         {
           title: translate('Catalog'),
-          render: ({ row }) => <>{row.catalog_name}</>,
+          render: ({ row }) => (
+            <>
+              {row.catalog_name}
+              {row.catalog_type_display && (
+                <span className="ms-2 badge badge-light-info">
+                  {row.catalog_type_display}
+                </span>
+              )}
+            </>
+          ),
           orderField: 'catalog_name',
           filter: 'catalog_name',
           id: 'catalog_name',
@@ -111,6 +120,17 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
           filter: 'catalog_version',
           id: 'catalog_version',
           keys: ['catalog_version'],
+          optional: true,
+        },
+        {
+          title: translate('Type'),
+          render: ({ row }) => (
+            <>{row.catalog_type_display || row.catalog_type || '—'}</>
+          ),
+          orderField: 'catalog_type',
+          filter: 'catalog_type',
+          id: 'catalog_type',
+          keys: ['catalog_type', 'catalog_type_display'],
           optional: true,
         },
         {
