@@ -11659,9 +11659,9 @@ wait-on@8.0.3:
     rxjs "^7.8.2"
 
 waldur-js-client@^7.8.10-dev.1:
-  version "7.8.10-dev.1"
-  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-7.8.10-dev.1.tgz#ed79320edd43131299a34eb2a07a4d3addac4515"
-  integrity sha512-aJnFCzcyN6EAIgYLFL+t1621MC62E4InFqe8nf7SQskIesF/WOdf8+n/7y0rMQq11cq3lNU4YZHZ/+FGSXrY/g==
+  version "7.9.1"
+  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-7.9.1.tgz#46b83c8c3a6cdb4d193993ce8aff3101272434f0"
+  integrity sha512-wX2B44sHlHHcW/L6fynIbiHbGHk2TeED3irDZz12ANGFQZ6UzQzoBoGzLd4gMlHzgVpU4QYcI/O4WeU4KIh3gg==
 
 walk-up-path@^4.0.0:
   version "4.0.0"
