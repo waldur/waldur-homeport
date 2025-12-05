@@ -33,8 +33,16 @@ const STATE_TRANSITIONS = {
     'Pending account linking',
     'Error creating',
   ],
-  'Pending additional validation': ['OK', 'Error creating'],
-  'Pending account linking': ['OK', 'Error creating'],
+  'Pending additional validation': [
+    'OK',
+    'Error creating',
+    'Pending account linking',
+  ],
+  'Pending account linking': [
+    'OK',
+    'Error creating',
+    'Pending additional validation',
+  ],
   OK: ['Requested deletion'],
   'Error creating': [
     'Creating',
