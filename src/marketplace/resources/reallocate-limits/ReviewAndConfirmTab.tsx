@@ -12,9 +12,11 @@ import { Limits } from '@waldur/marketplace/common/types';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
+import { FetchedData } from '../change-limits/utils';
+
 import { REALLOCATE_LIMITS_FORM_ID } from './constants';
 import { ReallocateFormData } from './types';
-import { calculateFreedCapacity, FetchedData } from './utils';
+import { calculateFreedCapacity } from './utils';
 
 interface ReviewAndConfirmTabProps {
   context: {

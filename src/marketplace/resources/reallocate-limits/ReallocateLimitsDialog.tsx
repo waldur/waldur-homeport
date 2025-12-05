@@ -11,12 +11,14 @@ import { WizardButtons } from '@waldur/marketplace/offerings/import/WizardButton
 import { WizardTabs } from '@waldur/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
+import { loadData } from '../change-limits/utils';
+
 import { ChangeResourceLimitsTab } from './ChangeResourceLimitsTab';
 import { REALLOCATE_LIMITS_FORM_ID } from './constants';
 import { ReallocateCapacityTab } from './ReallocateCapacityTab';
 import { ReviewAndConfirmTab, submitReallocation } from './ReviewAndConfirmTab';
 import { ReallocateFormData } from './types';
-import { loadData, calculateFreedCapacity } from './utils';
+import { calculateFreedCapacity } from './utils';
 
 interface ReallocateLimitsDialogProps {
   resolve: {

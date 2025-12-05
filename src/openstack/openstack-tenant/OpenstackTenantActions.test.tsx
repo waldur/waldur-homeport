@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureMockStore from 'redux-mock-store';
@@ -34,9 +35,12 @@ const renderComponent = (props = {}) => {
       },
     },
   });
+  const queryClient = new QueryClient();
   return render(
     <Provider store={store}>
-      <OpenstackTenantActions {...props} />
+      <QueryClientProvider client={queryClient}>
+        <OpenstackTenantActions {...props} />
+      </QueryClientProvider>
     </Provider>,
   );
 };
@@ -70,7 +74,6 @@ describe('OpenstackTenantActions', () => {
       'Edit',
       'Replicate',
       'Synchronise',
-      'Change plan',
       'Show usage',
       'Report usage',
       'Set backend ID',

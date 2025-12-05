@@ -23,16 +23,18 @@ export const ComponentTotalRow: FC<
         onClick={setToggle}
         className={toggled && canExpand ? 'expanded' : undefined}
       >
-        <td colSpan={5}>
+        <td colSpan={5} className="text-end">
           {canExpand && (
             <span className={toggled ? 'me-2 active' : 'me-2'}>
               <CaretDownIcon size={20} weight="bold" className="rotate-180" />
             </span>
           )}
-          <span className="fw-bolder">{translate('Total')}</span>
+          <span className="fw-bolder text-dark me-10">
+            {translate('Total')}:
+          </span>
         </td>
         {totalPeriods.slice(0, periodsCountToShow).map((price, index) => (
-          <td key={index}>
+          <td key={index} className="fw-bold text-dark">
             <PriceField
               price={price}
               changedPrice={changedTotalPeriods[index]}

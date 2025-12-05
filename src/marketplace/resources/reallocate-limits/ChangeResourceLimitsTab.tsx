@@ -6,11 +6,12 @@ import { formValueSelector } from 'redux-form';
 import { translate } from '@waldur/i18n';
 import { Limits } from '@waldur/marketplace/common/types';
 
+import { FetchedData } from '../change-limits/utils';
+
 import { ComponentRow } from './ComponentRow';
 import { ComponentTotalRow } from './ComponentTotalRow';
 import { REALLOCATE_LIMITS_FORM_ID } from './constants';
 import { calculateFreedCapacity } from './utils';
-import { FetchedData } from './utils';
 
 interface ChangeResourceLimitsTabProps {
   context: {
