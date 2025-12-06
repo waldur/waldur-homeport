@@ -8,6 +8,7 @@ import {
   MarketplaceFeatures,
 } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { hasSupport } from '@waldur/issues/hooks';
 import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
 
 export const states: StateDeclaration[] = [
@@ -34,9 +35,54 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Dashboard'),
-      priority: 100,
+      priority: 1,
     },
   },
+  // Original 8-category navigation structure
+  {
+    name: 'admin-system-management',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('System management'),
+    },
+  },
+
+  {
+    name: 'admin-user-interface',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('User interface'),
+    },
+  },
+
+  {
+    name: 'admin-configuration',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Configuration'),
+    },
+  },
+
+  {
+    name: 'admin-organizations-compliance',
+    parent: 'admin',
+    abstract: true,
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Organizations & compliance'),
+    },
+  },
+
   {
     name: 'admin-marketplace',
     parent: 'admin',
@@ -49,42 +95,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-settings',
-    parent: 'admin',
-    abstract: true,
-    component: UIView,
-    url: '',
-    data: {
-      breadcrumb: () => translate('Settings'),
-    },
-  },
-
-  {
-    name: 'admin-service-desk',
-    parent: 'admin',
-    abstract: true,
-    component: UIView,
-    url: '',
-    data: {
-      breadcrumb: () => translate('Service desk'),
-    },
-  },
-
-  {
-    name: 'admin-accounts',
-    parent: 'admin',
-    abstract: true,
-    component: UIView,
-    url: '',
-    data: {
-      breadcrumb: () => translate('Accounts'),
-    },
-  },
-
-  {
     name: 'admin-system-info',
     url: 'system-info/',
-    parent: 'admin-settings',
+    parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./SystemInfoPage').then((module) => ({
         default: module.SystemInfoPage,
@@ -96,23 +109,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-announcements',
-    url: 'announcements/',
-    parent: 'admin-settings',
-    component: lazyComponent(() =>
-      import('./announcements/AnnouncementsList').then((module) => ({
-        default: module.AnnouncementsList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Announcements'),
-    },
-  },
-
-  {
     name: 'admin-celery-info',
     url: 'celery-info/',
-    parent: 'admin-settings',
+    parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./CeleryInfoPage').then((module) => ({
         default: module.CeleryInfoPage,
@@ -126,21 +125,21 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-quick-shortcuts',
     url: 'quick-shortcuts/',
-    parent: 'admin-settings',
+    parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./quick-shortcuts/QuickShortcutsList').then((module) => ({
         default: module.QuickShortcutsList,
       })),
     ),
     data: {
-      breadcrumb: () => translate('Quick shortcuts'),
+      breadcrumb: () => translate('Navigation shortcuts'),
     },
   },
 
   {
     name: 'admin-branding',
     url: 'branding/',
-    parent: 'admin-settings',
+    parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./settings/AdministrationBranding').then((module) => ({
         default: module.AdministrationBranding,
@@ -154,7 +153,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-languages',
     url: 'languages/',
-    parent: 'admin-settings',
+    parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./languages/AdministrationLanguages').then((module) => ({
         default: module.AdministrationLanguages,
@@ -168,7 +167,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-integration-settings',
     url: 'integration-settings/',
-    parent: 'admin-service-desk',
+    parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./service-desk/AdministrationServiceDesk').then((module) => ({
         default: module.AdministrationServiceDesk,
@@ -182,7 +181,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-issue-templates',
     url: 'issue-templates/',
-    parent: 'admin-service-desk',
+    parent: 'admin-configuration',
     component: lazyComponent(() =>
       import(
         './service-desk/issue-templates/AdministrationIssueTemplatesList'
@@ -198,7 +197,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-marketplace-settings',
     url: 'marketplace/',
-    parent: 'admin-settings',
+    parent: 'admin-marketplace',
     component: lazyComponent(() =>
       import('./marketplace/AdministrationMarketplace').then((module) => ({
         default: module.AdministrationMarketplace,
@@ -212,7 +211,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-telemetry-settings',
     url: 'telemetry/',
-    parent: 'admin-settings',
+    parent: 'admin-system-management',
     component: lazyComponent(() =>
       import('./telemetry/AdministrationTelemetry').then((module) => ({
         default: module.AdministrationTelemetry,
@@ -225,21 +224,21 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-custom-scripts-settings',
     url: 'custom-scripts/',
-    parent: 'admin-settings',
+    parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./custom-scripts/AdministrationCustomScripts').then((module) => ({
         default: module.AdministrationCustomScripts,
       })),
     ),
     data: {
-      breadcrumb: () => translate('Custom Scripts'),
+      breadcrumb: () => translate('Custom scripts'),
     },
   },
 
   {
     name: 'admin-features',
     url: 'features/',
-    parent: 'admin-settings',
+    parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./FeaturesList').then((module) => ({
         default: module.FeaturesList,
@@ -253,7 +252,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-user-agreements',
     url: 'user-agreements/',
-    parent: 'admin-settings',
+    parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./agreements/UserAgreementsList').then((module) => ({
         default: module.UserAgreementsList,
@@ -265,104 +264,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-user-users',
-    url: 'users/?role',
-    parent: 'admin-accounts',
-    component: lazyComponent(() =>
-      import('@waldur/user/support/UserList').then((module) => ({
-        default: module.UserList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Users'),
-    },
-  },
-  {
-    name: 'admin-user-user-manage-container',
-    url: '',
-    parent: 'admin-accounts',
-    component: lazyComponent(() =>
-      import('@waldur/user/UserManageContainer').then((module) => ({
-        default: module.UserManageContainer,
-      })),
-    ),
-    abstract: true,
-    data: { skipBreadcrumb: true },
-  },
-  {
-    name: 'admin-user-user-manage',
-    url: 'users/:user_uuid/?tab',
-    parent: 'admin-user-user-manage-container',
-    component: lazyComponent(() =>
-      import('@waldur/user/UserManage').then((module) => ({
-        default: module.UserManage,
-      })),
-    ),
-  },
-  {
-    name: 'admin-user-notifications',
-    url: 'users/notifications/',
-    parent: 'admin-accounts',
-    component: lazyComponent(() =>
-      import('./hooks/HooksList').then((module) => ({
-        default: module.HooksList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Notifications'),
-    },
-  },
-  {
-    name: 'admin-user-active-sessions',
-    url: 'users/active-sessions/',
-    parent: 'admin-accounts',
-    component: lazyComponent(() =>
-      import('./TokensList').then((module) => ({ default: module.TokensList })),
-    ),
-    data: {
-      breadcrumb: () => translate('Active sessions'),
-    },
-  },
-  {
-    name: 'admin-user-freeipa-users',
-    url: 'freeipa-users/',
-    parent: 'admin-accounts',
-    component: lazyComponent(() =>
-      import('./users/FreeIPAUsersList').then((module) => ({
-        default: module.FreeIPAUsersList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('FreeIPA users'),
-    },
-  },
-  {
-    name: 'admin-user-robot-accounts',
-    url: 'robot-accounts/',
-    component: lazyComponent(() =>
-      import(
-        '@waldur/marketplace/robot-accounts/ProviderRobotAccountList'
-      ).then((module) => ({ default: module.ProviderRobotAccountList })),
-    ),
-    parent: 'admin-accounts',
-    data: {
-      breadcrumb: () => translate('Robot accounts'),
-    },
-  },
-  {
-    name: 'admin-user-offering-users',
-    url: 'offering-users/',
-    component: lazyComponent(() =>
-      import('./users/OfferingUsersList').then((module) => ({
-        default: module.OfferingUsersList,
-      })),
-    ),
-    parent: 'admin-accounts',
-    data: {
-      breadcrumb: () => translate('Offering users'),
-    },
-  },
-  {
     name: 'admin-user-lexis-links-list',
     url: 'lexis-links/',
     component: lazyComponent(() =>
@@ -370,7 +271,7 @@ export const states: StateDeclaration[] = [
         (module) => ({ default: module.BasicLexisLinkList }),
       ),
     ),
-    parent: 'admin-accounts',
+    parent: 'admin-organizations-compliance',
     data: {
       breadcrumb: () => translate('LEXIS links'),
       permissions: [
@@ -384,23 +285,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-invitations',
-    url: 'invitations/',
-    component: lazyComponent(() =>
-      import('./InvitationList').then((module) => ({
-        default: module.InvitationList,
-      })),
-    ),
-    parent: 'admin-accounts',
-    data: {
-      breadcrumb: () => translate('Invitations'),
-    },
-  },
-
-  {
     name: 'admin-service-accounts',
     url: 'service-accounts/?tab',
-    parent: 'admin-accounts',
+    parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./service-accounts/ServiceAccountsTable').then((module) => ({
         default: module.ServiceAccountsTable,
@@ -415,7 +302,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-course-accounts',
     url: 'course-accounts/?tab',
-    parent: 'admin-accounts',
+    parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./CourseAccountsTable').then((module) => ({
         default: module.CourseAccountsTable,
@@ -470,19 +357,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-organizations',
-    parent: 'admin',
-    abstract: true,
-    component: UIView,
-    url: '',
-    data: {
-      breadcrumb: () => translate('Organizations'),
-    },
-  },
-  {
     name: 'admin-organizations-group-list',
     url: 'organization-groups/',
-    parent: 'admin-organizations',
+    parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./organizations/OrganizationGroupsList').then((module) => ({
         default: module.OrganizationGroupsList,
@@ -495,7 +372,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-organization-cost-policies',
     url: 'organization-cost-policies/',
-    parent: 'admin-organizations',
+    parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./organizations/OrganizationCostPoliciesList').then((module) => ({
         default: module.OrganizationCostPoliciesList,
@@ -506,75 +383,11 @@ export const states: StateDeclaration[] = [
       permissions: [isStaff],
     },
   },
-  {
-    name: 'admin-organization-credit-management',
-    url: 'organization-credits/',
-    parent: 'admin-organizations',
-    component: lazyComponent(() =>
-      import('./organizations/OrganizationCreditsList').then((module) => ({
-        default: module.OrganizationCreditsList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Credit management'),
-      permissions: [isStaff],
-    },
-  },
-  {
-    name: 'admin-organization-requests',
-    url: 'organization-requests/',
-    parent: 'admin-organizations',
-    component: lazyComponent(() =>
-      import('./organizations/requests/OrganizationRequestsList').then(
-        (module) => ({
-          default: module.OrganizationRequestsList,
-        }),
-      ),
-    ),
-    data: {
-      breadcrumb: () => translate('Requests'),
-      permissions: [isStaff],
-    },
-  },
-
-  {
-    name: 'admin-onboarding',
-    url: 'onboarding/?tab',
-    parent: 'admin-organizations',
-    component: lazyComponent(() =>
-      import('./organizations/OrganizationOnboardingTabs').then((module) => ({
-        default: module.OrganizationOnboardingTabs,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Onboarding'),
-      permissions: [isStaff],
-      feature: MarketplaceFeatures.show_experimental_ui_components,
-    },
-  },
-
-  {
-    name: 'admin-onboarding-justification-details',
-    url: 'onboarding/justifications/:uuid/',
-    parent: 'admin-organizations',
-    component: lazyComponent(() =>
-      import('./organizations/OnboardingJustificationDetailsPage').then(
-        (module) => ({
-          default: module.OnboardingJustificationDetailsPage,
-        }),
-      ),
-    ),
-    data: {
-      breadcrumb: () => translate('Justification details'),
-      skipBreadcrumb: true,
-      permissions: [isStaff],
-    },
-  },
 
   {
     name: 'admin-identity',
     url: 'identity/',
-    parent: 'admin-settings',
+    parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./providers/IdentityProvidersList').then((module) => ({
         default: module.IdentityProvidersList,
@@ -588,7 +401,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-roles',
     url: 'roles/',
-    parent: 'admin-settings',
+    parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./roles/RolesList').then((module) => ({
         default: module.RolesList,
@@ -602,7 +415,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-auto-provisioning-rules',
     url: 'auto-provisioning-rules/',
-    parent: 'admin-settings',
+    parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./auto-provisioning-rules/RulesList').then((module) => ({
         default: module.RulesList,
@@ -614,23 +427,9 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-notification-messages',
-    url: 'notification-messages/',
-    parent: 'admin-settings',
-    component: lazyComponent(() =>
-      import('./notifications/NotificationList').then((module) => ({
-        default: module.NotificationList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Notifications'),
-    },
-  },
-
-  {
     name: 'admin-onboarding-settings',
     url: 'onboarding-settings/',
-    parent: 'admin-settings',
+    parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('./organizations/OnboardingSettings').then((module) => ({
         default: module.OnboardingSettings,
@@ -639,6 +438,50 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Onboarding settings'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+    },
+  },
+
+  {
+    name: 'admin-organization-credit-management',
+    url: 'organization-credits/',
+    parent: 'admin-organizations-compliance',
+    component: lazyComponent(() =>
+      import('./organizations/OrganizationCreditsList').then((module) => ({
+        default: module.OrganizationCreditsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Credit management'),
+      permissions: [isStaff],
+    },
+  },
+
+  {
+    name: 'admin-broadcast-templates',
+    url: 'broadcast-templates/',
+    parent: 'admin-user-interface',
+    component: lazyComponent(() =>
+      import('../broadcasts/BroadcastTemplateList').then((module) => ({
+        default: module.BroadcastTemplateList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Broadcast templates'),
+    },
+  },
+
+  {
+    name: 'admin-support-feedback',
+    url: 'support-feedback/',
+    parent: 'admin-user-interface',
+    component: lazyComponent(() =>
+      import('@waldur/issues/feedback/SupportFeedbackList').then((module) => ({
+        default: module.SupportFeedbackList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Support feedback'),
+      permissions: [isStaffOrSupport, hasSupport],
     },
   },
 ];

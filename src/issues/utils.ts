@@ -58,7 +58,7 @@ export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {
         isUser && {
           key: 'user',
           text: issue?.caller_full_name || '...',
-          to: 'admin-user-user-manage',
+          to: 'support-user-manage',
           params: { user_uuid: issue?.caller_uuid },
           maxLength: 30,
           ellipsis: 'md',

@@ -35,7 +35,13 @@ const broadcastState = {
   SENT: { label: translate('Sent'), color: 'success' },
 };
 
-export const BroadcastList: FunctionComponent<{}> = () => {
+interface BroadcastListProps {
+  standalone?: boolean;
+}
+
+export const BroadcastList: FunctionComponent<BroadcastListProps> = ({
+  standalone = false,
+}) => {
   const filterForm: any = useSelector(getFormValues('BroadcastsFilter'));
   const filter = useMemo(
     (): BroadcastMessagesListData['query'] => ({
@@ -91,7 +97,7 @@ export const BroadcastList: FunctionComponent<{}> = () => {
       rowActions={BroadcastsRowActions}
       hasQuery={true}
       title={translate('Broadcasts')}
-      standalone
+      standalone={standalone}
     />
   );
 };

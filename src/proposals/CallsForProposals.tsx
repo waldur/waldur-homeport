@@ -4,9 +4,7 @@ import { getIconUrl } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { Link } from '@waldur/core/Link';
 import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
-import { NewbiesGuideNotification } from '@waldur/dashboard/hero/NewbiesGuideNotification';
 import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useFullPage } from '@waldur/navigation/context';
 import { CallsAvailableOfferingsList } from '@waldur/proposals/CallsAvailableOfferingsList';
 import { CallsForProposalsList } from '@waldur/proposals/CallsForProposalsList';
@@ -21,18 +19,9 @@ export const CallsForProposals: FunctionComponent = () => {
   const backendImage = getIconUrl('call_management_hero_image');
 
   useFullPage();
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
 
   return (
     <>
-      {showExperimentalUiComponents && (
-        <NewbiesGuideNotification
-          guideState="calls-for-proposals-dashboard"
-          message={translate('New to {org} calls page?', {
-            org: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
-          })}
-        />
-      )}
       <LandingHeroSection
         header={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
         title={translate('Calls for proposals')}

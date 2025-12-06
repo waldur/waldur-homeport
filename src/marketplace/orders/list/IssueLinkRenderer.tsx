@@ -6,7 +6,7 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 export const IssueLinkRenderer: FunctionComponent<{ row }> = ({ row }) =>
   row.issue ? (
     <Link
-      state="support.detail"
+      state="support-detail"
       params={{ uuid: row.issue.uuid }}
       label={row.issue.key || 'N/A'}
     />

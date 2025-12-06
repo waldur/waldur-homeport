@@ -62,7 +62,7 @@ describe('Broadcast', () => {
   });
 
   it('renders title', () => {
-    cy.get('h1').should('contain', 'Broadcast');
+    cy.get('.card-title').should('contain', 'Broadcasts');
   });
 
   it('should create a broadcast with React Final Form', () => {

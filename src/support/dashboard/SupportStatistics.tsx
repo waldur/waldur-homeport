@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { getIssueStatuses } from '@waldur/issues/list/IssuesFilter';
 
 const getIssueState = (states: string[]) => ({
-  state: 'support.list',
+  state: 'support-list',
   params: {
     status: JSON.stringify(
       states.map((state) =>
@@ -55,7 +55,7 @@ export const SupportStatistics = () => {
             <StatisticsCard
               title={translate('Recent broadcasts (this month)')}
               value={data.recent_broadcasts_count}
-              to={{ state: 'support.broadcast' }}
+              to={{ state: 'support-broadcast' }}
             />
           </Col>
         </>

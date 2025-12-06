@@ -1,7 +1,8 @@
 const openAddDialog = () => {
-  cy.contains('button', 'Add')
+  cy.get('button')
+    .contains('Add')
     .click()
-    .get('.card-header .dropdown-menu .dropdown-item')
+    .get('.dropdown-menu .dropdown-item')
     .contains('Group invitation')
     .click();
 };
@@ -19,6 +20,9 @@ describe('Group invitations', () => {
       .intercept('GET', '/api/customers/**/counters/', {
         fixture: 'marketplace/counters.json',
       })
+      .intercept('GET', '/api/customers/**', {
+        fixture: 'customers/admin_customers.json',
+      })
       .intercept(
         'GET',
         '/api/customer-permissions-reviews/?customer_uuid=895e38d197e748459189f19285119edf&is_pending=true',
@@ -31,7 +35,7 @@ describe('Group invitations', () => {
       )
       .intercept(
         'GET',
-        '/api/user-group-invitations/?page=1&page_size=10&customer_uuid=895e38d197e748459189f19285119edf',
+        '/api/user-group-invitations/*',
         {
           fixture: 'group-invitations/user-group-invitations.json',
         },

@@ -15,11 +15,17 @@ import { TableQuery } from '@waldur/table/TableQuery';
 
 export const AdministrationLanguages: FunctionComponent = () => {
   const [query, setQuery] = useState('');
-  const [selectedLanguages, setSelectedLanguages] = useState<string[]>(
-    ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES,
-  );
+  const initialLanguages = ENV.plugins.WALDUR_CORE.LANGUAGE_CHOICES;
+  const [selectedLanguages, setSelectedLanguages] =
+    useState<string[]>(initialLanguages);
   const { showError, showErrorResponse, showSuccess } = useNotify();
   const { currentLanguage } = useLanguageSelector();
+
+  const hasChanges = useMemo(() => {
+    const currentSorted = [...selectedLanguages].sort();
+    const initialSorted = [...initialLanguages].sort();
+    return JSON.stringify(currentSorted) !== JSON.stringify(initialSorted);
+  }, [selectedLanguages, initialLanguages]);
 
   const handleLanguageChange = (code: string) => {
     setSelectedLanguages((prevSelectedLanguages: string | string[]) => {
@@ -94,15 +100,26 @@ export const AdministrationLanguages: FunctionComponent = () => {
       className="pb-1"
       bodyClassName="py-0 overflow-hidden"
       actions={
-        <>
+        <div className="d-flex align-items-center">
           <TableQuery query={query} setQuery={setQuery} />
-          <Button className="min-w-80px ms-4" onClick={saveLanguageOptions}>
-            <span className="svg-icon svg-icon-2">
-              <CheckCircleIcon weight="bold" />
-            </span>
-            {translate('Save')}
-          </Button>
-        </>
+          <div className="position-relative">
+            <Button
+              className="min-w-80px ms-4"
+              variant={hasChanges ? 'warning' : 'primary'}
+              onClick={saveLanguageOptions}
+            >
+              <span className="svg-icon svg-icon-2">
+                <CheckCircleIcon weight="bold" />
+              </span>
+              {translate('Save')}
+            </Button>
+            {hasChanges && (
+              <span className="position-absolute top-0 start-100 translate-middle badge badge-circle badge-warning">
+                !
+              </span>
+            )}
+          </div>
+        </div>
       }
     >
       <Row className="mb-n1">

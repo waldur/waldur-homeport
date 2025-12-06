@@ -16,14 +16,15 @@ describe('Categories', () => {
     cy.intercept(
       'PUT',
       '/api/marketplace-categories/4588ff519260461893ab371b8fe83363/',
-      (req) => {
-        req.reply((res) => {
-          const modifiedBody = {
-            ...res.body,
-            default_vm_category: true,
-          };
-          res.send(modifiedBody);
-        });
+      {
+        statusCode: 200,
+        body: {
+          url: '/api/marketplace-categories/4588ff519260461893ab371b8fe83363/',
+          uuid: '4588ff519260461893ab371b8fe83363',
+          title: 'HPC',
+          description: 'High Performance Computing',
+          default_vm_category: true,
+        },
       },
     )
       .as('updateCategory')

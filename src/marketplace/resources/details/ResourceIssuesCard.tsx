@@ -41,6 +41,7 @@ export const ResourceIssuesCard = ({ resource }) => {
       verboseName={translate('Support requests')}
       initialPageSize={PAGE_SIZE_COMPACT}
       tableActions={<CreateIssueButton resource={resource} />}
+      standalone={false}
     />
   ) : null;
 };

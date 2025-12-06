@@ -4,14 +4,10 @@ import { useSelector } from 'react-redux';
 import { getIconUrl } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
-import { NewbiesGuideNotification } from '@waldur/dashboard/hero/NewbiesGuideNotification';
 import DefaultDarkImage from '@waldur/dashboard/hero/servers-room-dark.png';
 import DefaultLightImage from '@waldur/dashboard/hero/servers-room-light.png';
 import { translate } from '@waldur/i18n';
-import {
-  isExperimentalUiComponentsVisible,
-  useMarketplacePublicTabs,
-} from '@waldur/marketplace/utils';
+import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
 import {
   useExtraToolbar,
   useFullPage,
@@ -34,7 +30,6 @@ export const LandingPage: FC<{}> = () => {
   );
   useFullPage();
 
-  const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   const { theme } = useTheme();
 
   useMarketplacePublicTabs();
@@ -48,14 +43,6 @@ export const LandingPage: FC<{}> = () => {
 
   return (
     <div className="marketplace-landing-page">
-      {showExperimentalUiComponents && (
-        <NewbiesGuideNotification
-          guideState="public.marketplace-landing"
-          message={translate('New to {org} marketplace?', {
-            org: ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE,
-          })}
-        />
-      )}
       <LandingHeroSection
         header={translate('Welcome to')}
         title={

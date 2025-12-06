@@ -1,15 +1,19 @@
+import { CheckCircleIcon } from '@phosphor-icons/react';
+import { useMemo, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
 import { TelemetryExampleButton } from '@waldur/administration/TelemetryExampleButton';
 import { ENV } from '@waldur/core/config';
+import { Panel } from '@waldur/core/Panel';
 import { FeaturesDescription } from '@waldur/features/FeaturesDescription';
 import { DeploymentFeatures } from '@waldur/FeaturesEnums';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { useNotify } from '@waldur/store/hooks';
+import { TableQuery } from '@waldur/table/TableQuery';
 
 const FeatureSection = ({ section }) => (
   <FormTable.Card title={section.description} className="card-bordered mb-5">
@@ -42,6 +46,7 @@ const FeatureSection = ({ section }) => (
 );
 
 export const FeaturesList = () => {
+  const [query, setQuery] = useState('');
   const { showErrorResponse, showSuccess } = useNotify();
 
   const saveFeaturesCallback = async (formData) => {
@@ -54,18 +59,61 @@ export const FeaturesList = () => {
     }
   };
 
+  const filteredSections = useMemo(() => {
+    const q = query.trim().toLowerCase();
+    if (!q) return FeaturesDescription;
+
+    return FeaturesDescription.map((section) => ({
+      ...section,
+      items: section.items.filter(
+        (item) =>
+          item.description.toLowerCase().includes(q) ||
+          item.key.toLowerCase().includes(q) ||
+          section.description.toLowerCase().includes(q),
+      ),
+    })).filter((section) => section.items.length > 0);
+  }, [query]);
+
   return (
     <Form
       onSubmit={saveFeaturesCallback}
       initialValues={ENV.FEATURES}
-      render={({ handleSubmit, submitting }) => (
+      render={({ handleSubmit, submitting, dirty }) => (
         <form onSubmit={handleSubmit}>
-          {FeaturesDescription.map((section) => (
-            <FeatureSection key={section.key} section={section} />
-          ))}
-          <Button type="submit" variant="primary" disabled={submitting}>
-            {translate('Save')}
-          </Button>
+          <Panel
+            title={translate('Features')}
+            cardBordered
+            className="pb-1"
+            bodyClassName="py-0"
+            actions={
+              <div className="d-flex align-items-center">
+                <TableQuery query={query} setQuery={setQuery} />
+                <div className="position-relative">
+                  <Button
+                    className="min-w-80px ms-4"
+                    type="submit"
+                    variant={dirty ? 'warning' : 'primary'}
+                    disabled={submitting}
+                    onClick={handleSubmit}
+                  >
+                    <span className="svg-icon svg-icon-2">
+                      <CheckCircleIcon weight="bold" />
+                    </span>
+                    {translate('Save')}
+                  </Button>
+                  {dirty && (
+                    <span className="position-absolute top-0 start-100 translate-middle badge badge-circle badge-warning">
+                      !
+                    </span>
+                  )}
+                </div>
+              </div>
+            }
+          >
+            {filteredSections.map((section) => (
+              <FeatureSection key={section.key} section={section} />
+            ))}
+          </Panel>
         </form>
       )}
     />

@@ -18,6 +18,7 @@ export const ProjectIssuesList: FunctionComponent = () => {
       scope={project}
       scopeType="project"
       filter={filter}
+      standalone={false}
     />
   );
 };

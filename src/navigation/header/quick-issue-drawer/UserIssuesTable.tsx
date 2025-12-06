@@ -15,6 +15,7 @@ export const UserIssuesTable: FC = () => {
       hiddenColumns={['caller', 'time_in_progress', 'customer', 'project']}
       title={translate('Requests')}
       initialPageSize={PAGE_SIZE_FULL}
+      standalone={false}
     />
   );
 };
