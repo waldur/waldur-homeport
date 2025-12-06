@@ -1,3 +1,4 @@
+import { FC } from 'react';
 import { broadcastMessageTemplatesList } from 'waldur-js-client';
 
 import { BroadcastTemplateActions } from '@waldur/broadcasts/BroadcastTemplateActions';
@@ -8,7 +9,13 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-export const BroadcastTemplateList = () => {
+interface BroadcastTemplateListProps {
+  standalone?: boolean;
+}
+
+export const BroadcastTemplateList: FC<BroadcastTemplateListProps> = ({
+  standalone = false,
+}) => {
   const tableProps = useTable({
     table: 'broadcast-templates',
     fetchData: createFetcher(broadcastMessageTemplatesList),
@@ -38,7 +45,7 @@ export const BroadcastTemplateList = () => {
         <BroadcastTemplateActions row={row} refetch={tableProps.fetch} />
       )}
       hasQuery={true}
-      standalone
+      standalone={standalone}
     />
   );
 };

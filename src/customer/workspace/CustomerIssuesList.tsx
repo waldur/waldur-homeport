@@ -13,6 +13,7 @@ export const CustomerIssuesList: FC = () => {
       filter={filter}
       scope={customer}
       scopeType="customer"
+      standalone={false}
     />
   );
 };

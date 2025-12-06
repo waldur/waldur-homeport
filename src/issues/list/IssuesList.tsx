@@ -35,6 +35,7 @@ interface OwnProps {
   scope?: Record<string, any>;
   scopeType?: string;
   filter?: Record<string, any>;
+  standalone?: boolean;
 }
 
 const mapStateToFilter = createSelector(
@@ -49,7 +50,7 @@ const mapStateToFilter = createSelector(
 );
 
 export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
-  const { hiddenColumns = [] } = props;
+  const { hiddenColumns = [], standalone = true } = props;
   const user = useSelector(getUser);
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
@@ -180,6 +181,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       hasQuery={true}
       showPageSizeSelector={true}
       enableExport={true}
+      standalone={standalone}
       tableActions={
         props.scope &&
         !props.scope.is_removed && (

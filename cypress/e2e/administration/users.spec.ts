@@ -96,7 +96,7 @@ describe('Users', () => {
 
       .setToken()
 
-      .visit('/administration/users/')
+      .visit('/support/users/')
       .waitForPage();
   });
 

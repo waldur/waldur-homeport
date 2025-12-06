@@ -25,7 +25,13 @@ import { useTable } from '@waldur/table/useTable';
 import { SupportFeedbackListFilter } from './SupportFeedbackListFilter';
 import { feedbackOptions } from './utils';
 
-export const SupportFeedbackList: FC = () => {
+interface SupportFeedbackListProps {
+  standalone?: boolean;
+}
+
+export const SupportFeedbackList: FC<SupportFeedbackListProps> = ({
+  standalone = false,
+}) => {
   const filter = useSelector(mapStateToProps);
   const props = useTable({
     table: SUPPORT_FEEDBACK_LIST,
@@ -74,7 +80,7 @@ export const SupportFeedbackList: FC = () => {
       enableExport={true}
       showPageSizeSelector={true}
       filters={<SupportFeedbackListFilter />}
-      standalone
+      standalone={standalone}
     />
   );
 };

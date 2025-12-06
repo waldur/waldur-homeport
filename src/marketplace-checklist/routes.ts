@@ -7,7 +7,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'admin-organization-checklist-management',
     url: 'organization-checklist-management/',
-    parent: 'admin-organizations',
+    parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
       import('@waldur/marketplace-checklist/ChecklistManagementTable').then(
         (module) => ({
@@ -18,7 +18,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Checklist management'),
       permissions: [isStaff],
-      priority: 100,
+      priority: 504,
     },
   },
 ];

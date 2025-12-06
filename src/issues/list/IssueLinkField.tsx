@@ -16,7 +16,7 @@ export const IssueLinkField: FunctionComponent<IssueLinkProps> = (props) => {
 
   return (
     <Link
-      state="support.detail"
+      state="support-detail"
       params={toParams}
       label={props.label}
       target={props.target}

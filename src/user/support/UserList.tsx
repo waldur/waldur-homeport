@@ -41,7 +41,7 @@ const EmailField = ({ row }: { row: User }) => (
 
 const FullNameField = ({ row }: { row: User }) => (
   <Link
-    state="admin-user-user-manage"
+    state="support-user-manage"
     params={{ user_uuid: row.uuid }}
     label={renderFieldOrDash(row.full_name)}
   />

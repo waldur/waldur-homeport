@@ -38,7 +38,7 @@ export const sendIssueCreateRequest = async (
       ),
     );
     if (refetch) refetch();
-    router.stateService.go('support.detail', { uuid: issue.uuid });
+    router.stateService.go('support-detail', { uuid: issue.uuid });
     dispatch(closeModalDialog());
   } catch (e) {
     dispatch(showErrorResponse(e, translate('Unable to create request.')));

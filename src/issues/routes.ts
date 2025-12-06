@@ -1,9 +1,10 @@
 import { UIView } from '@uirouter/react';
 
+import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { translate } from '@waldur/i18n';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { hasSupport } from './hooks';
 
@@ -18,6 +19,39 @@ export const states: StateDeclaration[] = [
       auth: true,
       title: () => translate('Support'),
       permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
+    name: 'support-user-management',
+    parent: 'support',
+    component: UIView,
+    abstract: true,
+    url: '',
+    data: {
+      breadcrumb: () => translate('User management'),
+    },
+  },
+
+  {
+    name: 'support-communication',
+    parent: 'support',
+    component: UIView,
+    abstract: true,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Communication'),
+    },
+  },
+
+  {
+    name: 'support-customer-support',
+    parent: 'support',
+    component: UIView,
+    abstract: true,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Customer support'),
     },
   },
 
@@ -43,7 +77,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Dashboard'),
-      priority: 100,
+      priority: 1,
     },
   },
 
@@ -62,21 +96,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.list',
-    url: 'list/?{status}',
-    component: lazyComponent(() =>
-      import('@waldur/issues/SupportIssues').then((module) => ({
-        default: module.SupportIssues,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Requests'),
-      permissions: [isStaffOrSupport, hasSupport],
-      priority: 103,
-    },
-  },
-
-  {
     name: 'supportFeedback',
     url: '/support/feedback/?token&evaluation',
     component: lazyComponent(() =>
@@ -90,23 +109,24 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'support.feedback',
-    url: 'feedback/',
+    name: 'support-list',
+    url: 'list/?{status}',
+    parent: 'support-communication',
     component: lazyComponent(() =>
-      import('@waldur/issues/feedback/SupportFeedbackList').then((module) => ({
-        default: module.SupportFeedbackList,
+      import('@waldur/issues/SupportIssues').then((module) => ({
+        default: module.SupportIssues,
       })),
     ),
     data: {
-      breadcrumb: () => translate('Feedback'),
+      breadcrumb: () => translate('Support requests'),
       permissions: [isStaffOrSupport, hasSupport],
-      priority: 102,
     },
   },
 
   {
-    name: 'support.broadcast',
+    name: 'support-broadcast',
     url: 'broadcast/',
+    parent: 'support-communication',
     component: lazyComponent(() =>
       import('../broadcasts/BroadcastList').then((module) => ({
         default: module.BroadcastList,
@@ -114,27 +134,13 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Broadcast'),
-      priority: 100,
     },
   },
 
   {
-    name: 'support.broadcast-templates',
-    url: 'broadcast-templates/',
-    component: lazyComponent(() =>
-      import('../broadcasts/BroadcastTemplateList').then((module) => ({
-        default: module.BroadcastTemplateList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Broadcast templates'),
-      priority: 101,
-    },
-  },
-
-  {
-    name: 'support.maintenance',
+    name: 'support-maintenance',
     url: 'maintenance/',
+    parent: 'support-communication',
     component: lazyComponent(() =>
       import('../maintenance/MaintenanceList').then((module) => ({
         default: module.MaintenanceList,
@@ -142,13 +148,13 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Maintenance'),
-      priority: 100,
     },
   },
 
   {
-    name: 'support-logs.audit-logs',
+    name: 'support-audit-logs',
     url: 'audit-logs/',
+    parent: 'support-logs',
     component: lazyComponent(() =>
       import('@waldur/support/SupportEventsList').then((module) => ({
         default: module.SupportEventsList,
@@ -159,8 +165,9 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'support-logs.email-logs',
+    name: 'support-email-logs',
     url: 'email-logs/',
+    parent: 'support-logs',
     component: lazyComponent(() =>
       import('@waldur/support/SupportEmailLogsList').then((module) => ({
         default: module.SupportEmailLogsList,
@@ -168,6 +175,225 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Outgoing emails'),
+    },
+  },
+
+  // User Management routes moved from Administration
+  {
+    name: 'support-users',
+    url: 'users/?role',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@waldur/user/support/UserList').then((module) => ({
+        default: module.UserList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Users'),
+    },
+  },
+
+  {
+    name: 'support-user-manage-container',
+    url: '',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@waldur/user/UserManageContainer').then((module) => ({
+        default: module.UserManageContainer,
+      })),
+    ),
+    abstract: true,
+    data: {
+      skipBreadcrumb: true,
+    },
+  },
+
+  {
+    name: 'support-user-manage',
+    url: 'users/:user_uuid/?tab',
+    parent: 'support-user-manage-container',
+    component: lazyComponent(() =>
+      import('@waldur/user/UserManage').then((module) => ({
+        default: module.UserManage,
+      })),
+    ),
+  },
+
+  {
+    name: 'support-active-sessions',
+    url: 'users/active-sessions/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@waldur/administration/TokensList').then((module) => ({
+        default: module.TokensList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Active sessions'),
+    },
+  },
+
+  {
+    name: 'support-freeipa-users',
+    url: 'freeipa-users/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@waldur/administration/users/FreeIPAUsersList').then(
+        (module) => ({
+          default: module.FreeIPAUsersList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('FreeIPA users'),
+      permissions: [() => ENV.plugins.WALDUR_CORE.FREEIPA_ENABLED],
+    },
+  },
+
+  {
+    name: 'support-robot-accounts',
+    url: 'robot-accounts/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import(
+        '@waldur/marketplace/robot-accounts/ProviderRobotAccountList'
+      ).then((module) => ({
+        default: module.ProviderRobotAccountList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Robot accounts'),
+    },
+  },
+
+  {
+    name: 'support-offering-users',
+    url: 'offering-users/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@waldur/administration/users/OfferingUsersList').then(
+        (module) => ({
+          default: module.OfferingUsersList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Offering users'),
+    },
+  },
+
+  {
+    name: 'support-invitations',
+    url: 'invitations/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@waldur/administration/InvitationList').then((module) => ({
+        default: module.InvitationList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Invitations'),
+    },
+  },
+
+  {
+    name: 'support-notification-messages',
+    url: 'notification-messages/',
+    parent: 'support-user-management',
+    component: lazyComponent(() =>
+      import('@waldur/administration/notifications/NotificationList').then(
+        (module) => ({
+          default: module.NotificationList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Notifications'),
+    },
+  },
+
+  // Communication
+  {
+    name: 'support-announcements',
+    url: 'announcements/',
+    parent: 'support-communication',
+    component: lazyComponent(() =>
+      import('@waldur/administration/announcements/AnnouncementsList').then(
+        (module) => ({
+          default: module.AnnouncementsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Announcements'),
+    },
+  },
+
+  // Customer Support
+  {
+    name: 'support-onboarding',
+    url: 'onboarding/?tab',
+    parent: 'support-customer-support',
+    component: lazyComponent(() =>
+      import(
+        '@waldur/administration/organizations/OrganizationOnboardingTabs'
+      ).then((module) => ({
+        default: module.OrganizationOnboardingTabs,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Onboarding'),
+      permissions: [isStaff],
+    },
+  },
+  {
+    name: 'support-onboarding-justification-details',
+    url: 'onboarding/justifications/:uuid/',
+    parent: 'support-customer-support',
+    component: lazyComponent(() =>
+      import(
+        '@waldur/administration/organizations/OnboardingJustificationDetailsPage'
+      ).then((module) => ({
+        default: module.OnboardingJustificationDetailsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Justification details'),
+      skipBreadcrumb: true,
+      permissions: [isStaff],
+    },
+  },
+  {
+    name: 'support-organization-requests',
+    url: 'organization-requests/',
+    parent: 'support-customer-support',
+    component: lazyComponent(() =>
+      import(
+        '@waldur/administration/organizations/requests/OrganizationRequestsList'
+      ).then((module) => ({
+        default: module.OrganizationRequestsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Organization requests'),
+      permissions: [isStaff],
+    },
+  },
+
+  {
+    name: 'support-organization-credits',
+    url: 'organization-credits/',
+    parent: 'support-customer-support',
+    component: lazyComponent(() =>
+      import(
+        '@waldur/administration/organizations/OrganizationCreditsList'
+      ).then((module) => ({
+        default: module.OrganizationCreditsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Credit management'),
+      permissions: [isStaff],
     },
   },
 ];
