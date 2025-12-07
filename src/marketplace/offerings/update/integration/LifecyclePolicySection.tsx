@@ -1,10 +1,11 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import { NumberField, StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 
 import {
   DefaultOfferingEditPanel,
@@ -136,6 +137,22 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
     props.refetch,
   );
 
+  const finalFields = useMemo(() => {
+    const scriptAutoApprovalField: OfferingEditField = {
+      label: translate('Auto-approve script orders'),
+      key: 'plugin_options.auto_approve_marketplace_script',
+      component: AwesomeCheckboxField,
+      description: translate(
+        'If enabled, orders for this script offering will be automatically approved without requiring manual provider approval. If disabled, orders will require manual approval by the service provider.',
+      ),
+    };
+
+    if (props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS) {
+      return [scriptAutoApprovalField, ...fields];
+    }
+    return fields;
+  }, [props.offering.type]);
+
   return (
     <FormTable.Card
       title={translate('Lifecycle policy')}
@@ -144,7 +161,7 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
       <FormTable>
         <DefaultOfferingEditPanel
           {...props}
-          fields={fields}
+          fields={finalFields}
           callback={update}
         />
       </FormTable>
