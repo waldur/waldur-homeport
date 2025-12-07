@@ -1024,6 +1024,12 @@ export const SettingsDescription = [
         default: '',
         type: 'secret_field',
       },
+      {
+        key: 'ONBOARDING_BREG_API_URL',
+        description: translate('Norway Business Register API server URL'),
+        default: 'https://data.brreg.no/',
+        type: 'url_field',
+      },
     ],
   },
   {
