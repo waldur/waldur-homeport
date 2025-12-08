@@ -1,4 +1,5 @@
-.offering-users-warning-bar {
+.offering-users-warning-bar,
+.resource-warning-bar {
   min-height: 50px;
   text-align: center;
   display: grid;
@@ -7,5 +8,28 @@
 
   .d-flex {
     color: #975e06;
+  }
+}
+
+.resource-warning-bar {
+  border: 1px solid #f1cfa1;
+  margin-bottom: 0.5rem;
+}
+
+.offering-users-warning-bar__show-more,
+.resource-warning-bar__show-more {
+  background: transparent;
+  border: none;
+  color: inherit;
+  font-weight: 500;
+  cursor: pointer;
+  margin-left: 0.5rem;
+  padding: 0;
+  text-decoration: none;
+
+  &:hover,
+  &:focus,
+  &:focus-visible {
+    text-decoration: underline;
   }
 }
