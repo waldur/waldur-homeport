@@ -63,10 +63,6 @@ describe('ProjectCreateDialog', () => {
       data: { uuid: 'mock-project-uuid' },
     } as any);
 
-    vi.mocked(projectsList).mockResolvedValue({
-      data: [],
-    } as any);
-
     const router = new UIRouterReact();
     router.plugin(servicesPlugin);
     router.plugin(pushStateLocationPlugin);
@@ -112,6 +108,9 @@ describe('ProjectCreateDialog', () => {
         },
       },
     };
+    vi.mocked(projectsList).mockResolvedValue({
+      data: [],
+    } as any);
   });
 
   afterEach(() => {

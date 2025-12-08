@@ -92,6 +92,12 @@ describe('Project manage', { testIsolation: false }, () => {
           .intercept('GET', `/api/customers/${project.customer_uuid}/`, {
             fixture: 'customers/alice.json',
           })
+          .intercept('GET', '/api/projects/?name=**', {
+            body: [],
+            headers: {
+              'x-result-count': '0',
+            },
+          })
           .intercept('PATCH', `/api/projects/${project.uuid}/`, editedProject)
           .as('updateProject');
       });
