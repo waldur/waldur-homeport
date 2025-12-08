@@ -1,3 +1,5 @@
+import { projectsList } from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 
 const checkPattern = (value: string) => {
@@ -14,12 +16,25 @@ const checkPattern = (value: string) => {
 };
 
 const checkDuplicate = (value, props) =>
-  props.customer?.projects &&
-  props.customer.projects.find(
-    (project) => project.name === value && project.uuid !== props.project_uuid,
-  )
-    ? translate('Name is duplicated. Choose other name.')
-    : undefined;
+  projectsList({
+    query: {
+      name: value,
+      customer: props.customer.uuid,
+    },
+  }).then((response) => {
+    const exactMatch = response.data.find(
+      (project) =>
+        project.name === value && project.uuid !== props.project_uuid,
+    );
+    if (exactMatch) {
+      return translate('Name is duplicated. Choose other name.');
+    }
+  });
 
-export const validateProjectName = (value, props) =>
-  checkDuplicate(value, props) || checkPattern(value);
+export const validateProjectName = (value, props) => {
+  const error = checkPattern(value);
+  if (error) {
+    return error;
+  }
+  return checkDuplicate(value, props);
+};

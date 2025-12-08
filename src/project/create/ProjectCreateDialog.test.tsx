@@ -10,7 +10,11 @@ import {
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
-import { projectTypesList, projectsCreate } from 'waldur-js-client';
+import {
+  projectTypesList,
+  projectsCreate,
+  projectsList,
+} from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
 import { Customer } from '@waldur/workspace/types';
@@ -59,6 +63,10 @@ describe('ProjectCreateDialog', () => {
       data: { uuid: 'mock-project-uuid' },
     } as any);
 
+    vi.mocked(projectsList).mockResolvedValue({
+      data: [],
+    } as any);
+
     const router = new UIRouterReact();
     router.plugin(servicesPlugin);
     router.plugin(pushStateLocationPlugin);
@@ -76,6 +84,7 @@ describe('ProjectCreateDialog', () => {
                 {
                   uuid: 'mock-customer-uuid',
                   url: 'mock-customer-url',
+                  name: 'Mock Customer',
                   projects: [],
                 } as Customer
               }
@@ -187,6 +196,8 @@ describe('ProjectCreateDialog', () => {
     } as any);
     renderComponent();
     await userEvent.type(screen.getByText('Project name'), 'Test Project');
+    screen.getByText('Project name').blur();
+
     await userEvent.type(
       screen.getByText('Project description'),
       'This is a test project',
@@ -215,5 +226,30 @@ describe('ProjectCreateDialog', () => {
       });
       expect(mockedRefetch).toHaveBeenCalled();
     });
+  });
+
+  it('shows error when project name is duplicate', async () => {
+    vi.mocked(projectTypesList).mockResolvedValue({ data: [] } as any);
+    vi.mocked(projectsList).mockResolvedValue({
+      data: [{ name: 'Test Project', uuid: 'existing-uuid' }],
+    } as any);
+
+    renderComponent();
+
+    const nameInput = screen.getByLabelText(/Project name/i);
+    await userEvent.type(nameInput, 'Test Project');
+
+    // Trigger validation (blur)
+    nameInput.blur();
+
+    await waitFor(() => {
+      expect(
+        screen.getByText('Name is duplicated. Choose other name.'),
+      ).toBeInTheDocument();
+    });
+
+    // Should not submit
+    await userEvent.click(screen.getByText('Create'));
+    expect(projectsCreate).not.toHaveBeenCalled();
   });
 });
