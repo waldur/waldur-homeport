@@ -114,6 +114,6 @@ describe('OrderSummary', () => {
       user: 'Alice Lebowski',
       components: [],
     };
-    expect(getUpdateSummary(ctx)).toMatchSnapshot();
+    expect(getUpdateSummary(ctx as any)).toMatchSnapshot();
   });
 });
