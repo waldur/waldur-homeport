@@ -92,7 +92,7 @@ export const OnboardingJustificationDetailsPage = () => {
           ),
         ),
       );
-      router.stateService.go('admin-onboarding', { tab: 'justifications' });
+      router.stateService.go('support-onboarding', { tab: 'justifications' });
     } catch (e) {
       dispatch(
         showErrorResponse(
@@ -123,7 +123,7 @@ export const OnboardingJustificationDetailsPage = () => {
       dispatch(
         showSuccess(translate('Onboarding justification has been rejected.')),
       );
-      router.stateService.go('admin-onboarding', { tab: 'justifications' });
+      router.stateService.go('support-onboarding', { tab: 'justifications' });
     } catch (e) {
       dispatch(
         showErrorResponse(
