@@ -1,3 +1,4 @@
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import {
   OnboardingVerification,
@@ -7,8 +8,10 @@ import {
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import { BooleanField } from '@waldur/table/BooleanField';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -66,6 +69,22 @@ export const OrganizationOnboardingVerificationsList: FC = () => {
         {
           title: translate('Validation method'),
           render: ({ row }) => row.validation_method || translate('manual'),
+        },
+        {
+          title: translate('Customer can be created'),
+          render: ({ row }) => (
+            <>
+              <BooleanField value={row.can_customer_be_created} />
+              {row.customer_creation_error_message && (
+                <Tip
+                  id={`tip-customer-creation-${row.uuid}`}
+                  label={row.customer_creation_error_message}
+                >
+                  <QuestionIcon weight="bold" />
+                </Tip>
+              )}
+            </>
+          ),
         },
         {
           title: translate('Created'),
