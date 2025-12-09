@@ -11,7 +11,7 @@ export const UserSubmittedFieldsTab = ({ order }) => {
             <FormTable.Item
               key={key}
               label={key}
-              value={<FieldWithCopy value={value} />}
+              value={<FieldWithCopy value={JSON.stringify(value)} />}
             />
           ))}
       </FormTable>
