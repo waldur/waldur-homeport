@@ -86,7 +86,12 @@ export const OrganizationCreateStep3: FunctionComponent<
                   </>
                 )}
                 {validationResult.error_traceback && (
-                  <pre className="mb-0">{validationResult.error_traceback}</pre>
+                  <pre
+                    className="mb-0"
+                    style={{ whiteSpace: 'pre-wrap', wordBreak: 'break-word' }}
+                  >
+                    {validationResult.error_traceback}
+                  </pre>
                 )}
               </>
             ) : null}
