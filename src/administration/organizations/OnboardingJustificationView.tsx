@@ -6,7 +6,7 @@ import { router } from '@waldur/router';
 
 export const OnboardingJustificationView = ({ row }) => {
   const callback = () => {
-    router.stateService.go('admin-onboarding-justification-details', {
+    router.stateService.go('support-onboarding-justification-details', {
       uuid: row.uuid,
     });
   };
