@@ -1,0 +1,60 @@
+offering:
+  name: Test Import Offering
+  description: A test offering for import
+  full_description: This is a comprehensive test offering used for Cypress E2E testing
+  vendor_details: Test Vendor Inc.
+  getting_started: Follow these steps to get started with the test offering
+  integration_guide: Integration guide for test offering
+  type: Marketplace.Basic
+  shared: true
+  billable: true
+  state: Active
+  category_name: AKKI
+  country: US
+  latitude: null
+  longitude: null
+  access_url: https://example.com/test-offering
+  paused_reason: ""
+components:
+  - type: cpu
+    name: CPU
+    description: CPU cores for compute
+    billing_type: fixed
+    measured_unit: cores
+    unit_factor: 1
+    limit_period: null
+    limit_amount: null
+    article_code: CPU-001
+    backend_id: cpu-backend-1
+  - type: ram
+    name: RAM
+    description: Memory allocation
+    billing_type: usage
+    measured_unit: GB
+    unit_factor: 1
+    limit_period: null
+    limit_amount: null
+    article_code: RAM-001
+    backend_id: ram-backend-1
+plans:
+  - name: Basic Plan
+    description: Basic pricing plan for small workloads
+    unit_price: 100.0
+    unit: month
+    archived: false
+    max_amount: null
+    article_code: PLAN-BASIC-001
+    backend_id: plan-basic-1
+  - name: Premium Plan
+    description: Premium plan with additional features
+    unit_price: 250.0
+    unit: month
+    archived: false
+    max_amount: null
+    article_code: PLAN-PREMIUM-001
+    backend_id: plan-premium-1
+screenshots: []
+files: []
+endpoints: []
+organization_groups: []
+terms_of_service: []

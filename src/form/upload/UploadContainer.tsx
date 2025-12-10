@@ -10,6 +10,7 @@ import './UploadContainer.scss';
 interface UploadContainerProps extends DropzoneOptions {
   message?: string;
   className?: string;
+  disabled?: boolean;
 }
 
 const rejectStyle = {
@@ -27,7 +28,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
   };
 
   return (
-    <Dropzone noClick ref={dropzoneNode} {...rest}>
+    <Dropzone noClick ref={dropzoneNode} disabled={props.disabled} {...rest}>
       {({ getRootProps, getInputProps, isDragActive, isDragReject }) => (
         <div
           {...getRootProps({

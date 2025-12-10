@@ -1,4 +1,4 @@
-import { PlusIcon } from '@phosphor-icons/react';
+import { PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -15,10 +15,17 @@ import { Offering, ServiceProvider } from '../types';
 
 import { OFFERING_IMPORT_FORM_ID } from './import/constants';
 import { OfferingBreadcrumbPopover } from './OfferingBreadcrumbPopover';
+import { SINGLE_OFFERING_IMPORT_FORM_ID } from './single-import/constants';
 
 const OfferingImportDialog = lazyComponent(() =>
   import('./import/OfferingImportDialog').then((module) => ({
     default: module.OfferingImportDialog,
+  })),
+);
+
+const SingleOfferingImportDialog = lazyComponent(() =>
+  import('./single-import/SingleOfferingImportDialog').then((module) => ({
+    default: module.SingleOfferingImportDialog,
   })),
 );
 
@@ -37,9 +44,10 @@ export const useOfferingDropdownActions = (refetch?) => {
     return null;
   }
 
-  return (
+  return [
     <ActionItem
-      title={translate('Import offerings')}
+      key="connect-remote-offerings"
+      title={translate('Connect remote offerings')}
       action={() => {
         dispatch(
           openModalDialog(OfferingImportDialog, {
@@ -50,8 +58,22 @@ export const useOfferingDropdownActions = (refetch?) => {
         );
       }}
       iconNode={<PlusIcon weight="bold" />}
-    />
-  );
+    />,
+    <ActionItem
+      key="import-offering"
+      title={translate('Import offering')}
+      action={() => {
+        dispatch(
+          openModalDialog(SingleOfferingImportDialog, {
+            resolve: { refetch },
+            size: 'lg',
+            formId: SINGLE_OFFERING_IMPORT_FORM_ID,
+          }),
+        );
+      }}
+      iconNode={<UploadSimpleIcon weight="bold" />}
+    />,
+  ];
 };
 
 export const getOfferingBreadcrumbItems = (
