@@ -80,7 +80,7 @@ export const AdminStatistics = () => {
             <StatisticsCard
               title={translate('Users')}
               value={data.users}
-              to={{ state: 'admin-user-users' }}
+              to={{ state: 'support-users' }}
             />
           </Col>
           <Col md={6} lg={4}>
