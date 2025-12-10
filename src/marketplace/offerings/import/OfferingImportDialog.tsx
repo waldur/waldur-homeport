@@ -88,9 +88,9 @@ export const OfferingImportDialog = reduxForm<
   return (
     <form onSubmit={handleSubmit(saveOffering)}>
       <ModalDialog
-        title={translate('Mass import of remote offerings')}
+        title={translate('Connect remote offerings')}
         subtitle={translate(
-          'Import offerings from remote organizations with configurable rules and mappings.',
+          'Connect offerings from remote organizations with configurable rules and mappings.',
         )}
         bodyClassName="h-400px"
         footer={

@@ -95,7 +95,7 @@ describe('OrderSummary', () => {
     resource_name: 'Demo Cloud',
     old_plan_name: 'Basic',
     new_plan_name: 'Advanced',
-    old_cost_estimate: '100',
+    old_cost_estimate: 100,
     new_cost_estimate: '300',
   };
 
@@ -105,7 +105,7 @@ describe('OrderSummary', () => {
       user: 'Alice Lebowski',
       components: COMPONENTS,
     };
-    expect(getUpdateSummary(ctx as any)).toMatchSnapshot();
+    expect(getUpdateSummary(ctx)).toMatchSnapshot();
   });
 
   it('formats update summary without components', () => {

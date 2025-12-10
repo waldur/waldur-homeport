@@ -1,0 +1,6 @@
+invalid_structure:
+  - this is not valid
+  - missing offering section
+  - should fail validation
+components:
+  - name: Invalid Component
