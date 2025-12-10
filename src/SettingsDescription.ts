@@ -956,7 +956,7 @@ export const SettingsDescription = [
         key: 'ONBOARDING_COUNTRY',
         description: translate('ISO 3166-1 alpha-2 country code for the deployment (e.g., \'EE\' for Estonia, \'AT\' for Austria). Used for onboarding and localization.'),
         default: '',
-        type: 'text_field',
+        type: 'string',
       },
       {
         key: 'ONBOARDING_VERIFICATION_EXPIRY_HOURS',
@@ -974,7 +974,7 @@ export const SettingsDescription = [
         key: 'ONBOARDING_ARIREGISTER_USERNAME',
         description: translate('Username for Estonian Äriregister API authentication.'),
         default: '',
-        type: 'text_field',
+        type: 'string',
       },
       {
         key: 'ONBOARDING_ARIREGISTER_PASSWORD',
@@ -1016,7 +1016,7 @@ export const SettingsDescription = [
         key: 'ONBOARDING_BOLAGSVERKET_CLIENT_ID',
         description: translate('Sweden Business Register API client identifier'),
         default: '',
-        type: 'text_field',
+        type: 'string',
       },
       {
         key: 'ONBOARDING_BOLAGSVERKET_CLIENT_SECRET',

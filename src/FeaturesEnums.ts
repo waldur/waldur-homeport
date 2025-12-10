@@ -5,6 +5,7 @@ export enum CustomerFeatures {
   payments_for_staff_only = 'customer.payments_for_staff_only',
   show_banking_data = 'customer.show_banking_data',
   show_domain = 'customer.show_domain',
+  show_onboarding = 'customer.show_onboarding',
   show_permission_reviews = 'customer.show_permission_reviews',
 }
 

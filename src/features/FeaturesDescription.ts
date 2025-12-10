@@ -21,6 +21,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Allows to hide domain field in organization detail.'),
       },
       {
+        key: 'show_onboarding',
+        description: translate('Enable onboarding functionality.'),
+      },
+      {
         key: 'show_permission_reviews',
         description: translate('Allows to show permission reviews tab and popups for organisations.'),
       },
