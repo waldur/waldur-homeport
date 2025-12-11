@@ -4,6 +4,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
 import {
+  CustomerFeatures,
   InvitationsFeatures,
   MarketplaceFeatures,
 } from '@waldur/FeaturesEnums';
@@ -437,7 +438,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Onboarding settings'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
+      feature: CustomerFeatures.show_onboarding,
     },
   },
 

@@ -229,10 +229,8 @@ export const detectOS = () => {
 };
 
 export const decodeFileName = (fileName: string) => {
-  return decodeURIComponent(
-    fileName
-      .split('/')
-      .pop()
-      .replace(/_[^_]+\./, '.'),
-  );
+  const name = fileName.split('/').pop();
+  // Remove hash suffix added by backend (e.g., logo_tYFDZbD.png -> logo.png)
+  // Pattern: underscore followed by 7 alphanumeric characters before the extension
+  return decodeURIComponent(name.replace(/_[a-zA-Z0-9]{7}\./, '.'));
 };

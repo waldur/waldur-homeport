@@ -1,11 +1,11 @@
 import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
 import { AddOrganizationButton } from './AddOrganizationButton';
 
 export const UserProfileActions = () => {
-  if (!isFeatureVisible(MarketplaceFeatures.show_experimental_ui_components)) {
+  if (!isFeatureVisible(CustomerFeatures.show_onboarding)) {
     return null;
   }
   return (

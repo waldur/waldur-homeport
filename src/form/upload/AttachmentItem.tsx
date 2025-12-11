@@ -6,7 +6,7 @@ import { useDispatch } from 'react-redux';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { formatFilesize } from '@waldur/core/utils';
+import { decodeFileName, formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -43,6 +43,8 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
       }),
     );
 
+  const fileName = decodeFileName(attachment.file_name);
+
   return (
     <div className="attachment-item">
       {isDeleting && (
@@ -66,7 +68,7 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
                 >
                   <ImageFetcher
                     url={attachment.file}
-                    name={attachment.file_name}
+                    name={fileName}
                     thumb
                     iconSize={iconSize}
                   />
@@ -74,16 +76,14 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
               ) : (
                 <FileDownloader
                   url={attachment.file}
-                  name={attachment.file_name}
+                  name={fileName}
                   size={iconSize}
                 />
               )}
             </div>
           )}
           <div className="attachment-item__body">
-            <h6 className="fw-bold text-gray-700 mb-0">
-              {attachment.file_name}
-            </h6>
+            <h6 className="fw-bold text-gray-700 mb-0">{fileName}</h6>
             <p className="fs-6 text-muted mb-0">
               {[
                 attachment.file_size
