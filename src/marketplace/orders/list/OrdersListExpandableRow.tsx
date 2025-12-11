@@ -41,7 +41,7 @@ export const OrdersListExpandableRow: FunctionComponent<{
     {order.state === 'pending-provider' && (
       <Field
         label={translate('Actions')}
-        value={<OrderProviderActions order={order} />}
+        value={<OrderProviderActions order={order} size="sm" />}
       />
     )}
   </ExpandableContainer>

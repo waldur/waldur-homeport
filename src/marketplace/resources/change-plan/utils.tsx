@@ -2,6 +2,8 @@ import {
   BasePublicPlan,
   marketplacePublicOfferingsRetrieve,
   marketplaceResourcesRetrieve,
+  Offering,
+  OrderDetails,
   PublicOfferingDetails,
   Resource,
 } from 'waldur-js-client';
@@ -13,6 +15,7 @@ import {
 } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
+import { getBillingPeriods } from '@waldur/marketplace/common/utils';
 
 export interface FetchedData {
   resource: Resource;
@@ -98,3 +101,70 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
   const initialValues = validPlan ? { plan: validPlan } : undefined;
   return { resource, columns, choices, initialValues };
 }
+
+export const getPlanSwitchData = (order: OrderDetails, offering: Offering) => {
+  const oldPlan = offering.plans.find((p) => p.uuid === order.old_plan_uuid);
+  const newPlan = offering.plans.find((p) => p.uuid === order.new_plan_uuid);
+
+  const { periods, multipliers } = getBillingPeriods(oldPlan.unit);
+  const { periods: newPeriods, multipliers: newMultipliers } =
+    getBillingPeriods(newPlan.unit);
+  const offeringComponents = filterOfferingComponents(offering).filter(
+    (component) => component.billing_type === 'limit',
+  );
+
+  const components = offeringComponents.map((component) => {
+    const currentLimit = order.limits[component.type] || 0;
+    const oldPrice = oldPlan.prices[component.type] || 0;
+    const oldSubTotal = oldPrice * currentLimit || 0;
+    const oldPrices = multipliers.map((mult) => mult * oldSubTotal);
+    const newPrice = newPlan.prices[component.type] || 0;
+    const newSubTotal = newPrice * currentLimit || 0;
+    const newPrices = newMultipliers.map((mult) => mult * newSubTotal);
+    const changedSubTotal = newSubTotal - oldSubTotal;
+    const changedSubTotalPrc = (changedSubTotal / oldSubTotal) * 100;
+    // Assuming the period hasn't changed.
+    const changedPrices = multipliers.map((mult) => mult * changedSubTotal);
+    return {
+      type: component.type,
+      name: component.name,
+      measured_unit: component.measured_unit,
+      is_boolean: component.is_boolean,
+      limit: currentLimit,
+      oldPrices,
+      newPrices,
+      changedPrices,
+      oldSubTotal,
+      newSubTotal,
+      changedSubTotal,
+      changedSubTotalPrc,
+    };
+  });
+  const oldTotal = components.reduce(
+    (result, item) => result + item.oldSubTotal,
+    0,
+  );
+  const newTotal = components.reduce(
+    (result, item) => result + item.newSubTotal,
+    0,
+  );
+  const changedTotal = components.reduce(
+    (result, item) => result + item.changedSubTotal,
+    0,
+  );
+  const totalPeriods = multipliers.map((mult) => mult * oldTotal || 0);
+  const newTotalPeriods = newMultipliers.map((mult) => mult * newTotal || 0);
+  // Assuming the period hasn't changed.
+  const changedTotalPeriods = multipliers.map(
+    (mult) => mult * changedTotal || 0,
+  );
+  return {
+    periods,
+    newPeriods,
+    components,
+    totalPeriods,
+    newTotalPeriods,
+    changedTotalPeriods,
+    offering,
+  };
+};

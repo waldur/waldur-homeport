@@ -1,13 +1,13 @@
 import { describe, it, expect } from 'vitest';
 
-import { getData } from '@waldur/marketplace/resources/change-limits/utils';
+import { getLimitChangeData } from '@waldur/marketplace/resources/change-limits/utils';
 
 import * as fixtures from './fixtures';
 
 describe('Change resource limits', () => {
   it('returns correct data', () => {
     expect(
-      getData(
+      getLimitChangeData(
         fixtures.plan,
         fixtures.offering,
         fixtures.newLimits,

@@ -1,0 +1,155 @@
+import { QuestionIcon } from '@phosphor-icons/react';
+import { useMemo } from 'react';
+
+import { formatDate } from '@waldur/core/dateUtils';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Tip } from '@waldur/core/Tooltip';
+import { translate } from '@waldur/i18n';
+import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/ChangedLimitField';
+import {
+  getLimitChangeData,
+  getLimitChangeRequirements,
+} from '@waldur/marketplace/resources/change-limits/utils';
+import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { Field } from '@waldur/resource/summary';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+
+import { DetailsTable } from './DetailsTable';
+import {
+  CostChangeField,
+  OrderTypeBasedProps,
+  RequestCommentField,
+  StartDateField,
+} from './OrderCommonFields';
+
+interface RenewalAttributes {
+  action: 'renew';
+  extension_months: number;
+  new_end_date: string;
+  old_end_date: string;
+  old_limits: Record<string, any>;
+  renewal_cost: number;
+}
+
+export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
+  const attributes = order.attributes as RenewalAttributes;
+
+  const data = useMemo(() => {
+    const requirements = getLimitChangeRequirements(
+      { limits: attributes.old_limits },
+      offering,
+    );
+
+    if (requirements) {
+      const newLimits = order.limits;
+      const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
+      const { usages, limits: currentLimits } = requirements;
+      return getLimitChangeData(
+        plan,
+        offering,
+        newLimits,
+        currentLimits,
+        usages,
+        true,
+      );
+    }
+    return {
+      periods: [],
+      components: [],
+      orderCanBeApproved: true,
+      totalPeriods: [],
+      changedTotalPeriods: [],
+      offering,
+    };
+  }, [order, offering]);
+
+  return (
+    <>
+      <StartDateField order={order} />
+      <Field
+        label={translate('Old end date')}
+        value={formatDate(attributes.old_end_date)}
+      />
+      <Field
+        label={translate('New end date')}
+        value={formatDate(attributes.new_end_date)}
+      />
+      <Field
+        label={translate('Extension')}
+        value={
+          '+ ' +
+          (attributes.extension_months === 1
+            ? translate('1 month')
+            : translate('{count} months', {
+                count: attributes.extension_months,
+              }))
+        }
+      />
+      <Field
+        label={translate('Renewal cost')}
+        value={defaultCurrency(attributes.renewal_cost)}
+      />
+      <CostChangeField order={order} />
+      <RequestCommentField order={order} />
+
+      <DetailsTable<(typeof data.components)[0]>
+        rows={data.components}
+        columns={[
+          {
+            title: translate('Component'),
+            render: ({ row }) => (
+              <>
+                {row.name}
+                <Tip label={row.type} id={'tip-' + row.type} className="ms-1">
+                  <QuestionIcon weight="bold" />
+                </Tip>
+              </>
+            ),
+            className: 'text-nowrap',
+          },
+          {
+            title: translate('Old limit'),
+            render: ({ row }) => `${row.limit ?? 0} ${row.measured_unit}`,
+          },
+          {
+            title: translate('New limit'),
+            render: ({ row }) =>
+              order.limits[row.type] + ' ' + row.measured_unit,
+          },
+          {
+            title: translate('Difference'),
+            render: ({ row }) =>
+              row.changedLimit ? (
+                <ChangedLimitField
+                  changedLimit={row.changedLimit}
+                  unit={row.measured_unit}
+                />
+              ) : (
+                DASH_ESCAPE_CODE
+              ),
+          },
+          ...data.periods.map((period, i) => ({
+            title: (
+              <>
+                {period} <PriceTooltip />
+              </>
+            ),
+            render: ({ row }) => defaultCurrency(row.prices[i]),
+          })),
+        ]}
+        totalRow={
+          <tr className="fw-bolder">
+            <td colSpan={4} className="text-dark text-end">
+              {translate('Total renewal cost')}
+            </td>
+            {data.totalPeriods.map((total, index) => (
+              <td key={index} className="text-dark">
+                {defaultCurrency(total)}
+              </td>
+            ))}
+          </tr>
+        }
+      />
+    </>
+  );
+};

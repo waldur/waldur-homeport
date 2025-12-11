@@ -4,12 +4,17 @@ export const formatCurrency = (
   value: string | number,
   currency: string,
   fractionSize: number,
+  signed?: boolean,
 ) => {
   if (typeof value === 'string') value = parseFloat(value);
-  return `${currency || ''} ${new Intl.NumberFormat('en-US', {
+  let sign = '';
+  if (signed) {
+    sign = value > 0 ? '+' : value < 0 ? '-' : '';
+  }
+  return `${sign}${currency || ''} ${new Intl.NumberFormat('en-US', {
     minimumFractionDigits: 2,
     maximumFractionDigits: fractionSize,
-  }).format(value)}`;
+  }).format(signed ? Math.abs(value) : value)}`;
 };
 
 const abbreviateNumber = (value: string | number) => {
@@ -28,6 +33,7 @@ const abbreviateNumber = (value: string | number) => {
 export const defaultCurrency = (
   value,
   shorten = false,
+  signed = false,
 ): string | null | undefined => {
   if (value === undefined || value === null) {
     return value;
@@ -49,5 +55,6 @@ export const defaultCurrency = (
     value,
     ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
     fractionSize,
+    signed,
   );
 };

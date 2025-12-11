@@ -16,6 +16,8 @@ export const OrderProviderActions = ({
   order,
   refetch,
   as,
+  size,
+  labeledDropdown,
 }: OrderActionProps) => {
   const user = useSelector(getUser);
 
@@ -53,9 +55,12 @@ export const OrderProviderActions = ({
       actions={[
         showApproveByProviderButton ? ApproveByProviderButton : null,
         showRejectByProviderButton ? RejectByProviderButton : null,
-        user.is_staff ? OrderUnlinkButton : null,
+        user?.is_staff ? OrderUnlinkButton : null,
       ].filter(Boolean)}
-      data-cy="public-resources-list-actions-dropdown-btn"
+      data-cy="order-provider-actions-dropdown-btn"
+      labeled={labeledDropdown}
+      drop="down"
+      size={size || 'md'}
     />
   );
 };

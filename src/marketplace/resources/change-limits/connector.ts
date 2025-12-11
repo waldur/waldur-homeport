@@ -9,7 +9,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { Limits } from '@waldur/marketplace/common/types';
 import { orderCanBeApproved as getOrderCanBeApproved } from '@waldur/marketplace/orders/actions/selectors';
 
-import { FetchedData, getData } from './utils';
+import { FetchedData, getLimitChangeData } from './utils';
 
 const FORM_ID = 'marketplaceChangeLimits';
 
@@ -54,7 +54,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
       usages,
       limits: currentLimits,
     } = ownProps.asyncState.value;
-    return getData(
+    return getLimitChangeData(
       plan,
       offering,
       newLimits,
