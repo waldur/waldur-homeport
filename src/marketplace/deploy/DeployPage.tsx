@@ -10,9 +10,10 @@ import {
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { InjectedFormProps, reduxForm } from 'redux-form';
-import { OrderDetails } from 'waldur-js-client';
+import { OrderDetails, projectsRetrieve } from 'waldur-js-client';
 
 import { parseDate } from '@waldur/core/dateUtils';
+import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
 import { getCustomer } from '@waldur/customer/utils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
@@ -110,57 +111,90 @@ export const BaseDeployPage = ({
 
   // Initialize project and cloud and initial attributes
   useEffectOnce(() => {
-    const initialValues: DeployFormData = {};
+    const initializeFormValues = async () => {
+      const initialValues: DeployFormData = {};
+      const urlParams = getInitialValues();
 
-    if (selectedOffering.project) {
-      initialValues.project = {
-        name: selectedOffering.project_name,
-        uuid: selectedOffering.project_uuid,
-        url: selectedOffering.project,
-      };
-    } else {
-      const projectFilter = marketplaceFilters?.find(
-        (item) => item.name === 'project',
-      );
-      if (projectFilter?.value) {
-        initialValues.project = projectFilter.value;
-      } else if (currentProject) {
-        initialValues.customer = currentCustomer;
-        initialValues.project = currentProject;
+      if (selectedOffering.project) {
+        initialValues.project = {
+          name: selectedOffering.project_name,
+          uuid: selectedOffering.project_uuid,
+          url: selectedOffering.project,
+        };
+      } else {
+        // Priority order: URL params > marketplace filters > current project
+        if (urlParams?.project_uuid) {
+          try {
+            const response = await projectsRetrieve({
+              path: { uuid: urlParams.project_uuid },
+            });
+            initialValues.project = response.data;
+          } catch {
+            // Failed to load project from URL param, continue with fallback
+          }
+        } else if (urlParams?.project) {
+          // Fallback for old full-object format
+          initialValues.project = urlParams.project;
+        } else {
+          const projectFilter = marketplaceFilters?.find(
+            (item) => item.name === 'project',
+          );
+          if (projectFilter?.value) {
+            initialValues.project = projectFilter.value;
+          } else if (currentProject) {
+            initialValues.customer = currentCustomer;
+            initialValues.project = currentProject;
+          }
+        }
       }
-    }
 
-    if (selectedOffering.shared) {
-      const customerFilter = marketplaceFilters?.find(
-        (item) => item.name === 'organization',
-      );
+      if (selectedOffering.shared) {
+        // Priority order: URL params > marketplace filters
+        if (urlParams?.organization_uuid) {
+          try {
+            const customer = await getCustomer(urlParams.organization_uuid);
+            initialValues.customer = customer;
+          } catch {
+            // Failed to load organization from URL param, continue with fallback
+          }
+        } else if (urlParams?.organization) {
+          // Fallback for old full-object format
+          initialValues.customer = urlParams.organization;
+        } else {
+          const customerFilter = marketplaceFilters?.find(
+            (item) => item.name === 'organization',
+          );
 
-      if (customerFilter?.value) {
-        initialValues.customer = customerFilter.value;
+          if (customerFilter?.value) {
+            initialValues.customer = customerFilter.value;
+          }
+        }
+      } else {
+        initialValues.customer = {
+          name: selectedOffering.customer_name,
+          uuid: selectedOffering.customer_uuid,
+          url: selectedOffering.customer,
+          payment_profiles: [],
+        };
       }
-    } else {
-      initialValues.customer = {
-        name: selectedOffering.customer_name,
-        uuid: selectedOffering.customer_uuid,
-        url: selectedOffering.customer,
-        payment_profiles: [],
-      };
-    }
 
-    if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
-      initialValues.offering = selectedOffering;
-    }
+      if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
+        initialValues.offering = selectedOffering;
+      }
 
-    if (props.initialLimits || props.limits) {
-      initialValues.limits = props.initialLimits || props.limits;
-    }
-    if (props.plan) {
-      initialValues.plan = props.plan;
-    }
+      if (props.initialLimits || props.limits) {
+        initialValues.limits = props.initialLimits || props.limits;
+      }
+      if (props.plan) {
+        initialValues.plan = props.plan;
+      }
 
-    Object.entries(initialValues).forEach(([key, value]) => {
-      props.change(key, value);
-    });
+      Object.entries(initialValues).forEach(([key, value]) => {
+        props.change(key, value);
+      });
+    };
+
+    initializeFormValues();
   });
 
   // Initialize limits and plan when the offering changes
@@ -250,6 +284,20 @@ export const BaseDeployPage = ({
       );
     }
   }, [formData?.attributes?.flavor, formData?.attributes?.image, props.change]);
+
+  // Sync organization and project UUIDs to URL parameters
+  useEffect(() => {
+    const urlValues: any = {};
+    if (customer?.uuid) {
+      urlValues.organization_uuid = customer.uuid;
+    }
+    if (project?.uuid) {
+      urlValues.project_uuid = project.uuid;
+    }
+    if (Object.keys(urlValues).length > 0) {
+      syncFiltersToURL(urlValues);
+    }
+  }, [customer, project]);
 
   // To check if a customer has display_billing_info_in_projects to hide prices
   // When the customer is not selected from the selector, we may not have this field.
