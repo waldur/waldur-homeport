@@ -14,6 +14,7 @@ import { InternalNameField } from '../../InternalNameField';
 import { ComponentMultiplierConfiguration } from './ComponentMultiplierConfiguration';
 import { ConditionalCascadeConfiguration } from './ConditionalCascadeConfiguration';
 import { FIELD_TYPES, OPTION_FORM_ID } from './constants';
+import { K8sDefaultsConfiguration } from './K8sDefaultsConfiguration';
 
 const selector = getFormValues(OPTION_FORM_ID);
 
@@ -82,6 +83,10 @@ export const OptionForm = ({ resourceType, offering }) => {
           name="component_multiplier_config"
           offering={offering}
         />
+      )}
+      {(type === 'single_datacenter_k8s_config' ||
+        type === 'multi_datacenter_k8s_config') && (
+        <K8sDefaultsConfiguration name="default_configs" />
       )}
       {resourceType === 'options' ? (
         <FormGroup>

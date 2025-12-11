@@ -1,8 +1,4 @@
-import {
-  BillingUnit,
-  OptionField,
-  OptionFieldTypeEnum,
-} from 'waldur-js-client';
+import { BillingUnit } from 'waldur-js-client';
 
 import { PlanFormData, OptionFormData } from './types';
 
@@ -20,10 +16,11 @@ export const formatOption = (option: OptionFormData) => {
     choices,
     cascade_config,
     component_multiplier_config,
+    default_configs,
     ...rest
   } = option;
-  const item: OptionField = {
-    type: type.value as OptionFieldTypeEnum,
+  const item: any = {
+    type: type.value,
     ...rest,
   };
 
@@ -44,6 +41,15 @@ export const formatOption = (option: OptionFormData) => {
   // Handle component_multiplier_config for component_multiplier type
   if (component_multiplier_config && item.type === 'component_multiplier') {
     item.component_multiplier_config = component_multiplier_config;
+  }
+
+  // Handle default_configs for K8s config types
+  if (
+    default_configs &&
+    (item.type === 'single_datacenter_k8s_config' ||
+      item.type === 'multi_datacenter_k8s_config')
+  ) {
+    item.default_configs = default_configs;
   }
 
   return item;

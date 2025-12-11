@@ -20,44 +20,46 @@ export default {
   create(context) {
     const borderRadiusTokens = {
       // CSS property values
-      'border-radius: 4px': 'border-radius: $border-radius-xs',
-      'border-radius: 6px': 'border-radius: $border-radius-sm',
-      'border-radius: 8px': 'border-radius: $border-radius', // or $border-radius-lg
-      'border-radius: 12px': 'border-radius: $border-radius-xl',
+      'border-radius: $border-radius-xs': 'border-radius: $border-radius-xs',
+      'border-radius: $border-radius-sm': 'border-radius: $border-radius-sm',
+      'border-radius: $border-radius': 'border-radius: $border-radius', // or $border-radius-lg
+      'border-radius: $border-radius-xl': 'border-radius: $border-radius-xl',
 
       // Individual corner properties
-      'border-top-left-radius: 4px':
+      'border-top-left-radius: $border-radius-xs':
         'border-top-left-radius: $border-radius-xs',
-      'border-top-right-radius: 4px':
+      'border-top-right-radius: $border-radius-xs':
         'border-top-right-radius: $border-radius-xs',
-      'border-bottom-left-radius: 4px':
+      'border-bottom-left-radius: $border-radius-xs':
         'border-bottom-left-radius: $border-radius-xs',
-      'border-bottom-right-radius: 4px':
+      'border-bottom-right-radius: $border-radius-xs':
         'border-bottom-right-radius: $border-radius-xs',
 
-      'border-top-left-radius: 6px':
+      'border-top-left-radius: $border-radius-sm':
         'border-top-left-radius: $border-radius-sm',
-      'border-top-right-radius: 6px':
+      'border-top-right-radius: $border-radius-sm':
         'border-top-right-radius: $border-radius-sm',
-      'border-bottom-left-radius: 6px':
+      'border-bottom-left-radius: $border-radius-sm':
         'border-bottom-left-radius: $border-radius-sm',
-      'border-bottom-right-radius: 6px':
+      'border-bottom-right-radius: $border-radius-sm':
         'border-bottom-right-radius: $border-radius-sm',
 
-      'border-top-left-radius: 8px': 'border-top-left-radius: $border-radius',
-      'border-top-right-radius: 8px': 'border-top-right-radius: $border-radius',
-      'border-bottom-left-radius: 8px':
+      'border-top-left-radius: $border-radius':
+        'border-top-left-radius: $border-radius',
+      'border-top-right-radius: $border-radius':
+        'border-top-right-radius: $border-radius',
+      'border-bottom-left-radius: $border-radius':
         'border-bottom-left-radius: $border-radius',
-      'border-bottom-right-radius: 8px':
+      'border-bottom-right-radius: $border-radius':
         'border-bottom-right-radius: $border-radius',
 
-      'border-top-left-radius: 12px':
+      'border-top-left-radius: $border-radius-xl':
         'border-top-left-radius: $border-radius-xl',
-      'border-top-right-radius: 12px':
+      'border-top-right-radius: $border-radius-xl':
         'border-top-right-radius: $border-radius-xl',
-      'border-bottom-left-radius: 12px':
+      'border-bottom-left-radius: $border-radius-xl':
         'border-bottom-left-radius: $border-radius-xl',
-      'border-bottom-right-radius: 12px':
+      'border-bottom-right-radius: $border-radius-xl':
         'border-bottom-right-radius: $border-radius-xl',
     };
     const borderRadiusRawValues = {

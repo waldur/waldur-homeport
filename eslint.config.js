@@ -9,22 +9,23 @@ import reactHooks from 'eslint-plugin-react-hooks';
 import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
+
+import enforceBadgeDesignTokens from './eslint-rules/enforce-badge-design-tokens.js';
 import enforceBadgeIconPatterns from './eslint-rules/enforce-badge-icon-patterns.js';
 import enforceBadgePropsConsistency from './eslint-rules/enforce-badge-props-consistency.js';
-import enforceBadgeDesignTokens from './eslint-rules/enforce-badge-design-tokens.js';
-import noManualIconColorsInBadges from './eslint-rules/no-manual-icon-colors-in-badges.js';
 import enforceBadgeRightIconPattern from './eslint-rules/enforce-badge-right-icon-pattern.js';
+import enforceBorderRadiusTokens from './eslint-rules/enforce-border-radius-tokens.js';
+import enforceBreadcrumbColors from './eslint-rules/enforce-breadcrumb-colors.js';
 import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
+import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
 import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
+import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
 import enforcePhosphorIconWeight from './eslint-rules/enforce-phosphor-icon-weight.js';
+import noManualIconColorsInBadges from './eslint-rules/no-manual-icon-colors-in-badges.js';
 import noTemplateInTranslate from './eslint-rules/no-template-in-translate.js';
 import preferClassnamesUtility from './eslint-rules/prefer-classnames-utility.js';
 
 // Design system rules
-import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
-import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
-import enforceBorderRadiusTokens from './eslint-rules/enforce-border-radius-tokens.js';
-import enforceBreadcrumbColors from './eslint-rules/enforce-breadcrumb-colors.js';
 
 const browserGlobals = {
   ...globals.browser,

@@ -46,12 +46,12 @@ export const OfferingOptionsSectionPure: FC<
               {data?.order?.map((key) => (
                 <tr key={key}>
                   <td className="col-md-3">
-                    {
-                      FIELD_TYPES.find(
-                        (fieldType) =>
-                          fieldType.value === data?.options[key]?.type,
-                      ).label
-                    }
+                    {FIELD_TYPES.find(
+                      (fieldType) =>
+                        fieldType.value === data?.options[key]?.type,
+                    )?.label ||
+                      data?.options[key]?.type ||
+                      translate('Unknown Type')}
                   </td>
                   <td className="col-md-3">{data.options[key]?.label}</td>
                   <td className="col-md-6">{data.options[key]?.help_text}</td>
