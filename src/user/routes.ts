@@ -3,7 +3,11 @@ import { UIView } from '@uirouter/react';
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
-import { MarketplaceFeatures, UserFeatures } from '@waldur/FeaturesEnums';
+import {
+  CustomerFeatures,
+  MarketplaceFeatures,
+  UserFeatures,
+} from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 
@@ -229,7 +233,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       breadcrumb: () => translate('Create organization'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
+      feature: CustomerFeatures.show_onboarding,
     },
   },
   {
