@@ -30,10 +30,13 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { FormGroup } from '../offerings/FormGroup';
 import { Offering } from '../types';
+import { isExperimentalUiComponentsVisible } from '../utils';
 
 import { ComponentMultiplierField } from './ComponentMultiplierField';
 import { ConditionalCascadeField } from './ConditionalCascadeField';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
+import { MultiDatacenterK8sConfigurationForm } from './MultiDatacenterK8sConfigurationForm';
+import { SingleDatacenterK8sConfigurationForm } from './SingleDatacenterK8sConfigurationForm';
 import { DeployFormData } from './types';
 
 interface OptionsFormProps {
@@ -174,6 +177,24 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
       params = {
         field: option,
       };
+      break;
+
+    case 'single_datacenter_k8s_config':
+      if (isExperimentalUiComponentsVisible()) {
+        OptionField = SingleDatacenterK8sConfigurationForm;
+        params = {
+          field: option,
+        };
+      }
+      break;
+
+    case 'multi_datacenter_k8s_config':
+      if (isExperimentalUiComponentsVisible()) {
+        OptionField = MultiDatacenterK8sConfigurationForm;
+        params = {
+          field: option,
+        };
+      }
       break;
   }
 

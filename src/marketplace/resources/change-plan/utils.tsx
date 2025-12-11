@@ -106,6 +106,19 @@ export const getPlanSwitchData = (order: OrderDetails, offering: Offering) => {
   const oldPlan = offering.plans.find((p) => p.uuid === order.old_plan_uuid);
   const newPlan = offering.plans.find((p) => p.uuid === order.new_plan_uuid);
 
+  // Guard against missing plans
+  if (!oldPlan || !newPlan) {
+    return {
+      periods: [],
+      newPeriods: [],
+      components: [],
+      totalPeriods: [],
+      newTotalPeriods: [],
+      changedTotalPeriods: [],
+      offering,
+    };
+  }
+
   const { periods, multipliers } = getBillingPeriods(oldPlan.unit);
   const { periods: newPeriods, multipliers: newMultipliers } =
     getBillingPeriods(newPlan.unit);

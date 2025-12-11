@@ -42,7 +42,10 @@ export const EditOptionDialog = connect<{}, {}, { resolve: { option } }>(
       ...ownProps.resolve.option,
       type: FIELD_TYPES.find(
         (fieldType) => fieldType.value === ownProps.resolve.option.type,
-      ),
+      ) || {
+        value: ownProps.resolve.option.type,
+        label: ownProps.resolve.option.type,
+      },
       choices: Array.isArray(ownProps.resolve.option.choices)
         ? ownProps.resolve.option.choices.join(', ')
         : ownProps.resolve.option.choices,
