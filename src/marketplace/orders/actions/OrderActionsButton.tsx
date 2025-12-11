@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
@@ -56,14 +55,14 @@ export const OrderActionsButton = ({
 
   if (order.state === 'pending-provider') {
     return (
-      <OrderProviderActions order={order} refetch={loadData} as={Button} />
+      <OrderProviderActions order={order} refetch={loadData} labeledDropdown />
     );
   }
 
   return showCancelButton ||
     showMarkAsDoneButton ||
     order.state === 'pending-consumer' ? (
-    <ActionsDropdownComponent label={translate('Actions')} labeled={true}>
+    <ActionsDropdownComponent label={translate('Actions')} labeled size="md">
       {showMarkAsDoneButton && (
         <MarkAsDoneButton row={order} refetch={loadData} />
       )}

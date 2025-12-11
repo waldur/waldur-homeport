@@ -3,6 +3,7 @@ import {
   marketplacePublicOfferingsPlansRetrieve,
   marketplacePublicOfferingsRetrieve,
   marketplaceResourcesRetrieve,
+  Offering,
   PublicOfferingDetails,
   Resource,
 } from 'waldur-js-client';
@@ -31,7 +32,33 @@ export interface FetchedData {
   offeringLimits: OfferingLimits;
 }
 
-export async function loadData(resource_uuid: string): Promise<FetchedData> {
+export const getLimitChangeRequirements = (
+  resource: Resource,
+  offering: Offering,
+) => {
+  const limitParser = getFormLimitParser(offering.type);
+  const limitSerializer = getFormLimitSerializer(offering.type);
+  const components = filterOfferingComponents(offering).filter(
+    (component) => component.billing_type === 'limit',
+  );
+  const usages = limitParser(resource.current_usages || {});
+  const resourceLimits = limitParser(resource.limits);
+  const limits: Record<string, number> = Object.fromEntries(
+    components.map((component) => [
+      component.type,
+      resourceLimits[component.type] || 0,
+    ]),
+  );
+  const offeringLimits = parseOfferingLimits(offering);
+  return {
+    limitSerializer,
+    usages,
+    limits,
+    offeringLimits,
+  };
+};
+
+export async function loadData(resource_uuid): Promise<FetchedData> {
   const resource = await marketplaceResourcesRetrieve({
     path: { uuid: resource_uuid },
   }).then((r) => r.data);
@@ -41,20 +68,10 @@ export async function loadData(resource_uuid: string): Promise<FetchedData> {
   const plan = await marketplacePublicOfferingsPlansRetrieve({
     path: { uuid: resource.offering_uuid, plan_uuid: resource.plan_uuid },
   }).then((response) => response.data);
-  const limitParser = getFormLimitParser(offering.type);
-  const limitSerializer = getFormLimitSerializer(offering.type);
-  const components = filterOfferingComponents(offering).filter(
-    (component) => component.billing_type === 'limit',
-  );
-  const usages = limitParser(resource.current_usages);
-  const resourceLimits = limitParser(resource.limits);
-  const limits: Record<string, number> = Object.fromEntries(
-    components.map((component) => [
-      component.type,
-      resourceLimits[component.type] || 0,
-    ]),
-  );
-  const offeringLimits = parseOfferingLimits(offering);
+
+  const { limitSerializer, usages, limits, offeringLimits } =
+    getLimitChangeRequirements(resource, offering);
+
   return {
     resource,
     offering,
@@ -67,7 +84,7 @@ export async function loadData(resource_uuid: string): Promise<FetchedData> {
   };
 }
 
-export const getData = (
+export const getLimitChangeData = (
   plan,
   offering,
   newLimits,

@@ -181,7 +181,7 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       enableExport={true}
       expandableRow={OrdersListExpandableRow}
       rowActions={({ row }) => (
-        <OrderProviderActions order={row} refetch={props.fetch} />
+        <OrderProviderActions order={row} refetch={props.fetch} size="sm" />
       )}
       hasOptionalColumns
       {...rest}

@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Stack } from 'react-bootstrap';
 import { OrderDetails as OrderDetailsType } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
@@ -21,7 +20,6 @@ import { LimitsSection } from './LimitsSection';
 import { OrderAccordion } from './OrderAccordion';
 import { OrderDetailsHeaderBody } from './OrderDetailsHeaderBody';
 import { OrderDetailsHeaderTitle } from './OrderDetailsHeaderTitle';
-import { OrderDetailsQuickBody } from './OrderDetailsQuickBody';
 import { OrderMetadataTab } from './OrderMetadataTab';
 import { OrderReviewButton } from './OrderReviewButton';
 import { OrderSummaryTab } from './OrderSummaryTab';
@@ -110,44 +108,25 @@ const PageHero = ({ data, isRefetching }) => (
     logoAlt={data.offering.name}
     logoTooltip={data.offering.name}
     logoCircle
-    title={
-      <Stack direction="horizontal">
-        <Stack direction="vertical">
-          <OrderDetailsHeaderTitle order={data.order} />
-          <OrderDetailsQuickBody order={data.order} />
-          <OrderDetailsHeaderBody order={data.order} />
-        </Stack>
-        {data.order.attachment && data.order.state === 'pending-provider' ? (
-          <Stack gap={3} className="align-items-end d-flex">
-            <RefreshButton
-              refetch={data.refetch}
-              isLoading={isRefetching}
-              size="sm"
-            />
-            <OrderReviewButton order={data.order} loadData={data.refetch} />
-          </Stack>
-        ) : (
-          <Stack
-            direction="vertical"
-            gap={3}
-            className="align-items-end d-flex"
-          >
-            <RefreshButton
-              refetch={data.refetch}
-              isLoading={isRefetching}
-              size="sm"
-            />
+    title={<OrderDetailsHeaderTitle order={data.order} />}
+    actions={
+      <>
+        <RefreshButton refetch={data.refetch} isLoading={isRefetching} />
 
-            <OrderActionsButton
-              order={data.order}
-              offering={data.offering}
-              loadData={data.refetch}
-            />
-          </Stack>
+        {data.order.attachment && data.order.state === 'pending-provider' ? (
+          <OrderReviewButton order={data.order} loadData={data.refetch} />
+        ) : (
+          <OrderActionsButton
+            order={data.order}
+            offering={data.offering}
+            loadData={data.refetch}
+          />
         )}
-      </Stack>
+      </>
     }
-  />
+  >
+    <OrderDetailsHeaderBody order={data.order} />
+  </PublicDashboardHero>
 );
 
 export const OrderDetails: FunctionComponent<OrderDetailsProps> = (data) => {

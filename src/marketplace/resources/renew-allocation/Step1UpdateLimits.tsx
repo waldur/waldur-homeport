@@ -14,7 +14,7 @@ import {
 } from '@waldur/form/WizardFinalForm';
 
 import { ChangeLimitsComponent } from '../change-limits/ChangeLimitsComponent';
-import { getData, loadData } from '../change-limits/utils';
+import { getLimitChangeData, loadData } from '../change-limits/utils';
 
 import { RenewAllocationFormData } from './types';
 
@@ -43,7 +43,14 @@ const UpdateLimitsTable: FC<{
     if (data) {
       const newLimits = values[getUuid(resource)].limits;
       const { offering, plan, usages, limits: currentLimits } = data;
-      return getData(plan, offering, newLimits, currentLimits, usages, true);
+      return getLimitChangeData(
+        plan,
+        offering,
+        newLimits,
+        currentLimits,
+        usages,
+        true,
+      );
     }
     const shouldConcealPrices = isFeatureVisible(
       MarketplaceFeatures.conceal_prices,

@@ -1,0 +1,21 @@
+import { translate } from '@waldur/i18n';
+import { getLabel } from '@waldur/marketplace/common/registry';
+import { Field } from '@waldur/resource/summary';
+
+import { OrderTypeBasedProps, RequestedByField } from './OrderCommonFields';
+
+export const ResourceTerminate = ({ order }: OrderTypeBasedProps) => {
+  return (
+    <>
+      <RequestedByField order={order} />
+      <Field
+        label={translate('Request to delete')}
+        value={getLabel(order.offering_type) + ' • ' + order.resource_name}
+      />
+      <Field
+        label={[translate('Project'), '/', translate('Organization')].join(' ')}
+        value={order.project_name + ' • ' + order.customer_name}
+      />
+    </>
+  );
+};

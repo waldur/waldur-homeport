@@ -5,4 +5,6 @@ export interface OrderActionProps {
   offering?: PublicOfferingDetails;
   refetch?(): void | Promise<void>;
   as?: React.ElementType;
+  size?: 'sm';
+  labeledDropdown?: boolean;
 }

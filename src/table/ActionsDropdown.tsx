@@ -18,7 +18,7 @@ import { translate } from '@waldur/i18n';
 
 import { DropdownActionItemType } from './types';
 
-interface ActionsDropdownProps {
+interface ActionsDropdownProps extends Partial<DropdownProps> {
   onToggle?: (isOpen: boolean) => void;
   disabled?: boolean;
   open?: boolean;
@@ -29,6 +29,7 @@ interface ActionsDropdownProps {
   row?: any;
   refetch?(): void;
   data?: Record<string, any>;
+  size?: 'sm' | 'md' | 'lg';
   tooltip?: string | boolean;
 }
 

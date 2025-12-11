@@ -14,6 +14,7 @@ interface ChangesAmountBadgeProps {
   badgeOutline?: boolean;
   badgePill?: boolean;
   badgeSm?: boolean;
+  reverseColor?: boolean;
   unit?: string;
 }
 export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
@@ -27,6 +28,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   badgeOutline,
   badgePill,
   badgeSm,
+  reverseColor,
   unit = '%',
 }) => {
   let className = asBadge
@@ -40,9 +42,9 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
 
   if (changes !== 0 && !Number.isNaN(changes)) {
     if (changes < 0) {
-      className += 'danger';
+      className += reverseColor ? 'success' : 'danger';
     } else {
-      className += 'success';
+      className += reverseColor ? 'danger' : 'success';
     }
   } else {
     className += 'default';

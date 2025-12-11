@@ -3,7 +3,13 @@ import { translate } from '@waldur/i18n';
 
 import { ORDER_STATE_LABELS } from '../OrderStates';
 
-export const OrderStateField = ({ order, pill, outline, hasBullet }) => {
+export const OrderStateField = ({
+  order,
+  pill,
+  outline,
+  hasBullet,
+  size = undefined,
+}) => {
   return (
     <StateIndicator
       label={ORDER_STATE_LABELS[order.state] || translate('Unknown state')}
@@ -20,6 +26,7 @@ export const OrderStateField = ({ order, pill, outline, hasBullet }) => {
       pill={pill}
       outline={outline}
       hasBullet={hasBullet}
+      size={size}
     />
   );
 };
