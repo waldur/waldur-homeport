@@ -9,8 +9,10 @@ import { NumberField, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 
-interface ComponentLimitsFieldProps
-  extends FieldArrayRenderProps<any, HTMLElement> {
+interface ComponentLimitsFieldProps extends FieldArrayRenderProps<
+  any,
+  HTMLElement
+> {
   components: OfferingComponent[];
 }
 

@@ -12,11 +12,11 @@ import { useUser } from '@waldur/workspace/hooks';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 const OfferingPermissionCreateDialog = lazyComponent(() =>
-  import(
-    '../offerings/details/permissions/OfferingPermissionCreateDialog'
-  ).then((module) => ({
-    default: module.OfferingPermissionCreateDialog,
-  })),
+  import('../offerings/details/permissions/OfferingPermissionCreateDialog').then(
+    (module) => ({
+      default: module.OfferingPermissionCreateDialog,
+    }),
+  ),
 );
 
 export const OfferingPermissionCreateButton: React.FC<{ fetch }> = ({

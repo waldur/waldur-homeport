@@ -27,16 +27,15 @@ interface ITableFilterContext {
 
 export const TableFilterContext = createContext<ITableFilterContext>({} as any);
 
-interface FilterContextProviderProps
-  extends Pick<
-    TableProps,
-    | 'table'
-    | 'filters'
-    | 'filterPosition'
-    | 'setFilter'
-    | 'applyFiltersFn'
-    | 'selectedSavedFilter'
-  > {
+interface FilterContextProviderProps extends Pick<
+  TableProps,
+  | 'table'
+  | 'filters'
+  | 'filterPosition'
+  | 'setFilter'
+  | 'applyFiltersFn'
+  | 'selectedSavedFilter'
+> {
   toggleFilterMenu?(show?): void;
 }
 

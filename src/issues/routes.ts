@@ -255,11 +255,11 @@ export const states: StateDeclaration[] = [
     url: 'robot-accounts/',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import(
-        '@waldur/marketplace/robot-accounts/ProviderRobotAccountList'
-      ).then((module) => ({
-        default: module.ProviderRobotAccountList,
-      })),
+      import('@waldur/marketplace/robot-accounts/ProviderRobotAccountList').then(
+        (module) => ({
+          default: module.ProviderRobotAccountList,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('Robot accounts'),
@@ -335,11 +335,11 @@ export const states: StateDeclaration[] = [
     url: 'onboarding/?tab',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import(
-        '@waldur/administration/organizations/OrganizationOnboardingTabs'
-      ).then((module) => ({
-        default: module.OrganizationOnboardingTabs,
-      })),
+      import('@waldur/administration/organizations/OrganizationOnboardingTabs').then(
+        (module) => ({
+          default: module.OrganizationOnboardingTabs,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('Onboarding'),
@@ -351,11 +351,11 @@ export const states: StateDeclaration[] = [
     url: 'onboarding/justifications/:uuid/',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import(
-        '@waldur/administration/organizations/OnboardingJustificationDetailsPage'
-      ).then((module) => ({
-        default: module.OnboardingJustificationDetailsPage,
-      })),
+      import('@waldur/administration/organizations/OnboardingJustificationDetailsPage').then(
+        (module) => ({
+          default: module.OnboardingJustificationDetailsPage,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('Justification details'),
@@ -368,11 +368,11 @@ export const states: StateDeclaration[] = [
     url: 'organization-requests/',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import(
-        '@waldur/administration/organizations/requests/OrganizationRequestsList'
-      ).then((module) => ({
-        default: module.OrganizationRequestsList,
-      })),
+      import('@waldur/administration/organizations/requests/OrganizationRequestsList').then(
+        (module) => ({
+          default: module.OrganizationRequestsList,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('Organization requests'),
@@ -385,11 +385,11 @@ export const states: StateDeclaration[] = [
     url: 'organization-credits/',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import(
-        '@waldur/administration/organizations/OrganizationCreditsList'
-      ).then((module) => ({
-        default: module.OrganizationCreditsList,
-      })),
+      import('@waldur/administration/organizations/OrganizationCreditsList').then(
+        (module) => ({
+          default: module.OrganizationCreditsList,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('Credit management'),

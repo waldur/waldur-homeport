@@ -43,8 +43,8 @@ export const ConfirmationDrawerToggle: React.FC = () => {
 
   const showBullet = Boolean(
     counters?.pendingOrdersCount ||
-      counters?.pendingProvidersCount ||
-      counters?.pendingProjectUpdatesCount,
+    counters?.pendingProvidersCount ||
+    counters?.pendingProjectUpdatesCount,
   );
 
   const openDrawer = () => {

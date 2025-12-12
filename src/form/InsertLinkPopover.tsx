@@ -32,6 +32,7 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
         updateLink({
           title: '',
           url: values.url,
+          text: '',
         });
       }}
       initialValues={{ url: initialUrl || '' }}

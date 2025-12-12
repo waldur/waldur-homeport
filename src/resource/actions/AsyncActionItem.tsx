@@ -9,8 +9,10 @@ import { ActionItem, ActionItemProps } from './ActionItem';
 import { ActionValidator } from './types';
 import { useValidators } from './useValidators';
 
-export interface AsyncActionItemProps<T>
-  extends Omit<ActionItemProps, 'disabled' | 'action'> {
+export interface AsyncActionItemProps<T> extends Omit<
+  ActionItemProps,
+  'disabled' | 'action'
+> {
   apiMethod(id: string): Promise<any>;
   resource: T;
   validators: ActionValidator<T>[];

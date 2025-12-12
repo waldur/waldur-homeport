@@ -28,8 +28,7 @@ interface ActionButtonProps {
 }
 
 export interface DialogActionProps<T>
-  extends DialogLaunchProps<T>,
-    ActionButtonProps {
+  extends DialogLaunchProps<T>, ActionButtonProps {
   resource: T;
   validators?: ActionValidator<T>[];
   extraResolve?: any;

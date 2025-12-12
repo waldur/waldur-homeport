@@ -4,8 +4,9 @@ import './OfferingLogo.scss';
 
 import DefaultLogo from './OfferingLogo.svg';
 
-interface OfferingLogoProps
-  extends Partial<Pick<JSX.IntrinsicElements['img'], 'style'>> {
+interface OfferingLogoProps extends Partial<
+  Pick<JSX.IntrinsicElements['img'], 'style'>
+> {
   src?: string;
   size?: string;
   className?: string;

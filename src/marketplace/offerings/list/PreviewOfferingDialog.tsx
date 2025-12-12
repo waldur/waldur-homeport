@@ -24,8 +24,7 @@ interface PreviewOfferingOwnProps {
 }
 
 interface PreviewOfferingDialogProps
-  extends OfferingConfigurationFormProps,
-    PreviewOfferingOwnProps {}
+  extends OfferingConfigurationFormProps, PreviewOfferingOwnProps {}
 
 const PurePreviewOfferingDialog = (props: PreviewOfferingDialogProps) => {
   return (

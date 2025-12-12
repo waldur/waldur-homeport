@@ -22,10 +22,9 @@ import {
   OfferingPolicyType,
 } from './types';
 
-interface PolicyCreateFormProps
-  extends Partial<
-    FormRenderProps<OfferingCostPolicyFormData | OfferingUsagePolicyFormData>
-  > {
+interface PolicyCreateFormProps extends Partial<
+  FormRenderProps<OfferingCostPolicyFormData | OfferingUsagePolicyFormData>
+> {
   type: OfferingPolicyType;
   offering?: Offering;
 }

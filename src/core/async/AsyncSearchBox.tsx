@@ -15,8 +15,9 @@ import useOnScreen from '../useOnScreen';
 import { InfiniteList } from './InfiniteList';
 import { BaseAsyncListProps, RowData } from './types';
 
-interface AsyncSearchBoxProps<Fetcher extends SdkFunction>
-  extends BaseAsyncListProps<Fetcher> {
+interface AsyncSearchBoxProps<
+  Fetcher extends SdkFunction,
+> extends BaseAsyncListProps<Fetcher> {
   className?: string;
   wrapperClassName?: string;
 }

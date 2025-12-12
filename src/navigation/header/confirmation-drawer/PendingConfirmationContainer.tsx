@@ -21,8 +21,8 @@ const EmptyPendingItemsPlaceholder = () => {
 export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
   const hasPendingItem = Boolean(
     props.pendingOrdersCount ||
-      props.pendingProvidersCount ||
-      props.pendingProjectUpdatesCount,
+    props.pendingProvidersCount ||
+    props.pendingProjectUpdatesCount,
   );
   if (!hasPendingItem) {
     return <EmptyPendingItemsPlaceholder />;

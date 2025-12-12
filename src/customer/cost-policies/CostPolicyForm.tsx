@@ -34,8 +34,9 @@ import {
   validateEmails,
 } from './utils';
 
-interface CostPolicyFormProps
-  extends Partial<InjectedFormProps<CostPolicyFormData>> {
+interface CostPolicyFormProps extends Partial<
+  InjectedFormProps<CostPolicyFormData>
+> {
   type: CostPolicyType;
   isEdit: boolean;
 }

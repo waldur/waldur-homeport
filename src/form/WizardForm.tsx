@@ -17,8 +17,10 @@ import { wrapTooltip } from '@waldur/table/ActionButton';
 
 import './wizard.scss';
 
-export interface WizardFormStepProps
-  extends Pick<InjectedFormProps, 'form' | 'initialValues'> {
+export interface WizardFormStepProps extends Pick<
+  InjectedFormProps,
+  'form' | 'initialValues'
+> {
   title: string;
   subtitle?: string;
   onSubmit(formData, dispatch, formProps): Promise<any> | void;

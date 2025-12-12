@@ -70,7 +70,7 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
 
   const isChanged = Boolean(
     input.value instanceof File ||
-      Boolean(input.value) !== Boolean(initialValue),
+    Boolean(input.value) !== Boolean(initialValue),
   );
 
   const isTooLarge = isChanged && input.value?.size > props.max;

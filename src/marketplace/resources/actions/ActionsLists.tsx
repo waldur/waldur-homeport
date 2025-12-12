@@ -8,9 +8,9 @@ import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 
 export const ActionsLists = {
   [INSTANCE_TYPE]: lazyComponent(() =>
-    import(
-      '@waldur/openstack/openstack-instance/OpenStackInstanceActions'
-    ).then((module) => ({ default: module.OpenStackInstanceActions })),
+    import('@waldur/openstack/openstack-instance/OpenStackInstanceActions').then(
+      (module) => ({ default: module.OpenStackInstanceActions }),
+    ),
   ),
   [VOLUME_TYPE]: lazyComponent(() =>
     import('@waldur/openstack/openstack-volume/OpenStackVolumeActions').then(

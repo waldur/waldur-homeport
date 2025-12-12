@@ -8,11 +8,11 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 
 const ResourceDetailsDialog = lazyComponent(() =>
-  import(
-    '@waldur/marketplace/resources/details/popup/ResourceDetailsDialog'
-  ).then((module) => ({
-    default: module.ResourceDetailsDialog,
-  })),
+  import('@waldur/marketplace/resources/details/popup/ResourceDetailsDialog').then(
+    (module) => ({
+      default: module.ResourceDetailsDialog,
+    }),
+  ),
 );
 
 export const ResourcesListActions = ({ row, fetch }) => {
