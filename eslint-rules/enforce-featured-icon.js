@@ -99,7 +99,7 @@ export default {
                 // Common icon component patterns
                 return (
                   /^[A-Z][a-zA-Z]*Icon$/.test(childName) ||
-                  /Icon$/.test(childName) ||
+                  (childName && childName.endsWith('Icon')) ||
                   childName === 'i'
                 ); // font icons
               }
@@ -138,8 +138,6 @@ export default {
 
           if (styleAttr && styleAttr.value) {
             // Look for manual styling that mimics FeaturedIcon
-            let styleValue = '';
-
             if (
               styleAttr.value.type === 'JSXExpressionContainer' &&
               styleAttr.value.expression.type === 'ObjectExpression'
@@ -160,7 +158,7 @@ export default {
               const hasIconChild = node.children?.some((child) => {
                 if (child.type === 'JSXElement') {
                   const childName = child.openingElement?.name?.name;
-                  return /Icon$/.test(childName);
+                  return childName && childName.endsWith('Icon');
                 }
                 return false;
               });

@@ -28,11 +28,11 @@ const OfferingDashboard = lazyComponent(() =>
   })),
 );
 const OfferingBookingResourcesCalendarContainer = lazyComponent(() =>
-  import(
-    '@waldur/booking/offering/OfferingBookingResourcesCalendarContainer'
-  ).then((module) => ({
-    default: module.OfferingBookingResourcesCalendarContainer,
-  })),
+  import('@waldur/booking/offering/OfferingBookingResourcesCalendarContainer').then(
+    (module) => ({
+      default: module.OfferingBookingResourcesCalendarContainer,
+    }),
+  ),
 );
 const OfferingResourcesList = lazyComponent(() =>
   import('../details/OfferingResourcesList').then((module) => ({

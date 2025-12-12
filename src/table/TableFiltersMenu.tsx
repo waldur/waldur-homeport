@@ -190,15 +190,14 @@ const openSubmenu = throttle(
   { leading: false },
 );
 
-interface TableFiltersMenuProps
-  extends Pick<
-    TableProps,
-    | 'filters'
-    | 'filterPosition'
-    | 'filtersStorage'
-    | 'setFilter'
-    | 'applyFiltersFn'
-  > {
+interface TableFiltersMenuProps extends Pick<
+  TableProps,
+  | 'filters'
+  | 'filterPosition'
+  | 'filtersStorage'
+  | 'setFilter'
+  | 'applyFiltersFn'
+> {
   table?: TableProps['table'];
   selectedSavedFilter?: TableProps['selectedSavedFilter'];
   openName?: string;

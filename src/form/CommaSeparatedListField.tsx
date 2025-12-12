@@ -6,8 +6,7 @@ import { translate } from '@waldur/i18n';
 import { FormField } from './types';
 
 interface CommaSeparatedListFieldProps
-  extends FormField,
-    Omit<FormControlProps, 'onBlur'> {
+  extends FormField, Omit<FormControlProps, 'onBlur'> {
   placeholder?: string;
   style?: any;
   maxLength?: number;

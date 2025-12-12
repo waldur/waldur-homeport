@@ -184,11 +184,11 @@ export const states: StateDeclaration[] = [
     url: 'issue-templates/',
     parent: 'admin-configuration',
     component: lazyComponent(() =>
-      import(
-        './service-desk/issue-templates/AdministrationIssueTemplatesList'
-      ).then((module) => ({
-        default: module.AdministrationIssueTemplatesList,
-      })),
+      import('./service-desk/issue-templates/AdministrationIssueTemplatesList').then(
+        (module) => ({
+          default: module.AdministrationIssueTemplatesList,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('Issue templates'),

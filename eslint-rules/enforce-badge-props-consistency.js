@@ -138,7 +138,7 @@ export default {
               expectedOrder,
               actualOrder,
             },
-            fix(fixer) {
+            fix() {
               // For now, let's disable the auto-fix for prop ordering as it's complex
               // The rule will still show the error but won't auto-fix
               return null;

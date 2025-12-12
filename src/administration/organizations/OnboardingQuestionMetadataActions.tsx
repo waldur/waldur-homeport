@@ -21,11 +21,11 @@ interface OnboardingQuestionMetadataActionsProps {
 }
 
 const OnboardingQuestionMappingFormDialog = lazyComponent(() =>
-  import(
-    '@waldur/administration/organizations/OnboardingQuestionMappingFormDialog'
-  ).then((module) => ({
-    default: module.OnboardingQuestionMappingFormDialog,
-  })),
+  import('@waldur/administration/organizations/OnboardingQuestionMappingFormDialog').then(
+    (module) => ({
+      default: module.OnboardingQuestionMappingFormDialog,
+    }),
+  ),
 );
 
 export const OnboardingQuestionMetadataActions: FC<

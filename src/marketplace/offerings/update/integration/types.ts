@@ -11,8 +11,9 @@ export interface ScriptEditorProps {
   refetch: () => Promise<any>;
 }
 
-export interface EditOfferingProps
-  extends Partial<Omit<FormTableItemProps, 'actions'>> {
+export interface EditOfferingProps extends Partial<
+  Omit<FormTableItemProps, 'actions'>
+> {
   title?: string;
   scope: any;
   name: string;

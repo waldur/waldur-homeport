@@ -213,17 +213,16 @@
       ]
     },
     "ignore": [
-      "extractLiteralsFromFiles.cjs",
-      "extractLiteralsFromFiles.ts",
-      "*.spec.ts",
-      "*.spec.tsx",
-      "*.fixture.ts",
-      "*.fixture.tsx",
+      "**/*.spec.ts",
+      "**/*.spec.tsx",
+      "**/*.fixture.ts",
+      "**/*.fixture.tsx",
+      "src/metronic/**",
       "src/EventsEnums.ts",
       "src/FeaturesEnums.ts",
-      "build.dev/**",
-      "locales/tools/analyze*Translations.cjs",
-      "locales/tools/cleanupTranslations.cjs"
+      "locales/tools/*.cjs",
+      "src/sass/mediaqueries.scss",
+      "src/sass/variables.scss"
     ]
   },
   "stylelint": {

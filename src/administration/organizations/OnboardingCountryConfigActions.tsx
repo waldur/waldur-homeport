@@ -21,11 +21,11 @@ interface OnboardingCountryConfigActionsProps {
 }
 
 const OnboardingCountryConfigFormDialog = lazyComponent(() =>
-  import(
-    '@waldur/administration/organizations/OnboardingCountryConfigFormDialog'
-  ).then((module) => ({
-    default: module.OnboardingCountryConfigFormDialog,
-  })),
+  import('@waldur/administration/organizations/OnboardingCountryConfigFormDialog').then(
+    (module) => ({
+      default: module.OnboardingCountryConfigFormDialog,
+    }),
+  ),
 );
 
 export const OnboardingCountryConfigActions: FC<

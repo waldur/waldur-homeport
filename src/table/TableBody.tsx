@@ -25,28 +25,27 @@ import { TableFilterContext } from './FilterContextProvider';
 import { Column, PinnedColumns, TableProps } from './types';
 import { getId } from './utils';
 
-interface TableBodyProps
-  extends Pick<
-    TableProps,
-    | 'rows'
-    | 'columns'
-    | 'rowClass'
-    | 'rowKey'
-    | 'expandableRow'
-    | 'expandableRowClassName'
-    | 'rowActions'
-    | 'enableMultiSelect'
-    | 'selectRow'
-    | 'selectedRows'
-    | 'toggleRow'
-    | 'toggled'
-    | 'fetch'
-    | 'fieldType'
-    | 'fieldName'
-    | 'validate'
-    | 'columnPositions'
-    | 'hasOptionalColumns'
-  > {
+interface TableBodyProps extends Pick<
+  TableProps,
+  | 'rows'
+  | 'columns'
+  | 'rowClass'
+  | 'rowKey'
+  | 'expandableRow'
+  | 'expandableRowClassName'
+  | 'rowActions'
+  | 'enableMultiSelect'
+  | 'selectRow'
+  | 'selectedRows'
+  | 'toggleRow'
+  | 'toggled'
+  | 'fetch'
+  | 'fieldType'
+  | 'fieldName'
+  | 'validate'
+  | 'columnPositions'
+  | 'hasOptionalColumns'
+> {
   pinnedColumns?: PinnedColumns;
 }
 

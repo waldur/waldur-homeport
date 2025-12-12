@@ -11,18 +11,17 @@ import { TableFiltersMenu } from './TableFiltersMenu';
 import { TableProps } from './types';
 import { getFiltersFormId } from './utils';
 
-interface TableFiltersProps
-  extends Pick<
-    TableProps,
-    | 'filters'
-    | 'renderFiltersDrawer'
-    | 'filtersStorage'
-    | 'hideClearFilters'
-    | 'filterPosition'
-    | 'setFilter'
-    | 'applyFiltersFn'
-    | 'selectedSavedFilter'
-  > {
+interface TableFiltersProps extends Pick<
+  TableProps,
+  | 'filters'
+  | 'renderFiltersDrawer'
+  | 'filtersStorage'
+  | 'hideClearFilters'
+  | 'filterPosition'
+  | 'setFilter'
+  | 'applyFiltersFn'
+  | 'selectedSavedFilter'
+> {
   table?: TableProps['table'];
 }
 

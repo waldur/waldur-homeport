@@ -69,7 +69,7 @@ export const ImageField: FunctionComponent<ImageFieldProps> = (props) => {
 
   const isChanged = Boolean(
     input.value instanceof File ||
-      Boolean(input.value) !== Boolean(initialValue),
+    Boolean(input.value) !== Boolean(initialValue),
   );
 
   return (

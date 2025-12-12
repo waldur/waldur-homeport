@@ -186,7 +186,8 @@ interface RoleAndProjectSelectFieldProps {
   disabled?: boolean;
 }
 interface RoleAndProjectSelectProps
-  extends Omit<RoleAndProjectSelectFieldProps, 'name'>,
+  extends
+    Omit<RoleAndProjectSelectFieldProps, 'name'>,
     FieldRenderProps<any, HTMLElement> {}
 
 const RoleAndProjectSelect: React.FC<RoleAndProjectSelectProps> = (props) => {

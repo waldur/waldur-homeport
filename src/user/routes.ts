@@ -71,11 +71,11 @@ export const states: StateDeclaration[] = [
     name: 'profile.issues',
     url: 'issues/',
     component: lazyComponent(() =>
-      import(
-        '@waldur/navigation/header/quick-issue-drawer/UserIssuesTable'
-      ).then((module) => ({
-        default: module.UserIssuesTable,
-      })),
+      import('@waldur/navigation/header/quick-issue-drawer/UserIssuesTable').then(
+        (module) => ({
+          default: module.UserIssuesTable,
+        }),
+      ),
     ),
     data: {
       breadcrumb: () => translate('Issues'),
@@ -249,9 +249,9 @@ export const states: StateDeclaration[] = [
     name: 'category-resources',
     url: '/resources/:category_uuid/',
     component: lazyComponent(() =>
-      import(
-        '@waldur/marketplace/resources/list/CategoryResourcesContainer'
-      ).then((module) => ({ default: module.CategoryResourcesContainer })),
+      import('@waldur/marketplace/resources/list/CategoryResourcesContainer').then(
+        (module) => ({ default: module.CategoryResourcesContainer }),
+      ),
     ),
     parent: 'layout',
   },

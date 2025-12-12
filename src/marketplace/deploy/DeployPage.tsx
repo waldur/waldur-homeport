@@ -51,8 +51,7 @@ interface DeployPageProps {
 }
 
 interface BaseDeployPageProps
-  extends Partial<InjectedFormProps>,
-    DeployPageProps {
+  extends Partial<InjectedFormProps>, DeployPageProps {
   order?: OrderDetails;
   formData: DeployFormData;
   selectedOffering: Offering;

@@ -199,33 +199,6 @@ export default {
         }
       },
 
-      // Check JSX style attributes
-      JSXAttribute(node) {
-        if (node.name.name === 'style' && node.value) {
-          if (
-            node.value.type === 'JSXExpressionContainer' &&
-            node.value.expression.type === 'ObjectExpression'
-          ) {
-            node.value.expression.properties.forEach((prop) => {
-              if (prop.type === 'Property' && prop.key && prop.value) {
-                const propertyName = prop.key.name;
-
-                if (
-                  isBorderRadiusProperty(propertyName) &&
-                  prop.value.type === 'Literal'
-                ) {
-                  checkForBorderRadiusValues(
-                    prop.value,
-                    prop.value.value,
-                    'borderRadius',
-                  );
-                }
-              }
-            });
-          }
-        }
-      },
-
       // Check className attributes for potential hardcoded radius utilities
       JSXAttribute(node) {
         if (
@@ -257,7 +230,7 @@ export default {
                     node: node.value,
                     messageId: 'useBorderRadiusToken',
                     data: {
-                      oldValue: `class=\"${cls}\"`,
+                      oldValue: `class="${cls}"`,
                       newToken:
                         'Consider using $border-radius-* tokens in SCSS instead',
                     },

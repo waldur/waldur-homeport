@@ -25,8 +25,9 @@ import { FilterSelect } from './FilterSelect';
 
 const FILTERS_FORM_ID = 'BreadcrumbsFiltersForm';
 
-interface BreadcrumbDropdownProps<Fetcher extends SdkFunction>
-  extends BaseAsyncListProps<Fetcher> {
+interface BreadcrumbDropdownProps<
+  Fetcher extends SdkFunction,
+> extends BaseAsyncListProps<Fetcher> {
   filters?: Array<{
     field: string;
     label: string;

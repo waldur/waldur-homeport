@@ -25,7 +25,8 @@ interface SearchPopoverProps {
 }
 
 interface TabContentProps
-  extends Partial<ReturnType<typeof useFavoritePages>>,
+  extends
+    Partial<ReturnType<typeof useFavoritePages>>,
     Partial<ReturnType<typeof useRecentSearch>> {
   result: SearchResult;
   clearSearch(): void;

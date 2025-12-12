@@ -21,9 +21,9 @@ import { TableProps } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
 const OpenStackSecurityGroupsDialog = lazyComponent(() =>
-  import(
-    '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog'
-  ).then((module) => ({ default: module.OpenStackSecurityGroupsDialog })),
+  import('@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsDialog').then(
+    (module) => ({ default: module.OpenStackSecurityGroupsDialog }),
+  ),
 );
 
 interface ShowSecurityGroupsButtonProps {
@@ -81,8 +81,7 @@ const ShowPreviewButton = () => {
 };
 
 interface OwnProps
-  extends Pick<FormStepProps, 'offering' | 'change'>,
-    Partial<TableProps> {}
+  extends Pick<FormStepProps, 'offering' | 'change'>, Partial<TableProps> {}
 
 export const FormSecurityGroupsField = ({
   offering,

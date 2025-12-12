@@ -229,9 +229,9 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-dashboard',
     url: 'dashboard/',
     component: lazyComponent(() =>
-      import(
-        '@waldur/marketplace/service-providers/dashboard/ProviderDashboard'
-      ).then((module) => ({ default: module.ProviderDashboard })),
+      import('@waldur/marketplace/service-providers/dashboard/ProviderDashboard').then(
+        (module) => ({ default: module.ProviderDashboard }),
+      ),
     ),
     parent: 'marketplace-provider',
     data: {
@@ -382,11 +382,11 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-vendor-offering-users',
     url: 'offering-users/',
     component: lazyComponent(() =>
-      import(
-        './service-providers/offering-users/ProviderOfferingUsersWithTabs'
-      ).then((module) => ({
-        default: module.ProviderOfferingUsersWithTabs,
-      })),
+      import('./service-providers/offering-users/ProviderOfferingUsersWithTabs').then(
+        (module) => ({
+          default: module.ProviderOfferingUsersWithTabs,
+        }),
+      ),
     ),
     parent: 'provider-marketplace',
     data: {
@@ -555,9 +555,9 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-robots',
     url: 'robots/',
     component: lazyComponent(() =>
-      import(
-        '@waldur/marketplace/robot-accounts/ProviderRobotAccountList'
-      ).then((module) => ({ default: module.ProviderRobotAccountList })),
+      import('@waldur/marketplace/robot-accounts/ProviderRobotAccountList').then(
+        (module) => ({ default: module.ProviderRobotAccountList }),
+      ),
     ),
     parent: 'provider-resources',
     data: {
