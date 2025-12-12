@@ -12,11 +12,17 @@ import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { getOnboardingCopy } from './constants';
+
 export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
   props,
 ) => {
   const user = useUser();
   const [verified, setVerified] = useState(false);
+
+  const countryCopy = getOnboardingCopy(
+    ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY,
+  );
 
   // ToDo: remove this after implementing getting user's identifier via auth methods
   const isAustriaCountry = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY === 'AT';
@@ -44,16 +50,8 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
       <div className="d-flex flex-column gap-5">
         <Card className="card-bordered">
           <Card.Body>
-            <h5 className="mb-3">
-              {translate(
-                'Estonian identity code required for business registration',
-              )}
-            </h5>
-            <p className="text-gray-700 mb-4">
-              {translate(
-                'To verify your right to represent a company in Estonia, we need to confirm your identity through the national authentication service (TARA). Your personal ID code will be securely retrieved from the Estonian Business Register (Äriregister).',
-              )}
-            </p>
+            <h5 className="mb-3">{countryCopy.title}</h5>
+            <p className="text-gray-700 mb-4">{countryCopy.description}</p>
 
             {!verified && (
               <>
@@ -66,11 +64,7 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
                       <div className="fw-semibold text-gray-800 mb-1">
                         {translate('Why do we need this?')}
                       </div>
-                      <div className="text-gray-700">
-                        {translate(
-                          'Estonian companies can be automatically verified by matching your personal ID with Äriregister data, making the process faster and more secure.',
-                        )}
-                      </div>
+                      <div className="text-gray-700">{countryCopy.reason}</div>
                     </div>
                   </Card.Body>
                 </Card>
@@ -142,9 +136,7 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
                     </div>
 
                     <p className="text-muted small mb-0">
-                      {translate(
-                        'Secure authentication through Estonian ID-card, Mobile-ID, Smart-ID.',
-                      )}
+                      {countryCopy.authMethodsNote}
                     </p>
                   </>
                 )}
