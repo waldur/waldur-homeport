@@ -5,7 +5,7 @@ It uses yarn for dependency management and Vite as module bundler.
 
 ## Minimal requirements
 
-- Linux Ubuntu, OS X or Windows Subsystem for Linux 2 with Ubuntu
+- Linux, OS X or Windows Subsystem for Linux 2 with Ubuntu
 - 2 GB of RAM and 2 GB of storage
 
 ## Installation via Dev Containers
