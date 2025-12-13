@@ -25,6 +25,8 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   time: (value) => formatTime(value),
   conditional_cascade: (value) => value,
   component_multiplier: (value) => value,
+  single_datacenter_k8s_config: (value) => JSON.stringify(value),
+  multi_datacenter_k8s_config: (value) => JSON.stringify(value),
 };
 
 const isEmpty = (value) =>

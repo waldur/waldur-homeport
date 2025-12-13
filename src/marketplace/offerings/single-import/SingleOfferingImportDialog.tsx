@@ -52,7 +52,6 @@ export const SingleOfferingImportDialog = reduxForm<
     import_plugin_options: true,
     import_secret_options: true,
     overwrite_existing: true,
-    preserve_state: true,
   },
 })(({ handleSubmit, submitting, invalid, resolve }) => {
   const refetch = resolve?.refetch;
@@ -99,7 +98,6 @@ export const SingleOfferingImportDialog = reduxForm<
         import_plugin_options: formData.import_plugin_options,
         import_secret_options: formData.import_secret_options,
         overwrite_existing: formData.overwrite_existing,
-        preserve_state: formData.preserve_state,
       };
 
       const response = await marketplaceProviderOfferingsImportOffering({
