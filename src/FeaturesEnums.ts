@@ -68,6 +68,7 @@ export enum SlurmFeatures {
 
 export enum SupportFeatures {
   conceal_change_request = 'support.conceal_change_request',
+  enable_llm_assistant = 'support.enable_llm_assistant',
   pricelist = 'support.pricelist',
   vm_type_overview = 'support.vm_type_overview',
 }

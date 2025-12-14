@@ -225,6 +225,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Conceal "Change request" from a selection of issue types for non-staff/non-support users.'),
       },
       {
+        key: 'enable_llm_assistant',
+        description: translate('Enable LLM Assistant'),
+      },
+      {
         key: 'pricelist',
         description: translate('Render marketplace plan components pricelist in support workspace.'),
       },
