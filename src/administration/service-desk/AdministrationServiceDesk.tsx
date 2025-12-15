@@ -92,17 +92,8 @@ export const AdministrationServiceDesk = () => {
     />
   ) : data ? (
     <>
-      <FormTable.Card
-        title={INTEGRATION_SETTINGS.description}
-        key={INTEGRATION_SETTINGS.description}
-        className="card-bordered mb-5"
-      >
-        <FormTable>
-          {INTEGRATION_SETTINGS.items.map((item) => (
-            <FieldRow item={item} key={item.key} value={data[item.key]} />
-          ))}
-        </FormTable>
-      </FormTable.Card>
+      <SettingsGroupCard group={INTEGRATION_SETTINGS} data={data} />
+
       <Card className="card-bordered">
         <Card.Body>
           <Row>
@@ -119,4 +110,22 @@ export const AdministrationServiceDesk = () => {
       </Card>
     </>
   ) : null;
+};
+
+const SettingsGroupCard = ({ group, data }) => {
+  if (!group) return null;
+
+  return (
+    <FormTable.Card
+      title={group.description}
+      key={group.description}
+      className="card-bordered mb-5"
+    >
+      <FormTable>
+        {group.items.map((item) => (
+          <FieldRow key={item.key} item={item} value={data[item.key]} />
+        ))}
+      </FormTable>
+    </FormTable.Card>
+  );
 };
