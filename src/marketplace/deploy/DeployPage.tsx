@@ -253,7 +253,10 @@ export const BaseDeployPage = ({
         completed = formSteps[i].requiredFields.every((fieldName) =>
           Boolean(get(formData, fieldName)),
         );
-      } else if (lastY >= el.current.offsetTop - 120 - window.innerHeight / 2) {
+      } else if (
+        lastY >=
+        el.current?.offsetTop - 120 - window.innerHeight / 2
+      ) {
         completed = true;
       }
       if (completed !== completedSteps[i]) {
