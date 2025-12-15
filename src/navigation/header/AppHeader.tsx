@@ -13,6 +13,7 @@ import { getTitle } from '../title';
 
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
+import { LLMChatDrawerToggle } from './LLMChatDrawerToggle';
 import { QuickIssueDrawerToggle } from './QuickIssueDrawerToggle';
 import { SearchToggle } from './search/SearchToggle';
 import { UserDropdownMenu } from './UserDropdown';
@@ -87,6 +88,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
             )}
             {Boolean(user) && hasSupport && <QuickIssueDrawerToggle />}
             {Boolean(user) && <ConfirmationDrawerToggle />}
+            {Boolean(user) && <LLMChatDrawerToggle />}
             {Boolean(user) && isSmallScr && (
               <span className="h-40px border-end align-self-center ms-1" />
             )}

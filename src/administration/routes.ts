@@ -7,6 +7,7 @@ import {
   CustomerFeatures,
   InvitationsFeatures,
   MarketplaceFeatures,
+  SupportFeatures,
 } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
@@ -166,8 +167,8 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'admin-integration-settings',
-    url: 'integration-settings/',
+    name: 'admin-service-desk-settings',
+    url: 'service-desk-settings/',
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./service-desk/AdministrationServiceDesk').then((module) => ({
@@ -175,7 +176,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      breadcrumb: () => translate('Integration settings'),
+      breadcrumb: () => translate('Service desk settings'),
     },
   },
 
@@ -424,6 +425,21 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Auto-provisioning rules'),
+    },
+  },
+
+  {
+    name: 'admin-ai-assistant-settings',
+    url: 'ai-assistant-settings/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./ai-assistant/AIAssistantSettings').then((module) => ({
+        default: module.AIAssistantSettings,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('AI Assistant settings'),
+      feature: SupportFeatures.enable_llm_assistant,
     },
   },
 

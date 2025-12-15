@@ -36,6 +36,7 @@
     "i18n:edit": "node locales/tools/translationEdit.cjs"
   },
   "dependencies": {
+    "@assistant-ui/react": "^0.11.51",
     "@cloudfour/simple-svg-placeholder": "^1.1.0",
     "@codemirror/language": "^6.0.0",
     "@dnd-kit/core": "^6.3.1",
@@ -73,6 +74,7 @@
     "lodash-es": "^4.17.21",
     "luxon": "3.2.1",
     "markdown-to-jsx": "^7.7.4",
+    "mermaid": "^11.12.1",
     "monaco-editor": "^0.52.2",
     "papaparse": "^5.2.2",
     "pdfmake": "^0.2.18",
