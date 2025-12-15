@@ -14,6 +14,7 @@ import { OrderDetails, projectsRetrieve } from 'waldur-js-client';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getCustomer } from '@waldur/customer/utils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
@@ -108,6 +109,8 @@ export const BaseDeployPage = ({
     (_, i) => stepRefs.current[i] ?? createRef(),
   );
 
+  const [isLoading, setIsLoading] = useState(true);
+
   // Initialize project and cloud and initial attributes
   useEffectOnce(() => {
     const initializeFormValues = async () => {
@@ -191,6 +194,8 @@ export const BaseDeployPage = ({
       Object.entries(initialValues).forEach(([key, value]) => {
         props.change(key, value);
       });
+
+      setIsLoading(false);
     };
 
     initializeFormValues();
@@ -310,11 +315,16 @@ export const BaseDeployPage = ({
       return;
     }
   }, []);
+
   useEffect(() => {
     if (!customer) return;
     if ('display_billing_info_in_projects' in customer) return;
     fetchCustomerBillingFlag(customer);
   }, [customer]);
+
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
 
   if (props.previewMode) {
     return (

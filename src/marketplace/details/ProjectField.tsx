@@ -52,7 +52,7 @@ export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
             loadOptions={(query, prevOptions, { page }) =>
               projectAutocomplete(customer.uuid, query, prevOptions, page, {
                 // UUID is used in suggest name API request
-                field: ['name', 'url', 'uuid'],
+                field: ['name', 'url', 'uuid', 'end_date'],
               })
             }
             label={translate('Project')}
