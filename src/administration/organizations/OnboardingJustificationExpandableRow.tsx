@@ -7,19 +7,17 @@ import { decodeFileName } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { useUser } from '@waldur/workspace/hooks';
 
 export const OnboardingJustificationExpandableRow: FC<{
   row: OnboardingJustification;
 }> = ({ row }) => {
-  const user = useUser();
   const docs = row.supporting_documentation;
 
   return (
     <ExpandableContainer>
       <Field
         label={translate('User name')}
-        value={user.full_name || user.username}
+        value={row.user_full_name}
         isStuck
         labelClass="me-2"
       />
