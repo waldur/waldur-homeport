@@ -1,5 +1,6 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { LimitPeriodEnum } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
@@ -20,6 +21,15 @@ interface OrderSummaryPlanRowsProps {
 
 const getRowLabel = (component: Component) =>
   `${component.name} ${component.amount} ${component.measured_unit}`;
+
+const getPerLimitPeriod = (limitPeriod: LimitPeriodEnum) =>
+  limitPeriod === 'annual'
+    ? translate('/year')
+    : limitPeriod === 'quarterly'
+      ? translate('/quarter')
+      : limitPeriod === 'month'
+        ? translate('/mo')
+        : '';
 
 export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
   const activeFixedPriceProfile =
@@ -42,8 +52,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
     ...oneTime.totalLimitedRows,
   ];
 
-  const total =
-    periodic.periodicTotal[monthlyPriceIndex] + oneTime.oneTimeTotal;
+  const total = periodic.total + oneTime.oneTimeTotal;
 
   return (
     <>
@@ -73,7 +82,10 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                 <CheckoutPricingRow
                   key={i}
                   label={getRowLabel(row)}
-                  value={defaultCurrency(row.prices[monthlyPriceIndex]) + '/mo'}
+                  value={
+                    defaultCurrency(row.prices[monthlyPriceIndex]) +
+                    getPerLimitPeriod('month')
+                  }
                 />
               ))
             : periodic.fixedRows.map((row, i) => (
@@ -84,14 +96,17 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                 />
               ))}
           {!shouldConcealPrices
-            ? periodic.periodicLimitedRows.map((row, i) => (
+            ? periodic.limitedRows.map((row, i) => (
                 <CheckoutPricingRow
                   key={i}
                   label={getRowLabel(row)}
-                  value={defaultCurrency(row.prices[monthlyPriceIndex]) + '/mo'}
+                  value={
+                    defaultCurrency(row.subTotal) +
+                    getPerLimitPeriod(row.limit_period as any)
+                  }
                 />
               ))
-            : periodic.periodicLimitedRows.map((row, i) => (
+            : periodic.limitedRows.map((row, i) => (
                 <CheckoutPricingRow
                   key={i}
                   label={row.name}
@@ -112,7 +127,8 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
           <CheckoutPricingRow
             label={translate('Monthly cost')}
             value={
-              defaultCurrency(periodic.periodicTotal[monthlyPriceIndex]) + '/mo'
+              defaultCurrency(periodic.totalPeriods[monthlyPriceIndex]) +
+              getPerLimitPeriod('month')
             }
           />
         )}

@@ -25,7 +25,7 @@ export const ComponentRowTotal = (props: {
             />
           )}
           <span className="fs-4 text-gray-700 min-w-150px text-start">
-            {defaultCurrency(props.amount)}
+            {defaultCurrency(props.amount ?? 0)}
             {Boolean(props.period) && (
               <>
                 {' /'}

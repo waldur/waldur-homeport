@@ -1,6 +1,12 @@
+import { sumBy } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { BasePublicPlan, PublicOfferingDetails } from 'waldur-js-client';
+import {
+  BasePublicPlan,
+  BillingUnit,
+  LimitPeriodEnum,
+  PublicOfferingDetails,
+} from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { calculateMonthsDifference } from '@waldur/core/dateUtils';
@@ -72,14 +78,24 @@ export const combinePrices = (
         }
       }
       const price = plan.prices[component.type] || 0;
+      // Calculate pricePerBillingPeriod based on plan.unit and component.limit_period
+      const pricePerBillingPeriod = calculatePricePerBillingPeriod(
+        price,
+        component.limit_period as LimitPeriodEnum,
+        plan.unit,
+      );
+
       const subTotal = price * amount;
-      const prices = multipliers.map((mult) => mult * subTotal);
+      const subTotalPerBillingPeriod =
+        (pricePerBillingPeriod || price) * amount;
+      const prices = multipliers.map((mult) => mult * subTotalPerBillingPeriod);
       return {
         ...component,
         amount,
         prices,
         subTotal,
         price,
+        pricePerBillingPeriod,
         min_value: offeringLimits[component.type].min,
         max_value: offeringLimits[component.type].max,
       };
@@ -129,6 +145,45 @@ export const combinePrices = (
   }
 };
 
+const LIMIT_PERIOD_IN_MONTHS: Partial<Record<LimitPeriodEnum, number>> = {
+  month: 1,
+  quarterly: 3,
+  annual: 12,
+};
+const BILLING_UNIT_IN_MONTHS: Partial<Record<BillingUnit, number>> = {
+  month: 1,
+  quarter: 3,
+  half_month: 0.5,
+  day: 1 / 30,
+  hour: 1 / (30 * 24),
+};
+
+const calculatePricePerBillingPeriod = (
+  price: number,
+  limitPeriod: LimitPeriodEnum,
+  billingUnit: BillingUnit,
+): number => {
+  if (billingUnit === 'quantity') {
+    return price;
+  }
+
+  const limitPeriodInMonths = LIMIT_PERIOD_IN_MONTHS[limitPeriod];
+  const billingUnitInMonths = BILLING_UNIT_IN_MONTHS[billingUnit];
+
+  if (!billingUnitInMonths) {
+    throw new Error(`Unsupported billing unit: ${billingUnit}`);
+  }
+
+  // price per month
+  const pricePerMonth = price / limitPeriodInMonths;
+
+  // price per billing unit
+  const pricePerBillingPeriod = pricePerMonth * billingUnitInMonths;
+
+  // safely rounding to avoid floating point issues
+  return Number(pricePerBillingPeriod.toFixed(6));
+};
+
 const calculateTotalPeriods = (components: Component[]) => {
   return components.reduce((totalPeriods, component) => {
     component.prices.forEach((price, i) => {
@@ -138,6 +193,12 @@ const calculateTotalPeriods = (components: Component[]) => {
     return totalPeriods;
   }, []);
 };
+
+export const LIMIT_PERIODS: LimitPeriodEnum[] = [
+  'month',
+  'quarterly',
+  'annual',
+];
 
 export const useComponentsDetailPrices = (prices: PricesData) => {
   const fixedRows = prices.components.filter(
@@ -168,6 +229,27 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
     (component) => component.limit_period && component.limit_period !== 'total',
   );
 
+  const periodicLimitedRowsByPeriod = useMemo<
+    Record<
+      LimitPeriodEnum,
+      { rows: Component[]; totalPeriods: number[]; total: number[] }
+    >
+  >(
+    () =>
+      LIMIT_PERIODS.reduce((acc, per) => {
+        const rows = periodicLimitedRows.filter(
+          (component) => component.limit_period === per,
+        );
+        acc[per] = {
+          rows: rows,
+          totalPeriods: calculateTotalPeriods(rows),
+          total: Number(sumBy(rows, 'subTotal').toFixed(2)),
+        };
+        return acc;
+      }, {} as any),
+    [periodicLimitedRows],
+  );
+
   const fixedTotalPeriods = useMemo(
     () => calculateTotalPeriods(fixedRows),
     [fixedRows],
@@ -194,13 +276,24 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
     [totalLimitedRows],
   );
 
-  const periodicTotal: number[] = useMemo(
+  const periodicTotalPeriods: number[] = useMemo(
     () =>
       prices.periods.map(
         (_, i) =>
           (fixedTotalPeriods[i] || 0) + (periodicLimitedTotalPeriods[i] || 0),
       ),
     [fixedTotalPeriods, periodicLimitedTotalPeriods],
+  );
+
+  const periodicTotal: number = useMemo(
+    () =>
+      Number(
+        sumBy(
+          (fixedRows || []).concat(periodicLimitedRows || []),
+          'subTotal',
+        ).toFixed(2),
+      ),
+    [fixedRows, periodicLimitedRows],
   );
 
   const oneTimeTotal: number = useMemo(
@@ -228,9 +321,16 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
       fixedRows,
       fixedTotalPeriods,
       usageRows,
-      periodicLimitedRows,
-      periodicLimitedTotalPeriods,
-      periodicTotal,
+      limitedRows: periodicLimitedRows,
+      limitedRowsByPeriod: periodicLimitedRowsByPeriod,
+      limitedTotalPeriods: periodicLimitedTotalPeriods,
+      totalPeriods: periodicTotalPeriods,
+      total: periodicTotal,
+      /** Consider the fixed and usage based components on a monthly basis for now. */
+      hasMonthlyCost:
+        periodicLimitedRowsByPeriod['month'].rows.length > 0 ||
+        fixedRows.length > 0 ||
+        usageRows.length > 0,
     },
     oneTime: {
       hasOneTimeCost,
