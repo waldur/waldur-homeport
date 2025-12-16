@@ -30,17 +30,18 @@ export const DashboardCard: FC<DashboardCardProps> = ({
       onClick={isClickable ? onClick : undefined}
       style={{
         cursor: isClickable ? 'pointer' : 'default',
+        minHeight: '120px',
       }}
     >
       <Card.Body className="d-flex align-items-center">
-        <div className="symbol symbol-50px me-4">
+        <div className="symbol symbol-50px me-4 flex-shrink-0">
           <div
             className={`symbol-label ${isClickable ? backgroundColor : 'bg-gray-300'}`}
           >
             {icon}
           </div>
         </div>
-        <div>
+        <div className="flex-grow-1">
           <Card.Title className="mb-1 h5">{title}</Card.Title>
           <p className="text-muted mb-0 fs-7">{message}</p>
         </div>
