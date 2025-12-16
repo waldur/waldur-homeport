@@ -2,7 +2,6 @@ import { SparkleIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { useLLMSettings } from '@waldur/ai-assistant/lib/useLLMSettings';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openDrawerDialog } from '@waldur/drawer/actions';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -17,12 +16,8 @@ const LLMChatDrawer = lazyComponent(() =>
 
 export const LLMChatDrawerToggle: React.FC = () => {
   const dispatch = useDispatch();
-  const { data } = useLLMSettings();
 
-  if (
-    !data.LLM_CHAT_ENABLED ||
-    !isFeatureVisible(SupportFeatures.enable_llm_assistant)
-  ) {
+  if (!isFeatureVisible(SupportFeatures.enable_llm_assistant)) {
     return null;
   }
 
