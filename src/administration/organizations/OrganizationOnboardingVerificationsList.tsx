@@ -13,6 +13,7 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { BooleanField } from '@waldur/table/BooleanField';
 import Table from '@waldur/table/Table';
+import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -39,12 +40,13 @@ const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
 
 export const getOnboardingVerificationColumns = (options?: {
   hideCustomerCreationColumn?: boolean;
-}): any[] => {
-  const columns: any[] = [
+}): Column[] => {
+  const columns: Column[] = [
     {
       title: translate('Legal name'),
-      render: ({ row }) => renderFieldOrDash(row.legal_name),
-      copyField: (row) => row.legal_name,
+      render: ({ row }) =>
+        renderFieldOrDash(row.legal_name || row.verified_company_data.name),
+      copyField: (row) => row.legal_name || row.verified_company_data.name,
       id: 'legal_name',
       keys: ['legal_name'],
     },
