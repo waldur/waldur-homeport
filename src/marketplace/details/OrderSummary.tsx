@@ -1,4 +1,4 @@
-import { createElement, FC, useMemo } from 'react';
+import { createElement, FC } from 'react';
 import { connect } from 'react-redux';
 import { isSubmitting } from 'redux-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
@@ -40,13 +40,7 @@ export const SummaryTable: FC<OrderSummaryProps> = (props) => {
 const OrderCheckout: FC<OrderSummaryProps> = (props) => {
   const { periodic, oneTime } = useComponentsDetailPrices(props.prices);
 
-  const monthlyPriceIndex = useMemo(() => {
-    const index = props.prices.periodKeys.indexOf('monthly');
-    return index > -1 ? index : 0;
-  }, [props.prices.periodKeys]);
-
-  const total =
-    periodic.periodicTotal[monthlyPriceIndex] + oneTime.oneTimeTotal;
+  const total = periodic.total + oneTime.oneTimeTotal;
 
   return (
     <DeployPageTotalCard

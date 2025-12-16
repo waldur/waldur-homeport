@@ -1,6 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import React, { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
+import { LimitPeriodEnum } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { formatCurrency } from '@waldur/core/formatCurrency';
@@ -70,8 +71,16 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
   const perPeriod = !props.period
     ? ''
     : props.period === 'annual'
-      ? ' /year'
-      : ' /mo';
+      ? translate(' /year')
+      : translate(' /mo');
+
+  const limitPeriod = props.offeringComponent.limit_period as LimitPeriodEnum;
+  const perLimitPeriod =
+    limitPeriod === 'annual'
+      ? translate(' /year')
+      : limitPeriod === 'quarterly'
+        ? translate(' /quarter')
+        : '';
 
   return (
     <FormTable.Item
@@ -85,14 +94,28 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
       actions={
         !props.hidePrices && (
           <>
-            {translate('Total')}
-            {': '}
-            {formatCurrency(
-              componentTotalPrice,
-              ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
-              4,
-            )}
-            {perPeriod}
+            <span className="d-block">
+              {translate('Total')}
+              {': '}
+              {formatCurrency(
+                perLimitPeriod
+                  ? props.offeringComponent.subTotal
+                  : componentTotalPrice,
+                ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                4,
+              )}
+              {perLimitPeriod || perPeriod}
+            </span>
+            {perLimitPeriod ? (
+              <span className="fs-7">
+                {formatCurrency(
+                  componentTotalPrice,
+                  ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
+                  4,
+                )}
+                {perPeriod}
+              </span>
+            ) : null}
           </>
         )
       }
