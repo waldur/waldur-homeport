@@ -37,6 +37,98 @@ const StatusBadge: FC<{ status: OnboardingVerificationStatusEnum }> = ({
   );
 };
 
+export const getOnboardingVerificationColumns = (options?: {
+  hideCustomerCreationColumn?: boolean;
+}): any[] => {
+  const columns: any[] = [
+    {
+      title: translate('Legal name'),
+      render: ({ row }) => renderFieldOrDash(row.legal_name),
+      copyField: (row) => row.legal_name,
+      id: 'legal_name',
+      keys: ['legal_name'],
+    },
+    {
+      title: translate('Registration code'),
+      render: ({ row }) => renderFieldOrDash(row.legal_person_identifier),
+      copyField: (row) => row.legal_person_identifier,
+      id: 'legal_person_identifier',
+      keys: ['legal_person_identifier'],
+    },
+    {
+      title: translate('Country'),
+      render: ({ row }) => renderFieldOrDash(row.country),
+      id: 'country',
+      keys: ['country'],
+    },
+    {
+      title: translate('Status'),
+      render: ({ row }) => <StatusBadge status={row.status} />,
+      id: 'status',
+      keys: ['status'],
+    },
+    {
+      title: translate('Validation method'),
+      render: ({ row }) => row.validation_method || translate('manual'),
+      id: 'validation_method',
+      keys: ['validation_method'],
+    },
+  ];
+
+  if (!options?.hideCustomerCreationColumn) {
+    columns.push({
+      title: translate('Customer can be created'),
+      render: ({ row }) => (
+        <>
+          <BooleanField value={row.can_customer_be_created} />
+          {row.customer_creation_error_message && (
+            <Tip
+              id={`tip-customer-creation-${row.uuid}`}
+              label={row.customer_creation_error_message}
+            >
+              <QuestionIcon weight="bold" />
+            </Tip>
+          )}
+        </>
+      ),
+      id: 'can_customer_be_created',
+      keys: ['can_customer_be_created'],
+    });
+  }
+
+  columns.push(
+    {
+      title: translate('Created'),
+      render: ({ row }) => formatDateTime(row.created),
+      optional: true,
+      id: 'created',
+      keys: ['created'] as Array<keyof OnboardingVerification>,
+    },
+    {
+      title: translate('Validated at'),
+      render: ({ row }) =>
+        row.validated_at
+          ? formatDateTime(row.validated_at)
+          : renderFieldOrDash(null),
+      optional: true,
+      id: 'validated_at',
+      keys: ['validated_at'] as Array<keyof OnboardingVerification>,
+    },
+    {
+      title: translate('Expires at'),
+      render: ({ row }) =>
+        row.expires_at
+          ? formatDateTime(row.expires_at)
+          : renderFieldOrDash(null),
+      optional: true,
+      id: 'expires_at',
+      keys: ['expires_at'] as Array<keyof OnboardingVerification>,
+    },
+  );
+
+  return columns;
+};
+
 export const OrganizationOnboardingVerificationsList: FC = () => {
   const tableProps = useTable({
     table: 'OrganizationOnboardingVerifications',
@@ -47,67 +139,11 @@ export const OrganizationOnboardingVerificationsList: FC = () => {
   return (
     <Table<OnboardingVerification>
       {...tableProps}
-      columns={[
-        {
-          title: translate('Legal name'),
-          render: ({ row }) => renderFieldOrDash(row.legal_name),
-          copyField: (row) => row.legal_name,
-        },
-        {
-          title: translate('Registration code'),
-          render: ({ row }) => renderFieldOrDash(row.legal_person_identifier),
-          copyField: (row) => row.legal_person_identifier,
-        },
-        {
-          title: translate('Country'),
-          render: ({ row }) => renderFieldOrDash(row.country),
-        },
-        {
-          title: translate('Status'),
-          render: ({ row }) => <StatusBadge status={row.status} />,
-        },
-        {
-          title: translate('Validation method'),
-          render: ({ row }) => row.validation_method || translate('manual'),
-        },
-        {
-          title: translate('Customer can be created'),
-          render: ({ row }) => (
-            <>
-              <BooleanField value={row.can_customer_be_created} />
-              {row.customer_creation_error_message && (
-                <Tip
-                  id={`tip-customer-creation-${row.uuid}`}
-                  label={row.customer_creation_error_message}
-                >
-                  <QuestionIcon weight="bold" />
-                </Tip>
-              )}
-            </>
-          ),
-        },
-        {
-          title: translate('Created'),
-          render: ({ row }) => formatDateTime(row.created),
-        },
-        {
-          title: translate('Validated at'),
-          render: ({ row }) =>
-            row.validated_at
-              ? formatDateTime(row.validated_at)
-              : renderFieldOrDash(null),
-        },
-        {
-          title: translate('Expires at'),
-          render: ({ row }) =>
-            row.expires_at
-              ? formatDateTime(row.expires_at)
-              : renderFieldOrDash(null),
-        },
-      ]}
+      columns={getOnboardingVerificationColumns()}
       hasQuery
       rowActions={OnboardingVerificationActions}
       expandableRow={OnboardingVerificationExpandableRow}
+      hasOptionalColumns
     />
   );
 };

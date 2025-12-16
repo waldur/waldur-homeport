@@ -56,6 +56,33 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    name: 'profile.onboarding-applications',
+    url: 'onboarding-applications/',
+    component: lazyComponent(() =>
+      import('./UserOnboardingVerificationsList').then((module) => ({
+        default: module.UserOnboardingVerificationsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Onboarding applications'),
+      feature: CustomerFeatures.show_onboarding,
+      priority: 121,
+    },
+  },
+  {
+    name: 'profile.verification-details',
+    url: 'verifications/:uuid/',
+    component: lazyComponent(() =>
+      import('./UserOnboardingJustificationDetailsPage').then((module) => ({
+        default: module.UserOnboardingJustificationDetailsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Verification details'),
+      skipBreadcrumb: true,
+    },
+  },
+  {
     name: 'profile.events',
     url: 'events/',
     component: lazyComponent(() =>

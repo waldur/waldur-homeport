@@ -1,22 +1,37 @@
-import { SignInIcon } from '@phosphor-icons/react';
+import { SignInIcon, BuildingsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
-import { userInvitationsList } from 'waldur-js-client';
+import { Col, Row } from 'react-bootstrap';
+import {
+  onboardingVerificationsList,
+  userInvitationsList,
+} from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { router } from '@waldur/router';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
 import { ActiveInvitationsList } from './ActiveInvitationsList';
+import { DashboardCard } from './DashboardCard';
 
 export const UserDashboard: FC = () => {
   const user = useUser();
   const [invitationsCount, setInvitationsCount] = useState<number>(0);
   const [isLoadingInvitations, setIsLoadingInvitations] =
     useState<boolean>(true);
+  const [escalatedVerificationsCount, setEscalatedVerificationsCount] =
+    useState<number>(0);
+  const [isLoadingVerifications, setIsLoadingVerifications] =
+    useState<boolean>(true);
+
+  const showOnboardingWidgets = isFeatureVisible(
+    CustomerFeatures.show_onboarding,
+  );
 
   if (!user) {
     return null;
@@ -45,13 +60,42 @@ export const UserDashboard: FC = () => {
     fetchInvitationsCount();
   }, [user.email]);
 
+  showOnboardingWidgets &&
+    useEffect(() => {
+      const fetchEscalatedVerificationsCount = async () => {
+        try {
+          setIsLoadingVerifications(true);
+          const response = await onboardingVerificationsList({
+            method: 'HEAD',
+            query: {
+              user_uuid: user.uuid,
+              status: 'escalated',
+            },
+          });
+          const count = fetchResultCount(response);
+          setEscalatedVerificationsCount(count);
+        } catch {
+          setEscalatedVerificationsCount(0);
+        } finally {
+          setIsLoadingVerifications(false);
+        }
+      };
+
+      fetchEscalatedVerificationsCount();
+    }, [user.uuid]);
+
   const hasActiveInvitations = invitationsCount > 0;
+  const hasEscalatedVerifications = escalatedVerificationsCount > 0;
 
   const scrollToActiveInvitations = () => {
     const element = document.getElementById('active-invitations-section');
     if (element) {
       element.scrollIntoView({ behavior: 'smooth' });
     }
+  };
+
+  const goToOnboardingApplications = () => {
+    router.stateService.go('profile.onboarding-applications');
   };
 
   const showDashboardWidgets = isExperimentalUiComponentsVisible();
@@ -61,50 +105,49 @@ export const UserDashboard: FC = () => {
       {showDashboardWidgets && (
         <Row className="mb-5">
           <Col md={4}>
-            <Card
-              className={`card-bordered ${
-                !isLoadingInvitations && hasActiveInvitations
-                  ? 'card-hover cursor-pointer'
-                  : 'opacity-50'
-              }`}
-              onClick={
-                !isLoadingInvitations && hasActiveInvitations
-                  ? scrollToActiveInvitations
-                  : undefined
+            <DashboardCard
+              title={translate('Active invitations')}
+              message={
+                isLoadingInvitations
+                  ? translate('Loading...')
+                  : hasActiveInvitations
+                    ? translate(
+                        'See pending invites sent to your email {email} ({count})',
+                        { email: user.email, count: invitationsCount },
+                      )
+                    : translate('No active invitations at the moment')
               }
-              style={{
-                cursor:
-                  !isLoadingInvitations && hasActiveInvitations
-                    ? 'pointer'
-                    : 'default',
-              }}
-            >
-              <Card.Body className="d-flex align-items-center">
-                <div className="symbol symbol-50px me-4">
-                  <div
-                    className={`symbol-label ${!isLoadingInvitations && hasActiveInvitations ? 'bg-success' : 'bg-gray-300'}`}
-                  >
-                    <SignInIcon size={32} color="white" weight="bold" />
-                  </div>
-                </div>
-                <div>
-                  <Card.Title className="mb-1 h5">
-                    {translate('Active invitations')}
-                  </Card.Title>
-                  <p className="text-muted mb-0 fs-7">
-                    {isLoadingInvitations
-                      ? translate('Loading...')
-                      : hasActiveInvitations
-                        ? translate(
-                            'See pending invites sent to your email {email} ({count})',
-                            { email: user.email, count: invitationsCount },
-                          )
-                        : translate('No active invitations at the moment')}
-                  </p>
-                </div>
-              </Card.Body>
-            </Card>
+              icon={<SignInIcon size={32} color="white" weight="bold" />}
+              isLoading={isLoadingInvitations}
+              hasItems={hasActiveInvitations}
+              backgroundColor="bg-success"
+              onClick={scrollToActiveInvitations}
+            />
           </Col>
+          {showOnboardingWidgets && (
+            <Col md={4}>
+              <DashboardCard
+                title={translate('Pending onboarding applications')}
+                message={
+                  isLoadingVerifications
+                    ? translate('Loading...')
+                    : hasEscalatedVerifications
+                      ? translate(
+                          'You have {count} pending organization onboarding application(s)',
+                          { count: escalatedVerificationsCount },
+                        )
+                      : translate(
+                          'No pending onboarding applications at the moment',
+                        )
+                }
+                icon={<BuildingsIcon size={32} color="white" weight="bold" />}
+                isLoading={isLoadingVerifications}
+                hasItems={hasEscalatedVerifications}
+                backgroundColor="bg-warning"
+                onClick={goToOnboardingApplications}
+              />
+            </Col>
+          )}
         </Row>
       )}
 

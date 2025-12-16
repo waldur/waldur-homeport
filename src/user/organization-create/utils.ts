@@ -156,6 +156,20 @@ export const handleManualVerification = async (
         legal_person_identifier: formData.registration_code,
       },
     });
+
+    // Submit checklist answers for the existing verification
+    const { allQuestions } = await getChecklistData();
+
+    if (allQuestions.length > 0) {
+      const answers = createAnswersFromFormData(allQuestions, formData);
+
+      if (answers.length > 0) {
+        await onboardingVerificationsSubmitAnswers({
+          path: { uuid: validation.uuid },
+          body: answers,
+        });
+      }
+    }
   } else {
     // Create new verification instance for pure manual flow
     const verificationResponse = await onboardingVerificationsStartVerification(
