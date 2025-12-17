@@ -4,6 +4,7 @@ import { useRef } from 'react';
 import Dropzone, { DropzoneOptions, DropzoneRef } from 'react-dropzone';
 
 import { formatJsx, translate } from '@waldur/i18n';
+import { useTheme } from '@waldur/theme/useTheme';
 
 import './UploadContainer.scss';
 
@@ -13,13 +14,20 @@ interface UploadContainerProps extends DropzoneOptions {
   disabled?: boolean;
 }
 
-const rejectStyle = {
-  borderColor: '#ff1744',
+const rejectStyleLight = {
+  borderColor: '#fda29b',
+};
+
+const rejectStyleDark = {
+  borderColor: '#f97066',
 };
 
 export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
   const { message, className, ...rest } = props;
   const dropzoneNode = useRef<DropzoneRef>(null);
+
+  const { theme } = useTheme();
+  const rejectStyle = theme === 'dark' ? rejectStyleDark : rejectStyleLight;
 
   const chooseFile = () => {
     if (dropzoneNode.current) {
@@ -50,19 +58,15 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
               </div>
             </div>
           )}
-          <div className="dropzone-message text-muted">
+          <div className="dropzone-message text-quaternary">
             <input {...getInputProps()} />
             <button
               type="button"
-              className="icon"
+              className="icon-square"
               aria-hidden="true"
               onClick={chooseFile}
             >
-              <CloudArrowUpIcon
-                size={20}
-                weight="bold"
-                className="text-primary"
-              />
+              <CloudArrowUpIcon size={16} weight="bold" />
             </button>
             <div>
               {translate(
@@ -73,6 +77,7 @@ export const UploadContainer: React.FC<UploadContainerProps> = (props) => {
                       className="text-anchor fw-bold"
                       type="button"
                       onClick={chooseFile}
+                      disabled={rest.disabled}
                     >
                       {child}
                     </button>

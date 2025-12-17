@@ -252,10 +252,19 @@ $card-px: 1.85rem !default;
 
 // Buttons + Forms
 //
-$input-btn-padding-y-sm: 0.39rem !default;
 
-$btn-padding-y-sm: $input-btn-padding-y-sm !default;
+$input-btn-padding-y: 0.538rem !default;
+$input-btn-padding-y-sm: 0.39rem !default;
+$input-btn-padding-y-lg: 0.692rem !default;
+
+$btn-padding-y: $input-btn-padding-y !default;
+$btn-padding-x: 0.846rem !default;
+$btn-padding-y-sm: 0.23rem !default;
 $btn-padding-x-sm: 0.54rem !default;
+$btn-padding-y-lg: $input-btn-padding-y-lg !default;
+$btn-padding-x-lg: 1.153rem !default;
+
+$btn-border-radius-sm: $border-radius-sm !default;
 
 $btn-disabled-opacity: 1 !default;
 

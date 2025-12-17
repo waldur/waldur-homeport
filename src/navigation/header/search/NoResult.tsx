@@ -40,14 +40,14 @@ export const NoResult: FC<NoResultProps> = ({
       style={style}
     >
       <RadialBg className="background" />
-      <div className="text-center d-flex flex-column align-items-center gap-6 pb-10 position-relative z-index-1">
-        <div className="search-icon">
+      <div className="text-center d-flex flex-column align-items-center pb-10 position-relative z-index-1">
+        <div className="icon-square icon-lg search-icon">
           <MagnifyingGlassIcon weight="bold" size={24} />
         </div>
 
         <div>
-          <h4 className="fw-bold mb-2">{title}</h4>
-          <div className="d-flex flex-column align-items-center text-muted fs-6">
+          <h4>{title}</h4>
+          <div className="d-flex flex-column align-items-center text-tertiary fs-6">
             {message !== null &&
               (message || (
                 <p className="mb-0">
@@ -59,11 +59,14 @@ export const NoResult: FC<NoResultProps> = ({
           </div>
         </div>
         {(actions || callback) && (
-          <div className="d-flex justify-content-center gap-4 w-100">
+          <div className="actions d-flex justify-content-center gap-4 w-100">
             {Boolean(callback) && (
               <Button
                 variant="tertiary"
-                className={classNames('mw-350px', actions ? 'w-175px' : 'w-50')}
+                className={classNames(
+                  'mw-175px min-w-120px',
+                  actions ? 'w-175px' : 'w-50',
+                )}
                 onClick={callback}
               >
                 {buttonTitle}

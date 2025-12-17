@@ -365,7 +365,7 @@ export const EditEndDateDialog = ({
               { list: ignoredResources.join(', ') },
             );
           }
-          dispatch(showSuccess(message, title));
+          dispatch(showSuccess(title, message));
           if (erredResources.length > 0) {
             showError(
               translate(

@@ -158,6 +158,7 @@ $theme-text-colors: (
   'primary-900': $primary-900,
   'secondary': $text-secondary,
   'quaternary': $text-quaternary,
+  'tertiary': $text-tertiary,
   'light': $light,
   'success': if(isDarkMode(), $success-500, $success),
   'info': $info,

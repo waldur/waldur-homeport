@@ -149,6 +149,23 @@
   }
 }
 
+.icon-square {
+  border: 1px solid $border-secondary;
+  padding: 10px;
+  border-radius: 8px;
+  background-color: transparent;
+  line-height: 0.9;
+
+  svg {
+    color: $fg-secondary;
+  }
+
+  &.icon-lg {
+    padding: 11px;
+    border-radius: 12px;
+  }
+}
+
 svg.icon-align,
 .icon-align svg {
   margin-top: -3px;

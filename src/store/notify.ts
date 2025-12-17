@@ -2,7 +2,7 @@ import { notify } from 'reapop';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 
-export const showSuccess = (message, title = undefined) =>
+export const showSuccess = (title, message = undefined) =>
   notify({
     status: 'success',
     title,
@@ -13,20 +13,20 @@ export const showSuccess = (message, title = undefined) =>
     dismissible: true,
   });
 
-export const showError = (message) =>
+export const showError = (title) =>
   notify({
     status: 'error',
-    message,
+    title,
     position: 'top-right',
     dismissAfter: 7000,
     showDismissButton: true,
     dismissible: true,
   });
 
-export const showInfo = (message) =>
+export const showInfo = (title) =>
   notify({
     status: 'info',
-    message,
+    title,
     position: 'top-right',
     dismissAfter: 7000,
     showDismissButton: true,

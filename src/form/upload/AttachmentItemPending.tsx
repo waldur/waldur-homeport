@@ -6,8 +6,6 @@ import { Button, ProgressBar } from 'react-bootstrap';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-import './AttachmentItem.scss';
-
 interface AttachmentItemPendingProps {
   file: File;
   progress: number;
@@ -21,7 +19,7 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
   file,
   progress,
   error,
-  iconSize = 20,
+  iconSize = 22,
   onRetry,
   onCancel,
 }) => {
@@ -31,24 +29,20 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
       data-testid="pending-attachment-item"
     >
       <div className="attachment-item__thumb">
-        <FileIcon
-          size={iconSize}
-          weight="bold"
-          className={error ? 'text-danger' : 'text-muted'}
-        />
+        <FileIcon size={iconSize} weight="bold" />
       </div>
 
       <div className="attachment-item__body">
-        <h6 className="fw-bold text-gray-700 mb-0">
+        <h6 className="fw-bold text-secondary">
           {error ? translate('Upload failed, please try again') : file.name}
         </h6>
-        <p className="fs-6 text-muted mb-0">
+        <p className="fs-6 text-muted">
           {error ? file.name : formatFilesize(file.size, 'B')}
         </p>
         {error ? (
           <button
             type="button"
-            className="text-btn text-gray-700 text-hover-primary fw-bold"
+            className="text-anchor text-anchor-danger mt-4px"
             onClick={() => onRetry(file)}
           >
             {translate('Try again')}
@@ -65,10 +59,7 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
         <Button
           variant="flush"
           size="sm"
-          className={classNames(
-            'btn-active-icon-danger attachment-item__delete btn-icon-right',
-            error && 'btn-icon-danger',
-          )}
+          className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete btn-icon-right"
           disabled={!error && progress && progress !== 0}
           onClick={() => onCancel(file)}
         >
