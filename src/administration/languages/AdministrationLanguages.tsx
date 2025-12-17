@@ -130,7 +130,7 @@ export const AdministrationLanguages: FunctionComponent = () => {
                 data-testid={`language_${language.code}`}
                 name={`language_${language.code}`}
                 alignMiddle
-                className="justify-content-between flex-row-reverse"
+                className="d-flex justify-content-between flex-row-reverse"
                 size="sm"
                 input={
                   {
