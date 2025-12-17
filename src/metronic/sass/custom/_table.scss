@@ -285,6 +285,10 @@
     .btn {
       height: 44px;
       font-size: $input-btn-font-size-lg;
+
+      &:not(.btn-icon) {
+        padding: 0.692rem 1.153rem;
+      }
     }
   }
 
@@ -595,22 +599,13 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 
 // Dark mode
 @if (isDarkMode()) {
-  // No result background
-  .search-no-result,
-  .search-error {
-    .search-icon,
-    .error-icon {
-      border: 1px solid $gray-200 !important;
-    }
-  }
-
   // Another table inside expanded view
   .table.table-expandable tr {
     .expandable-container .card-table {
-      border-color: $gray-200 !important;
+      border-color: $border-secondary !important;
 
       .card-header {
-        border-color: $gray-200 !important;
+        border-color: $border-secondary !important;
       }
     }
   }
@@ -626,6 +621,9 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 
     &.btn-icon {
       width: 44px;
+    }
+    &:not(.btn-icon) {
+      padding: 0.692rem 1.153rem;
     }
   }
 }

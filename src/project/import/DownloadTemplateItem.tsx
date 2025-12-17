@@ -2,8 +2,6 @@ import { DownloadSimpleIcon, FileCsvIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Button } from 'react-bootstrap';
 
-import '@waldur/form/upload/AttachmentItem.scss';
-
 interface DownloadTemplateItemProps {
   name: string;
   size?: string;

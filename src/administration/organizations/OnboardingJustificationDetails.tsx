@@ -139,10 +139,7 @@ export const OnboardingJustificationDetails: FC<
                             <AttachmentsList
                               attachments={[doc]}
                               ItemComponent={({ attachment }) => (
-                                <AttachmentItem
-                                  attachment={attachment}
-                                  iconSize={24}
-                                />
+                                <AttachmentItem attachment={attachment} />
                               )}
                             />
                           </Col>

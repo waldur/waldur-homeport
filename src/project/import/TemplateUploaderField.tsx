@@ -32,8 +32,8 @@ export const TemplateUploaderField = ({
             file_size: value[0].size,
             mime_type: value[0].type,
           }}
-          iconSize={20}
           onDelete={() => onChange([])}
+          error={meta.error}
         />
       )}
       <FieldError error={meta.dirty && meta.error} />

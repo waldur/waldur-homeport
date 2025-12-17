@@ -124,6 +124,7 @@ export const FileUploadTab: FunctionComponent = () => {
                 mime_type: formData.importFile.type,
               }}
               onDelete={clearFile}
+              error={validationResult?.error}
             />
           )}
 

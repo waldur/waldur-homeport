@@ -132,6 +132,7 @@
   background-color: transparent;
   color: $link-color;
   text-decoration: $link-decoration;
+  font-size: $font-size-lg;
   border: none;
   cursor: pointer;
   display: inline;
@@ -142,6 +143,18 @@
     color: $link-color;
     text-decoration: underline !important;
     transition: $transition-base;
+  }
+  &:disabled {
+    color: $text-disabled;
+    cursor: not-allowed;
+    text-decoration: none !important;
+  }
+
+  &.text-anchor-danger {
+    color: $text-error-primary;
+    &:hover {
+      color: $text-error-primary;
+    }
   }
 }
 .text-btn {

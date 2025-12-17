@@ -26,13 +26,17 @@
 
   .search-icon,
   .error-icon {
-    border: 1px solid var(--bs-border-color);
-    padding: 11px;
-    border-radius: 12px;
     margin-top: 45px;
+    margin-bottom: 16px;
+  }
 
-    svg {
-      color: var(--bs-gray-600);
-    }
+  h4 {
+    line-height: 24px;
+    margin-bottom: 4px;
+    font-weight: 500;
+  }
+
+  .actions {
+    margin-top: 24px;
   }
 }
