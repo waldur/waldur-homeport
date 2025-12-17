@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderConsumerActions';
 import { OrderProviderActions } from '@waldur/marketplace/orders/actions/OrderProviderActions';
 import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 
 interface OrderInProgressViewProps {
   resource: Resource;
@@ -158,7 +159,12 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
                 refetch={refetch}
                 as={Button}
               />
-            ) : resource.order_in_progress.state === 'pending-provider' ? (
+            ) : resource.order_in_progress.state === 'pending-provider' &&
+              !(
+                resource.offering_type === SITE_AGENT_PLUGIN &&
+                !offering.plugin_options
+                  .enable_display_of_order_actions_for_service_provider
+              ) ? (
               <OrderProviderActions
                 order={resource.order_in_progress}
                 refetch={refetch}

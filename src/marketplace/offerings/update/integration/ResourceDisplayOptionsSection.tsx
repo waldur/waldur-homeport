@@ -1,9 +1,10 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import { StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 
 import {
   DefaultOfferingEditPanel,
@@ -13,19 +14,6 @@ import {
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
 
-const fields: OfferingEditField[] = [
-  {
-    label: translate('Highlight backend ID display'),
-    key: 'plugin_options.highlight_backend_id_display',
-    component: AwesomeCheckboxField,
-  },
-  {
-    label: translate('Backend ID display label'),
-    key: 'plugin_options.backend_id_display_label',
-    component: StringField,
-  },
-];
-
 export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
   props,
 ) => {
@@ -33,6 +21,33 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
     props.offering,
     props.refetch,
   );
+
+  const fields: OfferingEditField[] = useMemo(() => {
+    const baseFields: OfferingEditField[] = [
+      {
+        label: translate('Highlight backend ID display'),
+        key: 'plugin_options.highlight_backend_id_display',
+        component: AwesomeCheckboxField,
+      },
+      {
+        label: translate('Backend ID display label'),
+        key: 'plugin_options.backend_id_display_label',
+        component: StringField,
+      },
+    ];
+
+    if (props.offering.type === SITE_AGENT_PLUGIN) {
+      baseFields.push({
+        label: translate(
+          'Enable display of order actions for service provider',
+        ),
+        key: 'plugin_options.enable_display_of_order_actions_for_service_provider',
+        component: AwesomeCheckboxField,
+      });
+    }
+
+    return baseFields;
+  }, [props.offering.type]);
 
   return (
     <FormTable.Card
