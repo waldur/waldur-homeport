@@ -950,7 +950,7 @@ export const SettingsDescription = [
       {
         key: 'WALDUR_AUTH_SOCIAL_ROLE_CLAIM',
         description: translate('Name of the claim that contains user roles.'),
-        default: 'roles',
+        default: '',
         type: 'string',
       },
     ],
