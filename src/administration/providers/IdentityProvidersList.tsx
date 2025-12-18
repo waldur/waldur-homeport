@@ -75,7 +75,10 @@ export const IdentityProvidersList = () => {
   return providersData && settingsData ? (
     <>
       <SettingsCard
-        groupNames={[translate('User settings')]}
+        groupNames={[
+          translate('User settings'),
+          translate('OIDC auth settings'),
+        ]}
         settingsSource={settingsData}
       />
 
