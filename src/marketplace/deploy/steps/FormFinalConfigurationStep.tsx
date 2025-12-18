@@ -27,6 +27,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         nameLabel={props.params?.nameLabel}
         offering={props.offering}
         project={project}
+        formatSuggestedName={props.params?.formatSuggestedName}
       />
 
       <Field

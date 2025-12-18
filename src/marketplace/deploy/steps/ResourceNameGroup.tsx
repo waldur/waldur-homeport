@@ -22,7 +22,10 @@ const ResourceNameField = (props) => {
           offering: props.offering.uuid,
         },
       });
-      props.input.onChange(response.data['name']);
+      const name = response.data['name'];
+      props.input.onChange(
+        props.formatSuggestedName ? props.formatSuggestedName(name) : name,
+      );
     },
     onError: (error) => {
       dispatch(showErrorResponse(error as any));
@@ -66,6 +69,7 @@ export const ResourceNameGroup = ({
   nameLabel = translate('Name'),
   offering,
   project,
+  ...props
 }) => (
   <Field
     name="attributes.name"
@@ -75,6 +79,10 @@ export const ResourceNameGroup = ({
     description={translate('This name will be visible in accounting data.')}
     validate={nameValidate}
   >
-    <ResourceNameField offering={offering} project={project} />
+    <ResourceNameField
+      offering={offering}
+      project={project}
+      formatSuggestedName={props.formatSuggestedName}
+    />
   </Field>
 );
