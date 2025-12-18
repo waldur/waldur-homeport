@@ -60,29 +60,31 @@ export const UserDashboard: FC = () => {
     fetchInvitationsCount();
   }, [user.email]);
 
-  showOnboardingWidgets &&
-    useEffect(() => {
-      const fetchEscalatedVerificationsCount = async () => {
-        try {
-          setIsLoadingVerifications(true);
-          const response = await onboardingVerificationsList({
-            method: 'HEAD',
-            query: {
-              user_uuid: user.uuid,
-              status: 'escalated',
-            },
-          });
-          const count = fetchResultCount(response);
-          setEscalatedVerificationsCount(count);
-        } catch {
-          setEscalatedVerificationsCount(0);
-        } finally {
-          setIsLoadingVerifications(false);
-        }
-      };
+  useEffect(() => {
+    if (!showOnboardingWidgets) {
+      return;
+    }
+    const fetchEscalatedVerificationsCount = async () => {
+      try {
+        setIsLoadingVerifications(true);
+        const response = await onboardingVerificationsList({
+          method: 'HEAD',
+          query: {
+            user_uuid: user.uuid,
+            status: 'escalated',
+          },
+        });
+        const count = fetchResultCount(response);
+        setEscalatedVerificationsCount(count);
+      } catch {
+        setEscalatedVerificationsCount(0);
+      } finally {
+        setIsLoadingVerifications(false);
+      }
+    };
 
-      fetchEscalatedVerificationsCount();
-    }, [user.uuid]);
+    fetchEscalatedVerificationsCount();
+  }, [user.uuid, showOnboardingWidgets]);
 
   const hasActiveInvitations = invitationsCount > 0;
   const hasEscalatedVerifications = escalatedVerificationsCount > 0;
