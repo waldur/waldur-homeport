@@ -1,3 +1,4 @@
+import { AZURE_SQL_TYPE, AZURE_VM_TYPE } from '@waldur/azure/constants';
 import azureIcon from '@waldur/images/appstore/icon-azure.png';
 import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
 import rancherIcon from '@waldur/images/appstore/icon-rancher.png';
@@ -24,8 +25,8 @@ export const getOfferingImage = (offering: Offering) => {
     case TENANT_TYPE:
       return openstackIcon;
 
-    case 'Azure.SQLServer':
-    case 'Azure.VirtualMachine':
+    case AZURE_SQL_TYPE:
+    case AZURE_VM_TYPE:
       return azureIcon;
 
     case MARKETPLACE_RANCHER:

@@ -1,6 +1,8 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { ResourceSummaryConfiguration } from '@waldur/resource/summary/types';
 
+import { AZURE_VM_TYPE } from '../constants';
+
 const AzureVirtualMachineSummary = lazyComponent(() =>
   import('./AzureVirtualMachineSummary').then((module) => ({
     default: module.AzureVirtualMachineSummary,
@@ -9,6 +11,6 @@ const AzureVirtualMachineSummary = lazyComponent(() =>
 
 export const AzureVirtualMachineSummaryConfiguration: ResourceSummaryConfiguration =
   {
-    type: 'Azure.VirtualMachine',
+    type: AZURE_VM_TYPE,
     component: AzureVirtualMachineSummary,
   };

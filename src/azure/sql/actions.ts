@@ -1,8 +1,10 @@
 import { ActionConfiguration } from '@waldur/resource/actions/types';
 
+import { AZURE_SQL_TYPE } from '../constants';
+
 import { DestroyServerAction } from './DestroyServerAction';
 
 export const AzureSqlServerActions: ActionConfiguration = {
-  type: 'Azure.SQLServer',
+  type: AZURE_SQL_TYPE,
   actions: [DestroyServerAction],
 };

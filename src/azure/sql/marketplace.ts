@@ -2,6 +2,8 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OfferingConfiguration } from '@waldur/marketplace/common/types';
 
+import { AZURE_SQL_TYPE } from '../constants';
+
 const AzureCredentialsForm = lazyComponent(() =>
   import('../common/AzureCredentialsForm').then((module) => ({
     default: module.AzureCredentialsForm,
@@ -19,7 +21,7 @@ const AzureSQLServerForm = lazyComponent(() =>
 );
 
 export const AzureSQLServerOffering: OfferingConfiguration = {
-  type: 'Azure.SQLServer',
+  type: AZURE_SQL_TYPE,
   get label() {
     return translate('Azure PostgreSQL database server');
   },

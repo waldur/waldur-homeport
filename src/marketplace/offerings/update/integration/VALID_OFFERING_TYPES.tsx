@@ -1,3 +1,4 @@
+import { AZURE_VM_TYPE } from '@waldur/azure/constants';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import {
   INSTANCE_TYPE,
@@ -14,4 +15,5 @@ export const VALID_OFFERING_TYPES = [
   SLURM_PLUGIN,
   MARKETPLACE_RANCHER,
   OFFERING_TYPE_CUSTOM_SCRIPTS,
+  AZURE_VM_TYPE,
 ];

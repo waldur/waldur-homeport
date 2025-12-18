@@ -1,3 +1,4 @@
+import { AZURE_VM_TYPE } from '@waldur/azure/constants';
 import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 import { ActionConfiguration } from '@waldur/resource/actions/types';
 
@@ -8,7 +9,7 @@ import { StartAction } from './StartAction';
 import { StopAction } from './StopAction';
 
 export const AzureVirtualMachineActions: ActionConfiguration = {
-  type: 'Azure.VirtualMachine',
+  type: AZURE_VM_TYPE,
   actions: [
     PullAction,
     StartAction,

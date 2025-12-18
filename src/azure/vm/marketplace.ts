@@ -2,6 +2,8 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OfferingConfiguration } from '@waldur/marketplace/common/types';
 
+import { AZURE_VM_TYPE } from '../constants';
+
 const AzureCredentialsForm = lazyComponent(() =>
   import('../common/AzureCredentialsForm').then((module) => ({
     default: module.AzureCredentialsForm,
@@ -27,7 +29,7 @@ const serializer = ({ name, location, image, size }) => ({
 });
 
 export const AzureVirtualMachineOffering: OfferingConfiguration = {
-  type: 'Azure.VirtualMachine',
+  type: AZURE_VM_TYPE,
   get label() {
     return translate('Azure Virtual Machine');
   },
