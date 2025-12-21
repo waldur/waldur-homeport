@@ -18,14 +18,11 @@ import {
   useAbortControllers,
   useThreadRunningState,
 } from '@waldur/ai-assistant/lib/thread/threadStateHooks';
-import { useLLMSettings } from '@waldur/ai-assistant/lib/useLLMSettings';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
 
 export function ThreadRuntimeProvider({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const { data: LLMSettings, isLoading } = useLLMSettings();
-
   const { currentThreadId, setCurrentThreadId, threads, setThreads } =
     useThreadContext();
 
@@ -93,7 +90,6 @@ export function ThreadRuntimeProvider({
     createController,
     cleanupController,
     abortThread,
-    LLMSettings,
   };
 
   // Message handlers
@@ -115,10 +111,6 @@ export function ThreadRuntimeProvider({
       threadList: threadListAdapter,
     },
   });
-
-  if (isLoading) {
-    return null;
-  }
 
   return (
     <AssistantRuntimeProvider runtime={runtime}>

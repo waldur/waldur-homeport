@@ -1,30 +1,38 @@
+import { chatStream } from 'waldur-js-client/sdk.gen';
+
 import { StreamChatChunk } from '@waldur/ai-assistant/lib/types';
 
 export async function* streamChat(
   input: string,
-  apiUrl: string,
   signal?: AbortSignal,
 ): AsyncGenerator<StreamChatChunk> {
-  const response = await fetch(apiUrl, {
-    method: 'POST',
-    headers: { 'Content-Type': 'application/json' },
-    body: JSON.stringify({ input }),
-    signal,
-  });
+  let result;
 
-  if (!response.body) throw new Error('No response body for streaming');
+  try {
+    result = await chatStream({
+      body: { input },
+      parseAs: 'stream',
+      signal,
+    });
+  } catch (error: unknown) {
+    if (error && typeof error === 'object' && 'detail' in error) {
+      const detail = (error as { detail: string }).detail;
+      throw new Error(detail);
+    }
+    if (error instanceof Error) {
+      throw error;
+    }
+    throw new Error('Failed to connect to the inference API');
+  }
 
-  const reader = response.body.getReader();
+  const stream = result.data as ReadableStream;
+  const reader = stream.getReader();
   const decoder = new TextDecoder();
+  let currentEvent = 'message';
   let buffer = '';
 
   try {
     while (true) {
-      if (signal?.aborted) {
-        await reader.cancel();
-        break;
-      }
-
       const { done, value } = await reader.read();
       if (done) break;
 
@@ -33,22 +41,29 @@ export async function* streamChat(
       buffer = lines.pop() || '';
 
       for (const line of lines) {
-        if (line.startsWith('data: ')) {
-          try {
-            yield JSON.parse(line.slice(6));
-          } catch {
-            throw new Error('Failed to parse stream data');
-          }
-        }
-      }
-    }
+        const trimmedLine = line.trim();
 
-    // yield any leftover buffer if it contains valid JSON
-    if (buffer.trim() && !signal?.aborted) {
-      try {
-        yield JSON.parse(buffer.trim().replace(/^data: /, ''));
-      } catch {
-        // ignore incomplete buffer
+        if (trimmedLine.startsWith('event: ')) {
+          currentEvent = trimmedLine.slice(7);
+          continue;
+        }
+
+        if (trimmedLine.startsWith('data: ')) {
+          const dataStr = trimmedLine.slice(6);
+          try {
+            const parsed = JSON.parse(dataStr);
+
+            if (currentEvent === 'error') {
+              throw new Error(parsed.detail || 'An unknown error occurred');
+            }
+
+            yield parsed as StreamChatChunk;
+          } catch (e) {
+            // Re-throw if it's explicit Error, otherwise ignore JSON noise
+            if (currentEvent === 'error') throw e;
+          }
+          currentEvent = 'message';
+        }
       }
     }
   } finally {

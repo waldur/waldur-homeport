@@ -3,10 +3,7 @@ import { MessageHandlerDependencies } from '@waldur/ai-assistant/lib/types';
 
 export const generateAndSetThreadTitle = async (
   input: string,
-  deps: Pick<
-    MessageHandlerDependencies,
-    'currentThreadId' | 'setThreadList' | 'LLMSettings'
-  >,
+  deps: Pick<MessageHandlerDependencies, 'currentThreadId' | 'setThreadList'>,
 ): Promise<void> => {
   const titleAbortController = new AbortController();
 
@@ -15,11 +12,7 @@ export const generateAndSetThreadTitle = async (
       "Generate a concise title of max 30 characters for the user's first message summary, and output ONLY the title. User Message:" +
       input;
 
-    const streamInput = streamChat(
-      titlePrompt,
-      deps.LLMSettings.LLM_INFERENCES_API_URL,
-      titleAbortController.signal,
-    );
+    const streamInput = streamChat(titlePrompt, titleAbortController.signal);
 
     let newTitle = '';
     for await (const part of streamInput) {
