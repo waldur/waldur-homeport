@@ -21,12 +21,11 @@ export interface MessageHandlerDependencies {
   createController: (threadId: string) => AbortController;
   cleanupController: (threadId: string) => void;
   abortThread: (threadId: string) => void;
-  LLMSettings: LLMSettings;
 }
 
 export interface ParseAssistantStreamParams extends Pick<
   MessageHandlerDependencies,
-  'setMessages' | 'LLMSettings'
+  'setMessages'
 > {
   contextInput: string;
   assistantId: string;
@@ -42,14 +41,6 @@ export interface StreamChatChunk {
 export type RunConfig = {
   readonly custom?: Record<string, unknown>;
 };
-
-export interface LLMSettings {
-  LLM_CHAT_ENABLED: boolean;
-  LLM_INFERENCES_BACKEND_TYPE: string;
-  LLM_INFERENCES_API_URL: string;
-  LLM_INFERENCES_API_TOKEN: string;
-  LLM_INFERENCES_MODEL: string;
-}
 
 export type CodeBlockProps = {
   node?: Element;

@@ -3,13 +3,10 @@ import { streamChat } from '@waldur/ai-assistant/lib/streaming/streamChat';
 import { ParseAssistantStreamParams } from '@waldur/ai-assistant/lib/types';
 
 export async function parseAssistantStream(params: ParseAssistantStreamParams) {
-  const { contextInput, assistantId, signal, setMessages, LLMSettings } =
-    params;
-
-  const apiUrl = LLMSettings.LLM_INFERENCES_API_URL;
+  const { contextInput, assistantId, signal, setMessages } = params;
 
   try {
-    for await (const part of streamChat(contextInput, apiUrl, signal)) {
+    for await (const part of streamChat(contextInput, signal)) {
       if (signal?.aborted) {
         break;
       }

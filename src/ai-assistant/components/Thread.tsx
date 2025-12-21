@@ -22,6 +22,7 @@ import {
   PencilSimpleIcon,
   MagnifyingGlassIcon,
   StopIcon,
+  WarningCircleIcon,
 } from '@phosphor-icons/react';
 import React, { type FC } from 'react';
 
@@ -221,7 +222,10 @@ const MessageError: FC = () => {
   return (
     <MessagePrimitive.Error>
       <ErrorPrimitive.Root>
-        <ErrorPrimitive.Message className="aui-message-error-message" />
+        <div className="aui-message-error-container">
+          <WarningCircleIcon weight="fill" />
+          <ErrorPrimitive.Message className="aui-message-error-message" />
+        </div>
       </ErrorPrimitive.Root>
     </MessagePrimitive.Error>
   );

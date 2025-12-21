@@ -320,8 +320,28 @@
   }
 }
 
+.aui-message-error-container {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  width: 100%;
+  padding: 0.5rem 0.75rem;
+  background-color: rgba($danger, 0.1);
+  border-left: 3px solid $danger;
+  border-radius: $border-radius;
+
+  svg {
+    color: $danger;
+    flex-shrink: 0;
+    width: 1.25rem;
+    height: 1.25rem;
+  }
+}
+
 .aui-message-error-message {
   color: $text-error-primary;
+  font-size: 1rem;
+  flex: 1;
 }
 
 .aui-composer-cancel-button {
@@ -354,8 +374,9 @@
 
 .aui-assistant-message-content {
   display: flex;
+  flex-direction: column;
   justify-content: center;
-  align-items: center;
+  align-items: flex-start;
   max-width: 100%;
   padding: 0.8rem 1rem;
   border-radius: $border-radius-xl;
@@ -365,6 +386,7 @@
   word-break: break-word;
   flex: 0 1 auto;
   min-height: 3rem;
+  gap: 0.75rem;
 }
 
 .aui-assistant-message-footer {
