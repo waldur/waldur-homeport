@@ -4,6 +4,7 @@ import {
 } from 'waldur-js-client';
 
 import * as AuthService from '@waldur/auth/AuthService';
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { InvitationTokenStorage } from '@waldur/core/StorageManager';
 import { createDeferred } from '@waldur/core/utils';
@@ -89,22 +90,26 @@ export function submitPermissionRequest(token) {
             router.stateService.go('profile.details');
           })
           .catch(async (error) => {
-            await waitForConfirmation(
-              store.dispatch,
-              translate('Access restricted'),
-              error ||
-                translate(
-                  "You don't have the required permissions to join this organization.",
-                ),
-              {
-                type: 'danger',
-                size: 'sm',
-                positiveButton: translate('Go to dashboard'),
-                positiveButtonVariant: 'primary w-175px',
-                onlyPositiveButton: true,
-              },
-            );
-            router.stateService.go('profile.details');
+            const errorMessage = format(error);
+            try {
+              await waitForConfirmation(
+                store.dispatch,
+                translate('Access restricted'),
+                errorMessage ||
+                  translate(
+                    "You don't have the required permissions to join this organization.",
+                  ),
+                {
+                  type: 'danger',
+                  size: 'sm',
+                  positiveButton: translate('Go to dashboard'),
+                  positiveButtonVariant: 'primary w-175px',
+                  onlyPositiveButton: true,
+                },
+              );
+            } finally {
+              router.stateService.go('profile.details');
+            }
           });
       }
     })
