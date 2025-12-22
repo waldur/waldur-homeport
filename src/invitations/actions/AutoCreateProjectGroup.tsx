@@ -51,14 +51,14 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
           label={translate('Project name template')}
           required
           description={translate(
-            'Use variables like {user.full_name}, {user.email} to create dynamic project names',
+            'Use variables like {full_name}, {email} to create dynamic project names',
           )}
           help={<NameTemplateTooltip />}
         >
           <Field
             name="project_name_template"
             component={StringField as any}
-            placeholder={translate('e.g. {user.full_name} Research project')}
+            placeholder={translate('e.g. {full_name} Research project')}
             disabled={disabled}
             validate={required}
           />
