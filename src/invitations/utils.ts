@@ -141,16 +141,26 @@ export async function acceptInvitation(token) {
 export function submitGroupRequest(token) {
   return userGroupInvitationsSubmitRequest({ path: { uuid: token } })
     .then((res) => {
-      store.dispatch(
-        showSuccess(
-          translate(
-            'Request has been sent. You’ll be notified once it’s approved.',
+      if (res.data.auto_approved) {
+        store.dispatch(
+          showSuccess(
+            translate('You have successfully joined {organization}', {
+              organization: res.data.scope_name,
+            }),
           ),
-          translate('You are requested to join {organization}', {
-            organization: res.data.scope_name,
-          }),
-        ),
-      );
+        );
+      } else {
+        store.dispatch(
+          showSuccess(
+            translate(
+              'Request has been sent. You’ll be notified once it’s approved.',
+            ),
+            translate('You are requested to join {organization}', {
+              organization: res.data.scope_name,
+            }),
+          ),
+        );
+      }
       return res.data;
     })
     .catch((error) => {

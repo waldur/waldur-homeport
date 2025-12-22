@@ -2,6 +2,7 @@ import { Field, useFormState } from 'react-final-form';
 
 import { validateEmailPatterns } from '@waldur/administration/auto-provisioning-rules/utils';
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { FormFieldError } from '@waldur/form/FormFieldError';
 import { translate } from '@waldur/i18n';
@@ -22,6 +23,22 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       className="mb-5 bg-gray-50"
       titleClassName="fs-6"
     >
+      <FormGroup>
+        <Field
+          name="auto_approve"
+          render={({ input }) => (
+            <AwesomeCheckboxField
+              label={translate('Auto-approve permission requests')}
+              description={translate(
+                'Automatically approve permission requests from users matching the specified rules.',
+              )}
+              alignMiddle
+              disabled={disabled}
+              input={input as any}
+            />
+          )}
+        />
+      </FormGroup>
       <FormGroup
         label={translate('Allowed email patterns')}
         description={translate(

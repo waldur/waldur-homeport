@@ -36,6 +36,7 @@ interface GroupInvitationCreateFormData {
   project?: Project;
   project_name_template: string;
   auto_create_project: boolean;
+  auto_approve: boolean;
   user_affiliations: Array<string>;
   user_email_patterns: Array<string>;
 }
@@ -69,6 +70,7 @@ export const GroupInvitationCreateDialog = ({
                   project_role: formData.role.uuid,
                   project_name_template: formData.project_name_template,
                   auto_create_project: formData.auto_create_project,
+                  auto_approve: formData.auto_approve,
                   user_affiliations: formData.user_affiliations,
                   user_email_patterns: formData.user_email_patterns,
                 }

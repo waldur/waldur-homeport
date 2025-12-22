@@ -15,23 +15,43 @@ export const requestToAccessOrganization = (
   submitGroupRequest(groupInvitationUuid)
     .then(async (groupInvitation) => {
       GroupInvitationTokenStorage.remove();
-      await waitForConfirmation(
-        dispatch,
-        translate('Request has been sent for approval'),
-        translate(
-          "Your request to join the organization {name} has been submitted. You’ll receive a notification once it's reviewed and approved.",
-          { name: <strong>{groupInvitation.scope_name || 'N/A'}</strong> },
-          formatJsxTemplate,
-        ),
-        {
-          type: 'success',
-          size: 'sm',
-          positiveButton: translate('OK'),
-          onlyPositiveButton: true,
-          positiveButtonVariant: 'primary w-95px',
-          iconNode: <CheckCircleIcon weight="bold" />,
-        },
-      );
+      if (groupInvitation.auto_approved) {
+        await waitForConfirmation(
+          dispatch,
+          translate('You have successfully joined {organization}', {
+            organization: groupInvitation.scope_name || 'N/A',
+          }),
+          translate(
+            'You can now see the shared resources and collaborate with your team.',
+          ),
+          {
+            type: 'success',
+            size: 'sm',
+            positiveButton: translate('OK'),
+            onlyPositiveButton: true,
+            positiveButtonVariant: 'primary w-95px',
+            iconNode: <CheckCircleIcon weight="bold" />,
+          },
+        );
+      } else {
+        await waitForConfirmation(
+          dispatch,
+          translate('Request has been sent for approval'),
+          translate(
+            "Your request to join the organization {name} has been submitted. You’ll receive a notification once it's reviewed and approved.",
+            { name: <strong>{groupInvitation.scope_name || 'N/A'}</strong> },
+            formatJsxTemplate,
+          ),
+          {
+            type: 'success',
+            size: 'sm',
+            positiveButton: translate('OK'),
+            onlyPositiveButton: true,
+            positiveButtonVariant: 'primary w-95px',
+            iconNode: <CheckCircleIcon weight="bold" />,
+          },
+        );
+      }
     })
     .catch(async (err) => {
       GroupInvitationTokenStorage.remove();
