@@ -367,27 +367,41 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
     }
   }, [selectedSavedFilter]);
 
-  const onApply = () => {
+  const onApply = (hideMenu = true) => {
     _setFilter(itemValue);
     if (props.onApply)
       props.onApply({ title: props.title, name: props.name, value: itemValue });
-    apply();
+    apply(hideMenu);
   };
 
   const [shown, setShown] = useState(false);
   const menuEl = useRef<HTMLDivElement>(null);
 
-  let isShown = false;
-  if (menuEl?.current) {
-    isShown = menuEl.current.classList.contains('show');
-  }
+  // Use MutationObserver to detect when menu-sub gets 'show' class added/removed
   useEffect(() => {
-    setShown(isShown);
-  }, [isShown]);
+    if (!menuEl.current) return;
+
+    const observer = new MutationObserver((mutations) => {
+      for (const mutation of mutations) {
+        if (mutation.attributeName === 'class') {
+          const hasShow = menuEl.current?.classList.contains('show') ?? false;
+          setShown(hasShow);
+        }
+      }
+    });
+
+    observer.observe(menuEl.current, { attributes: true });
+
+    // Check initial state
+    setShown(menuEl.current.classList.contains('show'));
+
+    return () => observer.disconnect();
+  }, []);
 
   useEffect(() => {
-    if (isShown && instantApply) {
-      onApply();
+    if (shown && instantApply) {
+      // Don't hide menu when value changes (e.g., during typing)
+      onApply(false);
     }
   }, [itemValue]);
 
@@ -430,7 +444,10 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
                     >
                       {translate('Cancel')}
                     </Button>
-                    <Button className="flex-grow-1 w-50" onClick={onApply}>
+                    <Button
+                      className="flex-grow-1 w-50"
+                      onClick={() => onApply()}
+                    >
                       {translate('Apply')}
                     </Button>
                   </div>
