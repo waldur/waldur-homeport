@@ -1,5 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 
+import { format } from '@waldur/core/ErrorMessageFormatter';
 import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
 import { FieldErrorMessage } from '@waldur/form/FieldError';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
@@ -55,18 +56,23 @@ export const requestToAccessOrganization = (
     })
     .catch(async (err) => {
       GroupInvitationTokenStorage.remove();
-      if (err?.[0] && err?.[0].includes('Request has been created already')) {
+      // Extract error message from the error object
+      const errorMessage = format(err);
+      if (
+        typeof errorMessage === 'string' &&
+        errorMessage.includes('Request has been created already')
+      ) {
         dispatch(showErrorResponse(err));
       } else {
         const formattedMessage = (
           <div>
             <p>
               {translate(
-                'You can’t join this organization with your current account details. Access is limited to certain users as defined by the organization manager.',
+                "You can't join this organization with your current account details. Access is limited to certain users as defined by the organization manager.",
               )}
             </p>
             <p className="fw-bolder">{translate('Restriction details')}:</p>
-            <FieldErrorMessage error={err} />
+            <FieldErrorMessage error={errorMessage} />
           </div>
         );
 
