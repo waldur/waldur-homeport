@@ -10,6 +10,7 @@ import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types'
 
 import { FormHardwareStep } from './FormHardwareStep';
 import { FormLocationStep } from './FormLocationStep';
+import { FormSecurityStep } from './FormSecurityStep';
 
 export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   DetailsOverviewStep,
@@ -29,6 +30,13 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     required: true,
     requiredFields: ['attributes.image', 'attributes.size'],
     component: FormHardwareStep,
+  },
+  {
+    label: translate('Security'),
+    id: 'step-security',
+    fields: ['attributes.ssh_public_key'],
+    required: false,
+    component: FormSecurityStep,
   },
   {
     ...FinalConfigurationStep,

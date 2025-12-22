@@ -21,11 +21,12 @@ const AzureVirtualMachineForm = lazyComponent(() =>
   })),
 );
 
-const serializer = ({ name, location, image, size }) => ({
+const serializer = ({ name, location, image, size, ssh_public_key }) => ({
   name,
   location: location ? location.url : undefined,
   size: size ? size.url : undefined,
   image: image ? image.url : undefined,
+  ssh_public_key: ssh_public_key ? ssh_public_key.url : undefined,
 });
 
 export const AzureVirtualMachineOffering: OfferingConfiguration = {
