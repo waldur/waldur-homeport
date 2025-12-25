@@ -1,10 +1,10 @@
 # Form Migration Guide
 
-The application contains **200+ form components** across two patterns, showing gradual migration from Redux Form to React Final Form.
+The application contains **650+ form-related files** across three patterns, showing ongoing migration from Redux Form to React Final Form.
 
 ## Form Patterns Comparison
 
-| Aspect | Redux Form (Legacy, 59.5%) | React Final Form (Modern, 30.5%) | VStepperForm (Multi-step, 10%) |
+| Aspect | Redux Form (Legacy, ~68%) | React Final Form (Modern, ~21%) | VStepperForm (Multi-step, ~7%) |
 |--------|------------|------------------|---------------------|
 | **State Storage** | Redux store | Local component state | Shared across steps |
 | **Performance** | Can cause unnecessary re-renders | Optimized subscription model | Step-based validation |
@@ -100,19 +100,31 @@ const onSubmit = async (formData) => {
 
 ## Migration Detailed Guidelines
 
-### Form Distribution
+### Form Distribution (as of December 2025)
 
-- **Redux Form (Legacy)**: 119 forms (59.5%) - being phased out
-- **React Final Form (Modern)**: 61 forms (30.5%) - preferred for new development
-- **VStepperForm (Multi-step)**: 20 forms (10%) - complex deployments
+- **Redux Form (Legacy)**: ~467 files importing redux-form (~68%) - being phased out
+- **React Final Form (Modern)**: ~146 files importing react-final-form (~21%) - preferred for new development
+- **VStepperForm (Multi-step)**: ~50 files (~7%) - complex deployments
+- **FormContainer usage**: ~96 files - Redux Form wrapper components
+
+Note: Many files import redux-form for shared field components (SelectField, StringField, etc.) and table filters, not just form definitions.
 
 ### Key Forms by Category
 
 - **User/Auth**: SigninForm, KeyCreateDialog (React Final Form)
-- **Projects**: ProjectCreateDialog (React Final Form), team management (Redux Form)
-- **Resources**: OpenStack/VMware/Azure provider configs (mostly Redux Form)
-- **Administration**: Mixed - newer ones use React Final Form
-- **Marketplace**: DeployForm (Redux Form), newer policy forms (React Final Form)
+- **Projects**: ProjectCreateDialog, team dialogs (React Final Form)
+- **Resources**: OpenStack/VMware/Azure deploy steps (VStepperForm with Redux Form fields)
+- **Administration**: Mixed - newer dialogs use React Final Form
+- **Marketplace**: Deploy flows use VStepperForm, policy forms use React Final Form
+- **Table Filters**: Predominantly Redux Form (high migration priority)
+- **Proposals**: Multi-step wizards using VStepperForm
+
+### Areas Needing Migration
+
+1. **Table filters** - Most still use Redux Form field components
+2. **Resource action dialogs** - Many use FormContainer pattern
+3. **Invoice/Reporting filters** - Redux Form based
+4. **Customer management** - Mixed, older dialogs need migration
 
 ## Post-Migration Cleanup
 

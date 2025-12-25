@@ -61,8 +61,10 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                 dispatch(
                   openModalDialog(AdministrationServiceDeskUpdateDialog, {
                     size: 'lg',
-                    initialValues,
-                    name: serviceDeskProvider,
+                    resolve: {
+                      initialValues,
+                      name: serviceDeskProvider,
+                    },
                   }),
                 )
               }
