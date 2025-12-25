@@ -1,9 +1,7 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
 
 const BroadcastTemplateUpdateDialog = lazyComponent(() =>
   import('./BroadcastTemplateUpdateDialog').then((module) => ({
@@ -14,16 +12,11 @@ const BroadcastTemplateUpdateDialog = lazyComponent(() =>
 export const BroadcastTemplateUpdateButton: FunctionComponent<{
   row;
   refetch;
-}> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = () => {
-    dispatch(
-      openModalDialog(BroadcastTemplateUpdateDialog, {
-        dialogClassName: 'modal-dialog-centered',
-        resolve: { template: row, refetch },
-        size: 'lg',
-      }),
-    );
-  };
-  return <EditAction action={callback} size="sm" />;
-};
+}> = ({ row, refetch }) => (
+  <EditModalButton
+    dialog={BroadcastTemplateUpdateDialog}
+    row={row}
+    buildResolve={(r) => ({ template: r, refetch })}
+    size="lg"
+  />
+);

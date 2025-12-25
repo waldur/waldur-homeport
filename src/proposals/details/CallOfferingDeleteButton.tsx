@@ -1,14 +1,10 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import {
   proposalRequestedOfferingsCancel,
   RequestedOffering,
 } from 'waldur-js-client';
 
+import { DeleteButton } from '@waldur/core/buttons';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 export const CallOfferingDeleteButton = ({
   row,
@@ -16,43 +12,25 @@ export const CallOfferingDeleteButton = ({
 }: {
   row: RequestedOffering;
   refetch(): void;
-}) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete the offering {offering_name} ?',
-          {
-            offering_name: <strong>{row.offering_name}</strong>,
-          },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
+}) => (
+  <DeleteButton
+    row={row}
+    apiFunction={(r) =>
+      proposalRequestedOfferingsCancel({ path: { uuid: r.uuid } })
     }
-    try {
-      await proposalRequestedOfferingsCancel({ path: { uuid: row.uuid } });
-      await refetch();
-      dispatch(showSuccess(translate('Requested offering has been removed.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete requested offering.')),
-      );
+    refetch={refetch}
+    confirmTitle={translate('Confirmation')}
+    confirmMessage={(r) =>
+      translate(
+        'Are you sure you want to delete the offering {offering_name} ?',
+        {
+          offering_name: <strong>{r.offering_name}</strong>,
+        },
+        formatJsxTemplate,
+      )
     }
-  };
-  return (
-    <ActionItem
-      title={translate('Remove')}
-      className="text-danger"
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
-      iconColor="danger"
-      size="sm"
-    />
-  );
-};
+    successMessage={translate('Requested offering has been removed.')}
+    errorMessage={translate('Unable to delete requested offering.')}
+    title={translate('Remove')}
+  />
+);

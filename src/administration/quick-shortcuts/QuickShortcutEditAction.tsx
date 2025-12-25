@@ -1,9 +1,7 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
 
 const QuickShortcutFormDialog = lazyComponent(() =>
   import('./QuickShortcutForm').then((module) => ({
@@ -14,16 +12,11 @@ const QuickShortcutFormDialog = lazyComponent(() =>
 export const QuickShortcutEditAction: FunctionComponent<{
   row;
   refetch;
-}> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = () => {
-    dispatch(
-      openModalDialog(QuickShortcutFormDialog, {
-        dialogClassName: 'modal-dialog-centered',
-        resolve: { shortcut: row, refetch },
-        size: 'lg',
-      }),
-    );
-  };
-  return <EditAction action={callback} size="sm" />;
-};
+}> = ({ row, refetch }) => (
+  <EditModalButton
+    dialog={QuickShortcutFormDialog}
+    row={row}
+    buildResolve={(r) => ({ shortcut: r, refetch })}
+    size="lg"
+  />
+);

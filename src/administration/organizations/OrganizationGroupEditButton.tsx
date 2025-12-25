@@ -1,9 +1,5 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
 
 const OrganizationGroupForm = lazyComponent(() =>
   import('./OrganizationGroupForm').then((module) => ({
@@ -11,18 +7,11 @@ const OrganizationGroupForm = lazyComponent(() =>
   })),
 );
 
-export const OrganizationGroupEditButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const openFormDialog = useCallback(
-    () =>
-      dispatch(
-        openModalDialog(OrganizationGroupForm, {
-          resolve: { organizationGroup: row, refetch },
-          size: 'lg',
-        }),
-      ),
-    [dispatch],
-  );
-
-  return <EditAction action={openFormDialog} size="sm" />;
-};
+export const OrganizationGroupEditButton = ({ row, refetch }) => (
+  <EditModalButton
+    dialog={OrganizationGroupForm}
+    row={row}
+    buildResolve={(r) => ({ organizationGroup: r, refetch })}
+    size="lg"
+  />
+);

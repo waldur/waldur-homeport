@@ -1,9 +1,5 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
 
 const ComponentPolicyFormDialog = lazyComponent(() =>
   import('./ComponentPolicyFormDialog').then((module) => ({
@@ -11,18 +7,11 @@ const ComponentPolicyFormDialog = lazyComponent(() =>
   })),
 );
 
-export const ComponentPolicyEditButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const openFormDialog = useCallback(
-    () =>
-      dispatch(
-        openModalDialog(ComponentPolicyFormDialog, {
-          resolve: { policy: row, refetch },
-          size: 'lg',
-        }),
-      ),
-    [dispatch],
-  );
-
-  return <EditAction action={openFormDialog} />;
-};
+export const ComponentPolicyEditButton = ({ row, refetch }) => (
+  <EditModalButton
+    dialog={ComponentPolicyFormDialog}
+    row={row}
+    buildResolve={(r) => ({ policy: r, refetch })}
+    size="lg"
+  />
+);

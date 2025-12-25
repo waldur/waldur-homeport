@@ -13,7 +13,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-export interface AccessSubnetFormProps {
+export interface AccessSubnetFormData {
   refetch(): void;
   customer_url?: string;
   row?: {
@@ -23,11 +23,12 @@ export interface AccessSubnetFormProps {
   };
 }
 
-export const AccessSubnetForm = ({
-  refetch,
-  customer_url,
-  row,
-}: AccessSubnetFormProps) => {
+interface AccessSubnetFormProps {
+  resolve: AccessSubnetFormData;
+}
+
+export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => {
+  const { refetch, customer_url, row } = resolve;
   const dispatch = useDispatch();
   const isEditMode = !!row;
   const [formData, setFormData] = useState<
