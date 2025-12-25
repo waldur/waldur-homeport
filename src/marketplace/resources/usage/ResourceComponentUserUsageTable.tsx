@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import {
@@ -10,11 +10,15 @@ import { formatMonth } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
+import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
 import { ResourceUsageFilter } from './ResourceUsageFilter';
 
-export const ResourceComponentUserUsageTable = (props) => {
+export const ResourceComponentUserUsageTable: FC<TableWithPortal<any>> = ({
+  portal,
+  ...props
+}) => {
   const filterForm: any = useSelector(getFormValues('ResourceUsageFilterForm'));
 
   const filter = useMemo(() => {
@@ -65,6 +69,10 @@ export const ResourceComponentUserUsageTable = (props) => {
       {...tableProps}
       columns={columns}
       filters={<ResourceUsageFilter />}
+      portal={portal}
+      hasActionBar={false}
+      cardBordered={false}
+      fullWidth
     />
   );
 };
