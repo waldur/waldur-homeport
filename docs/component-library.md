@@ -40,6 +40,75 @@ The application features a comprehensive set of reusable UI components organized
 | **ConfirmationDialog** | `src/modal/ConfirmationDialog.tsx` | Confirmation modal | Destructive actions, custom text |
 | **ActionDialog** | `src/modal/ActionDialog.tsx` | Generic action dialog | Form support, validation |
 
+### Button Factory Components
+
+Generic button factories that reduce boilerplate for common CRUD operations:
+
+| Component | Location | Description | Key Features |
+|-----------|----------|-------------|--------------|
+| **CreateModalButton** | `src/core/buttons/CreateModalButton.tsx` | Factory for create buttons | Opens dialog with resolve props, primary variant |
+| **EditModalButton** | `src/core/buttons/EditModalButton.tsx` | Factory for edit buttons | Supports buildResolve, getInitialValues, action-item or button mode |
+| **DeleteButton** | `src/core/buttons/DeleteButton.tsx` | Factory for delete buttons | Confirmation dialog, API call, success/error notifications |
+
+#### CreateModalButton Usage
+
+```tsx
+import { CreateModalButton } from '@waldur/core/buttons';
+import { lazyComponent } from '@waldur/core/lazyComponent';
+
+const MyDialog = lazyComponent(() =>
+  import('./MyDialog').then((m) => ({ default: m.MyDialog })),
+);
+
+export const MyCreateButton = ({ refetch }) => (
+  <CreateModalButton
+    dialog={MyDialog}
+    resolve={{ refetch }}
+    size="lg"
+  />
+);
+```
+
+#### EditModalButton Usage
+
+```tsx
+import { EditModalButton } from '@waldur/core/buttons';
+
+export const MyEditButton = ({ row, refetch }) => (
+  <EditModalButton
+    dialog={MyUpdateDialog}
+    row={row}
+    buildResolve={(r) => ({ uuid: r.uuid, refetch })}
+    getInitialValues={(r) => ({ name: r.name })}
+    size="lg"
+    title={translate('Update')}
+  />
+);
+```
+
+#### DeleteButton Usage
+
+```tsx
+import { DeleteButton } from '@waldur/core/buttons';
+import { myItemDestroy } from 'waldur-js-client';
+
+export const MyDeleteButton = ({ row, refetch }) => (
+  <DeleteButton
+    row={row}
+    apiFunction={(r) => myItemDestroy({ path: { uuid: r.uuid } })}
+    confirmTitle={translate('Delete item')}
+    confirmMessage={(r) => translate(
+      'Are you sure you want to delete {name}?',
+      { name: <strong>{r.name}</strong> },
+      formatJsxTemplate
+    )}
+    successMessage={translate('Item deleted.')}
+    errorMessage={translate('Unable to delete item.')}
+    refetch={refetch}
+  />
+);
+```
+
 ### Navigation Components
 
 | Component | Location | Description | Key Features |

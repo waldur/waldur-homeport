@@ -1,9 +1,7 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
 
 const NotificationUpdateDialog = lazyComponent(() =>
   import('./NotificationUpdateDialog').then((module) => ({
@@ -14,16 +12,11 @@ const NotificationUpdateDialog = lazyComponent(() =>
 export const NotificationUpdateButton: FunctionComponent<{
   row;
   refetch;
-}> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = () => {
-    dispatch(
-      openModalDialog(NotificationUpdateDialog, {
-        dialogClassName: 'modal-dialog-centered',
-        resolve: { notification: row, refetch },
-        size: 'xl',
-      }),
-    );
-  };
-  return <EditAction action={callback} size="sm" />;
-};
+}> = ({ row, refetch }) => (
+  <EditModalButton
+    dialog={NotificationUpdateDialog}
+    row={row}
+    buildResolve={(r) => ({ notification: r, refetch })}
+    size="xl"
+  />
+);

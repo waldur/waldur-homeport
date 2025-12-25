@@ -1,9 +1,8 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Checklist } from 'waldur-js-client';
 
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { useModal } from '@waldur/modal/hooks';
 
 import { CHECKLIST_FORM_ID } from '../constants';
 
@@ -21,20 +20,17 @@ interface ChecklistEditActionProps {
 export const ChecklistEditAction: FC<ChecklistEditActionProps> = ({
   row,
   refetch,
-}) => {
-  const { openDialog } = useModal();
-  const callback = useCallback(() => {
-    openDialog(ChecklistFormDialog, {
-      resolve: { refetch, checklistUuid: row.uuid },
-      initialValues: {
-        name: row.name,
-        category: row.category_uuid,
-        checklist_type: row.checklist_type,
-        description: row.description,
-      },
-      formId: CHECKLIST_FORM_ID,
-    });
-  }, [row, refetch]);
-
-  return <EditAction action={callback} />;
-};
+}) => (
+  <EditModalButton
+    dialog={ChecklistFormDialog}
+    row={row}
+    buildResolve={(r) => ({ refetch, checklistUuid: r.uuid })}
+    getInitialValues={(r) => ({
+      name: r.name,
+      category: r.category_uuid,
+      checklist_type: r.checklist_type,
+      description: r.description,
+    })}
+    formId={CHECKLIST_FORM_ID}
+  />
+);

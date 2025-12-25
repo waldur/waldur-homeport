@@ -1,9 +1,7 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 
-import { AddButton } from '@waldur/core/AddButton';
+import { CreateModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
 
 interface OnboardingCountryConfigCreateButtonProps {
   refetch: () => void;
@@ -19,17 +17,10 @@ const OnboardingCountryConfigFormDialog = lazyComponent(() =>
 
 export const OnboardingCountryConfigCreateButton: FC<
   OnboardingCountryConfigCreateButtonProps
-> = ({ refetch }) => {
-  const dispatch = useDispatch();
-
-  const createConfig = () => {
-    dispatch(
-      openModalDialog(OnboardingCountryConfigFormDialog, {
-        resolve: { refetch },
-        size: 'lg',
-      }),
-    );
-  };
-
-  return <AddButton action={createConfig} />;
-};
+> = ({ refetch }) => (
+  <CreateModalButton
+    dialog={OnboardingCountryConfigFormDialog}
+    resolve={{ refetch }}
+    size="lg"
+  />
+);

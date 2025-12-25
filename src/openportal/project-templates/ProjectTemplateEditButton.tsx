@@ -1,8 +1,5 @@
-import { useDispatch } from 'react-redux';
-
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
 
 const ProjectTemplateDialog = lazyComponent(() =>
   import('./ProjectTemplateDialog').then((module) => ({
@@ -10,14 +7,11 @@ const ProjectTemplateDialog = lazyComponent(() =>
   })),
 );
 
-export const ProjectTemplateEditButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = () =>
-    dispatch(
-      openModalDialog(ProjectTemplateDialog, {
-        resolve: { uuid: row.uuid, refetch },
-        size: 'lg',
-      }),
-    );
-  return <EditAction action={callback} size="sm" />;
-};
+export const ProjectTemplateEditButton = ({ row, refetch }) => (
+  <EditModalButton
+    dialog={ProjectTemplateDialog}
+    row={row}
+    buildResolve={(r) => ({ uuid: r.uuid, refetch })}
+    size="lg"
+  />
+);

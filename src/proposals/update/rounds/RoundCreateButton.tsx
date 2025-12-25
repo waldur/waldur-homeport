@@ -1,9 +1,5 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
-
-import { AddButton } from '@waldur/core/AddButton';
+import { CreateModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
 import { Call } from '@waldur/proposals/types';
 
 const CallRoundCreateDialog = lazyComponent(() =>
@@ -20,18 +16,10 @@ interface RoundCreateButtonProps {
 export const RoundCreateButton = ({
   call,
   refetch,
-}: RoundCreateButtonProps) => {
-  const dispatch = useDispatch();
-  const openRoundCreateDialog = useCallback(
-    () =>
-      dispatch(
-        openModalDialog(CallRoundCreateDialog, {
-          resolve: { call, refetch },
-          size: 'lg',
-        }),
-      ),
-    [dispatch],
-  );
-
-  return <AddButton action={openRoundCreateDialog} />;
-};
+}: RoundCreateButtonProps) => (
+  <CreateModalButton
+    dialog={CallRoundCreateDialog}
+    resolve={{ call, refetch }}
+    size="lg"
+  />
+);

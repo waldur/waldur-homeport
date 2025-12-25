@@ -1,10 +1,8 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { NestedPartition } from 'waldur-js-client';
 
+import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
 
 const OfferingPartitionFormDialog = lazyComponent(() =>
   import('./OfferingPartitionFormDialog').then((module) => ({
@@ -16,14 +14,10 @@ export const EditOfferingPartitionButton: FC<{
   row: NestedPartition;
   offering;
   refetch;
-}> = ({ offering, row, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = () => {
-    dispatch(
-      openModalDialog(OfferingPartitionFormDialog, {
-        resolve: { offering, partition: row, refetch },
-      }),
-    );
-  };
-  return <EditAction action={callback} />;
-};
+}> = ({ offering, row, refetch }) => (
+  <EditModalButton
+    dialog={OfferingPartitionFormDialog}
+    row={row}
+    buildResolve={(r) => ({ offering, partition: r, refetch })}
+  />
+);

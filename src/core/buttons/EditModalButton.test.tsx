@@ -1,0 +1,187 @@
+import '@testing-library/jest-dom';
+import { fireEvent, render, screen } from '@testing-library/react';
+import { FC } from 'react';
+import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
+
+import { useModal } from '@waldur/modal/hooks';
+
+import { EditModalButton } from './EditModalButton';
+
+vi.mock('@waldur/modal/hooks', () => ({
+  useModal: vi.fn(),
+}));
+
+vi.mock('@waldur/i18n', () => ({
+  translate: (str: string) => str,
+}));
+
+vi.mock(
+  '@waldur/marketplace/resources/actions/ResourceActionMenuContext',
+  () => ({
+    ResourceActionMenuContext: {
+      Provider: ({ children }: { children: React.ReactNode }) => children,
+    },
+  }),
+);
+
+interface MockRow {
+  uuid: string;
+  name: string;
+}
+
+const MockDialog: FC<{
+  resolve: { uuid: string; refetch: () => void };
+}> = () => <div>Mock Dialog</div>;
+
+describe('EditModalButton', () => {
+  const mockOpenDialog = vi.fn();
+  const mockRow: MockRow = { uuid: 'test-uuid', name: 'Test Item' };
+
+  beforeEach(() => {
+    vi.clearAllMocks();
+    (useModal as Mock).mockReturnValue({
+      openDialog: mockOpenDialog,
+      closeDialog: vi.fn(),
+    });
+  });
+
+  it('renders action item with default title', () => {
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+      />,
+    );
+
+    expect(screen.getByText('Edit')).toBeInTheDocument();
+  });
+
+  it('renders with custom title', () => {
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+        title="Update"
+      />,
+    );
+
+    expect(screen.getByText('Update')).toBeInTheDocument();
+  });
+
+  it('calls buildResolve with row to create resolve props', () => {
+    const buildResolve = vi.fn((row: MockRow) => ({
+      uuid: row.uuid,
+      refetch: vi.fn(),
+    }));
+
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        buildResolve={buildResolve}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Edit'));
+
+    expect(buildResolve).toHaveBeenCalledWith(mockRow);
+    expect(mockOpenDialog).toHaveBeenCalledWith(
+      MockDialog,
+      expect.objectContaining({
+        resolve: expect.objectContaining({ uuid: 'test-uuid' }),
+      }),
+    );
+  });
+
+  it('calls getInitialValues with row', () => {
+    const getInitialValues = vi.fn((row: MockRow) => ({
+      name: row.name,
+      description: '',
+    }));
+
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+        getInitialValues={getInitialValues}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Edit'));
+
+    expect(getInitialValues).toHaveBeenCalledWith(mockRow);
+    expect(mockOpenDialog).toHaveBeenCalledWith(
+      MockDialog,
+      expect.objectContaining({
+        initialValues: { name: 'Test Item', description: '' },
+      }),
+    );
+  });
+
+  it('opens dialog with correct size', () => {
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+        size="xl"
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Edit'));
+
+    expect(mockOpenDialog).toHaveBeenCalledWith(
+      MockDialog,
+      expect.objectContaining({ size: 'xl' }),
+    );
+  });
+
+  it('renders as button when renderAs is button', () => {
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+        renderAs="button"
+      />,
+    );
+
+    const button = screen.getByRole('button');
+    expect(button).toBeInTheDocument();
+    expect(button).toHaveTextContent('Edit');
+  });
+
+  it('renders disabled when disabled prop is true', () => {
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+        renderAs="button"
+        disabled
+      />,
+    );
+
+    expect(screen.getByRole('button')).toBeDisabled();
+  });
+
+  it('uses default size lg when not specified', () => {
+    render(
+      <EditModalButton
+        dialog={MockDialog}
+        row={mockRow}
+        resolve={{ uuid: mockRow.uuid, refetch: vi.fn() }}
+      />,
+    );
+
+    fireEvent.click(screen.getByText('Edit'));
+
+    expect(mockOpenDialog).toHaveBeenCalledWith(
+      MockDialog,
+      expect.objectContaining({ size: 'lg' }),
+    );
+  });
+});
