@@ -1,7 +1,7 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
+import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
@@ -14,18 +14,23 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { SupportSettingsForm } from './SupportSettingsForm';
 
-export const AdministrationServiceDeskUpdateDialog = reduxForm<
-  {},
-  { name: string }
->({
-  form: 'AdministrationServiceDeskUpdateDialog',
-})((props) => {
+interface AdministrationServiceDeskUpdateDialogProps {
+  resolve: {
+    name: string;
+    initialValues: Record<string, unknown>;
+  };
+}
+
+export const AdministrationServiceDeskUpdateDialog = ({
+  resolve,
+}: AdministrationServiceDeskUpdateDialogProps) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const callback = async (formData) => {
+
+  const onSubmit = async (formData) => {
     const relevantFormData = {};
     Object.keys(formData).forEach((fieldName) => {
-      if (fieldName.startsWith(props.name.toUpperCase())) {
+      if (fieldName.startsWith(resolve.name.toUpperCase())) {
         relevantFormData[fieldName] = formData[fieldName];
       }
     });
@@ -44,24 +49,30 @@ export const AdministrationServiceDeskUpdateDialog = reduxForm<
   };
 
   return (
-    <form onSubmit={props.handleSubmit(callback)} autoComplete="off">
-      <ModalDialog
-        title={translate('Update {name} settings', {
-          name: capitalize(props.name),
-        })}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={translate('Update')}
-            />
-          </>
-        }
-      >
-        <SupportSettingsForm name={props.name} />
-      </ModalDialog>
-    </form>
+    <Form
+      onSubmit={onSubmit}
+      initialValues={resolve.initialValues}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit} autoComplete="off">
+          <ModalDialog
+            title={translate('Update {name} settings', {
+              name: capitalize(resolve.name),
+            })}
+            footer={
+              <>
+                <CloseDialogButton />
+                <SubmitButton
+                  disabled={invalid}
+                  submitting={submitting}
+                  label={translate('Update')}
+                />
+              </>
+            }
+          >
+            <SupportSettingsForm name={resolve.name} />
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};
