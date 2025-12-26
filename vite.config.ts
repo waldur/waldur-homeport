@@ -38,6 +38,7 @@ export default defineConfig({
           'color-functions',
           'slash-div',
           'global-builtin',
+          'if-function',
         ],
       },
     },

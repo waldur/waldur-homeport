@@ -26,23 +26,31 @@ export interface StateTables {
 
 interface TableResponse<RowType = any> {
   rows: RowType[];
-  resultCount: number;
-  nextPage: number;
+  resultCount?: number;
+  nextPage?: number;
 }
 
-export type Fetcher = <RowType = any>(
+export type Fetcher<RowType = any> = (
   request: TableRequest,
 ) => Promise<TableResponse<RowType>>;
 
-export type FetcherOptions<QueryPayload = any, PathPayload = any> = {
+export type FetcherOptions<
+  QueryPayload = any,
+  PathPayload = any,
+  RowType = any,
+> = {
   query?: QueryPayload;
   path?: PathPayload;
-  parser?: (data, query?: any) => any[];
+  /** Parser function to transform API response data into row array.
+   * Use when the API returns an object with nested array, e.g.:
+   * `parser: (data) => data.questions` for `{ questions: [...] }` response
+   */
+  parser?: (data: any, query?: any) => RowType[];
 };
 
 export interface TableOptionsType<RowType = any> {
   table: string;
-  fetchData: (request: TableRequest) => any;
+  fetchData: Fetcher<RowType>;
   onFetch?: (rows: RowType[], totalCount: number, firstFetch: boolean) => void;
   onApplyFilter?: (filters: FilterItem[], firstFetch: boolean) => void;
   staleTime?: number;

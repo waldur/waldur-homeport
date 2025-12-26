@@ -4,6 +4,8 @@
 2. Table rendering is done using `Table` component.
 
 ```ts
+import { rolesList } from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 import Table from '@waldur/table/Table';
 import { createFetcher } from '@waldur/table/api';
@@ -12,7 +14,7 @@ import { useTable } from '@waldur/table/useTable';
 export const RolesList = () => {
   const tableProps = useTable({
     table: `RolesList`,
-    fetchData: createFetcher('roles'),
+    fetchData: createFetcher(rolesList),
   });
 
   return (
@@ -41,15 +43,120 @@ Column definition consists of two mandatory fields: `title` and `render`.
 
 ## fetchData property
 
-The fetchData property is a function that retrieves data for the table. It should return a promise that resolves to an object containing rows and resultCount. The `fetchData` function can be customized to fetch data from any API endpoint and transform it as needed before passing it to the table.
+The fetchData property is a function that retrieves data for the table. It should return a promise that resolves to an object containing `rows` (required) and optionally `resultCount` and `nextPage` for pagination.
 
-Example:
+### Using createFetcher with SDK functions
+
+The recommended way is to use `createFetcher` with SDK functions from `waldur-js-client`:
+
+```ts
+import { usersList } from 'waldur-js-client';
+import { createFetcher } from '@waldur/table/api';
+
+const tableProps = useTable({
+  table: 'UsersList',
+  fetchData: createFetcher(usersList),
+});
+```
+
+You can pass options to customize the request:
+
+```ts
+import { projectsList } from 'waldur-js-client';
+
+const tableProps = useTable({
+  table: 'ProjectsList',
+  fetchData: createFetcher(projectsList, {
+    // Additional query parameters
+    query: { is_active: true },
+    // Path parameters for nested resources
+    path: { customer_uuid: customerId },
+  }),
+});
+```
+
+### Using a parser to transform response data
+
+When the API returns data in a nested structure, use the `parser` option:
+
+```ts
+import { checklistRetrieve } from 'waldur-js-client';
+
+const tableProps = useTable({
+  table: 'QuestionsList',
+  fetchData: createFetcher(checklistRetrieve, {
+    path: { uuid: checklistId },
+    // Extract questions array from the response object
+    parser: (data) => data.questions,
+  }),
+});
+```
+
+### Custom fetchData function
+
+For static data or custom data sources, create a custom fetcher:
 
 ```ts
 const fetchData = () => Promise.resolve({
   rows: resource.items,
   resultCount: resource.items.length,
 });
+
+const tableProps = useTable({
+  table: 'StaticList',
+  fetchData,
+});
+```
+
+## Type safety
+
+The Table component supports TypeScript type inference. When using `createFetcher` with SDK functions, the row type is automatically inferred from the SDK function's return type.
+
+### Automatic type inference
+
+```ts
+import { Project, projectsList } from 'waldur-js-client';
+
+const tableProps = useTable({
+  table: 'ProjectsList',
+  fetchData: createFetcher(projectsList),
+});
+
+// columns are type-checked against Project type
+<Table
+  {...tableProps}
+  columns={[
+    {
+      title: 'Name',
+      render: ({ row }) => row.name, // row is typed as Project
+    },
+    {
+      title: 'Invalid',
+      render: ({ row }) => row.invalid_field, // TypeScript error!
+    },
+  ]}
+/>
+```
+
+### Explicit type parameter
+
+For custom fetchers or when you need explicit typing, use the generic parameter:
+
+```ts
+interface MyRow {
+  id: string;
+  name: string;
+}
+
+<Table<MyRow>
+  {...tableProps}
+  columns={[
+    {
+      title: 'Name',
+      render: ({ row }) => row.name, // row is typed as MyRow
+    },
+  ]}
+/>
 ```
 
 ## Export feature
@@ -109,7 +216,7 @@ Example:
 export const UsersTable = () => {
   const tableProps = useTable({
     table: 'users',
-    fetchData: createFetcher('users'),
+    fetchData: createFetcher(usersList),
   });
 
   return (
@@ -149,8 +256,8 @@ export const UsersTable = () => {
 
 Table component supports column ordering. To enable it:
 
-1. Add `enableOrdering` prop to the Table component
-2. Configure columns with `orderField` property to specify which field should be used for ordering
+1. Add `orderField` property to columns that should be sortable
+2. Clicking on column headers will toggle between ascending and descending order
 
 Example:
 
@@ -158,13 +265,12 @@ Example:
 export const UsersTable = () => {
   const tableProps = useTable({
     table: 'users',
-    fetchData: createFetcher('users'),
+    fetchData: createFetcher(usersList),
   });
 
   return (
     <Table
       {...tableProps}
-      enableOrdering
       columns={[
         {
           title: translate('Name'),
@@ -181,8 +287,6 @@ export const UsersTable = () => {
   );
 };
 ```
-
-When ordering is enabled, clicking on column headers will toggle between ascending and descending order.
 
 ## Filters feature
 
@@ -206,7 +310,7 @@ export const FilteredList = () => {
   const filter = useSelector(getFilterValues);
   const tableProps = useTable({
     table: 'FilteredList',
-    fetchData: createFetcher('hooks'),
+    fetchData: createFetcher(hooksList),
     filter,
   });
 
@@ -268,7 +372,7 @@ export const GridListItem = ({ row }) => (
 export const GridList = () => {
   const tableProps = useTable({
     table: 'GridList',
-    fetchData: createFetcher('items'),
+    fetchData: createFetcher(itemsList),
   });
 
   return (

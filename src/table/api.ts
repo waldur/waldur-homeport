@@ -7,7 +7,7 @@ import { Fetcher, FetcherOptions, TableRequest } from './types';
 
 export const processApiResponse = <TData = any>(
   result: Awaited<RequestResult<TData>>,
-  parser?: FetcherOptions['parser'],
+  parser?: (data: any, query?: any) => any[],
   query?: any,
 ) => {
   const contentType = result.response.headers
@@ -43,17 +43,30 @@ export type SdkFunction<
 }) => RequestResult<DataType>;
 
 /**
+ * Extracts the item type from an SDK list function's response type.
+ * SDK functions return RequestResult<Array<ItemType>>
+ * This utility extracts ItemType from that structure.
+ */
+type ExtractItemType<F> = F extends (
+  ...args: any[]
+) => Promise<{ data: infer R } | { data: undefined }>
+  ? R extends Array<infer Item>
+    ? Item
+    : R
+  : any;
+
+/**
  * Creates a fetcher function for a table, using a type-safe SDK function.
+ * The row type is automatically inferred from the SDK function's response type.
  * @param sdkFunction - The SDK function to call for fetching data.
  * @param options - Default options for the fetcher.
  */
-
 export function createFetcher<F extends SdkFunction<any, any, any>>(
   sdkFunction: F,
   options?: F extends SdkFunction<infer Q, infer P, any>
-    ? FetcherOptions<Q, P>
+    ? FetcherOptions<Q, P, ExtractItemType<F>>
     : never,
-): Fetcher {
+): Fetcher<ExtractItemType<F>> {
   return (request: TableRequest) => {
     const {
       query: optionsParams,
