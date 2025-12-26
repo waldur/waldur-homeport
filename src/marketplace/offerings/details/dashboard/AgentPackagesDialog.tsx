@@ -6,12 +6,20 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
+interface AgentPackage {
+  package: string;
+  version: string;
+}
+
 export const AgentPackagesDialog: FC<{
   resolve: { agentIdentity: AgentIdentity };
 }> = ({ resolve: { agentIdentity } }) => {
   const tableProps = useTable({
     table: 'AgentServiceProcesses',
-    fetchData: () => Promise.resolve({ rows: agentIdentity.dependencies }),
+    fetchData: () =>
+      Promise.resolve({
+        rows: (agentIdentity.dependencies || []) as AgentPackage[],
+      }),
   });
 
   return (

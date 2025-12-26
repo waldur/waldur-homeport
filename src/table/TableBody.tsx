@@ -8,6 +8,7 @@ import classNames from 'classnames';
 import React, {
   Fragment,
   FunctionComponent,
+  memo,
   useCallback,
   useEffect,
   useMemo,
@@ -52,16 +53,16 @@ interface TableBodyProps extends Pick<
 interface TableCellsProps {
   row;
   columns: TableProps['columns'];
-  columnsMap;
+  columnsMap: Record<string, Column>;
   columnPositions: TableProps['columnPositions'];
   hasOptionalColumns: TableProps['hasOptionalColumns'];
 }
 
-const InlineFilterButton = ({ column, row }) => {
+const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
   const { filterComponents, apply, changeFormField } =
     React.useContext(TableFilterContext);
 
-  const callback = () => {
+  const callback = useCallback(() => {
     const filterConfig = filterComponents.find(
       (comp) => comp.name === column.filter,
     );
@@ -69,7 +70,7 @@ const InlineFilterButton = ({ column, row }) => {
     filterConfig.setFilter(value);
     changeFormField(column.filter, value);
     apply();
-  };
+  }, [filterComponents, column, row, changeFormField, apply]);
 
   return (
     <>
@@ -80,7 +81,7 @@ const InlineFilterButton = ({ column, row }) => {
         data-kt-menu-placement="bottom"
       >
         <Tip
-          id={'tip-filter-' + column.title.slice(0, 2) + row.uuid}
+          id={'tip-filter-' + column.title.toString().slice(0, 2) + row.uuid}
           label={translate('Add filter')}
           delay={{ show: 1000, hide: 0 }}
         >
@@ -106,16 +107,18 @@ const InlineFilterButton = ({ column, row }) => {
       </div>
     </>
   );
-};
+});
 
-const hasFilterMenu = (key) => {
+InlineFilterButton.displayName = 'InlineFilterButton';
+
+const hasFilterMenu = (key: string) => {
   const item = document.querySelector(
     '#kt_content_container .table-filters-menu #filter-item-' + key,
   );
   return Boolean(item);
 };
 
-const renderCellContent = (column: Column, row) => {
+const TableCell = memo(({ column, row }: { column: Column; row }) => {
   // Skip rendering if column is not visible
   if (column.visible === false) {
     return null;
@@ -163,99 +166,89 @@ const renderCellContent = (column: Column, row) => {
       )}
     </td>
   );
-};
+});
 
-const TableCells = ({
-  row,
-  columns,
-  columnsMap,
-  columnPositions,
-  hasOptionalColumns,
-}: TableCellsProps) => (
-  <>
-    {hasOptionalColumns
-      ? columnPositions
-          .filter((id) => columnsMap[id])
-          .map((id) => (
-            <Fragment key={id}>
-              {renderCellContent(columnsMap[id], row)}
+TableCell.displayName = 'TableCell';
+
+const TableCells = memo(
+  ({
+    row,
+    columns,
+    columnsMap,
+    columnPositions,
+    hasOptionalColumns,
+  }: TableCellsProps) => (
+    <>
+      {hasOptionalColumns
+        ? columnPositions
+            .filter((id) => columnsMap[id])
+            .map((id) => (
+              <Fragment key={id}>
+                <TableCell column={columnsMap[id]} row={row} />
+              </Fragment>
+            ))
+        : columns.map((column, colIndex) => (
+            <Fragment key={colIndex}>
+              <TableCell column={column} row={row} />
             </Fragment>
-          ))
-      : columns.map((column, colIndex) => (
-          <Fragment key={colIndex}>{renderCellContent(column, row)}</Fragment>
-        ))}
-  </>
+          ))}
+    </>
+  ),
 );
 
-export const TableBody: FunctionComponent<TableBodyProps> = ({
-  rows,
-  columns,
-  rowClass,
-  rowKey,
-  expandableRow,
-  expandableRowClassName,
-  rowActions,
-  enableMultiSelect,
-  selectRow,
-  selectedRows,
-  toggleRow,
-  toggled,
-  fetch,
-  fieldType,
-  fieldName,
-  validate,
-  columnPositions,
-  hasOptionalColumns,
-  pinnedColumns = {},
-}) => {
-  const columnsMap = useMemo(
-    () =>
-      columns.reduce(
-        (result, column) => ({ ...result, [column.id]: column }),
-        {},
-      ),
-    [columns],
-  );
+TableCells.displayName = 'TableCells';
 
-  const trClick = useCallback(
-    (row, index) => {
-      if (!expandableRow) return;
-      toggleRow(getId(row, index));
-    },
-    [toggleRow],
-  );
+interface TableRowProps {
+  row;
+  rowIndex: number;
+  rowKey: string;
+  rowClass: TableProps['rowClass'];
+  expandableRow: TableProps['expandableRow'];
+  toggled: TableProps['toggled'];
+  fieldType: TableProps['fieldType'];
+  enableMultiSelect: TableProps['enableMultiSelect'];
+  selectRow: TableProps['selectRow'];
+  selectedRows: TableProps['selectedRows'];
+  rowActions: TableProps['rowActions'];
+  fetch: TableProps['fetch'];
+  columns: TableProps['columns'];
+  columnsMap: Record<string, Column>;
+  columnPositions: TableProps['columnPositions'];
+  hasOptionalColumns: TableProps['hasOptionalColumns'];
+  pinnedColumns: PinnedColumns;
+  onRowClick: (row, index: number) => void;
+  onChangeField: (row, input) => void;
+  fieldProps?: { input; meta };
+}
 
-  const isRowSelected = (row: any) => {
-    if (!selectedRows) return false;
-    return selectedRows.some((item) => item[rowKey] === row[rowKey]);
-  };
+const TableRow = memo<TableRowProps>(
+  ({
+    row,
+    rowIndex,
+    rowKey,
+    rowClass,
+    expandableRow,
+    toggled,
+    fieldType,
+    enableMultiSelect,
+    selectRow,
+    selectedRows,
+    rowActions,
+    fetch,
+    columns,
+    columnsMap,
+    columnPositions,
+    hasOptionalColumns,
+    pinnedColumns,
+    onRowClick,
+    onChangeField,
+    fieldProps,
+  }) => {
+    const isRowSelected = useMemo(() => {
+      if (!selectedRows) return false;
+      return selectedRows.some((item) => item[rowKey] === row[rowKey]);
+    }, [selectedRows, rowKey, row]);
 
-  const onChangeField = useCallback(
-    (row, input) => {
-      if (fieldType === 'checkbox') {
-        const newValues: any[] = input.value || [];
-        const index = newValues.findIndex((v) => v[rowKey] === row[rowKey]);
-        // Is field checked
-        if (index > -1) {
-          newValues.splice(index, 1);
-        } else {
-          newValues.push(row);
-        }
-        input.onChange(newValues);
-      } else if (fieldType === 'radio') {
-        input.onChange(row);
-      }
-      input.onBlur();
-    },
-    [fieldType],
-  );
-
-  // Re-initialize menu popups when the rows are changed, so that the cell-filter popups works properly.
-  useEffect(() => {
-    MenuComponent.reinitialization();
-  }, [rows?.length]);
-
-  const TR = (row, rowIndex, fieldProps = null) => {
     let isChecked = false;
     if (fieldProps) {
       if (Array.isArray(fieldProps.input.value)) {
@@ -266,8 +259,38 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
         isChecked = fieldProps.input.value?.[rowKey] === row[rowKey];
       }
     } else {
-      isChecked = isRowSelected(row);
+      isChecked = isRowSelected;
     }
+
+    const handleRowClick = useCallback(
+      (event: React.MouseEvent) => {
+        // prevent checkbox and expandable row to toggle when clicking on inner clickable elements
+        const el = event.target as HTMLElement;
+        if (
+          el.onclick ||
+          el instanceof HTMLInputElement ||
+          el.closest('button, a')
+        )
+          return;
+
+        onRowClick(row, rowIndex);
+        if (fieldProps && !expandableRow) {
+          onChangeField(row, fieldProps.input);
+        }
+      },
+      [row, rowIndex, fieldProps, expandableRow, onRowClick, onChangeField],
+    );
+
+    const handleSelectRow = useCallback(() => {
+      selectRow(row);
+    }, [selectRow, row]);
+
+    const handleFieldChange = useCallback(() => {
+      if (fieldProps) {
+        onChangeField(row, fieldProps.input);
+      }
+    }, [fieldProps, row, onChangeField]);
+
     return (
       <tr
         className={
@@ -279,21 +302,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
             },
           ) || undefined
         }
-        onClick={(event) => {
-          // prevent checkbox and expandable row to toggle when clicking on inner clickable elements
-          const el = event.target as HTMLElement;
-          if (
-            el.onclick ||
-            el instanceof HTMLInputElement ||
-            el.closest('button, a')
-          )
-            return;
-
-          trClick(row, rowIndex);
-          if (fieldProps && !expandableRow) {
-            onChangeField(row, fieldProps.input);
-          }
-        }}
+        onClick={handleRowClick}
       >
         {(enableMultiSelect || fieldType) && (
           <td className="row-control">
@@ -316,7 +325,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
                     type={fieldType}
                     className="form-check form-check-custom"
                     checked={isChecked}
-                    onChange={() => onChangeField(row, fieldProps.input)}
+                    onChange={handleFieldChange}
                     onClick={(e) => e.stopPropagation()}
                   />
                 </>
@@ -324,7 +333,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
                 <FormCheck
                   className="form-check form-check-custom form-check-sm"
                   checked={isChecked}
-                  onChange={() => selectRow(row)}
+                  onChange={handleSelectRow}
                 />
               )}
             </div>
@@ -361,38 +370,154 @@ export const TableBody: FunctionComponent<TableBodyProps> = ({
         )}
       </tr>
     );
-  };
+  },
+);
 
-  return (
-    <tbody>
-      {rows.map((row, rowIndex) => (
-        <React.Fragment key={rowIndex}>
-          {fieldType ? (
-            <Field
-              name={fieldName}
-              component={(fieldProps) => TR(row, rowIndex, fieldProps)}
-              validate={validate}
-            />
-          ) : (
-            TR(row, rowIndex)
-          )}
-          {expandableRow && toggled[getId(row, rowIndex)] && (
-            <tr>
-              <td
-                colSpan={
-                  columns.length +
-                  1 +
-                  (rowActions ? 1 : 0) +
-                  (enableMultiSelect || fieldType ? 1 : 0)
-                }
-                className={expandableRowClassName}
-              >
-                {React.createElement(expandableRow, { row, fetch })}
-              </td>
-            </tr>
-          )}
-        </React.Fragment>
-      ))}
-    </tbody>
-  );
-};
+TableRow.displayName = 'TableRow';
+
+export const TableBody: FunctionComponent<TableBodyProps> = memo(
+  ({
+    rows,
+    columns,
+    rowClass,
+    rowKey = 'uuid',
+    expandableRow,
+    expandableRowClassName,
+    rowActions,
+    enableMultiSelect,
+    selectRow,
+    selectedRows,
+    toggleRow,
+    toggled,
+    fetch,
+    fieldType,
+    fieldName,
+    validate,
+    columnPositions,
+    hasOptionalColumns,
+    pinnedColumns = {},
+  }) => {
+    const columnsMap = useMemo(
+      () =>
+        columns.reduce(
+          (result, column) => ({ ...result, [column.id]: column }),
+          {} as Record<string, Column>,
+        ),
+      [columns],
+    );
+
+    const onRowClick = useCallback(
+      (row, index: number) => {
+        if (!expandableRow) return;
+        toggleRow(getId(row, index));
+      },
+      [expandableRow, toggleRow],
+    );
+
+    const onChangeField = useCallback(
+      (row, input) => {
+        if (fieldType === 'checkbox') {
+          const newValues: any[] = input.value || [];
+          const index = newValues.findIndex((v) => v[rowKey] === row[rowKey]);
+          // Is field checked
+          if (index > -1) {
+            newValues.splice(index, 1);
+          } else {
+            newValues.push(row);
+          }
+          input.onChange(newValues);
+        } else if (fieldType === 'radio') {
+          input.onChange(row);
+        }
+        input.onBlur();
+      },
+      [fieldType, rowKey],
+    );
+
+    // Re-initialize menu popups when the rows are changed, so that the cell-filter popups works properly.
+    useEffect(() => {
+      MenuComponent.reinitialization();
+    }, [rows?.length]);
+
+    const renderRow = useCallback(
+      (row, rowIndex: number, fieldProps = null) => (
+        <TableRow
+          row={row}
+          rowIndex={rowIndex}
+          rowKey={rowKey}
+          rowClass={rowClass}
+          expandableRow={expandableRow}
+          toggled={toggled}
+          fieldType={fieldType}
+          enableMultiSelect={enableMultiSelect}
+          selectRow={selectRow}
+          selectedRows={selectedRows}
+          rowActions={rowActions}
+          fetch={fetch}
+          columns={columns}
+          columnsMap={columnsMap}
+          columnPositions={columnPositions}
+          hasOptionalColumns={hasOptionalColumns}
+          pinnedColumns={pinnedColumns}
+          onRowClick={onRowClick}
+          onChangeField={onChangeField}
+          fieldProps={fieldProps}
+        />
+      ),
+      [
+        rowKey,
+        rowClass,
+        expandableRow,
+        toggled,
+        fieldType,
+        enableMultiSelect,
+        selectRow,
+        selectedRows,
+        rowActions,
+        fetch,
+        columns,
+        columnsMap,
+        columnPositions,
+        hasOptionalColumns,
+        pinnedColumns,
+        onRowClick,
+        onChangeField,
+      ],
+    );
+
+    return (
+      <tbody>
+        {rows.map((row, rowIndex) => (
+          <React.Fragment key={rowIndex}>
+            {fieldType ? (
+              <Field
+                name={fieldName}
+                component={(fieldProps) => renderRow(row, rowIndex, fieldProps)}
+                validate={validate}
+              />
+            ) : (
+              renderRow(row, rowIndex)
+            )}
+            {expandableRow && toggled[getId(row, rowIndex)] && (
+              <tr>
+                <td
+                  colSpan={
+                    columns.length +
+                    1 +
+                    (rowActions ? 1 : 0) +
+                    (enableMultiSelect || fieldType ? 1 : 0)
+                  }
+                  className={expandableRowClassName}
+                >
+                  {React.createElement(expandableRow, { row, fetch })}
+                </td>
+              </tr>
+            )}
+          </React.Fragment>
+        ))}
+      </tbody>
+    );
+  },
+);
+
+(TableBody as FunctionComponent).displayName = 'TableBody';

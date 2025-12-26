@@ -1,4 +1,4 @@
-import { useCallback } from 'react';
+import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { openDrawerDialog, renderDrawerDialog } from '@waldur/drawer/actions';
@@ -9,7 +9,7 @@ import { type RootState } from '@waldur/store/reducers';
 import { selectTableRows, getTableState } from '@waldur/table/selectors';
 
 import * as actions from './actions';
-import { registerTable } from './registry';
+import { registerTable, unregisterTable } from './registry';
 import { TableFilterActions } from './TableFilterActions';
 import { TableFilterContainer } from './TableFilterContainer';
 import {
@@ -35,9 +35,22 @@ const getDefaultTitle = (state: RootState) => {
   return breadcrumbTitle || pageTitle;
 };
 
-export const useTable = (options: TableOptionsType) => {
+export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   const { table } = options;
-  registerTable({ ...options, table });
+  const isRegisteredRef = useRef(false);
+
+  // Register table on first render, unregister on unmount
+  if (!isRegisteredRef.current) {
+    registerTable({ ...options, table });
+    isRegisteredRef.current = true;
+  }
+
+  useEffect(() => {
+    return () => {
+      unregisterTable(table);
+    };
+  }, [table]);
+
   const dispatch = useDispatch();
 
   const fetch = useCallback(
@@ -162,7 +175,9 @@ export const useTable = (options: TableOptionsType) => {
 
   const tableState = useSelector(getTableState(table));
 
-  const rows = useSelector((state: RootState) => selectTableRows(state, table));
+  const rows = useSelector(
+    (state: RootState) => selectTableRows(state, table) as RowType[],
+  );
 
   const alterTitle = useSelector(getDefaultTitle);
 
