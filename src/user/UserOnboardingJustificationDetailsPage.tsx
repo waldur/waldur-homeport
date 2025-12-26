@@ -4,8 +4,6 @@ import { useDispatch } from 'react-redux';
 import {
   OnboardingJustification,
   OnboardingVerification,
-  onboardingJustificationsList,
-  onboardingJustificationsRetrieve,
   onboardingVerificationsRetrieve,
 } from 'waldur-js-client';
 
@@ -33,16 +31,11 @@ export const UserOnboardingJustificationDetailsPage = () => {
       });
       setVerification(verificationResponse.data);
 
-      const justificationsResponse = await onboardingJustificationsList({});
-      const matchedJustification = justificationsResponse.data.find(
-        (item) => item.verification_uuid === uuid,
-      );
-
-      if (matchedJustification) {
-        const detailedJustification = await onboardingJustificationsRetrieve({
-          path: { uuid: matchedJustification.uuid },
-        });
-        setJustification(detailedJustification.data);
+      if (
+        verificationResponse.data.justifications &&
+        verificationResponse.data.justifications.length > 0
+      ) {
+        setJustification(verificationResponse.data.justifications[0]);
       } else {
         setJustification(null);
         dispatch(
