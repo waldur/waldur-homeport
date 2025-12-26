@@ -33,11 +33,8 @@ export const UserDashboard: FC = () => {
     CustomerFeatures.show_onboarding,
   );
 
-  if (!user) {
-    return null;
-  }
-
   useEffect(() => {
+    if (!user) return;
     const fetchInvitationsCount = async () => {
       try {
         setIsLoadingInvitations(true);
@@ -58,12 +55,10 @@ export const UserDashboard: FC = () => {
     };
 
     fetchInvitationsCount();
-  }, [user.email]);
+  }, [user?.email]);
 
   useEffect(() => {
-    if (!showOnboardingWidgets) {
-      return;
-    }
+    if (!user || !showOnboardingWidgets) return;
     const fetchEscalatedVerificationsCount = async () => {
       try {
         setIsLoadingVerifications(true);
@@ -84,7 +79,11 @@ export const UserDashboard: FC = () => {
     };
 
     fetchEscalatedVerificationsCount();
-  }, [user.uuid, showOnboardingWidgets]);
+  }, [user?.uuid, showOnboardingWidgets]);
+
+  if (!user) {
+    return null;
+  }
 
   const hasActiveInvitations = invitationsCount > 0;
   const hasEscalatedVerifications = escalatedVerificationsCount > 0;
