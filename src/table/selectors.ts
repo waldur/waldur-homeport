@@ -5,18 +5,22 @@ import { type RootState } from '@waldur/store/reducers';
 import { INITIAL_STATE } from './constants';
 import { type StateTables, type TableState } from './types';
 
+// Stable empty references to avoid creating new objects on each selector call
+const EMPTY_OBJECT = {};
+const EMPTY_ARRAY = [];
+
 const selectTableEntities = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].entities;
   }
-  return {};
+  return EMPTY_OBJECT;
 };
 
 const selectTableEntitiesOrder = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].order;
   }
-  return [];
+  return EMPTY_ARRAY;
 };
 
 export const selectTableRows = createSelector(
@@ -36,7 +40,7 @@ export const selectTableSavedFilters = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
     return state.tables[table].savedFilters;
   }
-  return [];
+  return EMPTY_ARRAY;
 };
 
 export const selectSelectedSavedFilter = (state: RootState, table: string) => {

@@ -1,6 +1,6 @@
+import { useRouter } from '@uirouter/react';
 import { Button } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 
 import { Offering } from '../types';
@@ -11,18 +11,25 @@ export const ViewOfferingButton = ({
 }: {
   offering: Offering;
   disabled?: boolean;
-}) =>
-  disabled ? (
-    <Button variant="text-primary" className="btn-sm" disabled>
-      {translate('Details')}
-    </Button>
-  ) : (
-    <Link
-      state="public-offering.marketplace-public-offering"
-      params={{ uuid: offering.uuid }}
-      buttonVariant="text-primary"
+}) => {
+  const router = useRouter();
+
+  const handleClick = (e: React.MouseEvent) => {
+    e.stopPropagation();
+    e.preventDefault();
+    router.stateService.go('public-offering.marketplace-public-offering', {
+      uuid: offering.uuid,
+    });
+  };
+
+  return (
+    <Button
+      variant="text-primary"
       className="btn-sm"
+      disabled={disabled}
+      onClick={handleClick}
     >
       {translate('Details')}
-    </Link>
+    </Button>
   );
+};
