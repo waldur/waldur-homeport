@@ -2,73 +2,55 @@ import { marketplaceServiceProvidersOfferingsList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/BreadcrumbDropdown';
-import { useFavoritePages } from '@waldur/navigation/header/favorite-pages/FavoritePageService';
-import { SearchItem } from '@waldur/navigation/header/search/SearchItem';
+import { BreadcrumbSearchItem } from '@waldur/navigation/header/breadcrumb/BreadcrumbSearchItem';
 
-import { ServiceProvider } from '../types';
+import { Offering, ServiceProvider } from '../types';
 
 import { getStates } from './list/OfferingStateFilter';
 
-const OfferingRow = ({
-  row,
-  addFavoritePage,
-  removeFavorite,
-  isFavorite,
-  page,
-}) => (
-  <SearchItem
-    to={
-      page === 'edit'
-        ? 'marketplace-offering-update'
-        : 'marketplace-offering-details'
-    }
-    params={{ offering_uuid: row.uuid }}
-    image={row.thumbnail}
-    title={row.name}
-    subtitle={row.category_title}
-    addFavoritePage={addFavoritePage}
-    removeFavorite={removeFavorite}
-    isFavorite={isFavorite}
-  />
-);
-
 interface OfferingBreadcrumbPopoverProps {
   provider: ServiceProvider;
+  offering: Offering;
   page: 'details' | 'edit';
+  close: () => void;
 }
 
 export const OfferingBreadcrumbPopover = ({
   provider,
+  offering,
   page,
-}: OfferingBreadcrumbPopoverProps) => {
-  const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
-
-  return (
-    <BreadcrumbDropdown
-      fetcher={marketplaceServiceProvidersOfferingsList}
-      path={{ service_provider_uuid: provider.uuid }}
-      queryKey="marketplaceServiceProvidersOfferingsList"
-      queryField="name"
-      params={{
-        field: ['name', 'uuid', 'category_title', 'thumbnail'],
-      }}
-      filters={[
-        {
-          field: 'state',
-          label: translate('Status'),
-          options: getStates(),
-        },
-      ]}
-      RowComponent={({ row }) => (
-        <OfferingRow
-          row={row}
-          addFavoritePage={addFavoritePage}
-          removeFavorite={removeFavorite}
-          isFavorite={isFavorite}
-          page={page}
-        />
-      )}
-      emptyMessage={translate('There are no offerings.')}
-    />
-  );
-};
+  close,
+}: OfferingBreadcrumbPopoverProps) => (
+  <BreadcrumbDropdown
+    fetcher={marketplaceServiceProvidersOfferingsList}
+    path={{ service_provider_uuid: provider.uuid }}
+    queryKey="marketplaceServiceProvidersOfferingsList"
+    queryField="name"
+    params={{
+      field: ['name', 'uuid', 'category_title', 'thumbnail'],
+    }}
+    filters={[
+      {
+        field: 'state',
+        label: translate('Status'),
+        options: getStates(),
+      },
+    ]}
+    RowComponent={({ row }) => (
+      <BreadcrumbSearchItem
+        to={
+          page === 'edit'
+            ? 'marketplace-offering-update'
+            : 'marketplace-offering-details'
+        }
+        params={{ offering_uuid: row.uuid }}
+        image={row.thumbnail}
+        title={row.name}
+        subtitle={row.category_title}
+        isCurrent={row.uuid === offering?.uuid}
+      />
+    )}
+    emptyMessage={translate('There are no offerings.')}
+    close={close}
+  />
+);

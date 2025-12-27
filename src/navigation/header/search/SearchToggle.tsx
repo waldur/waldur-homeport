@@ -7,7 +7,11 @@ import { useSearch } from './useSearch';
 
 import './SearchToggle.scss';
 
-export const SearchToggle = () => {
+interface SearchToggleProps {
+  compact?: boolean;
+}
+
+export const SearchToggle = ({ compact }: SearchToggleProps) => {
   const { query, setQuery, result, show, setShow } = useSearch();
 
   return (
@@ -34,19 +38,28 @@ export const SearchToggle = () => {
         onClick={() => setShow(true)}
         aria-hidden="true"
       >
-        <SearchInput
-          result={result}
-          query={query}
-          setQuery={setQuery}
-          show={show}
-          className="d-none d-lg-block"
-        />
-
-        <button className="btn-nav-item d-lg-none" type="button">
-          <span className="svg-icon svg-icon-2">
-            <MagnifyingGlassIcon weight="bold" />
-          </span>
-        </button>
+        {compact ? (
+          <button className="btn-nav-item" type="button">
+            <span className="svg-icon svg-icon-2">
+              <MagnifyingGlassIcon weight="bold" />
+            </span>
+          </button>
+        ) : (
+          <>
+            <SearchInput
+              result={result}
+              query={query}
+              setQuery={setQuery}
+              show={show}
+              className="d-none d-lg-block"
+            />
+            <button className="btn-nav-item d-lg-none" type="button">
+              <span className="svg-icon svg-icon-2">
+                <MagnifyingGlassIcon weight="bold" />
+              </span>
+            </button>
+          </>
+        )}
       </div>
     </OverlayTrigger>
   );

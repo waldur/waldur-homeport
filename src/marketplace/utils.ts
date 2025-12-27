@@ -8,7 +8,6 @@ import { translate } from '@waldur/i18n';
 import { useExtraTabs } from '@waldur/navigation/context';
 import { useOfferingCategories } from '@waldur/navigation/sidebar/utils';
 import { Tab } from '@waldur/navigation/Tab';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { getCategoryItems } from './category/utils';
@@ -63,63 +62,3 @@ export const useMarketplacePublicTabs = () => {
   }, [categories]);
   useExtraTabs(tabs);
 };
-
-export const getOrderBreadcrumbItems = (order): IBreadcrumbItem[] => [
-  {
-    key: 'marketplace',
-    text: translate('Marketplace'),
-    to: 'public.marketplace-landing',
-  },
-  {
-    key: 'offerings',
-    text: translate('Offerings'),
-    to: 'public.offerings',
-    ellipsis: 'xxl',
-  },
-  {
-    key: 'offering',
-    text: order.offering_name,
-    to: 'public-offering.marketplace-public-offering',
-    params: { uuid: order.offering_uuid },
-    ellipsis: 'xxl',
-    truncate: true,
-  },
-  {
-    key: 'resources',
-    text: translate('Resources'),
-    to: 'all-resources',
-    params: {
-      offering: JSON.stringify({
-        uuid: order.offering_uuid,
-        name: order.offering_name,
-        category_title: order.category_title,
-        thumbnail: order.offering_thumbnail,
-      }),
-    },
-    ellipsis: 'xxl',
-  },
-  {
-    key: 'resource',
-    text: order.resource_name,
-    to: 'marketplace-resource-details',
-    params: { resource_uuid: order.marketplace_resource_uuid },
-    ellipsis: 'xxl',
-    truncate: true,
-  },
-  {
-    key: 'orders',
-    text: translate('Orders'),
-    to: 'marketplace-resource-details',
-    params: {
-      resource_uuid: order.marketplace_resource_uuid,
-      tab: 'order-history',
-    },
-    ellipsis: 'xxl',
-  },
-  {
-    key: 'order',
-    text: order.attributes.name + ' (' + order.type + ')',
-    active: true,
-    truncate: true,
-  },
-];

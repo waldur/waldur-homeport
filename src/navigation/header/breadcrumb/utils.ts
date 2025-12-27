@@ -17,7 +17,7 @@ export const usePresetBreadcrumbItems = () => {
     to: 'organization.dashboard',
     params: { uuid: customer.uuid },
     ellipsis: 'xl',
-    maxLength: 11,
+    truncate: true,
     onClick: () =>
       syncResourceFilters({ organization: customer, project: null }),
     ...options,
@@ -32,7 +32,7 @@ export const usePresetBreadcrumbItems = () => {
     to: 'project.dashboard',
     params: { uuid: project.uuid },
     ellipsis: 'xl',
-    maxLength: 11,
+    truncate: true,
     onClick: () =>
       syncResourceFilters({
         organization: {

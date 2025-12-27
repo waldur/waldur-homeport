@@ -67,13 +67,13 @@ export const SigninForm = () => (
 
           <button
             type="submit"
-            className="login-submit-button"
+            className="btn btn-primary login-submit-button"
             disabled={submitting}
           >
             {submitting && (
-              <>
-                <LoadingSpinnerIcon className="me-1" />{' '}
-              </>
+              <span className="svg-icon">
+                <LoadingSpinnerIcon className="me-1" />
+              </span>
             )}
             {translate('Login')}
           </button>

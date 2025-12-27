@@ -23,4 +23,5 @@ export interface IBreadcrumbItem {
   ellipsis?: 'md' | 'xl' | 'xxl';
   truncate?: boolean;
   maxLength?: number;
+  tooltipText?: string;
 }

@@ -15,7 +15,7 @@ export const LoginButton = ({
   label: string;
   onClick?(): void;
 }) => (
-  <button className="login-button" onClick={onClick}>
+  <button className="login-button btn btn-tertiary" onClick={onClick}>
     <div className="login-button-icon">
       {image}
       {icon && <span className="svg-icon">{icon}</span>}

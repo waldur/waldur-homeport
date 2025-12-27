@@ -9,6 +9,7 @@ import { mockOffering, mockPlan } from './test-utils';
 // Mock API specific to AddPlanDialog
 vi.mock('waldur-js-client', () => ({
   marketplacePlansCreate: vi.fn(),
+  formDataBodySerializer: {},
 }));
 
 // Mock store hooks

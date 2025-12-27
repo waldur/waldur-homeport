@@ -18,14 +18,37 @@
       text-decoration: underline !important;
     }
 
-    + .breadcrumb-item:before {
-      width: 20px;
-      height: 20px;
-      margin-right: $breadcrumb-item-padding-x;
+    + .breadcrumb-item {
+      padding-left: 6px;
+
+      &:before {
+        width: 20px;
+        height: 20px;
+        margin-right: 6px;
+        padding-right: 0;
+      }
     }
 
     .breadcrumb-back {
       margin-right: 8px;
+    }
+
+    // Note: Breadcrumb item hiding is now handled by JavaScript in Breadcrumbs.tsx
+    // which accounts for sidebar state. These CSS rules are kept as fallback.
+    &.ellipsis-md {
+      @include media-breakpoint-down(lg) {
+        display: none;
+      }
+    }
+    &.ellipsis-xl {
+      @include media-breakpoint-down(xl) {
+        display: none;
+      }
+    }
+    &.ellipsis-xxl {
+      @include media-breakpoint-down(xxl) {
+        display: none;
+      }
     }
   }
 }

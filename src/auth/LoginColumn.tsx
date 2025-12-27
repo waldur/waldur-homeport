@@ -11,6 +11,7 @@ import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@waldur/navigation/FooterLinks';
 import { JoinOrganizationFooterLink } from '@waldur/navigation/JoinOrganizationFooterLink';
+import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from './AuthHeader';
 import { IdentityProviderSelector } from './IdentityProviderSelector';
@@ -44,6 +45,9 @@ export const LoginColumn = () => {
 
   return (
     <div className="login-column">
+      <div className="login-header">
+        <ThemeSwitcherButton />
+      </div>
       <div className="login-body">
         <div className="login-grid-item-container">
           <div className="login-logo mb-2">

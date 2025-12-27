@@ -7,10 +7,10 @@ import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { PlanSection } from '@waldur/marketplace/details/plan/PlanSection';
 import { Offering } from '@waldur/marketplace/types';
-import { getOrderBreadcrumbItems } from '@waldur/marketplace/utils';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
+import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
 import { useTitle } from '@waldur/navigation/title';
-import { PageBarTab } from '@waldur/navigation/types';
+import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
 
 import { OrderActionsButton } from '../actions/OrderActionsButton';
@@ -18,12 +18,15 @@ import { OrderActionsButton } from '../actions/OrderActionsButton';
 import { ErrorDetailsTab } from './ErrorDetailsTab';
 import { LimitsSection } from './LimitsSection';
 import { OrderAccordion } from './OrderAccordion';
+import { OrderBreadcrumbPopover } from './OrderBreadcrumbPopover';
 import { OrderDetailsHeaderBody } from './OrderDetailsHeaderBody';
 import { OrderDetailsHeaderTitle } from './OrderDetailsHeaderTitle';
 import { OrderMetadataTab } from './OrderMetadataTab';
 import { OrderReviewButton } from './OrderReviewButton';
 import { OrderSummaryTab } from './OrderSummaryTab';
 import { OutputTab } from './OutputTab';
+import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
+import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
 import '@waldur/core/CustomCard.scss';
@@ -137,10 +140,74 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (data) => {
     data.order,
     data.refetch,
   ]);
-  const breadcrumbItems = useMemo(
-    () => getOrderBreadcrumbItems(data.order),
-    [data.order],
-  );
+
+  const { getOrganizationBreadcrumbItem } = usePresetBreadcrumbItems();
+
+  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
+    const order = data.order;
+    if (!order) return [];
+    return [
+      {
+        key: 'organizations',
+        text: translate('Organizations'),
+        to: 'organizations',
+        ellipsis: 'xxl',
+      },
+      getOrganizationBreadcrumbItem({
+        uuid: order.customer_uuid,
+        name: order.customer_name,
+      }),
+      {
+        key: 'organization.projects',
+        text: translate('Projects'),
+        to: 'organization.projects',
+        params: { uuid: order.customer_uuid },
+        ellipsis: 'xxl',
+      },
+      {
+        key: 'project.dashboard',
+        text: order.project_name,
+        to: 'project.dashboard',
+        params: { uuid: order.project_uuid },
+        dropdown: (close) => (
+          <ProjectBreadcrumbPopover order={order} close={close} />
+        ),
+        ellipsis: 'xl',
+        truncate: true,
+      },
+      {
+        key: 'project.resources',
+        text: order.category_title,
+        to: 'project.resources',
+        params: { uuid: order.project_uuid },
+        ellipsis: 'xxl',
+      },
+      {
+        key: 'resource',
+        text: order.resource_name,
+        to: 'marketplace-resource-details',
+        params: { resource_uuid: order.marketplace_resource_uuid },
+        dropdown: (close) => (
+          <ResourceBreadcrumbPopover order={order} close={close} />
+        ),
+        truncate: true,
+        tooltipText: `${order.category_title}: ${order.resource_name}`,
+      },
+      {
+        key: 'order',
+        text:
+          (order.attributes?.name || translate('Order')) +
+          ' (' +
+          order.type +
+          ')',
+        dropdown: (close) => (
+          <OrderBreadcrumbPopover order={order} close={close} />
+        ),
+        active: true,
+        truncate: true,
+      },
+    ];
+  }, [data.order]);
   useBreadcrumbs(breadcrumbItems);
 
   const tabs = useMemo(() => getOrderPageTabs(data), []);
