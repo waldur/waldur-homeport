@@ -4,8 +4,8 @@ import {
   QueryFunction,
   useInfiniteQuery,
 } from '@tanstack/react-query';
-import { debounce } from 'lodash-es';
-import { useCallback, useState } from 'react';
+import { debounce, isEqual } from 'lodash-es';
+import { useCallback, useMemo, useRef, useState } from 'react';
 import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useBoolean } from 'react-use';
@@ -19,8 +19,10 @@ import { Form } from '@waldur/form/Form';
 import { translate } from '@waldur/i18n';
 import { DataPage, processApiResponse, SdkFunction } from '@waldur/table/api';
 
+import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 import { HeaderButtonBullet } from '../HeaderButtonBullet';
 
+import { BreadcrumbDropdownContext } from './BreadcrumbDropdownContext';
 import { FilterSelect } from './FilterSelect';
 
 const FILTERS_FORM_ID = 'BreadcrumbsFiltersForm';
@@ -33,6 +35,8 @@ interface BreadcrumbDropdownProps<
     label: string;
     options: Array<{ value; label }>;
   }>;
+  /** Callback to close the dropdown popover */
+  close?: () => void;
 }
 
 export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
@@ -45,19 +49,44 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
   filters,
   emptyMessage = translate('There are no results for this keyword.'),
   placeholder = translate('Search'),
+  close,
 }: BreadcrumbDropdownProps<Fetcher>): JSX.Element => {
   const [query, setQuery] = useState('');
+  const { addFavoritePage, removeFavorite, isFavorite } = useFavoritePages();
+
+  const contextValue = useMemo(
+    () => ({
+      addFavoritePage,
+      removeFavorite,
+      isFavorite,
+      close: close || (() => {}),
+    }),
+    [addFavoritePage, removeFavorite, isFavorite, close],
+  );
   const [filterOpen, setFilterOpen] = useBoolean(false);
 
-  const formValues = useSelector((state) => {
-    const values = getFormValues(FILTERS_FORM_ID)(state);
-    return Object.keys(values || {}).reduce((acc, key) => {
-      if (values[key]?.length) {
-        acc[key] = values[key].map((option) => option.value);
-      }
-      return acc;
-    }, {});
-  });
+  // Get raw form values from Redux
+  const rawFormValues = useSelector(getFormValues(FILTERS_FORM_ID));
+
+  // Memoize transformed values to prevent infinite re-renders
+  const prevFormValuesRef = useRef({});
+  const formValues = useMemo(() => {
+    const transformed = Object.keys(rawFormValues || {}).reduce(
+      (acc, key) => {
+        if (rawFormValues[key]?.length) {
+          acc[key] = rawFormValues[key].map((option) => option.value);
+        }
+        return acc;
+      },
+      {} as Record<string, unknown[]>,
+    );
+    // Only return new object if values actually changed
+    if (isEqual(transformed, prevFormValuesRef.current)) {
+      return prevFormValuesRef.current;
+    }
+    prevFormValuesRef.current = transformed;
+    return transformed;
+  }, [rawFormValues]);
 
   const applyQuery = useCallback(
     debounce((value) => {
@@ -143,13 +172,15 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
           ))}
         </Form>
       )}
-      <div className="mh-300px overflow-auto">
-        <InfiniteList
-          RowComponent={RowComponent}
-          context={context}
-          emptyMessage={emptyMessage}
-        />
-      </div>
+      <BreadcrumbDropdownContext.Provider value={contextValue}>
+        <div className="mh-300px overflow-auto">
+          <InfiniteList
+            RowComponent={RowComponent}
+            context={context}
+            emptyMessage={emptyMessage}
+          />
+        </div>
+      </BreadcrumbDropdownContext.Provider>
     </div>
   );
 };

@@ -14,6 +14,7 @@ interface OwnProps extends BreadcrumbItemProps {
   ellipsis?: 'md' | 'xl' | 'xxl';
   truncate?: boolean;
   maxLength?: number; // to truncate title always
+  tooltipText?: string;
   isBack?: boolean;
   to?: string;
   params?: object;
@@ -26,6 +27,7 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
       ellipsis = undefined,
       truncate,
       maxLength,
+      tooltipText,
       isBack,
       children,
       className,
@@ -76,7 +78,11 @@ export const BreadcrumbItem = forwardRef<any, PropsWithChildren<OwnProps>>(
               )}
             </span>
           ) : truncate ? (
-            <TruncatedText text={children} padding={25} />
+            <TruncatedText
+              text={children}
+              tooltipText={tooltipText}
+              padding={10}
+            />
           ) : (
             <span>{children}</span>
           )

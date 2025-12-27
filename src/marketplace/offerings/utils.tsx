@@ -7,6 +7,7 @@ import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { checkCustomerUser } from '@waldur/workspace/selectors';
 
 import { ADMIN_OFFERINGS_FILTER_FORM_ID } from './admin/constants';
+import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';
 
 const ARTICLE_CODE_PATTERN = new RegExp(
   '^[A-Za-z0-9][A-Za-z0-9-_]*[A-Za-z0-9]$',
@@ -65,7 +66,7 @@ export const getPublicOfferingBreadcrumbItems = (
       to: 'marketplace-providers.details',
       params: offering ? { customer_uuid: offering.customer_uuid } : undefined,
       ellipsis: 'xl',
-      maxLength: 11,
+      truncate: true,
     },
     {
       key: 'marketplace-offerings',
@@ -87,6 +88,14 @@ export const getPublicOfferingBreadcrumbItems = (
     {
       key: 'offering',
       text: offering?.name || '...',
+      dropdown: offering
+        ? (close) => (
+            <PublicOfferingBreadcrumbPopover
+              offering={offering}
+              close={close}
+            />
+          )
+        : undefined,
       truncate: true,
       active: true,
     },

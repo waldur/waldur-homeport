@@ -1,24 +1,27 @@
 import { FunctionComponent } from 'react';
 
+import { Select } from '@waldur/form/themed-select';
+
 import { useLanguageSelector } from './useLanguageSelector';
 
 export const LanguageSelectorBox: FunctionComponent = () => {
   const { currentLanguage, languageChoices, setLanguage } =
     useLanguageSelector();
 
-  const handleChange = (event) => {
+  const handleChange = (lang) => {
     setLanguage(
-      languageChoices.find((language) => language.code === event.target.value),
+      languageChoices.find((language) => language.code === lang.code),
     );
   };
 
   return (
-    <select onChange={handleChange} value={currentLanguage.code}>
-      {languageChoices.map((option, index) => (
-        <option value={option.code} key={index}>
-          {option.label}
-        </option>
-      ))}
-    </select>
+    <Select
+      options={languageChoices}
+      value={currentLanguage}
+      getOptionValue={(opt) => opt.code}
+      onChange={handleChange}
+      size="sm"
+      className="login-lang-select"
+    />
   );
 };

@@ -84,7 +84,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
             {Boolean(user) && (hasBreadcrumbs || pageTitle || isSmallScr) && (
-              <SearchToggle />
+              <SearchToggle compact={hasBreadcrumbs} />
             )}
             {Boolean(user) && hasSupport && <QuickIssueDrawerToggle />}
             {Boolean(user) && <ConfirmationDrawerToggle />}

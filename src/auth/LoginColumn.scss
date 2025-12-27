@@ -1,12 +1,16 @@
-@import '@waldur/sass/variables';
-
 .login-column {
   height: 100%;
   min-height: 100vh;
-  background: white;
+  background: var(--waldur-bg-primary);
   display: flex;
   flex-direction: column;
   padding: 10px 10px 0 10px;
+}
+
+.login-header {
+  display: flex;
+  justify-content: end;
+  padding: 4px 10px 0;
 }
 
 .login-body {
@@ -16,7 +20,7 @@
   text-align: center;
   height: 100%;
   flex-grow: 1;
-  color: $text-color;
+  color: var(--bs-gray-500);
 }
 
 .login-footer {

@@ -3,6 +3,7 @@ import { Breadcrumb } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { useLayout } from '@waldur/metronic/layout/core';
 import { LayoutContext } from '@waldur/navigation/context';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 
@@ -36,10 +37,21 @@ const groupConsecutiveNumbers = (arr: number[] = []): number[][] => {
 
 export const Breadcrumbs = () => {
   const { breadcrumbs } = useContext(LayoutContext);
+  const layout = useLayout();
+  const isSidebarExpanded = !layout.config.aside.minimized;
 
-  const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
-  const isXl = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.xl });
-  const isXxl = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.xxl });
+  // When sidebar is expanded, use higher breakpoints to account for reduced content width
+  // Sidebar expanded is ~250px, collapsed is ~70px, difference ~180px
+  const sidebarOffset = isSidebarExpanded ? 150 : 0;
+  const isMd = useMediaQuery({
+    maxWidth: GRID_BREAKPOINTS.md + sidebarOffset,
+  });
+  const isXl = useMediaQuery({
+    maxWidth: GRID_BREAKPOINTS.xl + sidebarOffset,
+  });
+  const isXxl = useMediaQuery({
+    maxWidth: GRID_BREAKPOINTS.xxl + sidebarOffset,
+  });
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
     const hiddenIndexes = [];
@@ -85,7 +97,7 @@ export const Breadcrumbs = () => {
     );
 
     return shortenedBreadcrumbs;
-  }, [breadcrumbs, isMd, isXl, isXxl]);
+  }, [breadcrumbs, isMd, isXl, isXxl, isSidebarExpanded]);
 
   if (!breadcrumbs.length) {
     return null;
@@ -105,6 +117,7 @@ export const Breadcrumbs = () => {
             truncate={item.truncate}
             active={item.active}
             maxLength={item.maxLength}
+            tooltipText={item.tooltipText}
             isBack={breadcrumbItems.length === 1}
           >
             {item.text}

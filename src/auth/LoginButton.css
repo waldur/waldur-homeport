@@ -1,12 +1,9 @@
 .login-button {
-  background: #e7eaec;
-  border-radius: 12px;
-  padding: 7px;
   display: grid;
   grid-auto-flow: column;
+  justify-content: normal;
   margin: 10px 0;
   width: 100%;
-  border: none;
 }
 
 .login-button-icon {
@@ -23,6 +20,9 @@
   max-height: 30px;
   width: 30px;
   height: 30px;
+}
+.login-button-icon .svg-icon {
+  margin: 0;
 }
 
 .login-button-text {

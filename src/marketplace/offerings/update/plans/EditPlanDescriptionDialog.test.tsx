@@ -9,6 +9,7 @@ import { mockOffering, mockPlan } from './test-utils';
 // Mock API specific to EditPlanDescriptionDialog
 vi.mock('waldur-js-client', () => ({
   marketplacePlansUpdate: vi.fn(),
+  formDataBodySerializer: {},
 }));
 
 // Mock config to prevent errors from ENV access

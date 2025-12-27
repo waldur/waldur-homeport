@@ -18,14 +18,18 @@ import {
 const LAYOUT_CONFIG_KEY = 'LayoutConfig';
 
 function getLayout(): ILayout {
-  const ls = localStorage.getItem(LAYOUT_CONFIG_KEY);
-  if (ls) {
-    try {
-      return JSON.parse(ls) as ILayout;
-    } catch (er) {
-      // eslint-disable-next-line no-console
-      console.error(er);
+  try {
+    const ls = localStorage.getItem(LAYOUT_CONFIG_KEY);
+    if (ls) {
+      try {
+        return JSON.parse(ls) as ILayout;
+      } catch (er) {
+        // eslint-disable-next-line no-console
+        console.error(er);
+      }
     }
+  } catch {
+    // localStorage might not be available in test environments
   }
   return DefaultLayoutConfig;
 }

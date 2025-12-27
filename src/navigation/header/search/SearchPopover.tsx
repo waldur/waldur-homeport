@@ -373,7 +373,7 @@ export const SearchPopover = ({
         query={query}
         show={show}
         setQuery={setQuery}
-        className="px-5 mb-6 d-lg-none"
+        className="px-5 mb-6"
       />
 
       <Tab.Container defaultActiveKey="all">

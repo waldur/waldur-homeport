@@ -5,15 +5,15 @@ import { translate } from '@waldur/i18n';
 import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/BreadcrumbDropdown';
 import { BreadcrumbSearchItem } from '@waldur/navigation/header/breadcrumb/BreadcrumbSearchItem';
 
-export const ResourceBreadcrumbPopover = ({ resource, close }) => (
+export const ResourceBreadcrumbPopover = ({ order, close }) => (
   <BreadcrumbDropdown
     fetcher={marketplaceResourcesList}
     queryKey="marketplaceResourcesList"
     queryField="query"
     params={{
       state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
-      project_uuid: resource.project_uuid,
-      category_uuid: resource.category_uuid,
+      project_uuid: order.project_uuid,
+      category_uuid: order.category_uuid,
       field: ['name', 'uuid', 'offering_thumbnail', 'state', 'created'],
     }}
     RowComponent={({ row }) => (
@@ -23,10 +23,10 @@ export const ResourceBreadcrumbPopover = ({ resource, close }) => (
         image={row.offering_thumbnail}
         title={row.name}
         subtitle={formatDateTime(row.created)}
-        isCurrent={row.uuid === resource.uuid}
+        isCurrent={row.uuid === order.marketplace_resource_uuid}
       />
     )}
-    placeholder={translate('Type in name of resource...')}
+    placeholder={translate('Type to search resources...')}
     emptyMessage={translate('There are no resources.')}
     close={close}
   />

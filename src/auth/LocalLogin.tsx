@@ -21,7 +21,7 @@ const SignInWithLocalAccount: FC<SigninWithLocalAccountProps> = ({
 }) => (
   <button
     type="button"
-    className="login-with-local-account-button"
+    className="btn btn-link login-with-local-account-button"
     onClick={() => setShowForm(true)}
   >
     {translate('Sign in with local account')}
