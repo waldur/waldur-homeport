@@ -8,6 +8,8 @@
  * 4. Per-Datacenter Worker/Storage Groups with flavor selection
  */
 
+import { translate } from '@waldur/i18n';
+
 export interface LocalOpenStackFlavor {
   uuid: string;
   name: string;
@@ -466,4 +468,29 @@ export const validateMultiDatacenterConfiguration = (
   }
 
   return errors;
+};
+
+export const validateNumberOrRange = (value) => {
+  // const regex = /^\\d+(-\\d+)?$/;
+  const regex = /^\d+(-\d+)?$/;
+
+  if (!regex.test(value)) {
+    return translate("Fails format validation. e.g., '80' or '80-100'");
+  }
+
+  // If format is valid, perform numeric validation
+  const parts = value.split('-');
+  const startNum = parseInt(parts[0]);
+
+  if (parts.length === 2) {
+    const endNum = parseInt(parts[1]);
+    // Ensure the end number is not empty and the start is <= end
+    if (isNaN(endNum) || startNum > endNum) {
+      return translate(
+        'Invalid range. Ensure the end number is greater than or equal to the start number.',
+      );
+    }
+  }
+
+  return undefined;
 };

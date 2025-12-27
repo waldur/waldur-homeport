@@ -26,6 +26,7 @@ export const AddOptionButton: FunctionComponent<{
       openModalDialog(AddOptionDialog, {
         resolve: { offering, refetch, type },
         formId: OPTION_FORM_ID,
+        size: 'lg',
       }),
     );
   };

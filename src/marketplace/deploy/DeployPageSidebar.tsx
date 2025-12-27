@@ -38,6 +38,7 @@ export const DeployPageSidebar = (props: DeployPageSidebarProps) => {
           <FormSteps
             steps={props.steps}
             completedSteps={props.completedSteps}
+            disabledSteps={props.disabledSteps}
             errors={{ ...errors, ...submitErrors }}
           />
         </Card.Body>

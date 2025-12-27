@@ -54,7 +54,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = ({
         {props.help && props.helpEnd && (
           <Tip
             id={uniqueId('form-field-tooltip-')}
-            className="align-self-center ms-2"
+            className="align-self-center ms-2 mb-2"
             label={props.help}
           >
             <QuestionIcon weight="bold" size={16} className="text-muted" />

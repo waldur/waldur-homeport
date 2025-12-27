@@ -98,9 +98,25 @@ export const BaseDeployPage = ({
 
   const formSteps = useMemo(
     () =>
-      inputFormSteps.filter(
-        (step) => (step.isActive && step.isActive(selectedOffering)) ?? true,
-      ),
+      inputFormSteps
+        .filter(
+          (step) => (step.isActive && step.isActive(selectedOffering)) ?? true,
+        )
+        .map((step) => {
+          // Add dynamic fields for Additional configuration step
+          if (
+            step.id === 'step-additional-configuration' &&
+            selectedOffering.options?.order?.length
+          ) {
+            return {
+              ...step,
+              fields: selectedOffering.options.order.map(
+                (key) => `attributes.${key}`,
+              ),
+            };
+          }
+          return step;
+        }),
     [selectedOffering],
   );
 
@@ -228,6 +244,16 @@ export const BaseDeployPage = ({
   const [lastY, setLastY] = useState(0);
   const [completedSteps, setCompletedSteps] = useState<boolean[]>(
     formSteps.map(() => false),
+  );
+
+  const disabledSteps = useMemo(
+    () =>
+      formSteps.map(
+        (step) =>
+          step.id !== 'step-general' &&
+          (isProjectInactive || noOrganizationOrProject),
+      ),
+    [formSteps, isProjectInactive, noOrganizationOrProject],
   );
 
   const setScroll = useCallback(() => {
@@ -399,6 +425,7 @@ export const BaseDeployPage = ({
               steps={formSteps}
               offering={selectedOffering}
               completedSteps={completedSteps}
+              disabledSteps={disabledSteps}
               updateMode={props.updateMode}
               order={props.order}
             />
