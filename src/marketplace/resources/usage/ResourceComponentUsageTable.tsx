@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import {
   marketplaceComponentUsagesList,
   MarketplaceComponentUsagesListData,
@@ -8,9 +8,13 @@ import { formatMonth } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
+import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-export const ResourceComponentUsageTable = (props) => {
+export const ResourceComponentUsageTable: FC<TableWithPortal<any>> = ({
+  portal,
+  ...props
+}) => {
   const filter = useMemo(() => {
     const result: MarketplaceComponentUsagesListData['query'] = {
       resource_uuid: props.resource.resource_uuid,
@@ -37,7 +41,16 @@ export const ResourceComponentUsageTable = (props) => {
       render: ({ row }) => <>{row.usage}</>,
       orderField: 'usage',
     },
-  ].filter(Boolean);
+  ];
 
-  return <Table {...tableProps} columns={columns} />;
+  return (
+    <Table
+      {...tableProps}
+      columns={columns}
+      portal={portal}
+      hasActionBar={false}
+      cardBordered={false}
+      fullWidth
+    />
+  );
 };

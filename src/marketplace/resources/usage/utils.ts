@@ -354,15 +354,6 @@ export const getComponentsAndUsages = async (
 export const useResourceUsageTabs = () => {
   return [
     {
-      key: 'marketplace-component-user-usages',
-      title: translate('User usages'),
-      component: lazyComponent(() =>
-        import('./ResourceComponentUserUsageTable').then((module) => ({
-          default: module.ResourceComponentUserUsageTable,
-        })),
-      ),
-    },
-    {
       key: 'marketplace-component-usages',
       title: translate('Total usages'),
       component: lazyComponent(() =>
@@ -371,5 +362,14 @@ export const useResourceUsageTabs = () => {
         })),
       ),
     },
-  ].filter(Boolean);
+    {
+      key: 'marketplace-component-user-usages',
+      title: translate('User usages'),
+      component: lazyComponent(() =>
+        import('./ResourceComponentUserUsageTable').then((module) => ({
+          default: module.ResourceComponentUserUsageTable,
+        })),
+      ),
+    },
+  ];
 };
