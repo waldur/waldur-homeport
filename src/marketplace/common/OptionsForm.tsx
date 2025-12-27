@@ -35,9 +35,20 @@ import { isExperimentalUiComponentsVisible } from '../utils';
 import { ComponentMultiplierField } from './ComponentMultiplierField';
 import { ConditionalCascadeField } from './ConditionalCascadeField';
 import { fetchOpenstackOptions } from './fetchOpenstackOptions';
+import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
 import { MultiDatacenterK8sConfigurationForm } from './MultiDatacenterK8sConfigurationForm';
 import { SingleDatacenterK8sConfigurationForm } from './SingleDatacenterK8sConfigurationForm';
 import { DeployFormData } from './types';
+
+// Validator for K8s configuration fields - returns array for proper tooltip formatting
+const validateK8sConfig = (value) => {
+  if (!value) return undefined;
+  const errors = validateMultiDatacenterConfiguration(value);
+  if (errors.length > 0) {
+    return errors;
+  }
+  return undefined;
+};
 
 interface OptionsFormProps {
   options: Offering['options'];
@@ -183,7 +194,10 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
       if (isExperimentalUiComponentsVisible()) {
         OptionField = SingleDatacenterK8sConfigurationForm;
         params = {
+          hideLabel: true,
+          hideHelp: true,
           field: option,
+          validate: validateK8sConfig,
         };
       }
       break;
@@ -192,7 +206,10 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
       if (isExperimentalUiComponentsVisible()) {
         OptionField = MultiDatacenterK8sConfigurationForm;
         params = {
+          hideLabel: true,
+          hideHelp: true,
           field: option,
+          validate: validateK8sConfig,
         };
       }
       break;
@@ -225,15 +242,22 @@ export const OptionsForm = ({
               customer,
             );
 
+            // Use custom validator if provided, otherwise use required validator
+            const validateFn = params.validate
+              ? params.validate
+              : option.required
+                ? required
+                : undefined;
+
             return (
               <OptionField
                 key={key}
                 label={option.label}
                 name={`attributes.${key}`}
-                tooltip={option.help_text}
+                tooltip={!params.hideHelp && option.help_text}
                 tooltipEnd
                 required={option.required}
-                validate={option.required ? required : undefined}
+                validate={validateFn}
                 {...params}
               />
             );
@@ -257,18 +281,25 @@ export const OptionsForm = ({
         true,
       );
 
+      // Determine the validate function - use custom validator if provided, otherwise use required validator
+      const validateFn = params.validate
+        ? params.validate
+        : option.required
+          ? required
+          : undefined;
+
       return (
         <FormGroup
+          key={key}
           label={!params.hideLabel && option.label}
           help={option.help_text}
           helpEnd
           required={option.required}
         >
           <Field
-            key={key}
             name={`attributes.${key}`}
             component={OptionField as any}
-            validate={option.required ? required : undefined}
+            validate={validateFn}
             {...params}
             {...(OptionField === AwesomeCheckboxField
               ? { label: option.label, help_text: option.help_text }

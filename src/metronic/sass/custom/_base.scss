@@ -27,18 +27,23 @@
   }
 
   &.card-sm {
-    padding-top: 0.25rem;
-    padding-bottom: 0.25rem;
+    padding-top: 0.307rem;
+    padding-bottom: 0.307rem;
 
     .card-header {
-      margin-left: $card-px / 2;
-      margin-right: $card-px / 2;
+      margin-left: 1.23rem; // 16px
+      margin-right: 1.23rem;
       padding: 0;
       min-height: 36px;
+
+      .card-title {
+        margin-top: 0.615rem;
+        margin-bottom: 0.615rem;
+      }
     }
     .card-body {
-      padding-left: $card-px / 2;
-      padding-right: $card-px / 2;
+      padding: 1.23rem;
+      padding-bottom: 0.923rem;
     }
   }
 }

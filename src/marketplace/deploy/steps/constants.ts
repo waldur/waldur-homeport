@@ -6,7 +6,7 @@ import { FormDetailsOverviewStep } from './FormDetailsOverviewStep';
 import { FormPlanStep } from './FormPlanStep';
 
 export const DetailsOverviewStep = {
-  label: translate('Details overview'),
+  label: translate('General information'),
   id: 'step-general',
   fields: ['customer', 'project'],
   required: true,

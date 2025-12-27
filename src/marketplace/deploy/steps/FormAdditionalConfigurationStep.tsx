@@ -10,6 +10,7 @@ import { FormStepProps } from '../types';
 
 export const FormAdditionalConfigurationStep = (props: FormStepProps) => {
   const customer = useSelector(orderCustomerSelector);
+
   return (
     <Tip id={`tip-${props.id}`} label={props.disabledTooltip}>
       <AccordionCard

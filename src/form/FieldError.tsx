@@ -36,13 +36,23 @@ export const FieldErrorMessage: FunctionComponent<FieldErrorProps> = ({
 }) => {
   return (
     <span className={classNames((isOneLine(error) || center) && 'text-start')}>
-      {error
-        ? Array.isArray(error)
-          ? error.map((e, i) => <div key={i}>{e}</div>)
-          : typeof error === 'object'
-            ? getKeyValueElement(error)
-            : error
-        : null}
+      {error ? (
+        Array.isArray(error) ? (
+          error.length === 1 ? (
+            error[0]
+          ) : (
+            <ul className="mb-0 ps-3">
+              {error.map((e, i) => (
+                <li key={i}>{e}</li>
+              ))}
+            </ul>
+          )
+        ) : typeof error === 'object' ? (
+          getKeyValueElement(error)
+        ) : (
+          error
+        )
+      ) : null}
     </span>
   );
 };

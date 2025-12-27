@@ -1,6 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import React, { FunctionComponent } from 'react';
+import React, { FunctionComponent, ReactNode } from 'react';
 import { Col, ColProps, Row } from 'react-bootstrap';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -10,7 +10,7 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import './Field.css';
 
 interface FieldProps {
-  label: string;
+  label: ReactNode;
   labelTooltipLen?: number | false;
   tooltip?: string;
   value?: React.ReactNode;
@@ -46,12 +46,16 @@ export const Field: FunctionComponent<FieldProps> = ({
           props.labelClass,
         )}
       >
-        {labelTooltipLen && props.label.length > labelTooltipLen ? (
-          <Tip label={props.label} id="fieldLabel">
-            {props.label}:
-          </Tip>
+        {typeof props.label === 'string' ? (
+          labelTooltipLen && props.label.length > labelTooltipLen ? (
+            <Tip label={props.label} id="fieldLabel">
+              {props.label}:
+            </Tip>
+          ) : (
+            props.label + ':'
+          )
         ) : (
-          props.label + ':'
+          props.label
         )}
       </Col>
       <Col
@@ -63,7 +67,7 @@ export const Field: FunctionComponent<FieldProps> = ({
         {props.tooltip && (
           <Tip label={props.tooltip} id="fieldHelpText">
             {' '}
-            <QuestionIcon size={17} weight="bold" />
+            <QuestionIcon size={16} weight="bold" className="text-gray-400" />
           </Tip>
         )}
         {props.hasCopy && (

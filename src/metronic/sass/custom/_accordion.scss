@@ -5,11 +5,42 @@
 // Custom accordion
 .accordion {
   .card {
-    .card-header .card-toolbar {
-      @include svg-icon-color($gray-700);
+    .card-header {
+      flex-wrap: nowrap;
+      padding-top: 1.85rem;
+      padding-bottom: 1.23rem;
+
+      .card-toolbar {
+        align-self: self-start;
+        margin: 4px 0 4px 0.5rem;
+
+        > {
+          @include svg-icon-color($gray-700);
+        }
+      }
     }
-    &.card-solid .card-header .card-toolbar {
+    &.card-solid .card-header .card-toolbar > {
       @include svg-icon-color($gray-500);
+    }
+  }
+
+  &.accordion-secondary {
+    .card {
+      padding-bottom: 4px;
+
+      .card-header {
+        min-height: 42px;
+        padding: calc(0.923rem - 1px) 0 calc(0.615rem - 1px);
+        margin-left: 1.23rem;
+        margin-right: 1.23rem;
+
+        .card-toolbar > {
+          @include svg-icon-color($fg-disabled);
+        }
+      }
+      .card-body {
+        padding: 1.23rem 1.23rem calc(0.923rem - 4px);
+      }
     }
   }
 }

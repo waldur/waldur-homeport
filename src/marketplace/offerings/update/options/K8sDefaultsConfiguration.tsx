@@ -1,5 +1,5 @@
 import React from 'react';
-import { Card, Row, Col, Alert } from 'react-bootstrap';
+import { Card, Row, Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { InputField } from '@waldur/form/InputField';
@@ -23,8 +23,10 @@ export const K8sDefaultsConfiguration: React.FC<
       </Card.Header>
       <Card.Body>
         {/* Configuration Guide */}
-        <Alert variant="info" className="mb-4">
-          <h6 className="mb-2">{translate('Configuration Guide')}</h6>
+        <div className="rounded border border-primary bg-secondary p-4 mb-4">
+          <h6 className="mb-2 text-primary">
+            {translate('Configuration Guide')}
+          </h6>
           <p className="mb-2">
             {translate(
               'To make this Kubernetes option fully functional, you need to configure:',
@@ -40,35 +42,18 @@ export const K8sDefaultsConfiguration: React.FC<
               {translate('(Optional - improves user experience)')}
             </li>
           </ul>
-          <p className="text-muted mb-0">
+          <p className="mb-0 text-muted">
             {translate(
               'Without Kubernetes versions configured, users will see a warning and cannot create clusters.',
             )}
           </p>
-        </Alert>
+        </div>
 
         <p className="text-muted mb-4">
           {translate(
             'Configure default resource allocations for controller nodes, load balancers, and storage volumes. These values will be used as defaults when users create new clusters.',
           )}
         </p>
-
-        {/* Resource Sizing - Optional but Recommended */}
-        <Alert variant="light" className="mb-4 border-primary">
-          <h6 className="text-primary mb-2">
-            💡 {translate('Optional: Default Resource Sizing')}
-          </h6>
-          <p className="mb-2">
-            {translate(
-              'Configure default values for better user experience. If not set, system defaults will be used.',
-            )}
-          </p>
-          <small className="text-muted">
-            {translate(
-              'These settings help users by pre-filling sensible defaults when they create clusters.',
-            )}
-          </small>
-        </Alert>
 
         {/* Controller Node Defaults */}
         <h6 className="border-bottom pb-2 mb-3">
@@ -124,7 +109,7 @@ export const K8sDefaultsConfiguration: React.FC<
                 name={`${name}.default_controller_system_disk_gb`}
                 component={InputField}
                 type="number"
-                min="20"
+                min="1"
                 max="500"
                 normalize={(value) => (value ? parseInt(value, 10) : undefined)}
               />
@@ -141,7 +126,7 @@ export const K8sDefaultsConfiguration: React.FC<
                 name={`${name}.default_controller_etcd_disk_gb`}
                 component={InputField}
                 type="number"
-                min="10"
+                min="1"
                 max="1000"
                 normalize={(value) => (value ? parseInt(value, 10) : undefined)}
               />
@@ -203,7 +188,7 @@ export const K8sDefaultsConfiguration: React.FC<
                 name={`${name}.default_lb_system_disk_gb`}
                 component={InputField}
                 type="number"
-                min="20"
+                min="1"
                 max="500"
                 normalize={(value) => (value ? parseInt(value, 10) : undefined)}
               />
@@ -220,7 +205,7 @@ export const K8sDefaultsConfiguration: React.FC<
                 name={`${name}.default_lb_logs_disk_gb`}
                 component={InputField}
                 type="number"
-                min="10"
+                min="1"
                 max="1000"
                 normalize={(value) => (value ? parseInt(value, 10) : undefined)}
               />
@@ -285,7 +270,7 @@ export const K8sDefaultsConfiguration: React.FC<
                 name={`${name}.default_worker_data_disk_gb`}
                 component={InputField}
                 type="number"
-                min="10"
+                min="1"
                 max="10000"
                 normalize={(value) => (value ? parseInt(value, 10) : undefined)}
               />
@@ -300,7 +285,7 @@ export const K8sDefaultsConfiguration: React.FC<
                 name={`${name}.default_storage_data_disk_gb`}
                 component={InputField}
                 type="number"
-                min="10"
+                min="1"
                 max="10000"
                 normalize={(value) => (value ? parseInt(value, 10) : undefined)}
               />
@@ -317,7 +302,7 @@ export const K8sDefaultsConfiguration: React.FC<
                 name={`${name}.default_storage_san_disk_gb`}
                 component={InputField}
                 type="number"
-                min="100"
+                min="1"
                 max="50000"
                 normalize={(value) => (value ? parseInt(value, 10) : undefined)}
               />
@@ -325,67 +310,33 @@ export const K8sDefaultsConfiguration: React.FC<
           </Col>
         </Row>
 
-        {/* Kubernetes Version Configuration - CRITICAL */}
-        <Card className="border-warning mt-4">
-          <Card.Header className="bg-warning bg-opacity-10">
-            <h6 className="mb-0 text-warning">
-              <strong>
-                ⚠️ {translate('Required: Kubernetes Version Configuration')}
-              </strong>
-            </h6>
-          </Card.Header>
-          <Card.Body>
-            <Alert variant="warning" className="mb-3">
-              <strong>{translate('This field is mandatory!')}</strong>
-              <br />
-              {translate(
-                'Users will see an error and cannot create clusters until you configure available Kubernetes versions.',
+        {/* Kubernetes Version Configuration */}
+        <h6 className="border-bottom pb-2 mb-3 mt-4">
+          {translate('Kubernetes Version Configuration')}
+          <span className="text-danger ms-1">*</span>
+        </h6>
+        <p className="text-muted small mb-3">
+          {translate(
+            'Required: Users cannot create clusters until Kubernetes versions are configured.',
+          )}
+        </p>
+        <Row>
+          <Col md={12}>
+            <FormGroup
+              label={translate('Available Kubernetes Versions')}
+              help={translate(
+                'Enter comma-separated list of Kubernetes versions (e.g., 1.32.0,1.33.0,1.34.0). This controls which versions users can select when creating clusters.',
               )}
-            </Alert>
-
-            <Row>
-              <Col md={12}>
-                <FormGroup
-                  label={
-                    <span>
-                      <strong>
-                        {translate('Available Kubernetes Versions')}
-                      </strong>
-                      <span className="text-danger ms-1">*</span>
-                    </span>
-                  }
-                  help={translate(
-                    'Enter comma-separated list of Kubernetes versions (e.g., 1.32.0,1.33.0,1.34.0). This controls which versions users can select when creating clusters.',
-                  )}
-                >
-                  <Field
-                    name={`${name}.available_kubernetes_versions`}
-                    component={InputField}
-                    type="text"
-                    placeholder="1.32.0,1.33.0,1.34.0"
-                    className="border-warning"
-                  />
-                </FormGroup>
-
-                <Alert variant="success" className="mt-2">
-                  <small>
-                    <strong>
-                      {translate('✅ Example valid configuration:')}
-                    </strong>
-                    <br />
-                    <code>1.32.0,1.33.0,1.34.0</code>
-                    <br />
-                    <span className="text-muted">
-                      {translate(
-                        'This will offer users 3 Kubernetes versions to choose from.',
-                      )}
-                    </span>
-                  </small>
-                </Alert>
-              </Col>
-            </Row>
-          </Card.Body>
-        </Card>
+            >
+              <Field
+                name={`${name}.available_kubernetes_versions`}
+                component={InputField}
+                type="text"
+                placeholder="1.32.0,1.33.0,1.34.0"
+              />
+            </FormGroup>
+          </Col>
+        </Row>
       </Card.Body>
     </Card>
   );

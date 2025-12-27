@@ -1,5 +1,7 @@
 import {
   CheckCircleIcon,
+  CircleIcon,
+  LockIcon,
   WarningCircleIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
@@ -14,14 +16,16 @@ import { FieldErrorMessage } from './FieldError';
 import { VStepperFormStep } from './VStepperFormStep';
 
 export const FormSteps: FC<{
-  steps: Pick<VStepperFormStep, 'label' | 'id' | 'fields'>[];
+  steps: Pick<VStepperFormStep, 'label' | 'id' | 'fields' | 'required'>[];
   completedSteps?: boolean[];
+  disabledSteps?: boolean[];
   errors?;
   criticalErrors?;
   showRequiredErrors?: boolean;
 }> = ({
   steps,
   completedSteps = [],
+  disabledSteps = [],
   errors = [],
   criticalErrors,
   showRequiredErrors,
@@ -91,6 +95,8 @@ export const FormSteps: FC<{
     const hasCriticalErrors = Boolean(Object.keys(criticalErrors).length);
     const hasNormalErrors = Boolean(Object.keys(normalErrors).length);
 
+    const isDisabled = disabledSteps[i];
+
     return {
       key: step.id,
       title: (
@@ -98,10 +104,13 @@ export const FormSteps: FC<{
           className={classNames(
             'd-flex justify-content-between',
             (hasCriticalErrors || hasNormalErrors) && 'has-error',
+            isDisabled && 'text-muted',
           )}
         >
           {step.label}
-          {step.fields && hasCriticalErrors ? (
+          {isDisabled ? (
+            <LockIcon weight="bold" className="text-muted" size={20} />
+          ) : step.fields && hasCriticalErrors ? (
             <Tip
               label={<FieldErrorMessage error={criticalErrors} />}
               className="stepper-icon critical-error"
@@ -127,6 +136,8 @@ export const FormSteps: FC<{
             </Tip>
           ) : completedSteps[i] ? (
             <CheckCircleIcon weight="bold" className="text-success" size={20} />
+          ) : step.required ? (
+            <CircleIcon weight="bold" className="text-muted" size={20} />
           ) : null}
         </div>
       ),

@@ -27,6 +27,7 @@ export const EditOptionButton: FunctionComponent<
       openModalDialog(EditOptionDialog, {
         resolve: { offering, option, refetch, type },
         formId: OPTION_FORM_ID,
+        size: 'lg',
       }),
     );
   };

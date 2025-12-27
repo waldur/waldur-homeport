@@ -481,6 +481,13 @@
       }
     }
   }
+
+  &.bg-gray-50 .table {
+    th.pinned,
+    td.pinned {
+      background-color: $gray-50;
+    }
+  }
 }
 
 // Filters menu and its inputs

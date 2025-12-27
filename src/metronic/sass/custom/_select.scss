@@ -101,6 +101,26 @@
       }
     }
   }
+  &.select-table-cell {
+    .metronic-select {
+      &__control {
+        min-height: 35px;
+        margin: 1px;
+      }
+
+      &__input-container {
+        margin-top: 0;
+        margin-bottom: 0;
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+
+      &__dropdown-indicator {
+        padding-top: 0;
+        padding-bottom: 0;
+      }
+    }
+  }
 }
 
 // Menu/List

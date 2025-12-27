@@ -1,33 +1,31 @@
-import {
-  CheckIcon,
-  InfoIcon,
-  ShieldCheckIcon,
-  PlusIcon,
-  XIcon,
-} from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Card, Row, Col, Form, Alert, Button } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
+import { AccordionCard } from '@waldur/core/AccordionCard';
 import { Badge } from '@waldur/core/Badge';
+import { SelectField } from '@waldur/form';
 import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
+import { Field } from '@waldur/resource/summary';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { K8sFlavorSelectionTable } from './K8sFlavorSelectionTable';
-import K8sSecurityRulesField from './K8sSecurityRulesField';
+import { FormGroup } from '../offerings/FormGroup';
+
+import { K8sFormSection } from './K8sFormSection';
+import { K8sKubernetesConfigSection } from './K8sKubernetesConfigSection';
+import { K8sNodeGroupCard } from './K8sNodeGroupCard';
+import { K8sSecurityConfigSection } from './K8sSecurityConfigSection';
+import { K8sTotalResourcesCard } from './K8sTotalResourcesCard';
 import {
   MultiDatacenterK8sClusterConfig,
   DatacenterNodeGroup,
-  LocalOpenStackFlavor,
   K8sDefaultConfiguration,
-  getAvailableKubernetesVersions,
-  validateK8sConfiguration,
-  isK8sConfigurationComplete,
   createDefaultClusterConfig,
   getDefaultDatacenterDiskConfig,
-  getDefaultStorageDiskConfig,
+  calculateTotalClusterResources,
 } from './multi-datacenter-k8s-types';
 
 interface SingleDatacenterK8sConfigurationFormProps extends FormField {
@@ -38,308 +36,6 @@ interface SingleDatacenterK8sConfigurationFormProps extends FormField {
     required?: boolean;
   };
 }
-
-interface NodeGroupCardProps {
-  nodeGroup: DatacenterNodeGroup;
-  offeringUuid?: string;
-  onUpdate: (updates: Partial<DatacenterNodeGroup>) => void;
-  onRemove: () => void;
-  canRemove: boolean;
-  defaultConfigs?: K8sDefaultConfiguration;
-}
-
-const NodeGroupCard: React.FC<NodeGroupCardProps> = ({
-  nodeGroup,
-  offeringUuid,
-  onUpdate,
-  onRemove,
-  canRemove,
-  defaultConfigs,
-}) => {
-  const isStorageGroup = nodeGroup.type === 'storage';
-  const selectedFlavor = nodeGroup.openstack_flavor;
-
-  const handleFlavorSelect = (flavor: LocalOpenStackFlavor) => {
-    onUpdate({ openstack_flavor: flavor });
-  };
-
-  const handleProfileChange = (event: React.ChangeEvent<HTMLSelectElement>) => {
-    const newType = event.target.value as 'worker' | 'storage';
-    const newDiskConfig =
-      newType === 'storage'
-        ? getDefaultStorageDiskConfig(defaultConfigs)
-        : getDefaultDatacenterDiskConfig(defaultConfigs);
-
-    onUpdate({
-      type: newType,
-      disk_config: newDiskConfig,
-    });
-  };
-
-  const handleNodeCountChange = (
-    event: React.ChangeEvent<HTMLInputElement>,
-  ) => {
-    const nodeCount = Math.max(1, parseInt(event.target.value) || 1);
-    onUpdate({ node_count: nodeCount });
-  };
-
-  const handleDiskConfigChange = (
-    field: keyof DatacenterNodeGroup['disk_config'],
-    value: number,
-  ) => {
-    onUpdate({
-      disk_config: {
-        ...nodeGroup.disk_config,
-        [field]: Math.max(field === 'system_disk_size_gb' ? 20 : 10, value),
-      },
-    });
-  };
-
-  return (
-    <Card className={`mb-3 border-${isStorageGroup ? 'warning' : 'primary'}`}>
-      <Card.Header
-        className={`bg-${isStorageGroup ? 'warning' : 'primary'} bg-opacity-10`}
-      >
-        <Row className="align-items-center">
-          <Col>
-            <h6 className="mb-0">
-              <Badge
-                bg={isStorageGroup ? 'warning' : 'primary'}
-                className="me-2"
-              >
-                {nodeGroup.type.toUpperCase()}
-              </Badge>
-              {translate('{type} Node Group', {
-                type: nodeGroup.type,
-              })}
-            </h6>
-          </Col>
-          <Col xs="auto">
-            {selectedFlavor && (
-              <div className="text-end">
-                <small className="text-muted d-block">
-                  <CheckIcon size={12} className="me-1" weight="bold" />
-                  {selectedFlavor.vcpus} vCPU
-                </small>
-                <small className="text-muted d-block">
-                  <InfoIcon size={12} className="me-1" weight="bold" />
-                  {Math.round(selectedFlavor.ram / 1024)}GB RAM
-                </small>
-              </div>
-            )}
-            {canRemove && (
-              <Button
-                variant="danger"
-                size="sm"
-                onClick={onRemove}
-                className="ms-2"
-              >
-                <XIcon size={14} weight="bold" />
-              </Button>
-            )}
-          </Col>
-        </Row>
-      </Card.Header>
-
-      <Card.Body>
-        <Row>
-          {/* Node Group Profile Selection */}
-          <Col md={4}>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                {translate('Node Group Profile')}{' '}
-                <span className="text-danger">*</span>
-              </Form.Label>
-              <Form.Select
-                value={nodeGroup.type}
-                onChange={handleProfileChange}
-              >
-                <option value="worker">
-                  {translate('Worker - Application workloads')}
-                </option>
-                <option value="storage">
-                  {translate('Storage - Distributed storage and persistence')}
-                </option>
-              </Form.Select>
-              <Form.Text className="text-muted">
-                {nodeGroup.type === 'worker'
-                  ? translate('Runs application pods and services')
-                  : translate('Provides distributed storage for the cluster')}
-              </Form.Text>
-            </Form.Group>
-          </Col>
-
-          {/* OpenStack Flavor Selection */}
-          <Col md={4}>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                {translate('OpenStack Flavor')}{' '}
-                <span className="text-danger">*</span>
-              </Form.Label>
-              <K8sFlavorSelectionTable
-                offeringUuid={offeringUuid}
-                selectedFlavor={selectedFlavor}
-                onFlavorSelect={handleFlavorSelect}
-                nodeGroupType={nodeGroup.type}
-                datacenterName="Single Datacenter"
-                minimalSettings={defaultConfigs}
-              />
-            </Form.Group>
-          </Col>
-
-          {/* Node Count */}
-          <Col md={4}>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                {translate('Number of Nodes')}{' '}
-                <span className="text-danger">*</span>
-              </Form.Label>
-              <Form.Control
-                type="number"
-                min="1"
-                max="20"
-                value={nodeGroup.node_count}
-                onChange={handleNodeCountChange}
-              />
-              <Form.Text className="text-muted">
-                {translate('Number of {type} nodes in this group', {
-                  type: nodeGroup.type,
-                })}
-              </Form.Text>
-            </Form.Group>
-          </Col>
-        </Row>
-
-        {/* Disk Configuration */}
-        <Row>
-          <Col md={isStorageGroup ? 3 : 4}>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                {translate('System Disk')}
-                <Badge variant="default" outline className="ms-2">
-                  Pre-configured
-                </Badge>
-              </Form.Label>
-              <Form.Control
-                type="number"
-                value={nodeGroup.disk_config.system_disk_size_gb}
-                disabled
-                readOnly
-              />
-              <Form.Text className="text-muted">
-                {translate('Operating system and Kubernetes components')}
-              </Form.Text>
-            </Form.Group>
-          </Col>
-
-          <Col md={isStorageGroup ? 3 : 4}>
-            <Form.Group className="mb-3">
-              <Form.Label>
-                {translate('Data Disk')} <span className="text-danger">*</span>
-              </Form.Label>
-              <Form.Control
-                type="number"
-                min="10"
-                max="10000"
-                value={nodeGroup.disk_config.data_disk_size_gb}
-                onChange={(e) =>
-                  handleDiskConfigChange(
-                    'data_disk_size_gb',
-                    parseInt(e.target.value) || 10,
-                  )
-                }
-              />
-              <Form.Text className="text-muted">
-                {nodeGroup.type === 'worker'
-                  ? translate('Application data and container storage')
-                  : translate('Local storage cache and temporary data')}
-              </Form.Text>
-            </Form.Group>
-          </Col>
-
-          {/* Virtual SAN Disk (only for storage groups) */}
-          {isStorageGroup && (
-            <Col md={3}>
-              <Form.Group className="mb-3">
-                <Form.Label>
-                  {translate('Virtual SAN Disk')}{' '}
-                  <span className="text-danger">*</span>
-                  <Badge variant="warning" outline className="ms-2">
-                    Storage Only
-                  </Badge>
-                </Form.Label>
-                <Form.Control
-                  type="number"
-                  min="100"
-                  max="50000"
-                  value={nodeGroup.disk_config.virtual_san_disk_size_gb || 500}
-                  onChange={(e) =>
-                    handleDiskConfigChange(
-                      'virtual_san_disk_size_gb',
-                      parseInt(e.target.value) || 500,
-                    )
-                  }
-                />
-                <Form.Text className="text-muted">
-                  {translate(
-                    'Distributed storage pool for cluster persistence',
-                  )}
-                </Form.Text>
-              </Form.Group>
-            </Col>
-          )}
-
-          {/* Spacer for worker groups */}
-          {!isStorageGroup && <Col md={4} />}
-        </Row>
-
-        {/* Flavor Details */}
-        {selectedFlavor && (
-          <Alert variant="light" className="mt-3">
-            <Row>
-              <Col md={3}>
-                <div className="text-center">
-                  <CheckIcon size={24} className="text-primary" weight="bold" />
-                  <div>
-                    <strong>{selectedFlavor.vcpus}</strong>
-                  </div>
-                  <small className="text-muted">vCPUs</small>
-                </div>
-              </Col>
-              <Col md={3}>
-                <div className="text-center">
-                  <InfoIcon size={24} className="text-info" weight="bold" />
-                  <div>
-                    <strong>{Math.round(selectedFlavor.ram / 1024)}</strong>
-                  </div>
-                  <small className="text-muted">GB RAM</small>
-                </div>
-              </Col>
-              <Col md={3}>
-                <div className="text-center">
-                  <InfoIcon size={24} className="text-warning" weight="bold" />
-                  <div>
-                    <strong>{selectedFlavor.disk}</strong>
-                  </div>
-                  <small className="text-muted">GB Root Disk</small>
-                </div>
-              </Col>
-              <Col md={3}>
-                <div className="text-center">
-                  <CheckIcon size={24} className="text-success" weight="bold" />
-                  <div>
-                    <strong>{selectedFlavor.name}</strong>
-                  </div>
-                  <small className="text-muted">Flavor</small>
-                </div>
-              </Col>
-            </Row>
-          </Alert>
-        )}
-      </Card.Body>
-    </Card>
-  );
-};
 
 export const SingleDatacenterK8sConfigurationForm: React.FC<
   SingleDatacenterK8sConfigurationFormProps
@@ -402,21 +98,16 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
     }
   }, [clusterConfig]);
 
-  const handleKubernetesVersionChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
+  const handleKubernetesVersionChange = (version: string) => {
     setClusterConfig({
       ...clusterConfig,
-      kubernetes_version: event.target.value,
+      kubernetes_version: version,
     });
   };
 
-  const handleInfrastructureChange = (
-    event: React.ChangeEvent<HTMLSelectElement>,
-  ) => {
-    const selectedUuid = event.target.value;
+  const handleInfrastructureChange = (infraUuid: string) => {
     const selectedInfra = availableInfrastructures.find(
-      (infra) => infra.uuid === selectedUuid,
+      (infra) => infra.uuid === infraUuid,
     );
 
     // Update the single datacenter's infrastructure
@@ -437,10 +128,10 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
     });
   };
 
-  const handleLonghornChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+  const handleLonghornChange = (value: boolean) => {
     setClusterConfig({
       ...clusterConfig,
-      install_longhorn: event.target.checked,
+      install_longhorn: value,
     });
   };
 
@@ -500,305 +191,221 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
     });
   };
 
-  // Check for configuration warnings
-  const configurationWarnings = validateK8sConfiguration(defaultConfigs);
-  const isConfigComplete = isK8sConfigurationComplete(defaultConfigs);
+  const totalResources = calculateTotalClusterResources(
+    clusterConfig,
+    defaultConfigs,
+  );
 
   // Get the single datacenter
   const datacenter = clusterConfig.datacenters[0];
 
+  // Controller and load balancer configurations
+  const controllerNodes: number = 3;
+  const loadBalancerNodes = 1;
+  const controllerVcpus = defaultConfigs?.default_controller_vcpus || 2;
+  const controllerRam = defaultConfigs?.default_controller_ram_gb || 4;
+  const controllerSystemDisk =
+    defaultConfigs?.default_controller_system_disk_gb || 20;
+  const controllerEtcdDisk =
+    defaultConfigs?.default_controller_etcd_disk_gb || 50;
+  const lbVcpus = defaultConfigs?.default_lb_vcpus || 2;
+  const lbRam = defaultConfigs?.default_lb_ram_gb || 8;
+  const lbSystemDisk = defaultConfigs?.default_lb_system_disk_gb || 20;
+  const lbLogsDisk = defaultConfigs?.default_lb_logs_disk_gb || 20;
+
   return (
     <div className="single-datacenter-k8s-configuration">
-      {field.help_text && (
-        <Alert variant="info" className="mb-4">
-          <InfoIcon className="me-2" size={16} weight="bold" />
-          {field.help_text}
-        </Alert>
-      )}
+      <K8sKubernetesConfigSection
+        defaultConfigs={defaultConfigs}
+        kubernetesVersion={clusterConfig.kubernetes_version}
+        onKubernetesVersionChange={handleKubernetesVersionChange}
+        installLonghorn={clusterConfig.install_longhorn || false}
+        onLonghornChange={handleLonghornChange}
+      />
 
-      {/* Configuration Warnings */}
-      {configurationWarnings.length > 0 && (
-        <Alert variant="warning" className="mb-4">
-          <InfoIcon className="me-2" size={16} weight="bold" />
-          <strong>{translate('Configuration Incomplete')}</strong>
-          <ul className="mb-0 mt-2">
-            {configurationWarnings.map((warning, index) => (
-              <li key={index}>{warning}</li>
-            ))}
-          </ul>
-        </Alert>
-      )}
+      {/* Datacenter configuration */}
+      <K8sFormSection
+        title={translate('Datacenter configuration')}
+        topSeparator
+      >
+        <AccordionCard
+          title={
+            <>
+              {translate('Datacenter 1')}
+              <Badge variant="default" size="sm" pill outline className="ms-4">
+                {totalResources.totalNodes} nodes, {totalResources.totalVCpus}{' '}
+                vCPUs, {totalResources.totalRam}GB RAM
+              </Badge>
+            </>
+          }
+          secondary
+          defaultOpen
+          className="mb-5 bg-gray-50"
+        >
+          {/* OpenStack Infrastructure Selection */}
+          <FormGroup
+            label={translate('OpenStack infrastructure')}
+            description={translate(
+              'Choose the OpenStack tenant that will provide infrastructure for this datacenter',
+            )}
+            required
+            space={5}
+          >
+            <SelectField
+              input={{
+                value: datacenter?.openstack_infrastructure?.uuid || '',
+                onChange: handleInfrastructureChange,
+                onBlur: () => {},
+              }}
+              placeholder={translate('Select OpenStack infrastructure...')}
+              simpleValue
+              isLoading={loadingInfrastructures}
+              isDisabled={loadingInfrastructures}
+              options={availableInfrastructures.map((infra) => ({
+                value: infra.uuid,
+                label: `${infra.name} (${infra.customer_name})`,
+              }))}
+            />
+          </FormGroup>
 
-      {/* Kubernetes Version Selection */}
-      <Card className="mb-4">
-        <Card.Header>
-          <h6 className="mb-0">
-            <CheckIcon className="me-2" size={16} weight="bold" />
-            {translate('Kubernetes Configuration')}
-          </h6>
-        </Card.Header>
-        <Card.Body>
-          <Row>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Label>
-                  {translate('Kubernetes Version')}{' '}
-                  <span className="text-danger">*</span>
-                </Form.Label>
-                <Form.Select
-                  value={clusterConfig.kubernetes_version}
-                  onChange={handleKubernetesVersionChange}
-                  disabled={!isConfigComplete}
-                >
-                  <option value="">
-                    {isConfigComplete
-                      ? translate('Select Kubernetes version...')
-                      : translate(
-                          'Configuration incomplete - please configure offering settings',
-                        )}
-                  </option>
-                  {getAvailableKubernetesVersions(defaultConfigs).map(
-                    (version) => (
-                      <option key={version.value} value={version.value}>
-                        {version.label}
-                      </option>
-                    ),
+          {/* Controller Nodes Information */}
+          <Field
+            label={
+              <>
+                {translate('Controller nodes (Mandatory)')}:
+                <span className="text-quaternary fw-normal d-block">
+                  {translate(
+                    'Kubernetes control plane components (API server, etcd, scheduler)',
                   )}
-                </Form.Select>
-              </Form.Group>
-            </Col>
-            <Col md={6}>
-              <Form.Group className="mb-3">
-                <Form.Check
-                  type="checkbox"
-                  id="install-longhorn"
-                  checked={clusterConfig.install_longhorn || false}
-                  onChange={handleLonghornChange}
-                  label={
-                    <div>
-                      <strong>
-                        {translate('Install Longhorn Distributed Storage')}
-                      </strong>
-                      <div className="text-muted small mt-1">
-                        {translate(
-                          'Automatically install Longhorn for cloud-native distributed block storage.',
-                        )}
-                      </div>
-                    </div>
-                  }
-                />
-              </Form.Group>
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
+                </span>
+              </>
+            }
+            value={
+              <>
+                <span className="d-block">
+                  {controllerNodes}{' '}
+                  {controllerNodes === 1 ? 'controller' : 'controllers'}
+                </span>
+                <span className="d-block">
+                  {controllerNodes * controllerVcpus} vCPU,{' '}
+                  {controllerNodes * controllerRam}GB RAM
+                </span>
+                <span className="d-block">
+                  {controllerNodes * controllerSystemDisk}GB system +{' '}
+                  {controllerNodes * controllerEtcdDisk}GB etcd
+                </span>
+              </>
+            }
+            labelCol={4}
+            valueCol={7}
+            valueClass="offset-sm-1"
+            space={5}
+          />
+          {/* Load Balancer Nodes Information */}
+          <Field
+            label={
+              <>
+                {translate('Load balancer nodes (Mandatory)')}:
+                <span className="text-quaternary fw-normal d-block">
+                  {translate(
+                    'External load balancers for ingress and service exposure',
+                  )}
+                </span>
+              </>
+            }
+            value={
+              <>
+                <span className="d-block">
+                  {loadBalancerNodes} load{' '}
+                  {loadBalancerNodes === 1 ? 'balancer' : 'balancers'}
+                </span>
+                <span className="d-block">
+                  {loadBalancerNodes * lbVcpus} vCPU,{' '}
+                  {loadBalancerNodes * lbRam}GB RAM
+                </span>
+                <span className="d-block">
+                  {loadBalancerNodes * lbSystemDisk}GB system +{' '}
+                  {loadBalancerNodes * lbLogsDisk}GB logs
+                </span>
+              </>
+            }
+            labelCol={4}
+            valueCol={7}
+            valueClass="offset-sm-1"
+            space={datacenter?.openstack_infrastructure ? 5 : 0}
+          />
 
-      {/* OpenStack Infrastructure Selection */}
-      <Card className="mb-4">
-        <Card.Header>
-          <h6 className="mb-0">
-            <CheckIcon className="me-2" size={16} weight="bold" />
-            {translate('Infrastructure Configuration')}
-          </h6>
-        </Card.Header>
-        <Card.Body>
-          <Form.Group className="mb-4">
-            <Form.Label>
-              {translate('OpenStack Infrastructure')}{' '}
-              <span className="text-danger">*</span>
-            </Form.Label>
-
-            {loadingInfrastructures ? (
-              <Alert variant="info">
-                {translate('Loading available infrastructures...')}
-              </Alert>
-            ) : (
-              <Form.Select
-                value={datacenter?.openstack_infrastructure?.uuid || ''}
-                onChange={handleInfrastructureChange}
-              >
-                <option value="">
-                  {translate('Select OpenStack infrastructure...')}
-                </option>
-                {availableInfrastructures.map((infra) => (
-                  <option key={infra.uuid} value={infra.uuid}>
-                    {infra.name} ({infra.customer_name})
-                  </option>
-                ))}
-              </Form.Select>
-            )}
-
-            <Form.Text className="text-muted">
-              {translate(
-                'Choose the OpenStack tenant that will provide infrastructure for this cluster',
-              )}
-            </Form.Text>
-          </Form.Group>
-
-          <Alert variant="info">
-            <div>
-              <strong>{translate('Single Datacenter Deployment')}</strong>
-            </div>
-            <div className="text-muted mt-2">
-              {translate(
-                'This cluster will be deployed in one datacenter with 3 controller nodes and 1 load balancer for high availability within the datacenter.',
-              )}
-            </div>
-          </Alert>
-        </Card.Body>
-      </Card>
-
-      {/* Node Groups Configuration */}
-      {datacenter?.openstack_infrastructure && (
-        <Card className="mb-4">
-          <Card.Header>
-            <h6 className="mb-0">
-              <InfoIcon className="me-2" size={16} weight="bold" />
-              {translate('Node Groups Configuration')}
-            </h6>
-            <div className="card-toolbar">
-              <Button
-                variant="outline-primary"
-                size="sm"
-                onClick={addNodeGroup}
-              >
-                <PlusIcon size={14} className="me-1" weight="bold" />
-                {translate('Add Node Group')}
-              </Button>
-            </div>
-          </Card.Header>
-          <Card.Body>
-            <p className="text-muted mb-4">
-              {translate(
-                'Configure worker and storage node groups. At least one worker group is required.',
-              )}
-            </p>
-
-            {datacenter.node_groups.length === 0 && (
-              <Alert variant="warning">
-                {translate(
-                  'Add at least one worker group to configure the cluster',
-                )}
-              </Alert>
-            )}
-
-            {datacenter.node_groups.map((group, groupIndex) => (
-              <NodeGroupCard
-                key={group.id}
-                nodeGroup={group}
-                offeringUuid={datacenter.openstack_infrastructure?.uuid}
-                onUpdate={(updates) => updateNodeGroup(groupIndex, updates)}
-                onRemove={() => removeNodeGroup(groupIndex)}
-                canRemove={datacenter.node_groups.length > 1}
-                defaultConfigs={defaultConfigs}
+          {/* Node Groups Configuration */}
+          {datacenter?.openstack_infrastructure && (
+            <>
+              {/* Add Group Button */}
+              <Field
+                label={translate('Node groups')}
+                value={
+                  <Button variant="secondary" size="sm" onClick={addNodeGroup}>
+                    <span className="svg-icon svg-icon-2">
+                      <PlusCircleIcon weight="bold" />
+                    </span>
+                    {translate('Add node group')}
+                  </Button>
+                }
+                labelCol={4}
+                valueCol={7}
+                labelClass="col"
+                valueClass="offset-sm-1 col-auto"
+                space={5}
+                className="gy-2 align-items-center"
               />
-            ))}
-          </Card.Body>
-        </Card>
-      )}
 
-      {/* Security Configuration */}
-      <Card className="mb-4">
-        <Card.Header>
-          <h6 className="mb-0">
-            <ShieldCheckIcon className="me-2" size={16} weight="bold" />
-            {translate('Security Configuration')}
-          </h6>
-        </Card.Header>
-        <Card.Body>
-          <p className="text-muted mb-4">
-            {translate(
-              'Configure network security rules for cluster access and administration',
-            )}
-          </p>
+              {datacenter.node_groups.length === 0 && (
+                <Alert variant="warning">
+                  {translate(
+                    'Add at least one worker group to configure this datacenter',
+                  )}
+                </Alert>
+              )}
 
-          <div className="mb-4">
-            <K8sSecurityRulesField
-              field={{
-                label: translate('Public Access Rules'),
-                help_text: translate(
-                  'Network rules for public-facing load balancers and ingress controllers',
-                ),
-                required: false,
-                rule_type: 'public_access',
-              }}
-              input={{
-                value: clusterConfig.public_access_rules || [],
-                onChange: (rules) =>
-                  setClusterConfig({
-                    ...clusterConfig,
-                    public_access_rules: rules,
-                  }),
-                onBlur: () => {},
-                onFocus: () => {},
-                onDragStart: () => {},
-                onDrop: () => {},
-                name: 'public_access_rules',
-              }}
-              meta={{
-                touched: false,
-                error: undefined,
-                warning: undefined,
-                autofilled: false,
-                asyncValidating: false,
-                dirty: false,
-                dispatch: (() => {}) as any,
-                form: 'k8s-config',
-                initial: undefined,
-                invalid: false,
-                pristine: true,
-                submitting: false,
-                submitFailed: false,
-                valid: true,
-                visited: false,
-              }}
-            />
-          </div>
+              {datacenter.node_groups.map((group, groupIndex) => (
+                <K8sNodeGroupCard
+                  key={group.id}
+                  nodeGroup={group}
+                  index={groupIndex}
+                  datacenterName={datacenter.name}
+                  offeringUuid={datacenter.openstack_infrastructure?.uuid}
+                  onUpdate={(updates) => updateNodeGroup(groupIndex, updates)}
+                  onRemove={() => removeNodeGroup(groupIndex)}
+                  canRemove={datacenter.node_groups.length > 1}
+                  defaultConfigs={defaultConfigs}
+                />
+              ))}
+            </>
+          )}
+        </AccordionCard>
 
-          <div className="mb-4">
-            <K8sSecurityRulesField
-              field={{
-                label: translate('Administrative Access Rules'),
-                help_text: translate(
-                  'Network rules for cluster administration and monitoring',
-                ),
-                required: false,
-                rule_type: 'administrative_access',
-              }}
-              input={{
-                value: clusterConfig.administrative_access_rules || [],
-                onChange: (rules) =>
-                  setClusterConfig({
-                    ...clusterConfig,
-                    administrative_access_rules: rules,
-                  }),
-                onBlur: () => {},
-                onFocus: () => {},
-                onDragStart: () => {},
-                onDrop: () => {},
-                name: 'administrative_access_rules',
-              }}
-              meta={{
-                touched: false,
-                error: undefined,
-                warning: undefined,
-                autofilled: false,
-                asyncValidating: false,
-                dirty: false,
-                dispatch: (() => {}) as any,
-                form: 'k8s-config',
-                initial: undefined,
-                invalid: false,
-                pristine: true,
-                submitting: false,
-                submitFailed: false,
-                valid: true,
-                visited: false,
-              }}
-            />
-          </div>
-        </Card.Body>
-      </Card>
+        <K8sTotalResourcesCard
+          totalResources={totalResources}
+          datacenterCount={1}
+        />
+      </K8sFormSection>
+
+      <K8sSecurityConfigSection
+        publicAccessRules={clusterConfig.public_access_rules || []}
+        onPublicAccessRulesChange={(rules) =>
+          setClusterConfig({
+            ...clusterConfig,
+            public_access_rules: rules,
+          })
+        }
+        administrativeAccessRules={
+          clusterConfig.administrative_access_rules || []
+        }
+        onAdministrativeAccessRulesChange={(rules) =>
+          setClusterConfig({
+            ...clusterConfig,
+            administrative_access_rules: rules,
+          })
+        }
+      />
     </div>
   );
 };
