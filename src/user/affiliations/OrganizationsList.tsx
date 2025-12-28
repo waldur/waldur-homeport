@@ -6,6 +6,7 @@ import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
 import { OrganizationsFilter } from '@waldur/administration/organizations/OrganizationsFilter';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { OrganizationImportButton } from '@waldur/customer/import/OrganizationImportButton';
 import { OrganizationCard } from '@waldur/customer/list/OrganizationCard';
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
@@ -196,7 +197,9 @@ export const OrganizationsList: FunctionComponent = () => {
     },
     {
       title: translate('Phone number'),
-      render: ({ row }) => <>{row.phone_number || DASH_ESCAPE_CODE}</>,
+      render: ({ row }) => (
+        <>{formatPhoneNumber(row.phone_number) || DASH_ESCAPE_CODE}</>
+      ),
       keys: ['phone_number'],
       optional: true,
       id: 'phone_number',

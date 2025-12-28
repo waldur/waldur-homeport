@@ -6,6 +6,7 @@ import {
 } from '@phosphor-icons/react';
 import { Col, Row, Stack } from 'react-bootstrap';
 
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { ProviderOfferingPermissions } from '@waldur/marketplace/service-providers/dashboard/ProviderOfferingPermissions';
@@ -60,13 +61,12 @@ export const CustomerProfile = ({
               {customer.email}
             </span>
           )}
-          {customer.phone_number &&
-            typeof customer.phone_number === 'string' && (
-              <span className="text-nowrap">
-                <DeviceMobileIcon size={18} weight="duotone" className="me-1" />
-                {customer.phone_number}
-              </span>
-            )}
+          {customer.phone_number && (
+            <span className="text-nowrap">
+              <DeviceMobileIcon size={18} weight="duotone" className="me-1" />
+              {formatPhoneNumber(customer.phone_number)}
+            </span>
+          )}
           {customer.registration_code &&
             typeof customer.registration_code === 'string' && (
               <span className="text-nowrap">

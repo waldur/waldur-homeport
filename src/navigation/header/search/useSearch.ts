@@ -1,12 +1,15 @@
 import { keepPreviousData, useQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useState } from 'react';
+import { useSelector } from 'react-redux';
 import {
   customersList,
   marketplaceResourcesList,
   projectsList,
+  usersList,
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
+import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 const queryFn =
   (query) =>
@@ -69,6 +72,8 @@ type QueryResult = ReturnType<typeof queryFn>;
 export const useSearch = () => {
   const [query, setQuery] = useState('');
   const [show, setShow] = useState(false);
+  const [activeTab, setActiveTab] = useState('all');
+  const isStaffOrSupportUser = useSelector(isStaffOrSupport);
 
   const handleClickOutside = useCallback(
     (e) => {
@@ -100,7 +105,48 @@ export const useSearch = () => {
     placeholderData: keepPreviousData,
     enabled: show,
   });
-  return { query, setQuery, result, show, setShow };
+
+  const usersResult = useQuery({
+    queryKey: ['global-search-users', query],
+    queryFn: async ({ signal }) => {
+      const response = await usersList({
+        signal,
+        query: {
+          query: query,
+          field: [
+            'uuid',
+            'full_name',
+            'email',
+            'phone_number',
+            'organization',
+            'permissions',
+            'is_active',
+          ],
+          page_size: 50,
+        },
+      });
+      return {
+        users: response.data,
+        usersCount: fetchResultCount(response),
+      };
+    },
+    enabled: show && isStaffOrSupportUser,
+    staleTime: 60 * 1000,
+    placeholderData: keepPreviousData,
+  });
+
+  return {
+    query,
+    setQuery,
+    result,
+    usersResult,
+    show,
+    setShow,
+    activeTab,
+    setActiveTab,
+    isStaffOrSupportUser,
+  };
 };
 
 export type SearchResult = ReturnType<typeof useSearch>['result'];
+export type UsersSearchResult = ReturnType<typeof useSearch>['usersResult'];

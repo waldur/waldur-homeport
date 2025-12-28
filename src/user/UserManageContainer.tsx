@@ -39,6 +39,26 @@ const UserDeleteAccount = lazyComponent(() =>
     default: module.UserDeleteAccount,
   })),
 );
+const UserEvents = lazyComponent(() =>
+  import('@waldur/user/dashboard/UserEvents').then((module) => ({
+    default: module.UserEvents,
+  })),
+);
+const KeysList = lazyComponent(() =>
+  import('@waldur/user/keys/KeysList').then((module) => ({
+    default: module.KeysList,
+  })),
+);
+const UserOfferingList = lazyComponent(() =>
+  import('@waldur/user/UserOfferingList').then((module) => ({
+    default: module.UserOfferingList,
+  })),
+);
+const UserAffiliationsList = lazyComponent(() =>
+  import('@waldur/user/affiliations/UserAffiliationsList').then((module) => ({
+    default: module.UserAffiliationsList,
+  })),
+);
 
 const NotAllowedTab = () => (
   <p className="text-muted text-center">{translate('Not allowed')}</p>
@@ -107,19 +127,53 @@ export const UserManageContainer = ({ isPersonal }) => {
             currentUser.is_staff || isPersonal ? UserEditTab : UserDetailsTable,
           title: translate('User profile'),
         },
+        // Audit log - staff/support viewing other users (personal has /profile/events/)
+        (currentUser.is_staff || currentUser.is_support) &&
+          !isPersonal && {
+            key: 'audit-log',
+            component: UserEvents,
+            title: translate('Audit log'),
+          },
+        // SSH Keys - staff/support viewing other users (personal has /profile/keys/)
+        isFeatureVisible(UserFeatures.ssh_keys) &&
+          (currentUser.is_staff || currentUser.is_support) &&
+          !isPersonal && {
+            key: 'keys',
+            component: KeysList,
+            title: translate('Keys'),
+          },
+        // Remote accounts - staff/support viewing other users (personal has /profile/remote-accounts/)
+        (currentUser.is_staff || currentUser.is_support) &&
+          !isPersonal && {
+            key: 'remote-accounts',
+            component: UserOfferingList,
+            title: translate('Remote accounts'),
+          },
+        // Roles and permissions - staff/support viewing other users (personal has affiliations in dashboard)
+        (currentUser.is_staff || currentUser.is_support) &&
+          !isPersonal && {
+            key: 'roles',
+            component: UserAffiliationsList,
+            title: translate('Roles and permissions'),
+          },
         (!isFeatureVisible(UserFeatures.disable_user_termination) ||
           currentUser.is_staff) && {
           key: 'termination',
-          component: isValidUser
-            ? isPersonal
-              ? UserDeleteAccount
-              : UserTermination
-            : NotAllowedTab,
+          component:
+            // Staff can always terminate other users
+            currentUser.is_staff && !isPersonal
+              ? UserTermination
+              : isValidUser
+                ? isPersonal
+                  ? UserDeleteAccount
+                  : UserTermination
+                : NotAllowedTab,
           title: translate('Termination actions'),
-          disabled: !isValidUser,
+          // Staff viewing others: always enabled; otherwise: requires valid user
+          disabled: currentUser.is_staff && !isPersonal ? false : !isValidUser,
         },
       ].filter(Boolean),
-    [user, currentUser, isValidUser],
+    [user, currentUser, isValidUser, isPersonal],
   );
 
   const { tabSpec } = usePageTabsTransmitter(tabs);

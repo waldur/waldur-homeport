@@ -4,6 +4,7 @@ import { User } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
@@ -45,7 +46,9 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
 
       <FormTable.Item
         label={translate('Phone numbers')}
-        value={<FieldWithCopy value={props.user.phone_number} />}
+        value={
+          <FieldWithCopy value={formatPhoneNumber(props.user.phone_number)} />
+        }
       />
 
       <FormTable.Item

@@ -10,6 +10,7 @@ import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
@@ -82,7 +83,7 @@ export const UserProfile = ({
         {user.phone_number && (
           <span className="text-nowrap">
             <PhoneCallIcon size={18} weight="duotone" className="me-1" />
-            {user.phone_number}
+            {formatPhoneNumber(user.phone_number)}
           </span>
         )}
       </Stack>

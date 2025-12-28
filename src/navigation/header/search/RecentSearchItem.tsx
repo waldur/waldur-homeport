@@ -3,6 +3,7 @@ import {
   BuildingsIcon,
   ClipboardTextIcon,
   SquaresFourIcon,
+  UserIcon,
 } from '@phosphor-icons/react';
 
 import { Link } from '@waldur/core/Link';
@@ -36,6 +37,8 @@ export const RecentSearchItem = ({ item }) => {
           weight="bold"
           className="text-gray-700 me-4"
         />
+      ) : item.type === 'user' ? (
+        <UserIcon size={22} weight="bold" className="text-gray-700 me-4" />
       ) : (
         <SquaresFourIcon
           size={22}

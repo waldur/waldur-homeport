@@ -63,10 +63,85 @@ export const getAbbreviation = (text: string, length = 0) => {
   return length > 0 ? abbr.substring(0, length) : abbr;
 };
 
-export const formatPhoneNumber = (phoneNumber: PhoneNumber) => {
+/**
+ * Formats a phone number for human-readable display following E.123 international notation.
+ * E.123 is the ITU-T recommendation for formatting telephone numbers.
+ *
+ * Examples:
+ * - { country_code: '+1', national_number: '2025551234' } => '+1 202 555 1234'
+ * - { country_code: '44', national_number: '7911123456' } => '+44 791 112 3456'
+ * - '+12025551234' => '+1 202 555 1234'
+ */
+export const formatPhoneNumber = (phoneNumber: PhoneNumber): string | null => {
   if (!phoneNumber) return null;
-  if (typeof phoneNumber === 'string') return phoneNumber;
-  return phoneNumber.country_code + '-' + phoneNumber.national_number;
+
+  let countryCode: string;
+  let nationalNumber: string;
+
+  if (typeof phoneNumber === 'string') {
+    // Try to parse string format - check if it starts with + or digits
+    const cleaned = phoneNumber.replace(/[\s\-().]/g, '');
+    if (!cleaned) return null;
+
+    // If it starts with +, extract country code (assume 1-3 digits after +)
+    if (cleaned.startsWith('+')) {
+      // Simple heuristic: +1 for NANP, +XX or +XXX for others
+      if (cleaned.startsWith('+1') && cleaned.length > 2) {
+        countryCode = '+1';
+        nationalNumber = cleaned.slice(2);
+      } else {
+        // Try 2-digit country code first, then 3-digit
+        countryCode = cleaned.slice(0, 3);
+        nationalNumber = cleaned.slice(3);
+        if (nationalNumber.length < 6) {
+          countryCode = cleaned.slice(0, 4);
+          nationalNumber = cleaned.slice(4);
+        }
+      }
+    } else {
+      // No country code, just format the number
+      nationalNumber = cleaned;
+      countryCode = '';
+    }
+  } else {
+    countryCode = phoneNumber.country_code || '';
+    nationalNumber = phoneNumber.national_number || '';
+
+    // Ensure country code starts with +
+    if (countryCode && !countryCode.startsWith('+')) {
+      countryCode = '+' + countryCode;
+    }
+  }
+
+  // Clean national number of any non-digits
+  nationalNumber = nationalNumber.replace(/\D/g, '');
+
+  if (!nationalNumber) return countryCode || null;
+
+  // Format national number in groups of 3-4 digits for readability
+  // Common pattern: XXX XXX XXXX for 10 digits, or groups of 3 for others
+  const formatNationalNumber = (num: string): string => {
+    const len = num.length;
+    if (len <= 4) return num;
+    if (len <= 7) return `${num.slice(0, 3)} ${num.slice(3)}`;
+    if (len <= 10)
+      return `${num.slice(0, 3)} ${num.slice(3, 6)} ${num.slice(6)}`;
+    // For longer numbers, group in threes from the end
+    const parts: string[] = [];
+    let i = len;
+    while (i > 0) {
+      const start = Math.max(0, i - 3);
+      parts.unshift(num.slice(start, i));
+      i = start;
+    }
+    return parts.join(' ');
+  };
+
+  const formattedNational = formatNationalNumber(nationalNumber);
+
+  return countryCode
+    ? `${countryCode} ${formattedNational}`
+    : formattedNational;
 };
 
 export const listToDict = (key, value) => (list) => {

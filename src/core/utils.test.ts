@@ -2,6 +2,7 @@ import { describe, it, expect } from 'vitest';
 
 import {
   formatFilesize,
+  formatPhoneNumber,
   formatSnakeCase,
   listToDict,
   getUUID,
@@ -78,5 +79,112 @@ describe('truncate', () => {
     expect(truncate('Academy of social and political sciences')).toEqual(
       'Academy of soc...ical sciences',
     );
+  });
+});
+
+describe('formatPhoneNumber', () => {
+  describe('with object input', () => {
+    it('formats phone number with country code', () => {
+      expect(
+        formatPhoneNumber({
+          country_code: '+1',
+          national_number: '2025551234',
+        }),
+      ).toBe('+1 202 555 1234');
+    });
+
+    it('adds + prefix to country code if missing', () => {
+      expect(
+        formatPhoneNumber({
+          country_code: '44',
+          national_number: '7911123456',
+        }),
+      ).toBe('+44 791 112 3456');
+    });
+
+    it('formats phone number without country code', () => {
+      expect(
+        formatPhoneNumber({
+          country_code: '',
+          national_number: '5551234567',
+        }),
+      ).toBe('555 123 4567');
+    });
+
+    it('handles short national numbers', () => {
+      expect(
+        formatPhoneNumber({
+          country_code: '+1',
+          national_number: '5551234',
+        }),
+      ).toBe('+1 555 1234');
+    });
+
+    it('handles very short numbers', () => {
+      expect(
+        formatPhoneNumber({
+          country_code: '+1',
+          national_number: '1234',
+        }),
+      ).toBe('+1 1234');
+    });
+
+    it('handles long international numbers', () => {
+      expect(
+        formatPhoneNumber({
+          country_code: '+49',
+          national_number: '15123456789',
+        }),
+      ).toBe('+49 15 123 456 789');
+    });
+  });
+
+  describe('with string input', () => {
+    it('formats string with country code', () => {
+      expect(formatPhoneNumber('+12025551234')).toBe('+1 202 555 1234');
+    });
+
+    it('formats string without country code', () => {
+      expect(formatPhoneNumber('5551234567')).toBe('555 123 4567');
+    });
+
+    it('cleans up existing formatting', () => {
+      expect(formatPhoneNumber('+1 (202) 555-1234')).toBe('+1 202 555 1234');
+    });
+
+    it('handles string with dots as separators', () => {
+      expect(formatPhoneNumber('+1.202.555.1234')).toBe('+1 202 555 1234');
+    });
+
+    it('formats non-US international numbers', () => {
+      expect(formatPhoneNumber('+447911123456')).toBe('+44 791 112 3456');
+    });
+  });
+
+  describe('edge cases', () => {
+    it('returns null for null input', () => {
+      expect(formatPhoneNumber(null)).toBeNull();
+    });
+
+    it('returns null for undefined input', () => {
+      expect(formatPhoneNumber(undefined)).toBeNull();
+    });
+
+    it('returns null for empty string', () => {
+      expect(formatPhoneNumber('')).toBeNull();
+    });
+
+    it('returns null for whitespace only', () => {
+      expect(formatPhoneNumber('   ')).toBeNull();
+    });
+
+    it('returns country code only if national number is empty', () => {
+      expect(
+        formatPhoneNumber({
+          country_code: '+1',
+          national_number: '',
+        }),
+      ).toBe('+1');
+    });
   });
 });

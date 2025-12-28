@@ -1,9 +1,8 @@
 import React from 'react';
 import { CustomerDetails as CustomerDetailsType } from 'waldur-js-client';
 
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-
-import { formatPhone } from './utils';
 
 interface CustomerDetailsProps {
   customer: CustomerDetailsType;
@@ -28,7 +27,7 @@ export const CustomerDetails: React.FC<CustomerDetailsProps> = ({
     {customer.phone_number && (
       <div>
         <abbr title={translate('Phone')}>P:</abbr>{' '}
-        {formatPhone(customer.phone_number)}
+        {formatPhoneNumber(customer.phone_number)}
       </div>
     )}
 

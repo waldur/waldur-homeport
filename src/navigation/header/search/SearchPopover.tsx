@@ -1,10 +1,11 @@
-import { PlusIcon } from '@phosphor-icons/react';
+import { LockIcon, PlusIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { groupBy, isEmpty } from 'lodash-es';
-import { Fragment, useCallback, useEffect, useRef } from 'react';
+import { Fragment, useCallback } from 'react';
 import { Button, Col, Nav, Row, Tab } from 'react-bootstrap';
 
 import { Badge } from '@waldur/core/Badge';
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
@@ -14,13 +15,17 @@ import { RecentSearchItem } from './RecentSearchItem';
 import { useRecentSearch } from './RecentSearchService';
 import { SearchInput } from './SearchInput';
 import { SearchItem } from './SearchItem';
-import { SearchResult } from './useSearch';
+import { SearchResult, UsersSearchResult } from './useSearch';
 
 interface SearchPopoverProps {
   result: SearchResult;
+  usersResult: UsersSearchResult;
   query: string;
   show: boolean;
   setQuery;
+  activeTab: string;
+  setActiveTab: (tab: string) => void;
+  isStaffOrSupportUser: boolean;
   close(): void;
 }
 
@@ -112,6 +117,7 @@ const AllResultsTabContent = ({
                     to="organization.dashboard"
                     params={{ uuid: item.uuid }}
                     title={item.name}
+                    subtitle={item.abbreviation}
                     image={item.image}
                     isFavorite={isFavorite}
                     addFavoritePage={addFavoritePage}
@@ -216,6 +222,7 @@ const OrganizationsTabContent = ({
               to="organization.dashboard"
               params={{ uuid: item.uuid }}
               title={item.name}
+              subtitle={item.abbreviation}
               image={item.image}
               isFavorite={isFavorite}
               addFavoritePage={addFavoritePage}
@@ -338,11 +345,98 @@ const ResourcesTabContent = ({
   );
 };
 
+const formatUserSubtitle = (user) => {
+  const parts: string[] = [];
+
+  // Status first
+  parts.push(
+    user.is_active ? `✓ ${translate('Active')}` : `✗ ${translate('Inactive')}`,
+  );
+
+  if (user.email) parts.push(user.email);
+  const formattedPhone = formatPhoneNumber(user.phone_number);
+  if (formattedPhone) parts.push(formattedPhone);
+  if (user.organization) parts.push(user.organization);
+
+  const orgRoles = user.permissions?.filter((p) => p.scope_type === 'customer');
+  const projectRoles = user.permissions?.filter(
+    (p) => p.scope_type === 'project',
+  );
+
+  if (orgRoles?.length > 0) {
+    parts.push(
+      translate('{count} org role(s)', { count: orgRoles.length.toString() }),
+    );
+  }
+  if (projectRoles?.length > 0) {
+    parts.push(
+      translate('{count} project role(s)', {
+        count: projectRoles.length.toString(),
+      }),
+    );
+  }
+
+  return parts.join(' • ');
+};
+
+const UsersTabContent = ({
+  usersResult,
+  clearSearch,
+  addRecentSearch,
+  isFavorite,
+  addFavoritePage,
+  removeFavorite,
+  close,
+}: {
+  usersResult: UsersSearchResult;
+  clearSearch(): void;
+  addRecentSearch(item, type): void;
+  isFavorite: TabContentProps['isFavorite'];
+  addFavoritePage: TabContentProps['addFavoritePage'];
+  removeFavorite: TabContentProps['removeFavorite'];
+  close(): void;
+}) => {
+  return (
+    <>
+      {usersResult?.data?.usersCount ? (
+        <div className="py-5">
+          {usersResult.data.users.map((user) => (
+            <SearchItem
+              key={user.uuid}
+              to="support-user-manage"
+              params={{ user_uuid: user.uuid }}
+              title={user.full_name || user.email}
+              subtitle={formatUserSubtitle(user)}
+              isFavorite={isFavorite}
+              addFavoritePage={addFavoritePage}
+              removeFavorite={removeFavorite}
+              onClick={(item) => {
+                addRecentSearch(item, 'user');
+                close();
+              }}
+            />
+          ))}
+        </div>
+      ) : null}
+      <NoResult
+        isVisible={
+          !usersResult?.data?.usersCount && usersResult?.status !== 'pending'
+        }
+        callback={clearSearch}
+      />
+    </>
+  );
+};
+
 export const SearchPopover = ({
   result,
+  usersResult,
   query,
   show,
   setQuery,
+  activeTab,
+  setActiveTab,
+  isStaffOrSupportUser,
   close,
 }: SearchPopoverProps) => {
   const {
@@ -353,12 +447,6 @@ export const SearchPopover = ({
     removeFavorite,
     isFavorite,
   } = useFavoritePages();
-  const refSearch = useRef<HTMLInputElement>();
-  useEffect(() => {
-    if (refSearch.current) {
-      refSearch.current.focus();
-    }
-  }, []);
 
   const clearSearch = useCallback(() => {
     setQuery('');
@@ -374,9 +462,13 @@ export const SearchPopover = ({
         show={show}
         setQuery={setQuery}
         className="px-5 mb-6"
+        autoFocus
       />
 
-      <Tab.Container defaultActiveKey="all">
+      <Tab.Container
+        activeKey={activeTab}
+        onSelect={(key) => setActiveTab(key)}
+      >
         <div className="overflow-auto">
           <Nav variant="tabs" className="nav-line-tabs flex-nowrap">
             <Nav.Item className="text-nowrap ms-5">
@@ -409,7 +501,11 @@ export const SearchPopover = ({
                 )}
               </Nav.Link>
             </Nav.Item>
-            <Nav.Item className="text-nowrap me-5">
+            <Nav.Item
+              className={
+                isStaffOrSupportUser ? 'text-nowrap' : 'text-nowrap me-5'
+              }
+            >
               <Nav.Link eventKey="resources">
                 {translate('Resources')}
                 {Boolean(result.data) && (
@@ -419,6 +515,19 @@ export const SearchPopover = ({
                 )}
               </Nav.Link>
             </Nav.Item>
+            {isStaffOrSupportUser && (
+              <Nav.Item className="text-nowrap me-5">
+                <Nav.Link eventKey="users">
+                  <LockIcon size={14} className="me-1" weight="bold" />
+                  {translate('Users')}
+                  {Boolean(usersResult?.data) && (
+                    <Badge variant="default" pill outline className="ms-2">
+                      {usersResult.data.usersCount}
+                    </Badge>
+                  )}
+                </Nav.Link>
+              </Nav.Item>
+            )}
           </Nav>
         </div>
         <Tab.Content className="overflow-auto min-h-200px">
@@ -470,6 +579,19 @@ export const SearchPopover = ({
               close={close}
             />
           </Tab.Pane>
+          {isStaffOrSupportUser && (
+            <Tab.Pane eventKey="users">
+              <UsersTabContent
+                usersResult={usersResult}
+                clearSearch={clearSearch}
+                addRecentSearch={addRecentSearch}
+                isFavorite={isFavorite}
+                addFavoritePage={addFavoritePage}
+                removeFavorite={removeFavorite}
+                close={close}
+              />
+            </Tab.Pane>
+          )}
         </Tab.Content>
       </Tab.Container>
     </div>

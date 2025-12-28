@@ -44,7 +44,6 @@ export const SearchItem = (props: SearchItemProps) => {
         } else e.stopPropagation();
         syncResourceFilters(getResourceFilterFromSearchItem(props));
       }}
-      aria-hidden={true}
     >
       <ItemImage
         item={{ image: props.image, name: props.title }}

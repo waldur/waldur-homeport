@@ -17,14 +17,9 @@ export const WarnCard: FC<WarnCardProps> = ({
   className,
 }) => (
   <Card className={classNames('card-bordered rounded-3', className)}>
-    <Card.Body className="d-flex px-2">
+    <Card.Body className="d-flex align-items-start gap-3 p-4">
       {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      <FeaturedIcon
-        IconComponent={WarningCircleIcon}
-        variant="warning"
-        className="me-2"
-        style={{ marginTop: -9 }}
-      />
+      <FeaturedIcon IconComponent={WarningCircleIcon} variant="warning" />
 
       <div>
         <div className="mb-1 fw-bold">{title}</div>

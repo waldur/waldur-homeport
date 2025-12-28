@@ -1,3 +1,4 @@
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 export const CustomerContactColumn = ({ row }) => (
@@ -6,7 +7,11 @@ export const CustomerContactColumn = ({ row }) => (
       <p className="mb-0">{translate('Email: {email}', row)}</p>
     ) : null}
     {row.phone_number ? (
-      <p className="mb-0">{translate('Phone: {phone_number}', row)}</p>
+      <p className="mb-0">
+        {translate('Phone: {phone_number}', {
+          phone_number: formatPhoneNumber(row.phone_number),
+        })}
+      </p>
     ) : null}
   </>
 );
