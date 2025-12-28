@@ -1,4 +1,5 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
+import { useEffect } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
 import { SearchInput } from './SearchInput';
@@ -12,7 +13,36 @@ interface SearchToggleProps {
 }
 
 export const SearchToggle = ({ compact }: SearchToggleProps) => {
-  const { query, setQuery, result, show, setShow } = useSearch();
+  const {
+    query,
+    setQuery,
+    result,
+    usersResult,
+    show,
+    setShow,
+    activeTab,
+    setActiveTab,
+    isStaffOrSupportUser,
+  } = useSearch();
+
+  // Keyboard shortcuts: Cmd/Ctrl+K to open, Escape to close
+  useEffect(() => {
+    const handleKeyDown = (e: KeyboardEvent) => {
+      // Cmd+K (Mac) or Ctrl+K (Windows/Linux) to open search
+      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
+        e.preventDefault();
+        setShow(true);
+      }
+      // Escape to close search
+      if (e.key === 'Escape' && show) {
+        e.preventDefault();
+        setShow(false);
+      }
+    };
+
+    document.addEventListener('keydown', handleKeyDown);
+    return () => document.removeEventListener('keydown', handleKeyDown);
+  }, [show, setShow]);
 
   return (
     <OverlayTrigger
@@ -23,9 +53,13 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
         <Popover id="GlobalSearch">
           <SearchPopover
             result={result}
+            usersResult={usersResult}
             query={query}
             show={show}
             setQuery={setQuery}
+            activeTab={activeTab}
+            setActiveTab={setActiveTab}
+            isStaffOrSupportUser={isStaffOrSupportUser}
             close={() => setShow(false)}
           />
         </Popover>
@@ -52,6 +86,7 @@ export const SearchToggle = ({ compact }: SearchToggleProps) => {
               setQuery={setQuery}
               show={show}
               className="d-none d-lg-block"
+              showShortcut={!show}
             />
             <button className="btn-nav-item d-lg-none" type="button">
               <span className="svg-icon svg-icon-2">

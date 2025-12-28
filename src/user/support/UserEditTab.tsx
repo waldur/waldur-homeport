@@ -20,7 +20,10 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
   const currentUser = useSelector(getUser);
 
   const isSelf = currentUser.uuid === user.uuid;
-  const isDisabled = !currentUser.agreement_date;
+  // Disable editing if viewing own profile and haven't accepted ToS
+  const isDisabled = isSelf && !currentUser.agreement_date;
+  // Show warning if the viewed user hasn't accepted ToS
+  const showTosWarning = !user.agreement_date;
 
   return (
     <>
@@ -33,9 +36,11 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
         }
         className="card-bordered mb-7"
       >
-        {!currentUser.agreement_date && <AcceptTosWarning />}
+        {showTosWarning && (
+          <AcceptTosWarning isSelf={isSelf} userName={user.full_name} />
+        )}
         <FormTable>
-          {currentUser.uuid === user.uuid && (
+          {isSelf && !user.agreement_date && (
             <FormTable.Item value={<TermsOfServiceCheckbox user={user} />} />
           )}
           <UserEditAvatarFormItem user={user} disabled={isDisabled} />

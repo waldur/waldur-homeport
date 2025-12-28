@@ -9,6 +9,7 @@ import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
+import { formatPhoneNumber } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -32,7 +33,7 @@ const renderFieldOrDash = (field) => {
 };
 
 const PhoneNumberField = ({ row }: { row: User }) => (
-  <>{renderFieldOrDash(row.phone_number)}</>
+  <>{renderFieldOrDash(formatPhoneNumber(row.phone_number))}</>
 );
 
 const EmailField = ({ row }: { row: User }) => (
