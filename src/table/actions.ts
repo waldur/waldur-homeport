@@ -30,14 +30,12 @@ export const SWAP_COLUMNS = 'waldur/table/SWAP_COLUMNS';
 export const fetchListStart = (
   table: string,
   extraFilter?: Record<string, any>,
-  pullInterval?: number | (() => number),
   force?: boolean,
 ) => ({
   type: FETCH_LIST_START,
   payload: {
     table,
     extraFilter,
-    pullInterval,
     force,
   },
 });
@@ -45,7 +43,7 @@ export const fetchListStart = (
 export const fetchListDone = (
   table: string,
   entities: object,
-  order: number[],
+  order: string[],
   resultCount: number,
 ) => ({
   type: FETCH_LIST_DONE,

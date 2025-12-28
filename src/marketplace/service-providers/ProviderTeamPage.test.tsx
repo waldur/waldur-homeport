@@ -1,9 +1,29 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
 import { ProviderTeamPage } from './ProviderTeamPage';
+
+const createTestQueryClient = () =>
+  new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+
+// Mock useTableQuery to not make actual API calls
+vi.mock('@waldur/table/useTableQuery', () => ({
+  useTableQuery: () => ({
+    data: undefined,
+    isLoading: false,
+    isFetching: false,
+    error: null,
+    refetch: vi.fn(),
+  }),
+}));
 
 vi.mock('@waldur/core/config', () => ({
   ENV: {
@@ -75,16 +95,16 @@ const store = mockStore({
   form: {}, // For redux-form filters
 });
 
-vi.mock('@waldur/table/useTableLoader', () => ({
-  useTableLoader: () => false,
-}));
-
-const renderComponent = () =>
-  render(
-    <Provider store={store}>
-      <ProviderTeamPage />
-    </Provider>,
+const renderComponent = () => {
+  const queryClient = createTestQueryClient();
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <ProviderTeamPage />
+      </Provider>
+    </QueryClientProvider>,
   );
+};
 
 describe('ProviderTeamPage', () => {
   it('renders team members table and actions', async () => {

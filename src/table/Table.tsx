@@ -14,7 +14,6 @@ import { createPortal } from 'react-dom';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { titleCase } from '@waldur/core/utils';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { ErrorView } from '@waldur/ErrorView';
@@ -36,7 +35,6 @@ import { TableQuery } from './TableQuery';
 import { TableRefreshButton } from './TableRefreshButton';
 import { TableTabs } from './TableTabs';
 import { PinnedColumns, TableProps } from './types';
-import { useTableLoader } from './useTableLoader';
 
 import './Table.scss';
 
@@ -701,9 +699,5 @@ function Table<RowType = any>(props: TableProps<RowType>) {
 }
 
 export default function TableLoader<RowType = any>(props: TableProps<RowType>) {
-  const loading = useTableLoader();
-  if (loading) {
-    return <LoadingSpinner />;
-  }
   return <Table {...props} />;
 }

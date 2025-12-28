@@ -1,7 +1,7 @@
 import { RequestResult } from 'waldur-js-client';
 
-import { queryClient } from '@waldur/Application';
 import { fetchResultCount, parseNextPage } from '@waldur/core/api';
+import { queryClient } from '@waldur/core/queryClient';
 
 import { Fetcher, FetcherOptions, TableRequest } from './types';
 

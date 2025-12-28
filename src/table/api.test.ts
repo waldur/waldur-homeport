@@ -1,7 +1,7 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock dependencies
-vi.mock('@waldur/Application', () => ({
+vi.mock('@waldur/core/queryClient', () => ({
   queryClient: {
     fetchQuery: vi.fn(),
   },
@@ -12,8 +12,8 @@ vi.mock('@waldur/core/api', () => ({
   parseNextPage: vi.fn(),
 }));
 
-import { queryClient } from '@waldur/Application';
 import { fetchResultCount, parseNextPage } from '@waldur/core/api';
+import { queryClient } from '@waldur/core/queryClient';
 
 import { processApiResponse, createFetcher, fetchAll } from './api';
 

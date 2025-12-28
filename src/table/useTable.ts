@@ -1,6 +1,7 @@
 import { useCallback, useEffect, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
+import { queryClient } from '@waldur/core/queryClient';
 import { openDrawerDialog, renderDrawerDialog } from '@waldur/drawer/actions';
 import { translate } from '@waldur/i18n';
 import { getTitle } from '@waldur/navigation/title';
@@ -9,6 +10,8 @@ import { type RootState } from '@waldur/store/reducers';
 import { selectTableRows, getTableState } from '@waldur/table/selectors';
 
 import * as actions from './actions';
+import { INITIAL_STATE } from './constants';
+import { tableExtraFilters } from './middleware';
 import { registerTable, unregisterTable } from './registry';
 import { TableFilterActions } from './TableFilterActions';
 import { TableFilterContainer } from './TableFilterContainer';
@@ -19,6 +22,7 @@ import {
   Sorting,
   TableOptionsType,
 } from './types';
+import { useTableQuery } from './useTableQuery';
 
 const getDefaultTitle = (state: RootState) => {
   const pageTitle = getTitle(state);
@@ -53,19 +57,88 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
 
   const dispatch = useDispatch();
 
-  const fetch = useCallback(
-    (force = false) => {
+  // Get Redux state for request building
+  const tableState = useSelector(getTableState(table));
+  const {
+    pagination = INITIAL_STATE.pagination,
+    query = '',
+    sorting = INITIAL_STATE.sorting,
+    activeColumns = {},
+    filtersStorage = [],
+    applyFilters = false,
+  } = tableState || {};
+
+  // Merge filter from options with extraFilter from middleware (for external dispatches)
+  const filter = tableExtraFilters[table] || options.filter;
+
+  // Track firstFetch for onApplyFilter callback
+  const firstFetchRef = useRef(true);
+
+  // Use React Query for fetching
+  const { data, isLoading, isFetching, error, refetch } = useTableQuery({
+    table,
+    fetchData: options.fetchData,
+    filter,
+    staleTime: options.staleTime,
+    queryField: options.queryField,
+    mandatoryFields: options.mandatoryFields,
+    onFetch: options.onFetch,
+    currentPage: pagination.currentPage,
+    pageSize: pagination.pageSize,
+    query,
+    sorting,
+    activeColumns,
+  });
+
+  // Sync fetched data to Redux for compatibility
+  useEffect(() => {
+    if (data) {
+      // Handle "Invalid page" by resetting pagination to page 1
+      if (data.invalidPage) {
+        dispatch(actions.resetPagination(table));
+        return;
+      }
       dispatch(
-        actions.fetchListStart(
+        actions.fetchListDone(
           table,
-          options.filter,
-          options.pullInterval,
-          force,
+          data.entities,
+          data.order,
+          data.resultCount,
         ),
       );
+      // Reset sorting loading state if it was active
+      if (sorting.loading) {
+        dispatch(actions.sortListDone(table));
+      }
+      firstFetchRef.current = false;
+    }
+  }, [data, dispatch, table, sorting.loading]);
+
+  // Sync error to Redux
+  useEffect(() => {
+    if (error) {
+      dispatch(actions.fetchListError(table, error));
+    }
+  }, [error, dispatch, table]);
+
+  // Handle onApplyFilter callback
+  useEffect(() => {
+    if (applyFilters && options.onApplyFilter) {
+      options.onApplyFilter(filtersStorage, firstFetchRef.current);
+    }
+  }, [applyFilters, filtersStorage, options.onApplyFilter]);
+
+  // fetch() triggers React Query refetch
+  const fetch = useCallback(
+    (force = false) => {
+      if (force) {
+        queryClient.invalidateQueries({ queryKey: ['table', table] });
+      }
+      refetch();
     },
-    [dispatch, table, options.filter, options.pullInterval],
+    [refetch, table],
   );
+
   const gotoPage = useCallback(
     (page) => dispatch(actions.fetchListGotoPage(table, page)),
     [dispatch, table],
@@ -173,13 +246,13 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     [dispatch, table],
   );
 
-  const tableState = useSelector(getTableState(table));
+  const alterTitle = useSelector(getDefaultTitle);
 
+  // Get rows from Redux (synced from React Query via useEffect above)
+  // This maintains backward compatibility with tests that populate Redux directly
   const rows = useSelector(
     (state: RootState) => selectTableRows(state, table) as RowType[],
   );
-
-  const alterTitle = useSelector(getDefaultTitle);
 
   return {
     fetch,
@@ -201,7 +274,15 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     toggleColumn,
     initColumnPositions,
     swapColumns,
+    // Spread tableState for UI state (mode, toggled, selectedRows, etc.)
     ...tableState,
+    // Override with React Query state
+    loading: isLoading || isFetching,
+    error,
+    pagination: {
+      ...pagination,
+      resultCount: data?.resultCount ?? pagination.resultCount,
+    },
     table,
     rows,
     alterTitle,

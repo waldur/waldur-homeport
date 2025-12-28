@@ -59,7 +59,6 @@ export interface TableOptionsType<RowType = any> {
   exportKeys?: string[];
   exportData?: (rows: RowType[], props: any) => string[][];
   exportRow?: (row: RowType, props: any) => string[];
-  pullInterval?: number | (() => number);
   filter?;
   mandatoryFields?: string[];
 }
@@ -127,7 +126,7 @@ export interface TableState {
   toggled?: Record<string, boolean>;
   selectedRows?: any[];
   firstFetch?: boolean;
-  activeColumns: Record<string, boolean>;
+  activeColumns: Record<string, string[] | false>;
   columnPositions: string[];
 }
 

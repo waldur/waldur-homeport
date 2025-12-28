@@ -6,6 +6,7 @@ import { describe, it, expect, vi, beforeEach, afterEach } from 'vitest';
 
 import { reducer as tableReducer } from './store';
 import { useTable } from './useTable';
+import { useTableQuery } from './useTableQuery';
 
 // Mock the drawer actions
 vi.mock('@waldur/drawer/actions', () => ({
@@ -28,6 +29,25 @@ vi.mock('@waldur/router', () => ({
 // Mock navigation title
 vi.mock('@waldur/navigation/title', () => ({
   getTitle: () => 'Test Page',
+  effects: function* () {},
+}));
+
+// Mock queryClient
+vi.mock('@waldur/core/queryClient', () => ({
+  queryClient: {
+    invalidateQueries: vi.fn(),
+  },
+}));
+
+// Mock useTableQuery
+vi.mock('./useTableQuery', () => ({
+  useTableQuery: vi.fn(() => ({
+    data: undefined,
+    isLoading: false,
+    isFetching: false,
+    error: null,
+    refetch: vi.fn(),
+  })),
 }));
 
 const createTestStore = (initialState = {}) => {
@@ -496,6 +516,107 @@ describe('useTable', () => {
 
       expect(result1.current.pagination.currentPage).toBe(5);
       expect(result2.current.pagination.currentPage).toBe(10);
+    });
+  });
+
+  describe('error handling', () => {
+    it('resets pagination to page 1 when "Invalid page" response is received', () => {
+      const store = createTestStore();
+      const wrapper = createWrapper(store);
+
+      // Start with no data
+      vi.mocked(useTableQuery).mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        isFetching: false,
+        error: null,
+        refetch: vi.fn(),
+      });
+
+      const { result, rerender } = renderHook(
+        () =>
+          useTable({
+            table: 'TestTable',
+            fetchData: mockFetchData,
+          }),
+        { wrapper },
+      );
+
+      // Go to page 5
+      act(() => {
+        result.current.gotoPage(5);
+      });
+      expect(result.current.pagination.currentPage).toBe(5);
+
+      // Simulate "Invalid page" response (handled in useTableQuery, returns invalidPage flag)
+      vi.mocked(useTableQuery).mockReturnValue({
+        data: {
+          entities: {},
+          order: [],
+          resultCount: 0,
+          rows: [],
+          invalidPage: true,
+        },
+        isLoading: false,
+        isFetching: false,
+        error: null,
+        refetch: vi.fn(),
+      });
+
+      // Rerender to trigger the data handling effect
+      rerender();
+
+      // Pagination should be reset to page 1
+      expect(result.current.pagination.currentPage).toBe(1);
+    });
+
+    it('does not reset pagination for normal data responses', () => {
+      const store = createTestStore();
+      const wrapper = createWrapper(store);
+
+      // Start with no data
+      vi.mocked(useTableQuery).mockReturnValue({
+        data: undefined,
+        isLoading: false,
+        isFetching: false,
+        error: null,
+        refetch: vi.fn(),
+      });
+
+      const { result, rerender } = renderHook(
+        () =>
+          useTable({
+            table: 'TestTable',
+            fetchData: mockFetchData,
+          }),
+        { wrapper },
+      );
+
+      // Go to page 5
+      act(() => {
+        result.current.gotoPage(5);
+      });
+      expect(result.current.pagination.currentPage).toBe(5);
+
+      // Simulate normal data response (no invalidPage flag)
+      vi.mocked(useTableQuery).mockReturnValue({
+        data: {
+          entities: { '1': { uuid: '1' } },
+          order: ['1'],
+          resultCount: 1,
+          rows: [{ uuid: '1' }],
+        },
+        isLoading: false,
+        isFetching: false,
+        error: null,
+        refetch: vi.fn(),
+      });
+
+      // Rerender to trigger the data handling effect
+      rerender();
+
+      // Pagination should NOT be reset for normal responses
+      expect(result.current.pagination.currentPage).toBe(5);
     });
   });
 });
