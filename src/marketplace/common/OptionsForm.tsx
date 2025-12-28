@@ -196,6 +196,7 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
         params = {
           hideLabel: true,
           hideHelp: true,
+          hideError: true, // Errors shown in Progress block
           field: option,
           validate: validateK8sConfig,
         };
@@ -208,6 +209,7 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
         params = {
           hideLabel: true,
           hideHelp: true,
+          hideError: true, // Errors shown in Progress block
           field: option,
           validate: validateK8sConfig,
         };
@@ -305,7 +307,7 @@ export const OptionsForm = ({
               ? { label: option.label, help_text: option.help_text }
               : {})}
           />
-          <FormFieldError name={`attributes.${key}`} />
+          {!params.hideError && <FormFieldError name={`attributes.${key}`} />}
         </FormGroup>
       );
     })

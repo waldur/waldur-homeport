@@ -25,6 +25,7 @@ export interface FormGroupProps extends FormField {
   quickAction?: ReactNode;
   tooltipEnd?: boolean;
   tooltipProps?: Partial<TipProps>;
+  hideError?: boolean;
 }
 
 export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
@@ -40,6 +41,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
     tooltipEnd,
     tooltipProps,
     hideLabel,
+    hideError,
     meta,
     children,
     actions,
@@ -118,7 +120,7 @@ export const FormGroup: FC<PropsWithChildren<FormGroupProps>> = (props) => {
       )}
       {cloneElement(children as any, newProps)}
       {description && <Form.Text>{description}</Form.Text>}
-      {meta.touched && <FieldError error={meta.error} />}
+      {!hideError && meta.touched && <FieldError error={meta.error} />}
     </div>
   );
 
