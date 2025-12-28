@@ -1,6 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Button, Alert } from 'react-bootstrap';
+import { Alert, Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
@@ -26,7 +26,6 @@ import {
   createDefaultClusterConfig,
   calculateDatacenterResources,
   calculateTotalClusterResources,
-  validateMultiDatacenterConfiguration,
   getControllerNodesCount,
   getLoadBalancerNodesCount,
   getDefaultDatacenterDiskConfig,
@@ -403,7 +402,6 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
     clusterConfig,
     defaultConfigs,
   );
-  const validationErrors = validateMultiDatacenterConfiguration(clusterConfig);
 
   return (
     <div className="multi-datacenter-k8s-configuration">
@@ -472,18 +470,6 @@ export const MultiDatacenterK8sConfigurationForm: React.FC<
           })
         }
       />
-
-      {/* Validation Errors */}
-      {validationErrors.length > 0 && (
-        <Alert variant="danger">
-          <h6>{translate('Configuration Issues:')}</h6>
-          <ul className="mb-0">
-            {validationErrors.map((error, index) => (
-              <li key={index}>{error}</li>
-            ))}
-          </ul>
-        </Alert>
-      )}
     </div>
   );
 };

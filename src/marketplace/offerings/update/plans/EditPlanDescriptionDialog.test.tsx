@@ -223,7 +223,9 @@ describe('EditPlanDescriptionDialog', () => {
     await user.clear(nameInput);
 
     const saveButton = screen.getByText('Save');
-    expect(saveButton).toBeDisabled();
+    await waitFor(() => {
+      expect(saveButton).toBeDisabled();
+    });
   });
 
   it('shows loading state during submission', async () => {
