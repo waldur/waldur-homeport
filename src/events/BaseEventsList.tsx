@@ -27,7 +27,6 @@ export const BaseEventsList: FunctionComponent<Partial<TableProps>> = ({
       filter,
       fetchData: createFetcher(eventsList),
       queryField: 'message',
-      pullInterval: 30 * 1000,
     }),
     [table, filter],
   );

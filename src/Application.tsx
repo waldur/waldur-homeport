@@ -1,9 +1,5 @@
 import { ErrorBoundary } from '@sentry/react';
-import {
-  QueryCache,
-  QueryClient,
-  QueryClientProvider,
-} from '@tanstack/react-query';
+import { QueryClientProvider } from '@tanstack/react-query';
 import { UIRouter, UIView } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
@@ -11,6 +7,7 @@ import { useAsync } from 'react-use';
 
 import { ThreadProvider } from '@waldur/ai-assistant/logic/ThreadProvider';
 import { ThreadRuntimeProvider } from '@waldur/ai-assistant/logic/ThreadRuntimeProvider';
+import { queryClient } from '@waldur/core/queryClient';
 import { DrawerRoot } from '@waldur/drawer/DrawerRoot';
 import { ModalRoot } from '@waldur/modal/ModalRoot';
 import store from '@waldur/store/store';
@@ -25,16 +22,6 @@ import { NotificationContainer } from './NotificationContainer';
 import { router } from './router';
 import { states } from './states';
 import { ThemeProvider } from './theme/ThemeProvider';
-
-export const queryClient = new QueryClient({
-  queryCache: new QueryCache({
-    onError: (error: any) => {
-      if (error?.response?.status == 404) {
-        router.stateService.go('errorPage.notFound');
-      }
-    },
-  }),
-});
 
 states.forEach((state) => router.stateRegistry.register(state));
 

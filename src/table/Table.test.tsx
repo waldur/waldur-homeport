@@ -5,10 +5,6 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import Table from './Table';
 
-vi.mock('@waldur/table/useTableLoader', () => ({
-  useTableLoader: () => false,
-}));
-
 const TableWrapper = (component) => {
   const store = createStore(() => ({}));
 

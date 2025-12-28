@@ -2,12 +2,14 @@ import { applyMiddleware, combineReducers, createStore } from 'redux';
 import createSagaMiddleware from 'redux-saga';
 import thunk from 'redux-thunk';
 
+import { tableMiddleware } from '@waldur/table/middleware';
+
 import sagas from './effects';
 import { staticReducers } from './reducers';
 
 const sagaMiddleware = createSagaMiddleware();
 
-const middlewares = [sagaMiddleware, thunk];
+const middlewares = [sagaMiddleware, thunk, tableMiddleware];
 
 const store: any = createStore(
   combineReducers(staticReducers),
