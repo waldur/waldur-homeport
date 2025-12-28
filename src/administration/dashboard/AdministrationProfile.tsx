@@ -35,12 +35,14 @@ export const AdministrationProfile = ({
       // Health check is still loading
       return {
         label: translate('Checking...'),
-        className: 'bg-warning',
+        className: 'border border-warning text-warning',
       };
     }
     return {
       label: healthy ? translate('Healthy') : translate('Error'),
-      className: healthy ? 'bg-success' : 'bg-danger',
+      className: healthy
+        ? 'border border-success text-success'
+        : 'border border-danger text-danger',
     };
   };
 
@@ -100,7 +102,7 @@ export const AdministrationProfile = ({
               logoTopLabel={healthStatus.label}
               logoBottomLabel="Operator"
               logoTopClass={healthStatus.className}
-              logoBottomClass="bg-secondary"
+              logoBottomClass="bg-gray-400 text-white"
             />
           </Col>
           <Col>
