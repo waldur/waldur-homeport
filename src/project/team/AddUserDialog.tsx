@@ -23,6 +23,7 @@ import { SubmitButton } from '@waldur/form';
 import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+import { RestrictionsInfoCard } from '@waldur/invitations/actions/RestrictionsInfoCard';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
@@ -265,6 +266,12 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             iconNode={<UserPlusIcon weight="bold" />}
             iconColor="success"
           >
+            <RestrictionsInfoCard
+              customer={currentCustomer}
+              project={
+                level === 'project' ? currentProject : values.project || null
+              }
+            />
             <FormGroup label={translate('User')} required>
               <AsyncSelectFieldFinal
                 name="user"

@@ -1,12 +1,11 @@
-import { CheckCircleIcon } from '@phosphor-icons/react';
 import { useMemo, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
 import { TelemetryExampleButton } from '@waldur/administration/TelemetryExampleButton';
 import { ENV } from '@waldur/core/config';
 import { Panel } from '@waldur/core/Panel';
+import { SaveButton } from '@waldur/core/SaveButton';
 import { FeaturesDescription } from '@waldur/features/FeaturesDescription';
 import { DeploymentFeatures } from '@waldur/FeaturesEnums';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -88,25 +87,13 @@ export const FeaturesList = () => {
             actions={
               <div className="d-flex align-items-center">
                 <TableQuery query={query} setQuery={setQuery} />
-                <div className="position-relative">
-                  <Button
-                    className="min-w-80px ms-4"
-                    type="submit"
-                    variant={dirty ? 'warning' : 'primary'}
-                    disabled={submitting}
-                    onClick={handleSubmit}
-                  >
-                    <span className="svg-icon svg-icon-2">
-                      <CheckCircleIcon weight="bold" />
-                    </span>
-                    {translate('Save')}
-                  </Button>
-                  {dirty && (
-                    <span className="position-absolute top-0 start-100 translate-middle badge badge-circle badge-warning">
-                      !
-                    </span>
-                  )}
-                </div>
+                <SaveButton
+                  className="ms-4"
+                  type="submit"
+                  onClick={handleSubmit}
+                  submitting={submitting}
+                  dirty={dirty}
+                />
               </div>
             }
           >

@@ -11,9 +11,13 @@ import { useTable } from '@waldur/table/useTable';
 import { AccessSubnetCreateButton } from './AccessSubnetCreateButton';
 import { AccessSubnetRowActions } from './AccessSubnetRowActions';
 
+interface CustomerAccessControlPanelProps extends CustomerEditPanelProps {
+  standalone?: boolean;
+}
+
 export const CustomerAccessControlPanel: FunctionComponent<
-  CustomerEditPanelProps
-> = ({ customer }) => {
+  CustomerAccessControlPanelProps
+> = ({ customer, standalone }) => {
   const customer_uuid = customer.uuid;
   const filter = useMemo(() => ({ customer_uuid }), [customer_uuid]);
   const tableProps = useTable({
@@ -28,6 +32,8 @@ export const CustomerAccessControlPanel: FunctionComponent<
       {...tableProps}
       id="access-control"
       title={translate('Access control')}
+      hideTitle={standalone}
+      cardBordered={!standalone}
       columns={[
         {
           title: translate('CIDR'),

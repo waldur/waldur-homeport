@@ -37,6 +37,9 @@ export function loadProject(transition: Transition) {
         'abbreviation',
         'customer_credit',
         'is_service_provider',
+        'user_email_patterns',
+        'user_affiliations',
+        'user_identity_sources',
       ]);
       store.dispatch(setCurrentCustomer(customer));
       store.dispatch(setCurrentProject(project.data as unknown as Project));
