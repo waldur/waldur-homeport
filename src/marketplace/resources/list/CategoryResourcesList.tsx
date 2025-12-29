@@ -84,6 +84,9 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     if (filterValues?.organization) {
       filter.customer_uuid = filterValues.organization.uuid;
     }
+    if (filterValues?.exclude_attached) {
+      filter.is_attached = false;
+    }
     return filter;
   }, [filterValues, ownProps.category_uuid]);
 

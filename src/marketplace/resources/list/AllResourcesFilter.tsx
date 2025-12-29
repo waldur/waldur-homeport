@@ -25,6 +25,7 @@ interface FormData {
   organization;
   project;
   state;
+  exclude_attached?: boolean;
 }
 
 const PureProjectResourcesFilter = ({ category_uuid, initialValues }) => {
@@ -88,6 +89,17 @@ const PureProjectResourcesFilter = ({ category_uuid, initialValues }) => {
           name="include_terminated"
           component={AwesomeCheckboxField}
           label={translate('Include terminated')}
+        />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Exclude attached')}
+        name="exclude_attached"
+        badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
+      >
+        <Field
+          name="exclude_attached"
+          component={AwesomeCheckboxField}
+          label={translate('Exclude attached')}
         />
       </TableFilterItem>
     </>
