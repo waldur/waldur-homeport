@@ -69,11 +69,6 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
           export: (row) => formatDateTime(row.created),
         },
         {
-          title: translate('Expires at'),
-          render: ({ row }) => formatDateTime(row.expires),
-          export: (row) => formatDateTime(row.expires),
-        },
-        {
           title: translate('Type'),
           render: ({ row }) =>
             row.is_public ? (
