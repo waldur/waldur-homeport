@@ -97,7 +97,10 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         />
 
         <td>
-          <ChangedLimitField changedLimit={component.changedLimit} />
+          <ChangedLimitField
+            changedLimit={component.changedLimit}
+            unit={component.measured_unit}
+          />
         </td>
         {shouldConcealPrices
           ? null
