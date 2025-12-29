@@ -107,4 +107,5 @@ export const resultData: StateProps = {
   shouldConcealPrices: false,
   totalPeriods: [0.8633329999999999, 25.899989999999995, 315.116545],
   changedTotalPeriods: [-7.8063917, -234.19175099999998, -2849.3329705],
+  newLimits,
 };
