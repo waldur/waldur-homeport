@@ -371,6 +371,18 @@ const TableRow = memo<TableRowProps>(
       </tr>
     );
   },
+  // Custom comparison to prevent re-renders when only rowActions changes
+  // rowActions is a function that's often recreated on parent renders
+  // but doesn't affect the row's visual rendering
+  (prevProps, nextProps) => {
+    // Compare all props except rowActions
+    const { rowActions: _prevRowActions, ...prevRest } = prevProps;
+    const { rowActions: _nextRowActions, ...nextRest } = nextProps;
+
+    // Shallow compare remaining props
+    const keys = Object.keys(prevRest) as (keyof typeof prevRest)[];
+    return keys.every((key) => prevRest[key] === nextRest[key]);
+  },
 );
 
 TableRow.displayName = 'TableRow';
@@ -464,6 +476,9 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           fieldProps={fieldProps}
         />
       ),
+      // Note: rowActions is intentionally excluded from dependencies
+      // TableRow has a custom comparison function that ignores rowActions changes
+      // to prevent unnecessary re-renders when parent creates new rowActions functions
       [
         rowKey,
         rowClass,
@@ -473,7 +488,6 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
         enableMultiSelect,
         selectRow,
         selectedRows,
-        rowActions,
         fetch,
         columns,
         columnsMap,
