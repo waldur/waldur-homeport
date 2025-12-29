@@ -165,7 +165,7 @@ export const IdentityProvidersList = () => {
                   ...(
                     SettingsDescription.find((group) =>
                       group.description.includes(SETTINGS_FREEIPA_GROUP_NAME),
-                    ).items || []
+                    )?.items || []
                   ).reduce(
                     (acc, item) =>
                       Object.assign(acc, {
