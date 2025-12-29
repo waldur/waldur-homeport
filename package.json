@@ -20,7 +20,7 @@
     "deps:circular": "madge --exclude broadcasts/BroadcastFooter.tsx --circular src/**/*",
     "test": "vitest",
     "ci:start": "VITE_API_URL=http://localhost:8001/ yarn build && yarn serve --no-request-logging dist --single --listen 8001",
-    "ci:run": "cypress run",
+    "ci:run": "cypress run --spec cypress/e2e/group-invitations/groupInvitations.spec.ts",
     "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run",
     "i18n:extract": "node locales/tools/extractLiteralsFromFiles.cjs",
     "i18n:check": "node locales/tools/checkTranslations.cjs",

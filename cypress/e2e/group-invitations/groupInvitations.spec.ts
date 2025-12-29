@@ -144,7 +144,7 @@ describe('Group invitations', () => {
       .contains('Cancel')
       .click({ force: true });
 
-    cy.get('.modal-footer .btn:contains("Unsent")')
+    cy.get('.modal-footer .btn:contains("Confirm")')
       .click()
       .get('[role="alert"]')
       .should('be.visible');
