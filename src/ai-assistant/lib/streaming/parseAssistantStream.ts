@@ -15,9 +15,7 @@ export async function parseAssistantStream(params: ParseAssistantStreamParams) {
         prev.map((m) => {
           if (m.id !== assistantId) return m;
           const existingText = extractTextFromMessageContent(m.content);
-          const newContent = part.content
-            ? existingText + part.content
-            : existingText;
+          const newContent = part.c ? existingText + part.c : existingText;
           const newMetadata = part.additional_kwargs?.usage_metadata
             ? {
                 ...m.metadata,
