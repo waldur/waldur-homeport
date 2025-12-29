@@ -117,6 +117,7 @@ export const getLimitChangeData = (
       subTotal,
       changedSubTotal,
       changedLimit,
+      newLimits,
     };
   });
   const total = components.reduce((result, item) => result + item.subTotal, 0);
@@ -139,5 +140,6 @@ export const getLimitChangeData = (
     changedTotalPeriods,
     offering,
     shouldConcealPrices,
+    newLimits,
   };
 };

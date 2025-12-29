@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import {
   getLimitChangeRequirements,
   getLimitChangeData,
@@ -27,9 +28,11 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
       { limits: (order.attributes as any).old_limits },
       offering,
     );
+    const limitParser = getFormLimitParser(order.offering_type);
+    const resourceLimits = limitParser(order.limits);
 
     if (requirements) {
-      const newLimits = order.limits;
+      const newLimits = resourceLimits;
       const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
       const { usages, limits: currentLimits } = requirements;
       return getLimitChangeData(
@@ -48,6 +51,7 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
       totalPeriods: [],
       changedTotalPeriods: [],
       offering,
+      newLimits: resourceLimits,
     };
   }, [order, offering]);
 
@@ -80,7 +84,7 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
           {
             title: translate('New'),
             render: ({ row }) =>
-              order.limits[row.type] + ' ' + row.measured_unit,
+              data.newLimits[row.type] + ' ' + row.measured_unit,
           },
           {
             title: (

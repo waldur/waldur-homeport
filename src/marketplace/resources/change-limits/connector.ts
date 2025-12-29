@@ -42,6 +42,7 @@ export interface StateProps {
   orderCanBeApproved: boolean;
   shouldConcealPrices?: boolean;
   offering?: Offering;
+  newLimits?: Limits;
 }
 
 const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
