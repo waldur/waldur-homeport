@@ -13,7 +13,7 @@ export const ProviderFreeIPAForm = () => (
     {(
       SettingsDescription.find((group) =>
         group.description.includes(SETTINGS_FREEIPA_GROUP_NAME),
-      ).items || []
+      )?.items || []
     ).map((item) => (
       <FormGroup
         key={item.key}

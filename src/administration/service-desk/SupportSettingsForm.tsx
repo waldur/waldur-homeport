@@ -51,9 +51,10 @@ const parseDictField = (value) => {
 };
 
 export const SupportSettingsForm = ({ name }) => {
-  const fields = SettingsDescription.find((group) =>
-    group.description.toLowerCase().includes(name),
-  ).items;
+  const fields =
+    SettingsDescription.find((group) =>
+      group.description.toLowerCase().includes(name),
+    )?.items || [];
 
   return (
     <>
