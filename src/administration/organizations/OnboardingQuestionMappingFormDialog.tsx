@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { FORM_ERROR } from 'final-form';
 import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
@@ -54,10 +55,12 @@ export const OnboardingQuestionMappingFormDialog: FC<
             page_size: 1000,
             page,
             checklist_type: 'customer_onboarding',
-          },
+            has_onboarding_mapping: false,
+          } as any,
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    // Disable caching to always fetch the latest questions after opening the dialog
+    staleTime: 0,
   });
 
   const initialValues: FormData = mapping
@@ -73,15 +76,23 @@ export const OnboardingQuestionMappingFormDialog: FC<
       };
 
   const handleSubmit = async (formData: FormData) => {
+    // Validate that at least one field is filled
+    if (!formData.maps_to_customer_field && !formData.intent_field) {
+      return {
+        [FORM_ERROR]: translate(
+          'Please fill at least one field (Customer field or Intent field) to complete the mapping for the selected question. Unmapped questions will not appear in the organization create form.',
+        ),
+      };
+    }
+
     try {
       if (isEdit) {
         await onboardingQuestionMetadataUpdate({
           path: { uuid: mapping.uuid },
           body: {
             question: mapping.question,
-            maps_to_customer_field:
-              formData.maps_to_customer_field || undefined,
-            intent_field: formData.intent_field || undefined,
+            maps_to_customer_field: formData.maps_to_customer_field || '',
+            intent_field: formData.intent_field || '',
           },
         });
         dispatch(showSuccess(translate('Question mapping has been updated.')));
@@ -107,7 +118,7 @@ export const OnboardingQuestionMappingFormDialog: FC<
 
   return (
     <Form onSubmit={handleSubmit} initialValues={initialValues}>
-      {({ handleSubmit, submitting, invalid }) => (
+      {({ handleSubmit, submitting, submitError, dirtySinceLastSubmit }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={
@@ -119,7 +130,7 @@ export const OnboardingQuestionMappingFormDialog: FC<
               <>
                 <CloseDialogButton />
                 <SubmitButton
-                  disabled={invalid}
+                  disabled={submitError && !dirtySinceLastSubmit}
                   submitting={submitting}
                   label={translate('Save')}
                 />
@@ -132,6 +143,13 @@ export const OnboardingQuestionMappingFormDialog: FC<
                 message={translate('Unable to load questions.')}
               />
             ) : null}
+
+            {submitError && (
+              <div className="alert alert-danger" role="alert">
+                {submitError}
+              </div>
+            )}
+
             <FormGroup label={translate('Question')} required>
               <Field
                 name="question"
