@@ -33,7 +33,7 @@ export interface ParseAssistantStreamParams extends Pick<
 }
 
 export interface StreamChatChunk {
-  content?: string;
+  c?: string;
   additional_kwargs?: {
     usage_metadata?: object;
   };

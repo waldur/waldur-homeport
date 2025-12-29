@@ -16,8 +16,8 @@ export const generateAndSetThreadTitle = async (
 
     let newTitle = '';
     for await (const part of streamInput) {
-      if (part.content) {
-        newTitle += part.content;
+      if (part.c) {
+        newTitle += part.c;
       }
     }
 
