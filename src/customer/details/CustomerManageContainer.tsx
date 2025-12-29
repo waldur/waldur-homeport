@@ -21,9 +21,9 @@ const CustomerContactPanel = lazyComponent(() =>
     default: module.CustomerContactPanel,
   })),
 );
-const CustomerAccessControlPanel = lazyComponent(() =>
-  import('./CustomerAccessControlPanel').then((module) => ({
-    default: module.CustomerAccessControlPanel,
+const AccessControlTabsContainer = lazyComponent(() =>
+  import('./AccessControlTabsContainer').then((module) => ({
+    default: module.AccessControlTabsContainer,
   })),
 );
 const CustomerBillingPanel = lazyComponent(() =>
@@ -75,7 +75,7 @@ export const CustomerManageContainer = () => {
         },
         {
           key: 'access-control',
-          component: CustomerAccessControlPanel,
+          component: AccessControlTabsContainer,
           title: translate('Access control'),
         },
         {

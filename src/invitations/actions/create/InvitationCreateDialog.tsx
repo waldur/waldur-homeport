@@ -5,6 +5,7 @@ import { Form } from 'react-final-form';
 import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
+import { RestrictionsInfoCard } from '../RestrictionsInfoCard';
 import { GroupInviteRow, InvitationContext } from '../types';
 import { useInvitationCreateDialog } from '../useInvitationCreateDialog';
 
@@ -98,6 +99,12 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
                 onImport={(items) => populateRows(items, form.change)}
               />
             ) : null}
+            {step === 1 && (
+              <RestrictionsInfoCard
+                customer={resolve.customer}
+                project={resolve.project}
+              />
+            )}
             <div>
               {step === 1 ? (
                 <EmailsListGroupWrapper

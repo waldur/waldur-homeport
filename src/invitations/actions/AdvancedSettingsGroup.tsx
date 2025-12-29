@@ -40,9 +40,9 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
         />
       </FormGroup>
       <FormGroup
-        label={translate('Allowed email patterns')}
+        label={translate('Additional email patterns')}
         description={translate(
-          'Enter space separated regex pattern to match user email',
+          'Enter space-separated regex patterns. These are applied in addition to any existing restrictions.',
         )}
       >
         <Field
@@ -57,8 +57,10 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
       </FormGroup>
 
       <FormGroup
-        label={translate('Allowed affiliations')}
-        description={translate('Enter comma-separated affiliation identifiers')}
+        label={translate('Additional affiliations')}
+        description={translate(
+          'Enter comma-separated affiliation identifiers. These are applied in addition to any existing restrictions.',
+        )}
         spaceless
       >
         <Field

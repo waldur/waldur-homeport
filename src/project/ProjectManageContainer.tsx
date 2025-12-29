@@ -18,6 +18,11 @@ const ProjectMetadata = lazyComponent(() =>
     default: module.ProjectMetadata,
   })),
 );
+const ProjectMembershipRestrictions = lazyComponent(() =>
+  import('./manage/ProjectMembershipRestrictions').then((module) => ({
+    default: module.ProjectMembershipRestrictions,
+  })),
+);
 const ProjectCredit = lazyComponent(() =>
   import('./manage/ProjectCredit').then((module) => ({
     default: module.ProjectCredit,
@@ -44,6 +49,11 @@ export const ProjectManageContainer = () => {
           key: 'metadata',
           component: ProjectMetadata,
           title: translate('Metadata'),
+        },
+        {
+          key: 'membership-restrictions',
+          component: ProjectMembershipRestrictions,
+          title: translate('Membership restrictions'),
         },
         (project.project_credit || project.project_credit === 0) && {
           key: 'credit',

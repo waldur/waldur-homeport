@@ -21,6 +21,7 @@ import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';
 import { AutoCreateProjectGroup } from './AutoCreateProjectGroup';
 import { InvitationLinkField } from './InvitationLinkField';
 import { ProjectGroup } from './ProjectGroup';
+import { RestrictionsInfoCard } from './RestrictionsInfoCard';
 import { RoleGroup } from './RoleGroup';
 import { GroupInvitationType } from './types';
 
@@ -148,6 +149,10 @@ export const GroupInvitationCreateDialog = ({
                   required={!values?.auto_create_project}
                 />
                 <AutoCreateProjectGroup disabled={fieldsDisabled} />
+                <RestrictionsInfoCard
+                  customer={customer}
+                  project={values?.project}
+                />
                 <AdvancedSettingsGroup disabled={fieldsDisabled} />
                 <SubmitButton
                   variant="secondary"
