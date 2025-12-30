@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useState } from 'react';
+import { Col } from 'react-bootstrap';
 import {
   MaintenanceAnnouncementTemplate,
   maintenanceAnnouncementsTemplateList,
@@ -209,6 +210,20 @@ export const Step1CreateMessage: FC<WizardFormStepProps> = (props) => {
               )}
               containerClassName="col-12"
               validate={url}
+            />
+
+            <Col xs={12}>
+              <hr className="mb-7 mt-0" />
+            </Col>
+
+            <TextField
+              name="internal_notes"
+              label={translate('Internal notes (providers/staff visible only)')}
+              placeholder={translate(
+                'Add staff/provider-only information (not visible to customers)...',
+              )}
+              containerClassName="col-12"
+              spaceless
             />
           </FormContainer>
         );

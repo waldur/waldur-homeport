@@ -10,6 +10,7 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
+import { InternalNotes } from './InternalNotesField';
 import { MAINTENANCE_IMPACT_LEVEL } from './types';
 
 export const MaintenanceExpandableRow: FC<{
@@ -29,6 +30,7 @@ export const MaintenanceExpandableRow: FC<{
 
   return (
     <ExpandableContainer>
+      <InternalNotes maintenance={maintenance} space={5} />
       <Table<MaintenanceAnnouncementOffering>
         {...tableProps}
         columns={[
@@ -50,6 +52,7 @@ export const MaintenanceExpandableRow: FC<{
         verboseName={translate('Affected offerings')}
         hasActionBar={false}
         minHeight="auto"
+        equalColWidth
       />
     </ExpandableContainer>
   );

@@ -31,6 +31,7 @@ export interface MaintenanceForm {
   name: string;
   maintenance_type: keyof typeof MAINTENANCE_TYPE;
   message: string;
+  internal_notes: string;
   external_reference_url?: string;
   /** for offerings table */
   offerings: Array<{ uuid; url; name }>; // Temporary field to hold selected offerings

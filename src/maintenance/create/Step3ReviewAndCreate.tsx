@@ -6,6 +6,7 @@ import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 
+import { InternalNotes } from '../InternalNotesField';
 import { MAINTENANCE_TYPE, MaintenanceForm } from '../types';
 
 import { AffectedOfferingsTable } from './AffectedOfferingsTable';
@@ -39,12 +40,13 @@ export const Step3ReviewAndCreate: FC<WizardFormStepProps> = (props) => {
               })}
             />
             <Field label={translate('Message')} value={values.message} />
-            {values.external_reference_url && (
+            {Boolean(values.external_reference_url) && (
               <Field
                 label={translate('External reference')}
                 value={values.external_reference_url}
               />
             )}
+            <InternalNotes maintenance={values} />
             <Field
               label={translate('Affected offerings')}
               valueCol={12}

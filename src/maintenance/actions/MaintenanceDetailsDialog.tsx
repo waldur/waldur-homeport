@@ -9,6 +9,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Field } from '@waldur/resource/summary';
 
 import { AffectedOfferingsTable } from '../create/AffectedOfferingsTable';
+import { InternalNotes } from '../InternalNotesField';
 
 export const MaintenanceDetailsDialog: FC<{
   resolve: {
@@ -55,6 +56,7 @@ export const MaintenanceDetailsDialog: FC<{
         value={formatDateTime(maintenance.scheduled_end)}
       />
       <Field label={translate('Message')} value={maintenance.message} />
+      <InternalNotes maintenance={maintenance} />
       <Field
         label={translate('Affected offerings')}
         valueCol={12}

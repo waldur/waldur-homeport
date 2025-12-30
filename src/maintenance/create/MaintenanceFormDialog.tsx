@@ -78,6 +78,7 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
           service_provider: props.resolve.provider.url,
           maintenance_type: formData.maintenance_type,
           external_reference_url: formData.external_reference_url || '',
+          internal_notes: formData.internal_notes || '',
         };
 
         const {
