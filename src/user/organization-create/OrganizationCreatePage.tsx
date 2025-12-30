@@ -171,7 +171,11 @@ export const OrganizationCreatePage: FC = () => {
 
         await handleVerificationStatus(validation, formData, {
           onSuccess: () => {
-            showSuccess(translate('Organization created!'));
+            showSuccess(
+              translate(
+                'Organization created! You can view your submitted applications in your dashboard.',
+              ),
+            );
             formProps.destroy();
             router.stateService.go('profile.details');
           },
