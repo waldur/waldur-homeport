@@ -48,6 +48,7 @@ export const MaintenanceEditAction: FC<MaintenanceEditActionProps> = ({
           message: row.message,
           maintenance_type: row.maintenance_type,
           external_reference_url: row.external_reference_url,
+          internal_notes: row.internal_notes,
           scheduled_start_date: row.scheduled_start
             ? startDate.toISODate()
             : null,
