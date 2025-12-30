@@ -15,6 +15,7 @@ export const ResourceTeamDialog = ({ resolve }) => {
           uuid: resolve.resource?.project_uuid,
           name: resolve.resource?.project_name,
           customer_uuid: resolve.resource?.customer_uuid,
+          url: resolve.resource?.project,
         }}
       />
     </ModalDialog>

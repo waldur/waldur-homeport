@@ -26,7 +26,7 @@ export const ProjectPermisionActions = ({
     <ActionsDropdown
       row={row}
       refetch={fetch}
-      data={{ projectUuid, customerUuid }}
+      data={{ projectUuid, customerUuid, project }}
       actions={actions}
     />
   );

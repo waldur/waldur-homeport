@@ -20,6 +20,7 @@ interface EditUserButtonProps {
   refetch;
   projectUuid?;
   customerUuid?;
+  project?;
 }
 
 export const EditUserButton: React.FC<EditUserButtonProps> = ({
@@ -27,14 +28,15 @@ export const EditUserButton: React.FC<EditUserButtonProps> = ({
   refetch,
   projectUuid,
   customerUuid,
+  project,
 }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
-  const project = useSelector(getProject);
+  const currentProject = useSelector(getProject);
   const customer = useSelector(getCustomer);
 
   const hasContext = projectUuid || customerUuid;
-  const projectId = hasContext ? projectUuid : project?.uuid;
+  const projectId = hasContext ? projectUuid : currentProject?.uuid;
   const customerId = hasContext ? customerUuid : customer?.uuid;
 
   if (
@@ -53,6 +55,9 @@ export const EditUserButton: React.FC<EditUserButtonProps> = ({
         resolve: {
           permission,
           refetch,
+          projectUuid,
+          customerUuid,
+          project,
         },
       }),
     );

@@ -55,6 +55,9 @@ interface AddUserDialogProps {
   refetch;
   level?: RoleType;
   title?: string;
+  project?: Project;
+  customerUuid?: string;
+  customer?;
 }
 
 const customerUsersAutocomplete = async (
@@ -104,6 +107,9 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   refetch,
   level,
   title,
+  project,
+  customerUuid,
+  customer,
 }) => {
   const dispatch = useDispatch();
   const { closeDialog } = useModal();
@@ -114,6 +120,10 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
   const currentCustomer = useSelector(getCustomer);
   const hasCustomerPermission = useSelector(hasCurrentCustomerPermission);
 
+  const resolvedProject = project || currentProject;
+  const resolvedCustomer = customer || currentCustomer;
+  const resolvedCustomerUuid = customerUuid || resolvedCustomer?.uuid;
+
   const loadUsers = useCallback(
     async (query, prevOptions, page, showAllUsers: boolean) => {
       try {
@@ -121,9 +131,9 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
           return await usersAutocomplete({ query }, prevOptions, page);
         }
 
-        if (hasCustomerPermission || !currentProject) {
+        if (hasCustomerPermission || !resolvedProject) {
           return await customerUsersAutocomplete(
-            currentCustomer.uuid,
+            resolvedCustomerUuid,
             { user_keyword: query },
             prevOptions,
             page,
@@ -131,7 +141,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
         }
 
         return await projectUsersAutocomplete(
-          currentProject.uuid,
+          resolvedProject.uuid,
           { user_keyword: query },
           prevOptions,
           page,
@@ -145,7 +155,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
         };
       }
     },
-    [dispatch, hasCustomerPermission, currentProject, currentCustomer.uuid],
+    [dispatch, hasCustomerPermission, resolvedProject, resolvedCustomerUuid],
   );
 
   const getOptionLabel = (option) =>
@@ -157,11 +167,11 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
     async (formData: AddUserDialogFormData) => {
       if (formData.role.content_type === 'project') {
         try {
+          const targetProjectUuid =
+            formData.project?.uuid || resolvedProject?.uuid;
           await projectsAddUser({
             path: {
-              uuid: formData.project
-                ? formData.project.uuid
-                : currentProject.uuid,
+              uuid: targetProjectUuid,
             },
             body: {
               user: formData.user.uuid,
@@ -178,7 +188,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
       } else if (formData.role.content_type === 'customer') {
         try {
           await customersAddUser({
-            path: { uuid: currentCustomer.uuid },
+            path: { uuid: resolvedCustomerUuid },
             body: {
               user: formData.user.uuid,
               role: formData.role.name,
@@ -198,7 +208,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
       } else if (formData.role.content_type === 'call_organizer') {
         try {
           await callManagingOrganisationsAddUser({
-            path: { uuid: currentCustomer.call_managing_organization_uuid },
+            path: { uuid: resolvedCustomer.call_managing_organization_uuid },
             body: {
               user: formData.user.uuid,
               role: formData.role.name,
@@ -218,7 +228,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
       } else if (formData.role.content_type === 'service_provider') {
         try {
           await marketplaceServiceProvidersAddUser({
-            path: { uuid: currentCustomer.service_provider_uuid },
+            path: { uuid: resolvedCustomer.service_provider_uuid },
             body: {
               user: formData.user.uuid,
               role: formData.role.name,
@@ -242,8 +252,8 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
       showSuccess,
       closeDialog,
       showErrorResponse,
-      currentProject,
-      currentCustomer,
+      resolvedProject,
+      resolvedCustomer,
       currentUser,
       dispatch,
     ],
@@ -267,9 +277,9 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             iconColor="success"
           >
             <RestrictionsInfoCard
-              customer={currentCustomer}
+              customer={resolvedCustomer}
               project={
-                level === 'project' ? currentProject : values.project || null
+                level === 'project' ? resolvedProject : values.project || null
               }
             />
             <FormGroup label={translate('User')} required>
@@ -307,7 +317,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                 level === 'customer' &&
                 hasPermission(currentUser, {
                   permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
-                  customerId: currentCustomer.uuid,
+                  customerId: resolvedCustomerUuid,
                 })
                   ? ['customer', 'project']
                   : [level]

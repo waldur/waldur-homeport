@@ -60,7 +60,7 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
 
     try {
       await projectsDeleteUser({
-        path: { uuid: project.uuid },
+        path: { uuid: projectId },
         body: {
           user: permission.user_uuid,
           role: permission.role_name,
