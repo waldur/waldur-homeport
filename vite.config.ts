@@ -16,6 +16,18 @@ export default defineConfig({
       ),
     },
   },
+  server: {
+    proxy: {
+      '/api': {
+        target:
+          process.env.VITE_PROXY_TARGET ||
+          process.env.VITE_API_URL ||
+          'http://localhost:8000',
+        changeOrigin: true,
+        secure: process.env.VITE_PROXY_SECURE !== 'false',
+      },
+    },
+  },
   plugins: [
     react(),
     svgr({
