@@ -41,4 +41,8 @@
     border-color: $border-primary;
     color: $text-disabled;
   }
+
+  .btn-check + .btn:not(.btn-sm):not(.btn-lg) {
+    padding: 9px 15px;
+  }
 }

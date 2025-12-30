@@ -37,6 +37,10 @@ export async function signin(username, password) {
   await loginUser(response.data.token, 'local');
 }
 
+export async function signinByToken(token) {
+  await loginUser(token, 'local');
+}
+
 export function storeRedirect() {
   if (
     router.globals.params?.toState &&
