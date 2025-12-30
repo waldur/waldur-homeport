@@ -1,18 +1,14 @@
-import { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { Issue } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { UploadContainer } from '@waldur/form/upload/UploadContainer';
 import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
+import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 
-import * as actions from './actions';
+import { useIssueAttachments, useUploadAttachments } from './api';
+import { IssueAttachmentsContext } from './IssueAttachmentsContext';
 import { IssueAttachmentsList } from './IssueAttachmentsList';
-import { ReloadAttachments } from './ReloadAttachments';
-import { getAttachments, getUploading, getIsLoading } from './selectors';
-import { Attachment, IssueAttachmentUploading } from './types';
 
 interface IssueAttachmentsContainerProps {
   issue: Issue;
@@ -21,47 +17,43 @@ interface IssueAttachmentsContainerProps {
 export const IssueAttachmentsContainer: React.FC<
   IssueAttachmentsContainerProps
 > = ({ issue }) => {
-  const dispatch = useDispatch();
-
-  const attachments = useSelector<RootState, Attachment[]>(getAttachments);
-  const loading = useSelector<RootState, boolean>(getIsLoading);
-  const uploading = useSelector<RootState, IssueAttachmentUploading[]>(
-    getUploading,
-  );
-
-  useEffect(() => {
-    dispatch(actions.issueAttachmentsGet(issue.url));
-  }, [dispatch, issue.url]);
+  const { data, isLoading, refetch } = useIssueAttachments(issue.url);
+  const attachments = data ?? [];
+  const { uploading, upload, retry, cancel } = useUploadAttachments(issue.url);
 
   const onDrop = (files: File[]) => {
-    dispatch(actions.issueAttachmentsPut(issue.url, files));
+    upload(files);
   };
 
   return (
-    <Card className="card-bordered issue-attachments">
-      <Card.Header>
-        <Card.Title>
-          <span className="me-2">{translate('Attachments')}</span>
-          <ReloadAttachments issueUrl={issue.url} />
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        {issue.add_attachment_is_available ? (
-          <UploadContainer
-            onDrop={onDrop}
-            disabled={loading}
-            message={translate('SVG, PNG, JPG or GIF (max. 800x400px)')}
-          />
-        ) : null}
-        {loading && !attachments?.length ? (
-          <LoadingSpinner />
-        ) : (
-          <IssueAttachmentsList
-            attachments={attachments}
-            uploading={uploading}
-          />
-        )}
-      </Card.Body>
-    </Card>
+    <IssueAttachmentsContext.Provider value={issue}>
+      <Card className="card-bordered issue-attachments">
+        <Card.Header>
+          <Card.Title>
+            <span className="me-2">{translate('Attachments')}</span>
+            <RefreshButton refetch={refetch} loading={isLoading} />
+          </Card.Title>
+        </Card.Header>
+        <Card.Body>
+          {issue.add_attachment_is_available ? (
+            <UploadContainer
+              onDrop={onDrop}
+              disabled={isLoading}
+              message={translate('SVG, PNG, JPG or GIF (max. 800x400px)')}
+            />
+          ) : null}
+          {isLoading && attachments.length === 0 ? (
+            <LoadingSpinner />
+          ) : (
+            <IssueAttachmentsList
+              attachments={attachments}
+              uploading={uploading}
+              onRetry={retry}
+              onCancel={cancel}
+            />
+          )}
+        </Card.Body>
+      </Card>
+    </IssueAttachmentsContext.Provider>
   );
 };

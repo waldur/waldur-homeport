@@ -1,18 +1,14 @@
-import { useEffect } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import { Issue } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
+import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 
-import * as actions from './actions';
+import { useIssueComments } from './api';
 import { IssueCommentButton } from './IssueCommentButton';
+import { IssueCommentsContext } from './IssueCommentsContext';
 import { IssueCommentsList } from './IssueCommentsList';
-import { ReloadComments } from './ReloadComments';
-import { getCommentsSelector, getIsLoading } from './selectors';
-import { Comment } from './types';
 
 interface IssueCommentsContainerProps {
   issue: Issue;
@@ -21,34 +17,29 @@ interface IssueCommentsContainerProps {
 export const IssueCommentsContainer = ({
   issue,
 }: IssueCommentsContainerProps) => {
-  const dispatch = useDispatch();
-
-  const comments = useSelector<RootState, Comment[]>(getCommentsSelector);
-  const loading = useSelector<RootState, boolean>(getIsLoading);
-
-  useEffect(() => {
-    dispatch(actions.issueCommentsGet(issue.url));
-    dispatch(actions.issueCommentsIssueSet(issue));
-  }, [dispatch, issue]);
+  const { data, isLoading, refetch } = useIssueComments(issue.url);
+  const comments = data ?? [];
 
   return (
-    <Card className="card-bordered mb-5">
-      <Card.Header>
-        <Card.Title>
-          <span className="me-2">{translate('Comments')}</span>
-          <ReloadComments issueUrl={issue.url} />
-        </Card.Title>
-        <div className="card-toolbar">
-          <IssueCommentButton />
-        </div>
-      </Card.Header>
-      <Card.Body>
-        {loading && !comments?.length ? (
-          <LoadingSpinner />
-        ) : (
-          <IssueCommentsList comments={comments} />
-        )}
-      </Card.Body>
-    </Card>
+    <IssueCommentsContext.Provider value={issue}>
+      <Card className="card-bordered mb-5">
+        <Card.Header>
+          <Card.Title>
+            <span className="me-2">{translate('Comments')}</span>
+            <RefreshButton refetch={refetch} loading={isLoading} />
+          </Card.Title>
+          <div className="card-toolbar">
+            <IssueCommentButton />
+          </div>
+        </Card.Header>
+        <Card.Body>
+          {isLoading && comments.length === 0 ? (
+            <LoadingSpinner />
+          ) : (
+            <IssueCommentsList comments={comments} />
+          )}
+        </Card.Body>
+      </Card>
+    </IssueCommentsContext.Provider>
   );
 };

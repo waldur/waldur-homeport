@@ -19,7 +19,6 @@ import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { useBreadcrumbs } from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
 import { Field } from '@waldur/resource/summary';
-import { injectReducer, injectSaga } from '@waldur/store/store';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
@@ -28,21 +27,8 @@ import { IssueInfoButton } from './IssueInfo';
 import { IssueStatus } from './IssueStatus';
 import { useIssueBreadcrumbItems } from './utils';
 
-const loadDependencies = async (issueId: string) => {
-  const [issue, issueAttachmentsSaga, issueCommentsSaga, reducer] =
-    await Promise.all([
-      supportIssuesRetrieve({ path: { uuid: issueId } }),
-      import('@waldur/issues/attachments/effects').then(
-        (module) => module.default,
-      ),
-      import('@waldur/issues/comments/effects').then(
-        (module) => module.default,
-      ),
-      import('@waldur/issues/reducers').then((module) => module.reducer),
-    ]);
-  injectSaga('issueAttachmentsSaga', issueAttachmentsSaga);
-  injectSaga('issueCommentsSaga', issueCommentsSaga);
-  injectReducer('issues', reducer);
+const loadIssue = async (issueId: string) => {
+  const issue = await supportIssuesRetrieve({ path: { uuid: issueId } });
   return issue.data;
 };
 
@@ -68,7 +54,7 @@ export const IssueDetails: FunctionComponent = () => {
     refetch,
   } = useQuery({
     queryKey: ['Issue', issue_uuid],
-    queryFn: () => loadDependencies(issue_uuid),
+    queryFn: () => loadIssue(issue_uuid),
     refetchOnWindowFocus: false,
   });
 
