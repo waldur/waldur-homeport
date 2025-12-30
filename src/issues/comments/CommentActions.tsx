@@ -1,4 +1,5 @@
 import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
+import { useContext } from 'react';
 import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -7,7 +8,8 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { issueCommentsDelete } from './actions';
+import { useDeleteComment } from './api';
+import { IssueCommentsContext } from './IssueCommentsContext';
 
 const CommentFormDialog = lazyComponent(() =>
   import('./CommentFormDialog').then((module) => ({
@@ -17,12 +19,17 @@ const CommentFormDialog = lazyComponent(() =>
 
 export const CommentActions = ({ comment }) => {
   const dispatch = useDispatch();
+  const issue = useContext(IssueCommentsContext);
+  const deleteComment = useDeleteComment(issue.url);
 
   const user = useSelector(getUser);
 
   const openEditCommentDialog = () => {
     dispatch(
-      openModalDialog(CommentFormDialog, { resolve: { comment }, size: 'sm' }),
+      openModalDialog(CommentFormDialog, {
+        resolve: { comment, issue },
+        size: 'sm',
+      }),
     );
   };
 
@@ -39,7 +46,7 @@ export const CommentActions = ({ comment }) => {
     } catch {
       return;
     }
-    dispatch(issueCommentsDelete(comment.uuid));
+    deleteComment.mutate(comment.uuid);
   };
 
   return (
@@ -62,7 +69,7 @@ export const CommentActions = ({ comment }) => {
             variant="tertiary"
             size="sm"
             className="btn-icon-right"
-            disabled={!comment.destroy_is_available}
+            disabled={!comment.destroy_is_available || deleteComment.isPending}
             onClick={openDeleteDialog}
           >
             {translate('Remove')}

@@ -19,18 +19,10 @@ const mockAttachments = [
   { uuid: 'test-2', file_name: 'file2.jpg', file_size: 256 },
 ];
 
-const initStore: Partial<RootState> = {
-  issues: {
-    comments: {
-      issue: {} as any,
-      items: [],
-    } as any,
-    attachments: {
-      issue: {} as any,
-      items: [],
-    } as any,
-  },
-};
+const initStore: Partial<RootState> = {};
+
+const mockOnRetry = vi.fn();
+const mockOnCancel = vi.fn();
 
 const renderWithProvider = (component) => {
   const mockStore = configureStore();
@@ -40,7 +32,12 @@ const renderWithProvider = (component) => {
 describe('IssueAttachmentsList', () => {
   it('renders nothing when no attachments and no uploads', () => {
     const { container } = renderWithProvider(
-      <IssueAttachmentsList attachments={[]} uploading={[]} />,
+      <IssueAttachmentsList
+        attachments={[]}
+        uploading={[]}
+        onRetry={mockOnRetry}
+        onCancel={mockOnCancel}
+      />,
     );
     expect(container.firstChild).toBeNull();
   });
@@ -50,6 +47,8 @@ describe('IssueAttachmentsList', () => {
       <IssueAttachmentsList
         attachments={mockAttachments as any}
         uploading={[]}
+        onRetry={mockOnRetry}
+        onCancel={mockOnCancel}
       />,
     );
     expect(screen.getAllByTestId('mocked-attachment')).toHaveLength(2);
@@ -59,7 +58,12 @@ describe('IssueAttachmentsList', () => {
 
   it('renders pending attachment items for uploading files', () => {
     renderWithProvider(
-      <IssueAttachmentsList attachments={[]} uploading={attachmentUploading} />,
+      <IssueAttachmentsList
+        attachments={[]}
+        uploading={attachmentUploading}
+        onRetry={mockOnRetry}
+        onCancel={mockOnCancel}
+      />,
     );
     expect(screen.getAllByTestId('pending-attachment-item')).toHaveLength(2);
   });
@@ -69,6 +73,8 @@ describe('IssueAttachmentsList', () => {
       <IssueAttachmentsList
         attachments={mockAttachments as any}
         uploading={attachmentUploading.slice(1)}
+        onRetry={mockOnRetry}
+        onCancel={mockOnCancel}
       />,
     );
     expect(screen.getAllByTestId('mocked-attachment')).toHaveLength(2);

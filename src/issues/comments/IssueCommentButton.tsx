@@ -1,12 +1,13 @@
 import { PlusIcon } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { FC, useContext } from 'react';
 import { Button } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { type RootState } from '@waldur/store/reducers';
+
+import { IssueCommentsContext } from './IssueCommentsContext';
 
 const CommentFormDialog = lazyComponent(() =>
   import('./CommentFormDialog').then((module) => ({
@@ -16,13 +17,13 @@ const CommentFormDialog = lazyComponent(() =>
 
 export const IssueCommentButton: FC = () => {
   const dispatch = useDispatch();
-  const uiDisabled = useSelector(
-    (state: RootState) =>
-      !state.issues.comments.issue?.add_comment_is_available,
-  );
+  const issue = useContext(IssueCommentsContext);
+  const uiDisabled = !issue?.add_comment_is_available;
 
   const openCommentDialog = () => {
-    dispatch(openModalDialog(CommentFormDialog, { size: 'sm' }));
+    dispatch(
+      openModalDialog(CommentFormDialog, { resolve: { issue }, size: 'sm' }),
+    );
   };
 
   return (

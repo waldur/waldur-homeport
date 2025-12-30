@@ -1,6 +1,5 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { takeEvery } from 'redux-saga/effects';
 
 import { ENV } from '@waldur/core/config';
 import { type RootState } from '@waldur/store/reducers';
@@ -34,6 +33,14 @@ const setTitle = (
 export const reducer = (state = { title: '', subtitle: '' }, action) => {
   switch (action.type) {
     case SET_TITLE:
+      // Side effect: update browser tab title
+      if (action.payload.as !== 'page') {
+        document.title =
+          action.payload.title +
+          ' | ' +
+          ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
+      }
+      // State update: update page title
       if (action.payload.as !== 'browser') {
         return action.payload;
       }
@@ -43,15 +50,6 @@ export const reducer = (state = { title: '', subtitle: '' }, action) => {
       return state;
   }
 };
-
-export function* effects() {
-  yield takeEvery(SET_TITLE, (action: SetTitleAction) => {
-    if (action.payload.as !== 'page') {
-      document.title =
-        action.payload.title + ' | ' + ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE;
-    }
-  });
-}
 
 export const getTitle = (state: RootState) => state.title.title;
 

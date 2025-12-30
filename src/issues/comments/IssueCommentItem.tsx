@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/core/config';
 import { formatMediumDateTime, formatRelative } from '@waldur/core/dateUtils';
@@ -7,12 +7,9 @@ import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { FormattedJira } from '@waldur/core/FormattedJira';
 import { getAbbreviation } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { LoadingOverlay } from '@waldur/issues/comments/LoadingOverlay';
-import { type RootState } from '@waldur/store/reducers';
 import { openUserPopover } from '@waldur/user/actions';
 
 import { CommentActions } from './CommentActions';
-import { getIsDeleting } from './selectors';
 import { Comment } from './types';
 
 import './IssueCommentItem.scss';
@@ -55,19 +52,11 @@ const CommentAvatar = ({ comment }) => {
 export const IssueCommentItem: FunctionComponent<IssueCommentItemProps> = ({
   comment,
 }) => {
-  const deleting = useSelector((state: RootState) =>
-    getIsDeleting(state, { comment }),
-  );
-
   const dispatch = useDispatch();
 
   const openUserDialog = () => {
     dispatch(openUserPopover({ user_uuid: comment.author_uuid }));
   };
-
-  if (deleting) {
-    return <LoadingOverlay />;
-  }
 
   return (
     <div className="issue-comment timeline-item">

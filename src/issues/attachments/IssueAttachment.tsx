@@ -1,10 +1,9 @@
-import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FunctionComponent, useContext } from 'react';
 
 import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
 
-import * as actions from './actions';
-import { getIsDeleting } from './selectors';
+import { useDeleteAttachment } from './api';
+import { IssueAttachmentsContext } from './IssueAttachmentsContext';
 import { Attachment } from './types';
 
 interface IssueAttachmentProps {
@@ -14,18 +13,14 @@ interface IssueAttachmentProps {
 export const IssueAttachment: FunctionComponent<IssueAttachmentProps> = ({
   attachment,
 }) => {
-  const isDeleting = useSelector((state) =>
-    getIsDeleting(state, { attachment }),
-  );
-  const dispatch = useDispatch();
-  const deleteAttachment = () =>
-    dispatch(actions.issueAttachmentsDelete(attachment.uuid));
+  const issue = useContext(IssueAttachmentsContext);
+  const { deleteAttachment, isDeleting } = useDeleteAttachment(issue.url);
 
   return (
     <AttachmentItem
       attachment={attachment}
-      onDelete={deleteAttachment}
-      isDeleting={isDeleting}
+      onDelete={() => deleteAttachment(attachment.uuid)}
+      isDeleting={isDeleting(attachment.uuid)}
     />
   );
 };

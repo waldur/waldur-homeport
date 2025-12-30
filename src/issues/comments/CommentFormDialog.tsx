@@ -1,6 +1,6 @@
+import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
-import { connect } from 'react-redux';
-import { compose } from 'redux';
+import { useDispatch } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import {
   Issue,
@@ -16,28 +16,40 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse } from '@waldur/store/notify';
 
-import * as actions from './actions';
-import * as constants from './constants';
-import { getIssue } from './selectors';
+import { Comment } from './types';
 
-interface CommentFormDialogProps extends InjectedFormProps {
-  resolve: { comment };
-  isEdit: boolean;
-  issue: Issue;
+const FORM_ID = 'ISSUE_COMMENTS_FORM_MAIN';
+const COMMENT_FIELD = 'COMMENT';
+
+interface CommentFormDialogOwnProps {
+  resolve: { comment?: Comment; issue?: Issue };
 }
 
+interface CommentFormDialogProps
+  extends
+    InjectedFormProps<Record<string, string>, CommentFormDialogOwnProps>,
+    CommentFormDialogOwnProps {}
+
 const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
-  const onSubmit = async (data: { [key: string]: string }, dispatch) => {
-    if (props.isEdit) {
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+
+  const isEdit = Boolean(props.resolve?.comment);
+  const issue = props.resolve?.issue;
+
+  const onSubmit = async (data: { [key: string]: string }) => {
+    if (isEdit) {
       try {
-        const response = await supportCommentsUpdate({
+        await supportCommentsUpdate({
           path: { uuid: props.resolve.comment.uuid },
           body: {
             is_public: true,
-            description: data[constants.FORM_FIELDS.comment],
+            description: data[COMMENT_FIELD],
           },
         });
-        dispatch(actions.issueCommentsUpdateSuccess(response.data));
+        queryClient.invalidateQueries({
+          queryKey: ['issueComments', props.resolve.comment.issue],
+        });
         dispatch(closeModalDialog());
       } catch (error) {
         dispatch(
@@ -46,15 +58,16 @@ const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
       }
     } else {
       try {
-        const response = await supportIssuesComment({
-          path: { uuid: props.issue.uuid },
+        await supportIssuesComment({
+          path: { uuid: issue.uuid },
           body: {
             is_public: true,
-            description: data[constants.FORM_FIELDS.comment],
+            description: data[COMMENT_FIELD],
           },
         });
-
-        dispatch(actions.issueCommentsCreateSuccess(response.data));
+        queryClient.invalidateQueries({
+          queryKey: ['issueComments', issue.url],
+        });
         dispatch(closeModalDialog());
       } catch (error) {
         dispatch(
@@ -67,9 +80,7 @@ const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
   return (
     <form onSubmit={props.handleSubmit(onSubmit)}>
       <ModalDialog
-        title={
-          props.isEdit ? translate('Change comment') : translate('Add comment')
-        }
+        title={isEdit ? translate('Change comment') : translate('Add comment')}
         footer={
           <>
             <CloseDialogButton variant="tertiary" className="flex-equal" />
@@ -84,7 +95,7 @@ const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
       >
         <FormContainer submitting={props.submitting}>
           <TextField
-            name={constants.FORM_FIELDS.comment}
+            name={COMMENT_FIELD}
             spaceless
             hideLabel
             placeholder={translate('Enter a comment...')}
@@ -97,20 +108,17 @@ const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
   );
 };
 
-const mapStateToProps = (state, ownProps) => ({
-  isEdit: Boolean(ownProps.resolve?.comment),
-  initialValues: ownProps.resolve?.comment
-    ? { [constants.FORM_FIELDS.comment]: ownProps.resolve.comment.description }
-    : undefined,
-  issue: getIssue(state),
+export const CommentFormDialog = reduxForm<
+  Record<string, string>,
+  CommentFormDialogOwnProps
+>({
+  form: FORM_ID,
+  destroyOnUnmount: true,
+  initialValues: {},
+})((props) => {
+  const initialValues = props.resolve?.comment
+    ? { [COMMENT_FIELD]: props.resolve.comment.description }
+    : {};
+
+  return <PureCommentFormDialog {...props} initialValues={initialValues} />;
 });
-
-const enhance = compose(
-  connect(mapStateToProps),
-  reduxForm({
-    form: constants.MAIN_FORM_ID,
-    destroyOnUnmount: true,
-  }),
-);
-
-export const CommentFormDialog = enhance(PureCommentFormDialog);
