@@ -29,9 +29,14 @@ class LanguageUtilsServiceClass {
     // Check if current language is listed in choices and
     // switch to default language if current choice is invalid.
     // Fallback to first option in languageChoices list if defaultLanguage is invalid.
-    const code = LanguageStorage.get();
+    // Priority: URL param (?lang=xx) > localStorage > defaultLanguage > first choice
+    const urlParams = new URLSearchParams(window.location.search);
+    const urlLang = urlParams.get('lang');
+    const storedLang = LanguageStorage.get();
+
     const current =
-      this.findLanguageByCode(code) ||
+      this.findLanguageByCode(urlLang) ||
+      this.findLanguageByCode(storedLang) ||
       this.findLanguageByCode(ENV.defaultLanguage) ||
       this.getChoices()[0];
     this.setCurrentLanguage(current);
