@@ -30,6 +30,9 @@ interface EditUserDialogFormData {
 interface EditUserDialogResolve {
   permission: GenericPermission;
   refetch();
+  projectUuid?;
+  customerUuid?;
+  project?: Project;
 }
 
 interface EditUserDialogProps {
@@ -77,6 +80,8 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const currentProject = useSelector(getProject);
 
+  const project = resolve.project || currentProject;
+
   const initialValues = {
     role: getProjectRoles().find(
       ({ name }) => name === resolve.permission.role_name,
@@ -87,14 +92,14 @@ export const EditUserDialog: FC<EditUserDialogProps> = ({ resolve }) => {
   const saveUser = useCallback(
     async (formData: EditUserDialogFormData) => {
       try {
-        await savePermissions(currentProject, formData, resolve);
+        await savePermissions(project, formData, resolve);
         showSuccess(translate('Permission has been updated.'));
         closeDialog();
       } catch (error) {
         showErrorResponse(error, translate('Unable to update permission.'));
       }
     },
-    [currentProject, resolve, showSuccess, showErrorResponse, closeDialog],
+    [project, resolve, showSuccess, showErrorResponse, closeDialog],
   );
 
   return (

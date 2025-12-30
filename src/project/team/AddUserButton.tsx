@@ -35,7 +35,14 @@ export const AddUserButton: React.FC<{ project: Project; refetch }> = ({
   return (
     <ActionItem
       title={translate('Member')}
-      action={() => openDialog(AddUserDialog, { refetch, level: 'project' })}
+      action={() =>
+        openDialog(AddUserDialog, {
+          refetch,
+          level: 'project',
+          project,
+          customerUuid: project.customer_uuid,
+        })
+      }
       iconNode={<UserPlusIcon weight="bold" />}
       disabled={!canAddUser}
       tooltip={
