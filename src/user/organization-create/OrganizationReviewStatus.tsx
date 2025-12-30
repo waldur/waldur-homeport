@@ -71,6 +71,18 @@ export const OrganizationReviewStatus: FunctionComponent<
           </div>
         </div>
 
+        <h4 className="mb-3 fw-bold">
+          {translate('Data storage information')}
+        </h4>
+        <p
+          className="text-muted mb-6 fs-5"
+          style={{ maxWidth: '600px', margin: '0 auto' }}
+        >
+          {translate(
+            'Your application will be available in your dashboard with the relevant submitted information. If your application is rejected, it will remain available for 30 days so you can review the feedback. After this period, it will be automatically removed.',
+          )}
+        </p>
+
         <Button
           variant="tertiary"
           size="lg"
