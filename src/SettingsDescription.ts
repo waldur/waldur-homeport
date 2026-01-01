@@ -394,6 +394,12 @@ export const SettingsDescription = [
         type: 'image_field',
       },
       {
+        key: 'LOGIN_LOGO_MULTILINGUAL',
+        description: translate('Language-specific login logos. Dict mapping language codes to image paths, e.g., {\'de\': \'path/to/german_logo.png\'}. Falls back to LOGIN_LOGO if requested language not found.'),
+        default: {},
+        type: 'multilingual_image_field',
+      },
+      {
         key: 'FAVICON',
         description: translate('A custom favicon .png image file'),
         default: '',
