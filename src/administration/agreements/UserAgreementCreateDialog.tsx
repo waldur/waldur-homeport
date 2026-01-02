@@ -1,9 +1,12 @@
+import { useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
 import { userAgreementsCreate } from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { ENV } from '@waldur/core/config';
 import { required } from '@waldur/core/validators';
-import { SelectField, TextField } from '@waldur/form';
+import { SelectField } from '@waldur/form';
+import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { useModal } from '@waldur/modal/hooks';
@@ -14,12 +17,24 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
   const { showErrorResponse, showSuccess } = useNotify();
   const { closeDialog } = useModal();
 
+  const languageOptions = useMemo(
+    () => [
+      { label: translate('Default'), value: '' },
+      ...ENV.languageChoices.map((lang) => ({
+        label: lang.label,
+        value: lang.code,
+      })),
+    ],
+    [],
+  );
+
   const onSubmit = async (formValues) => {
     try {
       await userAgreementsCreate({
         body: {
           agreement_type: formValues.agreement_type.value,
           content: formValues.content,
+          language: formValues.language?.value ?? '',
         },
       });
       showSuccess(translate('User agreement has been created'));
@@ -56,8 +71,16 @@ export const UserAgreementCreateDialog = ({ resolve }) => {
                 validate={required}
               />
             </FormGroup>
+            <FormGroup label={translate('Language')} required>
+              <Field
+                name="language"
+                component={SelectField}
+                options={languageOptions}
+                validate={required}
+              />
+            </FormGroup>
             <FormGroup controlId="content" label={translate('Content')}>
-              <Field name="content" component={TextField as any} />
+              <Field name="content" component={MarkdownEditor as any} />
             </FormGroup>
           </ModalDialog>
         </form>

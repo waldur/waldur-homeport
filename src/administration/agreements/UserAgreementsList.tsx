@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { UserAgreement, userAgreementsList } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
@@ -12,6 +13,17 @@ import { UserAgreementCreateButton } from './UserAgreementCreateButton';
 import { UserAgreementDeleteButton } from './UserAgreementDeleteButton';
 import { UserAgreementsEditButton } from './UserAgreementsEditButton';
 import { UserAgreementsExpandableRow } from './UserAgreementsExpandableRow';
+
+const agreementTypeLabels = {
+  PP: translate('Privacy policy'),
+  TOS: translate('Terms of service'),
+};
+
+const getLanguageLabel = (code: string) => {
+  if (!code) return translate('Default');
+  const lang = ENV.languageChoices.find((l) => l.code === code);
+  return lang?.label || code;
+};
 
 const UserAggrementsRowActions = ({ row, fetch }) => (
   <ActionsDropdown
@@ -34,7 +46,12 @@ export const UserAgreementsList: FunctionComponent<{}> = () => {
       columns={[
         {
           title: translate('Type'),
-          render: ({ row }: { row }) => row.agreement_type,
+          render: ({ row }) =>
+            agreementTypeLabels[row.agreement_type] || row.agreement_type,
+        },
+        {
+          title: translate('Language'),
+          render: ({ row }) => getLanguageLabel(row.language),
         },
         {
           title: translate('Created at'),

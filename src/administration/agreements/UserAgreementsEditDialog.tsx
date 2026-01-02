@@ -2,7 +2,9 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { userAgreementsPartialUpdate } from 'waldur-js-client';
 
-import { FormGroup, SubmitButton, TextField } from '@waldur/form';
+import { ENV } from '@waldur/core/config';
+import { SubmitButton } from '@waldur/form';
+import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -18,6 +20,12 @@ interface UserAgreementsEditDialogOwnProps {
 const agreementTypeLabelMap = {
   pp: translate('Privacy policy'),
   tos: translate('Terms of service'),
+};
+
+const getLanguageLabel = (code: string) => {
+  if (!code) return translate('Default');
+  const lang = ENV.languageChoices.find((l) => l.code === code);
+  return lang?.label || code;
 };
 
 export const UserAgreementsEditDialog = ({
@@ -47,17 +55,22 @@ export const UserAgreementsEditDialog = ({
               <SubmitButton submitting={submitting} label={translate('Save')} />
             }
           >
-            <Field
-              name="content"
-              component={FormGroup as any}
-              label={
-                agreementTypeLabelMap[
-                  resolve.initialValues.agreement_type.toLowerCase()
-                ]
-              }
-            >
-              <TextField style={{ height: '520px' }} />
-            </Field>
+            <div className="mb-7">
+              <label className="form-label">{translate('Language')}</label>
+              <p className="form-control-plaintext">
+                {getLanguageLabel(resolve.initialValues.language)}
+              </p>
+            </div>
+            <div className="mb-7">
+              <label className="form-label">
+                {
+                  agreementTypeLabelMap[
+                    resolve.initialValues.agreement_type.toLowerCase()
+                  ]
+                }
+              </label>
+              <Field name="content" component={MarkdownEditor as any} />
+            </div>
           </ModalDialog>
         </form>
       )}
