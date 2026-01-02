@@ -10,7 +10,12 @@ import {
   TextField,
 } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { CountrySelectField } from '@waldur/form/CountrySelectField';
 import { DateField } from '@waldur/form/DateField';
+import { DateTimeField } from '@waldur/form/DateTimeField';
+import { EmailField } from '@waldur/form/EmailField';
+import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
+import { YearField } from '@waldur/form/YearField';
 import { translate } from '@waldur/i18n';
 import {
   isQuestionSelectType,
@@ -23,10 +28,17 @@ const questionComponent: Record<QuestionTypeEnum, ComponentType> = {
   boolean: AwesomeCheckboxField,
   number: NumberField,
   date: DateField,
+  datetime: DateTimeField,
   single_select: SelectField,
   multi_select: SelectField,
   multiple_files: FileUploadField,
   file: FileUploadField,
+  url: StringField,
+  email: EmailField,
+  country: CountrySelectField,
+  phone_number: PhoneNumberField,
+  year: YearField,
+  rating: NumberField,
 };
 
 type OwnProps = {

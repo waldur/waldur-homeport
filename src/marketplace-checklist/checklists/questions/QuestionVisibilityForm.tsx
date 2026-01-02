@@ -19,6 +19,8 @@ import { FileUploadField, NumberField, SelectField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { DateField } from '@waldur/form/DateField';
+import { DateTimeField } from '@waldur/form/DateTimeField';
+import { YearField } from '@waldur/form/YearField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { questionConditionOperatorOptions } from '@waldur/marketplace-checklist/utils';
@@ -45,9 +47,16 @@ const questionComponent: Record<
   boolean: AwesomeCheckboxField,
   number: NumberField,
   date: DateField,
+  datetime: DateTimeField,
   single_select: SelectField,
   multi_select: SelectField,
   multiple_files: FileUploadField,
+  url: CommaSeparatedListField,
+  email: CommaSeparatedListField,
+  country: CommaSeparatedListField,
+  phone_number: CommaSeparatedListField,
+  year: YearField,
+  rating: NumberField,
 };
 
 const FieldsListGroup = ({
