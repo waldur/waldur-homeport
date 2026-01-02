@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
-import { Field } from 'react-final-form';
+import { useEffect, useMemo } from 'react';
+import { Field, useForm } from 'react-final-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
 import { ENV } from '@waldur/core/config';
+import { isEmpty } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { SelectField, StringField, TextField } from '@waldur/form';
@@ -16,13 +18,38 @@ import { Call, ProposalReview } from '@waldur/proposals/types';
 
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 
+import { StepHeaderContent } from './StepHeaderContent';
 import { UploadDocumentationFiles } from './UploadDocumentationFiles';
 
 const isCodeRequired = ENV.plugins.WALDUR_CORE.OECD_FOS_2007_CODE_MANDATORY;
 
+// Fields to track for completion count
+const PROJECT_DETAIL_FIELDS = [
+  'name',
+  'project_summary',
+  'description',
+  'oecd_fos_2007_code',
+  'duration_in_days',
+  'supporting_documentation',
+] as const;
+
 export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
   const reviews: ProposalReview[] = props.params?.reviews;
   const proposal = props.params?.proposal;
+  const values = props.params?.values;
+  const isCompleted = props.params?.isCompleted;
+  const isRequired = props.params?.isRequired;
+  const isOpen = props.params?.isOpen;
+  const onToggle = props.params?.onToggle;
+
+  // Count filled fields for metadata display
+  const filledFieldsCount = useMemo(() => {
+    if (!values) return 0;
+    return PROJECT_DETAIL_FIELDS.filter((fieldName) => {
+      const value = values[fieldName];
+      return typeof value === 'object' ? !isEmpty(value) : Boolean(value);
+    }).length;
+  }, [values]);
 
   const { data: call } = useQuery({
     queryKey: ['Call', proposal.call_uuid],
@@ -38,15 +65,31 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
     refetchOnWindowFocus: false,
   });
 
-  // Check if proposal has compliance - collapse panels only if compliance exists
-  const hasCompliance = !!proposal?.compliance_status;
+  // Set duration from call's fixed_duration_in_days if available
+  const form = useForm();
+  useEffect(() => {
+    if (call?.fixed_duration_in_days && !values?.duration_in_days) {
+      form.change('duration_in_days', call.fixed_duration_in_days);
+    }
+  }, [call?.fixed_duration_in_days, form, values?.duration_in_days]);
 
   return (
     <AccordionCard
       title={translate('Project details')}
       subtitle={translate('Basic information about your research project.')}
       id={props.id}
-      defaultOpen={!hasCompliance}
+      isOpen={isOpen}
+      onToggle={onToggle}
+      actions={
+        <StepHeaderContent
+          isCompleted={isCompleted}
+          isRequired={isRequired}
+          metadata={translate('{filled}/{total} fields filled', {
+            filled: filledFieldsCount,
+            total: PROJECT_DETAIL_FIELDS.length,
+          })}
+        />
+      }
     >
       <FormGroup label={translate('Name')} required>
         <Field
@@ -149,6 +192,7 @@ export const ProjectDetailsStep = (props: VStepperFormStepProps) => {
               input={input}
               meta={meta}
               proposal={props.params.proposal}
+              refetch={props.params.refetch}
             />
           )}
         />

@@ -45,9 +45,9 @@ export const createProposalSteps = (call?: Call): VStepperFormStep[] => {
       label: translate('Resource requests'),
       id: 'step-resource-requests',
       component: FormResourceRequestsStep,
-      fields: ['resources'],
+      fields: ['resources', 'resources_init'],
       required: true,
-      requiredFields: ['resources'],
+      requiredFields: ['resources_init'], // Use resources_init as it holds actual resource requests
     },
     {
       label: translate('Project team'),
@@ -66,8 +66,8 @@ export const createProposalSteps = (call?: Call): VStepperFormStep[] => {
       id: 'step-compliance',
       component: ProposalComplianceStepExpanded,
       fields: ['compliance_questions'], // Placeholder field for compliance questions
-      required: false, // Compliance is optional for submission - used for evaluation only
-      requiredFields: [], // No required fields - basic question validation handled in component
+      required: true, // Compliance step completion is validated via backend is_completed status
+      requiredFields: [], // Validation handled via backend completion status, not individual fields
     };
 
     // Insert compliance step after project details, before resource requests

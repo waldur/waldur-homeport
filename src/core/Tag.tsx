@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, PropsWithChildren } from 'react';
+import { forwardRef, PropsWithChildren } from 'react';
 
 import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
 
@@ -9,19 +9,19 @@ interface TagProps {
   className?: string;
 }
 
-export const Tag: FC<PropsWithChildren<TagProps>> = ({
-  children,
-  onClear,
-  size,
-  className,
-}) => (
-  <span className={classNames('tag', size && `tag-${size}`, className)}>
-    {children}
-    {!!onClear && (
-      <RemoveFilterBadgeButton
-        size={size === 'sm' ? 10 : 12}
-        onClick={onClear}
-      />
-    )}
-  </span>
+export const Tag = forwardRef<HTMLSpanElement, PropsWithChildren<TagProps>>(
+  ({ children, onClear, size, className }, ref) => (
+    <span
+      ref={ref}
+      className={classNames('tag', size && `tag-${size}`, className)}
+    >
+      {children}
+      {!!onClear && (
+        <RemoveFilterBadgeButton
+          size={size === 'sm' ? 10 : 12}
+          onClick={onClear}
+        />
+      )}
+    </span>
+  ),
 );

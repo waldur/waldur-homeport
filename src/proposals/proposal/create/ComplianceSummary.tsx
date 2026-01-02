@@ -25,7 +25,10 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
   } = useQuery({
     queryKey: ['ProposalChecklistSummary', proposal.uuid],
     queryFn: () =>
-      proposalProposalsChecklistRetrieve({ path: { uuid: proposal.uuid } })
+      proposalProposalsChecklistRetrieve({
+        path: { uuid: proposal.uuid },
+        query: { include_all: true },
+      })
         .then((response) => response.data)
         .catch((err) => {
           if (

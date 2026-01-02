@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState, useMemo } from 'react';
+import { useCallback, useEffect, useState, useMemo } from 'react';
 import {
   proposalProposalsResourcesList,
   proposalPublicCallsRetrieve,
@@ -23,6 +23,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { AddCommentButton } from '../../create-review/AddCommentButton';
 import { FieldReviewComments } from '../../create-review/FieldReviewComments';
+import { StepHeaderContent } from '../StepHeaderContent';
 
 import { AddResourceButton } from './AddResourceButton';
 import { ProposalResourcesFilter } from './ProposalResourcesFilter';
@@ -34,13 +35,18 @@ import { ResourceRequestTemplates } from './ResourceRequestTemplates';
 
 export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
   const proposal: Proposal = props.params.proposal;
-
-  // Check if proposal has compliance - collapse panels only if compliance exists
-  const hasCompliance = !!proposal?.compliance_status;
   const change = props.params?.change;
   const reviews: ProposalReview[] = props.params?.reviews;
   const onAddCommentClick = props.params?.onAddCommentClick;
   const readOnlyMode = props.params.readOnly;
+  const values = props.params?.values;
+  const isCompleted = props.params?.isCompleted;
+  const isRequired = props.params?.isRequired;
+  const isOpen = props.params?.isOpen;
+  const onToggle = props.params?.onToggle;
+
+  // Get resource count from form values
+  const resourceCount = values?.resources_init?.length || 0;
 
   const [resourceRequests, setResourceRequests] = useState<RequestedResource[]>(
     [],
@@ -65,19 +71,26 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
 
   const filter = useMemo(() => ({}), []); // Stable filter object to prevent re-render loops
 
-  const tableProps = useTable({
-    table: 'ProposalResourcesList',
-    fetchData: createFetcher(proposalProposalsResourcesList, {
-      path: { uuid: proposal.uuid },
-    }),
-    filter,
-    onFetch(rows) {
+  // Memoize onFetch to prevent infinite re-render loops
+  // (onFetch is in useTableQuery's useEffect dependency array)
+  const handleFetch = useCallback(
+    (rows: RequestedResource[]) => {
       if (change) {
         setResourceRequests([...rows]);
         change('resources', rows);
         change('resources_init', [...rows]);
       }
     },
+    [change],
+  );
+
+  const tableProps = useTable({
+    table: 'ProposalResourcesList',
+    fetchData: createFetcher(proposalProposalsResourcesList, {
+      path: { uuid: proposal.uuid },
+    }),
+    filter,
+    onFetch: handleFetch,
   });
 
   // If the call has resource templates, change 'resources' field so that the values correspond to the templates.
@@ -97,7 +110,19 @@ export const FormResourceRequestsStep = (props: VStepperFormStepProps) => {
       id={props.id}
       title={translate('Resource requests')}
       subtitle={translate('Resources requested for your project.')}
-      defaultOpen={!hasCompliance}
+      isOpen={isOpen}
+      onToggle={onToggle}
+      actions={
+        <StepHeaderContent
+          isCompleted={isCompleted}
+          isRequired={isRequired}
+          metadata={
+            resourceCount > 0
+              ? translate('{count} resources', { count: resourceCount })
+              : undefined
+          }
+        />
+      }
     >
       {call?.resource_templates?.length && !readOnlyMode ? (
         <ResourceRequestTemplates

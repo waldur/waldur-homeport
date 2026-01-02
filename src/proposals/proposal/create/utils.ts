@@ -1,7 +1,6 @@
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
+import { useDispatch } from 'react-redux';
 import {
   CallResourceTemplate,
   Proposal,
@@ -16,7 +15,6 @@ import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
-import { PROPOSAL_UPDATE_SUBMISSION_FORM_ID } from '@waldur/proposals/constants';
 import { Call } from '@waldur/proposals/types';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { fetchListStart } from '@waldur/table/actions';
@@ -100,36 +98,32 @@ export const useProposalDecisionActions = (
   };
 };
 
-const proposalFormDataSelector = (state) =>
-  (getFormValues(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) || {}) as any;
-
 export const useSubmitProposalResourcesFromTemplates = (
   proposal: Proposal,
+  selectedTemplates: CallResourceTemplate[],
+  initialResources: RequestedResource[],
   showMessages = true,
 ) => {
   const queryClient = useQueryClient();
   const dispatch = useDispatch();
-  const formData: {
-    resources: CallResourceTemplate[];
-    resources_init: RequestedResource[];
-  } = useSelector(proposalFormDataSelector);
 
   const newSelections = useMemo(() => {
-    if (!formData?.resources?.length) return [];
-    return formData.resources.filter((resource) => {
-      return !formData.resources_init.some(
-        (req) => req.call_resource_template === resource.url,
+    if (!selectedTemplates?.length) return [];
+    return selectedTemplates.filter((template) => {
+      return !initialResources.some(
+        (req) => req.call_resource_template === template.url,
       );
     });
-  }, [formData]);
+  }, [selectedTemplates, initialResources]);
+
   const removedSelections = useMemo(() => {
-    if (!formData?.resources_init?.length) return [];
-    return formData.resources_init.filter((req) => {
-      return !formData.resources.some(
-        (resource) => resource.url === req.call_resource_template,
+    if (!initialResources?.length) return [];
+    return initialResources.filter((req) => {
+      return !selectedTemplates.some(
+        (template) => template.url === req.call_resource_template,
       );
     });
-  }, [formData]);
+  }, [selectedTemplates, initialResources]);
 
   const { mutate: saveSelections, isPending } = useMutation({
     mutationFn: async () => {

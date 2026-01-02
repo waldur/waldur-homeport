@@ -1,6 +1,6 @@
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { get } from 'lodash-es';
-import { createRef, FC, useCallback, useMemo, useRef } from 'react';
+import { createRef, FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import {
@@ -13,15 +13,105 @@ import {
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
+import { useAccordionUrlState } from '@waldur/core/useAccordionUrlState';
 import { isEmpty } from '@waldur/core/utils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
+import { extractComplianceAnswers } from './complianceUtils';
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
-import { useSubmitProposalResourcesFromTemplates } from './utils';
+
+// Evaluate if a dependency condition is met based on current form values
+const evaluateCondition = (
+  condition: {
+    question_description: string;
+    operator: string;
+    required_value: unknown;
+  },
+  answerValue: unknown,
+): boolean => {
+  const { operator, required_value } = condition;
+
+  if (answerValue === undefined || answerValue === null || answerValue === '') {
+    return false;
+  }
+
+  switch (operator) {
+    case 'equals':
+      return answerValue === required_value;
+    case 'not_equals':
+      return answerValue !== required_value;
+    case 'contains':
+      if (Array.isArray(answerValue)) {
+        return answerValue.includes(required_value);
+      }
+      return String(answerValue).includes(String(required_value));
+    case 'not_contains':
+      if (Array.isArray(answerValue)) {
+        return !answerValue.includes(required_value);
+      }
+      return !String(answerValue).includes(String(required_value));
+    case 'greater_than':
+      return Number(answerValue) > Number(required_value);
+    case 'less_than':
+      return Number(answerValue) < Number(required_value);
+    case 'is_empty':
+      return isEmpty(answerValue);
+    case 'is_not_empty':
+      return !isEmpty(answerValue);
+    default:
+      return answerValue === required_value;
+  }
+};
+
+// Check if compliance checklist is complete based on current form values
+const isComplianceComplete = (
+  checklistData: any,
+  formValues: Record<string, any>,
+): boolean => {
+  if (!checklistData?.questions?.length) {
+    return true; // No questions = complete
+  }
+
+  // Build map of question description to field name for dependency lookup
+  const questionDescToFieldName: Record<string, string> = {};
+  checklistData.questions.forEach((q: any) => {
+    questionDescToFieldName[q.description] = `compliance_${q.uuid}`;
+  });
+
+  // Check if a question is visible based on its dependencies
+  const isQuestionVisible = (question: any): boolean => {
+    const depInfo = question.dependencies_info;
+    if (!depInfo || !depInfo.conditions?.length) {
+      return true; // No dependencies = always visible
+    }
+
+    const results = depInfo.conditions.map((condition: any) => {
+      const fieldName = questionDescToFieldName[condition.question_description];
+      const answerValue = fieldName ? formValues[fieldName] : undefined;
+      return evaluateCondition(condition, answerValue);
+    });
+
+    return depInfo.logic === 'or'
+      ? results.some(Boolean)
+      : results.every(Boolean);
+  };
+
+  // Get visible required questions
+  const visibleRequiredQuestions = checklistData.questions.filter(
+    (q: any) => q.required && isQuestionVisible(q),
+  );
+
+  // Check if all visible required questions have answers
+  return visibleRequiredQuestions.every((question: any) => {
+    const fieldName = `compliance_${question.uuid}`;
+    const value = formValues[fieldName];
+    return typeof value === 'object' ? !isEmpty(value) : Boolean(value);
+  });
+};
 
 const attachDocuments = async (proposal_uuid, supporting_documentation) => {
   if (supporting_documentation) {
@@ -41,38 +131,13 @@ const attachDocuments = async (proposal_uuid, supporting_documentation) => {
 };
 
 const submitComplianceAnswers = async (
-  proposal_uuid,
-  formData,
-  checklistData,
+  proposal_uuid: string,
+  formData: Record<string, unknown>,
+  checklistData?: {
+    questions?: Array<{ uuid: string; question_type: string }>;
+  },
 ) => {
-  // Extract compliance answers from form data and submit them
-  const complianceAnswers = [];
-
-  Object.keys(formData).forEach((key) => {
-    if (key.startsWith('compliance_')) {
-      const questionUuid = key.replace('compliance_', '');
-      let answerData = formData[key];
-
-      // Format single_select answers as arrays for backend
-      // Backend expects single_select as ["uuid"] not "uuid"
-      if (answerData && typeof answerData === 'string') {
-        // Check if this is a single_select question by finding it in checklistData
-        const questionUuid = key.replace('compliance_', '');
-        const isSelectQuestion = checklistData?.questions?.some(
-          (q) => q.uuid === questionUuid && q.question_type === 'single_select',
-        );
-
-        if (isSelectQuestion) {
-          answerData = [answerData]; // Convert "uuid" to ["uuid"] for backend
-        }
-      }
-
-      complianceAnswers.push({
-        question_uuid: questionUuid,
-        answer_data: answerData,
-      });
-    }
-  });
+  const complianceAnswers = extractComplianceAnswers(formData, checklistData);
 
   if (complianceAnswers.length > 0) {
     try {
@@ -93,13 +158,17 @@ export const ProposalSubmissionStep: FC<{
   refetch;
 }> = ({ proposal, reviews, refetch }) => {
   const dispatch = useDispatch();
+  const queryClient = useQueryClient();
   const proposal_uuid = proposal.uuid;
 
-  // Query the proposal checklist to see if it has questions
+  // Query the proposal checklist with all questions (including hidden ones for real-time validation)
   const { data: checklistData } = useQuery({
-    queryKey: ['ProposalChecklist', proposal_uuid],
+    queryKey: ['ProposalChecklist', proposal_uuid, 'include_all'],
     queryFn: () =>
-      proposalProposalsChecklistRetrieve({ path: { uuid: proposal_uuid } })
+      proposalProposalsChecklistRetrieve({
+        path: { uuid: proposal_uuid },
+        query: { include_all: true },
+      })
         .then((response) => response.data)
         .catch((err) => {
           // If 400 with "No checklist configured", return null
@@ -166,19 +235,66 @@ export const ProposalSubmissionStep: FC<{
     return createProposalSteps(fakeCallForSteps);
   }, [shouldAddComplianceStep]);
 
+  // Get panel IDs for accordion URL state management
+  const panelIds = useMemo(() => formSteps.map((step) => step.id), [formSteps]);
+
+  // Manage accordion open/closed state via URL query params
+  const { isPanelOpen, togglePanel } = useAccordionUrlState(panelIds, []);
+
   const stepRefs = useRef([]);
   // Recalculate step refs when steps change (e.g., when compliance step is added)
   stepRefs.current = useMemo(() => {
     return formSteps.map((_, i) => stepRefs.current[i] ?? createRef());
   }, [formSteps]);
 
-  const { save: saveResources } =
-    useSubmitProposalResourcesFromTemplates(proposal);
+  // Store form reference for updating fields after save
+  const formRef = useRef<any>(null);
+
+  // Track previous checklistData to detect changes after save
+  const prevChecklistDataRef = useRef(checklistData);
+
+  // Sync compliance form fields when checklistData is refetched (e.g., after saving)
+  // This ensures file uploads show as "Uploaded" instead of "Pending" after save
+  useEffect(() => {
+    if (!formRef.current || !checklistData?.questions) return;
+
+    // Only sync if checklistData has actually changed
+    if (prevChecklistDataRef.current === checklistData) return;
+    prevChecklistDataRef.current = checklistData;
+
+    checklistData.questions.forEach((question) => {
+      const fieldName = `compliance_${question.uuid}`;
+      let answerData = question.existing_answer?.answer_data || null;
+
+      // Transform single_select arrays to single values for UI display
+      if (
+        question.question_type === 'single_select' &&
+        Array.isArray(answerData) &&
+        answerData.length > 0
+      ) {
+        answerData = answerData[0];
+      }
+
+      // Update the form field with the new value from backend
+      const currentValue = formRef.current.getState().values[fieldName];
+      // Only update if the current value has 'content' (pending upload) and
+      // the new value has 'stored_file_id' (processed upload)
+      if (
+        currentValue &&
+        typeof currentValue === 'object' &&
+        'content' in currentValue &&
+        answerData &&
+        typeof answerData === 'object' &&
+        'stored_file_id' in answerData
+      ) {
+        formRef.current.change(fieldName, answerData);
+      }
+    });
+  }, [checklistData]);
 
   const { mutate: saveAsDraft, isPending: isSaving } = useMutation({
     mutationFn: async (formValues: any) => {
       try {
-        await saveResources();
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
           body: formValues,
@@ -189,6 +305,10 @@ export const ProposalSubmissionStep: FC<{
           formValues.supporting_documentation,
         );
         dispatch(showSuccess(translate('Proposal updated successfully')));
+        // Invalidate checklist query to refresh compliance answers with stored file info
+        await queryClient.invalidateQueries({
+          queryKey: ['ProposalChecklist', proposal_uuid],
+        });
         if (refetch) refetch();
       } catch (error) {
         dispatch(showErrorResponse(error, translate('Something went wrong')));
@@ -208,7 +328,6 @@ export const ProposalSubmissionStep: FC<{
         return;
       }
       try {
-        await saveResources();
         await proposalProposalsUpdateProjectDetails({
           path: { uuid: proposal_uuid },
           body: formValues,
@@ -225,7 +344,7 @@ export const ProposalSubmissionStep: FC<{
         dispatch(showErrorResponse(error, translate('Something went wrong')));
       }
     },
-    [proposal, proposal_uuid],
+    [proposal, proposal_uuid, checklistData, dispatch, refetch],
   );
 
   return (
@@ -233,7 +352,14 @@ export const ProposalSubmissionStep: FC<{
       onSubmit={submitForm}
       initialValues={initialValues}
       render={({ handleSubmit, submitting, form, values }) => {
+        // Store form reference for use in effects
+        formRef.current = form;
+
         const completedSteps = formSteps.map((step) => {
+          // Special handling for compliance step - real-time client-side validation
+          if (step.id === 'step-compliance') {
+            return isComplianceComplete(checklistData, values);
+          }
           if (step.required && step.requiredFields?.length) {
             return step.requiredFields.every((fieldName) => {
               const field = get(values, fieldName);
@@ -259,7 +385,13 @@ export const ProposalSubmissionStep: FC<{
                         refetch,
                         reviews,
                         form,
+                        change: form.change,
                         values,
+                        isCompleted: completedSteps[i],
+                        isRequired: step.required,
+                        isOpen: isPanelOpen(step.id),
+                        onToggle: (isOpen: boolean) =>
+                          togglePanel(step.id, isOpen),
                       }}
                     />
                   </div>

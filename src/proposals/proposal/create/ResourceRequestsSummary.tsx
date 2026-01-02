@@ -32,15 +32,12 @@ export const ResourceRequestsSummary = ({
     }),
   });
 
-  // Check if proposal has compliance - collapse panels only if compliance exists
-  const hasCompliance = !!proposal?.compliance_status;
-
   return (
     <AccordionCard
       id="step-resource-requests"
       title={translate('Resource requests')}
       subtitle={translate('Resources requested for this proposal.')}
-      defaultOpen={!hasCompliance}
+      defaultOpen={false}
     >
       <Table<ProposalResource>
         {...tableProps}
