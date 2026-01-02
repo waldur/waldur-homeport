@@ -97,7 +97,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'call-management.proposal-details',
-    url: 'proposals/:proposal_uuid/?review_uuid',
+    url: 'proposals/:proposal_uuid/?review_uuid&panels',
     component: lazyComponent(() =>
       import('./proposal/create/ProposalManagePage').then((module) => ({
         default: module.ProposalManagePage,
@@ -325,7 +325,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'proposals.manage-proposal',
-    url: ':proposal_uuid/?review_uuid',
+    url: ':proposal_uuid/?review_uuid&panels',
     component: lazyComponent(() =>
       import('./proposal/create/ProposalManagePage').then((module) => ({
         default: module.ProposalManagePage,

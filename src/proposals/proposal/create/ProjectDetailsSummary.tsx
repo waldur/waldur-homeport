@@ -21,15 +21,12 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
   reviews,
   onAddCommentClick,
 }) => {
-  // Check if proposal has compliance - collapse panels only if compliance exists
-  const hasCompliance = !!proposal?.compliance_status;
-
   return (
     <AccordionCard
       id="step-project"
       title={translate('Project details')}
       subtitle={translate('Basic information about your research project.')}
-      defaultOpen={!hasCompliance}
+      defaultOpen={false}
     >
       <CommentSection
         label={translate('Name')}

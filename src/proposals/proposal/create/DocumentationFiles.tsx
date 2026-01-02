@@ -1,16 +1,20 @@
 import { ProposalDocumentation } from 'waldur-js-client';
 
+import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
 import { AttachmentItemPending } from '@waldur/form/upload/AttachmentItemPending';
 import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
 
 interface DocumentationFilesProps {
   files: Array<ProposalDocumentation>;
-  pending?: FileList;
+  pending?: FileList | File[];
   onChange?(value): void;
+  onDeleteExisting?(file: ProposalDocumentation): void;
 }
 
-export const DocumentationFiles = (props: DocumentationFilesProps) =>
-  props.files?.length > 0 || props.pending?.length > 0 ? (
+export const DocumentationFiles = (props: DocumentationFilesProps) => {
+  const pendingFiles = props.pending ? Array.from(props.pending) : [];
+
+  return props.files?.length > 0 || pendingFiles.length > 0 ? (
     <AttachmentsList
       attachments={
         props.files &&
@@ -24,20 +28,27 @@ export const DocumentationFiles = (props: DocumentationFilesProps) =>
             .replace(/_[^_]+\./, '.'),
         })) as any)
       }
-      uploading={
-        props.pending &&
-        Array.from(props.pending).map((file) => ({
-          key: file.size,
-          file,
-        }))
+      uploading={pendingFiles.map((file) => ({
+        key: file.size,
+        file,
+      }))}
+      ItemComponent={
+        props.onDeleteExisting
+          ? (itemProps) => (
+              <AttachmentItem
+                {...itemProps}
+                onDelete={() => props.onDeleteExisting(itemProps.attachment)}
+              />
+            )
+          : undefined
       }
       ItemPendingComponent={(itemProps) => (
         <AttachmentItemPending
           {...itemProps}
           onCancel={(f) =>
             props.onChange(
-              Array.from(props.pending).filter(
-                (file) => file.name !== f.name && file.size !== f.size,
+              pendingFiles.filter(
+                (file) => file.name !== f.name || file.size !== f.size,
               ),
             )
           }
@@ -46,3 +57,4 @@ export const DocumentationFiles = (props: DocumentationFilesProps) =>
       className="mb-3"
     />
   ) : null;
+};

@@ -1,4 +1,4 @@
-import { useCallback, useEffect, useRef } from 'react';
+import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { queryClient } from '@waldur/core/queryClient';
@@ -254,6 +254,17 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     (state: RootState) => selectTableRows(state, table) as RowType[],
   );
 
+  // Memoize pagination to prevent infinite re-renders in Table's useEffect
+  // that depends on props.pagination
+  const resultCount = data?.resultCount ?? pagination.resultCount;
+  const memoizedPagination = useMemo(
+    () => ({
+      ...pagination,
+      resultCount,
+    }),
+    [pagination, resultCount],
+  );
+
   return {
     fetch,
     gotoPage,
@@ -279,10 +290,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     // Override with React Query state
     loading: isLoading || isFetching,
     error,
-    pagination: {
-      ...pagination,
-      resultCount: data?.resultCount ?? pagination.resultCount,
-    },
+    pagination: memoizedPagination,
     table,
     rows,
     alterTitle,

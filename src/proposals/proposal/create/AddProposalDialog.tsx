@@ -1,6 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
-import { useCallback } from 'react';
+import { useCallback, useEffect } from 'react';
 import { reduxForm } from 'redux-form';
 import { NestedRound, proposalProposalsCreate } from 'waldur-js-client';
 
@@ -29,6 +29,17 @@ export const AddProposalDialog = reduxForm<
 })((props) => {
   const router = useRouter();
   const { showSuccess, showErrorResponse } = useNotify();
+
+  useEffect(() => {
+    // Delay focus to run after modal animation and autoFocus complete (~150ms)
+    const timer = setTimeout(() => {
+      const input =
+        document.querySelector<HTMLInputElement>('input[name="name"]');
+      input?.focus();
+    }, 200);
+    return () => clearTimeout(timer);
+  }, []);
+
   const processRequest = useCallback(
     async (values: FormData) => {
       try {

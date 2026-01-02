@@ -16,6 +16,10 @@ interface AccordionCardProps extends PropsWithChildren {
   className?: string;
   titleClassName?: string;
   defaultOpen?: boolean;
+  /** Controlled open state - when provided, component becomes controlled */
+  isOpen?: boolean;
+  /** Callback when accordion is toggled - required for controlled mode */
+  onToggle?: (isOpen: boolean) => void;
   solid?: boolean;
   size?: 'sm';
   secondary?: boolean;
@@ -64,9 +68,24 @@ const CustomToggle = ({
 };
 
 export const AccordionCard: FC<AccordionCardProps> = (props) => {
+  // Determine if controlled mode based on isOpen prop
+  const isControlled = props.isOpen !== undefined;
+
+  // For controlled mode, use activeKey; for uncontrolled, use defaultActiveKey
+  const accordionProps = isControlled
+    ? {
+        activeKey: props.isOpen ? '0' : null,
+        onSelect: (eventKey: string | null) => {
+          props.onToggle?.(eventKey === '0');
+        },
+      }
+    : {
+        defaultActiveKey: props.defaultOpen ? '0' : undefined,
+      };
+
   return (
     <Accordion
-      defaultActiveKey={props.defaultOpen && '0'}
+      {...accordionProps}
       className={props.secondary ? 'accordion-secondary' : undefined}
     >
       <Card
