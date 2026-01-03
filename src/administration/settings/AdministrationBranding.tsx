@@ -49,14 +49,19 @@ export const AdministrationBranding = () => {
 
   const getItemValue = useCallback(
     (item) => {
-      const value =
-        item.type === 'country_list_field'
-          ? data?.COUNTRIES
-          : ENV.plugins.WALDUR_CORE[item.key];
+      let value;
+      if (item.type === 'country_list_field') {
+        value = data?.COUNTRIES;
+      } else if (item.type === 'multilingual_image_field') {
+        // Get multilingual image values from API data, return empty object if not set
+        return data?.[item.key] || {};
+      } else {
+        value = ENV.plugins.WALDUR_CORE[item.key];
+      }
       if (value === false) return value;
       return value || ' ';
     },
-    [data?.COUNTRIES],
+    [data],
   );
 
   return (
