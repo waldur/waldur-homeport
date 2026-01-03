@@ -140,7 +140,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-branding',
-    url: 'branding/',
+    url: 'branding/?tab&q',
     parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./settings/AdministrationBranding').then((module) => ({
@@ -239,7 +239,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-features',
-    url: 'features/',
+    url: 'features/?tab&q',
     parent: 'admin-user-interface',
     component: lazyComponent(() =>
       import('./FeaturesList').then((module) => ({
