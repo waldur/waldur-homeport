@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { CountryListField } from './CountryListField';
+import { MultilingualImageEditButton } from './MultilingualImageEditButton';
 import { getKeyTitle, SIDEBAR_STYLES } from './utils';
 
 const ColorField = ({ value }) => (
@@ -26,6 +27,26 @@ const ImageField = ({ value }) => (
         backgroundImage: `url(${value})`,
       }}
     />
+  </div>
+);
+
+const MultilingualImageField = ({
+  value,
+}: {
+  value: Record<string, string>;
+}) => (
+  <div className="d-flex flex-wrap gap-2">
+    {value && typeof value === 'object' && Object.keys(value).length > 0 ? (
+      Object.entries(value).map(([lang]) => (
+        <span key={lang} className="badge badge-light-primary">
+          {lang.toUpperCase()}
+        </span>
+      ))
+    ) : (
+      <span className="text-muted">
+        {translate('No language-specific logos configured')}
+      </span>
+    )}
   </div>
 );
 
@@ -70,6 +91,8 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
               ? JSON.stringify(value, null, 2)
               : value || ''}
           </pre>
+        ) : item.type === 'multilingual_image_field' ? (
+          <MultilingualImageField value={value} />
         ) : typeof value === 'object' ? (
           <pre>{JSON.stringify(value, null, 2)}</pre>
         ) : item.key === 'SIDEBAR_STYLE' ? (
@@ -82,6 +105,8 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
       actions={
         item.type === 'country_list_field' ? (
           <CountryListEditButton onEdit={onEdit} />
+        ) : item.type === 'multilingual_image_field' ? (
+          <MultilingualImageEditButton item={item} value={value} />
         ) : (
           <ConfigurationEditButton item={item} value={value} />
         )

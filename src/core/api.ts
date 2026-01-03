@@ -97,8 +97,13 @@ client.interceptors.response.use((response) => {
   return response;
 });
 
-export const getIconUrl = (name: string) =>
-  `${ENV.apiEndpoint}api/icons/${name}/`;
+export const getIconUrl = (name: string, language?: string) => {
+  const baseUrl = `${ENV.apiEndpoint}api/icons/${name}/`;
+  if (language) {
+    return `${baseUrl}?language=${language}`;
+  }
+  return baseUrl;
+};
 
 export const fixURL = (endpoint: string) =>
   endpoint.startsWith('http')

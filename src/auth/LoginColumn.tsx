@@ -9,6 +9,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
+import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
 import { FooterLinks } from '@waldur/navigation/FooterLinks';
 import { JoinOrganizationFooterLink } from '@waldur/navigation/JoinOrganizationFooterLink';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
@@ -25,7 +26,8 @@ import './LoginColumn.scss';
 
 export const LoginColumn = () => {
   const features = useAuthFeatures();
-  const imageUrl = getIconUrl('login_logo');
+  const currentLanguage = LanguageUtilsService.getCurrentLanguage();
+  const imageUrl = getIconUrl('login_logo', currentLanguage?.code);
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['IdentityProvidersConfigurations'],
     queryFn: () => getIdentityProviders(),
