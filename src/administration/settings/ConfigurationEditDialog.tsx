@@ -83,18 +83,23 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
 
   const onSubmit = async (formData) => {
     try {
-      const isFileRemoving =
-        item.type === 'image_field' && formData.value === null;
+      const isImageField = item.type === 'image_field';
+      const isFileRemoving = isImageField && formData.value === null;
+      const isFileUpload = isImageField && formData.value instanceof File;
 
-      if (isFileRemoving)
+      if (isFileRemoving) {
         await overrideSettings({
           body: { [item.key]: null },
         });
-      else
+      } else {
+        // Only use formDataOptions (multipart/form-data) for actual file uploads
+        const requestOptions = isFileUpload ? formDataOptions : {};
+
         await overrideSettings({
           body: { [item.key]: formData.value ?? '' },
-          ...formDataOptions,
+          ...requestOptions,
         });
+      }
 
       ENV.plugins.WALDUR_CORE[item.key] = formData.value;
       showSuccess(translate('Configuration has been updated.'));
