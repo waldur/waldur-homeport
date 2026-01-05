@@ -1,0 +1,85 @@
+.layout-glassmorphism {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-glassmorphism-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-glassmorphism-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.layout-glassmorphism-card {
+  background: rgba(0, 0, 0, 0.6);
+  backdrop-filter: blur(20px);
+  -webkit-backdrop-filter: blur(20px);
+  border: 1px solid rgba(255, 255, 255, 0.15);
+  border-radius: 20px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 8px 32px rgba(0, 0, 0, 0.3);
+  text-align: center;
+  color: white;
+}
+
+.layout-glassmorphism-card .form-control {
+  background: rgba(255, 255, 255, 0.15);
+  border: 1px solid rgba(255, 255, 255, 0.2);
+  color: white;
+}
+
+.layout-glassmorphism-card .form-control::placeholder {
+  color: rgba(255, 255, 255, 0.6);
+}
+
+.layout-glassmorphism-card .form-label,
+.layout-glassmorphism-card .powered-by,
+.layout-glassmorphism-card p,
+.layout-glassmorphism-card .local-login-form {
+  color: rgba(255, 255, 255, 0.9);
+}
+
+.layout-glassmorphism-card a {
+  color: #f0a5b8;
+}
+
+.layout-glassmorphism-card a:hover {
+  color: #fff;
+}
+
+.layout-glassmorphism-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.4);
+  backdrop-filter: blur(10px);
+  color: white;
+  flex-wrap: wrap;
+  gap: 0.5rem;
+}
+
+.layout-glassmorphism-footer .menu-link {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.layout-glassmorphism-footer .menu-link:hover {
+  color: #fff !important;
+}
+
+.layout-glassmorphism-footer select {
+  color: white;
+  background: transparent;
+}

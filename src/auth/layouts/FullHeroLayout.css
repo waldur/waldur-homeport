@@ -1,0 +1,72 @@
+.layout-full-hero {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.layout-full-hero-overlay {
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.5);
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-full-hero-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-full-hero-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+@media (width >= 992px) {
+  .layout-full-hero-content {
+    flex-direction: row;
+    align-items: center;
+    justify-content: space-around;
+  }
+}
+
+.layout-full-hero-login {
+  background: var(--waldur-bg-primary);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 400px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+}
+
+.layout-full-hero-login-inner {
+  text-align: center;
+}
+
+.layout-full-hero-text {
+  text-align: center;
+  color: white;
+  max-width: 500px;
+}
+
+.layout-full-hero-text h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  margin-bottom: 1.5rem;
+}
+
+.layout-full-hero-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.layout-full-hero-footer .menu-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}

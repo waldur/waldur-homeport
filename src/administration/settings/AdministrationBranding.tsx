@@ -14,6 +14,12 @@ const CountrySelector = lazyComponent(() =>
   })),
 );
 
+const LoginPageListEditDialog = lazyComponent(() =>
+  import('./LoginPageListEditDialog').then((module) => ({
+    default: module.LoginPageListEditDialog,
+  })),
+);
+
 const BRANDING_TABS: SettingsTab[] = [
   {
     key: 'branding',
@@ -39,6 +45,11 @@ const BRANDING_TABS: SettingsTab[] = [
     key: 'theme',
     title: translate('Theme'),
     groupName: translate('Theme'),
+  },
+  {
+    key: 'login-page',
+    title: translate('Login page'),
+    groupName: translate('Login page'),
   },
   {
     key: 'images',
@@ -74,6 +85,20 @@ export const AdministrationBranding = () => {
                 settingKey: 'COUNTRIES',
               },
               size: 'xl',
+            }),
+          );
+        };
+      }
+      if (item.type === 'json_list_field') {
+        return () => {
+          const value = ENV.plugins.WALDUR_CORE[item.key] || [];
+          dispatch(
+            openModalDialog(LoginPageListEditDialog, {
+              resolve: {
+                item,
+                value,
+              },
+              size: 'lg',
             }),
           );
         };

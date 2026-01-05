@@ -1,0 +1,11 @@
+.layout-right-split {
+  display: grid;
+  min-height: 100vh;
+}
+
+@media (width >= 768px) {
+  .layout-right-split {
+    grid-auto-flow: column;
+    grid-template-columns: 1fr 1fr;
+  }
+}

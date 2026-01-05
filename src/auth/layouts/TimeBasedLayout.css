@@ -1,0 +1,71 @@
+.layout-time-based {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-time-based-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-time-based-header .theme-switcher-btn {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.layout-time-based-content {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+  gap: 2rem;
+}
+
+.layout-time-based-greeting {
+  text-align: center;
+  color: white;
+}
+
+.layout-time-based-greeting i {
+  font-size: 3rem;
+  margin-bottom: 1rem;
+  display: block;
+}
+
+.layout-time-based-greeting h2 {
+  font-size: 1.75rem;
+  font-weight: 300;
+  margin: 0;
+}
+
+.layout-time-based-card {
+  background: var(--waldur-bg-primary);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.layout-time-based-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.layout-time-based-footer .menu-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.layout-time-based-footer select {
+  color: white;
+  background: transparent;
+}

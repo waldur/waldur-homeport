@@ -1,0 +1,121 @@
+.layout-news {
+  display: grid;
+  min-height: 100vh;
+}
+
+@media (width >= 768px) {
+  .layout-news {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.layout-news-login {
+  background: var(--waldur-bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-news-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-news-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.layout-news-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--bs-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.layout-news-content {
+  background: var(--bs-gray-100);
+  display: none;
+  padding: 3rem;
+  overflow-y: auto;
+}
+
+[data-bs-theme='dark'] .layout-news-content {
+  background: var(--bs-gray-900);
+}
+
+@media (width >= 768px) {
+  .layout-news-content {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+}
+
+.layout-news-content-inner {
+  max-width: 500px;
+  width: 100%;
+}
+
+.layout-news-content-inner h2 {
+  margin-bottom: 1.5rem;
+  font-weight: bold;
+}
+
+.layout-news-list {
+  display: flex;
+  flex-direction: column;
+  gap: 1rem;
+}
+
+.layout-news-item {
+  background: var(--waldur-bg-primary);
+  padding: 1.5rem;
+  border-radius: 12px;
+  border: 1px solid var(--bs-border-color);
+}
+
+.layout-news-item-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 0.75rem;
+}
+
+.layout-news-date {
+  font-size: 0.85rem;
+  color: var(--bs-gray-500);
+}
+
+.layout-news-tag {
+  font-size: 0.75rem;
+  padding: 0.25rem 0.75rem;
+  border-radius: 20px;
+  background: var(--bs-primary);
+  color: white;
+  font-weight: 500;
+}
+
+.layout-news-item h3 {
+  font-size: 1.1rem;
+  font-weight: 600;
+  margin-bottom: 0.5rem;
+}
+
+.layout-news-item p {
+  font-size: 0.9rem;
+  color: var(--bs-gray-600);
+  margin: 0;
+}
+
+[data-bs-theme='dark'] .layout-news-item p {
+  color: var(--bs-gray-400);
+}

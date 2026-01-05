@@ -54,6 +54,48 @@ const CountryListEditButton = ({ onEdit }) => (
   <EditButton onClick={onEdit} size="sm" />
 );
 
+const LoginPageListField = ({
+  itemKey,
+  value,
+}: {
+  itemKey: string;
+  value: any[];
+}) => {
+  if (!value || !Array.isArray(value) || value.length === 0) {
+    return <span className="text-muted">{translate('Not configured')}</span>;
+  }
+
+  if (itemKey === 'LOGIN_PAGE_STATS') {
+    return (
+      <div className="d-flex flex-wrap gap-2">
+        {value.map((stat, i) => (
+          <span key={i} className="badge badge-light-primary">
+            {stat.value} {stat.label}
+          </span>
+        ))}
+      </div>
+    );
+  }
+
+  if (itemKey === 'LOGIN_PAGE_CAROUSEL_SLIDES') {
+    return (
+      <span className="text-muted">
+        {translate('{count} slides configured', { count: value.length })}
+      </span>
+    );
+  }
+
+  if (itemKey === 'LOGIN_PAGE_NEWS') {
+    return (
+      <span className="text-muted">
+        {translate('{count} news items configured', { count: value.length })}
+      </span>
+    );
+  }
+
+  return <span>{value.length} items</span>;
+};
+
 interface FieldRowProps {
   item: any;
   value: any;
@@ -93,11 +135,15 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
           </pre>
         ) : item.type === 'multilingual_image_field' ? (
           <MultilingualImageField value={value} />
+        ) : item.type === 'json_list_field' ? (
+          <LoginPageListField itemKey={item.key} value={value} />
         ) : typeof value === 'object' ? (
           <pre>{JSON.stringify(value, null, 2)}</pre>
         ) : item.key === 'SIDEBAR_STYLE' ? (
           SIDEBAR_STYLES.find((option) => option.value === value)?.label ||
           value
+        ) : item.type === 'select' && item.options ? (
+          item.options.find((option) => option.value === value)?.label || value
         ) : (
           value
         )
@@ -107,6 +153,8 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
           <CountryListEditButton onEdit={onEdit} />
         ) : item.type === 'multilingual_image_field' ? (
           <MultilingualImageEditButton item={item} value={value} />
+        ) : item.type === 'json_list_field' ? (
+          <EditButton onClick={onEdit} size="sm" />
         ) : (
           <ConfigurationEditButton item={item} value={value} />
         )
