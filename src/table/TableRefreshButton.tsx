@@ -1,7 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { TableProps } from '@waldur/table/types';
+import { Sorting } from '@waldur/table/types';
 
 export const LoadingSpinner: FunctionComponent = () => (
   <button type="button" className="btn btn-icon btn-flush">
@@ -11,7 +11,15 @@ export const LoadingSpinner: FunctionComponent = () => (
   </button>
 );
 
-export const TableRefreshButton = (props: TableProps) =>
+interface TableRefreshButtonProps {
+  loading?: boolean;
+  sorting?: Sorting & { loading?: boolean };
+  fetch: (force?: boolean) => void;
+}
+
+export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = (
+  props,
+) =>
   (props.loading && props.sorting && !props.sorting.loading) ||
   (props.sorting && props.sorting.loading) ? (
     <LoadingSpinner />
