@@ -1,0 +1,89 @@
+.layout-animated-gradient {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.layout-animated-gradient-bg {
+  position: absolute;
+  inset: 0;
+  background: linear-gradient(
+    -45deg,
+    var(--brand-color),
+    #23a6d5,
+    #23d5ab,
+    var(--brand-color)
+  );
+  background-size: 400% 400%;
+  animation: gradientShift 15s ease infinite;
+  z-index: 0;
+}
+
+@keyframes gradientShift {
+  0% {
+    background-position: 0% 50%;
+  }
+
+  50% {
+    background-position: 100% 50%;
+  }
+
+  100% {
+    background-position: 0% 50%;
+  }
+}
+
+.layout-animated-gradient-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-animated-gradient-header .theme-switcher-btn {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.layout-animated-gradient-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.layout-animated-gradient-card {
+  background: var(--waldur-bg-primary);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px rgba(0, 0, 0, 0.3);
+  text-align: center;
+}
+
+.layout-animated-gradient-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.layout-animated-gradient-footer .menu-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.layout-animated-gradient-footer select {
+  color: white;
+  background: transparent;
+}

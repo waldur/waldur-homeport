@@ -1,0 +1,61 @@
+.layout-logo-watermark {
+  min-height: 100vh;
+  background: var(--waldur-bg-primary);
+  display: flex;
+  flex-direction: column;
+  position: relative;
+  overflow: hidden;
+}
+
+.layout-logo-watermark-bg {
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+  width: 80%;
+  height: 80%;
+  background-size: contain;
+  background-repeat: no-repeat;
+  background-position: center;
+  opacity: 0.03;
+  pointer-events: none;
+}
+
+[data-bs-theme='dark'] .layout-logo-watermark-bg {
+  opacity: 0.05;
+  filter: invert(1);
+}
+
+.layout-logo-watermark-header {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-logo-watermark-content {
+  position: relative;
+  z-index: 1;
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.layout-logo-watermark-card {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.layout-logo-watermark-footer {
+  position: relative;
+  z-index: 1;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--bs-border-color);
+}

@@ -1,0 +1,58 @@
+.layout-gradient {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-gradient-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-gradient-header .theme-switcher-btn {
+  color: white;
+  border-color: rgba(255, 255, 255, 0.3);
+}
+
+.layout-gradient-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.layout-gradient-card {
+  background: var(--waldur-bg-primary);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow:
+    0 25px 50px -12px rgba(0, 0, 0, 0.25),
+    0 0 0 1px rgba(255, 255, 255, 0.1);
+  text-align: center;
+}
+
+.layout-gradient-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.2);
+  color: white;
+}
+
+.layout-gradient-footer .menu-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.layout-gradient-footer .menu-link:hover {
+  color: white !important;
+}
+
+.layout-gradient-footer select {
+  color: white;
+  background: transparent;
+}

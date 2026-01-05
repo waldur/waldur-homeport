@@ -1,0 +1,85 @@
+.layout-neumorphism {
+  min-height: 100vh;
+  background: #e0e5ec;
+  display: flex;
+  flex-direction: column;
+}
+
+[data-bs-theme='dark'] .layout-neumorphism {
+  background: #2d3436;
+}
+
+.layout-neumorphism-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-neumorphism-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.layout-neumorphism-card {
+  background: #e0e5ec;
+  border-radius: 30px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  text-align: center;
+  box-shadow:
+    20px 20px 60px #bec3c9,
+    -20px -20px 60px #ffffff;
+}
+
+[data-bs-theme='dark'] .layout-neumorphism-card {
+  background: #2d3436;
+  box-shadow:
+    20px 20px 60px #262b2d,
+    -20px -20px 60px #343d3f;
+}
+
+.layout-neumorphism-card .form-control {
+  background: #e0e5ec;
+  border: none;
+  border-radius: 12px;
+  box-shadow:
+    inset 5px 5px 10px #bec3c9,
+    inset -5px -5px 10px #ffffff;
+}
+
+[data-bs-theme='dark'] .layout-neumorphism-card .form-control {
+  background: #2d3436;
+  box-shadow:
+    inset 5px 5px 10px #262b2d,
+    inset -5px -5px 10px #343d3f;
+  color: white;
+}
+
+.layout-neumorphism-card .btn {
+  border-radius: 12px;
+  box-shadow:
+    5px 5px 10px #bec3c9,
+    -5px -5px 10px #ffffff;
+}
+
+[data-bs-theme='dark'] .layout-neumorphism-card .btn {
+  box-shadow:
+    5px 5px 10px #262b2d,
+    -5px -5px 10px #343d3f;
+}
+
+.layout-neumorphism-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-top: 1px solid rgba(0, 0, 0, 0.1);
+}
+
+[data-bs-theme='dark'] .layout-neumorphism-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}

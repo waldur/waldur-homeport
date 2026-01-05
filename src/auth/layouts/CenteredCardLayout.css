@@ -1,0 +1,53 @@
+.layout-centered-card {
+  min-height: 100vh;
+  background-size: cover;
+  background-position: center;
+}
+
+.layout-centered-card-overlay {
+  min-height: 100vh;
+  background: rgba(0, 0, 0, 0.6);
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-centered-card-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-centered-card-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 1rem;
+}
+
+.layout-centered-card-box {
+  background: var(--waldur-bg-primary);
+  border-radius: 12px;
+  padding: 2rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.25);
+  text-align: center;
+}
+
+.layout-centered-card-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  background: rgba(0, 0, 0, 0.3);
+  color: white;
+}
+
+.layout-centered-card-footer .menu-link {
+  color: rgba(255, 255, 255, 0.8) !important;
+}
+
+.layout-centered-card-footer .menu-link:hover {
+  color: white !important;
+}

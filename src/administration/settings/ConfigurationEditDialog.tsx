@@ -67,7 +67,15 @@ const ColorField = (props) => (
 );
 
 interface ConfigurationEditDialogProps {
-  resolve: { item: { key; description; type }; initialValues?: any };
+  resolve: {
+    item: {
+      key;
+      description;
+      type;
+      options?: Array<{ value: string; label: string }>;
+    };
+    initialValues?: any;
+  };
 }
 
 export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
@@ -173,6 +181,13 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                   component={SelectField as any}
                   name="value"
                   options={SUPPORT_BACKENDS}
+                  simpleValue
+                />
+              ) : item.type === 'select' && item.options ? (
+                <Field
+                  component={SelectField as any}
+                  name="value"
+                  options={item.options}
                   simpleValue
                 />
               ) : item.type === 'color_field' ? (

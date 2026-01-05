@@ -1,0 +1,90 @@
+.layout-duotone {
+  display: grid;
+  min-height: 100vh;
+}
+
+@media (width >= 768px) {
+  .layout-duotone {
+    grid-template-columns: 1fr 1fr;
+  }
+}
+
+.layout-duotone-login {
+  background: var(--waldur-bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-duotone-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-duotone-form {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  padding: 2rem;
+  text-align: center;
+  max-width: 400px;
+  margin: 0 auto;
+  width: 100%;
+}
+
+.layout-duotone-footer {
+  padding: 1rem;
+  border-top: 1px solid var(--bs-border-color);
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.layout-duotone-hero {
+  display: none;
+  position: relative;
+  overflow: hidden;
+}
+
+@media (width >= 768px) {
+  .layout-duotone-hero {
+    display: block;
+  }
+}
+
+.layout-duotone-hero-image {
+  position: absolute;
+  inset: 0;
+  background-size: cover;
+  background-position: center;
+  filter: grayscale(100%);
+}
+
+.layout-duotone-hero-overlay {
+  position: absolute;
+  inset: 0;
+  background: var(--duotone-color);
+  mix-blend-mode: multiply;
+  opacity: 0.8;
+}
+
+.layout-duotone-hero-content {
+  position: relative;
+  z-index: 1;
+  width: 100%;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  text-align: center;
+  color: white;
+  padding: 3rem;
+}
+
+.layout-duotone-hero-content h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  max-width: 400px;
+}

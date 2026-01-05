@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect } from 'react';
+import { useEffect, useState } from 'react';
 
 import { getIdentityProviders } from '@waldur/administration/api';
 import { getIconUrl } from '@waldur/core/api';
@@ -16,13 +16,15 @@ import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from './AuthHeader';
 import { IdentityProviderSelector } from './IdentityProviderSelector';
-import { LocalLogin } from './LocalLogin';
+import { LocalLoginButton, LocalLoginForm } from './LocalLogin';
 import { PoweredBy } from './PoweredBy';
 import { useAuthFeatures } from './useAuthFeatures';
 import { UserAuthWarning } from './UserAuthWarning';
 import { getOauthURL } from './utils';
 
 import './LoginColumn.scss';
+
+type LoginView = 'providers' | 'local-login';
 
 export const LoginColumn = () => {
   const features = useAuthFeatures();
@@ -33,6 +35,7 @@ export const LoginColumn = () => {
     queryFn: () => getIdentityProviders(),
   });
   const params = getQueryParams();
+  const [view, setView] = useState<LoginView>('providers');
 
   useEffect(() => {
     if (params['disableAutoLogin'] === '') {
@@ -44,6 +47,8 @@ export const LoginColumn = () => {
     }
     window.location.href = getOauthURL(provider);
   }, [params]);
+
+  const hasOtherProviders = data && data.length > 0;
 
   return (
     <div className="login-column">
@@ -60,18 +65,31 @@ export const LoginColumn = () => {
             />
           </div>
           <AuthHeader />
-          {isLoading ? (
-            <LoadingSpinner />
-          ) : error ? (
-            <LoadingErred
-              message={translate('Unable to load identity providers.')}
-              loadData={refetch}
+          {view === 'providers' ? (
+            <>
+              {isLoading ? (
+                <LoadingSpinner />
+              ) : error ? (
+                <LoadingErred
+                  message={translate('Unable to load identity providers.')}
+                  loadData={refetch}
+                />
+              ) : data ? (
+                <IdentityProviderSelector
+                  features={features}
+                  providers={data}
+                />
+              ) : null}
+              {features.SigninForm && (
+                <LocalLoginButton onClick={() => setView('local-login')} />
+              )}
+            </>
+          ) : (
+            <LocalLoginForm
+              onBack={
+                hasOtherProviders ? () => setView('providers') : undefined
+              }
             />
-          ) : data ? (
-            <IdentityProviderSelector features={features} providers={data} />
-          ) : null}
-          {features.SigninForm && (
-            <LocalLogin enableSeperator={features.enableSeperator} />
           )}
           <UserAuthWarning />
           <PoweredBy />

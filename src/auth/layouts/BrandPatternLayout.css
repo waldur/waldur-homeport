@@ -1,0 +1,40 @@
+.layout-brand-pattern {
+  min-height: 100vh;
+  background-color: var(--waldur-bg-primary);
+  display: flex;
+  flex-direction: column;
+}
+
+.layout-brand-pattern-header {
+  display: flex;
+  justify-content: flex-end;
+  padding: 1rem;
+}
+
+.layout-brand-pattern-content {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  padding: 2rem;
+}
+
+.layout-brand-pattern-card {
+  background: var(--waldur-bg-primary);
+  border: 1px solid var(--bs-border-color);
+  border-radius: 16px;
+  padding: 2.5rem;
+  width: 100%;
+  max-width: 420px;
+  box-shadow: 0 10px 40px rgba(0, 0, 0, 0.1);
+  text-align: center;
+}
+
+.layout-brand-pattern-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--bs-border-color);
+  background: var(--waldur-bg-primary);
+}

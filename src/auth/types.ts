@@ -19,9 +19,31 @@ interface ValimoAuthConfiguration {
   MOBILE_PREFIX: string;
 }
 
+interface LoginPageStat {
+  value: string;
+  label: string;
+}
+
+interface LoginPageCarouselSlide {
+  title: string;
+  subtitle: string;
+}
+
+interface LoginPageNewsItem {
+  date: string;
+  title: string;
+  description: string;
+  tag: string;
+}
+
 interface CoreConfiguration {
   INVITATION_USE_WEBHOOKS: boolean;
   DEFAULT_IDP: Pick<IdentityProvider, 'provider' | 'auth_url' | 'client_id'>;
+  LOGIN_PAGE_LAYOUT: string;
+  LOGIN_PAGE_VIDEO_URL: string;
+  LOGIN_PAGE_STATS: LoginPageStat[];
+  LOGIN_PAGE_CAROUSEL_SLIDES: LoginPageCarouselSlide[];
+  LOGIN_PAGE_NEWS: LoginPageNewsItem[];
   ANONYMOUS_USER_CAN_VIEW_OFFERINGS: boolean;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;

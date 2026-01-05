@@ -1,0 +1,61 @@
+.layout-stacked {
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+  background: var(--waldur-bg-primary);
+}
+
+.layout-stacked-hero {
+  background-size: cover;
+  background-position: center;
+}
+
+.layout-stacked-hero-overlay {
+  background: rgba(0, 0, 0, 0.6);
+  padding: 1rem;
+}
+
+.layout-stacked-hero-header {
+  display: flex;
+  justify-content: flex-end;
+}
+
+.layout-stacked-hero-content {
+  text-align: center;
+  color: white;
+  padding: 2rem 1rem 3rem;
+}
+
+.layout-stacked-hero-content h1 {
+  font-weight: bold;
+  text-transform: uppercase;
+  font-size: 1.5rem;
+  margin-bottom: 1rem;
+}
+
+@media (width >= 768px) {
+  .layout-stacked-hero-content h1 {
+    font-size: 2rem;
+  }
+}
+
+.layout-stacked-login {
+  flex: 1;
+  display: flex;
+  justify-content: center;
+  padding: 2rem;
+}
+
+.layout-stacked-login-content {
+  width: 100%;
+  max-width: 400px;
+  text-align: center;
+}
+
+.layout-stacked-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem 2rem;
+  border-top: 1px solid var(--bs-border-color);
+}

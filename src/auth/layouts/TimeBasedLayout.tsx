@@ -1,0 +1,109 @@
+import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
+
+import { getIdentityProviders } from '@waldur/administration/api';
+import { getIconUrl } from '@waldur/core/api';
+import { ENV } from '@waldur/core/config';
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { translate } from '@waldur/i18n';
+import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
+import { FooterLinks } from '@waldur/navigation/FooterLinks';
+import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
+
+import { AuthHeader } from '../AuthHeader';
+import { LoginMethods } from '../LoginMethods';
+import { PoweredBy } from '../PoweredBy';
+import { useAuthFeatures } from '../useAuthFeatures';
+import { UserAuthWarning } from '../UserAuthWarning';
+
+import './TimeBasedLayout.css';
+
+type TimeOfDay = 'morning' | 'afternoon' | 'evening' | 'night';
+
+const TIME_THEMES: Record<
+  TimeOfDay,
+  { gradient: string; greeting: string; icon: string }
+> = {
+  morning: {
+    gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
+    greeting: 'Good Morning',
+    icon: 'fa-sun',
+  },
+  afternoon: {
+    gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
+    greeting: 'Good Afternoon',
+    icon: 'fa-cloud-sun',
+  },
+  evening: {
+    gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
+    greeting: 'Good Evening',
+    icon: 'fa-cloud-moon',
+  },
+  night: {
+    gradient: 'linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 100%)',
+    greeting: 'Good Night',
+    icon: 'fa-moon',
+  },
+};
+
+function getTimeOfDay(): TimeOfDay {
+  const hour = new Date().getHours();
+  if (hour >= 5 && hour < 12) return 'morning';
+  if (hour >= 12 && hour < 17) return 'afternoon';
+  if (hour >= 17 && hour < 21) return 'evening';
+  return 'night';
+}
+
+export const TimeBasedLayout = () => {
+  const features = useAuthFeatures();
+  const imageUrl = getIconUrl('login_logo');
+
+  const timeOfDay = useMemo(() => getTimeOfDay(), []);
+  const theme = TIME_THEMES[timeOfDay];
+
+  const { data, isLoading, error, refetch } = useQuery({
+    queryKey: ['IdentityProvidersConfigurations'],
+    queryFn: () => getIdentityProviders(),
+  });
+
+  return (
+    <div className="layout-time-based" style={{ background: theme.gradient }}>
+      <div className="layout-time-based-header">
+        <ThemeSwitcherButton />
+      </div>
+      <div className="layout-time-based-content">
+        <div className="layout-time-based-greeting">
+          <i className={`fa ${theme.icon}`} />
+          <h2>{theme.greeting}</h2>
+        </div>
+        <div className="layout-time-based-card">
+          <div className="login-logo mb-3">
+            <img
+              alt={ENV.plugins.WALDUR_CORE.SHORT_PAGE_TITLE}
+              src={imageUrl}
+              style={{ maxWidth: '100%', maxHeight: '80px' }}
+            />
+          </div>
+          <AuthHeader />
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : error ? (
+            <LoadingErred
+              message={translate('Unable to load identity providers.')}
+              loadData={refetch}
+            />
+          ) : data ? (
+            <LoginMethods features={features} providers={data} />
+          ) : null}
+          <UserAuthWarning />
+          <PoweredBy />
+        </div>
+      </div>
+      <div className="layout-time-based-footer">
+        <LanguageSelectorBox />
+        <FooterLinks />
+      </div>
+    </div>
+  );
+};
