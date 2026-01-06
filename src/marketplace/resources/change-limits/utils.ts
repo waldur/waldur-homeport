@@ -1,7 +1,7 @@
 import {
   BasePublicPlan,
   marketplacePublicOfferingsPlansRetrieve,
-  marketplacePublicOfferingsRetrieve,
+  marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesRetrieve,
   Offering,
   PublicOfferingDetails,
@@ -62,12 +62,23 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
   const resource = await marketplaceResourcesRetrieve({
     path: { uuid: resource_uuid },
   }).then((r) => r.data);
-  const offering = await marketplacePublicOfferingsRetrieve({
-    path: { uuid: resource.offering_uuid },
+  const offering = await marketplaceResourcesOfferingRetrieve({
+    path: { uuid: resource_uuid },
   }).then((response) => response.data);
-  const plan = await marketplacePublicOfferingsPlansRetrieve({
+
+  let plan: BasePublicPlan;
+  await marketplacePublicOfferingsPlansRetrieve({
     path: { uuid: resource.offering_uuid, plan_uuid: resource.plan_uuid },
-  }).then((response) => response.data);
+  })
+    .then((response) => {
+      plan = response.data;
+    })
+    .catch(() => {
+      plan = offering.plans.find((p) => p.uuid === resource.plan_uuid);
+    });
+  if (!plan) {
+    throw Error(`Plan with uuid of ${resource.plan_uuid} does not exist.`);
+  }
 
   const { limitSerializer, usages, limits, offeringLimits } =
     getLimitChangeRequirements(resource, offering);
