@@ -1,0 +1,1 @@
+export { AtlassianDiscoveryButton } from './AtlassianDiscoveryButton';

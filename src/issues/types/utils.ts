@@ -2,7 +2,8 @@ import { User } from 'waldur-js-client';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { SupportFeatures } from '@waldur/FeaturesEnums';
-import { ISSUE_IDS, getIssueTypeChoices } from '@waldur/issues/types/constants';
+
+import { IssueTypeChoice } from './constants';
 
 export function getShowAllTypes(user: User) {
   return (
@@ -12,8 +13,11 @@ export function getShowAllTypes(user: User) {
   );
 }
 
-export function getIssueTypes(showAllTypes: boolean) {
+export function filterIssueTypes(
+  issueTypes: IssueTypeChoice[],
+  showAllTypes: boolean,
+): IssueTypeChoice[] {
   return showAllTypes
-    ? getIssueTypeChoices()
-    : getIssueTypeChoices().filter((x) => x.id !== ISSUE_IDS.CHANGE_REQUEST);
+    ? issueTypes
+    : issueTypes.filter((x) => x.id !== 'Change Request');
 }

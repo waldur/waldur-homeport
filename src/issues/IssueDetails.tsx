@@ -23,7 +23,7 @@ import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { IssueAttachmentsContainer } from './attachments/IssueAttachmentsContainer';
 import { IssueCommentsContainer } from './comments/IssueCommentsContainer';
-import { IssueInfoButton } from './IssueInfo';
+import { IssueLogButton, IssueSyncButton } from './IssueInfo';
 import { IssueStatus } from './IssueStatus';
 import { useIssueBreadcrumbItems } from './utils';
 
@@ -86,7 +86,8 @@ export const IssueDetails: FunctionComponent = () => {
         actions={
           <>
             <RefreshButton refetch={refetch} isLoading={isRefetching} />
-            <IssueInfoButton issue={issue} />
+            <IssueSyncButton issue={issue} refetch={refetch} />
+            <IssueLogButton issue={issue} />
           </>
         }
       >

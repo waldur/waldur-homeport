@@ -1,4 +1,6 @@
 import { WarningIcon } from '@phosphor-icons/react';
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { ProgressStep } from '@waldur/core/ProgressSteps';
@@ -8,8 +10,12 @@ import { useWizard } from '@waldur/marketplace/offerings/import/useWizard';
 import { WizardButtons } from '@waldur/marketplace/offerings/import/WizardButtons';
 import { WizardTabs } from '@waldur/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { getUser } from '@waldur/workspace/selectors';
 
+import { useRequestTypes } from '../api';
 import { IssueCreateButtonProps } from '../list/IssueCreateButton';
+import { mapRequestTypesToChoices } from '../types/constants';
+import { filterIssueTypes, getShowAllTypes } from '../types/utils';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 import { IssueDescriptionTab } from './IssueDescriptionTab';
@@ -48,6 +54,32 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } =
     useWizard(steps);
 
+  // Fetch request types at form level to control wizard navigation
+  const user = useSelector(getUser);
+  const showAllTypes = getShowAllTypes(user);
+  const { data: requestTypes, isLoading, error } = useRequestTypes();
+
+  const issueTypes = useMemo(() => {
+    if (!requestTypes) return [];
+    const choices = mapRequestTypesToChoices(requestTypes);
+    return filterIssueTypes(choices, showAllTypes);
+  }, [requestTypes, showAllTypes]);
+
+  // Block Next button if no request types available
+  const canProceed = !isLoading && !error && issueTypes.length > 0;
+
+  // Extended context with request types data
+  const extendedContext = useMemo(
+    () => ({
+      ...resolve,
+      requestTypes,
+      issueTypes,
+      isLoading,
+      error,
+    }),
+    [resolve, requestTypes, issueTypes, isLoading, error],
+  );
+
   return (
     <form onSubmit={handleSubmit(onCreateIssue)}>
       <ModalDialog
@@ -64,7 +96,7 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
             goBack={goBack}
             goNext={goNext}
             submitting={submitting}
-            invalid={invalid}
+            invalid={invalid || !canProceed}
             submitLabel={translate('Create')}
           />
         }
@@ -82,7 +114,7 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
           currentStep={step}
           tabs={tabs}
           mountOnEnter={true}
-          context={resolve}
+          context={extendedContext}
         />
       </ModalDialog>
     </form>
