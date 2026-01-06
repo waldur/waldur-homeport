@@ -36,7 +36,7 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
           )}
         {project.name}
         {project.kind === 'course' ? (
-          <Badge variant="warning" pill outline className="ms-2">
+          <Badge variant="pink" pill outline className="ms-2">
             {translate('Course')}
           </Badge>
         ) : project.kind === 'public' ? (

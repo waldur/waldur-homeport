@@ -179,7 +179,7 @@ export const projectKindOptions = (): Partial<
     course: {
       value: 'course' as KindEnum,
       label: translate('Course'),
-      color: 'warning',
+      color: 'pink',
       icon: GraduationCapIcon,
     },
   };
