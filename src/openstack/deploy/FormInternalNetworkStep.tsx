@@ -63,6 +63,14 @@ export const FormInternalNetworkStep = (props: FormStepProps) => {
               label={translate('Skip connection to external network')}
             />
           </Field>
+          <Field
+            name="attributes.skip_creation_of_default_subnet"
+            component={FormGroup}
+          >
+            <AwesomeCheckboxField
+              label={translate('Skip creation of default subnet')}
+            />
+          </Field>
         </>
       )}
     </VStepperFormStepCard>
