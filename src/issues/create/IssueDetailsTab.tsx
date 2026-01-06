@@ -1,18 +1,17 @@
 import { useCallback, useEffect } from 'react';
-import { Form, Stack } from 'react-bootstrap';
+import { Alert, Form, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, Field, formValueSelector, isSubmitting } from 'redux-form';
 
 import { ENV } from '@waldur/core/config';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { ProjectGroup } from '@waldur/issues/create/ProjectGroup';
 import { RootState } from '@waldur/store/reducers';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { IssueCreateButtonProps } from '../list/IssueCreateButton';
-import { getIssueTypeChoices, ISSUE_IDS } from '../types/constants';
-import { getIssueTypes, getShowAllTypes } from '../types/utils';
+import { IssueTypeChoice } from '../types/constants';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 import { OrganizationGroup } from './OrganizationGroup';
@@ -25,36 +24,43 @@ const standaloneIssueSelector = (state: RootState) =>
 const typeSelector = (state: RootState) =>
   formValueSelector(ISSUE_CREATION_FORM_ID)(state, 'type');
 
+interface IssueDetailsTabContext {
+  scope?: any;
+  scopeType?: string;
+  issueTypes: IssueTypeChoice[];
+  isLoading: boolean;
+  error: unknown;
+}
+
 export const IssueDetailsTab = ({
   context,
 }: {
-  context: IssueCreateButtonProps;
+  context: IssueDetailsTabContext;
 }) => {
   const dispatch = useDispatch();
   const standaloneIssue = useSelector(standaloneIssueSelector);
   const type = useSelector(typeSelector);
 
   const user = useSelector(getUser);
-  const showAllTypes = getShowAllTypes(user);
-  const issueTypes = getIssueTypes(showAllTypes);
+  const isStaffOrSupport = user?.is_staff || user?.is_support;
   const submitting = useSelector(isSubmitting(ISSUE_CREATION_FORM_ID));
+
+  // Get request types data from context (fetched in IssueCreateForm)
+  const { issueTypes, isLoading, error } = context;
 
   const setValue = useCallback(
     (field, value) => dispatch(change(ISSUE_CREATION_FORM_ID, field, value)),
-    [dispatch, change],
+    [dispatch],
   );
 
+  // Set default type to first available type when types are loaded
   useEffect(() => {
-    if (!type) {
-      setValue(
-        'type',
-        getIssueTypeChoices().find(
-          (option) => option.id === ISSUE_IDS.INFORMATIONAL,
-        ),
-      );
+    if (!type && issueTypes.length > 0) {
+      setValue('type', issueTypes[0]);
     }
-  }, [setValue, type]);
+  }, [setValue, type, issueTypes]);
 
+  // Set context values on mount
   useEffect(() => {
     const scope = context.scope;
 
@@ -94,6 +100,7 @@ export const IssueDetailsTab = ({
     }
   }, [context, setValue]);
 
+  // Clear context when standalone issue is checked
   useEffect(() => {
     if (standaloneIssue) {
       setValue('customer', undefined);
@@ -102,9 +109,43 @@ export const IssueDetailsTab = ({
     }
   }, [standaloneIssue, setValue]);
 
+  // Show loading state
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  // Show error if no request types available
+  if (error || issueTypes.length === 0) {
+    return (
+      <Alert variant="warning">
+        <Alert.Heading>
+          {translate('Service desk configuration incomplete')}
+        </Alert.Heading>
+        <p>
+          {translate(
+            'Unable to create support request. No request types are available.',
+          )}
+        </p>
+        {isStaffOrSupport && (
+          <p className="mb-0 text-muted">
+            <small>
+              {translate(
+                'Staff info: No active RequestTypes found. Use the Atlassian Settings Discovery wizard to configure and activate request types.',
+              )}
+            </small>
+          </p>
+        )}
+      </Alert>
+    );
+  }
+
+  // Show type selector only when there are multiple types
+  const showTypeSelector =
+    ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && issueTypes.length > 1;
+
   return (
     <>
-      {ENV.plugins.WALDUR_SUPPORT?.DISPLAY_REQUEST_TYPE && (
+      {showTypeSelector && (
         <Form.Group className="mb-5">
           <Form.Label>{translate('Request type')}</Form.Label>
           <TypeField issueTypes={issueTypes} isDisabled={submitting} />
@@ -117,7 +158,9 @@ export const IssueDetailsTab = ({
           label={translate(
             'Issue is general and not tied to any specific organization, project, or resource',
           )}
-          disabled={context.scope !== user && Boolean(context.scope)}
+          disabled={['customer', 'project', 'resource'].includes(
+            context.scopeType,
+          )}
         />
       </Form.Group>
       <Stack direction="horizontal" gap={3}>

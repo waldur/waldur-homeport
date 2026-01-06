@@ -2,11 +2,12 @@ import { FunctionComponent } from 'react';
 
 import { Tip } from '@waldur/core/Tooltip';
 
-import { ISSUE_ICONS } from './constants';
+import { getIconForType } from './constants';
 
-export const IssueTypeIcon: FunctionComponent<{ type }> = ({ type }) => {
-  const typeId = type.toUpperCase().replace(' ', '_');
-  const iconNode = ISSUE_ICONS[typeId] || ISSUE_ICONS.INCIDENT;
+export const IssueTypeIcon: FunctionComponent<{ type: string }> = ({
+  type,
+}) => {
+  const iconNode = getIconForType(type);
   return (
     <Tip id="issue-type-icon" label={type}>
       {iconNode}

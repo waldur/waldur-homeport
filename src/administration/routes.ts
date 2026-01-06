@@ -197,6 +197,23 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-request-types',
+    url: 'request-types/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./service-desk/request-types/RequestTypesList').then(
+        (module) => ({
+          default: module.RequestTypesList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Request types'),
+      permissions: [isStaff],
+    },
+  },
+
+  {
     name: 'admin-marketplace-settings',
     url: 'marketplace/',
     parent: 'admin-marketplace',

@@ -15,6 +15,8 @@ import { SettingsDescription } from '@waldur/SettingsDescription';
 
 import { FieldRow } from '../settings/FieldRow';
 
+import { AtlassianDiscoveryButton } from './atlassian-discovery';
+
 const AdministrationServiceDeskUpdateDialog = lazyComponent(() =>
   import('./AdministrationServiceDeskUpdateDialog').then((module) => ({
     default: module.AdministrationServiceDeskUpdateDialog,
@@ -30,7 +32,7 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   const dispatch = useDispatch();
 
   return (
-    <Card className="bg-light min-h-150px border border-secondary border-hover">
+    <Card className="card-bordered min-h-150px">
       <Card.Body className="pe-5">
         <div className="d-flex align-items-center h-100">
           <div className="d-flex flex-row justify-content-between h-100 flex-grow-1">
@@ -56,21 +58,26 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                 formatJsxTemplate,
               )}
             </p>
-            <Button
-              onClick={() =>
-                dispatch(
-                  openModalDialog(AdministrationServiceDeskUpdateDialog, {
-                    size: 'lg',
-                    resolve: {
-                      initialValues,
-                      name: serviceDeskProvider,
-                    },
-                  }),
-                )
-              }
-            >
-              {translate('Configure')}
-            </Button>
+            <div className="d-flex flex-wrap gap-2">
+              <Button
+                onClick={() =>
+                  dispatch(
+                    openModalDialog(AdministrationServiceDeskUpdateDialog, {
+                      size: 'lg',
+                      resolve: {
+                        initialValues,
+                        name: serviceDeskProvider,
+                      },
+                    }),
+                  )
+                }
+              >
+                {translate('Configure')}
+              </Button>
+              {serviceDeskProvider === 'atlassian' && (
+                <AtlassianDiscoveryButton />
+              )}
+            </div>
           </div>
         </div>
       </Card.Body>

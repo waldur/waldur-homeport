@@ -1,152 +1,145 @@
-import { EyeIcon } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
+import {
+  ArrowsClockwise,
+  ClockCounterClockwise,
+  SpinnerGap,
+} from '@phosphor-icons/react';
+import { useMutation } from '@tanstack/react-query';
+import { Button, Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
-import { Issue } from 'waldur-js-client';
+import { Issue, supportIssuesSync } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatRelative, formatDateTime } from '@waldur/core/dateUtils';
-import { ExternalLink } from '@waldur/core/ExternalLink';
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
-const IssueInfoDialog = ({ issue }: { issue: Issue }) => {
-  const staffOrSupport = useSelector(isStaffOrSupport);
+interface ProcessingLogEntry {
+  event: string;
+  details: Record<string, unknown>;
+  timestamp: string;
+}
+
+const formatEventName = (event: string) => {
+  return event
+    .split('_')
+    .map((word) => word.charAt(0).toUpperCase() + word.slice(1))
+    .join(' ');
+};
+
+const IssueLogDialog = ({ issue }: { issue: Issue }) => {
+  const processingLog = (issue as any).processing_log as
+    | ProcessingLogEntry[]
+    | undefined;
+
   return (
     <ModalDialog
-      title={translate('Info')}
+      title={translate('Processing log')}
       closeButton
-      bodyClassName="d-flex flex-column gap-1"
+      bodyClassName="p-0"
     >
-      {staffOrSupport && (
-        <Field
-          label={translate('Assigned to')}
-          value={issue.assignee_name || 'N/A'}
-          labelClass="mw-200px"
-        />
+      {processingLog && processingLog.length > 0 ? (
+        <Table responsive striped className="mb-0">
+          <thead>
+            <tr>
+              <th>{translate('Timestamp')}</th>
+              <th>{translate('Event')}</th>
+              <th>{translate('Details')}</th>
+            </tr>
+          </thead>
+          <tbody>
+            {processingLog.map((entry, index) => (
+              <tr key={index}>
+                <td className="text-nowrap">
+                  {formatDateTime(entry.timestamp)}
+                </td>
+                <td className="text-nowrap">{formatEventName(entry.event)}</td>
+                <td>
+                  <code className="small">
+                    {JSON.stringify(entry.details, null, 2)}
+                  </code>
+                </td>
+              </tr>
+            ))}
+          </tbody>
+        </Table>
+      ) : (
+        <div className="p-6 text-muted text-center">
+          {translate('No processing log entries.')}
+        </div>
       )}
-
-      {issue.priority && (
-        <Field
-          label={translate('Priority')}
-          value={
-            <Badge
-              variant={{ Medium: 'warning', High: 'danger' }[issue.priority]}
-              size="sm"
-              pill
-              outline
-            >
-              {issue.priority}
-            </Badge>
-          }
-          labelClass="mw-200px"
-        />
-      )}
-
-      {issue.reporter_name && staffOrSupport && (
-        <Field
-          label={translate('Reporter')}
-          value={issue.reporter_name}
-          labelClass="mw-200px"
-          hasCopy
-        />
-      )}
-
-      <Field
-        label={translate('Caller')}
-        value={issue.caller_full_name}
-        labelClass="mw-200px"
-      />
-
-      <Field
-        label={translate('Request type')}
-        value={issue.type}
-        labelClass="mw-200px"
-      />
-
-      {issue.customer_name && (
-        <Field
-          label={translate('Organization')}
-          value={issue.customer_name}
-          labelClass="mw-200px"
-        />
-      )}
-
-      {issue.project_name && (
-        <Field
-          label={translate('Project')}
-          value={issue.project_name}
-          labelClass="mw-200px"
-        />
-      )}
-
-      {issue.resource_type && (
-        <Field
-          label={translate('Service type')}
-          value={issue.resource_type}
-          labelClass="mw-200px"
-        />
-      )}
-
-      {issue.resource_name && (
-        <Field
-          label={translate('Affected resource')}
-          value={issue.resource_name}
-          labelClass="mw-200px"
-        />
-      )}
-
-      {issue.resolution && (
-        <Field
-          label={translate('Resolution')}
-          value={issue.resolution}
-          labelClass="mw-200px"
-        />
-      )}
-
-      {issue.link && staffOrSupport && (
-        <Field
-          label={translate('Link')}
-          value={
-            <ExternalLink
-              label={translate('Open in Service Desk')}
-              url={issue.link}
-              iconless
-              className="text-anchor"
-            />
-          }
-          labelClass="mw-200px"
-        />
-      )}
-
-      <Field
-        label={translate('Created')}
-        value={translate('{relative} ago, {date}', {
-          relative: formatRelative(issue.created),
-          date: formatDateTime(issue.created),
-        })}
-        labelClass="mw-200px"
-      />
     </ModalDialog>
   );
 };
 
-export const IssueInfoButton = ({ issue }) => {
+export const IssueLogButton = ({ issue }) => {
   const dispatch = useDispatch();
+  const staffOrSupport = useSelector(isStaffOrSupport);
+
+  if (!staffOrSupport) {
+    return null;
+  }
+
   const callback = () =>
     dispatch(
-      openModalDialog(IssueInfoDialog, {
+      openModalDialog(IssueLogDialog, {
+        size: 'lg',
         issue,
       }),
     );
+
   return (
     <Button variant="secondary" onClick={callback}>
       <span className="svg-icon svg-icon-2">
-        <EyeIcon weight="bold" />
+        <ClockCounterClockwise weight="bold" />
       </span>
-      {translate('Show details')}
+      {translate('Show log')}
+    </Button>
+  );
+};
+
+export const IssueSyncButton = ({
+  issue,
+  refetch,
+}: {
+  issue: Issue;
+  refetch: () => void;
+}) => {
+  const dispatch = useDispatch();
+  const staffOrSupport = useSelector(isStaffOrSupport);
+
+  const { mutate, isPending } = useMutation({
+    mutationFn: async () => {
+      // The sync endpoint doesn't need a body, but the generated types require it
+      await supportIssuesSync({
+        path: { uuid: issue.uuid },
+        body: {} as any,
+      });
+    },
+    onSuccess: () => {
+      dispatch(showSuccess(translate('Issue synchronized successfully.')));
+      refetch();
+    },
+    onError: (error: Response) => {
+      dispatch(showErrorResponse(error, translate('Unable to sync issue.')));
+    },
+  });
+
+  if (!staffOrSupport) {
+    return null;
+  }
+
+  return (
+    <Button variant="secondary" onClick={() => mutate()} disabled={isPending}>
+      <span className="svg-icon svg-icon-2">
+        {isPending ? (
+          <SpinnerGap weight="bold" className="fa-spin" />
+        ) : (
+          <ArrowsClockwise weight="bold" />
+        )}
+      </span>
+      {translate('Sync')}
     </Button>
   );
 };

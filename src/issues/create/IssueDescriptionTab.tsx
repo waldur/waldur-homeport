@@ -13,7 +13,7 @@ import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 
-import { ISSUE_IDS } from '../types/constants';
+import { TEMPLATE_TYPE_TO_NAME } from '../types/constants';
 
 import { AttachmentsGroup } from './AttachmentsGroup';
 import { AttachmentsList } from './AttachmentsList';
@@ -37,11 +37,14 @@ export const IssueDescriptionTab = () => {
     selector(state, 'template'),
   );
 
+  // Filter templates based on issue type
+  // Template.issue_type is like 'INFORMATIONAL', issueType.id is like 'Informational'
   const filteredTemplates = useMemo(
     () =>
       templateState.value && issueType
         ? templateState.value.filter(
-            (option) => ISSUE_IDS[option.issue_type] === issueType.id,
+            (option) =>
+              TEMPLATE_TYPE_TO_NAME[option.issue_type] === issueType.id,
           )
         : [],
     [templateState.value, issueType],
