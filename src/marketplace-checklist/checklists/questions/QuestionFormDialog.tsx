@@ -1,4 +1,5 @@
 import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { FormApi } from 'final-form';
 import arrayMutators from 'final-form-arrays';
 import { isEqual } from 'lodash-es';
 import { FC, useMemo, useState } from 'react';
@@ -21,6 +22,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { AtLeast } from '@waldur/core/types';
@@ -91,10 +93,11 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
 
   // Store the question if it saved, to avoid recreating it if there is an error with options, deps or conditions.
   const [savedQuestion, setSavedQuestion] = useState<QuestionAdmin>(null);
+  const [createAnother, setCreateAnother] = useState(false);
   const isEdit = Boolean(question?.uuid);
 
   // FIX THIS: complete the function - user guidance and trigger remained
-  const onSubmit = async (formData: ChecklistQuestionForm) => {
+  const onSubmit = async (formData: ChecklistQuestionForm, form: FormApi) => {
     try {
       const body: QuestionAdminRequest = {
         checklist: checklist.url,
@@ -285,7 +288,13 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
           ? translate('Question has been updated.')
           : translate('Question has been added.'),
       );
-      closeDialog();
+      if (createAnother) {
+        form.restart();
+        setCreateAnother(false);
+        setSavedQuestion(null);
+      } else {
+        closeDialog();
+      }
     } catch (e) {
       showErrorResponse(
         e,
@@ -317,6 +326,17 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             bodyClassName="h-500px mh-500px"
             footer={
               <>
+                {!isEdit && (
+                  <AwesomeCheckbox
+                    type="checkbox"
+                    label={translate('Create another')}
+                    disabled={submitting}
+                    value={createAnother}
+                    onChange={setCreateAnother}
+                    className="me-auto"
+                    id="check-another"
+                  />
+                )}
                 <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
                   disabled={invalid || pristine}

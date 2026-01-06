@@ -29,7 +29,7 @@ export const TextField: FunctionComponent<TextFieldProps> = (props) => {
       style={props.style}
       placeholder="  "
       onScroll={storeScroll}
-      isInvalid={Boolean(meta?.error)}
+      isInvalid={meta?.touched && Boolean(meta?.error)}
       {...props.input}
       rows={rows ? rows : 5}
       {...rest}
