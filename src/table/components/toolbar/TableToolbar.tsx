@@ -113,6 +113,8 @@ export function TableToolbarActions() {
               enableMultiSelect={config.enableMultiSelect}
               multiSelectActions={slots.multiSelectActions}
               fetch={actions.fetch}
+              standalone={config.standalone}
+              standaloneActionsInTable={config.standaloneActionsInTable}
             />
           </div>
         )}
