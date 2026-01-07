@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 import { invoiceItemsMigrateTo, invoicesList } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
@@ -17,33 +17,37 @@ export const InvoiceItemMoveDialog = ({
   const dispatch = useDispatch();
   const customer = useSelector(getCustomer);
 
-  const asyncState = useAsync(async () => {
-    const invoices = await getAllPages((page) =>
-      invoicesList({
-        query: {
-          page,
-          customer: customer.url,
-          field: ['url', 'number', 'year', 'month'],
-        },
-      }),
-    );
-    return {
-      invoices: invoices
-        .filter((currentInvoice) => currentInvoice.url !== invoice.url)
-        .map((invoice) => ({
-          label: formatDate(invoice),
-          value: invoice,
-        })),
-    };
+  const asyncState = useQuery({
+    queryKey: ['invoicesForMove', customer?.url, invoice.url],
+    queryFn: async () => {
+      const invoices = await getAllPages((page) =>
+        invoicesList({
+          query: {
+            page,
+            customer: customer.url,
+            field: ['url', 'number', 'year', 'month'],
+          },
+        }),
+      );
+      return {
+        invoices: invoices
+          .filter((currentInvoice) => currentInvoice.url !== invoice.url)
+          .map((invoice) => ({
+            label: formatDate(invoice),
+            value: invoice,
+          })),
+      };
+    },
+    staleTime: 3 * 60 * 1000,
   });
 
-  const fields = asyncState.value
+  const fields = asyncState.data
     ? [
         {
           name: 'invoice',
           label: translate('Target invoice'),
           type: 'select',
-          options: asyncState.value.invoices,
+          options: asyncState.data.invoices,
         },
       ]
     : [];
@@ -55,7 +59,7 @@ export const InvoiceItemMoveDialog = ({
         origin: formatDate(invoice),
       })}
       formFields={fields}
-      loading={asyncState.loading}
+      loading={asyncState.isLoading}
       error={asyncState.error}
       submitForm={async (formData) => {
         try {

@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 import {
   vmwareNetworksList,
   vmwareVirtualMachineCreatePort,
@@ -19,25 +19,33 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const asyncState = useAsync(async () => {
-    const networks = await getAllPages((page) =>
-      vmwareNetworksList({
-        query: {
-          page,
-          customer_pair_uuid: resource.customer_uuid,
-          settings_uuid: resource.settings_uuid,
-        },
-      }),
-    );
-    return {
-      networks: networks.map((network) => ({
-        value: network.url,
-        label: network.name,
-      })),
-    };
+  const asyncState = useQuery({
+    queryKey: [
+      'vmwareNetworks',
+      resource.customer_uuid,
+      resource.settings_uuid,
+    ],
+    queryFn: async () => {
+      const networks = await getAllPages((page) =>
+        vmwareNetworksList({
+          query: {
+            page,
+            customer_pair_uuid: resource.customer_uuid,
+            settings_uuid: resource.settings_uuid,
+          },
+        }),
+      );
+      return {
+        networks: networks.map((network) => ({
+          value: network.url,
+          label: network.name,
+        })),
+      };
+    },
+    staleTime: 3 * 60 * 1000,
   });
 
-  const fields = asyncState.value
+  const fields = asyncState.data
     ? [
         createNameField(),
         {
@@ -45,7 +53,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
           label: translate('Network'),
           type: 'select',
           required: true,
-          options: asyncState.value.networks,
+          options: asyncState.data.networks,
         },
       ]
     : [];

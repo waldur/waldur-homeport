@@ -1,5 +1,5 @@
+import { useQuery } from '@tanstack/react-query';
 import { Field } from 'react-final-form';
-import { useAsync } from 'react-use';
 import { projectTypesList } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -14,10 +14,14 @@ export const TypeGroup = ({ create }: { create?: boolean }) => {
     return null;
   }
   const {
-    loading,
+    isLoading: loading,
     error,
-    value: projectTypes,
-  } = useAsync(async () => (await projectTypesList()).data);
+    data: projectTypes,
+  } = useQuery({
+    queryKey: ['projectTypes'],
+    queryFn: async () => (await projectTypesList()).data,
+    staleTime: 5 * 60 * 1000,
+  });
   return loading ? (
     <LoadingSpinner />
   ) : error ? (

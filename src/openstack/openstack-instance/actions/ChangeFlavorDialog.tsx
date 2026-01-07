@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 import {
   InstanceFlavorChangeRequest,
   openstackInstancesChangeFlavor,
@@ -21,22 +21,26 @@ export const ChangeFlavorDialog: FC<ActionDialogProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const asyncState = useAsync(async () => {
-    const flavors = await loadFlavors({
-      tenant_uuid: resource.tenant_uuid,
-      field: ['url', 'name', 'cores', 'ram'],
-    });
-    return {
-      flavors: flavors
-        .filter((flavor) => flavor.name !== resource.flavor_name)
-        .map((flavor) => ({
-          label: `${flavor.name} (${formatFlavor(flavor)})`,
-          value: flavor.url,
-        })),
-    };
+  const asyncState = useQuery({
+    queryKey: ['flavors', resource.tenant_uuid, resource.flavor_name],
+    queryFn: async () => {
+      const flavors = await loadFlavors({
+        tenant_uuid: resource.tenant_uuid,
+        field: ['url', 'name', 'cores', 'ram'],
+      });
+      return {
+        flavors: flavors
+          .filter((flavor) => flavor.name !== resource.flavor_name)
+          .map((flavor) => ({
+            label: `${flavor.name} (${formatFlavor(flavor)})`,
+            value: flavor.url,
+          })),
+      };
+    },
+    staleTime: 3 * 60 * 1000,
   });
 
-  const fields = asyncState.value
+  const fields = asyncState.data
     ? [
         {
           name: 'currentFlavor',
@@ -48,7 +52,7 @@ export const ChangeFlavorDialog: FC<ActionDialogProps> = ({
           name: 'flavor',
           type: 'select',
           label: translate('New flavor'),
-          options: asyncState.value.flavors,
+          options: asyncState.data.flavors,
         },
       ]
     : [];
@@ -56,7 +60,7 @@ export const ChangeFlavorDialog: FC<ActionDialogProps> = ({
   return (
     <ResourceActionDialog
       dialogTitle={translate('Change flavor')}
-      loading={asyncState.loading}
+      loading={asyncState.isLoading}
       error={asyncState.error}
       formFields={fields}
       submitForm={async (formData: InstanceFlavorChangeRequest) => {

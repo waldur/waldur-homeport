@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 import {
   openstackInstancesList,
   openstackVolumesAttach,
@@ -18,32 +18,36 @@ export const AttachDialog: FC<ActionDialogProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const asyncState = useAsync(async () => {
-    const instances = await getAllPages((page) =>
-      openstackInstancesList({
-        query: {
-          page,
-          attach_volume_uuid: resource.uuid,
-          field: ['url', 'name'],
-        },
-      }),
-    );
-    return {
-      instances: instances.map((choice) => ({
-        value: choice.url,
-        label: choice.name,
-      })),
-    };
+  const asyncState = useQuery({
+    queryKey: ['attachableInstances', resource.uuid],
+    queryFn: async () => {
+      const instances = await getAllPages((page) =>
+        openstackInstancesList({
+          query: {
+            page,
+            attach_volume_uuid: resource.uuid,
+            field: ['url', 'name'],
+          },
+        }),
+      );
+      return {
+        instances: instances.map((choice) => ({
+          value: choice.url,
+          label: choice.name,
+        })),
+      };
+    },
+    staleTime: 3 * 60 * 1000,
   });
 
-  const fields = asyncState.value
+  const fields = asyncState.data
     ? [
         {
           name: 'instance',
           label: translate('Instance'),
           type: 'select',
           required: true,
-          options: asyncState.value.instances,
+          options: asyncState.data.instances,
         },
       ]
     : [];

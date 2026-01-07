@@ -251,4 +251,38 @@ describe('ProjectCreateDialog', () => {
     await userEvent.click(screen.getByText('Create'));
     expect(projectsCreate).not.toHaveBeenCalled();
   });
+
+  it('should NOT call projectsList when typing in description field', async () => {
+    vi.mocked(projectTypesList).mockResolvedValue({ data: [] } as any);
+    vi.mocked(projectsList).mockResolvedValue({ data: [] } as any);
+
+    renderComponent();
+
+    // Wait for form to be ready
+    await waitFor(() => {
+      expect(screen.getByText('Project description')).toBeInTheDocument();
+    });
+
+    // First, enter a valid project name (to pass pattern validation)
+    const nameInput = screen.getByLabelText(/Project name/i);
+    await userEvent.type(nameInput, 'Valid Project Name');
+
+    // Wait for debounced validation to complete
+    await new Promise((resolve) => setTimeout(resolve, 600));
+
+    // Clear any calls made during name entry
+    vi.mocked(projectsList).mockClear();
+
+    // Now type in the description field
+    const descriptionInput = screen.getByPlaceholderText(
+      'Enter a description...',
+    );
+    await userEvent.type(descriptionInput, 'This is a test description');
+
+    // Wait a bit to ensure no delayed calls are made
+    await new Promise((resolve) => setTimeout(resolve, 600));
+
+    // projectsList should NOT have been called when typing in description
+    expect(projectsList).not.toHaveBeenCalled();
+  });
 });
