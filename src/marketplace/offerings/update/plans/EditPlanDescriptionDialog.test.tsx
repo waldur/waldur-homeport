@@ -54,7 +54,7 @@ vi.mock('./constants', () => ({
 }));
 
 // Mock marketplace utils
-vi.mock('@waldur/marketplace/details/utils', () => ({
+vi.mock('@waldur/marketplace/offerings/store/utils', () => ({
   formatPlan: (data: any) => ({
     name: data.name,
     unit: data.unit?.value || data.unit,
