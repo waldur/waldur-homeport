@@ -96,7 +96,7 @@ export const CategoryFormDialog: FC<CategoryFormDialogProps> = ({
               </>
             }
           >
-            <FormGroup label={translate('Category name')} required>
+            <FormGroup label={translate('Category name')} required space={5}>
               <Field
                 name="name"
                 validate={required}
@@ -105,7 +105,7 @@ export const CategoryFormDialog: FC<CategoryFormDialogProps> = ({
               />
             </FormGroup>
 
-            <FormGroup label={translate('Description')}>
+            <FormGroup label={translate('Description')} space={5}>
               <Field
                 name="description"
                 component={TextField as any}

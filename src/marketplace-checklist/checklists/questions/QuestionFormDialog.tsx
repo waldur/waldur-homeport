@@ -105,6 +105,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
         question_type: formData.question_type,
         review_answer_value: formData.review_answer_value,
         required: formData.required || false,
+        order: formData.order,
       };
 
       if (formData.question_type === 'number') {
@@ -352,7 +353,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             <Tabs
               defaultActiveKey="general"
               id="questions-tabs"
-              className="nav-line-tabs mb-7"
+              className="nav-line-tabs mb-5"
               mountOnEnter
             >
               <Tab eventKey="general" title={translate('General')}>

@@ -21,7 +21,7 @@ export const QuestionGeneralForm = ({
 }) => {
   return (
     <>
-      <FormGroup label={translate('Question')} required>
+      <FormGroup label={translate('Question')} required space={5}>
         <Field
           name="description"
           component={TextField as any}
@@ -31,7 +31,7 @@ export const QuestionGeneralForm = ({
         />
       </FormGroup>
 
-      <FormGroup label={translate('Question type')} required>
+      <FormGroup label={translate('Question type')} required space={5}>
         <Field
           name="question_type"
           component={SelectField as any}
@@ -41,25 +41,37 @@ export const QuestionGeneralForm = ({
         />
       </FormGroup>
 
-      <Field
-        name="required"
-        component={AwesomeCheckboxField as any}
-        label={translate('Is required?')}
-      />
+      <FormGroup space={5}>
+        <Field
+          name="required"
+          component={AwesomeCheckboxField as any}
+          label={translate('Is required?')}
+        />
+      </FormGroup>
+
+      <FormGroup label={translate('Question order')} space={5}>
+        <Field
+          name="order"
+          component={NumberField as any}
+          label={translate('Question order')}
+          placeholder="0"
+          min={0}
+        />
+      </FormGroup>
 
       {['single_select', 'multi_select'].includes(values.question_type) ? (
         <QuestionAnswerOptions />
       ) : (
         values.question_type === 'number' && (
           <>
-            <FormGroup label={translate('Min value')}>
+            <FormGroup label={translate('Min value')} space={5}>
               <Field
                 name="min_value"
                 component={NumberField as any}
                 placeholder="0"
               />
             </FormGroup>
-            <FormGroup label={translate('Max value')}>
+            <FormGroup label={translate('Max value')} space={5}>
               <Field
                 name="max_value"
                 component={NumberField as any}

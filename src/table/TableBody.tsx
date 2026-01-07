@@ -305,7 +305,7 @@ const TableRow = memo<TableRowProps>(
         onClick={handleRowClick}
       >
         {(enableMultiSelect || fieldType) && (
-          <td className="row-control">
+          <td className="row-control" style={{ paddingLeft: '16px' }}>
             <div>
               {fieldType && fieldProps ? (
                 <>
@@ -331,7 +331,7 @@ const TableRow = memo<TableRowProps>(
                 </>
               ) : (
                 <FormCheck
-                  className="form-check form-check-custom form-check-sm"
+                  className="form-check form-check-custom form-check-md"
                   checked={isChecked}
                   onChange={handleSelectRow}
                 />
