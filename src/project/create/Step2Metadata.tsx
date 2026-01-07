@@ -1,6 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect } from 'react';
-import { checklistsAdminQuestionsList } from 'waldur-js-client';
+import {
+  projectsChecklistTemplateRetrieve,
+  QuestionAdmin,
+} from 'waldur-js-client';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -15,22 +18,24 @@ import { QuestionAnswerField } from '@waldur/marketplace-checklist/QuestionAnswe
 
 export const Step2Metadata: FC<WizardFinalFormStepProps> = (props) => {
   // Fetch customer checklist questions
-  const checklistUuid = props.values.customer?.project_metadata_checklist;
+  const customerUuid = props.values.customer?.uuid;
   const {
-    data: questions,
+    data: checklistData,
     isLoading,
     error,
     refetch,
   } = useQuery({
-    queryKey: ['ChecklistQuestions', checklistUuid],
+    queryKey: ['ProjectsChecklistTemplate', customerUuid],
     queryFn: () =>
-      checklistUuid
-        ? checklistsAdminQuestionsList({
-            query: { checklist_uuid: checklistUuid, page_size: 300 },
+      customerUuid
+        ? projectsChecklistTemplateRetrieve({
+            query: { parent_uuid: customerUuid },
           }).then((res) => res.data)
         : null,
     staleTime: 3 * 60 * 1000,
   });
+
+  const questions = checklistData?.questions || [];
 
   // Store questions in the form data to access it in the submit function
   useEffect(() => {
@@ -57,7 +62,7 @@ export const Step2Metadata: FC<WizardFinalFormStepProps> = (props) => {
           >
             <QuestionAnswerField
               name={`metadata.${question.uuid}`}
-              question={question}
+              question={question as QuestionAdmin}
             />
             <FormFieldError name={`metadata.${question.uuid}`} />
           </FormGroup>
