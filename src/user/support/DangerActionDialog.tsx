@@ -33,7 +33,7 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
         },
       }).then((response) => response.data);
       showSuccess(props.sucessMessage);
-      router.stateService.go('support-detail', { uuid: issue.uuid });
+      router.stateService.go('support.detail', { issue_uuid: issue.uuid });
       closeDialog();
     } catch (e) {
       showErrorResponse(e, translate('Unable to create request.'));

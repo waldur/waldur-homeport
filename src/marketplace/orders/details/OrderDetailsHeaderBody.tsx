@@ -2,11 +2,9 @@ import { useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field } from '@waldur/resource/summary';
-import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
 
 import { getOrderType } from '../utils';
 
@@ -55,22 +53,6 @@ export const OrderDetailsHeaderBody = ({ order }) => {
           labelCol="auto"
           valueCol="auto"
         />
-        {order.offering_type === SUPPORT_OFFERING_TYPE && order.issue && (
-          <Field
-            label={translate('Issue')}
-            value={
-              <Link
-                state="support-detail"
-                params={{ issue_uuid: order.issue.uuid }}
-                label={order.issue.key || order.issue.uuid}
-                className="text-link"
-              />
-            }
-            labelClass="w-100px"
-            labelCol="auto"
-            valueCol="auto"
-          />
-        )}
       </Col>
     </Row>
   );

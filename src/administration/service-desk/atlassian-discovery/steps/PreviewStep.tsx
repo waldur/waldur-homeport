@@ -38,6 +38,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
           caller_field: state.fieldMappings.caller_field,
           template_field: state.fieldMappings.template_field,
           waldur_backend_id_field: state.fieldMappings.waldur_backend_id_field,
+          default_offering_issue_type:
+            state.fieldMappings.default_offering_issue_type,
           confirm_save: true,
         },
       });
@@ -273,6 +275,18 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                         (p) => p.id === state.fieldMappings.default_priority,
                       )?.name || state.fieldMappings.default_priority}
                     </>
+                  ) : (
+                    <span className="text-muted">{translate('Not set')}</span>
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td className="text-muted">
+                  {translate('Default Offering Issue Type')}
+                </td>
+                <td>
+                  {state.fieldMappings.default_offering_issue_type ? (
+                    <>{state.fieldMappings.default_offering_issue_type}</>
                   ) : (
                     <span className="text-muted">{translate('Not set')}</span>
                   )}

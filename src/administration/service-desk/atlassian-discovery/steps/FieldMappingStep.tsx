@@ -120,6 +120,14 @@ export const FieldMappingStep = ({
     })),
   ];
 
+  const requestTypeOptions = [
+    { value: '', label: translate('-- Not set --') },
+    ...selectedRequestTypes.map((rt) => ({
+      value: rt.name,
+      label: rt.name,
+    })),
+  ];
+
   return (
     <Form
       onSubmit={handleSubmit}
@@ -270,6 +278,22 @@ export const FieldMappingStep = ({
                   name="default_priority"
                   component={SelectField as any}
                   options={priorityOptions}
+                  simpleValue
+                />
+              </FormGroup>
+            </div>
+
+            <div className="col-md-6">
+              <FormGroup
+                label={translate('Default Offering Issue Type')}
+                description={translate(
+                  'Issue type used when creating tickets for marketplace request-based orders',
+                )}
+              >
+                <Field
+                  name="default_offering_issue_type"
+                  component={SelectField as any}
+                  options={requestTypeOptions}
                   simpleValue
                 />
               </FormGroup>

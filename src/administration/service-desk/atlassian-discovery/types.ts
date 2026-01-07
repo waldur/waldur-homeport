@@ -36,5 +36,6 @@ export interface DiscoveryState {
     template_field?: string;
     waldur_backend_id_field?: string;
     default_priority?: string;
+    default_offering_issue_type?: string;
   };
 }

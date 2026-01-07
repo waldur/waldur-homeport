@@ -10,6 +10,7 @@ import { formatDateTime, formatRelative } from '@waldur/core/dateUtils';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { FormattedJira } from '@waldur/core/FormattedJira';
+import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
@@ -143,6 +144,27 @@ export const IssueDetails: FunctionComponent = () => {
             )}
           </Col>
         </Row>
+        {issue.order_uuid && (
+          <Row>
+            <Col className="mw-450px">
+              <Field
+                label={translate('Order')}
+                value={
+                  <Link
+                    state="marketplace-orders.details"
+                    params={{ order_uuid: issue.order_uuid }}
+                    className="text-link"
+                  >
+                    {issue.order_resource_name || issue.order_uuid}
+                  </Link>
+                }
+                isStuck
+                labelClass="min-w-100px"
+                className="fs-7"
+              />
+            </Col>
+          </Row>
+        )}
       </PublicDashboardHero>
 
       <Card className="card-bordered mb-5">

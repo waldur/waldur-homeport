@@ -16,6 +16,7 @@ import { SettingsDescription } from '@waldur/SettingsDescription';
 import { FieldRow } from '../settings/FieldRow';
 
 import { AtlassianDiscoveryButton } from './atlassian-discovery';
+import { IssueStatusList } from './issue-statuses';
 
 const AdministrationServiceDeskUpdateDialog = lazyComponent(() =>
   import('./AdministrationServiceDeskUpdateDialog').then((module) => ({
@@ -103,7 +104,7 @@ export const AdministrationServiceDesk = () => {
     <>
       <SettingsGroupCard group={INTEGRATION_SETTINGS} data={data} />
 
-      <Card className="card-bordered">
+      <Card className="card-bordered mb-6">
         <Card.Body>
           <Row>
             {serviceDeskProviders.map((serviceDeskProvider, index) => (
@@ -117,6 +118,8 @@ export const AdministrationServiceDesk = () => {
           </Row>
         </Card.Body>
       </Card>
+
+      <IssueStatusList />
     </>
   ) : null;
 };
