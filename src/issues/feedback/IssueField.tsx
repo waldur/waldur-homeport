@@ -5,8 +5,8 @@ const issueLabel = (key: string, summary: string) =>
 
 export const IssueField = ({ row }) => (
   <Link
-    state="support-detail"
-    params={{ uuid: row.issue_uuid }}
+    state="support.detail"
+    params={{ issue_uuid: row.issue_uuid }}
     label={issueLabel(row.issue_key, row.issue_summary)}
   />
 );

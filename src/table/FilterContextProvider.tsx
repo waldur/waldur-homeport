@@ -52,11 +52,11 @@ export const FilterContextProvider: FC<
 
   const [filterComponents, setFilterComponents] = useState([]);
 
-  const registerFilterComponent = (comp) => {
+  const registerFilterComponent = useCallback((comp) => {
     setFilterComponents((prev) =>
       prev.some((p) => p.name === comp.name) ? prev : [...prev, comp],
     );
-  };
+  }, []);
 
   const apply = () => {
     props.applyFiltersFn(true);

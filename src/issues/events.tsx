@@ -8,7 +8,7 @@ import { SupportEnum } from '../EventsEnums';
 const getIssueContext = (event) => ({
   ...getCallerContext(event),
   issue_link: (
-    <Link state="support-detail" params={{ uuid: event.issue_uuid }}>
+    <Link state="support.detail" params={{ issue_uuid: event.issue_uuid }}>
       {event.issue_key}
     </Link>
   ),

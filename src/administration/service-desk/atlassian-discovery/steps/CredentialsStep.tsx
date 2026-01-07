@@ -28,11 +28,13 @@ const AUTH_METHODS = [
 ];
 
 interface CredentialsStepProps {
+  initialValues?: Partial<AtlassianCredentials>;
   onValidated: (credentials: AtlassianCredentials) => void;
   onCancel: () => void;
 }
 
 export const CredentialsStep = ({
+  initialValues,
   onValidated,
   onCancel,
 }: CredentialsStepProps) => {
@@ -118,6 +120,7 @@ export const CredentialsStep = ({
       initialValues={{
         auth_method: 'api_token',
         verify_ssl: true,
+        ...initialValues,
       }}
       render={({ handleSubmit, values, invalid }) => (
         <form onSubmit={handleSubmit}>

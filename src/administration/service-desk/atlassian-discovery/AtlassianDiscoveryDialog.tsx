@@ -1,5 +1,7 @@
-import { useState, useCallback } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import { useState, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
+import { supportSettingsAtlassianCurrentSettingsRetrieve } from 'waldur-js-client';
 
 import { ProgressSteps, ProgressStep } from '@waldur/core/ProgressSteps';
 import { translate } from '@waldur/i18n';
@@ -29,6 +31,34 @@ export const AtlassianDiscoveryDialog = () => {
   const dispatch = useDispatch();
   const [step, setStep] = useState(0);
   const [state, setState] = useState<DiscoveryState>(INITIAL_STATE);
+
+  // Load current settings to pre-fill the form
+  const { data: currentSettings } = useQuery({
+    queryKey: ['AtlassianCurrentSettings'],
+    queryFn: () => supportSettingsAtlassianCurrentSettingsRetrieve(),
+    staleTime: 0,
+  });
+
+  // Build initial credentials from current settings
+  const initialCredentials = useMemo(():
+    | Partial<AtlassianCredentials>
+    | undefined => {
+    const settings = currentSettings?.data as
+      | Record<string, unknown>
+      | undefined;
+    if (!settings?.ATLASSIAN_API_URL) return undefined;
+
+    return {
+      api_url: settings.ATLASSIAN_API_URL as string,
+      verify_ssl: (settings.ATLASSIAN_VERIFY_SSL as boolean) ?? true,
+      auth_method:
+        (settings.auth_method as AtlassianCredentials['auth_method']) ||
+        'api_token',
+      email: (settings.ATLASSIAN_EMAIL as string) || '',
+      username: (settings.ATLASSIAN_USERNAME as string) || '',
+      // Secrets (token, password, personal_access_token) are not pre-filled for security
+    };
+  }, [currentSettings]);
 
   const updateState = useCallback((updates: Partial<DiscoveryState>) => {
     setState((prev) => ({ ...prev, ...updates }));
@@ -135,6 +165,7 @@ export const AtlassianDiscoveryDialog = () => {
       case 0:
         return (
           <CredentialsStep
+            initialValues={initialCredentials}
             onValidated={handleCredentialsValidated}
             onCancel={handleClose}
           />
