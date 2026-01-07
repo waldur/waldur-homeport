@@ -25,6 +25,14 @@ const fields: OfferingEditField[] = [
     ),
   },
   {
+    label: translate('Disable auto-approval'),
+    key: 'plugin_options.disable_autoapprove',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, orders for this offering will always require manual approval, overriding the auto-approval setting above',
+    ),
+  },
+  {
     label: translate('Resource termination date is required'),
     key: 'plugin_options.is_resource_termination_date_required',
     component: AwesomeCheckboxField,
