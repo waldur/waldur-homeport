@@ -46,14 +46,14 @@ export const DeleteConfirmationDialog: React.FC<
         <>
           <Button
             variant="tertiary"
-            className="flex-equal"
+            className="min-w-150px"
             onClick={handleCancel}
           >
             {translate('Cancel')}
           </Button>
           <Button
             variant="danger"
-            className="flex-equal"
+            className="min-w-150px"
             onClick={handleSubmit}
           >
             {translate('Delete')}

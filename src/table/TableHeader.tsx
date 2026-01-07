@@ -233,13 +233,13 @@ export const TableHeader: FC<TableHeaderProps> = ({
       <thead>
         <tr className="text-start text-muted fw-bolder fs-7 gs-0 align-middle">
           {fieldType ? (
-            <th style={{ width: '10px' }} />
+            <th style={{ width: '10px', paddingLeft: '16px' }} />
           ) : enableMultiSelect ? (
-            <th style={{ width: '10px' }}>
+            <th style={{ width: '10px', paddingLeft: '16px' }}>
               <FormCheck
                 ref={refCheck}
                 data-testid="select-all"
-                className="form-check form-check-custom form-check-sm"
+                className="form-check form-check-custom form-check-md"
                 checked={isAllSelected}
                 onChange={() => onSelectAllRows(rows)}
               />

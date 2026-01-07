@@ -77,6 +77,10 @@ const DraggableFieldsListGroup = ({
   const sensors = useSensors(useSensor(PointerSensor));
   const addDisabled = fields.value?.some((v) => !v);
 
+  if (fields.length === 0) {
+    fields.push('');
+  }
+
   const addRow = () => {
     if (!addDisabled) {
       fields.push('');
@@ -128,6 +132,7 @@ const DraggableFieldsListGroup = ({
                     variant="text-primary"
                     onClick={addRow}
                     disabled={addDisabled}
+                    size="sm"
                   >
                     <span className="svg-icon svg-icon-2">
                       <PlusIcon weight="bold" />

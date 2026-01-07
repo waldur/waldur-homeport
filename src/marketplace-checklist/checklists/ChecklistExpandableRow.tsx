@@ -26,7 +26,7 @@ export const ChecklistExpandableRow: FC<{
   });
 
   return (
-    <ExpandableContainer>
+    <ExpandableContainer asTable>
       <Table<QuestionAdmin>
         {...tableProps}
         columns={[
@@ -40,11 +40,17 @@ export const ChecklistExpandableRow: FC<{
               questionTypeOptions.find((q) => q.value === row.question_type)
                 ?.label || row.question_type,
           },
+          {
+            title: translate('Order'),
+            render: ({ row }) => row.order,
+          },
         ]}
         verboseName={translate('Questions')}
         hasActionBar={false}
         minHeight="auto"
         rowActions={QuestionRowActions}
+        initialPageSize={5}
+        showPageSizeSelector={true}
       />
     </ExpandableContainer>
   );

@@ -1,7 +1,7 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { ComponentType, useCallback } from 'react';
-import { Alert, Button, Card } from 'react-bootstrap';
+import { Button, Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import {
@@ -24,6 +24,7 @@ import { YearField } from '@waldur/form/YearField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { questionConditionOperatorOptions } from '@waldur/marketplace-checklist/utils';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 interface FieldValue {
   depends_on_question?;
@@ -97,7 +98,7 @@ const FieldsListGroup = ({
 
   return (
     <>
-      <div className="mb-2">
+      <div className="mb-5">
         <Field
           name="dependency_logic_operator"
           defaultValue="and"
@@ -261,7 +262,12 @@ const FieldsListGroup = ({
         );
       })}
       <div>
-        <Button variant="text-primary" onClick={addRow} disabled={addDisabled}>
+        <Button
+          variant="text-primary"
+          onClick={addRow}
+          disabled={addDisabled}
+          size="sm"
+        >
           <span className="svg-icon svg-icon-2">
             <PlusIcon weight="bold" />
           </span>
@@ -296,9 +302,12 @@ export const QuestionVisibilityForm = ({
 
   if (!data.length) {
     return (
-      <Alert variant="warning">
-        {translate('There are no questions in this checklist yet.')}
-      </Alert>
+      <NoResult
+        title={translate('There are no questions in this checklist yet')}
+        message={translate(
+          'Please add questions to the checklist before setting visibility conditions.',
+        )}
+      />
     );
   }
 

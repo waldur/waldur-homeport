@@ -31,6 +31,7 @@ export const QuestionEditAction: FC<QuestionEditActionProps> = ({ row }) => (
       description: r.description,
       question_type: r.question_type,
       required: r.required || false,
+      order: r.order,
       review_answer_value: r.review_answer_value as any,
       options: r.question_options.map((opt) => opt.label),
       min_value: r.min_value,

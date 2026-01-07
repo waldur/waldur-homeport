@@ -134,7 +134,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               </>
             }
           >
-            <FormGroup label={translate('Checklist name')} required>
+            <FormGroup label={translate('Checklist name')} required space={5}>
               <Field
                 name="name"
                 validate={required}
@@ -149,7 +149,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
                 message={translate('Unable to load categories.')}
               />
             ) : null}
-            <FormGroup label={translate('Category')} required>
+            <FormGroup label={translate('Category')} required space={5}>
               <Field
                 name="category"
                 component={SelectField as any}
@@ -162,7 +162,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               />
             </FormGroup>
 
-            <FormGroup label={translate('Checklist type')} required>
+            <FormGroup label={translate('Checklist type')} required space={5}>
               <Field
                 name="checklist_type"
                 component={SelectField as any}
@@ -172,7 +172,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
               />
             </FormGroup>
 
-            <FormGroup label={translate('Description')}>
+            <FormGroup label={translate('Description')} space={5}>
               <Field
                 name="description"
                 component={TextField as any}
