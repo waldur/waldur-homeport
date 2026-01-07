@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor, within } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
@@ -41,8 +42,16 @@ const fakeVolumeTypes = [
   },
 ] as unknown as OpenStackVolumeType[];
 
-const renderDialog = () =>
-  render(<RetypeDialog resolve={{ resource, refetch: vi.fn() }} />);
+const renderDialog = () => {
+  const queryClient = new QueryClient({
+    defaultOptions: { queries: { retry: false } },
+  });
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <RetypeDialog resolve={{ resource, refetch: vi.fn() }} />
+    </QueryClientProvider>,
+  );
+};
 
 describe('RetypeDialog', () => {
   const mockShowSuccess = vi.fn();

@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useAsync } from 'react-use';
 import { openstackVolumesRetype } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
@@ -19,20 +19,24 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
   const { showErrorResponse, showSuccess } = useNotify();
   const { closeDialog } = useModal();
 
-  const asyncState = useAsync(async () => {
-    const types = await loadVolumeTypes({
-      tenant_uuid: resource.tenant_uuid,
-    });
-    return {
-      types: types
-        .map((volumeType) => ({
-          value: volumeType.url,
-          label: volumeType.description
-            ? `${volumeType.name} (${volumeType.description})`
-            : volumeType.name,
-        }))
-        .filter((choice) => choice.value !== resource.type),
-    };
+  const asyncState = useQuery({
+    queryKey: ['volumeTypes', resource.tenant_uuid, resource.type],
+    queryFn: async () => {
+      const types = await loadVolumeTypes({
+        tenant_uuid: resource.tenant_uuid,
+      });
+      return {
+        types: types
+          .map((volumeType) => ({
+            value: volumeType.url,
+            label: volumeType.description
+              ? `${volumeType.name} (${volumeType.description})`
+              : volumeType.name,
+          }))
+          .filter((choice) => choice.value !== resource.type),
+      };
+    },
+    staleTime: 3 * 60 * 1000,
   });
 
   const submitRequest = async (formData) => {
@@ -58,7 +62,7 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog
             title={translate('Retype OpenStack Volume')}
-            loading={asyncState.loading}
+            loading={asyncState.isLoading}
             error={asyncState.error}
             submitting={submitting}
             invalid={invalid}
@@ -66,13 +70,13 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
             <p>
               <strong>{translate('Current type')}:</strong> {resource.type_name}
             </p>
-            {asyncState.value?.types.length > 0 ? (
+            {asyncState.data?.types.length > 0 ? (
               <FormGroup label={translate('Volume type')} required>
                 <Field
                   name="type"
                   validate={required}
                   render={({ input }) => (
-                    <Select {...input} options={asyncState.value.types} />
+                    <Select {...input} options={asyncState.data.types} />
                   )}
                 />
               </FormGroup>

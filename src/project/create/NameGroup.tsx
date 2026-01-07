@@ -23,8 +23,16 @@ export const NameGroup = ({
   error,
   refetch,
 }: NameGroupProps) => {
+  // Validate function receives (value, allValues, meta)
+  // Only run async validation when this field is active (focused)
   const validate = useCallback(
-    (value) => validateProjectName(value, { customer }),
+    (value, _allValues, meta) => {
+      // Skip async validation if field is not active (user is typing in another field)
+      if (meta && !meta.active) {
+        return undefined;
+      }
+      return validateProjectName(value, { customer });
+    },
     [customer],
   );
   return (

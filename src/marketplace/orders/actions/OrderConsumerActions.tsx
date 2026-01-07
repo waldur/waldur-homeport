@@ -15,7 +15,11 @@ export const OrderConsumerActions: FC<OrderActionProps> = (props) =>
 
       <RejectByConsumerButton
         {...props}
-        className={props.as === Button ? 'btn-danger btn-sm flex-grow-1' : 'text-danger flex-grow-1'}
+        className={
+          props.as === Button
+            ? 'btn-danger btn-sm flex-grow-1'
+            : 'text-danger flex-grow-1'
+        }
       />
     </>
   ) : null;

@@ -1,6 +1,6 @@
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
-import { useAsync } from 'react-use';
 import {
   openstackInstancesList,
   rancherNodesLinkOpenstack,
@@ -18,33 +18,37 @@ export const LinkDialog: FC<ActionDialogProps> = ({
 }) => {
   const dispatch = useDispatch();
 
-  const asyncState = useAsync(async () => {
-    const instances = await getAllPages((page) =>
-      openstackInstancesList({
-        query: {
-          page,
-          project_uuid: resource.project_uuid,
-          field: ['url', 'name'],
-        },
-      }),
-    );
+  const asyncState = useQuery({
+    queryKey: ['openstackInstancesForLink', resource.project_uuid],
+    queryFn: async () => {
+      const instances = await getAllPages((page) =>
+        openstackInstancesList({
+          query: {
+            page,
+            project_uuid: resource.project_uuid,
+            field: ['url', 'name'],
+          },
+        }),
+      );
 
-    return {
-      instances: instances.map((choice) => ({
-        value: choice.url,
-        label: choice.name,
-      })),
-    };
+      return {
+        instances: instances.map((choice) => ({
+          value: choice.url,
+          label: choice.name,
+        })),
+      };
+    },
+    staleTime: 3 * 60 * 1000,
   });
 
-  const fields = asyncState.value
+  const fields = asyncState.data
     ? [
         {
           name: 'instance',
           type: 'select',
           required: true,
           label: translate('OpenStack instance'),
-          options: asyncState.value.instances,
+          options: asyncState.data.instances,
         },
       ]
     : [];
