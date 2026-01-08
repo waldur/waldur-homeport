@@ -28,6 +28,7 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
   const filtersFormId = getFiltersFormId(props.filters);
 
   const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+  const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
   const filterPosition =
     isSm && originalFilterPosition === 'menu'
       ? 'sidebar'
@@ -49,8 +50,14 @@ export const TableFilterContainer: FC<TableFilterContainerProps> = (props) => {
         </div>
       ) : (
         // Header filters
-        <div className="d-flex scroll-x">
-          <div className="d-flex align-items-stretch text-nowrap w-100">
+        <div className={isMd ? 'd-flex scroll-x' : 'd-flex'}>
+          <div
+            className={
+              isMd
+                ? 'd-flex align-items-stretch text-nowrap w-100'
+                : 'd-flex align-items-stretch flex-wrap gap-2 w-100'
+            }
+          >
             {props.filters}
           </div>
         </div>

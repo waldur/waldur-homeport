@@ -1,12 +1,12 @@
 .table-tabs-container {
   .nav-tabs {
     padding-top: 0.93rem;
-    // padding-left: 0.93rem;
 
     .expandable-container & {
       border: 1px solid var(--bs-border-color);
       border-top-left-radius: 0.475rem;
       border-top-right-radius: 0.475rem;
+      padding-left: 12px;
     }
   }
 
