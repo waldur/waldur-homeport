@@ -197,6 +197,13 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
     handleHorizontalScroll,
   ]);
 
+  // Auto-show filter bar when filters are loaded (e.g., from URL)
+  useEffect(() => {
+    if (props.filtersStorage?.length > 0 && !showFilterMenuToggle) {
+      setShowFilterMenuToggle(true);
+    }
+  }, [props.filtersStorage?.length]);
+
   // Lifecycle: componentWillUnmount equivalent
   useEffect(() => {
     return () => {

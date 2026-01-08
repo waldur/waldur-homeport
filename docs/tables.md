@@ -323,6 +323,122 @@ export const FilteredList = () => {
 };
 ```
 
+### Filter positions
+
+The `filterPosition` prop controls where filters are displayed:
+
+| Position | Behavior |
+|----------|----------|
+| `header` | Filters always visible in card header |
+| `menu` | Filters in dropdown menu, toggled with filter button |
+| `sidebar` | Filters in drawer/sidebar panel |
+
+### Filter storage and badges
+
+When filters are applied, they are stored in `filtersStorage` (Redux state) which is used to:
+
+- Display filter badges/chips in the filter bar
+- Show filter count on the filter toggle button
+- Auto-expand the filter bar when filters are loaded from URL
+
+The flow:
+
+```text
+User changes filter field
+    ↓
+Redux Form stores value
+    ↓
+TableFilterItem calls setFilter() → updates filtersStorage[]
+    ↓
+Table re-fetches with new filter
+    ↓
+Filter badges rendered from filtersStorage
+```
+
+### URL query parameter sync
+
+Filters can be synced to URL query parameters for shareable links. Use utilities from `@waldur/core/filters`:
+
+```ts
+import {
+  syncFiltersToURL,
+  useReinitializeFilterFromUrl,
+  getQueryParams,
+} from '@waldur/core/filters';
+
+const FILTER_FORM_ID = 'MyFilterForm';
+
+export const MyList = () => {
+  // Load filters from URL on mount and route changes
+  useReinitializeFilterFromUrl(FILTER_FORM_ID);
+
+  const formValues = useSelector(getFormValues(FILTER_FORM_ID));
+
+  // Sync filter changes to URL
+  useEffect(() => {
+    if (formValues) {
+      syncFiltersToURL(formValues);
+    }
+  }, [formValues]);
+
+  // ... rest of component
+};
+```
+
+#### URL format
+
+Filters are stored in URL query parameters with compact encoding:
+
+| Value type | URL format | Example |
+|------------|------------|---------|
+| String | Direct value | `?name=test` |
+| Object with uuid | `uuid::name` | `?org=abc123::My+Org` |
+| Array | JSON encoded | `?tags=["a","b"]` |
+| Boolean | `true`/`false` | `?active=true` |
+
+The compact `uuid::name` format keeps URLs shorter while preserving display names for filter badges.
+
+#### Navigation behavior
+
+When navigating between pages in the SPA:
+
+1. **URL params persist** - query string is preserved during navigation
+2. **Form re-initialization** - `useReinitializeFilterFromUrl` re-populates the form when route changes
+3. **Auto-show filter bar** - when `filtersStorage` has items, the filter bar auto-expands
+
+```text
+Page A with filter → Navigate to Page B → Navigate back to Page A
+     ↓                      ↓                      ↓
+URL updated            URL preserved         URL read, form populated
+with filters           (SPA routing)         filtersStorage updated
+                                             Table re-fetches
+```
+
+### Default/initial filters
+
+To set default filter values that can be overridden by URL params:
+
+```ts
+const defaultValues = { status: 'active' };
+
+// URL params take precedence over defaults
+useReinitializeFilterFromUrl(FILTER_FORM_ID, defaultValues);
+```
+
+### Cross-page filters (Resources sidebar)
+
+The Resources sidebar filter (`src/navigation/sidebar/resources-filter/`) is a special case that:
+
+1. Syncs `organization` and `project` filters across multiple resource tables
+2. Persists to **localStorage** for session persistence
+3. Syncs to URL for shareable links
+
+Priority order:
+
+1. **URL params** (highest) - for shareable links
+2. **localStorage** - for session persistence
+3. **No filter** - shows all resources
+
 ### Inline filters
 
 The feature allows users to quickly filter table data by clicking values directly in the table cells, without manually setting filters. When column has `inlineFilter` property enabled:

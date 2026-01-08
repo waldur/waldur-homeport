@@ -1,13 +1,16 @@
 import { XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { createElement } from 'react';
+import { createElement, useCallback } from 'react';
 import { Button, Card, Col, Row, Stack } from 'react-bootstrap';
+import { useMediaQuery } from 'react-responsive';
 
+import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import { useTableContext } from '../../context';
 import { TableButtons } from '../../TableButtons';
+import { TableFilterButton } from '../../TableFilterButton';
 import { TableQuery } from '../../TableQuery';
 import { TableRefreshButton } from '../../TableRefreshButton';
 
@@ -36,6 +39,41 @@ export function TableToolbarActions() {
     filterPosition,
     filtersStorage,
   } = useTableContext();
+
+  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+
+  // Handler for filter button click
+  const onClickFilterButton = useCallback(
+    (event: React.MouseEvent) => {
+      if (filterPosition === 'sidebar') {
+        actions.renderFiltersDrawer(slots.filters);
+      } else {
+        actions.toggleFilterMenu();
+        const parent: HTMLElement = event.currentTarget.closest('.card-table');
+        if (!parent) return;
+        const btns = parent.getElementsByClassName(
+          'btn-add-filter',
+        ) as HTMLCollectionOf<HTMLButtonElement>;
+        if (btns?.length) {
+          if (!showFilterMenuToggle || filtersStorage?.length) {
+            btns.item(0).click();
+            event.stopPropagation();
+          }
+        }
+      }
+    },
+    [
+      actions,
+      slots.filters,
+      filterPosition,
+      showFilterMenuToggle,
+      filtersStorage,
+    ],
+  );
+
+  // Check if filter button should be shown next to search
+  const showFilterButtonNextToSearch =
+    !isSm && ['menu', 'sidebar'].includes(filterPosition) && slots.filters;
 
   return (
     <>
@@ -68,16 +106,26 @@ export function TableToolbarActions() {
         </Col>
       )}
 
-      {/* Table Query */}
+      {/* Table Query + Filter Button */}
       {config.hasQuery && (
         <Col
           xs
           className={classNames(
-            'order-2 order-sm-2 mw-lg-325px',
+            'order-2 order-sm-2 d-flex align-items-center gap-2',
             showTitle && 'ms-auto',
           )}
         >
-          <TableQuery query={query} setQuery={actions.setQuery} />
+          <div className="mw-lg-325px flex-grow-1">
+            <TableQuery query={query} setQuery={actions.setQuery} />
+          </div>
+          {/* Filter button next to search (only on larger screens) */}
+          {showFilterButtonNextToSearch && (
+            <TableFilterButton
+              onClick={onClickFilterButton}
+              hasFilter={!!filtersStorage?.length}
+              filterCount={filtersStorage?.length || 0}
+            />
+          )}
         </Col>
       )}
 
@@ -115,6 +163,7 @@ export function TableToolbarActions() {
               fetch={actions.fetch}
               standalone={config.standalone}
               standaloneActionsInTable={config.standaloneActionsInTable}
+              renderFilterButton={isSm}
             />
           </div>
         )}

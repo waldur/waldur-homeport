@@ -51,6 +51,8 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
     <Table<GroupInvitation>
       {...props}
       filters={<GroupInvitationsFilter />}
+      filterPosition="menu"
+      hasQuery
       columns={[
         {
           title: translate('Created by'),

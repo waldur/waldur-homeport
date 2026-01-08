@@ -3,6 +3,7 @@ import { useCallback, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
+import { getQueryParams, syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
 import {
@@ -190,13 +191,48 @@ export const useOrganizationAndProjectFiltersForResources = (
 
       // Save in local storage
       storeFilter(formData);
+
+      // Sync to URL so filters are visible and shareable
+      syncFiltersToURL(formData);
     },
     [dispatch, categories, state, params],
   );
 
   useEffect(() => {
-    const filter = restoreFilter();
-    syncResourceFilters(filter);
+    // Normalize filter values - handle arrays from old data or different code paths
+    const normalizeFilter = (filter: any) => {
+      if (!filter) return filter;
+      return {
+        ...filter,
+        organization: Array.isArray(filter.organization)
+          ? filter.organization[0]
+          : filter.organization,
+        project: Array.isArray(filter.project)
+          ? filter.project[0]
+          : filter.project,
+      };
+    };
+
+    // URL params take precedence over localStorage
+    const urlParams = getQueryParams();
+    const hasUrlFilters = urlParams.organization || urlParams.project;
+
+    if (hasUrlFilters) {
+      // Use URL params - they were set intentionally (e.g., shared link)
+      const normalized = normalizeFilter(urlParams);
+      syncResourceFilters(normalized);
+      // Also save to localStorage for persistence
+      storeFilter(normalized);
+    } else {
+      // Fall back to localStorage
+      const filter = restoreFilter();
+      const normalized = normalizeFilter(filter);
+      syncResourceFilters(normalized);
+      // Sync restored filters to URL so they are visible and shareable
+      if (normalized) {
+        syncFiltersToURL(normalized);
+      }
+    }
   }, []);
 
   return { syncResourceFilters };

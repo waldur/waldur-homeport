@@ -345,6 +345,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
 
   // The filter field must have an initial value (at least null) so that the filter menu popup does not close when setting this filter for the first time.
   // Wait a moment for the filters to set to the form. Then use them in the table state.
+  // Include itemValue in dependencies so filters loaded from URL are reflected in filtersStorage.
   useDebounce(
     () => {
       _setFilter(itemValue);
@@ -353,7 +354,7 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
       }
     },
     DELAY_WAITING_FOR_FILTER,
-    [],
+    [itemValue],
   );
 
   // Update filter when selecting a saved filter
