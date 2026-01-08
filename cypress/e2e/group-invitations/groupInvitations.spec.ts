@@ -7,60 +7,45 @@ const openAddDialog = () => {
     .click();
 };
 
+const CUSTOMER_UUID = '895e38d197e748459189f19285119edf';
+
 describe('Group invitations', () => {
   beforeEach(() => {
-    cy.mockConfigs()
+    cy.mockUser('admin')
       .mockChecklists()
-      .mockUser('admin')
       .setToken()
 
-      .intercept('GET', '/api/customers/895e38d197e748459189f19285119edf/', {
+      .intercept('GET', /\/api\/customers\/[^/]+\/$/, {
         fixture: 'customers/admin_customers.json',
       })
-      .intercept('GET', '/api/customers/**/counters/', {
+      .intercept('GET', /\/api\/customers\/[^/]+\/counters/, {
         fixture: 'marketplace/counters.json',
       })
-      .intercept('GET', '/api/customers/**', {
-        fixture: 'customers/admin_customers.json',
+      .intercept('GET', /\/api\/customer-credits\//, [])
+      .intercept('GET', /\/api\/marketplace-orders\//, [])
+      .intercept('GET', /\/api\/customer-permissions-reviews\//, [])
+      .intercept('GET', /\/api\/user-group-invitations\//, {
+        fixture: 'group-invitations/user-group-invitations.json',
       })
       .intercept(
         'GET',
-        '/api/customer-permissions-reviews/?customer_uuid=895e38d197e748459189f19285119edf&is_pending=true',
-        [],
-      )
-      .intercept(
-        'GET',
-        '/api/marketplace-orders/?o=-created&customer_uuid=895e38d197e748459189f19285119edf&state=requested%20for%20approval',
-        [],
-      )
-      .intercept(
-        'GET',
-        '/api/user-group-invitations/*',
-        {
-          fixture: 'group-invitations/user-group-invitations.json',
-        },
-      )
-      .intercept(
-        'GET',
-        '/api/user-group-invitations/?page=1&page_size=10&is_active=true&customer_uuid=895e38d197e748459189f19285119edf',
+        /\/api\/user-group-invitations\/\?.*is_active=true/,
         {
           fixture: 'group-invitations/user-group-invitations-active-items.json',
         },
       )
-      .intercept('POST', '/api/user-group-invitations/', {
+      .intercept('POST', /\/api\/user-group-invitations\/$/, {
         statusCode: 201,
         fixture: 'group-invitations/user-group-invitations-post.json',
       })
       .intercept(
         'POST',
-        '/api/user-group-invitations/ab999060754043c7b099e85893fdfabf/cancel/',
+        /\/api\/user-group-invitations\/[^/]+\/cancel\//,
         {
           fixture: 'group-invitations/user-group-invitations-cancel.json',
         },
       )
-      .visit(
-        '/organizations/895e38d197e748459189f19285119edf/group-invitations/',
-      )
+      .visit(`/organizations/${CUSTOMER_UUID}/group-invitations/`)
       .waitForPage();
   });
 

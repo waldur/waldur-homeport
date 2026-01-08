@@ -1,9 +1,14 @@
+import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Project, projectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
+import {
+  syncFiltersToURL,
+  useReinitializeFilterFromUrl,
+} from '@waldur/core/filters';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -30,8 +35,10 @@ import { getUser } from '@waldur/workspace/selectors';
 import { ProjectExpandableRow } from './ProjectExpandableRow';
 import { ProjectsListFilter } from './ProjectsListFilter';
 
+const FILTER_FORM_ID = 'affiliationProjectsListFilter';
+
 const mapStateToFilter = createSelector(
-  getFormValues('affiliationProjectsListFilter'),
+  getFormValues(FILTER_FORM_ID),
   getUser,
   (stateFilter: any, user) => {
     const filter: any = {};
@@ -62,7 +69,20 @@ const mapStateToFilter = createSelector(
 
 export const ProjectsList = () => {
   useTitle(translate('Projects'), '', 'browser');
+
+  // Load filters from URL on mount
+  useReinitializeFilterFromUrl(FILTER_FORM_ID);
+
   const filter = useSelector(mapStateToFilter);
+  const formValues = useSelector(getFormValues(FILTER_FORM_ID));
+
+  // Sync filter form values to URL when they change
+  useEffect(() => {
+    if (formValues) {
+      syncFiltersToURL(formValues);
+    }
+  }, [formValues]);
+
   const props = useTable({
     table: PROJECTS_LIST,
     fetchData: createFetcher(projectsList),

@@ -13,6 +13,7 @@ import { TableProps } from './types';
 interface TableButtonsProps extends TableProps {
   toggleFilterMenu?(): void;
   showFilterMenuToggle?: boolean;
+  renderFilterButton?: boolean;
 }
 
 export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
@@ -61,11 +62,13 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
       {showDefaultActions && (
         <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4 flex-grow-1 flex-sm-grow-0">
           {/* Filter */}
-          {['menu', 'sidebar'].includes(props.filterPosition) &&
+          {props.renderFilterButton !== false &&
+            ['menu', 'sidebar'].includes(props.filterPosition) &&
             props.filters && (
               <TableFilterButton
                 onClick={onClickFilterButton}
                 hasFilter={!!props.filtersStorage?.length}
+                filterCount={props.filtersStorage?.length || 0}
               />
             )}
           {/* Display mode */}
