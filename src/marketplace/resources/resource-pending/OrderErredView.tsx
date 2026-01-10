@@ -6,7 +6,7 @@ import {
 import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceOrdersCreate,
@@ -22,6 +22,7 @@ import { translate } from '@waldur/i18n';
 import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 const ResourceOrderErrorDialog = lazyComponent(() =>
   import('./ResourceOrderErrorDialog').then((module) => ({
@@ -44,12 +45,12 @@ const ShowErrorButton = ({ resource }) => {
     );
   };
   return (
-    <Button variant="danger" size="sm" onClick={showErrorDialog}>
-      <span className="svg-icon svg-icon-4">
-        <XCircleIcon weight="bold" />
-      </span>
-      {translate('Show error')}
-    </Button>
+    <CompactActionButton
+      variant="danger"
+      action={showErrorDialog}
+      iconNode={<XCircleIcon weight="bold" />}
+      title={translate('Show error')}
+    />
   );
 };
 
@@ -159,20 +160,13 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
           />
 
           <div className="d-flex flex-sm-column gap-3 text-nowrap">
-            <Button
+            <CompactActionButton
               variant="tertiary"
-              size="sm"
-              onClick={() => mutate()}
-              disabled={isLoading}
-            >
-              <span className="svg-icon svg-icon-4">
-                <ArrowsClockwiseIcon
-                  weight="bold"
-                  className={isLoading ? ' animation-spin' : ''}
-                />
-              </span>
-              {translate('Retry')}
-            </Button>
+              action={() => mutate()}
+              pending={isLoading}
+              iconNode={<ArrowsClockwiseIcon weight="bold" />}
+              title={translate('Retry')}
+            />
             <OrderDetailsLink
               order_uuid={resource.creation_order.uuid}
               project_uuid={resource.creation_order.project_uuid}

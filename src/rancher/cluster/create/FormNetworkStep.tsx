@@ -1,7 +1,6 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -12,6 +11,7 @@ import { translate } from '@waldur/i18n';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { formTenantSelector, formatSubnets } from './utils';
 
@@ -41,12 +41,13 @@ export const FormNetworkStep = (props: FormStepProps) => {
       actions={
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">
-            <Button variant="tertiary" className="text-nowrap" size="sm">
-              <span className="svg-icon svg-icon-2">
-                <PlusIcon weight="bold" />
-              </span>
-              {translate('New network')}
-            </Button>
+            <CompactActionButton
+              variant="tertiary"
+              className="text-nowrap"
+              action={() => {}}
+              iconNode={<PlusIcon weight="bold" />}
+              title={translate('New network')}
+            />
           </div>
         ) : null
       }

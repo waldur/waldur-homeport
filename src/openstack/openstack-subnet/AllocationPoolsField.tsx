@@ -1,6 +1,6 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useRef, useState } from 'react';
-import { Form, Button, InputGroup } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { FieldArray, Field, formValueSelector, change } from 'redux-form';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
@@ -9,6 +9,8 @@ import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 import { translate } from '@waldur/i18n';
 import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
 import { RootState } from '@waldur/store/reducers';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import {
   getDefaultAllocationPool,
@@ -147,9 +149,9 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
               onChange={(e) => validateField(e.target.value, index, 'end')}
             />
 
-            <Button
+            <ActionButton
               variant="danger"
-              onClick={() => {
+              action={() => {
                 fields.remove(index);
                 setValidationErrors((prev) => {
                   const newErrors = { ...prev };
@@ -158,10 +160,9 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
                   return newErrors;
                 });
               }}
-              title={translate('Remove')}
-            >
-              <TrashIcon weight="bold" />
-            </Button>
+              tooltip={translate('Remove')}
+              iconNode={<TrashIcon weight="bold" />}
+            />
           </InputGroup>
           {validationErrors[`${index}-start`] && (
             <div className="text-danger small mt-1">
@@ -177,9 +178,11 @@ const AllocationPoolsList: FunctionComponent<FieldArrayProps> = ({
       ))}
 
       <div className="mb-3">
-        <Button size="sm" onClick={addPool}>
-          <PlusCircleIcon weight="bold" /> {translate('Add allocation pool')}
-        </Button>
+        <CompactActionButton
+          action={addPool}
+          title={translate('Add allocation pool')}
+          iconNode={<PlusCircleIcon weight="bold" />}
+        />
       </div>
 
       {meta.error && meta.submitFailed && (

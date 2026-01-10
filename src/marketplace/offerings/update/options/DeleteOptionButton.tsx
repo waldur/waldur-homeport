@@ -1,5 +1,4 @@
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsUpdateOptions,
@@ -9,6 +8,7 @@ import {
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { OfferingSectionProps } from '../types';
 
@@ -66,8 +66,10 @@ export const DeleteOptionButton: FC<
     }
   };
   return (
-    <Button className="btn-sm btn-danger" onClick={handler}>
-      {translate('Delete')}
-    </Button>
+    <CompactActionButton
+      variant="danger"
+      action={handler}
+      title={translate('Delete')}
+    />
   );
 };

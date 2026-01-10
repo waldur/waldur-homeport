@@ -7,25 +7,25 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
-interface ReviewCloseButtonProps {
+interface ReviewCloseActionProps {
+  row: { uuid: string };
   scope: 'customer' | 'project';
-  reviewId: string;
 }
 
-export const ReviewCloseButton: FC<ReviewCloseButtonProps> = ({
-  reviewId,
+export const ReviewCloseAction: FC<ReviewCloseActionProps> = ({
+  row,
   scope,
 }) => {
   const dispatch = useDispatch();
   const callback = async () => {
     try {
       if (scope === 'customer') {
-        await customerPermissionsReviewsClose({ path: { uuid: reviewId } });
+        await customerPermissionsReviewsClose({ path: { uuid: row.uuid } });
       } else if (scope === 'project') {
-        await projectPermissionsReviewsClose({ path: { uuid: reviewId } });
+        await projectPermissionsReviewsClose({ path: { uuid: row.uuid } });
       }
 
       dispatch(showSuccess(translate('Review has been completed.')));
@@ -34,11 +34,10 @@ export const ReviewCloseButton: FC<ReviewCloseButtonProps> = ({
     }
   };
   return (
-    <RowActionButton
+    <ActionItem
       action={callback}
       title={translate('Complete review')}
       iconNode={<CheckIcon weight="bold" />}
-      size="sm"
     />
   );
 };

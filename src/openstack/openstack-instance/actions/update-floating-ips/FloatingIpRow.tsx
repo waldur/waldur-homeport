@@ -1,11 +1,11 @@
 import { CopyIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { SelectField } from './SelectField';
 import { getPairSelector } from './utils';
@@ -55,15 +55,12 @@ export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
         )}
       </td>
       <td>
-        <Button
+        <ActionButton
+          action={onRemove}
+          tooltip={translate('Delete')}
+          iconNode={<TrashIcon weight="bold" />}
           variant="text-secondary"
-          title={translate('Delete')}
-          onClick={onRemove}
-        >
-          <span className="svg-icon svg-icon-2">
-            <TrashIcon weight="bold" />
-          </span>
-        </Button>
+        />
       </td>
     </tr>
   );

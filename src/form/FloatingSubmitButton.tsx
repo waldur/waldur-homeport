@@ -1,13 +1,12 @@
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
 import { FieldErrorMessage } from './FieldError';
 import { FloatingButton } from './FloatingButton';
+import { SubmitButton } from './SubmitButton';
 
 interface OwnProps {
   label?: any;
@@ -34,15 +33,13 @@ export const FloatingSubmitButton: FC<OwnProps> = ({
         className="w-100"
         tipClassName="mw-225px"
       >
-        <Button
+        <SubmitButton
+          submitting={submitting}
           variant={variant}
-          type="submit"
-          disabled={disabled || submitting || errorsExist}
+          disabled={disabled || errorsExist}
           className="w-100"
-        >
-          {submitting && <LoadingSpinnerIcon className="me-1" />}
-          {label || translate('Submit')}
-        </Button>
+          label={label || translate('Submit')}
+        />
       </Tip>
     </FloatingButton>
   );

@@ -5,8 +5,8 @@ import { getIdentityProviders } from '@waldur/administration/api';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { CancelButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 export const ProviderDetailsDialog = (props) => {
@@ -59,7 +59,7 @@ export const ProviderDetailsDialog = (props) => {
       ) : data ? (
         <ModalDialog
           title={translate('Edit user agreement')}
-          footer={<CancelButton label={translate('OK')} />}
+          footer={<CloseDialogButton label={translate('OK')} />}
           closeButton
         >
           <ListGroup>

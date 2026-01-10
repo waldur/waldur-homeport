@@ -1,8 +1,9 @@
 import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Button, ProgressBar } from 'react-bootstrap';
+import { ProgressBar } from 'react-bootstrap';
 
+import { CompactIconButton } from '@waldur/core/buttons/IconButton';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
@@ -56,17 +57,14 @@ export const AttachmentItemPending: FC<AttachmentItemPendingProps> = ({
         ) : null}
       </div>
       <div>
-        <Button
+        <CompactIconButton
+          iconNode={<TrashIcon weight="bold" />}
+          tooltip={translate('Cancel upload')}
+          onClick={() => onCancel(file)}
           variant="flush"
-          size="sm"
           className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete btn-icon-right"
           disabled={!error && progress && progress !== 0}
-          onClick={() => onCancel(file)}
-        >
-          <span className="svg-icon svg-icon-2">
-            <TrashIcon weight="bold" />
-          </span>
-        </Button>
+        />
       </div>
     </div>
   );

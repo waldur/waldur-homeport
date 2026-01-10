@@ -12,9 +12,7 @@ export const ProjectPermisionActions = ({
   project,
 }) => {
   const actions = [
-    (props) => (
-      <UserDetailsButton {...props} userId={row.user_uuid} asDropdownItem />
-    ),
+    (props) => <UserDetailsButton {...props} userId={row.user_uuid} />,
   ];
 
   // Only add edit and remove actions if project is not removed

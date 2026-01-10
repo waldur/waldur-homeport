@@ -7,12 +7,12 @@ import {
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
 import { OfferingPolicyType } from './types';
 
-export const PolicyDeleteButton = ({
+export const PolicyDeleteAction = ({
   row,
   type,
   refetch,
@@ -53,12 +53,11 @@ export const PolicyDeleteButton = ({
     }
   };
   return (
-    <RowActionButton
+    <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      variant="danger"
       iconNode={<TrashIcon weight="bold" />}
-      size="sm"
+      className="text-danger"
     />
   );
 };

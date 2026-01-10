@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -40,9 +40,8 @@ export const UpdateCustomerOrganizationsGroupsButton = ({
       }),
     );
   return (
-    <EditButton
+    <CompactEditButton
       onClick={callback}
-      size="sm"
       disabled={disabled}
       tooltip={tooltip}
     />

@@ -5,10 +5,9 @@ import {
   externalLinksPartialUpdate,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { fileSerializer, formDataOptions } from '@waldur/core/api';
 import { composeValidators, url, required } from '@waldur/core/validators';
-import { StringField, TextField, FieldError } from '@waldur/form';
+import { StringField, TextField, FieldError, SubmitButton } from '@waldur/form';
 import { ImageField } from '@waldur/form/ImageField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';

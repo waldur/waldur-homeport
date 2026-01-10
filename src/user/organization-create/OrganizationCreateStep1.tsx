@@ -1,6 +1,6 @@
 import { CheckCircleIcon, InfoIcon, LockKeyIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useState } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/config';
@@ -10,6 +10,7 @@ import { FormGroup } from '@waldur/form/FormGroup';
 import { StringField } from '@waldur/form/StringField';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { getOnboardingCopy } from './constants';
@@ -124,15 +125,13 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
                 ) : (
                   <>
                     <div className="d-flex justify-content-start mb-4">
-                      <Button
+                      <ActionButton
                         variant="primary"
-                        size="lg"
-                        onClick={handleVerify}
+                        action={handleVerify}
                         className="px-8"
-                      >
-                        <LockKeyIcon size={20} className="me-2" weight="bold" />
-                        {translate('Verify Identity with TARA')}
-                      </Button>
+                        iconNode={<LockKeyIcon size={20} weight="bold" />}
+                        title={translate('Verify Identity with TARA')}
+                      />
                     </div>
 
                     <p className="text-muted small mb-0">

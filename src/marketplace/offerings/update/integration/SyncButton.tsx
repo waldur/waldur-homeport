@@ -1,11 +1,11 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { Button, Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsSync } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { VALID_OFFERING_TYPES } from './VALID_OFFERING_TYPES';
 
@@ -50,15 +50,13 @@ export const SyncButton = ({ offering, refetch }) => {
   const enabled = ['OK', 'ERRED'].includes(offering.scope_state);
 
   return (
-    <Button onClick={callback} variant="tertiary" disabled={!enabled}>
-      <span className="svg-icon svg-icon-2">
-        {enabled ? (
-          <ArrowsClockwiseIcon weight="bold" />
-        ) : (
-          <Spinner className="animation-spin" />
-        )}
-      </span>{' '}
-      {translate('Synchronize')}
-    </Button>
+    <ActionButton
+      action={callback}
+      variant="tertiary"
+      disabled={!enabled}
+      pending={!enabled}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
+      title={translate('Synchronize')}
+    />
   );
 };

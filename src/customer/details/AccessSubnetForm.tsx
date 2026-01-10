@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   accessSubnetsCreate,
@@ -8,6 +8,7 @@ import {
   PatchedAccessSubnetRequest,
 } from 'waldur-js-client';
 
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -101,9 +102,10 @@ export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => {
         }
         closeButton
         footer={
-          <Button type="submit" variant="primary" size="sm">
-            {isEditMode ? translate('Update') : translate('Create')}
-          </Button>
+          <CompactSubmitButton
+            submitting={false}
+            label={isEditMode ? translate('Update') : translate('Create')}
+          />
         }
       >
         <Form.Group>

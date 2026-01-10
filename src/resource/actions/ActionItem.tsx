@@ -2,12 +2,14 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { uniqueId } from 'lodash';
 import { FC, ReactNode, useContext } from 'react';
-import { Button, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
 import { ResourceActionMenuContext } from '@waldur/marketplace/resources/actions/ResourceActionMenuContext';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 export interface ActionItemProps {
   title: string;
@@ -40,7 +42,27 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
   if (actionMenuContext?.hideNonImportant && !props.important) {
     return null;
   }
-  return Component === Dropdown.Item || Component === Button ? (
+
+  // When rendering as a Button (or any non-Dropdown.Item), use ActionButton or CompactActionButton
+  if (props.as && Component !== Dropdown.Item) {
+    const ButtonComponent =
+      props.size === 'sm' ? CompactActionButton : ActionButton;
+    return (
+      <div className="d-flex align-items-center">
+        <ButtonComponent
+          className={classNames('d-flex gap-3', props.className)}
+          action={props.action}
+          disabled={props.disabled}
+          iconNode={props.iconNode}
+          title={props.title}
+          tooltip={props.tooltip}
+        />
+        {props.staff && <StaffOnlyIndicator className="text-dark ms-1 me-3" />}
+      </div>
+    );
+  }
+
+  return Component === Dropdown.Item ? (
     <div className="d-flex align-items-center">
       <Component
         className={classNames(
@@ -51,8 +73,6 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         // Workaround for rendering tooltips for disabled dropdown menu items.
         // See also: https://stackoverflow.com/questions/57349166/
         onClick={() => !props.disabled && props.action()}
-        variant={Component === Button ? '' : undefined}
-        size={Component === Button ? props.size : undefined}
         disabled={props.disabled}
       >
         <div className={props.disabled ? 'opacity-50' : undefined}>
@@ -60,8 +80,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
             <span
               className={classNames(
                 'svg-icon svg-icon-2',
-                Component !== Button &&
-                  `svg-icon-${props.iconColor || 'gray-400'}`,
+                `svg-icon-${props.iconColor || 'gray-400'}`,
               )}
             >
               {props.iconNode}

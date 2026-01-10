@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Answer, Project, QuestionWithAnswer } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 
@@ -35,5 +35,5 @@ export const MetadataEditButton = ({
     });
   }, [project, question]);
 
-  return <EditButton onClick={callback} size="sm" />;
+  return <CompactEditButton onClick={callback} />;
 };

@@ -2,10 +2,11 @@ import { LockIcon, PlusIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
-import { Button, Col, Nav, Row, Tab } from 'react-bootstrap';
+import { Col, Nav, Row, Tab } from 'react-bootstrap';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatPhoneNumber } from '@waldur/core/utils';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
@@ -92,16 +93,16 @@ const AllResultsTabContent = ({
             <SectionNoResult />
           )}
           {!isCurrentPageFavorite && (
-            <Button
+            <SubmitButton
+              submitting={false}
+              type="button"
               variant="link"
               className="ms-8"
               onClick={addCurrentPageFavorite}
-            >
-              <span className="svg-icon svg-icon-2">
-                <PlusIcon weight="bold" />
-              </span>
-              {translate('Add current page')}
-            </Button>
+              label={translate('Add current page')}
+              iconNode={<PlusIcon weight="bold" />}
+              iconOnLeft
+            />
           )}
         </div>
       </Col>

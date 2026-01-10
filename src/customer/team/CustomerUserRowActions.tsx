@@ -18,7 +18,7 @@ export const CustomerUserRowActions: FunctionComponent<
 > = ({ row, refetch }) => {
   return (
     <ActionsDropdownComponent>
-      <UserDetailsButton userId={row.uuid} asDropdownItem />
+      <UserDetailsButton userId={row.uuid} />
       <UserEditButton customer={row} refetch={refetch} />
       <AddProjectUserButton customer={row} refetch={refetch} asDropdownItem />
       <UserRemoveButton customer={row} refetch={refetch} />

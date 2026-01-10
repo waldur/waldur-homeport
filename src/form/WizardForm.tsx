@@ -1,14 +1,13 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
 import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -105,26 +104,27 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
 
             {/* Footer buttons inside form container */}
             <div className="d-flex justify-content-between mt-5 pt-5 border-top">
-              <Button
-                variant="outline btn-secondary"
+              <SubmitButton
+                submitting={false}
+                variant="secondary"
                 onClick={() => props.onPrev(formValues)}
                 disabled={props.step === 0}
                 className="min-w-125px"
-              >
-                <span className="svg-icon svg-icon-4">
-                  <CaretLeftIcon weight="bold" />
-                </span>
-                {translate('Back')}
-              </Button>
+                type="button"
+                label={translate('Back')}
+                iconNode={<CaretLeftIcon weight="bold" />}
+                iconOnLeft
+              />
               <div className="d-flex gap-3">
                 {props.onCancel && (
-                  <Button
+                  <SubmitButton
+                    submitting={false}
                     variant="tertiary"
                     className="min-w-125px"
                     onClick={props.onCancel}
-                  >
-                    {translate('Cancel')}
-                  </Button>
+                    type="button"
+                    label={translate('Cancel')}
+                  />
                 )}
                 {props.actions}
                 {typeof props.actions === 'function'
@@ -168,16 +168,16 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
         footer={
           <>
             {props.step > 0 && (
-              <Button
+              <SubmitButton
+                submitting={false}
                 variant="tertiary"
                 className="min-w-125px me-auto"
                 onClick={() => props.onPrev(formValues)}
-              >
-                <span className="svg-icon svg-icon-4">
-                  <CaretLeftIcon weight="bold" />
-                </span>
-                {translate('Back')}
-              </Button>
+                type="button"
+                label={translate('Back')}
+                iconNode={<CaretLeftIcon weight="bold" />}
+                iconOnLeft
+              />
             )}
             <CloseDialogButton className="min-w-125px" />
             {props.actions}

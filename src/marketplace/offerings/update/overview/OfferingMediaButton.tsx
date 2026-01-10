@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -48,6 +48,6 @@ export const OfferingMediaButton: FC<{
         customerId: customer.uuid,
       }))
   )
-    return <EditButton onClick={callback} size="sm" />;
+    return <CompactEditButton onClick={callback} />;
   return null;
 };

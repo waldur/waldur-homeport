@@ -1,8 +1,8 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 interface ActionsFieldProps {
   onRemove(): void;
@@ -10,16 +10,11 @@ interface ActionsFieldProps {
 
 export const ActionsField: FC<ActionsFieldProps> = ({ onRemove }) => (
   <td>
-    <Button
+    <CompactActionButton
+      action={onRemove}
+      title={translate('Delete')}
+      iconNode={<TrashIcon weight="bold" />}
       variant="danger"
-      size="sm"
-      onClick={onRemove}
-      className="d-flex align-items-center"
-    >
-      <span className="svg-icon svg-icon-2">
-        <TrashIcon weight="bold" />
-      </span>{' '}
-      {translate('Delete')}
-    </Button>
+    />
   </td>
 );

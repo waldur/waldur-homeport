@@ -178,7 +178,6 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                   canEditProject && (
                     <EditButton
                       onClick={handleEditDescription}
-                      size="sm"
                       tooltip={translate('Edit description')}
                     />
                   )
@@ -213,7 +212,6 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
                   user.is_staff && (
                     <EditButton
                       onClick={handleEditStaffNotes}
-                      size="sm"
                       tooltip={translate('Edit staff notes')}
                     />
                   )

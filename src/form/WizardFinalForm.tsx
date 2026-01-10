@@ -1,11 +1,10 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
-import { Button } from 'react-bootstrap';
 import { FormRenderProps } from 'react-final-form';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { StepsList } from '@waldur/marketplace/common/StepsList';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -49,16 +48,16 @@ export const WizardFinalForm: FC<WizardFormProps> = ({
         footer={
           <>
             {props.step > 0 && (
-              <Button
+              <SubmitButton
+                submitting={false}
                 variant="tertiary"
                 className="min-w-125px me-auto"
                 onClick={() => props.onPrev(props.values)}
-              >
-                <span className="svg-icon svg-icon-4">
-                  <CaretLeftIcon weight="bold" />
-                </span>
-                {translate('Back')}
-              </Button>
+                type="button"
+                label={translate('Back')}
+                iconNode={<CaretLeftIcon weight="bold" />}
+                iconOnLeft
+              />
             )}
             <CloseDialogButton className="min-w-125px" />
             {props.actions}

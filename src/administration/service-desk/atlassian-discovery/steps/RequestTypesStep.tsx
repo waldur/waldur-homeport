@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Alert, Button, FormCheck, Spinner, Table } from 'react-bootstrap';
+import { Alert, FormCheck, Spinner, Table } from 'react-bootstrap';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import type { AtlassianCredentials, DiscoveryState } from '../types';
 
@@ -96,9 +97,11 @@ export const RequestTypesStep = ({
       <div>
         <Alert variant="danger">{error}</Alert>
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary" onClick={onBack}>
-            {translate('Back')}
-          </Button>
+          <ActionButton
+            action={onBack}
+            variant="secondary"
+            title={translate('Back')}
+          />
         </div>
       </div>
     );
@@ -113,9 +116,11 @@ export const RequestTypesStep = ({
           )}
         </Alert>
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary" onClick={onBack}>
-            {translate('Back')}
-          </Button>
+          <ActionButton
+            action={onBack}
+            variant="secondary"
+            title={translate('Back')}
+          />
         </div>
       </div>
     );
@@ -176,19 +181,22 @@ export const RequestTypesStep = ({
           })}
         </span>
         <div className="d-flex gap-2">
-          <Button variant="secondary" onClick={onCancel}>
-            {translate('Cancel')}
-          </Button>
-          <Button variant="tertiary" onClick={onBack}>
-            {translate('Back')}
-          </Button>
-          <Button
+          <ActionButton
+            action={onCancel}
+            variant="secondary"
+            title={translate('Cancel')}
+          />
+          <ActionButton
+            action={onBack}
+            variant="tertiary"
+            title={translate('Back')}
+          />
+          <ActionButton
+            action={handleContinue}
             variant="primary"
-            onClick={handleContinue}
             disabled={selectedIds.size === 0}
-          >
-            {translate('Continue')}
-          </Button>
+            title={translate('Continue')}
+          />
         </div>
       </div>
     </div>

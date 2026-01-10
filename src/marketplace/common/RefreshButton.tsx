@@ -1,8 +1,8 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import { Button } from 'react-bootstrap';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 
 interface RefreshButtonProps {
@@ -13,27 +13,23 @@ interface RefreshButtonProps {
 }
 
 export const RefreshButton = ({
-  size,
+  size = 'lg',
   refetch,
   isLoading,
   className,
 }: RefreshButtonProps) => {
+  const ButtonComponent = size === 'sm' ? CompactSubmitButton : SubmitButton;
+
   return (
-    <Button
+    <ButtonComponent
+      submitting={isLoading}
+      type="button"
       variant="tertiary"
       className={classNames('min-w-100px', className)}
-      size={size}
       onClick={!isLoading ? refetch : undefined}
-    >
-      {isLoading ? (
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        <LoadingSpinnerIcon />
-      ) : (
-        <span className={'svg-icon' + (size !== 'sm' ? ' svg-icon-2' : '')}>
-          <ArrowClockwiseIcon weight="bold" />
-        </span>
-      )}
-      {translate('Refresh')}
-    </Button>
+      label={translate('Refresh')}
+      iconNode={<ArrowClockwiseIcon weight="bold" />}
+      iconOnLeft
+    />
   );
 };

@@ -3,7 +3,7 @@ import { Field, Form } from 'react-final-form';
 
 import { ENV } from '@waldur/core/config';
 import { format } from '@waldur/core/ErrorMessageFormatter';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
@@ -144,18 +144,11 @@ export const SigninForm = () => (
             </FormGroup>
           )}
 
-          <button
-            type="submit"
-            className="btn btn-primary login-submit-button"
-            disabled={submitting}
-          >
-            {submitting && (
-              <span className="svg-icon">
-                <LoadingSpinnerIcon className="me-1" />
-              </span>
-            )}
-            {translate('Login')}
-          </button>
+          <SubmitButton
+            submitting={submitting}
+            label={translate('Login')}
+            className="login-submit-button"
+          />
 
           {formError && (
             <div

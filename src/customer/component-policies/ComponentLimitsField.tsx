@@ -1,5 +1,5 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
-import { Button, Form, FormLabel } from 'react-bootstrap';
+import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
@@ -9,6 +9,7 @@ import { NumberField, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { validateNonNegative } from '@waldur/marketplace/common/utils';
 import { useComponentLimitsArrayFieldFunctions } from '@waldur/marketplace/offerings/details/policies/ComponentLimitsField';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { policyPeriodOptions } from '../cost-policies/utils';
 
@@ -86,17 +87,12 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                         />
                       </td>
                       <td>
-                        <Button
+                        <ActionButton
                           variant="danger"
-                          className="btn-icon"
-                          onClick={() => removeRow(i)}
+                          action={() => removeRow(i)}
                           disabled={fields.length === 1}
-                          aria-label="Remove"
-                        >
-                          <span className="svg-icon svg-icon-2">
-                            <TrashIcon weight="bold" />
-                          </span>
-                        </Button>
+                          iconNode={<TrashIcon weight="bold" />}
+                        />
                       </td>
                     </tr>
                   );
@@ -107,16 +103,10 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
         </Form.Group>
       )}
       <div>
-        <Button
-          variant="tertiary"
-          className="btn-icon"
-          onClick={addRow}
-          aria-label="Add"
-        >
-          <span className="svg-icon svg-icon-2">
-            <PlusCircleIcon weight="bold" />
-          </span>
-        </Button>
+        <ActionButton
+          action={addRow}
+          iconNode={<PlusCircleIcon weight="bold" />}
+        />
       </div>
     </>
   );

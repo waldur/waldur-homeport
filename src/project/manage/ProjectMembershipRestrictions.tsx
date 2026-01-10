@@ -1,7 +1,6 @@
 import { Buildings, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { customersRetrieve, Project } from 'waldur-js-client';
 
@@ -15,12 +14,13 @@ import {
   RestrictionsValue,
 } from '@waldur/core/restrictions';
 import { Tip } from '@waldur/core/Tooltip';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { usePermission } from '@waldur/permissions/hooks';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { getInitialValues } from './restrictions/EditProjectMembershipRestrictionsDialog';
 
@@ -129,12 +129,12 @@ export const ProjectMembershipRestrictions: FC<
       }
       cardBordered
       actions={
-        <Button variant="tertiary" onClick={openOrganizationRestrictionsDialog}>
-          <span className="svg-icon svg-icon-2">
-            <Buildings weight="bold" />
-          </span>
-          {translate('Organization restrictions')}
-        </Button>
+        <ActionButton
+          action={openOrganizationRestrictionsDialog}
+          title={translate('Organization restrictions')}
+          iconNode={<Buildings weight="bold" />}
+          variant="tertiary"
+        />
       }
     >
       <FormTable>
@@ -146,9 +146,8 @@ export const ProjectMembershipRestrictions: FC<
           value={<RestrictionsValue values={emailPatterns} />}
           actions={
             canEdit && (
-              <EditButton
+              <CompactEditButton
                 onClick={() => openEditDialog('user_email_patterns')}
-                size="sm"
               />
             )
           }
@@ -161,9 +160,8 @@ export const ProjectMembershipRestrictions: FC<
           value={<RestrictionsValue values={affiliations} />}
           actions={
             canEdit && (
-              <EditButton
+              <CompactEditButton
                 onClick={() => openEditDialog('user_affiliations')}
-                size="sm"
               />
             )
           }
@@ -176,9 +174,8 @@ export const ProjectMembershipRestrictions: FC<
           value={<RestrictionsValue values={identitySources} />}
           actions={
             canEdit && (
-              <EditButton
+              <CompactEditButton
                 onClick={() => openEditDialog('user_identity_sources')}
-                size="sm"
               />
             )
           }

@@ -6,12 +6,13 @@ import {
 } from '@phosphor-icons/react';
 import Papa from 'papaparse';
 import { FC, useCallback, useState } from 'react';
-import { Button, Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row, Stack } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { FileUploadField } from '@waldur/form';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { showError } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import saveAsCsv from '@waldur/table/exporters/csv';
 
 import example_file from './example_file.json';
@@ -108,15 +109,11 @@ export const BulkUpload: FC<OwnProps> = (props) => {
           </p>
         </Col>
         <Col xs="auto">
-          <Button
+          <ActionButton
             variant="text-danger"
-            className="btn-icon"
-            onClick={removeFile}
-          >
-            <span className="svg-icon svg-icon-1">
-              <TrashIcon weight="bold" />
-            </span>
-          </Button>
+            action={removeFile}
+            iconNode={<TrashIcon weight="bold" />}
+          />
         </Col>
       </Row>
     </div>

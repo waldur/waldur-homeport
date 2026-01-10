@@ -1,5 +1,4 @@
 import React, { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -21,6 +20,7 @@ import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/Ex
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { openModalDialog } from '@waldur/modal/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -67,13 +67,12 @@ const ResourceField = ({ row }) => {
   };
   return (
     <>
-      <Button
+      <ActionButton
         variant="flush"
         className="text-anchor fw-normal"
-        onClick={callback}
-      >
-        {row.name || row.offering_name}
-      </Button>
+        action={callback}
+        title={row.name || row.offering_name}
+      />
       <BackendIdTip backendId={row.backend_id} />
       <EndDateTooltip end_date={row.end_date} />
     </>

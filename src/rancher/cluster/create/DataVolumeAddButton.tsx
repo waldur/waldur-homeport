@@ -1,17 +1,16 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface DataVolumeAddButtonProps {
   onClick(): void;
 }
 
 export const DataVolumeAddButton = (props: DataVolumeAddButtonProps) => (
-  <Button onClick={props.onClick}>
-    <span className="svg-icon svg-icon-2">
-      <PlusCircleIcon weight="bold" />
-    </span>{' '}
-    {translate('Add data volume')}
-  </Button>
+  <ActionButton
+    action={props.onClick}
+    title={translate('Add data volume')}
+    iconNode={<PlusCircleIcon weight="bold" />}
+  />
 );

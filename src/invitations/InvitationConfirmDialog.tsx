@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useCallback, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { userInvitationsDetailsRetrieve } from 'waldur-js-client';
 
@@ -9,6 +8,7 @@ import { getInvitationLinkProps } from '@waldur/administration/getInvitationLink
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvitationTokenStorage } from '@waldur/core/StorageManager';
 import { translate } from '@waldur/i18n';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getUser } from '@waldur/workspace/selectors';
@@ -72,9 +72,7 @@ export const InvitationConfirmDialog: FunctionComponent<{
             closeAcceptingInvitation={closeAcceptingInvitation}
           />
         ) : (
-          <Button variant="tertiary" onClick={closeButton}>
-            {translate('Close')}
-          </Button>
+          <CloseDialogButton label={translate('Close')} onClick={closeButton} />
         )
       }
     >

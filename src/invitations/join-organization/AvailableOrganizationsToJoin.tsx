@@ -1,7 +1,6 @@
 import { LockOpenIcon, XIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
@@ -14,7 +13,9 @@ import { translate } from '@waldur/i18n';
 import { useBreadcrumbs } from '@waldur/navigation/context';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { showRedirectMessage } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { createFetcher } from '@waldur/table/api';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { useUser } from '@waldur/workspace/hooks';
@@ -108,16 +109,12 @@ export const AvailableOrganizationsToJoin: FC = () => {
               <div className="anonymous-join-organization-action d-flex align-items-center w-100">
                 {values?.invitation?.uuid ? (
                   <>
-                    <Button
-                      variant="icon"
-                      size="sm"
+                    <CompactActionButton
+                      action={() => form.change('invitation', null)}
+                      iconNode={<XIcon weight="bold" />}
+                      variant="secondary"
                       className="btn-no-focus btn-icon-gray-700 btn-active-icon-danger me-2"
-                      onClick={() => form.change('invitation', null)}
-                    >
-                      <span className="svg-icon svg-icon-3">
-                        <XIcon weight="bold" />
-                      </span>
-                    </Button>
+                    />
                     <div className="d-flex flex-wrap fs-6 ellipsis">
                       <span className="fw-normal me-1">
                         {translate('Selected organization')}:
@@ -140,13 +137,25 @@ export const AvailableOrganizationsToJoin: FC = () => {
                     {translate('Request access')}
                   </SubmitButton>
                 ) : values?.invitation?.uuid ? (
-                  <Button
-                    className="ms-6"
-                    size={isSmallScr ? 'sm' : undefined}
-                    onClick={() => continueToAutentification(values.invitation)}
-                  >
-                    {translate('Continue to autentification')}
-                  </Button>
+                  isSmallScr ? (
+                    <CompactActionButton
+                      action={() =>
+                        continueToAutentification(values.invitation)
+                      }
+                      title={translate('Continue to autentification')}
+                      variant="primary"
+                      className="ms-6"
+                    />
+                  ) : (
+                    <ActionButton
+                      action={() =>
+                        continueToAutentification(values.invitation)
+                      }
+                      title={translate('Continue to autentification')}
+                      variant="primary"
+                      className="ms-6"
+                    />
+                  )
                 ) : null}
               </div>
             }

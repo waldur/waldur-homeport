@@ -2,8 +2,8 @@ import { useMemo } from 'react';
 import { User, usersList, UsersListData } from 'waldur-js-client';
 
 import { FREEIPA_IDP } from '@waldur/auth/providers/constants';
-import { CancelButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { createFetcher } from '@waldur/table/api';
 import { BooleanField } from '@waldur/table/BooleanField';
@@ -61,7 +61,7 @@ export const ProviderUsersDialog = (props) => (
     title={translate('Users from {provider}', {
       provider: props.resolve.type,
     })}
-    footer={<CancelButton label={translate('OK')} />}
+    footer={<CloseDialogButton label={translate('OK')} />}
     closeButton
   >
     {props.resolve.type === FREEIPA_IDP ? (

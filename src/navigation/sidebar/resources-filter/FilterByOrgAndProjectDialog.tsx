@@ -1,9 +1,9 @@
 import { useCallback, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import { Project } from 'waldur-js-client';
 
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { SIDEBAR_RESOURCES_FILTER_FORM } from '@waldur/marketplace/constants';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
@@ -63,9 +63,11 @@ export const FilterByOrgAndProjectDialog = reduxForm<FormData>({
         footer={
           <>
             <CloseDialogButton className="flex-equal" />
-            <Button type="submit" className="flex-equal">
-              {translate('Apply')}
-            </Button>
+            <SubmitButton
+              submitting={false}
+              className="flex-equal"
+              label={translate('Apply')}
+            />
           </>
         }
       >

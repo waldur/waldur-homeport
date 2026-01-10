@@ -1,10 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 const TelemetryExampleDialog = lazyComponent(() =>
   import('./TelemetryExampleDialog').then((module) => ({
@@ -15,15 +15,11 @@ const TelemetryExampleDialog = lazyComponent(() =>
 export const TelemetryExampleButton = () => {
   const dispatch = useDispatch();
   return (
-    <Button
-      onClick={() => dispatch(openModalDialog(TelemetryExampleDialog))}
+    <CompactActionButton
+      action={() => dispatch(openModalDialog(TelemetryExampleDialog))}
       variant="link"
-      className="btn-sm"
-    >
-      <span className="svg-icon svg-icon-2">
-        <EyeIcon weight="bold" />
-      </span>
-      {translate('Show example')}
-    </Button>
+      iconNode={<EyeIcon weight="bold" />}
+      title={translate('Show example')}
+    />
   );
 };

@@ -1,6 +1,5 @@
 import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   OpenStackSecurityGroup,
@@ -14,6 +13,7 @@ import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
@@ -66,17 +66,13 @@ const ShowPreviewButton = () => {
   }, [securityGroups]);
 
   return (
-    <Button
-      variant="tertiary"
-      className="text-nowrap"
-      onClick={callback}
+    <ActionButton
+      action={callback}
       disabled={!securityGroups?.length}
-    >
-      <span className="svg-icon svg-icon-2">
-        <EyeIcon weight="bold" />
-      </span>
-      {translate('Preview')}
-    </Button>
+      title={translate('Preview')}
+      iconNode={<EyeIcon weight="bold" />}
+      className="text-nowrap"
+    />
   );
 };
 

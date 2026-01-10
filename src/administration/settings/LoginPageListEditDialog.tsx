@@ -1,13 +1,16 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
-import { Button, Form, InputGroup } from 'react-bootstrap';
+import { Form, InputGroup } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { getKeyTitle } from './utils';
 
@@ -67,19 +70,20 @@ const StatsEditor: FC<{
               onChange={(e) => updateItem(index, 'label', e.target.value)}
               placeholder={translate('Label (e.g., Active Users)')}
             />
-            <Button
+            <ActionButton
               variant="danger"
-              onClick={() => removeItem(index)}
-              title={translate('Remove')}
-            >
-              <TrashIcon weight="bold" />
-            </Button>
+              action={() => removeItem(index)}
+              tooltip={translate('Remove')}
+              iconNode={<TrashIcon weight="bold" />}
+            />
           </InputGroup>
         </div>
       ))}
-      <Button size="sm" onClick={addItem}>
-        <PlusCircleIcon weight="bold" /> {translate('Add stat')}
-      </Button>
+      <CompactActionButton
+        action={addItem}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        title={translate('Add stat')}
+      />
     </div>
   );
 };
@@ -117,13 +121,12 @@ const CarouselSlidesEditor: FC<{
                 onChange={(e) => updateItem(index, 'title', e.target.value)}
                 placeholder={translate('e.g., Welcome to Our Platform')}
               />
-              <Button
+              <ActionButton
                 variant="danger"
-                onClick={() => removeItem(index)}
-                title={translate('Remove')}
-              >
-                <TrashIcon weight="bold" />
-              </Button>
+                action={() => removeItem(index)}
+                tooltip={translate('Remove')}
+                iconNode={<TrashIcon weight="bold" />}
+              />
             </InputGroup>
           </Form.Group>
           <Form.Group>
@@ -140,9 +143,11 @@ const CarouselSlidesEditor: FC<{
           {index < items.length - 1 && <hr className="my-4" />}
         </div>
       ))}
-      <Button size="sm" onClick={addItem}>
-        <PlusCircleIcon weight="bold" /> {translate('Add slide')}
-      </Button>
+      <CompactActionButton
+        action={addItem}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        title={translate('Add slide')}
+      />
     </div>
   );
 };
@@ -180,13 +185,12 @@ const NewsItemsEditor: FC<{
                 onChange={(e) => updateItem(index, 'title', e.target.value)}
                 placeholder={translate('e.g., New Feature Released')}
               />
-              <Button
+              <ActionButton
                 variant="danger"
-                onClick={() => removeItem(index)}
-                title={translate('Remove')}
-              >
-                <TrashIcon weight="bold" />
-              </Button>
+                action={() => removeItem(index)}
+                tooltip={translate('Remove')}
+                iconNode={<TrashIcon weight="bold" />}
+              />
             </InputGroup>
           </Form.Group>
           <div className="d-flex gap-2 mb-2">
@@ -234,9 +238,11 @@ const NewsItemsEditor: FC<{
           {index < items.length - 1 && <hr className="my-4" />}
         </div>
       ))}
-      <Button size="sm" onClick={addItem}>
-        <PlusCircleIcon weight="bold" /> {translate('Add news item')}
-      </Button>
+      <CompactActionButton
+        action={addItem}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        title={translate('Add news item')}
+      />
     </div>
   );
 };
@@ -292,21 +298,13 @@ export const LoginPageListEditDialog: FC<LoginPageListEditDialogProps> = ({
       footer={
         <>
           <CloseDialogButton className="flex-equal" />
-          <Button
-            variant="primary"
+          <SubmitButton
+            submitting={submitting}
             className="flex-equal"
             onClick={handleSubmit}
-            disabled={submitting}
-          >
-            {submitting ? (
-              <>
-                <span className="spinner-border spinner-border-sm me-2" />
-                {translate('Saving...')}
-              </>
-            ) : (
-              translate('Confirm')
-            )}
-          </Button>
+            type="button"
+            label={translate('Confirm')}
+          />
         </>
       }
     >

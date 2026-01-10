@@ -245,8 +245,11 @@ describe('BackupRestoreDialog', () => {
     let networkRows = container.querySelectorAll('tbody tr');
     expect(networkRows).toHaveLength(fakeBackup.instance_ports.length + 1);
 
-    const deleteButton = screen.getAllByRole('button', { name: /Delete/i })[0];
-    await userEvent.click(deleteButton);
+    // Delete buttons are icon-only buttons in the table rows
+    const deleteButtons = container.querySelectorAll(
+      'tbody button.btn-text-secondary',
+    );
+    await userEvent.click(deleteButtons[0]);
 
     networkRows = container.querySelectorAll('tbody tr');
     expect(networkRows).toHaveLength(fakeBackup.instance_ports.length);

@@ -1,12 +1,14 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { useState } from 'react';
-import { Alert, Button, Card, Table } from 'react-bootstrap';
+import { Alert, Card, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
 
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import type { DiscoveryState } from '../types';
 
@@ -304,15 +306,22 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
       </Alert>
 
       <div className="d-flex justify-content-end gap-2 mt-6">
-        <Button variant="secondary" onClick={onClose}>
-          {translate('Cancel')}
-        </Button>
-        <Button variant="tertiary" onClick={onBack}>
-          {translate('Back')}
-        </Button>
-        <Button variant="primary" onClick={handleSave} disabled={saving}>
-          {saving ? translate('Saving...') : translate('Save Settings')}
-        </Button>
+        <ActionButton
+          action={onClose}
+          variant="secondary"
+          title={translate('Cancel')}
+        />
+        <ActionButton
+          action={onBack}
+          variant="tertiary"
+          title={translate('Back')}
+        />
+        <SubmitButton
+          submitting={saving}
+          onClick={handleSave}
+          label={translate('Save Settings')}
+          type="button"
+        />
       </div>
     </div>
   );

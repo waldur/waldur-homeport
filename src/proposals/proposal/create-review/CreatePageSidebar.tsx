@@ -1,7 +1,5 @@
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
 import { TosNotification } from '@waldur/form/TosNotification';
@@ -10,6 +8,7 @@ import { PageBarTabs } from '@waldur/marketplace/common/PageBarTabs';
 import { useReviewActions } from '@waldur/proposals/review/utils';
 import { ProposalReview } from '@waldur/proposals/types';
 import { isReviewInFinalState } from '@waldur/proposals/utils';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { createReviewSteps } from './steps/steps';
 
@@ -41,15 +40,13 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
       </Panel>
       {review && !isReviewInFinalState(review.state) && (
         <>
-          <Button
+          <ActionButton
+            action={saveAsDraft}
+            title={translate('Save as draft')}
             variant="secondary"
-            onClick={saveAsDraft}
             className="w-100 mt-2"
-            disabled={isSaving}
-          >
-            {isSaving && <LoadingSpinnerIcon className="me-1" />}
-            {translate('Save as draft')}
-          </Button>
+            pending={isSaving}
+          />
           <hr />
           <FloatingSubmitButton
             submitting={submitting}
@@ -57,15 +54,14 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
             variant="primary"
           />
 
-          <Button
+          <ActionButton
+            action={reject as any}
+            title={translate('Send back')}
             variant="danger"
-            onClick={reject as any}
             className="w-100 mt-2"
-            disabled={submitting || isRejecting}
-          >
-            {isRejecting && <LoadingSpinnerIcon className="me-1" />}
-            {translate('Send back')}
-          </Button>
+            disabled={submitting}
+            pending={isRejecting}
+          />
           <TosNotification className="text-center text-gray-500 mt-2" />
         </>
       )}

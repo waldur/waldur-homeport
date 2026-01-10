@@ -1,6 +1,7 @@
 import { DownloadSimpleIcon, FileCsvIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
+
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 interface DownloadTemplateItemProps {
   name: string;
@@ -25,16 +26,12 @@ export const DownloadTemplateItem: FC<DownloadTemplateItemProps> = (props) => {
         <p className="fs-6 text-muted mb-0">{props.size}</p>
       </div>
       <div>
-        <Button
+        <CompactActionButton
+          action={props.onClick}
+          iconNode={<DownloadSimpleIcon weight="bold" />}
+          iconRight
           variant="link"
-          size="sm"
-          className="btn-icon-right"
-          onClick={props.onClick}
-        >
-          <span className="svg-icon svg-icon-2">
-            <DownloadSimpleIcon weight="bold" />
-          </span>
-        </Button>
+        />
       </div>
     </div>
   );

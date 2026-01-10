@@ -2,7 +2,7 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { pick } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Button, FormCheck, FormText } from 'react-bootstrap';
+import { FormCheck, FormText } from 'react-bootstrap';
 import { Field, Form, FormRenderProps, useField } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import {
@@ -27,6 +27,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { selectSelectedRows } from '@waldur/table/selectors';
 import Table from '@waldur/table/Table';
 import { TableProps } from '@waldur/table/types';
@@ -192,13 +193,12 @@ const FormModalComponent: FC<
             {step === 1 ? (
               <CloseDialogButton className="min-w-125px" />
             ) : (
-              <Button
-                onClick={() => setStep(1)}
+              <ActionButton
+                title={translate('Go back')}
+                action={() => setStep(1)}
                 variant="tertiary"
                 className="min-w-125px"
-              >
-                {translate('Go back')}
-              </Button>
+              />
             )}
             <SubmitButton
               disabled={invalid || (selectedResources?.length > 0 && !confirm)}

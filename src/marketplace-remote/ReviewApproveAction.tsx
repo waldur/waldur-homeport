@@ -16,7 +16,6 @@ export const ReviewApproveAction = ({ request, refetch, apiMethod }) =>
         refetch,
         apiMethod,
       }}
-      rowAction
-      size="sm"
+      actionItem
     />
   ) : null;

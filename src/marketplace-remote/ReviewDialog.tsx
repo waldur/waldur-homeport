@@ -1,10 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
+import { FormContainer, FormFooter, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -34,16 +33,7 @@ export const ReviewDialog = enhance(
       <form onSubmit={handleSubmit(setRoutes)}>
         <ModalDialog
           title={translate('Review request')}
-          footer={
-            <>
-              <CloseDialogButton />
-              <SubmitButton
-                disabled={invalid}
-                submitting={submitting}
-                label={translate('Submit')}
-              />
-            </>
-          }
+          footer={<FormFooter submitting={submitting} invalid={invalid} />}
         >
           <FormContainer submitting={submitting}>
             <TextField label={translate('Comment')} name="review_comment" />

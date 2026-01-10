@@ -1,6 +1,5 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
@@ -10,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { useUser } from '@waldur/workspace/hooks';
 
 const MultiEditOptionsDialog = lazyComponent(() =>
@@ -56,12 +56,12 @@ export const MultiEditOptionsAction = ({
 
   return canShow ? (
     asButton ? (
-      <Button variant="tertiary" onClick={callback}>
-        <span className="svg-icon svg-icon-2">
-          <PencilSimpleIcon weight="bold" />
-        </span>
-        {translate('Edit all')}
-      </Button>
+      <ActionButton
+        variant="tertiary"
+        action={callback}
+        iconNode={<PencilSimpleIcon weight="bold" />}
+        title={translate('Edit all')}
+      />
     ) : (
       <EditAction
         title={translate('Edit resource options')}

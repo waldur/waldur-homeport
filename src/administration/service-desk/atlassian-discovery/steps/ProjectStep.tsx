@@ -1,8 +1,9 @@
 import { useState, useEffect } from 'react';
-import { Alert, Button, Card, FormCheck, Spinner } from 'react-bootstrap';
+import { Alert, Card, FormCheck, Spinner } from 'react-bootstrap';
 import { supportSettingsAtlassianDiscoverProjects } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import type { AtlassianCredentials, DiscoveryState } from '../types';
 
@@ -73,9 +74,11 @@ export const ProjectStep = ({
       <div>
         <Alert variant="danger">{error}</Alert>
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary" onClick={onBack}>
-            {translate('Back')}
-          </Button>
+          <ActionButton
+            action={onBack}
+            variant="secondary"
+            title={translate('Back')}
+          />
         </div>
       </div>
     );
@@ -90,9 +93,11 @@ export const ProjectStep = ({
           )}
         </Alert>
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary" onClick={onBack}>
-            {translate('Back')}
-          </Button>
+          <ActionButton
+            action={onBack}
+            variant="secondary"
+            title={translate('Back')}
+          />
         </div>
       </div>
     );
@@ -145,19 +150,22 @@ export const ProjectStep = ({
       </div>
 
       <div className="d-flex justify-content-end gap-2">
-        <Button variant="secondary" onClick={onCancel}>
-          {translate('Cancel')}
-        </Button>
-        <Button variant="tertiary" onClick={onBack}>
-          {translate('Back')}
-        </Button>
-        <Button
+        <ActionButton
+          action={onCancel}
+          variant="secondary"
+          title={translate('Cancel')}
+        />
+        <ActionButton
+          action={onBack}
+          variant="tertiary"
+          title={translate('Back')}
+        />
+        <ActionButton
+          action={handleContinue}
           variant="primary"
-          onClick={handleContinue}
           disabled={!selectedId}
-        >
-          {translate('Continue')}
-        </Button>
+          title={translate('Continue')}
+        />
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
 import { ArrowRightIcon, UserCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { reviewerProfilesMeRetrieve, ReviewerProfile } from 'waldur-js-client';
 
@@ -9,6 +9,7 @@ import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { OrcidLogo } from '@waldur/core/OrcidLogo';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { getUser } from '@waldur/workspace/selectors';
@@ -76,10 +77,14 @@ export const ReviewerProfileSummaryCard: FC<
                 )}
               </p>
             </div>
-            <Button variant="warning" onClick={handleManageProfile}>
-              {translate('Create profile')}
-              <ArrowRightIcon weight="bold" className="ms-2" />
-            </Button>
+            <SubmitButton
+              type="button"
+              variant="warning"
+              onClick={handleManageProfile}
+              submitting={false}
+              label={translate('Create profile')}
+              iconNode={<ArrowRightIcon weight="bold" />}
+            />
           </div>
         </Card.Body>
       </Card>
@@ -151,10 +156,14 @@ export const ReviewerProfileSummaryCard: FC<
           </div>
 
           {/* Action */}
-          <Button variant="light-primary" onClick={handleManageProfile}>
-            {translate('Manage profile')}
-            <ArrowRightIcon weight="bold" className="ms-2" />
-          </Button>
+          <SubmitButton
+            type="button"
+            variant="light-primary"
+            onClick={handleManageProfile}
+            submitting={false}
+            label={translate('Manage profile')}
+            iconNode={<ArrowRightIcon weight="bold" />}
+          />
         </div>
       </Card.Body>
     </Card>

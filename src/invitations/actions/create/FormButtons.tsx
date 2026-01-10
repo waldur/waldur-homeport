@@ -1,10 +1,10 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface FormButtonsProps {
   step;
@@ -22,23 +22,24 @@ export const FormButtons: FC<FormButtonsProps> = ({
   return step === 1 ? (
     <>
       <CloseDialogButton className="w-150px" />
-      <Button
+      <SubmitButton
         type="button"
+        submitting={false}
         className="w-150px"
         onClick={() => valid && setStep(2)}
         disabled={!valid}
-      >
-        {translate('Continue')}
-      </Button>
+        label={translate('Continue')}
+      />
     </>
   ) : step === 2 ? (
     <>
-      <Button variant="tertiary" className="w-150px" onClick={() => setStep(1)}>
-        <div className="svg-icon svg-icon-2">
-          <CaretLeftIcon weight="bold" />
-        </div>
-        {translate('Go back')}
-      </Button>
+      <ActionButton
+        variant="tertiary"
+        className="w-150px"
+        action={() => setStep(1)}
+        title={translate('Go back')}
+        iconNode={<CaretLeftIcon weight="bold" />}
+      />
       <CloseDialogButton className="ms-auto w-150px" />
       <SubmitButton
         label={translate('Send invitation')}

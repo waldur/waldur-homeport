@@ -1,12 +1,11 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { marketplaceProviderResourcesOfferingForSubresourcesList } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n/translate';
 import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
 import { Resource } from '@waldur/resource/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface AddResourceButtonProps {
   resource: Resource;
@@ -27,10 +26,7 @@ export const AddResourceButton = (props: AddResourceButtonProps) => {
     : null;
 
   return loading ? (
-    <Button variant="primary">
-      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      <LoadingSpinnerIcon className="p-2" />
-    </Button>
+    <ActionButton variant="primary" pending action={() => {}} />
   ) : (
     relatedOfferingUuid && (
       <OfferingLink

@@ -1,7 +1,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import {
   marketplaceCategoriesList,
   MarketplaceCategoriesListData,
@@ -15,6 +14,7 @@ import { getCategoryGroups } from '@waldur/marketplace/common/api';
 import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
 import { Category } from '@waldur/marketplace/types';
 import { createFetcher } from '@waldur/table/api';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
@@ -75,16 +75,12 @@ export const AdminCategoriesPage: FunctionComponent = () => {
                     <span className="text-danger">
                       {translate('Error in fetching groups')}
                     </span>
-                    <Button
-                      variant="flush"
-                      size="sm"
-                      className="btn-icon ms-1"
-                      onClick={() => refetch()}
-                    >
-                      <span className="svg-icon svg-icon-4 me-2">
-                        <ArrowsClockwiseIcon weight="bold" />
-                      </span>
-                    </Button>
+                    <CompactActionButton
+                      action={() => refetch()}
+                      iconNode={<ArrowsClockwiseIcon weight="bold" />}
+                      variant="secondary"
+                      className="ms-1"
+                    />
                   </>
                 );
               }

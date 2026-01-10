@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { loadData } from './loadData';
 import { ModalActionsDialog } from './ModalActionsDialog';
@@ -76,15 +76,12 @@ export const ActionsPopover = ({
         <ActionsList {...value} refetch={refetch} />
       </ResourceActionMenuContext.Provider>
       <div className="d-flex flex-column justify-content-center flex-grow-1">
-        <Button
+        <CompactActionButton
           variant="link"
-          size="sm"
           className="text-decoration-underline my-1"
-          role="button"
-          onClick={callback}
-        >
-          {translate('Show all')}
-        </Button>
+          action={callback}
+          title={translate('Show all')}
+        />
       </div>
     </>
   ) : null;

@@ -1,9 +1,9 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import {
   BackupFormChoices,
@@ -16,24 +16,22 @@ import {
 type NetworkChoices = Pick<BackupFormChoices, 'subnets' | 'floatingIps'>;
 
 const AddButton = ({ onClick, disabled }) => (
-  <Button variant="text-secondary" onClick={onClick} disabled={disabled}>
-    <span className="svg-icon svg-icon-2">
-      <PlusIcon weight="bold" />
-    </span>{' '}
-    {translate('Add')}
-  </Button>
+  <ActionButton
+    action={onClick}
+    disabled={disabled}
+    title={translate('Add')}
+    iconNode={<PlusIcon weight="bold" />}
+    variant="text-secondary"
+  />
 );
 
 const DeleteButton = ({ onClick }) => (
-  <Button
+  <ActionButton
+    action={onClick}
+    tooltip={translate('Delete')}
+    iconNode={<TrashIcon weight="bold" />}
     variant="text-secondary"
-    title={translate('Delete')}
-    onClick={onClick}
-  >
-    <span className="svg-icon svg-icon-2">
-      <TrashIcon weight="bold" />
-    </span>
-  </Button>
+  />
 );
 
 const SubnetField = ({ name, subnets, networks, network }) => {

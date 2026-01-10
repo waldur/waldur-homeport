@@ -192,6 +192,63 @@ return <Component {...props} />;
 - **Presentation Components**: Pure UI components with props
 - **Form Components**: Specialized forms using React Final Form
 - **Table Components**: Reusable table infrastructure with filtering, sorting, pagination
+- **Button Components**: Unified button system wrapping Bootstrap for consistent UX
+
+### Button Component Architecture
+
+The application uses a unified button system that wraps Bootstrap Button to ensure consistent styling, behavior, and accessibility. **Direct Bootstrap Button imports are forbidden** - use the appropriate Waldur wrapper component instead.
+
+```text
+Bootstrap Button (internal only, wrapped by BaseButton)
+│
+├── ActionButton (general purpose table/card actions)
+│   ├── RowActionButton (optimized for table rows)
+│   └── CompactActionButton (small variant for inline actions)
+│
+├── SubmitButton (form submission, large size)
+│   └── CompactSubmitButton (small forms, popovers)
+│
+├── EditButton (edit navigation/dialogs, large size)
+│   └── CompactEditButton (inline field editing)
+│
+├── CloseDialogButton (modal cancel/close)
+│
+├── IconButton (icon-only with tooltip)
+│
+├── ToolbarButton (table/panel toolbars)
+│
+├── SaveButton (form save with dirty state tracking)
+│
+└── Factory Components
+    ├── CreateModalButton (opens create dialog)
+    ├── EditModalButton (opens edit dialog)
+    └── DeleteButton (delete with confirmation)
+```
+
+#### Button Selection Guide
+
+| Use Case | Component |
+|----------|-----------|
+| Form submit | `SubmitButton` |
+| Form submit in popover/compact form | `CompactSubmitButton` |
+| Table row action | `ActionButton` or `RowActionButton` |
+| Inline action (small) | `CompactActionButton` |
+| Modal cancel/close | `CloseDialogButton` |
+| Icon-only button with tooltip | `IconButton` |
+| Table toolbar (refresh, export, filter) | `ToolbarButton` or `IconButton` |
+| Edit field in settings row | `CompactEditButton` |
+| Edit in card header | `EditButton` |
+| Create with dialog | `CreateModalButton` |
+| Delete with confirmation | `DeleteButton` |
+
+#### ESLint Enforcement
+
+The `no-direct-bootstrap-button` ESLint rule prevents direct Bootstrap Button imports. Allowed wrapper files:
+
+- `src/core/buttons/BaseButton.tsx`
+- `src/table/ActionButton.tsx`
+- `src/form/SubmitButton.tsx`
+- `src/modal/CloseDialogButton.tsx`
 
 ## Key Directories
 

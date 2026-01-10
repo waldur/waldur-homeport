@@ -7,7 +7,7 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { type DateTimePickerProps } from 'react-flatpickr';
 import { usePrevious } from 'react-use';
 import { Field, WrappedFieldArrayProps } from 'redux-form';
@@ -17,6 +17,7 @@ import { BookingProps } from '@waldur/booking/types';
 import { createBooking, getDurationOptions } from '@waldur/booking/utils';
 import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { BusinessHoursGroup } from './components/BusinessHoursGroup';
 import { SlotDurationGroup } from './components/SlotDurationGroup';
@@ -180,15 +181,11 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
                     </span>
                   )}
               </label>
-              <Button
+              <ActionButton
                 variant="text-danger"
-                className="btn-icon"
-                onClick={() => props.fields.remove(index)}
-              >
-                <span className="svg-icon svg-icon-2">
-                  <XIcon weight="bold" />
-                </span>
-              </Button>
+                action={() => props.fields.remove(index)}
+                iconNode={<XIcon weight="bold" />}
+              />
             </div>
             <Field
               name={schedule}
@@ -205,12 +202,13 @@ export const OfferingScheduler: FunctionComponent<OfferingSchedulerProps> = (
             />
           </div>
         ))}
-        <Button variant="text-primary" className="text-nowrap" onClick={addRow}>
-          <span className="svg-icon svg-icon-2">
-            <PlusCircleIcon weight="bold" />
-          </span>
-          {translate('Add time period')}
-        </Button>
+        <ActionButton
+          variant="text-primary"
+          className="text-nowrap"
+          action={addRow}
+          iconNode={<PlusCircleIcon weight="bold" />}
+          title={translate('Add time period')}
+        />
       </>
     </>
   );

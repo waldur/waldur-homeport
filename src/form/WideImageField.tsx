@@ -8,10 +8,10 @@ import {
   useEffect,
   useRef,
 } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { formatFilesize } from '@waldur/core/utils';
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
 
 import { FormField } from './types';
@@ -128,32 +128,28 @@ export const WideImageField: FunctionComponent<WideImageFieldProps> = (
               disabled={props.disabled}
             />
           </label>
-          <Button
+          <CompactSubmitButton
+            submitting={false}
             variant="tertiary"
-            size="sm"
             className="btn-icon-right"
             onClick={() => changeImage(initialValue)}
             disabled={props.disabled}
+            type="button"
+            label={translate('Cancel')}
+            iconNode={<XIcon weight="bold" />}
             data-image-input-action="cancel"
-          >
-            {translate('Cancel')}
-            <span className="svg-icon svg-icon-5">
-              <XIcon weight="bold" />
-            </span>
-          </Button>
-          <Button
+          />
+          <CompactSubmitButton
+            submitting={false}
             variant="tertiary"
-            size="sm"
             className="btn-icon-right"
             onClick={() => changeImage(null)}
             disabled={props.disabled}
+            type="button"
+            label={translate('Remove')}
+            iconNode={<TrashIcon weight="bold" />}
             data-image-input-action="remove"
-          >
-            {translate('Remove')}
-            <span className="svg-icon svg-icon-5">
-              <TrashIcon weight="bold" />
-            </span>
-          </Button>
+          />
           {props.extraActions
             ? createElement(props.extraActions, {
                 value: input.value,

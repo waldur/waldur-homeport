@@ -1,12 +1,11 @@
 import { CheckIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 export const ConsumerApproveAll = ({ orders, refetch }) => {
   const dispatch = useDispatch();
@@ -31,16 +30,12 @@ export const ConsumerApproveAll = ({ orders, refetch }) => {
     },
   });
   return (
-    <Button variant="primary" onClick={() => mutate()} disabled={isLoading}>
-      {isLoading ? (
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        <LoadingSpinnerIcon />
-      ) : (
-        <span className="svg-icon svg-icon-2">
-          <CheckIcon weight="bold" />
-        </span>
-      )}
-      {translate('Approve all')}
-    </Button>
+    <ActionButton
+      variant="primary"
+      action={() => mutate()}
+      pending={isLoading}
+      iconNode={<CheckIcon weight="bold" />}
+      title={translate('Approve all')}
+    />
   );
 };

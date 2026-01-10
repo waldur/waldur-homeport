@@ -1,6 +1,6 @@
 import { XIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
@@ -8,6 +8,7 @@ import { Badge } from '@waldur/core/Badge';
 import { syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
 
 import { setMarketplaceFilter } from './store/actions';
@@ -85,14 +86,13 @@ export const PageBarFilters = () => {
               </Badge>
             </Stack>
           ))}
-          <Button
+          <ActionButton
             variant="flush"
             className="btn-active-text-primary btn-no-focus"
-            onClick={clearFilters}
-          >
-            <XIcon weight="bold" className="svg-icon" />
-            {translate('Clear filters')}
-          </Button>
+            action={clearFilters}
+            iconNode={<XIcon weight="bold" />}
+            title={translate('Clear filters')}
+          />
         </div>
       </div>
     </div>

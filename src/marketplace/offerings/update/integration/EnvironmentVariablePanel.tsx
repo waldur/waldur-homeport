@@ -1,10 +1,10 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { Field, FormSection } from 'redux-form';
 
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 interface OwnProps {
   index: number;
@@ -33,16 +33,11 @@ export const EnvironmentVariablePanel: FunctionComponent<OwnProps> = (
           />
         </td>
         <td>
-          <Button
+          <CompactActionButton
             variant="text-danger"
-            size="sm"
-            className="btn-icon"
-            onClick={() => props.onRemove(props.index)}
-          >
-            <span className="svg-icon svg-icon-2">
-              <XIcon weight="bold" />
-            </span>
-          </Button>
+            action={() => props.onRemove(props.index)}
+            iconNode={<XIcon weight="bold" />}
+          />
         </td>
       </tr>
     </FormSection>

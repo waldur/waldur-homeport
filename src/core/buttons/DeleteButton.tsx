@@ -7,6 +7,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { DeleteButtonProps } from './types';
 
@@ -102,14 +103,15 @@ export function DeleteButton<TRow>({
   ]);
 
   if (renderAs === 'button') {
+    const ButtonComponent =
+      buttonSize === 'sm' ? CompactActionButton : ActionButton;
     return (
-      <ActionButton
+      <ButtonComponent
         action={handleDelete}
         title={title}
         iconNode={iconNode}
         disabled={disabled || loading}
         tooltip={tooltip}
-        size={buttonSize}
         variant="danger"
         pending={loading}
       />

@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface OwnProps {
   resource: string;
@@ -21,17 +21,16 @@ export const PlanDetailsLink: FunctionComponent<OwnProps> = ({ resource }) => {
   const { openDialog } = useModal();
 
   return (
-    <Button
+    <ActionButton
       variant="link"
       className="btn-flush"
-      onClick={() =>
+      action={() =>
         openDialog(PlanDetailsDialog, {
           resolve: { resourceId: resource },
           size: 'lg',
         })
       }
-    >
-      {translate('Show')}
-    </Button>
+      title={translate('Show')}
+    />
   );
 };

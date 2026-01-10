@@ -1,9 +1,10 @@
 import { FunctionComponent, useMemo, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
+import { SubmitButton } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
@@ -98,13 +99,14 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
       footer={
         <>
           <CloseDialogButton className="flex-equal" />
-          <Button
-            className="btn btn-primary flex-equal"
+          <SubmitButton
+            submitting={false}
+            className="flex-equal"
             onClick={saveCountryOptions}
             disabled={!isDirty}
-          >
-            {translate('Save')}
-          </Button>
+            type="button"
+            label={translate('Save')}
+          />
         </>
       }
     >

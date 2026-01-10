@@ -1,7 +1,6 @@
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import {
@@ -32,6 +31,7 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
 import {
@@ -292,16 +292,13 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
           />
 
           <div className="d-flex justify-content-between">
-            <Button
-              onClick={backToMainForm}
+            <ActionButton
+              action={backToMainForm}
+              title={translate('Back')}
+              iconNode={<ArrowLeftIcon weight="bold" />}
               variant="tertiary"
               className="min-w-125px"
-            >
-              <span className="svg-icon svg-icon-2">
-                <ArrowLeftIcon weight="bold" />
-              </span>
-              {translate('Back')}
-            </Button>
+            />
             <SubmitButton
               submitting={submitting}
               disabled={

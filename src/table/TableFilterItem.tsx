@@ -9,12 +9,13 @@ import React, {
   useRef,
   useState,
 } from 'react';
-import { Accordion, Button } from 'react-bootstrap';
+import { Accordion } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 import { Field, change, formValueSelector } from 'redux-form';
 
 import { Badge } from '@waldur/core/Badge';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 
@@ -438,19 +439,21 @@ const TableMenuFilterItem: FC<PropsWithChildren<TableFilterItem>> = ({
               {shown && (
                 <div className="menu-content filter-footer pb-0">
                   <div className="d-flex gap-4">
-                    <Button
+                    <SubmitButton
+                      submitting={false}
                       variant="tertiary"
                       className="flex-grow-1 w-50"
                       onClick={() => MenuComponent.hideDropdowns(null)}
-                    >
-                      {translate('Cancel')}
-                    </Button>
-                    <Button
+                      type="button"
+                      label={translate('Cancel')}
+                    />
+                    <SubmitButton
+                      submitting={false}
                       className="flex-grow-1 w-50"
                       onClick={() => onApply()}
-                    >
-                      {translate('Apply')}
-                    </Button>
+                      type="button"
+                      label={translate('Apply')}
+                    />
                   </div>
                 </div>
               )}

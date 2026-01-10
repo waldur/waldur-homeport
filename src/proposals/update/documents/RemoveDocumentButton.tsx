@@ -4,14 +4,14 @@ import { proposalProtectedCallsDetachDocuments } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
-export const RemoveDocumentButton = (props) => {
+export const RemoveDocumentAction = ({ row, call, refetch }) => {
   const dispatch = useDispatch();
   const callback = async () => {
     try {
-      if (props.file.uuid) {
+      if (row.uuid) {
         try {
           await waitForConfirmation(
             dispatch,
@@ -19,11 +19,11 @@ export const RemoveDocumentButton = (props) => {
             translate(
               'Are you sure you want to remove {document} document from {call}?',
               {
-                document: props.file.file_name
+                document: row.file_name
                   .split('/')
                   .pop()
                   .replace(/_[^_]+\./, '.'),
-                call: props.call.name,
+                call: call.name,
               },
             ),
             { forDeletion: true },
@@ -32,12 +32,12 @@ export const RemoveDocumentButton = (props) => {
           return;
         }
         await proposalProtectedCallsDetachDocuments({
-          path: { uuid: props.call.uuid },
-          body: { documents: [props.file.uuid] },
+          path: { uuid: call.uuid },
+          body: { documents: [row.uuid] },
         });
       }
       dispatch(showSuccess(translate('Documents have been removed.')));
-      props.refetch();
+      refetch();
     } catch (error) {
       dispatch(
         showErrorResponse(
@@ -50,12 +50,11 @@ export const RemoveDocumentButton = (props) => {
     }
   };
   return (
-    <RowActionButton
+    <ActionItem
       action={callback}
       title={translate('Remove')}
       iconNode={<TrashIcon weight="bold" />}
-      variant="danger"
-      size="sm"
+      className="text-danger"
     />
   );
 };

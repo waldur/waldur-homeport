@@ -1,15 +1,14 @@
 import { LightbulbFilamentIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormGroup, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const ResourceNameField = (props) => {
   const dispatch = useDispatch();
@@ -34,31 +33,19 @@ const ResourceNameField = (props) => {
       <div className="flex-grow-1 me-3 ">
         <StringField input={props.input} placeholder={props.offering.name} />
       </div>
-      {project ? (
-        <Button
-          variant="tertiary"
-          className="btn-tertiary"
-          onClick={() => suggestName()}
-          disabled={isLoading}
-        >
-          <span className="svg-icon svg-icon-2">
-            <LightbulbFilamentIcon weight="bold" />
-          </span>
-          {translate('Suggest name')}
-        </Button>
-      ) : (
-        <Tip
-          id="ResourceNameField"
-          label={translate('Organization and project need to be selected.')}
-        >
-          <Button variant="tertiary" className="btn-tertiary" disabled>
-            <span className="svg-icon svg-icon-2">
-              <LightbulbFilamentIcon weight="bold" />
-            </span>
-            {translate('Suggest name')}
-          </Button>
-        </Tip>
-      )}
+      <ActionButton
+        variant="tertiary"
+        action={() => suggestName()}
+        pending={isLoading}
+        disabled={!project}
+        iconNode={<LightbulbFilamentIcon weight="bold" />}
+        title={translate('Suggest name')}
+        tooltip={
+          !project
+            ? translate('Organization and project need to be selected.')
+            : undefined
+        }
+      />
     </div>
   );
 };

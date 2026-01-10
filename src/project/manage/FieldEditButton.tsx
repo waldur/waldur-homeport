@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -41,9 +41,8 @@ export const FieldEditButton = (props: EditProjectProps) => {
     : undefined;
 
   return (
-    <EditButton
+    <CompactEditButton
       onClick={callback}
-      size="sm"
       disabled={isDisabled}
       tooltip={tooltip}
     />

@@ -1,5 +1,4 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { marketplaceCategoryColumnsDestroy } from 'waldur-js-client';
@@ -9,6 +8,7 @@ import { StringField } from '@waldur/form/StringField';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { useNotify } from '@waldur/store/hooks';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 export const ColumnRow = ({ column, fields, index, name }) => {
   const dispatch = useDispatch();
@@ -92,9 +92,11 @@ export const ColumnRow = ({ column, fields, index, name }) => {
       </td>
 
       <td>
-        <Button variant="danger" onClick={onRemove} aria-description="Delete">
-          <TrashIcon weight="bold" />
-        </Button>
+        <ActionButton
+          variant="danger"
+          action={onRemove}
+          iconNode={<TrashIcon weight="bold" />}
+        />
       </td>
     </tr>
   );

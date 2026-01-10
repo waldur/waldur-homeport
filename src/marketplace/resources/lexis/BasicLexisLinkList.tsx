@@ -4,7 +4,8 @@ import { lexisLinksList } from 'waldur-js-client';
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
-import { LexisLinkDeleteButton } from '@waldur/marketplace/resources/lexis/LexisLinkDeleteButton';
+import { LexisLinkDeleteAction } from '@waldur/marketplace/resources/lexis/LexisLinkDeleteButton';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -57,7 +58,9 @@ export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
       columns={columns}
       verboseName={translate('LEXIS links')}
       rowActions={({ row }) => (
-        <LexisLinkDeleteButton row={row} refetch={props.fetch} />
+        <ActionsDropdown row={row} refetch={props.fetch}>
+          <LexisLinkDeleteAction row={row} refetch={props.fetch} />
+        </ActionsDropdown>
       )}
       title={translate('LEXIS links')}
       hasQuery={true}

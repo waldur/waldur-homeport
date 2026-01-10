@@ -1,6 +1,5 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
@@ -8,6 +7,7 @@ import FormTable from '@waldur/form/FormTable';
 import { WideImageField } from '@waldur/form/WideImageField';
 import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { useUpdateUser } from './useUpdateUser';
@@ -47,18 +47,15 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
           input={{ value: image, onChange: (value) => setImage(value) } as any}
           extraActions={({ isChanged, isTooLarge }) =>
             isChanged || isLoading ? (
-              <Button
+              <CompactActionButton
                 variant="primary"
-                size="sm"
-                className="btn-icon-right"
-                disabled={isLoading || isTooLarge || disabled}
-                onClick={() => callback({ image })}
-              >
-                {translate('Save')}
-                <span className="svg-icon svg-icon-5">
-                  <UploadSimpleIcon weight="bold" />
-                </span>
-              </Button>
+                iconRight
+                disabled={isTooLarge || disabled}
+                pending={isLoading}
+                action={() => callback({ image })}
+                title={translate('Save')}
+                iconNode={<UploadSimpleIcon weight="bold" />}
+              />
             ) : null
           }
         />

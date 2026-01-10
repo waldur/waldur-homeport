@@ -32,7 +32,6 @@ export const ProjectField: FC<ProjectFieldProps> = ({ previewMode }) => {
             customer={customer}
             title={translate('Add project')}
             variant="link"
-            size="sm"
             className="mb-1"
           />
         )

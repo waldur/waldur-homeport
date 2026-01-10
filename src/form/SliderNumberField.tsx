@@ -1,6 +1,9 @@
 import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
+
+import { CompactIconButton } from '@waldur/core/buttons/IconButton';
+import { translate } from '@waldur/i18n';
 
 import { FormField } from './types';
 
@@ -65,32 +68,26 @@ export const SliderNumberField: FunctionComponent<SliderNumberFieldProps> = (
         />
 
         <div>
-          <Button
-            size="sm"
-            variant="active-icon-primary"
-            className="plus-btn btn-icon btn-no-focus"
+          <CompactIconButton
+            iconNode={<PlusIcon weight="bold" />}
+            tooltip={translate('Increase')}
             onClick={() =>
               change(Number(input.value) + 1 * Number(props.step || 1))
             }
             disabled={props.disabled}
-          >
-            <span className="svg-icon svg-icon-4">
-              <PlusIcon weight="bold" />
-            </span>
-          </Button>
-          <Button
-            size="sm"
             variant="active-icon-primary"
-            className="minus-btn btn-icon btn-no-focus icon-align"
+            className="plus-btn btn-no-focus"
+          />
+          <CompactIconButton
+            iconNode={<MinusIcon weight="bold" />}
+            tooltip={translate('Decrease')}
             onClick={() =>
               change(Number(input.value) - 1 * Number(props.step || 1))
             }
             disabled={props.disabled}
-          >
-            <span className="svg-icon svg-icon-4">
-              <MinusIcon weight="bold" />
-            </span>
-          </Button>
+            variant="active-icon-primary"
+            className="minus-btn btn-no-focus icon-align"
+          />
         </div>
       </div>
       {props.unit && <span className="fw-bold fs-5 ms-3">{props.unit}</span>}

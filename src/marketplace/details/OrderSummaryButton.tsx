@@ -1,10 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const OrderSummaryDialog = lazyComponent(() =>
   import('./OrderSummaryDialog').then((module) => ({
@@ -20,18 +20,15 @@ export const OrderSummaryButton = ({
 }) => {
   const dispatch = useDispatch();
   return (
-    <Button
-      variant="secondary"
+    <ActionButton
+      variant="tertiary"
       className={className}
-      onClick={() =>
+      action={() =>
         dispatch(openModalDialog(OrderSummaryDialog, { offering, size: 'sm' }))
       }
       disabled={disabled}
-    >
-      <span className="svg-icon svg-icon-2">
-        <EyeIcon weight="bold" />
-      </span>
-      {label}
-    </Button>
+      title={label}
+      iconNode={<EyeIcon weight="bold" />}
+    />
   );
 };

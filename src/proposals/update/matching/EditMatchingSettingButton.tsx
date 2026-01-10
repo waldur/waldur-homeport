@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import type { EditMatchingSettingProps } from './types';
@@ -22,5 +22,5 @@ export const EditMatchingSettingButton = (props: EditMatchingSettingProps) => {
       }),
     );
   };
-  return <EditButton onClick={callback} btnIcon size="sm" />;
+  return <CompactEditButton onClick={callback} btnIcon />;
 };

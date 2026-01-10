@@ -1,6 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import React, { useState, useEffect, useCallback, useRef } from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
@@ -10,6 +10,7 @@ import { SelectField } from '@waldur/form';
 import { FormField } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { FormGroup } from '../offerings/FormGroup';
@@ -342,12 +343,12 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
               <Field
                 label={translate('Node groups')}
                 value={
-                  <Button variant="secondary" size="sm" onClick={addNodeGroup}>
-                    <span className="svg-icon svg-icon-2">
-                      <PlusCircleIcon weight="bold" />
-                    </span>
-                    {translate('Add node group')}
-                  </Button>
+                  <CompactActionButton
+                    variant="secondary"
+                    action={addNodeGroup}
+                    iconNode={<PlusCircleIcon weight="bold" />}
+                    title={translate('Add node group')}
+                  />
                 }
                 labelCol={4}
                 valueCol={7}

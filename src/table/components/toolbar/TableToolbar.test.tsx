@@ -276,7 +276,7 @@ describe('TableToolbarActions', () => {
         </Provider>,
       );
 
-      const clearButton = screen.getByRole('button', { name: '' });
+      const clearButton = screen.getByLabelText('Clear selection');
       await user.click(clearButton);
 
       expect(resetSelection).toHaveBeenCalled();

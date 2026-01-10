@@ -1,13 +1,12 @@
 import { useState, FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   customerPermissionsReviewsClose,
   projectPermissionsReviewsClose,
 } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { CustomerUsersList } from '@waldur/customer/team/CustomerUsersList';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -58,10 +57,12 @@ export const PendingMembershipReviewDialog: FunctionComponent<
             className="min-w-125px"
             label={translate('Remind me later')}
           />
-          <Button onClick={closeReviewCallback} disabled={submitting}>
-            {submitting && <LoadingSpinnerIcon className="me-1" />}
-            {translate('Complete review')}
-          </Button>
+          <SubmitButton
+            submitting={submitting}
+            onClick={closeReviewCallback}
+            type="button"
+            label={translate('Complete review')}
+          />
         </>
       }
     >

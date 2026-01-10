@@ -1,10 +1,10 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useCallback, FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { freeipaProfilesUpdateSshKeys } from 'waldur-js-client';
 
 import { Tip } from '@waldur/core/Tooltip';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
@@ -46,12 +46,16 @@ export const SyncProfile: FunctionComponent<{
       label={translate('Add Waldur user SSH keys to the FreeIPA profile')}
       id="freeipa-sync-profile"
     >
-      <Button variant="primary" className="ms-2" onClick={callback}>
-        <span className="svg-icon svg-icon-2">
-          <ArrowsClockwiseIcon weight="bold" />
-        </span>{' '}
-        {translate('Sync profile')}
-      </Button>
+      <SubmitButton
+        submitting={false}
+        type="button"
+        variant="primary"
+        className="ms-2"
+        onClick={callback}
+        label={translate('Sync profile')}
+        iconNode={<ArrowsClockwiseIcon weight="bold" />}
+        iconOnLeft
+      />
     </Tip>
   );
 };

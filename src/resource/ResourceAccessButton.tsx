@@ -4,12 +4,13 @@ import {
   CopyIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { Button, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { showSuccess } from '@waldur/store/notify';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { getResourceAccessEndpoints, isSshFormat } from './utils';
 
@@ -101,19 +102,15 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
                   : endpoint.url
               }
             >
-              <Button
+              <CompactActionButton
                 variant="link"
-                size="sm"
-                className="btn-icon h-20px"
-                onClick={(e) => {
+                className="h-20px"
+                action={(e) => {
                   copyText(endpoint.url);
                   e.preventDefault();
                 }}
-              >
-                <span className="svg-icon svg-icon-2">
-                  <CopyIcon weight="bold" />
-                </span>
-              </Button>
+                iconNode={<CopyIcon weight="bold" />}
+              />
             </Tip>
           </Dropdown.Item>
         ))}

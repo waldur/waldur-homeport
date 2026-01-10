@@ -5,7 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import Papa from 'papaparse';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Button, Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
@@ -26,6 +26,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showInfo, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getProject } from '@waldur/workspace/selectors';
 
 import templateFile from './course_accounts_template.json';
@@ -219,29 +220,25 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
               footer={
                 <>
                   {activeTab === 'batch' && step > 0 && (
-                    <Button
+                    <ActionButton
+                      title={translate('Back')}
+                      action={prevStep}
+                      iconNode={<CaretLeftIcon weight="bold" />}
                       variant="tertiary"
                       className="w-125px me-auto"
-                      onClick={prevStep}
-                    >
-                      <span className="svg-icon svg-icon-4">
-                        <CaretLeftIcon weight="bold" />
-                      </span>
-                      {translate('Back')}
-                    </Button>
+                    />
                   )}
                   <CloseDialogButton className="w-125px" />
                   {activeTab === 'batch' && step === 0 ? (
-                    <Button
-                      className="w-125px btn-icon-right"
-                      onClick={nextStep}
+                    <ActionButton
+                      title={translate('Next')}
+                      action={nextStep}
+                      iconNode={<CaretRightIcon weight="bold" />}
+                      iconRight
                       disabled={invalid}
-                    >
-                      {translate('Next')}
-                      <span className="svg-icon svg-icon-4">
-                        <CaretRightIcon weight="bold" />
-                      </span>
-                    </Button>
+                      variant="primary"
+                      className="w-125px"
+                    />
                   ) : (
                     <SubmitButton
                       submitting={submitting}

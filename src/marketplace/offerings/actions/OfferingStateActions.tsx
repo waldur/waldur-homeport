@@ -1,4 +1,4 @@
-import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
+import { ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsActivate,
@@ -11,6 +11,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { ACTIVE, ARCHIVED, DRAFT, PAUSED } from '../store/constants';
@@ -116,20 +117,17 @@ export const OfferingStateActions = ({
 
   if (offering.state == ARCHIVED) {
     return (
-      <Button
+      <ActionButton
         variant="tertiary"
-        onClick={() => setDraft()}
+        action={() => setDraft()}
         className={className}
-      >
-        {draftTitle}
-      </Button>
+        title={draftTitle}
+      />
     );
   }
   return (
     <Dropdown as={ButtonGroup} className={className}>
-      <Button variant="primary" onClick={() => callback()}>
-        {title}
-      </Button>
+      <ActionButton variant="primary" action={() => callback()} title={title} />
       <Dropdown.Toggle split variant="primary" className="px-4" />
       <Dropdown.Menu>
         {offering.state !== DRAFT && (

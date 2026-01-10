@@ -7,8 +7,9 @@ import { Variant } from 'react-bootstrap/esm/types';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
-interface EditButtonProps extends ButtonProps {
+export interface EditButtonProps extends ButtonProps {
   disabled?: boolean;
   tooltip?: string;
   label?: string;
@@ -28,8 +29,8 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
     state,
     params,
     iconRight = true,
-    variant = 'secondary',
-    size,
+    variant = 'tertiary',
+    size = 'lg',
     width = 90,
     btnIcon,
     className,
@@ -62,16 +63,23 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       </span>
       {!btnIcon && !iconRight && label}
     </Link>
+  ) : size === 'sm' ? (
+    <CompactActionButton
+      action={onClick}
+      iconNode={<PencilSimpleIcon weight="bold" />}
+      title={!btnIcon && label}
+      variant={variant}
+      iconRight={iconRight}
+      className={classNames(widthClass, className)}
+    />
   ) : (
     <ActionButton
       action={onClick}
       iconNode={<PencilSimpleIcon weight="bold" />}
       title={!btnIcon && label}
-      size={size}
       variant={variant}
       iconRight={iconRight}
       className={classNames(widthClass, className)}
-      {...rest}
     />
   );
 };

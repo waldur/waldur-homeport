@@ -1,11 +1,12 @@
 import { FC, useCallback, useState } from 'react';
-import { Button, Form, Modal } from 'react-bootstrap';
+import { Form, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { ConflictOfInterest, conflictsOfInterestWaive } from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 interface WaiveCOIDialogProps {
@@ -113,13 +114,7 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <Button
-          variant="secondary"
-          onClick={() => dispatch(closeModalDialog())}
-          disabled={submitting}
-        >
-          {translate('Cancel')}
-        </Button>
+        <CloseDialogButton disabled={submitting} />
         <SubmitButton
           submitting={submitting}
           disabled={!managementPlan.trim()}

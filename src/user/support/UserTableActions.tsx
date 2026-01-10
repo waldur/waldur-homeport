@@ -1,11 +1,11 @@
 import { PlusIcon } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const AddRemoteUserDialog = lazyComponent(() =>
   import('./AddRemoteUserDialog').then((module) => ({
@@ -22,11 +22,11 @@ export const UserTableActions = ({ refetch }) => {
     dispatch(openModalDialog(AddRemoteUserDialog, { resolve: { refetch } }));
   };
   return (
-    <Button onClick={openDialog} className="me-3">
-      <span className="svg-icon svg-icon-2">
-        <PlusIcon weight="bold" />
-      </span>{' '}
-      {translate('Add user')}
-    </Button>
+    <ActionButton
+      action={openDialog}
+      className="me-3"
+      iconNode={<PlusIcon weight="bold" />}
+      title={translate('Add user')}
+    />
   );
 };

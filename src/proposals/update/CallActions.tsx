@@ -1,5 +1,5 @@
 import { FC, useCallback } from 'react';
-import { DropdownButton, Dropdown, Button } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   proposalProtectedCallsActivate,
@@ -10,6 +10,8 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
 
 import { Call } from '../types';
 import { getCallStateActions } from '../utils';
@@ -61,7 +63,7 @@ export const CallActions: FC<CallActionsProps> = ({
 
   if (call.state === 'draft') {
     return (
-      <DropdownButton title={translate('Actions')} className={className}>
+      <ActionDropdownButton title={translate('Actions')} className={className}>
         {getCallStateActions()
           .filter((state) => state.value !== call.state)
           .map((state, i) => {
@@ -84,32 +86,30 @@ export const CallActions: FC<CallActionsProps> = ({
               </Tip>
             );
           })}
-      </DropdownButton>
+      </ActionDropdownButton>
     );
   }
 
   if (call.state === 'archived') {
     return (
       <Tip label={tooltipMessage} id="tooltip-activate" placement="top">
-        <Button
+        <ActionButton
+          title={translate('Activate')}
           variant="primary"
-          onClick={() => editCallState('activate', translate('Activate'))}
+          action={() => editCallState('activate', translate('Activate'))}
           className={className}
           disabled={!hasRounds}
-        >
-          {translate('Activate')}
-        </Button>
+        />
       </Tip>
     );
   }
 
   return (
-    <Button
+    <ActionButton
+      title={translate('Archive')}
       variant="primary"
-      onClick={() => editCallState('archive', translate('Archive'))}
+      action={() => editCallState('archive', translate('Archive'))}
       className={className}
-    >
-      {translate('Archive')}
-    </Button>
+    />
   );
 };

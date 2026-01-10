@@ -3,10 +3,9 @@ import { reduxForm } from 'redux-form';
 import { lexisLinksCreate } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { SubmitButton } from '@waldur/form';
+import { FormFooter } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -45,16 +44,7 @@ export const CreateLexisLinkDialog = reduxForm<
         title={translate('Create LEXIS Link for the resource {resourceName}', {
           resourceName: resource.name,
         })}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={props.submitting}
-              label={translate('Submit')}
-              className="btn btn-primary"
-            />
-          </>
-        }
+        footer={<FormFooter submitting={props.submitting} />}
       >
         {translate(
           'Are you sure you would like to create a LEXIS link for the resource {resourceName}?',

@@ -1,9 +1,10 @@
 import { FileTextIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { DropdownButton, Dropdown } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import { Invoice } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
 
 interface ResourceActionComponentProps {
   onToggle: (isOpen: boolean) => void;
@@ -25,7 +26,7 @@ const ActionItem = ({ invoice, invoiceKey, onSelect }) => (
 export const InvoicesDropdown: FunctionComponent<
   ResourceActionComponentProps
 > = (props) => (
-  <DropdownButton
+  <ActionDropdownButton
     title={
       <>
         <span className="svg-icon svg-icon-2">
@@ -66,5 +67,5 @@ export const InvoicesDropdown: FunctionComponent<
         )
       ) : null
     ) : null}
-  </DropdownButton>
+  </ActionDropdownButton>
 );

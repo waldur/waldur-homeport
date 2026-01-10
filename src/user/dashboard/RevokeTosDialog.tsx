@@ -1,7 +1,6 @@
 import { XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceResourcesList,
@@ -10,10 +9,12 @@ import {
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -60,20 +61,15 @@ export const RevokeTosDialog = ({
       iconColor="danger"
       footer={
         <>
-          <Button
-            variant="tertiary"
-            className="flex-equal"
-            onClick={() => dispatch(closeModalDialog())}
-          >
-            {translate('Cancel')}
-          </Button>
-          <Button
+          <CloseDialogButton className="flex-equal" />
+          <SubmitButton
+            submitting={false}
             variant="danger"
             className="flex-equal"
             onClick={handleRevoke}
-          >
-            {translate('Revoke')}
-          </Button>
+            type="button"
+            label={translate('Revoke')}
+          />
         </>
       }
     >

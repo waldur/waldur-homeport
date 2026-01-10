@@ -1,11 +1,10 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { parseDate } from '@waldur/core/dateUtils';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { removeEmptyObjects } from '@waldur/core/utils';
+import { SubmitButton } from '@waldur/form';
 import { FieldErrorMessage } from '@waldur/form/FieldError';
 import { FloatingButton } from '@waldur/form/FloatingButton';
 import { translate } from '@waldur/i18n';
@@ -36,19 +35,15 @@ export const OrderSubmitButton = (props: OrderSummaryProps) => {
     errors?.plan_entries;
 
   const Btn = (
-    <Button
-      variant="primary"
+    <SubmitButton
+      submitting={props.isSubmitting}
       disabled={Boolean(errorsExist) || !props.formValid || props.isSubmitting}
       type="submit"
       className="w-100"
-    >
-      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-      {props.isSubmitting && <LoadingSpinnerIcon className="me-1" />}
-      <span className="svg-icon svg-icon-2">
-        <ShoppingCartIcon weight="bold" />
-      </span>
-      {translate('Create')}
-    </Button>
+      label={translate('Create')}
+      iconNode={<ShoppingCartIcon weight="bold" />}
+      iconOnLeft
+    />
   );
 
   return (

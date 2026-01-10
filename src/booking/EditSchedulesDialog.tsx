@@ -4,10 +4,9 @@ import { FieldArray, reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { pick } from '@waldur/core/utils';
-import { FormContainer, SubmitButton } from '@waldur/form';
+import { FormContainer, FormFooter } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -64,13 +63,10 @@ export const EditSchedulesDialog = connect(
         <ModalDialog
           title={translate('Update schedule')}
           footer={
-            <>
-              <CloseDialogButton />
-              <SubmitButton
-                submitting={props.submitting}
-                label={translate('Update')}
-              />
-            </>
+            <FormFooter
+              submitting={props.submitting}
+              submitLabel={translate('Update')}
+            />
           }
         >
           <FormContainer {...props} className="size-xl">

@@ -1,7 +1,7 @@
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -46,9 +46,8 @@ export const SetAccessPolicyButton = ({
     return null;
   }
   return (
-    <EditButton
+    <CompactEditButton
       onClick={callback}
-      size="sm"
       disabled={disabled}
       tooltip={tooltip}
     />

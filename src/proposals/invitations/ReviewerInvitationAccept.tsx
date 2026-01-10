@@ -2,7 +2,7 @@ import { Check, X } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback } from 'react';
-import { Button, Card, Container } from 'react-bootstrap';
+import { Card, Container } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
   reviewerInvitationsRetrieve,
@@ -13,6 +13,7 @@ import {
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
@@ -266,30 +267,26 @@ export const ReviewerInvitationAccept: FC = () => {
 
       {/* Actions */}
       <div className="d-flex gap-4 justify-content-center">
-        <Button
+        <SubmitButton
+          type="button"
           variant="success"
-          size="lg"
           onClick={() => acceptMutation.mutate()}
-          disabled={
-            !canAccept || acceptMutation.isPending || declineMutation.isPending
-          }
-        >
-          <Check weight="bold" className="me-2" />
-          {acceptMutation.isPending
-            ? translate('Accepting...')
-            : translate('Accept invitation')}
-        </Button>
-        <Button
+          disabled={!canAccept || declineMutation.isPending}
+          submitting={acceptMutation.isPending}
+          label={translate('Accept invitation')}
+          iconNode={<Check weight="bold" />}
+          iconOnLeft
+        />
+        <SubmitButton
+          type="button"
           variant="danger"
-          size="lg"
           onClick={() => declineMutation.mutate()}
-          disabled={acceptMutation.isPending || declineMutation.isPending}
-        >
-          <X weight="bold" className="me-2" />
-          {declineMutation.isPending
-            ? translate('Declining...')
-            : translate('Decline invitation')}
-        </Button>
+          disabled={acceptMutation.isPending}
+          submitting={declineMutation.isPending}
+          label={translate('Decline invitation')}
+          iconNode={<X weight="bold" />}
+          iconOnLeft
+        />
       </div>
       {!canAccept && (
         <p className="text-center text-muted mt-4">

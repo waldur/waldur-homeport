@@ -2,11 +2,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
+import { FormFooter } from '@waldur/form';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { orderCanBeApproved as orderCanBeApprovedSelector } from '@waldur/marketplace/orders/actions/selectors';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { ReactComponent as TenantSubtitle } from '@waldur/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
 import { ReactComponent as ClusterSubtitle } from '@waldur/rancher/cluster/actions/DestroyActionSubtitle.md';
@@ -66,18 +65,15 @@ export const TerminateDialog = reduxForm<
           },
         )}
         footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={props.submitting}
-              label={
-                orderCanBeApproved
-                  ? translate('Submit')
-                  : translate('Request for a termination')
-              }
-              className="btn btn-danger"
-            />
-          </>
+          <FormFooter
+            submitting={props.submitting}
+            submitLabel={
+              orderCanBeApproved
+                ? translate('Submit')
+                : translate('Request for a termination')
+            }
+            submitVariant="danger"
+          />
         }
       >
         {translate(

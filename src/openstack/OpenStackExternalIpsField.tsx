@@ -1,8 +1,9 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { BaseFieldArrayProps, FieldArray, FormSection } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { StringField } from './StringField';
 
@@ -37,15 +38,11 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
                         <StringField name="external_ip" />
                       </td>
                       <td>
-                        <Button
+                        <ActionButton
+                          action={() => removeRow(i)}
+                          iconNode={<TrashIcon weight="bold" />}
                           variant="danger"
-                          className="btn-icon"
-                          onClick={() => removeRow(i)}
-                        >
-                          <span className="svg-icon svg-icon-2">
-                            <TrashIcon weight="bold" />
-                          </span>
-                        </Button>
+                        />
                       </td>
                     </tr>
                   </FormSection>
@@ -56,12 +53,12 @@ const FieldsListGroup = ({ fields }: BaseFieldArrayProps<any>) => {
         </Form.Group>
       )}
       <div>
-        <Button variant="tertiary" onClick={addRow}>
-          <span className="svg-icon svg-icon-2">
-            <PlusIcon weight="bold" />
-          </span>{' '}
-          {translate('Add')}
-        </Button>
+        <ActionButton
+          title={translate('Add')}
+          action={addRow}
+          iconNode={<PlusIcon weight="bold" />}
+          variant="tertiary"
+        />
       </div>
     </>
   );

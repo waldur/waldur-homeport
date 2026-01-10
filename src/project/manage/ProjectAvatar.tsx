@@ -1,12 +1,13 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { projectsPartialUpdate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@waldur/core/api';
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { WideImageField } from '@waldur/form/WideImageField';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -62,18 +63,12 @@ export const ProjectAvatar = ({ project }: { project: Project }) => {
                   disabled={project.is_removed}
                   extraActions={({ isChanged, isTooLarge }) =>
                     (isChanged || submitting) && !project.is_removed ? (
-                      <Button
-                        type="submit"
-                        variant="primary"
-                        size="sm"
-                        className="btn-icon-right"
-                        disabled={submitting || isTooLarge}
-                      >
-                        {translate('Save')}
-                        <span className="svg-icon svg-icon-5">
-                          <UploadSimpleIcon weight="bold" />
-                        </span>
-                      </Button>
+                      <CompactSubmitButton
+                        submitting={submitting}
+                        disabled={isTooLarge}
+                        label={translate('Save')}
+                        iconNode={<UploadSimpleIcon weight="bold" />}
+                      />
                     ) : null
                   }
                   {...(fieldProps as any)}

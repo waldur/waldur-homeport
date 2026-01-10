@@ -1,13 +1,12 @@
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
 import { FormSteps } from '@waldur/form/FormSteps';
 import { SidebarProps } from '@waldur/form/SidebarProps';
 import { TosNotification } from '@waldur/form/TosNotification';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;
@@ -59,15 +58,14 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             }
           />
 
-          <Button
+          <ActionButton
+            action={props.saveAsDraft}
+            title={translate('Save as draft')}
             variant="secondary"
-            onClick={props.saveAsDraft}
             className="w-100 mt-2"
-            disabled={props.submitting || props.isSaving}
-          >
-            {props.isSaving && <LoadingSpinnerIcon className="me-1" />}
-            {translate('Save as draft')}
-          </Button>
+            disabled={props.submitting}
+            pending={props.isSaving}
+          />
           <TosNotification />
         </>
       )}

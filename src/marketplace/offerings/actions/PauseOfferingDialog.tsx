@@ -2,10 +2,9 @@ import { useDispatch } from 'react-redux';
 import { reduxForm, Field } from 'redux-form';
 import { marketplaceProviderOfferingsPause } from 'waldur-js-client';
 
-import { SubmitButton, TextField } from '@waldur/form';
+import { FormFooter, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -35,15 +34,7 @@ export const PauseOfferingDialog = reduxForm<
     <form onSubmit={props.handleSubmit(callback)}>
       <ModalDialog
         title={translate('Pause offering')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={props.submitting}
-              label={translate('Submit')}
-            />
-          </>
-        }
+        footer={<FormFooter submitting={props.submitting} />}
       >
         <Field
           name="reason"

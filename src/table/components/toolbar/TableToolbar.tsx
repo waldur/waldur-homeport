@@ -1,9 +1,10 @@
 import { XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { createElement, useCallback } from 'react';
-import { Button, Card, Col, Row, Stack } from 'react-bootstrap';
+import { Card, Col, Row, Stack } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
+import { CompactIconButton } from '@waldur/core/buttons/IconButton';
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -84,14 +85,13 @@ export function TableToolbarActions() {
           className="order-1 order-sm-1 d-flex justify-content-start flex-wrap text-nowrap gap-4"
         >
           <Stack direction="horizontal" className="fw-normal text-dark me-2">
-            <Button
-              variant="text-secondary"
-              className="btn-icon me-1"
-              size="sm"
+            <CompactIconButton
+              iconNode={<XIcon weight="bold" />}
+              tooltip={translate('Clear selection')}
               onClick={actions.resetSelection}
-            >
-              <XIcon weight="bold" />
-            </Button>
+              variant="text-secondary"
+              className="me-1"
+            />
             <span>
               ({selectedRows?.length}) {translate('Selected')}
             </span>

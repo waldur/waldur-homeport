@@ -2,10 +2,9 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceResourcesMoveResource, Resource } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton } from '@waldur/form';
+import { FormContainer, FormFooter } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -73,14 +72,11 @@ export const MoveResourceDialog = reduxForm<
           },
         )}
         footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={props.submitting}
-              label={translate('Save')}
-              disabled={props.invalid}
-            />
-          </>
+          <FormFooter
+            submitting={props.submitting}
+            invalid={props.invalid}
+            submitLabel={translate('Save')}
+          />
         }
       >
         <FormContainer submitting={props.submitting}>

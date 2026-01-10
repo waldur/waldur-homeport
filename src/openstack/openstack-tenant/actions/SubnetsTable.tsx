@@ -1,10 +1,11 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 const SubNetRow = ({ SubNet: subnet, onRemove }) => (
   <tr>
@@ -15,23 +16,23 @@ const SubNetRow = ({ SubNet: subnet, onRemove }) => (
       <Field name={`${subnet}.destination`} component={InputField} />
     </td>
     <td>
-      <Button variant="text-secondary" onClick={onRemove} size="sm">
-        <span className="svg-icon svg-icon-2">
-          <TrashIcon weight="bold" />
-        </span>{' '}
-        {translate('Remove')}
-      </Button>
+      <CompactActionButton
+        title={translate('Remove')}
+        action={onRemove}
+        iconNode={<TrashIcon weight="bold" />}
+        variant="text-secondary"
+      />
     </td>
   </tr>
 );
 
 const SubNetAddButton = ({ onClick }) => (
-  <Button variant="text-secondary" onClick={onClick} size="sm">
-    <span className="svg-icon svg-icon-2">
-      <PlusIcon weight="bold" />
-    </span>{' '}
-    {translate('Add')}
-  </Button>
+  <CompactActionButton
+    title={translate('Add')}
+    action={onClick}
+    iconNode={<PlusIcon weight="bold" />}
+    variant="text-secondary"
+  />
 );
 
 export const SubnetsTable: FC<{ fields }> = ({ fields }) => {

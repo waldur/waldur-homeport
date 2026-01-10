@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { ActionButton, RowActionButton } from '@waldur/table/ActionButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ActionItem } from './ActionItem';
 import { DialogActionProps } from './DialogActionProps';
@@ -16,7 +16,6 @@ export const DialogActionButton: <T>(
   formId,
   validators,
   extraResolve,
-  rowAction,
   actionItem,
   ...rest
 }) => {
@@ -27,9 +26,7 @@ export const DialogActionButton: <T>(
     extraResolve,
     { size: dialogSize, formId },
   );
-  if (rowAction) {
-    return <RowActionButton {...rest} {...validationState} action={callback} />;
-  } else if (actionItem) {
+  if (actionItem) {
     return <ActionItem {...rest} {...validationState} action={callback} />;
   } else {
     return <ActionButton {...rest} {...validationState} action={callback} />;

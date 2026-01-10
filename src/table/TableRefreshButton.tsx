@@ -1,14 +1,22 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
+import { IconButton } from '@waldur/core/buttons/IconButton';
+import { translate } from '@waldur/i18n';
 import { Sorting } from '@waldur/table/types';
 
 export const LoadingSpinner: FunctionComponent = () => (
-  <button type="button" className="btn btn-icon btn-flush">
-    <span className="animation-spin">
-      <ArrowsClockwiseIcon size={20} data-cy="loading-spinner" weight="bold" />
-    </span>
-  </button>
+  <IconButton
+    iconNode={
+      <span className="animation-spin">
+        <ArrowsClockwiseIcon data-cy="loading-spinner" weight="bold" />
+      </span>
+    }
+    tooltip={translate('Loading')}
+    onClick={() => {}}
+    variant="flush"
+    disabled
+  />
 );
 
 interface TableRefreshButtonProps {
@@ -25,15 +33,16 @@ export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = (
   // 2. sorting.loading is true (sorting in progress)
   const showSpinner = props.loading || (props.sorting && props.sorting.loading);
 
-  return showSpinner ? (
-    <LoadingSpinner />
-  ) : (
-    <button
-      type="button"
-      className="btn btn-icon btn-text-secondary"
+  if (showSpinner) {
+    return <LoadingSpinner />;
+  }
+
+  return (
+    <IconButton
+      iconNode={<ArrowsClockwiseIcon data-cy="loading-spinner" weight="bold" />}
+      tooltip={translate('Refresh')}
       onClick={() => props.fetch(true)}
-    >
-      <ArrowsClockwiseIcon size={20} data-cy="loading-spinner" weight="bold" />
-    </button>
+      variant="text-secondary"
+    />
   );
 };

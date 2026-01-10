@@ -1,7 +1,7 @@
 import { PlusIcon, XIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback } from 'react';
-import { Button, Form, FormCheck } from 'react-bootstrap';
+import { Form, FormCheck } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { arrayPush, arrayRemoveAll, Field, FieldArray } from 'redux-form';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
@@ -20,6 +20,7 @@ import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPl
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { NODES_FIELD_ARRAY } from './constants';
 import { RANCHER_NODE_ROLES } from './RANCHER_NODE_ROLES';
@@ -146,15 +147,11 @@ const renderNodeRows = ({ fields, flavors }: any) => {
                           />
                         </td>
                         <td>
-                          <Button
+                          <ActionButton
                             variant="text-danger"
-                            className="btn-icon"
-                            onClick={() => fields.remove(index)}
-                          >
-                            <span className="svg-icon svg-icon-2">
-                              <XIcon weight="bold" />
-                            </span>
-                          </Button>
+                            action={() => fields.remove(index)}
+                            iconNode={<XIcon weight="bold" />}
+                          />
                         </td>
                       </tr>
                     </Fragment>
@@ -165,12 +162,13 @@ const renderNodeRows = ({ fields, flavors }: any) => {
           </div>
         </Form.Group>
       )}
-      <Button variant="tertiary" className="text-nowrap" onClick={addRow}>
-        <span className="svg-icon svg-icon-2">
-          <PlusIcon weight="bold" />
-        </span>
-        {translate('Add')}
-      </Button>
+      <ActionButton
+        variant="tertiary"
+        className="text-nowrap"
+        action={addRow}
+        iconNode={<PlusIcon weight="bold" />}
+        title={translate('Add')}
+      />
     </>
   );
 };

@@ -1,6 +1,6 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Alert, Button, Form, Stack } from 'react-bootstrap';
+import { Alert, Form, Stack } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
@@ -9,6 +9,7 @@ import { SelectField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { ChecklistQuestionForm } from '@waldur/marketplace-checklist/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface FieldValue {
   answer?;
@@ -76,16 +77,12 @@ const FieldsListGroup = ({
                 />
               </FormGroup>
 
-              <Button
+              <ActionButton
+                action={() => removeRow(i)}
+                iconNode={<TrashIcon weight="bold" />}
                 variant="text-danger"
-                className="btn-icon mt-1"
-                size="lg"
-                onClick={() => removeRow(i)}
-              >
-                <span className="svg-icon svg-icon-1">
-                  <TrashIcon weight="bold" />
-                </span>
-              </Button>
+                className="mt-1"
+              />
             </Stack>
             <FormGroup
               label={translate('Solution / Guidance')}
@@ -104,12 +101,13 @@ const FieldsListGroup = ({
         ))}
       </Form.Group>
       <div className="mt-3">
-        <Button variant="text-primary" onClick={addRow} disabled={addDisabled}>
-          <span className="svg-icon svg-icon-2">
-            <PlusIcon weight="bold" />
-          </span>
-          {translate('Add guidance')}
-        </Button>
+        <ActionButton
+          action={addRow}
+          title={translate('Add guidance')}
+          iconNode={<PlusIcon weight="bold" />}
+          variant="text-primary"
+          disabled={addDisabled}
+        />
       </div>
     </>
   );

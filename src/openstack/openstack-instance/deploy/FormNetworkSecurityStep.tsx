@@ -1,7 +1,7 @@
 import { PlusCircleIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { Fragment, useCallback, useEffect, useMemo, useState } from 'react';
-import { Button, Col, Form, FormLabel, Row } from 'react-bootstrap';
+import { Col, Form, FormLabel, Row } from 'react-bootstrap';
 import { components } from 'react-select';
 import { useToggle } from 'react-use';
 import { Field, FieldArray } from 'redux-form';
@@ -20,6 +20,7 @@ import {
   getIPsInRange,
   isIPInRange,
 } from '@waldur/openstack/openstack-network/utils';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -275,15 +276,11 @@ const renderNetworkRows = ({
                 </Field>
               </Col>
               <Col xs="auto" className="align-self-end">
-                <Button
+                <ActionButton
+                  action={() => fields.remove(index)}
+                  iconNode={<TrashIcon weight="bold" />}
                   variant="text-danger"
-                  className="btn-icon"
-                  onClick={() => fields.remove(index)}
-                >
-                  <span className="svg-icon svg-icon-1x">
-                    <TrashIcon weight="bold" />
-                  </span>
-                </Button>
+                />
               </Col>
               {hasCustomIp && (
                 <Col xs={12}>
@@ -300,16 +297,13 @@ const renderNetworkRows = ({
           </Fragment>
         ))}
       </div>
-      <Button
-        variant="text-primary"
+      <ActionButton
+        action={addRow}
         disabled={freeSubnets.length === 0}
-        onClick={addRow}
-      >
-        <span className="svg-icon svg-icon-2">
-          <PlusCircleIcon weight="bold" />
-        </span>{' '}
-        {translate('Add subnet')}
-      </Button>
+        title={translate('Add subnet')}
+        iconNode={<PlusCircleIcon weight="bold" />}
+        variant="text-primary"
+      />
     </div>
   );
 };

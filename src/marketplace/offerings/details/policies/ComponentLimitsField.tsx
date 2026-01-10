@@ -1,6 +1,6 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment } from 'react';
-import { Button, Form, FormLabel } from 'react-bootstrap';
+import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
@@ -8,6 +8,7 @@ import { required } from '@waldur/core/validators';
 import { NumberField, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface ComponentLimitsFieldProps extends FieldArrayRenderProps<
   any,
@@ -99,17 +100,13 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                           />
                         </td>
                         <td>
-                          <Button
+                          <ActionButton
+                            title={translate('Remove')}
                             variant="danger"
-                            className="btn-icon"
-                            onClick={() => removeRow(i)}
+                            action={() => removeRow(i)}
                             disabled={fields.length === 1}
-                            aria-label="Remove"
-                          >
-                            <span className="svg-icon svg-icon-2">
-                              <TrashIcon weight="bold" />
-                            </span>
-                          </Button>
+                            iconNode={<TrashIcon weight="bold" />}
+                          />
                         </td>
                       </tr>
                     </Fragment>
@@ -122,16 +119,12 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
       )}
       {fields.length < components.length && (
         <div>
-          <Button
+          <ActionButton
+            title={translate('Add')}
             variant="tertiary"
-            className="btn-icon"
-            onClick={addRow}
-            aria-label="Add"
-          >
-            <span className="svg-icon svg-icon-2">
-              <PlusCircleIcon weight="bold" />
-            </span>
-          </Button>
+            action={addRow}
+            iconNode={<PlusCircleIcon weight="bold" />}
+          />
         </div>
       )}
     </>

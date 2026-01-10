@@ -4,6 +4,7 @@ import { useCallback } from 'react';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { CreateModalButtonProps } from './types';
 
@@ -64,13 +65,15 @@ export function CreateModalButton<TResolve extends Record<string, unknown>>({
     openDialog,
   ]);
 
+  const ButtonComponent =
+    buttonSize === 'sm' ? CompactActionButton : ActionButton;
+
   return (
-    <ActionButton
+    <ButtonComponent
       action={handleClick}
       title={title}
       iconNode={iconNode}
       variant={variant}
-      size={buttonSize}
       disabled={disabled}
       tooltip={tooltip}
     />

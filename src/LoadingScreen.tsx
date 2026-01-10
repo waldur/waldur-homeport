@@ -1,10 +1,11 @@
 import { ArrowClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
-import { Button, Modal } from 'react-bootstrap';
+import { Modal } from 'react-bootstrap';
 
 import Illustration from '@waldur/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 
 import { lazyComponent } from './core/lazyComponent';
+import { SubmitButton } from './form';
 import { translate } from './i18n';
 import './LoadingScreen.css';
 import { ThemeProvider } from './theme/ThemeProvider';
@@ -43,19 +44,25 @@ export const LoadingScreen: FunctionComponent<{
                 )}
                 <div className="d-flex gap-4 mt-2">
                   {error.stack && (
-                    <Button variant="tertiary" onClick={() => setShow(true)}>
-                      <span className="svg-icon svg-icon-2">
-                        <EyeIcon weight="bold" />
-                      </span>
-                      {translate('Show error trace')}
-                    </Button>
+                    <SubmitButton
+                      submitting={false}
+                      type="button"
+                      variant="tertiary"
+                      onClick={() => setShow(true)}
+                      label={translate('Show error trace')}
+                      iconNode={<EyeIcon weight="bold" />}
+                      iconOnLeft
+                    />
                   )}
-                  <Button variant="success" onClick={() => location.reload()}>
-                    <span className="svg-icon svg-icon-2">
-                      <ArrowClockwiseIcon weight="bold" />
-                    </span>
-                    {translate('Reload')}
-                  </Button>
+                  <SubmitButton
+                    submitting={false}
+                    type="button"
+                    variant="success"
+                    onClick={() => location.reload()}
+                    label={translate('Reload')}
+                    iconNode={<ArrowClockwiseIcon weight="bold" />}
+                    iconOnLeft
+                  />
                 </div>
               </div>
             </>

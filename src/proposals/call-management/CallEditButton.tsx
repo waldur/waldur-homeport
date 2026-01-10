@@ -1,9 +1,8 @@
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 
 export const CallEditButton = ({ row }) => (
-  <EditButton
+  <CompactEditButton
     state="protected-call.main"
     params={{ call_uuid: row.uuid }}
-    size="sm"
   />
 );

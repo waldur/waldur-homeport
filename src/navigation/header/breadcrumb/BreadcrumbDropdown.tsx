@@ -6,13 +6,13 @@ import {
 } from '@tanstack/react-query';
 import { debounce, isEqual } from 'lodash-es';
 import { useCallback, useMemo, useRef, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useBoolean } from 'react-use';
 import { Field, getFormValues } from 'redux-form';
 
 import { InfiniteList } from '@waldur/core/async/InfiniteList';
 import { BaseAsyncListProps, RowData } from '@waldur/core/async/types';
+import { IconButton } from '@waldur/core/buttons/IconButton';
 import { isEmpty } from '@waldur/core/utils';
 import { FilterBox } from '@waldur/form/FilterBox';
 import { Form } from '@waldur/form/Form';
@@ -137,18 +137,18 @@ export const BreadcrumbDropdown = <Fetcher extends SdkFunction>({
         />
 
         {Boolean(filters) && (
-          <Button
-            variant="tertiary"
-            className="btn-icon btn-toggle-filters position-relative"
-            onClick={setFilterOpen}
-          >
-            <span className="svg-icon svg-icon-1">
-              <FunnelSimpleIcon weight="bold" />
-            </span>
+          <div className="position-relative">
+            <IconButton
+              iconNode={<FunnelSimpleIcon weight="bold" />}
+              tooltip={translate('Toggle filters')}
+              variant="tertiary"
+              className="btn-toggle-filters"
+              onClick={setFilterOpen}
+            />
             {!isEmpty(formValues) && (
               <HeaderButtonBullet size={8} blink={false} className="me-n2" />
             )}
-          </Button>
+          </div>
         )}
       </div>
       {filterOpen && (

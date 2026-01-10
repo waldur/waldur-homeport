@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { FieldArray, reduxForm } from 'redux-form';
 import {
@@ -8,6 +7,7 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
+import { IconButton } from '@waldur/core/buttons/IconButton';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -76,15 +76,11 @@ export const EditVarsDialog = connect<{}, {}, EditVarsDialogOwnProps>(
             <ModalDialog
               title={translate('Edit environment variables')}
               actions={
-                <Button
-                  variant="tertiary"
-                  className="btn-icon"
+                <IconButton
+                  iconNode={<PlusCircleIcon weight="bold" />}
+                  tooltip={translate('Add variable')}
                   onClick={() => nestedProps.fields.push({})}
-                >
-                  <span className="svg-icon svg-icon-2">
-                    <PlusCircleIcon weight="bold" />
-                  </span>
-                </Button>
+                />
               }
               footer={
                 <>

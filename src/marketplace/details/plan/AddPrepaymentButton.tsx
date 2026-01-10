@@ -1,7 +1,6 @@
 import { CalendarPlusIcon, XIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { change } from 'redux-form';
 
@@ -10,6 +9,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { orderProjectSelector } from '@waldur/marketplace/deploy/selectors';
 import { useModal } from '@waldur/modal/hooks';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { ORDER_FORM_ID } from '../constants';
 
@@ -102,15 +102,12 @@ export const AddPrepaymentButton = ({
   }
 
   return (
-    <Button
+    <CompactActionButton
       variant="text-primary"
-      className="btn-sm mb-1"
-      onClick={() => handleAddPrepayment(component)}
-    >
-      <span className="svg-icon svg-icon-2">
-        <CalendarPlusIcon weight="bold" />
-      </span>
-      {translate('Add prepayment')}
-    </Button>
+      className="mb-1"
+      action={() => handleAddPrepayment(component)}
+      iconNode={<CalendarPlusIcon weight="bold" />}
+      title={translate('Add prepayment')}
+    />
   );
 };

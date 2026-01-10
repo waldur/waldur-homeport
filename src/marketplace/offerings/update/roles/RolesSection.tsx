@@ -3,6 +3,7 @@ import { marketplaceOfferingUserRolesList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -10,7 +11,7 @@ import { useTable } from '@waldur/table/useTable';
 import { OfferingSectionProps } from '../types';
 
 import { AddRoleButton } from './AddRoleButton';
-import { DeleteRoleButton } from './DeleteRoleButton';
+import { DeleteRoleAction } from './DeleteRoleButton';
 
 export const RolesSection: FC<OfferingSectionProps> = (props) => {
   const tableProps = useTable({
@@ -41,7 +42,9 @@ export const RolesSection: FC<OfferingSectionProps> = (props) => {
       }
       hasQuery={false}
       rowActions={({ row }) => (
-        <DeleteRoleButton role={row} refetch={tableProps.fetch} />
+        <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <DeleteRoleAction row={row} refetch={tableProps.fetch} />
+        </ActionsDropdown>
       )}
       tableActions={<AddRoleButton {...props} refetch={tableProps.fetch} />}
     />

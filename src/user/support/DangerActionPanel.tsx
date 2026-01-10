@@ -1,11 +1,12 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Panel } from '@waldur/core/Panel';
 import { openModalDialog } from '@waldur/modal/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { DangerActionPanelProps } from './DangerActionPanelProps';
 
@@ -24,16 +25,13 @@ export const DangerActionPanel: FC<DangerActionPanelProps> = (props) => {
       title={props.panelTitle}
       cardBordered
       actions={
-        <Button
+        <ActionButton
           variant="danger"
-          onClick={() => dispatch(openModalDialog(DangerActionDialog, props))}
+          action={() => dispatch(openModalDialog(DangerActionDialog, props))}
           disabled={!confirm}
-        >
-          <span className="svg-icon svg-icon-2">
-            <TrashIcon weight="bold" />
-          </span>
-          {props.buttonTitle}
-        </Button>
+          iconNode={<TrashIcon weight="bold" />}
+          title={props.buttonTitle}
+        />
       }
     >
       {props.panelDescription}

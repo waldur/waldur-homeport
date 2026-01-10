@@ -2,8 +2,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { CustomerUser, Project, projectsAddUser } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
-import { FormContainer } from '@waldur/form';
+import { FormContainer, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';

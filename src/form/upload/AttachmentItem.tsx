@@ -1,9 +1,9 @@
 import { FileIcon, TrashIcon, WarningIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { CompactIconButton } from '@waldur/core/buttons/IconButton';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -115,16 +115,13 @@ export const AttachmentItem: FC<AttachmentItemProps> = ({
       )}
       {onDelete ? (
         <div>
-          <Button
-            variant="flush"
-            size="sm"
-            className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete btn-icon-right"
+          <CompactIconButton
+            iconNode={<TrashIcon weight="bold" />}
+            tooltip={translate('Delete attachment')}
             onClick={() => onDelete(attachment)}
-          >
-            <span className="svg-icon svg-icon-2">
-              <TrashIcon weight="bold" />
-            </span>
-          </Button>
+            variant="flush"
+            className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete btn-icon-right"
+          />
         </div>
       ) : null}
     </div>

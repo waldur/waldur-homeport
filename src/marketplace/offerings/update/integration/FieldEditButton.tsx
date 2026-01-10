@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { openModalDialog } from '@waldur/modal/actions';
 
 import { EditOfferingProps } from './types';
@@ -21,5 +21,5 @@ export const FieldEditButton = (props: EditOfferingProps) => {
       }),
     );
   };
-  return <EditButton onClick={callback} size="sm" disabled={props.disabled} />;
+  return <CompactEditButton onClick={callback} disabled={props.disabled} />;
 };

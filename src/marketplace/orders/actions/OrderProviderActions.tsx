@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -39,13 +39,21 @@ export const OrderProviderActions = ({
     });
   }, [order, user]);
 
-  return as === Button ? (
+  return as === ActionButton ? (
     <>
       {showApproveByProviderButton && (
-        <ApproveByProviderButton row={order} refetch={refetch} as={Button} />
+        <ApproveByProviderButton
+          row={order}
+          refetch={refetch}
+          as={ActionButton}
+        />
       )}
       {showRejectByProviderButton && (
-        <RejectByProviderButton row={order} refetch={refetch} as={Button} />
+        <RejectByProviderButton
+          row={order}
+          refetch={refetch}
+          as={ActionButton}
+        />
       )}
     </>
   ) : (

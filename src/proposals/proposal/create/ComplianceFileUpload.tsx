@@ -1,11 +1,11 @@
 import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { UploadContainer } from '@waldur/form/upload/UploadContainer';
 import { translate } from '@waldur/i18n';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import '@waldur/form/upload/AttachmentsList.scss';
 
@@ -290,16 +290,12 @@ export const ComplianceFileUpload: FC<ComplianceFileUploadProps> = ({
                   </p>
                 </div>
                 <div>
-                  <Button
+                  <CompactActionButton
+                    action={() => handleRemove(file.name)}
+                    iconNode={<TrashIcon weight="bold" />}
                     variant="flush"
-                    size="sm"
-                    className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete btn-icon-right"
-                    onClick={() => handleRemove(file.name)}
-                  >
-                    <span className="svg-icon svg-icon-2">
-                      <TrashIcon weight="bold" />
-                    </span>
-                  </Button>
+                    className="btn-icon-gray-400 btn-active-icon-danger attachment-item__delete"
+                  />
                 </div>
               </div>
             </li>

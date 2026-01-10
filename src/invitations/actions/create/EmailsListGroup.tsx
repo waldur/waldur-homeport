@@ -1,6 +1,6 @@
 import { PlusIcon, QuestionIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { ENV } from '@waldur/core/config';
@@ -12,6 +12,7 @@ import { InvitationsFeatures } from '@waldur/FeaturesEnums';
 import { EmailField } from '@waldur/form/EmailField';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { TablePagination } from '@waldur/table/TablePagination';
 
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
@@ -130,16 +131,12 @@ export const EmailsListGroup = ({
                           />
                         </td>
                         <td>
-                          <Button
+                          <ActionButton
                             variant="text-danger"
-                            className="btn-icon"
-                            onClick={() => removeRow(i)}
+                            action={() => removeRow(i)}
                             disabled={fields.length === 1}
-                          >
-                            <span className="svg-icon svg-icon-1x">
-                              <TrashIcon weight="bold" />
-                            </span>
-                          </Button>
+                            iconNode={<TrashIcon weight="bold" />}
+                          />
                         </td>
                       </tr>
                     </Fragment>
@@ -150,14 +147,17 @@ export const EmailsListGroup = ({
           </Form.Group>
         )}
         <div>
-          <Button variant="text-primary" disabled={warn} onClick={addRow}>
-            <div className="svg-icon svg-icon-2">
-              <PlusIcon weight="bold" />
-            </div>
-            {fields.length > 0
-              ? translate('Add another user')
-              : translate('Add user')}
-          </Button>
+          <ActionButton
+            variant="text-primary"
+            disabled={warn}
+            action={addRow}
+            title={
+              fields.length > 0
+                ? translate('Add another user')
+                : translate('Add user')
+            }
+            iconNode={<PlusIcon weight="bold" />}
+          />
           {warn && (
             <span className="text-danger ms-2">
               {translate('Too many empty fields')}

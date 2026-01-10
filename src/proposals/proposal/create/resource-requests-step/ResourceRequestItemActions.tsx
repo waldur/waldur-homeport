@@ -1,15 +1,16 @@
+import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { proposalProposalsResourcesDestroy } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { Proposal, ProposalResource } from '@waldur/proposals/types';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 
 const ResourceRequestFormDialog = lazyComponent(() =>
   import('./ResourceRequestFormDialog').then((module) => ({
@@ -23,11 +24,7 @@ interface ResourceRequestItemActionsProps {
   refetch;
 }
 
-export const ResourceRequestItemActions = ({
-  row,
-  proposal,
-  refetch,
-}: ResourceRequestItemActionsProps) => {
+const EditResourceRequestAction = ({ row, proposal, refetch }) => {
   const dispatch = useDispatch();
   const openEditResourceDialog = useCallback(
     () =>
@@ -39,7 +36,17 @@ export const ResourceRequestItemActions = ({
       ),
     [dispatch, row, proposal, refetch],
   );
+  return (
+    <ActionItem
+      action={openEditResourceDialog}
+      title={translate('Edit')}
+      iconNode={<PencilSimpleIcon weight="bold" />}
+    />
+  );
+};
 
+const RemoveResourceRequestAction = ({ row, proposal, refetch }) => {
+  const dispatch = useDispatch();
   const { mutate: remove, isPending: isRemoving } = useMutation({
     mutationFn: async () => {
       try {
@@ -75,14 +82,33 @@ export const ResourceRequestItemActions = ({
   });
 
   return (
-    <>
-      <EditButton onClick={openEditResourceDialog} size="sm" />
-      <RowActionButton
-        action={remove}
-        title={translate('Remove')}
-        pending={isRemoving}
-        size="sm"
+    <ActionItem
+      action={remove}
+      title={translate('Remove')}
+      iconNode={<TrashIcon weight="bold" />}
+      className="text-danger"
+      disabled={isRemoving}
+    />
+  );
+};
+
+export const ResourceRequestItemActions = ({
+  row,
+  proposal,
+  refetch,
+}: ResourceRequestItemActionsProps) => {
+  return (
+    <ActionsDropdown row={row} refetch={refetch} data={{ proposal }}>
+      <EditResourceRequestAction
+        row={row}
+        proposal={proposal}
+        refetch={refetch}
       />
-    </>
+      <RemoveResourceRequestAction
+        row={row}
+        proposal={proposal}
+        refetch={refetch}
+      />
+    </ActionsDropdown>
   );
 };

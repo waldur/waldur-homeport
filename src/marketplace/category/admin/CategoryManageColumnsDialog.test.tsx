@@ -108,20 +108,19 @@ describe('CategoryManageColumnsDialog', () => {
       data: [existingColumn],
     } as any);
 
+    // Mock confirmation dialog to resolve (accept)
+    vi.mocked(waitForConfirmation).mockResolvedValue(undefined);
+
     const { container } = renderDialog();
     await screen.findByText('Set columns in Test Category category');
 
     // Verify existing column is displayed
     expect(screen.getByDisplayValue('Existing Column')).toBeInTheDocument();
 
-    // Click delete button for the column
-    const deleteButton = container.querySelector(
-      'button[aria-description="Delete"]',
-    );
+    // Click delete button for the column (icon-only button with danger variant)
+    const deleteButton = container.querySelector('button.btn-danger');
     await userEvent.click(deleteButton);
 
-    // Mock confirmation dialog to return true
-    vi.mocked(waitForConfirmation).mockRejectedValue(true);
     // Verify API call
     expect(marketplaceCategoryColumnsDestroy).toHaveBeenCalledWith({
       path: { uuid: existingColumn.uuid },

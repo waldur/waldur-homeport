@@ -1,17 +1,19 @@
 import { debounce } from 'lodash-es';
 import { useCallback, useEffect, useState } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Form, reduxForm } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { FilterBox } from '@waldur/form/FilterBox';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { DataLoader } from '@waldur/navigation/sidebar/marketplace-popup/DataLoader';
 import { sidebarResourcesFilterSelector } from '@waldur/navigation/sidebar/resources-filter/utils';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ProjectFilter } from '../list/ProjectFilter';
 
@@ -98,22 +100,22 @@ export const ResourceImportDialog = connect<{}, {}, ImportDialogProps>(
               {step === 1 ? (
                 <CloseDialogButton className="flex-equal" />
               ) : (
-                <Button
+                <ActionButton
                   variant="tertiary"
                   className="flex-equal"
-                  onClick={() => setStep((current) => current - 1)}
-                >
-                  {translate('Back')}
-                </Button>
+                  action={() => setStep((current) => current - 1)}
+                  title={translate('Back')}
+                />
               )}
               {step === 1 || step === 2 ? (
-                <Button
+                <SubmitButton
                   className="flex-equal"
                   disabled={!nextEnabled}
+                  submitting={false}
+                  type="button"
                   onClick={() => setStep((current) => current + 1)}
-                >
-                  {translate('Next')}
-                </Button>
+                  label={translate('Next')}
+                />
               ) : (
                 <ImportButton
                   disabled={!submitEnabled}

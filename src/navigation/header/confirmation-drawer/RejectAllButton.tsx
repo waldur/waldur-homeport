@@ -1,11 +1,9 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersRejectByProvider } from 'waldur-js-client';
 import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import {
   TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
@@ -13,6 +11,7 @@ import {
   TABLE_PUBLIC_ORDERS,
 } from '@waldur/marketplace/orders/list/constants';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { fetchListStart, resetPagination } from '@waldur/table/actions';
 
 interface RejectAllButtonProps {
@@ -51,16 +50,12 @@ export const RejectAllButton: React.FC<RejectAllButtonProps> = (props) => {
     setLoading(false);
   }, [setLoading, dispatch, props.orders]);
   return (
-    <Button variant="danger" onClick={handler} disabled={loading}>
-      {loading ? (
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        <LoadingSpinnerIcon />
-      ) : (
-        <span className="svg-icon svg-icon-2">
-          <ProhibitIcon weight="bold" />
-        </span>
-      )}
-      {translate('Reject all')}
-    </Button>
+    <ActionButton
+      variant="danger"
+      action={handler}
+      pending={loading}
+      iconNode={<ProhibitIcon weight="bold" />}
+      title={translate('Reject all')}
+    />
   );
 };

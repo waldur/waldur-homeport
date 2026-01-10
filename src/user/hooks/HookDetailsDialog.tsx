@@ -10,11 +10,10 @@ import {
   hooksWebPartialUpdate,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { titleCase } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
-import { StringField } from '@waldur/form';
+import { StringField, SubmitButton } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';

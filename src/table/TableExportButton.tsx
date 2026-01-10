@@ -1,10 +1,10 @@
 import { ExportIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
+import { ToolbarButton } from './ToolbarButton';
 import { TableProps } from './types';
 import { useExportDialog } from './useExportDialog';
 
@@ -20,16 +20,11 @@ export const TableExportButton: FunctionComponent<
       disabled={props.rows?.length === 0}
     />
   ) : (
-    <Button
-      variant="tertiary"
-      size="lg"
+    <ToolbarButton
+      title={translate('Export')}
+      iconNode={<ExportIcon weight="bold" />}
       onClick={() => openExportDialog(props.table, 'clipboard', props)}
       disabled={props.rows?.length === 0}
-    >
-      <span className="svg-icon svg-icon-2">
-        <ExportIcon weight="bold" />
-      </span>
-      {translate('Export')}
-    </Button>
+    />
   );
 };

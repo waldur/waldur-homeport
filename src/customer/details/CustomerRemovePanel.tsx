@@ -1,12 +1,13 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showError } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer, isStaff } from '@waldur/workspace/selectors';
 
 const CustomerRemoveDialog = lazyComponent(() =>
@@ -61,12 +62,12 @@ export const CustomerRemovePanel: FunctionComponent = () => {
           <li>{translate('Removed organizations cannot be restored!')}</li>
         </ul>
         <div>
-          <Button onClick={removeCustomer} variant="danger">
-            <span className="svg-icon svg-icon-2">
-              <TrashIcon weight="bold" />
-            </span>{' '}
-            {translate('Remove organization')}
-          </Button>
+          <ActionButton
+            action={removeCustomer}
+            variant="danger"
+            title={translate('Remove organization')}
+            iconNode={<TrashIcon weight="bold" />}
+          />
         </div>
       </Card.Body>
     </Card>

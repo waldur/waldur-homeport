@@ -1,10 +1,10 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { FieldArrayFieldsProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { EthernetType } from '@waldur/openstack/types';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { Rule } from './types';
 
@@ -20,11 +20,10 @@ const DEFAULT_RULE = {
 };
 
 export const RuleAddButton: FC<RuleAddButtonProps> = ({ fields }) => (
-  <Button variant="primary" size="sm" onClick={() => fields.push(DEFAULT_RULE)}>
-    <span className="svg-icon svg-icon-2">
-      <PlusIcon weight="bold" />
-    </span>
-    &nbsp;
-    {translate('Add rule')}
-  </Button>
+  <CompactActionButton
+    action={() => fields.push(DEFAULT_RULE)}
+    title={translate('Add rule')}
+    iconNode={<PlusIcon weight="bold" />}
+    variant="primary"
+  />
 );

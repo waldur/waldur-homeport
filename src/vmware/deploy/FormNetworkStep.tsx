@@ -1,6 +1,5 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { vmwareNetworksList } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
@@ -9,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { createFetcher } from '@waldur/table/api';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
@@ -40,12 +40,13 @@ export const FormNetworkStep = (props: FormStepProps) => {
       actions={
         showExperimentalUiComponents ? (
           <div className="d-flex justify-content-end flex-grow-1">
-            <Button variant="tertiary" className="text-nowrap" size="sm">
-              <span className="svg-icon svg-icon-2">
-                <PlusIcon weight="bold" />
-              </span>
-              {translate('New interface')}
-            </Button>
+            <CompactActionButton
+              variant="tertiary"
+              className="text-nowrap"
+              iconNode={<PlusIcon weight="bold" />}
+              title={translate('New interface')}
+              action={() => {}}
+            />
           </div>
         ) : null
       }

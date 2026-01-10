@@ -10,6 +10,7 @@ import {
   useRef,
   useState,
 } from 'react';
+// eslint-disable-next-line waldur-custom/no-direct-bootstrap-button -- Navigation button with Metronic menu data attributes
 import { Button, Nav, TabContainer } from 'react-bootstrap';
 
 import { Link } from '@waldur/core/Link';

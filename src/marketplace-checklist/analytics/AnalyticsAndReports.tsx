@@ -2,7 +2,6 @@ import { ExportIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import {
-  Button,
   Card,
   ToggleButton,
   ToggleButtonGroup,
@@ -15,6 +14,7 @@ import { getAllPages } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ChecklistUsageAnalyticsTable } from './ChecklistUsageAnalyticsTable';
 import { ComplianceByCategoryTable } from './ComplianceByCategoryTable';
@@ -120,12 +120,12 @@ export const AnalyticsAndReports = () => {
               ))}
             </ToggleButtonGroup>
           )}
-          <Button variant="tertiary">
-            <span className="svg-icon svg-icon-2">
-              <ExportIcon weight="bold" />
-            </span>
-            {translate('Export report')}
-          </Button>
+          <ActionButton
+            action={() => {}}
+            title={translate('Export report')}
+            iconNode={<ExportIcon weight="bold" />}
+            variant="tertiary"
+          />
         </div>
       </Card.Header>
       <Card.Body className="p-0 overflow-hidden">
