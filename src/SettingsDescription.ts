@@ -334,6 +334,11 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+    ],
+  },
+  {
+    description: translate('Login page'),
+    items: [
       {
         key: 'LOGIN_PAGE_LAYOUT',
         description: translate('Login page layout style. Options: split-screen, centered-card, minimal, full-hero, gradient, stacked, right-split, glassmorphism, neumorphism, animated-gradient, video-background, bottom-sheet, tabbed, wizard, stats, news, carousel, logo-watermark, brand-pattern, duotone, diagonal, time-based, seasonal, weather.'),
@@ -801,6 +806,106 @@ export const SettingsDescription = [
         description: translate('Review duration in days.'),
         default: 7,
         type: 'integer',
+      },
+      {
+        key: 'REVIEWER_PROFILES_ENABLED',
+        description: translate('Enable reviewer profile management features.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'COI_DETECTION_ENABLED',
+        description: translate('Enable conflict of interest detection features.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'COI_DISCLOSURE_REQUIRED',
+        description: translate('Require reviewers to submit COI disclosure before reviewing proposals.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'AUTOMATED_MATCHING_ENABLED',
+        description: translate('Enable automated reviewer-proposal matching algorithms.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'COI_COAUTHORSHIP_LOOKBACK_YEARS',
+        description: translate('Default number of years to look back for co-authorship COI detection.'),
+        default: 5,
+        type: 'integer',
+      },
+      {
+        key: 'COI_COAUTHORSHIP_THRESHOLD_PAPERS',
+        description: translate('Default number of co-authored papers to trigger a COI.'),
+        default: 2,
+        type: 'integer',
+      },
+      {
+        key: 'COI_INSTITUTIONAL_LOOKBACK_YEARS',
+        description: translate('Default number of years after leaving institution before COI expires.'),
+        default: 3,
+        type: 'integer',
+      },
+    ],
+  },
+  {
+    description: translate('ORCID integration settings'),
+    items: [
+      {
+        key: 'ORCID_CLIENT_ID',
+        description: translate('ORCID OAuth2 Client ID for reviewer profile integration.'),
+        default: '',
+        type: 'string',
+      },
+      {
+        key: 'ORCID_CLIENT_SECRET',
+        description: translate('ORCID OAuth2 Client Secret.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'ORCID_REDIRECT_URI',
+        description: translate('ORCID OAuth2 Redirect URI. Typically {HOMEPORT_URL}/orcid-callback/'),
+        default: '',
+        type: 'url_field',
+      },
+      {
+        key: 'ORCID_API_URL',
+        description: translate('ORCID API Base URL. Use https://pub.sandbox.orcid.org/v3.0 for testing.'),
+        default: 'https://pub.orcid.org/v3.0',
+        type: 'url_field',
+      },
+      {
+        key: 'ORCID_AUTH_URL',
+        description: translate('ORCID OAuth Authorization URL. Use https://sandbox.orcid.org/oauth for testing.'),
+        default: 'https://orcid.org/oauth',
+        type: 'url_field',
+      },
+      {
+        key: 'ORCID_SANDBOX_MODE',
+        description: translate('Use ORCID sandbox environment for testing. When enabled, uses sandbox URLs automatically.'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
+  {
+    description: translate('Publication API settings'),
+    items: [
+      {
+        key: 'SEMANTIC_SCHOLAR_API_KEY',
+        description: translate('Semantic Scholar API Key for publication imports. Optional but recommended for higher rate limits.'),
+        default: '',
+        type: 'secret_field',
+      },
+      {
+        key: 'CROSSREF_MAILTO',
+        description: translate('Email address for CrossRef API polite pool. Provides higher rate limits.'),
+        default: '',
+        type: 'email_field',
       },
     ],
   },
