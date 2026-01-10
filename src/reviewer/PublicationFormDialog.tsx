@@ -1,0 +1,176 @@
+import { PencilSimple, PlusCircle } from '@phosphor-icons/react';
+import { Field, Form } from 'react-final-form';
+import { reviewerProfilesPublicationsCreate } from 'waldur-js-client';
+import { client } from 'waldur-js-client/client.gen';
+
+import { required } from '@waldur/core/validators';
+import {
+  FormGroup,
+  NumberField,
+  StringField,
+  SubmitButton,
+  TextField,
+} from '@waldur/form';
+import { translate } from '@waldur/i18n';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { useNotify } from '@waldur/store/hooks';
+
+interface PublicationFormDialogProps {
+  resolve: {
+    profile: { uuid: string };
+    refetch: () => void;
+    publication?: any;
+  };
+}
+
+export const PublicationFormDialog = ({
+  resolve,
+}: PublicationFormDialogProps) => {
+  const { showErrorResponse, showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
+  const isEdit = Boolean(resolve.publication);
+  const currentYear = new Date().getFullYear();
+
+  const initialValues = isEdit
+    ? {
+        title: resolve.publication.title,
+        doi: resolve.publication.doi,
+        venue: resolve.publication.venue,
+        publication_year: resolve.publication.publication_year,
+        abstract: resolve.publication.abstract,
+      }
+    : {
+        publication_year: currentYear,
+      };
+
+  const onSubmit = async (formValues) => {
+    try {
+      const body = {
+        title: formValues.title,
+        doi: formValues.doi || null,
+        publication_year: formValues.publication_year,
+        venue: formValues.venue,
+        abstract: formValues.abstract || undefined,
+      };
+
+      if (isEdit) {
+        await client.patch({
+          url: `/api/reviewer-profiles/${resolve.profile.uuid}/publications/${resolve.publication.uuid}/`,
+          body,
+          security: [{ name: 'Authorization', type: 'apiKey' }],
+        });
+        showSuccess(translate('Publication has been updated.'));
+      } else {
+        await reviewerProfilesPublicationsCreate({
+          path: { uuid: resolve.profile.uuid },
+          body,
+        });
+        showSuccess(translate('Publication has been added.'));
+      }
+
+      closeDialog();
+      await resolve.refetch();
+    } catch (error) {
+      showErrorResponse(
+        error,
+        isEdit
+          ? translate('Unable to update publication.')
+          : translate('Unable to add publication.'),
+      );
+    }
+  };
+
+  return (
+    <Form
+      initialValues={initialValues}
+      onSubmit={onSubmit}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              isEdit
+                ? translate('Edit publication')
+                : translate('Add publication')
+            }
+            subtitle={translate(
+              'Add publications for co-authorship conflict detection and expertise matching.',
+            )}
+            closeButton
+            iconNode={
+              isEdit ? (
+                <PencilSimple weight="bold" />
+              ) : (
+                <PlusCircle weight="bold" />
+              )
+            }
+            iconColor={isEdit ? 'warning' : 'success'}
+            footer={
+              <>
+                <CloseDialogButton className="min-w-125px" />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={invalid}
+                  label={isEdit ? translate('Update') : translate('Add')}
+                  className="btn btn-primary min-w-125px"
+                />
+              </>
+            }
+          >
+            <Field
+              name="title"
+              label={translate('Title')}
+              component={FormGroup as any}
+              validate={required}
+            >
+              <StringField />
+            </Field>
+
+            <Field
+              name="doi"
+              label={translate('DOI')}
+              description={translate(
+                'Digital Object Identifier (e.g., 10.1000/xyz123)',
+              )}
+              component={FormGroup as any}
+            >
+              <StringField />
+            </Field>
+
+            <Field
+              name="venue"
+              label={translate('Venue')}
+              description={translate('Journal or conference name')}
+              component={FormGroup as any}
+              validate={required}
+            >
+              <StringField />
+            </Field>
+
+            <Field
+              name="publication_year"
+              label={translate('Publication year')}
+              component={FormGroup as any}
+              validate={required}
+            >
+              <NumberField min={1900} max={currentYear + 1} />
+            </Field>
+
+            <Field
+              name="abstract"
+              label={translate('Abstract')}
+              description={translate(
+                'Optional abstract for text-based expertise matching',
+              )}
+              component={FormGroup as any}
+            >
+              <TextField rows={4} />
+            </Field>
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

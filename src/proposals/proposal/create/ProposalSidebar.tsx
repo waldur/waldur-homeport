@@ -1,6 +1,5 @@
+import { useMemo } from 'react';
 import { Button } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
-import { getFormSyncErrors } from 'redux-form';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
@@ -9,7 +8,6 @@ import { FormSteps } from '@waldur/form/FormSteps';
 import { SidebarProps } from '@waldur/form/SidebarProps';
 import { TosNotification } from '@waldur/form/TosNotification';
 import { translate } from '@waldur/i18n';
-import { PROPOSAL_UPDATE_SUBMISSION_FORM_ID } from '@waldur/proposals/constants';
 
 interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;
@@ -17,11 +15,15 @@ interface CompletionPageSidebarProps extends SidebarProps {
   editable?: boolean;
 }
 
-const formErrorsSelector = (state) =>
-  getFormSyncErrors(PROPOSAL_UPDATE_SUBMISSION_FORM_ID)(state) as any;
-
 export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
-  const errors = useSelector(formErrorsSelector);
+  // Check which required steps are incomplete based on completedSteps
+  const incompleteRequiredSteps = useMemo(() => {
+    return props.steps.filter(
+      (step, index) => step.required && !props.completedSteps?.[index],
+    );
+  }, [props.steps, props.completedSteps]);
+
+  const hasIncompleteSteps = incompleteRequiredSteps.length > 0;
 
   return (
     <>
@@ -30,7 +32,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
           key={`steps-${props.steps.length}`}
           steps={props.steps}
           completedSteps={props.completedSteps}
-          errors={errors}
+          errors={{}}
           showRequiredErrors
         />
       </Panel>
@@ -40,15 +42,14 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             submitting={props.submitting}
             label={translate('Submit')}
             variant="primary"
-            disabled={props.isSaving}
+            disabled={props.isSaving || hasIncompleteSteps}
             errors={
-              Object.keys(errors).length
+              hasIncompleteSteps
                 ? [
                     translate(
                       'Complete all required sections to proceed: {sections}',
                       {
-                        sections: props.steps
-                          .filter((step) => step.required)
+                        sections: incompleteRequiredSteps
                           .map((step) => step.label)
                           .join(', '),
                       },

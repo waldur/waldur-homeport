@@ -46,6 +46,9 @@ export const UnifiedSidebar = () => {
         'calls-for-proposals-dashboard',
         'proposals-all-proposals',
         'reviews-all-reviews',
+        'reviews-invitations',
+        'admin-proposals',
+        'admin-reviews',
         'public-call.details',
         'protected-call.main',
       ].includes(state.name)

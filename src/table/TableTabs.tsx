@@ -13,14 +13,18 @@ export const TableTabs = ({ tabs }: { tabs: TableTab[] }) => {
     router.stateService.go(tab.state ?? state.name, tab.params);
   };
 
-  const activeKey = useMemo(
-    () =>
-      tabs.find(
-        (t) =>
-          (!t.state || t.state === state.name) && isMatch(params, t.params),
-      )?.key,
-    [state, params, tabs],
-  );
+  const activeKey = useMemo(() => {
+    // Find tab that matches current state and params
+    const matchedTab = tabs.find(
+      (t) => (!t.state || t.state === state.name) && isMatch(params, t.params),
+    );
+    if (matchedTab) {
+      return matchedTab.key;
+    }
+    // Fall back to default tab if no match found
+    const defaultTab = tabs.find((t) => t.default);
+    return defaultTab?.key;
+  }, [state, params, tabs]);
 
   return (
     <Tab.Container unmountOnExit={true} activeKey={activeKey} onSelect={goTo}>

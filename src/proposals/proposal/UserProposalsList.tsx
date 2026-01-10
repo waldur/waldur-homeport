@@ -30,7 +30,9 @@ import { ProposalsTableFilter } from './ProposalsTableFilter';
 const filtersSelector = createSelector(
   getFormValues(PROPOSALS_FILTER_FORM_ID),
   (filters: any) => {
-    const result: ProposalProposalsListData['query'] = {};
+    const result: ProposalProposalsListData['query'] = {
+      my_proposals: true,
+    };
     if (filters?.state) {
       result.state = filters.state.map((option) => option.value);
     }

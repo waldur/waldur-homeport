@@ -178,7 +178,8 @@ export function TableToolbarActions() {
  * @internal
  */
 export function TableToolbarTitle() {
-  const { config, actions, display, showTitle, portal } = useTableContext();
+  const { config, actions, display, showTitle, portal, loading } =
+    useTableContext();
 
   if (!showTitle) {
     return null;
@@ -202,7 +203,7 @@ export function TableToolbarTitle() {
           </div>
         )}
         {!config.hideRefresh && !portal?.refresh && (
-          <TableRefreshButton fetch={actions.fetch} loading={false} />
+          <TableRefreshButton fetch={actions.fetch} loading={loading} />
         )}
       </Card.Title>
     </Col>

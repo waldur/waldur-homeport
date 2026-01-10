@@ -56,6 +56,14 @@ export const CallTabs = ({ call }: { call: Call }) => {
         )}
         <Nav.Item>
           <Nav.Link
+            eventKey="protected-call.manage"
+            className="text-center min-w-60px"
+          >
+            {translate('Manage')}
+          </Nav.Link>
+        </Nav.Item>
+        <Nav.Item>
+          <Nav.Link
             eventKey="protected-call.main"
             className="text-center min-w-60px"
           >

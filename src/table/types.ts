@@ -158,6 +158,8 @@ export interface TableTab {
   state?: string;
   params?: Record<string, any>;
   component?: ComponentType<any>;
+  /** Mark this tab as default when no other tab matches */
+  default?: boolean;
 }
 
 interface TablePortal {

@@ -1,4 +1,4 @@
-import { FC } from 'react';
+import { FC, ReactNode } from 'react';
 
 import { TeamTableComponent } from '@waldur/customer/team/TeamTableComponent';
 import { translate } from '@waldur/i18n';
@@ -16,6 +16,7 @@ interface UsersListProps {
   cardBordered?: boolean;
   hasActionBar?: boolean;
   fullWidth?: boolean;
+  expandableRow?: FC<{ row: GenericPermission }> | (({ row }) => ReactNode);
 }
 
 export const UsersList: FC<UsersListProps> = ({
@@ -27,6 +28,7 @@ export const UsersList: FC<UsersListProps> = ({
   cardBordered,
   hasActionBar,
   fullWidth,
+  expandableRow,
 }) => {
   return (
     <TeamTableComponent<GenericPermission>
@@ -53,6 +55,7 @@ export const UsersList: FC<UsersListProps> = ({
             )
       }
       footer={tableFooter}
+      expandableRow={expandableRow}
     />
   );
 };

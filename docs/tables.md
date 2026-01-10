@@ -501,3 +501,471 @@ export const GridList = () => {
   );
 };
 ```
+
+## Table tabs
+
+Table component supports tabs for switching between different views or data sets within the same table context. Tabs can navigate to different routes or update URL parameters.
+
+### Basic tabs
+
+Define tabs using an array of `TableTab` objects:
+
+```ts
+import { TableTab } from '@waldur/table/types';
+
+const tabs: TableTab[] = [
+  {
+    key: 'active',
+    title: translate('Active'),
+    params: { status: 'active' },
+  },
+  {
+    key: 'archived',
+    title: translate('Archived'),
+    params: { status: 'archived' },
+  },
+];
+
+<Table {...tableProps} tabs={tabs} />
+```
+
+### Tab properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `key` | `string \| number` | Unique identifier for the tab |
+| `title` | `ReactNode` | Tab label (can include badges, icons) |
+| `params` | `Record<string, any>` | URL parameters to set when tab is selected |
+| `state` | `string` | Optional UI-router state to navigate to |
+| `default` | `boolean` | Mark as default tab when no other tab matches |
+
+### Default tab
+
+When navigating to a page without specific tab parameters, no tab will be highlighted by default. Use the `default: true` property to specify which tab should be selected when no URL parameters match:
+
+```ts
+export const useReviewerPoolTabs = (): TableTab[] => {
+  return useMemo(
+    () => [
+      {
+        key: 'pool',
+        title: translate('Pool'),
+        params: { tab: 'reviewer-pool', pool_tab: 'pool' },
+        default: true, // Selected when no pool_tab parameter
+      },
+      {
+        key: 'discovery',
+        title: translate('Discovery'),
+        params: { tab: 'reviewer-pool', pool_tab: 'discovery' },
+      },
+      {
+        key: 'assignments',
+        title: translate('Assignments'),
+        params: { tab: 'reviewer-pool', pool_tab: 'assignments' },
+      },
+    ],
+    [],
+  );
+};
+```
+
+### Preserving parent tab context
+
+When using subtabs within a parent tab context, you must include all parent tab parameters in each subtab's `params`. The `TableTabs` component replaces all URL parameters when navigating, so omitting parent params will cause navigation to lose context.
+
+**Wrong** - loses parent tab context:
+
+```ts
+// Parent tab is selected via ?tab=reviewer-pool
+// These subtabs will navigate to ?pool_tab=xxx, losing tab=reviewer-pool
+const tabs: TableTab[] = [
+  {
+    key: 'pool',
+    title: translate('Pool'),
+    params: { pool_tab: 'pool' }, // Missing tab: 'reviewer-pool'!
+  },
+  {
+    key: 'assignments',
+    title: translate('Assignments'),
+    params: { pool_tab: 'assignments' }, // Will redirect to wrong parent tab
+  },
+];
+```
+
+**Correct** - preserves parent tab context:
+
+```ts
+// Include the parent tab parameter in all subtabs
+const tabs: TableTab[] = [
+  {
+    key: 'pool',
+    title: translate('Pool'),
+    params: { tab: 'reviewer-pool', pool_tab: 'pool' },
+    default: true,
+  },
+  {
+    key: 'assignments',
+    title: translate('Assignments'),
+    params: { tab: 'reviewer-pool', pool_tab: 'assignments' },
+  },
+];
+```
+
+### Tabs with route navigation
+
+Tabs can navigate to different routes using the `state` property:
+
+```ts
+const tabs: TableTab[] = [
+  {
+    key: 'reviews',
+    title: translate('Reviews'),
+    state: 'reviews-all-reviews',
+  },
+  {
+    key: 'invitations',
+    title: translate('Invitations'),
+    state: 'reviews-invitations',
+  },
+];
+```
+
+### Tabs with counts
+
+Use custom components in `title` to show counts or badges:
+
+```ts
+const TabWithCount = ({ label, count }) => (
+  <span className="d-flex align-items-center gap-2">
+    {label}
+    {count > 0 && (
+      <Badge variant="primary" size="sm" pill>
+        {count}
+      </Badge>
+    )}
+  </span>
+);
+
+const tabs = [
+  {
+    key: 'pending',
+    title: <TabWithCount label={translate('Pending')} count={pendingCount} />,
+    params: { status: 'pending' },
+  },
+];
+```
+
+## Expandable rows
+
+Table supports expandable rows to show additional details for each row. When enabled, rows can be expanded/collapsed by clicking on them.
+
+```ts
+const ExpandableRowContent = ({ row }) => (
+  <div className="p-4">
+    <h5>{row.name}</h5>
+    <p>{row.description}</p>
+    <dl>
+      <dt>Created</dt>
+      <dd>{formatDate(row.created)}</dd>
+      <dt>Status</dt>
+      <dd>{row.status}</dd>
+    </dl>
+  </div>
+);
+
+<Table
+  {...tableProps}
+  columns={columns}
+  expandableRow={ExpandableRowContent}
+/>
+```
+
+The expandable row component receives the full `row` object as a prop.
+
+## Row actions
+
+Row actions add action buttons to each row. Use `rowActions` prop with a component that receives the row data.
+
+### Dropdown menu (recommended)
+
+For a clean UI, use `ActionsDropdownComponent` with `ActionItem` to create a 3-dots dropdown menu:
+
+```ts
+import { FC, useCallback } from 'react';
+import { PencilSimple, Trash, EnvelopeSimple } from '@phosphor-icons/react';
+import { useMutation } from '@tanstack/react-query';
+
+import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { useNotify } from '@waldur/store/hooks';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+
+interface RowActionsProps {
+  row: MyRowType;
+  refetch: () => void;
+}
+
+export const RowActions: FC<RowActionsProps> = ({ row, refetch }) => {
+  const dispatch = useDispatch();
+  const { showSuccess, showErrorResponse } = useNotify();
+
+  const deleteMutation = useMutation({
+    mutationFn: () => deleteItem({ path: { uuid: row.uuid } }),
+    onSuccess: () => {
+      showSuccess(translate('Item deleted successfully.'));
+      refetch();
+    },
+    onError: (error) => {
+      showErrorResponse(error, translate('Failed to delete item.'));
+    },
+  });
+
+  const handleDelete = useCallback(async () => {
+    try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Delete item'),
+        translate('Are you sure you want to delete {name}?', { name: row.name }),
+      );
+      deleteMutation.mutate();
+    } catch {
+      // User cancelled confirmation
+    }
+  }, [dispatch, row, deleteMutation]);
+
+  // Conditionally show actions based on row state
+  const canEdit = row.status === 'draft';
+  const canDelete = row.status !== 'completed';
+
+  // Return null if no actions available
+  if (!canEdit && !canDelete) {
+    return null;
+  }
+
+  return (
+    <ActionsDropdownComponent>
+      {canEdit && (
+        <ActionItem
+          title={translate('Edit')}
+          action={() => handleEdit(row)}
+          iconNode={<PencilSimple weight="bold" />}
+        />
+      )}
+      {canDelete && (
+        <ActionItem
+          title={translate('Delete')}
+          action={handleDelete}
+          iconNode={<Trash weight="bold" />}
+          className="text-danger"
+          iconColor="danger"
+          disabled={deleteMutation.isPending}
+        />
+      )}
+    </ActionsDropdownComponent>
+  );
+};
+
+// Usage in table
+<Table
+  {...tableProps}
+  columns={columns}
+  rowActions={({ row }) => <RowActions row={row} refetch={tableProps.fetch} />}
+/>
+```
+
+### ActionItem properties
+
+| Property | Type | Description |
+|----------|------|-------------|
+| `title` | `string` | Action label text |
+| `action` | `() => void` | Click handler |
+| `iconNode` | `ReactNode` | Icon component (use Phosphor icons with `weight="bold"`) |
+| `disabled` | `boolean` | Disable the action |
+| `className` | `string` | Additional CSS classes (e.g., `text-danger`) |
+| `iconColor` | `string` | Icon color variant (e.g., `danger`, `success`) |
+
+### Inline buttons
+
+For simple cases with few actions, use inline buttons:
+
+```ts
+const RowActions = ({ row }) => (
+  <div className="d-flex gap-2">
+    <ActionButton
+      action={() => handleEdit(row)}
+      title={translate('Edit')}
+      iconNode={<PencilIcon />}
+    />
+    <ActionButton
+      action={() => handleDelete(row)}
+      title={translate('Delete')}
+      iconNode={<TrashIcon />}
+      variant="danger"
+    />
+  </div>
+);
+
+<Table {...tableProps} columns={columns} rowActions={RowActions} />
+```
+
+## Table actions
+
+Table actions appear in the table header toolbar. Use for actions that affect the whole table or for creating new items:
+
+```ts
+<Table
+  {...tableProps}
+  columns={columns}
+  tableActions={
+    <>
+      <button className="btn btn-primary btn-sm" onClick={handleCreate}>
+        <PlusIcon className="me-1" />
+        {translate('Create new')}
+      </button>
+      <button className="btn btn-outline-secondary btn-sm" onClick={handleExport}>
+        <DownloadIcon className="me-1" />
+        {translate('Export')}
+      </button>
+    </>
+  }
+/>
+```
+
+## Complex table example
+
+Here's an example of a complex table combining multiple features (based on the Reviewer Pool implementation):
+
+```ts
+import { useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
+
+// Filter selector - transforms form values to API filter params
+const filtersSelector = createSelector(
+  getFormValues('ReviewerPoolFilter'),
+  (filters: any) => {
+    const result: Record<string, any> = {};
+    if (filters?.status) {
+      result.invitation_status = filters.status.value;
+    }
+    return result;
+  },
+);
+
+// Tabs hook - defines sub-navigation within the table
+// Note: Include parent tab param (tab: 'reviewer-pool') to preserve context
+const usePoolTabs = (): TableTab[] => {
+  return useMemo(
+    () => [
+      {
+        key: 'pool',
+        title: translate('Pool'),
+        params: { tab: 'reviewer-pool', pool_tab: 'pool' },
+        default: true,
+      },
+      {
+        key: 'assignments',
+        title: translate('Assignments'),
+        params: { tab: 'reviewer-pool', pool_tab: 'assignments' },
+      },
+    ],
+    [],
+  );
+};
+
+// Expandable row component
+const ExpandableRow = ({ row }) => (
+  <div className="p-4">
+    <h6>{row.reviewer_name}</h6>
+    <p>Email: {row.reviewer_email}</p>
+    <p>Expertise: {row.expertise_areas?.join(', ')}</p>
+  </div>
+);
+
+// Main component
+export const ReviewerPoolSection = ({ call }) => {
+  const formFilters = useSelector(filtersSelector);
+  const tabs = usePoolTabs();
+
+  // Memoize filter to prevent infinite re-renders
+  const filter = useMemo(
+    () => ({
+      call_uuid: call.uuid,
+      ...formFilters,
+    }),
+    [call.uuid, formFilters],
+  );
+
+  const tableProps = useTable({
+    table: 'ReviewerPool',
+    fetchData: createFetcher(reviewerPoolList),
+    filter,
+  });
+
+  const columns = useMemo(
+    () => [
+      {
+        id: 'reviewer',
+        title: translate('Reviewer'),
+        render: ({ row }) => (
+          <div>
+            <div className="fw-bold">{row.reviewer_name}</div>
+            <small className="text-muted">{row.reviewer_email}</small>
+          </div>
+        ),
+        keys: ['reviewer_name', 'reviewer_email'],
+      },
+      {
+        id: 'status',
+        title: translate('Status'),
+        render: ({ row }) => (
+          <Badge variant={row.status === 'accepted' ? 'success' : 'warning'}>
+            {row.status_display}
+          </Badge>
+        ),
+        keys: ['status', 'status_display'],
+      },
+      {
+        id: 'assignments',
+        title: translate('Assignments'),
+        render: ({ row }) => `${row.current} / ${row.max}`,
+        keys: ['current_assignments', 'max_assignments'],
+        optional: true,
+      },
+    ],
+    [],
+  );
+
+  return (
+    <Table
+      {...tableProps}
+      columns={columns}
+      title={translate('Reviewer pool')}
+      tabs={tabs}
+      verboseName={translate('reviewers')}
+      hasQuery
+      hasOptionalColumns
+      showPageSizeSelector
+      filters={<ReviewerPoolFilter />}
+      expandableRow={ExpandableRow}
+      tableActions={
+        <button className="btn btn-primary btn-sm" onClick={handleInvite}>
+          {translate('Invite reviewer')}
+        </button>
+      }
+    />
+  );
+};
+```
+
+### Key patterns in complex tables
+
+1. **Memoize filters** - Always wrap filter objects in `useMemo` to prevent infinite re-renders when using selectors
+2. **Memoize columns** - Define columns in `useMemo` for performance
+3. **Use tabs for sub-navigation** - Tabs update URL params, allowing deep linking
+4. **Mark default tab** - Use `default: true` to highlight the correct tab on initial load
+5. **Preserve parent tab context** - When using nested subtabs, include parent tab params (e.g., `{ tab: 'reviewer-pool', pool_tab: 'pool' }`) to prevent navigation from losing context
+6. **Expandable rows for details** - Show additional information without navigating away
+7. **Optional columns** - Let users customize their view with `optional: true` and `hasOptionalColumns`

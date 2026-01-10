@@ -5,8 +5,6 @@ import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
@@ -21,9 +19,11 @@ import { Call } from '../types';
 import { useCallBreadcrumbItems } from '../utils';
 
 import { CallUpdateHero } from './CallUpdateHero';
+import { COISettingsSection } from './coi-settings/COISettingsSection';
 import { CallConfiguration } from './configuration/CallConfiguration';
 import { CallDocumentsSection } from './documents/CallDocumentsSection';
 import { CallGeneralSection } from './general/CallGeneralSection';
+import { MatchingSection } from './matching/MatchingSection';
 import { CallOfferingsSection } from './offerings/CallOfferingsSection';
 import { CallRoleMappingsList } from './role-mapping/CallRoleMappingsList';
 import { CallRoundsList } from './rounds/CallRoundsList';
@@ -40,25 +40,13 @@ const Body = ({ call, refetch, loading }) => {
     () =>
       [
         {
-          key: 'rounds',
-          title: (
-            <>
-              <ValidationIcon value={call.rounds.length > 0} />
-              {translate('Rounds')}
-            </>
-          ),
-
-          component: CallRoundsList,
-        },
-        {
           key: 'general',
           title: (
             <>
-              <ValidationIcon value={call.description} />
-              <span>{translate('General')}</span>
+              {!call.description && <ValidationIcon value={false} />}
+              {translate('General')}
             </>
           ),
-
           component: CallGeneralSection,
         },
         {
@@ -67,48 +55,19 @@ const Body = ({ call, refetch, loading }) => {
           component: CallConfiguration,
         },
         {
+          key: 'rounds',
+          title: (
+            <>
+              {!call.rounds.length && <ValidationIcon value={false} />}
+              {translate('Rounds')}
+            </>
+          ),
+          component: CallRoundsList,
+        },
+        {
           key: 'documents',
           title: translate('Documents'),
           component: CallDocumentsSection,
-        },
-        {
-          key: 'team',
-          title: translate('Team'),
-          defaultKey: !isFeatureVisible(MarketplaceFeatures.call_only)
-            ? 'reviewers'
-            : 'managers',
-          children: [
-            !isFeatureVisible(MarketplaceFeatures.call_only) && {
-              key: 'reviewers',
-              title: translate('Reviewers'),
-              component: ({ call }) => (
-                <TeamSection
-                  scope={call}
-                  roles={[RoleEnum.CALL_REVIEWER]}
-                  roleTypes={['call', 'call_organizer']}
-                  title={translate('Reviewers')}
-                  hasTeamTabs
-                />
-              ),
-
-              visible: false,
-            },
-            {
-              key: 'managers',
-              title: translate('Managers'),
-              component: ({ call }) => (
-                <TeamSection
-                  scope={call}
-                  roles={[RoleEnum.CALL_MANAGER]}
-                  roleTypes={['call', 'call_organizer']}
-                  title={translate('Managers')}
-                  hasTeamTabs
-                />
-              ),
-
-              visible: false,
-            },
-          ].filter(Boolean),
         },
         {
           key: 'offerings',
@@ -119,6 +78,28 @@ const Body = ({ call, refetch, loading }) => {
           key: 'role_mapping',
           title: translate('Role mapping'),
           component: CallRoleMappingsList,
+        },
+        {
+          key: 'coi-settings',
+          title: translate('COI settings'),
+          component: COISettingsSection,
+        },
+        {
+          key: 'matching',
+          title: translate('Matching settings'),
+          component: MatchingSection,
+        },
+        {
+          key: 'team',
+          title: translate('Team'),
+          component: ({ call }) => (
+            <TeamSection
+              scope={call}
+              roles={[RoleEnum.CALL_MANAGER]}
+              roleTypes={['call', 'call_organizer']}
+              title={translate('Managers')}
+            />
+          ),
         },
       ].filter(Boolean) as PageBarTab[],
     [call],

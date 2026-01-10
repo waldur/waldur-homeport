@@ -29,8 +29,9 @@ export const getRoundReviewStrategyOptions = () =>
   ] as { value: RoundReviewStrategy; label: string }[];
 
 export const formatRoundReviewStrategy = (value: RoundReviewStrategy) =>
-  getRoundReviewStrategyOptions().find((option) => option.value === value)
-    ?.label || value;
+  getRoundReviewStrategyOptions().find(
+    (option) => option.value === value?.toLowerCase(),
+  )?.label || value;
 
 export const getRoundAllocationStrategyOptions = () =>
   [
@@ -42,8 +43,9 @@ export const getRoundAllocationStrategyOptions = () =>
   ] as { value: RoundAllocationStrategy; label: string }[];
 
 export const formatRoundAllocationStrategy = (value: RoundAllocationStrategy) =>
-  getRoundAllocationStrategyOptions().find((option) => option.value === value)
-    ?.label || value;
+  getRoundAllocationStrategyOptions().find(
+    (option) => option.value === value?.toLowerCase(),
+  )?.label || value;
 
 export const getRoundAllocationTimeOptions = () =>
   [
@@ -52,8 +54,9 @@ export const getRoundAllocationTimeOptions = () =>
   ] as { value: RoundAllocationTime; label: string }[];
 
 export const formatRoundAllocationTime = (value: RoundAllocationTime) =>
-  getRoundAllocationTimeOptions().find((option) => option.value === value)
-    ?.label || value;
+  getRoundAllocationTimeOptions().find(
+    (option) => option.value === value?.toLowerCase(),
+  )?.label || value;
 
 export const getCallStateActions = () =>
   [
@@ -124,7 +127,6 @@ export const formatProposalState = (value: ProposalState) =>
 
 export const getReviewStateOptions = () =>
   [
-    { value: 'created', label: translate('Created') },
     { value: 'in_review', label: translate('In review') },
     { value: 'submitted', label: translate('Submitted') },
     { value: 'rejected', label: translate('Rejected') },
@@ -135,16 +137,14 @@ export const formatReviewState = (value: ProposalReviewStateEnum) =>
   value;
 
 export const getReviewStateBadgeVariant = (value: ProposalReviewStateEnum) =>
-  value === 'created'
-    ? 'default'
-    : value === 'in_review' || value === 'submitted'
-      ? 'warning'
-      : value === 'rejected'
-        ? 'danger'
-        : 'secondary';
+  value === 'in_review' || value === 'submitted'
+    ? 'warning'
+    : value === 'rejected'
+      ? 'danger'
+      : 'secondary';
 
 export const isReviewInFinalState = (state: ProposalReviewStateEnum) =>
-  !['in_review', 'created'].includes(state);
+  !['in_review'].includes(state);
 
 export const getRoundStatus = (round: NestedRound) => {
   if (!round) {
@@ -224,6 +224,31 @@ export const useCallBreadcrumbItems = (
         to: 'call-management.call-list',
         params: call ? { uuid: call.customer_uuid } : undefined,
         ellipsis: 'xl',
+      },
+      {
+        key: 'call',
+        text: call?.name || '...',
+        truncate: true,
+        active: true,
+      },
+    ],
+    [call],
+  );
+};
+
+/**
+ * Simplified breadcrumb for public call pages.
+ * Uses public routes that don't require organization access.
+ */
+export const usePublicCallBreadcrumbItems = (
+  call: Pick<Call, 'name'>,
+): IBreadcrumbItem[] => {
+  return useMemo(
+    () => [
+      {
+        key: 'calls-list',
+        text: translate('Calls for proposals'),
+        to: 'public-calls.list-public',
       },
       {
         key: 'call',

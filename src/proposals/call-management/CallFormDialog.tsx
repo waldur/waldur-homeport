@@ -213,7 +213,7 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
                   'Select compliance checklist (optional)',
                 )}
                 help_text={translate(
-                  'Optional checklist that proposal submitters must complete for compliance evaluation. Can be changed only before any proposals are submitted.',
+                  'Optional checklist that proposal applicants must complete for compliance evaluation. Can be changed only before any proposals are submitted.',
                 )}
               />
             )}

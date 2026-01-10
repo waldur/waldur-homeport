@@ -1322,7 +1322,14 @@
   resolved "https://registry.yarnpkg.com/@humanwhocodes/retry/-/retry-0.4.3.tgz#c2b9d2e374ee62c586d3adbea87199b1d7a7a6ba"
   integrity sha512-bV0Tgo9K4hfPCek+aMAn81RppFKv2ySDQeMoSZuvTASywNTnVJCArCZE2FWqpvIatKu7VMRLWlR1EazvVhDyhQ==
 
-"@iconify/types@^2.0.0":
+"@iconify-json/ph@^1.2.2":
+  version "1.2.2"
+  resolved "https://registry.yarnpkg.com/@iconify-json/ph/-/ph-1.2.2.tgz#eac734e80f4639df6ade990690a825540b4259c4"
+  integrity sha512-PgkEZNtqa8hBGjHXQa4pMwZa93hmfu8FUSjs/nv4oUU6yLsgv+gh9nu28Kqi8Fz9CCVu4hj1MZs9/60J57IzFw==
+  dependencies:
+    "@iconify/types" "*"
+
+"@iconify/types@*", "@iconify/types@^2.0.0":
   version "2.0.0"
   resolved "https://registry.yarnpkg.com/@iconify/types/-/types-2.0.0.tgz#ab0e9ea681d6c8a1214f30cd741fe3a20cc57f57"
   integrity sha512-+wluvCrRhXrhyOmRDJ3q8mux9JkKy5SJ/v8ol2tu4FVjyYvtEzkc/3pK15ET6RKg4b4w4BmTk1+gsCUhf21Ykg==
@@ -10314,11 +10321,6 @@ react-lifecycles-compat@^3.0.4:
   resolved "https://registry.yarnpkg.com/react-lifecycles-compat/-/react-lifecycles-compat-3.0.4.tgz#4f1a273afdfc8f3488a8c516bfda78f872352362"
   integrity sha512-fBASbA6LnOU9dOU2eW7aQ8xmYBSXUIWr+UmF9b1efZBazGNO+rcXT/icdKnYm2pTwcRylVUYwW7H1PHfLekVzA==
 
-react-rating-stars-component@^2.2.0:
-  version "2.2.0"
-  resolved "https://registry.yarnpkg.com/react-rating-stars-component/-/react-rating-stars-component-2.2.0.tgz#e947c6a1f59278e6fea1098453f43cb15d077c14"
-  integrity sha512-A3lgLxumfFQQicKQmxacZ91fq/zRaVWlCPnVodJmJV6obvod4/yCotetN9WuyBiUfnKsEFDBo/8B85ocwmL7ng==
-
 react-redux@^8.0.0:
   version "8.1.3"
   resolved "https://registry.yarnpkg.com/react-redux/-/react-redux-8.1.3.tgz#4fdc0462d0acb59af29a13c27ffef6f49ab4df46"
@@ -12408,10 +12410,10 @@ wait-on@9.0.3:
     minimist "^1.2.8"
     rxjs "^7.8.2"
 
-waldur-js-client@^7.9.6-dev.22:
-  version "7.9.6-dev.22"
-  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-7.9.6-dev.22.tgz#8910d13a7291ac53717bbe5f5c9b074df984f880"
-  integrity sha512-OMJJPFvpO+XGnJDoXqWx033cAOXhowQSRwjoHLfqUPmcOHuMQe8HRDKlzib890EjeUlYHf4DsZefCXfwM0Pdtg==
+waldur-js-client@^7.9.7-dev.1:
+  version "7.9.7-dev.1"
+  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-7.9.7-dev.1.tgz#d2550b69fbcd23ddd30d1a7ad75c0b1201990266"
+  integrity sha512-1veorvxKm+wpqFGWyQCZzdg6tixMbMgeozfci+DkgVO10SdMJKnNyv+3ci3tzepY6zDWRoft7DKcZDdp9CESzA==
 
 walk-up-path@^4.0.0:
   version "4.0.0"

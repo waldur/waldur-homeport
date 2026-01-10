@@ -1,19 +1,15 @@
-import { StarIcon } from '@phosphor-icons/react';
 import React, { useEffect } from 'react';
-import ReactStars from 'react-rating-stars-component';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { ProposalReview, ReviewSubmitRequest } from 'waldur-js-client';
 
-import {
-  RATING_STAR_ACTIVE_COLOR,
-  RATING_STAR_INACTIVE_COLOR,
-} from '@waldur/core/constants';
 import { Panel } from '@waldur/core/Panel';
 import { FormGroup, TextField } from '@waldur/form';
 import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { REVIEW_SUMMARY_FORM_ID } from '@waldur/proposals/constants';
 import { isReviewInFinalState } from '@waldur/proposals/utils';
+
+import { RateStars } from '../RateStars';
 
 type FormSummaryStepProps = VStepperFormStepProps &
   InjectedFormProps<ReviewSubmitRequest, VStepperFormStepProps>;
@@ -47,16 +43,11 @@ const FormSummaryStep: React.FC<FormSummaryStepProps> = (props) => {
               <label htmlFor={ratingId}>{translate('Rate')}</label>
               <div className="d-flex align-items-center gap-4">
                 <div id={ratingId}>
-                  <ReactStars
-                    key={`stars-${starValue}`}
+                  <RateStars
                     count={5}
                     size={20}
                     edit={!disabled}
                     isHalf={false}
-                    emptyIcon={<StarIcon weight="fill" />}
-                    filledIcon={<StarIcon weight="fill" />}
-                    color={RATING_STAR_INACTIVE_COLOR}
-                    activeColor={RATING_STAR_ACTIVE_COLOR}
                     value={starValue}
                     onChange={(value) => fieldProps.input.onChange(value)}
                   />

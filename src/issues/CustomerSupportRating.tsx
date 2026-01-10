@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
-import ReactStars from 'react-rating-stars-component';
 import { useAsync } from 'react-use';
 import {
   supportFeedbackAverageReportRetrieve,
   supportFeedbackReportRetrieve,
 } from 'waldur-js-client';
 
-import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
 import { translate } from '@waldur/i18n';
+import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
+
 import './CustomerSupportRating.scss';
 
 const loadData = async () => {
@@ -48,14 +48,7 @@ export const CustomerSupportRating: FunctionComponent = () => {
       className="customer-support-rating-container"
     >
       <div className="feedback-info">
-        <ReactStars
-          count={10}
-          size={24}
-          edit={false}
-          isHalf={true}
-          activeColor={RATING_STAR_ACTIVE_COLOR}
-          value={value.averageFeedback}
-        />
+        <RateStars count={10} size={24} value={Number(value.averageFeedback)} />
 
         <div className="total-reviews">
           <span>

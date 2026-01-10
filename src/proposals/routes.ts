@@ -117,34 +117,45 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'protected-call.main',
-    url: 'edit/?tab',
+    url: 'edit/?tab&coi_tab&matching_tab',
     component: lazyComponent(() =>
       import('./update/CallUpdateContainer').then((module) => ({
         default: module.CallUpdateContainer,
       })),
     ),
+    params: {
+      tab: {
+        dynamic: true,
+      },
+      coi_tab: {
+        dynamic: true,
+      },
+      matching_tab: {
+        dynamic: true,
+      },
+    },
+  },
+  {
+    name: 'protected-call.manage',
+    url: 'manage/?tab&pool_tab&discovery_tab',
+    component: lazyComponent(() =>
+      import('./manage/CallManageContainer').then((module) => ({
+        default: module.CallManageContainer,
+      })),
+    ),
+    params: {
+      tab: {
+        dynamic: true,
+      },
+      pool_tab: {
+        dynamic: true,
+      },
+      discovery_tab: {
+        dynamic: true,
+      },
+    },
   },
 
-  {
-    name: 'protected-call-round',
-    url: '',
-    abstract: true,
-    parent: 'protected-call',
-    component: lazyComponent(() =>
-      import('./round/RoundUIView').then((module) => ({
-        default: module.RoundUIView,
-      })),
-    ),
-  },
-  {
-    name: 'protected-call-round.details',
-    url: 'round/:round_uuid/?tab',
-    component: lazyComponent(() =>
-      import('./round/RoundPage').then((module) => ({
-        default: module.RoundPage,
-      })),
-    ),
-  },
   {
     name: 'proposal-review',
     url: 'review/:review_uuid/',
@@ -259,13 +270,82 @@ export const states: StateDeclaration[] = [
     url: '',
     parent: 'reviews',
     component: lazyComponent(() =>
-      import('./review/UserReviewsList').then((module) => ({
-        default: module.UserReviewsList,
+      import('./review/MyReviewsPage').then((module) => ({
+        default: module.MyReviewsPage,
       })),
     ),
     data: {
-      breadcrumb: () => translate('All reviews'),
+      breadcrumb: () => translate('My reviews'),
       priority: 100,
+    },
+  },
+  {
+    name: 'reviews-assignments',
+    url: 'assignments/',
+    parent: 'reviews',
+    component: lazyComponent(() =>
+      import('./review/MyAssignmentsPage').then((module) => ({
+        default: module.MyAssignmentsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Assignments'),
+    },
+  },
+  {
+    name: 'reviews-invitations',
+    url: 'invitations/',
+    parent: 'reviews',
+    component: lazyComponent(() =>
+      import('./review/MyInvitationsPage').then((module) => ({
+        default: module.MyInvitationsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Invitations'),
+    },
+  },
+  {
+    name: 'reviews-calls',
+    url: 'calls/',
+    parent: 'reviews',
+    component: lazyComponent(() =>
+      import('./review/MyCallsPage').then((module) => ({
+        default: module.MyCallsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Calls'),
+    },
+  },
+
+  // Admin routes for staff/support/call managers
+  {
+    name: 'admin-proposals',
+    url: '/admin/proposals/?{state}&{call}&{organization}',
+    parent: 'layout',
+    component: lazyComponent(() =>
+      import('./proposal/AdminProposalsList').then((module) => ({
+        default: module.AdminProposalsList,
+      })),
+    ),
+    data: {
+      title: () => translate('All proposals'),
+      breadcrumb: () => translate('All proposals'),
+    },
+  },
+  {
+    name: 'admin-reviews',
+    url: '/admin/reviews/?{state}&{call}&{organization}&{reviewer}',
+    parent: 'layout',
+    component: lazyComponent(() =>
+      import('./review/AdminReviewsList').then((module) => ({
+        default: module.AdminReviewsList,
+      })),
+    ),
+    data: {
+      title: () => translate('All reviews'),
+      breadcrumb: () => translate('All reviews'),
     },
   },
   {
@@ -333,6 +413,22 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       hideHeaderMenu: true,
+    },
+  },
+
+  // Reviewer invitation acceptance
+  {
+    name: 'reviewer-invitation-accept',
+    url: '/reviewer-invitation/:token/',
+    parent: 'layout',
+    component: lazyComponent(() =>
+      import('./invitations/ReviewerInvitationAccept').then((module) => ({
+        default: module.ReviewerInvitationAccept,
+      })),
+    ),
+    data: {
+      auth: true,
+      title: () => translate('Reviewer invitation'),
     },
   },
 ];

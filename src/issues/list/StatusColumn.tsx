@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
-import ReactStars from 'react-rating-stars-component';
 
-import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { IssueTypeIcon } from '@waldur/issues/types/IssueTypeIcon';
+import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
 
 export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
   <>
@@ -13,12 +12,9 @@ export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
         id="feedback-tooltip"
         label={`${row.feedback.evaluation_number} - ${row.feedback.comment}`}
       >
-        <ReactStars
+        <RateStars
           count={10}
           size={14}
-          edit={false}
-          isHalf={true}
-          activeColor={RATING_STAR_ACTIVE_COLOR}
           value={row.feedback.evaluation_number}
         />
       </Tip>

@@ -34,20 +34,20 @@ const configRows = [
     title: translate('Edit compliance checklist for proposal evaluation'),
   },
   {
-    label: translate('Reviewer identity visible to submitters'),
+    label: translate('Reviewer identity visible to applicants'),
     key: 'reviewer_identity_visible_to_submitters',
     getValue: (call) =>
       call.reviewer_identity_visible_to_submitters
         ? translate('Yes')
         : translate('No'),
-    title: translate('Edit reviewer identity visibility for submitters'),
+    title: translate('Edit reviewer identity visibility for applicants'),
   },
   {
-    label: translate('Reviews visible to submitters'),
+    label: translate('Reviews visible to applicants'),
     key: 'reviews_visible_to_submitters',
     getValue: (call) =>
       call.reviews_visible_to_submitters ? translate('Yes') : translate('No'),
-    title: translate('Edit reviews visibility for submitters'),
+    title: translate('Edit reviews visibility for applicants'),
   },
 ];
 
