@@ -1,7 +1,7 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { ComponentType, useCallback } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import {
@@ -25,6 +25,8 @@ import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { questionConditionOperatorOptions } from '@waldur/marketplace-checklist/utils';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 interface FieldValue {
   depends_on_question?;
@@ -148,15 +150,11 @@ const FieldsListGroup = ({
                 {translate('Condition {index}', { index: i + 1 })}
               </h6>
               <div className="card-toolbar m-0">
-                <Button
+                <ActionButton
+                  action={() => removeRow(i)}
+                  iconNode={<TrashIcon weight="bold" />}
                   variant="text-danger"
-                  className="btn-icon"
-                  onClick={() => removeRow(i)}
-                >
-                  <span className="svg-icon svg-icon-1">
-                    <TrashIcon weight="bold" />
-                  </span>
-                </Button>
+                />
               </div>
             </Card.Header>
             <Card.Body key={name + i} className="px-4">
@@ -262,17 +260,13 @@ const FieldsListGroup = ({
         );
       })}
       <div>
-        <Button
+        <CompactActionButton
+          action={addRow}
+          title={translate('Add condition')}
+          iconNode={<PlusIcon weight="bold" />}
           variant="text-primary"
-          onClick={addRow}
           disabled={addDisabled}
-          size="sm"
-        >
-          <span className="svg-icon svg-icon-2">
-            <PlusIcon weight="bold" />
-          </span>
-          {translate('Add condition')}
-        </Button>
+        />
       </div>
     </>
   );

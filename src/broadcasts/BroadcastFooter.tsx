@@ -4,13 +4,14 @@ import {
   FloppyDiskIcon,
   ShareIcon,
 } from '@phosphor-icons/react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { BroadcastFormData } from './types';
 
@@ -57,65 +58,58 @@ export const BroadcastFooter = ({
       {step === 0 ? (
         <>
           <CloseDialogButton />
-          <Button
-            type="submit"
+          <SubmitButton
+            submitting={false}
             onClick={() => form.change('action', 'draft')}
             variant="secondary"
             disabled={disabled}
-          >
-            <span className="svg-icon svg-icon-2">
-              <FloppyDiskIcon weight="bold" />
-            </span>{' '}
-            {translate('Save as draft')}
-          </Button>
-          <Button
-            onClick={saveAsTemplate}
+            iconNode={<FloppyDiskIcon weight="bold" />}
+            iconOnLeft
+            label={translate('Save as draft')}
+          />
+          <ActionButton
+            action={saveAsTemplate}
             variant="secondary"
             disabled={disabled}
-          >
-            <span className="svg-icon svg-icon-2">
-              <FloppyDiskIcon weight="bold" />
-            </span>{' '}
-            {translate('Save as a template')}
-          </Button>
-          <Button onClick={() => setStep(1)} disabled={disabled}>
-            <span className="svg-icon svg-icon-2">
-              <ArrowRightIcon weight="bold" />
-            </span>{' '}
-            {translate('Select recipients')}
-          </Button>
+            iconNode={<FloppyDiskIcon weight="bold" />}
+            title={translate('Save as a template')}
+          />
+          <ActionButton
+            action={() => setStep(1)}
+            disabled={disabled}
+            iconNode={<ArrowRightIcon weight="bold" />}
+            title={translate('Select recipients')}
+          />
         </>
       ) : (
         <>
-          <Button onClick={() => setStep(0)} variant="secondary">
-            <span className="svg-icon svg-icon-2">
-              <ArrowLeftIcon weight="bold" />
-            </span>{' '}
-            {translate('Back')}
-          </Button>
-          <Button
-            type="submit"
+          <ActionButton
+            action={() => setStep(0)}
+            variant="secondary"
+            iconNode={<ArrowLeftIcon weight="bold" />}
+            title={translate('Back')}
+          />
+          <SubmitButton
+            submitting={false}
             variant="secondary"
             onClick={() => form.change('action', 'draft')}
             disabled={disabled}
-          >
-            <span className="svg-icon svg-icon-2">
-              <FloppyDiskIcon weight="bold" />
-            </span>{' '}
-            {translate('Save as draft')}
-          </Button>
-          <Button
-            type="submit"
+            iconNode={<FloppyDiskIcon weight="bold" />}
+            iconOnLeft
+            label={translate('Save as draft')}
+          />
+          <SubmitButton
+            submitting={false}
             onClick={() => form.change('action', 'submit')}
             disabled={disabled}
-          >
-            <span className="svg-icon svg-icon-2">
-              <ShareIcon weight="bold" />
-            </span>{' '}
-            {formValues.send_at
-              ? translate('Schedule broadcast')
-              : translate('Send now')}
-          </Button>
+            iconNode={<ShareIcon weight="bold" />}
+            iconOnLeft
+            label={
+              formValues.send_at
+                ? translate('Schedule broadcast')
+                : translate('Send now')
+            }
+          />
         </>
       )}
     </>

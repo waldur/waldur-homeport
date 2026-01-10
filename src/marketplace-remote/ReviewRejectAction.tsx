@@ -9,7 +9,7 @@ export const ReviewRejectAction = ({ request, refetch, apiMethod }) =>
   request.state === 'pending' ? (
     <DialogActionButton
       title={translate('Reject')}
-      variant="danger"
+      className="text-danger"
       iconNode={<ProhibitIcon weight="bold" />}
       resource={request}
       modalComponent={ReviewDialog}
@@ -17,7 +17,6 @@ export const ReviewRejectAction = ({ request, refetch, apiMethod }) =>
         refetch,
         apiMethod,
       }}
-      rowAction
-      size="sm"
+      actionItem
     />
   ) : null;

@@ -1,11 +1,11 @@
 import { FunnelIcon, TrashIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
 import { change, clearFields, getFormValues, reset } from 'redux-form';
 
+import { CompactIconButton } from '@waldur/core/buttons/IconButton';
 import {
   REACT_SELECT_TABLE_FILTER,
   WindowedSelect,
@@ -37,16 +37,13 @@ const Control = (props) => (
       {props.children}
     </components.Control>
     {Boolean(props.getValue()[0]) && (
-      <Button
-        variant="text-danger"
-        size="sm"
-        className="btn-icon me-3"
+      <CompactIconButton
+        iconNode={<TrashIcon weight="bold" />}
+        tooltip={translate('Delete filter')}
         onClick={(e) => props.remove(e, props.getValue()[0])}
-      >
-        <span className="svg-icon svg-icon-2">
-          <TrashIcon weight="bold" />
-        </span>
-      </Button>
+        variant="text-danger"
+        className="me-3"
+      />
     )}
   </div>
 );
@@ -55,16 +52,13 @@ const ListOption: FC<OptionProps & { remove }> = (props) => (
   <components.Option {...props}>
     <div className="d-flex justify-content-between align-items-center">
       {props.children}
-      <Button
-        variant="text-danger"
-        size="sm"
-        className="btn-remove btn-icon"
+      <CompactIconButton
+        iconNode={<TrashIcon weight="bold" />}
+        tooltip={translate('Delete filter')}
         onClick={(e) => props.remove(e, props.getValue()[0])}
-      >
-        <span className="svg-icon svg-icon-2">
-          <TrashIcon weight="bold" />
-        </span>
-      </Button>
+        variant="text-danger"
+        className="btn-remove"
+      />
     </div>
   </components.Option>
 );

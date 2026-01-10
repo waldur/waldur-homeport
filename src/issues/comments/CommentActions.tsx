@@ -1,9 +1,9 @@
 import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 import { useContext } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -53,30 +53,25 @@ export const CommentActions = ({ comment }) => {
     <div className="flex-shrink-0 mt-5">
       {(user.is_staff || user.uuid === comment.author_uuid) && (
         <>
-          <Button
+          <CompactSubmitButton
+            submitting={false}
+            type="button"
             variant="tertiary"
-            size="sm"
-            className="btn-icon-right me-3"
+            className="me-3"
             disabled={!comment.update_is_available}
             onClick={openEditCommentDialog}
-          >
-            {translate('Change')}
-            <span className="svg-icon svg-icon-5">
-              <PencilSimpleIcon weight="bold" />
-            </span>
-          </Button>
-          <Button
+            label={translate('Change')}
+            iconNode={<PencilSimpleIcon weight="bold" />}
+          />
+          <CompactSubmitButton
+            submitting={deleteComment.isPending}
+            type="button"
             variant="tertiary"
-            size="sm"
-            className="btn-icon-right"
             disabled={!comment.destroy_is_available || deleteComment.isPending}
             onClick={openDeleteDialog}
-          >
-            {translate('Remove')}
-            <span className="svg-icon svg-icon-5">
-              <TrashIcon weight="bold" />
-            </span>
-          </Button>
+            label={translate('Remove')}
+            iconNode={<TrashIcon weight="bold" />}
+          />
         </>
       )}
     </div>

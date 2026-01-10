@@ -3,11 +3,12 @@ import { marketplaceOfferingUsagePoliciesList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/useTable';
 
 import { PoliciesTable } from './PoliciesTable';
-import { PolicyDeleteButton } from './PolicyDeleteButton';
+import { PolicyDeleteAction } from './PolicyDeleteButton';
 import { UsagePolicyCreateButton } from './UsagePolicyCreateButton';
 
 interface OfferingUsagePoliciesProps {
@@ -42,7 +43,13 @@ export const OfferingUsagePolicies: FC<OfferingUsagePoliciesProps> = ({
       ]}
       verboseName={translate('Usage policies')}
       rowActions={({ row }) => (
-        <PolicyDeleteButton row={row} type="usage" refetch={tableProps.fetch} />
+        <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <PolicyDeleteAction
+            row={row}
+            type="usage"
+            refetch={tableProps.fetch}
+          />
+        </ActionsDropdown>
       )}
       tableActions={
         <UsagePolicyCreateButton

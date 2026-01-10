@@ -1,12 +1,12 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { Button, Col } from 'react-bootstrap';
+import { Col } from 'react-bootstrap';
 
+import { IconButton } from '@waldur/core/buttons/IconButton';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
@@ -108,16 +108,13 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
             (loadingAdd ? (
               <LoadingSpinner />
             ) : (
-              <Tip id="tip-add-avatar" label={translate('Add user')}>
-                <Button
-                  variant="tertiary"
-                  className="btn-icon border-dashed btn-avatar btn-circle"
-                  onClick={onAddClick}
-                  size="lg"
-                >
-                  <PlusIcon size={16} weight="bold" />
-                </Button>
-              </Tip>
+              <IconButton
+                iconNode={<PlusIcon size={16} weight="bold" />}
+                tooltip={translate('Add user')}
+                variant="tertiary"
+                className="border-dashed btn-avatar btn-circle"
+                onClick={onAddClick}
+              />
             ))}
         </Col>
       }

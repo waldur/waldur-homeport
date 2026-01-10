@@ -1,13 +1,14 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { IssueTypeEnum, supportIssuesCreate } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { CancelButton } from '@waldur/form';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
@@ -54,16 +55,13 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
         iconColor="danger"
         footer={
           <>
-            <Button
-              variant="tertiary"
+            <CloseDialogButton className="flex-equal" />
+            <SubmitButton
+              submitting={false}
+              variant="danger"
               className="flex-equal"
-              onClick={() => closeDialog()}
-            >
-              {translate('Cancel')}
-            </Button>
-            <Button variant="danger" className="flex-equal" type="submit">
-              {translate('Delete')}
-            </Button>
+              label={translate('Delete')}
+            />
           </>
         }
       >
@@ -83,7 +81,7 @@ export const DangerActionDialog: FunctionComponent<DangerActionPanelProps> = (
       iconNode={<TrashIcon weight="bold" />}
       iconColor="danger"
       bodyClassName="text-quaternary fs-6"
-      footer={<CancelButton label={translate('OK')} />}
+      footer={<CloseDialogButton label={translate('OK')} />}
     >
       {props.fallbackMessage}
     </ModalDialog>

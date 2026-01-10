@@ -1,9 +1,10 @@
 import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { useEffect, useMemo } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { WideImageField } from '@waldur/form/WideImageField';
 import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
@@ -49,18 +50,12 @@ export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
                   size={64}
                   extraActions={({ isChanged, isTooLarge }) =>
                     isChanged || props.submitting ? (
-                      <Button
-                        type="submit"
-                        variant="primary"
-                        size="sm"
-                        className="btn-icon-right"
-                        disabled={props.submitting || isTooLarge}
-                      >
-                        {translate('Save')}
-                        <span className="svg-icon svg-icon-5">
-                          <UploadSimpleIcon weight="bold" />
-                        </span>
-                      </Button>
+                      <CompactSubmitButton
+                        submitting={props.submitting}
+                        label={translate('Save')}
+                        disabled={isTooLarge}
+                        iconNode={<UploadSimpleIcon weight="bold" />}
+                      />
                     ) : null
                   }
                   {...fieldProps}

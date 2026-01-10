@@ -2,12 +2,13 @@ import { useMemo } from 'react';
 import { marketplaceResourceUsersList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { AddUserButton } from './AddUserButton';
-import { DeleteUserButton } from './DeleteUserButton';
+import { DeleteUserAction } from './DeleteUserButton';
 
 export const ResourceUsersList = ({ resource, offering }) => {
   const filter = useMemo(() => ({ resource_uuid: resource.uuid }), [resource]);
@@ -33,7 +34,9 @@ export const ResourceUsersList = ({ resource, offering }) => {
       ]}
       verboseName={translate('roles')}
       rowActions={({ row }) => (
-        <DeleteUserButton user={row} refetch={tableProps.fetch} />
+        <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <DeleteUserAction row={row} refetch={tableProps.fetch} />
+        </ActionsDropdown>
       )}
       tableActions={
         <AddUserButton

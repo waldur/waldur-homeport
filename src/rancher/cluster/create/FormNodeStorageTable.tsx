@@ -1,6 +1,6 @@
 import { XIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren, useEffect } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { BaseFieldProps, Field } from 'redux-form';
 
 import { ENV } from '@waldur/core/config';
@@ -11,6 +11,7 @@ import {
   formatIntField,
   parseIntField,
 } from '@waldur/marketplace/common/utils';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 interface FormNodeStorageTableProps {
   title?: string;
@@ -116,15 +117,11 @@ export const FormNodeStorageRow: FC<FormNodeStorageRowProps> = (props) => {
       )}
       {props.onDeleteRow && (
         <td className="w-60px">
-          <Button
+          <ActionButton
             variant="text-danger"
-            className="btn-icon"
-            onClick={props.onDeleteRow}
-          >
-            <span className="svg-icon svg-icon-2">
-              <XIcon weight="bold" />
-            </span>
-          </Button>
+            action={props.onDeleteRow}
+            iconNode={<XIcon weight="bold" />}
+          />
         </td>
       )}
     </tr>

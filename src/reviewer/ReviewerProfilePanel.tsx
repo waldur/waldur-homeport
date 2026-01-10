@@ -1,7 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
-import { Button, Card, Nav } from 'react-bootstrap';
+import { Card, Nav } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   ReviewerProfile,
@@ -11,6 +11,7 @@ import {
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -170,25 +171,21 @@ export const ReviewerProfilePanel = ({
           <div className="d-flex flex-wrap align-items-center gap-3 ms-lg-auto">
             <ReviewerProfileAddDropdown profile={profile} />
             {profile.is_published ? (
-              <Button
+              <SubmitButton
+                type="button"
                 variant="danger"
                 onClick={handleUnpublish}
-                disabled={isPublishing}
-              >
-                {isPublishing
-                  ? translate('Unpublishing...')
-                  : translate('Unpublish profile')}
-              </Button>
+                submitting={isPublishing}
+                label={translate('Unpublish profile')}
+              />
             ) : (
-              <Button
+              <SubmitButton
+                type="button"
                 variant="success"
                 onClick={handlePublish}
-                disabled={isPublishing}
-              >
-                {isPublishing
-                  ? translate('Publishing...')
-                  : translate('Publish profile')}
-              </Button>
+                submitting={isPublishing}
+                label={translate('Publish profile')}
+              />
             )}
           </div>
         </div>

@@ -5,12 +5,11 @@ import { invoicesPaid } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
 import { formatISODate } from '@waldur/core/dateUtils';
-import { FileUploadField, FormContainer, SubmitButton } from '@waldur/form';
+import { FileUploadField, FormContainer, FormFooter } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { MARK_AS_PAID_FORM_ID } from '@waldur/invoices/constants';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -43,15 +42,7 @@ const MarkAsPaidDialogContainer: FunctionComponent<any> = (props) => {
     <form onSubmit={props.handleSubmit(markInvoiceAsPaid)}>
       <ModalDialog
         title={translate('Mark invoice as paid')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              submitting={props.submitting}
-              label={translate('Submit')}
-            />
-          </>
-        }
+        footer={<FormFooter submitting={props.submitting} />}
       >
         <div style={{ paddingBottom: '95px' }}>
           <FormContainer submitting={props.submitting}>

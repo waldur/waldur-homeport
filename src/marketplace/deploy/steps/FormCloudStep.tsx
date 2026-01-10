@@ -1,7 +1,6 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { QueryFunction, useInfiniteQuery } from '@tanstack/react-query';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { Field } from 'redux-form';
@@ -15,6 +14,7 @@ import { required } from '@waldur/core/validators';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { orderProjectSelector } from '../selectors';
@@ -164,12 +164,13 @@ export const FormCloudStep = (props: FormStepProps) => {
               <StepCardTabs tabs={tabs} tab={tab} setTab={setTab} />
             </div>
             <div className="d-flex gap-10 justify-content-end">
-              <Button variant="tertiary" className="text-nowrap" size="sm">
-                <span className="svg-icon svg-icon-2">
-                  <PlusIcon weight="bold" />
-                </span>
-                {translate('New cloud')}
-              </Button>
+              <CompactActionButton
+                variant="tertiary"
+                className="text-nowrap"
+                action={() => {}}
+                iconNode={<PlusIcon weight="bold" />}
+                title={translate('New cloud')}
+              />
             </div>
           </div>
         ) : null

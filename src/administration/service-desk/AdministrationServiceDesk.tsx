@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
-import { Button, Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -12,6 +12,7 @@ import FormTable from '@waldur/form/FormTable';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { SettingsDescription } from '@waldur/SettingsDescription';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { FieldRow } from '../settings/FieldRow';
 
@@ -60,8 +61,8 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
               )}
             </p>
             <div className="d-flex flex-wrap gap-2">
-              <Button
-                onClick={() =>
+              <ActionButton
+                action={() =>
                   dispatch(
                     openModalDialog(AdministrationServiceDeskUpdateDialog, {
                       size: 'lg',
@@ -72,9 +73,9 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                     }),
                   )
                 }
-              >
-                {translate('Configure')}
-              </Button>
+                title={translate('Configure')}
+                variant="primary"
+              />
               {serviceDeskProvider === 'atlassian' && (
                 <AtlassianDiscoveryButton />
               )}

@@ -43,7 +43,7 @@ const projectUserMandatoryFields = [
 const RowActions = ({ row }) => {
   return (
     <ActionsDropdownComponent>
-      <UserDetailsButton userId={row.user_uuid || row.uuid} asDropdownItem />
+      <UserDetailsButton userId={row.user_uuid || row.uuid} />
     </ActionsDropdownComponent>
   );
 };

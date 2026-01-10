@@ -2,10 +2,11 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { ReviewCloseButton } from '@waldur/customer/team/ReviewCloseButton';
+import { ReviewCloseAction } from '@waldur/customer/team/ReviewCloseButton';
 import { useTeamTableTabs } from '@waldur/customer/team/tabs';
 import { translate } from '@waldur/i18n';
 import { useTeamTableTabs as useProjectTeamTableTabs } from '@waldur/project/team/tabs';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { getProject } from '@waldur/workspace/selectors';
@@ -56,15 +57,13 @@ export const PermissionsReviewsList: FunctionComponent<
         },
       ]}
       verboseName={translate('permission reviews')}
-      rowActions={({ row }) => (
-        <>
-          {row.is_pending ? (
-            <ReviewCloseButton reviewId={row.uuid} scope={scope} />
-          ) : (
-            'N/A'
-          )}
-        </>
-      )}
+      rowActions={({ row }) =>
+        row.is_pending ? (
+          <ActionsDropdown row={row}>
+            <ReviewCloseAction row={row} scope={scope} />
+          </ActionsDropdown>
+        ) : null
+      }
       enableExport
     />
   );

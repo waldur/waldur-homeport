@@ -1,6 +1,5 @@
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/types';
 import { useDispatch } from 'react-redux';
 import { NestedRound, ProtectedRound } from 'waldur-js-client';
@@ -8,6 +7,7 @@ import { NestedRound, ProtectedRound } from 'waldur-js-client';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showInfo } from '@waldur/store/notify';
@@ -92,17 +92,22 @@ export const PublicCallApplyButton: FC<PublicCallApplyButtonProps> = ({
   }
 
   return activeRound ? (
-    <Button
+    <SubmitButton
+      submitting={false}
+      type="button"
       variant={variant}
       className={className}
       onClick={openAddProposalDialog}
-      title={!user ? tooltip : undefined}
-    >
-      {title}
-    </Button>
+      label={title}
+    />
   ) : (
-    <Button variant={variant} className={className} disabled>
-      {title}
-    </Button>
+    <SubmitButton
+      submitting={false}
+      type="button"
+      variant={variant}
+      className={className}
+      disabled
+      label={title}
+    />
   );
 };

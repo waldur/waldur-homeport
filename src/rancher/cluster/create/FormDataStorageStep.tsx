@@ -1,6 +1,5 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { Fragment, useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { FieldArray, FormSection } from 'redux-form';
 
@@ -10,6 +9,7 @@ import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import {
   FormNodeStorageRow,
@@ -62,18 +62,15 @@ const renderDataVolumeRows = ({
         ))}
       <tr>
         <td colSpan={4}>
-          <Button
+          <ActionButton
             variant="tertiary"
             className="text-nowrap"
-            onClick={() =>
+            action={() =>
               fields.push({ size: 1, volume_type: defaultVolumeType })
             }
-          >
-            <span className="svg-icon svg-icon-2">
-              <PlusIcon weight="bold" />
-            </span>
-            {translate('Add data volume')}
-          </Button>
+            iconNode={<PlusIcon weight="bold" />}
+            title={translate('Add data volume')}
+          />
         </td>
       </tr>
     </>

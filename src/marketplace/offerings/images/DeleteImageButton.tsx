@@ -1,3 +1,4 @@
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { marketplaceScreenshotsDestroy } from 'waldur-js-client';
 
@@ -6,11 +7,11 @@ import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 import { useUser } from '@waldur/workspace/hooks';
 
-export const DeleteImageButton = ({ row, fetch, offering }) => {
+export const DeleteImageAction = ({ row, refetch, offering }) => {
   const user = useUser();
   const dispatch = useDispatch();
   const handler = async () => {
@@ -26,7 +27,7 @@ export const DeleteImageButton = ({ row, fetch, offering }) => {
     }
     try {
       await marketplaceScreenshotsDestroy({ path: { uuid: row.uuid } });
-      fetch();
+      refetch();
       dispatch(showSuccess(translate('Image has been removed.')));
     } catch (error) {
       dispatch(showErrorResponse(error, translate('Unable to remove image.')));
@@ -44,6 +45,11 @@ export const DeleteImageButton = ({ row, fetch, offering }) => {
   }
 
   return (
-    <RowActionButton title={translate('Delete')} action={handler} size="sm" />
+    <ActionItem
+      title={translate('Delete')}
+      action={handler}
+      iconNode={<TrashIcon weight="bold" />}
+      className="text-danger"
+    />
   );
 };

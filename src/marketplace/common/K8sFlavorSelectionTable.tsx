@@ -5,6 +5,7 @@ import {
   MagnifyingGlassIcon,
 } from '@phosphor-icons/react';
 import React, { useMemo, useState } from 'react';
+// eslint-disable-next-line waldur-custom/no-direct-bootstrap-button -- Complex selector button with custom children, tooltip, and nested click handler
 import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -14,6 +15,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
 import { FilterBox } from '@waldur/form/FilterBox';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -140,12 +142,13 @@ const FlavorSelectionModal = reduxForm<{}, FlavorSelectionModalProps>({
         footer={
           <>
             <CloseDialogButton className="w-125px" />
-            <Button variant="primary" type="submit" disabled={invalid}>
-              <span className="svg-icon svg-icon-2">
-                <CheckIcon weight="bold" />
-              </span>
-              {translate('Select flavor')}
-            </Button>
+            <SubmitButton
+              submitting={false}
+              disabled={invalid}
+              label={translate('Select flavor')}
+              iconNode={<CheckIcon weight="bold" />}
+              iconOnLeft
+            />
           </>
         }
         bodyClassName="h-500px"

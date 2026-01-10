@@ -1,7 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -10,6 +9,7 @@ import { Panel } from '@waldur/core/Panel';
 import { FormSteps } from '@waldur/form/FormSteps';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
 import { Proposal, ProposalReview } from '../types';
@@ -98,22 +98,20 @@ export const ProposalDetails = ({
         </Panel>
         {canPerformDecisionActions && isCallManagerView && (
           <>
-            <Button
+            <ActionButton
               variant="primary"
-              onClick={handleApproveProposal}
-              className="btn-icon w-100 mt-2"
-            >
-              <CheckCircleIcon className="me-1" weight="bold" />
-              {translate('Accept')}
-            </Button>
-            <Button
+              action={handleApproveProposal}
+              className="w-100 mt-2"
+              iconNode={<CheckCircleIcon weight="bold" />}
+              title={translate('Accept')}
+            />
+            <ActionButton
               variant="danger"
-              onClick={handleRejectProposal}
-              className="btn-icon w-100 mt-2"
-            >
-              <XCircleIcon className="me-1" weight="bold" />
-              {translate('Reject')}
-            </Button>
+              action={handleRejectProposal}
+              className="w-100 mt-2"
+              iconNode={<XCircleIcon weight="bold" />}
+              title={translate('Reject')}
+            />
           </>
         )}
       </SidebarLayout.Sidebar>

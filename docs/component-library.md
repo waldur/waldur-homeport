@@ -11,7 +11,6 @@ The application features a comprehensive set of reusable UI components organized
 | Component | Location | Description | Key Features |
 |-----------|----------|-------------|--------------|
 | **Table** | `src/table/Table.tsx` | Main table component | Filtering, sorting, pagination, column visibility, export |
-| **ActionButton** | `src/table/ActionButton.tsx` | Reusable action button | Tooltip, loading state, multiple variants |
 | **ActionsDropdown** | `src/table/ActionsDropdown.tsx` | Dropdown for table actions | Bulk operations, contextual actions |
 | **ExpandableContainer** | `src/table/ExpandableContainer.tsx` | Collapsible row details | Table row expansion, detail views |
 | **TablePagination** | `src/table/TablePagination.tsx` | Pagination controls | Page navigation, size selection |
@@ -30,7 +29,135 @@ The application features a comprehensive set of reusable UI components organized
 | **FileUploadField** | `src/form/FileUploadField.tsx` | File upload | Drag & drop, validation |
 | **MarkdownEditor** | `src/form/MarkdownEditor.tsx` | Markdown editor | Preview, syntax highlighting |
 | **SecretField** | `src/form/SecretField.tsx` | Password/secret input | Show/hide toggle, validation |
-| **SubmitButton** | `src/form/SubmitButton.tsx` | Submit button | Loading state, disabled state |
+
+### Button Components
+
+The application uses a unified button system. **Never import Bootstrap Button directly** - use the appropriate Waldur wrapper component.
+
+#### Core Button Components
+
+| Component | Location | Description | Key Features |
+|-----------|----------|-------------|--------------|
+| **ActionButton** | `src/table/ActionButton.tsx` | General purpose action button | Tooltip, loading state, icon support, multiple variants |
+| **RowActionButton** | `src/table/ActionButton.tsx` | Optimized for table rows | Smaller touch target, row context |
+| **CompactActionButton** | `src/table/CompactActionButton.tsx` | Small inline actions | Compact size for tight spaces |
+| **SubmitButton** | `src/form/SubmitButton.tsx` | Form submission | Loading spinner, disabled states, large size |
+| **CompactSubmitButton** | `src/form/CompactSubmitButton.tsx` | Compact form submission | Small size for popovers/inline forms |
+| **EditButton** | `src/form/EditButton.tsx` | Edit navigation/dialogs | Large size, edit icon |
+| **CompactEditButton** | `src/form/CompactEditButton.tsx` | Inline field editing | Small size for settings rows |
+| **CloseDialogButton** | `src/modal/CloseDialogButton.tsx` | Modal cancel/close | Auto-closes dialog, customizable label |
+| **IconButton** | `src/table/IconButton.tsx` | Icon-only with tooltip | Required tooltip for accessibility |
+| **ToolbarButton** | `src/table/ToolbarButton.tsx` | Table/panel toolbars | Badge support, consistent toolbar styling |
+| **SaveButton** | `src/core/SaveButton.tsx` | Form save with dirty state | Tracks form changes, conditional visibility |
+
+#### Button Selection Guide
+
+| Use Case | Component | Size |
+|----------|-----------|------|
+| Form submit | `SubmitButton` | Large |
+| Form submit in popover/compact form | `CompactSubmitButton` | Small |
+| Table row action | `ActionButton` or `RowActionButton` | Large |
+| Inline action in form/table cell | `CompactActionButton` | Small |
+| Modal cancel/close | `CloseDialogButton` | Large |
+| Icon-only button | `IconButton` | - |
+| Table toolbar buttons | `ToolbarButton` or `IconButton` | - |
+| Edit field in settings row | `CompactEditButton` | Small |
+| Edit in card/panel header | `EditButton` | Large |
+| Create with dialog | `CreateModalButton` | Large |
+| Delete with confirmation | `DeleteButton` | Large |
+
+#### ActionButton Usage
+
+```tsx
+import { ActionButton } from '@waldur/table/ActionButton';
+
+// Basic usage
+<ActionButton
+  title={translate('Edit')}
+  action={() => handleEdit()}
+  iconNode={<PencilIcon weight="bold" />}
+/>
+
+// With loading state
+<ActionButton
+  title={translate('Save')}
+  action={handleSave}
+  pending={isSaving}
+  variant="primary"
+/>
+
+// Disabled with tooltip
+<ActionButton
+  title={translate('Delete')}
+  action={handleDelete}
+  disabled={!canDelete}
+  tooltip={!canDelete ? translate('Cannot delete active item') : undefined}
+  variant="danger"
+/>
+```
+
+#### SubmitButton Usage
+
+```tsx
+import { SubmitButton } from '@waldur/form';
+
+// In a form
+<SubmitButton
+  submitting={submitting}
+  disabled={pristine || invalid}
+  label={translate('Save changes')}
+/>
+
+// As action button (non-submit)
+<SubmitButton
+  type="button"
+  variant="success"
+  onClick={handleAccept}
+  submitting={isAccepting}
+  label={translate('Accept')}
+  iconNode={<CheckIcon weight="bold" />}
+  iconOnLeft
+/>
+```
+
+#### CloseDialogButton Usage
+
+```tsx
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+
+// Simple close
+<Modal.Footer>
+  <CloseDialogButton />
+  <SubmitButton submitting={submitting} label={translate('Save')} />
+</Modal.Footer>
+
+// Custom label
+<CloseDialogButton label={translate('Discard')} />
+
+// With custom handler
+<CloseDialogButton onClick={handleCancel} disabled={submitting} />
+```
+
+#### IconButton Usage
+
+```tsx
+import { IconButton } from '@waldur/table/IconButton';
+
+// Toolbar refresh button
+<IconButton
+  iconNode={<ArrowsClockwiseIcon weight="bold" />}
+  tooltip={translate('Refresh')}
+  onClick={handleRefresh}
+/>
+
+// With pending state
+<IconButton
+  iconNode={<DownloadIcon weight="bold" />}
+  tooltip={translate('Export')}
+  onClick={handleExport}
+  pending={isExporting}
+/>
+```
 
 ### Modal and Dialog Components
 

@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { cloneDeep } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { bookingStateAliases } from '@waldur/booking/BookingStateField';
@@ -12,6 +11,7 @@ import { parseDate } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 const ONE_HOUR_HEIGHT = 40; // 40px
 const ONE_MINUTE_HEIGHT = ONE_HOUR_HEIGHT / 60;
@@ -186,14 +186,12 @@ export const BookingResourceListItem = ({
               <div>{item.project_name}</div>
             )}
             <div className="position-absolute bottom-0 end-0 mb-2">
-              <Button
+              <CompactActionButton
                 variant="tertiary"
-                size="sm"
                 className={classNames(layout.diffHours < 1.1 && 'py-1')}
-                onClick={onClickSeeMore}
-              >
-                {translate('See more')}
-              </Button>
+                action={onClickSeeMore}
+                title={translate('See more')}
+              />
             </div>
           </div>
         </div>

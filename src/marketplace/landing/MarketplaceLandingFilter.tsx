@@ -1,14 +1,16 @@
 import { CaretDownIcon, FunnelSimpleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useCallback, useEffect, useState } from 'react';
-import { Button, Card, OverlayTrigger, Popover, Stack } from 'react-bootstrap';
+import { Card, Dropdown, Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import { Project } from 'waldur-js-client';
 
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -84,55 +86,14 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
   if (!user) return null;
 
   return (
-    <OverlayTrigger
-      trigger="click"
-      placement="bottom-end"
-      show={show}
-      overlay={
-        <Popover id="MarketplaceLandingFilter">
-          <Card className="menu menu-sub menu-sub-dropdown menu-gray-800 menu-hover-bg-light menu-hover-title-primary fs-5 show shadow-sm">
-            <Card.Body
-              as="form"
-              onSubmit={props.handleSubmit(apply)}
-              className="d-flex flex-column gap-8"
-            >
-              <div>
-                <Card.Title as="div" className="h3 mb-5">
-                  {translate('Filter by organization/project')}
-                </Card.Title>
-                <Card.Subtitle className="fw-normal text-muted">
-                  {translate(
-                    'Filter results by chosen organization and project',
-                  )}
-                </Card.Subtitle>
-              </div>
-              <OrganizationAutocomplete />
-              <ProjectFilter
-                customer_uuid={formValues?.organization?.uuid}
-                isDisabled={!formValues?.organization?.uuid}
-              />
-
-              <Stack direction="horizontal" gap={4}>
-                <Button
-                  variant="tertiary"
-                  className="flex-equal"
-                  onClick={() => setShow(false)}
-                >
-                  {translate('Cancel')}
-                </Button>
-                <Button type="submit" className="flex-equal">
-                  {translate('Apply')}
-                </Button>
-              </Stack>
-            </Card.Body>
-          </Card>
-        </Popover>
-      }
-    >
-      <Button
+    <Dropdown show={show} onToggle={setShow} align="end" autoClose={false}>
+      <Dropdown.Toggle
         variant="tertiary"
-        className={classNames('d-flex text-nowrap', show && 'active')}
-        onClick={() => setShow((v) => !v)}
+        className={classNames(
+          'd-flex text-nowrap btn-icon-right no-arrow',
+          show && 'active',
+        )}
+        id="marketplace-landing-filter-toggle"
       >
         <FunnelSimpleIcon size={20} className="svg-icon" weight="bold" />
         {translate('Organization')} & {translate('Project')}
@@ -141,7 +102,44 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
           className="svg-icon rotate-180 ms-2 me-0"
           weight="bold"
         />
-      </Button>
-    </OverlayTrigger>
+      </Dropdown.Toggle>
+      <Dropdown.Menu className="p-0 border-0 min-w-400px">
+        <Card className="menu menu-sub menu-sub-dropdown menu-gray-800 menu-hover-bg-light menu-hover-title-primary fs-5 show shadow-sm m-0">
+          <Card.Body
+            as="form"
+            onSubmit={props.handleSubmit(apply)}
+            className="d-flex flex-column gap-8"
+          >
+            <div>
+              <Card.Title as="div" className="h3 mb-5">
+                {translate('Filter by organization/project')}
+              </Card.Title>
+              <Card.Subtitle className="fw-normal text-muted">
+                {translate('Filter results by chosen organization and project')}
+              </Card.Subtitle>
+            </div>
+            <OrganizationAutocomplete />
+            <ProjectFilter
+              customer_uuid={formValues?.organization?.uuid}
+              isDisabled={!formValues?.organization?.uuid}
+            />
+
+            <Stack direction="horizontal" gap={4}>
+              <ActionButton
+                variant="tertiary"
+                className="flex-equal"
+                action={() => setShow(false)}
+                title={translate('Cancel')}
+              />
+              <SubmitButton
+                submitting={false}
+                className="flex-equal"
+                label={translate('Apply')}
+              />
+            </Stack>
+          </Card.Body>
+        </Card>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 });

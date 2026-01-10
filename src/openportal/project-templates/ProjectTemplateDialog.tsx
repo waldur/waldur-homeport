@@ -7,8 +7,8 @@ import {
   openportalProjectTemplateRetrieve,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';

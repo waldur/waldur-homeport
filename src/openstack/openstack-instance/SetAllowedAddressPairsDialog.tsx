@@ -1,6 +1,6 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Field, FieldArray, reduxForm } from 'redux-form';
@@ -18,6 +18,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { validatePrivateCIDR } from '../utils';
 
@@ -51,23 +52,23 @@ const PairRow = ({ pair, onRemove }) => (
       <Field name={`${pair}.mac_address`} component={ValidatedInputField} />
     </td>
     <td>
-      <Button variant="text-secondary" onClick={onRemove}>
-        <span className="svg-icon svg-icon-2">
-          <TrashIcon weight="bold" />
-        </span>{' '}
-        {translate('Remove')}
-      </Button>
+      <ActionButton
+        action={onRemove}
+        title={translate('Remove')}
+        iconNode={<TrashIcon weight="bold" />}
+        variant="text-secondary"
+      />
     </td>
   </tr>
 );
 
 const PairAddButton = ({ onClick }) => (
-  <Button variant="text-secondary" onClick={onClick}>
-    <span className="svg-icon svg-icon-2">
-      <PlusIcon weight="bold" />
-    </span>{' '}
-    {translate('Add pair')}
-  </Button>
+  <ActionButton
+    action={onClick}
+    title={translate('Add pair')}
+    iconNode={<PlusIcon weight="bold" />}
+    variant="text-secondary"
+  />
 );
 
 const PairsTable: React.FC<any> = ({ fields }) =>

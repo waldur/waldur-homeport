@@ -4,12 +4,13 @@ import { marketplaceOfferingEstimatedCostPoliciesList } from 'waldur-js-client';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import { useTable } from '@waldur/table/useTable';
 
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';
 import { PoliciesTable } from './PoliciesTable';
-import { PolicyDeleteButton } from './PolicyDeleteButton';
+import { PolicyDeleteAction } from './PolicyDeleteButton';
 
 interface OfferingCostPoliciesProps {
   offering: Offering;
@@ -36,7 +37,13 @@ export const OfferingCostPolicies: FC<OfferingCostPoliciesProps> = ({
       ]}
       verboseName={translate('Cost policies')}
       rowActions={({ row }) => (
-        <PolicyDeleteButton row={row} type="cost" refetch={tableProps.fetch} />
+        <ActionsDropdown row={row} refetch={tableProps.fetch}>
+          <PolicyDeleteAction
+            row={row}
+            type="cost"
+            refetch={tableProps.fetch}
+          />
+        </ActionsDropdown>
       )}
       tableActions={
         <CostPolicyCreateButton

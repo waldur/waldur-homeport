@@ -1,9 +1,9 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { FloatingIpRow } from './FloatingIpRow';
 
@@ -44,19 +44,16 @@ export const FloatingIpsList: FC<FloatingIpsListProps> = ({
           </table>
         )}
 
-        <Button
-          variant="text-secondary"
-          onClick={() => {
+        <ActionButton
+          action={() => {
             fields.push({
               floating_ip: true,
             });
           }}
-        >
-          <span className="svg-icon svg-icon-2">
-            <PlusCircleIcon weight="bold" />
-          </span>
-          {translate('Add')}
-        </Button>
+          title={translate('Add')}
+          iconNode={<PlusCircleIcon weight="bold" />}
+          variant="text-secondary"
+        />
       </>
     )}
   </>

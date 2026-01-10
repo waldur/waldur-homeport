@@ -1,5 +1,5 @@
 import { useState, useEffect } from 'react';
-import { Alert, Button, Spinner } from 'react-bootstrap';
+import { Alert, Spinner } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
   supportSettingsAtlassianDiscoverCustomFields,
@@ -7,8 +7,10 @@ import {
 } from 'waldur-js-client';
 
 import { SelectField } from '@waldur/form';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import type { AtlassianCredentials, DiscoveryState } from '../types';
 
@@ -96,9 +98,11 @@ export const FieldMappingStep = ({
       <div>
         <Alert variant="danger">{error}</Alert>
         <div className="d-flex justify-content-end gap-2">
-          <Button variant="secondary" onClick={onBack}>
-            {translate('Back')}
-          </Button>
+          <ActionButton
+            action={onBack}
+            variant="secondary"
+            title={translate('Back')}
+          />
         </div>
       </div>
     );
@@ -309,15 +313,17 @@ export const FieldMappingStep = ({
           )}
 
           <div className="d-flex justify-content-end gap-2 mt-6">
-            <Button variant="secondary" onClick={onCancel}>
-              {translate('Cancel')}
-            </Button>
-            <Button variant="tertiary" onClick={onBack}>
-              {translate('Back')}
-            </Button>
-            <Button type="submit" variant="primary">
-              {translate('Continue')}
-            </Button>
+            <ActionButton
+              action={onCancel}
+              variant="secondary"
+              title={translate('Cancel')}
+            />
+            <ActionButton
+              action={onBack}
+              variant="tertiary"
+              title={translate('Back')}
+            />
+            <SubmitButton submitting={false} label={translate('Continue')} />
           </div>
         </form>
       )}

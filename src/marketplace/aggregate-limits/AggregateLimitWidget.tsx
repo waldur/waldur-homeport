@@ -1,6 +1,5 @@
 import { EyeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { ComponentsUsageStats } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
@@ -13,6 +12,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import { WidgetCard } from '@waldur/dashboard/WidgetCard';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { Customer } from '@waldur/workspace/types';
 
 import { useAggregateLimitChart } from './utils';
@@ -150,14 +150,12 @@ export const AggregateLimitWidget = ({
   const cardAction = () => {
     if (showViewAllButton) {
       return (
-        <Button
-          onClick={viewAllComponents}
+        <CompactActionButton
+          action={viewAllComponents}
+          title={translate('View all')}
           variant="link"
-          size="sm"
           className="py-0"
-        >
-          {translate('View all')}
-        </Button>
+        />
       );
     }
     return null;

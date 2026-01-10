@@ -1,12 +1,13 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
 import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 
@@ -35,23 +36,23 @@ const StaticRouteRow = ({ route, nexthopValidator, onRemove }) => (
       />
     </td>
     <td>
-      <Button variant="text-secondary" onClick={onRemove} size="sm">
-        <span className="svg-icon svg-icon-2">
-          <TrashIcon weight="bold" />
-        </span>{' '}
-        {translate('Remove')}
-      </Button>
+      <CompactActionButton
+        title={translate('Remove')}
+        action={onRemove}
+        iconNode={<TrashIcon weight="bold" />}
+        variant="text-secondary"
+      />
     </td>
   </tr>
 );
 
 const StaticRouteAddButton = ({ onClick }) => (
-  <Button variant="text-secondary" onClick={onClick} size="sm">
-    <span className="svg-icon svg-icon-2">
-      <PlusIcon weight="bold" />
-    </span>{' '}
-    {translate('Add route')}
-  </Button>
+  <CompactActionButton
+    title={translate('Add route')}
+    action={onClick}
+    iconNode={<PlusIcon weight="bold" />}
+    variant="text-secondary"
+  />
 );
 
 export const StaticRoutesTable: FC<{ fields; fixedIps: string[] }> = ({

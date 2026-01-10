@@ -7,10 +7,9 @@ import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
 import { CodePreview } from '@waldur/core/CodePreview';
 import { Tip } from '@waldur/core/Tooltip';
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
+import { FormContainer, FormFooter, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -62,13 +61,10 @@ export const EditGettingStartedDialog = connect<
         <ModalDialog
           title={translate('Getting started instructions')}
           footer={
-            <>
-              <CloseDialogButton />
-              <SubmitButton
-                submitting={props.submitting}
-                label={translate('Update')}
-              />
-            </>
+            <FormFooter
+              submitting={props.submitting}
+              submitLabel={translate('Update')}
+            />
           }
         >
           <Row>

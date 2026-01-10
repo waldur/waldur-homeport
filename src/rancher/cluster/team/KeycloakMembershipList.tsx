@@ -1,6 +1,6 @@
 import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, memo, useMemo } from 'react';
-import { Dropdown, DropdownButton } from 'react-bootstrap';
+import { Dropdown } from 'react-bootstrap';
 import {
   KeycloakUserGroupMembership,
   keycloakUserGroupMembershipsList,
@@ -11,6 +11,7 @@ import {
 import Avatar from '@waldur/core/Avatar';
 import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { TableWithPortal } from '@waldur/table/types';
@@ -49,9 +50,9 @@ const TableActions = ({
 };
 
 const BulkActions = ({ rows, refetch }) => (
-  <DropdownButton variant="primary" title={translate('Actions')}>
+  <ActionDropdownButton variant="primary" title={translate('Actions')}>
     <KeycloakMembershipBulkRemoveAction rows={rows} refetch={refetch} />
-  </DropdownButton>
+  </ActionDropdownButton>
 );
 
 const UserField = ({ row }) => (

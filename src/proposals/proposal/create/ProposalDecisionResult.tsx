@@ -1,6 +1,6 @@
 import { CheckCircleIcon, EyeIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
@@ -8,6 +8,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { Proposal, ProposalReview } from '@waldur/proposals/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { RateStars } from '../create-review/RateStars';
@@ -76,10 +77,8 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
                 ? translate('1 star rate')
                 : translate('{count} stars rate', { count: overallScore })}
             </span>
-            <Button
-              variant="tertiary"
-              className="ms-auto"
-              onClick={() =>
+            <ActionButton
+              action={() =>
                 dispatch(
                   openModalDialog(ProposalReviewDialog, {
                     reviews,
@@ -87,12 +86,11 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
                   }),
                 )
               }
-            >
-              <span className="svg-icon svg-icon-2">
-                <EyeIcon weight="bold" />
-              </span>
-              {translate('More details')}
-            </Button>
+              title={translate('More details')}
+              iconNode={<EyeIcon weight="bold" />}
+              variant="tertiary"
+              className="ms-auto"
+            />
           </div>
         </div>
       </Card.Body>

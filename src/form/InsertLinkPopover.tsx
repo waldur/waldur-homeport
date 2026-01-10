@@ -16,9 +16,10 @@ import * as Popover from '@radix-ui/react-popover';
 import * as Tooltip from '@radix-ui/react-tooltip';
 import classNames from 'classnames';
 import { useState, FC, useEffect, forwardRef } from 'react';
-import { Modal, Button, FormLabel } from 'react-bootstrap';
+import { Modal, FormLabel } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
 
 import { StringField } from './StringField';
@@ -59,12 +60,21 @@ const LinkEditForm = ({ initialUrl, onCancel }) => {
           />
 
           <div>
-            <Button variant="tertiary" type="reset" size="sm">
-              {translate('Cancel')}
-            </Button>
-            <Button type="submit" size="sm" className="ms-2">
-              {translate('Save')}
-            </Button>
+            <CompactSubmitButton
+              submitting={false}
+              variant="tertiary"
+              type="button"
+              onClick={(e) => {
+                e.preventDefault();
+                onCancel();
+              }}
+              label={translate('Cancel')}
+            />
+            <CompactSubmitButton
+              submitting={false}
+              className="ms-2"
+              label={translate('Save')}
+            />
           </div>
         </form>
       )}

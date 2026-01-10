@@ -4,8 +4,8 @@ import { useDispatch } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
 import { OpenStackVolume, openstackVolumesExtend } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { formatFilesize } from '@waldur/core/utils';
+import { FormFooter } from '@waldur/form';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import {
@@ -13,7 +13,6 @@ import {
   formatIntField,
 } from '@waldur/marketplace/common/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
@@ -67,12 +66,7 @@ export const VolumeExtendDialog = reduxForm<
     <form onSubmit={handleSubmit(extendVolume)}>
       <ModalDialog
         title={translate('Extend OpenStack volume')}
-        footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton submitting={submitting} label={translate('Submit')} />
-          </>
-        }
+        footer={<FormFooter submitting={submitting} />}
       >
         <p>
           <strong>{translate('Volume name')}:</strong> {resource.name}

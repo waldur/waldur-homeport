@@ -5,14 +5,13 @@ import { marketplaceProviderOfferingsMoveOffering } from 'waldur-js-client';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
+import { FormFooter } from '@waldur/form';
 import { Select } from '@waldur/form/AsyncSelectField';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showError, showSuccess } from '@waldur/store/notify';
 
@@ -62,14 +61,11 @@ export const MoveOfferingDialog: FunctionComponent<{
               offeringName: offering.name,
             })}
             footer={
-              <>
-                <CloseDialogButton />
-                <SubmitButton
-                  submitting={submitting}
-                  label={translate('Save')}
-                  disabled={invalid}
-                />
-              </>
+              <FormFooter
+                submitting={submitting}
+                invalid={invalid}
+                submitLabel={translate('Save')}
+              />
             }
           >
             <FormGroup label={translate('Move to service provider')} required>

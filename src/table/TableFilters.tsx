@@ -1,10 +1,11 @@
 import { FunctionComponent, useCallback } from 'react';
-import { Button, Col, Row, Stack } from 'react-bootstrap';
+import { Col, Row, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { change, getFormValues } from 'redux-form';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 import { TableFiltersMenu } from './TableFiltersMenu';
@@ -87,13 +88,14 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
       </Col>
       {!props.hideClearFilters && props.filtersStorage.length > 0 && (
         <Col xs="auto" className="align-self-start text-end">
-          <Button
+          <SubmitButton
+            submitting={false}
             variant="flush"
             className="btn-active-text-primary h-40px"
             onClick={clearFilters}
-          >
-            {isMd ? translate('Clear') : translate('Clear filters')}
-          </Button>
+            type="button"
+            label={isMd ? translate('Clear') : translate('Clear filters')}
+          />
         </Col>
       )}
     </Row>

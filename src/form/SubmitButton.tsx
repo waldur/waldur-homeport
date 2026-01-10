@@ -1,31 +1,69 @@
 import { FC, ReactNode } from 'react';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { BaseButton } from '@waldur/core/buttons/BaseButton';
+import { translate } from '@waldur/i18n';
 
 interface SubmitButtonProps {
+  /** Loading/submitting state - shows spinner and disables button */
   submitting: boolean;
+  /** Button text label */
   label?: ReactNode;
+  /** Alternative to label - rendered as children */
   children?: ReactNode;
+  /** Button ID attribute */
   id?: string;
+  /** Disabled state (independent of submitting) */
   disabled?: boolean;
+  /** Form validation state - disables button when true */
+  invalid?: boolean;
+  /** Bootstrap button variant - defaults to 'primary' */
+  variant?: string;
+  /** Additional CSS classes */
   className?: string;
-  onClick?(event): void;
+  /** Button type - defaults to 'submit' */
+  type?: 'submit' | 'button';
+  /** Click handler */
+  onClick?(event: React.MouseEvent<HTMLButtonElement>): void;
+  /** Optional icon to display */
+  iconNode?: ReactNode;
+  /** Place icon on the left side (default: false, icon on right) */
+  iconOnLeft?: boolean;
+  /** Data attributes for testing/integration */
+  [key: `data-${string}`]: string | undefined;
 }
 
+/**
+ * SubmitButton - for form submission.
+ * Always renders at large size for visual consistency.
+ * Use CompactSubmitButton for compact form contexts (popovers, inline forms).
+ */
 export const SubmitButton: FC<SubmitButtonProps> = ({
-  className = 'btn btn-primary',
-  children,
+  submitting,
   label,
-  ...props
+  children,
+  id,
+  disabled,
+  invalid,
+  variant = 'primary',
+  className,
+  type = 'submit',
+  onClick,
+  iconNode,
+  iconOnLeft = false,
+  ...rest
 }) => (
-  <button
-    id={props.id}
-    type="submit"
+  <BaseButton
+    id={id}
+    label={children || label || translate('Submit')}
+    onClick={onClick}
+    iconNode={iconNode}
+    iconRight={!iconOnLeft}
     className={className}
-    disabled={props.submitting || props.disabled === true}
-    onClick={props.onClick}
-  >
-    {props.submitting && <LoadingSpinnerIcon className="me-1" />}
-    {children || label}
-  </button>
+    disabled={disabled || invalid}
+    variant={variant}
+    pending={submitting}
+    size="lg"
+    type={type}
+    {...rest}
+  />
 );

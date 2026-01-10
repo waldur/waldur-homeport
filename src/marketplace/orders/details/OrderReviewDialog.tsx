@@ -1,10 +1,11 @@
 import { useMutation } from '@tanstack/react-query';
-import { Button, Stack } from 'react-bootstrap';
+import { Stack } from 'react-bootstrap';
 import {
   marketplaceOrdersApproveByProvider,
   marketplaceOrdersRejectByProvider,
 } from 'waldur-js-client';
 
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { FileDownloader } from '@waldur/form/upload/FileDownloader';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -49,18 +50,22 @@ export const OrderReviewDialog = ({ order, loadData }) => {
       footer={
         <>
           <CloseDialogButton className="min-w-125px" />
-          <Button
-            className="btn-success btn-sm w-100"
+          <CompactSubmitButton
+            submitting={false}
+            variant="danger"
+            className="w-100"
             onClick={() => rejectOrder()}
-          >
-            {translate('Reject')}
-          </Button>
-          <Button
-            className="btn-danger btn-sm w-100"
+            type="button"
+            label={translate('Reject')}
+          />
+          <CompactSubmitButton
+            submitting={false}
+            variant="success"
+            className="w-100"
             onClick={() => approveOrder()}
-          >
-            {translate('Approve')}
-          </Button>
+            type="button"
+            label={translate('Approve')}
+          />
         </>
       }
     >

@@ -1,13 +1,13 @@
 import { TrashIcon, ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { openModalDialog } from '@waldur/modal/actions';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectRecoveryModal } from './ProjectRecoveryModal';
@@ -54,15 +54,12 @@ export const RemovedProjectWarningBar: FC = () => {
           </div>
           {isExperimentalUiComponentsVisible() && (
             <div>
-              <Button
+              <CompactActionButton
+                action={openRecoveryModal}
+                title={translate('Recover Project')}
+                iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
                 variant="danger"
-                size="sm"
-                onClick={openRecoveryModal}
-                className="d-flex align-items-center gap-2"
-              >
-                <ArrowCounterClockwiseIcon size={16} weight="bold" />
-                {translate('Recover Project')}
-              </Button>
+              />
             </div>
           )}
         </div>

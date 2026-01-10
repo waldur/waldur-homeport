@@ -21,7 +21,6 @@ const ProjectCreateDialog = lazyComponent(() =>
 interface ProjectCreateButtonProps {
   customer: Customer;
   variant?: ButtonVariant;
-  size?: 'sm' | 'lg';
   title?: string;
   iconNode?: ReactNode;
   refetch?;
@@ -33,7 +32,6 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
   title = translate('Add'),
   variant = 'primary',
   iconNode,
-  size,
   refetch,
   className,
 }) => {
@@ -51,7 +49,6 @@ export const ProjectCreateButton: FC<ProjectCreateButtonProps> = ({
   return (
     <ActionButton
       title={title}
-      size={size}
       variant={variant}
       className={className}
       action={() =>

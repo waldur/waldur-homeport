@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Card, Dropdown, DropdownButton } from 'react-bootstrap';
+import { Card, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { OIDC_TYPES } from '@waldur/auth/providers/constants';
@@ -7,6 +7,7 @@ import { IdentityProviderLogo } from '@waldur/auth/providers/IdentityProviderLog
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
 
 const CreateProviderDialog = lazyComponent(() =>
   import('./CreateProviderDialog').then((module) => ({
@@ -102,7 +103,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
             <div className="flex-grow-1">
               <h1 className="fs-2 text-nowrap fw-boldest">{title}</h1>
               <p className="fs-6 text-dark">{description}</p>
-              <DropdownButton
+              <ActionDropdownButton
                 variant={
                   provider?.is_active === true
                     ? 'primary'
@@ -140,7 +141,7 @@ export const ProviderCard: FC<ProviderCardProps> = ({
                     {translate('Add identity provider')}
                   </Dropdown.Item>
                 )}
-              </DropdownButton>
+              </ActionDropdownButton>
             </div>
           </div>
         </div>

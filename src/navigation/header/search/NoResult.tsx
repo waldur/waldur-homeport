@@ -1,8 +1,8 @@
 import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { CSSProperties, FC, ReactNode } from 'react';
-import { Button } from 'react-bootstrap';
 
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 import { RadialBg } from './RadialBg';
@@ -61,16 +61,17 @@ export const NoResult: FC<NoResultProps> = ({
         {(actions || callback) && (
           <div className="actions d-flex justify-content-center gap-4 w-100">
             {Boolean(callback) && (
-              <Button
+              <SubmitButton
+                submitting={false}
+                type="button"
                 variant="tertiary"
                 className={classNames(
                   'mw-175px min-w-120px',
                   actions ? 'w-175px' : 'w-50',
                 )}
                 onClick={callback}
-              >
-                {buttonTitle}
-              </Button>
+                label={buttonTitle}
+              />
             )}
             {actions}
           </div>

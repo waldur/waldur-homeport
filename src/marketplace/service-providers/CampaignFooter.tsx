@@ -1,6 +1,5 @@
 import { CaretRightIcon, PaperPlaneTiltIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   promotionsCampaignsCreate,
@@ -12,6 +11,7 @@ import * as api from '@waldur/marketplace/common/api';
 import { serializeCampaign } from '@waldur/marketplace/service-providers/utils';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { CampaignFormData } from './types';
@@ -83,32 +83,32 @@ export const CampaignFooter = ({
   );
 
   return step === 0 ? (
-    <Button
-      className="btn-icon-right"
-      onClick={() => setStep(1)}
+    <ActionButton
+      action={() => setStep(1)}
       disabled={disabled}
-    >
-      {translate('Continue')}
-      <span className="svg-icon svg-icon-2">
-        <CaretRightIcon weight="bold" />
-      </span>
-    </Button>
+      title={translate('Continue')}
+      iconNode={<CaretRightIcon weight="bold" />}
+      iconRight
+      variant="primary"
+    />
   ) : (
     <>
       {!isUpdate ? (
-        <Button disabled={disabled} onClick={handleSubmit(saveAndSend)}>
-          <span className="svg-icon svg-icon-2">
-            <PaperPlaneTiltIcon weight="bold" />
-          </span>
-          {translate('Create a campaign')}
-        </Button>
+        <ActionButton
+          disabled={disabled}
+          action={handleSubmit(saveAndSend)}
+          iconNode={<PaperPlaneTiltIcon weight="bold" />}
+          title={translate('Create a campaign')}
+          variant="primary"
+        />
       ) : (
-        <Button disabled={disabled} onClick={handleSubmit(saveAndUpdate)}>
-          <span className="svg-icon svg-icon-2">
-            <PaperPlaneTiltIcon weight="bold" />
-          </span>
-          {translate('Update a campaign')}
-        </Button>
+        <ActionButton
+          disabled={disabled}
+          action={handleSubmit(saveAndUpdate)}
+          iconNode={<PaperPlaneTiltIcon weight="bold" />}
+          title={translate('Update a campaign')}
+          variant="primary"
+        />
       )}
     </>
   );

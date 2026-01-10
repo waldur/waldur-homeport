@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import { userGroupInvitationsCreate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
 import { required } from '@waldur/core/validators';
 import { useCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { invitationTypeOptions } from '@waldur/invitations/actions/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';

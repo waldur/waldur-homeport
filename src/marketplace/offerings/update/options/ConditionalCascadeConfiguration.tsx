@@ -1,6 +1,6 @@
 import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import { FieldArray, WrappedFieldArrayProps } from 'redux-form';
 
@@ -8,6 +8,7 @@ import { required } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { FormGroup } from '../../FormGroup';
 
@@ -71,16 +72,12 @@ const CascadeStepsGroup = ({ fields }: WrappedFieldArrayProps<CascadeStep>) => {
                 {translate('Step {index}', { index: index + 1 })}
               </h6>
               <div className="card-toolbar m-0">
-                <Button
+                <ActionButton
                   variant="text-danger"
-                  className="btn-icon"
-                  onClick={() => removeStep(index)}
+                  action={() => removeStep(index)}
                   disabled={fields.length <= 1}
-                >
-                  <span className="svg-icon svg-icon-1">
-                    <TrashIcon weight="bold" />
-                  </span>
-                </Button>
+                  iconNode={<TrashIcon weight="bold" />}
+                />
               </div>
             </Card.Header>
             <Card.Body className="px-4">
@@ -196,12 +193,12 @@ const CascadeStepsGroup = ({ fields }: WrappedFieldArrayProps<CascadeStep>) => {
       })}
 
       <div>
-        <Button variant="text-primary" onClick={addStep}>
-          <span className="svg-icon svg-icon-2">
-            <PlusIcon weight="bold" />
-          </span>
-          {translate('Add step')}
-        </Button>
+        <ActionButton
+          variant="text-primary"
+          action={addStep}
+          iconNode={<PlusIcon weight="bold" />}
+          title={translate('Add step')}
+        />
       </div>
     </>
   );

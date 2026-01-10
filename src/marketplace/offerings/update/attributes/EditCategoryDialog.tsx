@@ -7,11 +7,10 @@ import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client'
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { SelectField, SubmitButton } from '@waldur/form';
+import { FormFooter, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { getCategories } from '@waldur/marketplace/common/api';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -72,14 +71,11 @@ export const EditCategoryDialog = reduxForm<FormData, OwnProps>({
       <ModalDialog
         title={translate('Edit category')}
         footer={
-          <>
-            <CloseDialogButton />
-            <SubmitButton
-              disabled={invalid}
-              submitting={submitting}
-              label={translate('Save')}
-            />
-          </>
+          <FormFooter
+            submitting={submitting}
+            invalid={invalid}
+            submitLabel={translate('Save')}
+          />
         }
       >
         {queryData.isLoading ? (

@@ -1,5 +1,6 @@
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
+
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ApproveByConsumerButton } from './ApproveByConsumerButton';
 import { RejectByConsumerButton } from './RejectByConsumerButton';
@@ -10,13 +11,15 @@ export const OrderConsumerActions: FC<OrderActionProps> = (props) =>
     <>
       <ApproveByConsumerButton
         {...props}
-        className={props.as === Button ? 'btn-success btn-sm' : 'text-success'}
+        className={
+          props.as === ActionButton ? 'btn-success btn-sm' : 'text-success'
+        }
       />
 
       <RejectByConsumerButton
         {...props}
         className={
-          props.as === Button
+          props.as === ActionButton
             ? 'btn-danger btn-sm flex-grow-1'
             : 'text-danger flex-grow-1'
         }

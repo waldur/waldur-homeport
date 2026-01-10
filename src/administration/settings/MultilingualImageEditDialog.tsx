@@ -1,9 +1,10 @@
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Button, Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
+import { SubmitButton } from '@waldur/form';
 import { WideImageField } from '@waldur/form/WideImageField';
 import { translate } from '@waldur/i18n';
 import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
@@ -106,13 +107,14 @@ export const MultilingualImageEditDialog: FC<
       footer={
         <>
           <CloseDialogButton className="flex-equal" />
-          <Button
-            className="btn btn-primary flex-equal"
+          <SubmitButton
+            submitting={submitting}
+            disabled={!hasChanges}
+            className="flex-equal"
             onClick={onSubmit}
-            disabled={!hasChanges || submitting}
-          >
-            {submitting ? translate('Saving...') : translate('Confirm')}
-          </Button>
+            type="button"
+            label={translate('Confirm')}
+          />
         </>
       }
     >

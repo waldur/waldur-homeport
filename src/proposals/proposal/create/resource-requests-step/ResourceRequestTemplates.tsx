@@ -2,7 +2,6 @@ import { CheckCircleIcon, CubeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { startCase } from 'lodash-es';
 import { FC, useEffect } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   CallResourceTemplate,
@@ -13,11 +12,11 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { FieldReviewComments } from '@waldur/proposals/proposal/create-review/FieldReviewComments';
 import { ProposalReview } from '@waldur/proposals/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { selectAllRows } from '@waldur/table/actions';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import { getTableState } from '@waldur/table/selectors';
@@ -192,21 +191,14 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
       minHeight="auto"
       hideRefresh
       tableActions={
-        <Button
-          disabled={(!newCount && !removedCount) || isPending}
-          onClick={saveSelections as any}
+        <ActionButton
+          action={saveSelections as any}
+          title={translate('Save')}
+          iconNode={<CheckCircleIcon weight="bold" />}
+          disabled={!newCount && !removedCount}
+          pending={isPending}
           className="min-w-125px"
-        >
-          <span className="svg-icon svg-icon-2">
-            {isPending ? (
-              // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-              <LoadingSpinnerIcon />
-            ) : (
-              <CheckCircleIcon weight="bold" />
-            )}
-          </span>
-          {translate('Save')}
-        </Button>
+        />
       }
       expandableRow={ExpandableRow}
       footer={

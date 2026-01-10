@@ -7,10 +7,9 @@ import {
   OpenStackStaticRouteRequest,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
+import { FormFooter } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -60,14 +59,11 @@ export const SetRoutesDialog = enhance(
         <ModalDialog
           title={translate('Update static routes')}
           footer={
-            <>
-              <CloseDialogButton />
-              <SubmitButton
-                disabled={invalid}
-                submitting={submitting}
-                label={translate('Update')}
-              />
-            </>
+            <FormFooter
+              submitting={submitting}
+              invalid={invalid}
+              submitLabel={translate('Update')}
+            />
           }
         >
           <FieldArray

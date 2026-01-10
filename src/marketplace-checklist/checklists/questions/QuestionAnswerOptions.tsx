@@ -16,13 +16,15 @@ import {
   PlusIcon,
   TrashIcon,
 } from '@phosphor-icons/react';
-import { Button, Card, Form } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { required, requiredArray } from '@waldur/core/validators';
 import { StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 const SortableField = ({ name, index, onRemove, disabled }) => {
   const {
@@ -56,16 +58,12 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
         <Field component={StringField as any} name={name} validate={required} />
       </td>
       <td width={60}>
-        <Button
+        <ActionButton
+          action={onRemove}
+          iconNode={<TrashIcon weight="bold" />}
           variant="text-danger"
-          className="btn-icon"
-          onClick={onRemove}
           disabled={disabled}
-        >
-          <span className="svg-icon svg-icon-1">
-            <TrashIcon weight="bold" />
-          </span>
-        </Button>
+        />
       </td>
     </tr>
   );
@@ -128,17 +126,13 @@ const DraggableFieldsListGroup = ({
               <tr>
                 <td />
                 <td colSpan={2}>
-                  <Button
+                  <CompactActionButton
+                    action={addRow}
+                    title={translate('Add answer')}
+                    iconNode={<PlusIcon weight="bold" />}
                     variant="text-primary"
-                    onClick={addRow}
                     disabled={addDisabled}
-                    size="sm"
-                  >
-                    <span className="svg-icon svg-icon-2">
-                      <PlusIcon weight="bold" />
-                    </span>
-                    {translate('Add answer')}
-                  </Button>
+                  />
                 </td>
               </tr>
             </tbody>

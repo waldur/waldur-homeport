@@ -7,7 +7,6 @@ import {
 import { init } from 'echarts';
 import { sum } from 'lodash-es';
 import { useCallback } from 'react';
-import { DropdownButton } from 'react-bootstrap';
 import { ProjectUser } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
@@ -15,6 +14,7 @@ import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useNotify } from '@waldur/store/hooks';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
 import exportAs from '@waldur/table/exporters';
 import { ExportData } from '@waldur/table/exporters/types';
 
@@ -235,7 +235,7 @@ export const UsageExportDropdown = (props: UsageExportDropdownProps) => {
   const exportUsages = useUsageExport(props);
 
   return (
-    <DropdownButton variant="tertiary" title={translate('Export all')}>
+    <ActionDropdownButton variant="tertiary" title={translate('Export all')}>
       <ActionItem
         title={translate('PNG')}
         action={() => exportUsages('png')}
@@ -259,6 +259,6 @@ export const UsageExportDropdown = (props: UsageExportDropdownProps) => {
         action={() => exportUsages('excel')}
         iconNode={<FileXlsIcon weight="bold" />}
       />
-    </DropdownButton>
+    </ActionDropdownButton>
   );
 };

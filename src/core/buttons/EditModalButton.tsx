@@ -5,6 +5,7 @@ import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { EditModalButtonProps } from './types';
 
@@ -77,13 +78,14 @@ export function EditModalButton<
   ]);
 
   if (renderAs === 'button') {
+    const ButtonComponent =
+      buttonSize === 'sm' ? CompactActionButton : ActionButton;
     return (
-      <ActionButton
+      <ButtonComponent
         action={handleClick}
         title={title}
         iconNode={iconNode}
         variant="tertiary"
-        size={buttonSize}
         disabled={disabled}
         tooltip={tooltip}
       />

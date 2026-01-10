@@ -1,12 +1,12 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { keysList, KeysListData } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { TableProps } from '@waldur/table/types';
@@ -62,16 +62,12 @@ export const FormSSHPublicKeysField = ({ change, ...props }: OwnProps) => {
       title={translate('SSH public keys')}
       verboseName={translate('SSH keys')}
       tableActions={
-        <Button
-          variant="tertiary"
+        <ActionButton
+          action={openFormDialog}
+          title={translate('Create new')}
+          iconNode={<PlusCircleIcon weight="bold" />}
           className="text-nowrap"
-          onClick={openFormDialog}
-        >
-          <span className="svg-icon svg-icon-2">
-            <PlusCircleIcon weight="bold" />
-          </span>
-          {translate('Create new')}
-        </Button>
+        />
       }
       hoverable
       fieldType="radio"

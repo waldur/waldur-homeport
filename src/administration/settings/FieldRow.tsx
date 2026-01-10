@@ -1,5 +1,5 @@
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
@@ -51,7 +51,7 @@ const MultilingualImageField = ({
 );
 
 const CountryListEditButton = ({ onEdit }) => (
-  <EditButton onClick={onEdit} size="sm" />
+  <CompactEditButton onClick={onEdit} />
 );
 
 const LoginPageListField = ({
@@ -154,7 +154,7 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
         ) : item.type === 'multilingual_image_field' ? (
           <MultilingualImageEditButton item={item} value={value} />
         ) : item.type === 'json_list_field' ? (
-          <EditButton onClick={onEdit} size="sm" />
+          <CompactEditButton onClick={onEdit} />
         ) : (
           <ConfigurationEditButton item={item} value={value} />
         )

@@ -1,6 +1,5 @@
-import { Button } from 'react-bootstrap';
-
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 
@@ -14,7 +13,9 @@ export const OrderReviewButton = ({ order, loadData }) => {
   const { openDialog } = useModal();
 
   return (
-    <Button
+    <SubmitButton
+      submitting={false}
+      type="button"
       variant="tertiary"
       onClick={() =>
         openDialog(OrderReviewDialog, {
@@ -23,8 +24,7 @@ export const OrderReviewButton = ({ order, loadData }) => {
           loadData,
         })
       }
-    >
-      {translate('Review PDF')}
-    </Button>
+      label={translate('Review PDF')}
+    />
   );
 };

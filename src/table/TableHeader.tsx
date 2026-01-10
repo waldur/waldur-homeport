@@ -1,8 +1,9 @@
 import { CaretDownIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
-import { Button, FormCheck } from 'react-bootstrap';
+import { FormCheck } from 'react-bootstrap';
 
+import { IconButton } from '@waldur/core/buttons/IconButton';
 import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
 import { translate } from '@waldur/i18n';
 
@@ -247,16 +248,26 @@ export const TableHeader: FC<TableHeaderProps> = ({
           ) : null}
           {expandableRow && (
             <th data-testid="all-rows-expander" style={{ width: '10px' }}>
-              <Button
+              <IconButton
+                iconNode={
+                  <CaretDownIcon
+                    size={20}
+                    weight="bold"
+                    className="rotate-180"
+                  />
+                }
+                tooltip={
+                  toggledAll
+                    ? translate('Collapse all rows')
+                    : translate('Expand all rows')
+                }
+                onClick={toggleAll}
                 variant="flush"
                 className={classNames(
                   'btn-no-focus',
                   toggledAll ? 'active' : '',
                 )}
-                onClick={toggleAll}
-              >
-                <CaretDownIcon size={20} weight="bold" className="rotate-180" />
-              </Button>
+              />
             </th>
           )}
           {hasOptionalColumns

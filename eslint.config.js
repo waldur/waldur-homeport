@@ -10,6 +10,7 @@ import reactRefresh from 'eslint-plugin-react-refresh';
 import globals from 'globals';
 import tseslint from 'typescript-eslint';
 
+import enforceActionsDropdownInTables from './eslint-rules/enforce-actions-dropdown-in-tables.js';
 import enforceBadgeDesignTokens from './eslint-rules/enforce-badge-design-tokens.js';
 import enforceBadgeIconPatterns from './eslint-rules/enforce-badge-icon-patterns.js';
 import enforceBadgePropsConsistency from './eslint-rules/enforce-badge-props-consistency.js';
@@ -17,6 +18,9 @@ import enforceBadgeRightIconPattern from './eslint-rules/enforce-badge-right-ico
 import enforceBorderRadiusTokens from './eslint-rules/enforce-border-radius-tokens.js';
 import enforceBreadcrumbColors from './eslint-rules/enforce-breadcrumb-colors.js';
 import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
+import noDirectBootstrapButton from './eslint-rules/no-direct-bootstrap-button.js';
+import noDirectBootstrapDropdownButton from './eslint-rules/no-direct-bootstrap-dropdown-button.js';
+import noEditButtonSizeOverride from './eslint-rules/no-edit-button-size-override.js';
 import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
 import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
 import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
@@ -51,12 +55,18 @@ export default tseslint
         'waldur-custom': {
           rules: {
             ...noTemplateInTranslate.rules,
+            'enforce-actions-dropdown-in-tables':
+              enforceActionsDropdownInTables,
             'enforce-badge-icon-patterns': enforceBadgeIconPatterns,
             'enforce-badge-props-consistency': enforceBadgePropsConsistency,
             'enforce-badge-design-tokens': enforceBadgeDesignTokens,
             'no-manual-icon-colors-in-badges': noManualIconColorsInBadges,
             'enforce-badge-right-icon-pattern': enforceBadgeRightIconPattern,
             'enforce-button-variants': enforceButtonVariants,
+            'no-direct-bootstrap-button': noDirectBootstrapButton,
+            'no-direct-bootstrap-dropdown-button':
+              noDirectBootstrapDropdownButton,
+            'no-edit-button-size-override': noEditButtonSizeOverride,
             'enforce-formcheck-components': enforceFormcheckComponents,
             'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
             'prefer-classnames-utility': preferClassnamesUtility,
@@ -94,12 +104,16 @@ export default tseslint
 
         // Custom local rules
         'waldur-custom/no-template-in-translate': 'error',
+        'waldur-custom/enforce-actions-dropdown-in-tables': 'warn',
         'waldur-custom/enforce-badge-icon-patterns': 'error',
         'waldur-custom/enforce-badge-props-consistency': 'error',
         'waldur-custom/enforce-badge-design-tokens': 'error',
         'waldur-custom/no-manual-icon-colors-in-badges': 'error',
         'waldur-custom/enforce-badge-right-icon-pattern': 'error',
         'waldur-custom/enforce-button-variants': 'error',
+        'waldur-custom/no-direct-bootstrap-button': 'error',
+        'waldur-custom/no-direct-bootstrap-dropdown-button': 'error',
+        'waldur-custom/no-edit-button-size-override': 'error',
         'waldur-custom/enforce-formcheck-components': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',

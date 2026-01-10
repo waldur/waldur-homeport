@@ -4,9 +4,9 @@ import {
   WarningCircleIcon,
 } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import '@waldur/navigation/header/search/NoResult.scss';
 
@@ -48,18 +48,24 @@ export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
           </div>
         </div>
         <div className="actions d-flex gap-4 mt-2">
-          <Button variant="tertiary" onClick={openErrorTraceDialog}>
-            <span className="svg-icon svg-icon-2">
-              <EyeIcon weight="bold" />
-            </span>
-            {translate('Show error trace')}
-          </Button>
-          <Button variant="tertiary" onClick={() => location.reload()}>
-            <span className="svg-icon svg-icon-2">
-              <ArrowClockwiseIcon weight="bold" />
-            </span>
-            {translate('Reload')}
-          </Button>
+          <SubmitButton
+            submitting={false}
+            type="button"
+            variant="tertiary"
+            onClick={openErrorTraceDialog}
+            label={translate('Show error trace')}
+            iconNode={<EyeIcon weight="bold" />}
+            iconOnLeft
+          />
+          <SubmitButton
+            submitting={false}
+            type="button"
+            variant="tertiary"
+            onClick={() => location.reload()}
+            label={translate('Reload')}
+            iconNode={<ArrowClockwiseIcon weight="bold" />}
+            iconOnLeft
+          />
         </div>
       </div>
     </div>

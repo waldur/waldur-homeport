@@ -2,7 +2,6 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { usersDestroy } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
@@ -12,6 +11,7 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { isDescendantOf } from '@waldur/navigation/useTabs';
 import { useNotify } from '@waldur/store/hooks';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { TermsOfService } from './TermsOfService';
 
@@ -61,16 +61,14 @@ export const UserDelete = ({ user }: { user: User }) => {
       className="mb-5"
       cardBordered
       actions={
-        <Button
+        <ActionButton
           variant="danger"
-          onClick={handleDeleteUser}
+          action={handleDeleteUser}
           disabled={isLoading}
-        >
-          <span className="svg-icon svg-icon-2">
-            <TrashIcon weight="bold" />
-          </span>
-          {translate('Delete')}
-        </Button>
+          pending={isLoading}
+          iconNode={<TrashIcon weight="bold" />}
+          title={translate('Delete')}
+        />
       }
     >
       <ul className="text-gray-500 mb-7">

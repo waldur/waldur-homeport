@@ -3,7 +3,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { customersPartialUpdate } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { translate } from '@waldur/i18n';
 import { GeolocationPoint } from '@waldur/map/types';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
@@ -51,7 +51,7 @@ export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
   };
 
   return (
-    <EditButton
+    <CompactEditButton
       onClick={() => {
         dispatch(
           openModalDialog(SetLocationDialog, {
@@ -70,7 +70,6 @@ export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
           }),
         );
       }}
-      size="sm"
     />
   );
 };

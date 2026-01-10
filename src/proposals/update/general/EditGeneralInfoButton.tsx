@@ -21,5 +21,5 @@ export const EditGeneralInfoButton = (props: EditCallProps) => {
       }),
     );
   };
-  return <EditButton onClick={callback} btnIcon size="sm" />;
+  return <EditButton onClick={callback} btnIcon />;
 };

@@ -1,6 +1,5 @@
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import {
@@ -8,14 +7,14 @@ import {
   MessageTemplateRequest,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { required } from '@waldur/core/validators';
-import { FormContainer, StringField } from '@waldur/form';
+import { FormContainer, StringField, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const BroadcastFormDialog = lazyComponent(() =>
   import('./BroadcastFormDialog').then((module) => ({
@@ -81,15 +80,12 @@ export const BroadcastSaveAsTemplateDialog = reduxForm<
           />
 
           <div className="d-flex justify-content-between">
-            <Button
-              onClick={() => backToBroadcast(resolve.broadcastData)}
+            <ActionButton
+              action={() => backToBroadcast(resolve.broadcastData)}
               variant="secondary"
-            >
-              <span className="svg-icon svg-icon-2">
-                <ArrowLeftIcon weight="bold" />
-              </span>{' '}
-              {translate('Back')}
-            </Button>
+              iconNode={<ArrowLeftIcon weight="bold" />}
+              title={translate('Back')}
+            />
             <SubmitButton submitting={submitting} label={translate('Save')} />
           </div>
         </FormContainer>

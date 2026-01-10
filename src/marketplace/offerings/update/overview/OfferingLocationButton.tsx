@@ -5,7 +5,7 @@ import {
 } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { translate } from '@waldur/i18n';
 import { GeolocationPoint } from '@waldur/map/types';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
@@ -67,5 +67,5 @@ export const OfferingLocationButton = ({
   if (offering.state === ARCHIVED) {
     return null;
   }
-  return <EditButton onClick={callback} size="sm" />;
+  return <CompactEditButton onClick={callback} />;
 };

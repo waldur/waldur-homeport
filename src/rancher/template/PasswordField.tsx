@@ -1,10 +1,11 @@
 import React from 'react';
-import { Button, FormControl, InputGroup } from 'react-bootstrap';
+import { FormControl, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
 import { range } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { FieldProps } from '../types';
 
@@ -31,9 +32,10 @@ export const PasswordField: React.FC<FieldProps> = (props) => {
     (props) => (
       <InputGroup>
         <FormControl {...props.input} />
-        <Button onClick={setGeneratedPassword}>
-          {translate('Generate password')}
-        </Button>
+        <ActionButton
+          action={setGeneratedPassword}
+          title={translate('Generate password')}
+        />
       </InputGroup>
     ),
 

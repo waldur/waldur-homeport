@@ -1,6 +1,6 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button, Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
+import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
 import { Field as FormField, Form } from 'react-final-form';
 import {
   OnboardingJustification,
@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
 import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
 import { translate } from '@waldur/i18n';
@@ -58,22 +59,26 @@ export const OnboardingJustificationDetails: FC<
             </div>
             {showActions && (
               <div className="d-flex gap-2">
-                <Button
+                <SubmitButton
+                  submitting={actionLoading}
                   variant="danger"
                   onClick={() => onReject?.(values)}
-                  disabled={!isPending || actionLoading}
-                >
-                  <XCircleIcon className="me-1" weight="bold" />
-                  {translate('Reject')}
-                </Button>
-                <Button
+                  disabled={!isPending}
+                  label={translate('Reject')}
+                  iconNode={<XCircleIcon weight="bold" />}
+                  iconOnLeft
+                  type="button"
+                />
+                <SubmitButton
+                  submitting={actionLoading}
                   variant="primary"
                   onClick={() => onApprove?.(values)}
-                  disabled={!isPending || actionLoading}
-                >
-                  <CheckCircleIcon className="me-1" weight="bold" />
-                  {translate('Approve')}
-                </Button>
+                  disabled={!isPending}
+                  label={translate('Approve')}
+                  iconNode={<CheckCircleIcon weight="bold" />}
+                  iconOnLeft
+                  type="button"
+                />
               </div>
             )}
           </div>

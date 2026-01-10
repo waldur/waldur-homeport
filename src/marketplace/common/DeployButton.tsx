@@ -1,8 +1,8 @@
 import { useRouter } from '@uirouter/react';
-import { Button } from 'react-bootstrap';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
 
 import { Offering } from '../types';
@@ -29,13 +29,13 @@ export const DeployButton = ({
   };
 
   return (
-    <Button
+    <CompactSubmitButton
+      submitting={false}
+      type="button"
       variant="text-primary"
-      className="btn-sm"
       disabled={disabled}
       onClick={handleClick}
-    >
-      {translate('Add resource')}
-    </Button>
+      label={translate('Add resource')}
+    />
   );
 };

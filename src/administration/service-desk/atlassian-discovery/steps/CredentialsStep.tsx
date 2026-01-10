@@ -1,5 +1,5 @@
 import { useState } from 'react';
-import { Alert, Button } from 'react-bootstrap';
+import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { supportSettingsAtlassianValidateCredentials } from 'waldur-js-client';
 
@@ -7,8 +7,10 @@ import { required, url } from '@waldur/core/validators';
 import { SelectField, StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { SecretField } from '@waldur/form/SecretField';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import type { AtlassianCredentials } from '../types';
 
@@ -249,18 +251,16 @@ export const CredentialsStep = ({
           )}
 
           <div className="d-flex justify-content-end gap-2">
-            <Button variant="secondary" onClick={onCancel}>
-              {translate('Cancel')}
-            </Button>
-            <Button
-              type="submit"
-              variant="primary"
-              disabled={invalid || validating}
-            >
-              {validating
-                ? translate('Validating...')
-                : translate('Validate & Continue')}
-            </Button>
+            <ActionButton
+              action={onCancel}
+              variant="secondary"
+              title={translate('Cancel')}
+            />
+            <SubmitButton
+              submitting={validating}
+              disabled={invalid}
+              label={translate('Validate & Continue')}
+            />
           </div>
         </form>
       )}

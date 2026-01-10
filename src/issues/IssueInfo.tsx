@@ -1,14 +1,11 @@
-import {
-  ArrowsClockwise,
-  ClockCounterClockwise,
-  SpinnerGap,
-} from '@phosphor-icons/react';
+import { ArrowsClockwise, ClockCounterClockwise } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -90,12 +87,15 @@ export const IssueLogButton = ({ issue }) => {
     );
 
   return (
-    <Button variant="secondary" onClick={callback}>
-      <span className="svg-icon svg-icon-2">
-        <ClockCounterClockwise weight="bold" />
-      </span>
-      {translate('Show log')}
-    </Button>
+    <SubmitButton
+      submitting={false}
+      type="button"
+      variant="secondary"
+      onClick={callback}
+      label={translate('Show log')}
+      iconNode={<ClockCounterClockwise weight="bold" />}
+      iconOnLeft
+    />
   );
 };
 
@@ -131,15 +131,15 @@ export const IssueSyncButton = ({
   }
 
   return (
-    <Button variant="secondary" onClick={() => mutate()} disabled={isPending}>
-      <span className="svg-icon svg-icon-2">
-        {isPending ? (
-          <SpinnerGap weight="bold" className="fa-spin" />
-        ) : (
-          <ArrowsClockwise weight="bold" />
-        )}
-      </span>
-      {translate('Sync')}
-    </Button>
+    <SubmitButton
+      submitting={isPending}
+      type="button"
+      variant="secondary"
+      onClick={() => mutate()}
+      disabled={isPending}
+      label={translate('Sync')}
+      iconNode={<ArrowsClockwise weight="bold" />}
+      iconOnLeft
+    />
   );
 };

@@ -1,10 +1,11 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button, Table } from 'react-bootstrap';
+import { Table } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
 import { translate } from '@waldur/i18n';
 import { Category } from '@waldur/marketplace/types';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { ColumnRow } from './ColumnRow';
 
@@ -36,12 +37,12 @@ const ColumnsHeader: FC = () => (
 );
 
 const ColumnAddButton = ({ fields }) => (
-  <Button variant="primary" size="sm" onClick={() => fields.push({})}>
-    <span className="svg-icon svg-icon-2">
-      <PlusIcon weight="bold" />
-    </span>{' '}
-    {translate('Add column')}
-  </Button>
+  <CompactActionButton
+    variant="primary"
+    action={() => fields.push({})}
+    iconNode={<PlusIcon weight="bold" />}
+    title={translate('Add column')}
+  />
 );
 
 export const ColumnsList: FC<ColumnsListProps> = ({

@@ -1,7 +1,7 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FallbackRender } from '@sentry/react';
-import { Button } from 'react-bootstrap';
 
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import Illustration from '@waldur/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
@@ -13,12 +13,15 @@ export const ErrorMessage: FallbackRender = (props) => (
       title={translate('An error has occurred.')}
       description={(props.error as Error).message}
       action={
-        <Button onClick={() => location.reload()} variant="success">
-          <span className="svg-icon svg-icon-2">
-            <ArrowsClockwiseIcon weight="bold" />
-          </span>{' '}
-          {translate('Reload')}
-        </Button>
+        <SubmitButton
+          submitting={false}
+          type="button"
+          onClick={() => location.reload()}
+          variant="success"
+          label={translate('Reload')}
+          iconNode={<ArrowsClockwiseIcon weight="bold" />}
+          iconOnLeft
+        />
       }
     />
 

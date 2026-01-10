@@ -1,11 +1,11 @@
 import { useEffect, useCallback } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { useAsyncFn, useToggle } from 'react-use';
 import { reduxForm, Field } from 'redux-form';
 
 import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
 import { LoadingErred } from '@waldur/core/LoadingErred';
+import { SubmitButton } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
@@ -84,9 +84,12 @@ export const ViewYAMLDialog = reduxForm<
       {value && (
         <>
           <CopyToClipboard value={value} textButton className="my-2" />{' '}
-          <Button onClick={toggleShowDiff}>
-            {showDiff ? translate('Hide diff') : translate('Show diff')}
-          </Button>
+          <SubmitButton
+            submitting={false}
+            onClick={toggleShowDiff}
+            type="button"
+            label={showDiff ? translate('Hide diff') : translate('Show diff')}
+          />
         </>
       )}
     </ActionDialog>

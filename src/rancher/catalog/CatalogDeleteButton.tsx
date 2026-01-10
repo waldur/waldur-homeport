@@ -6,11 +6,11 @@ import { rancherCatalogsDestroy } from 'waldur-js-client';
 import { ENV } from '@waldur/core/config';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { RowActionButton } from '@waldur/table/ActionButton';
 
-export const CatalogDeleteButton: FunctionComponent<{ catalog; refetch }> = ({
-  catalog,
+export const CatalogDeleteAction: FunctionComponent<{ row; refetch }> = ({
+  row,
   refetch,
 }) => {
   const [removing, setRemoving] = useState(false);
@@ -23,7 +23,7 @@ export const CatalogDeleteButton: FunctionComponent<{ catalog; refetch }> = ({
         translate('Delete catalog'),
         translate(
           'Are you sure you would like to delete Rancher catalog {catalog}?',
-          { catalog: <strong>{catalog.name}</strong> },
+          { catalog: <strong>{row.name}</strong> },
           formatJsxTemplate,
         ),
         { forDeletion: true },
@@ -33,7 +33,7 @@ export const CatalogDeleteButton: FunctionComponent<{ catalog; refetch }> = ({
     }
     try {
       setRemoving(true);
-      await rancherCatalogsDestroy({ path: { uuid: catalog.uuid } });
+      await rancherCatalogsDestroy({ path: { uuid: row.uuid } });
       await refetch();
       dispatch(showSuccess(translate('Catalog has been deleted.')));
     } catch (e) {
@@ -45,12 +45,12 @@ export const CatalogDeleteButton: FunctionComponent<{ catalog; refetch }> = ({
     return null;
   }
   return (
-    <RowActionButton
+    <ActionItem
       title={translate('Delete')}
       action={callback}
       iconNode={<TrashIcon weight="bold" />}
-      size="sm"
-      pending={removing}
+      className="text-danger"
+      disabled={removing}
     />
   );
 };

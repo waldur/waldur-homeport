@@ -6,13 +6,12 @@ import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 import {
   StringField,
   FormContainer,
-  SubmitButton,
+  FormFooter,
   TextField,
 } from '@waldur/form';
 import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
@@ -59,13 +58,10 @@ export const EditOverviewDialog = connect(
         <ModalDialog
           title={props.resolve.attribute.title}
           footer={
-            <>
-              <CloseDialogButton />
-              <SubmitButton
-                submitting={props.submitting}
-                label={translate('Update')}
-              />
-            </>
+            <FormFooter
+              submitting={props.submitting}
+              submitLabel={translate('Update')}
+            />
           }
         >
           <FormContainer

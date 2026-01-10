@@ -1,12 +1,11 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 export const ConsumerRejectAll = ({ orders, refetch }) => {
   const dispatch = useDispatch();
@@ -31,16 +30,12 @@ export const ConsumerRejectAll = ({ orders, refetch }) => {
     },
   });
   return (
-    <Button variant="danger" onClick={() => mutate()} disabled={isLoading}>
-      {isLoading ? (
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        <LoadingSpinnerIcon />
-      ) : (
-        <span className="svg-icon svg-icon-2">
-          <ProhibitIcon weight="bold" />
-        </span>
-      )}
-      {translate('Reject all')}
-    </Button>
+    <ActionButton
+      variant="danger"
+      action={() => mutate()}
+      pending={isLoading}
+      iconNode={<ProhibitIcon weight="bold" />}
+      title={translate('Reject all')}
+    />
   );
 };

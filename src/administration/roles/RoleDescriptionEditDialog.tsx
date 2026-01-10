@@ -3,8 +3,9 @@ import { Field, Form } from 'react-final-form';
 import { rolesUpdateDescriptionsUpdate } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { CancelButton, StringField, SubmitButton } from '@waldur/form';
+import { StringField, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -43,7 +44,7 @@ export const RoleDescriptionEditDialog = ({ resolve: { row, refetch } }) => {
             title={translate('Edit role description')}
             footer={
               <>
-                <CancelButton label={translate('Cancel')} />
+                <CloseDialogButton label={translate('Cancel')} />
                 <SubmitButton
                   disabled={invalid}
                   submitting={submitting}

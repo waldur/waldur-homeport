@@ -2,10 +2,9 @@ import { useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
 import { userAgreementsCreate } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
 import { ENV } from '@waldur/core/config';
 import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
+import { SelectField, SubmitButton } from '@waldur/form';
 import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';

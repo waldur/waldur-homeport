@@ -1,10 +1,9 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { FormContainer, TextField } from '@waldur/form';
+import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { USER_PERMISSION_REQUESTS_ACTION_FORM_ID } from '@waldur/invitations/constants';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -37,10 +36,12 @@ const PurePermissionRequestActionDialog: FunctionComponent<
       footer={
         !readOnly && (
           <>
-            <Button
+            <SubmitButton
+              submitting={props.submitting}
+              disabled={props.invalid}
               variant="danger"
               className="w-150px"
-              disabled={props.invalid || props.submitting}
+              type="button"
               onClick={props.handleSubmit((values) => {
                 rejectRequest(values.comment);
               })}
@@ -49,10 +50,12 @@ const PurePermissionRequestActionDialog: FunctionComponent<
                 <XCircleIcon weight="bold" />
               </span>
               {translate('Decline')}
-            </Button>
-            <Button
+            </SubmitButton>
+            <SubmitButton
+              submitting={props.submitting}
+              disabled={props.invalid}
               className="w-150px"
-              disabled={props.invalid || props.submitting}
+              type="button"
               onClick={props.handleSubmit((values) => {
                 approveRequest(values.comment);
               })}
@@ -61,7 +64,7 @@ const PurePermissionRequestActionDialog: FunctionComponent<
                 <CheckCircleIcon weight="bold" />
               </span>
               {translate('Approve')}
-            </Button>
+            </SubmitButton>
           </>
         )
       }

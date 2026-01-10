@@ -1,6 +1,6 @@
 import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
 import { Fragment } from 'react';
-import { Button, Form } from 'react-bootstrap';
+import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
@@ -10,6 +10,7 @@ import { SelectField } from '@waldur/form';
 import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { categoryAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { TablePagination } from '@waldur/table/TablePagination';
 
 interface FieldValue {
@@ -117,16 +118,12 @@ const FieldsListGroup = ({
                       </Field>
                     </td>
                     <td>
-                      <Button
+                      <ActionButton
                         variant="text-danger"
-                        className="btn-icon"
-                        onClick={() => removeRow(actualIndex)}
+                        action={() => removeRow(actualIndex)}
                         disabled={fields.length < 2}
-                      >
-                        <span className="svg-icon svg-icon-1">
-                          <TrashIcon weight="bold" />
-                        </span>
-                      </Button>
+                        iconNode={<TrashIcon weight="bold" />}
+                      />
                     </td>
                   </tr>
                 </Fragment>
@@ -136,12 +133,13 @@ const FieldsListGroup = ({
         </table>
       </Form.Group>
       <div>
-        <Button variant="text-primary" onClick={addRow} disabled={addDisabled}>
-          <span className="svg-icon svg-icon-2">
-            <PlusCircleIcon weight="bold" />
-          </span>{' '}
-          {translate('Add new')}
-        </Button>
+        <ActionButton
+          variant="text-primary"
+          action={addRow}
+          disabled={addDisabled}
+          iconNode={<PlusCircleIcon weight="bold" />}
+          title={translate('Add new')}
+        />
       </div>
 
       <TablePagination

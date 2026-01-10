@@ -6,7 +6,7 @@ import {
   openportalManagedProjectsAttach,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/auth/SubmitButton';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { useModal } from '@waldur/modal/hooks';

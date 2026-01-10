@@ -1,11 +1,11 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import React, { ReactNode, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { StringField } from '@waldur/form';
+import { StringField, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 import { ModalDialog } from './ModalDialog';
 import { ConfirmationDialogType } from './types';
@@ -77,22 +77,21 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
       footer={
         <>
           {!onlyPositiveButton && (
-            <Button
-              variant="tertiary"
+            <CloseDialogButton
+              label={negativeButton}
               className="flex-equal px-3"
               onClick={handleCancel}
-            >
-              {negativeButton}
-            </Button>
+            />
           )}
-          <Button
+          <SubmitButton
+            submitting={false}
             variant={positiveButtonVariant}
             className={onlyPositiveButton ? undefined : 'flex-equal px-3'}
             onClick={handleSubmit}
             disabled={showInput && inputRequired && !inputValue.trim()}
-          >
-            {positiveButton}
-          </Button>
+            type="button"
+            label={positiveButton}
+          />
         </>
       }
     >

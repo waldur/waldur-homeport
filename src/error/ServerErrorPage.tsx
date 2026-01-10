@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { goBack } from '@waldur/error/utils';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import Illustration from '@waldur/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 import { useTitle } from '@waldur/navigation/title';
@@ -27,10 +27,19 @@ export const ServerErrorPage: FunctionComponent = () => {
         </p>
 
         <div className="d-flex gap-3 justify-content-center">
-          <Button onClick={goBack} variant="secondary">
-            {translate('Go back')}
-          </Button>
-          <Button onClick={reload}>{translate('Reload page')}</Button>
+          <SubmitButton
+            submitting={false}
+            type="button"
+            onClick={goBack}
+            variant="secondary"
+            label={translate('Go back')}
+          />
+          <SubmitButton
+            submitting={false}
+            type="button"
+            onClick={reload}
+            label={translate('Reload page')}
+          />
         </div>
       </div>
     </div>

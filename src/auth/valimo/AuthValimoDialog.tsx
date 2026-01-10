@@ -13,6 +13,7 @@ import {
 
 import { ENV } from '@waldur/core/config';
 import { wait } from '@waldur/core/utils';
+import { SubmitButton } from '@waldur/form';
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -20,7 +21,6 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showError, showErrorResponse } from '@waldur/store/notify';
 
 import { loginUser } from '../AuthService';
-import { SubmitButton } from '../SubmitButton';
 
 export const AuthValimoDialog = reduxForm({ form: 'AuthValimoDialog' })(({
   submitting,

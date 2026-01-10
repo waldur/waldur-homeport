@@ -1,3 +1,5 @@
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+
 import { ReviewApproveAction } from './ReviewApproveAction';
 import { ReviewRejectAction } from './ReviewRejectAction';
 
@@ -6,18 +8,18 @@ export const ReviewActions = ({
   refetch,
   approveMethod,
   rejectMethod,
-}) => (
-  <>
-    <ReviewApproveAction
-      request={request}
-      refetch={refetch}
-      apiMethod={approveMethod}
-    />
-
-    <ReviewRejectAction
-      request={request}
-      refetch={refetch}
-      apiMethod={rejectMethod}
-    />
-  </>
-);
+}) =>
+  request.state === 'pending' ? (
+    <ActionsDropdown row={request} refetch={refetch}>
+      <ReviewApproveAction
+        request={request}
+        refetch={refetch}
+        apiMethod={approveMethod}
+      />
+      <ReviewRejectAction
+        request={request}
+        refetch={refetch}
+        apiMethod={rejectMethod}
+      />
+    </ActionsDropdown>
+  ) : null;

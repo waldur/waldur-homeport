@@ -1,6 +1,5 @@
 import { LightbulbFilamentIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
@@ -10,6 +9,7 @@ import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormGroup, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const ResourceNameField = (props) => {
   const dispatch = useDispatch();
@@ -38,27 +38,25 @@ const ResourceNameField = (props) => {
         <StringField input={props.input} isInvalid={props.isInvalid} />
       </div>
       {project ? (
-        <Button
+        <ActionButton
           variant="tertiary"
-          onClick={() => suggestName()}
+          action={() => suggestName()}
           disabled={isLoading}
-        >
-          <span className="svg-icon svg-icon-2">
-            <LightbulbFilamentIcon weight="bold" />
-          </span>
-          {translate('Suggest name')}
-        </Button>
+          iconNode={<LightbulbFilamentIcon weight="bold" />}
+          title={translate('Suggest name')}
+        />
       ) : (
         <Tip
           id="ResourceNameField"
           label={translate('Organization and project need to be selected.')}
         >
-          <Button variant="tertiary" disabled>
-            <span className="svg-icon svg-icon-2">
-              <LightbulbFilamentIcon weight="bold" />
-            </span>
-            {translate('Suggest name')}
-          </Button>
+          <ActionButton
+            variant="tertiary"
+            disabled
+            action={() => {}}
+            iconNode={<LightbulbFilamentIcon weight="bold" />}
+            title={translate('Suggest name')}
+          />
         </Tip>
       )}
     </div>

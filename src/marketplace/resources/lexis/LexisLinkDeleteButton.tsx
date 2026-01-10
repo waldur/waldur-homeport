@@ -4,9 +4,9 @@ import { lexisLinksDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { RowActionButton } from '@waldur/table/ActionButton';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
-export const LexisLinkDeleteButton = ({ row, refetch }) => {
+export const LexisLinkDeleteAction = ({ row, refetch }) => {
   const dispatch = useDispatch();
   const openDialog = async () => {
     try {
@@ -29,12 +29,11 @@ export const LexisLinkDeleteButton = ({ row, refetch }) => {
     refetch();
   };
   return (
-    <RowActionButton
+    <ActionItem
       title={translate('Remove')}
       action={openDialog}
-      variant="danger"
       iconNode={<TrashIcon weight="bold" />}
-      size="sm"
+      className="text-danger"
     />
   );
 };

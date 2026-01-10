@@ -3,13 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { uniqueId } from 'lodash-es';
 import { DateTime, Duration } from 'luxon';
 import { useCallback, useEffect, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 import { marketplaceBookingsList } from 'waldur-js-client';
 
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { BookingProps } from '../types';
 import {
@@ -71,15 +71,11 @@ const renderScheduleRows = ({
                 </span>
               )}
             </label>
-            <Button
+            <ActionButton
               variant="text-danger"
-              className="btn-icon"
-              onClick={() => fields.remove(index)}
-            >
-              <span className="svg-icon svg-icon-2">
-                <XIcon weight="bold" />
-              </span>
-            </Button>
+              action={() => fields.remove(index)}
+              iconNode={<XIcon weight="bold" />}
+            />
           </div>
           <Field
             name={schedule}
@@ -114,12 +110,13 @@ const renderScheduleRows = ({
           />
         </div>
       ))}
-      <Button variant="text-primary" className="text-nowrap" onClick={addRow}>
-        <span className="svg-icon svg-icon-2">
-          <PlusIcon weight="bold" />
-        </span>
-        {translate('Add time period')}
-      </Button>
+      <ActionButton
+        variant="text-primary"
+        className="text-nowrap"
+        action={addRow}
+        iconNode={<PlusIcon weight="bold" />}
+        title={translate('Add time period')}
+      />
     </>
   );
 };

@@ -1,7 +1,7 @@
 import { ChartBarIcon, TableIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
-import { Button, Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
+import { Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { marketplaceResourcesTeamList } from 'waldur-js-client';
 
@@ -9,6 +9,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 import { UsageExportDropdown } from '../usage/UsageExportDropdown';
@@ -117,21 +118,19 @@ export const UsageCard = ({ resource }) => {
             months={period}
           />
 
-          <Button
+          <ActionButton
             variant="tertiary"
-            className="btn-icon"
-            onClick={() =>
+            action={() =>
               setMode((prev) => (prev === 'chart' ? 'table' : 'chart'))
             }
-          >
-            <span className="svg-icon svg-icon-2">
-              {mode === 'chart' ? (
+            iconNode={
+              mode === 'chart' ? (
                 <TableIcon weight="bold" />
               ) : (
                 <ChartBarIcon weight="bold" />
-              )}
-            </span>
-          </Button>
+              )
+            }
+          />
         </div>
       </Card.Header>
       <Card.Body>

@@ -1,5 +1,5 @@
 import { useCallback, useMemo, useState } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { connect, useDispatch, useSelector } from 'react-redux';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import {
@@ -23,6 +23,7 @@ import {
   showErrorResponse,
   showSuccess,
 } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
 import { ScriptEditorHeader } from './ScriptEditorHeader';
@@ -256,9 +257,12 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                   'Please select a script language to use dry-run',
                 )}
               >
-                <Button variant="secondary" disabled>
-                  {translate('Save & dry run script')}
-                </Button>
+                <ActionButton
+                  variant="secondary"
+                  disabled
+                  action={() => {}}
+                  title={translate('Save & dry run script')}
+                />
               </Tip>
             ) : (
               <ScriptEditorHeader
@@ -291,13 +295,12 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                 )}
               </AccordionCard>
               <div className="d-flex justify-content-end gap-4">
-                <Button
+                <ActionButton
                   variant="tertiary"
-                  onClick={closeDialog}
+                  action={closeDialog}
                   disabled={props.submitting}
-                >
-                  {translate('Cancel')}
-                </Button>
+                  title={translate('Cancel')}
+                />
                 <SubmitButton
                   disabled={props.invalid || !isDirty}
                   submitting={props.submitting}

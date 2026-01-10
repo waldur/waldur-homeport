@@ -1,9 +1,9 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import { FC, useContext } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -27,15 +27,15 @@ export const IssueCommentButton: FC = () => {
   };
 
   return (
-    <Button
+    <SubmitButton
+      submitting={false}
+      type="button"
       variant="secondary"
       disabled={uiDisabled}
       onClick={openCommentDialog}
-    >
-      <span className="svg-icon svg-icon-2">
-        <PlusIcon weight="bold" />
-      </span>
-      {translate('Add comment')}
-    </Button>
+      label={translate('Add comment')}
+      iconNode={<PlusIcon weight="bold" />}
+      iconOnLeft
+    />
   );
 };

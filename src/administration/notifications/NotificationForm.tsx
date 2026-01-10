@@ -1,5 +1,5 @@
 import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
-import { Button, Tab, Tabs } from 'react-bootstrap';
+import { Tab, Tabs } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
@@ -7,6 +7,7 @@ import { required } from '@waldur/core/validators';
 import { TextField } from '@waldur/form';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { translate } from '@waldur/i18n';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { VariablesPane } from './VariablesPane';
 
@@ -68,21 +69,17 @@ const NotificationTabs = ({
             />
           )}
           <div className="mt-2 text-end">
-            <Button
-              onClick={() =>
+            <CompactActionButton
+              action={() =>
                 fields.update(index, {
                   ...fields.value[index],
                   content: template.original_content,
                 })
               }
               variant="warning"
-              size="sm"
-            >
-              <span className="svg-icon svg-icon-2">
-                <ArrowCounterClockwiseIcon weight="bold" />
-              </span>{' '}
-              {translate('Reset to default')}
-            </Button>
+              iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+              title={translate('Reset to default')}
+            />
           </div>
         </Tab>
       );

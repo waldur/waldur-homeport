@@ -4,10 +4,9 @@ import { useAsync } from 'react-use';
 import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
+import { FormFooter } from '@waldur/form';
 import { ChoicesTable } from '@waldur/form/ChoicesTable';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { PermissionEnum } from '@waldur/permissions/enums';
@@ -66,17 +65,14 @@ const ChangePlanComponent = (props: FetchedData & { refetch? }) => {
           <ModalDialog
             title={translate('Change resource plan')}
             footer={
-              <>
-                <CloseDialogButton />
-                <SubmitButton
-                  submitting={submitting}
-                  label={
-                    orderCanBeApproved
-                      ? translate('Submit')
-                      : translate('Request for a change')
-                  }
-                />
-              </>
+              <FormFooter
+                submitting={submitting}
+                submitLabel={
+                  orderCanBeApproved
+                    ? translate('Submit')
+                    : translate('Request for a change')
+                }
+              />
             }
           >
             {props.resource.plan_name ? (

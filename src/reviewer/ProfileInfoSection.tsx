@@ -1,7 +1,6 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { FunctionComponent, useCallback, useState } from 'react';
-import { Button } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { ReviewerProfile } from 'waldur-js-client';
 import { client } from 'waldur-js-client/client.gen';
@@ -9,6 +8,7 @@ import { client } from 'waldur-js-client/client.gen';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { OrcidLogo } from '@waldur/core/OrcidLogo';
+import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
@@ -149,38 +149,29 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
       <div className="d-flex gap-2">
         {profile.orcid_id ? (
           <>
-            <Button
+            <CompactSubmitButton
+              type="button"
               variant="outline-primary"
-              size="sm"
               onClick={handleSyncOrcid}
-              disabled={isSyncingOrcid}
-            >
-              {isSyncingOrcid
-                ? translate('Syncing...')
-                : translate('Sync ORCID')}
-            </Button>
-            <Button
+              submitting={isSyncingOrcid}
+              label={translate('Sync ORCID')}
+            />
+            <CompactSubmitButton
+              type="button"
               variant="danger"
-              size="sm"
               onClick={handleDisconnectOrcid}
-              disabled={isDisconnectingOrcid}
-            >
-              {isDisconnectingOrcid
-                ? translate('Disconnecting...')
-                : translate('Disconnect ORCID')}
-            </Button>
+              submitting={isDisconnectingOrcid}
+              label={translate('Disconnect ORCID')}
+            />
           </>
         ) : (
-          <Button
+          <CompactSubmitButton
+            type="button"
             variant="success"
-            size="sm"
             onClick={handleConnectOrcid}
-            disabled={isConnectingOrcid}
-          >
-            {isConnectingOrcid
-              ? translate('Connecting...')
-              : translate('Connect ORCID')}
-          </Button>
+            submitting={isConnectingOrcid}
+            label={translate('Connect ORCID')}
+          />
         )}
         {isStaff && (
           <ActionButton

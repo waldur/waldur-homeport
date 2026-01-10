@@ -7,7 +7,7 @@ import {
   RestrictionField,
   RestrictionsValue,
 } from '@waldur/core/restrictions';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -66,9 +66,8 @@ export const CustomerMembershipRestrictionsPanel: FC<
           value={<RestrictionsValue values={emailPatterns} />}
           actions={
             canEdit && (
-              <EditButton
+              <CompactEditButton
                 onClick={() => openEditDialog('user_email_patterns')}
-                size="sm"
               />
             )
           }
@@ -81,9 +80,8 @@ export const CustomerMembershipRestrictionsPanel: FC<
           value={<RestrictionsValue values={affiliations} />}
           actions={
             canEdit && (
-              <EditButton
+              <CompactEditButton
                 onClick={() => openEditDialog('user_affiliations')}
-                size="sm"
               />
             )
           }
@@ -96,9 +94,8 @@ export const CustomerMembershipRestrictionsPanel: FC<
           value={<RestrictionsValue values={identitySources} />}
           actions={
             canEdit && (
-              <EditButton
+              <CompactEditButton
                 onClick={() => openEditDialog('user_identity_sources')}
-                size="sm"
               />
             )
           }

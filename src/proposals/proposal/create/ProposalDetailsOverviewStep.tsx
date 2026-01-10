@@ -1,5 +1,5 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -12,6 +12,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { EndingField } from '@waldur/proposals/EndingField';
 import { Proposal } from '@waldur/proposals/types';
 import { Field } from '@waldur/resource/summary';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 const ProposalDetailsDialog = lazyComponent(() =>
   import('../ProposalDetailsDialog').then((module) => ({
@@ -22,22 +23,19 @@ const ProposalDetailsDialog = lazyComponent(() =>
 const DetailsOverviewButton = ({ proposal }) => {
   const dispatch = useDispatch();
   return (
-    <Button
-      variant="tertiary"
-      className="ms-auto"
-      onClick={() =>
+    <ActionButton
+      action={() =>
         dispatch(
           openModalDialog(ProposalDetailsDialog, {
             proposal,
           }),
         )
       }
-    >
-      <span className="svg-icon svg-icon-2">
-        <EyeIcon weight="bold" />
-      </span>
-      {translate('More details')}
-    </Button>
+      title={translate('More details')}
+      iconNode={<EyeIcon weight="bold" />}
+      variant="tertiary"
+      className="ms-auto"
+    />
   );
 };
 

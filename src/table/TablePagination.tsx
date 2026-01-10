@@ -1,7 +1,8 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
+import { IconButton } from '@waldur/core/buttons/IconButton';
 import { translate } from '@waldur/i18n';
 import Pagination from '@waldur/table/Pagination';
 
@@ -103,16 +104,12 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
       {/* Mobile view */}
       <div className="table-pagination d-flex d-md-none align-items-center justify-content-between">
         <div className={'page-item me-1' + (prevDisabled ? ' disabled' : '')}>
-          <Button
-            variant="tertiary"
-            className="btn-icon"
-            disabled={prevDisabled}
+          <IconButton
+            iconNode={<CaretLeftIcon weight="bold" />}
+            tooltip={translate('Previous page')}
             onClick={() => props.gotoPage(props.currentPage - 1)}
-          >
-            <span className="svg-icon svg-icon-2">
-              <CaretLeftIcon weight="bold" />
-            </span>
-          </Button>
+            disabled={prevDisabled}
+          />
         </div>
         {props.hasRows && (
           <div className="text-secondary fw-bold text-nowrap fs-5 mx-2">
@@ -123,16 +120,12 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
           </div>
         )}
         <div className={'page-item' + (nextDisabled ? ' disabled' : '')}>
-          <Button
-            variant="tertiary"
-            className="btn-icon"
-            disabled={nextDisabled}
+          <IconButton
+            iconNode={<CaretRightIcon weight="bold" />}
+            tooltip={translate('Next page')}
             onClick={() => props.gotoPage(props.currentPage + 1)}
-          >
-            <span className="svg-icon svg-icon-2">
-              <CaretRightIcon weight="bold" />
-            </span>
-          </Button>
+            disabled={nextDisabled}
+          />
         </div>
       </div>
     </>

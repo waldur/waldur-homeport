@@ -15,8 +15,8 @@ import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { createFetcher } from '@waldur/table/api';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
@@ -132,20 +132,18 @@ const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
 
   return (
     <div className="d-flex gap-2">
-      <ActionButton
+      <CompactActionButton
         action={handleAccept}
         title={translate('Accept')}
         iconNode={<CheckIcon weight="bold" />}
         variant="success"
-        size="sm"
         pending={acceptMutation.isPending}
       />
-      <ActionButton
+      <CompactActionButton
         action={handleDecline}
         title={translate('Decline')}
         iconNode={<XIcon weight="bold" />}
         variant="outline-danger"
-        size="sm"
         pending={declineMutation.isPending}
       />
     </div>

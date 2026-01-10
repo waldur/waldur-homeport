@@ -1,14 +1,22 @@
-import { Button } from 'react-bootstrap';
-
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 export const InvitationButtons = ({ dismiss, closeAcceptingInvitation }) => {
   return (
     <>
-      <Button variant="primary" onClick={closeAcceptingInvitation}>
-        {translate('Accept invitation')}
-      </Button>
-      <Button onClick={dismiss}>{translate('Cancel invitation')}</Button>
+      <SubmitButton
+        submitting={false}
+        type="button"
+        variant="primary"
+        onClick={closeAcceptingInvitation}
+        label={translate('Accept invitation')}
+      />
+      <SubmitButton
+        submitting={false}
+        type="button"
+        onClick={dismiss}
+        label={translate('Cancel invitation')}
+      />
     </>
   );
 };

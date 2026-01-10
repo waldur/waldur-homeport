@@ -10,17 +10,18 @@ import {
 } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
-import { Button, DropdownItem } from 'react-bootstrap';
+import { DropdownItem } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { Link } from '@waldur/core/Link';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { FilterBox } from '@waldur/form/FilterBox';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
 import { SCRIPT_ROWS } from './utils';
@@ -131,38 +132,34 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           className={isSmallScr ? 'w-250px' : 'w-300px'}
         />
 
-        <Button onClick={onSave} disabled={submitting || executing || !dirty}>
-          <span className="svg-icon svg-icon-2">
-            <CheckIcon weight="bold" />
-          </span>
+        <SubmitButton
+          submitting={submitting || executing}
+          disabled={!dirty}
+          onClick={onSave}
+          type="button"
+          iconNode={<CheckIcon weight="bold" />}
+          iconOnLeft
+        >
           {isSmallScr ? translate('Save') : translate('Save script')}
-        </Button>
-        <Button
-          onClick={onReset}
+        </SubmitButton>
+        <ActionButton
+          action={onReset}
           variant="secondary"
           disabled={submitting || !dirty}
-        >
-          <span className="svg-icon svg-icon-2">
-            <ArrowClockwiseIcon weight="bold" />
-          </span>
-          {isSmallScr ? translate('Reset') : translate('Reset to saved')}
-        </Button>
-        <Button
+          iconNode={<ArrowClockwiseIcon weight="bold" />}
+          title={isSmallScr ? translate('Reset') : translate('Reset to saved')}
+        />
+        <ActionButton
           variant="secondary"
-          onClick={onDryRun}
-          disabled={submitting || executing}
+          action={onDryRun}
+          disabled={submitting}
+          pending={executing}
           className="text-nowrap"
-        >
-          <span className="svg-icon svg-icon-2">
-            {executing ? (
-              // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-              <LoadingSpinnerIcon className="me-1" />
-            ) : (
-              <PlayIcon weight="bold" />
-            )}
-          </span>
-          {isSmallScr ? translate('Dry run') : translate('Dry run script')}
-        </Button>
+          iconNode={<PlayIcon weight="bold" />}
+          title={
+            isSmallScr ? translate('Dry run') : translate('Dry run script')
+          }
+        />
       </div>
       <ActionsDropdownComponent
         label={

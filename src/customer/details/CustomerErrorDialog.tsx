@@ -1,9 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { IssueTypeEnum } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { SubmitButton } from '@waldur/form';
 import { translate, formatJsxTemplate } from '@waldur/i18n';
 import { sendIssueCreateRequest } from '@waldur/issues/create/utils';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
@@ -240,9 +240,12 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
         <>
           <CloseDialogButton />
           {ENV.plugins.WALDUR_SUPPORT.ENABLED && (
-            <Button onClick={onCreateIssue} variant="primary">
-              {translate('Propose changes')}
-            </Button>
+            <SubmitButton
+              submitting={false}
+              onClick={onCreateIssue}
+              type="button"
+              label={translate('Propose changes')}
+            />
           )}
         </>
       }

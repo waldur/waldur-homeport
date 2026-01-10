@@ -3,10 +3,9 @@ import { Modal } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { OfferingExportParametersRequest } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
+import { FormFooter } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 
 const ExportOfferingForm: FC<any> = ({ handleSubmit, submitting, resolve }) => {
   const onSubmit = (formData: OfferingExportParametersRequest) => {
@@ -129,12 +128,10 @@ const ExportOfferingForm: FC<any> = ({ handleSubmit, submitting, resolve }) => {
         </div>
       </Modal.Body>
       <Modal.Footer>
-        <CloseDialogButton />
-        <SubmitButton
-          disabled={submitting}
+        <FormFooter
           submitting={submitting}
-          label={translate('Export')}
-          className="btn btn-success"
+          submitLabel={translate('Export')}
+          submitVariant="success"
         />
       </Modal.Footer>
     </form>

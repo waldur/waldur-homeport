@@ -2,10 +2,9 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { SubmitButton } from '@waldur/form';
+import { FormFooter } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { LocationContainer } from '@waldur/map/LocationContainer';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import './SetLocationDialog.scss';
@@ -40,14 +39,11 @@ export const SetLocationDialog: FunctionComponent<SetLocationDialogProps> =
                 : translate('Set location')
             }
             footer={
-              <>
-                <CloseDialogButton />
-                <SubmitButton
-                  disabled={invalid}
-                  submitting={submitting}
-                  label={translate('Save')}
-                />
-              </>
+              <FormFooter
+                submitting={submitting}
+                invalid={invalid}
+                submitLabel={translate('Save')}
+              />
             }
           >
             <Field

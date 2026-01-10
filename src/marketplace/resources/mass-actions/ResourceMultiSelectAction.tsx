@@ -1,7 +1,8 @@
-import { DropdownButton, DropdownDivider } from 'react-bootstrap';
+import { DropdownDivider } from 'react-bootstrap';
 import { Resource } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { MultiDestroyAction } from './MultiDestroyAction';
@@ -26,7 +27,7 @@ export const ResourceMultiSelectAction = ({
 }) => {
   const user = useUser();
   return (
-    <DropdownButton variant="primary" title={translate('All actions')}>
+    <ActionDropdownButton variant="primary" title={translate('All actions')}>
       <MultiRenewAllocationsAction rows={rows} refetch={refetch} />
       <MultiEditOptionsAction rows={rows} refetch={refetch} />
       <MultiStopAction rows={rows} refetch={refetch} />
@@ -45,6 +46,6 @@ export const ResourceMultiSelectAction = ({
           <MultiUnlinkAction rows={rows} refetch={refetch} />
         </>
       )}
-    </DropdownButton>
+    </ActionDropdownButton>
   );
 };

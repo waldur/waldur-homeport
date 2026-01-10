@@ -1,5 +1,4 @@
-import { Button } from 'react-bootstrap';
-
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 
 export const AnnouncementError = ({ refetch }) => (
@@ -7,9 +6,13 @@ export const AnnouncementError = ({ refetch }) => (
     <div>
       <p>
         {translate('Unable to load announcements')}
-        <Button variant="text" onClick={() => refetch()}>
-          {translate('Retry')}
-        </Button>
+        <SubmitButton
+          submitting={false}
+          type="button"
+          variant="text"
+          onClick={() => refetch()}
+          label={translate('Retry')}
+        />
       </p>
     </div>
   </div>

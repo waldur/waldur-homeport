@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 
 import { goBack } from '@waldur/error/utils';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
@@ -18,7 +18,12 @@ export const InvalidRoutePage: FunctionComponent = () => {
             "Page is not found. You've either entered invalid URL or trying to reach disabled feature.",
           )}
         </h1>
-        <Button onClick={goBack}>{translate('Back')}</Button>
+        <SubmitButton
+          submitting={false}
+          type="button"
+          onClick={goBack}
+          label={translate('Back')}
+        />
       </div>
     </div>
   );
