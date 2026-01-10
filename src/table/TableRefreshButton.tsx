@@ -19,9 +19,13 @@ interface TableRefreshButtonProps {
 
 export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = (
   props,
-) =>
-  (props.loading && props.sorting && !props.sorting.loading) ||
-  (props.sorting && props.sorting.loading) ? (
+) => {
+  // Show spinner when:
+  // 1. loading is true (general loading state)
+  // 2. sorting.loading is true (sorting in progress)
+  const showSpinner = props.loading || (props.sorting && props.sorting.loading);
+
+  return showSpinner ? (
     <LoadingSpinner />
   ) : (
     <button
@@ -32,3 +36,4 @@ export const TableRefreshButton: FunctionComponent<TableRefreshButtonProps> = (
       <ArrowsClockwiseIcon size={20} data-cy="loading-spinner" weight="bold" />
     </button>
   );
+};

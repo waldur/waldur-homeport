@@ -24,6 +24,7 @@ import { FieldReviewComments } from '../proposal/create-review/FieldReviewCommen
 import { ProposalReview } from '../types';
 
 import { InvitationsList } from './InvitationsList';
+import { ReviewerExpandableRow } from './ReviewerExpandableRow';
 import { TeamDropdownActions } from './TeamDropdownActions';
 import { UsersList } from './UsersList';
 
@@ -169,6 +170,11 @@ export const TeamSection: FC<
                 cardBordered={false}
                 hasActionBar={false}
                 fullWidth
+                expandableRow={
+                  props.roles?.includes(RoleEnum.CALL_REVIEWER)
+                    ? ReviewerExpandableRow
+                    : undefined
+                }
               />
             </Tab.Pane>
             <Tab.Pane eventKey="invitations" unmountOnExit={true}>

@@ -1,12 +1,18 @@
-import React, { useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { FC, useMemo } from 'react';
+import { Nav, Tab } from 'react-bootstrap';
 import {
   Proposal,
   ProposalReview,
+  proposalProposalsChecklistRetrieve,
   proposalReviewsList,
 } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
+import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
 import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
 import { ReviewStateRenderer } from '@waldur/proposals/review/ReviewStateRenderer';
 import { Field } from '@waldur/resource/summary';
@@ -37,6 +43,31 @@ const renderReviewScoreField = ({ row }) => {
   return <RateStars value={row.summary_score} />;
 };
 
+const ComplianceContent: FC<{ data: any }> = ({ data }) => {
+  if (!data.questions?.length) {
+    return (
+      <p className="text-muted">{translate('No compliance questions.')}</p>
+    );
+  }
+
+  return (
+    <FormTable>
+      {data.questions.map((question) => (
+        <FormTable.Item
+          key={question.uuid}
+          label={question.description}
+          value={
+            <ParsedAnswer
+              question={question as any}
+              answer={question.existing_answer as any}
+            />
+          }
+        />
+      ))}
+    </FormTable>
+  );
+};
+
 export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
   row,
 }) => {
@@ -47,14 +78,39 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
     filter,
   });
 
+  // Fetch compliance checklist data
+  const { data: checklistData } = useQuery({
+    queryKey: ['ProposalChecklistExpanded', row.uuid],
+    queryFn: () =>
+      proposalProposalsChecklistRetrieve({
+        path: { uuid: row.uuid },
+        query: { include_all: true },
+      })
+        .then((response) => response.data)
+        .catch((err) => {
+          // Handle "No checklist configured" gracefully
+          if (
+            err.response?.status === 400 &&
+            err.response?.data?.detail === CHECKLIST_NO_CONFIGURED_MSG
+          ) {
+            return null;
+          }
+          return null; // Silently fail for other errors in expandable row
+        }),
+    staleTime: 60000,
+  });
+
+  const reviewsCount = tableProps.pagination.resultCount ?? 0;
+  const questionsCount = checklistData?.questions?.length ?? 0;
+
   const columns = [
     {
       title: translate('Review'),
-      render: ({ row }) => (
+      render: ({ row: review }) => (
         <Link
           state="proposal-review"
-          params={{ review_uuid: row.uuid }}
-          label={row.name} // Generated in frontend
+          params={{ uuid: review.call_uuid, review_uuid: review.uuid }}
+          label={review.name} // Generated in frontend
         />
       ),
     },
@@ -81,18 +137,46 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
           className="col-md-12 mb-5"
         />
       )}
-      <Table
-        {...tableProps}
-        columns={columns}
-        minHeight="auto"
-        hideRefresh
-        verboseName={translate('Reviews')}
-        equalColWidth
-        hasActionBar={false}
-        rowActions={ProposalReviewsRowActions}
-        showPageSizeSelector
-        initialPageSize={5}
-      />
+
+      <Tab.Container defaultActiveKey="reviews" unmountOnExit={true}>
+        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mb-4">
+          <Nav.Item>
+            <Nav.Link eventKey="reviews">
+              {translate('Reviews')} ({reviewsCount})
+            </Nav.Link>
+          </Nav.Item>
+          {checklistData && (
+            <Nav.Item>
+              <Nav.Link eventKey="compliance">
+                {translate('Compliance')} ({questionsCount})
+              </Nav.Link>
+            </Nav.Item>
+          )}
+        </Nav>
+
+        <Tab.Content className="overflow-auto">
+          <Tab.Pane eventKey="reviews">
+            <Table
+              {...tableProps}
+              columns={columns}
+              minHeight="auto"
+              hideRefresh
+              verboseName={translate('Reviews')}
+              equalColWidth
+              hasActionBar={false}
+              rowActions={ProposalReviewsRowActions}
+              showPageSizeSelector
+              initialPageSize={5}
+            />
+          </Tab.Pane>
+
+          {checklistData && (
+            <Tab.Pane eventKey="compliance">
+              <ComplianceContent data={checklistData} />
+            </Tab.Pane>
+          )}
+        </Tab.Content>
+      </Tab.Container>
     </ExpandableContainer>
   );
 };

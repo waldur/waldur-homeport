@@ -1,4 +1,3 @@
-export const PROPOSAL_UPDATE_SUBMISSION_FORM_ID = 'ProposalSubmissionStep';
 export const PROPOSAL_UPDATE_REVIEW_FORM_ID = 'ProposalUpdateReviewForm';
 
 export const CALL_FILTER_FORM_ID = 'CallFilter';

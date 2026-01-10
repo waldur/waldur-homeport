@@ -30,8 +30,9 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
       id="rounds"
       columns={[
         {
-          title: translate('Round name'),
-          render: ({ row }) => row.name,
+          title: translate('Round ID'),
+          render: ({ row }) => row.slug,
+          copyField: (row) => row.slug,
         },
         {
           title: translate('Start date'),

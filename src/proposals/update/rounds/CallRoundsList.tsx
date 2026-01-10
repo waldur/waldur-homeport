@@ -1,11 +1,10 @@
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 import {
   ProtectedRound,
   proposalProtectedCallsRoundsList,
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
@@ -17,19 +16,29 @@ import { useTable } from '@waldur/table/useTable';
 
 import { RoundCreateButton } from './RoundCreateButton';
 import { RoundExpandableRow } from './RoundExpandableRow';
+import { RoundRowActions } from './RoundRowActions';
 
 interface CallRoundsListProps {
   call: Call;
+  refetch?: () => void;
 }
 
-export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
+export const CallRoundsList: FC<CallRoundsListProps> = ({
+  call,
+  refetch: parentRefetch,
+}) => {
   const tableProps = useTable({
     table: 'PrivateCallRoundsList',
     fetchData: createFetcher(proposalProtectedCallsRoundsList, {
-      path: { uuid: props.call.uuid },
+      path: { uuid: call.uuid },
     }),
     queryField: 'name',
   });
+
+  const refetch = useCallback(() => {
+    tableProps.fetch();
+    parentRefetch?.();
+  }, [tableProps.fetch, parentRefetch]);
 
   const renderRoundState = (row: ProtectedRound) => {
     const roundState = getRoundStatus(row);
@@ -43,20 +52,27 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
     );
   };
 
+  const RowActions = useCallback(
+    (props: { row: ProtectedRound }) => (
+      <RoundRowActions row={props.row} refetch={refetch} call={call} />
+    ),
+    [refetch, call],
+  );
+
+  const ExpandableRow = useCallback(
+    (props: { row: ProtectedRound }) => <RoundExpandableRow row={props.row} />,
+    [],
+  );
+
   return (
     <Table<ProtectedRound>
       {...tableProps}
       id="rounds"
       columns={[
         {
-          title: translate('Round name'),
-          render: ({ row }) => (
-            <Link
-              state="protected-call-round.details"
-              params={{ round_uuid: row.uuid, call_uuid: props.call.uuid }}
-              label={row.name}
-            />
-          ),
+          title: translate('Round ID'),
+          render: ({ row }) => <code className="fw-bold">{row.slug}</code>,
+          copyField: (row) => row.slug,
         },
         {
           title: translate('Start date'),
@@ -87,15 +103,14 @@ export const CallRoundsList: FC<CallRoundsListProps> = (props) => {
       ]}
       title={
         <>
-          <ValidationIcon value={props.call.rounds.length > 0} />
+          <ValidationIcon value={call.rounds.length > 0} />
           {translate('Rounds')}
         </>
       }
       verboseName={translate('Rounds')}
-      tableActions={
-        <RoundCreateButton call={props.call} refetch={tableProps.fetch} />
-      }
-      expandableRow={RoundExpandableRow}
+      tableActions={<RoundCreateButton call={call} refetch={refetch} />}
+      expandableRow={ExpandableRow}
+      rowActions={RowActions}
     />
   );
 };

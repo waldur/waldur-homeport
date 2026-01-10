@@ -52,9 +52,124 @@ The codebase follows a feature-based folder structure under `src/`:
 
 ### Navigation & Routing
 
-- Uses UI-Router for React with state-based routing
-- Routes defined in module-specific `routes.ts` files
-- Navigation context provides tab and breadcrumb management
+The application uses **UI-Router for React** with state-based routing. Routes are defined in module-specific `routes.ts` files.
+
+#### Route Definition Structure
+
+```typescript
+// Basic route with query parameters
+{
+  name: 'protected-call.main',
+  url: 'edit/?tab&coi_tab',
+  component: lazyComponent(() =>
+    import('./update/CallUpdateContainer').then((module) => ({
+      default: module.CallUpdateContainer,
+    })),
+  ),
+  params: {
+    coi_tab: {
+      dynamic: true,  // Prevents component reload when param changes
+    },
+  },
+}
+```
+
+#### Dynamic Parameters (Preventing Full Reloads)
+
+When a query parameter controls nested tabs or filters within a page, mark it as `dynamic: true` to prevent full component reloads:
+
+```typescript
+// BAD: Changing coi_tab triggers full state reload
+{
+  name: 'my-route',
+  url: 'page/?tab&subtab',
+  component: MyComponent,
+}
+
+// GOOD: Changing subtab only re-renders, no full reload
+{
+  name: 'my-route',
+  url: 'page/?tab&subtab',
+  component: MyComponent,
+  params: {
+    subtab: {
+      dynamic: true,
+    },
+  },
+}
+```
+
+#### Nested Tabs Pattern
+
+For tabs within a page section that need URL synchronization:
+
+1. **Add the parameter to the route URL** with `dynamic: true`:
+
+   ```typescript
+   {
+     name: 'protected-call.main',
+     url: 'edit/?tab&coi_tab',
+     params: {
+       coi_tab: { dynamic: true },
+     },
+   }
+   ```
+
+2. **Use router hooks in the component**:
+
+   ```typescript
+   import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
+
+   const MyTabbedSection: FC = () => {
+     const { state, params } = useCurrentStateAndParams();
+     const router = useRouter();
+
+     const activeTab = params.my_tab || 'default';
+
+     const handleTabSelect = useCallback(
+       (key: string | null) => {
+         if (key) {
+           router.stateService.go(state.name, { ...params, my_tab: key });
+         }
+       },
+       [router, state, params],
+     );
+
+     return (
+       <Tab.Container activeKey={activeTab} onSelect={handleTabSelect}>
+         {/* Tab content */}
+       </Tab.Container>
+     );
+   };
+   ```
+
+#### Main Page Tabs (usePageTabsTransmitter)
+
+For main page-level tabs, use the `usePageTabsTransmitter` hook which automatically handles URL synchronization:
+
+```typescript
+const tabs = useMemo<PageBarTab[]>(
+  () => [
+    { key: 'general', title: translate('General'), component: GeneralSection },
+    { key: 'settings', title: translate('Settings'), component: SettingsSection },
+  ],
+  [],
+);
+
+const {
+  tabSpec: { component: Component },
+} = usePageTabsTransmitter(tabs);
+
+return <Component {...props} />;
+```
+
+#### Route Best Practices
+
+1. **Use `dynamic: true`** for any parameter that controls UI state within a page (subtabs, filters, panel states)
+2. **Keep routes hierarchical** - child routes inherit parent's URL prefix
+3. **Use abstract routes** for shared layouts and data fetching
+4. **Lazy load components** with `lazyComponent()` for code splitting
+5. **Define query params in URL** - e.g., `url: 'page/?tab&filter'` makes params explicit
 
 ### Data Fetching
 

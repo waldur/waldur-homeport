@@ -13,7 +13,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
 
-import { useCallBreadcrumbItems } from '../utils';
+import { usePublicCallBreadcrumbItems } from '../utils';
 
 import { CallTabs } from './CallTabs';
 import { PublicCallDetailsHero } from './PublicCallDetailsHero';
@@ -96,7 +96,7 @@ export const PublicCallDetailsContainer: FC = () => {
 
   usePageHero(<PageHero call={call} />, [call]);
 
-  const breadcrumbItems = useCallBreadcrumbItems(call);
+  const breadcrumbItems = usePublicCallBreadcrumbItems(call);
   useBreadcrumbs(breadcrumbItems);
 
   const filteredTabs = useMemo(

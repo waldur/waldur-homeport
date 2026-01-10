@@ -6,11 +6,22 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { MenuAccordion } from '@waldur/navigation/sidebar/MenuAccordion';
 import { MenuItem } from '@waldur/navigation/sidebar/MenuItem';
+import { RoleEnum } from '@waldur/permissions/enums';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { isDescendantOf } from '../useTabs';
 
+const hasCallManagerRole = (user) =>
+  user?.permissions?.some(
+    (permission) =>
+      permission.scope_type === 'call' &&
+      permission.role_name === RoleEnum.CALL_MANAGER,
+  );
+
 export const CallPublicMenu = () => {
   const { state } = useCurrentStateAndParams();
+  const user = useUser();
+
   if (isFeatureVisible(MarketplaceFeatures.call_only)) {
     return (
       <MenuItem
@@ -26,6 +37,10 @@ export const CallPublicMenu = () => {
   ) {
     return null;
   }
+
+  const showAdminItems =
+    user?.is_staff || user?.is_support || hasCallManagerRole(user);
+
   return (
     <MenuAccordion
       title={translate('Calls')}
@@ -45,14 +60,29 @@ export const CallPublicMenu = () => {
       />
 
       <MenuItem
-        title={translate('Proposals')}
+        title={translate('My proposals')}
         state="proposals-all-proposals"
         activeState={
           isDescendantOf('proposals', state) ? state.name : undefined
         }
       />
 
-      <MenuItem title={translate('Reviews')} state="reviews-all-reviews" />
+      <MenuItem
+        title={translate('My reviews')}
+        state="reviews-all-reviews"
+        activeState={isDescendantOf('reviews', state) ? state.name : undefined}
+      />
+
+      {showAdminItems && (
+        <>
+          <div className="menu-separator my-2" />
+          <MenuItem
+            title={translate('All proposals')}
+            state="admin-proposals"
+          />
+          <MenuItem title={translate('All reviews')} state="admin-reviews" />
+        </>
+      )}
     </MenuAccordion>
   );
 };

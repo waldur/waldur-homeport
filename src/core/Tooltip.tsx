@@ -53,12 +53,43 @@ export const Tip: React.FC<PropsWithChildren<TipProps>> = ({
       }
       {...rest}
     >
-      <span className={className} aria-hidden="true" onClick={onClick}>
+      <span
+        className={className}
+        onClick={onClick}
+        role={onClick ? 'button' : undefined}
+        tabIndex={onClick ? 0 : undefined}
+        onKeyDown={
+          onClick
+            ? (e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  onClick();
+                }
+              }
+            : undefined
+        }
+      >
         {children}
       </span>
     </OverlayTrigger>
   ) : (
-    <span className={className} aria-hidden="true" onClick={onClick} {...rest}>
+    <span
+      className={className}
+      onClick={onClick}
+      role={onClick ? 'button' : undefined}
+      tabIndex={onClick ? 0 : undefined}
+      onKeyDown={
+        onClick
+          ? (e) => {
+              if (e.key === 'Enter' || e.key === ' ') {
+                e.preventDefault();
+                onClick();
+              }
+            }
+          : undefined
+      }
+      {...rest}
+    >
       {children}
     </span>
   );

@@ -165,7 +165,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'profile-manage',
-    url: 'manage/?tab',
+    url: 'manage/?tab&section',
     parent: 'profile-manage-container',
     component: lazyComponent(() =>
       import('./UserManage').then((module) => ({ default: module.UserManage })),

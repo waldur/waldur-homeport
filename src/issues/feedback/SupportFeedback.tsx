@@ -1,18 +1,18 @@
 import { useRouter } from '@uirouter/react';
 import { Form } from 'react-bootstrap';
-import ReactStars from 'react-rating-stars-component';
 import { connect, useDispatch } from 'react-redux';
 import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { supportFeedbacksCreate } from 'waldur-js-client';
 
-import { RATING_STAR_ACTIVE_COLOR } from '@waldur/core/constants';
 import { FormContainer, SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { SUPPORT_FEEDBACK_FORM_ID } from '@waldur/issues/feedback/constants';
 import { useTitle } from '@waldur/navigation/title';
+import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
 import { router } from '@waldur/router';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+
 import './SupportFeedback.scss';
 
 const SupportFeedbackContainer = (props) => {
@@ -45,12 +45,11 @@ const SupportFeedbackContainer = (props) => {
           name="evaluation"
           label={translate('Evaluation')}
           component={(fieldProps) => (
-            <ReactStars
+            <RateStars
               count={10}
               size={24}
-              edit={true}
+              edit
               isHalf={false}
-              activeColor={RATING_STAR_ACTIVE_COLOR}
               value={fieldProps.input.value}
               onChange={(value) => fieldProps.input.onChange(value)}
             />

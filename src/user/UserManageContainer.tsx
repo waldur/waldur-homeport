@@ -8,7 +8,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
+import { MarketplaceFeatures, UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
@@ -57,6 +57,11 @@ const UserOfferingList = lazyComponent(() =>
 const UserAffiliationsList = lazyComponent(() =>
   import('@waldur/user/affiliations/UserAffiliationsList').then((module) => ({
     default: module.UserAffiliationsList,
+  })),
+);
+const ReviewerProfileTab = lazyComponent(() =>
+  import('@waldur/user/ReviewerProfileTab').then((module) => ({
+    default: module.ReviewerProfileTab,
   })),
 );
 
@@ -127,6 +132,15 @@ export const UserManageContainer = ({ isPersonal }) => {
             currentUser.is_staff || isPersonal ? UserEditTab : UserDetailsTable,
           title: translate('User profile'),
         },
+        // Reviewer profile - only for personal profile when call management is enabled
+        isPersonal &&
+          isFeatureVisible(
+            MarketplaceFeatures.show_call_management_functionality,
+          ) && {
+            key: 'reviewer-profile',
+            component: ReviewerProfileTab,
+            title: translate('Reviewer profile'),
+          },
         // Audit log - staff/support viewing other users (personal has /profile/events/)
         (currentUser.is_staff || currentUser.is_support) &&
           !isPersonal && {
