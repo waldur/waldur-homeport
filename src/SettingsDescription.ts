@@ -1088,10 +1088,16 @@ export const SettingsDescription = [
     description: translate('Onboarding settings'),
     items: [
       {
-        key: 'ONBOARDING_COUNTRY',
-        description: translate('ISO 3166-1 alpha-2 country code for the deployment (e.g., \'EE\' for Estonia, \'AT\' for Austria). Used for onboarding and localization.'),
-        default: '',
-        type: 'string',
+        key: 'ONBOARDING_SUPPORTED_COUNTRIES',
+        description: translate('List of ISO 3166-1 alpha-2 country codes supported by this portal (e.g., [\'EE\', \'AT\', \'SE\']). Used to restrict available countries in onboarding.'),
+        default: [],
+        type: 'list_field',
+      },
+      {
+        key: 'ONBOARDING_VALIDATION_METHODS',
+        description: translate('List of automatic validation methods available for this portal (e.g., [\'ariregister\', \'wirtschaftscompass\', \'bolagsverket\']). Must match backend method names.'),
+        default: [],
+        type: 'list_field',
       },
       {
         key: 'ONBOARDING_VERIFICATION_EXPIRY_HOURS',
