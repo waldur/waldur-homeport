@@ -242,6 +242,21 @@ export const ExportOfferingButton = ({ row }: ExportOfferingButtonProps) => {
       yaml += 'terms_of_service: []\n';
     }
 
+    // Plugin options section (if included in export)
+    if (export_data.plugin_options) {
+      yaml += `plugin_options: ${JSON.stringify(export_data.plugin_options)}\n`;
+    }
+
+    // Resource options section (if included in export)
+    if (export_data.resource_options) {
+      yaml += `resource_options: ${JSON.stringify(export_data.resource_options)}\n`;
+    }
+
+    // Secret options section (if included in export)
+    if (export_data.secret_options) {
+      yaml += `secret_options: ${JSON.stringify(export_data.secret_options)}\n`;
+    }
+
     return yaml;
   };
 
