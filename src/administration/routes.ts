@@ -125,6 +125,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-rabbitmq',
+    url: 'rabbitmq/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./rabbitmq/RabbitMQPage').then((module) => ({
+        default: module.RabbitMQPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('RabbitMQ'),
+      permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
     name: 'admin-quick-shortcuts',
     url: 'quick-shortcuts/',
     parent: 'admin-user-interface',

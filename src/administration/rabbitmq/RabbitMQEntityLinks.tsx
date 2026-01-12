@@ -1,0 +1,22 @@
+import { FC } from 'react';
+
+import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
+
+import type { RmqStatsUser } from './api';
+
+interface UserLinkProps {
+  user: RmqStatsUser | null;
+}
+
+export const UserLink: FC<UserLinkProps> = ({ user }) => {
+  if (!user) {
+    return <span className="text-muted">{translate('Unknown user')}</span>;
+  }
+
+  return (
+    <Link state="users.details" params={{ uuid: user.uuid }}>
+      {user.full_name || user.username}
+    </Link>
+  );
+};
