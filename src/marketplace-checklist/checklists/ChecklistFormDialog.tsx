@@ -149,7 +149,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
                 message={translate('Unable to load categories.')}
               />
             ) : null}
-            <FormGroup label={translate('Category')} required space={5}>
+            <FormGroup label={translate('Category')} space={5}>
               <Field
                 name="category"
                 component={SelectField as any}
