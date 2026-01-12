@@ -109,8 +109,8 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
       };
 
       if (formData.question_type === 'number') {
-        if (formData.min_value) body.min_value = formData.min_value;
-        if (formData.max_value) body.max_value = formData.max_value;
+        body.min_value = formData.min_value || null;
+        body.max_value = formData.max_value || null;
       }
 
       if (formData.conditions?.length) {
