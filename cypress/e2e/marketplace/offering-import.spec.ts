@@ -241,6 +241,79 @@ describe('Offering Import', () => {
     cy.url().should('include', '/offering-update/new-offering-uuid-123');
   });
 
+  it('should include secret_options in import request when enabled', () => {
+    cy.intercept(
+      'POST',
+      '/api/marketplace-provider-offerings/import_offering/',
+      (req) => {
+        // Verify secret_options are included in the request
+        expect(req.body.offering_data.secret_options).to.deep.equal({
+          create: '#!/bin/bash\necho "Creating resource"\nexit 0',
+          update: '#!/bin/bash\necho "Updating resource"\nexit 0',
+          terminate: '#!/bin/bash\necho "Terminating resource"\nexit 0',
+          environ: [
+            { name: 'API_KEY', value: 'test-api-key' },
+            { name: 'API_URL', value: 'https://api.example.com' },
+          ],
+          language: 'bash',
+        });
+        expect(req.body.import_secret_options).to.equal(true);
+        expect(req.body.offering_data.plugin_options).to.deep.equal({});
+        expect(req.body.offering_data.resource_options).to.deep.equal({
+          order: [],
+          options: {},
+        });
+
+        req.reply({
+          statusCode: 200,
+          body: {
+            imported_offering_uuid: 'new-offering-uuid-123',
+            message: 'Offering imported successfully',
+          },
+        });
+      },
+    ).as('importRequest');
+
+    // Open import dialog
+    cy.get('.card-toolbar')
+      .find('.dropdown-toggle')
+      .click({ force: true });
+
+    cy.get('.dropdown-menu').contains('Import offering').click({ force: true });
+
+    // Step 1: Upload file
+    cy.fixture('offerings/valid-offering-export.yaml', 'utf-8').then(
+      (fileContent) => {
+        cy.get('input[type="file"]').selectFile(
+          {
+            contents: Cypress.Buffer.from(fileContent),
+            fileName: 'test-offering.yaml',
+            mimeType: 'text/yaml',
+          },
+          { force: true },
+        );
+      },
+    );
+
+    cy.contains('Test Import Offering', { timeout: 5000 }).should('be.visible');
+    cy.get('button').contains('Next').click();
+
+    // Step 2: Configure import - verify secret_options checkbox is checked
+    cy.contains('Configure import').should('be.visible');
+    cy.get('#check-import_secret_options').should('be.checked');
+    cy.get('button').contains('Next').click();
+
+    // Step 3: Review and submit
+    cy.contains('Review and confirm').should('be.visible');
+    cy.get('button').contains('Import').click();
+
+    // Should trigger import API call with secret_options
+    cy.wait('@importRequest');
+
+    // Should show success message
+    cy.contains('Offering imported successfully').should('be.visible');
+  });
+
   it('should handle import errors gracefully', () => {
     cy.intercept(
       'POST',
