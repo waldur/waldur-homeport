@@ -194,6 +194,8 @@ export const SingleOfferingImportDialog = reduxForm<
             : null,
           access_url: parsed.offering.access_url || '',
           paused_reason: parsed.offering.paused_reason || '',
+          attributes: parsed.offering.attributes,
+          options: parsed.offering.options,
         },
       };
 
@@ -263,6 +265,19 @@ export const SingleOfferingImportDialog = reduxForm<
 
       if (parsed.terms_of_service && Array.isArray(parsed.terms_of_service)) {
         result.terms_of_service = parsed.terms_of_service;
+      }
+
+      // Add plugin, secret, and resource options if they exist
+      if (parsed.plugin_options !== undefined) {
+        result.plugin_options = parsed.plugin_options;
+      }
+
+      if (parsed.secret_options !== undefined) {
+        result.secret_options = parsed.secret_options;
+      }
+
+      if (parsed.resource_options !== undefined) {
+        result.resource_options = parsed.resource_options;
       }
 
       return result;
