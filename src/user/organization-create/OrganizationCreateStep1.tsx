@@ -21,12 +21,13 @@ export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
   const user = useUser();
   const [verified, setVerified] = useState(false);
 
-  const countryCopy = getOnboardingCopy(
-    ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY,
-  );
+  const supportedCountries =
+    ENV.plugins.WALDUR_CORE.ONBOARDING_SUPPORTED_COUNTRIES;
+  const primaryCountry = supportedCountries?.[0] || '';
+  const countryCopy = getOnboardingCopy(primaryCountry);
 
   // ToDo: remove this after implementing getting user's identifier via auth methods
-  const isAustriaCountry = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY === 'AT';
+  const isAustriaCountry = primaryCountry === 'AT';
   const needsPersonIdentifier = !user?.civil_number;
   const needsPersonalData =
     isAustriaCountry &&

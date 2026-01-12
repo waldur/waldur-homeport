@@ -24,15 +24,6 @@ const tabs = [
     ),
   },
   {
-    key: 'country-configs',
-    title: translate('Country configurations'),
-    component: lazyComponent(() =>
-      import('./OnboardingCountryChecklistConfigs').then((module) => ({
-        default: module.OnboardingCountryChecklistConfigs,
-      })),
-    ),
-  },
-  {
     key: 'question-mappings',
     title: translate('Question mappings'),
     component: lazyComponent(() =>
