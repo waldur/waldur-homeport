@@ -13,7 +13,11 @@ export const checklistTypeOptions: Array<{ label; value: ChecklistTypeEnum }> =
     { label: translate('Offering compliance'), value: 'offering_compliance' },
     { label: translate('Proposal compliance'), value: 'proposal_compliance' },
     { label: translate('Project metadata'), value: 'project_metadata' },
-    { label: translate('Customer onboarding'), value: 'customer_onboarding' },
+    {
+      label: translate('Onboarding customer data'),
+      value: 'onboarding_customer',
+    },
+    { label: translate('Onboarding intent data'), value: 'onboarding_intent' },
   ];
 
 export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [

@@ -28,9 +28,8 @@ export const useChecklistCache = () => {
     if (checklistCache.current) {
       return checklistCache.current;
     }
-    const country = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY;
     const { fetchChecklistWithMetadata } = await import('./utils');
-    const data = await fetchChecklistWithMetadata(country);
+    const data = await fetchChecklistWithMetadata();
     checklistCache.current = data;
     return data;
   }, []);
@@ -48,14 +47,15 @@ export const useAutoValidation = (getChecklistData: () => Promise<any>) => {
 
   const runAutoValidation = useCallback(
     async (formData) => {
-      const country = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY;
+      const countries = ENV.plugins.WALDUR_CORE.ONBOARDING_SUPPORTED_COUNTRIES;
+      const country = countries?.[0] || '';
       setValidationLoading(true);
 
       try {
         // Step 1: Create verification instance
         const verificationResponse =
           await onboardingVerificationsStartVerification({
-            body: createVerificationRequestBody(formData, country, false),
+            body: createVerificationRequestBody(formData, country),
           });
 
         const verification = verificationResponse.data;

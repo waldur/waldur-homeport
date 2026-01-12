@@ -1,5 +1,6 @@
 import {
-  onboardingCountryConfigsList,
+  checklistsAdminList,
+  checklistsAdminQuestionsList,
   onboardingJustificationsAttachDocument,
   onboardingJustificationsCreateJustification,
   onboardingQuestionMetadataList,
@@ -30,65 +31,98 @@ interface ChecklistQuestionsWithMetadata {
 
 /**
  * Fetches checklist questions with their onboarding metadata and separates them
- * into customer fields (maps_to_customer_field) and intent fields (intent_field).
+ * into customer fields and intent fields.
  *
- * @param country - ISO country code (e.g., 'EE' for Estonia)
+ * The backend now expects two portal-wide checklists:
+ * - `onboarding_customer` for customer data questions
+ * - `onboarding_intent` for intent/purpose questions
+ *
  * @returns Object with all questions, customer questions, and intent questions
  */
-export const fetchChecklistWithMetadata = async (
-  country: string,
-): Promise<ChecklistQuestionsWithMetadata> => {
-  const configResponse = await onboardingCountryConfigsList({
-    query: { country },
-  });
+export const fetchChecklistWithMetadata =
+  async (): Promise<ChecklistQuestionsWithMetadata> => {
+    // Fetch both portal-wide onboarding checklists
+    const [customerResponse, intentResponse] = await Promise.all([
+      checklistsAdminList({
+        query: { checklist_type: 'onboarding_customer' },
+      }),
+      checklistsAdminList({ query: { checklist_type: 'onboarding_intent' } }),
+    ]);
 
-  const config = configResponse.data[0];
-  if (!config) {
-    return {
-      allQuestions: [],
-      customerQuestions: [],
-      intentQuestions: [],
-      checklistUuid: '',
-    };
-  }
+    const customerChecklist = customerResponse.data[0];
+    const intentChecklist = intentResponse.data[0];
 
-  const checklistUuid = config.checklist_uuid;
-
-  const questions = (config.questions as QuestionAdmin[]) || [];
-
-  const metadataResponse = await onboardingQuestionMetadataList({
-    query: { checklist_uuid: checklistUuid },
-  });
-
-  const metadataList = metadataResponse.data || [];
-
-  const questionsWithMetadata: QuestionWithMetadata[] = questions.map(
-    (question) => {
-      const metadata = metadataList.find(
-        (m) => m.question_uuid === question.uuid,
-      );
+    if (!customerChecklist && !intentChecklist) {
       return {
-        ...question,
-        onboarding_metadata: metadata,
+        allQuestions: [],
+        customerQuestions: [],
+        intentQuestions: [],
+        checklistUuid: '',
       };
-    },
-  );
+    }
 
-  const customerQuestions = questionsWithMetadata.filter(
-    (q) => q.onboarding_metadata?.maps_to_customer_field,
-  );
+    // Fetch questions for each checklist
+    const [customerQuestionsResponse, intentQuestionsResponse] =
+      await Promise.all([
+        customerChecklist
+          ? checklistsAdminQuestionsList({
+              query: { checklist_uuid: customerChecklist.uuid },
+            })
+          : Promise.resolve({ data: [] }),
+        intentChecklist
+          ? checklistsAdminQuestionsList({
+              query: { checklist_uuid: intentChecklist.uuid },
+            })
+          : Promise.resolve({ data: [] }),
+      ]);
 
-  const intentQuestions = questionsWithMetadata.filter(
-    (q) => q.onboarding_metadata?.intent_field,
-  );
+    const customerQuestionsList =
+      (customerQuestionsResponse.data as QuestionAdmin[]) || [];
+    const intentQuestionsList =
+      (intentQuestionsResponse.data as QuestionAdmin[]) || [];
 
-  return {
-    allQuestions: questionsWithMetadata,
-    customerQuestions,
-    intentQuestions,
-    checklistUuid,
+    // Fetch metadata for questions from both checklists
+    const checklistUuids = [customerChecklist?.uuid, intentChecklist?.uuid]
+      .filter(Boolean)
+      .join(',');
+
+    const metadataResponse = checklistUuids
+      ? await onboardingQuestionMetadataList({
+          query: { checklist_uuid: checklistUuids },
+        })
+      : { data: [] };
+
+    const metadataList = metadataResponse.data || [];
+
+    // Map questions with metadata
+    const mapWithMetadata = (
+      questions: QuestionAdmin[],
+    ): QuestionWithMetadata[] =>
+      questions.map((question) => {
+        const metadata = metadataList.find(
+          (m) => m.question_uuid === question.uuid,
+        );
+        return {
+          ...question,
+          onboarding_metadata: metadata,
+        };
+      });
+
+    const customerQuestionsWithMetadata = mapWithMetadata(
+      customerQuestionsList,
+    );
+    const intentQuestionsWithMetadata = mapWithMetadata(intentQuestionsList);
+
+    return {
+      allQuestions: [
+        ...customerQuestionsWithMetadata,
+        ...intentQuestionsWithMetadata,
+      ],
+      customerQuestions: customerQuestionsWithMetadata,
+      intentQuestions: intentQuestionsWithMetadata,
+      checklistUuid: customerChecklist?.uuid || intentChecklist?.uuid || '',
+    };
   };
-};
 
 export const createAnswersFromFormData = (questions: any[], formData: any) => {
   const answers = [];
@@ -127,13 +161,11 @@ export const createAnswersFromFormData = (questions: any[], formData: any) => {
 export const createVerificationRequestBody = (
   formData: any,
   country: string,
-  isManual: boolean,
 ): OnboardingCompanyValidationRequestRequest => {
   return {
     country,
     legal_person_identifier: formData.registration_code,
     legal_name: formData.name,
-    is_manual_validation: isManual,
   };
 };
 
@@ -142,7 +174,8 @@ export const handleManualVerification = async (
   verificationData: OnboardingVerification | null,
   getChecklistData: () => Promise<any>,
 ) => {
-  const country = ENV.plugins.WALDUR_CORE.ONBOARDING_COUNTRY;
+  const countries = ENV.plugins.WALDUR_CORE.ONBOARDING_SUPPORTED_COUNTRIES;
+  const country = countries?.[0] || '';
   let validation: OnboardingVerification;
 
   if (verificationData && verificationData.status === 'escalated') {
@@ -174,7 +207,7 @@ export const handleManualVerification = async (
     // Create new verification instance for pure manual flow
     const verificationResponse = await onboardingVerificationsStartVerification(
       {
-        body: createVerificationRequestBody(formData, country, true),
+        body: createVerificationRequestBody(formData, country),
       },
     );
 
