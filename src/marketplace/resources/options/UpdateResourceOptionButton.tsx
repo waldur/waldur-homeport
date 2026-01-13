@@ -21,11 +21,12 @@ export const UpdateResourceOptionButton: FunctionComponent<
   UpdateResourceOptionDialogProps['resolve']
 > = (props) => {
   const user = useSelector(getUser);
-  const disabled = !hasPermission(user, {
-    permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
-    projectId: props.resource.project_uuid,
-    customerId: props.resource.customer_uuid,
-  });
+  const disabled =
+    !hasPermission(user, {
+      permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
+      projectId: props.resource.project_uuid,
+      customerId: props.resource.customer_uuid,
+    }) || props.resource.state !== 'OK';
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(

@@ -38,11 +38,13 @@ export const ResourceOptionsCard: FC<ResourceOptionsCardProps> = (props) => {
       loading={props.isLoading}
       className="card-bordered"
       actions={
-        <MultiEditOptionsAction
-          rows={[props.resource]}
-          refetch={props.refetch}
-          asButton
-        />
+        props.resource.state === 'OK' && (
+          <MultiEditOptionsAction
+            rows={[props.resource]}
+            refetch={props.refetch}
+            asButton
+          />
+        )
       }
     >
       <FormTable>
