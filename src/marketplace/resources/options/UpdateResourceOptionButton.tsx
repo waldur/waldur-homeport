@@ -21,12 +21,14 @@ export const UpdateResourceOptionButton: FunctionComponent<
   UpdateResourceOptionDialogProps['resolve']
 > = (props) => {
   const user = useSelector(getUser);
-  const disabled =
-    !hasPermission(user, {
-      permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
-      projectId: props.resource.project_uuid,
-      customerId: props.resource.customer_uuid,
-    }) || props.resource.state !== 'OK';
+  const hasPerms = hasPermission(user, {
+    permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
+    projectId: props.resource.project_uuid,
+    customerId: props.resource.customer_uuid,
+  });
+  const isResourceOk = props.resource.state === 'OK';
+  const disabled = !hasPerms || !isResourceOk;
+
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
@@ -35,14 +37,21 @@ export const UpdateResourceOptionButton: FunctionComponent<
       }),
     );
   };
+
+  let tooltip: string | undefined;
+  if (disabled) {
+    if (!isResourceOk) {
+      tooltip = translate(
+        'Options cannot be edited while resource is being updated.',
+      );
+    } else if (!hasPerms) {
+      tooltip = translate(
+        "You don't have enough privileges to perform this operation.",
+      );
+    }
+  }
+
   return (
-    <EditButton
-      onClick={callback}
-      disabled={disabled}
-      tooltip={
-        disabled &&
-        translate("You don't have enough privileges to perform this operation.")
-      }
-    />
+    <EditButton onClick={callback} disabled={disabled} tooltip={tooltip} />
   );
 };
