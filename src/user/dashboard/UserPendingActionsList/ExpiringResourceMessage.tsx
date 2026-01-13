@@ -20,14 +20,19 @@ export const ExpiringResourceMessage: FC<{ row: ExtendedUserAction }> = ({
         />
       ),
       offeringType: row.offering_type || translate('Resource'),
-      offeringName: <span className="fw-medium">{row.offering_name}</span>,
+      offeringName: (
+        <Link
+          state="marketplace-offering-public"
+          params={{ offering_uuid: row.offering_uuid }}
+          label={row.offering_name}
+        />
+      ),
       project:
         row.project_name && row.project_uuid ? (
           <Link
             state="project.dashboard"
             params={{ uuid: row.project_uuid }}
             label={row.project_name}
-            className="fw-medium"
           />
         ) : (
           row.project_name || 'N/A'
@@ -38,7 +43,6 @@ export const ExpiringResourceMessage: FC<{ row: ExtendedUserAction }> = ({
             state="organization.dashboard"
             params={{ uuid: row.organization_uuid }}
             label={row.organization_name}
-            className="fw-medium"
           />
         ) : (
           row.organization_name || 'N/A'

@@ -19,20 +19,25 @@ export const OrderPendingApprovalMessage: FC<
         {
           resource: (
             <Link
-              state="marketplace-resource-details"
-              params={{ resource_uuid: row.resource_uuid }}
+              state={row.route_name || 'marketplace-orders.details'}
+              params={row.route_params}
               label={row.resource_name}
               className="fw-bold"
             />
           ),
-          orderType: <strong>{row.order_type}</strong>,
-          offering: <strong>{row.offering_name}</strong>,
+          orderType: row.order_type,
+          offering: (
+            <Link
+              state="marketplace-offering-public"
+              params={{ offering_uuid: row.offering_uuid }}
+              label={row.offering_name}
+            />
+          ),
           project: (
             <Link
               state="project.dashboard"
               params={{ uuid: row.project_uuid }}
               label={row.project_name}
-              className="fw-bold"
             />
           ),
           organization: (
@@ -40,7 +45,6 @@ export const OrderPendingApprovalMessage: FC<
               state="organization.dashboard"
               params={{ uuid: row.organization_uuid }}
               label={row.organization_name}
-              className="fw-bold"
             />
           ),
         },

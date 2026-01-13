@@ -50,6 +50,7 @@ export interface ExtendedUserAction extends Omit<UserAction, 'route_params'> {
   organization_name?: string;
   organization_uuid?: string;
   offering_name?: string;
+  offering_uuid?: string;
   offering_type?: string;
   resource_name?: string;
   resource_uuid?: string;
