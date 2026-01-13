@@ -112,6 +112,12 @@ const fields: OfferingEditField[] = [
       'Makes purchase order upload mandatory when "Enable purchase order upload" is active',
     ),
   },
+  {
+    label: translate('Resource expiration threshold'),
+    key: 'plugin_options.resource_expiration_threshold',
+    component: NumberField,
+    description: translate('Resource expiration threshold in days.'),
+  },
 
   {
     label: translate('Conceal billing data'),

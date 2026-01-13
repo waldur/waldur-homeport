@@ -80,6 +80,7 @@ export enum UserFeatures {
   show_slug = 'user.show_slug',
   show_username = 'user.show_username',
   ssh_keys = 'user.ssh_keys',
+  pending_user_actions = 'user.pending_user_actions',
 }
 
 export type FeaturesEnum =
@@ -93,4 +94,4 @@ export type FeaturesEnum =
   | SlurmFeatures
   | SupportFeatures
   | UserFeatures
-;
+  ;

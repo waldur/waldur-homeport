@@ -8,7 +8,7 @@ import {
 
 import { fetchResultCount } from '@waldur/core/api';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures, UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { router } from '@waldur/router';
@@ -153,7 +153,7 @@ export const UserDashboard: FC = () => {
         </Row>
       )}
 
-      {showDashboardWidgets && (
+      {isFeatureVisible(UserFeatures.pending_user_actions) && (
         <div className="mb-5">
           <UserPendingActionsList user={user} />
         </div>
