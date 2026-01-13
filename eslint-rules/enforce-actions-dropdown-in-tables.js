@@ -61,30 +61,6 @@ export default {
   },
 
   create(context) {
-    // Track if we're inside a rowActions prop
-    let rowActionsDepth = 0;
-    let currentRowActionsNode = null;
-
-    /**
-     * Check if a node is a JSX element with a forbidden component name
-     */
-    function isForbiddenComponent(node) {
-      if (node.type !== 'JSXElement') return false;
-
-      const elementName = getJSXElementName(node.openingElement);
-      return FORBIDDEN_DIRECT_COMPONENTS.includes(elementName);
-    }
-
-    /**
-     * Check if a node is an allowed wrapper component
-     */
-    function isAllowedWrapper(node) {
-      if (node.type !== 'JSXElement') return false;
-
-      const elementName = getJSXElementName(node.openingElement);
-      return ALLOWED_WRAPPER_COMPONENTS.includes(elementName);
-    }
-
     /**
      * Get the name of a JSX element
      */

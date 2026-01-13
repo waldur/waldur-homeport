@@ -1,0 +1,20 @@
+.alert-item {
+  padding: 1.23rem 0;
+  display: flex;
+  gap: 0.846rem;
+  border-bottom: 1px solid var(--bs-border-color);
+
+  :last-child > & {
+    border-bottom: unset;
+  }
+
+  .alert-icon {
+    margin-top: -0.77rem;
+  }
+
+  .alert-actions {
+    display: flex;
+    align-items: start;
+    padding-right: 2px;
+  }
+}

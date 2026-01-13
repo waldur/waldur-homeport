@@ -26,18 +26,6 @@ const ALLOWED_FILES = [
   'src/table/TableColumnsButton.tsx',
 ];
 
-const RECOMMENDED_COMPONENTS = {
-  'form submit/action buttons': 'SubmitButton from @waldur/form',
-  'icon-only buttons': 'IconButton from @waldur/core/buttons/IconButton',
-  'toolbar buttons': 'ToolbarButton from @waldur/table/ToolbarButton',
-  'table row actions':
-    'ActionButton or RowActionButton from @waldur/table/ActionButton',
-  'dialog cancel/close':
-    'CloseDialogButton from @waldur/modal/CloseDialogButton',
-  'create/edit/delete modals':
-    'CreateModalButton, EditModalButton, DeleteButton from @waldur/core/buttons',
-};
-
 export default {
   meta: {
     type: 'suggestion',

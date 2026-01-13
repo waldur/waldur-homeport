@@ -29,6 +29,7 @@ interface ActionsDropdownProps extends Partial<DropdownProps> {
   row?: any;
   refetch?(): void;
   data?: Record<string, any>;
+  variant?: Variant;
   size?: 'sm' | 'md' | 'lg';
   tooltip?: string | boolean;
 }

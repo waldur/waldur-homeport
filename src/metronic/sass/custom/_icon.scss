@@ -100,6 +100,7 @@
     }
   }
 
+  &.icon-default,
   &.icon-dark {
     border-color: rgba($fg-quaternary, 0.1);
 
@@ -142,6 +143,7 @@
       background-color: if(isDarkMode(), $warning-50, $bg-warning-secondary);
       @include svg-icon-color($fg-warning-secondary);
     }
+    &.icon-default,
     &.icon-dark {
       background-color: $bg-tertiary;
       @include svg-icon-color($fg-quaternary);

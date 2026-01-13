@@ -18,6 +18,7 @@ import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
 import { ActiveInvitationsList } from './ActiveInvitationsList';
 import { DashboardCard } from './DashboardCard';
+import { UserPendingActionsList } from './UserPendingActionsList';
 
 export const UserDashboard: FC = () => {
   const user = useUser();
@@ -150,6 +151,12 @@ export const UserDashboard: FC = () => {
             </Col>
           )}
         </Row>
+      )}
+
+      {showDashboardWidgets && (
+        <div className="mb-5">
+          <UserPendingActionsList user={user} />
+        </div>
       )}
 
       {hasActiveInvitations && (

@@ -27,6 +27,7 @@ yarn lint:fix       # Auto-fix linting
 ## Guides & Subagents
 
 For detailed guidance, see `docs/`:
+
 - `development-workflow.md` - Planning, TDD, problem-solving
 - `code-quality.md` - Testing, linting, TypeScript
 - `architecture.md` - Redux/Saga, component patterns
@@ -40,20 +41,25 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 ## Critical Rules
 
 **NEVER:**
+
 - Use `--no-verify` to bypass hooks
 - Disable tests instead of fixing them
 - Commit code that doesn't compile
 
 **ALWAYS:**
+
 - Memoize filter objects in `useTable` hooks to prevent infinite re-renders:
+
   ```typescript
   const filter = useMemo(() => ({ customer_uuid: customer.uuid }), [customer.uuid]);
   ```
+
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
 
 ## Task-Specific Docs
 
 These are NOT always-loaded - reference when needed:
+
 - Translation: `yarn i18n:analyze --help` for commands
 - MCP Debugging: See `docs/development-setup.md`
 - Dependencies: `npm view waldur-js-client versions --json | tail -20`

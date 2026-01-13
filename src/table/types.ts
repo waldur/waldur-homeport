@@ -191,6 +191,7 @@ export interface TableProps<RowType = any> extends TableState {
   className?: string;
   headerClassName?: string;
   titleClassName?: string;
+  bodyClassName?: string;
   id?: string;
   rowClass?: (({ row }: { row: RowType }) => string) | string;
   hoverable?: boolean;

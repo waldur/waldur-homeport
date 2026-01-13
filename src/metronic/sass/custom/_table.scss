@@ -300,8 +300,15 @@
     border: unset;
   }
 
-  &.grid-table .table-container {
-    overflow-x: hidden;
+  &.grid-table {
+    .table-container {
+      overflow-x: hidden;
+    }
+    &.full-width .table-pagination,
+    .table-pagination {
+      padding-left: 0 !important;
+      padding-right: 0 !important;
+    }
   }
 
   .table-filter {
