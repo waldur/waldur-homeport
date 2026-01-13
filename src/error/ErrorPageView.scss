@@ -1,0 +1,42 @@
+.error-view {
+  display: flex;
+  flex-direction: column;
+  height: 100%;
+  justify-content: center;
+  align-items: center;
+  margin: 18px 0;
+
+  h1 {
+    font-size: 295px;
+    font-weight: 900;
+    line-height: 1.1;
+    margin: 0;
+    background-image: linear-gradient(
+      145deg,
+      var(--bs-primary-600),
+      var(--bs-primary-800)
+    );
+    background-image: -webkit-linear-gradient(
+      325deg,
+      var(--bs-primary-600),
+      var(--bs-primary-800)
+    );
+    color: var(--bs-primary-700);
+    background-clip: text;
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+  }
+  h2 {
+    font-size: 24px;
+    margin-bottom: 16px;
+  }
+  p {
+    font-size: 18px;
+    font-weight: 200;
+    margin-bottom: 12px;
+    max-width: 500px;
+  }
+  button {
+    min-width: 86px;
+  }
+}

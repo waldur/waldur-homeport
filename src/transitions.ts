@@ -145,7 +145,7 @@ export function attachTransitions() {
     },
     (transition) =>
       transition.router.stateService.target(
-        transition.options().custom?.fallbackState || 'errorPage.notFound',
+        transition.options().custom?.fallbackState || 'errorPage.noPermission',
       ),
   );
 
@@ -160,6 +160,19 @@ export function attachTransitions() {
       });
       AuthService.clearAuthCache();
       return transition.router.stateService.target('login');
+    }
+    if (error && error.detail) {
+      if (error.detail.status === 403) {
+        return transition.router.stateService.target('errorPage.noPermission');
+      }
+      if (error.detail.status === 500) {
+        return transition.router.stateService.target('errorPage.severError');
+      }
+      if (error.detail.status === 503) {
+        return transition.router.stateService.target(
+          'errorPage.serviceNotAvailable',
+        );
+      }
     }
     if (error && error['redirectTo'] && error['status'] !== -1) {
       return transition.router.stateService.target(error['redirectTo']);
