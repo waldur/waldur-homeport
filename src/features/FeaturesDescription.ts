@@ -251,6 +251,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable email and webhook notifications management in user workspace.'),
       },
       {
+        key: 'pending_user_actions',
+        description: translate('Show pending user actions.'),
+      },
+      {
         key: 'preferred_language',
         description: translate('Render preferred language column in users list.'),
       },
@@ -265,10 +269,6 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'ssh_keys',
         description: translate('Enable SSH keys management in user workspace.'),
-      },
-      {
-        key: 'pending_user_actions',
-        description: translate('Show pending user actions.'),
       },
     ],
   },
