@@ -193,6 +193,7 @@ When debugging the frontend application using MCP Chrome DevTools:
 
 - **Default Staff Credentials**: Username `staff`, password `demo`
 - **Token Setup**: Set the authentication token in localStorage:
+
   ```javascript
   localStorage.setItem('waldur/auth/token', 'your-token-here');
   ```
@@ -200,7 +201,8 @@ When debugging the frontend application using MCP Chrome DevTools:
 ### Testing Removed Projects
 
 Use URLs with `include_terminated=true`:
-```
+
+```text
 http://localhost:8001/projects/{uuid}/?include_terminated=true
 http://localhost:8001/projects/{uuid}/manage/?include_terminated=true&tab=general
 ```

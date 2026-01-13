@@ -336,7 +336,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
             )}
 
           {/* Main content */}
-          <Card.Body>
+          <Card.Body className={props.bodyClassName}>
             <div
               ref={tableResponsiveRef}
               className="table-responsive dataTables_wrapper"
