@@ -6,7 +6,7 @@ import {
   vmwareVirtualMachineCreatePort,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { createNameField } from '@waldur/resource/actions/base';
@@ -30,6 +30,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         vmwareNetworksList({
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             customer_pair_uuid: resource.customer_uuid,
             settings_uuid: resource.settings_uuid,
           },

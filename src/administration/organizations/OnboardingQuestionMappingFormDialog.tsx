@@ -10,7 +10,7 @@ import {
   OnboardingQuestionMetadata,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import { SelectField, SubmitButton } from '@waldur/form';
@@ -52,7 +52,7 @@ export const OnboardingQuestionMappingFormDialog: FC<
       getAllPages((page) =>
         checklistsAdminQuestionsList({
           query: {
-            page_size: 1000,
+            page_size: MAX_PAGE_SIZE,
             page,
             checklist_type: 'customer_onboarding',
             has_onboarding_mapping: false,

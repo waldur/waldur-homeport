@@ -8,7 +8,7 @@ import {
   rancherClusterTemplatesList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import {
@@ -66,7 +66,7 @@ export const loadNodeCreateData = async (cluster: RancherCluster) => {
     tenant_uuid: cluster.tenant_uuid,
   });
   const templates = await getAllPages((page) =>
-    rancherClusterTemplatesList({ query: { page } }),
+    rancherClusterTemplatesList({ query: { page, page_size: MAX_PAGE_SIZE } }),
   );
   const volumeTypeChoices = formatVolumeTypeChoices(volumeTypes);
   const defaultVolumeType = getDefaultVolumeType(volumeTypeChoices);

@@ -6,7 +6,7 @@ import {
   marketplaceCategoryGroupsRetrieve,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useFullPage } from '@waldur/navigation/context';
@@ -27,7 +27,9 @@ export const CategoryGroupPage: FunctionComponent = () => {
       Promise.all([
         marketplaceCategoryGroupsRetrieve({ path: { uuid: group_uuid } }),
         getAllPages((page) =>
-          marketplaceCategoriesList({ query: { page, group_uuid } }),
+          marketplaceCategoriesList({
+            query: { page, page_size: MAX_PAGE_SIZE, group_uuid },
+          }),
         ),
       ]).then(([groupResponse, categories]) => ({
         ...groupResponse.data,

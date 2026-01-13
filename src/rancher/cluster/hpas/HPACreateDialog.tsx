@@ -8,7 +8,7 @@ import {
   rancherWorkloadsList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { StringField, SelectField, NumberField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { ActionDialog } from '@waldur/modal/ActionDialog';
@@ -90,12 +90,22 @@ export const HPACreateDialog = reduxForm<{}, OwnProps>({
   const { loading, value } = useAsync(async () => {
     const namespaces = await getAllPages((page) =>
       rancherNamespacesList({
-        query: { page, cluster_uuid: props.resolve.cluster.uuid, o: ['name'] },
+        query: {
+          page,
+          page_size: MAX_PAGE_SIZE,
+          cluster_uuid: props.resolve.cluster.uuid,
+          o: ['name'],
+        },
       }),
     );
     const workloads = await getAllPages((page) =>
       rancherWorkloadsList({
-        query: { page, cluster_uuid: props.resolve.cluster.uuid, o: ['name'] },
+        query: {
+          page,
+          page_size: MAX_PAGE_SIZE,
+          cluster_uuid: props.resolve.cluster.uuid,
+          o: ['name'],
+        },
       }),
     );
     return { namespaces, workloads };

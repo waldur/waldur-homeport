@@ -6,7 +6,7 @@ import {
   vmwareFoldersList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { FormContainer, SelectField } from '@waldur/form';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -25,6 +25,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
           vmwareClustersList({
             query: {
               page,
+              page_size: MAX_PAGE_SIZE,
               settings_uuid: props.offering.scope_uuid,
               customer_uuid: props.offering.customer_uuid,
             },
@@ -34,6 +35,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
           vmwareDatastoresList({
             query: {
               page,
+              page_size: MAX_PAGE_SIZE,
               settings_uuid: props.offering.scope_uuid,
               customer_uuid: props.offering.customer_uuid,
             },
@@ -43,6 +45,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
           vmwareFoldersList({
             query: {
               page,
+              page_size: MAX_PAGE_SIZE,
               settings_uuid: props.offering.scope_uuid,
               customer_uuid: props.offering.customer_uuid,
             },

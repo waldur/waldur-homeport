@@ -11,7 +11,7 @@ import {
   // PatchedCreateChecklistRequest,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import {
@@ -56,7 +56,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
     queryFn: () =>
       getAllPages((page) =>
         checklistsAdminCategoriesList({
-          query: { page_size: 1000, page },
+          query: { page_size: MAX_PAGE_SIZE, page },
         }),
       ),
     staleTime: 3 * 60 * 1000,

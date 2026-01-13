@@ -6,7 +6,7 @@ import {
   marketplaceComponentUsagesList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { parseDate } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -320,6 +320,7 @@ export const getComponentsAndUsages = async (
       marketplaceComponentUsagesList({
         query: {
           page,
+          page_size: MAX_PAGE_SIZE,
           resource_uuid,
           date_after,
           field: ['type', 'usage', 'billing_period'],
@@ -330,6 +331,7 @@ export const getComponentsAndUsages = async (
       marketplaceComponentUserUsagesList({
         query: {
           page,
+          page_size: MAX_PAGE_SIZE,
           resource_uuid,
           date_after,
           field: [

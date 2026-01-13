@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 import { openstackTenantsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField } from '@waldur/form';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -23,6 +23,7 @@ export const FormTenantStep = (props: FormStepProps) => {
             openstackTenantsList({
               query: {
                 page,
+                page_size: MAX_PAGE_SIZE,
                 project_uuid: project.uuid,
                 field: ['name', 'url', 'uuid'],
               },

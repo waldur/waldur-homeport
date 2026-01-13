@@ -8,7 +8,7 @@ import {
   OfferingComponentStat,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -45,6 +45,7 @@ export const ComponentsUsage: FC<OwnProps> = ({ offering }) => {
               path: { uuid: offering.uuid },
               query: {
                 page,
+                page_size: MAX_PAGE_SIZE,
                 start: DateTime.now()
                   .minus({ months: 2 })
                   .startOf('month')

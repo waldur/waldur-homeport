@@ -10,7 +10,7 @@ import {
 } from 'react-bootstrap';
 import { checklistsAdminCategoriesList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
@@ -70,7 +70,9 @@ export const AnalyticsAndReports = () => {
     queryKey: ['ChecklistCategories'],
     queryFn: () =>
       getAllPages((page) =>
-        checklistsAdminCategoriesList({ query: { page_size: 1000, page } }),
+        checklistsAdminCategoriesList({
+          query: { page_size: MAX_PAGE_SIZE, page },
+        }),
       ),
     staleTime: 3 * 60 * 1000,
   });

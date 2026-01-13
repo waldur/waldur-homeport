@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect } from 'react';
 import { Checklist, checklistsAdminList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
@@ -17,7 +17,11 @@ export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
     queryFn: () =>
       getAllPages((page) =>
         checklistsAdminList({
-          query: { page, checklist_type: 'offering_compliance' },
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            checklist_type: 'offering_compliance',
+          },
         }),
       ),
     staleTime: 3 * 60 * 1000,

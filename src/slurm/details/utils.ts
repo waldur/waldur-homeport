@@ -6,7 +6,7 @@ import {
   slurmAllocationUserUsageList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { palette } from '@waldur/slurm/details/constants';
 
@@ -217,7 +217,7 @@ export const loadCharts = async (
   }
   const componentUsages = await getAllPages((page) =>
     marketplaceComponentUsagesList({
-      query: { page, resource_uuid: resourceUuid },
+      query: { page, page_size: MAX_PAGE_SIZE, resource_uuid: resourceUuid },
     }),
   );
   const periodUsages = {};

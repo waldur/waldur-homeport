@@ -16,7 +16,7 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { getUUID } from '@waldur/core/utils';
@@ -73,7 +73,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
         maintenanceAnnouncementsTemplateList({
           query: {
             page,
-            page_size: 1000,
+            page_size: MAX_PAGE_SIZE,
             service_provider_uuid: resolve.provider?.uuid,
           },
         }),
@@ -97,7 +97,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
             maintenanceAnnouncementTemplateOfferingsList({
               query: {
                 page,
-                page_size: 1000,
+                page_size: MAX_PAGE_SIZE,
                 maintenance_template_uuid: formValues.template.uuid,
               },
             }),

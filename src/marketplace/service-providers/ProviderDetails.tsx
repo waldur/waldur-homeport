@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 import { marketplaceProviderOfferingsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
@@ -16,7 +16,9 @@ async function loadProviderData(customer_uuid) {
     customer_uuid,
   });
   const offerings = await getAllPages((page) =>
-    marketplaceProviderOfferingsList({ query: { page, customer_uuid } }),
+    marketplaceProviderOfferingsList({
+      query: { page, page_size: MAX_PAGE_SIZE, customer_uuid },
+    }),
   );
   return { provider, offerings };
 }

@@ -1,17 +1,20 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
-import { proposalProtectedCallsOfferingsList } from 'waldur-js-client';
+import {
+  proposalProtectedCallsOfferingsList,
+  RequestedOffering,
+} from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, StringField } from '@waldur/form';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 
 const getOfferings = (call_uuid: string) =>
-  getAllPages((page) =>
+  getAllPages<RequestedOffering>((page) =>
     proposalProtectedCallsOfferingsList({
-      query: { page, page_size: 1000, state: 'accepted' },
+      query: { page, page_size: MAX_PAGE_SIZE, state: 'accepted' },
       path: { uuid: call_uuid },
     }),
   );

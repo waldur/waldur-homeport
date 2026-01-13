@@ -7,9 +7,10 @@ import {
   Customer,
   marketplaceCustomerComponentUsagePoliciesActionsRetrieve,
   marketplaceProviderOfferingsList,
+  Offering,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { composeValidators, required } from '@waldur/core/validators';
@@ -40,17 +41,17 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
   } = useQuery({
     queryKey: ['provider-offering-components', customer.uuid],
     queryFn: () =>
-      getAllPages((page) =>
+      getAllPages<Offering>((page) =>
         marketplaceProviderOfferingsList({
           query: {
-            customer_uuid: customer.uuid,
-            field: ['components', 'name'],
             page,
-            page_size: 1000,
+            page_size: MAX_PAGE_SIZE,
+            customer_uuid: customer.uuid,
+            field: ['name', 'uuid', 'components', 'type', 'category_title'],
           },
         }),
-      ).then((offerings) =>
-        offerings.flatMap((offering) =>
+      ).then((options) => {
+        return options.flatMap((offering) =>
           offering.components?.length
             ? offering.components
                 .filter((c) => ['usage', 'limit'].includes(c.billing_type))
@@ -62,8 +63,8 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
                   offering_name: offering.name, // to provide context in case of components with the same name
                 }))
             : [],
-        ),
-      ),
+        );
+      }),
     refetchOnWindowFocus: false,
     staleTime: 5 * 60 * 1000,
   });

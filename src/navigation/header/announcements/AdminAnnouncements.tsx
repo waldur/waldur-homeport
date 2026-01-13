@@ -7,7 +7,7 @@ import {
   ANNOUNCEMENT_ICON,
   getAnnouncementTypeLabel,
 } from '@waldur/administration/utils';
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -26,7 +26,11 @@ export const AdminAnnouncements = () => {
     queryKey: ADMIN_ANNOUNCEMENTS_QUERY_KEY,
 
     queryFn: () =>
-      getAllPages(() => adminAnnouncementsList({ query: { is_active: true } })),
+      getAllPages((page) =>
+        adminAnnouncementsList({
+          query: { page, page_size: MAX_PAGE_SIZE, is_active: true },
+        }),
+      ),
 
     staleTime: 1000 * 60 * 5,
 

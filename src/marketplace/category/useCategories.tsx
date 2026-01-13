@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { getCategoryGroups } from '@waldur/marketplace/common/api';
 
 import {
@@ -26,6 +26,7 @@ export const useCategories = () => {
           marketplaceCategoriesList({
             query: {
               page,
+              page_size: MAX_PAGE_SIZE,
               field: ['uuid', 'icon', 'title', 'offering_count', 'group'],
               ...contextFilter,
             },

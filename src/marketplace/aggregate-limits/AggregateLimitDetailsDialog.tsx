@@ -8,7 +8,7 @@ import {
   Project,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -53,6 +53,7 @@ export const AggregateLimitDetailsDialog = ({
         marketplaceResourcesList({
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             project_uuid: project?.uuid,
             customer_uuid: customer?.uuid,
             state: NON_TERMINATED_STATES,

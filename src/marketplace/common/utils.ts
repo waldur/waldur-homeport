@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 import { organizationGroupsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -87,12 +87,13 @@ export const useOrganizationGroups = () => {
     queryKey: ['organizationGroups'],
 
     queryFn: () =>
-      getAllPages((page) => organizationGroupsList({ query: { page } })).then(
-        (items) =>
-          items.map((item) => ({
-            ...item,
-            value: item.url,
-          })),
+      getAllPages((page) =>
+        organizationGroupsList({ query: { page, page_size: MAX_PAGE_SIZE } }),
+      ).then((items) =>
+        items.map((item) => ({
+          ...item,
+          value: item.url,
+        })),
       ),
 
     staleTime: 5 * 60 * 1000,

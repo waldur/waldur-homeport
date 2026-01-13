@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
@@ -103,7 +103,11 @@ export const SelectCategoryTab = () => {
     queryFn: () =>
       getAllPages((page) =>
         marketplaceCategoriesList({
-          query: { page, field: ['uuid', 'title', 'group'], page_size: 100 },
+          query: {
+            page,
+            field: ['uuid', 'title', 'group'],
+            page_size: MAX_PAGE_SIZE,
+          },
         }),
       ),
 
