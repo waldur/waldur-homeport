@@ -73,8 +73,11 @@ export const combinePrices = (
             amount *= durationInMonths;
           }
         } else {
-          // Otherwise, preserve the existing logic for non-prepaid one-time components.
-          amount = 1;
+          // For non-prepaid one-time components, use plan quotas if available.
+          amount =
+            plan.quotas && plan.quotas[component.type]
+              ? plan.quotas[component.type]
+              : 1;
         }
       }
       const price = plan.prices[component.type] || 0;
