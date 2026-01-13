@@ -13,8 +13,8 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { USER_TOS_FILTER_FORM_ID } from '@waldur/user/constants';
 import { USER_TOS_MANAGEMENT_TABLE_ID } from '@waldur/user/constants';
-import { OfferingTosExpandableRow } from '@waldur/user/dashboard/OfferingTosExpandableRow';
 
+import { OfferingTosExpandableRow } from './OfferingTosExpandableRow';
 import { UserTosFilters } from './UserTosFilters';
 
 const mapStateToFilter = createSelector(

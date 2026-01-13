@@ -142,7 +142,7 @@ export const states: StateDeclaration[] = [
     name: 'profile.tos-management',
     url: 'tos-management/',
     component: lazyComponent(() =>
-      import('./dashboard/UserTosManagementSection').then((module) => ({
+      import('./dashboard/UserTosManagement').then((module) => ({
         default: module.UserTosManagementSection,
       })),
     ),
