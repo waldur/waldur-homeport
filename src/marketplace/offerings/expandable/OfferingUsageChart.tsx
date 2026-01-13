@@ -4,7 +4,7 @@ import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { marketplaceProviderOfferingsComponentStatsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { generateColors } from '@waldur/core/generateColors';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -29,6 +29,7 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
           path: { uuid: offering.uuid },
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             start: DateTime.now()
               .minus({ months: 12 })
               .startOf('month')

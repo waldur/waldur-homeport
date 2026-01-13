@@ -3,7 +3,7 @@ import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { PaymentProfile, paymentsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
@@ -23,7 +23,11 @@ export const AgreementInfo: FunctionComponent<AgreementInfoProps> = (props) => {
     if (activeFixedPricePaymentProfile) {
       const response = await getAllPages((page) =>
         paymentsList({
-          query: { page, profile_uuid: activeFixedPricePaymentProfile.uuid },
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            profile_uuid: activeFixedPricePaymentProfile.uuid,
+          },
         }),
       );
       return response

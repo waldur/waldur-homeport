@@ -5,7 +5,7 @@ import {
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { getAllPages, parseSelectData } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE, parseSelectData } from '@waldur/core/api';
 import { Category, Offering } from '@waldur/marketplace/types';
 import { Customer } from '@waldur/workspace/types';
 
@@ -18,6 +18,7 @@ export const fetchCategories = (
     marketplaceCategoriesList({
       query: {
         page,
+        page_size: MAX_PAGE_SIZE,
         ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
         ...(project ? { project_uuid: project.uuid } : {}),
         field: ['uuid', 'title', 'offering_count', 'icon', 'group'],

@@ -21,7 +21,7 @@ import {
   QuestionAdminRequest,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -71,7 +71,11 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
       question?.uuid
         ? getAllPages((page) =>
             checklistsAdminQuestionDependenciesList({
-              query: { question_uuid: question.uuid, page, page_size: 1000 },
+              query: {
+                question_uuid: question.uuid,
+                page,
+                page_size: MAX_PAGE_SIZE,
+              },
             }),
           )
         : null,

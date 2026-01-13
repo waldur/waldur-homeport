@@ -4,7 +4,7 @@ import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { customerCreditsList, projectsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { showErrorResponse } from '@waldur/store/notify';
@@ -40,7 +40,7 @@ export function fetchCustomerProjects(customerUuid) {
         field: ['uuid', 'url', 'name', 'end_date', 'image', 'resources_count'],
         o: ['name'],
         page,
-        page_size: 1000,
+        page_size: MAX_PAGE_SIZE,
       },
     }),
   );

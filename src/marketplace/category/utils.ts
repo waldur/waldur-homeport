@@ -8,7 +8,7 @@ import {
   marketplaceCategoryColumnsUpdate,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { Category, CategoryGroup } from '@waldur/marketplace/types';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -108,7 +108,11 @@ export const useCategoryColumnsEditor = (category: Category) => {
     () =>
       getAllPages((page) =>
         marketplaceCategoryColumnsList({
-          query: { page, category_uuid: category.uuid },
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            category_uuid: category.uuid,
+          },
         }),
       ),
     [category.uuid],

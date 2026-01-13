@@ -6,7 +6,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { arrayPush, arrayRemoveAll, Field, FieldArray } from 'redux-form';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField, StringField } from '@waldur/form';
 import { BoxNumberField } from '@waldur/form/BoxNumberField';
@@ -182,7 +182,11 @@ export const FormNodesStep = (props: FormStepProps) => {
     queryKey: ['nodes-step-templates'],
 
     queryFn: () =>
-      getAllPages((page) => rancherClusterTemplatesList({ query: { page } })),
+      getAllPages((page) =>
+        rancherClusterTemplatesList({
+          query: { page, page_size: MAX_PAGE_SIZE },
+        }),
+      ),
 
     staleTime: 3 * 60 * 1000,
   });

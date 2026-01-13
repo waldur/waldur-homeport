@@ -6,7 +6,7 @@ import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 import { marketplaceProviderOfferingsCostsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -46,6 +46,7 @@ export const OfferingCostsChart: FunctionComponent<OfferingCostChartProps> = (
           path: { uuid: props.offering.uuid },
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             accounting_is_running: accountRunningState?.value,
             start: DateTime.now().minus({ months: 11 }).toFormat('yyyy-MM'),
             end: DateTime.now().toFormat('yyyy-MM'),

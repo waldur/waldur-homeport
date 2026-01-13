@@ -17,7 +17,7 @@ import {
   Offering,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -125,12 +125,12 @@ const InfoRow = ({ label, states }) => {
 const loadData = async (offering_uuid) => {
   const resources = await getAllPages((page) =>
     marketplaceProviderResourcesList({
-      query: { offering_uuid, page, page_size: 1000 },
+      query: { offering_uuid, page, page_size: MAX_PAGE_SIZE },
     }),
   );
   const users = await getAllPages((page) =>
     marketplaceOfferingUsersList({
-      query: { offering_uuid, page, page_size: 1000 },
+      query: { offering_uuid, page, page_size: MAX_PAGE_SIZE },
     }),
   );
   return { resources, users };

@@ -7,7 +7,7 @@ import {
   maintenanceAnnouncementTemplateOfferingsList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required, url } from '@waldur/core/validators';
 import {
@@ -42,7 +42,7 @@ export const Step1CreateMessage: FC<WizardFormStepProps> = (props) => {
         maintenanceAnnouncementsTemplateList({
           query: {
             page,
-            page_size: 1000,
+            page_size: MAX_PAGE_SIZE,
             service_provider_uuid: props.data?.provider?.uuid,
           },
         }),
@@ -73,9 +73,10 @@ export const Step1CreateMessage: FC<WizardFormStepProps> = (props) => {
               const templateOfferings = await getAllPages((page) =>
                 maintenanceAnnouncementTemplateOfferingsList({
                   query: {
+                    page_size: MAX_PAGE_SIZE,
                     page,
-                    page_size: 1000,
                     maintenance_template_uuid: template?.uuid,
+                    service_provider_uuid: props.data?.provider?.uuid,
                   },
                 }),
               );

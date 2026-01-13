@@ -8,7 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -252,7 +252,7 @@ export const OfferingDetailsUIView = ({
     queryFn: () =>
       getAllPages((page) =>
         marketplacePlansUsageStatsList({
-          query: { page, offering_uuid },
+          query: { page, page_size: MAX_PAGE_SIZE, offering_uuid },
         }),
       ),
 

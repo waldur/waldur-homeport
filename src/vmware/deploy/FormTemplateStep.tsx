@@ -3,7 +3,7 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Field } from 'redux-form';
 import { VmwareTemplate, vmwareTemplatesList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -37,7 +37,11 @@ export const FormTemplateStep = (props: FormStepProps) => {
       props.offering.scope_uuid && props.offering.customer_uuid
         ? getAllPages((page) =>
             vmwareTemplatesList({
-              query: { page, settings_uuid: props.offering.scope_uuid },
+              query: {
+                page,
+                page_size: MAX_PAGE_SIZE,
+                settings_uuid: props.offering.scope_uuid,
+              },
             }),
           )
         : Promise.resolve([]),

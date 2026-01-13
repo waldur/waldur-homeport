@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { MAX_PAGE_SIZE } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
 import { SelectField } from '@waldur/form';
 import { FormField } from '@waldur/form/types';
@@ -72,7 +73,7 @@ export const SingleDatacenterK8sConfigurationForm: React.FC<
     try {
       const result = await marketplacePublicOfferingsList({
         query: {
-          page_size: 100,
+          page_size: MAX_PAGE_SIZE,
           type: ['OpenStack.Tenant'],
           state: ['Active'],
         },

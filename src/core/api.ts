@@ -14,6 +14,8 @@ import {
 import { cleanObject } from '@waldur/core/utils';
 import { router } from '@waldur/router';
 
+export const MAX_PAGE_SIZE = 300;
+
 const querySerializer = (params) =>
   Qs.stringify(params, { arrayFormat: 'repeat' });
 

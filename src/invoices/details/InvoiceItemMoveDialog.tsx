@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { invoiceItemsMigrateTo, invoicesList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
@@ -24,6 +24,7 @@ export const InvoiceItemMoveDialog = ({
         invoicesList({
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             customer: customer.url,
             field: ['url', 'number', 'year', 'month'],
           },

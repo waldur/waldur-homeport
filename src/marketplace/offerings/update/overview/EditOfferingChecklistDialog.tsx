@@ -7,7 +7,7 @@ import {
   marketplaceProviderOfferingsUpdateComplianceChecklist,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SelectField, SubmitButton } from '@waldur/form';
@@ -49,7 +49,11 @@ export const EditOfferingChecklistDialog: FC<{
     queryFn: () =>
       getAllPages((page) =>
         checklistsAdminList({
-          query: { page, checklist_type: 'offering_compliance' },
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            checklist_type: 'offering_compliance',
+          },
         }),
       ),
     staleTime: 3 * 60 * 1000,

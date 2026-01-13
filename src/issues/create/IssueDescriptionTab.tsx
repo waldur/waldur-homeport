@@ -5,7 +5,7 @@ import { useAsync } from 'react-use';
 import { change, Field, formValueSelector, isSubmitting } from 'redux-form';
 import { supportTemplatesList, Template } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { InputGroup } from '@waldur/customer/create/InputGroup';
 import { SelectField, TextField } from '@waldur/form';
@@ -27,7 +27,9 @@ export const IssueDescriptionTab = () => {
   const submitting = useSelector(isSubmitting(ISSUE_CREATION_FORM_ID));
 
   const templateState = useAsync(() =>
-    getAllPages((page) => supportTemplatesList({ query: { page } })),
+    getAllPages((page) =>
+      supportTemplatesList({ query: { page, page_size: MAX_PAGE_SIZE } }),
+    ),
   );
 
   const issueType = useSelector<RootState, IssueTypeOption>((state) =>

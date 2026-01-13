@@ -13,7 +13,7 @@ import {
   UserRoleDetails,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
@@ -92,6 +92,7 @@ export const AddResourceAccessDialog = reduxForm<
           path: { uuid: resource.project_uuid },
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             field: [
               'user_uuid',
               'user_full_name',
@@ -127,7 +128,13 @@ export const AddResourceAccessDialog = reduxForm<
     queryFn: () =>
       scope === 'project' &&
       getAllPages((page) =>
-        rancherProjectsList({ query: { page, cluster_uuid: resource.uuid } }),
+        rancherProjectsList({
+          query: {
+            page,
+            page_size: MAX_PAGE_SIZE,
+            cluster_uuid: resource.uuid,
+          },
+        }),
       ),
 
     staleTime: 3 * 60 * 1000,
@@ -148,6 +155,7 @@ export const AddResourceAccessDialog = reduxForm<
         rancherRoleTemplatesList({
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             scope_type: scope,
             settings_uuid: resource.service_settings_uuid,
           },

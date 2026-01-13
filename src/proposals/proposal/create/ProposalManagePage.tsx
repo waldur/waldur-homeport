@@ -8,7 +8,7 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { getQueryParams } from '@waldur/core/filters';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -89,6 +89,7 @@ export const ProposalManagePage = () => {
         proposalReviewsList({
           query: {
             page,
+            page_size: MAX_PAGE_SIZE,
             proposal_uuid,
           },
         }),

@@ -7,7 +7,7 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -60,6 +60,7 @@ export const ExportFullPriceList: FunctionComponent<
       marketplacePlanComponentsList({
         query: {
           page,
+          page_size: MAX_PAGE_SIZE,
           offering_uuid: offering.uuid,
         },
       }),
