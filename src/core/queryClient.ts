@@ -12,7 +12,13 @@ export const queryClient = new QueryClient({
       if (detail === 'Invalid page.') {
         return;
       }
-      if (error?.response?.status == 404) {
+      if (error?.response?.status === 403) {
+        router.stateService.target('errorPage.noPermission');
+      } else if (error?.response?.status === 500) {
+        router.stateService.target('errorPage.severError');
+      } else if (error?.response?.status === 503) {
+        router.stateService.target('errorPage.serviceNotAvailable');
+      } else if (error?.response?.status == 404) {
         router.stateService.go('errorPage.notFound');
       }
     },

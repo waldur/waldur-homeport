@@ -5,14 +5,14 @@ import { useTitle } from '@waldur/navigation/title';
 
 import { ErrorPageView } from './ErrorPageView';
 
-export const InvalidRoutePage: FunctionComponent = () => {
-  useTitle(translate('Object is not found.'));
+export const AccessDeniedPage: FunctionComponent = () => {
+  useTitle(translate('Access denied'));
   return (
     <ErrorPageView
-      code="404"
-      altTitle={translate('Page is not found')}
+      code="403"
+      altTitle={translate('Oops... Access to this page is denied.')}
       altDescription={translate(
-        "You've either entered invalid URL or trying to reach disabled feature.",
+        "You don't have enough permissions to view this page.",
       )}
     />
   );

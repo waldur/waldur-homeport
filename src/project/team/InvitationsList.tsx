@@ -128,7 +128,7 @@ export const InvitationsList: FunctionComponent = () => {
         project,
       })
     ) {
-      router.stateService.target('errorPage.notFound');
+      router.stateService.target('errorPage.noPermission');
     }
   }, [user, project, customer, router]);
 
