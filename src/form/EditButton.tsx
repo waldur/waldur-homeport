@@ -34,6 +34,8 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
     width = 90,
     btnIcon,
     className,
+    disabled,
+    tooltip,
     ...rest
   } = props;
 
@@ -71,6 +73,8 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       variant={variant}
       iconRight={iconRight}
       className={classNames(widthClass, className)}
+      disabled={disabled}
+      tooltip={tooltip}
     />
   ) : (
     <ActionButton
@@ -80,6 +84,8 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       variant={variant}
       iconRight={iconRight}
       className={classNames(widthClass, className)}
+      disabled={disabled}
+      tooltip={tooltip}
     />
   );
 };

@@ -62,7 +62,7 @@ export const OrderActionsButton = ({
   return showCancelButton ||
     showMarkAsDoneButton ||
     order.state === 'pending-consumer' ? (
-    <ActionsDropdownComponent label={translate('Actions')} labeled size="md">
+    <ActionsDropdownComponent label={translate('Actions')} labeled size="lg">
       {showMarkAsDoneButton && (
         <MarkAsDoneButton row={order} refetch={loadData} />
       )}
