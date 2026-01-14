@@ -42,6 +42,8 @@ interface AnnouncementBarProps {
   description: string;
   onShowMore?: () => void;
   ellipsis?: boolean;
+  colored?: boolean;
+  hasColon?: boolean;
 }
 
 export const AnnouncementBar: FC<AnnouncementBarProps> = ({
@@ -51,6 +53,8 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   icon,
   variant,
   ellipsis,
+  colored,
+  hasColon,
 }) => {
   const { textRef, isTruncated } = useTextTruncation();
 
@@ -63,7 +67,12 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   const showMoreButton = onShowMore && isTruncated;
 
   return (
-    <div className="bar bg-body d-print-none">
+    <div
+      className={classNames(
+        'bar d-print-none',
+        variant && colored ? `bar-${variant}` : 'bg-body',
+      )}
+    >
       <div
         className={classNames(
           'container-fluid w-100 d-flex align-items-center gap-2',
@@ -79,9 +88,11 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
         >
           <strong className="fw-bold">
             {label}
-            {': '}
+            {hasColon ? ': ' : ' '}
           </strong>
-          <span className="text-muted">{plainTextDescription}</span>
+          <span className={variant && colored ? undefined : 'text-muted'}>
+            {plainTextDescription}
+          </span>
         </p>
         {showMoreButton && (
           <button

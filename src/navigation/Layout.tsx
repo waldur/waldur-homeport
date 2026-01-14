@@ -119,8 +119,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
                 <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
               )}
               <BreadcrumbMain mobile />
-              <Announcements />
-              {ExtraAnnouncementBar}
+              <Announcements extraAnnouncement={ExtraAnnouncementBar} />
               <WarningBar />
               <OfferingUsersWarningBar />
               <RemovedProjectWarningBar />

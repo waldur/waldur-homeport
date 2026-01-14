@@ -25,6 +25,7 @@ export const ResourceActionsButton: FunctionComponent<
         } as any
       }
       refetch={refetch}
+      disabled={row.offering_state === 'Unavailable'}
     />
   ) : ActionsLists[row.offering_type] ? (
     <ModalActionsRouter
@@ -32,7 +33,12 @@ export const ResourceActionsButton: FunctionComponent<
       url={row.scope}
       name={row.name}
       refetch={refetch}
+      disabled={row.offering_state === 'Unavailable'}
     />
   ) : (
-    <ActionButtonResource url={row.scope} refetch={refetch} />
+    <ActionButtonResource
+      url={row.scope}
+      refetch={refetch}
+      disabled={row.offering_state === 'Unavailable'}
+    />
   );

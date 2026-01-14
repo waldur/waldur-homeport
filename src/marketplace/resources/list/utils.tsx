@@ -22,6 +22,7 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'available_actions', // CreateLexisLinkAction
     'end_date', // EditResourceEndDateAction
     'offering_type', // Expandable view, Actions
+    'offering_state', // Actions
     'provider_uuid', // SubmitReportAction, EditResourceEndDateAction
     'backend_metadata', // Mass-actions
     'backend_id', // SetBackendIdAction

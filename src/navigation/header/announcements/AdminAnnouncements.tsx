@@ -69,6 +69,7 @@ export const AdminAnnouncements = () => {
       variant={ANNOUNCEMENT_ICON[announcement.type].variant}
       ellipsis
       onShowMore={() => callback(announcement)}
+      hasColon
     />
   ));
 };

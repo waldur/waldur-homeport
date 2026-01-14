@@ -28,12 +28,14 @@ export default {
 
   create(context) {
     const filename = context.getFilename();
+    // Normalize path separators to forward slashes for cross-platform compatibility
+    const normalizedFilename = filename.replace(/\\/g, '/');
 
     // Check if this file is allowed to import DropdownButton directly
     const isAllowedFile = ALLOWED_FILES.some(
       (allowedPath) =>
-        filename.includes(allowedPath) ||
-        filename.endsWith(allowedPath.replace('src/', '')),
+        normalizedFilename.includes(allowedPath) ||
+        normalizedFilename.endsWith(allowedPath.replace('src/', '')),
     );
 
     if (isAllowedFile) {

@@ -1,4 +1,5 @@
-import { ButtonGroup, Dropdown } from 'react-bootstrap';
+import { ArrowClockwiseIcon } from '@phosphor-icons/react';
+import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsActivate,
@@ -14,7 +15,13 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { useUser } from '@waldur/workspace/hooks';
 
-import { ACTIVE, ARCHIVED, DRAFT, PAUSED } from '../store/constants';
+import {
+  ACTIVE,
+  ARCHIVED,
+  DRAFT,
+  PAUSED,
+  UNAVAILABLE,
+} from '../store/constants';
 
 const RequestActionDialog = lazyComponent(() =>
   import('@waldur/marketplace/offerings/actions/RequestActionDialog').then(
@@ -25,6 +32,12 @@ const RequestActionDialog = lazyComponent(() =>
 const PauseOfferingDialog = lazyComponent(() =>
   import('./PauseOfferingDialog').then((module) => ({
     default: module.PauseOfferingDialog,
+  })),
+);
+
+const ChangeOfferingAvailabilityDialog = lazyComponent(() =>
+  import('./ChangeOfferingAvailabilityDialog').then((module) => ({
+    default: module.ChangeOfferingAvailabilityDialog,
   })),
 );
 
@@ -93,6 +106,15 @@ export const OfferingStateActions = ({
       marketplaceProviderOfferingsArchive({ path: { uuid: offering.uuid } }),
     );
 
+  const openChangeAvailabilityDialog = () => {
+    dispatch(
+      openModalDialog(ChangeOfferingAvailabilityDialog, {
+        resolve: { offering, refetch: refreshOffering },
+        size: 'lg',
+      }),
+    );
+  };
+
   const draftTitle = user.is_staff
     ? translate('Set to draft')
     : translate('Request editing');
@@ -115,6 +137,22 @@ export const OfferingStateActions = ({
     [ARCHIVED]: setDraft,
   }[offering.state];
 
+  if (offering.state == UNAVAILABLE) {
+    if (!user.is_staff) return null;
+
+    return (
+      <Button
+        variant="tertiary"
+        onClick={openChangeAvailabilityDialog}
+        className={className}
+      >
+        <span className="svg-icon svg-icon-2">
+          <ArrowClockwiseIcon weight="bold" />
+        </span>
+        {translate('Restore')}
+      </Button>
+    );
+  }
   if (offering.state == ARCHIVED) {
     return (
       <ActionButton
@@ -137,6 +175,12 @@ export const OfferingStateActions = ({
         <Dropdown.Item onClick={() => archive()}>
           {translate('Archive')}
         </Dropdown.Item>
+
+        {user.is_staff && (
+          <Dropdown.Item onClick={openChangeAvailabilityDialog}>
+            {translate('Make unavailable')}
+          </Dropdown.Item>
+        )}
       </Dropdown.Menu>
     </Dropdown>
   );

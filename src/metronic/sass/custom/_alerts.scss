@@ -25,5 +25,20 @@
     .text-anchor {
       white-space: nowrap;
     }
+
+    &.bar-warning {
+      background-color: $bg-warning-primary;
+      color: if(isDarkMode(), $warning-700, $warning-800) !important;
+    }
+
+    &.bar-danger {
+      background-color: $bg-error-primary;
+      color: if(isDarkMode(), $danger-700, $danger-800) !important;
+    }
+
+    &.bar-success {
+      background-color: $bg-success-primary;
+      color: if(isDarkMode(), $success-700, $success-800) !important;
+    }
   }
 }

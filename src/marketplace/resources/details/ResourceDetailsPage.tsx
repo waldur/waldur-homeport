@@ -31,10 +31,16 @@ export const ResourceDetailsPage: FC<OwnProps> = (props) => {
   }
 
   return (
-    <props.tabSpec.component
-      {...data}
-      title={props.tabSpec.title}
-      refetch={props.refetch}
-    />
+    <div
+      className={
+        data.offering.state === 'Unavailable' ? 'disabled-view' : undefined
+      }
+    >
+      <props.tabSpec.component
+        {...data}
+        title={props.tabSpec.title}
+        refetch={props.refetch}
+      />
+    </div>
   );
 };
