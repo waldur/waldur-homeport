@@ -198,6 +198,7 @@ export function TableProvider<TData = any>({
         rowClass: props.rowClass,
         gridSize: props.gridSize,
         gridSpace: props.gridSpace,
+        gridFixedWidth: props.gridFixedWidth,
       },
 
       // Form field props
@@ -303,6 +304,7 @@ export function TableProvider<TData = any>({
       props.rowClass,
       props.gridSize,
       props.gridSpace,
+      props.gridFixedWidth,
       props.fieldType,
       props.fieldName,
       props.validate,

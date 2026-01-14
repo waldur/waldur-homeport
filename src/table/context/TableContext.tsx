@@ -103,6 +103,7 @@ interface TableDisplay {
   rowClass?: (({ row }: { row: any }) => string) | string;
   gridSize?: TableProps['gridSize'];
   gridSpace?: number;
+  gridFixedWidth?: boolean;
 }
 
 /**

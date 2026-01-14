@@ -183,6 +183,7 @@ export interface TableProps<RowType = any> extends TableState {
   gridItem?: React.ComponentType<{ row: RowType }>;
   gridSize?: ColProps;
   gridSpace?: number;
+  gridFixedWidth?: boolean;
   openFiltersDrawer?: (filters: React.ReactNode) => void;
   renderFiltersDrawer?: (filters: React.ReactNode) => void;
   dropdownActions?: ReactNode;

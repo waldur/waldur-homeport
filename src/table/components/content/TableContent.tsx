@@ -98,6 +98,7 @@ export function TableContent() {
             gridItem={slots.gridItem}
             gridSize={display.gridSize}
             gridSpace={display.gridSpace}
+            gridFixedWidth={display.gridFixedWidth}
           />
         </div>
       </ErrorBoundary>
