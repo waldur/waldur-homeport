@@ -9,10 +9,46 @@ import {
 } from '@waldur/form/WizardFinalForm';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { Field as SummaryField } from '@waldur/resource/summary';
 
 export const Step3PurchaseOrder: FC<WizardFinalFormStepProps> = (props) => {
+  const resources = props.data?.resources;
+  const resource = resources?.[0];
+  const isMulti = resources && resources.length > 1;
+
+  // Build resource identifier string
+  const resourceIdentifier = [resource.slug, resource.backend_id, resource.uuid]
+    .filter(Boolean)
+    .join(' / ');
+
+  // Build department to invoice string
+  const departmentToInvoice = [resource.customer_name, resource.project_name]
+    .filter(Boolean)
+    .join(' / ');
+
   return (
     <WizardFinalForm {...props}>
+      {/* Show resource info when invoked from pending actions (single resource only) */}
+      {!isMulti && (
+        <div className="mb-6">
+          <SummaryField
+            label={translate('Resource')}
+            value={resourceIdentifier}
+            labelCol={4}
+            valueCol={8}
+            className="mb-3"
+          />
+          <SummaryField
+            label={translate('Customer organization and project')}
+            value={departmentToInvoice}
+            labelCol={4}
+            valueCol={8}
+            className="mb-3"
+          />
+          <hr className="mb-4" />
+        </div>
+      )}
+
       <FormGroup
         label={translate('Purchase order reference')}
         description={translate(

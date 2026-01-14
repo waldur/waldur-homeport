@@ -1,9 +1,16 @@
-import { FC, useCallback } from 'react';
-import { marketplaceResourcesRenew, Resource } from 'waldur-js-client';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useCallback, useMemo } from 'react';
+import {
+  marketplaceResourcesRenew,
+  marketplaceResourcesRetrieve,
+  Resource,
+} from 'waldur-js-client';
 
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { WizardFinalFormContainer } from '@waldur/form/WizardFinalFormContainer';
 import { translate } from '@waldur/i18n';
+import { getFormLimitSerializer } from '@waldur/marketplace/common/registry';
 import { useModal } from '@waldur/modal/hooks';
 import { useNotify } from '@waldur/store/hooks';
 
@@ -12,11 +19,12 @@ import { Step2ExtendDuration } from './Step2ExtendDuration';
 import { Step3PurchaseOrder } from './Step3PurchaseOrder';
 import { RenewAllocationFormData } from './types';
 
-interface RenewAllocationDialog {
+interface RenewAllocationDialogProps {
   resolve: {
-    resources?: Array<Resource & { marketplace_resource_uuid? }>; // For multi selection
-    resource?: Resource & { marketplace_resource_uuid? };
-    refetch(): void;
+    resources?: Array<Resource>; // For multi selection
+    resource?: Resource;
+    resource_uuid?: string; // Fetch resource by UUID if resource not provided
+    refetch?(): void;
   };
 }
 
@@ -44,51 +52,90 @@ const steps: ProgressStep[] = [
   },
 ];
 
-export const RenewAllocationDialog: FC<RenewAllocationDialog> = ({
+export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
   resolve,
 }) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
 
-  const isMulti = resolve.resources?.length > 1;
-  const resources =
-    resolve.resources || (resolve.resource ? [resolve.resource] : []);
+  // Fetch resource by UUID if only UUID is provided
+  const shouldFetch =
+    !resolve.resource && !resolve.resources?.length && resolve.resource_uuid;
+
+  const {
+    data: fetchedResource,
+    isLoading,
+    error,
+  } = useQuery({
+    queryKey: ['renew-resource', resolve.resource_uuid],
+    queryFn: () =>
+      marketplaceResourcesRetrieve({
+        path: { uuid: resolve.resource_uuid },
+      }).then((response) => response.data),
+    enabled: Boolean(shouldFetch),
+    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+  });
+
+  const resources = useMemo(() => {
+    if (resolve.resources?.length) {
+      return resolve.resources;
+    }
+    if (resolve.resource) {
+      return [resolve.resource];
+    }
+    if (fetchedResource) {
+      return [fetchedResource];
+    }
+    return [];
+  }, [resolve.resources, resolve.resource, fetchedResource]);
+
+  const isMulti = resources.length > 1;
 
   const onSubmit = useCallback(
     async (formData: RenewAllocationFormData) => {
       try {
-        const promises = resources.map((resource) =>
-          marketplaceResourcesRenew({
-            path: { uuid: resource.marketplace_resource_uuid || resource.uuid },
+        const promises = resources.map((resource) => {
+          // Serialize limits (e.g., convert GB back to MB) based on offering type
+          const limitSerializer = getFormLimitSerializer(
+            resource.offering_type || '',
+          );
+          const serializedLimits = limitSerializer(
+            formData[resource.uuid]?.limits || {},
+          );
+
+          return marketplaceResourcesRenew({
+            path: { uuid: resource.uuid },
             body: {
               extension_months: formData.extension_months,
-              limits:
-                formData[resource.marketplace_resource_uuid || resource.uuid]
-                  .limits,
+              limits: serializedLimits,
               request_comment: formData.purchase_order_reference,
             },
-          }),
-        );
+          });
+        });
 
         await Promise.allSettled(promises).then((results) => {
-          const error = results.filter((res) => res.status === 'rejected');
-          const success = results.filter((res) => res.status === 'fulfilled');
+          const errorResults = results.filter(
+            (res) => res.status === 'rejected',
+          );
+          const successResults = results.filter(
+            (res) => res.status === 'fulfilled',
+          );
 
-          if (success.length) {
-            resolve.refetch();
+          if (successResults.length) {
+            resolve.refetch?.();
             if (isMulti) {
               showSuccess(
                 translate(
                   'Renewal request has been created for {n} resources.',
-                  { n: success.length },
+                  { n: successResults.length },
                 ),
               );
             } else {
               showSuccess(translate('Renewal request has been created.'));
             }
           }
-          if (error.length) {
-            showErrorResponse(error[0].reason);
+          if (errorResults.length) {
+            showErrorResponse(errorResults[0].reason);
           } else {
             closeDialog();
           }
@@ -98,8 +145,35 @@ export const RenewAllocationDialog: FC<RenewAllocationDialog> = ({
         showErrorResponse(e, translate('Unable to send renewal request.'));
       }
     },
-    [resolve, showSuccess, showErrorResponse, closeDialog],
+    [resources, resolve, showSuccess, showErrorResponse, closeDialog, isMulti],
   );
+
+  // Show loading state when fetching resource
+  if (shouldFetch && isLoading) {
+    return (
+      <div className="d-flex justify-content-center align-items-center p-10">
+        <LoadingSpinner />
+      </div>
+    );
+  }
+
+  // Show error if fetch failed
+  if (shouldFetch && error) {
+    return (
+      <div className="text-danger p-5">
+        {translate('Failed to load resource. Please try again.')}
+      </div>
+    );
+  }
+
+  // Don't render if no resources available
+  if (!resources.length) {
+    return (
+      <div className="text-muted p-5">
+        {translate('No resource available for renewal.')}
+      </div>
+    );
+  }
 
   const initialValues = {
     ...resources.reduce((acc, resource) => {
