@@ -318,7 +318,7 @@ export const SettingsDescription = [
     items: [
       {
         key: 'SIDEBAR_STYLE',
-        description: translate('Style of sidebar. Possible values: primary, dark, light, accent.'),
+        description: translate('Style of sidebar. Possible values: dark, light, accent.'),
         default: 'dark',
         type: 'string',
       },
@@ -1089,13 +1089,13 @@ export const SettingsDescription = [
     items: [
       {
         key: 'ONBOARDING_SUPPORTED_COUNTRIES',
-        description: translate('List of ISO 3166-1 alpha-2 country codes supported by this portal (e.g., [\'EE\', \'AT\', \'SE\']). Used to restrict available countries in onboarding.'),
+        description: translate('List of ISO 3166-1 alpha-2 country codes supported by this portal (e.g., EE, AT, SE). Used to restrict available countries in onboarding.'),
         default: [],
-        type: 'list_field',
+        type: 'country_list_field',
       },
       {
         key: 'ONBOARDING_VALIDATION_METHODS',
-        description: translate('List of automatic validation methods available for this portal (e.g., [\'ariregister\', \'wirtschaftscompass\', \'bolagsverket\']). Must match backend method names.'),
+        description: translate('List of automatic validation methods available for this portal (e.g., ariregister, wirtschaftscompass, bolagsverket). Must match backend method names.'),
         default: [],
         type: 'list_field',
       },
