@@ -18,3 +18,49 @@
     padding-bottom: 1.24rem;
   }
 }
+
+.disabled-view {
+  opacity: 0.5;
+
+  a,
+  button,
+  .btn {
+    box-shadow: none !important;
+    opacity: 1 !important;
+    pointer-events: none !important;
+
+    &:not(.nav-link) {
+      color: $fg-disabled !important;
+    }
+    &:not(.btn-icon):not(.btn-link):not(.text-btn):not(.text-link):not(
+        .nav-link
+      ):not(.text-anchor) {
+      background-color: $btn-bg-disable !important;
+      border-color: $btn-bg-disable !important;
+    }
+    &.btn-icon {
+      background-color: $bg-disabled_subtle !important;
+      border-color: transparent !important;
+    }
+
+    @include svg-icon-color($fg-disabled, true);
+  }
+
+  input {
+    border-color: $border-disabled !important;
+    color: $input-disabled-color !important;
+    background-color: $input-disabled-bg !important;
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+  }
+
+  table .dropdown-toggle,
+  .dropdown-toggle.btn-icon {
+    display: none !important;
+  }
+
+  .form-check {
+    cursor: not-allowed !important;
+    pointer-events: none !important;
+  }
+}

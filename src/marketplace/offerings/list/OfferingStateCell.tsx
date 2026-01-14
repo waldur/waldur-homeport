@@ -6,4 +6,5 @@ export const OfferingStateCell = ({ row }) =>
     Active: translate('Active'),
     Paused: translate('Paused'),
     Archived: translate('Archived'),
-  })[row.state];
+    Unavailable: translate('Unavailable'),
+  })[row.state] || row.state;

@@ -37,7 +37,9 @@ export const ResourceDetailsHero = ({
   isLoading;
 }) => {
   return (
-    <>
+    <div
+      className={offering.state === 'Unavailable' ? 'disabled-view' : undefined}
+    >
       {resource.end_date &&
         resource.project_end_date &&
         resource.end_date > resource.project_end_date && (
@@ -73,6 +75,7 @@ export const ResourceDetailsHero = ({
               refetch={refetch}
               labeled
               drop="down"
+              disabled={offering.state === 'Unavailable'}
             />
           </div>
         }
@@ -88,6 +91,6 @@ export const ResourceDetailsHero = ({
       >
         <ResourceDetailsHeaderBody resource={resource} offering={offering} />
       </PublicDashboardHero>
-    </>
+    </div>
   );
 };

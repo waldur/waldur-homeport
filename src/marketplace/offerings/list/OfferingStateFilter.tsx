@@ -13,6 +13,7 @@ export const getStates = () => [
   { value: 'Active', label: translate('Active') },
   { value: 'Paused', label: translate('Paused') },
   { value: 'Archived', label: translate('Archived') },
+  { value: 'Unavailable', label: translate('Unavailable') },
 ];
 
 export const OfferingStateFilter: FunctionComponent = () => {

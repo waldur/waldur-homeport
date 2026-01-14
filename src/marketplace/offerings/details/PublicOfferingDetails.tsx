@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
@@ -53,7 +54,12 @@ export const PublicOfferingDetails: FunctionComponent<
   }, [offering]);
 
   return tabSpec ? (
-    <div className="publicOfferingDetails">
+    <div
+      className={classNames(
+        'publicOfferingDetails',
+        offering.state === 'Unavailable' && 'disabled-view',
+      )}
+    >
       <tabSpec.component
         offering={offering}
         category={category}

@@ -2,7 +2,13 @@ import { StateIndicator } from '@waldur/core/StateIndicator';
 
 import { Offering } from '../types';
 
-import { ACTIVE, ARCHIVED, DRAFT, PAUSED } from './store/constants';
+import {
+  ACTIVE,
+  ARCHIVED,
+  DRAFT,
+  PAUSED,
+  UNAVAILABLE,
+} from './store/constants';
 
 interface OfferingStateFieldProps {
   offering: Offering;
@@ -22,6 +28,7 @@ export const OfferingStateField = ({
           [ACTIVE]: 'success',
           [PAUSED]: 'warning',
           [ARCHIVED]: 'default',
+          [UNAVAILABLE]: 'danger',
         }[offering.state]
       }
       hasBullet={hasBullet}

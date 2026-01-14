@@ -17,6 +17,8 @@ const ALLOWED_FILES = [
   'src/marketplace/orders/actions/RejectByProviderButton.tsx',
   'src/marketplace/orders/actions/MarkAsDoneButton.tsx',
   'src/marketplace/resources/resource-pending/OrderInProgressView.tsx',
+  // Uses Button with ButtonGroup and Dropdown (complex Bootstrap pattern)
+  'src/marketplace/offerings/actions/OfferingStateActions.tsx',
   'src/navigation/header/confirmation-drawer/PendingConsumerOrders.tsx',
   // Uses Button with 'as="a"' for anchor rendering
   'src/navigation/header/HeroButton.tsx',
@@ -49,12 +51,14 @@ export default {
 
   create(context) {
     const filename = context.getFilename();
+    // Normalize path separators to forward slashes for cross-platform compatibility
+    const normalizedFilename = filename.replace(/\\/g, '/');
 
     // Check if this file is allowed to import Button directly
     const isAllowedFile = ALLOWED_FILES.some(
       (allowedPath) =>
-        filename.includes(allowedPath) ||
-        filename.endsWith(allowedPath.replace('src/', '')),
+        normalizedFilename.includes(allowedPath) ||
+        normalizedFilename.endsWith(allowedPath.replace('src/', '')),
     );
 
     if (isAllowedFile) {

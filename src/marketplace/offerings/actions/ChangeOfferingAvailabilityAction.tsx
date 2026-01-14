@@ -1,4 +1,4 @@
-import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
+import { ArrowClockwiseIcon, ArrowFatDownIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Offering } from 'waldur-js-client';
 
@@ -8,13 +8,13 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { isStaff } from '@waldur/workspace/selectors';
 
-const MoveOfferingDialog = lazyComponent(() =>
-  import('./MoveOfferingDialog').then((module) => ({
-    default: module.MoveOfferingDialog,
+const ChangeOfferingAvailabilityDialog = lazyComponent(() =>
+  import('./ChangeOfferingAvailabilityDialog').then((module) => ({
+    default: module.ChangeOfferingAvailabilityDialog,
   })),
 );
 
-export const MoveOfferingAction = ({
+export const ChangeOfferingAvailabilityAction = ({
   row,
   refetch,
 }: {
@@ -25,8 +25,9 @@ export const MoveOfferingAction = ({
 
   const callback = () => {
     dispatch(
-      openModalDialog(MoveOfferingDialog, {
+      openModalDialog(ChangeOfferingAvailabilityDialog, {
         resolve: { offering: row, refetch },
+        size: 'lg',
       }),
     );
   };
@@ -36,9 +37,19 @@ export const MoveOfferingAction = ({
 
   return (
     <ActionItem
-      title={translate('Move offering')}
+      title={
+        row.state === 'Unavailable'
+          ? translate('Restore')
+          : translate('Set as down')
+      }
       action={callback}
-      iconNode={<ArrowsOutCardinalIcon weight="bold" />}
+      iconNode={
+        row.state === 'Unavailable' ? (
+          <ArrowClockwiseIcon weight="bold" />
+        ) : (
+          <ArrowFatDownIcon weight="bold" />
+        )
+      }
       staff
     />
   );

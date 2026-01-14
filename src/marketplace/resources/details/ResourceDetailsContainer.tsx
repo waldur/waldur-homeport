@@ -1,9 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
+import classNames from 'classnames';
 import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesRetrieve } from 'waldur-js-client';
 
+import { ANNOUNCEMENT_ICON } from '@waldur/administration/utils';
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -16,10 +18,16 @@ import {
   useToolbarActions,
   useExtraAnnouncementBar,
 } from '@waldur/navigation/context';
+import { AnnouncementBar } from '@waldur/navigation/header/announcements/AnnouncementBar';
 import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
 import { useTitle } from '@waldur/navigation/title';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
+import {
+  INSTANCE_TYPE,
+  TENANT_TYPE,
+  VOLUME_TYPE,
+} from '@waldur/openstack/constants';
 import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
 import { router } from '@waldur/router';
 import { setCurrentResource } from '@waldur/workspace/actions';
@@ -219,13 +227,30 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   );
 
   useExtraAnnouncementBar(
-    !data || isLoading ? null : (
+    !data || isLoading ? null : data.offering.state === 'Unavailable' ? (
+      <AnnouncementBar
+        label={translate('{offeringType} is currently unavailable.', {
+          offeringType: data.offering.name,
+        })}
+        description={
+          [TENANT_TYPE, VOLUME_TYPE, INSTANCE_TYPE].includes(data.offering.type)
+            ? translate(
+                'Operations on all related tenants, instances and volumes are temporarily blocked.',
+              )
+            : translate('Operations are temporarily blocked.')
+        }
+        icon={ANNOUNCEMENT_ICON.warning.icon}
+        variant={ANNOUNCEMENT_ICON.warning.variant}
+        colored
+      />
+    ) : (
       <ServiceProviderCommentWarningBar offering={data.offering} />
     ),
     [data, isLoading],
   );
 
   const openTeamModal = useCallback(() => {
+    if (data.offering.state === 'Unavailable') return;
     dispatch(
       openModalDialog(ResourceTeamDialog, {
         size: 'xl',
@@ -238,7 +263,10 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     <ProjectUsersBadge
       compact
       max={3}
-      className="col-auto align-items-center me-10"
+      className={classNames(
+        'col-auto align-items-center me-10',
+        data?.offering?.state === 'Unavailable' && 'disabled-view',
+      )}
       onClick={openTeamModal}
       projectId={resource?.project_uuid}
     />,

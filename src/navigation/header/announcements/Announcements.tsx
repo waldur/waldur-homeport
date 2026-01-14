@@ -1,9 +1,8 @@
 import { AdminAnnouncements } from './AdminAnnouncements';
 
-import './Announcements.scss';
-
-export const Announcements = () => (
+export const Announcements = ({ extraAnnouncement }) => (
   <div className="announcements">
     <AdminAnnouncements />
+    {extraAnnouncement}
   </div>
 );

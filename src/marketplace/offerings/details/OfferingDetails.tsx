@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import React, { useMemo } from 'react';
 import { PlanUsageResponse } from 'waldur-js-client';
 
@@ -30,7 +31,12 @@ export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
   );
 
   return props.tabSpec ? (
-    <div className="provider-offering">
+    <div
+      className={classNames(
+        'provider-offering',
+        props.offering.state === 'Unavailable' && 'disabled-view',
+      )}
+    >
       <props.tabSpec.component
         offering={props.offering}
         plansUsage={props.plansUsage}

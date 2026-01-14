@@ -1,5 +1,7 @@
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 
+import { ChangeOfferingAvailabilityAction } from '../actions/ChangeOfferingAvailabilityAction';
+
 import { DeleteOfferingButton } from './DeleteOfferingButton';
 import { EditOfferingButton } from './EditOfferingButton';
 import { ExportOfferingButton } from './ExportOfferingButton';
@@ -17,6 +19,7 @@ export const OfferingActions = ({ row, refetch }) => (
       OpenPublicOffering,
       ExportOfferingButton,
       MoveOfferingAction,
+      ChangeOfferingAvailabilityAction,
       DeleteOfferingButton,
     ]}
   />

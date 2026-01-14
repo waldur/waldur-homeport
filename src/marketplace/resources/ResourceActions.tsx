@@ -21,6 +21,7 @@ interface ResourceActionsProps {
   refetch;
   labeled?: boolean;
   drop?: DropDirection;
+  disabled?: boolean;
 }
 
 export const ResourceActions: FC<ResourceActionsProps> = ({
@@ -29,6 +30,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
   refetch,
   drop,
   labeled = false,
+  disabled,
 }) => {
   const [open, onToggle] = useBoolean(false);
   const extraActions = useMemo(() => {
@@ -48,6 +50,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
         refetch={refetch}
         labeled
         drop={drop}
+        disabled={disabled}
       />
     );
   }
@@ -61,6 +64,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
         refetch={refetch}
         labeled={labeled}
         drop={drop}
+        disabled={disabled}
       />
     );
   }
@@ -77,6 +81,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
       refetch={refetch}
       labeled={labeled}
       drop={drop}
+      disabled={disabled}
     />
   );
 };

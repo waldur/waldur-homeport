@@ -16,6 +16,7 @@ interface ResourceActionsButtonProps {
   refetch?(): void;
   labeled?: boolean;
   drop?: DropDirection;
+  disabled?: boolean;
 }
 
 export const ResourceActionsButton: FunctionComponent<
@@ -34,6 +35,7 @@ export const ResourceActionsButton: FunctionComponent<
       refetch={props.refetch}
       labeled={props.labeled}
       drop={props.drop}
+      disabled={props.disabled}
     />
   );
 };

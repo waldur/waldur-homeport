@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
-import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
+import {
+  marketplaceOfferingTermsOfServiceList,
+  OfferingState,
+} from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { translate } from '@waldur/i18n';
@@ -19,6 +22,7 @@ interface TosConsentWarningBannerProps {
     plugin_options?: {
       service_provider_can_create_offering_user?: boolean;
     };
+    state?: OfferingState;
   };
   userHasConsent?: boolean;
 }
@@ -73,6 +77,7 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
 
   return (
     <ResourceWarningBar
+      className={offering.state === 'Unavailable' ? 'disabled-view' : undefined}
       actions={
         <button
           type="button"

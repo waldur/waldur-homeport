@@ -3,7 +3,11 @@ import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { ActionsPopover } from './ActionsPopover';
 
 export const ModalActionsButton = (props) => (
-  <ActionsDropdownComponent labeled={props.labeled} drop={props.drop}>
+  <ActionsDropdownComponent
+    labeled={props.labeled}
+    drop={props.drop}
+    disabled={props.disabled}
+  >
     <ActionsPopover {...props} />
   </ActionsDropdownComponent>
 );
