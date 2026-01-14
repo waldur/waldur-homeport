@@ -101,12 +101,12 @@ export const states: StateDeclaration[] = [
     url: 'system-info/',
     parent: 'admin-system-management',
     component: lazyComponent(() =>
-      import('./SystemInfoPage').then((module) => ({
-        default: module.SystemInfoPage,
+      import('./database-stats/DatabaseStatsPage').then((module) => ({
+        default: module.DatabaseStatsPage,
       })),
     ),
     data: {
-      breadcrumb: () => translate('System info'),
+      breadcrumb: () => translate('Database statistics'),
     },
   },
 
