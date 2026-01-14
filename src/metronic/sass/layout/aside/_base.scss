@@ -103,6 +103,17 @@
     background-color: if(isDarkMode(), $gray-950, $gray-25);
   }
 
+  // Primary theme
+  &.aside-primary {
+    background-color: var(--waldur-brand-color);
+
+    .aside-logo {
+      h3 {
+        color: white;
+      }
+    }
+  }
+
   // Primary Dark theme
   &.aside-accent {
     background-color: get($aside-config, bg-color);

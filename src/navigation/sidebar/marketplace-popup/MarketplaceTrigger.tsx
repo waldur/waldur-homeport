@@ -33,7 +33,8 @@ export const MarketplaceTrigger: FunctionComponent = () => {
     <div className="menu-item add-resource-toggle">
       <span
         className={classNames('menu-link btn btn-outline', {
-          'btn-outline-white': sidebarStyle === 'dark',
+          'btn-outline-white':
+            sidebarStyle === 'dark' || sidebarStyle === 'primary',
           'btn-outline-primary': sidebarStyle === 'light',
         })}
         aria-hidden="true"

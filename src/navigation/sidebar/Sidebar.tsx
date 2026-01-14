@@ -31,6 +31,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
   const asideClassNames = {
     'aside-dark': sidebarStyle === 'dark',
     'aside-light': sidebarStyle === 'light',
+    'aside-primary': sidebarStyle === 'primary',
     'aside-accent': sidebarStyle === 'accent',
     'aside-accent-light': sidebarStyle === 'accent-light',
   };
@@ -38,7 +39,7 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
     'menu-title-gray-800': sidebarStyle === 'dark',
     'menu-title-dark-always':
       sidebarStyle === 'light' || sidebarStyle === 'accent-light',
-    'menu-title-white': sidebarStyle === 'accent',
+    'menu-title-white': sidebarStyle === 'accent' || sidebarStyle === 'primary',
   };
 
   return (
