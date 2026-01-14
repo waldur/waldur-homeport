@@ -21,6 +21,112 @@
   }
 }
 
+.grid-fixed-width {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(400px, 1fr));
+  gap: 8px;
+  justify-content: start;
+  margin-bottom: 16px;
+
+  .grid-card-wrapper {
+    width: 100%;
+    min-width: 0;
+    overflow: hidden;
+    box-sizing: border-box;
+    contain: layout style;
+
+    > * {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    > .d-flex {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      flex-shrink: 1;
+    }
+
+    > .d-flex > a {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      display: block;
+    }
+
+    .model-card-1 {
+      width: 100%;
+      max-width: 100%;
+      min-width: 0;
+      box-sizing: border-box;
+    }
+
+    .card-body {
+      min-width: 0;
+      overflow: hidden;
+      box-sizing: border-box;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: break-word;
+
+      > div {
+        min-width: 0;
+        overflow: hidden;
+        max-width: 100%;
+        word-break: break-word;
+        overflow-wrap: break-word;
+      }
+    }
+
+    .d-flex {
+      min-width: 0;
+      max-width: 100%;
+      overflow: hidden;
+      word-break: break-word;
+      overflow-wrap: break-word;
+    }
+
+    .card-body .d-flex {
+      word-break: break-word;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+
+    [class*='ellipsis-lines'] {
+      min-width: 0;
+      overflow: hidden;
+      max-width: 100%;
+      word-break: break-word;
+      overflow-wrap: break-word;
+      word-wrap: break-word;
+    }
+  }
+
+  @media (max-width: 575px) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.model-card-title-container {
+  min-width: 0;
+  flex: 1 1 auto;
+  max-width: 100%;
+  overflow: hidden;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
+.model-card-title {
+  min-width: 0;
+  max-width: 100%;
+  word-break: break-word;
+  overflow-wrap: break-word;
+  word-wrap: break-word;
+}
+
 @media (width <= 767px) {
   .dataTables_wrapper {
     display: flex;

@@ -292,6 +292,7 @@ export const ProjectsList = () => {
       verboseName={translate('projects')}
       title={translate('Projects')}
       gridSize={{ md: 6, xl: 4 }}
+      gridFixedWidth={true}
       gridItem={({ row }) => (
         <ProjectCard project={row} onClickDetails={() => onClickDetails(row)} />
       )}

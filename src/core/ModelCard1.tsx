@@ -61,11 +61,18 @@ export const ModelCard1: FC<ModelCard1Props> = ({
             {getAbbreviation(props.title, 3)}
           </ImagePlaceholder>
         )}
-        <div className={'ellipsis-lines-' + ellipsisLines}>
+        <div
+          className={classNames(
+            'ellipsis-lines-' + ellipsisLines,
+            'flex-grow-1',
+            'model-card-title-container',
+          )}
+        >
           <Card.Title
             className={classNames(
               'fs-4 fw-bold',
               'ellipsis-lines-' + ellipsisLines,
+              'model-card-title',
               !props.subtitle && 'mb-0',
             )}
           >
