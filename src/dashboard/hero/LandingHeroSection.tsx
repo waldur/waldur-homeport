@@ -18,6 +18,7 @@ export const LandingHeroSection: FC<
   const bgClassNames = {
     'bg-mode-dark': sidebarStyle === 'dark',
     'bg-mode-light': sidebarStyle === 'light',
+    'bg-mode-primary': sidebarStyle === 'primary',
     'bg-mode-accent': sidebarStyle === 'accent',
     'bg-mode-accent-light': sidebarStyle === 'accent-light',
   };

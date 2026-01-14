@@ -318,7 +318,7 @@ export const SettingsDescription = [
     items: [
       {
         key: 'SIDEBAR_STYLE',
-        description: translate('Style of sidebar. Possible values: dark, light, accent.'),
+        description: translate('Style of sidebar. Possible values: primary, dark, light, accent.'),
         default: 'dark',
         type: 'string',
       },

@@ -154,6 +154,17 @@ $custom-aside: (
     filter-badge-bg: transparent,
     filter-badge-border: if(isDarkMode(), $gray-600, $gray-300),
   ),
+  primary: (
+    add-resource-border: rgba(255, 255, 255, 0.3),
+    add-resource-color: rgba(255, 255, 255, 0.7),
+    add-resource-state-color: white,
+    show-more-color: rgba(255, 255, 255, 0.7),
+    show-more-active-icon: white,
+    filter-label: rgba(255, 255, 255, 0.7),
+    filter-badge-color: white,
+    filter-badge-bg: rgba(255, 255, 255, 0.15),
+    filter-badge-border: rgba(255, 255, 255, 0.3),
+  ),
   accent: (
     add-resource-border: var(--waldur-brand-300),
     add-resource-color: var(--waldur-brand-300),

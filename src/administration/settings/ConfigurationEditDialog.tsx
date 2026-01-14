@@ -5,6 +5,7 @@ import { overrideSettings } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
+import { WarnCard } from '@waldur/core/WarnCard';
 import { SelectField, SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { MonacoField } from '@waldur/form/MonacoField';
@@ -17,7 +18,7 @@ import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 
-import { getKeyTitle, SIDEBAR_STYLES } from './utils';
+import { getKeyTitle, SIDEBAR_STYLES, SIDEBAR_STYLE_PRIMARY } from './utils';
 
 const SUPPORT_BACKENDS = [
   {
@@ -122,7 +123,7 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, invalid, dirty }) => (
+      render={({ handleSubmit, submitting, invalid, dirty, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog
             title={getKeyTitle(item.key)}
@@ -170,12 +171,24 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
               ) : item.type === 'text_field' ? (
                 <Field component={TextField as any} name="value" />
               ) : item.key === 'SIDEBAR_STYLE' ? (
-                <Field
-                  component={SelectField as any}
-                  name="value"
-                  options={SIDEBAR_STYLES}
-                  simpleValue
-                />
+                <>
+                  <Field
+                    component={SelectField as any}
+                    name="value"
+                    options={SIDEBAR_STYLES}
+                    simpleValue
+                  />
+                  {values.value === SIDEBAR_STYLE_PRIMARY && (
+                    <div className="mt-3">
+                      <WarnCard
+                        title={translate('Warning')}
+                        description={translate(
+                          'Using the primary color as a sidebar color might affect contrast and usability.',
+                        )}
+                      />
+                    </div>
+                  )}
+                </>
               ) : item.key === 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE' ? (
                 <Field
                   component={SelectField as any}
