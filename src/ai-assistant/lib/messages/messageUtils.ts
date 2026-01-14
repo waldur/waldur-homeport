@@ -1,21 +1,41 @@
 import { ThreadMessageLike } from '@assistant-ui/react';
 
-export const addPreviousText = (
+import { UIBlock, BlockHistoryEntry } from '@waldur/ai-assistant/lib/types';
+
+/**
+ * Maximum number of block history entries to retain per message.
+ * Limits memory usage while providing sufficient edit history for user navigation.
+ * 10 versions balances UX (enough history) with memory constraints (prevents unbounded growth).
+ */
+const MAX_BLOCK_HISTORY_ENTRIES = 10;
+
+export const addPreviousBlocks = (
   metadata: ThreadMessageLike['metadata'] | undefined,
-  previousText: string,
-) => {
+  previousBlocks: UIBlock[],
+): ThreadMessageLike['metadata'] => {
+  // Don't save empty block arrays
+  if (!previousBlocks || previousBlocks.length === 0) {
+    return metadata;
+  }
+
   const custom = metadata?.custom ?? {};
-  const edits =
-    (custom.textChange as { previousText: string; editedAt: string }[]) ?? [];
+  const existingHistory = (custom.blockHistory as BlockHistoryEntry[]) ?? [];
+
+  const newEntry: BlockHistoryEntry = {
+    blocks: previousBlocks,
+    createdAt: new Date().toISOString(),
+  };
+
+  // Limit to MAX_BLOCK_HISTORY_ENTRIES entries, removing oldest if needed
+  const updatedHistory = [...existingHistory, newEntry].slice(
+    -MAX_BLOCK_HISTORY_ENTRIES,
+  );
 
   return {
     ...metadata,
     custom: {
       ...custom,
-      textChange: [
-        ...edits,
-        { previousText, editedAt: new Date().toISOString() },
-      ],
+      blockHistory: updatedHistory,
     },
   };
 };
@@ -32,7 +52,10 @@ export const addContext = (
     'easy-to-follow steps.\n';
   context += 'This is the conversation history:\n';
   for (const message of contextMessages) {
-    const contentText = extractTextFromMessageContent(message.content);
+    const blocks = (message.metadata?.custom as { blocks?: UIBlock[] })?.blocks;
+    const contentText = blocks
+      ? extractTextFromBlocks(blocks) // Assistant message with blocks
+      : extractTextFromMessageContent(message.content); // User message
     context += `${message.role}: ${contentText}\n`;
   }
 
@@ -40,6 +63,10 @@ export const addContext = (
   return context;
 };
 
+/**
+ * Required by assistant-ui's external store adapter.
+ * Currently, a pass-through function, but kept for interface compliance.
+ */
 export const convertMessage = (message: ThreadMessageLike) => {
   return message;
 };
@@ -61,4 +88,9 @@ export function extractTextFromMessageContent(
   }
 
   return '';
+}
+
+export function extractTextFromBlocks(blocks: UIBlock[]): string {
+  if (!blocks || blocks.length === 0) return '';
+  return blocks.map((block) => block.content).join('\n\n');
 }

@@ -2,8 +2,7 @@ import {
   ExternalStoreThreadData,
   ThreadMessageLike,
 } from '@assistant-ui/react';
-import { Element } from 'hast';
-import React, { ReactNode } from 'react';
+import React from 'react';
 
 export interface MessageHandlerDependencies {
   messages: readonly ThreadMessageLike[];
@@ -23,48 +22,28 @@ export interface MessageHandlerDependencies {
   abortThread: (threadId: string) => void;
 }
 
-export interface ParseAssistantStreamParams extends Pick<
-  MessageHandlerDependencies,
-  'setMessages'
-> {
-  contextInput: string;
-  assistantId: string;
-  signal: AbortSignal;
-}
-
-export interface StreamChatChunk {
-  c?: string;
-  additional_kwargs?: {
-    usage_metadata?: object;
-  };
-}
 export type RunConfig = {
   readonly custom?: Record<string, unknown>;
 };
 
-export type CodeBlockProps = {
-  node?: Element;
-  language?: string;
-  className?: string;
-  code: string;
-};
-
-export interface MarkdownTextProps {
-  text: string;
-  children?: ReactNode;
+export interface UIBlock {
+  id: string; // Unique ID for React keys
+  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown')
+  content: string;
+  tag?: string; // Optional metadata (e.g., language for code blocks)
+  status: 'loading' | 'streaming' | 'complete'; // Controls rendering
 }
 
-export interface LastUserMessageActionsProps {
-  messageId: string;
+export interface UIBlockProps {
+  block: UIBlock;
 }
 
-export interface ThreadProps {
-  onClose?: () => void;
-  hideCloseButton?: boolean;
+export interface BlockHistoryEntry {
+  blocks: UIBlock[];
+  createdAt: string;
 }
 
-export type SuggestionItem = {
-  label: string;
-  icon: ReactNode;
-  action: string;
-};
+export interface BlockBasedMetadata {
+  blocks?: UIBlock[];
+  blockHistory?: BlockHistoryEntry[];
+}
