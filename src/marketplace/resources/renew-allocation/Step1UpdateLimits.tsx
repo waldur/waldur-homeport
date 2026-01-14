@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useMemo } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
-import { useFormState } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -29,6 +29,7 @@ const UpdateLimitsTable: FC<{
   resource: OwnProps['data']['resources'][0];
 }> = (props) => {
   const resource = props.resource;
+  const form = useForm();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['ChangeLimitsData', getUuid(resource)],
@@ -37,11 +38,18 @@ const UpdateLimitsTable: FC<{
     staleTime: 3 * 60 * 1000,
   });
 
+  // Sync parsed limits (e.g., MB→GB) to form when data loads
+  useEffect(() => {
+    if (data?.limits) {
+      form.change(`${getUuid(resource)}.limits`, data.limits);
+    }
+  }, [data?.limits, form, resource]);
+
   const { values } = useFormState<RenewAllocationFormData>();
 
   const tableData = useMemo(() => {
     if (data) {
-      const newLimits = values[getUuid(resource)].limits;
+      const newLimits = values[getUuid(resource)]?.limits || data.limits;
       const { offering, plan, usages, limits: currentLimits } = data;
       return getLimitChangeData(
         plan,

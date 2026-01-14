@@ -5,6 +5,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/ChangedLimitField';
 import {
   getLimitChangeData,
@@ -34,6 +35,11 @@ interface RenewalAttributes {
 export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
   const attributes = order.attributes as RenewalAttributes;
 
+  const newLimits = useMemo(
+    () => getFormLimitParser(offering.type)(order.limits),
+    [offering.type, order.limits],
+  );
+
   const data = useMemo(() => {
     const requirements = getLimitChangeRequirements(
       { limits: attributes.old_limits },
@@ -41,7 +47,6 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
     );
 
     if (requirements) {
-      const newLimits = order.limits;
       const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
       const { usages, limits: currentLimits } = requirements;
       return getLimitChangeData(
@@ -61,7 +66,7 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
       changedTotalPeriods: [],
       offering,
     };
-  }, [order, offering]);
+  }, [order, offering, newLimits, attributes.old_limits]);
 
   return (
     <>
@@ -113,8 +118,7 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
           },
           {
             title: translate('New limit'),
-            render: ({ row }) =>
-              order.limits[row.type] + ' ' + row.measured_unit,
+            render: ({ row }) => newLimits[row.type] + ' ' + row.measured_unit,
           },
           {
             title: translate('Difference'),

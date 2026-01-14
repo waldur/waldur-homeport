@@ -2,14 +2,24 @@ import { useRouter } from '@uirouter/react';
 import { useDispatch } from 'react-redux';
 import { UserAction, userActionsExecuteAction } from 'waldur-js-client';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { SilenceAction } from './SilenceAction';
-import { CorrectiveAction } from './types';
+import { CorrectiveAction, ExtendedUserAction } from './types';
 import { UnsilenceAction } from './UnsilenceAction';
 import { ACTION_CATEGORY_CONFIG } from './utils';
+
+const RenewAllocationDialog = lazyComponent(() =>
+  import('@waldur/marketplace/resources/renew-allocation/RenewAllocationDialog').then(
+    (m) => ({
+      default: m.RenewAllocationDialog,
+    }),
+  ),
+);
 
 // Create action handler for corrective actions
 const createActionHandler = (
@@ -20,6 +30,22 @@ const createActionHandler = (
   dispatch?: any,
 ) => {
   return async () => {
+    // Special handling for Renew Resource action - open dialog directly
+    if (action.label === 'Renew Resource') {
+      const extRow = row as unknown as ExtendedUserAction;
+      dispatch?.(
+        openModalDialog(RenewAllocationDialog, {
+          size: 'xl',
+          fullscreen: 'lg-down',
+          resolve: {
+            resource_uuid: extRow.resource_uuid,
+            refetch,
+          },
+        }),
+      );
+      return;
+    }
+
     try {
       if (action.api_endpoint) {
         // Execute via backend API
