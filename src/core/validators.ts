@@ -116,6 +116,92 @@ export const url = (value) => {
   }
 };
 
+export const redirectURI = (value: string) => {
+  // Empty is allowed
+  if (!value || !value.trim()) {
+    return undefined;
+  }
+
+  const trimmedUrl = value.trim();
+
+  // Check if URL has scheme
+  if (!trimmedUrl.startsWith('http://') && !trimmedUrl.startsWith('https://')) {
+    return translate('Missing http:// or https://');
+  }
+
+  // Check if URL is valid and origin-only (no paths, query, or fragments)
+  try {
+    const parsedUrl = new URL(trimmedUrl);
+
+    // Enforce HTTPS except for localhost
+    if (
+      parsedUrl.protocol !== 'https:' &&
+      parsedUrl.hostname !== 'localhost' &&
+      parsedUrl.hostname !== '127.0.0.1'
+    ) {
+      return translate('Must use HTTPS (unless localhost)');
+    }
+
+    // Check for trailing slash
+    if (trimmedUrl.endsWith('/')) {
+      return translate('No trailing slashes allowed');
+    }
+
+    // Check for paths, query parameters, or fragments
+    if (parsedUrl.pathname !== '/' || parsedUrl.search || parsedUrl.hash) {
+      return translate('Must be origin-only (no paths, query, or fragments)');
+    }
+  } catch {
+    return translate('Invalid URL format');
+  }
+
+  return undefined;
+};
+
+export const validateRedirectURLs = (
+  value: string | string[] | null | undefined,
+) => {
+  // Empty is allowed (means allow all domains)
+  if (value === null || value === undefined || value === '') {
+    return undefined;
+  }
+
+  // Convert to array if needed
+  let urlArray: string[] = [];
+
+  if (Array.isArray(value)) {
+    urlArray = value;
+  } else if (typeof value === 'string' && value.trim()) {
+    urlArray = [value];
+  } else {
+    return undefined; // Empty is allowed
+  }
+
+  if (urlArray.length === 0) {
+    return undefined; // Empty is allowed (means allow all domains)
+  }
+
+  const errors: string[] = [];
+
+  urlArray.forEach((url, index) => {
+    const error = redirectURI(url);
+    if (error) {
+      errors.push(
+        translate('URL {index}: {error}', {
+          index: index + 1,
+          error,
+        }),
+      );
+    }
+  });
+
+  if (errors.length > 0) {
+    return errors.join('; ');
+  }
+
+  return undefined;
+};
+
 const latinName = (value: string) => {
   if (!value.match(LATIN_NAME_PATTERN)) {
     return translate('Name should consist of latin symbols and numbers.');
