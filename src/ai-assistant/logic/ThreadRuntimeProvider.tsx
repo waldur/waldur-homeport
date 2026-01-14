@@ -4,7 +4,7 @@ import {
   ThreadMessageLike,
   useExternalStoreRuntime,
 } from '@assistant-ui/react';
-import { ReactNode, useState } from 'react';
+import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
 
 import {
   createOnCancel,
@@ -13,12 +13,15 @@ import {
   createOnReload,
 } from '@waldur/ai-assistant/lib/messages/messageHandlers';
 import { convertMessage } from '@waldur/ai-assistant/lib/messages/messageUtils';
+import '@waldur/ai-assistant/lib/registry/registerComponents';
 import { createThreadListAdapter } from '@waldur/ai-assistant/lib/thread/threadListAdapter';
 import {
   useAbortControllers,
   useThreadRunningState,
 } from '@waldur/ai-assistant/lib/thread/threadStateHooks';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
+
+const EMPTY_MESSAGES: ThreadMessageLike[] = [];
 
 export function ThreadRuntimeProvider({
   children,
@@ -37,68 +40,106 @@ export function ThreadRuntimeProvider({
 
   // Get current thread state
   const isRunning = getIsRunning(currentThreadId);
-  const messages = threads.get(currentThreadId) ?? [];
+  const messages = useMemo(
+    () => threads.get(currentThreadId) ?? EMPTY_MESSAGES,
+    [threads, currentThreadId],
+  );
+
+  // Use ref to prevent handlers from recreating on every message update
+  const messagesRef = useRef(messages);
+  messagesRef.current = messages;
 
   // Messages setter for current thread
   const setMessages: React.Dispatch<
     React.SetStateAction<readonly ThreadMessageLike[]>
-  > = (valueOrUpdater) => {
-    setThreads((prev) => {
-      const currentMessages = prev.get(currentThreadId) ?? [];
-      const newMessages =
-        typeof valueOrUpdater === 'function'
-          ? (
-              valueOrUpdater as (
-                prev: readonly ThreadMessageLike[],
-              ) => readonly ThreadMessageLike[]
-            )(currentMessages)
-          : valueOrUpdater;
+  > = useCallback(
+    (valueOrUpdater) => {
+      setThreads((prev) => {
+        const currentMessages = prev.get(currentThreadId) ?? [];
+        const newMessages =
+          typeof valueOrUpdater === 'function'
+            ? (
+                valueOrUpdater as (
+                  prev: readonly ThreadMessageLike[],
+                ) => readonly ThreadMessageLike[]
+              )(currentMessages)
+            : valueOrUpdater;
 
-      if (newMessages === currentMessages) return prev;
+        if (newMessages === currentMessages) return prev;
 
-      const newThreads = new Map(prev);
-      newThreads.set(currentThreadId, newMessages as ThreadMessageLike[]);
+        const newThreads = new Map(prev);
+        newThreads.set(currentThreadId, newMessages as ThreadMessageLike[]);
 
-      return newThreads;
-    });
-  };
+        return newThreads;
+      });
+    },
+    [setThreads, currentThreadId],
+  );
 
   // Abort stream helper
-  const abortThreadStream = (threadId: string) => {
-    abortThread(threadId);
-    setIsRunning(threadId, false);
-  };
+  const abortThreadStream = useCallback(
+    (threadId: string) => {
+      abortThread(threadId);
+      setIsRunning(threadId, false);
+    },
+    [abortThread, setIsRunning],
+  );
 
   // Thread list adapter
-  const threadListAdapter = createThreadListAdapter({
-    currentThreadId,
-    threads,
-    threadList,
-    setThreadList,
-    setCurrentThreadId,
-    setThreads,
-    abortThreadStream,
-  });
+  const threadListAdapter = useMemo(
+    () =>
+      createThreadListAdapter({
+        currentThreadId,
+        threads,
+        threadList,
+        setThreadList,
+        setCurrentThreadId,
+        setThreads,
+        abortThreadStream,
+      }),
+    [
+      currentThreadId,
+      threads,
+      threadList,
+      setThreadList,
+      setCurrentThreadId,
+      setThreads,
+      abortThreadStream,
+    ],
+  );
 
   // Message handler dependencies
-  const handlerDeps = {
-    messages,
-    setMessages,
-    setIsRunning,
-    currentThreadId,
-    setThreadList,
-    createController,
-    cleanupController,
-    abortThread,
-  };
+  // Handlers access messages via getter function that reads from messagesRef
+  const handlerDeps = useMemo(
+    () => ({
+      get messages() {
+        return messagesRef.current;
+      },
+      setMessages,
+      setIsRunning,
+      currentThreadId,
+      setThreadList,
+      createController,
+      cleanupController,
+      abortThread,
+    }),
+    [
+      setMessages,
+      setIsRunning,
+      currentThreadId,
+      setThreadList,
+      createController,
+      cleanupController,
+      abortThread,
+    ],
+  );
 
   // Message handlers
-  const onNew = createOnNew(handlerDeps);
-  const onEdit = createOnEdit(handlerDeps);
-  const onReload = createOnReload(handlerDeps);
-  const onCancel = createOnCancel(handlerDeps);
+  const onNew = useMemo(() => createOnNew(handlerDeps), [handlerDeps]);
+  const onEdit = useMemo(() => createOnEdit(handlerDeps), [handlerDeps]);
+  const onReload = useMemo(() => createOnReload(handlerDeps), [handlerDeps]);
+  const onCancel = useMemo(() => createOnCancel(handlerDeps), [handlerDeps]);
 
-  // Runtime
   const runtime = useExternalStoreRuntime({
     isRunning,
     messages,

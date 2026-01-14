@@ -22,7 +22,7 @@ export const useThreadRunningState = () => {
     });
   };
 
-  return { runningThreads, getIsRunning, setIsRunning };
+  return { getIsRunning, setIsRunning };
 };
 
 export const useAbortControllers = () => {
@@ -56,5 +56,5 @@ export const useAbortControllers = () => {
     });
   };
 
-  return { abortControllers, createController, abortThread, cleanupController };
+  return { createController, abortThread, cleanupController };
 };

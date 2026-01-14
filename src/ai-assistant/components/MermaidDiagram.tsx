@@ -1,8 +1,7 @@
-import { useAssistantState } from '@assistant-ui/react';
 import mermaid from 'mermaid';
-import { FC, useEffect, useRef } from 'react';
+import { FC, useEffect, useRef, useState } from 'react';
 
-import type { CodeBlockProps } from '@waldur/ai-assistant/lib/types';
+import { SkeletonLoader } from '@waldur/ai-assistant/components/shared/SkeletonLoader';
 import { translate } from '@waldur/i18n';
 
 mermaid.initialize({
@@ -10,34 +9,30 @@ mermaid.initialize({
   securityLevel: 'strict',
 });
 
-export const MermaidDiagram: FC<CodeBlockProps> = ({ code }) => {
-  const ref = useRef<HTMLPreElement>(null);
+interface MermaidDiagramProps {
+  code: string;
+}
 
-  // Detect when this code block is complete
-  const isComplete = useAssistantState(({ part }) => {
-    if (part.type !== 'text') return false;
-
-    const codeIndex = part.text.indexOf(code);
-    if (codeIndex === -1) return false;
-
-    const afterCode = part.text.substring(codeIndex + code.length);
-
-    const closingBackticksMatch = afterCode.match(/^```|^\n```/);
-    return closingBackticksMatch !== null;
-  });
+export const MermaidDiagram: FC<MermaidDiagramProps> = ({ code }) => {
+  const ref = useRef<HTMLDivElement>(null);
+  const [isRendering, setIsRendering] = useState(true);
 
   useEffect(() => {
-    if (!isComplete) return;
+    if (!code) {
+      setIsRendering(true);
+      return;
+    }
 
+    setIsRendering(true);
     (async () => {
       try {
         const isValid = await mermaid.parse(code, { suppressErrors: true });
+
         if (isValid === false) {
           throw new Error('Mermaid parsing failed');
         }
 
         const id = `mermaid-${Math.random().toString(36).slice(2)}`;
-
         const result = await mermaid.render(id, code);
 
         if (result.svg.includes('NaN')) {
@@ -54,20 +49,27 @@ export const MermaidDiagram: FC<CodeBlockProps> = ({ code }) => {
         ) {
           throw new Error('Mermaid rendered a syntax error SVG.');
         }
+        setIsRendering(false);
       } catch {
         if (ref.current) {
-          ref.current.innerHTML = `<div style="color: red;">${translate('Error rendering diagram.')}</div>`;
+          ref.current.innerHTML = `<div style="color: red;">${translate('Error rendering diagram')}</div>`;
+          setIsRendering(false);
         }
       }
     })();
 
     return () => {};
-  }, [isComplete, code]);
+  }, [code]);
 
   return (
-    <pre ref={ref} className="aui-mermaid-diagram">
-      {translate('Drawing diagram...')}
-    </pre>
+    <div className="aui-mermaid-block">
+      {isRendering && <SkeletonLoader />}
+      <div
+        ref={ref}
+        className="aui-mermaid-diagram"
+        style={{ display: isRendering ? 'none' : 'block' }}
+      />
+    </div>
   );
 };
 

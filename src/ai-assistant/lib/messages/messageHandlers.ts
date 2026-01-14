@@ -7,13 +7,14 @@ import { addThreadToListIfNotExists } from '@waldur/ai-assistant/lib/thread/thre
 import {
   MessageHandlerDependencies,
   RunConfig,
+  UIBlock,
 } from '@waldur/ai-assistant/lib/types';
 
 import {
   createUserMessage,
   createAssistantPlaceholder,
 } from './messageFactories';
-import { addContext, addPreviousText } from './messageUtils';
+import { addContext, addPreviousBlocks } from './messageUtils';
 
 type StartRunConfig = {
   parentId: string | null;
@@ -55,8 +56,8 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
         signal: abortController.signal,
         setMessages: deps.setMessages,
       });
-      if (isFirstMessage) {
-        await generateAndSetThreadTitle(input, deps);
+      if (isFirstMessage && !abortController.signal.aborted) {
+        await generateAndSetThreadTitle(input, deps, abortController.signal);
       }
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
@@ -84,28 +85,40 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
       if (userIndex === -1) return;
 
       const oldUser = deps.messages[userIndex];
-      const oldText = extractTextFromMessageContent(oldUser.content);
-
       const oldAssistant = deps.messages[userIndex + 1];
-      const oldAssistantText = extractTextFromMessageContent(
-        oldAssistant.content,
-      );
+      if (!oldAssistant) return;
 
-      const assistantIdToStream = oldAssistant?.id ?? '';
+      const assistantIdToStream = oldAssistant.id ?? '';
       if (!assistantIdToStream) return;
+
+      // Extract current blocks before clearing
+      const currentBlocks =
+        (oldAssistant.metadata?.custom as { blocks?: UIBlock[] })?.blocks ?? [];
 
       deps.setMessages((prev) => {
         const updated = [...prev];
+        // Update user message (no history tracking needed)
         updated[userIndex] = {
           ...oldUser,
           content: [{ type: 'text', text: input }],
-          metadata: addPreviousText(oldUser.metadata, oldText),
         };
+
+        const updatedMetadata = addPreviousBlocks(
+          oldAssistant.metadata,
+          currentBlocks,
+        );
+
         updated[userIndex + 1] = {
           ...oldAssistant,
           content: [{ type: 'text', text: '' }],
           status: { type: 'running' },
-          metadata: addPreviousText(oldAssistant.metadata, oldAssistantText),
+          metadata: {
+            ...updatedMetadata,
+            custom: {
+              ...updatedMetadata?.custom,
+              blocks: [], // Clear blocks for new stream
+            },
+          },
         };
         return updated;
       });
@@ -137,9 +150,6 @@ export const createOnReload = (deps: MessageHandlerDependencies) => {
       if (assistantIndex === -1) return;
 
       const oldAssistant = deps.messages[assistantIndex];
-      const oldAssistantText = extractTextFromMessageContent(
-        oldAssistant.content,
-      );
 
       const userIndex = assistantIndex - 1;
       if (userIndex < 0) return;
@@ -148,13 +158,29 @@ export const createOnReload = (deps: MessageHandlerDependencies) => {
 
       if (oldAssistant.role !== 'assistant' || oldUser.role !== 'user') return;
 
+      // Extract current blocks before clearing
+      const currentBlocks =
+        (oldAssistant.metadata?.custom as { blocks?: UIBlock[] })?.blocks ?? [];
+
       deps.setMessages((prev) => {
         const updated = [...prev];
+
+        const updatedMetadata = addPreviousBlocks(
+          oldAssistant.metadata,
+          currentBlocks,
+        );
+
         updated[userIndex + 1] = {
           ...oldAssistant,
           content: [{ type: 'text', text: '' }],
           status: { type: 'running' },
-          metadata: addPreviousText(oldAssistant.metadata, oldAssistantText),
+          metadata: {
+            ...updatedMetadata,
+            custom: {
+              ...updatedMetadata?.custom,
+              blocks: [], // Clear blocks for new stream
+            },
+          },
         };
         return updated;
       });

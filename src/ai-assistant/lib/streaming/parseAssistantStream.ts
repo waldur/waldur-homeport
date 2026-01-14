@@ -1,9 +1,26 @@
-import { extractTextFromMessageContent } from '@waldur/ai-assistant/lib/messages/messageUtils';
+import {
+  markBlocksComplete,
+  updateBlocks,
+} from '@waldur/ai-assistant/lib/blocks/blockManager';
 import { streamChat } from '@waldur/ai-assistant/lib/streaming/streamChat';
-import { ParseAssistantStreamParams } from '@waldur/ai-assistant/lib/types';
+import {
+  BlockBasedMetadata,
+  MessageHandlerDependencies,
+  UIBlock,
+} from '@waldur/ai-assistant/lib/types';
+
+interface ParseAssistantStreamParams extends Pick<
+  MessageHandlerDependencies,
+  'setMessages'
+> {
+  contextInput: string;
+  assistantId: string;
+  signal: AbortSignal;
+}
 
 export async function parseAssistantStream(params: ParseAssistantStreamParams) {
   const { contextInput, assistantId, signal, setMessages } = params;
+  let currentBlocks: UIBlock[] = [];
 
   try {
     for await (const part of streamChat(contextInput, signal)) {
@@ -11,26 +28,28 @@ export async function parseAssistantStream(params: ParseAssistantStreamParams) {
         break;
       }
 
+      // Accumulate updates in memory
+      currentBlocks = updateBlocks(currentBlocks, part);
+
       setMessages((prev) =>
         prev.map((m) => {
           if (m.id !== assistantId) return m;
-          const existingText = extractTextFromMessageContent(m.content);
-          const newContent = part.c ? existingText + part.c : existingText;
-          const newMetadata = part.additional_kwargs?.usage_metadata
-            ? {
-                ...m.metadata,
-                custom: {
-                  ...m.metadata?.custom,
-                  ...part.additional_kwargs?.usage_metadata,
-                },
-              }
-            : m.metadata;
+
+          const existingMetadata = m.metadata?.custom as
+            | BlockBasedMetadata
+            | undefined;
 
           return {
             ...m,
-            content: [{ type: 'text', text: newContent }],
-            metadata: newMetadata,
-            status: { type: 'running' }, // For cancellation handling
+            content: [{ type: 'text', text: '' }],
+            metadata: {
+              ...m.metadata,
+              custom: {
+                ...existingMetadata,
+                blocks: currentBlocks,
+              },
+            },
+            status: { type: 'running' },
           };
         }),
       );
@@ -64,11 +83,25 @@ export async function parseAssistantStream(params: ParseAssistantStreamParams) {
       prev.map((m) => {
         if (m.id !== assistantId) return m;
 
-        // Don’t overwrite incomplete status
+        // Don't overwrite incomplete status
         if (m.status?.type === 'incomplete') return m;
+
+        // Mark all blocks as complete
+        const existingMetadata = m.metadata?.custom as
+          | BlockBasedMetadata
+          | undefined;
+        const existingBlocks: UIBlock[] = existingMetadata?.blocks || [];
+        const completedBlocks = markBlocksComplete(existingBlocks);
 
         return {
           ...m,
+          metadata: {
+            ...m.metadata,
+            custom: {
+              ...existingMetadata,
+              blocks: completedBlocks,
+            },
+          },
           status: { type: 'complete', reason: 'stop' },
         };
       }),

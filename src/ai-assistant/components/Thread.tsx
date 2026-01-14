@@ -24,16 +24,34 @@ import {
   StopIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
-import React, { type FC } from 'react';
+import React, { type FC, ReactNode, useMemo, useState } from 'react';
 
-import { MarkdownText } from '@waldur/ai-assistant/components/Markdown';
+import { BlockRenderer } from '@waldur/ai-assistant/components/BlockRenderer';
+import { LoadingDots } from '@waldur/ai-assistant/components/shared/LoadingDots';
+import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
+import { useVersionSelector } from '@waldur/ai-assistant/hooks/useVersionSelector';
+import { extractTextFromBlocks } from '@waldur/ai-assistant/lib/messages/messageUtils';
 import {
-  LastUserMessageActionsProps,
-  SuggestionItem,
-  ThreadProps,
+  BlockBasedMetadata,
+  BlockHistoryEntry,
 } from '@waldur/ai-assistant/lib/types';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
+
+interface ThreadProps {
+  onClose?: () => void;
+  hideCloseButton?: boolean;
+}
+
+type SuggestionItem = {
+  label: string;
+  icon: ReactNode;
+  action: string;
+};
+
+interface LastUserMessageActionsProps {
+  messageId: string;
+}
 
 export const Thread: FC<ThreadProps> = ({
   onClose,
@@ -231,17 +249,84 @@ const MessageError: FC = () => {
   );
 };
 
+const EMPTY_BLOCKS: never[] = [];
+const EMPTY_HISTORY: BlockHistoryEntry[] = [];
+
+/**
+ * Core component for rendering block-based assistant messages with version history.
+ * Uses stable empty arrays and memoization to prevent infinite update loops.
+ */
+const BlockBasedContent: FC = () => {
+  const metadata = useAssistantState((state) => {
+    return state.message.metadata?.custom as BlockBasedMetadata | undefined;
+  });
+  const isRunning = useAssistantState((status) => status.thread.isRunning);
+
+  // Memoize blocks and history extraction
+  const currentBlocks = useMemo(
+    () => metadata?.blocks || EMPTY_BLOCKS,
+    [metadata?.blocks],
+  );
+
+  const blockHistory = useMemo(
+    () => (metadata?.blockHistory as BlockHistoryEntry[]) || EMPTY_HISTORY,
+    [metadata?.blockHistory],
+  );
+
+  const {
+    displayedBlocks,
+    displayLabel,
+    isViewingHistory,
+    canGoPrevious,
+    canGoNext,
+    goToPreviousVersion,
+    goToNextVersion,
+    totalVersions,
+  } = useVersionSelector({ currentBlocks, blockHistory });
+
+  const hasHistory = totalVersions > 1;
+
+  if (displayedBlocks.length === 0 && isRunning) {
+    return <LoadingDots />;
+  }
+
+  if (displayedBlocks.length === 0) {
+    return null;
+  }
+
+  return (
+    <>
+      {/* Only show version indicator when history exists and not streaming */}
+      {hasHistory && !isRunning && (
+        <div className="aui-version-indicator">
+          <VersionSelector
+            displayLabel={displayLabel}
+            isViewingHistory={isViewingHistory}
+            canGoPrevious={canGoPrevious}
+            canGoNext={canGoNext}
+            onPrevious={goToPreviousVersion}
+            onNext={goToNextVersion}
+          />
+        </div>
+      )}
+
+      {isViewingHistory && (
+        <div className="aui-history-banner">
+          {translate('Viewing previous version')}
+        </div>
+      )}
+
+      <BlockRenderer blocks={displayedBlocks} />
+    </>
+  );
+};
+
 const AssistantMessage: FC = () => {
   return (
     <MessagePrimitive.Root asChild>
       <div className="aui-assistant-message-root" data-role="assistant">
         <div className="aui-assistant-message-content">
-          <MessagePrimitive.Parts
-            components={{
-              Empty: LoadingMessage,
-              Text: MarkdownText,
-            }}
-          />
+          <BlockBasedContent />
           <MessageError />
         </div>
 
@@ -253,21 +338,25 @@ const AssistantMessage: FC = () => {
   );
 };
 
-const LoadingMessage: FC = () => {
-  return (
-    <MessagePrimitive.If last>
-      <ThreadPrimitive.If running>
-        <div className="aui-loading-indicator">
-          <span className="dot" />
-          <span className="dot" />
-          <span className="dot" />
-        </div>
-      </ThreadPrimitive.If>
-    </MessagePrimitive.If>
-  );
-};
-
 const AssistantActionBar: FC = () => {
+  const [copied, setCopied] = useState(false);
+
+  const metadata = useAssistantState((state) => {
+    return state.message.metadata?.custom as BlockBasedMetadata | undefined;
+  });
+
+  const handleCopy = async () => {
+    try {
+      const blocks = metadata?.blocks ?? [];
+      const text = extractTextFromBlocks(blocks);
+      await navigator.clipboard.writeText(text);
+      setCopied(true);
+      setTimeout(() => setCopied(false), 2000);
+    } catch {
+      // Silently fail if clipboard access is denied
+    }
+  };
+
   return (
     <ActionBarPrimitive.Root
       hideWhenRunning
@@ -275,16 +364,17 @@ const AssistantActionBar: FC = () => {
       autohideFloat="single-branch"
       className="aui-assistant-action-bar-root"
     >
-      <ActionBarPrimitive.Copy asChild>
-        <button className="aui-button-ghost" aria-label={translate('Copy')}>
-          <MessagePrimitive.If copied>
-            <CheckIcon weight="regular" />
-          </MessagePrimitive.If>
-          <MessagePrimitive.If copied={false}>
-            <CopyIcon weight="regular" />
-          </MessagePrimitive.If>
-        </button>
-      </ActionBarPrimitive.Copy>
+      <button
+        onClick={handleCopy}
+        className="aui-button-ghost"
+        aria-label={translate('Copy')}
+      >
+        {copied ? (
+          <CheckIcon weight="regular" />
+        ) : (
+          <CopyIcon weight="regular" />
+        )}
+      </button>
 
       <MessagePrimitive.If last>
         <ActionBarPrimitive.Reload asChild>

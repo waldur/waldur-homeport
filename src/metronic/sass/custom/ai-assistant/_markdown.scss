@@ -129,6 +129,9 @@
 .aui-code-block-root {
   margin-top: 1rem;
   margin-bottom: 1rem;
+  max-width: 100%;
+  min-width: 300px;
+  overflow-x: auto;
 }
 
 .aui-code-header {
@@ -195,4 +198,62 @@
     max-width: 100%;
     height: auto;
   }
+}
+
+.aui-loading-block {
+  min-height: 120px;
+  padding: 1rem;
+  background-color: $bg-tertiary;
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+}
+
+.aui-skeleton-lines {
+  display: flex;
+  flex-direction: column;
+  gap: 0.75rem;
+}
+
+.aui-skeleton-line {
+  height: 1rem;
+  background: linear-gradient(
+    90deg,
+    $bg-tertiary 0%,
+    $border-primary 50%,
+    $bg-tertiary 100%
+  );
+  background-size: 200% 100%;
+  border-radius: $border-radius-xs;
+  animation: shimmer 1.5s ease-in-out infinite;
+
+  &--short {
+    width: 60%;
+  }
+
+  &--medium {
+    width: 80%;
+  }
+
+  &--long {
+    width: 95%;
+  }
+}
+
+@keyframes shimmer {
+  0% {
+    background-position: 200% 0;
+  }
+  100% {
+    background-position: -200% 0;
+  }
+}
+
+.aui-mermaid-block {
+  border-bottom-left-radius: $border-radius;
+  border-bottom-right-radius: $border-radius;
+  border-left: 1px solid $border-primary;
+  border-right: 1px solid $border-primary;
+  border-bottom: 1px solid $border-primary;
+  background-color: $bg-tertiary;
+  padding: 1rem;
 }
