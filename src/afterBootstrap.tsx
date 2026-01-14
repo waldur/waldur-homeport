@@ -16,6 +16,7 @@ function initSentry() {
       dsn: ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_DSN,
       environment:
         ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_ENVIRONMENT || 'unknown',
+      integrations: [Sentry.browserTracingIntegration()],
       tracesSampleRate:
         ENV.plugins.WALDUR_CORE.HOMEPORT_SENTRY_TRACES_SAMPLE_RATE || 0.2,
       tracePropagationTargets: [hostname, /^\//],
