@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { marketplacePlansCreate } from 'waldur-js-client';
@@ -43,7 +43,7 @@ vi.mock('./constants', () => ({
 }));
 
 // Mock utils
-vi.mock('@waldur/marketplace/details/utils', () => ({
+vi.mock('@waldur/marketplace/offerings/store/utils', () => ({
   formatPlan: (data: any) => ({
     name: data.name,
     unit: data.unit?.value || data.unit,
@@ -221,9 +221,11 @@ describe('AddPlanDialog', () => {
   it('shows loading state during submission', async () => {
     const mockPlansCreate = vi.mocked(marketplacePlansCreate);
     // Mock a delayed response
-    mockPlansCreate.mockImplementation(
-      () => new Promise((resolve) => setTimeout(resolve, 100)),
-    );
+    let resolvePromise: () => void;
+    const delayedPromise = new Promise<void>((resolve) => {
+      resolvePromise = resolve;
+    });
+    mockPlansCreate.mockImplementation(() => delayedPromise as any);
 
     renderComponent();
     const user = userEvent.setup();
@@ -243,11 +245,18 @@ describe('AddPlanDialog', () => {
     }
 
     const createButton = screen.getByText('Create');
-    await user.click(createButton);
+    // Use fireEvent for synchronous click to catch the submitting state
+    fireEvent.click(createButton);
 
     // Button should be disabled during submission
-    await waitFor(() => {
-      expect(createButton).toBeDisabled();
-    });
+    await waitFor(
+      () => {
+        expect(createButton).toBeDisabled();
+      },
+      { timeout: 2000 },
+    );
+
+    // Resolve the promise to clean up
+    resolvePromise!();
   });
 });

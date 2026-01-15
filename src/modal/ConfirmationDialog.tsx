@@ -1,8 +1,17 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import React, { ReactNode, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
+import {
+  openstackRoutersList,
+  OpenstackRoutersListData,
+} from 'waldur-js-client';
 
-import { StringField, SubmitButton } from '@waldur/form';
+import { parseSelectData } from '@waldur/core/api';
+import { ENV } from '@waldur/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import { SubmitButton } from '@waldur/form';
+import { AsyncPaginate } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -29,6 +38,8 @@ interface ConfirmationDialogProps {
     inputRequired?: boolean;
     inputLabel?: string;
     inputPlaceholder?: string;
+    showRouterSelect?: boolean;
+    tenantUuid?: string;
   };
 }
 
@@ -47,17 +58,64 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
     inputRequired = false,
     inputLabel,
     inputPlaceholder,
+    showRouterSelect = false,
+    tenantUuid,
   },
 }) => {
   const dispatch = useDispatch();
   const closeDialog = () => dispatch(closeModalDialog('HIDE_CONFIRM'));
   const [inputValue, setInputValue] = useState('');
+  const [routerValue, setRouterValue] = useState(null);
+
+  const loadRouters = async (query, prevOptions, { page }) => {
+    if (!tenantUuid) {
+      return {
+        options: [],
+        hasMore: false,
+        additional: { page: 1 },
+      };
+    }
+
+    const response = await openstackRoutersList({
+      query: {
+        tenant_uuid: tenantUuid,
+        state: ['OK'],
+        name: query,
+        page,
+        page_size: ENV.pageSize,
+        field: ['uuid', 'url', 'name'],
+      } as OpenstackRoutersListData['query'],
+    });
+
+    const selectData = parseSelectData(response);
+    return returnReactSelectAsyncPaginateObject(
+      {
+        options: selectData.options.map((router) => ({
+          value: router.url,
+          label: router.name,
+          ...router,
+        })),
+        totalItems: selectData.totalItems,
+      },
+      prevOptions,
+      page,
+    );
+  };
 
   const handleSubmit = () => {
     if (showInput && inputRequired && !inputValue.trim()) {
       return;
     }
-    deferred.resolve(showInput ? inputValue : undefined);
+    const result: any = {};
+    if (showInput) {
+      result.input = inputValue;
+    }
+    if (showRouterSelect && routerValue) {
+      result.router = routerValue.value;
+    }
+    deferred.resolve(
+      showInput || (showRouterSelect && routerValue) ? result : undefined,
+    );
     closeDialog();
   };
 
@@ -84,12 +142,12 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
             />
           )}
           <SubmitButton
-            submitting={false}
             variant={positiveButtonVariant}
             className={onlyPositiveButton ? undefined : 'flex-equal px-3'}
             onClick={handleSubmit}
             disabled={showInput && inputRequired && !inputValue.trim()}
             type="button"
+            submitting={false}
             label={positiveButton}
           />
         </>
@@ -99,12 +157,35 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         {body}
         {showInput && (
           <div className="mt-3">
-            <StringField
-              label={inputLabel}
+            <Form.Label>
+              {inputLabel}
+              {inputRequired && <span className="text-danger"> *</span>}
+            </Form.Label>
+            <Form.Control
+              type="text"
               placeholder={inputPlaceholder}
               value={inputValue}
               onChange={(e) => setInputValue(e.target.value)}
               required={inputRequired}
+            />
+          </div>
+        )}
+        {showRouterSelect && (
+          <div className="mt-3">
+            <label className="form-label">
+              {translate('Router')}{' '}
+              <span className="text-muted">({translate('Optional')})</span>
+            </label>
+            <AsyncPaginate
+              value={routerValue}
+              onChange={setRouterValue}
+              loadOptions={loadRouters}
+              defaultOptions
+              placeholder={translate('Select router...')}
+              isClearable
+              classNamePrefix="metronic-select"
+              getOptionLabel={(option) => option.label || option.name}
+              getOptionValue={(option) => option.value || option.url}
             />
           </div>
         )}

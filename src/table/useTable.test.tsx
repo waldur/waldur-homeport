@@ -29,6 +29,7 @@ vi.mock('@waldur/router', () => ({
 // Mock navigation title
 vi.mock('@waldur/navigation/title', () => ({
   getTitle: () => 'Test Page',
+  reducer: (state = { title: '', subtitle: '' }) => state,
   effects: function* () {},
 }));
 

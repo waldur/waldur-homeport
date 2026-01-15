@@ -43,6 +43,8 @@ export const waitForConfirmation = (
     inputLabel?: string;
     inputPlaceholder?: string;
     inputRequired?: boolean;
+    showRouterSelect?: boolean;
+    tenantUuid?: string;
   } = {},
 ) => {
   const deferred = createDeferred();

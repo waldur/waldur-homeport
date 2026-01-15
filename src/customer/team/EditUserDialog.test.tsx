@@ -13,6 +13,7 @@ vi.mock('waldur-js-client', () => ({
   customersAddUser: vi.fn(),
   customersDeleteUser: vi.fn(),
   customersUpdateUser: vi.fn(),
+  formDataBodySerializer: {},
 }));
 
 // Mock store hooks
@@ -34,6 +35,33 @@ vi.mock('@waldur/i18n', () => ({
 // Mock table constants
 vi.mock('@waldur/table/constants', () => ({
   DASH_ESCAPE_CODE: '—',
+  INITIAL_STATE: {
+    entities: {},
+    order: [],
+    loading: false,
+    error: null,
+    mode: 'table',
+    pagination: {
+      pageSize: 10,
+      resultCount: 0,
+      currentPage: 1,
+    },
+    sorting: {
+      mode: undefined,
+      field: null,
+      loading: false,
+    },
+    filterPosition: 'menu',
+    filtersStorage: [],
+    savedFilters: [],
+    selectedSavedFilter: null,
+    applyFilters: false,
+    toggled: {},
+    selectedRows: [],
+    firstFetch: true,
+    activeColumns: {},
+    columnPositions: [],
+  },
 }));
 
 // Mock workspace selectors

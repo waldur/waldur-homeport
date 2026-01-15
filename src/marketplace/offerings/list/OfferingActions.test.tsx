@@ -11,16 +11,20 @@ vi.mock('@waldur/permissions/hasPermission', () => ({
   hasPermission: vi.fn(() => true),
 }));
 
-vi.mock('@uirouter/react', () => ({
-  useRouter: vi.fn(),
-  useCurrentStateAndParams: () => ({
-    state: {
-      data: {
-        workspace: 'admin',
+vi.mock('@uirouter/react', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@uirouter/react')>();
+  return {
+    ...mod,
+    useRouter: vi.fn(),
+    useCurrentStateAndParams: () => ({
+      state: {
+        data: {
+          workspace: 'admin',
+        },
       },
-    },
-  }),
-}));
+    }),
+  };
+});
 
 const renderOfferingActions = (props?) => {
   const store = createStore(() => ({
