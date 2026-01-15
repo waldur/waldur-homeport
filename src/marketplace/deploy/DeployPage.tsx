@@ -10,7 +10,7 @@ import {
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { InjectedFormProps, reduxForm } from 'redux-form';
-import { OrderDetails, projectsRetrieve } from 'waldur-js-client';
+import { OrderDetails } from 'waldur-js-client';
 
 import { parseDate } from '@waldur/core/dateUtils';
 import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
@@ -37,6 +37,7 @@ import { isExperimentalUiComponentsVisible } from '../utils';
 import { DeployForm } from './DeployForm';
 import { DeployPageActions } from './DeployPageActions';
 import { DeployPageSidebar } from './DeployPageSidebar';
+import { resolveCustomer, resolveProject } from './initUtils';
 import { orderFormDataSelector } from './selectors';
 import { orderCustomerSelector } from './selectors';
 import { orderProjectSelector } from './selectors';
@@ -133,67 +134,29 @@ export const BaseDeployPage = ({
       const initialValues: DeployFormData = {};
       const urlParams = getInitialValues();
 
-      if (selectedOffering.project) {
-        initialValues.project = {
-          name: selectedOffering.project_name,
-          uuid: selectedOffering.project_uuid,
-          url: selectedOffering.project,
-        };
-      } else {
-        // Priority order: URL params > marketplace filters > current project
-        if (urlParams?.project_uuid) {
-          try {
-            const response = await projectsRetrieve({
-              path: { uuid: urlParams.project_uuid },
-            });
-            initialValues.project = response.data;
-          } catch {
-            // Failed to load project from URL param, continue with fallback
-          }
-        } else if (urlParams?.project) {
-          // Fallback for old full-object format
-          initialValues.project = urlParams.project;
-        } else {
-          const projectFilter = marketplaceFilters?.find(
-            (item) => item.name === 'project',
-          );
-          if (projectFilter?.value) {
-            initialValues.project = projectFilter.value;
-          } else if (currentProject) {
-            initialValues.customer = currentCustomer;
-            initialValues.project = currentProject;
-          }
-        }
+      const context = {
+        urlParams,
+        marketplaceFilters,
+        currentProject,
+        currentCustomer,
+        selectedOffering,
+      };
+
+      // Initialize project
+      const resolved = await resolveProject(context);
+      if (resolved.project) {
+        initialValues.project = resolved.project;
+      }
+      if (resolved.customer) {
+        initialValues.customer = resolved.customer;
       }
 
-      if (selectedOffering.shared) {
-        // Priority order: URL params > marketplace filters
-        if (urlParams?.organization_uuid) {
-          try {
-            const customer = await getCustomer(urlParams.organization_uuid);
-            initialValues.customer = customer;
-          } catch {
-            // Failed to load organization from URL param, continue with fallback
-          }
-        } else if (urlParams?.organization) {
-          // Fallback for old full-object format
-          initialValues.customer = urlParams.organization;
-        } else {
-          const customerFilter = marketplaceFilters?.find(
-            (item) => item.name === 'organization',
-          );
-
-          if (customerFilter?.value) {
-            initialValues.customer = customerFilter.value;
-          }
+      // Initialize customer (organization) if not already set
+      if (!initialValues.customer) {
+        const customer = await resolveCustomer(context);
+        if (customer) {
+          initialValues.customer = customer;
         }
-      } else {
-        initialValues.customer = {
-          name: selectedOffering.customer_name,
-          uuid: selectedOffering.customer_uuid,
-          url: selectedOffering.customer,
-          payment_profiles: [],
-        };
       }
 
       if (hasStepWithField(formSteps, 'offering') && selectedOffering) {
