@@ -44,16 +44,29 @@ export const AgentIdentityExpandableRow: FC<
               {translate('No configuration content available')}
             </p>
           )}
-          {row.dependencies && (
-            <>
-              <h6 className="mt-4 mb-2">{translate('Dependencies')}</h6>
-              <p className="text-muted">
-                {Array.isArray(row.dependencies)
-                  ? row.dependencies.join(', ')
-                  : String(row.dependencies)}
-              </p>
-            </>
-          )}
+          {row.dependencies &&
+            Array.isArray(row.dependencies) &&
+            row.dependencies.length > 0 && (
+              <>
+                <h6 className="mt-4 mb-2">{translate('Dependencies')}</h6>
+                <ul className="list-unstyled text-muted mb-0">
+                  {row.dependencies.map(
+                    (
+                      dep: { package?: string; version?: string } | string,
+                      index: number,
+                    ) => (
+                      <li key={index}>
+                        <code>
+                          {typeof dep === 'string'
+                            ? dep
+                            : `${dep.package || 'unknown'}==${dep.version || 'unknown'}`}
+                        </code>
+                      </li>
+                    ),
+                  )}
+                </ul>
+              </>
+            )}
         </div>
         <div className="col-md-6">
           <h6 className="mb-3">{translate('Services')}</h6>
