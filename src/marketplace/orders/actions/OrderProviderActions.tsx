@@ -68,7 +68,7 @@ export const OrderProviderActions = ({
       data-cy="order-provider-actions-dropdown-btn"
       labeled={labeledDropdown}
       drop="down"
-      size={size || 'md'}
+      size={size || 'lg'}
     />
   );
 };

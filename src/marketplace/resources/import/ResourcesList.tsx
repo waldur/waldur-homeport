@@ -37,12 +37,17 @@ export const ResourcesList: FunctionComponent<{
     [categoryUuid],
   );
 
+  const fetchData = useMemo(
+    () =>
+      createFetcher(marketplaceProviderOfferingsImportableResourcesList, {
+        path: { uuid: offering.uuid },
+      }),
+    [offering.uuid],
+  );
+
   const tableProps = useTable({
     table: 'offeringImportableResources',
-    fetchData: createFetcher(
-      marketplaceProviderOfferingsImportableResourcesList,
-      { path: { uuid: offering.uuid } },
-    ),
+    fetchData,
     filter,
     queryField: 'name',
   });

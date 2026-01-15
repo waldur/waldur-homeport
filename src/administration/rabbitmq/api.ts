@@ -1,5 +1,9 @@
-import { rabbitmqStatsRetrieve, type RmqPurgeResponse } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  rabbitmqOverviewRetrieve,
+  rabbitmqStats,
+  rabbitmqStatsRetrieve,
+  type RmqPurgeRequestRequest,
+} from 'waldur-js-client';
 
 // Re-export types for convenience
 export type {
@@ -7,35 +11,22 @@ export type {
   RmqVhostStats,
   RmqQueueStats,
   RmqStatsUser,
+  RmqOverview,
+  RmqObjectTotals,
+  RmqQueueTotals,
 } from 'waldur-js-client';
 
-// GET /api/rabbitmq-stats/ - uses SDK function
+// GET /api/rabbitmq-stats/ - View queue statistics
 export const getRabbitMQStats = () =>
   rabbitmqStatsRetrieve().then((response) => response.data);
 
-// Purge request types (not in SDK because DELETE body isn't typed in OpenAPI)
-interface PurgeQueueRequest {
-  vhost: string;
-  queue_name: string;
-}
+// POST /api/rabbitmq-stats/ - Purge or delete queues
+const purgeOrDeleteQueues = (body: RmqPurgeRequestRequest) =>
+  rabbitmqStats({ body }).then((response) => response.data);
 
-interface PurgePatternRequest {
-  vhost: string;
-  queue_pattern: string;
-}
+export const purgeRabbitMQQueues = purgeOrDeleteQueues;
+export const deleteRabbitMQQueues = purgeOrDeleteQueues;
 
-interface PurgeAllRequest {
-  purge_all_subscription_queues: true;
-}
-
-type PurgeRequest = PurgeQueueRequest | PurgePatternRequest | PurgeAllRequest;
-
-// DELETE /api/rabbitmq-stats/ - uses direct client call (body not typed in SDK)
-export const purgeRabbitMQQueues = (data: PurgeRequest) =>
-  client
-    .delete<RmqPurgeResponse>({
-      url: '/api/rabbitmq-stats/',
-      body: data as unknown,
-      security: [{ name: 'Authorization', type: 'apiKey' }],
-    })
-    .then((response) => response as unknown as { data: RmqPurgeResponse });
+// GET /api/rabbitmq-overview/ - Cluster overview statistics
+export const getRabbitMQOverview = () =>
+  rabbitmqOverviewRetrieve().then((response) => response.data);

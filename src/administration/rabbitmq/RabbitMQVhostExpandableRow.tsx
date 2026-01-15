@@ -2,6 +2,7 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { Link } from '@waldur/core/Link';
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
@@ -10,6 +11,7 @@ import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 import type { RmqQueueStats, RmqVhostStats } from './api';
 import { RabbitMQQueueActions } from './RabbitMQQueueActions';
+import { RabbitMQQueueConfigPopover } from './RabbitMQQueueConfigPopover';
 import { RabbitMQQueueHealthBadge } from './RabbitMQQueueHealthBadge';
 
 interface RabbitMQVhostExpandableRowProps {
@@ -49,6 +51,28 @@ export const RabbitMQVhostExpandableRow: FC<
           queue.object_type || '-',
       },
       {
+        title: translate('Queue type'),
+        render: ({ row: queue }: { row: RmqQueueStats }) => {
+          if (!queue.queue_type) return <span className="text-muted">-</span>;
+          const isClassic =
+            queue.queue_type !== 'quorum' && queue.queue_type !== 'stream';
+          const variant =
+            queue.queue_type === 'quorum'
+              ? 'primary'
+              : queue.queue_type === 'stream'
+                ? 'info'
+                : 'secondary';
+          return (
+            <StateIndicator
+              label={queue.queue_type}
+              variant={variant}
+              pill
+              outline={isClassic}
+            />
+          );
+        },
+      },
+      {
         title: translate('Messages'),
         render: ({ row: queue }: { row: RmqQueueStats }) => (
           <span className="fw-bold">{queue.messages.toLocaleString()}</span>
@@ -78,6 +102,12 @@ export const RabbitMQVhostExpandableRow: FC<
         title: translate('Status'),
         render: ({ row: queue }: { row: RmqQueueStats }) => (
           <RabbitMQQueueHealthBadge queue={queue} />
+        ),
+      },
+      {
+        title: translate('Config'),
+        render: ({ row: queue }: { row: RmqQueueStats }) => (
+          <RabbitMQQueueConfigPopover queue={queue} />
         ),
       },
       {

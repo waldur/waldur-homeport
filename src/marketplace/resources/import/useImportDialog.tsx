@@ -26,6 +26,7 @@ export const useImportDialog = () => {
   const [step, setStep] = useState(1); // 3 steps
   const [offering, setOffering] = useState<Offering>();
   const [plans, setPlans] = useState<Record<string, Plan>>({});
+  const dispatch = useDispatch();
 
   const formValues = useSelector((state) =>
     getFormValues(IMPORT_RESOURCE_FORM_ID)(state),
@@ -34,7 +35,7 @@ export const useImportDialog = () => {
   const submitEnabled = useMemo(
     () =>
       formValues?.resources?.length > 0 &&
-      (!offering.billable ||
+      (!offering?.billable ||
         formValues?.resources.every(
           (resource) => plans[resource.backend_id] !== undefined,
         )),
@@ -48,14 +49,16 @@ export const useImportDialog = () => {
         ? offering
         : false;
 
-  const selectOffering = (value: Offering) => {
-    setOffering(value);
-    change(IMPORT_RESOURCE_FORM_ID, 'resources', []);
-  };
+  const selectOffering = useCallback(
+    (value: Offering) => {
+      setOffering(value);
+      dispatch(change(IMPORT_RESOURCE_FORM_ID, 'resources', []));
+    },
+    [dispatch],
+  );
+
   const assignPlan = (resource: ImportableResource, plan: Plan) =>
     setPlans({ ...plans, [resource.backend_id]: plan });
-
-  const dispatch = useDispatch();
 
   const handleSubmit = useCallback(
     async (_formValues: FormData) => {

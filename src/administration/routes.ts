@@ -140,6 +140,36 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-site-agents',
+    url: 'site-agents/?tab',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./site-agents/SiteAgentManagement').then((module) => ({
+        default: module.SiteAgentManagement,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Site agents'),
+      permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
+    name: 'admin-event-subscriptions',
+    url: 'event-subscriptions/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./event-subscriptions/EventSubscriptionsList').then((module) => ({
+        default: module.EventSubscriptionsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Event subscriptions'),
+      permissions: [isStaffOrSupport],
+    },
+  },
+
+  {
     name: 'admin-quick-shortcuts',
     url: 'quick-shortcuts/',
     parent: 'admin-user-interface',

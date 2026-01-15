@@ -1,4 +1,4 @@
-import { TrashIcon, WarningIcon } from '@phosphor-icons/react';
+import { Trash, Warning } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -7,15 +7,15 @@ import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
 
-import { purgeRabbitMQQueues, type RmqStatsResponse } from './api';
+import { deleteRabbitMQQueues, type RmqStatsResponse } from './api';
 
-interface RabbitMQPurgeAllButtonProps {
+interface RabbitMQDeleteAllButtonProps {
   data: RmqStatsResponse;
 }
 
-const CONFIRMATION_TEXT = 'PURGE ALL';
+const CONFIRMATION_TEXT = 'DELETE ALL';
 
-export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
+export const RabbitMQDeleteAllButton: FC<RabbitMQDeleteAllButtonProps> = ({
   data,
 }) => {
   const dispatch = useDispatch();
@@ -23,13 +23,12 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
 
   const mutation = useMutation({
     mutationFn: () =>
-      purgeRabbitMQQueues({ purge_all_subscription_queues: true }),
-    onSuccess: (data) => {
+      deleteRabbitMQQueues({ delete_all_subscription_queues: true }),
+    onSuccess: (result) => {
       dispatch(
         showSuccess(
-          translate('Purged {messages} messages from {queues} queues', {
-            messages: data.purged_messages.toLocaleString(),
-            queues: data.purged_queues,
+          translate('Deleted {count} queues', {
+            count: result.deleted_queues,
           }),
         ),
       );
@@ -38,7 +37,7 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
     onError: (error) => {
       dispatch(
         showError(
-          translate('Failed to purge all queues: {error}', {
+          translate('Failed to delete all queues: {error}', {
             error: error instanceof Error ? error.message : String(error),
           }),
         ),
@@ -46,15 +45,15 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
     },
   });
 
-  const handlePurgeAll = useCallback(async () => {
+  const handleDeleteAll = useCallback(async () => {
     try {
       const typedValue = await waitForConfirmation(
         dispatch,
-        translate('WARNING: Mass queue purge'),
+        translate('WARNING: Mass queue deletion'),
         <>
           <p className="text-danger fw-bold">
             {translate(
-              'You are about to purge ALL subscription queues across ALL users.',
+              'You are about to DELETE ALL subscription queues across ALL users.',
             )}
           </p>
           <p>
@@ -66,7 +65,7 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
           </p>
           <p className="text-danger">
             {translate(
-              'This action cannot be undone and may affect all site agent integrations.',
+              'This will permanently remove all queues and their messages. All site agent integrations will be disconnected.',
             )}
           </p>
           <p className="mb-0">
@@ -77,8 +76,8 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
         </>,
         {
           type: 'danger',
-          iconNode: <WarningIcon weight="bold" />,
-          positiveButton: translate('Purge all queues'),
+          iconNode: <Warning weight="bold" />,
+          positiveButton: translate('Delete all queues'),
           positiveButtonVariant: 'danger',
           showInput: true,
           inputRequired: true,
@@ -107,11 +106,11 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
     <button
       type="button"
       className="btn btn-danger d-flex align-items-center gap-2"
-      onClick={handlePurgeAll}
+      onClick={handleDeleteAll}
       disabled={mutation.isPending || data.total_queues === 0}
     >
-      <TrashIcon size={16} weight="bold" />
-      {translate('Purge all queues')}
+      <Trash size={16} weight="bold" />
+      {translate('Delete all queues')}
     </button>
   );
 };
