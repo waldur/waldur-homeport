@@ -1,4 +1,4 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { render, screen, waitFor, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { marketplacePlansUpdate } from 'waldur-js-client';
@@ -230,21 +230,29 @@ describe('EditPlanDescriptionDialog', () => {
 
   it('shows loading state during submission', async () => {
     const mockPlansUpdate = vi.mocked(marketplacePlansUpdate);
-    // Mock a delayed response
-    mockPlansUpdate.mockImplementation(
-      () => new Promise((resolve) => setTimeout(resolve, 100)),
-    );
+    // Mock a delayed response with controllable promise
+    let resolvePromise: () => void;
+    const delayedPromise = new Promise<void>((resolve) => {
+      resolvePromise = resolve;
+    });
+    mockPlansUpdate.mockImplementation(() => delayedPromise as any);
 
     renderComponent();
-    const user = userEvent.setup();
 
     const saveButton = screen.getByText('Save');
-    await user.click(saveButton);
+    // Use fireEvent for synchronous click to catch the submitting state
+    fireEvent.click(saveButton);
 
     // Button should be disabled during submission
-    await waitFor(() => {
-      expect(saveButton).toBeDisabled();
-    });
+    await waitFor(
+      () => {
+        expect(saveButton).toBeDisabled();
+      },
+      { timeout: 2000 },
+    );
+
+    // Resolve the promise to clean up
+    resolvePromise!();
   });
 
   it('handles API errors gracefully', async () => {

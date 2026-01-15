@@ -8,6 +8,7 @@ import { CountrySelectField } from './CountrySelectField';
 
 vi.mock('waldur-js-client', () => ({
   customersCountriesList: vi.fn(),
+  formDataBodySerializer: {},
 }));
 
 const mockCountries = [

@@ -11,9 +11,13 @@ import { useNotify } from '@waldur/store/hooks';
 import { UserDelete } from './UserDelete';
 
 vi.mock('react-redux');
-vi.mock('@uirouter/react', () => ({
-  useRouter: vi.fn(),
-}));
+vi.mock('@uirouter/react', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@uirouter/react')>();
+  return {
+    ...mod,
+    useRouter: vi.fn(),
+  };
+});
 vi.mock('@tanstack/react-query');
 vi.mock('@waldur/modal/actions');
 vi.mock('@waldur/navigation/useTabs', () => ({

@@ -10,7 +10,7 @@ import { ActionValidator } from './types';
 import { useValidators } from './useValidators';
 
 interface AsyncActionButtonProps<T> {
-  apiMethod(id: string): Promise<any>;
+  apiMethod(id: string, data?: any): Promise<any>;
   resource: T;
   validators?: ActionValidator<T>[];
   title: string;
@@ -19,6 +19,10 @@ interface AsyncActionButtonProps<T> {
   iconNode?: ReactNode;
   className?: string;
   hasConfirmation?: boolean;
+  confirmationOptions?: {
+    showRouterSelect?: boolean;
+    tenantUuid?: string;
+  };
   refetch?(): void;
 }
 
@@ -31,14 +35,16 @@ export const AsyncActionButton: <T extends { uuid?: string }>(
   refetch,
   hasConfirmation,
   actionTitle,
+  confirmationOptions,
   ...rest
 }) => {
   const validationState = useValidators(validators, resource);
   const dispatch = useDispatch();
   const callback = async () => {
+    let confirmationData = undefined;
     if (hasConfirmation) {
       try {
-        await waitForConfirmation(
+        confirmationData = await waitForConfirmation(
           dispatch,
           translate('Confirmation'),
           translate('Are you sure you want to {action}?', {
@@ -47,6 +53,7 @@ export const AsyncActionButton: <T extends { uuid?: string }>(
           {
             iconNode: rest.iconNode,
             type: 'success',
+            ...confirmationOptions,
           },
         );
       } catch {
@@ -54,7 +61,7 @@ export const AsyncActionButton: <T extends { uuid?: string }>(
       }
     }
     try {
-      await apiMethod(resource.uuid);
+      await apiMethod(resource.uuid, confirmationData);
       if (refetch) {
         refetch();
       }

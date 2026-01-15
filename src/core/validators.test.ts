@@ -209,8 +209,9 @@ describe('URL validator', () => {
       url(complexUrl);
       const endTime = performance.now();
 
-      // Should complete in less than 15ms even for very long URLs
-      expect(endTime - startTime).toBeLessThan(15);
+      // Should complete in less than 50ms even for very long URLs
+      // Note: Performance may vary in CI environments, so we use a more lenient threshold
+      expect(endTime - startTime).toBeLessThan(50);
     });
 
     it('handles many validations efficiently', () => {

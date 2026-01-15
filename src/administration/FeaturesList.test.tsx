@@ -18,17 +18,21 @@ vi.mock('@waldur/store/hooks', () => ({
 vi.mock('@waldur/i18n', () => ({
   translate: (message) => message,
 }));
-vi.mock('@uirouter/react', () => ({
-  useCurrentStateAndParams: vi.fn().mockReturnValue({
-    state: { name: 'admin-features' },
-    params: {},
-  }),
-  useRouter: vi.fn().mockReturnValue({
-    stateService: {
-      go: vi.fn(),
-    },
-  }),
-}));
+vi.mock('@uirouter/react', async (importOriginal) => {
+  const mod = await importOriginal<typeof import('@uirouter/react')>();
+  return {
+    ...mod,
+    useCurrentStateAndParams: vi.fn().mockReturnValue({
+      state: { name: 'admin-features' },
+      params: {},
+    }),
+    useRouter: vi.fn().mockReturnValue({
+      stateService: {
+        go: vi.fn(),
+      },
+    }),
+  };
+});
 vi.mock('@waldur/features/FeaturesDescription', () => ({
   FeaturesDescription: [
     {

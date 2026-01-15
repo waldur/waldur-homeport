@@ -190,13 +190,16 @@ function throttle(timer: number | undefined, func: () => void, delay?: number) {
   }
 
   // Schedule a setTimeout after delay seconds
+  // Use default delay of 0 if not provided or if NaN to avoid NaN timeout
+  const timeoutDelay =
+    delay !== undefined && !isNaN(delay) && delay >= 0 ? delay : 0;
   timer = window.setTimeout(function () {
     func();
 
     // Once setTimeout function execution is finished, timerId = undefined so that in <br>
     // the next scroll event function execution can be scheduled by the setTimeout
     timer = undefined;
-  }, delay);
+  }, timeoutDelay);
 }
 
 function getElementChildren(
