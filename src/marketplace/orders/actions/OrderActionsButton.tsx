@@ -5,6 +5,7 @@ import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 import {
   BASIC_OFFERING_TYPE,
   SUPPORT_OFFERING_TYPE,
@@ -28,6 +29,13 @@ export const OrderActionsButton = ({
   loadData;
 }) => {
   const user = useSelector(getUser);
+
+  // Hide provider actions for site agent offerings when display is disabled
+  const hideProviderActions =
+    order.offering_type === SITE_AGENT_PLUGIN &&
+    !offering?.plugin_options
+      ?.enable_display_of_order_actions_for_service_provider;
+
   const showCancelButton = useMemo(() => {
     return (
       order.can_terminate &&
@@ -44,16 +52,23 @@ export const OrderActionsButton = ({
   }, [order, user]);
 
   const showMarkAsDoneButton = useMemo(() => {
+    // For SITE_AGENT_PLUGIN, respect the provider actions display setting
+    if (order.offering_type === SITE_AGENT_PLUGIN && hideProviderActions) {
+      return false;
+    }
     return (
       order.state === 'executing' &&
+      [SUPPORT_OFFERING_TYPE, BASIC_OFFERING_TYPE, SITE_AGENT_PLUGIN].includes(
+        order.offering_type,
+      ) &&
       hasPermission(user, {
         permission: PermissionEnum.APPROVE_ORDER,
         customerId: order.provider_uuid,
       })
     );
-  }, [order, user]);
+  }, [order, user, hideProviderActions]);
 
-  if (order.state === 'pending-provider') {
+  if (order.state === 'pending-provider' && !hideProviderActions) {
     return (
       <OrderProviderActions order={order} refetch={loadData} labeledDropdown />
     );

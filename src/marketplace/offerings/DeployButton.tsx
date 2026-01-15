@@ -24,7 +24,7 @@ export const DeployButton = ({
       <Link
         state={disabled ? '' : 'marketplace-offering-public'}
         params={{ offering_uuid: offering.uuid }}
-        className={`btn btn-primary w-100 ${disabled ? 'disabled' : ''}`}
+        className={`btn btn-lg btn-primary w-100 ${disabled ? 'disabled' : ''}`}
       >
         <span className="svg-icon svg-icon-2">
           <RocketLaunchIcon weight="bold" />

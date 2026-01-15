@@ -10,6 +10,8 @@ import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 import { getRabbitMQStats } from './api';
+import { RabbitMQClusterOverview } from './RabbitMQClusterOverview';
+import { RabbitMQDeleteAllButton } from './RabbitMQDeleteAllButton';
 import { RabbitMQOverviewCards } from './RabbitMQOverviewCards';
 import { RabbitMQPurgeAllButton } from './RabbitMQPurgeAllButton';
 import { RabbitMQVhostList } from './RabbitMQVhostList';
@@ -65,7 +67,12 @@ export const RabbitMQPage = () => {
   const panelActions = (
     <div className="d-flex align-items-center gap-4">
       <RefreshButton refetch={refetch} isLoading={isRefetching} />
-      {isStaff && <RabbitMQPurgeAllButton data={data} />}
+      {isStaff && (
+        <>
+          <RabbitMQPurgeAllButton data={data} />
+          <RabbitMQDeleteAllButton data={data} />
+        </>
+      )}
     </div>
   );
 
@@ -76,6 +83,7 @@ export const RabbitMQPage = () => {
       cardBordered
     >
       <RabbitMQOverviewCards data={data} />
+      <RabbitMQClusterOverview />
       <RabbitMQVhostList data={data} />
     </Panel>
   );

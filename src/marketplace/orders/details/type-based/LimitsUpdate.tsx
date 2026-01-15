@@ -34,6 +34,17 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
     if (requirements) {
       const newLimits = resourceLimits;
       const plan = offering.plans.find((p) => p.uuid === order.plan_uuid);
+      if (!plan) {
+        return {
+          periods: [],
+          components: [],
+          orderCanBeApproved: true,
+          totalPeriods: [],
+          changedTotalPeriods: [],
+          offering,
+          newLimits: resourceLimits,
+        };
+      }
       const { usages, limits: currentLimits } = requirements;
       return getLimitChangeData(
         plan,

@@ -12410,7 +12410,7 @@ wait-on@9.0.3:
     minimist "^1.2.8"
     rxjs "^7.8.2"
 
-waldur-js-client@^7.9.7-dev.6:
+waldur-js-client@^7.9.7-dev.7:
   version "7.9.7-dev.7"
   resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-7.9.7-dev.7.tgz#1f474184f5112d1d19235bce8f933340938e0b57"
   integrity sha512-ggxxTtXmOvYpLldjMewg6OIRVrfR1zMhklT4TtGPc+rSqnmTvh5A0Bz72lNS5cwVNCqWkcbho9A74j2Emr7yFQ==
