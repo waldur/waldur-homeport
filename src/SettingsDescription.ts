@@ -1088,12 +1088,6 @@ export const SettingsDescription = [
     description: translate('Onboarding settings'),
     items: [
       {
-        key: 'ONBOARDING_SUPPORTED_COUNTRIES',
-        description: translate('List of ISO 3166-1 alpha-2 country codes supported by this portal (e.g., EE, AT, SE). Used to restrict available countries in onboarding.'),
-        default: [],
-        type: 'country_list_field',
-      },
-      {
         key: 'ONBOARDING_VALIDATION_METHODS',
         description: translate('List of automatic validation methods available for this portal (e.g., ariregister, wirtschaftscompass, bolagsverket). Must match backend method names.'),
         default: [],
