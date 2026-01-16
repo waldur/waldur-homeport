@@ -1267,5 +1267,46 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('User Actions'),
+    items: [
+      {
+        key: 'USER_ACTIONS_ENABLED',
+        description: translate('Enable user actions notification system.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'USER_ACTIONS_PENDING_ORDER_HOURS',
+        description: translate('Hours before pending order becomes a user action item (1-168).'),
+        default: 24,
+        type: 'integer',
+      },
+      {
+        key: 'USER_ACTIONS_HIGH_URGENCY_NOTIFICATION',
+        description: translate('Send digest notification if user has high urgency actions.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'USER_ACTIONS_NOTIFICATION_THRESHOLD',
+        description: translate('Send digest notification if user has more than N actions.'),
+        default: 5,
+        type: 'integer',
+      },
+      {
+        key: 'USER_ACTIONS_EXECUTION_RETENTION_DAYS',
+        description: translate('Number of days to keep action execution history.'),
+        default: 90,
+        type: 'integer',
+      },
+      {
+        key: 'USER_ACTIONS_DEFAULT_EXPIRATION_REMINDERS',
+        description: translate('Default reminder schedule (days before expiration) for expiring resources. Can be overridden per offering via plugin_options.resource_expiration_reminders.'),
+        default: [30, 14, 7, 1],
+        type: 'list_field',
+      },
+    ],
+  },
 ];
 
