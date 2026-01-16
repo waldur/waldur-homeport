@@ -195,7 +195,8 @@ export function attachTransitions() {
         tryAcceptInvitation();
       }
 
-      // If it comes from the login page, check selected group invitation
+      // Fallback: Check for pending group invitation on initial page load
+      // Primary handling is in auth callback handlers (OauthLoginCompleted, AuthLoginCompleted)
       if (!transition.from().name) {
         tryJoinOrganization();
       }
