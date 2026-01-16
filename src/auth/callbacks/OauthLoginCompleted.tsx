@@ -6,6 +6,7 @@ import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { tryJoinOrganization } from '@waldur/invitations/tryJoinOrganization';
 
 import * as AuthService from '../AuthService';
 import { loginUser } from '../AuthService';
@@ -23,6 +24,7 @@ export const OauthLoginCompleted: FunctionComponent = () => {
       try {
         const token = decodeURIComponent(qs.token as string);
         await loginUser(token, provider);
+        tryJoinOrganization();
         AuthService.redirectOnSuccess();
       } catch (e) {
         setError(e.data?.detail || translate('Unknown error'));

@@ -3,6 +3,7 @@ import { FunctionComponent, useEffect } from 'react';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { tryJoinOrganization } from '@waldur/invitations/tryJoinOrganization';
 
 import { loginUser } from '../AuthService';
 
@@ -10,9 +11,10 @@ export const AuthLoginCompleted: FunctionComponent = () => {
   const router = useRouter();
   const { params } = useCurrentStateAndParams();
   useEffect(() => {
-    loginUser(params.token, params.method).then(() =>
-      router.stateService.go('profile.details'),
-    );
+    loginUser(params.token, params.method).then(() => {
+      tryJoinOrganization();
+      router.stateService.go('profile.details');
+    });
   }, [router, params]);
 
   return (
