@@ -13,6 +13,7 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { RolePopover } from './RolePopover';
+import { UserAffiliationsDropdownActions } from './UserAffiliationsDropdownActions';
 import { UserAffiliationsFilter } from './UserAffiliationsFilter';
 
 interface UserAffiliationsListProps {
@@ -131,6 +132,7 @@ export const UserAffiliationsList: FunctionComponent<
       verboseName={translate('affiliations')}
       title={translate('Roles and permissions')}
       filters={<UserAffiliationsFilter />}
+      tableActions={<UserAffiliationsDropdownActions />}
       initialPageSize={10}
       hasActionBar={hasActionBar}
     />

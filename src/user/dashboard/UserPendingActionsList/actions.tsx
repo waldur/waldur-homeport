@@ -1,3 +1,4 @@
+import { ClipboardTextIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useDispatch } from 'react-redux';
 import { UserAction, userActionsExecuteAction } from 'waldur-js-client';
@@ -9,7 +10,12 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { SilenceAction } from './SilenceAction';
-import { CorrectiveAction, ExtendedUserAction } from './types';
+import {
+  ActionCategory,
+  CorrectiveAction,
+  ExtendedUserAction,
+  UserPendingActionType,
+} from './types';
 import { UnsilenceAction } from './UnsilenceAction';
 import { ACTION_CATEGORY_CONFIG } from './utils';
 
@@ -19,6 +25,12 @@ const RenewAllocationDialog = lazyComponent(() =>
       default: m.RenewAllocationDialog,
     }),
   ),
+);
+
+const PendingOrderDetailsDialog = lazyComponent(() =>
+  import('./PendingOrderDetailsDialog').then((m) => ({
+    default: m.PendingOrderDetailsDialog,
+  })),
 );
 
 // Create action handler for corrective actions
@@ -101,29 +113,128 @@ const createDynamicAction = (
   );
 };
 
+export interface PrimaryActionInfo {
+  label: string;
+  handler: () => void;
+  icon: React.ComponentType<any>;
+  variant: string;
+}
+
+// Find the best primary action based on action type
+const findPrimaryAction = (
+  actionType: string,
+  correctiveActions: CorrectiveAction[],
+): CorrectiveAction | null => {
+  if (!correctiveActions || correctiveActions.length === 0) {
+    return null;
+  }
+
+  // For expiring resources, prefer "extend" category (Renew Resource)
+  if (actionType === UserPendingActionType.EXPIRING_RESOURCE) {
+    const extendAction = correctiveActions.find(
+      (a) => a.category === ActionCategory.EXTEND,
+    );
+    if (extendAction) return extendAction;
+  }
+
+  // For pending orders, we handle it separately with a Review dialog
+  // So we don't select a primary corrective action here
+  if (actionType === UserPendingActionType.PENDING_ORDER) {
+    return null;
+  }
+
+  // Fallback: first non-view action, or first action
+  const nonViewAction = correctiveActions.find(
+    (a) => a.category !== ActionCategory.VIEW,
+  );
+  return nonViewAction || correctiveActions[0];
+};
+
 export const usePendingActionActions = (
   row: UserAction,
   refetch?: () => void,
-) => {
+): {
+  primaryAction: PrimaryActionInfo | null;
+  remainingActions: Array<() => JSX.Element>;
+} => {
   const router = useRouter();
   const dispatch = useDispatch();
-  const actions = [];
 
-  // Add corrective actions from backend
-  if (row.corrective_actions && Array.isArray(row.corrective_actions)) {
-    row.corrective_actions.forEach((action) => {
-      actions.push(createDynamicAction(action, row, refetch, router, dispatch));
-    });
+  const correctiveActions = (row.corrective_actions ||
+    []) as CorrectiveAction[];
+  const extendedRow = row as unknown as ExtendedUserAction;
+
+  // Build primary action info based on action type
+  let primaryAction: PrimaryActionInfo | null = null;
+  let usedCorrectiveAction: CorrectiveAction | null = null;
+
+  // Special handling for pending orders - show Review button
+  if (row.action_type === UserPendingActionType.PENDING_ORDER) {
+    primaryAction = {
+      label: translate('Review'),
+      handler: () => {
+        dispatch(
+          openModalDialog(PendingOrderDetailsDialog, {
+            size: 'lg',
+            resolve: {
+              row: extendedRow,
+              refetch,
+            },
+          }),
+        );
+      },
+      icon: ClipboardTextIcon,
+      variant: 'warning',
+    };
+  } else {
+    // For other action types, find the best primary action from corrective actions
+    usedCorrectiveAction = findPrimaryAction(
+      row.action_type,
+      correctiveActions,
+    );
+
+    if (usedCorrectiveAction) {
+      const config =
+        ACTION_CATEGORY_CONFIG[
+          usedCorrectiveAction.category as keyof typeof ACTION_CATEGORY_CONFIG
+        ] || ACTION_CATEGORY_CONFIG.view;
+
+      primaryAction = {
+        label: usedCorrectiveAction.label,
+        handler: createActionHandler(
+          usedCorrectiveAction,
+          row,
+          refetch,
+          router,
+          dispatch,
+        ),
+        icon: config.icon,
+        variant: config.variant,
+      };
+    }
   }
+
+  // Build remaining actions array (all corrective actions not used as primary)
+  const remainingActions: Array<() => JSX.Element> = [];
+
+  correctiveActions.forEach((action) => {
+    // Skip the action used as primary (if any)
+    if (usedCorrectiveAction && action.label === usedCorrectiveAction.label) {
+      return;
+    }
+    remainingActions.push(
+      createDynamicAction(action, row, refetch, router, dispatch),
+    );
+  });
 
   // Add conditional silence/unsilence action
   if (row.is_effectively_silenced) {
-    // Show unmute action for silenced actions
-    actions.push(() => <UnsilenceAction row={row} refetch={refetch} />);
+    remainingActions.push(() => (
+      <UnsilenceAction row={row} refetch={refetch} />
+    ));
   } else {
-    // Show mute action for non-silenced actions
-    actions.push(() => <SilenceAction row={row} refetch={refetch} />);
+    remainingActions.push(() => <SilenceAction row={row} refetch={refetch} />);
   }
 
-  return actions;
+  return { primaryAction, remainingActions };
 };

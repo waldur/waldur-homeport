@@ -9,6 +9,8 @@ export const invitationTypeOptions = [
   {
     label: translate('Public'),
     value: 'public',
-    description: translate('Anonymous users can list invitation links'),
+    description: translate(
+      'Anonymous users can list invitation links. Only available for staff users.',
+    ),
   },
 ];

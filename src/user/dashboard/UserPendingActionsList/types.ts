@@ -4,8 +4,13 @@ export interface OwnProps {
   user: User;
 }
 
+export type UrgencyLevel = 'high' | 'medium' | 'low';
+
 export interface PendingActionsFilter {
   include_silenced?: boolean;
+  action_type?: string;
+  urgency?: UrgencyLevel;
+  overdue?: boolean;
 }
 
 // Based on ACTION_CATEGORY_CONFIG keys

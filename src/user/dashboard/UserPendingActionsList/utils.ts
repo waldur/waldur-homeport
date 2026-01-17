@@ -12,9 +12,24 @@ import {
   ChartBarIcon,
 } from '@phosphor-icons/react';
 
+import { translate } from '@waldur/i18n';
+
 import { ExpiringResourceMessage } from './ExpiringResourceMessage';
 import { OrderPendingApprovalMessage } from './OrderPendingApprovalMessage';
 import { ActionCategory, UserPendingActionType } from './types';
+
+export const getActionTypeLabel = (actionType: string): string => {
+  switch (actionType) {
+    case UserPendingActionType.EXPIRING_RESOURCE:
+      return translate('Resource expiring');
+    case UserPendingActionType.PENDING_ORDER:
+      return translate('Pending approval');
+    default:
+      return actionType
+        ? actionType.replace(/_/g, ' ').replace(/\b\w/g, (c) => c.toUpperCase())
+        : translate('Action');
+  }
+};
 
 export const ACTION_CATEGORY_CONFIG = {
   [ActionCategory.VIEW]: { icon: EyeIcon, variant: 'text-primary' },

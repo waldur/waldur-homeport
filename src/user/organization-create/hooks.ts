@@ -93,7 +93,7 @@ export const useAutoValidation = (getChecklistData: () => Promise<any>) => {
           runValidationBody.last_name = formData.temp_last_name;
           runValidationBody.birth_date = formData.temp_birth_date;
         } else if (formData.temp_person_identifier) {
-          runValidationBody.person_identifier = formData.temp_person_identifier;
+          runValidationBody.civil_number = formData.temp_person_identifier;
         }
 
         const validationResponse = await onboardingVerificationsRunValidation({

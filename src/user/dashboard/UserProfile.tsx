@@ -17,8 +17,6 @@ import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { formatUserIsActive } from '../support/utils';
 
-import { UserProfileActions } from './UserProfileActions';
-
 export const UserProfile = ({
   user,
   className,
@@ -35,7 +33,6 @@ export const UserProfile = ({
     <PublicDashboardHero
       hideQuickSection
       logo={user.image}
-      actions={<UserProfileActions />}
       logoAlt={abbreviation}
       logoCircle
       cardBordered
