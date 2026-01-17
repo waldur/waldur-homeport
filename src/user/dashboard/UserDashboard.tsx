@@ -7,8 +7,9 @@ import {
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
+import { ENV } from '@waldur/core/config';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures, UserFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { router } from '@waldur/router';
@@ -23,11 +24,11 @@ import { UserPendingActionsList } from './UserPendingActionsList';
 export const UserDashboard: FC = () => {
   const user = useUser();
   const [invitationsCount, setInvitationsCount] = useState<number>(0);
-  const [isLoadingInvitations, setIsLoadingInvitations] =
+  const [_isLoadingInvitations, setIsLoadingInvitations] =
     useState<boolean>(true);
   const [escalatedVerificationsCount, setEscalatedVerificationsCount] =
     useState<number>(0);
-  const [isLoadingVerifications, setIsLoadingVerifications] =
+  const [_isLoadingVerifications, setIsLoadingVerifications] =
     useState<boolean>(true);
 
   const showOnboardingWidgets = isFeatureVisible(
@@ -104,56 +105,46 @@ export const UserDashboard: FC = () => {
 
   return (
     <>
-      {showDashboardWidgets && (
-        <Row className="mb-5">
-          <Col md={4}>
-            <DashboardCard
-              title={translate('Active invitations')}
-              message={
-                isLoadingInvitations
-                  ? translate('Loading...')
-                  : hasActiveInvitations
-                    ? translate(
-                        'See pending invites sent to your email {email} ({count})',
-                        { email: user.email, count: invitationsCount },
-                      )
-                    : translate('No active invitations at the moment')
-              }
-              icon={<SignInIcon size={32} color="white" weight="bold" />}
-              isLoading={isLoadingInvitations}
-              hasItems={hasActiveInvitations}
-              backgroundColor="bg-success"
-              onClick={scrollToActiveInvitations}
-            />
-          </Col>
-          {showOnboardingWidgets && (
-            <Col md={4}>
-              <DashboardCard
-                title={translate('Pending onboarding applications')}
-                message={
-                  isLoadingVerifications
-                    ? translate('Loading...')
-                    : hasEscalatedVerifications
-                      ? translate(
-                          'You have {count} pending organization onboarding application(s)',
-                          { count: escalatedVerificationsCount },
-                        )
-                      : translate(
-                          'No pending onboarding applications at the moment',
-                        )
-                }
-                icon={<BuildingsIcon size={32} color="white" weight="bold" />}
-                isLoading={isLoadingVerifications}
-                hasItems={hasEscalatedVerifications}
-                backgroundColor="bg-warning"
-                onClick={goToOnboardingApplications}
-              />
-            </Col>
-          )}
-        </Row>
-      )}
+      {showDashboardWidgets &&
+        (hasActiveInvitations ||
+          (showOnboardingWidgets && hasEscalatedVerifications)) && (
+          <Row className="mb-5">
+            {hasActiveInvitations && (
+              <Col md={4}>
+                <DashboardCard
+                  title={translate('Active invitations')}
+                  message={translate(
+                    'See pending invites sent to your email {email} ({count})',
+                    { email: user.email, count: invitationsCount },
+                  )}
+                  icon={<SignInIcon size={32} color="white" weight="bold" />}
+                  isLoading={false}
+                  hasItems={true}
+                  backgroundColor="bg-success"
+                  onClick={scrollToActiveInvitations}
+                />
+              </Col>
+            )}
+            {showOnboardingWidgets && hasEscalatedVerifications && (
+              <Col md={4}>
+                <DashboardCard
+                  title={translate('Pending onboarding applications')}
+                  message={translate(
+                    'You have {count} pending organization onboarding application(s)',
+                    { count: escalatedVerificationsCount },
+                  )}
+                  icon={<BuildingsIcon size={32} color="white" weight="bold" />}
+                  isLoading={false}
+                  hasItems={true}
+                  backgroundColor="bg-warning"
+                  onClick={goToOnboardingApplications}
+                />
+              </Col>
+            )}
+          </Row>
+        )}
 
-      {isFeatureVisible(UserFeatures.pending_user_actions) && (
+      {ENV.plugins?.WALDUR_CORE?.USER_ACTIONS_ENABLED && (
         <div className="mb-5">
           <UserPendingActionsList user={user} />
         </div>

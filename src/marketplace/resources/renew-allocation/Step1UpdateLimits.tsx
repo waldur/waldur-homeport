@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo } from 'react';
-import { Tab, Tabs } from 'react-bootstrap';
+import { Card, Tab, Tabs } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -12,6 +13,8 @@ import {
   WizardFinalForm,
   WizardFinalFormStepProps,
 } from '@waldur/form/WizardFinalForm';
+import { translate } from '@waldur/i18n';
+import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
 
 import { ChangeLimitsComponent } from '../change-limits/ChangeLimitsComponent';
 import { getLimitChangeData, loadData } from '../change-limits/utils';
@@ -25,6 +28,97 @@ interface OwnProps extends WizardFinalFormStepProps {
 const getUuid = (resource) =>
   resource.marketplace_resource_uuid || resource.uuid;
 
+// Component to display one-time component pricing when no limit components exist
+const OneTimeComponentsSummary: FC<{
+  data: Awaited<ReturnType<typeof loadData>>;
+}> = ({ data }) => {
+  const { offering, plan } = data;
+  const shouldConcealPrices = isFeatureVisible(
+    MarketplaceFeatures.conceal_prices,
+  );
+
+  // Get one-time components from the offering
+  const oneTimeComponents = useMemo(() => {
+    const components = filterOfferingComponents(offering);
+    return components.filter(
+      (c) => c.billing_type === 'one' || c.billing_type === 'few',
+    );
+  }, [offering]);
+
+  if (oneTimeComponents.length === 0) {
+    return (
+      <div className="text-muted">
+        {translate(
+          'This offering has no adjustable limits. Continue to extend the allocation period.',
+        )}
+      </div>
+    );
+  }
+
+  return (
+    <div>
+      {plan ? (
+        <p>
+          <strong>{translate('Current plan')}</strong>: {plan.name}
+        </p>
+      ) : (
+        <p>{translate('Resource does not have any plan.')}</p>
+      )}
+      <Card className="card-table card-bordered">
+        <Card.Body className="p-0">
+          <div className="table-responsive">
+            <table className="table table-row-bordered align-middle mb-0">
+              <thead>
+                <tr>
+                  <th>{translate('Component')}</th>
+                  <th>{translate('Type')}</th>
+                  {!shouldConcealPrices && (
+                    <th className="text-end">{translate('Unit price')}</th>
+                  )}
+                </tr>
+              </thead>
+              <tbody>
+                {oneTimeComponents.map((component) => {
+                  const price = plan?.prices?.[component.type] || 0;
+                  return (
+                    <tr key={component.type}>
+                      <td>
+                        <strong>{component.name}</strong>
+                        {component.description && (
+                          <div className="text-muted small">
+                            {component.description}
+                          </div>
+                        )}
+                      </td>
+                      <td>
+                        {component.is_prepaid
+                          ? translate('Prepaid (per month)')
+                          : translate('One-time')}
+                      </td>
+                      {!shouldConcealPrices && (
+                        <td className="text-end">
+                          {defaultCurrency(price)}
+                          {component.measured_unit &&
+                            ` / ${component.measured_unit}`}
+                        </td>
+                      )}
+                    </tr>
+                  );
+                })}
+              </tbody>
+            </table>
+          </div>
+        </Card.Body>
+      </Card>
+      <p className="text-muted mt-3">
+        {translate(
+          'The renewal cost will be calculated based on the extension period selected in the next step.',
+        )}
+      </p>
+    </div>
+  );
+};
+
 const UpdateLimitsTable: FC<{
   resource: OwnProps['data']['resources'][0];
 }> = (props) => {
@@ -37,6 +131,13 @@ const UpdateLimitsTable: FC<{
     refetchOnWindowFocus: false,
     staleTime: 3 * 60 * 1000,
   });
+
+  // Check if offering has any limit-type components
+  const hasLimitComponents = useMemo(() => {
+    if (!data?.offering) return true; // Assume yes while loading
+    const components = filterOfferingComponents(data.offering);
+    return components.some((c) => c.billing_type === 'limit');
+  }, [data?.offering]);
 
   // Sync parsed limits (e.g., MB→GB) to form when data loads
   useEffect(() => {
@@ -74,11 +175,20 @@ const UpdateLimitsTable: FC<{
     };
   }, [data, values]);
 
-  return isLoading ? (
-    <LoadingSpinner />
-  ) : error ? (
-    <LoadingErred loadData={refetch} />
-  ) : (
+  if (isLoading) {
+    return <LoadingSpinner />;
+  }
+
+  if (error) {
+    return <LoadingErred loadData={refetch} />;
+  }
+
+  // Show one-time components summary if no limit components exist
+  if (!hasLimitComponents) {
+    return <OneTimeComponentsSummary data={data} />;
+  }
+
+  return (
     <ChangeLimitsComponent
       plan={data.plan}
       periods={tableData.periods}

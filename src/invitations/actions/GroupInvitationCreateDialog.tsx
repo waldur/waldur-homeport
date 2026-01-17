@@ -15,7 +15,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Role } from '@waldur/permissions/types';
 import { useNotify } from '@waldur/store/hooks';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, isStaff } from '@waldur/workspace/selectors';
 
 import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';
 import { AutoCreateProjectGroup } from './AutoCreateProjectGroup';
@@ -47,7 +47,16 @@ export const GroupInvitationCreateDialog = ({
 }: OwnProps) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const customer = useSelector(getCustomer);
+  const isStaffUser = useSelector(isStaff);
   const { loading } = useCustomerProjects();
+
+  const typeOptions = useMemo(
+    () =>
+      isStaffUser
+        ? invitationTypeOptions
+        : invitationTypeOptions.filter((option) => option.value !== 'public'),
+    [isStaffUser],
+  );
 
   const [invitation, setInvitation] = useState(null);
 
@@ -133,7 +142,7 @@ export const GroupInvitationCreateDialog = ({
                     validate={required}
                     render={({ input }) => (
                       <AwesomeRadioButton
-                        choices={invitationTypeOptions}
+                        choices={typeOptions}
                         disabled={fieldsDisabled}
                         input={input as any}
                       />
