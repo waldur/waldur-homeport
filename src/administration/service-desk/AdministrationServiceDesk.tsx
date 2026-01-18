@@ -10,6 +10,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import FormTable from '@waldur/form/FormTable';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { hasSupport } from '@waldur/issues/hooks';
 import { openModalDialog } from '@waldur/modal/actions';
 import { SettingsDescription } from '@waldur/SettingsDescription';
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -120,7 +121,7 @@ export const AdministrationServiceDesk = () => {
         </Card.Body>
       </Card>
 
-      <IssueStatusList />
+      {hasSupport() && <IssueStatusList />}
     </>
   ) : null;
 };
