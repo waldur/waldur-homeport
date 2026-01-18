@@ -129,9 +129,7 @@ export const IssueDetailsTab = ({
         {isStaffOrSupport && (
           <p className="mb-0 text-muted">
             <small>
-              {translate(
-                'Staff info: No active RequestTypes found. Use the Atlassian Settings Discovery wizard to configure and activate request types.',
-              )}
+              {translate('Staff info: No active RequestTypes found.')}
             </small>
           </p>
         )}
