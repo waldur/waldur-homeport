@@ -309,3 +309,22 @@ export const decodeFileName = (fileName: string) => {
   // Pattern: underscore followed by 7 alphanumeric characters before the extension
   return decodeURIComponent(name.replace(/_[a-zA-Z0-9]{7}\./, '.'));
 };
+
+/**
+ * Generates a random UUID v4.
+ * Uses crypto.randomUUID() when available, falls back to a polyfill for older browsers.
+ */
+export const randomUUID = (): string => {
+  if (
+    typeof crypto !== 'undefined' &&
+    typeof crypto.randomUUID === 'function'
+  ) {
+    return crypto.randomUUID();
+  }
+  // Fallback for older browsers (e.g., Chrome < 92)
+  return 'xxxxxxxx-xxxx-4xxx-yxxx-xxxxxxxxxxxx'.replace(/[xy]/g, (c) => {
+    const r = (Math.random() * 16) | 0;
+    const v = c === 'x' ? r : (r & 0x3) | 0x8;
+    return v.toString(16);
+  });
+};

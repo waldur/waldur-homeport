@@ -4,6 +4,7 @@ import {
   ThreadMessageLike,
 } from '@assistant-ui/react';
 
+import { randomUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 interface CreateThreadListAdapterParams {
@@ -76,7 +77,7 @@ export const createThreadListAdapter = ({
   ),
 
   onSwitchToNewThread: () => {
-    const newId = crypto.randomUUID();
+    const newId = randomUUID();
 
     // Remove current thread from if it has no messages
     deleteEmptyThread(threads, setThreads);
@@ -118,7 +119,7 @@ export const createThreadListAdapter = ({
       if (regularThreads.length > 0) {
         setCurrentThreadId(regularThreads[0].id);
       } else {
-        const newId = crypto.randomUUID();
+        const newId = randomUUID();
 
         setThreads((prev) => {
           const next = new Map(prev);

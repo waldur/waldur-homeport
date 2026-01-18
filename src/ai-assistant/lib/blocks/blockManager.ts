@@ -1,4 +1,5 @@
 import { UIBlock } from '@waldur/ai-assistant/lib/types';
+import { randomUUID } from '@waldur/core/utils';
 
 /**
  * updateBlocks - Manages incremental block state updates during streaming
@@ -27,7 +28,7 @@ export function updateBlocks(
     return [
       ...existingBlocks,
       {
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         key: part.t, // Use the component key directly (e.g., 'mermaid', 'code')
         content: '',
         tag: part.t,
@@ -69,7 +70,7 @@ export function updateBlocks(
     return [
       ...existingBlocks,
       {
-        id: crypto.randomUUID(),
+        id: randomUUID(),
         key: part.k,
         content: part.c,
         tag: part.t,
