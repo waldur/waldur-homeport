@@ -140,6 +140,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-pubsub-health',
+    url: 'pubsub-health/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./pubsub/PubSubHealthPage').then((module) => ({
+        default: module.PubSubHealthPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('PubSub health'),
+      permissions: [isStaff],
+    },
+  },
+
+  {
     name: 'admin-site-agents',
     url: 'site-agents/?tab',
     parent: 'admin-system-management',
