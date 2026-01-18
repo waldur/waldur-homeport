@@ -1,6 +1,8 @@
 import { ThreadMessageLike } from '@assistant-ui/react';
 import React, { createContext, ReactNode, useContext, useState } from 'react';
 
+import { randomUUID } from '@waldur/core/utils';
+
 const ThreadContext = createContext<{
   currentThreadId: string;
   setCurrentThreadId: (id: string) => void;
@@ -17,7 +19,7 @@ const ThreadContext = createContext<{
 
 export function ThreadProvider({ children }: { children: ReactNode }) {
   // Create initial thread with unique ID
-  const [threadID] = useState<string>(() => crypto.randomUUID());
+  const [threadID] = useState<string>(() => randomUUID());
   // Store ALL threads in a Map: threadId -> messages[]
   const [threads, setThreads] = useState<Map<string, ThreadMessageLike[]>>(
     () => new Map([[threadID, []]]),

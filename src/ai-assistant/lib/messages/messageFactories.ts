@@ -1,7 +1,9 @@
 import { ThreadMessageLike } from '@assistant-ui/react';
 
+import { randomUUID } from '@waldur/core/utils';
+
 export const createUserMessage = (text: string): ThreadMessageLike => ({
-  id: crypto.randomUUID(),
+  id: randomUUID(),
   role: 'user',
   content: [{ type: 'text', text }],
   createdAt: new Date(),
@@ -9,7 +11,7 @@ export const createUserMessage = (text: string): ThreadMessageLike => ({
 });
 
 export const createAssistantPlaceholder = (): ThreadMessageLike => ({
-  id: crypto.randomUUID(),
+  id: randomUUID(),
   role: 'assistant',
   content: [{ type: 'text', text: '' }],
   createdAt: new Date(),
