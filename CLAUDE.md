@@ -56,6 +56,17 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
 
+## Sentry Issue Workflow
+
+When given a Sentry URL:
+
+1. **Fetch** - Use `mcp__sentry__get_issue_details` with the URL
+2. **Analyze** - Identify root cause from stack trace and browser/environment info
+3. **Fix** - Implement the fix
+4. **Branch** - Create branch: `fix/sentry-{ISSUE-ID}` (e.g., `fix/sentry-PUHURI-PORTALS-E5C`)
+5. **Commit** - Use `[{ISSUE-ID}]` prefix and include `Fixes {ISSUE-ID}` in message body
+6. **Push** - Push with `-u origin` to set upstream
+
 ## Task-Specific Docs
 
 These are NOT always-loaded - reference when needed:
