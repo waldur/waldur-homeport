@@ -34,22 +34,50 @@ export const OnboardingJustificationDetailsPage = () => {
     if (!uuid) return;
     setLoading(true);
     try {
-      const justificationResponse = await onboardingJustificationsRetrieve({
-        path: { uuid },
-      });
-      setJustification(justificationResponse.data);
-
-      if (justificationResponse.data.verification_uuid) {
-        const verificationResponse = await onboardingVerificationsRetrieve({
-          path: { uuid: justificationResponse.data.verification_uuid },
+      // Try to fetch as justification first
+      try {
+        const justificationResponse = await onboardingJustificationsRetrieve({
+          path: { uuid },
         });
-        setVerification(verificationResponse.data);
-      } else {
-        setVerification(null);
+        setJustification(justificationResponse.data);
+
+        if (justificationResponse.data.verification_uuid) {
+          const verificationResponse = await onboardingVerificationsRetrieve({
+            path: { uuid: justificationResponse.data.verification_uuid },
+          });
+          setVerification(verificationResponse.data);
+        } else {
+          setVerification(null);
+        }
+      } catch (justificationError: any) {
+        // If justification not found, try as verification UUID
+        if (
+          justificationError?.status === 404 ||
+          justificationError?.response?.status === 404
+        ) {
+          const verificationResponse = await onboardingVerificationsRetrieve({
+            path: { uuid },
+          });
+          setVerification(verificationResponse.data);
+          // Check if verification has justifications
+          if (
+            verificationResponse.data.justifications &&
+            verificationResponse.data.justifications.length > 0
+          ) {
+            setJustification(verificationResponse.data.justifications[0]);
+          } else {
+            setJustification(null);
+          }
+        } else {
+          throw justificationError;
+        }
       }
     } catch (error) {
       dispatch(
-        showErrorResponse(error, translate('Unable to load justification.')),
+        showErrorResponse(
+          error,
+          translate('Unable to load verification details.'),
+        ),
       );
     } finally {
       setLoading(false);

@@ -1,171 +1,199 @@
-import { CheckCircleIcon, InfoIcon, LockKeyIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useEffect, useState } from 'react';
+import { InfoIcon } from '@phosphor-icons/react';
+import {
+  FunctionComponent,
+  useCallback,
+  useEffect,
+  useMemo,
+  useState,
+} from 'react';
 import { Card } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { useDispatch, useSelector } from 'react-redux';
+import { change, Field, formValueSelector } from 'redux-form';
+import { BlankEnum, ValidationMethodEnum } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
-import { DateField } from '@waldur/form/DateField';
 import { FormGroup } from '@waldur/form/FormGroup';
-import { StringField } from '@waldur/form/StringField';
+import { SelectField } from '@waldur/form/SelectField';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { useUser } from '@waldur/workspace/hooks';
+import { useNotify } from '@waldur/store/hooks';
 
-import { getOnboardingCopy } from './constants';
+import { getValidationMethodInfo } from './constants';
+import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';
+import { fetchPersonIdentifierFields } from './utils';
 
-export const OrganizationCreateStep1: FunctionComponent<WizardFormStepProps> = (
-  props,
-) => {
-  const user = useUser();
-  const [verified, setVerified] = useState(false);
+interface OrganizationCreateStep1Props extends WizardFormStepProps {
+  onFieldConfigFetched?: (config: PersonIdentifierFieldConfig | null) => void;
+}
 
-  const supportedCountries =
-    ENV.plugins.WALDUR_CORE.ONBOARDING_SUPPORTED_COUNTRIES;
-  const primaryCountry = supportedCountries?.[0] || '';
-  const countryCopy = getOnboardingCopy(primaryCountry);
+export const OrganizationCreateStep1: FunctionComponent<
+  OrganizationCreateStep1Props
+> = (props) => {
+  const dispatch = useDispatch();
+  const { showError } = useNotify();
 
-  // ToDo: remove this after implementing getting user's identifier via auth methods
-  const isAustriaCountry = primaryCountry === 'AT';
-  const needsPersonIdentifier = !user?.civil_number;
-  const needsPersonalData =
-    isAustriaCountry &&
-    (!user?.first_name || !user?.last_name || !user?.birth_date);
-  const showIdentifierForm = needsPersonIdentifier || needsPersonalData;
+  const selector = formValueSelector(props.form);
+  const formValidationMethod = useSelector((state) =>
+    selector(state, 'validationMethod'),
+  );
 
-  // Initialize verified state based on user's civil_number or if form fields are present
+  const [validationMethod, setValidationMethod] = useState<
+    ValidationMethodEnum | BlankEnum
+  >(formValidationMethod || '');
+  const [fieldConfig, setFieldConfig] =
+    useState<PersonIdentifierFieldConfig | null>(null);
+  const [loading, setLoading] = useState(false);
+
+  const validationMethodOptions = useMemo(() => {
+    const methods = ENV.plugins.WALDUR_CORE.ONBOARDING_VALIDATION_METHODS || [];
+
+    // Map method names to user-friendly labels
+    const methodLabels = {
+      ariregister: translate('Estonian Business Register (Äriregister)'),
+      wirtschaftscompass: translate(
+        'Austrian Business Register (WirtschaftsCompass)',
+      ),
+      bolagsverket: translate(
+        'Swedish Companies Registration Office (Bolagsverket)',
+      ),
+      manual: translate('Manual verification'),
+    };
+
+    // Always include manual as the last option
+    const allMethods = [...methods, 'manual'];
+
+    return allMethods.map((method) => ({
+      value: method,
+      label: methodLabels[method] || method,
+    }));
+  }, []);
+
+  // Fetch person identifier fields when validation method changes
+  const fetchFields = useCallback(
+    async (method: ValidationMethodEnum | 'manual') => {
+      if (!method || method === 'manual') {
+        setFieldConfig(null);
+        if (props.onFieldConfigFetched) {
+          props.onFieldConfigFetched(null);
+        }
+        return;
+      }
+
+      setLoading(true);
+      try {
+        const config = await fetchPersonIdentifierFields(method);
+        if (config === null) {
+          showError(
+            translate(
+              'Person identifier fields are not configured for this validation method. Please contact administrators.',
+            ),
+          );
+        }
+        setFieldConfig(config);
+        if (props.onFieldConfigFetched) {
+          props.onFieldConfigFetched(config);
+        }
+      } catch {
+        showError(
+          translate(
+            'Failed to fetch person identifier fields. Please try again or contact administrators.',
+          ),
+        );
+        setFieldConfig(null);
+        if (props.onFieldConfigFetched) {
+          props.onFieldConfigFetched(null);
+        }
+      } finally {
+        setLoading(false);
+      }
+    },
+    [],
+  );
+
+  // Update form when validation method changes
   useEffect(() => {
-    if (user?.civil_number || !showIdentifierForm) {
-      setVerified(true);
-    }
-  }, [user?.civil_number, showIdentifierForm]);
+    dispatch(change(props.form, 'validationMethod', validationMethod));
+    dispatch(change(props.form, 'personIdentifierFieldConfig', fieldConfig));
+  }, [validationMethod, fieldConfig, dispatch, props.form]);
 
-  const handleVerify = () => {
-    // TODO: Implement actual TARA auth integration
-    // For now, simulate successful verification
-    setVerified(true);
-  };
+  // Sync with form state
+  useEffect(() => {
+    if (formValidationMethod && formValidationMethod !== validationMethod) {
+      setValidationMethod(formValidationMethod);
+    }
+  }, [formValidationMethod, validationMethod]);
+
+  // Fetch fields when validation method changes
+  useEffect(() => {
+    if (validationMethod && typeof validationMethod === 'string') {
+      fetchFields(validationMethod);
+    }
+  }, [validationMethod]);
 
   return (
     <WizardForm {...props}>
       <div className="d-flex flex-column gap-5">
-        <Card className="card-bordered">
-          <Card.Body>
-            <h5 className="mb-3">{countryCopy.title}</h5>
-            <p className="text-gray-700 mb-4">{countryCopy.description}</p>
+        <Card className="border-0 shadow-sm">
+          <Card.Body className="p-8">
+            <h4 className="mb-4">{translate('Select verification method')}</h4>
+            <p className="text-gray-700 mb-6">
+              {translate(
+                'Choose how you would like to verify your organization. Automatic verification provides instant results if your company is registered in the selected business register.',
+              )}
+            </p>
 
-            {!verified && (
-              <>
-                <Card className="card-bordered mb-4">
-                  <Card.Body className="d-flex gap-3">
-                    <div className="flex-shrink-0">
-                      <InfoIcon size={24} weight="duotone" />
-                    </div>
-                    <div className="flex-grow-1">
-                      <div className="fw-semibold text-gray-800 mb-1">
-                        {translate('Why do we need this?')}
+            <Field
+              name="validationMethod"
+              label={translate('Verification method')}
+              component={FormGroup}
+              required
+              validate={required}
+              description={translate(
+                'How would you like to verify your company?',
+              )}
+              simpleValue
+            >
+              <SelectField
+                options={validationMethodOptions}
+                placeholder={translate('Select a verification method')}
+                isClearable={false}
+              />
+            </Field>
+
+            {loading && (
+              <div className="mt-4">
+                <LoadingSpinner />
+                <p className="text-center text-muted mt-2">
+                  {translate('Loading required fields...')}
+                </p>
+              </div>
+            )}
+
+            {!loading &&
+              validationMethod &&
+              (() => {
+                const methodInfo = getValidationMethodInfo(validationMethod);
+
+                return (
+                  <Card className="card-bordered">
+                    <Card.Body className="d-flex gap-3">
+                      <div className="flex-shrink-0">
+                        <InfoIcon size={24} weight="duotone" />
                       </div>
-                      <div className="text-gray-700">{countryCopy.reason}</div>
-                    </div>
-                  </Card.Body>
-                </Card>
-
-                {/* ToDo: remove this workaround after implementing getting user's identifier via auth methods */}
-                {showIdentifierForm ? (
-                  <div className="mb-4">
-                    <h6 className="mb-3">
-                      {translate('Please provide your identification details')}
-                    </h6>
-
-                    {needsPersonalData ? (
-                      <>
-                        <Field
-                          name="temp_first_name"
-                          label={translate('First name')}
-                          component={FormGroup}
-                          required={true}
-                          validate={required}
-                        >
-                          <StringField />
-                        </Field>
-                        <Field
-                          name="temp_last_name"
-                          label={translate('Last name')}
-                          component={FormGroup}
-                          required={true}
-                          validate={required}
-                        >
-                          <StringField />
-                        </Field>
-                        <Field
-                          name="temp_birth_date"
-                          label={translate('Birth date')}
-                          component={FormGroup}
-                          required={true}
-                          validate={required}
-                        >
-                          <DateField />
-                        </Field>
-                      </>
-                    ) : needsPersonIdentifier ? (
-                      <Field
-                        name="temp_person_identifier"
-                        label={translate('Person identifier')}
-                        component={FormGroup}
-                        required={true}
-                        validate={required}
-                        description={translate(
-                          'Your personal identification number',
-                        )}
-                      >
-                        <StringField />
-                      </Field>
-                    ) : null}
-                  </div>
-                ) : (
-                  <>
-                    <div className="d-flex justify-content-start mb-4">
-                      <ActionButton
-                        variant="primary"
-                        action={handleVerify}
-                        className="px-8"
-                        iconNode={<LockKeyIcon size={20} weight="bold" />}
-                        title={translate('Verify Identity with TARA')}
-                      />
-                    </div>
-
-                    <p className="text-muted small mb-0">
-                      {countryCopy.authMethodsNote}
-                    </p>
-                  </>
-                )}
-              </>
-            )}
-            {verified && (
-              <Card className="card-bordered">
-                <Card.Body className="d-flex gap-3">
-                  <div className="flex-shrink-0">
-                    <CheckCircleIcon
-                      size={24}
-                      weight="duotone"
-                      className="text-success"
-                    />
-                  </div>
-                  <div className="flex-grow-1">
-                    <div className="fw-semibold text-gray-800 mb-1">
-                      {translate('Personal identity code received')}
-                      {user?.civil_number && `: ${user.civil_number}`}
-                    </div>
-                    <div className="text-gray-700">
-                      {translate(
-                        'This will be used to check your company representative rights.',
-                      )}
-                    </div>
-                  </div>
-                </Card.Body>
-              </Card>
-            )}
+                      <div className="flex-grow-1">
+                        <div className="fw-semibold text-gray-800 mb-1">
+                          {methodInfo.title}
+                        </div>
+                        <div className="text-gray-700">
+                          {methodInfo.description}
+                        </div>
+                      </div>
+                    </Card.Body>
+                  </Card>
+                );
+              })()}
           </Card.Body>
         </Card>
       </div>

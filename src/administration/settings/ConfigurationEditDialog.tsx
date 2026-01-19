@@ -8,6 +8,7 @@ import { ENV } from '@waldur/core/config';
 import { WarnCard } from '@waldur/core/WarnCard';
 import { SelectField, SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import { MonacoField } from '@waldur/form/MonacoField';
 import { StringField } from '@waldur/form/StringField';
 import { WideImageField } from '@waldur/form/WideImageField';
@@ -21,7 +22,6 @@ import { useNotify } from '@waldur/store/hooks';
 import {
   formatListFieldValue,
   getKeyTitle,
-  parseListFieldValue,
   SIDEBAR_STYLES,
   SIDEBAR_STYLE_PRIMARY,
 } from './utils';
@@ -105,15 +105,8 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
   const onSubmit = async (formData) => {
     try {
       const isImageField = item.type === 'image_field';
-      const isListField = item.type === 'list_field';
       const isFileRemoving = isImageField && formData.value === null;
       const isFileUpload = isImageField && formData.value instanceof File;
-
-      // Parse list_field values from comma-separated string to array
-      let processedValue = formData.value;
-      if (isListField && typeof formData.value === 'string') {
-        processedValue = parseListFieldValue(formData.value);
-      }
 
       if (isFileRemoving) {
         await overrideSettings({
@@ -124,12 +117,12 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
         const requestOptions = isFileUpload ? formDataOptions : {};
 
         await overrideSettings({
-          body: { [item.key]: processedValue ?? '' },
+          body: { [item.key]: formData.value ?? '' },
           ...requestOptions,
         });
       }
 
-      ENV.plugins.WALDUR_CORE[item.key] = processedValue;
+      ENV.plugins.WALDUR_CORE[item.key] = formData.value ?? '';
       showSuccess(translate('Configuration has been updated.'));
       closeDialog();
       location.reload();
@@ -239,9 +232,10 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                 />
               ) : item.type === 'list_field' ? (
                 <Field
-                  component={StringField as any}
+                  component={CommaSeparatedListField as any}
                   name="value"
                   placeholder={translate('Enter comma-separated values')}
+                  height={100}
                 />
               ) : (
                 <Field component={StringField as any} name="value" />

@@ -32,18 +32,10 @@ const UserOnboardingVerificationActions: FC<{ row; fetch }> = ({
   row,
   fetch,
 }) => {
-  const disabled = row.justifications.length === 0;
-
   return (
     <ActionsDropdown
       row={row}
       refetch={fetch}
-      disabled={disabled}
-      tooltip={
-        disabled
-          ? translate('No manual justification available to view details.')
-          : null
-      }
       actions={[UserOnboardingVerificationView]}
     />
   );

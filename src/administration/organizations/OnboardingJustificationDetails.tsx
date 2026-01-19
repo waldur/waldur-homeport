@@ -39,23 +39,29 @@ export const OnboardingJustificationDetails: FC<
     return <LoadingSpinner />;
   }
 
-  if (!justification) {
+  if (!justification && !verification) {
     return null;
   }
 
-  const isPending = justification.validation_decision === 'pending';
+  const isPending = justification?.validation_decision === 'pending';
   const canEditNotes = isPending && !readOnly;
-  const showActions = !readOnly && onApprove && onReject;
+  const showActions = !readOnly && onApprove && onReject && justification;
 
   return (
     <Form
       onSubmit={() => {}}
-      initialValues={{ staff_notes: justification.staff_notes || '' }}
+      initialValues={{ staff_notes: justification?.staff_notes || '' }}
       render={({ handleSubmit, values }) => (
         <form onSubmit={handleSubmit}>
           <div className="d-flex align-items-center justify-content-between mb-4">
             <div className="d-flex align-items-center gap-3">
-              <h1 className="mb-0 ml-2">{justification.legal_name}</h1>
+              <h1 className="mb-0 ml-2">
+                {justification
+                  ? `${justification.legal_name} (${justification.legal_person_identifier})`
+                  : verification
+                    ? `${verification.legal_name || (verification.verified_company_data as any)?.name || ''} (${verification.legal_person_identifier || ''})`
+                    : translate('Verification details')}
+              </h1>
             </div>
             {showActions && (
               <div className="d-flex gap-2">
@@ -131,7 +137,7 @@ export const OnboardingJustificationDetails: FC<
                   </>
                 )}
 
-              {justification.supporting_documentation &&
+              {justification?.supporting_documentation &&
                 justification.supporting_documentation.length > 0 && (
                   <>
                     <h4 className="fw-bold mb-3">
@@ -154,42 +160,47 @@ export const OnboardingJustificationDetails: FC<
                   </>
                 )}
 
-              {(justification.error_message ||
-                justification.error_traceback) && (
+              {justification &&
+                (justification.error_message ||
+                  justification.error_traceback) && (
+                  <>
+                    <h4 className="fw-bold mb-3">
+                      {translate('Automatic validation logs')}
+                    </h4>
+                    <Field
+                      label={translate('Error code')}
+                      value={justification.error_message}
+                    />
+                    <Field
+                      label={translate('Traceback')}
+                      value={justification.error_traceback}
+                    />
+                  </>
+                )}
+
+              {justification && (
                 <>
-                  <h4 className="fw-bold mb-3">
-                    {translate('Automatic validation logs')}
-                  </h4>
-                  <Field
-                    label={translate('Error code')}
-                    value={justification.error_message}
-                  />
-                  <Field
-                    label={translate('Traceback')}
-                    value={justification.error_traceback}
-                  />
+                  <hr className="my-4" />
+
+                  <h4 className="fw-bold mb-3">{translate('Notes')}</h4>
+                  <Row className="mb-3">
+                    <Col xs={12} md={6}>
+                      <FormField name="staff_notes">
+                        {({ input }) => (
+                          <BootstrapForm.Control
+                            {...input}
+                            as="textarea"
+                            rows={3}
+                            placeholder={translate('Enter a description...')}
+                            disabled={!canEditNotes}
+                            style={{ color: 'inherit' }}
+                          />
+                        )}
+                      </FormField>
+                    </Col>
+                  </Row>
                 </>
               )}
-
-              <hr className="my-4" />
-
-              <h4 className="fw-bold mb-3">{translate('Notes')}</h4>
-              <Row className="mb-3">
-                <Col xs={12} md={6}>
-                  <FormField name="staff_notes">
-                    {({ input }) => (
-                      <BootstrapForm.Control
-                        {...input}
-                        as="textarea"
-                        rows={3}
-                        placeholder={translate('Enter a description...')}
-                        disabled={!canEditNotes}
-                        style={{ color: 'inherit' }}
-                      />
-                    )}
-                  </FormField>
-                </Col>
-              </Row>
             </Card.Body>
           </Card>
         </form>

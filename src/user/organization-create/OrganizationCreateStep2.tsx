@@ -1,3 +1,4 @@
+import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -18,8 +19,14 @@ import { AttachmentUploading } from '@waldur/form/upload/types';
 import { UploadContainer } from '@waldur/form/upload/UploadContainer';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { ChecklistQuestionField } from './ChecklistQuestionField';
+import { getAuthMethodInfo } from './constants';
+import {
+  PersonIdentifierFieldConfig,
+  PersonIdentifierFieldsRenderer,
+} from './PersonIdentifierFieldsRenderer';
 import { QuestionWithMetadata } from './utils';
 
 interface OrganizationCreateStep2Props extends WizardFormStepProps {
@@ -27,7 +34,8 @@ interface OrganizationCreateStep2Props extends WizardFormStepProps {
     allQuestions: any[];
     customerQuestions: any[];
     intentQuestions: any[];
-    checklistUuid: string;
+    checklistCustomerUuid: string;
+    checklistIntentUuid: string;
   }>;
 }
 
@@ -35,15 +43,22 @@ export const OrganizationCreateStep2: FunctionComponent<
   OrganizationCreateStep2Props
 > = (props) => {
   const dispatch = useDispatch();
+  const user = useUser();
 
   const selector = formValueSelector(props.form);
-  const formAddMethod = useSelector((state) => selector(state, 'addMethod'));
+  const formValidationMethod = useSelector((state) =>
+    selector(state, 'validationMethod'),
+  );
+  const fieldConfig = useSelector((state) =>
+    selector(state, 'personIdentifierFieldConfig'),
+  ) as PersonIdentifierFieldConfig | null;
   const uploadedFiles =
     useSelector((state) => selector(state, 'uploadedFiles')) || [];
 
-  const [addMethod, setAddMethod] = useState<'auto' | 'manual'>(
-    formAddMethod || 'auto',
+  const [validationMethod, setValidationMethod] = useState<string>(
+    formValidationMethod || '',
   );
+  const isManual = validationMethod === 'manual';
   const [checklistQuestions, setChecklistQuestions] = useState<
     QuestionWithMetadata[]
   >([]);
@@ -51,14 +66,28 @@ export const OrganizationCreateStep2: FunctionComponent<
   const [checklistFetched, setChecklistFetched] = useState(false);
 
   useEffect(() => {
-    dispatch(change(props.form, 'addMethod', addMethod));
-  }, [addMethod, dispatch, props.form]);
-
-  useEffect(() => {
-    if (formAddMethod && formAddMethod !== addMethod) {
-      setAddMethod(formAddMethod);
+    if (formValidationMethod && formValidationMethod !== validationMethod) {
+      setValidationMethod(formValidationMethod);
     }
-  }, [formAddMethod]);
+  }, [formValidationMethod]);
+
+  // Check if user already has required fields based on validation method
+  const hasRequiredFields = () => {
+    if (!fieldConfig || !fieldConfig.person_identifier_fields || !user)
+      return false;
+
+    if (fieldConfig.person_identifier_fields.type === 'string') {
+      const fieldName = fieldConfig.person_identifier_fields.field;
+      return !!user[fieldName];
+    } else if (fieldConfig.person_identifier_fields.type === 'object') {
+      const requiredFields = Object.keys(
+        fieldConfig.person_identifier_fields.fields,
+      );
+      return requiredFields.every((fieldName) => !!user[fieldName]);
+    }
+
+    return false;
+  };
 
   const updateUploadedFiles = useCallback(
     (files: AttachmentUploading[]) => {
@@ -89,14 +118,50 @@ export const OrganizationCreateStep2: FunctionComponent<
     [uploadedFiles, updateUploadedFiles],
   );
 
+  // Render checklist questions in a responsive grid layout
+  const renderChecklistQuestions = () => {
+    if (loading) return <LoadingSpinner />;
+    if (checklistQuestions.length === 0) return null;
+
+    return (
+      <Row className="g-4 pt-4">
+        {checklistQuestions.map((question, index) => {
+          const isLastOdd =
+            checklistQuestions.length % 2 !== 0 &&
+            index === checklistQuestions.length - 1;
+          return (
+            <Col md={isLastOdd ? 12 : 6} key={question.uuid}>
+              <ChecklistQuestionField question={question} />
+            </Col>
+          );
+        })}
+      </Row>
+    );
+  };
+
+  // Reset checklist fetched flag when validation method changes
+  useEffect(() => {
+    setChecklistFetched(false);
+  }, [isManual]);
+
   useEffect(() => {
     if (checklistFetched) return;
 
     const fetchChecklist = async () => {
+      if (!props.getChecklistData) {
+        return;
+      }
+
       setLoading(true);
       try {
         const data = await props.getChecklistData();
-        setChecklistQuestions(data.customerQuestions);
+        // For manual validation: show customer questions
+        // For automatic validation: show NO questions in Step 2 (intent questions in Step 4)
+        if (isManual) {
+          setChecklistQuestions(data.customerQuestions);
+        } else {
+          setChecklistQuestions([]);
+        }
         setChecklistFetched(true);
       } catch {
         setChecklistQuestions([]);
@@ -106,60 +171,101 @@ export const OrganizationCreateStep2: FunctionComponent<
     };
 
     fetchChecklist();
-  }, [checklistFetched, props.getChecklistData]);
+  }, [checklistFetched, isManual]);
 
   return (
     <WizardForm {...props}>
       <div className="d-flex flex-column gap-5">
         <Card className="border-0 shadow-sm">
           <Card.Body className="p-8">
-            <h5 className="mb-6 fw-semibold">
-              {translate('How would you like to add your company?')}
-            </h5>
+            {!isManual &&
+              (() => {
+                const methodInfo = getAuthMethodInfo(validationMethod);
 
-            <div className="d-flex flex-row gap-4 mb-6">
-              <BootstrapForm.Check
-                type="radio"
-                id="add-auto"
-                name="addMethod"
-                checked={addMethod === 'auto'}
-                onChange={() => setAddMethod('auto')}
-                label={
-                  <div className="ms-2">
-                    <div className="fw-semibold text-gray-800">
-                      {translate('Search in registry')}
-                    </div>
-                    <div className="text-muted small mt-0">
-                      {translate(
-                        'Find your company in the e-Business Register',
-                      )}
-                    </div>
-                  </div>
-                }
-                className="form-check-custom"
-              />
-              <BootstrapForm.Check
-                type="radio"
-                id="add-manual"
-                name="addMethod"
-                checked={addMethod === 'manual'}
-                onChange={() => setAddMethod('manual')}
-                label={
-                  <div className="ms-2">
-                    <div className="fw-semibold text-gray-800">
-                      {translate('Add manually')}
-                    </div>
-                    <div className="text-muted small mt-0">
-                      {translate('Enter company details manually')}
-                    </div>
-                  </div>
-                }
-                className="form-check-custom"
-              />
-            </div>
+                return (
+                  <>
+                    <p className="mb-3">{methodInfo.title}</p>
 
-            {addMethod === 'manual' ? (
-              <div className="pt-6">
+                    {hasRequiredFields() ? (
+                      <Card className="card-bordered mb-6">
+                        <Card.Body className="d-flex gap-3">
+                          <div className="flex-shrink-0">
+                            <CheckCircleIcon
+                              size={24}
+                              weight="duotone"
+                              className="text-success"
+                            />
+                          </div>
+                          <div className="flex-grow-1">
+                            <div className="fw-semibold text-gray-800 mb-1">
+                              {translate('Personal identity received')}
+                              {user?.civil_number && `: ${user.civil_number}`}
+                            </div>
+                            <div className="text-gray-700">
+                              {translate(
+                                'This will be used to check your company representative rights.',
+                              )}
+                            </div>
+                          </div>
+                        </Card.Body>
+                      </Card>
+                    ) : (
+                      <>
+                        <Card className="card-bordered mb-4">
+                          <Card.Body className="d-flex gap-3">
+                            <div className="flex-shrink-0">
+                              <InfoIcon size={24} weight="duotone" />
+                            </div>
+                            <div className="flex-grow-1">
+                              <div className="fw-semibold text-gray-800 mb-1">
+                                {translate('Why do we need this?')}
+                              </div>
+                              <div className="text-gray-700">
+                                {methodInfo.description}
+                              </div>
+                            </div>
+                          </Card.Body>
+                        </Card>
+
+                        {fieldConfig && (
+                          <PersonIdentifierFieldsRenderer
+                            fieldConfig={fieldConfig}
+                            loading={false}
+                          />
+                        )}
+                      </>
+                    )}
+
+                    {/* Registration code field for automatic validation */}
+                    <div className="mt-6">
+                      <Field
+                        name="registration_code"
+                        label={translate('Company registration code')}
+                        placeholder={translate('12345678')}
+                        component={FormGroup}
+                        required
+                        validate={required}
+                        description={translate(
+                          'The official registration number of your company',
+                        )}
+                      >
+                        <StringField />
+                      </Field>
+                    </div>
+
+                    {renderChecklistQuestions()}
+                  </>
+                );
+              })()}
+
+            {isManual && (
+              <div className="pt-2">
+                <p className="text-gray-700 mb-6">
+                  {translate(
+                    'Please provide your organization details. Supporting documents will help speed up the review process.',
+                  )}
+                </p>
+
                 <Row className="g-6">
                   <Col md={6}>
                     <Field
@@ -186,18 +292,7 @@ export const OrganizationCreateStep2: FunctionComponent<
                   </Col>
                 </Row>
 
-                {loading && <LoadingSpinner />}
-
-                {!loading && checklistQuestions.length > 0 && (
-                  <div className="pt-4">
-                    {checklistQuestions.map((question) => (
-                      <ChecklistQuestionField
-                        key={question.uuid}
-                        question={question}
-                      />
-                    ))}
-                  </div>
-                )}
+                {renderChecklistQuestions()}
 
                 {/* Documentation Upload Section */}
                 <div className="mt-8">
@@ -237,17 +332,6 @@ export const OrganizationCreateStep2: FunctionComponent<
                   </BootstrapForm.Group>
                 </div>
               </div>
-            ) : (
-              <Field
-                name="registration_code"
-                label={translate('Registration code')}
-                placeholder={translate('12345678')}
-                component={FormGroup}
-                required
-                validate={required}
-              >
-                <StringField />
-              </Field>
             )}
           </Card.Body>
         </Card>

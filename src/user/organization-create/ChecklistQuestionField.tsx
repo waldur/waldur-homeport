@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Field } from 'redux-form';
 import { QuestionAdmin } from 'waldur-js-client';
 
-import { composeValidators, required } from '@waldur/core/validators';
+import { composeValidators, email, required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
 import { FormGroup } from '@waldur/form/FormGroup';
@@ -20,7 +20,10 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
 }) => {
   const fieldName = `question_${question.uuid}`;
   const isRequired = question.required;
-  const validators = isRequired ? [required] : [];
+  const isEmailQuestion = question.question_type === 'email';
+  const validators = [];
+  if (isRequired) validators.push(required);
+  if (isEmailQuestion) validators.push(email);
 
   switch (question.question_type) {
     case 'text_input':
@@ -136,7 +139,34 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
         />
       );
 
+    case 'email':
+      return (
+        <Field
+          key={question.uuid}
+          name={fieldName}
+          label={question.description}
+          placeholder={question.user_guidance || ''}
+          required={isRequired}
+          validate={isRequired ? composeValidators(...validators) : undefined}
+          component={FormGroup}
+        >
+          <StringField type="email" />
+        </Field>
+      );
+
     default:
-      return null;
+      return (
+        <Field
+          key={question.uuid}
+          name={fieldName}
+          label={question.description}
+          placeholder={question.user_guidance || ''}
+          required={isRequired}
+          validate={isRequired ? composeValidators(...validators) : undefined}
+          component={FormGroup}
+        >
+          <StringField />
+        </Field>
+      );
   }
 };

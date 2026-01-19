@@ -24,4 +24,7 @@ export interface ChecklistQuestionForm {
   }>;
   dependency_logic_operator: DependencyLogicOperatorEnum;
   review_answer_value?: string;
+  // Onboarding metadata fields
+  maps_to_customer_field?: string;
+  intent_field?: string;
 }

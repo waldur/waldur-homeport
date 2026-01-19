@@ -1,22 +1,24 @@
 import {
-  checklistsAdminList,
-  checklistsAdminQuestionsList,
   onboardingJustificationsAttachDocument,
   onboardingJustificationsCreateJustification,
-  onboardingQuestionMetadataList,
+  onboardingPersonIdentifierFieldsRetrieve,
+  onboardingVerificationsAvailableChecklistsRetrieve,
   onboardingVerificationsCreateCustomer,
   onboardingVerificationsPartialUpdate,
   onboardingVerificationsStartVerification,
   onboardingVerificationsSubmitAnswers,
-  OnboardingCompanyValidationRequestRequest,
   OnboardingQuestionMetadata,
   OnboardingVerification,
+  OnboardingCompanyValidationRequestRequest,
   QuestionAdmin,
+  ValidationMethodEnum,
+  BlankEnum,
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
 import { translate } from '@waldur/i18n';
+
+import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';
 
 export interface QuestionWithMetadata extends QuestionAdmin {
   onboarding_metadata?: OnboardingQuestionMetadata;
@@ -26,103 +28,98 @@ interface ChecklistQuestionsWithMetadata {
   allQuestions: QuestionWithMetadata[];
   customerQuestions: QuestionWithMetadata[];
   intentQuestions: QuestionWithMetadata[];
-  checklistUuid: string;
+  checklistCustomerUuid: string;
+  checklistIntentUuid: string;
 }
 
 /**
- * Fetches checklist questions with their onboarding metadata and separates them
- * into customer fields and intent fields.
- *
- * The backend now expects two portal-wide checklists:
- * - `onboarding_customer` for customer data questions
- * - `onboarding_intent` for intent/purpose questions
+ * Fetches checklist questions with their onboarding metadata.
+ * Uses the available_checklists endpoint which is accessible to regular users.
  *
  * @returns Object with all questions, customer questions, and intent questions
  */
 export const fetchChecklistWithMetadata =
   async (): Promise<ChecklistQuestionsWithMetadata> => {
-    // Fetch both portal-wide onboarding checklists
-    const [customerResponse, intentResponse] = await Promise.all([
-      checklistsAdminList({
-        query: { checklist_type: 'onboarding_customer' },
-      }),
-      checklistsAdminList({ query: { checklist_type: 'onboarding_intent' } }),
-    ]);
+    try {
+      // Fetch checklists from the available_checklists endpoint
+      const response =
+        await onboardingVerificationsAvailableChecklistsRetrieve();
 
-    const customerChecklist = customerResponse.data[0];
-    const intentChecklist = intentResponse.data[0];
+      const customerChecklist = response.data.customer_checklist as any;
+      const intentChecklist = response.data.intent_checklist as any;
 
-    if (!customerChecklist && !intentChecklist) {
+      const checklistCustomerUuid = (customerChecklist?.uuid as string) || '';
+      const checklistIntentUuid = (intentChecklist?.uuid as string) || '';
+
+      // Extract questions with metadata already included
+      const customerQuestions: QuestionWithMetadata[] = (
+        customerChecklist?.questions || []
+      ).map((q: any) => ({
+        ...q,
+        onboarding_metadata: q.onboarding_metadata,
+      }));
+
+      const intentQuestions: QuestionWithMetadata[] = (
+        intentChecklist?.questions || []
+      ).map((q: any) => ({
+        ...q,
+        onboarding_metadata: q.onboarding_metadata,
+      }));
+
+      const allQuestions = [...customerQuestions, ...intentQuestions];
+
+      return {
+        allQuestions,
+        customerQuestions,
+        intentQuestions,
+        checklistCustomerUuid,
+        checklistIntentUuid,
+      };
+    } catch {
       return {
         allQuestions: [],
         customerQuestions: [],
         intentQuestions: [],
-        checklistUuid: '',
+        checklistCustomerUuid: '',
+        checklistIntentUuid: '',
       };
     }
-
-    // Fetch questions for each checklist
-    const [customerQuestionsResponse, intentQuestionsResponse] =
-      await Promise.all([
-        customerChecklist
-          ? checklistsAdminQuestionsList({
-              query: { checklist_uuid: customerChecklist.uuid },
-            })
-          : Promise.resolve({ data: [] }),
-        intentChecklist
-          ? checklistsAdminQuestionsList({
-              query: { checklist_uuid: intentChecklist.uuid },
-            })
-          : Promise.resolve({ data: [] }),
-      ]);
-
-    const customerQuestionsList =
-      (customerQuestionsResponse.data as QuestionAdmin[]) || [];
-    const intentQuestionsList =
-      (intentQuestionsResponse.data as QuestionAdmin[]) || [];
-
-    // Fetch metadata for questions from both checklists
-    const checklistUuids = [customerChecklist?.uuid, intentChecklist?.uuid]
-      .filter(Boolean)
-      .join(',');
-
-    const metadataResponse = checklistUuids
-      ? await onboardingQuestionMetadataList({
-          query: { checklist_uuid: checklistUuids },
-        })
-      : { data: [] };
-
-    const metadataList = metadataResponse.data || [];
-
-    // Map questions with metadata
-    const mapWithMetadata = (
-      questions: QuestionAdmin[],
-    ): QuestionWithMetadata[] =>
-      questions.map((question) => {
-        const metadata = metadataList.find(
-          (m) => m.question_uuid === question.uuid,
-        );
-        return {
-          ...question,
-          onboarding_metadata: metadata,
-        };
-      });
-
-    const customerQuestionsWithMetadata = mapWithMetadata(
-      customerQuestionsList,
-    );
-    const intentQuestionsWithMetadata = mapWithMetadata(intentQuestionsList);
-
-    return {
-      allQuestions: [
-        ...customerQuestionsWithMetadata,
-        ...intentQuestionsWithMetadata,
-      ],
-      customerQuestions: customerQuestionsWithMetadata,
-      intentQuestions: intentQuestionsWithMetadata,
-      checklistUuid: customerChecklist?.uuid || intentChecklist?.uuid || '',
-    };
   };
+
+/**
+ * Fetches person identifier field specifications for a validation method.
+ * @param validationMethod - The validation method identifier (e.g., 'ariregister', 'wirtschaftscompass')
+ * @returns Person identifier field configuration
+ */
+export const fetchPersonIdentifierFields = async (
+  validationMethod: ValidationMethodEnum | BlankEnum,
+): Promise<PersonIdentifierFieldConfig | null> => {
+  if (!validationMethod) {
+    return null;
+  }
+
+  try {
+    const response = await onboardingPersonIdentifierFieldsRetrieve({
+      query: {
+        validation_method: validationMethod,
+      },
+    });
+
+    // Validate response has required fields
+    if (!response.data || !response.data.person_identifier_fields) {
+      return null;
+    }
+
+    return response.data as PersonIdentifierFieldConfig;
+  } catch (error: any) {
+    // Backend returns 404 if fields are not configured
+    // Backend returns 400 if validation_method is missing
+    if (error?.status === 404 || error?.response?.status === 404) {
+      return null;
+    }
+    throw error;
+  }
+};
 
 export const createAnswersFromFormData = (questions: any[], formData: any) => {
   const answers = [];
@@ -160,10 +157,10 @@ export const createAnswersFromFormData = (questions: any[], formData: any) => {
 
 export const createVerificationRequestBody = (
   formData: any,
-  country: string,
+  validationMethod: ValidationMethodEnum | BlankEnum,
 ): OnboardingCompanyValidationRequestRequest => {
   return {
-    country,
+    validation_method: validationMethod,
     legal_person_identifier: formData.registration_code,
     legal_name: formData.name,
   };
@@ -174,11 +171,10 @@ export const handleManualVerification = async (
   verificationData: OnboardingVerification | null,
   getChecklistData: () => Promise<any>,
 ) => {
-  const countries = ENV.plugins.WALDUR_CORE.ONBOARDING_SUPPORTED_COUNTRIES;
-  const country = countries?.[0] || '';
   let validation: OnboardingVerification;
 
-  if (verificationData && verificationData.status === 'escalated') {
+  if (verificationData) {
+    // Reuse existing verification (either escalated or already created)
     validation = verificationData;
 
     // Update legal_name and registration code in case user changed them
@@ -191,15 +187,16 @@ export const handleManualVerification = async (
     });
 
     // Submit checklist answers for the existing verification
-    const { allQuestions } = await getChecklistData();
+    const { customerQuestions, intentQuestions } = await getChecklistData();
 
+    // Combine all answers and submit together
+    const allQuestions = [...customerQuestions, ...intentQuestions];
     if (allQuestions.length > 0) {
-      const answers = createAnswersFromFormData(allQuestions, formData);
-
-      if (answers.length > 0) {
+      const allAnswers = createAnswersFromFormData(allQuestions, formData);
+      if (allAnswers.length > 0) {
         await onboardingVerificationsSubmitAnswers({
           path: { uuid: validation.uuid },
-          body: answers,
+          body: allAnswers,
         });
       }
     }
@@ -207,21 +204,22 @@ export const handleManualVerification = async (
     // Create new verification instance for pure manual flow
     const verificationResponse = await onboardingVerificationsStartVerification(
       {
-        body: createVerificationRequestBody(formData, country),
+        body: createVerificationRequestBody(formData, ''),
       },
     );
 
     validation = verificationResponse.data;
 
-    const { allQuestions } = await getChecklistData();
+    const { customerQuestions, intentQuestions } = await getChecklistData();
 
+    // Combine all answers and submit together
+    const allQuestions = [...customerQuestions, ...intentQuestions];
     if (allQuestions.length > 0) {
-      const answers = createAnswersFromFormData(allQuestions, formData);
-
-      if (answers.length > 0) {
+      const allAnswers = createAnswersFromFormData(allQuestions, formData);
+      if (allAnswers.length > 0) {
         await onboardingVerificationsSubmitAnswers({
           path: { uuid: validation.uuid },
-          body: answers,
+          body: allAnswers,
         });
       }
     }
@@ -258,7 +256,7 @@ export const handleVerificationStatus = async (
     onError: (error: any) => void;
   },
 ) => {
-  const isManual = formData.addMethod === 'manual';
+  const isManual = formData.validationMethod === 'manual';
 
   if (isManual || validation.status === 'escalated') {
     const justificationResponse =

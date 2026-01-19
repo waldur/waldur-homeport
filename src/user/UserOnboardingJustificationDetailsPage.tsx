@@ -9,7 +9,7 @@ import {
 
 import { OnboardingJustificationDetails } from '@waldur/administration/organizations/OnboardingJustificationDetails';
 import { translate } from '@waldur/i18n';
-import { showError, showErrorResponse } from '@waldur/store/notify';
+import { showErrorResponse } from '@waldur/store/notify';
 
 export const UserOnboardingJustificationDetailsPage = () => {
   const {
@@ -38,11 +38,6 @@ export const UserOnboardingJustificationDetailsPage = () => {
         setJustification(verificationResponse.data.justifications[0]);
       } else {
         setJustification(null);
-        dispatch(
-          showError(
-            translate('No justification was found for this verification.'),
-          ),
-        );
       }
     } catch (error) {
       dispatch(
