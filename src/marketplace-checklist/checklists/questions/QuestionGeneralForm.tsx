@@ -1,7 +1,9 @@
 import { Field } from 'react-final-form';
+import { Checklist } from 'waldur-js-client';
 
+import { AtLeast } from '@waldur/core/types';
 import { greaterThan, required } from '@waldur/core/validators';
-import { NumberField, SelectField, TextField } from '@waldur/form';
+import { NumberField, SelectField, StringField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormFieldError } from '@waldur/form/FormFieldError';
 import { translate } from '@waldur/i18n';
@@ -16,9 +18,15 @@ const gt = (value, allValues) =>
 
 export const QuestionGeneralForm = ({
   values,
+  checklist,
 }: {
   values: ChecklistQuestionForm;
+  checklist?: AtLeast<Checklist, 'uuid' | 'url' | 'checklist_type'>;
 }) => {
+  const isOnboardingCustomer =
+    checklist?.checklist_type === 'onboarding_customer';
+  const isOnboardingIntent = checklist?.checklist_type === 'onboarding_intent';
+
   return (
     <>
       <FormGroup label={translate('Question')} required space={5}>
@@ -82,6 +90,38 @@ export const QuestionGeneralForm = ({
             </FormGroup>
           </>
         )
+      )}
+
+      {isOnboardingCustomer && (
+        <FormGroup
+          label={translate('Customer field mapping for onboarding')}
+          space={5}
+          help={translate(
+            "Customer model field name to map this answer to the Customer object (e.g., 'registration_code', 'email', 'vat_code').",
+          )}
+        >
+          <Field
+            name="maps_to_customer_field"
+            component={StringField as any}
+            placeholder="e.g., vat_code"
+          />
+        </FormGroup>
+      )}
+
+      {isOnboardingIntent && (
+        <FormGroup
+          label={translate('Intent field mapping for onboarding')}
+          space={5}
+          help={translate(
+            "Intent/purpose field to map the answer to the verification metadata (e.g., 'intent', 'registration_purpose').",
+          )}
+        >
+          <Field
+            name="intent_field"
+            component={StringField as any}
+            placeholder="e.g., intent"
+          />
+        </FormGroup>
       )}
     </>
   );

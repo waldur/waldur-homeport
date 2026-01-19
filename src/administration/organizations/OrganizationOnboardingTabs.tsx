@@ -23,15 +23,6 @@ const tabs = [
       })),
     ),
   },
-  {
-    key: 'question-mappings',
-    title: translate('Question mappings'),
-    component: lazyComponent(() =>
-      import('./OnboardingChecklistQuestionsMappingsList').then((module) => ({
-        default: module.OnboardingChecklistQuestionsMappingsList,
-      })),
-    ),
-  },
 ];
 
 export const OrganizationOnboardingTabs: FunctionComponent = () => {

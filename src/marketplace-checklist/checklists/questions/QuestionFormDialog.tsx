@@ -17,6 +17,9 @@ import {
   checklistsAdminQuestionOptionsPartialUpdate,
   checklistsAdminQuestionsCreate,
   checklistsAdminQuestionsUpdate,
+  onboardingQuestionMetadataCreate,
+  onboardingQuestionMetadataList,
+  onboardingQuestionMetadataUpdate,
   QuestionAdmin,
   QuestionAdminRequest,
 } from 'waldur-js-client';
@@ -82,18 +85,55 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
     staleTime: 5 * 60 * 1000,
   });
 
+  // Load onboarding metadata (For edit mode - if checklist is onboarding type)
+  const isOnboardingChecklist =
+    checklist?.checklist_type === 'onboarding_customer' ||
+    checklist?.checklist_type === 'onboarding_intent';
+
+  const {
+    data: onboardingMetadata,
+    isLoading: isLoadingMetadata,
+    error: errorMetadata,
+    refetch: refetchMetadata,
+  } = useQuery({
+    queryKey: ['OnboardingMetadata', question?.uuid],
+    queryFn: () =>
+      question?.uuid && isOnboardingChecklist
+        ? onboardingQuestionMetadataList({
+            query: { question_uuid: question.uuid },
+          }).then((response) => response.data[0] || null)
+        : null,
+    staleTime: 5 * 60 * 1000,
+    enabled: Boolean(question?.uuid) && isOnboardingChecklist,
+  });
+
   const initialValuesWithDeps = useMemo<ChecklistQuestionForm>(() => {
-    if (!deps?.length) return initialValues;
-    return {
-      ...initialValues,
-      conditions: deps.map((dep) => ({
-        uuid: dep.uuid,
-        depends_on_question: dep.depends_on_question,
-        operator: dep.operator,
-        required_answer_value: dep.required_answer_value,
-      })),
-    };
-  }, [initialValues, deps]);
+    let values = initialValues;
+
+    // Add dependencies
+    if (deps?.length) {
+      values = {
+        ...values,
+        conditions: deps.map((dep) => ({
+          uuid: dep.uuid,
+          depends_on_question: dep.depends_on_question,
+          operator: dep.operator,
+          required_answer_value: dep.required_answer_value,
+        })),
+      };
+    }
+
+    // Add onboarding metadata
+    if (onboardingMetadata) {
+      values = {
+        ...values,
+        maps_to_customer_field: onboardingMetadata.maps_to_customer_field || '',
+        intent_field: onboardingMetadata.intent_field || '',
+      };
+    }
+
+    return values;
+  }, [initialValues, deps, onboardingMetadata]);
 
   // Store the question if it saved, to avoid recreating it if there is an error with options, deps or conditions.
   const [savedQuestion, setSavedQuestion] = useState<QuestionAdmin>(null);
@@ -268,6 +308,47 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
         }
       }
 
+      // Save onboarding metadata (for onboarding checklists only)
+      if (isOnboardingChecklist) {
+        const hasCustomerField = Boolean(
+          formData.maps_to_customer_field?.trim(),
+        );
+        const hasIntentField = Boolean(formData.intent_field?.trim());
+
+        if (hasCustomerField || hasIntentField) {
+          // Create or update metadata
+          if (onboardingMetadata?.uuid) {
+            // Update existing
+            await onboardingQuestionMetadataUpdate({
+              path: { uuid: onboardingMetadata.uuid },
+              body: {
+                question: saved.url,
+                maps_to_customer_field:
+                  formData.maps_to_customer_field?.trim() || '',
+                intent_field: formData.intent_field?.trim() || '',
+              },
+            });
+          } else {
+            // Create new
+            await onboardingQuestionMetadataCreate({
+              body: {
+                question: saved.url,
+                maps_to_customer_field:
+                  formData.maps_to_customer_field?.trim() || undefined,
+                intent_field: formData.intent_field?.trim() || undefined,
+              },
+            });
+          }
+
+          // Invalidate metadata query
+          setTimeout(() => {
+            queryClient.invalidateQueries({
+              queryKey: ['OnboardingMetadata', saved.uuid],
+            });
+          }, 1000);
+        }
+      }
+
       if (!isEdit) {
         // Update questions_count on the checklists table when creation
         dispatch(
@@ -310,10 +391,12 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
     }
   };
 
-  if (isLoadingDeps) {
+  if (isLoadingDeps || isLoadingMetadata) {
     return <LoadingSpinner />;
   } else if (errorDeps) {
     return <LoadingErred loadData={refetchDeps} />;
+  } else if (errorMetadata) {
+    return <LoadingErred loadData={refetchMetadata} />;
   }
 
   return (
@@ -361,7 +444,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
               mountOnEnter
             >
               <Tab eventKey="general" title={translate('General')}>
-                <QuestionGeneralForm values={values} />
+                <QuestionGeneralForm values={values} checklist={checklist} />
               </Tab>
               {CHECKLIST_FLAGS.questionFormUserGuidance && (
                 <Tab

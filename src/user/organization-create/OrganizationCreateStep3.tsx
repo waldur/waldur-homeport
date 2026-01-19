@@ -13,12 +13,16 @@ import './OrganizationReviewStatus.scss';
 interface OrganizationCreateStep3Props extends WizardFormStepProps {
   validationResult?: OnboardingVerification | null;
   validationLoading?: boolean;
+  isManual?: boolean;
 }
 
 export const OrganizationCreateStep3: FunctionComponent<
   OrganizationCreateStep3Props
 > = (props) => {
-  const { validationResult, validationLoading } = props;
+  const { validationResult, validationLoading, isManual } = props;
+
+  // Disable next button when automatic validation is escalated
+  const submitDisabled = validationResult?.status === 'escalated' && !isManual;
 
   const getStatusIcon = () => {
     if (!validationResult) return null;
@@ -103,7 +107,7 @@ export const OrganizationCreateStep3: FunctionComponent<
   };
 
   return (
-    <WizardForm {...props}>
+    <WizardForm {...props} submitDisabled={submitDisabled}>
       <div className="d-flex flex-column gap-5">
         <Card className="border-0 shadow-sm">
           <Card.Body className="text-center position-relative overflow-hidden organization-validation-result">

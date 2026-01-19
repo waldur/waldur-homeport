@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { QuestionAdmin } from 'waldur-js-client';
+// import { QuestionAdmin } from 'waldur-js-client';
 
 import { EditModalButton } from '@waldur/core/buttons';
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -12,7 +12,9 @@ const QuestionFormDialog = lazyComponent(() =>
 );
 
 interface QuestionEditActionProps {
-  row: QuestionAdmin;
+  // Revert this after updating sdk
+  // row: QuestionAdmin;
+  row: any;
 }
 
 export const QuestionEditAction: FC<QuestionEditActionProps> = ({ row }) => (
@@ -25,6 +27,7 @@ export const QuestionEditAction: FC<QuestionEditActionProps> = ({ row }) => (
         uuid: r.checklist_uuid,
         name: r.checklist_name,
         url: r.checklist,
+        checklist_type: r.checklist_type,
       },
     })}
     getInitialValues={(r) => ({

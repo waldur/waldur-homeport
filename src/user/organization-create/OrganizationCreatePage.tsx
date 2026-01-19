@@ -2,6 +2,7 @@ import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
+import { onboardingVerificationsDestroy } from 'waldur-js-client';
 
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
@@ -31,15 +32,18 @@ export const OrganizationCreatePage: FC = () => {
   const { showSuccess, showErrorResponse } = useNotify();
 
   const selector = formValueSelector(ORGANIZATION_ONBOARDING_FORM_ID);
-  const addMethod =
-    useSelector((state) => selector(state, 'addMethod')) || 'manual';
-  const isManual = addMethod === 'manual';
+  const validationMethod = useSelector((state) =>
+    selector(state, 'validationMethod'),
+  );
+
+  const isManual = validationMethod === 'manual';
 
   const { getChecklistData } = useChecklistCache();
   const {
     validationLoading,
     validationResult,
     verificationData,
+    setVerificationData,
     runAutoValidation,
   } = useAutoValidation(getChecklistData);
 
@@ -48,14 +52,20 @@ export const OrganizationCreatePage: FC = () => {
 
   const handleStep2Submit = useCallback(
     async (formData) => {
-      if (formData.addMethod === 'auto') {
+      // Trigger auto-validation after person identifier input for automatic methods
+      if (formData.validationMethod !== 'manual') {
         await runAutoValidation(formData);
       }
     },
     [runAutoValidation],
   );
 
-  // Wrapper for Step 2 to handle auto-validation requests on submit
+  // Wrapper for Step 1 to fetch person identifier fields
+  const Step1Wrapper: FC<any> = useCallback((props) => {
+    return <OrganizationCreateStep1 {...props} />;
+  }, []);
+
+  // Wrapper for Step 2 to handle person identifier input
   const Step2Wrapper: FC<any> = useCallback(
     (props) => {
       const customOnSubmit = async (formData, dispatch, formProps) => {
@@ -84,10 +94,11 @@ export const OrganizationCreatePage: FC = () => {
           {...props}
           validationResult={validationResult}
           validationLoading={validationLoading}
+          isManual={isManual}
         />
       );
     },
-    [validationResult, validationLoading],
+    [validationResult, validationLoading, isManual],
   );
 
   // Wrapper for Step 4 to pass checklist data
@@ -104,31 +115,29 @@ export const OrganizationCreatePage: FC = () => {
   );
 
   const wizardForms = useMemo(
-    () => [OrganizationCreateStep1, Step2Wrapper, Step3Wrapper, Step4Wrapper],
-    [Step2Wrapper, Step3Wrapper, Step4Wrapper],
+    () => [Step1Wrapper, Step2Wrapper, Step3Wrapper, Step4Wrapper],
+    [Step1Wrapper, Step2Wrapper, Step3Wrapper, Step4Wrapper],
   );
 
   const steps: ProgressStep[] = useMemo(
     () => [
       {
-        key: 'verification',
-        label: translate('Verification'),
-        description: translate(
-          'Confirm your identity through the national provider',
-        ),
+        key: 'method',
+        label: translate('Method'),
+        description: translate('Select verification method'),
         completed: false,
       },
       {
-        key: 'company',
-        label: translate('Company'),
-        description: translate('Provide company details'),
+        key: 'identification',
+        label: translate('Identification'),
+        description: translate('Provide required identification details'),
         completed: false,
       },
       {
         key: 'result',
         label: translate('Result'),
         description: translate('Review results of validation'),
-        completed: isManual, // Mark as completed if manual mode
+        completed: isManual,
       },
       {
         key: 'intent',
@@ -150,21 +159,36 @@ export const OrganizationCreatePage: FC = () => {
         'Are you sure you want to cancel? All entered data will be lost.',
       ),
     );
+
+    // Clean up verification object if it was created
+    if (verificationData?.uuid) {
+      try {
+        await onboardingVerificationsDestroy({
+          path: { uuid: verificationData.uuid },
+        });
+      } catch {
+        // Ignore errors during cleanup
+        return;
+      }
+    }
+
     router.stateService.go('profile.details');
-  }, [dispatch, router]);
+  }, [dispatch, router, verificationData]);
 
   const createOnboardingVerification = useCallback(
     async (formData, _dispatch, formProps) => {
       try {
-        const isManual = formData.addMethod === 'manual';
-        let validation = isManual ? null : validationResult;
+        const isManualValidation = formData.validationMethod === 'manual';
+        let validation = isManualValidation ? null : validationResult;
 
-        if (isManual) {
+        if (isManualValidation) {
           validation = await handleManualVerification(
             formData,
             verificationData,
             getChecklistData,
           );
+          // Store the verification to prevent duplicate creation on retry
+          setVerificationData(validation);
         } else {
           await handleAutoIntentAnswers(formData, validation, getChecklistData);
         }
@@ -197,6 +221,7 @@ export const OrganizationCreatePage: FC = () => {
       router,
       validationResult,
       verificationData,
+      setVerificationData,
       getChecklistData,
     ],
   );

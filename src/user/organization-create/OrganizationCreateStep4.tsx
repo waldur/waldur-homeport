@@ -13,7 +13,8 @@ interface OrganizationCreateStep4Props extends WizardFormStepProps {
     allQuestions: any[];
     customerQuestions: any[];
     intentQuestions: any[];
-    checklistUuid: string;
+    checklistCustomerUuid: string;
+    checklistIntentUuid: string;
   }>;
 }
 
@@ -31,6 +32,10 @@ export const OrganizationCreateStep4: FunctionComponent<
     if (checklistFetched) return;
 
     const fetchChecklist = async () => {
+      if (!props.getChecklistData) {
+        return;
+      }
+
       setLoading(true);
       try {
         const data = await props.getChecklistData();
@@ -44,7 +49,7 @@ export const OrganizationCreateStep4: FunctionComponent<
     };
 
     fetchChecklist();
-  }, [checklistFetched, props.getChecklistData]);
+  }, [checklistFetched]);
 
   return (
     <WizardForm {...props}>

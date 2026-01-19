@@ -48,7 +48,6 @@ interface CoreConfiguration {
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;
-  ONBOARDING_SUPPORTED_COUNTRIES: string[];
   ONBOARDING_VALIDATION_METHODS: string[];
   BRAND_COLOR: string;
   HERO_LINK_URL: string;

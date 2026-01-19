@@ -7,7 +7,6 @@ import {
   OnboardingRunValidationRequestRequest,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
 import { translate } from '@waldur/i18n';
 import { useNotify } from '@waldur/store/hooks';
 
@@ -21,7 +20,8 @@ export const useChecklistCache = () => {
     allQuestions: any[];
     customerQuestions: any[];
     intentQuestions: any[];
-    checklistUuid: string;
+    checklistCustomerUuid: string;
+    checklistIntentUuid: string;
   } | null>(null);
 
   const getChecklistData = useCallback(async () => {
@@ -47,54 +47,49 @@ export const useAutoValidation = (getChecklistData: () => Promise<any>) => {
 
   const runAutoValidation = useCallback(
     async (formData) => {
-      const countries = ENV.plugins.WALDUR_CORE.ONBOARDING_SUPPORTED_COUNTRIES;
-      const country = countries?.[0] || '';
       setValidationLoading(true);
 
       try {
-        // Step 1: Create verification instance
+        // Step 1: Create verification instance with validation_method
         const verificationResponse =
           await onboardingVerificationsStartVerification({
-            body: createVerificationRequestBody(formData, country),
+            body: createVerificationRequestBody(
+              formData,
+              formData.validationMethod,
+            ),
           });
 
         const verification = verificationResponse.data;
         setVerificationData(verification);
 
-        // Step 2: Submit customer checklist answers
-        const { customerQuestions } = await getChecklistData();
+        // Step 2: Submit INTENT checklist answers (automatic validation only requires intent questions)
+        const { intentQuestions } = await getChecklistData();
 
-        if (customerQuestions.length > 0) {
-          const answers = createAnswersFromFormData(
-            customerQuestions,
+        if (intentQuestions.length > 0) {
+          const intentAnswers = createAnswersFromFormData(
+            intentQuestions,
             formData,
           );
 
-          if (answers.length > 0) {
+          if (intentAnswers.length > 0) {
             await onboardingVerificationsSubmitAnswers({
               path: { uuid: verification.uuid },
-              body: answers,
+              body: intentAnswers,
             });
           }
         }
 
         // Step 3: Run validation with user identification
-        const isAustriaCountry = country === 'AT';
         const runValidationBody: OnboardingRunValidationRequestRequest = {};
 
-        // ToDo: remove this workaround after implementing getting user's identifier via auth methods
-        if (
-          isAustriaCountry &&
-          formData.temp_first_name &&
-          formData.temp_last_name &&
-          formData.temp_birth_date
-        ) {
-          runValidationBody.first_name = formData.temp_first_name;
-          runValidationBody.last_name = formData.temp_last_name;
-          runValidationBody.birth_date = formData.temp_birth_date;
-        } else if (formData.temp_person_identifier) {
-          runValidationBody.civil_number = formData.temp_person_identifier;
-        }
+        // Extract person identifier fields dynamically from form data
+        // Fields are prefixed with 'person_identifier_' by PersonIdentifierFieldsRenderer
+        Object.keys(formData).forEach((key) => {
+          if (key.startsWith('person_identifier_')) {
+            const fieldName = key.replace('person_identifier_', '');
+            runValidationBody[fieldName] = formData[key];
+          }
+        });
 
         const validationResponse = await onboardingVerificationsRunValidation({
           path: { uuid: verification.uuid },
