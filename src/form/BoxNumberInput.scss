@@ -28,6 +28,8 @@
   .plus-btn,
   .minus-btn {
     position: absolute;
+    top: 50%;
+    transform: translateY(-50%);
     display: block;
     width: 28px !important;
     height: 28px !important;
