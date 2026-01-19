@@ -56,6 +56,11 @@ const BRANDING_TABS: SettingsTab[] = [
     title: translate('Images'),
     groupName: translate('Images'),
   },
+  {
+    key: 'table',
+    title: translate('Table settings'),
+    groupName: translate('Table settings'),
+  },
 ];
 
 export const AdministrationBranding = () => {

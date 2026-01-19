@@ -436,6 +436,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-software-catalog-settings',
+    url: 'software-catalog/',
+    parent: 'admin-marketplace',
+    component: lazyComponent(() =>
+      import('./marketplace/AdministrationSoftwareCatalog').then((module) => ({
+        default: module.AdministrationSoftwareCatalog,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Software catalog'),
+      feature: MarketplaceFeatures.display_software_catalog,
+    },
+  },
+
+  {
     name: 'admin-organizations-group-list',
     url: 'organization-groups/',
     parent: 'admin-organizations-compliance',
@@ -535,6 +550,23 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-call-management-settings',
+    url: 'call-management-settings/?tab&q',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./call-management/AdministrationCallManagement').then(
+        (module) => ({
+          default: module.AdministrationCallManagement,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Call management'),
+      feature: MarketplaceFeatures.show_call_management_functionality,
+    },
+  },
+
+  {
     name: 'admin-onboarding-settings',
     url: 'onboarding-settings/',
     parent: 'admin-organizations-compliance',
@@ -546,6 +578,20 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Onboarding settings'),
       feature: CustomerFeatures.show_onboarding,
+    },
+  },
+
+  {
+    name: 'admin-project-settings',
+    url: 'project-settings/',
+    parent: 'admin-organizations-compliance',
+    component: lazyComponent(() =>
+      import('./organizations/AdministrationProject').then((module) => ({
+        default: module.AdministrationProject,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Project settings'),
     },
   },
 
