@@ -18,7 +18,13 @@ import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 
-import { getKeyTitle, SIDEBAR_STYLES, SIDEBAR_STYLE_PRIMARY } from './utils';
+import {
+  formatListFieldValue,
+  getKeyTitle,
+  parseListFieldValue,
+  SIDEBAR_STYLES,
+  SIDEBAR_STYLE_PRIMARY,
+} from './utils';
 
 const SUPPORT_BACKENDS = [
   {
@@ -86,15 +92,28 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
   const { closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
 
-  const initialValues = resolve.initialValues || {
-    value: ENV.plugins.WALDUR_CORE[item.key],
-  };
+  const initialValues = (() => {
+    const rawValue =
+      resolve.initialValues?.value ?? ENV.plugins.WALDUR_CORE[item.key];
+    // Format arrays as comma-separated strings for list_field type
+    if (item.type === 'list_field' && Array.isArray(rawValue)) {
+      return { value: formatListFieldValue(rawValue) };
+    }
+    return { value: rawValue };
+  })();
 
   const onSubmit = async (formData) => {
     try {
       const isImageField = item.type === 'image_field';
+      const isListField = item.type === 'list_field';
       const isFileRemoving = isImageField && formData.value === null;
       const isFileUpload = isImageField && formData.value instanceof File;
+
+      // Parse list_field values from comma-separated string to array
+      let processedValue = formData.value;
+      if (isListField && typeof formData.value === 'string') {
+        processedValue = parseListFieldValue(formData.value);
+      }
 
       if (isFileRemoving) {
         await overrideSettings({
@@ -105,12 +124,12 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
         const requestOptions = isFileUpload ? formDataOptions : {};
 
         await overrideSettings({
-          body: { [item.key]: formData.value ?? '' },
+          body: { [item.key]: processedValue ?? '' },
           ...requestOptions,
         });
       }
 
-      ENV.plugins.WALDUR_CORE[item.key] = formData.value;
+      ENV.plugins.WALDUR_CORE[item.key] = processedValue;
       showSuccess(translate('Configuration has been updated.'));
       closeDialog();
       location.reload();
@@ -217,6 +236,12 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                   component={WideImageField as any}
                   name="value"
                   initialValue={initialValues.value}
+                />
+              ) : item.type === 'list_field' ? (
+                <Field
+                  component={StringField as any}
+                  name="value"
+                  placeholder={translate('Enter comma-separated values')}
                 />
               ) : (
                 <Field component={StringField as any} name="value" />

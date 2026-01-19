@@ -72,6 +72,11 @@ export const UserPendingActionsList: FC<OwnProps> = () => {
     <PendingActionAlertItem row={props.row} refetch={tableProps.fetch} />
   );
 
+  // Hide table when empty (after initial load)
+  if (!tableProps.loading && tableProps.rows.length === 0) {
+    return null;
+  }
+
   return (
     <Table
       {...tableProps}

@@ -521,6 +521,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-user-actions-settings',
+    url: 'user-actions-settings/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./user-actions/AdministrationUserActions').then((module) => ({
+        default: module.AdministrationUserActions,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('User actions'),
+    },
+  },
+
+  {
     name: 'admin-onboarding-settings',
     url: 'onboarding-settings/',
     parent: 'admin-organizations-compliance',
