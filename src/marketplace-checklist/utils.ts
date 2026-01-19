@@ -68,7 +68,7 @@ export const questionConditionOperatorOptions: Array<{
 
 /** For disabling/hiding the things for non-functional parts of the checklist management */
 export const CHECKLIST_FLAGS = {
-  analyticsAndReports: false,
+  analyticsAndReports: true,
 
   checklistActionChangeStatus: false,
 

@@ -14,15 +14,6 @@ const tabs = [
       })),
     ),
   },
-  {
-    key: 'categories',
-    title: translate('Categories'),
-    component: lazyComponent(() =>
-      import('./categories/CategoriesTable').then((module) => ({
-        default: module.CategoriesTable,
-      })),
-    ),
-  },
   CHECKLIST_FLAGS.analyticsAndReports && {
     key: 'analytics-reports',
     title: translate('Analytics & reports'),

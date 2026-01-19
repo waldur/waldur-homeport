@@ -9,7 +9,6 @@ import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
   const { isLoading, error, data, refetch } = useQuery({
@@ -59,10 +58,6 @@ export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
             {
               title: translate('Questions'),
               render: ({ row }) => row.questions_count,
-            },
-            {
-              title: translate('Category'),
-              render: ({ row }) => renderFieldOrDash(row.category_name),
             },
           ]}
           verboseName={translate('Checklists')}

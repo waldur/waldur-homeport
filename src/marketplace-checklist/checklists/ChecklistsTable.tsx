@@ -32,10 +32,6 @@ export const ChecklistsTable: FC<TableWithPortal> = ({ portal }) => {
           render: ({ row }) => row.name,
         },
         {
-          title: translate('Category'),
-          render: ({ row }) => renderFieldOrDash(row.category_name),
-        },
-        {
           title: translate('Checklist type'),
           render: ({ row }) => {
             const option = checklistTypeOptions.find(
