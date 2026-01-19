@@ -27,7 +27,6 @@ export const ChecklistEditAction: FC<ChecklistEditActionProps> = ({
     buildResolve={(r) => ({ refetch, checklistUuid: r.uuid })}
     getInitialValues={(r) => ({
       name: r.name,
-      category: r.category_uuid,
       checklist_type: r.checklist_type,
       description: r.description,
     })}

@@ -1,5 +1,4 @@
 import { ExportIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 import {
   Card,
@@ -8,16 +7,11 @@ import {
   Row,
   Col,
 } from 'react-bootstrap';
-import { checklistsAdminCategoriesList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ChecklistUsageAnalyticsTable } from './ChecklistUsageAnalyticsTable';
-import { ComplianceByCategoryTable } from './ComplianceByCategoryTable';
 import { OrgPerformanceTable } from './OrgPerformanceTable';
 import { StatWidgetCard } from './StatWidgetCard';
 
@@ -26,8 +20,6 @@ const periodOptions = [
   { label: translate('1 month'), value: 30 },
   { label: translate('{month} months', { month: 6 }), value: 6 * 30 },
 ];
-
-const allCategoriesOption = { name: translate('All categories'), url: 'all' };
 
 // Dummy data for top cards and tables (replace with real API calls as needed)
 const topCards = [
@@ -54,53 +46,15 @@ const topCards = [
 ];
 
 export const AnalyticsAndReports = () => {
-  const [category, setCategory] = useState(allCategoriesOption);
   const [period, setPeriod] = useState(
     periodOptions.length > 1
       ? periodOptions[periodOptions.length - 2].value
       : periodOptions[0].value,
   );
 
-  const {
-    data: categories = [],
-    isLoading,
-    error,
-    refetch: refetchCategories,
-  } = useQuery({
-    queryKey: ['ChecklistCategories'],
-    queryFn: () =>
-      getAllPages((page) =>
-        checklistsAdminCategoriesList({
-          query: { page_size: MAX_PAGE_SIZE, page },
-        }),
-      ),
-    staleTime: 3 * 60 * 1000,
-  });
-
   return (
     <Card>
       <Card.Header className="mx-0 border-0">
-        <Card.Title>
-          {error ? (
-            <LoadingErred
-              message={translate('Unable to load categories')}
-              loadData={refetchCategories}
-              className="d-flex flex-center gap-4"
-            />
-          ) : (
-            <Select
-              getOptionValue={(option) => option.url}
-              getOptionLabel={(option) => option.name}
-              value={category}
-              placeholder={translate('All categories')}
-              onChange={setCategory}
-              options={[allCategoriesOption].concat(categories)}
-              isLoading={isLoading}
-              className="metronic-select-container min-w-150px min-w-lg-325px"
-              classNamePrefix="metronic-select"
-            />
-          )}
-        </Card.Title>
         <div className="card-toolbar gap-4">
           {periodOptions.length > 1 && (
             <ToggleButtonGroup
@@ -144,11 +98,8 @@ export const AnalyticsAndReports = () => {
           ))}
         </Row>
 
-        {/* Compliance by Category & Checklist Usage Analytics */}
+        {/* Compliance & Checklist Usage Analytics */}
         <Row className="mb-5 g-5">
-          <Col md={6} xs={12}>
-            <ComplianceByCategoryTable />
-          </Col>
           <Col md={6} xs={12}>
             <ChecklistUsageAnalyticsTable />
           </Col>
