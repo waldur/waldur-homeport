@@ -77,8 +77,8 @@
 }
 
 .image-placeholder {
-  color: if(isDarkMode(), $primary-500, $primary);
-  background-color: if(isDarkMode(), $gray-100, $primary-50);
+  color: if(isDarkMode(), $brand-500, $brand);
+  background-color: if(isDarkMode(), $gray-100, $brand-50);
 }
 
 /* Typography */

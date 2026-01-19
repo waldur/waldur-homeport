@@ -4,14 +4,14 @@ $bg-height: 232px;
   position: relative;
   height: $bg-height;
   width: 100%;
-  background-color: $primary-900;
+  background-color: $brand-900;
   background-position: center center;
   background-repeat: no-repeat;
   background-size: cover;
 
   &.has-overlay::before {
     content: ' ';
-    background-color: rgba($primary-900, 0.4);
+    background-color: rgba($brand-900-rgb, 0.4);
     position: absolute;
     top: 0;
     left: 0;
@@ -90,13 +90,13 @@ $bg-height: 232px;
 
     #search-box-wrapper {
       input {
-        color: if(isDarkMode(), $gray-400, $primary-500);
-        @include placeholder(if(isDarkMode(), $gray-400, $primary-500));
-        background-color: if(isDarkMode(), #000, $primary-950);
-        border-color: if(isDarkMode(), $gray-300, $primary-300);
+        color: if(isDarkMode(), $gray-400, $brand-500);
+        @include placeholder(if(isDarkMode(), $gray-400, $brand-500));
+        background-color: if(isDarkMode(), #000, $brand-950);
+        border-color: if(isDarkMode(), $gray-300, $brand-300);
       }
       svg path {
-        fill: if(isDarkMode(), $gray-400, $primary-500);
+        fill: if(isDarkMode(), $gray-400, $brand-500);
       }
 
       @if (isDarkMode() == false) {
