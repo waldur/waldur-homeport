@@ -1,5 +1,5 @@
 import { useRouter } from '@uirouter/react';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { onboardingVerificationsDestroy } from 'waldur-js-client';
@@ -49,6 +49,64 @@ export const OrganizationCreatePage: FC = () => {
 
   const [submissionComplete, setSubmissionComplete] = useState(false);
   const [submittedCompanyName, setSubmittedCompanyName] = useState<string>('');
+  const submissionCompleteRef = useRef(false);
+
+  // Cleanup verification data on unmount or navigation away
+  const cleanupVerification = useCallback(async () => {
+    if (verificationData?.uuid && !submissionCompleteRef.current) {
+      try {
+        await onboardingVerificationsDestroy({
+          path: { uuid: verificationData.uuid },
+        });
+      } catch {
+        // Ignore errors during cleanup
+      }
+    }
+  }, [verificationData, submissionComplete]);
+
+  // Handle tab close or page refresh
+  useEffect(() => {
+    const handleBeforeUnload = (e: BeforeUnloadEvent) => {
+      if (verificationData?.uuid && !submissionComplete) {
+        // Attempt cleanup (may not complete if tab closes immediately)
+        cleanupVerification();
+        // Show browser confirmation dialog
+        e.preventDefault();
+        e.returnValue = '';
+      }
+    };
+
+    window.addEventListener('beforeunload', handleBeforeUnload);
+
+    return () => {
+      window.removeEventListener('beforeunload', handleBeforeUnload);
+    };
+  }, [verificationData, submissionComplete, cleanupVerification]);
+
+  // Handle navigation away from page
+  useEffect(() => {
+    const deregister = router.transitionService.onBefore(
+      {},
+      async (transition) => {
+        // Don't cleanup if navigating to review status or if already completed
+        if (
+          verificationData?.uuid &&
+          !submissionCompleteRef.current &&
+          transition.to().name !== 'profile.verification-details'
+        ) {
+          try {
+            await cleanupVerification();
+          } catch {
+            // Ignore errors during cleanup
+          }
+        }
+      },
+    );
+
+    return () => {
+      deregister();
+    };
+  }, [router, verificationData, cleanupVerification]);
 
   const handleStep2Submit = useCallback(
     async (formData) => {
@@ -160,20 +218,11 @@ export const OrganizationCreatePage: FC = () => {
       ),
     );
 
-    // Clean up verification object if it was created
-    if (verificationData?.uuid) {
-      try {
-        await onboardingVerificationsDestroy({
-          path: { uuid: verificationData.uuid },
-        });
-      } catch {
-        // Ignore errors during cleanup
-        return;
-      }
-    }
+    // Clean up verification object
+    await cleanupVerification();
 
     router.stateService.go('profile.details');
-  }, [dispatch, router, verificationData]);
+  }, [dispatch, router, cleanupVerification]);
 
   const createOnboardingVerification = useCallback(
     async (formData, _dispatch, formProps) => {
@@ -195,6 +244,8 @@ export const OrganizationCreatePage: FC = () => {
 
         await handleVerificationStatus(validation, formData, {
           onSuccess: () => {
+            submissionCompleteRef.current = true;
+            setSubmissionComplete(true);
             showSuccess(
               translate(
                 'Organization created! You can view your submitted applications in your dashboard.',
@@ -204,6 +255,7 @@ export const OrganizationCreatePage: FC = () => {
             router.stateService.go('profile.details');
           },
           onReview: (companyName) => {
+            submissionCompleteRef.current = true;
             setSubmittedCompanyName(companyName);
             setSubmissionComplete(true);
           },
