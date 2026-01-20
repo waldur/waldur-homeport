@@ -396,4 +396,18 @@ export const states: StateDeclaration[] = [
       permissions: [isStaff],
     },
   },
+
+  {
+    name: 'support-invoices',
+    url: 'invoices/',
+    parent: 'support-customer-support',
+    component: lazyComponent(() =>
+      import('@waldur/support/invoices').then((module) => ({
+        default: module.SupportInvoiceItemsContainer,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Invoice items'),
+    },
+  },
 ];
