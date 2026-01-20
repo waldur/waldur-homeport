@@ -10,6 +10,7 @@ import { TerminateAction } from '@waldur/marketplace/resources/terminate/Termina
 import { CreateRobotAccountAction } from '@waldur/marketplace/robot-accounts/CreateRobotAccountAction';
 import { SetErredActionItem } from '@waldur/resource/actions/SetErredActionItem';
 import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
+import { PullSiteAgentResourceAction } from '@waldur/site-agent/PullSiteAgentResourceAction';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceDetailsAction } from '../details/popup/ResourceDetailsAction';
@@ -43,6 +44,7 @@ export const ActionsList = [
   SetErredActionItem,
   EditResourceEndDateAction,
   SyncResourceAction,
+  PullSiteAgentResourceAction,
   CreateLexisLinkAction,
 ];
 
@@ -54,6 +56,7 @@ export const CustomerResourceActions = [
   ReallocateLimitsAction,
   EditResourceEndDateAction,
   SyncResourceAction,
+  PullSiteAgentResourceAction,
   TerminateAction,
 ];
 
@@ -68,6 +71,7 @@ export const ProviderActionsList = [
   SetErredActionItem,
   EditResourceEndDateByProviderAction,
   ResourceDetailsAction,
+  PullSiteAgentResourceAction,
 ];
 
 export const StaffActions = [
