@@ -17,6 +17,8 @@ import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { formatUserIsActive } from '../support/utils';
 
+import { UserActions } from './UserActions';
+
 export const UserProfile = ({
   user,
   className,
@@ -53,6 +55,7 @@ export const UserProfile = ({
           )}
         </div>
       }
+      actions={<UserActions />}
     >
       <Stack
         direction="horizontal"

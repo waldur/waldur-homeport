@@ -19,6 +19,8 @@ import { translate } from '@waldur/i18n';
 import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
 
+import { ProjectActions } from './dashboard/ProjectActions';
+
 interface ProjectProfileProps {
   project: Project;
 }
@@ -113,6 +115,7 @@ export const ProjectProfile = ({ project }: ProjectProfileProps) => {
           <ProjectKindCard project={project} />
         )
       }
+      actions={<ProjectActions project={project} />}
     >
       <Stack direction="horizontal" className="gap-6 mb-1">
         {project.oecd_fos_2007_code && (

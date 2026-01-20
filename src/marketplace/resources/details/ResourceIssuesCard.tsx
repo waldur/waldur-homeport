@@ -37,7 +37,7 @@ export const ResourceIssuesCard = ({ resource }) => {
       scope={resource}
       scopeType="resource"
       filter={filter}
-      title={translate('Requests')}
+      title={translate('Support')}
       verboseName={translate('Support requests')}
       initialPageSize={PAGE_SIZE_COMPACT}
       tableActions={<CreateIssueButton resource={resource} />}
