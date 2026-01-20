@@ -6,6 +6,7 @@ import {
 
 export interface ChecklistQuestionForm {
   description: string; // Question
+  user_guidance?: string;
   question_type: QuestionTypeEnum;
   required?: boolean;
   order?: number;

@@ -32,6 +32,7 @@ export const QuestionEditAction: FC<QuestionEditActionProps> = ({ row }) => (
     })}
     getInitialValues={(r) => ({
       description: r.description,
+      user_guidance: r.user_guidance,
       question_type: r.question_type,
       required: r.required || false,
       order: r.order,

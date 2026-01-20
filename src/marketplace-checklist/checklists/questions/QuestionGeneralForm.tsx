@@ -32,10 +32,19 @@ export const QuestionGeneralForm = ({
       <FormGroup label={translate('Question')} required space={5}>
         <Field
           name="description"
-          component={TextField as any}
+          component={StringField as any}
           placeholder={translate('Type your question here...')}
           maxLength={150}
           validate={required}
+        />
+      </FormGroup>
+
+      <FormGroup label={translate('User guidance')} space={5}>
+        <Field
+          name="user_guidance"
+          component={TextField as any}
+          placeholder={translate('Input placeholder help text for user...')}
+          maxLength={300}
         />
       </FormGroup>
 

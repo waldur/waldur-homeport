@@ -146,6 +146,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
       const body: QuestionAdminRequest = {
         checklist: checklist.url,
         description: formData.description,
+        user_guidance: formData.user_guidance,
         question_type: formData.question_type,
         review_answer_value: formData.review_answer_value,
         required: formData.required || false,
