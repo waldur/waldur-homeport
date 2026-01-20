@@ -181,19 +181,6 @@ export const getResourceTabs = ({
     });
   }
 
-  const showIssues = hasSupport();
-  if (showIssues) {
-    tabs.push({
-      key: 'requests',
-      title: translate('Requests'),
-      component: lazyComponent(() =>
-        import('./ResourceIssuesCard').then((module) => ({
-          default: module.ResourceIssuesCard,
-        })),
-      ),
-    });
-  }
-
   if (offering.resource_options?.order?.length) {
     tabs.push({
       key: 'resource-options',
@@ -291,6 +278,20 @@ export const getResourceTabs = ({
       ),
     });
   }
+
+  const showIssues = hasSupport();
+  if (showIssues) {
+    tabs.push({
+      key: 'support',
+      title: translate('Support'),
+      component: lazyComponent(() =>
+        import('./ResourceIssuesCard').then((module) => ({
+          default: module.ResourceIssuesCard,
+        })),
+      ),
+    });
+  }
+
   return tabs;
 };
 

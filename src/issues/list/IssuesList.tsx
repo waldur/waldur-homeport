@@ -176,7 +176,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       {...tableProps}
       filters={props.filter ? undefined : <IssuesFilter />}
       columns={columns}
-      title={translate('Requests')}
+      title={translate('Support requests')}
       verboseName={translate('support requests')}
       hasQuery={true}
       showPageSizeSelector={true}

@@ -105,7 +105,8 @@ export const states: StateDeclaration[] = [
       ),
     ),
     data: {
-      breadcrumb: () => translate('Issues'),
+      breadcrumb: () => translate('Support'),
+      skipBreadcrumb: true,
       permissions: [hasSupport],
     },
   },
