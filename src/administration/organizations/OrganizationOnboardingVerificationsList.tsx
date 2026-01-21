@@ -45,8 +45,8 @@ export const getOnboardingVerificationColumns = (options?: {
     {
       title: translate('Legal name'),
       render: ({ row }) =>
-        renderFieldOrDash(row.legal_name || row.verified_company_data.name),
-      copyField: (row) => row.legal_name || row.verified_company_data.name,
+        renderFieldOrDash(row.verified_company_data.name || row.legal_name),
+      copyField: (row) => row.verified_company_data.name || row.legal_name,
       id: 'legal_name',
       keys: ['legal_name'],
     },
