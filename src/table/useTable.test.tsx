@@ -136,6 +136,38 @@ describe('useTable', () => {
       expect(typeof result.current.openFiltersDrawer).toBe('function');
       expect(typeof result.current.renderFiltersDrawer).toBe('function');
     });
+
+    it('returns filter from options for export functionality', () => {
+      const store = createTestStore();
+      const testFilter = { customer_uuid: 'test-uuid', status: 'active' };
+
+      const { result } = renderHook(
+        () =>
+          useTable({
+            table: 'TestTable',
+            fetchData: mockFetchData,
+            filter: testFilter,
+          }),
+        { wrapper: createWrapper(store) },
+      );
+
+      expect(result.current.filter).toEqual(testFilter);
+    });
+
+    it('returns undefined filter when no filter is provided', () => {
+      const store = createTestStore();
+
+      const { result } = renderHook(
+        () =>
+          useTable({
+            table: 'TestTable',
+            fetchData: mockFetchData,
+          }),
+        { wrapper: createWrapper(store) },
+      );
+
+      expect(result.current.filter).toBeUndefined();
+    });
   });
 
   describe('pagination actions', () => {

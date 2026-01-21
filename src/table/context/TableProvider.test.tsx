@@ -292,6 +292,46 @@ describe('TableProvider', () => {
     });
   });
 
+  describe('filter passthrough', () => {
+    it('provides filter from props for export functionality', () => {
+      const testFilter = { customer_uuid: 'test-uuid', status: 'active' };
+
+      function FilterConsumer() {
+        const { filter } = useTableContext();
+        return <span data-testid="filter">{JSON.stringify(filter)}</span>;
+      }
+
+      render(
+        <TableProvider {...defaultProps} filter={testFilter}>
+          <FilterConsumer />
+        </TableProvider>,
+      );
+
+      expect(screen.getByTestId('filter')).toHaveTextContent(
+        JSON.stringify(testFilter),
+      );
+    });
+
+    it('provides undefined filter when not specified', () => {
+      function FilterConsumer() {
+        const { filter } = useTableContext();
+        return (
+          <span data-testid="filter">
+            {filter === undefined ? 'undefined' : JSON.stringify(filter)}
+          </span>
+        );
+      }
+
+      render(
+        <TableProvider {...defaultProps}>
+          <FilterConsumer />
+        </TableProvider>,
+      );
+
+      expect(screen.getByTestId('filter')).toHaveTextContent('undefined');
+    });
+  });
+
   describe('slots', () => {
     it('provides gridItem slot when specified', () => {
       const GridItem = ({ row }) => <div>{row.name}</div>;

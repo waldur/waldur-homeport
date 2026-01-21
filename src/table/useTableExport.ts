@@ -11,6 +11,7 @@ import { fetchAll } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from './constants';
 import exportAs from './exporters';
 import { ExportConfig } from './exporters/types';
+import { tableExtraFilters } from './middleware';
 import { getTableOptions } from './registry';
 import { selectTableRows, getTableState } from './selectors';
 import { TableRequest } from './types';
@@ -61,11 +62,17 @@ export function useTableExport(table, props?) {
     }
 
     if (config.allPages) {
+      // Use current filter from props (passed from Table component) instead of
+      // stale filter from registry, as the registry filter is captured only once
+      // when the table is first registered. Also check tableExtraFilters for
+      // cases where filter was set via Redux action.
+      const currentFilter =
+        props?.filter ?? tableExtraFilters[table] ?? options.filter;
       const request: TableRequest = {
         tableKey: table,
         pageSize: Math.max(tableState.pagination.resultCount, 200),
         currentPage: 1,
-        filter: config.withFilters ? { ...options.filter } : {},
+        filter: config.withFilters ? { ...currentFilter } : {},
       };
       if (config.withFilters && options.queryField && tableState.query) {
         request.filter[options.queryField] = tableState.query;

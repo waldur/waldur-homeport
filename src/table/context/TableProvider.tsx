@@ -107,6 +107,7 @@ export function TableProvider<TData = any>({
       pinnedColumns: props.pinnedColumns,
 
       // Filters
+      filter: props.filter,
       filterPosition: props.filterPosition,
       filtersStorage: props.filtersStorage || [],
       showFilterMenuToggle: props.showFilterMenuToggle,
@@ -229,6 +230,7 @@ export function TableProvider<TData = any>({
       props.activeColumns,
       props.columnPositions,
       props.pinnedColumns,
+      props.filter,
       props.filterPosition,
       props.filtersStorage,
       props.showFilterMenuToggle,
