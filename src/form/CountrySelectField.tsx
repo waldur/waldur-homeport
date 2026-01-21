@@ -56,10 +56,11 @@ export const CountrySelectField: FC<CountrySelectFieldProps> = ({
           ? data?.find((option) => option.value === input.value) || null
           : null
       }
-      onChange={(option: CountryOption | null) =>
-        input.onChange(option?.value || null)
-      }
-      onBlur={input.onBlur}
+      onChange={(option: CountryOption | null) => {
+        input.onChange(option?.value || null);
+        input.onBlur(option?.value || null);
+      }}
+      onBlur={() => input.onBlur(input.value)}
       components={{ Option, SingleValue }}
       placeholder={placeholder}
       getOptionLabel={(option: CountryOption) => option.label}

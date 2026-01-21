@@ -29,6 +29,11 @@ export const questionTypeOptions: Array<{ label; value: QuestionTypeEnum }> = [
   { label: translate('Multi select'), value: 'multi_select' },
   { label: translate('Date'), value: 'date' },
   { label: translate('File'), value: 'file' },
+  { label: translate('Email'), value: 'email' },
+  { label: translate('Phone number'), value: 'phone_number' },
+  { label: translate('URL'), value: 'url' },
+  { label: translate('Year'), value: 'year' },
+  { label: translate('Country'), value: 'country' },
 ];
 
 export const isQuestionSelectType = (questionType) =>
