@@ -37,6 +37,7 @@ export function TableToolbarActions() {
     activeColumns,
     columnPositions,
     mode,
+    filter,
     filterPosition,
     filtersStorage,
   } = useTableContext();
@@ -147,6 +148,7 @@ export function TableToolbarActions() {
               gridItem={slots.gridItem}
               mode={mode}
               setDisplayMode={actions.setDisplayMode}
+              filter={filter}
               filters={slots.filters}
               filterPosition={filterPosition}
               filtersStorage={filtersStorage}

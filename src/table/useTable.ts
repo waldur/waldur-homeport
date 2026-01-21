@@ -294,5 +294,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
     table,
     rows,
     alterTitle,
+    // Pass current filter for export functionality
+    filter,
   };
 };

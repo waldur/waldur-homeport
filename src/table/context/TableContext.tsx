@@ -135,6 +135,7 @@ export interface TableContextValue<TData = any> {
   pinnedColumns: PinnedColumns;
 
   // Filters
+  filter?: Record<string, any>;
   filterPosition: FilterPosition;
   filtersStorage: FilterItem[];
   showFilterMenuToggle: boolean;
