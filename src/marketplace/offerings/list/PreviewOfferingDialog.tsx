@@ -1,7 +1,11 @@
+import { useQuery } from '@tanstack/react-query';
 import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
+import { marketplaceProviderOfferingsRetrieve } from 'waldur-js-client';
 
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { DeployFormData } from '@waldur/marketplace/common/types';
 import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
@@ -27,12 +31,49 @@ interface PreviewOfferingDialogProps
   extends OfferingConfigurationFormProps, PreviewOfferingOwnProps {}
 
 const PurePreviewOfferingDialog = (props: PreviewOfferingDialogProps) => {
+  const initialOffering = props.resolve.offering;
+  const shouldLoadFullOffering =
+    !initialOffering.options || !initialOffering.plans;
+
+  const {
+    data: fetchedOffering,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: [
+      'preview-offering',
+      initialOffering.uuid,
+      shouldLoadFullOffering,
+    ],
+    queryFn: () =>
+      marketplaceProviderOfferingsRetrieve({
+        path: { uuid: initialOffering.uuid },
+      }).then((response) => response.data as Offering),
+    enabled: shouldLoadFullOffering,
+    refetchOnWindowFocus: false,
+  });
+
+  const offeringData = shouldLoadFullOffering
+    ? fetchedOffering
+    : initialOffering;
+
   return (
     <ModalDialog
       title={translate('Preview offering')}
       footer={<CloseDialogButton />}
     >
-      <DeployPage offering={props.resolve.offering} previewMode={true} />
+      {shouldLoadFullOffering ? (
+        isLoading ? (
+          <LoadingSpinner />
+        ) : error ? (
+          <LoadingErred loadData={refetch} />
+        ) : offeringData ? (
+          <DeployPage offering={offeringData} previewMode={true} />
+        ) : null
+      ) : (
+        <DeployPage offering={offeringData} previewMode={true} />
+      )}
     </ModalDialog>
   );
 };
