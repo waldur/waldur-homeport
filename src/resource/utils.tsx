@@ -3,7 +3,10 @@ import { translate } from '@waldur/i18n';
 
 export const getResourceAccessEndpoints = (resource, offering) => {
   const os = detectOS();
-  let endpoints = [...resource.endpoints, ...offering.endpoints];
+  let endpoints = [
+    ...(resource.endpoints || []),
+    ...(offering.endpoints || []),
+  ];
   if (os === 'Windows') {
     endpoints = endpoints.filter((endpoint) => !isSshFormat(endpoint.url));
   }

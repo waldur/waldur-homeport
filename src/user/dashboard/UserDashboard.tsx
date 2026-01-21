@@ -1,7 +1,14 @@
-import { SignInIcon, BuildingsIcon } from '@phosphor-icons/react';
-import { FC, useEffect, useState } from 'react';
-import { Col, Row } from 'react-bootstrap';
 import {
+  SignInIcon,
+  BuildingsIcon,
+  RocketLaunchIcon,
+} from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useEffect, useMemo, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
+import { useDispatch } from 'react-redux';
+import {
+  marketplaceGlobalCategoriesRetrieve,
   onboardingVerificationsList,
   userInvitationsList,
 } from 'waldur-js-client';
@@ -12,6 +19,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { openModalDialog } from '@waldur/modal/actions';
 import { router } from '@waldur/router';
 import { useUser } from '@waldur/workspace/hooks';
 
@@ -20,9 +28,11 @@ import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 import { ActiveInvitationsList } from './ActiveInvitationsList';
 import { DashboardCard } from './DashboardCard';
 import { UserPendingActionsList } from './UserPendingActionsList';
+import { UserResourcesDialog } from './UserResourcesWidget';
 
 export const UserDashboard: FC = () => {
   const user = useUser();
+  const dispatch = useDispatch();
   const [invitationsCount, setInvitationsCount] = useState<number>(0);
   const [_isLoadingInvitations, setIsLoadingInvitations] =
     useState<boolean>(true);
@@ -30,6 +40,23 @@ export const UserDashboard: FC = () => {
     useState<number>(0);
   const [_isLoadingVerifications, setIsLoadingVerifications] =
     useState<boolean>(true);
+
+  // Reuse the same query as sidebar ResourcesMenu for resource counts
+  const { data: counters } = useQuery({
+    queryKey: ['ResourcesMenu', 'Counters', user?.uuid, undefined, undefined],
+    queryFn: () =>
+      marketplaceGlobalCategoriesRetrieve({}).then((response) => response.data),
+    enabled: !!user,
+    refetchOnWindowFocus: false,
+  });
+
+  const resourcesCount = useMemo((): number => {
+    if (!counters) return 0;
+    return Object.values(counters).reduce<number>(
+      (acc, count) => acc + (Number(count) || 0),
+      0,
+    );
+  }, [counters]);
 
   const showOnboardingWidgets = isFeatureVisible(
     CustomerFeatures.show_onboarding,
@@ -89,6 +116,7 @@ export const UserDashboard: FC = () => {
 
   const hasActiveInvitations = invitationsCount > 0;
   const hasEscalatedVerifications = escalatedVerificationsCount > 0;
+  const hasResources = resourcesCount > 0;
 
   const scrollToActiveInvitations = () => {
     const element = document.getElementById('active-invitations-section');
@@ -101,31 +129,59 @@ export const UserDashboard: FC = () => {
     router.stateService.go('profile.onboarding-applications');
   };
 
+  const openResourcesDialog = () => {
+    dispatch(openModalDialog(UserResourcesDialog, { resolve: {}, size: 'lg' }));
+  };
+
   const showDashboardWidgets = isExperimentalUiComponentsVisible();
+
+  // Resources widget shows independently (always visible when user has resources)
+  const showOtherWidgets =
+    showDashboardWidgets &&
+    (hasActiveInvitations ||
+      (showOnboardingWidgets && hasEscalatedVerifications));
 
   return (
     <>
-      {showDashboardWidgets &&
-        (hasActiveInvitations ||
-          (showOnboardingWidgets && hasEscalatedVerifications)) && (
-          <Row className="mb-5">
-            {hasActiveInvitations && (
-              <Col md={4}>
-                <DashboardCard
-                  title={translate('Active invitations')}
-                  message={translate(
-                    'See pending invites sent to your email {email} ({count})',
-                    { email: user.email, count: invitationsCount },
-                  )}
-                  icon={<SignInIcon size={32} color="white" weight="bold" />}
-                  isLoading={false}
-                  hasItems={true}
-                  backgroundColor="bg-success"
-                  onClick={scrollToActiveInvitations}
-                />
-              </Col>
-            )}
-            {showOnboardingWidgets && hasEscalatedVerifications && (
+      {(hasResources || showOtherWidgets) && (
+        <Row className="mb-5">
+          {hasResources && (
+            <Col md={4}>
+              <DashboardCard
+                title={translate('Your resources')}
+                message={translate(
+                  'You have access to {count} resources. Click to learn how to get started.',
+                  { count: resourcesCount },
+                )}
+                icon={
+                  <RocketLaunchIcon size={32} color="white" weight="bold" />
+                }
+                isLoading={false}
+                hasItems={true}
+                backgroundColor="bg-info"
+                onClick={openResourcesDialog}
+              />
+            </Col>
+          )}
+          {showDashboardWidgets && hasActiveInvitations && (
+            <Col md={4}>
+              <DashboardCard
+                title={translate('Active invitations')}
+                message={translate(
+                  'See pending invites sent to your email {email} ({count})',
+                  { email: user.email, count: invitationsCount },
+                )}
+                icon={<SignInIcon size={32} color="white" weight="bold" />}
+                isLoading={false}
+                hasItems={true}
+                backgroundColor="bg-success"
+                onClick={scrollToActiveInvitations}
+              />
+            </Col>
+          )}
+          {showDashboardWidgets &&
+            showOnboardingWidgets &&
+            hasEscalatedVerifications && (
               <Col md={4}>
                 <DashboardCard
                   title={translate('Pending onboarding applications')}
@@ -141,8 +197,8 @@ export const UserDashboard: FC = () => {
                 />
               </Col>
             )}
-          </Row>
-        )}
+        </Row>
+      )}
 
       {ENV.plugins?.WALDUR_CORE?.USER_ACTIONS_ENABLED && (
         <div className="mb-5">
