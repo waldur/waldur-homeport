@@ -20,14 +20,20 @@ import {
   useThreadRunningState,
 } from '@waldur/ai-assistant/lib/thread/threadStateHooks';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
+import { isDrawerOpen } from '@waldur/drawer/utils';
 
 const EMPTY_MESSAGES: ThreadMessageLike[] = [];
 
 export function ThreadRuntimeProvider({
   children,
 }: Readonly<{ children: ReactNode }>) {
-  const { currentThreadId, setCurrentThreadId, threads, setThreads } =
-    useThreadContext();
+  const {
+    currentThreadId,
+    setCurrentThreadId,
+    threads,
+    setThreads,
+    setHasNewMessages,
+  } = useThreadContext();
 
   const [threadList, setThreadList] = useState<
     ExternalStoreThreadData<'regular' | 'archived'>[]
@@ -122,6 +128,11 @@ export function ThreadRuntimeProvider({
       createController,
       cleanupController,
       abortThread,
+      onStreamComplete: () => {
+        if (!isDrawerOpen()) {
+          setHasNewMessages(true);
+        }
+      },
     }),
     [
       setMessages,
@@ -131,6 +142,7 @@ export function ThreadRuntimeProvider({
       createController,
       cleanupController,
       abortThread,
+      setHasNewMessages,
     ],
   );
 

@@ -2,11 +2,13 @@ import { SparkleIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
+import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openDrawerDialog } from '@waldur/drawer/actions';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
 
 const LLMChatDrawer = lazyComponent(() =>
   import('@waldur/ai-assistant/components/LLMChatDrawer').then((module) => ({
@@ -16,12 +18,15 @@ const LLMChatDrawer = lazyComponent(() =>
 
 export const LLMChatDrawerToggle: React.FC = () => {
   const dispatch = useDispatch();
+  const { hasNewMessages, setHasNewMessages } = useThreadContext();
 
   if (!isFeatureVisible(SupportFeatures.enable_llm_assistant)) {
     return null;
   }
 
   const openChatDrawer = () => {
+    // Clear the unread indicator when drawer opens
+    setHasNewMessages(false);
     dispatch(
       openDrawerDialog(LLMChatDrawer, {
         title: translate('AI Assistant'),
@@ -42,6 +47,7 @@ export const LLMChatDrawerToggle: React.FC = () => {
         <span className="svg-icon svg-icon-2">
           <SparkleIcon weight="bold" />
         </span>
+        {hasNewMessages && <HeaderButtonBullet />}
       </button>
     </div>
   );

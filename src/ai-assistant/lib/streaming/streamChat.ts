@@ -1,5 +1,7 @@
 import { chatStream, ChatResponse } from 'waldur-js-client';
 
+import { translate } from '@waldur/i18n';
+
 export async function* streamChat(
   input: string,
   signal?: AbortSignal,
@@ -21,12 +23,14 @@ export async function* streamChat(
     if (error instanceof Error) {
       throw error;
     }
-    throw new Error('Failed to connect to the inference API');
+    throw new Error(translate('Failed to connect to the inference API'));
   }
 
   const stream = result.data;
   if (!stream) {
-    throw new Error('No stream data received from the inference API');
+    throw new Error(
+      translate('No stream data received from the inference API'),
+    );
   }
   const reader = stream.getReader();
   const decoder = new TextDecoder();

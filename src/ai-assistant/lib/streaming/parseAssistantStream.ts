@@ -8,6 +8,7 @@ import {
   MessageHandlerDependencies,
   UIBlock,
 } from '@waldur/ai-assistant/lib/types';
+import { translate } from '@waldur/i18n';
 
 interface ParseAssistantStreamParams extends Pick<
   MessageHandlerDependencies,
@@ -16,11 +17,14 @@ interface ParseAssistantStreamParams extends Pick<
   contextInput: string;
   assistantId: string;
   signal: AbortSignal;
+  onStreamComplete?: () => void;
 }
 
 export async function parseAssistantStream(params: ParseAssistantStreamParams) {
-  const { contextInput, assistantId, signal, setMessages } = params;
+  const { contextInput, assistantId, signal, setMessages, onStreamComplete } =
+    params;
   let currentBlocks: UIBlock[] = [];
+  let hadError = false;
 
   try {
     for await (const part of streamChat(contextInput, signal)) {
@@ -55,12 +59,13 @@ export async function parseAssistantStream(params: ParseAssistantStreamParams) {
       );
     }
   } catch (error: unknown) {
+    hadError = true;
     const aborted = signal?.aborted;
     const errorMessage = aborted
-      ? 'Assistant message was cancelled'
+      ? translate('Assistant message was cancelled')
       : error instanceof Error
         ? error.message
-        : 'An unknown error occurred';
+        : translate('An unknown error occurred');
 
     const reason: 'cancelled' | 'error' = aborted ? 'cancelled' : 'error';
 
@@ -106,5 +111,10 @@ export async function parseAssistantStream(params: ParseAssistantStreamParams) {
         };
       }),
     );
+
+    // Notify that stream completed successfully (not aborted and no errors)
+    if (!signal?.aborted && !hadError && onStreamComplete) {
+      onStreamComplete();
+    }
   }
 }

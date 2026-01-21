@@ -3,19 +3,18 @@ import React, { createContext, ReactNode, useContext, useState } from 'react';
 
 import { randomUUID } from '@waldur/core/utils';
 
-const ThreadContext = createContext<{
+interface ThreadContextType {
   currentThreadId: string;
   setCurrentThreadId: (id: string) => void;
   threads: Map<string, ThreadMessageLike[]>;
   setThreads: React.Dispatch<
     React.SetStateAction<Map<string, ThreadMessageLike[]>>
   >;
-}>({
-  currentThreadId: 'default',
-  setCurrentThreadId: () => {},
-  threads: new Map(),
-  setThreads: () => {},
-});
+  hasNewMessages: boolean;
+  setHasNewMessages: (hasNew: boolean) => void;
+}
+
+const ThreadContext = createContext<ThreadContextType | null>(null);
 
 export function ThreadProvider({ children }: { children: ReactNode }) {
   // Create initial thread with unique ID
@@ -26,19 +25,28 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
   );
   // Track which thread is currently active
   const [currentThreadId, setCurrentThreadId] = useState(threadID);
+  // Track if there are new messages
+  const [hasNewMessages, setHasNewMessages] = useState(false);
 
   return (
     <ThreadContext.Provider
-      value={{ currentThreadId, setCurrentThreadId, threads, setThreads }}
+      value={{
+        currentThreadId,
+        setCurrentThreadId,
+        threads,
+        setThreads,
+        hasNewMessages,
+        setHasNewMessages,
+      }}
     >
       {children}
     </ThreadContext.Provider>
   );
 }
 
-export function useThreadContext() {
+export function useThreadContext(): ThreadContextType {
   const context = useContext(ThreadContext);
-  if (!context) {
+  if (context === null) {
     throw new Error('useThreadContext must be used within ThreadProvider');
   }
   return context;
