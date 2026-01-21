@@ -20,6 +20,7 @@ export interface MessageHandlerDependencies {
   createController: (threadId: string) => AbortController;
   cleanupController: (threadId: string) => void;
   abortThread: (threadId: string) => void;
+  onStreamComplete?: () => void;
 }
 
 export type RunConfig = {

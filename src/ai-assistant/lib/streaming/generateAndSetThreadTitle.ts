@@ -1,5 +1,6 @@
 import { streamChat } from '@waldur/ai-assistant/lib/streaming/streamChat';
 import { MessageHandlerDependencies } from '@waldur/ai-assistant/lib/types';
+import { translate } from '@waldur/i18n';
 
 export const generateAndSetThreadTitle = async (
   input: string,
@@ -39,7 +40,7 @@ export const generateAndSetThreadTitle = async (
     deps.setThreadList((prev) =>
       prev.map((thread) =>
         thread.id === deps.currentThreadId
-          ? { ...thread, title: 'New Chat' }
+          ? { ...thread, title: translate('New Chat') }
           : thread,
       ),
     );

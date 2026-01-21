@@ -55,6 +55,7 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
         assistantId: assistantPlaceholder.id!,
         signal: abortController.signal,
         setMessages: deps.setMessages,
+        onStreamComplete: deps.onStreamComplete,
       });
       if (isFirstMessage && !abortController.signal.aborted) {
         await generateAndSetThreadTitle(input, deps, abortController.signal);
@@ -131,6 +132,7 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
         assistantId: assistantIdToStream,
         signal: abortController.signal,
         setMessages: deps.setMessages,
+        onStreamComplete: deps.onStreamComplete,
       });
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
@@ -193,6 +195,7 @@ export const createOnReload = (deps: MessageHandlerDependencies) => {
         assistantId: sourceId,
         signal: abortController.signal,
         setMessages: deps.setMessages,
+        onStreamComplete: deps.onStreamComplete,
       });
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
