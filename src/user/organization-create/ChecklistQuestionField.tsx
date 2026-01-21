@@ -3,13 +3,21 @@ import { Field } from 'redux-form';
 import { QuestionAdmin } from 'waldur-js-client';
 
 import { composeValidators, email, required } from '@waldur/core/validators';
+import { FileUploadField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { CountrySelectField } from '@waldur/form/CountrySelectField';
 import { DateField } from '@waldur/form/DateField';
+import { DateTimeField } from '@waldur/form/DateTimeField';
+import { EmailField } from '@waldur/form/EmailField';
 import { FormGroup } from '@waldur/form/FormGroup';
 import { NumberField } from '@waldur/form/NumberField';
+import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
 import { SelectField } from '@waldur/form/SelectField';
 import { StringField } from '@waldur/form/StringField';
 import { TextField } from '@waldur/form/TextField';
+import { YearField } from '@waldur/form/YearField';
+import { translate } from '@waldur/i18n';
+import { useQuestionNumberValidator } from '@waldur/marketplace-checklist/utils';
 
 interface ChecklistQuestionFieldProps {
   question: QuestionAdmin;
@@ -19,24 +27,32 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
   question,
 }) => {
   const fieldName = `question_${question.uuid}`;
+  const type = question.question_type;
   const isRequired = question.required;
-  const isEmailQuestion = question.question_type === 'email';
+
+  const numberValidator = useQuestionNumberValidator(question);
+
   const validators = [];
   if (isRequired) validators.push(required);
-  if (isEmailQuestion) validators.push(email);
+  if (type === 'email') validators.push(email);
+  if (type === 'number' && numberValidator) validators.push(numberValidator);
 
-  switch (question.question_type) {
+  const commonProps = {
+    key: question.uuid,
+    name: fieldName,
+    label: question.description,
+    required: isRequired,
+    validate:
+      validators.length > 0 ? composeValidators(...validators) : undefined,
+  };
+
+  const placeholder =
+    question.user_guidance || translate('Type your answer here');
+
+  switch (type) {
     case 'text_input':
       return (
-        <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          placeholder={question.user_guidance || ''}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
-          component={FormGroup}
-        >
+        <Field {...commonProps} placeholder={placeholder} component={FormGroup}>
           <StringField />
         </Field>
       );
@@ -44,13 +60,9 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
     case 'text_area':
       return (
         <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          placeholder={question.user_guidance || ''}
+          {...commonProps}
+          placeholder={placeholder}
           rows={3}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
           component={FormGroup}
         >
           <TextField />
@@ -60,13 +72,10 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
     case 'single_select':
       return (
         <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
+          {...commonProps}
           component={FormGroup}
           simpleValue
+          isClearable={!isRequired}
           options={question.question_options?.map((opt) => ({
             label: opt.label,
             value: opt.uuid,
@@ -79,14 +88,11 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
     case 'multi_select':
       return (
         <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
+          {...commonProps}
           component={FormGroup}
           simpleValue
           isMulti
+          isClearable={!isRequired}
           options={question.question_options?.map((opt) => ({
             label: opt.label,
             value: opt.uuid,
@@ -99,12 +105,8 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
     case 'number':
       return (
         <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          placeholder={question.user_guidance || ''}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
+          {...commonProps}
+          placeholder="0"
           component={FormGroup}
           min={question.min_value}
           max={question.max_value}
@@ -115,56 +117,108 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
 
     case 'date':
       return (
-        <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
-          component={FormGroup}
-        >
+        <Field {...commonProps} component={FormGroup}>
           <DateField />
+        </Field>
+      );
+
+    case 'datetime':
+      return (
+        <Field {...commonProps} component={FormGroup}>
+          <DateTimeField />
+        </Field>
+      );
+
+    case 'year':
+      return (
+        <Field {...commonProps} component={FormGroup}>
+          <YearField />
         </Field>
       );
 
     case 'boolean':
       return (
         <Field
-          key={question.uuid}
-          name={fieldName}
+          {...commonProps}
           component={AwesomeCheckboxField as any}
-          label={question.description}
           description={question.user_guidance}
-          validate={isRequired ? composeValidators(...validators) : undefined}
         />
       );
 
     case 'email':
       return (
         <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          placeholder={question.user_guidance || ''}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
+          {...commonProps}
+          placeholder={question.user_guidance}
           component={FormGroup}
         >
-          <StringField type="email" />
+          <EmailField />
+        </Field>
+      );
+
+    case 'phone_number':
+      return (
+        <Field
+          {...commonProps}
+          placeholder={question.user_guidance}
+          component={FormGroup}
+        >
+          <PhoneNumberField />
+        </Field>
+      );
+
+    case 'url':
+      return (
+        <Field
+          {...commonProps}
+          placeholder={question.user_guidance}
+          component={FormGroup}
+        >
+          <StringField type="url" />
+        </Field>
+      );
+
+    case 'file':
+    case 'multiple_files':
+      return (
+        <Field
+          {...commonProps}
+          component={FormGroup}
+          showFileName={true}
+          buttonLabel={translate('Browse')}
+        >
+          <FileUploadField buttonLabel="" />
+        </Field>
+      );
+
+    case 'rating':
+      return (
+        <Field
+          {...commonProps}
+          placeholder="0"
+          component={FormGroup}
+          min={question.min_value || 0}
+          max={question.max_value || 10}
+        >
+          <NumberField />
+        </Field>
+      );
+
+    case 'country':
+      return (
+        <Field
+          {...commonProps}
+          placeholder={placeholder}
+          component={FormGroup}
+          isClearable={!isRequired}
+        >
+          <CountrySelectField />
         </Field>
       );
 
     default:
       return (
-        <Field
-          key={question.uuid}
-          name={fieldName}
-          label={question.description}
-          placeholder={question.user_guidance || ''}
-          required={isRequired}
-          validate={isRequired ? composeValidators(...validators) : undefined}
-          component={FormGroup}
-        >
+        <Field {...commonProps} placeholder={placeholder} component={FormGroup}>
           <StringField />
         </Field>
       );
