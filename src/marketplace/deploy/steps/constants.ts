@@ -30,7 +30,7 @@ export const AdditionalConfigurationStep = {
   required: false,
   component: FormAdditionalConfigurationStep,
   isActive: (offering) => {
-    return offering.options.order?.length > 0;
+    return offering.options?.order?.length > 0;
   },
 };
 
