@@ -2360,9 +2360,11 @@
           "template",
           "resource-usage",
           "support",
+          "invoices",
           "user",
           "affiliations",
           "UserPendingActionsList",
+          "UserResourcesWidget",
           "UserTosManagement"
         ],
         "component_types": [
@@ -2437,10 +2439,13 @@
           "rancher/template/ApplicationConfiguration.tsx",
           "reporting/resource-usage/ResourceUsageFilter.tsx",
           "support/SupportEventsFilter.tsx",
+          "support/invoices/SupportInvoiceItemsFilter.tsx",
+          "support/invoices/SupportInvoiceItemsList.tsx",
           "user/UserPermissionRequestsList.tsx",
           "user/affiliations/SummaryResourcesTable.tsx",
           "user/dashboard/UserPendingActionsList/ActionContext.tsx",
           "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceProjectGroup.tsx",
           "user/dashboard/UserTosManagement/OfferingResourcesTable.tsx",
           "user/dashboard/UserTosManagement/RevokeTosDialog.tsx"
         ]
@@ -2470,9 +2475,13 @@
         "unknown"
       ],
       "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
+        "endpoints": [
+          "x-result-count"
+        ],
+        "http_methods": [
+          "GET"
+        ],
+        "has_api_calls": true
       },
       "interaction_context": {
         "modifies_state": true,
@@ -2480,7 +2489,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 65
+      "usage_count": 68
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -15823,6 +15832,7 @@
           "admin",
           "customer_management",
           "general",
+          "billing",
           "support",
           "marketplace",
           "infrastructure",
@@ -15842,6 +15852,7 @@
           "import",
           "payment-profiles",
           "invitations",
+          "import-usage",
           "list",
           "offerings",
           "details",
@@ -15889,6 +15900,7 @@
           "customer/payment-profiles/PaymentProfileList.tsx",
           "invitations/GroupInvitationsList.tsx",
           "invitations/InvitationsList.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "issues/list/IssuesFilter.tsx",
           "issues/list/IssuesList.tsx",
           "marketplace/offerings/OfferingBreadcrumbPopover.tsx",
@@ -15955,7 +15967,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 54
+      "usage_count": 55
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -16347,9 +16359,11 @@
           "resource-usage",
           "reviewer",
           "support",
+          "invoices",
           "user",
           "affiliations",
-          "UserPendingActionsList"
+          "UserPendingActionsList",
+          "UserResourcesWidget"
         ],
         "component_types": [
           "filter",
@@ -16428,6 +16442,8 @@
           "reporting/resource-usage/ResourceUsageFilter.tsx",
           "reviewer/AffiliationsSection.tsx",
           "support/SupportEventsFilter.tsx",
+          "support/invoices/SupportInvoiceItemsFilter.tsx",
+          "support/invoices/SupportInvoiceItemsList.tsx",
           "user/UserPermissionRequestExpandableRow.tsx",
           "user/UserPermissionRequestsList.tsx",
           "user/affiliations/OrganizationsList.tsx",
@@ -16436,6 +16452,7 @@
           "user/affiliations/UserAffiliationsList.tsx",
           "user/dashboard/UserPendingActionsList/ActionContext.tsx",
           "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceProjectGroup.tsx",
           "user/support/UserDetailsTable.tsx",
           "user/support/UserFilter.tsx",
           "user/support/UserList.tsx"
@@ -16464,9 +16481,13 @@
         "unknown"
       ],
       "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
+        "endpoints": [
+          "x-result-count"
+        ],
+        "http_methods": [
+          "GET"
+        ],
+        "has_api_calls": true
       },
       "interaction_context": {
         "modifies_state": true,
@@ -16474,7 +16495,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 76
+      "usage_count": 79
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -18154,8 +18175,8 @@
         "title",
         "unknown",
         "generic_element",
-        "label",
-        "property_value"
+        "property_value",
+        "label"
       ],
       "components": [
         "Table",
@@ -18245,6 +18266,7 @@
           "core/PermissionsReviewsList.tsx",
           "customer/list/CustomerList.tsx",
           "customer/list/OrganizationCard.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "invoices/list/InvoicesFilter.tsx",
           "issues/IssueDetails.tsx",
           "issues/feedback/SupportFeedbackList.tsx",
@@ -18305,7 +18327,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 46
+      "usage_count": 47
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -22826,6 +22848,7 @@
         "ModalDialog",
         "Table",
         "TableFilterItem",
+        "BsTable",
         "Tab",
         "Tabs",
         "VStepperFormStepCard",
@@ -22858,6 +22881,7 @@
           "general",
           "infrastructure",
           "project_management",
+          "support",
           "user_management"
         ],
         "feature_areas": [
@@ -22866,6 +22890,7 @@
           "site-agents",
           "credits",
           "details",
+          "import-usage",
           "aggregate-limits",
           "deploy",
           "steps",
@@ -22890,6 +22915,7 @@
           "configuration",
           "plan-usage",
           "resource-usage",
+          "invoices",
           "user",
           "affiliations",
           "UserPendingActionsList",
@@ -22916,6 +22942,7 @@
           "customer/credits/CreditUsageFilter.tsx",
           "invoices/details/InvoiceItemsFilter.tsx",
           "invoices/details/InvoiceItemsTable.tsx",
+          "invoices/import-usage/Step2ColumnMapping.tsx",
           "marketplace/aggregate-limits/AggregateLimitsExpandableRow.tsx",
           "marketplace/deploy/DetailsOverviewDialog.tsx",
           "marketplace/deploy/steps/FormDetailsOverviewStep.tsx",
@@ -22970,6 +22997,8 @@
           "reporting/resource-usage/ResourceUsageFilter.tsx",
           "reporting/resource-usage/ResourceUsageList.tsx",
           "reporting/resource-usage/UserUsageList.tsx",
+          "support/invoices/SupportInvoiceItemsFilter.tsx",
+          "support/invoices/SupportInvoiceItemsList.tsx",
           "user/UserOfferingList.tsx",
           "user/affiliations/SummaryResourcesTable.tsx",
           "user/dashboard/UserPendingActionsList/ActionContext.tsx",
@@ -22984,6 +23013,8 @@
           "FormGroup",
           "Table",
           "TableFilterItem",
+          "label",
+          "th",
           "Tab",
           "div",
           "MetadataGroupBy",
@@ -23007,7 +23038,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 69
+      "usage_count": 72
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -23037,6 +23068,7 @@
         "FormLabel",
         "FormContainer",
         "WizardForm",
+        "BsTable",
         "VStepperFormStepCard",
         "Card",
         "PlanCard",
@@ -23063,6 +23095,7 @@
       "file_context": {
         "domains": [
           "admin",
+          "billing",
           "marketplace",
           "general",
           "infrastructure",
@@ -23071,6 +23104,7 @@
         ],
         "feature_areas": [
           "auto-provisioning-rules",
+          "import-usage",
           "steps",
           "plan",
           "offerings",
@@ -23098,6 +23132,7 @@
         "paths": [
           "administration/auto-provisioning-rules/RuleExpandableRow.tsx",
           "administration/auto-provisioning-rules/Step1OfferingAndPlan.tsx",
+          "invoices/import-usage/Step2ColumnMapping.tsx",
           "marketplace/deploy/steps/FormPlanStep.tsx",
           "marketplace/deploy/steps/constants.ts",
           "marketplace/details/plan/PlanSection.tsx",
@@ -23126,6 +23161,8 @@
         "tags": [
           "Field",
           "FormLabel",
+          "label",
+          "th",
           "VStepperFormStepCard",
           "h3",
           "PlanCard",
@@ -23151,7 +23188,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 24
+      "usage_count": 25
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -29843,6 +29880,7 @@
       "ui_types": [
         "label",
         "unknown",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -29888,6 +29926,7 @@
           "administration/dashboard/AdministrationProfile.tsx",
           "ai-assistant/components/LLMErrorBoundary.tsx",
           "core/async/InfiniteList.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "marketplace/deploy/steps/FormCloudStep.tsx",
           "marketplace/resources/details/UsageCard.tsx"
         ]
@@ -29914,7 +29953,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -30009,15 +30048,14 @@
       "ui_types": [
         "unknown",
         "property_value",
-        "generic_element",
         "title",
+        "generic_element",
         "menu_item",
         "label"
       ],
       "components": [
         "Col",
         "Link",
-        "Table",
         "IssuesList",
         "MenuItem"
       ],
@@ -30049,12 +30087,9 @@
         "feature_areas": [
           "dashboard",
           "customer",
-          "list",
           "issues",
           "details",
           "navigation",
-          "header",
-          "quick-issue-drawer",
           "sidebar",
           "project",
           "user",
@@ -30063,21 +30098,18 @@
         "component_types": [
           "component",
           "button",
-          "list",
           "card",
-          "navigation"
+          "navigation",
+          "list"
         ],
         "paths": [
           "administration/dashboard/AdministrationProfile.tsx",
           "customer/dashboard/CustomerActions.tsx",
           "customer/routes.ts",
-          "issues/list/IssuesList.tsx",
           "issues/routes.ts",
           "marketplace/resources/details/ResourceIssuesCard.tsx",
           "marketplace/resources/details/fetchData.tsx",
           "navigation/FooterLinks.tsx",
-          "navigation/header/QuickIssueDrawerToggle.tsx",
-          "navigation/header/quick-issue-drawer/UserIssuesTable.tsx",
           "navigation/sidebar/SupportMenu.tsx",
           "project/dashboard/ProjectActions.tsx",
           "project/routes.ts",
@@ -30090,7 +30122,6 @@
       "jsx_context": {
         "tags": [
           "Link",
-          "Table",
           "IssuesList",
           "span",
           "MenuItem"
@@ -30111,7 +30142,7 @@
         "has_validation": false,
         "max_nesting_level": 8
       },
-      "usage_count": 17
+      "usage_count": 14
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -44714,6 +44745,7 @@
           "infrastructure",
           "project_management",
           "resource_management",
+          "support",
           "user_management"
         ],
         "feature_areas": [
@@ -44771,6 +44803,7 @@
           "template",
           "quotas",
           "summary",
+          "invoices",
           "user",
           "affiliations",
           "UserPendingActionsList",
@@ -44926,6 +44959,7 @@
           "resource/actions/base.ts",
           "resource/summary/ResourceSummaryBase.tsx",
           "slurm/details/AllocationJobsTable.tsx",
+          "support/invoices/SupportInvoiceItemsList.tsx",
           "user/UserPermissionRequestsList.tsx",
           "user/affiliations/ProjectsList.tsx",
           "user/affiliations/SummaryResourcesTable.tsx",
@@ -44968,7 +45002,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 148
+      "usage_count": 149
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -46193,6 +46227,8 @@
       "components": [
         "TableFilterItem",
         "Table",
+        "Col",
+        "Row",
         "Field",
         "ModalDialog",
         "Popup",
@@ -46200,8 +46236,6 @@
         "MapContainer",
         "Tab",
         "Tabs",
-        "Col",
-        "Row",
         "VStepperFormStepCard",
         "FormContainer"
       ],
@@ -46232,6 +46266,7 @@
           "organizations",
           "details",
           "list",
+          "import-usage",
           "maintenance",
           "actions",
           "map",
@@ -46259,6 +46294,7 @@
           "customer/list/CustomerListFilter.tsx",
           "invoices/details/InvoiceItemsFilter.tsx",
           "invoices/details/InvoiceItemsTable.tsx",
+          "invoices/import-usage/Step2ColumnMapping.tsx",
           "invoices/list/InvoicesStatsList.tsx",
           "maintenance/MaintenanceList.tsx",
           "maintenance/actions/MaintenanceDetailsDialog.tsx",
@@ -46282,6 +46318,7 @@
         "tags": [
           "TableFilterItem",
           "Table",
+          "label",
           "Field",
           "Popup",
           "Tab",
@@ -46303,7 +46340,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 22
+      "usage_count": 23
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -57306,6 +57343,7 @@
         "paths": [
           "administration/rabbitmq/RabbitMQClusterOverview.tsx",
           "administration/rabbitmq/RabbitMQVhostExpandableRow.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "marketplace/offerings/import-users/Step2PreviewAndImport.tsx"
         ]
       },
@@ -57330,7 +57368,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -66851,11 +66889,12 @@
       "primary_ui_type": "title",
       "ui_types": [
         "label",
-        "title",
         "unknown",
+        "title",
         "tab_label"
       ],
       "components": [
+        "BsTable",
         "Table",
         "ExpandableContainer",
         "Tab",
@@ -66878,22 +66917,26 @@
       "variables": {},
       "file_context": {
         "domains": [
+          "billing",
           "marketplace",
           "general"
         ],
         "feature_areas": [
+          "import-usage",
           "plans",
           "project-templates",
           "organization",
           "proposals"
         ],
         "component_types": [
-          "form",
           "component",
-          "page"
+          "page",
+          "form"
         ],
         "paths": [
           "administration/roles/PermissionOptions.tsx",
+          "invoices/import-usage/Step2ColumnMapping.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "marketplace/offerings/update/plans/PlanResourcesTable.tsx",
           "openportal/project-templates/ProjectTemplateExpandableRow.tsx",
           "organization/OrganizationUIView.tsx",
@@ -66902,6 +66945,7 @@
       },
       "jsx_context": {
         "tags": [
+          "th",
           "Table",
           "strong",
           "Tab"
@@ -66922,7 +66966,7 @@
         "has_validation": false,
         "max_nesting_level": 9
       },
-      "usage_count": 5
+      "usage_count": 7
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -101812,7 +101856,8 @@
         "SelectField",
         "FormContainer",
         "FormGroup",
-        "SummaryField"
+        "SummaryField",
+        "TableFilterItem"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -101833,7 +101878,8 @@
         "domains": [
           "general",
           "customer_management",
-          "marketplace"
+          "marketplace",
+          "support"
         ],
         "feature_areas": [
           "booking",
@@ -101842,14 +101888,16 @@
           "details",
           "policies",
           "usage",
-          "reviewer"
+          "reviewer",
+          "invoices"
         ],
         "component_types": [
           "component",
           "field",
           "list",
           "form",
-          "page"
+          "page",
+          "card"
         ],
         "paths": [
           "booking/BookingCheckoutSummary.tsx",
@@ -101860,7 +101908,9 @@
           "marketplace/offerings/details/policies/PoliciesTable.tsx",
           "marketplace/offerings/details/policies/PolicyCreateForm.tsx",
           "marketplace/resources/usage/ResourceUsageForm.tsx",
-          "reviewer/AffiliationsSection.tsx"
+          "reviewer/AffiliationsSection.tsx",
+          "support/invoices/SupportInvoiceItemsFilter.tsx",
+          "support/invoices/SupportInvoiceItemsList.tsx"
         ]
       },
       "jsx_context": {
@@ -101870,7 +101920,8 @@
           "Table",
           "SelectField",
           "FormGroup",
-          "SummaryField"
+          "SummaryField",
+          "TableFilterItem"
         ],
         "conditional_render": true
       },
@@ -101888,7 +101939,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 9
+      "usage_count": 11
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -114637,7 +114688,8 @@
         "domains": [
           "customer_management",
           "billing",
-          "marketplace"
+          "marketplace",
+          "support"
         ],
         "feature_areas": [
           "cost-policies",
@@ -114677,7 +114729,8 @@
           "marketplace/resources/change-limits/ComponentTotalRow.tsx",
           "marketplace/resources/details/ResourceComponentItem.tsx",
           "marketplace/resources/usage/UsageExportDropdown.tsx",
-          "reporting/invoices/utils.ts"
+          "reporting/invoices/utils.ts",
+          "support/invoices/SupportInvoiceItemsList.tsx"
         ]
       },
       "jsx_context": {
@@ -114709,7 +114762,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 21
+      "usage_count": 22
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -117125,14 +117178,19 @@
   "Article code": {
     "message": "Article code",
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "ui_types": [
         "property_value",
         "function_call",
         "label",
+        "unknown",
+        "title",
         "generic_element"
       ],
       "components": [
+        "Col",
+        "Row",
+        "BsTable",
         "Component"
       ],
       "is_user_facing": true,
@@ -117159,23 +117217,30 @@
         "feature_areas": [
           "credits",
           "details",
+          "import-usage",
           "offerings"
         ],
         "component_types": [
           "dialog",
           "card",
+          "component",
+          "page",
           "field"
         ],
         "paths": [
           "customer/credits/CreditUsageDialog.tsx",
           "invoices/details/InvoiceItemExpandableRow.tsx",
           "invoices/details/InvoiceItemUpdateDialog.tsx",
+          "invoices/import-usage/Step2ColumnMapping.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "marketplace/offerings/ArticleCodeField.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "small",
+          "label",
+          "th",
           "Component"
         ],
         "conditional_render": true
@@ -117192,11 +117257,12 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 9
       },
-      "usage_count": 4
+      "usage_count": 6
     },
     "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -117485,6 +117551,9 @@
       "components": [
         "Table",
         "ModalDialog",
+        "Col",
+        "Row",
+        "BsTable",
         "Field"
       ],
       "is_user_facing": true,
@@ -117505,21 +117574,27 @@
       "file_context": {
         "domains": [
           "customer_management",
+          "billing",
           "marketplace"
         ],
         "feature_areas": [
           "credits",
+          "import-usage",
           "offerings",
           "plans",
           "usage"
         ],
         "component_types": [
           "dialog",
+          "component",
+          "page",
           "list",
           "form"
         ],
         "paths": [
           "customer/credits/CreditUsageDialog.tsx",
+          "invoices/import-usage/Step2ColumnMapping.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "marketplace/offerings/PriceList.tsx",
           "marketplace/offerings/update/plans/QuotasTable.tsx",
           "marketplace/resources/usage/ResourceUsageForm.tsx"
@@ -117528,6 +117603,7 @@
       "jsx_context": {
         "tags": [
           "Table",
+          "label",
           "th",
           "Field"
         ],
@@ -117547,7 +117623,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 4
+      "usage_count": 6
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -128787,6 +128863,7 @@
         "component_types": [],
         "paths": [
           "customer/import/OrganizationImportDialog.tsx",
+          "invoices/import-usage/ComponentUsageImportDialog.tsx",
           "project/course-accounts/CourseAccountFormDialog.tsx",
           "project/import/ProjectImportDialog.tsx"
         ]
@@ -128809,7 +128886,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     }
   },
   "Preview & import": {
@@ -128841,6 +128918,7 @@
         "component_types": [],
         "paths": [
           "customer/import/OrganizationImportDialog.tsx",
+          "invoices/import-usage/ComponentUsageImportDialog.tsx",
           "marketplace/offerings/import-users/UserImportDialog.tsx",
           "project/import/ProjectImportDialog.tsx"
         ]
@@ -128863,7 +128941,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     }
   },
   "No valid organizations to import": {
@@ -129289,11 +129367,13 @@
       "file_context": {
         "domains": [
           "customer_management",
+          "billing",
           "marketplace",
           "project_management"
         ],
         "feature_areas": [
           "import",
+          "import-usage",
           "import-users",
           "course-accounts"
         ],
@@ -129303,6 +129383,7 @@
         ],
         "paths": [
           "customer/import/Step2UploadFile.tsx",
+          "invoices/import-usage/Step1UploadFile.tsx",
           "marketplace/offerings/import-users/Step1UploadFile.tsx",
           "project/course-accounts/CourseAccountFormDialog.tsx",
           "project/import/Step4UploadFile.tsx"
@@ -129326,7 +129407,7 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -130309,11 +130390,13 @@
       "file_context": {
         "domains": [
           "customer_management",
+          "billing",
           "marketplace",
           "project_management"
         ],
         "feature_areas": [
           "import",
+          "import-usage",
           "import-users",
           "course-accounts"
         ],
@@ -130323,6 +130406,7 @@
         ],
         "paths": [
           "customer/import/Step3PreviewAndImport.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
           "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
           "project/course-accounts/Step2PreviewAndCreate.tsx",
           "project/import/Step5PreviewAndImport.tsx"
@@ -130348,7 +130432,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -142866,12 +142950,13 @@
       "primary_ui_type": "title",
       "ui_types": [
         "generic_element",
-        "title",
-        "unknown"
+        "unknown",
+        "title"
       ],
       "components": [
         "ExpandableEventField",
         "ExpandableContainer",
+        "BsTable",
         "Table",
         "AccordionCard",
         "ModalDialog",
@@ -142898,11 +142983,13 @@
       "file_context": {
         "domains": [
           "general",
+          "billing",
           "resource_management",
           "user_management"
         ],
         "feature_areas": [
           "events",
+          "import-usage",
           "details",
           "create",
           "resource-requests-step",
@@ -142914,13 +143001,14 @@
         ],
         "component_types": [
           "list",
+          "component",
           "card",
           "form",
-          "dialog",
-          "component"
+          "dialog"
         ],
         "paths": [
           "events/ExpandableEventDetailsTable.tsx",
+          "invoices/import-usage/Step2ColumnMapping.tsx",
           "proposals/details/CallOfferingsCard.tsx",
           "proposals/proposal/create/ResourceRequestsSummary.tsx",
           "proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx",
@@ -142934,6 +143022,7 @@
       "jsx_context": {
         "tags": [
           "ExpandableEventField",
+          "th",
           "Table",
           "strong",
           "Component",
@@ -142953,12 +143042,13 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 8
+        "max_nesting_level": 9
       },
-      "usage_count": 9
+      "usage_count": 10
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -158422,10 +158512,12 @@
       "file_context": {
         "domains": [
           "general",
+          "billing",
           "marketplace"
         ],
         "feature_areas": [
           "create",
+          "import-usage",
           "import-users",
           "single-import",
           "import"
@@ -158437,6 +158529,7 @@
         ],
         "paths": [
           "invitations/actions/create/BulkUpload.tsx",
+          "invoices/import-usage/ComponentUsageImportDialog.tsx",
           "marketplace/offerings/import-users/UserImportDialog.tsx",
           "marketplace/offerings/single-import/SingleOfferingImportDialog.tsx",
           "marketplace/resources/import/ImportButton.tsx",
@@ -158468,7 +158561,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -163695,12 +163788,13 @@
   "Quantity": {
     "message": "Quantity",
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "ui_types": [
         "unknown",
         "label",
         "function_call",
-        "generic_element"
+        "generic_element",
+        "title"
       ],
       "components": [
         "ExpandableContainer",
@@ -163728,12 +163822,14 @@
         "domains": [
           "billing",
           "marketplace",
-          "infrastructure"
+          "infrastructure",
+          "support"
         ],
         "feature_areas": [
           "details",
           "plan",
-          "hpas"
+          "hpas",
+          "invoices"
         ],
         "component_types": [
           "card",
@@ -163749,7 +163845,8 @@
           "marketplace/details/plan/PlanDetailsTable.tsx",
           "marketplace/details/plan/TotalLimitComponentsTable.tsx",
           "rancher/cluster/hpas/HPACreateDialog.tsx",
-          "rancher/cluster/hpas/HPAUpdateDialog.tsx"
+          "rancher/cluster/hpas/HPAUpdateDialog.tsx",
+          "support/invoices/SupportInvoiceItemsList.tsx"
         ]
       },
       "jsx_context": {
@@ -163757,7 +163854,8 @@
           "th",
           "strong",
           "ComponentRow2",
-          "NumberField"
+          "NumberField",
+          "Table"
         ],
         "conditional_render": false
       },
@@ -163775,9 +163873,10 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 8
+      "usage_count": 9
     },
     "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
@@ -163786,12 +163885,15 @@
   "Unit price": {
     "message": "Unit price",
     "context": {
-      "primary_ui_type": "label",
+      "primary_ui_type": "title",
       "ui_types": [
         "unknown",
-        "label"
+        "label",
+        "title"
       ],
-      "components": [],
+      "components": [
+        "Table"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 10,
@@ -163810,26 +163912,31 @@
       "file_context": {
         "domains": [
           "billing",
-          "marketplace"
+          "marketplace",
+          "support"
         ],
         "feature_areas": [
           "details",
-          "renew-allocation"
+          "renew-allocation",
+          "invoices"
         ],
         "component_types": [
           "card",
           "dialog",
-          "form"
+          "form",
+          "list"
         ],
         "paths": [
           "invoices/details/InvoiceItemExpandableRow.tsx",
           "invoices/details/InvoiceItemUpdateDialog.tsx",
-          "marketplace/resources/renew-allocation/Step1UpdateLimits.tsx"
+          "marketplace/resources/renew-allocation/Step1UpdateLimits.tsx",
+          "support/invoices/SupportInvoiceItemsList.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "th"
+          "th",
+          "Table"
         ],
         "conditional_render": true
       },
@@ -163847,9 +163954,10 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -165117,7 +165225,8 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "property_value"
       ],
       "components": [
         "Table"
@@ -165139,16 +165248,22 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "billing"
+          "billing",
+          "support"
         ],
         "feature_areas": [
-          "details"
+          "details",
+          "issues",
+          "invoices"
         ],
         "component_types": [
-          "list"
+          "list",
+          "component"
         ],
         "paths": [
-          "invoices/details/InvoiceItemsTable.tsx"
+          "invoices/details/InvoiceItemsTable.tsx",
+          "issues/routes.ts",
+          "support/invoices/SupportInvoiceItemsList.tsx"
         ]
       },
       "jsx_context": {
@@ -165171,7 +165286,7 @@
         "has_validation": false,
         "max_nesting_level": 4
       },
-      "usage_count": 1
+      "usage_count": 3
     },
     "translator_notes": [
       "This appears in billing context. Ensure financial terminology is accurate."
@@ -165977,6 +166092,2289 @@
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
       "Contains variables: customer_link, period. Variable types: url, unknown."
+    ]
+  },
+  "Import usage": {
+    "message": "Import usage",
+    "context": {
+      "primary_ui_type": "action_button",
+      "ui_types": [
+        "action_button"
+      ],
+      "components": [
+        "ActionButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionButton"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Map columns": {
+    "message": "Map columns",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Please select a billing period": {
+    "message": "Please select a billing period",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 30,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "No valid items to import": {
+    "message": "No valid items to import",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Successfully imported {n} items": {
+    "message": "Successfully imported {n} items",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 31,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "Contains variables: n. Variable types: unknown.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "{n} items failed to import": {
+    "message": "{n} items failed to import",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 5,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "Contains variables: n. Variable types: unknown.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Failed to import usage data": {
+    "message": "Failed to import usage data",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 27,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Import component usage": {
+    "message": "Import component usage",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "WizardFormContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "WizardFormContainer"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Upload Excel file {arrow} map columns {arrow} preview & import": {
+    "message": "Upload Excel file {arrow} map columns {arrow} preview & import",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "WizardFormContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 62,
+        "wordCount": 10,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "arrow": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invoices/import-usage/ComponentUsageImportDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "WizardFormContainer"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "Contains variables: arrow. Variable types: unknown.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Invalid format. Please import an Excel (.xlsx, .xls) or CSV file.": {
+    "message": "Invalid format. Please import an Excel (.xlsx, .xls) or CSV file.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 65,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate."
+    ]
+  },
+  "Select billing period": {
+    "message": "Select billing period",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "WizardForm"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h6"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Select year": {
+    "message": "Select year",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Select month": {
+    "message": "Select month",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Upload your file": {
+    "message": "Upload your file",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "WizardForm"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "import-usage",
+          "import-users"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx",
+          "marketplace/offerings/import-users/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h6"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Excel or CSV (max. 10 MB)": {
+    "message": "Excel or CSV (max. 10 MB)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "UploadContainer"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": true,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "UploadContainer"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Supported formats": {
+    "message": "Supported formats",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "li"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Required columns": {
+    "message": "Required columns",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing",
+          "marketplace"
+        ],
+        "feature_areas": [
+          "import-usage",
+          "import-users"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx",
+          "marketplace/offerings/import-users/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "li"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Customer name, Item name, Amount": {
+    "message": "Customer name, Item name, Amount",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 32,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step1UploadFile.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "li"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Map columns to fields": {
+    "message": "Map columns to fields",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "WizardForm"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h6"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Select which columns from your file correspond to each field.": {
+    "message": "Select which columns from your file correspond to each field.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "WizardForm"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 61,
+        "wordCount": 10,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Customer name": {
+    "message": "Customer name",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "label"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Select column": {
+    "message": "Select column",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Item name": {
+    "message": "Item name",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "title"
+      ],
+      "components": [
+        "Col",
+        "Row",
+        "BsTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component",
+          "page"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx",
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "label",
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "optional": {
+    "message": "optional",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 8,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "label"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Preview": {
+    "message": "Preview",
+    "context": {
+      "primary_ui_type": "action_button",
+      "ui_types": [
+        "unknown",
+        "generic_element",
+        "action_button"
+      ],
+      "components": [
+        "Col",
+        "Row",
+        "ModalDialog",
+        "Tab",
+        "Tabs",
+        "FormGroup",
+        "ActionButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing",
+          "marketplace",
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "import-usage",
+          "overview",
+          "tos",
+          "deploy"
+        ],
+        "component_types": [
+          "component",
+          "dialog",
+          "form"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx",
+          "marketplace/offerings/update/overview/EditGettingStartedDialog.tsx",
+          "marketplace/offerings/update/tos/TosEditDialog.tsx",
+          "openstack/openstack-instance/deploy/FormSecurityGroupsField.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h6",
+          "div",
+          "Tab",
+          "ActionButton"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 4
+    },
+    "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Showing first {count} rows with mapped values": {
+    "message": "Showing first {count} rows with mapped values",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 45,
+        "wordCount": 7,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step2ColumnMapping.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Skipped": {
+    "message": "Skipped",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Skip records with errors": {
+    "message": "Skip records with errors",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "FormCheck"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing",
+          "project_management"
+        ],
+        "feature_areas": [
+          "import-usage",
+          "import"
+        ],
+        "component_types": [
+          "page",
+          "component"
+        ],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx",
+          "project/import/SkipErrorsCheck.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormCheck"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Matched": {
+    "message": "Matched",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Please fix errors or check \"Skip records with errors\"": {
+    "message": "Please fix errors or check \"Skip records with errors\"",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "WizardForm"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 53,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "WizardForm"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Failed to load customers": {
+    "message": "Failed to load customers",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "WizardForm"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "{n} ready to import": {
+    "message": "{n} ready to import",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 4,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "n": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "Contains variables: n. Variable types: unknown.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "{ready} ready, {skipped} skipped, {errors} errors": {
+    "message": "{ready} ready, {skipped} skipped, {errors} errors",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 49,
+        "wordCount": 6,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "ready": {
+          "type": "unknown"
+        },
+        "skipped": {
+          "type": "unknown"
+        },
+        "errors": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "read"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "Contains variables: ready, skipped, errors. Variable types: unknown.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Usage items": {
+    "message": "Usage items",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Table"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "billing"
+        ],
+        "feature_areas": [
+          "import-usage"
+        ],
+        "component_types": [
+          "page"
+        ],
+        "paths": [
+          "invoices/import-usage/Step3PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in billing context. Ensure financial terminology is accurate.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Organization has signed a fixed price agreement": {
@@ -172243,6 +174641,93 @@
       "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
+  "Support requests": {
+    "message": "Support requests",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "generic_element",
+        "property_value",
+        "title",
+        "unknown"
+      ],
+      "components": [
+        "Table",
+        "IssuesList"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "support",
+          "marketplace",
+          "general"
+        ],
+        "feature_areas": [
+          "list",
+          "issues",
+          "details",
+          "header",
+          "quick-issue-drawer"
+        ],
+        "component_types": [
+          "list",
+          "component",
+          "card",
+          "navigation"
+        ],
+        "paths": [
+          "issues/list/IssuesList.tsx",
+          "issues/routes.ts",
+          "marketplace/resources/details/ResourceIssuesCard.tsx",
+          "navigation/header/QuickIssueDrawerToggle.tsx",
+          "navigation/header/quick-issue-drawer/UserIssuesTable.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Table",
+          "IssuesList",
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 5
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "support requests": {
     "message": "support requests",
     "context": {
@@ -172547,77 +175032,6 @@
       },
       "usage_count": 1
     }
-  },
-  "Support requests": {
-    "message": "Support requests",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "property_value",
-        "generic_element"
-      ],
-      "components": [
-        "IssuesList"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 16,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "support",
-          "marketplace"
-        ],
-        "feature_areas": [
-          "issues",
-          "details"
-        ],
-        "component_types": [
-          "component",
-          "card"
-        ],
-        "paths": [
-          "issues/routes.ts",
-          "marketplace/resources/details/ResourceIssuesCard.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "IssuesList"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
   },
   "Broadcast": {
     "message": "Broadcast",
@@ -183698,13 +186112,15 @@
           "marketplace",
           "general",
           "infrastructure",
-          "resource_management"
+          "resource_management",
+          "user_management"
         ],
         "feature_areas": [
           "common",
           "navigation",
           "update-floating-ips",
-          "resource"
+          "resource",
+          "UserResourcesWidget"
         ],
         "component_types": [
           "component",
@@ -183716,7 +186132,8 @@
           "marketplace/common/CopyToClipboard.tsx",
           "navigation/FooterLinks.tsx",
           "openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx",
-          "resource/ResourceAccessButton.tsx"
+          "resource/ResourceAccessButton.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
         ]
       },
       "jsx_context": {
@@ -183737,7 +186154,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This is a success message. Use positive, confirming language.",
@@ -193426,7 +195843,8 @@
         "TableTabsContainer",
         "ExpandableContainer",
         "FormTable",
-        "ModalDialog"
+        "ModalDialog",
+        "Card"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -193457,7 +195875,8 @@
           "update",
           "plans",
           "offering-requests",
-          "UserPendingActionsList"
+          "UserPendingActionsList",
+          "UserResourcesWidget"
         ],
         "component_types": [
           "component",
@@ -193479,7 +195898,8 @@
           "marketplace/orders/details/OrderMetadataTab.tsx",
           "marketplace/resources/details/ResourceComponentsDialog.tsx",
           "proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
-          "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx"
+          "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
         ]
       },
       "jsx_context": {
@@ -193487,7 +195907,8 @@
           "Table",
           "PoliciesTable",
           "ModalDialog",
-          "h3"
+          "h3",
+          "div"
         ],
         "conditional_render": true
       },
@@ -193503,9 +195924,9 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 9
+        "max_nesting_level": 10
       },
-      "usage_count": 13
+      "usage_count": 14
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -195606,13 +198027,16 @@
       "ui_types": [
         "action_button",
         "generic_element",
-        "label"
+        "label",
+        "unknown"
       ],
       "components": [
         "ActionButton",
         "DialogActionItem",
         "WidgetCard",
-        "ActionItem"
+        "ActionItem",
+        "Link",
+        "Card"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -195639,7 +198063,8 @@
           "plan",
           "popup",
           "project",
-          "affiliations"
+          "affiliations",
+          "UserResourcesWidget"
         ],
         "component_types": [
           "button",
@@ -195651,7 +198076,8 @@
           "marketplace/resources/details/popup/ResourceDetailsAction.tsx",
           "project/ProjectDashboardCostLimits.tsx",
           "user/affiliations/ResourcesListActions.tsx",
-          "user/affiliations/SummaryOrganizationProjects.tsx"
+          "user/affiliations/SummaryOrganizationProjects.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
         ]
       },
       "jsx_context": {
@@ -195659,7 +198085,8 @@
           "ActionButton",
           "DialogActionItem",
           "WidgetCard",
-          "ActionItem"
+          "ActionItem",
+          "Link"
         ],
         "conditional_render": false
       },
@@ -195677,7 +198104,7 @@
         "has_validation": false,
         "max_nesting_level": 10
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -200534,7 +202961,8 @@
       ],
       "components": [
         "PublicOfferingCardTitle",
-        "Card"
+        "Card",
+        "Link"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -200553,11 +202981,13 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "marketplace"
+          "marketplace",
+          "user_management"
         ],
         "feature_areas": [
           "offerings",
-          "details"
+          "details",
+          "UserResourcesWidget"
         ],
         "component_types": [
           "page",
@@ -200568,13 +202998,15 @@
           "marketplace/offerings/OfferingPublicUIView.tsx",
           "marketplace/offerings/details/PublicOfferingGettingStarted.tsx",
           "marketplace/resources/details/GettingStartedCard.tsx",
-          "marketplace/resources/details/fetchData.tsx"
+          "marketplace/resources/details/fetchData.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "PublicOfferingCardTitle",
-          "h3"
+          "h3",
+          "Link"
         ],
         "conditional_render": true
       },
@@ -200587,16 +203019,17 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 5
+        "max_nesting_level": 9
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -212111,138 +214544,6 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
-    ]
-  },
-  "Upload your file": {
-    "message": "Upload your file",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "WizardForm"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 16,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "import-users"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "marketplace/offerings/import-users/Step1UploadFile.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "h6"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 9
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Required columns": {
-    "message": "Required columns",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "Field"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 16,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace"
-        ],
-        "feature_areas": [
-          "import-users"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "marketplace/offerings/import-users/Step1UploadFile.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "li"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Maximum rows": {
@@ -224901,7 +227202,8 @@
         "Component",
         "FormGroup",
         "Field",
-        "ModalDialog"
+        "ModalDialog",
+        "Card"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -224940,7 +227242,8 @@
           "manage",
           "summary",
           "affiliations",
-          "UserPendingActionsList"
+          "UserPendingActionsList",
+          "UserResourcesWidget"
         ],
         "component_types": [
           "form",
@@ -224975,7 +227278,8 @@
           "slurm/details/AllocationJobsTable.tsx",
           "user/affiliations/OrganizationsList.tsx",
           "user/affiliations/ProjectsList.tsx",
-          "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx"
+          "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
         ]
       },
       "jsx_context": {
@@ -224986,7 +227290,8 @@
           "SummaryField",
           "Component",
           "FormGroup",
-          "Field"
+          "Field",
+          "span"
         ],
         "conditional_render": true
       },
@@ -225004,7 +227309,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 26
+      "usage_count": 27
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -238929,91 +241234,6 @@
       "This appears in the marketplace context. Use business-appropriate language.",
       "Contains variables: resource_name, resource_username, backend_id, options_key, backend_metadata_key. Variable types: string, unknown.",
       "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Preview": {
-    "message": "Preview",
-    "context": {
-      "primary_ui_type": "action_button",
-      "ui_types": [
-        "unknown",
-        "generic_element",
-        "action_button"
-      ],
-      "components": [
-        "Col",
-        "Row",
-        "ModalDialog",
-        "Tab",
-        "Tabs",
-        "FormGroup",
-        "ActionButton"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "infrastructure"
-        ],
-        "feature_areas": [
-          "overview",
-          "tos",
-          "deploy"
-        ],
-        "component_types": [
-          "dialog",
-          "form"
-        ],
-        "paths": [
-          "marketplace/offerings/update/overview/EditGettingStartedDialog.tsx",
-          "marketplace/offerings/update/tos/TosEditDialog.tsx",
-          "openstack/openstack-instance/deploy/FormSecurityGroupsField.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "div",
-          "Tab",
-          "ActionButton"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 7
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This text appears on a button. Keep it short and action-oriented.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Assigned compliance checklist": {
@@ -283690,11 +285910,13 @@
       "file_context": {
         "domains": [
           "marketplace",
-          "general"
+          "general",
+          "user_management"
         ],
         "feature_areas": [
           "service-providers",
-          "resource-requests-step"
+          "resource-requests-step",
+          "UserResourcesWidget"
         ],
         "component_types": [
           "component",
@@ -283703,13 +285925,15 @@
         "paths": [
           "marketplace/service-providers/ResourcesColumn.tsx",
           "marketplace/service-providers/ResourcesCountColumn.tsx",
-          "proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx"
+          "proposals/proposal/create/resource-requests-step/FormResourceRequestsStep.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceProjectGroup.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
           "button",
-          "StepHeaderContent"
+          "StepHeaderContent",
+          "AccordionCard"
         ],
         "conditional_render": false
       },
@@ -283717,9 +285941,13 @@
         "unknown"
       ],
       "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
+        "endpoints": [
+          "x-result-count"
+        ],
+        "http_methods": [
+          "GET"
+        ],
+        "has_api_calls": true
       },
       "interaction_context": {
         "modifies_state": true,
@@ -283727,7 +285955,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -289822,12 +292050,14 @@
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
-        "generic_element"
+        "generic_element",
+        "unknown"
       ],
       "components": [
         "Tab",
         "Tabs",
-        "ModalDialog"
+        "ModalDialog",
+        "FormGroup"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -289852,15 +292082,18 @@
           "questions"
         ],
         "component_types": [
-          "dialog"
+          "dialog",
+          "form"
         ],
         "paths": [
-          "marketplace-checklist/checklists/questions/QuestionFormDialog.tsx"
+          "marketplace-checklist/checklists/questions/QuestionFormDialog.tsx",
+          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Tab"
+          "Tab",
+          "FormGroup"
         ],
         "conditional_render": true
       },
@@ -289878,7 +292111,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -290036,6 +292269,72 @@
       "text_characteristics": {
         "length": 26,
         "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "questions"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "marketplace-checklist/checklists/questions/QuestionGeneralForm.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Input placeholder help text for user...": {
+    "message": "Input placeholder help text for user...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 39,
+        "wordCount": 6,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -344206,71 +346505,6 @@
     },
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language."
-    ]
-  },
-  "Skip records with errors": {
-    "message": "Skip records with errors",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "generic_element"
-      ],
-      "components": [
-        "FormCheck"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 24,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "project_management"
-        ],
-        "feature_areas": [
-          "import"
-        ],
-        "component_types": [
-          "component"
-        ],
-        "paths": [
-          "project/import/SkipErrorsCheck.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "FormCheck"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Projects only": {
@@ -420145,7 +422379,8 @@
         "unknown"
       ],
       "components": [
-        "Dropdown"
+        "Dropdown",
+        "Card"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -420164,21 +422399,27 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "resource_management"
+          "resource_management",
+          "user_management"
         ],
         "feature_areas": [
-          "resource"
+          "resource",
+          "UserResourcesWidget"
         ],
         "component_types": [
-          "button"
+          "button",
+          "component"
         ],
         "paths": [
-          "resource/ResourceAccessButton.tsx"
+          "resource/ResourceAccessButton.tsx",
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [],
-        "conditional_render": false
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -420192,12 +422433,13 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 3
+        "max_nesting_level": 8
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
-      "This action modifies application state. Use clear, actionable language."
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Select resource...": {
@@ -435053,6 +437295,67 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Unable to load invoice items.": {
+    "message": "Unable to load invoice items.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "support"
+        ],
+        "feature_areas": [
+          "invoices"
+        ],
+        "component_types": [
+          "card"
+        ],
+        "paths": [
+          "support/invoices/SupportInvoiceItemsContainer.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Service Desk": {
     "message": "Service Desk",
     "context": {
@@ -441724,7 +444027,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 9
@@ -441732,6 +444035,7 @@
       "usage_count": 2
     },
     "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -441878,6 +444182,148 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
+  "Your resources": {
+    "message": "Your resources",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "DashboardCard",
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/dashboard/UserDashboard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "DashboardCard"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "You have access to {count} resources. Click to learn how to get started.": {
+    "message": "You have access to {count} resources. Click to learn how to get started.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "DashboardCard",
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 72,
+        "wordCount": 13,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "dashboard"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/dashboard/UserDashboard.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "DashboardCard"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "See pending invites sent to your email {email} ({count})": {
     "message": "See pending invites sent to your email {email} ({count})",
     "context": {
@@ -441941,7 +444387,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 9
@@ -441951,6 +444397,7 @@
     "translator_notes": [
       "Contains variables: email, count. Variable types: email, number.",
       "Variable contains numbers. Consider plural handling in your language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -442010,7 +444457,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 9
@@ -442018,6 +444465,7 @@
       "usage_count": 1
     },
     "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -442081,7 +444529,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 9
@@ -442091,6 +444539,7 @@
     "translator_notes": [
       "Contains variables: count. Variable types: number.",
       "Variable contains numbers. Consider plural handling in your language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -444952,6 +447401,761 @@
       },
       "usage_count": 1
     }
+  },
+  "Loading project details...": {
+    "message": "Loading project details...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "AccordionCard"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/ResourceProjectGroup.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [
+          "x-result-count"
+        ],
+        "http_methods": [
+          "GET"
+        ],
+        "has_api_calls": true
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "{count} team members": {
+    "message": "{count} team members",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 3,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/ResourceProjectGroup.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [
+          "x-result-count"
+        ],
+        "http_methods": [
+          "GET"
+        ],
+        "has_api_calls": true
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "View team": {
+    "message": "View team",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Link"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/ResourceProjectGroup.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Link"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [
+          "x-result-count"
+        ],
+        "http_methods": [
+          "GET"
+        ],
+        "has_api_calls": true
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Loading details...": {
+    "message": "Loading details...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Card"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "+{count} more": {
+    "message": "+{count} more",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "count": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: count. Variable types: number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Getting Started with Your Resources": {
+    "message": "Getting Started with Your Resources",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 35,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/UserResourcesDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Learn how to access and use your allocated resources": {
+    "message": "Learn how to access and use your allocated resources",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 52,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/UserResourcesDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "View all resources": {
+    "message": "View all resources",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "SubmitButton",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/UserResourcesDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "SubmitButton"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Failed to load resources. Please try again.": {
+    "message": "Failed to load resources. Please try again.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 43,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/UserResourcesDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "No resources found.": {
+    "message": "No resources found.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/UserResourcesDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Showing {displayed} of {total} resources. Click \"View all resources\" to see the complete list.": {
+    "message": "Showing {displayed} of {total} resources. Click \"View all resources\" to see the complete list.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 94,
+        "wordCount": 14,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "displayed": {
+          "type": "unknown"
+        },
+        "total": {
+          "type": "number"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "UserResourcesWidget"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "user/dashboard/UserResourcesWidget/UserResourcesDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "div"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "read"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: displayed, total. Variable types: unknown, number.",
+      "Variable contains numbers. Consider plural handling in your language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
   },
   "Accept ToS": {
     "message": "Accept ToS",
