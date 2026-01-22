@@ -120,9 +120,12 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
     };
   }, [handleHorizontalScroll]);
 
+  // Track whether we've applied the initial mode resolver
+  const initialModeResolvedRef = useRef(false);
+
   // Lifecycle: componentDidMount equivalent
   useEffect(() => {
-    if (props.initialMode) {
+    if (props.initialMode && !props.initialModeResolver) {
       props.setDisplayMode(props.initialMode);
     }
 
@@ -203,6 +206,27 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
       setShowFilterMenuToggle(true);
     }
   }, [props.filtersStorage?.length]);
+
+  // Apply initialModeResolver after first data fetch
+  useEffect(() => {
+    if (
+      props.initialModeResolver &&
+      !initialModeResolvedRef.current &&
+      props.pagination?.resultCount !== undefined &&
+      !props.loading
+    ) {
+      const resolvedMode = props.initialModeResolver(
+        props.pagination.resultCount,
+      );
+      props.setDisplayMode(resolvedMode);
+      initialModeResolvedRef.current = true;
+    }
+  }, [
+    props.initialModeResolver,
+    props.pagination?.resultCount,
+    props.loading,
+    props.setDisplayMode,
+  ]);
 
   // Lifecycle: componentWillUnmount equivalent
   useEffect(() => {

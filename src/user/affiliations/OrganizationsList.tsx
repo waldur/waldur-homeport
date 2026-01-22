@@ -1,10 +1,12 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
+import { useMediaQuery } from 'react-responsive';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
 import { OrganizationsFilter } from '@waldur/administration/organizations/OrganizationsFilter';
+import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { formatPhoneNumber } from '@waldur/core/utils';
 import { OrganizationImportButton } from '@waldur/customer/import/OrganizationImportButton';
@@ -21,6 +23,7 @@ import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { SLUG_COLUMN } from '@waldur/table/slug';
 import Table from '@waldur/table/Table';
+import { DisplayMode } from '@waldur/table/types';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -301,6 +304,24 @@ export const OrganizationsList: FunctionComponent = () => {
     });
   }
 
+  // Grid shows 3 cards per row on xl+ screens, 2 cards per row on smaller screens
+  // Default to grid view if visible rows fit nicely
+  const CARDS_PER_ROW_XL = 3;
+  const CARDS_PER_ROW_MD = 2;
+  const isXlScreen = useMediaQuery({ minWidth: GRID_BREAKPOINTS.xl });
+  // Reduce visible rows on shorter viewports (e.g., 13" laptop vs 16" laptop)
+  const isShortViewport = useMediaQuery({ maxHeight: 900 });
+  const VISIBLE_ROWS = isShortViewport ? 2 : 3;
+  const gridThreshold = isXlScreen
+    ? VISIBLE_ROWS * CARDS_PER_ROW_XL
+    : VISIBLE_ROWS * CARDS_PER_ROW_MD;
+
+  const initialModeResolver = useCallback(
+    (resultCount: number): DisplayMode =>
+      resultCount <= gridThreshold ? 'grid' : 'table',
+    [gridThreshold],
+  );
+
   return (
     <Table
       {...props}
@@ -308,6 +329,7 @@ export const OrganizationsList: FunctionComponent = () => {
       verboseName={translate('organizations')}
       title={translate('Organizations')}
       gridSize={{ md: 6, xl: 4 }}
+      initialModeResolver={initialModeResolver}
       gridItem={({ row }) => (
         <OrganizationCard
           organization={row as any}
