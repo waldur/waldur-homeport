@@ -243,6 +243,9 @@ export interface TableProps<RowType = any> extends TableState {
   initColumnPositions?(ids: string[]): void;
   swapColumns?(column1: string, column2: string): void;
   initialMode?: 'grid' | 'table';
+  /** Function to determine initial display mode based on result count.
+   * Called after first data fetch. Takes precedence over initialMode when provided. */
+  initialModeResolver?: (resultCount: number) => DisplayMode;
   standalone?: boolean;
   standaloneActionsInTable?: boolean;
   hideClearFilters?: boolean;
