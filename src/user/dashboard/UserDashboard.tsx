@@ -15,6 +15,7 @@ import {
 
 import { fetchResultCount } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -25,14 +26,19 @@ import { useUser } from '@waldur/workspace/hooks';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
-import { ActiveInvitationsList } from './ActiveInvitationsList';
 import { DashboardCard } from './DashboardCard';
 import { UserPendingActionsList } from './UserPendingActionsList';
 import { UserResourcesDialog } from './UserResourcesWidget';
 
+const ActiveInvitationsDialog = lazyComponent(() =>
+  import('./ActiveInvitationsDialog').then((m) => ({
+    default: m.ActiveInvitationsDialog,
+  })),
+);
+
 export const UserDashboard: FC = () => {
-  const user = useUser();
   const dispatch = useDispatch();
+  const user = useUser();
   const [invitationsCount, setInvitationsCount] = useState<number>(0);
   const [_isLoadingInvitations, setIsLoadingInvitations] =
     useState<boolean>(true);
@@ -118,11 +124,13 @@ export const UserDashboard: FC = () => {
   const hasEscalatedVerifications = escalatedVerificationsCount > 0;
   const hasResources = resourcesCount > 0;
 
-  const scrollToActiveInvitations = () => {
-    const element = document.getElementById('active-invitations-section');
-    if (element) {
-      element.scrollIntoView({ behavior: 'smooth' });
-    }
+  const openActiveInvitations = () => {
+    dispatch(
+      openModalDialog(ActiveInvitationsDialog, {
+        size: 'lg',
+        resolve: { user },
+      }),
+    );
   };
 
   const goToOnboardingApplications = () => {
@@ -166,7 +174,7 @@ export const UserDashboard: FC = () => {
           {showDashboardWidgets && hasActiveInvitations && (
             <Col md={4}>
               <DashboardCard
-                title={translate('Active invitations')}
+                title={translate('Pending invitations')}
                 message={translate(
                   'See pending invites sent to your email {email} ({count})',
                   { email: user.email, count: invitationsCount },
@@ -175,7 +183,7 @@ export const UserDashboard: FC = () => {
                 isLoading={false}
                 hasItems={true}
                 backgroundColor="bg-success"
-                onClick={scrollToActiveInvitations}
+                onClick={openActiveInvitations}
               />
             </Col>
           )}
@@ -203,12 +211,6 @@ export const UserDashboard: FC = () => {
       {ENV.plugins?.WALDUR_CORE?.USER_ACTIONS_ENABLED && (
         <div className="mb-5">
           <UserPendingActionsList user={user} />
-        </div>
-      )}
-
-      {hasActiveInvitations && (
-        <div id="active-invitations-section">
-          <ActiveInvitationsList user={user} />
         </div>
       )}
 
