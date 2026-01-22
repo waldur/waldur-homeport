@@ -6,7 +6,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { checkCustomerUser } from '@waldur/workspace/selectors';
 
-import { ADMIN_OFFERINGS_FILTER_FORM_ID } from './admin/constants';
+import { OFFERINGS_FILTER_FORM_ID } from './constants';
 import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';
 
 const ARTICLE_CODE_PATTERN = new RegExp(
@@ -79,9 +79,7 @@ export const getPublicOfferingBreadcrumbItems = (
           name: offering.customer_name,
           uuid: offering.customer_uuid,
         };
-        dispatch(
-          change(ADMIN_OFFERINGS_FILTER_FORM_ID, 'organization', customer),
-        );
+        dispatch(change(OFFERINGS_FILTER_FORM_ID, 'organization', customer));
         router.stateService.go('public.offerings');
       },
     },

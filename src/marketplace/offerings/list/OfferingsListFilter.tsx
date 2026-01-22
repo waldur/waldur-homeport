@@ -6,14 +6,14 @@ import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
 import { OfferingStateFilter } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
+import { ServiceProviderAutocomplete } from '@waldur/marketplace/offerings/ServiceProviderAutocomplete';
 import { CategoryFilter } from '@waldur/marketplace/resources/list/CategoryFilter';
 import { TagFilter } from '@waldur/marketplace/tags/TagFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-import { ADMIN_OFFERINGS_FILTER_FORM_ID } from './constants';
+import { OFFERINGS_FILTER_FORM_ID } from '../constants';
 
-interface AdminOfferingsFilterOwnProps {
+interface OfferingsListFilterOwnProps {
   showCategory?;
   showOrganization?;
 }
@@ -29,8 +29,8 @@ const sharedOptions = [
   },
 ];
 
-const PureAdminOfferingsFilter: FunctionComponent<
-  AdminOfferingsFilterOwnProps
+const PureOfferingsListFilter: FunctionComponent<
+  OfferingsListFilterOwnProps
 > = ({ showCategory, showOrganization = true }) => (
   <>
     <TableFilterItem
@@ -46,7 +46,7 @@ const PureAdminOfferingsFilter: FunctionComponent<
         name="organization"
         badgeValue={(value) => value?.name}
       >
-        <OrganizationAutocomplete
+        <ServiceProviderAutocomplete
           reactSelectProps={REACT_SELECT_TABLE_FILTER}
         />
       </TableFilterItem>
@@ -99,9 +99,9 @@ const PureAdminOfferingsFilter: FunctionComponent<
   </>
 );
 
-const enhance = reduxForm<{}, AdminOfferingsFilterOwnProps>({
-  form: ADMIN_OFFERINGS_FILTER_FORM_ID,
+const enhance = reduxForm<{}, OfferingsListFilterOwnProps>({
+  form: OFFERINGS_FILTER_FORM_ID,
   destroyOnUnmount: false,
 });
 
-export const AdminOfferingsFilter = enhance(PureAdminOfferingsFilter);
+export const OfferingsListFilter = enhance(PureOfferingsListFilter);

@@ -1,2 +1,3 @@
 export const PROVIDER_OFFERING_DATA_QUERY_KEY = 'providerOfferingData';
 export const PUBLIC_OFFERING_DATA_QUERY_KEY = 'publicOfferingData';
+export const OFFERINGS_FILTER_FORM_ID = 'adminOfferingsFilter';
