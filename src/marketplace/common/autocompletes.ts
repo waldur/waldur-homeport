@@ -10,6 +10,7 @@ import {
   marketplaceResourcesList,
   MarketplaceResourcesListData,
   marketplaceServiceProvidersList,
+  marketplaceTagsList,
   projectsList,
   ProjectsListData,
   usersList,
@@ -246,5 +247,26 @@ export const resourceAutocomplete = async (
     parseSelectData(response),
     prevOptions,
     currentPage,
+  );
+};
+
+export const tagAutocomplete = async (
+  query: string,
+  prevOptions,
+  { page },
+  extraParams?,
+) => {
+  const response = await marketplaceTagsList({
+    query: {
+      name: query,
+      page: page,
+      page_size: ENV.pageSize,
+      ...extraParams,
+    },
+  });
+  return returnReactSelectAsyncPaginateObject(
+    parseSelectData(response),
+    prevOptions,
+    page,
   );
 };

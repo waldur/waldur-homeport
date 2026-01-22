@@ -8,6 +8,7 @@ import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/
 import { OfferingStateFilter } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
 import { CategoryFilter } from '@waldur/marketplace/resources/list/CategoryFilter';
+import { TagFilter } from '@waldur/marketplace/tags/TagFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { ADMIN_OFFERINGS_FILTER_FORM_ID } from './constants';
@@ -66,6 +67,13 @@ const PureAdminOfferingsFilter: FunctionComponent<
         <CategoryFilter />
       </TableFilterItem>
     ) : null}
+    <TableFilterItem
+      title={translate('Tag')}
+      name="tag"
+      badgeValue={(value) => value?.name}
+    >
+      <TagFilter />
+    </TableFilterItem>
     <TableFilterItem
       name="shared"
       title={translate('Shared')}

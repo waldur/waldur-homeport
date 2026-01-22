@@ -105,7 +105,7 @@
     "reselect": "^3.0.1",
     "source-map": "^0.7.4",
     "text-security": "^3.2.1",
-    "waldur-js-client": "^7.9.8-dev.2",
+    "waldur-js-client": "^7.9.9-dev.0",
     "yjs": "^13.5.22"
   },
   "devDependencies": {

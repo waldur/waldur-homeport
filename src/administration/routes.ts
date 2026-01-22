@@ -422,6 +422,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-marketplace-tags',
+    url: 'tags/',
+    parent: 'admin-marketplace',
+    component: lazyComponent(() =>
+      import('@waldur/marketplace/tags/admin/TagsList').then((module) => ({
+        default: module.TagsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Tags'),
+    },
+  },
+
+  {
     name: 'admin-marketplace-remote-sync',
     url: 'remote-offering-sync/',
     parent: 'admin-marketplace',

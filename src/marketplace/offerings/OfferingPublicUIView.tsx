@@ -8,6 +8,7 @@ import {
   marketplacePublicOfferingsRetrieve,
 } from 'waldur-js-client';
 
+import { isAuthenticated } from '@waldur/auth/AuthService';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isEmpty } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -180,7 +181,9 @@ export const OfferingPublicUIView = () => {
     queryKey: [PUBLIC_OFFERING_DATA_QUERY_KEY, uuid, user?.uuid],
 
     queryFn: async () => {
-      const options = user ? undefined : { auth: null };
+      // Use isAuthenticated() which checks localStorage token synchronously,
+      // rather than user from Redux which may not be loaded yet on page refresh
+      const options = isAuthenticated() ? undefined : { auth: null };
       const offering = (await marketplacePublicOfferingsRetrieve({
         path: { uuid },
         ...options,
@@ -190,9 +193,9 @@ export const OfferingPublicUIView = () => {
         ...options,
       }).then((response) => response.data);
 
-      // Check if offering has active ToS
+      // Check if offering has active ToS (only for authenticated users)
       let hasActiveTos = false;
-      if (user) {
+      if (isAuthenticated()) {
         try {
           const tosData = await marketplaceOfferingTermsOfServiceList({
             query: { offering_uuid: offering.uuid, is_active: true },

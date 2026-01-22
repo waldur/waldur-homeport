@@ -17,7 +17,10 @@ import BaseSelect, {
   ThemeConfig,
 } from 'react-select';
 import CreatableSelect from 'react-select/creatable';
-import { AsyncPaginate as BaseAsyncPaginate } from 'react-select-async-paginate';
+import {
+  AsyncPaginate as BaseAsyncPaginate,
+  withAsyncPaginate,
+} from 'react-select-async-paginate';
 import BaseWindowedSelect from 'react-windowed-select';
 import { BaseFieldProps } from 'redux-form';
 
@@ -361,6 +364,52 @@ export const AsyncPaginate: FC<any> = ({
       {...REACT_SELECT_MENU_PORTALING}
       components={composedComponents}
       {...props}
+      className={classNames('metronic-select-container', props.className)}
+      classNamePrefix="metronic-select"
+      loadOptions={wrappedLoadOptions || props.loadOptions}
+    />
+  );
+};
+
+const BaseAsyncCreatablePaginate = withAsyncPaginate(CreatableSelect);
+
+export const AsyncCreatablePaginate: FC<any> = ({
+  components = undefined,
+  ...props
+}) => {
+  const theme = useSelectTheme();
+
+  const getOptionValue = props.getOptionValue || ((option) => option.value);
+  let wrappedLoadOptions;
+  if (props.menuIsOpen && props.loadOptions) {
+    wrappedLoadOptions = async (query, prevOptions, additional) => {
+      const result = await props.loadOptions(query, prevOptions, additional);
+      return {
+        ...result,
+        options: reorderAsyncOptions(
+          result.options,
+          props.value,
+          getOptionValue,
+          props.isMulti,
+          additional?.page,
+        ),
+      };
+    };
+  }
+
+  const composedComponents = composeComponents(components, props.isMulti);
+
+  return (
+    <BaseAsyncCreatablePaginate
+      theme={theme}
+      additional={{
+        page: 1,
+      }}
+      {...REACT_SELECT_MENU_PORTALING}
+      components={composedComponents}
+      {...props}
+      className={classNames('metronic-select-container', props.className)}
+      classNamePrefix="metronic-select"
       loadOptions={wrappedLoadOptions || props.loadOptions}
     />
   );
