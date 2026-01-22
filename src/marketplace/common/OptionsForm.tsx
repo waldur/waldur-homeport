@@ -38,6 +38,7 @@ import { fetchOpenstackOptions } from './fetchOpenstackOptions';
 import { validateMultiDatacenterConfiguration } from './multi-datacenter-k8s-types';
 import { MultiDatacenterK8sConfigurationForm } from './MultiDatacenterK8sConfigurationForm';
 import { SingleDatacenterK8sConfigurationForm } from './SingleDatacenterK8sConfigurationForm';
+import { StorageFolderManagerField } from './StorageFolderManagerField';
 import { DeployFormData } from './types';
 
 // Validator for K8s configuration fields - returns array for proper tooltip formatting
@@ -185,6 +186,12 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
       break;
     case 'component_multiplier':
       OptionField = ComponentMultiplierField;
+      params = {
+        field: option,
+      };
+      break;
+    case 'storage_folder_manager':
+      OptionField = StorageFolderManagerField;
       params = {
         field: option,
       };

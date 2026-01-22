@@ -15,6 +15,7 @@ import { ComponentMultiplierConfiguration } from './ComponentMultiplierConfigura
 import { ConditionalCascadeConfiguration } from './ConditionalCascadeConfiguration';
 import { FIELD_TYPES, OPTION_FORM_ID } from './constants';
 import { K8sDefaultsConfiguration } from './K8sDefaultsConfiguration';
+import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 
 const selector = getFormValues(OPTION_FORM_ID);
 
@@ -81,6 +82,12 @@ export const OptionForm = ({ resourceType, offering }) => {
       {type === 'component_multiplier' && (
         <ComponentMultiplierConfiguration
           name="component_multiplier_config"
+          offering={offering}
+        />
+      )}
+      {type === 'storage_folder_manager' && (
+        <StorageFolderConfiguration
+          name="storage_folder_config"
           offering={offering}
         />
       )}

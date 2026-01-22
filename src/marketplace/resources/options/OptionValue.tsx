@@ -25,6 +25,12 @@ const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   time: (value) => formatTime(value),
   conditional_cascade: (value) => value,
   component_multiplier: (value) => value,
+  storage_folder_manager: (value) => {
+    if (typeof value === 'object' && value !== null) {
+      return `${value.storage_data_type || ''} - ${value.permissions || ''}`;
+    }
+    return value;
+  },
   single_datacenter_k8s_config: (value) => JSON.stringify(value),
   multi_datacenter_k8s_config: (value) => JSON.stringify(value),
 };
