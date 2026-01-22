@@ -1192,7 +1192,7 @@ export const SettingsDescription = [
         key: 'LLM_INFERENCES_API_TOKEN',
         description: translate('API key for authenticating with the LLM inference service.'),
         default: '',
-        type: 'string',
+        type: 'secret_field',
       },
       {
         key: 'LLM_INFERENCES_MODEL',
