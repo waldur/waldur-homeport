@@ -52,6 +52,9 @@ const formatAttributes = (props): OrderCreateRequest['attributes'] => {
       // For component multiplier fields, store the original user input
       // The multiplication will be handled by backend during order processing
       newAttributes[key] = value;
+    } else if (optionConfig?.type === 'storage_folder_manager') {
+      // For storage folder manager, keep the whole object structure
+      newAttributes[key] = value;
     } else if (
       optionConfig?.type === 'single_datacenter_k8s_config' ||
       optionConfig?.type === 'multi_datacenter_k8s_config'
