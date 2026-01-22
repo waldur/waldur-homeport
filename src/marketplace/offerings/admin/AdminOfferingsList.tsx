@@ -13,10 +13,14 @@ import {
   ADMIN_OFFERINGS_FILTER_FORM_ID,
 } from './constants';
 
+type AdminOfferingsFilter = MarketplaceProviderOfferingsListData['query'] & {
+  tag?: string; // TODO: Remove once SDK includes tag filter support
+};
+
 export const mapStateToFilter = createSelector(
   getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID),
   (filterValues: any) => {
-    const filter: MarketplaceProviderOfferingsListData['query'] = {};
+    const filter: AdminOfferingsFilter = {};
     if (filterValues?.organization) {
       filter.customer_uuid = filterValues.organization.uuid;
     }
@@ -29,6 +33,9 @@ export const mapStateToFilter = createSelector(
       }
       if (filterValues.category) {
         filter.category_uuid = filterValues.category.uuid;
+      }
+      if (filterValues.tag) {
+        filter.tag = filterValues.tag.uuid;
       }
       if (filterValues.shared) {
         filter.shared = filterValues.shared;

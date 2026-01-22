@@ -51,7 +51,10 @@ const RowActions = ({ row }) => {
   );
 };
 
-const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
+// TODO: Remove 'tags' type override once SDK includes tags field support
+const mandatoryFields: Array<
+  MarketplacePublicOfferingsListData['query']['field'][number] | 'tags'
+> = [
   // OfferingCard
   'uuid',
   'name',
@@ -62,6 +65,7 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'thumbnail',
   'image',
   'type',
+  'tags',
   // OfferingCard and RowActions
   'customer_uuid',
   'shared',

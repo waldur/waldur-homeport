@@ -22,7 +22,10 @@ import {
   getMarketplaceFilters,
 } from './filter/store/selectors';
 
-const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
+// TODO: Remove 'tags' type override once SDK includes tags field support
+const mandatoryFields: Array<
+  MarketplacePublicOfferingsListData['query']['field'][number] | 'tags'
+> = [
   'uuid',
   'name',
   'description',
@@ -36,6 +39,7 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'state',
   'shared',
   'paused_reason',
+  'tags',
 ];
 
 const mapStateToFilter = createSelector<

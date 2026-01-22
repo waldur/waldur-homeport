@@ -2,17 +2,18 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
+import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { ModelCard1 } from '@waldur/core/ModelCard1';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import Placeholder from '@waldur/images/logo_w.svg';
 import { OfferingDetailsLink } from '@waldur/marketplace/links/OfferingDetailsLink';
+import { TagBadges } from '@waldur/marketplace/tags/TagBadges';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { isOfferingRestrictedToProject } from '../offerings/utils';
-import { Offering } from '../types';
 
 import './OfferingCard.scss';
 import { DeployButton } from './DeployButton';
@@ -20,7 +21,7 @@ import { getOfferingImage } from './getOfferingImage';
 import { ViewOfferingButton } from './ViewOfferingButton';
 
 interface OfferingCardProps {
-  offering: Offering;
+  offering: PublicOfferingDetails;
   className?: string;
 }
 
@@ -60,6 +61,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = (props) => {
             <Placeholder className="mh-85px" />
           </span>
         }
+        body={<TagBadges tags={props.offering.tags} />}
         footer={
           !isRestricted ? (
             <div className="d-flex justify-content-end align-items-center gap-2">

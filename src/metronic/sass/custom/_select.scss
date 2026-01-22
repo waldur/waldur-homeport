@@ -70,7 +70,8 @@
 
     &__value-container--is-multi {
       display: flex;
-      gap: 6px;
+      flex-wrap: wrap;
+      gap: 8px;
     }
   }
 

@@ -43,6 +43,9 @@ const mapStateToFilter = createSelector(
     if (filters?.offering_type) {
       result.type = filters.offering_type.value;
     }
+    if (filters?.tag) {
+      result.tag = filters.tag.uuid;
+    }
     return result;
   },
 );

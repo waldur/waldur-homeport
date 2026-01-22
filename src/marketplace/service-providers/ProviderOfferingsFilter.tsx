@@ -9,6 +9,7 @@ import {
   OfferingStateFilter,
   getStates,
 } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
+import { TagFilter } from '@waldur/marketplace/tags/TagFilter';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { PROVIDER_OFFERINGS_FORM_ID } from './constants';
@@ -38,6 +39,14 @@ const PureProviderOfferingsFilter: FunctionComponent = () => (
 
     <TableFilterItem title={translate('Integration type')} name="offering_type">
       <OfferingTypeAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+    </TableFilterItem>
+
+    <TableFilterItem
+      title={translate('Tag')}
+      name="tag"
+      badgeValue={(value) => value?.name}
+    >
+      <TagFilter />
     </TableFilterItem>
   </>
 );
