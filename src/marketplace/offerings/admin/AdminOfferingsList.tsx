@@ -4,21 +4,19 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
+import { OFFERINGS_FILTER_FORM_ID } from '../constants';
 import { BaseOfferingsList } from '../list/OfferingsList';
+import { OfferingsListFilter } from '../list/OfferingsListFilter';
 import { getStates } from '../list/OfferingStateFilter';
 
-import { AdminOfferingsFilter } from './AdminOfferingsFilter';
-import {
-  ADMIN_OFFERING_TABLE_NAME,
-  ADMIN_OFFERINGS_FILTER_FORM_ID,
-} from './constants';
+import { ADMIN_OFFERING_TABLE_NAME } from './constants';
 
 type AdminOfferingsFilter = MarketplaceProviderOfferingsListData['query'] & {
   tag?: string; // TODO: Remove once SDK includes tag filter support
 };
 
 export const mapStateToFilter = createSelector(
-  getFormValues(ADMIN_OFFERINGS_FILTER_FORM_ID),
+  getFormValues(OFFERINGS_FILTER_FORM_ID),
   (filterValues: any) => {
     const filter: AdminOfferingsFilter = {};
     if (filterValues?.organization) {
@@ -61,7 +59,7 @@ export const AdminOfferingsList = () => {
       hasOrganizationColumn
       showActions
       showProvider
-      filters={<AdminOfferingsFilter initialValues={initialValues} />}
+      filters={<OfferingsListFilter initialValues={initialValues} />}
     />
   );
 };

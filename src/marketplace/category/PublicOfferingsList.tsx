@@ -26,8 +26,8 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { OfferingCard } from '../common/OfferingCard';
 import { OfferingLink } from '../links/OfferingLink';
-import { AdminOfferingsFilter } from '../offerings/admin/AdminOfferingsFilter';
 import { mapStateToFilter } from '../offerings/admin/AdminOfferingsList';
+import { OfferingsListFilter } from '../offerings/list/OfferingsListFilter';
 import { getStates } from '../offerings/list/OfferingStateFilter';
 import { OfferingStateField } from '../offerings/OfferingStateField';
 import { isOfferingRestrictedToProject } from '../offerings/utils';
@@ -180,7 +180,7 @@ export const PublicOfferingsList: FunctionComponent<{
       gridItem={({ row }) => <OfferingCard offering={row} />}
       hoverShadow={{ grid: false }}
       filters={
-        <AdminOfferingsFilter
+        <OfferingsListFilter
           showCategory={showCategory}
           showOrganization={showOrganization}
         />
