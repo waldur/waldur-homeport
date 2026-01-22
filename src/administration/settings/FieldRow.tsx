@@ -2,6 +2,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { SecretField } from '@waldur/marketplace/common/SecretField';
 
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { CountryListField } from './CountryListField';
@@ -111,7 +112,9 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
       description={item.description}
       descriptionClassName="text-gray-600"
       value={
-        item.type === 'image_field' ? (
+        item.type === 'secret_field' ? (
+          <SecretField value={value} />
+        ) : item.type === 'image_field' ? (
           <ImageField value={value} />
         ) : item.type === 'color_field' ? (
           <ColorField value={value} />
