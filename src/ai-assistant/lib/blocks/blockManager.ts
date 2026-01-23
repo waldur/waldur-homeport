@@ -1,3 +1,5 @@
+import { ChatResponse } from 'waldur-js-client';
+
 import { UIBlock } from '@waldur/ai-assistant/lib/types';
 import { randomUUID } from '@waldur/core/utils';
 
@@ -15,16 +17,7 @@ import { randomUUID } from '@waldur/core/utils';
  */
 export function updateBlocks(
   existingBlocks: UIBlock[],
-  part: {
-    k?: string; // Component key
-    c?: string; // Content chunk
-    t?: string; // Component tag
-    m?: Record<string, unknown>; // Additional metadata
-    e?: string; // Error message
-    h?: string[]; // Table headers
-    r?: string[][]; // Table rows
-    n?: number; // Total count
-  },
+  part: ChatResponse,
 ): UIBlock[] {
   // Handle 'load' key: create empty block with loading status
   if (part.k === 'load' && part.t) {
@@ -51,8 +44,8 @@ export function updateBlocks(
         {
           ...lastBlock,
           content: part.c ?? lastBlock.content ?? '',
-          headers: part.h ?? lastBlock.headers,
-          rows: part.r ?? lastBlock.rows,
+          headers: (part.h as string[]) ?? lastBlock.headers,
+          rows: (part.r as string[][]) ?? lastBlock.rows,
           totalCount: part.n ?? lastBlock.totalCount,
           status: 'streaming',
         },
@@ -66,8 +59,8 @@ export function updateBlocks(
         id: randomUUID(),
         key: 'table',
         content: part.c ?? '',
-        headers: part.h,
-        rows: part.r,
+        headers: part.h as string[],
+        rows: part.r as string[][],
         totalCount: part.n,
         status: 'streaming',
       },
