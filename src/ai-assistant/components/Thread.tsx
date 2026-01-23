@@ -8,8 +8,6 @@ import {
 } from '@assistant-ui/react';
 import {
   ArrowDownIcon,
-  CheckIcon,
-  CopyIcon,
   PencilIcon,
   ArrowClockwiseIcon,
   XIcon,
@@ -24,7 +22,7 @@ import {
   StopIcon,
   WarningCircleIcon,
 } from '@phosphor-icons/react';
-import React, { type FC, ReactNode, useMemo, useState } from 'react';
+import React, { type FC, ReactNode, useMemo } from 'react';
 
 import { BlockRenderer } from '@waldur/ai-assistant/components/BlockRenderer';
 import { LoadingDots } from '@waldur/ai-assistant/components/shared/LoadingDots';
@@ -35,6 +33,7 @@ import {
   BlockBasedMetadata,
   BlockHistoryEntry,
 } from '@waldur/ai-assistant/lib/types';
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
 
@@ -339,23 +338,12 @@ const AssistantMessage: FC = () => {
 };
 
 const AssistantActionBar: FC = () => {
-  const [copied, setCopied] = useState(false);
-
   const metadata = useAssistantState((state) => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
 
-  const handleCopy = async () => {
-    try {
-      const blocks = metadata?.blocks ?? [];
-      const text = extractTextFromBlocks(blocks);
-      await navigator.clipboard.writeText(text);
-      setCopied(true);
-      setTimeout(() => setCopied(false), 2000);
-    } catch {
-      // Silently fail if clipboard access is denied
-    }
-  };
+  const blocks = metadata?.blocks ?? [];
+  const textToCopy = extractTextFromBlocks(blocks);
 
   return (
     <ActionBarPrimitive.Root
@@ -364,17 +352,7 @@ const AssistantActionBar: FC = () => {
       autohideFloat="single-branch"
       className="aui-assistant-action-bar-root"
     >
-      <button
-        onClick={handleCopy}
-        className="aui-button-ghost"
-        aria-label={translate('Copy')}
-      >
-        {copied ? (
-          <CheckIcon weight="regular" />
-        ) : (
-          <CopyIcon weight="regular" />
-        )}
-      </button>
+      <CopyToClipboardButton value={textToCopy} className="aui-button-ghost" />
 
       <MessagePrimitive.If last>
         <ActionBarPrimitive.Reload asChild>

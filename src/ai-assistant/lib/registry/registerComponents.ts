@@ -1,6 +1,7 @@
 import { CodeBlock } from '@waldur/ai-assistant/components/blocks/CodeBlock';
 import { MarkdownBlock } from '@waldur/ai-assistant/components/blocks/MarkdownBlock';
 import { MermaidBlock } from '@waldur/ai-assistant/components/blocks/MermaidBlock';
+import { TableBlock } from '@waldur/ai-assistant/components/blocks/TableBlock';
 
 import { uiRegistry } from './uiRegistry';
 
@@ -17,4 +18,9 @@ uiRegistry.register({
 uiRegistry.register({
   key: 'mermaid',
   component: MermaidBlock,
+});
+
+uiRegistry.register({
+  key: 'table',
+  component: TableBlock,
 });
