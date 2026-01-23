@@ -100,6 +100,7 @@ interface CoreConfiguration {
   ENABLE_ORDER_START_DATE: boolean;
   OIDC_ACCESS_TOKEN_ENABLED: boolean;
   USER_ACTIONS_ENABLED: boolean;
+  ENABLED_USER_PROFILE_ATTRIBUTES: string[];
 }
 
 interface OpenStackConfiguration {

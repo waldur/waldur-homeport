@@ -67,6 +67,25 @@ When given a Sentry URL:
 5. **Commit** - Use `[{ISSUE-ID}]` prefix and include `Fixes {ISSUE-ID}` in message body
 6. **Push** - Push with `-u origin` to set upstream
 
+## SDK Updates
+
+When new backend API endpoints are needed, regenerate the SDK locally:
+
+```bash
+./docs/update-local-sdk.sh ../waldur-mastermind ../js-client
+```
+
+This script:
+
+1. Generates OpenAPI schema from MasterMind
+2. Generates TypeScript SDK from schema
+3. Builds and links `waldur-js-client` locally
+4. Regenerates enums and descriptions (FeaturesEnums, SettingsDescription, etc.)
+
+**Prerequisites:** Both `waldur-mastermind` and `js-client` repos must be checked out as siblings.
+
+**After running:** Verify with `yarn tsc --noEmit`
+
 ## Task-Specific Docs
 
 These are NOT always-loaded - reference when needed:

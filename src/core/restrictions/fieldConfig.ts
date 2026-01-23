@@ -30,4 +30,30 @@ export const fieldConfig: Record<
       'Users who authenticated using any of these identity providers will be allowed.',
     ),
   },
+  user_nationalities: {
+    title: translate('Edit nationalities'),
+    label: translate('Nationalities'),
+    placeholder: translate('e.g., DE, FR, US (ISO 3166-1 alpha-2 codes)'),
+    description: translate(
+      'Users with any of these nationalities will be allowed.',
+    ),
+  },
+  user_organization_types: {
+    title: translate('Edit organization types'),
+    label: translate('Organization types'),
+    placeholder: translate(
+      'e.g., urn:schac:homeOrganizationType:int:university',
+    ),
+    description: translate(
+      'Users whose organization type matches any of these SCHAC URNs will be allowed.',
+    ),
+  },
+  user_assurance_levels: {
+    title: translate('Edit assurance levels'),
+    label: translate('Assurance levels'),
+    placeholder: translate('e.g., https://refeds.org/assurance/IAP/medium'),
+    description: translate(
+      'Users must have ALL of these assurance levels to be allowed.',
+    ),
+  },
 };

@@ -6,6 +6,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { getNativeNameVisible } from '@waldur/store/config';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import {
@@ -14,7 +15,13 @@ import {
   isStaff,
 } from '@waldur/workspace/selectors';
 
+import {
+  formatGender,
+  formatOrganizationType,
+  formatAssuranceUri,
+} from './aai-constants';
 import { ChangeEmailButton } from './ChangeEmailButton';
+import { isProfileAttributeEnabled } from './profileAttributes';
 import { UserEditRow } from './UserEditRow';
 
 const isRequired = (field: string) => {
@@ -267,6 +274,204 @@ const AffiliationsRow = ({ user, disabled }) =>
     />
   ) : null;
 
+// AAI User Profile Fields
+
+const PersonalTitleRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('personal_title') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Personal title')}
+      name="personal_title"
+      value={user.personal_title}
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'personal_title')}
+      description={
+        isSelf
+          ? translate('Your honorific title (Mr, Ms, Dr, Prof, etc.)')
+          : translate("The user's honorific title")
+      }
+    />
+  ) : null;
+
+const GenderRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('gender') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Gender')}
+      name="gender"
+      value={formatGender(user.gender)}
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'gender')}
+      description={
+        isSelf
+          ? translate('Your gender (ISO 5218)')
+          : translate("The user's gender")
+      }
+    />
+  ) : null;
+
+const PlaceOfBirthRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('place_of_birth') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Place of birth')}
+      name="place_of_birth"
+      value={user.place_of_birth}
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'place_of_birth')}
+      description={
+        isSelf
+          ? translate('Your place of birth')
+          : translate("The user's place of birth")
+      }
+    />
+  ) : null;
+
+const CountryOfResidenceRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('country_of_residence') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Country of residence')}
+      name="country_of_residence"
+      value={
+        user.country_of_residence ? (
+          <span>
+            <CountryFlag
+              countryCode={user.country_of_residence}
+              fontSize={16}
+            />{' '}
+            {user.country_of_residence}
+          </span>
+        ) : null
+      }
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'country_of_residence')}
+      description={
+        isSelf
+          ? translate('Your current country of residence')
+          : translate("The user's current country of residence")
+      }
+    />
+  ) : null;
+
+const NationalityRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('nationality') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Nationality')}
+      name="nationality"
+      value={
+        user.nationality ? (
+          <span>
+            <CountryFlag countryCode={user.nationality} fontSize={16} />{' '}
+            {user.nationality}
+          </span>
+        ) : null
+      }
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'nationality')}
+      description={
+        isSelf
+          ? translate('Your primary nationality')
+          : translate("The user's primary nationality")
+      }
+    />
+  ) : null;
+
+const NationalitiesRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('nationalities') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Nationalities')}
+      name="nationalities"
+      value={
+        Array.isArray(user.nationalities) && user.nationalities.length > 0 ? (
+          <span className="d-flex flex-wrap gap-2">
+            {(user.nationalities as string[]).map((code) => (
+              <span key={code} className="badge badge-light">
+                <CountryFlag countryCode={code} fontSize={14} /> {code}
+              </span>
+            ))}
+          </span>
+        ) : null
+      }
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'nationalities')}
+      description={
+        isSelf
+          ? translate('All your citizenships')
+          : translate("All the user's citizenships")
+      }
+    />
+  ) : null;
+
+const OrganizationCountryRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('organization_country') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Organization country')}
+      name="organization_country"
+      value={
+        user.organization_country ? (
+          <span>
+            <CountryFlag
+              countryCode={user.organization_country}
+              fontSize={16}
+            />{' '}
+            {user.organization_country}
+          </span>
+        ) : null
+      }
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'organization_country')}
+      description={
+        isSelf
+          ? translate("Your organization's country")
+          : translate("The user's organization country")
+      }
+    />
+  ) : null;
+
+const OrganizationTypeRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('organization_type') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Organization type')}
+      name="organization_type"
+      value={formatOrganizationType(user.organization_type)}
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'organization_type')}
+      description={
+        isSelf
+          ? translate('The type of organization you belong to')
+          : translate('The type of organization the user belongs to')
+      }
+    />
+  ) : null;
+
+const EdupersonAssuranceRow = ({ user, disabled }) =>
+  isProfileAttributeEnabled('eduperson_assurance') &&
+  Array.isArray(user.eduperson_assurance) &&
+  user.eduperson_assurance.length > 0 ? (
+    <UserEditRow
+      user={user}
+      label={translate('Assurance levels')}
+      name="eduperson_assurance"
+      value={
+        <span className="d-flex flex-wrap gap-2">
+          {(user.eduperson_assurance as string[]).map((uri) => (
+            <span key={uri} className="badge badge-light-info">
+              {formatAssuranceUri(uri)}
+            </span>
+          ))}
+        </span>
+      }
+      disabled={disabled}
+      protected={true}
+      protectedMsg={translate('Read-only field from identity provider')}
+    />
+  ) : null;
+
 const DescriptionRow = ({ user, disabled, isSelf }) => {
   const visible = useSelector(isStaffOrSupport);
   return visible ? (
@@ -312,17 +517,39 @@ export const UserEditRows = ({
 
   return (
     <>
+      {/* Basic Information */}
       <FirstNameRow user={user} isSelf={isSelf} disabled={disabled} />
       <LastNameRow user={user} isSelf={isSelf} disabled={disabled} />
       <NativeNameRow user={user} isSelf={isSelf} disabled={disabled} />
+
+      {/* Personal Identity */}
+      <PersonalTitleRow user={user} isSelf={isSelf} disabled={disabled} />
+      <GenderRow user={user} isSelf={isSelf} disabled={disabled} />
+      <PlaceOfBirthRow user={user} isSelf={isSelf} disabled={disabled} />
+
+      {/* Contact Information */}
       <PhoneNumberRow user={user} isSelf={isSelf} disabled={disabled} />
       <EmailRow user={user} isSelf={isSelf} disabled={disabled} />
+
+      {/* Geographic Information */}
+      <CountryOfResidenceRow user={user} isSelf={isSelf} disabled={disabled} />
+      <NationalityRow user={user} isSelf={isSelf} disabled={disabled} />
+      <NationalitiesRow user={user} isSelf={isSelf} disabled={disabled} />
+
+      {/* Organization Details */}
+      <OrganizationRow user={user} isSelf={isSelf} disabled={disabled} />
+      <OrganizationCountryRow user={user} isSelf={isSelf} disabled={disabled} />
+      <OrganizationTypeRow user={user} isSelf={isSelf} disabled={disabled} />
+      <JobTitleRow user={user} isSelf={isSelf} disabled={disabled} />
+      <AffiliationsRow user={user} disabled={disabled} />
+
+      {/* Identity & Assurance */}
+      <EdupersonAssuranceRow user={user} disabled={disabled} />
+
+      {/* System Information */}
       <DateJoinedRow user={user} disabled={disabled} />
       <UserTypeRow user={user} isSelf={isSelf} disabled={disabled} />
       <CivilNumberRow user={user} disabled={disabled} />
-      <OrganizationRow user={user} isSelf={isSelf} disabled={disabled} />
-      <JobTitleRow user={user} isSelf={isSelf} disabled={disabled} />
-      <AffiliationsRow user={user} disabled={disabled} />
       <DescriptionRow user={user} isSelf={isSelf} disabled={disabled} />
       <ShortnameRow user={user} currentUser={currentUser} disabled={disabled} />
       <NotificationsEnabledRow

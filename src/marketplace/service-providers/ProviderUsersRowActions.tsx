@@ -1,6 +1,7 @@
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { UserDetailsButton } from '@waldur/user/support/UserDetailsButton';
+
+import { ProviderUserDetailsButton } from './ProviderUserDetailsButton';
 
 export const ProviderUsersRowActions = ({ row }) => {
-  return <ActionsDropdown row={row} actions={[UserDetailsButton]} />;
+  return <ActionsDropdown row={row} actions={[ProviderUserDetailsButton]} />;
 };

@@ -177,6 +177,20 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Outgoing emails'),
     },
   },
+  {
+    name: 'support-data-access-logs',
+    url: 'data-access-logs/',
+    parent: 'support-logs',
+    component: lazyComponent(() =>
+      import('@waldur/support/SupportDataAccessLogsList').then((module) => ({
+        default: module.SupportDataAccessLogsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Data access logs'),
+      permissions: [isStaffOrSupport],
+    },
+  },
 
   // User Management routes moved from Administration
   {

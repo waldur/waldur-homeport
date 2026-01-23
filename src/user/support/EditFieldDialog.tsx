@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import { required } from '@waldur/core/validators';
 import { SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { CountrySelectField } from '@waldur/form/CountrySelectField';
+import { MultiCountrySelectField } from '@waldur/form/MultiCountrySelectField';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -15,7 +17,22 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 import { EditUserProps } from '../types';
 
+import {
+  GenderSelectField,
+  OrganizationTypeSelectField,
+  PersonalTitleSelectField,
+} from './fields';
 import { useUpdateUser } from './useUpdateUser';
+
+// Fields that use CountrySelectField
+const COUNTRY_FIELDS = [
+  'country_of_residence',
+  'nationality',
+  'organization_country',
+];
+
+// Fields that use MultiCountrySelectField
+const MULTI_COUNTRY_FIELDS = ['nationalities'];
 
 interface EditFieldDialogProps {
   resolve: EditUserProps;
@@ -84,6 +101,61 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
                   validate={resolve.requiredMsg ? required : undefined}
                   maxLength={500}
                   spaceless
+                />
+              </FormGroup>
+            ) : resolve.name === 'gender' ? (
+              <FormGroup
+                label={resolve.label}
+                required={Boolean(resolve.requiredMsg)}
+              >
+                <Field
+                  name="gender"
+                  component={GenderSelectField as any}
+                  validate={resolve.requiredMsg ? required : undefined}
+                />
+              </FormGroup>
+            ) : resolve.name === 'personal_title' ? (
+              <FormGroup
+                label={resolve.label}
+                required={Boolean(resolve.requiredMsg)}
+              >
+                <Field
+                  name="personal_title"
+                  component={PersonalTitleSelectField as any}
+                  validate={resolve.requiredMsg ? required : undefined}
+                />
+              </FormGroup>
+            ) : resolve.name === 'organization_type' ? (
+              <FormGroup
+                label={resolve.label}
+                required={Boolean(resolve.requiredMsg)}
+              >
+                <Field
+                  name="organization_type"
+                  component={OrganizationTypeSelectField as any}
+                  validate={resolve.requiredMsg ? required : undefined}
+                />
+              </FormGroup>
+            ) : COUNTRY_FIELDS.includes(resolve.name) ? (
+              <FormGroup
+                label={resolve.label}
+                required={Boolean(resolve.requiredMsg)}
+              >
+                <Field
+                  name={resolve.name}
+                  component={CountrySelectField as any}
+                  validate={resolve.requiredMsg ? required : undefined}
+                />
+              </FormGroup>
+            ) : MULTI_COUNTRY_FIELDS.includes(resolve.name) ? (
+              <FormGroup
+                label={resolve.label}
+                required={Boolean(resolve.requiredMsg)}
+              >
+                <Field
+                  name={resolve.name}
+                  component={MultiCountrySelectField as any}
+                  validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>
             ) : resolve.name ? (

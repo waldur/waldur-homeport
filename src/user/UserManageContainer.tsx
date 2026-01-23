@@ -64,6 +64,11 @@ const ReviewerProfileTab = lazyComponent(() =>
     default: module.ReviewerProfileTab,
   })),
 );
+const DataAccessTab = lazyComponent(() =>
+  import('@waldur/user/data-access/DataAccessTab').then((module) => ({
+    default: module.DataAccessTab,
+  })),
+);
 
 const NotAllowedTab = () => (
   <p className="text-muted text-center">{translate('Not allowed')}</p>
@@ -169,6 +174,13 @@ export const UserManageContainer = ({ isPersonal }) => {
             key: 'roles',
             component: UserAffiliationsList,
             title: translate('Roles and permissions'),
+          },
+        // Data access - staff/support viewing any user, or user viewing own profile
+        isFeatureVisible(UserFeatures.show_data_access) &&
+          (currentUser.is_staff || currentUser.is_support || isPersonal) && {
+            key: 'data-access',
+            component: DataAccessTab,
+            title: translate('Data access'),
           },
         (!isFeatureVisible(UserFeatures.disable_user_termination) ||
           currentUser.is_staff) && {

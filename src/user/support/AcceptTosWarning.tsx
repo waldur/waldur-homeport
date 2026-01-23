@@ -11,6 +11,7 @@ export const AcceptTosWarning = ({
   userName,
 }: AcceptTosWarningProps) => (
   <WarnCard
+    prominent
     title={
       isSelf
         ? translate('Action required: Accept terms and conditions')
@@ -26,6 +27,6 @@ export const AcceptTosWarning = ({
             { userName: userName || translate('This user') },
           )
     }
-    className="mt-3"
+    className="mb-7"
   />
 );

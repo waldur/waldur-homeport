@@ -1,16 +1,16 @@
-import React from 'react';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
+import { ExternalLink } from '@waldur/core/ExternalLink';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { AcceptTosWarning } from './AcceptTosWarning';
-import { IdentityProviderCard } from './IdentityProviderCard';
+import { IdentityProviderIndicator } from './IdentityProviderIndicator';
 import { TermsOfServiceCheckbox } from './TermsOfServiceCheckbox';
-import { UserEditAvatarFormItem } from './UserEditAvatarFormItem';
-import { UserEditRows } from './UserEditRows';
+import { UserProfileTabs } from './UserProfileTabs';
 
 interface UserEditTabProps {
   user: User;
@@ -27,26 +27,40 @@ export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
 
   return (
     <>
-      <IdentityProviderCard user={user} />
-      <FormTable.Card
-        title={
-          isSelf
-            ? translate('Personal information')
-            : translate('Profile settings')
-        }
-        className="card-bordered mb-7"
-      >
-        {showTosWarning && (
-          <AcceptTosWarning isSelf={isSelf} userName={user.full_name} />
-        )}
-        <FormTable>
-          {isSelf && !user.agreement_date && (
-            <FormTable.Item value={<TermsOfServiceCheckbox user={user} />} />
-          )}
-          <UserEditAvatarFormItem user={user} disabled={isDisabled} />
-          <UserEditRows user={user} disabled={isDisabled} />
-        </FormTable>
-      </FormTable.Card>
+      {showTosWarning && (
+        <AcceptTosWarning isSelf={isSelf} userName={user.full_name} />
+      )}
+      {isSelf && !user.agreement_date && (
+        <Card className="card-bordered mb-7">
+          <Card.Body>
+            <FormTable>
+              <FormTable.Item value={<TermsOfServiceCheckbox user={user} />} />
+            </FormTable>
+          </Card.Body>
+        </Card>
+      )}
+      <Card className="card-bordered mb-7">
+        <Card.Header>
+          <Card.Title>
+            {isSelf
+              ? translate('Personal information')
+              : translate('Profile settings')}
+          </Card.Title>
+          <div className="card-toolbar gap-4">
+            <IdentityProviderIndicator user={user} showManagementLink={false} />
+            {user.identity_provider_management_url && (
+              <ExternalLink
+                label={translate('Manage profile')}
+                url={user.identity_provider_management_url}
+                className="btn btn-light-primary"
+              />
+            )}
+          </div>
+        </Card.Header>
+        <Card.Body>
+          <UserProfileTabs user={user} disabled={isDisabled} />
+        </Card.Body>
+      </Card>
     </>
   );
 };

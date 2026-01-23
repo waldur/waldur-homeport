@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { OfferingUser } from 'waldur-js-client';
 
+import { OfferingUserDetailsButton } from '@waldur/marketplace/offerings/details/OfferingUserDetailsButton';
 import { ProviderOfferingUserDeleteButton } from '@waldur/marketplace/service-providers/ProviderOfferingUserDeleteButton';
 import { ProviderOfferingUserUpdateButton } from '@waldur/marketplace/service-providers/ProviderOfferingUserUpdateButton';
 import { RestrictOfferingUserButton } from '@waldur/marketplace/service-providers/RestrictOfferingUser';
@@ -49,6 +50,9 @@ export const OfferingUserRowActions: React.FC<OfferingUserRowActionsProps> = ({
       row={row}
       refetch={fetch}
       actions={[
+        (props) => (
+          <OfferingUserDetailsButton row={props.row} offering={offering} />
+        ),
         (props) => (
           <>
             <ProviderOfferingUserUpdateButton

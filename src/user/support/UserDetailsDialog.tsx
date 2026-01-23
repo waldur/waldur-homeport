@@ -12,6 +12,7 @@ import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { UserEvents } from '@waldur/user/dashboard/UserEvents';
+import { DataAccessDialogContent } from '@waldur/user/data-access/DataAccessDialogContent';
 import { KeysList } from '@waldur/user/keys/KeysList';
 import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
 import { UserOfferingList } from '@waldur/user/UserOfferingList';
@@ -79,6 +80,12 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
               <UserAffiliationsList user={user} hasActionBar={false} />
             </Tab>
           ) : null}
+          {isFeatureVisible(UserFeatures.show_data_access) &&
+            (currentUser.is_staff || currentUser.is_support) && (
+              <Tab eventKey={7} title={translate('Data access')}>
+                <DataAccessDialogContent user={user} />
+              </Tab>
+            )}
         </Tabs>
       ) : null}
     </ModalDialog>

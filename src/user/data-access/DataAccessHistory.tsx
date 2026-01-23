@@ -1,0 +1,152 @@
+import { FC, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
+
+import { Badge } from '@waldur/core/Badge';
+import { formatDateTime } from '@waldur/core/dateUtils';
+import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
+import Table from '@waldur/table/Table';
+import { useTable } from '@waldur/table/useTable';
+
+import { dataAccessHistoryFetcher } from './api';
+import { AccessHistoryFilter } from './components/AccessHistoryFilter';
+import { DataAccessHistoryEntry } from './types';
+import {
+  formatFieldName,
+  getAccessorCategory,
+  getAccessorTypeBadgeVariant,
+} from './utils';
+
+interface DataAccessHistoryProps {
+  userUuid: string;
+  isViewerStaffOrSupport: boolean;
+}
+
+const mapStateToFilter = createSelector(
+  getFormValues('AccessHistoryFilter'),
+  (filterValues: any) => {
+    const result: Record<string, string> = {};
+    if (filterValues?.start_date) {
+      result.start_date = filterValues.start_date;
+    }
+    if (filterValues?.end_date) {
+      result.end_date = filterValues.end_date;
+    }
+    if (filterValues?.accessor_type?.value) {
+      result.accessor_type = filterValues.accessor_type.value;
+    }
+    return result;
+  },
+);
+
+export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
+  userUuid,
+  isViewerStaffOrSupport,
+}) => {
+  const filterValues = useSelector(mapStateToFilter);
+
+  const filter = useMemo(
+    () => ({
+      ...filterValues,
+    }),
+    [filterValues],
+  );
+
+  const tableProps = useTable({
+    table: `dataAccessHistory-${userUuid}`,
+    fetchData: dataAccessHistoryFetcher(userUuid),
+    filter,
+  });
+
+  const columns = useMemo(() => {
+    const baseColumns = [
+      {
+        title: translate('Date & Time'),
+        orderField: 'timestamp',
+        render: ({ row }: { row: DataAccessHistoryEntry }) => (
+          <>{formatDateTime(row.timestamp)}</>
+        ),
+      },
+      {
+        title: translate('Accessor'),
+        render: ({ row }: { row: DataAccessHistoryEntry }) => {
+          if (isViewerStaffOrSupport && row.accessor) {
+            return (
+              <Link
+                state="admin-user-users.details"
+                params={{ user_uuid: row.accessor.uuid }}
+              >
+                {row.accessor.full_name || row.accessor.username}
+              </Link>
+            );
+          }
+          return (
+            <span className="text-muted">
+              {row.accessor_category || getAccessorCategory(row.accessor_type)}
+            </span>
+          );
+        },
+      },
+      {
+        title: translate('Access type'),
+        render: ({ row }: { row: DataAccessHistoryEntry }) => (
+          <Badge
+            variant={getAccessorTypeBadgeVariant(row.accessor_type)}
+            pill
+            outline
+          >
+            {getAccessorCategory(row.accessor_type)}
+          </Badge>
+        ),
+      },
+      {
+        title: translate('Fields accessed'),
+        render: ({ row }: { row: DataAccessHistoryEntry }) => (
+          <div className="d-flex flex-wrap gap-1">
+            {row.accessed_fields.map((field) => (
+              <Badge key={field} variant="secondary" pill outline>
+                {formatFieldName(field)}
+              </Badge>
+            ))}
+          </div>
+        ),
+      },
+    ];
+
+    if (isViewerStaffOrSupport) {
+      baseColumns.push(
+        {
+          title: translate('IP address'),
+          render: ({ row }: { row: DataAccessHistoryEntry }) => (
+            <code className="text-muted small">{row.ip_address || '-'}</code>
+          ),
+        },
+        {
+          title: translate('Context'),
+          render: ({ row }: { row: DataAccessHistoryEntry }) =>
+            row.context?.endpoint ? (
+              <code className="text-muted small">
+                {String(row.context.method)} {String(row.context.endpoint)}
+              </code>
+            ) : (
+              <span className="text-muted">-</span>
+            ),
+        },
+      );
+    }
+
+    return baseColumns;
+  }, [isViewerStaffOrSupport]);
+
+  return (
+    <Table<DataAccessHistoryEntry>
+      {...tableProps}
+      columns={columns}
+      filters={<AccessHistoryFilter />}
+      verboseName={translate('Access history entries')}
+      showPageSizeSelector
+    />
+  );
+};
