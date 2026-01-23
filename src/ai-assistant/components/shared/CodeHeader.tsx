@@ -1,7 +1,6 @@
-import { CheckIcon, CopyIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { useCopyToClipboard } from '@waldur/ai-assistant/hooks/useCopyToClipboard';
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 
 interface CodeHeaderProps {
   language?: string;
@@ -14,26 +13,16 @@ export const CodeHeader: FC<CodeHeaderProps> = ({
   code,
   showCopyButton = true,
 }) => {
-  const { isCopied, copyToClipboard } = useCopyToClipboard();
-
-  const onCopy = () => {
-    if (!code || isCopied) return;
-    copyToClipboard(code);
-  };
-
   return (
     <div className="aui-code-header">
       <span className="aui-code-language">{language || 'text'}</span>
       {showCopyButton && (
-        <button
-          className="aui-code-copy-btn"
-          onClick={onCopy}
-          aria-label="Copy code"
-          title="Copy"
-        >
-          {!isCopied && <CopyIcon weight="bold" />}
-          {isCopied && <CheckIcon weight="bold" />}
-        </button>
+        <CopyToClipboardButton
+          value={code}
+          buttonClassName="aui-code-copy-btn"
+          onlyButton
+          verbose="Code"
+        />
       )}
     </div>
   );

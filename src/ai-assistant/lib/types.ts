@@ -29,10 +29,14 @@ export type RunConfig = {
 
 export interface UIBlock {
   id: string; // Unique ID for React keys
-  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown')
+  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown', 'table')
   content: string;
   tag?: string; // Optional metadata (e.g., language for code blocks)
   status: 'loading' | 'streaming' | 'complete'; // Controls rendering
+  // Table-specific fields (when key === 'table')
+  headers?: string[]; // Table column headers
+  rows?: string[][]; // Table data rows
+  totalCount?: number; // Total number of rows
 }
 
 export interface UIBlockProps {
