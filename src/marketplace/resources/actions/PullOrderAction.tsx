@@ -12,7 +12,7 @@ export const PullOrderAction = ({ resource, ...rest }) => {
   const callback = async () => {
     try {
       await remoteWaldurApiPullOrder({
-        path: { uuid: resource.creation_order.uuid },
+        path: { uuid: resource.order_in_progress.uuid },
       });
       dispatch(
         showSuccess(translate('Pulling resource order has been scheduled.')),
