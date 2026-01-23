@@ -7,6 +7,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { OfferingUserRowActions } from '@waldur/marketplace/offerings/actions/OfferingUserRowActions';
+import { CreateOfferingUserButton } from '@waldur/marketplace/offerings/details/CreateOfferingUserButton';
 import { UserImportButton } from '@waldur/marketplace/offerings/import-users/UserImportButton';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
 import { createFetcher } from '@waldur/table/api';
@@ -24,8 +25,14 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
   Partial<TableWithPortal> & {
     provider?;
     hasOrganizationColumn?: boolean;
+    offering?: {
+      uuid: string;
+      customer_uuid?: string;
+      plugin_options?: { service_provider_can_create_offering_user?: boolean };
+      has_compliance_requirements?: boolean;
+    };
   }
-> = ({ provider, hasOrganizationColumn, portal }) => {
+> = ({ provider, hasOrganizationColumn, portal, offering }) => {
   const filterValues = useSelector(
     getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
   ) as { offering?; provider?; state?: Array<{ value: any }> };
@@ -34,10 +41,10 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       provider_uuid: hasOrganizationColumn
         ? filterValues?.provider?.customer_uuid
         : provider?.customer_uuid,
-      offering_uuid: filterValues?.offering?.uuid,
+      offering_uuid: offering?.uuid || filterValues?.offering?.uuid,
       state: filterValues?.state?.map((option) => option.value),
     }),
-    [provider, filterValues],
+    [provider, filterValues, offering],
   );
   const tableProps = useTable({
     table: 'marketplace-offering-users',
@@ -45,6 +52,25 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     filter,
     queryField: 'query',
   });
+  const offeringColumn = !offering
+    ? [
+        {
+          title: translate('Offering'),
+          render: ({ row }) => (
+            <Link
+              state="public-offering.marketplace-public-offering"
+              params={{ uuid: row.offering_uuid }}
+              label={row.offering_name}
+            />
+          ),
+          filter: 'offering',
+          inlineFilter: (row) => ({
+            name: row.offering_name,
+            uuid: row.offering_uuid,
+          }),
+        },
+      ]
+    : [];
   const organizationColumn = hasOrganizationColumn
     ? [
         {
@@ -59,7 +85,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       ]
     : [];
   const stateColumn =
-    provider || hasOrganizationColumn
+    provider || hasOrganizationColumn || offering
       ? [
           {
             title: translate('Account state'),
@@ -68,22 +94,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
         ]
       : [];
   const columns = [
-    {
-      title: translate('Offering'),
-      render: ({ row }) => (
-        <Link
-          state="public-offering.marketplace-public-offering"
-          params={{ uuid: row.offering_uuid }}
-          label={row.offering_name}
-        />
-      ),
-
-      filter: 'offering',
-      inlineFilter: (row) => ({
-        name: row.offering_name,
-        uuid: row.offering_uuid,
-      }),
-    },
+    ...offeringColumn,
     ...organizationColumn,
     {
       title: translate('User'),
@@ -107,6 +118,10 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     },
   ];
 
+  const showExpandableRow = offering
+    ? offering.has_compliance_requirements
+    : Boolean(provider);
+
   return (
     <Table
       {...tableProps}
@@ -114,32 +129,42 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       verboseName={translate('Offering users')}
       showPageSizeSelector={true}
       filters={
-        <ProviderOfferingUsersFilter
-          hasOrganizationColumn={hasOrganizationColumn}
-        />
+        !offering ? (
+          <ProviderOfferingUsersFilter
+            hasOrganizationColumn={hasOrganizationColumn}
+          />
+        ) : undefined
       }
       portal={portal}
       hasActionBar={!portal}
       cardBordered={!portal}
       fullWidth={!!portal}
       tableActions={
-        <>
-          <UserImportButton refetch={tableProps.fetch} provider={provider} />
-          <CreateProviderOfferingUserButton
-            refetch={tableProps.fetch}
-            provider={provider}
+        offering ? (
+          <CreateOfferingUserButton
+            offering={offering}
+            onSuccess={tableProps.fetch}
           />
-        </>
+        ) : (
+          <>
+            <UserImportButton refetch={tableProps.fetch} provider={provider} />
+            <CreateProviderOfferingUserButton
+              refetch={tableProps.fetch}
+              provider={provider}
+            />
+          </>
+        )
       }
       rowActions={({ row }) => (
         <OfferingUserRowActions
           row={row}
           fetch={tableProps.fetch}
           provider={provider}
+          offering={offering}
         />
       )}
       hasQuery={true}
-      expandableRow={provider ? OfferingUsersExpandableRow : undefined}
+      expandableRow={showExpandableRow ? OfferingUsersExpandableRow : undefined}
     />
   );
 };

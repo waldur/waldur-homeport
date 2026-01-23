@@ -1,15 +1,13 @@
-import { FC, useCallback } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import {
   getRestrictionsArray,
+  MembershipRestrictionFormItems,
   RestrictionField,
-  RestrictionsValue,
 } from '@waldur/core/restrictions';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -39,9 +37,19 @@ export const CustomerMembershipRestrictionsPanel: FC<
     customerId: customer.uuid,
   });
 
-  const emailPatterns = getRestrictionsArray(customer.user_email_patterns);
-  const affiliations = getRestrictionsArray(customer.user_affiliations);
-  const identitySources = getRestrictionsArray(customer.user_identity_sources);
+  const restrictionData = useMemo(
+    () => ({
+      emailPatterns: getRestrictionsArray(customer.user_email_patterns),
+      affiliations: getRestrictionsArray(customer.user_affiliations),
+      identitySources: getRestrictionsArray(customer.user_identity_sources),
+      nationalities: getRestrictionsArray(customer['user_nationalities']),
+      organizationTypes: getRestrictionsArray(
+        customer['user_organization_types'],
+      ),
+      assuranceLevels: getRestrictionsArray(customer['user_assurance_levels']),
+    }),
+    [customer],
+  );
 
   const openEditDialog = useCallback(
     (field: RestrictionField) => {
@@ -58,47 +66,10 @@ export const CustomerMembershipRestrictionsPanel: FC<
   return (
     <div className="p-6">
       <FormTable>
-        <FormTable.Item
-          label={translate('Email patterns')}
-          description={translate(
-            'Users whose email matches any of these regex patterns will be allowed.',
-          )}
-          value={<RestrictionsValue values={emailPatterns} />}
-          actions={
-            canEdit && (
-              <CompactEditButton
-                onClick={() => openEditDialog('user_email_patterns')}
-              />
-            )
-          }
-        />
-        <FormTable.Item
-          label={translate('User affiliations')}
-          description={translate(
-            'Users with any of these affiliations will be allowed.',
-          )}
-          value={<RestrictionsValue values={affiliations} />}
-          actions={
-            canEdit && (
-              <CompactEditButton
-                onClick={() => openEditDialog('user_affiliations')}
-              />
-            )
-          }
-        />
-        <FormTable.Item
-          label={translate('Identity sources')}
-          description={translate(
-            'Users authenticated via any of these identity providers will be allowed.',
-          )}
-          value={<RestrictionsValue values={identitySources} />}
-          actions={
-            canEdit && (
-              <CompactEditButton
-                onClick={() => openEditDialog('user_identity_sources')}
-              />
-            )
-          }
+        <MembershipRestrictionFormItems
+          data={restrictionData}
+          canEdit={canEdit}
+          onEditField={openEditDialog}
         />
       </FormTable>
     </div>

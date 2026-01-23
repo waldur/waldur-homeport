@@ -1,0 +1,223 @@
+import { UserGearIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
+import {
+  marketplaceProviderOfferingsUserAttributeConfigRetrieve,
+  OfferingUser,
+} from 'waldur-js-client';
+
+import { formatDateTime } from '@waldur/core/dateUtils';
+import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import FormTable from '@waldur/form/FormTable';
+import { translate } from '@waldur/i18n';
+import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+
+interface OfferingUserDetailsDialogProps {
+  resolve: { offeringUser: OfferingUser; offeringUuid: string };
+}
+
+// Maps exposed_fields values to OfferingUser properties
+const FIELD_MAPPING: Record<
+  string,
+  {
+    label: () => string;
+    getValue: (user: OfferingUser) => string | unknown;
+  }
+> = {
+  full_name: {
+    label: () => translate('Full name'),
+    getValue: (user) => user.user_full_name,
+  },
+  email: {
+    label: () => translate('Email'),
+    getValue: (user) => user.user_email,
+  },
+  phone_number: {
+    label: () => translate('Phone number'),
+    getValue: (user) => user.user_phone_number,
+  },
+  organization: {
+    label: () => translate('Organization'),
+    getValue: (user) => user.user_organization,
+  },
+  job_title: {
+    label: () => translate('Job title'),
+    getValue: (user) => user.user_job_title,
+  },
+  affiliations: {
+    label: () => translate('Affiliations'),
+    getValue: (user) => user.user_affiliations,
+  },
+  gender: {
+    label: () => translate('Gender'),
+    getValue: (user) => user.user_gender,
+  },
+  personal_title: {
+    label: () => translate('Personal title'),
+    getValue: (user) => user.user_personal_title,
+  },
+  place_of_birth: {
+    label: () => translate('Place of birth'),
+    getValue: (user) => user.user_place_of_birth,
+  },
+  country_of_residence: {
+    label: () => translate('Country of residence'),
+    getValue: (user) => user.user_country_of_residence,
+  },
+  nationality: {
+    label: () => translate('Nationality'),
+    getValue: (user) => user.user_nationality,
+  },
+  nationalities: {
+    label: () => translate('Nationalities'),
+    getValue: (user) => user.user_nationalities,
+  },
+  organization_country: {
+    label: () => translate('Organization country'),
+    getValue: (user) => user.user_organization_country,
+  },
+  organization_type: {
+    label: () => translate('Organization type'),
+    getValue: (user) => user.user_organization_type,
+  },
+  eduperson_assurance: {
+    label: () => translate('EduPerson assurance'),
+    getValue: (user) => user.user_eduperson_assurance,
+  },
+  civil_number: {
+    label: () => translate('Civil number'),
+    getValue: (user) => user.user_civil_number,
+  },
+  birth_date: {
+    label: () => translate('Birth date'),
+    getValue: (user) => user.user_birth_date,
+  },
+  identity_source: {
+    label: () => translate('Registration method'),
+    getValue: (user) => user.user_identity_source,
+  },
+};
+
+const formatValue = (value: unknown): string => {
+  if (value === null || value === undefined || value === '') {
+    return DASH_ESCAPE_CODE;
+  }
+  if (Array.isArray(value)) {
+    return value.length > 0 ? value.join(', ') : DASH_ESCAPE_CODE;
+  }
+  return String(value);
+};
+
+export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
+  resolve: { offeringUser, offeringUuid },
+}) => {
+  const {
+    data: config,
+    isLoading,
+    error,
+    refetch,
+  } = useQuery({
+    queryKey: ['offering-user-attribute-config', offeringUuid],
+    queryFn: () =>
+      marketplaceProviderOfferingsUserAttributeConfigRetrieve({
+        path: { uuid: offeringUuid },
+      }).then((response) => response.data),
+    staleTime: 3 * 60 * 1000,
+  });
+
+  const exposedUserAttributes = useMemo(() => {
+    if (!config?.exposed_fields) return [];
+    return config.exposed_fields
+      .filter((field) => FIELD_MAPPING[field])
+      .map((field) => ({
+        key: field,
+        label: FIELD_MAPPING[field].label(),
+        value: formatValue(FIELD_MAPPING[field].getValue(offeringUser)),
+      }));
+  }, [config, offeringUser]);
+
+  return (
+    <ModalDialog
+      title={translate('Offering user details')}
+      subtitle={offeringUser.user_full_name}
+      iconNode={<UserGearIcon weight="bold" />}
+      iconColor="success"
+      footer={<CloseDialogButton />}
+    >
+      {isLoading ? (
+        <LoadingSpinner />
+      ) : error ? (
+        <LoadingErred
+          message={translate('Unable to load user attribute configuration.')}
+          loadData={refetch}
+        />
+      ) : (
+        <FormTable hideActions detailsMode className="gy-5">
+          {/* Exposed user attributes from config */}
+          {exposedUserAttributes.map((attr) => (
+            <FormTable.Item
+              key={attr.key}
+              label={attr.label}
+              value={<FieldWithCopy value={attr.value} />}
+            />
+          ))}
+
+          {/* Always show offering-specific fields */}
+          <FormTable.Item
+            label={translate('Offering username')}
+            value={<FieldWithCopy value={formatValue(offeringUser.username)} />}
+          />
+          <FormTable.Item
+            label={translate('State')}
+            value={<OfferingUserStateField row={offeringUser} />}
+          />
+          {offeringUser.is_restricted !== undefined && (
+            <FormTable.Item
+              label={translate('Restricted')}
+              value={
+                offeringUser.is_restricted ? translate('Yes') : translate('No')
+              }
+            />
+          )}
+          {offeringUser.service_provider_comment && (
+            <FormTable.Item
+              label={translate('Service provider comment')}
+              value={
+                <FieldWithCopy value={offeringUser.service_provider_comment} />
+              }
+            />
+          )}
+          {offeringUser.service_provider_comment_url && (
+            <FormTable.Item
+              label={translate('Service provider comment URL')}
+              value={
+                <a
+                  href={offeringUser.service_provider_comment_url}
+                  target="_blank"
+                  rel="noopener noreferrer"
+                >
+                  {offeringUser.service_provider_comment_url}
+                </a>
+              }
+            />
+          )}
+          <FormTable.Item
+            label={translate('Created')}
+            value={formatDateTime(offeringUser.created)}
+          />
+          {offeringUser.modified && (
+            <FormTable.Item
+              label={translate('Modified')}
+              value={formatDateTime(offeringUser.modified)}
+            />
+          )}
+        </FormTable>
+      )}
+    </ModalDialog>
+  );
+};

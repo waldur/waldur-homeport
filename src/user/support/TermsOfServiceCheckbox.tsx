@@ -32,7 +32,7 @@ export const TermsOfServiceCheckbox: FunctionComponent<
         <Form.Check.Label className="opacity-100">
           {!user.agreement_date
             ? translate(
-                'You agree to the <tos>Terms of Service</tos> and <pp>Privacy policy</pp>.',
+                'I agree to the <tos>Terms of Service</tos> and <pp>Privacy Policy</pp>',
                 {
                   tos: (s: string) => <Link state="about.tos" label={s} />,
                   pp: (s: string) => <Link state="about.privacy" label={s} />,

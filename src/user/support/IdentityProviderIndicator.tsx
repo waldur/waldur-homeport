@@ -3,7 +3,21 @@ import { ExternalLink } from '@waldur/core/ExternalLink';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
-export const IdentityProviderIndicator = ({ user, hasLabel = false }) => (
+interface IdentityProviderIndicatorProps {
+  user: {
+    registration_method?: string;
+    identity_provider_label?: string;
+    identity_provider_management_url?: string;
+  };
+  hasLabel?: boolean;
+  showManagementLink?: boolean;
+}
+
+export const IdentityProviderIndicator = ({
+  user,
+  hasLabel = false,
+  showManagementLink = true,
+}: IdentityProviderIndicatorProps) => (
   <div className="d-flex align-items-center">
     <Tip label={user.registration_method} id="registration_method_tooltip">
       <div className="symbol symbol-circle symbol-40px img-wrapper">
@@ -21,7 +35,7 @@ export const IdentityProviderIndicator = ({ user, hasLabel = false }) => (
           {translate('Identity provider')}
         </span>
       )}
-      {user.identity_provider_management_url ? (
+      {showManagementLink && user.identity_provider_management_url ? (
         <ExternalLink
           label={translate('Manage profile')}
           url={user.identity_provider_management_url}

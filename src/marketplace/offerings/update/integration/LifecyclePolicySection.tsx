@@ -1,5 +1,7 @@
 import { FC, useMemo } from 'react';
+import { Card, Nav, Tab } from 'react-bootstrap';
 
+import { useSettingsUrlSync } from '@waldur/administration/settings/useSettingsUrlSync';
 import { NumberField, StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
@@ -15,7 +17,8 @@ import {
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
 
-const fields: OfferingEditField[] = [
+// Order approval fields
+const orderApprovalFields: OfferingEditField[] = [
   {
     label: translate('Auto approve in service provider projects'),
     key: 'plugin_options.auto_approve_in_service_provider_projects',
@@ -32,6 +35,19 @@ const fields: OfferingEditField[] = [
       'When enabled, orders for this offering will always require manual approval, overriding the auto-approval setting above',
     ),
   },
+];
+
+const scriptAutoApprovalField: OfferingEditField = {
+  label: translate('Auto-approve script orders'),
+  key: 'plugin_options.auto_approve_marketplace_script',
+  component: AwesomeCheckboxField,
+  description: translate(
+    'If enabled, orders for this script offering will be automatically approved without requiring manual provider approval. If disabled, orders will require manual approval by the service provider.',
+  ),
+};
+
+// Resource lifecycle fields
+const resourceLifecycleFields: OfferingEditField[] = [
   {
     label: translate('Resource termination date is required'),
     key: 'plugin_options.is_resource_termination_date_required',
@@ -65,6 +81,16 @@ const fields: OfferingEditField[] = [
     ),
   },
   {
+    label: translate('Resource expiration threshold'),
+    key: 'plugin_options.resource_expiration_threshold',
+    component: NumberField,
+    description: translate('Resource expiration threshold in days.'),
+  },
+];
+
+// Resource capabilities fields
+const resourceCapabilitiesFields: OfferingEditField[] = [
+  {
     label: translate('Supports downscaling'),
     key: 'plugin_options.supports_downscaling',
     component: AwesomeCheckboxField,
@@ -80,6 +106,18 @@ const fields: OfferingEditField[] = [
       'Enables pausing/unpausing operations for resources created from this offering',
     ),
   },
+  {
+    label: translate('Create orders on resource option change'),
+    key: 'plugin_options.create_orders_on_resource_option_change',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'Automatically creates new orders when configuration options of related resources are modified',
+    ),
+  },
+];
+
+// Provisioning fields
+const provisioningFields: OfferingEditField[] = [
   {
     label: translate('Minimal team count for resource provisioning'),
     key: 'plugin_options.minimal_team_count_for_provisioning',
@@ -97,6 +135,18 @@ const fields: OfferingEditField[] = [
     ),
   },
   {
+    label: translate('Maximal resource count per project'),
+    key: 'plugin_options.maximal_resource_count_per_project',
+    component: NumberField,
+    description: translate(
+      'Limits the maximum number of resources from this offering allowed per project',
+    ),
+  },
+];
+
+// Purchase order fields
+const purchaseOrderFields: OfferingEditField[] = [
+  {
     label: translate('Enable purchase order upload'),
     key: 'plugin_options.enable_purchase_order_upload',
     component: AwesomeCheckboxField,
@@ -112,13 +162,10 @@ const fields: OfferingEditField[] = [
       'Makes purchase order upload mandatory when "Enable purchase order upload" is active',
     ),
   },
-  {
-    label: translate('Resource expiration threshold'),
-    key: 'plugin_options.resource_expiration_threshold',
-    component: NumberField,
-    description: translate('Resource expiration threshold in days.'),
-  },
+];
 
+// Billing fields
+const billingFields: OfferingEditField[] = [
   {
     label: translate('Conceal billing data'),
     key: 'plugin_options.conceal_billing_data',
@@ -127,22 +174,15 @@ const fields: OfferingEditField[] = [
       'Hides pricing and components tabs in offering details to conceal billing information',
     ),
   },
-  {
-    label: translate('Maximal resource count per project'),
-    key: 'plugin_options.maximal_resource_count_per_project',
-    component: NumberField,
-    description: translate(
-      'Limits the maximum number of resources from this offering allowed per project',
-    ),
-  },
-  {
-    label: translate('Create orders on resource option change'),
-    key: 'plugin_options.create_orders_on_resource_option_change',
-    component: AwesomeCheckboxField,
-    description: translate(
-      'Automatically creates new orders when configuration options of related resources are modified',
-    ),
-  },
+];
+
+const LIFECYCLE_TABS = [
+  { key: 'approval', title: translate('Order approval') },
+  { key: 'lifecycle', title: translate('Resource lifecycle') },
+  { key: 'capabilities', title: translate('Resource capabilities') },
+  { key: 'provisioning', title: translate('Provisioning') },
+  { key: 'purchase-orders', title: translate('Purchase orders') },
+  { key: 'billing', title: translate('Billing') },
 ];
 
 export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
@@ -151,34 +191,102 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
     props.refetch,
   );
 
-  const finalFields = useMemo(() => {
-    const scriptAutoApprovalField: OfferingEditField = {
-      label: translate('Auto-approve script orders'),
-      key: 'plugin_options.auto_approve_marketplace_script',
-      component: AwesomeCheckboxField,
-      description: translate(
-        'If enabled, orders for this script offering will be automatically approved without requiring manual provider approval. If disabled, orders will require manual approval by the service provider.',
-      ),
-    };
+  const { activeKey, handleSelect, defaultActiveKey } = useSettingsUrlSync(
+    LIFECYCLE_TABS,
+    'section',
+  );
 
+  const approvalFields = useMemo(() => {
     if (props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS) {
-      return [scriptAutoApprovalField, ...fields];
+      return [scriptAutoApprovalField, ...orderApprovalFields];
     }
-    return fields;
+    return orderApprovalFields;
   }, [props.offering.type]);
 
   return (
-    <FormTable.Card
-      title={translate('Lifecycle policy')}
-      className="card-bordered mb-7"
-    >
-      <FormTable>
-        <DefaultOfferingEditPanel
-          {...props}
-          fields={finalFields}
-          callback={update}
-        />
-      </FormTable>
-    </FormTable.Card>
+    <Card className="card-bordered">
+      <Card.Body>
+        <Tab.Container
+          defaultActiveKey={defaultActiveKey}
+          activeKey={activeKey}
+          onSelect={handleSelect}
+        >
+          <Nav variant="tabs" className="nav-line-tabs mb-5">
+            {LIFECYCLE_TABS.map((tab) => (
+              <Nav.Item key={tab.key}>
+                <Nav.Link eventKey={tab.key}>{tab.title}</Nav.Link>
+              </Nav.Item>
+            ))}
+          </Nav>
+          <Tab.Content>
+            {/* Order approval tab */}
+            <Tab.Pane eventKey="approval" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={approvalFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+
+            {/* Resource lifecycle tab */}
+            <Tab.Pane eventKey="lifecycle" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={resourceLifecycleFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+
+            {/* Resource capabilities tab */}
+            <Tab.Pane eventKey="capabilities" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={resourceCapabilitiesFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+
+            {/* Provisioning tab */}
+            <Tab.Pane eventKey="provisioning" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={provisioningFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+
+            {/* Purchase orders tab */}
+            <Tab.Pane eventKey="purchase-orders" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={purchaseOrderFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+
+            {/* Billing tab */}
+            <Tab.Pane eventKey="billing" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={billingFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+          </Tab.Content>
+        </Tab.Container>
+      </Card.Body>
+    </Card>
   );
 };

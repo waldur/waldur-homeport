@@ -60,6 +60,11 @@ const UserManagementSection = lazyComponent(() =>
     default: module.UserManagementSection,
   })),
 );
+const UserAttributeConfigSection = lazyComponent(() =>
+  import('./update/integration/UserAttributeConfigSection').then((module) => ({
+    default: module.UserAttributeConfigSection,
+  })),
+);
 const LexisLinkIntegrationSection = lazyComponent(() =>
   import('./update/integration/LexisLinkIntegrationSection').then((module) => ({
     default: module.LexisLinkIntegrationSection,
@@ -214,6 +219,13 @@ const getTabs = (offering: Offering): PageBarTab[] => {
               key: 'user-management',
               component: UserManagementSection,
               title: translate('User management'),
+            }
+          : null,
+        offering.plugin_options?.service_provider_can_create_offering_user
+          ? {
+              key: 'user-attribute-config',
+              component: UserAttributeConfigSection,
+              title: translate('User attribute exposure'),
             }
           : null,
         isFeatureVisible(MarketplaceFeatures.lexis_links)

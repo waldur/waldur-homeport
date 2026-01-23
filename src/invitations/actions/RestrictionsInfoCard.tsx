@@ -21,6 +21,9 @@ interface RestrictionsSectionProps {
   emailPatterns: string[];
   affiliations: string[];
   identitySources: string[];
+  nationalities: string[];
+  organizationTypes: string[];
+  assuranceLevels: string[];
 }
 
 const RestrictionsSection: FC<RestrictionsSectionProps> = ({
@@ -28,11 +31,17 @@ const RestrictionsSection: FC<RestrictionsSectionProps> = ({
   emailPatterns,
   affiliations,
   identitySources,
+  nationalities,
+  organizationTypes,
+  assuranceLevels,
 }) => {
   const hasAny =
     emailPatterns.length > 0 ||
     affiliations.length > 0 ||
-    identitySources.length > 0;
+    identitySources.length > 0 ||
+    nationalities.length > 0 ||
+    organizationTypes.length > 0 ||
+    assuranceLevels.length > 0;
 
   if (!hasAny) return null;
 
@@ -61,6 +70,28 @@ const RestrictionsSection: FC<RestrictionsSectionProps> = ({
           <RestrictionsValue values={identitySources} />
         </div>
       )}
+      {nationalities.length > 0 && (
+        <div className="mb-2">
+          <span className="text-muted me-2">{translate('Nationalities')}:</span>
+          <RestrictionsValue values={nationalities} />
+        </div>
+      )}
+      {organizationTypes.length > 0 && (
+        <div className="mb-2">
+          <span className="text-muted me-2">
+            {translate('Organization types')}:
+          </span>
+          <RestrictionsValue values={organizationTypes} />
+        </div>
+      )}
+      {assuranceLevels.length > 0 && (
+        <div className="mb-2">
+          <span className="text-muted me-2">
+            {translate('Assurance levels')}:
+          </span>
+          <RestrictionsValue values={assuranceLevels} />
+        </div>
+      )}
     </div>
   );
 };
@@ -80,6 +111,15 @@ export const RestrictionsInfoCard: FC<RestrictionsInfoCardProps> = ({
   const customerIdentitySources = getRestrictionsArray(
     customer?.user_identity_sources,
   );
+  const customerNationalities = getRestrictionsArray(
+    customer?.['user_nationalities'],
+  );
+  const customerOrganizationTypes = getRestrictionsArray(
+    customer?.['user_organization_types'],
+  );
+  const customerAssuranceLevels = getRestrictionsArray(
+    customer?.['user_assurance_levels'],
+  );
 
   // Get restrictions from project (if provided)
   const projectEmailPatterns = getRestrictionsArray(
@@ -89,16 +129,31 @@ export const RestrictionsInfoCard: FC<RestrictionsInfoCardProps> = ({
   const projectIdentitySources = getRestrictionsArray(
     project?.user_identity_sources,
   );
+  const projectNationalities = getRestrictionsArray(
+    project?.['user_nationalities'],
+  );
+  const projectOrganizationTypes = getRestrictionsArray(
+    project?.['user_organization_types'],
+  );
+  const projectAssuranceLevels = getRestrictionsArray(
+    project?.['user_assurance_levels'],
+  );
 
   const hasCustomerRestrictions =
     customerEmailPatterns.length > 0 ||
     customerAffiliations.length > 0 ||
-    customerIdentitySources.length > 0;
+    customerIdentitySources.length > 0 ||
+    customerNationalities.length > 0 ||
+    customerOrganizationTypes.length > 0 ||
+    customerAssuranceLevels.length > 0;
 
   const hasProjectRestrictions =
     projectEmailPatterns.length > 0 ||
     projectAffiliations.length > 0 ||
-    projectIdentitySources.length > 0;
+    projectIdentitySources.length > 0 ||
+    projectNationalities.length > 0 ||
+    projectOrganizationTypes.length > 0 ||
+    projectAssuranceLevels.length > 0;
 
   if (!hasCustomerRestrictions && !hasProjectRestrictions) {
     return null;
@@ -127,6 +182,9 @@ export const RestrictionsInfoCard: FC<RestrictionsInfoCardProps> = ({
         emailPatterns={customerEmailPatterns}
         affiliations={customerAffiliations}
         identitySources={customerIdentitySources}
+        nationalities={customerNationalities}
+        organizationTypes={customerOrganizationTypes}
+        assuranceLevels={customerAssuranceLevels}
       />
 
       <RestrictionsSection
@@ -134,6 +192,9 @@ export const RestrictionsInfoCard: FC<RestrictionsInfoCardProps> = ({
         emailPatterns={projectEmailPatterns}
         affiliations={projectAffiliations}
         identitySources={projectIdentitySources}
+        nationalities={projectNationalities}
+        organizationTypes={projectOrganizationTypes}
+        assuranceLevels={projectAssuranceLevels}
       />
     </AccordionCard>
   );

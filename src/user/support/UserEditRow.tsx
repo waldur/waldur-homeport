@@ -11,7 +11,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 interface RowProps {
   user: User;
   label: string;
-  value: string;
+  value: React.ReactNode;
   description?: string;
   requiredMsg?: string | null;
   disabled?: boolean;

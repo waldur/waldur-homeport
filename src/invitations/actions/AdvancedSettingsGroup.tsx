@@ -61,12 +61,58 @@ export const AdvancedSettingsGroup = ({ disabled }) => {
         description={translate(
           'Enter comma-separated affiliation identifiers. These are applied in addition to any existing restrictions.',
         )}
-        spaceless
       >
         <Field
           name="user_affiliations"
           component={CommaSeparatedListField as any}
           placeholder="student, faculty, researcher (comma-separated)"
+          disabled={disabled}
+        />
+      </FormGroup>
+
+      <FormGroup
+        label={translate('Required nationalities')}
+        description={translate(
+          'Enter comma-separated ISO country codes. Users with any of these nationalities will be allowed.',
+        )}
+      >
+        <Field
+          name="user_nationalities"
+          component={CommaSeparatedListField as any}
+          placeholder={translate('e.g. DE, FR, US (comma-separated)')}
+          disabled={disabled}
+        />
+      </FormGroup>
+
+      <FormGroup
+        label={translate('Required organization types')}
+        description={translate(
+          'Enter comma-separated SCHAC organization type URNs.',
+        )}
+      >
+        <Field
+          name="user_organization_types"
+          component={CommaSeparatedListField as any}
+          placeholder={translate(
+            'e.g. urn:schac:homeOrganizationType:int:university',
+          )}
+          disabled={disabled}
+        />
+      </FormGroup>
+
+      <FormGroup
+        label={translate('Required assurance levels')}
+        description={translate(
+          'Enter comma-separated REFEDS assurance URIs. Users must have ALL of these levels.',
+        )}
+        spaceless
+      >
+        <Field
+          name="user_assurance_levels"
+          component={CommaSeparatedListField as any}
+          placeholder={translate(
+            'e.g. https://refeds.org/assurance/IAP/medium',
+          )}
           disabled={disabled}
         />
       </FormGroup>

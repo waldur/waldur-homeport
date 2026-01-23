@@ -75,6 +75,24 @@ export const GroupInvitationsListExpandableRow: FunctionComponent<{
       labelClass="min-w-150px fw-bolder"
       space={5}
     />
+    <Field
+      label={translate('Allowed nationalities')}
+      value={formatList(row['user_nationalities'])}
+      labelClass="min-w-150px fw-bolder"
+      space={5}
+    />
+    <Field
+      label={translate('Allowed organization types')}
+      value={formatList(row['user_organization_types'])}
+      labelClass="min-w-150px fw-bolder"
+      space={5}
+    />
+    <Field
+      label={translate('Required assurance levels')}
+      value={formatList(row['user_assurance_levels'])}
+      labelClass="min-w-150px fw-bolder"
+      space={5}
+    />
 
     <UserPermissionRequestsList groupInvitationUuid={row.uuid} />
   </ExpandableContainer>
