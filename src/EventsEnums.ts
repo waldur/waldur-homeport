@@ -305,6 +305,7 @@ export const UsersEnum = {
   ssh_key_deletion_succeeded: 'ssh_key_deletion_succeeded',
   user_activated: 'user_activated',
   user_creation_succeeded: 'user_creation_succeeded',
+  user_data_accessed: 'user_data_accessed',
   user_deactivated: 'user_deactivated',
   user_deletion_succeeded: 'user_deletion_succeeded',
   user_details_update_succeeded: 'user_details_update_succeeded',

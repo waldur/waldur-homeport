@@ -77,6 +77,7 @@ export enum UserFeatures {
   disable_user_termination = 'user.disable_user_termination',
   notifications = 'user.notifications',
   preferred_language = 'user.preferred_language',
+  show_data_access = 'user.show_data_access',
   show_slug = 'user.show_slug',
   show_username = 'user.show_username',
   ssh_keys = 'user.ssh_keys',

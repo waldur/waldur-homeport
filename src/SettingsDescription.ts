@@ -932,23 +932,11 @@ export const SettingsDescription = [
     ],
   },
   {
-    description: translate('User settings'),
+    description: translate('Authentication settings'),
     items: [
       {
         key: 'AUTO_APPROVE_USER_TOS',
         description: translate('Mark terms of services as approved for new users.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'ENABLE_STRICT_CHECK_ACCEPTING_INVITATION',
-        description: translate('If true, user email in Waldur database and in invitatation must strictly match.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'INVITATION_DISABLE_MULTIPLE_ROLES',
-        description: translate('Do not allow user to accept multiple roles within the same scope (project or organization) using invitation. When enabled, users can still accept invitations to different scopes but cannot have multiple roles in the same scope.'),
         default: false,
         type: 'boolean',
       },
@@ -973,6 +961,69 @@ export const SettingsDescription = [
       {
         key: 'OIDC_ACCESS_TOKEN_ENABLED',
         description: translate('If true, OIDC complete view returns access token instead of Waldur token'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
+  {
+    description: translate('Invitation settings'),
+    items: [
+      {
+        key: 'ENABLE_STRICT_CHECK_ACCEPTING_INVITATION',
+        description: translate('If true, user email in Waldur database and in invitatation must strictly match.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'INVITATION_DISABLE_MULTIPLE_ROLES',
+        description: translate('Do not allow user to accept multiple roles within the same scope (project or organization) using invitation. When enabled, users can still accept invitations to different scopes but cannot have multiple roles in the same scope.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'INVITATION_ALLOWED_FIELDS',
+        description: translate('Fields that can be provided in invitations for email personalization. These are NOT copied to user profile.'),
+        default: ['full_name', 'organization', 'job_title'],
+        type: 'list_field',
+      },
+    ],
+  },
+  {
+    description: translate('User profile settings'),
+    items: [
+      {
+        key: 'DEFAULT_OFFERING_USER_ATTRIBUTES',
+        description: translate('Default user attributes exposed to service providers (OfferingUser API) when no explicit config exists. Available options: username, full_name, email, phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, eduperson_assurance, civil_number, identity_source.'),
+        default: ['username', 'full_name', 'email'],
+        type: 'list_field',
+      },
+      {
+        key: 'ENABLED_USER_PROFILE_ATTRIBUTES',
+        description: translate('List of enabled user profile attributes. Controls IdP sync and UI display. Core attributes (username, email, first_name, last_name, full_name) are always enabled. Available options: phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, eduperson_assurance, civil_number, identity_source.'),
+        default: ['phone_number', 'organization', 'job_title', 'affiliations'],
+        type: 'list_field',
+      },
+    ],
+  },
+  {
+    description: translate('Data privacy settings'),
+    items: [
+      {
+        key: 'USER_DATA_ACCESS_LOGGING_ENABLED',
+        description: translate('Enable logging of user profile data access events for GDPR compliance.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'USER_DATA_ACCESS_LOG_RETENTION_DAYS',
+        description: translate('Number of days to retain user data access logs before automatic cleanup.'),
+        default: 90,
+        type: 'integer',
+      },
+      {
+        key: 'USER_DATA_ACCESS_LOG_SELF_ACCESS',
+        description: translate('Log when users access their own profile data. Disabled by default to reduce log volume.'),
         default: false,
         type: 'boolean',
       },
@@ -1038,47 +1089,47 @@ export const SettingsDescription = [
     ],
   },
   {
-    description: translate('OIDC auth settings'),
+    description: translate('API token authentication'),
     items: [
       {
         key: 'OIDC_AUTH_URL',
-        description: translate('OIDC authentication endpoint URL.'),
+        description: translate('OIDC authorization endpoint URL. Reserved for future OAuth 2.0 authorization code flow integration.'),
         default: '',
         type: 'string',
       },
       {
         key: 'OIDC_INTROSPECTION_URL',
-        description: translate('OIDC introspection endpoint URL for validating access tokens.'),
+        description: translate('RFC 7662 Token Introspection endpoint URL. Used to validate API bearer tokens. When a client sends Authorization: Bearer <token>, Waldur calls this endpoint to verify the token is active.'),
         default: '',
         type: 'string',
       },
       {
         key: 'OIDC_CLIENT_ID',
-        description: translate('Client ID for authenticating against the introspection endpoint.'),
+        description: translate('Client ID for HTTP Basic authentication when calling the token introspection endpoint. Required together with OIDC_CLIENT_SECRET and OIDC_INTROSPECTION_URL.'),
         default: '',
         type: 'string',
       },
       {
         key: 'OIDC_CLIENT_SECRET',
-        description: translate('Client secret for authenticating against the introspection endpoint.'),
+        description: translate('Client secret for HTTP Basic authentication when calling the token introspection endpoint. Required together with OIDC_CLIENT_ID and OIDC_INTROSPECTION_URL.'),
         default: '',
         type: 'string',
       },
       {
         key: 'OIDC_USER_FIELD',
-        description: translate('Field name from the introspection response to identify the user (e.g., \'username\', \'email\', \'client_id\').'),
+        description: translate('Field name from the introspection response JSON used to identify the Waldur user. Common values: \'username\', \'email\', \'sub\', \'client_id\'. The value is matched against User.username.'),
         default: 'username',
         type: 'string',
       },
       {
         key: 'OIDC_CACHE_TIMEOUT',
-        description: translate('Number of seconds to cache token introspection results.'),
+        description: translate('Seconds to cache successful token introspection results. Reduces load on the introspection endpoint. Set to 0 to disable caching. Default: 300 (5 minutes).'),
         default: 300,
         type: 'integer',
       },
       {
         key: 'WALDUR_AUTH_SOCIAL_ROLE_CLAIM',
-        description: translate('Name of the claim that contains user roles.'),
+        description: translate('OAuth/OIDC token claim name containing user roles for automatic staff/support assignment. If the claim contains \'staff\', user gets is_staff=True. If it contains \'support\', user gets is_support=True. Leave empty to disable role synchronization from identity provider.'),
         default: '',
         type: 'string',
       },
