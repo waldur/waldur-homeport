@@ -12,3 +12,4 @@ yarn-error.log
 .env
 locales/llm-prompts
 locales/*backup*
+e2e-visual/snapshots/
