@@ -28,9 +28,7 @@ function registerDarkTheme() {
         },
       },
       axisLabel: {
-        textStyle: {
-          color: contrastColor,
-        },
+        color: contrastColor,
       },
       splitLine: {
         lineStyle: {
@@ -89,9 +87,7 @@ function registerDarkTheme() {
     },
     toolbox: {
       iconStyle: {
-        normal: {
-          borderColor: contrastColor,
-        },
+        borderColor: contrastColor,
       },
     },
     axisPointer: {
@@ -107,22 +103,14 @@ function registerDarkTheme() {
         color: contrastColor,
       },
       itemStyle: {
-        normal: {
-          color: colorPalette[1],
-        },
+        color: colorPalette[1],
       },
       label: {
-        normal: {
-          textStyle: {
-            color: contrastColor,
-          },
-        },
+        color: contrastColor,
       },
       controlStyle: {
-        normal: {
-          color: contrastColor,
-          borderColor: contrastColor,
-        },
+        color: contrastColor,
+        borderColor: contrastColor,
       },
     },
     timeAxis: axisCommon(),
@@ -138,19 +126,15 @@ function registerDarkTheme() {
     },
     gauge: {
       title: {
-        textStyle: {
-          color: contrastColor,
-        },
+        color: contrastColor,
       },
     },
     candlestick: {
       itemStyle: {
-        normal: {
-          color: '#FD1050',
-          color0: '#0CF49B',
-          borderColor: '#FD1050',
-          borderColor0: '#0CF49B',
-        },
+        color: '#FD1050',
+        color0: '#0CF49B',
+        borderColor: '#FD1050',
+        borderColor0: '#0CF49B',
       },
     },
   };
@@ -178,9 +162,7 @@ function registerLightTheme() {
         },
       },
       axisLabel: {
-        textStyle: {
-          color: contrastColor,
-        },
+        color: contrastColor,
       },
       splitLine: {
         lineStyle: {
@@ -221,9 +203,7 @@ function registerLightTheme() {
 
     toolbox: {
       iconStyle: {
-        normal: {
-          borderColor: '#06467c',
-        },
+        borderColor: '#06467c',
       },
     },
 
@@ -256,10 +236,8 @@ function registerLightTheme() {
         color: contrastColor,
       },
       controlStyle: {
-        normal: {
-          color: contrastColor,
-          borderColor: contrastColor,
-        },
+        color: contrastColor,
+        borderColor: contrastColor,
       },
     },
 
@@ -270,15 +248,11 @@ function registerLightTheme() {
 
     candlestick: {
       itemStyle: {
-        normal: {
-          color: '#c12e34',
-          color0: '#2b821d',
-          lineStyle: {
-            width: 1,
-            color: '#c12e34',
-            color0: '#2b821d',
-          },
-        },
+        color: '#c12e34',
+        color0: '#2b821d',
+        borderColor: '#c12e34',
+        borderColor0: '#2b821d',
+        borderWidth: 1,
       },
     },
 
@@ -288,25 +262,19 @@ function registerLightTheme() {
 
     map: {
       label: {
-        normal: {
-          textStyle: {
-            color: '#c12e34',
-          },
+        color: '#c12e34',
+      },
+      emphasis: {
+        label: {
+          color: '#c12e34',
         },
-        emphasis: {
-          textStyle: {
-            color: '#c12e34',
-          },
+        itemStyle: {
+          areaColor: '#e6b600',
         },
       },
       itemStyle: {
-        normal: {
-          borderColor: '#eee',
-          areaColor: '#ddd',
-        },
-        emphasis: {
-          areaColor: '#e6b600',
-        },
+        borderColor: '#eee',
+        areaColor: '#ddd',
       },
     },
 
@@ -330,9 +298,7 @@ function registerLightTheme() {
         },
       },
       axisLabel: {
-        textStyle: {
-          color: 'auto',
-        },
+        color: 'auto',
       },
       splitLine: {
         length: 12,
@@ -346,14 +312,10 @@ function registerLightTheme() {
         color: 'auto',
       },
       title: {
-        textStyle: {
-          color: '#333',
-        },
+        color: '#333',
       },
       detail: {
-        textStyle: {
-          color: 'auto',
-        },
+        color: 'auto',
       },
     },
   };
