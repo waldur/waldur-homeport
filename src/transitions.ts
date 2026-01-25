@@ -165,6 +165,10 @@ export function attachTransitions() {
       if (error.detail.status === 403) {
         return transition.router.stateService.target('errorPage.noPermission');
       }
+      if (error.detail.status === 428) {
+        // HTTP 428 Precondition Required - user profile incomplete with enforcement enabled
+        return transition.router.stateService.target('profile-manage');
+      }
       if (error.detail.status === 500) {
         return transition.router.stateService.target('errorPage.severError');
       }
