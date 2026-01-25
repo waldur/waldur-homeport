@@ -1004,6 +1004,18 @@ export const SettingsDescription = [
         default: ['phone_number', 'organization', 'job_title', 'affiliations'],
         type: 'list_field',
       },
+      {
+        key: 'MANDATORY_USER_ATTRIBUTES',
+        description: translate('List of user profile attributes that are mandatory. Users with missing mandatory attributes will have limited API access until their profile is complete. Available: phone_number, organization, job_title, affiliations, civil_number, first_name, last_name, email, etc.'),
+        default: [],
+        type: 'list_field',
+      },
+      {
+        key: 'ENFORCE_MANDATORY_USER_ATTRIBUTES',
+        description: translate('If True, users with incomplete mandatory attributes will be blocked from most API endpoints until they complete their profile.'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
   {
