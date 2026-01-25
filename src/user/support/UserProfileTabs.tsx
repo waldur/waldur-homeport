@@ -30,7 +30,10 @@ import { UserEditAvatarFormItem } from './UserEditAvatarFormItem';
 import { UserEditRow } from './UserEditRow';
 
 const isRequired = (field: string) => {
-  return ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS.includes(field);
+  return (
+    ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS.includes(field) ||
+    (ENV.plugins.WALDUR_CORE.MANDATORY_USER_ATTRIBUTES || []).includes(field)
+  );
 };
 
 const getDefaultRequiredMsg = (field: string, isSelf: boolean) =>

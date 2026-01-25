@@ -17,7 +17,7 @@ import { UserProfileHero } from '@waldur/user/dashboard/UserProfileHero';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { CompleteYourProfileBanner } from './CompleteYourProfileBanner';
-import { UsersService } from './UsersService';
+import { useProfileCompleteness } from './useProfileCompleteness';
 
 const UserDetailsTable = lazyComponent(() =>
   import('@waldur/user/support/UserDetailsTable').then((module) => ({
@@ -120,12 +120,12 @@ export const UserManageContainer = ({ isPersonal }) => {
 
   useBreadcrumbs(breadcrumbItems);
 
+  const profileCompleteness = useProfileCompleteness(user);
+
   const isValidUser = useMemo(
     () =>
-      user &&
-      !UsersService.mandatoryFieldsMissing(user) &&
-      Boolean(user.agreement_date),
-    [user],
+      user && profileCompleteness?.is_complete && Boolean(user.agreement_date),
+    [user, profileCompleteness],
   );
 
   const tabs = useMemo<PageBarTab[]>(
@@ -219,11 +219,15 @@ export const UserManageContainer = ({ isPersonal }) => {
     if (isPersonal && !isValidUser) {
       return {
         permission: 'custom',
-        banner: <CompleteYourProfileBanner />,
+        banner: (
+          <CompleteYourProfileBanner
+            missingFields={profileCompleteness?.missing_fields}
+          />
+        ),
       };
     }
     return null;
-  }, [isPersonal, isValidUser]);
+  }, [isPersonal, isValidUser, profileCompleteness]);
 
   if (isLoading) {
     return <LoadingSpinner />;

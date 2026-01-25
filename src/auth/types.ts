@@ -101,6 +101,8 @@ interface CoreConfiguration {
   OIDC_ACCESS_TOKEN_ENABLED: boolean;
   USER_ACTIONS_ENABLED: boolean;
   ENABLED_USER_PROFILE_ATTRIBUTES: string[];
+  MANDATORY_USER_ATTRIBUTES?: string[];
+  ENFORCE_MANDATORY_USER_ATTRIBUTES?: boolean;
 }
 
 interface OpenStackConfiguration {

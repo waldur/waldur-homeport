@@ -10,6 +10,7 @@ import { getHeaders, initApiClient } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { ImpersonationStorage } from '@waldur/core/StorageManager';
 import store from '@waldur/store/store';
+import { getProfileCompleteness } from '@waldur/user/useProfileCompleteness';
 import { setCurrentUser, setImpersonatorUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -63,11 +64,25 @@ class UsersServiceClass {
     return this.getCurrentUser().then((user) => {
       return (
         user.is_staff ||
-        (!this.mandatoryFieldsMissing(user) && (user as User).agreement_date)
+        (!this.mandatoryAttributesMissing(user) &&
+          (user as User).agreement_date)
       );
     });
   }
 
+  /**
+   * Check if mandatory profile attributes are missing.
+   * Uses profile_completeness from API if available, otherwise falls back to local calculation.
+   */
+  mandatoryAttributesMissing(user: User) {
+    const completeness = getProfileCompleteness(user);
+    return !completeness.is_complete;
+  }
+
+  /**
+   * @deprecated Use mandatoryAttributesMissing instead
+   * Check if legacy USER_MANDATORY_FIELDS are missing (for registration flow)
+   */
   mandatoryFieldsMissing(user) {
     return ENV.plugins.WALDUR_CORE.USER_MANDATORY_FIELDS.reduce(
       (result, item) => result || !user[item],

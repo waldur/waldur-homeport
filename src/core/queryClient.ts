@@ -14,6 +14,9 @@ export const queryClient = new QueryClient({
       }
       if (error?.response?.status === 403) {
         router.stateService.target('errorPage.noPermission');
+      } else if (error?.response?.status === 428) {
+        // HTTP 428 Precondition Required - user profile incomplete with enforcement enabled
+        router.stateService.go('profile-manage');
       } else if (error?.response?.status === 500) {
         router.stateService.target('errorPage.severError');
       } else if (error?.response?.status === 503) {
