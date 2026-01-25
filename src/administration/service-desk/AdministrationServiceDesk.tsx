@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card, Col, Dropdown, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -13,16 +13,21 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
 import { openModalDialog } from '@waldur/modal/actions';
 import { SettingsDescription } from '@waldur/SettingsDescription';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
 
 import { FieldRow } from '../settings/FieldRow';
 
-import { AtlassianDiscoveryButton } from './atlassian-discovery';
 import { IssueStatusList } from './issue-statuses';
 
 const AdministrationServiceDeskUpdateDialog = lazyComponent(() =>
   import('./AdministrationServiceDeskUpdateDialog').then((module) => ({
     default: module.AdministrationServiceDeskUpdateDialog,
+  })),
+);
+
+const AtlassianDiscoveryDialog = lazyComponent(() =>
+  import('./atlassian-discovery/AtlassianDiscoveryDialog').then((module) => ({
+    default: module.AtlassianDiscoveryDialog,
   })),
 );
 
@@ -33,6 +38,26 @@ const INTEGRATION_SETTINGS = SettingsDescription.find(
 
 const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
   const dispatch = useDispatch();
+
+  const openConfigure = () => {
+    dispatch(
+      openModalDialog(AdministrationServiceDeskUpdateDialog, {
+        size: 'lg',
+        resolve: {
+          initialValues,
+          name: serviceDeskProvider,
+        },
+      }),
+    );
+  };
+
+  const openDiscovery = () => {
+    dispatch(
+      openModalDialog(AtlassianDiscoveryDialog, {
+        size: 'xl',
+      }),
+    );
+  };
 
   return (
     <Card className="card-bordered min-h-150px">
@@ -61,26 +86,19 @@ const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
                 formatJsxTemplate,
               )}
             </p>
-            <div className="d-flex flex-wrap gap-2">
-              <ActionButton
-                action={() =>
-                  dispatch(
-                    openModalDialog(AdministrationServiceDeskUpdateDialog, {
-                      size: 'lg',
-                      resolve: {
-                        initialValues,
-                        name: serviceDeskProvider,
-                      },
-                    }),
-                  )
-                }
-                title={translate('Configure')}
-                variant="primary"
-              />
+            <ActionDropdownButton
+              variant="primary"
+              title={translate('Actions')}
+            >
+              <Dropdown.Item onClick={openConfigure}>
+                {translate('Configure')}
+              </Dropdown.Item>
               {serviceDeskProvider === 'atlassian' && (
-                <AtlassianDiscoveryButton />
+                <Dropdown.Item onClick={openDiscovery}>
+                  {translate('Discovery')}
+                </Dropdown.Item>
               )}
-            </div>
+            </ActionDropdownButton>
           </div>
         </div>
       </Card.Body>

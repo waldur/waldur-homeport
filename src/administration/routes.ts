@@ -494,7 +494,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-identity',
-    url: 'identity/',
+    url: 'identity/?tab',
     parent: 'admin-configuration',
     component: lazyComponent(() =>
       import('./providers/IdentityProvidersList').then((module) => ({

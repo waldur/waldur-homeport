@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
 import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -21,6 +20,7 @@ import { SettingsDescription } from '@waldur/SettingsDescription';
 
 import { getIdentityProviders } from '../api';
 import { FieldRow } from '../settings/FieldRow';
+import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
 
 import { ProviderCard } from './ProviderCard';
 
@@ -177,7 +177,7 @@ const ProvidersTabContent = ({
 );
 
 export const IdentityProvidersList = () => {
-  const [activeTab, setActiveTab] = useState('authentication');
+  const { activeKey, handleSelect } = useSettingsUrlSync(IDENTITY_TABS);
 
   const {
     data: providersData,
@@ -240,10 +240,7 @@ export const IdentityProvidersList = () => {
         </Card.Title>
       </Card.Header>
       <Card.Body>
-        <Tab.Container
-          activeKey={activeTab}
-          onSelect={(k) => setActiveTab(k as string)}
-        >
+        <Tab.Container activeKey={activeKey} onSelect={handleSelect}>
           <Nav variant="tabs" className="nav-line-tabs mb-5">
             {IDENTITY_TABS.map((tab) => (
               <Nav.Item key={tab.key}>
