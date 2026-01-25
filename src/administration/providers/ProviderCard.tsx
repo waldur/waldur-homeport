@@ -33,6 +33,12 @@ const ProviderDetailsDialog = lazyComponent(() =>
   })),
 );
 
+const OidcDiscoveryDialog = lazyComponent(() =>
+  import('./oidc-discovery/OidcDiscoveryDialog').then((module) => ({
+    default: module.OidcDiscoveryDialog,
+  })),
+);
+
 interface ProviderCardProps {
   title: string;
   description: string;
@@ -87,6 +93,15 @@ export const ProviderCard: FC<ProviderCardProps> = ({
     );
   };
 
+  const openDiscovery = () => {
+    dispatch(
+      openModalDialog(OidcDiscoveryDialog, {
+        resolve: { provider, type, refetch },
+        size: 'xl',
+      }),
+    );
+  };
+
   return (
     <Card className="bg-light min-h-150px border border-secondary border-hover">
       <Card.Body className="pe-5">
@@ -126,6 +141,11 @@ export const ProviderCard: FC<ProviderCardProps> = ({
                         {translate('Edit')}
                       </Dropdown.Item>
                     )}
+                    {editable && OIDC_TYPES.includes(type) && (
+                      <Dropdown.Item onClick={openDiscovery}>
+                        {translate('Re-discover')}
+                      </Dropdown.Item>
+                    )}
                     <Dropdown.Item onClick={showUsers}>
                       {translate('Users')}
                     </Dropdown.Item>
@@ -137,9 +157,16 @@ export const ProviderCard: FC<ProviderCardProps> = ({
                       )}
                   </>
                 ) : (
-                  <Dropdown.Item onClick={createProvider}>
-                    {translate('Add identity provider')}
-                  </Dropdown.Item>
+                  <>
+                    <Dropdown.Item onClick={createProvider}>
+                      {translate('Add identity provider')}
+                    </Dropdown.Item>
+                    {OIDC_TYPES.includes(type) && (
+                      <Dropdown.Item onClick={openDiscovery}>
+                        {translate('Discovery wizard')}
+                      </Dropdown.Item>
+                    )}
+                  </>
                 )}
               </ActionDropdownButton>
             </div>
