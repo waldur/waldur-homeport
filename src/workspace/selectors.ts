@@ -81,3 +81,54 @@ export const isOwnerOrStaff = createSelector(
     return userIsOwner;
   },
 );
+
+/**
+ * Check if user has access to any organization
+ * (either as owner, manager, or staff)
+ */
+export const hasAnyOrganizationAccess = (state: RootState): boolean => {
+  const user = getUser(state);
+  if (!user) return false;
+  if (user.is_staff || user.is_support) return true;
+  return user.permissions?.some((p) => p.scope_type === 'customer') ?? false;
+};
+
+/**
+ * Check if user manages any service provider offerings
+ */
+export const isServiceProviderManager = (state: RootState): boolean => {
+  const user = getUser(state);
+  if (!user) return false;
+  if (user.is_staff) return true;
+  return (
+    user.permissions?.some(
+      (p) =>
+        p.scope_type === 'customer' &&
+        (p.role_name === RoleEnum.CUSTOMER_OWNER ||
+          p.role_name === RoleEnum.CUSTOMER_MANAGER),
+    ) ?? false
+  );
+};
+
+/**
+ * Check if user is a call manager for any organization
+ */
+export const isCallManager = (state: RootState): boolean => {
+  const user = getUser(state);
+  if (!user) return false;
+  if (user.is_staff) return true;
+  return (
+    user.permissions?.some((p) => p.role_name === RoleEnum.CALL_MANAGER) ??
+    false
+  );
+};
+
+/**
+ * Check if user can access reporting (any role-based access)
+ */
+export const canAccessReporting = (state: RootState): boolean => {
+  const user = getUser(state);
+  if (!user) return false;
+  if (user.is_staff || user.is_support) return true;
+  return hasAnyOrganizationAccess(state);
+};

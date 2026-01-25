@@ -8,7 +8,10 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
+import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+
 import { CustomerQuotasFilter } from './CustomerQuotasFilter';
+import { QuotasAnalytics } from './QuotasAnalytics';
 import { CustomerQuota, QuotaChoice } from './types';
 
 const filterSelector = createSelector(
@@ -17,6 +20,8 @@ const filterSelector = createSelector(
 );
 
 export const CustomerQuotasList = () => {
+  useReportBreadcrumbs({ currentReport: 'quotas', category: 'resources' });
+
   const filter = useSelector(filterSelector);
   const tableProps = useTable({
     table: 'CustomerQuotasList',
@@ -57,6 +62,9 @@ export const CustomerQuotasList = () => {
       showPageSizeSelector={true}
       filters={<CustomerQuotasFilter />}
       hideClearFilters
+      tableActions={
+        <QuotasAnalytics data={tableProps.rows} loading={tableProps.loading} />
+      }
     />
   );
 };

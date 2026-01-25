@@ -13,6 +13,7 @@ import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
+import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 import { usageTableTabs } from '../utils';
 
 import { ResourceUsageFilter } from './ResourceUsageFilter';
@@ -20,6 +21,8 @@ import { mapStateToFilter } from './ResourceUsageList';
 import { UsageExpandableRow } from './UserUsageExpandableRow';
 
 export const UserUsageList: FC = () => {
+  useReportBreadcrumbs({ currentReport: 'user-usage', category: 'resources' });
+
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: 'UserUsageReports',
