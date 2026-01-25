@@ -1,0 +1,343 @@
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { FC, useMemo, useState } from 'react';
+
+import { Link } from '@waldur/core/Link';
+import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
+import { translate } from '@waldur/i18n';
+import { useTitle } from '@waldur/navigation/title';
+
+import {
+  AnalyticsCapability,
+  AnalyticsMode,
+  AnalyticsPageContent,
+  createSimulationResult,
+  DrillDownDataItem,
+  DrillDownPath,
+  SimulationParam,
+  SimulationResult,
+} from '../analytics';
+import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+
+import { generateCallPerformanceData } from './mockData';
+import { CallPerformanceData } from './types';
+
+/**
+ * Simulation parameters for Call Performance "What if" analysis
+ */
+const callPerformanceSimulationParams: SimulationParam[] = [
+  {
+    id: 'acceptanceThreshold',
+    label: translate('Acceptance threshold'),
+    description: translate('Minimum review score required for acceptance'),
+    type: 'slider',
+    defaultValue: 7,
+    min: 1,
+    max: 10,
+    step: 0.5,
+    unit: '/10',
+  },
+  {
+    id: 'reviewerCount',
+    label: translate('Reviewers per proposal'),
+    description: translate('Number of reviewers assigned to each proposal'),
+    type: 'select',
+    defaultValue: '3',
+    options: [
+      { value: '2', label: translate('2 reviewers') },
+      { value: '3', label: translate('3 reviewers (standard)') },
+      { value: '4', label: translate('4 reviewers') },
+      { value: '5', label: translate('5 reviewers (thorough)') },
+    ],
+  },
+  {
+    id: 'submissionGrowth',
+    label: translate('Submission growth'),
+    description: translate('Expected change in proposal submissions'),
+    type: 'slider',
+    defaultValue: 0,
+    min: -30,
+    max: 50,
+    step: 5,
+    unit: '%',
+  },
+];
+
+/**
+ * Calculate simulation results for Call Performance "What if" analysis
+ */
+function calculateCallPerformanceSimulation(
+  params: Record<string, number | string>,
+  data: unknown,
+): SimulationResult[] {
+  const calls = data as CallPerformanceData[];
+  if (!calls || calls.length === 0) return [];
+
+  const threshold = Number(params.acceptanceThreshold);
+  const reviewerCount = Number(params.reviewerCount);
+  const growthRate = Number(params.submissionGrowth) / 100;
+
+  // Current totals
+  const totalProposals = calls.reduce((sum, c) => sum + c.total_proposals, 0);
+  const totalAccepted = calls.reduce((sum, c) => sum + c.proposals_accepted, 0);
+  const totalRejected = calls.reduce((sum, c) => sum + c.proposals_rejected, 0);
+  const totalReviews = calls.reduce((sum, c) => sum + c.total_reviews, 0);
+
+  // Projected values
+  const projectedProposals = Math.round(totalProposals * (1 + growthRate));
+  const projectedReviews = Math.round(
+    projectedProposals * reviewerCount * 0.85,
+  ); // 85% review rate
+
+  // Estimate acceptance based on threshold change
+  // Higher threshold = fewer acceptances
+  const thresholdDelta = threshold - 7; // 7 is baseline
+  const acceptanceModifier = 1 - thresholdDelta * 0.1;
+  const projectedAccepted = Math.round(
+    (totalAccepted / totalProposals) * projectedProposals * acceptanceModifier,
+  );
+  const projectedRejected = Math.round(
+    ((totalRejected / totalProposals) * projectedProposals) /
+      acceptanceModifier,
+  );
+
+  const currentAcceptanceRate =
+    totalAccepted + totalRejected > 0
+      ? (totalAccepted / (totalAccepted + totalRejected)) * 100
+      : 0;
+  const projectedAcceptanceRate =
+    projectedAccepted + projectedRejected > 0
+      ? (projectedAccepted / (projectedAccepted + projectedRejected)) * 100
+      : 0;
+
+  // Workload per reviewer (assuming 20 active reviewers)
+  const reviewerPoolSize = 20;
+  const currentWorkload = Math.round(totalReviews / reviewerPoolSize);
+  const projectedWorkload = Math.round(projectedReviews / reviewerPoolSize);
+
+  return [
+    createSimulationResult(
+      'total-proposals',
+      translate('Total proposals'),
+      totalProposals,
+      projectedProposals,
+    ),
+    createSimulationResult(
+      'accepted',
+      translate('Proposals accepted'),
+      totalAccepted,
+      projectedAccepted,
+    ),
+    createSimulationResult(
+      'acceptance-rate',
+      translate('Acceptance rate'),
+      Math.round(currentAcceptanceRate),
+      Math.round(projectedAcceptanceRate),
+      '%',
+    ),
+    createSimulationResult(
+      'total-reviews',
+      translate('Total reviews needed'),
+      totalReviews,
+      projectedReviews,
+    ),
+    createSimulationResult(
+      'reviewer-workload',
+      translate('Avg reviews per reviewer'),
+      currentWorkload,
+      projectedWorkload,
+    ),
+  ];
+}
+
+/**
+ * Transform call data for drill-down analysis
+ */
+function transformCallsToDrillDownItems(
+  calls: CallPerformanceData[],
+): DrillDownDataItem[] {
+  const totalProposals = calls.reduce((sum, c) => sum + c.total_proposals, 0);
+
+  return calls
+    .map((call) => ({
+      id: call.call_uuid,
+      label: call.call_name,
+      value: call.total_proposals,
+      percentage:
+        totalProposals > 0 ? (call.total_proposals / totalProposals) * 100 : 0,
+      canDrillDown: true,
+      metadata: {
+        organization: call.managing_organization_name,
+        state: call.state,
+        acceptanceRate: call.acceptance_rate,
+      },
+      change: {
+        value: call.proposals_accepted - call.proposals_rejected,
+        percent: Math.round(call.acceptance_rate - 80),
+        direction: (call.acceptance_rate >= 80 ? 'up' : 'down') as
+          | 'up'
+          | 'down',
+      },
+    }))
+    .sort((a, b) => b.value - a.value);
+}
+
+/**
+ * Generate drill-down data for proposal states within a call
+ */
+function getProposalStateBreakdown(
+  calls: CallPerformanceData[],
+  callId: string,
+): DrillDownDataItem[] {
+  const call = calls.find((c) => c.call_uuid === callId);
+  if (!call) return [];
+
+  const states = [
+    {
+      id: 'accepted',
+      label: translate('Accepted'),
+      value: call.proposals_accepted,
+    },
+    {
+      id: 'in_review',
+      label: translate('In review'),
+      value: call.proposals_in_review,
+    },
+    {
+      id: 'submitted',
+      label: translate('Submitted'),
+      value: call.proposals_submitted,
+    },
+    { id: 'draft', label: translate('Draft'), value: call.proposals_draft },
+    {
+      id: 'rejected',
+      label: translate('Rejected'),
+      value: call.proposals_rejected,
+    },
+    {
+      id: 'canceled',
+      label: translate('Canceled'),
+      value: call.proposals_canceled,
+    },
+  ];
+
+  const total = states.reduce((sum, s) => sum + s.value, 0);
+
+  return states
+    .filter((s) => s.value > 0)
+    .map((state) => ({
+      id: state.id,
+      label: state.label,
+      value: state.value,
+      percentage: total > 0 ? (state.value / total) * 100 : 0,
+      canDrillDown: false,
+    }))
+    .sort((a, b) => b.value - a.value);
+}
+
+function getCallPerformanceAnalyticsCapability(
+  calls: CallPerformanceData[],
+): AnalyticsCapability {
+  const drillDownPaths: DrillDownPath[] = [
+    {
+      from: translate('Call'),
+      to: translate('Proposal state'),
+      dimension: 'call',
+      fetchData: (callId: string) =>
+        Promise.resolve(getProposalStateBreakdown(calls, callId)),
+    },
+  ];
+
+  return {
+    supportedModes: ['what-if', 'why-so'],
+    simulationParams: callPerformanceSimulationParams,
+    calculateSimulation: calculateCallPerformanceSimulation,
+    initialDimension: translate('Call'),
+    drillDownPaths,
+    whatIfDataSource: 'mocked',
+    whatIfDataSourceDescription: translate(
+      'Projections are simulated based on historical acceptance patterns.',
+    ),
+    whySoDataSource: 'mocked',
+    whySoDataSourceDescription: translate(
+      'Drill-down shows proposal distribution by state within each call.',
+    ),
+  };
+}
+
+const modeConfig: Record<
+  AnalyticsMode,
+  { label: string; description: string }
+> = {
+  'what-if': {
+    label: translate('What if'),
+    description: translate(
+      'Explore how changes to acceptance thresholds and reviewer requirements affect outcomes',
+    ),
+  },
+  'why-so': {
+    label: translate('Why so'),
+    description: translate(
+      'Drill down from calls to understand proposal distribution and acceptance patterns',
+    ),
+  },
+};
+
+export const CallPerformanceAnalyticsPage: FC = () => {
+  useTitle(translate('Call Performance Analysis'));
+
+  const { params } = useCurrentStateAndParams();
+  const initialMode = (params.mode as AnalyticsMode) || 'what-if';
+  const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
+
+  const calls = useMemo(() => generateCallPerformanceData(), []);
+  const capability = useMemo(
+    () => getCallPerformanceAnalyticsCapability(calls),
+    [calls],
+  );
+  const drillDownData = useMemo(
+    () => transformCallsToDrillDownItems(calls),
+    [calls],
+  );
+
+  useReportBreadcrumbs({
+    currentReport: 'call-performance',
+    category: 'proposals',
+    additionalItems: [
+      { key: 'analytics', text: translate('Analytics'), active: true },
+    ],
+  });
+
+  return (
+    <>
+      <PublicDashboardHero
+        containerClassName="mb-5"
+        cardBordered
+        hideQuickSection
+        title={translate('Call Performance Analysis')}
+        actions={
+          <Link
+            state="reporting-call-performance"
+            className="btn btn-light btn-sm"
+          >
+            {translate('Back to Call Performance')}
+          </Link>
+        }
+      >
+        <p className="text-muted mb-0">
+          {translate(
+            'Analyze call submission patterns and explore scenarios for optimizing acceptance rates.',
+          )}
+        </p>
+      </PublicDashboardHero>
+
+      <AnalyticsPageContent
+        activeMode={activeMode}
+        setActiveMode={setActiveMode}
+        capability={capability}
+        data={calls}
+        drillDownData={drillDownData}
+        modeConfig={modeConfig}
+      />
+    </>
+  );
+};

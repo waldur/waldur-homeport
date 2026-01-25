@@ -17,6 +17,7 @@ import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
+import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 import { usageTableTabs } from '../utils';
 
 import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
@@ -53,6 +54,8 @@ export const mapStateToFilter = createSelector(
 );
 
 export const ResourceUsageList: FC = () => {
+  useReportBreadcrumbs({ currentReport: 'usage', category: 'resources' });
+
   const filter = useSelector(mapStateToFilter);
   const props = useTable({
     table: 'ResourceUsageReports',

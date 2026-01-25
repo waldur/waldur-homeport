@@ -15,15 +15,20 @@ import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
+import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+
+import { PlanUsageAnalytics } from './PlanUsageAnalytics';
 import { PlanUsageFilter } from './PlanUsageFilter';
 import { PlanUsageRowActions } from './PlanUsageRowActions';
 
 export const PlanUsageList: FunctionComponent = () => {
-  const filter = useSelector(mapStateToProps);
+  useReportBreadcrumbs({ currentReport: 'capacity', category: 'provider' });
+
+  const formFilter = useSelector(mapStateToProps);
   const props = useTable({
     table: 'PlanUsages',
     fetchData: createFetcher(marketplacePlansUsageStatsList),
-    filter,
+    filter: formFilter,
   });
   const columns: Column<PlanUsageResponse>[] = [
     {
@@ -82,6 +87,9 @@ export const PlanUsageList: FunctionComponent = () => {
       initialSorting={{ field: 'usage', mode: 'desc' }}
       rowActions={PlanUsageRowActions}
       filters={<PlanUsageFilter />}
+      tableActions={
+        <PlanUsageAnalytics data={props.rows} loading={props.loading} />
+      }
     />
   );
 };

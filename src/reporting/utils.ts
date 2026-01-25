@@ -2,18 +2,23 @@ import { EChartsOption, graphic } from 'echarts';
 
 import { hexToRgb } from '@waldur/core/generateColors';
 import { CHART_LINE_COLOR } from '@waldur/dashboard/constants';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+
+export const isMockDataEnabled = () =>
+  isFeatureVisible(MarketplaceFeatures.show_experimental_ui_components);
 
 export const usageTableTabs = [
   {
     key: 'resource-usage',
     title: translate('Resource usage'),
-    state: 'marketplace-support-usage-reports',
+    state: 'reporting-resource-usage',
   },
   {
     key: 'user-usage',
     title: translate('User usage'),
-    state: 'marketplace-support-user-usage-reports',
+    state: 'reporting-user-usage',
   },
 ];
 

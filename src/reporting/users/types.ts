@@ -1,0 +1,57 @@
+import {
+  UserActiveStatusCount,
+  UserAffiliationCount,
+  UserAuthMethodCount,
+  UserIdentitySourceCount,
+  UserLanguageCount,
+  UserOrganizationCount,
+  UserRegistrationTrend,
+} from 'waldur-js-client';
+
+/**
+ * Re-export SDK types for convenience
+ */
+export type {
+  UserActiveStatusCount,
+  UserAffiliationCount,
+  UserAuthMethodCount,
+  UserIdentitySourceCount,
+  UserLanguageCount,
+  UserOrganizationCount,
+  UserRegistrationTrend,
+};
+
+/**
+ * Aggregated user statistics from all endpoints
+ */
+export interface UserStatistics {
+  authMethods: UserAuthMethodCount[];
+  identitySources: UserIdentitySourceCount[];
+  organizations: UserOrganizationCount[];
+  affiliations: UserAffiliationCount[];
+  activeStatus: UserActiveStatusCount[];
+  languages: UserLanguageCount[];
+  registrationTrend: UserRegistrationTrend[];
+}
+
+/**
+ * Summary metrics computed from user statistics (frontend-only)
+ */
+export interface UserStatisticsSummary {
+  /** Total number of users across all auth methods */
+  totalUsers: number;
+  /** Number of active users */
+  activeUsers: number;
+  /** Percentage of active users */
+  activePercent: number;
+  /** Number of users using federated authentication */
+  federatedUsers: number;
+  /** Percentage of users using federated authentication */
+  federatedPercent: number;
+  /** Number of distinct identity sources */
+  identitySourceCount: number;
+  /** Number of distinct organizations */
+  organizationCount: number;
+  /** Number of distinct affiliations */
+  affiliationCount: number;
+}
