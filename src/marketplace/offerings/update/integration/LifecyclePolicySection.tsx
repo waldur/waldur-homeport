@@ -114,6 +114,14 @@ const resourceCapabilitiesFields: OfferingEditField[] = [
       'Automatically creates new orders when configuration options of related resources are modified',
     ),
   },
+  {
+    label: translate('Enable SLURM periodic usage policy'),
+    key: 'plugin_options.slurm_periodic_policy_enabled',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.',
+    ),
+  },
 ];
 
 // Provisioning fields
@@ -172,14 +180,6 @@ const billingFields: OfferingEditField[] = [
     component: AwesomeCheckboxField,
     description: translate(
       'Hides pricing and components tabs in offering details to conceal billing information',
-    ),
-  },
-  {
-    label: translate('Enable SLURM periodic usage policy'),
-    key: 'plugin_options.slurm_periodic_policy_enabled',
-    component: AwesomeCheckboxField,
-    description: translate(
-      'When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.',
     ),
   },
 ];
