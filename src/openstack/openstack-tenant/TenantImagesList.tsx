@@ -1,4 +1,4 @@
-import { FunctionComponent } from 'react';
+import { FunctionComponent, ReactElement } from 'react';
 import {
   OpenStackImage,
   openstackImagesList,
@@ -14,7 +14,8 @@ import { useTable } from '@waldur/table/useTable';
 
 export const TenantImagesList: FunctionComponent<{
   filter: OpenstackImagesListData['query'];
-}> = ({ filter }) => {
+  filters?: ReactElement | null;
+}> = ({ filter, filters }) => {
   const props = useTable({
     table: 'openstack-images',
     fetchData: createFetcher(openstackImagesList),
@@ -66,6 +67,7 @@ export const TenantImagesList: FunctionComponent<{
       hasQuery={true}
       hasOptionalColumns
       showPageSizeSelector
+      filters={filters}
     />
   );
 };
