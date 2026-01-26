@@ -205,13 +205,15 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           component: OfferingUsagePolicies,
           visible: true,
         },
-        {
-          key: 'slurm-policy',
-          title: translate('SLURM policy'),
-          component: SlurmPolicySection,
-          visible: true,
-        },
-      ],
+        offering.plugin_options?.slurm_periodic_policy_enabled
+          ? {
+              key: 'slurm-policy',
+              title: translate('SLURM policy'),
+              component: SlurmPolicySection,
+              visible: true,
+            }
+          : null,
+      ].filter(Boolean),
     },
     {
       title: translate('Events'),

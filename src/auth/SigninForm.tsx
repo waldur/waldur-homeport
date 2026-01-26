@@ -112,6 +112,7 @@ export const SigninForm = () => (
                   fieldName="username"
                   placeholder={translate('Enter your username')}
                   type="text"
+                  autoFocus
                 />
               </FormGroup>
               <FormGroup
@@ -140,6 +141,7 @@ export const SigninForm = () => (
                 fieldName="token"
                 placeholder={translate('Paste here your token')}
                 type="password"
+                autoFocus
               />
             </FormGroup>
           )}

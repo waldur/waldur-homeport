@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 
 import '@waldur/form/SecretField.scss';
 
-const PasswordField = ({ placeholder, input }) => {
+const PasswordField = ({ placeholder, input, autoFocus = false }) => {
   const [showSecret, onToggle] = useToggle(false);
 
   return (
@@ -19,6 +19,7 @@ const PasswordField = ({ placeholder, input }) => {
         autoComplete="new-password"
         placeholder={placeholder}
         className="login-input"
+        autoFocus={autoFocus}
         {...input}
       />
 
@@ -43,21 +44,27 @@ export const InputGroup: FunctionComponent<{
   fieldName;
   placeholder;
   type;
-}> = ({ fieldName, placeholder, type }) => {
+  autoFocus?: boolean;
+}> = ({ fieldName, placeholder, type, autoFocus }) => {
   const renderComponent = useCallback(
     ({ input }) =>
       type === 'password' ? (
-        <PasswordField placeholder={placeholder} input={input} />
+        <PasswordField
+          placeholder={placeholder}
+          input={input}
+          autoFocus={autoFocus}
+        />
       ) : (
         <StringField
           className="login-input"
           type={type}
           placeholder={placeholder}
+          autoFocus={autoFocus}
           {...input}
         />
       ),
 
-    [placeholder, type],
+    [placeholder, type, autoFocus],
   );
 
   return <Field name={fieldName} component={renderComponent} />;
