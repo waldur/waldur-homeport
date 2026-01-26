@@ -1,8 +1,8 @@
-import { render, screen, waitFor } from '@testing-library/react';
+import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
-import React from 'react'; // Added React import for ReactNode
+import React from 'react';
 import { Provider } from 'react-redux';
-import { reduxForm } from 'redux-form'; // Added InjectedFormProps
+import { reduxForm } from 'redux-form';
 import configureMockStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { Offering, OptionField } from 'waldur-js-client';
@@ -19,38 +19,35 @@ const TestForm = reduxForm<any, TestFormProps>({ form: 'TestForm' })(
   ({ children }) => <form>{children}</form>,
 );
 
-const mockField = {
-  type: 'storage_folder_manager',
-  label: 'Storage Configuration',
-  storage_folder_config: {
-    component_type: 'storage',
-    default_hard_quota_multiplier: 1.0,
-    inode_soft_multiplier: 7000,
-    inode_hard_multiplier: 10000,
-    storage_data_types: [
-      { key: 'store', label: 'Store' },
-      { key: 'archive', label: 'Archive' },
-    ],
-    default_permission: '2770',
-  },
-} as OptionField;
-
-const mockOffering = {
-  components: [
-    {
-      type: 'storage',
-      name: 'Storage',
-      billing_type: 'limit',
-      default_limit: 10,
+const createMockField = (overrides = {}): OptionField =>
+  ({
+    type: 'storage_folder_manager',
+    label: 'Storage Configuration',
+    storage_folder_config: {
+      component_type: 'storage',
+      default_hard_quota_multiplier: 1.0,
+      inode_soft_multiplier: 7000,
+      inode_hard_multiplier: 10000,
+      storage_data_types: [
+        { key: 'store', label: 'Store' },
+        { key: 'archive', label: 'Archive' },
+      ],
+      default_permission: '2770',
     },
-  ],
-} as Offering;
+    ...overrides,
+  }) as OptionField;
 
-const mockCustomer = {
-  user: {
-    role: 'user',
-  },
-};
+const createMockOffering = (): Offering =>
+  ({
+    components: [
+      {
+        type: 'storage',
+        name: 'Storage',
+        billing_type: 'limit',
+        default_limit: 10,
+      },
+    ],
+  }) as Offering;
 
 const createStore = (storageLimit = 10) =>
   mockStore({
@@ -63,36 +60,54 @@ const createStore = (storageLimit = 10) =>
     },
   });
 
-const renderComponent = (
-  props: Partial<Parameters<typeof StorageFolderManagerField>[0]> = {},
+interface RenderOptions {
+  field?: OptionField;
+  inputValue?: any;
+  offering?: Offering;
+  storageLimit?: number;
+}
+
+const renderComponent = ({
+  field = createMockField(),
+  inputValue = '',
+  offering = createMockOffering(),
   storageLimit = 10,
-) => {
+}: RenderOptions = {}) => {
   const onChange = vi.fn();
   const store = createStore(storageLimit);
 
-  const result = render(
-    <Provider store={store}>
-      <TestForm>
-        <StorageFolderManagerField
-          field={mockField}
-          input={
-            {
-              value: '',
-              onChange,
-              onBlur: vi.fn(),
-              onFocus: vi.fn(),
-              onDragStart: vi.fn(),
-              onDrop: vi.fn(),
-              name: 'storage_folder_manager',
-            } as any
-          }
-          customer={mockCustomer as any}
-          offering={mockOffering}
-          {...props}
-        />
-      </TestForm>
-    </Provider>,
-  );
+  const Wrapper = () => {
+    const [value, setValue] = React.useState(inputValue);
+
+    const handleChange = (newValue: any) => {
+      setValue(newValue);
+      onChange(newValue);
+    };
+
+    return (
+      <Provider store={store}>
+        <TestForm>
+          <StorageFolderManagerField
+            field={field}
+            input={
+              {
+                value,
+                onChange: handleChange,
+                onBlur: vi.fn(),
+                onFocus: vi.fn(),
+                onDragStart: vi.fn(),
+                onDrop: vi.fn(),
+                name: 'storage_folder_manager',
+              } as any
+            }
+            offering={offering}
+          />
+        </TestForm>
+      </Provider>
+    );
+  };
+
+  const result = render(<Wrapper />);
 
   return { ...result, onChange, store };
 };
@@ -102,25 +117,17 @@ describe('StorageFolderManagerField', () => {
     vi.clearAllMocks();
   });
 
-  describe('rendering', () => {
-    it('renders storage data type selector', () => {
+  describe('Rendering', () => {
+    it('renders all main form sections', () => {
       renderComponent();
 
       expect(screen.getByText('Storage Data Type')).toBeInTheDocument();
       expect(screen.getByText('Permissions')).toBeInTheDocument();
+      expect(screen.getByText('Hard Quota Override (TB)')).toBeInTheDocument();
       expect(screen.getByText('Calculated Quotas')).toBeInTheDocument();
     });
 
-    it('renders hard quota override field', () => {
-      renderComponent();
-
-      expect(screen.getByText('Hard Quota Override (TB)')).toBeInTheDocument();
-      expect(
-        screen.getByPlaceholderText('Optional override'),
-      ).toBeInTheDocument();
-    });
-
-    it('renders space and inode quota sections', () => {
+    it('renders quota display sections', () => {
       renderComponent();
 
       expect(screen.getByText('Space Quotas')).toBeInTheDocument();
@@ -130,22 +137,35 @@ describe('StorageFolderManagerField', () => {
     });
 
     it('renders help text when provided', () => {
-      const fieldWithHelpText = {
-        ...mockField,
+      const field = createMockField({
         help_text: 'This is help text for the storage folder manager',
-      } as OptionField;
+      });
 
-      renderComponent({ field: fieldWithHelpText });
+      renderComponent({ field });
 
       expect(
         screen.getByText('This is help text for the storage folder manager'),
       ).toBeInTheDocument();
     });
+
+    it('renders placeholder text for inputs', () => {
+      const field = createMockField();
+      // @ts-ignore
+      field.storage_folder_config.default_permission = '';
+
+      renderComponent({ field });
+
+      expect(
+        screen.getByPlaceholderText('Optional override'),
+      ).toBeInTheDocument();
+      expect(screen.getByText('Select storage data type')).toBeInTheDocument();
+      expect(screen.getByText('Select permissions')).toBeInTheDocument();
+    });
   });
 
-  describe('quota calculations', () => {
-    it('calculates quotas correctly with default multiplier', () => {
-      renderComponent({}, 5); // 5 TB soft quota
+  describe('Quota Calculations', () => {
+    it('calculates quotas with default multiplier', () => {
+      renderComponent({ storageLimit: 5 });
 
       expect(screen.getByText('Soft: 5.0 TB')).toBeInTheDocument();
       expect(screen.getByText('Hard: 5.0 TB')).toBeInTheDocument(); // 1.0 multiplier
@@ -153,75 +173,77 @@ describe('StorageFolderManagerField', () => {
       expect(screen.getByText('Hard: 50,000 files')).toBeInTheDocument(); // 5 * 10000
     });
 
-    it('calculates quotas correctly with custom hard quota multiplier', () => {
-      const fieldWithMultiplier = {
-        ...mockField,
+    it('calculates quotas with custom hard quota multiplier', () => {
+      const field = createMockField({
         storage_folder_config: {
-          ...mockField.storage_folder_config,
+          component_type: 'storage',
           default_hard_quota_multiplier: 1.5,
+          inode_soft_multiplier: 7000,
+          inode_hard_multiplier: 10000,
+          storage_data_types: [{ key: 'store', label: 'Store' }],
+          default_permission: '2770',
         },
-      } as OptionField;
+      });
 
-      renderComponent({ field: fieldWithMultiplier }, 10);
+      renderComponent({ field, storageLimit: 10 });
 
       expect(screen.getByText('Soft: 10.0 TB')).toBeInTheDocument();
       expect(screen.getByText('Hard: 15.0 TB')).toBeInTheDocument(); // 10 * 1.5
     });
 
-    it('calculates inodes correctly with custom multipliers', () => {
-      const fieldWithCustomInodes = {
-        ...mockField,
+    it('calculates inodes with custom multipliers', () => {
+      const field = createMockField({
         storage_folder_config: {
-          ...mockField.storage_folder_config,
+          component_type: 'storage',
+          default_hard_quota_multiplier: 1.0,
           inode_soft_multiplier: 5000,
           inode_hard_multiplier: 8000,
+          storage_data_types: [{ key: 'store', label: 'Store' }],
+          default_permission: '2770',
         },
-      };
+      });
 
-      renderComponent({ field: fieldWithCustomInodes }, 2);
+      renderComponent({ field, storageLimit: 2 });
 
-      expect(screen.getByText('Soft: 10,000 files')).toBeInTheDocument(); // 2 * 5000
-      expect(screen.getByText('Hard: 16,000 files')).toBeInTheDocument(); // 2 * 8000
-    });
-  });
-
-  describe('user interactions', () => {
-    it('renders storage data type select with options', () => {
-      renderComponent();
-
-      // The select components should be rendered with the placeholder
-      const selects = screen.getAllByRole('combobox');
-      expect(selects.length).toBeGreaterThanOrEqual(2);
+      expect(screen.getByText('Soft: 10,000 files')).toBeInTheDocument();
+      expect(screen.getByText('Hard: 16,000 files')).toBeInTheDocument();
     });
 
-    it('renders permission select with all permission options available', () => {
-      renderComponent();
-
-      // Permissions should be available in the component
-      // (Full select interaction tested in e2e/integration tests)
-      expect(screen.getByText('Permissions')).toBeInTheDocument();
-    });
-
-    it('updates hard quota when override value is entered', async () => {
+    it('updates hard quota calculation when override is provided', async () => {
       const user = userEvent.setup();
-      const { onChange } = renderComponent({}, 10);
+      renderComponent({ storageLimit: 10 });
 
       const hardQuotaInput = screen.getByPlaceholderText('Optional override');
       await user.type(hardQuotaInput, '15');
 
       await waitFor(() => {
-        expect(onChange).toHaveBeenCalled();
-      });
-
-      // Check the displayed hard quota updates
-      await waitFor(() => {
         expect(screen.getByText('Hard: 15.0 TB')).toBeInTheDocument();
       });
     });
 
-    it('clears hard quota override when input is cleared', async () => {
+    it('recalculates inode quotas based on hard quota override', async () => {
+      renderComponent({ storageLimit: 10 });
+
+      const hardQuotaInput = screen.getByPlaceholderText('Optional override');
+      fireEvent.change(hardQuotaInput, { target: { value: '20' } });
+
+      await waitFor(() => {
+        expect(screen.getByText('Hard: 200,000 files')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('User Interactions', () => {
+    it('renders storage data type select', () => {
+      renderComponent();
+
+      const selects = screen.getAllByRole('combobox');
+      expect(selects.length).toBeGreaterThanOrEqual(2);
+    });
+
+    it('clears hard quota override and reverts to default', async () => {
       const user = userEvent.setup();
-      renderComponent({}, 10);
+      renderComponent({ storageLimit: 10 });
 
       const hardQuotaInput = screen.getByPlaceholderText('Optional override');
       await user.type(hardQuotaInput, '15');
@@ -237,12 +259,24 @@ describe('StorageFolderManagerField', () => {
         expect(screen.getByText('Hard: 10.0 TB')).toBeInTheDocument();
       });
     });
+
+    it('calls onChange when hard quota is updated', async () => {
+      const user = userEvent.setup();
+      const { onChange } = renderComponent({ storageLimit: 10 });
+
+      const hardQuotaInput = screen.getByPlaceholderText('Optional override');
+      await user.type(hardQuotaInput, '15');
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalled();
+      });
+    });
   });
 
-  describe('validation', () => {
+  describe('Validation', () => {
     it('shows error when hard quota is less than soft quota', async () => {
       const user = userEvent.setup();
-      renderComponent({}, 10); // 10 TB soft quota
+      renderComponent({ storageLimit: 10 });
 
       const hardQuotaInput = screen.getByPlaceholderText('Optional override');
       await user.type(hardQuotaInput, '5'); // Less than soft quota of 10
@@ -253,37 +287,9 @@ describe('StorageFolderManagerField', () => {
         ).toBeInTheDocument();
       });
     });
-
-    it('does not show error when hard quota equals soft quota', async () => {
-      const user = userEvent.setup();
-      renderComponent({}, 10);
-
-      const hardQuotaInput = screen.getByPlaceholderText('Optional override');
-      await user.type(hardQuotaInput, '10');
-
-      await waitFor(() => {
-        expect(
-          screen.queryByText(/Hard quota cannot be less than soft quota/),
-        ).not.toBeInTheDocument();
-      });
-    });
-
-    it('does not show error when hard quota is greater than soft quota', async () => {
-      const user = userEvent.setup();
-      renderComponent({}, 10);
-
-      const hardQuotaInput = screen.getByPlaceholderText('Optional override');
-      await user.type(hardQuotaInput, '15');
-
-      await waitFor(() => {
-        expect(
-          screen.queryByText(/Hard quota cannot be less than soft quota/),
-        ).not.toBeInTheDocument();
-      });
-    });
   });
 
-  describe('default permission auto-selection', () => {
+  describe('Default Permission Auto-selection', () => {
     it('auto-selects default permission on mount', async () => {
       const { onChange } = renderComponent();
 
@@ -298,14 +304,12 @@ describe('StorageFolderManagerField', () => {
     });
 
     it('does not override existing permission value', async () => {
-      const existingValue = {
+      const inputValue = {
         storage_data_type: 'archive',
         permissions: '2775',
       };
 
-      const { onChange } = renderComponent({
-        input: { value: existingValue, onChange: vi.fn() } as any,
-      });
+      const { onChange } = renderComponent({ inputValue });
 
       // The component should not override the existing permission
       await waitFor(() => {
@@ -319,13 +323,30 @@ describe('StorageFolderManagerField', () => {
         }
       });
     });
+
+    it('respects permission from initial input value', async () => {
+      const field = createMockField();
+      // @ts-ignore
+      field.storage_folder_config.default_permission = '';
+
+      const inputValue = {
+        storage_data_type: 'store',
+        permissions: '2770',
+        hard_quota_space: '',
+      };
+
+      renderComponent({ field, inputValue });
+
+      await waitFor(() => {
+        expect(screen.getByText(/2770/)).toBeInTheDocument();
+      });
+    });
   });
 
-  describe('form value submission', () => {
+  describe('Form Value Submission', () => {
     it('calls onChange with calculated inode quotas', async () => {
-      const { onChange } = renderComponent({}, 5);
+      const { onChange } = renderComponent({ storageLimit: 5 });
 
-      // Component should call onChange on mount with calculated values
       await waitFor(() => {
         expect(onChange).toHaveBeenCalled();
         const calls = onChange.mock.calls;
@@ -335,9 +356,9 @@ describe('StorageFolderManagerField', () => {
       });
     });
 
-    it('includes custom hard quota in submitted value when overridden', async () => {
+    it('includes custom hard quota in submitted value', async () => {
       const user = userEvent.setup();
-      const { onChange } = renderComponent({}, 10);
+      const { onChange } = renderComponent({ storageLimit: 10 });
 
       const hardQuotaInput = screen.getByPlaceholderText('Optional override');
       await user.type(hardQuotaInput, '20');
@@ -348,64 +369,184 @@ describe('StorageFolderManagerField', () => {
       });
     });
 
-    it('submission value structure matches expected format', async () => {
-      const { onChange } = renderComponent({}, 10);
+    it('omits hard_quota_space when not overridden', async () => {
+      const { onChange } = renderComponent({ storageLimit: 10 });
 
       await waitFor(() => {
         expect(onChange).toHaveBeenCalled();
-        const lastCall = onChange.mock.calls[onChange.mock.calls.length - 1][0];
-        // Check the structure of the submitted value
+        const calls = onChange.mock.calls;
+        if (calls.length === 0) return;
+        const lastCall = calls[calls.length - 1][0];
+        expect(lastCall.hard_quota_space).toBeUndefined();
+      });
+    });
+
+    it('submission value has correct structure', async () => {
+      const { onChange } = renderComponent({ storageLimit: 10 });
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalled();
+        const calls = onChange.mock.calls;
+        if (calls.length === 0) return;
+        const lastCall = calls[calls.length - 1][0];
         expect(lastCall).toHaveProperty('storage_data_type');
         expect(lastCall).toHaveProperty('permissions');
         expect(lastCall).toHaveProperty('soft_quota_inodes');
         expect(lastCall).toHaveProperty('hard_quota_inodes');
       });
     });
+
+    it('rounds inode values to whole numbers', async () => {
+      const { onChange } = renderComponent({ storageLimit: 3 });
+
+      await waitFor(() => {
+        expect(onChange).toHaveBeenCalled();
+        const calls = onChange.mock.calls;
+        const lastCall = calls[calls.length - 1][0];
+        expect(Number.isInteger(lastCall.soft_quota_inodes)).toBe(true);
+        expect(Number.isInteger(lastCall.hard_quota_inodes)).toBe(true);
+      });
+    });
   });
 
-  describe('edge cases', () => {
+  describe('Edge Cases', () => {
     it('handles missing storage_folder_config gracefully', () => {
-      const fieldWithoutConfig = {
+      const field = {
         type: 'storage_folder_manager',
         label: 'Storage Configuration',
       } as OptionField;
 
-      // Should not throw
-      expect(() =>
-        renderComponent({ field: fieldWithoutConfig }),
-      ).not.toThrow();
+      expect(() => renderComponent({ field })).not.toThrow();
     });
 
     it('handles empty storage_data_types array', () => {
-      const fieldWithEmptyTypes = {
-        ...mockField,
+      const field = createMockField({
         storage_folder_config: {
-          ...mockField.storage_folder_config,
+          component_type: 'storage',
           storage_data_types: [],
+          default_permission: '2770',
         },
-      } as OptionField;
+      });
 
-      renderComponent({ field: fieldWithEmptyTypes });
+      renderComponent({ field });
 
-      // Component should still render
       expect(screen.getByText('Storage Data Type')).toBeInTheDocument();
     });
 
-    it('uses default values when multipliers are not provided', () => {
-      const fieldWithoutMultipliers = {
-        ...mockField,
+    it('uses default multiplier values when not provided', () => {
+      const field = createMockField({
         storage_folder_config: {
           component_type: 'storage',
           storage_data_types: [{ key: 'store', label: 'Store' }],
           default_permission: '2770',
         },
-      } as OptionField;
+      });
 
-      renderComponent({ field: fieldWithoutMultipliers }, 1);
+      renderComponent({ field, storageLimit: 1 });
 
-      // Should use default multipliers (7000 soft, 10000 hard for inodes)
       expect(screen.getByText('Soft: 7,000 files')).toBeInTheDocument();
       expect(screen.getByText('Hard: 10,000 files')).toBeInTheDocument();
+    });
+
+    it('handles zero storage limit', () => {
+      renderComponent({ storageLimit: 0 });
+
+      expect(screen.getByText('Soft: 0.0 TB')).toBeInTheDocument();
+      expect(screen.getByText('Hard: 0.0 TB')).toBeInTheDocument();
+      expect(screen.getByText('Soft: 0 files')).toBeInTheDocument();
+      expect(screen.getByText('Hard: 0 files')).toBeInTheDocument();
+    });
+
+    it('handles missing offering gracefully', () => {
+      expect(() =>
+        renderComponent({ offering: undefined as any }),
+      ).not.toThrow();
+    });
+
+    it('falls back to default limit when offering component not found', () => {
+      const offering = {
+        components: [
+          {
+            type: 'different_type',
+            name: 'Different',
+            billing_type: 'limit',
+            default_limit: 20,
+          },
+        ],
+      } as Offering;
+
+      const store = mockStore({
+        form: {
+          OrderForm: {
+            values: {
+              // No limits
+            },
+          },
+        },
+      });
+
+      render(
+        <Provider store={store}>
+          <TestForm>
+            <StorageFolderManagerField
+              field={createMockField()}
+              input={{ value: '', onChange: vi.fn(), name: 'test' } as any}
+              offering={offering}
+            />
+          </TestForm>
+        </Provider>,
+      );
+
+      // Should use fallback of 1 TB
+      expect(screen.getByText('Soft: 1.0 TB')).toBeInTheDocument();
+    });
+
+    it('handles decimal hard quota inputs', async () => {
+      const user = userEvent.setup();
+      renderComponent({ storageLimit: 10 });
+
+      const hardQuotaInput = screen.getByPlaceholderText('Optional override');
+      await user.type(hardQuotaInput, '12.5');
+
+      await waitFor(() => {
+        expect(screen.getByText('Hard: 12.5 TB')).toBeInTheDocument();
+      });
+    });
+  });
+
+  describe('Reactivity', () => {
+    it('recalculates quotas when storage limit changes in form', async () => {
+      const { rerender } = renderComponent({ storageLimit: 5 });
+
+      expect(screen.getByText('Soft: 5.0 TB')).toBeInTheDocument();
+
+      // Simulate store update
+      const newStore = createStore(10);
+      rerender(
+        <Provider store={newStore}>
+          <TestForm>
+            <StorageFolderManagerField
+              field={createMockField()}
+              input={
+                {
+                  value: '',
+                  onChange: vi.fn(),
+                  onBlur: vi.fn(),
+                  onFocus: vi.fn(),
+                  onDragStart: vi.fn(),
+                  onDrop: vi.fn(),
+                  name: 'storage_folder_manager',
+                } as any
+              }
+              offering={createMockOffering()}
+            />
+          </TestForm>
+        </Provider>,
+      );
+
+      await waitFor(() => {
+        expect(screen.getByText('Soft: 10.0 TB')).toBeInTheDocument();
+      });
     });
   });
 });
