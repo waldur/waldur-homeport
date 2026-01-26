@@ -35,6 +35,7 @@ For detailed guidance, see `docs/`:
 - `api-integration.md` - React Query, CRUD patterns
 - `form-migration.md` - Redux → React Final Form
 - `development-setup.md` - Build, environment, tooling
+- `ui-consistency-guidelines.md` - Empty states, buttons, loading, tooltips
 
 Subagents in `.claude/agents/` provide deep expertise for each area.
 
@@ -55,6 +56,13 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   ```
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
+
+- Follow UI/UX consistency patterns (see `docs/ui-consistency-guidelines.md`):
+  - Use `renderFieldOrDash()` for null/undefined values (never `|| 'N/A'` or `|| ''`)
+  - Disabled buttons MUST have tooltip explaining why
+  - Use `NoResult` component for all empty states with actionable CTAs
+  - Use `hasPermission()` utility for permission checks (not direct `user.is_staff`)
+  - Hide buttons when user permanently lacks permission; disable when temporary/fixable
 
 ## Sentry Issue Workflow
 
