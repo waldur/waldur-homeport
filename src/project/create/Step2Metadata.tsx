@@ -8,15 +8,12 @@ import {
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { FormFieldError } from '@waldur/form/FormFieldError';
-import {
-  WizardFinalForm,
-  WizardFinalFormStepProps,
-} from '@waldur/form/WizardFinalForm';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { QuestionAnswerField } from '@waldur/marketplace-checklist/QuestionAnswerField';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-export const Step2Metadata: FC<WizardFinalFormStepProps> = (props) => {
+export const Step2Metadata: FC<WizardStepProps> = (props) => {
   // Fetch customer checklist questions
   const customerUuid = props.values.customer?.uuid;
   const {
@@ -45,7 +42,7 @@ export const Step2Metadata: FC<WizardFinalFormStepProps> = (props) => {
   }, [questions]);
 
   return (
-    <WizardFinalForm {...props} submitDisabled={Boolean(error) || isLoading}>
+    <WizardModal {...props} submitDisabled={Boolean(error) || isLoading}>
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
@@ -70,6 +67,6 @@ export const Step2Metadata: FC<WizardFinalFormStepProps> = (props) => {
       ) : (
         <p className="text-center">{translate('There is no checklist.')}</p>
       )}
-    </WizardFinalForm>
+    </WizardModal>
   );
 };

@@ -2,10 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 
 import { fetchCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
-import {
-  WizardFinalForm,
-  WizardFinalFormStepProps,
-} from '@waldur/form/WizardFinalForm';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 import { Customer } from '@waldur/workspace/types';
 
 import { CreditGroup } from './CreditGroup';
@@ -21,7 +18,7 @@ import { SlugGroup } from './SlugGroup';
 import { StartDateGroup } from './StartDateGroup';
 import { TypeGroup } from './TypeGroup';
 
-export const Step1ProjectInfo: FC<WizardFinalFormStepProps> = (props) => {
+export const Step1ProjectInfo: FC<WizardStepProps> = (props) => {
   const initialCustomer = props.data.initialCustomer;
   const selectedCustomer = props.data.selectedCustomer as Customer;
   const setSelectedCustomer = props.data.setSelectedCustomer as React.Dispatch<
@@ -51,7 +48,7 @@ export const Step1ProjectInfo: FC<WizardFinalFormStepProps> = (props) => {
   }, [selectedCustomer, projects, initialCustomer]);
 
   return (
-    <WizardFinalForm {...props} loading={isLoading}>
+    <WizardModal {...props} loading={isLoading}>
       <OrganizationGroup
         onChange={setSelectedCustomer}
         isDisabled={!!initialCustomer}
@@ -73,6 +70,6 @@ export const Step1ProjectInfo: FC<WizardFinalFormStepProps> = (props) => {
       <EndDateGroup create />
       <CreditGroup customer={props.values?.customer} />
       <ImageGroup create />
-    </WizardFinalForm>
+    </WizardModal>
   );
 };

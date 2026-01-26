@@ -1,15 +1,17 @@
 import { FC, useEffect, useMemo } from 'react';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
+import { useForm, useFormState } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsList } from 'waldur-js-client';
 
 import { getUUID } from '@waldur/core/utils';
 import { SelectField, TextField } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
 import { resetSelection, selectRow } from '@waldur/table/actions';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { MAINTENANCE_IMPACT_LEVEL, MaintenanceForm } from '../types';
 
@@ -28,7 +30,7 @@ const baseFilter = {
 const ImpactLevelField = ({ row }) => (
   <Field
     name={`impact_level.${row.uuid}`}
-    component={SelectField}
+    component={SelectField as any}
     defaultOptions
     options={impactLevelOptions}
     noOptionsMessage={() => translate('No results found')}
@@ -40,14 +42,18 @@ const ImpactLevelField = ({ row }) => (
 const DescriptionField = ({ row }) => (
   <Field
     name={`impact_description.${row.uuid}`}
-    component={TextField}
+    component={TextField as any}
     placeholder={translate('Describe specific impact on this service...')}
     className="my-1"
     rows="2"
   />
 );
 
-export const Step2SelectOfferings: FC<WizardFormStepProps> = (props) => {
+export const Step2SelectOfferings: FC<WizardStepProps> = (props) => {
+  const form = useForm<MaintenanceForm>();
+  const { values } = useFormState<MaintenanceForm>();
+  const dispatch = useDispatch();
+
   const filter = useMemo(
     () =>
       props.data?.provider
@@ -62,82 +68,72 @@ export const Step2SelectOfferings: FC<WizardFormStepProps> = (props) => {
     filter,
   });
 
-  return (
-    <WizardForm {...props}>
-      {(wizardProps) => {
-        const formValues: MaintenanceForm = wizardProps.formValues;
+  // Update offerings in the form state when selections change
+  useEffect(() => {
+    form.change('offerings', tableProps.selectedRows);
+  }, [tableProps.selectedRows, form]);
 
-        // NOTE: Can not use field feature of table, because of infinite rendering issue
-        // Update offerings in the form state when selections change
-        useEffect(() => {
-          wizardProps.change('offerings', tableProps.selectedRows);
-        }, [tableProps.selectedRows]);
+  // Re-select the rows (on edit OR when back is clicked)
+  useEffect(() => {
+    dispatch(resetSelection(TABLE_ID));
 
-        // Re-select the rows (on edit OR when back is clicked)
-        useEffect(() => {
-          wizardProps.dispatch(resetSelection(TABLE_ID));
-
-          if (formValues.offerings?.length) {
-            // Use current selections
-            formValues.offerings.forEach((offering) => {
-              wizardProps.dispatch(selectRow(TABLE_ID, offering));
-            });
-          } else if (
-            formValues.template &&
-            formValues.template_affected_offerings?.length
-          ) {
-            // Initiate selections from template offerings
-            formValues.template_affected_offerings.forEach((item) => {
-              wizardProps.dispatch(
-                selectRow(TABLE_ID, {
-                  uuid: getUUID(item.offering),
-                  url: item.offering,
-                  name: item.offering_name,
-                }),
-              );
-            });
-          } else if (formValues.affected_offerings?.length) {
-            // Initiate selections
-            formValues.affected_offerings.forEach((item) => {
-              wizardProps.dispatch(
-                selectRow(TABLE_ID, {
-                  uuid: getUUID(item.offering),
-                  url: item.offering,
-                  name: item.offering_name,
-                }),
-              );
-            });
-          }
-        }, []);
-
-        return (
-          <Table
-            {...tableProps}
-            columns={[
-              {
-                title: translate('Offering name'),
-                render: ({ row }) => row.name,
-              },
-              {
-                title: translate('Impact level'),
-                render: ImpactLevelField,
-                className: 'align-top',
-              },
-              {
-                title: translate('Description'),
-                render: DescriptionField,
-              },
-            ]}
-            verboseName={translate('Offerings')}
-            cardBordered={false}
-            hasActionBar={false}
-            fullWidth
-            equalColWidth
-            showPageSizeSelector={true}
-            enableMultiSelect
-          />
+    if (values.offerings?.length) {
+      // Use current selections
+      values.offerings.forEach((offering) => {
+        dispatch(selectRow(TABLE_ID, offering));
+      });
+    } else if (values.template && values.template_affected_offerings?.length) {
+      // Initiate selections from template offerings
+      values.template_affected_offerings.forEach((item) => {
+        dispatch(
+          selectRow(TABLE_ID, {
+            uuid: getUUID(item.offering),
+            url: item.offering,
+            name: item.offering_name,
+          }),
         );
-      }}
-    </WizardForm>
+      });
+    } else if (values.affected_offerings?.length) {
+      // Initiate selections
+      values.affected_offerings.forEach((item) => {
+        dispatch(
+          selectRow(TABLE_ID, {
+            uuid: getUUID(item.offering),
+            url: item.offering,
+            name: item.offering_name,
+          }),
+        );
+      });
+    }
+  }, []);
+
+  return (
+    <WizardModal {...props}>
+      <Table
+        {...tableProps}
+        columns={[
+          {
+            title: translate('Offering name'),
+            render: ({ row }) => row.name,
+          },
+          {
+            title: translate('Impact level'),
+            render: ImpactLevelField,
+            className: 'align-top',
+          },
+          {
+            title: translate('Description'),
+            render: DescriptionField,
+          },
+        ]}
+        verboseName={translate('Offerings')}
+        cardBordered={false}
+        hasActionBar={false}
+        fullWidth
+        equalColWidth
+        showPageSizeSelector={true}
+        enableMultiSelect
+      />
+    </WizardModal>
   );
 };

@@ -294,7 +294,6 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Maintenance'),
-      feature: MarketplaceFeatures.show_experimental_ui_components,
     },
   },
 

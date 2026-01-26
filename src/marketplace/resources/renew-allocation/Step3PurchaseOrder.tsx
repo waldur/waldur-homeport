@@ -3,15 +3,12 @@ import { Col, Row } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
 import { StringField } from '@waldur/form';
-import {
-  WizardFinalForm,
-  WizardFinalFormStepProps,
-} from '@waldur/form/WizardFinalForm';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Field as SummaryField } from '@waldur/resource/summary';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-export const Step3PurchaseOrder: FC<WizardFinalFormStepProps> = (props) => {
+export const Step3PurchaseOrder: FC<WizardStepProps> = (props) => {
   const resources = props.data?.resources;
   const resource = resources?.[0];
   const isMulti = resources && resources.length > 1;
@@ -27,7 +24,7 @@ export const Step3PurchaseOrder: FC<WizardFinalFormStepProps> = (props) => {
     .join(' / ');
 
   return (
-    <WizardFinalForm {...props}>
+    <WizardModal {...props}>
       {/* Show resource info when invoked from pending actions (single resource only) */}
       {!isMulti && (
         <div className="mb-6">
@@ -64,6 +61,6 @@ export const Step3PurchaseOrder: FC<WizardFinalFormStepProps> = (props) => {
           </Col>
         </Row>
       </FormGroup>
-    </WizardFinalForm>
+    </WizardModal>
   );
 };

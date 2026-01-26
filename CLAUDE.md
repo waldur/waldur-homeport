@@ -86,6 +86,152 @@ This script:
 
 **After running:** Verify with `yarn tsc --noEmit`
 
+## Wizard Migration Patterns
+
+When migrating wizard dialogs to use `@waldur/wizard`, follow these patterns:
+
+### Basic Pattern (Standard Wizards)
+
+```tsx
+import { Wizard, WizardModal, WizardStepProps } from '@waldur/wizard';
+
+// Define steps
+const steps: ProgressStep[] = [
+  { key: 'step1', label: translate('Step 1'), completed: false },
+  { key: 'step2', label: translate('Step 2'), completed: false },
+];
+
+// Create step components
+const Step1: FC<WizardStepProps> = (props) => (
+  <WizardModal {...props}>
+    <Field name="fieldName" component={StringField as any} />
+  </WizardModal>
+);
+
+// Use Wizard component
+<Wizard
+  title={translate('Dialog Title')}
+  steps={steps}
+  wizardForms={[Step1, Step2]}
+  onSubmit={handleSubmit}
+  initialValues={initialValues}
+/>
+```
+
+### Async Validation Gates
+
+For wizards where steps require API validation before proceeding (e.g., credential validation):
+
+1. **Store all state in form values** - Use `useForm()` and `useFormState()` in steps
+2. **Custom footer per step** - Use `renderFooter` prop in `WizardModal`
+3. **Async operations update form values** - Validation results stored in form state
+4. **Call `props.handleSubmit()` to advance** - After successful validation
+
+```tsx
+const CredentialsStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<MyFormValues>();
+  const { values } = useFormState<MyFormValues>();
+  const [validating, setValidating] = useState(false);
+
+  const validateAndContinue = async () => {
+    setValidating(true);
+    const result = await validateCredentials(values);
+    if (result.valid) {
+      form.change('credentialsValid', true);
+      props.handleSubmit(); // Advance to next step
+    }
+    setValidating(false);
+  };
+
+  const renderFooter = () => (
+    <>
+      <CloseDialogButton />
+      <SubmitButton
+        submitting={validating}
+        onClick={validateAndContinue}
+        label={translate('Validate & Continue')}
+      />
+    </>
+  );
+
+  return <WizardModal {...props} renderFooter={renderFooter}>...</WizardModal>;
+};
+```
+
+### Custom Footer Buttons
+
+For wizards with non-standard buttons (e.g., "Save as Draft", "Save as Template"):
+
+```tsx
+<Wizard
+  renderFooter={(props) => (
+    <>
+      <CloseDialogButton />
+      <SubmitButton
+        onClick={() => props.form.change('action', 'draft')}
+        label={translate('Save as draft')}
+      />
+      <SubmitButton
+        onClick={props.handleSubmit}
+        label={translate('Continue')}
+      />
+    </>
+  )}
+/>
+```
+
+### Form Field Layout (React Final Form)
+
+**NEVER use `FormContainer` from `@waldur/form`** - it wraps children with redux-form's `Field` internally and will cause "Field must be inside a component decorated with reduxForm()" errors.
+
+**Correct pattern for React Final Form:**
+
+```tsx
+import { Field } from 'react-final-form';
+import { StringField, SelectField, TextField } from '@waldur/form';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+
+// Each field wrapped in FormGroup for labels, descriptions, spacing
+<FormGroup label={translate('Name')} required>
+  <Field
+    name="name"
+    component={StringField as any}
+    placeholder={translate('Enter name...')}
+    validate={required}
+  />
+</FormGroup>
+
+// Side-by-side fields use Bootstrap grid
+<div className="row">
+  <div className="col-sm-6">
+    <FormGroup label={translate('Start date')} required>
+      <Field name="start_date" component={DateField as any} validate={required} />
+    </FormGroup>
+  </div>
+  <div className="col-sm-6">
+    <FormGroup label={translate('End date')} required>
+      <Field name="end_date" component={DateField as any} validate={required} />
+    </FormGroup>
+  </div>
+</div>
+```
+
+**FormGroup props:**
+
+- `label` - Field label text
+- `description` - Help text below field
+- `required` - Shows red asterisk
+- `spaceless` - Removes bottom margin (use on last field)
+
+### Key Lessons Learned
+
+1. **Don't nest forms** - Steps should NOT have their own `<Form>` wrapper when using Wizard
+2. **Use `form.change()` for async results** - Store API responses in form values
+3. **Footer buttons use `type="button"`** - Prevent accidental form submission
+4. **Extract credentials helper** - Create reusable object from form values for API calls
+5. **Reset downstream state** - When user changes earlier step selection, clear dependent data
+6. **Use FormGroup, not FormContainer** - `FormContainer` is redux-form only; use `FormGroup` from `@waldur/marketplace/offerings/FormGroup` for React Final Form
+
 ## Task-Specific Docs
 
 These are NOT always-loaded - reference when needed:

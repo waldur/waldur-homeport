@@ -1,33 +1,41 @@
-import { useState, useEffect } from 'react';
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
+import { FC, useState, useEffect } from 'react';
 import { Alert, Card, FormCheck, Spinner } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverProjects } from 'waldur-js-client';
 
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import type { AtlassianCredentials, DiscoveryState } from '../types';
+import type { AtlassianFormValues } from '../types';
 
-interface ProjectStepProps {
-  credentials: AtlassianCredentials;
-  onSelected: (
-    project: DiscoveryState['selectedProject'],
-    projects: DiscoveryState['projects'],
-  ) => void;
-  onBack: () => void;
-  onCancel: () => void;
-}
-
-export const ProjectStep = ({
-  credentials,
-  onSelected,
-  onBack,
-  onCancel,
-}: ProjectStepProps) => {
+/**
+ * Step 2: Project Selection
+ *
+ * Fetches available Service Desk projects and allows user to select one.
+ * Stores projects and selection in form values.
+ */
+export const ProjectStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<AtlassianFormValues>();
+  const { values } = useFormState<AtlassianFormValues>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [projects, setProjects] = useState<DiscoveryState['projects']>([]);
-  const [selectedId, setSelectedId] = useState<string | null>(null);
 
+  // Extract credentials from form values
+  const credentials = {
+    api_url: values.api_url,
+    auth_method: values.auth_method,
+    email: values.email,
+    token: values.token,
+    personal_access_token: values.personal_access_token,
+    username: values.username,
+    password: values.password,
+    verify_ssl: values.verify_ssl,
+  };
+
+  // Load projects when step mounts
   useEffect(() => {
     const loadProjects = async () => {
       setLoading(true);
@@ -36,7 +44,7 @@ export const ProjectStep = ({
         const response = await supportSettingsAtlassianDiscoverProjects({
           body: credentials,
         });
-        setProjects(response.data || []);
+        form.change('projects', response.data || []);
       } catch (e: any) {
         setError(
           e.response?.data?.detail ||
@@ -49,62 +57,82 @@ export const ProjectStep = ({
     };
 
     loadProjects();
-  }, [credentials]);
+  }, []);
 
   const handleContinue = () => {
-    const selected = projects.find((p) => p.id === selectedId);
-    if (selected) {
-      onSelected(selected, projects);
-    }
+    // Reset downstream state when project changes
+    form.change('requestTypes', []);
+    form.change('selectedRequestTypeIds', []);
+    form.change('customFields', []);
+    form.change('fieldMappings', {});
+    // Advance to next step
+    props.handleSubmit();
   };
+
+  // Custom footer for this step
+  const renderFooter = () => (
+    <>
+      <SubmitButton
+        submitting={false}
+        variant="tertiary"
+        className="min-w-125px me-auto"
+        onClick={() => props.onPrev(values)}
+        type="button"
+        label={translate('Back')}
+        iconNode={<CaretLeftIcon weight="bold" />}
+        iconOnLeft
+      />
+      <CloseDialogButton className="min-w-125px" />
+      <SubmitButton
+        submitting={false}
+        disabled={!values.selectedProjectId || loading}
+        label={translate('Continue')}
+        onClick={handleContinue}
+        type="button"
+        className="btn-icon-right min-w-125px"
+      >
+        <span className="svg-icon svg-icon-2">
+          <CaretRightIcon weight="bold" />
+        </span>
+      </SubmitButton>
+    </>
+  );
 
   if (loading) {
     return (
-      <div className="text-center py-10">
-        <Spinner animation="border" />
-        <p className="mt-4">
-          {translate('Discovering Service Desk projects...')}
-        </p>
-      </div>
+      <WizardModal {...props} renderFooter={renderFooter}>
+        <div className="text-center py-10">
+          <Spinner animation="border" />
+          <p className="mt-4">
+            {translate('Discovering Service Desk projects...')}
+          </p>
+        </div>
+      </WizardModal>
     );
   }
 
   if (error) {
     return (
-      <div>
+      <WizardModal {...props} renderFooter={renderFooter}>
         <Alert variant="danger">{error}</Alert>
-        <div className="d-flex justify-content-end gap-2">
-          <ActionButton
-            action={onBack}
-            variant="secondary"
-            title={translate('Back')}
-          />
-        </div>
-      </div>
+      </WizardModal>
     );
   }
 
-  if (projects.length === 0) {
+  if (values.projects.length === 0) {
     return (
-      <div>
+      <WizardModal {...props} renderFooter={renderFooter}>
         <Alert variant="warning">
           {translate(
             'No Service Desk projects found. Please ensure you have access to at least one Service Desk project.',
           )}
         </Alert>
-        <div className="d-flex justify-content-end gap-2">
-          <ActionButton
-            action={onBack}
-            variant="secondary"
-            title={translate('Back')}
-          />
-        </div>
-      </div>
+      </WizardModal>
     );
   }
 
   return (
-    <div>
+    <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Select Service Desk Project')}</h4>
       <p className="text-muted mb-4">
         {translate(
@@ -113,23 +141,25 @@ export const ProjectStep = ({
       </p>
 
       <div className="row g-3 mb-6">
-        {projects.map((project) => (
+        {values.projects.map((project) => (
           <div key={project.id} className="col-md-6">
             <Card
               className={`cursor-pointer h-100 ${
-                selectedId === project.id
+                values.selectedProjectId === project.id
                   ? 'border-primary border-2'
                   : 'border-secondary'
               }`}
-              onClick={() => setSelectedId(project.id)}
+              onClick={() => form.change('selectedProjectId', project.id)}
             >
               <Card.Body>
                 <div className="d-flex align-items-start">
                   <FormCheck
                     type="radio"
                     className="me-3"
-                    checked={selectedId === project.id}
-                    onChange={() => setSelectedId(project.id)}
+                    checked={values.selectedProjectId === project.id}
+                    onChange={() =>
+                      form.change('selectedProjectId', project.id)
+                    }
                   />
                   <div>
                     <h5 className="mb-1">
@@ -148,25 +178,6 @@ export const ProjectStep = ({
           </div>
         ))}
       </div>
-
-      <div className="d-flex justify-content-end gap-2">
-        <ActionButton
-          action={onCancel}
-          variant="secondary"
-          title={translate('Cancel')}
-        />
-        <ActionButton
-          action={onBack}
-          variant="tertiary"
-          title={translate('Back')}
-        />
-        <ActionButton
-          action={handleContinue}
-          variant="primary"
-          disabled={!selectedId}
-          title={translate('Continue')}
-        />
-      </div>
-    </div>
+    </WizardModal>
   );
 };

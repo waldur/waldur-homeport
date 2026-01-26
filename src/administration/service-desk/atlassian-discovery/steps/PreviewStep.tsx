@@ -1,47 +1,66 @@
+import { CaretLeftIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Alert, Card, Table } from 'react-bootstrap';
+import { useFormState } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
 
 import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import type { DiscoveryState } from '../types';
+import type { AtlassianFormValues } from '../types';
 
-interface PreviewStepProps {
-  state: DiscoveryState;
-  onBack: () => void;
-  onClose: () => void;
-}
-
-export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
+/**
+ * Step 5: Preview and Save
+ *
+ * Shows a summary of all configured settings and saves to the backend.
+ */
+export const PreviewStep: FC<WizardStepProps> = (props) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+  const { values } = useFormState<AtlassianFormValues>();
   const [saving, setSaving] = useState(false);
+
+  const selectedProject = values.projects.find(
+    (p) => p.id === values.selectedProjectId,
+  );
+
+  const selectedRequestTypes = values.requestTypes.filter((rt) =>
+    (values.selectedRequestTypeIds || []).includes(rt.id),
+  );
 
   const handleSave = async () => {
     setSaving(true);
     try {
       await supportSettingsAtlassianSaveSettings({
         body: {
-          ...state.credentials!,
-          project_id: state.selectedProject?.id || '',
-          // Selected request types are activated in the database by the backend
-          issue_types: state.selectedRequestTypes.map((rt) => rt.name),
-          reporter_field: state.fieldMappings.reporter_field,
-          impact_field: state.fieldMappings.impact_field,
-          organisation_field: state.fieldMappings.organisation_field,
-          project_field: state.fieldMappings.project_field,
-          affected_resource_field: state.fieldMappings.affected_resource_field,
-          caller_field: state.fieldMappings.caller_field,
-          template_field: state.fieldMappings.template_field,
-          waldur_backend_id_field: state.fieldMappings.waldur_backend_id_field,
+          api_url: values.api_url,
+          auth_method: values.auth_method,
+          email: values.email,
+          token: values.token,
+          personal_access_token: values.personal_access_token,
+          username: values.username,
+          password: values.password,
+          verify_ssl: values.verify_ssl,
+          project_id: values.selectedProjectId || '',
+          issue_types: selectedRequestTypes.map((rt) => rt.name),
+          reporter_field: values.fieldMappings?.reporter_field,
+          impact_field: values.fieldMappings?.impact_field,
+          organisation_field: values.fieldMappings?.organisation_field,
+          project_field: values.fieldMappings?.project_field,
+          affected_resource_field:
+            values.fieldMappings?.affected_resource_field,
+          caller_field: values.fieldMappings?.caller_field,
+          template_field: values.fieldMappings?.template_field,
+          waldur_backend_id_field:
+            values.fieldMappings?.waldur_backend_id_field,
           default_offering_issue_type:
-            state.fieldMappings.default_offering_issue_type,
+            values.fieldMappings?.default_offering_issue_type,
           confirm_save: true,
         },
       });
@@ -61,8 +80,31 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
     }
   };
 
+  // Custom footer for this step
+  const renderFooter = () => (
+    <>
+      <SubmitButton
+        submitting={false}
+        variant="tertiary"
+        className="min-w-125px me-auto"
+        onClick={() => props.onPrev(values)}
+        type="button"
+        label={translate('Back')}
+        iconNode={<CaretLeftIcon weight="bold" />}
+        iconOnLeft
+      />
+      <CloseDialogButton className="min-w-125px" />
+      <SubmitButton
+        submitting={saving}
+        label={translate('Save Settings')}
+        onClick={handleSave}
+        type="button"
+      />
+    </>
+  );
+
   return (
-    <div>
+    <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Preview Settings')}</h4>
       <p className="text-muted mb-4">
         {translate(
@@ -82,14 +124,14 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                   {translate('API URL')}
                 </td>
                 <td>
-                  <code>{state.credentials?.api_url}</code>
+                  <code>{values.api_url}</code>
                 </td>
               </tr>
               <tr>
                 <td className="text-muted">
                   {translate('Authentication Method')}
                 </td>
-                <td>{state.credentials?.auth_method}</td>
+                <td>{values.auth_method}</td>
               </tr>
             </tbody>
           </Table>
@@ -108,16 +150,14 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                   {translate('Selected Project')}
                 </td>
                 <td>
-                  <strong>{state.selectedProject?.name}</strong>{' '}
-                  <span className="text-muted">
-                    ({state.selectedProject?.key})
-                  </span>
+                  <strong>{selectedProject?.name}</strong>{' '}
+                  <span className="text-muted">({selectedProject?.key})</span>
                 </td>
               </tr>
               <tr>
                 <td className="text-muted">{translate('Project ID')}</td>
                 <td>
-                  <code>{state.selectedProject?.id}</code>
+                  <code>{selectedProject?.id}</code>
                 </td>
               </tr>
             </tbody>
@@ -130,7 +170,7 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
           <h5 className="mb-0">{translate('Request Types')}</h5>
         </Card.Header>
         <Card.Body>
-          {state.selectedRequestTypes.length > 0 ? (
+          {selectedRequestTypes.length > 0 ? (
             <Table borderless size="sm">
               <thead>
                 <tr>
@@ -139,7 +179,7 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                 </tr>
               </thead>
               <tbody>
-                {state.selectedRequestTypes.map((rt) => (
+                {selectedRequestTypes.map((rt) => (
                   <tr key={rt.id}>
                     <td>{rt.name}</td>
                     <td>
@@ -169,8 +209,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                   {translate('Reporter Field')}
                 </td>
                 <td>
-                  {state.fieldMappings.reporter_field ? (
-                    <code>{state.fieldMappings.reporter_field}</code>
+                  {values.fieldMappings?.reporter_field ? (
+                    <code>{values.fieldMappings.reporter_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -181,8 +221,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
               <tr>
                 <td className="text-muted">{translate('Impact Field')}</td>
                 <td>
-                  {state.fieldMappings.impact_field ? (
-                    <code>{state.fieldMappings.impact_field}</code>
+                  {values.fieldMappings?.impact_field ? (
+                    <code>{values.fieldMappings.impact_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -195,8 +235,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                   {translate('Organisation Field')}
                 </td>
                 <td>
-                  {state.fieldMappings.organisation_field ? (
-                    <code>{state.fieldMappings.organisation_field}</code>
+                  {values.fieldMappings?.organisation_field ? (
+                    <code>{values.fieldMappings.organisation_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -207,8 +247,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
               <tr>
                 <td className="text-muted">{translate('Project Field')}</td>
                 <td>
-                  {state.fieldMappings.project_field ? (
-                    <code>{state.fieldMappings.project_field}</code>
+                  {values.fieldMappings?.project_field ? (
+                    <code>{values.fieldMappings.project_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -221,8 +261,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                   {translate('Affected Resource Field')}
                 </td>
                 <td>
-                  {state.fieldMappings.affected_resource_field ? (
-                    <code>{state.fieldMappings.affected_resource_field}</code>
+                  {values.fieldMappings?.affected_resource_field ? (
+                    <code>{values.fieldMappings.affected_resource_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -233,8 +273,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
               <tr>
                 <td className="text-muted">{translate('Caller Field')}</td>
                 <td>
-                  {state.fieldMappings.caller_field ? (
-                    <code>{state.fieldMappings.caller_field}</code>
+                  {values.fieldMappings?.caller_field ? (
+                    <code>{values.fieldMappings.caller_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -245,8 +285,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
               <tr>
                 <td className="text-muted">{translate('Template Field')}</td>
                 <td>
-                  {state.fieldMappings.template_field ? (
-                    <code>{state.fieldMappings.template_field}</code>
+                  {values.fieldMappings?.template_field ? (
+                    <code>{values.fieldMappings.template_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -259,8 +299,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                   {translate('Waldur Backend ID Field')}
                 </td>
                 <td>
-                  {state.fieldMappings.waldur_backend_id_field ? (
-                    <code>{state.fieldMappings.waldur_backend_id_field}</code>
+                  {values.fieldMappings?.waldur_backend_id_field ? (
+                    <code>{values.fieldMappings.waldur_backend_id_field}</code>
                   ) : (
                     <span className="text-muted">
                       {translate('Not mapped')}
@@ -271,11 +311,11 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
               <tr>
                 <td className="text-muted">{translate('Default Priority')}</td>
                 <td>
-                  {state.fieldMappings.default_priority ? (
+                  {values.fieldMappings?.default_priority ? (
                     <>
-                      {state.priorities.find(
-                        (p) => p.id === state.fieldMappings.default_priority,
-                      )?.name || state.fieldMappings.default_priority}
+                      {(values.priorities || []).find(
+                        (p) => p.id === values.fieldMappings?.default_priority,
+                      )?.name || values.fieldMappings.default_priority}
                     </>
                   ) : (
                     <span className="text-muted">{translate('Not set')}</span>
@@ -287,8 +327,8 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
                   {translate('Default Offering Issue Type')}
                 </td>
                 <td>
-                  {state.fieldMappings.default_offering_issue_type ? (
-                    <>{state.fieldMappings.default_offering_issue_type}</>
+                  {values.fieldMappings?.default_offering_issue_type ? (
+                    <>{values.fieldMappings.default_offering_issue_type}</>
                   ) : (
                     <span className="text-muted">{translate('Not set')}</span>
                   )}
@@ -304,25 +344,6 @@ export const PreviewStep = ({ state, onBack, onClose }: PreviewStepProps) => {
           'Note: Credentials (API token, password, etc.) will be securely stored and are not shown in this preview.',
         )}
       </Alert>
-
-      <div className="d-flex justify-content-end gap-2 mt-6">
-        <ActionButton
-          action={onClose}
-          variant="secondary"
-          title={translate('Cancel')}
-        />
-        <ActionButton
-          action={onBack}
-          variant="tertiary"
-          title={translate('Back')}
-        />
-        <SubmitButton
-          submitting={saving}
-          onClick={handleSave}
-          label={translate('Save Settings')}
-          type="button"
-        />
-      </div>
-    </div>
+    </WizardModal>
   );
 };

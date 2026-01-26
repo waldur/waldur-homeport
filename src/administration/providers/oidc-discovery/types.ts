@@ -1,5 +1,4 @@
 import type {
-  DiscoverMetadataRequestRequest,
   DiscoverMetadataResponse,
   IdentityProvider,
   WaldurFieldSuggestion,
@@ -12,51 +11,41 @@ export interface FieldMappingChoice {
   customClaim?: string;
 }
 
-export interface OidcDiscoveryState {
+/**
+ * Form values for OIDC Discovery wizard.
+ * All wizard state is stored in Final Form values.
+ */
+export interface OidcFormValues {
   // Step 1: Connection
-  connection: DiscoverMetadataRequestRequest | null;
-  connectionValid: boolean;
-  clientId: string;
-  clientSecret: string;
+  discovery_url: string;
+  verify_ssl: boolean;
+  client_id: string;
+  client_secret: string;
 
-  // Step 2: Discovery
+  // Step 2: Discovery (populated by DiscoveryStep)
   discoveryResult: DiscoverMetadataResponse | null;
-  claimsNotExposed: boolean;
   manualClaims: string[];
 
   // Step 3: Mapping
   fieldMappings: FieldMappingChoice[];
 
-  // Step 4: Configuration
-  configuration: {
-    label: string;
-    management_url: string;
-    protected_fields: string;
-    extra_scope: string;
-    user_field: string;
-    user_claim: string;
-    allowed_redirects: string[];
-    enable_pkce: boolean;
-    enable_post_logout_redirect: boolean;
-    is_active: boolean;
-  };
-
-  // Existing provider (for re-discovery)
-  existingProvider?: IdentityProvider;
+  // Step 4 & 5: Configuration
+  label: string;
+  management_url: string;
+  protected_fields: string;
+  extra_scope: string;
+  user_field: string;
+  user_claim: string;
+  allowed_redirects: string[];
+  enable_pkce: boolean;
+  enable_post_logout_redirect: boolean;
+  is_active: boolean;
 }
 
 export interface OidcDiscoveryDialogResolve {
   provider?: IdentityProvider;
   type: string;
   refetch: () => void;
-}
-
-export interface StepProps {
-  state: OidcDiscoveryState;
-  updateState: (updates: Partial<OidcDiscoveryState>) => void;
-  onNext: () => void;
-  onBack: () => void;
-  onCancel: () => void;
 }
 
 // Re-export for convenience

@@ -1,4 +1,3 @@
-import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
@@ -7,40 +6,23 @@ import {
   MessageTemplateRequest,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
 import { required } from '@waldur/core/validators';
 import { FormContainer, StringField, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
+import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
 
-const BroadcastFormDialog = lazyComponent(() =>
-  import('./BroadcastFormDialog').then((module) => ({
-    default: module.BroadcastFormDialog,
-  })),
-);
+import { BroadcastFormData } from './types';
 
 export const BroadcastSaveAsTemplateDialog = reduxForm<
   MessageTemplateRequest,
-  { resolve: { refetch; broadcastData; broadcastUuid? } }
+  { resolve: { refetch; broadcastData: BroadcastFormData } }
 >({
   form: 'BroadcastSaveAsTemplateDialog',
 })(({ submitting, handleSubmit, resolve }) => {
   const dispatch = useDispatch();
-  const backToBroadcast = (broadcastData) =>
-    dispatch(
-      openModalDialog(BroadcastFormDialog, {
-        dialogClassName: 'modal-dialog-centered',
-        resolve: {
-          refetch: resolve.refetch,
-          uuid: resolve.broadcastUuid, // We need this if we came from the edit form
-        },
-        initialValues: broadcastData,
-        size: 'xl',
-      }),
-    );
   const callback = useCallback(
     async (formData: MessageTemplateRequest) => {
       try {
@@ -52,7 +34,7 @@ export const BroadcastSaveAsTemplateDialog = reduxForm<
         });
         await resolve.refetch();
         dispatch(
-          showSuccess(translate('Broadcast has been save as a template.')),
+          showSuccess(translate('Broadcast has been saved as a template.')),
         );
         dispatch(closeModalDialog());
       } catch (e) {
@@ -79,13 +61,8 @@ export const BroadcastSaveAsTemplateDialog = reduxForm<
             validate={required}
           />
 
-          <div className="d-flex justify-content-between">
-            <ActionButton
-              action={() => backToBroadcast(resolve.broadcastData)}
-              variant="secondary"
-              iconNode={<ArrowLeftIcon weight="bold" />}
-              title={translate('Back')}
-            />
+          <div className="d-flex justify-content-end gap-2">
+            <CloseDialogButton />
             <SubmitButton submitting={submitting} label={translate('Save')} />
           </div>
         </FormContainer>

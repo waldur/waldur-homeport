@@ -14,10 +14,10 @@ import {
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
 import { formatISODate } from '@waldur/core/dateUtils';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFinalFormContainer } from '@waldur/form/WizardFinalFormContainer';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { useNotify } from '@waldur/store/hooks';
+import { Wizard } from '@waldur/wizard';
 import { Customer } from '@waldur/workspace/types';
 
 import { Step1ProjectInfo } from './Step1ProjectInfo';
@@ -174,7 +174,7 @@ export const ProjectCreateDialog = ({
   }, [selectedCustomer]);
 
   return (
-    <WizardFinalFormContainer
+    <Wizard<ProjectFormData>
       onSubmit={onSubmit}
       submitLabel={translate('Create')}
       steps={WizardStepsData.steps}
@@ -183,7 +183,7 @@ export const ProjectCreateDialog = ({
       subtitle={translate(
         'Provide the required information to set up a new project.',
       )}
-      initialValues={{ customer }}
+      initialValues={{ customer: customer as { url: string } }}
       data={{
         initialCustomer: customer,
         selectedCustomer,

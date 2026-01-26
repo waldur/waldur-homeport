@@ -1,18 +1,18 @@
-import { useMemo, useEffect } from 'react';
+import { FC, useEffect, useMemo } from 'react';
 import { Card, Form } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 
 import { Badge } from '@waldur/core/Badge';
-import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
 import {
   isProfileAttributeEnabled,
   ProfileAttribute,
 } from '@waldur/user/support/profileAttributes';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import type {
   FieldMappingChoice,
-  StepProps,
+  OidcFormValues,
   WaldurFieldSuggestion,
 } from '../types';
 
@@ -26,12 +26,12 @@ interface FieldMappingRowProps {
   onChange: (mapping: FieldMappingChoice) => void;
 }
 
-const FieldMappingRow = ({
+const FieldMappingRow: FC<FieldMappingRowProps> = ({
   field,
   mapping,
   allClaims,
   onChange,
-}: FieldMappingRowProps) => {
+}) => {
   const selectedValue = mapping?.isCustom
     ? CUSTOM_CLAIM
     : mapping?.selectedClaim || NOT_MAPPED;
@@ -68,7 +68,6 @@ const FieldMappingRow = ({
     });
   };
 
-  // Build options with suggested claims at the top
   const suggestedSet = new Set(field.suggested_claims);
   const availableSet = new Set(field.available_claims);
 
@@ -86,7 +85,6 @@ const FieldMappingRow = ({
         >
           <option value={NOT_MAPPED}>-- {translate('Not mapped')} --</option>
 
-          {/* Available claims with suggestions marked */}
           {field.available_claims.length > 0 && (
             <optgroup label={translate('Available Claims')}>
               {field.available_claims.map((claim) => (
@@ -98,7 +96,6 @@ const FieldMappingRow = ({
             </optgroup>
           )}
 
-          {/* Other claims from the IdP */}
           {allClaims.filter((c) => !availableSet.has(c)).length > 0 && (
             <optgroup label={translate('Other Claims')}>
               {allClaims
@@ -153,40 +150,38 @@ const FieldMappingRow = ({
   );
 };
 
-export const MappingStep = ({
-  state,
-  updateState,
-  onNext,
-  onBack,
-  onCancel,
-}: StepProps) => {
+export const MappingStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<OidcFormValues>();
+  const { values } = useFormState<OidcFormValues>();
+  const existingProvider = props.data?.existingProvider;
+
   // Filter fields to only show enabled profile attributes
   const enabledFields = useMemo(() => {
-    if (!state.discoveryResult?.waldur_fields) {
+    if (!values.discoveryResult?.waldur_fields) {
       return [];
     }
-    return state.discoveryResult.waldur_fields.filter((field) =>
+    return values.discoveryResult.waldur_fields.filter((field) =>
       isProfileAttributeEnabled(field.field as ProfileAttribute),
     );
-  }, [state.discoveryResult?.waldur_fields]);
+  }, [values.discoveryResult?.waldur_fields]);
 
   // Combine discovered claims with manual claims
   const allClaims = useMemo(() => {
     const claims = [
-      ...(state.discoveryResult?.claims_supported || []),
-      ...(state.manualClaims || []),
+      ...(values.discoveryResult?.claims_supported || []),
+      ...(values.manualClaims || []),
     ];
     return [...new Set(claims)];
-  }, [state.discoveryResult?.claims_supported, state.manualClaims]);
+  }, [values.discoveryResult?.claims_supported, values.manualClaims]);
 
   // Initialize mappings from existing provider or auto-select first available claim
   useEffect(() => {
-    if (state.fieldMappings.length === 0 && enabledFields.length > 0) {
+    if (values.fieldMappings.length === 0 && enabledFields.length > 0) {
       const initialMappings: FieldMappingChoice[] = enabledFields.map(
         (field) => {
           // Check if there's an existing mapping from the provider
           const existingMapping =
-            state.existingProvider?.attribute_mapping?.[field.field];
+            existingProvider?.attribute_mapping?.[field.field];
 
           if (existingMapping) {
             const isAvailable =
@@ -217,36 +212,36 @@ export const MappingStep = ({
         },
       );
 
-      updateState({ fieldMappings: initialMappings });
+      form.change('fieldMappings', initialMappings);
     }
   }, [
     enabledFields,
     allClaims,
-    state.existingProvider,
-    state.fieldMappings.length,
-    updateState,
+    existingProvider,
+    values.fieldMappings.length,
+    form,
   ]);
 
   const handleMappingChange = (mapping: FieldMappingChoice) => {
-    const newMappings = state.fieldMappings.filter(
+    const newMappings = values.fieldMappings.filter(
       (m) => m.waldurField !== mapping.waldurField,
     );
     newMappings.push(mapping);
-    updateState({ fieldMappings: newMappings });
+    form.change('fieldMappings', newMappings);
   };
 
   const getMappingForField = (
     fieldName: string,
   ): FieldMappingChoice | undefined => {
-    return state.fieldMappings.find((m) => m.waldurField === fieldName);
+    return values.fieldMappings.find((m) => m.waldurField === fieldName);
   };
 
-  const mappedCount = state.fieldMappings.filter(
+  const mappedCount = values.fieldMappings.filter(
     (m) => m.selectedClaim || (m.isCustom && m.customClaim),
   ).length;
 
   return (
-    <div>
+    <WizardModal {...props}>
       <h4 className="mb-4">{translate('Claim Mapping')}</h4>
       <p className="text-muted mb-4">
         {translate(
@@ -284,25 +279,6 @@ export const MappingStep = ({
           )}
         </Card.Body>
       </Card>
-
-      <div className="d-flex justify-content-end gap-2 mt-6">
-        <ActionButton
-          action={onCancel}
-          variant="secondary"
-          title={translate('Cancel')}
-        />
-        <ActionButton
-          action={onBack}
-          variant="tertiary"
-          title={translate('Back')}
-        />
-        <SubmitButton
-          submitting={false}
-          onClick={onNext}
-          label={translate('Continue to Configuration')}
-          type="button"
-        />
-      </div>
-    </div>
+    </WizardModal>
   );
 };

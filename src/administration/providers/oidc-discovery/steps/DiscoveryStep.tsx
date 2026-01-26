@@ -1,26 +1,35 @@
 import { useQuery } from '@tanstack/react-query';
-import { useState } from 'react';
+import { FC, useEffect, useState } from 'react';
 import { Alert, Card, Table } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 import { identityProvidersDiscoverMetadata } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { WarnCard } from '@waldur/core/WarnCard';
-import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import type { StepProps } from '../types';
+import type { OidcFormValues } from '../types';
 
-export const DiscoveryStep = ({
-  state,
-  updateState,
-  onNext,
-  onBack,
-  onCancel,
-}: StepProps) => {
+export const DiscoveryStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<OidcFormValues>();
+  const { values } = useFormState<OidcFormValues>();
   const [manualClaimInput, setManualClaimInput] = useState('');
+
+  // Auto-fix discovery URL if it doesn't contain the well-known path
+  const getDiscoveryUrl = (url: string) => {
+    if (!url) return url;
+    if (!url.includes('.well-known/openid-configuration')) {
+      return url.endsWith('/')
+        ? `${url}.well-known/openid-configuration`
+        : `${url}/.well-known/openid-configuration`;
+    }
+    return url;
+  };
+
+  const discoveryUrl = getDiscoveryUrl(values.discovery_url);
 
   const {
     data: discoveryResult,
@@ -28,20 +37,37 @@ export const DiscoveryStep = ({
     error,
     refetch,
   } = useQuery({
-    queryKey: ['OidcDiscovery', state.connection?.discovery_url],
+    queryKey: ['OidcDiscovery', discoveryUrl],
     queryFn: async () => {
-      if (!state.connection) {
-        throw new Error('Connection not configured');
-      }
       const response = await identityProvidersDiscoverMetadata({
-        body: state.connection,
+        body: {
+          discovery_url: discoveryUrl,
+          verify_ssl: values.verify_ssl,
+        },
       });
       return response.data;
     },
-    enabled: Boolean(state.connection),
+    enabled: Boolean(discoveryUrl),
     staleTime: 0,
     retry: false,
   });
+
+  // Store discovery result in form when it changes
+  useEffect(() => {
+    if (discoveryResult && discoveryResult !== values.discoveryResult) {
+      form.change('discoveryResult', discoveryResult);
+      // Update discovery_url to the fixed version
+      if (discoveryUrl !== values.discovery_url) {
+        form.change('discovery_url', discoveryUrl);
+      }
+    }
+  }, [
+    discoveryResult,
+    form,
+    values.discoveryResult,
+    discoveryUrl,
+    values.discovery_url,
+  ]);
 
   const claimsNotExposed =
     !discoveryResult?.claims_supported ||
@@ -50,41 +76,42 @@ export const DiscoveryStep = ({
   const handleAddManualClaim = () => {
     if (manualClaimInput.trim()) {
       const newClaims = [
-        ...(state.manualClaims || []),
+        ...(values.manualClaims || []),
         manualClaimInput.trim(),
       ];
-      updateState({ manualClaims: newClaims });
+      form.change('manualClaims', newClaims);
       setManualClaimInput('');
     }
   };
 
   const handleRemoveManualClaim = (claim: string) => {
-    const newClaims = (state.manualClaims || []).filter((c) => c !== claim);
-    updateState({ manualClaims: newClaims });
+    const newClaims = (values.manualClaims || []).filter((c) => c !== claim);
+    form.change('manualClaims', newClaims);
   };
 
-  const handleContinue = () => {
-    updateState({
-      discoveryResult: discoveryResult || null,
-      claimsNotExposed,
-    });
-    onNext();
-  };
+  const allClaims = [
+    ...(discoveryResult?.claims_supported || []),
+    ...(values.manualClaims || []),
+  ];
 
+  // Show loading state
   if (isLoading) {
     return (
-      <div className="text-center py-10">
-        <LoadingSpinner />
-        <p className="mt-4 text-muted">
-          {translate('Discovering OIDC metadata from identity provider...')}
-        </p>
-      </div>
+      <WizardModal {...props} submitDisabled>
+        <div className="text-center py-10">
+          <LoadingSpinner />
+          <p className="mt-4 text-muted">
+            {translate('Discovering OIDC metadata from identity provider...')}
+          </p>
+        </div>
+      </WizardModal>
     );
   }
 
+  // Show error state
   if (error) {
     return (
-      <div>
+      <WizardModal {...props} submitDisabled>
         <LoadingErred
           message={translate('Failed to discover OIDC metadata')}
           loadData={refetch}
@@ -93,33 +120,22 @@ export const DiscoveryStep = ({
           {(error as Error).message ||
             translate('Unable to connect to the discovery endpoint.')}
         </Alert>
-        <div className="d-flex justify-content-end gap-2 mt-6">
-          <ActionButton
-            action={onCancel}
-            variant="secondary"
-            title={translate('Cancel')}
-          />
-          <ActionButton
-            action={onBack}
-            variant="tertiary"
-            title={translate('Back')}
-          />
-        </div>
-      </div>
+      </WizardModal>
     );
   }
 
   if (!discoveryResult) {
-    return null;
+    return (
+      <WizardModal {...props} submitDisabled>
+        <div className="text-center py-10 text-muted">
+          {translate('No discovery results available.')}
+        </div>
+      </WizardModal>
+    );
   }
 
-  const allClaims = [
-    ...(discoveryResult.claims_supported || []),
-    ...(state.manualClaims || []),
-  ];
-
   return (
-    <div>
+    <WizardModal {...props}>
       <h4 className="mb-4">{translate('Discovery Results')}</h4>
       <p className="text-muted mb-4">
         {translate(
@@ -173,12 +189,12 @@ export const DiscoveryStep = ({
                 <Badge
                   key={claim}
                   variant={
-                    state.manualClaims?.includes(claim) ? 'warning' : 'default'
+                    values.manualClaims?.includes(claim) ? 'warning' : 'default'
                   }
                   outline
                 >
                   {claim}
-                  {state.manualClaims?.includes(claim) && (
+                  {values.manualClaims?.includes(claim) && (
                     <button
                       type="button"
                       className="btn-close ms-2"
@@ -208,12 +224,14 @@ export const DiscoveryStep = ({
                 )}
               />
             </div>
-            <ActionButton
-              action={handleAddManualClaim}
-              variant="secondary"
-              title={translate('Add Claim')}
+            <button
+              type="button"
+              className="btn btn-secondary"
+              onClick={handleAddManualClaim}
               disabled={!manualClaimInput.trim()}
-            />
+            >
+              {translate('Add Claim')}
+            </button>
           </div>
         </Card.Body>
       </Card>
@@ -298,25 +316,6 @@ export const DiscoveryStep = ({
             </Card.Body>
           </Card>
         )}
-
-      <div className="d-flex justify-content-end gap-2 mt-6">
-        <ActionButton
-          action={onCancel}
-          variant="secondary"
-          title={translate('Cancel')}
-        />
-        <ActionButton
-          action={onBack}
-          variant="tertiary"
-          title={translate('Back')}
-        />
-        <SubmitButton
-          submitting={false}
-          onClick={handleContinue}
-          label={translate('Continue to Mapping')}
-          type="button"
-        />
-      </div>
-    </div>
+    </WizardModal>
   );
 };

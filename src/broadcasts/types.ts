@@ -20,6 +20,7 @@ export interface BroadcastFormData extends Broadcast {
   customers: IdNamePair[];
   offerings: IdNamePair[];
   all_users: boolean;
+  action?: 'draft' | 'submit';
 }
 
 interface QueryRequest {

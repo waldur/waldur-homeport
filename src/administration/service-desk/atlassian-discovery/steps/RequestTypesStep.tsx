@@ -1,37 +1,41 @@
-import { useState, useEffect } from 'react';
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
+import { FC, useState, useEffect } from 'react';
 import { Alert, FormCheck, Spinner, Table } from 'react-bootstrap';
+import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import type { AtlassianCredentials, DiscoveryState } from '../types';
+import type { AtlassianFormValues } from '../types';
 
-interface RequestTypesStepProps {
-  credentials: AtlassianCredentials;
-  project: NonNullable<DiscoveryState['selectedProject']>;
-  onSelected: (
-    selectedTypes: DiscoveryState['selectedRequestTypes'],
-    allTypes: DiscoveryState['requestTypes'],
-  ) => void;
-  onBack: () => void;
-  onCancel: () => void;
-}
-
-export const RequestTypesStep = ({
-  credentials,
-  project,
-  onSelected,
-  onBack,
-  onCancel,
-}: RequestTypesStepProps) => {
+/**
+ * Step 3: Request Types Selection
+ *
+ * Fetches available request types for the selected project and allows
+ * user to select which ones should be available for support tickets.
+ */
+export const RequestTypesStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<AtlassianFormValues>();
+  const { values } = useFormState<AtlassianFormValues>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [requestTypes, setRequestTypes] = useState<
-    DiscoveryState['requestTypes']
-  >([]);
-  const [selectedIds, setSelectedIds] = useState<Set<string>>(new Set());
 
+  // Extract credentials from form values
+  const credentials = {
+    api_url: values.api_url,
+    auth_method: values.auth_method,
+    email: values.email,
+    token: values.token,
+    personal_access_token: values.personal_access_token,
+    username: values.username,
+    password: values.password,
+    verify_ssl: values.verify_ssl,
+  };
+
+  // Load request types when step mounts
   useEffect(() => {
     const loadRequestTypes = async () => {
       setLoading(true);
@@ -40,10 +44,10 @@ export const RequestTypesStep = ({
         const response = await supportSettingsAtlassianDiscoverRequestTypes({
           body: {
             ...credentials,
-            project_id: project.id,
+            project_id: values.selectedProjectId!,
           },
         });
-        setRequestTypes(response.data || []);
+        form.change('requestTypes', response.data || []);
       } catch (e: any) {
         setError(
           e.response?.data?.detail ||
@@ -55,79 +59,99 @@ export const RequestTypesStep = ({
       }
     };
 
-    loadRequestTypes();
-  }, [credentials, project]);
+    if (values.selectedProjectId) {
+      loadRequestTypes();
+    }
+  }, [values.selectedProjectId]);
 
   const toggleSelection = (id: string) => {
-    setSelectedIds((prev) => {
-      const next = new Set(prev);
-      if (next.has(id)) {
-        next.delete(id);
-      } else {
-        next.add(id);
-      }
-      return next;
-    });
+    const currentIds = values.selectedRequestTypeIds || [];
+    const newIds = currentIds.includes(id)
+      ? currentIds.filter((i) => i !== id)
+      : [...currentIds, id];
+    form.change('selectedRequestTypeIds', newIds);
   };
 
   const toggleAll = () => {
-    if (selectedIds.size === requestTypes.length) {
-      setSelectedIds(new Set());
+    const currentIds = values.selectedRequestTypeIds || [];
+    if (currentIds.length === values.requestTypes.length) {
+      form.change('selectedRequestTypeIds', []);
     } else {
-      setSelectedIds(new Set(requestTypes.map((rt) => rt.id)));
+      form.change(
+        'selectedRequestTypeIds',
+        values.requestTypes.map((rt) => rt.id),
+      );
     }
   };
 
   const handleContinue = () => {
-    const selected = requestTypes.filter((rt) => selectedIds.has(rt.id));
-    onSelected(selected, requestTypes);
+    props.handleSubmit();
   };
+
+  const selectedCount = (values.selectedRequestTypeIds || []).length;
+
+  // Custom footer for this step
+  const renderFooter = () => (
+    <>
+      <SubmitButton
+        submitting={false}
+        variant="tertiary"
+        className="min-w-125px me-auto"
+        onClick={() => props.onPrev(values)}
+        type="button"
+        label={translate('Back')}
+        iconNode={<CaretLeftIcon weight="bold" />}
+        iconOnLeft
+      />
+      <CloseDialogButton className="min-w-125px" />
+      <SubmitButton
+        submitting={false}
+        disabled={selectedCount === 0 || loading}
+        label={translate('Continue')}
+        onClick={handleContinue}
+        type="button"
+        className="btn-icon-right min-w-125px"
+      >
+        <span className="svg-icon svg-icon-2">
+          <CaretRightIcon weight="bold" />
+        </span>
+      </SubmitButton>
+    </>
+  );
 
   if (loading) {
     return (
-      <div className="text-center py-10">
-        <Spinner animation="border" />
-        <p className="mt-4">{translate('Loading request types...')}</p>
-      </div>
+      <WizardModal {...props} renderFooter={renderFooter}>
+        <div className="text-center py-10">
+          <Spinner animation="border" />
+          <p className="mt-4">{translate('Loading request types...')}</p>
+        </div>
+      </WizardModal>
     );
   }
 
   if (error) {
     return (
-      <div>
+      <WizardModal {...props} renderFooter={renderFooter}>
         <Alert variant="danger">{error}</Alert>
-        <div className="d-flex justify-content-end gap-2">
-          <ActionButton
-            action={onBack}
-            variant="secondary"
-            title={translate('Back')}
-          />
-        </div>
-      </div>
+      </WizardModal>
     );
   }
 
-  if (requestTypes.length === 0) {
+  if (values.requestTypes.length === 0) {
     return (
-      <div>
+      <WizardModal {...props} renderFooter={renderFooter}>
         <Alert variant="warning">
           {translate(
             'No request types found for this project. Please configure request types in Jira Service Desk.',
           )}
         </Alert>
-        <div className="d-flex justify-content-end gap-2">
-          <ActionButton
-            action={onBack}
-            variant="secondary"
-            title={translate('Back')}
-          />
-        </div>
-      </div>
+      </WizardModal>
     );
   }
 
   return (
-    <div>
+    <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Select Request Types')}</h4>
       <p className="text-muted mb-4">
         {translate(
@@ -141,7 +165,7 @@ export const RequestTypesStep = ({
             <th style={{ width: 40 }}>
               <FormCheck
                 type="checkbox"
-                checked={selectedIds.size === requestTypes.length}
+                checked={selectedCount === values.requestTypes.length}
                 onChange={toggleAll}
               />
             </th>
@@ -151,7 +175,7 @@ export const RequestTypesStep = ({
           </tr>
         </thead>
         <tbody>
-          {requestTypes.map((rt) => (
+          {values.requestTypes.map((rt) => (
             <tr
               key={rt.id}
               className="cursor-pointer"
@@ -160,7 +184,9 @@ export const RequestTypesStep = ({
               <td>
                 <FormCheck
                   type="checkbox"
-                  checked={selectedIds.has(rt.id)}
+                  checked={(values.selectedRequestTypeIds || []).includes(
+                    rt.id,
+                  )}
                   onChange={() => toggleSelection(rt.id)}
                 />
               </td>
@@ -177,28 +203,10 @@ export const RequestTypesStep = ({
       <div className="d-flex justify-content-between">
         <span className="text-muted">
           {translate('{count} request type(s) selected', {
-            count: selectedIds.size,
+            count: selectedCount,
           })}
         </span>
-        <div className="d-flex gap-2">
-          <ActionButton
-            action={onCancel}
-            variant="secondary"
-            title={translate('Cancel')}
-          />
-          <ActionButton
-            action={onBack}
-            variant="tertiary"
-            title={translate('Back')}
-          />
-          <ActionButton
-            action={handleContinue}
-            variant="primary"
-            disabled={selectedIds.size === 0}
-            title={translate('Continue')}
-          />
-        </div>
       </div>
-    </div>
+    </WizardModal>
   );
 };
