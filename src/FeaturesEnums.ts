@@ -76,6 +76,7 @@ export enum SupportFeatures {
 export enum UserFeatures {
   disable_user_termination = 'user.disable_user_termination',
   notifications = 'user.notifications',
+  pending_user_actions = 'user.pending_user_actions',
   preferred_language = 'user.preferred_language',
   show_data_access = 'user.show_data_access',
   show_slug = 'user.show_slug',
