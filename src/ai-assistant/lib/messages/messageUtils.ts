@@ -90,7 +90,32 @@ export function extractTextFromMessageContent(
   return '';
 }
 
+/**
+ * Block-specific content extractors.
+ */
+const blockExtractors: Record<string, (block: UIBlock) => string> = {
+  markdown: (block) => block.content,
+  code: (block) => block.content,
+  mermaid: (block) => block.content,
+  table: (block) => {
+    if (!block.headers || !block.rows) return block.content;
+
+    // Format as Markdown table
+    const headers = block.headers.join(' | ');
+    const separator = block.headers.map(() => '---').join(' | ');
+    const rows = block.rows.map((row) => row.join(' | ')).join('\n');
+
+    return `${headers}\n${separator}\n${rows}`;
+  },
+};
+
 export function extractTextFromBlocks(blocks: UIBlock[]): string {
   if (!blocks || blocks.length === 0) return '';
-  return blocks.map((block) => block.content).join('\n\n');
+
+  return blocks
+    .map((block) => {
+      const extractor = blockExtractors[block.key] ?? ((b) => b.content);
+      return extractor(block);
+    })
+    .join('\n\n');
 }
