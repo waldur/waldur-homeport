@@ -1,81 +1,27 @@
-import { Card, Col, Row } from 'react-bootstrap';
-import { Field, FieldArray } from 'redux-form';
+import { Field } from 'react-final-form';
+import { FieldArray } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { FormGroup } from '../../FormGroup';
 
 import { STORAGE_FOLDER_PERMISSIONS } from './constants';
+import { StorageDataTypeArrayField } from './StorageDataTypeArrayField';
 
 interface StorageFolderConfigurationProps {
-  name: string;
   offering?: {
     components?: OfferingComponent[];
   };
 }
 
-const StorageDataTypeArrayField = ({ fields, meta: { touched, error } }) => (
-  <div>
-    {fields.map((member, index) => (
-      <Card key={index} className="mb-3">
-        <Card.Header className="d-flex justify-content-between align-items-center">
-          <span className="fw-bold">
-            {translate('Storage Data Type')} #{index + 1}
-          </span>
-          <CompactActionButton
-            title={translate('Remove')}
-            variant="danger"
-            action={() => fields.remove(index)}
-          />
-        </Card.Header>
-        <Card.Body>
-          <Row>
-            <Col md={6}>
-              <Field
-                name={`${member}.key`}
-                component={InputField}
-                label={translate('Key')}
-                help_text={translate(
-                  'Internal identifier (lowercase, no spaces)',
-                )}
-                placeholder={translate('Key')}
-                validate={required}
-              />
-            </Col>
-            <Col md={6}>
-              <Field
-                name={`${member}.label`}
-                component={InputField}
-                label={translate('Display Label')}
-                help_text={translate('User-friendly name shown in dropdown')}
-                placeholder={translate('Display Label')}
-                validate={required}
-              />
-            </Col>
-          </Row>
-        </Card.Body>
-      </Card>
-    ))}
-    <CompactActionButton
-      title={translate('Add Storage Data Type')}
-      variant="outline-primary"
-      action={() => fields.push({ key: '', label: '' })}
-    />
-    {touched && error && (
-      <div className="invalid-feedback d-block">{error}</div>
-    )}
-  </div>
-);
-
 export const StorageFolderConfiguration = ({
-  name,
   offering,
 }: StorageFolderConfigurationProps) => {
+  const name = 'storage_folder_config';
   // Filter only limit-based components
   const limitComponents =
     offering?.components?.filter(
@@ -99,7 +45,7 @@ export const StorageFolderConfiguration = ({
         <Field
           name={`${name}.component_type`}
           validate={required}
-          component={(fieldProps) => (
+          render={(fieldProps) => (
             <Select
               value={componentOptions.find(
                 (opt) => opt.value === fieldProps.input.value,
@@ -123,7 +69,7 @@ export const StorageFolderConfiguration = ({
       >
         <Field
           name={`${name}.default_hard_quota_multiplier`}
-          component={InputField}
+          component={InputField as any}
           type="number"
           min="1"
           step="0.1"
@@ -141,27 +87,30 @@ export const StorageFolderConfiguration = ({
       >
         <Field
           name={`${name}.inode_soft_multiplier`}
-          component={InputField}
+          component={InputField as any}
           type="number"
           min="1"
           placeholder="7000"
         />
       </FormGroup>
 
-      <FormGroup
-        label={translate('Inode Hard Multiplier')}
-        description={translate(
-          'Number of inodes per TB for hard quota (should be ≥ soft multiplier).',
+      <Field
+        name={`${name}.inode_hard_multiplier`}
+        type="number"
+        render={({ input, meta, ...props }) => (
+          <FormGroup
+            label={translate('Inode Hard Multiplier')}
+            description={translate(
+              'Number of inodes per TB for hard quota (should be ≥ soft multiplier).',
+            )}
+            meta={{ ...meta, touched: true }} // Force error display for cross-field validation
+          >
+            <InputField input={input as any} {...props} />
+          </FormGroup>
         )}
-      >
-        <Field
-          name={`${name}.inode_hard_multiplier`}
-          component={InputField}
-          type="number"
-          min="1"
-          placeholder="10000"
-        />
-      </FormGroup>
+        min="1"
+        placeholder="10000"
+      />
 
       <FormGroup
         label={translate('Storage Data Types')}
@@ -184,7 +133,7 @@ export const StorageFolderConfiguration = ({
         <Field
           name={`${name}.default_permission`}
           validate={required}
-          component={(fieldProps) => (
+          render={(fieldProps) => (
             <Select
               value={
                 STORAGE_FOLDER_PERMISSIONS.find(

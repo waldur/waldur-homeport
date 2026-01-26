@@ -1,4 +1,4 @@
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 import { OfferingComponent } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
@@ -8,17 +8,18 @@ import { translate } from '@waldur/i18n';
 
 import { FormGroup } from '../../FormGroup';
 
+const AnyInputField = InputField as any;
+
 interface ComponentMultiplierConfigurationProps {
-  name: string;
   offering?: {
     components?: OfferingComponent[];
   };
 }
 
 export const ComponentMultiplierConfiguration = ({
-  name,
   offering,
 }: ComponentMultiplierConfigurationProps) => {
+  const name = 'component_multiplier_config';
   // Filter only limit-based components
   const limitComponents =
     offering?.components?.filter(
@@ -32,48 +33,55 @@ export const ComponentMultiplierConfiguration = ({
 
   return (
     <>
-      <FormGroup
-        label={translate('Component Type')}
-        description={translate(
-          'Select the limit-based component this multiplier applies to',
-        )}
-        required
-      >
-        <Field
-          name={`${name}.component_type`}
-          validate={required}
-          component={(fieldProps) => (
+      <Field
+        name={`${name}.component_type`}
+        validate={required}
+        render={(fieldProps) => (
+          <FormGroup
+            label={translate('Component Type')}
+            description={translate(
+              'Select the limit-based component this multiplier applies to',
+            )}
+            required
+            meta={fieldProps.meta}
+          >
             <Select
               value={componentOptions.find(
                 (opt) => opt.value === fieldProps.input.value,
               )}
               onChange={(option) => fieldProps.input.onChange(option?.value)}
+              onBlur={fieldProps.input.onBlur}
               options={componentOptions}
               isClearable={false}
               placeholder={translate('Select component')}
               getOptionValue={(option) => option.value}
               getOptionLabel={(option) => option.label}
             />
-          )}
-        />
-      </FormGroup>
-
-      <FormGroup
-        label={translate('Multiplication Factor')}
-        description={translate(
-          'User input will be multiplied by this factor to calculate the component limit',
+          </FormGroup>
         )}
-        required
-      >
-        <Field
-          name={`${name}.factor`}
-          component={InputField}
-          type="number"
-          min="1"
-          validate={required}
-          placeholder={translate('e.g., 50000 for TB to inodes conversion')}
-        />
-      </FormGroup>
+      />
+
+      <Field
+        name={`${name}.factor`}
+        validate={required}
+        render={(fieldProps) => (
+          <FormGroup
+            label={translate('Multiplication Factor')}
+            description={translate(
+              'User input will be multiplied by this factor to calculate the component limit',
+            )}
+            required
+            meta={fieldProps.meta}
+          >
+            <AnyInputField
+              input={fieldProps.input}
+              type="number"
+              min="1"
+              placeholder={translate('e.g., 50000 for TB to inodes conversion')}
+            />
+          </FormGroup>
+        )}
+      />
 
       <FormGroup
         label={translate('Minimum Limit')}
@@ -83,7 +91,7 @@ export const ComponentMultiplierConfiguration = ({
       >
         <Field
           name={`${name}.min_limit`}
-          component={InputField}
+          component={AnyInputField}
           type="number"
           min="0"
           placeholder={translate('e.g., 1')}
@@ -98,7 +106,7 @@ export const ComponentMultiplierConfiguration = ({
       >
         <Field
           name={`${name}.max_limit`}
-          component={InputField}
+          component={AnyInputField}
           type="number"
           min="0"
           placeholder={translate('e.g., 100')}

@@ -1,6 +1,7 @@
+import arrayMutators from 'final-form-arrays';
 import { useCallback } from 'react';
+import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateOptions,
   marketplaceProviderOfferingsUpdateResourceOptions,
@@ -14,22 +15,15 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { formatOption } from '../../store/utils';
 
-import { OPTION_FORM_ID, FIELD_TYPES } from './constants';
+import { FIELD_TYPES } from './constants';
 import { OptionForm } from './OptionForm';
+import { validateOptionForm } from './validation';
 
-export const AddOptionDialog = reduxForm<
-  {},
-  { resolve: { offering; refetch; type } }
->({
-  form: OPTION_FORM_ID,
-  initialValues: {
-    type: FIELD_TYPES[0],
-  },
-})((props) => {
+export const AddOptionDialog = ({ resolve }) => {
   const dispatch = useDispatch();
   const update = useCallback(
     async (formData) => {
-      const oldOptions = props.resolve.offering[props.resolve.type];
+      const oldOptions = resolve.offering[resolve.type];
       const newOptions = {
         order: oldOptions?.order
           ? [...oldOptions.order, formData.name]
@@ -40,49 +34,59 @@ export const AddOptionDialog = reduxForm<
         },
       };
       try {
-        if (props.resolve.type === 'options') {
+        if (resolve.type === 'options') {
           await marketplaceProviderOfferingsUpdateOptions({
-            path: { uuid: props.resolve.offering.uuid },
+            path: { uuid: resolve.offering.uuid },
             body: {
               options: newOptions,
             },
           });
-        } else if (props.resolve.type === 'resource_options') {
+        } else if (resolve.type === 'resource_options') {
           await marketplaceProviderOfferingsUpdateResourceOptions({
-            path: { uuid: props.resolve.offering.uuid },
+            path: { uuid: resolve.offering.uuid },
             body: {
               resource_options: newOptions,
             },
           });
         }
         dispatch(showSuccess(translate('Option has been added successfully.')));
-        if (props.resolve.refetch) await props.resolve.refetch();
+        if (resolve.refetch) await resolve.refetch();
         dispatch(closeModalDialog());
       } catch (error) {
         dispatch(showErrorResponse(error, translate('Unable to add option.')));
       }
     },
-    [dispatch],
+    [dispatch, resolve],
   );
 
   return (
-    <form onSubmit={props.handleSubmit(update)}>
-      <ModalDialog
-        title={translate('Add option')}
-        footer={
-          <SubmitButton
-            disabled={props.invalid}
-            submitting={props.submitting}
-            label={translate('Create')}
-          />
-        }
-        closeButton
-      >
-        <OptionForm
-          resourceType={props.resolve.type}
-          offering={props.resolve.offering}
-        />
-      </ModalDialog>
-    </form>
+    <Form
+      onSubmit={update}
+      validate={validateOptionForm}
+      initialValues={{
+        type: FIELD_TYPES[0],
+      }}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Add option')}
+            footer={
+              <SubmitButton
+                disabled={invalid}
+                submitting={submitting}
+                label={translate('Create')}
+              />
+            }
+            closeButton
+          >
+            <OptionForm
+              resourceType={resolve.type}
+              offering={resolve.offering}
+            />
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
-});
+};

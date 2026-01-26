@@ -49,10 +49,10 @@ export const resolveProject = async (
   }
 
   // Priority 2: URL params
-  if (urlParams?.project_uuid) {
+  if (urlParams?.project_uuid?.uuid) {
     try {
       const response = await projectsRetrieve({
-        path: { uuid: urlParams.project_uuid },
+        path: { uuid: urlParams.project_uuid.uuid },
       });
       return { project: response.data };
     } catch {
@@ -121,9 +121,9 @@ export const resolveCustomer = async (
   }
 
   // Priority 2: URL params
-  if (urlParams?.organization_uuid) {
+  if (urlParams?.organization_uuid?.uuid) {
     try {
-      return await getCustomer(urlParams.organization_uuid);
+      return await getCustomer(urlParams.organization_uuid.uuid);
     } catch {
       // Failed to load organization from URL param, continue with fallback
     }

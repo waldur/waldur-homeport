@@ -1,6 +1,7 @@
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
-import { reduxForm } from 'redux-form';
+import arrayMutators from 'final-form-arrays';
+import { useCallback, useMemo } from 'react';
+import { Form } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsUpdateOptions,
   marketplaceProviderOfferingsUpdateResourceOptions,
@@ -14,8 +15,9 @@ import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { formatOption } from '../../store/utils';
 
-import { OPTION_FORM_ID, FIELD_TYPES } from './constants';
+import { FIELD_TYPES } from './constants';
 import { OptionForm } from './OptionForm';
+import { validateOptionForm } from './validation';
 
 const serializeCascadeConfig = (cascadeConfig) => {
   if (!cascadeConfig?.steps) return cascadeConfig;
@@ -36,88 +38,94 @@ const serializeCascadeConfig = (cascadeConfig) => {
   };
 };
 
-export const EditOptionDialog = connect<{}, {}, { resolve: { option } }>(
-  (_, ownProps) => ({
-    initialValues: {
-      ...ownProps.resolve.option,
-      type: FIELD_TYPES.find(
-        (fieldType) => fieldType.value === ownProps.resolve.option.type,
-      ) || {
-        value: ownProps.resolve.option.type,
-        label: ownProps.resolve.option.type,
-      },
-      choices: Array.isArray(ownProps.resolve.option.choices)
-        ? ownProps.resolve.option.choices.join(', ')
-        : ownProps.resolve.option.choices,
-      cascade_config: ownProps.resolve.option.cascade_config
-        ? serializeCascadeConfig(ownProps.resolve.option.cascade_config)
-        : undefined,
-    },
-  }),
-)(
-  reduxForm<{}, { resolve: { offering; option; type; refetch } }>({
-    form: OPTION_FORM_ID,
-  })((props) => {
-    const dispatch = useDispatch();
-    const update = useCallback(
-      async (formData) => {
-        const oldOptions = props.resolve.offering[props.resolve.type];
-        const newOptions = {
-          order: oldOptions.order,
-          options: {
-            ...oldOptions.options,
-            [props.resolve.option.name]: formatOption(formData),
-          },
-        };
-        try {
-          if (props.resolve.type === 'options') {
-            await marketplaceProviderOfferingsUpdateOptions({
-              path: { uuid: props.resolve.offering.uuid },
-              body: {
-                options: newOptions,
-              },
-            });
-          } else if (props.resolve.type === 'resource_options') {
-            await marketplaceProviderOfferingsUpdateResourceOptions({
-              path: { uuid: props.resolve.offering.uuid },
-              body: {
-                resource_options: newOptions,
-              },
-            });
-          }
-          dispatch(
-            showSuccess(translate('Option has been updated successfully.')),
-          );
-          if (props.resolve.refetch) await props.resolve.refetch();
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update an option.')),
-          );
-        }
-      },
-      [dispatch],
-    );
+export const EditOptionDialog = ({ resolve }) => {
+  const dispatch = useDispatch();
 
-    return (
-      <form onSubmit={props.handleSubmit(update)}>
-        <ModalDialog
-          title={translate('Edit option')}
-          footer={
-            <SubmitButton
-              disabled={props.invalid}
-              submitting={props.submitting}
-              label={translate('Save')}
+  const initialValues = useMemo(
+    () => ({
+      ...resolve.option,
+      type: FIELD_TYPES.find(
+        (fieldType) => fieldType.value === resolve.option.type,
+      ) || {
+        value: resolve.option.type,
+        label: resolve.option.type,
+      },
+      choices: Array.isArray(resolve.option.choices)
+        ? resolve.option.choices.join(', ')
+        : resolve.option.choices,
+      cascade_config: resolve.option.cascade_config
+        ? serializeCascadeConfig(resolve.option.cascade_config)
+        : undefined,
+    }),
+    [resolve.option],
+  );
+
+  const update = useCallback(
+    async (formData) => {
+      const oldOptions = resolve.offering[resolve.type];
+      const newOptions = {
+        order: oldOptions.order,
+        options: {
+          ...oldOptions.options,
+          [resolve.option.name]: formatOption(formData),
+        },
+      };
+      try {
+        if (resolve.type === 'options') {
+          await marketplaceProviderOfferingsUpdateOptions({
+            path: { uuid: resolve.offering.uuid },
+            body: {
+              options: newOptions,
+            },
+          });
+        } else if (resolve.type === 'resource_options') {
+          await marketplaceProviderOfferingsUpdateResourceOptions({
+            path: { uuid: resolve.offering.uuid },
+            body: {
+              resource_options: newOptions,
+            },
+          });
+        }
+        dispatch(
+          showSuccess(translate('Option has been updated successfully.')),
+        );
+        if (resolve.refetch) await resolve.refetch();
+        dispatch(closeModalDialog());
+      } catch (error) {
+        dispatch(
+          showErrorResponse(error, translate('Unable to update an option.')),
+        );
+      }
+    },
+    [dispatch, resolve],
+  );
+
+  return (
+    <Form
+      onSubmit={update}
+      initialValues={initialValues}
+      validate={validateOptionForm}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, submitting, invalid }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Edit option')}
+            footer={
+              <SubmitButton
+                disabled={invalid}
+                submitting={submitting}
+                label={translate('Save')}
+              />
+            }
+            closeButton
+          >
+            <OptionForm
+              resourceType={resolve.type}
+              offering={resolve.offering}
             />
-          }
-          closeButton
-        >
-          <OptionForm
-            resourceType={props.resolve.type}
-            offering={props.resolve.offering}
-          />
-        </ModalDialog>
-      </form>
-    );
-  }),
-);
+          </ModalDialog>
+        </form>
+      )}
+    />
+  );
+};

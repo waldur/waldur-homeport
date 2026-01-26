@@ -1,19 +1,14 @@
 import React from 'react';
 import { Card, Row, Col } from 'react-bootstrap';
-import { Field } from 'redux-form';
+import { Field } from 'react-final-form';
 
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
 
 import { FormGroup } from '../../FormGroup';
 
-interface K8sDefaultsConfigurationProps {
-  name: string;
-}
-
-export const K8sDefaultsConfiguration: React.FC<
-  K8sDefaultsConfigurationProps
-> = ({ name }) => {
+export const K8sDefaultsConfiguration: React.FC<{}> = () => {
+  const name = 'default_configs';
   return (
     <Card>
       <Card.Header>
@@ -70,11 +65,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_controller_vcpus`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="16"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -87,11 +82,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_controller_ram_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="64"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -107,11 +102,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_controller_system_disk_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="500"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -124,11 +119,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_controller_etcd_disk_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="1000"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -149,11 +144,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_lb_vcpus`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="16"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -166,11 +161,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_lb_ram_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="64"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -186,11 +181,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_lb_system_disk_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="500"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -203,11 +198,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_lb_logs_disk_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="1000"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -228,11 +223,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.minimal_worker_vcpus`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="16"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -245,11 +240,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.minimal_worker_ram_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="64"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -268,11 +263,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_worker_data_disk_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="10000"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -283,11 +278,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_storage_data_disk_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="10000"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -300,11 +295,11 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.default_storage_san_disk_gb`}
-                component={InputField}
+                component={InputField as any}
                 type="number"
                 min="1"
                 max="50000"
-                normalize={(value) => (value ? parseInt(value, 10) : undefined)}
+                parse={(value) => (value ? parseInt(value, 10) : undefined)}
               />
             </FormGroup>
           </Col>
@@ -330,7 +325,7 @@ export const K8sDefaultsConfiguration: React.FC<
             >
               <Field
                 name={`${name}.available_kubernetes_versions`}
-                component={InputField}
+                component={InputField as any}
                 type="text"
                 placeholder="1.32.0,1.33.0,1.34.0"
               />
