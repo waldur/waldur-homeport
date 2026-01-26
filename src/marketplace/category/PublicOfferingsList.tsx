@@ -1,4 +1,7 @@
+import { DotsThreeVerticalIcon } from '@phosphor-icons/react';
+import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
+import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import {
   marketplacePublicOfferingsList,
@@ -25,7 +28,6 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { OfferingCard } from '../common/OfferingCard';
-import { OfferingLink } from '../links/OfferingLink';
 import { mapStateToFilter } from '../offerings/admin/AdminOfferingsList';
 import { OfferingsListFilter } from '../offerings/list/OfferingsListFilter';
 import { getStates } from '../offerings/list/OfferingStateFilter';
@@ -35,19 +37,39 @@ import { Offering } from '../types';
 
 const RowActions = ({ row }) => {
   const user = useSelector(getUser);
+  const router = useRouter();
   const { isAllowed } = isOfferingRestrictedToProject(row, user);
   if (isFeatureVisible(MarketplaceFeatures.catalogue_only)) {
     return null;
   }
 
   return (
-    <OfferingLink
-      offering_uuid={row.uuid}
-      className="btn btn-secondary btn-sm"
-      disabled={!isAllowed}
-    >
-      {translate('Deploy')}
-    </OfferingLink>
+    <Dropdown drop="down" align="start">
+      <Dropdown.Toggle
+        variant="text-secondary"
+        className="btn-icon no-arrow"
+        disabled={!isAllowed}
+        size="sm"
+      >
+        <DotsThreeVerticalIcon size={22} weight="bold" />
+      </Dropdown.Toggle>
+      <Dropdown.Menu flip={false}>
+        <Dropdown.Item
+          onClick={() => {
+            if (isAllowed) {
+              setTimeout(() => {
+                router.stateService.go('marketplace-offering-public', {
+                  offering_uuid: row.uuid,
+                });
+              }, 100);
+            }
+          }}
+          disabled={!isAllowed}
+        >
+          {translate('Deploy')}
+        </Dropdown.Item>
+      </Dropdown.Menu>
+    </Dropdown>
   );
 };
 
