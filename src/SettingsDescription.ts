@@ -1319,7 +1319,7 @@ export const SettingsDescription = [
       {
         key: 'SOFTWARE_CATALOG_CLEANUP_ENABLED',
         description: translate('Enable automatic cleanup of old catalog data'),
-        default: false,
+        default: true,
         type: 'boolean',
       },
       {
