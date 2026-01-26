@@ -174,6 +174,14 @@ const billingFields: OfferingEditField[] = [
       'Hides pricing and components tabs in offering details to conceal billing information',
     ),
   },
+  {
+    label: translate('Enable SLURM periodic usage policy'),
+    key: 'plugin_options.slurm_periodic_policy_enabled',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, allows configuring QoS-based threshold enforcement, carryover logic, and fairshare decay for site-agent managed SLURM offerings.',
+    ),
+  },
 ];
 
 const LIFECYCLE_TABS = [

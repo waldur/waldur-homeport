@@ -81,7 +81,7 @@ export const MultiSelectOption = (props) => {
     </components.Option>
   );
 };
-const MultiSelectValue = (props: MultiValueProps) => (
+export const MultiSelectValue = (props: MultiValueProps) => (
   <Tag onClear={props.removeProps.onClick}>{props.children}</Tag>
 );
 

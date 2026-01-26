@@ -1,31 +1,166 @@
+import { EyeIcon, Lightning } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useState, useEffect, useMemo } from 'react';
-import { FormCheck } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import arrayMutators from 'final-form-arrays';
+import { FC, useState, useEffect, useMemo, useCallback } from 'react';
+import { Card, FormCheck } from 'react-bootstrap';
+import { Field, Form, useFormState, useForm } from 'react-final-form';
 import { useDispatch } from 'react-redux';
+import { components } from 'react-select';
 import {
   marketplaceSlurmPeriodicUsagePoliciesCreate,
   marketplaceSlurmPeriodicUsagePoliciesList,
   marketplaceSlurmPeriodicUsagePoliciesDestroy,
+  marketplaceSlurmPeriodicUsagePoliciesPartialUpdate,
   LimitTypeEnum,
+  PeriodEnum,
   QosStrategyEnum,
+  SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Panel } from '@waldur/core/Panel';
-import { NumberField, SelectField } from '@waldur/form';
+import { SaveButton } from '@waldur/core/SaveButton';
+import {
+  policyPeriodOptions,
+  validateEmails,
+} from '@waldur/customer/cost-policies/utils';
+import {
+  NumberField,
+  SelectField,
+  StringField,
+  SubmitButton,
+} from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { MultiSelectValue } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
+import { ComponentLimitsField } from '@waldur/marketplace/offerings/details/policies/ComponentLimitsField';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { openModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
 import { OfferingSectionProps } from '../types';
 
+import {
+  TresBillingWeightsField,
+  recordToArray,
+  arrayToRecord,
+} from './TresBillingWeightsField';
+
+const SlurmPolicyPreviewDialog = lazyComponent(() =>
+  import('./SlurmPolicyPreviewDialog').then((m) => ({
+    default: m.SlurmPolicyPreviewDialog,
+  })),
+);
+
+// Helper component to access form state and open preview dialog
+const PreviewButton: FC<{ offering: OfferingSectionProps['offering'] }> = ({
+  offering,
+}) => {
+  const dispatch = useDispatch();
+  const formState = useFormState();
+
+  const openPreview = useCallback(() => {
+    dispatch(
+      openModalDialog(SlurmPolicyPreviewDialog, {
+        resolve: {
+          formValues: {
+            grace_ratio: formState.values.grace_ratio,
+            fairshare_decay_half_life:
+              formState.values.fairshare_decay_half_life,
+            carryover_enabled: formState.values.carryover_enabled,
+          },
+          offering,
+        },
+        size: 'lg',
+      }),
+    );
+  }, [dispatch, formState.values, offering]);
+
+  return (
+    <SubmitButton
+      variant="outline-primary"
+      onClick={openPreview}
+      submitting={false}
+      type="button"
+      iconNode={<EyeIcon weight="bold" />}
+      iconOnLeft
+    >
+      {translate('Preview Impact')}
+    </SubmitButton>
+  );
+};
+
+// Preset selector component
+const PresetSelector: FC = () => {
+  const form = useForm();
+  const [selectedPreset, setSelectedPreset] = useState<string | null>(null);
+
+  const applyPreset = useCallback(
+    (preset: PolicyPreset) => {
+      // Apply all values from the preset
+      Object.entries(preset.values).forEach(([key, value]) => {
+        form.change(key as keyof SlurmPolicyFormData, value);
+      });
+      setSelectedPreset(preset.key);
+    },
+    [form],
+  );
+
+  return (
+    <div className="mb-6">
+      <div className="d-flex align-items-center gap-2 mb-3">
+        <Lightning weight="bold" className="text-primary" />
+        <span className="fw-semibold">{translate('Quick Configuration')}</span>
+      </div>
+      <div className="row g-3">
+        {policyPresets.map((preset) => (
+          <div key={preset.key} className="col-md-6 col-lg-3">
+            <Card
+              className={`h-100 cursor-pointer border-2 ${
+                selectedPreset === preset.key
+                  ? 'border-primary bg-light-primary'
+                  : 'border-light-dark'
+              }`}
+              onClick={() => applyPreset(preset)}
+              style={{ cursor: 'pointer' }}
+            >
+              <Card.Body className="p-3">
+                <Card.Title className="fs-7 fw-bold mb-2">
+                  {preset.label}
+                </Card.Title>
+                <Card.Text className="fs-8 text-gray-600 mb-0">
+                  {preset.description}
+                </Card.Text>
+              </Card.Body>
+            </Card>
+          </div>
+        ))}
+      </div>
+      <div className="form-text mt-2">
+        {translate(
+          'Select a preset to quickly configure common policy patterns. You can customize individual settings after applying a preset.',
+        )}
+      </div>
+    </div>
+  );
+};
+
+interface ComponentLimit {
+  type: string;
+  limit: number;
+}
+
+interface TresWeight {
+  key: string;
+  value: number;
+}
+
 interface SlurmPolicyFormData {
   limit_type: LimitTypeEnum;
   tres_billing_enabled: boolean;
-  tres_billing_weights: Record<string, number>;
+  tres_billing_weights_array: TresWeight[];
   fairshare_decay_half_life: number;
   grace_ratio: number;
   carryover_enabled: boolean;
@@ -33,6 +168,12 @@ interface SlurmPolicyFormData {
   qos_strategy: QosStrategyEnum;
   apply_to_all: boolean;
   organization_groups: string[];
+  actions: string[];
+  options: {
+    notify_external_user?: string;
+  };
+  component_limits_set: ComponentLimit[];
+  period: PeriodEnum;
 }
 
 const limitTypeOptions = [
@@ -52,14 +193,123 @@ const qosStrategyOptions = [
   },
 ];
 
-const initialValues: SlurmPolicyFormData = {
+// Policy presets for quick configuration
+interface PolicyPreset {
+  key: string;
+  label: string;
+  description: string;
+  values: Partial<SlurmPolicyFormData>;
+}
+
+const policyPresets: PolicyPreset[] = [
+  {
+    key: 'quarterly_soft',
+    label: translate('Quarterly Research (Soft Limits)'),
+    description: translate(
+      'Quarterly billing period with 20% grace ratio allowing overrun. Includes carryover of unused allocation and fairshare decay. Ideal for research projects with variable workloads.',
+    ),
+    values: {
+      period: 2 as PeriodEnum, // Quarterly
+      grace_ratio: 0.2,
+      carryover_enabled: true,
+      fairshare_decay_half_life: 15,
+      raw_usage_reset: false,
+      qos_strategy: 'progressive' as QosStrategyEnum,
+      limit_type: 'GrpTRESMins' as LimitTypeEnum,
+      tres_billing_enabled: true,
+      actions: [
+        'notify_organization_owners',
+        'request_slurm_resource_downscaling',
+      ],
+    },
+  },
+  {
+    key: 'monthly_strict',
+    label: translate('Monthly Strict'),
+    description: translate(
+      'Monthly billing with hard limits and no grace period. Usage resets each month with no carryover. Best for environments requiring strict cost control.',
+    ),
+    values: {
+      period: 1 as PeriodEnum, // Monthly
+      grace_ratio: 0,
+      carryover_enabled: false,
+      fairshare_decay_half_life: 7,
+      raw_usage_reset: true,
+      qos_strategy: 'threshold' as QosStrategyEnum,
+      limit_type: 'GrpTRESMins' as LimitTypeEnum,
+      tres_billing_enabled: true,
+      actions: [
+        'notify_organization_owners',
+        'block_creation_of_new_resources',
+        'request_slurm_resource_pausing',
+      ],
+    },
+  },
+  {
+    key: 'annual_grant',
+    label: translate('Annual Grant Allocation'),
+    description: translate(
+      'Annual billing period designed for research grants. Generous 30% grace ratio with carryover enabled. Slower decay preserves fairshare priority longer.',
+    ),
+    values: {
+      period: 4 as PeriodEnum, // Annual
+      grace_ratio: 0.3,
+      carryover_enabled: true,
+      fairshare_decay_half_life: 30,
+      raw_usage_reset: false,
+      qos_strategy: 'progressive' as QosStrategyEnum,
+      limit_type: 'GrpTRESMins' as LimitTypeEnum,
+      tres_billing_enabled: true,
+      actions: ['notify_organization_owners'],
+    },
+  },
+  {
+    key: 'tracking_only',
+    label: translate('Usage Tracking Only'),
+    description: translate(
+      'Track usage without enforcing limits. No QoS modifications, just notifications. Useful for monitoring before implementing enforcement.',
+    ),
+    values: {
+      period: 1 as PeriodEnum, // Monthly
+      grace_ratio: 1.0, // 100% grace = effectively no hard limit
+      carryover_enabled: false,
+      fairshare_decay_half_life: 15,
+      raw_usage_reset: true,
+      qos_strategy: 'threshold' as QosStrategyEnum,
+      limit_type: 'GrpTRESMins' as LimitTypeEnum,
+      tres_billing_enabled: false,
+      actions: ['notify_organization_owners'],
+    },
+  },
+];
+
+const slurmActionOptions = [
+  {
+    value: 'notify_organization_owners',
+    label: translate('Notify organization owners'),
+  },
+  {
+    value: 'notify_external_user',
+    label: translate('Notify external user'),
+  },
+  {
+    value: 'block_creation_of_new_resources',
+    label: translate('Block creation of new resources'),
+  },
+  {
+    value: 'request_slurm_resource_downscaling',
+    label: translate('Request SLURM resource downscaling (slowdown QoS)'),
+  },
+  {
+    value: 'request_slurm_resource_pausing',
+    label: translate('Request SLURM resource pausing (blocked QoS)'),
+  },
+];
+
+const defaultValues: SlurmPolicyFormData = {
   limit_type: 'GrpTRESMins' as LimitTypeEnum,
   tres_billing_enabled: true,
-  tres_billing_weights: {
-    CPU: 0.015625,
-    Mem: 0.001953125,
-    'GRES/gpu': 0.25,
-  },
+  tres_billing_weights_array: [],
   fairshare_decay_half_life: 15,
   grace_ratio: 0.2,
   carryover_enabled: true,
@@ -67,7 +317,45 @@ const initialValues: SlurmPolicyFormData = {
   qos_strategy: 'threshold' as QosStrategyEnum,
   apply_to_all: true,
   organization_groups: [],
+  actions: ['notify_organization_owners'],
+  options: {},
+  component_limits_set: [] as ComponentLimit[],
+  period: 3 as PeriodEnum, // Default to quarterly (3 months)
 };
+
+// Convert existing policy data to form values
+const policyToFormValues = (
+  policy: SlurmPeriodicUsagePolicy,
+): SlurmPolicyFormData => ({
+  limit_type: policy.limit_type || defaultValues.limit_type,
+  tres_billing_enabled:
+    policy.tres_billing_enabled ?? defaultValues.tres_billing_enabled,
+  tres_billing_weights_array: policy.tres_billing_weights
+    ? recordToArray(policy.tres_billing_weights as Record<string, number>)
+    : defaultValues.tres_billing_weights_array,
+  fairshare_decay_half_life:
+    policy.fairshare_decay_half_life ?? defaultValues.fairshare_decay_half_life,
+  grace_ratio: policy.grace_ratio ?? defaultValues.grace_ratio,
+  carryover_enabled:
+    policy.carryover_enabled ?? defaultValues.carryover_enabled,
+  raw_usage_reset: policy.raw_usage_reset ?? defaultValues.raw_usage_reset,
+  qos_strategy: policy.qos_strategy || defaultValues.qos_strategy,
+  apply_to_all: policy.apply_to_all ?? defaultValues.apply_to_all,
+  organization_groups: policy.organization_groups || [],
+  // Convert actions string to array
+  actions: policy.actions
+    ? policy.actions.split(',').map((a) => a.trim())
+    : defaultValues.actions,
+  options: (policy.options as { notify_external_user?: string }) || {},
+  component_limits_set:
+    policy.component_limits_set?.length > 0
+      ? policy.component_limits_set.map((limit) => ({
+          type: limit.type,
+          limit: limit.limit,
+        }))
+      : defaultValues.component_limits_set,
+  period: policy.period ?? defaultValues.period,
+});
 
 export const SlurmPolicySection: FC<OfferingSectionProps> = ({
   offering,
@@ -104,15 +392,28 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
     }
   }, [existingPolicies]);
 
-  // Compute dynamic initial values based on organization groups
-  const dynamicInitialValues = useMemo(
-    (): SlurmPolicyFormData => ({
-      ...initialValues,
+  // Get the first existing policy (if any) for editing
+  const existingPolicy = existingPolicies?.[0] || null;
+
+  // Compute initial values based on existing policy or defaults
+  const dynamicInitialValues = useMemo((): SlurmPolicyFormData => {
+    if (existingPolicy) {
+      return policyToFormValues(existingPolicy);
+    }
+    return {
+      ...defaultValues,
       apply_to_all: organizationGroups?.length === 0, // True when no groups available
       organization_groups: [],
-    }),
-    [organizationGroups],
-  );
+    };
+  }, [existingPolicy, organizationGroups]);
+
+  // Filter offering components to those that support limits/usage
+  const availableComponents = useMemo(() => {
+    if (!offering?.components) return [];
+    return offering.components.filter(
+      (c) => c.billing_type === 'usage' || c.billing_type === 'limit',
+    );
+  }, [offering?.components]);
 
   // Force checkbox to be checked when no organization groups exist
   useEffect(() => {
@@ -194,32 +495,42 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
     setIsSubmitting(true);
 
     try {
-      // First, remove existing policies if any
-      if (existingPolicies && existingPolicies.length > 0) {
-        await Promise.all(
-          existingPolicies.map((policy) =>
-            marketplaceSlurmPeriodicUsagePoliciesDestroy({
-              path: { uuid: policy.uuid },
-            }),
-          ),
-        );
-      }
-
-      // Create new policy
-      const policyData = {
-        ...formData,
-        offering: offering.url,
-        scope: offering.url,
-        actions: 'notify_organization_owners',
-        component_limits_set: [],
+      // Convert form data to API format
+      const {
+        actions: actionsArray,
+        tres_billing_weights_array,
+        ...restFormData
+      } = formData;
+      const apiData = {
+        ...restFormData,
+        actions: actionsArray.join(','),
+        tres_billing_weights: arrayToRecord(tres_billing_weights_array),
       };
 
-      await marketplaceSlurmPeriodicUsagePoliciesCreate({
-        body: policyData,
-      });
-      dispatch(
-        showSuccess(translate('SLURM policy has been saved successfully.')),
-      );
+      if (existingPolicy) {
+        // Update existing policy
+        await marketplaceSlurmPeriodicUsagePoliciesPartialUpdate({
+          path: { uuid: existingPolicy.uuid },
+          body: apiData,
+        });
+        dispatch(
+          showSuccess(translate('SLURM policy has been updated successfully.')),
+        );
+      } else {
+        // Create new policy
+        const policyData = {
+          ...apiData,
+          scope: offering.url,
+          component_limits_set: [],
+        };
+
+        await marketplaceSlurmPeriodicUsagePoliciesCreate({
+          body: policyData,
+        });
+        dispatch(
+          showSuccess(translate('SLURM policy has been created successfully.')),
+        );
+      }
 
       await refetchPolicies();
 
@@ -239,216 +550,298 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
     }
   };
 
-  return (
-    <Panel
-      title={translate('SLURM Periodic Usage Policy')}
-      subtitle={translate(
-        'Configure SLURM-specific periodic usage policy with decay and carryover logic.',
-      )}
-      titleClassName="fw-normal"
-      cardBordered
-    >
-      <div className="mb-6">
-        <FormCheck
-          type="switch"
-          id="slurm-policy-toggle"
-          checked={isPolicyEnabled}
-          onChange={(e) => handleTogglePolicy(e.target.checked)}
-          disabled={isSubmitting}
-          label={translate('Enable SLURM Periodic Usage Policy')}
-        />
-        <div className="form-text">
-          {translate(
-            'When enabled, allows configuration of SLURM-specific usage policies. When disabled, removes any existing policies from the backend.',
-          )}
-        </div>
+  const panelTitle = translate('SLURM Periodic Usage Policy');
+  const panelSubtitle = translate(
+    'Configure SLURM-specific periodic usage policy with decay and carryover logic.',
+  );
+
+  const enableToggle = (
+    <div className="mb-6">
+      <FormCheck
+        type="switch"
+        id="slurm-policy-toggle"
+        checked={isPolicyEnabled}
+        onChange={(e) => handleTogglePolicy(e.target.checked)}
+        disabled={isSubmitting}
+        label={translate('Enable SLURM Periodic Usage Policy')}
+      />
+      <div className="form-text">
+        {translate(
+          'When enabled, allows configuration of SLURM-specific usage policies. When disabled, removes any existing policies from the backend.',
+        )}
       </div>
+    </div>
+  );
 
-      {isPolicyEnabled && (
-        <Form
-          key={`slurm-form-${organizationGroups?.length || 0}`}
-          onSubmit={handleSubmit}
-          initialValues={dynamicInitialValues}
-          render={({ handleSubmit, form, pristine }) => (
-            <>
-              <div className="d-flex justify-content-end mb-4">
-                <div className="d-flex gap-3">
-                  <button
-                    type="button"
-                    className="btn btn-light"
-                    onClick={() => form.reset()}
-                    disabled={pristine || isSubmitting}
+  if (!isPolicyEnabled) {
+    return (
+      <Panel
+        title={panelTitle}
+        subtitle={panelSubtitle}
+        titleClassName="fw-normal"
+        cardBordered
+      >
+        {enableToggle}
+      </Panel>
+    );
+  }
+
+  return (
+    <Form
+      key={`slurm-form-${existingPolicy?.uuid || 'new'}-${organizationGroups?.length || 0}`}
+      onSubmit={handleSubmit}
+      initialValues={dynamicInitialValues}
+      mutators={{ ...arrayMutators }}
+      render={({ handleSubmit, form, pristine, dirty }) => (
+        <Panel
+          title={panelTitle}
+          subtitle={panelSubtitle}
+          titleClassName="fw-normal"
+          cardBordered
+          actions={
+            <div className="d-flex gap-3">
+              <PreviewButton offering={offering} />
+              <SubmitButton
+                variant="secondary"
+                onClick={() => form.reset()}
+                disabled={pristine}
+                submitting={isSubmitting}
+                type="button"
+              >
+                {translate('Reset')}
+              </SubmitButton>
+              <SaveButton
+                onClick={handleSubmit}
+                submitting={isSubmitting}
+                dirty={dirty}
+              />
+            </div>
+          }
+        >
+          {enableToggle}
+          <form id="slurm-policy-form" onSubmit={handleSubmit}>
+            <PresetSelector />
+
+            <FormGroup
+              label={translate('Policy Actions')}
+              help={translate(
+                'Select actions to trigger when usage thresholds are reached.',
+              )}
+              required
+            >
+              <Field
+                component={SelectField as any}
+                name="actions"
+                options={slurmActionOptions}
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                isMulti
+                simpleValue
+                placeholder={translate('Select actions...')}
+                components={{
+                  MultiValue: MultiSelectValue,
+                  ValueContainer: components.ValueContainer,
+                }}
+              />
+            </FormGroup>
+
+            <Field name="actions">
+              {({ input: actionsInput }) =>
+                actionsInput.value?.includes('notify_external_user') && (
+                  <FormGroup
+                    label={translate('External Email')}
+                    help={translate(
+                      'Comma-separated list of email addresses to notify.',
+                    )}
+                    required
                   >
-                    {translate('Reset')}
-                  </button>
-                  <button
-                    type="submit"
-                    form="slurm-policy-form"
-                    className="btn btn-primary"
-                    disabled={isSubmitting}
-                  >
-                    {isSubmitting
-                      ? translate('Saving...')
-                      : translate('Save Policy')}
-                  </button>
-                </div>
-              </div>
+                    <Field
+                      component={StringField as any}
+                      name="options.notify_external_user"
+                      validate={validateEmails}
+                      placeholder="admin@example.com, ops@example.com"
+                    />
+                  </FormGroup>
+                )
+              }
+            </Field>
 
-              <form id="slurm-policy-form" onSubmit={handleSubmit}>
-                <FormGroup label={translate('Limit Type')} required>
-                  <Field
-                    component={SelectField as any}
-                    name="limit_type"
-                    options={limitTypeOptions}
-                    getOptionValue={(option) => option.value}
-                    getOptionLabel={(option) => option.label}
-                    simpleValue
-                  />
-                </FormGroup>
+            {availableComponents.length > 0 && (
+              <ComponentLimitsField components={availableComponents} />
+            )}
 
-                <FormGroup
-                  help={translate(
-                    'Use TRES billing units instead of raw TRES values',
-                  )}
-                >
-                  <Field
-                    component={AwesomeCheckbox as any}
-                    name="tres_billing_enabled"
-                    label={translate('TRES Billing Enabled')}
-                  />
-                </FormGroup>
+            <FormGroup
+              label={translate('Period')}
+              help={translate(
+                'The time period over which usage is accumulated and limits are applied.',
+              )}
+              required
+            >
+              <Field
+                component={SelectField as any}
+                name="period"
+                options={Object.values(policyPeriodOptions)}
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                simpleValue
+              />
+            </FormGroup>
 
-                <FormGroup
-                  label={translate('Fairshare Decay Half-Life')}
-                  help={translate(
-                    'Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife)',
-                  )}
-                  required
-                >
-                  <Field
-                    component={NumberField as any}
-                    name="fairshare_decay_half_life"
-                    min={1}
-                    unit={translate('days')}
-                  />
-                </FormGroup>
+            <FormGroup label={translate('Limit Type')} required>
+              <Field
+                component={SelectField as any}
+                name="limit_type"
+                options={limitTypeOptions}
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                simpleValue
+              />
+            </FormGroup>
 
-                <FormGroup
-                  label={translate('Grace Ratio')}
-                  help={translate(
-                    'Grace period ratio (0.2 = 20% overconsumption allowed)',
-                  )}
-                  required
-                >
-                  <Field
-                    component={NumberField as any}
-                    name="grace_ratio"
-                    min={0}
-                    max={1}
-                    step={0.1}
-                  />
-                </FormGroup>
+            <FormGroup
+              help={translate(
+                'Use TRES billing units instead of raw TRES values',
+              )}
+            >
+              <Field
+                component={AwesomeCheckboxField as any}
+                name="tres_billing_enabled"
+                label={translate('TRES Billing Enabled')}
+              />
+            </FormGroup>
 
-                <FormGroup
-                  help={translate(
-                    'Enable unused allocation carryover to next period',
-                  )}
-                >
-                  <Field
-                    component={AwesomeCheckbox as any}
-                    name="carryover_enabled"
-                    label={translate('Carryover Enabled')}
-                  />
-                </FormGroup>
+            <Field name="tres_billing_enabled">
+              {({ input: tresBillingInput }) =>
+                tresBillingInput.value && <TresBillingWeightsField />
+              }
+            </Field>
 
-                <FormGroup
-                  help={translate(
-                    'Reset raw usage at period transitions (PriorityUsageResetPeriod=None)',
-                  )}
-                >
-                  <Field
-                    component={AwesomeCheckbox as any}
-                    name="raw_usage_reset"
-                    label={translate('Raw Usage Reset')}
-                  />
-                </FormGroup>
+            <FormGroup
+              label={translate('Fairshare Decay Half-Life')}
+              help={translate(
+                'Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife)',
+              )}
+              required
+            >
+              <Field
+                component={NumberField as any}
+                name="fairshare_decay_half_life"
+                min={1}
+                unit={translate('days')}
+              />
+            </FormGroup>
 
-                <FormGroup label={translate('QoS Strategy')} required>
-                  <Field
-                    component={SelectField as any}
-                    name="qos_strategy"
-                    options={qosStrategyOptions}
-                    getOptionValue={(option) => option.value}
-                    getOptionLabel={(option) => option.label}
-                    simpleValue
-                  />
-                </FormGroup>
+            <FormGroup
+              label={translate('Grace Ratio')}
+              help={translate(
+                'Grace period ratio (0.2 = 20% overconsumption allowed)',
+              )}
+              required
+            >
+              <Field
+                component={NumberField as any}
+                name="grace_ratio"
+                min={0}
+                max={1}
+                step={0.1}
+              />
+            </FormGroup>
 
-                <FormGroup
-                  description={
-                    organizationGroups?.length > 0
-                      ? translate(
-                          'When enabled, this policy applies to all organization groups. When disabled, you can select specific groups.',
-                        )
-                      : translate(
-                          'No organization groups are configured in the system. The policy will automatically apply to all organizations.',
-                        )
-                  }
-                >
-                  <Field
-                    component={AwesomeCheckbox as any}
-                    name="apply_to_all"
-                    label={translate('Apply to All Organization Groups')}
-                    disabled={organizationGroups?.length === 0}
-                  />
-                  {organizationGroups?.length === 0 && (
-                    <Field name="apply_to_all">
-                      {({ input }) => {
-                        if (!input.value && organizationGroups?.length === 0) {
-                          input.onChange(true);
-                        }
-                        return null;
-                      }}
-                    </Field>
-                  )}
-                </FormGroup>
+            <FormGroup
+              help={translate(
+                'Enable unused allocation carryover to next period',
+              )}
+            >
+              <Field
+                component={AwesomeCheckboxField as any}
+                name="carryover_enabled"
+                label={translate('Carryover Enabled')}
+              />
+            </FormGroup>
 
+            <FormGroup
+              help={translate(
+                'Reset raw usage at period transitions (PriorityUsageResetPeriod=None)',
+              )}
+            >
+              <Field
+                component={AwesomeCheckboxField as any}
+                name="raw_usage_reset"
+                label={translate('Raw Usage Reset')}
+              />
+            </FormGroup>
+
+            <FormGroup label={translate('QoS Strategy')} required>
+              <Field
+                component={SelectField as any}
+                name="qos_strategy"
+                options={qosStrategyOptions}
+                getOptionValue={(option) => option.value}
+                getOptionLabel={(option) => option.label}
+                simpleValue
+              />
+            </FormGroup>
+
+            <FormGroup
+              description={
+                organizationGroups?.length > 0
+                  ? translate(
+                      'When enabled, this policy applies to all organization groups. When disabled, you can select specific groups.',
+                    )
+                  : translate(
+                      'No organization groups are configured in the system. The policy will automatically apply to all organizations.',
+                    )
+              }
+            >
+              <Field
+                component={AwesomeCheckboxField as any}
+                name="apply_to_all"
+                label={translate('Apply to All Organization Groups')}
+                disabled={organizationGroups?.length === 0}
+              />
+              {organizationGroups?.length === 0 && (
                 <Field name="apply_to_all">
-                  {({ input: applyToAllInput }) => (
-                    <>
-                      {!applyToAllInput.value &&
-                        organizationGroups?.length > 0 && (
-                          <FormGroup
-                            label={translate('Organization Groups')}
-                            help={translate(
-                              'Select which organization groups this policy should apply to.',
-                            )}
-                            required
-                          >
-                            <Field
-                              component={SelectField as any}
-                              name="organization_groups"
-                              options={organizationGroups.map((group) => ({
-                                value: group.url,
-                                label: group.name,
-                              }))}
-                              getOptionValue={(option) => option.value}
-                              getOptionLabel={(option) => option.label}
-                              isMulti
-                              placeholder={translate(
-                                'Select organization groups...',
-                              )}
-                            />
-                          </FormGroup>
-                        )}
-                    </>
-                  )}
+                  {({ input }) => {
+                    if (!input.value && organizationGroups?.length === 0) {
+                      input.onChange(true);
+                    }
+                    return null;
+                  }}
                 </Field>
-              </form>
-            </>
-          )}
-        />
+              )}
+            </FormGroup>
+
+            <Field name="apply_to_all">
+              {({ input: applyToAllInput }) => (
+                <>
+                  {!applyToAllInput.value && organizationGroups?.length > 0 && (
+                    <FormGroup
+                      label={translate('Organization Groups')}
+                      help={translate(
+                        'Select which organization groups this policy should apply to.',
+                      )}
+                      required
+                    >
+                      <Field
+                        component={SelectField as any}
+                        name="organization_groups"
+                        options={organizationGroups.map((group) => ({
+                          value: group.url,
+                          label: group.name,
+                        }))}
+                        getOptionValue={(option) => option.value}
+                        getOptionLabel={(option) => option.label}
+                        isMulti
+                        placeholder={translate('Select organization groups...')}
+                      />
+                    </FormGroup>
+                  )}
+                </>
+              )}
+            </Field>
+          </form>
+        </Panel>
       )}
-    </Panel>
+    />
   );
 };
