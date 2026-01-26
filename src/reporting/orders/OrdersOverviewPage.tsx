@@ -1,18 +1,15 @@
 import { FC, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { useTitle } from '@waldur/navigation/title';
 
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
+import { OrdersContent } from './OrdersContent';
 import { OrdersFilter } from './OrdersFilter';
-import { OrdersStateChart } from './OrdersStateChart';
-import { OrdersSummaryCards } from './OrdersSummaryCards';
-import { OrdersTrendChart } from './OrdersTrendChart';
-import { OrdersTypeChart } from './OrdersTypeChart';
 import { useOrdersStats } from './useOrdersStats';
 
 export const OrdersOverviewPage: FC = () => {
@@ -25,39 +22,22 @@ export const OrdersOverviewPage: FC = () => {
 
   return (
     <>
-      <Card className="mb-6">
-        <Card.Header>
-          <Card.Title>{translate('Filters')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <OrdersFilter days={days} onDaysChange={setDays} />
-        </Card.Body>
-      </Card>
+      <OrdersFilter days={days} onDaysChange={setDays} />
 
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
         <LoadingErred loadData={refetch} />
       ) : data ? (
-        <>
-          <OrdersSummaryCards stats={data.summary} />
-
-          <Row className="g-4 mb-6">
-            <Col xs={12} lg={8}>
-              <OrdersTrendChart dailyStats={data.daily} />
-            </Col>
-            <Col xs={12} lg={4}>
-              <OrdersStateChart stateStats={data.by_state} />
-            </Col>
-          </Row>
-
-          <Row className="g-4">
-            <Col xs={12} lg={6}>
-              <OrdersTypeChart typeStats={data.by_type} />
-            </Col>
-          </Row>
-        </>
-      ) : null}
+        <OrdersContent data={data} />
+      ) : (
+        <NoResult
+          title={translate('No data available')}
+          message={translate(
+            'No order statistics found for the selected period.',
+          )}
+        />
+      )}
     </>
   );
 };
