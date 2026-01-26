@@ -1,105 +1,57 @@
-import { useSelector } from 'react-redux';
-import { Field, getFormValues } from 'redux-form';
+import { Field, useFormState } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { InputField } from '@waldur/form/InputField';
-import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 
-import { DisplayNameField } from '../../DisplayNameField';
 import { FormGroup } from '../../FormGroup';
-import { InternalNameField } from '../../InternalNameField';
 
+import { ChoicesOptionConfig } from './ChoicesOptionConfig';
 import { ComponentMultiplierConfiguration } from './ComponentMultiplierConfiguration';
 import { ConditionalCascadeConfiguration } from './ConditionalCascadeConfiguration';
-import { FIELD_TYPES, OPTION_FORM_ID } from './constants';
+import { DisplayNameField } from './DisplayNameField';
+import { InternalNameField } from './InternalNameField';
 import { K8sDefaultsConfiguration } from './K8sDefaultsConfiguration';
+import { NumericOptionConfig } from './NumericOptionConfig';
+import { OptionTypeGroup } from './OptionTypeGroup';
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
+import { StringOptionConfig } from './StringOptionConfig';
 
-const selector = getFormValues(OPTION_FORM_ID);
-
-const TypeGroup = () => (
-  <FormGroup label={translate('Type')} required={true}>
-    <Field
-      name="type"
-      validate={required}
-      component={(fieldProps) => (
-        <Select
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          options={FIELD_TYPES}
-          isClearable={false}
-        />
-      )}
-    />
-  </FormGroup>
-);
+const OPTION_COMPONENTS = {
+  integer: NumericOptionConfig,
+  money: NumericOptionConfig,
+  select_string: ChoicesOptionConfig,
+  select_string_multi: ChoicesOptionConfig,
+  string: StringOptionConfig,
+  conditional_cascade: ConditionalCascadeConfiguration,
+  component_multiplier: ComponentMultiplierConfiguration,
+  storage_folder_manager: StorageFolderConfiguration,
+  single_datacenter_k8s_config: K8sDefaultsConfiguration,
+  multi_datacenter_k8s_config: K8sDefaultsConfiguration,
+};
 
 export const OptionForm = ({ resourceType, offering }) => {
-  const optionValue = useSelector(selector) as any;
-  const type = optionValue.type.value;
+  const { values } = useFormState({
+    subscription: { values: true },
+  });
+  const type = values.type?.value;
+  const OptionComponent = OPTION_COMPONENTS[type];
 
   return (
     <>
-      <InternalNameField name="name" />
-      <DisplayNameField name="label" />
+      <InternalNameField />
+      <DisplayNameField />
+
       <FormGroup label={translate('Description')}>
-        <Field name="help_text" type="text" component={InputField} />
+        <Field name="help_text" type="text" component={InputField as any} />
       </FormGroup>
-      <TypeGroup />
-      {(type === 'integer' || type === 'money') && (
-        <>
-          <FormGroup label={translate('Minimal value')}>
-            <Field name="min" type="number" component={InputField} />
-          </FormGroup>
-          <FormGroup label={translate('Maximal value')}>
-            <Field name="max" type="number" component={InputField} />
-          </FormGroup>
-        </>
-      )}
-      {(type === 'select_string' || type === 'select_string_multi') && (
-        <FormGroup
-          label={translate('Choices as comma-separated list')}
-          required={true}
-        >
-          <Field
-            name="choices"
-            type="text"
-            component={InputField}
-            validate={required}
-          />
-        </FormGroup>
-      )}
-      {type === 'string' && (
-        <FormGroup label={translate('Default value')}>
-          <Field name="default" type="text" component={InputField} />
-        </FormGroup>
-      )}
-      {type === 'conditional_cascade' && (
-        <ConditionalCascadeConfiguration name="cascade_config" />
-      )}
-      {type === 'component_multiplier' && (
-        <ComponentMultiplierConfiguration
-          name="component_multiplier_config"
-          offering={offering}
-        />
-      )}
-      {type === 'storage_folder_manager' && (
-        <StorageFolderConfiguration
-          name="storage_folder_config"
-          offering={offering}
-        />
-      )}
-      {(type === 'single_datacenter_k8s_config' ||
-        type === 'multi_datacenter_k8s_config') && (
-        <K8sDefaultsConfiguration name="default_configs" />
-      )}
+      <OptionTypeGroup />
+      {OptionComponent && <OptionComponent offering={offering} />}
       {resourceType === 'options' ? (
         <FormGroup>
           <Field
             name="required"
-            component={AwesomeCheckboxField}
+            component={AwesomeCheckboxField as any}
             label={translate('Required')}
           />
         </FormGroup>

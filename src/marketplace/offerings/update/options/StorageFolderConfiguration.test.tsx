@@ -1,27 +1,16 @@
 import { render, screen } from '@testing-library/react';
-import { Provider } from 'react-redux';
-import { reduxForm } from 'redux-form';
-import configureMockStore from 'redux-mock-store';
-import { describe, expect, it, vi, beforeEach } from 'vitest';
+import arrayMutators from 'final-form-arrays';
+import { Form } from 'react-final-form';
+import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { Offering } from '@waldur/marketplace/types';
 
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 
-interface TestFormProps {
-  children?: React.ReactNode;
-}
-
 // Mock translate
 vi.mock('@waldur/i18n', () => ({
   translate: vi.fn((str) => str),
 }));
-
-const mockStore = configureMockStore();
-
-const TestForm = reduxForm<any, TestFormProps>({ form: 'TestForm' })(
-  ({ children }) => <form>{children}</form>,
-);
 
 const mockOffering = {
   components: [
@@ -43,31 +32,23 @@ const mockOffering = {
   ],
 } as Offering;
 
-const createStore = (formValues = {}) =>
-  mockStore({
-    form: {
-      TestForm: {
-        values: formValues,
-      },
-    },
-  });
-
 const renderComponent = (
   props: Partial<Parameters<typeof StorageFolderConfiguration>[0]> = {},
-  formValues = {},
+  initialValues = {},
+  validate: any = undefined,
 ) => {
-  const store = createStore(formValues);
-
   return render(
-    <Provider store={store}>
-      <TestForm>
-        <StorageFolderConfiguration
-          name="storage_folder_config"
-          offering={mockOffering}
-          {...props}
-        />
-      </TestForm>
-    </Provider>,
+    <Form
+      onSubmit={() => {}}
+      initialValues={initialValues}
+      mutators={{ ...arrayMutators }}
+      validate={validate}
+      render={({ handleSubmit }) => (
+        <form onSubmit={handleSubmit}>
+          <StorageFolderConfiguration offering={mockOffering} {...props} />
+        </form>
+      )}
+    />,
   );
 };
 
@@ -130,17 +111,13 @@ describe('StorageFolderConfiguration', () => {
       // The component type select should be present
       const selects = screen.getAllByRole('combobox');
       expect(selects.length).toBeGreaterThanOrEqual(1);
-
-      // CPU (usage-based) should not be available as an option
-      // Storage and RAM (limit-based) should be available
-      // We can't easily test Select options without clicking, but we verify the component renders
     });
 
     it('handles empty components array gracefully', () => {
       const offeringWithNoComponents = { components: [] };
 
       expect(() =>
-        renderComponent({ offering: offeringWithNoComponents }),
+        renderComponent({ offering: offeringWithNoComponents as any }),
       ).not.toThrow();
     });
 
@@ -221,6 +198,35 @@ describe('StorageFolderConfiguration', () => {
       expect(
         screen.getByText(
           'Number of inodes per TB for hard quota (should be ≥ soft multiplier).',
+        ),
+      ).toBeInTheDocument();
+    });
+  });
+
+  describe('inode multiplier validation', () => {
+    it('renders error message in UI when validation fails', () => {
+      const validate = () => ({
+        storage_folder_config: {
+          inode_hard_multiplier:
+            'Hard inode multiplier cannot be less than soft inode multiplier',
+        },
+      });
+
+      renderComponent(
+        {},
+        {
+          type: { value: 'storage_folder_manager' },
+          storage_folder_config: {
+            inode_soft_multiplier: '2000',
+            inode_hard_multiplier: '1000',
+          },
+        },
+        validate,
+      );
+
+      expect(
+        screen.getByText(
+          'Hard inode multiplier cannot be less than soft inode multiplier',
         ),
       ).toBeInTheDocument();
     });
