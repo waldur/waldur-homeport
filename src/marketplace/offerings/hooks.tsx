@@ -1,4 +1,5 @@
-import { PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react';
+import { Gear, PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -11,11 +12,18 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useUser } from '@waldur/workspace/hooks';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { getServiceProviderByCustomer } from '../common/api';
 import { Offering, ServiceProvider } from '../types';
 
 import { OFFERING_IMPORT_FORM_ID } from './import/constants';
 import { OfferingBreadcrumbPopover } from './OfferingBreadcrumbPopover';
 import { SINGLE_OFFERING_IMPORT_FORM_ID } from './single-import/constants';
+
+const SiteAgentConfigDialog = lazyComponent(() =>
+  import('@waldur/site-agent/SiteAgentConfigDialog').then((module) => ({
+    default: module.SiteAgentConfigDialog,
+  })),
+);
 
 const OfferingImportDialog = lazyComponent(() =>
   import('./import/OfferingImportDialog').then((module) => ({
@@ -39,6 +47,16 @@ export const useOfferingDropdownActions = (refetch?) => {
   });
   const showOfferingListActions =
     customer && customer.is_service_provider && canCreateOffering;
+
+  // Fetch ServiceProvider by customer UUID to get the actual ServiceProvider UUID
+  const { data: serviceProvider } = useQuery({
+    queryKey: ['ServiceProvider', customer?.uuid],
+    queryFn: () =>
+      customer?.uuid
+        ? getServiceProviderByCustomer({ customer_uuid: customer.uuid })
+        : null,
+    enabled: !!customer?.uuid && !!customer?.is_service_provider,
+  });
 
   if (!showOfferingListActions) {
     return null;
@@ -72,6 +90,20 @@ export const useOfferingDropdownActions = (refetch?) => {
         );
       }}
       iconNode={<UploadSimpleIcon weight="bold" />}
+    />,
+    <ActionItem
+      key="generate-site-agent-config"
+      title={translate('Generate Site Agent Config')}
+      action={() => {
+        dispatch(
+          openModalDialog(SiteAgentConfigDialog, {
+            resolve: { provider: { uuid: serviceProvider?.uuid } },
+            size: 'lg',
+          }),
+        );
+      }}
+      iconNode={<Gear weight="bold" />}
+      disabled={!serviceProvider}
     />,
   ];
 };
