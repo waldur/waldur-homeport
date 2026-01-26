@@ -1,6 +1,7 @@
-import { useState, useEffect } from 'react';
+import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
+import { FC, useState, useEffect } from 'react';
 import { Alert, Spinner } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 import {
   supportSettingsAtlassianDiscoverCustomFields,
   supportSettingsAtlassianDiscoverPriorities,
@@ -10,40 +11,40 @@ import { SelectField } from '@waldur/form';
 import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import type { AtlassianCredentials, DiscoveryState } from '../types';
+import type { AtlassianFormValues } from '../types';
 
-interface FieldMappingStepProps {
-  credentials: AtlassianCredentials;
-  project: NonNullable<DiscoveryState['selectedProject']>;
-  selectedRequestTypes: DiscoveryState['selectedRequestTypes'];
-  onMappingsSet: (
-    mappings: DiscoveryState['fieldMappings'],
-    customFields: DiscoveryState['customFields'],
-    priorities: DiscoveryState['priorities'],
-  ) => void;
-  onBack: () => void;
-  onCancel: () => void;
-}
-
-export const FieldMappingStep = ({
-  credentials,
-  project,
-  selectedRequestTypes,
-  onMappingsSet,
-  onBack,
-  onCancel,
-}: FieldMappingStepProps) => {
+/**
+ * Step 4: Field Mapping
+ *
+ * Maps Waldur fields to Atlassian custom fields. Fetches available
+ * custom fields and priorities from the selected project.
+ */
+export const FieldMappingStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<AtlassianFormValues>();
+  const { values } = useFormState<AtlassianFormValues>();
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState<string | null>(null);
-  const [customFields, setCustomFields] = useState<
-    DiscoveryState['customFields']
-  >([]);
-  const [priorities, setPriorities] = useState<DiscoveryState['priorities']>(
-    [],
+
+  // Extract credentials from form values
+  const credentials = {
+    api_url: values.api_url,
+    auth_method: values.auth_method,
+    email: values.email,
+    token: values.token,
+    personal_access_token: values.personal_access_token,
+    username: values.username,
+    password: values.password,
+    verify_ssl: values.verify_ssl,
+  };
+
+  const selectedRequestTypes = values.requestTypes.filter((rt) =>
+    (values.selectedRequestTypeIds || []).includes(rt.id),
   );
 
+  // Load custom fields and priorities when step mounts
   useEffect(() => {
     const loadData = async () => {
       setLoading(true);
@@ -54,7 +55,7 @@ export const FieldMappingStep = ({
           supportSettingsAtlassianDiscoverCustomFields({
             body: {
               ...credentials,
-              project_id: project.id,
+              project_id: values.selectedProjectId!,
               request_type_id: requestTypeId,
             },
           }),
@@ -62,8 +63,8 @@ export const FieldMappingStep = ({
             body: credentials,
           }),
         ]);
-        setCustomFields(fieldsResponse.data || []);
-        setPriorities(prioritiesResponse.data || []);
+        form.change('customFields', fieldsResponse.data || []);
+        form.change('priorities', prioritiesResponse.data || []);
       } catch (e: any) {
         setError(
           e.response?.data?.detail ||
@@ -75,42 +76,19 @@ export const FieldMappingStep = ({
       }
     };
 
-    loadData();
-  }, [credentials, project, selectedRequestTypes]);
+    if (values.selectedProjectId) {
+      loadData();
+    }
+  }, [values.selectedProjectId]);
 
-  const handleSubmit = (values: DiscoveryState['fieldMappings']) => {
-    onMappingsSet(values, customFields, priorities);
+  const handleContinue = () => {
+    props.handleSubmit();
   };
 
-  if (loading) {
-    return (
-      <div className="text-center py-10">
-        <Spinner animation="border" />
-        <p className="mt-4">
-          {translate('Loading custom fields and priorities...')}
-        </p>
-      </div>
-    );
-  }
-
-  if (error) {
-    return (
-      <div>
-        <Alert variant="danger">{error}</Alert>
-        <div className="d-flex justify-content-end gap-2">
-          <ActionButton
-            action={onBack}
-            variant="secondary"
-            title={translate('Back')}
-          />
-        </div>
-      </div>
-    );
-  }
-
+  // Build select options
   const fieldOptions = [
     { value: '', label: translate('-- Not mapped --') },
-    ...customFields.map((f) => ({
+    ...(values.customFields || []).map((f) => ({
       value: f.id,
       label: `${f.name} (${f.id})`,
     })),
@@ -118,7 +96,7 @@ export const FieldMappingStep = ({
 
   const priorityOptions = [
     { value: '', label: translate('-- Not set --') },
-    ...priorities.map((p) => ({
+    ...(values.priorities || []).map((p) => ({
       value: p.id,
       label: p.name,
     })),
@@ -132,201 +110,228 @@ export const FieldMappingStep = ({
     })),
   ];
 
-  return (
-    <Form
-      onSubmit={handleSubmit}
-      render={({ handleSubmit }) => (
-        <form onSubmit={handleSubmit}>
-          <h4 className="mb-4">{translate('Field Mapping')}</h4>
-          <p className="text-muted mb-4">
-            {translate(
-              'Map Waldur fields to Atlassian custom fields. These mappings allow Waldur to automatically populate issue fields.',
-            )}
+  // Custom footer for this step
+  const renderFooter = () => (
+    <>
+      <SubmitButton
+        submitting={false}
+        variant="tertiary"
+        className="min-w-125px me-auto"
+        onClick={() => props.onPrev(values)}
+        type="button"
+        label={translate('Back')}
+        iconNode={<CaretLeftIcon weight="bold" />}
+        iconOnLeft
+      />
+      <CloseDialogButton className="min-w-125px" />
+      <SubmitButton
+        submitting={false}
+        disabled={loading}
+        label={translate('Continue')}
+        onClick={handleContinue}
+        type="button"
+        className="btn-icon-right min-w-125px"
+      >
+        <span className="svg-icon svg-icon-2">
+          <CaretRightIcon weight="bold" />
+        </span>
+      </SubmitButton>
+    </>
+  );
+
+  if (loading) {
+    return (
+      <WizardModal {...props} renderFooter={renderFooter}>
+        <div className="text-center py-10">
+          <Spinner animation="border" />
+          <p className="mt-4">
+            {translate('Loading custom fields and priorities...')}
           </p>
+        </div>
+      </WizardModal>
+    );
+  }
 
-          <div className="row">
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Reporter Field')}
-                description={translate(
-                  'Custom field for storing the reporter email',
-                )}
-              >
-                <Field
-                  name="reporter_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+  if (error) {
+    return (
+      <WizardModal {...props} renderFooter={renderFooter}>
+        <Alert variant="danger">{error}</Alert>
+      </WizardModal>
+    );
+  }
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Impact Field')}
-                description={translate(
-                  'Custom field for storing the impact level',
-                )}
-              >
-                <Field
-                  name="impact_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+  return (
+    <WizardModal {...props} renderFooter={renderFooter}>
+      <h4 className="mb-4">{translate('Field Mapping')}</h4>
+      <p className="text-muted mb-4">
+        {translate(
+          'Map Waldur fields to Atlassian custom fields. These mappings allow Waldur to automatically populate issue fields.',
+        )}
+      </p>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Organisation Field')}
-                description={translate(
-                  'Custom field for storing the organisation name',
-                )}
-              >
-                <Field
-                  name="organisation_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+      <div className="row">
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Reporter Field')}
+            description={translate(
+              'Custom field for storing the reporter email',
+            )}
+          >
+            <Field
+              name="fieldMappings.reporter_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Project Field')}
-                description={translate(
-                  'Custom field for storing the project name',
-                )}
-              >
-                <Field
-                  name="project_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Impact Field')}
+            description={translate('Custom field for storing the impact level')}
+          >
+            <Field
+              name="fieldMappings.impact_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Affected Resource Field')}
-                description={translate(
-                  'Custom field for storing the affected resource',
-                )}
-              >
-                <Field
-                  name="affected_resource_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Organisation Field')}
+            description={translate(
+              'Custom field for storing the organisation name',
+            )}
+          >
+            <Field
+              name="fieldMappings.organisation_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Caller Field')}
-                description={translate('Custom field for storing the caller')}
-              >
-                <Field
-                  name="caller_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Project Field')}
+            description={translate('Custom field for storing the project name')}
+          >
+            <Field
+              name="fieldMappings.project_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Template Field')}
-                description={translate(
-                  'Custom field for storing the template name',
-                )}
-              >
-                <Field
-                  name="template_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Affected Resource Field')}
+            description={translate(
+              'Custom field for storing the affected resource',
+            )}
+          >
+            <Field
+              name="fieldMappings.affected_resource_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Waldur Backend ID Field')}
-                description={translate(
-                  'Custom field for storing the Waldur backend ID',
-                )}
-              >
-                <Field
-                  name="waldur_backend_id_field"
-                  component={SelectField as any}
-                  options={fieldOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Caller Field')}
+            description={translate('Custom field for storing the caller')}
+          >
+            <Field
+              name="fieldMappings.caller_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Default Priority')}
-                description={translate(
-                  'Default priority for new issues when not specified',
-                )}
-              >
-                <Field
-                  name="default_priority"
-                  component={SelectField as any}
-                  options={priorityOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Template Field')}
+            description={translate(
+              'Custom field for storing the template name',
+            )}
+          >
+            <Field
+              name="fieldMappings.template_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-            <div className="col-md-6">
-              <FormGroup
-                label={translate('Default Offering Issue Type')}
-                description={translate(
-                  'Issue type used when creating tickets for marketplace request-based orders',
-                )}
-              >
-                <Field
-                  name="default_offering_issue_type"
-                  component={SelectField as any}
-                  options={requestTypeOptions}
-                  simpleValue
-                />
-              </FormGroup>
-            </div>
-          </div>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Waldur Backend ID Field')}
+            description={translate(
+              'Custom field for storing the Waldur backend ID',
+            )}
+          >
+            <Field
+              name="fieldMappings.waldur_backend_id_field"
+              component={SelectField as any}
+              options={fieldOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
 
-          {customFields.length === 0 && (
-            <Alert variant="info" className="mt-4">
-              {translate(
-                'No custom fields found. You can skip this step and configure field mappings later.',
-              )}
-            </Alert>
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Default Priority')}
+            description={translate(
+              'Default priority for new issues when not specified',
+            )}
+          >
+            <Field
+              name="fieldMappings.default_priority"
+              component={SelectField as any}
+              options={priorityOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
+
+        <div className="col-md-6">
+          <FormGroup
+            label={translate('Default Offering Issue Type')}
+            description={translate(
+              'Issue type used when creating tickets for marketplace request-based orders',
+            )}
+          >
+            <Field
+              name="fieldMappings.default_offering_issue_type"
+              component={SelectField as any}
+              options={requestTypeOptions}
+              simpleValue
+            />
+          </FormGroup>
+        </div>
+      </div>
+
+      {(values.customFields || []).length === 0 && (
+        <Alert variant="info" className="mt-4">
+          {translate(
+            'No custom fields found. You can skip this step and configure field mappings later.',
           )}
-
-          <div className="d-flex justify-content-end gap-2 mt-6">
-            <ActionButton
-              action={onCancel}
-              variant="secondary"
-              title={translate('Cancel')}
-            />
-            <ActionButton
-              action={onBack}
-              variant="tertiary"
-              title={translate('Back')}
-            />
-            <SubmitButton submitting={false} label={translate('Continue')} />
-          </div>
-        </form>
+        </Alert>
       )}
-    />
+    </WizardModal>
   );
 };

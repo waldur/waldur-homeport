@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useState } from 'react';
-import { Col } from 'react-bootstrap';
+import { Field, useForm, useFormState } from 'react-final-form';
 import {
   MaintenanceAnnouncementTemplate,
   maintenanceAnnouncementsTemplateList,
@@ -10,26 +10,29 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required, url } from '@waldur/core/validators';
-import {
-  FormContainer,
-  SelectField,
-  StringField,
-  TextField,
-} from '@waldur/form';
+import { SelectField, StringField, TextField } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { TimeField } from '@waldur/form/TimeField';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import { MAINTENANCE_TYPE } from '../types';
+import { MaintenanceForm } from '../types';
 import { getMaintenanceOfferingFormFields } from '../utils';
 
-const maintenanceTypeOptions = Object.keys(MAINTENANCE_TYPE).map((key) => ({
-  label: MAINTENANCE_TYPE[key],
-  value: Number(key),
-}));
+const maintenanceTypeOptions = [
+  { label: translate('Scheduled'), value: 1 },
+  { label: translate('Emergency'), value: 2 },
+  { label: translate('Security'), value: 3 },
+  { label: translate('System upgrade'), value: 4 },
+  { label: translate('Patch deployment'), value: 5 },
+];
 
-export const Step1CreateMessage: FC<WizardFormStepProps> = (props) => {
+export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
+  const form = useForm<MaintenanceForm>();
+  const { values } = useFormState<MaintenanceForm>();
+  const [offeringsError, setOfferingsError] = useState<Error | null>(null);
+
   const {
     data: templates,
     isLoading,
@@ -51,184 +54,191 @@ export const Step1CreateMessage: FC<WizardFormStepProps> = (props) => {
     refetchOnWindowFocus: false,
   });
 
+  const fillFields = useCallback(
+    async (template: MaintenanceAnnouncementTemplate) => {
+      if (!template) {
+        form.change('template_affected_offerings', null);
+        return;
+      }
+      props.setLoading();
+      setOfferingsError(null);
+
+      form.change('name', template.name);
+      form.change('maintenance_type', template.maintenance_type);
+      form.change('message', template.message);
+
+      // Fetch template affected offerings
+      try {
+        const templateOfferings = await getAllPages((page) =>
+          maintenanceAnnouncementTemplateOfferingsList({
+            query: {
+              page_size: MAX_PAGE_SIZE,
+              page,
+              maintenance_template_uuid: template?.uuid,
+              service_provider_uuid: props.data?.provider?.uuid,
+            },
+          }),
+        );
+        const { affected_offerings, impact_level, impact_description } =
+          getMaintenanceOfferingFormFields(templateOfferings);
+
+        form.change('offerings', []);
+        form.change('template_affected_offerings', affected_offerings as any);
+        form.change('impact_level', impact_level);
+        form.change('impact_description', impact_description);
+      } catch (err) {
+        setOfferingsError(err as Error);
+      } finally {
+        props.setLoading();
+      }
+    },
+    [form, props],
+  );
+
   return (
-    <WizardForm {...props}>
-      {(wizardProps) => {
-        const [offeringsError, setOfferingsError] = useState();
+    <WizardModal {...props}>
+      {!isLoading && error ? (
+        <LoadingErred
+          loadData={refetch}
+          message={translate('Unable to load templates')}
+        />
+      ) : null}
 
-        const fillFields = useCallback(
-          async (template: MaintenanceAnnouncementTemplate) => {
-            if (!template) {
-              wizardProps.change('template_affected_offerings', null);
-              return;
-            }
-            wizardProps.setLoading(true);
-            setOfferingsError(null);
+      <FormGroup
+        label={translate('Template')}
+        description={translate(
+          'Select a previously saved template to auto-fill form fields',
+        )}
+      >
+        <Field
+          name="template"
+          component={SelectField as any}
+          options={templates}
+          isClearable
+          getOptionLabel={(option) => option.name}
+          getOptionValue={(option) => option.uuid}
+          onChange={fillFields}
+          isLoading={isLoading}
+        />
+      </FormGroup>
 
-            wizardProps.change('name', template.name);
-            wizardProps.change('maintenance_type', template.maintenance_type);
-            wizardProps.change('message', template.message);
-            // Fetch template affected offerings
-            try {
-              const templateOfferings = await getAllPages((page) =>
-                maintenanceAnnouncementTemplateOfferingsList({
-                  query: {
-                    page_size: MAX_PAGE_SIZE,
-                    page,
-                    maintenance_template_uuid: template?.uuid,
-                    service_provider_uuid: props.data?.provider?.uuid,
-                  },
-                }),
-              );
-              const { affected_offerings, impact_level, impact_description } =
-                getMaintenanceOfferingFormFields(templateOfferings);
+      {values?.template && offeringsError ? (
+        <LoadingErred
+          loadData={() => fillFields(values.template)}
+          message={translate('Unable to load template offerings')}
+        />
+      ) : null}
 
-              wizardProps.change('offerings', []);
-              wizardProps.change(
-                'template_affected_offerings',
-                affected_offerings,
-              );
-              wizardProps.change('impact_level', impact_level);
-              wizardProps.change('impact_description', impact_description);
-            } catch (err) {
-              setOfferingsError(err);
-            } finally {
-              wizardProps.setLoading(false);
-            }
-          },
-          [offeringsError, setOfferingsError],
-        );
+      <FormGroup label={translate('Name')} required>
+        <Field
+          name="name"
+          component={StringField as any}
+          placeholder={translate('e.g. Database maintance')}
+          validate={required}
+        />
+      </FormGroup>
 
-        return (
-          <FormContainer
-            submitting={wizardProps.submitting}
-            className="size-lg"
-            asRow
-          >
-            {!isLoading && error ? (
-              <LoadingErred
-                loadData={refetch}
-                message={translate('Unable to load templates')}
-              />
-            ) : null}
-            <SelectField
-              name="template"
-              label={translate('Template')}
-              description={translate(
-                'Select a previously saved template to auto-fill form fields',
-              )}
-              options={templates}
-              isClearable
-              getOptionLabel={(option) => option.name}
-              getOptionValue={(option) => option.uuid}
-              containerClassName="col-12"
-              onChange={fillFields}
-              isLoading={isLoading}
-            />
-            {wizardProps.formValues?.template && offeringsError ? (
-              <LoadingErred
-                loadData={() => fillFields(wizardProps?.formValues.template)}
-                message={translate('Unable to load template offerings')}
-              />
-            ) : null}
-            <StringField
-              name="name"
-              label={translate('Name')}
-              placeholder={translate('e.g. Database maintance')}
-              containerClassName="col-12"
-              required
-              validate={required}
-            />
-            <SelectField
-              name="maintenance_type"
-              label={translate('Maintenance type')}
-              options={maintenanceTypeOptions}
-              isClearable={false}
-              getOptionValue={(option) => option.value}
-              getOptionLabel={(option) => option.label}
-              containerClassName="col-12"
-              required
-              validate={required}
-              simpleValue
-            />
-            <TextField
-              name="message"
-              label={translate('Message')}
-              placeholder={translate(
-                'Describe the public details of the maintenance...',
-              )}
-              containerClassName="col-12"
-              required
-              validate={required}
-            />
+      <FormGroup label={translate('Maintenance type')} required>
+        <Field
+          name="maintenance_type"
+          component={SelectField as any}
+          options={maintenanceTypeOptions}
+          isClearable={false}
+          getOptionValue={(option) => option.value}
+          getOptionLabel={(option) => option.label}
+          validate={required}
+          simpleValue
+        />
+      </FormGroup>
 
-            {/* Dates */}
-            <DateField
-              label={translate('Start date')}
+      <FormGroup label={translate('Message')} required>
+        <Field
+          name="message"
+          component={TextField as any}
+          placeholder={translate(
+            'Describe the public details of the maintenance...',
+          )}
+          validate={required}
+        />
+      </FormGroup>
+
+      {/* Dates - side by side */}
+      <div className="row">
+        <div className="col-sm-6">
+          <FormGroup label={translate('Start date')} required>
+            <Field
               name="scheduled_start_date"
+              component={DateField as any}
               placeholder={translate('DD/MM/YYYY')}
               dateFormat="Y-m-d"
-              required
               validate={required}
-              containerClassName="col-sm-6"
             />
-            <TimeField
-              label={translate('Start time')}
+          </FormGroup>
+        </div>
+        <div className="col-sm-6">
+          <FormGroup label={translate('Start time')} required>
+            <Field
               name="scheduled_start_time"
+              component={TimeField as any}
               placeholder={translate('HH:MM')}
-              dateFormat="Y-m-d"
-              required
               validate={required}
-              containerClassName="col-sm-6"
             />
-            <DateField
-              label={translate('End date')}
+          </FormGroup>
+        </div>
+      </div>
+
+      <div className="row">
+        <div className="col-sm-6">
+          <FormGroup label={translate('End date')} required>
+            <Field
               name="scheduled_end_date"
+              component={DateField as any}
               placeholder={translate('DD/MM/YYYY')}
               dateFormat="Y-m-d"
-              required
               validate={required}
-              containerClassName="col-sm-6"
             />
-            <TimeField
-              label={translate('End time')}
+          </FormGroup>
+        </div>
+        <div className="col-sm-6">
+          <FormGroup label={translate('End time')} required>
+            <Field
               name="scheduled_end_time"
+              component={TimeField as any}
               placeholder={translate('HH:mm')}
-              dateFormat="Y-m-d"
-              required
               validate={required}
-              containerClassName="col-sm-6"
             />
+          </FormGroup>
+        </div>
+      </div>
 
-            <StringField
-              name="external_reference_url"
-              label={translate('External reference (Optional)')}
-              placeholder={translate(
-                'e.g. https://status.example.com/maintenance/123',
-              )}
-              description={translate(
-                'Link to external maintenance page or ticket',
-              )}
-              containerClassName="col-12"
-              validate={url}
-            />
+      <FormGroup
+        label={translate('External reference (Optional)')}
+        description={translate('Link to external maintenance page or ticket')}
+      >
+        <Field
+          name="external_reference_url"
+          component={StringField as any}
+          placeholder={translate(
+            'e.g. https://status.example.com/maintenance/123',
+          )}
+          validate={url}
+        />
+      </FormGroup>
 
-            <Col xs={12}>
-              <hr className="mb-7 mt-0" />
-            </Col>
+      <hr className="mb-7 mt-0" />
 
-            <TextField
-              name="internal_notes"
-              label={translate('Internal notes (providers/staff visible only)')}
-              placeholder={translate(
-                'Add staff/provider-only information (not visible to customers)...',
-              )}
-              containerClassName="col-12"
-              spaceless
-            />
-          </FormContainer>
-        );
-      }}
-    </WizardForm>
+      <FormGroup
+        label={translate('Internal notes (providers/staff visible only)')}
+        spaceless
+      >
+        <Field
+          name="internal_notes"
+          component={TextField as any}
+          placeholder={translate(
+            'Add staff/provider-only information (not visible to customers)...',
+          )}
+        />
+      </FormGroup>
+    </WizardModal>
   );
 };

@@ -1,18 +1,19 @@
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Alert } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Field, useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianValidateCredentials } from 'waldur-js-client';
 
-import { required, url } from '@waldur/core/validators';
+import { url } from '@waldur/core/validators';
 import { SelectField, StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { SecretField } from '@waldur/form/SecretField';
 import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import type { AtlassianCredentials } from '../types';
+import type { AtlassianFormValues } from '../types';
 
 const AUTH_METHODS = [
   {
@@ -29,17 +30,15 @@ const AUTH_METHODS = [
   },
 ];
 
-interface CredentialsStepProps {
-  initialValues?: Partial<AtlassianCredentials>;
-  onValidated: (credentials: AtlassianCredentials) => void;
-  onCancel: () => void;
-}
-
-export const CredentialsStep = ({
-  initialValues,
-  onValidated,
-  onCancel,
-}: CredentialsStepProps) => {
+/**
+ * Step 1: Credentials
+ *
+ * Validates Atlassian credentials via API before allowing navigation to next step.
+ * Uses custom footer because "Next" requires async validation.
+ */
+export const CredentialsStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<AtlassianFormValues>();
+  const { values } = useFormState<AtlassianFormValues>();
   const [validating, setValidating] = useState(false);
   const [error, setError] = useState<string | null>(null);
   const [serverInfo, setServerInfo] = useState<{
@@ -47,20 +46,33 @@ export const CredentialsStep = ({
     deployment_type: string;
   } | null>(null);
 
-  const handleSubmit = async (values: AtlassianCredentials) => {
+  const validateAndContinue = async () => {
     setValidating(true);
     setError(null);
     setServerInfo(null);
 
     try {
+      const credentials = {
+        api_url: values.api_url,
+        auth_method: values.auth_method,
+        email: values.email,
+        token: values.token,
+        personal_access_token: values.personal_access_token,
+        username: values.username,
+        password: values.password,
+        verify_ssl: values.verify_ssl,
+      };
+
       const response = await supportSettingsAtlassianValidateCredentials({
-        body: values,
+        body: credentials,
       });
 
       const data = response.data as any;
       if (data.valid) {
         setServerInfo(data.server_info);
-        onValidated(values);
+        form.change('credentialsValid', true);
+        // Advance to next step via form submission
+        props.handleSubmit();
       } else {
         setError(data.error || translate('Invalid credentials'));
       }
@@ -75,195 +87,139 @@ export const CredentialsStep = ({
     }
   };
 
-  const validate = (values: AtlassianCredentials) => {
-    const errors: Record<string, string> = {};
-
-    if (!values.api_url) {
-      errors.api_url = translate('API URL is required');
-    }
-
-    if (!values.auth_method) {
-      errors.auth_method = translate('Authentication method is required');
-    }
+  const isFormValid = () => {
+    if (!values.api_url || !values.auth_method) return false;
 
     if (values.auth_method === 'api_token') {
-      if (!values.email) {
-        errors.email = translate('Email is required for API Token auth');
-      }
-      if (!values.token) {
-        errors.token = translate('API Token is required');
-      }
+      return Boolean(values.email && values.token);
     }
-
     if (values.auth_method === 'personal_access_token') {
-      if (!values.personal_access_token) {
-        errors.personal_access_token = translate(
-          'Personal Access Token is required',
-        );
-      }
+      return Boolean(values.personal_access_token);
     }
-
     if (values.auth_method === 'basic') {
-      if (!values.username) {
-        errors.username = translate('Username is required');
-      }
-      if (!values.password) {
-        errors.password = translate('Password is required');
-      }
+      return Boolean(values.username && values.password);
     }
-
-    return errors;
+    return false;
   };
 
+  // Custom footer for this step
+  const renderFooter = () => (
+    <>
+      <CloseDialogButton className="min-w-125px" />
+      <SubmitButton
+        submitting={validating}
+        disabled={!isFormValid()}
+        label={translate('Validate & Continue')}
+        onClick={validateAndContinue}
+        type="button"
+      />
+    </>
+  );
+
   return (
-    <Form
-      onSubmit={handleSubmit}
-      validate={validate}
-      initialValues={{
-        auth_method: 'api_token',
-        verify_ssl: true,
-        ...initialValues,
-      }}
-      render={({ handleSubmit, values, invalid }) => (
-        <form onSubmit={handleSubmit}>
-          <div className="mb-6">
-            <h4 className="mb-4">{translate('Connection Settings')}</h4>
+    <WizardModal {...props} renderFooter={renderFooter}>
+      <div className="mb-6">
+        <h4 className="mb-4">{translate('Connection Settings')}</h4>
 
-            <FormGroup
-              label={translate('API URL')}
-              description={translate(
-                'e.g., https://your-domain.atlassian.net or https://jira.example.com',
-              )}
-              required
-            >
-              <Field
-                name="api_url"
-                component={StringField as any}
-                validate={url}
-              />
-            </FormGroup>
-
-            <FormGroup label={translate('Authentication Method')} required>
-              <Field
-                name="auth_method"
-                component={SelectField as any}
-                options={AUTH_METHODS}
-                simpleValue
-              />
-            </FormGroup>
-
-            <FormGroup>
-              <Field
-                name="verify_ssl"
-                component={AwesomeCheckboxField as any}
-                label={translate('Verify SSL Certificate')}
-              />
-            </FormGroup>
-          </div>
-
-          {values.auth_method === 'api_token' && (
-            <div className="mb-6">
-              <h4 className="mb-4">{translate('API Token Authentication')}</h4>
-              <p className="text-muted mb-4">
-                {translate(
-                  'For Atlassian Cloud, create an API token at https://id.atlassian.com/manage-profile/security/api-tokens',
-                )}
-              </p>
-
-              <FormGroup
-                label={translate('Email')}
-                description={translate('Your Atlassian account email')}
-                required
-              >
-                <Field
-                  name="email"
-                  component={StringField as any}
-                  validate={required}
-                />
-              </FormGroup>
-
-              <FormGroup label={translate('API Token')} required>
-                <Field
-                  name="token"
-                  component={SecretField as any}
-                  validate={required}
-                />
-              </FormGroup>
-            </div>
+        <FormGroup
+          label={translate('API URL')}
+          description={translate(
+            'e.g., https://your-domain.atlassian.net or https://jira.example.com',
           )}
+          required
+        >
+          <Field name="api_url" component={StringField as any} validate={url} />
+        </FormGroup>
 
-          {values.auth_method === 'personal_access_token' && (
-            <div className="mb-6">
-              <h4 className="mb-4">
-                {translate('Personal Access Token Authentication')}
-              </h4>
-              <p className="text-muted mb-4">
-                {translate(
-                  'For Jira Server/Data Center, create a PAT in your profile settings.',
-                )}
-              </p>
+        <FormGroup label={translate('Authentication Method')} required>
+          <Field
+            name="auth_method"
+            component={SelectField as any}
+            options={AUTH_METHODS}
+            simpleValue
+          />
+        </FormGroup>
 
-              <FormGroup label={translate('Personal Access Token')} required>
-                <Field
-                  name="personal_access_token"
-                  component={SecretField as any}
-                  validate={required}
-                />
-              </FormGroup>
-            </div>
-          )}
+        <FormGroup>
+          <Field
+            name="verify_ssl"
+            component={AwesomeCheckboxField as any}
+            label={translate('Verify SSL Certificate')}
+          />
+        </FormGroup>
+      </div>
 
-          {values.auth_method === 'basic' && (
-            <div className="mb-6">
-              <h4 className="mb-4">{translate('Basic Authentication')}</h4>
+      {values.auth_method === 'api_token' && (
+        <div className="mb-6">
+          <h4 className="mb-4">{translate('API Token Authentication')}</h4>
+          <p className="text-muted mb-4">
+            {translate(
+              'For Atlassian Cloud, create an API token at https://id.atlassian.com/manage-profile/security/api-tokens',
+            )}
+          </p>
 
-              <FormGroup label={translate('Username')} required>
-                <Field
-                  name="username"
-                  component={StringField as any}
-                  validate={required}
-                />
-              </FormGroup>
+          <FormGroup
+            label={translate('Email')}
+            description={translate('Your Atlassian account email')}
+            required
+          >
+            <Field name="email" component={StringField as any} />
+          </FormGroup>
 
-              <FormGroup label={translate('Password')} required>
-                <Field
-                  name="password"
-                  component={SecretField as any}
-                  validate={required}
-                />
-              </FormGroup>
-            </div>
-          )}
-
-          {error && (
-            <Alert variant="danger" className="mb-4">
-              {error}
-            </Alert>
-          )}
-
-          {serverInfo && (
-            <Alert variant="success" className="mb-4">
-              {translate('Connected to Jira {version} ({type})', {
-                version: serverInfo.version,
-                type: serverInfo.deployment_type,
-              })}
-            </Alert>
-          )}
-
-          <div className="d-flex justify-content-end gap-2">
-            <ActionButton
-              action={onCancel}
-              variant="secondary"
-              title={translate('Cancel')}
-            />
-            <SubmitButton
-              submitting={validating}
-              disabled={invalid}
-              label={translate('Validate & Continue')}
-            />
-          </div>
-        </form>
+          <FormGroup label={translate('API Token')} required>
+            <Field name="token" component={SecretField as any} />
+          </FormGroup>
+        </div>
       )}
-    />
+
+      {values.auth_method === 'personal_access_token' && (
+        <div className="mb-6">
+          <h4 className="mb-4">
+            {translate('Personal Access Token Authentication')}
+          </h4>
+          <p className="text-muted mb-4">
+            {translate(
+              'For Jira Server/Data Center, create a PAT in your profile settings.',
+            )}
+          </p>
+
+          <FormGroup label={translate('Personal Access Token')} required>
+            <Field
+              name="personal_access_token"
+              component={SecretField as any}
+            />
+          </FormGroup>
+        </div>
+      )}
+
+      {values.auth_method === 'basic' && (
+        <div className="mb-6">
+          <h4 className="mb-4">{translate('Basic Authentication')}</h4>
+
+          <FormGroup label={translate('Username')} required>
+            <Field name="username" component={StringField as any} />
+          </FormGroup>
+
+          <FormGroup label={translate('Password')} required>
+            <Field name="password" component={SecretField as any} />
+          </FormGroup>
+        </div>
+      )}
+
+      {error && (
+        <Alert variant="danger" className="mb-4">
+          {error}
+        </Alert>
+      )}
+
+      {serverInfo && (
+        <Alert variant="success" className="mb-4">
+          {translate('Connected to Jira {version} ({type})', {
+            version: serverInfo.version,
+            type: serverInfo.deployment_type,
+          })}
+        </Alert>
+      )}
+    </WizardModal>
   );
 };

@@ -15,14 +15,11 @@ import {
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { NumberField } from '@waldur/form';
-import {
-  WizardFinalForm,
-  WizardFinalFormStepProps,
-} from '@waldur/form/WizardFinalForm';
 import { translate } from '@waldur/i18n';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Field } from '@waldur/resource/summary';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { loadData } from '../change-limits/utils';
 
@@ -93,7 +90,7 @@ const RenewalCostEstimate: FC<{
   );
 };
 
-export const Step2ExtendDuration: FC<WizardFinalFormStepProps> = (props) => {
+export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
   const resources: Resource[] = props.data.resources;
   const isMulti = resources?.length > 1;
   const { values } = useFormState<RenewAllocationFormData>();
@@ -104,7 +101,7 @@ export const Step2ExtendDuration: FC<WizardFinalFormStepProps> = (props) => {
   );
 
   return (
-    <WizardFinalForm {...props}>
+    <WizardModal {...props}>
       <Row>
         <Col sm={6} md={5} lg={4}>
           {!isMulti && (
@@ -157,6 +154,6 @@ export const Step2ExtendDuration: FC<WizardFinalFormStepProps> = (props) => {
           )}
         </Col>
       </Row>
-    </WizardFinalForm>
+    </WizardModal>
   );
 };

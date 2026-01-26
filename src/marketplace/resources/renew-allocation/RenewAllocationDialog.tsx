@@ -8,11 +8,11 @@ import {
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFinalFormContainer } from '@waldur/form/WizardFinalFormContainer';
 import { translate } from '@waldur/i18n';
 import { getFormLimitSerializer } from '@waldur/marketplace/common/registry';
 import { useModal } from '@waldur/modal/hooks';
 import { useNotify } from '@waldur/store/hooks';
+import { Wizard } from '@waldur/wizard';
 
 import { Step1UpdateLimits } from './Step1UpdateLimits';
 import { Step2ExtendDuration } from './Step2ExtendDuration';
@@ -184,7 +184,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
   };
 
   return (
-    <WizardFinalFormContainer
+    <Wizard<RenewAllocationFormData>
       onSubmit={onSubmit}
       submitLabel={translate('Confirm')}
       steps={steps}
@@ -207,7 +207,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
               'Extend the allocation period and optionally provide a purchase order.',
             )
       }
-      initialValues={initialValues}
+      initialValues={initialValues as Partial<RenewAllocationFormData>}
       data={{ resources }}
       modalProps={{ bodyClassName: 'h-450px' }}
     />

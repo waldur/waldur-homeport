@@ -1,12 +1,12 @@
-import { useState } from 'react';
+/**
+ * @deprecated Use `useWizard` from '@waldur/wizard' instead.
+ *
+ * This file re-exports the useWizard hook for backward compatibility.
+ * Import from '@waldur/wizard' for new code:
+ *
+ * ```tsx
+ * import { useWizard } from '@waldur/wizard';
+ * ```
+ */
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-
-export const useWizard = (steps: ProgressStep[]) => {
-  const [step, setStep] = useState<ProgressStep>(() => steps[0]);
-  const goBack = () => setStep(steps[steps.indexOf(step) - 1]);
-  const goNext = () => setStep(steps[steps.indexOf(step) + 1]);
-  const isFirstStep = step === steps[0];
-  const isLastStep = step === steps[steps.length - 1];
-  return { step, setStep, goBack, goNext, isFirstStep, isLastStep };
-};
+export { useWizard } from '@waldur/wizard';

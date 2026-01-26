@@ -17,7 +17,7 @@
     "lint:check": "eslint src locales/tools",
     "lint:fix": "eslint --fix src locales/tools",
     "deps:unused": "knip --include files,types,enumMembers,exports",
-    "deps:circular": "madge --exclude broadcasts/BroadcastFooter.tsx --circular src/**/*",
+    "deps:circular": "madge --exclude 'broadcasts/BroadcastFooter' --exclude 'js-client' --circular src/**/*",
     "test": "vitest",
     "ci:start": "VITE_API_URL=http://localhost:8001/ yarn build && yarn serve --no-request-logging dist --single --listen 8001",
     "ci:run": "cypress run --spec cypress/e2e/group-invitations/groupInvitations.spec.ts",

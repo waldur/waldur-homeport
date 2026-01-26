@@ -1,44 +1,50 @@
-import { Config } from 'final-form';
-import { useState, createElement, FC, ReactNode } from 'react';
+import { useState, createElement } from 'react';
 import { Form } from 'react-final-form';
 import { useToggle } from 'react-use';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { translate } from '@waldur/i18n';
 
-import { WizardFinalFormStepProps } from './WizardFinalForm';
+import type {
+  WizardFooterRenderProps,
+  WizardProps,
+  WizardStepProps,
+} from './types';
 
-interface WizardFormContainerProps {
-  title: string;
-  subtitle?: string;
-  onSubmit: Config['onSubmit'];
-  submitLabel?: string;
-  nextLabel?: string;
-  steps: ProgressStep[];
-  hideStepper?: boolean;
-  wizardForms: FC<WizardFinalFormStepProps>[];
-  initialValues?: Config['initialValues'];
-  actions?: WizardFinalFormStepProps['actions'];
-  data?: any;
-  validate?: Config['validate'];
-  mutators?: Config['mutators'];
-  modalProps?: {
-    iconNode?: ReactNode;
-    iconColor?: string;
-    headerClassName?: string;
-    bodyClassName?: string;
-  };
-}
-
-export const WizardFinalFormContainer: FC<WizardFormContainerProps> = ({
+/**
+ * Main Wizard component that orchestrates multi-step form workflows.
+ *
+ * Features:
+ * - Central form state management with React Final Form
+ * - Step navigation with back/next functionality
+ * - Tracks visited steps to prevent skipping ahead
+ * - Loading state support for async operations
+ *
+ * @example
+ * ```tsx
+ * const steps = [
+ *   { key: 'step1', label: 'Step 1', completed: false },
+ *   { key: 'step2', label: 'Step 2', completed: false },
+ * ];
+ *
+ * <Wizard
+ *   title="My Wizard"
+ *   steps={steps}
+ *   wizardForms={[Step1Component, Step2Component]}
+ *   onSubmit={handleSubmit}
+ * />
+ * ```
+ */
+export function Wizard<FormValues = any>({
   submitLabel = translate('Submit'),
   nextLabel = translate('Next'),
   ...props
-}) => {
+}: WizardProps<FormValues>) {
   const [step, setStep] = useState(0);
   const [lastVisitedStep, setLastVisitedStep] = useState(0);
   const [loading, setLoading] = useToggle(false);
+
   const isLast = step === props.steps.length - 1;
+
   const nextStep = () => {
     const newStep = step + 1;
     setStep(newStep);
@@ -47,10 +53,13 @@ export const WizardFinalFormContainer: FC<WizardFormContainerProps> = ({
     }
     return newStep;
   };
+
   const prevStep = () => setStep((s) => Math.max(0, s - 1));
+
   const selectStep = (num: number) => {
     if (num <= lastVisitedStep) setStep(num);
   };
+
   const _submitLabel = isLast ? submitLabel : nextLabel;
 
   const _submit = (values, form, callback) => {
@@ -68,6 +77,22 @@ export const WizardFinalFormContainer: FC<WizardFormContainerProps> = ({
       validate={props.validate}
       mutators={props.mutators}
       render={(formProps) => {
+        // Build renderFooter wrapper that provides navigation functions
+        const renderFooterWithNav = props.renderFooter
+          ? () =>
+              props.renderFooter!({
+                step,
+                totalSteps: props.steps.length,
+                submitting: formProps.submitting,
+                invalid: formProps.invalid,
+                values: formProps.values,
+                form: formProps.form,
+                onPrev: prevStep,
+                onStep: selectStep,
+                handleSubmit: formProps.handleSubmit,
+              } as WizardFooterRenderProps)
+          : undefined;
+
         return createElement(props.wizardForms[step], {
           ...formProps,
           title: props.title,
@@ -85,8 +110,9 @@ export const WizardFinalFormContainer: FC<WizardFormContainerProps> = ({
           modalProps: props.modalProps,
           loading,
           setLoading,
-        });
+          renderFooter: renderFooterWithNav,
+        } as WizardStepProps);
       }}
     />
   );
-};
+}

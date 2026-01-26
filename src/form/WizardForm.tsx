@@ -14,7 +14,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { wrapTooltip } from '@waldur/table/ActionButton';
 
-import './wizard.scss';
+import '@waldur/wizard/wizard.scss';
 
 export interface WizardFormStepProps extends Pick<
   InjectedFormProps,

@@ -9,19 +9,16 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import {
-  WizardFinalForm,
-  WizardFinalFormStepProps,
-} from '@waldur/form/WizardFinalForm';
 import { translate } from '@waldur/i18n';
 import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { ChangeLimitsComponent } from '../change-limits/ChangeLimitsComponent';
 import { getLimitChangeData, loadData } from '../change-limits/utils';
 
 import { RenewAllocationFormData } from './types';
 
-interface OwnProps extends WizardFinalFormStepProps {
+interface OwnProps extends WizardStepProps {
   data: { resources: Array<Resource & { marketplace_resource_uuid }> };
 }
 
@@ -209,7 +206,7 @@ export const Step1UpdateLimits: FC<OwnProps> = (props) => {
   const isMulti = resources?.length > 1;
 
   return (
-    <WizardFinalForm {...props}>
+    <WizardModal {...props}>
       {isMulti ? (
         <Tabs
           id="resources-limits-change"
@@ -230,6 +227,6 @@ export const Step1UpdateLimits: FC<OwnProps> = (props) => {
       ) : (
         <UpdateLimitsTable resource={resources[0]} />
       )}
-    </WizardFinalForm>
+    </WizardModal>
   );
 };

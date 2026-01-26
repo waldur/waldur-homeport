@@ -1,5 +1,6 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   MaintenanceAnnouncement,
   MaintenanceAnnouncementRequest,
@@ -13,16 +14,13 @@ import {
 import { parseDate } from '@waldur/core/dateUtils';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { getUUID } from '@waldur/core/utils';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
 import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { useModal } from '@waldur/modal/hooks';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { Wizard } from '@waldur/wizard';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
-import {
-  getMaintenanceOfferings,
-  MAINTENANCE_ANNOUNCEMENT_FORM_ID,
-} from '../utils';
+import { getMaintenanceOfferings } from '../utils';
 
 import { MaintenanceSaveAsDropdown } from './MaintenanceSaveAsDropdown';
 import { Step1CreateMessage } from './Step1CreateMessage';
@@ -56,8 +54,11 @@ const steps: ProgressStep[] = [
 export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
   props,
 ) => {
+  const { closeDialog } = useModal();
+  const dispatch = useDispatch();
+
   const submitForm = useCallback(
-    async (formData: MaintenanceForm, dispatch, formProps) => {
+    async (formData: MaintenanceForm) => {
       try {
         const startTime = parseDate(formData.scheduled_start_time);
         const startDate = parseDate(formData.scheduled_start_date).set({
@@ -137,19 +138,17 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
           dispatch(showSuccess(translate('Maintenance added successfully')));
         }
 
-        formProps.destroy();
         if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
+        closeDialog();
       } catch (error) {
         dispatch(showErrorResponse(error));
       }
     },
-    [props.resolve.refetch],
+    [props.resolve, closeDialog, dispatch],
   );
 
   return (
-    <WizardFormContainer
-      form={MAINTENANCE_ANNOUNCEMENT_FORM_ID}
+    <Wizard<MaintenanceForm>
       onSubmit={submitForm}
       submitLabel={translate('Confirm')}
       steps={steps}
@@ -164,10 +163,10 @@ export const MaintenanceFormDialog: FC<MaintenanceFormDialogProps> = (
       )}
       initialValues={props.initialValues}
       data={{ provider: props.resolve.provider }}
-      actions={({ formValues }) => (
+      actions={({ values }) => (
         <MaintenanceSaveAsDropdown
           formComponent={MaintenanceFormDialog}
-          formValues={formValues}
+          formValues={values}
           provider={props.resolve.provider}
           maintenanceUuid={props.resolve.maintenanceUuid}
           refetch={props.resolve.refetch}
