@@ -415,31 +415,6 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
     );
   }, [offering?.components]);
 
-  // Force checkbox to be checked when no organization groups exist
-  useEffect(() => {
-    if (organizationGroups?.length === 0) {
-      const timer = setTimeout(() => {
-        const checkboxes = document.querySelectorAll('input[type="checkbox"]');
-        const applyToAllCheckbox = Array.from(checkboxes).find((cb) => {
-          const text = cb.closest('div')?.textContent || '';
-          return text.includes('Apply to All Organization Groups');
-        }) as HTMLInputElement;
-
-        if (
-          applyToAllCheckbox &&
-          applyToAllCheckbox.disabled &&
-          !applyToAllCheckbox.checked
-        ) {
-          applyToAllCheckbox.checked = true;
-          const event = new Event('change', { bubbles: true });
-          applyToAllCheckbox.dispatchEvent(event);
-        }
-      }, 100);
-
-      return () => clearTimeout(timer);
-    }
-  }, [organizationGroups]);
-
   if (!offering) {
     return null;
   }
@@ -492,6 +467,8 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
   };
 
   const handleSubmit = async (formData: SlurmPolicyFormData) => {
+    if (!isPolicyEnabled) return;
+
     setIsSubmitting(true);
 
     try {

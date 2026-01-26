@@ -8,6 +8,7 @@ import {
   showBackendId,
 } from '@waldur/marketplace/common/registry';
 import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
+import { GenerateSiteAgentConfigForOfferingButton } from '@waldur/site-agent/GenerateSiteAgentConfigForOfferingButton';
 
 import {
   DefaultOfferingEditPanel,
@@ -42,10 +43,21 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
   const hideScopeState =
     !props.offering.scope_state && props.offering.type === SITE_AGENT_PLUGIN;
 
+  const isSlurmOffering = props.offering.type === SITE_AGENT_PLUGIN;
+
   return (
     <FormTable.Card
       title={TITLE}
-      actions={<SyncButton offering={props.offering} refetch={props.refetch} />}
+      actions={
+        <div className="d-flex gap-2 align-items-center">
+          {isSlurmOffering && (
+            <GenerateSiteAgentConfigForOfferingButton
+              offering={props.offering}
+            />
+          )}
+          <SyncButton offering={props.offering} refetch={props.refetch} />
+        </div>
+      }
       className="card-bordered mb-7"
     >
       <FormTable>
