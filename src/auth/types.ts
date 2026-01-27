@@ -36,6 +36,12 @@ interface LoginPageNewsItem {
   tag: string;
 }
 
+type OfferingVisibilityMode =
+  | 'show_all'
+  | 'show_restricted_disabled'
+  | 'hide_inaccessible'
+  | 'require_membership';
+
 interface CoreConfiguration {
   INVITATION_USE_WEBHOOKS: boolean;
   DEFAULT_IDP: Pick<IdentityProvider, 'provider' | 'auth_url' | 'client_id'>;
@@ -45,6 +51,7 @@ interface CoreConfiguration {
   LOGIN_PAGE_CAROUSEL_SLIDES: LoginPageCarouselSlide[];
   LOGIN_PAGE_NEWS: LoginPageNewsItem[];
   ANONYMOUS_USER_CAN_VIEW_OFFERINGS: boolean;
+  RESTRICTED_OFFERING_VISIBILITY_MODE?: OfferingVisibilityMode;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;
   MASTERMIND_URL: string;
