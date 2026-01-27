@@ -1,8 +1,9 @@
 import { FlaskIcon, LightbulbIcon } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
 import { AnalyticsMode } from '../analytics';
 
@@ -15,11 +16,21 @@ const supportedModes: AnalyticsMode[] = ['what-if', 'why-so'];
 
 /**
  * Buttons component that navigates to the Quotas Analytics page with specific mode.
+ * Only visible when experimental UI components are enabled.
  */
 export const QuotasAnalytics: FC<QuotasAnalyticsProps> = ({
   data,
   loading,
 }) => {
+  const showExperimental = useMemo(
+    () => isExperimentalUiComponentsVisible(),
+    [],
+  );
+
+  if (!showExperimental) {
+    return null;
+  }
+
   const hasWhatIf = supportedModes.includes('what-if');
   const hasWhySo = supportedModes.includes('why-so');
   const isDisabled = loading || data.length === 0;

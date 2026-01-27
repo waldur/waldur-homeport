@@ -14,6 +14,8 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { useTitle } from '@waldur/navigation/title';
 
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
@@ -156,23 +158,24 @@ export const ProviderRevenuePage: FC = () => {
 
   return (
     <>
-      <Card className="mb-6">
-        <Card.Header>
-          <Card.Title>{translate('Select provider')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="d-flex flex-wrap gap-6 mb-6">
+        <FormGroup
+          label={translate('Provider')}
+          className="flex-grow-1 mw-300px"
+        >
           <ProviderFilter />
-        </Card.Body>
-      </Card>
+        </FormGroup>
+      </div>
 
       {providerUuid ? (
         <ProviderRevenueContent providerUuid={providerUuid} />
       ) : (
-        <Card>
-          <Card.Body className="text-center text-muted py-10">
-            {translate('Please select a provider to view revenue data')}
-          </Card.Body>
-        </Card>
+        <NoResult
+          title={translate('Select a provider')}
+          message={translate(
+            'Choose a provider from the dropdown above to view revenue data.',
+          )}
+        />
       )}
     </>
   );

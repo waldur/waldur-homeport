@@ -1,8 +1,8 @@
-import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { FC, ReactNode } from 'react';
 
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 interface DateRangeOption {
   value: number;
@@ -20,16 +20,24 @@ const dateRangeOptions: DateRangeOption[] = [
 interface OrdersFilterProps {
   days: number;
   onDaysChange: (days: number) => void;
+  extraFilters?: ReactNode;
 }
 
-export const OrdersFilter: FC<OrdersFilterProps> = ({ days, onDaysChange }) => {
+export const OrdersFilter: FC<OrdersFilterProps> = ({
+  days,
+  onDaysChange,
+  extraFilters,
+}) => {
   const selectedDateRange = dateRangeOptions.find((o) => o.value === days);
 
   return (
-    <Row className="mb-6 g-3">
-      <Col xs={12} sm={6} md={4} lg={3}>
+    <div className="d-flex flex-wrap gap-6 mb-6">
+      {extraFilters}
+      <FormGroup
+        label={translate('Date range')}
+        className="flex-grow-1 mw-200px"
+      >
         <Select
-          placeholder={translate('Date range')}
           value={selectedDateRange}
           onChange={(option: DateRangeOption | null) =>
             option && onDaysChange(option.value)
@@ -39,7 +47,7 @@ export const OrdersFilter: FC<OrdersFilterProps> = ({ days, onDaysChange }) => {
           className="metronic-select-container"
           classNamePrefix="metronic-select"
         />
-      </Col>
-    </Row>
+      </FormGroup>
+    </div>
   );
 };
