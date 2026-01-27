@@ -164,6 +164,7 @@ export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => {
         hasQuery={true}
         title={title}
         initialPageSize={5}
+        showPageSizeSelector
         footer={footer}
       />
     </ModalDialog>
