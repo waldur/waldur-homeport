@@ -10,8 +10,13 @@ import {
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import {
+  showError,
+  showErrorResponse,
+  showSuccess,
+} from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { useUser } from '@waldur/workspace/hooks';
 
@@ -41,6 +46,20 @@ const ChangeOfferingAvailabilityDialog = lazyComponent(() =>
   })),
 );
 
+const getActivationErrors = (offering): string[] => {
+  const errors: string[] = [];
+  if (!offering.plans?.length) {
+    errors.push(translate('Offering must have at least one plan.'));
+  }
+  if (
+    offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS &&
+    !offering.secret_options?.create
+  ) {
+    errors.push(translate('Script is not defined.'));
+  }
+  return errors;
+};
+
 export const OfferingStateActions = ({
   offering,
   refreshOffering,
@@ -63,6 +82,11 @@ export const OfferingStateActions = ({
     }
   };
   const activate = () => {
+    const errors = getActivationErrors(offering);
+    if (errors.length > 0) {
+      errors.forEach((error) => dispatch(showError(error)));
+      return;
+    }
     if (user.is_staff) {
       updateOfferingState(() =>
         marketplaceProviderOfferingsActivate({ path: { uuid: offering.uuid } }),
@@ -96,10 +120,16 @@ export const OfferingStateActions = ({
     );
   };
 
-  const unpause = () =>
+  const unpause = () => {
+    const errors = getActivationErrors(offering);
+    if (errors.length > 0) {
+      errors.forEach((error) => dispatch(showError(error)));
+      return;
+    }
     updateOfferingState(() =>
       marketplaceProviderOfferingsUnpause({ path: { uuid: offering.uuid } }),
     );
+  };
 
   const archive = () =>
     updateOfferingState(() =>
