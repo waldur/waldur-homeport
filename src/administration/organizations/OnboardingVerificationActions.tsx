@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 
 import { OnboardingVerificationCreateCustomer } from './OnboardingVerificationCreateCustomer';
+import { OnboardingVerificationDeleteAction } from './OnboardingVerificationDeleteAction';
 import { OnboardingVerificationView } from './OnboardingVerificationView';
 
 export const OnboardingVerificationActions: FC<{ row; fetch }> = ({
@@ -16,6 +17,7 @@ export const OnboardingVerificationActions: FC<{ row; fetch }> = ({
       actions={[
         OnboardingVerificationView,
         OnboardingVerificationCreateCustomer,
+        OnboardingVerificationDeleteAction,
       ].filter(Boolean)}
     />
   );
