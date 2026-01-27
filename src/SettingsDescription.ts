@@ -107,6 +107,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'RESTRICTED_OFFERING_VISIBILITY_MODE',
+        description: translate('Controls offering visibility for regular users. \'show_all\': Show all shared offerings (current behavior). \'show_restricted_disabled\': Show all but mark inaccessible as disabled. \'hide_inaccessible\': Hide offerings user cannot access. \'require_membership\': Hide all unless user belongs to an organization/project.'),
+        default: 'show_all',
+        type: 'string',
+      },
+      {
         key: 'NOTIFY_STAFF_ABOUT_APPROVALS',
         description: translate('If true, users with staff role are notified when request for order approval is generated'),
         default: false,
@@ -1262,6 +1268,24 @@ export const SettingsDescription = [
         description: translate('Name of the LLM model to use for inference.'),
         default: 'gemma3:27b',
         type: 'string',
+      },
+      {
+        key: 'LLM_TOKEN_LIMIT_DAILY',
+        description: translate('Default daily token limit (integer). -1 means unlimited.'),
+        default: -1,
+        type: 'integer',
+      },
+      {
+        key: 'LLM_TOKEN_LIMIT_WEEKLY',
+        description: translate('Default weekly token limit (integer). -1 means unlimited.'),
+        default: -1,
+        type: 'integer',
+      },
+      {
+        key: 'LLM_TOKEN_LIMIT_MONTHLY',
+        description: translate('Default monthly token limit (integer). -1 means unlimited.'),
+        default: -1,
+        type: 'integer',
       },
     ],
   },
