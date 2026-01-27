@@ -1331,6 +1331,41 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('Table Growth Monitoring'),
+    items: [
+      {
+        key: 'TABLE_GROWTH_MONITORING_ENABLED',
+        description: translate('Enable table growth monitoring to detect potential data leaks from bugs.'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'TABLE_GROWTH_WEEKLY_THRESHOLD_PERCENT',
+        description: translate('Alert if a table grows by more than this percentage in a week.'),
+        default: 50,
+        type: 'integer',
+      },
+      {
+        key: 'TABLE_GROWTH_MONTHLY_THRESHOLD_PERCENT',
+        description: translate('Alert if a table grows by more than this percentage in a month.'),
+        default: 200,
+        type: 'integer',
+      },
+      {
+        key: 'TABLE_GROWTH_RETENTION_DAYS',
+        description: translate('Number of days to retain table size history data.'),
+        default: 90,
+        type: 'integer',
+      },
+      {
+        key: 'TABLE_GROWTH_MIN_SIZE_BYTES',
+        description: translate('Minimum table size in bytes (default 1MB) to monitor. Smaller tables are ignored.'),
+        default: 1048576,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('User Actions'),
     items: [
       {

@@ -17,7 +17,8 @@ type ReportCategory =
   | 'financial'
   | 'infrastructure'
   | 'proposals'
-  | 'users';
+  | 'users'
+  | 'operations';
 
 interface ReportDefinition {
   key: string;
@@ -177,6 +178,16 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         key: 'affiliations',
         title: translate('Affiliations'),
         state: 'reporting-user-affiliations',
+      },
+    ],
+  },
+  operations: {
+    title: translate('Operations'),
+    reports: [
+      {
+        key: 'maintenance-overview',
+        title: translate('Maintenance overview'),
+        state: 'reporting-maintenance-overview',
       },
     ],
   },
