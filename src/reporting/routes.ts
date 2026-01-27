@@ -510,6 +510,35 @@ export const states: StateDeclaration[] = [
     },
   },
 
+  // Operations category (cross-provider maintenance reporting)
+  {
+    name: 'reporting-operations',
+    abstract: true,
+    parent: 'reporting',
+    component: UIView,
+    url: '',
+    redirectTo: 'reporting-maintenance-overview',
+    data: {
+      breadcrumb: () => translate('Operations'),
+      priority: 475,
+    },
+  },
+  {
+    name: 'reporting-maintenance-overview',
+    url: 'maintenance-overview/',
+    parent: 'reporting-operations',
+    component: lazyComponent(() =>
+      import('./maintenance/MaintenanceReportingOverviewPage').then(
+        (module) => ({
+          default: module.MaintenanceReportingOverviewPage,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Maintenance overview'),
+    },
+  },
+
   // Legacy redirect routes for backward compatibility
   {
     name: 'reporting.organizations',

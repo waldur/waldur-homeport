@@ -17,6 +17,7 @@ import {
   UsersIcon,
   UsersThreeIcon,
   WarningCircleIcon,
+  WrenchIcon,
 } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import {
@@ -440,6 +441,23 @@ export const ReportingDashboard: FC = () => {
           ],
         });
       }
+
+      // Operations category
+      result.push({
+        key: 'operations',
+        title: translate('Operations'),
+        reports: [
+          {
+            uuid: 'maintenance-overview',
+            icon: <WrenchIcon size={18} weight="bold" />,
+            title: translate('Maintenance overview'),
+            description: translate(
+              'Cross-provider maintenance analytics and timeline',
+            ),
+            state: 'reporting-maintenance-overview',
+          },
+        ],
+      });
     }
 
     return result;

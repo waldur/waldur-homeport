@@ -215,15 +215,20 @@ const UserTypeRow = ({ user, disabled, isSelf }) => {
   ) : null;
 };
 
-const CivilNumberRow = ({ user, disabled }) =>
-  user.civil_number ? (
+const CivilNumberRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('civil_number') ? (
     <UserEditRow
       user={user}
       label={translate('ID code')}
       name="civil_number"
       value={user.civil_number}
       disabled={disabled}
-      protected={true}
+      protected={fieldIsProtected(user, 'civil_number')}
+      description={
+        isSelf
+          ? translate('Your personal identification number')
+          : translate("The user's personal identification number")
+      }
     />
   ) : null;
 
@@ -552,7 +557,7 @@ export const UserEditRows = ({
       {/* System Information */}
       <DateJoinedRow user={user} disabled={disabled} />
       <UserTypeRow user={user} isSelf={isSelf} disabled={disabled} />
-      <CivilNumberRow user={user} disabled={disabled} />
+      <CivilNumberRow user={user} isSelf={isSelf} disabled={disabled} />
       <DescriptionRow user={user} isSelf={isSelf} disabled={disabled} />
       <ShortnameRow user={user} currentUser={currentUser} disabled={disabled} />
       <NotificationsEnabledRow
