@@ -10,7 +10,6 @@ import {
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
-import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 import { SLURM_PLUGIN } from '@waldur/slurm/constants';
 import { VMWARE_VM } from '@waldur/vmware/constants';
 
@@ -33,7 +32,6 @@ export const getOfferingImage = (offering: Offering) => {
       return rancherIcon;
 
     case SLURM_PLUGIN:
-    case SITE_AGENT_PLUGIN:
       return slurmIcon;
 
     case VMWARE_VM:
