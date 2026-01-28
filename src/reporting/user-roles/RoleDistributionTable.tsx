@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { CustomerMemberCount } from 'waldur-js-client';
 
+import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { translate } from '@waldur/i18n';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -24,18 +25,14 @@ const columns: Column<CustomerMemberCount>[] = [
   {
     title: translate('Members'),
     render: ({ row }) => (
-      <span className="fw-bold text-primary">{row.count.toLocaleString()}</span>
+      <span className="fw-bold text-primary">
+        {row.count != null ? row.count.toLocaleString() : '—'}
+      </span>
     ),
   },
   {
     title: translate('Has resources'),
-    render: ({ row }) => (
-      <span
-        className={`badge ${row.has_resources ? 'badge-light-success' : 'badge-light-secondary'}`}
-      >
-        {row.has_resources ? translate('Yes') : translate('No')}
-      </span>
-    ),
+    render: ({ row }) => <BooleanBadge value={row.has_resources} />,
   },
 ];
 
@@ -43,7 +40,7 @@ export const RoleDistributionTable: FC<RoleDistributionTableProps> = ({
   data,
 }) => {
   const sortedData = useMemo(
-    () => [...data].sort((a, b) => b.count - a.count),
+    () => [...data].sort((a, b) => (b.count ?? 0) - (a.count ?? 0)),
     [data],
   );
 

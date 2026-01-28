@@ -13,6 +13,7 @@ import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { VersionHistoryButton } from '@waldur/version-history';
 
 import { PureDetailsTable } from './PlanDetailsTable';
 import { combinePrices } from './utils';
@@ -100,7 +101,18 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
   return (
     <ModalDialog
       title={translate('Plan details')}
-      footer={<CloseDialogButton label={translate('Done')} />}
+      footer={
+        <>
+          {data?.plan && (
+            <VersionHistoryButton
+              entityType="plan"
+              entityUuid={data.plan.uuid}
+              entityName={data.plan.name}
+            />
+          )}
+          <CloseDialogButton label={translate('Done')} />
+        </>
+      }
     >
       {isLoading ? (
         <LoadingSpinner />

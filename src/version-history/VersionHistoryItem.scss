@@ -1,0 +1,13 @@
+@use '../core/timeline-item' as *;
+
+.timeline .version-history-item {
+  @include timeline-item-base;
+
+  &:hover:not(.bg-light-primary) {
+    background-color: var(--bs-secondary-bg);
+  }
+
+  &.bg-light-primary:hover {
+    background-color: var(--bs-light-primary) !important;
+  }
+}
