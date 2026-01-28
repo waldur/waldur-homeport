@@ -1,5 +1,12 @@
 import { FC, useCallback, useMemo } from 'react';
 import { Field, Form as FinalForm } from 'react-final-form';
+import {
+  IssueStatusCreateRequest,
+  IssueStatusType,
+  PatchedIssueStatusRequest,
+  supportIssueStatusesCreate,
+  supportIssueStatusesPartialUpdate,
+} from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
 import { SelectField, StringField, SubmitButton } from '@waldur/form';
@@ -9,12 +16,7 @@ import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 
-import {
-  createIssueStatus,
-  IssueStatusAdmin,
-  IssueStatusTypeChoices,
-  updateIssueStatus,
-} from './api';
+import { IssueStatusAdmin, IssueStatusTypeChoices } from './api';
 
 interface IssueStatusFormProps {
   resolve: {
@@ -36,10 +38,21 @@ export const IssueStatusForm: FC<IssueStatusFormProps> = ({ resolve }) => {
           type: values.type.value,
         };
         if (isEdit) {
-          await updateIssueStatus(resolve.issueStatus!.uuid, payload);
+          await supportIssueStatusesPartialUpdate({
+            path: { uuid: resolve.issueStatus!.uuid },
+            body: {
+              ...payload,
+              type: payload.type as IssueStatusType,
+            } as PatchedIssueStatusRequest,
+          });
           showSuccess(translate('Issue status has been updated.'));
         } else {
-          await createIssueStatus(payload);
+          await supportIssueStatusesCreate({
+            body: {
+              ...payload,
+              type: payload.type as IssueStatusType,
+            } as IssueStatusCreateRequest,
+          });
           showSuccess(translate('Issue status has been created.'));
         }
         resolve.refetch();

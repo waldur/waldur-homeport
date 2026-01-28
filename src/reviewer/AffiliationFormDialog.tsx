@@ -2,11 +2,11 @@ import { PencilSimple, PlusCircle } from '@phosphor-icons/react';
 import { FormCheck } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
+  nestedReviewerProfileAffiliationsPartialUpdate,
   reviewerProfilesAffiliationsCreate,
   ReviewerAffiliationRequest,
   AffiliationTypeEnum,
 } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
 
 import { required } from '@waldur/core/validators';
 import {
@@ -80,11 +80,12 @@ export const AffiliationFormDialog = ({
 
       if (isEdit) {
         // Update existing affiliation
-        await client.patch({
-          url: `/api/reviewer-profiles/${resolve.profile.uuid}/affiliations/${resolve.affiliation.uuid}/`,
-          body: JSON.stringify(body),
-          headers: { 'Content-Type': 'application/json' },
-          security: [{ name: 'Authorization', type: 'apiKey' }],
+        await nestedReviewerProfileAffiliationsPartialUpdate({
+          path: {
+            reviewer_profile_uuid: resolve.profile.uuid,
+            uuid: resolve.affiliation.uuid,
+          },
+          body,
         });
         showSuccess(translate('Affiliation has been updated.'));
       } else {

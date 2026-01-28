@@ -2,18 +2,18 @@ import { CheckCircle, Trash, XCircle } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
+import {
+  RequestTypeAdmin,
+  RequestTypeAdminRequest,
+  supportRequestTypesAdminActivate,
+  supportRequestTypesAdminDeactivate,
+  supportRequestTypesAdminDestroy,
+} from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
-
-import {
-  activateRequestType,
-  deactivateRequestType,
-  deleteRequestType,
-  RequestTypeAdmin,
-} from './api';
 
 interface RequestTypeBatchActionsProps {
   rows: RequestTypeAdmin[];
@@ -51,7 +51,10 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
 
       try {
         const promises = inactiveRows.map((row) =>
-          activateRequestType(row.uuid),
+          supportRequestTypesAdminActivate({
+            path: { uuid: row.uuid },
+            body: {} as RequestTypeAdminRequest,
+          }),
         );
         await Promise.all(promises);
         refetch();
@@ -98,7 +101,10 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
 
       try {
         const promises = activeRows.map((row) =>
-          deactivateRequestType(row.uuid),
+          supportRequestTypesAdminDeactivate({
+            path: { uuid: row.uuid },
+            body: {} as RequestTypeAdminRequest,
+          }),
         );
         await Promise.all(promises);
         refetch();
@@ -158,7 +164,9 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
       }
 
       try {
-        const promises = rows.map((row) => deleteRequestType(row.uuid));
+        const promises = rows.map((row) =>
+          supportRequestTypesAdminDestroy({ path: { uuid: row.uuid } }),
+        );
         await Promise.all(promises);
         refetch();
         dispatch(

@@ -1,8 +1,10 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ReviewerExpertise } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  nestedReviewerProfileExpertiseDestroy,
+  ReviewerExpertise,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -51,9 +53,11 @@ export const ExpertiseBulkRemoveButton = ({
     try {
       setIsRemoving(true);
       const promises = rows.map((row) =>
-        client.delete({
-          url: `/api/reviewer-profiles/${profile.uuid}/expertise/${row.uuid}/`,
-          security: [{ name: 'Authorization', type: 'apiKey' }],
+        nestedReviewerProfileExpertiseDestroy({
+          path: {
+            reviewer_profile_uuid: profile.uuid,
+            uuid: row.uuid,
+          },
         }),
       );
 

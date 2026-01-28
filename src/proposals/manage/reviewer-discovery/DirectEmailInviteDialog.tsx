@@ -2,7 +2,10 @@ import { FORM_ERROR } from 'final-form';
 import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  EmailInvitationRequest,
+  proposalProtectedCallsInviteByEmail,
+} from 'waldur-js-client';
 
 import { StringField, SubmitButton, TextField } from '@waldur/form';
 import { FormContainer } from '@waldur/form/FormContainer';
@@ -51,13 +54,12 @@ export const DirectEmailInviteDialog = ({
   const processRequest = useCallback(
     async (values: FormValues) => {
       try {
-        await client.post({
-          url: `/api/proposal-protected-calls/${resolve.call.uuid}/invite-by-email/`,
+        await proposalProtectedCallsInviteByEmail({
+          path: { uuid: resolve.call.uuid },
           body: {
             email: values.email,
             invitation_message: values.invitation_message || undefined,
-          },
-          security: [{ name: 'Authorization', type: 'apiKey' }],
+          } as EmailInvitationRequest,
         });
         resolve.refetch();
         dispatch(

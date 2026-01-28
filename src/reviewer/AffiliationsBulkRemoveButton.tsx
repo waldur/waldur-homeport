@@ -1,8 +1,10 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ReviewerAffiliation } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  nestedReviewerProfileAffiliationsDestroy,
+  ReviewerAffiliation,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -52,9 +54,11 @@ export const AffiliationsBulkRemoveButton = ({
     try {
       setIsRemoving(true);
       const promises = rows.map((row) =>
-        client.delete({
-          url: `/api/reviewer-profiles/${profile.uuid}/affiliations/${row.uuid}/`,
-          security: [{ name: 'Authorization', type: 'apiKey' }],
+        nestedReviewerProfileAffiliationsDestroy({
+          path: {
+            reviewer_profile_uuid: profile.uuid,
+            uuid: row.uuid,
+          },
         }),
       );
 

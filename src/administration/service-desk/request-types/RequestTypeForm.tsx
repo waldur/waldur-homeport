@@ -1,5 +1,12 @@
 import { FC, useCallback, useMemo } from 'react';
 import { Field, Form as FinalForm } from 'react-final-form';
+import {
+  PatchedRequestTypeAdminRequest,
+  RequestTypeAdmin,
+  RequestTypeAdminRequest,
+  supportRequestTypesAdminCreate,
+  supportRequestTypesAdminPartialUpdate,
+} from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
 import { NumberField, StringField, SubmitButton } from '@waldur/form';
@@ -9,8 +16,6 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
-
-import { createRequestType, RequestTypeAdmin, updateRequestType } from './api';
 
 interface RequestTypeFormProps {
   resolve: {
@@ -28,10 +33,15 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
     async (values: Partial<RequestTypeAdmin>) => {
       try {
         if (isEdit) {
-          await updateRequestType(resolve.requestType!.uuid, values);
+          await supportRequestTypesAdminPartialUpdate({
+            path: { uuid: resolve.requestType!.uuid },
+            body: values as PatchedRequestTypeAdminRequest,
+          });
           showSuccess(translate('Request type has been updated.'));
         } else {
-          await createRequestType(values);
+          await supportRequestTypesAdminCreate({
+            body: values as RequestTypeAdminRequest,
+          });
           showSuccess(translate('Request type has been created.'));
         }
         resolve.refetch();

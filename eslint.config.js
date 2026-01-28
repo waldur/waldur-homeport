@@ -20,6 +20,7 @@ import enforceBreadcrumbColors from './eslint-rules/enforce-breadcrumb-colors.js
 import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
 import noDirectBootstrapButton from './eslint-rules/no-direct-bootstrap-button.js';
 import noDirectBootstrapDropdownButton from './eslint-rules/no-direct-bootstrap-dropdown-button.js';
+import noDirectClientUsage from './eslint-rules/no-direct-client-usage.js';
 import noEditButtonSizeOverride from './eslint-rules/no-edit-button-size-override.js';
 import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
 import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
@@ -66,6 +67,7 @@ export default tseslint
             'no-direct-bootstrap-button': noDirectBootstrapButton,
             'no-direct-bootstrap-dropdown-button':
               noDirectBootstrapDropdownButton,
+            'no-direct-client-usage': noDirectClientUsage,
             'no-edit-button-size-override': noEditButtonSizeOverride,
             'enforce-formcheck-components': enforceFormcheckComponents,
             'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
@@ -113,6 +115,7 @@ export default tseslint
         'waldur-custom/enforce-button-variants': 'error',
         'waldur-custom/no-direct-bootstrap-button': 'error',
         'waldur-custom/no-direct-bootstrap-dropdown-button': 'error',
+        'waldur-custom/no-direct-client-usage': 'error',
         'waldur-custom/no-edit-button-size-override': 'error',
         'waldur-custom/enforce-formcheck-components': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',

@@ -1,6 +1,6 @@
 import { FunctionComponent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { client } from 'waldur-js-client/client.gen';
+import { nestedReviewerProfilePublicationsDestroy } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -29,9 +29,8 @@ export const PublicationDeleteAction: FunctionComponent<{
 
     setLoading(true);
     try {
-      await client.delete({
-        url: `/api/reviewer-profiles/${profile.uuid}/publications/${row.uuid}/`,
-        security: [{ name: 'Authorization', type: 'apiKey' }],
+      await nestedReviewerProfilePublicationsDestroy({
+        path: { reviewer_profile_uuid: profile.uuid, uuid: row.uuid },
       });
       dispatch(showSuccess(translate('Publication has been deleted.')));
       refetch?.();

@@ -1,12 +1,14 @@
 import { Trash } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
+import {
+  RequestTypeAdmin,
+  supportRequestTypesAdminDestroy,
+} from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useNotify } from '@waldur/store/hooks';
-
-import { deleteRequestType, RequestTypeAdmin } from './api';
 
 export const RequestTypeDeleteAction = ({
   row,
@@ -43,7 +45,7 @@ export const RequestTypeDeleteAction = ({
     }
 
     try {
-      await deleteRequestType(row.uuid);
+      await supportRequestTypesAdminDestroy({ path: { uuid: row.uuid } });
       showSuccess(translate('Request type has been deleted.'));
       refetch();
     } catch (error) {

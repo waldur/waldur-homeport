@@ -1,6 +1,6 @@
 import { FunctionComponent, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { client } from 'waldur-js-client/client.gen';
+import { nestedReviewerProfileAffiliationsDestroy } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -29,9 +29,8 @@ export const AffiliationDeleteAction: FunctionComponent<{
 
     setLoading(true);
     try {
-      await client.delete({
-        url: `/api/reviewer-profiles/${profile.uuid}/affiliations/${row.uuid}/`,
-        security: [{ name: 'Authorization', type: 'apiKey' }],
+      await nestedReviewerProfileAffiliationsDestroy({
+        path: { reviewer_profile_uuid: profile.uuid, uuid: row.uuid },
       });
       dispatch(showSuccess(translate('Affiliation has been deleted.')));
       refetch?.();

@@ -1,4 +1,7 @@
-import { client } from 'waldur-js-client/client.gen';
+import {
+  usersDataAccessHistoryList,
+  usersDataAccessRetrieve,
+} from 'waldur-js-client';
 
 import { fetchResultCount, parseNextPage } from '@waldur/core/api';
 import { queryClient } from '@waldur/core/queryClient';
@@ -6,15 +9,12 @@ import { TableRequest } from '@waldur/table/types';
 
 import { DataAccessHistoryEntry, DataAccessVisibility } from './types';
 
-const API_BASE = '/api/users';
-
 // Fetch data access visibility (who CAN access)
 export const fetchDataAccessVisibility = async (
   userUuid: string,
 ): Promise<DataAccessVisibility> => {
-  const response = await client.get({
-    url: `${API_BASE}/${userUuid}/data_access/`,
-    security: [{ in: 'header', type: 'http' }],
+  const response = await usersDataAccessRetrieve({
+    path: { uuid: userUuid },
   });
   return response.data as DataAccessVisibility;
 };
@@ -30,10 +30,9 @@ export const dataAccessHistoryFetcher =
     return queryClient.fetchQuery({
       queryKey: ['table', request.tableKey, userUuid, query],
       queryFn: async () => {
-        const response = await client.get({
-          url: `${API_BASE}/${userUuid}/data_access_history/`,
+        const response = await usersDataAccessHistoryList({
+          path: { uuid: userUuid },
           query,
-          security: [{ in: 'header', type: 'http' }],
         });
         const rows = response.data as DataAccessHistoryEntry[];
         const resultCount = fetchResultCount(response);
