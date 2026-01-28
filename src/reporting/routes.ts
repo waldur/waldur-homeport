@@ -128,6 +128,101 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Usage trends'),
     },
   },
+  {
+    name: 'reporting-organization-summary',
+    url: 'organization-summary/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./organization-summary/OrganizationSummaryPage').then(
+        (module) => ({
+          default: module.OrganizationSummaryPage,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Organization summary'),
+    },
+  },
+  {
+    name: 'reporting-project-detail',
+    url: 'project-detail/:project_uuid/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./project-detail/ProjectDetailPage').then((module) => ({
+        default: module.ProjectDetailPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Project detail'),
+    },
+  },
+  {
+    name: 'reporting-resources-geography',
+    url: 'resources-geography/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./resources-geography/ResourcesGeographyPage').then((m) => ({
+        default: m.ResourcesGeographyPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Geographic distribution'),
+    },
+  },
+  {
+    name: 'reporting-project-classification',
+    url: 'project-classification/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./project-classification/ProjectClassificationPage').then(
+        (m) => ({
+          default: m.ProjectClassificationPage,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Project classification'),
+    },
+  },
+  {
+    name: 'reporting-usage-by-customer',
+    url: 'usage-by-customer/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./usage-by-customer/UsageByCustomerPage').then((m) => ({
+        default: m.UsageByCustomerPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Usage by customer'),
+    },
+  },
+  {
+    name: 'reporting-usage-by-org-type',
+    url: 'usage-by-org-type/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./usage-by-org-type/UsageByOrgTypePage').then((m) => ({
+        default: m.UsageByOrgTypePage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Usage by organization type'),
+    },
+  },
+  {
+    name: 'reporting-usage-by-creator',
+    url: 'usage-by-creator/',
+    parent: 'reporting-resources',
+    component: lazyComponent(() =>
+      import('./usage-by-creator/UsageByCreatorPage').then((m) => ({
+        default: m.UsageByCreatorPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Usage by creator'),
+    },
+  },
 
   // Proposals & Reviews category (feature-based visibility)
   // Requires both call management AND experimental flags since all children use mock data
@@ -414,6 +509,19 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Affiliations'),
     },
   },
+  {
+    name: 'reporting-user-roles',
+    url: 'user-roles/',
+    parent: 'reporting-users',
+    component: lazyComponent(() =>
+      import('./user-roles/UserRolesPage').then((m) => ({
+        default: m.UserRolesPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Role distribution'),
+    },
+  },
 
   // Financial category (staff/support only) - renamed from Platform
   {
@@ -481,6 +589,19 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Orders'),
     },
   },
+  {
+    name: 'reporting-offering-costs',
+    url: 'offering-costs/',
+    parent: 'reporting-financial',
+    component: lazyComponent(() =>
+      import('./offering-costs/OfferingCostsPage').then((m) => ({
+        default: m.OfferingCostsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Offering costs'),
+    },
+  },
 
   // Infrastructure category (staff/support only)
   {
@@ -536,6 +657,19 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Maintenance overview'),
+    },
+  },
+  {
+    name: 'reporting-provisioning-stats',
+    url: 'provisioning-stats/',
+    parent: 'reporting-operations',
+    component: lazyComponent(() =>
+      import('./provisioning-stats/ProvisioningStatsPage').then((m) => ({
+        default: m.ProvisioningStatsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Provisioning statistics'),
     },
   },
 
