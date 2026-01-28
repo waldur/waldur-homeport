@@ -21,7 +21,6 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
       {
         title: translate('Affiliation'),
         render: ({ row }) => <span className="fw-bold">{row.affiliation}</span>,
-        orderField: 'affiliation',
         export: (row) => row.affiliation,
       },
       {
@@ -31,7 +30,6 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
             {row.total_resources.toLocaleString()}
           </span>
         ),
-        orderField: 'total_resources',
         export: (row) => row.total_resources,
       },
       {
@@ -41,7 +39,6 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
             {row.total_usage.toLocaleString()}
           </span>
         ),
-        orderField: 'total_usage',
         export: (row) => row.total_usage,
       },
       {
@@ -49,7 +46,6 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
         render: ({ row }) => (
           <span className="fw-semibold">{defaultCurrency(row.total_cost)}</span>
         ),
-        orderField: 'total_cost',
         export: (row) => row.total_cost,
       },
     ];
@@ -84,11 +80,7 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
       initColumnPositions={noop}
       resetPagination={noop}
       hasPagination={false}
-      hasQuery
       verboseName={translate('affiliations')}
-      standalone
-      initialSorting={{ field: 'total_resources', mode: 'desc' }}
-      enableExport
     />
   );
 };

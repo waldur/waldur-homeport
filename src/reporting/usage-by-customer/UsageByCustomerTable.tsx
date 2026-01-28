@@ -35,7 +35,6 @@ export const UsageByCustomerTable: FC<Props> = ({
             {row.customer_name}
           </Link>
         ),
-        orderField: 'customer_name',
         export: (row) => row.customer_name,
       },
       {
@@ -48,7 +47,6 @@ export const UsageByCustomerTable: FC<Props> = ({
         render: ({ row }) => (
           <span className="text-success fw-semibold">{row.resources_ok}</span>
         ),
-        orderField: 'resources_ok',
         export: (row) => row.resources_ok,
       },
       {
@@ -60,7 +58,6 @@ export const UsageByCustomerTable: FC<Props> = ({
             {row.resources_erred}
           </span>
         ),
-        orderField: 'resources_erred',
         export: (row) => row.resources_erred,
       },
       {
@@ -68,7 +65,6 @@ export const UsageByCustomerTable: FC<Props> = ({
         render: ({ row }) => (
           <span className="fw-semibold">{row.resources_total}</span>
         ),
-        orderField: 'resources_total',
         export: (row) => row.resources_total,
       },
       {
@@ -78,7 +74,6 @@ export const UsageByCustomerTable: FC<Props> = ({
             {defaultCurrency(parseFloat(row.total_cost))}
           </span>
         ),
-        orderField: 'total_cost',
         export: (row) => row.total_cost,
       },
     ];
@@ -127,11 +122,7 @@ export const UsageByCustomerTable: FC<Props> = ({
       initColumnPositions={noop}
       resetPagination={noop}
       hasPagination={false}
-      hasQuery
       verboseName={translate('organizations')}
-      standalone
-      initialSorting={{ field: 'resources_total', mode: 'desc' }}
-      enableExport
     />
   );
 };

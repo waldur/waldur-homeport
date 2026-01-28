@@ -1,7 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { marketplaceStatsComponentUsagesPerMonthList } from 'waldur-js-client';
+import {
+  AggregatedUsageTrend,
+  marketplaceStatsAggregatedUsageTrendsList,
+} from 'waldur-js-client';
 
 import { MonthlyUsageData } from './types';
 import {
@@ -15,43 +18,35 @@ interface UseUsageTrendsOptions {
   offering_uuid?: string;
 }
 
-interface ComponentUsagePerMonth {
-  period?: string;
-  total_usage?: number;
-  count?: number;
-}
-
 export const useUsageTrends = (options: UseUsageTrendsOptions = {}) => {
   const currentYear = DateTime.now().year;
   const { year = currentYear } = options;
 
-  // Fetch all usage data (endpoint doesn't support date filtering)
+  // Fetch aggregated usage trends from new backend endpoint
   const usageQuery = useQuery({
-    queryKey: ['usage-trends-all'],
+    queryKey: ['usage-trends-aggregated'],
     queryFn: async ({ signal }) => {
-      const response = await marketplaceStatsComponentUsagesPerMonthList({
+      const response = await marketplaceStatsAggregatedUsageTrendsList({
         query: {
           page_size: 1000, // Get all available data
         },
         signal,
       });
 
-      // Transform the response to our format
-      const data = response.data as ComponentUsagePerMonth[];
-      return data.map((item) => {
-        const period = item.period || '';
-        const [yearStr, monthStr] = period.split('-');
-        return {
-          period,
-          year: parseInt(yearStr, 10) || 0,
-          month: parseInt(monthStr, 10) || 1,
-          total_usage: item.total_usage || 0,
-          resource_count: item.count || 0,
-          component_count: 0, // Not available in this endpoint
-        } as MonthlyUsageData;
-      });
+      // Transform to our format
+      const data = response.data as AggregatedUsageTrend[];
+      return data.map(
+        (item): MonthlyUsageData => ({
+          period: item.period,
+          year: item.year,
+          month: item.month,
+          total_usage: parseFloat(item.total_usage) || 0,
+          resource_count: item.resource_count,
+          component_count: item.component_count,
+        }),
+      );
     },
-    staleTime: 10 * 60 * 1000, // 10 minutes - this data is cached on backend
+    staleTime: 10 * 60 * 1000, // 10 minutes
   });
 
   // Filter and process data by year

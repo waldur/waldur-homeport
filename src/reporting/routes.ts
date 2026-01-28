@@ -145,13 +145,20 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'reporting-project-detail',
-    url: 'project-detail/:project_uuid/',
+    url: 'project-detail/',
     parent: 'reporting-resources',
     component: lazyComponent(() =>
       import('./project-detail/ProjectDetailPage').then((module) => ({
         default: module.ProjectDetailPage,
       })),
     ),
+    params: {
+      project_uuid: {
+        value: null,
+        squash: true,
+        dynamic: true,
+      },
+    },
     data: {
       breadcrumb: () => translate('Project detail'),
     },
