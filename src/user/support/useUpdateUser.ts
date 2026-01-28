@@ -5,6 +5,7 @@ import { User } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
+import { tryJoinOrganization } from '@waldur/invitations/tryJoinOrganization';
 import { useNotify } from '@waldur/store/hooks';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -39,7 +40,16 @@ export const useUpdateUser = (user: User) => {
         ...(hasImageFile ? formDataOptions : {}),
       });
       if (newUser.uuid === currentUser.uuid) {
+        // Check if ToS was just accepted (agreement_date changed from null to not-null)
+        const tosJustAccepted =
+          !currentUser.agreement_date && newUser.agreement_date;
+
         dispatch(setCurrentUser(newUser));
+
+        // If ToS was just accepted, check for pending group invitation
+        if (tosJustAccepted) {
+          tryJoinOrganization();
+        }
       }
       showSuccess(translate('User has been updated'));
     } catch (error) {
