@@ -52,6 +52,22 @@ export const formatOption = (option: OptionFormData) => {
     item.default_configs = default_configs;
   }
 
+  // Handle validators for cross-field validation
+  if (rest.validators && Array.isArray(rest.validators)) {
+    const validValidators = rest.validators.filter(
+      (v) => v.type && v.target_field,
+    );
+    if (validValidators.length > 0) {
+      item.validators = validValidators.map((v) => ({
+        type: typeof v.type === 'object' ? v.type.value : v.type,
+        target_field:
+          typeof v.target_field === 'object'
+            ? v.target_field.value
+            : v.target_field,
+      }));
+    }
+  }
+
   return item;
 };
 

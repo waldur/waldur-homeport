@@ -6,6 +6,9 @@ import {
   AttributeValidator,
   composeValidators,
   greaterThanField,
+  greaterThanOrEqualField,
+  lessThanField,
+  lessThanOrEqualField,
   required,
 } from '@waldur/core/validators';
 import {
@@ -56,6 +59,13 @@ const validateK8sConfig = (value) => {
   return undefined;
 };
 
+const VALIDATOR_MAPPING = {
+  gt: greaterThanField,
+  gte: greaterThanOrEqualField,
+  lt: lessThanField,
+  lte: lessThanOrEqualField,
+};
+
 /**
  * Builds a validator function for an option field, including cross-field validation.
  * @param option - The option field configuration
@@ -84,14 +94,13 @@ const buildOptionValidator = (
   // Add cross-field validators
   if (option.validators && Array.isArray(option.validators)) {
     option.validators.forEach((validator: AttributeValidator) => {
-      if (validator.type === 'gt') {
-        const targetOption = options.options?.[validator.target_field];
+      const targetOption = options.options?.[validator.target_field];
+      const targetLabel = targetOption?.label;
+
+      const validatorFn = VALIDATOR_MAPPING[validator.type];
+      if (validatorFn) {
         validators.push(
-          greaterThanField(
-            validator.target_field,
-            allValues,
-            targetOption?.label,
-          ),
+          validatorFn(validator.target_field, allValues, targetLabel),
         );
       }
     });
