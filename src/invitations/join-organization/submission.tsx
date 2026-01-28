@@ -6,6 +6,7 @@ import { FieldErrorMessage } from '@waldur/form/FieldError';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
+import { UsersService } from '@waldur/user/UsersService';
 
 import { submitGroupRequest } from '../utils';
 
@@ -17,6 +18,8 @@ export const requestToAccessOrganization = (
     .then(async (groupInvitation) => {
       GroupInvitationTokenStorage.remove();
       if (groupInvitation.auto_approved) {
+        // Refresh user to get updated permissions from backend
+        await UsersService.refreshCurrentUser();
         await waitForConfirmation(
           dispatch,
           translate('You have successfully joined {organization}', {
