@@ -6,7 +6,10 @@ import {
 import * as AuthService from '@waldur/auth/AuthService';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { InvitationTokenStorage } from '@waldur/core/StorageManager';
+import {
+  GroupInvitationTokenStorage,
+  InvitationTokenStorage,
+} from '@waldur/core/StorageManager';
 import { createDeferred } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
@@ -111,9 +114,15 @@ export function submitPermissionRequest(token) {
               router.stateService.go('profile.details');
             }
           });
+      } else {
+        // User cancelled - clear token and redirect to profile
+        GroupInvitationTokenStorage.remove();
+        router.stateService.go('profile.details');
       }
     })
     .catch(() => {
+      // Dialog dismissed or error - clear token and redirect to profile
+      GroupInvitationTokenStorage.remove();
       router.stateService.go('profile.details');
     });
 }
@@ -143,7 +152,7 @@ export async function acceptInvitation(token) {
   }
 }
 
-export function submitGroupRequest(token) {
+function submitGroupRequest(token) {
   return userGroupInvitationsSubmitRequest({ path: { uuid: token } })
     .then((res) => {
       if (res.data.auto_approved) {

@@ -1,4 +1,5 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+import { userGroupInvitationsSubmitRequest } from 'waldur-js-client';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
@@ -8,13 +9,13 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse } from '@waldur/store/notify';
 import { UsersService } from '@waldur/user/UsersService';
 
-import { submitGroupRequest } from '../utils';
-
 export const requestToAccessOrganization = (
   groupInvitationUuid: string,
   dispatch,
 ) =>
-  submitGroupRequest(groupInvitationUuid)
+  // Call API directly instead of submitGroupRequest() to avoid duplicate toast notification
+  userGroupInvitationsSubmitRequest({ path: { uuid: groupInvitationUuid } })
+    .then((res) => res.data)
     .then(async (groupInvitation) => {
       GroupInvitationTokenStorage.remove();
       if (groupInvitation.auto_approved) {

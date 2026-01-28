@@ -2,15 +2,20 @@ import store from '@waldur/store/store';
 
 import { MatomoInstance } from './afterBootstrap';
 import * as AuthService from './auth/AuthService';
-import { RedirectStorage } from './core/StorageManager';
+import {
+  GroupInvitationTokenStorage,
+  RedirectStorage,
+} from './core/StorageManager';
 import { cleanObject } from './core/utils';
 import { setPrevParams, setPrevState } from './error/utils';
 import { isFeatureVisible } from './features/connect';
 import { MarketplaceFeatures } from './FeaturesEnums';
+import { translate } from './i18n';
 import { tryAcceptInvitation } from './invitations/tryAcceptInvitation';
 import { tryJoinOrganization } from './invitations/tryJoinOrganization';
 import { closeModalDialog } from './modal/actions';
 import { router } from './router';
+import { showRedirectMessage } from './store/notify';
 import { UsersService } from './user/UsersService';
 
 export function attachTransitions() {
@@ -53,6 +58,14 @@ export function attachTransitions() {
         return;
       }
 
+      // Preserve group invitation token before potential redirect to profile-manage
+      if (toStateName === 'user-group-invitation') {
+        const token = transition.params().token;
+        if (token) {
+          GroupInvitationTokenStorage.set(token);
+        }
+      }
+
       try {
         const result = await UsersService.isCurrentUserValid();
         if (result) {
@@ -74,6 +87,24 @@ export function attachTransitions() {
         state.data && state.data.auth && !AuthService.isAuthenticated(),
     },
     (transition) => {
+      const toStateName = transition.to().name;
+
+      // Show message and store token for group invitation
+      if (toStateName === 'user-group-invitation') {
+        const token = transition.params().token;
+        if (token) {
+          GroupInvitationTokenStorage.set(token);
+          store.dispatch(
+            showRedirectMessage(
+              translate('Authentication required'),
+              translate(
+                'Please log in to request access to this organization.',
+              ),
+            ),
+          );
+        }
+      }
+
       // If `catalogue_only` feature is enabled, user should be redirected to marketplace landing page.
       if (isFeatureVisible(MarketplaceFeatures.catalogue_only)) {
         return transition.router.stateService.target(
@@ -218,8 +249,11 @@ export function attachTransitions() {
       }
 
       // Fallback: Check for pending group invitation on initial page load
-      // Primary handling is in auth callback handlers (OauthLoginCompleted, AuthLoginCompleted)
-      if (!transition.from().name) {
+      // Skip if landing on user-group-invitation route (it handles invitations via confirmation dialog)
+      if (
+        !transition.from().name &&
+        transition.to().name !== 'user-group-invitation'
+      ) {
         tryJoinOrganization();
       }
     }

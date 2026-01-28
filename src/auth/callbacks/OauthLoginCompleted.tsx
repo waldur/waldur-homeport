@@ -4,6 +4,7 @@ import { FunctionComponent, useEffect, useState } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { RedirectStorage } from '@waldur/core/StorageManager';
 import { getQueryString } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { tryJoinOrganization } from '@waldur/invitations/tryJoinOrganization';
@@ -24,7 +25,12 @@ export const OauthLoginCompleted: FunctionComponent = () => {
       try {
         const token = decodeURIComponent(qs.token as string);
         await loginUser(token, provider);
-        tryJoinOrganization();
+        // Only call tryJoinOrganization if NOT redirecting to user-group-invitation
+        // (that route handles invitations via its own confirmation dialog)
+        const redirect = RedirectStorage.get();
+        if (redirect?.toState !== 'user-group-invitation') {
+          tryJoinOrganization();
+        }
         AuthService.redirectOnSuccess();
       } catch (e) {
         setError(e.data?.detail || translate('Unknown error'));
