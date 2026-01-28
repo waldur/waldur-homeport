@@ -1,6 +1,12 @@
 import { describe, it, expect } from 'vitest';
 
-import { email, isGuid, url, validateRedirectURLs } from './validators';
+import {
+  email,
+  greaterThanField,
+  isGuid,
+  url,
+  validateRedirectURLs,
+} from './validators';
 
 describe('GUID validator', () => {
   it('returns undefined if GUID is valid', () => {
@@ -427,6 +433,93 @@ describe('validateRedirectURLs', () => {
       const result = validateRedirectURLs(['  http://example.com  ']);
       expect(result).toContain('URL 1:');
       expect(result).toContain('Must use HTTPS (unless localhost)');
+    });
+  });
+});
+
+describe('greaterThanField validator', () => {
+  describe('returns error when source is not greater than target', () => {
+    it('returns error when source equals target', () => {
+      const allValues = { attributes: { min_value: 10, max_value: 10 } };
+      const validator = greaterThanField('min_value', allValues, 'Minimum');
+      expect(validator(10)).toBe('Must be greater than Minimum.');
+    });
+
+    it('returns error when source is less than target', () => {
+      const allValues = { attributes: { min_value: 20, max_value: 10 } };
+      const validator = greaterThanField('min_value', allValues, 'Minimum');
+      expect(validator(10)).toBe('Must be greater than Minimum.');
+    });
+
+    it('uses target field name when label not provided', () => {
+      const allValues = { attributes: { min_value: 10 } };
+      const validator = greaterThanField('min_value', allValues);
+      expect(validator(5)).toBe('Must be greater than min_value.');
+    });
+  });
+
+  describe('returns undefined when source is greater than target', () => {
+    it('passes when source is greater than target', () => {
+      const allValues = { attributes: { min_value: 5, max_value: 10 } };
+      const validator = greaterThanField('min_value', allValues, 'Minimum');
+      expect(validator(10)).toBeUndefined();
+    });
+  });
+
+  describe('handles edge cases correctly', () => {
+    it('returns undefined when source value is undefined', () => {
+      const allValues = { attributes: { min_value: 10 } };
+      const validator = greaterThanField('min_value', allValues);
+      expect(validator(undefined)).toBeUndefined();
+    });
+
+    it('returns undefined when source value is null', () => {
+      const allValues = { attributes: { min_value: 10 } };
+      const validator = greaterThanField('min_value', allValues);
+      expect(validator(null)).toBeUndefined();
+    });
+
+    it('returns undefined when target value is undefined', () => {
+      const allValues = { attributes: {} };
+      const validator = greaterThanField('min_value', allValues);
+      expect(validator(10)).toBeUndefined();
+    });
+
+    it('returns undefined when target value is null', () => {
+      const allValues = { attributes: { min_value: null } };
+      const validator = greaterThanField('min_value', allValues);
+      expect(validator(10)).toBeUndefined();
+    });
+
+    it('returns undefined when attributes are missing', () => {
+      const allValues = {};
+      const validator = greaterThanField('min_value', allValues);
+      expect(validator(10)).toBeUndefined();
+    });
+
+    it('returns undefined when allValues is undefined', () => {
+      const validator = greaterThanField('min_value', undefined as any);
+      expect(validator(10)).toBeUndefined();
+    });
+
+    it('works with zero values correctly', () => {
+      const allValues = { attributes: { min_value: 0 } };
+      const validator = greaterThanField('min_value', allValues, 'Minimum');
+      // 0 is not greater than 0
+      expect(validator(0)).toBe('Must be greater than Minimum.');
+      // 1 is greater than 0
+      expect(validator(1)).toBeUndefined();
+    });
+
+    it('works with negative values correctly', () => {
+      const allValues = { attributes: { min_value: -5 } };
+      const validator = greaterThanField('min_value', allValues, 'Minimum');
+      // -3 > -5
+      expect(validator(-3)).toBeUndefined();
+      // -5 is not greater than -5
+      expect(validator(-5)).toBe('Must be greater than Minimum.');
+      // -10 < -5
+      expect(validator(-10)).toBe('Must be greater than Minimum.');
     });
   });
 });

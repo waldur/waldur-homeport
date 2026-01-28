@@ -6,8 +6,8 @@ import { notificationMessagesTemplatesList } from 'waldur-js-client';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { validateMaxLength } from '@waldur/core/validators';
 import { TextField } from '@waldur/form';
-import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
