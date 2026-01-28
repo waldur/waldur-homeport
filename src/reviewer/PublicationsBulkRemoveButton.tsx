@@ -1,8 +1,10 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { useDispatch } from 'react-redux';
-import { ReviewerPublication } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  nestedReviewerProfilePublicationsDestroy,
+  ReviewerPublication,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -47,9 +49,11 @@ export const PublicationsBulkRemoveButton = ({
     try {
       setIsRemoving(true);
       const promises = rows.map((row) =>
-        client.delete({
-          url: `/api/reviewer-profiles/${profile.uuid}/publications/${row.uuid}/`,
-          security: [{ name: 'Authorization', type: 'apiKey' }],
+        nestedReviewerProfilePublicationsDestroy({
+          path: {
+            reviewer_profile_uuid: profile.uuid,
+            uuid: row.uuid,
+          },
         }),
       );
 

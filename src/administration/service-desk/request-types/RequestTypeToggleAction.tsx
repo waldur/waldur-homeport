@@ -1,14 +1,14 @@
 import { CheckCircle, XCircle } from '@phosphor-icons/react';
+import {
+  RequestTypeAdmin,
+  RequestTypeAdminRequest,
+  supportRequestTypesAdminActivate,
+  supportRequestTypesAdminDeactivate,
+} from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useNotify } from '@waldur/store/hooks';
-
-import {
-  activateRequestType,
-  deactivateRequestType,
-  RequestTypeAdmin,
-} from './api';
 
 export const RequestTypeToggleAction = ({
   row,
@@ -22,10 +22,16 @@ export const RequestTypeToggleAction = ({
   const handleToggle = async () => {
     try {
       if (row.is_active) {
-        await deactivateRequestType(row.uuid);
+        await supportRequestTypesAdminDeactivate({
+          path: { uuid: row.uuid },
+          body: {} as RequestTypeAdminRequest,
+        });
         showSuccess(translate('Request type has been deactivated.'));
       } else {
-        await activateRequestType(row.uuid);
+        await supportRequestTypesAdminActivate({
+          path: { uuid: row.uuid },
+          body: {} as RequestTypeAdminRequest,
+        });
         showSuccess(translate('Request type has been activated.'));
       }
       refetch();

@@ -2,8 +2,12 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { FunctionComponent, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { ReviewerProfile } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  reviewerProfilesConnectOrcidRetrieve,
+  reviewerProfilesDisconnectOrcid,
+  reviewerProfilesSyncOrcid,
+  ReviewerProfile,
+} from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -60,11 +64,10 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
   const handleConnectOrcid = useCallback(async () => {
     setIsConnectingOrcid(true);
     try {
-      const result = await client.get<{ authorization_url: string }>({
-        url: `/api/reviewer-profiles/${profile.uuid}/connect-orcid/`,
-        security: [{ name: 'Authorization', type: 'apiKey' }],
+      const result = await reviewerProfilesConnectOrcidRetrieve({
+        path: { uuid: profile.uuid },
       });
-      const authUrl = (result as any).data?.authorization_url;
+      const authUrl = result.data.authorization_url;
       if (authUrl) {
         window.location.href = authUrl;
       }
@@ -77,9 +80,8 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
   const handleSyncOrcid = useCallback(async () => {
     setIsSyncingOrcid(true);
     try {
-      await client.post({
-        url: `/api/reviewer-profiles/${profile.uuid}/sync-orcid/`,
-        security: [{ name: 'Authorization', type: 'apiKey' }],
+      await reviewerProfilesSyncOrcid({
+        path: { uuid: profile.uuid },
       });
       showSuccess(translate('ORCID data synchronized successfully.'));
       refetch?.();
@@ -103,9 +105,8 @@ export const ProfileInfoSection: FunctionComponent<ProfileInfoSectionProps> = ({
   const handleDisconnectOrcid = useCallback(async () => {
     setIsDisconnectingOrcid(true);
     try {
-      await client.post({
-        url: `/api/reviewer-profiles/${profile.uuid}/disconnect-orcid/`,
-        security: [{ name: 'Authorization', type: 'apiKey' }],
+      await reviewerProfilesDisconnectOrcid({
+        path: { uuid: profile.uuid },
       });
       showSuccess(translate('ORCID disconnected successfully.'));
       refetch?.();

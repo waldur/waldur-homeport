@@ -3,8 +3,11 @@ import { FORM_ERROR } from 'final-form';
 import { FC, useCallback, useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
-import { proposalProtectedCallsMatchingConfigurationRetrieve } from 'waldur-js-client';
-import { client } from 'waldur-js-client/client.gen';
+import {
+  PatchedMatchingConfigurationRequest,
+  proposalProtectedCallsMatchingConfigurationPartialUpdate,
+  proposalProtectedCallsMatchingConfigurationRetrieve,
+} from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import {
@@ -118,10 +121,9 @@ export const EditMatchingSettingDialog: FC<Props> = ({ resolve }) => {
       const body = { [resolve.name]: value };
 
       try {
-        await client.patch({
-          url: `/api/proposal-protected-calls/${resolve.call.uuid}/matching-configuration/`,
-          body,
-          security: [{ name: 'Authorization', type: 'apiKey' }],
+        await proposalProtectedCallsMatchingConfigurationPartialUpdate({
+          path: { uuid: resolve.call.uuid },
+          body: body as PatchedMatchingConfigurationRequest,
         });
         // Invalidate queries to refresh parent component
         await queryClient.invalidateQueries({
