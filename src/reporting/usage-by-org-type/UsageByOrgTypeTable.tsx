@@ -24,7 +24,6 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
             {row.organization_type || translate('Unknown')}
           </span>
         ),
-        orderField: 'organization_type',
         export: (row) => row.organization_type || 'Unknown',
       },
       {
@@ -34,7 +33,6 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
             {row.total_resources.toLocaleString()}
           </span>
         ),
-        orderField: 'total_resources',
         export: (row) => row.total_resources,
       },
       {
@@ -44,7 +42,6 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
             {row.total_usage.toLocaleString()}
           </span>
         ),
-        orderField: 'total_usage',
         export: (row) => row.total_usage,
       },
     ];
@@ -79,11 +76,7 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
       initColumnPositions={noop}
       resetPagination={noop}
       hasPagination={false}
-      hasQuery
       verboseName={translate('organization types')}
-      standalone
-      initialSorting={{ field: 'total_resources', mode: 'desc' }}
-      enableExport
     />
   );
 };
