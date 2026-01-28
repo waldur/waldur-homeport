@@ -1,8 +1,13 @@
 import { FC } from 'react';
-import { Field } from 'react-final-form';
+import { Field, useFormState } from 'react-final-form';
 import { useSelector } from 'react-redux';
 
-import { required } from '@waldur/core/validators';
+import {
+  AttributeValidator,
+  composeValidators,
+  greaterThanField,
+  required,
+} from '@waldur/core/validators';
 import {
   FormContainer,
   NumberField,
@@ -49,6 +54,58 @@ const validateK8sConfig = (value) => {
     return errors;
   }
   return undefined;
+};
+
+/**
+ * Builds a validator function for an option field, including cross-field validation.
+ * @param option - The option field configuration
+ * @param options - All options (to get labels for target fields)
+ * @param allValues - All form values for cross-field validation
+ * @param customValidator - Optional custom validator from params
+ */
+const buildOptionValidator = (
+  option: any,
+  options: any,
+  allValues: Record<string, any>,
+  customValidator?: (value: any) => any,
+) => {
+  const validators: Array<(value: any) => any> = [];
+
+  // Add custom validator if provided (e.g., K8s config validator)
+  if (customValidator) {
+    validators.push(customValidator);
+  }
+
+  // Add required validator
+  if (option.required) {
+    validators.push(required);
+  }
+
+  // Add cross-field validators
+  if (option.validators && Array.isArray(option.validators)) {
+    option.validators.forEach((validator: AttributeValidator) => {
+      if (validator.type === 'gt') {
+        const targetOption = options.options?.[validator.target_field];
+        validators.push(
+          greaterThanField(
+            validator.target_field,
+            allValues,
+            targetOption?.label,
+          ),
+        );
+      }
+    });
+  }
+
+  if (validators.length === 0) {
+    return undefined;
+  }
+
+  if (validators.length === 1) {
+    return validators[0];
+  }
+
+  return composeValidators(...validators);
 };
 
 interface OptionsFormProps {
@@ -227,6 +284,69 @@ const getComponentAndParams = (option, key, customer, finalForm = false) => {
   return { OptionField, params };
 };
 
+/**
+ * Inner component for react-final-form that uses useFormState for cross-field validation.
+ * This is a separate component to ensure useFormState only subscribes when finalForm=true.
+ */
+const OptionsFormFinal = ({
+  options,
+  customer,
+}: {
+  options: Offering['options'];
+  customer?: DeployFormData['customer'];
+}) => {
+  const { values } = useFormState({ subscription: { values: true } });
+
+  return (
+    <>
+      {options.order &&
+        options.order.map((key) => {
+          const option = options.options[key];
+          if (!option) {
+            return null;
+          }
+          const { OptionField, params } = getComponentAndParams(
+            option,
+            key,
+            customer,
+            true,
+          );
+
+          // Build validator with cross-field support
+          const validateFn = buildOptionValidator(
+            option,
+            options,
+            values,
+            params.validate,
+          );
+
+          return (
+            <FormGroup
+              key={key}
+              label={!params.hideLabel && option.label}
+              help={option.help_text}
+              helpEnd
+              required={option.required}
+            >
+              <Field
+                name={`attributes.${key}`}
+                component={OptionField as any}
+                validate={validateFn}
+                {...params}
+                {...(OptionField === AwesomeCheckboxField
+                  ? { label: option.label, help_text: option.help_text }
+                  : {})}
+              />
+              {!params.hideError && (
+                <FormFieldError name={`attributes.${key}`} />
+              )}
+            </FormGroup>
+          );
+        })}
+    </>
+  );
+};
+
 export const OptionsForm = ({
   options,
   submitting,
@@ -275,48 +395,6 @@ export const OptionsForm = ({
     );
   }
 
-  // Render fields for "react-final-form"
-  return (
-    options.order &&
-    options.order.map((key) => {
-      const option = options.options[key];
-      if (!option) {
-        return null;
-      }
-      const { OptionField, params } = getComponentAndParams(
-        option,
-        key,
-        customer,
-        true,
-      );
-
-      // Determine the validate function - use custom validator if provided, otherwise use required validator
-      const validateFn = params.validate
-        ? params.validate
-        : option.required
-          ? required
-          : undefined;
-
-      return (
-        <FormGroup
-          key={key}
-          label={!params.hideLabel && option.label}
-          help={option.help_text}
-          helpEnd
-          required={option.required}
-        >
-          <Field
-            name={`attributes.${key}`}
-            component={OptionField as any}
-            validate={validateFn}
-            {...params}
-            {...(OptionField === AwesomeCheckboxField
-              ? { label: option.label, help_text: option.help_text }
-              : {})}
-          />
-          {!params.hideError && <FormFieldError name={`attributes.${key}`} />}
-        </FormGroup>
-      );
-    })
-  );
+  // Render fields for "react-final-form" with cross-field validation support
+  return <OptionsFormFinal options={options} customer={customer} />;
 };

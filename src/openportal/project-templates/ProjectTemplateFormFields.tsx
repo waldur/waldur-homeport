@@ -1,5 +1,11 @@
 import { Field } from 'react-final-form';
 
+import {
+  composeValidators,
+  positive,
+  required,
+  validateMaxLength,
+} from '@waldur/core/validators';
 import { NumberField, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -10,12 +16,6 @@ import { AllocationUnitsMappingField } from './AllocationUnitsMappingField';
 import { OfferingAutocompleteField } from './OfferingAutocompleteField';
 import { OrganizationAutocompleteField } from './OrganizationAutocompleteField';
 import { RoleMappingField } from './RoleMappingField';
-import {
-  composeValidators,
-  validateMaxLength,
-  validatePositiveNumber,
-  validateRequired,
-} from './validators';
 
 export const ProjectTemplateFormFields = () => (
   <>
@@ -30,7 +30,7 @@ export const ProjectTemplateFormFields = () => (
         placeholder={translate('e.g., my-project-template')}
         maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECTCLASS_LENGTH}
         validate={composeValidators(
-          validateRequired,
+          required,
           validateMaxLength(
             PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECTCLASS_LENGTH,
           ),
@@ -50,7 +50,7 @@ export const ProjectTemplateFormFields = () => (
         placeholder={translate('e.g. my-remote-offering')}
         maxLength={PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_OFFERING_LENGTH}
         validate={composeValidators(
-          validateRequired,
+          required,
           validateMaxLength(
             PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_OFFERING_LENGTH,
           ),
@@ -72,7 +72,7 @@ export const ProjectTemplateFormFields = () => (
           PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PORTALIDENTIFIER_LENGTH
         }
         validate={composeValidators(
-          validateRequired,
+          required,
           validateMaxLength(
             PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PORTALIDENTIFIER_LENGTH,
           ),
@@ -90,7 +90,7 @@ export const ProjectTemplateFormFields = () => (
         name="customer"
         component={OrganizationAutocompleteField as any}
         placeholder={translate('Select organisation')}
-        validate={validateRequired}
+        validate={required}
         required
         reactSelectProps={{
           isClearable: true,
@@ -128,7 +128,7 @@ export const ProjectTemplateFormFields = () => (
           PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECT_SHORTNAME_LENGTH
         }
         validate={composeValidators(
-          validateRequired,
+          required,
           validateMaxLength(
             PROJECT_TEMPLATE_FIELD_CONSTRAINTS.MAX_PROJECT_SHORTNAME_LENGTH,
           ),
@@ -192,7 +192,7 @@ export const ProjectTemplateFormFields = () => (
         placeholder={translate('e.g., 1000.00')}
         step="0.01"
         min="0"
-        validate={validatePositiveNumber}
+        validate={positive}
         help={translate(
           'Credit limit beyond which requests need local admin approval. Leave empty for no approval required, set to 0 for all requests to require approval.',
         )}
@@ -211,7 +211,7 @@ export const ProjectTemplateFormFields = () => (
         placeholder={translate('e.g., 10000.00')}
         step="0.01"
         min="0"
-        validate={validatePositiveNumber}
+        validate={positive}
         help={translate(
           'Maximum credit limit for projects using this template. Requests beyond this are automatically rejected. Leave empty for no maximum limit, set to 0 to prevent project creation.',
         )}

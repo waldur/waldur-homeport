@@ -1,7 +1,6 @@
 import { DateTime } from 'luxon';
 
 import { PeriodOption } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
 
 export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
   let date = DateTime.now().startOf('month');
@@ -18,8 +17,3 @@ export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
   }
   return choices;
 };
-
-export const validateMaxLength = (max: number) => (value: string) =>
-  value && value.length > max
-    ? translate('Must be {max} characters or less.', { max })
-    : undefined;

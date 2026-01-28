@@ -1,9 +1,9 @@
 import { Field } from 'react-final-form';
 
+import { validateMaxLength } from '@waldur/core/validators';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { TextField } from '@waldur/form';
-import { validateMaxLength } from '@waldur/form/utils';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 

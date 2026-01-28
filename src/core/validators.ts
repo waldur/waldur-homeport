@@ -45,10 +45,65 @@ export const greaterThan = (n) => (value: number) =>
     ? translate('Must be greater than {n}.', { n })
     : undefined;
 
+/**
+ * Type for cross-field attribute validators.
+ * These validators compare values between different form fields.
+ */
+export interface AttributeValidator {
+  type: 'gt'; // Can be extended: 'gte' | 'lt' | 'lte' | 'eq'
+  target_field: string;
+  source_field?: string; // Added by backend during processing
+}
+
+/**
+ * Creates a validator that checks if the current field value is greater than
+ * another field's value. Used for cross-field validation in marketplace options.
+ *
+ * @param targetField - The name of the field to compare against
+ * @param allValues - All form values (typically from useFormState)
+ * @param targetFieldLabel - Optional display label for the target field in error messages
+ */
+export const greaterThanField =
+  (
+    targetField: string,
+    allValues: Record<string, any>,
+    targetFieldLabel?: string,
+  ) =>
+  (value: any) => {
+    const targetValue = allValues?.attributes?.[targetField];
+    if (
+      value !== undefined &&
+      value !== null &&
+      targetValue !== undefined &&
+      targetValue !== null &&
+      value <= targetValue
+    ) {
+      return translate('Must be greater than {fieldLabel}.', {
+        fieldLabel: targetFieldLabel || targetField,
+      });
+    }
+    return undefined;
+  };
+
 export const max = (length) => (value) =>
   value && value.length > length
     ? translate('Must be {length} characters or less.', { length })
     : undefined;
+
+/**
+ * Validates that a string value does not exceed the specified maximum length.
+ * Alias for max() with clearer naming convention.
+ */
+export const validateMaxLength = (maxLength: number) => (value: string) =>
+  value && value.length > maxLength
+    ? translate('Must be {max} characters or less.', { max: maxLength })
+    : undefined;
+
+/**
+ * Validates that a number is positive (>= 0).
+ */
+export const positive = (value: number) =>
+  value < 0 ? translate('Value must be positive') : undefined;
 
 export const email = (value) =>
   value && !/^[A-Z0-9._%+-]+@[A-Z0-9.-]+\.[A-Z]{2,}$/i.test(value)

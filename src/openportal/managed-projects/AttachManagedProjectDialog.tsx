@@ -6,6 +6,7 @@ import {
   openportalManagedProjectsAttach,
 } from 'waldur-js-client';
 
+import { required } from '@waldur/core/validators';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -21,9 +22,6 @@ import { ProjectAutocompleteField } from './ProjectAutocompleteField';
 const INITIAL_VALUES = {
   project: null,
 } as const;
-
-const validateRequired = (value: any) =>
-  value ? undefined : translate('This field is required.');
 
 // Types
 interface AttachProjectFormValues {
@@ -191,7 +189,7 @@ export const AttachManagedProjectDialog: React.FC<
                 name="project"
                 component={ProjectAutocompleteField as any}
                 placeholder={translate('Select project')}
-                validate={validateRequired}
+                validate={required}
                 query={query}
                 required
                 reactSelectProps={{
