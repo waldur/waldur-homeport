@@ -55,7 +55,7 @@ export const UserProfile = ({
           )}
         </div>
       }
-      actions={<UserActions />}
+      actions={<UserActions user={user} />}
     >
       <Stack
         direction="horizontal"

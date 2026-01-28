@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { keysList, SshKey } from 'waldur-js-client';
 
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
@@ -10,16 +11,22 @@ import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { KeysListExpandableRow } from '@waldur/user/keys/KeysListExpandableRow';
 import { useUser } from '@waldur/workspace/hooks';
+import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';
+import { KeyVersionHistoryAction } from './KeyVersionHistoryAction';
 
 const KeysListRowActions = ({ row, fetch }) => {
+  const showVersionHistory = useSelector(isStaffOrSupport);
   return (
     <ActionsDropdown
       row={row}
       refetch={fetch}
-      actions={[KeyRemoveButton].filter(Boolean)}
+      actions={[
+        KeyRemoveButton,
+        showVersionHistory && KeyVersionHistoryAction,
+      ].filter(Boolean)}
     />
   );
 };

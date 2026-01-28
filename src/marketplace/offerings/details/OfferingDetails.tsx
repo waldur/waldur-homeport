@@ -4,6 +4,7 @@ import { PlanUsageResponse } from 'waldur-js-client';
 
 import { Category, Offering } from '@waldur/marketplace/types';
 import { useToolbarActions } from '@waldur/navigation/context';
+import { VersionHistoryButton } from '@waldur/version-history';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from '../expandable/constants';
 
@@ -19,9 +20,16 @@ interface OfferingDetailsProps {
 
 export const OfferingDetails: React.FC<OfferingDetailsProps> = (props) => {
   useToolbarActions(
-    props.offering.integration_status.length > 0 ? (
-      <ConnectionStatusIndicator status={props.offering.integration_status} />
-    ) : null,
+    <div className="d-flex gap-2">
+      {props.offering.integration_status.length > 0 && (
+        <ConnectionStatusIndicator status={props.offering.integration_status} />
+      )}
+      <VersionHistoryButton
+        entityType="offering"
+        entityUuid={props.offering.uuid}
+        entityName={props.offering.name}
+      />
+    </div>,
     [props.offering],
   );
 

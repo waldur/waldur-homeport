@@ -1,0 +1,24 @@
+// Shared timeline item styles mixin
+// Used by VersionHistoryItem and IssueCommentItem
+
+@mixin timeline-item-base {
+  .timeline-line {
+    border-left: 2px solid var(--bs-border-color);
+  }
+  .timeline-icon {
+    border-bottom: 4px solid var(--bs-body-bg);
+  }
+  &:not(:first-child) {
+    .timeline-icon {
+      border-top: 4px solid var(--bs-body-bg);
+    }
+    .timeline-content {
+      margin-top: 4px;
+    }
+  }
+
+  .timeline-content {
+    margin-bottom: 0;
+    padding-bottom: 12px;
+  }
+}

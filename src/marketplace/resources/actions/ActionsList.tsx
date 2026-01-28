@@ -28,6 +28,7 @@ import { PullResourceAction } from './PullResourceAction';
 import { PullRobotAccounts } from './PullRobotAccounts';
 import { SetDownscaledAction } from './SetDownscaledAction';
 import { SetPausedAction } from './SetPausedAction';
+import { VersionHistoryAction } from './VersionHistoryAction';
 
 export const ActionsList = [
   EditAction,
@@ -85,4 +86,6 @@ export const StaffActions = [
   PullResourceAction,
   PullOrderAction,
   PullRobotAccounts,
+  // Version history
+  VersionHistoryAction,
 ];
