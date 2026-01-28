@@ -1,7 +1,7 @@
 import { ArrowsLeftRightIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import {
-  marketplacePublicOfferingsRetrieve,
+  marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
@@ -32,25 +32,19 @@ const getAvailablePlanChoices = (offering, resource) => {
 export const ChangePlanAction: ActionItemType = ({ resource, refetch }) => {
   // Fetch offering data to check number of available plans
   const { data: offeringData, isLoading } = useQuery({
-    queryKey: [
-      'changePlan',
-      resource.marketplace_resource_uuid,
-      resource.offering_uuid,
-    ],
+    queryKey: ['changePlan', resource.marketplace_resource_uuid],
     queryFn: async () => {
       const [resourceData, offeringData] = await Promise.all([
         marketplaceResourcesRetrieve({
           path: { uuid: resource.marketplace_resource_uuid },
         }).then((r) => r.data),
-        marketplacePublicOfferingsRetrieve({
-          path: { uuid: resource.offering_uuid },
+        marketplaceResourcesOfferingRetrieve({
+          path: { uuid: resource.marketplace_resource_uuid },
         }).then((r) => r.data),
       ]);
       return { resource: resourceData, offering: offeringData };
     },
-    enabled: Boolean(
-      resource.marketplace_resource_uuid && resource.offering_uuid,
-    ),
+    enabled: Boolean(resource.marketplace_resource_uuid),
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
   });
