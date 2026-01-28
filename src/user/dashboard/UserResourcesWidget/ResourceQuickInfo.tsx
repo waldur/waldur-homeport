@@ -8,7 +8,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import { marketplacePublicOfferingsRetrieve, Resource } from 'waldur-js-client';
+import {
+  marketplaceResourcesOfferingRetrieve,
+  Resource,
+} from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
@@ -38,10 +41,10 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
 
   // Fetch offering details for endpoints, components, getting_started, and description
   const { data: offering, isLoading: isLoadingOffering } = useQuery({
-    queryKey: ['offering-details-onboarding', resource.offering_uuid],
+    queryKey: ['resource-offering-details', resource.uuid],
     queryFn: async () => {
-      const response = await marketplacePublicOfferingsRetrieve({
-        path: { uuid: resource.offering_uuid },
+      const response = await marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resource.uuid },
       });
       return response.data;
     },

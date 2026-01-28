@@ -1,6 +1,6 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
+import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -23,12 +23,15 @@ const useRenewAllocationAction = ({ resource, refetch }) => {
 
   // Check if resource has prepaid components by fetching offering data
   const { data: offering, isLoading } = useQuery({
-    queryKey: ['offering', resource.offering_uuid],
+    queryKey: [
+      'resource-offering',
+      resource.marketplace_resource_uuid || resource.uuid,
+    ],
     queryFn: () =>
-      marketplacePublicOfferingsRetrieve({
-        path: { uuid: resource.offering_uuid },
+      marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resource.marketplace_resource_uuid || resource.uuid },
       }).then((response) => response.data),
-    enabled: Boolean(resource.offering_uuid),
+    enabled: Boolean(resource.marketplace_resource_uuid || resource.uuid),
     staleTime: 5 * 60 * 1000, // Cache for 5 minutes
     refetchOnWindowFocus: false,
   });
@@ -65,10 +68,10 @@ export const RenewAllocationActionAction: ActionItemType = ({
 }) => {
   const buttonProps = useRenewAllocationAction({ resource, refetch });
 
-  // Only show the action if resource has a plan and offering_uuid (needed for prepaid check)
+  // Only show the action if resource has a plan and resource UUID (needed for prepaid check)
   if (
     !(resource.plan_uuid || resource.marketplace_plan_uuid) ||
-    !resource.offering_uuid
+    !(resource.marketplace_resource_uuid || resource.uuid)
   ) {
     return null;
   }

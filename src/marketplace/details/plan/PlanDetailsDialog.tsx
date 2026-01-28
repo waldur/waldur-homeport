@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import React from 'react';
 import {
-  marketplacePublicOfferingsRetrieve,
+  marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesRetrieve,
   projectsRetrieve,
 } from 'waldur-js-client';
@@ -22,32 +22,24 @@ interface PlanDetailsDialogProps {
 }
 
 async function loadData(resourceId: string) {
-  const resource = await marketplaceResourcesRetrieve({
-    path: { uuid: resourceId },
-    query: {
-      field: [
-        'offering_uuid',
-        'project_uuid',
-        'plan',
-        'plan_uuid',
-        'limits',
-        'current_usages',
-      ],
-    },
-  }).then((r) => r.data);
-  const offering = await marketplacePublicOfferingsRetrieve({
-    path: { uuid: resource.offering_uuid },
-    query: {
-      field: [
-        'type',
-        'plans',
-        'components',
-        'plugin_options',
-        'options',
-        'resource_options',
-      ],
-    },
-  }).then((response) => response.data);
+  const [resource, offering] = await Promise.all([
+    marketplaceResourcesRetrieve({
+      path: { uuid: resourceId },
+      query: {
+        field: [
+          'offering_uuid',
+          'project_uuid',
+          'plan',
+          'plan_uuid',
+          'limits',
+          'current_usages',
+        ],
+      },
+    }).then((r) => r.data),
+    marketplaceResourcesOfferingRetrieve({
+      path: { uuid: resourceId },
+    }).then((response) => response.data),
+  ]);
   const plan =
     resource.plan &&
     offering.plans.find((item) => item.uuid === resource.plan_uuid);

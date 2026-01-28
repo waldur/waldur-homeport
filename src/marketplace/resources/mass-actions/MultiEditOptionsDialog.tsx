@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 import {
-  marketplacePublicOfferingsRetrieve,
+  marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesUpdateOptions,
   Resource,
 } from 'waldur-js-client';
@@ -53,10 +53,10 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
 
   // Fetch related offering
   const offeringQuery = useQuery({
-    queryKey: ['marketplaceCategories'],
+    queryKey: ['resource-offering-options', resolve.rows[0].uuid],
     queryFn: () =>
-      marketplacePublicOfferingsRetrieve({
-        path: { uuid: resolve.rows[0].offering_uuid },
+      marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resolve.rows[0].uuid },
       }).then((response) => response.data),
     staleTime: 3 * 60 * 1000,
   });

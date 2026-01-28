@@ -1,6 +1,6 @@
 import {
   BasePublicPlan,
-  marketplacePublicOfferingsRetrieve,
+  marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesRetrieve,
   Offering,
   OrderDetails,
@@ -89,12 +89,14 @@ const getChoices = (
   }));
 
 export async function loadData(resource_uuid): Promise<FetchedData> {
-  const resource = await marketplaceResourcesRetrieve({
-    path: { uuid: resource_uuid },
-  }).then((r) => r.data);
-  const offering = await marketplacePublicOfferingsRetrieve({
-    path: { uuid: resource.offering_uuid },
-  }).then((response) => response.data);
+  const [resource, offering] = await Promise.all([
+    marketplaceResourcesRetrieve({
+      path: { uuid: resource_uuid },
+    }).then((r) => r.data),
+    marketplaceResourcesOfferingRetrieve({
+      path: { uuid: resource_uuid },
+    }).then((response) => response.data),
+  ]);
   const columns = getColumns(offering);
   const choices = getChoices(offering, resource);
   const validPlan = choices.find((choice) => !choice.disabled);
