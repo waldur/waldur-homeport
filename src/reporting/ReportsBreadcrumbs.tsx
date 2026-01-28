@@ -62,6 +62,41 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         title: translate('Usage trends'),
         state: 'reporting-usage-trends',
       },
+      {
+        key: 'organization-summary',
+        title: translate('Organization summary'),
+        state: 'reporting-organization-summary',
+      },
+      {
+        key: 'project-detail',
+        title: translate('Project detail'),
+        state: 'reporting-project-detail',
+      },
+      {
+        key: 'resources-geography',
+        title: translate('Geographic distribution'),
+        state: 'reporting-resources-geography',
+      },
+      {
+        key: 'project-classification',
+        title: translate('Project classification'),
+        state: 'reporting-project-classification',
+      },
+      {
+        key: 'usage-by-customer',
+        title: translate('Usage by customer'),
+        state: 'reporting-usage-by-customer',
+      },
+      {
+        key: 'usage-by-org-type',
+        title: translate('Usage by organization type'),
+        state: 'reporting-usage-by-org-type',
+      },
+      {
+        key: 'usage-by-creator',
+        title: translate('Usage by creator'),
+        state: 'reporting-usage-by-creator',
+      },
     ],
   },
   provider: {
@@ -128,6 +163,11 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         title: translate('Orders'),
         state: 'reporting-orders',
       },
+      {
+        key: 'offering-costs',
+        title: translate('Offering costs'),
+        state: 'reporting-offering-costs',
+      },
     ],
   },
   infrastructure: {
@@ -179,6 +219,11 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         title: translate('Affiliations'),
         state: 'reporting-user-affiliations',
       },
+      {
+        key: 'user-roles',
+        title: translate('Role distribution'),
+        state: 'reporting-user-roles',
+      },
     ],
   },
   operations: {
@@ -188,6 +233,11 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         key: 'maintenance-overview',
         title: translate('Maintenance overview'),
         state: 'reporting-maintenance-overview',
+      },
+      {
+        key: 'provisioning-stats',
+        title: translate('Provisioning statistics'),
+        state: 'reporting-provisioning-stats',
       },
     ],
   },

@@ -1,12 +1,16 @@
 import {
   BuildingsIcon,
   ChartLineUpIcon,
+  CheckCircleIcon,
   ClipboardTextIcon,
   CubeIcon,
   CurrencyCircleDollarIcon,
   FileTextIcon,
+  FlagIcon,
   FlaskIcon,
+  FolderIcon,
   GaugeIcon,
+  GraduationCapIcon,
   LightbulbIcon,
   ListBulletsIcon,
   PackageIcon,
@@ -228,6 +232,69 @@ export const ReportingDashboard: FC = () => {
             description: translate('Year-over-year usage analysis and growth'),
             state: 'reporting-usage-trends',
           },
+          {
+            uuid: 'organization-summary',
+            icon: <BuildingsIcon size={18} weight="bold" />,
+            title: translate('Organization summary'),
+            description: translate(
+              'Resources, limits, and usage by organization',
+            ),
+            state: 'reporting-organization-summary',
+          },
+          {
+            uuid: 'project-detail',
+            icon: <FolderIcon size={18} weight="bold" />,
+            title: translate('Project detail'),
+            description: translate(
+              'Resource limit and usage history over time',
+            ),
+            state: 'reporting-project-detail',
+          },
+          {
+            uuid: 'resources-geography',
+            icon: <FlagIcon size={18} weight="bold" />,
+            title: translate('Geographic distribution'),
+            description: translate(
+              'Resources by country, organization group, and offering',
+            ),
+            state: 'reporting-resources-geography',
+          },
+          {
+            uuid: 'project-classification',
+            icon: <GraduationCapIcon size={18} weight="bold" />,
+            title: translate('Project classification'),
+            description: translate(
+              'Project usage by OECD code and industry classification',
+            ),
+            state: 'reporting-project-classification',
+          },
+          {
+            uuid: 'usage-by-customer',
+            icon: <BuildingsIcon size={18} weight="bold" />,
+            title: translate('Usage by customer'),
+            description: translate(
+              'Full resource breakdown per customer with usages, limits, and costs',
+            ),
+            state: 'reporting-usage-by-customer',
+          },
+          {
+            uuid: 'usage-by-org-type',
+            icon: <TagIcon size={18} weight="bold" />,
+            title: translate('Usage by organization type'),
+            description: translate(
+              'Resource usage grouped by creator organization type',
+            ),
+            state: 'reporting-usage-by-org-type',
+          },
+          {
+            uuid: 'usage-by-creator',
+            icon: <UsersIcon size={18} weight="bold" />,
+            title: translate('Usage by creator'),
+            description: translate(
+              'Resource usage by creator affiliations and organization type',
+            ),
+            state: 'reporting-usage-by-creator',
+          },
         ],
       });
     }
@@ -378,6 +445,13 @@ export const ReportingDashboard: FC = () => {
             ),
             state: 'reporting-user-affiliations',
           },
+          {
+            uuid: 'user-roles',
+            icon: <UsersIcon size={18} weight="bold" />,
+            title: translate('Role distribution'),
+            description: translate('Member counts per organization'),
+            state: 'reporting-user-roles',
+          },
         ],
       });
     }
@@ -419,6 +493,14 @@ export const ReportingDashboard: FC = () => {
         state: 'reporting-orders',
       });
 
+      financialReports.push({
+        uuid: 'offering-costs',
+        icon: <CurrencyCircleDollarIcon size={18} weight="bold" />,
+        title: translate('Offering costs'),
+        description: translate('Cost metrics per offering'),
+        state: 'reporting-offering-costs',
+      });
+
       result.push({
         key: 'financial',
         title: translate('Financial'),
@@ -455,6 +537,15 @@ export const ReportingDashboard: FC = () => {
               'Cross-provider maintenance analytics and timeline',
             ),
             state: 'reporting-maintenance-overview',
+          },
+          {
+            uuid: 'provisioning-stats',
+            icon: <CheckCircleIcon size={18} weight="bold" />,
+            title: translate('Provisioning statistics'),
+            description: translate(
+              'Order success rates and provisioning trends',
+            ),
+            state: 'reporting-provisioning-stats',
           },
         ],
       });
