@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
@@ -12,7 +11,6 @@ import {
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { getNativeNameVisible } from '@waldur/store/config';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 import { getRoleFilterOptions, getUserStatusFilterOptions } from './utils';
@@ -21,7 +19,6 @@ import './UserFilter.scss';
 
 interface UserFilterProps extends InjectedFormProps {
   submitting: boolean;
-  nativeNameVisible: boolean;
 }
 
 const PureUserFilter: FunctionComponent<UserFilterProps> = () => {
@@ -100,17 +97,12 @@ const PureUserFilter: FunctionComponent<UserFilterProps> = () => {
   );
 };
 
-const mapStateToProps = () => ({
-  nativeNameVisible: getNativeNameVisible(),
-});
-
 const enhance = compose(
   reduxForm({
     form: 'userFilter',
     destroyOnUnmount: false,
     enableReinitialize: true,
   }),
-  connect(mapStateToProps),
 );
 
 export const UserFilter = enhance(PureUserFilter);

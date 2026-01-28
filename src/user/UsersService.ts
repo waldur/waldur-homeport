@@ -62,11 +62,14 @@ class UsersServiceClass {
 
   isCurrentUserValid() {
     return this.getCurrentUser().then((user) => {
-      return (
-        user.is_staff ||
-        (!this.mandatoryAttributesMissing(user) &&
-          (user as User).agreement_date)
-      );
+      // Staff and support users are always valid
+      if (user.is_staff || user.is_support) {
+        return true;
+      }
+      // Frontend always enforces profile completeness (enforcement_enabled is for API only)
+      const completeness = getProfileCompleteness(user);
+      // Check profile completeness and agreement date
+      return completeness.is_complete && Boolean((user as User).agreement_date);
     });
   }
 

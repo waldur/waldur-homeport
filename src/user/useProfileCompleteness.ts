@@ -2,6 +2,10 @@ import { useMemo } from 'react';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import {
+  isProfileAttributeEnabled,
+  ProfileAttribute,
+} from '@waldur/user/support/profileAttributes';
 
 interface ProfileCompleteness {
   is_complete: boolean;
@@ -16,6 +20,13 @@ type UserWithProfileCompleteness = User & {
 };
 
 /**
+ * Check if a field is visible in the UI based on configuration
+ */
+const isFieldVisibleInUI = (field: string): boolean => {
+  return isProfileAttributeEnabled(field as ProfileAttribute);
+};
+
+/**
  * Extract profile completeness from user object or calculate locally
  */
 export const getProfileCompleteness = (user: User): ProfileCompleteness => {
@@ -27,7 +38,14 @@ export const getProfileCompleteness = (user: User): ProfileCompleteness => {
     serverCompleteness &&
     typeof serverCompleteness.is_complete === 'boolean'
   ) {
-    return serverCompleteness;
+    // Filter out fields that aren't visible in the UI
+    const visibleMissingFields =
+      serverCompleteness.missing_fields.filter(isFieldVisibleInUI);
+    return {
+      ...serverCompleteness,
+      missing_fields: visibleMissingFields,
+      is_complete: visibleMissingFields.length === 0,
+    };
   }
 
   // Fall back to local calculation
@@ -36,12 +54,17 @@ export const getProfileCompleteness = (user: User): ProfileCompleteness => {
   const enforcementEnabled =
     ENV.plugins.WALDUR_CORE.ENFORCE_MANDATORY_USER_ATTRIBUTES || false;
 
-  const missingFields = mandatoryAttributes.filter((field) => !user[field]);
+  // Only consider fields that are visible in the UI
+  const visibleMandatoryAttributes =
+    mandatoryAttributes.filter(isFieldVisibleInUI);
+  const missingFields = visibleMandatoryAttributes.filter(
+    (field) => !user[field],
+  );
 
   return {
     is_complete: missingFields.length === 0,
     missing_fields: missingFields,
-    mandatory_fields: mandatoryAttributes,
+    mandatory_fields: visibleMandatoryAttributes,
     enforcement_enabled: enforcementEnabled,
   };
 };

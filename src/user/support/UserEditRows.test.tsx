@@ -5,8 +5,8 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ENV } from '@waldur/core/config';
 import * as features from '@waldur/features/connect';
-import * as config from '@waldur/store/config';
 
+import * as profileAttributes from './profileAttributes';
 import { UserEditRows } from './UserEditRows';
 
 // Mock dependencies
@@ -21,12 +21,13 @@ vi.mock('@waldur/core/config', () => ({
       WALDUR_CORE: {
         USER_MANDATORY_FIELDS: [],
         PROTECT_USER_DETAILS_FOR_REGISTRATION_METHODS: [],
+        ENABLED_USER_PROFILE_ATTRIBUTES: [],
       },
     },
   },
 }));
-vi.mock('@waldur/store/config', () => ({
-  getNativeNameVisible: vi.fn(),
+vi.mock('./profileAttributes', () => ({
+  isProfileAttributeEnabled: vi.fn(),
 }));
 vi.mock('@waldur/user/support/selectors', () => ({
   isRequired: () => false,
@@ -78,7 +79,9 @@ describe('UserEditRows', () => {
   beforeEach(() => {
     vi.clearAllMocks();
     vi.mocked(features.isFeatureVisible).mockReturnValue(true);
-    vi.mocked(config.getNativeNameVisible).mockReturnValue(true);
+    vi.mocked(profileAttributes.isProfileAttributeEnabled).mockReturnValue(
+      true,
+    );
   });
 
   describe('Field visibility', () => {
@@ -93,7 +96,9 @@ describe('UserEditRows', () => {
     });
 
     it('shows native name when feature is enabled', () => {
-      vi.mocked(config.getNativeNameVisible).mockReturnValue(true);
+      vi.mocked(profileAttributes.isProfileAttributeEnabled).mockImplementation(
+        (attr) => attr === 'native_name',
+      );
       renderComponent();
       expect(
         screen.getByRole('columnheader', { name: /native name/i }),
@@ -101,7 +106,9 @@ describe('UserEditRows', () => {
     });
 
     it('hides native name when feature is disabled', () => {
-      vi.mocked(config.getNativeNameVisible).mockReturnValue(false);
+      vi.mocked(profileAttributes.isProfileAttributeEnabled).mockImplementation(
+        (attr) => attr !== 'native_name',
+      );
       renderComponent();
       expect(screen.queryByText('Native name')).not.toBeInTheDocument();
     });
@@ -118,11 +125,11 @@ describe('UserEditRows', () => {
       expect(screen.getByText('Group 1, Group 2')).toBeInTheDocument();
     });
 
-    it('hides civil number when not provided', () => {
-      renderComponent({
-        ...mockUser,
-        civil_number: null,
-      });
+    it('hides civil number when profile attribute is disabled', () => {
+      vi.mocked(profileAttributes.isProfileAttributeEnabled).mockImplementation(
+        (attr) => attr !== 'civil_number',
+      );
+      renderComponent();
       expect(screen.queryByText('ID code')).not.toBeInTheDocument();
     });
   });
@@ -158,14 +165,16 @@ describe('UserEditRows', () => {
   });
 
   describe('Mandatory fields', () => {
-    it('shows required message for mandatory fields', () => {
+    it('shows asterisk for required fields', () => {
       vi.mocked(ENV).plugins.WALDUR_CORE.USER_MANDATORY_FIELDS = [
         'first_name',
         'email',
       ];
 
       renderComponent();
-      expect(screen.getAllByTestId('warning').length).toBe(2);
+      // Required fields show asterisk in label
+      const requiredIndicators = document.querySelectorAll('.text-danger.ms-1');
+      expect(requiredIndicators.length).toBeGreaterThanOrEqual(2);
     });
   });
 

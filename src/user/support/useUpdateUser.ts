@@ -20,18 +20,23 @@ export const useUpdateUser = (user: User) => {
   const callback = async (data) => {
     setIsLoading(true);
     try {
+      // Only use FormData when uploading an image file
+      const hasImageFile = data.image instanceof File;
+
+      const body = {
+        ...data,
+        agree_with_policy: true,
+        image: hasImageFile ? fileSerializer(data.image) : undefined,
+        token_lifetime:
+          'token_lifetime' in data && data.token_lifetime
+            ? data.token_lifetime.value
+            : undefined,
+      };
+
       const { data: newUser } = await usersPartialUpdate({
         path: { uuid: user.uuid },
-        body: {
-          ...data,
-          agree_with_policy: true,
-          image: fileSerializer(data.image),
-          token_lifetime:
-            'token_lifetime' in data && data.token_lifetime
-              ? data.token_lifetime.value
-              : undefined,
-        },
-        ...formDataOptions,
+        body,
+        ...(hasImageFile ? formDataOptions : {}),
       });
       if (newUser.uuid === currentUser.uuid) {
         dispatch(setCurrentUser(newUser));

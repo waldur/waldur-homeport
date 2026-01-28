@@ -1,8 +1,13 @@
-import { PencilSimpleIcon } from '@phosphor-icons/react';
+import {
+  LockSimpleIcon,
+  PencilSimpleIcon,
+  WarningCircleIcon,
+} from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { Tip } from '@waldur/core/Tooltip';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -13,7 +18,8 @@ interface RowProps {
   label: string;
   value: React.ReactNode;
   description?: string;
-  requiredMsg?: string | null;
+  /** Mark field as required (shows asterisk) */
+  required?: boolean;
   disabled?: boolean;
   protected?: boolean;
   protectedMsg?: string;
@@ -37,32 +43,61 @@ export const UserEditRow = (props: RowProps) => {
       }),
     );
   };
-  const tooltip = props.protected
+
+  const isEmpty = !props.value;
+  const isProtected = props.protected;
+  // Show warning only when required field is missing AND protected (user can't fix it)
+  const showProtectedMissingWarning = props.required && isEmpty && isProtected;
+
+  const protectedTooltip = props.protectedMsg
     ? props.protectedMsg
-      ? props.protectedMsg
-      : props.user.identity_provider_label
-        ? translate('Information is coming from {identityProvider}', {
-            identityProvider: props.user.identity_provider_label,
-          })
-        : translate('Information is coming from identity provider')
-    : undefined;
+    : props.user.identity_provider_label
+      ? translate('Information is coming from {identityProvider}', {
+          identityProvider: props.user.identity_provider_label,
+        })
+      : translate('Information is coming from identity provider');
+
+  // Build the value display with appropriate indicators
+  const valueDisplay = (
+    <span className="d-inline-flex align-items-center gap-2">
+      <span>{props.value || '—'}</span>
+      {showProtectedMissingWarning && (
+        <Tip
+          label={translate('Required field not provided by {idp}', {
+            idp:
+              props.user.identity_provider_label ||
+              translate('identity provider'),
+          })}
+          id={`${props.name}-warning`}
+        >
+          <WarningCircleIcon size={16} weight="bold" className="text-warning" />
+        </Tip>
+      )}
+    </span>
+  );
 
   return (
     <FormTable.Item
       label={props.label}
       description={props.description}
-      value={props.value || '—'}
-      warnTooltip={props.requiredMsg}
+      value={valueDisplay}
+      required={props.required}
       disabled={props.disabled}
       actions={
         props.actions || (
           <ActionButton
             action={callback}
-            iconNode={<PencilSimpleIcon weight="bold" />}
+            iconNode={
+              isProtected ? (
+                <LockSimpleIcon weight="bold" />
+              ) : (
+                <PencilSimpleIcon weight="bold" />
+              )
+            }
             variant="secondary"
             className="btn-sm btn-icon"
-            disabled={props.protected || props.disabled}
-            tooltip={tooltip}
+            disabled={isProtected || props.disabled}
+            tooltip={isProtected ? protectedTooltip : undefined}
             data-testid={`user-edit-row-${props.name}`}
           />
         )

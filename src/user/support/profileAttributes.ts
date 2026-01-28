@@ -11,6 +11,7 @@ const CORE_PROFILE_ATTRIBUTES = [
 
 // Configurable attributes (type-only, not used at runtime)
 type ConfigurableProfileAttribute =
+  | 'native_name'
   | 'phone_number'
   | 'organization'
   | 'job_title'
@@ -42,5 +43,6 @@ export const isProfileAttributeEnabled = (
   }
   const enabled =
     ENV.plugins?.WALDUR_CORE?.ENABLED_USER_PROFILE_ATTRIBUTES ?? [];
+
   return enabled.includes(attribute);
 };

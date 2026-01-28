@@ -7,7 +7,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { getNativeNameVisible } from '@waldur/store/config';
+import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { CustomerChecklistPanel } from './CustomerChecklistPanel';
@@ -19,7 +19,7 @@ import { StaffOnlyIndicator } from './StaffOnlyIndicator';
 import { CustomerEditPanelProps } from './types';
 
 export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
-  const nativeNameVisible = getNativeNameVisible();
+  const nativeNameVisible = isProfileAttributeEnabled('native_name');
   const user = useSelector(getUser);
 
   const detailsRows = useMemo(

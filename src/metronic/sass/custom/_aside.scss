@@ -1,6 +1,14 @@
 .aside {
   .menu {
     .menu-item {
+      // Disabled menu item styling for profile completeness enforcement
+      &.menu-item-disabled {
+        .menu-link {
+          opacity: 0.5;
+          cursor: not-allowed;
+          pointer-events: none;
+        }
+      }
       &.menu-accordion {
         &.hover {
           background: if(isDarkMode(), $gray-300, $primary-700);

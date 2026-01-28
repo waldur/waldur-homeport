@@ -1,17 +1,18 @@
-import { useState } from 'react';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { useCallback, useEffect, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { Tip } from '@waldur/core/Tooltip';
 import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { getNativeNameVisible } from '@waldur/store/config';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import {
   getUser,
@@ -36,10 +37,39 @@ const isRequired = (field: string) => {
   );
 };
 
-const getDefaultRequiredMsg = (field: string, isSelf: boolean) =>
-  isSelf
-    ? translate('Your {field} is required', { field })
-    : translate("The user's {field} is required", { field });
+interface TabStats {
+  total: number;
+  missingMandatory: number;
+  missingMandatoryFields: string[];
+}
+
+const hasValue = (value: unknown): boolean => {
+  if (value === null || value === undefined || value === '') return false;
+  if (Array.isArray(value)) return value.length > 0;
+  return true;
+};
+
+const TabBadge = ({ stats, tabKey }: { stats: TabStats; tabKey: string }) => {
+  if (stats.missingMandatory > 0) {
+    return (
+      <Tip
+        label={translate('Missing required fields: {fields}', {
+          fields: stats.missingMandatoryFields.join(', '),
+        })}
+        id={`tab-badge-${tabKey}`}
+      >
+        <span className="badge badge-sm badge-circle badge-danger ms-2">
+          {stats.missingMandatory}
+        </span>
+      </Tip>
+    );
+  }
+  return (
+    <span className="badge badge-sm badge-circle badge-light ms-2">
+      {stats.total}
+    </span>
+  );
+};
 
 const fieldIsProtected = (user: User, field: string) =>
   user.identity_provider_fields.includes(field) ||
@@ -55,7 +85,7 @@ interface TabContentProps {
 
 // Basic Information Tab
 const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
-  const nativeNameIsVisible = useSelector(getNativeNameVisible);
+  const hasNativeName = isProfileAttributeEnabled('native_name');
 
   return (
     <FormTable>
@@ -71,11 +101,7 @@ const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
             ? translate('Display your first name on your profile')
             : translate("Display the user's first name on their profile")
         }
-        requiredMsg={
-          isRequired('first_name')
-            ? getDefaultRequiredMsg(translate('first name'), isSelf)
-            : null
-        }
+        required={isRequired('first_name')}
         protected={fieldIsProtected(user, 'first_name')}
       />
       <UserEditRow
@@ -89,25 +115,17 @@ const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
             ? translate('Display your last name on your profile')
             : translate("Display the user's last name on their profile")
         }
-        requiredMsg={
-          isRequired('last_name')
-            ? getDefaultRequiredMsg(translate('last name'), isSelf)
-            : null
-        }
+        required={isRequired('last_name')}
         protected={fieldIsProtected(user, 'last_name')}
       />
-      {nativeNameIsVisible && (
+      {hasNativeName && (
         <UserEditRow
           user={user}
           label={translate('Native name')}
           name="native_name"
           value={user.native_name}
           disabled={disabled}
-          requiredMsg={
-            isRequired('native_name')
-              ? getDefaultRequiredMsg(translate('native name'), isSelf)
-              : null
-          }
+          required={isRequired('native_name')}
           protected={fieldIsProtected(user, 'native_name')}
         />
       )}
@@ -118,22 +136,11 @@ const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
         value={user.email}
         disabled={disabled}
         protected={fieldIsProtected(user, 'email')}
-        requiredMsg={
-          isRequired('email')
-            ? translate(
-                '{pronoun} email is required for account notifications and password recovery',
-                { pronoun: isSelf ? translate('Your') : translate("User's") },
-              )
-            : null
-        }
+        required={isRequired('email')}
         description={
           isSelf
-            ? translate(
-                'Provide an email address for communication and recovery',
-              )
-            : translate(
-                "Provide an email address for the user's communication and recovery",
-              )
+            ? translate('Provide an email address for notifications')
+            : translate("Provide an email address for the user's notifications")
         }
         actions={
           !fieldIsProtected(user, 'email') ? (
@@ -148,18 +155,10 @@ const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
         value={user.phone_number}
         disabled={disabled}
         protected={fieldIsProtected(user, 'phone_number')}
-        requiredMsg={
-          isRequired('phone_number')
-            ? translate('{pronoun} phone number', {
-                pronoun: isSelf ? translate('Your') : translate("User's"),
-              })
-            : null
-        }
-        description={
-          isSelf
-            ? translate('Enter your contact number')
-            : translate('Enter a contact number for the user')
-        }
+        required={isRequired('phone_number')}
+        description={translate(
+          'International format with country code, e.g. +1 202 555 1234',
+        )}
       />
     </FormTable>
   );
@@ -188,6 +187,7 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
           name="personal_title"
           value={user.personal_title}
           disabled={disabled}
+          required={isRequired('personal_title')}
           protected={fieldIsProtected(user, 'personal_title')}
           description={
             isSelf
@@ -203,6 +203,7 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
           name="gender"
           value={formatGender(user.gender as number | null | undefined)}
           disabled={disabled}
+          required={isRequired('gender')}
           protected={fieldIsProtected(user, 'gender')}
           description={
             isSelf
@@ -218,6 +219,7 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
           name="place_of_birth"
           value={user.place_of_birth}
           disabled={disabled}
+          required={isRequired('place_of_birth')}
           protected={fieldIsProtected(user, 'place_of_birth')}
           description={
             isSelf
@@ -265,6 +267,7 @@ const GeographicTab = ({ user, disabled, isSelf }: TabContentProps) => {
             ) : null
           }
           disabled={disabled}
+          required={isRequired('country_of_residence')}
           protected={fieldIsProtected(user, 'country_of_residence')}
           description={
             isSelf
@@ -287,6 +290,7 @@ const GeographicTab = ({ user, disabled, isSelf }: TabContentProps) => {
             ) : null
           }
           disabled={disabled}
+          required={isRequired('nationality')}
           protected={fieldIsProtected(user, 'nationality')}
           description={
             isSelf
@@ -313,6 +317,7 @@ const GeographicTab = ({ user, disabled, isSelf }: TabContentProps) => {
             ) : null
           }
           disabled={disabled}
+          required={isRequired('nationalities')}
           protected={fieldIsProtected(user, 'nationalities')}
           description={
             isSelf
@@ -342,6 +347,7 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
         name="organization"
         value={user.organization}
         disabled={disabled}
+        required={isRequired('organization')}
         protected={fieldIsProtected(user, 'organization')}
         description={
           isSelf
@@ -370,6 +376,7 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
             ) : null
           }
           disabled={disabled}
+          required={isRequired('organization_country')}
           protected={fieldIsProtected(user, 'organization_country')}
           description={
             isSelf
@@ -385,6 +392,7 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
           name="organization_type"
           value={formatOrganizationType(user.organization_type)}
           disabled={disabled}
+          required={isRequired('organization_type')}
           protected={fieldIsProtected(user, 'organization_type')}
           description={
             isSelf
@@ -399,6 +407,7 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
         name="job_title"
         value={user.job_title}
         disabled={disabled}
+        required={isRequired('job_title')}
         protected={fieldIsProtected(user, 'job_title')}
         description={
           isSelf
@@ -517,11 +526,7 @@ const StaffTab = ({ user, disabled, isSelf }: TabContentProps) => {
         value={user.description}
         disabled={disabled}
         description={translate('Internal notes about this user account')}
-        requiredMsg={
-          isRequired('description')
-            ? getDefaultRequiredMsg(translate('notes'), isSelf)
-            : null
-        }
+        required={isRequired('description')}
       />
       <UserEditRow
         user={user}
@@ -556,14 +561,202 @@ interface UserProfileTabsProps {
   disabled?: boolean;
 }
 
+const useTabStats = (user: User): Record<TabKey, TabStats> => {
+  return useMemo(() => {
+    const calculateStats = (
+      fields: Array<{
+        name: string;
+        enabled: boolean;
+        value: unknown;
+        label: string;
+      }>,
+    ): TabStats => {
+      const enabledFields = fields.filter((f) => f.enabled);
+      const missingMandatory = enabledFields.filter(
+        (f) => isRequired(f.name) && !hasValue(f.value),
+      );
+      return {
+        total: enabledFields.length,
+        missingMandatory: missingMandatory.length,
+        missingMandatoryFields: missingMandatory.map((f) => f.label),
+      };
+    };
+
+    const basicFields = [
+      {
+        name: 'first_name',
+        enabled: true,
+        value: user.first_name,
+        label: translate('First name'),
+      },
+      {
+        name: 'last_name',
+        enabled: true,
+        value: user.last_name,
+        label: translate('Last name'),
+      },
+      {
+        name: 'native_name',
+        enabled: isProfileAttributeEnabled('native_name'),
+        value: user.native_name,
+        label: translate('Native name'),
+      },
+      {
+        name: 'email',
+        enabled: true,
+        value: user.email,
+        label: translate('Email'),
+      },
+      {
+        name: 'phone_number',
+        enabled: true,
+        value: user.phone_number,
+        label: translate('Phone number'),
+      },
+    ];
+
+    const personalFields = [
+      {
+        name: 'personal_title',
+        enabled: isProfileAttributeEnabled('personal_title'),
+        value: user.personal_title,
+        label: translate('Personal title'),
+      },
+      {
+        name: 'gender',
+        enabled: isProfileAttributeEnabled('gender'),
+        value: user.gender,
+        label: translate('Gender'),
+      },
+      {
+        name: 'place_of_birth',
+        enabled: isProfileAttributeEnabled('place_of_birth'),
+        value: user.place_of_birth,
+        label: translate('Place of birth'),
+      },
+    ];
+
+    const geographicFields = [
+      {
+        name: 'country_of_residence',
+        enabled: isProfileAttributeEnabled('country_of_residence'),
+        value: user.country_of_residence,
+        label: translate('Country of residence'),
+      },
+      {
+        name: 'nationality',
+        enabled: isProfileAttributeEnabled('nationality'),
+        value: user.nationality,
+        label: translate('Nationality'),
+      },
+      {
+        name: 'nationalities',
+        enabled: isProfileAttributeEnabled('nationalities'),
+        value: user.nationalities,
+        label: translate('Nationalities'),
+      },
+    ];
+
+    const organizationFields = [
+      {
+        name: 'organization',
+        enabled: true,
+        value: user.organization,
+        label: translate('Organization'),
+      },
+      {
+        name: 'organization_country',
+        enabled: isProfileAttributeEnabled('organization_country'),
+        value: user.organization_country,
+        label: translate('Organization country'),
+      },
+      {
+        name: 'organization_type',
+        enabled: isProfileAttributeEnabled('organization_type'),
+        value: user.organization_type,
+        label: translate('Organization type'),
+      },
+      {
+        name: 'job_title',
+        enabled: true,
+        value: user.job_title,
+        label: translate('Job position'),
+      },
+    ];
+
+    // System tab has no mandatory editable fields
+    const systemFields = [
+      {
+        name: 'date_joined',
+        enabled: true,
+        value: user.date_joined,
+        label: '',
+      },
+    ];
+
+    // Staff tab
+    const staffFields = [
+      {
+        name: 'description',
+        enabled: true,
+        value: user.description,
+        label: translate('Notes'),
+      },
+    ];
+
+    return {
+      basic: calculateStats(basicFields),
+      personal: calculateStats(personalFields),
+      geographic: calculateStats(geographicFields),
+      organization: calculateStats(organizationFields),
+      system: calculateStats(systemFields),
+      staff: calculateStats(staffFields),
+    };
+  }, [user]);
+};
+
+const TAB_KEYS: TabKey[] = [
+  'basic',
+  'personal',
+  'geographic',
+  'organization',
+  'system',
+  'staff',
+];
+
 export const UserProfileTabs = ({
   user,
   disabled = false,
 }: UserProfileTabsProps) => {
-  const [activeTab, setActiveTab] = useState<TabKey>('basic');
+  const { params } = useCurrentStateAndParams();
   const currentUser = useSelector(getUser);
   const isSelf = currentUser.uuid === user.uuid;
   const isVisibleStaffOrSupport = useSelector(isStaffOrSupport);
+
+  // Initialize tab from URL param or default to 'basic'
+  const initialTab =
+    params.section && TAB_KEYS.includes(params.section as TabKey)
+      ? (params.section as TabKey)
+      : 'basic';
+  const [activeTab, setActiveTab] = useState<TabKey>(initialTab);
+
+  // Update URL when tab changes (using History API to avoid full reload)
+  const handleTabChange = useCallback((key: TabKey) => {
+    setActiveTab(key);
+    // Update URL without triggering UI-Router state transition
+    const url = new URL(window.location.href);
+    url.searchParams.set('section', key);
+    window.history.replaceState(null, '', url.toString());
+  }, []);
+
+  // Sync with URL changes (e.g., browser back/forward)
+  useEffect(() => {
+    if (params.section && TAB_KEYS.includes(params.section as TabKey)) {
+      setActiveTab(params.section as TabKey);
+    }
+  }, [params.section]);
+
+  const tabStats = useTabStats(user);
 
   // Determine which tabs to show based on enabled profile attributes
   const hasPersonalFields =
@@ -577,21 +770,63 @@ export const UserProfileTabs = ({
     isProfileAttributeEnabled('nationalities');
 
   const tabs: { key: TabKey; title: React.ReactNode; show: boolean }[] = [
-    { key: 'basic', title: translate('Basic info'), show: true },
-    { key: 'personal', title: translate('Personal'), show: hasPersonalFields },
+    {
+      key: 'basic',
+      title: (
+        <>
+          {translate('Basic info')}
+          <TabBadge stats={tabStats.basic} tabKey="basic" />
+        </>
+      ),
+      show: true,
+    },
+    {
+      key: 'personal',
+      title: (
+        <>
+          {translate('Personal')}
+          <TabBadge stats={tabStats.personal} tabKey="personal" />
+        </>
+      ),
+      show: hasPersonalFields,
+    },
     {
       key: 'geographic',
-      title: translate('Geographic'),
+      title: (
+        <>
+          {translate('Geographic')}
+          <TabBadge stats={tabStats.geographic} tabKey="geographic" />
+        </>
+      ),
       show: hasGeographicFields,
     },
-    { key: 'organization', title: translate('Affiliation'), show: true },
-    { key: 'system', title: translate('System'), show: true },
+    {
+      key: 'organization',
+      title: (
+        <>
+          {translate('Affiliation')}
+          <TabBadge stats={tabStats.organization} tabKey="organization" />
+        </>
+      ),
+      show: true,
+    },
+    {
+      key: 'system',
+      title: (
+        <>
+          {translate('System')}
+          <TabBadge stats={tabStats.system} tabKey="system" />
+        </>
+      ),
+      show: true,
+    },
     {
       key: 'staff',
       title: (
         <>
           <StaffOnlyIndicator className="me-1" />
           {translate('Internal')}
+          <TabBadge stats={tabStats.staff} tabKey="staff" />
         </>
       ),
       show: isVisibleStaffOrSupport,
@@ -616,7 +851,7 @@ export const UserProfileTabs = ({
   return (
     <Tab.Container
       activeKey={activeTab}
-      onSelect={(k) => setActiveTab(k as TabKey)}
+      onSelect={(k) => handleTabChange(k as TabKey)}
     >
       <Nav variant="tabs" className="nav-line-tabs mb-4">
         {visibleTabs.map((tab) => (
