@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 
 import { getPubSubOverview } from './api';
+import { EventSubscriptionQueuesCard } from './EventSubscriptionQueuesCard';
 import { PubSubCircuitBreakerCard } from './PubSubCircuitBreakerCard';
 import { PubSubCircuitBreakerResetButton } from './PubSubCircuitBreakerResetButton';
 import { PubSubDeadLetterQueueCard } from './PubSubDeadLetterQueueCard';
@@ -86,6 +87,7 @@ export const PubSubHealthPage = () => {
       <PubSubMetricsCard />
       <PubSubDeadLetterQueueCard />
       <PubSubTopQueuesCard />
+      <EventSubscriptionQueuesCard />
     </Panel>
   );
 };

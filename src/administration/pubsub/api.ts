@@ -6,6 +6,7 @@ import {
   debugPubsubMetricsRetrieve,
   debugPubsubOverviewRetrieve,
   debugPubsubQueuesRetrieve,
+  eventSubscriptionQueuesList,
 } from 'waldur-js-client';
 
 // Re-export types from SDK
@@ -32,3 +33,6 @@ export const getTopQueues = () =>
 
 export const getDeadLetterQueue = () =>
   debugPubsubDeadLetterQueueRetrieve().then((response) => response.data);
+
+export const getEventSubscriptionQueues = () =>
+  eventSubscriptionQueuesList().then((response) => response.data);
