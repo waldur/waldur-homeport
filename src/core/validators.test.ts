@@ -3,7 +3,10 @@ import { describe, it, expect } from 'vitest';
 import {
   email,
   greaterThanField,
+  greaterThanOrEqualField,
   isGuid,
+  lessThanField,
+  lessThanOrEqualField,
   url,
   validateRedirectURLs,
 } from './validators';
@@ -521,5 +524,56 @@ describe('greaterThanField validator', () => {
       // -10 < -5
       expect(validator(-10)).toBe('Must be greater than Minimum.');
     });
+  });
+});
+
+describe('greaterThanOrEqualField validator', () => {
+  const allValues = { attributes: { target: 10 } };
+  const validator = greaterThanOrEqualField('target', allValues, 'Target');
+
+  it('returns undefined when value is greater than target', () => {
+    expect(validator(11)).toBeUndefined();
+  });
+
+  it('returns undefined when value is equal to target', () => {
+    expect(validator(10)).toBeUndefined();
+  });
+
+  it('returns error when value is less than target', () => {
+    expect(validator(9)).toBe('Must be greater than or equal to Target.');
+  });
+});
+
+describe('lessThanField validator', () => {
+  const allValues = { attributes: { target: 10 } };
+  const validator = lessThanField('target', allValues, 'Target');
+
+  it('returns undefined when value is less than target', () => {
+    expect(validator(9)).toBeUndefined();
+  });
+
+  it('returns error when value is equal to target', () => {
+    expect(validator(10)).toBe('Must be less than Target.');
+  });
+
+  it('returns error when value is greater than target', () => {
+    expect(validator(11)).toBe('Must be less than Target.');
+  });
+});
+
+describe('lessThanOrEqualField validator', () => {
+  const allValues = { attributes: { target: 10 } };
+  const validator = lessThanOrEqualField('target', allValues, 'Target');
+
+  it('returns undefined when value is less than target', () => {
+    expect(validator(9)).toBeUndefined();
+  });
+
+  it('returns undefined when value is equal to target', () => {
+    expect(validator(10)).toBeUndefined();
+  });
+
+  it('returns error when value is greater than target', () => {
+    expect(validator(11)).toBe('Must be less than or equal to Target.');
   });
 });

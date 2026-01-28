@@ -23,6 +23,10 @@ export interface OptionFormData {
   cascade_config?: CascadeConfig;
   component_multiplier_config?: ComponentMultiplierConfig;
   default_configs?: K8sDefaultConfiguration;
+  validators?: Array<{
+    type: Option | string;
+    target_field: Option | string;
+  }>;
 }
 
 export type OfferingLimits = Record<string, { min: number; max: number }>;

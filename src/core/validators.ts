@@ -63,7 +63,11 @@ export interface AttributeValidator {
  * @param allValues - All form values (typically from useFormState)
  * @param targetFieldLabel - Optional display label for the target field in error messages
  */
-export const greaterThanField =
+const createFieldValidator =
+  (
+    compareFn: (value: any, targetValue: any) => boolean,
+    translator: (ctx: any) => string,
+  ) =>
   (
     targetField: string,
     allValues: Record<string, any>,
@@ -76,14 +80,50 @@ export const greaterThanField =
       value !== null &&
       targetValue !== undefined &&
       targetValue !== null &&
-      value <= targetValue
+      compareFn(value, targetValue)
     ) {
-      return translate('Must be greater than {fieldLabel}.', {
+      return translator({
         fieldLabel: targetFieldLabel || targetField,
       });
     }
     return undefined;
   };
+
+/**
+ * Validates that a field's value is greater than another field's value. Used for cross-field validation in marketplace options.
+ *
+ * @param targetField - The name of the field to compare against
+ * @param allValues - All form values (typically from useFormState)
+ * @param targetFieldLabel - Optional display label for the target field in error messages
+ */
+export const greaterThanField = createFieldValidator(
+  (value, targetValue) => value <= targetValue,
+  (ctx) => translate('Must be greater than {fieldLabel}.', ctx),
+);
+
+/**
+ * Validates that a field's value is greater than or equal to another field's value.
+ */
+export const greaterThanOrEqualField = createFieldValidator(
+  (value, targetValue) => value < targetValue,
+  (ctx) => translate('Must be greater than or equal to {fieldLabel}.', ctx),
+);
+
+/**
+ * Validates that a field's value is less than another field's value.
+ */
+export const lessThanField = createFieldValidator(
+  (value, targetValue) => value >= targetValue,
+  (ctx) => translate('Must be less than {fieldLabel}.', ctx),
+);
+
+/**
+ * Validates that a field's value is less than or equal to another field's value.
+ */
+export const lessThanOrEqualField = createFieldValidator(
+  (value, targetValue) => value > targetValue,
+  (ctx) => translate('Must be less than or equal to {fieldLabel}.', ctx),
+);
 
 export const max = (length) => (value) =>
   value && value.length > length
