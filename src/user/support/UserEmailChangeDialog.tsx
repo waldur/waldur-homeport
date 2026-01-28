@@ -18,9 +18,7 @@ export const UserEmailChangeDialog: FunctionComponent<{
   return (
     <ModalDialog
       title={translate('Email')}
-      subtitle={translate(
-        'Provide an email address for communication and recovery',
-      )}
+      subtitle={translate('Provide an email address for notifications')}
       footer={
         <>
           <CloseDialogButton variant="tertiary" className="flex-equal" />

@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -16,7 +17,15 @@ const MarketplacePopup = lazyComponent(() =>
   })),
 );
 
-export const MarketplaceTrigger: FunctionComponent = () => {
+interface MarketplaceTriggerProps {
+  disabled?: boolean;
+  disabledTooltip?: string;
+}
+
+export const MarketplaceTrigger: FunctionComponent<MarketplaceTriggerProps> = ({
+  disabled,
+  disabledTooltip,
+}) => {
   const dispatch = useDispatch();
   const openFormDialog = useCallback(
     () =>
@@ -29,8 +38,12 @@ export const MarketplaceTrigger: FunctionComponent = () => {
   );
   const sidebarStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
 
-  return (
-    <div className="menu-item add-resource-toggle">
+  const trigger = (
+    <div
+      className={classNames('menu-item add-resource-toggle', {
+        'menu-item-disabled': disabled,
+      })}
+    >
       <span
         className={classNames('menu-link btn btn-outline', {
           'btn-outline-white':
@@ -38,7 +51,7 @@ export const MarketplaceTrigger: FunctionComponent = () => {
           'btn-outline-primary': sidebarStyle === 'light',
         })}
         aria-hidden="true"
-        onClick={openFormDialog}
+        onClick={disabled ? undefined : openFormDialog}
       >
         <span className="menu-icon justify-content-center">
           <span className="svg-icon svg-icon-2">
@@ -49,4 +62,14 @@ export const MarketplaceTrigger: FunctionComponent = () => {
       </span>
     </div>
   );
+
+  if (disabled && disabledTooltip) {
+    return (
+      <Tip label={disabledTooltip} id="marketplace-trigger">
+        {trigger}
+      </Tip>
+    );
+  }
+
+  return trigger;
 };

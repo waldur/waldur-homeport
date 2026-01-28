@@ -1,5 +1,6 @@
 import { ChatTeardropTextIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
+import { FC } from 'react';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -18,7 +19,15 @@ const hasCallManagerRole = (user) =>
       permission.role_name === RoleEnum.CALL_MANAGER,
   );
 
-export const CallPublicMenu = () => {
+interface CallPublicMenuProps {
+  disabled?: boolean;
+  disabledTooltip?: string;
+}
+
+export const CallPublicMenu: FC<CallPublicMenuProps> = ({
+  disabled,
+  disabledTooltip,
+}) => {
   const { state } = useCurrentStateAndParams();
   const user = useUser();
 
@@ -29,6 +38,8 @@ export const CallPublicMenu = () => {
         state="calls-for-proposals-dashboard"
         icon={<ChatTeardropTextIcon weight="bold" />}
         child={false}
+        disabled={disabled}
+        disabledTooltip={disabledTooltip}
       />
     );
   }
@@ -46,6 +57,8 @@ export const CallPublicMenu = () => {
       title={translate('Calls')}
       itemId="calls-menu"
       icon={<ChatTeardropTextIcon weight="bold" />}
+      disabled={disabled}
+      disabledTooltip={disabledTooltip}
     >
       <MenuItem
         title={translate('Calls for proposals')}

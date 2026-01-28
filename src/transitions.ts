@@ -26,18 +26,36 @@ export function attachTransitions() {
     }
   });
 
+  // Check profile validity for ALL authenticated users, regardless of route auth setting
   router.transitionService.onBefore(
     {
-      to: (state) =>
-        state.data && state.data.auth && AuthService.isAuthenticated(),
+      to: () => AuthService.isAuthenticated(),
     },
     async (transition) => {
+      // Allow access to profile management and auth-related states
+      const allowedStates = [
+        'profile-manage',
+        'profile-manage-container',
+        'login',
+        'logout',
+        'home.login_completed',
+        'home.oauth_login_completed',
+        'home.login_failed',
+        'home.logout_completed',
+        'home.logout_failed',
+      ];
+      const toStateName = transition.to().name;
+      if (
+        allowedStates.some(
+          (name) => toStateName === name || toStateName.startsWith(name + '.'),
+        )
+      ) {
+        return;
+      }
+
       try {
         const result = await UsersService.isCurrentUserValid();
         if (result) {
-          return;
-        }
-        if (transition.to().name == 'profile-manage') {
           return;
         }
         return transition.router.stateService.target('profile-manage');

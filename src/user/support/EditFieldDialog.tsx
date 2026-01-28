@@ -8,6 +8,7 @@ import { SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CountrySelectField } from '@waldur/form/CountrySelectField';
 import { MultiCountrySelectField } from '@waldur/form/MultiCountrySelectField';
+import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -155,6 +156,20 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
                 <Field
                   name={resolve.name}
                   component={MultiCountrySelectField as any}
+                  validate={resolve.requiredMsg ? required : undefined}
+                />
+              </FormGroup>
+            ) : resolve.name === 'phone_number' ? (
+              <FormGroup
+                label={resolve.label}
+                required={Boolean(resolve.requiredMsg)}
+                description={translate(
+                  'International format with country code, e.g. +1 202 555 1234',
+                )}
+              >
+                <Field
+                  name="phone_number"
+                  component={PhoneNumberField as any}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>

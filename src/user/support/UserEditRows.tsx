@@ -7,7 +7,6 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { getNativeNameVisible } from '@waldur/store/config';
 import { formatUserStatus } from '@waldur/user/support/utils';
 import {
   getUser,
@@ -31,11 +30,6 @@ const isRequired = (field: string) => {
   );
 };
 
-const getDefaultRequiredMsg = (field, isSelf) =>
-  isSelf
-    ? translate('Your {field} is required', { field })
-    : translate("The user's {field} is required", { field });
-
 const fieldIsProtected = (user: User, field: string) =>
   user.identity_provider_fields.includes(field) ||
   (
@@ -54,11 +48,7 @@ const FirstNameRow = ({ user, disabled, isSelf }) => (
         ? translate('Display your first name on your profile')
         : translate("Display the user's first name on their profile")
     }
-    requiredMsg={
-      isRequired('first_name')
-        ? getDefaultRequiredMsg(translate('first name'), isSelf)
-        : null
-    }
+    required={isRequired('first_name')}
     protected={fieldIsProtected(user, 'first_name')}
   />
 );
@@ -75,33 +65,23 @@ const LastNameRow = ({ user, disabled, isSelf }) => (
         ? translate('Display your last name on your profile')
         : translate("Display the user's last name on their profile")
     }
-    requiredMsg={
-      isRequired('last_name')
-        ? getDefaultRequiredMsg(translate('last name'), isSelf)
-        : null
-    }
+    required={isRequired('last_name')}
     protected={fieldIsProtected(user, 'last_name')}
   />
 );
 
-const NativeNameRow = ({ user, disabled, isSelf }) => {
-  const nativeNameIsVisible = useSelector(getNativeNameVisible);
-  return nativeNameIsVisible ? (
+const NativeNameRow = ({ user, disabled }) =>
+  isProfileAttributeEnabled('native_name') ? (
     <UserEditRow
       user={user}
       label={translate('Native name')}
       name="native_name"
       value={user.native_name}
       disabled={disabled}
-      requiredMsg={
-        isRequired('native_name')
-          ? getDefaultRequiredMsg(translate('native name'), isSelf)
-          : null
-      }
+      required={isRequired('native_name')}
       protected={fieldIsProtected(user, 'native_name')}
     />
   ) : null;
-};
 
 const NotificationsEnabledRow = ({ user, disabled, isSelf }) => {
   const isStaffUser = useSelector(isStaff);
@@ -129,7 +109,7 @@ const NotificationsEnabledRow = ({ user, disabled, isSelf }) => {
   );
 };
 
-const PhoneNumberRow = ({ user, disabled, isSelf }) => (
+const PhoneNumberRow = ({ user, disabled }) => (
   <UserEditRow
     user={user}
     label={translate('Phone number')}
@@ -137,18 +117,10 @@ const PhoneNumberRow = ({ user, disabled, isSelf }) => (
     value={user.phone_number}
     disabled={disabled}
     protected={fieldIsProtected(user, 'phone_number')}
-    requiredMsg={
-      isRequired('phone_number')
-        ? translate('{pronoun} phone number', {
-            pronoun: isSelf ? translate('Your') : translate("User's"),
-          })
-        : null
-    }
-    description={
-      isSelf
-        ? translate('Enter your contact number')
-        : translate('Enter a contact number for the user')
-    }
+    required={isRequired('phone_number')}
+    description={translate(
+      'International format with country code, e.g. +1 202 555 1234',
+    )}
   />
 );
 
@@ -160,20 +132,11 @@ const EmailRow = ({ user, disabled, isSelf }) => (
     value={user.email}
     disabled={disabled}
     protected={fieldIsProtected(user, 'email')}
-    requiredMsg={
-      isRequired('email')
-        ? translate(
-            '{pronoun} email is required for account notifications and password recovery',
-            { pronoun: isSelf ? translate('Your') : translate("User's") },
-          )
-        : null
-    }
+    required={isRequired('email')}
     description={
       isSelf
-        ? translate('Provide an email address for communication and recovery')
-        : translate(
-            "Provide an email address for the user's communication and recovery",
-          )
+        ? translate('Provide an email address for notifications')
+        : translate("Provide an email address for the user's notifications")
     }
     actions={
       !fieldIsProtected(user, 'email') ? (
@@ -480,7 +443,7 @@ const EdupersonAssuranceRow = ({ user, disabled }) =>
     />
   ) : null;
 
-const DescriptionRow = ({ user, disabled, isSelf }) => {
+const DescriptionRow = ({ user, disabled }) => {
   const visible = useSelector(isStaffOrSupport);
   return visible ? (
     <UserEditRow
@@ -492,11 +455,7 @@ const DescriptionRow = ({ user, disabled, isSelf }) => {
       description={translate(
         'Additional account description invisible to user',
       )}
-      requiredMsg={
-        isRequired('description')
-          ? getDefaultRequiredMsg(translate('description'), isSelf)
-          : null
-      }
+      required={isRequired('description')}
     />
   ) : null;
 };
@@ -528,7 +487,7 @@ export const UserEditRows = ({
       {/* Basic Information */}
       <FirstNameRow user={user} isSelf={isSelf} disabled={disabled} />
       <LastNameRow user={user} isSelf={isSelf} disabled={disabled} />
-      <NativeNameRow user={user} isSelf={isSelf} disabled={disabled} />
+      <NativeNameRow user={user} disabled={disabled} />
 
       {/* Personal Identity */}
       <PersonalTitleRow user={user} isSelf={isSelf} disabled={disabled} />
@@ -536,7 +495,7 @@ export const UserEditRows = ({
       <PlaceOfBirthRow user={user} isSelf={isSelf} disabled={disabled} />
 
       {/* Contact Information */}
-      <PhoneNumberRow user={user} isSelf={isSelf} disabled={disabled} />
+      <PhoneNumberRow user={user} disabled={disabled} />
       <EmailRow user={user} isSelf={isSelf} disabled={disabled} />
 
       {/* Geographic Information */}
@@ -558,7 +517,7 @@ export const UserEditRows = ({
       <DateJoinedRow user={user} disabled={disabled} />
       <UserTypeRow user={user} isSelf={isSelf} disabled={disabled} />
       <CivilNumberRow user={user} isSelf={isSelf} disabled={disabled} />
-      <DescriptionRow user={user} isSelf={isSelf} disabled={disabled} />
+      <DescriptionRow user={user} disabled={disabled} />
       <ShortnameRow user={user} currentUser={currentUser} disabled={disabled} />
       <NotificationsEnabledRow
         user={user}

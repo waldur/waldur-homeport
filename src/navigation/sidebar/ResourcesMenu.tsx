@@ -103,7 +103,17 @@ const RenderMenuItems = ({ items }) => {
   );
 };
 
-export const ResourcesMenu = ({ user }) => {
+interface ResourcesMenuProps {
+  user;
+  disabled?: boolean;
+  disabledTooltip?: string;
+}
+
+export const ResourcesMenu = ({
+  user,
+  disabled,
+  disabledTooltip,
+}: ResourcesMenuProps) => {
   const categories = useOfferingCategories();
 
   const { data: categoryGroups } = useQuery({
@@ -182,6 +192,8 @@ export const ResourcesMenu = ({ user }) => {
       itemId="resources-menu"
       icon={<SquaresFourIcon weight="bold" />}
       badge={<ResourcesMenuFilterButton />}
+      disabled={disabled}
+      disabledTooltip={disabledTooltip}
     >
       <ResourcesMenuFilters />
       <MenuItem

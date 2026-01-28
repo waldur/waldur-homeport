@@ -5,6 +5,7 @@ import { useEffect } from 'react';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
+import { useProfileCompletenessContext } from '@waldur/user/ProfileCompletenessContext';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
@@ -19,6 +20,12 @@ export const UnifiedSidebar = () => {
   const user = useUser();
   const router = useRouter();
   const { state, params } = useCurrentStateAndParams();
+  const { shouldBlockNavigation } = useProfileCompletenessContext();
+
+  const disabledTooltip = shouldBlockNavigation
+    ? translate('Please complete your profile to access this section')
+    : undefined;
+
   useEffect(() => {
     MenuComponent.reinitialization();
     const menuElement = document.querySelector('#kt_aside_menu');
@@ -64,13 +71,32 @@ export const UnifiedSidebar = () => {
   return (
     <Sidebar>
       {user.is_staff || user.permissions?.length !== 0 ? (
-        <MarketplaceTrigger />
+        <MarketplaceTrigger
+          disabled={shouldBlockNavigation}
+          disabledTooltip={disabledTooltip}
+        />
       ) : null}
-      <OrganizationsListMenu />
-      <ProjectsListMenu />
-      <ResourcesMenu user={user} />
-      <ReportingMenu />
-      <CallPublicMenu />
+      <OrganizationsListMenu
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
+      />
+      <ProjectsListMenu
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
+      />
+      <ResourcesMenu
+        user={user}
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
+      />
+      <ReportingMenu
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
+      />
+      <CallPublicMenu
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
+      />
       <MenuItem
         activeState={
           [
@@ -85,6 +111,8 @@ export const UnifiedSidebar = () => {
         title={translate('Marketplace')}
         state="public.marketplace-landing"
         child={false}
+        disabled={shouldBlockNavigation}
+        disabledTooltip={disabledTooltip}
       />
     </Sidebar>
   );

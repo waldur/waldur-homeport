@@ -12,6 +12,7 @@ import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
 import { RemovedProjectWarningBar } from '@waldur/project/RemovedProjectWarningBar';
 import { OfferingUsersWarningBar } from '@waldur/user/OfferingUsersWarningBar';
+import { ProfileCompletenessProvider } from '@waldur/user/ProfileCompletenessContext';
 import { UsersService } from '@waldur/user/UsersService';
 import { getImpersonatorUser, getUser } from '@waldur/workspace/selectors';
 
@@ -109,48 +110,50 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   return (
     <LayoutContext.Provider value={context}>
       <PermissionDataProvider>
-        <div className="d-flex flex-column flex-root print-content-only">
-          {PageBar && <OutstandingBar>{PageBar}</OutstandingBar>}
-          <div className="page d-flex flex-row flex-column-fluid">
-            <UnifiedSidebar />
-            <div className="wrapper d-flex flex-column flex-row-fluid">
-              <CookiesConsent />
-              {!state?.data?.hideHeader && (
-                <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
-              )}
-              <BreadcrumbMain mobile />
-              <Announcements extraAnnouncement={ExtraAnnouncementBar} />
-              <WarningBar />
-              <OfferingUsersWarningBar />
-              <RemovedProjectWarningBar />
-              <div
-                className={classNames(
-                  'content d-flex flex-column flex-grow-1',
-                  { 'full-page': fullPage },
+        <ProfileCompletenessProvider>
+          <div className="d-flex flex-column flex-root print-content-only">
+            {PageBar && <OutstandingBar>{PageBar}</OutstandingBar>}
+            <div className="page d-flex flex-row flex-column-fluid">
+              <UnifiedSidebar />
+              <div className="wrapper d-flex flex-column flex-row-fluid">
+                <CookiesConsent />
+                {!state?.data?.hideHeader && (
+                  <AppHeader hasBreadcrumbs={Boolean(breadcrumbs.length)} />
                 )}
-              >
-                {PageHero && (
-                  <div className="hero w-100 d-flex flex-column">
-                    {PageHero}
-                  </div>
-                )}
-                {showToolbar && <Toolbar actions={actions} />}
-                {ExtraToolbar && (
-                  <div className="extra-toolbar">{ExtraToolbar}</div>
-                )}
-                <div className="post w-100 d-flex flex-column-fluid">
-                  {state.data.auth && !currentUser ? (
-                    <LoadingSpinner />
-                  ) : (
-                    children
+                <BreadcrumbMain mobile />
+                <Announcements extraAnnouncement={ExtraAnnouncementBar} />
+                <WarningBar />
+                <OfferingUsersWarningBar />
+                <RemovedProjectWarningBar />
+                <div
+                  className={classNames(
+                    'content d-flex flex-column flex-grow-1',
+                    { 'full-page': fullPage },
                   )}
-                  <MasterLayout />
+                >
+                  {PageHero && (
+                    <div className="hero w-100 d-flex flex-column">
+                      {PageHero}
+                    </div>
+                  )}
+                  {showToolbar && <Toolbar actions={actions} />}
+                  {ExtraToolbar && (
+                    <div className="extra-toolbar">{ExtraToolbar}</div>
+                  )}
+                  <div className="post w-100 d-flex flex-column-fluid">
+                    {state.data.auth && !currentUser ? (
+                      <LoadingSpinner />
+                    ) : (
+                      children
+                    )}
+                    <MasterLayout />
+                  </div>
                 </div>
+                <AppFooter />
               </div>
-              <AppFooter />
             </div>
           </div>
-        </div>
+        </ProfileCompletenessProvider>
       </PermissionDataProvider>
     </LayoutContext.Provider>
   );

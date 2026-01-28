@@ -9,13 +9,14 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { getNativeNameVisible } from '@waldur/store/config';
 import { type RootState } from '@waldur/store/reducers';
 import {
   formatUserIsActive,
   formatUserStatus,
 } from '@waldur/user/support/utils';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
+
+import { isProfileAttributeEnabled } from './profileAttributes';
 
 interface OwnProps {
   user: User;
@@ -33,7 +34,7 @@ export const UserDetailsTable: FunctionComponent<OwnProps> = (props) => {
         value={<FieldWithCopy value={props.user.full_name} />}
       />
 
-      {getNativeNameVisible() && (
+      {isProfileAttributeEnabled('native_name') && (
         <FormTable.Item
           label={translate('Native name')}
           value={<FieldWithCopy value={props.user.native_name} />}
