@@ -74,8 +74,9 @@ export const combinePrices = (
           }
         } else {
           // For non-prepaid one-time components, use plan quotas if available.
+          // Use != null to properly handle quota value of 0
           amount =
-            plan.quotas && plan.quotas[component.type]
+            plan.quotas && plan.quotas[component.type] != null
               ? plan.quotas[component.type]
               : 1;
         }
