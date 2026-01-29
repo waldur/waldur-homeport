@@ -46,6 +46,7 @@ interface TableBodyProps extends Pick<
   | 'validate'
   | 'columnPositions'
   | 'hasOptionalColumns'
+  | 'isRowExpandable'
 > {
   pinnedColumns?: PinnedColumns;
 }
@@ -219,6 +220,7 @@ interface TableRowProps {
   onRowClick: (row, index: number) => void;
   onChangeField: (row, input) => void;
   fieldProps?: { input; meta };
+  isRowExpandable?: (row: any) => boolean;
 }
 
 const TableRow = memo<TableRowProps>(
@@ -243,6 +245,7 @@ const TableRow = memo<TableRowProps>(
     onRowClick,
     onChangeField,
     fieldProps,
+    isRowExpandable,
   }) => {
     const isRowSelected = useMemo(() => {
       if (!selectedRows) return false;
@@ -291,13 +294,15 @@ const TableRow = memo<TableRowProps>(
       }
     }, [fieldProps, row, onChangeField]);
 
+    const canExpand = expandableRow && (isRowExpandable?.(row) ?? true);
+
     return (
       <tr
         className={
           classNames(
             typeof rowClass === 'function' ? rowClass({ row }) : rowClass,
             {
-              expanded: expandableRow && toggled[getId(row, rowIndex)],
+              expanded: canExpand && toggled[getId(row, rowIndex)],
               checked: fieldType && isChecked,
             },
           ) || undefined
@@ -344,7 +349,9 @@ const TableRow = memo<TableRowProps>(
             data-testid="row-expander"
             className={toggled[getId(row, rowIndex)] ? 'active' : ''}
           >
-            <CaretDownIcon size={20} weight="bold" className="rotate-180" />
+            {canExpand && (
+              <CaretDownIcon size={20} weight="bold" className="rotate-180" />
+            )}
           </td>
         )}
         <TableCells
@@ -408,6 +415,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
     columnPositions,
     hasOptionalColumns,
     pinnedColumns = {},
+    isRowExpandable,
   }) => {
     const columnsMap = useMemo(
       () =>
@@ -474,6 +482,7 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
           onRowClick={onRowClick}
           onChangeField={onChangeField}
           fieldProps={fieldProps}
+          isRowExpandable={isRowExpandable}
         />
       ),
       // Note: rowActions is intentionally excluded from dependencies
@@ -501,34 +510,39 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
 
     return (
       <tbody>
-        {rows.map((row, rowIndex) => (
-          <React.Fragment key={rowIndex}>
-            {fieldType ? (
-              <Field
-                name={fieldName}
-                component={(fieldProps) => renderRow(row, rowIndex, fieldProps)}
-                validate={validate}
-              />
-            ) : (
-              renderRow(row, rowIndex)
-            )}
-            {expandableRow && toggled[getId(row, rowIndex)] && (
-              <tr>
-                <td
-                  colSpan={
-                    columns.length +
-                    1 +
-                    (rowActions ? 1 : 0) +
-                    (enableMultiSelect || fieldType ? 1 : 0)
+        {rows.map((row, rowIndex) => {
+          const canExpand = expandableRow && (isRowExpandable?.(row) ?? true);
+          return (
+            <React.Fragment key={rowIndex}>
+              {fieldType ? (
+                <Field
+                  name={fieldName}
+                  component={(fieldProps) =>
+                    renderRow(row, rowIndex, fieldProps)
                   }
-                  className={expandableRowClassName}
-                >
-                  {React.createElement(expandableRow, { row, fetch })}
-                </td>
-              </tr>
-            )}
-          </React.Fragment>
-        ))}
+                  validate={validate}
+                />
+              ) : (
+                renderRow(row, rowIndex)
+              )}
+              {canExpand && toggled[getId(row, rowIndex)] && (
+                <tr>
+                  <td
+                    colSpan={
+                      columns.length +
+                      1 +
+                      (rowActions ? 1 : 0) +
+                      (enableMultiSelect || fieldType ? 1 : 0)
+                    }
+                    className={expandableRowClassName}
+                  >
+                    {React.createElement(expandableRow, { row, fetch })}
+                  </td>
+                </tr>
+              )}
+            </React.Fragment>
+          );
+        })}
       </tbody>
     );
   },
