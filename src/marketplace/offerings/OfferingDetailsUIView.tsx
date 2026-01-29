@@ -50,11 +50,9 @@ const PlanUsageList = lazyComponent(() =>
   })),
 );
 const OfferingUsersTable = lazyComponent(() =>
-  import('@waldur/marketplace/service-providers/offering-users/ProviderOfferingUsersList').then(
-    (module) => ({
-      default: module.ProviderOfferingUsersListComponent,
-    }),
-  ),
+  import('./details/OfferingUsersTable').then((module) => ({
+    default: module.OfferingUsersTable,
+  })),
 );
 const OfferingPermissionsList = lazyComponent(() =>
   import('./details/permissions/OfferingPermissionsList').then((module) => ({

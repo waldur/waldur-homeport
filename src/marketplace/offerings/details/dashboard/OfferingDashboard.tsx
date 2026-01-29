@@ -26,7 +26,6 @@ interface OwnProps {
 
 export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.xl });
-
   const [agentIdentity, setAgentIdentity] = useState(null);
 
   const {

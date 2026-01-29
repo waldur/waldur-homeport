@@ -3,15 +3,19 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { marketplaceOfferingUsersList } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { OfferingUserRowActions } from '@waldur/marketplace/offerings/actions/OfferingUserRowActions';
 import { CreateOfferingUserButton } from '@waldur/marketplace/offerings/details/CreateOfferingUserButton';
 import { UserImportButton } from '@waldur/marketplace/offerings/import-users/UserImportButton';
+import { TosReportingButton } from '@waldur/marketplace/offerings/update/tos/TosReportingButton';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
-import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
+import { TableExportButton } from '@waldur/table/TableExportButton';
 import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
@@ -31,8 +35,9 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       plugin_options?: { service_provider_can_create_offering_user?: boolean };
       has_compliance_requirements?: boolean;
     };
+    tableActions?: React.ReactNode | ((tableProps: any) => React.ReactNode);
   }
-> = ({ provider, hasOrganizationColumn, portal, offering }) => {
+> = ({ provider, hasOrganizationColumn, portal, offering, tableActions }) => {
   const filterValues = useSelector(
     getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
   ) as { offering?; provider?; state?: Array<{ value: any }> };
@@ -44,11 +49,29 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       offering_uuid: offering?.uuid || filterValues?.offering?.uuid,
       state: filterValues?.state?.map((option) => option.value),
     }),
-    [provider, filterValues, offering],
+    [provider, filterValues, offering, hasOrganizationColumn],
   );
   const tableProps = useTable({
     table: 'marketplace-offering-users',
-    fetchData: createFetcher(marketplaceOfferingUsersList),
+    fetchData: async (request) => {
+      const queryParams: any = {
+        ...filter,
+      };
+
+      if (request.query) {
+        queryParams.query = request.query;
+      }
+
+      const response = await marketplaceOfferingUsersList({
+        query: queryParams,
+      });
+
+      return {
+        rows: response.data || [],
+        resultCount: response.data?.length || 0,
+        nextPage: undefined,
+      };
+    },
     filter,
     queryField: 'query',
   });
@@ -71,19 +94,20 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
         },
       ]
     : [];
-  const organizationColumn = hasOrganizationColumn
-    ? [
-        {
-          title: translate('Organization'),
-          render: ({ row }) => row.customer_name,
-          filter: 'provider',
-          inlineFilter: (row) => ({
-            customer_name: row.customer_name,
-            customer_uuid: row.customer_uuid,
-          }),
-        },
-      ]
-    : [];
+  const organizationColumn =
+    hasOrganizationColumn || offering
+      ? [
+          {
+            title: translate('Organization'),
+            render: ({ row }) => row.customer_name,
+            filter: 'provider',
+            inlineFilter: (row) => ({
+              customer_name: row.customer_name,
+              customer_uuid: row.customer_uuid,
+            }),
+          },
+        ]
+      : [];
   const stateColumn =
     provider || hasOrganizationColumn || offering
       ? [
@@ -93,6 +117,29 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
           },
         ]
       : [];
+  const tosConsentColumn = isFeatureVisible(
+    MarketplaceFeatures.display_user_tos,
+  )
+    ? [
+        {
+          title: translate('ToS consent status'),
+          render: ({ row }) => {
+            if (row.has_consent) {
+              return (
+                <Badge variant="success" pill outline>
+                  {translate('Accepted')}
+                </Badge>
+              );
+            }
+            return (
+              <Badge variant="warning" pill outline>
+                {translate('Not accepted')}
+              </Badge>
+            );
+          },
+        },
+      ]
+    : [];
   const columns = [
     ...offeringColumn,
     ...organizationColumn,
@@ -100,7 +147,6 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       title: translate('User'),
       render: ({ row }) => row.user_full_name,
     },
-    ...stateColumn,
     {
       title: translate('External username'),
       render: ({ row }) => row.username || 'N/A',
@@ -116,11 +162,15 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       render: ({ row }) => formatDateTime(row.modified),
       orderField: 'modified',
     },
+    ...stateColumn,
+    ...tosConsentColumn,
   ];
 
   const showExpandableRow = offering
     ? offering.has_compliance_requirements
-    : Boolean(provider);
+    : Boolean(provider) ||
+      (hasOrganizationColumn &&
+        isFeatureVisible(MarketplaceFeatures.display_user_tos));
 
   return (
     <Table
@@ -136,18 +186,34 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
         ) : undefined
       }
       portal={portal}
-      hasActionBar={!portal}
+      hasActionBar={!portal || !!portal?.additionalActions}
       cardBordered={!portal}
       fullWidth={!!portal}
       tableActions={
-        offering ? (
+        tableActions ? (
+          typeof tableActions === 'function' ? (
+            tableActions(tableProps)
+          ) : (
+            tableActions
+          )
+        ) : portal?.additionalActions ? (
+          typeof portal.additionalActions === 'function' ? (
+            portal.additionalActions(tableProps)
+          ) : (
+            portal.additionalActions
+          )
+        ) : offering ? (
           <CreateOfferingUserButton
             offering={offering}
             onSuccess={tableProps.fetch}
           />
         ) : (
           <>
+            {provider && (
+              <TosReportingButton providerUuid={provider.customer_uuid} />
+            )}
             <UserImportButton refetch={tableProps.fetch} provider={provider} />
+            <TableExportButton {...tableProps} />
             <CreateProviderOfferingUserButton
               refetch={tableProps.fetch}
               provider={provider}
