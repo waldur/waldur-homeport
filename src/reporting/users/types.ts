@@ -3,8 +3,10 @@ import {
   UserAffiliationCount,
   UserAuthMethodCount,
   UserIdentitySourceCount,
+  UserJobTitleCount,
   UserLanguageCount,
   UserOrganizationCount,
+  UserOrganizationTypeCount,
   UserRegistrationTrend,
 } from 'waldur-js-client';
 
@@ -16,8 +18,10 @@ export type {
   UserAffiliationCount,
   UserAuthMethodCount,
   UserIdentitySourceCount,
+  UserJobTitleCount,
   UserLanguageCount,
   UserOrganizationCount,
+  UserOrganizationTypeCount,
   UserRegistrationTrend,
 };
 
@@ -32,6 +36,8 @@ export interface UserStatistics {
   activeStatus: UserActiveStatusCount[];
   languages: UserLanguageCount[];
   registrationTrend: UserRegistrationTrend[];
+  organizationTypes: UserOrganizationTypeCount[];
+  jobTitles: UserJobTitleCount[];
 }
 
 /**

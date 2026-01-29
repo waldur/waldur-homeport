@@ -14,7 +14,9 @@ import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 import { ActiveStatusChart } from './charts/ActiveStatusChart';
 import { AuthMethodsChart } from './charts/AuthMethodsChart';
 import { IdentitySourcesChart } from './charts/IdentitySourcesChart';
+import { JobPositionsChart } from './charts/JobPositionsChart';
 import { LanguagesChart } from './charts/LanguagesChart';
+import { OrganizationTypesChart } from './charts/OrganizationTypesChart';
 import { RegistrationTrendChart } from './charts/RegistrationTrendChart';
 import { SummaryCards } from './charts/SummaryCards';
 import {
@@ -32,6 +34,8 @@ export const UserDemographicsPage: FC = () => {
 
   // Check which profile attributes are enabled
   const showIdentitySource = isProfileAttributeEnabled('identity_source');
+  const showOrganizationType = isProfileAttributeEnabled('organization_type');
+  const showJobTitle = isProfileAttributeEnabled('job_title');
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -76,6 +80,22 @@ export const UserDemographicsPage: FC = () => {
           <RegistrationTrendChart data={data.registrationTrend} />
         </Col>
       </Row>
+
+      {/* Organization Type and Job Position Row */}
+      {(showOrganizationType || showJobTitle) && (
+        <Row className="mb-6 g-4">
+          {showOrganizationType && (
+            <Col xs={12} lg={showJobTitle ? 6 : 12}>
+              <OrganizationTypesChart data={data.organizationTypes} />
+            </Col>
+          )}
+          {showJobTitle && (
+            <Col xs={12} lg={showOrganizationType ? 6 : 12}>
+              <JobPositionsChart data={data.jobTitles} />
+            </Col>
+          )}
+        </Row>
+      )}
 
       {/* Link to analytics page when experimental is enabled */}
       {showExperimental && (

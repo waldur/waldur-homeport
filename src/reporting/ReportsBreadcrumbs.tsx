@@ -7,6 +7,10 @@ import { FeaturesEnum, SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useBreadcrumbs } from '@waldur/navigation/context';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
+import {
+  isProfileAttributeEnabled,
+  ProfileAttribute,
+} from '@waldur/user/support/profileAttributes';
 
 // Stable empty array to avoid infinite re-renders
 const EMPTY_ITEMS: IBreadcrumbItem[] = [];
@@ -26,6 +30,8 @@ interface ReportDefinition {
   state: string;
   /** Optional feature flag - report only visible when feature is enabled */
   feature?: FeaturesEnum;
+  /** Optional profile attribute - report only visible when attribute is enabled */
+  attribute?: ProfileAttribute;
 }
 
 interface CategoryConfig {
@@ -218,6 +224,7 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         key: 'affiliations',
         title: translate('Affiliations'),
         state: 'reporting-user-affiliations',
+        attribute: 'affiliations',
       },
       {
         key: 'user-roles',
@@ -310,11 +317,13 @@ export const useReportBreadcrumbs = ({
   const currentReportDef = config.reports.find((r) => r.key === currentReport);
   const reportTitle = currentReportDef?.title || currentReport;
 
-  // Filter reports by feature visibility
+  // Filter reports by feature visibility and profile attribute availability
   const visibleReports = useMemo(
     () =>
       config.reports.filter(
-        (report) => !report.feature || isFeatureVisible(report.feature),
+        (report) =>
+          (!report.feature || isFeatureVisible(report.feature)) &&
+          (!report.attribute || isProfileAttributeEnabled(report.attribute)),
       ),
     [config.reports],
   );
