@@ -3,7 +3,9 @@ import {
   marketplaceStatsUserAffiliationCountList,
   marketplaceStatsUserAuthMethodCountList,
   marketplaceStatsUserIdentitySourceCountList,
+  marketplaceStatsUserJobTitleCountList,
   marketplaceStatsUserOrganizationCountList,
+  marketplaceStatsUserOrganizationTypeCountList,
   UserAffiliationCount,
   UserOrganizationCount,
   usersUserActiveStatusCountList,
@@ -48,6 +50,8 @@ async function fetchUserStatistics(
   const showIdentitySource = isProfileAttributeEnabled('identity_source');
   const showAffiliations = isProfileAttributeEnabled('affiliations');
   const showOrganization = isProfileAttributeEnabled('organization');
+  const showOrganizationType = isProfileAttributeEnabled('organization_type');
+  const showJobTitle = isProfileAttributeEnabled('job_title');
 
   const [
     authMethods,
@@ -57,6 +61,8 @@ async function fetchUserStatistics(
     activeStatus,
     languages,
     registrationTrend,
+    organizationTypes,
+    jobTitles,
   ] = await Promise.all([
     // Core stats - always fetch
     safeFetch(() => marketplaceStatsUserAuthMethodCountList({ signal })),
@@ -74,6 +80,15 @@ async function fetchUserStatistics(
     safeFetch(() => usersUserActiveStatusCountList({ signal })),
     safeFetch(() => usersUserLanguageCountList({ signal })),
     safeFetch(() => usersUserRegistrationTrendList({ signal })),
+    // Organization type and job title stats
+    showOrganizationType
+      ? safeFetch(() =>
+          marketplaceStatsUserOrganizationTypeCountList({ signal }),
+        )
+      : Promise.resolve([]),
+    showJobTitle
+      ? safeFetch(() => marketplaceStatsUserJobTitleCountList({ signal }))
+      : Promise.resolve([]),
   ]);
 
   return {
@@ -84,6 +99,8 @@ async function fetchUserStatistics(
     activeStatus,
     languages,
     registrationTrend,
+    organizationTypes,
+    jobTitles,
   };
 }
 
