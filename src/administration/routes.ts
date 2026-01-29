@@ -283,7 +283,7 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      breadcrumb: () => translate('Marketplace'),
+      breadcrumb: () => translate('Settings'),
     },
   },
 
