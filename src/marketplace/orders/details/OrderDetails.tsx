@@ -1,12 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
-import { OrderDetails as OrderDetailsType } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { PlanSection } from '@waldur/marketplace/details/plan/PlanSection';
-import { Offering } from '@waldur/marketplace/types';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
 import { useTitle } from '@waldur/navigation/title';
@@ -31,63 +29,67 @@ import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
 import '@waldur/core/CustomCard.scss';
 
-const getOrderPageTabs = (data: {
-  order: OrderDetailsType;
-  offering: Offering;
-}): PageBarTab[] => {
-  const limitParser = getFormLimitParser(data.order.offering_type);
-  const limits = limitParser(data.order.limits);
+const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
   const tabs = [
     {
       key: 'summary',
       title: translate('Order summary'),
       component: () => (
-        <OrderSummaryTab order={data.order} offering={data.offering} />
+        <OrderSummaryTab order={props.order} offering={props.offering} />
       ),
     },
     {
       key: 'metadata',
       title: translate('Metadata'),
       component: () => (
-        <OrderMetadataTab order={data.order} offering={data.offering} />
+        <OrderMetadataTab order={props.order} offering={props.offering} />
       ),
     },
     {
       key: 'user-submitted-fields',
       title: translate('User submitted fields'),
-      component: () => <UserSubmittedFieldsTab order={data.order} />,
+      component: () => <UserSubmittedFieldsTab order={props.order} />,
     },
     {
       key: 'accounting',
       title: translate('Accounting'),
       component: () => (
-        <PlanSection offering={data.offering} order={data.order} />
+        <PlanSection offering={props.offering} order={props.order} />
       ),
     },
     {
       key: 'limits',
       title: translate('Limits'),
-      component: () => (
-        <LimitsSection components={data.offering.components} limits={limits} />
-      ),
+      component: () => {
+        const limitParser = getFormLimitParser(props.order.offering_type);
+        const limits = limitParser(props.order.limits);
+        return (
+          <LimitsSection
+            components={props.offering.components}
+            limits={limits}
+            order={props.order}
+            offering={props.offering}
+          />
+        );
+      },
     },
   ];
 
   // Only show Output tab if there is output
-  if (data.order.output) {
+  if (props.order.output) {
     tabs.push({
       key: 'output',
       title: translate('Output'),
-      component: () => <OutputTab order={data.order} />,
+      component: () => <OutputTab order={props.order} />,
     });
   }
 
   // Only show Error details tab if there are errors
-  if (data.order.error_message) {
+  if (props.order.error_message) {
     tabs.push({
       key: 'error-details',
       title: translate('Error details'),
-      component: () => <ErrorDetailsTab order={data.order} />,
+      component: () => <ErrorDetailsTab order={props.order} />,
     });
   }
 
@@ -97,54 +99,54 @@ const getOrderPageTabs = (data: {
 interface OrderDetailsProps {
   offering: any;
   order: any;
-  data: any;
+  limits: any;
   refetch: any;
   isRefetching: boolean;
 }
 
-const PageHero = ({ data, isRefetching }) => (
+const PageHero = ({ isRefetching, ...props }: OrderDetailsProps) => (
   <PublicDashboardHero
     hideQuickSection
     cardBordered
     className="container-fluid my-5 d-print-none"
-    logo={data.offering.thumbnail}
-    logoAlt={data.offering.name}
-    logoTooltip={data.offering.name}
+    logo={props.offering.thumbnail}
+    logoAlt={props.offering.name}
+    logoTooltip={props.offering.name}
     logoCircle
-    title={<OrderDetailsHeaderTitle order={data.order} />}
+    title={<OrderDetailsHeaderTitle order={props.order} />}
     actions={
       <>
-        <RefreshButton refetch={data.refetch} isLoading={isRefetching} />
+        <RefreshButton refetch={props.refetch} isLoading={isRefetching} />
 
-        {data.order.attachment && data.order.state === 'pending-provider' ? (
-          <OrderReviewButton order={data.order} loadData={data.refetch} />
+        {props.order.attachment && props.order.state === 'pending-provider' ? (
+          <OrderReviewButton order={props.order} loadData={props.refetch} />
         ) : (
           <OrderActionsButton
-            order={data.order}
-            offering={data.offering}
-            loadData={data.refetch}
+            order={props.order}
+            offering={props.offering}
+            loadData={props.refetch}
           />
         )}
       </>
     }
   >
-    <OrderDetailsHeaderBody order={data.order} />
+    <OrderDetailsHeaderBody order={props.order} />
   </PublicDashboardHero>
 );
 
-export const OrderDetails: FunctionComponent<OrderDetailsProps> = (data) => {
+export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
   useTitle(translate('Order details'));
-  usePageHero(<PageHero data={data} isRefetching={data.isRefetching} />, [
-    data.isRefetching,
-    data.offering,
-    data.order,
-    data.refetch,
+  usePageHero(<PageHero {...props} isRefetching={props.isRefetching} />, [
+    props.isRefetching,
+    props.offering,
+    props.order,
+    props.refetch,
   ]);
 
   const { getOrganizationBreadcrumbItem } = usePresetBreadcrumbItems();
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {
-    const order = data.order;
+    const order = props.order;
     if (!order) return [];
     return [
       {
@@ -207,19 +209,22 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (data) => {
         truncate: true,
       },
     ];
-  }, [data.order]);
+  }, [props.order]);
   useBreadcrumbs(breadcrumbItems);
 
-  const tabs = useMemo(() => getOrderPageTabs(data), []);
+  const tabs = useMemo(
+    () => getOrderPageTabs(props),
+    [props.order, props.offering, props.limits],
+  );
   const {
     tabSpec: { component: Component },
   } = usePageTabsTransmitter(tabs);
 
-  if (data) {
+  if (props) {
     return (
       <>
         <Component />
-        <OrderAccordion {...data} loadData={data.refetch} />
+        <OrderAccordion {...props} loadData={props.refetch} />
       </>
     );
   }

@@ -10,14 +10,44 @@ import { Project } from '@waldur/workspace/types';
 
 interface OrderStartDateFieldProps {
   project: Project;
+  simple?: boolean;
 }
 
-export const OrderStartDateField = ({ project }: OrderStartDateFieldProps) => {
+export const OrderStartDateField = ({
+  project,
+  simple,
+}: OrderStartDateFieldProps) => {
   // 1. Check if the feature is enabled from the global config
   const isEnabled = ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
 
   // 2. Memoize date calculations for performance
-  const dateFieldProps = useMemo(() => {
+  const dateFieldProps = useOrderStartDateBounds(project);
+
+  // 3. Do not render anything if the feature is disabled
+  if (!isEnabled) {
+    return null;
+  }
+
+  // 4. Render the Redux Form Field
+  return (
+    <Field
+      name="start_date" // This field is at the root of the order payload
+      label={translate('Start date')}
+      component={simple ? DateField : FormGroup}
+      description={
+        !simple &&
+        translate(
+          'The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.',
+        )
+      }
+    >
+      {!simple && <DateField {...dateFieldProps} />}
+    </Field>
+  );
+};
+
+export const useOrderStartDateBounds = (project: Project) => {
+  return useMemo(() => {
     if (!project) {
       return {
         minDate: DateTime.local().plus({ days: 1 }).toISODate(),
@@ -48,23 +78,4 @@ export const OrderStartDateField = ({ project }: OrderStartDateFieldProps) => {
       isClearable: true, // This field is optional
     };
   }, [project]);
-
-  // 3. Do not render anything if the feature is disabled
-  if (!isEnabled) {
-    return null;
-  }
-
-  // 4. Render the Redux Form Field
-  return (
-    <Field
-      name="start_date" // This field is at the root of the order payload
-      label={translate('Start date')}
-      component={FormGroup}
-      description={translate(
-        'The date when the resource provisioning will be initiated. If not set, the order is processed immediately after approval.',
-      )}
-    >
-      <DateField {...dateFieldProps} />
-    </Field>
-  );
 };
