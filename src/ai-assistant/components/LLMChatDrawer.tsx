@@ -24,7 +24,7 @@ export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
       {/* Chat messages area - grows to fill space */}
       <div className="flex-grow-1 overflow-auto">
         <LLMErrorBoundary onClose={close}>
-          <Thread onClose={close} hideCloseButton={true} />
+          <Thread />
         </LLMErrorBoundary>
       </div>
     </div>

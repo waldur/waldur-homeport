@@ -254,4 +254,9 @@ export interface TableProps<RowType = any> extends TableState {
   hideTitle?: boolean;
   hideIfEmpty?: boolean;
   portal?: TablePortal;
+  /**
+   * Function to determine if a row is expandable.
+   * If not provided, all rows are considered expandable if expandableRow is set.
+   */
+  isRowExpandable?: (row: RowType) => boolean;
 }

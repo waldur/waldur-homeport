@@ -7,10 +7,8 @@ import {
   useAssistantState,
 } from '@assistant-ui/react';
 import {
-  ArrowDownIcon,
   PencilIcon,
   ArrowClockwiseIcon,
-  XIcon,
   SparkleIcon,
   PaperPlaneTiltIcon,
   CubeIcon,
@@ -21,9 +19,13 @@ import {
   MagnifyingGlassIcon,
   StopIcon,
   WarningCircleIcon,
+  CoinsIcon,
 } from '@phosphor-icons/react';
-import React, { type FC, ReactNode, useMemo } from 'react';
+import { useQuery } from '@tanstack/react-query';
+import React, { type FC, ReactNode, useEffect, useMemo } from 'react';
+import { chatQuotaUsageRetrieve } from 'waldur-js-client';
 
+import { calculateQuotaPercentage } from '@waldur/administration/ai-assistant/AITokenExpandableRow';
 import { BlockRenderer } from '@waldur/ai-assistant/components/BlockRenderer';
 import { LoadingDots } from '@waldur/ai-assistant/components/shared/LoadingDots';
 import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
@@ -35,12 +37,8 @@ import {
 } from '@waldur/ai-assistant/lib/types';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { translate } from '@waldur/i18n';
+import { QuotaProgressBar } from '@waldur/marketplace/resources/details/QuotaProgressBar';
 import { useUser } from '@waldur/workspace/hooks';
-
-interface ThreadProps {
-  onClose?: () => void;
-  hideCloseButton?: boolean;
-}
 
 type SuggestionItem = {
   label: string;
@@ -52,24 +50,9 @@ interface LastUserMessageActionsProps {
   messageId: string;
 }
 
-export const Thread: FC<ThreadProps> = ({
-  onClose,
-  hideCloseButton = false,
-}) => {
+export const Thread: FC = () => {
   return (
     <ThreadPrimitive.Root className="aui-root aui-thread-root">
-      {!hideCloseButton && (
-        <div className="aui-thread-header">
-          <button
-            className="aui-button aui-close-button"
-            onClick={onClose}
-            aria-label={translate('Close')}
-          >
-            <XIcon weight="bold" />
-          </button>
-        </div>
-      )}
-
       <ThreadPrimitive.Viewport className="aui-thread-viewport">
         <ThreadPrimitive.If empty>
           <ThreadWelcome />
@@ -83,19 +66,8 @@ export const Thread: FC<ThreadProps> = ({
           }}
         />
       </ThreadPrimitive.Viewport>
-
       <Composer />
     </ThreadPrimitive.Root>
-  );
-};
-
-const ThreadScrollToBottom: FC = () => {
-  return (
-    <ThreadPrimitive.ScrollToBottom asChild>
-      <button className="aui-thread-scroll-to-bottom">
-        <ArrowDownIcon weight="bold" />
-      </button>
-    </ThreadPrimitive.ScrollToBottom>
   );
 };
 
@@ -183,9 +155,24 @@ const ThreadSuggestions: FC = () => {
 };
 
 const Composer: FC = () => {
+  const isRunning = useAssistantState(({ thread }) => thread.isRunning);
+  const [showUsage, setShowUsage] = React.useState(false);
+
+  const { data: quota, refetch: refetchQuota } = useQuery({
+    queryKey: ['chatQuota'],
+    queryFn: () => chatQuotaUsageRetrieve().then((r) => r.data),
+    enabled: showUsage,
+  });
+
+  // Refetch when isRunning changes from true -> false
+  useEffect(() => {
+    if (!isRunning && showUsage) {
+      refetchQuota();
+    }
+  }, [isRunning, showUsage, refetchQuota]);
+
   return (
     <div className="aui-composer-wrapper">
-      <ThreadScrollToBottom />
       <ComposerPrimitive.Root className="aui-composer-root">
         <div className="aui-composer-input-row">
           <MagnifyingGlassIcon weight="bold" />
@@ -197,21 +184,75 @@ const Composer: FC = () => {
             aria-label={translate('Message input')}
           />
         </div>
+        {showUsage && quota && (
+          <div className="aui-composer-usage-row">
+            <TokenSummary quota={quota} />
+          </div>
+        )}
         <div className="aui-composer-action-row">
-          <ComposerAction />
+          <ComposerAction showUsage={showUsage} setShowUsage={setShowUsage} />
         </div>
       </ComposerPrimitive.Root>
     </div>
   );
 };
 
-const ComposerAction: FC = () => {
+const TokenSummary = ({ quota }) => {
+  const periods = [
+    { label: translate('Daily'), key: 'daily' },
+    { label: translate('Weekly'), key: 'weekly' },
+    { label: translate('Monthly'), key: 'monthly' },
+  ];
+
+  return (
+    <div className="aui-token-summary-row">
+      {periods.map((p) => {
+        const percent = calculateQuotaPercentage(
+          quota[`${p.key}_usage`],
+          quota[`${p.key}_limit`],
+          quota[`${p.key}_system_default`],
+        );
+
+        return (
+          <div key={p.key} className="token-stat-item">
+            <span className="token-label">{p.label}</span>
+            <QuotaProgressBar
+              percent={percent ?? 0}
+              height={4}
+              className="flex-grow-1"
+            />
+            <span className="token-value">
+              {percent !== null ? `${percent}%` : '∞'}
+            </span>
+          </div>
+        );
+      })}
+    </div>
+  );
+};
+
+const ComposerAction: FC<{
+  showUsage: boolean;
+  setShowUsage: (value: boolean) => void;
+}> = ({ showUsage, setShowUsage }) => {
   return (
     <div className="aui-composer-action-wrapper">
+      <button
+        type="button"
+        className={`aui-composer-button token ${showUsage ? 'active' : ''}`}
+        onClick={() => {
+          setShowUsage(!showUsage);
+        }}
+        aria-label={translate('Show Token Usage')}
+      >
+        <CoinsIcon weight="bold" />
+        <span>{translate('Show Tokens')}</span>
+      </button>
+
       <ThreadPrimitive.If running={false}>
         <ComposerPrimitive.Send asChild>
           <button
-            className="aui-composer-send-button"
+            className="aui-composer-button send"
             aria-label={translate('Send message')}
           >
             <PaperPlaneTiltIcon weight="bold" />
@@ -259,7 +300,9 @@ const BlockBasedContent: FC = () => {
   const metadata = useAssistantState((state) => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
-  const isRunning = useAssistantState((status) => status.thread.isRunning);
+  const isRunning = useAssistantState(({ thread }) => thread.isRunning);
+  const messageStatus = useAssistantState(({ message }) => message.status);
+  const hasErrors = messageStatus?.type === 'incomplete' && messageStatus.error;
 
   // Memoize blocks and history extraction
   const currentBlocks = useMemo(
@@ -285,7 +328,7 @@ const BlockBasedContent: FC = () => {
 
   const hasHistory = totalVersions > 1;
 
-  if (displayedBlocks.length === 0 && isRunning) {
+  if (displayedBlocks.length === 0 && isRunning && !hasErrors) {
     return <LoadingDots />;
   }
 
@@ -341,9 +384,20 @@ const AssistantActionBar: FC = () => {
   const metadata = useAssistantState((state) => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
+  const messageStatus = useAssistantState(({ message }) => message.status);
 
-  const blocks = metadata?.blocks ?? [];
-  const textToCopy = extractTextFromBlocks(blocks);
+  const hasErrors = messageStatus?.type === 'incomplete' && messageStatus.error;
+  let text: string;
+
+  if (hasErrors && messageStatus.error) {
+    text =
+      typeof messageStatus.error === 'string'
+        ? messageStatus.error
+        : JSON.stringify(messageStatus.error, null, 2);
+  } else {
+    const blocks = metadata?.blocks ?? [];
+    text = extractTextFromBlocks(blocks);
+  }
 
   return (
     <ActionBarPrimitive.Root
@@ -352,7 +406,7 @@ const AssistantActionBar: FC = () => {
       autohideFloat="single-branch"
       className="aui-assistant-action-bar-root"
     >
-      <CopyToClipboardButton value={textToCopy} className="aui-button-ghost" />
+      <CopyToClipboardButton value={text} className="aui-button-ghost" />
 
       <MessagePrimitive.If last>
         <ActionBarPrimitive.Reload asChild>

@@ -1,10 +1,11 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { User, usersList, UsersListData } from 'waldur-js-client';
 
+import { AITokenExpandableRow } from '@waldur/administration/ai-assistant/AITokenExpandableRow';
 import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
@@ -379,6 +380,17 @@ export const UserList: FunctionComponent = () => {
     });
   }
 
+  const expandableRow = useCallback(
+    ({ row }) => (
+      <AITokenExpandableRow
+        row={row}
+        refetch={props.fetch}
+        isTableRefreshing={props.loading}
+      />
+    ),
+    [props.fetch, props.loading],
+  );
+
   return (
     <Table
       {...props}
@@ -391,6 +403,8 @@ export const UserList: FunctionComponent = () => {
       enableExport={true}
       tableActions={<UserTableActions refetch={props.fetch} />}
       hasQuery={true}
+      expandableRow={expandableRow}
+      isRowExpandable={(row) => !!row.is_active}
     />
   );
 };

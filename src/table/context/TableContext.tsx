@@ -47,6 +47,7 @@ interface TableConfig {
   hasActionBar: boolean;
   hasHeaders: boolean;
   hasOptionalColumns: boolean;
+  isRowExpandable?: (row: any) => boolean;
   enableMultiSelect: boolean;
   enableExport: boolean;
   showExportInDropdown: boolean;
