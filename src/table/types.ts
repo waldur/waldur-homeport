@@ -165,6 +165,7 @@ export interface TableTab {
 interface TablePortal {
   toolbar?: HTMLElement;
   refresh?: HTMLElement;
+  additionalActions?: any;
 }
 
 export interface TableProps<RowType = any> extends TableState {

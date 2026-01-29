@@ -13,7 +13,6 @@ import { USER_TOS_MANAGEMENT_TABLE_ID } from '@waldur/user/constants';
 import { OfferingSectionProps } from '../types';
 
 import { AddTosButton } from './AddTosButton';
-import { TosHistoryLogButton } from './TosHistoryLogButton';
 import { TosRowActions } from './TosRowActions';
 export const TosManagementSection: FC<OfferingSectionProps> = ({
   offering,
@@ -59,10 +58,7 @@ export const TosManagementSection: FC<OfferingSectionProps> = ({
         <TosRowActions tos={row} refetch={tableProps.fetch} />
       )}
       tableActions={
-        <>
-          <TosHistoryLogButton offering={offering} />
-          <AddTosButton offering={offering} refetch={tableProps.fetch} />
-        </>
+        <AddTosButton offering={offering} refetch={tableProps.fetch} />
       }
       hasQuery
       placeholderComponent={

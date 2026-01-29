@@ -1,10 +1,16 @@
+import { useQuery } from '@tanstack/react-query';
 import {
   marketplaceOfferingUsersChecklistRetrieve,
+  marketplaceUserOfferingConsentsList,
   OfferingUser,
   QuestionWithAnswer,
 } from 'waldur-js-client';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { BooleanIconBadge } from '@waldur/project/metadata/BooleanIconBadge';
@@ -31,9 +37,70 @@ export const OfferingUsersExpandableRow = ({
   });
 
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
+  const showTosFields = isFeatureVisible(MarketplaceFeatures.display_user_tos);
+
+  // Fetch consent details when the row is expanded
+  // Fetch for users with consent or who may have revoked consent
+  const { data: consentData, isLoading: isLoadingConsent } = useQuery({
+    queryKey: [
+      'offeringUserConsent',
+      offeringUser.user_uuid,
+      offeringUser.offering_uuid,
+    ],
+    queryFn: async () => {
+      const response = await marketplaceUserOfferingConsentsList({
+        query: {
+          user_uuid: offeringUser.user_uuid,
+          offering_uuid: offeringUser.offering_uuid,
+          page_size: 1,
+          o: ['-modified'], // Get the most recent consent record
+        },
+      });
+      return response.data?.[0] || null;
+    },
+    enabled: showTosFields,
+  });
+
+  const consent = consentData;
 
   return (
     <ExpandableContainer>
+      {showTosFields && (
+        <>
+          <Field
+            label={translate('ToS version')}
+            value={
+              isLoadingConsent ? (
+                <LoadingSpinnerIcon />
+              ) : (
+                consent?.version || 'N/A'
+              )
+            }
+            labelClass="mw-175px"
+          />
+          <Field
+            label={translate('ToS consent date')}
+            value={
+              isLoadingConsent ? (
+                <LoadingSpinnerIcon />
+              ) : consent?.agreement_date ? (
+                formatDateTime(consent.agreement_date)
+              ) : (
+                'N/A'
+              )
+            }
+            labelClass="mw-175px"
+          />
+          {consent?.revocation_date && (
+            <Field
+              label={translate('ToS revocation date')}
+              value={formatDateTime(consent.revocation_date)}
+              labelClass="mw-175px"
+            />
+          )}
+        </>
+      )}
+
       <Field
         label={translate('Comment')}
         value={
