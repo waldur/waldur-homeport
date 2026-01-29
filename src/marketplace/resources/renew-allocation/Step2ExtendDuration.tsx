@@ -8,7 +8,7 @@ import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import {
   composeValidators,
-  greaterThan,
+  greaterThanOrEqual,
   lessThanOrEqual,
   required,
 } from '@waldur/core/validators';
@@ -25,7 +25,7 @@ import { loadData } from '../change-limits/utils';
 
 import { RenewAllocationFormData } from './types';
 
-const MAX_MONTHS = 10 * 12; // 10 years
+const MAX_MONTHS = 60; // 5 years
 
 const getUuid = (resource) =>
   resource.marketplace_resource_uuid || resource.uuid;
@@ -119,7 +119,7 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
             name="extension_months"
             validate={composeValidators(
               required,
-              greaterThan(0),
+              greaterThanOrEqual(12),
               lessThanOrEqual(MAX_MONTHS),
             )}
             render={({ input, meta }) => (
@@ -142,7 +142,7 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
                 }
                 meta={meta}
               >
-                <NumberField input={input as any} min={1} max={MAX_MONTHS} />
+                <NumberField input={input as any} min={12} max={MAX_MONTHS} />
               </FormGroup>
             )}
           />
