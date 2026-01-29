@@ -11,6 +11,7 @@ import { useUser } from '@waldur/workspace/hooks';
 import { getOrderType } from '../utils';
 
 import { ExportOrderComponentsButton } from './ExportOrderComponentsButton';
+import { useOrderEditable } from './hooks';
 import { OrderTypeBasedDetails } from './type-based/OrderTypeBasedDetails';
 
 export const OrderSummaryTab = ({
@@ -22,6 +23,8 @@ export const OrderSummaryTab = ({
 }) => {
   const user = useUser();
   const orderType = useMemo(() => getOrderType(order), [order]);
+
+  const canEdit = useOrderEditable(order);
 
   return (
     <Panel
@@ -53,7 +56,11 @@ export const OrderSummaryTab = ({
           />
         )}
 
-        <OrderTypeBasedDetails order={order} offering={offering} />
+        <OrderTypeBasedDetails
+          order={order}
+          offering={offering}
+          editable={canEdit}
+        />
       </div>
     </Panel>
   );

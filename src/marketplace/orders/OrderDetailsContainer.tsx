@@ -52,10 +52,10 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
     </h3>
   ) : data ? (
     <OrderDetails
-      data={data}
       refetch={refetch}
       order={data.order}
       offering={data.offering}
+      limits={data.limits}
       isRefetching={isRefetching}
     />
   ) : null;

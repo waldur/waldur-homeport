@@ -17,6 +17,7 @@ import { SwitchPlan } from './SwitchPlan';
 export const OrderTypeBasedDetails = ({
   order,
   offering,
+  editable,
 }: OrderTypeBasedProps) => {
   const orderType = useMemo(() => getOrderType(order), [order]);
 
@@ -42,7 +43,11 @@ export const OrderTypeBasedDetails = ({
       ) : orderType.type === 'terminate' ? (
         <ResourceTerminate order={order} offering={offering} />
       ) : orderType.type === 'create' ? (
-        <ResourceCreation order={order} offering={offering} />
+        <ResourceCreation
+          order={order}
+          offering={offering}
+          editable={editable}
+        />
       ) : null}
     </>
   );

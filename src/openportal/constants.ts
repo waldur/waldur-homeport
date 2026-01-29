@@ -1,5 +1,5 @@
 import { translate } from '@waldur/i18n';
-import { FormFinalConfigurationStep } from '@waldur/openportal/FormFinalConfigurationStep';
+import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
 
 export const OPENPORTAL_PLUGIN = 'Marketplace.OpenPortal';
 
