@@ -84,7 +84,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'conceal_offering_pricing_tab_in_public_view',
-        description: translate('Conceal offering pricing tab in the offering's public view.'),
+        description: translate('Conceal offering pricing tab in the offering\'s public view.'),
       },
       {
         key: 'conceal_prices',
