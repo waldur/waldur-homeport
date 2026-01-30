@@ -54,7 +54,7 @@ export const CompleteYourProfileBanner = ({
                   },
                 )
               : translate(
-                  'To ensure full access to all Waldur features and services please update your profile information to avoid any disruption in service.',
+                  'To ensure full access to all platform features and services, please update your profile information to avoid service disruptions.',
                 )}
           </span>
         </p>
