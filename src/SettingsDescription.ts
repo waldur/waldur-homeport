@@ -1430,5 +1430,16 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('SLURM Policy'),
+    items: [
+      {
+        key: 'SLURM_POLICY_EVALUATION_LOG_RETENTION_DAYS',
+        description: translate('Number of days to retain SLURM policy evaluation log entries before automatic cleanup.'),
+        default: 90,
+        type: 'integer',
+      },
+    ],
+  },
 ];
 

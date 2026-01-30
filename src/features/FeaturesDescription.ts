@@ -83,6 +83,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Allow marketplace to function as a catalogue only.'),
       },
       {
+        key: 'conceal_offering_pricing_tab_in_public_view',
+        description: translate('Conceal offering pricing tab in the offering's public view.'),
+      },
+      {
         key: 'conceal_prices',
         description: translate('Do not render prices in order details.'),
       },
