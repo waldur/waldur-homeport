@@ -2,6 +2,7 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { Field, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
+import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { BaseButton } from '@waldur/core/buttons/BaseButton';
 import { CompactIconButton } from '@waldur/core/buttons/IconButton';
@@ -18,11 +19,7 @@ const VALIDATOR_TYPES = [
 ];
 
 interface ValidatorConfigurationProps {
-  offering?: {
-    options?: {
-      options?: Record<string, { type: string; label: string; name?: string }>;
-    };
-  };
+  offering?: PublicOfferingDetails;
 }
 
 export const ValidatorConfiguration = ({

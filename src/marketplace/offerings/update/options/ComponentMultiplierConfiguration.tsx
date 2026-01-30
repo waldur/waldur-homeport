@@ -1,5 +1,5 @@
 import { Field } from 'react-final-form';
-import { OfferingComponent } from 'waldur-js-client';
+import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
 import { InputField } from '@waldur/form/InputField';
@@ -8,12 +8,12 @@ import { translate } from '@waldur/i18n';
 
 import { FormGroup } from '../../FormGroup';
 
+import { ValidatorConfiguration } from './ValidatorConfiguration';
+
 const AnyInputField = InputField as any;
 
 interface ComponentMultiplierConfigurationProps {
-  offering?: {
-    components?: OfferingComponent[];
-  };
+  offering?: PublicOfferingDetails;
 }
 
 export const ComponentMultiplierConfiguration = ({
@@ -112,6 +112,7 @@ export const ComponentMultiplierConfiguration = ({
           placeholder={translate('e.g., 100')}
         />
       </FormGroup>
+      <ValidatorConfiguration offering={offering} />
     </>
   );
 };

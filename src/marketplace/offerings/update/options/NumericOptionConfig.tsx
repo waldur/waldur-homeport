@@ -1,4 +1,5 @@
 import { Field } from 'react-final-form';
+import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { InputField } from '@waldur/form/InputField';
 import { translate } from '@waldur/i18n';
@@ -8,7 +9,7 @@ import { FormGroup } from '../../FormGroup';
 import { ValidatorConfiguration } from './ValidatorConfiguration';
 
 interface NumericOptionConfigProps {
-  offering?: any;
+  offering?: PublicOfferingDetails;
 }
 
 export const NumericOptionConfig = ({ offering }: NumericOptionConfigProps) => (
