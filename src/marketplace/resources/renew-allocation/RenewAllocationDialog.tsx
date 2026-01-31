@@ -180,7 +180,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
       acc[resource.uuid] = { limits: resource.limits };
       return acc;
     }, {}),
-    extension_months: 1,
+    extension_months: 12,
   };
 
   return (
