@@ -9,7 +9,12 @@ import { translate } from '@waldur/i18n';
 import { canRegisterServiceProviderForCustomer } from '@waldur/marketplace/service-providers/selectors';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { getCustomer, getUser, isStaff } from '@waldur/workspace/selectors';
+import {
+  getCustomer,
+  getUser,
+  isOwnerOrStaff as isOwnerOrStaffSelector,
+  isStaff,
+} from '@waldur/workspace/selectors';
 
 const CustomerDetailsPanel = lazyComponent(() =>
   import('./CustomerDetailsPanel').then((module) => ({
@@ -51,6 +56,11 @@ const CustomerRemovePanel = lazyComponent(() =>
     default: module.CustomerRemovePanel,
   })),
 );
+const ProjectDigestConfigPage = lazyComponent(() =>
+  import('../project-digest/ProjectDigestConfigPage').then((module) => ({
+    default: module.ProjectDigestConfigPage,
+  })),
+);
 
 export const CustomerManageContainer = () => {
   const user = useSelector(getUser);
@@ -59,6 +69,7 @@ export const CustomerManageContainer = () => {
   const canRegisterServiceProvider = useSelector(
     canRegisterServiceProviderForCustomer,
   );
+  const userIsOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
 
   const tabs = useMemo<PageBarTab[]>(
     () =>
@@ -104,6 +115,13 @@ export const CustomerManageContainer = () => {
               key: 'credit',
               component: CustomerCreditPanel,
               title: translate('Credit management'),
+            }
+          : null,
+        userIsOwnerOrStaff
+          ? {
+              key: 'project-digest',
+              component: ProjectDigestConfigPage,
+              title: translate('Project digest'),
             }
           : null,
         isUserStaff
