@@ -63,6 +63,10 @@ export enum RancherFeatures {
   volume_mount_point = 'rancher.volume_mount_point',
 }
 
+export enum ResellerFeatures {
+  arrow = 'reseller.arrow',
+}
+
 export enum SlurmFeatures {
   jobs = 'slurm.jobs',
 }
@@ -93,6 +97,7 @@ export type FeaturesEnum =
   | OpenstackFeatures
   | ProjectFeatures
   | RancherFeatures
+  | ResellerFeatures
   | SlurmFeatures
   | SupportFeatures
   | UserFeatures

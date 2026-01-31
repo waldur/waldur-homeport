@@ -1460,6 +1460,41 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('Arrow Integration'),
+    items: [
+      {
+        key: 'ARROW_AUTO_RECONCILIATION',
+        description: translate('Auto-apply compensations when Arrow validates billing'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ARROW_SYNC_INTERVAL_HOURS',
+        description: translate('Billing sync interval in hours'),
+        default: 6,
+        type: 'integer',
+      },
+      {
+        key: 'ARROW_CONSUMPTION_SYNC_ENABLED',
+        description: translate('Enable real-time consumption sync from Arrow API'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ARROW_CONSUMPTION_SYNC_INTERVAL_HOURS',
+        description: translate('Consumption sync interval in hours (default: hourly)'),
+        default: 1,
+        type: 'integer',
+      },
+      {
+        key: 'ARROW_BILLING_CHECK_INTERVAL_HOURS',
+        description: translate('Billing export check interval in hours for reconciliation'),
+        default: 6,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('SLURM Policy'),
     items: [
       {

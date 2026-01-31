@@ -211,6 +211,16 @@ export const FeaturesDescription: FeatureSection[] = [
     ],
   },
   {
+    key: 'reseller',
+    description: translate('Reseller integrations'),
+    items: [
+      {
+        key: 'arrow',
+        description: translate('Enable Arrow integration menu in administration.'),
+      },
+    ],
+  },
+  {
     key: 'slurm',
     description: translate('SLURM resources provisioning'),
     items: [
