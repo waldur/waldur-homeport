@@ -21,6 +21,7 @@ import {
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
+import { VersionHistoryButton } from '@waldur/version-history';
 import {
   isOwnerOrStaff,
   isServiceManagerSelector,
@@ -210,6 +211,13 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 offering={offering}
                 refreshOffering={props.refetch}
                 className="order-2 order-sm-1 flex-sm-column-auto flex-root"
+              />
+            )}
+            {!props.isPublic && (
+              <VersionHistoryButton
+                entityType="offering"
+                entityUuid={offering.uuid}
+                entityName={offering.name}
               />
             )}
             <RefreshButton

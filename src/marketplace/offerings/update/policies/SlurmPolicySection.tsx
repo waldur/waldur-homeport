@@ -1,10 +1,16 @@
-import { EyeIcon, Lightning } from '@phosphor-icons/react';
+import {
+  ClockCounterClockwise,
+  EyeIcon,
+  Lightning,
+  Play,
+  Question,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
-import { Card, FormCheck } from 'react-bootstrap';
+import { Card, Dropdown, FormCheck } from 'react-bootstrap';
 import { Field, Form, useFormState, useForm } from 'react-final-form';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { components } from 'react-select';
 import {
   marketplaceSlurmPeriodicUsagePoliciesCreate,
@@ -39,9 +45,12 @@ import { ComponentLimitsField } from '@waldur/marketplace/offerings/details/poli
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { openModalDialog } from '@waldur/modal/actions';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
+import { getUser } from '@waldur/workspace/selectors';
 
 import { OfferingSectionProps } from '../types';
 
+import { SlurmPolicyStatusSummary } from './SlurmPolicyStatusSummary';
 import {
   TresBillingWeightsField,
   recordToArray,
@@ -54,12 +63,104 @@ const SlurmPolicyPreviewDialog = lazyComponent(() =>
   })),
 );
 
-// Helper component to access form state and open preview dialog
-const PreviewButton: FC<{ offering: OfferingSectionProps['offering'] }> = ({
-  offering,
-}) => {
+const SlurmPolicyExecutionLogDialog = lazyComponent(() =>
+  import('./SlurmPolicyExecutionLogDialog').then((m) => ({
+    default: m.SlurmPolicyExecutionLogDialog,
+  })),
+);
+
+const SlurmPolicyEvaluateDialog = lazyComponent(() =>
+  import('./SlurmPolicyEvaluateDialog').then((m) => ({
+    default: m.SlurmPolicyEvaluateDialog,
+  })),
+);
+
+const SlurmPolicySummaryDialog = lazyComponent(() =>
+  import('./SlurmPolicySummaryDialog').then((m) => ({
+    default: m.SlurmPolicySummaryDialog,
+  })),
+);
+
+// Staff-only button to open evaluate/dry-run dialog
+const EvaluateButton: FC<{ policyUuid: string }> = ({ policyUuid }) => {
+  const dispatch = useDispatch();
+  const user = useSelector(getUser);
+
+  const openEvaluate = useCallback(() => {
+    dispatch(
+      openModalDialog(SlurmPolicyEvaluateDialog, {
+        resolve: { policyUuid },
+        size: 'xl',
+      }),
+    );
+  }, [dispatch, policyUuid]);
+
+  if (!user?.is_staff) {
+    return null;
+  }
+
+  return (
+    <SubmitButton
+      variant="outline-warning"
+      onClick={openEvaluate}
+      submitting={false}
+      type="button"
+      iconNode={<Play weight="bold" />}
+      iconOnLeft
+    >
+      {translate('Evaluate')}
+    </SubmitButton>
+  );
+};
+
+// Dropdown combining informational and log actions
+const PolicyInfoDropdown: FC<{
+  offering: OfferingSectionProps['offering'];
+  policyUuid?: string;
+}> = ({ offering, policyUuid }) => {
   const dispatch = useDispatch();
   const formState = useFormState();
+
+  const planAllocations = useMemo(() => {
+    if (!offering?.plans) return [];
+    return offering.plans
+      .filter((plan) => plan.components?.length)
+      .map((plan) => ({
+        planName: plan.name || plan.uuid || '',
+        components: (plan.components || [])
+          .filter((c) => c.amount && c.amount > 0)
+          .map((c) => ({
+            name: c.name || c.type || '',
+            type: c.type || '',
+            amount: c.amount || 0,
+            measuredUnit: c.measured_unit || '',
+          })),
+      }))
+      .filter((plan) => plan.components.length > 0);
+  }, [offering?.plans]);
+
+  const openSummary = useCallback(() => {
+    dispatch(
+      openModalDialog(SlurmPolicySummaryDialog, {
+        resolve: {
+          config: {
+            limit_type: formState.values.limit_type,
+            tres_billing_enabled: formState.values.tres_billing_enabled,
+            carryover_factor: formState.values.carryover_factor,
+            grace_ratio: formState.values.grace_ratio,
+            carryover_enabled: formState.values.carryover_enabled,
+            raw_usage_reset: formState.values.raw_usage_reset,
+            qos_strategy: formState.values.qos_strategy,
+            apply_to_all: formState.values.apply_to_all,
+            actions: formState.values.actions,
+            period: formState.values.period,
+          },
+          planAllocations,
+        },
+        size: 'xl',
+      }),
+    );
+  }, [dispatch, formState.values, planAllocations]);
 
   const openPreview = useCallback(() => {
     dispatch(
@@ -67,8 +168,7 @@ const PreviewButton: FC<{ offering: OfferingSectionProps['offering'] }> = ({
         resolve: {
           formValues: {
             grace_ratio: formState.values.grace_ratio,
-            fairshare_decay_half_life:
-              formState.values.fairshare_decay_half_life,
+            carryover_factor: formState.values.carryover_factor,
             carryover_enabled: formState.values.carryover_enabled,
           },
           offering,
@@ -78,17 +178,36 @@ const PreviewButton: FC<{ offering: OfferingSectionProps['offering'] }> = ({
     );
   }, [dispatch, formState.values, offering]);
 
+  const openExecutionLog = useCallback(() => {
+    if (!policyUuid) return;
+    dispatch(
+      openModalDialog(SlurmPolicyExecutionLogDialog, {
+        resolve: { policyUuid },
+        size: 'xl',
+      }),
+    );
+  }, [dispatch, policyUuid]);
+
   return (
-    <SubmitButton
-      variant="outline-primary"
-      onClick={openPreview}
-      submitting={false}
-      type="button"
-      iconNode={<EyeIcon weight="bold" />}
-      iconOnLeft
-    >
-      {translate('Preview Impact')}
-    </SubmitButton>
+    <ActionDropdownButton title={translate('Policy info')}>
+      <Dropdown.Item onClick={openSummary}>
+        <Question weight="bold" className="me-2" />
+        {translate('How it works')}
+      </Dropdown.Item>
+      <Dropdown.Item onClick={openPreview}>
+        <EyeIcon weight="bold" className="me-2" />
+        {translate('Preview impact')}
+      </Dropdown.Item>
+      {policyUuid && (
+        <>
+          <Dropdown.Divider />
+          <Dropdown.Item onClick={openExecutionLog}>
+            <ClockCounterClockwise weight="bold" className="me-2" />
+            {translate('Execution log')}
+          </Dropdown.Item>
+        </>
+      )}
+    </ActionDropdownButton>
   );
 };
 
@@ -161,7 +280,7 @@ interface SlurmPolicyFormData {
   limit_type: LimitTypeEnum;
   tres_billing_enabled: boolean;
   tres_billing_weights_array: TresWeight[];
-  fairshare_decay_half_life: number;
+  carryover_factor: number;
   grace_ratio: number;
   carryover_enabled: boolean;
   raw_usage_reset: boolean;
@@ -206,13 +325,13 @@ const policyPresets: PolicyPreset[] = [
     key: 'quarterly_soft',
     label: translate('Quarterly Research (Soft Limits)'),
     description: translate(
-      'Quarterly billing period with 20% grace ratio allowing overrun. Includes carryover of unused allocation and fairshare decay. Ideal for research projects with variable workloads.',
+      'Quarterly billing period with 20% grace ratio allowing overrun. Includes carryover of unused allocation. Ideal for research projects with variable workloads.',
     ),
     values: {
       period: 2 as PeriodEnum, // Quarterly
       grace_ratio: 0.2,
       carryover_enabled: true,
-      fairshare_decay_half_life: 15,
+      carryover_factor: 50,
       raw_usage_reset: false,
       qos_strategy: 'progressive' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
@@ -233,7 +352,7 @@ const policyPresets: PolicyPreset[] = [
       period: 1 as PeriodEnum, // Monthly
       grace_ratio: 0,
       carryover_enabled: false,
-      fairshare_decay_half_life: 7,
+      carryover_factor: 0,
       raw_usage_reset: true,
       qos_strategy: 'threshold' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
@@ -249,13 +368,13 @@ const policyPresets: PolicyPreset[] = [
     key: 'annual_grant',
     label: translate('Annual Grant Allocation'),
     description: translate(
-      'Annual billing period designed for research grants. Generous 30% grace ratio with carryover enabled. Slower decay preserves fairshare priority longer.',
+      'Annual billing period designed for research grants. Generous 30% grace ratio with carryover enabled. Up to 75% of unused allocation carries over.',
     ),
     values: {
       period: 4 as PeriodEnum, // Annual
       grace_ratio: 0.3,
       carryover_enabled: true,
-      fairshare_decay_half_life: 30,
+      carryover_factor: 75,
       raw_usage_reset: false,
       qos_strategy: 'progressive' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
@@ -273,7 +392,7 @@ const policyPresets: PolicyPreset[] = [
       period: 1 as PeriodEnum, // Monthly
       grace_ratio: 1.0, // 100% grace = effectively no hard limit
       carryover_enabled: false,
-      fairshare_decay_half_life: 15,
+      carryover_factor: 0,
       raw_usage_reset: true,
       qos_strategy: 'threshold' as QosStrategyEnum,
       limit_type: 'GrpTRESMins' as LimitTypeEnum,
@@ -310,7 +429,7 @@ const defaultValues: SlurmPolicyFormData = {
   limit_type: 'GrpTRESMins' as LimitTypeEnum,
   tres_billing_enabled: true,
   tres_billing_weights_array: [],
-  fairshare_decay_half_life: 15,
+  carryover_factor: 50,
   grace_ratio: 0.2,
   carryover_enabled: true,
   raw_usage_reset: true,
@@ -333,8 +452,7 @@ const policyToFormValues = (
   tres_billing_weights_array: policy.tres_billing_weights
     ? recordToArray(policy.tres_billing_weights as Record<string, number>)
     : defaultValues.tres_billing_weights_array,
-  fairshare_decay_half_life:
-    policy.fairshare_decay_half_life ?? defaultValues.fairshare_decay_half_life,
+  carryover_factor: policy.carryover_factor ?? defaultValues.carryover_factor,
   grace_ratio: policy.grace_ratio ?? defaultValues.grace_ratio,
   carryover_enabled:
     policy.carryover_enabled ?? defaultValues.carryover_enabled,
@@ -577,7 +695,13 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           cardBordered
           actions={
             <div className="d-flex gap-3">
-              <PreviewButton offering={offering} />
+              <PolicyInfoDropdown
+                offering={offering}
+                policyUuid={existingPolicy?.uuid}
+              />
+              {existingPolicy && (
+                <EvaluateButton policyUuid={existingPolicy.uuid} />
+              )}
               <SubmitButton
                 variant="secondary"
                 onClick={() => form.reset()}
@@ -596,6 +720,9 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           }
         >
           {enableToggle}
+          {existingPolicy && (
+            <SlurmPolicyStatusSummary policyUuid={existingPolicy.uuid} />
+          )}
           <form id="slurm-policy-form" onSubmit={handleSubmit}>
             <PresetSelector />
 
@@ -694,17 +821,18 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
             </Field>
 
             <FormGroup
-              label={translate('Fairshare Decay Half-Life')}
+              label={translate('Carryover factor')}
               help={translate(
-                'Fairshare decay half-life in days (matches SLURM PriorityDecayHalfLife)',
+                'Maximum percentage of the base allocation that can carry over from unused previous period (0 = no carryover, 100 = full carryover).',
               )}
               required
             >
               <Field
                 component={NumberField as any}
-                name="fairshare_decay_half_life"
-                min={1}
-                unit={translate('days')}
+                name="carryover_factor"
+                min={0}
+                max={100}
+                unit="%"
               />
             </FormGroup>
 

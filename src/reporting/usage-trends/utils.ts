@@ -137,10 +137,12 @@ export const formatYearOverYearChart = (
     },
     legend: {
       data: [String(currentYear), String(currentYear - 1)],
+      top: 0,
     },
     grid: {
       left: '3%',
       right: '4%',
+      top: '15%',
       bottom: '3%',
       containLabel: true,
     },
@@ -198,10 +200,12 @@ export const formatUsageTrendChart = (
     },
     legend: {
       data: [translate('Total usage'), translate('Resource count')],
+      top: 0,
     },
     grid: {
       left: '3%',
       right: '4%',
+      top: '15%',
       bottom: '3%',
       containLabel: true,
     },

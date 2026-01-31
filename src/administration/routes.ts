@@ -465,6 +465,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-slurm-policy-settings',
+    url: 'slurm-policy/',
+    parent: 'admin-marketplace',
+    component: lazyComponent(() =>
+      import('./marketplace/AdministrationSlurmPolicy').then((module) => ({
+        default: module.AdministrationSlurmPolicy,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('SLURM policy'),
+    },
+  },
+
+  {
     name: 'admin-organizations-group-list',
     url: 'organization-groups/',
     parent: 'admin-organizations-compliance',
