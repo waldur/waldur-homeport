@@ -14,7 +14,7 @@ interface SlurmPolicyPreviewDialogProps {
   resolve: {
     formValues: {
       grace_ratio?: number;
-      fairshare_decay_half_life?: number;
+      carryover_factor?: number;
       carryover_enabled?: boolean;
     };
     offering: Offering;

@@ -22,6 +22,7 @@ export const SaveButton: FC<SaveButtonProps> = ({
         className={`min-w-80px ${className}`.trim()}
         variant={dirty ? 'warning' : 'primary'}
         disabled={submitting}
+        size="lg"
         {...rest}
       >
         <span className="svg-icon svg-icon-2">

@@ -6,7 +6,8 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesPreviewImpact,
 } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { Badge } from '@waldur/core/Badge';
+import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
@@ -127,26 +128,24 @@ const ThresholdVisualization: FC<ThresholdVisualizationProps> = ({
   );
 };
 
-interface DecayCalculatorProps {
+interface CarryoverDetailsProps {
   previousUsage: number;
-  daysElapsed: number;
-  halfLife: number;
-  decayFactor: number;
-  effectiveUsage: number;
+  carryoverFactor: number;
+  unused: number;
+  carryoverCap: number;
+  carryover: number;
 }
 
-const DecayCalculator: FC<DecayCalculatorProps> = ({
+const CarryoverDetails: FC<CarryoverDetailsProps> = ({
   previousUsage,
-  daysElapsed,
-  halfLife,
-  decayFactor,
-  effectiveUsage,
+  carryoverFactor,
+  unused,
+  carryoverCap,
+  carryover,
 }) => {
-  const decayPercentage = (1 - decayFactor) * 100;
-
   return (
     <div className="mb-6">
-      <h6 className="fw-semibold mb-3">{translate('Decay Impact')}</h6>
+      <h6 className="fw-semibold mb-3">{translate('Carryover Calculation')}</h6>
       <div className="border rounded p-3">
         <div className="row">
           <div className="col-md-6">
@@ -157,37 +156,33 @@ const DecayCalculator: FC<DecayCalculatorProps> = ({
               <strong>{previousUsage.toLocaleString()}</strong>
             </div>
             <div className="mb-2">
-              <span className="text-muted">{translate('Days Elapsed')}: </span>
-              <strong>{daysElapsed}</strong>
-            </div>
-            <div className="mb-2">
-              <span className="text-muted">{translate('Half-Life')}: </span>
-              <strong>
-                {halfLife} {translate('days')}
-              </strong>
+              <span className="text-muted">
+                {translate('Carryover Factor')}:{' '}
+              </span>
+              <strong>{carryoverFactor}%</strong>
             </div>
           </div>
           <div className="col-md-6">
             <div className="mb-2">
-              <span className="text-muted">{translate('Decay Factor')}: </span>
-              <strong>{(decayFactor * 100).toFixed(2)}%</strong>
+              <span className="text-muted">{translate('Unused')}: </span>
+              <strong>{unused.toLocaleString()}</strong>
             </div>
             <div className="mb-2">
-              <span className="text-muted">{translate('Usage Decayed')}: </span>
+              <span className="text-muted">{translate('Carryover Cap')}: </span>
+              <strong>{carryoverCap.toLocaleString()}</strong>
+            </div>
+            <div className="mb-2">
+              <span className="text-muted">{translate('Carryover')}: </span>
               <strong className="text-success">
-                -{decayPercentage.toFixed(1)}%
+                +{carryover.toLocaleString()}
               </strong>
-            </div>
-            <div className="mb-2">
-              <span className="text-muted">
-                {translate('Effective Usage')}:{' '}
-              </span>
-              <strong>{effectiveUsage.toLocaleString()}</strong>
             </div>
           </div>
         </div>
         <div className="mt-2 small text-muted">
-          {translate('Formula: decay_factor = 2^(-days / half_life)')}
+          {translate('Formula: carryover = min(unused, {pct}% × base)', {
+            pct: carryoverFactor,
+          })}
         </div>
       </div>
     </div>
@@ -359,7 +354,7 @@ const DateProjections: FC<DateProjectionsProps> = ({
 
 interface SlurmPolicyFormValues {
   grace_ratio?: number;
-  fairshare_decay_half_life?: number;
+  carryover_factor?: number;
   carryover_enabled?: boolean;
 }
 
@@ -380,15 +375,14 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
       allocation,
       grace_ratio: formValues.grace_ratio ?? 0.2,
       previous_usage: 500, // Example previous usage for preview
-      fairshare_decay_half_life: formValues.fairshare_decay_half_life ?? 15,
+      carryover_factor: formValues.carryover_factor ?? 50,
       carryover_enabled: formValues.carryover_enabled ?? true,
-      days_elapsed: 90, // Default for quarterly
       resource_uuid: resource?.uuid,
     }),
     [
       allocation,
       formValues.grace_ratio,
-      formValues.fairshare_decay_half_life,
+      formValues.carryover_factor,
       formValues.carryover_enabled,
       resource?.uuid,
     ],
@@ -467,21 +461,116 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
 
       {preview.carryover && (
         <>
-          <DecayCalculator
-            previousUsage={preview.carryover.previous_usage}
-            daysElapsed={preview.carryover.days_elapsed}
-            halfLife={preview.carryover.half_life}
-            decayFactor={preview.carryover.decay_factor}
-            effectiveUsage={preview.carryover.effective_usage}
-          />
+          {'carryover_factor' in preview.carryover && (
+            <CarryoverDetails
+              previousUsage={preview.carryover.previous_usage}
+              carryoverFactor={preview.carryover.carryover_factor}
+              unused={preview.carryover.unused}
+              carryoverCap={preview.carryover.carryover_cap}
+              carryover={preview.carryover.carryover}
+            />
+          )}
 
           <CarryoverInfo
             baseAllocation={preview.carryover.base_allocation}
-            unusedCarryover={preview.carryover.unused_carryover}
+            unusedCarryover={preview.carryover.carryover ?? 0}
             totalAllocation={preview.carryover.total_allocation}
             carryoverEnabled={preview.carryover_enabled}
           />
         </>
+      )}
+
+      {preview.preview_commands && preview.preview_commands.length > 0 && (
+        <div className="mt-4">
+          <h6>{translate('Preview commands')}</h6>
+          <div className="table-responsive">
+            <table className="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th>{translate('Type')}</th>
+                  <th>{translate('Description')}</th>
+                  <th>{translate('Command')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {preview.preview_commands.map((cmd, idx) => (
+                  <tr key={idx}>
+                    <td>
+                      <Badge variant="secondary" size="sm" pill outline>
+                        {cmd.type}
+                      </Badge>
+                    </td>
+                    <td>{cmd.description}</td>
+                    <td>
+                      <code className="small">{cmd.command}</code>
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
+      )}
+
+      {preview.command_history && preview.command_history.length > 0 && (
+        <div className="mt-4">
+          <h6>{translate('Recent command history')}</h6>
+          <div className="table-responsive">
+            <table className="table table-sm table-hover">
+              <thead>
+                <tr>
+                  <th>{translate('Timestamp')}</th>
+                  <th>{translate('Type')}</th>
+                  <th>{translate('Command')}</th>
+                  <th>{translate('Mode')}</th>
+                  <th>{translate('Status')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {preview.command_history.map((cmd) => (
+                  <tr key={cmd.uuid}>
+                    <td className="text-nowrap">
+                      {formatDateTime(cmd.executed_at)}
+                    </td>
+                    <td>
+                      <Badge variant="secondary" size="sm" pill outline>
+                        {cmd.command_type}
+                      </Badge>
+                    </td>
+                    <td>
+                      <code className="small">{cmd.shell_command}</code>
+                    </td>
+                    <td>
+                      <Badge
+                        variant={
+                          cmd.execution_mode === 'production'
+                            ? 'primary'
+                            : 'info'
+                        }
+                        size="sm"
+                        pill
+                        outline
+                      >
+                        {cmd.execution_mode}
+                      </Badge>
+                    </td>
+                    <td>
+                      {cmd.success ? (
+                        <Badge variant="success" size="sm" pill outline>
+                          {translate('OK')}
+                        </Badge>
+                      ) : (
+                        <Badge variant="danger" size="sm" pill outline>
+                          {translate('Failed')}
+                        </Badge>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </table>
+          </div>
+        </div>
       )}
 
       <div className="small text-muted mt-4">
