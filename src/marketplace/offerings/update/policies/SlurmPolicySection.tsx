@@ -18,7 +18,7 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesDestroy,
   marketplaceSlurmPeriodicUsagePoliciesPartialUpdate,
   LimitTypeEnum,
-  PeriodEnum,
+  PolicyPeriodEnum,
   QosStrategyEnum,
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
@@ -292,7 +292,7 @@ interface SlurmPolicyFormData {
     notify_external_user?: string;
   };
   component_limits_set: ComponentLimit[];
-  period: PeriodEnum;
+  period: PolicyPeriodEnum;
 }
 
 const limitTypeOptions = [
@@ -328,7 +328,7 @@ const policyPresets: PolicyPreset[] = [
       'Quarterly billing period with 20% grace ratio allowing overrun. Includes carryover of unused allocation. Ideal for research projects with variable workloads.',
     ),
     values: {
-      period: 2 as PeriodEnum, // Quarterly
+      period: 2 as PolicyPeriodEnum, // Quarterly
       grace_ratio: 0.2,
       carryover_enabled: true,
       carryover_factor: 50,
@@ -349,7 +349,7 @@ const policyPresets: PolicyPreset[] = [
       'Monthly billing with hard limits and no grace period. Usage resets each month with no carryover. Best for environments requiring strict cost control.',
     ),
     values: {
-      period: 1 as PeriodEnum, // Monthly
+      period: 1 as PolicyPeriodEnum, // Monthly
       grace_ratio: 0,
       carryover_enabled: false,
       carryover_factor: 0,
@@ -371,7 +371,7 @@ const policyPresets: PolicyPreset[] = [
       'Annual billing period designed for research grants. Generous 30% grace ratio with carryover enabled. Up to 75% of unused allocation carries over.',
     ),
     values: {
-      period: 4 as PeriodEnum, // Annual
+      period: 4 as PolicyPeriodEnum, // Annual
       grace_ratio: 0.3,
       carryover_enabled: true,
       carryover_factor: 75,
@@ -389,7 +389,7 @@ const policyPresets: PolicyPreset[] = [
       'Track usage without enforcing limits. No QoS modifications, just notifications. Useful for monitoring before implementing enforcement.',
     ),
     values: {
-      period: 1 as PeriodEnum, // Monthly
+      period: 1 as PolicyPeriodEnum, // Monthly
       grace_ratio: 1.0, // 100% grace = effectively no hard limit
       carryover_enabled: false,
       carryover_factor: 0,
@@ -439,7 +439,7 @@ const defaultValues: SlurmPolicyFormData = {
   actions: ['notify_organization_owners'],
   options: {},
   component_limits_set: [] as ComponentLimit[],
-  period: 3 as PeriodEnum, // Default to quarterly (3 months)
+  period: 3 as PolicyPeriodEnum, // Default to quarterly (3 months)
 };
 
 // Convert existing policy data to form values
