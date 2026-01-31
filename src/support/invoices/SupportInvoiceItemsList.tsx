@@ -2,11 +2,7 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import {
-  InvoiceItemDetail,
-  InvoiceItemDetails,
-  invoiceItemsList,
-} from 'waldur-js-client';
+import { InvoiceItemDetail, invoiceItemsList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { PeriodOption } from '@waldur/form/types';
@@ -95,12 +91,8 @@ export const SupportInvoiceItemsList: FunctionComponent<
         },
         {
           title: translate('Offering'),
-          render: ({ row }) =>
-            renderFieldOrDash(
-              (row.details as InvoiceItemDetails)?.offering_name,
-            ),
-          export: (row) =>
-            (row.details as InvoiceItemDetails)?.offering_name || '',
+          render: ({ row }) => renderFieldOrDash(row.offering_name),
+          export: 'offering_name',
           filter: 'offering',
         },
         {
@@ -136,6 +128,7 @@ export const SupportInvoiceItemsList: FunctionComponent<
       ]}
       verboseName={translate('Invoice items')}
       hasQuery
+      showPageSizeSelector
       enableExport
       tableActions={<ComponentUsageImportButton refetch={tableProps.fetch} />}
     />

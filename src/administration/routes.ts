@@ -7,6 +7,7 @@ import {
   CustomerFeatures,
   InvitationsFeatures,
   MarketplaceFeatures,
+  ResellerFeatures,
   SupportFeatures,
 } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -605,6 +606,22 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Call management'),
       feature: MarketplaceFeatures.show_call_management_functionality,
+    },
+  },
+
+  {
+    name: 'admin-arrow',
+    url: 'arrow/?tab',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./arrow/ArrowDashboard').then((module) => ({
+        default: module.ArrowDashboard,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Arrow Integration'),
+      permissions: [isStaff],
+      feature: ResellerFeatures.arrow,
     },
   },
 

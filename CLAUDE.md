@@ -240,6 +240,34 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 5. **Reset downstream state** - When user changes earlier step selection, clear dependent data
 6. **Use FormGroup, not FormContainer** - `FormContainer` is redux-form only; use `FormGroup` from `@waldur/marketplace/offerings/FormGroup` for React Final Form
 
+## Exposing New Fields from Backend to Frontend
+
+When a frontend table needs data that isn't available as a top-level field in the API response (e.g., data buried in a JSON `details` blob):
+
+1. **Add a serializer field in waldur-mastermind** — use `SerializerMethodField` with a fallback pattern:
+
+   ```python
+   offering_name = serializers.SerializerMethodField()
+
+   @extend_schema_field(serializers.CharField(allow_null=True))
+   def get_offering_name(self, obj: models.InvoiceItem) -> str | None:
+       # Use direct relationship first
+       if obj.resource and obj.resource.offering:
+           return obj.resource.offering.name
+       # Fallback to details field for backward compatibility
+       if obj.details and "offering_name" in obj.details:
+           return obj.details["offering_name"]
+       return None
+   ```
+
+   Add the field to `Meta.fields` tuple. Use `SerializerMethodField` (not `source=`) when the FK can be null and you need a fallback.
+
+2. **Add tests** — test direct relationship, fallback to `details`, and `None` when neither exists.
+
+3. **Regenerate the SDK** — run `./docs/update-local-sdk.sh` so the TypeScript types include the new field.
+
+4. **Update the frontend** — use `row.field_name` directly instead of casting through `details`.
+
 ## Task-Specific Docs
 
 These are NOT always-loaded - reference when needed:

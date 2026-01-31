@@ -20,6 +20,7 @@ export const groupInvoiceItems = (
 
     if (!acc[key]) {
       acc[key] = {
+        uuid: key,
         resource_name:
           item.resource_name || item.details.resource_name || item.name,
         resource_uuid: resourceKey,

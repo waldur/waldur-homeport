@@ -1107,35 +1107,6 @@ export const SettingsDescription = [
     ],
   },
   {
-    description: translate('SCIM settings'),
-    items: [
-      {
-        key: 'SCIM_MEMBERSHIP_SYNC_ENABLED',
-        description: translate('Enable SCIM entitlement synchronization to external identity provider.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'SCIM_API_URL',
-        description: translate('Base URL of the SCIM API service.'),
-        default: '',
-        type: 'string',
-      },
-      {
-        key: 'SCIM_API_KEY',
-        description: translate('SCIM API key for X-API-Key header.'),
-        default: '',
-        type: 'secret_field',
-      },
-      {
-        key: 'SCIM_URN_NAMESPACE',
-        description: translate('URN namespace for SCIM entitlements.'),
-        default: '',
-        type: 'string',
-      },
-    ],
-  },
-  {
     description: translate('API token authentication'),
     items: [
       {
