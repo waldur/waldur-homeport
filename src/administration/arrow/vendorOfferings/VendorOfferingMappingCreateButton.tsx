@@ -1,0 +1,43 @@
+import { PlusCircleIcon } from '@phosphor-icons/react';
+import { useDispatch } from 'react-redux';
+
+import { lazyComponent } from '@waldur/core/lazyComponent';
+import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
+import { ActionButton } from '@waldur/table/ActionButton';
+
+const VendorOfferingMappingCreateDialog = lazyComponent(() =>
+  import('./VendorOfferingMappingCreateDialog').then((module) => ({
+    default: module.VendorOfferingMappingCreateDialog,
+  })),
+);
+
+interface VendorOfferingMappingCreateButtonProps {
+  settings?: { uuid: string } | null;
+  refetch: () => void;
+}
+
+export const VendorOfferingMappingCreateButton = ({
+  settings,
+  refetch,
+}: VendorOfferingMappingCreateButtonProps) => {
+  const dispatch = useDispatch();
+
+  const openDialog = () => {
+    dispatch(
+      openModalDialog(VendorOfferingMappingCreateDialog, {
+        resolve: { settings, refetch },
+      }),
+    );
+  };
+
+  return (
+    <ActionButton
+      title={translate('Add mapping')}
+      action={openDialog}
+      iconNode={<PlusCircleIcon weight="bold" />}
+      variant="primary"
+      disabled={!settings?.uuid}
+    />
+  );
+};

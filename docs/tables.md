@@ -533,7 +533,7 @@ const tabs: TableTab[] = [
 
 | Property | Type | Description |
 |----------|------|-------------|
-| `key` | `string \| number` | Unique identifier for the tab |
+| `key` | `string` or `number` | Unique identifier for the tab |
 | `title` | `ReactNode` | Tab label (can include badges, icons) |
 | `params` | `Record<string, any>` | URL parameters to set when tab is selected |
 | `state` | `string` | Optional UI-router state to navigate to |

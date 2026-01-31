@@ -12,7 +12,7 @@ import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
 import { INVOICE_ITEMS_FILTER_FORM } from '../constants';
 import { Invoice, InvoiceItemsFilterData, InvoiceTableItem } from '../types';
@@ -20,6 +20,7 @@ import { formatPeriod } from '../utils';
 
 import { InvoiceDetailActions } from './InvoiceDetailActions';
 import { InvoiceItemExpandableRow } from './InvoiceItemExpandableRow';
+import { InvoiceItemsBulkDelete } from './InvoiceItemsBulkDelete';
 import { InvoiceItemsFilter } from './InvoiceItemsFilter';
 import { groupInvoiceItems } from './utils';
 
@@ -72,6 +73,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
 }) => {
   const filter = useFilters();
   const customer = useSelector(getCustomer);
+  const user = useSelector(getUser);
 
   const fetchItems = useMemo(() => {
     return createFetcher(invoicesItemsRetrieve, {
@@ -198,6 +200,8 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
       })}
       hasQuery={true}
       minHeight="auto"
+      enableMultiSelect={user?.is_staff}
+      multiSelectActions={InvoiceItemsBulkDelete}
       tableActions={<InvoiceDetailActions invoice={invoice} />}
       expandableRowClassName="py-2 pe-2"
       expandableRow={({ row }) => (

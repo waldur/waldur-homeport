@@ -1,0 +1,27 @@
+import { FC } from 'react';
+
+import { required } from '@waldur/core/validators';
+import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
+import { translate } from '@waldur/i18n';
+
+import { ArrowCustomerMappingAutocomplete } from '../../mappings/ArrowCustomerMappingAutocomplete';
+
+export const Step1SelectCustomer: FC<WizardFormStepProps> = (props) => {
+  return (
+    <WizardForm {...props} submitDisabledInvalid>
+      {() => (
+        <div>
+          <p className="text-muted mb-5">
+            {translate(
+              'Select the Arrow customer mapping to import licenses from.',
+            )}
+          </p>
+          <ArrowCustomerMappingAutocomplete
+            placeholder={translate('Select an Arrow-mapped customer...')}
+            validator={required}
+          />
+        </div>
+      )}
+    </WizardForm>
+  );
+};

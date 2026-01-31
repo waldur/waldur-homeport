@@ -5,6 +5,7 @@ import { Project } from 'waldur-js-client';
 import { Offering, ServiceProvider } from '@waldur/marketplace/types';
 
 export interface InvoiceTableItem {
+  uuid: string;
   resource_name: string;
   resource_uuid: string;
   offering_name: string;

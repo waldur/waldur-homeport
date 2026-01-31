@@ -35,9 +35,9 @@ $gray-900: if(isDarkMode(), #f5f5f6, #101828);
 
 1. `Application.tsx` wraps the app with `ThemeProvider`
 2. `ThemeProvider` calls `getInitialTheme()` which checks:
-   - localStorage for saved preference
-   - OS `prefers-color-scheme` setting
-   - Falls back to 'light'
+  - localStorage for saved preference
+  - OS `prefers-color-scheme` setting
+  - Falls back to 'light'
 3. `loadTheme()` dynamically imports the appropriate stylesheet
 4. User toggles update localStorage and reload the CSS
 
@@ -181,7 +181,7 @@ Components like react-select, Monaco Editor, and ECharts need explicit theme con
 
 1. Toggle theme using the switcher in the user dropdown menu
 2. Check that:
-   - Text is readable against backgrounds
-   - Borders are visible but not harsh
-   - Interactive elements have visible hover states
-   - Third-party components match the overall theme
+  - Text is readable against backgrounds
+  - Borders are visible but not harsh
+  - Interactive elements have visible hover states
+  - Third-party components match the overall theme
