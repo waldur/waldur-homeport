@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { MonthlyUsageData } from './types';
 import { formatUsageTrendChart } from './utils';
@@ -30,9 +31,10 @@ export const UsageTrendChart: FC<UsageTrendChartProps> = ({
         {hasData ? (
           <EChart options={chartOptions} height="350px" />
         ) : (
-          <div className="text-muted text-center py-10">
-            {translate('No usage data available for {year}', { year })}
-          </div>
+          <NoResult
+            title={translate('No data available')}
+            message={translate('Try adjusting your filters or date range.')}
+          />
         )}
       </Card.Body>
     </Card>

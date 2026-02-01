@@ -3,7 +3,9 @@ import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { LimitHistoryPoint, ComponentLabelMap } from './types';
 
@@ -149,19 +151,16 @@ export const ResourceLimitsHistoryChart: FC<
       </Card.Header>
       <Card.Body>
         {isLoading ? (
-          <div className="d-flex align-items-center justify-content-center h-100 py-10">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">{translate('Loading...')}</span>
-            </div>
-          </div>
+          <LoadingSpinner className="py-10" />
         ) : hasData && chartOptions ? (
           <EChart options={chartOptions} height="350px" />
         ) : (
-          <div className="text-muted text-center py-10">
-            {translate(
+          <NoResult
+            title={translate('No data available')}
+            message={translate(
               'No limit changes recorded. Limits are captured when orders are processed.',
             )}
-          </div>
+          />
         )}
       </Card.Body>
     </Card>

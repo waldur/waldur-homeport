@@ -99,8 +99,11 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
   if (!data || data.length === 0) {
     return (
       <Card>
-        <Card.Body className="text-center text-muted py-10">
-          {translate('No revenue data available for this provider')}
+        <Card.Body>
+          <NoResult
+            title={translate('No data available')}
+            message={translate('No revenue data available for this provider.')}
+          />
         </Card.Body>
       </Card>
     );

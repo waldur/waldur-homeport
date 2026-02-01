@@ -11,6 +11,7 @@ import { Breadcrumb, Card, ProgressBar, Table } from 'react-bootstrap';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { MockDataIndicator } from './MockDataIndicator';
 import {
@@ -275,9 +276,10 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
 
       {/* Empty state */}
       {!isLoading && !error && currentLevel.data.length === 0 && (
-        <div className="text-muted text-center py-4">
-          {translate('No data available at this level')}
-        </div>
+        <NoResult
+          title={translate('No data available')}
+          message={translate('No data available at this level.')}
+        />
       )}
 
       {/* Drill-down hint */}

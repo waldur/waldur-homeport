@@ -12,6 +12,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
+import { ParentLink } from '@waldur/marketplace/resources/details/ParentResourceLink';
 import { useExtraAnnouncementBar } from '@waldur/navigation/context';
 import { AnnouncementBar } from '@waldur/navigation/header/announcements/AnnouncementBar';
 import { useTitle } from '@waldur/navigation/title';
@@ -197,6 +198,13 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 organization: offering.customer_name,
               })}
             </p>
+            {offering.parent_name && offering.parent_uuid && (
+              <ParentLink
+                parent_name={offering.parent_name}
+                state="public-offering.marketplace-public-offering"
+                params={{ uuid: offering.parent_uuid }}
+              />
+            )}
           </>
         }
         actions={

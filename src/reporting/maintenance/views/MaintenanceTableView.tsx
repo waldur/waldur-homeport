@@ -5,9 +5,11 @@ import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { getMaintenanceState } from '@waldur/maintenance/utils';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { MaintenanceReportingExpandableRow } from '../MaintenanceReportingExpandableRow';
 import {
@@ -73,15 +75,19 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
         title: translate('Actual'),
         render: ({ row }) => {
           if (!row.actual_start && !row.actual_end) {
-            return <span className="text-muted">—</span>;
+            return <span className="text-muted">{DASH_ESCAPE_CODE}</span>;
           }
           return (
             <>
               <span className="d-block text-nowrap">
-                {row.actual_start ? formatDateTime(row.actual_start) : '—'}
+                {row.actual_start
+                  ? formatDateTime(row.actual_start)
+                  : DASH_ESCAPE_CODE}
               </span>
               <span className="d-block text-nowrap text-muted">
-                {row.actual_end ? formatDateTime(row.actual_end) : '—'}
+                {row.actual_end
+                  ? formatDateTime(row.actual_end)
+                  : DASH_ESCAPE_CODE}
               </span>
             </>
           );
@@ -101,13 +107,13 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
       {
         title: translate('Type'),
         render: ({ row }) =>
-          MAINTENANCE_TYPE_LABELS[row.maintenance_type || 1] || '—',
+          renderFieldOrDash(MAINTENANCE_TYPE_LABELS[row.maintenance_type || 1]),
       },
       {
         title: translate('Max impact'),
         render: ({ row }) => {
           const maxImpact = getMaxImpactLevel(row);
-          return IMPACT_LABELS[maxImpact] || '—';
+          return renderFieldOrDash(IMPACT_LABELS[maxImpact]);
         },
       },
     ],

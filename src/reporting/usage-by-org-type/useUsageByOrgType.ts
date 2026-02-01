@@ -5,6 +5,8 @@ import {
   ResourceUsageByOrgType,
 } from 'waldur-js-client';
 
+import { translate } from '@waldur/i18n';
+
 import { OrgTypeAggregation, UsageByOrgTypeSummary } from './types';
 
 const STALE_TIME = 5 * 60 * 1000; // 5 minutes
@@ -29,7 +31,7 @@ export function useUsageByOrgType() {
     const byOrgType: Record<string, OrgTypeAggregation> = {};
 
     queryResult.data.forEach((item) => {
-      const orgType = item.organization_type || 'Unknown';
+      const orgType = item.organization_type || translate('Unknown');
       if (!byOrgType[orgType]) {
         byOrgType[orgType] = {
           organization_type: orgType,

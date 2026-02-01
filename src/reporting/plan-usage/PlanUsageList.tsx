@@ -14,6 +14,7 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
@@ -65,7 +66,7 @@ export const PlanUsageList: FunctionComponent = () => {
     },
     {
       title: translate('Limit'),
-      render: ({ row }) => <>{row.limit || 'N/A'}</>,
+      render: ({ row }) => <>{renderFieldOrDash(row.limit)}</>,
       orderField: 'limit',
       export: 'limit',
     },

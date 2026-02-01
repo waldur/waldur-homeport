@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
@@ -47,16 +47,22 @@ const RowWrapper = (
   </ComponentRow>
 );
 
-export const ComponentEditRow: React.FC<ComponentEditRowProps> = (props) => (
-  <Field
-    name={`limits.${props.component.type}`}
-    parse={parseIntField}
-    format={formatIntField}
-    validate={getOfferingComponentValidator(props.component)}
-    component={RowWrapper}
-    offeringComponent={props.component}
-  />
-);
+export const ComponentEditRow: React.FC<ComponentEditRowProps> = (props) => {
+  const validate = useMemo(
+    () => getOfferingComponentValidator(props.component),
+    [props.component.min_value, props.component.max_value],
+  );
+  return (
+    <Field
+      name={`limits.${props.component.type}`}
+      parse={parseIntField}
+      format={formatIntField}
+      validate={validate}
+      component={RowWrapper}
+      offeringComponent={props.component}
+    />
+  );
+};
 
 const RowWrapper2 = (
   props: WrappedFieldProps & {
@@ -89,16 +95,22 @@ const RowWrapper2 = (
   </ComponentRow2>
 );
 
-export const ComponentEditRow2: React.FC<ComponentEditRowProps> = (props) => (
-  <Field
-    name={`limits.${props.component.type}`}
-    parse={parseIntField}
-    format={formatIntField}
-    validate={getOfferingComponentValidator(props.component)}
-    component={RowWrapper2}
-    offeringComponent={props.component}
-    hidePrices={props.hidePrices}
-    period={props.period}
-    activePriceIndex={props.activePriceIndex}
-  />
-);
+export const ComponentEditRow2: React.FC<ComponentEditRowProps> = (props) => {
+  const validate = useMemo(
+    () => getOfferingComponentValidator(props.component),
+    [props.component.min_value, props.component.max_value],
+  );
+  return (
+    <Field
+      name={`limits.${props.component.type}`}
+      parse={parseIntField}
+      format={formatIntField}
+      validate={validate}
+      component={RowWrapper2}
+      offeringComponent={props.component}
+      hidePrices={props.hidePrices}
+      period={props.period}
+      activePriceIndex={props.activePriceIndex}
+    />
+  );
+};

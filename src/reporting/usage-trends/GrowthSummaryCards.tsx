@@ -9,6 +9,7 @@ import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { GrowthStats } from './types';
 
@@ -118,7 +119,7 @@ export const GrowthSummaryCards: FC<GrowthSummaryCardsProps> = ({
           icon={<CalendarIcon size={24} weight="bold" />}
           iconColor="#7239ea"
           label={translate('Peak month')}
-          value={stats.peakMonth || '-'}
+          value={renderFieldOrDash(stats.peakMonth)}
         />
       </Col>
     </Row>

@@ -27,6 +27,7 @@ import { translate } from '@waldur/i18n';
 import { getUsageHistoryPeriodOptions } from '@waldur/marketplace/resources/usage/utils';
 import { Field } from '@waldur/resource/summary';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { getUsageLineChartOptions } from '../utils';
 
@@ -162,7 +163,7 @@ export const UsageExpandableRow = ({
           <Field label={translate('Resource')} value={row.resource_uuid} />
           <Field
             label={translate('Comment')}
-            value={row.description || 'N/A'}
+            value={renderFieldOrDash(row.description)}
           />
         </Col>
         <Col sm={6} className="border-sm-start ps-md-9">
@@ -183,7 +184,7 @@ export const UsageExpandableRow = ({
                           key={option.value}
                           id={'tbg-' + option.value + uniqueId()}
                           value={option.value}
-                          variant="outline btn-outline-default"
+                          variant="outline-secondary"
                           size="sm"
                           className="px-4"
                         >
