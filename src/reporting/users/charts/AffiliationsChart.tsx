@@ -5,8 +5,10 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { EChart } from '@waldur/core/EChart';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import {
   AffiliationCategory,
@@ -115,7 +117,7 @@ const tableColumns: Column<AffiliationWithCount>[] = [
   {
     title: translate('Organization'),
     render: ({ row }) => (
-      <span className="fw-semibold">{row.organization || '-'}</span>
+      <span className="fw-semibold">{renderFieldOrDash(row.organization)}</span>
     ),
   },
   {
@@ -131,7 +133,9 @@ const tableColumns: Column<AffiliationWithCount>[] = [
   {
     title: translate('Identifier'),
     render: ({ row }) => (
-      <span className="text-muted font-monospace">{row.identifier || '-'}</span>
+      <span className="text-muted font-monospace">
+        {renderFieldOrDash(row.identifier)}
+      </span>
     ),
   },
   {
@@ -255,8 +259,11 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({ data }) => {
         <Card.Header>
           <Card.Title>{translate('User affiliations')}</Card.Title>
         </Card.Header>
-        <Card.Body className="d-flex align-items-center justify-content-center text-muted">
-          {translate('No data available')}
+        <Card.Body>
+          <NoResult
+            title={translate('No data available')}
+            message={translate('Try adjusting your filters or date range.')}
+          />
         </Card.Body>
       </Card>
     );
@@ -386,9 +393,10 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({ data }) => {
           {aggregatedData.length > 0 ? (
             <EChart options={chartOptions} height={`${chartHeight}px`} />
           ) : (
-            <div className="text-center text-muted py-10">
-              {translate('No data matches the selected filters')}
-            </div>
+            <NoResult
+              title={translate('No data available')}
+              message={translate('Try adjusting your filters or date range.')}
+            />
           )}
         </Card.Body>
       </Card>

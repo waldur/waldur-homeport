@@ -21,7 +21,7 @@ export const PublicOfferingPricingPlanItem: FC<PricingPlanItemProps> = ({
       actions={<PlanDescriptionButton planDescription={plan.description} />}
       cardBordered
     >
-      <TabbedPlanComponents offering={offering} plan={plan} />
+      <TabbedPlanComponents offering={offering} plan={plan} viewMode />
     </Panel>
   );
 };

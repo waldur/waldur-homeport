@@ -5,6 +5,7 @@ import { DailyOrderStats } from 'waldur-js-client';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 interface ProvisioningTrendChartProps {
   daily: DailyOrderStats[];
@@ -110,8 +111,11 @@ export const ProvisioningTrendChart: FC<ProvisioningTrendChartProps> = ({
         <Card.Header>
           <Card.Title>{translate('Success rate trend')}</Card.Title>
         </Card.Header>
-        <Card.Body className="d-flex align-items-center justify-content-center text-muted">
-          {translate('No data available')}
+        <Card.Body>
+          <NoResult
+            title={translate('No data available')}
+            message={translate('Try adjusting your filters or date range.')}
+          />
         </Card.Body>
       </Card>
     );

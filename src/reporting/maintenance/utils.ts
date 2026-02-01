@@ -2,6 +2,7 @@ import { DateTime } from 'luxon';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 import { MaintenanceTimelineItem } from './types';
 
@@ -164,7 +165,7 @@ export function formatTimelineChart(
         html += `${translate('State')}: ${STATE_LABELS[item.state] || item.state}<br/>`;
         html += `${translate('Provider')}: ${item.providerName}<br/>`;
         html += `${translate('Scheduled')}: ${schedStart} - ${schedEnd}<br/>`;
-        html += `${translate('Impact')}: ${IMPACT_LABELS[item.maxImpactLevel] || '-'}`;
+        html += `${translate('Impact')}: ${IMPACT_LABELS[item.maxImpactLevel] || DASH_ESCAPE_CODE}`;
 
         return html;
       },

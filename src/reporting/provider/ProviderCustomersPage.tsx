@@ -166,9 +166,12 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
               {monthlyChartOptions ? (
                 <EChart options={monthlyChartOptions} height="300px" />
               ) : (
-                <div className="text-center text-muted py-10">
-                  {translate('No data available')}
-                </div>
+                <NoResult
+                  title={translate('No data available')}
+                  message={translate(
+                    'Try adjusting your filters or date range.',
+                  )}
+                />
               )}
             </Card.Body>
           </Card>

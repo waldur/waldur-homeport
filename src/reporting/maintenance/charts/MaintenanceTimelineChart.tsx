@@ -2,6 +2,7 @@ import { FC } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { MaintenanceTimelineItem, TimelineGrouping } from '../types';
 import { formatTimelineChart } from '../utils';
@@ -19,9 +20,10 @@ export const MaintenanceTimelineChart: FC<MaintenanceTimelineChartProps> = ({
 }) => {
   if (items.length === 0) {
     return (
-      <div className="text-muted text-center py-10">
-        {translate('No maintenance data for timeline')}
-      </div>
+      <NoResult
+        title={translate('No data available')}
+        message={translate('Try adjusting your filters or date range.')}
+      />
     );
   }
 

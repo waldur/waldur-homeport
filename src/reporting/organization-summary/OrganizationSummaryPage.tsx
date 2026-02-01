@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
@@ -36,14 +37,16 @@ export const OrganizationSummaryPage: FC = () => {
 
   return (
     <>
-      <div className="d-flex flex-wrap gap-6 mb-6">
-        <FormGroup
-          label={translate('Organization')}
-          className="flex-grow-1 mw-300px"
-        >
-          <OrganizationFilter />
-        </FormGroup>
-      </div>
+      <Card className="mb-6">
+        <Card.Header>
+          <Card.Title>{translate('Filters')}</Card.Title>
+        </Card.Header>
+        <Card.Body>
+          <FormGroup label={translate('Organization')} className="mw-300px">
+            <OrganizationFilter />
+          </FormGroup>
+        </Card.Body>
+      </Card>
 
       {customerUuid ? (
         <OrganizationResourcesTable customerUuid={customerUuid} />

@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { UserOrganizationCount } from '../types';
 
@@ -129,8 +130,11 @@ export const OrganizationsChart: FC<OrganizationsChartProps> = ({ data }) => {
         <Card.Header>
           <Card.Title>{translate('User organizations')}</Card.Title>
         </Card.Header>
-        <Card.Body className="d-flex align-items-center justify-content-center text-muted">
-          {translate('No data available')}
+        <Card.Body>
+          <NoResult
+            title={translate('No data available')}
+            message={translate('Try adjusting your filters or date range.')}
+          />
         </Card.Body>
       </Card>
     );

@@ -5,6 +5,8 @@ import {
   ResourceUsageByAffiliation,
 } from 'waldur-js-client';
 
+import { translate } from '@waldur/i18n';
+
 import { AffiliationAggregation, UsageByAffiliationSummary } from './types';
 
 const STALE_TIME = 5 * 60 * 1000; // 5 minutes
@@ -29,7 +31,7 @@ export function useUsageByAffiliation() {
     const byAffiliation: Record<string, AffiliationAggregation> = {};
 
     queryResult.data.forEach((item) => {
-      const affiliation = item.affiliation || 'Unknown';
+      const affiliation = item.affiliation || translate('Unknown');
       if (!byAffiliation[affiliation]) {
         byAffiliation[affiliation] = {
           affiliation,

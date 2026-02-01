@@ -3,7 +3,9 @@ import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { UsageHistoryPoint, ComponentLabelMap } from './types';
 
@@ -157,17 +159,14 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
       </Card.Header>
       <Card.Body>
         {isLoading ? (
-          <div className="d-flex align-items-center justify-content-center h-100 py-10">
-            <div className="spinner-border text-primary" role="status">
-              <span className="visually-hidden">{translate('Loading...')}</span>
-            </div>
-          </div>
+          <LoadingSpinner className="py-10" />
         ) : hasData && chartOptions ? (
           <EChart options={chartOptions} height="350px" />
         ) : (
-          <div className="text-muted text-center py-10">
-            {translate('No usage data recorded for this resource.')}
-          </div>
+          <NoResult
+            title={translate('No data available')}
+            message={translate('No usage data recorded for this resource.')}
+          />
         )}
       </Card.Body>
     </Card>

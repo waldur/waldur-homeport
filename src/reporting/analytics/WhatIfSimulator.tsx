@@ -9,8 +9,10 @@ import classNames from 'classnames';
 import { FC, useCallback } from 'react';
 import { Card, Form, InputGroup } from 'react-bootstrap';
 
+import { Tip } from '@waldur/core/Tooltip';
 import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { MockDataIndicator } from './MockDataIndicator';
 import { DataSourceType, SimulationParam, SimulationResult } from './types';
@@ -101,17 +103,29 @@ const ParamInput: FC<{
   }
 
   // Default: number input with increment/decrement
+  const isAtMin = param.min !== undefined && numValue <= param.min;
+  const isAtMax = param.max !== undefined && numValue >= param.max;
+
   return (
     <InputGroup size="sm">
-      <CompactSubmitButton
-        submitting={false}
-        type="button"
-        variant="outline-secondary"
-        onClick={() => handleChange(numValue - step)}
-        disabled={param.min !== undefined && numValue <= param.min}
-        iconNode={<CaretDownIcon weight="bold" />}
-        label=""
-      />
+      <Tip
+        id={`${param.id}-dec`}
+        label={
+          isAtMin
+            ? translate('Minimum value reached')
+            : translate('Decrease value')
+        }
+      >
+        <CompactSubmitButton
+          submitting={false}
+          type="button"
+          variant="outline-secondary"
+          onClick={() => handleChange(numValue - step)}
+          disabled={isAtMin}
+          iconNode={<CaretDownIcon weight="bold" />}
+          label=""
+        />
+      </Tip>
       <Form.Control
         type="number"
         value={numValue}
@@ -122,15 +136,24 @@ const ParamInput: FC<{
         className="text-center"
         style={{ maxWidth: '100px' }}
       />
-      <CompactSubmitButton
-        submitting={false}
-        type="button"
-        variant="outline-secondary"
-        onClick={() => handleChange(numValue + step)}
-        disabled={param.max !== undefined && numValue >= param.max}
-        iconNode={<CaretUpIcon weight="bold" />}
-        label=""
-      />
+      <Tip
+        id={`${param.id}-inc`}
+        label={
+          isAtMax
+            ? translate('Maximum value reached')
+            : translate('Increase value')
+        }
+      >
+        <CompactSubmitButton
+          submitting={false}
+          type="button"
+          variant="outline-secondary"
+          onClick={() => handleChange(numValue + step)}
+          disabled={isAtMax}
+          iconNode={<CaretUpIcon weight="bold" />}
+          label=""
+        />
+      </Tip>
       {param.unit && <InputGroup.Text>{param.unit}</InputGroup.Text>}
     </InputGroup>
   );
@@ -253,9 +276,10 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
       )}
 
       {results.length === 0 && hasChanges && (
-        <div className="text-muted text-center py-4">
-          {translate('Adjust parameters to see projected impact')}
-        </div>
+        <NoResult
+          title={translate('No data available')}
+          message={translate('Adjust parameters to see projected impact.')}
+        />
       )}
     </div>
   );

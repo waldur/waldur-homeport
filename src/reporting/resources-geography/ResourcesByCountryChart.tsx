@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 import { OfferingCountryStats } from 'waldur-js-client';
 
+import { translate } from '@waldur/i18n';
+
 import { DonutChart } from '../users/charts/DonutChart';
 
 interface ResourcesByCountryChartProps {
@@ -13,11 +15,13 @@ export const ResourcesByCountryChart: FC<ResourcesByCountryChartProps> = ({
   const chartData = useMemo(
     () =>
       data.map((item) => ({
-        name: item.country || 'Unknown',
+        name: item.country || translate('Unknown'),
         value: item.count,
       })),
     [data],
   );
 
-  return <DonutChart title="Resources by country" data={chartData} />;
+  return (
+    <DonutChart title={translate('Resources by country')} data={chartData} />
+  );
 };

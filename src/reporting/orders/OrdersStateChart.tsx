@@ -3,6 +3,7 @@ import { Card } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { formatOrdersStateChart } from './utils';
 
@@ -23,9 +24,10 @@ export const OrdersStateChart: FC<OrdersStateChartProps> = ({ stateStats }) => {
         {hasData ? (
           <EChart options={chartOptions} height="300px" />
         ) : (
-          <div className="text-muted text-center py-10">
-            {translate('No orders in the selected period')}
-          </div>
+          <NoResult
+            title={translate('No data available')}
+            message={translate('Try adjusting your filters or date range.')}
+          />
         )}
       </Card.Body>
     </Card>

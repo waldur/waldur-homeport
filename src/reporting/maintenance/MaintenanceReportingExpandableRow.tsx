@@ -66,7 +66,8 @@ export const MaintenanceReportingExpandableRow: FC<{
           },
           {
             title: translate('Impact'),
-            render: ({ row }) => IMPACT_LABELS[row.impact_level || 1] || '—',
+            render: ({ row }) =>
+              renderFieldOrDash(IMPACT_LABELS[row.impact_level || 1]),
           },
           {
             title: translate('Description'),

@@ -204,7 +204,7 @@ export const OrganizationResourcesTable: FC<
               params={{ uuid: row.project_uuid }}
               className="text-dark text-hover-primary fw-semibold"
             >
-              {row.project_name || '—'}
+              {renderFieldOrDash(row.project_name)}
             </Link>
             <div className="d-flex align-items-center text-muted fs-8 mt-1">
               <span className="text-truncate" style={{ maxWidth: '150px' }}>
@@ -231,7 +231,7 @@ export const OrganizationResourcesTable: FC<
               params={{ resource_uuid: row.uuid }}
               className="text-dark text-hover-primary fw-semibold"
             >
-              {row.name || row.offering_name || '—'}
+              {renderFieldOrDash(row.name || row.offering_name)}
             </Link>
             <div className="d-flex align-items-center text-muted fs-8 mt-1">
               <span className="text-truncate" style={{ maxWidth: '150px' }}>
@@ -323,7 +323,8 @@ export const OrganizationResourcesTable: FC<
         const parsed = parseOptions(options);
         const value = parsed[key];
         if (Array.isArray(value)) return value.join(', ');
-        if (typeof value === 'boolean') return value ? 'Yes' : 'No';
+        if (typeof value === 'boolean')
+          return value ? translate('Yes') : translate('No');
         if (typeof value === 'string') return value;
         if (typeof value === 'number') return value;
         return String(value ?? '');

@@ -13,6 +13,7 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { parseDate } from '@waldur/core/dateUtils';
+import { translate } from '@waldur/i18n';
 
 import {
   ResourceOption,
@@ -57,8 +58,8 @@ export const useProjectResources = (projectUuid?: string) => {
         .map(
           (r): ResourceOption => ({
             uuid: r.uuid,
-            name: r.name || 'Unnamed resource',
-            resource_name: r.name || 'Unnamed resource',
+            name: r.name || translate('Unnamed resource'),
+            resource_name: r.name || translate('Unnamed resource'),
           }),
         );
     },

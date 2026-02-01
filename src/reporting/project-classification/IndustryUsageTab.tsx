@@ -8,6 +8,8 @@ import {
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
@@ -31,7 +33,7 @@ function flattenUsageData(
 
   for (const [category, components] of Object.entries(usageData)) {
     for (const [componentType, usage] of Object.entries(components)) {
-      const limit = limitData[category]?.[componentType] || '-';
+      const limit = limitData[category]?.[componentType] || DASH_ESCAPE_CODE;
       rows.push({
         category,
         componentType,
@@ -174,9 +176,12 @@ export const IndustryUsageTab: FC<IndustryUsageTabProps> = ({
               {aggregatedCounts.some((item) => item.count > 0) ? (
                 <EChart options={chartOptions} height="300px" />
               ) : (
-                <div className="text-center text-muted py-10">
-                  {translate('No project count data available')}
-                </div>
+                <NoResult
+                  title={translate('No data available')}
+                  message={translate(
+                    'Try adjusting your filters or date range.',
+                  )}
+                />
               )}
             </Card.Body>
           </Card>

@@ -24,7 +24,7 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
             {row.organization_type || translate('Unknown')}
           </span>
         ),
-        export: (row) => row.organization_type || 'Unknown',
+        export: (row) => row.organization_type || translate('Unknown'),
       },
       {
         title: translate('Total resources'),
