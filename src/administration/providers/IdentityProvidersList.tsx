@@ -51,6 +51,11 @@ const IDENTITY_TABS = [
     groupName: translate('API token authentication'),
   },
   {
+    key: 'scim',
+    title: translate('SCIM'),
+    groupName: translate('SCIM settings'),
+  },
+  {
     key: 'providers',
     title: translate('Providers'),
     groupName: null, // Custom tab, not from SettingsDescription
