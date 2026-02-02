@@ -31,6 +31,8 @@ interface BaseButtonProps {
   type?: 'button' | 'submit';
   /** Button ID attribute */
   id?: string;
+  /** Associates button with a form by ID (for buttons outside the form element) */
+  form?: string;
   /** Data attributes for testing/integration */
   [key: `data-${string}`]: string | undefined;
 }
@@ -57,6 +59,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
   size,
   type = 'button',
   id,
+  form,
   ...rest
 }) => {
   const iconSize = size === 'sm' ? '4' : '2';
@@ -83,6 +86,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
       onClick={onClick}
       variant={variant}
       disabled={disabled || pending}
+      form={form}
       {...dataProps}
     >
       {pending && <LoadingSpinnerIcon className={label ? 'me-1' : undefined} />}
