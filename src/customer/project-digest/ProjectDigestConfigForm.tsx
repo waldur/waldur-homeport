@@ -1,27 +1,31 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useCallback, useEffect, useMemo } from 'react';
 import { FormCheck } from 'react-bootstrap';
-import { Field, Form } from 'react-final-form';
+import { Field, Form, FormSpy } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { NumberField } from '@waldur/form/NumberField';
 import { SelectField } from '@waldur/form/SelectField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import {
-  ProjectDigestConfig,
-  sendTestDigest,
-  updateProjectDigestConfig,
-} from './api';
+import { ProjectDigestConfig, updateProjectDigestConfig } from './api';
+
+export interface DigestFormState {
+  submitting: boolean;
+  pristine: boolean;
+  isEnabled: boolean;
+}
 
 interface ProjectDigestConfigFormProps {
   config: ProjectDigestConfig;
   customerUuid: string;
   onUpdated: () => void;
+  onFormStateChange?: (state: DigestFormState) => void;
 }
+
+export const DIGEST_FORM_ID = 'digest-config-form';
 
 const FREQUENCY_OPTIONS = [
   { value: 'weekly', label: () => translate('Weekly') },
@@ -39,10 +43,24 @@ const DAY_OF_WEEK_OPTIONS = [
   { value: 6, label: () => translate('Saturday') },
 ];
 
+const FormStateNotifier: FC<{
+  onChange: (state: DigestFormState) => void;
+}> = ({ onChange }) => (
+  <FormSpy subscription={{ submitting: true, pristine: true, values: true }}>
+    {({ submitting, pristine, values }) => {
+      useEffect(() => {
+        onChange({ submitting, pristine, isEnabled: !!values.is_enabled });
+      }, [submitting, pristine, values.is_enabled, onChange]);
+      return null;
+    }}
+  </FormSpy>
+);
+
 export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
   config,
   customerUuid,
   onUpdated,
+  onFormStateChange,
 }) => {
   const dispatch = useDispatch();
 
@@ -57,16 +75,26 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
     [],
   );
 
-  const initialValues = useMemo(
-    () => ({
+  const initialValues = useMemo(() => {
+    let sections: string[] = [];
+    if (Array.isArray(config?.enabled_sections)) {
+      sections = config.enabled_sections;
+    } else if (typeof config?.enabled_sections === 'string') {
+      try {
+        const parsed = JSON.parse(config.enabled_sections);
+        sections = Array.isArray(parsed) ? parsed : [];
+      } catch {
+        sections = [];
+      }
+    }
+    return {
       is_enabled: config?.is_enabled ?? false,
       frequency: config?.frequency ?? 'monthly',
-      enabled_sections: config?.enabled_sections ?? [],
+      enabled_sections: sections,
       day_of_week: config?.day_of_week ?? 1,
       day_of_month: config?.day_of_month ?? 1,
-    }),
-    [config],
-  );
+    };
+  }, [config]);
 
   const availableSections = config?.available_sections ?? [];
 
@@ -90,30 +118,15 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
     [customerUuid, onUpdated, dispatch],
   );
 
-  const handleSendTest = useCallback(async () => {
-    try {
-      await sendTestDigest(customerUuid);
-      dispatch(
-        showSuccess(
-          translate('Test digest email has been sent to your email address.'),
-        ),
-      );
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to send test digest email.'),
-        ),
-      );
-    }
-  }, [customerUuid, dispatch]);
-
   return (
     <Form
       onSubmit={onSubmit}
       initialValues={initialValues}
-      render={({ handleSubmit, submitting, pristine, values }) => (
-        <form onSubmit={handleSubmit}>
+      render={({ handleSubmit, values }) => (
+        <form id={DIGEST_FORM_ID} onSubmit={handleSubmit}>
+          {onFormStateChange && (
+            <FormStateNotifier onChange={onFormStateChange} />
+          )}
           <FormGroup label={translate('Enable digest emails')}>
             <Field
               name="is_enabled"
@@ -173,59 +186,44 @@ export const ProjectDigestConfigForm: FC<ProjectDigestConfigFormProps> = ({
                     'Select which sections to include in the digest. Leave all unchecked to include all sections.',
                   )}
                 >
-                  {availableSections.map((section) => (
-                    <Field
-                      key={section.key}
-                      name="enabled_sections"
-                      render={({ input }) => (
-                        <FormCheck
-                          className="form-check-custom mb-2"
-                          type="checkbox"
-                          id={`section-${section.key}`}
-                          label={section.title}
-                          checked={
-                            Array.isArray(values.enabled_sections) &&
-                            values.enabled_sections.includes(section.key)
-                          }
-                          onChange={(e) => {
-                            const currentSections = Array.isArray(
-                              values.enabled_sections,
-                            )
-                              ? [...values.enabled_sections]
-                              : [];
-                            if (e.target.checked) {
-                              currentSections.push(section.key);
-                            } else {
-                              const idx = currentSections.indexOf(section.key);
-                              if (idx >= 0) currentSections.splice(idx, 1);
+                  <Field
+                    name="enabled_sections"
+                    render={({ input }) => (
+                      <>
+                        {availableSections.map((section) => (
+                          <FormCheck
+                            key={section.key}
+                            className="form-check-custom mb-2"
+                            type="checkbox"
+                            id={`section-${section.key}`}
+                            label={section.title}
+                            checked={
+                              Array.isArray(input.value) &&
+                              input.value.includes(section.key)
                             }
-                            input.onChange(currentSections);
-                          }}
-                        />
-                      )}
-                    />
-                  ))}
+                            onChange={(e) => {
+                              const currentSections = Array.isArray(input.value)
+                                ? [...input.value]
+                                : [];
+                              if (e.target.checked) {
+                                currentSections.push(section.key);
+                              } else {
+                                const idx = currentSections.indexOf(
+                                  section.key,
+                                );
+                                if (idx >= 0) currentSections.splice(idx, 1);
+                              }
+                              input.onChange(currentSections);
+                            }}
+                          />
+                        ))}
+                      </>
+                    )}
+                  />
                 </FormGroup>
               )}
             </>
           )}
-
-          <div className="d-flex gap-3">
-            <SubmitButton
-              submitting={submitting}
-              disabled={pristine}
-              label={translate('Save')}
-            />
-            {config?.is_enabled && (
-              <SubmitButton
-                submitting={false}
-                type="button"
-                variant="secondary"
-                onClick={handleSendTest}
-                label={translate('Send test email')}
-              />
-            )}
-          </div>
         </form>
       )}
     />

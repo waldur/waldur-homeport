@@ -5,7 +5,6 @@ import { ProjectDigestPreviewResponse } from 'waldur-js-client';
 
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { showErrorResponse } from '@waldur/store/notify';
@@ -66,7 +65,7 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
   };
 
   return (
-    <FormTable.Card title={translate('Preview')} className="card-bordered mb-5">
+    <>
       <div className="mb-5">
         <label className="form-label">
           {translate('Select a project to preview the digest')}
@@ -87,12 +86,13 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
       {isPending && <LoadingSpinner />}
 
       {preview && !isPending && (
-        <div className="border rounded p-5">
-          <h4 className="mb-4">{preview.subject}</h4>
-          <hr />
+        <div
+          className="rounded shadow-sm p-6"
+          style={{ backgroundColor: '#fff', color: '#333' }}
+        >
           <FormattedHtml html={preview.html_body} />
         </div>
       )}
-    </FormTable.Card>
+    </>
   );
 };

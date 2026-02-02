@@ -22,6 +22,8 @@ interface SubmitButtonProps {
   className?: string;
   /** Button type - defaults to 'submit' */
   type?: 'submit' | 'button';
+  /** Associates button with a form by ID (for buttons outside the form element) */
+  form?: string;
   /** Click handler */
   onClick?(event: React.MouseEvent<HTMLButtonElement>): void;
   /** Optional icon to display */
@@ -47,6 +49,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
   variant = 'primary',
   className,
   type = 'submit',
+  form,
   onClick,
   iconNode,
   iconOnLeft = false,
@@ -64,6 +67,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
     pending={submitting}
     size="lg"
     type={type}
+    form={form}
     {...rest}
   />
 );
