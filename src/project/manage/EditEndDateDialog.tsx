@@ -177,6 +177,10 @@ const FormModalComponent: FC<
       }),
   });
 
+  const hasResources = resources?.length && value.meta.dirty;
+  const hasUnselectedResources = step === 2 && ignoredResources.length > 0;
+  const adjustModalHeight = hasResources || hasUnselectedResources;
+
   return (
     <form onSubmit={handleSubmit}>
       <ModalDialog
@@ -187,7 +191,9 @@ const FormModalComponent: FC<
               })
             : translate('Some conflicting resources are unselected')
         }
-        bodyClassName="h-200px"
+        bodyClassName={
+          adjustModalHeight ? 'd-flex flex-column h-400px' : 'h-200px'
+        }
         footer={
           <>
             {step === 1 ? (
@@ -217,7 +223,7 @@ const FormModalComponent: FC<
           </>
         }
       >
-        <div className={step === 2 ? 'd-none' : undefined}>
+        <div className={step === 2 ? 'd-none' : 'd-flex flex-column h-100'}>
           <FormGroup controlId="project_end_date" spaceless>
             <Field
               name="end_date"
@@ -243,16 +249,21 @@ const FormModalComponent: FC<
                   "You've changed the project end date. Some resources now conflict with this date. Review the list below to align or confirm resource termination dates.",
                 )}
               </p>
-              <ResourcesTable
-                {...tableProps}
-                enableMultiSelect
-                projectDate={valueDate}
-              />
+              <div
+                className="flex-grow-1 overflow-auto"
+                style={{ minHeight: 0 }}
+              >
+                <ResourcesTable
+                  {...tableProps}
+                  enableMultiSelect
+                  projectDate={valueDate}
+                />
+              </div>
 
               <FormCheck
                 id="confirm-update-termination-dates"
                 type="checkbox"
-                className="form-check-custom form-check-sm"
+                className="form-check-custom form-check-sm pt-3"
                 checked={confirm}
                 onChange={(value) => setConfirm(value.target.checked)}
                 label={translate(
@@ -264,14 +275,22 @@ const FormModalComponent: FC<
         </div>
 
         {step === 2 && (
-          <>
+          <div
+            className="d-flex flex-column flex-grow-1"
+            style={{ minHeight: 0 }}
+          >
             <p className="text-gray-700 mb-4">
               {translate(
                 'The following resources were not selected and will be forcibly terminated on the project end date:',
               )}
             </p>
-            <ResourcesTable {...tablePropsUnselected} projectDate={valueDate} />
-          </>
+            <div className="flex-grow-1 overflow-auto" style={{ minHeight: 0 }}>
+              <ResourcesTable
+                {...tablePropsUnselected}
+                projectDate={valueDate}
+              />
+            </div>
+          </div>
         )}
       </ModalDialog>
     </form>
