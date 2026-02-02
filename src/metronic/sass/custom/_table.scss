@@ -305,6 +305,14 @@
       &.btn-add-filter.btn-icon.btn-sm {
         width: 44px !important;
         height: 44px !important;
+
+        .svg-icon,
+        .svg-icon.svg-icon-4 {
+          svg {
+            width: 20px !important;
+            height: 20px !important;
+          }
+        }
       }
     }
   }
