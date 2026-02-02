@@ -295,6 +295,20 @@
     }
   }
 
+  .card-toolbar {
+    .btn {
+      &.btn-icon {
+        width: 44px;
+        height: 44px;
+      }
+      &.btn-add-filter.btn-icon,
+      &.btn-add-filter.btn-icon.btn-sm {
+        width: 44px !important;
+        height: 44px !important;
+      }
+    }
+  }
+
   table {
     margin-bottom: 0;
   }
