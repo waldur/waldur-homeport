@@ -1,9 +1,12 @@
+import { TrashIcon } from '@phosphor-icons/react';
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
+import { useRouter } from '@uirouter/react';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsActivate,
   marketplaceProviderOfferingsArchive,
+  marketplaceProviderOfferingsDestroy,
   marketplaceProviderOfferingsDraft,
   marketplaceProviderOfferingsUnpause,
 } from 'waldur-js-client';
@@ -11,7 +14,10 @@ import {
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import {
   showError,
   showErrorResponse,
@@ -67,6 +73,7 @@ export const OfferingStateActions = ({
 }) => {
   const dispatch = useDispatch();
   const user = useUser();
+  const router = useRouter();
   const updateOfferingState = async (api) => {
     try {
       await api();
@@ -145,6 +152,56 @@ export const OfferingStateActions = ({
     );
   };
 
+  const handleDelete = async () => {
+    try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Delete confirmation'),
+        translate('Are you sure you want to delete offering {name}?', {
+          name: offering.name,
+        }),
+        { forDeletion: true },
+      );
+    } catch {
+      return;
+    }
+    try {
+      await marketplaceProviderOfferingsDestroy({
+        path: { uuid: offering.uuid },
+      });
+      dispatch(
+        showSuccess(
+          translate('Offering {name} deleted successfully.', {
+            name: offering.name,
+          }),
+        ),
+      );
+      router.stateService.go('marketplace-vendor-offerings', {
+        uuid: offering.customer_uuid,
+      });
+    } catch (error) {
+      dispatch(
+        showErrorResponse(
+          error,
+          translate('Error while deleting offering {name}.', {
+            name: offering.name,
+          }),
+        ),
+      );
+    }
+  };
+
+  const canDeleteOffering = hasPermission(user, {
+    permission: PermissionEnum.DELETE_OFFERING,
+    customerId: offering.customer_uuid,
+  });
+
+  const showDeleteAction = user.is_staff
+    ? true
+    : offering.state === DRAFT &&
+      !offering.resources_count &&
+      canDeleteOffering;
+
   const draftTitle = user.is_staff
     ? translate('Set to draft')
     : translate('Request editing');
@@ -209,6 +266,21 @@ export const OfferingStateActions = ({
         {user.is_staff && (
           <Dropdown.Item onClick={openChangeAvailabilityDialog}>
             {translate('Make unavailable')}
+          </Dropdown.Item>
+        )}
+
+        {showDeleteAction && <Dropdown.Divider />}
+
+        {showDeleteAction && (
+          <Dropdown.Item
+            as="button"
+            className="text-danger"
+            onClick={handleDelete}
+          >
+            <span className="svg-icon svg-icon-2 svg-icon-danger">
+              <TrashIcon weight="bold" />
+            </span>
+            {translate('Delete')}
           </Dropdown.Item>
         )}
       </Dropdown.Menu>
