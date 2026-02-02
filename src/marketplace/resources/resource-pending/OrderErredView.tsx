@@ -59,7 +59,8 @@ const getSortedSteps = (resource: Resource) => [
     label: translate('Order submitted'),
     description: [
       [
-        resource.creation_order.created_by_full_name,
+        resource.creation_order.created_by_full_name ||
+          resource.creation_order.created_by_username,
         formatDateTime(resource.creation_order.created),
       ].join(', '),
     ],
@@ -70,7 +71,8 @@ const getSortedSteps = (resource: Resource) => [
     label: translate('Approved'),
     description: [
       [
-        resource.creation_order.consumer_reviewed_by_full_name,
+        resource.creation_order.consumer_reviewed_by_full_name ||
+          resource.creation_order.consumer_reviewed_by_username,
         formatDateTime(resource.creation_order.consumer_reviewed_at),
       ].join(', '),
     ],
