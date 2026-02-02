@@ -286,6 +286,9 @@
       height: 44px;
       font-size: $input-btn-font-size-lg;
 
+      &.btn-icon {
+        width: 44px;
+      }
       &:not(.btn-icon) {
         padding: 0.692rem 1.153rem;
       }
