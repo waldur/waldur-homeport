@@ -82,6 +82,8 @@ describe('OpenstackTenantActions', () => {
       'Set as erred',
       'Move',
       'Unlink',
+      'Mark as ERRED',
+      'Mark as OK',
       'Terminate',
     ]);
   });

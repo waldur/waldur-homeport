@@ -1,3 +1,8 @@
+import {
+  openstackInstancesSetErred,
+  openstackInstancesSetOk,
+} from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 import { ActionGroup } from '@waldur/marketplace/resources/actions/ActionGroup';
 import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
@@ -5,6 +10,8 @@ import { ProviderActionsGroup } from '@waldur/marketplace/resources/actions/Prov
 import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import { ShowUsageAction } from '@waldur/marketplace/resources/list/ShowUsageAction';
+import { SetResourceErredAction } from '@waldur/resource/actions/SetResourceErredAction';
+import { SetResourceOkAction } from '@waldur/resource/actions/SetResourceOkAction';
 import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
 
 import { ChangeFlavorAction } from './actions/ChangeFlavorAction';
@@ -48,6 +55,16 @@ export const OpenStackInstanceActions = (props) => (
       <MoveResourceAction {...props} />
       <UnlinkActionItem {...props} />
       <UnlinkOpenStackInstanceAction {...props} />
+      <SetResourceErredAction
+        apiMethod={openstackInstancesSetErred}
+        resource={props.resource}
+        refetch={props.refetch}
+      />
+      <SetResourceOkAction
+        apiMethod={openstackInstancesSetOk}
+        resource={props.resource}
+        refetch={props.refetch}
+      />
     </ActionGroup>
 
     <ActionGroup title={translate('Dangerous actions')}>
