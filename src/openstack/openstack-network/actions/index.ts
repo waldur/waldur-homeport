@@ -1,3 +1,10 @@
+import {
+  openstackNetworksSetErred,
+  openstackNetworksSetOk,
+} from 'waldur-js-client';
+
+import { createSetErredAction } from '@waldur/resource/actions/SetResourceErredAction';
+import { createSetOkAction } from '@waldur/resource/actions/SetResourceOkAction';
 import { ActionConfiguration } from '@waldur/resource/actions/types';
 
 import { CreateSubnetAction } from './CreateSubnetAction';
@@ -16,5 +23,7 @@ export const OpenStackNetworkActions: ActionConfiguration = {
     CreateSubnetAction,
     SetMtuAction,
     DestroyNetworkAction,
+    createSetErredAction(openstackNetworksSetErred),
+    createSetOkAction(openstackNetworksSetOk),
   ],
 };

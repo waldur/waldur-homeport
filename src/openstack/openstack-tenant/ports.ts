@@ -1,3 +1,7 @@
+import { openstackPortsSetErred, openstackPortsSetOk } from 'waldur-js-client';
+
+import { createSetErredAction } from '@waldur/resource/actions/SetResourceErredAction';
+import { createSetOkAction } from '@waldur/resource/actions/SetResourceOkAction';
 import { ActionConfiguration } from '@waldur/resource/actions/types';
 
 import { OPENSTACK_PORT_TYPE } from '../constants';
@@ -20,5 +24,7 @@ export const OpenStackPortActions: ActionConfiguration = {
     PullPortAction,
     UnlinkPortAction,
     DestroyPortAction,
+    createSetErredAction(openstackPortsSetErred),
+    createSetOkAction(openstackPortsSetOk),
   ],
 };
