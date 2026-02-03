@@ -1,7 +1,7 @@
 import { CheckCircleIcon, InfoIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useEffect, useState } from 'react';
 import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { change, Field, formValueSelector } from 'redux-form';
 
 import { ACCEPTED_FILE_TYPES } from '@waldur/core/constants';
@@ -118,6 +118,18 @@ export const OrganizationCreateStep2: FunctionComponent<
     [uploadedFiles, updateUploadedFiles],
   );
 
+  // Get all form values for dependency evaluation
+  const allFormValues = useSelector((state) => {
+    const questionFields = checklistQuestions.reduce(
+      (acc, q) => {
+        acc[`question_${q.uuid}`] = selector(state, `question_${q.uuid}`);
+        return acc;
+      },
+      {} as Record<string, any>,
+    );
+    return questionFields;
+  }, shallowEqual);
+
   // Render checklist questions in a responsive grid layout
   const renderChecklistQuestions = () => {
     if (loading) return <LoadingSpinner />;
@@ -131,7 +143,11 @@ export const OrganizationCreateStep2: FunctionComponent<
             index === checklistQuestions.length - 1;
           return (
             <Col md={isLastOdd ? 12 : 6} key={question.uuid}>
-              <ChecklistQuestionField question={question} />
+              <ChecklistQuestionField
+                question={question}
+                allQuestions={checklistQuestions}
+                formValues={allFormValues}
+              />
             </Col>
           );
         })}

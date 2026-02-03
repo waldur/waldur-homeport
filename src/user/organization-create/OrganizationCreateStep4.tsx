@@ -1,5 +1,7 @@
 import { FunctionComponent, useEffect, useState } from 'react';
 import { Card } from 'react-bootstrap';
+import { useSelector, shallowEqual } from 'react-redux';
+import { formValueSelector } from 'redux-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
@@ -26,6 +28,20 @@ export const OrganizationCreateStep4: FunctionComponent<
   >([]);
   const [loading, setLoading] = useState(false);
   const [checklistFetched, setChecklistFetched] = useState(false);
+
+  const selector = formValueSelector(props.form);
+
+  // Get all form values for dependency evaluation
+  const allFormValues = useSelector((state) => {
+    const questionFields = checklistQuestions.reduce(
+      (acc, q) => {
+        acc[`question_${q.uuid}`] = selector(state, `question_${q.uuid}`);
+        return acc;
+      },
+      {} as Record<string, any>,
+    );
+    return questionFields;
+  }, shallowEqual);
 
   // Fetch checklist for country on mount
   useEffect(() => {
@@ -71,6 +87,8 @@ export const OrganizationCreateStep4: FunctionComponent<
                   <ChecklistQuestionField
                     key={question.uuid}
                     question={question}
+                    allQuestions={checklistQuestions}
+                    formValues={allFormValues}
                   />
                 ))}
               </div>

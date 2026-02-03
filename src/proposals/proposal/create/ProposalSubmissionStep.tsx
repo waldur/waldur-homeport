@@ -17,55 +17,13 @@ import { useAccordionUrlState } from '@waldur/core/useAccordionUrlState';
 import { isEmpty } from '@waldur/core/utils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
+import { evaluateCondition } from '@waldur/marketplace-checklist/questionDependencies';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
 import { extractComplianceAnswers } from './complianceUtils';
 import { ProposalSidebar } from './ProposalSidebar';
 import { createProposalSteps } from './steps';
-
-// Evaluate if a dependency condition is met based on current form values
-const evaluateCondition = (
-  condition: {
-    question_description: string;
-    operator: string;
-    required_value: unknown;
-  },
-  answerValue: unknown,
-): boolean => {
-  const { operator, required_value } = condition;
-
-  if (answerValue === undefined || answerValue === null || answerValue === '') {
-    return false;
-  }
-
-  switch (operator) {
-    case 'equals':
-      return answerValue === required_value;
-    case 'not_equals':
-      return answerValue !== required_value;
-    case 'contains':
-      if (Array.isArray(answerValue)) {
-        return answerValue.includes(required_value);
-      }
-      return String(answerValue).includes(String(required_value));
-    case 'not_contains':
-      if (Array.isArray(answerValue)) {
-        return !answerValue.includes(required_value);
-      }
-      return !String(answerValue).includes(String(required_value));
-    case 'greater_than':
-      return Number(answerValue) > Number(required_value);
-    case 'less_than':
-      return Number(answerValue) < Number(required_value);
-    case 'is_empty':
-      return isEmpty(answerValue);
-    case 'is_not_empty':
-      return !isEmpty(answerValue);
-    default:
-      return answerValue === required_value;
-  }
-};
 
 // Check if compliance checklist is complete based on current form values
 const isComplianceComplete = (

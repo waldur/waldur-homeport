@@ -2,12 +2,7 @@ import { ArrowBendDownRight } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
-
-interface DependencyCondition {
-  question_description: string;
-  operator: string;
-  required_value: unknown;
-}
+import { DependencyCondition } from '@waldur/marketplace-checklist/questionDependencies';
 
 interface QuestionDependencyInfo {
   logic: 'and' | 'or';

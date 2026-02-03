@@ -12,55 +12,15 @@ import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
+import {
+  DependencyInfo,
+  evaluateQuestionVisibility,
+} from '@waldur/marketplace-checklist/questionDependencies';
 import { useNotify } from '@waldur/store/hooks';
 
 import { ComplianceFileUpload } from './ComplianceFileUpload';
 import { QuestionDependencyHint } from './QuestionDependencyHint';
 import { StepHeaderContent } from './StepHeaderContent';
-
-// Evaluate if a dependency condition is met based on current form values
-const evaluateCondition = (
-  condition: {
-    question_description: string;
-    operator: string;
-    required_value: unknown;
-  },
-  answerValue: unknown,
-): boolean => {
-  const { operator, required_value } = condition;
-
-  // No answer means condition is not met
-  if (answerValue === undefined || answerValue === null || answerValue === '') {
-    return false;
-  }
-
-  switch (operator) {
-    case 'equals':
-      return answerValue === required_value;
-    case 'not_equals':
-      return answerValue !== required_value;
-    case 'contains':
-      if (Array.isArray(answerValue)) {
-        return answerValue.includes(required_value);
-      }
-      return String(answerValue).includes(String(required_value));
-    case 'not_contains':
-      if (Array.isArray(answerValue)) {
-        return !answerValue.includes(required_value);
-      }
-      return !String(answerValue).includes(String(required_value));
-    case 'greater_than':
-      return Number(answerValue) > Number(required_value);
-    case 'less_than':
-      return Number(answerValue) < Number(required_value);
-    case 'is_empty':
-      return isEmpty(answerValue);
-    case 'is_not_empty':
-      return !isEmpty(answerValue);
-    default:
-      return answerValue === required_value;
-  }
-};
 
 // Simple field component mapping for React Final Form
 const getFieldComponent = (questionType: string) => {
@@ -174,32 +134,11 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
   // Check if a question is visible based on its dependencies and current form values
   const isQuestionVisible = useCallback(
     (question: (typeof checklistData.questions)[0]): boolean => {
-      const depInfo = question.dependencies_info as {
-        logic: 'and' | 'or';
-        conditions: Array<{
-          question_description: string;
-          operator: string;
-          required_value: unknown;
-        }>;
-      } | null;
-
-      // No dependencies = always visible
-      if (!depInfo || !depInfo.conditions?.length) {
-        return true;
-      }
-
-      const results = depInfo.conditions.map((condition) => {
-        // Find the parent question's form value by description
-        const fieldName =
-          questionUuidToFieldName[condition.question_description];
-        const answerValue = fieldName ? values?.[fieldName] : undefined;
-        return evaluateCondition(condition, answerValue);
-      });
-
-      // Apply logic operator
-      return depInfo.logic === 'or'
-        ? results.some(Boolean)
-        : results.every(Boolean);
+      return evaluateQuestionVisibility(
+        question.dependencies_info as DependencyInfo,
+        questionUuidToFieldName,
+        values || {},
+      );
     },
     [questionUuidToFieldName, values],
   );
