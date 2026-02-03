@@ -14,6 +14,7 @@ import { CreateOfferingUserButton } from '@waldur/marketplace/offerings/details/
 import { UserImportButton } from '@waldur/marketplace/offerings/import-users/UserImportButton';
 import { TosReportingButton } from '@waldur/marketplace/offerings/update/tos/TosReportingButton';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
+import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { TableExportButton } from '@waldur/table/TableExportButton';
 import { TableWithPortal } from '@waldur/table/types';
@@ -53,25 +54,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
   );
   const tableProps = useTable({
     table: 'marketplace-offering-users',
-    fetchData: async (request) => {
-      const queryParams: any = {
-        ...filter,
-      };
-
-      if (request.query) {
-        queryParams.query = request.query;
-      }
-
-      const response = await marketplaceOfferingUsersList({
-        query: queryParams,
-      });
-
-      return {
-        rows: response.data || [],
-        resultCount: response.data?.length || 0,
-        nextPage: undefined,
-      };
-    },
+    fetchData: createFetcher(marketplaceOfferingUsersList),
     filter,
     queryField: 'query',
   });
