@@ -25,6 +25,17 @@ export const FilterBox: FC<FilterBoxProps> = ({
     inputRef?.current.focus();
   }, [inputRef, autoFocus]);
 
+  const handleKeyDown = (e: React.KeyboardEvent<HTMLInputElement>) => {
+    // Prevent form submission when Enter is pressed in search input
+    if (e.key === 'Enter') {
+      e.preventDefault();
+    }
+    // Call original onKeyDown if provided
+    if (props.onKeyDown) {
+      props.onKeyDown(e);
+    }
+  };
+
   return (
     <InputGroup className={classNames('has-icon', className)}>
       <div className="input-group-icon">
@@ -35,6 +46,7 @@ export const FilterBox: FC<FilterBoxProps> = ({
         className={inputClassName}
         {...props}
         ref={inputRef}
+        onKeyDown={handleKeyDown}
       />
     </InputGroup>
   );
