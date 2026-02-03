@@ -1,6 +1,5 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { Field } from 'redux-form';
-import { QuestionAdmin } from 'waldur-js-client';
 
 import { composeValidators, email, required } from '@waldur/core/validators';
 import { FileUploadField } from '@waldur/form';
@@ -17,20 +16,58 @@ import { StringField } from '@waldur/form/StringField';
 import { TextField } from '@waldur/form/TextField';
 import { YearField } from '@waldur/form/YearField';
 import { translate } from '@waldur/i18n';
+import {
+  DependencyInfo,
+  evaluateQuestionVisibility,
+} from '@waldur/marketplace-checklist/questionDependencies';
 import { useQuestionNumberValidator } from '@waldur/marketplace-checklist/utils';
 
+import { QuestionWithMetadata } from './utils';
+
 interface ChecklistQuestionFieldProps {
-  question: QuestionAdmin;
+  question: QuestionWithMetadata;
+  allQuestions?: QuestionWithMetadata[];
+  formValues?: Record<string, any>;
 }
 
 export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
   question,
+  allQuestions,
+  formValues,
 }) => {
   const fieldName = `question_${question.uuid}`;
   const type = question.question_type;
   const isRequired = question.required;
 
   const numberValidator = useQuestionNumberValidator(question);
+
+  const isVisible = useMemo(() => {
+    if (!allQuestions || !formValues) {
+      return true;
+    }
+
+    // Build a map of question description to form field name for dependency lookup
+    const questionDescToFieldName = allQuestions.reduce(
+      (acc, q) => {
+        acc[q.description] = `question_${q.uuid}`;
+        return acc;
+      },
+      {} as Record<string, string>,
+    );
+
+    return evaluateQuestionVisibility(
+      question.dependencies_info as unknown as
+        | DependencyInfo
+        | null
+        | undefined,
+      questionDescToFieldName,
+      formValues,
+    );
+  }, [question.dependencies_info, allQuestions, formValues]);
+
+  if (!isVisible) {
+    return null;
+  }
 
   const validators = [];
   if (isRequired) validators.push(required);
@@ -76,7 +113,11 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
           component={FormGroup}
           simpleValue
           isClearable={!isRequired}
-          options={question.question_options?.map((opt) => ({
+          options={(
+            question.question_options as
+              | Array<{ label: string; uuid: string }>
+              | undefined
+          )?.map((opt) => ({
             label: opt.label,
             value: opt.uuid,
           }))}
@@ -93,7 +134,11 @@ export const ChecklistQuestionField: FC<ChecklistQuestionFieldProps> = ({
           simpleValue
           isMulti
           isClearable={!isRequired}
-          options={question.question_options?.map((opt) => ({
+          options={(
+            question.question_options as
+              | Array<{ label: string; uuid: string }>
+              | undefined
+          )?.map((opt) => ({
             label: opt.label,
             value: opt.uuid,
           }))}

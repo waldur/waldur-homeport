@@ -10,7 +10,7 @@ import {
   OnboardingQuestionMetadata,
   OnboardingVerification,
   OnboardingCompanyValidationRequestRequest,
-  QuestionAdmin,
+  QuestionWithAnswer,
   ValidationMethodEnum,
   BlankEnum,
 } from 'waldur-js-client';
@@ -20,7 +20,7 @@ import { translate } from '@waldur/i18n';
 
 import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';
 
-export interface QuestionWithMetadata extends QuestionAdmin {
+export interface QuestionWithMetadata extends QuestionWithAnswer {
   onboarding_metadata?: OnboardingQuestionMetadata;
 }
 
