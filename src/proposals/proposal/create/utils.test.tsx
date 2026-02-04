@@ -56,7 +56,7 @@ describe('useProposalDecisionActions', () => {
       },
     });
 
-    vi.mocked(waitForConfirmation).mockResolvedValue(undefined);
+    vi.mocked(waitForConfirmation).mockResolvedValue({ input: undefined });
     vi.mocked(proposalProposalsApprove).mockResolvedValue({} as any);
     vi.mocked(proposalProposalsReject).mockResolvedValue({} as any);
   });
@@ -152,7 +152,9 @@ describe('useProposalDecisionActions', () => {
 
     it('should call API with rejection reason and show success message', async () => {
       const rejectionReason = 'Insufficient budget';
-      vi.mocked(waitForConfirmation).mockResolvedValue(rejectionReason);
+      vi.mocked(waitForConfirmation).mockResolvedValue({
+        input: rejectionReason,
+      });
 
       const { result } = renderUseProposalDecisionActions();
 
@@ -167,7 +169,7 @@ describe('useProposalDecisionActions', () => {
     });
 
     it('should call API with empty reason when no input provided', async () => {
-      vi.mocked(waitForConfirmation).mockResolvedValue('');
+      vi.mocked(waitForConfirmation).mockResolvedValue({ input: '' });
 
       const { result } = renderUseProposalDecisionActions();
 
@@ -195,7 +197,7 @@ describe('useProposalDecisionActions', () => {
     });
 
     it('should handle undefined rejection reason', async () => {
-      vi.mocked(waitForConfirmation).mockResolvedValue(undefined);
+      vi.mocked(waitForConfirmation).mockResolvedValue({ input: undefined });
 
       const { result } = renderUseProposalDecisionActions();
 

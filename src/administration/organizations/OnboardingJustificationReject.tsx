@@ -30,7 +30,7 @@ export const OnboardingJustificationReject: FunctionComponent<{
       );
       await onboardingJustificationsReject({
         path: { uuid: row.uuid },
-        body: { staff_notes: staff_notes },
+        body: { staff_notes: staff_notes.input },
       });
       await refetch();
       dispatch(

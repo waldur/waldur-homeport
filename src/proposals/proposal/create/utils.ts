@@ -78,7 +78,7 @@ export const useProposalDecisionActions = (
 
       await proposalProposalsReject({
         path: { uuid: proposal.uuid },
-        body: { allocation_comment: reason },
+        body: { allocation_comment: reason.input },
       });
 
       dispatch(showSuccess(translate('Proposal has been rejected.')));

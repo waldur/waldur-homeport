@@ -34,7 +34,7 @@ export const OnboardingJustificationApprove: FunctionComponent<{
 
       await onboardingJustificationsApprove({
         path: { uuid: row.uuid },
-        body: { staff_notes: staff_notes },
+        body: { staff_notes: staff_notes.input },
       });
       await refetch();
       dispatch(
