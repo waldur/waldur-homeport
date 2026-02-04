@@ -114,6 +114,10 @@ const AttributeRow: FC<{
     value={
       attribute.type === 'html' ? (
         <FormattedHtml html={offering[attribute.key]} />
+      ) : attribute.type === 'boolean' ? (
+        <CheckOrX value={offering[attribute.key]} />
+      ) : attribute.type === 'list' ? (
+        offering[attribute.key]?.join(', ') || 'N/A'
       ) : (
         offering[attribute.key] || 'N/A'
       )

@@ -7,6 +7,8 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
+import { ResourceAction } from '../actions/constants';
+
 const ResourceShowUsageDialog = lazyComponent(() =>
   import('@waldur/marketplace/resources/usage/ResourceShowUsageDialog').then(
     (module) => ({ default: module.ResourceShowUsageDialog }),
@@ -30,6 +32,8 @@ export const ShowUsageAction = ({ resource }: { resource: Resource }) => {
     <ActionItem
       title={translate('Show usage')}
       iconNode={<ChartPieIcon weight="bold" />}
+      actionId={ResourceAction.SHOW_USAGE}
+      resource={resource}
       action={() =>
         callback({
           ...resource,

@@ -8,6 +8,8 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
+import { ResourceAction } from './constants';
+
 const MoveResourceDialog = lazyComponent(() =>
   import('./MoveResourceDialog').then((module) => ({
     default: module.MoveResourceDialog,
@@ -34,6 +36,8 @@ export const MoveResourceAction: ActionItemType = ({ resource, refetch }) => {
       action={callback}
       staff
       iconNode={<ArrowsOutCardinalIcon weight="bold" />}
+      actionId={ResourceAction.MOVE_RESOURCE}
+      resource={resource}
     />
   ) : null;
 };

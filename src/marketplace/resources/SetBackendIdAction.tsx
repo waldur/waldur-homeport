@@ -8,6 +8,8 @@ import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { ResourceAction } from './actions/constants';
+
 const SetBackendIdDialog = lazyComponent(() =>
   import('./SetBackendIdDialog').then((module) => ({
     default: module.SetBackendIdDialog,
@@ -31,6 +33,7 @@ export const SetBackendIdAction: ActionItemType = ({ resource, refetch }) => {
       extraResolve={{ refetch }}
       resource={resource}
       iconNode={<CodeIcon weight="bold" />}
+      actionId={ResourceAction.UPDATE_BACKEND_ID}
     />
   );
 };

@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceProviderResourcesSetAsErred } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -82,6 +83,8 @@ export const SetErredActionItem: FC<{
       className="text-danger"
       iconNode={<CloudXIcon weight="bold" />}
       iconColor="danger"
+      actionId={ResourceAction.SET_AS_ERRED}
+      resource={resource}
     />
   );
 };

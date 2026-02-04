@@ -11,6 +11,8 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { ResourceAction } from './constants';
+
 const EditResourceEndDateDialog = lazyComponent(() =>
   import('./EditResourceEndDateDialog').then((module) => ({
     default: module.EditResourceEndDateDialog,
@@ -59,6 +61,8 @@ export const EditResourceEndDateAction: ActionItemType = ({
       title={translate('Set termination date')}
       action={callback}
       iconNode={<CalendarBlankIcon weight="bold" />}
+      actionId={ResourceAction.EDIT_TERMINATION_DATE}
+      resource={_resource}
     />
   );
 };

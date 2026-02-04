@@ -1,9 +1,10 @@
 import { FC, useMemo } from 'react';
 
-import { StringField } from '@waldur/form';
+import { SelectField, StringField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { getResourceActionOptions } from '@waldur/marketplace/resources/actions/utils';
 import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 
 import {
@@ -33,6 +34,16 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
         label: translate('Backend ID display label'),
         key: 'plugin_options.backend_id_display_label',
         component: StringField,
+      },
+      {
+        label: translate('Disable resource actions'),
+        key: 'plugin_options.disabled_resource_actions',
+        component: SelectField,
+        fieldProps: {
+          options: getResourceActionOptions(),
+          isMulti: true,
+          simpleValue: true,
+        },
       },
     ];
 

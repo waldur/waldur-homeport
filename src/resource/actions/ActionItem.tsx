@@ -7,6 +7,7 @@ import { Variant } from 'react-bootstrap/esm/types';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
+import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
 import { ResourceActionMenuContext } from '@waldur/marketplace/resources/actions/ResourceActionMenuContext';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { CompactActionButton } from '@waldur/table/CompactActionButton';
@@ -23,11 +24,21 @@ export interface ActionItemProps {
   tooltip?: string;
   as?;
   size?: 'sm' | 'lg';
+  actionId?: ResourceAction;
+  resource?: any;
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
   const Component = props.as || Dropdown.Item;
   const actionMenuContext = useContext(ResourceActionMenuContext);
+  if (
+    props.actionId &&
+    props.resource?.offering_plugin_options?.disabled_resource_actions?.includes(
+      props.actionId,
+    )
+  ) {
+    return null;
+  }
   if (
     actionMenuContext?.query &&
     !props.title
