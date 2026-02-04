@@ -82,6 +82,7 @@ export const MoveProjectDialog: FunctionComponent<{
                   organizationAutocomplete(query, prevOptions, page, {
                     field: ['name', 'url', 'abbreviation'],
                     o: 'name',
+                    current_user_has_project_create_permission: true,
                   })
                 }
                 getOptionLabel={(option) =>
