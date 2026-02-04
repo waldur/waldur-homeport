@@ -1324,7 +1324,7 @@ export const SettingsDescription = [
       {
         key: 'SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED',
         description: translate('Enable automated daily updates for EESSI software catalog'),
-        default: true,
+        default: false,
         type: 'boolean',
       },
       {
@@ -1348,7 +1348,7 @@ export const SettingsDescription = [
       {
         key: 'SOFTWARE_CATALOG_SPACK_UPDATE_ENABLED',
         description: translate('Enable automated daily updates for Spack software catalog'),
-        default: true,
+        default: false,
         type: 'boolean',
       },
       {
