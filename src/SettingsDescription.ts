@@ -1319,7 +1319,30 @@ export const SettingsDescription = [
     ],
   },
   {
-    description: translate('Software catalog settings'),
+    description: translate('Software catalog general'),
+    items: [
+      {
+        key: 'SOFTWARE_CATALOG_UPDATE_EXISTING_PACKAGES',
+        description: translate('Update existing packages during catalog refresh'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'SOFTWARE_CATALOG_CLEANUP_ENABLED',
+        description: translate('Enable automatic cleanup of old catalog data'),
+        default: true,
+        type: 'boolean',
+      },
+      {
+        key: 'SOFTWARE_CATALOG_RETENTION_DAYS',
+        description: translate('Number of days to retain old catalog versions'),
+        default: 90,
+        type: 'integer',
+      },
+    ],
+  },
+  {
+    description: translate('Software catalog EESSI'),
     items: [
       {
         key: 'SOFTWARE_CATALOG_EESSI_UPDATE_ENABLED',
@@ -1345,6 +1368,11 @@ export const SettingsDescription = [
         default: true,
         type: 'boolean',
       },
+    ],
+  },
+  {
+    description: translate('Software catalog Spack'),
+    items: [
       {
         key: 'SOFTWARE_CATALOG_SPACK_UPDATE_ENABLED',
         description: translate('Enable automated daily updates for Spack software catalog'),
@@ -1362,24 +1390,6 @@ export const SettingsDescription = [
         description: translate('URL for Spack repology.json data'),
         default: 'https://raw.githubusercontent.com/spack/packages.spack.io/refs/heads/gh-pages/data/repology.json',
         type: 'string',
-      },
-      {
-        key: 'SOFTWARE_CATALOG_UPDATE_EXISTING_PACKAGES',
-        description: translate('Update existing packages during catalog refresh'),
-        default: true,
-        type: 'boolean',
-      },
-      {
-        key: 'SOFTWARE_CATALOG_CLEANUP_ENABLED',
-        description: translate('Enable automatic cleanup of old catalog data'),
-        default: true,
-        type: 'boolean',
-      },
-      {
-        key: 'SOFTWARE_CATALOG_RETENTION_DAYS',
-        description: translate('Number of days to retain old catalog versions'),
-        default: 90,
-        type: 'integer',
       },
     ],
   },

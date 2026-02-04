@@ -466,7 +466,7 @@ export const states: StateDeclaration[] = [
 
   {
     name: 'admin-software-catalog-settings',
-    url: 'software-catalog/',
+    url: 'software-catalog/?tab',
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
       import('./marketplace/AdministrationSoftwareCatalog').then((module) => ({
