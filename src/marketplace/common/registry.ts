@@ -154,6 +154,13 @@ export function getProvisioningConfigForm(offeringType: string) {
   );
 }
 
+export function getProvisioningConfigSection(offeringType: string) {
+  return (
+    Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&
+    REGISTRY[offeringType].provisioningConfigSection
+  );
+}
+
 export function getCredentialsForm(offeringType: string) {
   return (
     Object.prototype.hasOwnProperty.call(REGISTRY, offeringType) &&

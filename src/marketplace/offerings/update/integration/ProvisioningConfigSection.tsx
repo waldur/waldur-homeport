@@ -4,7 +4,10 @@ import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { EditSchedulesButton } from '@waldur/booking/EditSchedulesButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
-import { getProvisioningConfigForm } from '@waldur/marketplace/common/registry';
+import {
+  getProvisioningConfigForm,
+  getProvisioningConfigSection,
+} from '@waldur/marketplace/common/registry';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
 
 import { GoogleCalendarActions } from './GoogleCalendarActions';
@@ -22,9 +25,11 @@ export const ProvisioningConfigSection: FC<OfferingEditPanelProps> = (
     props.offering,
     props.refetch,
   );
+  const CustomSection = getProvisioningConfigSection(props.offering.type);
   const ProvisioningConfigForm = getProvisioningConfigForm(props.offering.type);
 
   if (
+    !CustomSection &&
     !ProvisioningConfigForm &&
     ![OFFERING_TYPE_CUSTOM_SCRIPTS, OFFERING_TYPE_BOOKING].includes(
       props.offering.type,
@@ -35,6 +40,10 @@ export const ProvisioningConfigSection: FC<OfferingEditPanelProps> = (
 
   if (props.offering.type === OFFERING_TYPE_CUSTOM_SCRIPTS) {
     return <ScriptIntegrationSummary {...props} />;
+  }
+
+  if (CustomSection) {
+    return <CustomSection {...props} />;
   }
 
   return (
