@@ -8,6 +8,8 @@ import { ActionItemType } from '@waldur/resource/actions/types';
 import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
 import { useValidators } from '@waldur/resource/actions/useValidators';
 
+import { ResourceAction } from '../actions/constants';
+
 const ChangeLimitsDialog = lazyComponent(() =>
   import('./ChangeLimitsDialog').then((module) => ({
     default: module.ChangeLimitsDialog,
@@ -31,6 +33,8 @@ const useChangeLimits = ({ resource, refetch }) => {
     disabled,
     iconNode: <TimerIcon weight="bold" />,
     important: true,
+    actionId: ResourceAction.UPDATE_LIMITS,
+    resource,
   };
 };
 

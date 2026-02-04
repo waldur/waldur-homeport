@@ -23,5 +23,12 @@ export const DialogActionItem: <T>(
     extraResolve,
     { size: dialogSize, formId },
   );
-  return <ActionItem {...rest} {...validationState} action={callback} />;
+  return (
+    <ActionItem
+      {...rest}
+      {...validationState}
+      resource={resource}
+      action={callback}
+    />
+  );
 };

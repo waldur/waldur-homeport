@@ -11,6 +11,8 @@ import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 
+import { ResourceAction } from '../actions/constants';
+
 const ChangePlanDialog = lazyComponent(() =>
   import('./ChangePlanDialog').then((module) => ({
     default: module.ChangePlanDialog,
@@ -78,6 +80,7 @@ export const ChangePlanAction: ActionItemType = ({ resource, refetch }) => {
       resource={resource}
       extraResolve={{ refetch }}
       iconNode={<ArrowsLeftRightIcon weight="bold" />}
+      actionId={ResourceAction.SWITCH_PLAN}
     />
   );
 };

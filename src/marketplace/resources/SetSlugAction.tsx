@@ -6,6 +6,8 @@ import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { ResourceAction } from './actions/constants';
+
 const SetSlugDialog = lazyComponent(() =>
   import('./SetSlugDialog').then((module) => ({
     default: module.SetSlugDialog,
@@ -25,6 +27,7 @@ export const SetSlugAction: ActionItemType = ({ resource, refetch }) => {
       resource={resource}
       staff
       iconNode={<LinkIcon weight="bold" />}
+      actionId={ResourceAction.SET_SLUG}
     />
   );
 };

@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { marketplaceResourcesUnlink } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { useUser } from '@waldur/workspace/hooks';
@@ -60,6 +61,8 @@ export const UnlinkActionItem: FC<{ resource }> = ({ resource }) => {
       staff
       iconNode={<LinkBreakIcon weight="bold" />}
       iconColor="danger"
+      actionId={ResourceAction.UNLINK}
+      resource={resource}
     />
   );
 };

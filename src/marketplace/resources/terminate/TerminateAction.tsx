@@ -8,6 +8,8 @@ import { validateState } from '@waldur/resource/actions/base';
 import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
 import { useValidators } from '@waldur/resource/actions/useValidators';
 
+import { ResourceAction } from '../actions/constants';
+
 const TerminateDialog = lazyComponent(() =>
   import('./TerminateDialog').then((module) => ({
     default: module.TerminateDialog,
@@ -35,6 +37,8 @@ export const TerminateAction: FC<TerminateActionProps> = ({
     tooltip,
     disabled,
     className: 'text-danger',
+    actionId: ResourceAction.TERMINATE,
+    resource,
   };
   return (
     <ActionItem

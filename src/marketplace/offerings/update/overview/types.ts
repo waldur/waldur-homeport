@@ -8,6 +8,7 @@ export interface Attribute {
   required?: boolean;
   description?: string;
   requiredMsg?: string;
+  options?: { value: string; label: string }[];
 }
 export interface EditOfferingProps {
   offering: Offering;

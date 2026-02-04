@@ -1,6 +1,7 @@
 import { ReactNode } from 'react';
 import { ButtonVariant, Variant } from 'react-bootstrap/esm/types';
 
+import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
 import { DialogSizeType } from '@waldur/modal/types';
 import { ActionValidator } from '@waldur/resource/actions/types';
 
@@ -34,4 +35,5 @@ export interface DialogActionProps<T>
   iconClass?: string;
   iconNode?: ReactNode;
   iconColor?: Variant;
+  actionId?: ResourceAction;
 }

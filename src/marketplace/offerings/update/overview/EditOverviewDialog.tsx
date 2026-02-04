@@ -5,10 +5,12 @@ import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
 import {
   StringField,
+  SelectField,
   FormContainer,
   FormFooter,
   TextField,
 } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
@@ -74,6 +76,20 @@ export const EditOverviewDialog = connect(
               <MarkdownEditor name="value" autoFocus hideLabel spaceless />
             ) : props.resolve.attribute.type === 'text' ? (
               <TextField name="value" hideLabel spaceless />
+            ) : props.resolve.attribute.type === 'boolean' ? (
+              <AwesomeCheckboxField
+                name="value"
+                label={props.resolve.attribute.title}
+                hideLabel
+              />
+            ) : props.resolve.attribute.type === 'list' ? (
+              <SelectField
+                name="value"
+                options={props.resolve.attribute.options}
+                multi={true}
+                simpleValue={true}
+                hideLabel
+              />
             ) : (
               <StringField
                 name="value"
