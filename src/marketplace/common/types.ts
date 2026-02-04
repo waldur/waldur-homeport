@@ -7,7 +7,10 @@ import {
 } from 'waldur-js-client';
 
 import { CheckoutSummaryProps } from '../deploy/types';
-import { OfferingEditPanelFormProps } from '../offerings/update/integration/types';
+import {
+  OfferingEditPanelFormProps,
+  OfferingEditPanelProps,
+} from '../offerings/update/integration/types';
 import {
   AttributesType,
   Offering,
@@ -35,6 +38,9 @@ export interface OfferingConfiguration<
   >;
   provisioningConfigForm?: LazyExoticComponent<
     ComponentType<OfferingEditPanelFormProps>
+  >;
+  provisioningConfigSection?: LazyExoticComponent<
+    ComponentType<OfferingEditPanelProps>
   >;
   credentialsForm?: LazyExoticComponent<
     ComponentType<OfferingEditPanelFormProps>

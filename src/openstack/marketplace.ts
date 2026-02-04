@@ -19,6 +19,11 @@ const OpenStackProvisioningConfigForm = lazyComponent(() =>
     default: module.OpenStackProvisioningConfigForm,
   })),
 );
+const OpenStackProvisioningConfigSection = lazyComponent(() =>
+  import('./OpenStackProvisioningConfigSection').then((module) => ({
+    default: module.OpenStackProvisioningConfigSection,
+  })),
+);
 const OpenstackTenantOrderForm = lazyComponent(() =>
   import('./deploy/OpenstackTenantOrderForm').then((module) => ({
     default: module.OpenstackTenantOrderForm,
@@ -72,6 +77,7 @@ export const OpenStackTenantOffering: OfferingConfiguration = {
   orderFormComponent: OpenstackTenantOrderForm,
   detailsComponent: OpenStackTenantDetails,
   provisioningConfigForm: OpenStackProvisioningConfigForm,
+  provisioningConfigSection: OpenStackProvisioningConfigSection,
   limitSerializer,
   limitParser,
   onlyOnePlan: true,

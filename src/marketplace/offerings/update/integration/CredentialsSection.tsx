@@ -1,5 +1,8 @@
+import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
+import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StringField } from '@waldur/form';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
@@ -7,8 +10,11 @@ import {
   getCredentialsForm,
   showBackendId,
 } from '@waldur/marketplace/common/registry';
+import { openModalDialog } from '@waldur/modal/actions';
+import { TENANT_TYPE } from '@waldur/openstack/constants';
 import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 import { GenerateSiteAgentConfigForOfferingButton } from '@waldur/site-agent/GenerateSiteAgentConfigForOfferingButton';
+import { ActionButton } from '@waldur/table/ActionButton';
 
 import {
   DefaultOfferingEditPanel,
@@ -20,9 +26,18 @@ import { SyncButton } from './SyncButton';
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
 
+const OpenStackDiscoveryDialog = lazyComponent(() =>
+  import('@waldur/openstack/openstack-discovery/OpenStackDiscoveryDialog').then(
+    (module) => ({
+      default: module.OpenStackDiscoveryDialog,
+    }),
+  ),
+);
+
 const TITLE = translate('Credentials');
 
 export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
+  const dispatch = useDispatch();
   const { update } = useUpdateOfferingIntegration(
     props.offering,
     props.refetch,
@@ -53,6 +68,24 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
           {isSlurmOffering && (
             <GenerateSiteAgentConfigForOfferingButton
               offering={props.offering}
+            />
+          )}
+          {props.offering.type === TENANT_TYPE && (
+            <ActionButton
+              action={() =>
+                dispatch(
+                  openModalDialog(OpenStackDiscoveryDialog, {
+                    size: 'xl',
+                    resolve: {
+                      offering: props.offering,
+                      refetch: props.refetch,
+                    },
+                  }),
+                )
+              }
+              variant="tertiary"
+              iconNode={<MagnifyingGlassIcon weight="bold" />}
+              title={translate('Discover')}
             />
           )}
           <SyncButton offering={props.offering} refetch={props.refetch} />
