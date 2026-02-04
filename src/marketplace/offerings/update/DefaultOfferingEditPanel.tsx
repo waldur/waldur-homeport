@@ -2,7 +2,7 @@ import { get } from 'lodash-es';
 
 import { CheckOrX } from '@waldur/core/CheckOrX';
 import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
-import { SecretField, TextField } from '@waldur/form';
+import { SecretField, SelectField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
 import FormTable from '@waldur/form/FormTable';
@@ -44,6 +44,8 @@ export const DefaultOfferingEditPanel = (
           ) : field.component === AwesomeCheckboxField ? (
             <CheckOrX value={get(props.offering, field.key)} />
           ) : field.component === CommaSeparatedListField ? (
+            (get(props.offering, field.key) || []).join(', ')
+          ) : field.component === SelectField ? (
             (get(props.offering, field.key) || []).join(', ')
           ) : (
             get(props.offering, field.key, 'N/A')
