@@ -16,6 +16,10 @@ export const getInvoiceStatusOptions = (accountingMode?) => {
       value: 'pending',
     },
     {
+      label: translate('Pending finalization'),
+      value: 'pending_finalization',
+    },
+    {
       label: translate('Canceled'),
       value: 'canceled',
     },
@@ -33,6 +37,11 @@ export const getInvoiceStatusOptions = (accountingMode?) => {
   }
 
   return result;
+};
+
+export const getInvoiceStateLabel = (state: string) => {
+  const option = getInvoiceStatusOptions().find((s) => s.value === state);
+  return option ? option.label : state;
 };
 
 const PureInvoicesFilter = () => {
