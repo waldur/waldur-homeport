@@ -71,7 +71,14 @@ type QueryResult = ReturnType<typeof queryFn>;
 
 export const useSearch = () => {
   const [query, setQuery] = useState('');
+  const [debouncedQuery, setDebouncedQuery] = useState('');
   const [show, setShow] = useState(false);
+
+  useEffect(() => {
+    const timer = setTimeout(() => setDebouncedQuery(query), 500);
+    return () => clearTimeout(timer);
+  }, [query]);
+
   const [activeTab, setActiveTab] = useState('all');
   const isStaffOrSupportUser = useSelector(isStaffOrSupport);
 
@@ -97,22 +104,20 @@ export const useSearch = () => {
   }, [handleClickOutside]);
 
   const result = useQuery<{}, {}, Awaited<ReturnType<QueryResult>>>({
-    queryKey: [`global-search`, query],
-
-    queryFn: queryFn(query),
-
+    queryKey: ['global-search', debouncedQuery],
+    queryFn: queryFn(debouncedQuery),
     staleTime: 60 * 1000,
     placeholderData: keepPreviousData,
-    enabled: show,
+    enabled: show && debouncedQuery.length > 0,
   });
 
   const usersResult = useQuery({
-    queryKey: ['global-search-users', query],
+    queryKey: ['global-search-users', debouncedQuery],
     queryFn: async ({ signal }) => {
       const response = await usersList({
         signal,
         query: {
-          query: query,
+          query: debouncedQuery,
           field: [
             'uuid',
             'full_name',
@@ -130,7 +135,7 @@ export const useSearch = () => {
         usersCount: fetchResultCount(response),
       };
     },
-    enabled: show && isStaffOrSupportUser,
+    enabled: show && isStaffOrSupportUser && debouncedQuery.length > 0,
     staleTime: 60 * 1000,
     placeholderData: keepPreviousData,
   });
