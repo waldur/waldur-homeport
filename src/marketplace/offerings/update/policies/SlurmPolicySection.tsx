@@ -4,6 +4,7 @@ import {
   Lightning,
   Play,
   Question,
+  Warning,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
@@ -720,6 +721,20 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           }
         >
           {enableToggle}
+          {existingPolicy?.warnings?.length > 0 && (
+            <div className="alert alert-warning d-flex align-items-start mb-4">
+              <Warning
+                weight="bold"
+                className="me-2 mt-1 flex-shrink-0"
+                size={20}
+              />
+              <div>
+                {existingPolicy.warnings.map((warning, index) => (
+                  <div key={index}>{warning}</div>
+                ))}
+              </div>
+            </div>
+          )}
           {existingPolicy && (
             <SlurmPolicyStatusSummary policyUuid={existingPolicy.uuid} />
           )}
