@@ -10,6 +10,7 @@ import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { ResourceAction } from '../actions/constants';
 import { validateStaffAction } from '../actions/utils';
 
 const SubmitReportDialog = lazyComponent(() =>
@@ -43,6 +44,7 @@ export const SubmitReportAction: ActionItemType = ({
       dialogSize="xl"
       resource={marketplaceResource || resource}
       extraResolve={{ refetch }}
+      actionId={ResourceAction.SUBMIT_REPORT}
     />
   );
 };

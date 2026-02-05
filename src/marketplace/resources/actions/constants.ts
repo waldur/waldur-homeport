@@ -13,4 +13,7 @@ export enum ResourceAction {
   SET_SLUG = 'set_slug',
   SHOW_USAGE = 'show_usage',
   SET_AS_ERRED = 'set_as_erred',
+  CREATE_ROBOT_ACCOUNT = 'create_robot_account',
+  SUBMIT_REPORT = 'submit_report',
+  REPORT_USAGE = 'report_usage',
 }

@@ -27,4 +27,10 @@ export const getResourceActionOptions = () => [
   { value: ResourceAction.SET_SLUG, label: translate('Set slug') },
   { value: ResourceAction.SHOW_USAGE, label: translate('Show usage') },
   { value: ResourceAction.SET_AS_ERRED, label: translate('Set as erred') },
+  {
+    value: ResourceAction.CREATE_ROBOT_ACCOUNT,
+    label: translate('Create robot account'),
+  },
+  { value: ResourceAction.SUBMIT_REPORT, label: translate('Submit report') },
+  { value: ResourceAction.REPORT_USAGE, label: translate('Report usage') },
 ];

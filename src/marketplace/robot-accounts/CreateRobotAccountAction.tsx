@@ -10,6 +10,8 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { ResourceAction } from '../resources/actions/constants';
+
 const CreateRobotAccountDialog = lazyComponent(() =>
   import('./CreateRobotAccountDialog').then((module) => ({
     default: module.CreateRobotAccountDialog,
@@ -42,6 +44,8 @@ export const CreateRobotAccountAction: ActionItemType = ({ resource }) => {
       title={translate('Create robot account')}
       action={callback}
       iconNode={<RobotIcon weight="bold" />}
+      actionId={ResourceAction.CREATE_ROBOT_ACCOUNT}
+      resource={resource}
     />
   );
 };

@@ -13,6 +13,8 @@ import { validateState } from '@waldur/resource/actions/base';
 import { useValidators } from '@waldur/resource/actions/useValidators';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { ResourceAction } from '../actions/constants';
+
 const ResourceCreateUsageDialog = lazyComponent(() =>
   import('@waldur/marketplace/resources/usage/ResourceCreateUsageDialog').then(
     (module) => ({ default: module.ResourceCreateUsageDialog }),
@@ -68,6 +70,8 @@ export const ReportUserUsageAction = ({ resource }: { resource: Resource }) => {
           backend_id: resource.backend_id,
         })
       }
+      actionId={ResourceAction.REPORT_USAGE}
+      resource={resource}
       disabled={isDisabled || isDisabledState}
       tooltip={[
         isDisabled &&
