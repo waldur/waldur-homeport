@@ -19,7 +19,11 @@ import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvoicePayButton } from '../details/InvoicePayButton';
 
-import { getInvoiceStatusOptions, InvoicesFilter } from './InvoicesFilter';
+import {
+  getInvoiceStateLabel,
+  getInvoiceStatusOptions,
+  InvoicesFilter,
+} from './InvoicesFilter';
 import { SendNotificationButton } from './SendNotificationButton';
 
 const RowActions = ({ row, fetch }) => (
@@ -55,13 +59,14 @@ export const InvoicesList: FunctionComponent = () => {
     },
     {
       title: translate('State'),
-      render: ({ row }) => row.state,
+      render: ({ row }) => getInvoiceStateLabel(row.state),
       filter: 'state',
       inlineFilter: (row) => [
         getInvoiceStatusOptions().find((s) => s.value === row.state),
       ],
 
-      export: 'state',
+      export: (row) => getInvoiceStateLabel(row.state),
+      exportKeys: ['state'],
     },
     {
       title: translate('Invoice date'),

@@ -36,7 +36,8 @@ export const MonthOverview: FunctionComponent<MonthOverviewProps> = ({
   costTrend,
 }) => {
   const isCurrentMonth = Boolean(
-    invoice.state === 'pending' && !invoice.invoice_date,
+    (invoice.state === 'pending' || invoice.state === 'pending_finalization') &&
+    !invoice.invoice_date,
   );
   const isAccountingMode = ENV.accountingMode === 'accounting';
   const maxProjectsShowCount = isCurrentMonth && !isAccountingMode ? 4 : 5;
