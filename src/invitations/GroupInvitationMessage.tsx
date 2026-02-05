@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
-import { Invitation } from 'waldur-js-client';
+import { GroupInvitation } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 
 import { formatInvitation } from './formatInvitation';
 
 export const GroupInvitationMessage: FunctionComponent<{
-  invitation: Invitation;
+  invitation: GroupInvitation;
 }> = ({ invitation }) => (
   <>
     <p>{formatInvitation(invitation)}</p>
