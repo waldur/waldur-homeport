@@ -12,7 +12,7 @@ import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatPhoneNumber } from '@waldur/core/utils';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
+import { SupportFeatures, UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { RoleEnum } from '@waldur/permissions/enums';
 import { formatRole } from '@waldur/permissions/utils';
@@ -380,6 +380,10 @@ export const UserList: FunctionComponent = () => {
     });
   }
 
+  const aiAssistantEnabled = isFeatureVisible(
+    SupportFeatures.enable_llm_assistant,
+  );
+
   const expandableRow = useCallback(
     ({ row }) => (
       <AITokenExpandableRow
@@ -403,8 +407,10 @@ export const UserList: FunctionComponent = () => {
       enableExport={true}
       tableActions={<UserTableActions refetch={props.fetch} />}
       hasQuery={true}
-      expandableRow={expandableRow}
-      isRowExpandable={(row) => !!row.is_active}
+      expandableRow={aiAssistantEnabled ? expandableRow : undefined}
+      isRowExpandable={
+        aiAssistantEnabled ? (row) => !!row.is_active : undefined
+      }
     />
   );
 };
