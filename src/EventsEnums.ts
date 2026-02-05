@@ -20,6 +20,11 @@ export const CallEnum = {
   call_document_removed: 'call_document_removed',
 };
 
+export const ChatEnum = {
+  chat_session_accessed: 'chat_session_accessed',
+  chat_thread_accessed: 'chat_thread_accessed',
+};
+
 export const CreditsEnum = {
   allowed_offerings_have_been_updated: 'allowed_offerings_have_been_updated',
   automatic_credit_adjustment: 'automatic_credit_adjustment',
@@ -94,6 +99,11 @@ export const Offering_accountingEnum = {
   marketplace_plan_created: 'marketplace_plan_created',
   marketplace_plan_deleted: 'marketplace_plan_deleted',
   marketplace_plan_updated: 'marketplace_plan_updated',
+};
+
+export const OnboardingEnum = {
+  onboarding_verification_deleted: 'onboarding_verification_deleted',
+  onboarding_verification_deleted_by_task: 'onboarding_verification_deleted_by_task',
 };
 
 export const PermissionsEnum = {

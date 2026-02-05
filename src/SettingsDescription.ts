@@ -1316,6 +1316,18 @@ export const SettingsDescription = [
         default: -1,
         type: 'integer',
       },
+      {
+        key: 'LLM_CHAT_SESSION_RETENTION_DAYS',
+        description: translate('Number of days to retain chat sessions before automatic deletion. Set to -1 to disable automatic cleanup.'),
+        default: 90,
+        type: 'integer',
+      },
+      {
+        key: 'LLM_CHAT_STORAGE_ENABLED',
+        description: translate('Enable persistent storage of chat messages. When disabled, messages are streamed but not saved.'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
   {
