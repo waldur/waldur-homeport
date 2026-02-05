@@ -7,6 +7,8 @@ import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constan
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
+import { ResourceAction } from './constants';
+
 export const SyncResourceAction = ({ resource, ...rest }) => {
   const dispatch = useDispatch();
   const callback = async () => {
@@ -28,6 +30,8 @@ export const SyncResourceAction = ({ resource, ...rest }) => {
       action={callback}
       {...rest}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
+      actionId={ResourceAction.SYNCHRONIZE}
+      resource={resource}
     />
   ) : null;
 };

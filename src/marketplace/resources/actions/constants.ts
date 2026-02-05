@@ -16,4 +16,7 @@ export enum ResourceAction {
   CREATE_ROBOT_ACCOUNT = 'create_robot_account',
   SUBMIT_REPORT = 'submit_report',
   REPORT_USAGE = 'report_usage',
+  VIEW_DETAILS = 'view_details',
+  SYNCHRONIZE = 'synchronize',
+  VERSION_HISTORY = 'version_history',
 }

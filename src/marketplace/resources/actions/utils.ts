@@ -33,4 +33,10 @@ export const getResourceActionOptions = () => [
   },
   { value: ResourceAction.SUBMIT_REPORT, label: translate('Submit report') },
   { value: ResourceAction.REPORT_USAGE, label: translate('Report usage') },
+  { value: ResourceAction.VIEW_DETAILS, label: translate('View details') },
+  { value: ResourceAction.SYNCHRONIZE, label: translate('Synchronise') },
+  {
+    value: ResourceAction.VERSION_HISTORY,
+    label: translate('Version history'),
+  },
 ];
