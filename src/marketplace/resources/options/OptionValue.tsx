@@ -50,7 +50,11 @@ export const OptionValue = ({
   }
   const Renderer = OptionValueRenders[option.type];
   if (Renderer) {
-    return Renderer(value);
+    const renderedValue = Renderer(value);
+    if (typeof renderedValue === 'object' && renderedValue !== null) {
+      return JSON.stringify(renderedValue);
+    }
+    return renderedValue;
   }
   return 'N/A';
 };

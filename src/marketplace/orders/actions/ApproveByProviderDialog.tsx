@@ -1,0 +1,207 @@
+import { CheckIcon } from '@phosphor-icons/react';
+import { useMutation, useQuery } from '@tanstack/react-query';
+import { FC } from 'react';
+import { Field, Form, useFormState } from 'react-final-form';
+import {
+  marketplaceOrdersApproveByProvider,
+  marketplaceResourcesOfferingRetrieve,
+  OrderDetails,
+} from 'waldur-js-client';
+
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SubmitButton } from '@waldur/form';
+import { FormFieldError } from '@waldur/form/FormFieldError';
+import { translate } from '@waldur/i18n';
+import {
+  buildOptionValidator,
+  getComponentAndParams,
+  OptionsForm,
+} from '@waldur/marketplace/common/OptionsForm';
+import { OptionValue } from '@waldur/marketplace/resources/options/OptionValue';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { useModal } from '@waldur/modal/hooks';
+import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { useNotify } from '@waldur/store/hooks';
+
+interface ApproveByProviderDialogProps {
+  resolve: {
+    order: OrderDetails;
+    refetch?: () => void;
+  };
+}
+
+/** Renders inline option row with submitted value and editable new value */
+const OptionRow: FC<{
+  optionKey: string;
+  option: any;
+  submittedValue: any;
+  resourceOptions: any;
+}> = ({ optionKey, option, submittedValue, resourceOptions }) => {
+  const { values } = useFormState({ subscription: { values: true } });
+  const { OptionField, params } = getComponentAndParams(
+    option,
+    optionKey,
+    null,
+    true,
+  );
+  const validateFn = buildOptionValidator(
+    option,
+    resourceOptions,
+    values,
+    params.validate,
+  );
+
+  return (
+    <tr>
+      <td>{option?.label || optionKey}</td>
+      <td className="text-muted">
+        <OptionValue option={option} value={submittedValue} />
+      </td>
+      <td>
+        <Field
+          name={`attributes.${optionKey}`}
+          component={OptionField as any}
+          validate={validateFn}
+          {...params}
+        />
+        <FormFieldError name={`attributes.${optionKey}`} />
+      </td>
+    </tr>
+  );
+};
+
+export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
+  resolve,
+}) => {
+  const { showErrorResponse, showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
+  // Determine if this order type supports options update
+  const orderAttributes = resolve.order.attributes as Record<string, any>;
+  const isOptionsUpdateOrder =
+    resolve.order.type === 'Create' ||
+    (resolve.order.type === 'Update' &&
+      typeof orderAttributes?.new_options === 'object');
+
+  // User-submitted options (from Update orders)
+  const userSubmittedOptions =
+    orderAttributes?.new_options || orderAttributes.options || {};
+
+  // Fetch offering to get resource_options (only if order supports options)
+  const offeringQuery = useQuery({
+    queryKey: [
+      'order-offering-options',
+      resolve.order.marketplace_resource_uuid,
+    ],
+    queryFn: () =>
+      marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resolve.order.marketplace_resource_uuid },
+      }).then((response) => response.data),
+    staleTime: 3 * 60 * 1000,
+    enabled: isOptionsUpdateOrder,
+  });
+
+  const resourceOptions = offeringQuery.data?.resource_options;
+  const hasOptions =
+    isOptionsUpdateOrder && Boolean(resourceOptions?.order?.length);
+
+  const { mutate: approveOrder, isPending } = useMutation({
+    mutationFn: async (formData: { attributes?: Record<string, any> }) => {
+      const body: { attributes?: { new_options?: Record<string, any> } } = {};
+      if (formData?.attributes && Object.keys(formData.attributes).length > 0) {
+        body.attributes = { new_options: formData.attributes };
+      }
+
+      await marketplaceOrdersApproveByProvider({
+        path: { uuid: resolve.order.uuid },
+        body: Object.keys(body).length > 0 ? body : undefined,
+      });
+    },
+    onSuccess: async () => {
+      showSuccess(translate('Order has been approved.'));
+      if (resolve.refetch) await resolve.refetch();
+      closeDialog();
+    },
+    onError: (error) => {
+      showErrorResponse(error, translate('Unable to approve order.'));
+    },
+  });
+
+  const handleSubmit = (formData: { attributes?: Record<string, any> }) => {
+    approveOrder(formData);
+  };
+
+  const hasUserSubmittedOptions = Object.keys(userSubmittedOptions).length > 0;
+
+  return (
+    <Form
+      onSubmit={handleSubmit}
+      initialValues={
+        hasUserSubmittedOptions ? { attributes: userSubmittedOptions } : {}
+      }
+    >
+      {({ handleSubmit, submitting }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={translate('Approve order')}
+            iconNode={<CheckIcon weight="bold" />}
+            iconColor="success"
+            footer={
+              <>
+                <CloseDialogButton className="min-w-125px" />
+                <SubmitButton
+                  disabled={offeringQuery.isLoading || !!offeringQuery.error}
+                  submitting={submitting || isPending}
+                  label={translate('Approve')}
+                />
+              </>
+            }
+          >
+            {offeringQuery.isLoading ? (
+              <LoadingSpinner />
+            ) : offeringQuery.error ? (
+              <LoadingErred loadData={offeringQuery.refetch} className="mb-4" />
+            ) : hasOptions ? (
+              <>
+                {hasUserSubmittedOptions ? (
+                  <div className="table-responsive">
+                    <table className="table table-row-bordered mb-0 align-middle">
+                      <thead>
+                        <tr>
+                          <th>{translate('Option')}</th>
+                          <th>{translate('Submitted value')}</th>
+                          <th>{translate('New value')}</th>
+                        </tr>
+                      </thead>
+                      <tbody>
+                        {resourceOptions.order.map((key) => {
+                          const option = resourceOptions.options[key];
+                          const submittedValue = userSubmittedOptions[key];
+                          if (submittedValue === undefined) return null;
+                          return (
+                            <OptionRow
+                              key={key}
+                              optionKey={key}
+                              option={option}
+                              submittedValue={submittedValue}
+                              resourceOptions={resourceOptions}
+                            />
+                          );
+                        })}
+                      </tbody>
+                    </table>
+                  </div>
+                ) : (
+                  <OptionsForm options={resourceOptions} finalForm />
+                )}
+              </>
+            ) : (
+              <p>{translate('Are you sure you want to approve this order?')}</p>
+            )}
+          </ModalDialog>
+        </form>
+      )}
+    </Form>
+  );
+};
