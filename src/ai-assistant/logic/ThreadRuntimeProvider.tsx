@@ -17,6 +17,7 @@ import '@waldur/ai-assistant/lib/registry/registerComponents';
 import { createThreadListAdapter } from '@waldur/ai-assistant/lib/thread/threadListAdapter';
 import {
   useAbortControllers,
+  useBackendThreadIds,
   useThreadRunningState,
 } from '@waldur/ai-assistant/lib/thread/threadStateHooks';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
@@ -43,6 +44,7 @@ export function ThreadRuntimeProvider({
   const { getIsRunning, setIsRunning } = useThreadRunningState();
   const { createController, abortThread, cleanupController } =
     useAbortControllers();
+  const { getBackendThreadId, setBackendThreadId } = useBackendThreadIds();
 
   // Get current thread state
   const isRunning = getIsRunning(currentThreadId);
@@ -133,6 +135,8 @@ export function ThreadRuntimeProvider({
           setHasNewMessages(true);
         }
       },
+      getBackendThreadId,
+      setBackendThreadId,
     }),
     [
       setMessages,
@@ -143,6 +147,8 @@ export function ThreadRuntimeProvider({
       cleanupController,
       abortThread,
       setHasNewMessages,
+      getBackendThreadId,
+      setBackendThreadId,
     ],
   );
 

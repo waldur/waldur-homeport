@@ -58,3 +58,18 @@ export const useAbortControllers = () => {
 
   return { createController, abortThread, cleanupController };
 };
+
+export const useBackendThreadIds = () => {
+  const [backendThreadIds, setBackendThreadIds] = useState<Map<string, string>>(
+    new Map(),
+  );
+
+  const getBackendThreadId = (threadId: string) =>
+    backendThreadIds.get(threadId);
+
+  const setBackendThreadId = (threadId: string, uuid: string) => {
+    setBackendThreadIds((prev) => new Map(prev).set(threadId, uuid));
+  };
+
+  return { getBackendThreadId, setBackendThreadId };
+};

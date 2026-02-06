@@ -18,19 +18,37 @@ interface ParseAssistantStreamParams extends Pick<
   assistantId: string;
   signal: AbortSignal;
   onStreamComplete?: () => void;
+  threadUuid?: string | null;
 }
 
-export async function parseAssistantStream(params: ParseAssistantStreamParams) {
-  const { contextInput, assistantId, signal, setMessages, onStreamComplete } =
-    params;
+export async function parseAssistantStream(
+  params: ParseAssistantStreamParams,
+): Promise<string | undefined> {
+  const {
+    contextInput,
+    assistantId,
+    signal,
+    setMessages,
+    onStreamComplete,
+    threadUuid,
+  } = params;
   let currentBlocks: UIBlock[] = [];
   let hadError = false;
+  let receivedThreadUuid: string | undefined;
 
   try {
-    for await (const part of streamChat(contextInput, signal)) {
+    for await (const part of streamChat(contextInput, signal, threadUuid)) {
       if (signal?.aborted) {
         break;
       }
+
+      // Capture thread_uuid from the backend metadata envelope
+      if (part.m?.thread_uuid && !receivedThreadUuid) {
+        receivedThreadUuid = part.m.thread_uuid as string;
+      }
+
+      // Skip metadata-only chunks (no renderable content)
+      if (!part.k && !part.c) continue;
 
       // Accumulate updates in memory
       currentBlocks = updateBlocks(currentBlocks, part);
@@ -117,4 +135,6 @@ export async function parseAssistantStream(params: ParseAssistantStreamParams) {
       onStreamComplete();
     }
   }
+
+  return receivedThreadUuid;
 }

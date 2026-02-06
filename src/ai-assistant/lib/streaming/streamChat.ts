@@ -5,12 +5,18 @@ import { translate } from '@waldur/i18n';
 export async function* streamChat(
   input: string,
   signal?: AbortSignal,
+  threadUuid?: string | null,
+  updateThreadName?: string,
 ): AsyncGenerator<ChatResponse> {
   let result;
 
   try {
     result = await chatStream({
-      body: { input },
+      body: {
+        input,
+        thread_uuid: threadUuid ?? undefined,
+        update_thread_name: updateThreadName,
+      },
       parseAs: 'stream',
       signal,
     });
