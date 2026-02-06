@@ -41,11 +41,13 @@ export const OptionsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
           },
           {
             title: translate('Old'),
-            render: ({ row }) => row.old,
+            render: ({ row }) =>
+              typeof row.old === 'object' ? JSON.stringify(row.old) : row.old,
           },
           {
             title: translate('New'),
-            render: ({ row }) => row.new,
+            render: ({ row }) =>
+              typeof row.new === 'object' ? JSON.stringify(row.new) : row.new,
           },
         ]}
       />

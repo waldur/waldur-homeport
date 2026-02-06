@@ -73,7 +73,7 @@ const VALIDATOR_MAPPING = {
  * @param allValues - All form values for cross-field validation
  * @param customValidator - Optional custom validator from params
  */
-const buildOptionValidator = (
+export const buildOptionValidator = (
   option: any,
   options: any,
   allValues: Record<string, any>,
@@ -124,7 +124,12 @@ interface OptionsFormProps {
   finalForm?: boolean;
 }
 
-const getComponentAndParams = (option, key, customer, finalForm = false) => {
+export const getComponentAndParams = (
+  option,
+  key,
+  customer,
+  finalForm = false,
+) => {
   let OptionField: FC<Partial<FormGroupProps>> = StringField;
   let params: Record<string, any> = {};
   switch (option.type) {
