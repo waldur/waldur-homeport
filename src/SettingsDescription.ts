@@ -1436,7 +1436,7 @@ export const SettingsDescription = [
       {
         key: 'USER_ACTIONS_ENABLED',
         description: translate('Enable user actions notification system.'),
-        default: true,
+        default: false,
         type: 'boolean',
       },
       {
