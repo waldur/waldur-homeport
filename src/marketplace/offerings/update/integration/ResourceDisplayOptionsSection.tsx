@@ -36,7 +36,7 @@ export const ResourceDisplayOptionsSection: FC<OfferingEditPanelProps> = (
         component: StringField,
       },
       {
-        label: translate('Disable resource actions'),
+        label: translate('Disabled resource actions'),
         key: 'plugin_options.disabled_resource_actions',
         component: SelectField,
         isStaffOnly: true,
