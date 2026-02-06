@@ -92,6 +92,7 @@ export const ResourceUsageFormContainer: FunctionComponent<OwnProps> = (
         // Report resource usage
         const requestBody: ComponentUsageCreateRequest = {
           plan_period: period.value?.uuid,
+          resource: period.value?.uuid ? undefined : props.params.resource_uuid,
           usages,
         };
         await marketplaceComponentUsagesSetUsage({

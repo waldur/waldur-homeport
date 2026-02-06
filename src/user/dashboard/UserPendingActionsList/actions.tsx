@@ -5,7 +5,7 @@ import { UserAction, userActionsExecuteAction } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
 
@@ -41,6 +41,10 @@ const createActionHandler = (
   router?: any,
   dispatch?: any,
 ) => {
+  const needsConfirmation =
+    action.confirmation_required ||
+    action.category === ActionCategory.TERMINATE;
+
   return async () => {
     // Special handling for Renew Resource action - open dialog directly
     if (action.label === 'Renew Resource') {
@@ -56,6 +60,24 @@ const createActionHandler = (
         }),
       );
       return;
+    }
+
+    // Confirmation for destructive or flagged actions
+    if (needsConfirmation && dispatch) {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Confirm action'),
+          translate('Are you sure you want to perform "{action}"?', {
+            action: action.label,
+          }),
+          {
+            forDeletion: action.category === ActionCategory.TERMINATE,
+          },
+        );
+      } catch {
+        return;
+      }
     }
 
     try {

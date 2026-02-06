@@ -1,0 +1,152 @@
+import { useQuery } from '@tanstack/react-query';
+import { FC, useMemo } from 'react';
+import { Table } from 'react-bootstrap';
+import { useFormState } from 'react-final-form';
+import {
+  marketplaceResourcesEstimateRenewal,
+  RenewalEstimateComponent,
+  Resource,
+} from 'waldur-js-client';
+
+import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { translate } from '@waldur/i18n';
+import { getFormLimitSerializer } from '@waldur/marketplace/common/registry';
+
+import { RenewAllocationFormData } from './types';
+
+interface RenewalCostBreakdownProps {
+  resource: Resource;
+  extensionMonths: number;
+}
+
+const ComponentRow: FC<{ item: RenewalEstimateComponent }> = ({ item }) => {
+  const delta =
+    item.billing_type === 'limit'
+      ? ` (+${item.new_limit - item.current_limit})`
+      : '';
+  return (
+    <tr>
+      <td>
+        {item.component_name}
+        {delta}
+      </td>
+      <td className="text-muted">
+        {defaultCurrency(item.unit_price)}/
+        {item.billing_type === 'prepaid'
+          ? translate('mo')
+          : item.billing_period === 'annual'
+            ? translate('yr')
+            : item.billing_period === 'quarterly'
+              ? translate('qtr')
+              : translate('mo')}
+        {' × '}
+        {item.new_limit} {item.measured_unit}
+        {' × '}
+        {item.period_description}
+      </td>
+      <td className="text-end text-nowrap">{defaultCurrency(item.total)}</td>
+    </tr>
+  );
+};
+
+export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
+  resource,
+  extensionMonths,
+}) => {
+  const shouldConcealPrices = isFeatureVisible(
+    MarketplaceFeatures.conceal_prices,
+  );
+  const { values } = useFormState<RenewAllocationFormData>();
+
+  const serializedLimits = useMemo(() => {
+    const formLimits = values[resource.uuid]?.limits || {};
+    const limitSerializer = getFormLimitSerializer(
+      resource.offering_type || '',
+    );
+    return limitSerializer(formLimits);
+  }, [values, resource.uuid, resource.offering_type]);
+
+  const { data, isLoading } = useQuery({
+    queryKey: [
+      'RenewalEstimate',
+      resource.uuid,
+      extensionMonths,
+      JSON.stringify(serializedLimits),
+    ],
+    queryFn: () =>
+      marketplaceResourcesEstimateRenewal({
+        path: { uuid: resource.uuid },
+        body: {
+          extension_months: extensionMonths,
+          limits: serializedLimits,
+        },
+      }).then((res) => res.data),
+    enabled: extensionMonths >= 12,
+    staleTime: 30_000,
+  });
+
+  if (shouldConcealPrices) return null;
+  if (isLoading) return <LoadingSpinner />;
+  if (!data || parseFloat(data.total) === 0) return null;
+
+  const subscriptionItems = data.components.filter(
+    (c) => c.billing_type === 'prepaid',
+  );
+  const limitItems = data.components.filter((c) => c.billing_type === 'limit');
+
+  return (
+    <div className="mt-4">
+      <h6 className="mb-3">{translate('Estimated cost breakdown')}</h6>
+      <Table size="sm" borderless>
+        <thead>
+          <tr className="border-bottom">
+            <th>{translate('Component')}</th>
+            <th>{translate('Details')}</th>
+            <th className="text-end">{translate('Cost')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {subscriptionItems.map((item) => (
+            <ComponentRow key={item.component_type} item={item} />
+          ))}
+          {subscriptionItems.length > 0 && limitItems.length > 0 && (
+            <tr className="border-top">
+              <td colSpan={2} className="text-end text-muted fw-semibold small">
+                {translate('Subscription subtotal')}
+              </td>
+              <td className="text-end text-nowrap fw-semibold">
+                {defaultCurrency(data.subscription_total)}
+              </td>
+            </tr>
+          )}
+          {limitItems.map((item) => (
+            <ComponentRow key={item.component_type} item={item} />
+          ))}
+          {limitItems.length > 0 && subscriptionItems.length > 0 && (
+            <tr className="border-top">
+              <td colSpan={2} className="text-end text-muted fw-semibold small">
+                {translate('Limit change subtotal')}
+              </td>
+              <td className="text-end text-nowrap fw-semibold">
+                {defaultCurrency(data.limit_change_total)}
+              </td>
+            </tr>
+          )}
+        </tbody>
+        <tfoot>
+          <tr className="border-top">
+            <td colSpan={2} className="text-end fw-bold">
+              {translate('Total')}
+            </td>
+            <td className="text-end text-nowrap fw-bold fs-5">
+              {defaultCurrency(data.total)}
+            </td>
+          </tr>
+        </tfoot>
+      </Table>
+    </div>
+  );
+};
