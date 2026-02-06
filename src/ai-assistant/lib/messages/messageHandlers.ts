@@ -50,15 +50,24 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
       const contextInput = addContext(input, deps.messages.slice(0, -1));
       const abortController = deps.createController(deps.currentThreadId);
 
-      await parseAssistantStream({
+      const backendThreadUuid = await parseAssistantStream({
         contextInput,
         assistantId: assistantPlaceholder.id!,
         signal: abortController.signal,
         setMessages: deps.setMessages,
         onStreamComplete: deps.onStreamComplete,
+        threadUuid: deps.getBackendThreadId(deps.currentThreadId),
       });
+      if (backendThreadUuid) {
+        deps.setBackendThreadId(deps.currentThreadId, backendThreadUuid);
+      }
       if (isFirstMessage && !abortController.signal.aborted) {
-        await generateAndSetThreadTitle(input, deps, abortController.signal);
+        await generateAndSetThreadTitle(
+          input,
+          deps,
+          abortController.signal,
+          backendThreadUuid,
+        );
       }
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
@@ -127,13 +136,17 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
       const contextInput = addContext(input, deps.messages.slice(0, userIndex));
       const abortController = deps.createController(deps.currentThreadId);
 
-      await parseAssistantStream({
+      const backendThreadUuid = await parseAssistantStream({
         contextInput,
         assistantId: assistantIdToStream,
         signal: abortController.signal,
         setMessages: deps.setMessages,
         onStreamComplete: deps.onStreamComplete,
+        threadUuid: deps.getBackendThreadId(deps.currentThreadId),
       });
+      if (backendThreadUuid) {
+        deps.setBackendThreadId(deps.currentThreadId, backendThreadUuid);
+      }
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
       deps.cleanupController(deps.currentThreadId);
@@ -190,13 +203,17 @@ export const createOnReload = (deps: MessageHandlerDependencies) => {
       const contextInput = addContext(input, deps.messages.slice(0, userIndex));
       const abortController = deps.createController(deps.currentThreadId);
 
-      await parseAssistantStream({
+      const backendThreadUuid = await parseAssistantStream({
         contextInput,
         assistantId: sourceId,
         signal: abortController.signal,
         setMessages: deps.setMessages,
         onStreamComplete: deps.onStreamComplete,
+        threadUuid: deps.getBackendThreadId(deps.currentThreadId),
       });
+      if (backendThreadUuid) {
+        deps.setBackendThreadId(deps.currentThreadId, backendThreadUuid);
+      }
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
       deps.cleanupController(deps.currentThreadId);

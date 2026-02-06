@@ -21,6 +21,8 @@ export interface MessageHandlerDependencies {
   cleanupController: (threadId: string) => void;
   abortThread: (threadId: string) => void;
   onStreamComplete?: () => void;
+  getBackendThreadId: (threadId: string) => string | undefined;
+  setBackendThreadId: (threadId: string, uuid: string) => void;
 }
 
 export type RunConfig = {

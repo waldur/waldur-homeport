@@ -6,13 +6,19 @@ export const generateAndSetThreadTitle = async (
   input: string,
   deps: Pick<MessageHandlerDependencies, 'currentThreadId' | 'setThreadList'>,
   signal?: AbortSignal,
+  backendThreadUuid?: string,
 ): Promise<void> => {
   try {
     const titlePrompt =
       "Generate a concise title of max 30 characters for the user's first message summary, and output ONLY the title. User Message:" +
       input;
 
-    const streamInput = streamChat(titlePrompt, signal);
+    const streamInput = streamChat(
+      titlePrompt,
+      signal,
+      null,
+      backendThreadUuid,
+    );
 
     let newTitle = '';
     for await (const part of streamInput) {
