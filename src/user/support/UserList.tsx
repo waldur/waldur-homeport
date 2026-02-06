@@ -24,6 +24,7 @@ import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
+import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserFilter } from './UserFilter';
 import { UserImpersonateButton } from './UserImpersonateButton';
@@ -125,7 +126,11 @@ const RowActions = ({ row }: { row: User }) => {
   return (
     <ActionsDropdown
       row={row}
-      actions={[UserImpersonateButton, UserDetailsButton]}
+      actions={[
+        RecalculateUserActionsButton,
+        UserImpersonateButton,
+        UserDetailsButton,
+      ]}
     />
   );
 };

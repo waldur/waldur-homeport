@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { Field } from 'react-final-form';
+import { Field, useFormState } from 'react-final-form';
+import { Resource } from 'waldur-js-client';
 
 import { StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -8,10 +9,14 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Field as SummaryField } from '@waldur/resource/summary';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
+import { RenewalCostBreakdown } from './RenewalCostBreakdown';
+import { RenewAllocationFormData } from './types';
+
 export const Step3PurchaseOrder: FC<WizardStepProps> = (props) => {
   const resources = props.data?.resources;
-  const resource = resources?.[0];
+  const resource: Resource = resources?.[0];
   const isMulti = resources && resources.length > 1;
+  const { values } = useFormState<RenewAllocationFormData>();
 
   // Build resource identifier string
   const resourceIdentifier = [resource.slug, resource.backend_id, resource.uuid]
@@ -41,6 +46,11 @@ export const Step3PurchaseOrder: FC<WizardStepProps> = (props) => {
             labelCol={4}
             valueCol={8}
             className="mb-3"
+          />
+          {/* Show estimated renewal cost before PO reference */}
+          <RenewalCostBreakdown
+            resource={resource}
+            extensionMonths={values.extension_months || 0}
           />
           <hr className="mb-4" />
         </div>

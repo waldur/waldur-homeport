@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo } from 'react';
 import {
   marketplaceResourcesRenew,
@@ -57,6 +58,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 }) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
+  const router = useRouter();
 
   // Fetch resource by UUID if only UUID is provided
   const shouldFetch =
@@ -113,39 +115,49 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
           });
         });
 
-        await Promise.allSettled(promises).then((results) => {
-          const errorResults = results.filter(
-            (res) => res.status === 'rejected',
-          );
-          const successResults = results.filter(
-            (res) => res.status === 'fulfilled',
-          );
+        const results = await Promise.allSettled(promises);
+        const errorResults = results.filter((res) => res.status === 'rejected');
+        const successResults = results.filter(
+          (res) => res.status === 'fulfilled',
+        );
 
-          if (successResults.length) {
-            resolve.refetch?.();
-            if (isMulti) {
-              showSuccess(
-                translate(
-                  'Renewal request has been created for {n} resources.',
-                  { n: successResults.length },
-                ),
-              );
-            } else {
-              showSuccess(translate('Renewal request has been created.'));
-            }
-          }
-          if (errorResults.length) {
-            showErrorResponse(errorResults[0].reason);
+        if (successResults.length) {
+          resolve.refetch?.();
+          if (isMulti) {
+            showSuccess(
+              translate('Renewal request has been created for {n} resources.', {
+                n: successResults.length,
+              }),
+            );
           } else {
-            closeDialog();
+            showSuccess(translate('Renewal request has been created.'));
           }
-          return results;
-        });
+        }
+        if (errorResults.length) {
+          showErrorResponse(errorResults[0].reason);
+        } else {
+          closeDialog();
+          // For single resource, redirect to the order detail page
+          if (!isMulti && successResults.length === 1) {
+            const orderUuid = successResults[0].value.data.order_uuid;
+            router.stateService.go('marketplace-orders.details', {
+              order_uuid: orderUuid,
+            });
+          }
+        }
       } catch (e) {
         showErrorResponse(e, translate('Unable to send renewal request.'));
       }
     },
-    [resources, resolve, showSuccess, showErrorResponse, closeDialog, isMulti],
+    [
+      resources,
+      resolve,
+      showSuccess,
+      showErrorResponse,
+      closeDialog,
+      isMulti,
+      router,
+    ],
   );
 
   // Show loading state when fetching resource

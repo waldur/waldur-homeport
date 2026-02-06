@@ -68,15 +68,28 @@ export const OrderActionsButton = ({
     );
   }, [order, user, hideProviderActions]);
 
+  const showConsumerActions = useMemo(() => {
+    if (order.state !== 'pending-consumer') return false;
+    const canApprove = hasPermission(user, {
+      permission: PermissionEnum.APPROVE_ORDER,
+      customerId: order.customer_uuid,
+      projectId: order.project_uuid,
+    });
+    const canReject = hasPermission(user, {
+      permission: PermissionEnum.REJECT_ORDER,
+      customerId: order.customer_uuid,
+      projectId: order.project_uuid,
+    });
+    return canApprove || canReject;
+  }, [order, user]);
+
   if (order.state === 'pending-provider' && !hideProviderActions) {
     return (
       <OrderProviderActions order={order} refetch={loadData} labeledDropdown />
     );
   }
 
-  return showCancelButton ||
-    showMarkAsDoneButton ||
-    order.state === 'pending-consumer' ? (
+  return showCancelButton || showMarkAsDoneButton || showConsumerActions ? (
     <ActionsDropdownComponent label={translate('Actions')} labeled size="lg">
       {showMarkAsDoneButton && (
         <MarkAsDoneButton row={order} refetch={loadData} />
@@ -84,7 +97,9 @@ export const OrderActionsButton = ({
       {showCancelButton && (
         <CancelOrderButton uuid={order.uuid} loadData={loadData} />
       )}
-      <OrderConsumerActions order={order} offering={offering} />
+      {showConsumerActions && (
+        <OrderConsumerActions order={order} offering={offering} />
+      )}
     </ActionsDropdownComponent>
   ) : null;
 };
