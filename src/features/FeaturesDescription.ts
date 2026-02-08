@@ -277,6 +277,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable Data Access tab showing who can access user profile data.'),
       },
       {
+        key: 'show_identity_bridge',
+        description: translate('Show identity bridge information in user profiles and admin views.'),
+      },
+      {
         key: 'show_slug',
         description: translate('Enable display of slug field in user summary.'),
       },

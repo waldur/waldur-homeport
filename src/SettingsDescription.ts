@@ -1523,5 +1523,28 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('Identity Bridge'),
+    items: [
+      {
+        key: 'FEDERATED_IDENTITY_SYNC_ENABLED',
+        description: translate('Enable the Identity Bridge API for push-based ISD user attribute synchronization.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES',
+        description: translate('User attributes settable via Identity Bridge. Must be a subset of WRITABLE_USER_FIELDS.'),
+        default: ['first_name', 'last_name', 'email', 'organization', 'affiliations'],
+        type: 'list_field',
+      },
+      {
+        key: 'FEDERATED_IDENTITY_DEACTIVATION_POLICY',
+        description: translate('When to deactivate a federated user: \'all_isds_removed\' (only when removed from all ISDs) or \'any_isd_removed\' (on first ISD removal, backward compatible).'),
+        default: 'any_isd_removed',
+        type: 'string',
+      },
+    ],
+  },
 ];
 

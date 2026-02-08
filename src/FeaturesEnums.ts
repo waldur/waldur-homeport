@@ -84,6 +84,7 @@ export enum UserFeatures {
   pending_user_actions = 'user.pending_user_actions',
   preferred_language = 'user.preferred_language',
   show_data_access = 'user.show_data_access',
+  show_identity_bridge = 'user.show_identity_bridge',
   show_slug = 'user.show_slug',
   show_username = 'user.show_username',
   ssh_keys = 'user.ssh_keys',
