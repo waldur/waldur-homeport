@@ -105,13 +105,13 @@ export function submitPermissionRequest(token) {
                 {
                   type: 'danger',
                   size: 'sm',
-                  positiveButton: translate('Go to dashboard'),
+                  positiveButton: translate('My requests'),
                   positiveButtonVariant: 'primary w-175px',
                   onlyPositiveButton: true,
                 },
               );
             } finally {
-              router.stateService.go('profile.details');
+              router.stateService.go('profile.permission-requests');
             }
           });
       } else {

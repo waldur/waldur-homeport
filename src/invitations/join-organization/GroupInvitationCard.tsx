@@ -35,7 +35,7 @@ export const GroupInvitationCard: FC<{ row: GroupInvitation }> = ({
     [invitation, dispatch],
   );
 
-  const description = invitation.scope_description;
+  const description = invitation.custom_text || invitation.scope_description;
 
   return (
     <Field
