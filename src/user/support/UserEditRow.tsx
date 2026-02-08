@@ -6,12 +6,17 @@ import {
 import { useDispatch } from 'react-redux';
 import { User } from 'waldur-js-client';
 
+import { formatDateTime } from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
+
+import { formatIsdName } from './IsdBadges';
 
 interface RowProps {
   user: User;
@@ -25,6 +30,8 @@ interface RowProps {
   protectedMsg?: string;
   name: string;
   actions?: React.ReactNode;
+  /** Identity Bridge attribute source info (auto-derived from user if not provided) */
+  attributeSource?: { source: string; timestamp: string };
 }
 
 const EditFieldDialog = lazyComponent(() =>
@@ -49,13 +56,29 @@ export const UserEditRow = (props: RowProps) => {
   // Show warning only when required field is missing AND protected (user can't fix it)
   const showProtectedMissingWarning = props.required && isEmpty && isProtected;
 
+  // Auto-derive attribute source from user when Identity Bridge feature is enabled
+  const userSources = props.user.attribute_sources as Record<
+    string,
+    { source: string; timestamp: string }
+  >;
+  const attributeSource =
+    props.attributeSource ||
+    (isFeatureVisible(UserFeatures.show_identity_bridge)
+      ? userSources?.[props.name]
+      : undefined);
+
   const protectedTooltip = props.protectedMsg
     ? props.protectedMsg
-    : props.user.identity_provider_label
-      ? translate('Information is coming from {identityProvider}', {
-          identityProvider: props.user.identity_provider_label,
+    : attributeSource?.source
+      ? translate('Managed by {source}. Last synced: {date}', {
+          source: formatIsdName(attributeSource.source),
+          date: formatDateTime(attributeSource.timestamp),
         })
-      : translate('Information is coming from identity provider');
+      : props.user.identity_provider_label
+        ? translate('Information is coming from {identityProvider}', {
+            identityProvider: props.user.identity_provider_label,
+          })
+        : translate('Information is coming from identity provider');
 
   // Build the value display with appropriate indicators
   const valueDisplay = (

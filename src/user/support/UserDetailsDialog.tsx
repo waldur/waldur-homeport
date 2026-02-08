@@ -20,6 +20,8 @@ import { getUser } from '@waldur/workspace/selectors';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 
+import { UserIdentityBridgeTab } from './UserIdentityBridgeTab';
+
 interface UserDetailsDialogProps {
   resolve: {
     user: User;
@@ -84,6 +86,12 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
             (currentUser.is_staff || currentUser.is_support) && (
               <Tab eventKey={7} title={translate('Data access')}>
                 <DataAccessDialogContent user={user} />
+              </Tab>
+            )}
+          {isFeatureVisible(UserFeatures.show_identity_bridge) &&
+            currentUser.is_staff && (
+              <Tab eventKey={8} title={translate('Identity Bridge')}>
+                <UserIdentityBridgeTab user={user} />
               </Tab>
             )}
         </Tabs>
