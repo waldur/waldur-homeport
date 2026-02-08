@@ -25,6 +25,7 @@ type ConfigurableProfileAttribute =
   | 'nationalities'
   | 'organization_country'
   | 'organization_type'
+  | 'organization_registry_code'
   | 'eduperson_assurance'
   | 'civil_number'
   | 'identity_source';
