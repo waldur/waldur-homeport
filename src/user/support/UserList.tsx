@@ -24,6 +24,7 @@ import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
+import { IsdBadges } from './IsdBadges';
 import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserFilter } from './UserFilter';
@@ -190,6 +191,8 @@ const mandatoryFields: UsersListData['query']['field'] = [
   'url',
   'permissions',
   'has_active_session',
+  'active_isds',
+  'is_identity_manager',
 ];
 
 export const UserList: FunctionComponent = () => {
@@ -369,6 +372,27 @@ export const UserList: FunctionComponent = () => {
       keys: ['slug'],
       id: 'slug',
     });
+  }
+
+  if (isFeatureVisible(UserFeatures.show_identity_bridge)) {
+    columns.push(
+      {
+        title: translate('Active ISDs'),
+        render: ({ row }) => (
+          <IsdBadges isds={(row.active_isds as string[]) || []} />
+        ),
+        keys: ['active_isds'],
+        id: 'active_isds',
+        optional: true,
+      },
+      {
+        title: translate('Identity manager'),
+        render: ({ row }) => <BooleanField value={row.is_identity_manager} />,
+        keys: ['is_identity_manager'],
+        id: 'is_identity_manager',
+        optional: true,
+      },
+    );
   }
 
   const validColumns = columns.map((column) => column.id);

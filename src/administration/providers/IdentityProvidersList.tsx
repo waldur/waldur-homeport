@@ -1,4 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
+import { useMemo } from 'react';
 import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -14,6 +15,8 @@ import {
 import { ENV } from '@waldur/core/config';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { SettingsDescription } from '@waldur/SettingsDescription';
@@ -22,6 +25,7 @@ import { getIdentityProviders } from '../api';
 import { FieldRow } from '../settings/FieldRow';
 import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
 
+import { IdentityBridgeTab } from './IdentityBridgeTab';
 import { ProviderCard } from './ProviderCard';
 
 const IDENTITY_TABS = [
@@ -182,7 +186,19 @@ const ProvidersTabContent = ({
 );
 
 export const IdentityProvidersList = () => {
-  const { activeKey, handleSelect } = useSettingsUrlSync(IDENTITY_TABS);
+  const tabs = useMemo(() => {
+    const result = [...IDENTITY_TABS];
+    if (isFeatureVisible(UserFeatures.show_identity_bridge)) {
+      result.push({
+        key: 'identity-bridge',
+        title: translate('Identity Bridge'),
+        groupName: null,
+      });
+    }
+    return result;
+  }, []);
+
+  const { activeKey, handleSelect } = useSettingsUrlSync(tabs);
 
   const {
     data: providersData,
@@ -247,7 +263,7 @@ export const IdentityProvidersList = () => {
       <Card.Body>
         <Tab.Container activeKey={activeKey} onSelect={handleSelect}>
           <Nav variant="tabs" className="nav-line-tabs mb-5">
-            {IDENTITY_TABS.map((tab) => (
+            {tabs.map((tab) => (
               <Nav.Item key={tab.key}>
                 <Nav.Link eventKey={tab.key} className="cursor-pointer">
                   {tab.title}
@@ -256,9 +272,17 @@ export const IdentityProvidersList = () => {
             ))}
           </Nav>
           <Tab.Content>
-            {IDENTITY_TABS.map((tab) => (
+            {tabs.map((tab) => (
               <Tab.Pane key={tab.key} eventKey={tab.key}>
-                {tab.groupName ? (
+                {tab.key === 'identity-bridge' ? (
+                  <>
+                    <SettingsTabContent
+                      groupName={translate('Identity Bridge')}
+                      settingsData={settingsData}
+                    />
+                    <IdentityBridgeTab />
+                  </>
+                ) : tab.groupName ? (
                   <SettingsTabContent
                     groupName={tab.groupName}
                     settingsData={settingsData}

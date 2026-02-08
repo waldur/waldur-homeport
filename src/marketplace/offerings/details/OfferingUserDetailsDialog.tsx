@@ -10,12 +10,15 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { IsdBadges } from '@waldur/user/support/IsdBadges';
 
 interface OfferingUserDetailsDialogProps {
   resolve: { offeringUser: OfferingUser; offeringUuid: string };
@@ -216,6 +219,16 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
               value={formatDateTime(offeringUser.modified)}
             />
           )}
+          {isFeatureVisible(UserFeatures.show_identity_bridge) &&
+            Array.isArray(offeringUser.user_active_isds) &&
+            offeringUser.user_active_isds.length > 0 && (
+              <FormTable.Item
+                label={translate('Active ISDs')}
+                value={
+                  <IsdBadges isds={offeringUser.user_active_isds as string[]} />
+                }
+              />
+            )}
         </FormTable>
       )}
     </ModalDialog>
