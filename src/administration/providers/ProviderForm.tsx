@@ -281,6 +281,17 @@ export const ProviderForm = () => (
         component={StringField as any}
       />
     </FormGroup>
+    <FormGroup
+      label={translate('Organization registry code field')}
+      help={translate(
+        'The OIDC claim to be used as the value for the organization_registry_code field.',
+      )}
+    >
+      <Field
+        name="attribute_mapping.organization_registry_code"
+        component={StringField as any}
+      />
+    </FormGroup>
     <AllowedRedirectsField />
     <Form.Group className="mb-7">
       <Field
