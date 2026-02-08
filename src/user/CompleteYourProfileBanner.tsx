@@ -4,26 +4,26 @@ import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
 
 // Field name to human-readable label mapping
-const FIELD_LABELS: Record<string, string> = {
-  first_name: 'First name',
-  last_name: 'Last name',
-  email: 'Email',
-  phone_number: 'Phone number',
-  organization: 'Organization',
-  job_title: 'Job position',
-  native_name: 'Native name',
-  personal_title: 'Personal title',
-  gender: 'Gender',
-  place_of_birth: 'Place of birth',
-  country_of_residence: 'Country of residence',
-  nationality: 'Nationality',
-  nationalities: 'Nationalities',
-  organization_country: 'Organization country',
-  organization_type: 'Organization type',
+const FIELD_LABELS: Record<string, () => string> = {
+  first_name: () => translate('First name'),
+  last_name: () => translate('Last name'),
+  email: () => translate('Email'),
+  phone_number: () => translate('Phone number'),
+  organization: () => translate('Organization'),
+  job_title: () => translate('Job position'),
+  native_name: () => translate('Native name'),
+  personal_title: () => translate('Personal title'),
+  gender: () => translate('Gender'),
+  place_of_birth: () => translate('Place of birth'),
+  country_of_residence: () => translate('Country of residence'),
+  nationality: () => translate('Nationality'),
+  nationalities: () => translate('Nationalities'),
+  organization_country: () => translate('Organization country'),
+  organization_type: () => translate('Organization type'),
 };
 
 const formatFieldName = (field: string): string => {
-  return FIELD_LABELS[field] || field.replace(/_/g, ' ');
+  return FIELD_LABELS[field]?.() || field.replace(/_/g, ' ');
 };
 
 interface CompleteYourProfileBannerProps {
