@@ -36,7 +36,11 @@ export const GroupInvitationConfirmDialog: FunctionComponent<{
 
   return (
     <ModalDialog
-      title={translate('Request permission')}
+      title={
+        invitation?.is_public
+          ? translate('Join organization')
+          : translate('Request permission')
+      }
       footer={
         !asyncResult.loading &&
         !asyncResult.error && (

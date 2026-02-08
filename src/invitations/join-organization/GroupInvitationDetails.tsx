@@ -30,6 +30,12 @@ export const GroupInvitationDetails = ({
         :
       </h6>
       <p className="text-muted">{resolve.invitation.scope_name}</p>
+      {resolve.invitation.custom_text && (
+        <>
+          <h6 className="text-gray-700">{translate('Message')}:</h6>
+          <p className="text-muted">{resolve.invitation.custom_text}</p>
+        </>
+      )}
       <h6 className="text-gray-700">{translate('Description')}:</h6>
       <p className="text-muted">{resolve.invitation.scope_description}</p>
     </ModalDialog>

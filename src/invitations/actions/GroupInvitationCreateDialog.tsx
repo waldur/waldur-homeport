@@ -6,9 +6,9 @@ import { userGroupInvitationsCreate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
 import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
-import { required } from '@waldur/core/validators';
+import { required, validateMaxLength } from '@waldur/core/validators';
 import { useCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
-import { SubmitButton } from '@waldur/form';
+import { SubmitButton, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { invitationTypeOptions } from '@waldur/invitations/actions/constants';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
@@ -40,6 +40,7 @@ interface GroupInvitationCreateFormData {
   auto_approve: boolean;
   user_affiliations: Array<string>;
   user_email_patterns: Array<string>;
+  custom_text: string;
 }
 
 export const GroupInvitationCreateDialog = ({
@@ -75,6 +76,7 @@ export const GroupInvitationCreateDialog = ({
             is_public: formData.type === 'public',
             role: formData.role.uuid,
             scope,
+            custom_text: formData.custom_text || '',
             ...(formData.role.content_type === 'project'
               ? {
                   project_role: formData.role.uuid,
@@ -161,6 +163,25 @@ export const GroupInvitationCreateDialog = ({
                 <RestrictionsInfoCard
                   customer={customer}
                   project={values?.project}
+                />
+                <Field
+                  name="custom_text"
+                  validate={validateMaxLength(500)}
+                  render={({ input, meta }) => (
+                    <FormGroup
+                      label={translate('Custom text')}
+                      description={translate(
+                        'Optional message displayed to users viewing this invitation.',
+                      )}
+                      meta={meta}
+                    >
+                      <TextField
+                        input={input as any}
+                        isInvalid={Boolean(meta.error)}
+                        disabled={fieldsDisabled}
+                      />
+                    </FormGroup>
+                  )}
                 />
                 <AdvancedSettingsGroup disabled={fieldsDisabled} />
                 <SubmitButton

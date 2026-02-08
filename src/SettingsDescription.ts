@@ -970,12 +970,6 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
-      {
-        key: 'REMOTE_EDUTEAMS_REFRESH_TOKEN',
-        description: translate('Rotating OAuth2 refresh token for remote eduTEAMS API access. Automatically updated by the periodic token rotation task. If empty, falls back to REMOTE_EDUTEAMS_REFRESH_TOKEN from Django settings.'),
-        default: '',
-        type: 'secret_field',
-      },
     ],
   },
   {

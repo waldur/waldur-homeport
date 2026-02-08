@@ -55,6 +55,14 @@ export const GroupInvitationsListExpandableRow: FunctionComponent<{
       labelClass="min-w-150px fw-bolder"
       space={5}
     />
+    {row.custom_text && (
+      <Field
+        label={translate('Custom text')}
+        value={row.custom_text}
+        labelClass="min-w-150px fw-bolder"
+        space={5}
+      />
+    )}
     {row.project_name_template && (
       <Field
         label={translate('Project name template')}
