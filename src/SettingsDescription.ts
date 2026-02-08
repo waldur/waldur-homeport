@@ -1006,13 +1006,13 @@ export const SettingsDescription = [
     items: [
       {
         key: 'DEFAULT_OFFERING_USER_ATTRIBUTES',
-        description: translate('Default user attributes exposed to service providers (OfferingUser API) when no explicit config exists. Available options: username, full_name, email, phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, eduperson_assurance, civil_number, identity_source.'),
+        description: translate('Default user attributes exposed to service providers (OfferingUser API) when no explicit config exists. Available options: username, full_name, email, phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, organization_registry_code, eduperson_assurance, civil_number, identity_source.'),
         default: ['username', 'full_name', 'email'],
         type: 'list_field',
       },
       {
         key: 'ENABLED_USER_PROFILE_ATTRIBUTES',
-        description: translate('List of enabled user profile attributes. Controls IdP sync and UI display. Core attributes (username, email, first_name, last_name, full_name) are always enabled. Available options: phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, eduperson_assurance, civil_number, identity_source.'),
+        description: translate('List of enabled user profile attributes. Controls IdP sync and UI display. Core attributes (username, email, first_name, last_name, full_name) are always enabled. Available options: phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, organization_registry_code, eduperson_assurance, civil_number, identity_source.'),
         default: ['phone_number', 'organization', 'job_title', 'affiliations'],
         type: 'list_field',
       },
