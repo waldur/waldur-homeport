@@ -28,6 +28,10 @@ export const FeaturesDescription: FeatureSection[] = [
         key: 'show_permission_reviews',
         description: translate('Allows to show permission reviews tab and popups for organisations.'),
       },
+      {
+        key: 'show_project_digest',
+        description: translate('Enable display of project digest configuration in organization settings.'),
+      },
     ],
   },
   {

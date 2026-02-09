@@ -1546,5 +1546,16 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('Project Digest'),
+    items: [
+      {
+        key: 'ENABLE_PROJECT_DIGEST',
+        description: translate('Enable project digest email notifications for organizations.'),
+        default: false,
+        type: 'boolean',
+      },
+    ],
+  },
 ];
 

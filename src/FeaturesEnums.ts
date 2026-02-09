@@ -7,6 +7,7 @@ export enum CustomerFeatures {
   show_domain = 'customer.show_domain',
   show_onboarding = 'customer.show_onboarding',
   show_permission_reviews = 'customer.show_permission_reviews',
+  show_project_digest = 'customer.show_project_digest',
 }
 
 export enum DeploymentFeatures {
