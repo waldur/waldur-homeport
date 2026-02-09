@@ -9,7 +9,7 @@ import { getAllPages } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import {
   NumberField,
   SelectField,
@@ -234,9 +234,11 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 name="accounting_start_date"
                 label={translate('Accounting start date')}
               />
-            ) : props.resolve.name === 'bank_name' ? (
+            ) : props.resolve.name === 'bank_name' &&
+              isFeatureVisible(CustomerFeatures.show_banking_data) ? (
               <StringField name="bank_name" label={translate('Bank name')} />
-            ) : props.resolve.name === 'bank_account' ? (
+            ) : props.resolve.name === 'bank_account' &&
+              isFeatureVisible(CustomerFeatures.show_banking_data) ? (
               <StringField
                 name="bank_account"
                 label={translate('Bank account')}

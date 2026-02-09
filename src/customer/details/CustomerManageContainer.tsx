@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { canRegisterServiceProviderForCustomer } from '@waldur/marketplace/service-providers/selectors';
 import { PageBarTab } from '@waldur/navigation/types';
@@ -117,7 +117,8 @@ export const CustomerManageContainer = () => {
               title: translate('Credit management'),
             }
           : null,
-        userIsOwnerOrStaff
+        userIsOwnerOrStaff &&
+        isFeatureVisible(CustomerFeatures.show_project_digest)
           ? {
               key: 'project-digest',
               component: ProjectDigestConfigPage,

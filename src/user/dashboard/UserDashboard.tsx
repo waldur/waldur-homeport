@@ -14,10 +14,9 @@ import {
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures, UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -208,7 +207,7 @@ export const UserDashboard: FC = () => {
         </Row>
       )}
 
-      {ENV.plugins?.WALDUR_CORE?.USER_ACTIONS_ENABLED && (
+      {isFeatureVisible(UserFeatures.pending_user_actions) && (
         <div className="mb-5">
           <UserPendingActionsList user={user} />
         </div>

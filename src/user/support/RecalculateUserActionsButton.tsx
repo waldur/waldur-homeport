@@ -3,6 +3,8 @@ import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -20,7 +22,7 @@ export const RecalculateUserActionsButton: FunctionComponent<{ row }> = ({
   const user = useSelector(getUser);
   const dispatch = useDispatch();
 
-  if (!user?.is_staff) {
+  if (!user?.is_staff || !isFeatureVisible(UserFeatures.pending_user_actions)) {
     return null;
   }
 

@@ -14,7 +14,7 @@ import { OrganizationCard } from '@waldur/customer/list/OrganizationCard';
 import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
 import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
@@ -228,20 +228,24 @@ export const OrganizationsList: FunctionComponent = () => {
       optional: true,
       id: 'accounting_start_date',
     },
-    {
-      title: translate('Bank account'),
-      render: ({ row }) => <>{row.bank_account || DASH_ESCAPE_CODE}</>,
-      keys: ['bank_account'],
-      optional: true,
-      id: 'bank_account',
-    },
-    {
-      title: translate('Bank name'),
-      render: ({ row }) => <>{row.bank_name || DASH_ESCAPE_CODE}</>,
-      keys: ['bank_name'],
-      optional: true,
-      id: 'bank_name',
-    },
+    ...(isFeatureVisible(CustomerFeatures.show_banking_data)
+      ? ([
+          {
+            title: translate('Bank account'),
+            render: ({ row }) => <>{row.bank_account || DASH_ESCAPE_CODE}</>,
+            keys: ['bank_account'],
+            optional: true,
+            id: 'bank_account',
+          },
+          {
+            title: translate('Bank name'),
+            render: ({ row }) => <>{row.bank_name || DASH_ESCAPE_CODE}</>,
+            keys: ['bank_name'],
+            optional: true,
+            id: 'bank_name',
+          },
+        ] as Array<Column<Customer>>)
+      : []),
     {
       title: translate('Default tax percent'),
       render: ({ row }) => <>{row.default_tax_percent || DASH_ESCAPE_CODE}</>,

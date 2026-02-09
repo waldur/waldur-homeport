@@ -9,6 +9,7 @@ import {
   MarketplaceFeatures,
   ResellerFeatures,
   SupportFeatures,
+  UserFeatures,
 } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
@@ -589,6 +590,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('User actions'),
+      feature: UserFeatures.pending_user_actions,
     },
   },
 

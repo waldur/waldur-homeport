@@ -14,7 +14,7 @@ import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 import {
-  customerOptionalFields,
+  getCustomerOptionalFields,
   deleteDuplicateRecords,
   parseOrganizationsFile,
   validateOrganizationCreation,
@@ -99,7 +99,7 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           title: translate('Email'),
           render: ({ row }) => renderFieldOrDash(row.email),
         },
-        ...customerOptionalFields.map(
+        ...getCustomerOptionalFields().map(
           (field) =>
             data.some((record) => Boolean(record[field.key])) && {
               title: field.title,
