@@ -1,5 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 import { IdentityProvider, overrideSettingsRetrieve } from 'waldur-js-client';
 
@@ -27,6 +27,7 @@ import { useSettingsUrlSync } from '../settings/useSettingsUrlSync';
 
 import { IdentityBridgeTab } from './IdentityBridgeTab';
 import { ProviderCard } from './ProviderCard';
+import { ScimSyncButton } from './ScimSyncButton';
 
 const IDENTITY_TABS = [
   {
@@ -69,12 +70,34 @@ const IDENTITY_TABS = [
 const SettingsTabContent = ({
   groupName,
   settingsData,
+  actions,
 }: {
   groupName: string;
   settingsData: Record<string, unknown>;
+  actions?: ReactNode;
 }) => {
   const group = SettingsDescription.find((g) => g.description === groupName);
   if (!group) return null;
+
+  if (actions) {
+    return (
+      <FormTable.Card
+        title={groupName}
+        actions={actions}
+        className="card-bordered mb-5"
+      >
+        <FormTable>
+          {group.items.map((item) => (
+            <FieldRow
+              key={item.key}
+              item={item}
+              value={settingsData?.[item.key]}
+            />
+          ))}
+        </FormTable>
+      </FormTable.Card>
+    );
+  }
 
   return (
     <FormTable>
@@ -286,6 +309,12 @@ export const IdentityProvidersList = () => {
                   <SettingsTabContent
                     groupName={tab.groupName}
                     settingsData={settingsData}
+                    actions={
+                      tab.key === 'scim' &&
+                      settingsData?.['SCIM_MEMBERSHIP_SYNC_ENABLED'] ? (
+                        <ScimSyncButton />
+                      ) : undefined
+                    }
                   />
                 ) : (
                   <ProvidersTabContent
