@@ -3,7 +3,6 @@ import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import {
   BasePublicPlan,
-  BillingUnit,
   LimitPeriodEnum,
   PublicOfferingDetails,
 } from 'waldur-js-client';
@@ -82,24 +81,18 @@ export const combinePrices = (
         }
       }
       const price = plan.prices[component.type] || 0;
-      // Calculate pricePerBillingPeriod based on plan.unit and component.limit_period
-      const pricePerBillingPeriod = calculatePricePerBillingPeriod(
-        price,
-        component.limit_period as LimitPeriodEnum,
-        plan.unit,
-      );
-
+      // The price from the plan component is always per billing unit
+      // (per the plan's unit field: hour, day, month, etc.).
+      // The limit_period only defines how limits are evaluated/reset,
+      // not how prices are denominated.
       const subTotal = price * amount;
-      const subTotalPerBillingPeriod =
-        (pricePerBillingPeriod || price) * amount;
-      const prices = multipliers.map((mult) => mult * subTotalPerBillingPeriod);
+      const prices = multipliers.map((mult) => mult * subTotal);
       return {
         ...component,
         amount,
         prices,
         subTotal,
         price,
-        pricePerBillingPeriod,
         min_value: offeringLimits[component.type].min,
         max_value: offeringLimits[component.type].max,
       };
@@ -147,45 +140,6 @@ export const combinePrices = (
       periodKeys: [],
     };
   }
-};
-
-const LIMIT_PERIOD_IN_MONTHS: Partial<Record<LimitPeriodEnum, number>> = {
-  month: 1,
-  quarterly: 3,
-  annual: 12,
-};
-const BILLING_UNIT_IN_MONTHS: Partial<Record<BillingUnit, number>> = {
-  month: 1,
-  quarter: 3,
-  half_month: 0.5,
-  day: 1 / 30,
-  hour: 1 / (30 * 24),
-};
-
-const calculatePricePerBillingPeriod = (
-  price: number,
-  limitPeriod: LimitPeriodEnum,
-  billingUnit: BillingUnit,
-): number => {
-  if (billingUnit === 'quantity') {
-    return price;
-  }
-
-  const limitPeriodInMonths = LIMIT_PERIOD_IN_MONTHS[limitPeriod];
-  const billingUnitInMonths = BILLING_UNIT_IN_MONTHS[billingUnit];
-
-  if (!billingUnitInMonths) {
-    throw new Error(`Unsupported billing unit: ${billingUnit}`);
-  }
-
-  // price per month
-  const pricePerMonth = price / limitPeriodInMonths;
-
-  // price per billing unit
-  const pricePerBillingPeriod = pricePerMonth * billingUnitInMonths;
-
-  // safely rounding to avoid floating point issues
-  return Number(pricePerBillingPeriod.toFixed(6));
 };
 
 const calculateTotalPeriods = (components: Component[]) => {
