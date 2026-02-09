@@ -18,16 +18,23 @@ import { PublicOfferingsList } from './PublicOfferingsList';
 
 export const AllOfferingsList = () => {
   const {
-    params: { initialMode },
+    params: { initialMode, tag_name },
   } = useCurrentStateAndParams();
   useTitle(translate('Offerings'));
   useMarketplacePublicTabs();
   const filters = useSelector(getMarketplaceFilters);
   useToolbarActions(<MarketplaceLandingFilter />);
   useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
-  const filter = useMemo(
+  const contextFilter = useMemo(
     () => getContextFiltersForOfferings(filters),
     [filters],
+  );
+  const filter = useMemo(
+    () => ({
+      ...contextFilter,
+      ...(tag_name ? { tag_name } : undefined),
+    }),
+    [contextFilter, tag_name],
   );
 
   return (
