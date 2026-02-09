@@ -20,12 +20,19 @@ const validateRows = (value) => {
   return undefined;
 };
 
+interface EmailsListGroupWrapperProps {
+  roles;
+  customer;
+  project;
+  disabled;
+}
+
 export const EmailsListGroupWrapper = ({
   roles,
   customer,
   project,
   disabled,
-}) => {
+}: EmailsListGroupWrapperProps) => {
   return (
     <FieldArray
       name="rows"

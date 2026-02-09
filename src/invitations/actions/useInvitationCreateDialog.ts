@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { userInvitationsCreate } from 'waldur-js-client';
+import { userInvitationsCheckDuplicates } from 'waldur-js-client/sdk.gen';
 
 import { ENV } from '@waldur/core/config';
 import { translate } from '@waldur/i18n';
@@ -42,6 +43,65 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
   const defaultRole = useMemo(
     () => (roles.length > 0 ? roles[0] : null),
     [roles, context],
+  );
+
+  const getScopeForRow = useCallback(
+    (row: GroupInvitationFormData['rows'][0]) => {
+      if (!row?.role_project?.role) return null;
+      if (row.role_project.role.content_type === 'project') {
+        return row.role_project.project?.url ?? null;
+      }
+      if (row.role_project.role.content_type === 'customer') {
+        return context.customer.url;
+      }
+      return context.scope?.url ?? null;
+    },
+    [context],
+  );
+
+  const checkDuplicates = useCallback(
+    async (
+      formData: GroupInvitationFormData,
+    ): Promise<Array<{ email: string; roleUuid: string }>> => {
+      const validRows = (formData.rows ?? []).filter(
+        (row) => row?.email && row?.role_project?.role,
+      );
+      if (validRows.length === 0) return [];
+
+      const byScope = new Map<string, { email: string; role: string }[]>();
+      for (const row of validRows) {
+        const scope = getScopeForRow(row);
+        if (!scope) continue;
+        const list = byScope.get(scope) ?? [];
+        list.push({
+          email: row.email,
+          role: row.role_project.role.uuid,
+        });
+        byScope.set(scope, list);
+      }
+
+      const duplicatePairs: Array<{ email: string; roleUuid: string }> = [];
+      await Promise.all(
+        Array.from(byScope.entries()).map(async ([scope, invitations]) => {
+          const response = await userInvitationsCheckDuplicates({
+            body: { scope, invitations },
+          });
+          const data = response.data as {
+            duplicates?: Array<{ email: string; role: string }>;
+          };
+          if (data?.duplicates?.length) {
+            duplicatePairs.push(
+              ...data.duplicates.map((d) => ({
+                email: d.email,
+                roleUuid: d.role,
+              })),
+            );
+          }
+        }),
+      );
+      return duplicatePairs;
+    },
+    [getScopeForRow],
   );
 
   const createInvitations = useCallback(
@@ -110,6 +170,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
   const finish = () => dispatch(closeModalDialog());
 
   return {
+    checkDuplicates,
     createInvitations,
     finish,
     roles,

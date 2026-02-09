@@ -1,9 +1,11 @@
 import arrayMutators from 'final-form-arrays';
-import { useCallback, useState } from 'react';
-import { Form } from 'react-final-form';
+import { useCallback, useRef, useState } from 'react';
+import { Form, FormSpy } from 'react-final-form';
+import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { showErrorResponse } from '@waldur/store/notify';
 
 import { RestrictionsInfoCard } from '../RestrictionsInfoCard';
 import { GroupInviteRow, InvitationContext } from '../types';
@@ -23,14 +25,101 @@ interface OwnProps {
 const initialValues = { rows: [{}] };
 
 export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
-  const { createInvitations, finish, roles, defaultRole, defaultProject } =
-    useInvitationCreateDialog(resolve);
+  const dispatch = useDispatch();
+  const {
+    checkDuplicates,
+    createInvitations,
+    finish,
+    roles,
+    defaultRole,
+    defaultProject,
+  } = useInvitationCreateDialog(resolve);
 
   const [step, setStep] = useState<1 | 2>(1);
+  const [_duplicateEmails, setDuplicateEmails] = useState<string[]>([]);
+  const [isCheckingDuplicates, setIsCheckingDuplicates] = useState(false);
+  const rowsSnapshotRef = useRef<string>('');
 
   const submit = useCallback(
     (formData) => createInvitations(formData).then(() => finish()),
     [createInvitations, finish],
+  );
+
+  const handleContinueClick = useCallback(
+    async (formApi: {
+      getState: () => { values: { rows?: GroupInviteRow[] }; valid?: boolean };
+      change: (name: string, value: unknown) => void;
+    }) => {
+      const formValues = formApi.getState().values;
+      const rows = formValues.rows ?? [];
+
+      // 1. In-form duplicates: (email + role) pairs that appear more than once – checked only on Continue
+      const pairCounts = new Map<string, number>();
+      rows.forEach((row: GroupInviteRow) => {
+        const email = row?.email?.trim();
+        const roleUuid = row?.role_project?.role?.uuid;
+        if (email && roleUuid) {
+          const key = `${email}\0${roleUuid}`;
+          pairCounts.set(key, (pairCounts.get(key) ?? 0) + 1);
+        }
+      });
+      const duplicateInFormPairs = Array.from(pairCounts.entries())
+        .filter(([, count]) => count > 1)
+        .map(([key]) => {
+          const [email, roleUuid] = key.split('\0');
+          return { email, roleUuid };
+        });
+
+      if (duplicateInFormPairs.length > 0) {
+        formApi.change('_duplicateInFormEmails', duplicateInFormPairs);
+        rows.forEach((row: GroupInviteRow, i: number) => {
+          if (row?.email) {
+            formApi.change(`rows.${i}.email`, row.email);
+          }
+        });
+        return false;
+      }
+
+      formApi.change('_duplicateInFormEmails', undefined);
+
+      setIsCheckingDuplicates(true);
+      try {
+        const duplicatePairs = await checkDuplicates(
+          formValues as Parameters<typeof checkDuplicates>[0],
+        );
+        if (duplicatePairs.length > 0) {
+          setDuplicateEmails(duplicatePairs.map((p) => p.email));
+          formApi.change('_duplicateEmails', duplicatePairs);
+          rows.forEach((row: GroupInviteRow, i: number) => {
+            if (row?.email && row?.role_project?.role?.uuid) {
+              const isDuplicate = duplicatePairs.some(
+                (p) =>
+                  p.email === row.email &&
+                  p.roleUuid === row.role_project.role.uuid,
+              );
+              if (isDuplicate) {
+                formApi.change(`rows.${i}.email`, row.email);
+              }
+            }
+          });
+          return false;
+        }
+        setDuplicateEmails([]);
+        formApi.change('_duplicateEmails', undefined);
+        return true;
+      } catch (e) {
+        dispatch(
+          showErrorResponse(
+            e,
+            translate('Unable to check for duplicate invitations.'),
+          ),
+        );
+        return false;
+      } finally {
+        setIsCheckingDuplicates(false);
+      }
+    },
+    [checkDuplicates, dispatch],
   );
 
   const populateRows = useCallback(
@@ -91,6 +180,9 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
                 step={step}
                 submitting={submitting}
                 valid={valid}
+                isCheckingDuplicates={isCheckingDuplicates}
+                onContinueClick={handleContinueClick}
+                form={form}
               />
             }
           >
@@ -103,6 +195,31 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
               <RestrictionsInfoCard
                 customer={resolve.customer}
                 project={resolve.project}
+              />
+            )}
+            {step === 1 && (
+              <FormSpy
+                subscription={{ values: true }}
+                onChange={(state) => {
+                  const rows = (state.values?.rows ?? []) as GroupInviteRow[];
+                  const snapshot = rows
+                    .map(
+                      (r) =>
+                        `${r?.email ?? ''}\0${r?.role_project?.role?.uuid ?? ''}`,
+                    )
+                    .join('\n');
+                  const prev = rowsSnapshotRef.current;
+                  if (prev !== '' && prev !== snapshot) {
+                    rowsSnapshotRef.current = snapshot;
+                    rows.forEach((row: GroupInviteRow, i: number) => {
+                      if (row?.email) {
+                        form.change(`rows.${i}.email`, row.email);
+                      }
+                    });
+                  } else if (prev === '') {
+                    rowsSnapshotRef.current = snapshot;
+                  }
+                }}
               />
             )}
             <div>
