@@ -115,6 +115,9 @@ const getTabs = (
         }
       : null,
     isFeatureVisible(MarketplaceFeatures.catalogue_only) ||
+    isFeatureVisible(
+      MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
+    ) ||
     !offering.plans?.length
       ? null
       : {
@@ -122,7 +125,10 @@ const getTabs = (
           key: 'pricing',
           component: PublicOfferingPricing,
         },
-    isFeatureVisible(MarketplaceFeatures.catalogue_only)
+    isFeatureVisible(MarketplaceFeatures.catalogue_only) ||
+    isFeatureVisible(
+      MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
+    )
       ? null
       : {
           title: translate('Components'),

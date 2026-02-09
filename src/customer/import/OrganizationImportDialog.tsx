@@ -16,7 +16,7 @@ import { Step1DownloadTemplate } from './Step1DownloadTemplate';
 import { Step2UploadFile } from './Step2UploadFile';
 import { Step3PreviewAndImport } from './Step3PreviewAndImport';
 import {
-  customerOptionalFields,
+  getCustomerOptionalFields,
   deleteDuplicateRecords,
   parseOrganizationsFile,
   validateOrganizationCreation,
@@ -81,7 +81,7 @@ export const OrganizationImportDialog: FC<OrganizationImportDialogProps> = (
           const payload = {
             name: org.name,
             email: org.email,
-            ...customerOptionalFields.reduce((acc, field) => {
+            ...getCustomerOptionalFields().reduce((acc, field) => {
               acc[field.key] = org[field.key];
               return acc;
             }, {}),

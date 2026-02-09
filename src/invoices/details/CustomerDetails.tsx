@@ -2,6 +2,8 @@ import React from 'react';
 import { CustomerDetails as CustomerDetailsType } from 'waldur-js-client';
 
 import { formatPhoneNumber } from '@waldur/core/utils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 
 interface CustomerDetailsProps {
@@ -31,11 +33,13 @@ export const CustomerDetails: React.FC<CustomerDetailsProps> = ({
       </div>
     )}
 
-    {customer.bank_name && customer.bank_account && (
-      <div>
-        {customer.bank_name}, {customer.bank_account}
-      </div>
-    )}
+    {isFeatureVisible(CustomerFeatures.show_banking_data) &&
+      customer.bank_name &&
+      customer.bank_account && (
+        <div>
+          {customer.bank_name}, {customer.bank_account}
+        </div>
+      )}
 
     {customer.vat_code && (
       <div>

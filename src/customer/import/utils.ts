@@ -2,6 +2,8 @@ import Papa from 'papaparse';
 import { Customer } from 'waldur-js-client';
 
 import { email } from '@waldur/core/validators';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 
 import templateFile from './organizations_template.json';
@@ -13,7 +15,9 @@ interface IField {
 
 type RawCustomer = Partial<Customer>;
 
-export const customerOptionalFields = [
+const bankingFieldKeys = ['bank_name', 'bank_account'];
+
+const allCustomerOptionalFields = [
   { title: translate('Abbreviation'), key: 'abbreviation' },
   { title: translate('Address'), key: 'address' },
   { title: translate('Postal'), key: 'postal' },
@@ -28,6 +32,13 @@ export const customerOptionalFields = [
   { title: translate('Default tax percent'), key: 'default_tax_percent' },
   { title: translate('Notification emails'), key: 'notification_emails' },
 ];
+
+export const getCustomerOptionalFields = () =>
+  isFeatureVisible(CustomerFeatures.show_banking_data)
+    ? allCustomerOptionalFields
+    : allCustomerOptionalFields.filter(
+        (f) => !bankingFieldKeys.includes(f.key),
+      );
 
 export const parseOrganizationsFile = (file: File) => {
   return new Promise<RawCustomer[]>((resolve, reject) =>

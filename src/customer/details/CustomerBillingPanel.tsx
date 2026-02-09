@@ -1,6 +1,8 @@
 import { FC, useMemo } from 'react';
 
 import { formatDate } from '@waldur/core/dateUtils';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
@@ -10,23 +12,28 @@ import { CustomerEditPanelProps } from './types';
 
 export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
   const detailsRows = useMemo(
-    () => [
-      {
-        label: translate('Accounting start date'),
-        key: 'accounting_start_date',
-        value: formatDate(props.customer.accounting_start_date),
-      },
-      {
-        label: translate('Bank name'),
-        key: 'bank_name',
-        value: props.customer.bank_name,
-      },
-      {
-        label: translate('Bank account'),
-        key: 'bank_account',
-        value: props.customer.bank_account,
-      },
-    ],
+    () =>
+      [
+        {
+          label: translate('Accounting start date'),
+          key: 'accounting_start_date',
+          value: formatDate(props.customer.accounting_start_date),
+        },
+        isFeatureVisible(CustomerFeatures.show_banking_data)
+          ? {
+              label: translate('Bank name'),
+              key: 'bank_name',
+              value: props.customer.bank_name,
+            }
+          : null,
+        isFeatureVisible(CustomerFeatures.show_banking_data)
+          ? {
+              label: translate('Bank account'),
+              key: 'bank_account',
+              value: props.customer.bank_account,
+            }
+          : null,
+      ].filter(Boolean),
 
     [props.customer],
   );
