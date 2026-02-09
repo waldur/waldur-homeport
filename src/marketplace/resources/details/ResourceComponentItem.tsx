@@ -13,8 +13,10 @@ interface ResourceComponentItemProps {
   expanded?: boolean;
 }
 
-const normalize = (value: number, factor: number) =>
-  ((value || 0) / (factor || 1)).toFixed();
+const normalize = (value: number, factor: number) => {
+  const result = (value || 0) / (factor || 1);
+  return Number.isInteger(result) ? result.toFixed() : result.toFixed(2);
+};
 
 export const getQuotaCellProps = (component: OfferingComponent, resource) => {
   if (!component) {
