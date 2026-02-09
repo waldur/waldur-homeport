@@ -32,9 +32,7 @@ export const VendorOfferingMappingsList: FunctionComponent<
   VendorOfferingMappingsListProps
 > = ({ settings }) => {
   const filter = useMemo(
-    () => ({
-      ...(settings?.uuid ? { settings_uuid: settings.uuid } : {}),
-    }),
+    () => (settings?.uuid ? { settings_uuid: settings.uuid } : {}),
     [settings?.uuid],
   );
 

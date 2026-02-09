@@ -1,5 +1,5 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { FC, useCallback } from 'react';
 
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -7,10 +7,13 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 interface FormButtonsProps {
-  step;
-  setStep;
-  submitting;
-  valid;
+  step: 1 | 2;
+  setStep: (step: 1 | 2) => void;
+  submitting: boolean;
+  valid: boolean;
+  isCheckingDuplicates?: boolean;
+  onContinueClick?: (form: any) => Promise<boolean>;
+  form?: any;
 }
 
 export const FormButtons: FC<FormButtonsProps> = ({
@@ -18,16 +21,29 @@ export const FormButtons: FC<FormButtonsProps> = ({
   setStep,
   submitting,
   valid,
+  isCheckingDuplicates = false,
+  onContinueClick,
+  form,
 }) => {
+  const handleContinue = useCallback(async () => {
+    if (!valid) return;
+    if (onContinueClick && form) {
+      const canProceed = await onContinueClick(form);
+      if (canProceed) setStep(2);
+    } else if (!onContinueClick) {
+      setStep(2);
+    }
+  }, [valid, onContinueClick, form, setStep]);
+
   return step === 1 ? (
     <>
       <CloseDialogButton className="w-150px" />
       <SubmitButton
         type="button"
-        submitting={false}
+        submitting={isCheckingDuplicates}
         className="w-150px"
-        onClick={() => valid && setStep(2)}
-        disabled={!valid}
+        onClick={handleContinue}
+        disabled={!valid || isCheckingDuplicates}
         label={translate('Continue')}
       />
     </>
