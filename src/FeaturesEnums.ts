@@ -12,6 +12,7 @@ export enum CustomerFeatures {
 
 export enum DeploymentFeatures {
   enable_cookie_notice = 'deployment.enable_cookie_notice',
+  enable_disclaimer_area = 'deployment.enable_disclaimer_area',
   send_metrics = 'deployment.send_metrics',
 }
 

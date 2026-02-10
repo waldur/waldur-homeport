@@ -43,6 +43,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable cookie notice in marketplace.'),
       },
       {
+        key: 'enable_disclaimer_area',
+        description: translate('Enable disclaimer area below the footer.'),
+      },
+      {
         key: 'send_metrics',
         description: translate('Send telemetry metrics.'),
       },
