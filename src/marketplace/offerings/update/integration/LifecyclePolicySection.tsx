@@ -152,6 +152,26 @@ const provisioningFields: OfferingEditField[] = [
   },
 ];
 
+// Provider-consumer messaging fields
+const providerConsumerMessagingFields: OfferingEditField[] = [
+  {
+    label: translate('Enable provider-customer messaging'),
+    key: 'plugin_options.enable_provider_consumer_messaging',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'Allows service providers to send messages with attachments to customers on pending orders, and customers to respond',
+    ),
+  },
+  {
+    label: translate('Send email notifications for messages'),
+    key: 'plugin_options.notify_about_provider_consumer_messages',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'Sends email notifications when providers or customers exchange messages on pending orders',
+    ),
+  },
+];
+
 // Purchase order fields
 const purchaseOrderFields: OfferingEditField[] = [
   {
@@ -189,6 +209,7 @@ const LIFECYCLE_TABS = [
   { key: 'lifecycle', title: translate('Resource lifecycle') },
   { key: 'capabilities', title: translate('Resource capabilities') },
   { key: 'provisioning', title: translate('Provisioning') },
+  { key: 'messaging', title: translate('Messaging') },
   { key: 'purchase-orders', title: translate('Purchase orders') },
   { key: 'billing', title: translate('Billing') },
 ];
@@ -266,6 +287,17 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
                 <DefaultOfferingEditPanel
                   offering={props.offering}
                   fields={provisioningFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+
+            {/* Messaging tab */}
+            <Tab.Pane eventKey="messaging" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={providerConsumerMessagingFields}
                   callback={update}
                 />
               </FormTable>

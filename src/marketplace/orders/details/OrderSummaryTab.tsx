@@ -35,6 +35,18 @@ export const OrderSummaryTab = ({
       }
     >
       <div className="d-flex flex-column gap-3">
+        <Field
+          label={translate('Offering')}
+          value={
+            <Link
+              state="public-offering.marketplace-public-offering"
+              params={{ uuid: order.offering_uuid }}
+              className="text-link"
+            >
+              {order.offering_name}
+            </Link>
+          }
+        />
         {user?.is_staff && (
           <Field label={translate('Order UUID')} value={order.uuid} />
         )}

@@ -10,10 +10,12 @@ import { getUser } from '@waldur/workspace/selectors';
 import { ApproveByProviderButton } from './ApproveByProviderButton';
 import { OrderUnlinkButton } from './OrderUnlinkButton';
 import { RejectByProviderButton } from './RejectByProviderButton';
+import { SetProviderInfoButton } from './SetProviderInfoButton';
 import { OrderActionProps } from './types';
 
 export const OrderProviderActions = ({
   order,
+  offering,
   refetch,
   as,
   size,
@@ -39,6 +41,16 @@ export const OrderProviderActions = ({
     });
   }, [order, user]);
 
+  const showRequestInfoButton = useMemo(() => {
+    return (
+      offering?.plugin_options?.['enable_provider_consumer_messaging'] &&
+      hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        customerId: order.provider_uuid,
+      })
+    );
+  }, [order, offering, user]);
+
   return as === ActionButton ? (
     <>
       {showApproveByProviderButton && (
@@ -55,6 +67,13 @@ export const OrderProviderActions = ({
           as={ActionButton}
         />
       )}
+      {showRequestInfoButton && (
+        <SetProviderInfoButton
+          row={order}
+          refetch={refetch}
+          as={ActionButton}
+        />
+      )}
     </>
   ) : (
     <ActionsDropdown
@@ -63,6 +82,7 @@ export const OrderProviderActions = ({
       actions={[
         showApproveByProviderButton ? ApproveByProviderButton : null,
         showRejectByProviderButton ? RejectByProviderButton : null,
+        showRequestInfoButton ? SetProviderInfoButton : null,
         user?.is_staff ? OrderUnlinkButton : null,
       ].filter(Boolean)}
       data-cy="order-provider-actions-dropdown-btn"

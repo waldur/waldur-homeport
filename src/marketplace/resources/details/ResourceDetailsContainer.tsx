@@ -1,3 +1,4 @@
+import { CheckCircleIcon, EnvelopeIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import classNames from 'classnames';
@@ -226,27 +227,63 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     [resource, data, refetch, isLoading, isRefetching],
   );
 
-  useExtraAnnouncementBar(
-    !data || isLoading ? null : data.offering.state === 'Unavailable' ? (
+  const messagingBar = useMemo(() => {
+    const order = resource?.order_in_progress;
+    if (order?.state !== 'pending-provider' || !order?.provider_message)
+      return null;
+    const plainMessage = order.provider_message.replace(/<[^>]*>/g, '');
+    const description = order.provider_message_url
+      ? `${plainMessage} — ${order.provider_message_url}`
+      : plainMessage;
+    const hasCustomerResponse =
+      order.consumer_message || order.consumer_message_attachment;
+    return hasCustomerResponse ? (
       <AnnouncementBar
-        label={translate('{offeringType} is currently unavailable.', {
-          offeringType: data.offering.name,
-        })}
-        description={
-          [TENANT_TYPE, VOLUME_TYPE, INSTANCE_TYPE].includes(data.offering.type)
-            ? translate(
-                'Operations on all related tenants, instances and volumes are temporarily blocked.',
-              )
-            : translate('Operations are temporarily blocked.')
-        }
-        icon={ANNOUNCEMENT_ICON.warning.icon}
-        variant={ANNOUNCEMENT_ICON.warning.variant}
+        icon={CheckCircleIcon}
+        variant="success"
+        label={translate('Customer responded')}
+        description={description}
         colored
       />
     ) : (
-      <ServiceProviderCommentWarningBar offering={data.offering} />
+      <AnnouncementBar
+        icon={EnvelopeIcon}
+        variant="warning"
+        label={translate('Information requested')}
+        description={description}
+        colored
+      />
+    );
+  }, [resource]);
+
+  useExtraAnnouncementBar(
+    !data || isLoading ? null : (
+      <>
+        {data.offering.state === 'Unavailable' ? (
+          <AnnouncementBar
+            label={translate('{offeringType} is currently unavailable.', {
+              offeringType: data.offering.name,
+            })}
+            description={
+              [TENANT_TYPE, VOLUME_TYPE, INSTANCE_TYPE].includes(
+                data.offering.type,
+              )
+                ? translate(
+                    'Operations on all related tenants, instances and volumes are temporarily blocked.',
+                  )
+                : translate('Operations are temporarily blocked.')
+            }
+            icon={ANNOUNCEMENT_ICON.warning.icon}
+            variant={ANNOUNCEMENT_ICON.warning.variant}
+            colored
+          />
+        ) : (
+          <ServiceProviderCommentWarningBar offering={data.offering} />
+        )}
+        {messagingBar}
+      </>
     ),
-    [data, isLoading],
+    [data, isLoading, messagingBar],
   );
 
   const openTeamModal = useCallback(() => {

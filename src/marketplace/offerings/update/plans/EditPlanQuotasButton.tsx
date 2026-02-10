@@ -22,7 +22,10 @@ export const EditPlanQuotasButton: FunctionComponent<{
 }> = ({ offering, plan, refetch }) => {
   const dispatch = useDispatch();
   const components = offering.components.filter(
-    (c) => c.billing_type === 'fixed',
+    (c) =>
+      c.billing_type === 'fixed' ||
+      c.billing_type === 'one' ||
+      c.billing_type === 'few',
   );
   if (components.length === 0) {
     return null;

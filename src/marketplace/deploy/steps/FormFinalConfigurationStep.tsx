@@ -39,8 +39,8 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         <TextField />
       </Field>
       <div className="mb-7 border-bottom" />
-      <TerminationDateField offering={props.offering} />
       <OrderStartDateField project={project} />
+      <TerminationDateField offering={props.offering} />
     </VStepperFormStepCard>
   );
 };

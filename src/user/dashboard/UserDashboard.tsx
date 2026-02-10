@@ -100,7 +100,7 @@ export const UserDashboard: FC = () => {
           method: 'HEAD',
           query: {
             user_uuid: user.uuid,
-            status: 'escalated',
+            status: ['Escalated for manual validation'],
           },
         });
         const count = fetchResultCount(response);

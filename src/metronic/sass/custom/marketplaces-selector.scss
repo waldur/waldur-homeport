@@ -1,7 +1,5 @@
 @import '@waldur/metronic/sass/core/components/_variables.scss';
 
-$dark-color: #1f2e23;
-
 #marketplaces-selector {
   .list-group {
     border-radius: unset;
@@ -36,19 +34,28 @@ $dark-color: #1f2e23;
         color: unset !important;
       }
       &.active {
-        background-color: $gray-50 !important;
+        background-color: $gray-100 !important;
         color: unset !important;
         z-index: unset;
       }
       @if isDarkMode() {
         color: $white !important;
-        background-color: $dark-light !important;
+        background-color: $gray-25 !important;
         &:hover {
-          background-color: $dark-inverse !important;
+          background-color: $gray-50 !important;
         }
         &.active {
-          background-color: $dark-inverse !important;
+          background-color: $gray-100 !important;
         }
+      }
+    }
+
+    // Accordion group headers should not look like a selected category
+    .accordion > .list-group-item.active {
+      @if isDarkMode() {
+        background-color: $gray-50 !important;
+      } @else {
+        background-color: $gray-50 !important;
       }
     }
   }
@@ -73,20 +80,20 @@ $dark-color: #1f2e23;
     }
 
     .list-group-item {
-      background-color: if(isDarkMode(), $dark-inverse, $white);
-      color: if(isDarkMode(), $gray-700, $white) !important;
+      background-color: if(isDarkMode(), $gray-25, $white);
+      color: if(isDarkMode(), $gray-700, $black) !important;
       border: 0;
 
       &:hover {
-        background-color: if(isDarkMode(), $hover-bg, $gray-50);
+        background-color: if(isDarkMode(), $gray-100, $gray-50);
       }
       &.active {
-        background-color: if(isDarkMode(), $gray-400, $gray-700);
+        background-color: if(isDarkMode(), $gray-200, $gray-100);
         .title {
-          color: $white;
+          color: if(isDarkMode(), $white, $black);
         }
         .description {
-          color: if(isDarkMode(), $gray-800, $gray-100);
+          color: if(isDarkMode(), $gray-600, $gray-500);
         }
       }
       &.disabled {
@@ -97,7 +104,7 @@ $dark-color: #1f2e23;
         }
       }
       .description {
-        color: $gray-700;
+        color: $gray-500;
       }
     }
   }
