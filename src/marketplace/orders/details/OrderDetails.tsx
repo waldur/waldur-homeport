@@ -24,6 +24,7 @@ import { OrderReviewButton } from './OrderReviewButton';
 import { OrderSummaryTab } from './OrderSummaryTab';
 import { OutputTab } from './OutputTab';
 import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
+import { ProviderConsumerInfoTab } from './ProviderConsumerInfoTab';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
@@ -74,6 +75,21 @@ const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
       },
     },
   ];
+
+  // Only show Provider info tab when provider has sent a message or attachment
+  if (props.order.provider_message || props.order.provider_message_attachment) {
+    tabs.push({
+      key: 'provider-info',
+      title: translate('Provider info'),
+      component: () => (
+        <ProviderConsumerInfoTab
+          order={props.order}
+          offering={props.offering}
+          refetch={props.refetch}
+        />
+      ),
+    });
+  }
 
   // Only show Output tab if there is output
   if (props.order.output) {

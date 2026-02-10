@@ -85,7 +85,12 @@ export const OrderActionsButton = ({
 
   if (order.state === 'pending-provider' && !hideProviderActions) {
     return (
-      <OrderProviderActions order={order} refetch={loadData} labeledDropdown />
+      <OrderProviderActions
+        order={order}
+        offering={offering}
+        refetch={loadData}
+        labeledDropdown
+      />
     );
   }
 

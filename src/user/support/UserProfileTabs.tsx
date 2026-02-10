@@ -336,6 +336,9 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
     'organization_country',
   );
   const hasOrganizationType = isProfileAttributeEnabled('organization_type');
+  const hasOrganizationRegistryCode = isProfileAttributeEnabled(
+    'organization_registry_code',
+  );
   const hasAffiliations =
     Array.isArray(user.affiliations) && user.affiliations.length > 0;
 
@@ -398,6 +401,22 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
             isSelf
               ? translate('The type of organization you belong to')
               : translate('The type of organization the user belongs to')
+          }
+        />
+      )}
+      {hasOrganizationRegistryCode && (
+        <UserEditRow
+          user={user}
+          label={translate('Organization registry code')}
+          name="organization_registry_code"
+          value={user.organization_registry_code}
+          disabled={disabled}
+          required={isRequired('organization_registry_code')}
+          protected={fieldIsProtected(user, 'organization_registry_code')}
+          description={
+            isSelf
+              ? translate("Your organization's registry code")
+              : translate("The user's organization registry code")
           }
         />
       )}
@@ -675,6 +694,12 @@ const useTabStats = (user: User): Record<TabKey, TabStats> => {
         enabled: isProfileAttributeEnabled('organization_type'),
         value: user.organization_type,
         label: translate('Organization type'),
+      },
+      {
+        name: 'organization_registry_code',
+        enabled: isProfileAttributeEnabled('organization_registry_code'),
+        value: user.organization_registry_code,
+        label: translate('Organization registry code'),
       },
       {
         name: 'job_title',

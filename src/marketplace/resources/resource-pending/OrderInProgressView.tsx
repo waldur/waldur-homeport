@@ -1,6 +1,6 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { Button, Card } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -10,6 +10,44 @@ import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderCo
 import { OrderProviderActions } from '@waldur/marketplace/orders/actions/OrderProviderActions';
 import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
 import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+
+const OrderInProgressActions: FC<{
+  resource: Resource;
+  offering: PublicOfferingDetails;
+  refetch(): void;
+}> = ({ resource, offering, refetch }) => {
+  if (resource.order_in_progress.state === 'pending-consumer') {
+    return (
+      <ActionsDropdownComponent labeled size="sm">
+        <OrderConsumerActions
+          order={resource.order_in_progress}
+          offering={offering}
+          refetch={refetch}
+        />
+      </ActionsDropdownComponent>
+    );
+  }
+  if (
+    resource.order_in_progress.state === 'pending-provider' &&
+    !(
+      resource.offering_type === SITE_AGENT_PLUGIN &&
+      !offering.plugin_options
+        ?.enable_display_of_order_actions_for_service_provider
+    )
+  ) {
+    return (
+      <OrderProviderActions
+        order={resource.order_in_progress}
+        offering={offering}
+        refetch={refetch}
+        labeledDropdown
+        size="sm"
+      />
+    );
+  }
+  return null;
+};
 
 interface OrderInProgressViewProps {
   resource: Resource;
@@ -152,25 +190,6 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
           />
 
           <div className="d-flex flex-sm-column gap-3 text-nowrap">
-            {resource.order_in_progress.state === 'pending-consumer' ? (
-              <OrderConsumerActions
-                order={resource.order_in_progress}
-                offering={offering}
-                refetch={refetch}
-                as={Button}
-              />
-            ) : resource.order_in_progress.state === 'pending-provider' &&
-              !(
-                resource.offering_type === SITE_AGENT_PLUGIN &&
-                !offering.plugin_options
-                  .enable_display_of_order_actions_for_service_provider
-              ) ? (
-              <OrderProviderActions
-                order={resource.order_in_progress}
-                refetch={refetch}
-                as={Button}
-              />
-            ) : null}
             <OrderDetailsLink
               order_uuid={resource.order_in_progress.uuid}
               project_uuid={resource.order_in_progress.project_uuid}
@@ -181,6 +200,11 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
               </span>
               {translate('View order')}
             </OrderDetailsLink>
+            <OrderInProgressActions
+              resource={resource}
+              offering={offering}
+              refetch={refetch}
+            />
           </div>
         </Card.Body>
       </Card>

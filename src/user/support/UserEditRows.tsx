@@ -420,6 +420,23 @@ const OrganizationTypeRow = ({ user, disabled, isSelf }) =>
     />
   ) : null;
 
+const OrganizationRegistryCodeRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('organization_registry_code') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Organization registry code')}
+      name="organization_registry_code"
+      value={user.organization_registry_code}
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'organization_registry_code')}
+      description={
+        isSelf
+          ? translate("Your organization's registry code")
+          : translate("The user's organization registry code")
+      }
+    />
+  ) : null;
+
 const EdupersonAssuranceRow = ({ user, disabled }) =>
   isProfileAttributeEnabled('eduperson_assurance') &&
   Array.isArray(user.eduperson_assurance) &&
@@ -507,6 +524,11 @@ export const UserEditRows = ({
       <OrganizationRow user={user} isSelf={isSelf} disabled={disabled} />
       <OrganizationCountryRow user={user} isSelf={isSelf} disabled={disabled} />
       <OrganizationTypeRow user={user} isSelf={isSelf} disabled={disabled} />
+      <OrganizationRegistryCodeRow
+        user={user}
+        isSelf={isSelf}
+        disabled={disabled}
+      />
       <JobTitleRow user={user} isSelf={isSelf} disabled={disabled} />
       <AffiliationsRow user={user} disabled={disabled} />
 
