@@ -1223,6 +1223,7 @@
   "HTML message": "HTML tekstas",
   "Human-friendly name of the Waldur deployment.": "Žmogui draugiškas \"Waldur\" dislokacijos pavadinimas.",
   "Hypervisor": "Hipervizorius",
+  "I agree to the <tos>Terms of Service</tos> and <pp>Privacy Policy</pp>": "Sutinku su <tos>Paslaugų teikimo sąlygomis</tos> ir <pp>Privatumo politika</pp>",
   "I confirm that I understand the impact and want to delete my account": "Patvirtinu, kad suprantu poveikį ir noriu ištrinti savo paskyrą",
   "Icon": "Piktograma",
   "ID": "ID",
@@ -1960,6 +1961,7 @@
   "PDF": "PDF",
   "PDF, PNG, JPG, JPEG, DOCX, DOC or ODT (max. 2 MB)": "PDF, PNG, JPG, JPEG, DOCX, DOC arba ODT (ne daugiau kaip 2 MB)",
   "Pending": "Laukiama",
+  "Pending: Terms and conditions not accepted": "Laukiama: naudojimo sąlygos nepriimtos",
   "Pending account linking": "Laukiamas paskyros susiejimas",
   "Pending approval": "Laukiama patvirtinimo",
   "Pending confirmations": "Laukiama patvirtinimų",
@@ -3744,6 +3746,7 @@
   "{user} has requested changing of plan from \"{old_plan}\" to \"{new_plan}\".": "{user} paprašė pakeisti planą iš \"{old_plan}\" į \"{new_plan}\".",
   "{user} has requested provisioning of \"{resource_name}\" with plan \"{plan_name}\".": "{user} paprašė parengti \"{resource_name}\" su planu \"{plan_name}\".",
   "{user} has requested termination of {resource_name} with active plan \"{plan_name}\".": "Vartotojas {user} paprašė nutraukti {resource_name} su aktyviuoju planu \"{plan_name}\".",
+  "{userName} has not yet accepted the Terms of Service and privacy policy.": "{userName} dar nepriėmė Paslaugų teikimo sąlygų ir privatumo politikos.",
   "{value} at {date}": "{value} {date}",
   "{value} at {date}, estimated": "{value} {date}, apskaičiuota",
   "{verboseName} has been updated.": "{verboseName} atnaujinta."
