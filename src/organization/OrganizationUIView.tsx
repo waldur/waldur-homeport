@@ -59,6 +59,11 @@ const PageHero = ({ customer }) => {
       permission: PermissionEnum.UPDATE_CUSTOMER,
       customerId: customer.uuid,
     }) ||
+    // Can update customer contact details
+    hasPermission(user, {
+      permission: PermissionEnum.CUSTOMER_CONTACT_UPDATE,
+      customerId: customer.uuid,
+    }) ||
     // Can view/manage access control
     hasPermission(user, {
       permission: PermissionEnum.LIST_CUSTOMER_USERS,
