@@ -44,9 +44,9 @@ export const SettingsDescription = [
       },
       {
         key: 'DISCLAIMER_AREA_TEXT',
-        description: translate('Text content rendered in the disclaimer area below the footer.'),
+        description: translate('Text displayed in the disclaimer area of the footer.'),
         default: '',
-        type: 'text_field',
+        type: 'string',
       },
     ],
   },
@@ -466,7 +466,7 @@ export const SettingsDescription = [
       },
       {
         key: 'DISCLAIMER_AREA_LOGO',
-        description: translate('The logo image rendered in the disclaimer area below the footer.'),
+        description: translate('Logo displayed in the disclaimer area of the footer.'),
         default: '',
         type: 'image_field',
       },

@@ -53,7 +53,7 @@ export const UserOnboardingVerificationsList: FC = () => {
     table: 'UserOnboardingVerifications',
     fetchData: createFetcher(onboardingVerificationsList),
     filter,
-    queryField: 'query',
+    queryField: 'legal_name',
   });
 
   return (

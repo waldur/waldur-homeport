@@ -105,7 +105,6 @@ export const getOnboardingVerificationColumns = (options?: {
       optional: true,
       id: 'created',
       keys: ['created'] as Array<keyof OnboardingVerification>,
-      orderField: 'created',
     },
     {
       title: translate('Validated at'),
@@ -116,7 +115,6 @@ export const getOnboardingVerificationColumns = (options?: {
       optional: true,
       id: 'validated_at',
       keys: ['validated_at'] as Array<keyof OnboardingVerification>,
-      orderField: 'validated_at',
     },
     {
       title: translate('Expires at'),
@@ -127,7 +125,6 @@ export const getOnboardingVerificationColumns = (options?: {
       optional: true,
       id: 'expires_at',
       keys: ['expires_at'] as Array<keyof OnboardingVerification>,
-      orderField: 'expires_at',
     },
   );
 
@@ -138,7 +135,7 @@ export const OrganizationOnboardingVerificationsList: FC = () => {
   const tableProps = useTable({
     table: 'OrganizationOnboardingVerifications',
     fetchData: createFetcher(onboardingVerificationsList),
-    queryField: 'query',
+    queryField: 'legal_name',
   });
 
   return (

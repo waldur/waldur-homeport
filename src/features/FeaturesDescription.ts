@@ -44,7 +44,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'enable_disclaimer_area',
-        description: translate('Enable disclaimer area below the footer.'),
+        description: translate('Enable disclaimer area in the footer.'),
       },
       {
         key: 'send_metrics',
