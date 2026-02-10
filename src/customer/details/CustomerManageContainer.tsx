@@ -9,6 +9,8 @@ import { translate } from '@waldur/i18n';
 import { canRegisterServiceProviderForCustomer } from '@waldur/marketplace/service-providers/selectors';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import {
   getCustomer,
   getUser,
@@ -70,70 +72,93 @@ export const CustomerManageContainer = () => {
     canRegisterServiceProviderForCustomer,
   );
   const userIsOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
+  const canUpdateCustomer = hasPermission(user, {
+    permission: PermissionEnum.UPDATE_CUSTOMER,
+    customerId: customer.uuid,
+  });
+  const canUpdateContact = hasPermission(user, {
+    permission: PermissionEnum.CUSTOMER_CONTACT_UPDATE,
+    customerId: customer.uuid,
+  });
+  const showOnlyContact = canUpdateContact && !canUpdateCustomer;
 
   const tabs = useMemo<PageBarTab[]>(
     () =>
-      [
-        {
-          key: 'basic-details',
-          component: CustomerDetailsPanel,
-          title: translate('Basic details'),
-        },
-        {
-          key: 'contact',
-          component: CustomerContactPanel,
-          title: translate('Contact'),
-        },
-        {
-          key: 'access-control',
-          component: AccessControlTabsContainer,
-          title: translate('Access control'),
-        },
-        {
-          key: 'billing',
-          component: CustomerBillingPanel,
-          title: translate('Billing'),
-        },
-        isFeatureVisible(
-          MarketplaceFeatures.show_call_management_functionality,
-        ) && isUserStaff
-          ? {
-              key: 'call-manager',
-              component: CustomerCallManagerPanel,
-              title: translate('Call manager'),
-            }
-          : null,
-        customer.is_service_provider || canRegisterServiceProvider
-          ? {
-              key: 'service-provider',
-              component: CustomerMarketplacePanel,
-              title: translate('Service provider'),
-            }
-          : null,
-        customer.credit
-          ? {
-              key: 'credit',
-              component: CustomerCreditPanel,
-              title: translate('Credit management'),
-            }
-          : null,
-        userIsOwnerOrStaff &&
-        isFeatureVisible(CustomerFeatures.show_project_digest)
-          ? {
-              key: 'project-digest',
-              component: ProjectDigestConfigPage,
-              title: translate('Project digest'),
-            }
-          : null,
-        isUserStaff
-          ? {
-              key: 'remove',
-              component: CustomerRemovePanel,
-              title: translate('Remove'),
-            }
-          : null,
-      ].filter(Boolean),
-    [user, customer, canRegisterServiceProvider],
+      showOnlyContact
+        ? [
+            {
+              key: 'contact',
+              component: CustomerContactPanel,
+              title: translate('Contact'),
+            },
+          ]
+        : [
+            {
+              key: 'basic-details',
+              component: CustomerDetailsPanel,
+              title: translate('Basic details'),
+            },
+            {
+              key: 'contact',
+              component: CustomerContactPanel,
+              title: translate('Contact'),
+            },
+            {
+              key: 'access-control',
+              component: AccessControlTabsContainer,
+              title: translate('Access control'),
+            },
+            {
+              key: 'billing',
+              component: CustomerBillingPanel,
+              title: translate('Billing'),
+            },
+            isFeatureVisible(
+              MarketplaceFeatures.show_call_management_functionality,
+            ) && isUserStaff
+              ? {
+                  key: 'call-manager',
+                  component: CustomerCallManagerPanel,
+                  title: translate('Call manager'),
+                }
+              : null,
+            customer.is_service_provider || canRegisterServiceProvider
+              ? {
+                  key: 'service-provider',
+                  component: CustomerMarketplacePanel,
+                  title: translate('Service provider'),
+                }
+              : null,
+            customer.credit
+              ? {
+                  key: 'credit',
+                  component: CustomerCreditPanel,
+                  title: translate('Credit management'),
+                }
+              : null,
+            userIsOwnerOrStaff &&
+            isFeatureVisible(CustomerFeatures.show_project_digest)
+              ? {
+                  key: 'project-digest',
+                  component: ProjectDigestConfigPage,
+                  title: translate('Project digest'),
+                }
+              : null,
+            isUserStaff
+              ? {
+                  key: 'remove',
+                  component: CustomerRemovePanel,
+                  title: translate('Remove'),
+                }
+              : null,
+          ].filter(Boolean),
+    [
+      canRegisterServiceProvider,
+      customer,
+      isUserStaff,
+      showOnlyContact,
+      userIsOwnerOrStaff,
+    ],
   );
 
   const { tabSpec } = usePageTabsTransmitter(tabs);
