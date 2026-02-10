@@ -42,12 +42,6 @@ export const SettingsDescription = [
         default: 'Username',
         type: 'string',
       },
-      {
-        key: 'DISCLAIMER_AREA_TEXT',
-        description: translate('Text displayed in the disclaimer area of the footer.'),
-        default: '',
-        type: 'string',
-      },
     ],
   },
   {
@@ -461,12 +455,6 @@ export const SettingsDescription = [
       {
         key: 'KEYCLOAK_ICON',
         description: translate('A custom PNG icon for Keycloak login button'),
-        default: '',
-        type: 'image_field',
-      },
-      {
-        key: 'DISCLAIMER_AREA_LOGO',
-        description: translate('Logo displayed in the disclaimer area of the footer.'),
         default: '',
         type: 'image_field',
       },

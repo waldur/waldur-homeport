@@ -13,7 +13,6 @@ import { BackendHealthStatusIndicator } from '@waldur/navigation/BackendHealthSt
 import { showError } from '@waldur/store/notify';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
-import { DisclaimerArea } from './DisclaimerArea';
 import { FooterLinks } from './FooterLinks';
 
 const UpgradeNotificationDialog = lazyComponent(() =>
@@ -82,34 +81,31 @@ export const AppFooter: FunctionComponent = () => {
   };
 
   return (
-    <div className="footer d-flex flex-column">
-      <div className="py-4 d-flex flex-lg-column">
-        <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between fs-6">
-          <div className="text-dark fw-bold order-2 order-md-1 icon-align">
-            {translate('Version')}: {ENV.buildId}
-            <BackendHealthStatusIndicator />
-            {showUpgradeAvailable && (
-              <Tip
-                id="upgrade-tooltip"
-                label={translate('Update available')}
-                className="ms-8px"
-              >
-                <span className="d-inline-block">
-                  <ArrowCircleUpIcon
-                    size={20}
-                    color="#6B8E23"
-                    weight="bold"
-                    className="cursor-pointer"
-                    onClick={openUpgradeDialog}
-                  />
-                </span>
-              </Tip>
-            )}
-          </div>
-          <FooterLinks />
+    <div className="footer py-4 d-flex flex-lg-column">
+      <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-between fs-6">
+        <div className="text-dark fw-bold order-2 order-md-1 icon-align">
+          {translate('Version')}: {ENV.buildId}
+          <BackendHealthStatusIndicator />
+          {showUpgradeAvailable && (
+            <Tip
+              id="upgrade-tooltip"
+              label={translate('Update available')}
+              className="ms-8px"
+            >
+              <span className="d-inline-block">
+                <ArrowCircleUpIcon
+                  size={20}
+                  color="#6B8E23"
+                  weight="bold"
+                  className="cursor-pointer"
+                  onClick={openUpgradeDialog}
+                />
+              </span>
+            </Tip>
+          )}
         </div>
+        <FooterLinks />
       </div>
-      <DisclaimerArea />
     </div>
   );
 };
