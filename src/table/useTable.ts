@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { getTitle } from '@waldur/navigation/title';
 import { router } from '@waldur/router';
 import { type RootState } from '@waldur/store/reducers';
-import { selectTableRows, getTableState } from '@waldur/table/selectors';
+import { makeSelectTableRows, getTableState } from '@waldur/table/selectors';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';
@@ -74,6 +74,11 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
   // Track firstFetch for onApplyFilter callback
   const firstFetchRef = useRef(true);
 
+  // Use a ref for onApplyFilter to avoid triggering the effect
+  // when the callback reference changes (e.g., unmemoized inline functions)
+  const onApplyFilterRef = useRef(options.onApplyFilter);
+  onApplyFilterRef.current = options.onApplyFilter;
+
   // Use React Query for fetching
   const { data, isLoading, isFetching, error, refetch } = useTableQuery({
     table,
@@ -123,10 +128,10 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
 
   // Handle onApplyFilter callback
   useEffect(() => {
-    if (applyFilters && options.onApplyFilter) {
-      options.onApplyFilter(filtersStorage, firstFetchRef.current);
+    if (applyFilters && onApplyFilterRef.current) {
+      onApplyFilterRef.current(filtersStorage, firstFetchRef.current);
     }
-  }, [applyFilters, filtersStorage, options.onApplyFilter]);
+  }, [applyFilters, filtersStorage]);
 
   // fetch() triggers React Query refetch
   const fetch = useCallback(
@@ -250,8 +255,11 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
 
   // Get rows from Redux (synced from React Query via useEffect above)
   // This maintains backward compatibility with tests that populate Redux directly
+  // Each useTable instance gets its own selector to avoid cache thrashing
+  // when multiple tables are active (e.g. page table + drawer table).
+  const selectRows = useMemo(() => makeSelectTableRows(), []);
   const rows = useSelector(
-    (state: RootState) => selectTableRows(state, table) as RowType[],
+    (state: RootState) => selectRows(state, table) as RowType[],
   );
 
   // Memoize pagination to prevent infinite re-renders in Table's useEffect
