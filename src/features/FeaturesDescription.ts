@@ -111,6 +111,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable display of user terms of service in UI.'),
       },
       {
+        key: 'hide_marketplace_from_end_users',
+        description: translate('Hide marketplace functionality from end users but allow staff access.'),
+      },
+      {
         key: 'import_resources',
         description: translate('Allow to import resources from service provider to project.'),
       },

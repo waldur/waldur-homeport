@@ -32,6 +32,7 @@ export enum MarketplaceFeatures {
   display_offering_partitions = 'marketplace.display_offering_partitions',
   display_software_catalog = 'marketplace.display_software_catalog',
   display_user_tos = 'marketplace.display_user_tos',
+  hide_marketplace_from_end_users = 'marketplace.hide_marketplace_from_end_users',
   import_resources = 'marketplace.import_resources',
   lexis_links = 'marketplace.lexis_links',
   show_call_management_functionality = 'marketplace.show_call_management_functionality',
