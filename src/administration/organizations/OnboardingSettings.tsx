@@ -7,6 +7,8 @@ import { translate } from '@waldur/i18n';
 
 import { SettingsCard } from '../settings/SettingsCard';
 
+import { OnboardingSetup } from './onboarding-setup/OnboardingSetup';
+
 export const OnboardingSettings = () => {
   const { data, error, isLoading, refetch } = useQuery({
     queryKey: ['AdministrationOnboarding'],
@@ -21,9 +23,13 @@ export const OnboardingSettings = () => {
       loadData={refetch}
     />
   ) : data ? (
-    <SettingsCard
-      groupNames={[translate('Onboarding settings')]}
-      settingsSource={data}
-    />
+    <>
+      <OnboardingSetup />
+      <hr />
+      <SettingsCard
+        groupNames={[translate('Onboarding settings')]}
+        settingsSource={data}
+      />
+    </>
   ) : null;
 };
