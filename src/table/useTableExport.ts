@@ -1,4 +1,5 @@
 import { isEqual } from 'lodash-es';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
 import { isEmpty, orderByFilter } from '@waldur/core/utils';
@@ -13,7 +14,7 @@ import exportAs from './exporters';
 import { ExportConfig } from './exporters/types';
 import { tableExtraFilters } from './middleware';
 import { getTableOptions } from './registry';
-import { selectTableRows, getTableState } from './selectors';
+import { makeSelectTableRows, getTableState } from './selectors';
 import { TableRequest } from './types';
 
 export function useTableExport(table, props?) {
@@ -27,7 +28,8 @@ export function useTableExport(table, props?) {
   } = getTableOptions(table);
 
   const tableState = useSelector(getTableState(table));
-  let rows = useSelector((state: RootState) => selectTableRows(state, table));
+  const selectRows = useMemo(() => makeSelectTableRows(), []);
+  let rows = useSelector((state: RootState) => selectRows(state, table));
   const customExport = Boolean(exportFields || exportRow);
 
   async function fetchRows(config) {

@@ -23,18 +23,21 @@ const selectTableEntitiesOrder = (state: RootState, table: string) => {
   return EMPTY_ARRAY;
 };
 
-export const selectTableRows = createSelector(
-  selectTableEntities,
-  selectTableEntitiesOrder,
-  (entities, order) => {
-    const rows = [];
-
-    order.forEach((uuid) => {
-      rows.push(entities[uuid]);
-    });
-    return rows;
-  },
-);
+// Factory: returns a per-table selector with its own cache entry.
+// Each call site gets an independent memoization cache, avoiding
+// cache thrashing when multiple tables are active simultaneously.
+export const makeSelectTableRows = () =>
+  createSelector(
+    selectTableEntities,
+    selectTableEntitiesOrder,
+    (entities, order) => {
+      const rows = [];
+      order.forEach((uuid) => {
+        rows.push(entities[uuid]);
+      });
+      return rows;
+    },
+  );
 
 export const selectTableSavedFilters = (state: RootState, table: string) => {
   if (state.tables && state.tables[table]) {
