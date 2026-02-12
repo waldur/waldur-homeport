@@ -1122,6 +1122,64 @@
       "usage_count": 1
     }
   },
+  "Text content rendered in the disclaimer area below the footer.": {
+    "message": "Text content rendered in the disclaimer area below the footer.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 62,
+        "wordCount": 10,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Marketplace Branding": {
     "message": "Marketplace Branding",
     "context": {
@@ -5501,6 +5559,64 @@
         "startsWithCapital": true,
         "hasNumbers": false,
         "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "The logo image rendered in the disclaimer area below the footer.": {
+    "message": "The logo image rendered in the disclaimer area below the footer.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 64,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
         "isAllCaps": false
       },
       "variables": {},
@@ -10482,6 +10598,64 @@
         "isSentence": false,
         "startsWithCapital": true,
         "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Rotating OAuth2 refresh token for remote eduTEAMS API access. Automatically updated by the periodic token rotation task. If empty, falls back to REMOTE_EDUTEAMS_REFRESH_TOKEN from Django settings.": {
+    "message": "Rotating OAuth2 refresh token for remote eduTEAMS API access. Automatically updated by the periodic token rotation task. If empty, falls back to REMOTE_EDUTEAMS_REFRESH_TOKEN from Django settings.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 196,
+        "wordCount": 26,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": true,
         "hasSpecialChars": true,
         "isAllCaps": false
       },
@@ -16014,6 +16188,368 @@
       "usage_count": 1
     }
   },
+  "Identity Bridge": {
+    "message": "Identity Bridge",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "property_value",
+        "title",
+        "generic_element",
+        "unknown"
+      ],
+      "components": [
+        "SettingsTabContent",
+        "Tab",
+        "Tabs"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin",
+          "user_management"
+        ],
+        "feature_areas": [
+          "providers",
+          "support"
+        ],
+        "component_types": [
+          "list",
+          "dialog"
+        ],
+        "paths": [
+          "SettingsDescription.ts",
+          "administration/providers/IdentityProvidersList.tsx",
+          "user/support/UserDetailsDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "SettingsTabContent",
+          "Tab"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in administrative interface. Use formal, technical language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Enable the Identity Bridge API for push-based ISD user attribute synchronization.": {
+    "message": "Enable the Identity Bridge API for push-based ISD user attribute synchronization.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 81,
+        "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "User attributes settable via Identity Bridge. Must be a subset of WRITABLE_USER_FIELDS.": {
+    "message": "User attributes settable via Identity Bridge. Must be a subset of WRITABLE_USER_FIELDS.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 87,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "When to deactivate a federated user: 'all_isds_removed' (only when removed from all ISDs) or 'any_isd_removed' (on first ISD removal, backward compatible).": {
+    "message": "When to deactivate a federated user: 'all_isds_removed' (only when removed from all ISDs) or 'any_isd_removed' (on first ISD removal, backward compatible).",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 155,
+        "wordCount": 21,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Project Digest": {
+    "message": "Project Digest",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Enable project digest email notifications for organizations.": {
+    "message": "Enable project digest email notifications for organizations.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 60,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "User agreements": {
     "message": "User agreements",
     "context": {
@@ -17433,7 +17969,8 @@
         "title",
         "generic_element",
         "unknown",
-        "label"
+        "label",
+        "property_value"
       ],
       "components": [
         "Table",
@@ -17536,6 +18073,7 @@
           "proposals/team/InvitationsList.tsx",
           "rancher/cluster/team/AddResourceAccessDialog.tsx",
           "rancher/cluster/team/KeycloakMembershipList.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/affiliations/OrganizationsList.tsx",
           "user/affiliations/SummaryTeamTable.tsx",
           "user/hooks/HookTypeField.tsx",
@@ -17575,7 +18113,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 38
+      "usage_count": 39
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -18586,6 +19124,7 @@
           "support/SupportEventsFilter.tsx",
           "support/invoices/SupportInvoiceItemsFilter.tsx",
           "support/invoices/SupportInvoiceItemsList.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/UserPermissionRequestExpandableRow.tsx",
           "user/UserPermissionRequestsList.tsx",
           "user/affiliations/OrganizationsList.tsx",
@@ -18640,7 +19179,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 95
+      "usage_count": 96
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -20064,6 +20603,7 @@
       "primary_ui_type": "title",
       "ui_types": [
         "title",
+        "property_value",
         "generic_element",
         "label"
       ],
@@ -20103,6 +20643,7 @@
         ],
         "paths": [
           "administration/TokensList.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -20128,7 +20669,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -20142,6 +20683,7 @@
       "primary_ui_type": "title",
       "ui_types": [
         "title",
+        "property_value",
         "generic_element",
         "label"
       ],
@@ -20181,6 +20723,7 @@
         ],
         "paths": [
           "administration/TokensList.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -20206,7 +20749,7 @@
         "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -21288,7 +21831,8 @@
           "reporting/orders/utils.ts",
           "reporting/usage-trends/utils.ts",
           "table/SaveFilterDialog.tsx",
-          "user/support/UserEditAvatarFormItem.tsx"
+          "user/support/UserEditAvatarFormItem.tsx",
+          "user/support/UserIdentityBridgeTab.tsx"
         ]
       },
       "jsx_context": {
@@ -21318,7 +21862,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 69
+      "usage_count": 70
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
@@ -28298,6 +28842,7 @@
           "user/hooks/HookDetailsDialog.tsx",
           "user/hooks/HooksList.tsx",
           "user/support/UserEditRows.tsx",
+          "user/support/UserIdentityBridgeTab.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
       },
@@ -28328,7 +28873,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 16
+      "usage_count": 17
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -38448,6 +38993,7 @@
         "Tab",
         "Tabs",
         "VStepperFormStepCard",
+        "Panel",
         "WizardForm",
         "MetadataGroupBy",
         "SelectField"
@@ -38550,6 +39096,7 @@
           "marketplace/offerings/PriceListFilter.tsx",
           "marketplace/offerings/details/permissions/OfferingPermissionCreateDialog.tsx",
           "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
+          "marketplace/orders/details/OrderSummaryTab.tsx",
           "marketplace/orders/list/MarketplaceOrdersListFilter.tsx",
           "marketplace/orders/list/OrdersListExpandableRow.tsx",
           "marketplace/resources/list/AllResourcesFilter.tsx",
@@ -38648,7 +39195,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 84
+      "usage_count": 85
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -60900,6 +61447,7 @@
         ],
         "paths": [
           "administration/dashboard/AdminStatistics.tsx",
+          "administration/providers/IdentityBridgeTab.tsx",
           "administration/providers/ProviderCard.tsx",
           "customer/routes.ts",
           "issues/routes.ts",
@@ -60925,8 +61473,8 @@
       "jsx_context": {
         "tags": [
           "StatisticsCard",
-          "Table",
           "th",
+          "Table",
           "TeamTableComponent"
         ],
         "conditional_render": true
@@ -60945,7 +61493,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 21
+      "usage_count": 22
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -61430,6 +61978,7 @@
         ],
         "feature_areas": [
           "dashboard",
+          "providers",
           "pubsub"
         ],
         "component_types": [
@@ -61438,6 +61987,7 @@
         ],
         "paths": [
           "administration/dashboard/AdministrationProfile.tsx",
+          "administration/providers/IdentityBridgeTab.tsx",
           "administration/pubsub/PubSubOverviewCards.tsx",
           "administration/rabbitmq/RabbitMQQueueHealthBadge.tsx"
         ]
@@ -61460,7 +62010,7 @@
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
@@ -69989,6 +70539,7 @@
         "feature_areas": [
           "marketplace",
           "organizations",
+          "providers",
           "quick-shortcuts",
           "roles",
           "steps",
@@ -70063,6 +70614,7 @@
           "administration/marketplace/SoftwareCatalogDiscoverDialog.tsx",
           "administration/organizations/OrganizationGroupForm.tsx",
           "administration/organizations/OrganizationGroupsList.tsx",
+          "administration/providers/IdentityBridgeTab.tsx",
           "administration/quick-shortcuts/QuickShortcutForm.tsx",
           "administration/quick-shortcuts/QuickShortcutsList.tsx",
           "administration/roles/RoleForm.tsx",
@@ -70219,8 +70771,8 @@
         "tags": [
           "Table",
           "Field",
-          "FormGroup",
           "th",
+          "FormGroup",
           "StringField",
           "DecoratedLabel",
           "b",
@@ -70247,7 +70799,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 154
+      "usage_count": 155
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -70479,7 +71031,8 @@
     "context": {
       "primary_ui_type": "title",
       "ui_types": [
-        "title"
+        "title",
+        "unknown"
       ],
       "components": [
         "Table"
@@ -70501,23 +71054,27 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "admin"
+          "admin",
+          "user_management"
         ],
         "feature_areas": [
-          "marketplace"
+          "marketplace",
+          "support"
         ],
         "component_types": [
           "component"
         ],
         "paths": [
-          "administration/marketplace/AdministrationSoftwareCatalog.tsx"
+          "administration/marketplace/AdministrationSoftwareCatalog.tsx",
+          "user/support/UserIdentityBridgeTab.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Table"
+          "Table",
+          "th"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -70530,15 +71087,17 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
+        "has_validation": true,
         "max_nesting_level": 7
       },
-      "usage_count": 1
+      "usage_count": 2
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "software catalogs": {
@@ -79786,6 +80345,1064 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Warning": {
+    "message": "Warning",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "unknown",
+        "generic_element",
+        "label"
+      ],
+      "components": [
+        "WarnCard",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers",
+          "settings"
+        ],
+        "component_types": [
+          "component",
+          "form",
+          "dialog"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx",
+          "administration/providers/ProviderForm.tsx",
+          "administration/rabbitmq/RabbitMQQueueHealthBadge.tsx",
+          "administration/settings/ConfigurationEditDialog.tsx",
+          "administration/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "WarnCard"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 5
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Unhealthy": {
+    "message": "Unhealthy",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language."
+    ]
+  },
+  "Unable to load identity bridge statistics.": {
+    "message": "Unable to load identity bridge statistics.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "LoadingErred"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 42,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "LoadingErred"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language."
+    ]
+  },
+  "ISD health": {
+    "message": "ISD health",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h5"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "ISD": {
+    "message": "ISD",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 3,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": true
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This text may be conditionally shown/hidden. Ensure context independence.",
+      "Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language."
+    ]
+  },
+  "Stale users": {
+    "message": "Stale users",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Oldest sync": {
+    "message": "Oldest sync",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Health": {
+    "message": "Health",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Identity managers": {
+    "message": "Identity managers",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h5"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Managed ISDs": {
+    "message": "Managed ISDs",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog",
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin",
+          "user_management"
+        ],
+        "feature_areas": [
+          "providers",
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx",
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th",
+          "FormGroup"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Summary": {
+    "message": "Summary",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "generic_element",
+        "title",
+        "label"
+      ],
+      "components": [
+        "Component",
+        "ModalDialog",
+        "Table",
+        "FormGroup",
+        "AccordionCard",
+        "CommentSection",
+        "Accordion",
+        "Tab",
+        "Tabs"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin",
+          "infrastructure",
+          "marketplace",
+          "general",
+          "resource_management",
+          "user_management"
+        ],
+        "feature_areas": [
+          "providers",
+          "vm",
+          "details",
+          "openstack-tenant",
+          "create",
+          "apps",
+          "template",
+          "summary",
+          "UserPendingActionsList",
+          "vmware"
+        ],
+        "component_types": [
+          "component",
+          "dialog",
+          "list",
+          "form"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx",
+          "azure/vm/AzureVirtualMachineSummary.tsx",
+          "marketplace/details/OrderSummaryDialog.tsx",
+          "openstack/openstack-tenant/TenantInstancesList.tsx",
+          "proposals/proposal/create/ProjectDetailsStep.tsx",
+          "proposals/proposal/create/ProjectDetailsSummary.tsx",
+          "proposals/proposal/create-review/steps/steps.ts",
+          "rancher/cluster/apps/ApplicationDetailsDialog.tsx",
+          "rancher/template/TemplateDetail.tsx",
+          "resource/summary/VirtualMachineSummary.tsx",
+          "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx",
+          "vmware/VMwareVirtualMachineSummary.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h5",
+          "Component",
+          "ModalDialog",
+          "Table",
+          "FormGroup",
+          "CommentSection",
+          "Tab"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 12
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Total federated users": {
+    "message": "Total federated users",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language."
+    ]
+  },
+  "Active federated users": {
+    "message": "Active federated users",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language."
+    ]
+  },
+  "Stale threshold": {
+    "message": "Stale threshold",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 15,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language."
+    ]
+  },
+  "{days} days": {
+    "message": "{days} days",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown",
+        "generic_element",
+        "property_value"
+      ],
+      "components": [
+        "FormTable",
+        "StatCard",
+        "Col",
+        "Row"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": false,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {
+        "days": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "admin",
+          "marketplace",
+          "general"
+        ],
+        "feature_areas": [
+          "providers",
+          "policies",
+          "review",
+          "proposals",
+          "reviewer"
+        ],
+        "component_types": [
+          "component",
+          "form",
+          "page",
+          "list"
+        ],
+        "paths": [
+          "administration/providers/IdentityBridgeTab.tsx",
+          "marketplace/offerings/update/policies/SlurmPolicyPreview.tsx",
+          "proposals/review/ReviewStatsWidgets.tsx",
+          "reporting/proposals/ReviewProgressList.tsx",
+          "reviewer/ProfileInfoSection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "StatCard",
+          "span"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": true,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 5
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "Contains variables: days. Variable types: unknown.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This action triggers navigation. Consider using navigation-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Authentication": {
     "message": "Authentication",
     "context": {
@@ -80917,6 +82534,7 @@
           "proposals/update/coi-settings/COISettingsSection.tsx",
           "user/hooks/HooksList.tsx",
           "user/support/UserEditRows.tsx",
+          "user/support/UserIdentityBridgeTab.tsx",
           "user/support/UserProfileTabs.tsx",
           "user/support/UserStatus.tsx",
           "user/support/utils.ts"
@@ -80946,7 +82564,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 12
+      "usage_count": 13
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -81686,80 +83304,6 @@
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
       "Contains variables: url. Variable types: url.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Warning": {
-    "message": "Warning",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "generic_element",
-        "label"
-      ],
-      "components": [
-        "WarnCard",
-        "FormGroup"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "admin"
-        ],
-        "feature_areas": [
-          "providers",
-          "settings"
-        ],
-        "component_types": [
-          "form",
-          "dialog"
-        ],
-        "paths": [
-          "administration/providers/ProviderForm.tsx",
-          "administration/rabbitmq/RabbitMQQueueHealthBadge.tsx",
-          "administration/settings/ConfigurationEditDialog.tsx",
-          "administration/utils.ts"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "WarnCard"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 9
-      },
-      "usage_count": 4
-    },
-    "translator_notes": [
-      "This appears in administrative interface. Use formal, technical language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -83781,6 +85325,138 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Organization registry code field": {
+    "message": "Organization registry code field",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 32,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "administration/providers/ProviderForm.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "The OIDC claim to be used as the value for the organization_registry_code field.": {
+    "message": "The OIDC claim to be used as the value for the organization_registry_code field.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 80,
+        "wordCount": 13,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "administration/providers/ProviderForm.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in administrative interface. Use formal, technical language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Verify SSL": {
     "message": "Verify SSL",
     "context": {
@@ -84152,6 +85828,201 @@
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
       "Contains variables: provider. Variable types: unknown."
+    ]
+  },
+  "SCIM user synchronization has been scheduled.": {
+    "message": "SCIM user synchronization has been scheduled.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 45,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "administration/providers/ScimSyncButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in administrative interface. Use formal, technical language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to schedule SCIM user synchronization.": {
+    "message": "Unable to schedule SCIM user synchronization.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 45,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "administration/providers/ScimSyncButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in administrative interface. Use formal, technical language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Sync all users": {
+    "message": "Sync all users",
+    "context": {
+      "primary_ui_type": "action_button",
+      "ui_types": [
+        "action_button"
+      ],
+      "components": [
+        "ActionButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "providers"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "administration/providers/ScimSyncButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionButton"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in administrative interface. Use formal, technical language.",
+      "This action modifies application state. Use clear, actionable language."
     ]
   },
   "Identity provider has been updated successfully.": {
@@ -125045,13 +126916,15 @@
           "admin",
           "marketplace",
           "infrastructure",
-          "general"
+          "general",
+          "user_management"
         ],
         "feature_areas": [
           "request-types",
           "reallocate-limits",
           "actions",
-          "assignments"
+          "assignments",
+          "support"
         ],
         "component_types": [
           "list",
@@ -125063,7 +126936,8 @@
           "marketplace/resources/reallocate-limits/ReallocateLimitsDialog.tsx",
           "openstack/openstack-tenant/actions/SubnetsTable.tsx",
           "openstack/openstack-tenant/actions/VolumeTypesTable.tsx",
-          "proposals/assignments/AssignmentBatchesSection.tsx"
+          "proposals/assignments/AssignmentBatchesSection.tsx",
+          "user/support/UserIdentityBridgeTab.tsx"
         ]
       },
       "jsx_context": {
@@ -125084,15 +126958,16 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 5
+        "has_validation": true,
+        "max_nesting_level": 7
       },
-      "usage_count": 5
+      "usage_count": 6
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -133086,15 +134961,18 @@
   "Send": {
     "message": "Send",
     "context": {
-      "primary_ui_type": "action_button",
+      "primary_ui_type": "submit_button",
       "ui_types": [
         "unknown",
         "generic_element",
-        "action_button"
+        "action_button",
+        "submit_button"
       ],
       "components": [
         "ActionItem",
         "ActionButton",
+        "SubmitButton",
+        "ModalDialog",
         "ActionsDropdownComponent"
       ],
       "is_user_facing": true,
@@ -133115,23 +134993,28 @@
       "file_context": {
         "domains": [
           "general",
-          "customer_management"
+          "customer_management",
+          "marketplace"
         ],
         "feature_areas": [
           "ai-assistant",
           "broadcasts",
           "list",
+          "actions",
           "assignments"
         ],
         "component_types": [
           "component",
           "button",
-          "list"
+          "list",
+          "dialog"
         ],
         "paths": [
           "ai-assistant/components/Thread.tsx",
           "broadcasts/BroadcastSendButton.tsx",
           "customer/list/FinancialReportSendButton.tsx",
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx",
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx",
           "proposals/assignments/AssignmentBatchRowActions.tsx"
         ]
       },
@@ -133139,12 +135022,14 @@
         "tags": [
           "span",
           "ActionItem",
-          "ActionButton"
+          "ActionButton",
+          "SubmitButton"
         ],
         "conditional_render": true
       },
       "action_types": [
-        "unknown"
+        "unknown",
+        "create"
       ],
       "api_context": {
         "endpoints": [],
@@ -133154,14 +135039,17 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
+        "has_validation": true,
+        "max_nesting_level": 10
       },
-      "usage_count": 4
+      "usage_count": 6
     },
     "translator_notes": [
       "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This relates to creation actions. Use encouraging, positive language.",
       "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -139195,116 +141083,6 @@
       },
       "usage_count": 1
     }
-  },
-  "Summary": {
-    "message": "Summary",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "generic_element",
-        "unknown",
-        "title",
-        "label"
-      ],
-      "components": [
-        "Component",
-        "ModalDialog",
-        "Table",
-        "FormGroup",
-        "AccordionCard",
-        "CommentSection",
-        "Accordion",
-        "Tab",
-        "Tabs"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "infrastructure",
-          "marketplace",
-          "general",
-          "resource_management",
-          "user_management"
-        ],
-        "feature_areas": [
-          "vm",
-          "details",
-          "openstack-tenant",
-          "create",
-          "apps",
-          "template",
-          "summary",
-          "UserPendingActionsList",
-          "vmware"
-        ],
-        "component_types": [
-          "component",
-          "dialog",
-          "list",
-          "form"
-        ],
-        "paths": [
-          "azure/vm/AzureVirtualMachineSummary.tsx",
-          "marketplace/details/OrderSummaryDialog.tsx",
-          "openstack/openstack-tenant/TenantInstancesList.tsx",
-          "proposals/proposal/create/ProjectDetailsStep.tsx",
-          "proposals/proposal/create/ProjectDetailsSummary.tsx",
-          "proposals/proposal/create-review/steps/steps.ts",
-          "rancher/cluster/apps/ApplicationDetailsDialog.tsx",
-          "rancher/template/TemplateDetail.tsx",
-          "resource/summary/VirtualMachineSummary.tsx",
-          "user/dashboard/UserPendingActionsList/PendingOrderDetailsDialog.tsx",
-          "vmware/VMwareVirtualMachineSummary.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Component",
-          "ModalDialog",
-          "Table",
-          "FormGroup",
-          "CommentSection",
-          "Tab"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 8
-      },
-      "usage_count": 11
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
   },
   "Size": {
     "message": "Size",
@@ -145415,7 +147193,8 @@
         "Table",
         "ExpandableContainer",
         "ModalDialog",
-        "Field"
+        "Field",
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -145435,6 +147214,7 @@
       "file_context": {
         "domains": [
           "general",
+          "marketplace",
           "user_management"
         ],
         "feature_areas": [
@@ -145445,6 +147225,7 @@
           "join-organization",
           "actions",
           "create",
+          "details",
           "announcements",
           "offering-requests",
           "maintenance",
@@ -145465,6 +147246,9 @@
           "maintenance/actions/MaintenanceDetailsDialog.tsx",
           "maintenance/create/Step1CreateMessage.tsx",
           "maintenance/create/Step3ReviewAndCreate.tsx",
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx",
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx",
+          "marketplace/orders/details/ProviderConsumerInfoTab.tsx",
           "navigation/header/announcements/AnnouncementDetailsDialog.tsx",
           "proposals/offering-requests/OfferingRequestsListExpandableRow.tsx",
           "reporting/maintenance/MaintenanceReportingExpandableRow.tsx",
@@ -145491,15 +147275,17 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 8
+        "max_nesting_level": 10
       },
-      "usage_count": 12
+      "usage_count": 15
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -149638,6 +151424,7 @@
       "ui_types": [
         "unknown",
         "label",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -149680,6 +151467,7 @@
           "invitations/actions/RestrictionsInfoCard.tsx",
           "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -149705,7 +151493,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 7
+      "usage_count": 8
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -161522,7 +163310,8 @@
         "label",
         "generic_element",
         "title",
-        "unknown"
+        "unknown",
+        "property_value"
       ],
       "components": [
         "StringField",
@@ -161571,6 +163360,7 @@
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
           "marketplace/service-providers/ProviderUserDetailsDialog.tsx",
           "marketplace-checklist/utils.ts",
+          "user/CompleteYourProfileBanner.tsx",
           "user/affiliations/OrganizationsList.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserList.tsx",
@@ -161598,7 +163388,7 @@
         "has_validation": true,
         "max_nesting_level": 9
       },
-      "usage_count": 11
+      "usage_count": 12
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -162102,6 +163892,7 @@
       "ui_types": [
         "label",
         "generic_element",
+        "property_value",
         "unknown"
       ],
       "components": [
@@ -162150,6 +163941,7 @@
           "customer/details/CustomerDetailsPanel.tsx",
           "customer/details/EditFieldDialog.tsx",
           "marketplace/service-providers/ProviderDetailsBody.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserDetailsTable.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
@@ -162177,7 +163969,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 6
+      "usage_count": 7
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -186585,6 +188377,64 @@
       "usage_count": 1
     }
   },
+  "Enable display of project digest configuration in organization settings.": {
+    "message": "Enable display of project digest configuration in organization settings.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 72,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "features"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "features/FeaturesDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Waldur deployment settings": {
     "message": "Waldur deployment settings",
     "context": {
@@ -186649,6 +188499,64 @@
       "text_characteristics": {
         "length": 36,
         "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "features"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "features/FeaturesDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Enable disclaimer area below the footer.": {
+    "message": "Enable disclaimer area below the footer.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 40,
+        "wordCount": 6,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -189797,6 +191705,64 @@
       "text_characteristics": {
         "length": 64,
         "wordCount": 11,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "features"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "features/FeaturesDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Show identity bridge information in user profiles and admin views.": {
+    "message": "Show identity bridge information in user profiles and admin views.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 66,
+        "wordCount": 10,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -203060,6 +205026,119 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "This email and role combination is entered more than once.": {
+    "message": "This email and role combination is entered more than once.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 58,
+        "wordCount": 10,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "invitations/actions/create/EmailsListGroup.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "This email already has a pending invitation.": {
+    "message": "This email already has a pending invitation.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 44,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "invitations/actions/create/EmailsListGroup.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Must start with a country prefix ie EE34501234215": {
     "message": "Must start with a country prefix ie EE34501234215",
     "context": {
@@ -203630,6 +205709,69 @@
       },
       "usage_count": 1
     }
+  },
+  "Unable to check for duplicate invitations.": {
+    "message": "Unable to check for duplicate invitations.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 42,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invitations/actions/create/InvitationCreateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "Invite by email": {
     "message": "Invite by email",
@@ -228832,24 +230974,29 @@
       "variables": {},
       "file_context": {
         "domains": [
-          "marketplace"
+          "marketplace",
+          "user_management"
         ],
         "feature_areas": [
-          "attributes"
+          "attributes",
+          "support"
         ],
         "component_types": [
-          "dialog"
+          "dialog",
+          "component"
         ],
         "paths": [
           "marketplace/category/admin/ColumnsList.tsx",
-          "marketplace/offerings/update/attributes/EditAttributeDialog.tsx"
+          "marketplace/offerings/update/attributes/EditAttributeDialog.tsx",
+          "user/support/UserIdentityBridgeTab.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "strong"
+          "strong",
+          "th"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -228862,14 +231009,16 @@
       "interaction_context": {
         "modifies_state": true,
         "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 5
+        "has_validation": true,
+        "max_nesting_level": 7
       },
-      "usage_count": 2
+      "usage_count": 3
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language."
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Widget": {
@@ -253985,6 +256134,7 @@
       "primary_ui_type": "label",
       "ui_types": [
         "label",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -254020,6 +256170,7 @@
         "paths": [
           "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -254044,7 +256195,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -254057,6 +256208,7 @@
       "primary_ui_type": "label",
       "ui_types": [
         "label",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -254092,6 +256244,7 @@
         "paths": [
           "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -254116,7 +256269,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -254129,6 +256282,7 @@
       "primary_ui_type": "label",
       "ui_types": [
         "label",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -254164,6 +256318,7 @@
         "paths": [
           "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -254188,7 +256343,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -254201,6 +256356,7 @@
       "primary_ui_type": "label",
       "ui_types": [
         "label",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -254236,6 +256392,7 @@
         "paths": [
           "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -254260,7 +256417,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -254273,6 +256430,7 @@
       "primary_ui_type": "label",
       "ui_types": [
         "label",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -254308,6 +256466,7 @@
         "paths": [
           "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -254332,7 +256491,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -254345,6 +256504,7 @@
       "primary_ui_type": "label",
       "ui_types": [
         "label",
+        "property_value",
         "generic_element"
       ],
       "components": [
@@ -254380,6 +256540,7 @@
         "paths": [
           "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -254404,7 +256565,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in a form with validation. Ensure message supports user guidance.",
@@ -254459,6 +256620,7 @@
           "marketplace/offerings/update/integration/UserAttributeConfigSection.tsx",
           "reporting/usage-by-org-type/UsageByOrgTypeTable.tsx",
           "reporting/users/affiliationParser.ts",
+          "user/CompleteYourProfileBanner.tsx",
           "user/support/UserEditRows.tsx",
           "user/support/UserProfileTabs.tsx"
         ]
@@ -254483,7 +256645,7 @@
         "has_validation": true,
         "max_nesting_level": 8
       },
-      "usage_count": 6
+      "usage_count": 7
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -255000,6 +257162,76 @@
       "usage_count": 1
     },
     "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Active ISDs": {
+    "message": "Active ISDs",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "title"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 11,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace",
+          "user_management"
+        ],
+        "feature_areas": [
+          "details",
+          "support"
+        ],
+        "component_types": [
+          "dialog",
+          "list"
+        ],
+        "paths": [
+          "marketplace/offerings/details/OfferingUserDetailsDialog.tsx",
+          "user/support/UserList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
@@ -272928,12 +275160,14 @@
       "primary_ui_type": "title",
       "ui_types": [
         "unknown",
+        "generic_element",
         "label",
         "title"
       ],
       "components": [
         "FormGroup",
-        "ModalDialog"
+        "ModalDialog",
+        "FormTable"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -272957,14 +275191,19 @@
         ],
         "feature_areas": [
           "endpoints",
+          "actions",
+          "details",
           "catalog"
         ],
         "component_types": [
           "dialog",
+          "component",
           "list"
         ],
         "paths": [
           "marketplace/offerings/update/endpoints/AddEndpointDialog.tsx",
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx",
+          "marketplace/orders/details/ProviderConsumerInfoTab.tsx",
           "marketplace-checklist/utils.ts",
           "rancher/catalog/ClusterCatalogList.tsx"
         ]
@@ -272973,7 +275212,7 @@
         "tags": [
           "FormGroup"
         ],
-        "conditional_render": false
+        "conditional_render": true
       },
       "action_types": [
         "unknown"
@@ -272987,15 +275226,16 @@
         "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
-        "max_nesting_level": 7
+        "max_nesting_level": 10
       },
-      "usage_count": 3
+      "usage_count": 5
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
       "This appears in the marketplace context. Use business-appropriate language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence.",
       "Original text is in ALL CAPS. Consider if this emphasis is appropriate in your language."
     ]
   },
@@ -277995,6 +280235,214 @@
       "usage_count": 1
     }
   },
+  "Enable provider-customer messaging": {
+    "message": "Enable provider-customer messaging",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Allows service providers to send messages with attachments to customers on pending orders, and customers to respond": {
+    "message": "Allows service providers to send messages with attachments to customers on pending orders, and customers to respond",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 115,
+        "wordCount": 17,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Send email notifications for messages": {
+    "message": "Send email notifications for messages",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 37,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Sends email notifications when providers or customers exchange messages on pending orders": {
+    "message": "Sends email notifications when providers or customers exchange messages on pending orders",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 89,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Enable purchase order upload": {
     "message": "Enable purchase order upload",
     "context": {
@@ -278543,6 +280991,61 @@
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance.",
       "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Messaging": {
+    "message": "Messaging",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "marketplace/offerings/update/integration/LifecyclePolicySection.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
   "Purchase orders": {
@@ -302320,94 +304823,6 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
-  "{days} days": {
-    "message": "{days} days",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown",
-        "generic_element",
-        "property_value"
-      ],
-      "components": [
-        "StatCard",
-        "Col",
-        "Row",
-        "FormTable"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 11,
-        "wordCount": 2,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": false,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {
-        "days": {
-          "type": "unknown"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "general"
-        ],
-        "feature_areas": [
-          "policies",
-          "review",
-          "proposals",
-          "reviewer"
-        ],
-        "component_types": [
-          "form",
-          "page",
-          "list"
-        ],
-        "paths": [
-          "marketplace/offerings/update/policies/SlurmPolicyPreview.tsx",
-          "proposals/review/ReviewStatsWidgets.tsx",
-          "reporting/proposals/ReviewProgressList.tsx",
-          "reviewer/ProfileInfoSection.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "StatCard",
-          "span"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": true,
-        "has_validation": false,
-        "max_nesting_level": 9
-      },
-      "usage_count": 4
-    },
-    "translator_notes": [
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "Contains variables: days. Variable types: unknown.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This action triggers navigation. Consider using navigation-appropriate language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
   "Notification Sent": {
     "message": "Notification Sent",
     "context": {
@@ -316728,6 +319143,142 @@
       "usage_count": 1
     }
   },
+  "Customer responded": {
+    "message": "Customer responded",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AnnouncementBar"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 18,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "orders",
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/OrderDetailsContainer.tsx",
+          "marketplace/resources/details/ResourceDetailsContainer.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AnnouncementBar"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Information requested": {
+    "message": "Information requested",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AnnouncementBar"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "orders",
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/OrderDetailsContainer.tsx",
+          "marketplace/resources/details/ResourceDetailsContainer.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AnnouncementBar"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Unable to load order details.": {
     "message": "Unable to load order details.",
     "context": {
@@ -318500,6 +321051,729 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
+  "Response has been sent.": {
+    "message": "Response has been sent.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to send response.": {
+    "message": "Unable to send response.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Respond to provider": {
+    "message": "Respond to provider",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Enter a message for the provider...": {
+    "message": "Enter a message for the provider...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 35,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Attachment (PDF)": {
+    "message": "Attachment (PDF)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx",
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "PDF (max. 10 MB)": {
+    "message": "PDF (max. 10 MB)",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "UploadContainer",
+        "Field",
+        "FormGroup"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": true,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetConsumerInfoDialog.tsx",
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "UploadContainer"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Request info": {
+    "message": "Request info",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ActionItem"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetProviderInfoButton.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionItem"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Provider info has been saved.": {
+    "message": "Provider info has been saved.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to save provider info.": {
+    "message": "Unable to save provider info.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Send info to customer": {
+    "message": "Send info to customer",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Enter a message for the customer...": {
+    "message": "Enter a message for the customer...",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "Field",
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 35,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/orders/actions/SetProviderInfoDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Field"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Please upload Purchase Order document and click approve to continue.": {
     "message": "Please upload Purchase Order document and click approve to continue.",
     "context": {
@@ -319472,6 +322746,68 @@
         "max_nesting_level": 5
       },
       "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Provider info": {
+    "message": "Provider info",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 13,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/details/OrderDetails.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
@@ -322004,6 +325340,331 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language."
+    ]
+  },
+  "Provider message": {
+    "message": "Provider message",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/details/ProviderConsumerInfoTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Respond": {
+    "message": "Respond",
+    "context": {
+      "primary_ui_type": "action_button",
+      "ui_types": [
+        "action_button"
+      ],
+      "components": [
+        "ActionButton"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/details/ProviderConsumerInfoTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ActionButton"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text appears on a button. Keep it short and action-oriented.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Attachment": {
+    "message": "Attachment",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/details/ProviderConsumerInfoTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Download PDF": {
+    "message": "Download PDF",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/details/ProviderConsumerInfoTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "a"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Customer response": {
+    "message": "Customer response",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "details"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "marketplace/orders/details/ProviderConsumerInfoTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 9
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
   "Type to search resources...": {
@@ -542357,6 +546018,152 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "Job position": {
+    "message": "Job position",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "property_value",
+        "unknown",
+        "generic_element",
+        "label"
+      ],
+      "components": [
+        "FormTable",
+        "UserEditRow"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 12,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "list",
+          "form",
+          "component"
+        ],
+        "paths": [
+          "user/CompleteYourProfileBanner.tsx",
+          "user/support/UserDetailsTable.tsx",
+          "user/support/UserEditRows.tsx",
+          "user/support/UserProfileTabs.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "UserEditRow"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 4
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Organization registry code": {
+    "message": "Organization registry code",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "property_value",
+        "generic_element",
+        "label"
+      ],
+      "components": [
+        "UserEditRow",
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "form",
+          "component"
+        ],
+        "paths": [
+          "user/CompleteYourProfileBanner.tsx",
+          "user/support/UserEditRows.tsx",
+          "user/support/UserProfileTabs.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "UserEditRow"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 3
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Complete your profile.": {
     "message": "Complete your profile.",
     "context": {
@@ -562928,78 +566735,6 @@
       "This is a title/heading. Use title case if appropriate in your language."
     ]
   },
-  "Job position": {
-    "message": "Job position",
-    "context": {
-      "primary_ui_type": "label",
-      "ui_types": [
-        "unknown",
-        "generic_element",
-        "label"
-      ],
-      "components": [
-        "FormTable",
-        "UserEditRow"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 12,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "user_management"
-        ],
-        "feature_areas": [
-          "support"
-        ],
-        "component_types": [
-          "list",
-          "form",
-          "component"
-        ],
-        "paths": [
-          "user/support/UserDetailsTable.tsx",
-          "user/support/UserEditRows.tsx",
-          "user/support/UserProfileTabs.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "UserEditRow"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 5
-      },
-      "usage_count": 3
-    },
-    "translator_notes": [
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
   "User type": {
     "message": "User type",
     "context": {
@@ -563259,6 +566994,75 @@
       "usage_count": 1
     },
     "translator_notes": [
+      "This action modifies application state. Use clear, actionable language."
+    ]
+  },
+  "Managed by {source}. Last synced: {date}": {
+    "message": "Managed by {source}. Last synced: {date}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 40,
+        "wordCount": 6,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "source": {
+          "type": "unknown"
+        },
+        "date": {
+          "type": "date"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "user/support/UserEditRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: source, date. Variable types: unknown, date.",
       "This action modifies application state. Use clear, actionable language."
     ]
   },
@@ -565837,6 +569641,144 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Your organization's registry code": {
+    "message": "Your organization's registry code",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "UserEditRow",
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 33,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "form",
+          "component"
+        ],
+        "paths": [
+          "user/support/UserEditRows.tsx",
+          "user/support/UserProfileTabs.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "UserEditRow"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "The user's organization registry code": {
+    "message": "The user's organization registry code",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "UserEditRow",
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 37,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "form",
+          "component"
+        ],
+        "paths": [
+          "user/support/UserEditRows.tsx",
+          "user/support/UserProfileTabs.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "UserEditRow"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 9
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
   "Read-only field from identity provider": {
     "message": "Read-only field from identity provider",
     "context": {
@@ -566598,6 +570540,1217 @@
       },
       "usage_count": 1
     }
+  },
+  "Fresh": {
+    "message": "Fresh",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Aging": {
+    "message": "Aging",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Stale": {
+    "message": "Stale",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Managed ISDs have been updated.": {
+    "message": "Managed ISDs have been updated.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 31,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to update managed ISDs.": {
+    "message": "Unable to update managed ISDs.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 30,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Comma-separated list of ISDs, e.g. isd:puhuri, isd:fenix": {
+    "message": "Comma-separated list of ISDs, e.g. isd:puhuri, isd:fenix",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "FormGroup",
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 56,
+        "wordCount": 7,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "User has been updated.": {
+    "message": "User has been updated.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to update user.": {
+    "message": "Unable to update user.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Identity manager": {
+    "message": "Identity manager",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "title"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 16,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component",
+          "list"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx",
+          "user/support/UserList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 5
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to load identity bridge status.": {
+    "message": "Unable to load identity bridge status.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "LoadingErred"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 38,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "LoadingErred"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Identity manager settings": {
+    "message": "Identity manager settings",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h5"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Federation status": {
+    "message": "Federation status",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Federated": {
+    "message": "Federated",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Badge",
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Local": {
+    "message": "Local",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "Badge",
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "Badge"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Connected ISDs": {
+    "message": "Connected ISDs",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormTable"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 14,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Attribute provenance": {
+    "message": "Attribute provenance",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h5"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Freshness": {
+    "message": "Freshness",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 9,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Effective bridge fields": {
+    "message": "Effective bridge fields",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "h5"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "These fields can be synced via the Identity Bridge.": {
+    "message": "These fields can be synced via the Identity Bridge.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 51,
+        "wordCount": 9,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "user_management"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "user/support/UserIdentityBridgeTab.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This appears in a form with validation. Ensure message supports user guidance.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
   },
   "Unable to impersonate the user.": {
     "message": "Unable to impersonate the user.",

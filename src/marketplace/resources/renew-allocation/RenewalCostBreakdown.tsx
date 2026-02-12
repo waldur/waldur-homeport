@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import {
   marketplaceResourcesEstimateRenewal,
+  projectsRetrieve,
   RenewalEstimateComponent,
   Resource,
 } from 'waldur-js-client';
@@ -56,9 +57,22 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
   resource,
   extensionMonths,
 }) => {
-  const shouldConcealPrices = isFeatureVisible(
-    MarketplaceFeatures.conceal_prices,
-  );
+  const { data: project } = useQuery({
+    queryKey: ['display-project-billing', resource.project_uuid],
+    queryFn: () =>
+      resource.project_uuid
+        ? projectsRetrieve({
+            path: { uuid: resource.project_uuid },
+            query: { field: ['customer_display_billing_info_in_projects'] },
+          }).then((response) => response.data)
+        : null,
+    refetchOnWindowFocus: false,
+    staleTime: 5 * 60 * 1000,
+  });
+
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+    project?.customer_display_billing_info_in_projects === false;
   const { values } = useFormState<RenewAllocationFormData>();
 
   const serializedLimits = useMemo(() => {

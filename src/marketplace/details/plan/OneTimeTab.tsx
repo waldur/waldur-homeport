@@ -8,8 +8,13 @@ import { ControlRows } from './ControlRows';
 import { FixedRows } from './FixedRows';
 import { PrepaidRows } from './PrepaidRows';
 
-export const OneTimeTab = ({ oneTime, viewMode }) => {
-  const shouldConcealPrices = useSelector(concealPricesSelector);
+export const OneTimeTab = ({
+  oneTime,
+  viewMode,
+  concealBillingInfo = false,
+}) => {
+  const shouldConcealPrices =
+    useSelector(concealPricesSelector) || concealBillingInfo;
 
   return (
     <section className="plan-details-section">

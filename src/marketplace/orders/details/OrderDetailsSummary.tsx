@@ -13,14 +13,19 @@ import { getCustomer, getProject } from '@waldur/workspace/selectors';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 
-const mapStateToProps = (state: RootState, ownProps: OrderSummaryProps) => ({
-  customer: getCustomer(state),
-  project: getProject(state),
-  total: pricesSelector(state, ownProps).total,
-  formData: orderFormDataSelector(state),
-  formValid: formIsValidSelector(state),
-  shouldConcealPrices: isFeatureVisible(MarketplaceFeatures.conceal_prices),
-});
+const mapStateToProps = (state: RootState, ownProps: OrderSummaryProps) => {
+  const customer = getCustomer(state);
+  return {
+    customer,
+    project: getProject(state),
+    total: pricesSelector(state, ownProps).total,
+    formData: orderFormDataSelector(state),
+    formValid: formIsValidSelector(state),
+    shouldConcealPrices:
+      isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+      customer?.display_billing_info_in_projects === false,
+  };
+};
 
 export const OrderDetailsSummary = connect<
   StateProps,

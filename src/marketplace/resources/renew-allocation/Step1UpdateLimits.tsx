@@ -30,9 +30,9 @@ const OneTimeComponentsSummary: FC<{
   data: Awaited<ReturnType<typeof loadData>>;
 }> = ({ data }) => {
   const { offering, plan } = data;
-  const shouldConcealPrices = isFeatureVisible(
-    MarketplaceFeatures.conceal_prices,
-  );
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+    data.concealBillingInfo;
 
   // Get one-time components from the offering
   const oneTimeComponents = useMemo(() => {
@@ -156,6 +156,7 @@ const UpdateLimitsTable: FC<{
         currentLimits,
         usages,
         true,
+        data.concealBillingInfo,
       );
     }
     const shouldConcealPrices = isFeatureVisible(

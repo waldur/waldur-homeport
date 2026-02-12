@@ -6,6 +6,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
+import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
 import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/ChangedLimitField';
 import {
   getLimitChangeData,
@@ -33,6 +34,7 @@ interface RenewalAttributes {
 }
 
 export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
+  const shouldConcealPrices = useShouldConcealPrices(order.project_uuid);
   const attributes = order.attributes as RenewalAttributes;
 
   const newLimits = useMemo(
@@ -90,11 +92,16 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
               }))
         }
       />
-      <Field
-        label={translate('Renewal cost')}
-        value={defaultCurrency(attributes.renewal_cost)}
+      {!shouldConcealPrices && (
+        <Field
+          label={translate('Renewal cost')}
+          value={defaultCurrency(attributes.renewal_cost)}
+        />
+      )}
+      <CostChangeField
+        order={order}
+        shouldConcealPrices={shouldConcealPrices}
       />
-      <CostChangeField order={order} />
       <RequestCommentField order={order} />
 
       <DetailsTable<(typeof data.components)[0]>
@@ -132,26 +139,30 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
                 DASH_ESCAPE_CODE
               ),
           },
-          ...data.periods.map((period, i) => ({
-            title: (
-              <>
-                {period} <PriceTooltip />
-              </>
-            ),
-            render: ({ row }) => defaultCurrency(row.prices[i]),
-          })),
+          ...(shouldConcealPrices
+            ? []
+            : data.periods.map((period, i) => ({
+                title: (
+                  <>
+                    {period} <PriceTooltip />
+                  </>
+                ),
+                render: ({ row }) => defaultCurrency(row.prices[i]),
+              }))),
         ]}
         totalRow={
-          <tr className="fw-bolder">
-            <td colSpan={4} className="text-dark text-end">
-              {translate('Total renewal cost')}
-            </td>
-            {data.totalPeriods.map((total, index) => (
-              <td key={index} className="text-dark">
-                {defaultCurrency(total)}
+          shouldConcealPrices ? null : (
+            <tr className="fw-bolder">
+              <td colSpan={4} className="text-dark text-end">
+                {translate('Total renewal cost')}
               </td>
-            ))}
-          </tr>
+              {data.totalPeriods.map((total, index) => (
+                <td key={index} className="text-dark">
+                  {defaultCurrency(total)}
+                </td>
+              ))}
+            </tr>
+          )
         }
       />
     </>
