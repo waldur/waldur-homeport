@@ -4,11 +4,14 @@ import {
   marketplaceResourcesRetrieve,
   Offering,
   OrderDetails,
+  projectsRetrieve,
   PublicOfferingDetails,
   Resource,
 } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import {
   SelectDialogFieldColumn,
   SelectDialogFieldChoice,
@@ -28,6 +31,7 @@ export interface FetchedData {
 
 const getColumns = (
   offering: PublicOfferingDetails,
+  shouldConcealPrices: boolean,
 ): SelectDialogFieldColumn[] => [
   {
     name: 'name',
@@ -39,10 +43,14 @@ const getColumns = (
       name: component.type,
       label: component.name,
     })),
-  {
-    name: 'price',
-    label: translate('Price'),
-  },
+  ...(shouldConcealPrices
+    ? []
+    : [
+        {
+          name: 'price',
+          label: translate('Price'),
+        },
+      ]),
 ];
 
 const sortPlans = (plans: BasePublicPlan[]) =>
@@ -97,7 +105,24 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
       path: { uuid: resource_uuid },
     }).then((response) => response.data),
   ]);
-  const columns = getColumns(offering);
+
+  let shouldConcealPrices = isFeatureVisible(
+    MarketplaceFeatures.conceal_prices,
+  );
+  if (!shouldConcealPrices && resource.project_uuid) {
+    try {
+      const project = await projectsRetrieve({
+        path: { uuid: resource.project_uuid },
+        query: { field: ['customer_display_billing_info_in_projects'] },
+      }).then((response) => response.data);
+      shouldConcealPrices =
+        project?.customer_display_billing_info_in_projects === false;
+    } catch {
+      // If we can't fetch the project, don't conceal prices
+    }
+  }
+
+  const columns = getColumns(offering, shouldConcealPrices);
   const choices = getChoices(offering, resource);
   const validPlan = choices.find((choice) => !choice.disabled);
   const initialValues = validPlan ? { plan: validPlan } : undefined;

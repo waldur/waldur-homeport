@@ -98,7 +98,11 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
             : null}
           {oneTime.hasOneTimeCost ? (
             <Tab.Pane eventKey="onetime">
-              <OneTimeTab oneTime={oneTime} viewMode={props.viewMode} />
+              <OneTimeTab
+                oneTime={oneTime}
+                viewMode={props.viewMode}
+                concealBillingInfo={props.concealBillingInfo}
+              />
             </Tab.Pane>
           ) : null}
 

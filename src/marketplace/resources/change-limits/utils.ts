@@ -4,6 +4,7 @@ import {
   marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesRetrieve,
   Offering,
+  projectsRetrieve,
   PublicOfferingDetails,
   Resource,
 } from 'waldur-js-client';
@@ -30,6 +31,7 @@ export interface FetchedData {
   limits: Limits;
   initialValues: { limits: Limits };
   offeringLimits: OfferingLimits;
+  concealBillingInfo: boolean;
 }
 
 export const getLimitChangeRequirements = (
@@ -83,6 +85,20 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
   const { limitSerializer, usages, limits, offeringLimits } =
     getLimitChangeRequirements(resource, offering);
 
+  let concealBillingInfo = false;
+  if (resource.project_uuid) {
+    try {
+      const project = await projectsRetrieve({
+        path: { uuid: resource.project_uuid },
+        query: { field: ['customer_display_billing_info_in_projects'] },
+      }).then((response) => response.data);
+      concealBillingInfo =
+        project?.customer_display_billing_info_in_projects === false;
+    } catch {
+      // If we can't fetch the project, don't conceal prices
+    }
+  }
+
   return {
     resource,
     offering,
@@ -92,6 +108,7 @@ export async function loadData(resource_uuid): Promise<FetchedData> {
     limits,
     offeringLimits,
     initialValues: { limits },
+    concealBillingInfo,
   };
 }
 
@@ -102,6 +119,7 @@ export const getLimitChangeData = (
   currentLimits,
   usages,
   orderCanBeApproved,
+  concealBillingInfo = false,
 ): StateProps => {
   const { periods, multipliers } = getBillingPeriods(plan.unit);
   const offeringComponents = filterOfferingComponents(offering).filter(
@@ -139,9 +157,8 @@ export const getLimitChangeData = (
   const changedTotalPeriods = multipliers.map(
     (mult) => mult * changedTotal || 0,
   );
-  const shouldConcealPrices = isFeatureVisible(
-    MarketplaceFeatures.conceal_prices,
-  );
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) || concealBillingInfo;
   return {
     periods,
     components,

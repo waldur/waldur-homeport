@@ -16,6 +16,7 @@ export interface OrderTypeBasedProps {
   offering?: PublicOfferingDetails;
   editable?: boolean;
   formTableItem?: boolean;
+  shouldConcealPrices?: boolean;
 }
 
 export const RequestedByField = ({
@@ -76,6 +77,7 @@ export const StartDateField = ({
 export const CostChangeField = ({
   order,
   formTableItem,
+  shouldConcealPrices,
 }: OrderTypeBasedProps) => {
   const costChange = useMemo(() => {
     const amount = defaultCurrency(
@@ -85,6 +87,7 @@ export const CostChangeField = ({
     );
     return amount + getPlanUnitAbbr(order.plan_unit);
   }, [order]);
+  if (shouldConcealPrices) return null;
   const Component = formTableItem ? FormTable.Item : Field;
   return <Component label={translate('Cost change')} value={costChange} />;
 };

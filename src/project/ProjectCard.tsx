@@ -6,6 +6,8 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { ModelCard1 } from '@waldur/core/ModelCard1';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -25,6 +27,9 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
   onClickDetails,
 }) => {
   const user = useSelector(getUser);
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+    project.customer_display_billing_info_in_projects === false;
   const canEdit = canEditProject(user, {
     customer: { uuid: project.customer_uuid },
     project,
@@ -80,28 +85,32 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               valueCol={6}
             />
 
-            <Field
-              label={translate('Cost estimation')}
-              value={defaultCurrency(
-                (project.billing_price_estimate &&
-                  project.billing_price_estimate.total) ||
-                  0,
-              )}
-              space={2}
-              labelCol={6}
-              valueCol={6}
-            />
+            {!shouldConcealPrices && (
+              <>
+                <Field
+                  label={translate('Cost estimation')}
+                  value={defaultCurrency(
+                    (project.billing_price_estimate &&
+                      project.billing_price_estimate.total) ||
+                      0,
+                  )}
+                  space={2}
+                  labelCol={6}
+                  valueCol={6}
+                />
 
-            {(project.project_credit || project.project_credit === 0) && (
-              <Field
-                label={translate('Remaining credit')}
-                value={renderFieldOrDash(
-                  defaultCurrency(project.project_credit),
+                {(project.project_credit || project.project_credit === 0) && (
+                  <Field
+                    label={translate('Remaining credit')}
+                    value={renderFieldOrDash(
+                      defaultCurrency(project.project_credit),
+                    )}
+                    space={2}
+                    labelCol={6}
+                    valueCol={6}
+                  />
                 )}
-                space={2}
-                labelCol={6}
-                valueCol={6}
-              />
+              </>
             )}
           </div>
         }

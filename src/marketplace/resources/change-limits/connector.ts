@@ -54,6 +54,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
       plan,
       usages,
       limits: currentLimits,
+      concealBillingInfo,
     } = ownProps.asyncState.value;
     return getLimitChangeData(
       plan,
@@ -62,6 +63,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
       currentLimits,
       usages,
       orderCanBeApproved,
+      concealBillingInfo,
     );
   }
   const shouldConcealPrices = isFeatureVisible(

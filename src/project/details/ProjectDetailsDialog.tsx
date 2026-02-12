@@ -4,6 +4,8 @@ import { Project } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -13,6 +15,9 @@ import { ProjectCostField } from '../ProjectCostField';
 export const ProjectDetailsDialog: FC<{
   project: Project;
 }> = ({ project }) => {
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+    project.customer_display_billing_info_in_projects === false;
   return (
     <ModalDialog
       title={translate('Project details for {name}', { name: project.name })}
@@ -57,10 +62,12 @@ export const ProjectDetailsDialog: FC<{
           value={<FieldWithCopy value={project.description} />}
         />
 
-        <FormTable.Item
-          label={translate('Estimated cost')}
-          value={<FieldWithCopy value={ProjectCostField({ row: project })} />}
-        />
+        {!shouldConcealPrices && (
+          <FormTable.Item
+            label={translate('Estimated cost')}
+            value={<FieldWithCopy value={ProjectCostField({ row: project })} />}
+          />
+        )}
       </FormTable>
     </ModalDialog>
   );

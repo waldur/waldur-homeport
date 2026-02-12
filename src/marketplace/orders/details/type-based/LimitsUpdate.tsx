@@ -5,6 +5,7 @@ import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
+import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
 import {
   getLimitChangeRequirements,
   getLimitChangeData,
@@ -23,6 +24,7 @@ import {
 } from './OrderCommonFields';
 
 export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
+  const shouldConcealPrices = useShouldConcealPrices(order.project_uuid);
   const data = useMemo(() => {
     const requirements = getLimitChangeRequirements(
       { limits: (order.attributes as any).old_limits },
@@ -71,7 +73,10 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
       <RequestedByField order={order} />
       <RequestCommentField order={order} />
       <DescriptionField order={order} offering={offering} />
-      <CostChangeField order={order} />
+      <CostChangeField
+        order={order}
+        shouldConcealPrices={shouldConcealPrices}
+      />
 
       <DetailsTable<(typeof data.components)[0]>
         rows={data.components}
@@ -97,36 +102,42 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
             render: ({ row }) =>
               data.newLimits[row.type] + ' ' + row.measured_unit,
           },
-          {
-            title: (
-              <>
-                {translate('Old price')}
-                <PriceTooltip />
-              </>
-            ),
-            render: ({ row }) =>
-              defaultCurrency(row.prices[0] - row.changedPrices[0]),
-          },
-          {
-            title: (
-              <>
-                {translate('New price')}
-                <PriceTooltip />
-              </>
-            ),
-            render: ({ row }) => defaultCurrency(row.prices[0]),
-          },
+          ...(shouldConcealPrices
+            ? []
+            : [
+                {
+                  title: (
+                    <>
+                      {translate('Old price')}
+                      <PriceTooltip />
+                    </>
+                  ),
+                  render: ({ row }) =>
+                    defaultCurrency(row.prices[0] - row.changedPrices[0]),
+                },
+                {
+                  title: (
+                    <>
+                      {translate('New price')}
+                      <PriceTooltip />
+                    </>
+                  ),
+                  render: ({ row }) => defaultCurrency(row.prices[0]),
+                },
+              ]),
         ]}
         totalRow={
-          <tr className="fw-bolder">
-            <td colSpan={4} className="text-dark text-end">
-              {translate('Total cost')}
-            </td>
-            <td className="text-dark">
-              {defaultCurrency(data.changedTotalPeriods[0], false, true)}
-              {getPlanUnitAbbr(order.plan_unit)}
-            </td>
-          </tr>
+          shouldConcealPrices ? null : (
+            <tr className="fw-bolder">
+              <td colSpan={4} className="text-dark text-end">
+                {translate('Total cost')}
+              </td>
+              <td className="text-dark">
+                {defaultCurrency(data.changedTotalPeriods[0], false, true)}
+                {getPlanUnitAbbr(order.plan_unit)}
+              </td>
+            </tr>
+          )
         }
       />
     </>

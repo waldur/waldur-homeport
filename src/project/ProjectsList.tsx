@@ -4,7 +4,7 @@ import { projectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
+import { MarketplaceFeatures, ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
@@ -92,7 +92,11 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
     },
   ];
 
-  if (isFeatureVisible(ProjectFeatures.estimated_cost)) {
+  if (
+    isFeatureVisible(ProjectFeatures.estimated_cost) &&
+    !isFeatureVisible(MarketplaceFeatures.conceal_prices) &&
+    customer?.display_billing_info_in_projects !== false
+  ) {
     columns.push({
       title: translate('Estimated cost'),
       render: ProjectCostField,
