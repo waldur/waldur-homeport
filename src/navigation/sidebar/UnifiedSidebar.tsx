@@ -2,6 +2,8 @@ import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
 
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
@@ -68,9 +70,14 @@ export const UnifiedSidebar = () => {
   if (!user) {
     return null;
   }
+  const canAccessMarketplace =
+    !isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) ||
+    user.is_staff;
+
   return (
     <Sidebar>
-      {user.is_staff || user.permissions?.length !== 0 ? (
+      {canAccessMarketplace &&
+      (user.is_staff || user.permissions?.length !== 0) ? (
         <MarketplaceTrigger
           disabled={shouldBlockNavigation}
           disabledTooltip={disabledTooltip}
@@ -97,23 +104,28 @@ export const UnifiedSidebar = () => {
         disabled={shouldBlockNavigation}
         disabledTooltip={disabledTooltip}
       />
-      <MenuItem
-        activeState={
-          [
-            'public.marketplace',
-            'public-offering',
-            'marketplace-orders.details',
-          ].some((name) => state.name.startsWith(name))
-            ? state.name
-            : undefined
-        }
-        icon={<ShoppingCartIcon weight="bold" />}
-        title={translate('Marketplace')}
-        state="public.marketplace-landing"
-        child={false}
-        disabled={shouldBlockNavigation}
-        disabledTooltip={disabledTooltip}
-      />
+      {(!isFeatureVisible(
+        MarketplaceFeatures.hide_marketplace_from_end_users,
+      ) ||
+        user.is_staff) && (
+        <MenuItem
+          activeState={
+            [
+              'public.marketplace',
+              'public-offering',
+              'marketplace-orders.details',
+            ].some((name) => state.name.startsWith(name))
+              ? state.name
+              : undefined
+          }
+          icon={<ShoppingCartIcon weight="bold" />}
+          title={translate('Marketplace')}
+          state="public.marketplace-landing"
+          child={false}
+          disabled={shouldBlockNavigation}
+          disabledTooltip={disabledTooltip}
+        />
+      )}
     </Sidebar>
   );
 };
