@@ -10,9 +10,19 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
 import { PermissionEnum } from '@waldur/permissions/enums';
-import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { isOwnerOrStaff, isStaff } from '@waldur/workspace/selectors';
 
 import { fetchProvider } from './resolve';
+
+const canAccessMarketplace = (state) => {
+  const hideFromEndUsers = isFeatureVisible(
+    MarketplaceFeatures.hide_marketplace_from_end_users,
+  );
+  if (!hideFromEndUsers) {
+    return true;
+  }
+  return isStaff(state);
+};
 
 export const states: StateDeclaration[] = [
   {
@@ -72,6 +82,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
+      permissions: [canAccessMarketplace],
     },
   },
 
@@ -89,6 +100,7 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('Orders'),
       permissions: [
         () => !isFeatureVisible(MarketplaceFeatures.catalogue_only),
+        canAccessMarketplace,
       ],
     },
   },
@@ -115,6 +127,7 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
+      permissions: [canAccessMarketplace],
     },
   },
   {
@@ -128,6 +141,7 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
+      permissions: [canAccessMarketplace],
     },
   },
   {
@@ -141,6 +155,7 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
+      permissions: [canAccessMarketplace],
     },
   },
   {
@@ -154,6 +169,7 @@ export const states: StateDeclaration[] = [
     data: {
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
       useExtraTabs: true,
+      permissions: [canAccessMarketplace],
     },
   },
 
@@ -534,6 +550,9 @@ export const states: StateDeclaration[] = [
         default: module.OrderDetailsContainer,
       })),
     ),
+    data: {
+      permissions: [canAccessMarketplace],
+    },
   },
 
   {
@@ -734,6 +753,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Service providers'),
+      permissions: [canAccessMarketplace],
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },

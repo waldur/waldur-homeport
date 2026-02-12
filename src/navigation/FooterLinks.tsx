@@ -71,16 +71,20 @@ export const FooterLinks = () => {
               </Link>
             </li>
           )}
-          {ENV.plugins.WALDUR_CORE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS && (
-            <li className="menu-item" data-kt-menu-trigger="click">
-              <Link
-                className="menu-link px-8px"
-                state="public.marketplace-landing"
-              >
-                {translate('Explore marketplace')}
-              </Link>
-            </li>
-          )}
+          {ENV.plugins.WALDUR_CORE.ANONYMOUS_USER_CAN_VIEW_OFFERINGS &&
+            (!isFeatureVisible(
+              MarketplaceFeatures.hide_marketplace_from_end_users,
+            ) ||
+              user?.is_staff) && (
+              <li className="menu-item" data-kt-menu-trigger="click">
+                <Link
+                  className="menu-link px-8px"
+                  state="public.marketplace-landing"
+                >
+                  {translate('Explore marketplace')}
+                </Link>
+              </li>
+            )}
         </>
       )}
 
