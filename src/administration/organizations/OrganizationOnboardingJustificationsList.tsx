@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import {
   OnboardingJustification,
+  OnboardingJustificationsListData,
   onboardingJustificationsList,
   ValidationDecisionEnum,
 } from 'waldur-js-client';
@@ -33,10 +34,15 @@ const DecisionBadge: FC<{ decision: ValidationDecisionEnum }> = ({
 };
 
 export const OrganizationOnboardingJustificationsList: FC = () => {
+  const filter: OnboardingJustificationsListData['query'] = {
+    o: ['-created'],
+  };
+
   const tableProps = useTable({
     table: 'OrganizationOnboardingJustifications',
     fetchData: createFetcher(onboardingJustificationsList),
-    queryField: 'user_justification',
+    filter,
+    queryField: 'query',
   });
 
   return (
@@ -70,6 +76,7 @@ export const OrganizationOnboardingJustificationsList: FC = () => {
         {
           title: translate('Created'),
           render: ({ row }) => formatDateTime(row.created),
+          orderField: 'created',
         },
         {
           title: translate('Validated at'),
@@ -77,6 +84,7 @@ export const OrganizationOnboardingJustificationsList: FC = () => {
             row.validated_at
               ? formatDateTime(row.validated_at)
               : renderFieldOrDash(null),
+          orderField: 'validated_at',
         },
       ]}
       hasQuery={true}
