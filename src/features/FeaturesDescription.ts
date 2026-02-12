@@ -115,6 +115,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Hide marketplace functionality from end users but allow staff access.'),
       },
       {
+        key: 'hide_organization_information_from_project_members',
+        description: translate('Hide organization information from project-level users. Organization owners, managers, and staff retain full access.'),
+      },
+      {
         key: 'import_resources',
         description: translate('Allow to import resources from service provider to project.'),
       },
