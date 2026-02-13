@@ -172,6 +172,12 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
+      {
+        key: 'ALLOW_SERVICE_PROVIDER_OFFERING_ACTIVATION',
+        description: translate('If true, service provider owners and managers can activate offerings without staff approval.'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
   {
