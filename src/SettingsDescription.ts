@@ -173,8 +173,8 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
-        key: 'ALLOW_SERVICE_PROVIDER_OFFERING_ACTIVATION',
-        description: translate('If true, service provider owners and managers can activate offerings without staff approval.'),
+        key: 'ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT',
+        description: translate('If true, service provider owners and managers can manage offering lifecycle (activate, pause, unpause, archive, draft, delete) without staff approval.'),
         default: false,
         type: 'boolean',
       },
