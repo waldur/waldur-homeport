@@ -1,10 +1,11 @@
-import { DiffEditor, loader } from '@monaco-editor/react';
+import { DiffEditor } from '@monaco-editor/react';
 import * as monacoEditor from 'monaco-editor';
-import { FunctionComponent, useEffect, useMemo, useState } from 'react';
+import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { Nav, Table } from 'react-bootstrap';
 import { VersionHistory } from 'waldur-js-client';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
+import { initMonaco } from '@waldur/form/monacoSetup';
 import { translate } from '@waldur/i18n';
 import { LoadingSpinner } from '@waldur/table/TableRefreshButton';
 
@@ -28,10 +29,7 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
   const [isMonacoReady, setIsMonacoReady] = useState(false);
 
   useEffect(() => {
-    loader.config({ monaco: monacoEditor });
-    loader.init().then(() => {
-      setIsMonacoReady(true);
-    });
+    initMonaco().then(() => setIsMonacoReady(true));
   }, []);
 
   const diffs = useMemo(() => {
@@ -90,17 +88,27 @@ export const VersionDiffViewer: FunctionComponent<VersionDiffViewerProps> = ({
       </div>
 
       <div className="flex-grow-1 overflow-auto">
-        {viewMode === 'table' ? (
+        <div style={{ display: viewMode === 'table' ? undefined : 'none' }}>
           <TableDiffView diffs={diffs} />
-        ) : isMonacoReady ? (
-          <JsonDiffView
-            currentVersion={currentVersion}
-            previousVersion={previousVersion}
-          />
-        ) : (
-          <div className="d-flex justify-content-center align-items-center h-100">
-            <LoadingSpinner />
+        </div>
+        {isMonacoReady ? (
+          <div
+            style={{
+              display: viewMode === 'json' ? undefined : 'none',
+              height: '100%',
+            }}
+          >
+            <JsonDiffView
+              currentVersion={currentVersion}
+              previousVersion={previousVersion}
+            />
           </div>
+        ) : (
+          viewMode === 'json' && (
+            <div className="d-flex justify-content-center align-items-center h-100">
+              <LoadingSpinner />
+            </div>
+          )
         )}
       </div>
     </div>
@@ -155,6 +163,8 @@ const JsonDiffView: FunctionComponent<{
   currentVersion: VersionHistory;
   previousVersion: VersionHistory | null;
 }> = ({ currentVersion, previousVersion }) => {
+  const editorRef = useRef<monacoEditor.editor.IDiffEditor | null>(null);
+
   const originalJson = useMemo(
     () =>
       previousVersion
@@ -168,6 +178,24 @@ const JsonDiffView: FunctionComponent<{
     [currentVersion],
   );
 
+  useEffect(() => {
+    return () => {
+      // Dispose models after the DiffEditor widget has been disposed
+      // (child cleanup runs before parent cleanup).
+      // We use keepCurrentOriginalModel/keepCurrentModifiedModel to prevent
+      // @monaco-editor/react from disposing models before the widget,
+      // which causes "TextModel got disposed before DiffEditorWidget model got reset".
+      const model = editorRef.current?.getModel();
+      model?.original?.dispose();
+      model?.modified?.dispose();
+      editorRef.current = null;
+    };
+  }, []);
+
+  const handleMount = (editor: monacoEditor.editor.IDiffEditor) => {
+    editorRef.current = editor;
+  };
+
   return (
     <DiffEditor
       height="100%"
@@ -175,6 +203,9 @@ const JsonDiffView: FunctionComponent<{
       original={originalJson}
       modified={modifiedJson}
       theme="vs-dark"
+      onMount={handleMount}
+      keepCurrentOriginalModel={true}
+      keepCurrentModifiedModel={true}
       options={{
         readOnly: true,
         minimap: { enabled: false },
