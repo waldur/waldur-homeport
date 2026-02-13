@@ -6,10 +6,14 @@ import { marketplaceResourcesTerminate } from 'waldur-js-client';
 import { translate } from '@waldur/i18n';
 import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { useUser } from '@waldur/workspace/hooks';
 
 export const MultiDestroyAction = ({ rows, refetch }) => {
   const dispatch = useDispatch();
+  const user = useUser();
 
   const permittedResources = useMemo(
     () =>
@@ -18,9 +22,14 @@ export const MultiDestroyAction = ({ rows, refetch }) => {
           ['OK', 'ERRED'].includes(resource.state) &&
           !resource.offering_plugin_options?.disabled_resource_actions?.includes(
             ResourceAction.TERMINATE,
-          ),
+          ) &&
+          hasPermission(user, {
+            permission: PermissionEnum.TERMINATE_RESOURCE,
+            projectId: resource.project_uuid,
+            customerId: resource.customer_uuid,
+          }),
       ),
-    [rows],
+    [rows, user],
   );
 
   const callback = useCallback(async () => {

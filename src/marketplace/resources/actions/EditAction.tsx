@@ -2,9 +2,12 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
+import { useUser } from '@waldur/workspace/hooks';
 
 const EditDialog = lazyComponent(() =>
   import('./EditDialog').then((module) => ({ default: module.EditDialog })),
@@ -20,8 +23,24 @@ const CUSTOM_EDIT_ACTION_RESOURCE_TYPES = [
   'VMware.VirtualMachine',
 ];
 
-export const EditAction: ActionItemType = ({ resource, refetch }) =>
-  CUSTOM_EDIT_ACTION_RESOURCE_TYPES.includes(resource.resource_type) ? null : (
+export const EditAction: ActionItemType = ({ resource, refetch }) => {
+  const user = useUser();
+
+  if (CUSTOM_EDIT_ACTION_RESOURCE_TYPES.includes(resource.resource_type)) {
+    return null;
+  }
+
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.UPDATE_RESOURCE,
+      projectId: resource.project_uuid,
+      customerId: resource.customer_uuid,
+    })
+  ) {
+    return null;
+  }
+
+  return (
     <DialogActionItem
       validators={validators}
       title={translate('Edit')}
@@ -31,3 +50,4 @@ export const EditAction: ActionItemType = ({ resource, refetch }) =>
       iconNode={<PencilSimpleIcon weight="bold" />}
     />
   );
+};

@@ -7,9 +7,12 @@ import {
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { validateState } from '@waldur/resource/actions/base';
 import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { ResourceAction } from '../actions/constants';
 
@@ -32,6 +35,8 @@ const getAvailablePlanChoices = (offering, resource) => {
 };
 
 export const ChangePlanAction: ActionItemType = ({ resource, refetch }) => {
+  const user = useUser();
+
   // Fetch offering data to check number of available plans
   const { data: offeringData, isLoading } = useQuery({
     queryKey: ['changePlan', resource.marketplace_resource_uuid],
@@ -53,6 +58,17 @@ export const ChangePlanAction: ActionItemType = ({ resource, refetch }) => {
 
   // Don't show action if no marketplace resource UUID
   if (!resource.marketplace_resource_uuid) {
+    return null;
+  }
+
+  // Hide if user lacks permission to switch plan
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.SWITCH_RESOURCE_PLAN,
+      projectId: resource.project_uuid,
+      customerId: resource.customer_uuid,
+    })
+  ) {
     return null;
   }
 

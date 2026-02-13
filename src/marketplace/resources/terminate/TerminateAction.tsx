@@ -3,10 +3,13 @@ import { FC } from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { validateState } from '@waldur/resource/actions/base';
 import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
 import { useValidators } from '@waldur/resource/actions/useValidators';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { ResourceAction } from '../actions/constants';
 
@@ -27,7 +30,18 @@ export const TerminateAction: FC<TerminateActionProps> = ({
   resource,
   refetch,
 }) => {
+  const user = useUser();
   const { tooltip, disabled } = useValidators(validators, resource);
+
+  if (
+    !hasPermission(user, {
+      permission: PermissionEnum.TERMINATE_RESOURCE,
+      projectId: resource.project_uuid,
+      customerId: resource.customer_uuid,
+    })
+  ) {
+    return null;
+  }
   const action = useModalDialogCallback(TerminateDialog, resource, {
     refetch,
   });
