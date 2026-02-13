@@ -146,7 +146,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'public.offerings',
-    url: '/marketplace-public-offerings/?{initialMode}&{tag_name}',
+    url: '/marketplace-public-offerings/?{initialMode}',
     component: lazyComponent(() =>
       import('./category/AllOfferingsList').then((module) => ({
         default: module.AllOfferingsList,

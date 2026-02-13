@@ -11,14 +11,10 @@ import { getStates } from '../list/OfferingStateFilter';
 
 import { ADMIN_OFFERING_TABLE_NAME } from './constants';
 
-type AdminOfferingsFilter = MarketplaceProviderOfferingsListData['query'] & {
-  tag?: string; // TODO: Remove once SDK includes tag filter support
-};
-
 export const mapStateToFilter = createSelector(
   getFormValues(OFFERINGS_FILTER_FORM_ID),
   (filterValues: any) => {
-    const filter: AdminOfferingsFilter = {};
+    const filter: MarketplaceProviderOfferingsListData['query'] = {};
     if (filterValues?.organization) {
       filter.customer_uuid = filterValues.organization.uuid;
     }
