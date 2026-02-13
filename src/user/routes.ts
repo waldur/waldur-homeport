@@ -3,6 +3,7 @@ import { UIView } from '@uirouter/react';
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { isFeatureVisible } from '@waldur/features/connect';
 import {
   CustomerFeatures,
   MarketplaceFeatures,
@@ -10,8 +11,19 @@ import {
 } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
+import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
 
 import { UsersService } from './UsersService';
+
+const canAccessOrganization = (state) => {
+  const hideFromProjectMembers = isFeatureVisible(
+    MarketplaceFeatures.hide_organization_information_from_project_members,
+  );
+  if (!hideFromProjectMembers) {
+    return true;
+  }
+  return hasNonProjectPermissions(state);
+};
 
 export const states: StateDeclaration[] = [
   {
@@ -248,6 +260,9 @@ export const states: StateDeclaration[] = [
       })),
     ),
     parent: 'layout',
+    data: {
+      permissions: [canAccessOrganization],
+    },
   },
   {
     name: 'organizations-create',
@@ -262,6 +277,7 @@ export const states: StateDeclaration[] = [
       auth: true,
       breadcrumb: () => translate('Create organization'),
       feature: CustomerFeatures.show_onboarding,
+      permissions: [canAccessOrganization],
     },
   },
   {

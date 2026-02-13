@@ -93,6 +93,14 @@ export const hasAnyOrganizationAccess = (state: RootState): boolean => {
   return user.permissions?.some((p) => p.scope_type === 'customer') ?? false;
 };
 
+// Check if user has any non-project permissions
+export const hasNonProjectPermissions = (state: RootState): boolean => {
+  const user = getUser(state);
+  if (!user) return false;
+  if (user.is_staff || user.is_support) return true;
+  return user.permissions?.some((p) => p.scope_type !== 'project') ?? false;
+};
+
 /**
  * Check if user manages any service provider offerings
  */

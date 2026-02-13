@@ -1,6 +1,19 @@
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
+import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
+
+const canAccessOrganization = (state) => {
+  const hideFromProjectMembers = isFeatureVisible(
+    MarketplaceFeatures.hide_organization_information_from_project_members,
+  );
+  if (!hideFromProjectMembers) {
+    return true;
+  }
+  return hasNonProjectPermissions(state);
+};
 
 export const states: StateDeclaration[] = [
   {
@@ -58,6 +71,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       skipBreadcrumb: true,
+      permissions: [canAccessOrganization],
       ...ANONYMOUS_LAYOUT_ROUTE_CONFIG,
     },
   },

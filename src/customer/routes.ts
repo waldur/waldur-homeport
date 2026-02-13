@@ -18,6 +18,7 @@ import {
   isOwnerOrStaff,
   isStaff,
   isOwner,
+  hasNonProjectPermissions,
 } from '@waldur/workspace/selectors';
 
 import { userHasCustomerPermission } from './utils';
@@ -30,6 +31,16 @@ function canAccessPaymentProfiles(state) {
   return false;
 }
 
+const canAccessOrganization = (state) => {
+  const hideFromProjectMembers = isFeatureVisible(
+    MarketplaceFeatures.hide_organization_information_from_project_members,
+  );
+  if (!hideFromProjectMembers) {
+    return true;
+  }
+  return hasNonProjectPermissions(state);
+};
+
 export const states: StateDeclaration[] = [
   {
     name: 'organization',
@@ -38,6 +49,7 @@ export const states: StateDeclaration[] = [
     data: {
       auth: true,
       title: () => translate('Organization'),
+      permissions: [canAccessOrganization],
     },
     parent: 'layout',
     component: lazyComponent(() =>

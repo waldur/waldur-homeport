@@ -1,6 +1,6 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 
 import * as AuthService from '@waldur/auth/AuthService';
 import { ENV } from '@waldur/core/config';
@@ -13,6 +13,7 @@ import { DocsLink } from '@waldur/navigation/header/DocsLink';
 import { IssuesLink } from '@waldur/navigation/IssuesLink';
 import { showSuccess } from '@waldur/store/notify';
 import { useUser } from '@waldur/workspace/hooks';
+import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
 
 import { JoinOrganizationFooterLink } from './JoinOrganizationFooterLink';
 
@@ -36,11 +37,17 @@ export const FooterLinks = () => {
   const dispatch = useDispatch();
 
   const user = useUser();
+  const hasNonProjectPerms = useSelector(hasNonProjectPermissions);
 
   const showSupport =
     ENV.plugins.WALDUR_CORE.DOCS_URL ||
     ENV.plugins.WALDUR_CORE.SITE_EMAIL ||
     ENV.plugins.WALDUR_CORE.SITE_PHONE;
+
+  const canAccessOrganization =
+    !isFeatureVisible(
+      MarketplaceFeatures.hide_organization_information_from_project_members,
+    ) || hasNonProjectPerms;
 
   const copyText = useCallback(
     (text) => {
@@ -88,7 +95,7 @@ export const FooterLinks = () => {
         </>
       )}
 
-      {!!user && <JoinOrganizationFooterLink />}
+      {!!user && canAccessOrganization && <JoinOrganizationFooterLink />}
 
       <li className="menu-item" data-kt-menu-trigger="click">
         <Link className="menu-link px-8px" state="about.privacy">

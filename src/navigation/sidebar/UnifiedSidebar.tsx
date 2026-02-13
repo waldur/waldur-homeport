@@ -1,6 +1,7 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
+import { useSelector } from 'react-redux';
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -9,6 +10,7 @@ import { MenuComponent } from '@waldur/metronic/components';
 import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
 import { useProfileCompletenessContext } from '@waldur/user/ProfileCompletenessContext';
 import { useUser } from '@waldur/workspace/hooks';
+import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
 
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';
@@ -67,12 +69,19 @@ export const UnifiedSidebar = () => {
     }
   }, [router, state, params.resource_uuid]);
 
+  const hasNonProjectPerms = useSelector(hasNonProjectPermissions);
+
   if (!user) {
     return null;
   }
   const canAccessMarketplace =
     !isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) ||
     user.is_staff;
+
+  const canAccessOrganization =
+    !isFeatureVisible(
+      MarketplaceFeatures.hide_organization_information_from_project_members,
+    ) || hasNonProjectPerms;
 
   return (
     <Sidebar>
@@ -83,10 +92,12 @@ export const UnifiedSidebar = () => {
           disabledTooltip={disabledTooltip}
         />
       ) : null}
-      <OrganizationsListMenu
-        disabled={shouldBlockNavigation}
-        disabledTooltip={disabledTooltip}
-      />
+      {canAccessOrganization && (
+        <OrganizationsListMenu
+          disabled={shouldBlockNavigation}
+          disabledTooltip={disabledTooltip}
+        />
+      )}
       <ProjectsListMenu
         disabled={shouldBlockNavigation}
         disabledTooltip={disabledTooltip}
