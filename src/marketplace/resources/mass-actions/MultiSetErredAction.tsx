@@ -6,10 +6,14 @@ import { marketplaceProviderResourcesSetAsErred } from 'waldur-js-client';
 import { translate } from '@waldur/i18n';
 import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { useUser } from '@waldur/workspace/hooks';
 
 export const MultiSetErredAction = ({ rows, refetch }) => {
   const dispatch = useDispatch();
+  const user = useUser();
 
   const permittedResources = useMemo(
     () =>
@@ -17,9 +21,13 @@ export const MultiSetErredAction = ({ rows, refetch }) => {
         (resource) =>
           !resource.offering_plugin_options?.disabled_resource_actions?.includes(
             ResourceAction.SET_AS_ERRED,
-          ),
+          ) &&
+          hasPermission(user, {
+            permission: PermissionEnum.SET_RESOURCE_STATE,
+            customerId: resource.provider_uuid,
+          }),
       ),
-    [rows],
+    [rows, user],
   );
 
   const callback = useCallback(async () => {
