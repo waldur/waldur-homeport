@@ -15,6 +15,8 @@ import {
   AuthMethodStorage,
 } from '../core/StorageManager';
 
+const DEFAULT_REDIRECT_STATE = 'profile.details';
+
 export async function loginUser(token: string, method: string) {
   AuthTokenStorage.set(token);
   AuthMethodStorage.set(method);
@@ -44,7 +46,8 @@ export async function signinByToken(token) {
 export function storeRedirect() {
   if (
     router.globals.params?.toState &&
-    router.globals.params?.toState !== 'profile.details'
+    router.globals.params?.toState !== DEFAULT_REDIRECT_STATE &&
+    !router.globals.params?.toState.startsWith('error')
   ) {
     RedirectStorage.set({
       toState: router.globals.params.toState,
@@ -53,20 +56,23 @@ export function storeRedirect() {
   }
 }
 
-export function redirectOnSuccess() {
+export async function redirectOnSuccess() {
   const redirect = RedirectStorage.get();
-  if (redirect) {
+  let targetState = DEFAULT_REDIRECT_STATE;
+  let targetParams = {};
+  if (redirect && redirect.toState && redirect.toParams) {
     RedirectStorage.remove();
-    // If redirect is not possible, go to default state
-    const href = router.stateService.href(redirect.toState, redirect.toParams);
-    if (!href) {
-      return router.stateService.go('profile.details', { reload: true });
+    if (!targetState.startsWith('error')) {
+      targetState = redirect.toState;
+      targetParams = redirect.toParams;
     }
-    // TODO: Use router.stateService.go(redirect.toState, redirect.toParams) instead
-    document.location = href;
-  } else {
-    return router.stateService.go('profile.details', { reload: true });
   }
+  try {
+    await router.stateService.go(targetState, targetParams);
+  } catch {
+    await router.stateService.go(DEFAULT_REDIRECT_STATE);
+  }
+  document.location.reload();
 }
 
 export function clearAuthCache() {
