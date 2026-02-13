@@ -215,7 +215,7 @@ export const useOrganizationAndProjectFiltersForResources = (
 
     // URL params take precedence over localStorage
     const urlParams = getQueryParams();
-    const hasUrlFilters = urlParams.organization || urlParams.project;
+    const hasUrlFilters = Object.keys(urlParams).length > 0;
 
     if (hasUrlFilters) {
       // Use URL params - they were set intentionally (e.g., shared link)

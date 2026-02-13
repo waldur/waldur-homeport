@@ -18,7 +18,7 @@ import { PublicOfferingsList } from './PublicOfferingsList';
 
 export const AllOfferingsList = () => {
   const {
-    params: { initialMode, tag_name },
+    params: { initialMode },
   } = useCurrentStateAndParams();
   useTitle(translate('Offerings'));
   useMarketplacePublicTabs();
@@ -29,20 +29,13 @@ export const AllOfferingsList = () => {
     () => getContextFiltersForOfferings(filters),
     [filters],
   );
-  const filter = useMemo(
-    () => ({
-      ...contextFilter,
-      ...(tag_name ? { tag_name } : undefined),
-    }),
-    [contextFilter, tag_name],
-  );
 
   return (
     <PublicOfferingsList
       showCategory
       showOrganization
       initialMode={initialMode}
-      filter={filter}
+      filter={contextFilter}
     />
   );
 };
