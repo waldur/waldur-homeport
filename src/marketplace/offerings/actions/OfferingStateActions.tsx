@@ -11,6 +11,7 @@ import {
   marketplaceProviderOfferingsUnpause,
 } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
@@ -88,13 +89,17 @@ export const OfferingStateActions = ({
       );
     }
   };
+  const canManageOfferingLifecycle =
+    user.is_staff ||
+    !!ENV.plugins.WALDUR_CORE.ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT;
+
   const activate = () => {
     const errors = getActivationErrors(offering);
     if (errors.length > 0) {
       errors.forEach((error) => dispatch(showError(error)));
       return;
     }
-    if (user.is_staff) {
+    if (canManageOfferingLifecycle) {
       updateOfferingState(() =>
         marketplaceProviderOfferingsActivate({ path: { uuid: offering.uuid } }),
       );
@@ -107,7 +112,7 @@ export const OfferingStateActions = ({
     }
   };
   const setDraft = () => {
-    if (user.is_staff) {
+    if (canManageOfferingLifecycle) {
       updateOfferingState(() =>
         marketplaceProviderOfferingsDraft({ path: { uuid: offering.uuid } }),
       );
@@ -196,17 +201,18 @@ export const OfferingStateActions = ({
     customerId: offering.customer_uuid,
   });
 
-  const showDeleteAction = user.is_staff
-    ? true
-    : offering.state === DRAFT &&
-      !offering.resources_count &&
-      canDeleteOffering;
+  const showDeleteAction = canManageOfferingLifecycle
+    ? user.is_staff ||
+      (offering.state === DRAFT &&
+        !offering.resources_count &&
+        canDeleteOffering)
+    : false;
 
-  const draftTitle = user.is_staff
+  const draftTitle = canManageOfferingLifecycle
     ? translate('Set to draft')
     : translate('Request editing');
 
-  const activateTitle = user.is_staff
+  const activateTitle = canManageOfferingLifecycle
     ? translate('Activate')
     : translate('Request publishing');
 
@@ -225,7 +231,7 @@ export const OfferingStateActions = ({
   }[offering.state];
 
   if (offering.state == UNAVAILABLE) {
-    if (!user.is_staff) return null;
+    if (!canManageOfferingLifecycle) return null;
 
     return (
       <Button
@@ -263,7 +269,7 @@ export const OfferingStateActions = ({
           {translate('Archive')}
         </Dropdown.Item>
 
-        {user.is_staff && (
+        {canManageOfferingLifecycle && (
           <Dropdown.Item onClick={openChangeAvailabilityDialog}>
             {translate('Make unavailable')}
           </Dropdown.Item>
