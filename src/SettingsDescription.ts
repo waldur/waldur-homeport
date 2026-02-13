@@ -983,6 +983,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'OIDC_MATCHMAKING_BY_EMAIL',
+        description: translate('If true, when OIDC login fails to find a user by the primary lookup field, attempt a secondary lookup by email before creating a new user. On successful email match, the user\'s primary lookup field is updated to the OIDC claim value.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
         key: 'OIDC_ACCESS_TOKEN_ENABLED',
         description: translate('If true, OIDC complete view returns access token instead of Waldur token'),
         default: false,
