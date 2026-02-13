@@ -26,6 +26,7 @@ export const EChart: React.FC<ChartProps> = ({
 }) => {
   const containerRef = useRef<HTMLDivElement | null>(null);
   const chartRef = useRef<any>(null);
+  const resizeObserverRef = useRef<ResizeObserver | null>(null);
   const [loading, setLoading] = useState(false);
   const { theme } = useTheme();
 
@@ -33,8 +34,13 @@ export const EChart: React.FC<ChartProps> = ({
     drawChart();
 
     return () => {
+      if (resizeObserverRef.current) {
+        resizeObserverRef.current.disconnect();
+        resizeObserverRef.current = null;
+      }
       if (chartRef.current) {
         chartRef.current.dispose();
+        chartRef.current = null;
         containerRef.current = null;
       }
     };
@@ -45,6 +51,7 @@ export const EChart: React.FC<ChartProps> = ({
     if (!containerRef.current) return;
 
     import('@waldur/echarts').then((module) => {
+      if (!containerRef.current) return;
       const echarts = module.default;
 
       if (chartRef.current) {
@@ -84,15 +91,17 @@ export const EChart: React.FC<ChartProps> = ({
         );
       }
       renderChart();
-      const resizeObserver = new ResizeObserver((entries) => {
-        entries.forEach(({ target }) => {
-          const instance = echarts.getInstanceByDom(target as HTMLElement);
-          if (instance) {
-            instance.resize();
-          }
+      if (!resizeObserverRef.current) {
+        resizeObserverRef.current = new ResizeObserver((entries) => {
+          entries.forEach(({ target }) => {
+            const instance = echarts.getInstanceByDom(target as HTMLElement);
+            if (instance) {
+              instance.resize();
+            }
+          });
         });
-      });
-      resizeObserver.observe(containerRef.current);
+      }
+      resizeObserverRef.current.observe(containerRef.current);
     });
   };
 
