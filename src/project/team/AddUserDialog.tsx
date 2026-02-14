@@ -298,6 +298,11 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
                 getOptionValue={(option) => option.uuid}
                 getOptionLabel={getOptionLabel}
                 components={{ Option: UserListOptionInline }}
+                noOptionsMessage={() =>
+                  translate(
+                    'No users found. You can only see users from projects you belong to. Use "Invite by mail" to add new users.',
+                  )
+                }
                 required={true}
                 validate={required}
               />

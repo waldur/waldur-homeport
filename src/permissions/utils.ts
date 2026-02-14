@@ -1,4 +1,5 @@
 import { ENV } from '@waldur/core/config';
+import { translate } from '@waldur/i18n';
 import { ROLE_TYPES } from '@waldur/permissions/constants';
 
 import { RoleEnum } from './enums';
@@ -36,3 +37,31 @@ export const formatRole = (name: string) => {
 
 export const formatRoleType = (content_type: RoleType) =>
   ROLE_TYPES.find(({ value }) => value === content_type)?.label || content_type;
+
+/**
+ * Returns a descriptive tooltip for disabled permission-gated actions.
+ * Looks up ENV.roles to find which roles have the required permission.
+ */
+export const getPermissionDisabledTooltip = (
+  permission: string | string[],
+  scopeTypes: RoleType[] = ['project', 'customer'],
+): string => {
+  const permissions = Array.isArray(permission) ? permission : [permission];
+  const roles = ENV.roles
+    .filter(
+      (role) =>
+        scopeTypes.includes(role.content_type as RoleType) &&
+        role.is_active &&
+        role.permissions?.some((p) => permissions.includes(p)),
+    )
+    .map((role) => role.description || role.name);
+
+  if (roles.length > 0) {
+    return translate('This action is available for: {roles}.', {
+      roles: roles.join(', '),
+    });
+  }
+  return translate(
+    "You don't have enough privileges to perform this operation.",
+  );
+};
