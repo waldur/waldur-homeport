@@ -19,6 +19,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import {
   showError,
   showErrorResponse,
@@ -208,6 +209,10 @@ export const OfferingStateActions = ({
         canDeleteOffering)
     : false;
 
+  const deletionRestricted =
+    offering.plugin_options?.restrict_deletion_with_active_resources &&
+    offering.resources_count > 0;
+
   const draftTitle = canManageOfferingLifecycle
     ? translate('Set to draft')
     : translate('Request editing');
@@ -278,16 +283,21 @@ export const OfferingStateActions = ({
         {showDeleteAction && <Dropdown.Divider />}
 
         {showDeleteAction && (
-          <Dropdown.Item
-            as="button"
+          <ActionItem
+            title={translate('Delete')}
+            action={handleDelete}
+            iconNode={<TrashIcon weight="bold" />}
+            iconColor="danger"
             className="text-danger"
-            onClick={handleDelete}
-          >
-            <span className="svg-icon svg-icon-2 svg-icon-danger">
-              <TrashIcon weight="bold" />
-            </span>
-            {translate('Delete')}
-          </Dropdown.Item>
+            disabled={!!deletionRestricted}
+            tooltip={
+              deletionRestricted
+                ? translate(
+                    'Offering cannot be deleted while it has active resources.',
+                  )
+                : undefined
+            }
+          />
         )}
       </Dropdown.Menu>
     </Dropdown>
