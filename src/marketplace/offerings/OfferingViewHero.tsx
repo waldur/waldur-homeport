@@ -22,7 +22,6 @@ import {
   TENANT_TYPE,
   VOLUME_TYPE,
 } from '@waldur/openstack/constants';
-import { VersionHistoryButton } from '@waldur/version-history';
 import {
   isOwnerOrStaff,
   isServiceManagerSelector,
@@ -34,8 +33,8 @@ import { Offering } from '../types';
 
 import { OfferingStateActions } from './actions/OfferingStateActions';
 import { DeployButton } from './DeployButton';
-import { PreviewButton } from './list/PreviewButton';
 import { OfferingAccessButton } from './OfferingAccessButton';
+import { OfferingExtraActionsButton } from './OfferingExtraActionsButton';
 import { OfferingStateField } from './OfferingStateField';
 
 interface OfferingViewHeroProps {
@@ -213,7 +212,6 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               <DeployButton offering={offering} disabled={!canDeploy} />
             )}
             <OfferingAccessButton offering={offering} />
-            <PreviewButton offering={offering} />
             {isEditPage && (
               <OfferingStateActions
                 offering={offering}
@@ -222,11 +220,9 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               />
             )}
             {!props.isPublic && (
-              <VersionHistoryButton
-                entityType="offering"
-                entityUuid={offering.uuid}
-                entityName={offering.name}
-              />
+              <div className="order-2 order-sm-2">
+                <OfferingExtraActionsButton offering={offering} />
+              </div>
             )}
             <RefreshButton
               refetch={props.refetch}

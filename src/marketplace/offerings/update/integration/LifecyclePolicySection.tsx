@@ -86,6 +86,14 @@ const resourceLifecycleFields: OfferingEditField[] = [
     component: NumberField,
     description: translate('Resource expiration threshold in days.'),
   },
+  {
+    label: translate('Restrict deletion with active resources'),
+    key: 'plugin_options.restrict_deletion_with_active_resources',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, offering cannot be deleted while it has non-terminated resources. Applies to all users including staff.',
+    ),
+  },
 ];
 
 // Resource capabilities fields

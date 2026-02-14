@@ -7,6 +7,16 @@ import { translate } from '@waldur/i18n';
 
 import { OfferingActions } from './OfferingActions';
 
+vi.mock('@waldur/core/config', () => ({
+  ENV: {
+    plugins: {
+      WALDUR_CORE: {
+        ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT: true,
+      },
+    },
+  },
+}));
+
 vi.mock('@waldur/permissions/hasPermission', () => ({
   hasPermission: vi.fn(() => true),
 }));
@@ -70,14 +80,17 @@ describe('OfferingActions', () => {
     expect(screen.getByText(translate('Open public page'))).toBeInTheDocument();
   });
 
-  it('hides delete action when offering is not in Draft state', async () => {
+  it('shows disabled delete action when offering is not in Draft state', async () => {
     renderOfferingActions();
     const dropdownButton = screen.getByRole('button');
     await act(async () => {
       await fireEvent.click(dropdownButton);
     });
 
-    expect(screen.queryByText(translate('Delete'))).not.toBeInTheDocument();
+    expect(screen.getByText(translate('Delete'))).toBeInTheDocument();
+    expect(
+      screen.getByText(translate('Delete')).closest('.opacity-50'),
+    ).toBeInTheDocument();
   });
 
   it('shows delete action for Draft offerings', async () => {
