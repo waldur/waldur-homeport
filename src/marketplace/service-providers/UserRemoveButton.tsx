@@ -8,6 +8,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { GenericPermission } from '@waldur/permissions/types';
+import { getPermissionDisabledTooltip } from '@waldur/permissions/utils';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
@@ -68,7 +69,10 @@ export const UserRemoveButton: FC<UserRemoveButtonProps> = ({
       disabled={disabled}
       tooltip={
         disabled &&
-        translate("You don't have enough privileges to perform this operation.")
+        getPermissionDisabledTooltip(
+          PermissionEnum.DELETE_CUSTOMER_PERMISSION,
+          ['customer'],
+        )
       }
     />
   );

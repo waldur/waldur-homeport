@@ -3,6 +3,8 @@ import { FC } from 'react';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { PermissionMap } from '@waldur/permissions/enums';
+import { getPermissionDisabledTooltip } from '@waldur/permissions/utils';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 import { InvitationContext } from '../types';
@@ -13,8 +15,11 @@ export const InvitationCreateButton: FC<
 > = (context) => {
   const { callback, canInvite, loadingProjects } = useCreateInvitation(context);
 
+  const permissions = context.roleTypes
+    ?.map((rt) => PermissionMap[rt])
+    .filter(Boolean);
   const tooltip = !canInvite
-    ? translate("You don't have enough privileges to perform this operation.")
+    ? getPermissionDisabledTooltip(permissions || [])
     : null;
 
   return (

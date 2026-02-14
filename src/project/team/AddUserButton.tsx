@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
+import { getPermissionDisabledTooltip } from '@waldur/permissions/utils';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useUser } from '@waldur/workspace/hooks';
 
@@ -47,8 +48,8 @@ export const AddUserButton: React.FC<{ project: Project; refetch }> = ({
       disabled={!canAddUser}
       tooltip={
         !canAddUser
-          ? translate(
-              "You don't have enough privileges to perform this operation.",
+          ? getPermissionDisabledTooltip(
+              PermissionEnum.CREATE_PROJECT_PERMISSION,
             )
           : null
       }
