@@ -6,6 +6,7 @@ import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -21,8 +22,26 @@ export const RejectByConsumerButton: FC<
   const user = useSelector(getUser);
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
+      let result;
       try {
-        await marketplaceOrdersRejectByConsumer({ path: { uuid: order.uuid } });
+        result = await waitForConfirmation(
+          dispatch,
+          translate('Reject order'),
+          translate('Are you sure you want to reject this order?'),
+          {
+            showInput: true,
+            inputLabel: translate('Rejection reason (optional)'),
+            positiveButton: translate('Reject'),
+          },
+        );
+      } catch {
+        return;
+      }
+      try {
+        await marketplaceOrdersRejectByConsumer({
+          path: { uuid: order.uuid },
+          body: { consumer_rejection_comment: result?.input },
+        });
         if (refetch) {
           await refetch();
         }
