@@ -20,6 +20,7 @@ const mandatoryFields: Array<keyof ArrowVendorOfferingMapping> = [
   'arrow_vendor_name',
   'offering_name',
   'offering_type',
+  'plan_name',
   'is_active',
   'created',
 ];
@@ -64,10 +65,18 @@ export const VendorOfferingMappingsList: FunctionComponent<
               {row.offering_type && (
                 <>
                   <br />
-                  <code className="text-muted small">{row.offering_type}</code>
+                  <span className="text-muted small">{row.offering_type}</span>
                 </>
               )}
             </div>
+          ),
+        },
+        {
+          title: translate('Plan'),
+          render: ({ row }) => (
+            <span className="text-dark">
+              {row.plan_name || DASH_ESCAPE_CODE}
+            </span>
           ),
         },
         {

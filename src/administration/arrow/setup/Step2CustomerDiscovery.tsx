@@ -1,71 +1,54 @@
-import { useCallback, useEffect, useMemo, useState } from 'react';
+import { CaretLeftIcon } from '@phosphor-icons/react';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert, Table as BTable } from 'react-bootstrap';
-import type {
-  ArrowCredentialsRequest,
-  ArrowCustomerDiscovery,
-  CustomerMappingSuggestion,
-  WaldurCustomerBrief,
-} from 'waldur-js-client';
+import { useForm, useFormState } from 'react-final-form';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SubmitButton } from '@waldur/form/SubmitButton';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { useDiscoverArrowCustomers } from '../api';
+import type { ArrowSetupFormValues } from '../types';
 
-interface Step2CustomerDiscoveryProps {
-  credentials: ArrowCredentialsRequest;
-  onMapped: (selectedMappings: Map<string, string>) => void;
-  onBack: () => void;
-  onCancel: () => void;
-}
-
-export const Step2CustomerDiscovery = ({
-  credentials,
-  onMapped,
-  onBack,
-  onCancel,
-}: Step2CustomerDiscoveryProps) => {
+export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
+  const form = useForm<ArrowSetupFormValues>();
+  const { values } = useFormState<ArrowSetupFormValues>();
   const [error, setError] = useState<string | null>(null);
-  const [customers, setCustomers] = useState<ArrowCustomerDiscovery[]>([]);
-  const [waldurCustomers, setWaldurCustomers] = useState<WaldurCustomerBrief[]>(
-    [],
-  );
-  const [suggestions, setSuggestions] = useState<CustomerMappingSuggestion[]>(
-    [],
-  );
-  const [mappings, setMappings] = useState<Map<string, string>>(new Map());
   const discoverCustomers = useDiscoverArrowCustomers();
 
-  // Discover customers on mount
+  // Discover customers on mount (only if not already done)
   useEffect(() => {
+    if (values.discoveryComplete) return;
+
     const discover = async () => {
       try {
         const response = await discoverCustomers.mutateAsync({
-          api_url: credentials.api_url,
-          api_key: credentials.api_key,
+          api_url: values.api_url,
+          api_key: values.api_key,
         });
         const data = response.data;
-        setCustomers(data.arrow_customers || []);
-        setWaldurCustomers(data.waldur_customers || []);
-        setSuggestions(data.suggestions || []);
+        form.change('customers', data.arrow_customers || []);
+        form.change('waldurCustomers', data.waldur_customers || []);
+        form.change('suggestions', data.suggestions || []);
+        form.change('exportTypes', data.export_types || []);
 
-        // Pre-populate mappings from suggestions
-        const initialMappings = new Map<string, string>();
+        // Pre-populate mappings from high-confidence suggestions
+        const initialMappings: Record<string, string> = {};
         (data.suggestions || []).forEach((suggestion) => {
           if (
             suggestion.suggested_waldur_customer &&
             suggestion.confidence &&
             suggestion.confidence > 0.7
           ) {
-            initialMappings.set(
-              suggestion.arrow_customer.reference,
-              suggestion.suggested_waldur_customer.uuid,
-            );
+            initialMappings[suggestion.arrow_customer.reference] =
+              suggestion.suggested_waldur_customer.uuid;
           }
         });
-        setMappings(initialMappings);
+        form.change('selectedMappings', initialMappings);
+        form.change('discoveryComplete', true);
       } catch (e: any) {
         setError(
           e.response?.data?.detail ||
@@ -75,78 +58,88 @@ export const Step2CustomerDiscovery = ({
       }
     };
     discover();
-  }, [credentials]);
+  }, [values.discoveryComplete]);
 
   const waldurCustomerOptions = useMemo(
     () =>
-      waldurCustomers.map((c) => ({
+      values.waldurCustomers.map((c) => ({
         value: c.uuid,
         label: c.name,
       })),
-    [waldurCustomers],
+    [values.waldurCustomers],
   );
 
   const handleMappingChange = useCallback(
     (arrowRef: string, waldurUuid: string | null) => {
-      setMappings((prev) => {
-        const next = new Map(prev);
-        if (waldurUuid) {
-          next.set(arrowRef, waldurUuid);
-        } else {
-          next.delete(arrowRef);
-        }
-        return next;
-      });
+      const current = values.selectedMappings;
+      if (waldurUuid) {
+        form.change('selectedMappings', { ...current, [arrowRef]: waldurUuid });
+      } else {
+        const { [arrowRef]: _, ...rest } = current;
+        form.change('selectedMappings', rest);
+      }
     },
-    [],
+    [values.selectedMappings, form],
   );
-
-  const handleContinue = useCallback(() => {
-    onMapped(mappings);
-  }, [mappings, onMapped]);
 
   const getSuggestionForCustomer = useCallback(
     (arrowRef: string) => {
-      return suggestions.find((s) => s.arrow_customer.reference === arrowRef);
+      return values.suggestions.find(
+        (s) => s.arrow_customer.reference === arrowRef,
+      );
     },
-    [suggestions],
+    [values.suggestions],
+  );
+
+  const mappingCount = Object.keys(values.selectedMappings).length;
+
+  const renderFooter = () => (
+    <>
+      <SubmitButton
+        submitting={false}
+        variant="tertiary"
+        className="min-w-125px me-auto"
+        onClick={() => props.onPrev(values)}
+        type="button"
+        label={translate('Back')}
+        iconNode={<CaretLeftIcon weight="bold" />}
+        iconOnLeft
+      />
+      <CloseDialogButton className="min-w-125px" />
+      <SubmitButton
+        submitting={false}
+        label={translate('Continue')}
+        onClick={() => props.handleSubmit()}
+        type="button"
+      />
+    </>
   );
 
   if (discoverCustomers.isPending) {
     return (
-      <div className="text-center py-10">
-        <LoadingSpinner />
-        <p className="mt-4 text-muted">
-          {translate('Discovering Arrow customers...')}
-        </p>
-      </div>
+      <WizardModal {...props} renderFooter={renderFooter}>
+        <div className="text-center py-10">
+          <LoadingSpinner />
+          <p className="mt-4 text-muted">
+            {translate('Discovering Arrow customers...')}
+          </p>
+        </div>
+      </WizardModal>
     );
   }
 
   if (error) {
     return (
-      <div>
+      <WizardModal {...props} renderFooter={renderFooter}>
         <Alert variant="danger" className="mb-4">
           {error}
         </Alert>
-        <div className="d-flex justify-content-end gap-2">
-          <ActionButton
-            action={onCancel}
-            variant="secondary"
-            title={translate('Cancel')}
-          />
-          <ActionButton
-            action={onBack}
-            variant="tertiary"
-            title={translate('Back')}
-          />
-        </div>
-      </div>
+      </WizardModal>
     );
   }
 
   return (
-    <div>
+    <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Map Arrow Customers to Waldur')}</h4>
       <p className="text-muted mb-4">
         {translate(
@@ -154,7 +147,7 @@ export const Step2CustomerDiscovery = ({
         )}
       </p>
 
-      {customers.length === 0 ? (
+      {values.customers.length === 0 ? (
         <Alert variant="info">
           {translate(
             'No Arrow customers found. You can continue without mappings.',
@@ -173,9 +166,10 @@ export const Step2CustomerDiscovery = ({
               </tr>
             </thead>
             <tbody>
-              {customers.map((customer) => {
+              {values.customers.map((customer) => {
                 const suggestion = getSuggestionForCustomer(customer.reference);
-                const currentValue = mappings.get(customer.reference);
+                const currentValue =
+                  values.selectedMappings[customer.reference];
 
                 return (
                   <tr key={customer.reference}>
@@ -187,9 +181,7 @@ export const Step2CustomerDiscovery = ({
                         </span>
                       )}
                     </td>
-                    <td>
-                      <code>{customer.reference}</code>
-                    </td>
+                    <td>{customer.reference}</td>
                     <td>
                       <Select
                         value={waldurCustomerOptions.find(
@@ -223,28 +215,11 @@ export const Step2CustomerDiscovery = ({
         </div>
       )}
 
-      <div className="d-flex justify-content-between align-items-center">
+      <div className="d-flex align-items-center">
         <span className="text-muted">
-          {translate('{count} mappings selected', { count: mappings.size })}
+          {translate('{count} mappings selected', { count: mappingCount })}
         </span>
-        <div className="d-flex gap-2">
-          <ActionButton
-            action={onCancel}
-            variant="secondary"
-            title={translate('Cancel')}
-          />
-          <ActionButton
-            action={onBack}
-            variant="tertiary"
-            title={translate('Back')}
-          />
-          <ActionButton
-            action={handleContinue}
-            variant="primary"
-            title={translate('Continue')}
-          />
-        </div>
       </div>
-    </div>
+    </WizardModal>
   );
 };

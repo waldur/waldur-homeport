@@ -132,14 +132,14 @@ export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
                         {row.friendly_name || row.offer_name}
                       </div>
                       <div className="text-muted small">
-                        <code>{row.license_reference}</code>
+                        {row.license_reference}
                       </div>
                     </div>
                   ),
                 },
                 {
                   title: translate('SKU'),
-                  render: ({ row }) => <code>{row.offer_sku}</code>,
+                  render: ({ row }) => <>{row.offer_sku}</>,
                 },
               ]}
               rowKey="license_reference"
@@ -165,16 +165,14 @@ export const Step4SelectLicenses: FC<WizardFormStepProps> = (props) => {
                     render: ({ row }) => (
                       <div className="text-muted">
                         <div>{row.friendly_name || row.offer_name}</div>
-                        <div className="small">
-                          <code>{row.license_reference}</code>
-                        </div>
+                        <div className="small">{row.license_reference}</div>
                       </div>
                     ),
                   },
                   {
                     title: translate('SKU'),
                     render: ({ row }) => (
-                      <code className="text-muted">{row.offer_sku}</code>
+                      <span className="text-muted">{row.offer_sku}</span>
                     ),
                   },
                   {

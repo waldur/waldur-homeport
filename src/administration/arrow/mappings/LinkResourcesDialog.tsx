@@ -112,9 +112,9 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
                           <strong>{suggestion.resource_name}</strong>
                         </td>
                         <td>
-                          <code className="small">
+                          <span className="small">
                             {suggestion.license_reference}
-                          </code>
+                          </span>
                           {suggestion.license_name && (
                             <div className="text-muted small">
                               {suggestion.license_name}
@@ -190,9 +190,9 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
                       {data.arrow_licenses.map((license, idx) => (
                         <tr key={idx}>
                           <td>
-                            <code className="small">
+                            <span className="small">
                               {license.license_reference}
-                            </code>
+                            </span>
                           </td>
                           <td>{license.vendor_name || DASH_ESCAPE_CODE}</td>
                           <td>
@@ -250,9 +250,9 @@ export const LinkResourcesDialog: FC<LinkResourcesDialogProps> = ({
                           <td>{resource.offering_name || DASH_ESCAPE_CODE}</td>
                           <td>
                             {resource.backend_id ? (
-                              <code className="small text-success">
+                              <span className="small text-success">
                                 {resource.backend_id}
-                              </code>
+                              </span>
                             ) : (
                               <span className="text-muted">
                                 {translate('Not set')}

@@ -122,7 +122,7 @@ export const CustomerMappingExpandableRow: FC<
                     <tr key={idx}>
                       <td>{line.resource_name || DASH_ESCAPE_CODE}</td>
                       <td>
-                        <code className="small">{line.license_reference}</code>
+                        <span className="small">{line.license_reference}</span>
                       </td>
                       <td>
                         {inBilling ? (
@@ -177,9 +177,9 @@ export const CustomerMappingExpandableRow: FC<
                   <tr key={idx}>
                     <td>{line.vendor_name || DASH_ESCAPE_CODE}</td>
                     <td>
-                      <code className="small">
+                      <span className="small">
                         {line.license_reference || DASH_ESCAPE_CODE}
-                      </code>
+                      </span>
                     </td>
                     <td>{line.offer_sku || DASH_ESCAPE_CODE}</td>
                     <td className="text-end">

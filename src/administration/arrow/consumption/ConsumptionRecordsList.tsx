@@ -1,3 +1,4 @@
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -11,6 +12,7 @@ import {
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -20,6 +22,7 @@ import { useTable } from '@waldur/table/useTable';
 import { ARROW_FORM_NAMES } from '../constants';
 
 import { ConsumptionRecordsFilter } from './ConsumptionRecordsFilter';
+import { ForceImportConsumptionButton } from './ForceImportConsumptionButton';
 
 const filtersSelector = createSelector(
   getFormValues(ARROW_FORM_NAMES.consumptionRecordsFilter),
@@ -85,11 +88,7 @@ export const ConsumptionRecordsList: FunctionComponent<
       columns={[
         {
           title: translate('License'),
-          render: ({ row }) => (
-            <div>
-              <code className="text-dark">{row.license_reference}</code>
-            </div>
-          ),
+          render: ({ row }) => <div>{row.license_reference}</div>,
         },
         {
           title: translate('Resource'),
@@ -121,7 +120,19 @@ export const ConsumptionRecordsList: FunctionComponent<
           render: ({ row }) => <>{defaultCurrency(row.consumed_sell)}</>,
         },
         {
-          title: translate('Final'),
+          title: (
+            <>
+              {translate('Final')}{' '}
+              <Tip
+                id="final-sell-tooltip"
+                label={translate(
+                  'Confirmed amount from Arrow billing export. Empty until reconciliation is run.',
+                )}
+              >
+                <QuestionIcon size={18} weight="bold" />
+              </Tip>
+            </>
+          ),
           render: ({ row }) =>
             row.final_sell ? (
               <>{defaultCurrency(row.final_sell)}</>
@@ -130,7 +141,19 @@ export const ConsumptionRecordsList: FunctionComponent<
             ),
         },
         {
-          title: translate('Status'),
+          title: (
+            <>
+              {translate('Status')}{' '}
+              <Tip
+                id="status-tooltip"
+                label={translate(
+                  'Pending: provisional amount from Arrow API. Finalized: confirmed by billing export. Reconciled: adjustment applied if final differs from consumed.',
+                )}
+              >
+                <QuestionIcon size={18} weight="bold" />
+              </Tip>
+            </>
+          ),
           render: ({ row }) => (
             <div className="d-flex flex-column gap-1">
               <Badge
@@ -155,6 +178,7 @@ export const ConsumptionRecordsList: FunctionComponent<
       verboseName={translate('consumption records')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       hasQuery
+      tableActions={<ForceImportConsumptionButton refetch={tableProps.fetch} />}
       filters={<ConsumptionRecordsFilter />}
       expandableRow={ConsumptionRecordDetail}
     />
@@ -163,7 +187,7 @@ export const ConsumptionRecordsList: FunctionComponent<
 
 // Expandable row component
 const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (
-  <div className="p-4 bg-light">
+  <div className="p-4 border rounded">
     <div className="row">
       <div className="col-md-6">
         <table className="table table-sm table-borderless mb-0">
@@ -172,15 +196,11 @@ const ConsumptionRecordDetail = ({ row }: { row: ArrowConsumptionRecord }) => (
               <td className="text-muted" style={{ width: '40%' }}>
                 {translate('UUID')}
               </td>
-              <td>
-                <code>{row.uuid}</code>
-              </td>
+              <td>{row.uuid}</td>
             </tr>
             <tr>
               <td className="text-muted">{translate('License Reference')}</td>
-              <td>
-                <code>{row.license_reference}</code>
-              </td>
+              <td>{row.license_reference}</td>
             </tr>
             <tr>
               <td className="text-muted">{translate('Resource')}</td>

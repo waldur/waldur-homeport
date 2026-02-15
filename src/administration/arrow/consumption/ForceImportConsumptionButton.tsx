@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from '@phosphor-icons/react';
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -7,24 +7,24 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const CustomerMappingCreateDialog = lazyComponent(() =>
-  import('./CustomerMappingCreateDialog').then((module) => ({
-    default: module.CustomerMappingCreateDialog,
+const ForceImportConsumptionDialog = lazyComponent(() =>
+  import('./ForceImportConsumptionDialog').then((module) => ({
+    default: module.ForceImportConsumptionDialog,
   })),
 );
 
-interface CustomerMappingCreateButtonProps {
+interface ForceImportConsumptionButtonProps {
   refetch: () => void;
 }
 
-export const CustomerMappingCreateButton = ({
+export const ForceImportConsumptionButton = ({
   refetch,
-}: CustomerMappingCreateButtonProps) => {
+}: ForceImportConsumptionButtonProps) => {
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {
     dispatch(
-      openModalDialog(CustomerMappingCreateDialog, {
+      openModalDialog(ForceImportConsumptionDialog, {
         resolve: { refetch },
         size: 'lg',
       }),
@@ -34,8 +34,8 @@ export const CustomerMappingCreateButton = ({
   return (
     <ActionButton
       action={handleClick}
-      title={translate('Add mapping')}
-      iconNode={<PlusCircleIcon weight="bold" />}
+      title={translate('Force import')}
+      iconNode={<ArrowsClockwise weight="bold" />}
       variant="primary"
     />
   );

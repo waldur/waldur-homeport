@@ -1,4 +1,4 @@
-import { PlusCircleIcon } from '@phosphor-icons/react';
+import { ArrowsClockwise } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -7,24 +7,22 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
-const CustomerMappingCreateDialog = lazyComponent(() =>
-  import('./CustomerMappingCreateDialog').then((module) => ({
-    default: module.CustomerMappingCreateDialog,
+const BillingSyncDialog = lazyComponent(() =>
+  import('./BillingSyncDialog').then((module) => ({
+    default: module.BillingSyncDialog,
   })),
 );
 
-interface CustomerMappingCreateButtonProps {
+interface BillingSyncButtonProps {
   refetch: () => void;
 }
 
-export const CustomerMappingCreateButton = ({
-  refetch,
-}: CustomerMappingCreateButtonProps) => {
+export const BillingSyncButton = ({ refetch }: BillingSyncButtonProps) => {
   const dispatch = useDispatch();
 
   const handleClick = useCallback(() => {
     dispatch(
-      openModalDialog(CustomerMappingCreateDialog, {
+      openModalDialog(BillingSyncDialog, {
         resolve: { refetch },
         size: 'lg',
       }),
@@ -34,8 +32,8 @@ export const CustomerMappingCreateButton = ({
   return (
     <ActionButton
       action={handleClick}
-      title={translate('Add mapping')}
-      iconNode={<PlusCircleIcon weight="bold" />}
+      title={translate('Sync billing')}
+      iconNode={<ArrowsClockwise weight="bold" />}
       variant="primary"
     />
   );

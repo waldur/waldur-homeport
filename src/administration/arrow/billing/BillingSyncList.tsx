@@ -1,6 +1,5 @@
-import { ArrowsClockwise, Play } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
@@ -13,14 +12,11 @@ import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { useTriggerBillingSync, useTriggerReconciliation } from '../api';
 import {
   ARROW_FORM_NAMES,
   getBillingSyncStateLabel,
@@ -28,6 +24,7 @@ import {
 } from '../constants';
 
 import { BillingSyncActions } from './BillingSyncActions';
+import { BillingSyncButton } from './BillingSyncButton';
 import { BillingSyncFilter } from './BillingSyncFilter';
 import { BillingSyncStatusCard } from './BillingSyncStatusCard';
 
@@ -66,61 +63,6 @@ const mandatoryFields: Array<keyof ArrowBillingSync> = [
 interface BillingSyncListProps {
   settings?: { uuid: string } | null;
 }
-
-const BillingSyncTableActions = ({ refetch }: { refetch: () => void }) => {
-  const dispatch = useDispatch();
-  const triggerSync = useTriggerBillingSync();
-  const triggerReconciliation = useTriggerReconciliation();
-
-  // Get current year/month for sync
-  const now = new Date();
-  const currentYear = now.getFullYear();
-  const currentMonth = now.getMonth() + 1;
-
-  const handleTriggerSync = async () => {
-    try {
-      await triggerSync.mutateAsync({ year: currentYear, month: currentMonth });
-      dispatch(showSuccess(translate('Billing sync triggered')));
-      refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Failed to trigger sync')));
-    }
-  };
-
-  const handleTriggerReconciliation = async () => {
-    try {
-      await triggerReconciliation.mutateAsync({
-        year: currentYear,
-        month: currentMonth,
-      });
-      dispatch(showSuccess(translate('Reconciliation triggered')));
-      refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Failed to trigger reconciliation')),
-      );
-    }
-  };
-
-  return (
-    <div className="d-flex gap-2">
-      <ActionButton
-        action={handleTriggerSync}
-        title={translate('Sync billing')}
-        iconNode={<ArrowsClockwise />}
-        variant="primary"
-        pending={triggerSync.isPending}
-      />
-      <ActionButton
-        action={handleTriggerReconciliation}
-        title={translate('Reconcile')}
-        iconNode={<Play />}
-        variant="secondary"
-        pending={triggerReconciliation.isPending}
-      />
-    </div>
-  );
-};
 
 export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
   settings,
@@ -220,7 +162,7 @@ export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
         hasQuery
         filters={<BillingSyncFilter />}
         rowActions={({ row }) => <BillingSyncActions row={row} />}
-        tableActions={<BillingSyncTableActions refetch={tableProps.fetch} />}
+        tableActions={<BillingSyncButton refetch={tableProps.fetch} />}
       />
     </div>
   );

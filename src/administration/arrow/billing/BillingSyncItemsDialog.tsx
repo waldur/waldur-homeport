@@ -70,10 +70,10 @@ export const BillingSyncItemsDialog = ({
               {displayItems.map((item: ArrowBillingSyncItem, index: number) => (
                 <tr key={item.arrow_line_reference || index}>
                   <td>
-                    <code className="small">{item.arrow_line_reference}</code>
+                    <span className="small">{item.arrow_line_reference}</span>
                   </td>
                   <td>
-                    <code className="small">{item.subscription_reference}</code>
+                    <span className="small">{item.subscription_reference}</span>
                   </td>
                   <td>{item.vendor_name}</td>
                   <td>{item.description}</td>
