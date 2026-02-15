@@ -1426,6 +1426,23 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('System Logging'),
+    items: [
+      {
+        key: 'SYSTEM_LOG_ENABLED',
+        description: translate('Enable storing system logs (API, Worker, Beat) in the database for staff viewing.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'SYSTEM_LOG_MAX_ROWS_PER_SOURCE',
+        description: translate('Maximum number of log rows to keep per source (api, worker, beat). Oldest rows are deleted when exceeded.'),
+        default: 5000,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('Table Growth Monitoring'),
     items: [
       {
