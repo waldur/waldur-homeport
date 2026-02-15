@@ -191,6 +191,20 @@ export const states: StateDeclaration[] = [
       permissions: [isStaffOrSupport],
     },
   },
+  {
+    name: 'support-system-logs',
+    url: 'system-logs/',
+    parent: 'support-logs',
+    component: lazyComponent(() =>
+      import('@waldur/support/SupportSystemLogsList').then((module) => ({
+        default: module.SupportSystemLogsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('System logs'),
+      permissions: [isStaffOrSupport],
+    },
+  },
 
   // User Management routes moved from Administration
   {

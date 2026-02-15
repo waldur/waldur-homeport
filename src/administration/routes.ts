@@ -304,6 +304,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-system-logging-settings',
+    url: 'system-logging/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./system-logging/AdministrationSystemLogging').then((module) => ({
+        default: module.AdministrationSystemLogging,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('System logging'),
+    },
+  },
+
+  {
     name: 'admin-telemetry-settings',
     url: 'telemetry/',
     parent: 'admin-system-management',
