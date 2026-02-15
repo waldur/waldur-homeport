@@ -1,10 +1,15 @@
 import { useCallback } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import type { ArrowSettings } from 'waldur-js-client';
+import type { ArrowSettings as _ArrowSettings } from 'waldur-js-client';
+
+// TODO: Remove after SDK regeneration — invoice_item_prefix is a new backend field
+type ArrowSettings = _ArrowSettings & { invoice_item_prefix?: string };
 
 import { Badge } from '@waldur/core/Badge';
+import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { ExternalLink } from '@waldur/core/ExternalLink';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -49,7 +54,10 @@ interface ArrowSettingsCardProps {
 
 export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
   const { data, isLoading, error, refetch } = useArrowSettings();
-  const currentSettings = settings ?? data;
+  const currentSettings = (settings ?? data) as
+    | ArrowSettings
+    | null
+    | undefined;
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -105,7 +113,10 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                   {translate('API URL')}
                 </td>
                 <td>
-                  <code>{currentSettings.api_url}</code>
+                  <ExternalLink
+                    url={currentSettings.api_url}
+                    label={currentSettings.api_url}
+                  />
                 </td>
               </tr>
               <tr>
@@ -116,7 +127,31 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                 <td className="text-muted">{translate('Partner Reference')}</td>
                 <td>
                   {currentSettings.partner_reference ? (
-                    <code>{currentSettings.partner_reference}</code>
+                    <span className="d-flex align-items-center gap-2">
+                      {currentSettings.partner_reference}
+                      <CopyToClipboardButton
+                        value={currentSettings.partner_reference}
+                        onlyButton
+                      />
+                    </span>
+                  ) : (
+                    DASH_ESCAPE_CODE
+                  )}
+                </td>
+              </tr>
+              <tr>
+                <td className="text-muted">
+                  {translate('Export Type Reference')}
+                </td>
+                <td>
+                  {currentSettings.export_type_reference ? (
+                    <span className="d-flex align-items-center gap-2">
+                      {currentSettings.export_type_reference}
+                      <CopyToClipboardButton
+                        value={currentSettings.export_type_reference}
+                        onlyButton
+                      />
+                    </span>
                   ) : (
                     DASH_ESCAPE_CODE
                   )}
@@ -130,6 +165,26 @@ export const ArrowSettingsCard = ({ settings }: ArrowSettingsCardProps) => {
                   {currentSettings.invoice_price_source === 'buy'
                     ? translate('Buy price')
                     : translate('Sell price')}
+                </td>
+              </tr>
+              <tr>
+                <td className="text-muted">
+                  {translate('Invoice Item Prefix')}
+                </td>
+                <td>
+                  <div>
+                    {currentSettings.invoice_item_prefix || 'Arrow consumption'}
+                  </div>
+                  <div className="text-muted small mt-1">
+                    {translate(
+                      'Consumption items appear as "{prefix}: {resource name}" and adjustments as "{prefix} adjustment: {resource name} (additional charge|credit)".',
+                      {
+                        prefix:
+                          currentSettings.invoice_item_prefix ||
+                          'Arrow consumption',
+                      },
+                    )}
+                  </div>
                 </td>
               </tr>
               <tr>

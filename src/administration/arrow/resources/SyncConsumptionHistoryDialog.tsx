@@ -85,7 +85,7 @@ export const SyncConsumptionHistoryDialog = ({
           {resource.backend_id && (
             <>
               {' '}
-              <code className="text-muted">({resource.backend_id})</code>
+              <span className="text-muted">({resource.backend_id})</span>
             </>
           )}
         </>

@@ -1026,7 +1026,7 @@ $code-padding: 0.1rem 0.4rem !default; // Custom variable
 $code-margin: 0 0.5rem !default; // Custom variable
 $code-font-weight: 400 !default; // Custom variable
 $code-border-radius: 0.3rem !default; // Custom variable
-$code-color: #b93993 !default; // Custom variable
+$code-color: if(isDarkMode(), #e493c6, #b93993) !default; // Custom variable
 $code-space: 0.25rem !default; // Custom variable
 
 // Spinners

@@ -61,9 +61,7 @@ export const CustomerBillingSummaryDialog: FC<
                         <td className="text-muted">
                           {translate('Arrow Reference')}
                         </td>
-                        <td>
-                          <code>{data.arrow_reference}</code>
-                        </td>
+                        <td>{data.arrow_reference}</td>
                       </tr>
                       <tr>
                         <td className="text-muted">
@@ -190,12 +188,12 @@ export const CustomerBillingSummaryDialog: FC<
                         <tr key={idx}>
                           <td>{line.vendor_name || DASH_ESCAPE_CODE}</td>
                           <td>
-                            <code
+                            <span
                               className="small"
                               title={line.license_reference}
                             >
                               {line.license_reference || DASH_ESCAPE_CODE}
-                            </code>
+                            </span>
                           </td>
                           <td>{line.offer_sku || DASH_ESCAPE_CODE}</td>
                           <td className="text-end">
@@ -273,9 +271,9 @@ export const CustomerBillingSummaryDialog: FC<
                         <tr key={idx}>
                           <td>{line.resource_name || DASH_ESCAPE_CODE}</td>
                           <td>
-                            <code className="small">
+                            <span className="small">
                               {line.license_reference}
-                            </code>
+                            </span>
                           </td>
                           <td className="text-end fw-semibold">
                             {line.sell_price ? (

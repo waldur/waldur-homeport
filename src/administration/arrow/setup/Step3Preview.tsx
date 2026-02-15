@@ -1,34 +1,33 @@
+import { CaretLeftIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
-import { useState } from 'react';
+import { FC, useState } from 'react';
 import { Alert, Card, Table } from 'react-bootstrap';
+import { useFormState } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
+import { Badge } from '@waldur/core/Badge';
+import { ExternalLink } from '@waldur/core/ExternalLink';
 import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
+import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { arrowQueryKeys, useSaveArrowSettings } from '../api';
-import type { ArrowDiscoveryState } from '../types';
+import type { ArrowSetupFormValues } from '../types';
 
-interface Step3PreviewProps {
-  state: ArrowDiscoveryState;
-  onBack: () => void;
-  onClose: () => void;
-}
-
-export const Step3Preview = ({ state, onBack, onClose }: Step3PreviewProps) => {
+export const Step3Preview: FC<WizardStepProps> = (props) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
+  const { values } = useFormState<ArrowSetupFormValues>();
   const [saving, setSaving] = useState(false);
   const saveSettings = useSaveArrowSettings();
 
   const handleSave = async () => {
     setSaving(true);
     try {
-      // Convert mappings Map to array format expected by API
-      const customerMappings = Array.from(state.selectedMappings.entries()).map(
+      const customerMappings = Object.entries(values.selectedMappings).map(
         ([arrowRef, waldurUuid]) => ({
           arrow_reference: arrowRef,
           waldur_customer_uuid: waldurUuid,
@@ -36,8 +35,8 @@ export const Step3Preview = ({ state, onBack, onClose }: Step3PreviewProps) => {
       );
 
       await saveSettings.mutateAsync({
-        api_url: state.credentials!.api_url,
-        api_key: state.credentials!.api_key,
+        api_url: values.api_url,
+        api_key: values.api_key,
         customer_mappings: customerMappings,
       });
 
@@ -55,8 +54,32 @@ export const Step3Preview = ({ state, onBack, onClose }: Step3PreviewProps) => {
     }
   };
 
+  const mappingCount = Object.keys(values.selectedMappings).length;
+
+  const renderFooter = () => (
+    <>
+      <SubmitButton
+        submitting={false}
+        variant="tertiary"
+        className="min-w-125px me-auto"
+        onClick={() => props.onPrev(values)}
+        type="button"
+        label={translate('Back')}
+        iconNode={<CaretLeftIcon weight="bold" />}
+        iconOnLeft
+      />
+      <CloseDialogButton className="min-w-125px" />
+      <SubmitButton
+        submitting={saving}
+        label={translate('Save & Complete')}
+        onClick={handleSave}
+        type="button"
+      />
+    </>
+  );
+
   return (
-    <div>
+    <WizardModal {...props} renderFooter={renderFooter}>
       <h4 className="mb-4">{translate('Preview Settings')}</h4>
       <p className="text-muted mb-4">
         {translate(
@@ -76,23 +99,29 @@ export const Step3Preview = ({ state, onBack, onClose }: Step3PreviewProps) => {
                   {translate('API URL')}
                 </td>
                 <td>
-                  <code>{state.credentials?.api_url}</code>
+                  <ExternalLink url={values.api_url} label={values.api_url} />
                 </td>
               </tr>
-              {state.partnerInfo && (
+              {values.partnerInfo && (
                 <>
                   <tr>
                     <td className="text-muted">{translate('Partner Name')}</td>
-                    <td>{String(state.partnerInfo.partner_name || '')}</td>
+                    <td>
+                      {String(
+                        (values.partnerInfo as Record<string, unknown>)
+                          .company_name || '',
+                      )}
+                    </td>
                   </tr>
                   <tr>
                     <td className="text-muted">
                       {translate('Partner Reference')}
                     </td>
                     <td>
-                      <code>
-                        {String(state.partnerInfo.partner_reference || '')}
-                      </code>
+                      {String(
+                        (values.partnerInfo as Record<string, unknown>)
+                          .reference || '',
+                      )}
                     </td>
                   </tr>
                 </>
@@ -107,7 +136,7 @@ export const Step3Preview = ({ state, onBack, onClose }: Step3PreviewProps) => {
           <h5 className="mb-0">{translate('Customer Mappings')}</h5>
         </Card.Header>
         <Card.Body>
-          {state.selectedMappings.size > 0 ? (
+          {mappingCount > 0 ? (
             <Table borderless size="sm">
               <thead>
                 <tr>
@@ -116,18 +145,18 @@ export const Step3Preview = ({ state, onBack, onClose }: Step3PreviewProps) => {
                 </tr>
               </thead>
               <tbody>
-                {Array.from(state.selectedMappings.entries()).map(
+                {Object.entries(values.selectedMappings).map(
                   ([arrowRef, waldurUuid]) => {
-                    const waldurCustomer = state.waldurCustomers.find(
+                    const waldurCustomer = values.waldurCustomers.find(
                       (c) => c.uuid === waldurUuid,
                     );
-                    const arrowCustomer = state.customers.find(
+                    const arrowCustomer = values.customers.find(
                       (c) => c.reference === arrowRef,
                     );
                     return (
                       <tr key={arrowRef}>
                         <td>
-                          <code>{arrowRef}</code>
+                          {arrowRef}
                           {arrowCustomer && (
                             <span className="text-muted ms-2">
                               ({arrowCustomer.companyName})
@@ -149,30 +178,83 @@ export const Step3Preview = ({ state, onBack, onClose }: Step3PreviewProps) => {
         </Card.Body>
       </Card>
 
+      {values.exportTypes.length > 0 && (
+        <Card className="mb-4">
+          <Card.Header>
+            <h5 className="mb-0">{translate('Available Export Types')}</h5>
+          </Card.Header>
+          <Card.Body>
+            <p className="text-muted small mb-3">
+              {translate(
+                'These billing export types are available from your Arrow account. Compatible types have all required fields.',
+              )}
+            </p>
+            <Table borderless size="sm">
+              <thead>
+                <tr>
+                  <th>{translate('Export Type')}</th>
+                  <th>{translate('Status')}</th>
+                  <th>{translate('Fields')}</th>
+                </tr>
+              </thead>
+              <tbody>
+                {values.exportTypes.map((et) => (
+                  <tr key={et.reference}>
+                    <td>
+                      <span className="fw-bold">{et.name}</span>
+                      <br />
+                      <span className="text-muted small">{et.reference}</span>
+                    </td>
+                    <td>
+                      {et.recommended ? (
+                        <Badge variant="success" pill outline>
+                          {translate('Recommended')}
+                        </Badge>
+                      ) : et.compatible ? (
+                        <Badge variant="primary" pill outline>
+                          {translate('Compatible')}
+                        </Badge>
+                      ) : (
+                        <Badge variant="danger" pill outline>
+                          {translate('Missing fields')}
+                        </Badge>
+                      )}
+                    </td>
+                    <td>
+                      <small className="text-muted">
+                        {translate('{found}/{total} required', {
+                          found: et.required_fields_found,
+                          total: et.required_fields_total,
+                        })}
+                        {', '}
+                        {translate('{found}/{total} important', {
+                          found: et.important_fields_found,
+                          total: et.important_fields_total,
+                        })}
+                      </small>
+                      {et.missing_required_fields.length > 0 && (
+                        <div className="mt-1">
+                          <small className="text-danger">
+                            {translate('Missing: {fields}', {
+                              fields: et.missing_required_fields.join(', '),
+                            })}
+                          </small>
+                        </div>
+                      )}
+                    </td>
+                  </tr>
+                ))}
+              </tbody>
+            </Table>
+          </Card.Body>
+        </Card>
+      )}
+
       <Alert variant="info">
         {translate(
           'Note: API credentials will be securely stored. You can add more customer mappings after setup.',
         )}
       </Alert>
-
-      <div className="d-flex justify-content-end gap-2 mt-6">
-        <ActionButton
-          action={onClose}
-          variant="secondary"
-          title={translate('Cancel')}
-        />
-        <ActionButton
-          action={onBack}
-          variant="tertiary"
-          title={translate('Back')}
-        />
-        <SubmitButton
-          submitting={saving}
-          onClick={handleSave}
-          label={translate('Save & Complete')}
-          type="button"
-        />
-      </div>
-    </div>
+    </WizardModal>
   );
 };

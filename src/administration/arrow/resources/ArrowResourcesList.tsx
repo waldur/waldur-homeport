@@ -109,14 +109,16 @@ export const ArrowResourcesList: FunctionComponent<
           title: translate('Backend ID'),
           render: ({ row }) =>
             row.backend_id ? (
-              <code className="text-dark">{row.backend_id}</code>
+              <span>{row.backend_id}</span>
             ) : (
               <span className="text-muted">{DASH_ESCAPE_CODE}</span>
             ),
         },
         {
           title: translate('State'),
-          render: ({ row }) => <ResourceStateField resource={row} pill />,
+          render: ({ row }) => (
+            <ResourceStateField resource={row} pill outline />
+          ),
         },
       ]}
       title={translate('Resources')}

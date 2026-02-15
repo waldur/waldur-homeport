@@ -5,6 +5,7 @@ import { createSelector } from 'reselect';
 import { InvoiceItemDetail, invoiceItemsList } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { Link } from '@waldur/core/Link';
 import { PeriodOption } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 import { ComponentUsageImportButton } from '@waldur/invoices/import-usage';
@@ -79,7 +80,28 @@ export const SupportInvoiceItemsList: FunctionComponent<
         },
         {
           title: translate('Organization'),
-          render: ({ row }) => renderFieldOrDash(row.customer_name),
+          render: ({ row }) => {
+            if (!row.customer_name) return renderFieldOrDash(row.customer_name);
+            const invoiceUuid = row.invoice?.split('/').filter(Boolean).pop();
+            return invoiceUuid ? (
+              <Link
+                state="billingDetails"
+                params={{
+                  uuid: row.customer_uuid,
+                  invoice_uuid: invoiceUuid,
+                }}
+              >
+                {row.customer_name}
+              </Link>
+            ) : (
+              <Link
+                state="organization-billing.billing"
+                params={{ uuid: row.customer_uuid }}
+              >
+                {row.customer_name}
+              </Link>
+            );
+          },
           export: 'customer_name',
           filter: 'organization',
         },

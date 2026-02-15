@@ -69,23 +69,17 @@ flowchart TB
 
     subgraph fetch["Data Fetching"]
         B --> C["Fetch billing export from Arrow API"]
-        C --> C1{Classification filter works?}
-        C1 -->|Yes| D["Group lines by customer"]
-        C1 -->|No| C2["Retry without classification filter"]
-        C2 --> D
+        C --> D["Group lines by End User Company Name"]
     end
 
     subgraph grouping["Customer Matching"]
-        D --> D1{Customer Reference field exists?}
-        D1 -->|Yes| D2["Match by arrow_reference"]
-        D1 -->|No| D3["Match by End User Company Name → arrow_company_name"]
-        D2 --> E["Process each customer's lines"]
-        D3 --> E
+        D --> D1["Match End User Company Name → arrow_company_name"]
+        D1 --> E["Process each customer's lines"]
     end
 
     subgraph process["Line Processing"]
         E --> F["For each billing line"]
-        F --> G["Identify line via Line Reference || Sequence || Order Id"]
+        F --> G["Identify line via Order Id (Sequence as fallback)"]
         G --> H["Parse prices: Customer Total Price / Total Wholesale Price"]
         H --> I["Create InvoiceItem + BillingSyncItem"]
     end
@@ -95,27 +89,20 @@ flowchart TB
         J --> K["Mark ArrowBillingSync as 'synced'"]
     end
 
-    style C1 fill:#fff3e0,color:#000
-    style D1 fill:#fff3e0,color:#000
     style K fill:#e8f5e9,color:#000
 `;
 
 const getReconciliationDiagram = (priceLabel: string) => `
 flowchart TB
     subgraph fetch["Fetch Billing Export"]
-        A["Fetch billing data for period"] --> A1{Classification filter works?}
-        A1 -->|Yes| B["Parse billing lines"]
-        A1 -->|No| A2["Retry without filter"]
-        A2 --> B
+        A["Fetch billing data for period"] --> B["Parse billing lines"]
     end
 
     subgraph match["Match Records"]
         B --> C["For each unfinalized consumption record"]
-        C --> D{Find by License Reference?}
+        C --> D{Find by ARS Subscription ID?}
         D -->|Yes| E["Billing data found"]
-        D -->|No| D2{Find by ARS Subscription ID?}
-        D2 -->|Yes| E
-        D2 -->|No| F["Skip — no billing data"]
+        D -->|No| F["Skip — no billing data"]
     end
 
     subgraph reconcile["Reconciliation"]
@@ -127,9 +114,7 @@ flowchart TB
         K --> I
     end
 
-    style A1 fill:#fff3e0,color:#000
     style D fill:#fff3e0,color:#000
-    style D2 fill:#fff3e0,color:#000
     style H fill:#fff3e0,color:#000
     style I fill:#e8f5e9,color:#000
 `;
@@ -179,14 +164,6 @@ const SYNC_STATES = [
     ),
   },
   {
-    state: 'reconciling',
-    description: translate('Comparing Arrow amounts with Waldur invoice data'),
-  },
-  {
-    state: 'reconciled',
-    description: translate('Arrow and Waldur amounts match - sync is complete'),
-  },
-  {
     state: 'failed',
     description: translate(
       'An error occurred during sync - check logs for details',
@@ -198,7 +175,7 @@ const KEY_CONCEPTS = [
   {
     term: translate('Customer Mapping'),
     description: translate(
-      'Links an Arrow customer (by their reference ID) to a Waldur organization. This determines where consumption records and billing data are attributed.',
+      'Links an Arrow customer (by their company name / End User Company Name) to a Waldur organization. This determines where consumption records and billing data are attributed.',
     ),
   },
   {
@@ -223,6 +200,12 @@ const KEY_CONCEPTS = [
     term: translate('License Import'),
     description: translate(
       'Process of importing Arrow licenses as Waldur marketplace resources. Select a customer mapping, choose a vendor offering, pick a project, then select licenses to import.',
+    ),
+  },
+  {
+    term: translate('Vendor Offering Mapping'),
+    description: translate(
+      'Links an Arrow vendor name to a Waldur marketplace offering and billing plan. Required for importing Arrow licenses — the import wizard uses these mappings to determine which offering to create resources under.',
     ),
   },
   {
@@ -257,7 +240,7 @@ flowchart TB
 
     subgraph result["Result"]
         I --> J["Create Waldur resources"]
-        J --> K["Set backend_id = license_reference"]
+        J --> K["Set backend_id = License Reference"]
         K --> L["Ready for consumption sync"]
     end
 
@@ -292,14 +275,14 @@ flowchart LR
 `;
 
 // Invoice Item creation types
-const getInvoiceItemTypes = (priceLabel: string) => [
+const getInvoiceItemTypes = (priceLabel: string, prefix: string) => [
   {
     type: translate('Provisional'),
     source: 'arrow_consumption',
     trigger: translate(
       'Created/updated during real-time consumption sync. Used for end-of-month invoice generation.',
     ),
-    nameFormat: 'Arrow consumption: {Resource.name}',
+    nameFormat: `${prefix}: {Resource.name}`,
     quantity: '1',
     unitPrice: `consumed_${priceLabel}`,
     details: [
@@ -314,8 +297,7 @@ const getInvoiceItemTypes = (priceLabel: string) => [
     trigger: translate(
       'Created when final billing export arrives and differs from provisional amount. Added to current month invoice.',
     ),
-    nameFormat:
-      'Arrow adjustment: {Resource.name} (additional charge|credit for {billing_period})',
+    nameFormat: `${prefix} adjustment: {Resource.name} (additional charge|credit for {billing_period})`,
     quantity: '1',
     unitPrice: `final_${priceLabel} - consumed_${priceLabel}`,
     details: [
@@ -329,15 +311,15 @@ const getInvoiceItemTypes = (priceLabel: string) => [
 
 const CUSTOMER_MAPPING_FIELDS = [
   {
-    arrowField: 'customers[].reference',
+    arrowField: 'customers[].Reference',
     waldurField: 'arrow_reference',
     description: translate('Arrow customer ID (e.g., XSP661245)'),
   },
   {
-    arrowField: 'customers[].companyName',
+    arrowField: 'customers[].CompanyName',
     waldurField: 'arrow_company_name',
     description: translate(
-      'Arrow company display name. Also used as fallback for billing sync grouping when "Customer Reference" field is absent from the export.',
+      'Arrow company display name (End User Company Name). Used for billing sync grouping to match export lines to customer mappings.',
     ),
   },
   {
@@ -368,15 +350,15 @@ const BILLING_SYNC_ITEM_FIELDS = [
     ),
   },
   {
-    arrowField: 'export[].Subscription Reference',
+    arrowField: 'export[].Vendor Subscription ID',
     waldurField: 'subscription_reference',
-    description: translate('Arrow subscription reference ID'),
+    description: translate('Arrow vendor subscription reference ID'),
   },
   {
-    arrowField: 'export[].Line Reference || Sequence || Order Id',
+    arrowField: 'export[].Order Id (Sequence as fallback)',
     waldurField: 'arrow_line_reference',
     description: translate(
-      'Unique line identifier. Different export types use different fields — falls back through Line Reference, Sequence, then Order Id.',
+      'Unique line identifier. Uses Order Id, with Sequence as a fallback.',
     ),
   },
   {
@@ -432,16 +414,14 @@ const CONSUMPTION_RECORD_FIELDS = [
     ),
   },
   {
-    arrowField:
-      'Matched by "License Reference" || "ARS Subscription ID" → "Customer Total Price"',
+    arrowField: 'Matched by "ARS Subscription ID" → "Customer Total Price"',
     waldurField: 'final_sell',
     description: translate(
-      'Final sell amount from billing export. Reconciliation matches by License Reference first, then falls back to ARS Subscription ID.',
+      'Final sell amount from billing export. Reconciliation matches by ARS Subscription ID.',
     ),
   },
   {
-    arrowField:
-      'Matched by "License Reference" || "ARS Subscription ID" → "Total Wholesale Price"',
+    arrowField: 'Matched by "ARS Subscription ID" → "Total Wholesale Price"',
     waldurField: 'final_buy',
     description: translate(
       'Final buy amount from billing export. Same matching logic as final_sell.',
@@ -473,17 +453,17 @@ const CONSUMPTION_RECORD_FIELDS = [
 
 const RESOURCE_ATTRIBUTE_FIELDS = [
   {
-    arrowField: 'License Reference || ARS Subscription ID',
+    arrowField: 'ARS Subscription ID',
     waldurField: 'attributes["arrow_license_reference"]',
     description: translate(
-      'Must be set on Resource to enable consumption sync. During reconciliation, matched against both "License Reference" and "ARS Subscription ID" fields in the billing export.',
+      'Must be set on Resource to enable consumption sync. During reconciliation, matched against the "ARS Subscription ID" field in the billing export.',
     ),
   },
   {
-    arrowField: 'Vendor Subscription ID',
+    arrowField: 'License Reference (XSP...)',
     waldurField: 'backend_id',
     description: translate(
-      'Used as primary key for matching billing export lines',
+      'Arrow license reference set during import or manual linking. Used for matching billing and consumption data.',
     ),
   },
   {
@@ -523,7 +503,7 @@ const SETTINGS_FIELDS = [
     arrowField: 'User input',
     waldurField: 'classification_filter',
     description: translate(
-      'Filter for IAAS/SAAS classification. Optional — if the Arrow API rejects this filter for the chosen export type, the system automatically retries without it.',
+      'Filter for IAAS/SAAS classification. Optional — used to pre-filter billing export data.',
     ),
   },
   {
@@ -531,6 +511,20 @@ const SETTINGS_FIELDS = [
     waldurField: 'invoice_price_source',
     description: translate(
       'Which price to use for invoicing: sell (default) or buy',
+    ),
+  },
+  {
+    arrowField: 'User input',
+    waldurField: 'invoice_item_prefix',
+    description: translate(
+      'Prefix for invoice item names (e.g., "Arrow consumption"). Used in both provisional and compensation items.',
+    ),
+  },
+  {
+    arrowField: 'User selection',
+    waldurField: 'sync_enabled',
+    description: translate(
+      'Whether automatic periodic sync is enabled for this integration',
     ),
   },
 ];
@@ -563,10 +557,12 @@ const FieldMappingTable: FC<FieldMappingTableProps> = ({
         {fields.map((field, idx) => (
           <tr key={idx}>
             <td>
-              <code className="text-primary">{field.arrowField}</code>
+              <span className="text-primary fw-semibold">
+                {field.arrowField}
+              </span>
             </td>
             <td>
-              <code>{field.waldurField}</code>
+              <span className="fw-semibold">{field.waldurField}</span>
             </td>
             <td className="text-muted">{field.description}</td>
           </tr>
@@ -586,9 +582,12 @@ export const ArrowHowItWorksDialog: FC = () => {
     () => getReconciliationDiagram(priceSource),
     [priceSource],
   );
+  // TODO: Remove cast after SDK regeneration — invoice_item_prefix is a new backend field
+  const invoiceItemPrefix =
+    (settings as any)?.invoice_item_prefix || 'Arrow consumption';
   const invoiceItemTypes = useMemo(
-    () => getInvoiceItemTypes(priceSource),
-    [priceSource],
+    () => getInvoiceItemTypes(priceSource, invoiceItemPrefix),
+    [priceSource, invoiceItemPrefix],
   );
 
   return (
@@ -611,7 +610,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           {settings && (
             <div className="alert alert-warning mt-4 mb-0">
               <strong>{translate('Invoice price source')}:</strong>{' '}
-              <code>{priceLabel}</code>.{' '}
+              <strong>{priceLabel}</strong>.{' '}
               {translate(
                 'All invoice items, provisional amounts, and reconciliation adjustments use {price} prices.',
                 { price: priceLabel.toLowerCase() },
@@ -776,9 +775,9 @@ export const ArrowHowItWorksDialog: FC = () => {
                   'Compensation items are created for any discrepancies',
                 )}{' '}
                 (
-                <code>
+                <span className="fw-semibold">
                   adjustment = final_{priceSource} - consumed_{priceSource}
-                </code>
+                </span>
                 )
               </li>
             </ol>
@@ -790,7 +789,7 @@ export const ArrowHowItWorksDialog: FC = () => {
           <h4 className="mb-4">{translate('Invoice item creation')}</h4>
           <p className="text-muted mb-4">
             {translate(
-              'Arrow integration creates three types of invoice items depending on the sync stage.',
+              'Arrow integration creates two types of invoice items depending on the sync stage.',
             )}
           </p>
           <div className="table-responsive">
@@ -811,14 +810,12 @@ export const ArrowHowItWorksDialog: FC = () => {
                   <tr key={item.source}>
                     <td className="fw-bold">
                       <span className="d-block">{item.type}</span>
-                      <code className="text-muted small">{item.source}</code>
+                      <span className="text-muted small">{item.source}</span>
                     </td>
-                    <td className="small">{item.trigger}</td>
+                    <td>{item.trigger}</td>
+                    <td>{item.nameFormat}</td>
                     <td>
-                      <code className="small">{item.nameFormat}</code>
-                    </td>
-                    <td>
-                      <code className="small">{item.unitPrice}</code>
+                      {item.unitPrice}
                       <div className="text-muted small mt-1">
                         {translate('qty')}: {item.quantity}
                       </div>
@@ -827,7 +824,7 @@ export const ArrowHowItWorksDialog: FC = () => {
                       <ul className="list-unstyled small mb-0">
                         {item.details.map((detail, idx) => (
                           <li key={idx}>
-                            <code className="text-muted">{detail}</code>
+                            <span className="text-muted">{detail}</span>
                           </li>
                         ))}
                       </ul>
@@ -941,7 +938,7 @@ export const ArrowHowItWorksDialog: FC = () => {
                 {SYNC_STATES.map((item) => (
                   <tr key={item.state}>
                     <td className="fw-bold text-gray-800">
-                      <code>{item.state}</code>
+                      <span className="fw-semibold">{item.state}</span>
                     </td>
                     <td>{item.description}</td>
                   </tr>

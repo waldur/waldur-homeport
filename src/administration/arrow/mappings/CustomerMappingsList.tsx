@@ -92,7 +92,7 @@ export const CustomerMappingsList: FunctionComponent<
                 {row.arrow_company_name}
               </span>
               <br />
-              <code className="text-muted small">{row.arrow_reference}</code>
+              <span className="text-muted small">{row.arrow_reference}</span>
             </div>
           ),
         },
