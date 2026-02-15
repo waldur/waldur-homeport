@@ -67,8 +67,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'organization-resources',
+    name: 'organization-resources-group',
+    abstract: true,
     parent: 'organization',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Resources'),
+      priority: 110,
+    },
+  },
+
+  {
+    name: 'organization-resources',
+    parent: 'organization-resources-group',
     url: 'marketplace-resources/',
     component: lazyComponent(() =>
       import('../marketplace/resources/list/OrganizationResourcesAllList').then(
@@ -77,13 +89,12 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Resources'),
-      priority: 110,
       permissions: [userHasCustomerPermission(PermissionEnum.LIST_RESOURCES)],
     },
   },
   {
     name: 'organization-orders',
-    parent: 'organization',
+    parent: 'organization-resources-group',
     url: 'marketplace-orders/',
     component: lazyComponent(() =>
       import('./orders/CustomerOrdersList').then((module) => ({
@@ -92,7 +103,6 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Orders'),
-      priority: 120,
       permissions: [
         userHasCustomerPermission(PermissionEnum.LIST_ORDERS),
         () => !isFeatureVisible(MarketplaceFeatures.catalogue_only),
@@ -342,22 +352,6 @@ export const states: StateDeclaration[] = [
   },
 
   {
-    name: 'organization-cost-policies',
-    url: 'cost-policies/',
-    parent: 'organization-billing',
-    component: lazyComponent(() =>
-      import('./cost-policies/CostPoliciesList').then((module) => ({
-        default: module.CostPoliciesList,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Cost policies'),
-      permissions: [isOwnerOrStaff],
-      priority: 135,
-    },
-  },
-
-  {
     name: 'project-credit-management',
     url: 'credit-management/',
     parent: 'organization-billing',
@@ -377,9 +371,22 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'organization-policies',
+    abstract: true,
+    parent: 'organization',
+    component: UIView,
+    url: '',
+    data: {
+      breadcrumb: () => translate('Policy'),
+      priority: 150,
+      permissions: [isOwnerOrStaff],
+    },
+  },
+
+  {
     name: 'organization-component-policies',
     url: 'component-policies/',
-    parent: 'organization',
+    parent: 'organization-policies',
     component: lazyComponent(() =>
       import('./component-policies/ComponentPoliciesList').then((module) => ({
         default: module.ComponentPoliciesList,
@@ -387,6 +394,21 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Component policies'),
+      permissions: [isOwnerOrStaff],
+    },
+  },
+
+  {
+    name: 'organization-cost-policies',
+    url: 'cost-policies/',
+    parent: 'organization-policies',
+    component: lazyComponent(() =>
+      import('./cost-policies/CostPoliciesList').then((module) => ({
+        default: module.CostPoliciesList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Cost policies'),
       permissions: [isOwnerOrStaff],
     },
   },

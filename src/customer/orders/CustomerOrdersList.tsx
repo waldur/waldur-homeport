@@ -26,7 +26,6 @@ export const CustomerOrdersList: FunctionComponent = () => {
       filters={<CustomerOrdersListFilter />}
       filter={filter}
       hideColumns={['organization']}
-      standalone
       enableMultiSelect
       multiSelectActions={OrdersBulkActions}
     />
