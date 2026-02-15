@@ -1,31 +1,34 @@
-import { useQuery } from '@tanstack/react-query';
-import { overrideSettingsRetrieve } from 'waldur-js-client';
-
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
-import { SettingsCard } from '../settings/SettingsCard';
+import { SettingsTab, SettingsWithTabs } from '../settings/SettingsWithTabs';
 
-export const AdministrationMarketplace = () => {
-  const { data, error, isLoading, refetch } = useQuery({
-    queryKey: ['AdministrationMarketplace'],
-    queryFn: () => overrideSettingsRetrieve().then((response) => response.data),
-  });
+const MARKETPLACE_TABS: SettingsTab[] = [
+  {
+    key: 'visibility',
+    title: translate('Visibility & Access'),
+    groupName: translate('Marketplace visibility & access'),
+  },
+  {
+    key: 'notifications',
+    title: translate('Notifications'),
+    groupName: translate('Marketplace notifications'),
+  },
+  {
+    key: 'offerings',
+    title: translate('Offerings & Orders'),
+    groupName: translate('Offerings & orders'),
+  },
+  {
+    key: 'development',
+    title: translate('Development'),
+    groupName: translate('Marketplace development'),
+  },
+];
 
-  if (isLoading) return <LoadingSpinner />;
-  if (error)
-    return (
-      <LoadingErred
-        message={translate('Unable to load marketplace configuration.')}
-        loadData={refetch}
-      />
-    );
-
-  return data ? (
-    <SettingsCard
-      groupNames={[translate('Marketplace')]}
-      settingsSource={data}
-    />
-  ) : null;
-};
+export const AdministrationMarketplace = () => (
+  <SettingsWithTabs
+    title={translate('Marketplace settings')}
+    tabs={MARKETPLACE_TABS}
+    queryKey="AdministrationMarketplace"
+  />
+);
