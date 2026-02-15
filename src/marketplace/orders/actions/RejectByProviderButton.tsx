@@ -36,23 +36,30 @@ export const RejectByProviderButton: FunctionComponent<
     mutationFn: async () => {
       const isSiteAgentOrder = props.row.offering_type === SITE_AGENT_PLUGIN;
 
-      if (isSiteAgentOrder) {
-        try {
-          await waitForConfirmation(
-            dispatch,
-            translate('Reject order'),
-            translate(
-              'Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',
-            ),
-          );
-        } catch {
-          return;
-        }
+      let result;
+      try {
+        result = await waitForConfirmation(
+          dispatch,
+          translate('Reject order'),
+          isSiteAgentOrder
+            ? translate(
+                'Provider rejection is expected to be done by Waldur site agent. Doing it manually can lead to a broken state.',
+              )
+            : translate('Are you sure you want to reject this order?'),
+          {
+            showInput: true,
+            inputLabel: translate('Rejection reason (optional)'),
+            positiveButton: translate('Reject'),
+          },
+        );
+      } catch {
+        return;
       }
 
       try {
         await marketplaceOrdersRejectByProvider({
           path: { uuid: props.row.uuid },
+          body: { provider_rejection_comment: result?.input },
         });
         const newOrder = await marketplaceOrdersRetrieve({
           path: { uuid: props.row.uuid },

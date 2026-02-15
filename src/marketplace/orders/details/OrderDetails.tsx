@@ -25,6 +25,7 @@ import { OrderSummaryTab } from './OrderSummaryTab';
 import { OutputTab } from './OutputTab';
 import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
 import { ProviderConsumerInfoTab } from './ProviderConsumerInfoTab';
+import { RejectionDetailsTab } from './RejectionDetailsTab';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
@@ -106,6 +107,18 @@ const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
       key: 'error-details',
       title: translate('Error details'),
       component: () => <ErrorDetailsTab order={props.order} />,
+    });
+  }
+
+  // Only show Rejection details tab if there are rejection comments
+  if (
+    props.order.consumer_rejection_comment ||
+    props.order.provider_rejection_comment
+  ) {
+    tabs.push({
+      key: 'rejection-details',
+      title: translate('Rejection details'),
+      component: () => <RejectionDetailsTab order={props.order} />,
     });
   }
 
