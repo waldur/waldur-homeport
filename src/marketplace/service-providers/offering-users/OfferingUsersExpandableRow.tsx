@@ -6,12 +6,14 @@ import {
   QuestionWithAnswer,
 } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { FIELD_MAPPING } from '@waldur/marketplace/offerings/details/OfferingUserDetailsDialog';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { BooleanIconBadge } from '@waldur/project/metadata/BooleanIconBadge';
 import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
@@ -122,6 +124,36 @@ export const OfferingUsersExpandableRow = ({
         value={offeringUser.service_provider_comment_url || 'N/A'}
         labelClass="mw-175px"
       />
+
+      {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
+        <>
+          <Field
+            label={translate('Profile status')}
+            value={
+              offeringUser.is_profile_complete
+                ? translate('Complete')
+                : translate('Incomplete')
+            }
+            labelClass="mw-175px"
+          />
+          {offeringUser.missing_profile_attributes?.length > 0 && (
+            <Field
+              label={translate('Missing attributes')}
+              value={offeringUser.missing_profile_attributes
+                .map((key) => {
+                  const mapping = FIELD_MAPPING[key];
+                  return mapping
+                    ? mapping.label()
+                    : key
+                        .replace(/_/g, ' ')
+                        .replace(/^\w/, (c) => c.toUpperCase());
+                })
+                .join(', ')}
+              labelClass="mw-175px"
+            />
+          )}
+        </>
+      )}
 
       <Table<QuestionWithAnswer>
         {...tableProps}

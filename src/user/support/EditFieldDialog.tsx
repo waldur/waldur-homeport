@@ -12,7 +12,7 @@ import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
@@ -23,6 +23,7 @@ import {
   OrganizationTypeSelectField,
   PersonalTitleSelectField,
 } from './fields';
+import { useProfileFieldWarnings } from './useProfileFieldWarnings';
 import { useUpdateUser } from './useUpdateUser';
 
 // Fields that use CountrySelectField
@@ -44,10 +45,47 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
 }) => {
   const dispatch = useDispatch();
   const { callback } = useUpdateUser(resolve.user);
+  const { data: fieldWarnings } = useProfileFieldWarnings();
 
   const processRequest = useCallback(
     async (values) => {
       try {
+        const newValue = values[resolve.name];
+        const isEmpty =
+          newValue === '' ||
+          newValue === null ||
+          newValue === undefined ||
+          (Array.isArray(newValue) && newValue.length === 0);
+
+        if (isEmpty && fieldWarnings) {
+          const offerings = fieldWarnings[resolve.name];
+          if (offerings?.length) {
+            const offeringNames = offerings
+              .map((o) => o.offering_name)
+              .join(', ');
+            try {
+              await waitForConfirmation(
+                dispatch,
+                translate('Field required by offerings'),
+                translate(
+                  '"{field}" is required by: {offerings}. Without it, service providers will not be able to see your user account.',
+                  {
+                    field: resolve.label,
+                    offerings: offeringNames,
+                  },
+                ),
+                {
+                  positiveButton: translate('Clear anyway'),
+                  positiveButtonVariant: 'warning',
+                  negativeButton: translate('Cancel'),
+                },
+              );
+            } catch {
+              return;
+            }
+          }
+        }
+
         await callback(values);
         dispatch(closeModalDialog());
       } catch (e) {
@@ -56,7 +94,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
         }
       }
     },
-    [resolve, dispatch],
+    [resolve, dispatch, fieldWarnings],
   );
 
   return (

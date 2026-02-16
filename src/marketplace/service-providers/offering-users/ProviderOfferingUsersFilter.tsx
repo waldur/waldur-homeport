@@ -3,6 +3,8 @@ import { useSelector } from 'react-redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { OfferingUserState } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
+import { SelectField } from '@waldur/form/SelectField';
 import {
   REACT_MULTI_SELECT_TABLE_FILTER,
   REACT_SELECT_TABLE_FILTER,
@@ -39,6 +41,12 @@ const getOfferingUserStateFilterOptions = (): {
   { value: 'Deleted', label: translate('Deleted') },
   { value: 'Error creating', label: translate('Error creating') },
   { value: 'Error deleting', label: translate('Error deleting') },
+];
+
+const profileCompletenessOptions = [
+  { value: undefined, label: translate('All') },
+  { value: true, label: translate('Complete') },
+  { value: false, label: translate('Incomplete') },
 ];
 
 const OfferingUserStateFilter = () => (
@@ -99,6 +107,31 @@ const PureProviderOfferingUsersFilter: FunctionComponent<
           getValueLabel={(option) => option.customer_name}
         >
           <ProviderAutocomplete reactSelectProps={REACT_SELECT_TABLE_FILTER} />
+        </TableFilterItem>
+      )}
+      {ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
+        <TableFilterItem
+          title={translate('Profile status')}
+          name="has_complete_profile"
+          getValueLabel={(value) =>
+            profileCompletenessOptions.find((op) => op.value === value)?.label
+          }
+          instantApply={false}
+        >
+          <Field
+            name="has_complete_profile"
+            component={(fieldProps) => (
+              <SelectField
+                {...fieldProps}
+                placeholder={translate('Select status')}
+                options={profileCompletenessOptions}
+                noUpdateOnBlur={true}
+                simpleValue={true}
+                isClearable={true}
+                {...REACT_SELECT_TABLE_FILTER}
+              />
+            )}
+          />
         </TableFilterItem>
       )}
     </>

@@ -4,13 +4,16 @@ import { getFormValues } from 'redux-form';
 import { marketplaceOfferingUsersList } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
+import { Tip } from '@waldur/core/Tooltip';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { OfferingUserRowActions } from '@waldur/marketplace/offerings/actions/OfferingUserRowActions';
 import { CreateOfferingUserButton } from '@waldur/marketplace/offerings/details/CreateOfferingUserButton';
+import { FIELD_MAPPING } from '@waldur/marketplace/offerings/details/OfferingUserDetailsDialog';
 import { UserImportButton } from '@waldur/marketplace/offerings/import-users/UserImportButton';
 import { TosReportingButton } from '@waldur/marketplace/offerings/update/tos/TosReportingButton';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
@@ -41,7 +44,12 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
 > = ({ provider, hasOrganizationColumn, portal, offering, tableActions }) => {
   const filterValues = useSelector(
     getFormValues(PROVIDER_OFFERING_USERS_FORM_ID),
-  ) as { offering?; provider?; state?: Array<{ value: any }> };
+  ) as {
+    offering?;
+    provider?;
+    state?: Array<{ value: any }>;
+    has_complete_profile?: boolean;
+  };
   const filter = useMemo(
     () => ({
       provider_uuid: hasOrganizationColumn
@@ -49,6 +57,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
         : provider?.customer_uuid,
       offering_uuid: offering?.uuid || filterValues?.offering?.uuid,
       state: filterValues?.state?.map((option) => option.value),
+      has_complete_profile: filterValues?.has_complete_profile,
     }),
     [provider, filterValues, offering, hasOrganizationColumn],
   );
@@ -123,6 +132,50 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
         },
       ]
     : [];
+  const profileCompleteColumn = ENV.plugins.WALDUR_CORE
+    .ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS
+    ? [
+        {
+          title: translate('Profile complete'),
+          render: ({ row }) => {
+            if (row.is_profile_complete) {
+              return (
+                <Badge variant="success" pill outline>
+                  {translate('Complete')}
+                </Badge>
+              );
+            }
+            const missingLabels = (row.missing_profile_attributes || [])
+              .map((key) => {
+                const mapping = FIELD_MAPPING[key];
+                return mapping
+                  ? mapping.label()
+                  : key
+                      .replace(/_/g, ' ')
+                      .replace(/^\w/, (c) => c.toUpperCase());
+              })
+              .join(', ');
+            const badge = (
+              <Badge variant="warning" pill outline>
+                {translate('Incomplete')}
+              </Badge>
+            );
+            return missingLabels ? (
+              <Tip
+                label={translate('Missing: {attributes}', {
+                  attributes: missingLabels,
+                })}
+                id={`profile-incomplete-${row.uuid}`}
+              >
+                {badge}
+              </Tip>
+            ) : (
+              badge
+            );
+          },
+        },
+      ]
+    : [];
   const columns = [
     ...offeringColumn,
     ...organizationColumn,
@@ -147,6 +200,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     },
     ...stateColumn,
     ...tosConsentColumn,
+    ...profileCompleteColumn,
   ];
 
   const showExpandableRow = offering

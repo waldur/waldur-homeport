@@ -34,6 +34,7 @@ import { router } from '@waldur/router';
 import { setCurrentResource } from '@waldur/workspace/actions';
 
 import { fetchData, getResourceTabs } from './fetchData';
+import { ProfileCompletenessWarningBanner } from './ProfileCompletenessWarningBanner';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
 import { ServiceProviderCommentWarningBar } from './ServiceProviderCommentWarningBar';
@@ -213,6 +214,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
           offering={data.offering}
           userHasConsent={data.offering?.user_has_consent}
         />
+        <ProfileCompletenessWarningBanner offering={data.offering} />
         <ResourceDetailsHero
           resource={resource}
           scope={data.scope}
