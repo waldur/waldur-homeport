@@ -92,8 +92,14 @@ export const SettingsDescription = [
     ],
   },
   {
-    description: translate('Marketplace visibility & access'),
+    description: translate('Marketplace'),
     items: [
+      {
+        key: 'THUMBNAIL_SIZE',
+        description: translate('Size of the thumbnail to generate when screenshot is uploaded for an offering.'),
+        default: '120x120',
+        type: 'string',
+      },
       {
         key: 'ANONYMOUS_USER_CAN_VIEW_OFFERINGS',
         description: translate('Allow anonymous users to see shared offerings in active, paused and archived states'),
@@ -112,23 +118,6 @@ export const SettingsDescription = [
         default: 'show_all',
         type: 'string',
       },
-      {
-        key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
-        description: translate('If True, users must have active consent to access offerings that have active Terms of Service.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT',
-        description: translate('If true, service provider owners and managers can manage offering lifecycle (activate, pause, unpause, archive, draft, delete) without staff approval.'),
-        default: false,
-        type: 'boolean',
-      },
-    ],
-  },
-  {
-    description: translate('Marketplace notifications'),
-    items: [
       {
         key: 'NOTIFY_STAFF_ABOUT_APPROVALS',
         description: translate('If true, users with staff role are notified when request for order approval is generated'),
@@ -153,16 +142,23 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
-    ],
-  },
-  {
-    description: translate('Offerings & orders'),
-    items: [
       {
-        key: 'THUMBNAIL_SIZE',
-        description: translate('Size of the thumbnail to generate when screenshot is uploaded for an offering.'),
-        default: '120x120',
-        type: 'string',
+        key: 'ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND',
+        description: translate('Enable mock returns for the service account service'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ENABLE_MOCK_COURSE_ACCOUNT_BACKEND',
+        description: translate('Enable mock returns for the course account service'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
+        description: translate('If True, users must have active consent to access offerings that have active Terms of Service.'),
+        default: false,
+        type: 'boolean',
       },
       {
         key: 'DISABLED_OFFERING_TYPES',
@@ -176,20 +172,9 @@ export const SettingsDescription = [
         default: false,
         type: 'boolean',
       },
-    ],
-  },
-  {
-    description: translate('Marketplace development'),
-    items: [
       {
-        key: 'ENABLE_MOCK_SERVICE_ACCOUNT_BACKEND',
-        description: translate('Enable mock returns for the service account service'),
-        default: false,
-        type: 'boolean',
-      },
-      {
-        key: 'ENABLE_MOCK_COURSE_ACCOUNT_BACKEND',
-        description: translate('Enable mock returns for the course account service'),
+        key: 'ALLOW_SERVICE_PROVIDER_OFFERING_MANAGEMENT',
+        description: translate('If true, service provider owners and managers can manage offering lifecycle (activate, pause, unpause, archive, draft, delete) without staff approval.'),
         default: false,
         type: 'boolean',
       },
