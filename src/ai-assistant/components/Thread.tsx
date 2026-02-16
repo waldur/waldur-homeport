@@ -157,11 +157,15 @@ const ThreadSuggestions: FC = () => {
 const Composer: FC = () => {
   const isRunning = useAssistantState(({ thread }) => thread.isRunning);
   const [showUsage, setShowUsage] = React.useState(false);
+  const user = useUser();
 
   const { data: quota, refetch: refetchQuota } = useQuery({
     queryKey: ['chatQuota'],
-    queryFn: () => chatQuotaUsageRetrieve().then((r) => r.data),
-    enabled: showUsage,
+    queryFn: () =>
+      chatQuotaUsageRetrieve({ query: { user_uuid: user.uuid } }).then(
+        (r) => r.data,
+      ),
+    enabled: showUsage && !!user?.uuid,
   });
 
   // Refetch when isRunning changes from true -> false

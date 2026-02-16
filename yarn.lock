@@ -12471,10 +12471,10 @@ wait-on@9.0.3:
     minimist "^1.2.8"
     rxjs "^7.8.2"
 
-waldur-js-client@^8.0.3-dev.16:
-  version "8.0.3-dev.16"
-  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-8.0.3-dev.16.tgz#b5c5b221748e0c288daeb72646ffaf1a16c691ec"
-  integrity sha512-7WYNZ+8EmGPHU/keAMvRKvR+znO/Gy7QH+6N8OttluczkIPPkLDPs4nLaStYGsQGyOIugTY/U29cSU1rrUsTiw==
+waldur-js-client@^8.0.4-dev.2:
+  version "8.0.4-dev.2"
+  resolved "https://registry.yarnpkg.com/waldur-js-client/-/waldur-js-client-8.0.4-dev.2.tgz#fd542706f34ae69e8d180cfc04ff842955d774f9"
+  integrity sha512-K7MaO5Ns7cUVEvbvIM4+U/IAmndgzxgWVV+msgzOIjREDwlyoB33E5Jmx9bkEl8zUdit0jmiDtSEqJxl4uiesA==
 
 walk-up-path@^4.0.0:
   version "4.0.0"

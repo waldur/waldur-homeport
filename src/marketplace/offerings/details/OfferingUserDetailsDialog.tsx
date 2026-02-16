@@ -6,6 +6,7 @@ import {
   OfferingUser,
 } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -25,7 +26,7 @@ interface OfferingUserDetailsDialogProps {
 }
 
 // Maps exposed_fields values to OfferingUser properties
-const FIELD_MAPPING: Record<
+export const FIELD_MAPPING: Record<
   string,
   {
     label: () => string;
@@ -186,6 +187,35 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
                 offeringUser.is_restricted ? translate('Yes') : translate('No')
               }
             />
+          )}
+          {ENV.plugins.WALDUR_CORE
+            .ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS && (
+            <>
+              <FormTable.Item
+                label={translate('Profile complete')}
+                value={
+                  offeringUser.is_profile_complete
+                    ? translate('Yes')
+                    : translate('No')
+                }
+              />
+              {offeringUser.is_profile_complete === false &&
+                offeringUser.missing_profile_attributes?.length > 0 && (
+                  <FormTable.Item
+                    label={translate('Missing attributes')}
+                    value={offeringUser.missing_profile_attributes
+                      .map((key) => {
+                        const mapping = FIELD_MAPPING[key];
+                        return mapping
+                          ? mapping.label()
+                          : key
+                              .replace(/_/g, ' ')
+                              .replace(/^\w/, (c) => c.toUpperCase());
+                      })
+                      .join(', ')}
+                  />
+                )}
+            </>
           )}
           {offeringUser.service_provider_comment && (
             <FormTable.Item
