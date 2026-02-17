@@ -2747,7 +2747,7 @@
   "Shutdown": "Išjungimo",
   "Sign in": "Prisijungti",
   "Sign in with local account": "Prisijunkite naudodami vietinę paskyrą",
-  "Sign in with {label}": "Prisijunkite naudodami {label}",
+  "Sign in with {label}": "Prisijungimas",
   "Single Sign-On": "Bendrasis prisijungimas",
   "Single sign-on using SAML2-based identity federation.": "Vienkartinis prisijungimas naudojant SAML2 pagrįstą tapatybės susijungimą.",
   "Size": "Dydis",
