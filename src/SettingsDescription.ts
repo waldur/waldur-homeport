@@ -1614,3 +1614,4 @@ export const SettingsDescription = [
     ],
   },
 ];
+
