@@ -142,6 +142,11 @@ const TenantVolumeTypesTable = lazyComponent(() =>
     default: module.TenantVolumeTypesTable,
   })),
 );
+const TenantServerGroupsTable = lazyComponent(() =>
+  import('./openstack-tenant/TenantServerGroupsTable').then((module) => ({
+    default: module.TenantServerGroupsTable,
+  })),
+);
 const RolesSection = lazyComponent(() =>
   import('./update/roles/RolesSection').then((module) => ({
     default: module.RolesSection,
@@ -268,6 +273,11 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           key: 'volume-types',
           component: TenantVolumeTypesTable,
           title: translate('Volume types'),
+        },
+        {
+          key: 'server-groups',
+          component: TenantServerGroupsTable,
+          title: translate('Server groups'),
         },
       ],
     });

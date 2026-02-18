@@ -107,7 +107,10 @@ export const connectForm = reduxForm<CreateSecurityGroupFormData, OwnProps>({
 });
 
 /////////////////////////////
-export const useCreateServerGroupForm = (resource: OpenStackTenant) => {
+export const useCreateServerGroupForm = (
+  resource: OpenStackTenant,
+  refetch?,
+) => {
   const asyncState = useAsync(
     () =>
       getAllPages((page) =>
@@ -131,6 +134,9 @@ export const useCreateServerGroupForm = (resource: OpenStackTenant) => {
           policy: formData.policy['value'],
         },
       });
+      if (refetch) {
+        await refetch();
+      }
       dispatch(
         showSuccess(translate('Server group creation has been scheduled.')),
       );

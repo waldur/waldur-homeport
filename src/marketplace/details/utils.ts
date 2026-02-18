@@ -63,8 +63,13 @@ const formatAttributes = (props): OrderCreateRequest['attributes'] => {
       newAttributes[key] =
         typeof value === 'string' ? JSON.parse(value) : value;
     } else if (typeof value === 'object' && !Array.isArray(value)) {
-      // For regular select fields, extract the value property
-      newAttributes[key] = value['value'];
+      if (optionConfig) {
+        // For offering option select fields, extract the value property
+        newAttributes[key] = value['value'];
+      } else {
+        // For serializer output (e.g. server_group: { url: "..." }), pass through as-is
+        newAttributes[key] = value;
+      }
     } else {
       // For primitive values, use as-is
       newAttributes[key] = value;

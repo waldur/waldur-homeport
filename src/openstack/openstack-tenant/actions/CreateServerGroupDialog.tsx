@@ -8,12 +8,13 @@ import { useCreateServerGroupForm } from './utils';
 interface CreateServerGroupDialogProps {
   resolve: {
     resource: OpenStackTenant;
+    refetch?;
   };
 }
 
 export const CreateServerGroupDialog: FC<CreateServerGroupDialogProps> = ({
-  resolve: { resource },
+  resolve: { resource, refetch },
 }) => {
-  const formState = useCreateServerGroupForm(resource);
+  const formState = useCreateServerGroupForm(resource, refetch);
   return <CreateServerGroupForm {...formState} />;
 };

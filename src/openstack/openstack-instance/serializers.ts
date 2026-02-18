@@ -53,7 +53,7 @@ const serializeServerGroup = (group) => {
   if (!group) {
     return undefined;
   }
-  return group.url;
+  return { url: group.url };
 };
 
 export const instanceSerializer = ({

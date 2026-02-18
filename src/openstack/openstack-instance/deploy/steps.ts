@@ -13,6 +13,7 @@ import { validateOpenstackInstanceName } from '../utils';
 import { FormHardwareConfigurationStep } from './FormHardwareConfigurationStep';
 import { FormImageStep } from './FormImageStep';
 import { FormNetworkSecurityStep } from './FormNetworkSecurityStep';
+import { FormSchedulingStep } from './FormSchedulingStep';
 import { FormStartupScriptStep } from './FormStartupScriptStep';
 
 export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
@@ -63,6 +64,13 @@ export const deployOfferingSteps: OfferingConfigurationFormStep[] = [
     ],
     required: false,
     component: FormNetworkSecurityStep,
+  },
+  {
+    label: translate('Scheduling'),
+    id: 'step-scheduling',
+    fields: ['attributes.server_group'],
+    required: false,
+    component: FormSchedulingStep,
   },
   {
     label: translate('Automation'),

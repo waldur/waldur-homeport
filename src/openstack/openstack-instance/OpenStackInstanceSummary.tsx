@@ -56,6 +56,13 @@ export const OpenStackInstanceSummary = (
         valueClass="text-decoration-underline"
       />
 
+      {props.resource.server_group && (
+        <Component
+          label={translate('Server group')}
+          value={`${props.resource.server_group.name} (${props.resource.server_group.policy})`}
+        />
+      )}
+
       <Component
         label={translate('Availability zone')}
         value={props.resource.availability_zone_name}

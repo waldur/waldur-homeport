@@ -43,7 +43,7 @@ export const fetchOfferingsByPage = (
     query: {
       ...(customer ? { allowed_customer_uuid: customer.uuid } : {}),
       ...(project ? { project_uuid: project.uuid } : {}),
-      ...(importable ? { importable: true } : {}),
+      ...(importable ? { importable: 'true' } : {}),
       category_uuid: category.uuid,
       name: search,
       field: [
