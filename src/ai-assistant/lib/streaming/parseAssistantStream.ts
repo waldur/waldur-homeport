@@ -19,11 +19,18 @@ interface ParseAssistantStreamParams extends Pick<
   signal: AbortSignal;
   onStreamComplete?: () => void;
   threadUuid?: string | null;
+  mode?: 'reload' | null;
+}
+
+interface ParseAssistantStreamResult {
+  threadUuid?: string;
+  userMessageUuid?: string;
+  assistantMessageUuid?: string;
 }
 
 export async function parseAssistantStream(
   params: ParseAssistantStreamParams,
-): Promise<string | undefined> {
+): Promise<ParseAssistantStreamResult | undefined> {
   const {
     contextInput,
     assistantId,
@@ -31,20 +38,37 @@ export async function parseAssistantStream(
     setMessages,
     onStreamComplete,
     threadUuid,
+    mode,
   } = params;
   let currentBlocks: UIBlock[] = [];
   let hadError = false;
   let receivedThreadUuid: string | undefined;
+  let userMessageUuid: string | undefined;
+  let assistantMessageUuid: string | undefined;
 
   try {
-    for await (const part of streamChat(contextInput, signal, threadUuid)) {
+    for await (const part of streamChat(
+      contextInput,
+      signal,
+      threadUuid,
+      undefined,
+      mode,
+    )) {
       if (signal?.aborted) {
         break;
       }
 
-      // Capture thread_uuid from the backend metadata envelope
-      if (part.m?.thread_uuid && !receivedThreadUuid) {
-        receivedThreadUuid = part.m.thread_uuid as string;
+      // Capture metadata from the backend envelope
+      if (part.m) {
+        if (part.m.thread_uuid && !receivedThreadUuid) {
+          receivedThreadUuid = part.m.thread_uuid as string;
+        }
+        if (part.m.user_message_uuid) {
+          userMessageUuid = part.m.user_message_uuid as string;
+        }
+        if (part.m.assistant_message_uuid) {
+          assistantMessageUuid = part.m.assistant_message_uuid as string;
+        }
       }
 
       // Skip metadata-only chunks (no renderable content)
@@ -136,5 +160,9 @@ export async function parseAssistantStream(
     }
   }
 
-  return receivedThreadUuid;
+  return {
+    threadUuid: receivedThreadUuid,
+    userMessageUuid,
+    assistantMessageUuid,
+  };
 }

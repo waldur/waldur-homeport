@@ -168,10 +168,9 @@ export const TableHeader: FC<TableHeaderProps> = ({
   }, [refCheck?.current, isAllSelected, selectedRows]);
 
   const toggledAll = useMemo(() => {
-    if (!expandableRow) return false;
-    const toggledRows = Object.values(toggled);
-    return toggledRows.length === rows.length && toggledRows.every(Boolean);
-  }, [toggled, rows]);
+    if (!expandableRow || rows.length === 0) return false;
+    return rows.every((row, i) => toggled[getId(row, i)]);
+  }, [toggled, getId, rows, expandableRow]);
 
   const toggleAll = useCallback(() => {
     if (toggledAll) {

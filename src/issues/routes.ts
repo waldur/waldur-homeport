@@ -3,6 +3,7 @@ import { UIView } from '@uirouter/react';
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
+import { SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
 
@@ -203,6 +204,20 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('System logs'),
       permissions: [isStaffOrSupport],
+    },
+  },
+  {
+    name: 'support-ai-assistant-logs',
+    url: 'ai-assistant-logs/',
+    parent: 'support-logs',
+    component: lazyComponent(() =>
+      import('@waldur/support/SupportAIAssistantLogsList').then((module) => ({
+        default: module.SupportAIAssistantLogsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('AI assistant logs'),
+      feature: SupportFeatures.enable_llm_assistant,
     },
   },
 

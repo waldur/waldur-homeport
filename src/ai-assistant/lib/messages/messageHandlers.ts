@@ -1,4 +1,5 @@
 import { AppendMessage } from '@assistant-ui/react';
+import { chatMessagesEdit } from 'waldur-js-client';
 
 import { extractTextFromMessageContent } from '@waldur/ai-assistant/lib/messages/messageUtils';
 import { generateAndSetThreadTitle } from '@waldur/ai-assistant/lib/streaming/generateAndSetThreadTitle';
@@ -20,6 +21,26 @@ type StartRunConfig = {
   parentId: string | null;
   sourceId: string | null;
   runConfig: RunConfig;
+};
+
+const setBackendUuid = (
+  setMessages: MessageHandlerDependencies['setMessages'],
+  messageId: string,
+  backendUuid: string,
+) => {
+  setMessages((prev) =>
+    prev.map((m) =>
+      m.id === messageId
+        ? {
+            ...m,
+            metadata: {
+              ...m.metadata,
+              custom: { ...m.metadata?.custom, backendUuid },
+            },
+          }
+        : m,
+    ),
+  );
 };
 
 export const createOnNew = (deps: MessageHandlerDependencies) => {
@@ -50,7 +71,7 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
       const contextInput = addContext(input, deps.messages.slice(0, -1));
       const abortController = deps.createController(deps.currentThreadId);
 
-      const backendThreadUuid = await parseAssistantStream({
+      const result = await parseAssistantStream({
         contextInput,
         assistantId: assistantPlaceholder.id!,
         signal: abortController.signal,
@@ -58,15 +79,29 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
         onStreamComplete: deps.onStreamComplete,
         threadUuid: deps.getBackendThreadId(deps.currentThreadId),
       });
-      if (backendThreadUuid) {
-        deps.setBackendThreadId(deps.currentThreadId, backendThreadUuid);
+      if (result?.threadUuid) {
+        deps.setBackendThreadId(deps.currentThreadId, result.threadUuid);
+      }
+      if (result?.userMessageUuid) {
+        setBackendUuid(
+          deps.setMessages,
+          userMessage.id,
+          result.userMessageUuid,
+        );
+      }
+      if (result?.assistantMessageUuid) {
+        setBackendUuid(
+          deps.setMessages,
+          assistantPlaceholder.id!,
+          result.assistantMessageUuid,
+        );
       }
       if (isFirstMessage && !abortController.signal.aborted) {
         await generateAndSetThreadTitle(
           input,
           deps,
           abortController.signal,
-          backendThreadUuid,
+          result?.threadUuid,
         );
       }
     } finally {
@@ -101,6 +136,11 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
       const assistantIdToStream = oldAssistant.id ?? '';
       if (!assistantIdToStream) return;
 
+      // Get backend UUID from user message metadata
+      const backendUserUuid = (
+        oldUser.metadata?.custom as { backendUuid?: string }
+      )?.backendUuid;
+
       // Extract current blocks before clearing
       const currentBlocks =
         (oldAssistant.metadata?.custom as { blocks?: UIBlock[] })?.blocks ?? [];
@@ -133,19 +173,43 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
         return updated;
       });
 
+      // Call backend edit endpoint if we have a backend UUID
+      if (backendUserUuid) {
+        try {
+          await chatMessagesEdit({
+            body: { content: input },
+            path: { uuid: backendUserUuid },
+          });
+        } catch {
+          // Continue with stream even if edit fails
+        }
+      }
+
       const contextInput = addContext(input, deps.messages.slice(0, userIndex));
       const abortController = deps.createController(deps.currentThreadId);
 
-      const backendThreadUuid = await parseAssistantStream({
+      // Stream with mode="reload" to regenerate assistant response
+      const result = await parseAssistantStream({
         contextInput,
         assistantId: assistantIdToStream,
         signal: abortController.signal,
         setMessages: deps.setMessages,
         onStreamComplete: deps.onStreamComplete,
         threadUuid: deps.getBackendThreadId(deps.currentThreadId),
+        mode: 'reload',
       });
-      if (backendThreadUuid) {
-        deps.setBackendThreadId(deps.currentThreadId, backendThreadUuid);
+      if (result?.threadUuid) {
+        deps.setBackendThreadId(deps.currentThreadId, result.threadUuid);
+      }
+      if (result?.userMessageUuid) {
+        setBackendUuid(deps.setMessages, oldUser.id!, result.userMessageUuid);
+      }
+      if (result?.assistantMessageUuid) {
+        setBackendUuid(
+          deps.setMessages,
+          assistantIdToStream,
+          result.assistantMessageUuid,
+        );
       }
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
@@ -203,16 +267,21 @@ export const createOnReload = (deps: MessageHandlerDependencies) => {
       const contextInput = addContext(input, deps.messages.slice(0, userIndex));
       const abortController = deps.createController(deps.currentThreadId);
 
-      const backendThreadUuid = await parseAssistantStream({
+      // Stream with mode="reload" to regenerate assistant response
+      const result = await parseAssistantStream({
         contextInput,
         assistantId: sourceId,
         signal: abortController.signal,
         setMessages: deps.setMessages,
         onStreamComplete: deps.onStreamComplete,
         threadUuid: deps.getBackendThreadId(deps.currentThreadId),
+        mode: 'reload',
       });
-      if (backendThreadUuid) {
-        deps.setBackendThreadId(deps.currentThreadId, backendThreadUuid);
+      if (result?.threadUuid) {
+        deps.setBackendThreadId(deps.currentThreadId, result.threadUuid);
+      }
+      if (result?.assistantMessageUuid) {
+        setBackendUuid(deps.setMessages, sourceId, result.assistantMessageUuid);
       }
     } finally {
       deps.setIsRunning(deps.currentThreadId, false);
