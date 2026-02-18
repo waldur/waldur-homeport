@@ -30,6 +30,11 @@ export const TagsList: FunctionComponent = () => {
           copyField: (row) => row.name,
         },
         {
+          title: translate('UUID'),
+          render: ({ row }) => row.uuid,
+          copyField: (row) => row.uuid,
+        },
+        {
           title: translate('Description'),
           render: ({ row }) => <>{truncate(row.description, 80)}</>,
         },
