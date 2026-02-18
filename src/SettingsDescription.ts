@@ -414,12 +414,6 @@ export const SettingsDescription = [
     description: translate('Images'),
     items: [
       {
-        key: 'SITE_LOGO',
-        description: translate('The image used in marketplace order header.'),
-        default: '',
-        type: 'image_field',
-      },
-      {
         key: 'SIDEBAR_LOGO',
         description: translate('The image rendered at the top of sidebar menu in HomePort.'),
         default: '',
@@ -1620,4 +1614,3 @@ export const SettingsDescription = [
     ],
   },
 ];
-
