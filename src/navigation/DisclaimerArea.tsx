@@ -19,7 +19,8 @@ export const DisclaimerArea: FunctionComponent = () => {
 
   return (
     <div className="border-top py-6">
-      <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-center gap-4 fs-7 text-muted">
+      <div className="container-fluid d-flex flex-column flex-md-row align-items-center justify-content-center gap-6 fs-7 text-muted">
+        {text && <span>{text}</span>}
         {logo && (
           <img
             src={getIconUrl('disclaimer_area_logo')}
@@ -27,7 +28,6 @@ export const DisclaimerArea: FunctionComponent = () => {
             style={{ maxHeight: 40, objectFit: 'contain' }}
           />
         )}
-        {text && <span>{text}</span>}
       </div>
     </div>
   );
