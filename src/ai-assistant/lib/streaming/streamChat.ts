@@ -7,6 +7,7 @@ export async function* streamChat(
   signal?: AbortSignal,
   threadUuid?: string | null,
   updateThreadName?: string,
+  mode?: 'reload' | null,
 ): AsyncGenerator<ChatResponse> {
   let result;
 
@@ -16,6 +17,7 @@ export async function* streamChat(
         input,
         thread_uuid: threadUuid ?? undefined,
         update_thread_name: updateThreadName,
+        mode: mode ?? undefined,
       },
       parseAs: 'stream',
       signal,

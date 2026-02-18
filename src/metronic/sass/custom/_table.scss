@@ -636,6 +636,11 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
   }
 }
 
+// Chat log message bubble inside expanded row
+.chat-log-bubble {
+  background-color: $bg-tertiary;
+}
+
 // Dark mode
 @if (isDarkMode()) {
   // Another table inside expanded view
