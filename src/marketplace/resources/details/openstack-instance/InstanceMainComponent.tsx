@@ -28,6 +28,13 @@ export const InstanceMainComponent = ({ resourceScope }) => {
           hasCopy
         />
 
+        {resourceScope.server_group && (
+          <Field
+            label={translate('Server group')}
+            value={`${resourceScope.server_group.name} (${resourceScope.server_group.policy})`}
+          />
+        )}
+
         <Field
           label={translate('Internal IPs')}
           value={resourceScope.internal_ips.join(', ')}

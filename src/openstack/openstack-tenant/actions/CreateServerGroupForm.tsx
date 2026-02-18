@@ -9,7 +9,12 @@ import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
 
 import { connectServerGroupForm } from './utils';
 
-const getPolicies = () => [{ value: 'affinity', label: translate('Affinity') }];
+const getPolicies = () => [
+  { value: 'affinity', label: translate('Affinity') },
+  { value: 'anti-affinity', label: translate('Anti-affinity') },
+  { value: 'soft-affinity', label: translate('Soft affinity') },
+  { value: 'soft-anti-affinity', label: translate('Soft anti-affinity') },
+];
 
 export const CreateServerGroupForm = connectServerGroupForm(
   ({

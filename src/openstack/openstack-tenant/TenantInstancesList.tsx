@@ -46,6 +46,7 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
         'start_time',
         'volumes',
         'security_groups',
+        'server_group',
         'backend_id',
         'marketplace_resource_uuid',
         'key_name',
