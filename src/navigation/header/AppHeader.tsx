@@ -74,10 +74,6 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
           <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">
             {hasBreadcrumbs ? (
               <BreadcrumbMain />
-            ) : pageTitle ? (
-              <div className="page-title d-flex align-items-center me-3">
-                <h1 className="text-dark fw-boldest fs-2 my-1">{pageTitle}</h1>
-              </div>
             ) : (
               !isSmallScr && <SearchToggle />
             )}
