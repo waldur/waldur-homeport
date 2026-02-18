@@ -9,8 +9,6 @@ import { Link } from '@waldur/core/Link';
 import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
 import { useUser } from '@waldur/workspace/hooks';
 
-import { getTitle } from '../title';
-
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';
 import { LLMChatDrawerToggle } from './LLMChatDrawerToggle';
@@ -37,7 +35,6 @@ interface AppHeaderProps {
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   hasBreadcrumbs,
 }) => {
-  const pageTitle = useSelector(getTitle);
   const user = useUser();
   const imageUrl = getIconUrl('sidebar_logo_mobile');
   const [errorImg, setErrorImg] = useState(false);
@@ -72,15 +69,11 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-grow-1">
           <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">
-            {hasBreadcrumbs ? (
-              <BreadcrumbMain />
-            ) : (
-              !isSmallScr && <SearchToggle />
-            )}
+            {hasBreadcrumbs && <BreadcrumbMain />}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
-            {Boolean(user) && (hasBreadcrumbs || pageTitle || isSmallScr) && (
-              <SearchToggle compact={hasBreadcrumbs} />
+            {Boolean(user) && (
+              <SearchToggle compact={Boolean(hasBreadcrumbs || isSmallScr)} />
             )}
             {Boolean(user) && hasSupport && <QuickIssueDrawerToggle />}
             {Boolean(user) && <ConfirmationDrawerToggle />}
