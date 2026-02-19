@@ -212,6 +212,18 @@ const billingFields: OfferingEditField[] = [
   },
 ];
 
+// Integrations fields
+const integrationsFields: OfferingEditField[] = [
+  {
+    label: translate('Enable Keycloak integration'),
+    key: 'plugin_options.keycloak_enabled',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, Keycloak group management is available for this offering. Configure connection details in the Keycloak integration tab.',
+    ),
+  },
+];
+
 const LIFECYCLE_TABS = [
   { key: 'approval', title: translate('Order approval') },
   { key: 'lifecycle', title: translate('Resource lifecycle') },
@@ -220,6 +232,7 @@ const LIFECYCLE_TABS = [
   { key: 'messaging', title: translate('Messaging') },
   { key: 'purchase-orders', title: translate('Purchase orders') },
   { key: 'billing', title: translate('Billing') },
+  { key: 'integrations', title: translate('Integrations') },
 ];
 
 export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
@@ -328,6 +341,17 @@ export const LifecyclePolicySection: FC<OfferingEditPanelProps> = (props) => {
                 <DefaultOfferingEditPanel
                   offering={props.offering}
                   fields={billingFields}
+                  callback={update}
+                />
+              </FormTable>
+            </Tab.Pane>
+
+            {/* Integrations tab */}
+            <Tab.Pane eventKey="integrations" unmountOnExit>
+              <FormTable>
+                <DefaultOfferingEditPanel
+                  offering={props.offering}
+                  fields={integrationsFields}
                   callback={update}
                 />
               </FormTable>

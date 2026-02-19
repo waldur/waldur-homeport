@@ -194,14 +194,23 @@ export const getResourceTabs = ({
   }
 
   if (offering.roles?.length > 0) {
+    const keycloakEnabled = (offering.plugin_options as any)?.keycloak_enabled;
     tabs.push({
       key: 'users',
       title: translate('Roles'),
-      component: lazyComponent(() =>
-        import('../users/ResourceUsersList').then((module) => ({
-          default: module.ResourceUsersList,
-        })),
-      ),
+      component: keycloakEnabled
+        ? lazyComponent(() =>
+            import('@waldur/marketplace/offerings/keycloak/OfferingKeycloakMembershipList').then(
+              (module) => ({
+                default: module.OfferingKeycloakMembershipList,
+              }),
+            ),
+          )
+        : lazyComponent(() =>
+            import('../users/ResourceUsersList').then((module) => ({
+              default: module.ResourceUsersList,
+            })),
+          ),
     });
   }
 

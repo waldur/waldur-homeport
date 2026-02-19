@@ -1,7 +1,7 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
-import { keycloakUserGroupMembershipsDestroy } from 'waldur-js-client';
+import { offeringKeycloakMembershipsDestroy } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
@@ -28,7 +28,7 @@ export const KeycloakMembershipBulkRemoveAction = ({ rows, refetch }) => {
       }
       try {
         const promises = rows.map((row) =>
-          keycloakUserGroupMembershipsDestroy({
+          offeringKeycloakMembershipsDestroy({
             path: { uuid: row.uuid },
           }),
         );

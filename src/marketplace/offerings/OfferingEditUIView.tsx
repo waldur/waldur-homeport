@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
+import { get } from 'lodash-es';
 import { useMemo } from 'react';
 import {
   marketplaceCategoriesRetrieve,
@@ -68,6 +69,16 @@ const UserAttributeConfigSection = lazyComponent(() =>
 const LexisLinkIntegrationSection = lazyComponent(() =>
   import('./update/integration/LexisLinkIntegrationSection').then((module) => ({
     default: module.LexisLinkIntegrationSection,
+  })),
+);
+const KeycloakIntegrationSection = lazyComponent(() =>
+  import('./keycloak/KeycloakIntegrationSection').then((module) => ({
+    default: module.KeycloakIntegrationSection,
+  })),
+);
+const KeycloakGroupsSection = lazyComponent(() =>
+  import('./keycloak/KeycloakGroupsSection').then((module) => ({
+    default: module.KeycloakGroupsSection,
   })),
 );
 const TosManagementSection = lazyComponent(() =>
@@ -178,81 +189,87 @@ const getTabs = (offering: Offering): PageBarTab[] => {
   const PluginOptionsForm = getPluginOptionsForm(offering.type);
   const provisioningConfigForm = getProvisioningConfigForm(offering.type);
 
-  if (
-    CredentialsForm ||
-    SecretOptionsForm ||
-    PluginOptionsForm ||
-    provisioningConfigForm
-  ) {
-    tabs.push({
-      key: 'integration',
-      title: (
-        <>
-          <ValidationIcon
-            value={
-              offering.type !== OFFERING_TYPE_CUSTOM_SCRIPTS ||
-              SCRIPT_ROWS.every(
-                (option) => offering.secret_options[option.type],
-              )
-            }
-          />
+  // Always show integration tab — Keycloak integration is available for any offering type
+  tabs.push({
+    key: 'integration',
+    title: (
+      <>
+        <ValidationIcon
+          value={
+            offering.type !== OFFERING_TYPE_CUSTOM_SCRIPTS ||
+            SCRIPT_ROWS.every((option) => offering.secret_options[option.type])
+          }
+        />
 
-          {translate('Integration')}
-        </>
-      ),
+        {translate('Integration')}
+      </>
+    ),
 
-      children: [
-        CredentialsForm
-          ? {
-              key: 'credentials',
-              component: CredentialsSection,
-              title: translate('Credentials'),
-            }
-          : null,
-        {
-          key: 'lifecycle-policy',
-          component: LifecyclePolicySection,
-          title: translate('Lifecycle policy'),
-        },
-        {
-          key: 'resource-display-options',
-          component: ResourceDisplayOptionsSection,
-          title: translate('Resource display options'),
-        },
-        SecretOptionsForm || PluginOptionsForm
-          ? {
-              key: 'user-management',
-              component: UserManagementSection,
-              title: translate('User management'),
-            }
-          : null,
-        offering.plugin_options?.service_provider_can_create_offering_user
-          ? {
-              key: 'user-attribute-config',
-              component: UserAttributeConfigSection,
-              title: translate('User attribute exposure'),
-            }
-          : null,
-        isFeatureVisible(MarketplaceFeatures.lexis_links)
-          ? {
-              key: 'lexis-link-integration',
-              component: LexisLinkIntegrationSection,
-              title: translate('LEXIS integration'),
-            }
-          : null,
-        provisioningConfigForm ||
-        [OFFERING_TYPE_CUSTOM_SCRIPTS, OFFERING_TYPE_BOOKING].includes(
-          offering.type,
-        )
-          ? {
-              key: 'provisioning-configuration',
-              component: ProvisioningConfigSection,
-              title: translate('Provisioning configuration'),
-            }
-          : null,
-      ].filter(Boolean),
-    });
-  }
+    children: [
+      CredentialsForm
+        ? {
+            key: 'credentials',
+            component: CredentialsSection,
+            title: translate('Credentials'),
+          }
+        : null,
+      {
+        key: 'lifecycle-policy',
+        component: LifecyclePolicySection,
+        title: translate('Lifecycle policy'),
+      },
+      {
+        key: 'resource-display-options',
+        component: ResourceDisplayOptionsSection,
+        title: translate('Resource display options'),
+      },
+      SecretOptionsForm || PluginOptionsForm
+        ? {
+            key: 'user-management',
+            component: UserManagementSection,
+            title: translate('User management'),
+          }
+        : null,
+      offering.plugin_options?.service_provider_can_create_offering_user
+        ? {
+            key: 'user-attribute-config',
+            component: UserAttributeConfigSection,
+            title: translate('User attribute exposure'),
+          }
+        : null,
+      isFeatureVisible(MarketplaceFeatures.lexis_links)
+        ? {
+            key: 'lexis-link-integration',
+            component: LexisLinkIntegrationSection,
+            title: translate('LEXIS integration'),
+          }
+        : null,
+      get(offering, 'plugin_options.keycloak_enabled')
+        ? {
+            key: 'keycloak-integration',
+            component: KeycloakIntegrationSection,
+            title: translate('Keycloak settings'),
+          }
+        : null,
+      get(offering, 'plugin_options.keycloak_enabled')
+        ? {
+            key: 'keycloak-groups',
+            component: KeycloakGroupsSection,
+            title: translate('Keycloak groups'),
+          }
+        : null,
+      provisioningConfigForm ||
+      [OFFERING_TYPE_CUSTOM_SCRIPTS, OFFERING_TYPE_BOOKING].includes(
+        offering.type,
+      )
+        ? {
+            key: 'provisioning-configuration',
+            component: ProvisioningConfigSection,
+            title: translate('Provisioning configuration'),
+          }
+        : null,
+    ].filter(Boolean),
+  });
 
   if (offering.type === TENANT_TYPE) {
     tabs.push({
