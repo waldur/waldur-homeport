@@ -1,11 +1,9 @@
 import { FunctionComponent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
-import { OrganizationsFilter } from '@waldur/administration/organizations/OrganizationsFilter';
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { formatPhoneNumber } from '@waldur/core/utils';
@@ -21,40 +19,18 @@ import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation
 import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import {
+  CustomersFilter,
+  selectCustomersFilter,
+} from '@waldur/table/generated/CustomersFilter';
 import { SLUG_COLUMN } from '@waldur/table/slug';
 import Table from '@waldur/table/Table';
-import { DisplayMode } from '@waldur/table/types';
-import { Column } from '@waldur/table/types';
+import { Column, DisplayMode } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
-import { CUSTOMERS_FILTER_FORM_ID } from '../constants';
-
 import { OrganizationExpandableRow } from './OrganizationExpandableRow';
-
-const mapStateToFilter = createSelector(
-  getFormValues(CUSTOMERS_FILTER_FORM_ID),
-  getUser,
-  (filterValues: any, user) => {
-    const filter: Record<string, string | string[]> = {};
-    if (filterValues?.accounting_is_running) {
-      filter.accounting_is_running = filterValues.accounting_is_running.value;
-    }
-    if (filterValues?.is_service_provider) {
-      filter.is_service_provider = filterValues.is_service_provider.value;
-    }
-    if (filterValues?.organization_group) {
-      filter.organization_group_uuid = filterValues.organization_group.uuid;
-    }
-    if (filterValues?.is_call_managing_organization) {
-      filter.is_call_managing_organization =
-        filterValues.is_call_managing_organization;
-    }
-    filter.user_uuid = user.uuid;
-    return filter;
-  },
-);
 
 const mandatoryFields: CustomersListData['query']['field'] = [
   // Grid view
@@ -69,10 +45,19 @@ const mandatoryFields: CustomersListData['query']['field'] = [
   'url', // Expand view - to create project
 ];
 
+const filterSelector = createSelector(
+  getUser,
+  selectCustomersFilter,
+  (user, filter) => ({
+    ...filter,
+    user_uuid: user?.uuid,
+  }),
+);
+
 export const OrganizationsList: FunctionComponent = () => {
   useTitle(translate('Organizations'), '', 'browser');
 
-  const filter = useSelector(mapStateToFilter);
+  const filter = useSelector(filterSelector);
 
   const props = useTable({
     table: 'customerList',
@@ -351,7 +336,7 @@ export const OrganizationsList: FunctionComponent = () => {
           <OrganizationCreateButton />
         </>
       }
-      filters={<OrganizationsFilter />}
+      filters={<CustomersFilter />}
       hasOptionalColumns
       expandableRowClassName="py-2 pe-2"
       expandableRow={OrganizationExpandableRow}

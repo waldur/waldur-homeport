@@ -6,7 +6,7 @@ export default mergeConfig(
   viteConfig,
   defineConfig({
     test: {
-      include: ['**/*.test.ts', '**/*.test.tsx'],
+      include: ['**/*.test.ts', '**/*.test.tsx', 'test/**/*.test.ts'],
       globals: true,
       environment: 'jsdom',
       setupFiles: ['./test/setupTests.js'],
@@ -17,7 +17,7 @@ export default mergeConfig(
         provider: 'v8',
         reporter: ['text', 'html', 'lcov', 'clover', 'cobertura'],
         reportsDirectory: './coverage',
-        include: ['src/**/*.{ts,tsx,js,jsx}'],
+        include: ['src/**/*.{ts,tsx,js,jsx}', 'generate-filters.cjs'],
         exclude: [
           'node_modules/',
           'test/',

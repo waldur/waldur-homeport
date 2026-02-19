@@ -1,4 +1,4 @@
-import { FunctionComponent, useCallback, useMemo } from 'react';
+import { FunctionComponent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { financialReportsList } from 'waldur-js-client';
@@ -10,6 +10,11 @@ import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { createFetcher } from '@waldur/table/api';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import {
+  FinancialReportsFilter,
+  FinancialReportsFilterFormId,
+  selectFinancialReportsFilter,
+} from '@waldur/table/generated/FinancialReportsFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -18,7 +23,6 @@ import { Customer } from '@waldur/workspace/types';
 
 import { CurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';
-import { CustomerListFilter } from './CustomerListFilter';
 import {
   EstimatedCostField,
   ExportEstimatedCostField,
@@ -57,7 +61,7 @@ export const CustomerList: FunctionComponent<{
   accountingPeriods;
 }> = ({ initialValues, accountingPeriods }) => {
   const customerListFilter: any = useSelector(
-    getFormValues('customerListFilter'),
+    getFormValues(FinancialReportsFilterFormId),
   );
   const accountingPeriodIsCurrent =
     customerListFilter?.accounting_period?.value.current;
@@ -125,10 +129,7 @@ export const CustomerList: FunctionComponent<{
     });
   }
 
-  const filter = useMemo(
-    () => formatFilter(customerListFilter),
-    [customerListFilter],
-  );
+  const filter = useSelector(selectFinancialReportsFilter);
 
   const props = useTable({
     table: 'customerList',
@@ -140,7 +141,7 @@ export const CustomerList: FunctionComponent<{
   const expandableRow = useCallback(
     ({ row }) => (
       <ExpandableContainer>
-        <CustomerExpandableRow row={row} providerUUID={filter?.provider_uuid} />
+        <CustomerExpandableRow row={row} providerUUID={filter?.customer_uuid} />
       </ExpandableContainer>
     ),
 
@@ -159,29 +160,11 @@ export const CustomerList: FunctionComponent<{
       expandableRow={expandableRow}
       tableActions={<FinancialReportSendButton />}
       filters={
-        <CustomerListFilter
+        <FinancialReportsFilter
           initialValues={initialValues}
           accountingPeriods={accountingPeriods}
         />
       }
     />
   );
-};
-
-const formatFilter = (filter) => {
-  if (filter) {
-    const formattedFilter: any = {
-      ...(filter.accounting_period && {
-        accounting_is_running: filter.accounting_is_running
-          ? filter.accounting_is_running.value
-          : undefined,
-        year: filter.accounting_period.value.year,
-        month: filter.accounting_period.value.month,
-      }),
-      ...(filter.provider && {
-        customer_uuid: filter.provider.customer_uuid,
-      }),
-    };
-    return formattedFilter;
-  }
 };

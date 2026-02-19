@@ -1,8 +1,5 @@
 export { Invoice, InvoiceItem } from 'waldur-js-client';
 import { InvoiceItem } from 'waldur-js-client';
-import { Project } from 'waldur-js-client';
-
-import { Offering, ServiceProvider } from '@waldur/marketplace/types';
 
 export interface InvoiceTableItem {
   uuid: string;
@@ -19,11 +16,4 @@ export interface InvoiceTableItem {
   tax: number;
   total: number;
   items: InvoiceItem[];
-}
-
-export interface InvoiceItemsFilterData {
-  provider: ServiceProvider;
-  project: Project;
-  offering: Offering;
-  conceal_compensation_items: boolean;
 }

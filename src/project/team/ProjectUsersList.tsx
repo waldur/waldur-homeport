@@ -1,6 +1,4 @@
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   Project,
   projectsListUsersList,
@@ -8,16 +6,18 @@ import {
 } from 'waldur-js-client';
 
 import { TeamTableComponent } from '@waldur/customer/team/TeamTableComponent';
+import { getProjectRoles } from '@waldur/permissions/utils';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProjectsListUsersFilter,
+  selectProjectsListUsersFilter,
+} from '@waldur/table/generated/ProjectsListUsersFilter';
 import { useTable } from '@waldur/table/useTable';
 import { getProject } from '@waldur/workspace/selectors';
-
-import { PROJECT_USERS_LIST_FILTER_FORM_ID } from '../constants';
 
 import { ProjectPermisionActions } from './ProjectPermisionActions';
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
 import { ProjectUsersBulkRemoveButton } from './ProjectUsersBulkRemoveButton';
-import { ProjectUsersListFilter } from './ProjectUsersListFilter';
 import { SyncMembersButton } from './SyncMembersButton';
 import { useTeamTableTabs } from './tabs';
 import { TeamDropdownActions } from './TeamDropdownActions';
@@ -32,18 +32,6 @@ const mandatoryFields = [
   'role_name',
   'user_username',
 ];
-const mapStateToFilter = createSelector(
-  getFormValues(PROJECT_USERS_LIST_FILTER_FORM_ID),
-  (filterValues: any) => {
-    const filter: Record<string, string | boolean> = {};
-    if (filterValues) {
-      if (filterValues.project_role) {
-        filter.role = filterValues.project_role.map(({ name }) => name);
-      }
-    }
-    return filter;
-  },
-);
 
 const TeamSecondaryDropdownActions = ({ project, refetch }) => {
   // For removed projects, only show permissions log (read-only)
@@ -68,7 +56,7 @@ export const ProjectUsersList = ({
   hideTabs?: boolean;
   project: Project;
 }) => {
-  const filter = useSelector(mapStateToFilter);
+  const filter = useSelector(selectProjectsListUsersFilter);
   const currentProject = useSelector(getProject);
 
   const _project = project || currentProject;
@@ -112,7 +100,7 @@ export const ProjectUsersList = ({
           project={_project}
         />
       )}
-      filters={<ProjectUsersListFilter />}
+      filters={<ProjectsListUsersFilter projectRoles={getProjectRoles()} />}
       enableMultiSelect
       multiSelectActions={({ rows, refetch }) => (
         <ProjectUsersBulkRemoveButton

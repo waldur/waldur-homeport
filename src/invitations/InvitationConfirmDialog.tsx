@@ -13,10 +13,10 @@ import { useModal } from '@waldur/modal/hooks';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { formatInvitationState } from './choices';
 import { InvitationButtons } from './InvitationButtons';
 import { InvitationErrorMessage } from './InvitationErrorMessage';
 import { InvitationMessage } from './InvitationMessage';
-import { formatInvitationState } from './InvitationStateFilter';
 
 export const InvitationConfirmDialog: FunctionComponent<{
   resolve: { token; deferred };

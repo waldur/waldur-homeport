@@ -1,6 +1,5 @@
 import { FC, ReactNode, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { invoicesItemsRetrieve } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
@@ -10,18 +9,20 @@ import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { createFetcher } from '@waldur/table/api';
+import {
+  InvoicesItemsFilter,
+  selectInvoicesItemsFilter,
+} from '@waldur/table/generated/InvoicesItemsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { getCustomer, getUser } from '@waldur/workspace/selectors';
 
-import { INVOICE_ITEMS_FILTER_FORM } from '../constants';
-import { Invoice, InvoiceItemsFilterData, InvoiceTableItem } from '../types';
+import { Invoice, InvoiceTableItem } from '../types';
 import { formatPeriod } from '../utils';
 
 import { InvoiceDetailActions } from './InvoiceDetailActions';
 import { InvoiceItemExpandableRow } from './InvoiceItemExpandableRow';
 import { InvoiceItemsBulkDelete } from './InvoiceItemsBulkDelete';
-import { InvoiceItemsFilter } from './InvoiceItemsFilter';
 import { groupInvoiceItems } from './utils';
 
 interface InvoiceItemsTableProps {
@@ -38,30 +39,6 @@ interface InvoiceItemsTableProps {
   footer?: ReactNode;
 }
 
-const useFilters = () => {
-  const filterValues = useSelector(
-    getFormValues(INVOICE_ITEMS_FILTER_FORM),
-  ) as InvoiceItemsFilterData;
-  return useMemo(() => {
-    const filter: Record<string, string> = {};
-    if (filterValues) {
-      if (filterValues.provider) {
-        filter.provider_uuid = filterValues.provider.uuid;
-      }
-      if (filterValues.project) {
-        filter.project_uuid = filterValues.project.uuid;
-      }
-      if (filterValues.offering) {
-        filter.offering_uuid = filterValues.offering.uuid;
-      }
-      if (filterValues.conceal_compensation_items) {
-        filter.conceal_compensation_items = 'true';
-      }
-    }
-    return filter;
-  }, [filterValues]);
-};
-
 export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
   invoice,
   invoiceView,
@@ -71,7 +48,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
   refreshInvoiceItems,
   setTotalFiltered,
 }) => {
-  const filter = useFilters();
+  const filter = useSelector(selectInvoicesItemsFilter);
   const customer = useSelector(getCustomer);
   const user = useSelector(getUser);
 
@@ -113,7 +90,7 @@ export const InvoiceItemsTable: FC<InvoiceItemsTableProps> = ({
   return (
     <Table<InvoiceTableItem>
       {...tableProps}
-      filters={<InvoiceItemsFilter customerUuid={getUUID(invoice.customer)} />}
+      filters={<InvoicesItemsFilter customerUuid={getUUID(invoice.customer)} />}
       columns={[
         {
           title: translate('Resource name'),
