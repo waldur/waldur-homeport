@@ -46,4 +46,8 @@ export const SIDEBAR_STYLES = [
     label: translate('Light'),
     value: 'light',
   },
+  {
+    label: translate('Match theme'),
+    value: 'auto',
+  },
 ];
