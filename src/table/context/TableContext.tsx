@@ -33,6 +33,7 @@ interface TableActions<TData = any> {
   initColumnPositions: (ids: string[]) => void;
   swapColumns: (column1: string, column2: string) => void;
   toggleFilterMenu: (show?: boolean) => void;
+  openFiltersDrawer: (filters: ReactNode) => void;
   renderFiltersDrawer: (filters: ReactNode) => void;
 }
 

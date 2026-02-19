@@ -159,6 +159,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
           props: {
             table,
             filters,
+            filterPosition: 'sidebar' as const,
             setFilter: (item: FilterItem) =>
               dispatch(actions.setFilter(table, item)),
             apply: () => applyFiltersFn(true),
@@ -176,6 +177,7 @@ export const useTable = <RowType = any>(options: TableOptionsType<RowType>) => {
           props: {
             table,
             filters,
+            filterPosition: 'sidebar' as const,
             setFilter: (item: FilterItem) =>
               dispatch(actions.setFilter(table, item)),
           },

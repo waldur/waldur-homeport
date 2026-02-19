@@ -60,6 +60,7 @@ const defaultProps = {
   initColumnPositions: vi.fn(),
   swapColumns: vi.fn(),
   renderFiltersDrawer: vi.fn(),
+  openFiltersDrawer: vi.fn(),
 };
 
 describe('TableProvider', () => {
@@ -377,6 +378,65 @@ describe('TableProvider', () => {
       );
 
       expect(screen.getByTestId('has-row-actions')).toHaveTextContent('true');
+    });
+  });
+
+  describe('mobile filter regression - openFiltersDrawer in context', () => {
+    it('exposes openFiltersDrawer as a distinct action from renderFiltersDrawer', () => {
+      const openFiltersDrawer = vi.fn();
+      const renderFiltersDrawer = vi.fn();
+
+      function DrawerActionsConsumer() {
+        const { actions } = useTableContext();
+        return (
+          <div>
+            <button
+              onClick={() => actions.openFiltersDrawer(<div>filters</div>)}
+              data-testid="open-btn"
+            >
+              Open
+            </button>
+            <button
+              onClick={() => actions.renderFiltersDrawer(<div>filters</div>)}
+              data-testid="render-btn"
+            >
+              Render
+            </button>
+          </div>
+        );
+      }
+
+      render(
+        <TableProvider
+          {...defaultProps}
+          openFiltersDrawer={openFiltersDrawer}
+          renderFiltersDrawer={renderFiltersDrawer}
+        >
+          <DrawerActionsConsumer />
+        </TableProvider>,
+      );
+
+      screen.getByTestId('open-btn').click();
+      expect(openFiltersDrawer).toHaveBeenCalledTimes(1);
+      expect(renderFiltersDrawer).not.toHaveBeenCalled();
+
+      screen.getByTestId('render-btn').click();
+      expect(renderFiltersDrawer).toHaveBeenCalledTimes(1);
+    });
+
+    it('passes filterPosition from props to context', () => {
+      function FilterPosConsumer() {
+        const { filterPosition } = useTableContext();
+        return <span data-testid="filter-pos">{filterPosition}</span>;
+      }
+
+      render(
+        <TableProvider {...defaultProps} filterPosition="sidebar">
+          <FilterPosConsumer />
+        </TableProvider>,
+      );
+
+      expect(screen.getByTestId('filter-pos')).toHaveTextContent('sidebar');
     });
   });
 });

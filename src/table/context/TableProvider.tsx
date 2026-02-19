@@ -138,6 +138,7 @@ export function TableProvider<TData = any>({
         initColumnPositions: props.initColumnPositions,
         swapColumns: props.swapColumns,
         toggleFilterMenu: props.toggleFilterMenu,
+        openFiltersDrawer: props.openFiltersDrawer,
         renderFiltersDrawer: props.renderFiltersDrawer,
       },
 
@@ -257,6 +258,7 @@ export function TableProvider<TData = any>({
       props.initColumnPositions,
       props.swapColumns,
       props.toggleFilterMenu,
+      props.openFiltersDrawer,
       props.renderFiltersDrawer,
       props.table,
       props.rowKey,

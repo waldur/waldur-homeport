@@ -5,10 +5,8 @@ import {
   useCallback,
   useState,
 } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
-
-import { RootState } from '@waldur/store/reducers';
 
 import { FilterItem, TableProps, TableState } from './types';
 import { getFiltersFormId } from './utils';
@@ -42,12 +40,6 @@ interface FilterContextProviderProps extends Pick<
 export const FilterContextProvider: FC<
   PropsWithChildren<FilterContextProviderProps>
 > = (props) => {
-  const originalFilterPosition = useSelector((state: RootState) => {
-    if (props.table && state.tables && state.tables[props.table]) {
-      return state.tables[props.table].filterPosition;
-    }
-    return 'header';
-  });
   const filtersFormId = getFiltersFormId(props.filters);
 
   const [filterComponents, setFilterComponents] = useState([]);
@@ -75,7 +67,7 @@ export const FilterContextProvider: FC<
     <TableFilterContext.Provider
       value={{
         selectedSavedFilter: props.selectedSavedFilter,
-        filterPosition: originalFilterPosition,
+        filterPosition: props.filterPosition,
         form: filtersFormId,
         changeFormField,
         setFilter: props.setFilter,

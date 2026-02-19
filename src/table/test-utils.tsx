@@ -54,6 +54,7 @@ export const createMockTableContext = (
     initColumnPositions: vi.fn(),
     swapColumns: vi.fn(),
     toggleFilterMenu: vi.fn(),
+    openFiltersDrawer: vi.fn(),
     renderFiltersDrawer: vi.fn(),
   },
   config: {
