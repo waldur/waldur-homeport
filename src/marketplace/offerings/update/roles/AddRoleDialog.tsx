@@ -25,6 +25,7 @@ export const AddRoleDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
           body: {
             offering: props.resolve.offering.url,
             name: formData.name,
+            scope_type: formData.scope_type || '',
           },
         });
         dispatch(showSuccess(translate('Role has been added successfully.')));
@@ -51,6 +52,18 @@ export const AddRoleDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
       >
         <FormGroup label={translate('Name')} required={true}>
           <Field name="name" validate={required} component={StringField} />
+        </FormGroup>
+        <FormGroup
+          label={translate('Scope type')}
+          description={translate(
+            'Level this role applies at, e.g. "cluster", "project". Leave empty for offering-wide roles.',
+          )}
+        >
+          <Field
+            name="scope_type"
+            component={StringField}
+            placeholder={translate('e.g. cluster, project')}
+          />
         </FormGroup>
       </ModalDialog>
     </form>

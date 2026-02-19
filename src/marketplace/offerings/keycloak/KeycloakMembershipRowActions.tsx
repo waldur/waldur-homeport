@@ -1,20 +1,21 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import {
-  KeycloakUserGroupMembership,
-  keycloakUserGroupMembershipsDestroy,
+  OfferingKeycloakMembership,
+  offeringKeycloakMembershipsDestroy,
 } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 
 const DeleteKeycloakMembershipAction = ({
   row,
   refetch,
 }: {
-  row: KeycloakUserGroupMembership;
+  row: OfferingKeycloakMembership;
   refetch;
 }) => {
   const dispatch = useDispatch();
@@ -40,8 +41,18 @@ const DeleteKeycloakMembershipAction = ({
     } catch {
       return;
     }
-    await keycloakUserGroupMembershipsDestroy({ path: { uuid: row.uuid } });
-    refetch();
+    try {
+      await offeringKeycloakMembershipsDestroy({ path: { uuid: row.uuid } });
+      dispatch(showSuccess(translate('Resource access has been removed.')));
+      refetch();
+    } catch (error) {
+      dispatch(
+        showErrorResponse(
+          error,
+          translate('Unable to remove resource access.'),
+        ),
+      );
+    }
   };
   return (
     <ActionItem

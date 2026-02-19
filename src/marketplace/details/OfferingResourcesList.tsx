@@ -11,6 +11,7 @@ import {
   FILTER_OFFERING_RESOURCE,
   TABLE_OFFERING_RESOURCE,
 } from '@waldur/marketplace/details/constants';
+import { ResourceKeycloakScopesRow } from '@waldur/marketplace/offerings/keycloak/ResourceKeycloakScopesRow';
 import { Offering } from '@waldur/marketplace/types';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
@@ -35,6 +36,11 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
   const filterValues: any = useSelector(
     getFormValues(FILTER_OFFERING_RESOURCE),
   );
+
+  const keycloakEnabled = Boolean(
+    (ownProps.offering.plugin_options as any)?.keycloak_enabled,
+  );
+
   const filter = useMemo(() => {
     const filter: MarketplaceProviderResourcesListData['query'] = {};
     if (filterValues?.state) {
@@ -58,7 +64,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     fetchData: createFetcher(marketplaceProviderResourcesList),
     filter,
     queryField: 'query',
-    mandatoryFields: resourcesListRequiredFields(false),
+    mandatoryFields: resourcesListRequiredFields(keycloakEnabled),
   });
 
   return (
@@ -77,6 +83,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
         <ProviderResourceActions resource={row} refetch={tableProps.fetch} />
       )}
       filters={<OfferingResourcesFilter />}
+      expandableRow={keycloakEnabled ? ResourceKeycloakScopesRow : undefined}
     />
   );
 };

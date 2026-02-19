@@ -157,9 +157,11 @@ export const RancherClusterTabConfiguration: ResourceTabsConfiguration = {
           title: translate('Resource access'),
           visible: false,
           component: lazyComponent(() =>
-            import('./team/KeycloakMembershipList').then((module) => ({
-              default: module.KeycloakMembershipList,
-            })),
+            import('@waldur/marketplace/offerings/keycloak/OfferingKeycloakMembershipList').then(
+              (module) => ({
+                default: module.OfferingKeycloakMembershipList,
+              }),
+            ),
           ),
         },
       ],
