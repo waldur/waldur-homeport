@@ -1,6 +1,10 @@
 import { ThreadMessageLike } from '@assistant-ui/react';
 
-import { UIBlock, BlockHistoryEntry } from '@waldur/ai-assistant/lib/types';
+import {
+  UIBlock,
+  BlockHistoryEntry,
+  MessageHandlerDependencies,
+} from '@waldur/ai-assistant/lib/types';
 
 /**
  * Maximum number of block history entries to retain per message.
@@ -38,29 +42,6 @@ export const addPreviousBlocks = (
       blockHistory: updatedHistory,
     },
   };
-};
-
-export const addContext = (
-  userInput: string,
-  pastMessages: readonly ThreadMessageLike[],
-): string => {
-  const contextMessages = pastMessages.slice(-50);
-  let context =
-    'This is the system prompt: You are a highly knowledgeable and helpful support assistant for ' +
-    'Waldur. Your primary goal is to provide clear, accurate, and friendly assistance to users. ' +
-    'Always respond in a professional and polite tone, breaking down complex instructions into simple, ' +
-    'easy-to-follow steps.\n';
-  context += 'This is the conversation history:\n';
-  for (const message of contextMessages) {
-    const blocks = (message.metadata?.custom as { blocks?: UIBlock[] })?.blocks;
-    const contentText = blocks
-      ? extractTextFromBlocks(blocks) // Assistant message with blocks
-      : extractTextFromMessageContent(message.content); // User message
-    context += `${message.role}: ${contentText}\n`;
-  }
-
-  context += `\nThis is the user prompt: ${userInput}\n`;
-  return context;
 };
 
 /**
@@ -119,3 +100,23 @@ export function extractTextFromBlocks(blocks: UIBlock[]): string {
     })
     .join('\n\n');
 }
+
+export const setBackendUuid = (
+  setMessages: MessageHandlerDependencies['setMessages'],
+  messageId: string,
+  backendUuid: string,
+) => {
+  setMessages((prev) =>
+    prev.map((m) =>
+      m.id === messageId
+        ? {
+            ...m,
+            metadata: {
+              ...m.metadata,
+              custom: { ...m.metadata?.custom, backendUuid },
+            },
+          }
+        : m,
+    ),
+  );
+};

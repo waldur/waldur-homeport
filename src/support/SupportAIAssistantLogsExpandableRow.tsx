@@ -66,7 +66,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
       </div>
       <div className="p-3 rounded chat-log-bubble">
         <span style={{ whiteSpace: 'pre-wrap' }}>
-          {selectedMessage.content}
+          {selectedMessage.content.trim()}
         </span>
       </div>
     </div>

@@ -1,7 +1,11 @@
 import { AppendMessage } from '@assistant-ui/react';
 import { chatMessagesEdit } from 'waldur-js-client';
 
-import { extractTextFromMessageContent } from '@waldur/ai-assistant/lib/messages/messageUtils';
+import {
+  addPreviousBlocks,
+  extractTextFromMessageContent,
+  setBackendUuid,
+} from '@waldur/ai-assistant/lib/messages/messageUtils';
 import { generateAndSetThreadTitle } from '@waldur/ai-assistant/lib/streaming/generateAndSetThreadTitle';
 import { parseAssistantStream } from '@waldur/ai-assistant/lib/streaming/parseAssistantStream';
 import { addThreadToListIfNotExists } from '@waldur/ai-assistant/lib/thread/threadListAdapter';
@@ -15,32 +19,11 @@ import {
   createUserMessage,
   createAssistantPlaceholder,
 } from './messageFactories';
-import { addContext, addPreviousBlocks } from './messageUtils';
 
 type StartRunConfig = {
   parentId: string | null;
   sourceId: string | null;
   runConfig: RunConfig;
-};
-
-const setBackendUuid = (
-  setMessages: MessageHandlerDependencies['setMessages'],
-  messageId: string,
-  backendUuid: string,
-) => {
-  setMessages((prev) =>
-    prev.map((m) =>
-      m.id === messageId
-        ? {
-            ...m,
-            metadata: {
-              ...m.metadata,
-              custom: { ...m.metadata?.custom, backendUuid },
-            },
-          }
-        : m,
-    ),
-  );
 };
 
 export const createOnNew = (deps: MessageHandlerDependencies) => {
@@ -68,11 +51,10 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
       const assistantPlaceholder = createAssistantPlaceholder();
       deps.setMessages((prev) => [...prev, assistantPlaceholder]);
 
-      const contextInput = addContext(input, deps.messages.slice(0, -1));
       const abortController = deps.createController(deps.currentThreadId);
 
       const result = await parseAssistantStream({
-        contextInput,
+        input,
         assistantId: assistantPlaceholder.id!,
         signal: abortController.signal,
         setMessages: deps.setMessages,
@@ -185,12 +167,11 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
         }
       }
 
-      const contextInput = addContext(input, deps.messages.slice(0, userIndex));
       const abortController = deps.createController(deps.currentThreadId);
 
       // Stream with mode="reload" to regenerate assistant response
       const result = await parseAssistantStream({
-        contextInput,
+        input,
         assistantId: assistantIdToStream,
         signal: abortController.signal,
         setMessages: deps.setMessages,
@@ -264,12 +245,11 @@ export const createOnReload = (deps: MessageHandlerDependencies) => {
         return updated;
       });
 
-      const contextInput = addContext(input, deps.messages.slice(0, userIndex));
       const abortController = deps.createController(deps.currentThreadId);
 
       // Stream with mode="reload" to regenerate assistant response
       const result = await parseAssistantStream({
-        contextInput,
+        input,
         assistantId: sourceId,
         signal: abortController.signal,
         setMessages: deps.setMessages,

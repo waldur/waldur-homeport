@@ -14,7 +14,7 @@ interface ParseAssistantStreamParams extends Pick<
   MessageHandlerDependencies,
   'setMessages'
 > {
-  contextInput: string;
+  input: string;
   assistantId: string;
   signal: AbortSignal;
   onStreamComplete?: () => void;
@@ -32,7 +32,7 @@ export async function parseAssistantStream(
   params: ParseAssistantStreamParams,
 ): Promise<ParseAssistantStreamResult | undefined> {
   const {
-    contextInput,
+    input,
     assistantId,
     signal,
     setMessages,
@@ -48,7 +48,7 @@ export async function parseAssistantStream(
 
   try {
     for await (const part of streamChat(
-      contextInput,
+      input,
       signal,
       threadUuid,
       undefined,
