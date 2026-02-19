@@ -79,7 +79,11 @@ export const UserDetailsDialog: FunctionComponent<UserDetailsDialogProps> = ({
           currentUser.is_support ||
           currentUser.uuid === user.uuid ? (
             <Tab eventKey={6} title={translate('Roles and permissions')}>
-              <UserAffiliationsList user={user} hasActionBar={false} />
+              <UserAffiliationsList
+                user={user}
+                hasActionBar={false}
+                fullWidth
+              />
             </Tab>
           ) : null}
           {isFeatureVisible(UserFeatures.show_data_access) &&
