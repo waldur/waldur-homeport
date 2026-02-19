@@ -1,3 +1,4 @@
+import { uniqueId } from 'lodash-es';
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
@@ -13,12 +14,15 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { RolePopover } from './RolePopover';
+import { UserAffiliationsBulkRemoveButton } from './UserAffiliationsBulkRemoveButton';
 import { UserAffiliationsDropdownActions } from './UserAffiliationsDropdownActions';
 import { UserAffiliationsFilter } from './UserAffiliationsFilter';
+import { UserAffiliationsRowActions } from './UserAffiliationsRowActions';
 
 interface UserAffiliationsListProps {
   user;
   hasActionBar?: boolean;
+  fullWidth?: boolean;
 }
 
 interface UserAffiliationsFilterValues {
@@ -29,9 +33,15 @@ interface UserAffiliationsFilterValues {
   };
 }
 
+const rowsParser = (data: any[]) => {
+  if (!data?.length) return data;
+  data.forEach((d) => Object.assign(d, { uuid: uniqueId() }));
+  return data;
+};
+
 export const UserAffiliationsList: FunctionComponent<
   UserAffiliationsListProps
-> = ({ user, hasActionBar = true }) => {
+> = ({ user, hasActionBar = true, fullWidth }) => {
   const formValues = (useSelector((state) =>
     getFormValues('UserAffiliationsFilter')(state),
   ) as UserAffiliationsFilterValues) || {
@@ -63,7 +73,9 @@ export const UserAffiliationsList: FunctionComponent<
   ]);
   const props = useTable({
     table: 'UserAffiliationsList',
-    fetchData: createFetcher(userPermissionsList),
+    fetchData: createFetcher(userPermissionsList, {
+      parser: rowsParser,
+    }),
     queryField: 'name',
     filter,
   });
@@ -134,7 +146,13 @@ export const UserAffiliationsList: FunctionComponent<
       filters={<UserAffiliationsFilter />}
       tableActions={<UserAffiliationsDropdownActions />}
       initialPageSize={10}
+      rowActions={UserAffiliationsRowActions}
       hasActionBar={hasActionBar}
+      fullWidth={fullWidth}
+      enableMultiSelect={hasActionBar}
+      multiSelectActions={
+        hasActionBar ? UserAffiliationsBulkRemoveButton : undefined
+      }
     />
   );
 };
