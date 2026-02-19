@@ -9,6 +9,7 @@ import {
   ToggleComponent,
 } from '@waldur/metronic/components';
 import { useLayout } from '@waldur/metronic/layout/core';
+import { useTheme } from '@waldur/theme/useTheme';
 
 import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';
@@ -27,7 +28,14 @@ export const Sidebar: React.FC<PropsWithChildren> = (props) => {
     }
   }, [sidebarRef, layout]);
 
-  const sidebarStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
+  const { theme } = useTheme();
+  const configuredStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
+  const sidebarStyle =
+    configuredStyle === 'auto'
+      ? theme === 'dark'
+        ? 'dark'
+        : 'light'
+      : configuredStyle;
   const asideClassNames = {
     'aside-dark': sidebarStyle === 'dark',
     'aside-light': sidebarStyle === 'light',
