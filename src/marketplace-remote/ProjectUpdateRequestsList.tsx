@@ -1,33 +1,37 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import { marketplaceProjectUpdateRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
+import { Option } from '@waldur/marketplace/common/registry';
 import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProjectUpdateRequestListFilter,
+  selectProjectUpdateRequestListFilter,
+} from '@waldur/table/generated/MarketplaceProjectUpdateRequestsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
-import { ProjectUpdateRequestListFilter } from './ProjectUpdateRequestListFilter';
-import { getStates } from './RequestStateFilter';
 
-const mapStateToFilter = createSelector(
-  getProject,
-  getFormValues('ProjectUpdateRequestListFilter'),
-  (project, filterValues: any) => ({
-    project_uuid: project.uuid,
-    state: filterValues?.state?.map((choice) => choice.value),
-  }),
-);
+const getStates = (): Option[] => [
+  { value: 'pending', label: translate('Pending') },
+  { value: 'approved', label: translate('Approved') },
+  { value: 'rejected', label: translate('Rejected') },
+  { value: 'canceled', label: translate('Canceled') },
+];
 
 export const ProjectUpdateRequestsList: FunctionComponent = () => {
   useTitle(translate('Project updates'));
-  const filter = useSelector(mapStateToFilter);
+  const filterState = useSelector(selectProjectUpdateRequestListFilter);
+  const project = useSelector(getProject);
+  const filter = {
+    ...filterState,
+    project_uuid: project.uuid,
+  };
   const props = useTable({
     table: 'marketplace-project-update-requests',
     fetchData: createFetcher(marketplaceProjectUpdateRequestsList),

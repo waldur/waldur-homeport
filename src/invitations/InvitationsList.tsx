@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { userInvitationsList } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -12,25 +11,27 @@ import { translate } from '@waldur/i18n';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
 import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
+import {
+  selectUserInvitationsFilter,
+  UserInvitationsFilter,
+} from '@waldur/table/generated/UserInvitationsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
 import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
 import { getCustomer } from '@waldur/workspace/selectors';
 
+import { formatInvitationState } from './choices';
 import { InvitationActions } from './InvitationActions';
-import { InvitationsFilter } from './InvitationsFilter';
 import { InvitationsMultiSelectActions } from './InvitationsMultiSelectActions';
-import { formatInvitationState } from './InvitationStateFilter';
 
 export const InvitationsList: FunctionComponent = () => {
   useTitle(translate('Invitations'));
   const customer = useSelector(getCustomer);
-  const stateFilter: any = useSelector(getFormValues('InvitationsFilter'));
+  const stateFilter = useSelector(selectUserInvitationsFilter);
   const filter = useMemo(
     () => ({
       ...stateFilter,
-      state: stateFilter?.state?.map((option) => option.value),
       customer_uuid: customer.uuid,
     }),
     [stateFilter, customer],
@@ -47,7 +48,7 @@ export const InvitationsList: FunctionComponent = () => {
   return (
     <Table
       {...props}
-      filters={<InvitationsFilter />}
+      filters={<UserInvitationsFilter />}
       columns={[
         {
           title: translate('Email'),

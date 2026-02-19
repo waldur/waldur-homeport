@@ -1,7 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
@@ -10,13 +9,16 @@ import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationPolicyService';
+import { formatInvitationState } from '@waldur/invitations/choices';
+import { choices } from '@waldur/invitations/choices';
 import { InvitationActions } from '@waldur/invitations/InvitationActions';
 import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
-import { InvitationsFilter } from '@waldur/invitations/InvitationsFilter';
 import { InvitationsMultiSelectActions } from '@waldur/invitations/InvitationsMultiSelectActions';
-import { formatInvitationState } from '@waldur/invitations/InvitationStateFilter';
-import { choices } from '@waldur/invitations/InvitationStateFilter';
 import { createFetcher } from '@waldur/table/api';
+import {
+  selectUserInvitationsFilter,
+  UserInvitationsFilter,
+} from '@waldur/table/generated/UserInvitationsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
@@ -98,7 +100,7 @@ const InvitationsListComponent: FunctionComponent = () => {
       }
       hasQuery={true}
       expandableRow={InvitationExpandableRow}
-      filters={<InvitationsFilter />}
+      filters={<UserInvitationsFilter />}
       enableMultiSelect
       multiSelectActions={InvitationsMultiSelectActions}
     />
@@ -107,11 +109,10 @@ const InvitationsListComponent: FunctionComponent = () => {
 
 const mapStateToFilter = createSelector(
   getProject,
-  getFormValues('InvitationsFilter'),
+  selectUserInvitationsFilter,
   (project, stateFilter: any) => ({
     ...stateFilter,
     scope: project.url,
-    state: stateFilter?.state?.map((option) => option.value),
   }),
 );
 

@@ -6,9 +6,8 @@ import {
   Select,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
-import { Option } from '@waldur/marketplace/common/registry';
 
-export const getStates = (): Option[] => [
+export const getStates = () => [
   { value: 'pending', label: translate('Pending') },
   { value: 'approved', label: translate('Approved') },
   { value: 'rejected', label: translate('Rejected') },

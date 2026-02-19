@@ -1,0 +1,145 @@
+overrides:
+  customers_list:
+    filters:
+      - accounting_is_running
+      - is_service_provider
+      - is_call_managing_organization
+      - organization_group_uuid
+    is_service_provider:
+      label: Service provider
+    is_call_managing_organization:
+      label: Call managing organization
+      feature: show_call_management_functionality
+    accounting_is_running:
+      label: Accounting is running
+      placeholder: "Show with running accounting"
+      enumOverrides:
+        "undefined": All
+        "true": Running accounting
+        "false": Not running accounting
+
+  financial_reports_list:
+    filters:
+      - customer_uuid
+      - accounting_period
+      - accounting_is_running
+    customer_uuid:
+      label: Service provider
+      operationId: marketplace_service_providers_list
+      valueField: customer_uuid
+      labelField: customer_name
+    accounting_period:
+      label: Accounting period
+      options: props.accountingPeriods
+      mapTo: true
+    accounting_is_running:
+      label: Accounting is running
+      placeholder: "Show with running accounting"
+      enumOverrides:
+        true: Running accounting
+        false: Not running accounting
+        undefined: All
+
+  invoices_items_retrieve:
+    filters:
+      - provider_uuid
+      - project_uuid
+      - offering_uuid
+      - conceal_compensation_items
+    provider_uuid:
+      label: Service provider
+      operationId: marketplace_service_providers_list
+    offering_uuid:
+      extraQuery:
+        state: Active
+    project_uuid:
+      label: Project
+      extraQuery:
+        customer: "props.customerUuid"
+
+  email_logs_list:
+    componentName: SupportEmailLogsFilter
+    filters:
+      - emails
+      - subject
+      - sent_at
+    emails:
+      placeholder: "Emails contains"
+    subject:
+      placeholder: "Subject contains"
+    sent_at:
+      placeholder: "YYYY-MM-DD"
+
+  user_invitations_list:
+    filters:
+      - state
+      - role_uuid
+      - customer_uuid
+      - scope_type
+    state:
+      label: State
+      enumOverrides:
+        requested: Requested
+        rejected: Rejected
+        pending: Pending
+        project: Pending project start
+        canceled: Canceled
+        expired: Expired
+        accepted: Accepted
+    role_uuid:
+      label: Role
+      operationId: roles_list
+      labelField: description
+    customer_uuid:
+      label: Organization
+      operationId: customers_list
+    scope_type:
+      label: Scope type
+      enumOverrides:
+        customer: Organization
+        project: Project
+        offering: Offering
+        call: Call
+        proposal: Proposal
+        service_provider: Service provider organization
+        call_organizer: Call managing organization
+
+  projects_list_users_list:
+    filters:
+      - project_role
+    project_role:
+      label: Role
+      mapTo: role
+      isMulti: true
+      options: props.projectRoles
+      valueField: name
+      labelField: description
+
+  customers_users_list:
+    filters:
+      - project_role
+      - organization_role
+    project_role:
+      label: Project role
+      isMulti: true
+      options: props.projectRoles
+      valueField: name
+      labelField: description
+    organization_role:
+      label: Organization role
+      isMulti: true
+      options: props.organizationRoles
+      valueField: name
+      labelField: description
+
+  marketplace_project_update_requests_list:
+    componentName: ProjectUpdateRequestListFilter
+    filters:
+      - state
+    state:
+      label: State
+      enumOverrides:
+        pending: Pending
+        approved: Approved
+        rejected: Rejected
+        canceled: Canceled

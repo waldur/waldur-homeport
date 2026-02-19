@@ -1,7 +1,9 @@
 import { RequestResult } from 'waldur-js-client';
 
 import { fetchResultCount, parseNextPage } from '@waldur/core/api';
+import { ENV } from '@waldur/core/config';
 import { queryClient } from '@waldur/core/queryClient';
+import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
 
 import { Fetcher, FetcherOptions, TableRequest } from './types';
 
@@ -118,3 +120,28 @@ export async function fetchAll(fetch: Fetcher, request: TableRequest) {
   }
   return result;
 }
+
+export const createSelectFetcher =
+  (
+    listMethod: SdkFunction,
+    searchField: string = 'name',
+    extraParams: Record<string, any> = {},
+  ) =>
+  async (query: string, prevOptions, { page }) => {
+    const params: Record<string, any> = {
+      [searchField]: query,
+      page: page,
+      page_size: ENV.pageSize,
+      ...extraParams,
+    };
+    const response = await listMethod({ query: params });
+    // Strip 'options' property from items to prevent react-select
+    // from interpreting them as grouped options.
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const options = response.data.map(({ options: _, ...rest }) => rest);
+    return returnReactSelectAsyncPaginateObject(
+      { options, totalItems: fetchResultCount(response) },
+      prevOptions,
+      page,
+    );
+  };

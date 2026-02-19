@@ -40,7 +40,8 @@
     "./typings.d.ts",
     "cypress.config.ts",
     "extractLiteralsFromFiles.ts",
-    "vite.config.ts"
+    "vite.config.ts",
+    "test"
   ],
   "exclude": [
     "./cypress/**/*",
