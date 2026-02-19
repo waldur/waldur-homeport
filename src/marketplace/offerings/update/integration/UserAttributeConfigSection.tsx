@@ -14,6 +14,8 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
 import { Tip } from '@waldur/core/Tooltip';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { FeaturesEnum, UserFeatures } from '@waldur/FeaturesEnums';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
@@ -45,6 +47,7 @@ const TITLE = (
 
 interface AttributeFieldDef extends OfferingEditField {
   attribute?: ProfileAttribute;
+  featureFlag?: FeaturesEnum;
 }
 
 const ALL_ATTRIBUTE_FIELDS: AttributeFieldDef[] = [
@@ -153,6 +156,13 @@ const ALL_ATTRIBUTE_FIELDS: AttributeFieldDef[] = [
     attribute: 'organization_type',
   },
   {
+    key: 'expose_organization_registry_code',
+    label: translate('Organization registry code'),
+    description: translate("Organization's registry code"),
+    component: AwesomeCheckboxField,
+    attribute: 'organization_registry_code',
+  },
+  {
     key: 'expose_eduperson_assurance',
     label: translate('eduPerson assurance'),
     description: translate('REFEDS assurance level'),
@@ -180,6 +190,13 @@ const ALL_ATTRIBUTE_FIELDS: AttributeFieldDef[] = [
     component: AwesomeCheckboxField,
     // No feature flag for identity_source - always visible
   },
+  {
+    key: 'expose_active_isds',
+    label: translate('Active ISDs'),
+    description: translate('Active identity source declarations'),
+    component: AwesomeCheckboxField,
+    featureFlag: UserFeatures.show_identity_bridge,
+  },
 ];
 
 export const UserAttributeConfigSection: FC<OfferingEditPanelProps> = ({
@@ -193,7 +210,8 @@ export const UserAttributeConfigSection: FC<OfferingEditPanelProps> = ({
     () =>
       ALL_ATTRIBUTE_FIELDS.filter(
         (field) =>
-          !field.attribute || isProfileAttributeEnabled(field.attribute),
+          (!field.attribute || isProfileAttributeEnabled(field.attribute)) &&
+          (!field.featureFlag || isFeatureVisible(field.featureFlag)),
       ),
     [],
   );
