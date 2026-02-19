@@ -362,6 +362,12 @@ export const SettingsDescription = [
         type: 'string',
       },
       {
+        key: 'FONT_FAMILY',
+        description: translate('Font family used in the UI. Possible values: Inter, Maven Pro.'),
+        default: 'Inter',
+        type: 'string',
+      },
+      {
         key: 'BRAND_COLOR',
         description: translate('Brand color is used for button background.'),
         default: '#307300',
@@ -1372,6 +1378,12 @@ export const SettingsDescription = [
         description: translate('Enable persistent storage of chat messages. When disabled, messages are streamed but not saved.'),
         default: false,
         type: 'boolean',
+      },
+      {
+        key: 'LLM_CHAT_HISTORY_LIMIT',
+        description: translate('Maximum number of past messages included in the LLM context window.'),
+        default: 50,
+        type: 'integer',
       },
     ],
   },
