@@ -31,20 +31,27 @@ export const PublicOfferingPricing = reduxForm<{}, PublicOfferingPricingProps>({
       id="pricing"
       className="public-offering-pricing"
     >
-      <WrappedTabs
-        ref={refNav}
-        defaultActiveKey={offering.plans[0].uuid}
-        items={offering.plans}
-        wrappedItems={wrappedItems}
-        renderTab={({ item }) => item.name}
-        renderContent={({ item }) => (
-          <PublicOfferingPricingPlanItem
-            key={item.uuid}
-            offering={offering}
-            plan={item}
-          />
-        )}
-      />
+      {offering.plans.length === 1 ? (
+        <PublicOfferingPricingPlanItem
+          offering={offering}
+          plan={offering.plans[0]}
+        />
+      ) : (
+        <WrappedTabs
+          ref={refNav}
+          defaultActiveKey={offering.plans[0].uuid}
+          items={offering.plans}
+          wrappedItems={wrappedItems}
+          renderTab={({ item }) => item.name}
+          renderContent={({ item }) => (
+            <PublicOfferingPricingPlanItem
+              key={item.uuid}
+              offering={offering}
+              plan={item}
+            />
+          )}
+        />
+      )}
     </Panel>
   );
 });

@@ -16,8 +16,6 @@ export const PublicOfferingPricingPlanItem: FC<PricingPlanItemProps> = ({
 }) => {
   return (
     <Panel
-      title={plan.name}
-      titleClassName="fw-normal"
       actions={<PlanDescriptionButton planDescription={plan.description} />}
       cardBordered
     >

@@ -18,6 +18,8 @@ export const FormPlanStep = (props: FormStepProps) => {
   );
 
   const customer = useSelector(orderCustomerSelector);
+  const concealBillingInfo =
+    customer?.display_billing_info_in_projects === false;
 
   if (plans.length === 0) {
     return null;
@@ -44,7 +46,10 @@ export const FormPlanStep = (props: FormStepProps) => {
         </div>
         <PlanDescriptionButton />
       </div>
-      <TabbedPlanComponents offering={props.offering} customer={customer} />
+      <TabbedPlanComponents
+        offering={props.offering}
+        concealBillingInfo={concealBillingInfo}
+      />
     </VStepperFormStepCard>
   );
 };

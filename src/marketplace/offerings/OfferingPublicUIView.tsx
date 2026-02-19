@@ -3,6 +3,7 @@ import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  customersList,
   marketplaceCategoriesRetrieve,
   marketplaceOfferingTermsOfServiceList,
   marketplacePublicOfferingsRetrieve,
@@ -76,6 +77,7 @@ const getTabs = (
   offering?: Offering,
   category?: Category,
   hasActiveTos = false,
+  concealPricing = false,
 ): PageBarTab[] => {
   if (!offering) {
     // Return an empty array or placeholders until the offering is loaded
@@ -118,6 +120,7 @@ const getTabs = (
     isFeatureVisible(
       MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
     ) ||
+    concealPricing ||
     !offering.plans?.length
       ? null
       : {
@@ -128,7 +131,8 @@ const getTabs = (
     isFeatureVisible(MarketplaceFeatures.catalogue_only) ||
     isFeatureVisible(
       MarketplaceFeatures.conceal_offering_pricing_tab_in_public_view,
-    )
+    ) ||
+    concealPricing
       ? null
       : {
           title: translate('Components'),
@@ -201,6 +205,7 @@ export const OfferingPublicUIView = () => {
 
       // Check if offering has active ToS (only for authenticated users)
       let hasActiveTos = false;
+      let concealPricing = false;
       if (isAuthenticated()) {
         try {
           const tosData = await marketplaceOfferingTermsOfServiceList({
@@ -210,9 +215,25 @@ export const OfferingPublicUIView = () => {
         } catch {
           hasActiveTos = false;
         }
+
+        // Check if all user's organizations conceal billing info
+        try {
+          const customers = await customersList({
+            query: {
+              field: ['uuid', 'display_billing_info_in_projects'],
+            },
+          }).then((response) => response.data);
+          if (customers.length > 0) {
+            concealPricing = customers.every(
+              (c) => c.display_billing_info_in_projects === false,
+            );
+          }
+        } catch {
+          concealPricing = false;
+        }
       }
 
-      return { offering, category, hasActiveTos };
+      return { offering, category, hasActiveTos, concealPricing };
     },
 
     refetchOnWindowFocus: false,
@@ -220,7 +241,13 @@ export const OfferingPublicUIView = () => {
   });
 
   const tabs = useMemo(
-    () => getTabs(data?.offering, data?.category, data?.hasActiveTos),
+    () =>
+      getTabs(
+        data?.offering,
+        data?.category,
+        data?.hasActiveTos,
+        data?.concealPricing,
+      ),
     [data],
   );
   const { tabSpec } = usePageTabsTransmitter(tabs);
