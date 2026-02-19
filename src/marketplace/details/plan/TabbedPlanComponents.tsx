@@ -8,8 +8,8 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
 import { Limits } from '@waldur/marketplace/details/types';
-import { getCustomer } from '@waldur/workspace/selectors';
 
 import { OneTimeTab } from './OneTimeTab';
 import { PeriodicTab } from './PeriodicTab';
@@ -37,23 +37,52 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
 
   const { periodic, oneTime } = useComponentsDetailPrices(props);
 
-  const currentCustomer = useSelector(getCustomer);
-  const customer = props.customer || currentCustomer;
+  const globalConceal = useSelector(concealPricesSelector);
+  const shouldConcealPrices = globalConceal || props.concealBillingInfo;
 
   if (!periodic.hasPeriodicCost && !oneTime.hasOneTimeCost) {
     return null;
   }
 
-  const defaultActiveKey = oneTime.hasOneTimeCost
-    ? 'onetime'
-    : 'periodic-' +
-      LIMIT_PERIODS.find(
-        (per) => periodic.limitedRowsByPeriod[per].rows.length > 0,
-      );
+  const customer = props.customer;
 
   const canShowTab = (period: LimitPeriodEnum) =>
     periodic.limitedRowsByPeriod[period].rows.length > 0 ||
     (period === 'month' && periodic.hasMonthlyCost);
+
+  if (shouldConcealPrices) {
+    return (
+      <div className="plan-details-container">
+        {oneTime.hasOneTimeCost && (
+          <OneTimeTab
+            oneTime={oneTime}
+            viewMode={props.viewMode}
+            concealBillingInfo
+          />
+        )}
+        {periodic.hasPeriodicCost &&
+          LIMIT_PERIODS.map(
+            (period) =>
+              canShowTab(period) && (
+                <PeriodicTab
+                  key={period}
+                  periodic={periodic}
+                  limitPeriod={period}
+                  customer={customer}
+                  viewMode={props.viewMode}
+                  periodKeys={props.periodKeys}
+                  periods={props.periods}
+                  concealBillingInfo
+                />
+              ),
+          )}
+      </div>
+    );
+  }
+
+  const defaultActiveKey = oneTime.hasOneTimeCost
+    ? 'onetime'
+    : 'periodic-' + LIMIT_PERIODS.find((per) => canShowTab(per));
 
   return (
     <div className="plan-details-container">
@@ -118,6 +147,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
                         viewMode={props.viewMode}
                         periodKeys={props.periodKeys}
                         periods={props.periods}
+                        concealBillingInfo={props.concealBillingInfo}
                       />
                     </Tab.Pane>
                   ),
@@ -134,6 +164,7 @@ interface TabbedPlanComponents {
   plan?: BasePublicPlan;
   limits?: Limits;
   viewMode?: boolean;
+  concealBillingInfo?: boolean;
 }
 
 export const TabbedPlanComponents = connect<
