@@ -1,4 +1,4 @@
-import { EyeIcon, GearSixIcon } from '@phosphor-icons/react';
+import { EyeIcon, GearSixIcon, ListBulletsIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
@@ -21,6 +21,12 @@ const CostPoliciesDetailsDialog = lazyComponent(() =>
   })),
 );
 
+const CostBreakdownDialog = lazyComponent(() =>
+  import('./CostBreakdownDialog').then((module) => ({
+    default: module.CostBreakdownDialog,
+  })),
+);
+
 export const ProjectDashboardCostLimits = ({
   project,
 }: {
@@ -29,11 +35,11 @@ export const ProjectDashboardCostLimits = ({
   const router = useRouter();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
 
-  const { chart, options, error, isLoading, refetch } =
+  const { chart, options, error, isLoading, refetch, currentMonthItems } =
     useProjectCostChart(project);
 
   const dispatch = useDispatch();
-  const viewDetails = useCallback(
+  const viewPolicies = useCallback(
     () =>
       dispatch(
         openModalDialog(CostPoliciesDetailsDialog, {
@@ -42,6 +48,17 @@ export const ProjectDashboardCostLimits = ({
         }),
       ),
     [dispatch, project],
+  );
+
+  const viewBreakdown = useCallback(
+    () =>
+      dispatch(
+        openModalDialog(CostBreakdownDialog, {
+          resolve: { items: currentMonthItems },
+          size: 'lg',
+        }),
+      ),
+    [dispatch, currentMonthItems],
   );
 
   if (isLoading) {
@@ -60,7 +77,7 @@ export const ProjectDashboardCostLimits = ({
         <>
           {translate('Project cost')}
           <small className="text-muted fs-7 ms-4 fw-normal">
-            ({translate('Current month’s cost')}: {chart.current})
+            ({translate('Current month\u2019s cost')}: {chart.current})
           </small>
         </>
       }
@@ -77,10 +94,17 @@ export const ProjectDashboardCostLimits = ({
             }
           : null,
         {
-          label: translate('View details'),
+          label: translate('View cost policies'),
           icon: <EyeIcon weight="bold" />,
-          callback: viewDetails,
+          callback: viewPolicies,
         },
+        currentMonthItems?.length > 0
+          ? {
+              label: translate('Cost breakdown'),
+              icon: <ListBulletsIcon weight="bold" />,
+              callback: viewBreakdown,
+            }
+          : null,
       ].filter(Boolean)}
     >
       <EChart options={options} />

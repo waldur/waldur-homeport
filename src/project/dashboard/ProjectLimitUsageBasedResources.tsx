@@ -31,6 +31,7 @@ import { PROJECT_RESOURCES_LIST_FILTER } from '../constants';
 
 import { ProjectResourcesFilter } from './ProjectResourcesFilter';
 import { ResourceQuotaField } from './ResourceQuotaField';
+import { ResourceRateField } from './ResourceRateField';
 import { withResourceComponentsLoader } from './withResourceComponentsLoader';
 
 const QuotaField = withResourceComponentsLoader(ResourceQuotaField);
@@ -48,6 +49,8 @@ const mandatoryFields = resourcesListRequiredFields(false).concat([
   'current_usages',
   'state',
   'renewal_date',
+  'plan_uuid',
+  'plan_unit',
 ]);
 
 const mapStateToFilter = createSelector(
@@ -61,7 +64,9 @@ const mapStateToFilter = createSelector(
   },
 );
 
-export const ProjectLimitUsageBasedResources: FC = () => {
+export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
+  showCost,
+}) => {
   const project = useSelector(getProject);
 
   const stateFilter = useSelector(mapStateToFilter);
@@ -99,7 +104,7 @@ export const ProjectLimitUsageBasedResources: FC = () => {
               uuid_list: uniq(
                 tableProps.rows.map((row) => row.offering_uuid),
               ).join(','),
-              field: ['uuid', 'components'],
+              field: ['uuid', 'components', 'plans'],
             },
           }).then((response) => response.data)
         : [],
@@ -146,6 +151,12 @@ export const ProjectLimitUsageBasedResources: FC = () => {
             />
           ),
         },
+        showCost && {
+          title: translate('Rate'),
+          render: ({ row }) => (
+            <ResourceRateField row={row} data={data} isLoading={isLoading} />
+          ),
+        },
         isFeatureVisible(MarketplaceFeatures.show_resource_end_date) && {
           title: translate('Expiration'),
           render: ({ row }) => (
@@ -165,7 +176,7 @@ export const ProjectLimitUsageBasedResources: FC = () => {
           ),
         },
       ].filter(Boolean) as Column<Resource>[],
-    [data, isLoading],
+    [data, isLoading, showCost],
   );
 
   return (

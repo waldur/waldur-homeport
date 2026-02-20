@@ -2,6 +2,7 @@ import { GlobeSimpleIcon, GraduationCapIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import {
+  InvoiceCostItem,
   invoiceItemsCostsList,
   KindEnum,
   marketplaceProjectEstimatedCostPoliciesList,
@@ -51,7 +52,7 @@ export function useProjectCostChart(project: Project) {
   });
 
   const chartData = useMemo(() => {
-    if (!data) return { chart: null, options: null };
+    if (!data) return { chart: null, options: null, currentMonthItems: null };
     const chart = formatProjectCostChart(data.invoices);
 
     const hlines = (data.costPolicies || []).map((item) => {
@@ -76,7 +77,13 @@ export function useProjectCostChart(project: Project) {
       };
     });
 
-    return getCostChartAndOptions(chart, hlines);
+    // Extract items from the current month invoice entry
+    const currentMonthEntry = data.invoices.find(
+      (inv) => inv.items && inv.items.length > 0,
+    );
+    const currentMonthItems: InvoiceCostItem[] = currentMonthEntry?.items || [];
+
+    return { ...getCostChartAndOptions(chart, hlines), currentMonthItems };
   }, [data]);
 
   return {
@@ -85,6 +92,7 @@ export function useProjectCostChart(project: Project) {
     refetch,
     chart: chartData?.chart,
     options: chartData?.options,
+    currentMonthItems: chartData?.currentMonthItems,
   };
 }
 

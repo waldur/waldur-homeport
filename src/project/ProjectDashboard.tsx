@@ -230,7 +230,11 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           )}
         </Row>
       )}
-      {shouldShowLimitBasedResources && <ProjectLimitUsageBasedResources />}
+      {shouldShowLimitBasedResources && (
+        <ProjectLimitUsageBasedResources
+          showCost={!shouldConcealPrices && showBillingInfo}
+        />
+      )}
       <Row>
         {!shouldConcealPrices && showBillingInfo && (
           <Col md={6} sm={12} className="mb-5" style={COMMON_WIDGET_HEIGHT}>
