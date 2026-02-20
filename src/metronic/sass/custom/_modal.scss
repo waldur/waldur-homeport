@@ -32,6 +32,11 @@
     margin-bottom: 0 !important;
   }
 }
+
+// Countries modal: remove additional 16px modal-body padding; only main 24px (p-7) remains
+.country-selector-modal .modal-body {
+  padding: 0 !important;
+}
 .modal-header ~ .modal-body {
   padding-top: 0.923rem;
 }

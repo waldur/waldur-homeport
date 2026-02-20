@@ -89,7 +89,7 @@ export const AdministrationBranding = () => {
                 value: countries,
                 settingKey: 'COUNTRIES',
               },
-              size: 'md',
+              size: 'lg',
             }),
           );
         };
