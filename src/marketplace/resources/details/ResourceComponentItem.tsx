@@ -1,4 +1,4 @@
-import { LimitPeriodEnum, OfferingComponent } from 'waldur-js-client';
+import { LimitPeriodEnum, OfferingComponent, Resource } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 
@@ -18,13 +18,17 @@ const normalize = (value: number, factor: number) => {
   return Number.isInteger(result) ? result.toFixed() : result.toFixed(2);
 };
 
-export const getQuotaCellProps = (component: OfferingComponent, resource) => {
+export const getQuotaCellProps = (
+  component: OfferingComponent,
+  resource: Pick<Resource, 'current_usages' | 'limits' | 'limit_usage'>,
+) => {
   if (!component) {
     return { usage: '', limit: '', title: '' };
   }
   return {
     usage:
-      component.billing_type === 'limit' && resource.limit_usage
+      component.billing_type === 'limit' &&
+      resource.limit_usage?.[component.type]
         ? normalize(resource.limit_usage[component.type], component.factor)
         : normalize(resource.current_usages[component.type], component.factor),
     limit:
