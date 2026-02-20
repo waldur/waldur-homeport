@@ -1,4 +1,4 @@
-import { OfferingComponent } from 'waldur-js-client';
+import { LimitPeriodEnum, OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 
@@ -36,6 +36,13 @@ export const getQuotaCellProps = (component: OfferingComponent, resource) => {
   };
 };
 
+const limitPeriodMap: Record<LimitPeriodEnum, string> = {
+  total: translate('Total'),
+  quarterly: translate('Quarterly'),
+  annual: translate('Annual'),
+  month: translate('Monthly'),
+};
+
 export const ResourceComponentItem = ({
   component,
   resource,
@@ -52,15 +59,8 @@ export const ResourceComponentItem = ({
         {...props}
         billingType={billingType}
         limitFrequency={
-          // limit_period options: total, month, quarterly, annual
           component.billing_type === 'limit' &&
-          (limitPeriod === 'total'
-            ? translate('Total')
-            : limitPeriod === 'quarterly'
-              ? translate('Quarterly')
-              : limitPeriod === 'annual'
-                ? translate('Annual')
-                : translate('Monthly'))
+          (limitPeriodMap[limitPeriod as string] || translate('Monthly'))
         }
       />
     );
