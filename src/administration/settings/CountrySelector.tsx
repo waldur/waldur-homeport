@@ -96,6 +96,8 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
   return (
     <ModalDialog
       title={translate('Available countries')}
+      className="country-selector-modal"
+      bodyClassName="p-0"
       footer={
         <>
           <CloseDialogButton className="flex-equal" />
@@ -110,7 +112,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
         </>
       }
     >
-      <div className="p-5">
+      <div className="p-7">
         <div className="mb-4">
           <TableQuery query={query} setQuery={setQuery} />
         </div>
@@ -122,7 +124,7 @@ export const CountrySelectorDialog: FunctionComponent<CountrySelectorProps> = ({
                   data-testid={`country_${countryCode}`}
                   name={`country_${countryCode}`}
                   alignMiddle
-                  className="justify-content-between flex-row-reverse"
+                  className="d-flex justify-content-between flex-row-reverse w-100"
                   size="sm"
                   input={
                     {
