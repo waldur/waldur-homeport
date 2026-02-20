@@ -108,11 +108,13 @@ export const QuestionGeneralForm = ({
           help={translate(
             "Customer model field name to map this answer to the Customer object (e.g., 'registration_code', 'email', 'vat_code').",
           )}
+          required
         >
           <Field
             name="maps_to_customer_field"
             component={StringField as any}
             placeholder="e.g., vat_code"
+            required
           />
         </FormGroup>
       )}
@@ -124,11 +126,13 @@ export const QuestionGeneralForm = ({
           help={translate(
             "Intent/purpose field to map the answer to the verification metadata (e.g., 'intent', 'registration_purpose').",
           )}
+          required
         >
           <Field
             name="intent_field"
             component={StringField as any}
             placeholder="e.g., intent"
+            required
           />
         </FormGroup>
       )}
