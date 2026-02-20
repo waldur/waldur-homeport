@@ -7,7 +7,7 @@ import { ConfirmationDialog } from './ConfirmationDialog';
 import { DeleteConfirmationDialog } from './DeleteConfirmationDialog';
 import { ModalAction, ConfirmationDialogType, DialogSizeType } from './types';
 
-export interface AppModalProps extends ModalProps {
+export interface AppModalProps extends Omit<ModalProps, 'size'> {
   size?: DialogSizeType;
   formId?: string;
 }

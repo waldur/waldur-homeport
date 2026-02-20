@@ -46,6 +46,10 @@
   }
 }
 
+.modal-md {
+  max-width: $modal-md;
+}
+
 .modal-lg {
   .modal-footer .btn.flex-equal {
     max-width: 148px;

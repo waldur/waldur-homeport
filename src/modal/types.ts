@@ -1,4 +1,4 @@
-export type DialogSizeType = 'sm' | 'lg' | 'xl';
+export type DialogSizeType = 'sm' | 'md' | 'lg' | 'xl';
 export type ConfirmationDialogType =
   | 'primary'
   | 'success'
