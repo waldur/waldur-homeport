@@ -374,12 +374,6 @@ export const SettingsDescription = [
         type: 'color_field',
       },
       {
-        key: 'FONT_FAMILY',
-        description: translate('Font used across the application.'),
-        default: 'Inter',
-        type: 'string',
-      },
-      {
         key: 'DISABLE_DARK_THEME',
         description: translate('Toggler to disable dark theme.'),
         default: false,
@@ -1378,12 +1372,6 @@ export const SettingsDescription = [
         description: translate('Number of days to retain chat sessions before automatic deletion. Set to -1 to disable automatic cleanup.'),
         default: 90,
         type: 'integer',
-      },
-      {
-        key: 'LLM_CHAT_STORAGE_ENABLED',
-        description: translate('Enable persistent storage of chat messages. When disabled, messages are streamed but not saved.'),
-        default: false,
-        type: 'boolean',
       },
       {
         key: 'LLM_CHAT_HISTORY_LIMIT',
