@@ -7,7 +7,7 @@ import { SecretField } from '@waldur/marketplace/common/SecretField';
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { CountryListField } from './CountryListField';
 import { MultilingualImageEditButton } from './MultilingualImageEditButton';
-import { getKeyTitle, SIDEBAR_STYLES } from './utils';
+import { FONT_FAMILIES, getKeyTitle, SIDEBAR_STYLES } from './utils';
 
 const ColorField = ({ value }) => (
   <div className="symbol symbol-50px symbol-circle">
@@ -142,6 +142,8 @@ export const FieldRow = ({ item, value, onEdit, isLoading }: FieldRowProps) => {
           <LoginPageListField itemKey={item.key} value={value} />
         ) : typeof value === 'object' ? (
           <pre>{JSON.stringify(value, null, 2)}</pre>
+        ) : item.key === 'FONT_FAMILY' ? (
+          FONT_FAMILIES.find((option) => option.value === value)?.label || value
         ) : item.key === 'SIDEBAR_STYLE' ? (
           SIDEBAR_STYLES.find((option) => option.value === value)?.label ||
           value

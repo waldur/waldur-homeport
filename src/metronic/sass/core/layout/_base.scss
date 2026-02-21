@@ -8,18 +8,24 @@ body {
   height: 100%;
   margin: 0px;
   padding: 0px;
-  font-size: $root-font-size !important;
+  font-size: calc(
+    #{$root-font-size} * var(--waldur-font-size-adjust, 1)
+  ) !important;
   font-weight: $font-weight-base;
-  font-family: $font-family-sans-serif;
+  font-family: var(--waldur-font-family, #{$font-family-sans-serif});
 
   // Tablet mode
   @include media-breakpoint-down(lg) {
-    font-size: $root-font-size-lg !important;
+    font-size: calc(
+      #{$root-font-size-lg} * var(--waldur-font-size-adjust, 1)
+    ) !important;
   }
 
   // Mobile mode
   @include media-breakpoint-down(md) {
-    font-size: $root-font-size-md !important;
+    font-size: calc(
+      #{$root-font-size-md} * var(--waldur-font-size-adjust, 1)
+    ) !important;
   }
 
   -webkit-font-smoothing: antialiased;

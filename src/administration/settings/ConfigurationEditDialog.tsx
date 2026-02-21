@@ -20,6 +20,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 
 import {
+  FONT_FAMILIES,
   formatListFieldValue,
   getKeyTitle,
   SIDEBAR_STYLES,
@@ -182,6 +183,13 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                 />
               ) : item.type === 'text_field' ? (
                 <Field component={TextField as any} name="value" />
+              ) : item.key === 'FONT_FAMILY' ? (
+                <Field
+                  component={SelectField as any}
+                  name="value"
+                  options={FONT_FAMILIES}
+                  simpleValue
+                />
               ) : item.key === 'SIDEBAR_STYLE' ? (
                 <>
                   <Field

@@ -1255,6 +1255,11 @@
   resolved "https://registry.yarnpkg.com/@fontsource/inter/-/inter-4.5.15.tgz#eed1873d68755d3b52d6fcfcfa3493118430a512"
   integrity sha512-FzleM9AxZQK2nqsTDtBiY0PMEVWvnKnuu2i09+p6DHvrHsuucoV2j0tmw+kAT3L4hvsLdAIDv6MdGehsPIdT+Q==
 
+"@fontsource/maven-pro@^5.2.10":
+  version "5.2.10"
+  resolved "https://registry.yarnpkg.com/@fontsource/maven-pro/-/maven-pro-5.2.10.tgz#afb8a7f4048cbc46e9be3f2c4252c535a847e5e4"
+  integrity sha512-CTydzkg80OGaZCtHXBU1FGUs5Ut7fU7kxzfm3fXenLug32+9vgt0u0iTXOx2nRpAhHsq93u0HyRUiWzESxx9iQ==
+
 "@fontsource/open-sans@^4.5.14":
   version "4.5.14"
   resolved "https://registry.yarnpkg.com/@fontsource/open-sans/-/open-sans-4.5.14.tgz#b3e1665c0b3fdfc1f030ded2843749e3cf3a5900"
