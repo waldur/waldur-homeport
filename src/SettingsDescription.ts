@@ -374,6 +374,12 @@ export const SettingsDescription = [
         type: 'color_field',
       },
       {
+        key: 'FONT_FAMILY',
+        description: translate('Font used across the application.'),
+        default: 'Inter',
+        type: 'string',
+      },
+      {
         key: 'DISABLE_DARK_THEME',
         description: translate('Toggler to disable dark theme.'),
         default: false,

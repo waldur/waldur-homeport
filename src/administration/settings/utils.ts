@@ -23,6 +23,17 @@ export const formatListFieldValue = (value: unknown[]): string => {
 export const getKeyTitle = (key) =>
   titleCase(key.toLowerCase().replaceAll('_', ' '));
 
+export const FONT_FAMILIES = [
+  {
+    label: 'Inter',
+    value: 'Inter',
+  },
+  {
+    label: 'Maven Pro',
+    value: 'Maven Pro',
+  },
+];
+
 export const SIDEBAR_STYLE_PRIMARY = 'primary';
 
 export const SIDEBAR_STYLES = [
