@@ -41,6 +41,7 @@ const mandatoryFields: CustomersListData['query']['field'] = [
   'created',
   'customer_credit',
   'billing_price_estimate',
+  'display_billing_info_in_projects',
   'organization_groups',
   'url', // Expand view - to create project
 ];

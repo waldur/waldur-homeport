@@ -9,6 +9,8 @@ import {
   OrganizationLink,
   useOrganizationLink,
 } from '@waldur/customer/list/OrganizationLink';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
@@ -27,6 +29,9 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
   onClickDetails,
 }) => {
   const user = useSelector(getUser);
+  const shouldConcealPrices =
+    isFeatureVisible(MarketplaceFeatures.conceal_prices) ||
+    organization.display_billing_info_in_projects === false;
   const { navigate } = useOrganizationLink(organization.uuid);
   const canEditCustomer = hasPermission(user, {
     permission: PermissionEnum.UPDATE_CUSTOMER,
@@ -76,29 +81,33 @@ export const OrganizationCard: FunctionComponent<OrganizationCardProps> = ({
             valueCol={6}
           />
 
-          <Field
-            label={translate('Cost estimation')}
-            value={defaultCurrency(
-              (organization.billing_price_estimate &&
-                organization.billing_price_estimate.total) ||
-                0,
-            )}
-            space={2}
-            labelCol={6}
-            valueCol={6}
-          />
+          {!shouldConcealPrices && (
+            <>
+              <Field
+                label={translate('Cost estimation')}
+                value={defaultCurrency(
+                  (organization.billing_price_estimate &&
+                    organization.billing_price_estimate.total) ||
+                    0,
+                )}
+                space={2}
+                labelCol={6}
+                valueCol={6}
+              />
 
-          {(organization.customer_credit ||
-            organization.customer_credit === 0) && (
-            <Field
-              label={translate('Remaining credit')}
-              value={renderFieldOrDash(
-                defaultCurrency(organization.customer_credit),
+              {(organization.customer_credit ||
+                organization.customer_credit === 0) && (
+                <Field
+                  label={translate('Remaining credit')}
+                  value={renderFieldOrDash(
+                    defaultCurrency(organization.customer_credit),
+                  )}
+                  space={2}
+                  labelCol={6}
+                  valueCol={6}
+                />
               )}
-              space={2}
-              labelCol={6}
-              valueCol={6}
-            />
+            </>
           )}
         </div>
       }
