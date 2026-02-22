@@ -1,12 +1,11 @@
 // This file is auto-generated. Do not edit manually.
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
   Customer,
+  InvitationState,
   RoleDetails,
   UserInvitationsListData,
   customersList,
@@ -22,42 +21,7 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-const ScopeTypeEnum = [
-  {
-    label: translate('Call'),
-    value: 'call',
-  },
-  {
-    label: translate('Call managing organization'),
-    value: 'call_organizer',
-  },
-  {
-    label: translate('Organization'),
-    value: 'customer',
-  },
-  {
-    label: translate('Offering'),
-    value: 'offering',
-  },
-  {
-    label: translate('Project'),
-    value: 'project',
-  },
-  {
-    label: translate('Proposal'),
-    value: 'proposal',
-  },
-  {
-    label: translate('Service provider organization'),
-    value: 'service_provider',
-  },
-];
-interface ScopeTypeEnumOption {
-  label: string;
-  value: string;
-}
-
-const StateEnum = [
+export const InvitationStateChoices: InvitationStateChoicesOption[] = [
   {
     label: translate('Accepted'),
     value: 'accepted',
@@ -87,26 +51,71 @@ const StateEnum = [
     value: 'requested',
   },
 ];
-interface StateEnumOption {
+export interface InvitationStateChoicesOption {
+  label: string;
+  value: InvitationState;
+}
+
+export const ScopeTypeChoices: ScopeTypeChoicesOption[] = [
+  {
+    label: translate('Call'),
+    value: 'call',
+  },
+  {
+    label: translate('Call managing organization'),
+    value: 'call_organizer',
+  },
+  {
+    label: translate('Organization'),
+    value: 'customer',
+  },
+  {
+    label: translate('Offering'),
+    value: 'offering',
+  },
+  {
+    label: translate('Project'),
+    value: 'project',
+  },
+  {
+    label: translate('Proposal'),
+    value: 'proposal',
+  },
+  {
+    label: translate('Service provider organization'),
+    value: 'service_provider',
+  },
+];
+export interface ScopeTypeChoicesOption {
   label: string;
   value: string;
 }
 
-export const PureUserInvitationsFilter: FunctionComponent<any> = (_props) => (
+export const PureUserInvitationsFilter: FunctionComponent<
+  UserInvitationsFilterProps
+> = (props) => (
   <>
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value) => value?.label}
+      getValueLabel={(value: InvitationStateChoicesOption[]) =>
+        value?.map((v) => v?.label).join(', ')
+      }
     >
       <Field
         name="state"
         component={(fieldProps) => (
           <Select
             placeholder={translate('State')}
-            options={StateEnum}
+            options={InvitationStateChoices}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
+            getOptionValue={(option: InvitationStateChoicesOption) =>
+              String(option.value)
+            }
+            getOptionLabel={(option: InvitationStateChoicesOption) =>
+              option.label
+            }
             isClearable={true}
             isMulti={true}
             {...REACT_SELECT_TABLE_FILTER}
@@ -126,8 +135,14 @@ export const PureUserInvitationsFilter: FunctionComponent<any> = (_props) => (
             placeholder={translate('Role')}
             loadOptions={createSelectFetcher(rolesList, 'name')}
             defaultOptions
-            getOptionValue={(option: RoleDetails) => option.uuid}
-            getOptionLabel={(option: RoleDetails) => option.description}
+            getOptionValue={
+              props.getOptionValue ||
+              ((option: RoleDetails) => String(option.uuid || ''))
+            }
+            getOptionLabel={
+              props.getOptionLabel ||
+              ((option: RoleDetails) => String(option.description || ''))
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -149,8 +164,14 @@ export const PureUserInvitationsFilter: FunctionComponent<any> = (_props) => (
             placeholder={translate('Organization')}
             loadOptions={createSelectFetcher(customersList, 'query')}
             defaultOptions
-            getOptionValue={(option: Customer) => option.uuid}
-            getOptionLabel={(option: Customer) => option.name}
+            getOptionValue={
+              props.getOptionValue ||
+              ((option: Customer) => String(option.uuid || ''))
+            }
+            getOptionLabel={
+              props.getOptionLabel ||
+              ((option: Customer) => String(option.name || ''))
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -163,16 +184,20 @@ export const PureUserInvitationsFilter: FunctionComponent<any> = (_props) => (
     <TableFilterItem
       title={translate('Scope type')}
       name="scope_type"
-      getValueLabel={(value) => value?.label}
+      getValueLabel={(value: ScopeTypeChoicesOption) => value?.label}
     >
       <Field
         name="scope_type"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Scope type')}
-            options={ScopeTypeEnum}
+            options={ScopeTypeChoices}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
+            getOptionValue={(option: ScopeTypeChoicesOption) =>
+              String(option.value)
+            }
+            getOptionLabel={(option: ScopeTypeChoicesOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -184,16 +209,21 @@ export const PureUserInvitationsFilter: FunctionComponent<any> = (_props) => (
 
 export const UserInvitationsFilterFormId = 'UserInvitationsFilter';
 
+interface UserInvitationsFilterProps {
+  getOptionLabel?: (option: any) => string;
+  getOptionValue?: (option: any) => string;
+}
+
 interface UserInvitationsFilterFormData {
-  state: StateEnumOption[];
+  state: InvitationStateChoicesOption[];
   role: RoleDetails;
   customer: Customer;
-  scope_type: ScopeTypeEnumOption;
+  scope_type: ScopeTypeChoicesOption;
 }
 
 export const UserInvitationsFilter = reduxForm<
   UserInvitationsFilterFormData,
-  any
+  UserInvitationsFilterProps
 >({
   form: UserInvitationsFilterFormId,
   destroyOnUnmount: false,
@@ -205,7 +235,7 @@ export const selectUserInvitationsFilter = createSelector(
     const filter: UserInvitationsListData['query'] = {};
     if (values) {
       if (values.state) {
-        filter.state = values.state.map((v) => v.value) as any;
+        filter.state = values.state.map((v: any) => v.value);
       }
       if (values.role) {
         filter.role_uuid = values.role.uuid;

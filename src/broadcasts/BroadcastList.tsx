@@ -1,6 +1,5 @@
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import {
   BroadcastMessage,
   broadcastMessagesList,
@@ -11,12 +10,15 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  BroadcastMessagesFilter,
+  selectBroadcastMessagesFilter,
+} from '@waldur/table/generated/BroadcastMessagesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { BroadcastCreateButton } from './BroadcastCreateButton';
 import { BroadcastExpandableRow } from './BroadcastExpandableRow';
-import { BroadcastFilter } from './BroadcastFilter';
 import { BroadcastsRowActions } from './BroadcastsRowActions';
 
 const mandatoryFields: BroadcastMessagesListData['query']['field'] = [
@@ -42,13 +44,7 @@ interface BroadcastListProps {
 export const BroadcastList: FunctionComponent<BroadcastListProps> = ({
   standalone = false,
 }) => {
-  const filterForm: any = useSelector(getFormValues('BroadcastsFilter'));
-  const filter = useMemo(
-    (): BroadcastMessagesListData['query'] => ({
-      state: filterForm?.state?.value,
-    }),
-    [filterForm],
-  );
+  const filter = useSelector(selectBroadcastMessagesFilter);
   const props = useTable({
     table: 'broadcast',
     fetchData: createFetcher(broadcastMessagesList),
@@ -90,7 +86,7 @@ export const BroadcastList: FunctionComponent<BroadcastListProps> = ({
       ]}
       verboseName={translate('broadcasts')}
       tableActions={<BroadcastCreateButton refetch={props.fetch} />}
-      filters={<BroadcastFilter />}
+      filters={<BroadcastMessagesFilter />}
       expandableRow={BroadcastExpandableRow}
       initialPageSize={10}
       showPageSizeSelector={true}

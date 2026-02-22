@@ -1,7 +1,6 @@
 import { PencilSimpleIcon, QuestionIcon } from '@phosphor-icons/react';
 import { uniqueId } from 'lodash-es';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { Notification, notificationMessagesList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
@@ -9,15 +8,18 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { BooleanField } from '@waldur/table/BooleanField';
+import {
+  NotificationMessagesFilter,
+  selectNotificationMessagesFilter,
+} from '@waldur/table/generated/NotificationMessagesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { NotificationActions } from './NotificationActions';
 import { NotificationExpandableRow } from './NotificationExpandableRow';
-import { NotificationFilter } from './NotificationFilter';
 
 export const NotificationList = () => {
-  const filter = useSelector(getFormValues('notificationFilter'));
+  const filter = useSelector(selectNotificationMessagesFilter);
   const tableProps = useTable({
     table: 'notification',
     fetchData: createFetcher(notificationMessagesList),
@@ -88,7 +90,7 @@ export const NotificationList = () => {
       showPageSizeSelector={true}
       hasQuery={true}
       enableExport={true}
-      filters={<NotificationFilter />}
+      filters={<NotificationMessagesFilter />}
     />
   );
 };

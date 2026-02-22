@@ -12,7 +12,7 @@ import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureSupportEmailLogsFilter: FunctionComponent<any> = (_props) => (
+export const PureSupportEmailLogsFilter: FunctionComponent<{}> = (_props) => (
   <>
     <TableFilterItem title={translate('Emails')} name="emails">
       <Field
@@ -48,7 +48,7 @@ interface SupportEmailLogsFilterFormData {
 
 export const SupportEmailLogsFilter = reduxForm<
   SupportEmailLogsFilterFormData,
-  any
+  {}
 >({
   form: SupportEmailLogsFilterFormId,
   destroyOnUnmount: false,

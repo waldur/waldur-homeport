@@ -110,7 +110,6 @@ overrides:
     project_role:
       label: Role
       mapTo: role
-      isMulti: true
       options: props.projectRoles
       valueField: name
       labelField: description
@@ -120,13 +119,11 @@ overrides:
       - project_role
       - organization_role
     project_role:
-      label: Project role
       isMulti: true
       options: props.projectRoles
       valueField: name
       labelField: description
     organization_role:
-      label: Organization role
       isMulti: true
       options: props.organizationRoles
       valueField: name
@@ -136,10 +133,26 @@ overrides:
     componentName: ProjectUpdateRequestListFilter
     filters:
       - state
-    state:
-      label: State
+
+  notification_messages_list:
+    filters:
+      - is_overridden
+    is_overridden:
+      label: Status
       enumOverrides:
-        pending: Pending
-        approved: Approved
-        rejected: Rejected
-        canceled: Canceled
+        "false": Not overridden
+        "true": Overridden
+
+  broadcast_messages_list:
+    filters:
+      - state
+
+  admin_announcements_list:
+    filters:
+      - type
+      - is_active
+    is_active:
+      label: Status
+      enumOverrides:
+        "true": Active
+        "false": Inactive

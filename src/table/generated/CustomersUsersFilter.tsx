@@ -16,7 +16,9 @@ export const PureCustomersUsersFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Project role')}
       name="project_role"
-      getValueLabel={(value) => value?.description}
+      getValueLabel={(value: any[]) =>
+        value?.map((v) => v?.description).join(', ')
+      }
     >
       <Field
         name="project_role"
@@ -26,7 +28,7 @@ export const PureCustomersUsersFilter: FunctionComponent<
             options={props.projectRoles}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option) => option.name}
+            getOptionValue={(option) => String(option.name)}
             getOptionLabel={(option) => option.description}
             isClearable={true}
             isMulti={true}
@@ -38,7 +40,9 @@ export const PureCustomersUsersFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Organization role')}
       name="organization_role"
-      getValueLabel={(value) => value?.description}
+      getValueLabel={(value: any[]) =>
+        value?.map((v) => v?.description).join(', ')
+      }
     >
       <Field
         name="organization_role"
@@ -48,7 +52,7 @@ export const PureCustomersUsersFilter: FunctionComponent<
             options={props.organizationRoles}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option) => option.name}
+            getOptionValue={(option) => String(option.name)}
             getOptionLabel={(option) => option.description}
             isClearable={true}
             isMulti={true}
@@ -63,8 +67,8 @@ export const PureCustomersUsersFilter: FunctionComponent<
 export const CustomersUsersFilterFormId = 'CustomersUsersFilter';
 
 interface CustomersUsersFilterProps {
-  projectRoles: any[];
-  organizationRoles: any[];
+  organizationRoles?: any[];
+  projectRoles?: any[];
 }
 
 interface CustomersUsersFilterFormData {
@@ -86,12 +90,12 @@ export const selectCustomersUsersFilter = createSelector(
     const filter: CustomersUsersListData['query'] = {};
     if (values) {
       if (values.project_role) {
-        filter.project_role = values.project_role.map((v) => v.name) as any;
+        filter.project_role = values.project_role.map((v: any) => v.name);
       }
       if (values.organization_role) {
         filter.organization_role = values.organization_role.map(
-          (v) => v.name,
-        ) as any;
+          (v: any) => v.name,
+        );
       }
     }
     return filter;

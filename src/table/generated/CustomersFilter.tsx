@@ -1,7 +1,5 @@
 // This file is auto-generated. Do not edit manually.
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -13,6 +11,7 @@ import {
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import {
   Select,
   AsyncPaginate,
@@ -22,7 +21,7 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-const AccountingIsRunningEnum = [
+export const AccountingIsRunningChoices: AccountingIsRunningChoicesOption[] = [
   {
     label: translate('Not running accounting'),
     value: false,
@@ -36,44 +35,34 @@ const AccountingIsRunningEnum = [
     value: 'undefined',
   },
 ];
-interface AccountingIsRunningEnumOption {
+export interface AccountingIsRunningChoicesOption {
   label: string;
   value: any;
 }
 
-const BooleanEnum = [
-  {
-    label: translate('No'),
-    value: false,
-  },
-  {
-    label: translate('Yes'),
-    value: true,
-  },
-  {
-    label: translate('All'),
-  },
-];
-interface BooleanEnumOption {
-  label: string;
-  value: any;
-}
-
-export const PureCustomersFilter: FunctionComponent<any> = (_props) => (
+export const PureCustomersFilter: FunctionComponent<CustomersFilterProps> = (
+  props,
+) => (
   <>
     <TableFilterItem
       title={translate('Accounting is running')}
       name="accounting_is_running"
-      getValueLabel={(value) => value?.label}
+      getValueLabel={(value: AccountingIsRunningChoicesOption) => value?.label}
     >
       <Field
         name="accounting_is_running"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Show with running accounting')}
-            options={AccountingIsRunningEnum}
+            options={AccountingIsRunningChoices}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
+            getOptionValue={(option: AccountingIsRunningChoicesOption) =>
+              String(option.value)
+            }
+            getOptionLabel={(option: AccountingIsRunningChoicesOption) =>
+              option.label
+            }
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -83,20 +72,16 @@ export const PureCustomersFilter: FunctionComponent<any> = (_props) => (
     <TableFilterItem
       title={translate('Service provider')}
       name="is_service_provider"
-      getValueLabel={(value) => value?.label}
+      badgeValue={(value) =>
+        value ? translate('Service provider') : translate('All')
+      }
+      ellipsis={false}
     >
       <Field
         name="is_service_provider"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Service provider')}
-            options={BooleanEnum}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
-          />
-        )}
+        component={AwesomeCheckboxField}
+        label={translate('Service provider')}
+        parse={(v) => v || undefined}
       />
     </TableFilterItem>
     {isFeatureVisible(
@@ -105,27 +90,25 @@ export const PureCustomersFilter: FunctionComponent<any> = (_props) => (
       <TableFilterItem
         title={translate('Call managing organization')}
         name="is_call_managing_organization"
-        getValueLabel={(value) => value?.label}
+        badgeValue={(value) =>
+          value ? translate('Call managing organization') : translate('All')
+        }
+        ellipsis={false}
       >
         <Field
           name="is_call_managing_organization"
-          component={(fieldProps) => (
-            <Select
-              placeholder={translate('Call managing organization')}
-              options={BooleanEnum}
-              value={fieldProps.input.value}
-              onChange={(value) => fieldProps.input.onChange(value)}
-              isClearable={true}
-              {...REACT_SELECT_TABLE_FILTER}
-            />
-          )}
+          component={AwesomeCheckboxField}
+          label={translate('Call managing organization')}
+          parse={(v) => v || undefined}
         />
       </TableFilterItem>
     )}
     <TableFilterItem
       title={translate('Organization group')}
       name="organization_group"
-      getValueLabel={(value: OrganizationGroup) => value?.name}
+      getValueLabel={(value: OrganizationGroup[]) =>
+        value?.map((v) => v?.name).join(', ')
+      }
     >
       <Field
         name="organization_group"
@@ -134,8 +117,14 @@ export const PureCustomersFilter: FunctionComponent<any> = (_props) => (
             placeholder={translate('Organization group')}
             loadOptions={createSelectFetcher(organizationGroupsList, 'name')}
             defaultOptions
-            getOptionValue={(option: OrganizationGroup) => option.uuid}
-            getOptionLabel={(option: OrganizationGroup) => option.name}
+            getOptionValue={
+              props.getOptionValue ||
+              ((option: OrganizationGroup) => String(option.uuid || ''))
+            }
+            getOptionLabel={
+              props.getOptionLabel ||
+              ((option: OrganizationGroup) => String(option.name || ''))
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -151,14 +140,22 @@ export const PureCustomersFilter: FunctionComponent<any> = (_props) => (
 
 export const CustomersFilterFormId = 'CustomersFilter';
 
+interface CustomersFilterProps {
+  getOptionLabel?: (option: any) => string;
+  getOptionValue?: (option: any) => string;
+}
+
 interface CustomersFilterFormData {
-  accounting_is_running: AccountingIsRunningEnumOption;
-  is_service_provider: BooleanEnumOption;
-  is_call_managing_organization: BooleanEnumOption;
+  accounting_is_running: AccountingIsRunningChoicesOption;
+  is_service_provider: boolean;
+  is_call_managing_organization: boolean;
   organization_group: OrganizationGroup[];
 }
 
-export const CustomersFilter = reduxForm<CustomersFilterFormData, any>({
+export const CustomersFilter = reduxForm<
+  CustomersFilterFormData,
+  CustomersFilterProps
+>({
   form: CustomersFilterFormId,
   destroyOnUnmount: false,
 })(PureCustomersFilter);
@@ -172,16 +169,16 @@ export const selectCustomersFilter = createSelector(
         filter.accounting_is_running = values.accounting_is_running.value;
       }
       if (values.is_service_provider) {
-        filter.is_service_provider = values.is_service_provider.value;
+        filter.is_service_provider = values.is_service_provider;
       }
       if (values.is_call_managing_organization) {
         filter.is_call_managing_organization =
-          values.is_call_managing_organization.value;
+          values.is_call_managing_organization;
       }
       if (values.organization_group) {
         filter.organization_group_uuid = values.organization_group.map(
-          (v) => v.uuid,
-        ) as any;
+          (v: any) => v.uuid,
+        );
       }
     }
     return filter;

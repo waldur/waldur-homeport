@@ -13,32 +13,14 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import {
-  Select,
   AsyncPaginate,
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
-
-const BooleanEnum = [
-  {
-    label: translate('No'),
-    value: false,
-  },
-  {
-    label: translate('Yes'),
-    value: true,
-  },
-  {
-    label: translate('All'),
-  },
-];
-interface BooleanEnumOption {
-  label: string;
-  value: any;
-}
 
 export const PureInvoicesItemsFilter: FunctionComponent<
   InvoicesItemsFilterProps
@@ -59,8 +41,14 @@ export const PureInvoicesItemsFilter: FunctionComponent<
               'customer_keyword',
             )}
             defaultOptions
-            getOptionValue={(option: ServiceProvider) => option.uuid}
-            getOptionLabel={(option: ServiceProvider) => option.customer_name}
+            getOptionValue={
+              props.getOptionValue ||
+              ((option: ServiceProvider) => String(option.uuid || ''))
+            }
+            getOptionLabel={
+              props.getOptionLabel ||
+              ((option: ServiceProvider) => String(option.customer_name || ''))
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -84,8 +72,14 @@ export const PureInvoicesItemsFilter: FunctionComponent<
               customer: props.customerUuid,
             })}
             defaultOptions
-            getOptionValue={(option: Project) => option.uuid}
-            getOptionLabel={(option: Project) => option.name}
+            getOptionValue={
+              props.getOptionValue ||
+              ((option: Project) => String(option.uuid || ''))
+            }
+            getOptionLabel={
+              props.getOptionLabel ||
+              ((option: Project) => String(option.name || ''))
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -111,8 +105,14 @@ export const PureInvoicesItemsFilter: FunctionComponent<
               { state: 'Active' },
             )}
             defaultOptions
-            getOptionValue={(option: PublicOfferingDetails) => option.uuid}
-            getOptionLabel={(option: PublicOfferingDetails) => option.name}
+            getOptionValue={
+              props.getOptionValue ||
+              ((option: PublicOfferingDetails) => String(option.uuid || ''))
+            }
+            getOptionLabel={
+              props.getOptionLabel ||
+              ((option: PublicOfferingDetails) => String(option.name || ''))
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -125,20 +125,16 @@ export const PureInvoicesItemsFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Conceal compensation items')}
       name="conceal_compensation_items"
-      getValueLabel={(value) => value?.label}
+      badgeValue={(value) =>
+        value ? translate('Conceal compensation items') : translate('All')
+      }
+      ellipsis={false}
     >
       <Field
         name="conceal_compensation_items"
-        component={(fieldProps) => (
-          <Select
-            placeholder={translate('Conceal compensation items')}
-            options={BooleanEnum}
-            value={fieldProps.input.value}
-            onChange={(value) => fieldProps.input.onChange(value)}
-            isClearable={true}
-            {...REACT_SELECT_TABLE_FILTER}
-          />
-        )}
+        component={AwesomeCheckboxField}
+        label={translate('Conceal compensation items')}
+        parse={(v) => v || undefined}
       />
     </TableFilterItem>
   </>
@@ -147,14 +143,16 @@ export const PureInvoicesItemsFilter: FunctionComponent<
 export const InvoicesItemsFilterFormId = 'InvoicesItemsFilter';
 
 interface InvoicesItemsFilterProps {
-  customerUuid: any;
+  customerUuid?: any;
+  getOptionLabel?: (option: any) => string;
+  getOptionValue?: (option: any) => string;
 }
 
 interface InvoicesItemsFilterFormData {
   provider: ServiceProvider;
   project: Project;
   offering: PublicOfferingDetails;
-  conceal_compensation_items: BooleanEnumOption;
+  conceal_compensation_items: boolean;
 }
 
 export const InvoicesItemsFilter = reduxForm<
@@ -180,8 +178,7 @@ export const selectInvoicesItemsFilter = createSelector(
         filter.offering_uuid = values.offering.uuid;
       }
       if (values.conceal_compensation_items) {
-        filter.conceal_compensation_items =
-          values.conceal_compensation_items.value;
+        filter.conceal_compensation_items = values.conceal_compensation_items;
       }
     }
     return filter;

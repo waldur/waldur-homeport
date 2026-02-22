@@ -18,7 +18,7 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-const AccountingIsRunningEnum = [
+export const AccountingIsRunningChoices: AccountingIsRunningChoicesOption[] = [
   {
     label: translate('Not running accounting'),
     value: false,
@@ -32,7 +32,7 @@ const AccountingIsRunningEnum = [
     value: 'undefined',
   },
 ];
-interface AccountingIsRunningEnumOption {
+export interface AccountingIsRunningChoicesOption {
   label: string;
   value: any;
 }
@@ -56,8 +56,14 @@ export const PureFinancialReportsFilter: FunctionComponent<
               'customer_keyword',
             )}
             defaultOptions
-            getOptionValue={(option: ServiceProvider) => option.customer_uuid}
-            getOptionLabel={(option: ServiceProvider) => option.customer_name}
+            getOptionValue={
+              props.getOptionValue ||
+              ((option: ServiceProvider) => String(option.customer_uuid || ''))
+            }
+            getOptionLabel={
+              props.getOptionLabel ||
+              ((option: ServiceProvider) => String(option.customer_name || ''))
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -70,7 +76,7 @@ export const PureFinancialReportsFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Accounting period')}
       name="accounting_period"
-      getValueLabel={(value) => value?.label}
+      getValueLabel={(value: any) => value?.label}
     >
       <Field
         name="accounting_period"
@@ -89,16 +95,22 @@ export const PureFinancialReportsFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Accounting is running')}
       name="accounting_is_running"
-      getValueLabel={(value) => value?.label}
+      getValueLabel={(value: AccountingIsRunningChoicesOption) => value?.label}
     >
       <Field
         name="accounting_is_running"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Show with running accounting')}
-            options={AccountingIsRunningEnum}
+            options={AccountingIsRunningChoices}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
+            getOptionValue={(option: AccountingIsRunningChoicesOption) =>
+              String(option.value)
+            }
+            getOptionLabel={(option: AccountingIsRunningChoicesOption) =>
+              option.label
+            }
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -111,13 +123,15 @@ export const PureFinancialReportsFilter: FunctionComponent<
 export const FinancialReportsFilterFormId = 'FinancialReportsFilter';
 
 interface FinancialReportsFilterProps {
-  accountingPeriods: any[];
+  accountingPeriods?: any[];
+  getOptionLabel?: (option: any) => string;
+  getOptionValue?: (option: any) => string;
 }
 
 interface FinancialReportsFilterFormData {
   customer: ServiceProvider;
   accounting_period: any;
-  accounting_is_running: AccountingIsRunningEnumOption;
+  accounting_is_running: AccountingIsRunningChoicesOption;
 }
 
 export const FinancialReportsFilter = reduxForm<
