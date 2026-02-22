@@ -8,8 +8,8 @@ const CONFIG_PATH = path.resolve(__dirname, './generate-filters-config.yaml');
 
 const ABBREVIATIONS = ['IP', 'ID', 'CPU', 'RAM', 'UUID', 'RBAC', 'OK', 'MAC', 'VM', 'MD5', 'SHA', 'SHA256', 'SHA512'];
 const SEARCH_CANDIDATES = ['query', 'name', 'email', 'username', 'full_name', 'title', 'customer_keyword', 'keyword'];
-const LABEL_CANDIDATES = ['name', 'title', 'full_name', 'username', 'email', 'customer_name'];
-const VALUE_CANDIDATES = ['uuid', 'url', 'id', 'pk', 'customer_uuid'];
+const LABEL_CANDIDATES = ['name', 'title', 'full_name', 'username', 'email', 'label', 'slug', 'customer_name', 'organization_name'];
+const VALUE_CANDIDATES = ['uuid', 'url', 'id', 'pk', 'value'];
 
 // --- Utility Functions ---
 const utils = {
@@ -97,16 +97,24 @@ class FilterMapper {
         if (!pathEntry) return [];
 
         const queryParams = (pathEntry[1].get.parameters || []).filter(p => p.in === 'query');
-        const paramNames = queryParams.map(p => p.name);
-        const toExclude = ['page', 'page_size', 'o', 'field', ...paramNames.filter(n => n.endsWith('_uuid') && paramNames.includes(n.replace(/_uuid$/, '')))];
+        const opOverrides = this.config.overrides[opId] || {};
+        const extraFilters = this.config.extraFilters?.[opId] || [];
 
-        let filters = queryParams
-            .filter(p => !toExclude.includes(p.name))
-            .map(p => this.mapParameter(p, opId));
+        let filters = [];
+        if (opOverrides.filters) {
+            filters = opOverrides.filters.map(name => {
+                const param = queryParams.find(p => p.name === name) || { name };
+                return this.mapParameter(param, opId);
+            });
+        } else {
+            filters = queryParams.map(param => {
+                return this.mapParameter(param, opId);
+            });
+        }
 
-        if (this.config.extraFilters?.[opId]) {
-            this.config.extraFilters[opId].forEach(f => {
-                if (typeof f.loadOptions === 'string') {
+        if (extraFilters.length) {
+            extraFilters.forEach(f => {
+                if (f.loadOptions && f.loadOptions.endsWith('_retrieve')) {
                     const listOp = f.loadOptions.replace(/_retrieve$/, '_list');
                     f.loadOptions = this.proc.allOperationIds.has(listOp) ? utils.toCamelCase(listOp) : utils.toCamelCase(f.loadOptions);
                 }
@@ -114,43 +122,47 @@ class FilterMapper {
             });
         }
 
-        const opOverrides = this.config.overrides[opId];
-        if (opOverrides?.filters) {
-            filters = opOverrides.filters.map(name => {
-                const existing = filters.find(f => f.name === name || f.mapTo === name);
-                return existing || this.mapParameter({ name }, opId);
-            }).filter(Boolean);
-        }
-
         return this._deduplicateAndFinalize(filters);
     }
 
-    mapParameter(param, currentOpId) {
-        const overrides = this.config.overrides[currentOpId]?.[param.name] || {};
+    mapParameter(param, opId, manualOverrides = {}) {
+        const configOverrides = (opId && param.name) ? (this.config.overrides[opId]?.[param.name] || {}) : {};
+        const overrides = { ...configOverrides, ...manualOverrides };
         let schema = param.schema || {};
-        let enumName = null;
-
+        let schemaEnumName = null;
         if (schema.$ref) {
-            enumName = schema.$ref.split('/').pop();
+            schemaEnumName = schema.$ref.split('/').pop();
             schema = utils.resolveRef(schema.$ref, this.proc.schema) || schema;
+        } else if (schema.items?.$ref) {
+            schemaEnumName = schema.items.$ref.split('/').pop();
         }
 
+        const originalName = param.name;
+        const isMulti = schema.type === 'array' || undefined;
         const filter = {
             name: param.name.endsWith('_uuid') ? param.name.replace(/_uuid$/, '') : param.name,
             label: utils.humanize(param.name.replace(/_uuid$/, '')),
             mapTo: param.name.endsWith('_uuid') ? param.name : undefined,
-            isMulti: schema.type === 'array' || undefined,
+            isMulti,
         };
 
         const targetOp = overrides.operationId || param['x-waldur-operation-id'];
 
-        if (targetOp) {
+        if (targetOp && !overrides.options && !overrides.enumOverrides) {
             this._mapAutocomplete(filter, targetOp);
         } else {
-            this._mapStandard(filter, param, schema, enumName, overrides);
+            this._mapStandard(filter, param, schema, schemaEnumName, overrides);
         }
 
         Object.assign(filter, overrides);
+
+        if (isMulti && filter.isMulti === undefined) {
+            filter.isMulti = true;
+        }
+
+        if (!filter.mapTo && filter.name !== originalName) {
+            filter.mapTo = originalName;
+        }
 
         if (overrides.component && !['Select', 'Autocomplete'].includes(overrides.component)) {
             ['options', 'optionsPlaceholder', 'enumName'].forEach(k => delete filter[k]);
@@ -177,47 +189,56 @@ class FilterMapper {
         }
     }
 
-    _mapStandard(filter, param, schema, enumName, overrides) {
+
+
+    _mapStandard(filter, param, schema, schemaEnumName, overrides) {
         const enumOptions = schema.enum || (schema.items?.$ref ? (utils.resolveRef(schema.items.$ref, this.proc.schema)?.enum) : schema.items?.enum);
 
-        if (enumOptions || overrides.enumOverrides || overrides.options) {
+        if (overrides.options || overrides.enumOverrides || enumOptions) {
             filter.component = 'Select';
-            if (typeof overrides.options === 'string') {
+            if (typeof overrides.options === 'string' && overrides.options.startsWith('props.')) {
                 filter.optionsPlaceholder = overrides.options;
                 return;
             }
 
-            const options = (enumOptions || Object.keys(overrides.enumOverrides || {})).map(opt => ({
-                label: overrides.enumOverrides?.[opt] || utils.humanize(String(opt)),
-                value: opt === 'true' ? true : opt === 'false' ? false : opt === 'null' ? null : opt
-            }));
+            const source = overrides.options || overrides.enumOverrides || enumOptions;
+            const options = (Array.isArray(source) ? source : Object.keys(source)).map(opt => {
+                if (typeof opt === 'object' && opt.label && opt.value !== undefined) return opt;
+                return {
+                    label: overrides.enumOverrides?.[opt] || utils.humanize(String(opt)),
+                    value: opt === 'true' ? true : opt === 'false' ? false : opt === 'null' ? null : opt
+                };
+            });
 
             const key = JSON.stringify([...options].sort((a, b) => String(a.value).localeCompare(String(b.value))));
-            let finalEnumName = enumName || this.proc.namedEnums.get(key) || utils.toPascalCase(param.name) + 'Enum';
+            let finalEnumName = overrides.enumName || schemaEnumName || this.proc.namedEnums.get(key) || utils.toPascalCase(param.name);
+            if (!finalEnumName.endsWith('Choices')) {
+                finalEnumName += 'Choices';
+            }
 
-            this._registerEnum(key, finalEnumName, filter);
+            this._registerEnum(key, finalEnumName, filter, overrides.valueType || schemaEnumName);
             filter.options = options;
         } else if (schema.type === 'boolean') {
-            filter.component = 'Select';
-            filter.options = [{ label: 'No', value: false }, { label: 'Yes', value: true }, { label: 'All', value: undefined }];
-            this._registerEnum(JSON.stringify(filter.options), 'BooleanEnum', filter);
+            filter.component = 'AwesomeCheckboxField';
         } else if (schema.format === 'date' || schema.format === 'date-time') {
             filter.component = 'DateField';
+        } else if (schema.type === 'number' || schema.type === 'integer') {
+            filter.component = 'NumberField';
         } else {
             filter.component = 'StringField';
         }
     }
 
-    _registerEnum(key, name, filter) {
+    _registerEnum(key, name, filter, valueType) {
         if (this.enumReverseRegistry.has(key)) {
             filter.optionsPlaceholder = this.enumReverseRegistry.get(key);
         } else {
             let uniqueName = name;
             let i = 1;
-            while (this.enumRegistry.has(uniqueName) && this.enumRegistry.get(uniqueName) !== key) {
+            while (this.enumRegistry.has(uniqueName) && this.enumRegistry.get(uniqueName).options !== key) {
                 uniqueName = `${name}_${i++}`;
             }
-            this.enumRegistry.set(uniqueName, key);
+            this.enumRegistry.set(uniqueName, { options: key, valueType });
             this.enumReverseRegistry.set(key, uniqueName);
             filter.optionsPlaceholder = uniqueName;
         }
@@ -233,7 +254,7 @@ class FilterMapper {
 // --- Generator Module ---
 
 class Generator {
-    static field(f) {
+    static field(f, enumRegistry) {
         const tLabel = `translate("${f.label}")`;
         const tPlace = `translate("${f.placeholder || f.label}")`;
         const commonSelectProps = [
@@ -245,7 +266,25 @@ class Generator {
         let input = '';
         const customProps = f.props ? Object.entries(f.props).map(([k, v]) => `${k}={${v}}`).join('\n        ') : '';
 
-        if (['StringField', 'DateField', 'AwesomeCheckboxField'].includes(f.component)) {
+        // Determine Badge/Label logic
+        let valLabel = '';
+        if (f.component === 'AwesomeCheckboxField') {
+            const trueLabel = f.badgeLabels?.true || f.label;
+            const falseLabel = f.badgeLabels?.false || 'All';
+            valLabel = `badgeValue={(value) =>
+      value ? translate("${trueLabel}") : translate("${falseLabel}")
+    }\n      ellipsis={false}`;
+        } else if (['StringField', 'NumberField', 'DateField'].includes(f.component)) {
+            valLabel = '';
+        } else {
+            const typeAnn = (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)) ? `: ${f.optionsPlaceholder}Option` : (f.valueType ? `: ${f.valueType}` : '');
+            const access = f.labelField ? `?.${f.labelField}` : '?.label';
+            const argType = (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)) ? `${f.optionsPlaceholder}Option` : (f.valueType || 'any');
+            valLabel = `getValueLabel={(value: ${argType}${f.isMulti ? '[]' : ''}) => ${f.isMulti ? `value?.map((v) => v${access}).join(', ')` : `value${access}`}}`;
+        }
+
+        // Generate Field Inputs
+        if (['StringField', 'NumberField', 'DateField', 'AwesomeCheckboxField'].includes(f.component)) {
             const extraProps = f.component === 'AwesomeCheckboxField' ? `label={${tLabel}} parse={(v) => v || undefined}` : `placeholder={${tPlace}}`;
             input = `      <Field
         name="${f.name}"
@@ -266,8 +305,8 @@ class Generator {
             placeholder={${tPlace}}
             loadOptions={createSelectFetcher(${f.loadOptions}, '${f.searchParam || 'name'}'${extraQuery})}
             defaultOptions
-            getOptionValue={(option${vType}) => option.${f.valueField || 'url'}}
-            getOptionLabel={(option${vType}) => option.${f.labelField || 'name'}}
+            getOptionValue={props.getOptionValue || ((option${vType}) => String(option.${f.valueField || 'url'} || ''))}
+            getOptionLabel={props.getOptionLabel || ((option${vType}) => String(option.${f.labelField || 'name'} || ''))}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             ${commonSelectProps}
@@ -282,6 +321,9 @@ class Generator {
             const vType = f.valueType ? `: ${f.valueType}` : '';
             const selectProps = f.props ? Object.entries(f.props).map(([k, v]) => `${k}={${v}}`).join('\n            ') : '';
 
+            const defaultVal = (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)) ? `getOptionValue={(option: ${f.optionsPlaceholder}Option) => option.value}` : `getOptionValue={(option: any) => option.value}`;
+            const defaultLabel = (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)) ? `getOptionLabel={(option: ${f.optionsPlaceholder}Option) => option.label}` : `getOptionLabel={(option: any) => option.label}`;
+
             input = `      <Field
         name="${f.name}"
         component={(fieldProps) => (
@@ -290,8 +332,8 @@ class Generator {
             options={${optionsVar}}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            ${f.valueField ? `getOptionValue={(option${vType}) => option.${f.valueField}}` : ''}
-            ${f.labelField ? `getOptionLabel={(option${vType}) => option.${f.labelField}}` : ''}
+            ${f.valueField ? `getOptionValue={(option${vType}) => String(option.${f.valueField})}` : (optionsVar.startsWith('props.') ? '' : `getOptionValue={(option: ${f.optionsPlaceholder}Option) => String(option.value)}`)}
+            ${f.labelField ? `getOptionLabel={(option${vType}) => option.${f.labelField}}` : (optionsVar.startsWith('props.') ? '' : `getOptionLabel={(option: ${f.optionsPlaceholder}Option) => option.label}`)}
             ${commonSelectProps}
             ${selectProps}
           />
@@ -301,16 +343,20 @@ class Generator {
             input = `      <${f.component} ${customProps} />\n`;
         }
 
-        const valLabel = ['StringField', 'DateField'].includes(f.component)
-            ? ''
-            : `getValueLabel={(value${f.valueType ? `: ${f.valueType}` : ''}) => value?.${f.labelField || 'label'}}`;
-
         let jsx = `    <TableFilterItem
       title={${tLabel}}
       name="${f.name}"
-      ${valLabel}
+      ${valLabel || (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder) ? `getValueLabel={(value: ${f.optionsPlaceholder}Option) => value?.label}` : '')}
     >
 ${input}    </TableFilterItem>\n`;
+
+        if (f.isHidden) {
+            const hiddenCond = typeof f.isHidden === 'string' && f.isHidden.startsWith('props.')
+                ? f.isHidden
+                : JSON.stringify(f.isHidden);
+            jsx = `    {!(${hiddenCond}) && (
+${jsx}    )}\n`;
+        }
 
         return f.feature ? `    {isFeatureVisible(MarketplaceFeatures.${f.feature}) && (
 ${jsx}    )}\n` : jsx;
@@ -328,9 +374,10 @@ ${jsx}    )}\n` : jsx;
         } else {
             const target = f.mapTo || f.name;
             const access = ['Autocomplete', 'Select'].includes(f.component)
-                ? (f.isMulti ? `.map(v => v.${vProp})` : `.${vProp}`)
+                ? (f.isMulti ? `.map((v: any) => v.${vProp})` : `.${vProp}`)
                 : '';
-            logic = `        filter.${target} = values.${f.name}${access}${f.isMulti ? ' as any' : ''};\n`;
+            const val = `values.${f.name}${access}`;
+            logic = `        filter.${target} = ${(f.isMulti && !['Autocomplete', 'Select'].includes(f.component) ? `[${val}]` : val)};\n`;
         }
         return `      if (values.${f.name}) {\n${logic}      }\n`;
     }
@@ -341,32 +388,50 @@ ${jsx}    )}\n` : jsx;
 
         const componentsCode = opIds.map(id => {
             const filters = operationFilters[id];
-            const pascalId = utils.toPascalCase(id).replace(/(?:List|Retrieve)$/, '');
-            const compName = config.overrides[id]?.componentName || `${pascalId}Filter`;
-            const usesProps = filters.some(f => JSON.stringify(f).includes('props.'));
+            // 1. Generate the SDK Type name (e.g., "InvoicesItemsRetrieveData")
+            const sdkDataType = `${utils.toPascalCase(id)}Data`;
+
+            // 2. Generate the Component Name (e.g., "InvoicesItemsFilter")
+            const cleanId = utils.toPascalCase(id).replace(/(?:List|Retrieve|Create|Update|Delete)$/, '');
+            const compName = config.overrides[id]?.componentName || `${cleanId}Filter`;
+            const usesProps = filters.some(f => JSON.stringify(f).includes('props.') || f.component === 'Autocomplete' || (typeof f.isHidden === 'string' && f.isHidden.includes('props.')));
 
             const interfaceFields = filters.map(f => {
                 let type = 'any';
                 if (['StringField', 'DateField'].includes(f.component)) type = 'string';
+                else if (f.component === 'NumberField') type = 'number';
                 else if (f.component === 'AwesomeCheckboxField') type = 'boolean';
+                else if (f.optionsPlaceholder && enumRegistry.has(f.optionsPlaceholder)) {
+                    type = `${f.optionsPlaceholder}Option`;
+                    if (f.isMulti) type += '[]';
+                }
                 else if (f.valueType) type = f.valueType;
-                else if (f.optionsPlaceholder && enumRegistry.has(f.optionsPlaceholder)) type = `${f.optionsPlaceholder}Option`;
-                return `  ${f.name}: ${f.isMulti ? `${type}[]` : type};`;
+                return `  ${f.name}: ${f.isMulti && !type.endsWith('[]') ? `${type}[]` : type};`;
             }).join('\n');
 
             let propsInterface = '';
             if (usesProps) {
                 const pFields = new Set();
                 filters.forEach(f => {
-                    if (f.optionsPlaceholder?.startsWith('props.')) pFields.add(`  ${f.optionsPlaceholder.split('.')[1]}: any[];`);
-                    if (f.extraQuery) Object.values(f.extraQuery).forEach(v => typeof v === 'string' && v.startsWith('props.') && pFields.add(`  ${v.split('.')[1]}: any;`));
+                    if (f.optionsPlaceholder?.startsWith('props.')) pFields.add(`  ${f.optionsPlaceholder.split('.')[1]}?: any[];`);
+                    if (f.extraQuery) {
+                        const qValues = typeof f.extraQuery === 'object' ? Object.values(f.extraQuery) : [f.extraQuery];
+                        qValues.forEach(v => typeof v === 'string' && v.startsWith('props.') && pFields.add(`  ${v.split('.')[1]}?: any;`));
+                    }
+                    if (typeof f.isHidden === 'string' && f.isHidden.startsWith('props.')) {
+                        pFields.add(`  ${f.isHidden.split('.')[1]}?: boolean;`);
+                    }
+                    if (f.component === 'Autocomplete') {
+                        pFields.add(`  getOptionLabel?: (option: any) => string;`);
+                        pFields.add(`  getOptionValue?: (option: any) => string;`);
+                    }
                 });
-                if (pFields.size) propsInterface = `interface ${compName}Props {\n${Array.from(pFields).join('\n')}\n}\n\n`;
+                if (pFields.size) propsInterface = `interface ${compName}Props {\n${Array.from(pFields).sort().join('\n')}\n}\n\n`;
             }
 
-            return `export const Pure${compName}: FunctionComponent<${usesProps ? `${compName}Props` : 'any'}> = (${usesProps ? 'props' : '_props'}) => (
+            return `export const Pure${compName}: FunctionComponent<${usesProps ? `${compName}Props` : '{}'}> = (${usesProps ? 'props' : '_props'}) => (
   <>
-${filters.map(Generator.field).join('')}  </>
+${filters.map(f => Generator.field(f, enumRegistry)).join('')}  </>
 );
 
 export const ${compName}FormId = '${config.overrides[id]?.formId || compName}';
@@ -375,15 +440,15 @@ ${propsInterface}interface ${compName}FormData {
 ${interfaceFields}
 }
 
-export const ${compName} = reduxForm<${compName}FormData, ${usesProps ? `${compName}Props` : 'any'}>({
+export const ${compName} = reduxForm<${compName}FormData, ${usesProps ? `${compName}Props` : '{}'}>({
   form: ${compName}FormId,
   destroyOnUnmount: false,
 })(Pure${compName});
 
 export const select${compName} = createSelector(
   getFormValues(${compName}FormId),
-  (values: ${compName}FormData | undefined) => {
-    const filter: ${utils.toPascalCase(id)}Data['query'] = {};
+    (values: ${compName}FormData | undefined) => {
+    const filter: ${sdkDataType}['query'] = {};
     if (values) {
 ${filters.map(Generator.selector).join('')}    }
     return filter;
@@ -395,7 +460,7 @@ ${filters.map(Generator.selector).join('')}    }
         return [
             `// This file is auto-generated. Do not edit manually.`,
             `/* eslint-disable @typescript-eslint/no-unused-vars */`,
-            this.imports(opIds, operationFilters, config),
+            this.imports(opIds, operationFilters, enumRegistry, config),
             this.enums(enumRegistry, usedEnums),
             componentsCode
         ].join('\n\n');
@@ -403,24 +468,32 @@ ${filters.map(Generator.selector).join('')}    }
 
     static enums(reg, used) {
         return Array.from(used).sort().map(name => {
-            const opts = JSON.parse(reg.get(name));
+            const entry = reg.get(name);
+            const opts = JSON.parse(entry.options);
             const json = JSON.stringify(opts, null, 2).replace(/"label":\s*"([^"]+)"/g, '"label": translate("$1")');
-            const vTypes = new Set(opts.map(o => typeof o.value));
-            return `const ${name} = ${json};\ninterface ${name}Option { label: string; value: ${vTypes.size === 1 ? Array.from(vTypes)[0] : 'any'}; }\n`;
+            const vTypes = entry.valueType ? [entry.valueType] : Array.from(new Set(opts.map(o => typeof o.value)));
+            return `export const ${name}: ${name}Option[] = ${json};\nexport interface ${name}Option { label: string; value: ${vTypes.length === 1 ? vTypes[0] : 'any'}; }\n`;
         }).join('\n');
     }
 
-    static imports(opIds, opFilters, config) {
+    static imports(opIds, opFilters, enumRegistry, config) {
         const sdk = new Set();
         const comps = new Set();
         const extras = new Set();
 
         opIds.forEach(id => {
-            sdk.add(`${utils.toPascalCase(id)}Data`);
+            const sdkDataType = `${utils.toPascalCase(id)}Data`;
+            sdk.add(sdkDataType);
             (config.overrides[id]?.extraImports || []).forEach(i => extras.add(i));
             opFilters[id].forEach(f => {
                 if (f.loadOptions) sdk.add(f.loadOptions);
                 if (f.valueType) sdk.add(f.valueType);
+                if (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)) {
+                    const vt = enumRegistry.get(f.optionsPlaceholder).valueType;
+                    if (vt && !['string', 'number', 'boolean', 'any'].includes(vt)) {
+                        sdk.add(vt);
+                    }
+                }
                 if (f.feature) comps.add('feature');
                 if (f.component === 'Autocomplete') comps.add('AsyncPaginate');
                 if (f.component === 'Select' || f.options) comps.add('Select');
@@ -443,7 +516,10 @@ ${filters.map(Generator.selector).join('')}    }
         const hasComp = (c) => Array.from(opIds).some(id => opFilters[id].some(f => f.component === c));
         if (hasComp('AwesomeCheckboxField')) lines.push(`import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';`);
         if (hasComp('DateField')) lines.push(`import { DateField } from '@waldur/form/DateField';`);
-        if (hasComp('StringField')) lines.push(`import { StringField } from '@waldur/form';`);
+        const formFields = [];
+        if (hasComp('StringField')) formFields.push('StringField');
+        if (hasComp('NumberField')) formFields.push('NumberField');
+        if (formFields.length) lines.push(`import { ${formFields.join(', ')} } from '@waldur/form';`);
 
         const themed = [
             comps.has('Select') && 'Select',

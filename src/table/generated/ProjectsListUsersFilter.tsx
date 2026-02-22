@@ -15,7 +15,7 @@ export const PureProjectsListUsersFilter: FunctionComponent<
   <TableFilterItem
     title={translate('Role')}
     name="project_role"
-    getValueLabel={(value) => value?.description}
+    getValueLabel={(value: any) => value?.description}
   >
     <Field
       name="project_role"
@@ -25,10 +25,9 @@ export const PureProjectsListUsersFilter: FunctionComponent<
           options={props.projectRoles}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option) => option.name}
+          getOptionValue={(option) => String(option.name)}
           getOptionLabel={(option) => option.description}
           isClearable={true}
-          isMulti={true}
           {...REACT_SELECT_TABLE_FILTER}
         />
       )}
@@ -39,11 +38,11 @@ export const PureProjectsListUsersFilter: FunctionComponent<
 export const ProjectsListUsersFilterFormId = 'ProjectsListUsersFilter';
 
 interface ProjectsListUsersFilterProps {
-  projectRoles: any[];
+  projectRoles?: any[];
 }
 
 interface ProjectsListUsersFilterFormData {
-  project_role: any[];
+  project_role: any;
 }
 
 export const ProjectsListUsersFilter = reduxForm<
@@ -60,7 +59,7 @@ export const selectProjectsListUsersFilter = createSelector(
     const filter: ProjectsListUsersListData['query'] = {};
     if (values) {
       if (values.project_role) {
-        filter.role = values.project_role.map((v) => v.name) as any;
+        filter.role = values.project_role.name;
       }
     }
     return filter;

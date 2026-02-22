@@ -5,55 +5,67 @@
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
-import { MarketplaceProjectUpdateRequestsListData } from 'waldur-js-client';
+import {
+  MarketplaceProjectUpdateRequestsListData,
+  RemoteProjectUpdateRequestStateEnum,
+} from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-const StateEnum_1 = [
-  {
-    label: translate('Approved'),
-    value: 'approved',
-  },
-  {
-    label: translate('Canceled'),
-    value: 'canceled',
-  },
-  {
-    label: translate('Draft'),
-    value: 'draft',
-  },
-  {
-    label: translate('Pending'),
-    value: 'pending',
-  },
-  {
-    label: translate('Rejected'),
-    value: 'rejected',
-  },
-];
-interface StateEnum_1Option {
+export const RemoteProjectUpdateRequestStateEnumChoices: RemoteProjectUpdateRequestStateEnumChoicesOption[] =
+  [
+    {
+      label: translate('Approved'),
+      value: 'approved',
+    },
+    {
+      label: translate('Canceled'),
+      value: 'canceled',
+    },
+    {
+      label: translate('Draft'),
+      value: 'draft',
+    },
+    {
+      label: translate('Pending'),
+      value: 'pending',
+    },
+    {
+      label: translate('Rejected'),
+      value: 'rejected',
+    },
+  ];
+export interface RemoteProjectUpdateRequestStateEnumChoicesOption {
   label: string;
-  value: string;
+  value: RemoteProjectUpdateRequestStateEnum;
 }
 
-export const PureProjectUpdateRequestListFilter: FunctionComponent<any> = (
+export const PureProjectUpdateRequestListFilter: FunctionComponent<{}> = (
   _props,
 ) => (
   <TableFilterItem
     title={translate('State')}
     name="state"
-    getValueLabel={(value) => value?.label}
+    getValueLabel={(
+      value: RemoteProjectUpdateRequestStateEnumChoicesOption[],
+    ) => value?.map((v) => v?.label).join(', ')}
   >
     <Field
       name="state"
       component={(fieldProps) => (
         <Select
           placeholder={translate('State')}
-          options={StateEnum_1}
+          options={RemoteProjectUpdateRequestStateEnumChoices}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
+          getOptionValue={(
+            option: RemoteProjectUpdateRequestStateEnumChoicesOption,
+          ) => String(option.value)}
+          getOptionLabel={(
+            option: RemoteProjectUpdateRequestStateEnumChoicesOption,
+          ) => option.label}
           isClearable={true}
           isMulti={true}
           {...REACT_SELECT_TABLE_FILTER}
@@ -67,12 +79,12 @@ export const ProjectUpdateRequestListFilterFormId =
   'ProjectUpdateRequestListFilter';
 
 interface ProjectUpdateRequestListFilterFormData {
-  state: StateEnum_1Option[];
+  state: RemoteProjectUpdateRequestStateEnumChoicesOption[];
 }
 
 export const ProjectUpdateRequestListFilter = reduxForm<
   ProjectUpdateRequestListFilterFormData,
-  any
+  {}
 >({
   form: ProjectUpdateRequestListFilterFormId,
   destroyOnUnmount: false,
@@ -84,7 +96,7 @@ export const selectProjectUpdateRequestListFilter = createSelector(
     const filter: MarketplaceProjectUpdateRequestsListData['query'] = {};
     if (values) {
       if (values.state) {
-        filter.state = values.state.map((v) => v.value) as any;
+        filter.state = values.state.map((v: any) => v.value);
       }
     }
     return filter;

@@ -139,15 +139,14 @@ describe('generate-filters.cjs', () => {
       expect(filter.component).toBe('StringField');
     });
 
-    it('maps boolean parameter to Select', () => {
+    it('maps boolean parameter to checkbox', () => {
       const param = {
         name: 'is_active',
         in: 'query',
         schema: { type: 'boolean' },
       };
       const filter = mapper.mapParameter(param, 'users_list');
-      expect(filter.component).toBe('Select');
-      expect(filter.options).toHaveLength(3); // Yes, No, All
+      expect(filter.component).toBe('AwesomeCheckboxField');
     });
 
     it('maps uuid parameter and strips suffix', () => {

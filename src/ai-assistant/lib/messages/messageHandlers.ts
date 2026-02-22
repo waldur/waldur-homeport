@@ -1,5 +1,5 @@
 import { AppendMessage } from '@assistant-ui/react';
-import { chatMessagesEdit } from 'waldur-js-client';
+// import { chatMessagesEdit } from 'waldur-js-client';
 
 import {
   addPreviousBlocks,
@@ -119,9 +119,9 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
       if (!assistantIdToStream) return;
 
       // Get backend UUID from user message metadata
-      const backendUserUuid = (
-        oldUser.metadata?.custom as { backendUuid?: string }
-      )?.backendUuid;
+      // const backendUserUuid = (
+      //   oldUser.metadata?.custom as { backendUuid?: string }
+      // )?.backendUuid;
 
       // Extract current blocks before clearing
       const currentBlocks =
@@ -156,16 +156,16 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
       });
 
       // Call backend edit endpoint if we have a backend UUID
-      if (backendUserUuid) {
-        try {
-          await chatMessagesEdit({
-            body: { content: input },
-            path: { uuid: backendUserUuid },
-          });
-        } catch {
-          // Continue with stream even if edit fails
-        }
-      }
+      // if (backendUserUuid) {
+      //   try {
+      //     await chatMessagesEdit({
+      //       body: { content: input },
+      //       path: { uuid: backendUserUuid },
+      //     });
+      //   } catch {
+      //     // Continue with stream even if edit fails
+      //   }
+      // }
 
       const abortController = deps.createController(deps.currentThreadId);
 
