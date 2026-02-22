@@ -8,6 +8,7 @@ import { useUser } from '@waldur/workspace/hooks';
 import { MultiDestroyAction } from './MultiDestroyAction';
 import { MultiEditOptionsAction } from './MultiEditOptionsAction';
 import { MultiMoveAction } from './MultiMoveAction';
+import { MultiPlacementMapAction } from './MultiPlacementMapAction';
 import { MultiPullAction } from './MultiPullAction';
 import { MultiRenewAllocationsAction } from './MultiRenewAllocationsAction';
 import { MultiRestartAction } from './MultiRestartAction';
@@ -40,6 +41,7 @@ export const ResourceMultiSelectAction = ({
       {user.is_staff && (
         <>
           <DropdownDivider className="border-top m-0" />
+          <MultiPlacementMapAction rows={rows} />
           <MultiSetDownscaledAction rows={rows} refetch={refetch} />
           <MultiSetPausedAction rows={rows} refetch={refetch} />
           <MultiSetErredAction rows={rows} refetch={refetch} />

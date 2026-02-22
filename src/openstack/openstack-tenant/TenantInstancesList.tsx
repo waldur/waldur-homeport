@@ -8,6 +8,7 @@ import {
 import { translate } from '@waldur/i18n';
 import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
 import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
+import { HypervisorPlacementMapButton } from '@waldur/openstack/openstack-tenant/HypervisorPlacementMapButton';
 import { IPList } from '@waldur/resource/IPList';
 import { ResourceName } from '@waldur/resource/ResourceName';
 import { ResourceState } from '@waldur/resource/state/ResourceState';
@@ -90,10 +91,13 @@ export const TenantInstancesList: FunctionComponent<{ resourceScope }> = ({
       title={translate('Instances')}
       verboseName={translate('instances')}
       tableActions={
-        <AddResourceButton
-          resource={resourceScope}
-          offeringType={INSTANCE_TYPE}
-        />
+        <>
+          <HypervisorPlacementMapButton tenantUuid={resourceScope.uuid} />
+          <AddResourceButton
+            resource={resourceScope}
+            offeringType={INSTANCE_TYPE}
+          />
+        </>
       }
       rowActions={({ row }) => (
         <ModalActionsRouter
