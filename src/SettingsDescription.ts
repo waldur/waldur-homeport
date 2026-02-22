@@ -1379,6 +1379,12 @@ export const SettingsDescription = [
         default: 50,
         type: 'integer',
       },
+      {
+        key: 'LLM_INJECTION_ALLOWLIST',
+        description: translate('Comma-separated allowlist phrases that bypass injection detection.'),
+        default: '',
+        type: 'string',
+      },
     ],
   },
   {
