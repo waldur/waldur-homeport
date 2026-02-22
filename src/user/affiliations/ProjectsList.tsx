@@ -14,7 +14,7 @@ import {
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
+import { MarketplaceFeatures, ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@waldur/navigation/title';
@@ -90,6 +90,14 @@ export const ProjectsList = () => {
     fetchData: createFetcher(projectsList),
     queryField: 'name',
     filter,
+    mandatoryFields: [
+      'uuid',
+      'name',
+      'customer_uuid',
+      'customer_name',
+      'customer_display_billing_info_in_projects',
+      'image',
+    ],
   });
 
   const { syncResourceFilters } =
@@ -221,24 +229,35 @@ export const ProjectsList = () => {
     SLUG_COLUMN as Column<Project>,
   ];
 
-  if (isFeatureVisible(ProjectFeatures.estimated_cost)) {
+  if (
+    isFeatureVisible(ProjectFeatures.estimated_cost) &&
+    !isFeatureVisible(MarketplaceFeatures.conceal_prices)
+  ) {
     columns.push({
       title: translate('Cost estimation'),
-      render: ({ row }) => (
-        <>
-          {defaultCurrency(
-            (row.billing_price_estimate && row.billing_price_estimate.total) ||
-              0,
-          )}
-        </>
-      ),
+      render: ({ row }) =>
+        row.customer_display_billing_info_in_projects === false ? (
+          <>{DASH_ESCAPE_CODE}</>
+        ) : (
+          <>
+            {defaultCurrency(
+              (row.billing_price_estimate &&
+                row.billing_price_estimate.total) ||
+                0,
+            )}
+          </>
+        ),
 
       keys: ['billing_price_estimate'],
       id: 'cost_estimation',
       export: (row) =>
-        defaultCurrency(
-          (row.billing_price_estimate && row.billing_price_estimate.total) || 0,
-        ),
+        row.customer_display_billing_info_in_projects === false
+          ? DASH_ESCAPE_CODE
+          : defaultCurrency(
+              (row.billing_price_estimate &&
+                row.billing_price_estimate.total) ||
+                0,
+            ),
     });
   }
 
