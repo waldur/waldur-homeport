@@ -102,7 +102,7 @@ export const PureInvoicesItemsFilter: FunctionComponent<
             loadOptions={createSelectFetcher(
               marketplacePublicOfferingsList,
               'query',
-              { state: 'Active' },
+              { state: ['Active'] },
             )}
             defaultOptions
             getOptionValue={

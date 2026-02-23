@@ -12,11 +12,11 @@ overrides:
       feature: show_call_management_functionality
     accounting_is_running:
       label: Accounting is running
-      placeholder: "Show with running accounting"
+      placeholder: 'Show with running accounting'
       enumOverrides:
-        "undefined": All
-        "true": Running accounting
-        "false": Not running accounting
+        'undefined': All
+        'true': Running accounting
+        'false': Not running accounting
 
   financial_reports_list:
     filters:
@@ -34,7 +34,7 @@ overrides:
       mapTo: true
     accounting_is_running:
       label: Accounting is running
-      placeholder: "Show with running accounting"
+      placeholder: 'Show with running accounting'
       enumOverrides:
         true: Running accounting
         false: Not running accounting
@@ -51,11 +51,11 @@ overrides:
       operationId: marketplace_service_providers_list
     offering_uuid:
       extraQuery:
-        state: Active
+        state: [Active]
     project_uuid:
       label: Project
       extraQuery:
-        customer: "props.customerUuid"
+        customer: 'props.customerUuid'
 
   email_logs_list:
     componentName: SupportEmailLogsFilter
@@ -64,11 +64,11 @@ overrides:
       - subject
       - sent_at
     emails:
-      placeholder: "Emails contains"
+      placeholder: 'Emails contains'
     subject:
-      placeholder: "Subject contains"
+      placeholder: 'Subject contains'
     sent_at:
-      placeholder: "YYYY-MM-DD"
+      placeholder: 'YYYY-MM-DD'
 
   user_invitations_list:
     filters:
@@ -86,13 +86,10 @@ overrides:
         canceled: Canceled
         expired: Expired
         accepted: Accepted
-    role_uuid:
-      label: Role
-      operationId: roles_list
-      labelField: description
     customer_uuid:
       label: Organization
-      operationId: customers_list
+    role_uuid:
+      labelField: description
     scope_type:
       label: Scope type
       enumOverrides:
@@ -140,8 +137,8 @@ overrides:
     is_overridden:
       label: Status
       enumOverrides:
-        "false": Not overridden
-        "true": Overridden
+        'false': Not overridden
+        'true': Overridden
 
   broadcast_messages_list:
     filters:
@@ -154,8 +151,8 @@ overrides:
     is_active:
       label: Status
       enumOverrides:
-        "true": Active
-        "false": Inactive
+        'true': Active
+        'false': Inactive
 
   support_feedbacks_list:
     componentName: SupportFeedbacksFilter
@@ -163,10 +160,6 @@ overrides:
       - evaluation
       - user_uuid
       - period
-    user_uuid:
-      label: User
-      name: user
-      operationId: users_list
     evaluation:
       label: Evaluation
       options: props.evaluationOptions
@@ -177,34 +170,28 @@ overrides:
 
   data_access_logs_list:
     componentName: SupportDataAccessLogsFilter
-    output: "./src/table/generated/SupportDataAccessLogsFilter.tsx"
+    output: './src/table/generated/SupportDataAccessLogsFilter.tsx'
     filters:
       - start_date
       - end_date
       - accessor_type
       - user_uuid
     user_uuid:
-      label: User
-      name: user
-      operationId: users_list
       searchParam: full_name
       extraQuery:
-        o: ["full_name"]
+        o: ['full_name']
 
   marketplace_plan_components_list:
     componentName: PriceListFilter
-    output: "./src/table/generated/PriceListFilter.tsx"
+    output: './src/table/generated/PriceListFilter.tsx'
     filters:
       - offering_uuid
     offering_uuid:
-      label: Offering
-      name: offering
-      operationId: marketplace_provider_offerings_list
       searchParam: name
 
   marketplace_plans_usage_stats_list:
     componentName: PlanUsageFilter
-    output: "./src/table/generated/PlanUsageFilter.tsx"
+    output: './src/table/generated/PlanUsageFilter.tsx'
     filters:
       - customer_provider_uuid
       - offering_uuid
@@ -214,16 +201,12 @@ overrides:
       operationId: marketplace_service_providers_list
       labelField: customer_name
       valueField: customer_uuid
-      searchParam: customer_keyword
     offering_uuid:
-      label: Offering
-      name: offering
-      operationId: marketplace_provider_offerings_list
       searchParam: name
 
   admin_arrow_billing_syncs_list:
     componentName: BillingSyncFilter
-    output: "./src/table/generated/BillingSyncFilter.tsx"
+    output: './src/table/generated/BillingSyncFilter.tsx'
     filters:
       - state
       - report_period_from
@@ -241,14 +224,14 @@ overrides:
           value: 4
     report_period_from:
       label: Period from
-      options: "props.billingPeriods"
+      options: 'props.billingPeriods'
     report_period_to:
       label: Period to
-      options: "props.billingPeriods"
+      options: 'props.billingPeriods'
 
   admin_arrow_customer_mappings_list:
     componentName: CustomerMappingsFilter
-    output: "./src/table/generated/CustomerMappingsFilter.tsx"
+    output: './src/table/generated/CustomerMappingsFilter.tsx'
     filters:
       - waldur_customer_uuid
       - arrow_reference
@@ -256,8 +239,49 @@ overrides:
     waldur_customer_uuid:
       label: Waldur Organization
       name: organization
-      operationId: customers_list
     arrow_reference:
       label: Arrow Reference
     is_active:
       label: Active
+
+  marketplace_customer_estimated_cost_policies_list:
+    componentName: OrganizationCostPoliciesFilter
+    output: './src/table/generated/OrganizationCostPoliciesFilter.tsx'
+    filters:
+      - customer_uuid
+    customer_uuid:
+      label: Organization
+      name: organization
+
+  chat_threads_list:
+    componentName: SupportAIAssistantLogsFilter
+    output: './src/table/generated/SupportAIAssistantLogsFilter.tsx'
+    filters:
+      - created
+      - modified
+      - user
+      - is_flagged
+      - max_severity
+      - is_archived
+    user:
+      searchParam: full_name
+
+  marketplace_robot_accounts_list:
+    componentName: ProviderRobotAccountFilter
+    output: './src/table/generated/ProviderRobotAccountFilter.tsx'
+    filters:
+      - customer_uuid
+      - project_uuid
+    customer_uuid:
+      label: Organization
+      name: customer
+      operationId: marketplace_service_providers_robot_account_customers_list
+      searchParam: customer_name
+      extraPath:
+        uuid: props.provider.uuid
+    project_uuid:
+      name: project
+      operationId: marketplace_service_providers_robot_account_projects_list
+      searchParam: project_name
+      extraPath:
+        uuid: props.provider.uuid

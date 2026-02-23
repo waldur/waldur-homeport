@@ -121,24 +121,41 @@ export async function fetchAll(fetch: Fetcher, request: TableRequest) {
   return result;
 }
 
+// Helper to extract the Query type from the SDK function signature
+type GetQuery<T> = T extends (options?: { query?: infer Q }) => any
+  ? NonNullable<Q>
+  : any;
+
+// Helper to extract the Path type
+type GetPath<T> = T extends (options?: { path?: infer P }) => any
+  ? NonNullable<P>
+  : any;
+
 export const createSelectFetcher =
-  (
-    listMethod: SdkFunction,
-    searchField: string = 'name',
-    extraParams: Record<string, any> = {},
+  <T extends (options: any) => any>(
+    listMethod: T,
+    searchField: keyof GetQuery<T>,
+    extraQuery: Partial<GetQuery<T>> = {},
+    pathParams: Partial<GetPath<T>> = {},
   ) =>
-  async (query: string, prevOptions, { page }) => {
-    const params: Record<string, any> = {
+  async (query: string, prevOptions: any, { page }: { page: number }) => {
+    const params = {
       [searchField]: query,
       page: page,
       page_size: ENV.pageSize,
-      ...extraParams,
-    };
-    const response = await listMethod({ query: params });
-    // Strip 'options' property from items to prevent react-select
-    // from interpreting them as grouped options.
-    // eslint-disable-next-line @typescript-eslint/no-unused-vars
-    const options = response.data.map(({ options: _, ...rest }) => rest);
+      ...extraQuery,
+    } as any;
+
+    const response = await listMethod({
+      path: pathParams,
+      query: params,
+    });
+
+    const options = response.data.map(
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      ({ options: _, ...rest }: any) => rest,
+    );
+
     return returnReactSelectAsyncPaginateObject(
       { options, totalItems: fetchResultCount(response) },
       prevOptions,

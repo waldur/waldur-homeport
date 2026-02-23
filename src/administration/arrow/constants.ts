@@ -42,13 +42,8 @@ export const getBillingSyncStateLabel = (
 
 /** Form names for redux-form */
 export const ARROW_FORM_NAMES = {
-  customerMappingsFilter: 'ArrowCustomerMappingsFilter',
-  billingSyncFilter: 'ArrowBillingSyncFilter',
   consumptionRecordsFilter: 'ArrowConsumptionRecordsFilter',
-  customerMappingForm: 'ArrowCustomerMappingForm',
-  credentialsForm: 'ArrowCredentialsForm',
   arrowResourcesFilter: 'ArrowResourcesFilter',
-  vendorOfferingMappingsFilter: 'ArrowVendorOfferingMappingsFilter',
 } as const;
 
 /** Tab keys for Arrow dashboard */
