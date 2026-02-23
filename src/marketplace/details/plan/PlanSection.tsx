@@ -3,6 +3,7 @@ import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { DetailsField } from '@waldur/marketplace/common/DetailsField';
+import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
 import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
 import { PlanDetailsTable } from '@waldur/marketplace/details/plan/PlanDetailsTable';
 import { Offering } from '@waldur/marketplace/types';
@@ -22,6 +23,7 @@ const PlanCard = ({
   order,
   offering,
   type,
+  concealBillingInfo,
 }) => (
   <Card className="card-bordered">
     <Card.Header className="custom-card-header custom-padding-zero">
@@ -49,6 +51,7 @@ const PlanCard = ({
           order={order}
           offering={offering}
           type={type}
+          concealBillingInfo={concealBillingInfo}
         />
       </DetailsField>
     </Card.Body>
@@ -56,6 +59,7 @@ const PlanCard = ({
 );
 
 export const PlanSection = (props: PlanDetailsProps) => {
+  const shouldConcealPrices = useShouldConcealPrices(props.order.project_uuid);
   const { plan_name, plan_description, old_plan_name } = props.order;
   if (!plan_name) {
     return (
@@ -87,6 +91,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
             order={props.order}
             offering={props.offering}
             type="old"
+            concealBillingInfo={shouldConcealPrices}
           />
 
           <hr />
@@ -97,6 +102,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
             order={props.order}
             offering={props.offering}
             type="new"
+            concealBillingInfo={shouldConcealPrices}
           />
         </>
       ) : (
@@ -107,6 +113,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
           order={props.order}
           offering={props.offering}
           type="new"
+          concealBillingInfo={shouldConcealPrices}
         />
       )}
     </>
