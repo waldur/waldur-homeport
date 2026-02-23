@@ -266,6 +266,23 @@ overrides:
     user:
       searchParam: full_name
 
+  system_logs_list:
+    componentName: SupportSystemLogsFilter
+    output: './src/table/generated/SupportSystemLogsFilter.tsx'
+    filters:
+      - source
+      - level
+      - instance
+      - logger_name
+      - start_date
+      - end_date
+    start_date:
+      component: DateField
+      mapTo: false
+    end_date:
+      component: DateField
+      mapTo: false
+
   marketplace_robot_accounts_list:
     componentName: ProviderRobotAccountFilter
     output: './src/table/generated/ProviderRobotAccountFilter.tsx'
