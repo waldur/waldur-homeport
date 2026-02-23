@@ -5,27 +5,50 @@ import { FormGroup } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 
-export const TerminationDateField = ({ offering }) => {
-  const defaultOffsetDays =
-    offering.plugin_options?.default_resource_termination_offset_in_days;
-  const maxOffsetDays =
-    offering.plugin_options?.max_resource_termination_offset_in_days;
-  const isTerminationDateRequired =
-    offering.plugin_options?.is_resource_termination_date_required;
+interface PluginOptions {
+  default_resource_termination_offset_in_days?: number;
+  max_resource_termination_offset_in_days?: number;
+  latest_date_for_resource_termination?: string;
+  is_resource_termination_date_required?: boolean;
+}
 
-  const dateFieldProps: any = {
-    minDate: DateTime.local().plus({ weeks: 1 }).toISODate(),
+export function getTerminationDateProps(
+  pluginOptions: PluginOptions | undefined,
+  now: DateTime = DateTime.local(),
+) {
+  const defaultOffsetDays =
+    pluginOptions?.default_resource_termination_offset_in_days;
+  const maxOffsetDays = pluginOptions?.max_resource_termination_offset_in_days;
+  const latestDate = pluginOptions?.latest_date_for_resource_termination;
+  const isTerminationDateRequired =
+    pluginOptions?.is_resource_termination_date_required;
+
+  const props: any = {
+    minDate: now.plus({ weeks: 1 }).toISODate(),
   };
 
   if (isTerminationDateRequired === true) {
-    dateFieldProps.defaultDate = DateTime.local()
-      .plus({ days: defaultOffsetDays })
-      .toISODate();
-    dateFieldProps.maxDate = DateTime.local()
-      .plus({ days: maxOffsetDays })
-      .toISODate();
-    dateFieldProps.isClearable = !isTerminationDateRequired;
+    props.defaultDate = now.plus({ days: defaultOffsetDays }).toISODate();
+    if (maxOffsetDays) {
+      props.maxDate = now.plus({ days: maxOffsetDays }).toISODate();
+    }
+    if (latestDate) {
+      const latestIso = DateTime.fromISO(latestDate).toISODate();
+      props.maxDate = props.maxDate
+        ? DateTime.min(
+            DateTime.fromISO(props.maxDate),
+            DateTime.fromISO(latestIso),
+          ).toISODate()
+        : latestIso;
+    }
+    props.isClearable = !isTerminationDateRequired;
   }
+
+  return props;
+}
+
+export const TerminationDateField = ({ offering }) => {
+  const dateFieldProps = getTerminationDateProps(offering.plugin_options);
   return (
     <Field
       name="attributes.end_date"

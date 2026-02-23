@@ -124,7 +124,7 @@ export const OrderMetadataTab = ({
 
         <FormTable.Item
           label={translate('Offering billable?')}
-          value={order.offering_billable ? 'Yes' : 'No'}
+          value={order.offering_billable ? translate('Yes') : translate('No')}
         />
 
         <FormTable.Item
@@ -134,7 +134,7 @@ export const OrderMetadataTab = ({
 
         <FormTable.Item
           label={translate('Offering shared?')}
-          value={order.offering_shared ? 'Yes' : 'No'}
+          value={order.offering_shared ? translate('Yes') : translate('No')}
         />
 
         <FormTable.Item
