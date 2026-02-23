@@ -5,9 +5,10 @@ import { translate } from '@waldur/i18n';
 export async function* streamChat(
   input: string,
   signal?: AbortSignal,
-  threadUuid?: string | null,
-  updateThreadName?: string,
-  mode?: 'reload' | null,
+  thread_uuid?: string,
+  mode?: 'reload' | 'edit',
+  edit_message_uuid?: string,
+  update_thread_name?: string,
 ): AsyncGenerator<ChatResponse> {
   let result;
 
@@ -15,9 +16,10 @@ export async function* streamChat(
     result = await chatStream({
       body: {
         input,
-        thread_uuid: threadUuid ?? undefined,
-        update_thread_name: updateThreadName,
-        mode: mode ?? undefined,
+        thread_uuid,
+        update_thread_name,
+        mode,
+        edit_message_uuid,
       },
       parseAs: 'stream',
       signal,

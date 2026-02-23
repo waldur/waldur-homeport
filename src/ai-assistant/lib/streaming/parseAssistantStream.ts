@@ -18,8 +18,9 @@ interface ParseAssistantStreamParams extends Pick<
   assistantId: string;
   signal: AbortSignal;
   onStreamComplete?: () => void;
-  threadUuid?: string | null;
-  mode?: 'reload' | null;
+  threadUuid?: string;
+  mode?: 'reload' | 'edit';
+  edit_message_uuid?: string;
 }
 
 interface ParseAssistantStreamResult {
@@ -39,6 +40,7 @@ export async function parseAssistantStream(
     onStreamComplete,
     threadUuid,
     mode,
+    edit_message_uuid,
   } = params;
   let currentBlocks: UIBlock[] = [];
   let hadError = false;
@@ -51,8 +53,9 @@ export async function parseAssistantStream(
       input,
       signal,
       threadUuid,
-      undefined,
       mode,
+      edit_message_uuid,
+      undefined,
     )) {
       if (signal?.aborted) {
         break;

@@ -16,7 +16,9 @@ export const generateAndSetThreadTitle = async (
     const streamInput = streamChat(
       titlePrompt,
       signal,
-      null,
+      undefined,
+      undefined,
+      undefined,
       backendThreadUuid,
     );
 

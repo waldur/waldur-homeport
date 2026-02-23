@@ -35,6 +35,7 @@ import {
   BlockBasedMetadata,
   BlockHistoryEntry,
 } from '@waldur/ai-assistant/lib/types';
+import { Badge } from '@waldur/core/Badge';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { translate } from '@waldur/i18n';
 import { QuotaProgressBar } from '@waldur/marketplace/resources/details/QuotaProgressBar';
@@ -344,7 +345,7 @@ const BlockBasedContent: FC = () => {
     <>
       {/* Only show version indicator when history exists and not streaming */}
       {hasHistory && !isRunning && (
-        <div className="aui-version-indicator">
+        <div className="aui-version-indicator gap-2">
           <VersionSelector
             displayLabel={displayLabel}
             isViewingHistory={isViewingHistory}
@@ -353,12 +354,11 @@ const BlockBasedContent: FC = () => {
             onPrevious={goToPreviousVersion}
             onNext={goToNextVersion}
           />
-        </div>
-      )}
-
-      {isViewingHistory && (
-        <div className="aui-history-banner">
-          {translate('Viewing previous version')}
+          {isViewingHistory && (
+            <Badge variant="warning" size="sm" outline>
+              {translate('Past version')}
+            </Badge>
+          )}
         </div>
       )}
 
