@@ -45,8 +45,8 @@ const mapStateToFilter = createSelector(
 );
 
 interface SupportInvoiceItemsListProps {
-  initialValues: { accounting_period: PeriodOption };
-  accountingPeriods: PeriodOption[];
+  initialValues: { accounting_period: { label: string; value: PeriodOption } };
+  accountingPeriods: { label: string; value: PeriodOption }[];
 }
 
 export const SupportInvoiceItemsList: FunctionComponent<

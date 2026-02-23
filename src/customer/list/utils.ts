@@ -1,6 +1,10 @@
 import { DateTime } from 'luxon';
 
-export const makeAccountingPeriods = (start: DateTime) => {
+import { PeriodOption } from '@waldur/form/types';
+
+export const makeAccountingPeriods = (
+  start: DateTime,
+): { label: string; value: PeriodOption }[] => {
   let date = DateTime.now().startOf('month');
   const diff = date.diff(start, 'months');
   const choices = [];

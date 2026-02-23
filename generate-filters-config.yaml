@@ -156,3 +156,21 @@ overrides:
       enumOverrides:
         "true": Active
         "false": Inactive
+
+  support_feedbacks_list:
+    componentName: SupportFeedbacksFilter
+    filters:
+      - evaluation
+      - user_uuid
+      - period
+    user_uuid:
+      label: User
+      name: user
+      operationId: users_list
+    evaluation:
+      label: Evaluation
+      options: props.evaluationOptions
+    period:
+      label: Period
+      options: props.periodOptions
+      mapTo: true

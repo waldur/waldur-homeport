@@ -7,7 +7,7 @@ import { PeriodOption } from '@waldur/form/types';
 import { translate } from '@waldur/i18n';
 
 interface AccountingPeriodFieldProps {
-  options: PeriodOption[];
+  options: { label: string; value: PeriodOption }[];
   reactSelectProps?: Partial<SelectProps>;
   name?: string;
 }
