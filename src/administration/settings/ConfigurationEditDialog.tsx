@@ -20,27 +20,10 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { useNotify } from '@waldur/store/hooks';
 
 import {
-  FONT_FAMILIES,
   formatListFieldValue,
   getKeyTitle,
-  SIDEBAR_STYLES,
   SIDEBAR_STYLE_PRIMARY,
 } from './utils';
-
-const SUPPORT_BACKENDS = [
-  {
-    label: 'Atlassian',
-    value: 'atlassian',
-  },
-  {
-    label: 'Zammad',
-    value: 'zammad',
-  },
-  {
-    label: 'SMAX',
-    value: 'smax',
-  },
-];
 
 const colorPalette = [
   '#307300',
@@ -183,44 +166,35 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
                 />
               ) : item.type === 'text_field' ? (
                 <Field component={TextField as any} name="value" />
-              ) : item.key === 'FONT_FAMILY' ? (
-                <Field
-                  component={SelectField as any}
-                  name="value"
-                  options={FONT_FAMILIES}
-                  simpleValue
-                />
-              ) : item.key === 'SIDEBAR_STYLE' ? (
+              ) : (item.type === 'choice_field' ||
+                  item.type === 'select' ||
+                  item.options) &&
+                item.type !== 'multiple_choice_field' ? (
                 <>
                   <Field
                     component={SelectField as any}
                     name="value"
-                    options={SIDEBAR_STYLES}
+                    options={item.options}
                     simpleValue
                   />
-                  {values.value === SIDEBAR_STYLE_PRIMARY && (
-                    <div className="mt-3">
-                      <WarnCard
-                        title={translate('Warning')}
-                        description={translate(
-                          'Using the primary color as a sidebar color might affect contrast and usability.',
-                        )}
-                      />
-                    </div>
-                  )}
+                  {item.key === 'SIDEBAR_STYLE' &&
+                    values.value === SIDEBAR_STYLE_PRIMARY && (
+                      <div className="mt-3">
+                        <WarnCard
+                          title={translate('Warning')}
+                          description={translate(
+                            'Using the primary color as a sidebar color might affect contrast and usability.',
+                          )}
+                        />
+                      </div>
+                    )}
                 </>
-              ) : item.key === 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE' ? (
-                <Field
-                  component={SelectField as any}
-                  name="value"
-                  options={SUPPORT_BACKENDS}
-                  simpleValue
-                />
-              ) : item.type === 'select' && item.options ? (
+              ) : item.type === 'multiple_choice_field' && item.options ? (
                 <Field
                   component={SelectField as any}
                   name="value"
                   options={item.options}
+                  isMulti
                   simpleValue
                 />
               ) : item.type === 'color_field' ? (
