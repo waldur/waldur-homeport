@@ -1,6 +1,6 @@
 import { LightbulbFilamentIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
@@ -8,18 +8,29 @@ import { Tip } from '@waldur/core/Tooltip';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormGroup, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import {
+  orderFormAttributesSelector,
+  orderFormSelector,
+} from '@waldur/marketplace/deploy/selectors';
 import { showErrorResponse } from '@waldur/store/notify';
+import type { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const ResourceNameField = (props) => {
   const dispatch = useDispatch();
   const project = props.project;
+  const plan = useSelector((state: RootState) =>
+    orderFormSelector(state, 'plan'),
+  );
+  const attributes = useSelector(orderFormAttributesSelector);
   const { mutate: suggestName, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       const response = await marketplaceResourcesSuggestName({
         body: {
           project: project.uuid,
           offering: props.offering.uuid,
+          plan: plan?.uuid,
+          attributes,
         },
       });
       const name = response.data['name'];

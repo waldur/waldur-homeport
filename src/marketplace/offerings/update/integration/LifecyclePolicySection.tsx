@@ -158,6 +158,14 @@ const provisioningFields: OfferingEditField[] = [
       'Limits the maximum number of resources from this offering allowed per project',
     ),
   },
+  {
+    label: translate('Resource name pattern'),
+    key: 'plugin_options.resource_name_pattern',
+    component: StringField,
+    description: translate(
+      'Python format string for auto-generated resource names. Available variables: {customer_name}, {customer_slug}, {project_name}, {project_slug}, {offering_name}, {offering_slug}, {plan_name}, {counter}, {attributes[KEY]}.',
+    ),
+  },
 ];
 
 // Provider-consumer messaging fields
