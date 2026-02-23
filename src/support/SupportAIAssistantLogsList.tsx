@@ -1,11 +1,8 @@
 import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   chatThreadsList,
-  ChatThreadsListData,
   InjectionSeverityEnum,
   ThreadSession,
 } from 'waldur-js-client';
@@ -14,8 +11,11 @@ import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { SupportAIAssistantLogsExpandableRow } from '@waldur/support/SupportAIAssistantLogsExpandableRow';
-import { SupportAIAssistantLogsFilter } from '@waldur/support/SupportAIAssistantLogsFilter';
 import { createFetcher } from '@waldur/table/api';
+import {
+  SupportAIAssistantLogsFilter,
+  selectSupportAIAssistantLogsFilter,
+} from '@waldur/table/generated/SupportAIAssistantLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -37,34 +37,8 @@ export const getSeverityBadgeVariant = (
   }
 };
 
-const mapStateToFilter = createSelector(
-  getFormValues('SupportAIAssistantLogsFilter'),
-  (filterValues: any) => {
-    const result: ChatThreadsListData['query'] = {};
-    if (filterValues?.user) {
-      result.user = filterValues.user.uuid;
-    }
-    if (filterValues?.is_archived) {
-      result.is_archived = filterValues.is_archived.value;
-    }
-    if (filterValues?.is_flagged) {
-      result.is_flagged = filterValues.is_flagged.value;
-    }
-    if (filterValues?.max_severity) {
-      result.max_severity = filterValues.max_severity.value;
-    }
-    if (filterValues?.created) {
-      result.created = filterValues.created;
-    }
-    if (filterValues?.modified) {
-      result.modified = filterValues.modified;
-    }
-    return result;
-  },
-);
-
 export const SupportAIAssistantLogsList: FunctionComponent = () => {
-  const filter = useSelector(mapStateToFilter);
+  const filter = useSelector(selectSupportAIAssistantLogsFilter);
 
   const fetcher = useMemo(() => createFetcher(chatThreadsList), []);
 

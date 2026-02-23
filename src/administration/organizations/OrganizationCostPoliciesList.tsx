@@ -1,12 +1,9 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   CustomerEstimatedCostPolicy,
   marketplaceCustomerEstimatedCostPoliciesList,
-  MarketplaceCustomerEstimatedCostPoliciesListData,
 } from 'waldur-js-client';
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
@@ -18,25 +15,15 @@ import { getCostPolicyActionOptions } from '@waldur/customer/cost-policies/utils
 import { OrganizationNameLink } from '@waldur/customer/list/OrganizationNameLink';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  OrganizationCostPoliciesFilter,
+  selectOrganizationCostPoliciesFilter,
+} from '@waldur/table/generated/OrganizationCostPoliciesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { OrganizationCostPoliciesFilter } from './OrganizationCostPoliciesFilter';
-
-const filtersSelector = createSelector(
-  getFormValues('OrgCostPoliciesFilter'),
-  (filterValues: any) => {
-    const result: MarketplaceCustomerEstimatedCostPoliciesListData['query'] =
-      {};
-    if (filterValues?.organization) {
-      result.customer_uuid = filterValues.organization.uuid;
-    }
-    return result;
-  },
-);
-
 export const OrganizationCostPoliciesList: FC = () => {
-  const filter = useSelector(filtersSelector);
+  const filter = useSelector(selectOrganizationCostPoliciesFilter);
 
   const tableProps = useTable({
     table: 'OrgCostPoliciesList',

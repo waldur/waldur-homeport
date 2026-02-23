@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import {
   marketplaceRobotAccountsList,
   RobotAccountDetails,
@@ -9,33 +8,24 @@ import {
 import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProviderRobotAccountFilter,
+  selectProviderRobotAccountFilter,
+} from '@waldur/table/generated/ProviderRobotAccountFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { ProviderRobotAccountFilter } from './ProviderRobotAccountFilter';
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
-interface FilterValues {
-  project?: { uuid };
-  customer?: { uuid };
-}
-
 export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
-  const filterValues = useSelector(
-    getFormValues('ProviderRobotAccountFilter'),
-  ) as FilterValues;
+  const formFilter = useSelector(selectProviderRobotAccountFilter);
   const customer = useSelector(getCustomer);
   const filter = useMemo(() => {
-    const baseFilter: {
-      project_uuid?: string;
-      customer_uuid?: string;
-      provider_uuid?: string;
-    } = {
-      project_uuid: filterValues?.project?.uuid,
-      customer_uuid: filterValues?.customer?.uuid,
+    const baseFilter: any = {
+      ...formFilter,
     };
 
     if (provider) {
@@ -43,7 +33,7 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
     }
 
     return baseFilter;
-  }, [filterValues, customer]);
+  }, [formFilter, customer, provider]);
 
   const tableProps = useTable({
     table: 'provider-robot-accounts',
