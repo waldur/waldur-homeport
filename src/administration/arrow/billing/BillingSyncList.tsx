@@ -1,49 +1,29 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  adminArrowBillingSyncsList,
-  ArrowBillingSync,
-  AdminArrowBillingSyncsListData,
-} from 'waldur-js-client';
+import { adminArrowBillingSyncsList, ArrowBillingSync } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
+import { getPreviousBillingPeriods } from '@waldur/reporting/usage-monitoring/utils';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import {
+  BillingSyncFilter,
+  selectBillingSyncFilter,
+} from '@waldur/table/generated/BillingSyncFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import {
-  ARROW_FORM_NAMES,
   getBillingSyncStateLabel,
   getBillingSyncStateVariant,
 } from '../constants';
 
 import { BillingSyncActions } from './BillingSyncActions';
 import { BillingSyncButton } from './BillingSyncButton';
-import { BillingSyncFilter } from './BillingSyncFilter';
 import { BillingSyncStatusCard } from './BillingSyncStatusCard';
-
-const filtersSelector = createSelector(
-  getFormValues(ARROW_FORM_NAMES.billingSyncFilter),
-  (filterValues: any) => {
-    const result: AdminArrowBillingSyncsListData['query'] = {};
-    if (filterValues?.state) {
-      result.state = filterValues.state.value;
-    }
-    if (filterValues?.report_period_from) {
-      result.report_period_from = filterValues.report_period_from;
-    }
-    if (filterValues?.report_period_to) {
-      result.report_period_to = filterValues.report_period_to;
-    }
-    return result;
-  },
-);
 
 const mandatoryFields: Array<keyof ArrowBillingSync> = [
   'uuid',
@@ -67,7 +47,16 @@ interface BillingSyncListProps {
 export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
   settings,
 }) => {
-  const formFilter = useSelector(filtersSelector);
+  const formFilter = useSelector(selectBillingSyncFilter);
+
+  const billingPeriods = useMemo(
+    () =>
+      getPreviousBillingPeriods(12).map((period) => ({
+        label: period,
+        value: period,
+      })),
+    [],
+  );
 
   const filter = useMemo(
     () => ({
@@ -160,7 +149,7 @@ export const BillingSyncList: FunctionComponent<BillingSyncListProps> = ({
         verboseName={translate('billing syncs')}
         initialSorting={{ field: 'created', mode: 'desc' }}
         hasQuery
-        filters={<BillingSyncFilter />}
+        filters={<BillingSyncFilter billingPeriods={billingPeriods} />}
         rowActions={({ row }) => <BillingSyncActions row={row} />}
         tableActions={<BillingSyncButton refetch={tableProps.fetch} />}
       />
