@@ -15,17 +15,6 @@ const BILLING_SYNC_STATE_LABELS: Record<ArrowBillingSyncStateEnum, string> = {
   4: translate('Failed'),
 };
 
-/** Billing sync state options for filtering */
-export const BILLING_SYNC_STATE_OPTIONS: {
-  value: ArrowBillingSyncStateEnum;
-  label: string;
-}[] = [
-  { value: 1, label: translate('Pending') },
-  { value: 2, label: translate('Syncing') },
-  { value: 3, label: translate('Synced') },
-  { value: 4, label: translate('Failed') },
-];
-
 /** Get badge variant for billing sync state */
 export const getBillingSyncStateVariant = (
   state: ArrowBillingSyncStateEnum,

@@ -1,16 +1,17 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   marketplacePlansUsageStatsList,
-  MarketplacePlansUsageStatsListData,
   PlanUsageResponse,
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { createFetcher } from '@waldur/table/api';
+import {
+  PlanUsageFilter,
+  selectPlanUsageFilter,
+} from '@waldur/table/generated/PlanUsageFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -19,13 +20,12 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
 import { PlanUsageAnalytics } from './PlanUsageAnalytics';
-import { PlanUsageFilter } from './PlanUsageFilter';
 import { PlanUsageRowActions } from './PlanUsageRowActions';
 
 export const PlanUsageList: FunctionComponent = () => {
   useReportBreadcrumbs({ currentReport: 'capacity', category: 'provider' });
 
-  const formFilter = useSelector(mapStateToProps);
+  const formFilter = useSelector(selectPlanUsageFilter);
   const props = useTable({
     table: 'PlanUsages',
     fetchData: createFetcher(marketplacePlansUsageStatsList),
@@ -94,19 +94,3 @@ export const PlanUsageList: FunctionComponent = () => {
     />
   );
 };
-
-const mapStateToProps = createSelector(
-  getFormValues('PlanUsageFilter'),
-  (filterValues: any) => {
-    const filter: MarketplacePlansUsageStatsListData['query'] = {};
-    if (filterValues) {
-      if (filterValues.provider) {
-        filter.customer_provider_uuid = filterValues.provider.customer_uuid;
-      }
-      if (filterValues.offering) {
-        filter.offering_uuid = filterValues.offering.uuid;
-      }
-    }
-    return filter;
-  },
-);

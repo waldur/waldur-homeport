@@ -1,18 +1,16 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  dataAccessLogsList,
-  DataAccessLogsListData,
-  GlobalUserDataAccessLog,
-} from 'waldur-js-client';
+import { dataAccessLogsList, GlobalUserDataAccessLog } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  SupportDataAccessLogsFilter,
+  selectSupportDataAccessLogsFilter,
+} from '@waldur/table/generated/SupportDataAccessLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import {
@@ -23,30 +21,9 @@ import {
 import { DataAccessLogsBulkDeleteAction } from './DataAccessLogsBulkDeleteAction';
 import { DataAccessLogsRowActions } from './DataAccessLogsRowActions';
 import { SupportDataAccessLogsExpandableRow } from './SupportDataAccessLogsExpandableRow';
-import { SupportDataAccessLogsFilter } from './SupportDataAccessLogsFilter';
-
-const mapStateToFilter = createSelector(
-  getFormValues('SupportDataAccessLogsFilter'),
-  (filterValues: any) => {
-    const result: DataAccessLogsListData['query'] = {};
-    if (filterValues?.start_date) {
-      result.start_date = filterValues.start_date;
-    }
-    if (filterValues?.end_date) {
-      result.end_date = filterValues.end_date;
-    }
-    if (filterValues?.accessor_type?.value) {
-      result.accessor_type = filterValues.accessor_type.value;
-    }
-    if (filterValues?.user?.uuid) {
-      result.user_uuid = filterValues.user.uuid;
-    }
-    return result;
-  },
-);
 
 export const SupportDataAccessLogsList = () => {
-  const filterValues = useSelector(mapStateToFilter);
+  const filterValues = useSelector(selectSupportDataAccessLogsFilter);
 
   const filter = useMemo(
     () => ({

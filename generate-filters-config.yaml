@@ -174,3 +174,90 @@ overrides:
       label: Period
       options: props.periodOptions
       mapTo: true
+
+  data_access_logs_list:
+    componentName: SupportDataAccessLogsFilter
+    output: "./src/table/generated/SupportDataAccessLogsFilter.tsx"
+    filters:
+      - start_date
+      - end_date
+      - accessor_type
+      - user_uuid
+    user_uuid:
+      label: User
+      name: user
+      operationId: users_list
+      searchParam: full_name
+      extraQuery:
+        o: ["full_name"]
+
+  marketplace_plan_components_list:
+    componentName: PriceListFilter
+    output: "./src/table/generated/PriceListFilter.tsx"
+    filters:
+      - offering_uuid
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_provider_offerings_list
+      searchParam: name
+
+  marketplace_plans_usage_stats_list:
+    componentName: PlanUsageFilter
+    output: "./src/table/generated/PlanUsageFilter.tsx"
+    filters:
+      - customer_provider_uuid
+      - offering_uuid
+    customer_provider_uuid:
+      label: Service provider
+      name: provider
+      operationId: marketplace_service_providers_list
+      labelField: customer_name
+      valueField: customer_uuid
+      searchParam: customer_keyword
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_provider_offerings_list
+      searchParam: name
+
+  admin_arrow_billing_syncs_list:
+    componentName: BillingSyncFilter
+    output: "./src/table/generated/BillingSyncFilter.tsx"
+    filters:
+      - state
+      - report_period_from
+      - report_period_to
+    state:
+      label: State
+      options:
+        - label: Pending
+          value: 1
+        - label: Syncing
+          value: 2
+        - label: Synced
+          value: 3
+        - label: Failed
+          value: 4
+    report_period_from:
+      label: Period from
+      options: "props.billingPeriods"
+    report_period_to:
+      label: Period to
+      options: "props.billingPeriods"
+
+  admin_arrow_customer_mappings_list:
+    componentName: CustomerMappingsFilter
+    output: "./src/table/generated/CustomerMappingsFilter.tsx"
+    filters:
+      - waldur_customer_uuid
+      - arrow_reference
+      - is_active
+    waldur_customer_uuid:
+      label: Waldur Organization
+      name: organization
+      operationId: customers_list
+    arrow_reference:
+      label: Arrow Reference
+    is_active:
+      label: Active
