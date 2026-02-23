@@ -3,11 +3,9 @@ import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   overrideSettingsRetrieve,
   systemLogsList,
-  SystemLogsListData,
   SystemLog,
 } from 'waldur-js-client';
 
@@ -17,11 +15,15 @@ import { Link } from '@waldur/core/Link';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  SupportSystemLogsFilter,
+  selectSupportSystemLogsFilter,
+  SupportSystemLogsFilterFormId,
+} from '@waldur/table/generated/SupportSystemLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { SupportSystemLogsExpandableRow } from './SupportSystemLogsExpandableRow';
-import { SupportSystemLogsFilter } from './SupportSystemLogsFilter';
 
 type BadgeVariant = 'danger' | 'warning' | 'info' | 'secondary';
 
@@ -39,36 +41,6 @@ const getLevelBadgeVariant = (level: string): BadgeVariant => {
   }
 };
 
-const mapStateToFilter = createSelector(
-  getFormValues('SupportSystemLogsFilter'),
-  (filterValues: any) => {
-    const result: SystemLogsListData['query'] = {};
-    if (filterValues?.source?.value) {
-      result.source = filterValues.source.value;
-    }
-    if (filterValues?.level?.value) {
-      result.level = filterValues.level.value;
-    }
-    if (filterValues?.instance) {
-      result.instance = filterValues.instance;
-    }
-    if (filterValues?.logger_name) {
-      result.logger_name = filterValues.logger_name;
-    }
-    if (filterValues?.start_date) {
-      result.created_from = DateTime.fromISO(filterValues.start_date)
-        .startOf('day')
-        .toSeconds();
-    }
-    if (filterValues?.end_date) {
-      result.created_to = DateTime.fromISO(filterValues.end_date)
-        .endOf('day')
-        .toSeconds();
-    }
-    return result;
-  },
-);
-
 export const SupportSystemLogsList = () => {
   const { data: settings } = useQuery({
     queryKey: ['SystemLogSettings'],
@@ -78,14 +50,25 @@ export const SupportSystemLogsList = () => {
 
   const isEnabled = settings?.SYSTEM_LOG_ENABLED ?? true;
 
-  const filterValues = useSelector(mapStateToFilter);
-
-  const filter = useMemo(
-    () => ({
-      ...filterValues,
-    }),
-    [filterValues],
+  const filterValues = useSelector(selectSupportSystemLogsFilter);
+  const formValues: any = useSelector(
+    getFormValues(SupportSystemLogsFilterFormId),
   );
+
+  const filter = useMemo(() => {
+    const result: any = { ...filterValues };
+    if (formValues?.start_date) {
+      result.created_from = DateTime.fromISO(formValues.start_date)
+        .startOf('day')
+        .toSeconds();
+    }
+    if (formValues?.end_date) {
+      result.created_to = DateTime.fromISO(formValues.end_date)
+        .endOf('day')
+        .toSeconds();
+    }
+    return result;
+  }, [filterValues, formValues]);
 
   const tableProps = useTable({
     table: 'SupportSystemLogsList',

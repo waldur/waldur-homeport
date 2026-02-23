@@ -10,6 +10,7 @@ const CONFIG_PATH = path.resolve(__dirname, './generate-filters-config.yaml');
 const ABBREVIATIONS = [
   'IP',
   'ID',
+  'API',
   'CPU',
   'RAM',
   'UUID',
@@ -518,6 +519,9 @@ ${jsx}    )}\n`
       f.valueField ||
       (f.component === 'Autocomplete' ? (isUuid ? 'uuid' : 'url') : 'value');
 
+    if (f.mapTo === false) {
+      return '';
+    }
     if (f.mapTo === true) {
       logic = `        Object.assign(filter, values.${f.name}.value);\n`;
     } else if (typeof f.mapTo === 'object') {
