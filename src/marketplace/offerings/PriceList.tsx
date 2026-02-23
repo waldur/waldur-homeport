@@ -1,15 +1,13 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  marketplacePlanComponentsList,
-  MarketplacePlanComponentsListData,
-  PlanComponent,
-} from 'waldur-js-client';
+import { marketplacePlanComponentsList, PlanComponent } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  PriceListFilter,
+  selectPriceListFilter,
+} from '@waldur/table/generated/PriceListFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -17,21 +15,8 @@ import { useTable } from '@waldur/table/useTable';
 import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';
 
-import { PriceListFilter } from './PriceListFilter';
-
-const filterSelector = createSelector(
-  getFormValues('PriceListFilter'),
-  (filterValues: any) => {
-    const filter: MarketplacePlanComponentsListData['query'] = {};
-    if (filterValues?.offering) {
-      filter.offering_uuid = filterValues.offering.uuid;
-    }
-    return filter;
-  },
-);
-
 export const PriceList = () => {
-  const formFilter = useSelector(filterSelector);
+  const formFilter = useSelector(selectPriceListFilter);
   const filter = useMemo(() => formFilter, [formFilter?.offering_uuid]);
   const props = useTable({
     table: 'MarketplacePriceList',

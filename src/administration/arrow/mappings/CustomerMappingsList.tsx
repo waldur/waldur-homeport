@@ -1,41 +1,25 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   adminArrowCustomerMappingsList,
   ArrowCustomerMapping,
-  AdminArrowCustomerMappingsListData,
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  CustomerMappingsFilter,
+  selectCustomerMappingsFilter,
+} from '@waldur/table/generated/CustomerMappingsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
-
-import { ARROW_FORM_NAMES } from '../constants';
 
 import { CustomerMappingActions } from './CustomerMappingActions';
 import { CustomerMappingCreateButton } from './CustomerMappingCreateButton';
 import { CustomerMappingExpandableRow } from './CustomerMappingExpandableRow';
 import { CustomerMappingsBulkDeleteAction } from './CustomerMappingsBulkDeleteAction';
-import { CustomerMappingsFilter } from './CustomerMappingsFilter';
-
-const filtersSelector = createSelector(
-  getFormValues(ARROW_FORM_NAMES.customerMappingsFilter),
-  (filterValues: any) => {
-    const result: AdminArrowCustomerMappingsListData['query'] = {};
-    if (filterValues?.organization) {
-      result.waldur_customer_uuid = filterValues.organization.uuid;
-    }
-    if (filterValues?.arrow_reference) {
-      result.arrow_reference = filterValues.arrow_reference;
-    }
-    return result;
-  },
-);
 
 const mandatoryFields: Array<keyof ArrowCustomerMapping> = [
   'uuid',
@@ -54,7 +38,7 @@ interface CustomerMappingsListProps {
 export const CustomerMappingsList: FunctionComponent<
   CustomerMappingsListProps
 > = ({ settings }) => {
-  const formFilter = useSelector(filtersSelector);
+  const formFilter = useSelector(selectCustomerMappingsFilter);
 
   const filter = useMemo(
     () => ({
