@@ -110,7 +110,8 @@ export const SettingsDescription = [
         key: 'RESTRICTED_OFFERING_VISIBILITY_MODE',
         description: translate('Controls offering visibility for regular users. \'show_all\': Show all shared offerings (current behavior). \'show_restricted_disabled\': Show all but mark inaccessible as disabled. \'hide_inaccessible\': Hide offerings user cannot access. \'require_membership\': Hide all unless user belongs to an organization/project.'),
         default: 'show_all',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'show_all', label: 'Show all shared offerings' }, { value: 'show_restricted_disabled', label: 'Show all but mark inaccessible as disabled' }, { value: 'hide_inaccessible', label: 'Hide offerings user cannot access' }, { value: 'require_membership', label: 'Hide all unless user belongs to an organization/project' }],
       },
       {
         key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
@@ -174,7 +175,8 @@ export const SettingsDescription = [
         key: 'DISABLED_OFFERING_TYPES',
         description: translate('List of offering types disabled for creation and selection.'),
         default: [],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'Support.OfferingTemplate', label: 'Support' }, { value: 'Marketplace.Booking', label: 'Booking' }, { value: 'Marketplace.Basic', label: 'Basic' }, { value: 'OpenStack.Tenant', label: 'OpenStack Tenant' }, { value: 'OpenStack.Instance', label: 'OpenStack Instance' }, { value: 'OpenStack.Volume', label: 'OpenStack Volume' }, { value: 'Marketplace.Rancher', label: 'Rancher' }, { value: 'VMware.VirtualMachine', label: 'VMware Virtual Machine' }, { value: 'Waldur.RemoteOffering', label: 'Remote Offering' }, { value: 'Marketplace.Script', label: 'Script' }, { value: 'SlurmInvoices.SlurmPackage', label: 'SLURM Package' }, { value: 'Marketplace.Slurm', label: 'Site Agent' }],
       },
       {
         key: 'ENABLE_ORDER_START_DATE',
@@ -236,7 +238,8 @@ export const SettingsDescription = [
         key: 'SCRIPT_RUN_MODE',
         description: translate('Type of jobs deployment. Valid values: "docker" for simple docker deployment, "k8s" for Kubernetes-based one'),
         default: 'docker',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'docker', label: 'Docker' }, { value: 'k8s', label: 'Kubernetes' }],
       },
       {
         key: 'DOCKER_CLIENT',
@@ -317,9 +320,10 @@ export const SettingsDescription = [
       },
       {
         key: 'MAINTENANCE_ANNOUNCEMENT_NOTIFY_SYSTEM',
-        description: translate('How maintenance notifications are delivered. Choices: AdminAnnouncement or BroadcastMessage.'),
+        description: translate('How maintenance notifications are delivered.'),
         default: ['AdminAnnouncement'],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'AdminAnnouncement', label: 'AdminAnnouncement' }, { value: 'BroadcastMessage', label: 'BroadcastMessage' }],
       },
     ],
   },
@@ -357,15 +361,17 @@ export const SettingsDescription = [
     items: [
       {
         key: 'SIDEBAR_STYLE',
-        description: translate('Style of sidebar. Possible values: dark, light, accent.'),
+        description: translate('Style of sidebar.'),
         default: 'dark',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'primary', label: 'Primary' }, { value: 'accent', label: 'Dark primary' }, { value: 'accent-light', label: 'Light primary' }, { value: 'dark', label: 'Dark' }, { value: 'light', label: 'Light' }, { value: 'auto', label: 'Match theme' }],
       },
       {
         key: 'FONT_FAMILY',
-        description: translate('Font family used in the UI. Possible values: Inter, Maven Pro.'),
+        description: translate('Font family used in the UI.'),
         default: 'Inter',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'Inter', label: 'Inter' }, { value: 'Maven Pro', label: 'Maven Pro' }],
       },
       {
         key: 'BRAND_COLOR',
@@ -386,9 +392,10 @@ export const SettingsDescription = [
     items: [
       {
         key: 'LOGIN_PAGE_LAYOUT',
-        description: translate('Login page layout style. Options: split-screen, centered-card, minimal, full-hero, gradient, stacked, right-split, glassmorphism, neumorphism, animated-gradient, video-background, bottom-sheet, tabbed, wizard, stats, news, carousel, logo-watermark, brand-pattern, duotone, diagonal, time-based, seasonal, weather.'),
+        description: translate('Login page layout style.'),
         default: 'split-screen',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'split-screen', label: 'Split-screen' }, { value: 'centered-card', label: 'Centered-card' }, { value: 'minimal', label: 'Minimal' }, { value: 'full-hero', label: 'Full-hero' }, { value: 'gradient', label: 'Gradient' }, { value: 'stacked', label: 'Stacked' }, { value: 'right-split', label: 'Right-split' }, { value: 'glassmorphism', label: 'Glassmorphism' }, { value: 'neumorphism', label: 'Neumorphism' }, { value: 'animated-gradient', label: 'Animated-gradient' }, { value: 'video-background', label: 'Video-background' }, { value: 'bottom-sheet', label: 'Bottom-sheet' }, { value: 'tabbed', label: 'Tabbed' }, { value: 'wizard', label: 'Wizard' }, { value: 'stats', label: 'Stats' }, { value: 'news', label: 'News' }, { value: 'carousel', label: 'Carousel' }, { value: 'logo-watermark', label: 'Logo-watermark' }, { value: 'brand-pattern', label: 'Brand-pattern' }, { value: 'duotone', label: 'Duotone' }, { value: 'diagonal', label: 'Diagonal' }, { value: 'time-based', label: 'Time-based' }, { value: 'seasonal', label: 'Seasonal' }, { value: 'weather', label: 'Weather' }],
       },
       {
         key: 'LOGIN_PAGE_VIDEO_URL',
@@ -510,9 +517,10 @@ export const SettingsDescription = [
       },
       {
         key: 'WALDUR_SUPPORT_ACTIVE_BACKEND_TYPE',
-        description: translate('Type of support backend. Possible values: atlassian, zammad, smax.'),
+        description: translate('Type of support backend.'),
         default: 'atlassian',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'atlassian', label: 'Atlassian' }, { value: 'zammad', label: 'Zammad' }, { value: 'smax', label: 'SMAX' }],
       },
       {
         key: 'WALDUR_SUPPORT_DISPLAY_REQUEST_TYPE',
@@ -742,9 +750,10 @@ export const SettingsDescription = [
       },
       {
         key: 'ZAMMAD_ARTICLE_TYPE',
-        description: translate('Type of a comment. Default is email because it allows support to reply to tickets directly in Zammad<https://docs.zammad.org/en/latest/api/ticket/articles.html#articles/>'),
+        description: translate('Type of a comment.'),
         default: 'email',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'email', label: 'email' }, { value: 'phone', label: 'phone' }, { value: 'web', label: 'web' }, { value: 'note', label: 'note' }, { value: 'sms', label: 'sms' }, { value: 'chat', label: 'chat' }, { value: 'fax', label: 'fax' }, { value: 'twitter status', label: 'twitter status' }, { value: 'twitter direct-message', label: 'twitter direct-message' }, { value: 'facebook feed post', label: 'facebook feed post' }, { value: 'facebook feed comment', label: 'facebook feed comment' }, { value: 'telegram personal-message', label: 'telegram personal-message' }],
       },
       {
         key: 'ZAMMAD_COMMENT_MARKER',
@@ -989,7 +998,8 @@ export const SettingsDescription = [
         key: 'DEFAULT_IDP',
         description: translate('Triggers authentication flow at once.'),
         default: '',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: '', label: 'Not configured' }, { value: 'tara', label: 'TARA' }, { value: 'eduteams', label: 'eduTEAMS' }, { value: 'keycloak', label: 'Keycloak' }],
       },
       {
         key: 'DEACTIVATE_USER_IF_NO_ROLES',
@@ -1042,7 +1052,8 @@ export const SettingsDescription = [
         key: 'INVITATION_ALLOWED_FIELDS',
         description: translate('Fields that can be provided in invitations for email personalization. These are NOT copied to user profile.'),
         default: ['full_name', 'organization', 'job_title'],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'username', label: 'Username' }, { value: 'full_name', label: 'Full name' }, { value: 'email', label: 'Email' }, { value: 'phone_number', label: 'Phone number' }, { value: 'organization', label: 'Organization' }, { value: 'job_title', label: 'Job title' }, { value: 'affiliations', label: 'Affiliations' }, { value: 'gender', label: 'Gender' }, { value: 'personal_title', label: 'Personal title' }, { value: 'birth_date', label: 'Birth date' }, { value: 'place_of_birth', label: 'Place of birth' }, { value: 'country_of_residence', label: 'Country of residence' }, { value: 'nationality', label: 'Nationality' }, { value: 'nationalities', label: 'Nationalities' }, { value: 'organization_country', label: 'Organization country' }, { value: 'organization_type', label: 'Organization type' }, { value: 'organization_registry_code', label: 'Organization registry code' }, { value: 'eduperson_assurance', label: 'Eduperson assurance' }, { value: 'civil_number', label: 'Civil number' }, { value: 'identity_source', label: 'Identity source' }],
       },
     ],
   },
@@ -1051,21 +1062,24 @@ export const SettingsDescription = [
     items: [
       {
         key: 'DEFAULT_OFFERING_USER_ATTRIBUTES',
-        description: translate('Default user attributes exposed to service providers (OfferingUser API) when no explicit config exists. Available options: username, full_name, email, phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, organization_registry_code, eduperson_assurance, civil_number, identity_source.'),
+        description: translate('Default user attributes exposed to service providers (OfferingUser API) when no explicit config exists.'),
         default: ['username', 'full_name', 'email'],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'username', label: 'Username' }, { value: 'full_name', label: 'Full name' }, { value: 'email', label: 'Email' }, { value: 'phone_number', label: 'Phone number' }, { value: 'organization', label: 'Organization' }, { value: 'job_title', label: 'Job title' }, { value: 'affiliations', label: 'Affiliations' }, { value: 'gender', label: 'Gender' }, { value: 'personal_title', label: 'Personal title' }, { value: 'birth_date', label: 'Birth date' }, { value: 'place_of_birth', label: 'Place of birth' }, { value: 'country_of_residence', label: 'Country of residence' }, { value: 'nationality', label: 'Nationality' }, { value: 'nationalities', label: 'Nationalities' }, { value: 'organization_country', label: 'Organization country' }, { value: 'organization_type', label: 'Organization type' }, { value: 'organization_registry_code', label: 'Organization registry code' }, { value: 'eduperson_assurance', label: 'Eduperson assurance' }, { value: 'civil_number', label: 'Civil number' }, { value: 'identity_source', label: 'Identity source' }],
       },
       {
         key: 'ENABLED_USER_PROFILE_ATTRIBUTES',
-        description: translate('List of enabled user profile attributes. Controls IdP sync and UI display. Core attributes (username, email, first_name, last_name, full_name) are always enabled. Available options: phone_number, organization, job_title, affiliations, gender, personal_title, birth_date, place_of_birth, country_of_residence, nationality, nationalities, organization_country, organization_type, organization_registry_code, eduperson_assurance, civil_number, identity_source.'),
+        description: translate('List of enabled user profile attributes. Controls IdP sync and UI display.'),
         default: ['phone_number', 'organization', 'job_title', 'affiliations'],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'username', label: 'Username' }, { value: 'full_name', label: 'Full name' }, { value: 'email', label: 'Email' }, { value: 'phone_number', label: 'Phone number' }, { value: 'organization', label: 'Organization' }, { value: 'job_title', label: 'Job title' }, { value: 'affiliations', label: 'Affiliations' }, { value: 'gender', label: 'Gender' }, { value: 'personal_title', label: 'Personal title' }, { value: 'birth_date', label: 'Birth date' }, { value: 'place_of_birth', label: 'Place of birth' }, { value: 'country_of_residence', label: 'Country of residence' }, { value: 'nationality', label: 'Nationality' }, { value: 'nationalities', label: 'Nationalities' }, { value: 'organization_country', label: 'Organization country' }, { value: 'organization_type', label: 'Organization type' }, { value: 'organization_registry_code', label: 'Organization registry code' }, { value: 'eduperson_assurance', label: 'Eduperson assurance' }, { value: 'civil_number', label: 'Civil number' }, { value: 'identity_source', label: 'Identity source' }],
       },
       {
         key: 'MANDATORY_USER_ATTRIBUTES',
-        description: translate('List of user profile attributes that are mandatory. Users with missing mandatory attributes will have limited API access until their profile is complete. Available: phone_number, organization, job_title, affiliations, civil_number, first_name, last_name, email, etc.'),
+        description: translate('List of user profile attributes that are mandatory.'),
         default: [],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'username', label: 'Username' }, { value: 'full_name', label: 'Full name' }, { value: 'email', label: 'Email' }, { value: 'phone_number', label: 'Phone number' }, { value: 'organization', label: 'Organization' }, { value: 'job_title', label: 'Job title' }, { value: 'affiliations', label: 'Affiliations' }, { value: 'gender', label: 'Gender' }, { value: 'personal_title', label: 'Personal title' }, { value: 'birth_date', label: 'Birth date' }, { value: 'place_of_birth', label: 'Place of birth' }, { value: 'country_of_residence', label: 'Country of residence' }, { value: 'nationality', label: 'Nationality' }, { value: 'nationalities', label: 'Nationalities' }, { value: 'organization_country', label: 'Organization country' }, { value: 'organization_type', label: 'Organization type' }, { value: 'organization_registry_code', label: 'Organization registry code' }, { value: 'eduperson_assurance', label: 'Eduperson assurance' }, { value: 'civil_number', label: 'Civil number' }, { value: 'identity_source', label: 'Identity source' }],
       },
       {
         key: 'ENFORCE_MANDATORY_USER_ATTRIBUTES',
@@ -1238,9 +1252,10 @@ export const SettingsDescription = [
     items: [
       {
         key: 'ONBOARDING_VALIDATION_METHODS',
-        description: translate('List of automatic validation methods available for this portal (e.g., ariregister, wirtschaftscompass, bolagsverket). Must match backend method names.'),
+        description: translate('List of automatic validation methods available for this portal.'),
         default: [],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'ariregister', label: 'ariregister' }, { value: 'wirtschaftscompass', label: 'wirtschaftscompass' }, { value: 'bolagsverket', label: 'bolagsverket' }],
       },
       {
         key: 'ONBOARDING_VERIFICATION_EXPIRY_HOURS',
@@ -1602,15 +1617,17 @@ export const SettingsDescription = [
       },
       {
         key: 'FEDERATED_IDENTITY_SYNC_ALLOWED_ATTRIBUTES',
-        description: translate('User attributes settable via Identity Bridge. Must be a subset of WRITABLE_USER_FIELDS.'),
+        description: translate('User attributes settable via Identity Bridge.'),
         default: ['first_name', 'last_name', 'email', 'organization', 'affiliations'],
-        type: 'list_field',
+        type: 'multiple_choice_field',
+        options: [{ value: 'username', label: 'Username' }, { value: 'full_name', label: 'Full name' }, { value: 'email', label: 'Email' }, { value: 'phone_number', label: 'Phone number' }, { value: 'organization', label: 'Organization' }, { value: 'job_title', label: 'Job title' }, { value: 'affiliations', label: 'Affiliations' }, { value: 'gender', label: 'Gender' }, { value: 'personal_title', label: 'Personal title' }, { value: 'birth_date', label: 'Birth date' }, { value: 'place_of_birth', label: 'Place of birth' }, { value: 'country_of_residence', label: 'Country of residence' }, { value: 'nationality', label: 'Nationality' }, { value: 'nationalities', label: 'Nationalities' }, { value: 'organization_country', label: 'Organization country' }, { value: 'organization_type', label: 'Organization type' }, { value: 'organization_registry_code', label: 'Organization registry code' }, { value: 'eduperson_assurance', label: 'Eduperson assurance' }, { value: 'civil_number', label: 'Civil number' }, { value: 'identity_source', label: 'Identity source' }],
       },
       {
         key: 'FEDERATED_IDENTITY_DEACTIVATION_POLICY',
-        description: translate('When to deactivate a federated user: \'all_isds_removed\' (only when removed from all ISDs) or \'any_isd_removed\' (on first ISD removal, backward compatible).'),
+        description: translate('When to deactivate a federated user.'),
         default: 'any_isd_removed',
-        type: 'string',
+        type: 'choice_field',
+        options: [{ value: 'all_isds_removed', label: 'All ISDs removed' }, { value: 'any_isd_removed', label: 'Any ISD removal' }],
       },
     ],
   },
