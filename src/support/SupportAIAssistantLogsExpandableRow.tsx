@@ -1,13 +1,19 @@
+import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { FunctionComponent, memo, useMemo, useState } from 'react';
+import { useMediaQuery } from 'react-responsive';
 import { chatMessagesList, Message, ThreadSession } from 'waldur-js-client';
 
 import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
 import { Badge } from '@waldur/core/Badge';
+import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDateTime } from '@waldur/core/dateUtils';
+import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { getSeverityBadgeVariant } from '@waldur/support/SupportAIAssistantLogsList';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 
 interface MessageWithVersions {
@@ -18,6 +24,8 @@ interface MessageWithVersions {
 const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
   messageGroup,
 }) => {
+  const isSm = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.sm });
+
   // Start with the latest version selected
   const lastIndex = messageGroup.versions.length - 1;
   const [selectedVersionIndex, setSelectedVersionIndex] = useState(lastIndex);
@@ -29,6 +37,12 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
   const isAssistant = selectedMessage.role === 'assistant';
   const isViewingHistory = clampedIndex < messageGroup.versions.length - 1;
   const hasVersions = messageGroup.versions.length > 1;
+  const hasHistoricalFlag = useMemo(
+    () =>
+      !selectedMessage.is_flagged &&
+      messageGroup.versions.slice(0, -1).some((v) => v.is_flagged),
+    [selectedMessage.is_flagged, messageGroup.versions],
+  );
 
   return (
     <div>
@@ -37,34 +51,71 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
           {isAssistant ? translate('Assistant') : translate('User')}
         </Badge>
         <span className="text-muted small">
-          {formatDateTime(selectedMessage.created)}
+          {(isSm ? formatShortDateTime : formatDateTime)(
+            selectedMessage.created,
+          )}
         </span>
+        {selectedMessage.is_flagged && (
+          <Badge
+            variant={getSeverityBadgeVariant(
+              selectedMessage.injection_severity,
+            )}
+            size="sm"
+            leftIcon={<ShieldWarningIcon weight="bold" />}
+            outline
+          >
+            {selectedMessage.injection_severity}
+          </Badge>
+        )}
+        {hasHistoricalFlag && (
+          <Tip
+            id={`historical-flag-${messageGroup.current.uuid}`}
+            label={translate(
+              'A previous version of this message was flagged for prompt injection',
+            )}
+          >
+            <Badge
+              variant="secondary"
+              size="sm"
+              leftIcon={<ShieldWarningIcon weight="bold" />}
+              outline
+            >
+              {translate('Flagged in history')}
+            </Badge>
+          </Tip>
+        )}
         {isViewingHistory && (
-          <Badge variant="warning" size="sm" light>
+          <Badge variant="warning" size="sm" outline>
             {translate('Past version')}
           </Badge>
         )}
-        {hasVersions && (
-          <VersionSelector
-            displayLabel={translate('Version {current} / {total}', {
-              current: clampedIndex + 1,
-              total: messageGroup.versions.length,
-            })}
-            isViewingHistory={isViewingHistory}
-            canGoPrevious={clampedIndex > 0}
-            canGoNext={clampedIndex < messageGroup.versions.length - 1}
-            onPrevious={() => setSelectedVersionIndex((prev) => prev - 1)}
-            onNext={() => setSelectedVersionIndex((prev) => prev + 1)}
+        <div className="d-flex align-items-center gap-2 ms-auto">
+          {hasVersions && (
+            <VersionSelector
+              displayLabel={translate('Version {current} / {total}', {
+                current: clampedIndex + 1,
+                total: messageGroup.versions.length,
+              })}
+              isViewingHistory={isViewingHistory}
+              canGoPrevious={clampedIndex > 0}
+              canGoNext={clampedIndex < messageGroup.versions.length - 1}
+              onPrevious={() => setSelectedVersionIndex((prev) => prev - 1)}
+              onNext={() => setSelectedVersionIndex((prev) => prev + 1)}
+            />
+          )}
+          <CopyToClipboardButton
+            value={selectedMessage.content}
+            verbose={translate('Message')}
+            onlyButton
+            size={14}
           />
-        )}
-        <CopyToClipboardButton
-          value={selectedMessage.content}
-          verbose={translate('Message')}
-          onlyButton
-          size={14}
-        />
+        </div>
       </div>
-      <div className="p-3 rounded chat-log-bubble">
+      <div
+        className={classNames('p-3 rounded chat-log-bubble', {
+          'border-start border-3 border-danger': selectedMessage.is_flagged,
+        })}
+      >
         <span style={{ whiteSpace: 'pre-wrap' }}>
           {selectedMessage.content.trim()}
         </span>

@@ -8,9 +8,17 @@ import { translate } from '@waldur/i18n';
 import { UserAutocomplete } from '@waldur/issues/feedback/UserAutocomplete';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-const ARCHIVED_OPTIONS = [
+const YES_NO_OPTIONS = [
   { value: true, label: translate('Yes') },
   { value: false, label: translate('No') },
+];
+
+const SEVERITY_OPTIONS = [
+  { value: 'critical', label: translate('Critical') },
+  { value: 'high', label: translate('High') },
+  { value: 'medium', label: translate('Medium') },
+  { value: 'low', label: translate('Low') },
+  { value: 'none', label: translate('None') },
 ];
 
 const PureAIAssistantLogsFilter: FunctionComponent = () => (
@@ -47,6 +55,32 @@ const PureAIAssistantLogsFilter: FunctionComponent = () => (
       <UserAutocomplete />
     </TableFilterItem>
     <TableFilterItem
+      title={translate('Flagged messages')}
+      name="is_flagged"
+      badgeValue={(value) => value?.label}
+    >
+      <Field
+        name="is_flagged"
+        component={SelectField}
+        options={YES_NO_OPTIONS}
+        isClearable
+        {...REACT_SELECT_TABLE_FILTER}
+      />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Max severity')}
+      name="max_severity"
+      badgeValue={(value) => value?.label}
+    >
+      <Field
+        name="max_severity"
+        component={SelectField}
+        options={SEVERITY_OPTIONS}
+        isClearable
+        {...REACT_SELECT_TABLE_FILTER}
+      />
+    </TableFilterItem>
+    <TableFilterItem
       title={translate('Archived')}
       name="is_archived"
       badgeValue={(value) => value?.label}
@@ -54,15 +88,9 @@ const PureAIAssistantLogsFilter: FunctionComponent = () => (
       <Field
         name="is_archived"
         component={SelectField}
-        options={ARCHIVED_OPTIONS}
+        options={YES_NO_OPTIONS}
         isClearable
         {...REACT_SELECT_TABLE_FILTER}
-        styles={{
-          menuList: (baseStyles) => ({
-            ...baseStyles,
-            maxHeight: '120px',
-          }),
-        }}
       />
     </TableFilterItem>
   </>
