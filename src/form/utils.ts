@@ -2,7 +2,10 @@ import { DateTime } from 'luxon';
 
 import { PeriodOption } from '@waldur/form/types';
 
-export const makeLastTwelveMonthsFilterPeriods = (): PeriodOption[] => {
+export const makeLastTwelveMonthsFilterPeriods = (): {
+  label: string;
+  value: PeriodOption;
+}[] => {
   let date = DateTime.now().startOf('month');
   const choices = [];
   for (let i = 0; i < 12; i++) {

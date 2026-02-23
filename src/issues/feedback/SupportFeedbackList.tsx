@@ -1,28 +1,22 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  Feedback,
-  supportFeedbacksList,
-  SupportFeedbacksListData,
-} from 'waldur-js-client';
+import { Feedback, supportFeedbacksList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
-import {
-  SUPPORT_FEEDBACK_LIST,
-  SUPPORT_FEEDBACK_LIST_FILTER_FORM,
-} from '@waldur/issues/feedback/constants';
+import { SUPPORT_FEEDBACK_LIST } from '@waldur/issues/feedback/constants';
 import { IssueField } from '@waldur/issues/feedback/IssueField';
 import { SupportFeedbackListExpandableRow } from '@waldur/issues/feedback/SupportFeedbackListExpandableRow';
-import { getStartAndEndDatesOfMonth } from '@waldur/issues/utils';
+import { makeLastTwelveMonthsFilterPeriodsAsCreatedRange } from '@waldur/issues/utils';
 import { createFetcher } from '@waldur/table/api';
+import {
+  selectSupportFeedbacksFilter,
+  SupportFeedbacksFilter,
+} from '@waldur/table/generated/SupportFeedbacksFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { SupportFeedbackListFilter } from './SupportFeedbackListFilter';
 import { feedbackOptions } from './utils';
 
 interface SupportFeedbackListProps {
@@ -32,7 +26,7 @@ interface SupportFeedbackListProps {
 export const SupportFeedbackList: FC<SupportFeedbackListProps> = ({
   standalone = false,
 }) => {
-  const filter = useSelector(mapStateToProps);
+  const filter = useSelector(selectSupportFeedbacksFilter);
   const props = useTable({
     table: SUPPORT_FEEDBACK_LIST,
     fetchData: createFetcher(supportFeedbacksList),
@@ -79,32 +73,13 @@ export const SupportFeedbackList: FC<SupportFeedbackListProps> = ({
       hasQuery={true}
       enableExport={true}
       showPageSizeSelector={true}
-      filters={<SupportFeedbackListFilter />}
+      filters={
+        <SupportFeedbacksFilter
+          evaluationOptions={feedbackOptions()}
+          periodOptions={makeLastTwelveMonthsFilterPeriodsAsCreatedRange()}
+        />
+      }
       standalone={standalone}
     />
   );
 };
-
-const mapStateToProps = createSelector(
-  getFormValues(SUPPORT_FEEDBACK_LIST_FILTER_FORM),
-  (filterValues: any) => {
-    const filter: SupportFeedbacksListData['query'] = {};
-    if (!filterValues) {
-      return {};
-    }
-    if (filterValues.evaluation) {
-      filter.evaluation = filterValues.evaluation.value;
-    }
-    if (filterValues.period) {
-      const { start, end } = getStartAndEndDatesOfMonth(
-        filterValues.period.value,
-      );
-      filter.created_after = start;
-      filter.created_before = end;
-    }
-    if (filterValues.user) {
-      filter.user = filterValues.user.url;
-    }
-    return filter;
-  },
-);

@@ -4,6 +4,7 @@ import { Issue } from 'waldur-js-client';
 
 import { getUUID } from '@waldur/core/utils';
 import { PeriodOption } from '@waldur/form/types';
+import { makeLastTwelveMonthsFilterPeriods } from '@waldur/form/utils';
 import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 
@@ -14,6 +15,20 @@ export const getStartAndEndDatesOfMonth = (period: PeriodOption) => {
     start: dt.startOf('month').toISODate(),
     end: dt.endOf('month').toISODate(),
   };
+};
+
+export const makeLastTwelveMonthsFilterPeriodsAsCreatedRange = () => {
+  const choices = makeLastTwelveMonthsFilterPeriods();
+  return choices.map((choice) => {
+    const { start, end } = getStartAndEndDatesOfMonth(choice.value);
+    return {
+      label: choice.label,
+      value: {
+        created_after: start,
+        created_before: end,
+      },
+    };
+  });
 };
 
 export const useIssueBreadcrumbItems = (issue: Issue): IBreadcrumbItem[] => {

@@ -11,7 +11,7 @@ import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter'
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 interface SupportInvoiceItemsFilterProps {
-  accountingPeriods: PeriodOption[];
+  accountingPeriods: { label: string; value: PeriodOption }[];
 }
 
 const PureSupportInvoiceItemsFilter: FunctionComponent<

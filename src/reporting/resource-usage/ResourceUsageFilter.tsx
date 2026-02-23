@@ -16,7 +16,7 @@ import { TableFilterItem } from '@waldur/table/TableFilterItem';
 import { Customer } from '@waldur/workspace/types';
 
 interface ResourceUsageFilterProps {
-  options: PeriodOption[];
+  options: { label: string; value: PeriodOption }[];
   customer: Customer;
 }
 
