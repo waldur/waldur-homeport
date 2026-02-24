@@ -1,4 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import { marketplaceSoftwarePackagesList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -7,7 +8,10 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { PublicOfferingSoftwareCatalogFilter } from './PublicOfferingSoftwareCatalogFilter';
+import {
+  PublicOfferingSoftwareCatalogFilter,
+  selectSoftwareCatalogFilter,
+} from './PublicOfferingSoftwareCatalogFilter';
 import { SoftwarePackageExpandableRow } from './SoftwarePackageExpandableRow';
 
 interface PublicOfferingSoftwareCatalogTableProps {
@@ -55,6 +59,7 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
 
     return parts.length > 0 ? parts.join(' | ') : null;
   };
+  const formFilter = useSelector(selectSoftwareCatalogFilter);
   const filter = useMemo(
     () => ({
       offering_uuid: offering.uuid,
@@ -66,8 +71,9 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
           (sc) => sc.enabled_cpu_microarchitectures || [],
         ),
       }),
+      ...formFilter,
     }),
-    [offering.uuid, offering.software_catalogs],
+    [offering.uuid, offering.software_catalogs, formFilter],
   );
 
   const tableProps = useTable({

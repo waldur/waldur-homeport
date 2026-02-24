@@ -7,6 +7,7 @@ import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { useUser } from '@waldur/workspace/hooks';
 
+import { UserPermissionRequestDeleteButton } from './UserPermissionRequestDeleteButton';
 import { UserPermissionRequestReviewButton } from './UserPermissionRequestReviewButton';
 
 interface UserPermissionRequestRowActionsProps {
@@ -34,20 +35,24 @@ export const UserPermissionRequestRowActions: FunctionComponent<
 
   const actionable = row.state === 'pending' && canManageRequest;
 
+  const actions = actionable
+    ? [
+        UserPermissionRequestReviewButton,
+        UserPermissionRequestApproveButton,
+        UserPermissionRequestRejectButton,
+      ]
+    : [UserPermissionRequestReviewButton];
+
+  if (user.is_staff) {
+    actions.push(UserPermissionRequestDeleteButton);
+  }
+
   return (
     <ActionsDropdown
       row={row}
       refetch={refetch}
-      data={{ readOnly: !actionable }}
-      actions={
-        actionable
-          ? [
-              UserPermissionRequestReviewButton,
-              UserPermissionRequestApproveButton,
-              UserPermissionRequestRejectButton,
-            ]
-          : [UserPermissionRequestReviewButton]
-      }
+      data={{ readOnly: !actionable && !user.is_staff }}
+      actions={actions}
     />
   );
 };
