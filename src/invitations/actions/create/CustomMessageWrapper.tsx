@@ -43,7 +43,7 @@ export const CustomMessageWrapper = () => {
       <Field
         name="extra_invitation_text"
         placeholder={translate('Enter custom message...')}
-        validate={validateMaxLength(250)}
+        validate={validateMaxLength(2000)}
         render={({ input, meta }) => (
           <FormGroup
             label={translate('Custom message')}
