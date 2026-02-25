@@ -57,6 +57,71 @@ overrides:
       extraQuery:
         customer: 'props.customerUuid'
 
+  marketplace_resources_list:
+    componentName: ArrowResourcesFilter
+    output: './src/table/generated/ArrowResourcesFilter.tsx'
+    filters:
+      - customer_uuid
+      - project_uuid
+    customer_uuid:
+      label: Organization
+      name: organization
+    project_uuid:
+      label: Project
+      name: project
+      extraQuery:
+        customer: 'props.organizationUuid'
+
+  admin_arrow_consumption_records_list:
+    componentName: ConsumptionRecordsFilter
+    output: './src/table/generated/ConsumptionRecordsFilter.tsx'
+    filters:
+      - customer_uuid
+      - is_finalized
+    customer_uuid:
+      label: Organization
+      name: organization
+    is_finalized:
+      label: Status
+      enumOverrides:
+        true: Finalized
+        false: Pending
+
+  openstack_images_list:
+    componentName: TenantImagesFilter
+    output: './src/table/generated/TenantImagesFilter.tsx'
+    filters:
+      - show_duplicate_names
+    show_duplicate_names:
+      label: Show duplicate names
+      component: AwesomeCheckboxField
+      badgeLabels:
+        true: Yes
+        false: No
+
+  invoice_items_list:
+    componentName: SupportInvoiceItemsFilter
+    output: './src/table/generated/SupportInvoiceItemsFilter.tsx'
+    filters:
+      - customer_uuid
+      - accounting_period
+      - project_uuid
+      - offering_uuid
+    customer_uuid:
+      label: Organization
+      name: organization
+    accounting_period:
+      label: Period
+      options: props.accountingPeriods
+      mapTo: true
+    project_uuid:
+      label: Project
+      name: project
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_provider_offerings_list
+
   email_logs_list:
     componentName: SupportEmailLogsFilter
     filters:
@@ -265,6 +330,26 @@ overrides:
       - is_archived
     user:
       searchParam: full_name
+
+  events_list:
+    componentName: SupportEventsFilter
+    output: './src/table/generated/SupportEventsFilter.tsx'
+    filters:
+      - customer_uuid
+      - project_uuid
+      - user_uuid
+    customer_uuid:
+      label: Organization
+      name: organization
+    project_uuid:
+      label: Project
+      name: project
+    user_uuid:
+      label: User
+      name: user
+      searchParam: full_name
+      extraQuery:
+        o: ['full_name']
 
   system_logs_list:
     componentName: SupportSystemLogsFilter

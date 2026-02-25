@@ -4,17 +4,17 @@ import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
-  InvoicesItemsRetrieveData,
+  Customer,
+  InvoiceItemsListData,
   Project,
-  PublicOfferingDetails,
-  ServiceProvider,
-  marketplacePublicOfferingsList,
-  marketplaceServiceProvidersList,
+  ProviderOfferingDetails,
+  customersList,
+  marketplaceProviderOfferingsList,
   projectsList,
 } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import {
+  Select,
   AsyncPaginate,
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
@@ -22,36 +22,48 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureInvoicesItemsFilter: FunctionComponent<
-  InvoicesItemsFilterProps
+export const PureSupportInvoiceItemsFilter: FunctionComponent<
+  SupportInvoiceItemsFilterProps
 > = (props) => (
   <>
     <TableFilterItem
-      title={translate('Service provider')}
-      name="provider"
-      getValueLabel={(value: ServiceProvider) => value?.customer_name}
+      title={translate('Organization')}
+      name="organization"
+      getValueLabel={(value: Customer) => value?.name}
     >
       <Field
-        name="provider"
+        name="organization"
         component={(fieldProps) => (
           <AsyncPaginate
-            placeholder={translate('Service provider')}
-            loadOptions={createSelectFetcher(
-              marketplaceServiceProvidersList,
-              'customer_keyword',
-            )}
+            placeholder={translate('Organization')}
+            loadOptions={createSelectFetcher(customersList, 'query')}
             defaultOptions
-            getOptionValue={(option: ServiceProvider) =>
-              String(option.uuid || '')
-            }
-            getOptionLabel={(option: ServiceProvider) =>
-              String(option.customer_name || '')
-            }
+            getOptionValue={(option: Customer) => String(option.uuid || '')}
+            getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
             className="metronic-select-container"
+          />
+        )}
+      />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Period')}
+      name="accounting_period"
+      getValueLabel={(value: any) => value?.label}
+    >
+      <Field
+        name="accounting_period"
+        component={(fieldProps) => (
+          <Select
+            placeholder={translate('Period')}
+            options={props.accountingPeriods}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
           />
         )}
       />
@@ -66,9 +78,7 @@ export const PureInvoicesItemsFilter: FunctionComponent<
         component={(fieldProps) => (
           <AsyncPaginate
             placeholder={translate('Project')}
-            loadOptions={createSelectFetcher(projectsList, 'query', {
-              customer: props.customerUuid,
-            })}
+            loadOptions={createSelectFetcher(projectsList, 'query')}
             defaultOptions
             getOptionValue={(option: Project) => String(option.uuid || '')}
             getOptionLabel={(option: Project) => String(option.name || '')}
@@ -84,7 +94,7 @@ export const PureInvoicesItemsFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Offering')}
       name="offering"
-      getValueLabel={(value: PublicOfferingDetails) => value?.name}
+      getValueLabel={(value: ProviderOfferingDetails) => value?.name}
     >
       <Field
         name="offering"
@@ -92,15 +102,14 @@ export const PureInvoicesItemsFilter: FunctionComponent<
           <AsyncPaginate
             placeholder={translate('Offering')}
             loadOptions={createSelectFetcher(
-              marketplacePublicOfferingsList,
+              marketplaceProviderOfferingsList,
               'query',
-              { state: ['Active'] },
             )}
             defaultOptions
-            getOptionValue={(option: PublicOfferingDetails) =>
+            getOptionValue={(option: ProviderOfferingDetails) =>
               String(option.uuid || '')
             }
-            getOptionLabel={(option: PublicOfferingDetails) =>
+            getOptionLabel={(option: ProviderOfferingDetails) =>
               String(option.name || '')
             }
             value={fieldProps.input.value}
@@ -112,61 +121,46 @@ export const PureInvoicesItemsFilter: FunctionComponent<
         )}
       />
     </TableFilterItem>
-    <TableFilterItem
-      title={translate('Conceal compensation items')}
-      name="conceal_compensation_items"
-      badgeValue={(value) =>
-        value ? translate('Conceal compensation items') : translate('All')
-      }
-      ellipsis={false}
-    >
-      <Field
-        name="conceal_compensation_items"
-        component={AwesomeCheckboxField}
-        label={translate('Conceal compensation items')}
-        parse={(v) => v || undefined}
-      />
-    </TableFilterItem>
   </>
 );
 
-export const InvoicesItemsFilterFormId = 'InvoicesItemsFilter';
+export const SupportInvoiceItemsFilterFormId = 'SupportInvoiceItemsFilter';
 
-interface InvoicesItemsFilterProps {
-  customerUuid?: any;
+interface SupportInvoiceItemsFilterProps {
+  accountingPeriods?: any[];
 }
 
-interface InvoicesItemsFilterFormData {
-  provider: ServiceProvider;
+interface SupportInvoiceItemsFilterFormData {
+  organization: Customer;
+  accounting_period: any;
   project: Project;
-  offering: PublicOfferingDetails;
-  conceal_compensation_items: boolean;
+  offering: ProviderOfferingDetails;
 }
 
-export const InvoicesItemsFilter = reduxForm<
-  InvoicesItemsFilterFormData,
-  InvoicesItemsFilterProps
+export const SupportInvoiceItemsFilter = reduxForm<
+  SupportInvoiceItemsFilterFormData,
+  SupportInvoiceItemsFilterProps
 >({
-  form: InvoicesItemsFilterFormId,
+  form: SupportInvoiceItemsFilterFormId,
   destroyOnUnmount: false,
-})(PureInvoicesItemsFilter);
+})(PureSupportInvoiceItemsFilter);
 
-export const selectInvoicesItemsFilter = createSelector(
-  getFormValues(InvoicesItemsFilterFormId),
-  (values: InvoicesItemsFilterFormData | undefined) => {
-    const filter: InvoicesItemsRetrieveData['query'] = {};
+export const selectSupportInvoiceItemsFilter = createSelector(
+  getFormValues(SupportInvoiceItemsFilterFormId),
+  (values: SupportInvoiceItemsFilterFormData | undefined) => {
+    const filter: InvoiceItemsListData['query'] = {};
     if (values) {
-      if (values.provider) {
-        filter.provider_uuid = values.provider.uuid;
+      if (values.organization) {
+        filter.customer_uuid = values.organization.uuid;
+      }
+      if (values.accounting_period) {
+        Object.assign(filter, values.accounting_period.value);
       }
       if (values.project) {
         filter.project_uuid = values.project.uuid;
       }
       if (values.offering) {
         filter.offering_uuid = values.offering.uuid;
-      }
-      if (values.conceal_compensation_items) {
-        filter.conceal_compensation_items = values.conceal_compensation_items;
       }
     }
     return filter;

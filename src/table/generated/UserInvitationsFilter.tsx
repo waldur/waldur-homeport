@@ -91,9 +91,7 @@ export interface ScopeTypeChoicesOption {
   value: string;
 }
 
-export const PureUserInvitationsFilter: FunctionComponent<
-  UserInvitationsFilterProps
-> = (props) => (
+export const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -135,13 +133,9 @@ export const PureUserInvitationsFilter: FunctionComponent<
             placeholder={translate('Role')}
             loadOptions={createSelectFetcher(rolesList, 'name')}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: RoleDetails) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: RoleDetails) => String(option.description || ''))
+            getOptionValue={(option: RoleDetails) => String(option.uuid || '')}
+            getOptionLabel={(option: RoleDetails) =>
+              String(option.description || '')
             }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
@@ -164,14 +158,8 @@ export const PureUserInvitationsFilter: FunctionComponent<
             placeholder={translate('Organization')}
             loadOptions={createSelectFetcher(customersList, 'query')}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: Customer) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: Customer) => String(option.name || ''))
-            }
+            getOptionValue={(option: Customer) => String(option.uuid || '')}
+            getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -209,11 +197,6 @@ export const PureUserInvitationsFilter: FunctionComponent<
 
 export const UserInvitationsFilterFormId = 'UserInvitationsFilter';
 
-interface UserInvitationsFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface UserInvitationsFilterFormData {
   state: InvitationStateChoicesOption[];
   role: RoleDetails;
@@ -223,7 +206,7 @@ interface UserInvitationsFilterFormData {
 
 export const UserInvitationsFilter = reduxForm<
   UserInvitationsFilterFormData,
-  UserInvitationsFilterProps
+  {}
 >({
   form: UserInvitationsFilterFormId,
   destroyOnUnmount: false,

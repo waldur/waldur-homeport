@@ -19,9 +19,7 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PurePlanUsageFilter: FunctionComponent<PlanUsageFilterProps> = (
-  props,
-) => (
+export const PurePlanUsageFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Service provider')}
@@ -38,13 +36,11 @@ export const PurePlanUsageFilter: FunctionComponent<PlanUsageFilterProps> = (
               'customer_keyword',
             )}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: ServiceProvider) => String(option.customer_uuid || ''))
+            getOptionValue={(option: ServiceProvider) =>
+              String(option.customer_uuid || '')
             }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: ServiceProvider) => String(option.customer_name || ''))
+            getOptionLabel={(option: ServiceProvider) =>
+              String(option.customer_name || '')
             }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
@@ -70,13 +66,11 @@ export const PurePlanUsageFilter: FunctionComponent<PlanUsageFilterProps> = (
               'name',
             )}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: ProviderOfferingDetails) => String(option.uuid || ''))
+            getOptionValue={(option: ProviderOfferingDetails) =>
+              String(option.uuid || '')
             }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: ProviderOfferingDetails) => String(option.name || ''))
+            getOptionLabel={(option: ProviderOfferingDetails) =>
+              String(option.name || '')
             }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
@@ -92,20 +86,12 @@ export const PurePlanUsageFilter: FunctionComponent<PlanUsageFilterProps> = (
 
 export const PlanUsageFilterFormId = 'PlanUsageFilter';
 
-interface PlanUsageFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface PlanUsageFilterFormData {
   provider: ServiceProvider;
   offering: ProviderOfferingDetails;
 }
 
-export const PlanUsageFilter = reduxForm<
-  PlanUsageFilterFormData,
-  PlanUsageFilterProps
->({
+export const PlanUsageFilter = reduxForm<PlanUsageFilterFormData, {}>({
   form: PlanUsageFilterFormId,
   destroyOnUnmount: false,
 })(PurePlanUsageFilter);

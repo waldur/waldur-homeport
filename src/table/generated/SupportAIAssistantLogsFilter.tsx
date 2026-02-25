@@ -49,9 +49,7 @@ export interface InjectionSeverityEnumChoicesOption {
   value: InjectionSeverityEnum;
 }
 
-export const PureSupportAIAssistantLogsFilter: FunctionComponent<
-  SupportAIAssistantLogsFilterProps
-> = (props) => (
+export const PureSupportAIAssistantLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Created')} name="created">
       <Field
@@ -79,14 +77,8 @@ export const PureSupportAIAssistantLogsFilter: FunctionComponent<
             placeholder={translate('User')}
             loadOptions={createSelectFetcher(usersList, 'full_name')}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: User) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: User) => String(option.full_name || ''))
-            }
+            getOptionValue={(option: User) => String(option.uuid || '')}
+            getOptionLabel={(option: User) => String(option.full_name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -159,11 +151,6 @@ export const PureSupportAIAssistantLogsFilter: FunctionComponent<
 export const SupportAIAssistantLogsFilterFormId =
   'SupportAIAssistantLogsFilter';
 
-interface SupportAIAssistantLogsFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface SupportAIAssistantLogsFilterFormData {
   created: string;
   modified: string;
@@ -175,7 +162,7 @@ interface SupportAIAssistantLogsFilterFormData {
 
 export const SupportAIAssistantLogsFilter = reduxForm<
   SupportAIAssistantLogsFilterFormData,
-  SupportAIAssistantLogsFilterProps
+  {}
 >({
   form: SupportAIAssistantLogsFilterFormId,
   destroyOnUnmount: false,

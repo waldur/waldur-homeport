@@ -440,8 +440,8 @@ class Generator {
             placeholder={${tPlace}}
             loadOptions={createSelectFetcher(${f.loadOptions}, '${f.searchParam || 'name'}'${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
             defaultOptions
-            getOptionValue={props.getOptionValue || ((option${vType}) => String(option.${f.valueField || 'url'} || ''))}
-            getOptionLabel={props.getOptionLabel || ((option${vType}) => String(option.${f.labelField || 'name'} || ''))}
+            getOptionValue={(option${vType}) => String(option.${f.valueField || 'url'} || '')}
+            getOptionLabel={(option${vType}) => String(option.${f.labelField || 'name'} || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             ${commonSelectProps}
@@ -589,9 +589,9 @@ ${jsx}    )}\n`
           })
           .join('\n');
 
+        const pFields = new Set();
         let propsInterface = '';
         if (usesProps) {
-          const pFields = new Set();
           filters.forEach((f) => {
             if (f.optionsPlaceholder?.startsWith('props.'))
               pFields.add(`  ${f.optionsPlaceholder.split('.')[1]}?: any[];`);
@@ -625,16 +625,14 @@ ${jsx}    )}\n`
             ) {
               pFields.add(`  ${f.isHidden.split('.')[1]}?: boolean;`);
             }
-            if (f.component === 'Autocomplete') {
-              pFields.add(`  getOptionLabel?: (option: any) => string;`);
-              pFields.add(`  getOptionValue?: (option: any) => string;`);
-            }
           });
           if (pFields.size)
             propsInterface = `interface ${compName}Props {\n${Array.from(pFields).sort().join('\n')}\n}\n\n`;
         }
 
-        return `export const Pure${compName}: FunctionComponent<${usesProps ? `${compName}Props` : '{}'}> = (${usesProps ? 'props' : '_props'}) => (
+        const propsInterfaceName = pFields.size ? `${compName}Props` : '{}';
+
+        return `export const Pure${compName}: FunctionComponent<${propsInterfaceName}> = (${pFields.size ? 'props' : ''}) => (
   <>
 ${filters.map((f) => Generator.field(f, enumRegistry)).join('')}  </>
 );
@@ -645,7 +643,7 @@ ${propsInterface}interface ${compName}FormData {
 ${interfaceFields}
 }
 
-export const ${compName} = reduxForm<${compName}FormData, ${usesProps ? `${compName}Props` : '{}'}>({
+export const ${compName} = reduxForm<${compName}FormData, ${propsInterfaceName}>({
   form: ${compName}FormId,
   destroyOnUnmount: false,
 })(Pure${compName});

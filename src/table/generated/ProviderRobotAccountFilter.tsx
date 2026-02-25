@@ -39,14 +39,8 @@ export const PureProviderRobotAccountFilter: FunctionComponent<
               { uuid: props.provider.uuid },
             )}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: NameUuid) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: NameUuid) => String(option.name || ''))
-            }
+            getOptionValue={(option: NameUuid) => String(option.uuid || '')}
+            getOptionLabel={(option: NameUuid) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -73,14 +67,8 @@ export const PureProviderRobotAccountFilter: FunctionComponent<
               { uuid: props.provider.uuid },
             )}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: NameUuid) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: NameUuid) => String(option.name || ''))
-            }
+            getOptionValue={(option: NameUuid) => String(option.uuid || '')}
+            getOptionLabel={(option: NameUuid) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -96,8 +84,6 @@ export const PureProviderRobotAccountFilter: FunctionComponent<
 export const ProviderRobotAccountFilterFormId = 'ProviderRobotAccountFilter';
 
 interface ProviderRobotAccountFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
   provider?: any;
 }
 

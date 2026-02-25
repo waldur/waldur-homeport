@@ -8,20 +8,13 @@ import { Tip } from '@waldur/core/Tooltip';
 import { getNameFieldValidators } from '@waldur/core/validators';
 import { FormGroup, StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
-import {
-  orderFormAttributesSelector,
-  orderFormSelector,
-} from '@waldur/marketplace/deploy/selectors';
+import { orderFormAttributesSelector } from '@waldur/marketplace/deploy/selectors';
 import { showErrorResponse } from '@waldur/store/notify';
-import type { RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 const ResourceNameField = (props) => {
   const dispatch = useDispatch();
   const project = props.project;
-  const plan = useSelector((state: RootState) =>
-    orderFormSelector(state, 'plan'),
-  );
   const attributes = useSelector(orderFormAttributesSelector);
   const { mutate: suggestName, isPending: isLoading } = useMutation({
     mutationFn: async () => {
@@ -29,7 +22,6 @@ const ResourceNameField = (props) => {
         body: {
           project: project.uuid,
           offering: props.offering.uuid,
-          plan: plan?.uuid,
           attributes,
         },
       });

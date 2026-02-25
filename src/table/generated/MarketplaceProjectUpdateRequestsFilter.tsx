@@ -1,7 +1,5 @@
 // This file is auto-generated. Do not edit manually.
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -42,9 +40,7 @@ export interface RemoteProjectUpdateRequestStateEnumChoicesOption {
   value: RemoteProjectUpdateRequestStateEnum;
 }
 
-export const PureProjectUpdateRequestListFilter: FunctionComponent<{}> = (
-  _props,
-) => (
+export const PureProjectUpdateRequestListFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"

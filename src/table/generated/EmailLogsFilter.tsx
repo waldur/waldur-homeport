@@ -1,7 +1,5 @@
 // This file is auto-generated. Do not edit manually.
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -12,7 +10,7 @@ import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureSupportEmailLogsFilter: FunctionComponent<{}> = (_props) => (
+export const PureSupportEmailLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Emails')} name="emails">
       <Field

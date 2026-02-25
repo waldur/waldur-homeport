@@ -47,9 +47,7 @@ export interface AccessorTypeEnumChoicesOption {
   value: AccessorTypeEnum;
 }
 
-export const PureSupportDataAccessLogsFilter: FunctionComponent<
-  SupportDataAccessLogsFilterProps
-> = (props) => (
+export const PureSupportDataAccessLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Start date')} name="start_date">
       <Field
@@ -104,14 +102,8 @@ export const PureSupportDataAccessLogsFilter: FunctionComponent<
               o: ['full_name'],
             })}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: User) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: User) => String(option.full_name || ''))
-            }
+            getOptionValue={(option: User) => String(option.uuid || '')}
+            getOptionLabel={(option: User) => String(option.full_name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -126,11 +118,6 @@ export const PureSupportDataAccessLogsFilter: FunctionComponent<
 
 export const SupportDataAccessLogsFilterFormId = 'SupportDataAccessLogsFilter';
 
-interface SupportDataAccessLogsFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface SupportDataAccessLogsFilterFormData {
   start_date: string;
   end_date: string;
@@ -140,7 +127,7 @@ interface SupportDataAccessLogsFilterFormData {
 
 export const SupportDataAccessLogsFilter = reduxForm<
   SupportDataAccessLogsFilterFormData,
-  SupportDataAccessLogsFilterProps
+  {}
 >({
   form: SupportDataAccessLogsFilterFormId,
   destroyOnUnmount: false,
