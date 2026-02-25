@@ -82,9 +82,6 @@ const PureMarketplaceOrdersListFilter = (props) => {
 export const MarketplaceOrdersListFilter = reduxForm({
   form: MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
   onChange: syncFiltersToURL,
-  initialValues: {
-    state: createOrderStateOptions()[0],
-  },
   touchOnChange: true,
   destroyOnUnmount: false,
 })((props) => (
@@ -95,9 +92,6 @@ export const ProviderOrdersListFilter = reduxForm({
   form: PROVIDER_ORDERS_LIST_FILTER_FORM_ID,
   onChange: syncFiltersToURL,
   touchOnChange: true,
-  initialValues: {
-    state: createOrderStateOptions()[0],
-  },
   destroyOnUnmount: false,
 })((props) => (
   <PureMarketplaceOrdersListFilter {...props} hasOffering hasOrganization />
