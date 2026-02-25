@@ -488,7 +488,10 @@ export const states: StateDeclaration[] = [
     parent: 'organization',
     data: {
       breadcrumb: () => translate('My offerings'),
-      permissions: [isOwnerOrStaff],
+      permissions: [
+        isOwnerOrStaff,
+        (state) => Boolean(state.workspace.customer?.has_my_offerings),
+      ],
       priority: 130,
     },
   },
