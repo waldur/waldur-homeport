@@ -45,7 +45,11 @@ const FixedRows = (props: {
 }) => (
   <>
     {props.components.map((component, index) => (
-      <ComponentRow key={index} offeringComponent={component}>
+      <ComponentRow
+        key={index}
+        offeringComponent={component}
+        hidePrices={props.concealBillingInfo}
+      >
         {component.amount}
       </ComponentRow>
     ))}
