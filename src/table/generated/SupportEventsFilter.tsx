@@ -14,12 +14,29 @@ import {
 } from 'waldur-js-client';
 
 import {
+  Select,
   AsyncPaginate,
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
+
+export const FeatureChoices: FeatureChoicesOption[] = [
+  {
+    label: translate('Project events'),
+    value: 'projects',
+  },
+  {
+    label: translate('Resource events'),
+    value: 'resources',
+  },
+];
+export interface FeatureChoicesOption {
+  label: string;
+  value: string;
+}
 
 export const PureSupportEventsFilter: FunctionComponent<{}> = () => (
   <>
@@ -94,6 +111,32 @@ export const PureSupportEventsFilter: FunctionComponent<{}> = () => (
         )}
       />
     </TableFilterItem>
+    <TableFilterItem
+      title={translate('Type')}
+      name="feature"
+      getValueLabel={(value: FeatureChoicesOption[]) =>
+        value?.map((v) => v?.label).join(', ')
+      }
+    >
+      <Field
+        name="feature"
+        component={(fieldProps) => (
+          <Select
+            placeholder={translate('Type')}
+            options={FeatureChoices}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            getOptionValue={(option: FeatureChoicesOption) =>
+              String(option.value)
+            }
+            getOptionLabel={(option: FeatureChoicesOption) => option.label}
+            isClearable={true}
+            isMulti={true}
+            {...REACT_SELECT_TABLE_FILTER}
+          />
+        )}
+      />
+    </TableFilterItem>
   </>
 );
 
@@ -103,6 +146,7 @@ interface SupportEventsFilterFormData {
   organization: Customer;
   project: Project;
   user: User;
+  feature: FeatureChoicesOption[];
 }
 
 export const SupportEventsFilter = reduxForm<SupportEventsFilterFormData, {}>({
@@ -110,21 +154,25 @@ export const SupportEventsFilter = reduxForm<SupportEventsFilterFormData, {}>({
   destroyOnUnmount: false,
 })(PureSupportEventsFilter);
 
-export const selectSupportEventsFilter = createSelector(
-  getFormValues(SupportEventsFilterFormId),
-  (values: SupportEventsFilterFormData | undefined) => {
-    const filter: EventsListData['query'] = {};
-    if (values) {
-      if (values.organization) {
-        filter.customer_uuid = values.organization.uuid;
-      }
-      if (values.project) {
-        filter.project_uuid = values.project.uuid;
-      }
-      if (values.user) {
-        filter.user_uuid = values.user.uuid;
-      }
+export const selectSupportEventsFilter = createSelector<
+  RootState,
+  Partial<SupportEventsFilterFormData>,
+  EventsListData['query']
+>(getFormValues(SupportEventsFilterFormId), (values) => {
+  const filter: EventsListData['query'] = {} as any;
+  if (values) {
+    if (values.organization) {
+      filter.customer_uuid = values.organization.uuid;
     }
-    return filter;
-  },
-);
+    if (values.project) {
+      filter.project_uuid = values.project.uuid;
+    }
+    if (values.user) {
+      filter.user_uuid = values.user.uuid;
+    }
+    if (values.feature) {
+      filter.feature = values.feature.map((v: any) => v.value);
+    }
+  }
+  return filter;
+});

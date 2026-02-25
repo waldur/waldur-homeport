@@ -19,6 +19,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -145,24 +146,25 @@ export const SupportInvoiceItemsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureSupportInvoiceItemsFilter);
 
-export const selectSupportInvoiceItemsFilter = createSelector(
-  getFormValues(SupportInvoiceItemsFilterFormId),
-  (values: SupportInvoiceItemsFilterFormData | undefined) => {
-    const filter: InvoiceItemsListData['query'] = {};
-    if (values) {
-      if (values.organization) {
-        filter.customer_uuid = values.organization.uuid;
-      }
-      if (values.accounting_period) {
-        Object.assign(filter, values.accounting_period.value);
-      }
-      if (values.project) {
-        filter.project_uuid = values.project.uuid;
-      }
-      if (values.offering) {
-        filter.offering_uuid = values.offering.uuid;
-      }
+export const selectSupportInvoiceItemsFilter = createSelector<
+  RootState,
+  Partial<SupportInvoiceItemsFilterFormData>,
+  InvoiceItemsListData['query']
+>(getFormValues(SupportInvoiceItemsFilterFormId), (values) => {
+  const filter: InvoiceItemsListData['query'] = {} as any;
+  if (values) {
+    if (values.organization) {
+      filter.customer_uuid = values.organization.uuid;
     }
-    return filter;
-  },
-);
+    if (values.accounting_period) {
+      Object.assign(filter, values.accounting_period.value);
+    }
+    if (values.project) {
+      filter.project_uuid = values.project.uuid;
+    }
+    if (values.offering) {
+      filter.offering_uuid = values.offering.uuid;
+    }
+  }
+  return filter;
+});

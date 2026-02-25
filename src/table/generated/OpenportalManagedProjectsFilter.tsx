@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
-  MarketplaceProjectUpdateRequestsListData,
+  OpenportalManagedProjectsListData,
   RemoteProjectUpdateRequestStateEnum,
 } from 'waldur-js-client';
 
@@ -41,7 +41,7 @@ export interface RemoteProjectUpdateRequestStateEnumChoicesOption {
   value: RemoteProjectUpdateRequestStateEnum;
 }
 
-export const PureProjectUpdateRequestListFilter: FunctionComponent<{}> = () => (
+export const PureManagedProjectsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -72,27 +72,26 @@ export const PureProjectUpdateRequestListFilter: FunctionComponent<{}> = () => (
   </TableFilterItem>
 );
 
-export const ProjectUpdateRequestListFilterFormId =
-  'ProjectUpdateRequestListFilter';
+export const ManagedProjectsFilterFormId = 'ManagedProjectsFilter';
 
-interface ProjectUpdateRequestListFilterFormData {
+interface ManagedProjectsFilterFormData {
   state: RemoteProjectUpdateRequestStateEnumChoicesOption[];
 }
 
-export const ProjectUpdateRequestListFilter = reduxForm<
-  ProjectUpdateRequestListFilterFormData,
+export const ManagedProjectsFilter = reduxForm<
+  ManagedProjectsFilterFormData,
   {}
 >({
-  form: ProjectUpdateRequestListFilterFormId,
+  form: ManagedProjectsFilterFormId,
   destroyOnUnmount: false,
-})(PureProjectUpdateRequestListFilter);
+})(PureManagedProjectsFilter);
 
-export const selectProjectUpdateRequestListFilter = createSelector<
+export const selectManagedProjectsFilter = createSelector<
   RootState,
-  Partial<ProjectUpdateRequestListFilterFormData>,
-  MarketplaceProjectUpdateRequestsListData['query']
->(getFormValues(ProjectUpdateRequestListFilterFormId), (values) => {
-  const filter: MarketplaceProjectUpdateRequestsListData['query'] = {} as any;
+  Partial<ManagedProjectsFilterFormData>,
+  OpenportalManagedProjectsListData['query']
+>(getFormValues(ManagedProjectsFilterFormId), (values) => {
+  const filter: OpenportalManagedProjectsListData['query'] = {} as any;
   if (values) {
     if (values.state) {
       filter.state = values.state.map((v: any) => v.value);

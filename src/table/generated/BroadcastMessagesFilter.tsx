@@ -10,6 +10,7 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const BroadcastMessageStateEnumChoices: BroadcastMessageStateEnumChoicesOption[] =
@@ -76,15 +77,16 @@ export const BroadcastMessagesFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureBroadcastMessagesFilter);
 
-export const selectBroadcastMessagesFilter = createSelector(
-  getFormValues(BroadcastMessagesFilterFormId),
-  (values: BroadcastMessagesFilterFormData | undefined) => {
-    const filter: BroadcastMessagesListData['query'] = {};
-    if (values) {
-      if (values.state) {
-        filter.state = values.state.value;
-      }
+export const selectBroadcastMessagesFilter = createSelector<
+  RootState,
+  Partial<BroadcastMessagesFilterFormData>,
+  BroadcastMessagesListData['query']
+>(getFormValues(BroadcastMessagesFilterFormId), (values) => {
+  const filter: BroadcastMessagesListData['query'] = {} as any;
+  if (values) {
+    if (values.state) {
+      filter.state = values.state.value;
     }
-    return filter;
-  },
-);
+  }
+  return filter;
+});

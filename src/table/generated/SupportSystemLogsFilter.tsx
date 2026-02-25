@@ -13,6 +13,7 @@ import { StringField } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const SystemLogLevelEnumChoices: SystemLogLevelEnumChoicesOption[] = [
@@ -159,24 +160,25 @@ export const SupportSystemLogsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureSupportSystemLogsFilter);
 
-export const selectSupportSystemLogsFilter = createSelector(
-  getFormValues(SupportSystemLogsFilterFormId),
-  (values: SupportSystemLogsFilterFormData | undefined) => {
-    const filter: SystemLogsListData['query'] = {};
-    if (values) {
-      if (values.source) {
-        filter.source = values.source.value;
-      }
-      if (values.level) {
-        filter.level = values.level.value;
-      }
-      if (values.instance) {
-        filter.instance = values.instance;
-      }
-      if (values.logger_name) {
-        filter.logger_name = values.logger_name;
-      }
+export const selectSupportSystemLogsFilter = createSelector<
+  RootState,
+  Partial<SupportSystemLogsFilterFormData>,
+  SystemLogsListData['query']
+>(getFormValues(SupportSystemLogsFilterFormId), (values) => {
+  const filter: SystemLogsListData['query'] = {} as any;
+  if (values) {
+    if (values.source) {
+      filter.source = values.source.value;
     }
-    return filter;
-  },
-);
+    if (values.level) {
+      filter.level = values.level.value;
+    }
+    if (values.instance) {
+      filter.instance = values.instance;
+    }
+    if (values.logger_name) {
+      filter.logger_name = values.logger_name;
+    }
+  }
+  return filter;
+});

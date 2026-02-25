@@ -338,6 +338,7 @@ overrides:
       - customer_uuid
       - project_uuid
       - user_uuid
+      - feature
     customer_uuid:
       label: Organization
       name: organization
@@ -350,6 +351,12 @@ overrides:
       searchParam: full_name
       extraQuery:
         o: ['full_name']
+    feature:
+      label: Type
+      isMulti: true
+      enumOverrides:
+        projects: Project events
+        resources: Resource events
 
   system_logs_list:
     componentName: SupportSystemLogsFilter
@@ -387,3 +394,41 @@ overrides:
       searchParam: project_name
       extraPath:
         uuid: props.provider.uuid
+
+  support_issues_list:
+    componentName: IssuesFilter
+    filters:
+      - status
+    status:
+      enumOverrides:
+        Open: Open
+        Waiting for support: Waiting for support
+        Closed: Closed
+        Resolved: Resolved
+
+  customer_quotas_list:
+    componentName: CustomerQuotasFilter
+    initialValues:
+      quota_name: { label: Resources, value: estimated_price }
+    filters:
+      - quota_name
+    quota_name:
+      label: Quota
+
+  openportal_managed_projects_list:
+    componentName: ManagedProjectsFilter
+    filters:
+      - state
+    state:
+      isMulti: true
+
+  reviewer_suggestions_list:
+    componentName: SuggestionsTableFilter
+    filters:
+      - status
+    status:
+      enumOverrides:
+        pending: Pending
+        confirmed: Confirmed
+        rejected: Rejected
+        invited: Invited

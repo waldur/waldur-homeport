@@ -7,6 +7,7 @@ import { OpenstackImagesListData } from 'waldur-js-client';
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const PureTenantImagesFilter: FunctionComponent<{}> = () => (
@@ -36,15 +37,16 @@ export const TenantImagesFilter = reduxForm<TenantImagesFilterFormData, {}>({
   destroyOnUnmount: false,
 })(PureTenantImagesFilter);
 
-export const selectTenantImagesFilter = createSelector(
-  getFormValues(TenantImagesFilterFormId),
-  (values: TenantImagesFilterFormData | undefined) => {
-    const filter: OpenstackImagesListData['query'] = {};
-    if (values) {
-      if (values.show_duplicate_names) {
-        filter.show_duplicate_names = values.show_duplicate_names;
-      }
+export const selectTenantImagesFilter = createSelector<
+  RootState,
+  Partial<TenantImagesFilterFormData>,
+  OpenstackImagesListData['query']
+>(getFormValues(TenantImagesFilterFormId), (values) => {
+  const filter: OpenstackImagesListData['query'] = {} as any;
+  if (values) {
+    if (values.show_duplicate_names) {
+      filter.show_duplicate_names = values.show_duplicate_names;
     }
-    return filter;
-  },
-);
+  }
+  return filter;
+});

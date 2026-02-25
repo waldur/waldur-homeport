@@ -1,12 +1,6 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  Issue,
-  supportIssuesList,
-  SupportIssuesListData,
-} from 'waldur-js-client';
+import { Issue, supportIssuesList } from 'waldur-js-client';
 
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
@@ -15,13 +9,17 @@ import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandabl
 import { StatusColumn } from '@waldur/issues/list/StatusColumn';
 import { TitleColumn } from '@waldur/issues/list/TitleColumn';
 import { createFetcher } from '@waldur/table/api';
+import {
+  selectIssuesFilter,
+  IssuesFilter,
+  StatusChoices,
+} from '@waldur/table/generated/SupportIssuesFilter';
 import Table from '@waldur/table/Table';
 import { TableProps, Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueCreateButton } from './IssueCreateButton';
-import { getIssueStatuses, IssuesFilter } from './IssuesFilter';
 
 interface OwnProps {
   hiddenColumns?: (
@@ -38,23 +36,12 @@ interface OwnProps {
   standalone?: boolean;
 }
 
-const mapStateToFilter = createSelector(
-  getFormValues('IssuesFilter'),
-  (filters: any) => {
-    const result: SupportIssuesListData['query'] = {};
-    if (filters?.status) {
-      result.status = filters.status.map((option) => option.value);
-    }
-    return result;
-  },
-);
-
 export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
   const { hiddenColumns = [], standalone = true } = props;
   const user = useSelector(getUser);
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
-  const filter = useSelector(mapStateToFilter);
+  const filter = useSelector(selectIssuesFilter);
 
   const tableProps = useTable({
     table: `issuesList-${props.scope?.uuid}`,
@@ -81,7 +68,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         orderField: 'status',
         filter: 'status',
         inlineFilter: (row) =>
-          getIssueStatuses().filter((op) => op.value === row.status),
+          StatusChoices.filter((op) => op.value === row.status),
         export: (row) => row.status || 'N/A',
         exportKeys: ['status'],
       },

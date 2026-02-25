@@ -16,6 +16,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -93,18 +94,19 @@ export const ArrowResourcesFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureArrowResourcesFilter);
 
-export const selectArrowResourcesFilter = createSelector(
-  getFormValues(ArrowResourcesFilterFormId),
-  (values: ArrowResourcesFilterFormData | undefined) => {
-    const filter: MarketplaceResourcesListData['query'] = {};
-    if (values) {
-      if (values.organization) {
-        filter.customer_uuid = values.organization.uuid;
-      }
-      if (values.project) {
-        filter.project_uuid = values.project.uuid;
-      }
+export const selectArrowResourcesFilter = createSelector<
+  RootState,
+  Partial<ArrowResourcesFilterFormData>,
+  MarketplaceResourcesListData['query']
+>(getFormValues(ArrowResourcesFilterFormId), (values) => {
+  const filter: MarketplaceResourcesListData['query'] = {} as any;
+  if (values) {
+    if (values.organization) {
+      filter.customer_uuid = values.organization.uuid;
     }
-    return filter;
-  },
-);
+    if (values.project) {
+      filter.project_uuid = values.project.uuid;
+    }
+  }
+  return filter;
+});

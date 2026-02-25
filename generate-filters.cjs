@@ -74,8 +74,9 @@ const utils = {
 // --- Logic Modules ---
 
 class SchemaProcessor {
-  constructor(schema) {
+  constructor(schema, config) {
     this.schema = schema;
+    this.config = config;
     this.allOperationIds = new Set();
     this.searchFields = new Map();
     this.responseFields = new Map();
@@ -87,11 +88,18 @@ class SchemaProcessor {
     const map = new Map();
     const components = this.schema.components?.schemas || {};
     for (const [name, def] of Object.entries(components)) {
-      if (def.enum && def['x-waldur-enum-names']) {
+      const enumNames = def['x-enum-descriptions'];
+      if (def.enum && enumNames) {
         const options = def.enum.map((val, i) => ({
-          label: def['x-waldur-enum-names'][i],
+          label: enumNames[i],
           value: val,
         }));
+        map.set(name, JSON.stringify(options));
+      }
+    }
+    // Merge extra enums from config
+    if (this.config.extraEnums) {
+      for (const [name, options] of Object.entries(this.config.extraEnums)) {
         map.set(name, JSON.stringify(options));
       }
     }
@@ -210,6 +218,7 @@ class FilterMapper {
       label: utils.humanize(param.name.replace(/_uuid$/, '')),
       mapTo: param.name.endsWith('_uuid') ? param.name : undefined,
       isMulti,
+      required: param.required || overrides.required,
     };
 
     const targetOp = overrides.operationId || param['x-waldur-operation-id'];
@@ -271,6 +280,13 @@ class FilterMapper {
       (schema.items?.$ref
         ? utils.resolveRef(schema.items.$ref, this.proc.schema)?.enum
         : schema.items?.enum);
+    const enumNames =
+      schema['x-enum-descriptions'] ||
+      (schema.items?.$ref
+        ? utils.resolveRef(schema.items.$ref, this.proc.schema)?.[
+            'x-enum-descriptions'
+          ]
+        : schema.items?.['x-enum-descriptions']);
 
     if (overrides.options || overrides.enumOverrides || enumOptions) {
       filter.component = 'Select';
@@ -286,11 +302,14 @@ class FilterMapper {
         overrides.options || overrides.enumOverrides || enumOptions;
       const options = (
         Array.isArray(source) ? source : Object.keys(source)
-      ).map((opt) => {
+      ).map((opt, i) => {
         if (typeof opt === 'object' && opt.label && opt.value !== undefined)
           return opt;
         return {
-          label: overrides.enumOverrides?.[opt] || utils.humanize(String(opt)),
+          label:
+            overrides.enumOverrides?.[opt] ||
+            (enumOptions?.includes(opt) && enumNames ? enumNames[i] : null) ||
+            utils.humanize(String(opt)),
           value:
             opt === 'true'
               ? true
@@ -366,7 +385,7 @@ class Generator {
     const tLabel = `translate("${f.label}")`;
     const tPlace = `translate("${f.placeholder || f.label}")`;
     const commonSelectProps = [
-      `isClearable={true}`,
+      `isClearable={${!f.required}}`,
       f.isMulti ? `isMulti={true}` : null,
       `{...REACT_SELECT_TABLE_FILTER}`,
     ]
@@ -407,6 +426,8 @@ class Generator {
       valLabel = `getValueLabel={(value: ${argType}${f.isMulti ? '[]' : ''}) => ${f.isMulti ? `value?.map((v) => v${access}).join(', ')` : `value${access}`}}`;
     }
 
+    const validation = f.required ? 'validate={[required]}' : '';
+
     // Generate Field Inputs
     if (
       [
@@ -424,17 +445,29 @@ class Generator {
         name="${f.name}"
         component={${f.component}}
         ${extraProps}
+        ${validation}
         ${customProps}
       />\n`;
-        } else if (f.component === 'Autocomplete') {
-            const extraQuery = f.extraQuery ? `, ${JSON.stringify(f.extraQuery).replace(/"(props\.[a-zA-Z0-9_.]+)"/g, '$1')}` : '';
-            const extraPath = f.extraPath ? `, ${JSON.stringify(f.extraPath).replace(/"(props\.[a-zA-Z0-9_.]+)"/g, '$1')}` : '';
-            const vType = f.valueType ? `: ${f.valueType}` : '';
-            const spreads = (f.propSpreads || []).map(s => `{...${s}}`).join('\n            ');
-            const autocompleteProps = f.props ? Object.entries(f.props).map(([k, v]) => `${k}={${v}}`).join('\n            ') : '';
+    } else if (f.component === 'Autocomplete') {
+      const extraQuery = f.extraQuery
+        ? `, ${JSON.stringify(f.extraQuery).replace(/"(props\.[a-zA-Z0-9_.]+)"/g, '$1')}`
+        : '';
+      const extraPath = f.extraPath
+        ? `, ${JSON.stringify(f.extraPath).replace(/"(props\.[a-zA-Z0-9_.]+)"/g, '$1')}`
+        : '';
+      const vType = f.valueType ? `: ${f.valueType}` : '';
+      const spreads = (f.propSpreads || [])
+        .map((s) => `{...${s}}`)
+        .join('\n            ');
+      const autocompleteProps = f.props
+        ? Object.entries(f.props)
+            .map(([k, v]) => `${k}={${v}}`)
+            .join('\n            ')
+        : '';
 
-            input = `      <Field
+      input = `      <Field
         name="${f.name}"
+        ${validation}
         component={(fieldProps) => (
           <AsyncPaginate
             placeholder={${tPlace}}
@@ -471,6 +504,7 @@ class Generator {
 
       input = `      <Field
         name="${f.name}"
+        ${validation}
         component={(fieldProps) => (
           <Select
             placeholder={${tPlace}}
@@ -491,6 +525,7 @@ class Generator {
     let jsx = `    <TableFilterItem
       title={${tLabel}}
       name="${f.name}"
+      ${f.required ? 'hideRemoveButton={true}' : ''}
       ${valLabel || (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder) ? `getValueLabel={(value: ${f.optionsPlaceholder}Option) => value?.label}` : '')}
     >
 ${input}    </TableFilterItem>\n`;
@@ -646,12 +681,17 @@ ${interfaceFields}
 export const ${compName} = reduxForm<${compName}FormData, ${propsInterfaceName}>({
   form: ${compName}FormId,
   destroyOnUnmount: false,
+  ${config.overrides[id]?.initialValues ? `initialValues: ${JSON.stringify(config.overrides[id].initialValues).replace(/"label":\s*"([^"]+)"/g, '"label": translate("$1")')},` : ''}
 })(Pure${compName});
 
-export const select${compName} = createSelector(
+export const select${compName} = createSelector<
+  RootState,
+  Partial<${compName}FormData>,
+  ${sdkDataType}['query']
+>(
   getFormValues(${compName}FormId),
-    (values: ${compName}FormData | undefined) => {
-    const filter: ${sdkDataType}['query'] = {};
+  (values) => {
+    const filter: ${sdkDataType}['query'] = {} as any;
     if (values) {
 ${filters.map(Generator.selector).join('')}    }
     return filter;
@@ -712,13 +752,22 @@ ${filters.map(Generator.selector).join('')}    }
       });
     });
 
+    const hasRequired = Array.from(opIds).some((id) =>
+      opFilters[id].some((f) => f.required),
+    );
+
     const lines = [
+      `import { RootState } from '@waldur/store/reducers';`,
       `import { translate } from '@waldur/i18n';`,
       `import { FunctionComponent } from 'react';`,
       `import { Field, getFormValues, reduxForm } from 'redux-form';`,
       `import { createSelector } from 'reselect';`,
       `import { TableFilterItem } from '@waldur/table/TableFilterItem';`,
     ];
+
+    if (hasRequired) {
+      lines.push(`import { required } from '@waldur/core/validators';`);
+    }
 
     if (comps.has('feature')) {
       lines.push(
@@ -775,7 +824,7 @@ function run() {
   const config = fs.existsSync(CONFIG_PATH)
     ? yaml.load(fs.readFileSync(CONFIG_PATH, 'utf8'))
     : { overrides: {} };
-  const proc = new SchemaProcessor(schema);
+  const proc = new SchemaProcessor(schema, config);
   const mapper = new FilterMapper(proc, config);
 
   const operationFilters = {};

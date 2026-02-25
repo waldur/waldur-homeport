@@ -1,8 +1,6 @@
 import { InfoIcon, UserIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   reviewerSuggestionsList,
   ReviewerSuggestion,
@@ -22,17 +20,17 @@ import { PoolSummaryButton } from '@waldur/proposals/update/reviewer-pool/PoolSu
 import { useReviewerPoolTabs } from '@waldur/proposals/update/reviewer-pool/tabs';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { createFetcher } from '@waldur/table/api';
+import {
+  SuggestionsTableFilter,
+  selectSuggestionsTableFilter,
+  ReviewerSuggestionStatusEnumChoices,
+} from '@waldur/table/generated/ReviewerSuggestionsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { ReviewerDiscoveryActions } from './ReviewerDiscoveryActions';
 import { SuggestionExpandableRow } from './SuggestionExpandableRow';
 import { SuggestionRowActions } from './SuggestionRowActions';
-import {
-  getSuggestionStatusOptions,
-  SUGGESTIONS_FILTER_FORM_ID,
-  SuggestionsTableFilter,
-} from './SuggestionsTableFilter';
 
 const ReviewerProfileDialog = lazyComponent(() =>
   import('./ReviewerProfileDialog').then((m) => ({
@@ -227,23 +225,11 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
   );
 };
 
-// Filter selector to get form values
-const filtersSelector = createSelector(
-  getFormValues(SUGGESTIONS_FILTER_FORM_ID),
-  (filters: any) => {
-    const result: Record<string, any> = {};
-    if (filters?.status) {
-      result.status = filters.status.value;
-    }
-    return result;
-  },
-);
-
 export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
   call,
 }) => {
   const dispatch = useDispatch();
-  const formFilters = useSelector(filtersSelector);
+  const formFilters = useSelector(selectSuggestionsTableFilter);
   const tabs = useReviewerPoolTabs();
 
   const filter = useMemo(
@@ -389,7 +375,9 @@ export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
         keys: ['status', 'status_display'],
         filter: 'status',
         inlineFilter: (row: ReviewerSuggestion) =>
-          getSuggestionStatusOptions().find((opt) => opt.value === row.status),
+          ReviewerSuggestionStatusEnumChoices.find(
+            (opt) => opt.value === row.status,
+          ),
       },
       {
         id: 'reviewed_by',

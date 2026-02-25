@@ -15,6 +15,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -100,18 +101,19 @@ export const ProviderRobotAccountFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureProviderRobotAccountFilter);
 
-export const selectProviderRobotAccountFilter = createSelector(
-  getFormValues(ProviderRobotAccountFilterFormId),
-  (values: ProviderRobotAccountFilterFormData | undefined) => {
-    const filter: MarketplaceRobotAccountsListData['query'] = {};
-    if (values) {
-      if (values.customer) {
-        filter.customer_uuid = values.customer.uuid;
-      }
-      if (values.project) {
-        filter.project_uuid = values.project.uuid;
-      }
+export const selectProviderRobotAccountFilter = createSelector<
+  RootState,
+  Partial<ProviderRobotAccountFilterFormData>,
+  MarketplaceRobotAccountsListData['query']
+>(getFormValues(ProviderRobotAccountFilterFormId), (values) => {
+  const filter: MarketplaceRobotAccountsListData['query'] = {} as any;
+  if (values) {
+    if (values.customer) {
+      filter.customer_uuid = values.customer.uuid;
     }
-    return filter;
-  },
-);
+    if (values.project) {
+      filter.project_uuid = values.project.uuid;
+    }
+  }
+  return filter;
+});

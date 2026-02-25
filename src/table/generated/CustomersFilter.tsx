@@ -18,6 +18,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -148,27 +149,28 @@ export const CustomersFilter = reduxForm<CustomersFilterFormData, {}>({
   destroyOnUnmount: false,
 })(PureCustomersFilter);
 
-export const selectCustomersFilter = createSelector(
-  getFormValues(CustomersFilterFormId),
-  (values: CustomersFilterFormData | undefined) => {
-    const filter: CustomersListData['query'] = {};
-    if (values) {
-      if (values.accounting_is_running) {
-        filter.accounting_is_running = values.accounting_is_running.value;
-      }
-      if (values.is_service_provider) {
-        filter.is_service_provider = values.is_service_provider;
-      }
-      if (values.is_call_managing_organization) {
-        filter.is_call_managing_organization =
-          values.is_call_managing_organization;
-      }
-      if (values.organization_group) {
-        filter.organization_group_uuid = values.organization_group.map(
-          (v: any) => v.uuid,
-        );
-      }
+export const selectCustomersFilter = createSelector<
+  RootState,
+  Partial<CustomersFilterFormData>,
+  CustomersListData['query']
+>(getFormValues(CustomersFilterFormId), (values) => {
+  const filter: CustomersListData['query'] = {} as any;
+  if (values) {
+    if (values.accounting_is_running) {
+      filter.accounting_is_running = values.accounting_is_running.value;
     }
-    return filter;
-  },
-);
+    if (values.is_service_provider) {
+      filter.is_service_provider = values.is_service_provider;
+    }
+    if (values.is_call_managing_organization) {
+      filter.is_call_managing_organization =
+        values.is_call_managing_organization;
+    }
+    if (values.organization_group) {
+      filter.organization_group_uuid = values.organization_group.map(
+        (v: any) => v.uuid,
+      );
+    }
+  }
+  return filter;
+});
