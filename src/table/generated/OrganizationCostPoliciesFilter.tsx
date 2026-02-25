@@ -17,9 +17,7 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureOrganizationCostPoliciesFilter: FunctionComponent<
-  OrganizationCostPoliciesFilterProps
-> = (props) => (
+export const PureOrganizationCostPoliciesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Organization')}
     name="organization"
@@ -32,14 +30,8 @@ export const PureOrganizationCostPoliciesFilter: FunctionComponent<
           placeholder={translate('Organization')}
           loadOptions={createSelectFetcher(customersList, 'query')}
           defaultOptions
-          getOptionValue={
-            props.getOptionValue ||
-            ((option: Customer) => String(option.uuid || ''))
-          }
-          getOptionLabel={
-            props.getOptionLabel ||
-            ((option: Customer) => String(option.name || ''))
-          }
+          getOptionValue={(option: Customer) => String(option.uuid || '')}
+          getOptionLabel={(option: Customer) => String(option.name || '')}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
           isClearable={true}
@@ -54,18 +46,13 @@ export const PureOrganizationCostPoliciesFilter: FunctionComponent<
 export const OrganizationCostPoliciesFilterFormId =
   'OrganizationCostPoliciesFilter';
 
-interface OrganizationCostPoliciesFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface OrganizationCostPoliciesFilterFormData {
   organization: Customer;
 }
 
 export const OrganizationCostPoliciesFilter = reduxForm<
   OrganizationCostPoliciesFilterFormData,
-  OrganizationCostPoliciesFilterProps
+  {}
 >({
   form: OrganizationCostPoliciesFilterFormId,
   destroyOnUnmount: false,

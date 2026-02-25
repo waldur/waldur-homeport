@@ -49,14 +49,8 @@ export const PureSupportFeedbacksFilter: FunctionComponent<
             placeholder={translate('User')}
             loadOptions={createSelectFetcher(usersList, 'query')}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: User) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: User) => String(option.full_name || ''))
-            }
+            getOptionValue={(option: User) => String(option.uuid || '')}
+            getOptionLabel={(option: User) => String(option.full_name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -92,8 +86,6 @@ export const SupportFeedbacksFilterFormId = 'SupportFeedbacksFilter';
 
 interface SupportFeedbacksFilterProps {
   evaluationOptions?: any[];
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
   periodOptions?: any[];
 }
 

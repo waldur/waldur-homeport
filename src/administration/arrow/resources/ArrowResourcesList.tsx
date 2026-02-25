@@ -1,12 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  marketplaceResourcesList,
-  MarketplaceResourcesListData,
-  Resource,
-} from 'waldur-js-client';
+import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
@@ -14,43 +9,16 @@ import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceS
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import {
+  ArrowResourcesFilter,
+  selectArrowResourcesFilter,
+  ArrowResourcesFilterFormId,
+} from '@waldur/table/generated/ArrowResourcesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { ARROW_FORM_NAMES } from '../constants';
-
 import { ArrowResourceImportButton } from './ArrowResourceImportButton';
 import { ArrowResourcesActions } from './ArrowResourcesActions';
-import { ArrowResourcesFilter } from './ArrowResourcesFilter';
-
-const filtersSelector = createSelector(
-  getFormValues(ARROW_FORM_NAMES.arrowResourcesFilter),
-  (filterValues: any) => {
-    const result: MarketplaceResourcesListData['query'] = {
-      state: NON_TERMINATED_STATES,
-    };
-    if (filterValues?.organization) {
-      result.customer_uuid = filterValues.organization.uuid;
-    }
-    if (filterValues?.project) {
-      result.project_uuid = filterValues.project.uuid;
-    }
-    return result;
-  },
-);
-
-const mandatoryFields: Array<keyof Resource> = [
-  'uuid',
-  'name',
-  'state',
-  'backend_id',
-  'customer_name',
-  'customer_uuid',
-  'project_name',
-  'project_uuid',
-  'backend_metadata',
-  'provider_uuid',
-];
 
 interface ArrowResourcesListProps {
   settings?: { uuid: string } | null;
@@ -59,13 +27,17 @@ interface ArrowResourcesListProps {
 export const ArrowResourcesList: FunctionComponent<
   ArrowResourcesListProps
 > = () => {
-  const formFilter = useSelector(filtersSelector);
+  const filterValues = useSelector(selectArrowResourcesFilter);
+  const formValues: any = useSelector(
+    getFormValues(ArrowResourcesFilterFormId),
+  );
 
   const filter = useMemo(
     () => ({
-      ...formFilter,
+      state: NON_TERMINATED_STATES,
+      ...filterValues,
     }),
-    [formFilter],
+    [filterValues],
   );
 
   const tableProps = useTable({
@@ -73,7 +45,18 @@ export const ArrowResourcesList: FunctionComponent<
     fetchData: createFetcher(marketplaceResourcesList),
     filter,
     queryField: 'query',
-    mandatoryFields,
+    mandatoryFields: [
+      'uuid',
+      'name',
+      'state',
+      'backend_id',
+      'customer_name',
+      'customer_uuid',
+      'project_name',
+      'project_uuid',
+      'backend_metadata',
+      'provider_uuid',
+    ],
   });
 
   return (
@@ -125,7 +108,11 @@ export const ArrowResourcesList: FunctionComponent<
       verboseName={translate('resources')}
       initialSorting={{ field: 'name', mode: 'asc' }}
       hasQuery
-      filters={<ArrowResourcesFilter />}
+      filters={
+        <ArrowResourcesFilter
+          organizationUuid={formValues?.organization?.uuid}
+        />
+      }
       tableActions={<ArrowResourceImportButton refetch={tableProps.fetch} />}
       rowActions={({ row }) => (
         <ArrowResourcesActions row={row} refetch={tableProps.fetch} />

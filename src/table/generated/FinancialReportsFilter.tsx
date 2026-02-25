@@ -56,13 +56,11 @@ export const PureFinancialReportsFilter: FunctionComponent<
               'customer_keyword',
             )}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: ServiceProvider) => String(option.customer_uuid || ''))
+            getOptionValue={(option: ServiceProvider) =>
+              String(option.customer_uuid || '')
             }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: ServiceProvider) => String(option.customer_name || ''))
+            getOptionLabel={(option: ServiceProvider) =>
+              String(option.customer_name || '')
             }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
@@ -124,8 +122,6 @@ export const FinancialReportsFilterFormId = 'FinancialReportsFilter';
 
 interface FinancialReportsFilterProps {
   accountingPeriods?: any[];
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
 }
 
 interface FinancialReportsFilterFormData {

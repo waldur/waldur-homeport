@@ -19,9 +19,7 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureCustomerMappingsFilter: FunctionComponent<
-  CustomerMappingsFilterProps
-> = (props) => (
+export const PureCustomerMappingsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Waldur Organization')}
@@ -35,14 +33,8 @@ export const PureCustomerMappingsFilter: FunctionComponent<
             placeholder={translate('Waldur Organization')}
             loadOptions={createSelectFetcher(customersList, 'query')}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: Customer) => String(option.uuid || ''))
-            }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: Customer) => String(option.name || ''))
-            }
+            getOptionValue={(option: Customer) => String(option.uuid || '')}
+            getOptionLabel={(option: Customer) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -80,11 +72,6 @@ export const PureCustomerMappingsFilter: FunctionComponent<
 
 export const CustomerMappingsFilterFormId = 'CustomerMappingsFilter';
 
-interface CustomerMappingsFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface CustomerMappingsFilterFormData {
   organization: Customer;
   arrow_reference: string;
@@ -93,7 +80,7 @@ interface CustomerMappingsFilterFormData {
 
 export const CustomerMappingsFilter = reduxForm<
   CustomerMappingsFilterFormData,
-  CustomerMappingsFilterProps
+  {}
 >({
   form: CustomerMappingsFilterFormId,
   destroyOnUnmount: false,

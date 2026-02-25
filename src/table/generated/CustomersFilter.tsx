@@ -40,9 +40,7 @@ export interface AccountingIsRunningChoicesOption {
   value: any;
 }
 
-export const PureCustomersFilter: FunctionComponent<CustomersFilterProps> = (
-  props,
-) => (
+export const PureCustomersFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Accounting is running')}
@@ -117,13 +115,11 @@ export const PureCustomersFilter: FunctionComponent<CustomersFilterProps> = (
             placeholder={translate('Organization group')}
             loadOptions={createSelectFetcher(organizationGroupsList, 'name')}
             defaultOptions
-            getOptionValue={
-              props.getOptionValue ||
-              ((option: OrganizationGroup) => String(option.uuid || ''))
+            getOptionValue={(option: OrganizationGroup) =>
+              String(option.uuid || '')
             }
-            getOptionLabel={
-              props.getOptionLabel ||
-              ((option: OrganizationGroup) => String(option.name || ''))
+            getOptionLabel={(option: OrganizationGroup) =>
+              String(option.name || '')
             }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
@@ -140,11 +136,6 @@ export const PureCustomersFilter: FunctionComponent<CustomersFilterProps> = (
 
 export const CustomersFilterFormId = 'CustomersFilter';
 
-interface CustomersFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface CustomersFilterFormData {
   accounting_is_running: AccountingIsRunningChoicesOption;
   is_service_provider: boolean;
@@ -152,10 +143,7 @@ interface CustomersFilterFormData {
   organization_group: OrganizationGroup[];
 }
 
-export const CustomersFilter = reduxForm<
-  CustomersFilterFormData,
-  CustomersFilterProps
->({
+export const CustomersFilter = reduxForm<CustomersFilterFormData, {}>({
   form: CustomersFilterFormId,
   destroyOnUnmount: false,
 })(PureCustomersFilter);

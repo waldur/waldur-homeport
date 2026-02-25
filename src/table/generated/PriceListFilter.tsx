@@ -17,9 +17,7 @@ import { translate } from '@waldur/i18n';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PurePriceListFilter: FunctionComponent<PriceListFilterProps> = (
-  props,
-) => (
+export const PurePriceListFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Offering')}
     name="offering"
@@ -35,13 +33,11 @@ export const PurePriceListFilter: FunctionComponent<PriceListFilterProps> = (
             'name',
           )}
           defaultOptions
-          getOptionValue={
-            props.getOptionValue ||
-            ((option: ProviderOfferingDetails) => String(option.uuid || ''))
+          getOptionValue={(option: ProviderOfferingDetails) =>
+            String(option.uuid || '')
           }
-          getOptionLabel={
-            props.getOptionLabel ||
-            ((option: ProviderOfferingDetails) => String(option.name || ''))
+          getOptionLabel={(option: ProviderOfferingDetails) =>
+            String(option.name || '')
           }
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
@@ -56,19 +52,11 @@ export const PurePriceListFilter: FunctionComponent<PriceListFilterProps> = (
 
 export const PriceListFilterFormId = 'PriceListFilter';
 
-interface PriceListFilterProps {
-  getOptionLabel?: (option: any) => string;
-  getOptionValue?: (option: any) => string;
-}
-
 interface PriceListFilterFormData {
   offering: ProviderOfferingDetails;
 }
 
-export const PriceListFilter = reduxForm<
-  PriceListFilterFormData,
-  PriceListFilterProps
->({
+export const PriceListFilter = reduxForm<PriceListFilterFormData, {}>({
   form: PriceListFilterFormId,
   destroyOnUnmount: false,
 })(PurePriceListFilter);

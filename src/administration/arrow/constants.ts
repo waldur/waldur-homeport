@@ -2,12 +2,6 @@ import type { ArrowBillingSyncStateEnum } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 
-/** Billing sync state enum values from SDK:
- * 1 = pending
- * 2 = syncing
- * 3 = synced
- * 4 = failed
- */
 const BILLING_SYNC_STATE_LABELS: Record<ArrowBillingSyncStateEnum, string> = {
   1: translate('Pending'),
   2: translate('Syncing'),
@@ -39,12 +33,6 @@ export const getBillingSyncStateLabel = (
 ): string => {
   return BILLING_SYNC_STATE_LABELS[state] || String(state);
 };
-
-/** Form names for redux-form */
-export const ARROW_FORM_NAMES = {
-  consumptionRecordsFilter: 'ArrowConsumptionRecordsFilter',
-  arrowResourcesFilter: 'ArrowResourcesFilter',
-} as const;
 
 /** Tab keys for Arrow dashboard */
 export const ARROW_TAB_KEYS = {

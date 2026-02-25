@@ -1,7 +1,5 @@
 // This file is auto-generated. Do not edit manually.
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -59,7 +57,7 @@ export interface SystemLogSourceEnumChoicesOption {
   value: SystemLogSourceEnum;
 }
 
-export const PureSupportSystemLogsFilter: FunctionComponent<{}> = (_props) => (
+export const PureSupportSystemLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Source')}

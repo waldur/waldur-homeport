@@ -1,7 +1,5 @@
 // This file is auto-generated. Do not edit manually.
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -49,7 +47,7 @@ export interface IsActiveChoicesOption {
   value: boolean;
 }
 
-export const PureAdminAnnouncementsFilter: FunctionComponent<{}> = (_props) => (
+export const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Type')}

@@ -1,7 +1,5 @@
 // This file is auto-generated. Do not edit manually.
 
-/* eslint-disable @typescript-eslint/no-unused-vars */
-
 import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
@@ -34,7 +32,7 @@ export interface BroadcastMessageStateEnumChoicesOption {
   value: BroadcastMessageStateEnum;
 }
 
-export const PureBroadcastMessagesFilter: FunctionComponent<{}> = (_props) => (
+export const PureBroadcastMessagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"

@@ -1,12 +1,9 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FunctionComponent, useMemo } from 'react';
+import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   adminArrowConsumptionRecordsList,
   ArrowConsumptionRecord,
-  AdminArrowConsumptionRecordsListData,
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
@@ -16,33 +13,14 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import {
+  ConsumptionRecordsFilter,
+  selectConsumptionRecordsFilter,
+} from '@waldur/table/generated/ConsumptionRecordsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { ARROW_FORM_NAMES } from '../constants';
-
-import { ConsumptionRecordsFilter } from './ConsumptionRecordsFilter';
 import { ForceImportConsumptionButton } from './ForceImportConsumptionButton';
-
-const filtersSelector = createSelector(
-  getFormValues(ARROW_FORM_NAMES.consumptionRecordsFilter),
-  (filterValues: any) => {
-    const result: AdminArrowConsumptionRecordsListData['query'] = {};
-    if (filterValues?.organization) {
-      result.customer_uuid = filterValues.organization.uuid;
-    }
-    if (filterValues?.project) {
-      result.project_uuid = filterValues.project.uuid;
-    }
-    if (
-      filterValues?.is_finalized !== undefined &&
-      filterValues.is_finalized !== null
-    ) {
-      result.is_finalized = filterValues.is_finalized.value;
-    }
-    return result;
-  },
-);
 
 const mandatoryFields: Array<keyof ArrowConsumptionRecord> = [
   'uuid',
@@ -65,14 +43,7 @@ interface ConsumptionRecordsListProps {
 export const ConsumptionRecordsList: FunctionComponent<
   ConsumptionRecordsListProps
 > = () => {
-  const formFilter = useSelector(filtersSelector);
-
-  const filter = useMemo(
-    () => ({
-      ...formFilter,
-    }),
-    [formFilter],
-  );
+  const filter = useSelector(selectConsumptionRecordsFilter);
 
   const tableProps = useTable({
     table: 'ArrowConsumptionRecords',
