@@ -1225,7 +1225,7 @@ export const SettingsDescription = [
         key: 'OIDC_CLIENT_SECRET',
         description: translate('Client secret for HTTP Basic authentication when calling the token introspection endpoint. Required together with OIDC_CLIENT_ID and OIDC_INTROSPECTION_URL.'),
         default: '',
-        type: 'string',
+        type: 'secret_field',
       },
       {
         key: 'OIDC_USER_FIELD',
