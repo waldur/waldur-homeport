@@ -37,7 +37,6 @@ export enum MarketplaceFeatures {
   hide_organization_information_from_project_members = 'marketplace.hide_organization_information_from_project_members',
   import_resources = 'marketplace.import_resources',
   lexis_links = 'marketplace.lexis_links',
-  marketplace_staff_only = 'marketplace.marketplace_staff_only',
   show_call_management_functionality = 'marketplace.show_call_management_functionality',
   show_experimental_ui_components = 'marketplace.show_experimental_ui_components',
   show_resource_end_date = 'marketplace.show_resource_end_date',

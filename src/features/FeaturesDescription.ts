@@ -131,10 +131,6 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enabled LEXIS link integrations for offerings.'),
       },
       {
-        key: 'marketplace_staff_only',
-        description: translate('Make marketplace visible only to staff users. Non-staff users will not see marketplace section.'),
-      },
-      {
         key: 'show_call_management_functionality',
         description: translate('Enabled display of call management functionality.'),
       },
