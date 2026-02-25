@@ -4,7 +4,10 @@ import { Project } from 'waldur-js-client';
 
 import { AddButton } from '@waldur/core/AddButton';
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { openModalDialog } from '@waldur/modal/actions';
+import { useUser } from '@waldur/workspace/hooks';
 import { Customer } from '@waldur/workspace/types';
 
 const MarketplacePopup = lazyComponent(() =>
@@ -20,7 +23,16 @@ interface CreateResourceButtonProps {
 }
 
 export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
+  const user = useUser();
   const dispatch = useDispatch();
+
+  if (
+    isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) &&
+    !user?.is_staff
+  ) {
+    return null;
+  }
+
   const openFormDialog = useCallback(
     () =>
       dispatch(
