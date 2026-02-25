@@ -123,7 +123,7 @@ describe('generate-filters.cjs', () => {
       expect(resp).toBeDefined();
       expect(resp.valueField).toBe('uuid');
       expect(resp.labelField).toBe('username');
-      expect(resp.returnType).toBe('User');
+      expect(resp.returnType).toBe('UsersListData');
     });
 
     it('extracts extra enums from config', () => {

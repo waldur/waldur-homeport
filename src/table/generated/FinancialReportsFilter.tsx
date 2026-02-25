@@ -38,7 +38,7 @@ export interface AccountingIsRunningChoicesOption {
   value: any;
 }
 
-export const PureFinancialReportsFilter: FunctionComponent<
+const PureFinancialReportsFilter: FunctionComponent<
   FinancialReportsFilterProps
 > = (props) => (
   <>
@@ -139,12 +139,14 @@ export const FinancialReportsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureFinancialReportsFilter);
 
+type FinancialReportsFilterQuery = FinancialReportsListData['query'];
+
 export const selectFinancialReportsFilter = createSelector<
   RootState,
   Partial<FinancialReportsFilterFormData>,
-  FinancialReportsListData['query']
+  FinancialReportsFilterQuery
 >(getFormValues(FinancialReportsFilterFormId), (values) => {
-  const filter: FinancialReportsListData['query'] = {} as any;
+  const filter: FinancialReportsFilterQuery = {} as any;
   if (values) {
     if (values.customer) {
       filter.customer_uuid = values.customer.customer_uuid;

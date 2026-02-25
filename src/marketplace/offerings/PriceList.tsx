@@ -5,9 +5,9 @@ import { marketplacePlanComponentsList, PlanComponent } from 'waldur-js-client';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import {
-  PriceListFilter,
-  selectPriceListFilter,
-} from '@waldur/table/generated/PriceListFilter';
+  MarketplacePlanComponentsFilter,
+  selectMarketplacePlanComponentsFilter,
+} from '@waldur/table/generated/MarketplacePlanComponentsFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -16,7 +16,7 @@ import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';
 
 export const PriceList = () => {
-  const formFilter = useSelector(selectPriceListFilter);
+  const formFilter = useSelector(selectMarketplacePlanComponentsFilter);
   const filter = useMemo(() => formFilter, [formFilter?.offering_uuid]);
   const props = useTable({
     table: 'MarketplacePriceList',
@@ -80,7 +80,7 @@ export const PriceList = () => {
       verboseName={translate('components')}
       showPageSizeSelector={true}
       enableExport={true}
-      filters={<PriceListFilter />}
+      filters={<MarketplacePlanComponentsFilter />}
     />
   );
 };

@@ -15,7 +15,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureSupportFeedbacksFilter: FunctionComponent<
+const PureSupportFeedbacksFilter: FunctionComponent<
   SupportFeedbacksFilterProps
 > = (props) => (
   <>
@@ -104,12 +104,14 @@ export const SupportFeedbacksFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureSupportFeedbacksFilter);
 
+type SupportFeedbacksFilterQuery = SupportFeedbacksListData['query'];
+
 export const selectSupportFeedbacksFilter = createSelector<
   RootState,
   Partial<SupportFeedbacksFilterFormData>,
-  SupportFeedbacksListData['query']
+  SupportFeedbacksFilterQuery
 >(getFormValues(SupportFeedbacksFilterFormId), (values) => {
-  const filter: SupportFeedbacksListData['query'] = {} as any;
+  const filter: SupportFeedbacksFilterQuery = {} as any;
   if (values) {
     if (values.evaluation) {
       filter.evaluation = values.evaluation.value;

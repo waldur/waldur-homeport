@@ -1,6 +1,5 @@
 import { FC, useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
 
@@ -9,10 +8,13 @@ import { translate } from '@waldur/i18n';
 import { ProposalReview } from '@waldur/proposals/types';
 import { getReviewStateOptions } from '@waldur/proposals/utils';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProposalReviewsFilter,
+  selectProposalReviewsFilter,
+} from '@waldur/table/generated/ProposalReviewsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
-import { USER_REVIEWS_FILTER_FORM_ID } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { EndingField } from '../EndingField';
@@ -20,23 +22,16 @@ import { EndingField } from '../EndingField';
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewsExpandableRow } from './ReviewsExpandableRow';
 import { ReviewsRowActions } from './ReviewsRowActons';
-import { ReviewsTableFilter } from './ReviewsTableFilter';
 import { ReviewStateRenderer } from './ReviewStateRenderer';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';
 import { useMyReviewsTabs } from './tabs';
 
 const filtersSelector = createSelector(
   getUser,
-  getFormValues(USER_REVIEWS_FILTER_FORM_ID),
-  (user, filters: any) => {
-    const result: ProposalReviewsListData['query'] = {};
+  selectProposalReviewsFilter,
+  (user, filters) => {
+    const result: ProposalReviewsListData['query'] = { ...filters };
     result.reviewer_uuid = user.uuid;
-    if (filters?.state) {
-      result.state = filters.state.map((option) => option.value);
-    }
-    if (filters?.call) {
-      result.call_uuid = filters.call.uuid;
-    }
     return result;
   },
 );
@@ -153,7 +148,7 @@ export const MyReviewsPage: FC = () => {
             verboseName={translate('reviews')}
             hasQuery={true}
             rowActions={ReviewsRowActions}
-            filters={<ReviewsTableFilter />}
+            filters={<ProposalReviewsFilter />}
             showPageSizeSelector={true}
             expandableRow={ReviewsExpandableRow}
             hasOptionalColumns

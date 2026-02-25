@@ -4,13 +4,14 @@ import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
-  AdminArrowConsumptionRecordsListData,
   Customer,
+  MarketplaceResourcesListData,
+  Project,
   customersList,
+  projectsList,
 } from 'waldur-js-client';
 
 import {
-  Select,
   AsyncPaginate,
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
@@ -19,22 +20,9 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const IsFinalizedChoices: IsFinalizedChoicesOption[] = [
-  {
-    label: translate('Pending'),
-    value: false,
-  },
-  {
-    label: translate('Finalized'),
-    value: true,
-  },
-];
-export interface IsFinalizedChoicesOption {
-  label: string;
-  value: boolean;
-}
-
-export const PureConsumptionRecordsFilter: FunctionComponent<{}> = () => (
+const PureMarketplaceResourcesFilter: FunctionComponent<
+  MarketplaceResourcesFilterProps
+> = (props) => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -60,24 +48,26 @@ export const PureConsumptionRecordsFilter: FunctionComponent<{}> = () => (
       />
     </TableFilterItem>
     <TableFilterItem
-      title={translate('Status')}
-      name="is_finalized"
-      getValueLabel={(value: IsFinalizedChoicesOption) => value?.label}
+      title={translate('Project')}
+      name="project"
+      getValueLabel={(value: Project) => value?.name}
     >
       <Field
-        name="is_finalized"
+        name="project"
         component={(fieldProps) => (
-          <Select
-            placeholder={translate('Status')}
-            options={IsFinalizedChoices}
+          <AsyncPaginate
+            placeholder={translate('Project')}
+            loadOptions={createSelectFetcher(projectsList, 'query', {
+              customer: props.organizationUuid,
+            })}
+            defaultOptions
+            getOptionValue={(option: Project) => String(option.uuid || '')}
+            getOptionLabel={(option: Project) => String(option.name || '')}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: IsFinalizedChoicesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: IsFinalizedChoicesOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
+            className="metronic-select-container"
           />
         )}
       />
@@ -85,33 +75,39 @@ export const PureConsumptionRecordsFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const ConsumptionRecordsFilterFormId = 'ConsumptionRecordsFilter';
+export const MarketplaceResourcesFilterFormId = 'MarketplaceResourcesFilter';
 
-interface ConsumptionRecordsFilterFormData {
-  organization: Customer;
-  is_finalized: IsFinalizedChoicesOption;
+interface MarketplaceResourcesFilterProps {
+  organizationUuid?: any;
 }
 
-export const ConsumptionRecordsFilter = reduxForm<
-  ConsumptionRecordsFilterFormData,
-  {}
->({
-  form: ConsumptionRecordsFilterFormId,
-  destroyOnUnmount: false,
-})(PureConsumptionRecordsFilter);
+interface MarketplaceResourcesFilterFormData {
+  organization: Customer;
+  project: Project;
+}
 
-export const selectConsumptionRecordsFilter = createSelector<
+export const MarketplaceResourcesFilter = reduxForm<
+  MarketplaceResourcesFilterFormData,
+  MarketplaceResourcesFilterProps
+>({
+  form: MarketplaceResourcesFilterFormId,
+  destroyOnUnmount: false,
+})(PureMarketplaceResourcesFilter);
+
+type MarketplaceResourcesFilterQuery = MarketplaceResourcesListData['query'];
+
+export const selectMarketplaceResourcesFilter = createSelector<
   RootState,
-  Partial<ConsumptionRecordsFilterFormData>,
-  AdminArrowConsumptionRecordsListData['query']
->(getFormValues(ConsumptionRecordsFilterFormId), (values) => {
-  const filter: AdminArrowConsumptionRecordsListData['query'] = {} as any;
+  Partial<MarketplaceResourcesFilterFormData>,
+  MarketplaceResourcesFilterQuery
+>(getFormValues(MarketplaceResourcesFilterFormId), (values) => {
+  const filter: MarketplaceResourcesFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
       filter.customer_uuid = values.organization.uuid;
     }
-    if (values.is_finalized) {
-      filter.is_finalized = values.is_finalized.value;
+    if (values.project) {
+      filter.project_uuid = values.project.uuid;
     }
   }
   return filter;

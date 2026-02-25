@@ -11,11 +11,12 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
+import { RancherClusterFilter } from '@waldur/table/generated/RancherClusterFilter';
 import Table from '@waldur/table/Table';
 import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { ClusterFilter, useClusterFilter } from '../ClusterFilter';
+import { useClusterFilter } from '../ClusterFilterHooks';
 import { ViewYAMLButton } from '../ViewYAMLButton';
 
 import { HPACreateButton } from './HPACreateButton';
@@ -103,7 +104,7 @@ export const ClusterHPAList: FunctionComponent<
       verboseName={translate('horizontal pod autoscalers')}
       showPageSizeSelector
       tableActions={<HPACreateButton cluster={resourceScope} />}
-      filters={<ClusterFilter cluster={resourceScope} />}
+      filters={<RancherClusterFilter cluster={resourceScope} />}
       portal={portal}
       hasActionBar={false}
       cardBordered={false}

@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureTenantImagesFilter: FunctionComponent<{}> = () => (
+const PureOpenstackImagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Show duplicate names')}
     name="show_duplicate_names"
@@ -26,23 +26,28 @@ export const PureTenantImagesFilter: FunctionComponent<{}> = () => (
   </TableFilterItem>
 );
 
-export const TenantImagesFilterFormId = 'TenantImagesFilter';
+export const OpenstackImagesFilterFormId = 'OpenstackImagesFilter';
 
-interface TenantImagesFilterFormData {
+interface OpenstackImagesFilterFormData {
   show_duplicate_names: boolean;
 }
 
-export const TenantImagesFilter = reduxForm<TenantImagesFilterFormData, {}>({
-  form: TenantImagesFilterFormId,
+export const OpenstackImagesFilter = reduxForm<
+  OpenstackImagesFilterFormData,
+  {}
+>({
+  form: OpenstackImagesFilterFormId,
   destroyOnUnmount: false,
-})(PureTenantImagesFilter);
+})(PureOpenstackImagesFilter);
 
-export const selectTenantImagesFilter = createSelector<
+type OpenstackImagesFilterQuery = OpenstackImagesListData['query'];
+
+export const selectOpenstackImagesFilter = createSelector<
   RootState,
-  Partial<TenantImagesFilterFormData>,
-  OpenstackImagesListData['query']
->(getFormValues(TenantImagesFilterFormId), (values) => {
-  const filter: OpenstackImagesListData['query'] = {} as any;
+  Partial<OpenstackImagesFilterFormData>,
+  OpenstackImagesFilterQuery
+>(getFormValues(OpenstackImagesFilterFormId), (values) => {
+  const filter: OpenstackImagesFilterQuery = {} as any;
   if (values) {
     if (values.show_duplicate_names) {
       filter.show_duplicate_names = values.show_duplicate_names;

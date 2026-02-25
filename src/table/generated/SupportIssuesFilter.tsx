@@ -33,7 +33,7 @@ export interface StatusChoicesOption {
   value: string;
 }
 
-export const PureIssuesFilter: FunctionComponent<{}> = () => (
+const PureSupportIssuesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="status"
@@ -57,23 +57,25 @@ export const PureIssuesFilter: FunctionComponent<{}> = () => (
   </TableFilterItem>
 );
 
-export const IssuesFilterFormId = 'IssuesFilter';
+export const SupportIssuesFilterFormId = 'SupportIssuesFilter';
 
-interface IssuesFilterFormData {
+interface SupportIssuesFilterFormData {
   status: StatusChoicesOption;
 }
 
-export const IssuesFilter = reduxForm<IssuesFilterFormData, {}>({
-  form: IssuesFilterFormId,
+export const SupportIssuesFilter = reduxForm<SupportIssuesFilterFormData, {}>({
+  form: SupportIssuesFilterFormId,
   destroyOnUnmount: false,
-})(PureIssuesFilter);
+})(PureSupportIssuesFilter);
 
-export const selectIssuesFilter = createSelector<
+type SupportIssuesFilterQuery = SupportIssuesListData['query'];
+
+export const selectSupportIssuesFilter = createSelector<
   RootState,
-  Partial<IssuesFilterFormData>,
-  SupportIssuesListData['query']
->(getFormValues(IssuesFilterFormId), (values) => {
-  const filter: SupportIssuesListData['query'] = {} as any;
+  Partial<SupportIssuesFilterFormData>,
+  SupportIssuesFilterQuery
+>(getFormValues(SupportIssuesFilterFormId), (values) => {
+  const filter: SupportIssuesFilterQuery = {} as any;
   if (values) {
     if (values.status) {
       filter.status = values.status.value;

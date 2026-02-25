@@ -122,16 +122,25 @@ class SchemaProcessor {
 
         const resp =
           op.responses?.['200']?.content?.['application/json']?.schema;
-        if (!resp) continue;
+        if (!resp) {
+          this.responseFields.set(op.operationId, {
+            returnType: `${utils.toPascalCase(op.operationId)}Data`,
+          });
+          continue;
+        }
         let s = resp.$ref ? utils.resolveRef(resp.$ref, this.schema) : resp;
+        let returnType =
+          resp.$ref?.split('/').pop() ||
+          `${utils.toPascalCase(op.operationId)}Data`;
+        if (returnType === 'NameUUID') returnType = 'NameUuid';
+
         if (s?.type === 'array' && s.items) {
           let item = s.items.$ref
             ? utils.resolveRef(s.items.$ref, this.schema)
             : s.items;
+          const itemType = s.items.$ref?.split('/').pop();
           if (item?.properties) {
             const props = Object.keys(item.properties);
-            let returnType = s.items.$ref?.split('/').pop();
-            if (returnType === 'NameUUID') returnType = 'NameUuid';
             this.responseFields.set(op.operationId, {
               valueField:
                 VALUE_CANDIDATES.find((c) => props.includes(c)) || 'uuid',
@@ -139,8 +148,13 @@ class SchemaProcessor {
                 LABEL_CANDIDATES.find((c) => props.includes(c)) || 'name',
               props,
               returnType,
+              itemType: itemType === 'NameUUID' ? 'NameUuid' : itemType,
             });
           }
+        } else {
+          this.responseFields.set(op.operationId, {
+            returnType,
+          });
         }
       }
     }
@@ -155,7 +169,9 @@ class FilterMapper {
     this.enumReverseRegistry = new Map();
   }
 
-  getFiltersForOp(opId) {
+  getFiltersForOp(key) {
+    const opOverrides = this.config.overrides[key] || {};
+    const opId = opOverrides.operationId || `${key}_list`;
     const pathEntry = Object.entries(this.proc.schema.paths).find(
       ([_, m]) => m.get?.operationId === opId,
     );
@@ -164,18 +180,17 @@ class FilterMapper {
     const queryParams = (pathEntry[1].get.parameters || []).filter(
       (p) => p.in === 'query',
     );
-    const opOverrides = this.config.overrides[opId] || {};
-    const extraFilters = this.config.extraFilters?.[opId] || [];
+    const extraFilters = this.config.extraFilters?.[key] || [];
 
     let filters = [];
     if (opOverrides.filters) {
       filters = opOverrides.filters.map((name) => {
         const param = queryParams.find((p) => p.name === name) || { name };
-        return this.mapParameter(param, opId);
+        return this.mapParameter(param, key);
       });
     } else {
       filters = queryParams.map((param) => {
-        return this.mapParameter(param, opId);
+        return this.mapParameter(param, key);
       });
     }
 
@@ -202,11 +217,12 @@ class FilterMapper {
     let schemaEnumName = null;
     if (schema.$ref) {
       schemaEnumName = schema.$ref.split('/').pop();
-      if (schemaEnumName === 'NameUUID') schemaEnumName = 'NameUuid';
-      schema = utils.resolveRef(schema.$ref, this.proc.schema) || schema;
     } else if (schema.items?.$ref) {
       schemaEnumName = schema.items.$ref.split('/').pop();
-      if (schemaEnumName === 'NameUUID') schemaEnumName = 'NameUuid';
+    }
+    if (schemaEnumName === 'NameUUID') schemaEnumName = 'NameUuid';
+    if (schema.$ref) {
+      schema = utils.resolveRef(schema.$ref, this.proc.schema) || schema;
     }
 
     const originalName = param.name;
@@ -265,7 +281,9 @@ class FilterMapper {
       };
       filter.valueField = resp.valueField;
       filter.labelField = resp.labelField;
-      if (resp.returnType) filter.valueType = resp.returnType;
+      if (resp.returnType) {
+        filter.valueType = resp.itemType || resp.returnType;
+      }
 
       const finalName = filter.mapTo || filter.name;
       if (finalName.endsWith('_uuid') && resp.props?.includes(finalName)) {
@@ -412,12 +430,6 @@ class Generator {
     ) {
       valLabel = '';
     } else {
-      const typeAnn =
-        f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)
-          ? `: ${f.optionsPlaceholder}Option`
-          : f.valueType
-            ? `: ${f.valueType}`
-            : '';
       const access = f.labelField ? `?.${f.labelField}` : '?.label';
       const argType =
         f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)
@@ -465,13 +477,18 @@ class Generator {
             .join('\n            ')
         : '';
 
+      const searchParam =
+        f.searchParam === false
+          ? ', null as any'
+          : `, '${f.searchParam || 'name'}'`;
+
       input = `      <Field
         name="${f.name}"
         ${validation}
         component={(fieldProps) => (
           <AsyncPaginate
             placeholder={${tPlace}}
-            loadOptions={createSelectFetcher(${f.loadOptions}, '${f.searchParam || 'name'}'${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
+            loadOptions={createSelectFetcher(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
             defaultOptions
             getOptionValue={(option${vType}) => String(option.${f.valueField || 'url'} || '')}
             getOptionLabel={(option${vType}) => String(option.${f.labelField || 'name'} || '')}
@@ -492,15 +509,6 @@ class Generator {
             .map(([k, v]) => `${k}={${v}}`)
             .join('\n            ')
         : '';
-
-      const defaultVal =
-        f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)
-          ? `getOptionValue={(option: ${f.optionsPlaceholder}Option) => option.value}`
-          : `getOptionValue={(option: any) => option.value}`;
-      const defaultLabel =
-        f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)
-          ? `getOptionLabel={(option: ${f.optionsPlaceholder}Option) => option.label}`
-          : `getOptionLabel={(option: any) => option.label}`;
 
       input = `      <Field
         name="${f.name}"
@@ -576,7 +584,7 @@ ${jsx}    )}\n`
     return `      if (values.${f.name}) {\n${logic}      }\n`;
   }
 
-  static file(opIds, operationFilters, enumRegistry, config) {
+  static file(opIds, operationFilters, enumRegistry, config, processor) {
     const usedEnums = new Set();
     opIds.forEach((id) =>
       operationFilters[id].forEach(
@@ -590,15 +598,15 @@ ${jsx}    )}\n`
     const componentsCode = opIds
       .map((id) => {
         const filters = operationFilters[id];
+        const opId = config.overrides[id]?.operationId || `${id}_list`;
         // 1. Generate the SDK Type name (e.g., "InvoicesItemsRetrieveData")
-        const sdkDataType = `${utils.toPascalCase(id)}Data`;
+        const sdkDataType = `${utils.toPascalCase(opId)}Data`;
 
         // 2. Generate the Component Name (e.g., "InvoicesItemsFilter")
         const cleanId = utils
           .toPascalCase(id)
           .replace(/(?:List|Retrieve|Create|Update|Delete)$/, '');
-        const compName =
-          config.overrides[id]?.componentName || `${cleanId}Filter`;
+        const compName = `${cleanId}Filter`;
         const usesProps = filters.some(
           (f) =>
             JSON.stringify(f).includes('props.') ||
@@ -667,12 +675,12 @@ ${jsx}    )}\n`
 
         const propsInterfaceName = pFields.size ? `${compName}Props` : '{}';
 
-        return `export const Pure${compName}: FunctionComponent<${propsInterfaceName}> = (${pFields.size ? 'props' : ''}) => (
+        return `const Pure${compName}: FunctionComponent<${propsInterfaceName}> = (${pFields.size ? 'props' : ''}) => (
   <>
 ${filters.map((f) => Generator.field(f, enumRegistry)).join('')}  </>
 );
 
-export const ${compName}FormId = '${config.overrides[id]?.formId || compName}';
+export const ${compName}FormId = '${compName}';
 
 ${propsInterface}interface ${compName}FormData {
 ${interfaceFields}
@@ -684,14 +692,16 @@ export const ${compName} = reduxForm<${compName}FormData, ${propsInterfaceName}>
   ${config.overrides[id]?.initialValues ? `initialValues: ${JSON.stringify(config.overrides[id].initialValues).replace(/"label":\s*"([^"]+)"/g, '"label": translate("$1")')},` : ''}
 })(Pure${compName});
 
+type ${compName}Query = ${sdkDataType}['query'];
+
 export const select${compName} = createSelector<
   RootState,
   Partial<${compName}FormData>,
-  ${sdkDataType}['query']
+  ${compName}Query
 >(
   getFormValues(${compName}FormId),
   (values) => {
-    const filter: ${sdkDataType}['query'] = {} as any;
+    const filter: ${compName}Query = {} as any;
     if (values) {
 ${filters.map(Generator.selector).join('')}    }
     return filter;
@@ -704,7 +714,7 @@ ${filters.map(Generator.selector).join('')}    }
     return [
       `// This file is auto-generated. Do not edit manually.`,
       `/* eslint-disable @typescript-eslint/no-unused-vars */`,
-      this.imports(opIds, operationFilters, enumRegistry, config),
+      this.imports(opIds, operationFilters, enumRegistry, config, processor),
       this.enums(enumRegistry, usedEnums),
       componentsCode,
     ].join('\n\n');
@@ -734,7 +744,8 @@ ${filters.map(Generator.selector).join('')}    }
     const extras = new Set();
 
     opIds.forEach((id) => {
-      const sdkDataType = `${utils.toPascalCase(id)}Data`;
+      const opId = config.overrides[id]?.operationId || `${id}_list`;
+      const sdkDataType = `${utils.toPascalCase(opId)}Data`;
       sdk.add(sdkDataType);
       (config.overrides[id]?.extraImports || []).forEach((i) => extras.add(i));
       opFilters[id].forEach((f) => {
@@ -842,9 +853,7 @@ function run() {
   Object.keys(operationFilters)
     .sort()
     .forEach((id) => {
-      const out =
-        config.overrides[id]?.output ||
-        `./src/table/generated/${utils.toPascalCase(id).replace(/(?:List|Retrieve)$/, '')}Filter.tsx`;
+      const out = `./src/table/generated/${utils.toPascalCase(id).replace(/(?:List|Retrieve)$/, '')}Filter.tsx`;
       const fullPath = path.resolve(__dirname, out);
       if (!outputFiles.has(fullPath)) outputFiles.set(fullPath, []);
       outputFiles.get(fullPath).push(id);
@@ -856,6 +865,7 @@ function run() {
       operationFilters,
       mapper.enumRegistry,
       config,
+      proc,
     );
     fs.mkdirSync(path.dirname(filePath), { recursive: true });
     fs.writeFileSync(filePath, content);

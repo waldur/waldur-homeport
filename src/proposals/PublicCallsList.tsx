@@ -1,6 +1,5 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import {
   proposalPublicCallsList,
   ProposalPublicCallsListData,
@@ -11,13 +10,15 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProposalPublicCallsFilter,
+  selectProposalPublicCallsFilter,
+} from '@waldur/table/generated/ProposalPublicCallsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { CallAllFiltersWithDefaultState } from './call-management/CallAllFilters';
 import { CallCard } from './CallCard';
-import { CALL_FILTER_FORM_ID } from './constants';
 import { PublicCallApplyButton } from './details/PublicCallApplyButton';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { Call } from './types';
@@ -108,32 +109,18 @@ const CallColumns = [
 export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
   props,
 ) => {
-  const usePublicCallsFilter = (
-    offering_uuid?: string,
-    provider_uuid?: string,
-  ) => {
-    const filters = useSelector(getFormValues(CALL_FILTER_FORM_ID)) as any;
+  const filters = useSelector(selectProposalPublicCallsFilter);
 
-    return useMemo(() => {
-      const result: ProposalPublicCallsListData['query'] = {};
-      if (filters) {
-        if (filters.state) {
-          result.state = filters.state.map((option) => option.value);
-        }
-        if (filters.has_active_round) {
-          result.has_active_round = filters.has_active_round;
-        }
-      }
-      if (offering_uuid) {
-        result.offering_uuid = offering_uuid;
-      }
-      if (provider_uuid) {
-        result.offerings_provider_uuid = provider_uuid;
-      }
-      return result;
-    }, [filters, offering_uuid, provider_uuid]);
-  };
-  const filter = usePublicCallsFilter(props.offering_uuid, props.provider_uuid);
+  const filter = useMemo(() => {
+    const result: ProposalPublicCallsListData['query'] = { ...filters };
+    if (props.offering_uuid) {
+      result.offering_uuid = props.offering_uuid;
+    }
+    if (props.provider_uuid) {
+      result.offerings_provider_uuid = props.provider_uuid;
+    }
+    return result;
+  }, [filters, props.offering_uuid, props.provider_uuid]);
   const tableProps = useTable({
     table: 'PublicCallsList',
     fetchData: createFetcher(proposalPublicCallsList),
@@ -153,7 +140,7 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
       initialSorting={{ field: 'name', mode: 'desc' }}
       hasQuery={true}
       expandableRow={PublicCallExpandableRow}
-      filters={<CallAllFiltersWithDefaultState />}
+      filters={<ProposalPublicCallsFilter />}
       rowActions={({ row }) => (
         <PublicCallApplyButton
           call={row}

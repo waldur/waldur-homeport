@@ -58,7 +58,7 @@ export interface SystemLogSourceEnumChoicesOption {
   value: SystemLogSourceEnum;
 }
 
-export const PureSupportSystemLogsFilter: FunctionComponent<{}> = () => (
+const PureSystemLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Source')}
@@ -141,9 +141,9 @@ export const PureSupportSystemLogsFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const SupportSystemLogsFilterFormId = 'SupportSystemLogsFilter';
+export const SystemLogsFilterFormId = 'SystemLogsFilter';
 
-interface SupportSystemLogsFilterFormData {
+interface SystemLogsFilterFormData {
   source: SystemLogSourceEnumChoicesOption;
   level: SystemLogLevelEnumChoicesOption;
   instance: string;
@@ -152,20 +152,19 @@ interface SupportSystemLogsFilterFormData {
   end_date: string;
 }
 
-export const SupportSystemLogsFilter = reduxForm<
-  SupportSystemLogsFilterFormData,
-  {}
->({
-  form: SupportSystemLogsFilterFormId,
+export const SystemLogsFilter = reduxForm<SystemLogsFilterFormData, {}>({
+  form: SystemLogsFilterFormId,
   destroyOnUnmount: false,
-})(PureSupportSystemLogsFilter);
+})(PureSystemLogsFilter);
 
-export const selectSupportSystemLogsFilter = createSelector<
+type SystemLogsFilterQuery = SystemLogsListData['query'];
+
+export const selectSystemLogsFilter = createSelector<
   RootState,
-  Partial<SupportSystemLogsFilterFormData>,
-  SystemLogsListData['query']
->(getFormValues(SupportSystemLogsFilterFormId), (values) => {
-  const filter: SystemLogsListData['query'] = {} as any;
+  Partial<SystemLogsFilterFormData>,
+  SystemLogsFilterQuery
+>(getFormValues(SystemLogsFilterFormId), (values) => {
+  const filter: SystemLogsFilterQuery = {} as any;
   if (values) {
     if (values.source) {
       filter.source = values.source.value;

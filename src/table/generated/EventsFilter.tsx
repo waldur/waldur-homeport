@@ -38,7 +38,7 @@ export interface FeatureChoicesOption {
   value: string;
 }
 
-export const PureSupportEventsFilter: FunctionComponent<{}> = () => (
+const PureEventsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -140,26 +140,28 @@ export const PureSupportEventsFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const SupportEventsFilterFormId = 'SupportEventsFilter';
+export const EventsFilterFormId = 'EventsFilter';
 
-interface SupportEventsFilterFormData {
+interface EventsFilterFormData {
   organization: Customer;
   project: Project;
   user: User;
   feature: FeatureChoicesOption[];
 }
 
-export const SupportEventsFilter = reduxForm<SupportEventsFilterFormData, {}>({
-  form: SupportEventsFilterFormId,
+export const EventsFilter = reduxForm<EventsFilterFormData, {}>({
+  form: EventsFilterFormId,
   destroyOnUnmount: false,
-})(PureSupportEventsFilter);
+})(PureEventsFilter);
 
-export const selectSupportEventsFilter = createSelector<
+type EventsFilterQuery = EventsListData['query'];
+
+export const selectEventsFilter = createSelector<
   RootState,
-  Partial<SupportEventsFilterFormData>,
-  EventsListData['query']
->(getFormValues(SupportEventsFilterFormId), (values) => {
-  const filter: EventsListData['query'] = {} as any;
+  Partial<EventsFilterFormData>,
+  EventsFilterQuery
+>(getFormValues(EventsFilterFormId), (values) => {
+  const filter: EventsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
       filter.customer_uuid = values.organization.uuid;

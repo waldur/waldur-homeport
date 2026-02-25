@@ -2,12 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { uniq } from 'lodash-es';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   marketplacePublicOfferingsList,
   marketplaceResourcesList,
-  MarketplaceResourcesListData,
   Resource,
 } from 'waldur-js-client';
 
@@ -22,14 +19,15 @@ import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNa
 import { ResourceTerminationDateField } from '@waldur/marketplace/resources/list/ResourceTerminationDateField';
 import { resourcesListRequiredFields } from '@waldur/marketplace/resources/list/utils';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProjectResourcesFilter,
+  selectProjectResourcesFilter,
+} from '@waldur/table/generated/ProjectResourcesFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { getProject } from '@waldur/workspace/selectors';
 
-import { PROJECT_RESOURCES_LIST_FILTER } from '../constants';
-
-import { ProjectResourcesFilter } from './ProjectResourcesFilter';
 import { ResourceQuotaField } from './ResourceQuotaField';
 import { ResourceRateField } from './ResourceRateField';
 import { withResourceComponentsLoader } from './withResourceComponentsLoader';
@@ -53,23 +51,12 @@ const mandatoryFields = resourcesListRequiredFields(false).concat([
   'plan_unit',
 ]);
 
-const mapStateToFilter = createSelector(
-  getFormValues(PROJECT_RESOURCES_LIST_FILTER),
-  (filters: any) => {
-    const result: MarketplaceResourcesListData['query'] = {};
-    if (filters?.offering) {
-      result.offering_uuid = filters.offering.uuid;
-    }
-    return result;
-  },
-);
-
 export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
   showCost,
 }) => {
   const project = useSelector(getProject);
 
-  const stateFilter = useSelector(mapStateToFilter);
+  const stateFilter = useSelector(selectProjectResourcesFilter);
   const filter = useMemo(
     () => ({
       project_uuid: project.uuid,

@@ -7,8 +7,8 @@ import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import {
-  ManagedProjectsFilter,
-  selectManagedProjectsFilter,
+  OpenportalManagedProjectsFilter,
+  selectOpenportalManagedProjectsFilter,
 } from '@waldur/table/generated/OpenportalManagedProjectsFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
@@ -42,7 +42,7 @@ const renderOffering = (destination: string) => {
 export const ManagedProjectsList = () => {
   useTitle(translate('Managed Projects'), '', 'browser');
 
-  const filter = useSelector(selectManagedProjectsFilter);
+  const filter = useSelector(selectOpenportalManagedProjectsFilter);
 
   const tableProps = useTable({
     table: `ManagedProjectsList`,
@@ -146,7 +146,7 @@ export const ManagedProjectsList = () => {
       rowActions={({ row }) => (
         <ManagedProjectActions project={row} refetch={tableProps.fetch} />
       )}
-      filters={<ManagedProjectsFilter />}
+      filters={<OpenportalManagedProjectsFilter />}
     />
   );
 };

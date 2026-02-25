@@ -13,9 +13,9 @@ import { translate } from '@waldur/i18n';
 import { SupportAIAssistantLogsExpandableRow } from '@waldur/support/SupportAIAssistantLogsExpandableRow';
 import { createFetcher } from '@waldur/table/api';
 import {
-  SupportAIAssistantLogsFilter,
-  selectSupportAIAssistantLogsFilter,
-} from '@waldur/table/generated/SupportAIAssistantLogsFilter';
+  ChatThreadsFilter as SupportAIAssistantLogsFilter,
+  selectChatThreadsFilter as selectSupportAIAssistantLogsFilter,
+} from '@waldur/table/generated/ChatThreadsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';

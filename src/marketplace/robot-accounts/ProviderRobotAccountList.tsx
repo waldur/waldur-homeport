@@ -9,9 +9,9 @@ import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer'
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import {
-  ProviderRobotAccountFilter,
-  selectProviderRobotAccountFilter,
-} from '@waldur/table/generated/ProviderRobotAccountFilter';
+  MarketplaceRobotAccountsFilter,
+  selectMarketplaceRobotAccountsFilter,
+} from '@waldur/table/generated/MarketplaceRobotAccountsFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -21,7 +21,7 @@ import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
 
 export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
-  const formFilter = useSelector(selectProviderRobotAccountFilter);
+  const formFilter = useSelector(selectMarketplaceRobotAccountsFilter);
   const customer = useSelector(getCustomer);
   const filter = useMemo(() => {
     const baseFilter: any = {
@@ -82,7 +82,7 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
   return (
     <Table<RobotAccountDetails>
       {...tableProps}
-      filters={<ProviderRobotAccountFilter provider={provider} />}
+      filters={<MarketplaceRobotAccountsFilter provider={provider} />}
       columns={columns}
       verboseName={translate('robot accounts')}
       expandableRow={RobotAccountExpandable}

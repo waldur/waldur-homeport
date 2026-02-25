@@ -33,7 +33,7 @@ export interface BroadcastMessageStateEnumChoicesOption {
   value: BroadcastMessageStateEnum;
 }
 
-export const PureBroadcastMessagesFilter: FunctionComponent<{}> = () => (
+const PureBroadcastMessagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -77,12 +77,14 @@ export const BroadcastMessagesFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureBroadcastMessagesFilter);
 
+type BroadcastMessagesFilterQuery = BroadcastMessagesListData['query'];
+
 export const selectBroadcastMessagesFilter = createSelector<
   RootState,
   Partial<BroadcastMessagesFilterFormData>,
-  BroadcastMessagesListData['query']
+  BroadcastMessagesFilterQuery
 >(getFormValues(BroadcastMessagesFilterFormId), (values) => {
-  const filter: BroadcastMessagesListData['query'] = {} as any;
+  const filter: BroadcastMessagesFilterQuery = {} as any;
   if (values) {
     if (values.state) {
       filter.state = values.state.value;

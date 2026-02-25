@@ -41,7 +41,7 @@ export interface AccountingIsRunningChoicesOption {
   value: any;
 }
 
-export const PureCustomersFilter: FunctionComponent<{}> = () => (
+const PureCustomersFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Accounting is running')}
@@ -149,12 +149,14 @@ export const CustomersFilter = reduxForm<CustomersFilterFormData, {}>({
   destroyOnUnmount: false,
 })(PureCustomersFilter);
 
+type CustomersFilterQuery = CustomersListData['query'];
+
 export const selectCustomersFilter = createSelector<
   RootState,
   Partial<CustomersFilterFormData>,
-  CustomersListData['query']
+  CustomersFilterQuery
 >(getFormValues(CustomersFilterFormId), (values) => {
-  const filter: CustomersListData['query'] = {} as any;
+  const filter: CustomersFilterQuery = {} as any;
   if (values) {
     if (values.accounting_is_running) {
       filter.accounting_is_running = values.accounting_is_running.value;

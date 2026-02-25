@@ -10,9 +10,9 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureCustomersUsersFilter: FunctionComponent<
-  CustomersUsersFilterProps
-> = (props) => (
+const PureCustomersUsersFilter: FunctionComponent<CustomersUsersFilterProps> = (
+  props,
+) => (
   <>
     <TableFilterItem
       title={translate('Project role')}
@@ -85,12 +85,14 @@ export const CustomersUsersFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureCustomersUsersFilter);
 
+type CustomersUsersFilterQuery = CustomersUsersListData['query'];
+
 export const selectCustomersUsersFilter = createSelector<
   RootState,
   Partial<CustomersUsersFilterFormData>,
-  CustomersUsersListData['query']
+  CustomersUsersFilterQuery
 >(getFormValues(CustomersUsersFilterFormId), (values) => {
-  const filter: CustomersUsersListData['query'] = {} as any;
+  const filter: CustomersUsersFilterQuery = {} as any;
   if (values) {
     if (values.project_role) {
       filter.project_role = values.project_role.map((v: any) => v.name);

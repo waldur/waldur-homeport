@@ -9,11 +9,12 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
+import { RancherClusterFilter } from '@waldur/table/generated/RancherClusterFilter';
 import Table from '@waldur/table/Table';
 import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { ClusterFilter, useClusterResourceFilter } from '../ClusterFilter';
+import { useClusterResourceFilter } from '../ClusterFilterHooks';
 
 import { ApplicationDeleteButton } from './ApplicationDeleteButton';
 import { ApplicationDetailsButton } from './ApplicationDetailsButton';
@@ -69,7 +70,7 @@ export const ClusterApplicationsList: FunctionComponent<
       ]}
       rowActions={ApplicationActions}
       verboseName={translate('applications')}
-      filters={<ClusterFilter cluster={resourceScope} />}
+      filters={<RancherClusterFilter cluster={resourceScope} />}
       showPageSizeSelector
       portal={portal}
       hasActionBar={false}

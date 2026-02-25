@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { customerQuotasList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
@@ -11,6 +10,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { selectCustomerQuotasFilter } from '@waldur/table/generated/CustomerQuotasFilter';
 
 import {
   AnalyticsCapability,
@@ -23,7 +23,7 @@ import {
 } from '../analytics';
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
-import { CustomerQuota, QuotaChoice } from './types';
+import { CustomerQuota } from './types';
 
 /**
  * Simulation parameters for Quota "What if" analysis
@@ -243,9 +243,7 @@ export const QuotasAnalyticsPage: FC = () => {
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
 
   // Get filter values from the form if available
-  const formValues = useSelector<any, { quota: QuotaChoice }>(
-    getFormValues('CustomerQuotasFilter') as any,
-  );
+  const formValues = useSelector(selectCustomerQuotasFilter);
 
   // Fetch quota data
   const {
@@ -254,11 +252,11 @@ export const QuotasAnalyticsPage: FC = () => {
     error,
     refetch,
   } = useQuery({
-    queryKey: ['QuotasAnalytics', formValues?.quota?.key],
+    queryKey: ['QuotasAnalytics', formValues?.quota_name],
     queryFn: async () => {
       const response = await customerQuotasList({
         query: {
-          quota_name: formValues?.quota?.key || 'nc_resource_count',
+          quota_name: formValues?.quota_name || 'nc_resource_count',
         } as any,
       });
       return response.data as CustomerQuota[];

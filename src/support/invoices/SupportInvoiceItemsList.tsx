@@ -9,9 +9,9 @@ import { translate } from '@waldur/i18n';
 import { ComponentUsageImportButton } from '@waldur/invoices/import-usage';
 import { createFetcher } from '@waldur/table/api';
 import {
-  selectSupportInvoiceItemsFilter,
-  SupportInvoiceItemsFilter,
-} from '@waldur/table/generated/SupportInvoiceItemsFilter';
+  selectInvoiceItemsFilter,
+  InvoiceItemsFilter,
+} from '@waldur/table/generated/InvoiceItemsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -24,7 +24,7 @@ interface SupportInvoiceItemsListProps {
 export const SupportInvoiceItemsList: FunctionComponent<
   SupportInvoiceItemsListProps
 > = ({ initialValues, accountingPeriods }) => {
-  const filterValues = useSelector(selectSupportInvoiceItemsFilter);
+  const filterValues = useSelector(selectInvoiceItemsFilter);
 
   const tableProps = useTable({
     table: 'supportInvoiceItems',
@@ -37,7 +37,7 @@ export const SupportInvoiceItemsList: FunctionComponent<
     <Table<InvoiceItemDetail>
       {...tableProps}
       filters={
-        <SupportInvoiceItemsFilter
+        <InvoiceItemsFilter
           accountingPeriods={accountingPeriods}
           initialValues={initialValues}
         />

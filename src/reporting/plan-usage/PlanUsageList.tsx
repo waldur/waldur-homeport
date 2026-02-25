@@ -9,9 +9,9 @@ import { translate } from '@waldur/i18n';
 import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
 import { createFetcher } from '@waldur/table/api';
 import {
-  PlanUsageFilter,
-  selectPlanUsageFilter,
-} from '@waldur/table/generated/PlanUsageFilter';
+  MarketplacePlansUsageStatsFilter,
+  selectMarketplacePlansUsageStatsFilter,
+} from '@waldur/table/generated/MarketplacePlansUsageStatsFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -25,7 +25,7 @@ import { PlanUsageRowActions } from './PlanUsageRowActions';
 export const PlanUsageList: FunctionComponent = () => {
   useReportBreadcrumbs({ currentReport: 'capacity', category: 'provider' });
 
-  const formFilter = useSelector(selectPlanUsageFilter);
+  const formFilter = useSelector(selectMarketplacePlansUsageStatsFilter);
   const props = useTable({
     table: 'PlanUsages',
     fetchData: createFetcher(marketplacePlansUsageStatsList),
@@ -87,7 +87,7 @@ export const PlanUsageList: FunctionComponent = () => {
       enableExport={true}
       initialSorting={{ field: 'usage', mode: 'desc' }}
       rowActions={PlanUsageRowActions}
-      filters={<PlanUsageFilter />}
+      filters={<MarketplacePlansUsageStatsFilter />}
       tableActions={
         <PlanUsageAnalytics data={props.rows} loading={props.loading} />
       }

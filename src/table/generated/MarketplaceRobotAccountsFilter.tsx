@@ -19,8 +19,8 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureProviderRobotAccountFilter: FunctionComponent<
-  ProviderRobotAccountFilterProps
+const PureMarketplaceRobotAccountsFilter: FunctionComponent<
+  MarketplaceRobotAccountsFilterProps
 > = (props) => (
   <>
     <TableFilterItem
@@ -82,31 +82,35 @@ export const PureProviderRobotAccountFilter: FunctionComponent<
   </>
 );
 
-export const ProviderRobotAccountFilterFormId = 'ProviderRobotAccountFilter';
+export const MarketplaceRobotAccountsFilterFormId =
+  'MarketplaceRobotAccountsFilter';
 
-interface ProviderRobotAccountFilterProps {
+interface MarketplaceRobotAccountsFilterProps {
   provider?: any;
 }
 
-interface ProviderRobotAccountFilterFormData {
+interface MarketplaceRobotAccountsFilterFormData {
   customer: NameUuid;
   project: NameUuid;
 }
 
-export const ProviderRobotAccountFilter = reduxForm<
-  ProviderRobotAccountFilterFormData,
-  ProviderRobotAccountFilterProps
+export const MarketplaceRobotAccountsFilter = reduxForm<
+  MarketplaceRobotAccountsFilterFormData,
+  MarketplaceRobotAccountsFilterProps
 >({
-  form: ProviderRobotAccountFilterFormId,
+  form: MarketplaceRobotAccountsFilterFormId,
   destroyOnUnmount: false,
-})(PureProviderRobotAccountFilter);
+})(PureMarketplaceRobotAccountsFilter);
 
-export const selectProviderRobotAccountFilter = createSelector<
+type MarketplaceRobotAccountsFilterQuery =
+  MarketplaceRobotAccountsListData['query'];
+
+export const selectMarketplaceRobotAccountsFilter = createSelector<
   RootState,
-  Partial<ProviderRobotAccountFilterFormData>,
-  MarketplaceRobotAccountsListData['query']
->(getFormValues(ProviderRobotAccountFilterFormId), (values) => {
-  const filter: MarketplaceRobotAccountsListData['query'] = {} as any;
+  Partial<MarketplaceRobotAccountsFilterFormData>,
+  MarketplaceRobotAccountsFilterQuery
+>(getFormValues(MarketplaceRobotAccountsFilterFormId), (values) => {
+  const filter: MarketplaceRobotAccountsFilterQuery = {} as any;
   if (values) {
     if (values.customer) {
       filter.customer_uuid = values.customer.uuid;

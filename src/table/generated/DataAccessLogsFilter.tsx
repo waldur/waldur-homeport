@@ -48,7 +48,7 @@ export interface AccessorTypeEnumChoicesOption {
   value: AccessorTypeEnum;
 }
 
-export const PureSupportDataAccessLogsFilter: FunctionComponent<{}> = () => (
+const PureDataAccessLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Start date')} name="start_date">
       <Field
@@ -117,29 +117,30 @@ export const PureSupportDataAccessLogsFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const SupportDataAccessLogsFilterFormId = 'SupportDataAccessLogsFilter';
+export const DataAccessLogsFilterFormId = 'DataAccessLogsFilter';
 
-interface SupportDataAccessLogsFilterFormData {
+interface DataAccessLogsFilterFormData {
   start_date: string;
   end_date: string;
   accessor_type: AccessorTypeEnumChoicesOption;
   user: User;
 }
 
-export const SupportDataAccessLogsFilter = reduxForm<
-  SupportDataAccessLogsFilterFormData,
-  {}
->({
-  form: SupportDataAccessLogsFilterFormId,
-  destroyOnUnmount: false,
-})(PureSupportDataAccessLogsFilter);
+export const DataAccessLogsFilter = reduxForm<DataAccessLogsFilterFormData, {}>(
+  {
+    form: DataAccessLogsFilterFormId,
+    destroyOnUnmount: false,
+  },
+)(PureDataAccessLogsFilter);
 
-export const selectSupportDataAccessLogsFilter = createSelector<
+type DataAccessLogsFilterQuery = DataAccessLogsListData['query'];
+
+export const selectDataAccessLogsFilter = createSelector<
   RootState,
-  Partial<SupportDataAccessLogsFilterFormData>,
-  DataAccessLogsListData['query']
->(getFormValues(SupportDataAccessLogsFilterFormId), (values) => {
-  const filter: DataAccessLogsListData['query'] = {} as any;
+  Partial<DataAccessLogsFilterFormData>,
+  DataAccessLogsFilterQuery
+>(getFormValues(DataAccessLogsFilterFormId), (values) => {
+  const filter: DataAccessLogsFilterQuery = {} as any;
   if (values) {
     if (values.start_date) {
       filter.start_date = values.start_date;

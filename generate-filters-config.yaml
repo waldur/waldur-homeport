@@ -1,5 +1,5 @@
 overrides:
-  customers_list:
+  customers:
     filters:
       - accounting_is_running
       - is_service_provider
@@ -18,7 +18,7 @@ overrides:
         'true': Running accounting
         'false': Not running accounting
 
-  financial_reports_list:
+  financial_reports:
     filters:
       - customer_uuid
       - accounting_period
@@ -40,26 +40,7 @@ overrides:
         false: Not running accounting
         undefined: All
 
-  invoices_items_retrieve:
-    filters:
-      - provider_uuid
-      - project_uuid
-      - offering_uuid
-      - conceal_compensation_items
-    provider_uuid:
-      label: Service provider
-      operationId: marketplace_service_providers_list
-    offering_uuid:
-      extraQuery:
-        state: [Active]
-    project_uuid:
-      label: Project
-      extraQuery:
-        customer: 'props.customerUuid'
-
-  marketplace_resources_list:
-    componentName: ArrowResourcesFilter
-    output: './src/table/generated/ArrowResourcesFilter.tsx'
+  marketplace_resources:
     filters:
       - customer_uuid
       - project_uuid
@@ -67,14 +48,11 @@ overrides:
       label: Organization
       name: organization
     project_uuid:
-      label: Project
       name: project
       extraQuery:
         customer: 'props.organizationUuid'
 
-  admin_arrow_consumption_records_list:
-    componentName: ConsumptionRecordsFilter
-    output: './src/table/generated/ConsumptionRecordsFilter.tsx'
+  admin_arrow_consumption_records:
     filters:
       - customer_uuid
       - is_finalized
@@ -87,9 +65,7 @@ overrides:
         true: Finalized
         false: Pending
 
-  openstack_images_list:
-    componentName: TenantImagesFilter
-    output: './src/table/generated/TenantImagesFilter.tsx'
+  openstack_images:
     filters:
       - show_duplicate_names
     show_duplicate_names:
@@ -99,31 +75,31 @@ overrides:
         true: Yes
         false: No
 
-  invoice_items_list:
-    componentName: SupportInvoiceItemsFilter
-    output: './src/table/generated/SupportInvoiceItemsFilter.tsx'
+  invoices_items:
+    operationId: invoices_items_retrieve
     filters:
-      - customer_uuid
-      - accounting_period
+      - provider_uuid
       - project_uuid
       - offering_uuid
-    customer_uuid:
-      label: Organization
-      name: organization
-    accounting_period:
-      label: Period
-      options: props.accountingPeriods
-      mapTo: true
+      - conceal_compensation_items
+    provider_uuid:
+      label: Service provider
+      name: provider
+      operationId: marketplace_service_providers_list
     project_uuid:
-      label: Project
       name: project
+      operationId: projects_list
+      extraQuery:
+        customer: 'props.customerUuid'
     offering_uuid:
-      label: Offering
       name: offering
-      operationId: marketplace_provider_offerings_list
+      operationId: marketplace_public_offerings_list
+      extraQuery:
+        state: ['Active']
+    conceal_compensation_items:
+      component: AwesomeCheckboxField
 
-  email_logs_list:
-    componentName: SupportEmailLogsFilter
+  email_logs:
     filters:
       - emails
       - subject
@@ -135,7 +111,7 @@ overrides:
     sent_at:
       placeholder: 'YYYY-MM-DD'
 
-  user_invitations_list:
+  user_invitations:
     filters:
       - state
       - role_uuid
@@ -166,7 +142,7 @@ overrides:
         service_provider: Service provider organization
         call_organizer: Call managing organization
 
-  projects_list_users_list:
+  projects_list_users:
     filters:
       - project_role
     project_role:
@@ -176,7 +152,7 @@ overrides:
       valueField: name
       labelField: description
 
-  customers_users_list:
+  customers_users:
     filters:
       - project_role
       - organization_role
@@ -191,12 +167,11 @@ overrides:
       valueField: name
       labelField: description
 
-  marketplace_project_update_requests_list:
-    componentName: ProjectUpdateRequestListFilter
+  marketplace_project_update_requests:
     filters:
       - state
 
-  notification_messages_list:
+  notification_messages:
     filters:
       - is_overridden
     is_overridden:
@@ -205,11 +180,11 @@ overrides:
         'false': Not overridden
         'true': Overridden
 
-  broadcast_messages_list:
+  broadcast_messages:
     filters:
       - state
 
-  admin_announcements_list:
+  admin_announcements:
     filters:
       - type
       - is_active
@@ -219,8 +194,7 @@ overrides:
         'true': Active
         'false': Inactive
 
-  support_feedbacks_list:
-    componentName: SupportFeedbacksFilter
+  support_feedbacks:
     filters:
       - evaluation
       - user_uuid
@@ -233,9 +207,7 @@ overrides:
       options: props.periodOptions
       mapTo: true
 
-  data_access_logs_list:
-    componentName: SupportDataAccessLogsFilter
-    output: './src/table/generated/SupportDataAccessLogsFilter.tsx'
+  data_access_logs:
     filters:
       - start_date
       - end_date
@@ -246,17 +218,25 @@ overrides:
       extraQuery:
         o: ['full_name']
 
-  marketplace_plan_components_list:
-    componentName: PriceListFilter
-    output: './src/table/generated/PriceListFilter.tsx'
+  customer_quotas:
+    initialValues:
+      quota_name: { label: Resources, value: estimated_price }
+    filters:
+      - quota_name
+    quota_name:
+      label: Quota
+
+  openportal_managed_projects:
+    filters:
+      - state
+
+  marketplace_plan_components:
     filters:
       - offering_uuid
     offering_uuid:
       searchParam: name
 
-  marketplace_plans_usage_stats_list:
-    componentName: PlanUsageFilter
-    output: './src/table/generated/PlanUsageFilter.tsx'
+  marketplace_plans_usage_stats:
     filters:
       - customer_provider_uuid
       - offering_uuid
@@ -269,9 +249,7 @@ overrides:
     offering_uuid:
       searchParam: name
 
-  admin_arrow_billing_syncs_list:
-    componentName: BillingSyncFilter
-    output: './src/table/generated/BillingSyncFilter.tsx'
+  admin_arrow_billing_syncs:
     filters:
       - state
       - report_period_from
@@ -294,9 +272,7 @@ overrides:
       label: Period to
       options: 'props.billingPeriods'
 
-  admin_arrow_customer_mappings_list:
-    componentName: CustomerMappingsFilter
-    output: './src/table/generated/CustomerMappingsFilter.tsx'
+  admin_arrow_customer_mappings:
     filters:
       - waldur_customer_uuid
       - arrow_reference
@@ -309,18 +285,14 @@ overrides:
     is_active:
       label: Active
 
-  marketplace_customer_estimated_cost_policies_list:
-    componentName: OrganizationCostPoliciesFilter
-    output: './src/table/generated/OrganizationCostPoliciesFilter.tsx'
+  marketplace_customer_estimated_cost_policies:
     filters:
       - customer_uuid
     customer_uuid:
       label: Organization
       name: organization
 
-  chat_threads_list:
-    componentName: SupportAIAssistantLogsFilter
-    output: './src/table/generated/SupportAIAssistantLogsFilter.tsx'
+  chat_threads:
     filters:
       - created
       - modified
@@ -331,9 +303,7 @@ overrides:
     user:
       searchParam: full_name
 
-  events_list:
-    componentName: SupportEventsFilter
-    output: './src/table/generated/SupportEventsFilter.tsx'
+  events:
     filters:
       - customer_uuid
       - project_uuid
@@ -343,7 +313,6 @@ overrides:
       label: Organization
       name: organization
     project_uuid:
-      label: Project
       name: project
     user_uuid:
       label: User
@@ -358,9 +327,7 @@ overrides:
         projects: Project events
         resources: Resource events
 
-  system_logs_list:
-    componentName: SupportSystemLogsFilter
-    output: './src/table/generated/SupportSystemLogsFilter.tsx'
+  system_logs:
     filters:
       - source
       - level
@@ -375,9 +342,7 @@ overrides:
       component: DateField
       mapTo: false
 
-  marketplace_robot_accounts_list:
-    componentName: ProviderRobotAccountFilter
-    output: './src/table/generated/ProviderRobotAccountFilter.tsx'
+  marketplace_robot_accounts:
     filters:
       - customer_uuid
       - project_uuid
@@ -395,35 +360,7 @@ overrides:
       extraPath:
         uuid: props.provider.uuid
 
-  support_issues_list:
-    componentName: IssuesFilter
-    filters:
-      - status
-    status:
-      enumOverrides:
-        Open: Open
-        Waiting for support: Waiting for support
-        Closed: Closed
-        Resolved: Resolved
-
-  customer_quotas_list:
-    componentName: CustomerQuotasFilter
-    initialValues:
-      quota_name: { label: Resources, value: estimated_price }
-    filters:
-      - quota_name
-    quota_name:
-      label: Quota
-
-  openportal_managed_projects_list:
-    componentName: ManagedProjectsFilter
-    filters:
-      - state
-    state:
-      isMulti: true
-
-  reviewer_suggestions_list:
-    componentName: SuggestionsTableFilter
+  reviewer_suggestions:
     filters:
       - status
     status:
@@ -432,3 +369,182 @@ overrides:
         confirmed: Confirmed
         rejected: Rejected
         invited: Invited
+
+  customer_events:
+    operationId: events_list
+    initialValues:
+      feature:
+        - label: Organization events
+          value: customers
+    filters:
+      - feature
+    feature:
+      label: Type
+      isMulti: true
+      enumOverrides:
+        customers: Organization events
+        projects: Project events
+        resources: Resource events
+
+  user_group_invitations:
+    filters:
+      - is_active
+    is_active:
+      label: Group invitations
+      component: AwesomeCheckboxField
+      badgeLabels:
+        true: Only active
+        false: All
+
+  invoices:
+    filters:
+      - state
+    state:
+      isMulti: true
+      enumOverrides:
+        pending: Pending
+        pending_finalization: Pending finalization
+        canceled: Canceled
+        created: Created
+        paid: Paid
+
+  marketplace_provider_offerings:
+    initialValues:
+      state:
+        - label: Draft
+          value: Draft
+        - label: Active
+          value: Active
+    filters:
+      - state
+    state:
+      isMulti: true
+      enumOverrides:
+        Draft: Draft
+        Active: Active
+        Paused: Paused
+        Archived: Archived
+        Unavailable: Unavailable
+
+  project_resources:
+    operationId: marketplace_resources_list
+    filters:
+      - offering_uuid
+    offering_uuid:
+      operationId: marketplace_public_offerings_list
+      extraQuery:
+        project_uuid: 'props.project.uuid'
+
+  proposal_proposals:
+    initialValues:
+      state:
+        - label: Submitted
+          value: submitted
+        - label: Accepted
+          value: accepted
+        - label: In review
+          value: in_review
+    filters:
+      - state
+      - call_uuid
+      - round_uuid
+      - organization_uuid
+    state:
+      isMulti: true
+      enumOverrides:
+        draft: Draft
+        submitted: Submitted
+        accepted: Accepted
+        rejected: Rejected
+        canceled: Canceled
+        in_review: In review
+    call_uuid:
+      operationId: proposal_public_calls_list
+    round_uuid:
+      operationId: call_rounds_list
+      searchParam: false
+    organization_uuid:
+      label: Organization
+
+  proposal_public_calls:
+    initialValues:
+      state:
+        - label: Active
+          value: active
+      has_active_round: false
+    filters:
+      - state
+      - has_active_round
+    state:
+      isMulti: true
+      enumOverrides:
+        draft: Draft
+        active: Active
+        archived: Archived
+    has_active_round:
+      label: Active round
+      component: AwesomeCheckboxField
+      badgeLabels:
+        true: Yes
+        false: All
+
+  proposal_reviews:
+    filters:
+      - state
+      - call_uuid
+    state:
+      isMulti: true
+      enumOverrides:
+        in_review: In review
+        submitted: Submitted
+        rejected: Rejected
+    call_uuid:
+      operationId: proposal_public_calls_list
+
+  rancher_cluster:
+    operationId: rancher_ingresses_list
+    filters:
+      - namespace_uuid
+      - rancher_project_uuid
+    namespace_uuid:
+      extraQuery:
+        cluster_uuid: 'props.cluster.uuid'
+    rancher_project_uuid:
+      extraQuery:
+        cluster_uuid: 'props.cluster.uuid'
+
+  invoice_items:
+    filters:
+      - customer_uuid
+      - accounting_period
+      - project_uuid
+      - offering_uuid
+    customer_uuid:
+      label: Organization
+      name: organization
+    accounting_period:
+      label: Period
+      options: props.accountingPeriods
+      mapTo: true
+    project_uuid:
+      name: project
+    offering_uuid:
+      name: offering
+      operationId: marketplace_provider_offerings_list
+
+    status:
+      enumOverrides:
+        Closed: Closed
+        Open: Open
+        Resolved: Resolved
+        'Waiting for support': 'Waiting for support'
+
+  support_issues:
+    filters:
+      - status
+    status:
+      enumOverrides:
+        Closed: Closed
+        Open: Open
+        Resolved: Resolved
+        'Waiting for support': Waiting for support

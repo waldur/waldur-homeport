@@ -11,7 +11,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureSupportEmailLogsFilter: FunctionComponent<{}> = () => (
+const PureEmailLogsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Emails')} name="emails">
       <Field
@@ -37,28 +37,27 @@ export const PureSupportEmailLogsFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const SupportEmailLogsFilterFormId = 'SupportEmailLogsFilter';
+export const EmailLogsFilterFormId = 'EmailLogsFilter';
 
-interface SupportEmailLogsFilterFormData {
+interface EmailLogsFilterFormData {
   emails: string;
   subject: string;
   sent_at: string;
 }
 
-export const SupportEmailLogsFilter = reduxForm<
-  SupportEmailLogsFilterFormData,
-  {}
->({
-  form: SupportEmailLogsFilterFormId,
+export const EmailLogsFilter = reduxForm<EmailLogsFilterFormData, {}>({
+  form: EmailLogsFilterFormId,
   destroyOnUnmount: false,
-})(PureSupportEmailLogsFilter);
+})(PureEmailLogsFilter);
 
-export const selectSupportEmailLogsFilter = createSelector<
+type EmailLogsFilterQuery = EmailLogsListData['query'];
+
+export const selectEmailLogsFilter = createSelector<
   RootState,
-  Partial<SupportEmailLogsFilterFormData>,
-  EmailLogsListData['query']
->(getFormValues(SupportEmailLogsFilterFormId), (values) => {
-  const filter: EmailLogsListData['query'] = {} as any;
+  Partial<EmailLogsFilterFormData>,
+  EmailLogsFilterQuery
+>(getFormValues(EmailLogsFilterFormId), (values) => {
+  const filter: EmailLogsFilterQuery = {} as any;
   if (values) {
     if (values.emails) {
       filter.emails = values.emails;

@@ -16,14 +16,16 @@ import { OrganizationNameLink } from '@waldur/customer/list/OrganizationNameLink
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import {
-  OrganizationCostPoliciesFilter,
-  selectOrganizationCostPoliciesFilter,
-} from '@waldur/table/generated/OrganizationCostPoliciesFilter';
+  MarketplaceCustomerEstimatedCostPoliciesFilter,
+  selectMarketplaceCustomerEstimatedCostPoliciesFilter,
+} from '@waldur/table/generated/MarketplaceCustomerEstimatedCostPoliciesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 export const OrganizationCostPoliciesList: FC = () => {
-  const filter = useSelector(selectOrganizationCostPoliciesFilter);
+  const filter = useSelector(
+    selectMarketplaceCustomerEstimatedCostPoliciesFilter,
+  );
 
   const tableProps = useTable({
     table: 'OrgCostPoliciesList',
@@ -102,7 +104,7 @@ export const OrganizationCostPoliciesList: FC = () => {
       ]}
       verboseName={translate('Cost policies')}
       initialSorting={{ field: 'created', mode: 'desc' }}
-      filters={<OrganizationCostPoliciesFilter />}
+      filters={<MarketplaceCustomerEstimatedCostPoliciesFilter />}
       rowActions={({ row }) => (
         <CostPolicyActions
           row={row}

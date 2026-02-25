@@ -10,9 +10,9 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import {
-  CustomerMappingsFilter,
-  selectCustomerMappingsFilter,
-} from '@waldur/table/generated/CustomerMappingsFilter';
+  AdminArrowCustomerMappingsFilter as CustomerMappingsFilter,
+  selectAdminArrowCustomerMappingsFilter as selectCustomerMappingsFilter,
+} from '@waldur/table/generated/AdminArrowCustomerMappingsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 

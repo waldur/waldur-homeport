@@ -25,7 +25,7 @@ export interface IsOverriddenChoicesOption {
   value: boolean;
 }
 
-export const PureNotificationMessagesFilter: FunctionComponent<{}> = () => (
+const PureNotificationMessagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="is_overridden"
@@ -65,12 +65,14 @@ export const NotificationMessagesFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureNotificationMessagesFilter);
 
+type NotificationMessagesFilterQuery = NotificationMessagesListData['query'];
+
 export const selectNotificationMessagesFilter = createSelector<
   RootState,
   Partial<NotificationMessagesFilterFormData>,
-  NotificationMessagesListData['query']
+  NotificationMessagesFilterQuery
 >(getFormValues(NotificationMessagesFilterFormId), (values) => {
-  const filter: NotificationMessagesListData['query'] = {} as any;
+  const filter: NotificationMessagesFilterQuery = {} as any;
   if (values) {
     if (values.is_overridden) {
       filter.is_overridden = values.is_overridden.value;

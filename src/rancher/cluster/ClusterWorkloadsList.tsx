@@ -4,11 +4,12 @@ import { RancherWorkload, rancherWorkloadsList } from 'waldur-js-client';
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import { RancherClusterFilter } from '@waldur/table/generated/RancherClusterFilter';
 import Table from '@waldur/table/Table';
 import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { ClusterFilter, useClusterFilter } from './ClusterFilter';
+import { useClusterFilter } from './ClusterFilterHooks';
 import { WorkloadActions } from './WorkloadActions';
 
 export const ClusterWorkloadsList: FunctionComponent<
@@ -53,7 +54,7 @@ export const ClusterWorkloadsList: FunctionComponent<
           render: ({ row }) => <>{row.runtime_state}</>,
         },
       ]}
-      filters={<ClusterFilter cluster={resourceScope} />}
+      filters={<RancherClusterFilter cluster={resourceScope} />}
       verboseName={translate('workloads')}
       showPageSizeSelector
       rowActions={({ row }) => <WorkloadActions workload={row} />}

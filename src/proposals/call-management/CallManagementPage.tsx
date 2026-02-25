@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
   proposalProtectedCallsList,
@@ -10,10 +9,12 @@ import {
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { CallAllFilters } from '@waldur/proposals/call-management/CallAllFilters';
-import { CALL_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { Call } from '@waldur/proposals/types';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProposalPublicCallsFilter,
+  selectProposalPublicCallsFilter,
+} from '@waldur/table/generated/ProposalPublicCallsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -26,17 +27,11 @@ import { CallExpandableRow } from './CallExpandableRow';
 
 const mapStateToFilter = createSelector(
   getCustomer,
-  getFormValues(CALL_FILTER_FORM_ID),
-  (customer, filters: any) => {
-    const result: ProposalProtectedCallsListData['query'] = {};
+  selectProposalPublicCallsFilter,
+  (customer, filters) => {
+    const result: ProposalProtectedCallsListData['query'] = { ...filters };
     if (customer) {
       result.customer_uuid = customer.uuid;
-    }
-
-    if (filters) {
-      if (filters.state) {
-        result.state = filters.state.map((option) => option.value);
-      }
     }
     return result;
   },
@@ -88,7 +83,7 @@ export const CallManagementPage: FunctionComponent = () => {
       hasQuery={true}
       tableActions={<CallCreateButton refetch={tableProps.fetch} />}
       expandableRow={CallExpandableRow}
-      filters={<CallAllFilters />}
+      filters={<ProposalPublicCallsFilter />}
     />
   );
 };

@@ -14,9 +14,9 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import {
-  ConsumptionRecordsFilter,
-  selectConsumptionRecordsFilter,
-} from '@waldur/table/generated/ConsumptionRecordsFilter';
+  AdminArrowConsumptionRecordsFilter as ConsumptionRecordsFilter,
+  selectAdminArrowConsumptionRecordsFilter as selectConsumptionRecordsFilter,
+} from '@waldur/table/generated/AdminArrowConsumptionRecordsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
