@@ -9,7 +9,7 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { isStaff } from '@waldur/workspace/selectors';
 
 const UserFormDialog = lazyComponent(() =>
-  import('./CreateUserDialog').then((module) => ({
+  import('./UserFormDialog').then((module) => ({
     default: module.UserFormDialog,
   })),
 );

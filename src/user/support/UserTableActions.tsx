@@ -14,9 +14,9 @@ const AddRemoteUserDialog = lazyComponent(() =>
   })),
 );
 
-const CreateUserDialog = lazyComponent(() =>
-  import('./CreateUserDialog').then((module) => ({
-    default: module.CreateUserDialog,
+const UserFormDialog = lazyComponent(() =>
+  import('./UserFormDialog').then((module) => ({
+    default: module.UserFormDialog,
   })),
 );
 
@@ -32,7 +32,7 @@ export const UserTableActions = ({ refetch }) => {
 
   const openCreateDialog = () => {
     dispatch(
-      openModalDialog(CreateUserDialog, {
+      openModalDialog(UserFormDialog, {
         size: 'lg',
         resolve: { refetch },
       }),
