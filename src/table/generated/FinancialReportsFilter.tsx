@@ -15,6 +15,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -138,21 +139,22 @@ export const FinancialReportsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureFinancialReportsFilter);
 
-export const selectFinancialReportsFilter = createSelector(
-  getFormValues(FinancialReportsFilterFormId),
-  (values: FinancialReportsFilterFormData | undefined) => {
-    const filter: FinancialReportsListData['query'] = {};
-    if (values) {
-      if (values.customer) {
-        filter.customer_uuid = values.customer.customer_uuid;
-      }
-      if (values.accounting_period) {
-        Object.assign(filter, values.accounting_period.value);
-      }
-      if (values.accounting_is_running) {
-        filter.accounting_is_running = values.accounting_is_running.value;
-      }
+export const selectFinancialReportsFilter = createSelector<
+  RootState,
+  Partial<FinancialReportsFilterFormData>,
+  FinancialReportsListData['query']
+>(getFormValues(FinancialReportsFilterFormId), (values) => {
+  const filter: FinancialReportsListData['query'] = {} as any;
+  if (values) {
+    if (values.customer) {
+      filter.customer_uuid = values.customer.customer_uuid;
     }
-    return filter;
-  },
-);
+    if (values.accounting_period) {
+      Object.assign(filter, values.accounting_period.value);
+    }
+    if (values.accounting_is_running) {
+      filter.accounting_is_running = values.accounting_is_running.value;
+    }
+  }
+  return filter;
+});

@@ -7,6 +7,7 @@ import { ProjectsListUsersListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const PureProjectsListUsersFilter: FunctionComponent<
@@ -53,15 +54,16 @@ export const ProjectsListUsersFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureProjectsListUsersFilter);
 
-export const selectProjectsListUsersFilter = createSelector(
-  getFormValues(ProjectsListUsersFilterFormId),
-  (values: ProjectsListUsersFilterFormData | undefined) => {
-    const filter: ProjectsListUsersListData['query'] = {};
-    if (values) {
-      if (values.project_role) {
-        filter.role = values.project_role.name;
-      }
+export const selectProjectsListUsersFilter = createSelector<
+  RootState,
+  Partial<ProjectsListUsersFilterFormData>,
+  ProjectsListUsersListData['query']
+>(getFormValues(ProjectsListUsersFilterFormId), (values) => {
+  const filter: ProjectsListUsersListData['query'] = {} as any;
+  if (values) {
+    if (values.project_role) {
+      filter.role = values.project_role.name;
     }
-    return filter;
-  },
-);
+  }
+  return filter;
+});

@@ -1,5 +1,5 @@
 import { FunctionComponent } from 'react';
-import { userPermissionRequestsDestroy } from 'waldur-js-client';
+import { userPermissionRequestsCancelRequest } from 'waldur-js-client';
 
 import { DeleteButton } from '@waldur/core/buttons';
 import { translate } from '@waldur/i18n';
@@ -15,7 +15,7 @@ export const UserPermissionRequestDeleteButton: FunctionComponent<
   <DeleteButton
     row={row}
     apiFunction={(r) =>
-      userPermissionRequestsDestroy({ path: { uuid: r.uuid } })
+      userPermissionRequestsCancelRequest({ path: { uuid: r.uuid } })
     }
     confirmTitle={translate('Delete permission request')}
     confirmMessage={translate(

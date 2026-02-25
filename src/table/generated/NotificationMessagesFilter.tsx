@@ -7,6 +7,7 @@ import { NotificationMessagesListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const IsOverriddenChoices: IsOverriddenChoicesOption[] = [
@@ -64,15 +65,16 @@ export const NotificationMessagesFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureNotificationMessagesFilter);
 
-export const selectNotificationMessagesFilter = createSelector(
-  getFormValues(NotificationMessagesFilterFormId),
-  (values: NotificationMessagesFilterFormData | undefined) => {
-    const filter: NotificationMessagesListData['query'] = {};
-    if (values) {
-      if (values.is_overridden) {
-        filter.is_overridden = values.is_overridden.value;
-      }
+export const selectNotificationMessagesFilter = createSelector<
+  RootState,
+  Partial<NotificationMessagesFilterFormData>,
+  NotificationMessagesListData['query']
+>(getFormValues(NotificationMessagesFilterFormId), (values) => {
+  const filter: NotificationMessagesListData['query'] = {} as any;
+  if (values) {
+    if (values.is_overridden) {
+      filter.is_overridden = values.is_overridden.value;
     }
-    return filter;
-  },
-);
+  }
+  return filter;
+});

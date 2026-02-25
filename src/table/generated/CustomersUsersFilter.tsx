@@ -7,6 +7,7 @@ import { CustomersUsersListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const PureCustomersUsersFilter: FunctionComponent<
@@ -84,20 +85,21 @@ export const CustomersUsersFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureCustomersUsersFilter);
 
-export const selectCustomersUsersFilter = createSelector(
-  getFormValues(CustomersUsersFilterFormId),
-  (values: CustomersUsersFilterFormData | undefined) => {
-    const filter: CustomersUsersListData['query'] = {};
-    if (values) {
-      if (values.project_role) {
-        filter.project_role = values.project_role.map((v: any) => v.name);
-      }
-      if (values.organization_role) {
-        filter.organization_role = values.organization_role.map(
-          (v: any) => v.name,
-        );
-      }
+export const selectCustomersUsersFilter = createSelector<
+  RootState,
+  Partial<CustomersUsersFilterFormData>,
+  CustomersUsersListData['query']
+>(getFormValues(CustomersUsersFilterFormId), (values) => {
+  const filter: CustomersUsersListData['query'] = {} as any;
+  if (values) {
+    if (values.project_role) {
+      filter.project_role = values.project_role.map((v: any) => v.name);
     }
-    return filter;
-  },
-);
+    if (values.organization_role) {
+      filter.organization_role = values.organization_role.map(
+        (v: any) => v.name,
+      );
+    }
+  }
+  return filter;
+});

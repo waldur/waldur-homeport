@@ -11,6 +11,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -103,21 +104,22 @@ export const SupportFeedbacksFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureSupportFeedbacksFilter);
 
-export const selectSupportFeedbacksFilter = createSelector(
-  getFormValues(SupportFeedbacksFilterFormId),
-  (values: SupportFeedbacksFilterFormData | undefined) => {
-    const filter: SupportFeedbacksListData['query'] = {};
-    if (values) {
-      if (values.evaluation) {
-        filter.evaluation = values.evaluation.value;
-      }
-      if (values.user) {
-        filter.user_uuid = values.user.uuid;
-      }
-      if (values.period) {
-        Object.assign(filter, values.period.value);
-      }
+export const selectSupportFeedbacksFilter = createSelector<
+  RootState,
+  Partial<SupportFeedbacksFilterFormData>,
+  SupportFeedbacksListData['query']
+>(getFormValues(SupportFeedbacksFilterFormId), (values) => {
+  const filter: SupportFeedbacksListData['query'] = {} as any;
+  if (values) {
+    if (values.evaluation) {
+      filter.evaluation = values.evaluation.value;
     }
-    return filter;
-  },
-);
+    if (values.user) {
+      filter.user_uuid = values.user.uuid;
+    }
+    if (values.period) {
+      Object.assign(filter, values.period.value);
+    }
+  }
+  return filter;
+});

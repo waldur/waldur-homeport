@@ -1,14 +1,15 @@
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import { openportalManagedProjectsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { isEmpty } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import {
+  ManagedProjectsFilter,
+  selectManagedProjectsFilter,
+} from '@waldur/table/generated/OpenportalManagedProjectsFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -16,37 +17,6 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ManagedProjectActions } from './ManagedProjectActions';
 import { ManagedProjectExpandableRow } from './ManagedProjectExpandableRow';
-import { ManagedProjectsFilter } from './ManagedProjectsFilter';
-
-const mapStateToFilter = createSelector(
-  getFormValues('managedProjectsFilter'),
-  (userFilter: any) => {
-    if (!userFilter) {
-      // If no filter is set, default to pending
-      return { state: ['pending'] };
-    }
-
-    const filter = {
-      ...userFilter,
-      feature: userFilter?.feature?.map((option) => option.value),
-    };
-
-    // Handle state filter
-    if (
-      userFilter.state &&
-      Array.isArray(userFilter.state) &&
-      userFilter.state.length > 0
-    ) {
-      // If state is selected, map to values
-      filter.state = userFilter.state.map((option) => option.value);
-    } else if (isEmpty(userFilter.state)) {
-      // If no state is selected, default to pending
-      filter.state = ['pending'];
-    }
-
-    return filter;
-  },
-);
 
 const renderProjectTemplate = (row: any) => {
   if (row.project_template_data) {
@@ -72,14 +42,16 @@ const renderOffering = (destination: string) => {
 export const ManagedProjectsList = () => {
   useTitle(translate('Managed Projects'), '', 'browser');
 
-  // Get filter values from redux-form
-  const filter = useSelector(mapStateToFilter);
+  const filter = useSelector(selectManagedProjectsFilter);
 
   const tableProps = useTable({
     table: `ManagedProjectsList`,
     fetchData: createFetcher(openportalManagedProjectsList),
     queryField: 'query',
-    filter,
+    filter: {
+      ...filter,
+      state: filter?.state || ['pending'],
+    },
   });
 
   const columns: Array<Column> = [

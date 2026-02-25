@@ -7,6 +7,7 @@ import { AdminArrowBillingSyncsListData } from 'waldur-js-client';
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const StateChoices: StateChoicesOption[] = [
@@ -120,21 +121,22 @@ export const BillingSyncFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureBillingSyncFilter);
 
-export const selectBillingSyncFilter = createSelector(
-  getFormValues(BillingSyncFilterFormId),
-  (values: BillingSyncFilterFormData | undefined) => {
-    const filter: AdminArrowBillingSyncsListData['query'] = {};
-    if (values) {
-      if (values.state) {
-        filter.state = values.state.value;
-      }
-      if (values.report_period_from) {
-        filter.report_period_from = values.report_period_from.value;
-      }
-      if (values.report_period_to) {
-        filter.report_period_to = values.report_period_to.value;
-      }
+export const selectBillingSyncFilter = createSelector<
+  RootState,
+  Partial<BillingSyncFilterFormData>,
+  AdminArrowBillingSyncsListData['query']
+>(getFormValues(BillingSyncFilterFormId), (values) => {
+  const filter: AdminArrowBillingSyncsListData['query'] = {} as any;
+  if (values) {
+    if (values.state) {
+      filter.state = values.state.value;
     }
-    return filter;
-  },
-);
+    if (values.report_period_from) {
+      filter.report_period_from = values.report_period_from.value;
+    }
+    if (values.report_period_to) {
+      filter.report_period_to = values.report_period_to.value;
+    }
+  }
+  return filter;
+});

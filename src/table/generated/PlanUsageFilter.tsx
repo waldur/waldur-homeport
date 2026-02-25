@@ -16,6 +16,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -96,18 +97,19 @@ export const PlanUsageFilter = reduxForm<PlanUsageFilterFormData, {}>({
   destroyOnUnmount: false,
 })(PurePlanUsageFilter);
 
-export const selectPlanUsageFilter = createSelector(
-  getFormValues(PlanUsageFilterFormId),
-  (values: PlanUsageFilterFormData | undefined) => {
-    const filter: MarketplacePlansUsageStatsListData['query'] = {};
-    if (values) {
-      if (values.provider) {
-        filter.customer_provider_uuid = values.provider.customer_uuid;
-      }
-      if (values.offering) {
-        filter.offering_uuid = values.offering.uuid;
-      }
+export const selectPlanUsageFilter = createSelector<
+  RootState,
+  Partial<PlanUsageFilterFormData>,
+  MarketplacePlansUsageStatsListData['query']
+>(getFormValues(PlanUsageFilterFormId), (values) => {
+  const filter: MarketplacePlansUsageStatsListData['query'] = {} as any;
+  if (values) {
+    if (values.provider) {
+      filter.customer_provider_uuid = values.provider.customer_uuid;
     }
-    return filter;
-  },
-);
+    if (values.offering) {
+      filter.offering_uuid = values.offering.uuid;
+    }
+  }
+  return filter;
+});

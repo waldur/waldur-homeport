@@ -15,6 +15,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -99,18 +100,19 @@ export const ConsumptionRecordsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureConsumptionRecordsFilter);
 
-export const selectConsumptionRecordsFilter = createSelector(
-  getFormValues(ConsumptionRecordsFilterFormId),
-  (values: ConsumptionRecordsFilterFormData | undefined) => {
-    const filter: AdminArrowConsumptionRecordsListData['query'] = {};
-    if (values) {
-      if (values.organization) {
-        filter.customer_uuid = values.organization.uuid;
-      }
-      if (values.is_finalized) {
-        filter.is_finalized = values.is_finalized.value;
-      }
+export const selectConsumptionRecordsFilter = createSelector<
+  RootState,
+  Partial<ConsumptionRecordsFilterFormData>,
+  AdminArrowConsumptionRecordsListData['query']
+>(getFormValues(ConsumptionRecordsFilterFormId), (values) => {
+  const filter: AdminArrowConsumptionRecordsListData['query'] = {} as any;
+  if (values) {
+    if (values.organization) {
+      filter.customer_uuid = values.organization.uuid;
     }
-    return filter;
-  },
-);
+    if (values.is_finalized) {
+      filter.is_finalized = values.is_finalized.value;
+    }
+  }
+  return filter;
+});

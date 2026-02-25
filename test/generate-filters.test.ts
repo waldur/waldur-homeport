@@ -75,7 +75,7 @@ describe('generate-filters.cjs', () => {
           },
           StatusEnum: {
             enum: ['active', 'inactive'],
-            'x-waldur-enum-names': ['Active', 'Inactive'],
+            'x-enum-descriptions': ['Active', 'Inactive'],
           },
         },
       },
@@ -84,7 +84,7 @@ describe('generate-filters.cjs', () => {
     let processor: any;
 
     beforeEach(() => {
-      processor = new SchemaProcessor(mockSchema);
+      processor = new SchemaProcessor(mockSchema, { overrides: {} });
     });
 
     it('indexes operation IDs', () => {
@@ -101,12 +101,44 @@ describe('generate-filters.cjs', () => {
       expect(values[0]).toContain('Active');
     });
 
+    it('extracts named enums using x-enum-descriptions', () => {
+      const schemaWithDesc = {
+        components: {
+          schemas: {
+            DescEnum: {
+              enum: ['v1', 'v2'],
+              'x-enum-descriptions': ['Label 1', 'Label 2'],
+            },
+          },
+        },
+        paths: {},
+      };
+      const proc = new SchemaProcessor(schemaWithDesc, { overrides: {} });
+      expect(proc.namedEnums.has('DescEnum')).toBe(true);
+      expect(proc.namedEnums.get('DescEnum')).toContain('Label 1');
+    });
+
     it('identifies response fields and types', () => {
       const resp = processor.responseFields.get('users_list');
       expect(resp).toBeDefined();
       expect(resp.valueField).toBe('uuid');
       expect(resp.labelField).toBe('username');
       expect(resp.returnType).toBe('User');
+    });
+
+    it('extracts extra enums from config', () => {
+      const configWithExtra = {
+        overrides: {},
+        extraEnums: {
+          CustomEnum: [
+            { label: 'Option 1', value: 'opt1' },
+            { label: 'Option 2', value: 'opt2' },
+          ],
+        },
+      };
+      const proc = new SchemaProcessor(mockSchema, configWithExtra);
+      expect(proc.namedEnums.has('CustomEnum')).toBe(true);
+      expect(proc.namedEnums.get('CustomEnum')).toContain('Option 1');
     });
   });
 
@@ -127,8 +159,8 @@ describe('generate-filters.cjs', () => {
         },
         components: { schemas: {} },
       };
-      processor = new SchemaProcessor(schema);
       config = { overrides: {} };
+      processor = new SchemaProcessor(schema, config);
       mapper = new FilterMapper(processor, config);
     });
 
@@ -159,6 +191,20 @@ describe('generate-filters.cjs', () => {
       expect(filter.name).toBe('project');
       expect(filter.label).toBe('Project');
       expect(filter.mapTo).toBe('project_uuid');
+    });
+
+    it('maps enum parameter with descriptions', () => {
+      const param = {
+        name: 'status',
+        in: 'query',
+        schema: {
+          type: 'string',
+          enum: ['open', 'closed'],
+          'x-enum-descriptions': ['Open Status', 'Closed Status'],
+        },
+      };
+      const filter = mapper.mapParameter(param, 'users_list');
+      expect(filter.options[0].label).toBe('Open Status');
     });
 
     it('applies overrides from config', () => {
@@ -220,6 +266,30 @@ describe('generate-filters.cjs', () => {
       };
       const code = Generator.selector(field);
       expect(code).toContain('filter.user_uuid = values.user.uuid;');
+    });
+
+    it('generates file with initialValues and translate', () => {
+      const opIds = ['users_list'];
+      const operationFilters = {
+        users_list: [{ name: 'name', component: 'StringField', label: 'Name' }],
+      };
+      const enumRegistry = new Map();
+      const config = {
+        overrides: {
+          users_list: {
+            initialValues: { type: { label: 'Active', value: 'active' } },
+          },
+        },
+      };
+      const code = Generator.file(
+        opIds,
+        operationFilters,
+        enumRegistry,
+        config,
+      );
+      expect(code).toContain(
+        'initialValues: {"type":{"label": translate("Active"),"value":"active"}}',
+      );
     });
   });
 });

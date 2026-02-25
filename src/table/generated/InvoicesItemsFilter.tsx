@@ -19,6 +19,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -151,24 +152,25 @@ export const InvoicesItemsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureInvoicesItemsFilter);
 
-export const selectInvoicesItemsFilter = createSelector(
-  getFormValues(InvoicesItemsFilterFormId),
-  (values: InvoicesItemsFilterFormData | undefined) => {
-    const filter: InvoicesItemsRetrieveData['query'] = {};
-    if (values) {
-      if (values.provider) {
-        filter.provider_uuid = values.provider.uuid;
-      }
-      if (values.project) {
-        filter.project_uuid = values.project.uuid;
-      }
-      if (values.offering) {
-        filter.offering_uuid = values.offering.uuid;
-      }
-      if (values.conceal_compensation_items) {
-        filter.conceal_compensation_items = values.conceal_compensation_items;
-      }
+export const selectInvoicesItemsFilter = createSelector<
+  RootState,
+  Partial<InvoicesItemsFilterFormData>,
+  InvoicesItemsRetrieveData['query']
+>(getFormValues(InvoicesItemsFilterFormId), (values) => {
+  const filter: InvoicesItemsRetrieveData['query'] = {} as any;
+  if (values) {
+    if (values.provider) {
+      filter.provider_uuid = values.provider.uuid;
     }
-    return filter;
-  },
-);
+    if (values.project) {
+      filter.project_uuid = values.project.uuid;
+    }
+    if (values.offering) {
+      filter.offering_uuid = values.offering.uuid;
+    }
+    if (values.conceal_compensation_items) {
+      filter.conceal_compensation_items = values.conceal_compensation_items;
+    }
+  }
+  return filter;
+});

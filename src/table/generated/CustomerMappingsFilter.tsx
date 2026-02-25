@@ -16,6 +16,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -86,21 +87,22 @@ export const CustomerMappingsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureCustomerMappingsFilter);
 
-export const selectCustomerMappingsFilter = createSelector(
-  getFormValues(CustomerMappingsFilterFormId),
-  (values: CustomerMappingsFilterFormData | undefined) => {
-    const filter: AdminArrowCustomerMappingsListData['query'] = {};
-    if (values) {
-      if (values.organization) {
-        filter.waldur_customer_uuid = values.organization.uuid;
-      }
-      if (values.arrow_reference) {
-        filter.arrow_reference = values.arrow_reference;
-      }
-      if (values.is_active) {
-        filter.is_active = values.is_active;
-      }
+export const selectCustomerMappingsFilter = createSelector<
+  RootState,
+  Partial<CustomerMappingsFilterFormData>,
+  AdminArrowCustomerMappingsListData['query']
+>(getFormValues(CustomerMappingsFilterFormId), (values) => {
+  const filter: AdminArrowCustomerMappingsListData['query'] = {} as any;
+  if (values) {
+    if (values.organization) {
+      filter.waldur_customer_uuid = values.organization.uuid;
     }
-    return filter;
-  },
-);
+    if (values.arrow_reference) {
+      filter.arrow_reference = values.arrow_reference;
+    }
+    if (values.is_active) {
+      filter.is_active = values.is_active;
+    }
+  }
+  return filter;
+});

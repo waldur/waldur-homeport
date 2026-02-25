@@ -18,6 +18,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -168,30 +169,31 @@ export const SupportAIAssistantLogsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureSupportAIAssistantLogsFilter);
 
-export const selectSupportAIAssistantLogsFilter = createSelector(
-  getFormValues(SupportAIAssistantLogsFilterFormId),
-  (values: SupportAIAssistantLogsFilterFormData | undefined) => {
-    const filter: ChatThreadsListData['query'] = {};
-    if (values) {
-      if (values.created) {
-        filter.created = values.created;
-      }
-      if (values.modified) {
-        filter.modified = values.modified;
-      }
-      if (values.user) {
-        filter.user = values.user.uuid;
-      }
-      if (values.is_flagged) {
-        filter.is_flagged = values.is_flagged;
-      }
-      if (values.max_severity) {
-        filter.max_severity = values.max_severity.value;
-      }
-      if (values.is_archived) {
-        filter.is_archived = values.is_archived;
-      }
+export const selectSupportAIAssistantLogsFilter = createSelector<
+  RootState,
+  Partial<SupportAIAssistantLogsFilterFormData>,
+  ChatThreadsListData['query']
+>(getFormValues(SupportAIAssistantLogsFilterFormId), (values) => {
+  const filter: ChatThreadsListData['query'] = {} as any;
+  if (values) {
+    if (values.created) {
+      filter.created = values.created;
     }
-    return filter;
-  },
-);
+    if (values.modified) {
+      filter.modified = values.modified;
+    }
+    if (values.user) {
+      filter.user = values.user.uuid;
+    }
+    if (values.is_flagged) {
+      filter.is_flagged = values.is_flagged;
+    }
+    if (values.max_severity) {
+      filter.max_severity = values.max_severity.value;
+    }
+    if (values.is_archived) {
+      filter.is_archived = values.is_archived;
+    }
+  }
+  return filter;
+});

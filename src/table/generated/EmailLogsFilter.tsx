@@ -8,6 +8,7 @@ import { EmailLogsListData } from 'waldur-js-client';
 import { StringField } from '@waldur/form';
 import { DateField } from '@waldur/form/DateField';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const PureSupportEmailLogsFilter: FunctionComponent<{}> = () => (
@@ -52,21 +53,22 @@ export const SupportEmailLogsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureSupportEmailLogsFilter);
 
-export const selectSupportEmailLogsFilter = createSelector(
-  getFormValues(SupportEmailLogsFilterFormId),
-  (values: SupportEmailLogsFilterFormData | undefined) => {
-    const filter: EmailLogsListData['query'] = {};
-    if (values) {
-      if (values.emails) {
-        filter.emails = values.emails;
-      }
-      if (values.subject) {
-        filter.subject = values.subject;
-      }
-      if (values.sent_at) {
-        filter.sent_at = values.sent_at;
-      }
+export const selectSupportEmailLogsFilter = createSelector<
+  RootState,
+  Partial<SupportEmailLogsFilterFormData>,
+  EmailLogsListData['query']
+>(getFormValues(SupportEmailLogsFilterFormId), (values) => {
+  const filter: EmailLogsListData['query'] = {} as any;
+  if (values) {
+    if (values.emails) {
+      filter.emails = values.emails;
     }
-    return filter;
-  },
-);
+    if (values.subject) {
+      filter.subject = values.subject;
+    }
+    if (values.sent_at) {
+      filter.sent_at = values.sent_at;
+    }
+  }
+  return filter;
+});

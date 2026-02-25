@@ -17,6 +17,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -133,24 +134,25 @@ export const SupportDataAccessLogsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureSupportDataAccessLogsFilter);
 
-export const selectSupportDataAccessLogsFilter = createSelector(
-  getFormValues(SupportDataAccessLogsFilterFormId),
-  (values: SupportDataAccessLogsFilterFormData | undefined) => {
-    const filter: DataAccessLogsListData['query'] = {};
-    if (values) {
-      if (values.start_date) {
-        filter.start_date = values.start_date;
-      }
-      if (values.end_date) {
-        filter.end_date = values.end_date;
-      }
-      if (values.accessor_type) {
-        filter.accessor_type = values.accessor_type.value;
-      }
-      if (values.user) {
-        filter.user_uuid = values.user.uuid;
-      }
+export const selectSupportDataAccessLogsFilter = createSelector<
+  RootState,
+  Partial<SupportDataAccessLogsFilterFormData>,
+  DataAccessLogsListData['query']
+>(getFormValues(SupportDataAccessLogsFilterFormId), (values) => {
+  const filter: DataAccessLogsListData['query'] = {} as any;
+  if (values) {
+    if (values.start_date) {
+      filter.start_date = values.start_date;
     }
-    return filter;
-  },
-);
+    if (values.end_date) {
+      filter.end_date = values.end_date;
+    }
+    if (values.accessor_type) {
+      filter.accessor_type = values.accessor_type.value;
+    }
+    if (values.user) {
+      filter.user_uuid = values.user.uuid;
+    }
+  }
+  return filter;
+});

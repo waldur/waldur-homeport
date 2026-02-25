@@ -14,6 +14,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -58,16 +59,17 @@ export const OrganizationCostPoliciesFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureOrganizationCostPoliciesFilter);
 
-export const selectOrganizationCostPoliciesFilter = createSelector(
-  getFormValues(OrganizationCostPoliciesFilterFormId),
-  (values: OrganizationCostPoliciesFilterFormData | undefined) => {
-    const filter: MarketplaceCustomerEstimatedCostPoliciesListData['query'] =
-      {};
-    if (values) {
-      if (values.organization) {
-        filter.customer_uuid = values.organization.uuid;
-      }
+export const selectOrganizationCostPoliciesFilter = createSelector<
+  RootState,
+  Partial<OrganizationCostPoliciesFilterFormData>,
+  MarketplaceCustomerEstimatedCostPoliciesListData['query']
+>(getFormValues(OrganizationCostPoliciesFilterFormId), (values) => {
+  const filter: MarketplaceCustomerEstimatedCostPoliciesListData['query'] =
+    {} as any;
+  if (values) {
+    if (values.organization) {
+      filter.customer_uuid = values.organization.uuid;
     }
-    return filter;
-  },
-);
+  }
+  return filter;
+});

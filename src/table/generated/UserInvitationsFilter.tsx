@@ -18,6 +18,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -212,24 +213,25 @@ export const UserInvitationsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureUserInvitationsFilter);
 
-export const selectUserInvitationsFilter = createSelector(
-  getFormValues(UserInvitationsFilterFormId),
-  (values: UserInvitationsFilterFormData | undefined) => {
-    const filter: UserInvitationsListData['query'] = {};
-    if (values) {
-      if (values.state) {
-        filter.state = values.state.map((v: any) => v.value);
-      }
-      if (values.role) {
-        filter.role_uuid = values.role.uuid;
-      }
-      if (values.customer) {
-        filter.customer_uuid = values.customer.uuid;
-      }
-      if (values.scope_type) {
-        filter.scope_type = values.scope_type.value;
-      }
+export const selectUserInvitationsFilter = createSelector<
+  RootState,
+  Partial<UserInvitationsFilterFormData>,
+  UserInvitationsListData['query']
+>(getFormValues(UserInvitationsFilterFormId), (values) => {
+  const filter: UserInvitationsListData['query'] = {} as any;
+  if (values) {
+    if (values.state) {
+      filter.state = values.state.map((v: any) => v.value);
     }
-    return filter;
-  },
-);
+    if (values.role) {
+      filter.role_uuid = values.role.uuid;
+    }
+    if (values.customer) {
+      filter.customer_uuid = values.customer.uuid;
+    }
+    if (values.scope_type) {
+      filter.scope_type = values.scope_type.value;
+    }
+  }
+  return filter;
+});

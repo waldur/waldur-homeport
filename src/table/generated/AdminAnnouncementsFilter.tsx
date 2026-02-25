@@ -10,6 +10,7 @@ import {
 
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
 export const AdminAnnouncementTypeEnumChoices: AdminAnnouncementTypeEnumChoicesOption[] =
@@ -118,18 +119,19 @@ export const AdminAnnouncementsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureAdminAnnouncementsFilter);
 
-export const selectAdminAnnouncementsFilter = createSelector(
-  getFormValues(AdminAnnouncementsFilterFormId),
-  (values: AdminAnnouncementsFilterFormData | undefined) => {
-    const filter: AdminAnnouncementsListData['query'] = {};
-    if (values) {
-      if (values.type) {
-        filter.type = values.type.map((v: any) => v.value);
-      }
-      if (values.is_active) {
-        filter.is_active = values.is_active.value;
-      }
+export const selectAdminAnnouncementsFilter = createSelector<
+  RootState,
+  Partial<AdminAnnouncementsFilterFormData>,
+  AdminAnnouncementsListData['query']
+>(getFormValues(AdminAnnouncementsFilterFormId), (values) => {
+  const filter: AdminAnnouncementsListData['query'] = {} as any;
+  if (values) {
+    if (values.type) {
+      filter.type = values.type.map((v: any) => v.value);
     }
-    return filter;
-  },
-);
+    if (values.is_active) {
+      filter.is_active = values.is_active.value;
+    }
+  }
+  return filter;
+});

@@ -14,6 +14,7 @@ import {
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
+import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
@@ -61,15 +62,16 @@ export const PriceListFilter = reduxForm<PriceListFilterFormData, {}>({
   destroyOnUnmount: false,
 })(PurePriceListFilter);
 
-export const selectPriceListFilter = createSelector(
-  getFormValues(PriceListFilterFormId),
-  (values: PriceListFilterFormData | undefined) => {
-    const filter: MarketplacePlanComponentsListData['query'] = {};
-    if (values) {
-      if (values.offering) {
-        filter.offering_uuid = values.offering.uuid;
-      }
+export const selectPriceListFilter = createSelector<
+  RootState,
+  Partial<PriceListFilterFormData>,
+  MarketplacePlanComponentsListData['query']
+>(getFormValues(PriceListFilterFormId), (values) => {
+  const filter: MarketplacePlanComponentsListData['query'] = {} as any;
+  if (values) {
+    if (values.offering) {
+      filter.offering_uuid = values.offering.uuid;
     }
-    return filter;
-  },
-);
+  }
+  return filter;
+});
