@@ -55,7 +55,6 @@ export async function parseAssistantStream(
       threadUuid,
       mode,
       edit_message_uuid,
-      undefined,
     )) {
       if (signal?.aborted) {
         break;
