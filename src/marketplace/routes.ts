@@ -45,6 +45,9 @@ export const states: StateDeclaration[] = [
       })),
     ),
     parent: 'public',
+    data: {
+      permissions: [canAccessMarketplace],
+    },
   },
 
   {

@@ -32,12 +32,14 @@ export const getResourceTabs = ({
   scope,
   lexisLinksCount,
   robotAccountsCount,
+  isStaff,
 }: {
   resource: Resource;
   offering: PublicOfferingDetails;
   scope;
   lexisLinksCount;
   robotAccountsCount;
+  isStaff: boolean;
 }) => {
   // Generate tabs
   const tabs: PageBarTab<{
@@ -214,41 +216,46 @@ export const getResourceTabs = ({
     });
   }
 
-  tabs.push({
-    key: 'metadata',
-    title: translate('Resource metadata'),
-    children: [
-      {
-        key: 'resource-details',
-        title: translate('Resource details'),
-        component: lazyComponent(() =>
-          import('./ResourceMetadataCard').then((module) => ({
-            default: module.ResourceMetadataCard,
-          })),
-        ),
-      },
-      {
-        key: 'activity',
-        title: translate('Audit logs'),
-        component: lazyComponent(() =>
-          import('./ActivityCard').then((module) => ({
-            default: module.ActivityCard,
-          })),
-        ),
-      },
-      {
-        key: 'order-history',
-        title: translate('Order history'),
-        component: lazyComponent(() =>
-          import('@waldur/marketplace/orders/list/ResourceOrders').then(
-            (module) => ({
-              default: module.ResourceOrders,
-            }),
+  if (
+    !isFeatureVisible(MarketplaceFeatures.conceal_resource_metadata) ||
+    isStaff
+  ) {
+    tabs.push({
+      key: 'metadata',
+      title: translate('Resource metadata'),
+      children: [
+        {
+          key: 'resource-details',
+          title: translate('Resource details'),
+          component: lazyComponent(() =>
+            import('./ResourceMetadataCard').then((module) => ({
+              default: module.ResourceMetadataCard,
+            })),
           ),
-        ),
-      },
-    ],
-  });
+        },
+        {
+          key: 'activity',
+          title: translate('Audit logs'),
+          component: lazyComponent(() =>
+            import('./ActivityCard').then((module) => ({
+              default: module.ActivityCard,
+            })),
+          ),
+        },
+        {
+          key: 'order-history',
+          title: translate('Order history'),
+          component: lazyComponent(() =>
+            import('@waldur/marketplace/orders/list/ResourceOrders').then(
+              (module) => ({
+                default: module.ResourceOrders,
+              }),
+            ),
+          ),
+        },
+      ],
+    });
+  }
 
   if (
     resource.offering_type === TENANT_TYPE &&

@@ -32,6 +32,7 @@ import {
 import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
 import { router } from '@waldur/router';
 import { setCurrentResource } from '@waldur/workspace/actions';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { fetchData, getResourceTabs } from './fetchData';
 import { ProfileCompletenessWarningBanner } from './ProfileCompletenessWarningBanner';
@@ -49,6 +50,7 @@ const ResourceTeamDialog = lazyComponent(() =>
 export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   const { params } = useCurrentStateAndParams();
   const dispatch = useDispatch();
+  const user = useUser();
 
   const {
     data: resource,
@@ -128,8 +130,11 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   }, [resource, resourceState]);
 
   const tabs = useMemo(
-    () => (data ? getResourceTabs({ ...data, resource }) : []),
-    [resource, data],
+    () =>
+      data
+        ? getResourceTabs({ ...data, resource, isStaff: user?.is_staff })
+        : [],
+    [resource, data, user?.is_staff],
   );
 
   useTitle(resource?.name);

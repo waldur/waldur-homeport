@@ -115,10 +115,7 @@ export const UnifiedSidebar = () => {
         disabled={shouldBlockNavigation}
         disabledTooltip={disabledTooltip}
       />
-      {(!isFeatureVisible(
-        MarketplaceFeatures.hide_marketplace_from_end_users,
-      ) ||
-        user.is_staff) && (
+      {canAccessMarketplace && (
         <MenuItem
           activeState={
             [
