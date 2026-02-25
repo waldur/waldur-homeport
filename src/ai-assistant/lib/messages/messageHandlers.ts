@@ -5,7 +5,6 @@ import {
   extractTextFromMessageContent,
   setBackendUuid,
 } from '@waldur/ai-assistant/lib/messages/messageUtils';
-import { generateAndSetThreadTitle } from '@waldur/ai-assistant/lib/streaming/generateAndSetThreadTitle';
 import { parseAssistantStream } from '@waldur/ai-assistant/lib/streaming/parseAssistantStream';
 import { addThreadToListIfNotExists } from '@waldur/ai-assistant/lib/thread/threadListAdapter';
 import {
@@ -39,8 +38,6 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
         throw new Error('Only text messages are supported');
 
       const input = firstContent.text;
-      const isFirstMessage = deps.messages.length === 0;
-
       const userMessage = createUserMessage(input);
       deps.setMessages((prev) => [...prev, userMessage]);
 
@@ -75,14 +72,6 @@ export const createOnNew = (deps: MessageHandlerDependencies) => {
           deps.setMessages,
           assistantPlaceholder.id!,
           result.assistantMessageUuid,
-        );
-      }
-      if (isFirstMessage && !abortController.signal.aborted) {
-        await generateAndSetThreadTitle(
-          input,
-          deps,
-          abortController.signal,
-          result?.threadUuid,
         );
       }
     } finally {
