@@ -20,7 +20,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureCustomerMappingsFilter: FunctionComponent<{}> = () => (
+const PureAdminArrowCustomerMappingsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Waldur Organization')}
@@ -71,28 +71,32 @@ export const PureCustomerMappingsFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const CustomerMappingsFilterFormId = 'CustomerMappingsFilter';
+export const AdminArrowCustomerMappingsFilterFormId =
+  'AdminArrowCustomerMappingsFilter';
 
-interface CustomerMappingsFilterFormData {
+interface AdminArrowCustomerMappingsFilterFormData {
   organization: Customer;
   arrow_reference: string;
   is_active: boolean;
 }
 
-export const CustomerMappingsFilter = reduxForm<
-  CustomerMappingsFilterFormData,
+export const AdminArrowCustomerMappingsFilter = reduxForm<
+  AdminArrowCustomerMappingsFilterFormData,
   {}
 >({
-  form: CustomerMappingsFilterFormId,
+  form: AdminArrowCustomerMappingsFilterFormId,
   destroyOnUnmount: false,
-})(PureCustomerMappingsFilter);
+})(PureAdminArrowCustomerMappingsFilter);
 
-export const selectCustomerMappingsFilter = createSelector<
+type AdminArrowCustomerMappingsFilterQuery =
+  AdminArrowCustomerMappingsListData['query'];
+
+export const selectAdminArrowCustomerMappingsFilter = createSelector<
   RootState,
-  Partial<CustomerMappingsFilterFormData>,
-  AdminArrowCustomerMappingsListData['query']
->(getFormValues(CustomerMappingsFilterFormId), (values) => {
-  const filter: AdminArrowCustomerMappingsListData['query'] = {} as any;
+  Partial<AdminArrowCustomerMappingsFilterFormData>,
+  AdminArrowCustomerMappingsFilterQuery
+>(getFormValues(AdminArrowCustomerMappingsFilterFormId), (values) => {
+  const filter: AdminArrowCustomerMappingsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
       filter.waldur_customer_uuid = values.organization.uuid;

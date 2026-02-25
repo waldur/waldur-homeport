@@ -21,8 +21,8 @@ import { useReviewerPoolTabs } from '@waldur/proposals/update/reviewer-pool/tabs
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { createFetcher } from '@waldur/table/api';
 import {
-  SuggestionsTableFilter,
-  selectSuggestionsTableFilter,
+  ReviewerSuggestionsFilter,
+  selectReviewerSuggestionsFilter,
   ReviewerSuggestionStatusEnumChoices,
 } from '@waldur/table/generated/ReviewerSuggestionsFilter';
 import Table from '@waldur/table/Table';
@@ -229,7 +229,7 @@ export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
   call,
 }) => {
   const dispatch = useDispatch();
-  const formFilters = useSelector(selectSuggestionsTableFilter);
+  const formFilters = useSelector(selectReviewerSuggestionsFilter);
   const tabs = useReviewerPoolTabs();
 
   const filter = useMemo(
@@ -426,7 +426,7 @@ export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
       tableActions={toolbarActions}
       showPageSizeSelector
       hasQuery
-      filters={<SuggestionsTableFilter />}
+      filters={<ReviewerSuggestionsFilter />}
       rowActions={SuggestionRowActions}
       rowClass={({ row }) =>
         row.status === 'rejected' ? 'bg-light-danger' : ''

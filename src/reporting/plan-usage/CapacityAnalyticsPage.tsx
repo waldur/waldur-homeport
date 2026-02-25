@@ -13,7 +13,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
-import { selectPlanUsageFilter } from '@waldur/table/generated/PlanUsageFilter';
+import { selectMarketplacePlansUsageStatsFilter } from '@waldur/table/generated/MarketplacePlansUsageStatsFilter';
 
 import { AnalyticsMode, AnalyticsPageContent } from '../analytics';
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
@@ -49,7 +49,7 @@ export const CapacityAnalyticsPage: FC = () => {
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
 
   // Get filter values from the form if available
-  const filter = useSelector(selectPlanUsageFilter);
+  const filter = useSelector(selectMarketplacePlansUsageStatsFilter);
 
   // Fetch plan usage data
   const {

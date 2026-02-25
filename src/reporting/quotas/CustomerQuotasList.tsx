@@ -1,12 +1,10 @@
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { customerQuotasList } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import {
   CustomerQuotasFilter,
-  CustomerQuotasFilterFormId,
   selectCustomerQuotasFilter,
 } from '@waldur/table/generated/CustomerQuotasFilter';
 import Table from '@waldur/table/Table';
@@ -27,12 +25,10 @@ export const CustomerQuotasList = () => {
     fetchData: createFetcher(customerQuotasList),
     filter,
   });
-  const formValues = useSelector<any, { quota_name: any }>(
-    getFormValues(CustomerQuotasFilterFormId) as any,
-  );
+  const formValues = useSelector(selectCustomerQuotasFilter);
 
   const activeQuota = getQuotas(true).find(
-    (q) => q.key === formValues?.quota_name?.value,
+    (q) => q.key === formValues?.quota_name,
   );
 
   return (

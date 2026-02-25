@@ -20,7 +20,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PurePlanUsageFilter: FunctionComponent<{}> = () => (
+const PureMarketplacePlansUsageStatsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Service provider')}
@@ -85,24 +85,31 @@ export const PurePlanUsageFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const PlanUsageFilterFormId = 'PlanUsageFilter';
+export const MarketplacePlansUsageStatsFilterFormId =
+  'MarketplacePlansUsageStatsFilter';
 
-interface PlanUsageFilterFormData {
+interface MarketplacePlansUsageStatsFilterFormData {
   provider: ServiceProvider;
   offering: ProviderOfferingDetails;
 }
 
-export const PlanUsageFilter = reduxForm<PlanUsageFilterFormData, {}>({
-  form: PlanUsageFilterFormId,
+export const MarketplacePlansUsageStatsFilter = reduxForm<
+  MarketplacePlansUsageStatsFilterFormData,
+  {}
+>({
+  form: MarketplacePlansUsageStatsFilterFormId,
   destroyOnUnmount: false,
-})(PurePlanUsageFilter);
+})(PureMarketplacePlansUsageStatsFilter);
 
-export const selectPlanUsageFilter = createSelector<
+type MarketplacePlansUsageStatsFilterQuery =
+  MarketplacePlansUsageStatsListData['query'];
+
+export const selectMarketplacePlansUsageStatsFilter = createSelector<
   RootState,
-  Partial<PlanUsageFilterFormData>,
-  MarketplacePlansUsageStatsListData['query']
->(getFormValues(PlanUsageFilterFormId), (values) => {
-  const filter: MarketplacePlansUsageStatsListData['query'] = {} as any;
+  Partial<MarketplacePlansUsageStatsFilterFormData>,
+  MarketplacePlansUsageStatsFilterQuery
+>(getFormValues(MarketplacePlansUsageStatsFilterFormId), (values) => {
+  const filter: MarketplacePlansUsageStatsFilterQuery = {} as any;
   if (values) {
     if (values.provider) {
       filter.customer_provider_uuid = values.provider.customer_uuid;

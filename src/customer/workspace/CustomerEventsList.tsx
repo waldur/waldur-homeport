@@ -1,23 +1,24 @@
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
+import { EventsListData } from 'waldur-js-client';
 
 import { isEmpty } from '@waldur/core/utils';
 import { BaseEventsList } from '@waldur/events/BaseEventsList';
+import {
+  CustomerEventsFilter,
+  selectCustomerEventsFilter,
+} from '@waldur/table/generated/CustomerEventsFilter';
 import { getCustomer } from '@waldur/workspace/selectors';
-
-import { CustomerEventsFilter } from './CustomerEventsFilter';
 
 const mapStateToFilter = createSelector(
   getCustomer,
-  getFormValues('customerEventsFilter'),
-  (customer, userFilter: any) => {
-    const filter = {
+  selectCustomerEventsFilter,
+  (customer, userFilter) => {
+    const filter: EventsListData['query'] = {
       ...userFilter,
-      feature: userFilter?.feature?.map((option) => option.value),
       scope: customer.url,
     };
-    if (userFilter && isEmpty(userFilter.feature)) {
+    if (isEmpty(userFilter.feature)) {
       filter.feature = ['customers', 'projects', 'resources'];
     }
     return filter;

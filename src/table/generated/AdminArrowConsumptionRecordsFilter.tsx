@@ -4,14 +4,13 @@ import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
+  AdminArrowConsumptionRecordsListData,
   Customer,
-  MarketplaceResourcesListData,
-  Project,
   customersList,
-  projectsList,
 } from 'waldur-js-client';
 
 import {
+  Select,
   AsyncPaginate,
   REACT_SELECT_TABLE_FILTER,
 } from '@waldur/form/themed-select';
@@ -20,9 +19,22 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureArrowResourcesFilter: FunctionComponent<
-  ArrowResourcesFilterProps
-> = (props) => (
+export const IsFinalizedChoices: IsFinalizedChoicesOption[] = [
+  {
+    label: translate('Pending'),
+    value: false,
+  },
+  {
+    label: translate('Finalized'),
+    value: true,
+  },
+];
+export interface IsFinalizedChoicesOption {
+  label: string;
+  value: boolean;
+}
+
+const PureAdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -48,26 +60,24 @@ export const PureArrowResourcesFilter: FunctionComponent<
       />
     </TableFilterItem>
     <TableFilterItem
-      title={translate('Project')}
-      name="project"
-      getValueLabel={(value: Project) => value?.name}
+      title={translate('Status')}
+      name="is_finalized"
+      getValueLabel={(value: IsFinalizedChoicesOption) => value?.label}
     >
       <Field
-        name="project"
+        name="is_finalized"
         component={(fieldProps) => (
-          <AsyncPaginate
-            placeholder={translate('Project')}
-            loadOptions={createSelectFetcher(projectsList, 'query', {
-              customer: props.organizationUuid,
-            })}
-            defaultOptions
-            getOptionValue={(option: Project) => String(option.uuid || '')}
-            getOptionLabel={(option: Project) => String(option.name || '')}
+          <Select
+            placeholder={translate('Status')}
+            options={IsFinalizedChoices}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
+            getOptionValue={(option: IsFinalizedChoicesOption) =>
+              String(option.value)
+            }
+            getOptionLabel={(option: IsFinalizedChoicesOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
-            className="metronic-select-container"
           />
         )}
       />
@@ -75,37 +85,37 @@ export const PureArrowResourcesFilter: FunctionComponent<
   </>
 );
 
-export const ArrowResourcesFilterFormId = 'ArrowResourcesFilter';
+export const AdminArrowConsumptionRecordsFilterFormId =
+  'AdminArrowConsumptionRecordsFilter';
 
-interface ArrowResourcesFilterProps {
-  organizationUuid?: any;
-}
-
-interface ArrowResourcesFilterFormData {
+interface AdminArrowConsumptionRecordsFilterFormData {
   organization: Customer;
-  project: Project;
+  is_finalized: IsFinalizedChoicesOption;
 }
 
-export const ArrowResourcesFilter = reduxForm<
-  ArrowResourcesFilterFormData,
-  ArrowResourcesFilterProps
+export const AdminArrowConsumptionRecordsFilter = reduxForm<
+  AdminArrowConsumptionRecordsFilterFormData,
+  {}
 >({
-  form: ArrowResourcesFilterFormId,
+  form: AdminArrowConsumptionRecordsFilterFormId,
   destroyOnUnmount: false,
-})(PureArrowResourcesFilter);
+})(PureAdminArrowConsumptionRecordsFilter);
 
-export const selectArrowResourcesFilter = createSelector<
+type AdminArrowConsumptionRecordsFilterQuery =
+  AdminArrowConsumptionRecordsListData['query'];
+
+export const selectAdminArrowConsumptionRecordsFilter = createSelector<
   RootState,
-  Partial<ArrowResourcesFilterFormData>,
-  MarketplaceResourcesListData['query']
->(getFormValues(ArrowResourcesFilterFormId), (values) => {
-  const filter: MarketplaceResourcesListData['query'] = {} as any;
+  Partial<AdminArrowConsumptionRecordsFilterFormData>,
+  AdminArrowConsumptionRecordsFilterQuery
+>(getFormValues(AdminArrowConsumptionRecordsFilterFormId), (values) => {
+  const filter: AdminArrowConsumptionRecordsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
       filter.customer_uuid = values.organization.uuid;
     }
-    if (values.project) {
-      filter.project_uuid = values.project.uuid;
+    if (values.is_finalized) {
+      filter.is_finalized = values.is_finalized.value;
     }
   }
   return filter;

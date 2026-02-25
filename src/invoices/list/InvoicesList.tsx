@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { invoicesList } from 'waldur-js-client';
 
@@ -9,9 +8,12 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { INVOICES_TABLE } from '@waldur/invoices/constants';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { MarkAsPaidButton } from '@waldur/invoices/list/MarkAsPaidButton';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
+import {
+  InvoicesFilter,
+  selectInvoicesFilter,
+} from '@waldur/table/generated/InvoicesFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -22,8 +24,8 @@ import { InvoicePayButton } from '../details/InvoicePayButton';
 import {
   getInvoiceStateLabel,
   getInvoiceStatusOptions,
-  InvoicesFilter,
-} from './InvoicesFilter';
+} from './InvoicesFilterUtils';
+import { MarkAsPaidButton } from './MarkAsPaidButton';
 import { SendNotificationButton } from './SendNotificationButton';
 
 const RowActions = ({ row, fetch }) => (
@@ -32,6 +34,28 @@ const RowActions = ({ row, fetch }) => (
     refetch={fetch}
     actions={[SendNotificationButton, MarkAsPaidButton, InvoicePayButton]}
   />
+);
+
+const mapsStateToFilter = createSelector(
+  getCustomer,
+  selectInvoicesFilter,
+  (customer, stateFilter) => ({
+    ...stateFilter,
+    customer: customer.url,
+    field: [
+      'uuid',
+      'state',
+      'due_date',
+      'month',
+      'year',
+      'invoice_date',
+      'number',
+      'price',
+      'tax',
+      'total',
+      'payment_url',
+    ],
+  }),
 );
 
 export const InvoicesList: FunctionComponent = () => {
@@ -116,26 +140,3 @@ export const InvoicesList: FunctionComponent = () => {
     />
   );
 };
-
-const mapsStateToFilter = createSelector(
-  getCustomer,
-  getFormValues('InvoicesFilter'),
-  (customer, stateFilter: any) => ({
-    ...stateFilter,
-    customer: customer.url,
-    state: stateFilter?.state?.map((option) => option.value),
-    field: [
-      'uuid',
-      'state',
-      'due_date',
-      'month',
-      'year',
-      'invoice_date',
-      'number',
-      'price',
-      'tax',
-      'total',
-      'payment_url',
-    ],
-  }),
-);

@@ -48,7 +48,7 @@ export interface IsActiveChoicesOption {
   value: boolean;
 }
 
-export const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
+const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('Type')}
@@ -119,12 +119,14 @@ export const AdminAnnouncementsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureAdminAnnouncementsFilter);
 
+type AdminAnnouncementsFilterQuery = AdminAnnouncementsListData['query'];
+
 export const selectAdminAnnouncementsFilter = createSelector<
   RootState,
   Partial<AdminAnnouncementsFilterFormData>,
-  AdminAnnouncementsListData['query']
+  AdminAnnouncementsFilterQuery
 >(getFormValues(AdminAnnouncementsFilterFormId), (values) => {
-  const filter: AdminAnnouncementsListData['query'] = {} as any;
+  const filter: AdminAnnouncementsFilterQuery = {} as any;
   if (values) {
     if (values.type) {
       filter.type = values.type.map((v: any) => v.value);

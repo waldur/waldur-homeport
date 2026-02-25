@@ -11,13 +11,13 @@ import { ENV } from '@waldur/core/config';
 import { Link } from '@waldur/core/Link';
 import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
 import { translate } from '@waldur/i18n';
-import { OfferingsFilter } from '@waldur/marketplace/offerings/list/OfferingsFilter';
 import { OfferingStateCell } from '@waldur/marketplace/offerings/list/OfferingStateCell';
 import { getStates } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
 import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
 import { useFullPage } from '@waldur/navigation/context';
 import { AvailableOfferingCard } from '@waldur/proposals/AvailableOfferingCard';
 import { createFetcher } from '@waldur/table/api';
+import { MarketplaceProviderOfferingsFilter } from '@waldur/table/generated/MarketplaceProviderOfferingsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -98,7 +98,7 @@ export const CallsAvailableOfferingsPage: FunctionComponent = () => {
           verboseName={translate('Available offerings')}
           initialSorting={{ field: 'name', mode: 'desc' }}
           hasQuery={true}
-          filters={<OfferingsFilter />}
+          filters={<MarketplaceProviderOfferingsFilter />}
         />
       </div>
     </>

@@ -6,7 +6,6 @@ import {
 } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
@@ -15,11 +14,13 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { CustomerPermissionsLogButton } from '@waldur/customer/team/CustomerPermissionsLogButton';
 import { TeamDropdownActions } from '@waldur/customer/team/TeamDropdownActions';
 import { translate } from '@waldur/i18n';
-import { GROUP_INVITATIONS_FILTER_FORM_ID } from '@waldur/invitations/constants';
 import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRowActions';
-import { GroupInvitationsFilter } from '@waldur/invitations/GroupInvitationsFilter';
 import { GroupInvitationsListExpandableRow } from '@waldur/invitations/GroupInvitationsListExpandableRow';
 import { createFetcher } from '@waldur/table/api';
+import {
+  UserGroupInvitationsFilter,
+  selectUserGroupInvitationsFilter,
+} from '@waldur/table/generated/UserGroupInvitationsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { RoleField } from '@waldur/user/affiliations/RoleField';
@@ -30,9 +31,9 @@ import { useTeamTableTabs } from '../customer/team/tabs';
 
 const mapStateToFilter = createSelector(
   getCustomer,
-  getFormValues(GROUP_INVITATIONS_FILTER_FORM_ID),
-  (customer, filterValues) => ({
-    ...filterValues,
+  selectUserGroupInvitationsFilter,
+  (customer, filter) => ({
+    ...filter,
     customer_uuid: customer?.uuid,
   }),
 );
@@ -50,7 +51,7 @@ export const GroupInvitationsList: FunctionComponent<{}> = () => {
   return (
     <Table<GroupInvitation>
       {...props}
-      filters={<GroupInvitationsFilter />}
+      filters={<UserGroupInvitationsFilter />}
       filterPosition="menu"
       hasQuery
       columns={[

@@ -16,10 +16,10 @@ import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import {
-  SupportSystemLogsFilter,
-  selectSupportSystemLogsFilter,
-  SupportSystemLogsFilterFormId,
-} from '@waldur/table/generated/SupportSystemLogsFilter';
+  SystemLogsFilter as SupportSystemLogsFilter,
+  selectSystemLogsFilter as selectSupportSystemLogsFilter,
+  SystemLogsFilterFormId as SupportSystemLogsFilterFormId,
+} from '@waldur/table/generated/SystemLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 

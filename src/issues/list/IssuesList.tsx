@@ -10,12 +10,12 @@ import { StatusColumn } from '@waldur/issues/list/StatusColumn';
 import { TitleColumn } from '@waldur/issues/list/TitleColumn';
 import { createFetcher } from '@waldur/table/api';
 import {
-  selectIssuesFilter,
-  IssuesFilter,
+  SupportIssuesFilter as IssuesFilter,
+  selectSupportIssuesFilter as selectIssuesFilter,
   StatusChoices,
 } from '@waldur/table/generated/SupportIssuesFilter';
 import Table from '@waldur/table/Table';
-import { TableProps, Column } from '@waldur/table/types';
+import { Column, TableProps } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { getUser } from '@waldur/workspace/selectors';
 

@@ -41,7 +41,7 @@ export interface RemoteProjectUpdateRequestStateEnumChoicesOption {
   value: RemoteProjectUpdateRequestStateEnum;
 }
 
-export const PureManagedProjectsFilter: FunctionComponent<{}> = () => (
+const PureOpenportalManagedProjectsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
@@ -72,26 +72,30 @@ export const PureManagedProjectsFilter: FunctionComponent<{}> = () => (
   </TableFilterItem>
 );
 
-export const ManagedProjectsFilterFormId = 'ManagedProjectsFilter';
+export const OpenportalManagedProjectsFilterFormId =
+  'OpenportalManagedProjectsFilter';
 
-interface ManagedProjectsFilterFormData {
+interface OpenportalManagedProjectsFilterFormData {
   state: RemoteProjectUpdateRequestStateEnumChoicesOption[];
 }
 
-export const ManagedProjectsFilter = reduxForm<
-  ManagedProjectsFilterFormData,
+export const OpenportalManagedProjectsFilter = reduxForm<
+  OpenportalManagedProjectsFilterFormData,
   {}
 >({
-  form: ManagedProjectsFilterFormId,
+  form: OpenportalManagedProjectsFilterFormId,
   destroyOnUnmount: false,
-})(PureManagedProjectsFilter);
+})(PureOpenportalManagedProjectsFilter);
 
-export const selectManagedProjectsFilter = createSelector<
+type OpenportalManagedProjectsFilterQuery =
+  OpenportalManagedProjectsListData['query'];
+
+export const selectOpenportalManagedProjectsFilter = createSelector<
   RootState,
-  Partial<ManagedProjectsFilterFormData>,
-  OpenportalManagedProjectsListData['query']
->(getFormValues(ManagedProjectsFilterFormId), (values) => {
-  const filter: OpenportalManagedProjectsListData['query'] = {} as any;
+  Partial<OpenportalManagedProjectsFilterFormData>,
+  OpenportalManagedProjectsFilterQuery
+>(getFormValues(OpenportalManagedProjectsFilterFormId), (values) => {
+  const filter: OpenportalManagedProjectsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
       filter.state = values.state.map((v: any) => v.value);

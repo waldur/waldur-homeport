@@ -1,6 +1,5 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
   proposalProposalsList,
@@ -14,39 +13,30 @@ import {
   getProposalStateOptions,
 } from '@waldur/proposals/utils';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProposalProposalsFilter,
+  selectProposalProposalsFilter,
+} from '@waldur/table/generated/ProposalProposalsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { PROPOSALS_FILTER_FORM_ID } from '../constants';
 import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 
-import { AdminProposalsTableFilter } from './AdminProposalsTableFilter';
 import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
 
 const filtersSelector = createSelector(
-  getFormValues(PROPOSALS_FILTER_FORM_ID),
-  (filters: any) => {
+  selectProposalProposalsFilter,
+  (filterValues) => {
     const result: ProposalProposalsListData['query'] & { round_uuid?: string } =
-      {};
+      {
+        ...filterValues,
+      };
     result.o = ['-round__cutoff_time'];
-    result.state = getNonCanceledProposalStates();
-
-    if (filters) {
-      if (filters.state) {
-        result.state = filters.state.map((option) => option.value);
-      }
-      if (filters.call) {
-        result.call_uuid = filters.call.uuid;
-      }
-      if (filters.round) {
-        result.round_uuid = filters.round.uuid;
-      }
-      if (filters.organization) {
-        result.organization_uuid = filters.organization.uuid;
-      }
+    if (!result.state) {
+      result.state = getNonCanceledProposalStates();
     }
     return result;
   },
@@ -152,7 +142,7 @@ export const AdminProposalsList: FC = () => {
       title={translate('All proposals')}
       verboseName={translate('Proposals')}
       hasQuery={true}
-      filters={<AdminProposalsTableFilter />}
+      filters={<ProposalProposalsFilter />}
       rowActions={({ row }) => (
         <ProposalRowActions refetch={tableProps.fetch} row={row} />
       )}

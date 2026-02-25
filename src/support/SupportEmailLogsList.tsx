@@ -7,8 +7,8 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import {
-  selectSupportEmailLogsFilter,
-  SupportEmailLogsFilter,
+  selectEmailLogsFilter as selectSupportEmailLogsFilter,
+  EmailLogsFilter as SupportEmailLogsFilter,
 } from '@waldur/table/generated/EmailLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';

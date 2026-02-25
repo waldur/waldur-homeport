@@ -9,6 +9,10 @@ import { translate } from '@waldur/i18n';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
+import {
+  InvoicesFilter,
+  InvoicesFilterFormId,
+} from '@waldur/table/generated/InvoicesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { getCustomer } from '@waldur/workspace/selectors';
@@ -18,8 +22,7 @@ import { formatPeriod } from '../utils';
 import {
   getInvoiceStateLabel,
   getInvoiceStatusOptions,
-  InvoicesFilter,
-} from './InvoicesFilter';
+} from './InvoicesFilterUtils';
 import { SendNotificationButton } from './SendNotificationButton';
 
 const RecordPeriodField = ({ row }) => formatPeriod(row);
@@ -34,7 +37,7 @@ const RowActions = ({ row, fetch }) => (
 
 export const BillingRecordsList: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
-  const stateFilter: any = useSelector(getFormValues('InvoicesFilter'));
+  const stateFilter: any = useSelector(getFormValues(InvoicesFilterFormId));
   const filter = useMemo(
     () => ({
       ...stateFilter,

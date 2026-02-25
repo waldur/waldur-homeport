@@ -8,8 +8,8 @@ import { Option } from '@waldur/marketplace/common/registry';
 import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import {
-  ProjectUpdateRequestListFilter,
-  selectProjectUpdateRequestListFilter,
+  MarketplaceProjectUpdateRequestsFilter as ProjectUpdateRequestListFilter,
+  selectMarketplaceProjectUpdateRequestsFilter as selectProjectUpdateRequestListFilter,
 } from '@waldur/table/generated/MarketplaceProjectUpdateRequestsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';

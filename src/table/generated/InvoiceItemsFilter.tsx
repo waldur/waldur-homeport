@@ -23,9 +23,9 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureSupportInvoiceItemsFilter: FunctionComponent<
-  SupportInvoiceItemsFilterProps
-> = (props) => (
+const PureInvoiceItemsFilter: FunctionComponent<InvoiceItemsFilterProps> = (
+  props,
+) => (
   <>
     <TableFilterItem
       title={translate('Organization')}
@@ -125,33 +125,35 @@ export const PureSupportInvoiceItemsFilter: FunctionComponent<
   </>
 );
 
-export const SupportInvoiceItemsFilterFormId = 'SupportInvoiceItemsFilter';
+export const InvoiceItemsFilterFormId = 'InvoiceItemsFilter';
 
-interface SupportInvoiceItemsFilterProps {
+interface InvoiceItemsFilterProps {
   accountingPeriods?: any[];
 }
 
-interface SupportInvoiceItemsFilterFormData {
+interface InvoiceItemsFilterFormData {
   organization: Customer;
   accounting_period: any;
   project: Project;
   offering: ProviderOfferingDetails;
 }
 
-export const SupportInvoiceItemsFilter = reduxForm<
-  SupportInvoiceItemsFilterFormData,
-  SupportInvoiceItemsFilterProps
+export const InvoiceItemsFilter = reduxForm<
+  InvoiceItemsFilterFormData,
+  InvoiceItemsFilterProps
 >({
-  form: SupportInvoiceItemsFilterFormId,
+  form: InvoiceItemsFilterFormId,
   destroyOnUnmount: false,
-})(PureSupportInvoiceItemsFilter);
+})(PureInvoiceItemsFilter);
 
-export const selectSupportInvoiceItemsFilter = createSelector<
+type InvoiceItemsFilterQuery = InvoiceItemsListData['query'];
+
+export const selectInvoiceItemsFilter = createSelector<
   RootState,
-  Partial<SupportInvoiceItemsFilterFormData>,
-  InvoiceItemsListData['query']
->(getFormValues(SupportInvoiceItemsFilterFormId), (values) => {
-  const filter: InvoiceItemsListData['query'] = {} as any;
+  Partial<InvoiceItemsFilterFormData>,
+  InvoiceItemsFilterQuery
+>(getFormValues(InvoiceItemsFilterFormId), (values) => {
+  const filter: InvoiceItemsFilterQuery = {} as any;
   if (values) {
     if (values.organization) {
       filter.customer_uuid = values.organization.uuid;

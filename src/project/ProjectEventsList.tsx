@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { BaseEventsList } from '@waldur/events/BaseEventsList';
 import { translate } from '@waldur/i18n';
 import {
-  selectSupportEventsFilter,
-  SupportEventsFilter,
-} from '@waldur/table/generated/SupportEventsFilter';
+  selectEventsFilter as selectSupportEventsFilter,
+  EventsFilter as SupportEventsFilter,
+} from '@waldur/table/generated/EventsFilter';
 import { getProject } from '@waldur/workspace/selectors';
 
 export const ProjectEventsView: FunctionComponent = () => {

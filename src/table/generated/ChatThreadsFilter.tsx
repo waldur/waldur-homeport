@@ -50,7 +50,7 @@ export interface InjectionSeverityEnumChoicesOption {
   value: InjectionSeverityEnum;
 }
 
-export const PureSupportAIAssistantLogsFilter: FunctionComponent<{}> = () => (
+const PureChatThreadsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem title={translate('Created')} name="created">
       <Field
@@ -149,10 +149,9 @@ export const PureSupportAIAssistantLogsFilter: FunctionComponent<{}> = () => (
   </>
 );
 
-export const SupportAIAssistantLogsFilterFormId =
-  'SupportAIAssistantLogsFilter';
+export const ChatThreadsFilterFormId = 'ChatThreadsFilter';
 
-interface SupportAIAssistantLogsFilterFormData {
+interface ChatThreadsFilterFormData {
   created: string;
   modified: string;
   user: User;
@@ -161,20 +160,19 @@ interface SupportAIAssistantLogsFilterFormData {
   is_archived: boolean;
 }
 
-export const SupportAIAssistantLogsFilter = reduxForm<
-  SupportAIAssistantLogsFilterFormData,
-  {}
->({
-  form: SupportAIAssistantLogsFilterFormId,
+export const ChatThreadsFilter = reduxForm<ChatThreadsFilterFormData, {}>({
+  form: ChatThreadsFilterFormId,
   destroyOnUnmount: false,
-})(PureSupportAIAssistantLogsFilter);
+})(PureChatThreadsFilter);
 
-export const selectSupportAIAssistantLogsFilter = createSelector<
+type ChatThreadsFilterQuery = ChatThreadsListData['query'];
+
+export const selectChatThreadsFilter = createSelector<
   RootState,
-  Partial<SupportAIAssistantLogsFilterFormData>,
-  ChatThreadsListData['query']
->(getFormValues(SupportAIAssistantLogsFilterFormId), (values) => {
-  const filter: ChatThreadsListData['query'] = {} as any;
+  Partial<ChatThreadsFilterFormData>,
+  ChatThreadsFilterQuery
+>(getFormValues(ChatThreadsFilterFormId), (values) => {
+  const filter: ChatThreadsFilterQuery = {} as any;
   if (values) {
     if (values.created) {
       filter.created = values.created;

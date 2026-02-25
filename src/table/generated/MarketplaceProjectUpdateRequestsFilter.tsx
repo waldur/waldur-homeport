@@ -41,58 +41,62 @@ export interface RemoteProjectUpdateRequestStateEnumChoicesOption {
   value: RemoteProjectUpdateRequestStateEnum;
 }
 
-export const PureProjectUpdateRequestListFilter: FunctionComponent<{}> = () => (
-  <TableFilterItem
-    title={translate('State')}
-    name="state"
-    getValueLabel={(
-      value: RemoteProjectUpdateRequestStateEnumChoicesOption[],
-    ) => value?.map((v) => v?.label).join(', ')}
-  >
-    <Field
+const PureMarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
+  () => (
+    <TableFilterItem
+      title={translate('State')}
       name="state"
-      component={(fieldProps) => (
-        <Select
-          placeholder={translate('State')}
-          options={RemoteProjectUpdateRequestStateEnumChoices}
-          value={fieldProps.input.value}
-          onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(
-            option: RemoteProjectUpdateRequestStateEnumChoicesOption,
-          ) => String(option.value)}
-          getOptionLabel={(
-            option: RemoteProjectUpdateRequestStateEnumChoicesOption,
-          ) => option.label}
-          isClearable={true}
-          isMulti={true}
-          {...REACT_SELECT_TABLE_FILTER}
-        />
-      )}
-    />
-  </TableFilterItem>
-);
+      getValueLabel={(
+        value: RemoteProjectUpdateRequestStateEnumChoicesOption[],
+      ) => value?.map((v) => v?.label).join(', ')}
+    >
+      <Field
+        name="state"
+        component={(fieldProps) => (
+          <Select
+            placeholder={translate('State')}
+            options={RemoteProjectUpdateRequestStateEnumChoices}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            getOptionValue={(
+              option: RemoteProjectUpdateRequestStateEnumChoicesOption,
+            ) => String(option.value)}
+            getOptionLabel={(
+              option: RemoteProjectUpdateRequestStateEnumChoicesOption,
+            ) => option.label}
+            isClearable={true}
+            isMulti={true}
+            {...REACT_SELECT_TABLE_FILTER}
+          />
+        )}
+      />
+    </TableFilterItem>
+  );
 
-export const ProjectUpdateRequestListFilterFormId =
-  'ProjectUpdateRequestListFilter';
+export const MarketplaceProjectUpdateRequestsFilterFormId =
+  'MarketplaceProjectUpdateRequestsFilter';
 
-interface ProjectUpdateRequestListFilterFormData {
+interface MarketplaceProjectUpdateRequestsFilterFormData {
   state: RemoteProjectUpdateRequestStateEnumChoicesOption[];
 }
 
-export const ProjectUpdateRequestListFilter = reduxForm<
-  ProjectUpdateRequestListFilterFormData,
+export const MarketplaceProjectUpdateRequestsFilter = reduxForm<
+  MarketplaceProjectUpdateRequestsFilterFormData,
   {}
 >({
-  form: ProjectUpdateRequestListFilterFormId,
+  form: MarketplaceProjectUpdateRequestsFilterFormId,
   destroyOnUnmount: false,
-})(PureProjectUpdateRequestListFilter);
+})(PureMarketplaceProjectUpdateRequestsFilter);
 
-export const selectProjectUpdateRequestListFilter = createSelector<
+type MarketplaceProjectUpdateRequestsFilterQuery =
+  MarketplaceProjectUpdateRequestsListData['query'];
+
+export const selectMarketplaceProjectUpdateRequestsFilter = createSelector<
   RootState,
-  Partial<ProjectUpdateRequestListFilterFormData>,
-  MarketplaceProjectUpdateRequestsListData['query']
->(getFormValues(ProjectUpdateRequestListFilterFormId), (values) => {
-  const filter: MarketplaceProjectUpdateRequestsListData['query'] = {} as any;
+  Partial<MarketplaceProjectUpdateRequestsFilterFormData>,
+  MarketplaceProjectUpdateRequestsFilterQuery
+>(getFormValues(MarketplaceProjectUpdateRequestsFilterFormId), (values) => {
+  const filter: MarketplaceProjectUpdateRequestsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
       filter.state = values.state.map((v: any) => v.value);

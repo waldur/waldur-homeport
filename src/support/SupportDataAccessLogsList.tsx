@@ -8,9 +8,9 @@ import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import {
-  SupportDataAccessLogsFilter,
-  selectSupportDataAccessLogsFilter,
-} from '@waldur/table/generated/SupportDataAccessLogsFilter';
+  DataAccessLogsFilter as SupportDataAccessLogsFilter,
+  selectDataAccessLogsFilter as selectSupportDataAccessLogsFilter,
+} from '@waldur/table/generated/DataAccessLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import {

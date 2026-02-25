@@ -23,9 +23,9 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureInvoicesItemsFilter: FunctionComponent<
-  InvoicesItemsFilterProps
-> = (props) => (
+const PureInvoicesItemsFilter: FunctionComponent<InvoicesItemsFilterProps> = (
+  props,
+) => (
   <>
     <TableFilterItem
       title={translate('Service provider')}
@@ -152,12 +152,14 @@ export const InvoicesItemsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureInvoicesItemsFilter);
 
+type InvoicesItemsFilterQuery = InvoicesItemsRetrieveData['query'];
+
 export const selectInvoicesItemsFilter = createSelector<
   RootState,
   Partial<InvoicesItemsFilterFormData>,
-  InvoicesItemsRetrieveData['query']
+  InvoicesItemsFilterQuery
 >(getFormValues(InvoicesItemsFilterFormId), (values) => {
-  const filter: InvoicesItemsRetrieveData['query'] = {} as any;
+  const filter: InvoicesItemsFilterQuery = {} as any;
   if (values) {
     if (values.provider) {
       filter.provider_uuid = values.provider.uuid;

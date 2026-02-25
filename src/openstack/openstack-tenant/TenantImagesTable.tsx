@@ -3,16 +3,16 @@ import { useSelector } from 'react-redux';
 import { OpenstackImagesListData } from 'waldur-js-client';
 
 import {
-  TenantImagesFilter,
-  selectTenantImagesFilter,
-} from '@waldur/table/generated/TenantImagesFilter';
+  OpenstackImagesFilter,
+  selectOpenstackImagesFilter,
+} from '@waldur/table/generated/OpenstackImagesFilter';
 
 import { TenantImagesList } from './TenantImagesList';
 
 export const TenantImagesTable: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
 }) => {
-  const filterValues = useSelector(selectTenantImagesFilter);
+  const filterValues = useSelector(selectOpenstackImagesFilter);
   const filter = useMemo(
     (): OpenstackImagesListData['query'] => ({
       tenant_uuid: resourceScope.uuid,
@@ -20,5 +20,7 @@ export const TenantImagesTable: FunctionComponent<{ resourceScope }> = ({
     }),
     [resourceScope?.uuid, filterValues],
   );
-  return <TenantImagesList filter={filter} filters={<TenantImagesFilter />} />;
+  return (
+    <TenantImagesList filter={filter} filters={<OpenstackImagesFilter />} />
+  );
 };

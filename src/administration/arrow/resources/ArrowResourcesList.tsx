@@ -10,10 +10,10 @@ import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import {
-  ArrowResourcesFilter,
-  selectArrowResourcesFilter,
-  ArrowResourcesFilterFormId,
-} from '@waldur/table/generated/ArrowResourcesFilter';
+  MarketplaceResourcesFilter,
+  selectMarketplaceResourcesFilter,
+  MarketplaceResourcesFilterFormId,
+} from '@waldur/table/generated/MarketplaceResourcesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
@@ -27,9 +27,9 @@ interface ArrowResourcesListProps {
 export const ArrowResourcesList: FunctionComponent<
   ArrowResourcesListProps
 > = () => {
-  const filterValues = useSelector(selectArrowResourcesFilter);
+  const filterValues = useSelector(selectMarketplaceResourcesFilter);
   const formValues: any = useSelector(
-    getFormValues(ArrowResourcesFilterFormId),
+    getFormValues(MarketplaceResourcesFilterFormId),
   );
 
   const filter = useMemo(
@@ -109,7 +109,7 @@ export const ArrowResourcesList: FunctionComponent<
       initialSorting={{ field: 'name', mode: 'asc' }}
       hasQuery
       filters={
-        <ArrowResourcesFilter
+        <MarketplaceResourcesFilter
           organizationUuid={formValues?.organization?.uuid}
         />
       }

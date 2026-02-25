@@ -37,7 +37,7 @@ export interface ReviewerSuggestionStatusEnumChoicesOption {
   value: ReviewerSuggestionStatusEnum;
 }
 
-export const PureSuggestionsTableFilter: FunctionComponent<{}> = () => (
+const PureReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="status"
@@ -68,26 +68,28 @@ export const PureSuggestionsTableFilter: FunctionComponent<{}> = () => (
   </TableFilterItem>
 );
 
-export const SuggestionsTableFilterFormId = 'SuggestionsTableFilter';
+export const ReviewerSuggestionsFilterFormId = 'ReviewerSuggestionsFilter';
 
-interface SuggestionsTableFilterFormData {
+interface ReviewerSuggestionsFilterFormData {
   status: ReviewerSuggestionStatusEnumChoicesOption[];
 }
 
-export const SuggestionsTableFilter = reduxForm<
-  SuggestionsTableFilterFormData,
+export const ReviewerSuggestionsFilter = reduxForm<
+  ReviewerSuggestionsFilterFormData,
   {}
 >({
-  form: SuggestionsTableFilterFormId,
+  form: ReviewerSuggestionsFilterFormId,
   destroyOnUnmount: false,
-})(PureSuggestionsTableFilter);
+})(PureReviewerSuggestionsFilter);
 
-export const selectSuggestionsTableFilter = createSelector<
+type ReviewerSuggestionsFilterQuery = ReviewerSuggestionsListData['query'];
+
+export const selectReviewerSuggestionsFilter = createSelector<
   RootState,
-  Partial<SuggestionsTableFilterFormData>,
-  ReviewerSuggestionsListData['query']
->(getFormValues(SuggestionsTableFilterFormId), (values) => {
-  const filter: ReviewerSuggestionsListData['query'] = {} as any;
+  Partial<ReviewerSuggestionsFilterFormData>,
+  ReviewerSuggestionsFilterQuery
+>(getFormValues(ReviewerSuggestionsFilterFormId), (values) => {
+  const filter: ReviewerSuggestionsFilterQuery = {} as any;
   if (values) {
     if (values.status) {
       filter.status = values.status.map((v: any) => v.value);

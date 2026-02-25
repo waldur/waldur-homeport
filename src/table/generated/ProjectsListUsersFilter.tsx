@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PureProjectsListUsersFilter: FunctionComponent<
+const PureProjectsListUsersFilter: FunctionComponent<
   ProjectsListUsersFilterProps
 > = (props) => (
   <TableFilterItem
@@ -54,12 +54,14 @@ export const ProjectsListUsersFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureProjectsListUsersFilter);
 
+type ProjectsListUsersFilterQuery = ProjectsListUsersListData['query'];
+
 export const selectProjectsListUsersFilter = createSelector<
   RootState,
   Partial<ProjectsListUsersFilterFormData>,
-  ProjectsListUsersListData['query']
+  ProjectsListUsersFilterQuery
 >(getFormValues(ProjectsListUsersFilterFormId), (values) => {
-  const filter: ProjectsListUsersListData['query'] = {} as any;
+  const filter: ProjectsListUsersFilterQuery = {} as any;
   if (values) {
     if (values.project_role) {
       filter.role = values.project_role.name;

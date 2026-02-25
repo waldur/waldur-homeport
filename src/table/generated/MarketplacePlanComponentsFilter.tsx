@@ -18,7 +18,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const PurePriceListFilter: FunctionComponent<{}> = () => (
+const PureMarketplacePlanComponentsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Offering')}
     name="offering"
@@ -51,23 +51,30 @@ export const PurePriceListFilter: FunctionComponent<{}> = () => (
   </TableFilterItem>
 );
 
-export const PriceListFilterFormId = 'PriceListFilter';
+export const MarketplacePlanComponentsFilterFormId =
+  'MarketplacePlanComponentsFilter';
 
-interface PriceListFilterFormData {
+interface MarketplacePlanComponentsFilterFormData {
   offering: ProviderOfferingDetails;
 }
 
-export const PriceListFilter = reduxForm<PriceListFilterFormData, {}>({
-  form: PriceListFilterFormId,
+export const MarketplacePlanComponentsFilter = reduxForm<
+  MarketplacePlanComponentsFilterFormData,
+  {}
+>({
+  form: MarketplacePlanComponentsFilterFormId,
   destroyOnUnmount: false,
-})(PurePriceListFilter);
+})(PureMarketplacePlanComponentsFilter);
 
-export const selectPriceListFilter = createSelector<
+type MarketplacePlanComponentsFilterQuery =
+  MarketplacePlanComponentsListData['query'];
+
+export const selectMarketplacePlanComponentsFilter = createSelector<
   RootState,
-  Partial<PriceListFilterFormData>,
-  MarketplacePlanComponentsListData['query']
->(getFormValues(PriceListFilterFormId), (values) => {
-  const filter: MarketplacePlanComponentsListData['query'] = {} as any;
+  Partial<MarketplacePlanComponentsFilterFormData>,
+  MarketplacePlanComponentsFilterQuery
+>(getFormValues(MarketplacePlanComponentsFilterFormId), (values) => {
+  const filter: MarketplacePlanComponentsFilterQuery = {} as any;
   if (values) {
     if (values.offering) {
       filter.offering_uuid = values.offering.uuid;

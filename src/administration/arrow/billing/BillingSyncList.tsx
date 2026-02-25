@@ -10,9 +10,9 @@ import { getPreviousBillingPeriods } from '@waldur/reporting/usage-monitoring/ut
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import {
-  BillingSyncFilter,
-  selectBillingSyncFilter,
-} from '@waldur/table/generated/BillingSyncFilter';
+  AdminArrowBillingSyncsFilter as BillingSyncFilter,
+  selectAdminArrowBillingSyncsFilter as selectBillingSyncFilter,
+} from '@waldur/table/generated/AdminArrowBillingSyncsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 

@@ -92,7 +92,7 @@ export interface ScopeTypeChoicesOption {
   value: string;
 }
 
-export const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
+const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
   <>
     <TableFilterItem
       title={translate('State')}
@@ -213,12 +213,14 @@ export const UserInvitationsFilter = reduxForm<
   destroyOnUnmount: false,
 })(PureUserInvitationsFilter);
 
+type UserInvitationsFilterQuery = UserInvitationsListData['query'];
+
 export const selectUserInvitationsFilter = createSelector<
   RootState,
   Partial<UserInvitationsFilterFormData>,
-  UserInvitationsListData['query']
+  UserInvitationsFilterQuery
 >(getFormValues(UserInvitationsFilterFormId), (values) => {
-  const filter: UserInvitationsListData['query'] = {} as any;
+  const filter: UserInvitationsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
       filter.state = values.state.map((v: any) => v.value);

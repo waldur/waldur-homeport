@@ -62,7 +62,7 @@ export interface CustomerQuotasQuotaNameEnumChoicesOption {
   value: CustomerQuotasQuotaNameEnum;
 }
 
-export const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
+const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Quota')}
     name="quota_name"
@@ -110,12 +110,14 @@ export const CustomerQuotasFilter = reduxForm<CustomerQuotasFilterFormData, {}>(
   },
 )(PureCustomerQuotasFilter);
 
+type CustomerQuotasFilterQuery = CustomerQuotasListData['query'];
+
 export const selectCustomerQuotasFilter = createSelector<
   RootState,
   Partial<CustomerQuotasFilterFormData>,
-  CustomerQuotasListData['query']
+  CustomerQuotasFilterQuery
 >(getFormValues(CustomerQuotasFilterFormId), (values) => {
-  const filter: CustomerQuotasListData['query'] = {} as any;
+  const filter: CustomerQuotasFilterQuery = {} as any;
   if (values) {
     if (values.quota_name) {
       filter.quota_name = values.quota_name.value;

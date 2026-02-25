@@ -33,8 +33,8 @@ export interface StateChoicesOption {
   value: number;
 }
 
-export const PureBillingSyncFilter: FunctionComponent<
-  BillingSyncFilterProps
+const PureAdminArrowBillingSyncsFilter: FunctionComponent<
+  AdminArrowBillingSyncsFilterProps
 > = (props) => (
   <>
     <TableFilterItem
@@ -101,32 +101,36 @@ export const PureBillingSyncFilter: FunctionComponent<
   </>
 );
 
-export const BillingSyncFilterFormId = 'BillingSyncFilter';
+export const AdminArrowBillingSyncsFilterFormId =
+  'AdminArrowBillingSyncsFilter';
 
-interface BillingSyncFilterProps {
+interface AdminArrowBillingSyncsFilterProps {
   billingPeriods?: any[];
 }
 
-interface BillingSyncFilterFormData {
+interface AdminArrowBillingSyncsFilterFormData {
   state: StateChoicesOption;
   report_period_from: any;
   report_period_to: any;
 }
 
-export const BillingSyncFilter = reduxForm<
-  BillingSyncFilterFormData,
-  BillingSyncFilterProps
+export const AdminArrowBillingSyncsFilter = reduxForm<
+  AdminArrowBillingSyncsFilterFormData,
+  AdminArrowBillingSyncsFilterProps
 >({
-  form: BillingSyncFilterFormId,
+  form: AdminArrowBillingSyncsFilterFormId,
   destroyOnUnmount: false,
-})(PureBillingSyncFilter);
+})(PureAdminArrowBillingSyncsFilter);
 
-export const selectBillingSyncFilter = createSelector<
+type AdminArrowBillingSyncsFilterQuery =
+  AdminArrowBillingSyncsListData['query'];
+
+export const selectAdminArrowBillingSyncsFilter = createSelector<
   RootState,
-  Partial<BillingSyncFilterFormData>,
-  AdminArrowBillingSyncsListData['query']
->(getFormValues(BillingSyncFilterFormId), (values) => {
-  const filter: AdminArrowBillingSyncsListData['query'] = {} as any;
+  Partial<AdminArrowBillingSyncsFilterFormData>,
+  AdminArrowBillingSyncsFilterQuery
+>(getFormValues(AdminArrowBillingSyncsFilterFormId), (values) => {
+  const filter: AdminArrowBillingSyncsFilterQuery = {} as any;
   if (values) {
     if (values.state) {
       filter.state = values.state.value;
