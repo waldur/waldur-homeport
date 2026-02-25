@@ -27,6 +27,7 @@ import { useTable } from '@waldur/table/useTable';
 import { IsdBadges } from './IsdBadges';
 import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';
 import { UserDetailsButton } from './UserDetailsButton';
+import { UserEditButton } from './UserEditButton';
 import { UserFilter } from './UserFilter';
 import { UserImpersonateButton } from './UserImpersonateButton';
 import { UserTableActions } from './UserTableActions';
@@ -123,11 +124,13 @@ const renderListOrDash = (list) => {
     </>
   );
 };
-const RowActions = ({ row }: { row: User }) => {
+const RowActions = ({ row, fetch }: { row: User; fetch? }) => {
   return (
     <ActionsDropdown
       row={row}
+      refetch={fetch}
       actions={[
+        UserEditButton,
         RecalculateUserActionsButton,
         UserImpersonateButton,
         UserDetailsButton,
