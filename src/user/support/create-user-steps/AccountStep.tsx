@@ -1,12 +1,20 @@
-import { FC } from 'react';
-import { Field } from 'react-final-form';
+import {
+  ArrowCounterClockwiseIcon,
+  ShieldCheckIcon,
+} from '@phosphor-icons/react';
+import { FC, useCallback } from 'react';
+import { Field, useForm, useFormState } from 'react-final-form';
 
+import { generatePassword } from '@waldur/core/generatePassword';
 import { composeValidators, email, required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
+import { SecretField } from '@waldur/form/SecretField';
 import { StringField } from '@waldur/form/StringField';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
+
+import { UserFormData, UserFormDialogData } from '../UserFormDialog';
 
 const usernameValidator = (value: string) =>
   value && !/^[a-z0-9@.+\-_]+$/.test(value)
@@ -21,6 +29,25 @@ const maxLength128 = (value: string) =>
     : undefined;
 
 export const AccountStep: FC<WizardStepProps> = (props) => {
+  const form = useForm<UserFormData>();
+  const { values } = useFormState<UserFormData>();
+  const { editMode, user } = (props.data || {}) as UserFormDialogData;
+
+  const handleGeneratePassword = useCallback(() => {
+    const password = generatePassword(16);
+    form.change('password', password);
+    form.change('remove_password', false);
+  }, [form]);
+
+  const handleRemovePassword = useCallback(() => {
+    form.change('password', '');
+    form.change('remove_password', true);
+  }, [form]);
+
+  const handleCancelRemove = useCallback(() => {
+    form.change('remove_password', false);
+  }, [form]);
+
   return (
     <WizardModal {...props}>
       <FormGroup label={translate('Username')} required>
@@ -74,7 +101,6 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
         description={translate(
           'Designates whether the user is a global support user.',
         )}
-        spaceless
       >
         <Field
           name="is_support"
@@ -82,6 +108,72 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
           type="checkbox"
         />
       </FormGroup>
+
+      <h6 className="fw-bold mb-4 mt-6">
+        {translate('Password')}
+        {editMode && (
+          <span className="ms-2">
+            {user?.has_usable_password ? (
+              <span className="badge badge-light-success fs-8 fw-semibold">
+                <ShieldCheckIcon weight="bold" className="me-1" />
+                {translate('Set')}
+              </span>
+            ) : (
+              <span className="badge badge-light-warning fs-8 fw-semibold">
+                {translate('Not set')}
+              </span>
+            )}
+          </span>
+        )}
+      </h6>
+
+      {values.remove_password ? (
+        <div className="alert alert-warning d-flex align-items-center justify-content-between py-3">
+          <span>{translate('Password will be removed when you save.')}</span>
+          <button
+            type="button"
+            className="btn btn-sm btn-light-warning"
+            onClick={handleCancelRemove}
+          >
+            {translate('Cancel')}
+          </button>
+        </div>
+      ) : (
+        <>
+          <FormGroup
+            label={translate('Password')}
+            description={translate(
+              'Leave empty to keep the current password unchanged.',
+            )}
+          >
+            <div className="d-flex gap-2">
+              <div className="flex-grow-1">
+                <Field name="password" component={SecretField as any} />
+              </div>
+              <button
+                type="button"
+                className="btn btn-light-success btn-sm"
+                onClick={handleGeneratePassword}
+                title={translate('Generate password')}
+              >
+                <ArrowCounterClockwiseIcon weight="bold" className="me-1" />
+                {translate('Generate')}
+              </button>
+            </div>
+          </FormGroup>
+          {editMode && user?.has_usable_password && !values.password && (
+            <FormGroup label="" spaceless>
+              <button
+                type="button"
+                className="btn btn-sm btn-danger"
+                onClick={handleRemovePassword}
+              >
+                {translate('Remove password')}
+              </button>
+            </FormGroup>
+          )}
+        </>
+      )}
     </WizardModal>
   );
 };

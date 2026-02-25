@@ -10,7 +10,7 @@ import {
 import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
-import { UserFormData, UserFormDialogData } from '../CreateUserDialog';
+import { UserFormData, UserFormDialogData } from '../UserFormDialog';
 
 const ReviewRow = ({
   label,
@@ -65,6 +65,22 @@ export const ReviewStep: FC<WizardStepProps> = (props) => {
           <ReviewRow
             label={translate('Support')}
             value={<BooleanLabel value={values.is_support} />}
+          />
+          <ReviewRow
+            label={translate('Password')}
+            value={
+              values.remove_password ? (
+                <span className="text-danger">
+                  {translate('Will be removed')}
+                </span>
+              ) : values.password ? (
+                <span className="text-success">{translate('Will be set')}</span>
+              ) : editMode ? (
+                <span className="text-muted">{translate('No changes')}</span>
+              ) : (
+                <span className="text-muted">{translate('Not set')}</span>
+              )
+            }
           />
 
           <tr>

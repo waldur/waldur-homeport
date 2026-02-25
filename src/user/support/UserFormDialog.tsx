@@ -4,8 +4,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import {
   GenderEnum,
   User,
+  usersChangePassword,
   usersCreate,
   usersPartialUpdate,
+  usersRemovePassword,
   UserRequest,
 } from 'waldur-js-client';
 
@@ -44,10 +46,13 @@ export interface UserFormData {
   organization_country?: string;
   organization_type?: string;
   organization_registry_code?: string;
+  password?: string;
+  remove_password?: boolean;
 }
 
 export interface UserFormDialogData {
   editMode: boolean;
+  user?: User;
 }
 
 interface UserFormDialogProps {
@@ -116,19 +121,46 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
   const onSubmit = useCallback(
     async (formData: UserFormData) => {
       try {
+        let targetUuid: string;
+
         if (editMode) {
           const { data: updatedUser } = await usersPartialUpdate({
             path: { uuid: user.uuid },
             body: buildBody(formData),
           });
+          targetUuid = updatedUser.uuid;
           if (updatedUser.uuid === currentUser?.uuid) {
             dispatch(setCurrentUser(updatedUser));
           }
           showSuccess(translate('User has been updated.'));
         } else {
-          await usersCreate({ body: buildBody(formData) });
+          const { data: createdUser } = await usersCreate({
+            body: buildBody(formData),
+          });
+          targetUuid = createdUser.uuid;
           showSuccess(translate('User has been created.'));
         }
+
+        // Handle password operations after user create/update
+        try {
+          if (formData.remove_password && editMode) {
+            await usersRemovePassword({ path: { uuid: targetUuid } });
+          } else if (formData.password) {
+            await usersChangePassword({
+              path: { uuid: targetUuid },
+              body: { new_password: formData.password },
+            });
+          }
+        } catch (passwordError) {
+          showErrorResponse(
+            passwordError,
+            translate('User was saved but password could not be updated.'),
+          );
+          if (refetch) await refetch();
+          closeDialog();
+          return;
+        }
+
         if (refetch) {
           await refetch();
         }
@@ -187,7 +219,7 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
     };
   }, [user]);
 
-  const data: UserFormDialogData = { editMode };
+  const data: UserFormDialogData = { editMode, user };
 
   return (
     <Wizard<UserFormData>
@@ -214,6 +246,3 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
     />
   );
 };
-
-// Keep backward-compatible alias
-export const CreateUserDialog = UserFormDialog;

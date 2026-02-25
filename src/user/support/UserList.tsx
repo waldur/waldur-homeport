@@ -176,6 +176,8 @@ const mandatoryFields: UsersListData['query']['field'] = [
   'uuid',
   // UserDetailsButton
   'full_name',
+  'first_name',
+  'last_name',
   'native_name',
   'civil_number',
   'phone_number',
@@ -196,6 +198,18 @@ const mandatoryFields: UsersListData['query']['field'] = [
   'has_active_session',
   'active_isds',
   'is_identity_manager',
+  'has_usable_password',
+  // UserEditButton (edit dialog needs these fields)
+  'description',
+  'personal_title',
+  'gender',
+  'place_of_birth',
+  'country_of_residence',
+  'nationality',
+  'nationalities',
+  'organization_country',
+  'organization_type',
+  'organization_registry_code',
 ];
 
 export const UserList: FunctionComponent = () => {
@@ -281,6 +295,15 @@ export const UserList: FunctionComponent = () => {
       keys: ['is_support'],
       id: 'is_support',
       export: (row) => (row.is_support ? translate('Yes') : translate('No')),
+    },
+    {
+      title: translate('Password'),
+      render: ({ row }) => <BooleanField value={row.has_usable_password} />,
+      className: 'text-center',
+      keys: ['has_usable_password'],
+      id: 'has_usable_password',
+      export: (row) =>
+        row.has_usable_password ? translate('Yes') : translate('No'),
     },
     {
       title: translate('Status'),
