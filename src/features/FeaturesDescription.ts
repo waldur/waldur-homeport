@@ -99,6 +99,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Do not render prices in order details.'),
       },
       {
+        key: 'conceal_resource_metadata',
+        description: translate('Conceal resource metadata from non-staff users in resource detail view.'),
+      },
+      {
         key: 'display_offering_partitions',
         description: translate('Enable display of offering partitions in UI.'),
       },
@@ -125,6 +129,10 @@ export const FeaturesDescription: FeatureSection[] = [
       {
         key: 'lexis_links',
         description: translate('Enabled LEXIS link integrations for offerings.'),
+      },
+      {
+        key: 'marketplace_staff_only',
+        description: translate('Make marketplace visible only to staff users. Non-staff users will not see marketplace section.'),
       },
       {
         key: 'show_call_management_functionality',
