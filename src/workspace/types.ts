@@ -10,6 +10,7 @@ export { User, Project, Payment } from 'waldur-js-client';
 export interface Customer extends SdkCustomer {
   credit?: CustomerCredit;
   projects?: Project[];
+  has_my_offerings?: boolean;
 }
 
 export type PhoneNumber =

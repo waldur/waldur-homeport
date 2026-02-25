@@ -2,9 +2,13 @@ import { Transition } from '@uirouter/react';
 import { cloneDeep } from 'lodash-es';
 import { useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
-import { customerCreditsList, projectsList } from 'waldur-js-client';
+import {
+  customerCreditsList,
+  marketplaceProviderOfferingsList,
+  projectsList,
+} from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { fetchResultCount, getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { showErrorResponse } from '@waldur/store/notify';
@@ -21,10 +25,22 @@ export async function fetchCustomer(transition: Transition) {
   } else {
     try {
       const currentCustomer = await getCustomer(customerId);
-      const credit = await customerCreditsList({
-        query: { customer_uuid: currentCustomer?.uuid },
-      }).then((r) => r.data[0]);
-      Object.assign(currentCustomer, { credit });
+      const [credit, myOfferingsResult] = await Promise.all([
+        customerCreditsList({
+          query: { customer_uuid: currentCustomer?.uuid },
+        }).then((r) => r.data[0]),
+        marketplaceProviderOfferingsList({
+          query: {
+            customer_uuid: currentCustomer?.uuid,
+            billable: false,
+            page_size: 1,
+          },
+        }),
+      ]);
+      Object.assign(currentCustomer, {
+        credit,
+        has_my_offerings: fetchResultCount(myOfferingsResult) > 0,
+      });
       store.dispatch(setCurrentCustomer(currentCustomer));
     } catch {
       router.stateService.go('errorPage.notFound');
