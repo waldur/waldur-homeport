@@ -1,0 +1,125 @@
+import { FC } from 'react';
+import { Field } from 'react-final-form';
+
+import { CountrySelectField } from '@waldur/form/CountrySelectField';
+import { MultiCountrySelectField } from '@waldur/form/MultiCountrySelectField';
+import { SelectField } from '@waldur/form/SelectField';
+import { StringField } from '@waldur/form/StringField';
+import { translate } from '@waldur/i18n';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import {
+  getGenderChoices,
+  getOrganizationTypeOptions,
+  getPersonalTitleOptions,
+} from '@waldur/user/support/aai-constants';
+import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
+
+export const IdentityStep: FC<WizardStepProps> = (props) => {
+  const hasAnyField =
+    isProfileAttributeEnabled('personal_title') ||
+    isProfileAttributeEnabled('gender') ||
+    isProfileAttributeEnabled('place_of_birth') ||
+    isProfileAttributeEnabled('country_of_residence') ||
+    isProfileAttributeEnabled('nationality') ||
+    isProfileAttributeEnabled('nationalities') ||
+    isProfileAttributeEnabled('organization_country') ||
+    isProfileAttributeEnabled('organization_type') ||
+    isProfileAttributeEnabled('organization_registry_code');
+
+  return (
+    <WizardModal {...props}>
+      {!hasAnyField && (
+        <p className="text-muted">
+          {translate(
+            'No additional identity fields are enabled in this deployment.',
+          )}
+        </p>
+      )}
+
+      {isProfileAttributeEnabled('personal_title') && (
+        <FormGroup label={translate('Personal title')}>
+          <Field
+            name="personal_title"
+            component={SelectField as any}
+            options={getPersonalTitleOptions()}
+            simpleValue
+            isClearable
+          />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('gender') && (
+        <FormGroup label={translate('Gender')}>
+          <Field
+            name="gender"
+            component={SelectField as any}
+            options={getGenderChoices()}
+            simpleValue
+            isClearable
+          />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('place_of_birth') && (
+        <FormGroup label={translate('Place of birth')}>
+          <Field name="place_of_birth" component={StringField as any} />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('country_of_residence') && (
+        <FormGroup label={translate('Country of residence')}>
+          <Field
+            name="country_of_residence"
+            component={CountrySelectField as any}
+          />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('nationality') && (
+        <FormGroup label={translate('Nationality')}>
+          <Field name="nationality" component={CountrySelectField as any} />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('nationalities') && (
+        <FormGroup label={translate('Nationalities')}>
+          <Field
+            name="nationalities"
+            component={MultiCountrySelectField as any}
+          />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('organization_country') && (
+        <FormGroup label={translate('Organization country')}>
+          <Field
+            name="organization_country"
+            component={CountrySelectField as any}
+          />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('organization_type') && (
+        <FormGroup label={translate('Organization type')}>
+          <Field
+            name="organization_type"
+            component={SelectField as any}
+            options={getOrganizationTypeOptions()}
+            simpleValue
+            isClearable
+          />
+        </FormGroup>
+      )}
+
+      {isProfileAttributeEnabled('organization_registry_code') && (
+        <FormGroup label={translate('Organization registry code')} spaceless>
+          <Field
+            name="organization_registry_code"
+            component={StringField as any}
+          />
+        </FormGroup>
+      )}
+    </WizardModal>
+  );
+};

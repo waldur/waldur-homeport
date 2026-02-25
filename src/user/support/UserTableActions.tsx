@@ -1,11 +1,12 @@
-import { PlusIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
+import { PlusIcon, UserPlusIcon } from '@phosphor-icons/react';
+import { useDispatch, useSelector } from 'react-redux';
 
 import { ENV } from '@waldur/core/config';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { isStaff } from '@waldur/workspace/selectors';
 
 const AddRemoteUserDialog = lazyComponent(() =>
   import('./AddRemoteUserDialog').then((module) => ({
@@ -13,20 +14,53 @@ const AddRemoteUserDialog = lazyComponent(() =>
   })),
 );
 
+const CreateUserDialog = lazyComponent(() =>
+  import('./CreateUserDialog').then((module) => ({
+    default: module.CreateUserDialog,
+  })),
+);
+
 export const UserTableActions = ({ refetch }) => {
   const dispatch = useDispatch();
-  if (!ENV.plugins.WALDUR_AUTH_SOCIAL.REMOTE_EDUTEAMS_ENABLED) {
+  const isStaffUser = useSelector(isStaff);
+
+  const showEduTeams = ENV.plugins.WALDUR_AUTH_SOCIAL.REMOTE_EDUTEAMS_ENABLED;
+
+  if (!isStaffUser && !showEduTeams) {
     return null;
   }
-  const openDialog = () => {
+
+  const openCreateDialog = () => {
+    dispatch(
+      openModalDialog(CreateUserDialog, {
+        size: 'lg',
+        resolve: { refetch },
+      }),
+    );
+  };
+
+  const openAddRemoteDialog = () => {
     dispatch(openModalDialog(AddRemoteUserDialog, { resolve: { refetch } }));
   };
+
   return (
-    <ActionButton
-      action={openDialog}
-      className="me-3"
-      iconNode={<PlusIcon weight="bold" />}
-      title={translate('Add user')}
-    />
+    <>
+      {isStaffUser && (
+        <ActionButton
+          action={openCreateDialog}
+          className="me-3"
+          iconNode={<UserPlusIcon weight="bold" />}
+          title={translate('Create user')}
+        />
+      )}
+      {showEduTeams && (
+        <ActionButton
+          action={openAddRemoteDialog}
+          className="me-3"
+          iconNode={<PlusIcon weight="bold" />}
+          title={translate('Add user')}
+        />
+      )}
+    </>
   );
 };
