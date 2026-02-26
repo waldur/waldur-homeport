@@ -91,6 +91,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Allow marketplace to function as a catalogue only.'),
       },
       {
+        key: 'conceal_audit_log_from_end_users',
+        description: translate('Hide audit log tab from non-staff and non-support users.'),
+      },
+      {
         key: 'conceal_offering_pricing_tab_in_public_view',
         description: translate('Conceal offering pricing tab in the offering\'s public view.'),
       },
