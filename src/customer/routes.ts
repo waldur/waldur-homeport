@@ -17,6 +17,7 @@ import {
   getCustomer,
   isOwnerOrStaff,
   isStaff,
+  isStaffOrSupport,
   isOwner,
   hasNonProjectPermissions,
 } from '@waldur/workspace/selectors';
@@ -147,6 +148,12 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Audit logs'),
       priority: 180,
+      permissions: [
+        (state) =>
+          !isFeatureVisible(
+            MarketplaceFeatures.conceal_audit_log_from_end_users,
+          ) || isStaffOrSupport(state),
+      ],
     },
   },
 

@@ -3,10 +3,14 @@ import { UIView } from '@uirouter/react';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures, InvitationsFeatures } from '@waldur/FeaturesEnums';
+import {
+  MarketplaceFeatures,
+  ProjectFeatures,
+  InvitationsFeatures,
+} from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
-import { getProject } from '@waldur/workspace/selectors';
+import { getProject, isStaffOrSupport } from '@waldur/workspace/selectors';
 
 import { loadProject } from './resolve';
 
@@ -128,6 +132,12 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Audit logs'),
       priority: 130,
+      permissions: [
+        (state) =>
+          !isFeatureVisible(
+            MarketplaceFeatures.conceal_audit_log_from_end_users,
+          ) || isStaffOrSupport(state),
+      ],
     },
   },
   {

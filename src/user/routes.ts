@@ -11,7 +11,10 @@ import {
 } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { hasSupport } from '@waldur/issues/hooks';
-import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
+import {
+  hasNonProjectPermissions,
+  isStaffOrSupport,
+} from '@waldur/workspace/selectors';
 
 import { UsersService } from './UsersService';
 
@@ -104,6 +107,12 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Audit logs'),
+      permissions: [
+        (state) =>
+          !isFeatureVisible(
+            MarketplaceFeatures.conceal_audit_log_from_end_users,
+          ) || isStaffOrSupport(state),
+      ],
     },
   },
   {

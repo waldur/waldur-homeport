@@ -33,6 +33,7 @@ export const getResourceTabs = ({
   lexisLinksCount,
   robotAccountsCount,
   isStaff,
+  isSupport,
 }: {
   resource: Resource;
   offering: PublicOfferingDetails;
@@ -40,6 +41,7 @@ export const getResourceTabs = ({
   lexisLinksCount;
   robotAccountsCount;
   isStaff: boolean;
+  isSupport?: boolean;
 }) => {
   // Generate tabs
   const tabs: PageBarTab<{
@@ -233,15 +235,23 @@ export const getResourceTabs = ({
             })),
           ),
         },
-        {
-          key: 'activity',
-          title: translate('Audit logs'),
-          component: lazyComponent(() =>
-            import('./ActivityCard').then((module) => ({
-              default: module.ActivityCard,
-            })),
-          ),
-        },
+        ...(!isFeatureVisible(
+          MarketplaceFeatures.conceal_audit_log_from_end_users,
+        ) ||
+        isStaff ||
+        isSupport
+          ? [
+              {
+                key: 'activity',
+                title: translate('Audit logs'),
+                component: lazyComponent(() =>
+                  import('./ActivityCard').then((module) => ({
+                    default: module.ActivityCard,
+                  })),
+                ),
+              },
+            ]
+          : []),
         {
           key: 'order-history',
           title: translate('Order history'),

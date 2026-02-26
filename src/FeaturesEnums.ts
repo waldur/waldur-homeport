@@ -27,6 +27,7 @@ export enum MarketplaceFeatures {
   allow_display_of_images_in_markdown = 'marketplace.allow_display_of_images_in_markdown',
   call_only = 'marketplace.call_only',
   catalogue_only = 'marketplace.catalogue_only',
+  conceal_audit_log_from_end_users = 'marketplace.conceal_audit_log_from_end_users',
   conceal_offering_pricing_tab_in_public_view = 'marketplace.conceal_offering_pricing_tab_in_public_view',
   conceal_prices = 'marketplace.conceal_prices',
   conceal_resource_metadata = 'marketplace.conceal_resource_metadata',
