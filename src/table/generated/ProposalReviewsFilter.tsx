@@ -4,10 +4,18 @@ import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
+  Customer,
+  Proposal,
   ProposalReviewStateEnum,
   ProposalReviewsListData,
+  ProtectedRound,
   PublicCall,
+  User,
+  customersList,
+  proposalProposalsList,
+  proposalProtectedCallsRoundsList,
   proposalPublicCallsList,
+  usersList,
 } from 'waldur-js-client';
 
 import {
@@ -20,32 +28,33 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const ProposalReviewStateEnumChoices: ProposalReviewStateEnumChoicesOption[] =
-  [
-    {
-      label: translate('In review'),
-      value: 'in_review',
-    },
-    {
-      label: translate('Rejected'),
-      value: 'rejected',
-    },
-    {
-      label: translate('Submitted'),
-      value: 'submitted',
-    },
-  ];
-export interface ProposalReviewStateEnumChoicesOption {
+export const ProposalReviewStateOptions: ProposalReviewStateOption[] = [
+  {
+    label: translate('In review'),
+    value: 'in_review',
+  },
+  {
+    label: translate('Rejected'),
+    value: 'rejected',
+  },
+  {
+    label: translate('Submitted'),
+    value: 'submitted',
+  },
+];
+export interface ProposalReviewStateOption {
   label: string;
   value: ProposalReviewStateEnum;
 }
 
-const PureProposalReviewsFilter: FunctionComponent<{}> = () => (
+const PureProposalReviewsFilter: FunctionComponent<
+  ProposalReviewsFilterProps
+> = (props) => (
   <>
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: ProposalReviewStateEnumChoicesOption[]) =>
+      getValueLabel={(value: ProposalReviewStateOption[]) =>
         value?.map((v) => v?.label).join(', ')
       }
     >
@@ -54,15 +63,13 @@ const PureProposalReviewsFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('State')}
-            options={ProposalReviewStateEnumChoices}
+            options={ProposalReviewStateOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ProposalReviewStateEnumChoicesOption) =>
+            getOptionValue={(option: ProposalReviewStateOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: ProposalReviewStateEnumChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: ProposalReviewStateOption) => option.label}
             isClearable={true}
             isMulti={true}
             {...REACT_SELECT_TABLE_FILTER}
@@ -93,19 +100,134 @@ const PureProposalReviewsFilter: FunctionComponent<{}> = () => (
         )}
       />
     </TableFilterItem>
+    <TableFilterItem
+      title={translate('Round')}
+      name="round"
+      getValueLabel={(value: ProtectedRound) => value?.name}
+    >
+      <Field
+        name="round"
+        component={(fieldProps) => (
+          <AsyncPaginate
+            placeholder={translate('Round')}
+            loadOptions={createSelectFetcher(
+              proposalProtectedCallsRoundsList,
+              null as any,
+              {},
+              { uuid: props.callUuid },
+            )}
+            defaultOptions
+            getOptionValue={(option: ProtectedRound) =>
+              String(option.uuid || '')
+            }
+            getOptionLabel={(option: ProtectedRound) =>
+              String(option.name || '')
+            }
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
+            className="metronic-select-container"
+          />
+        )}
+      />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Organization')}
+      name="organization"
+      getValueLabel={(value: Customer) => value?.name}
+    >
+      <Field
+        name="organization"
+        component={(fieldProps) => (
+          <AsyncPaginate
+            placeholder={translate('Organization')}
+            loadOptions={createSelectFetcher(customersList, 'query')}
+            defaultOptions
+            getOptionValue={(option: Customer) => String(option.uuid || '')}
+            getOptionLabel={(option: Customer) => String(option.name || '')}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
+            className="metronic-select-container"
+          />
+        )}
+      />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Reviewer')}
+      name="reviewer"
+      getValueLabel={(value: User) =>
+        value?.full_name || value?.username || value?.email
+      }
+    >
+      <Field
+        name="reviewer"
+        component={(fieldProps) => (
+          <AsyncPaginate
+            placeholder={translate('Reviewer')}
+            loadOptions={createSelectFetcher(usersList, 'query')}
+            defaultOptions
+            getOptionValue={(option: User) => String(option.uuid || '')}
+            getOptionLabel={(option: User) =>
+              String(option.full_name || option.username || option.email || '')
+            }
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
+            className="metronic-select-container"
+          />
+        )}
+      />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Proposal')}
+      name="proposal"
+      getValueLabel={(value: Proposal) => value?.name}
+    >
+      <Field
+        name="proposal"
+        component={(fieldProps) => (
+          <AsyncPaginate
+            placeholder={translate('Proposal')}
+            loadOptions={createSelectFetcher(proposalProposalsList, 'name', {
+              call_uuid: props.callUuid,
+            })}
+            defaultOptions
+            getOptionValue={(option: Proposal) => String(option.uuid || '')}
+            getOptionLabel={(option: Proposal) => String(option.name || '')}
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
+            className="metronic-select-container"
+          />
+        )}
+      />
+    </TableFilterItem>
   </>
 );
 
 export const ProposalReviewsFilterFormId = 'ProposalReviewsFilter';
 
+interface ProposalReviewsFilterProps {
+  callUuid?: any;
+}
+
 interface ProposalReviewsFilterFormData {
-  state: ProposalReviewStateEnumChoicesOption[];
+  state: ProposalReviewStateOption[];
   call: PublicCall;
+  round: ProtectedRound;
+  organization: Customer;
+  reviewer: User;
+  proposal: Proposal;
 }
 
 export const ProposalReviewsFilter = reduxForm<
   ProposalReviewsFilterFormData,
-  {}
+  ProposalReviewsFilterProps
 >({
   form: ProposalReviewsFilterFormId,
   destroyOnUnmount: false,
@@ -125,6 +247,18 @@ export const selectProposalReviewsFilter = createSelector<
     }
     if (values.call) {
       filter.call_uuid = values.call.uuid;
+    }
+    if (values.round) {
+      filter.round_uuid = values.round.uuid;
+    }
+    if (values.organization) {
+      filter.organization_uuid = values.organization.uuid;
+    }
+    if (values.reviewer) {
+      filter.reviewer_uuid = values.reviewer.uuid;
+    }
+    if (values.proposal) {
+      filter.proposal_uuid = values.proposal.uuid;
     }
   }
   return filter;

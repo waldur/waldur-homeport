@@ -1,16 +1,16 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  proposalProposalsList,
-  ProposalProposalsListData,
-} from 'waldur-js-client';
+import { proposalProposalsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProposalProposalsFilter,
+  selectProposalProposalsFilter,
+  ProposalStatesOptions,
+} from '@waldur/table/generated/ProposalProposalsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -21,36 +21,13 @@ import { ProposalBadge } from '../proposal/ProposalBadge';
 import { ProposalRowActions } from '../proposal/ProposalRowActions';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 import { Call } from '../types';
-import { getProposalStateOptions } from '../utils';
-
-import {
-  CallProposalsListFilter,
-  CALL_PROPOSALS_FILTER_FORM_ID,
-} from './CallProposalsListFilter';
 
 interface CallProposalsListProps {
   call: Call;
 }
 
-const filtersSelector = createSelector(
-  getFormValues(CALL_PROPOSALS_FILTER_FORM_ID),
-  (filters: any) => {
-    const result: ProposalProposalsListData['query'] = {};
-    if (filters?.round) {
-      result.round_uuid = filters.round.uuid;
-    }
-    if (filters?.state?.length) {
-      result.state = filters.state.map((s) => s.value);
-    }
-    if (filters?.applicant) {
-      result.created_by_uuid = filters.applicant.uuid;
-    }
-    return result;
-  },
-);
-
 export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
-  const formFilters = useSelector(filtersSelector);
+  const formFilters = useSelector(selectProposalProposalsFilter);
 
   const filter = useMemo(
     () => ({
@@ -143,7 +120,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
           id: 'state',
           filter: 'state',
           inlineFilter: (row) =>
-            getProposalStateOptions().filter((s) => s.value === row.state),
+            ProposalStatesOptions.filter((s) => s.value === row.state),
         },
         ...(hasComplianceChecklist
           ? [
@@ -171,7 +148,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
           refetch={tableProps.fetch}
         />
       )}
-      filters={<CallProposalsListFilter callUuid={call.uuid} />}
+      filters={<ProposalProposalsFilter callUuid={call.uuid} />}
     />
   );
 };

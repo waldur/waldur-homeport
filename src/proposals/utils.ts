@@ -75,7 +75,7 @@ export const formatCallState = (value: CallState) =>
   getCallStateOptions().find((option) => option.value === value)?.label ||
   value;
 
-export const getCallOfferingStateOptions = () =>
+const getCallOfferingStateOptions = () =>
   [
     { value: 'requested', label: translate('Requested') },
     { value: 'accepted', label: translate('Accepted') },

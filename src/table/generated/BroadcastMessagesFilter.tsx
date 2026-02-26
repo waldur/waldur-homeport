@@ -13,22 +13,21 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const BroadcastMessageStateEnumChoices: BroadcastMessageStateEnumChoicesOption[] =
-  [
-    {
-      label: translate('Draft'),
-      value: 'DRAFT',
-    },
-    {
-      label: translate('Scheduled'),
-      value: 'SCHEDULED',
-    },
-    {
-      label: translate('Sent'),
-      value: 'SENT',
-    },
-  ];
-export interface BroadcastMessageStateEnumChoicesOption {
+export const BroadcastMessageStateOptions: BroadcastMessageStateOption[] = [
+  {
+    label: translate('Draft'),
+    value: 'DRAFT',
+  },
+  {
+    label: translate('Scheduled'),
+    value: 'SCHEDULED',
+  },
+  {
+    label: translate('Sent'),
+    value: 'SENT',
+  },
+];
+export interface BroadcastMessageStateOption {
   label: string;
   value: BroadcastMessageStateEnum;
 }
@@ -37,24 +36,20 @@ const PureBroadcastMessagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
-    getValueLabel={(value: BroadcastMessageStateEnumChoicesOption) =>
-      value?.label
-    }
+    getValueLabel={(value: BroadcastMessageStateOption) => value?.label}
   >
     <Field
       name="state"
       component={(fieldProps) => (
         <Select
           placeholder={translate('State')}
-          options={BroadcastMessageStateEnumChoices}
+          options={BroadcastMessageStateOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: BroadcastMessageStateEnumChoicesOption) =>
+          getOptionValue={(option: BroadcastMessageStateOption) =>
             String(option.value)
           }
-          getOptionLabel={(option: BroadcastMessageStateEnumChoicesOption) =>
-            option.label
-          }
+          getOptionLabel={(option: BroadcastMessageStateOption) => option.label}
           isClearable={true}
           {...REACT_SELECT_TABLE_FILTER}
         />
@@ -66,7 +61,7 @@ const PureBroadcastMessagesFilter: FunctionComponent<{}> = () => (
 export const BroadcastMessagesFilterFormId = 'BroadcastMessagesFilter';
 
 interface BroadcastMessagesFilterFormData {
-  state: BroadcastMessageStateEnumChoicesOption;
+  state: BroadcastMessageStateOption;
 }
 
 export const BroadcastMessagesFilter = reduxForm<

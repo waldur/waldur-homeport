@@ -1,7 +1,5 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import { conflictsOfInterestList, ConflictOfInterest } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
@@ -12,17 +10,17 @@ import { Call } from '@waldur/proposals/types';
 import { PoolSummaryButton } from '@waldur/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@waldur/proposals/update/reviewer-pool/tabs';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ConflictsOfInterestFilter,
+  CoiSeverityLevelOptions,
+  ConflictOfInterestStatusOptions,
+  CoiTypeOptions,
+  selectConflictsOfInterestFilter,
+} from '@waldur/table/generated/ConflictsOfInterestFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { COIExpandableRow } from './COIExpandableRow';
-import {
-  COIReviewFilter,
-  COI_REVIEW_FILTER_FORM_ID,
-  getCOISeverityOptions,
-  getCOIStatusOptions,
-  getCOITypeOptions,
-} from './COIReviewFilter';
 import { COIRowActions } from './COIRowActions';
 
 interface COIReviewSectionProps {
@@ -81,31 +79,8 @@ const StatusBadge: FC<{ status: string; display: string }> = ({
   );
 };
 
-const filtersSelector = createSelector(
-  getFormValues(COI_REVIEW_FILTER_FORM_ID),
-  (filters: any) => {
-    const result: Record<string, any> = {};
-    if (filters?.round) {
-      result.round_uuid = filters.round.uuid;
-    }
-    if (filters?.status?.length) {
-      result.status = filters.status.map((s) => s.value);
-    }
-    if (filters?.severity) {
-      result.severity = filters.severity.value;
-    }
-    if (filters?.coi_type?.length) {
-      result.coi_type = filters.coi_type.map((t) => t.value);
-    }
-    if (filters?.detection_method?.length) {
-      result.detection_method = filters.detection_method.map((d) => d.value);
-    }
-    return result;
-  },
-);
-
 export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
-  const formFilters = useSelector(filtersSelector);
+  const formFilters = useSelector(selectConflictsOfInterestFilter);
   const tabs = useReviewerPoolTabs();
 
   const filter = useMemo(
@@ -167,7 +142,7 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
         keys: ['coi_type', 'coi_type_display'],
         filter: 'coi_type',
         inlineFilter: (row: ConflictOfInterest) =>
-          getCOITypeOptions().filter((opt) => opt.value === row.coi_type),
+          CoiTypeOptions.filter((opt) => opt.value === row.coi_type),
       },
       {
         title: translate('Severity'),
@@ -181,7 +156,7 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
         keys: ['severity', 'severity_display'],
         filter: 'severity',
         inlineFilter: (row: ConflictOfInterest) =>
-          getCOISeverityOptions().find((opt) => opt.value === row.severity),
+          CoiSeverityLevelOptions.find((opt) => opt.value === row.severity),
       },
       {
         title: translate('Status'),
@@ -192,7 +167,9 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
         keys: ['status', 'status_display'],
         filter: 'status',
         inlineFilter: (row: ConflictOfInterest) =>
-          getCOIStatusOptions().filter((opt) => opt.value === row.status),
+          ConflictOfInterestStatusOptions.filter(
+            (opt) => opt.value === row.status,
+          ),
       },
       {
         title: translate('Detection'),
@@ -224,7 +201,7 @@ export const COIReviewSection: FC<COIReviewSectionProps> = ({ call }) => {
       verboseName={translate('conflicts of interest')}
       showPageSizeSelector
       hasQuery
-      filters={<COIReviewFilter call={call} />}
+      filters={<ConflictsOfInterestFilter call={call} />}
       rowActions={COIRowActions}
       hasOptionalColumns
       expandableRow={COIExpandableRow}

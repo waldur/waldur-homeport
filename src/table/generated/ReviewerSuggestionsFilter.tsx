@@ -13,7 +13,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const ReviewerSuggestionStatusEnumChoices: ReviewerSuggestionStatusEnumChoicesOption[] =
+export const ReviewerSuggestionStatusOptions: ReviewerSuggestionStatusOption[] =
   [
     {
       label: translate('Confirmed'),
@@ -32,7 +32,7 @@ export const ReviewerSuggestionStatusEnumChoices: ReviewerSuggestionStatusEnumCh
       value: 'rejected',
     },
   ];
-export interface ReviewerSuggestionStatusEnumChoicesOption {
+export interface ReviewerSuggestionStatusOption {
   label: string;
   value: ReviewerSuggestionStatusEnum;
 }
@@ -41,7 +41,7 @@ const PureReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="status"
-    getValueLabel={(value: ReviewerSuggestionStatusEnumChoicesOption[]) =>
+    getValueLabel={(value: ReviewerSuggestionStatusOption[]) =>
       value?.map((v) => v?.label).join(', ')
     }
   >
@@ -50,13 +50,13 @@ const PureReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
       component={(fieldProps) => (
         <Select
           placeholder={translate('Status')}
-          options={ReviewerSuggestionStatusEnumChoices}
+          options={ReviewerSuggestionStatusOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: ReviewerSuggestionStatusEnumChoicesOption) =>
+          getOptionValue={(option: ReviewerSuggestionStatusOption) =>
             String(option.value)
           }
-          getOptionLabel={(option: ReviewerSuggestionStatusEnumChoicesOption) =>
+          getOptionLabel={(option: ReviewerSuggestionStatusOption) =>
             option.label
           }
           isClearable={true}
@@ -71,7 +71,7 @@ const PureReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
 export const ReviewerSuggestionsFilterFormId = 'ReviewerSuggestionsFilter';
 
 interface ReviewerSuggestionsFilterFormData {
-  status: ReviewerSuggestionStatusEnumChoicesOption[];
+  status: ReviewerSuggestionStatusOption[];
 }
 
 export const ReviewerSuggestionsFilter = reduxForm<

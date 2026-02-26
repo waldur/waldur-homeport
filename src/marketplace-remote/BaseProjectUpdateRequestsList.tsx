@@ -7,12 +7,12 @@ import {
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import { RemoteProjectUpdateRequestStateOptions } from '@waldur/table/generated/MarketplaceProjectUpdateRequestsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { ProjectUpdateRequestActions } from './ProjectUpdateRequestActions';
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
-import { getStates } from './RequestStateFilter';
 
 export const BaseProjectUpdateRequestsList: FunctionComponent<{
   filter;
@@ -43,7 +43,9 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
           render: ({ row }) => row.state,
           filter: 'state',
           inlineFilter: (row) =>
-            getStates().filter((s) => s.value === row.state),
+            RemoteProjectUpdateRequestStateOptions.filter(
+              (s) => s.value === row.state,
+            ),
         },
         {
           title: translate('Created'),

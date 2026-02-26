@@ -22,7 +22,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const AccountingIsRunningChoices: AccountingIsRunningChoicesOption[] = [
+export const AccountingIsRunningOptions: AccountingIsRunningOption[] = [
   {
     label: translate('Not running accounting'),
     value: false,
@@ -36,7 +36,7 @@ export const AccountingIsRunningChoices: AccountingIsRunningChoicesOption[] = [
     value: 'undefined',
   },
 ];
-export interface AccountingIsRunningChoicesOption {
+export interface AccountingIsRunningOption {
   label: string;
   value: any;
 }
@@ -46,22 +46,20 @@ const PureCustomersFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Accounting is running')}
       name="accounting_is_running"
-      getValueLabel={(value: AccountingIsRunningChoicesOption) => value?.label}
+      getValueLabel={(value: AccountingIsRunningOption) => value?.label}
     >
       <Field
         name="accounting_is_running"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Show with running accounting')}
-            options={AccountingIsRunningChoices}
+            options={AccountingIsRunningOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: AccountingIsRunningChoicesOption) =>
+            getOptionValue={(option: AccountingIsRunningOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: AccountingIsRunningChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: AccountingIsRunningOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -138,7 +136,7 @@ const PureCustomersFilter: FunctionComponent<{}> = () => (
 export const CustomersFilterFormId = 'CustomersFilter';
 
 interface CustomersFilterFormData {
-  accounting_is_running: AccountingIsRunningChoicesOption;
+  accounting_is_running: AccountingIsRunningOption;
   is_service_provider: boolean;
   is_call_managing_organization: boolean;
   organization_group: OrganizationGroup[];

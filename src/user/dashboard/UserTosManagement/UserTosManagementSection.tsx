@@ -1,7 +1,5 @@
 import { FC, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import {
   MarketplacePublicOfferingsListData,
   marketplacePublicOfferingsList,
@@ -9,29 +7,15 @@ import {
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  UserTosFiltersFilter,
+  selectUserTosFiltersFilter,
+} from '@waldur/table/generated/UserTosFiltersFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
-import { USER_TOS_FILTER_FORM_ID } from '@waldur/user/constants';
 import { USER_TOS_MANAGEMENT_TABLE_ID } from '@waldur/user/constants';
 
 import { OfferingTosExpandableRow } from './OfferingTosExpandableRow';
-import { UserTosFilters } from './UserTosFilters';
-
-const mapStateToFilter = createSelector(
-  getFormValues(USER_TOS_FILTER_FORM_ID),
-  (filterValues: any) => {
-    const filter: MarketplacePublicOfferingsListData['query'] = {
-      has_terms_of_service: true,
-      user_has_offering_user: true,
-    };
-
-    if (filterValues?.user_has_consent !== undefined) {
-      filter.user_has_consent = filterValues.user_has_consent;
-    }
-
-    return filter;
-  },
-);
 
 const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'uuid',
@@ -46,7 +30,16 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
 ];
 
 export const UserTosManagementSection: FC = () => {
-  const filter = useSelector(mapStateToFilter);
+  const formFilters = useSelector(selectUserTosFiltersFilter);
+
+  const filter = useMemo(
+    () => ({
+      ...formFilters,
+      has_terms_of_service: true,
+      user_has_offering_user: true,
+    }),
+    [formFilters],
+  );
 
   const tableProps = useTable({
     table: USER_TOS_MANAGEMENT_TABLE_ID,
@@ -117,7 +110,7 @@ export const UserTosManagementSection: FC = () => {
     <Table
       {...tableProps}
       title={translate('Terms of Service management')}
-      filters={<UserTosFilters />}
+      filters={<UserTosFiltersFilter />}
       columns={columns}
       verboseName={translate('offerings')}
       expandableRow={expandableRow}

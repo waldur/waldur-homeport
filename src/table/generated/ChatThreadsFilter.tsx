@@ -22,30 +22,29 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const InjectionSeverityEnumChoices: InjectionSeverityEnumChoicesOption[] =
-  [
-    {
-      label: translate('Critical'),
-      value: 'critical',
-    },
-    {
-      label: translate('High'),
-      value: 'high',
-    },
-    {
-      label: translate('Low'),
-      value: 'low',
-    },
-    {
-      label: translate('Medium'),
-      value: 'medium',
-    },
-    {
-      label: translate('None'),
-      value: 'none',
-    },
-  ];
-export interface InjectionSeverityEnumChoicesOption {
+export const InjectionSeverityOptions: InjectionSeverityOption[] = [
+  {
+    label: translate('Critical'),
+    value: 'critical',
+  },
+  {
+    label: translate('High'),
+    value: 'high',
+  },
+  {
+    label: translate('Low'),
+    value: 'low',
+  },
+  {
+    label: translate('Medium'),
+    value: 'medium',
+  },
+  {
+    label: translate('None'),
+    value: 'none',
+  },
+];
+export interface InjectionSeverityOption {
   label: string;
   value: InjectionSeverityEnum;
 }
@@ -69,7 +68,9 @@ const PureChatThreadsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('User')}
       name="user"
-      getValueLabel={(value: User) => value?.full_name}
+      getValueLabel={(value: User) =>
+        value?.full_name || value?.username || value?.email
+      }
     >
       <Field
         name="user"
@@ -79,7 +80,9 @@ const PureChatThreadsFilter: FunctionComponent<{}> = () => (
             loadOptions={createSelectFetcher(usersList, 'full_name')}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) => String(option.full_name || '')}
+            getOptionLabel={(option: User) =>
+              String(option.full_name || option.username || option.email || '')
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -107,24 +110,20 @@ const PureChatThreadsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Max severity')}
       name="max_severity"
-      getValueLabel={(value: InjectionSeverityEnumChoicesOption) =>
-        value?.label
-      }
+      getValueLabel={(value: InjectionSeverityOption) => value?.label}
     >
       <Field
         name="max_severity"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Max severity')}
-            options={InjectionSeverityEnumChoices}
+            options={InjectionSeverityOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: InjectionSeverityEnumChoicesOption) =>
+            getOptionValue={(option: InjectionSeverityOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: InjectionSeverityEnumChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: InjectionSeverityOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -156,7 +155,7 @@ interface ChatThreadsFilterFormData {
   modified: string;
   user: User;
   is_flagged: boolean;
-  max_severity: InjectionSeverityEnumChoicesOption;
+  max_severity: InjectionSeverityOption;
   is_archived: boolean;
 }
 

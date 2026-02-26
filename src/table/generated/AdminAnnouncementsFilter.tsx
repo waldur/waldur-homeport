@@ -13,27 +13,26 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const AdminAnnouncementTypeEnumChoices: AdminAnnouncementTypeEnumChoicesOption[] =
-  [
-    {
-      label: translate('Danger'),
-      value: 'danger',
-    },
-    {
-      label: translate('Information'),
-      value: 'information',
-    },
-    {
-      label: translate('Warning'),
-      value: 'warning',
-    },
-  ];
-export interface AdminAnnouncementTypeEnumChoicesOption {
+export const AdminAnnouncementTypeOptions: AdminAnnouncementTypeOption[] = [
+  {
+    label: translate('Danger'),
+    value: 'danger',
+  },
+  {
+    label: translate('Information'),
+    value: 'information',
+  },
+  {
+    label: translate('Warning'),
+    value: 'warning',
+  },
+];
+export interface AdminAnnouncementTypeOption {
   label: string;
   value: AdminAnnouncementTypeEnum;
 }
 
-export const IsActiveChoices: IsActiveChoicesOption[] = [
+export const IsActiveOptions: IsActiveOption[] = [
   {
     label: translate('Inactive'),
     value: false,
@@ -43,7 +42,7 @@ export const IsActiveChoices: IsActiveChoicesOption[] = [
     value: true,
   },
 ];
-export interface IsActiveChoicesOption {
+export interface IsActiveOption {
   label: string;
   value: boolean;
 }
@@ -53,7 +52,7 @@ const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Type')}
       name="type"
-      getValueLabel={(value: AdminAnnouncementTypeEnumChoicesOption[]) =>
+      getValueLabel={(value: AdminAnnouncementTypeOption[]) =>
         value?.map((v) => v?.label).join(', ')
       }
     >
@@ -62,13 +61,13 @@ const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('Type')}
-            options={AdminAnnouncementTypeEnumChoices}
+            options={AdminAnnouncementTypeOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: AdminAnnouncementTypeEnumChoicesOption) =>
+            getOptionValue={(option: AdminAnnouncementTypeOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: AdminAnnouncementTypeEnumChoicesOption) =>
+            getOptionLabel={(option: AdminAnnouncementTypeOption) =>
               option.label
             }
             isClearable={true}
@@ -81,20 +80,18 @@ const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Status')}
       name="is_active"
-      getValueLabel={(value: IsActiveChoicesOption) => value?.label}
+      getValueLabel={(value: IsActiveOption) => value?.label}
     >
       <Field
         name="is_active"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Status')}
-            options={IsActiveChoices}
+            options={IsActiveOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: IsActiveChoicesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: IsActiveChoicesOption) => option.label}
+            getOptionValue={(option: IsActiveOption) => String(option.value)}
+            getOptionLabel={(option: IsActiveOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -107,8 +104,8 @@ const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
 export const AdminAnnouncementsFilterFormId = 'AdminAnnouncementsFilter';
 
 interface AdminAnnouncementsFilterFormData {
-  type: AdminAnnouncementTypeEnumChoicesOption[];
-  is_active: IsActiveChoicesOption;
+  type: AdminAnnouncementTypeOption[];
+  is_active: IsActiveOption;
 }
 
 export const AdminAnnouncementsFilter = reduxForm<

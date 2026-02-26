@@ -1,22 +1,20 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  Proposal,
-  proposalProposalsList,
-  ProposalProposalsListData,
-} from 'waldur-js-client';
+import { Proposal, proposalProposalsList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-import { PROPOSALS_FILTER_FORM_ID } from '@waldur/proposals/constants';
 import { getProposalStateOptions } from '@waldur/proposals/utils';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import {
+  ProposalsFilter,
+  selectProposalsFilter,
+  ProposalStatesOptions,
+} from '@waldur/table/generated/ProposalsFilter';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
@@ -25,24 +23,6 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { EndingField } from '../EndingField';
 
 import { ProposalBadge } from './ProposalBadge';
-import { ProposalsTableFilter } from './ProposalsTableFilter';
-
-const filtersSelector = createSelector(
-  getFormValues(PROPOSALS_FILTER_FORM_ID),
-  (filters: any) => {
-    const result: ProposalProposalsListData['query'] = {
-      my_proposals: true,
-    };
-    if (filters?.state) {
-      result.state = filters.state.map((option) => option.value);
-    }
-    if (filters?.call) {
-      result.call_uuid = filters.call.uuid;
-    }
-    result.o = ['-round__cutoff_time'];
-    return result;
-  },
-);
 
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
@@ -51,7 +31,16 @@ export const UserProposalsList: FC = () => {
     params: { call },
   } = useCurrentStateAndParams();
   const callObj = call ? JSON.parse(decodeURIComponent(call)) : undefined;
-  const filter = useSelector(filtersSelector);
+  const formFilters = useSelector(selectProposalsFilter);
+
+  const filter = useMemo(
+    () => ({
+      my_proposals: true,
+      o: ['-round__cutoff_time'],
+      ...formFilters,
+    }),
+    [formFilters],
+  );
 
   const tableProps = useTable({
     table: 'MyProposalsList',
@@ -112,7 +101,7 @@ export const UserProposalsList: FC = () => {
       orderField: 'state',
       filter: 'state',
       inlineFilter: (row) =>
-        getProposalStateOptions().filter((s) => s.value === row.state),
+        ProposalStatesOptions.filter((s) => s.value === row.state),
       id: 'state',
     },
     {
@@ -165,7 +154,7 @@ export const UserProposalsList: FC = () => {
       hasQuery={true}
       hasOptionalColumns
       showPageSizeSelector={true}
-      filters={<ProposalsTableFilter initialValues={initialValues} />}
+      filters={<ProposalsFilter initialValues={initialValues} />}
     />
   );
 };

@@ -12,7 +12,7 @@ import { createFetcher } from '@waldur/table/api';
 import {
   SupportIssuesFilter as IssuesFilter,
   selectSupportIssuesFilter as selectIssuesFilter,
-  StatusChoices,
+  StatusOptions,
 } from '@waldur/table/generated/SupportIssuesFilter';
 import Table from '@waldur/table/Table';
 import { Column, TableProps } from '@waldur/table/types';
@@ -68,7 +68,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         orderField: 'status',
         filter: 'status',
         inlineFilter: (row) =>
-          StatusChoices.filter((op) => op.value === row.status),
+          StatusOptions.filter((op) => op.value === row.status),
         export: (row) => row.status || 'N/A',
         exportKeys: ['status'],
       },

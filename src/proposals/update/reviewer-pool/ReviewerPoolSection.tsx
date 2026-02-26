@@ -1,8 +1,6 @@
 import { ClockIcon, EnvelopeSimple, WarningIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import { callReviewerPoolsList, CallReviewerPool } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
@@ -13,15 +11,16 @@ import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { Call } from '@waldur/proposals/types';
 import { createFetcher } from '@waldur/table/api';
+import {
+  CallReviewerPoolsFilter,
+  selectCallReviewerPoolsFilter,
+  InvitationStatusOptions,
+} from '@waldur/table/generated/CallReviewerPoolsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { PoolSummaryButton } from './PoolSummaryButton';
 import { ReviewerPoolExpandableRow } from './ReviewerPoolExpandableRow';
-import {
-  ReviewerPoolFilter,
-  REVIEWER_POOL_FILTER_FORM_ID,
-} from './ReviewerPoolFilter';
 import { useReviewerPoolTabs } from './tabs';
 
 const DirectEmailInviteDialog = lazyComponent(() =>
@@ -86,27 +85,9 @@ const isExpired = (expiresAt: string | null): boolean => {
   return new Date(expiresAt) < new Date();
 };
 
-// Filter selector
-const filtersSelector = createSelector(
-  getFormValues(REVIEWER_POOL_FILTER_FORM_ID),
-  (filters: any) => {
-    const result: Record<string, any> = {};
-    if (filters?.invitation_status) {
-      result.invitation_status = filters.invitation_status.value;
-    }
-    if (
-      filters?.is_panel_member !== undefined &&
-      filters?.is_panel_member !== null
-    ) {
-      result.is_panel_member = filters.is_panel_member.value;
-    }
-    return result;
-  },
-);
-
 export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
   const dispatch = useDispatch();
-  const formFilters = useSelector(filtersSelector);
+  const formFilters = useSelector(selectCallReviewerPoolsFilter);
   const tabs = useReviewerPoolTabs();
 
   const filter = useMemo(
@@ -208,6 +189,11 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
               )}
           </div>
         ),
+        filter: 'invitation_status',
+        inlineFilter: (row) =>
+          InvitationStatusOptions.filter(
+            (op) => op.value === row.invitation_status,
+          ),
         keys: [
           'invitation_status',
           'invitation_status_display',
@@ -339,7 +325,7 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
       verboseName={translate('reviewer pool members')}
       showPageSizeSelector
       hasQuery
-      filters={<ReviewerPoolFilter />}
+      filters={<CallReviewerPoolsFilter />}
       hasOptionalColumns
       expandableRow={ReviewerPoolExpandableRow}
       tableActions={

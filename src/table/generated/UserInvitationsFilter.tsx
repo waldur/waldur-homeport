@@ -22,7 +22,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const InvitationStateChoices: InvitationStateChoicesOption[] = [
+export const InvitationStateOptions: InvitationStateOption[] = [
   {
     label: translate('Accepted'),
     value: 'accepted',
@@ -52,12 +52,12 @@ export const InvitationStateChoices: InvitationStateChoicesOption[] = [
     value: 'requested',
   },
 ];
-export interface InvitationStateChoicesOption {
+export interface InvitationStateOption {
   label: string;
   value: InvitationState;
 }
 
-export const ScopeTypeChoices: ScopeTypeChoicesOption[] = [
+export const ScopeTypeOptions: ScopeTypeOption[] = [
   {
     label: translate('Call'),
     value: 'call',
@@ -87,7 +87,7 @@ export const ScopeTypeChoices: ScopeTypeChoicesOption[] = [
     value: 'service_provider',
   },
 ];
-export interface ScopeTypeChoicesOption {
+export interface ScopeTypeOption {
   label: string;
   value: string;
 }
@@ -97,7 +97,7 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: InvitationStateChoicesOption[]) =>
+      getValueLabel={(value: InvitationStateOption[]) =>
         value?.map((v) => v?.label).join(', ')
       }
     >
@@ -106,15 +106,13 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('State')}
-            options={InvitationStateChoices}
+            options={InvitationStateOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: InvitationStateChoicesOption) =>
+            getOptionValue={(option: InvitationStateOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: InvitationStateChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: InvitationStateOption) => option.label}
             isClearable={true}
             isMulti={true}
             {...REACT_SELECT_TABLE_FILTER}
@@ -173,20 +171,18 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Scope type')}
       name="scope_type"
-      getValueLabel={(value: ScopeTypeChoicesOption) => value?.label}
+      getValueLabel={(value: ScopeTypeOption) => value?.label}
     >
       <Field
         name="scope_type"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Scope type')}
-            options={ScopeTypeChoices}
+            options={ScopeTypeOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ScopeTypeChoicesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: ScopeTypeChoicesOption) => option.label}
+            getOptionValue={(option: ScopeTypeOption) => String(option.value)}
+            getOptionLabel={(option: ScopeTypeOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -199,10 +195,10 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
 export const UserInvitationsFilterFormId = 'UserInvitationsFilter';
 
 interface UserInvitationsFilterFormData {
-  state: InvitationStateChoicesOption[];
+  state: InvitationStateOption[];
   role: RoleDetails;
   customer: Customer;
-  scope_type: ScopeTypeChoicesOption;
+  scope_type: ScopeTypeOption;
 }
 
 export const UserInvitationsFilter = reduxForm<

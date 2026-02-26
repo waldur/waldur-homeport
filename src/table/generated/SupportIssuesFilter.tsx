@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const StatusChoices: StatusChoicesOption[] = [
+export const StatusOptions: StatusOption[] = [
   {
     label: translate('Closed'),
     value: 'Closed',
@@ -28,7 +28,7 @@ export const StatusChoices: StatusChoicesOption[] = [
     value: 'Waiting for support',
   },
 ];
-export interface StatusChoicesOption {
+export interface StatusOption {
   label: string;
   value: string;
 }
@@ -37,18 +37,18 @@ const PureSupportIssuesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="status"
-    getValueLabel={(value: StatusChoicesOption) => value?.label}
+    getValueLabel={(value: StatusOption) => value?.label}
   >
     <Field
       name="status"
       component={(fieldProps) => (
         <Select
           placeholder={translate('Status')}
-          options={StatusChoices}
+          options={StatusOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: StatusChoicesOption) => String(option.value)}
-          getOptionLabel={(option: StatusChoicesOption) => option.label}
+          getOptionValue={(option: StatusOption) => String(option.value)}
+          getOptionLabel={(option: StatusOption) => option.label}
           isClearable={true}
           {...REACT_SELECT_TABLE_FILTER}
         />
@@ -60,7 +60,7 @@ const PureSupportIssuesFilter: FunctionComponent<{}> = () => (
 export const SupportIssuesFilterFormId = 'SupportIssuesFilter';
 
 interface SupportIssuesFilterFormData {
-  status: StatusChoicesOption;
+  status: StatusOption;
 }
 
 export const SupportIssuesFilter = reduxForm<SupportIssuesFilterFormData, {}>({

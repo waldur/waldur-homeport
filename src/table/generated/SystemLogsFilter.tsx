@@ -16,7 +16,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const SystemLogLevelEnumChoices: SystemLogLevelEnumChoicesOption[] = [
+export const SystemLogLevelOptions: SystemLogLevelOption[] = [
   {
     label: translate('Critical'),
     value: 'CRITICAL',
@@ -34,12 +34,12 @@ export const SystemLogLevelEnumChoices: SystemLogLevelEnumChoicesOption[] = [
     value: 'WARNING',
   },
 ];
-export interface SystemLogLevelEnumChoicesOption {
+export interface SystemLogLevelOption {
   label: string;
   value: SystemLogLevelEnum;
 }
 
-export const SystemLogSourceEnumChoices: SystemLogSourceEnumChoicesOption[] = [
+export const SystemLogSourceOptions: SystemLogSourceOption[] = [
   {
     label: translate('API'),
     value: 'api',
@@ -53,7 +53,7 @@ export const SystemLogSourceEnumChoices: SystemLogSourceEnumChoicesOption[] = [
     value: 'worker',
   },
 ];
-export interface SystemLogSourceEnumChoicesOption {
+export interface SystemLogSourceOption {
   label: string;
   value: SystemLogSourceEnum;
 }
@@ -63,22 +63,20 @@ const PureSystemLogsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Source')}
       name="source"
-      getValueLabel={(value: SystemLogSourceEnumChoicesOption) => value?.label}
+      getValueLabel={(value: SystemLogSourceOption) => value?.label}
     >
       <Field
         name="source"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Source')}
-            options={SystemLogSourceEnumChoices}
+            options={SystemLogSourceOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: SystemLogSourceEnumChoicesOption) =>
+            getOptionValue={(option: SystemLogSourceOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: SystemLogSourceEnumChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: SystemLogSourceOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -88,22 +86,20 @@ const PureSystemLogsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Level')}
       name="level"
-      getValueLabel={(value: SystemLogLevelEnumChoicesOption) => value?.label}
+      getValueLabel={(value: SystemLogLevelOption) => value?.label}
     >
       <Field
         name="level"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Level')}
-            options={SystemLogLevelEnumChoices}
+            options={SystemLogLevelOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: SystemLogLevelEnumChoicesOption) =>
+            getOptionValue={(option: SystemLogLevelOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: SystemLogLevelEnumChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: SystemLogLevelOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -144,8 +140,8 @@ const PureSystemLogsFilter: FunctionComponent<{}> = () => (
 export const SystemLogsFilterFormId = 'SystemLogsFilter';
 
 interface SystemLogsFilterFormData {
-  source: SystemLogSourceEnumChoicesOption;
-  level: SystemLogLevelEnumChoicesOption;
+  source: SystemLogSourceOption;
+  level: SystemLogLevelOption;
   instance: string;
   logger_name: string;
   start_date: string;

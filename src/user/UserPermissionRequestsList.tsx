@@ -1,41 +1,34 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 import { userPermissionRequestsList } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
 import { createFetcher } from '@waldur/table/api';
+import {
+  UserPermissionRequestsFilter,
+  selectUserPermissionRequestsFilter,
+  UserPermissionRequestsRemoteProjectUpdateRequestStateOptions as RemoteProjectUpdateRequestStateOptions,
+} from '@waldur/table/generated/UserPermissionRequestsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
-import {
-  USER_PERMISSION_REQUESTS_FILTER_FORM_ID,
-  USER_PERMISSION_REQUESTS_TABLE_ID,
-} from '@waldur/user/constants';
+import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@waldur/user/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { UserPermissionRequestActions } from './UserPermissionRequestActions';
 import { UserPermissionRequestExpandableRow } from './UserPermissionRequestExpandableRow';
-import { UserPermissionRequestsListFilter } from './UserPermissionRequestsListFilter';
-import { getStates } from './UserPermissionRequestsStateFilter';
-
-const mapStateToProps = createSelector(
-  getUser,
-  getFormValues(USER_PERMISSION_REQUESTS_FILTER_FORM_ID),
-  (user, filterValues: any) => {
-    const filter: Record<string, string> = {
-      created_by: user?.uuid,
-    };
-    if (filterValues && filterValues.state) {
-      filter.state = filterValues.state.map((option) => option.value);
-    }
-    return filter;
-  },
-);
 
 export const UserPermissionRequestsList = () => {
-  const filter = useSelector(mapStateToProps);
+  const user = useSelector(getUser);
+  const formFilter = useSelector(selectUserPermissionRequestsFilter);
+  const filter = useMemo(
+    () => ({
+      created_by: user?.uuid,
+      ...formFilter,
+    }),
+    [user?.uuid, formFilter],
+  );
   const props = useTable({
     table: USER_PERMISSION_REQUESTS_TABLE_ID,
     fetchData: createFetcher(userPermissionRequestsList),
@@ -63,7 +56,10 @@ export const UserPermissionRequestsList = () => {
       title: translate('Status'),
       render: PermissionRequestStateField,
       filter: 'state',
-      inlineFilter: (row) => getStates().filter((s) => s.value === row.state),
+      inlineFilter: (row) =>
+        RemoteProjectUpdateRequestStateOptions.filter(
+          (s) => s.value === row.state,
+        ),
     },
   ];
 
@@ -73,7 +69,7 @@ export const UserPermissionRequestsList = () => {
       columns={columns}
       verboseName={translate('user permission requests')}
       showPageSizeSelector={true}
-      filters={<UserPermissionRequestsListFilter />}
+      filters={<UserPermissionRequestsFilter />}
       rowActions={UserPermissionRequestActions}
       expandableRow={UserPermissionRequestExpandableRow}
     />

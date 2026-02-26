@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const InvoiceStateEnumChoices: InvoiceStateEnumChoicesOption[] = [
+export const InvoiceStateOptions: InvoiceStateOption[] = [
   {
     label: translate('Canceled'),
     value: 'canceled',
@@ -32,7 +32,7 @@ export const InvoiceStateEnumChoices: InvoiceStateEnumChoicesOption[] = [
     value: 'pending_finalization',
   },
 ];
-export interface InvoiceStateEnumChoicesOption {
+export interface InvoiceStateOption {
   label: string;
   value: InvoiceStateEnum;
 }
@@ -41,7 +41,7 @@ const PureInvoicesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
-    getValueLabel={(value: InvoiceStateEnumChoicesOption[]) =>
+    getValueLabel={(value: InvoiceStateOption[]) =>
       value?.map((v) => v?.label).join(', ')
     }
   >
@@ -50,15 +50,11 @@ const PureInvoicesFilter: FunctionComponent<{}> = () => (
       component={(fieldProps) => (
         <Select
           placeholder={translate('State')}
-          options={InvoiceStateEnumChoices}
+          options={InvoiceStateOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: InvoiceStateEnumChoicesOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: InvoiceStateEnumChoicesOption) =>
-            option.label
-          }
+          getOptionValue={(option: InvoiceStateOption) => String(option.value)}
+          getOptionLabel={(option: InvoiceStateOption) => option.label}
           isClearable={true}
           isMulti={true}
           {...REACT_SELECT_TABLE_FILTER}
@@ -71,7 +67,7 @@ const PureInvoicesFilter: FunctionComponent<{}> = () => (
 export const InvoicesFilterFormId = 'InvoicesFilter';
 
 interface InvoicesFilterFormData {
-  state: InvoiceStateEnumChoicesOption[];
+  state: InvoiceStateOption[];
 }
 
 export const InvoicesFilter = reduxForm<InvoicesFilterFormData, {}>({

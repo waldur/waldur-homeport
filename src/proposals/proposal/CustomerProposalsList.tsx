@@ -1,57 +1,41 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import {
-  proposalProposalsList,
-  ProposalProposalsListData,
-} from 'waldur-js-client';
+import { proposalProposalsList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import {
-  getNonCanceledProposalStates,
-  getProposalStateOptions,
-} from '@waldur/proposals/utils';
+import { getNonCanceledProposalStates } from '@waldur/proposals/utils';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProposalsFilter,
+  selectProposalsFilter,
+  ProposalStatesOptions,
+} from '@waldur/table/generated/ProposalsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { PROPOSALS_FILTER_FORM_ID } from '../constants';
 import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';
 
 import { ProposalBadge } from './ProposalBadge';
 import { ProposalRowActions } from './ProposalRowActions';
-import { ProposalsTableFilter } from './ProposalsTableFilter';
-
-const mapStateToFilter = createSelector(
-  getCustomer,
-  getFormValues(PROPOSALS_FILTER_FORM_ID),
-  (customer, filters: any) => {
-    const result: ProposalProposalsListData['query'] = {};
-    if (customer) {
-      result.organization_uuid = customer.uuid;
-    }
-    result.o = ['-round__cutoff_time'];
-    result.state = getNonCanceledProposalStates();
-
-    if (filters) {
-      if (filters.state) {
-        result.state = filters.state.map((option) => option.value);
-      }
-      if (filters.call) {
-        result.call_uuid = filters.call.uuid;
-      }
-    }
-    return result;
-  },
-);
 
 export const CustomerProposalsList: FC<{}> = () => {
-  const filter = useSelector(mapStateToFilter);
+  const customer = useSelector(getCustomer);
+  const formFilters = useSelector(selectProposalsFilter);
+
+  const filter = useMemo(
+    () => ({
+      organization_uuid: customer?.uuid,
+      o: ['-round__cutoff_time'],
+      state: getNonCanceledProposalStates(),
+      ...formFilters,
+    }),
+    [customer?.uuid, formFilters],
+  );
+
   const tableProps = useTable({
     table: 'ProposalsList',
     fetchData: createFetcher(proposalProposalsList),
@@ -110,13 +94,13 @@ export const CustomerProposalsList: FC<{}> = () => {
           render: ({ row }) => <ProposalBadge state={row.state} />,
           filter: 'state',
           inlineFilter: (row) =>
-            getProposalStateOptions().filter((s) => s.value === row.state),
+            ProposalStatesOptions.filter((s) => s.value === row.state),
         },
       ]}
       title={translate('Proposals')}
       verboseName={translate('Proposals')}
       hasQuery={true}
-      filters={<ProposalsTableFilter form={PROPOSALS_FILTER_FORM_ID} />}
+      filters={<ProposalsFilter />}
       rowActions={({ row }) => (
         <ProposalRowActions refetch={tableProps.fetch} row={row} />
       )}

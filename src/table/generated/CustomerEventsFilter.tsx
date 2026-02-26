@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const FeatureChoices_1: FeatureChoices_1Option[] = [
+export const CustomerEventsFeatureOptions: CustomerEventsFeatureOption[] = [
   {
     label: translate('Organization events'),
     value: 'customers',
@@ -24,7 +24,7 @@ export const FeatureChoices_1: FeatureChoices_1Option[] = [
     value: 'resources',
   },
 ];
-export interface FeatureChoices_1Option {
+export interface CustomerEventsFeatureOption {
   label: string;
   value: string;
 }
@@ -33,7 +33,7 @@ const PureCustomerEventsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Type')}
     name="feature"
-    getValueLabel={(value: FeatureChoices_1Option[]) =>
+    getValueLabel={(value: CustomerEventsFeatureOption[]) =>
       value?.map((v) => v?.label).join(', ')
     }
   >
@@ -42,13 +42,13 @@ const PureCustomerEventsFilter: FunctionComponent<{}> = () => (
       component={(fieldProps) => (
         <Select
           placeholder={translate('Type')}
-          options={FeatureChoices_1}
+          options={CustomerEventsFeatureOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: FeatureChoices_1Option) =>
+          getOptionValue={(option: CustomerEventsFeatureOption) =>
             String(option.value)
           }
-          getOptionLabel={(option: FeatureChoices_1Option) => option.label}
+          getOptionLabel={(option: CustomerEventsFeatureOption) => option.label}
           isClearable={true}
           isMulti={true}
           {...REACT_SELECT_TABLE_FILTER}
@@ -61,7 +61,7 @@ const PureCustomerEventsFilter: FunctionComponent<{}> = () => (
 export const CustomerEventsFilterFormId = 'CustomerEventsFilter';
 
 interface CustomerEventsFilterFormData {
-  feature: FeatureChoices_1Option[];
+  feature: CustomerEventsFeatureOption[];
 }
 
 export const CustomerEventsFilter = reduxForm<CustomerEventsFilterFormData, {}>(

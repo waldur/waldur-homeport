@@ -5,13 +5,13 @@ import { marketplaceSoftwarePackagesList } from 'waldur-js-client';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { createFetcher } from '@waldur/table/api';
+import {
+  MarketplaceSoftwarePackagesFilter,
+  selectMarketplaceSoftwarePackagesFilter,
+} from '@waldur/table/generated/MarketplaceSoftwarePackagesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import {
-  PublicOfferingSoftwareCatalogFilter,
-  selectSoftwareCatalogFilter,
-} from './PublicOfferingSoftwareCatalogFilter';
 import { SoftwarePackageExpandableRow } from './SoftwarePackageExpandableRow';
 
 interface PublicOfferingSoftwareCatalogTableProps {
@@ -59,18 +59,19 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
 
     return parts.length > 0 ? parts.join(' | ') : null;
   };
-  const formFilter = useSelector(selectSoftwareCatalogFilter);
+  const formFilter = useSelector(selectMarketplaceSoftwarePackagesFilter);
   const filter = useMemo(
     () => ({
       offering_uuid: offering.uuid,
-      ...(offering.software_catalogs?.length > 0 && {
-        enabled_cpu_family: offering.software_catalogs.flatMap(
-          (sc) => sc.enabled_cpu_family || [],
-        ),
-        uniqueCpuMicroarchitectures: offering.software_catalogs.flatMap(
+      ...((offering.software_catalogs?.length > 0 && {
+        cpu_family: offering.software_catalogs.flatMap(
+          (sc) => sc.enabled_cpu_family || '',
+        )[0],
+        cpu_microarchitecture: offering.software_catalogs.flatMap(
           (sc) => sc.enabled_cpu_microarchitectures || [],
         ),
-      }),
+      }) ||
+        {}),
       ...formFilter,
     }),
     [offering.uuid, offering.software_catalogs, formFilter],
@@ -162,7 +163,7 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
       showPageSizeSelector
       enableExport
       hasOptionalColumns
-      filters={<PublicOfferingSoftwareCatalogFilter />}
+      filters={<MarketplaceSoftwarePackagesFilter />}
       filter={filter}
       expandableRow={SoftwarePackageExpandableRowWithOffering}
     />

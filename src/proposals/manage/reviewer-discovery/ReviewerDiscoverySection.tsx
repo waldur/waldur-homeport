@@ -23,7 +23,7 @@ import { createFetcher } from '@waldur/table/api';
 import {
   ReviewerSuggestionsFilter,
   selectReviewerSuggestionsFilter,
-  ReviewerSuggestionStatusEnumChoices,
+  ReviewerSuggestionStatusOptions,
 } from '@waldur/table/generated/ReviewerSuggestionsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
@@ -375,7 +375,7 @@ export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
         keys: ['status', 'status_display'],
         filter: 'status',
         inlineFilter: (row: ReviewerSuggestion) =>
-          ReviewerSuggestionStatusEnumChoices.find(
+          ReviewerSuggestionStatusOptions.find(
             (opt) => opt.value === row.status,
           ),
       },

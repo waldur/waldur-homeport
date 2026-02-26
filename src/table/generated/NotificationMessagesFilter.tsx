@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const IsOverriddenChoices: IsOverriddenChoicesOption[] = [
+export const IsOverriddenOptions: IsOverriddenOption[] = [
   {
     label: translate('Not overridden'),
     value: false,
@@ -20,7 +20,7 @@ export const IsOverriddenChoices: IsOverriddenChoicesOption[] = [
     value: true,
   },
 ];
-export interface IsOverriddenChoicesOption {
+export interface IsOverriddenOption {
   label: string;
   value: boolean;
 }
@@ -29,20 +29,18 @@ const PureNotificationMessagesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="is_overridden"
-    getValueLabel={(value: IsOverriddenChoicesOption) => value?.label}
+    getValueLabel={(value: IsOverriddenOption) => value?.label}
   >
     <Field
       name="is_overridden"
       component={(fieldProps) => (
         <Select
           placeholder={translate('Status')}
-          options={IsOverriddenChoices}
+          options={IsOverriddenOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: IsOverriddenChoicesOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: IsOverriddenChoicesOption) => option.label}
+          getOptionValue={(option: IsOverriddenOption) => String(option.value)}
+          getOptionLabel={(option: IsOverriddenOption) => option.label}
           isClearable={true}
           {...REACT_SELECT_TABLE_FILTER}
         />
@@ -54,7 +52,7 @@ const PureNotificationMessagesFilter: FunctionComponent<{}> = () => (
 export const NotificationMessagesFilterFormId = 'NotificationMessagesFilter';
 
 interface NotificationMessagesFilterFormData {
-  is_overridden: IsOverriddenChoicesOption;
+  is_overridden: IsOverriddenOption;
 }
 
 export const NotificationMessagesFilter = reduxForm<

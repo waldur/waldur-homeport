@@ -8,56 +8,54 @@ import {
   CustomerQuotasQuotaNameEnum,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const CustomerQuotasQuotaNameEnumChoices: CustomerQuotasQuotaNameEnumChoicesOption[] =
-  [
-    {
-      label: translate('Resources'),
-      value: 'estimated_price',
-    },
-    {
-      label: translate('Estimated price per month'),
-      value: 'nc_resource_count',
-    },
-    {
-      label: translate('VPC vCPU'),
-      value: 'os_cpu_count',
-    },
-    {
-      label: translate('VPC RAM'),
-      value: 'os_ram_size',
-    },
-    {
-      label: translate('VPC block storage size'),
-      value: 'os_storage_size',
-    },
-    {
-      label: translate('VPC floating IP count'),
-      value: 'vpc_cpu_count',
-    },
-    {
-      label: translate('VPC instance count'),
-      value: 'vpc_floating_ip_count',
-    },
-    {
-      label: translate('Cloud vCPU'),
-      value: 'vpc_instance_count',
-    },
-    {
-      label: translate('Cloud RAM'),
-      value: 'vpc_ram_size',
-    },
-    {
-      label: translate('Cloud block storage size'),
-      value: 'vpc_storage_size',
-    },
-  ];
-export interface CustomerQuotasQuotaNameEnumChoicesOption {
+export const CustomerQuotasQuotaNameOptions: CustomerQuotasQuotaNameOption[] = [
+  {
+    label: translate('Resources'),
+    value: 'estimated_price',
+  },
+  {
+    label: translate('Estimated price per month'),
+    value: 'nc_resource_count',
+  },
+  {
+    label: translate('VPC vCPU'),
+    value: 'os_cpu_count',
+  },
+  {
+    label: translate('VPC RAM'),
+    value: 'os_ram_size',
+  },
+  {
+    label: translate('VPC block storage size'),
+    value: 'os_storage_size',
+  },
+  {
+    label: translate('VPC floating IP count'),
+    value: 'vpc_cpu_count',
+  },
+  {
+    label: translate('VPC instance count'),
+    value: 'vpc_floating_ip_count',
+  },
+  {
+    label: translate('Cloud vCPU'),
+    value: 'vpc_instance_count',
+  },
+  {
+    label: translate('Cloud RAM'),
+    value: 'vpc_ram_size',
+  },
+  {
+    label: translate('Cloud block storage size'),
+    value: 'vpc_storage_size',
+  },
+];
+export interface CustomerQuotasQuotaNameOption {
   label: string;
   value: CustomerQuotasQuotaNameEnum;
 }
@@ -66,27 +64,23 @@ const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Quota')}
     name="quota_name"
-    hideRemoveButton={true}
-    getValueLabel={(value: CustomerQuotasQuotaNameEnumChoicesOption) =>
-      value?.label
-    }
+    getValueLabel={(value: CustomerQuotasQuotaNameOption) => value?.label}
   >
     <Field
       name="quota_name"
-      validate={[required]}
       component={(fieldProps) => (
         <Select
           placeholder={translate('Quota')}
-          options={CustomerQuotasQuotaNameEnumChoices}
+          options={CustomerQuotasQuotaNameOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: CustomerQuotasQuotaNameEnumChoicesOption) =>
+          getOptionValue={(option: CustomerQuotasQuotaNameOption) =>
             String(option.value)
           }
-          getOptionLabel={(option: CustomerQuotasQuotaNameEnumChoicesOption) =>
+          getOptionLabel={(option: CustomerQuotasQuotaNameOption) =>
             option.label
           }
-          isClearable={false}
+          isClearable={true}
           {...REACT_SELECT_TABLE_FILTER}
         />
       )}
@@ -97,7 +91,7 @@ const PureCustomerQuotasFilter: FunctionComponent<{}> = () => (
 export const CustomerQuotasFilterFormId = 'CustomerQuotasFilter';
 
 interface CustomerQuotasFilterFormData {
-  quota_name: CustomerQuotasQuotaNameEnumChoicesOption;
+  quota_name: CustomerQuotasQuotaNameOption;
 }
 
 export const CustomerQuotasFilter = reduxForm<CustomerQuotasFilterFormData, {}>(

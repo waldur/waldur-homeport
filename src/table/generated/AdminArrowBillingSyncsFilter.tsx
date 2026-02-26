@@ -10,7 +10,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const StateChoices: StateChoicesOption[] = [
+export const StateOptions: StateOption[] = [
   {
     label: translate('Pending'),
     value: 1,
@@ -28,7 +28,7 @@ export const StateChoices: StateChoicesOption[] = [
     value: 4,
   },
 ];
-export interface StateChoicesOption {
+export interface StateOption {
   label: string;
   value: number;
 }
@@ -40,20 +40,18 @@ const PureAdminArrowBillingSyncsFilter: FunctionComponent<
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: StateChoicesOption) => value?.label}
+      getValueLabel={(value: StateOption) => value?.label}
     >
       <Field
         name="state"
         component={(fieldProps) => (
           <Select
             placeholder={translate('State')}
-            options={StateChoices}
+            options={StateOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: StateChoicesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: StateChoicesOption) => option.label}
+            getOptionValue={(option: StateOption) => String(option.value)}
+            getOptionLabel={(option: StateOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -109,7 +107,7 @@ interface AdminArrowBillingSyncsFilterProps {
 }
 
 interface AdminArrowBillingSyncsFilterFormData {
-  state: StateChoicesOption;
+  state: StateOption;
   report_period_from: any;
   report_period_to: any;
 }
