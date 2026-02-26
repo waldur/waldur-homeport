@@ -1,5 +1,6 @@
 import { EChartsOption, graphic } from 'echarts';
 
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { hexToRgb } from '@waldur/core/generateColors';
 import { CHART_LINE_COLOR } from '@waldur/dashboard/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -33,7 +34,7 @@ export const getUsageLineChartOptions = (
       trigger: 'axis',
       formatter: (params) => {
         const point = params[0];
-        return `${point.axisValue}<br/>${point.data}`;
+        return `${point.axisValue}<br/>${formatUsageValue(point.data)}`;
       },
     },
     grid: {

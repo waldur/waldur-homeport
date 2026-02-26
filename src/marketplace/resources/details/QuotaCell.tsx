@@ -1,5 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { Tip } from '@waldur/core/Tooltip';
 
 import { QuotaProgressBar } from './QuotaProgressBar';
@@ -38,8 +39,8 @@ const CellDescription = ({
       </>
     )}
     {limit
-      ? `${usage.toLocaleString()}/${limit.toLocaleString()}`
-      : usage.toLocaleString()}
+      ? `${formatUsageValue(usage)}/${formatUsageValue(limit)}`
+      : formatUsageValue(usage)}
     {units && ` ${units}`}
 
     {title && ` ${title}`}

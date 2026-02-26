@@ -21,6 +21,7 @@ import {
 import { getAllPages } from '@waldur/core/api';
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { EChart } from '@waldur/core/EChart';
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -216,12 +217,12 @@ export const UsageExpandableRow = ({
                       <span>
                         {translate('Max')}
                         {': '}
-                        {Math.max(...chartData)}
+                        {formatUsageValue(Math.max(...chartData))}
                       </span>
                       <span>
                         {translate('Last')}
                         {': '}
-                        {chartData[chartData.length - 1]}
+                        {formatUsageValue(chartData[chartData.length - 1])}
                       </span>
                     </div>
                     <EChart options={chartOptions} height="70px" />

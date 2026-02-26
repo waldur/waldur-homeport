@@ -1,3 +1,4 @@
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { translate } from '@waldur/i18n';
 
 import { getUsagePercentOfLimitComponent } from './QuotaCell';
@@ -27,8 +28,8 @@ export const QuotaSingleView = ({
     <div className="d-flex flex-column">
       <span className="fw-bold text-dark text-nowrap ellipsis">
         {limit
-          ? `${usage.toLocaleString()} / ${limit.toLocaleString()}`
-          : usage.toLocaleString()}
+          ? `${formatUsageValue(usage)} / ${formatUsageValue(limit)}`
+          : formatUsageValue(usage)}
         {units && ` ${units}`}
         {title && ` ${title}`}
       </span>
