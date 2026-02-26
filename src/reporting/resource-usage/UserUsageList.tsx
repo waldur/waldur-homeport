@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { createFetcher } from '@waldur/table/api';
@@ -92,7 +93,9 @@ export const UserUsageList: FC = () => {
     },
     {
       title: translate('Value'),
-      render: ({ row }) => <>{row.usage + ' ' + row.measured_unit}</>,
+      render: ({ row }) => (
+        <>{formatUsageValue(row.usage) + ' ' + row.measured_unit}</>
+      ),
       export: (row) => row.usage + ' ' + row.measured_unit,
       exportKeys: ['usage', 'measured_unit'],
     },

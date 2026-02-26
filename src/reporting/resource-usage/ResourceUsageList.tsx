@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { translate } from '@waldur/i18n';
 import { getStartAndEndDatesOfMonth } from '@waldur/issues/utils';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
@@ -119,7 +120,9 @@ export const ResourceUsageList: FC = () => {
     },
     {
       title: translate('Value'),
-      render: ({ row }) => <>{row.usage + ' ' + row.measured_unit}</>,
+      render: ({ row }) => (
+        <>{formatUsageValue(row.usage) + ' ' + row.measured_unit}</>
+      ),
       export: (row) => row.usage + ' ' + row.measured_unit,
       exportKeys: ['usage', 'measured_unit'],
     },

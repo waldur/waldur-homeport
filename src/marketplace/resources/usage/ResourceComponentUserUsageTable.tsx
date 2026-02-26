@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { formatMonth } from '@waldur/core/dateUtils';
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
@@ -59,7 +60,7 @@ export const ResourceComponentUserUsageTable: FC<TableWithPortal<any>> = ({
     },
     {
       title: `${props.offeringComponent.name} / ${props.offeringComponent.measured_unit}`,
-      render: ({ row }) => <>{row.usage}</>,
+      render: ({ row }) => <>{formatUsageValue(row.usage)}</>,
       orderField: 'usage',
     },
   ].filter(Boolean);
