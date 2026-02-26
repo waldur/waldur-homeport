@@ -36,7 +36,11 @@ export const getQuotaCellProps = (
       component.billing_type === 'limit'
         ? normalize(resource.limits[component.type], component.factor)
         : null,
-    title: component.name + ' ' + component.measured_unit,
+    title:
+      component.measured_unit &&
+      component.name.endsWith(component.measured_unit)
+        ? component.name
+        : component.name + ' ' + component.measured_unit,
   };
 };
 
