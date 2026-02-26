@@ -132,9 +132,14 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
   const tabs = useMemo(
     () =>
       data
-        ? getResourceTabs({ ...data, resource, isStaff: user?.is_staff })
+        ? getResourceTabs({
+            ...data,
+            resource,
+            isStaff: user?.is_staff,
+            isSupport: user?.is_support,
+          })
         : [],
-    [resource, data, user?.is_staff],
+    [resource, data, user?.is_staff, user?.is_support],
   );
 
   useTitle(resource?.name);
