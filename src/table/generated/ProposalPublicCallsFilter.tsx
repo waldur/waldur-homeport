@@ -11,7 +11,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const CallStatesChoices: CallStatesChoicesOption[] = [
+export const CallStatesOptions: CallStatesOption[] = [
   {
     label: translate('Active'),
     value: 'active',
@@ -25,7 +25,7 @@ export const CallStatesChoices: CallStatesChoicesOption[] = [
     value: 'draft',
   },
 ];
-export interface CallStatesChoicesOption {
+export interface CallStatesOption {
   label: string;
   value: CallStates;
 }
@@ -35,7 +35,7 @@ const PureProposalPublicCallsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: CallStatesChoicesOption[]) =>
+      getValueLabel={(value: CallStatesOption[]) =>
         value?.map((v) => v?.label).join(', ')
       }
     >
@@ -44,13 +44,11 @@ const PureProposalPublicCallsFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('State')}
-            options={CallStatesChoices}
+            options={CallStatesOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: CallStatesChoicesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: CallStatesChoicesOption) => option.label}
+            getOptionValue={(option: CallStatesOption) => String(option.value)}
+            getOptionLabel={(option: CallStatesOption) => option.label}
             isClearable={true}
             isMulti={true}
             {...REACT_SELECT_TABLE_FILTER}
@@ -77,7 +75,7 @@ const PureProposalPublicCallsFilter: FunctionComponent<{}> = () => (
 export const ProposalPublicCallsFilterFormId = 'ProposalPublicCallsFilter';
 
 interface ProposalPublicCallsFilterFormData {
-  state: CallStatesChoicesOption[];
+  state: CallStatesOption[];
   has_active_round: boolean;
 }
 

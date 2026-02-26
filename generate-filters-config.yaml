@@ -170,6 +170,17 @@ overrides:
   marketplace_project_update_requests:
     filters:
       - state
+      - customer_uuid
+    initialValues:
+      state:
+        - value: pending
+          label: Pending
+    state:
+      isMulti: true
+    customer_uuid:
+      label: Organization
+      name: organization
+      operationId: customers_list
 
   notification_messages:
     filters:
@@ -370,6 +381,50 @@ overrides:
         rejected: Rejected
         invited: Invited
 
+  conflicts_of_interest:
+    filters:
+      - round_uuid
+      - status
+      - severity
+      - coi_type
+      - detection_method
+    round_uuid:
+      label: Round
+      name: round
+      operationId: proposal_protected_calls_rounds_list
+      searchParam: false
+      extraPath:
+        uuid: props.call.uuid
+    status:
+      label: Status
+      isMulti: true
+    severity:
+      label: Severity
+    coi_type:
+      label: Type
+      isMulti: true
+      enumOverrides:
+        INST_SAME: Institutional (Same)
+        FIN_DIRECT: Financial (Direct)
+        REL_FAMILY: Relative (Family)
+        ROLE_NAMED: Role (Named)
+        COLLAB_ACTIVE: Collaborative (Active)
+        REL_MENTOR: Relationship (Mentor)
+        REL_SUPERVISOR: Relationship (Supervisor)
+        COAUTH_RECENT: Co-authorship (Recent)
+        INST_DEPT: Institutional (Department)
+        INST_FORMER: Institutional (Former)
+        ROLE_CONF: Role (Confidential)
+        COLLAB_GRANT: Collaborative (Grant)
+        REL_EDITORIAL: Relationship (Editorial)
+        COMPET: Competition
+        COAUTH_OLD: Co-authorship (Old)
+        INST_CONSORT: Institutional (Consortium)
+        CONF_ATTEND: Conference Attendance
+        SOC_MEMBER: Society Member
+    detection_method:
+      label: Detection
+
   customer_events:
     operationId: events_list
     initialValues:
@@ -436,19 +491,12 @@ overrides:
         project_uuid: 'props.project.uuid'
 
   proposal_proposals:
-    initialValues:
-      state:
-        - label: Submitted
-          value: submitted
-        - label: Accepted
-          value: accepted
-        - label: In review
-          value: in_review
     filters:
       - state
       - call_uuid
       - round_uuid
       - organization_uuid
+      - created_by_uuid
     state:
       isMulti: true
       enumOverrides:
@@ -459,12 +507,24 @@ overrides:
         canceled: Canceled
         in_review: In review
     call_uuid:
+      label: Call
+      name: call
       operationId: proposal_public_calls_list
     round_uuid:
-      operationId: call_rounds_list
+      label: Round
+      name: round
+      operationId: proposal_protected_calls_rounds_list
+      extraPath:
+        uuid: props.callUuid
       searchParam: false
     organization_uuid:
       label: Organization
+      name: organization
+      operationId: customers_list
+    created_by_uuid:
+      label: Applicant
+      name: applicant
+      operationId: users_list
 
   proposal_public_calls:
     initialValues:
@@ -487,19 +547,6 @@ overrides:
       badgeLabels:
         true: Yes
         false: All
-
-  proposal_reviews:
-    filters:
-      - state
-      - call_uuid
-    state:
-      isMulti: true
-      enumOverrides:
-        in_review: In review
-        submitted: Submitted
-        rejected: Rejected
-    call_uuid:
-      operationId: proposal_public_calls_list
 
   rancher_cluster:
     operationId: rancher_ingresses_list
@@ -548,3 +595,245 @@ overrides:
         Open: Open
         Resolved: Resolved
         'Waiting for support': Waiting for support
+
+  user_tos_filters:
+    operationId: marketplace_public_offerings_list
+    filters:
+      - user_has_consent
+    user_has_consent:
+      label: Consent status
+      component: Select
+      options:
+        - value: true
+          label: Accepted
+        - value: false
+          label: Not accepted
+
+  user_pending_actions:
+    operationId: user_actions_list
+    filters:
+      - action_type
+      - urgency
+      - overdue
+      - include_silenced
+    action_type:
+      label: Action type
+      component: Select
+      options:
+        - value: expiring_resource
+          label: Expiring resource
+        - value: pending_order
+          label: Pending order approval
+
+  marketplace_software_packages:
+    filters:
+      - catalog_name
+      - catalog_version
+      - catalog_type
+      - category
+      - license
+      - toolchain_name
+    catalog_name:
+      label: Catalog
+    catalog_version:
+      label: Version
+    catalog_type:
+      label: Type
+    category:
+      label: Category
+    license:
+      label: License
+    toolchain_name:
+      label: Toolchain
+
+  user_data_access_history:
+    operationId: users_data_access_history_list
+    filters:
+      - start_date
+      - end_date
+      - accessor_type
+    start_date:
+      label: Start date
+      props:
+        inline: true
+    end_date:
+      label: End date
+      props:
+        inline: true
+    accessor_type:
+      label: Accessor type
+      component: Select
+      options:
+        - value: staff
+          label: Staff
+        - value: support
+          label: Support
+        - value: organization_member
+          label: Organization member
+        - value: service_provider
+          label: Service provider
+        - value: self
+          label: Self-access
+
+  promotions_campaigns:
+    filters:
+      - state
+      - discount_type
+    state:
+      isMulti: true
+      enumOverrides:
+        Draft: Draft
+        Active: Active
+        Terminated: Terminated
+    discount_type:
+      label: Discount type
+      options:
+        - value: discount
+          label: Discount
+        - value: special_price
+          label: Special price
+
+  user_permission_requests:
+    filters:
+      - state
+    initialValues:
+      state:
+        - value: pending
+          label: Pending
+    state:
+      isMulti: true
+      enumOverrides:
+        pending: Pending
+        approved: Approved
+        rejected: Rejected
+
+  call_reviewer_pools:
+    filters:
+      - invitation_status
+    invitation_status:
+      label: Status
+      isMulti: true
+      enumOverrides:
+        pending: Pending
+        accepted: Accepted
+        declined: Declined
+        expired: Expired
+
+  proposal_reviews:
+    filters:
+      - state
+      - call_uuid
+      - round_uuid
+      - organization_uuid
+      - reviewer_uuid
+      - proposal_uuid
+    state:
+      isMulti: true
+      enumOverrides:
+        in_review: In review
+        submitted: Submitted
+        rejected: Rejected
+    call_uuid:
+      label: Call
+      name: call
+      operationId: proposal_public_calls_list
+    round_uuid:
+      label: Round
+      name: round
+      operationId: proposal_protected_calls_rounds_list
+      extraPath:
+        uuid: props.callUuid
+      searchParam: false
+    organization_uuid:
+      label: Organization
+      name: organization
+      operationId: customers_list
+    reviewer_uuid:
+      label: Reviewer
+      name: reviewer
+      operationId: users_list
+      valueField: uuid
+      labelField: full_name
+    proposal_uuid:
+      label: Proposal
+      name: proposal
+      operationId: proposal_proposals_list
+      extraQuery:
+        call_uuid: props.callUuid
+
+  proposals:
+    operationId: proposal_proposals_list
+    filters:
+      - state
+      - call_uuid
+    state:
+      isMulti: true
+      enumOverrides:
+        draft: Draft
+        submitted: Submitted
+        accepted: Accepted
+        rejected: Rejected
+        canceled: Canceled
+        in_review: In review
+    call_uuid:
+      label: Call
+      name: call
+      operationId: proposal_public_calls_list
+
+  proposal_requested_offerings:
+    filters:
+      - organization_uuid
+      - call
+      - state
+      - offering
+    organization_uuid:
+      label: Organization
+      name: organization
+      operationId: customers_list
+    call:
+      label: Call
+      name: call
+      operationId: proposal_public_calls_list
+      valueField: url
+    state:
+      label: Status
+      isMulti: true
+      enumOverrides:
+        requested: Requested
+        accepted: Accepted
+        canceled: Canceled
+    offering:
+      label: Offering
+      name: offering
+      operationId: marketplace_public_offerings_list
+      valueField: url
+      extraQuery:
+        shared: true
+
+  credit_usage:
+    operationId: invoice_items_list
+    filters:
+      - offering_uuid
+      - resource_uuid
+      - start_year
+      - start_month
+    offering_uuid:
+      label: Offering
+      name: offering
+      operationId: marketplace_public_offerings_list
+    resource_uuid:
+      label: Resource
+      name: resource
+      operationId: marketplace_resources_list
+      extraQuery:
+        customer_uuid: props.customerUUID
+    start_year:
+      label: Year
+      name: year
+      component: Select
+      options: props.yearOptions
+    start_month:
+      label: Month
+      name: month
+      component: Select
+      options: props.monthOptions

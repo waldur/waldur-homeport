@@ -1,15 +1,17 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
-import { proposalReviewsList, ProposalReviewsListData } from 'waldur-js-client';
+import { proposalReviewsList } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { EndingField } from '@waldur/proposals/EndingField';
 import { ProposalReview } from '@waldur/proposals/types';
-import { getReviewStateOptions } from '@waldur/proposals/utils';
 import { createFetcher } from '@waldur/table/api';
+import {
+  ProposalReviewsFilter,
+  selectProposalReviewsFilter,
+  ProposalReviewStateOptions,
+} from '@waldur/table/generated/ProposalReviewsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -19,39 +21,15 @@ import { ReviewStateRenderer } from '../review/ReviewStateRenderer';
 import { Call } from '../types';
 
 import { CallReviewExpandableRow } from './CallReviewExpandableRow';
-import {
-  CallReviewsListFilter,
-  CALL_REVIEWS_FILTER_FORM_ID,
-} from './CallReviewsListFilter';
 
 interface CallReviewsListProps {
   call: Call;
 }
 
-const filtersSelector = createSelector(
-  getFormValues(CALL_REVIEWS_FILTER_FORM_ID),
-  (filters: any) => {
-    const result: ProposalReviewsListData['query'] = {};
-    if (filters?.round) {
-      result.round_uuid = filters.round.uuid;
-    }
-    if (filters?.state?.length) {
-      result.state = filters.state.map((s) => s.value);
-    }
-    if (filters?.reviewer) {
-      result.reviewer_uuid = filters.reviewer.uuid;
-    }
-    if (filters?.proposal) {
-      result.proposal_uuid = filters.proposal.uuid;
-    }
-    return result;
-  },
-);
-
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
 export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
-  const formFilters = useSelector(filtersSelector);
+  const formFilters = useSelector(selectProposalReviewsFilter);
 
   const filter = useMemo(
     () => ({
@@ -131,14 +109,14 @@ export const CallReviewsList: FC<CallReviewsListProps> = ({ call }) => {
           id: 'state',
           filter: 'state',
           inlineFilter: (row) =>
-            getReviewStateOptions().filter((s) => s.value === row.state),
+            ProposalReviewStateOptions.filter((s) => s.value === row.state),
         },
       ]}
       title={translate('Reviews')}
       hasQuery
       verboseName={translate('Reviews')}
       rowActions={ReviewsRowActions}
-      filters={<CallReviewsListFilter callUuid={call.uuid} />}
+      filters={<ProposalReviewsFilter callUuid={call.uuid} />}
       expandableRow={CallReviewExpandableRow}
     />
   );

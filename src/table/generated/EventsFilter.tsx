@@ -23,7 +23,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const FeatureChoices: FeatureChoicesOption[] = [
+export const FeatureOptions: FeatureOption[] = [
   {
     label: translate('Project events'),
     value: 'projects',
@@ -33,7 +33,7 @@ export const FeatureChoices: FeatureChoicesOption[] = [
     value: 'resources',
   },
 ];
-export interface FeatureChoicesOption {
+export interface FeatureOption {
   label: string;
   value: string;
 }
@@ -89,7 +89,9 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('User')}
       name="user"
-      getValueLabel={(value: User) => value?.full_name}
+      getValueLabel={(value: User) =>
+        value?.full_name || value?.username || value?.email
+      }
     >
       <Field
         name="user"
@@ -101,7 +103,9 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
             })}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) => String(option.full_name || '')}
+            getOptionLabel={(option: User) =>
+              String(option.full_name || option.username || option.email || '')
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -114,7 +118,7 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Type')}
       name="feature"
-      getValueLabel={(value: FeatureChoicesOption[]) =>
+      getValueLabel={(value: FeatureOption[]) =>
         value?.map((v) => v?.label).join(', ')
       }
     >
@@ -123,13 +127,11 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('Type')}
-            options={FeatureChoices}
+            options={FeatureOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: FeatureChoicesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: FeatureChoicesOption) => option.label}
+            getOptionValue={(option: FeatureOption) => String(option.value)}
+            getOptionLabel={(option: FeatureOption) => option.label}
             isClearable={true}
             isMulti={true}
             {...REACT_SELECT_TABLE_FILTER}
@@ -146,7 +148,7 @@ interface EventsFilterFormData {
   organization: Customer;
   project: Project;
   user: User;
-  feature: FeatureChoicesOption[];
+  feature: FeatureOption[];
 }
 
 export const EventsFilter = reduxForm<EventsFilterFormData, {}>({

@@ -13,7 +13,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const RemoteProjectUpdateRequestStateEnumChoices: RemoteProjectUpdateRequestStateEnumChoicesOption[] =
+export const RemoteProjectUpdateRequestStateOptions: RemoteProjectUpdateRequestStateOption[] =
   [
     {
       label: translate('Approved'),
@@ -36,7 +36,7 @@ export const RemoteProjectUpdateRequestStateEnumChoices: RemoteProjectUpdateRequ
       value: 'rejected',
     },
   ];
-export interface RemoteProjectUpdateRequestStateEnumChoicesOption {
+export interface RemoteProjectUpdateRequestStateOption {
   label: string;
   value: RemoteProjectUpdateRequestStateEnum;
 }
@@ -45,24 +45,24 @@ const PureOpenportalManagedProjectsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
-    getValueLabel={(
-      value: RemoteProjectUpdateRequestStateEnumChoicesOption[],
-    ) => value?.map((v) => v?.label).join(', ')}
+    getValueLabel={(value: RemoteProjectUpdateRequestStateOption[]) =>
+      value?.map((v) => v?.label).join(', ')
+    }
   >
     <Field
       name="state"
       component={(fieldProps) => (
         <Select
           placeholder={translate('State')}
-          options={RemoteProjectUpdateRequestStateEnumChoices}
+          options={RemoteProjectUpdateRequestStateOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(
-            option: RemoteProjectUpdateRequestStateEnumChoicesOption,
-          ) => String(option.value)}
-          getOptionLabel={(
-            option: RemoteProjectUpdateRequestStateEnumChoicesOption,
-          ) => option.label}
+          getOptionValue={(option: RemoteProjectUpdateRequestStateOption) =>
+            String(option.value)
+          }
+          getOptionLabel={(option: RemoteProjectUpdateRequestStateOption) =>
+            option.label
+          }
           isClearable={true}
           isMulti={true}
           {...REACT_SELECT_TABLE_FILTER}
@@ -76,7 +76,7 @@ export const OpenportalManagedProjectsFilterFormId =
   'OpenportalManagedProjectsFilter';
 
 interface OpenportalManagedProjectsFilterFormData {
-  state: RemoteProjectUpdateRequestStateEnumChoicesOption[];
+  state: RemoteProjectUpdateRequestStateOption[];
 }
 
 export const OpenportalManagedProjectsFilter = reduxForm<

@@ -1,17 +1,18 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
-import { createSelector } from 'reselect';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import {
+  UserDataAccessHistoryFilter,
+  selectUserDataAccessHistoryFilter,
+} from '@waldur/table/generated/UserDataAccessHistoryFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { dataAccessHistoryFetcher } from './api';
-import { AccessHistoryFilter } from './components/AccessHistoryFilter';
 import { DataAccessHistoryEntry } from './types';
 import {
   formatFieldName,
@@ -24,28 +25,11 @@ interface DataAccessHistoryProps {
   isViewerStaffOrSupport: boolean;
 }
 
-const mapStateToFilter = createSelector(
-  getFormValues('AccessHistoryFilter'),
-  (filterValues: any) => {
-    const result: Record<string, string> = {};
-    if (filterValues?.start_date) {
-      result.start_date = filterValues.start_date;
-    }
-    if (filterValues?.end_date) {
-      result.end_date = filterValues.end_date;
-    }
-    if (filterValues?.accessor_type?.value) {
-      result.accessor_type = filterValues.accessor_type.value;
-    }
-    return result;
-  },
-);
-
 export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
   userUuid,
   isViewerStaffOrSupport,
 }) => {
-  const filterValues = useSelector(mapStateToFilter);
+  const filterValues = useSelector(selectUserDataAccessHistoryFilter);
 
   const filter = useMemo(
     () => ({
@@ -144,7 +128,7 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
     <Table<DataAccessHistoryEntry>
       {...tableProps}
       columns={columns}
-      filters={<AccessHistoryFilter />}
+      filters={<UserDataAccessHistoryFilter />}
       verboseName={translate('Access history entries')}
       showPageSizeSelector
     />

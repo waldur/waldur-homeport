@@ -57,10 +57,19 @@ const utils = {
     );
     return h;
   },
-  toCamelCase: (s) => s?.replace(/_([a-z])/g, (g) => g[1].toUpperCase()) || '',
   toPascalCase: (s) => {
-    const c = utils.toCamelCase(s);
-    return c.charAt(0).toUpperCase() + c.slice(1);
+    if (!s) return '';
+    return s
+      .replace(/([A-Z]+)([A-Z][a-z])/g, '$1_$2')
+      .replace(/([a-z0-9])([A-Z])/g, '$1_$2')
+      .split(/[^a-zA-Z0-9]+/)
+      .filter(Boolean)
+      .map((word) => word.charAt(0).toUpperCase() + word.slice(1).toLowerCase())
+      .join('');
+  },
+  toCamelCase: (s) => {
+    const p = utils.toPascalCase(s);
+    return p.charAt(0).toLowerCase() + p.slice(1);
   },
   resolveRef(ref, root) {
     if (!ref?.startsWith('#/')) return null;
@@ -132,13 +141,13 @@ class SchemaProcessor {
         let returnType =
           resp.$ref?.split('/').pop() ||
           `${utils.toPascalCase(op.operationId)}Data`;
-        if (returnType === 'NameUUID') returnType = 'NameUuid';
+        returnType = utils.toPascalCase(returnType);
 
         if (s?.type === 'array' && s.items) {
           let item = s.items.$ref
             ? utils.resolveRef(s.items.$ref, this.schema)
             : s.items;
-          const itemType = s.items.$ref?.split('/').pop();
+          const itemType = utils.toPascalCase(s.items.$ref?.split('/').pop());
           if (item?.properties) {
             const props = Object.keys(item.properties);
             this.responseFields.set(op.operationId, {
@@ -148,7 +157,7 @@ class SchemaProcessor {
                 LABEL_CANDIDATES.find((c) => props.includes(c)) || 'name',
               props,
               returnType,
-              itemType: itemType === 'NameUUID' ? 'NameUuid' : itemType,
+              itemType,
             });
           }
         } else {
@@ -216,11 +225,10 @@ class FilterMapper {
     let schema = param.schema || {};
     let schemaEnumName = null;
     if (schema.$ref) {
-      schemaEnumName = schema.$ref.split('/').pop();
+      schemaEnumName = utils.toPascalCase(schema.$ref.split('/').pop());
     } else if (schema.items?.$ref) {
-      schemaEnumName = schema.items.$ref.split('/').pop();
+      schemaEnumName = utils.toPascalCase(schema.items.$ref.split('/').pop());
     }
-    if (schemaEnumName === 'NameUUID') schemaEnumName = 'NameUuid';
     if (schema.$ref) {
       schema = utils.resolveRef(schema.$ref, this.proc.schema) || schema;
     }
@@ -242,7 +250,7 @@ class FilterMapper {
     if (targetOp && !overrides.options && !overrides.enumOverrides) {
       this._mapAutocomplete(filter, targetOp);
     } else {
-      this._mapStandard(filter, param, schema, schemaEnumName, overrides);
+      this._mapStandard(filter, param, schema, schemaEnumName, overrides, opId);
     }
 
     Object.assign(filter, overrides);
@@ -281,6 +289,7 @@ class FilterMapper {
       };
       filter.valueField = resp.valueField;
       filter.labelField = resp.labelField;
+      filter.itemType = resp.itemType;
       if (resp.returnType) {
         filter.valueType = resp.itemType || resp.returnType;
       }
@@ -292,7 +301,7 @@ class FilterMapper {
     }
   }
 
-  _mapStandard(filter, param, schema, schemaEnumName, overrides) {
+  _mapStandard(filter, param, schema, schemaEnumName, overrides, opId) {
     const enumOptions =
       schema.enum ||
       (schema.items?.$ref
@@ -349,8 +358,9 @@ class FilterMapper {
         schemaEnumName ||
         this.proc.namedEnums.get(key) ||
         utils.toPascalCase(param.name);
-      if (!finalEnumName.endsWith('Choices')) {
-        finalEnumName += 'Choices';
+      finalEnumName = finalEnumName.replace(/Enum$/, '').replace(/Choices$/, '');
+      if (!finalEnumName.endsWith('Options')) {
+        finalEnumName += 'Options';
       }
 
       this._registerEnum(
@@ -358,6 +368,7 @@ class FilterMapper {
         finalEnumName,
         filter,
         overrides.valueType || schemaEnumName,
+        opId,
       );
       filter.options = options;
     } else if (schema.type === 'boolean') {
@@ -371,17 +382,19 @@ class FilterMapper {
     }
   }
 
-  _registerEnum(key, name, filter, valueType) {
+  _registerEnum(key, name, filter, valueType, opId) {
     if (this.enumReverseRegistry.has(key)) {
       filter.optionsPlaceholder = this.enumReverseRegistry.get(key);
     } else {
       let uniqueName = name;
-      let i = 1;
-      while (
+      if (
         this.enumRegistry.has(uniqueName) &&
         this.enumRegistry.get(uniqueName).options !== key
       ) {
-        uniqueName = `${name}_${i++}`;
+        const prefix = utils
+          .toPascalCase(opId)
+          .replace(/(?:List|Retrieve|Create|Update|Delete)$/, '');
+        uniqueName = prefix + name;
       }
       this.enumRegistry.set(uniqueName, { options: key, valueType });
       this.enumReverseRegistry.set(key, uniqueName);
@@ -430,10 +443,13 @@ class Generator {
     ) {
       valLabel = '';
     } else {
-      const access = f.labelField ? `?.${f.labelField}` : '?.label';
+      let access = f.labelField ? `?.${f.labelField}` : '?.label';
+      if (f.itemType === 'User') {
+        access = '?.full_name || value?.username || value?.email';
+      }
       const argType =
         f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)
-          ? `${f.optionsPlaceholder}Option`
+          ? f.optionsPlaceholder.replace(/Options$/, 'Option')
           : f.valueType || 'any';
       valLabel = `getValueLabel={(value: ${argType}${f.isMulti ? '[]' : ''}) => ${f.isMulti ? `value?.map((v) => v${access}).join(', ')` : `value${access}`}}`;
     }
@@ -491,7 +507,7 @@ class Generator {
             loadOptions={createSelectFetcher(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
             defaultOptions
             getOptionValue={(option${vType}) => String(option.${f.valueField || 'url'} || '')}
-            getOptionLabel={(option${vType}) => String(option.${f.labelField || 'name'} || '')}
+            getOptionLabel={(option${vType}) => ${f.itemType === 'User' ? 'String(option.full_name || option.username || option.email || "")' : `String(option.${f.labelField || 'name'} || '')` }}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             ${commonSelectProps}
@@ -519,8 +535,8 @@ class Generator {
             options={${optionsVar}}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            ${f.valueField ? `getOptionValue={(option${vType}) => String(option.${f.valueField})}` : optionsVar.startsWith('props.') ? '' : `getOptionValue={(option: ${f.optionsPlaceholder}Option) => String(option.value)}`}
-            ${f.labelField ? `getOptionLabel={(option${vType}) => option.${f.labelField}}` : optionsVar.startsWith('props.') ? '' : `getOptionLabel={(option: ${f.optionsPlaceholder}Option) => option.label}`}
+            ${f.valueField ? `getOptionValue={(option${vType}) => String(option.${f.valueField})}` : optionsVar.startsWith('props.') ? '' : `getOptionValue={(option: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => String(option.value)}`}
+            ${f.labelField ? `getOptionLabel={(option${vType}) => option.${f.labelField}}` : optionsVar.startsWith('props.') ? '' : `getOptionLabel={(option: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => option.label}`}
             ${commonSelectProps}
             ${selectProps}
           />
@@ -534,7 +550,7 @@ class Generator {
       title={${tLabel}}
       name="${f.name}"
       ${f.required ? 'hideRemoveButton={true}' : ''}
-      ${valLabel || (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder) ? `getValueLabel={(value: ${f.optionsPlaceholder}Option) => value?.label}` : '')}
+      ${valLabel || (f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder) ? `getValueLabel={(value: ${f.optionsPlaceholder.replace(/Options$/, 'Option')}) => value?.label}` : '')}
     >
 ${input}    </TableFilterItem>\n`;
 
@@ -621,13 +637,14 @@ ${jsx}    )}\n`
               type = 'string';
             else if (f.component === 'NumberField') type = 'number';
             else if (f.component === 'AwesomeCheckboxField') type = 'boolean';
-            else if (
-              f.optionsPlaceholder &&
-              enumRegistry.has(f.optionsPlaceholder)
-            ) {
-              type = `${f.optionsPlaceholder}Option`;
-              if (f.isMulti) type += '[]';
-            } else if (f.valueType) type = f.valueType;
+                        else if (
+                          f.optionsPlaceholder &&
+                          enumRegistry.has(f.optionsPlaceholder)
+                        ) {
+                          type = f.optionsPlaceholder.replace(/Options$/, 'Option');
+                          if (f.isMulti) type += '[]';
+                        }
+             else if (f.valueType) type = f.valueType;
             return `  ${f.name}: ${f.isMulti && !type.endsWith('[]') ? `${type}[]` : type};`;
           })
           .join('\n');
@@ -733,7 +750,8 @@ ${filters.map(Generator.selector).join('')}    }
         const vTypes = entry.valueType
           ? [entry.valueType]
           : Array.from(new Set(opts.map((o) => typeof o.value)));
-        return `export const ${name}: ${name}Option[] = ${json};\nexport interface ${name}Option { label: string; value: ${vTypes.length === 1 ? vTypes[0] : 'any'}; }\n`;
+        const interfaceName = name.replace(/Options$/, 'Option');
+        return `export const ${name}: ${interfaceName}[] = ${json};\nexport interface ${interfaceName} { label: string; value: ${vTypes.length === 1 ? vTypes[0] : 'any'}; }\n`;
       })
       .join('\n');
   }

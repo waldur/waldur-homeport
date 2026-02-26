@@ -19,7 +19,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const IsFinalizedChoices: IsFinalizedChoicesOption[] = [
+export const IsFinalizedOptions: IsFinalizedOption[] = [
   {
     label: translate('Pending'),
     value: false,
@@ -29,7 +29,7 @@ export const IsFinalizedChoices: IsFinalizedChoicesOption[] = [
     value: true,
   },
 ];
-export interface IsFinalizedChoicesOption {
+export interface IsFinalizedOption {
   label: string;
   value: boolean;
 }
@@ -62,20 +62,18 @@ const PureAdminArrowConsumptionRecordsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Status')}
       name="is_finalized"
-      getValueLabel={(value: IsFinalizedChoicesOption) => value?.label}
+      getValueLabel={(value: IsFinalizedOption) => value?.label}
     >
       <Field
         name="is_finalized"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Status')}
-            options={IsFinalizedChoices}
+            options={IsFinalizedOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: IsFinalizedChoicesOption) =>
-              String(option.value)
-            }
-            getOptionLabel={(option: IsFinalizedChoicesOption) => option.label}
+            getOptionValue={(option: IsFinalizedOption) => String(option.value)}
+            getOptionLabel={(option: IsFinalizedOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -90,7 +88,7 @@ export const AdminArrowConsumptionRecordsFilterFormId =
 
 interface AdminArrowConsumptionRecordsFilterFormData {
   organization: Customer;
-  is_finalized: IsFinalizedChoicesOption;
+  is_finalized: IsFinalizedOption;
 }
 
 export const AdminArrowConsumptionRecordsFilter = reduxForm<

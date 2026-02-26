@@ -17,8 +17,7 @@ export type RowData<Fetcher extends SdkFunction> = Awaited<
 /**
  * Extracts the valid params for the 'query' parameter of a fetcher function.
  */
-export type QueryParams<Fetcher extends SdkFunction> =
-  Parameters<Fetcher>[0]['query'];
+type QueryParams<Fetcher extends SdkFunction> = Parameters<Fetcher>[0]['query'];
 
 /**
  * Base props for any component that displays an asynchronous, searchable list.

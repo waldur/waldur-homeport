@@ -4,14 +4,16 @@ import { FunctionComponent } from 'react';
 import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
-  CallRound,
   Customer,
   ProposalProposalsListData,
   ProposalStates,
+  ProtectedRound,
   PublicCall,
-  callRoundsList,
+  User,
   customersList,
+  proposalProtectedCallsRoundsList,
   proposalPublicCallsList,
+  usersList,
 } from 'waldur-js-client';
 
 import {
@@ -24,7 +26,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const ProposalStatesChoices: ProposalStatesChoicesOption[] = [
+export const ProposalStatesOptions: ProposalStatesOption[] = [
   {
     label: translate('Accepted'),
     value: 'accepted',
@@ -50,17 +52,19 @@ export const ProposalStatesChoices: ProposalStatesChoicesOption[] = [
     value: 'submitted',
   },
 ];
-export interface ProposalStatesChoicesOption {
+export interface ProposalStatesOption {
   label: string;
   value: ProposalStates;
 }
 
-const PureProposalProposalsFilter: FunctionComponent<{}> = () => (
+const PureProposalProposalsFilter: FunctionComponent<
+  ProposalProposalsFilterProps
+> = (props) => (
   <>
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: ProposalStatesChoicesOption[]) =>
+      getValueLabel={(value: ProposalStatesOption[]) =>
         value?.map((v) => v?.label).join(', ')
       }
     >
@@ -69,15 +73,13 @@ const PureProposalProposalsFilter: FunctionComponent<{}> = () => (
         component={(fieldProps) => (
           <Select
             placeholder={translate('State')}
-            options={ProposalStatesChoices}
+            options={ProposalStatesOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: ProposalStatesChoicesOption) =>
+            getOptionValue={(option: ProposalStatesOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: ProposalStatesChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: ProposalStatesOption) => option.label}
             isClearable={true}
             isMulti={true}
             {...REACT_SELECT_TABLE_FILTER}
@@ -111,17 +113,26 @@ const PureProposalProposalsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Round')}
       name="round"
-      getValueLabel={(value: CallRound) => value?.slug}
+      getValueLabel={(value: ProtectedRound) => value?.name}
     >
       <Field
         name="round"
         component={(fieldProps) => (
           <AsyncPaginate
             placeholder={translate('Round')}
-            loadOptions={createSelectFetcher(callRoundsList, null as any)}
+            loadOptions={createSelectFetcher(
+              proposalProtectedCallsRoundsList,
+              null as any,
+              {},
+              { uuid: props.callUuid },
+            )}
             defaultOptions
-            getOptionValue={(option: CallRound) => String(option.uuid || '')}
-            getOptionLabel={(option: CallRound) => String(option.slug || '')}
+            getOptionValue={(option: ProtectedRound) =>
+              String(option.uuid || '')
+            }
+            getOptionLabel={(option: ProtectedRound) =>
+              String(option.name || '')
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -154,31 +165,56 @@ const PureProposalProposalsFilter: FunctionComponent<{}> = () => (
         )}
       />
     </TableFilterItem>
+    <TableFilterItem
+      title={translate('Applicant')}
+      name="applicant"
+      getValueLabel={(value: User) =>
+        value?.full_name || value?.username || value?.email
+      }
+    >
+      <Field
+        name="applicant"
+        component={(fieldProps) => (
+          <AsyncPaginate
+            placeholder={translate('Applicant')}
+            loadOptions={createSelectFetcher(usersList, 'query')}
+            defaultOptions
+            getOptionValue={(option: User) => String(option.uuid || '')}
+            getOptionLabel={(option: User) =>
+              String(option.full_name || option.username || option.email || '')
+            }
+            value={fieldProps.input.value}
+            onChange={(value) => fieldProps.input.onChange(value)}
+            isClearable={true}
+            {...REACT_SELECT_TABLE_FILTER}
+            className="metronic-select-container"
+          />
+        )}
+      />
+    </TableFilterItem>
   </>
 );
 
 export const ProposalProposalsFilterFormId = 'ProposalProposalsFilter';
 
+interface ProposalProposalsFilterProps {
+  callUuid?: any;
+}
+
 interface ProposalProposalsFilterFormData {
-  state: ProposalStatesChoicesOption[];
+  state: ProposalStatesOption[];
   call: PublicCall;
-  round: CallRound;
+  round: ProtectedRound;
   organization: Customer;
+  applicant: User;
 }
 
 export const ProposalProposalsFilter = reduxForm<
   ProposalProposalsFilterFormData,
-  {}
+  ProposalProposalsFilterProps
 >({
   form: ProposalProposalsFilterFormId,
   destroyOnUnmount: false,
-  initialValues: {
-    state: [
-      { label: translate('Submitted'), value: 'submitted' },
-      { label: translate('Accepted'), value: 'accepted' },
-      { label: translate('In review'), value: 'in_review' },
-    ],
-  },
 })(PureProposalProposalsFilter);
 
 type ProposalProposalsFilterQuery = ProposalProposalsListData['query'];
@@ -201,6 +237,9 @@ export const selectProposalProposalsFilter = createSelector<
     }
     if (values.organization) {
       filter.organization_uuid = values.organization.uuid;
+    }
+    if (values.applicant) {
+      filter.created_by_uuid = values.applicant.uuid;
     }
   }
   return filter;

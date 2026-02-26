@@ -13,7 +13,7 @@ import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const OfferingStateChoices: OfferingStateChoicesOption[] = [
+export const OfferingStateOptions: OfferingStateOption[] = [
   {
     label: translate('Active'),
     value: 'Active',
@@ -35,7 +35,7 @@ export const OfferingStateChoices: OfferingStateChoicesOption[] = [
     value: 'Unavailable',
   },
 ];
-export interface OfferingStateChoicesOption {
+export interface OfferingStateOption {
   label: string;
   value: OfferingState;
 }
@@ -44,7 +44,7 @@ const PureMarketplaceProviderOfferingsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
-    getValueLabel={(value: OfferingStateChoicesOption[]) =>
+    getValueLabel={(value: OfferingStateOption[]) =>
       value?.map((v) => v?.label).join(', ')
     }
   >
@@ -53,13 +53,11 @@ const PureMarketplaceProviderOfferingsFilter: FunctionComponent<{}> = () => (
       component={(fieldProps) => (
         <Select
           placeholder={translate('State')}
-          options={OfferingStateChoices}
+          options={OfferingStateOptions}
           value={fieldProps.input.value}
           onChange={(value) => fieldProps.input.onChange(value)}
-          getOptionValue={(option: OfferingStateChoicesOption) =>
-            String(option.value)
-          }
-          getOptionLabel={(option: OfferingStateChoicesOption) => option.label}
+          getOptionValue={(option: OfferingStateOption) => String(option.value)}
+          getOptionLabel={(option: OfferingStateOption) => option.label}
           isClearable={true}
           isMulti={true}
           {...REACT_SELECT_TABLE_FILTER}
@@ -73,7 +71,7 @@ export const MarketplaceProviderOfferingsFilterFormId =
   'MarketplaceProviderOfferingsFilter';
 
 interface MarketplaceProviderOfferingsFilterFormData {
-  state: OfferingStateChoicesOption[];
+  state: OfferingStateOption[];
 }
 
 export const MarketplaceProviderOfferingsFilter = reduxForm<

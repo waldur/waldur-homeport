@@ -21,7 +21,7 @@ import { RootState } from '@waldur/store/reducers';
 import { createSelectFetcher } from '@waldur/table/api';
 import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-export const AccessorTypeEnumChoices: AccessorTypeEnumChoicesOption[] = [
+export const AccessorTypeOptions: AccessorTypeOption[] = [
   {
     label: translate('Organization member'),
     value: 'organization_member',
@@ -43,7 +43,7 @@ export const AccessorTypeEnumChoices: AccessorTypeEnumChoicesOption[] = [
     value: 'support',
   },
 ];
-export interface AccessorTypeEnumChoicesOption {
+export interface AccessorTypeOption {
   label: string;
   value: AccessorTypeEnum;
 }
@@ -67,22 +67,20 @@ const PureDataAccessLogsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Accessor type')}
       name="accessor_type"
-      getValueLabel={(value: AccessorTypeEnumChoicesOption) => value?.label}
+      getValueLabel={(value: AccessorTypeOption) => value?.label}
     >
       <Field
         name="accessor_type"
         component={(fieldProps) => (
           <Select
             placeholder={translate('Accessor type')}
-            options={AccessorTypeEnumChoices}
+            options={AccessorTypeOptions}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
-            getOptionValue={(option: AccessorTypeEnumChoicesOption) =>
+            getOptionValue={(option: AccessorTypeOption) =>
               String(option.value)
             }
-            getOptionLabel={(option: AccessorTypeEnumChoicesOption) =>
-              option.label
-            }
+            getOptionLabel={(option: AccessorTypeOption) => option.label}
             isClearable={true}
             {...REACT_SELECT_TABLE_FILTER}
           />
@@ -92,7 +90,9 @@ const PureDataAccessLogsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('User')}
       name="user"
-      getValueLabel={(value: User) => value?.full_name}
+      getValueLabel={(value: User) =>
+        value?.full_name || value?.username || value?.email
+      }
     >
       <Field
         name="user"
@@ -104,7 +104,9 @@ const PureDataAccessLogsFilter: FunctionComponent<{}> = () => (
             })}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) => String(option.full_name || '')}
+            getOptionLabel={(option: User) =>
+              String(option.full_name || option.username || option.email || '')
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}
@@ -122,7 +124,7 @@ export const DataAccessLogsFilterFormId = 'DataAccessLogsFilter';
 interface DataAccessLogsFilterFormData {
   start_date: string;
   end_date: string;
-  accessor_type: AccessorTypeEnumChoicesOption;
+  accessor_type: AccessorTypeOption;
   user: User;
 }
 

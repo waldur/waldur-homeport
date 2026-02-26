@@ -4,15 +4,14 @@ import { userActionsList, UserAction } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
+import {
+  UserPendingActionsFilter,
+  selectUserPendingActionsFilter,
+} from '@waldur/table/generated/UserPendingActionsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { PendingActionAlertItem } from './PendingActionAlertItem';
-import {
-  PendingActionsFilterForm,
-  mapStateToFilter,
-  USER_PENDING_ACTIONS_FILTER_FORM_ID,
-} from './PendingActionsFilter';
 import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';
 import { OwnProps } from './types';
 
@@ -53,9 +52,7 @@ const createSortedFetcher = (baseFetcher: ReturnType<typeof createFetcher>) => {
 };
 
 export const UserPendingActionsList: FC<OwnProps> = () => {
-  const filter = useSelector((state) =>
-    mapStateToFilter(state, USER_PENDING_ACTIONS_FILTER_FORM_ID),
-  );
+  const filter = useSelector(selectUserPendingActionsFilter);
 
   const fetchData = useMemo(
     () => createSortedFetcher(createFetcher(userActionsList)),
@@ -91,7 +88,7 @@ export const UserPendingActionsList: FC<OwnProps> = () => {
       bodyClassName="pt-0"
       minHeight="auto"
       tableActions={<RecalculateUserActionsButton refetch={tableProps.fetch} />}
-      filters={<PendingActionsFilterForm />}
+      filters={<UserPendingActionsFilter />}
       hasQuery={true}
     />
   );

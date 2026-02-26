@@ -6,13 +6,13 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
-import { StatusChoices } from '@waldur/table/generated/SupportIssuesFilter';
+import { StatusOptions } from '@waldur/table/generated/SupportIssuesFilter';
 
 const getIssueState = (states: string[]) => ({
   state: 'support-list',
   params: {
     status: JSON.stringify(
-      states.map((state) => StatusChoices.find((op) => op.value === state)),
+      states.map((state) => StatusOptions.find((op) => op.value === state)),
     ),
   },
 });

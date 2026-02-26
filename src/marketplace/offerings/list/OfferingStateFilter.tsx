@@ -4,8 +4,8 @@ import { Field } from 'redux-form';
 import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import {
-  OfferingStateChoices,
-  OfferingStateChoicesOption,
+  OfferingStateOptions,
+  OfferingStateOption,
 } from '@waldur/table/generated/MarketplaceProviderOfferingsFilter';
 import './OfferingsStateFilter.scss';
 
@@ -23,13 +23,11 @@ export const OfferingStateFilter: FunctionComponent = () => (
     component={(fieldProps) => (
       <Select
         placeholder={translate('State')}
-        options={OfferingStateChoices}
+        options={OfferingStateOptions}
         value={fieldProps.input.value}
         onChange={(value) => fieldProps.input.onChange(value)}
-        getOptionValue={(option: OfferingStateChoicesOption) =>
-          String(option.value)
-        }
-        getOptionLabel={(option: OfferingStateChoicesOption) => option.label}
+        getOptionValue={(option: OfferingStateOption) => String(option.value)}
+        getOptionLabel={(option: OfferingStateOption) => option.label}
         isClearable={true}
         isMulti={true}
         {...REACT_SELECT_TABLE_FILTER}

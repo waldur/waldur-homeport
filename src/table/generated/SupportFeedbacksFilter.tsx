@@ -41,7 +41,9 @@ const PureSupportFeedbacksFilter: FunctionComponent<
     <TableFilterItem
       title={translate('User')}
       name="user"
-      getValueLabel={(value: User) => value?.full_name}
+      getValueLabel={(value: User) =>
+        value?.full_name || value?.username || value?.email
+      }
     >
       <Field
         name="user"
@@ -51,7 +53,9 @@ const PureSupportFeedbacksFilter: FunctionComponent<
             loadOptions={createSelectFetcher(usersList, 'query')}
             defaultOptions
             getOptionValue={(option: User) => String(option.uuid || '')}
-            getOptionLabel={(option: User) => String(option.full_name || '')}
+            getOptionLabel={(option: User) =>
+              String(option.full_name || option.username || option.email || '')
+            }
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             isClearable={true}

@@ -1,22 +1,24 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
-import { getFormValues } from 'redux-form';
 import { Campaign, promotionsCampaignsList } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { CampaignCreateButton } from '@waldur/marketplace/service-providers/CampaignCreateButton';
 import { ProviderCampaignActions } from '@waldur/marketplace/service-providers/ProviderCampaignActions';
-import { ProviderCampaignFilter } from '@waldur/marketplace/service-providers/ProviderCampaignFilter';
 import { ProviderCampaignResourceExpandable } from '@waldur/marketplace/service-providers/ProviderCampaignResourceExpandable';
 import { createFetcher } from '@waldur/table/api';
+import {
+  PromotionsCampaignsFilter,
+  selectPromotionsCampaignsFilter,
+  CampaignStateOptions,
+} from '@waldur/table/generated/PromotionsCampaignsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
 import { CampaignStateIndicator } from './CampaignStateIndicator';
-import { getCampaignStateOptions } from './ProviderCampaignStateFilter';
 
 const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
   provider,
@@ -25,26 +27,14 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
     ({ row }) => <ProviderCampaignResourceExpandable campaign={row} />,
     [],
   );
-  const filterValues: any = useSelector(
-    getFormValues('ProviderCampaignFilter'),
+  const formFilter = useSelector(selectPromotionsCampaignsFilter);
+  const filter = useMemo(
+    () => ({
+      service_provider_uuid: provider?.uuid,
+      ...formFilter,
+    }),
+    [formFilter, provider?.uuid],
   );
-  const filter = useMemo(() => {
-    const filter: Record<string, any> = {};
-    if (provider) {
-      filter.service_provider_uuid = provider.uuid;
-    }
-    if (filterValues) {
-      if (filterValues.state) {
-        filter.state = filterValues.state.map((option) => option.value);
-      }
-      if (filterValues.discount_type) {
-        filter.discount_type = filterValues.discount_type.map(
-          (option) => option.value,
-        );
-      }
-    }
-    return filter;
-  }, [filterValues, provider]);
   const props = useTable({
     table: 'marketplace-provider-campaigns',
     fetchData: createFetcher(promotionsCampaignsList),
@@ -69,7 +59,7 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
           render: CampaignStateIndicator,
           filter: 'state',
           inlineFilter: (row) =>
-            getCampaignStateOptions().filter(
+            CampaignStateOptions.filter(
               (op) => op.value === (row.state ?? '').toLowerCase(),
             ),
         },
@@ -90,7 +80,7 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
       hasQuery={true}
       rowActions={ProviderCampaignActions}
       expandableRow={ExpandableRow}
-      filters={<ProviderCampaignFilter />}
+      filters={<PromotionsCampaignsFilter />}
     />
   );
 };
