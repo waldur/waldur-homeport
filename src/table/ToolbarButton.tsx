@@ -29,7 +29,7 @@ interface ToolbarButtonProps {
 
 /**
  * ToolbarButton - for table/panel toolbar actions.
- * Always renders at large size for visual consistency.
+ * Uses small size to match table header design.
  */
 export const ToolbarButton: FC<ToolbarButtonProps> = ({
   title,
@@ -53,7 +53,7 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
         badge !== undefined && 'position-relative',
         { disabled: disabled || pending },
       )}
-      size="lg"
+      size="sm"
       onClick={onClick}
       disabled={disabled || pending}
     >

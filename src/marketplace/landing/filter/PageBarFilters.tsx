@@ -8,7 +8,7 @@ import { Badge } from '@waldur/core/Badge';
 import { syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
 
 import { setMarketplaceFilter } from './store/actions';
@@ -86,9 +86,9 @@ export const PageBarFilters = () => {
               </Badge>
             </Stack>
           ))}
-          <ActionButton
-            variant="flush"
-            className="btn-active-text-primary btn-no-focus"
+          <CompactActionButton
+            variant="text-secondary"
+            className="btn-no-focus"
             action={clearFilters}
             iconNode={<XIcon weight="bold" />}
             title={translate('Clear filters')}
