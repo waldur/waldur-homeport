@@ -107,69 +107,72 @@ export function TableToolbarActions() {
         </Col>
       )}
 
-      {/* Table Query + Filter Button */}
-      {config.hasQuery && (
+      {/* Right side: search, filters and table actions */}
+      {(config.hasQuery || showActionsColumn) && (
         <Col
           xs
           className={classNames(
-            'order-2 order-sm-2 d-flex align-items-center gap-2',
-            showTitle && 'ms-auto',
+            'order-2 order-sm-2 d-flex align-items-center flex-wrap flex-sm-nowrap text-nowrap gap-4',
+            showTitle
+              ? 'ms-auto justify-content-end'
+              : 'justify-content-between',
           )}
         >
-          <div className="mw-lg-325px flex-grow-1">
-            <TableQuery query={query} setQuery={actions.setQuery} />
-          </div>
-          {/* Filter button next to search (only on larger screens) */}
-          {showFilterButtonNextToSearch && (
-            <TableFilterButton
-              onClick={onClickFilterButton}
-              hasFilter={!!filtersStorage?.length}
-              filterCount={filtersStorage?.length || 0}
-            />
+          {config.hasQuery && (
+            <div className="d-flex align-items-center gap-4">
+              <div className="table-toolbar-search">
+                <TableQuery query={query} setQuery={actions.setQuery} />
+              </div>
+              {/* Filter button next to search (only on larger screens) */}
+              {showFilterButtonNextToSearch && (
+                <TableFilterButton
+                  onClick={onClickFilterButton}
+                  hasFilter={!!filtersStorage?.length}
+                  filterCount={filtersStorage?.length || 0}
+                />
+              )}
+            </div>
+          )}
+
+          {showActionsColumn && (
+            <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4">
+              <TableButtons
+                table={config.table}
+                rows={rows}
+                columns={columns}
+                activeColumns={activeColumns}
+                columnPositions={columnPositions}
+                toggleColumn={actions.toggleColumn}
+                swapColumns={actions.swapColumns}
+                hasOptionalColumns={config.hasOptionalColumns}
+                enableExport={config.enableExport}
+                showExportInDropdown={config.showExportInDropdown}
+                gridItem={slots.gridItem}
+                mode={mode}
+                setDisplayMode={actions.setDisplayMode}
+                filter={filter}
+                filters={slots.filters}
+                filterPosition={filterPosition}
+                filtersStorage={filtersStorage}
+                setFilter={actions.setFilter}
+                applyFiltersFn={actions.applyFiltersFn}
+                renderFiltersDrawer={actions.renderFiltersDrawer}
+                openFiltersDrawer={actions.openFiltersDrawer}
+                showFilterMenuToggle={showFilterMenuToggle}
+                toggleFilterMenu={actions.toggleFilterMenu}
+                tableActions={slots.tableActions}
+                dropdownActions={slots.dropdownActions}
+                enableMultiSelect={config.enableMultiSelect}
+                multiSelectActions={slots.multiSelectActions}
+                fetch={actions.fetch}
+                standalone={config.standalone}
+                standaloneActionsInTable={config.standaloneActionsInTable}
+                renderFilterButton={isSm}
+              />
+            </div>
           )}
         </Col>
       )}
-
-      {/* Remaining table action buttons */}
-      <Col sm="auto" className="order-3 order-sm-3 ms-auto">
-        {showActionsColumn && (
-          <div className="d-flex justify-content-sm-end flex-wrap flex-sm-nowrap text-nowrap gap-4">
-            <TableButtons
-              table={config.table}
-              rows={rows}
-              columns={columns}
-              activeColumns={activeColumns}
-              columnPositions={columnPositions}
-              toggleColumn={actions.toggleColumn}
-              swapColumns={actions.swapColumns}
-              hasOptionalColumns={config.hasOptionalColumns}
-              enableExport={config.enableExport}
-              showExportInDropdown={config.showExportInDropdown}
-              gridItem={slots.gridItem}
-              mode={mode}
-              setDisplayMode={actions.setDisplayMode}
-              filter={filter}
-              filters={slots.filters}
-              filterPosition={filterPosition}
-              filtersStorage={filtersStorage}
-              setFilter={actions.setFilter}
-              applyFiltersFn={actions.applyFiltersFn}
-              renderFiltersDrawer={actions.renderFiltersDrawer}
-              openFiltersDrawer={actions.openFiltersDrawer}
-              showFilterMenuToggle={showFilterMenuToggle}
-              toggleFilterMenu={actions.toggleFilterMenu}
-              tableActions={slots.tableActions}
-              dropdownActions={slots.dropdownActions}
-              enableMultiSelect={config.enableMultiSelect}
-              multiSelectActions={slots.multiSelectActions}
-              fetch={actions.fetch}
-              standalone={config.standalone}
-              standaloneActionsInTable={config.standaloneActionsInTable}
-              renderFilterButton={isSm}
-            />
-          </div>
-        )}
-      </Col>
     </>
   );
 }
