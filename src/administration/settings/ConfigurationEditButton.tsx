@@ -18,7 +18,7 @@ export const ConfigurationEditButton = ({ item, value }) => {
       dispatch(
         openModalDialog(ConfigurationEditDialog, {
           resolve: { item, initialValues: { value } },
-          size: item.key === 'LOGIN_PAGE_LAYOUT' ? 'lg' : 'md',
+          size: 'md',
         }),
       ),
     [dispatch],
