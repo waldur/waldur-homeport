@@ -38,8 +38,8 @@ const PureUserPermissionRequestsFilter: FunctionComponent<{}> = () => (
     title={translate('State')}
     name="state"
     getValueLabel={(
-      value: UserPermissionRequestsRemoteProjectUpdateRequestStateOption[],
-    ) => value?.map((v) => v?.label).join(', ')}
+      value: UserPermissionRequestsRemoteProjectUpdateRequestStateOption,
+    ) => value?.label}
   >
     <Field
       name="state"
