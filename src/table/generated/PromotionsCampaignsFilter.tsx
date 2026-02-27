@@ -5,7 +5,6 @@ import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
   CampaignStateEnum,
-  DiscountTypeEnum,
   PromotionsCampaignsListData,
 } from 'waldur-js-client';
 
@@ -45,7 +44,7 @@ export const DiscountTypeOptions: DiscountTypeOption[] = [
 ];
 export interface DiscountTypeOption {
   label: string;
-  value: DiscountTypeEnum;
+  value: string;
 }
 
 const PurePromotionsCampaignsFilter: FunctionComponent<{}> = () => (
