@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import {
-  reviewerProfilesAffiliationsList,
-  ReviewerProfilesAffiliationsListData,
   ReviewerAffiliation,
+  nestedReviewerProfileAffiliationsList,
+  NestedReviewerProfileAffiliationsListData,
 } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
@@ -45,16 +45,16 @@ export const AffiliationsSection = ({
   refetch?: () => void;
 }) => {
   const filter = useMemo(
-    (): ReviewerProfilesAffiliationsListData['query'] => ({}),
+    (): NestedReviewerProfileAffiliationsListData['query'] => ({}),
     [],
   );
 
   const tableProps = useTable({
     table: 'reviewerAffiliationsList',
     fetchData: createFetcher((...args) =>
-      reviewerProfilesAffiliationsList({
+      nestedReviewerProfileAffiliationsList({
         ...args[0],
-        path: { uuid: profile.uuid },
+        path: { reviewer_profile_uuid: profile.uuid },
       }),
     ),
     filter,

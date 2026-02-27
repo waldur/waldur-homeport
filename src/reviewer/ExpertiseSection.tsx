@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import {
-  reviewerProfilesExpertiseList,
-  ReviewerProfilesExpertiseListData,
   ReviewerExpertise,
+  nestedReviewerProfileExpertiseList,
+  NestedReviewerProfileExpertiseListData,
 } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
@@ -40,16 +40,16 @@ export const ExpertiseSection = ({
   refetch?: () => void;
 }) => {
   const filter = useMemo(
-    (): ReviewerProfilesExpertiseListData['query'] => ({}),
+    (): NestedReviewerProfileExpertiseListData['query'] => ({}),
     [],
   );
 
   const tableProps = useTable({
     table: 'reviewerExpertiseList',
     fetchData: createFetcher((...args) =>
-      reviewerProfilesExpertiseList({
+      nestedReviewerProfileExpertiseList({
         ...args[0],
-        path: { uuid: profile.uuid },
+        path: { reviewer_profile_uuid: profile.uuid },
       }),
     ),
     filter,
