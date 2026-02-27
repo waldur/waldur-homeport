@@ -1,9 +1,9 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
 import {
-  reviewerProfilesExpertiseCreate,
   ReviewerExpertiseRequest,
   ProficiencyLevelEnum,
+  nestedReviewerProfileExpertiseCreate,
 } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
@@ -50,8 +50,8 @@ export const ExpertiseFormDialog = ({ resolve }: ExpertiseFormDialogProps) => {
         years_experience: formValues.years_experience || null,
       };
 
-      await reviewerProfilesExpertiseCreate({
-        path: { uuid: resolve.profile.uuid },
+      await nestedReviewerProfileExpertiseCreate({
+        path: { reviewer_profile_uuid: resolve.profile.uuid },
         body,
       });
 

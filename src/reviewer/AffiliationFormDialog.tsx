@@ -3,9 +3,9 @@ import { FormCheck } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import {
   nestedReviewerProfileAffiliationsPartialUpdate,
-  reviewerProfilesAffiliationsCreate,
   ReviewerAffiliationRequest,
   AffiliationTypeEnum,
+  nestedReviewerProfileAffiliationsCreate,
 } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
@@ -90,8 +90,8 @@ export const AffiliationFormDialog = ({
         showSuccess(translate('Affiliation has been updated.'));
       } else {
         // Create new affiliation
-        await reviewerProfilesAffiliationsCreate({
-          path: { uuid: resolve.profile.uuid },
+        await nestedReviewerProfileAffiliationsCreate({
+          path: { reviewer_profile_uuid: resolve.profile.uuid },
           body,
         });
         showSuccess(translate('Affiliation has been added.'));

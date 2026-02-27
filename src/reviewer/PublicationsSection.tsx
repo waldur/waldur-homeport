@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import {
-  reviewerProfilesPublicationsList,
-  ReviewerProfilesPublicationsListData,
+  nestedReviewerProfilePublicationsList,
+  NestedReviewerProfilePublicationsListData,
   ReviewerPublication,
 } from 'waldur-js-client';
 
@@ -37,16 +37,16 @@ export const PublicationsSection = ({
   refetch?: () => void;
 }) => {
   const filter = useMemo(
-    (): ReviewerProfilesPublicationsListData['query'] => ({}),
+    (): NestedReviewerProfilePublicationsListData['query'] => ({}),
     [],
   );
 
   const tableProps = useTable({
     table: 'reviewerPublicationsList',
     fetchData: createFetcher((...args) =>
-      reviewerProfilesPublicationsList({
+      nestedReviewerProfilePublicationsList({
         ...args[0],
-        path: { uuid: profile.uuid },
+        path: { reviewer_profile_uuid: profile.uuid },
       }),
     ),
     filter,

@@ -1,8 +1,8 @@
 import { PencilSimple, PlusCircle } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
 import {
+  nestedReviewerProfilePublicationsCreate,
   nestedReviewerProfilePublicationsPartialUpdate,
-  reviewerProfilesPublicationsCreate,
 } from 'waldur-js-client';
 
 import { required } from '@waldur/core/validators';
@@ -68,8 +68,8 @@ export const PublicationFormDialog = ({
         });
         showSuccess(translate('Publication has been updated.'));
       } else {
-        await reviewerProfilesPublicationsCreate({
-          path: { uuid: resolve.profile.uuid },
+        await nestedReviewerProfilePublicationsCreate({
+          path: { reviewer_profile_uuid: resolve.profile.uuid },
           body,
         });
         showSuccess(translate('Publication has been added.'));
