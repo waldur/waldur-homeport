@@ -64,9 +64,7 @@ const PureProposalProposalsFilter: FunctionComponent<
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: ProposalStatesOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: ProposalStatesOption) => value?.label}
     >
       <Field
         name="state"

@@ -44,9 +44,7 @@ const PureMarketplaceProviderOfferingsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
-    getValueLabel={(value: OfferingStateOption[]) =>
-      value?.map((v) => v?.label).join(', ')
-    }
+    getValueLabel={(value: OfferingStateOption) => value?.label}
   >
     <Field
       name="state"

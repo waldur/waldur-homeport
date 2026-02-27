@@ -118,9 +118,7 @@ const PureEventsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Type')}
       name="feature"
-      getValueLabel={(value: FeatureOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: FeatureOption) => value?.label}
     >
       <Field
         name="feature"

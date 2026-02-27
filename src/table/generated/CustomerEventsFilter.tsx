@@ -33,9 +33,7 @@ const PureCustomerEventsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Type')}
     name="feature"
-    getValueLabel={(value: CustomerEventsFeatureOption[]) =>
-      value?.map((v) => v?.label).join(', ')
-    }
+    getValueLabel={(value: CustomerEventsFeatureOption) => value?.label}
   >
     <Field
       name="feature"

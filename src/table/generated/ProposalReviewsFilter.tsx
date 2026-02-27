@@ -54,9 +54,7 @@ const PureProposalReviewsFilter: FunctionComponent<
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: ProposalReviewStateOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: ProposalReviewStateOption) => value?.label}
     >
       <Field
         name="state"

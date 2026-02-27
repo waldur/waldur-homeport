@@ -54,8 +54,8 @@ const PureMarketplaceProjectUpdateRequestsFilter: FunctionComponent<{}> =
       <TableFilterItem
         title={translate('State')}
         name="state"
-        getValueLabel={(value: RemoteProjectUpdateRequestStateOption[]) =>
-          value?.map((v) => v?.label).join(', ')
+        getValueLabel={(value: RemoteProjectUpdateRequestStateOption) =>
+          value?.label
         }
       >
         <Field

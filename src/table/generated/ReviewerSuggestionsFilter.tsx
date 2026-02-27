@@ -41,9 +41,7 @@ const PureReviewerSuggestionsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="status"
-    getValueLabel={(value: ReviewerSuggestionStatusOption[]) =>
-      value?.map((v) => v?.label).join(', ')
-    }
+    getValueLabel={(value: ReviewerSuggestionStatusOption) => value?.label}
   >
     <Field
       name="status"

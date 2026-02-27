@@ -24,9 +24,7 @@ const PureProjectResourcesFilter: FunctionComponent<
   <TableFilterItem
     title={translate('Offering')}
     name="offering"
-    getValueLabel={(value: PublicOfferingDetails[]) =>
-      value?.map((v) => v?.name).join(', ')
-    }
+    getValueLabel={(value: PublicOfferingDetails) => value?.name}
   >
     <Field
       name="offering"

@@ -35,9 +35,7 @@ const PureProposalPublicCallsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: CallStatesOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: CallStatesOption) => value?.label}
     >
       <Field
         name="state"

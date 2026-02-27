@@ -97,9 +97,7 @@ const PureUserInvitationsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: InvitationStateOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: InvitationStateOption) => value?.label}
     >
       <Field
         name="state"

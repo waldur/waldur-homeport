@@ -451,7 +451,7 @@ class Generator {
         f.optionsPlaceholder && enumRegistry?.has(f.optionsPlaceholder)
           ? f.optionsPlaceholder.replace(/Options$/, 'Option')
           : f.valueType || 'any';
-      valLabel = `getValueLabel={(value: ${argType}${f.isMulti ? '[]' : ''}) => ${f.isMulti ? `value?.map((v) => v${access}).join(', ')` : `value${access}`}}`;
+      valLabel = `getValueLabel={(value: ${argType}) => value${access}}`;
     }
 
     const validation = f.required ? 'validate={[required]}' : '';

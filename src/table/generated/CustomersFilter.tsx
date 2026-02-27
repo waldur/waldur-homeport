@@ -103,9 +103,7 @@ const PureCustomersFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Organization group')}
       name="organization_group"
-      getValueLabel={(value: OrganizationGroup[]) =>
-        value?.map((v) => v?.name).join(', ')
-      }
+      getValueLabel={(value: OrganizationGroup) => value?.name}
     >
       <Field
         name="organization_group"

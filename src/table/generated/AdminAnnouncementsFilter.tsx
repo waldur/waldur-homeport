@@ -52,9 +52,7 @@ const PureAdminAnnouncementsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Type')}
       name="type"
-      getValueLabel={(value: AdminAnnouncementTypeOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: AdminAnnouncementTypeOption) => value?.label}
     >
       <Field
         name="type"

@@ -94,9 +94,7 @@ const PureProposalRequestedOfferingsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('Status')}
       name="state"
-      getValueLabel={(value: RequestedOfferingStatesOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: RequestedOfferingStatesOption) => value?.label}
     >
       <Field
         name="state"

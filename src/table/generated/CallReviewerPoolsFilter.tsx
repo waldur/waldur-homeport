@@ -40,9 +40,7 @@ const PureCallReviewerPoolsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('Status')}
     name="invitation_status"
-    getValueLabel={(value: InvitationStatusOption[]) =>
-      value?.map((v) => v?.label).join(', ')
-    }
+    getValueLabel={(value: InvitationStatusOption) => value?.label}
   >
     <Field
       name="invitation_status"

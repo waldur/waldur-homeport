@@ -41,9 +41,7 @@ const PureInvoicesFilter: FunctionComponent<{}> = () => (
   <TableFilterItem
     title={translate('State')}
     name="state"
-    getValueLabel={(value: InvoiceStateOption[]) =>
-      value?.map((v) => v?.label).join(', ')
-    }
+    getValueLabel={(value: InvoiceStateOption) => value?.label}
   >
     <Field
       name="state"

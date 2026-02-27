@@ -17,9 +17,7 @@ const PureCustomersUsersFilter: FunctionComponent<CustomersUsersFilterProps> = (
     <TableFilterItem
       title={translate('Project role')}
       name="project_role"
-      getValueLabel={(value: any[]) =>
-        value?.map((v) => v?.description).join(', ')
-      }
+      getValueLabel={(value: any) => value?.description}
     >
       <Field
         name="project_role"
@@ -41,9 +39,7 @@ const PureCustomersUsersFilter: FunctionComponent<CustomersUsersFilterProps> = (
     <TableFilterItem
       title={translate('Organization role')}
       name="organization_role"
-      getValueLabel={(value: any[]) =>
-        value?.map((v) => v?.description).join(', ')
-      }
+      getValueLabel={(value: any) => value?.description}
     >
       <Field
         name="organization_role"

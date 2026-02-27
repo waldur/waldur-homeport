@@ -53,9 +53,7 @@ const PurePromotionsCampaignsFilter: FunctionComponent<{}> = () => (
     <TableFilterItem
       title={translate('State')}
       name="state"
-      getValueLabel={(value: CampaignStateOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: CampaignStateOption) => value?.label}
     >
       <Field
         name="state"

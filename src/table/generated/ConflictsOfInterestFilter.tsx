@@ -207,9 +207,7 @@ const PureConflictsOfInterestFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Status')}
       name="status"
-      getValueLabel={(value: ConflictOfInterestStatusOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: ConflictOfInterestStatusOption) => value?.label}
     >
       <Field
         name="status"
@@ -258,9 +256,7 @@ const PureConflictsOfInterestFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Type')}
       name="coi_type"
-      getValueLabel={(value: CoiTypeOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: CoiTypeOption) => value?.label}
     >
       <Field
         name="coi_type"
@@ -282,9 +278,7 @@ const PureConflictsOfInterestFilter: FunctionComponent<
     <TableFilterItem
       title={translate('Detection')}
       name="detection_method"
-      getValueLabel={(value: DetectionMethodOption[]) =>
-        value?.map((v) => v?.label).join(', ')
-      }
+      getValueLabel={(value: DetectionMethodOption) => value?.label}
     >
       <Field
         name="detection_method"
