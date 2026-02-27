@@ -3,6 +3,7 @@ import { FormControl } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
+import { VisualLayoutSelector } from '@waldur/auth/VisualLayoutSelector';
 import { formDataOptions } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { WarnCard } from '@waldur/core/WarnCard';
@@ -55,6 +56,10 @@ const ColorField = (props) => (
     ))}
     <FormControl value={props.input.value} onChange={props.input.onChange} />
   </div>
+);
+
+const VisualLayoutSelectorField = ({ input }) => (
+  <VisualLayoutSelector value={input.value} onChange={input.onChange} />
 );
 
 interface ConfigurationEditDialogProps {
@@ -139,7 +144,9 @@ export const ConfigurationEditDialog: FC<ConfigurationEditDialogProps> = ({
               label={item.type !== 'boolean' && item.description}
               spaceless
             >
-              {item.type === 'html_field' ? (
+              {item.key === 'LOGIN_PAGE_LAYOUT' ? (
+                <Field component={VisualLayoutSelectorField} name="value" />
+              ) : item.type === 'html_field' ? (
                 <Field
                   component={MonacoField as any}
                   name="value"
