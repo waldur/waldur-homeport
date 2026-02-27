@@ -609,6 +609,21 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-ssh-keys-settings',
+    url: 'ssh-keys-settings/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./ssh-keys/AdministrationSshKeys').then((module) => ({
+        default: module.AdministrationSshKeys,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('SSH key settings'),
+      feature: UserFeatures.ssh_keys,
+    },
+  },
+
+  {
     name: 'admin-call-management-settings',
     url: 'call-management-settings/?tab&q',
     parent: 'admin-configuration',

@@ -113,6 +113,8 @@ interface CoreConfiguration {
   ENABLED_USER_PROFILE_ATTRIBUTES: string[];
   MANDATORY_USER_ATTRIBUTES?: string[];
   ENFORCE_MANDATORY_USER_ATTRIBUTES?: boolean;
+  SSH_KEY_ALLOWED_TYPES: string[];
+  SSH_KEY_MIN_RSA_KEY_SIZE: number;
 }
 
 interface OpenStackConfiguration {

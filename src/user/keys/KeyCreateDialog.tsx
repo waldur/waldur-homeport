@@ -1,8 +1,12 @@
-import React from 'react';
+import { InfoIcon } from '@phosphor-icons/react';
+import React, { useMemo } from 'react';
+import { Card } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { keysCreate, SshKeyRequest } from 'waldur-js-client';
 
+import { ENV } from '@waldur/core/config';
+import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { required } from '@waldur/core/validators';
 import { StringField } from '@waldur/form/StringField';
 import { SubmitButton } from '@waldur/form/SubmitButton';
@@ -29,6 +33,47 @@ const extractNameFromKey = (publicKey: string) => {
 interface KeyCreateDialogProps {
   refetch?: () => void;
 }
+
+const SshKeyRestrictionsBanner = () => {
+  const allowedTypes = ENV.plugins.WALDUR_CORE.SSH_KEY_ALLOWED_TYPES || [];
+  const minRsaKeySize = ENV.plugins.WALDUR_CORE.SSH_KEY_MIN_RSA_KEY_SIZE || 0;
+
+  const showMinRsa = useMemo(
+    () =>
+      minRsaKeySize > 0 &&
+      (allowedTypes.length === 0 || allowedTypes.includes('ssh-rsa')),
+    [allowedTypes, minRsaKeySize],
+  );
+
+  if (allowedTypes.length === 0 && minRsaKeySize <= 0) {
+    return null;
+  }
+
+  return (
+    <Card className="card-bordered bg-light-info mb-4">
+      <Card.Body className="d-flex align-items-center gap-3 p-4">
+        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
+        <FeaturedIcon IconComponent={InfoIcon} variant="info" />
+        <div>
+          {allowedTypes.length > 0 && (
+            <div>
+              {translate('Allowed key types: {types}', {
+                types: allowedTypes.join(', '),
+              })}
+            </div>
+          )}
+          {showMinRsa && (
+            <div>
+              {translate('Minimum RSA key size: {size} bits', {
+                size: minRsaKeySize,
+              })}
+            </div>
+          )}
+        </div>
+      </Card.Body>
+    </Card>
+  );
+};
 
 export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
   refetch,
@@ -80,6 +125,7 @@ export const KeyCreateDialog: React.FC<KeyCreateDialogProps> = ({
             }
           >
             <div className="size-lg">
+              <SshKeyRestrictionsBanner />
               <FormGroup label={translate('Key name')}>
                 <Field
                   component={StringField as any}
