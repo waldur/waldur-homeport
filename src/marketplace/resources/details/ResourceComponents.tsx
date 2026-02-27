@@ -16,13 +16,18 @@ export const ResourceComponents = ({
 }) => {
   const isSmallScreen = useMediaQuery({ maxWidth: 320 });
 
-  if (components.length === 1) {
+  if (components.length <= 2) {
     return (
-      <ResourceComponentItem
-        expanded
-        resource={resource}
-        component={components[0]}
-      />
+      <div className="d-flex flex-column gap-4">
+        {components.map((component) => (
+          <ResourceComponentItem
+            key={component.type}
+            expanded
+            resource={resource}
+            component={component}
+          />
+        ))}
+      </div>
     );
   }
 

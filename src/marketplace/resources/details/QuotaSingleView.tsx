@@ -11,7 +11,7 @@ interface QuotaSingleView {
   title: any;
   billingType?: string;
   limitFrequency?: string;
-  currentUsage?: string;
+  displayUnit?: string;
 }
 
 export const QuotaSingleView = ({
@@ -21,17 +21,20 @@ export const QuotaSingleView = ({
   title,
   billingType,
   limitFrequency,
+  displayUnit,
 }: QuotaSingleView) => {
   const percent = getUsagePercentOfLimitComponent(limit, usage);
 
   return (
     <div className="d-flex flex-column">
+      <span className="fw-bold fs-7 text-muted text-nowrap ellipsis">
+        {title}
+      </span>
       <span className="fw-bold text-dark text-nowrap ellipsis">
         {limit
           ? `${formatUsageValue(usage)} / ${formatUsageValue(limit)}`
           : formatUsageValue(usage)}
         {units && ` ${units}`}
-        {title && ` ${title}`}
       </span>
       <QuotaProgressBar percent={percent} className="mt-2" />
       <div className="d-flex justify-content-between gap-4 fs-6 mt-3">
@@ -47,6 +50,14 @@ export const QuotaSingleView = ({
               {translate('Limit frequency')}:
             </span>
             <span className="text-muted">{limitFrequency}</span>
+          </div>
+        )}
+        {displayUnit && (
+          <div>
+            <span className="fw-bold d-block mb-1">
+              {translate('Measured in')}:
+            </span>
+            <span className="text-muted">{displayUnit}</span>
           </div>
         )}
         <div>
