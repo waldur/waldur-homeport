@@ -1642,5 +1642,23 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('SSH keys'),
+    items: [
+      {
+        key: 'SSH_KEY_ALLOWED_TYPES',
+        description: translate('List of allowed SSH key types. Empty list means all types are allowed.'),
+        default: ['ssh-ed25519', 'ecdsa-sha2-nistp256', 'ecdsa-sha2-nistp384', 'ecdsa-sha2-nistp521', 'ssh-rsa', 'sk-ssh-ed25519@openssh.com', 'sk-ecdsa-sha2-nistp256@openssh.com'],
+        type: 'multiple_choice_field',
+        options: [{ value: 'ssh-ed25519', label: 'ssh-ed25519' }, { value: 'ecdsa-sha2-nistp256', label: 'ecdsa-sha2-nistp256' }, { value: 'ecdsa-sha2-nistp384', label: 'ecdsa-sha2-nistp384' }, { value: 'ecdsa-sha2-nistp521', label: 'ecdsa-sha2-nistp521' }, { value: 'ssh-rsa', label: 'ssh-rsa' }, { value: 'sk-ssh-ed25519@openssh.com', label: 'sk-ssh-ed25519@openssh.com' }, { value: 'sk-ecdsa-sha2-nistp256@openssh.com', label: 'sk-ecdsa-sha2-nistp256@openssh.com' }],
+      },
+      {
+        key: 'SSH_KEY_MIN_RSA_KEY_SIZE',
+        description: translate('Minimum allowed RSA key size in bits. Set to 0 to disable the check.'),
+        default: 2048,
+        type: 'integer',
+      },
+    ],
+  },
 ];
 
