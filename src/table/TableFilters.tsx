@@ -1,3 +1,4 @@
+import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -5,8 +6,8 @@ import { useMediaQuery } from 'react-responsive';
 import { change, getFormValues } from 'redux-form';
 
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { TableProps } from './types';
@@ -51,6 +52,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
   }, [dispatch, props, formValues]);
 
   const isMd = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.md });
+  const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (
     <Row className="card-toolbar w-100 my-4 g-0 gap-4">
@@ -88,13 +90,12 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
       </Col>
       {!props.hideClearFilters && props.filtersStorage.length > 0 && (
         <Col xs="auto" className="align-self-start text-end">
-          <SubmitButton
-            submitting={false}
-            variant="flush"
-            className="btn-active-text-primary h-40px"
-            onClick={clearFilters}
-            type="button"
-            label={isMd ? translate('Clear') : translate('Clear filters')}
+          <CompactActionButton
+            variant="text-secondary"
+            className="btn-no-focus"
+            action={clearFilters}
+            iconNode={<XIcon weight="bold" />}
+            title={clearLabel}
           />
         </Col>
       )}
