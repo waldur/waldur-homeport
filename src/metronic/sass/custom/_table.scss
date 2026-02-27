@@ -293,6 +293,18 @@
         padding: 0.692rem 1.153rem;
       }
     }
+
+    .table-toolbar-search {
+      flex: 0 0 320px;
+      max-width: 320px;
+      width: 320px;
+
+      @include media-breakpoint-down(md) {
+        flex: 1 1 auto;
+        max-width: 100%;
+        width: 100%;
+      }
+    }
   }
 
   .card-toolbar {
