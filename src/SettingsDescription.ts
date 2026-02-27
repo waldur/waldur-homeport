@@ -1658,6 +1658,12 @@ export const SettingsDescription = [
         default: 2048,
         type: 'integer',
       },
+      {
+        key: 'ENABLE_ISSUES_FOR_USER_SSH_KEY_CHANGES',
+        description: translate('If true, a support ticket is created when a user adds or removes an SSH public key.'),
+        default: false,
+        type: 'boolean',
+      },
     ],
   },
 ];
