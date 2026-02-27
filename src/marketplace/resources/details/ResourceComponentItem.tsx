@@ -18,13 +18,29 @@ const normalize = (value: number, factor: number) => {
   return Number.isInteger(result) ? result.toFixed() : result.toFixed(2);
 };
 
+const UNIT_CONVERSIONS: Record<string, Record<number, string>> = {
+  MB: { 1024: 'GB', 1048576: 'TB' },
+  GB: { 1024: 'TB' },
+  KB: { 1024: 'MB', 1048576: 'GB' },
+};
+
+export const getDisplayUnit = (
+  measuredUnit: string | undefined,
+  factor: number | null | undefined,
+): string => {
+  if (!measuredUnit) return '';
+  if (!factor || factor === 1) return measuredUnit;
+  return UNIT_CONVERSIONS[measuredUnit]?.[factor] ?? measuredUnit;
+};
+
 export const getQuotaCellProps = (
   component: OfferingComponent,
   resource: Pick<Resource, 'current_usages' | 'limits' | 'limit_usage'>,
 ) => {
   if (!component) {
-    return { usage: '', limit: '', title: '' };
+    return { usage: '', limit: '', title: '', units: '', displayUnit: '' };
   }
+  const displayUnit = getDisplayUnit(component.measured_unit, component.factor);
   return {
     usage:
       component.billing_type === 'limit' &&
@@ -36,11 +52,9 @@ export const getQuotaCellProps = (
       component.billing_type === 'limit'
         ? normalize(resource.limits[component.type], component.factor)
         : null,
-    title:
-      component.measured_unit &&
-      component.name.endsWith(component.measured_unit)
-        ? component.name
-        : component.name + ' ' + component.measured_unit,
+    title: component.name,
+    displayUnit,
+    units: displayUnit,
   };
 };
 
@@ -61,11 +75,16 @@ export const ResourceComponentItem = ({
   const billingType = getBillingTypeLabel(component.billing_type);
   const limitPeriod = component.limit_period;
 
+  const description = props.displayUnit
+    ? `${billingType} · ${translate('Measured in')}: ${props.displayUnit}`
+    : billingType;
+
   if (expanded) {
     return (
       <QuotaSingleView
         {...props}
         billingType={billingType}
+        displayUnit={props.displayUnit}
         limitFrequency={
           component.billing_type === 'limit' &&
           (limitPeriodMap[limitPeriod as string] || translate('Monthly'))
@@ -74,5 +93,5 @@ export const ResourceComponentItem = ({
     );
   }
 
-  return <QuotaCell {...props} description={billingType} />;
+  return <QuotaCell {...props} description={description} />;
 };

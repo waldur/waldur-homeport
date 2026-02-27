@@ -30,21 +30,25 @@ const CellDescription = ({
   title,
   description,
 }: QuotaCellProps) => (
-  <span className="fw-bolder fs-7 text-dark text-nowrap ellipsis">
-    {description && (
-      <>
-        <Tip id="quota" label={description} className="aligned-tip">
-          <QuestionIcon weight="bold" />
-        </Tip>{' '}
-      </>
-    )}
-    {limit
-      ? `${formatUsageValue(usage)}/${formatUsageValue(limit)}`
-      : formatUsageValue(usage)}
-    {units && ` ${units}`}
-
-    {title && ` ${title}`}
-  </span>
+  <>
+    <span className="fw-bolder fs-7 text-dark text-nowrap ellipsis">
+      {title}
+      {description && (
+        <>
+          {' '}
+          <Tip id="quota" label={description} className="aligned-tip">
+            <QuestionIcon weight="bold" />
+          </Tip>
+        </>
+      )}
+    </span>
+    <span className="fw-bolder fs-7 text-dark text-nowrap ellipsis">
+      {limit
+        ? `${formatUsageValue(usage)}/${formatUsageValue(limit)}`
+        : formatUsageValue(usage)}
+      {units && ` ${units}`}
+    </span>
+  </>
 );
 
 export const QuotaCell = ({
