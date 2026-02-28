@@ -9,6 +9,7 @@ import { Offering } from '@waldur/marketplace/types';
 import { TENANT_TYPE } from '@waldur/openstack/constants';
 import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
 import { createFetcher } from '@waldur/table/api';
+import { PAGE_SIZE_FULL } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
@@ -125,6 +126,7 @@ export const FlavorTable = ({
       fieldType="radio"
       fieldName={fieldName}
       validate={[required, exceeds]}
+      initialPageSize={PAGE_SIZE_FULL * 5}
     />
   );
 };
