@@ -71,7 +71,7 @@ export const AdminProposalsList: FC = () => {
         },
         {
           title: translate('Applicant'),
-          render: ({ row }) => <>{row.created_by_name || '-'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.created_by_name)}</>,
           keys: ['created_by_name'],
           id: 'applicant',
         },

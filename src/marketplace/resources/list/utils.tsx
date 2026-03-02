@@ -101,7 +101,7 @@ export const getResourceAllListColumns = (
       },
       {
         title: translate('Parent offering'),
-        render: ({ row }) => <>{row.parent_offering_name || 'N/A'}</>,
+        render: ({ row }) => <>{renderFieldOrDash(row.parent_offering_name)}</>,
         id: 'parent_offering',
         keys: ['parent_offering_name'],
         optional: true,
@@ -109,7 +109,7 @@ export const getResourceAllListColumns = (
       },
       {
         title: translate('Plan'),
-        render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
+        render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
         id: 'plan',
         keys: ['plan_name'],
         optional: true,
@@ -148,7 +148,7 @@ export const getResourceAllListColumns = (
         : []),
       {
         title: translate('Project end date'),
-        render: ({ row }) => <>{row.project_end_date || 'N/A'}</>,
+        render: ({ row }) => <>{renderFieldOrDash(row.project_end_date)}</>,
         id: 'project_end_date',
         keys: ['project_end_date'],
         optional: true,

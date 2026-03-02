@@ -22,6 +22,7 @@ import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
 import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
 import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
 import enforcePhosphorIconWeight from './eslint-rules/enforce-phosphor-icon-weight.js';
+import enforceRenderFieldOrDash from './eslint-rules/enforce-render-field-or-dash.js';
 import noDirectBootstrapButton from './eslint-rules/no-direct-bootstrap-button.js';
 import noDirectBootstrapDropdownButton from './eslint-rules/no-direct-bootstrap-dropdown-button.js';
 import noDirectClientUsage from './eslint-rules/no-direct-client-usage.js';
@@ -72,6 +73,7 @@ export default tseslint
             'enforce-formcheck-components': enforceFormcheckComponents,
             'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
             'prefer-classnames-utility': preferClassnamesUtility,
+            'enforce-render-field-or-dash': enforceRenderFieldOrDash,
 
             // Design system rules
             'enforce-featured-icon': enforceFeaturedIcon,
@@ -120,6 +122,7 @@ export default tseslint
         'waldur-custom/enforce-formcheck-components': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
+        'waldur-custom/enforce-render-field-or-dash': 'warn',
 
         // Design system rules
         'waldur-custom/enforce-featured-icon': 'error',

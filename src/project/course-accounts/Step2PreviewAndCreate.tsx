@@ -116,7 +116,7 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
         },
         {
           title: translate('Description'),
-          render: ({ row }) => row.description || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.description),
         },
         {
           title: translate('Status'),

@@ -70,7 +70,7 @@ export const CallProposalsList: FC<CallProposalsListProps> = ({ call }) => {
         },
         {
           title: translate('Applicant'),
-          render: ({ row }) => <>{row.created_by_name || '-'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.created_by_name)}</>,
           keys: ['created_by_name', 'created_by_uuid'],
           id: 'applicant',
           filter: 'applicant',

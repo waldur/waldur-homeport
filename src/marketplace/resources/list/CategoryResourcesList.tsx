@@ -140,7 +140,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     },
     {
       title: translate('Parent offering'),
-      render: ({ row }) => row.parent_offering_name || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.parent_offering_name),
       filter: 'parent_offering',
       id: 'parent_offering',
       keys: ['parent_offering_name'],
