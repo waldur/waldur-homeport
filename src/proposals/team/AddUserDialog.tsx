@@ -51,7 +51,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
         });
 
         await refetch();
-        showSuccess('User has been added.');
+        showSuccess(translate('User has been added.'));
         closeDialog();
       } catch (error) {
         showErrorResponse(error, translate('Unable to add user.'));

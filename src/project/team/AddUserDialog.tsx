@@ -180,7 +180,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             },
           });
           await refetch();
-          showSuccess('User has been added to project.');
+          showSuccess(translate('User has been added to project.'));
           closeDialog();
         } catch (error) {
           showErrorResponse(error, translate('Unable to add user.'));
@@ -200,7 +200,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             dispatch(setCurrentUser(newUser));
           }
           await refetch();
-          showSuccess('User has been added to organization.');
+          showSuccess(translate('User has been added to organization.'));
           closeDialog();
         } catch (error) {
           showErrorResponse(error, translate('Unable to add user.'));
@@ -220,7 +220,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             dispatch(setCurrentUser(newUser));
           }
           await refetch();
-          showSuccess('User has been added to organization.');
+          showSuccess(translate('User has been added to organization.'));
           closeDialog();
         } catch (error) {
           showErrorResponse(error, translate('Unable to add user.'));
@@ -240,7 +240,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
             dispatch(setCurrentUser(newUser));
           }
           await refetch();
-          showSuccess('User has been added to organization.');
+          showSuccess(translate('User has been added to organization.'));
           closeDialog();
         } catch (error) {
           showErrorResponse(error, translate('Unable to add user.'));

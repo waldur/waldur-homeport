@@ -43,9 +43,9 @@ export const WorkloadActions: FunctionComponent<{ workload }> = ({
     }
     try {
       await rancherWorkloadsRedeploy({ path: { uuid: workload.uuid } });
-      dispatch(showSuccess('Workload has been redeployed.'));
+      dispatch(showSuccess(translate('Workload has been redeployed.')));
     } catch (e) {
-      dispatch(showErrorResponse(e, 'Unable to redeploy workload.'));
+      dispatch(showErrorResponse(e, translate('Unable to redeploy workload.')));
     }
   }, [dispatch, workload]);
 
@@ -66,10 +66,10 @@ export const WorkloadActions: FunctionComponent<{ workload }> = ({
     }
     try {
       await rancherWorkloadsDestroy({ path: { uuid: workload.uuid } });
-      dispatch(showSuccess('Workload has been deleted.'));
+      dispatch(showSuccess(translate('Workload has been deleted.')));
       dispatch(deleteEntity('rancher-workloads', workload.uuid));
     } catch (e) {
-      dispatch(showErrorResponse(e, 'Unable to delete workload.'));
+      dispatch(showErrorResponse(e, translate('Unable to delete workload.')));
     }
   }, [dispatch, workload]);
 

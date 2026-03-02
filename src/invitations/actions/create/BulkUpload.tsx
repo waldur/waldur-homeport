@@ -37,7 +37,9 @@ export const BulkUpload: FC<OwnProps> = (props) => {
       const _file = acceptedFiles[0];
 
       if (!_file || _file.type !== 'text/csv') {
-        dispatch(showError('Invalid format, please import a .csv file'));
+        dispatch(
+          showError(translate('Invalid format, please import a .csv file')),
+        );
         return;
       }
       setFile(_file);
@@ -49,7 +51,9 @@ export const BulkUpload: FC<OwnProps> = (props) => {
             );
             if (emailIndex === -1) {
               // Can't find the emails in the data
-              dispatch(showError('Unable to locate email information'));
+              dispatch(
+                showError(translate('Unable to locate email information')),
+              );
               return;
             }
             const roleIndex = results.data[0].findIndex((str) =>

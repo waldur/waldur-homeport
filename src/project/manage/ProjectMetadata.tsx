@@ -18,7 +18,8 @@ import { ParsedAnswer } from '../metadata/ParsedAnswer';
 import { FieldEditButton } from './FieldEditButton';
 import { MetadataEditButton } from './MetadataEditButton';
 
-const METADATA_LOAD_ERROR_MSG = translate('Unable to load full metadata.');
+const getMetadataLoadErrorMsg = () =>
+  translate('Unable to load full metadata.');
 
 interface ProjectMetadataProps {
   project: Project;
@@ -36,7 +37,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
         .then((response) => response.data)
         .catch((err) => {
           if (err.detail !== CHECKLIST_NO_CONFIGURED_MSG) {
-            showErrorResponse(err, METADATA_LOAD_ERROR_MSG);
+            showErrorResponse(err, getMetadataLoadErrorMsg());
           }
           throw err;
         }),
@@ -91,7 +92,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
           <FormTable.Item
             value={
               <LoadingErred
-                message={METADATA_LOAD_ERROR_MSG}
+                message={getMetadataLoadErrorMsg()}
                 loadData={refetch}
               />
             }

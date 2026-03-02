@@ -34,7 +34,7 @@ const OpenStackDiscoveryDialog = lazyComponent(() =>
   ),
 );
 
-const TITLE = translate('Credentials');
+const getTitle = () => translate('Credentials');
 
 export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
   const dispatch = useDispatch();
@@ -62,7 +62,7 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
 
   return (
     <FormTable.Card
-      title={TITLE}
+      title={getTitle()}
       actions={
         <div className="d-flex gap-2 align-items-center">
           {isSlurmOffering && (
@@ -100,7 +100,7 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
         {CredentialsForm ? (
           <CredentialsForm
             offering={props.offering}
-            title={TITLE}
+            title={getTitle()}
             callback={update}
           />
         ) : null}

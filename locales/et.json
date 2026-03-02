@@ -3115,6 +3115,7 @@
   "Request for a termination": "Eemaldamise taotlus",
   "Request has been sent": "Taotlus on saadetud",
   "Request has been sent for approval": "Taotlus on kinnitamiseks saadetud",
+  "Request has been sent. You'll be notified once it's approved.": "Taotlus on saadetud. Teid teavitatakse, kui see on kinnitatud.",
   "Request is not valid.": "Taotlus ei kehti.",
   "Request limits change": "Taotle limiitide muutmist",
   "Request pausing of resources": "Taotlege ressursside peatamist",

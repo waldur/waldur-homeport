@@ -81,7 +81,7 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
       const _file = acceptedFiles[0];
 
       if (!_file) {
-        dispatch(showError('No file has been imported'));
+        dispatch(showError(translate('No file has been imported')));
         return;
       }
       parseFile(_file).then((_data) => {

@@ -214,7 +214,9 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           response.data.uuid,
         );
         if (asyncDryRunResult.data.get_state_display === 'erred') {
-          dispatch(showError('An error occurred during script execution.'));
+          dispatch(
+            showError(translate('An error occurred during script execution.')),
+          );
         } else {
           dispatch(
             showSuccess(
