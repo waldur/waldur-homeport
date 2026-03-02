@@ -1,10 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
-import { useEffect, useState } from 'react';
+import { useState } from 'react';
 
 import { getIdentityProviders } from '@waldur/administration/api';
 import { getIconUrl } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
-import { getQueryParams } from '@waldur/core/filters';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -20,7 +19,6 @@ import { LocalLoginButton, LocalLoginForm } from './LocalLogin';
 import { PoweredBy } from './PoweredBy';
 import { useAuthFeatures } from './useAuthFeatures';
 import { UserAuthWarning } from './UserAuthWarning';
-import { getOauthURL } from './utils';
 
 import './LoginColumn.scss';
 
@@ -34,19 +32,7 @@ export const LoginColumn = () => {
     queryKey: ['IdentityProvidersConfigurations'],
     queryFn: () => getIdentityProviders(),
   });
-  const params = getQueryParams();
   const [view, setView] = useState<LoginView>('providers');
-
-  useEffect(() => {
-    if (params['disableAutoLogin'] === '') {
-      return;
-    }
-    const provider = ENV.plugins.WALDUR_CORE.DEFAULT_IDP;
-    if (!provider) {
-      return;
-    }
-    window.location.href = getOauthURL(provider);
-  }, [params]);
 
   const hasOtherProviders = data && data.length > 0;
 

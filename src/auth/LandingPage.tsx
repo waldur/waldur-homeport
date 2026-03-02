@@ -1,5 +1,7 @@
 import { useEffect } from 'react';
 
+import { ENV } from '@waldur/core/config';
+import { getQueryParams } from '@waldur/core/filters';
 import { CookiesConsent } from '@waldur/navigation/cookies/CookiesConsent';
 
 import * as AuthService from './AuthService';
@@ -38,6 +40,7 @@ import {
   LandingPageLayout,
 } from './layouts';
 import { useLayoutSwitcher } from './useLayoutSwitcher';
+import { getOauthURL } from './utils';
 
 const LayoutComponents: Record<LandingPageLayout, React.ComponentType> = {
   // Classic
@@ -76,6 +79,18 @@ export const LandingPage = () => {
   const { layout } = useLayoutSwitcher();
 
   useEffect(() => AuthService.storeRedirect(), []);
+
+  useEffect(() => {
+    const params = getQueryParams();
+    if (params['disableAutoLogin'] === '') {
+      return;
+    }
+    const provider = ENV.plugins.WALDUR_CORE.DEFAULT_IDP;
+    if (!provider) {
+      return;
+    }
+    window.location.href = getOauthURL(provider);
+  }, []);
 
   const LayoutComponent = LayoutComponents[layout];
 
