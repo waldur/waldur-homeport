@@ -16,9 +16,9 @@ import { ProfileCompletenessProvider } from '@waldur/user/ProfileCompletenessCon
 import { UsersService } from '@waldur/user/UsersService';
 import { getImpersonatorUser, getUser } from '@waldur/workspace/selectors';
 
-import { AppFooter } from './AppFooter';
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
+import { AppFooter } from './footer/AppFooter';
 import { Announcements } from './header/announcements/Announcements';
 import { AppHeader } from './header/AppHeader';
 import { BreadcrumbMain } from './header/breadcrumb/BreadcrumbMain';

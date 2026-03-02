@@ -9,7 +9,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
-import { BackendHealthStatusIndicator } from '@waldur/navigation/BackendHealthStatusIndicator';
+import { BackendHealthStatusIndicator } from '@waldur/navigation/footer/BackendHealthStatusIndicator';
 import { showError } from '@waldur/store/notify';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 

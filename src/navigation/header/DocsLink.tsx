@@ -9,13 +9,15 @@ export const DocsLink: FunctionComponent = () => {
     return null;
   }
   return (
-    <a
-      href={link}
-      target="_blank"
-      rel="noopener noreferrer"
-      className="menu-link px-2"
-    >
-      {translate('Documentation')}
-    </a>
+    <div className="menu-item">
+      <a
+        href={link}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="menu-link px-3"
+      >
+        <span className="menu-title">{translate('Documentation')}</span>
+      </a>
+    </div>
   );
 };

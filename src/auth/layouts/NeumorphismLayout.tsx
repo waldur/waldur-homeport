@@ -7,7 +7,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
-import { FooterLinks } from '@waldur/navigation/FooterLinks';
+import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
@@ -30,6 +30,7 @@ export const NeumorphismLayout = () => {
   return (
     <div className="layout-neumorphism">
       <div className="layout-neumorphism-header">
+        <LanguageSelectorBox />
         <ThemeSwitcherButton />
       </div>
       <div className="layout-neumorphism-content">
@@ -57,7 +58,6 @@ export const NeumorphismLayout = () => {
         </div>
       </div>
       <div className="layout-neumorphism-footer">
-        <LanguageSelectorBox />
         <FooterLinks />
       </div>
     </div>

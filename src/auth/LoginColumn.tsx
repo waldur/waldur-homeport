@@ -9,8 +9,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
 import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
-import { FooterLinks } from '@waldur/navigation/FooterLinks';
-import { JoinOrganizationFooterLink } from '@waldur/navigation/JoinOrganizationFooterLink';
+import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from './AuthHeader';
@@ -39,6 +38,7 @@ export const LoginColumn = () => {
   return (
     <div className="login-column">
       <div className="login-header">
+        <LanguageSelectorBox />
         <ThemeSwitcherButton />
       </div>
       <div className="login-body">
@@ -80,12 +80,6 @@ export const LoginColumn = () => {
           <UserAuthWarning />
           <PoweredBy />
         </div>
-      </div>
-      <div className="login-footer footer-top">
-        <LanguageSelectorBox />
-        <ul className="menu menu-brand justify-content-end icon-align">
-          <JoinOrganizationFooterLink loginPage />
-        </ul>
       </div>
       <div className="login-footer">
         <FooterLinks />

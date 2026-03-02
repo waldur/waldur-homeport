@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { getBackendHealthStatus } from '@waldur/navigation/BackendHealthStatusIndicator';
+import { getBackendHealthStatus } from '@waldur/navigation/footer/BackendHealthStatusIndicator';
 
 export const BackendHealthStatusDialog: FunctionComponent = () => {
   const [{ loading, value }, reFetch] = useAsyncFn(getBackendHealthStatus, []);
