@@ -8,8 +8,13 @@
 
 .layout-glassmorphism-header {
   display: flex;
-  justify-content: flex-end;
+  justify-content: space-between;
+  align-items: center;
   padding: 1rem;
+}
+
+.layout-glassmorphism-header .btn {
+  background: rgba(255, 255, 255, 0.5);
 }
 
 .layout-glassmorphism-content {
@@ -71,12 +76,33 @@
   gap: 0.5rem;
 }
 
-.layout-glassmorphism-footer .menu-link {
+.layout-glassmorphism-footer .menu-brand > .menu-item > .menu-link {
   color: rgba(255, 255, 255, 0.9) !important;
 }
 
-.layout-glassmorphism-footer .menu-link:hover {
+.layout-glassmorphism-footer .menu-brand > .menu-item > .menu-link .menu-title {
+  color: rgba(255, 255, 255, 0.9) !important;
+}
+
+.layout-glassmorphism-footer
+  .menu-brand
+  > .menu-item
+  > .menu-link
+  .menu-arrow:after {
+  background: white;
+}
+
+.layout-glassmorphism-footer .menu-brand > .menu-item > .menu-link:hover {
   color: #fff !important;
+}
+
+.layout-glassmorphism-footer .menu-sub-dropdown .menu-link {
+  color: #181c32 !important; /* Dark color for dropdown items */
+}
+
+.layout-glassmorphism-footer .menu-sub-dropdown .menu-link:hover {
+  background-color: #f5f8fa !important;
+  color: #009ef7 !important;
 }
 
 .layout-glassmorphism-footer select {

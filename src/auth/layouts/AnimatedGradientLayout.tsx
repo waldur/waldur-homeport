@@ -7,7 +7,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
-import { FooterLinks } from '@waldur/navigation/FooterLinks';
+import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
@@ -39,6 +39,7 @@ export const AnimatedGradientLayout = () => {
     >
       <div className="layout-animated-gradient-bg" />
       <div className="layout-animated-gradient-header">
+        <LanguageSelectorBox />
         <ThemeSwitcherButton />
       </div>
       <div className="layout-animated-gradient-content">
@@ -66,7 +67,6 @@ export const AnimatedGradientLayout = () => {
         </div>
       </div>
       <div className="layout-animated-gradient-footer">
-        <LanguageSelectorBox />
         <FooterLinks />
       </div>
     </div>

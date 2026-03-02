@@ -8,7 +8,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
-import { FooterLinks } from '@waldur/navigation/FooterLinks';
+import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
@@ -110,6 +110,7 @@ export const WeatherLayout = () => {
           ))}
       </div>
       <div className="layout-weather-header">
+        <LanguageSelectorBox />
         <div className="layout-weather-indicator">
           <i className={`fa ${theme.icon}`} />
         </div>
@@ -140,7 +141,6 @@ export const WeatherLayout = () => {
         </div>
       </div>
       <div className="layout-weather-footer">
-        <LanguageSelectorBox />
         <FooterLinks />
       </div>
     </div>

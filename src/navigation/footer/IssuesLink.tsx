@@ -8,7 +8,7 @@ import { hasSupport } from '@waldur/issues/hooks';
 import { useUser } from '@waldur/workspace/hooks';
 
 const QuickIssueContainer = lazyComponent(() =>
-  import('../navigation/header/quick-issue-drawer/QuickIssueContainer').then(
+  import('../../navigation/header/quick-issue-drawer/QuickIssueContainer').then(
     (module) => ({ default: module.QuickIssueContainer }),
   ),
 );
@@ -27,10 +27,16 @@ export const IssuesLink: React.FC = () => {
   };
 
   return showIssues && user ? (
-    <span className="menu-link px-2">
-      <span className="menu-title" aria-hidden="true" onClick={openDrawer}>
-        {translate('Issues')}
+    <div className="menu-item">
+      <span
+        className="menu-link px-3"
+        role="button"
+        onKeyDown={openDrawer}
+        onClick={openDrawer}
+        tabIndex={-1}
+      >
+        <span className="menu-title">{translate('Issues')}</span>
       </span>
-    </span>
+    </div>
   ) : null;
 };

@@ -8,7 +8,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
-import { FooterLinks } from '@waldur/navigation/FooterLinks';
+import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
@@ -63,6 +63,7 @@ export const CarouselLayout = () => {
     <div className="layout-carousel">
       <div className="layout-carousel-login">
         <div className="layout-carousel-header">
+          <LanguageSelectorBox />
           <ThemeSwitcherButton />
         </div>
         <div className="layout-carousel-form">
@@ -88,7 +89,6 @@ export const CarouselLayout = () => {
           <PoweredBy />
         </div>
         <div className="layout-carousel-footer">
-          <LanguageSelectorBox />
           <FooterLinks />
         </div>
       </div>

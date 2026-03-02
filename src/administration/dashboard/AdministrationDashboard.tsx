@@ -7,7 +7,7 @@ import { translate } from '@waldur/i18n';
 import {
   getBackendHealthStatus,
   isWorking,
-} from '@waldur/navigation/BackendHealthStatusIndicator';
+} from '@waldur/navigation/footer/BackendHealthStatusIndicator';
 
 import { AdministrationProfile } from './AdministrationProfile';
 import { AdminStatistics } from './AdminStatistics';

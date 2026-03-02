@@ -7,7 +7,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
-import { FooterLinks } from '@waldur/navigation/FooterLinks';
+import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
@@ -38,6 +38,7 @@ export const FullHeroLayout = () => {
     >
       <div className="layout-full-hero-overlay">
         <div className="layout-full-hero-header">
+          <LanguageSelectorBox />
           <ThemeSwitcherButton />
         </div>
         <div className="layout-full-hero-content">
@@ -71,7 +72,6 @@ export const FullHeroLayout = () => {
           </div>
         </div>
         <div className="layout-full-hero-footer">
-          <LanguageSelectorBox />
           <FooterLinks />
         </div>
       </div>

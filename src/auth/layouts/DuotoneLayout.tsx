@@ -7,7 +7,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
-import { FooterLinks } from '@waldur/navigation/FooterLinks';
+import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
 import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
@@ -36,6 +36,7 @@ export const DuotoneLayout = () => {
     <div className="layout-duotone">
       <div className="layout-duotone-login">
         <div className="layout-duotone-header">
+          <LanguageSelectorBox />
           <ThemeSwitcherButton />
         </div>
         <div className="layout-duotone-form">
@@ -61,7 +62,6 @@ export const DuotoneLayout = () => {
           <PoweredBy />
         </div>
         <div className="layout-duotone-footer">
-          <LanguageSelectorBox />
           <FooterLinks />
         </div>
       </div>
