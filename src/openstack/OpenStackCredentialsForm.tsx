@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
 import { required } from '@waldur/core/validators';
-import { SecretField, StringField, TextField } from '@waldur/form';
+import { SecretField, SelectField, StringField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { translate } from '@waldur/i18n';
 import {
@@ -9,6 +9,14 @@ import {
   OfferingEditField,
 } from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
 import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
+
+const AUTH_TYPE_OPTIONS = [
+  { value: 'password', label: translate('Password') },
+  {
+    value: 'v3applicationcredential',
+    label: translate('Application Credential'),
+  },
+];
 
 const fields: OfferingEditField[] = [
   {
@@ -19,6 +27,20 @@ const fields: OfferingEditField[] = [
     ),
     component: StringField,
     fieldProps: { required: true, validate: required },
+  },
+  {
+    label: translate('Authentication type'),
+    key: 'service_attributes.auth_type',
+    component: SelectField,
+    fieldProps: {
+      options: AUTH_TYPE_OPTIONS,
+      simpleValue: true,
+      isClearable: false,
+    },
+    value: (val) =>
+      AUTH_TYPE_OPTIONS.find((o) => o.value === val)?.label ||
+      val ||
+      'Password',
   },
   {
     label: translate('Domain name'),

@@ -3,7 +3,7 @@ import { Alert } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { openstackDiscoveryValidateCredentials } from 'waldur-js-client';
 
-import { StringField, TextField } from '@waldur/form';
+import { SelectField, StringField, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { SecretField } from '@waldur/form/SecretField';
 import { SubmitButton } from '@waldur/form/SubmitButton';
@@ -13,6 +13,14 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
+
+const AUTH_TYPE_OPTIONS = [
+  { value: 'password', label: translate('Password') },
+  {
+    value: 'v3applicationcredential',
+    label: translate('Application Credential'),
+  },
+];
 
 export const CredentialsStep: FC<WizardStepProps> = (props) => {
   const form = useForm<OpenStackDiscoveryFormValues>();
@@ -80,11 +88,35 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
           <Field name="auth_url" component={StringField as any} />
         </FormGroup>
 
-        <FormGroup label={translate('Username')} required>
+        <FormGroup label={translate('Authentication type')}>
+          <Field
+            name="auth_type"
+            component={SelectField as any}
+            options={AUTH_TYPE_OPTIONS}
+            simpleValue
+            isClearable={false}
+          />
+        </FormGroup>
+
+        <FormGroup
+          label={
+            values.auth_type === 'v3applicationcredential'
+              ? translate('Application Credential ID')
+              : translate('Username')
+          }
+          required
+        >
           <Field name="username" component={StringField as any} />
         </FormGroup>
 
-        <FormGroup label={translate('Password')} required>
+        <FormGroup
+          label={
+            values.auth_type === 'v3applicationcredential'
+              ? translate('Application Credential Secret')
+              : translate('Password')
+          }
+          required
+        >
           <Field name="password" component={SecretField as any} />
         </FormGroup>
 

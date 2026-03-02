@@ -61,6 +61,7 @@ export const extractCredentials = (
   user_domain_name: values.user_domain_name,
   project_domain_name: values.project_domain_name,
   project_name: values.project_name,
+  auth_type: values.auth_type,
   verify_ssl: values.verify_ssl,
   certificate: values.certificate,
 });

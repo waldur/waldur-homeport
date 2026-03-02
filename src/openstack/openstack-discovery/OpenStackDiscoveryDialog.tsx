@@ -55,6 +55,9 @@ export const OpenStackDiscoveryDialog: FC<OwnProps> = ({ resolve }) => {
       auth_url: (sa.backend_url as string) || '',
       username: (sa.username as string) || '',
       password: '',
+      auth_type:
+        (sa.auth_type as OpenStackDiscoveryFormValues['auth_type']) ||
+        'password',
       user_domain_name: (sa.user_domain_name as string) || 'Default',
       project_domain_name: (sa.project_domain_name as string) || 'Default',
       project_name: (sa.project_name as string) || 'admin',
