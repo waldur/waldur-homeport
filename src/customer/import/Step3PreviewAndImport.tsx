@@ -46,7 +46,7 @@ export const Step3PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       const _file = acceptedFiles[0];
 
       if (!_file) {
-        dispatch(showError('No file has been imported'));
+        dispatch(showError(translate('No file has been imported')));
         return;
       }
       parseOrganizationsFile(_file).then((_data) => {

@@ -30,7 +30,7 @@ import {
   validateOfferingUserCreation,
 } from './utils';
 
-const statusMessages = {
+const getStatusMessages = () => ({
   invalid: translate('Invalid user'),
   username: translate('Missing username'),
   offering: translate('Invalid offering'),
@@ -39,7 +39,7 @@ const statusMessages = {
   ready: translate('Ready'),
   created: translate('Created'),
   erred: translate('Erred'),
-};
+});
 const statusColors = {
   ready: 'default',
   created: 'success',
@@ -54,6 +54,7 @@ const StatusField = ({
   status?: RecordStatus;
 }) => {
   const validate = validateOfferingUserCreation(row);
+  const statusMessages = getStatusMessages();
   return status ? (
     <Tip
       id={`tip-error-${row.uuid}`}

@@ -16,7 +16,7 @@ import { ScriptIntegrationSummary } from './ScriptIntegrationSummary';
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
 
-const TITLE = translate('Provisioning configuration');
+const getTitle = () => translate('Provisioning configuration');
 
 export const ProvisioningConfigSection: FC<OfferingEditPanelProps> = (
   props,
@@ -48,7 +48,7 @@ export const ProvisioningConfigSection: FC<OfferingEditPanelProps> = (
 
   return (
     <FormTable.Card
-      title={TITLE}
+      title={getTitle()}
       actions={
         <>
           <EditSchedulesButton {...props} />
@@ -62,7 +62,7 @@ export const ProvisioningConfigSection: FC<OfferingEditPanelProps> = (
         {ProvisioningConfigForm && (
           <ProvisioningConfigForm
             offering={props.offering}
-            title={TITLE}
+            title={getTitle()}
             callback={update}
           />
         )}

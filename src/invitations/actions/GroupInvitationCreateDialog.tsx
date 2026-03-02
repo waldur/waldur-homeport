@@ -90,10 +90,10 @@ export const GroupInvitationCreateDialog = ({
           },
         });
         setInvitation(res.data);
-        showSuccess('Group invitation has been created.');
+        showSuccess(translate('Group invitation has been created.'));
         if (refetch) refetch();
       } catch (e) {
-        showErrorResponse(e, 'Unable to create group invitation.');
+        showErrorResponse(e, translate('Unable to create group invitation.'));
       }
     },
     [customer, refetch, setInvitation, showSuccess, showErrorResponse],

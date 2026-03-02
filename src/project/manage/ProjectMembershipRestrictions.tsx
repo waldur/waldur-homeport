@@ -41,9 +41,10 @@ const OrganizationRestrictionsDialog = lazyComponent(() =>
   })),
 );
 
-const restrictionsTooltip = translate(
-  'When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic). Project-level restrictions are applied in addition to organization-level restrictions.',
-);
+const getRestrictionsTooltip = () =>
+  translate(
+    'When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic). Project-level restrictions are applied in addition to organization-level restrictions.',
+  );
 
 export const ProjectMembershipRestrictions: FC<
   ProjectMembershipRestrictionsProps
@@ -127,7 +128,10 @@ export const ProjectMembershipRestrictions: FC<
       title={
         <span className="d-flex align-items-center gap-2">
           {translate('Membership restrictions')}
-          <Tip id="project-restrictions-tooltip" label={restrictionsTooltip}>
+          <Tip
+            id="project-restrictions-tooltip"
+            label={getRestrictionsTooltip()}
+          >
             <QuestionIcon
               size={16}
               weight="bold"

@@ -17,16 +17,18 @@ import { CustomerEditPanelProps } from './types';
 
 type SubTabKey = 'subnets' | 'restrictions';
 
-const restrictionsTooltip = translate(
-  'When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic).',
-);
-
-const subTabs: Array<{ key: SubTabKey; title: string; tooltip?: string }> = [
+const getSubTabs = (): Array<{
+  key: SubTabKey;
+  title: string;
+  tooltip?: string;
+}> => [
   { key: 'subnets', title: translate('Allowed access subnets') },
   {
     key: 'restrictions',
     title: translate('Membership restrictions'),
-    tooltip: restrictionsTooltip,
+    tooltip: translate(
+      'When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic).',
+    ),
   },
 ];
 
@@ -76,7 +78,7 @@ export const AccessControlTabsContainer: FC<CustomerEditPanelProps> = ({
               variant="tabs"
               className="nav-line-tabs flex-nowrap mx-0 border-0"
             >
-              {subTabs.map((tab) => (
+              {getSubTabs().map((tab) => (
                 <Nav.Item key={tab.key} className="text-nowrap">
                   <Nav.Link as="button" eventKey={tab.key}>
                     {tab.title}

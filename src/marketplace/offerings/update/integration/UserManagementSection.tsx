@@ -11,7 +11,7 @@ import { GLAuthConfigButton } from './GLAuthConfigButton';
 import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
 
-const TITLE = translate('User management');
+const getTitle = () => translate('User management');
 
 export const UserManagementSection: FC<OfferingEditPanelProps> = (props) => {
   const { update } = useUpdateOfferingIntegration(
@@ -23,7 +23,7 @@ export const UserManagementSection: FC<OfferingEditPanelProps> = (props) => {
 
   return (
     <FormTable.Card
-      title={TITLE}
+      title={getTitle()}
       className="card-bordered mb-7"
       actions={<GLAuthConfigButton offering={props.offering} />}
     >
@@ -31,14 +31,14 @@ export const UserManagementSection: FC<OfferingEditPanelProps> = (props) => {
         {SecretOptionsForm && (
           <SecretOptionsForm
             offering={props.offering}
-            title={TITLE}
+            title={getTitle()}
             callback={update}
           />
         )}
         {PluginOptionsForm && (
           <PluginOptionsForm
             offering={props.offering}
-            title={TITLE}
+            title={getTitle()}
             callback={update}
           />
         )}

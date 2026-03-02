@@ -39,7 +39,7 @@ export const AdministrationServiceDeskUpdateDialog = ({
       queryClient.invalidateQueries({
         queryKey: ['AdministrationServiceDesk'],
       });
-      dispatch(showSuccess('Configurations have been updated'));
+      dispatch(showSuccess(translate('Configurations have been updated')));
       dispatch(closeModalDialog());
     } catch (e) {
       dispatch(
