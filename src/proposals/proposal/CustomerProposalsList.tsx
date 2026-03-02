@@ -59,7 +59,7 @@ export const CustomerProposalsList: FC<{}> = () => {
         },
         {
           title: translate('Applicant'),
-          render: ({ row }) => <>{row.created_by_name || '-'} </>,
+          render: ({ row }) => <>{renderFieldOrDash(row.created_by_name)} </>,
         },
         {
           title: translate('Call'),
