@@ -268,7 +268,7 @@ export const SettingsDescription = [
       {
         key: 'DOCKER_IMAGES',
         description: translate('Key is command to execute script, value is a dictionary of image name and command.'),
-        default: {'python': {'image': 'python:3.11-alpine', 'command': 'python'}, 'shell': {'image': 'alpine:3', 'command': 'sh'}, 'ansible': {'image': 'alpine/ansible:2.18.6', 'command': 'ansible-playbook'}},
+        default: {'python': {'image': 'python:3.12-alpine', 'command': 'python'}, 'shell': {'image': 'alpine:3', 'command': 'sh'}, 'ansible': {'image': 'alpine/ansible:2.18.6', 'command': 'ansible-playbook'}},
         type: 'dict_field',
       },
       {
