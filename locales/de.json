@@ -2647,6 +2647,7 @@
   "You also agree to the service provider’s <tos>terms of service</tos> and provider’s <pp>privacy policy</pp>.": "Sie stimmen auch denen des Dienstanbieters zu<tos> Nutzungsbedingungen</tos> und Anbieter<pp> Datenschutzrichtlinie</pp> .",
   "You also agree to the service provider’s <tos>terms of service</tos>.": "Sie stimmen auch denen des Dienstanbieters zu<tos> Nutzungsbedingungen</tos> .",
   "You are going to delete {tosName}. This action is irreversible. The ToS will be permanently removed.": "Sie sind dabei, {tosName} zu löschen. Diese Aktion ist unwiderruflich. Die AGB werden dauerhaft entfernt.",
+  "You are not allowed to accept this invitation. Your email or organization must match the invitation restrictions.": "Sie dürfen diese Einladung nicht annehmen. Ihre E-Mail-Adresse oder Organisation muss den Einladungsbeschränkungen entsprechen.",
   "You can not create group invitations.": "Sie können keine Gruppeneinladungen erstellen.",
   "You can register organization as a service provider by pressing the button": "Sie können die Organisation als Dienstleister registrieren, indem Sie auf die Schaltfläche klicken",
   "You can remove this organization by pressing the button": "Sie können diese Organisation entfernen, indem Sie den Button drücken",

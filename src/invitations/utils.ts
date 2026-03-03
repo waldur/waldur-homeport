@@ -23,6 +23,17 @@ import store from '@waldur/store/store';
 import { UsersService, getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
 
+// Backend error messages mapped to translated frontend strings
+const BACKEND_ERROR_TRANSLATIONS: Record<string, string> = {
+  'You are not allowed to accept this invitation. Your email or organization must match the invitation restrictions.':
+    translate(
+      'You are not allowed to accept this invitation. Your email or organization must match the invitation restrictions.',
+    ),
+};
+
+const translateBackendError = (message: string): string =>
+  BACKEND_ERROR_TRANSLATIONS[message] || message;
+
 const InvitationConfirmDialog = lazyComponent(() =>
   import('./InvitationConfirmDialog').then((module) => ({
     default: module.InvitationConfirmDialog,
@@ -98,7 +109,7 @@ export function submitPermissionRequest(token) {
               await waitForConfirmation(
                 store.dispatch,
                 translate('Access restricted'),
-                errorMessage ||
+                translateBackendError(errorMessage) ||
                   translate(
                     "You don't have the required permissions to join this organization.",
                   ),

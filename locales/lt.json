@@ -4900,6 +4900,7 @@
   "You are about to revoke resource access from {count} users. Once removed, they'll immediately lose access and all associated permissions.": "Jūs ketinate atšaukti išteklių prieigą {count} vartotojams. Pašalinus jie iš karto praras prieigą ir visus susijusius leidimus.",
   "You are going to cancel invitation by {name}. This action cannot be undone.": "Jūs ketinate atšaukti {name} kvietimą. Šio veiksmo anuliuoti negalima.",
   "You are going to delete {tosName}. This action is irreversible. The ToS will be permanently removed.": "Ketinate ištrinti {tosName}. Šis veiksmas negrįžtamas. Paslaugų teikimo sąlygos bus visam laikui pašalintos.",
+  "You are not allowed to accept this invitation. Your email or organization must match the invitation restrictions.": "Jums neleidžiama priimti šio kvietimo. Jūsų el. paštas arba organizacija turi atitikti kvietimo apribojimus.",
   "You are requested to join {organization}": "Jūs prašote prisijungti prie {organization}",
   "You are requesting to join {name}": "Jūs prašote prisijungti prie {name}",
   "You are viewing the chart in log scale mode.": "Jūs žiūrite diagramą logaritminės skalės režimu.",
