@@ -4735,6 +4735,7 @@
   "You are going to cancel invitation by {name}. This action cannot be undone.": "Soovite tühistada kasutaja {name} kutse. Seda tegevust ei saa tagasi võtta.",
   "You are going to delete answer for the question {question}. This action cannot be undone.": "Olete kustutamas vastust küsimusele {question}. Seda toimingut ei saa tagasi võtta.",
   "You are going to delete {tosName}. This action is irreversible. The ToS will be permanently removed.": "Soovite kustutada {tosName}. See tegevus on pöördumatu. Kasutustingimused eemaldatakse jäädavalt.",
+  "You are not allowed to accept this invitation. Your email or organization must match the invitation restrictions.": "Teil ei ole lubatud seda kutset vastu võtta. Teie e-posti aadress või organisatsioon peab vastama kutse piirangutele.",
   "You are requested to join {organization}": "Teid kutsutakse liituma organisatsiooniga {organization}",
   "You are requesting to join {name}": "Taotlete liitumist organisatsiooniga {name}",
   "You are viewing the chart in log scale mode.": "Vaatate diagrammi logaritmilises skaala režiimis.",

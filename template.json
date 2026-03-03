@@ -17278,6 +17278,64 @@
       "usage_count": 1
     }
   },
+  "If true, a support ticket is created when a user adds or removes an SSH public key.": {
+    "message": "If true, a support ticket is created when a user adds or removes an SSH public key.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 83,
+        "wordCount": 17,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "general"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "SettingsDescription.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "User agreements": {
     "message": "User agreements",
     "context": {
@@ -17698,14 +17756,12 @@
       "primary_ui_type": "label",
       "ui_types": [
         "property_value",
-        "label",
-        "unknown"
+        "label"
       ],
       "components": [
         "Field",
         "FormGroup",
-        "ModalDialog",
-        "Link"
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -17730,7 +17786,7 @@
         "feature_areas": [
           "general",
           "agreements",
-          "navigation"
+          "footer"
         ],
         "component_types": [
           "component",
@@ -17743,13 +17799,12 @@
           "administration/agreements/UserAgreementDeleteButton.tsx",
           "administration/agreements/UserAgreementsEditDialog.tsx",
           "administration/agreements/UserAgreementsList.tsx",
-          "navigation/FooterLinks.tsx"
+          "navigation/footer/useFooterLinks.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Field",
-          "Link"
+          "Field"
         ],
         "conditional_render": false
       },
@@ -17762,7 +17817,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 10
@@ -17771,7 +17826,6 @@
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -19284,7 +19338,7 @@
           "tos",
           "service-providers",
           "compliance",
-          "navigation",
+          "footer",
           "openstack-tenant",
           "course-accounts",
           "team",
@@ -19348,7 +19402,7 @@
           "marketplace/service-providers/ProviderCampaignsList.tsx",
           "marketplace/service-providers/ProviderUserDetailsDialog.tsx",
           "marketplace/service-providers/compliance/ComplianceExpandableRow.tsx",
-          "navigation/BackendHealthStatusDialog.tsx",
+          "navigation/footer/BackendHealthStatusDialog.tsx",
           "openstack/openstack-tenant/TenantPortsList.tsx",
           "project/course-accounts/Step2PreviewAndCreate.tsx",
           "project/import/Step5PreviewAndImport.tsx",
@@ -19884,7 +19938,7 @@
           "details",
           "usage",
           "service-providers",
-          "navigation",
+          "footer",
           "openstack-tenant",
           "reviewer-discovery",
           "coi-settings",
@@ -19926,7 +19980,7 @@
           "marketplace/resources/details/ServiceProviderCommentModal.tsx",
           "marketplace/resources/usage/ResourceShowUsageDialog.tsx",
           "marketplace/service-providers/ProviderProjectResourcesDialog.tsx",
-          "navigation/UpgradeNotificationDialog.tsx",
+          "navigation/footer/UpgradeNotificationDialog.tsx",
           "openstack/openstack-tenant/HypervisorPlacementMapDialog.tsx",
           "openstack/openstack-tenant/PlacementMapBatchDialog.tsx",
           "proposals/manage/reviewer-discovery/ReviewerProfileDialog.tsx",
@@ -20481,7 +20535,7 @@
           "details",
           "software-catalogs",
           "tos",
-          "navigation",
+          "footer",
           "apps",
           "template",
           "generated",
@@ -20508,7 +20562,7 @@
           "marketplace/offerings/update/tos/AddTosDialog.tsx",
           "marketplace/offerings/update/tos/TosDataTables.tsx",
           "marketplace/offerings/update/tos/TosEditDialog.tsx",
-          "navigation/AppFooter.tsx",
+          "navigation/footer/AppFooter.tsx",
           "rancher/cluster/apps/ApplicationDetailsDialog.tsx",
           "rancher/template/ApplicationConfiguration.tsx",
           "table/generated/MarketplaceSoftwarePackagesFilter.tsx",
@@ -22503,14 +22557,12 @@
       "primary_ui_type": "label",
       "ui_types": [
         "label",
-        "property_value",
-        "unknown"
+        "property_value"
       ],
       "components": [
         "Field",
         "FormGroup",
-        "ModalDialog",
-        "Link"
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -22536,7 +22588,7 @@
         "feature_areas": [
           "agreements",
           "single-import",
-          "navigation"
+          "footer"
         ],
         "component_types": [
           "dialog",
@@ -22549,13 +22601,12 @@
           "administration/agreements/UserAgreementsEditDialog.tsx",
           "administration/agreements/UserAgreementsList.tsx",
           "marketplace/offerings/single-import/ReviewImportTab.tsx",
-          "navigation/FooterLinks.tsx"
+          "navigation/footer/useFooterLinks.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "Field",
-          "Link"
+          "Field"
         ],
         "conditional_render": false
       },
@@ -22568,7 +22619,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 10
@@ -22577,7 +22628,6 @@
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -66255,6 +66305,7 @@
         "Col",
         "Link",
         "IssuesList",
+        "FooterDropdown",
         "MenuItem",
         "AccordionCard",
         "FormGroup",
@@ -66291,7 +66342,7 @@
           "customer",
           "issues",
           "details",
-          "navigation",
+          "footer",
           "sidebar",
           "project",
           "data-access",
@@ -66314,7 +66365,7 @@
           "issues/routes.ts",
           "marketplace/resources/details/ResourceIssuesCard.tsx",
           "marketplace/resources/details/fetchData.tsx",
-          "navigation/FooterLinks.tsx",
+          "navigation/footer/SupportMenu.tsx",
           "navigation/sidebar/SupportMenu.tsx",
           "project/dashboard/ProjectActions.tsx",
           "project/routes.ts",
@@ -66334,8 +66385,9 @@
         "tags": [
           "Link",
           "IssuesList",
-          "span",
+          "FooterDropdown",
           "MenuItem",
+          "span",
           "FormGroup",
           "ReviewRow"
         ],
@@ -76073,7 +76125,7 @@
         ],
         "feature_areas": [
           "marketplace",
-          "navigation"
+          "footer"
         ],
         "component_types": [
           "dialog",
@@ -76081,7 +76133,7 @@
         ],
         "paths": [
           "administration/marketplace/SoftwareCatalogDiscoverDialog.tsx",
-          "navigation/AppFooter.tsx"
+          "navigation/footer/AppFooter.tsx"
         ]
       },
       "jsx_context": {
@@ -81838,7 +81890,7 @@
           "plan",
           "details",
           "resource-pending",
-          "navigation",
+          "footer",
           "proposals",
           "provisioning-stats"
         ],
@@ -81854,7 +81906,7 @@
           "marketplace/orders/OrderStates.ts",
           "marketplace/resources/details/ResourceComponentsDialog.tsx",
           "marketplace/resources/resource-pending/OrderInProgressView.tsx",
-          "navigation/BackendHealthStatusDialog.tsx",
+          "navigation/footer/BackendHealthStatusDialog.tsx",
           "reporting/proposals/ReviewProgressList.tsx",
           "reporting/provisioning-stats/ProvisioningByStateChart.tsx",
           "reporting/provisioning-stats/ProvisioningTrendChart.tsx"
@@ -97192,7 +97244,8 @@
       "ui_types": [
         "function_call",
         "unknown",
-        "label"
+        "label",
+        "property_value"
       ],
       "components": [
         "Table",
@@ -97238,6 +97291,7 @@
           "marketplace/offerings/update/policies/SlurmPolicyEvaluateDialog.tsx",
           "openstack/openstack-security-groups/rule-editor/RemoteGroupField.tsx",
           "proposals/update/coi-review/COIExpandableRow.tsx",
+          "support/SupportAIAssistantLogsList.tsx",
           "table/generated/ChatThreadsFilter.tsx"
         ]
       },
@@ -97262,7 +97316,7 @@
         "has_validation": true,
         "max_nesting_level": 10
       },
-      "usage_count": 7
+      "usage_count": 8
     },
     "translator_notes": [
       "This appears in the marketplace context. Use business-appropriate language.",
@@ -101578,7 +101632,7 @@
         ],
         "feature_areas": [
           "pubsub",
-          "navigation"
+          "footer"
         ],
         "component_types": [
           "card",
@@ -101586,7 +101640,7 @@
         ],
         "paths": [
           "administration/pubsub/PubSubIssuesCard.tsx",
-          "navigation/IssuesLink.tsx"
+          "navigation/footer/IssuesLink.tsx"
         ]
       },
       "jsx_context": {
@@ -103032,7 +103086,8 @@
       "primary_ui_type": "label",
       "ui_types": [
         "unknown",
-        "label"
+        "label",
+        "property_value"
       ],
       "components": [],
       "is_user_facing": true,
@@ -103063,6 +103118,7 @@
         "paths": [
           "administration/pubsub/PubSubOverviewCards.tsx",
           "administration/rabbitmq/RabbitMQQueueHealthBadge.tsx",
+          "support/SupportAIAssistantLogsList.tsx",
           "table/generated/ChatThreadsFilter.tsx",
           "table/generated/SystemLogsFilter.tsx"
         ]
@@ -103085,7 +103141,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
       "This appears in administrative interface. Use formal, technical language."
@@ -124923,6 +124979,70 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Configurations have been updated": {
+    "message": "Configurations have been updated",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 32,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "admin"
+        ],
+        "feature_areas": [
+          "service-desk"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "administration/service-desk/AdministrationServiceDeskUpdateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in administrative interface. Use formal, technical language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Unable to update the configurations.": {
     "message": "Unable to update the configurations.",
     "context": {
@@ -141633,9 +141753,12 @@
     "context": {
       "primary_ui_type": "label",
       "ui_types": [
-        "label"
+        "label",
+        "unknown"
       ],
-      "components": [],
+      "components": [
+        "FooterDropdown"
+      ],
       "is_user_facing": true,
       "text_characteristics": {
         "length": 4,
@@ -141656,17 +141779,22 @@
           "general"
         ],
         "feature_areas": [
-          "ai-assistant"
+          "ai-assistant",
+          "footer"
         ],
         "component_types": [
-          "component"
+          "component",
+          "navigation"
         ],
         "paths": [
-          "ai-assistant/components/Thread.tsx"
+          "ai-assistant/components/Thread.tsx",
+          "navigation/footer/MobileMenu.tsx"
         ]
       },
       "jsx_context": {
-        "tags": [],
+        "tags": [
+          "FooterDropdown"
+        ],
         "conditional_render": false
       },
       "action_types": [
@@ -141681,9 +141809,9 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 0
+        "max_nesting_level": 5
       },
-      "usage_count": 1
+      "usage_count": 2
     }
   },
   "Show me more options": {
@@ -142206,6 +142334,71 @@
     },
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language.",
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Sensitive information detected": {
+    "message": "Sensitive information detected",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "generic_element"
+      ],
+      "components": [
+        "AlertItem"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 30,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "ai-assistant"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "ai-assistant/components/Thread.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "AlertItem"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -143697,7 +143890,7 @@
       },
       "interaction_context": {
         "modifies_state": true,
-        "triggers_navigation": true,
+        "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 10
       },
@@ -143705,7 +143898,6 @@
     },
     "translator_notes": [
       "This action modifies application state. Use clear, actionable language.",
-      "This action triggers navigation. Consider using navigation-appropriate language.",
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
@@ -168150,58 +168342,6 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
-  "When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic).": {
-    "message": "When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic).",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 193,
-        "wordCount": 29,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [],
-        "feature_areas": [],
-        "component_types": [],
-        "paths": [
-          "customer/details/AccessControlTabsContainer.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    }
-  },
   "Allowed access subnets": {
     "message": "Allowed access subnets",
     "context": {
@@ -168326,6 +168466,58 @@
       "This is a title/heading. Use title case if appropriate in your language.",
       "This action modifies application state. Use clear, actionable language."
     ]
+  },
+  "When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic).": {
+    "message": "When restrictions are configured, only users matching at least one criterion can become members. If multiple restriction types are configured, matching any one of them is sufficient (OR logic).",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "tooltip"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 193,
+        "wordCount": 29,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "customer/details/AccessControlTabsContainer.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Access control": {
     "message": "Access control",
@@ -177703,9 +177895,10 @@
   "Invalid format, please import a .csv file": {
     "message": "Invalid format, please import a .csv file",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "error_message",
       "ui_types": [
-        "property_value"
+        "property_value",
+        "error_message"
       ],
       "components": [],
       "is_user_facing": true,
@@ -177726,20 +177919,24 @@
       "file_context": {
         "domains": [
           "customer_management",
+          "general",
           "marketplace",
           "project_management"
         ],
         "feature_areas": [
           "import",
+          "create",
           "import-users",
           "course-accounts"
         ],
         "component_types": [
           "component",
+          "form",
           "dialog"
         ],
         "paths": [
           "customer/import/Step2UploadFile.tsx",
+          "invitations/actions/create/BulkUpload.tsx",
           "marketplace/offerings/import-users/Step1UploadFile.tsx",
           "project/course-accounts/CourseAccountFormDialog.tsx",
           "project/import/Step4UploadFile.tsx"
@@ -177758,15 +177955,17 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": false,
+        "modifies_state": true,
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 0
       },
-      "usage_count": 4
+      "usage_count": 5
     },
     "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
       "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
@@ -178263,6 +178462,78 @@
       },
       "usage_count": 1
     }
+  },
+  "No file has been imported": {
+    "message": "No file has been imported",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "customer_management",
+          "marketplace",
+          "project_management"
+        ],
+        "feature_areas": [
+          "import",
+          "import-users",
+          "course-accounts"
+        ],
+        "component_types": [
+          "page",
+          "form"
+        ],
+        "paths": [
+          "customer/import/Step3PreviewAndImport.tsx",
+          "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
+          "project/course-accounts/Step2PreviewAndCreate.tsx",
+          "project/import/Step5PreviewAndImport.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 4
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "{count} duplicate records were removed.": {
     "message": "{count} duplicate records were removed.",
@@ -202979,13 +203250,13 @@
   "Join organization": {
     "message": "Join organization",
     "context": {
-      "primary_ui_type": "unknown",
+      "primary_ui_type": "label",
       "ui_types": [
-        "unknown"
+        "unknown",
+        "label"
       ],
       "components": [
-        "ModalDialog",
-        "Link"
+        "ModalDialog"
       ],
       "is_user_facing": true,
       "text_characteristics": {
@@ -203008,7 +203279,7 @@
         ],
         "feature_areas": [
           "invitations",
-          "navigation"
+          "footer"
         ],
         "component_types": [
           "dialog",
@@ -203016,13 +203287,12 @@
         ],
         "paths": [
           "invitations/GroupInvitationConfirmDialog.tsx",
-          "navigation/JoinOrganizationFooterLink.tsx"
+          "navigation/footer/useFooterLinks.tsx"
         ]
       },
       "jsx_context": {
         "tags": [
-          "ModalDialog",
-          "span"
+          "ModalDialog"
         ],
         "conditional_render": false
       },
@@ -210028,6 +210298,130 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
+  "Group invitation has been created.": {
+    "message": "Group invitation has been created.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invitations/actions/GroupInvitationCreateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to create group invitation.": {
+    "message": "Unable to create group invitation.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "actions"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "invitations/actions/GroupInvitationCreateDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Create group invitation": {
     "message": "Create group invitation",
     "context": {
@@ -211430,6 +211824,69 @@
       },
       "usage_count": 1
     }
+  },
+  "Unable to locate email information": {
+    "message": "Unable to locate email information",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 5,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "create"
+        ],
+        "component_types": [
+          "form"
+        ],
+        "paths": [
+          "invitations/actions/create/BulkUpload.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "{count} users": {
     "message": "{count} users",
@@ -215193,6 +215650,58 @@
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
+  },
+  "You are not allowed to accept this invitation. Your email or organization must match the invitation restrictions.": {
+    "message": "You are not allowed to accept this invitation. Your email or organization must match the invitation restrictions.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 113,
+        "wordCount": 17,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "invitations/utils.ts"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
   },
   "Invitation is not valid anymore.": {
     "message": "Invitation is not valid anymore.",
@@ -239174,7 +239683,7 @@
         ],
         "feature_areas": [
           "common",
-          "navigation",
+          "footer",
           "update-floating-ips",
           "resource",
           "UserResourcesWidget"
@@ -239187,7 +239696,7 @@
         ],
         "paths": [
           "marketplace/common/CopyToClipboard.tsx",
-          "navigation/FooterLinks.tsx",
+          "navigation/footer/SupportMenu.tsx",
           "openstack/openstack-instance/actions/update-floating-ips/FloatingIpRow.tsx",
           "resource/ResourceAccessButton.tsx",
           "user/dashboard/UserResourcesWidget/ResourceQuickInfo.tsx"
@@ -270746,73 +271255,6 @@
       "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
-  "No file has been imported": {
-    "message": "No file has been imported",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 25,
-        "wordCount": 5,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "marketplace",
-          "project_management"
-        ],
-        "feature_areas": [
-          "import-users",
-          "import"
-        ],
-        "component_types": [
-          "page"
-        ],
-        "paths": [
-          "marketplace/offerings/import-users/Step2PreviewAndImport.tsx",
-          "project/import/Step5PreviewAndImport.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 2
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
   "At least one user is required.": {
     "message": "At least one user is required.",
     "context": {
@@ -289851,6 +290293,70 @@
       "text_characteristics": {
         "length": 24,
         "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "marketplace"
+        ],
+        "feature_areas": [
+          "integration"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "marketplace/offerings/update/integration/EditScriptDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This appears in the marketplace context. Use business-appropriate language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "An error occurred during script execution.": {
+    "message": "An error occurred during script execution.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 42,
+        "wordCount": 6,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
@@ -364472,14 +364978,14 @@
       "primary_ui_type": "title",
       "ui_types": [
         "property_value",
-        "unknown",
+        "label",
         "menu_item",
+        "unknown",
         "generic_element",
         "title",
         "text_content"
       ],
       "components": [
-        "Link",
         "MenuItem",
         "MenuAccordion",
         "LandingHeroSection",
@@ -364507,7 +365013,7 @@
         ],
         "feature_areas": [
           "marketplace",
-          "navigation",
+          "footer",
           "sidebar",
           "proposals"
         ],
@@ -364519,7 +365025,7 @@
         ],
         "paths": [
           "marketplace/routes.ts",
-          "navigation/FooterLinks.tsx",
+          "navigation/footer/useFooterLinks.tsx",
           "navigation/sidebar/CallPublicMenu.tsx",
           "proposals/CallsForProposals.tsx",
           "proposals/PublicCallsList.tsx",
@@ -364530,12 +365036,11 @@
       },
       "jsx_context": {
         "tags": [
-          "Link",
           "MenuItem",
           "LandingHeroSection",
           "Table"
         ],
-        "conditional_render": true
+        "conditional_render": false
       },
       "action_types": [
         "unknown"
@@ -364546,7 +365051,7 @@
         "has_api_calls": false
       },
       "interaction_context": {
-        "modifies_state": true,
+        "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
         "max_nesting_level": 5
@@ -364555,9 +365060,7 @@
     },
     "translator_notes": [
       "This is a title/heading. Use title case if appropriate in your language.",
-      "This appears in the marketplace context. Use business-appropriate language.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
+      "This appears in the marketplace context. Use business-appropriate language."
     ]
   },
   "Managed projects": {
@@ -379375,709 +379878,6 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
-  "Version check endpoint is not available.": {
-    "message": "Version check endpoint is not available.",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 40,
-        "wordCount": 6,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "navigation"
-        ],
-        "paths": [
-          "navigation/AppFooter.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Unable to check version update: {error}": {
-    "message": "Unable to check version update: {error}",
-    "context": {
-      "primary_ui_type": "error_message",
-      "ui_types": [
-        "error_message"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 39,
-        "wordCount": 6,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {
-        "error": {
-          "type": "unknown"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "navigation"
-        ],
-        "paths": [
-          "navigation/AppFooter.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": true,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is an error message. Ensure tone is helpful and not alarming.",
-      "Contains variables: error. Variable types: unknown.",
-      "This action modifies application state. Use clear, actionable language.",
-      "This appears in a form with validation. Ensure message supports user guidance."
-    ]
-  },
-  "Backend health status": {
-    "message": "Backend health status",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 21,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "navigation/BackendHealthStatusDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 8
-      },
-      "usage_count": 1
-    }
-  },
-  "Check name": {
-    "message": "Check name",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 10,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "navigation/BackendHealthStatusDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "th"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 10
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Explore marketplace": {
-    "message": "Explore marketplace",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Link"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 19,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "navigation"
-        ],
-        "paths": [
-          "navigation/FooterLinks.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "Link"
-        ],
-        "conditional_render": true
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": true,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 3
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This action modifies application state. Use clear, actionable language.",
-      "This text may be conditionally shown/hidden. Ensure context independence."
-    ]
-  },
-  "Join public organization": {
-    "message": "Join public organization",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "Link"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 24,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "navigation"
-        ],
-        "paths": [
-          "navigation/JoinOrganizationFooterLink.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "span"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 5
-      },
-      "usage_count": 1
-    }
-  },
-  "Upgrade available": {
-    "message": "Upgrade available",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 17,
-        "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "navigation/UpgradeNotificationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "ModalDialog"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 5
-      },
-      "usage_count": 1
-    }
-  },
-  "Waldur {version} is now available.": {
-    "message": "Waldur {version} is now available.",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 34,
-        "wordCount": 5,
-        "hasVariables": true,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": true,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {
-        "version": {
-          "type": "unknown"
-        }
-      },
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "navigation/UpgradeNotificationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "p"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "Contains variables: version. Variable types: unknown."
-    ]
-  },
-  "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:": {
-    "message": "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 86,
-        "wordCount": 12,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "navigation/UpgradeNotificationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "p"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 4
-      },
-      "usage_count": 1
-    }
-  },
-  "For Helm-based deployments": {
-    "message": "For Helm-based deployments",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 26,
-        "wordCount": 3,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": true,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "navigation/UpgradeNotificationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "a"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    }
-  },
-  "For Docker Compose deployments": {
-    "message": "For Docker Compose deployments",
-    "context": {
-      "primary_ui_type": "unknown",
-      "ui_types": [
-        "unknown"
-      ],
-      "components": [
-        "ModalDialog"
-      ],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 30,
-        "wordCount": 4,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "general"
-        ],
-        "feature_areas": [
-          "navigation"
-        ],
-        "component_types": [
-          "dialog"
-        ],
-        "paths": [
-          "navigation/UpgradeNotificationDialog.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [
-          "a"
-        ],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 6
-      },
-      "usage_count": 1
-    }
-  },
   "Optional cookies: Help us improve your experience": {
     "message": "Optional cookies: Help us improve your experience",
     "context": {
@@ -380605,6 +380405,697 @@
       "This text may be conditionally shown/hidden. Ensure context independence."
     ]
   },
+  "Version check endpoint is not available.": {
+    "message": "Version check endpoint is not available.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 40,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "navigation"
+        ],
+        "paths": [
+          "navigation/footer/AppFooter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to check version update: {error}": {
+    "message": "Unable to check version update: {error}",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 39,
+        "wordCount": 6,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "error": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "navigation"
+        ],
+        "paths": [
+          "navigation/footer/AppFooter.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "Contains variables: error. Variable types: unknown.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Backend health status": {
+    "message": "Backend health status",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 21,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/footer/BackendHealthStatusDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "span"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    }
+  },
+  "Check name": {
+    "message": "Check name",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 10,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/footer/BackendHealthStatusDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "th"
+        ],
+        "conditional_render": true
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 10
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This text may be conditionally shown/hidden. Ensure context independence."
+    ]
+  },
+  "Upgrade available": {
+    "message": "Upgrade available",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/footer/UpgradeNotificationDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "ModalDialog"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 5
+      },
+      "usage_count": 1
+    }
+  },
+  "Waldur {version} is now available.": {
+    "message": "Waldur {version} is now available.",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 34,
+        "wordCount": 5,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "version": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/footer/UpgradeNotificationDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: version. Variable types: unknown."
+    ]
+  },
+  "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:": {
+    "message": "Your Waldur installation needs to be upgraded. For upgrade instructions, please visit:",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 86,
+        "wordCount": 12,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/footer/UpgradeNotificationDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "p"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 4
+      },
+      "usage_count": 1
+    }
+  },
+  "For Helm-based deployments": {
+    "message": "For Helm-based deployments",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/footer/UpgradeNotificationDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "a"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "For Docker Compose deployments": {
+    "message": "For Docker Compose deployments",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "ModalDialog"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 30,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "navigation/footer/UpgradeNotificationDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "a"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 6
+      },
+      "usage_count": 1
+    }
+  },
+  "Join public organization": {
+    "message": "Join public organization",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 24,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "navigation"
+        ],
+        "paths": [
+          "navigation/footer/useFooterLinks.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Explore marketplace": {
+    "message": "Explore marketplace",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "footer"
+        ],
+        "component_types": [
+          "navigation"
+        ],
+        "paths": [
+          "navigation/footer/useFooterLinks.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Pending confirmations": {
     "message": "Pending confirmations",
     "context": {
@@ -380769,7 +381260,7 @@
       },
       "jsx_context": {
         "tags": [
-          "a"
+          "span"
         ],
         "conditional_render": false
       },
@@ -380785,7 +381276,7 @@
         "modifies_state": false,
         "triggers_navigation": false,
         "has_validation": false,
-        "max_nesting_level": 2
+        "max_nesting_level": 4
       },
       "usage_count": 1
     }
@@ -393073,6 +393564,59 @@
       "usage_count": 1
     }
   },
+  "Application Credential": {
+    "message": "Application Credential",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 22,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "openstack/OpenStackCredentialsForm.tsx",
+          "openstack/openstack-discovery/steps/CredentialsStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    }
+  },
   "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)": {
     "message": "Keystone auth URL (e.g. http://keystone.example.com:5000/v3)",
     "context": {
@@ -393124,6 +393668,75 @@
       },
       "usage_count": 1
     }
+  },
+  "Authentication type": {
+    "message": "Authentication type",
+    "context": {
+      "primary_ui_type": "label",
+      "ui_types": [
+        "label",
+        "unknown"
+      ],
+      "components": [
+        "FormGroup",
+        "WizardModal"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 19,
+        "wordCount": 2,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "steps"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "openstack/OpenStackCredentialsForm.tsx",
+          "openstack/openstack-discovery/steps/CredentialsStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 7
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
   },
   "Tenant user username": {
     "message": "Tenant user username",
@@ -398087,6 +398700,140 @@
         "triggers_navigation": false,
         "has_validation": true,
         "max_nesting_level": 7
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Application Credential ID": {
+    "message": "Application Credential ID",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormGroup",
+        "WizardModal"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 25,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "steps"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "openstack/openstack-discovery/steps/CredentialsStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Application Credential Secret": {
+    "message": "Application Credential Secret",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "unknown"
+      ],
+      "components": [
+        "FormGroup",
+        "WizardModal"
+      ],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 3,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "steps"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "openstack/openstack-discovery/steps/CredentialsStep.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [
+          "FormGroup"
+        ],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 8
       },
       "usage_count": 1
     },
@@ -440138,6 +440885,69 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
+  "User has been added to project.": {
+    "message": "User has been added to project.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 31,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "team"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "project/team/AddUserDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Unable to add user.": {
     "message": "Unable to add user.",
     "context": {
@@ -440204,6 +441014,69 @@
     },
     "translator_notes": [
       "This is an error message. Ensure tone is helpful and not alarming.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "User has been added to organization.": {
+    "message": "User has been added to organization.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 36,
+        "wordCount": 6,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "project_management"
+        ],
+        "feature_areas": [
+          "team"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "project/team/AddUserDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
       "This action modifies application state. Use clear, actionable language.",
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
@@ -470666,6 +471539,68 @@
       "usage_count": 1
     }
   },
+  "User has been added.": {
+    "message": "User has been added.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 20,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "general"
+        ],
+        "feature_areas": [
+          "team"
+        ],
+        "component_types": [
+          "dialog"
+        ],
+        "paths": [
+          "proposals/team/AddUserDialog.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Select a user to assign a role within the project.": {
     "message": "Select a user to assign a role within the project.",
     "context": {
@@ -478830,6 +479765,7 @@
         "component_types": [],
         "paths": [
           "proposals/update/coi-settings/COISummaryDialog.tsx",
+          "support/SupportAIAssistantLogsList.tsx",
           "table/generated/ChatThreadsFilter.tsx",
           "table/generated/UserPendingActionsFilter.tsx"
         ]
@@ -478852,7 +479788,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     }
   },
   "Reviewer has a direct financial stake in the proposal outcome": {
@@ -479250,6 +480186,7 @@
         "component_types": [],
         "paths": [
           "proposals/update/coi-settings/COISummaryDialog.tsx",
+          "support/SupportAIAssistantLogsList.tsx",
           "table/generated/ChatThreadsFilter.tsx",
           "table/generated/UserPendingActionsFilter.tsx"
         ]
@@ -479272,7 +480209,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     }
   },
   "Reviewer is in the same department as proposal team member": {
@@ -479669,6 +480606,7 @@
         "component_types": [],
         "paths": [
           "proposals/update/coi-settings/COISummaryDialog.tsx",
+          "support/SupportAIAssistantLogsList.tsx",
           "table/generated/ChatThreadsFilter.tsx",
           "table/generated/UserPendingActionsFilter.tsx"
         ]
@@ -479691,7 +480629,7 @@
         "has_validation": false,
         "max_nesting_level": 0
       },
-      "usage_count": 3
+      "usage_count": 4
     }
   },
   "Reviewer and proposal team are in the same consortium": {
@@ -497457,6 +498395,132 @@
       "This action modifies application state. Use clear, actionable language."
     ]
   },
+  "Workload has been redeployed.": {
+    "message": "Workload has been redeployed.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 29,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "cluster"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "rancher/cluster/WorkloadActions.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to redeploy workload.": {
+    "message": "Unable to redeploy workload.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 28,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "cluster"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "rancher/cluster/WorkloadActions.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
   "Delete workload": {
     "message": "Delete workload",
     "context": {
@@ -497583,6 +498647,132 @@
       "Contains variables: workload. Variable types: unknown.",
       "This action modifies application state. Use clear, actionable language.",
       "This is a question. Ensure question format is appropriate in your language."
+    ]
+  },
+  "Workload has been deleted.": {
+    "message": "Workload has been deleted.",
+    "context": {
+      "primary_ui_type": "success_message",
+      "ui_types": [
+        "success_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "cluster"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "rancher/cluster/WorkloadActions.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is a success message. Use positive, confirming language.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
+    ]
+  },
+  "Unable to delete workload.": {
+    "message": "Unable to delete workload.",
+    "context": {
+      "primary_ui_type": "error_message",
+      "ui_types": [
+        "error_message"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 26,
+        "wordCount": 4,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": true,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "infrastructure"
+        ],
+        "feature_areas": [
+          "cluster"
+        ],
+        "component_types": [
+          "button"
+        ],
+        "paths": [
+          "rancher/cluster/WorkloadActions.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": true,
+        "triggers_navigation": false,
+        "has_validation": true,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "This is an error message. Ensure tone is helpful and not alarming.",
+      "This action modifies application state. Use clear, actionable language.",
+      "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
   "Create node": {
@@ -555304,6 +556494,459 @@
       "usage_count": 1
     }
   },
+  "Injection: {categories}": {
+    "message": "Injection: {categories}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 23,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "categories": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "support"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: categories. Variable types: unknown."
+    ]
+  },
+  "PII: {categories}": {
+    "message": "PII: {categories}",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "function_call"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 17,
+        "wordCount": 2,
+        "hasVariables": true,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": true,
+        "isAllCaps": false
+      },
+      "variables": {
+        "categories": {
+          "type": "unknown"
+        }
+      },
+      "file_context": {
+        "domains": [
+          "support"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "component"
+        ],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    },
+    "translator_notes": [
+      "Contains variables: categories. Variable types: unknown."
+    ]
+  },
+  "Flagged": {
+    "message": "Flagged",
+    "context": {
+      "primary_ui_type": "title",
+      "ui_types": [
+        "unknown",
+        "title"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 7,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [
+          "support"
+        ],
+        "feature_areas": [
+          "support"
+        ],
+        "component_types": [
+          "list"
+        ],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx",
+          "support/SupportAIAssistantLogsList.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 2
+    },
+    "translator_notes": [
+      "This is a title/heading. Use title case if appropriate in your language."
+    ]
+  },
+  "Block": {
+    "message": "Block",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Redact": {
+    "message": "Redact",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 6,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Warn": {
+    "message": "Warn",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Flag": {
+    "message": "Flag",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 4,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
+  "Allow": {
+    "message": "Allow",
+    "context": {
+      "primary_ui_type": "unknown",
+      "ui_types": [
+        "property_value"
+      ],
+      "components": [],
+      "is_user_facing": true,
+      "text_characteristics": {
+        "length": 5,
+        "wordCount": 1,
+        "hasVariables": false,
+        "hasMarkup": false,
+        "isQuestion": false,
+        "isExclamation": false,
+        "isSentence": false,
+        "startsWithCapital": true,
+        "hasNumbers": false,
+        "hasSpecialChars": false,
+        "isAllCaps": false
+      },
+      "variables": {},
+      "file_context": {
+        "domains": [],
+        "feature_areas": [],
+        "component_types": [],
+        "paths": [
+          "support/SupportAIAssistantLogsExpandableRow.tsx"
+        ]
+      },
+      "jsx_context": {
+        "tags": [],
+        "conditional_render": false
+      },
+      "action_types": [
+        "unknown"
+      ],
+      "api_context": {
+        "endpoints": [],
+        "http_methods": [],
+        "has_api_calls": false
+      },
+      "interaction_context": {
+        "modifies_state": false,
+        "triggers_navigation": false,
+        "has_validation": false,
+        "max_nesting_level": 0
+      },
+      "usage_count": 1
+    }
+  },
   "Assistant": {
     "message": "Assistant",
     "context": {
@@ -555651,67 +557294,6 @@
       "text_characteristics": {
         "length": 11,
         "wordCount": 2,
-        "hasVariables": false,
-        "hasMarkup": false,
-        "isQuestion": false,
-        "isExclamation": false,
-        "isSentence": false,
-        "startsWithCapital": true,
-        "hasNumbers": false,
-        "hasSpecialChars": false,
-        "isAllCaps": false
-      },
-      "variables": {},
-      "file_context": {
-        "domains": [
-          "support"
-        ],
-        "feature_areas": [
-          "support"
-        ],
-        "component_types": [
-          "list"
-        ],
-        "paths": [
-          "support/SupportAIAssistantLogsList.tsx"
-        ]
-      },
-      "jsx_context": {
-        "tags": [],
-        "conditional_render": false
-      },
-      "action_types": [
-        "unknown"
-      ],
-      "api_context": {
-        "endpoints": [],
-        "http_methods": [],
-        "has_api_calls": false
-      },
-      "interaction_context": {
-        "modifies_state": false,
-        "triggers_navigation": false,
-        "has_validation": false,
-        "max_nesting_level": 0
-      },
-      "usage_count": 1
-    },
-    "translator_notes": [
-      "This is a title/heading. Use title case if appropriate in your language."
-    ]
-  },
-  "Flagged": {
-    "message": "Flagged",
-    "context": {
-      "primary_ui_type": "title",
-      "ui_types": [
-        "title"
-      ],
-      "components": [],
-      "is_user_facing": true,
-      "text_characteristics": {
-        "length": 7,
-        "wordCount": 1,
         "hasVariables": false,
         "hasMarkup": false,
         "isQuestion": false,
