@@ -1,9 +1,14 @@
 import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
-import { FunctionComponent, memo, useMemo, useState } from 'react';
+import React, { FunctionComponent, memo, useMemo, useState } from 'react';
 import { useMediaQuery } from 'react-responsive';
-import { chatMessagesList, Message, ThreadSession } from 'waldur-js-client';
+import {
+  ActionTakenEnum,
+  chatMessagesList,
+  Message,
+  ThreadSession,
+} from 'waldur-js-client';
 
 import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
 import { Badge } from '@waldur/core/Badge';
@@ -13,8 +18,58 @@ import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
-import { getSeverityBadgeVariant } from '@waldur/support/SupportAIAssistantLogsList';
+import {
+  getSeverityBadgeVariant,
+  severityLabels,
+} from '@waldur/support/SupportAIAssistantLogsList';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+
+const formatDetectionCategories = (
+  injectionCategories: unknown,
+  piiCategories: unknown,
+): React.ReactNode => {
+  const parts: string[] = [];
+  if (Array.isArray(injectionCategories) && injectionCategories.length > 0) {
+    parts.push(
+      translate('Injection: {categories}', {
+        categories: injectionCategories.join(', '),
+      }),
+    );
+  }
+  if (Array.isArray(piiCategories) && piiCategories.length > 0) {
+    parts.push(
+      translate('PII: {categories}', {
+        categories: piiCategories.join(', '),
+      }),
+    );
+  }
+  if (parts.length === 0) return translate('Flagged');
+  return <span style={{ whiteSpace: 'pre-line' }}>{parts.join('\n')}</span>;
+};
+
+const getActionBadgeVariant = (
+  action: ActionTakenEnum,
+): 'danger' | 'orange' | 'warning' | 'secondary' => {
+  switch (action) {
+    case 'block':
+      return 'danger';
+    case 'redact':
+      return 'orange';
+    case 'warn':
+      return 'warning';
+    case 'flag':
+    default:
+      return 'secondary';
+  }
+};
+
+const actionLabels: Record<ActionTakenEnum, string> = {
+  block: translate('Block'),
+  redact: translate('Redact'),
+  warn: translate('Warn'),
+  flag: translate('Flag'),
+  allow: translate('Allow'),
+};
 
 interface MessageWithVersions {
   current: Message;
@@ -56,17 +111,34 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
           )}
         </span>
         {selectedMessage.is_flagged && (
-          <Badge
-            variant={getSeverityBadgeVariant(
-              selectedMessage.injection_severity,
+          <Tip
+            id={`flag-detail-${messageGroup.current.uuid}`}
+            label={formatDetectionCategories(
+              selectedMessage.injection_categories,
+              selectedMessage.pii_categories,
             )}
-            size="sm"
-            leftIcon={<ShieldWarningIcon weight="bold" />}
-            outline
           >
-            {selectedMessage.injection_severity}
-          </Badge>
+            <Badge
+              variant={getSeverityBadgeVariant(selectedMessage.severity)}
+              size="sm"
+              leftIcon={<ShieldWarningIcon weight="bold" />}
+              outline
+            >
+              {severityLabels[selectedMessage.severity]}
+            </Badge>
+          </Tip>
         )}
+        {selectedMessage.is_flagged &&
+          selectedMessage.action_taken &&
+          selectedMessage.action_taken !== 'allow' && (
+            <Badge
+              variant={getActionBadgeVariant(selectedMessage.action_taken)}
+              size="sm"
+              outline
+            >
+              {actionLabels[selectedMessage.action_taken]}
+            </Badge>
+          )}
         {hasHistoricalFlag && (
           <Tip
             id={`historical-flag-${messageGroup.current.uuid}`}

@@ -27,6 +27,7 @@ interface ParseAssistantStreamResult {
   threadUuid?: string;
   userMessageUuid?: string;
   assistantMessageUuid?: string;
+  warning?: string;
 }
 
 export async function parseAssistantStream(
@@ -47,6 +48,7 @@ export async function parseAssistantStream(
   let receivedThreadUuid: string | undefined;
   let userMessageUuid: string | undefined;
   let assistantMessageUuid: string | undefined;
+  let warning: string | undefined;
 
   try {
     for await (const part of streamChat(
@@ -73,8 +75,15 @@ export async function parseAssistantStream(
         }
       }
 
-      // Skip metadata-only chunks (no renderable content)
-      if (!part.k && !part.c) continue;
+      // Capture PII/security warning
+      if (part.w) {
+        warning = part.w;
+      }
+
+      // Skip metadata-only chunks (no renderable content).
+      // Warning-only chunks (part.w without part.k/part.c) pass through
+      // so that setMessages is called, persisting the warning in metadata.
+      if (!part.k && !part.c && !part.w) continue;
 
       // Accumulate updates in memory
       currentBlocks = updateBlocks(currentBlocks, part);
@@ -95,6 +104,7 @@ export async function parseAssistantStream(
               custom: {
                 ...existingMetadata,
                 blocks: currentBlocks,
+                ...(warning ? { warning } : {}),
               },
             },
             status: { type: 'running' },
@@ -149,6 +159,7 @@ export async function parseAssistantStream(
             custom: {
               ...existingMetadata,
               blocks: completedBlocks,
+              ...(warning ? { warning } : {}),
             },
           },
           status: { type: 'complete', reason: 'stop' },
@@ -166,5 +177,6 @@ export async function parseAssistantStream(
     threadUuid: receivedThreadUuid,
     userMessageUuid,
     assistantMessageUuid,
+    warning,
   };
 }

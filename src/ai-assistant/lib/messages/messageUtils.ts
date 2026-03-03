@@ -2,6 +2,7 @@ import { ThreadMessageLike } from '@assistant-ui/react';
 
 import {
   UIBlock,
+  BlockBasedMetadata,
   BlockHistoryEntry,
   MessageHandlerDependencies,
 } from '@waldur/ai-assistant/lib/types';
@@ -24,10 +25,12 @@ export const addPreviousBlocks = (
 
   const custom = metadata?.custom ?? {};
   const existingHistory = (custom.blockHistory as BlockHistoryEntry[]) ?? [];
+  const previousWarning = (custom as BlockBasedMetadata).warning;
 
   const newEntry: BlockHistoryEntry = {
     blocks: previousBlocks,
     createdAt: new Date().toISOString(),
+    ...(previousWarning ? { warning: previousWarning } : {}),
   };
 
   // Limit to MAX_BLOCK_HISTORY_ENTRIES entries, removing oldest if needed

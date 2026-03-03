@@ -20,6 +20,14 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
+export const severityLabels: Record<InjectionSeverityEnum, string> = {
+  critical: translate('Critical'),
+  high: translate('High'),
+  medium: translate('Medium'),
+  low: translate('Low'),
+  none: translate('None'),
+};
+
 export const getSeverityBadgeVariant = (
   severity: InjectionSeverityEnum,
 ): 'danger' | 'orange' | 'warning' | 'secondary' | 'success' => {
@@ -99,7 +107,7 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
               size="sm"
               outline
             >
-              {severity.charAt(0).toUpperCase() + severity.slice(1)}
+              {severityLabels[severity]}
             </Badge>
           );
         },
