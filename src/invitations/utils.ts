@@ -165,8 +165,10 @@ export async function acceptInvitation(token) {
 
 function submitGroupRequest(token) {
   return userGroupInvitationsSubmitRequest({ path: { uuid: token } })
-    .then((res) => {
+    .then(async (res) => {
       if (res.data.auto_approved) {
+        // Refresh user to get updated permissions from backend
+        await UsersService.refreshCurrentUser();
         store.dispatch(
           showSuccess(
             translate('You have successfully joined {organization}', {
