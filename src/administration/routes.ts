@@ -113,6 +113,22 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-table-growth-settings',
+    url: 'table-growth-settings/',
+    parent: 'admin-system-management',
+    component: lazyComponent(() =>
+      import('./table-growth/AdministrationTableGrowthSettings').then(
+        (module) => ({
+          default: module.AdministrationTableGrowthSettings,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Table growth settings'),
+    },
+  },
+
+  {
     name: 'admin-system-info',
     url: 'system-info/',
     parent: 'admin-system-management',
