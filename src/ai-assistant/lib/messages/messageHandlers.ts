@@ -137,6 +137,7 @@ export const createOnEdit = (deps: MessageHandlerDependencies) => {
             custom: {
               ...updatedMetadata?.custom,
               blocks: [], // Clear blocks for new stream
+              warning: undefined, // Clear warning for new stream
             },
           },
         };
@@ -216,6 +217,7 @@ export const createOnReload = (deps: MessageHandlerDependencies) => {
             custom: {
               ...updatedMetadata?.custom,
               blocks: [], // Clear blocks for new stream
+              warning: undefined, // Clear warning for new stream
             },
           },
         };

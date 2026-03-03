@@ -25,6 +25,13 @@ export const useVersionSelector = ({
     return blockHistory[selectedVersionIndex]?.blocks ?? [];
   }, [selectedVersionIndex, currentBlocks, blockHistory]);
 
+  const displayedWarning = useMemo(() => {
+    if (selectedVersionIndex === -1) {
+      return undefined; // Current version warning is read from metadata directly
+    }
+    return blockHistory[selectedVersionIndex]?.warning;
+  }, [selectedVersionIndex, blockHistory]);
+
   // Convert internal index to user-facing version number
   // History[0] is oldest = Version 1, Current = Version N
   const displayVersionNumber =
@@ -63,6 +70,7 @@ export const useVersionSelector = ({
     totalVersions,
     isViewingHistory,
     displayedBlocks,
+    displayedWarning,
     displayLabel,
     displayVersionNumber,
     goToPreviousVersion,

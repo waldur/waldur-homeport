@@ -48,9 +48,11 @@ export interface UIBlockProps {
 export interface BlockHistoryEntry {
   blocks: UIBlock[];
   createdAt: string;
+  warning?: string;
 }
 
 export interface BlockBasedMetadata {
   blocks?: UIBlock[];
   blockHistory?: BlockHistoryEntry[];
+  warning?: string;
 }

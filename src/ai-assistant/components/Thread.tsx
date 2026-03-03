@@ -35,6 +35,7 @@ import {
   BlockBasedMetadata,
   BlockHistoryEntry,
 } from '@waldur/ai-assistant/lib/types';
+import { AlertItem } from '@waldur/core/AlertItem';
 import { Badge } from '@waldur/core/Badge';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { translate } from '@waldur/i18n';
@@ -322,6 +323,7 @@ const BlockBasedContent: FC = () => {
 
   const {
     displayedBlocks,
+    displayedWarning,
     displayLabel,
     isViewingHistory,
     canGoPrevious,
@@ -331,6 +333,7 @@ const BlockBasedContent: FC = () => {
     totalVersions,
   } = useVersionSelector({ currentBlocks, blockHistory });
 
+  const activeWarning = isViewingHistory ? displayedWarning : metadata?.warning;
   const hasHistory = totalVersions > 1;
 
   if (displayedBlocks.length === 0 && isRunning && !hasErrors) {
@@ -362,6 +365,13 @@ const BlockBasedContent: FC = () => {
         </div>
       )}
 
+      {activeWarning && (
+        <AlertItem
+          variant="warning"
+          title={translate('Sensitive information detected')}
+          body={activeWarning}
+        />
+      )}
       <BlockRenderer blocks={displayedBlocks} />
     </>
   );
