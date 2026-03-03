@@ -1,4 +1,4 @@
-import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
+import { CheckCircleIcon, InfoIcon, XCircleIcon } from '@phosphor-icons/react';
 import { userGroupInvitationsSubmitRequest } from 'waldur-js-client';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
@@ -6,8 +6,12 @@ import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
 import { FieldErrorMessage } from '@waldur/form/FieldError';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse } from '@waldur/store/notify';
 import { UsersService } from '@waldur/user/UsersService';
+
+const isDuplicateOrConflictError = (errorMessage: unknown): boolean =>
+  typeof errorMessage === 'string' &&
+  (errorMessage.includes('already exists') ||
+    errorMessage.includes('already has'));
 
 export const requestToAccessOrganization = (
   groupInvitationUuid: string,
@@ -60,13 +64,23 @@ export const requestToAccessOrganization = (
     })
     .catch(async (err) => {
       GroupInvitationTokenStorage.remove();
-      // Extract error message from the error object
       const errorMessage = format(err);
-      if (
-        typeof errorMessage === 'string' &&
-        errorMessage.includes('Request has been created already')
-      ) {
-        dispatch(showErrorResponse(err));
+      if (isDuplicateOrConflictError(errorMessage)) {
+        await waitForConfirmation(
+          dispatch,
+          translate('You already have access'),
+          translate(
+            'You already have the requested role or a pending request for this organization.',
+          ),
+          {
+            type: 'primary',
+            size: 'sm',
+            positiveButton: translate('OK'),
+            onlyPositiveButton: true,
+            positiveButtonVariant: 'primary w-95px',
+            iconNode: <InfoIcon weight="bold" />,
+          },
+        );
       } else {
         const formattedMessage = (
           <div>
