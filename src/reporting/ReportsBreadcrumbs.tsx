@@ -143,6 +143,11 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         title: translate('Provider offerings'),
         state: 'reporting-provider-offerings',
       },
+      {
+        key: 'openstack-instances',
+        title: translate('OpenStack instances'),
+        state: 'reporting-openstack-instances',
+      },
     ],
   },
   financial: {

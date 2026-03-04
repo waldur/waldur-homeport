@@ -404,6 +404,15 @@ export const ReportingDashboard: FC = () => {
             description: translate('Offering performance metrics'),
             state: 'reporting-provider-offerings',
           },
+          {
+            uuid: 'openstack-instances',
+            icon: <StackIcon size={18} weight="bold" />,
+            title: translate('OpenStack instances'),
+            description: translate(
+              'OpenStack instance inventory and aggregated metrics',
+            ),
+            state: 'reporting-openstack-instances',
+          },
         ],
       });
     }
