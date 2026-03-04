@@ -1240,6 +1240,12 @@ export const SettingsDescription = [
         type: 'integer',
       },
       {
+        key: 'OIDC_DEFAULT_LOGOUT_URL',
+        description: translate('Default logout URL used as fallback when IdentityProvider does not have a logout_url set. This allows configuring a global logout endpoint for OIDC providers that don\'t expose end_session_endpoint in their discovery document.'),
+        default: '',
+        type: 'url_field',
+      },
+      {
         key: 'WALDUR_AUTH_SOCIAL_ROLE_CLAIM',
         description: translate('OAuth/OIDC token claim name containing user roles for automatic staff/support assignment. If the claim contains \'staff\', user gets is_staff=True. If it contains \'support\', user gets is_support=True. Leave empty to disable role synchronization from identity provider.'),
         default: '',
