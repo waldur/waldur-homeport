@@ -103,14 +103,27 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
                             );
                           })
                           .map((target) => (
-                            <span
-                              key={target.uuid}
-                              className="badge badge-light-secondary"
-                              title={target.target_type || 'Software target'}
-                            >
-                              {target.target_name ||
-                                `${target.target_type}/${target.target_subtype || 'unknown'}`}
-                            </span>
+                            <>
+                              <span
+                                key={target.uuid}
+                                className="badge badge-light-secondary"
+                                title={target.target_type || 'Software target'}
+                              >
+                                {target.target_name ||
+                                  `${target.target_type}/${target.target_subtype || 'unknown'}`}
+                              </span>
+                              {(
+                                target.gpu_architectures as string[] | undefined
+                              )?.map((gpuArch) => (
+                                <span
+                                  key={`${target.uuid}-gpu-${gpuArch}`}
+                                  className="badge badge-light-warning"
+                                  title={translate('GPU architecture')}
+                                >
+                                  {gpuArch}
+                                </span>
+                              ))}
+                            </>
                           ))}
                       </div>
                     </div>

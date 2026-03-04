@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { StringField } from '@waldur/form';
+import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { RootState } from '@waldur/store/reducers';
@@ -91,6 +92,26 @@ const PureMarketplaceSoftwarePackagesFilter: FunctionComponent<{}> = () => (
         placeholder={translate('Toolchain')}
       />
     </TableFilterItem>
+    <TableFilterItem
+      title={translate('Has GPU')}
+      name="has_gpu"
+      badgeValue={(value) => (value ? translate('Has GPU') : translate('All'))}
+      ellipsis={false}
+    >
+      <Field
+        name="has_gpu"
+        component={AwesomeCheckboxField}
+        label={translate('Has GPU')}
+        parse={(v) => v || undefined}
+      />
+    </TableFilterItem>
+    <TableFilterItem title={translate('GPU architecture')} name="gpu_arch">
+      <Field
+        name="gpu_arch"
+        component={StringField}
+        placeholder={translate('GPU architecture')}
+      />
+    </TableFilterItem>
   </>
 );
 
@@ -104,6 +125,8 @@ interface MarketplaceSoftwarePackagesFilterFormData {
   category: string;
   license: string;
   toolchain_name: string;
+  has_gpu: boolean;
+  gpu_arch: string;
 }
 
 export const MarketplaceSoftwarePackagesFilter = reduxForm<
@@ -141,6 +164,12 @@ export const selectMarketplaceSoftwarePackagesFilter = createSelector<
     }
     if (values.toolchain_name) {
       filter.toolchain_name = values.toolchain_name;
+    }
+    if (values.has_gpu) {
+      filter.has_gpu = values.has_gpu;
+    }
+    if (values.gpu_arch) {
+      filter.gpu_arch = values.gpu_arch;
     }
   }
   return filter;

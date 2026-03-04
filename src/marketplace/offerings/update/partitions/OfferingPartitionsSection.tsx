@@ -54,6 +54,16 @@ export const OfferingPartitionsSection: FC<OfferingSectionProps> = (props) => {
           render: ({ row }) => renderFieldOrDash(row.partition_name),
         },
         {
+          title: translate('CPU architecture'),
+          render: ({ row }) => renderFieldOrDash(row.cpu_arch),
+          optional: true,
+        },
+        {
+          title: translate('GPU architecture'),
+          render: ({ row }) => renderFieldOrDash(row.gpu_arch),
+          optional: true,
+        },
+        {
           title: translate('Default time limit'),
           render: ({ row }) =>
             row.default_time
