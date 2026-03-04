@@ -74,6 +74,14 @@ export const UserPluginOptionsForm: FunctionComponent<
             'If true, offering users are created automatically when a user is added to the project with active offering resources or when a new offering resource is created.',
           ),
         },
+        canCreateUser && {
+          label: translate('Enable automatic deletion of offering users'),
+          key: 'plugin_options.offering_user_auto_deletion',
+          component: AwesomeCheckboxField,
+          description: translate(
+            'If enabled, offering users will be automatically marked for deletion when users lose project access. If disabled, deletion must be triggered manually by the service provider.',
+          ),
+        },
         props.offering.type === SITE_AGENT_PLUGIN && {
           label: translate('Account name generation policy'),
           key: 'plugin_options.account_name_generation_policy',
