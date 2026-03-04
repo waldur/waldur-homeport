@@ -7,7 +7,7 @@ import {
   OpenStackSecurityGroup,
   openstackSecurityGroupsList,
   openstackSecurityGroupsSetRules,
-  ProtocolEnum,
+  SecurityGroupRuleProtocolEnum,
 } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
@@ -98,7 +98,9 @@ export const serializeRulesPayload = (formData: SecurityGroupRulesFormData) =>
       ...rest,
       ethertype: ethertype as EthertypeEnum,
       direction: direction as DirectionEnum,
-      protocol: (protocol === 'any' ? '' : protocol) as ProtocolEnum,
+      protocol: (protocol === 'any'
+        ? ''
+        : protocol) as SecurityGroupRuleProtocolEnum,
       from_port: port_range.min,
       to_port: port_range.max,
     }),

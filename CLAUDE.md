@@ -34,6 +34,7 @@ For detailed guidance, see `docs/`:
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns
 - `form-migration.md` - Redux → React Final Form
+- `filter-migration-guide.md` - Generated table filters from OpenAPI schema
 - `development-setup.md` - Build, environment, tooling
 - `ui-consistency-guidelines.md` - Empty states, buttons, loading, tooltips
 
@@ -56,6 +57,11 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   ```
 
 - Use design token button variants (`tertiary`, `danger`, `success`, `text-primary`) - linter enforces this
+
+- Use **generated filters** for table filter components (see `docs/filter-migration-guide.md`):
+  1. Add config to `generate-filters-config.yaml`
+  2. Run `node generate-filters.cjs`
+  3. Import from `@waldur/table/generated/` — never write manual filter components
 
 - Follow UI/UX consistency patterns (see `docs/ui-consistency-guidelines.md`):
   - Use `renderFieldOrDash()` for null/undefined values (never `|| 'N/A'` or `|| ''`)

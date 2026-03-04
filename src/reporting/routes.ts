@@ -637,6 +637,19 @@ export const states: StateDeclaration[] = [
       breadcrumb: () => translate('VM type overview'),
     },
   },
+  {
+    name: 'reporting-openstack-instances',
+    url: 'openstack-instances/?tab',
+    parent: 'reporting-provider',
+    component: lazyComponent(() =>
+      import('./openstack-instances/OpenstackInstancesPage').then((m) => ({
+        default: m.OpenstackInstancesPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('OpenStack instances'),
+    },
+  },
 
   // Operations category (cross-provider maintenance reporting)
   {

@@ -837,3 +837,42 @@ overrides:
       name: month
       component: Select
       options: props.monthOptions
+
+  marketplace_stats_openstack_instances:
+    filters:
+      - customer_uuid
+      - project_uuid
+      - runtime_state
+      - hypervisor_hostname
+      - flavor_name
+      - image_name
+    customer_uuid:
+      label: Organization
+      name: organization
+    project_uuid:
+      name: project
+      extraQuery:
+        customer: 'props.organizationUuid'
+    runtime_state:
+      label: Runtime state
+      component: Select
+      options:
+        - value: ACTIVE
+          label: Active
+        - value: SHUTOFF
+          label: Shutoff
+        - value: PAUSED
+          label: Paused
+        - value: SUSPENDED
+          label: Suspended
+        - value: ERROR
+          label: Error
+    hypervisor_hostname:
+      label: Hypervisor
+      placeholder: Hypervisor hostname...
+    flavor_name:
+      label: Flavor
+      placeholder: Flavor name...
+    image_name:
+      label: Image
+      placeholder: Image name...
