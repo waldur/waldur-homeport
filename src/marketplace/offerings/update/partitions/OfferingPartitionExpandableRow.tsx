@@ -6,6 +6,7 @@ import { CheckOrX } from '@waldur/core/CheckOrX';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface OwnProps {
   row: NestedPartition;
@@ -16,8 +17,18 @@ export const OfferingPartitionExpandableRow: FC<OwnProps> = ({ row }) => (
     <Row>
       <Col lg={6}>
         <Field
+          label={translate('CPU architecture')}
+          value={renderFieldOrDash(row.cpu_arch)}
+          space={2}
+        />
+        <Field
+          label={translate('GPU architecture')}
+          value={renderFieldOrDash(row.gpu_arch)}
+          space={2}
+        />
+        <Field
           label={translate('Default task binding policy (SLURM cpu_bind)')}
-          value={row.cpu_bind || 'N/A'}
+          value={renderFieldOrDash(row.cpu_bind)}
           space={2}
         />
         <Field

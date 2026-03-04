@@ -34,6 +34,15 @@ export const OfferingPartitionForm: FC = () => {
         />
       </FormGroup>
 
+      {/* Architecture */}
+      <GroupHeader>{translate('Architecture')}</GroupHeader>
+      <FormGroup label={translate('CPU architecture (e.g., x86_64/amd/zen3)')}>
+        <Field name="cpu_arch" component={StringField as any} />
+      </FormGroup>
+      <FormGroup label={translate('GPU architecture (e.g., nvidia/cc90)')}>
+        <Field name="gpu_arch" component={StringField as any} />
+      </FormGroup>
+
       {/* CPU Configuration */}
       <GroupHeader>{translate('CPU configuration')}</GroupHeader>
       <NonNegativeField

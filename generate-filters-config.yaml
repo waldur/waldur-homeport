@@ -633,6 +633,8 @@ overrides:
       - category
       - license
       - toolchain_name
+      - has_gpu
+      - gpu_arch
     catalog_name:
       label: Catalog
     catalog_version:
@@ -645,6 +647,10 @@ overrides:
       label: License
     toolchain_name:
       label: Toolchain
+    has_gpu:
+      label: Has GPU
+    gpu_arch:
+      label: GPU architecture
 
   user_data_access_history:
     operationId: users_data_access_history_list
