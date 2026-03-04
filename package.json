@@ -75,7 +75,7 @@
     "jszip": "3.8.0",
     "leaflet": "^1.9.4",
     "leaflet-geosearch": "^3.11.1",
-    "lodash-es": "^4.17.21",
+    "lodash-es": "^4.17.23",
     "luxon": "3.2.1",
     "markdown-to-jsx": "^7.7.4",
     "mermaid": "^11.12.1",
@@ -83,7 +83,7 @@
     "papaparse": "^5.2.2",
     "pdfmake": "^0.2.18",
     "prop-types": "^15.6.2",
-    "qs": "^6.14.0",
+    "qs": "^6.14.2",
     "react": "^18.3.0",
     "react-bootstrap": "^2.10.9",
     "react-dom": "^18.3.0",
@@ -183,7 +183,7 @@
     "vite-plugin-svgr": "^4.3.0",
     "vitest": "^3.2.4",
     "vitest-location-mock": "^1.0.4",
-    "xlsx": "^0.18.5"
+    "read-excel-file": "^7.0.1"
   },
   "prettier": {
     "semi": true,
@@ -252,6 +252,15 @@
       "src/table/generated/ProposalProposalsFilter.tsx",
       "src/table/generated/MarketplaceStatsOpenstackInstancesFilter.tsx"
     ]
+  },
+  "resolutions": {
+    "rollup": "^4.59.0",
+    "systeminformation": "^5.31.0",
+    "lodash": "^4.17.23",
+    "lodash-es": "^4.17.23",
+    "qs": "^6.14.2",
+    "diff": "^5.2.2",
+    "**/serve-handler/**/minimatch": "^3.1.3"
   },
   "packageManager": "yarn@1.22.22+sha512.a6b2f7906b721bba3d67d4aff083df04dad64c399707841b7acf00f6b133b7ac24255f2652fa22ae3534329dc6180534e98d17432037ff6fd140556e2bb3137e"
 }

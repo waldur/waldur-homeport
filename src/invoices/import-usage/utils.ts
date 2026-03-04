@@ -1,5 +1,5 @@
+import readXlsxFile from 'read-excel-file/browser';
 import { v4 as uuidv4 } from 'uuid';
-import * as XLSX from 'xlsx';
 
 import { COMPONENT_USAGE_IMPORT_FORM_ID } from '@waldur/invoices/constants';
 
@@ -12,54 +12,26 @@ import {
 
 export { COMPONENT_USAGE_IMPORT_FORM_ID };
 
-export const parseExcelFile = (file: File): Promise<ExcelParseResult> => {
-  return new Promise((resolve, reject) => {
-    const reader = new FileReader();
+export const parseExcelFile = async (file: File): Promise<ExcelParseResult> => {
+  const jsonData = await readXlsxFile(file);
 
-    reader.onload = (e) => {
-      try {
-        const data = e.target?.result;
-        const workbook = XLSX.read(data, { type: 'binary' });
+  if (jsonData.length === 0) {
+    throw new Error('The file is empty');
+  }
 
-        // Get the first sheet
-        const firstSheetName = workbook.SheetNames[0];
-        const worksheet = workbook.Sheets[firstSheetName];
+  // First row is headers
+  const headers = jsonData[0].map((h) => String(h ?? '').trim());
 
-        // Convert to JSON with headers
-        const jsonData = XLSX.utils.sheet_to_json(worksheet, {
-          header: 1,
-          defval: '',
-        }) as any[][];
-
-        if (jsonData.length === 0) {
-          reject(new Error('The file is empty'));
-          return;
-        }
-
-        // First row is headers
-        const headers = jsonData[0].map((h) => String(h).trim());
-
-        // Rest are data rows
-        const rows = jsonData.slice(1).map((row) => {
-          const rowObj: Record<string, any> = {};
-          headers.forEach((header, index) => {
-            rowObj[header] = row[index];
-          });
-          return rowObj;
-        });
-
-        resolve({ headers, rows });
-      } catch {
-        reject(new Error('Failed to parse the Excel file'));
-      }
-    };
-
-    reader.onerror = () => {
-      reject(new Error('Failed to read the file'));
-    };
-
-    reader.readAsBinaryString(file);
+  // Rest are data rows
+  const rows = jsonData.slice(1).map((row) => {
+    const rowObj: Record<string, any> = {};
+    headers.forEach((header, index) => {
+      rowObj[header] = row[index] ?? '';
+    });
+    return rowObj;
   });
+
+  return { headers, rows };
 };
 
 export const mapRowsToUsage = (
