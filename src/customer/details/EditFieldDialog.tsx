@@ -225,6 +225,15 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                   'Email addresses for receiving notifications, separated by commas',
                 )}
               />
+            ) : props.resolve.name === 'allowed_domains' ? (
+              <CommaSeparatedListField
+                name="allowed_domains"
+                label={translate('Allowed domains')}
+                placeholder={translate('Enter domains separated by commas')}
+                description={translate(
+                  'List of allowed domains for offering endpoints.',
+                )}
+              />
             ) : // Service provider
             props.resolve.name === 'description' ? (
               <TextField name="description" label={translate('Description')} />

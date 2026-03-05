@@ -45,10 +45,10 @@ export const CommaSeparatedListField: FC<CommaSeparatedListFieldProps> = ({
       className={solid && 'form-control-solid'}
       type="text"
       placeholder={placeholder}
+      {...rest}
       value={value || ''}
       onChange={handleChange}
       onBlur={handleBlur}
-      {...rest}
     />
   );
 };
