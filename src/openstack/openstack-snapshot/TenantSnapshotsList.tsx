@@ -14,6 +14,7 @@ import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
   resourceScope,
@@ -41,7 +42,7 @@ export const TenantSnapshotsList: FunctionComponent<{ resourceScope }> = ({
         },
         {
           title: translate('Description'),
-          render: ({ row }) => row.description || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.description),
         },
         {
           title: translate('Size'),

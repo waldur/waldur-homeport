@@ -13,6 +13,7 @@ import {
   parseIntField,
 } from '@waldur/marketplace/common/utils';
 import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { Component } from './types';
 
@@ -49,7 +50,7 @@ export const TotalLimitComponentsTable: FunctionComponent<
         {props.components.map((component, index) => (
           <tr key={index}>
             <td>{component.name}</td>
-            <td>{component.measured_unit || 'N/A'}</td>
+            <td>{renderFieldOrDash(component.measured_unit)}</td>
             <td>
               {props.viewMode ? (
                 component.amount

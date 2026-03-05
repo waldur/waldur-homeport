@@ -18,7 +18,15 @@ const SKIP_PROPERTIES = new Set([
   'src',
 ]);
 
-const EXCLUDED_FILE_PATTERNS = [/table\/utils/, /table\/constants/];
+const EXCLUDED_FILE_PATTERNS = [
+  /table\/utils/,
+  /table\/constants/,
+  /exporters?\//,
+  /Export[^/]*\.tsx?$/,
+  /ExportDropdown\.tsx?$/,
+];
+
+const SKIP_FUNCTIONS = new Set(['translate', 'formatJsx', 'formatJsxTemplate']);
 
 /**
  * Walk up the AST to check if the node is inside a context
@@ -57,6 +65,19 @@ function isInSkippedContext(node) {
       current.id &&
       current.id.type === 'Identifier' &&
       SKIP_PROPERTIES.has(current.id.name)
+    ) {
+      return true;
+    }
+
+    // translate('...', { key: value || 'N/A' }) — string interpolation, not display
+    if (
+      current.type === 'CallExpression' &&
+      current.callee &&
+      ((current.callee.type === 'Identifier' &&
+        SKIP_FUNCTIONS.has(current.callee.name)) ||
+        (current.callee.type === 'MemberExpression' &&
+          current.callee.property &&
+          SKIP_FUNCTIONS.has(current.callee.property.name)))
     ) {
       return true;
     }

@@ -16,6 +16,7 @@ import { createFetcher } from '@waldur/table/api';
 import { BooleanField } from '@waldur/table/BooleanField';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { VOLUME_TYPE } from '../constants';
 
@@ -57,7 +58,7 @@ export const TenantVolumesList: FunctionComponent<{ resourceScope }> = ({
         },
         {
           title: translate('Type'),
-          render: ({ row }) => row.type_name || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.type_name),
         },
         {
           title: translate('Attached to'),

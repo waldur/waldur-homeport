@@ -5,6 +5,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { FieldEditButton } from './FieldEditButton';
 import { StaffOnlyIndicator } from './StaffOnlyIndicator';
@@ -66,7 +67,7 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
             <FormTable.Item
               key={row.key}
               label={row.label}
-              value={row.value || 'N/A'}
+              value={renderFieldOrDash(row.value)}
               actions={
                 props.canUpdate ? (
                   <>
@@ -92,7 +93,7 @@ export const CustomerBillingPanel: FC<CustomerEditPanelProps> = (props) => {
             <FormTable.Item
               key={row.key}
               label={row.label}
-              value={row.value || 'N/A'}
+              value={renderFieldOrDash(row.value)}
               actions={
                 props.canUpdate ? (
                   <>

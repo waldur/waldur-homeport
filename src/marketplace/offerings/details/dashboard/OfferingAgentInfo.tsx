@@ -8,6 +8,7 @@ import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const AgentPackagesDialog = lazyComponent(() =>
   import('./AgentPackagesDialog').then((module) => ({
@@ -71,7 +72,7 @@ export const OfferingAgentInfo: FC<OwnProps> = ({
             <FormTable.Item
               label={translate('Version')}
               colon
-              value={agentIdentity.version || 'N/A'}
+              value={renderFieldOrDash(agentIdentity.version)}
             />
             <FormTable.Item
               label={translate('Uptime')}

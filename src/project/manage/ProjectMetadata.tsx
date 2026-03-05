@@ -11,6 +11,7 @@ import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/const
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { usePermission } from '@waldur/permissions/hooks';
 import { useNotify } from '@waldur/store/hooks';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { ParsedAnswer } from '../metadata/ParsedAnswer';
@@ -57,12 +58,11 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
       <FormTable>
         <FormTable.Item
           label={translate('OECD FoS code')}
-          value={
-            (project.oecd_fos_2007_code && (
+          value={renderFieldOrDash(
+            project.oecd_fos_2007_code && (
               <span>{`${project.oecd_fos_2007_code}. ${project.oecd_fos_2007_label}`}</span>
-            )) ||
-            'N/A'
-          }
+            ),
+          )}
           actions={
             isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) && (
               <FieldEditButton project={project} name="oecd_fos_2007_code" />
@@ -72,7 +72,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
 
         <FormTable.Item
           label={translate('Backend ID')}
-          value={project.backend_id || 'N/A'}
+          value={renderFieldOrDash(project.backend_id)}
           actions={<FieldEditButton project={project} name="backend_id" />}
         />
 

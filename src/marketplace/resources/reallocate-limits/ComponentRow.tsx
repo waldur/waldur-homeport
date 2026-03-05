@@ -14,6 +14,7 @@ import {
 import { getResourceComponentValidator } from '@waldur/marketplace/offerings/store/limits';
 import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
 import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/ChangedLimitField';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface ComponentRowProps {
   component: {
@@ -110,7 +111,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   return (
     <tr>
       <td className="text-nowrap">{component.name}</td>
-      <td>{component.limit || 'N/A'}</td>
+      <td>{renderFieldOrDash(component.limit)}</td>
       <FormField
         name={`limits.${component.type}`}
         parse={parseIntField}

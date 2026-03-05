@@ -14,6 +14,7 @@ import { ProviderOfferingUsersFilter } from '@waldur/marketplace/service-provide
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { useUser } from '@waldur/workspace/hooks';
 
 interface OwnProps {
@@ -52,7 +53,7 @@ export const UserOfferingList: FunctionComponent<OwnProps> = ({
     },
     {
       title: translate('Username'),
-      render: ({ row }) => <>{row.username || 'N/A'}</>,
+      render: ({ row }) => <>{renderFieldOrDash(row.username)}</>,
     },
     {
       title: translate('Created at'),

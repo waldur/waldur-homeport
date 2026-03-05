@@ -1,4 +1,5 @@
 import { Badge } from '@waldur/core/Badge';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const STATUS_COLORS = {
   Open: 'primary',
@@ -15,6 +16,6 @@ export const IssueStatus = ({ status }) => (
     outline
     className="flex-shrink-0"
   >
-    {status || 'N/A'}
+    {renderFieldOrDash(status)}
   </Badge>
 );

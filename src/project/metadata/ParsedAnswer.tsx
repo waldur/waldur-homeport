@@ -3,6 +3,7 @@ import { Answer, QuestionAdmin } from 'waldur-js-client';
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { formatFilesize } from '@waldur/core/utils';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface ParsedAnswerProps {
   question: QuestionAdmin;
@@ -54,7 +55,7 @@ export const ParsedAnswer: FC<ParsedAnswerProps> = ({ question, answer }) => {
 
   return answerValue || [0, false].includes(answerValue) ? (
     Array.isArray(answerValue) ? (
-      answerValue.join(', ') || 'N/A'
+      renderFieldOrDash(answerValue.join(', '))
     ) : answerValue === true || answerValue === false ? (
       <BooleanBadge value={answerValue} />
     ) : (

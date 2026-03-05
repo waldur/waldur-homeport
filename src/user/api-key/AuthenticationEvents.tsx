@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const EventDateField = ({ row }) => <>{formatRelative(row.created)}</>;
 
@@ -30,11 +31,12 @@ export const AuthenticationEvents: FunctionComponent<{ user }> = ({ user }) => {
       columns={[
         {
           title: translate('Message'),
-          render: ({ row }) => eventsRegistry.formatEvent(row) || 'N/A',
+          render: ({ row }) =>
+            renderFieldOrDash(eventsRegistry.formatEvent(row)),
         },
         {
           title: translate('IP address'),
-          render: ({ row }) => row.context['ip_address'] || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.context['ip_address']),
         },
         {
           title: translate('Time'),

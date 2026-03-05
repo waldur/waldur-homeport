@@ -13,6 +13,7 @@ import { createFetcher } from '@waldur/table/api';
 import { BooleanField } from '@waldur/table/BooleanField';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CreateNetworkAction } from '../openstack-tenant/actions/CreateNetworkAction';
 
@@ -80,9 +81,11 @@ export const TenantNetworksList: FunctionComponent<{ resourceScope }> = ({
         {
           title: translate('Subnets'),
           render: ({ row }) =>
-            row.subnets
-              .map((subnet) => `${subnet.name}: ${subnet.cidr}`)
-              .join(', ') || 'N/A',
+            renderFieldOrDash(
+              row.subnets
+                .map((subnet) => `${subnet.name}: ${subnet.cidr}`)
+                .join(', '),
+            ),
         },
         {
           title: translate('State'),

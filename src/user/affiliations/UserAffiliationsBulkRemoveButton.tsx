@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { canDeletePermission, revokePermission } from './utils';
@@ -33,7 +34,7 @@ export const UserAffiliationsBulkRemoveButton = ({
     try {
       const itemsList = allowedItemsToRemove.map((perm) => (
         <li key={perm.scope_uuid}>
-          {perm.role_name} ({perm.scope_name || '-'})
+          {perm.role_name} ({renderFieldOrDash(perm.scope_name)})
         </li>
       ));
 
@@ -72,7 +73,7 @@ export const UserAffiliationsBulkRemoveButton = ({
             showErrorResponse(
               e,
               translate('Unable to revoke permission {userName}.', {
-                userName: `${perm.role_name} (${perm.scope_name || '-'})`,
+                userName: `${perm.role_name} (${renderFieldOrDash(perm.scope_name)})`,
               }),
             ),
           );

@@ -11,6 +11,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { ActionItemType } from '@waldur/resource/actions/types';
 import { showErrorResponse, showInfo, showSuccess } from '@waldur/store/notify';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const BodyComponent = (router, setOption) => {
   return (
@@ -22,8 +23,8 @@ const BodyComponent = (router, setOption) => {
           const ips = port.fixed_ips?.length
             ? port.fixed_ips.map((fip) => fip.ip_address).join(', ')
             : '—';
-          const mac = port.mac_address || '—';
-          const subnet = port.subnet_name || '—';
+          const mac = renderFieldOrDash(port.mac_address);
+          const subnet = renderFieldOrDash(port.subnet_name);
           return {
             value: port.url,
             label: `${ips} (${mac}) / ${subnet}`.trim(),

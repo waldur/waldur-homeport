@@ -16,6 +16,7 @@ import { ServiceProvider } from '@waldur/marketplace/types';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { SecretValueField } from '../SecretValueField';
@@ -147,7 +148,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
 
         <FormTable.Item
           label={translate('Description')}
-          value={serviceProvider?.description || 'N/A'}
+          value={renderFieldOrDash(serviceProvider?.description)}
           actions={
             <FieldEditButton
               customer={serviceProvider}

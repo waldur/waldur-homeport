@@ -6,6 +6,7 @@ import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { UsageHistoryPoint, ComponentLabelMap } from './types';
 
@@ -99,7 +100,9 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
           );
           let result = `<strong>${date}</strong><br/>`;
           for (const param of params) {
-            const cumulative = param.value[1]?.toLocaleString() || '—';
+            const cumulative = renderFieldOrDash(
+              param.value[1]?.toLocaleString(),
+            );
             // Find the monthly usage for this point
             const type = Object.keys(seriesByType).find(
               (t) => getTypeLabel(t, labelMap) === param.seriesName,
@@ -107,7 +110,7 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
             const point = type
               ? seriesByType[type].find((p) => p.date === params[0].value[0])
               : null;
-            const monthly = point?.usage?.toLocaleString() || '—';
+            const monthly = renderFieldOrDash(point?.usage?.toLocaleString());
 
             result += `${param.marker} ${param.seriesName}<br/>`;
             result += `&nbsp;&nbsp;${translate('Monthly')}: ${monthly}<br/>`;

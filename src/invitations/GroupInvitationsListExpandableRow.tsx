@@ -6,6 +6,7 @@ import { UserPermissionRequestsList } from '@waldur/invitations/UserPermissionRe
 import { Field } from '@waldur/resource/summary';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { getGroupInvitationLink } from './utils';
 
@@ -22,7 +23,7 @@ const formatScopeType = (scopeType: string | null): string => {
   } else if (scopeType === 'project') {
     return translate('Project');
   }
-  return scopeType || 'N/A';
+  return renderFieldOrDash(scopeType);
 };
 
 export const GroupInvitationsListExpandableRow: FunctionComponent<{

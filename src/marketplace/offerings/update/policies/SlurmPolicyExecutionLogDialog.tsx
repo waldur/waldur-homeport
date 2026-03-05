@@ -12,6 +12,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface SlurmPolicyExecutionLogDialogProps {
   resolve: {
@@ -252,7 +253,9 @@ const CommandHistoryTab: FC<{ policyUuid: string }> = ({ policyUuid }) => {
                   </Badge>
                 )}
               </td>
-              <td className="small text-danger">{cmd.error_message || '-'}</td>
+              <td className="small text-danger">
+                {renderFieldOrDash(cmd.error_message)}
+              </td>
             </tr>
           ))}
         </tbody>

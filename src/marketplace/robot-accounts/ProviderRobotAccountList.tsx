@@ -15,6 +15,7 @@ import {
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { RobotAccountActions } from './RobotAccountActions';
@@ -66,7 +67,7 @@ export const ProviderRobotAccountList: FC<{ provider }> = ({ provider }) => {
     },
     {
       title: translate('Type'),
-      render: ({ row }) => row.type || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.type),
     },
     {
       title: translate('Username'),

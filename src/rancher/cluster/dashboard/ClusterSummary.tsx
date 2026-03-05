@@ -5,6 +5,7 @@ import { RancherCluster } from 'waldur-js-client';
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const ClusterSummary: FC<{
   resourceScope: RancherCluster;
@@ -16,7 +17,7 @@ export const ClusterSummary: FC<{
         <Field
           className="mb-2"
           label={translate('Kubernetes version')}
-          value={resourceScope?.kubernetes_version || 'N/A'}
+          value={renderFieldOrDash(resourceScope?.kubernetes_version)}
           labelCol={6}
           valueCol={6}
         />
@@ -24,15 +25,15 @@ export const ClusterSummary: FC<{
           <Field
             className="mb-2"
             label={translate('Load balancer IPs')}
-            value={
+            value={renderFieldOrDash(
               resourceScope?.public_ips
                 .map((item) =>
                   item.external_ip_address
                     ? `${item.ip_address}/${item.external_ip_address}`
                     : item.ip_address,
                 )
-                .join(',') || 'N/A'
-            }
+                .join(','),
+            )}
             hasCopy={Boolean(resourceScope?.public_ips?.length)}
             labelCol={6}
             valueCol={6}
@@ -42,7 +43,7 @@ export const ClusterSummary: FC<{
           <Field
             className="mb-2"
             label={translate('Router IPs')}
-            value={resourceScope?.router_ips.join(',') || 'N/A'}
+            value={renderFieldOrDash(resourceScope?.router_ips.join(','))}
             hasCopy={Boolean(resourceScope?.router_ips?.length)}
             labelCol={6}
             valueCol={6}

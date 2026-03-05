@@ -6,6 +6,7 @@ import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
 import { FieldErrorMessage } from '@waldur/form/FieldError';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { UsersService } from '@waldur/user/UsersService';
 
 const isDuplicateOrConflictError = (errorMessage: unknown): boolean =>
@@ -28,7 +29,7 @@ export const requestToAccessOrganization = (
         await waitForConfirmation(
           dispatch,
           translate('You have successfully joined {organization}', {
-            organization: groupInvitation.scope_name || 'N/A',
+            organization: renderFieldOrDash(groupInvitation.scope_name),
           }),
           translate(
             'You can now see the shared resources and collaborate with your team.',
@@ -48,7 +49,11 @@ export const requestToAccessOrganization = (
           translate('Request has been sent for approval'),
           translate(
             "Your request to join the organization {name} has been submitted. You’ll receive a notification once it's reviewed and approved.",
-            { name: <strong>{groupInvitation.scope_name || 'N/A'}</strong> },
+            {
+              name: (
+                <strong>{renderFieldOrDash(groupInvitation.scope_name)}</strong>
+              ),
+            },
             formatJsxTemplate,
           ),
           {

@@ -5,6 +5,7 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { OfferingSectionProps } from '../types';
 
@@ -37,15 +38,15 @@ export const OfferingSoftwareCatalogsSection: FC<OfferingSectionProps> = (
     const baseColumns = [
       {
         title: translate('Catalog'),
-        render: ({ row }) => row.catalog?.name || '—',
+        render: ({ row }) => renderFieldOrDash(row.catalog?.name),
       },
       {
         title: translate('Package count'),
-        render: ({ row }) => row.package_count || '—',
+        render: ({ row }) => renderFieldOrDash(row.package_count),
       },
       {
         title: translate('Version'),
-        render: ({ row }) => row.catalog?.version || '—',
+        render: ({ row }) => renderFieldOrDash(row.catalog?.version),
       },
       {
         title: translate('CPU family'),
@@ -82,7 +83,7 @@ export const OfferingSoftwareCatalogsSection: FC<OfferingSectionProps> = (
     if (isFeatureVisible(MarketplaceFeatures.display_offering_partitions)) {
       baseColumns.push({
         title: translate('Partition'),
-        render: ({ row }) => row.partition?.partition_name || '—',
+        render: ({ row }) => renderFieldOrDash(row.partition?.partition_name),
       });
     }
 

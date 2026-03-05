@@ -12,6 +12,7 @@ import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceS
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const mandatoryFields: MarketplaceResourcesListData['query']['field'] = [
   'uuid',
@@ -46,7 +47,7 @@ export const OfferingResourcesTable: FC<OfferingResourcesTableProps> = memo(
         },
         {
           title: translate('Project'),
-          render: ({ row }) => <>{row.project_name || '-'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.project_name)}</>,
         },
         {
           title: translate('Category'),

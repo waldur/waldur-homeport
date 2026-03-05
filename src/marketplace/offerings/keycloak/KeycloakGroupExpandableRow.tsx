@@ -12,6 +12,7 @@ import { createFetcher } from '@waldur/table/api';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { KeycloakMembershipRowActions } from './KeycloakMembershipRowActions';
 
@@ -38,11 +39,13 @@ export const KeycloakGroupExpandableRow: FC<{
           {
             title: translate('Name'),
             render: ({ row }) =>
-              [row.first_name, row.last_name].filter(Boolean).join(' ') || '—',
+              renderFieldOrDash(
+                [row.first_name, row.last_name].filter(Boolean).join(' '),
+              ),
           },
           {
             title: translate('Email'),
-            render: ({ row }) => row.email || '—',
+            render: ({ row }) => renderFieldOrDash(row.email),
           },
           {
             title: translate('Status'),

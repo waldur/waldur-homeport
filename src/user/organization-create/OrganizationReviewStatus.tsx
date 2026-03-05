@@ -5,6 +5,7 @@ import { Card } from 'react-bootstrap';
 import { translate } from '@waldur/i18n';
 import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import './OrganizationReviewStatus.scss';
 
@@ -16,7 +17,7 @@ interface OrganizationReviewStatusProps {
 export const OrganizationReviewStatus: FunctionComponent<
   OrganizationReviewStatusProps
 > = ({ onGoToDashboard, companyName }) => {
-  const displayName = companyName || 'N/A';
+  const displayName = renderFieldOrDash(companyName);
   const submittedAt = new Date().toLocaleDateString(undefined, {
     year: 'numeric',
     month: 'long',

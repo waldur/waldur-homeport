@@ -6,6 +6,7 @@ import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { LimitHistoryPoint, ComponentLabelMap } from './types';
 
@@ -103,7 +104,7 @@ export const ResourceLimitsHistoryChart: FC<
           );
           let result = `<strong>${date}</strong><br/>`;
           for (const param of params) {
-            result += `${param.marker} ${param.seriesName}: ${param.value[1]?.toLocaleString() || '—'}<br/>`;
+            result += `${param.marker} ${param.seriesName}: ${renderFieldOrDash(param.value[1]?.toLocaleString())}<br/>`;
           }
           return result;
         },

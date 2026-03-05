@@ -22,6 +22,7 @@ import Table from '@waldur/table/Table';
 import { TableExportButton } from '@waldur/table/TableExportButton';
 import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { PROVIDER_OFFERING_USERS_FORM_ID } from '../constants';
 
@@ -185,7 +186,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     },
     {
       title: translate('External username'),
-      render: ({ row }) => row.username || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.username),
       orderField: 'username',
     },
     {

@@ -7,6 +7,7 @@ import { ProjectCostField } from '@waldur/project/ProjectCostField';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ResourcesColumn } from './ResourcesColumn';
 
@@ -40,7 +41,7 @@ export const OrganizationProjectsExpandable = ({
         },
         {
           title: translate('Description'),
-          render: ({ row }) => row.description || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.description),
         },
         {
           title: translate('End date'),

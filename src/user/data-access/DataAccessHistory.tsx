@@ -11,6 +11,7 @@ import {
 } from '@waldur/table/generated/UserDataAccessHistoryFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { dataAccessHistoryFetcher } from './api';
 import { DataAccessHistoryEntry } from './types';
@@ -104,7 +105,9 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
         {
           title: translate('IP address'),
           render: ({ row }: { row: DataAccessHistoryEntry }) => (
-            <code className="text-muted small">{row.ip_address || '-'}</code>
+            <code className="text-muted small">
+              {renderFieldOrDash(row.ip_address)}
+            </code>
           ),
         },
         {

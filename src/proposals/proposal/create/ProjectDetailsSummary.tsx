@@ -6,6 +6,7 @@ import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
 import { translate } from '@waldur/i18n';
 import { Proposal, ProposalReview } from '@waldur/proposals/types';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CommentSection } from './CommentSection';
 import { DocumentationFiles } from './DocumentationFiles';
@@ -83,7 +84,7 @@ export const ProjectDetailsSummary: FC<ProjectDetailsSummaryProps> = ({
 
       <ReadOnlyFormControl
         label={translate('Research field (OECD code)')}
-        value={proposal.oecd_fos_2007_label || 'N/A'}
+        value={renderFieldOrDash(proposal.oecd_fos_2007_label)}
         tooltip={translate('Select the main research field for the project.')}
         actions={
           <div style={{ width: 42.5 }}>

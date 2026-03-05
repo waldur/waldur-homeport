@@ -13,6 +13,7 @@ import {
 } from '@waldur/table/generated/DataAccessLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import {
   getAccessorCategory,
   getAccessorTypeBadgeVariant,
@@ -92,7 +93,9 @@ export const SupportDataAccessLogsList = () => {
       {
         title: translate('IP address'),
         render: ({ row }: { row: GlobalUserDataAccessLog }) => (
-          <code className="text-muted">{row.ip_address || '—'}</code>
+          <code className="text-muted">
+            {renderFieldOrDash(row.ip_address)}
+          </code>
         ),
         export: (row: GlobalUserDataAccessLog) => row.ip_address || '',
       },

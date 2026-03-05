@@ -28,6 +28,7 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field } from '@waldur/resource/summary';
 import { useNotify } from '@waldur/store/hooks';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ExtendedUserAction } from './types';
 
@@ -67,7 +68,7 @@ const OrderSummaryTab: FC<{ order: OrderDetails }> = ({ order }) => {
                 label={order.resource_name}
               />
             ) : (
-              order.resource_name || '-'
+              renderFieldOrDash(order.resource_name)
             )
           }
           labelClass="w-100px"

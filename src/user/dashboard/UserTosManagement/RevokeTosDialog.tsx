@@ -17,6 +17,7 @@ import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const RevokeTosDialog = ({
   resolve: { tos, offering, refetch, offeringUuid },
@@ -115,7 +116,7 @@ export const RevokeTosDialog = ({
                         <td>
                           <ResourceNameField row={resource} />
                         </td>
-                        <td>{resource.project_name || '-'}</td>
+                        <td>{renderFieldOrDash(resource.project_name)}</td>
                         <td>{resource.category_title}</td>
                         <td>{formatDateTime(resource.created)}</td>
                         <td>

@@ -14,6 +14,7 @@ import { createFetcher } from '@waldur/table/api';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const mandatoryFields = [
   'uuid',
@@ -57,7 +58,7 @@ export const TagExpandableRow = ({ row }: TagExpandableRowProps) => {
           },
           {
             title: translate('Organization'),
-            render: ({ row }) => row.customer_name || 'N/A',
+            render: ({ row }) => renderFieldOrDash(row.customer_name),
             id: 'organization',
           },
           {

@@ -25,6 +25,7 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
@@ -150,7 +151,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Plan'),
-      render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
+      render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
       export: 'plan_name',
       keys: ['plan_name'],
       optional: true,
@@ -167,7 +168,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Effective ID'),
-      render: ({ row }) => <>{row.effective_id || 'N/A'}</>,
+      render: ({ row }) => <>{renderFieldOrDash(row.effective_id)}</>,
       export: 'effective_id',
       optional: true,
       keys: ['effective_id'],
@@ -175,7 +176,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
     },
     {
       title: translate('Backend ID'),
-      render: ({ row }) => <>{row.backend_id || 'N/A'}</>,
+      render: ({ row }) => <>{renderFieldOrDash(row.backend_id)}</>,
       export: 'backend_id',
       optional: true,
       keys: ['backend_id'],

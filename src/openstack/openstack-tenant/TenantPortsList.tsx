@@ -12,6 +12,7 @@ import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CreatePortAction } from './actions/CreatePortAction';
 
@@ -80,12 +81,12 @@ export const TenantPortsList: FunctionComponent<{ resourceScope }> = ({
         },
         {
           title: translate('MAC address'),
-          render: ({ row }) => <>{row.mac_address || 'N/A'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.mac_address)}</>,
           copyField: (row) => row.mac_address || '',
         },
         {
           title: translate('Network name'),
-          render: ({ row }) => <>{row.network_name || 'N/A'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.network_name)}</>,
           copyField: (row) => row.network_name || '',
         },
         {

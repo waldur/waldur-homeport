@@ -4,6 +4,7 @@ import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { translate } from '@waldur/i18n';
 import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
 import { Field } from '@waldur/resource/summary';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const OfferingUserDetailsField = ({
   offeringUser,
@@ -14,7 +15,7 @@ export const OfferingUserDetailsField = ({
     return null;
   }
 
-  const username = offeringUser.username || 'N/A';
+  const username = renderFieldOrDash(offeringUser.username);
   const showStateBadge = offeringUser.state && offeringUser.state !== 'OK';
 
   return (

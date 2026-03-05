@@ -3,6 +3,7 @@ import { FC, useMemo } from 'react';
 import { formatPhoneNumber } from '@waldur/core/utils';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { FieldEditButton } from './FieldEditButton';
 import { CustomerEditPanelProps } from './types';
@@ -49,7 +50,7 @@ export const CustomerContactPanel: FC<CustomerEditPanelProps> = (props) => {
           <FormTable.Item
             key={row.key}
             label={row.label}
-            value={row.value || 'N/A'}
+            value={renderFieldOrDash(row.value)}
             actions={
               props.canUpdate ? (
                 <FieldEditButton

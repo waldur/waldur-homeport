@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { useMarketplacePublicTabs } from '../utils';
 
@@ -35,7 +36,7 @@ export const ServiceProvidersList: FunctionComponent = () => {
     },
     {
       title: translate('Description'),
-      render: ({ row }) => row.description || '—',
+      render: ({ row }) => renderFieldOrDash(row.description),
       keys: ['description'],
     },
     {

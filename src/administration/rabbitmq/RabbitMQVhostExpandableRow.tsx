@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
 import type { RmqQueueStats, RmqVhostStats } from './api';
@@ -48,7 +49,7 @@ export const RabbitMQVhostExpandableRow: FC<
       {
         title: translate('Type'),
         render: ({ row: queue }: { row: RmqQueueStats }) =>
-          queue.object_type || '-',
+          renderFieldOrDash(queue.object_type),
       },
       {
         title: translate('Queue type'),

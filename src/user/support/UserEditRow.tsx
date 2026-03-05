@@ -15,6 +15,7 @@ import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { formatIsdName } from './IsdBadges';
 
@@ -83,7 +84,7 @@ export const UserEditRow = (props: RowProps) => {
   // Build the value display with appropriate indicators
   const valueDisplay = (
     <span className="d-inline-flex align-items-center gap-2">
-      <span>{props.value || '—'}</span>
+      <span>{renderFieldOrDash(props.value)}</span>
       {showProtectedMissingWarning && (
         <Tip
           label={translate('Required field not provided by {idp}', {

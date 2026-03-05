@@ -21,6 +21,7 @@ import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { TableRequest } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface ReviewerPoolExpandableRowProps {
   row: CallReviewerPool;
@@ -69,11 +70,11 @@ const AffiliationsTable: FC<{ affiliations: ReviewerAffiliation[] }> = ({
         },
         {
           title: translate('Position'),
-          render: ({ row }) => row.position_title || '-',
+          render: ({ row }) => renderFieldOrDash(row.position_title),
         },
         {
           title: translate('Department'),
-          render: ({ row }) => row.department || '-',
+          render: ({ row }) => renderFieldOrDash(row.department),
         },
       ]}
       verboseName={translate('affiliations')}
@@ -110,7 +111,7 @@ const ExpertiseTable: FC<{ expertise: ReviewerExpertise[] }> = ({
         },
         {
           title: translate('Category'),
-          render: ({ row }) => row.expertise_category_name || '-',
+          render: ({ row }) => renderFieldOrDash(row.expertise_category_name),
         },
       ]}
       verboseName={translate('expertise keywords')}
@@ -155,7 +156,7 @@ const PublicationsTable: FC<{ publications: ReviewerPublication[] }> = ({
         },
         {
           title: translate('Venue'),
-          render: ({ row }) => row.venue || '-',
+          render: ({ row }) => renderFieldOrDash(row.venue),
         },
         {
           title: translate('Year'),

@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { Badge } from '@waldur/core/Badge';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { useArrowConsumptionStatus, useArrowSettings } from '../api';
 
@@ -48,7 +49,7 @@ export const BillingSyncStatusCard = () => {
               {translate('Pending Records')}
             </div>
             <span className="fw-bold">
-              {(status as any)?.pending_count ?? '-'}
+              {renderFieldOrDash((status as any)?.pending_count)}
             </span>
           </Col>
           <Col md={3}>
@@ -56,7 +57,7 @@ export const BillingSyncStatusCard = () => {
               {translate('Synced Records')}
             </div>
             <span className="fw-bold">
-              {(status as any)?.synced_count ?? '-'}
+              {renderFieldOrDash((status as any)?.synced_count)}
             </span>
           </Col>
           <Col md={3}>
@@ -64,7 +65,7 @@ export const BillingSyncStatusCard = () => {
               {translate('Failed Records')}
             </div>
             <span className="fw-bold text-danger">
-              {(status as any)?.failed_count ?? '-'}
+              {renderFieldOrDash((status as any)?.failed_count)}
             </span>
           </Col>
         </Row>

@@ -13,6 +13,7 @@ import {
 } from '@waldur/table/generated/MarketplaceProjectUpdateRequestsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getProject } from '@waldur/workspace/selectors';
 
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
@@ -64,7 +65,7 @@ export const ProjectUpdateRequestsList: FunctionComponent = () => {
         },
         {
           title: translate('Reviewed by'),
-          render: ({ row }) => row.reviewed_by_full_name || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.reviewed_by_full_name),
         },
       ]}
       expandableRow={ProjectUpdateRequestExpandable}

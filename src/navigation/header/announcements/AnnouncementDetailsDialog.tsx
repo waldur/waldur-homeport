@@ -11,6 +11,7 @@ import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
 import { translate } from '@waldur/i18n';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { Field } from '@waldur/resource/summary';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const AnnouncementDetailsDialog: FC<{
   resolve: {
@@ -122,13 +123,13 @@ export const AnnouncementDetailsDialog: FC<{
             {announcement.maintenance_affected_offerings.map(
               (offering, index) => (
                 <tr key={offering.uuid || index}>
-                  <td>{offering.name || 'N/A'}</td>
+                  <td>{renderFieldOrDash(offering.name)}</td>
                   <td>
-                    {offering.impact_level_display ||
-                      offering.impact_level ||
-                      'N/A'}
+                    {renderFieldOrDash(
+                      offering.impact_level_display || offering.impact_level,
+                    )}
                   </td>
-                  <td>{offering.impact_description || 'N/A'}</td>
+                  <td>{renderFieldOrDash(offering.impact_description)}</td>
                 </tr>
               ),
             )}

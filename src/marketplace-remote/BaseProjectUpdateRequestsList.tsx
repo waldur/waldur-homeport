@@ -10,6 +10,7 @@ import { createFetcher } from '@waldur/table/api';
 import { RemoteProjectUpdateRequestStateOptions } from '@waldur/table/generated/MarketplaceProjectUpdateRequestsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ProjectUpdateRequestActions } from './ProjectUpdateRequestActions';
 import { ProjectUpdateRequestExpandable } from './ProjectUpdateRequestExpandable';
@@ -59,7 +60,7 @@ export const BaseProjectUpdateRequestsList: FunctionComponent<{
         },
         {
           title: translate('Reviewed by'),
-          render: ({ row }) => row.reviewed_by_full_name || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.reviewed_by_full_name),
         },
       ]}
       title={title || translate('Project updates')}
