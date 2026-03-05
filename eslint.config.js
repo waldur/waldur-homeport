@@ -21,6 +21,7 @@ import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
 import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
 import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
 import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
+import enforceNoResultWithCta from './eslint-rules/enforce-noresult-with-cta.js';
 import enforcePhosphorIconWeight from './eslint-rules/enforce-phosphor-icon-weight.js';
 import enforceRenderFieldOrDash from './eslint-rules/enforce-render-field-or-dash.js';
 import noDirectBootstrapButton from './eslint-rules/no-direct-bootstrap-button.js';
@@ -80,6 +81,7 @@ export default tseslint
             'enforce-nav-tabs-pattern': enforceNavTabsPattern,
             'enforce-border-radius-tokens': enforceBorderRadiusTokens,
             'enforce-breadcrumb-colors': enforceBreadcrumbColors,
+            'enforce-noresult-with-cta': enforceNoResultWithCta,
           },
         },
       },
@@ -123,6 +125,7 @@ export default tseslint
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
+        'waldur-custom/enforce-noresult-with-cta': 'warn',
 
         // Design system rules
         'waldur-custom/enforce-featured-icon': 'error',
