@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
 import { FieldEditButton } from '@waldur/customer/details/FieldEditButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
@@ -17,7 +18,7 @@ import { waitForConfirmation } from '@waldur/modal/actions';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
 import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getCustomer, isStaff } from '@waldur/workspace/selectors';
 
 import { SecretValueField } from '../SecretValueField';
 
@@ -33,6 +34,7 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
   const customer = useSelector(getCustomer);
+  const isStaffUser = useSelector(isStaff);
 
   const { data: secretCode, error } = useQuery({
     queryKey: ['ServiceProviderSecretCode', serviceProvider?.uuid],
@@ -155,6 +157,25 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
               name="description"
               callback={update}
             />
+          }
+        />
+
+        <FormTable.Item
+          label={translate('Allowed domains')}
+          value={renderFieldOrDash(
+            (serviceProvider?.allowed_domains as string[])?.join(', '),
+          )}
+          actions={
+            <>
+              <StaffOnlyIndicator />
+              {isStaffUser && (
+                <FieldEditButton
+                  customer={serviceProvider}
+                  name="allowed_domains"
+                  callback={update}
+                />
+              )}
+            </>
           }
         />
       </FormTable>
