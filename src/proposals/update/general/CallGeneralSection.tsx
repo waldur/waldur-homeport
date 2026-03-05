@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
 import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
 import { Call } from '@waldur/proposals/types';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { EditGeneralInfoButton } from './EditGeneralInfoButton';
 
@@ -32,7 +33,7 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
           <tbody>
             <tr>
               <td className="col-md-3">{translate('Name')}</td>
-              <td className="col-md-9">{props.call.name || 'N/A'}</td>
+              <td className="col-md-9">{renderFieldOrDash(props.call.name)}</td>
               <td className="row-actions">
                 <div>
                   <EditGeneralInfoButton
@@ -66,7 +67,9 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
             </tr>
             <tr>
               <td className="col-md-3">{translate('Reference code')}</td>
-              <td className="col-md-9">{props.call.reference_code || 'N/A'}</td>
+              <td className="col-md-9">
+                {renderFieldOrDash(props.call.reference_code)}
+              </td>
               <td className="row-actions">
                 <div>
                   <EditGeneralInfoButton
@@ -81,7 +84,9 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
             {isFeatureVisible(MarketplaceFeatures.call_only) && (
               <tr>
                 <td className="col-md-3">{translate('External URL')}</td>
-                <td className="col-md-9">{props.call.external_url || 'N/A'}</td>
+                <td className="col-md-9">
+                  {renderFieldOrDash(props.call.external_url)}
+                </td>
                 <td className="row-actions">
                   <div>
                     <EditGeneralInfoButton

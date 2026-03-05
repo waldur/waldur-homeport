@@ -1,6 +1,7 @@
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const OpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
@@ -13,7 +14,7 @@ export const OpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
       />
       <Component
         label={translate('Backend ID')}
-        value={resource.backend_id || 'N/A'}
+        value={renderFieldOrDash(resource.backend_id)}
         hasCopy={!!resource.backend_id}
       />
     </>

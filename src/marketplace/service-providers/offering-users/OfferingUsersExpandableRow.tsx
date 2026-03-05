@@ -22,6 +22,7 @@ import { createFetcher } from '@waldur/table/api';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { AnswerRowActions } from './AnswerRowActions';
 
@@ -75,7 +76,7 @@ export const OfferingUsersExpandableRow = ({
               isLoadingConsent ? (
                 <LoadingSpinnerIcon />
               ) : (
-                consent?.version || 'N/A'
+                renderFieldOrDash(consent?.version)
               )
             }
             labelClass="mw-175px"
@@ -121,7 +122,7 @@ export const OfferingUsersExpandableRow = ({
 
       <Field
         label={translate('Comment URL')}
-        value={offeringUser.service_provider_comment_url || 'N/A'}
+        value={renderFieldOrDash(offeringUser.service_provider_comment_url)}
         labelClass="mw-175px"
       />
 

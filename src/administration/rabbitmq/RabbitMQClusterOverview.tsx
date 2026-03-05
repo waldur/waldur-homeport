@@ -5,6 +5,7 @@ import { Col, Row, Table } from 'react-bootstrap';
 import { AccordionCard } from '@waldur/core/AccordionCard';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import {
   getRabbitMQOverview,
@@ -43,17 +44,20 @@ const RabbitMQClusterOverviewContent: FC<
         </h6>
         <ClusterInfoRow
           label={translate('Cluster name')}
-          value={data.cluster_name || '-'}
+          value={renderFieldOrDash(data.cluster_name)}
         />
         <ClusterInfoRow
           label={translate('RabbitMQ version')}
-          value={data.rabbitmq_version || '-'}
+          value={renderFieldOrDash(data.rabbitmq_version)}
         />
         <ClusterInfoRow
           label={translate('Erlang version')}
-          value={data.erlang_version || '-'}
+          value={renderFieldOrDash(data.erlang_version)}
         />
-        <ClusterInfoRow label={translate('Node')} value={data.node || '-'} />
+        <ClusterInfoRow
+          label={translate('Node')}
+          value={renderFieldOrDash(data.node)}
+        />
       </Col>
 
       <Col md={4}>

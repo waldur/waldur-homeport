@@ -11,6 +11,7 @@ import {
 } from '@waldur/table/generated/MarketplaceSoftwarePackagesFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { SoftwarePackageExpandableRow } from './SoftwarePackageExpandableRow';
 
@@ -97,7 +98,7 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
         },
         {
           title: translate('Description'),
-          render: ({ row }) => <>{row.description || '—'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.description)}</>,
           orderField: 'description',
           id: 'description',
           keys: ['description'],
@@ -132,7 +133,9 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
         {
           title: translate('Type'),
           render: ({ row }) => (
-            <>{row.catalog_type_display || row.catalog_type || '—'}</>
+            <>
+              {renderFieldOrDash(row.catalog_type_display || row.catalog_type)}
+            </>
           ),
           orderField: 'catalog_type',
           filter: 'catalog_type',

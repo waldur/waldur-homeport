@@ -13,6 +13,7 @@ import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
 import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
 import { translate } from '@waldur/i18n';
 import { Field } from '@waldur/resource/summary';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface OnboardingJustificationDetailsProps {
   justification: OnboardingJustification | null;
@@ -109,7 +110,7 @@ export const OnboardingJustificationDetails: FC<
                       <Field
                         key={key}
                         label={key}
-                        value={String(value || '—')}
+                        value={String(renderFieldOrDash(value))}
                       />
                     ))}
 
@@ -128,7 +129,7 @@ export const OnboardingJustificationDetails: FC<
                         <Field
                           key={key}
                           label={key}
-                          value={String(value || '—')}
+                          value={String(renderFieldOrDash(value))}
                         />
                       ),
                     )}

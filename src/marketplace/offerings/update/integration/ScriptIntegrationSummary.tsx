@@ -1,6 +1,7 @@
 import { CheckOrX } from '@waldur/core/CheckOrX';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { EditScriptButton } from './EditScriptButton';
 import { EditVarsButton } from './EditVarsButton';
@@ -26,7 +27,7 @@ export const ScriptIntegrationSummary = ({
           label={field.label}
           value={
             field.type === 'language' ? (
-              offering.secret_options[field.type] || 'N/A'
+              renderFieldOrDash(offering.secret_options[field.type])
             ) : (
               <CheckOrX value={offering.secret_options[field.type]} />
             )

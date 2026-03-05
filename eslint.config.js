@@ -122,7 +122,7 @@ export default tseslint
         'waldur-custom/enforce-formcheck-components': 'error',
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
-        'waldur-custom/enforce-render-field-or-dash': 'warn',
+        'waldur-custom/enforce-render-field-or-dash': 'error',
 
         // Design system rules
         'waldur-custom/enforce-featured-icon': 'error',

@@ -7,6 +7,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -79,9 +80,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
         user?.is_staff && {
           label: translate('Maximum number of service accounts'),
           key: 'max_service_accounts',
-          value: props.customer.max_service_accounts
-            ? props.customer.max_service_accounts
-            : 'N/A',
+          value: renderFieldOrDash(props.customer.max_service_accounts),
         },
         isFeatureVisible(
           MarketplaceFeatures.show_experimental_ui_components,
@@ -140,7 +139,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
               key={row.key}
               label={row.label}
               description={row.description}
-              value={row.value || 'N/A'}
+              value={renderFieldOrDash(row.value)}
               actions={
                 props.canUpdate &&
                 ([
@@ -215,7 +214,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
             <FormTable.Item
               key={row.key}
               label={row.label}
-              value={row.value || 'N/A'}
+              value={renderFieldOrDash(row.value)}
               actions={
                 props.canUpdate ? (
                   <FieldEditButton

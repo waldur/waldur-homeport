@@ -1,5 +1,7 @@
 import classNames from 'classnames';
 
+import { renderFieldOrDash } from '@waldur/table/utils';
+
 interface CheckoutPricingRowProps {
   label: any;
   value: any;
@@ -20,6 +22,6 @@ export const CheckoutPricingRow = ({
     )}
   >
     <div className={total ? 'fw-bold' : 'text-muted'}>{label}</div>
-    <div className="text-end fw-bold">{value || '-'}</div>
+    <div className="text-end fw-bold">{renderFieldOrDash(value)}</div>
   </div>
 );

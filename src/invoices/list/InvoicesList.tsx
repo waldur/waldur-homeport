@@ -17,6 +17,7 @@ import {
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { InvoicePayButton } from '../details/InvoicePayButton';
@@ -94,12 +95,12 @@ export const InvoicesList: FunctionComponent = () => {
     },
     {
       title: translate('Invoice date'),
-      render: ({ row }) => row.invoice_date || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.invoice_date),
       export: 'invoice_date',
     },
     {
       title: translate('Due date'),
-      render: ({ row }) => row.due_date || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.due_date),
       export: 'due_date',
     },
   ];

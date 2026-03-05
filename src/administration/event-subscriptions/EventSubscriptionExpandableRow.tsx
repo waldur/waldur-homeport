@@ -3,6 +3,7 @@ import { EventSubscription } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface EventSubscriptionExpandableRowProps {
   row: EventSubscription;
@@ -40,12 +41,12 @@ export const EventSubscriptionExpandableRow: FC<
               </tr>
               <tr>
                 <td className="text-muted">{translate('Full name')}</td>
-                <td>{row.user_full_name || '-'}</td>
+                <td>{renderFieldOrDash(row.user_full_name)}</td>
               </tr>
               <tr>
                 <td className="text-muted">{translate('Source IP')}</td>
                 <td>
-                  <code>{row.source_ip || '-'}</code>
+                  <code>{renderFieldOrDash(row.source_ip)}</code>
                 </td>
               </tr>
             </tbody>

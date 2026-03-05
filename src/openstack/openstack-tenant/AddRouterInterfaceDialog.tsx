@@ -14,6 +14,7 @@ import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { RootState } from '@waldur/store/reducers';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 const selector = formValueSelector(RESOURCE_ACTION_FORM);
 const typeSelector = (state: RootState): string => selector(state, 'type');
@@ -81,7 +82,7 @@ export const AddRouterInterfaceDialog = ({ resolve: { router } }) => {
                       const ips = port.fixed_ips?.length
                         ? port.fixed_ips.map((fip) => fip.ip_address).join(', ')
                         : '—';
-                      const mac = port.mac_address || '—';
+                      const mac = renderFieldOrDash(port.mac_address);
                       const nameOrUuid = port.name || port.uuid;
                       return {
                         value: port.url,

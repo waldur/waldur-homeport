@@ -1,4 +1,5 @@
 import { Link } from '@waldur/core/Link';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { useUser } from '@waldur/workspace/hooks';
 
 export const UserDetailsLink = ({ uuid, name }) => {
@@ -10,6 +11,6 @@ export const UserDetailsLink = ({ uuid, name }) => {
       </Link>
     );
   } else {
-    return name || 'N/A';
+    return renderFieldOrDash(name);
   }
 };

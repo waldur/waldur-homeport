@@ -8,6 +8,7 @@ import { translate } from '@waldur/i18n';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface AssignmentBatchExpandableRowProps {
   row: { uuid: string };
@@ -146,7 +147,9 @@ export const AssignmentBatchExpandableRow: FC<
           {
             title: translate('Decline reason'),
             render: ({ row: item }) => (
-              <span className="text-muted">{item.decline_reason || '-'}</span>
+              <span className="text-muted">
+                {renderFieldOrDash(item.decline_reason)}
+              </span>
             ),
           },
         ]}

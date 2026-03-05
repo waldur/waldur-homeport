@@ -7,6 +7,7 @@ import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { SubmitJobAction } from './SubmitJobAction';
 
@@ -21,11 +22,11 @@ export const AllocationJobsTable: FunctionComponent<{ resourceScope }> = ({
     },
     {
       title: translate('User'),
-      render: ({ row }) => row.user_name || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.user_name),
     },
     {
       title: translate('Backend ID'),
-      render: ({ row }) => row.backend_id || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.backend_id),
     },
     {
       title: translate('State'),

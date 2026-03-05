@@ -7,6 +7,7 @@ import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import type { AtlassianFormValues } from '../types';
@@ -191,7 +192,9 @@ export const RequestTypesStep: FC<WizardStepProps> = (props) => {
                 />
               </td>
               <td className="fw-bold">{rt.name}</td>
-              <td className="text-muted">{rt.description || '-'}</td>
+              <td className="text-muted">
+                {renderFieldOrDash(rt.description)}
+              </td>
               <td>
                 <code>{rt.issue_type_id}</code>
               </td>

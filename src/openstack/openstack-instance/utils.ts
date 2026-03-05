@@ -3,6 +3,7 @@ import { OpenStackFloatingIp } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { formatFlavor } from '@waldur/resource/utils';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { Quota } from '../types';
 
@@ -133,14 +134,11 @@ export function flavorValidator(model, choice) {
   if (!model.image) {
     return true;
   }
-  if (model.image.min_ram > choice.ram) {
-    return true;
-  }
-  return false;
+  return model.image.min_ram > choice.ram;
 }
 
 export const formatAddressList = (row: OpenStackNestedPort) =>
-  row.fixed_ips.map((fip) => fip.ip_address).join(', ') || 'N/A';
+  renderFieldOrDash(row.fixed_ips.map((fip) => fip.ip_address).join(', '));
 
 export const getQuotas = ({ formData, usages, limits }) => {
   const quotas: Quota[] = [

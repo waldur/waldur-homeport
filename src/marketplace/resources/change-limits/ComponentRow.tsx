@@ -18,6 +18,7 @@ import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/C
 import { PriceField } from '@waldur/marketplace/resources/change-limits/PriceField';
 import { Field } from '@waldur/resource/summary';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ComponentRowType } from './connector';
 
@@ -79,8 +80,8 @@ export const ComponentRow: FC<ComponentRowProps> = ({
           )}
           {component.name}
         </td>
-        <td>{component.usage || 'N/A'}</td>
-        <td>{component.limit || 'N/A'}</td>
+        <td>{renderFieldOrDash(component.usage)}</td>
+        <td>{renderFieldOrDash(component.limit)}</td>
         <FieldComponent
           name={`${parentName ? parentName + '.' : ''}limits.${component.type}`}
           parse={parseIntField}

@@ -9,6 +9,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { minimalConsumptionLogicOptions } from '@waldur/customer/credits/constants';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CreditFieldEditButton } from './CreditFieldEditButton';
 
@@ -41,32 +42,33 @@ export const ProjectCredit: React.FC<ProjectCreditProps> = ({ project }) => {
           currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
         }),
         key: 'value',
-        value: creditData?.value || 'N/A',
+        value: renderFieldOrDash(creditData?.value),
       },
       {
         label: translate('End date'),
         key: 'end_date',
-        value: creditData?.end_date || 'N/A',
+        value: renderFieldOrDash(creditData?.end_date),
       },
       {
         label: translate('Minimal consumption logic'),
         key: 'minimal_consumption_logic',
-        value:
+        value: renderFieldOrDash(
           minimalConsumptionLogicOptions.find(
             (opt) => opt.value === creditData?.minimal_consumption_logic,
-          )?.label || 'N/A',
+          )?.label,
+        ),
       },
       {
         label: translate('Expected consumption ({currency} per month)', {
           currency: ENV.plugins.WALDUR_CORE.CURRENCY_NAME,
         }),
         key: 'expected_consumption',
-        value: creditData?.expected_consumption || 'N/A',
+        value: renderFieldOrDash(creditData?.expected_consumption),
       },
       {
         label: translate('Grace coefficient (%)'),
         key: 'grace_coefficient',
-        value: creditData?.grace_coefficient || 'N/A',
+        value: renderFieldOrDash(creditData?.grace_coefficient),
       },
       {
         label: translate('Apply as minimal consumption'),

@@ -9,6 +9,7 @@ import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
   filter,
@@ -31,7 +32,7 @@ export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
     },
     {
       title: translate('Robot account type'),
-      render: ({ row }) => row.robot_account_type || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.robot_account_type),
     },
     {
       title: translate('State'),

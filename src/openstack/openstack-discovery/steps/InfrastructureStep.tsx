@@ -18,6 +18,7 @@ import { SubmitButton } from '@waldur/form/SubmitButton';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
@@ -289,7 +290,9 @@ export const InfrastructureStep: FC<WizardStepProps> = (props) => {
               {values.volumeTypes.map((vt) => (
                 <tr key={vt.id}>
                   <td>{vt.name}</td>
-                  <td className="text-muted">{vt.description || '-'}</td>
+                  <td className="text-muted">
+                    {renderFieldOrDash(vt.description)}
+                  </td>
                 </tr>
               ))}
             </tbody>

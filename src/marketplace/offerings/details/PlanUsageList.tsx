@@ -4,6 +4,7 @@ import { Card } from 'react-bootstrap';
 import { PlanUsageResponse } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface OwnProps {
   plansUsage: PlanUsageResponse[];
@@ -24,7 +25,7 @@ const PlanGroup = ({ plan }: { plan: PlanUsageResponse }) => (
         </tr>
         <tr>
           <th className="w-50 text-gray-700 fw-bold">{translate('Limit')}:</th>
-          <td>{plan.limit || 'N/A'}</td>
+          <td>{renderFieldOrDash(plan.limit)}</td>
         </tr>
         <tr>
           <th className="w-50 text-gray-700 fw-bold">

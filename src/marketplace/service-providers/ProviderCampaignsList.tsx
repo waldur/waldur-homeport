@@ -15,6 +15,7 @@ import {
 } from '@waldur/table/generated/PromotionsCampaignsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
@@ -52,7 +53,7 @@ const ProviderCampaignsListComponent: FunctionComponent<{ provider }> = ({
         },
         {
           title: translate('Coupon'),
-          render: ({ row }) => row.coupon || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.coupon),
         },
         {
           title: translate('Status'),

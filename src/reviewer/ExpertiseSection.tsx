@@ -11,6 +11,7 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ExpertiseBulkRemoveButton } from './ExpertiseBulkRemoveButton';
 import { ExpertiseDeleteAction } from './ExpertiseDeleteAction';
@@ -62,7 +63,7 @@ export const ExpertiseSection = ({
     },
     {
       title: translate('Category'),
-      render: ({ row }) => row.expertise_category_name || '-',
+      render: ({ row }) => renderFieldOrDash(row.expertise_category_name),
     },
     {
       title: translate('Proficiency'),

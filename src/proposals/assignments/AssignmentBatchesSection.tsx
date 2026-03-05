@@ -1,4 +1,8 @@
-import { EnvelopeSimple, Sparkle, UserPlus } from '@phosphor-icons/react';
+import {
+  EnvelopeSimpleIcon,
+  SparkleIcon,
+  UserPlusIcon,
+} from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
@@ -25,6 +29,7 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { TableTabs } from '@waldur/table/TableTabs';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { Call } from '../types';
 
@@ -199,7 +204,9 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
         title: translate('Reviewer'),
         render: ({ row }: { row: AssignmentBatchList }) => (
           <div>
-            <div className="fw-bold">{row.reviewer_name || '-'}</div>
+            <div className="fw-bold">
+              {renderFieldOrDash(row.reviewer_name)}
+            </div>
             <small className="text-muted">{row.reviewer_email}</small>
           </div>
         ),
@@ -303,7 +310,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
         className="btn btn-secondary btn-sm"
         onClick={handleManualAssignment}
       >
-        <UserPlus size={16} weight="bold" className="me-1" />
+        <UserPlusIcon size={16} weight="bold" className="me-1" />
         {translate('Manual assignment')}
       </button>
       <button
@@ -311,7 +318,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
         onClick={() => generateMutation.mutate()}
         disabled={generateMutation.isPending}
       >
-        <Sparkle size={16} weight="bold" className="me-1" />
+        <SparkleIcon size={16} weight="bold" className="me-1" />
         {translate('Generate assignments')}
       </button>
       {draftCount > 0 && (
@@ -320,7 +327,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
           onClick={() => sendAllMutation.mutate()}
           disabled={sendAllMutation.isPending}
         >
-          <EnvelopeSimple size={16} weight="bold" className="me-1" />
+          <EnvelopeSimpleIcon size={16} weight="bold" className="me-1" />
           {translate('Send all drafts')} ({draftCount})
         </button>
       )}

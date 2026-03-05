@@ -9,6 +9,7 @@ import { Tip } from '@waldur/core/Tooltip';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 
 import { ComponentCost } from './ComponentCost';
@@ -43,7 +44,7 @@ export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
       </td>
       <td className={props.className}>{props.children}</td>
       <td>
-        <p>{props.offeringComponent.measured_unit || 'N/A'}</p>
+        <p>{renderFieldOrDash(props.offeringComponent.measured_unit)}</p>
       </td>
       {!activeFixedPriceProfile && !props.hidePrices
         ? props.offeringComponent.prices.map((price, innerIndex) => (

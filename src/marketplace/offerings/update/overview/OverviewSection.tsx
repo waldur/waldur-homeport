@@ -14,6 +14,7 @@ import { getUUID } from '@waldur/core/utils';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { OfferingSectionProps } from '../types';
 
@@ -117,9 +118,9 @@ const AttributeRow: FC<{
       ) : attribute.type === 'boolean' ? (
         <CheckOrX value={offering[attribute.key]} />
       ) : attribute.type === 'list' ? (
-        offering[attribute.key]?.join(', ') || 'N/A'
+        renderFieldOrDash(offering[attribute.key]?.join(', '))
       ) : (
-        offering[attribute.key] || 'N/A'
+        renderFieldOrDash(offering[attribute.key])
       )
     }
     description={attribute.description}

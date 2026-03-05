@@ -13,6 +13,7 @@ import { translate } from '@waldur/i18n';
 import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/update/components/ComponentAccountingTypeField';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 
@@ -258,8 +259,9 @@ export const getUsageHistoryPeriodOptions = (
 };
 
 export const getBillingTypeLabel = (value) =>
-  getAccountingTypeOptions().find((option) => option.value === value)?.label ||
-  'N/A';
+  renderFieldOrDash(
+    getAccountingTypeOptions().find((option) => option.value === value)?.label,
+  );
 
 export const getTotalUsagePeriod = (
   usages: ComponentUsage[],

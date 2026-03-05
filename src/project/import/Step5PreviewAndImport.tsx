@@ -24,6 +24,7 @@ import { showError } from '@waldur/store/notify';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { ProjectPreviewExpandableRow } from './ProjectPreviewExpandableRow';
 import { SkipErrorsCheck } from './SkipErrorsCheck';
@@ -104,7 +105,7 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
         },
         data.some((project) => Boolean(project.customer_uuid)) && {
           title: translate('Organization'),
-          render: ({ row }) => <>{row.customer_uuid || 'N/A'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.customer_uuid)}</>,
         },
         isFeatureVisible(ProjectFeatures.show_description_in_create_dialog) &&
           data.some((project) => Boolean(project.description)) && {
@@ -116,12 +117,14 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
         isFeatureVisible(ProjectFeatures.oecd_fos_2007_code) &&
           data.some((project) => Boolean(project.oecd_fos_2007_code)) && {
             title: translate('OECD FoS code'),
-            render: ({ row }) => <>{row.oecd_fos_2007_code || 'N/A'}</>,
+            render: ({ row }) => (
+              <>{renderFieldOrDash(row.oecd_fos_2007_code)}</>
+            ),
           },
         isFeatureVisible(ProjectFeatures.show_type_in_create_dialog) &&
           data.some((project) => Boolean(project.project_type)) && {
             title: translate('Type'),
-            render: ({ row }) => <>{row.project_type || 'N/A'}</>,
+            render: ({ row }) => <>{renderFieldOrDash(row.project_type)}</>,
           },
         isFeatureVisible(ProjectFeatures.show_start_date_in_create_dialog) && {
           title: translate('Start date'),
@@ -241,17 +244,21 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
             },
             fields.includes('plan_name') && {
               title: translate('Plan'),
-              render: ({ row }) => <>{row.plan_name || 'N/A'}</>,
+              render: ({ row }) => <>{renderFieldOrDash(row.plan_name)}</>,
             },
           ]
             .concat(
               offering.components.map((comp) => ({
                 title: comp.name,
-                render: ({ row }) => <>{row.limits[comp.type] || 'N/A'}</>,
+                render: ({ row }) => (
+                  <>{renderFieldOrDash(row.limits[comp.type])}</>
+                ),
               })),
               Object.keys(offering.attributes).map((attr) => ({
                 title: attr,
-                render: ({ row }) => <>{row.attributes[attr] || 'N/A'}</>,
+                render: ({ row }) => (
+                  <>{renderFieldOrDash(row.attributes[attr])}</>
+                ),
               })),
             )
             .filter(Boolean);

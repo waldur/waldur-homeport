@@ -1,6 +1,8 @@
 import { FunctionComponent } from 'react';
 import { NestedSection } from 'waldur-js-client';
 
+import { renderFieldOrDash } from '@waldur/table/utils';
+
 import { AttributeRow } from './AttributeRow';
 
 interface AttributeSectionProps {
@@ -22,7 +24,7 @@ export const AttributeSection: FunctionComponent<AttributeSectionProps> = (
     {props.section.attributes.map((attr, index) => (
       <AttributeRow
         key={index}
-        value={props.attributes[attr.key] || 'N/A'}
+        value={renderFieldOrDash(props.attributes[attr.key])}
         attribute={attr}
       />
     ))}

@@ -9,6 +9,7 @@ import { sendIssueCreateRequest } from '@waldur/issues/create/utils';
 import { ISSUE_IDS } from '@waldur/issues/types/constants';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
 export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
@@ -33,36 +34,36 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
     if (resolve.customer.native_name != resolve.formData.native_name) {
       parts.push(
         translate('Current native name: {value}.', {
-          value: resolve.customer.native_name || 'N/A',
+          value: renderFieldOrDash(resolve.customer.native_name),
         }),
       );
       parts.push(
         translate('Proposed native name: {value}.', {
-          value: resolve.formData.native_name || 'N/A',
+          value: renderFieldOrDash(resolve.formData.native_name),
         }),
       );
     }
     if (resolve.customer.abbreviation != resolve.formData.abbreviation) {
       parts.push(
         translate('Current abbreviation: {value}.', {
-          value: resolve.customer.abbreviation || 'N/A',
+          value: renderFieldOrDash(resolve.customer.abbreviation),
         }),
       );
       parts.push(
         translate('Proposed abbreviation: {value}.', {
-          value: resolve.formData.abbreviation || 'N/A',
+          value: renderFieldOrDash(resolve.formData.abbreviation),
         }),
       );
     }
     if (resolve.customer.domain != resolve.formData.domain) {
       parts.push(
         translate('Current domain name: {value}.', {
-          value: resolve.customer.domain || 'N/A',
+          value: renderFieldOrDash(resolve.customer.domain),
         }),
       );
       parts.push(
         translate('Proposed domain name: {value}.', {
-          value: resolve.formData.domain || 'N/A',
+          value: renderFieldOrDash(resolve.formData.domain),
         }),
       );
     }
@@ -71,12 +72,12 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
     ) {
       parts.push(
         translate('Current registry code: {value}.', {
-          value: resolve.customer.registration_code || 'N/A',
+          value: renderFieldOrDash(resolve.customer.registration_code),
         }),
       );
       parts.push(
         translate('Proposed registry code: {value}.', {
-          value: resolve.formData.registration_code || 'N/A',
+          value: renderFieldOrDash(resolve.formData.registration_code),
         }),
       );
     }
@@ -85,60 +86,60 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
     ) {
       parts.push(
         translate('Current agreement number: {value}.', {
-          value: resolve.customer.agreement_number || 'N/A',
+          value: renderFieldOrDash(resolve.customer.agreement_number),
         }),
       );
       parts.push(
         translate('Proposed agreement number: {value}.', {
-          value: resolve.formData.agreement_number || 'N/A',
+          value: renderFieldOrDash(resolve.formData.agreement_number),
         }),
       );
     }
     if (resolve.customer.address != resolve.formData.address) {
       parts.push(
         translate('Current address: {value}.', {
-          value: resolve.customer.address || 'N/A',
+          value: renderFieldOrDash(resolve.customer.address),
         }),
       );
       parts.push(
         translate('Proposed address: {value}.', {
-          value: resolve.formData.address || 'N/A',
+          value: renderFieldOrDash(resolve.formData.address),
         }),
       );
     }
     if (resolve.customer.email != resolve.formData.email) {
       parts.push(
         translate('Current email: {value}.', {
-          value: resolve.customer.email || 'N/A',
+          value: renderFieldOrDash(resolve.customer.email),
         }),
       );
       parts.push(
         translate('Proposed email: {value}.', {
-          value: resolve.formData.email || 'N/A',
+          value: renderFieldOrDash(resolve.formData.email),
         }),
       );
     }
     if (resolve.customer.phone_number != resolve.formData.phone_number) {
       parts.push(
         translate('Current contact phone: {value}.', {
-          value: resolve.customer.phone_number || 'N/A',
+          value: renderFieldOrDash(resolve.customer.phone_number),
         }),
       );
       parts.push(
         translate('Proposed contact phone: {value}.', {
-          value: resolve.formData.phone_number || 'N/A',
+          value: renderFieldOrDash(resolve.formData.phone_number),
         }),
       );
     }
     if (resolve.customer.vat_code != resolve.formData.vat_code) {
       parts.push(
         translate('Current VAT code: {value}.', {
-          value: resolve.customer.vat_code || 'N/A',
+          value: renderFieldOrDash(resolve.customer.vat_code),
         }),
       );
       parts.push(
         translate('Proposed VAT code: {value}.', {
-          value: resolve.formData.vat_code || 'N/A',
+          value: renderFieldOrDash(resolve.formData.vat_code),
         }),
       );
     }
@@ -161,48 +162,48 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
     if (resolve.customer.access_subnets != resolve.formData.access_subnets) {
       parts.push(
         translate('Current subnets: {value}.', {
-          value: resolve.customer.access_subnets || 'N/A',
+          value: renderFieldOrDash(resolve.customer.access_subnets),
         }),
       );
       parts.push(
         translate('Proposed subnets: {value}.', {
-          value: resolve.formData.access_subnets || 'N/A',
+          value: renderFieldOrDash(resolve.formData.access_subnets),
         }),
       );
     }
     if (resolve.customer.postal != resolve.formData.postal) {
       parts.push(
         translate('Current postal code: {value}.', {
-          value: resolve.customer.postal || 'N/A',
+          value: renderFieldOrDash(resolve.customer.postal),
         }),
       );
       parts.push(
         translate('Proposed postal code: {value}.', {
-          value: resolve.formData.postal || 'N/A',
+          value: renderFieldOrDash(resolve.formData.postal),
         }),
       );
     }
     if (resolve.customer.bank_name != resolve.formData.bank_name) {
       parts.push(
         translate('Current bank name: {value}.', {
-          value: resolve.customer.bank_name || 'N/A',
+          value: renderFieldOrDash(resolve.customer.bank_name),
         }),
       );
       parts.push(
         translate('Proposed bank name: {value}.', {
-          value: resolve.formData.bank_name || 'N/A',
+          value: renderFieldOrDash(resolve.formData.bank_name),
         }),
       );
     }
     if (resolve.customer.bank_account != resolve.formData.bank_account) {
       parts.push(
         translate('Current bank account: {value}.', {
-          value: resolve.customer.bank_account || 'N/A',
+          value: renderFieldOrDash(resolve.customer.bank_account),
         }),
       );
       parts.push(
         translate('Proposed bank account: {value}.', {
-          value: resolve.formData.bank_account || 'N/A',
+          value: renderFieldOrDash(resolve.formData.bank_account),
         }),
       );
     }
@@ -211,12 +212,12 @@ export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
     ) {
       parts.push(
         translate('Current country: {value}.', {
-          value: resolve.customer.country_name || 'N/A',
+          value: renderFieldOrDash(resolve.customer.country_name),
         }),
       );
       parts.push(
         translate('Proposed country: {value}.', {
-          value: resolve.formData.country?.display_name || 'N/A',
+          value: renderFieldOrDash(resolve.formData.country?.display_name),
         }),
       );
     }

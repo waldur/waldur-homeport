@@ -3,6 +3,7 @@ import { FC } from 'react';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const OpenstackPortSummary: FC<ResourceSummaryProps> = ({
   resource: row,
@@ -13,15 +14,15 @@ export const OpenstackPortSummary: FC<ResourceSummaryProps> = ({
     <>
       <Component
         label={translate('Device ID')}
-        value={row.device_id || 'N/A'}
+        value={renderFieldOrDash(row.device_id)}
       />
       <Component
         label={translate('Device owner')}
-        value={row.device_owner || 'N/A'}
+        value={renderFieldOrDash(row.device_owner)}
       />
       <Component
         label={translate('Backend ID')}
-        value={row.backend_id || 'N/A'}
+        value={renderFieldOrDash(row.backend_id)}
         hasCopy={!!row.backend_id}
       />
 

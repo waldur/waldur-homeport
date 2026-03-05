@@ -16,6 +16,7 @@ import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
@@ -258,19 +259,19 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
                 <td className="text-muted" style={{ width: '40%' }}>
                   {translate('External network')}
                 </td>
-                <td>{selectedNetwork?.name || '-'}</td>
+                <td>{renderFieldOrDash(selectedNetwork?.name)}</td>
               </tr>
               <tr>
                 <td className="text-muted">
                   {translate('Instance availability zone')}
                 </td>
-                <td>{values.selectedInstanceAZ || '-'}</td>
+                <td>{renderFieldOrDash(values.selectedInstanceAZ)}</td>
               </tr>
               <tr>
                 <td className="text-muted">
                   {translate('Volume availability zone')}
                 </td>
-                <td>{values.selectedVolumeAZ || '-'}</td>
+                <td>{renderFieldOrDash(values.selectedVolumeAZ)}</td>
               </tr>
             </tbody>
           </Table>

@@ -8,6 +8,7 @@ import { RancherClusterFilter } from '@waldur/table/generated/RancherClusterFilt
 import Table from '@waldur/table/Table';
 import { TableWithPortal } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { useClusterFilter } from './ClusterFilterHooks';
 import { ImportYAMLButton } from './ImportYAMLButton';
@@ -44,15 +45,17 @@ export const ClusterServicesList: FunctionComponent<
         },
         {
           title: translate('Cluster IP'),
-          render: ({ row }) => <>{row.cluster_ip || 'N/A'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.cluster_ip)}</>,
         },
         {
           title: translate('Target'),
           render: ({ row }) => (
             <>
-              {row.target_workloads
-                .map((workload) => workload.name)
-                .join(', ') || 'N/A'}
+              {renderFieldOrDash(
+                row.target_workloads
+                  .map((workload) => workload.name)
+                  .join(', '),
+              )}
             </>
           ),
         },

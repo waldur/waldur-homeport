@@ -12,6 +12,7 @@ import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CreateRouterAction } from './actions/CreateRouterAction';
 
@@ -63,7 +64,7 @@ export const TenantRoutersList: FunctionComponent<{ resourceScope }> = ({
         },
         {
           title: translate('Fixed IPs'),
-          render: ({ row }) => row.fixed_ips.join(', ') || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.fixed_ips.join(', ')),
         },
         {
           title: translate('State'),

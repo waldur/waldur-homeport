@@ -3,13 +3,14 @@ import { Project } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
 import { parseDate } from '@waldur/core/dateUtils';
+import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import FormTable, { FormTableItemProps } from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { useUser } from '@waldur/workspace/hooks';
 
-import { StaffOnlyIndicator } from '../../customer/details/StaffOnlyIndicator';
 import { projectKindOptions } from '../utils';
 
 import { FieldEditButton } from './FieldEditButton';
@@ -28,22 +29,22 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
           {
             label: translate('Name'),
             key: 'name',
-            value: project.name || 'N/A',
+            value: renderFieldOrDash(project.name),
           },
           user.is_staff && {
             label: translate('Slug'),
             key: 'slug',
-            value: project.slug || 'N/A',
+            value: renderFieldOrDash(project.slug),
           },
           user.is_staff && {
             label: translate('Staff notes'),
             key: 'staff_notes',
-            value: project.staff_notes || 'N/A',
+            value: renderFieldOrDash(project.staff_notes),
           },
           {
             label: translate('Owner'),
             key: 'customer_name',
-            value: project.customer_name || 'N/A',
+            value: renderFieldOrDash(project.customer_name),
           },
           {
             label: translate('Start date'),
@@ -51,7 +52,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
               'Date when invitations are sent and resource orders processed.',
             ),
             key: 'start_date',
-            value: project.start_date || 'N/A',
+            value: renderFieldOrDash(project.start_date),
             // If date is past, disable it
             disabled: project.start_date
               ? parseDate(project.start_date) < parseDate(null)
@@ -63,7 +64,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
               'Date when termination orders are created; project is removed if resources are already terminated.',
             ),
             key: 'end_date',
-            value: project.end_date || 'N/A',
+            value: renderFieldOrDash(project.end_date),
           },
           isFeatureVisible(
             MarketplaceFeatures.show_experimental_ui_components,
@@ -78,16 +79,17 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
           {
             label: translate('Description'),
             key: 'description',
-            value: project.description || 'N/A',
+            value: renderFieldOrDash(project.description),
           },
           ENV.plugins.WALDUR_CORE.ENABLE_PROJECT_KIND_COURSE && {
             label: translate('Project kind'),
             key: 'kind',
-            value:
+            value: renderFieldOrDash(
               (
                 projectKindOptions()[project.kind] ||
                 projectKindOptions().default
-              )?.label || 'N/A',
+              )?.label,
+            ),
           },
           user.is_staff && {
             label: translate('Maximum number of service accounts'),
@@ -95,9 +97,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
               'The maximum number of service accounts that can be created in this project.',
             ),
             key: 'max_service_accounts',
-            value: project.max_service_accounts
-              ? project.max_service_accounts
-              : 'N/A',
+            value: renderFieldOrDash(project.max_service_accounts),
           },
         ] satisfies Array<{ key: string } & FormTableItemProps>
       ).filter(Boolean),

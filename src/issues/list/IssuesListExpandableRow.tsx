@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { linkify } from '@waldur/issues/utils';
 import { Field } from '@waldur/resource/summary';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const IssuesListExpandableRow: FunctionComponent<{
   row;
@@ -18,18 +19,22 @@ export const IssuesListExpandableRow: FunctionComponent<{
     <Row>
       <Col xs={6}>
         <Field label={translate('Reporter')}>
-          {row.reporter_name || 'N/A'}
+          {renderFieldOrDash(row.reporter_name)}
         </Field>
         <Field label={translate('Organization')}>
-          {row.customer_name || 'N/A'}
+          {renderFieldOrDash(row.customer_name)}
         </Field>
-        <Field label={translate('Project')}>{row.project_name || 'N/A'}</Field>
+        <Field label={translate('Project')}>
+          {renderFieldOrDash(row.project_name)}
+        </Field>
       </Col>
       <Col xs={6}>
         <Field label={translate('Service type')}>
-          {row.project_name || 'N/A'}
+          {renderFieldOrDash(row.project_name)}
         </Field>
-        <Field label={translate('Created')}>{row.resource_type || 'N/A'}</Field>
+        <Field label={translate('Created')}>
+          {renderFieldOrDash(row.resource_type)}
+        </Field>
         {supportOrStaff && (
           <Field label={translate('Assigned to')}>
             {formatDate(row.created)}

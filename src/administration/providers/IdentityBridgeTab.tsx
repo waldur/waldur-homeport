@@ -11,6 +11,7 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { formatIsdName, IsdBadges } from '@waldur/user/support/IsdBadges';
 
 const HealthIndicator: FC<{
@@ -153,7 +154,7 @@ export const IdentityBridgeTab: FC = () => {
           <FormTable.Item
             label={translate('Stale threshold')}
             value={translate('{days} days', {
-              days: stats.stale_threshold_days ?? '—',
+              days: renderFieldOrDash(stats.stale_threshold_days),
             })}
           />
         </FormTable>

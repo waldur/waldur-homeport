@@ -9,6 +9,7 @@ import { ResourceState } from '@waldur/resource/state/ResourceState';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { INSTANCE_TYPE } from '../constants';
 import { CreateBackupAction } from '../openstack-instance/actions/CreateBackupAction';
@@ -45,7 +46,7 @@ export const BackupsList: FunctionComponent<{ resourceScope }> = ({
         },
         {
           title: translate('Description'),
-          render: ({ row }) => row.description || 'N/A',
+          render: ({ row }) => renderFieldOrDash(row.description),
         },
         {
           title: translate('Keep until'),

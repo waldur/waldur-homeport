@@ -7,6 +7,7 @@ import { DateTimeField } from '@waldur/form/DateTimeField';
 import { TimezoneField } from '@waldur/form/TimezoneField';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   props,
@@ -57,7 +58,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
               parse={(value) => (value ? formatISOWithoutZone(value) : value)}
               format={(value) => (value ? new Date(value) : value)}
             />
-            {translate('Duration')}: {duration || '-'}
+            {translate('Duration')}: {renderFieldOrDash(duration)}
           </FormContainer>
         );
       }}

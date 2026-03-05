@@ -9,6 +9,7 @@ import { useTeamTableTabs as useProjectTeamTableTabs } from '@waldur/project/tea
 import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getProject } from '@waldur/workspace/selectors';
 
 interface PermissionsReviewsListProps {
@@ -42,8 +43,8 @@ export const PermissionsReviewsList: FunctionComponent<
         },
         {
           title: translate('Performed by'),
-          render: ({ row }) => <>{row.reviewer_full_name || 'N/A'}</>,
-          export: (row) => row.reviewer_full_name || 'N/A',
+          render: ({ row }) => <>{renderFieldOrDash(row.reviewer_full_name)}</>,
+          export: (row) => renderFieldOrDash(row.reviewer_full_name),
         },
         {
           title: translate('State'),

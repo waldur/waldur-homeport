@@ -17,6 +17,7 @@ import {
 import Table from '@waldur/table/Table';
 import { Column, TableProps } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { IssueCreateButton } from './IssueCreateButton';
@@ -56,10 +57,10 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         title: translate('Key'),
         orderField: 'key',
         render: ({ row }) => (
-          <IssueLinkField label={row.key || 'N/A'} row={row} />
+          <IssueLinkField label={renderFieldOrDash(row.key)} row={row} />
         ),
 
-        export: (row) => row.key || 'N/A',
+        export: (row) => renderFieldOrDash(row.key),
         exportKeys: ['key'],
       },
       {
@@ -69,7 +70,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         filter: 'status',
         inlineFilter: (row) =>
           StatusOptions.filter((op) => op.value === row.status),
-        export: (row) => row.status || 'N/A',
+        export: (row) => renderFieldOrDash(row.status),
         exportKeys: ['status'],
       },
       {
@@ -91,7 +92,7 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         visible: false,
         title: translate('Service type'),
         render: null,
-        export: (row) => row.resource_type || 'N/A',
+        export: (row) => renderFieldOrDash(row.resource_type),
         exportKeys: ['resource_type'],
       });
     }
@@ -99,8 +100,8 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       columns.push({
         title: translate('Organization'),
         orderField: 'customer_name',
-        render: ({ row }) => row.customer_name || 'N/A',
-        export: (row) => row.customer_name || 'N/A',
+        render: ({ row }) => renderFieldOrDash(row.customer_name),
+        export: (row) => renderFieldOrDash(row.customer_name),
         exportKeys: ['customer_name'],
       });
     }
@@ -108,8 +109,8 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       columns.push({
         title: translate('Project'),
         orderField: 'project_name',
-        render: ({ row }) => row.project_name || 'N/A',
-        export: (row) => row.project_name || 'N/A',
+        render: ({ row }) => renderFieldOrDash(row.project_name),
+        export: (row) => renderFieldOrDash(row.project_name),
         exportKeys: ['project_name'],
       });
     }
@@ -117,8 +118,8 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
       columns.push({
         title: translate('Caller'),
         orderField: 'caller_full_name',
-        render: ({ row }) => row.caller_full_name || 'N/A',
-        export: (row) => row.caller_full_name || 'N/A',
+        render: ({ row }) => renderFieldOrDash(row.caller_full_name),
+        export: (row) => renderFieldOrDash(row.caller_full_name),
         exportKeys: ['caller_full_name'],
       });
     }
@@ -128,14 +129,14 @@ export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
         visible: false,
         title: translate('Reporter'),
         render: null,
-        export: (row) => row.reporter_name || 'N/A',
+        export: (row) => renderFieldOrDash(row.reporter_name),
         exportKeys: ['reporter_name'],
       });
       columns.push({
         visible: false,
         title: translate('Assigned to'),
         render: null,
-        export: (row) => row.assignee_name || 'N/A',
+        export: (row) => renderFieldOrDash(row.assignee_name),
         exportKeys: ['assignee_name'],
       });
     }

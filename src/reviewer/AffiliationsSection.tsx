@@ -12,6 +12,7 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { AffiliationDeleteAction } from './AffiliationDeleteAction';
 import { AffiliationEditAction } from './AffiliationEditAction';
@@ -67,7 +68,7 @@ export const AffiliationsSection = ({
     },
     {
       title: translate('Department'),
-      render: ({ row }) => row.department || '-',
+      render: ({ row }) => renderFieldOrDash(row.department),
     },
     {
       title: translate('Position'),

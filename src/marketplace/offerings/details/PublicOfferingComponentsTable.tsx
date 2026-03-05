@@ -4,6 +4,7 @@ import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface PublicOfferingComponentsTableProps {
   offering: Offering;
@@ -43,7 +44,7 @@ export const PublicOfferingComponentsTable: FunctionComponent<
         },
         {
           title: translate('Description'),
-          render: ({ row }) => <>{row.description || '—'}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.description)}</>,
         },
       ]}
       title={translate('Components')}

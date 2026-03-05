@@ -12,6 +12,7 @@ import {
 } from '@waldur/table/generated/EmailLogsFilter';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const SupportEmailLogsList = () => {
   const filter = useSelector(selectSupportEmailLogsFilter);
@@ -32,7 +33,7 @@ export const SupportEmailLogsList = () => {
           title: translate('Subject'),
           orderField: 'subject',
           render: ({ row }) => <>{row.subject}</>,
-          export: (row) => row.subject || 'N/A',
+          export: (row) => renderFieldOrDash(row.subject),
         },
         {
           title: translate('Sent at'),

@@ -12,6 +12,7 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { PublicationDeleteAction } from './PublicationDeleteAction';
 import { PublicationEditAction } from './PublicationEditAction';
@@ -72,7 +73,7 @@ export const PublicationsSection = ({
     },
     {
       title: translate('Venue'),
-      render: ({ row }) => row.venue || '-',
+      render: ({ row }) => renderFieldOrDash(row.venue),
     },
     {
       title: translate('Year'),

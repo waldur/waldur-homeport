@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';
@@ -24,7 +25,7 @@ export const RobotAccountList: FunctionComponent<{ resource }> = ({
   const columns = [
     {
       title: translate('Type'),
-      render: ({ row }) => row.type || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.type),
       export: 'type',
     },
     {

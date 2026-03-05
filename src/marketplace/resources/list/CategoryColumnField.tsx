@@ -5,6 +5,7 @@ import { formatFilesize } from '@waldur/core/utils';
 import { CategoryColumn } from '@waldur/marketplace/types';
 import { validateIP } from '@waldur/marketplace/utils';
 import { IPList } from '@waldur/resource/IPList';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface CategoryColumnFieldProps {
   row: Resource;
@@ -39,6 +40,6 @@ export const CategoryColumnField: FunctionComponent<
       return metadata.instance_name;
 
     default:
-      return value || 'N/A';
+      return renderFieldOrDash(value);
   }
 };

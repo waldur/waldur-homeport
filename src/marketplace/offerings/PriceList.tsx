@@ -11,6 +11,7 @@ import {
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';
@@ -47,8 +48,8 @@ export const PriceList = () => {
     },
     {
       title: translate('Measured unit'),
-      render: ({ row }) => row.measured_unit || 'N/A',
-      export: (row) => row.measured_unit || 'N/A',
+      render: ({ row }) => renderFieldOrDash(row.measured_unit),
+      export: (row) => renderFieldOrDash(row.measured_unit),
       exportKeys: ['measured_unit'],
     },
     {

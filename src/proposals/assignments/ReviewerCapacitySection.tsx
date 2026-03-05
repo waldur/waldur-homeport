@@ -8,6 +8,7 @@ import { openModalDialog } from '@waldur/modal/actions';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { Call } from '../types';
 
@@ -60,7 +61,9 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
         title: translate('Reviewer'),
         render: ({ row }: { row: CallReviewerPool }) => (
           <div>
-            <div className="fw-bold">{row.reviewer_name || '-'}</div>
+            <div className="fw-bold">
+              {renderFieldOrDash(row.reviewer_name)}
+            </div>
             <small className="text-muted">{row.reviewer_email}</small>
           </div>
         ),

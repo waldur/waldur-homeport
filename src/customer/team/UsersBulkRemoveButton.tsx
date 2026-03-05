@@ -9,6 +9,7 @@ import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 import { ActionButton } from '@waldur/table/ActionButton';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { useUser } from '@waldur/workspace/hooks';
 import { getCustomer } from '@waldur/workspace/selectors';
 
@@ -30,7 +31,7 @@ export const UsersBulkRemoveButton = ({ rows, refetch }) => {
     try {
       const userList = rows.map((row) => (
         <li key={row.uuid}>
-          {row.full_name || row.username} ({row.email || '-'})
+          {row.full_name || row.username} ({renderFieldOrDash(row.email)})
         </li>
       ));
 

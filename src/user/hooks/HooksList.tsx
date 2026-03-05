@@ -9,6 +9,7 @@ import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { HOOK_LIST_ID } from './constants';
@@ -26,7 +27,8 @@ const StateField = ({ row }) => {
   );
 };
 
-const getDestinationField = (row) => row.destination_url || row.email || 'N/A';
+const getDestinationField = (row) =>
+  renderFieldOrDash(row.destination_url || row.email);
 const getEventsField = (row) =>
   row.event_groups.map(formatEventTitle).join(', ');
 

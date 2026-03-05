@@ -12,6 +12,7 @@ import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { RoleMappingCreateButton } from './RoleMappingCreateButton';
 import { RoleMappingDeleteAction } from './RoleMappingDeleteAction';
@@ -48,7 +49,7 @@ export const CallRoleMappingsList = (props) => {
     },
     {
       title: translate('Project role'),
-      render: ({ row }) => formatRole(row.project_role) || 'N/A',
+      render: ({ row }) => renderFieldOrDash(formatRole(row.project_role)),
     },
   ];
 

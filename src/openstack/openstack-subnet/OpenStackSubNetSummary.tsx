@@ -3,6 +3,7 @@ import { translate } from '@waldur/i18n';
 import { formatAllocationPool } from '@waldur/openstack/openstack-network/utils';
 import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
 import { formatDefault } from '@waldur/resource/utils';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;
@@ -30,7 +31,7 @@ export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
       />
       <Component
         label={translate('Backend ID')}
-        value={resource.backend_id || 'N/A'}
+        value={renderFieldOrDash(resource.backend_id)}
         hasCopy={!!resource.backend_id}
       />
       <Component
