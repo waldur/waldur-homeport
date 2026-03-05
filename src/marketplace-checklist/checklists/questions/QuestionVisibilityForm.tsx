@@ -301,6 +301,8 @@ export const QuestionVisibilityForm = ({
         message={translate(
           'Please add questions to the checklist before setting visibility conditions.',
         )}
+        callback={refetch}
+        buttonTitle={translate('Refresh')}
       />
     );
   }
