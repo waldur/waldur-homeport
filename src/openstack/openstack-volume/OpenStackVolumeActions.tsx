@@ -7,6 +7,7 @@ import { translate } from '@waldur/i18n';
 import { ActionGroup } from '@waldur/marketplace/resources/actions/ActionGroup';
 import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
 import { ProviderActionsGroup } from '@waldur/marketplace/resources/actions/ProviderActionsGroup';
+import { PullMarketplaceResourceAction } from '@waldur/marketplace/resources/actions/PullMarketplaceResourceAction';
 import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import { ShowUsageAction } from '@waldur/marketplace/resources/list/ShowUsageAction';
@@ -31,6 +32,7 @@ export const OpenstackVolumeActions = (props) => (
       <ExtendAction {...props} />
       <RetypeAction {...props} />
       <PullAction {...props} />
+      <PullMarketplaceResourceAction {...props} />
     </ActionGroup>
 
     <ActionGroup title={translate('Billing actions')}>
