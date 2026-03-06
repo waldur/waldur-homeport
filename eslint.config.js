@@ -18,6 +18,7 @@ import enforceBadgeRightIconPattern from './eslint-rules/enforce-badge-right-ico
 import enforceBorderRadiusTokens from './eslint-rules/enforce-border-radius-tokens.js';
 import enforceBreadcrumbColors from './eslint-rules/enforce-breadcrumb-colors.js';
 import enforceButtonVariants from './eslint-rules/enforce-button-variants.js';
+import enforceDisabledButtonTooltip from './eslint-rules/enforce-disabled-button-tooltip.js';
 import enforceFeaturedIcon from './eslint-rules/enforce-featured-icon.js';
 import enforceFormcheckComponents from './eslint-rules/enforce-formcheck-components.js';
 import enforceNavTabsPattern from './eslint-rules/enforce-nav-tabs-pattern.js';
@@ -75,6 +76,7 @@ export default tseslint
             'enforce-phosphor-icon-weight': enforcePhosphorIconWeight,
             'prefer-classnames-utility': preferClassnamesUtility,
             'enforce-render-field-or-dash': enforceRenderFieldOrDash,
+            'enforce-disabled-button-tooltip': enforceDisabledButtonTooltip,
 
             // Design system rules
             'enforce-featured-icon': enforceFeaturedIcon,
@@ -125,6 +127,7 @@ export default tseslint
         'waldur-custom/enforce-phosphor-icon-weight': 'error',
         'waldur-custom/prefer-classnames-utility': 'error',
         'waldur-custom/enforce-render-field-or-dash': 'error',
+        'waldur-custom/enforce-disabled-button-tooltip': 'warn',
         'waldur-custom/enforce-noresult-with-cta': 'warn',
 
         // Design system rules
