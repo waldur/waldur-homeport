@@ -10,7 +10,6 @@ import { TerminateAction } from '@waldur/marketplace/resources/terminate/Termina
 import { CreateRobotAccountAction } from '@waldur/marketplace/robot-accounts/CreateRobotAccountAction';
 import { SetErredActionItem } from '@waldur/resource/actions/SetErredActionItem';
 import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
-import { PullSiteAgentResourceAction } from '@waldur/site-agent/PullSiteAgentResourceAction';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceDetailsAction } from '../details/popup/ResourceDetailsAction';
@@ -23,6 +22,7 @@ import { RenewAllocationActionAction } from '../renew-allocation/RenewAllocation
 import { EditAction } from './EditAction';
 import { EditResourceEndDateByProviderAction } from './EditResourceEndDateByProviderAction';
 import { EditResourceEndDateByStaffAction } from './EditResourceEndDateByStaffAction';
+import { PullMarketplaceResourceAction } from './PullMarketplaceResourceAction';
 import { PullOrderAction } from './PullOrderAction';
 import { PullResourceAction } from './PullResourceAction';
 import { PullRobotAccounts } from './PullRobotAccounts';
@@ -45,7 +45,7 @@ export const ActionsList = [
   SetErredActionItem,
   EditResourceEndDateAction,
   SyncResourceAction,
-  PullSiteAgentResourceAction,
+  PullMarketplaceResourceAction,
   CreateLexisLinkAction,
 ];
 
@@ -57,7 +57,7 @@ export const CustomerResourceActions = [
   ReallocateLimitsAction,
   EditResourceEndDateAction,
   SyncResourceAction,
-  PullSiteAgentResourceAction,
+  PullMarketplaceResourceAction,
   TerminateAction,
 ];
 
@@ -72,7 +72,7 @@ export const ProviderActionsList = [
   SetErredActionItem,
   EditResourceEndDateByProviderAction,
   ResourceDetailsAction,
-  PullSiteAgentResourceAction,
+  PullMarketplaceResourceAction,
 ];
 
 export const StaffActions = [
