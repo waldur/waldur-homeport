@@ -83,6 +83,7 @@ export const CustomerMappingsBulkDeleteAction = ({
       variant="danger"
       disabled={isPending || rows.length === 0}
       pending={isPending}
+      tooltip={translate('Select at least one mapping to delete')}
     />
   );
 };
