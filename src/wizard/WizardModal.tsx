@@ -43,7 +43,11 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
   const isLastStep = props.step === props.steps.length - 1;
 
   return (
-    <form className="wizard" onSubmit={props.handleSubmit}>
+    <form
+      className="wizard"
+      onSubmit={props.handleSubmit}
+      data-testid="wizard-dialog"
+    >
       <ModalDialog
         title={props.title}
         subtitle={props.subtitle}
@@ -62,6 +66,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
                   label={translate('Back')}
                   iconNode={<CaretLeftIcon weight="bold" />}
                   iconOnLeft
+                  data-testid="wizard-back-btn"
                 />
               )}
               <CloseDialogButton className="min-w-125px" />
@@ -77,6 +82,7 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
                     props.submitDisabled || props.loading || props.invalid
                   }
                   className="btn-icon-right min-w-125px"
+                  data-testid="wizard-submit-btn"
                   children={
                     props.loading ? (
                       <span className="svg-icon svg-icon-2">

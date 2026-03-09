@@ -263,7 +263,12 @@ export const OfferingStateActions = ({
   }
   return (
     <Dropdown as={ButtonGroup} className={className}>
-      <ActionButton variant="primary" action={() => callback()} title={title} />
+      <ActionButton
+        variant="primary"
+        action={() => callback()}
+        title={title}
+        data-testid="offering-primary-state-action"
+      />
       <Dropdown.Toggle split variant="primary" className="px-4" />
       <Dropdown.Menu>
         {offering.state !== DRAFT && (

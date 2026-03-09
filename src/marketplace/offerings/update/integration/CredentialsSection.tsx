@@ -86,6 +86,7 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
               variant="tertiary"
               iconNode={<MagnifyingGlassIcon weight="bold" />}
               title={translate('Discover')}
+              data-testid="credentials-discover-btn"
             />
           )}
           <SyncButton offering={props.offering} refetch={props.refetch} />

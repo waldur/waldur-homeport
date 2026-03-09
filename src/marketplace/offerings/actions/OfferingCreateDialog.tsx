@@ -104,7 +104,10 @@ export const OfferingCreateDialog = reduxForm<
     );
   }
   return (
-    <form onSubmit={handleSubmit(saveOffering)}>
+    <form
+      onSubmit={handleSubmit(saveOffering)}
+      data-testid="offering-create-dialog"
+    >
       <ModalDialog
         title={translate('New offering')}
         footer={
@@ -114,6 +117,7 @@ export const OfferingCreateDialog = reduxForm<
               submitting={submitting}
               disabled={invalid}
               label={translate('Create')}
+              data-testid="offering-create-submit"
             />
           </>
         }

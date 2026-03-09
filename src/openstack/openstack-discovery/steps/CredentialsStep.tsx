@@ -69,6 +69,7 @@ export const CredentialsStep: FC<WizardStepProps> = (props) => {
         label={translate('Validate & Continue')}
         onClick={validateAndContinue}
         type="button"
+        data-testid="discovery-validate-btn"
       />
     </>
   );
