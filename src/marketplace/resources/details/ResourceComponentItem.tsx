@@ -1,6 +1,7 @@
 import { LimitPeriodEnum, OfferingComponent, Resource } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { TENANT_TYPE } from '@waldur/openstack/constants';
 
 import { getBillingTypeLabel } from '../usage/utils';
 
@@ -27,20 +28,31 @@ const UNIT_CONVERSIONS: Record<string, Record<number, string>> = {
 export const getDisplayUnit = (
   measuredUnit: string | undefined,
   factor: number | null | undefined,
+  offeringType?: string,
 ): string => {
   if (!measuredUnit) return '';
+  // For tenants, the measured unit is already in human-readable form
+  // The `factor` field is for internal use only
+  if (offeringType === TENANT_TYPE) return measuredUnit;
   if (!factor || factor === 1) return measuredUnit;
   return UNIT_CONVERSIONS[measuredUnit]?.[factor] ?? measuredUnit;
 };
 
 export const getQuotaCellProps = (
   component: OfferingComponent,
-  resource: Pick<Resource, 'current_usages' | 'limits' | 'limit_usage'>,
+  resource: Pick<
+    Resource,
+    'current_usages' | 'limits' | 'limit_usage' | 'offering_type'
+  >,
 ) => {
   if (!component) {
     return { usage: '', limit: '', title: '', units: '', displayUnit: '' };
   }
-  const displayUnit = getDisplayUnit(component.measured_unit, component.factor);
+  const displayUnit = getDisplayUnit(
+    component.measured_unit,
+    component.factor,
+    resource.offering_type,
+  );
   return {
     usage:
       component.billing_type === 'limit' &&
