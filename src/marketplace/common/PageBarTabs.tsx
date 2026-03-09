@@ -48,6 +48,7 @@ const PageBarTabItem = (props: PageBarTabProps) =>
               : '')
         }
         onClick={() => scrollToSectionById(props.name)}
+        data-testid={`page-bar-tab-${props.name}`}
       >
         {props.title}
       </Button>
@@ -83,6 +84,7 @@ const PageBarTabItem = (props: PageBarTabProps) =>
           (props.active ? ' active' : '')
       }
       onClick={() => scrollToSectionById(props.name)}
+      data-testid={`page-bar-tab-${props.name}`}
     >
       {props.title}
     </Link>

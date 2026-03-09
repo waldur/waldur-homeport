@@ -55,7 +55,12 @@ export const MenuItem: FC<MenuItemProps> = (props) => {
       {disabled ? (
         <span className="menu-link">{content}</span>
       ) : (
-        <Link state={props.state} params={props.params} className="menu-link">
+        <Link
+          state={props.state}
+          params={props.params}
+          className="menu-link"
+          data-testid={props.state}
+        >
           {content}
         </Link>
       )}

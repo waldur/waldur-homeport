@@ -128,6 +128,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                   <Nav.Link
                     disabled
                     className="d-flex align-items-center text-center min-w-60px opacity-50"
+                    data-testid="offering-tab-public"
                   >
                     {translate('Public')}
                     <QuestionIcon size={18} className="ms-1" weight="bold" />
@@ -139,6 +140,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                 <Nav.Link
                   eventKey="public-offering.marketplace-public-offering"
                   className="text-center min-w-60px"
+                  data-testid="offering-tab-public"
                 >
                   {translate('Public')}
                 </Nav.Link>
@@ -152,6 +154,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     : 'marketplace-offering-details'
                 }
                 className="text-center min-w-60px"
+                data-testid="offering-tab-manage"
               >
                 {translate('Manage')}
               </Nav.Link>
@@ -164,6 +167,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
                     : 'marketplace-offering-update'
                 }
                 className="text-center min-w-60px"
+                data-testid="offering-tab-edit"
               >
                 {translate('Edit')}
               </Nav.Link>

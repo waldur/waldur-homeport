@@ -101,22 +101,29 @@ const PageHero = ({ customer }) => {
           <Tab
             eventKey="organization.dashboard"
             title={translate('Customer')}
+            data-testid="organization-tab-customer"
           />
 
           {showCallManagement && (
             <Tab
               eventKey="call-management.dashboard"
               title={translate('Call management')}
+              data-testid="organization-tab-call-management"
             />
           )}
           {showServiceProvider && (
             <Tab
               eventKey="marketplace-provider-dashboard"
               title={translate('Service provider')}
+              data-testid="organization-tab-service-provider"
             />
           )}
           {canViewCustomerManagement && (
-            <Tab eventKey="organization-manage" title={translate('Edit')} />
+            <Tab
+              eventKey="organization-manage"
+              title={translate('Edit')}
+              data-testid="organization-tab-edit"
+            />
           )}
         </Tabs>
       )}
