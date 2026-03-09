@@ -43,7 +43,13 @@ export const CreateOfferingButton = ({
         customerId: customer.uuid,
       }))
   ) {
-    return <AddButton action={callback} className={className} />;
+    return (
+      <AddButton
+        action={callback}
+        className={className}
+        data-testid="offering-add-btn"
+      />
+    );
   } else {
     return null;
   }

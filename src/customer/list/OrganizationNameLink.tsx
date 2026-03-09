@@ -7,5 +7,6 @@ export const OrganizationNameLink: FunctionComponent<{ row }> = ({ row }) => (
     state="organization.dashboard"
     params={{ uuid: row.uuid }}
     label={row.name}
+    data-testid={`organization-link-${row.name}`}
   />
 );

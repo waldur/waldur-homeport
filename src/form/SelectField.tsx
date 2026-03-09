@@ -8,6 +8,7 @@ export const SelectField: FunctionComponent<any> = (props) => {
   return (
     <Select
       {...rest}
+      data-testid={props['data-testid']}
       name={input.name}
       value={
         (simpleValue || typeof input.value !== 'object') && options

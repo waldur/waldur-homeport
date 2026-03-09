@@ -173,6 +173,7 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
         label={translate('Apply Configuration')}
         onClick={handleApply}
         type="button"
+        data-testid="discovery-apply-btn"
       />
     </>
   );

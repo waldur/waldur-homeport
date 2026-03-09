@@ -174,6 +174,7 @@ export const OfferingCreateDialog = reduxForm<
             getOptionLabel={(option) => option.title}
             isClearable={false}
             validate={required}
+            data-testid="offering-category"
           />
 
           <SelectField
@@ -184,6 +185,7 @@ export const OfferingCreateDialog = reduxForm<
             isClearable={false}
             validate={required}
             spaceless
+            data-testid="offering-type"
           />
         </FormContainer>
       </ModalDialog>
