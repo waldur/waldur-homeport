@@ -58,6 +58,7 @@ export const ResourceStateField = ({
             })
           : ''
       }
+      data-testid="state-indicator"
     />
   );
 };

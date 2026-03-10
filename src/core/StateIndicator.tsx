@@ -15,6 +15,7 @@ export interface StateIndicatorProps {
   pill?: boolean;
   hasBullet?: boolean;
   size?: 'sm' | 'lg';
+  'data-testid'?: string;
 }
 
 export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
@@ -34,6 +35,7 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
       ) : undefined
     }
     {...props}
+    data-testid={props['data-testid'] || 'default-state-indicator'}
   >
     {props.label}
   </Badge>

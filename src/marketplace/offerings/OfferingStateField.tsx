@@ -34,6 +34,7 @@ export const OfferingStateField = ({
       hasBullet={hasBullet}
       outline
       pill
+      data-testid="offering-state-field"
     />
   );
 };
