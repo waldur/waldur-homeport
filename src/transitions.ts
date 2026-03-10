@@ -41,6 +41,13 @@ export function attachTransitions() {
       const allowedStates = [
         'profile-manage',
         'profile-manage-container',
+        'about',
+        'errorPage',
+        'invitation-accept',
+        'invitation-approve',
+        'invitation-reject',
+        'supportFeedback',
+        'user-email-change',
         'login',
         'logout',
         'home.login_completed',
