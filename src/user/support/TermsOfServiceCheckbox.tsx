@@ -17,20 +17,25 @@ export const TermsOfServiceCheckbox: FunctionComponent<
   TermsOfServiceCheckboxProps
 > = ({ user }) => {
   const { callback, isLoading } = useUpdateUser(user);
+  const isAgreed = Boolean(user.agreement_date);
+  const inputId = 'tos-agreement-check';
+
   return (
     <div className="d-flex align-items-center">
       <Form.Check type="checkbox">
         <Form.Check.Input
+          id={inputId}
           type="checkbox"
-          checked={Boolean(user.agreement_date)}
+          checked={isAgreed}
           onChange={() => {
-            if (!user.agreement_date) callback({ agree_with_policy: true });
+            if (!isAgreed) callback({ agree_with_policy: true });
           }}
-          disabled={isLoading || Boolean(user.agreement_date)}
+          disabled={isLoading || isAgreed}
+          data-testid="tos-checkbox"
         />
 
-        <Form.Check.Label className="opacity-100">
-          {!user.agreement_date
+        <Form.Check.Label htmlFor={inputId} className="opacity-100">
+          {!isAgreed
             ? translate(
                 'I agree to the <tos>Terms of Service</tos> and <pp>Privacy Policy</pp>',
                 {
@@ -51,7 +56,9 @@ export const TermsOfServiceCheckbox: FunctionComponent<
         </Form.Check.Label>
       </Form.Check>
 
-      {isLoading && <LoadingSpinnerIcon className="ms-2" />}
+      {isLoading && (
+        <LoadingSpinnerIcon className="ms-2" data-testid="tos-spinner" />
+      )}
     </div>
   );
 };
