@@ -55,6 +55,7 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
           props.className,
         )}
         id={props.id}
+        data-testid={props.id}
       >
         {props.disabled && <div className="step-blocker" />}
         <Card.Header className="gap-2">

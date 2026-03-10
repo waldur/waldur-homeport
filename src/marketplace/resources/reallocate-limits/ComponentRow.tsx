@@ -109,7 +109,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   const validators = [...baseValidators, currentLimitValidator];
 
   return (
-    <tr>
+    <tr data-testid={`row-${component.type}`}>
       <td className="text-nowrap">{component.name}</td>
       <td>{renderFieldOrDash(component.limit)}</td>
       <FormField

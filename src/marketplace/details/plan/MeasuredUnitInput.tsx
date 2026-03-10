@@ -11,6 +11,7 @@ export const MeasuredUnitInput = ({
 }) => (
   <InputGroup className="mw-200px">
     <Form.Control
+      name={input.name}
       type="number"
       min={component.min_value || 0}
       max={component.max_value}

@@ -32,7 +32,7 @@ export const ComponentRow: React.FC<PropsWithChildren<ComponentRowProps>> = (
     customer && getActiveFixedPricePaymentProfile(customer.payment_profiles);
 
   return (
-    <tr>
+    <tr data-testid={`row-${props.offeringComponent.type}`}>
       <td>
         <p>
           {props.offeringComponent.name}
@@ -85,6 +85,8 @@ export const ComponentRow2: React.FC<PropsWithChildren<ComponentRowProps>> = (
 
   return (
     <FormTable.Item
+      htmlFor={`limit-${props.offeringComponent.type}`}
+      data-testid={`row-${props.offeringComponent.type}`}
       label={props.offeringComponent.name}
       description={
         props.hidePrices ? null : (

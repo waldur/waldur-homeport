@@ -49,6 +49,7 @@ export const ProjectFilter: React.FC<ProjectFilterProps> = (props) => (
         isDisabled={props.isDisabled}
         className="metronic-select-container"
         classNamePrefix="metronic-select"
+        inputId="project-selector-input"
         {...props.reactSelectProps}
       />
     )}

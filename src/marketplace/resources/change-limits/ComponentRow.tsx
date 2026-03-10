@@ -71,6 +71,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
       <tr
         onClick={setToggle}
         className={toggled && canExpand ? 'expanded' : undefined}
+        data-testid={`row-${component.type}`}
       >
         <td className="text-nowrap">
           {canExpand && (

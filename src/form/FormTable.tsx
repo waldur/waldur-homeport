@@ -23,6 +23,8 @@ export interface FormTableItemProps {
   valueClass?: string;
   actionsClass?: string;
   required?: boolean;
+  'data-testid'?: string;
+  htmlFor?: string;
 }
 
 const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
@@ -36,10 +38,14 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
     <tr
       key={i}
       className={classNames(props.disabled && 'opacity-50', props.className)}
+      data-testid={props['data-testid']}
     >
       {i === 0 && props.description ? (
         <th className={row ? 'col-md-4' : 'col-md-auto'} rowSpan={titleRowSpan}>
-          <div className="title fw-bolder">
+          <label
+            htmlFor={props.htmlFor}
+            className="title fw-bolder mb-0 d-block"
+          >
             {props.label}
             {props.required && <span className="text-danger ms-1">*</span>}
             {Boolean(props.tooltip) &&
@@ -63,7 +69,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
                 />,
               )}
             {props.colon && ':'}
-          </div>
+          </label>
           <div
             className={classNames(
               'description fw-normal',
@@ -75,28 +81,30 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
         </th>
       ) : i === 0 && props.label ? (
         <th className="title col-md-3" rowSpan={titleRowSpan}>
-          {props.label}
-          {props.required && <span className="text-danger ms-1">*</span>}
-          {Boolean(props.tooltip) &&
-            wrapTooltip(
-              props.tooltip,
-              <QuestionIcon
-                size={20}
-                weight="bold"
-                className="ms-2 text-muted mb-1"
-                data-testid="tooltip"
-              />,
-            )}
-          {Boolean(props.warnTooltip) &&
-            wrapTooltip(
-              props.warnTooltip,
-              <WarningCircleIcon
-                size={20}
-                weight="bold"
-                className="ms-2 text-warning mb-1"
-              />,
-            )}
-          {props.colon && ':'}
+          <label htmlFor={props.htmlFor} className="mb-0 d-block">
+            {props.label}
+            {props.required && <span className="text-danger ms-1">*</span>}
+            {Boolean(props.tooltip) &&
+              wrapTooltip(
+                props.tooltip,
+                <QuestionIcon
+                  size={20}
+                  weight="bold"
+                  className="ms-2 text-muted mb-1"
+                  data-testid="tooltip"
+                />,
+              )}
+            {Boolean(props.warnTooltip) &&
+              wrapTooltip(
+                props.warnTooltip,
+                <WarningCircleIcon
+                  size={20}
+                  weight="bold"
+                  className="ms-2 text-warning mb-1"
+                />,
+              )}
+            {props.colon && ':'}
+          </label>
         </th>
       ) : null}
       {row || [false, 0].includes(row) ? (

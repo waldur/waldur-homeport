@@ -44,6 +44,7 @@ export const OrganizationAutocomplete: FunctionComponent<
         isClearable={true}
         className="metronic-select-container"
         classNamePrefix="metronic-select"
+        inputId="organization-selector-input"
         {...props.reactSelectProps}
       />
     )}
