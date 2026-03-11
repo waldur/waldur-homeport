@@ -29,20 +29,20 @@ const HeroTitle = ({ project }: ProjectProfileProps) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
   return (
     <div>
-      <h3 className="mb-1">
+      <h3 className="mb-1 d-flex align-items-center flex-wrap">
         {isFeatureVisible(ProjectFeatures.show_industry_flag) &&
           project.is_industry && (
             <span className="svg-icon svg-icon-3 me-3">
               <FactoryIcon weight="bold" />
             </span>
           )}
-        {project.name}
+        <span>{project.name}</span>
         {project.kind === 'course' ? (
-          <Badge variant="pink" pill outline className="ms-2">
+          <Badge variant="pink" pill outline className="ms-2 text-nowrap">
             {translate('Course')}
           </Badge>
         ) : project.kind === 'public' ? (
-          <Badge variant="blue" pill outline className="ms-2">
+          <Badge variant="blue" pill outline className="ms-2 text-nowrap">
             {translate('Public')}
           </Badge>
         ) : null}
@@ -110,6 +110,7 @@ export const ProjectProfile = ({ project }: ProjectProfileProps) => {
       logoCircle
       cardBordered
       title={<HeroTitle project={project} />}
+      mobileBottomActions
       quickBody={
         ['public', 'course'].includes(project.kind) && (
           <ProjectKindCard project={project} />
