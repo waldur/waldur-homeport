@@ -44,9 +44,9 @@ The application uses a unified button system. **Never import Bootstrap Button di
 | **SubmitButton** | `src/form/SubmitButton.tsx` | Form submission | Loading spinner, disabled states, large size |
 | **CompactSubmitButton** | `src/form/CompactSubmitButton.tsx` | Compact form submission | Small size for popovers/inline forms |
 | **EditButton** | `src/form/EditButton.tsx` | Edit navigation/dialogs | Large size, edit icon |
-| **CompactEditButton** | `src/form/CompactEditButton.tsx` | Inline field editing | Small size for settings rows |
+| **CompactEditButton** | `src/form/CompactEditButton.tsx` | Edit button for key-value rows | Used in key-value component where label and edit button appear in the same row |
 | **CloseDialogButton** | `src/modal/CloseDialogButton.tsx` | Modal cancel/close | Auto-closes dialog, customizable label |
-| **IconButton** | `src/table/IconButton.tsx` | Icon-only with tooltip | Required tooltip for accessibility |
+| **IconButton** | `src/core/buttons/IconButton.tsx` | Icon-only with tooltip | Required tooltip for accessibility |
 | **ToolbarButton** | `src/table/ToolbarButton.tsx` | Table/panel toolbars | Badge support, consistent toolbar styling |
 | **SaveButton** | `src/core/SaveButton.tsx` | Form save with dirty state | Tracks form changes, conditional visibility |
 
@@ -54,17 +54,17 @@ The application uses a unified button system. **Never import Bootstrap Button di
 
 | Use Case | Component | Size |
 |----------|-----------|------|
-| Form submit | `SubmitButton` | Large |
-| Form submit in popover/compact form | `CompactSubmitButton` | Small |
-| Table row action | `ActionButton` or `RowActionButton` | Large |
-| Inline action in form/table cell | `CompactActionButton` | Small |
-| Modal cancel/close | `CloseDialogButton` | Large |
-| Icon-only button | `IconButton` | - |
-| Table toolbar buttons | `ToolbarButton` or `IconButton` | - |
-| Edit field in settings row | `CompactEditButton` | Small |
-| Edit in card/panel header | `EditButton` | Large |
-| Create with dialog | `CreateModalButton` | Large |
-| Delete with confirmation | `DeleteButton` | Large |
+| Form submit | `SubmitButton` | `lg` |
+| Form submit in popover/inline form | `CompactSubmitButton` | `sm` |
+| Table row action | `ActionButton` or `RowActionButton` | `lg` |
+| Inline action in tight spaces | `CompactActionButton` | `sm` |
+| Modal cancel/close | `CloseDialogButton` | `lg` |
+| Icon-only button | `IconButton` | — |
+| Table toolbar buttons | `ToolbarButton` or `IconButton` | — |
+| Edit button in key-value component row | `CompactEditButton` | `sm` |
+| Edit in card/panel header | `EditButton` | `lg` |
+| Create with dialog | `CreateModalButton` | `lg` |
+| Delete with confirmation | `DeleteButton` | `lg` |
 
 #### ActionButton Usage
 
@@ -141,7 +141,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 #### IconButton Usage
 
 ```tsx
-import { IconButton } from '@waldur/table/IconButton';
+import { IconButton } from '@waldur/core/buttons/IconButton';
 
 // Toolbar refresh button
 <IconButton
@@ -621,3 +621,373 @@ export const composeValidators = (...validators) => (value) =>
 6. **Configuration-Driven**: Use data structures to define forms rather than hardcoding
 
 This type-specific field system enables dynamic form generation while maintaining type safety and consistent user experience across the application.
+
+## Component Prop Reference
+
+Prop tables extracted from TypeScript interfaces. Use these to generate correct props without reading source files.
+
+### Buttons
+
+#### ActionButton
+
+```ts
+import { ActionButton } from '@waldur/table/ActionButton';
+```
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | `(event?: any) => void` | yes | — | Click handler |
+| `title` | `string` | no | — | Button label text |
+| `iconNode` | `ReactNode` | no | — | Icon to display |
+| `iconRight` | `boolean` | no | `false` | Place icon on the right instead of left |
+| `variant` | `string` | no | `'tertiary'` | Design token button variant |
+| `disabled` | `boolean` | no | `false` | Disabled state |
+| `tooltip` | `string` | no | — | Tooltip text. **REQUIRED when `disabled` is true** |
+| `pending` | `boolean` | no | `false` | Shows spinner and disables button |
+| `className` | `string` | no | — | Additional CSS classes |
+| `visibility` | `{ minWidth?: number; maxWidth?: number }` | no | — | Responsive visibility constraints |
+| `data-testid` | `string` | no | — | Test ID attribute |
+
+---
+
+#### CompactActionButton
+
+```ts
+import { CompactActionButton } from '@waldur/table/CompactActionButton';
+```
+
+Same props as `ActionButton` (without `visibility`). Use for tight spaces — renders at `sm` size.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `action` | `(event?: any) => void` | yes | — | Click handler |
+| `title` | `string` | no | — | Button label text |
+| `iconNode` | `ReactNode` | no | — | Icon to display |
+| `iconRight` | `boolean` | no | `false` | Place icon on the right instead of left |
+| `variant` | `string` | no | `'tertiary'` | Design token button variant |
+| `disabled` | `boolean` | no | `false` | Disabled state |
+| `tooltip` | `string` | no | — | Tooltip text. **REQUIRED when `disabled` is true** |
+| `pending` | `boolean` | no | `false` | Shows spinner and disables button |
+| `className` | `string` | no | — | Additional CSS classes |
+
+---
+
+#### SubmitButton
+
+```ts
+import { SubmitButton } from '@waldur/form';
+```
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `submitting` | `boolean` | yes | — | Shows spinner and disables button while true |
+| `label` | `ReactNode` | no | — | Button label text |
+| `children` | `ReactNode` | no | — | Alternative to `label` |
+| `variant` | `string` | no | `'primary'` | Design token button variant |
+| `disabled` | `boolean` | no | `false` | Disabled state independent of `submitting` |
+| `invalid` | `boolean` | no | `false` | Disables button when form is invalid |
+| `type` | `'submit' \| 'button'` | no | `'submit'` | Button type |
+| `onClick` | `(event: React.MouseEvent<HTMLButtonElement>) => void` | no | — | Click handler |
+| `iconNode` | `ReactNode` | no | — | Icon to display |
+| `iconOnLeft` | `boolean` | no | `false` | Place icon on the left (default is right) |
+| `id` | `string` | no | — | HTML id attribute |
+| `form` | `string` | no | — | Associates button with a form by id |
+| `className` | `string` | no | — | Additional CSS classes |
+| `data-*` | `string` | no | — | Any `data-` attribute for testing/integration |
+
+---
+
+#### CompactSubmitButton
+
+```ts
+import { CompactSubmitButton } from '@waldur/form';
+```
+
+Same props as `SubmitButton` (without `form`). Renders at `sm` size — use inside popovers and inline forms.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `submitting` | `boolean` | yes | — | Shows spinner and disables button while true |
+| `label` | `ReactNode` | no | — | Button label text |
+| `children` | `ReactNode` | no | — | Alternative to `label` |
+| `variant` | `string` | no | `'primary'` | Design token button variant |
+| `disabled` | `boolean` | no | `false` | Disabled state independent of `submitting` |
+| `invalid` | `boolean` | no | `false` | Disables button when form is invalid |
+| `type` | `'submit' \| 'button'` | no | `'submit'` | Button type |
+| `onClick` | `(event: React.MouseEvent<HTMLButtonElement>) => void` | no | — | Click handler |
+| `iconNode` | `ReactNode` | no | — | Icon to display |
+| `iconOnLeft` | `boolean` | no | `false` | Place icon on the left (default is right) |
+| `id` | `string` | no | — | HTML id attribute |
+| `className` | `string` | no | — | Additional CSS classes |
+
+---
+
+#### IconButton
+
+```ts
+import { IconButton } from '@waldur/core/buttons/IconButton';
+```
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `iconNode` | `ReactNode` | yes | — | Icon to display |
+| `tooltip` | `string` | yes | — | Tooltip text. **Required for accessibility** |
+| `onClick` | `(event: React.MouseEvent) => void` | yes | — | Click handler |
+| `variant` | `ButtonVariant` | no | — | Design token button variant |
+| `disabled` | `boolean` | no | `false` | Disabled state |
+| `pending` | `boolean` | no | `false` | Shows spinner while true |
+| `type` | `'button' \| 'submit'` | no | `'button'` | Button type |
+| `className` | `string` | no | — | Additional CSS classes |
+| `data-testid` | `string` | no | — | Test ID attribute |
+
+---
+
+#### CompactIconButton
+
+```ts
+import { CompactIconButton } from '@waldur/core/buttons/IconButton';
+```
+
+Identical props to `IconButton`. Renders at `sm` size.
+
+---
+
+#### ToolbarButton
+
+```ts
+import { ToolbarButton } from '@waldur/table/ToolbarButton';
+```
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `iconNode` | `ReactNode` | yes | — | Icon to display |
+| `onClick` | `(event: React.MouseEvent) => void` | yes | — | Click handler |
+| `title` | `string` | no | — | Button label text (omit for icon-only) |
+| `tooltip` | `string` | no | — | Tooltip text shown on hover |
+| `variant` | `ButtonVariant` | no | — | Design token button variant |
+| `disabled` | `boolean` | no | `false` | Disabled state |
+| `pending` | `boolean` | no | `false` | Shows spinner while true |
+| `badge` | `number \| string` | no | — | Badge count to display (e.g. active filter count) |
+| `className` | `string` | no | — | Additional CSS classes |
+
+---
+
+#### BaseButton
+
+```ts
+import { BaseButton } from '@waldur/core/buttons/BaseButton';
+```
+
+**Do not use in feature code.** This is an internal primitive used by the higher-level button components. Feature code must use the specific button components (`ActionButton`, `SubmitButton`, `ToolbarButton`, etc.) which already cover all use cases.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `size` | `'sm' \| 'lg'` | yes | — | Button size |
+| `label` | `ReactNode` | no | — | Button label text |
+| `onClick` | `(event?: any) => void` | no | — | Click handler |
+| `iconNode` | `ReactNode` | no | — | Icon to display |
+| `iconRight` | `boolean` | no | `false` | Place icon on the right instead of left |
+| `variant` | `ButtonVariant` | no | — | Design token button variant |
+| `disabled` | `boolean` | no | `false` | Disabled state |
+| `tooltip` | `string` | no | — | Tooltip text. **REQUIRED when `disabled` is true** |
+| `pending` | `boolean` | no | `false` | Shows spinner and disables button |
+| `type` | `'button' \| 'submit'` | no | `'button'` | Button type |
+| `id` | `string` | no | — | HTML id attribute |
+| `form` | `string` | no | — | Associates button with a form by id |
+| `className` | `string` | no | — | Additional CSS classes |
+| `data-*` | `string` | no | — | Any `data-` attribute for testing/integration |
+
+---
+
+### Data Display
+
+#### Badge
+
+```ts
+import { Badge } from '@waldur/core/Badge';
+```
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `variant` | `Variant \| 'pink' \| 'blue' \| 'teal' \| 'indigo' \| 'purple' \| 'rose' \| 'orange' \| 'moss'` | no | — | Badge color variant |
+| `leftIcon` | `ReactNode` | no | — | Icon displayed on left |
+| `rightIcon` | `ReactNode` | no | — | Icon displayed on right |
+| `onlyIcon` | `boolean` | no | `false` | Show icon only, no text |
+| `alignIcon` | `boolean` | no | `false` | Align icon vertically |
+| `tooltip` | `ReactNode` | no | — | Tooltip text |
+| `tooltipProps` | `Partial<TipProps>` | no | — | Custom tooltip configuration |
+| `light` | `boolean` | no | `false` | Use light background |
+| `outline` | `boolean` | no | `false` | Use outline style |
+| `pill` | `boolean` | no | `false` | Use pill (rounded) shape |
+| `roundless` | `boolean` | no | `false` | Remove border radius |
+| `hasBullet` | `boolean` | no | `false` | Include bullet point |
+| `size` | `'sm' \| 'lg'` | no | — | Badge size |
+
+---
+
+#### StateIndicator
+
+```ts
+import { StateIndicator } from '@waldur/core/StateIndicator';
+```
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `label` | `string` | yes | — | Display label |
+| `variant` | `Variant` | yes | — | Color variant |
+| `tooltip` | `string` | no | — | Tooltip text |
+| `active` | `boolean` | no | `false` | Shows loading spinner when true |
+| `light` | `boolean` | no | `false` | Use light background |
+| `outline` | `boolean` | no | `false` | Use outline style |
+| `pill` | `boolean` | no | `false` | Use pill (rounded) shape |
+| `roundless` | `boolean` | no | `false` | Remove border radius |
+| `hasBullet` | `boolean` | no | `false` | Include bullet point |
+| `size` | `'sm' \| 'lg'` | no | — | Badge size |
+
+---
+
+#### NoResult
+
+```ts
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
+```
+
+Use for **all empty states**. Always provide an actionable CTA via `callback`+`buttonTitle` or `actions`.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `title` | `string` | no | — | Empty state heading |
+| `message` | `ReactNode` | no | — | Empty state body text |
+| `buttonTitle` | `string` | no | — | Label for the default action button |
+| `callback` | `() => void` | no | — | Handler for the default action button |
+| `actions` | `ReactNode` | no | — | Custom action buttons/elements (alternative to `callback`) |
+| `isVisible` | `boolean` | no | `true` | Control component visibility |
+| `className` | `string` | no | — | Additional CSS classes |
+| `style` | `CSSProperties` | no | — | Inline styles |
+
+---
+
+### Tables
+
+#### Table
+
+```ts
+import { Table } from '@waldur/table';
+```
+
+Key configuration props. Full interface is large — these are the most commonly used.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `rows` | `any[]` | yes | — | Row data array |
+| `fetch` | `(force?: boolean) => void` | yes | — | Function to load data |
+| `columns` | `Array<Column<RowType>>` | yes | — | Column definitions |
+| `table` | `string` | no | — | Table identifier key (used for persisted state) |
+| `rowKey` | `string` | no | `'uuid'` | Field used as row key |
+| `title` | `ReactNode` | no | — | Table heading |
+| `subtitle` | `ReactNode` | no | — | Table subheading |
+| `hasPagination` | `boolean` | no | `true` | Enable pagination controls |
+| `hasQuery` | `boolean` | no | `false` | Enable search input |
+| `hasActionBar` | `boolean` | no | `true` | Show action bar above table |
+| `hasHeaders` | `boolean` | no | `true` | Show column headers |
+| `hasOptionalColumns` | `boolean` | no | `false` | Enable column visibility toggle |
+| `enableExport` | `boolean` | no | `false` | Enable export functionality |
+| `enableMultiSelect` | `boolean` | no | `false` | Enable row multi-select |
+| `hoverable` | `boolean` | no | `false` | Enable row hover highlight |
+| `rowClass` | `(({ row }) => string) \| string` | no | — | CSS class for individual rows |
+| `rowActions` | `React.ComponentType<{ row; fetch }>` | no | — | Per-row actions component |
+| `expandableRow` | `React.ComponentType<{ row; fetch }>` | no | — | Expandable row detail component |
+| `isRowExpandable` | `(row: RowType) => boolean` | no | — | Controls which rows can be expanded |
+| `tableActions` | `ReactNode` | no | — | Toolbar action buttons |
+| `dropdownActions` | `ReactNode` | no | — | Actions shown in toolbar dropdown |
+| `multiSelectActions` | `React.ComponentType<{ rows; refetch }>` | no | — | Bulk action component (requires `enableMultiSelect`) |
+| `filters` | `JSX.Element` | no | — | Filter UI component |
+| `filterPosition` | `'menu' \| 'sidebar' \| 'header'` | no | `'menu'` | Where to render filters |
+| `placeholderComponent` | `ReactNode` | no | — | Custom empty state component |
+| `placeholderActions` | `ReactNode` | no | — | Empty state action buttons |
+| `emptyMessage` | `ReactNode` | no | — | Simple empty state message text |
+| `hideRefresh` | `boolean` | no | `false` | Hide refresh button |
+| `hideIfEmpty` | `boolean` | no | `false` | Hide entire table when no rows |
+| `initialPageSize` | `number` | no | — | Initial number of rows per page |
+| `gridItem` | `React.ComponentType<{ row }>` | no | — | Component for grid display mode |
+| `tabs` | `TableTab[]` | no | — | Tab configuration |
+| `footer` | `ReactNode` | no | — | Footer content |
+| `className` | `string` | no | — | Table wrapper CSS classes |
+
+---
+
+### Forms
+
+#### FormGroup (React Final Form)
+
+```ts
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+```
+
+Use this version inside React Final Form. **Do not use `FormContainer` from `@waldur/form`** — that is redux-form only and will cause errors.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `label` | `ReactNode` | no | — | Field label |
+| `description` | `ReactNode` | no | — | Help text displayed below field |
+| `help` | `ReactNode` | no | — | Alternative help text |
+| `helpEnd` | `boolean` | no | `false` | Place help text at end of label row |
+| `required` | `boolean` | no | `false` | Shows red asterisk |
+| `spaceless` | `boolean` | no | `false` | Remove bottom margin. Use on last field in a form |
+| `space` | `number` | no | `7` | Bottom margin size |
+| `quickAction` | `ReactNode` | no | — | Quick action element next to label |
+| `controlId` | `string` | no | — | HTML `for` attribute on label |
+| `id` | `string` | no | — | HTML id attribute |
+| `className` | `string` | no | — | Additional CSS classes |
+| `meta` | `FieldMetaState<any>` | no | — | React Final Form field metadata (for validation display) |
+
+---
+
+#### SelectField
+
+```ts
+import { SelectField } from '@waldur/form';
+```
+
+Redux Form field component. In React Final Form use `<Field name="..." component={SelectField as any} />`.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `options` | `Array<{ value: any; label: string }>` | yes | — | Selectable options |
+| `isMulti` | `boolean` | no | `false` | Enable multi-value selection |
+| `simpleValue` | `boolean` | no | `false` | Store plain value instead of `{ value, label }` object |
+| `getOptionValue` | `(option: any) => any` | no | — | Custom option value accessor |
+| `placeholder` | `string` | no | — | Placeholder text |
+| `isDisabled` | `boolean` | no | `false` | Disable the select |
+| `isClearable` | `boolean` | no | `false` | Show clear button |
+| `className` | `string` | no | — | Additional CSS classes |
+| `noUpdateOnBlur` | `boolean` | no | `false` | Skip redux-form blur update |
+
+---
+
+#### StringField
+
+```ts
+import { StringField } from '@waldur/form';
+```
+
+Redux Form field component. In React Final Form use `<Field name="..." component={StringField as any} />`.
+
+| Prop | Type | Required | Default | Description |
+|------|------|----------|---------|-------------|
+| `placeholder` | `string` | no | — | Placeholder text |
+| `disabled` | `boolean` | no | `false` | Disable the input |
+| `readOnly` | `boolean` | no | `false` | Read-only state |
+| `maxLength` | `number` | no | — | Maximum character length |
+| `pattern` | `string` | no | — | HTML validation regex pattern |
+| `autoFocus` | `boolean` | no | `false` | Focus input on mount |
+| `solid` | `boolean` | no | `false` | Use solid background styling |
+| `icon` | `ReactNode` | no | — | Icon displayed inside the input |
+| `label` | `ReactNode` | no | — | Field label (used with `FormGroup`) |
+| `description` | `ReactNode` | no | — | Help text below field |
+| `tooltip` | `ReactNode` | no | — | Tooltip on label |
+| `required` | `boolean` | no | `false` | Shows required indicator |
+| `validate` | `Validator \| Validator[]` | no | — | Validation function(s) |
+| `className` | `string` | no | — | Additional CSS classes on input |
+| `containerClassName` | `string` | no | — | Additional CSS classes on wrapper |
+| `spaceless` | `boolean` | no | `false` | Remove bottom margin |
