@@ -2,7 +2,6 @@ import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   remoteWaldurApiPullOfferingDetails,
-  remoteWaldurApiPullOfferingInvoices,
   remoteWaldurApiPullOfferingOrders,
   remoteWaldurApiPullOfferingResources,
   remoteWaldurApiPullOfferingRobotAccounts,
@@ -169,31 +168,6 @@ const usePullRemoteOfferingOrders = () => {
   );
 };
 
-const usePullRemoteOfferingInvoices = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPullOfferingInvoices({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Offering invoices synchronization has been scheduled.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize offering invoices.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-
 const usePullRemoteOfferingRobotAccounts = () => {
   const dispatch = useDispatch();
 
@@ -229,7 +203,6 @@ export const RemoteActions = ({ offering }) => {
   const pullRemoteOfferingUsage = usePullRemoteOfferingUsage();
   const pullRemoteOfferingResources = usePullRemoteOfferingResources();
   const pullRemoteOfferingOrders = usePullRemoteOfferingOrders();
-  const pullRemoteOfferingInvoices = usePullRemoteOfferingInvoices();
   const pullRemoteOfferingRobotAccounts = usePullRemoteOfferingRobotAccounts();
   const isVisible =
     offering.type === REMOTE_OFFERING_TYPE &&
@@ -261,10 +234,6 @@ export const RemoteActions = ({ offering }) => {
     {
       label: translate('Push project data'),
       handler: () => pushRemoteOfferingProjectData(offering.uuid),
-    },
-    {
-      label: translate('Pull resources invoices'),
-      handler: () => pullRemoteOfferingInvoices(offering.uuid),
     },
     {
       label: translate('Pull robot accounts'),
