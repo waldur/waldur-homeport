@@ -43,6 +43,7 @@ export const MarketplaceTrigger: FunctionComponent<MarketplaceTriggerProps> = ({
       className={classNames('menu-item add-resource-toggle', {
         'menu-item-disabled': disabled,
       })}
+      data-testid="add-resource-toggle"
     >
       <span
         className={classNames('menu-link btn btn-outline', {
