@@ -74,6 +74,22 @@ const linksAttributes: Attribute[] = [
       'Provide the URL users will use to access the offering.',
     ),
   },
+  {
+    key: 'documentation_url',
+    title: translate('Documentation URL'),
+    type: 'string',
+    maxLength: 200,
+    description: translate('Link to the documentation for this offering.'),
+  },
+  {
+    key: 'helpdesk_url',
+    title: translate('Helpdesk URL'),
+    type: 'string',
+    maxLength: 200,
+    description: translate(
+      'Link to the helpdesk or support portal for this offering.',
+    ),
+  },
 ];
 
 const identifiersAttributes: Attribute[] = [

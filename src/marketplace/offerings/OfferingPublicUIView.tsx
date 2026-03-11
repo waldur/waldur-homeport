@@ -72,6 +72,11 @@ const PublicOfferingTermsOfService = lazyComponent(() =>
     default: module.PublicOfferingTermsOfService,
   })),
 );
+const PublicOfferingDocumentationAndSupport = lazyComponent(() =>
+  import('./details/PublicOfferingDocumentationAndSupport').then((module) => ({
+    default: module.PublicOfferingDocumentationAndSupport,
+  })),
+);
 
 const getTabs = (
   offering?: Offering,
@@ -173,6 +178,13 @@ const getTabs = (
           title: translate('Terms of Service'),
           key: 'terms-of-service',
           component: PublicOfferingTermsOfService,
+        }
+      : null,
+    offering?.documentation_url || offering?.helpdesk_url
+      ? {
+          title: translate('Documentation & support'),
+          key: 'documentation-support',
+          component: PublicOfferingDocumentationAndSupport,
         }
       : null,
   ].filter(Boolean);

@@ -6,4 +6,6 @@ export const pickOverview = pick([
   'full_description',
   'privacy_policy_link',
   'access_url',
+  'documentation_url',
+  'helpdesk_url',
 ]);
