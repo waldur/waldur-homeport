@@ -76,6 +76,14 @@ table .expandable-container {
     }
   }
 
+  // Remove divider before Actions column in sections table
+  .card-table.sections-table-no-actions-divider {
+    th.pinned.is-floating::before,
+    td.row-actions.pinned.is-floating::before {
+      display: none;
+    }
+  }
+
   // Another table inside expanded view
   .card-table {
     background-color: transparent;

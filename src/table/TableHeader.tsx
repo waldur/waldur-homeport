@@ -19,6 +19,7 @@ interface TableHeaderProps {
   onSortClick?(sorting: Sorting): void;
   currentSorting?: Sorting;
   expandableRow?: boolean;
+  hideExpandAllHeader?: boolean;
   showActions?: boolean;
   rows: any[];
   enableMultiSelect?: boolean;
@@ -131,6 +132,7 @@ export const TableHeader: FC<TableHeaderProps> = ({
   onSortClick,
   currentSorting,
   expandableRow = false,
+  hideExpandAllHeader = false,
   showActions,
   rows,
   enableMultiSelect,
@@ -246,27 +248,33 @@ export const TableHeader: FC<TableHeaderProps> = ({
             </th>
           ) : null}
           {expandableRow && (
-            <th data-testid="all-rows-expander" style={{ width: '10px' }}>
-              <IconButton
-                iconNode={
-                  <CaretDownIcon
-                    size={20}
-                    weight="bold"
-                    className="rotate-180"
-                  />
-                }
-                tooltip={
-                  toggledAll
-                    ? translate('Collapse all rows')
-                    : translate('Expand all rows')
-                }
-                onClick={toggleAll}
-                variant="flush"
-                className={classNames(
-                  'btn-no-focus',
-                  toggledAll ? 'active' : '',
-                )}
-              />
+            <th
+              data-testid="all-rows-expander"
+              style={{ width: '10px' }}
+              className={hideExpandAllHeader ? 'empty-expand-header' : ''}
+            >
+              {!hideExpandAllHeader && (
+                <IconButton
+                  iconNode={
+                    <CaretDownIcon
+                      size={20}
+                      weight="bold"
+                      className="rotate-180"
+                    />
+                  }
+                  tooltip={
+                    toggledAll
+                      ? translate('Collapse all rows')
+                      : translate('Expand all rows')
+                  }
+                  onClick={toggleAll}
+                  variant="flush"
+                  className={classNames(
+                    'btn-no-focus',
+                    toggledAll ? 'active' : '',
+                  )}
+                />
+              )}
             </th>
           )}
           {hasOptionalColumns

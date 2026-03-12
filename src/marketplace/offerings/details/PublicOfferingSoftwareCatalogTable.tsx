@@ -64,15 +64,16 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
   const filter = useMemo(
     () => ({
       offering_uuid: offering.uuid,
-      ...((offering.software_catalogs?.length > 0 && {
-        cpu_family: offering.software_catalogs.flatMap(
-          (sc) => sc.enabled_cpu_family || '',
-        )[0],
-        cpu_microarchitecture: offering.software_catalogs.flatMap(
-          (sc) => sc.enabled_cpu_microarchitectures || [],
-        ),
-      }) ||
-        {}),
+      ...(offering.software_catalogs?.length > 0
+        ? {
+            cpu_family: offering.software_catalogs.flatMap(
+              (sc) => sc.enabled_cpu_family || '',
+            )[0],
+            cpu_microarchitecture: offering.software_catalogs.flatMap(
+              (sc) => sc.enabled_cpu_microarchitectures || [],
+            ),
+          }
+        : {}),
       ...formFilter,
     }),
     [offering.uuid, offering.software_catalogs, formFilter],
