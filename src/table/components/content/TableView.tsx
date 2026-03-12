@@ -50,6 +50,7 @@ export function TableView() {
           currentSorting={sorting}
           columns={visibleColumns}
           expandableRow={Boolean(slots.expandableRow)}
+          hideExpandAllHeader={config.hideExpandAllHeader}
           showActions={showActions}
           enableMultiSelect={config.enableMultiSelect}
           onSelectAllRows={actions.selectAllRows}

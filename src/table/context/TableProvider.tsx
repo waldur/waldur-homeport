@@ -169,6 +169,7 @@ export function TableProvider<TData = any>({
         hideTitle: props.hideTitle ?? false,
         hideIfEmpty: props.hideIfEmpty ?? false,
         placeholderHasRetry: props.placeholderHasRetry ?? true,
+        hideExpandAllHeader: props.hideExpandAllHeader ?? false,
       },
 
       // Slots
@@ -285,6 +286,7 @@ export function TableProvider<TData = any>({
       props.hideTitle,
       props.hideIfEmpty,
       props.placeholderHasRetry,
+      props.hideExpandAllHeader,
       props.gridItem,
       props.expandableRow,
       props.rowActions,

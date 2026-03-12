@@ -19,10 +19,19 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
 import { CategoryCreateButton } from './CategoryCreateButton';
+import { CategoryExpandableRow } from './CategoryExpandableRow';
 import { CategoryRowActions } from './CategoryRowActions';
 
 const categoryFields: MarketplaceCategoriesListData['query'] = {
-  field: ['uuid', 'title', 'description', 'icon', 'offering_count', 'group'],
+  field: [
+    'uuid',
+    'title',
+    'description',
+    'icon',
+    'offering_count',
+    'group',
+    'sections',
+  ],
 };
 
 export const AdminCategoriesPage: FunctionComponent = () => {
@@ -103,6 +112,10 @@ export const AdminCategoriesPage: FunctionComponent = () => {
           },
         },
         {
+          title: translate('Sections'),
+          render: ({ row }) => <>{row.sections?.length ?? 0}</>,
+        },
+        {
           title: translate('Offerings count'),
           render: ({ row }) => <>{row.offering_count}</>,
         },
@@ -113,6 +126,8 @@ export const AdminCategoriesPage: FunctionComponent = () => {
       ]}
       verboseName={translate('Categories')}
       initialSorting={{ field: 'title', mode: 'desc' }}
+      expandableRow={CategoryExpandableRow}
+      isRowExpandable={(row) => (row.sections?.length ?? 0) > 0}
       rowActions={({ row }) => (
         <CategoryRowActions row={row} refetch={tableProps.fetch} />
       )}
