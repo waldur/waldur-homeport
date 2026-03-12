@@ -68,20 +68,22 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
   );
 
   // To initialize & apply filters (from URL)
-  useEffect(() => formValues && apply(formValues), []);
+  // Logic moved to shared syncResourceFilters hook
 
   // Clear project filter if organization is cleared
   useEffect(() => {
     if (!formValues?.project) return;
-    if (
-      !formValues?.organization ||
+    if (!formValues?.organization) {
+      dispatch(props.change('project', undefined));
+      apply({ ...formValues, project: null });
+    } else if (
+      formValues.project.customer_uuid &&
       formValues.organization.uuid !== formValues.project.customer_uuid
     ) {
       dispatch(props.change('project', undefined));
-      const newValues = { ...formValues, project: null };
-      apply(newValues);
+      apply({ ...formValues, project: null });
     }
-  }, [formValues, props.change]);
+  }, [formValues?.organization?.uuid, formValues?.project?.uuid, props.change]);
 
   if (!user) return null;
 

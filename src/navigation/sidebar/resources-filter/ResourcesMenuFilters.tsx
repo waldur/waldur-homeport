@@ -24,7 +24,7 @@ export const ResourcesMenuFilters = () => {
     return project;
   }, [filters]);
 
-  const { clearAllFilters } = useOrganizationAndProjectFiltersForResources();
+  const { removeFilter } = useOrganizationAndProjectFiltersForResources();
 
   return (
     <>
@@ -46,7 +46,9 @@ export const ResourcesMenuFilters = () => {
                   {filterItem.value?.abbreviation || filterItem.value?.name}
                 </span>
                 <span className="right-icon">
-                  <RemoveFilterBadgeButton onClick={clearAllFilters} />
+                  <RemoveFilterBadgeButton
+                    onClick={() => removeFilter(filterItem.name)}
+                  />
                 </span>
               </span>
             </Stack>
