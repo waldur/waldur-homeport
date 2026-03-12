@@ -82,7 +82,6 @@ export const createMockTableContext = (
     hideTitle: false,
     hideIfEmpty: false,
     placeholderHasRetry: true,
-    hideExpandAllHeader: false,
   },
   slots: {},
   display: {},

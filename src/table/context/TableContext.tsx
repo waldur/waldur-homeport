@@ -66,7 +66,6 @@ interface TableConfig {
   hideTitle: boolean;
   hideIfEmpty: boolean;
   placeholderHasRetry: boolean;
-  hideExpandAllHeader: boolean;
 }
 
 /**

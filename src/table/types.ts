@@ -259,6 +259,4 @@ export interface TableProps<RowType = any> extends TableState {
    * If not provided, all rows are considered expandable if expandableRow is set.
    */
   isRowExpandable?: (row: RowType) => boolean;
-  /** Hide the expand-all/collapse-all button in the header when expandable rows are used */
-  hideExpandAllHeader?: boolean;
 }
