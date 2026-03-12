@@ -19,7 +19,8 @@ export const PageBarFilters = () => {
   const filters = useSelector(getMarketplaceFilters);
   const dispatch = useDispatch();
 
-  const { clearAllFilters } = useOrganizationAndProjectFiltersForResources();
+  const { syncResourceFilters, clearAllFilters } =
+    useOrganizationAndProjectFiltersForResources();
 
   const removeFilter = useCallback(
     (name) => {
@@ -43,8 +44,18 @@ export const PageBarFilters = () => {
         return acc;
       }, {});
       syncFiltersToURL(newFilters);
+
+      // Sync with sidebar resource filters
+      if (name === 'organization') {
+        syncResourceFilters({ organization: null, project: null });
+      } else if (name === 'project') {
+        syncResourceFilters({
+          organization: filters.find((f) => f.name === 'organization')?.value,
+          project: null,
+        });
+      }
     },
-    [dispatch, filters],
+    [dispatch, filters, syncResourceFilters],
   );
 
   if (!filters?.length) return null;
