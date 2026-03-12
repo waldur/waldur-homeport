@@ -8,6 +8,7 @@ import { Badge } from '@waldur/core/Badge';
 import { syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
+import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
 import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
 
@@ -17,6 +18,8 @@ import { getMarketplaceFilters } from './store/selectors';
 export const PageBarFilters = () => {
   const filters = useSelector(getMarketplaceFilters);
   const dispatch = useDispatch();
+
+  const { clearAllFilters } = useOrganizationAndProjectFiltersForResources();
 
   const removeFilter = useCallback(
     (name) => {
@@ -43,15 +46,6 @@ export const PageBarFilters = () => {
     },
     [dispatch, filters],
   );
-
-  const clearFilters = useCallback(() => {
-    filters.forEach((item) => removeFilter(item.name));
-    const emptyFilters = filters.reduce(
-      (acc, filter) => ({ ...acc, [filter.name]: null }),
-      {},
-    );
-    syncFiltersToURL(emptyFilters);
-  }, [filters, removeFilter]);
 
   if (!filters?.length) return null;
 
@@ -89,7 +83,7 @@ export const PageBarFilters = () => {
           <CompactActionButton
             variant="text-secondary"
             className="btn-no-focus"
-            action={clearFilters}
+            action={clearAllFilters}
             iconNode={<XIcon weight="bold" />}
             title={translate('Clear filters')}
           />

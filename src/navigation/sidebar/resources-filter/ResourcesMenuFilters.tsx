@@ -24,11 +24,7 @@ export const ResourcesMenuFilters = () => {
     return project;
   }, [filters]);
 
-  const { syncResourceFilters } =
-    useOrganizationAndProjectFiltersForResources();
-  const clearFilters = () => {
-    syncResourceFilters({ organization: null, project: null });
-  };
+  const { clearAllFilters } = useOrganizationAndProjectFiltersForResources();
 
   return (
     <>
@@ -50,7 +46,7 @@ export const ResourcesMenuFilters = () => {
                   {filterItem.value?.abbreviation || filterItem.value?.name}
                 </span>
                 <span className="right-icon">
-                  <RemoveFilterBadgeButton onClick={clearFilters} />
+                  <RemoveFilterBadgeButton onClick={clearAllFilters} />
                 </span>
               </span>
             </Stack>
