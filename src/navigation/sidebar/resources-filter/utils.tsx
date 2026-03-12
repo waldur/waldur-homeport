@@ -1,11 +1,13 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useEffect } from 'react';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { change } from 'redux-form';
 
 import { getQueryParams, syncFiltersToURL } from '@waldur/core/filters';
 import { translate } from '@waldur/i18n';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
+import { setMarketplaceFilter } from '@waldur/marketplace/landing/filter/store/actions';
+import { getMarketplaceFilters } from '@waldur/marketplace/landing/filter/store/selectors';
 import {
   ALL_RESOURCES_TABLE_ID,
   CATEGORY_RESOURCES_ALL_FILTER_FORM_ID,
@@ -198,6 +200,19 @@ export const useOrganizationAndProjectFiltersForResources = (
     [dispatch, categories, state, params],
   );
 
+  const filters = useSelector(getMarketplaceFilters);
+
+  const clearAllFilters = useCallback(() => {
+    const emptyFilters: Record<string, null> = {};
+    filters?.forEach((item) => {
+      dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, item.name, null, true));
+      dispatch(setMarketplaceFilter({ name: item.name, value: null }));
+      emptyFilters[item.name] = null;
+    });
+    syncFiltersToURL(emptyFilters);
+    syncResourceFilters({ organization: null, project: null });
+  }, [dispatch, filters, syncResourceFilters]);
+
   useEffect(() => {
     // Normalize filter values - handle arrays from old data or different code paths
     const normalizeFilter = (filter: any) => {
@@ -235,7 +250,7 @@ export const useOrganizationAndProjectFiltersForResources = (
     }
   }, []);
 
-  return { syncResourceFilters };
+  return { syncResourceFilters, clearAllFilters };
 };
 
 export const sidebarResourcesFilterSelector = (state: any) => {
