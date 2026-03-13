@@ -393,10 +393,7 @@ Cleanup test k8s deployment:
   before_script:
     - export KUBECONFIG=${K8S_CONFIG_WALDUR_HELM_TEST}
   script:
-    - kubectl delete secret waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
-    - kubectl delete deployment waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
-    - kubectl delete service waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
-    - kubectl delete ingress waldur-homeport-test-${CI_MERGE_REQUEST_ID} || true
+    - kubectl delete secret,deployment,service,ingress waldur-homeport-test-${CI_MERGE_REQUEST_ID} --ignore-not-found=true --wait=true
 
 Cleanup previous k8s test deployment:
   extends: Cleanup test k8s deployment
