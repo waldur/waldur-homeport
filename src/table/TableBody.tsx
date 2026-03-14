@@ -57,6 +57,11 @@ interface TableCellsProps {
   columnsMap: Record<string, Column>;
   columnPositions: TableProps['columnPositions'];
   hasOptionalColumns: TableProps['hasOptionalColumns'];
+  expander?: {
+    canExpand: boolean;
+    isExpanded: boolean;
+  };
+  hasLeadingCheckbox?: boolean;
 }
 
 const InlineFilterButton = memo(({ column, row }: { column: Column; row }) => {
@@ -119,55 +124,109 @@ const hasFilterMenu = (key: string) => {
   return Boolean(item);
 };
 
-const TableCell = memo(({ column, row }: { column: Column; row }) => {
-  // Skip rendering if column is not visible
-  if (column.visible === false) {
-    return null;
-  }
-
-  if (!column.render || typeof column.render !== 'function') {
-    return null;
-  }
-
-  const renderedContent = React.createElement(column.render, {
+const TableCell = memo(
+  ({
+    column,
     row,
-  });
+    isFirstColumn,
+    expander,
+    hasLeadingCheckbox,
+  }: {
+    column: Column;
+    row;
+    isFirstColumn?: boolean;
+    expander?: {
+      canExpand: boolean;
+      isExpanded: boolean;
+    };
+    hasLeadingCheckbox?: boolean;
+  }) => {
+    // Skip rendering if column is not visible
+    if (column.visible === false) {
+      return null;
+    }
 
-  if (renderedContent === undefined || renderedContent === null) {
-    return null;
-  }
-  const valueToCopy = column.copyField ? column.copyField(row) : '';
-  const hasFilter = column.inlineFilter && hasFilterMenu(column.filter);
-  return (
-    <td
-      className={classNames(
-        column.className,
-        column.inlineFilter && 'has-filter',
-        (column.ellipsis ?? true) && 'ellipsis',
-      )}
-      onClick={column.disabledClick ? (e) => e.stopPropagation() : undefined}
-    >
-      {column.copyField ? (
-        <>
-          <div className="with-copy d-flex align-items-center gap-1">
-            <div className="td-data">{renderedContent}</div>
-            <CopyToClipboardButton value={valueToCopy} />
+    if (!column.render || typeof column.render !== 'function') {
+      return null;
+    }
+
+    const renderedContent = React.createElement(column.render, {
+      row,
+    });
+
+    if (renderedContent === undefined || renderedContent === null) {
+      return null;
+    }
+    const valueToCopy = column.copyField ? column.copyField(row) : '';
+    const hasFilter = column.inlineFilter && hasFilterMenu(column.filter);
+
+    const cellClassName = classNames(
+      column.className,
+      column.inlineFilter && 'has-filter',
+      (column.ellipsis ?? true) && 'ellipsis',
+    );
+
+    const content = column.copyField ? (
+      <>
+        <div className="with-copy d-flex align-items-center gap-1">
+          <div className="td-data">{renderedContent}</div>
+          <CopyToClipboardButton value={valueToCopy} />
+        </div>
+        {hasFilter && <InlineFilterButton column={column} row={row} />}
+      </>
+    ) : (
+      <>
+        {hasFilter ? (
+          <div className="td-data">{renderedContent}</div>
+        ) : (
+          renderedContent
+        )}
+        {hasFilter && <InlineFilterButton column={column} row={row} />}
+      </>
+    );
+
+    const handleClick = column.disabledClick
+      ? (e: React.MouseEvent) => e.stopPropagation()
+      : undefined;
+
+    // First data column: render expander icon and text in the same cell.
+    if (isFirstColumn && expander) {
+      return (
+        <td
+          className={cellClassName}
+          onClick={handleClick}
+          style={{ paddingLeft: 0, paddingRight: 0 }}
+        >
+          <div
+            style={{
+              display: 'flex',
+              alignItems: 'center',
+              paddingLeft: hasLeadingCheckbox ? 12 : 16,
+              paddingRight: 16,
+              columnGap: 12,
+            }}
+          >
+            {expander.canExpand && (
+              <span
+                data-testid="row-expander"
+                className={classNames({ active: expander.isExpanded })}
+              >
+                <CaretDownIcon size={20} weight="bold" className="rotate-180" />
+              </span>
+            )}
+            <div style={{ minWidth: 0, flex: '1 1 auto' }}>{content}</div>
           </div>
-          {hasFilter && <InlineFilterButton column={column} row={row} />}
-        </>
-      ) : (
-        <>
-          {hasFilter ? (
-            <div className="td-data">{renderedContent}</div>
-          ) : (
-            renderedContent
-          )}
-          {hasFilter && <InlineFilterButton column={column} row={row} />}
-        </>
-      )}
-    </td>
-  );
-});
+        </td>
+      );
+    }
+
+    return (
+      <td className={cellClassName} onClick={handleClick}>
+        {content}
+      </td>
+    );
+  },
+);
 
 TableCell.displayName = 'TableCell';
 
@@ -178,23 +237,45 @@ const TableCells = memo(
     columnsMap,
     columnPositions,
     hasOptionalColumns,
-  }: TableCellsProps) => (
-    <>
-      {hasOptionalColumns
-        ? columnPositions
-            .filter((id) => columnsMap[id])
-            .map((id) => (
-              <Fragment key={id}>
-                <TableCell column={columnsMap[id]} row={row} />
+    expander,
+    hasLeadingCheckbox,
+  }: TableCellsProps) => {
+    const firstVisibleIndex = hasOptionalColumns
+      ? columnPositions
+          .filter((id) => columnsMap[id])
+          .findIndex((id) => columnsMap[id].visible !== false)
+      : columns.findIndex((col) => col.visible !== false);
+
+    return (
+      <>
+        {hasOptionalColumns
+          ? columnPositions
+              .filter((id) => columnsMap[id])
+              .map((id, index) => (
+                <Fragment key={id}>
+                  <TableCell
+                    column={columnsMap[id]}
+                    row={row}
+                    isFirstColumn={index === firstVisibleIndex}
+                    expander={expander}
+                    hasLeadingCheckbox={hasLeadingCheckbox}
+                  />
+                </Fragment>
+              ))
+          : columns.map((column, colIndex) => (
+              <Fragment key={colIndex}>
+                <TableCell
+                  column={column}
+                  row={row}
+                  isFirstColumn={colIndex === firstVisibleIndex}
+                  expander={expander}
+                  hasLeadingCheckbox={hasLeadingCheckbox}
+                />
               </Fragment>
-            ))
-        : columns.map((column, colIndex) => (
-            <Fragment key={colIndex}>
-              <TableCell column={column} row={row} />
-            </Fragment>
-          ))}
-    </>
-  ),
+            ))}
+      </>
+    );
+  },
 );
 
 TableCells.displayName = 'TableCells';
@@ -295,6 +376,7 @@ const TableRow = memo<TableRowProps>(
     }, [fieldProps, row, onChangeField]);
 
     const canExpand = expandableRow && (isRowExpandable?.(row) ?? true);
+    const isExpanded = Boolean(canExpand && toggled[getId(row, rowIndex)]);
 
     return (
       <tr
@@ -344,22 +426,21 @@ const TableRow = memo<TableRowProps>(
             </div>
           </td>
         )}
-        {expandableRow && (
-          <td
-            data-testid="row-expander"
-            className={toggled[getId(row, rowIndex)] ? 'active' : ''}
-          >
-            {canExpand && (
-              <CaretDownIcon size={20} weight="bold" className="rotate-180" />
-            )}
-          </td>
-        )}
         <TableCells
           row={row}
           columns={columns}
           columnsMap={columnsMap}
           columnPositions={columnPositions}
           hasOptionalColumns={hasOptionalColumns}
+          expander={
+            expandableRow
+              ? {
+                  canExpand,
+                  isExpanded,
+                }
+              : undefined
+          }
+          hasLeadingCheckbox={Boolean(enableMultiSelect || fieldType)}
         />
 
         {rowActions && (
@@ -530,7 +611,6 @@ export const TableBody: FunctionComponent<TableBodyProps> = memo(
                   <td
                     colSpan={
                       columns.length +
-                      1 +
                       (rowActions ? 1 : 0) +
                       (enableMultiSelect || fieldType ? 1 : 0)
                     }

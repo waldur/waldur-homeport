@@ -7,6 +7,12 @@
   margin-bottom: 8px;
 }
 
+// Checkbox column in tables: 16px from left edge, no extra right padding
+.table tbody > tr > td.row-control {
+  padding-left: 16px;
+  padding-right: 0;
+}
+
 .blocking-layer {
   position: absolute;
   width: 100%;

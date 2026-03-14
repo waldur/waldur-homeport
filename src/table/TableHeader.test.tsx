@@ -129,13 +129,14 @@ describe('TableHeader', () => {
     expect(screen.queryByTestId('sort-desc')).not.toBeInTheDocument();
   });
 
-  it('should render column for expandable indicator if header has expandable row', () => {
+  it('should render expandable indicator inside first data column header', () => {
     renderTableHeader({
       expandableRow: true,
     });
 
     const headers = screen.getAllByRole('columnheader');
-    expect(headers).toHaveLength(mockColumns.length + 1);
+    expect(headers).toHaveLength(mockColumns.length);
+    expect(screen.getByLabelText('Expand all rows')).toBeInTheDocument();
   });
 
   it('should select all rows when clicking on select-all checkbox', () => {
