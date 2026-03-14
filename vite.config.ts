@@ -58,4 +58,10 @@ export default defineConfig({
   build: {
     sourcemap: true,
   },
+  legacy: {
+    // Restore Vite 7 CJS interop behavior to fix production runtime errors
+    // caused by Rolldown's stricter default-export resolution for CJS deps.
+    // TODO: identify the specific problematic dependency and remove this flag.
+    inconsistentCjsInterop: true,
+  },
 });
