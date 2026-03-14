@@ -19,9 +19,7 @@
     "deps:unused": "knip --include files,types,enumMembers,exports",
     "deps:circular": "madge --exclude 'broadcasts/BroadcastFooter' --exclude 'js-client' --circular src/**/*",
     "test": "vitest",
-    "ci:start": "VITE_API_URL=http://localhost:8001/ yarn build && yarn serve --no-request-logging dist --single --listen 8001",
-    "ci:run": "cypress run --spec cypress/e2e/group-invitations/groupInvitations.spec.ts",
-    "ci:test": "start-server-and-test ci:start http://localhost:8001/ ci:run",
+    "test:e2e": "playwright test --project e2e",
     "i18n:extract": "node locales/tools/extractLiteralsFromFiles.cjs",
     "i18n:check": "node locales/tools/checkTranslations.cjs",
     "i18n:check:dry": "node locales/tools/checkTranslations.cjs --dry-run",
@@ -144,12 +142,9 @@
     "autoprefixer": "^10.4.20",
     "cross-env": "^7.0.3",
     "cssnano": "^7.0.6",
-    "cypress": "^15.8.1",
-    "cypress-recurse": "^1.37.1",
     "eslint": "^9.30.0",
     "eslint-config-prettier": "^10.1.5",
     "eslint-import-resolver-alias": "^1.1.2",
-    "eslint-plugin-cypress": "^4.1.0",
     "eslint-plugin-import": "^2.31.0",
     "eslint-plugin-jsx-a11y": "^6.10.2",
     "eslint-plugin-prettier": "^5.2.3",
@@ -173,7 +168,6 @@
     "redux-mock-store": "^1.2.3",
     "sass": "^1.85.0",
     "serve": "^14.2.4",
-    "start-server-and-test": "^2.0.10",
     "stylelint": "^16.14.1",
     "stylelint-config-standard-scss": "^14.0.0",
     "ts-import-plugin": "^3.0.0",
@@ -204,18 +198,9 @@
     ]
   },
   "knip": {
-    "cypress": {
-      "config": "cypress.config.js",
-      "entry": [
-        "cypress/e2e/**/*.ts",
-        "cypress/support/e2e.ts",
-        "cypress/support/commands.ts"
-      ]
-    },
     "eslint": {
       "entry": [
-        "eslint.config.js",
-        "cypress/.eslintrc.cjs"
+        "eslint.config.js"
       ]
     },
     "ignore": [

@@ -208,7 +208,7 @@ export default tseslint
         '*.fixture.ts',
         'typings.d.ts',
         '.cache-loader',
-        'cypress',
+        'e2e',
         'src/permissions/enums.ts',
         'src/EventsEnums.ts',
         'src/FeaturesEnums.ts',

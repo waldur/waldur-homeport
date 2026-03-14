@@ -118,7 +118,7 @@ Run unit tests:
 
 Run E2E tests:
   image:
-    name: registry.hpc.ut.ee/mirror/cypress/included:15.8.1
+    name: mcr.microsoft.com/playwright:v1.58.0-noble
     entrypoint: [""]
   stage: test
   interruptible: true
@@ -137,20 +137,16 @@ Run E2E tests:
         - tsconfig.json
         - typings.d.ts
         - vite.config.ts
-        - cypress/**/*
-        - cypress.config.js
+        - e2e/**/*
+        - playwright.config.ts
       allow_failure: true
   script:
-    - NO_COLOR=1 yarn ci:test
+    - yarn test:e2e
   artifacts:
     expire_in: 1 week
     when: always
     paths:
-      - cypress/screenshots
-      - cypress/videos
-    reports:
-      junit:
-        - cypress/results/output-*.xml
+      - test-results/
 
 Build artifact:
   stage: build

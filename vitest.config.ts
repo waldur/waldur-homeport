@@ -24,7 +24,7 @@ export default mergeConfig(
           '**/*.test.{ts,tsx}',
           '**/*.d.ts',
           'vite.config.ts',
-          'cypress/',
+          'e2e/',
           'src/vendor.ts',
           'src/echarts/',
           'src/metronic/',
