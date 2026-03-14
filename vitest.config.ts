@@ -16,12 +16,14 @@ export default mergeConfig(
       coverage: {
         provider: 'v8',
         reporter: ['text', 'html', 'lcov', 'clover', 'cobertura'],
+        reportOnFailure: true,
         reportsDirectory: './coverage',
-        include: ['src/**/*.{ts,tsx,js,jsx}', 'generate-filters.cjs'],
         exclude: [
           'node_modules/',
           'test/',
           '**/*.test.{ts,tsx}',
+          '**/*.fixture.{ts,tsx}',
+          '**/*.spec.{ts,tsx}',
           '**/*.d.ts',
           'vite.config.ts',
           'e2e/',

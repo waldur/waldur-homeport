@@ -40,8 +40,23 @@ export default function reactDisplayNamePlugin(): Plugin {
         )
       */
 
+      // Find all comment ranges to skip matches inside comments
+      const commentRanges: Array<[number, number]> = [];
+      const commentRegex = /\/\/.*$|\/\*[\s\S]*?\*\//gm;
+      let commentMatch;
+      while ((commentMatch = commentRegex.exec(code)) !== null) {
+        commentRanges.push([
+          commentMatch.index,
+          commentMatch.index + commentMatch[0].length,
+        ]);
+      }
+
+      const isInsideComment = (pos: number) =>
+        commentRanges.some(([start, end]) => pos >= start && pos < end);
+
       let match;
       while ((match = componentRegex.exec(code)) !== null) {
+        if (isInsideComment(match.index)) continue;
         const componentName = match[1];
         // Add displayName at the end of the file
         transformedCode = `${transformedCode}\n${componentName}.displayName = '${componentName}';`;
