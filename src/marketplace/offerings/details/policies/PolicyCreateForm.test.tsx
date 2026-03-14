@@ -68,7 +68,7 @@ const mockOffering = {
 };
 
 const renderComponent = (
-  submitFn: ReturnType<typeof vi.fn>,
+  submitFn,
   type: 'cost' | 'usage' = 'cost',
   initialValues = {},
   offering = mockOffering,
@@ -107,7 +107,7 @@ const renderComponent = (
 };
 
 describe('PolicyCreateDialog', () => {
-  let submitFn;
+  let submitFn: any;
 
   beforeEach(() => {
     submitFn = vi.fn();
