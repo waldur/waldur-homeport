@@ -15,7 +15,7 @@ const TEST_PASSWORD = 'demo';
 
 // Helper to login
 async function login(page: Page) {
-  // Set cookie consent in localStorage before navigating (like Cypress does)
+  // Set cookie consent in localStorage before navigating
   await page.goto('/');
   await page.evaluate(() => {
     localStorage.setItem('waldur/cookies/consent', 'true');

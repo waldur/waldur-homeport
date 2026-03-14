@@ -12,15 +12,16 @@ Unit tests use written using:
 * [@testing-library/react](https://testing-library.com/docs/react-testing-library/intro/) for testing React components
 * [@testing-library/user-event](https://testing-library.com/docs/user-event/intro/) for simulating user interactions
 
-## Integration tests
+## E2E tests
 
-Integration tests are implemented using [Cypress framework](https://www.cypress.io/).
+E2E tests are implemented using [Playwright](https://playwright.dev/).
 
-* Run all tests headless (CI mode): `yarn ci:test`
-* Open Cypress GUI (requires dev server running): `yarn cypress open`
+* Run E2E tests: `yarn test:e2e`
+* Run visual regression tests: `yarn test:visual`
+* Update visual snapshots: `yarn test:visual:update`
 
-Integration tests are located in:
+E2E tests are located in:
 
-* `cypress/e2e/` - Test specifications
-* `cypress/fixtures/` - Test data
-* `cypress/support/` - Custom commands and utilities
+* `e2e/` - E2E test specifications
+* `e2e-visual/` - Visual regression tests
+* `playwright.config.ts` - Playwright configuration

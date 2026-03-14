@@ -38,14 +38,11 @@
   "include": [
     "./src/**/*",
     "./typings.d.ts",
-    "cypress.config.ts",
     "extractLiteralsFromFiles.ts",
     "vite.config.ts",
     "test"
   ],
   "exclude": [
-    "./cypress/**/*",
-    "./cypress.config.js",
     "**/*.spec.tsx",
     "**/*.spec.ts",
     "**/*.fixture.tsx",
