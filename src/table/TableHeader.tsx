@@ -3,7 +3,6 @@ import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
-import { IconButton } from '@waldur/core/buttons/IconButton';
 import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
 import { translate } from '@waldur/i18n';
 
@@ -93,6 +92,12 @@ const TableTh = ({
   setFilter,
   applyFiltersFn,
   toggleFilterMenu,
+  isFirstDataColumn,
+  expandableRow,
+  toggledAll,
+  toggleAll,
+  hasLeadingCheckbox,
+  style,
 }) => (
   <th
     className={
@@ -101,10 +106,49 @@ const TableTh = ({
         column.filter && filters && 'filter-column',
       ) || undefined
     }
+    style={style}
   >
     {WithThMeta(
       <>
-        <span>
+        <span
+          className={
+            isFirstDataColumn && expandableRow
+              ? 'cell-with-expander-header'
+              : undefined
+          }
+          style={
+            isFirstDataColumn && expandableRow
+              ? {
+                  paddingLeft: hasLeadingCheckbox ? 12 : 16,
+                  paddingRight: 16,
+                }
+              : undefined
+          }
+        >
+          {isFirstDataColumn && expandableRow && (
+            <span
+              className={classNames(
+                'all-rows-expander',
+                toggledAll ? 'active' : '',
+              )}
+              role="button"
+              tabIndex={0}
+              aria-label={
+                toggledAll
+                  ? translate('Collapse all rows')
+                  : translate('Expand all rows')
+              }
+              onClick={toggleAll}
+              onKeyDown={(e) => {
+                if (e.key === 'Enter' || e.key === ' ') {
+                  e.preventDefault();
+                  toggleAll();
+                }
+              }}
+            >
+              <CaretDownIcon size={20} weight="bold" className="rotate-180" />
+            </span>
+          )}
           {column.title}
           {renderSortingIcon(column, currentSorting, onSortClick)}
         </span>
@@ -207,12 +251,18 @@ export const TableHeader: FC<TableHeaderProps> = ({
 
   // The first column which has no custom width. Find it to make it wider.
   const firstColIndex = visibleCols.findIndex((col) => !col.width);
+  const hasLeadingCheckbox = Boolean(fieldType || enableMultiSelect);
+
+  const firstVisibleDataIndex = hasOptionalColumns
+    ? columnPositions
+        .filter((id) => columnMap[id])
+        .findIndex((id) => columnMap[id].visible ?? true)
+    : columns.findIndex((col) => col.visible ?? true);
 
   return (
     <>
       <colgroup>
         {fieldType || enableMultiSelect ? <col width="10px" /> : null}
-        {expandableRow && <col width="10px" />}
         {visibleCols.map((col, i) => (
           <col
             key={i}
@@ -245,35 +295,11 @@ export const TableHeader: FC<TableHeaderProps> = ({
               />
             </th>
           ) : null}
-          {expandableRow && (
-            <th data-testid="all-rows-expander" style={{ width: '10px' }}>
-              <IconButton
-                iconNode={
-                  <CaretDownIcon
-                    size={20}
-                    weight="bold"
-                    className="rotate-180"
-                  />
-                }
-                tooltip={
-                  toggledAll
-                    ? translate('Collapse all rows')
-                    : translate('Expand all rows')
-                }
-                onClick={toggleAll}
-                variant="flush"
-                className={classNames(
-                  'btn-no-focus',
-                  toggledAll ? 'active' : '',
-                )}
-              />
-            </th>
-          )}
           {hasOptionalColumns
             ? columnPositions
                 .filter((id) => columnMap[id])
                 .map(
-                  (id) =>
+                  (id, index) =>
                     (columnMap[id].visible ?? true) && (
                       <TableTh
                         key={id}
@@ -285,6 +311,16 @@ export const TableHeader: FC<TableHeaderProps> = ({
                         setFilter={setFilter}
                         applyFiltersFn={applyFiltersFn}
                         toggleFilterMenu={toggleFilterMenu}
+                        isFirstDataColumn={index === firstVisibleDataIndex}
+                        expandableRow={expandableRow}
+                        toggledAll={toggledAll}
+                        toggleAll={toggleAll}
+                        hasLeadingCheckbox={hasLeadingCheckbox}
+                        style={
+                          expandableRow && index === firstVisibleDataIndex
+                            ? { paddingLeft: 0, paddingRight: 0 }
+                            : undefined
+                        }
                       />
                     ),
                 )
@@ -301,6 +337,16 @@ export const TableHeader: FC<TableHeaderProps> = ({
                       setFilter={setFilter}
                       applyFiltersFn={applyFiltersFn}
                       toggleFilterMenu={toggleFilterMenu}
+                      isFirstDataColumn={index === firstVisibleDataIndex}
+                      expandableRow={expandableRow}
+                      toggledAll={toggledAll}
+                      toggleAll={toggleAll}
+                      hasLeadingCheckbox={hasLeadingCheckbox}
+                      style={
+                        expandableRow && index === firstVisibleDataIndex
+                          ? { paddingLeft: 0, paddingRight: 0 }
+                          : undefined
+                      }
                     />
                   ),
               )}

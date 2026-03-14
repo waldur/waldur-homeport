@@ -3,6 +3,35 @@
   align-items: center;
 }
 
+// First data header cell when table is expandable: arrow + text with same padding/gap as body
+.cell-with-expander-header {
+  display: inline-flex;
+  align-items: center;
+  column-gap: 12px;
+}
+
+.cell-with-expander-header .all-rows-expander {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+}
+
+// Checkbox header cell: 16px from table edge, no extra right padding
+// Use > thead to avoid leaking into nested/embedded tables
+.table.table-expandable > thead > tr > th:first-child {
+  padding-left: 16px !important;
+  padding-right: 0 !important;
+}
+
+// First sortable data header cell with arrow+text:
+// remove gx-8px / table default horizontal padding so inner 16/12 padding is exact.
+// Use > thead to avoid leaking into nested/embedded tables
+.table.table-expandable.gx-8px > thead > tr > th.sorting-column:first-of-type,
+.table.table-expandable > thead > tr > th.sorting-column:first-of-type {
+  padding-left: 0 !important;
+  padding-right: 0 !important;
+}
+
 .filter-column > button,
 .filter-column > .th-wrapper > button {
   margin-left: 4px;
