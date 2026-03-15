@@ -310,6 +310,11 @@ const renderNetworkRows = ({
 
 export const FormNetworkSecurityStep = (props: FormStepProps) => {
   const [customIpEnabled, setCustomIpEnabled] = useToggle(false);
+  const [portSecurityEnabled, setPortSecurityEnabled] = useToggle(true);
+
+  useEffect(() => {
+    props.change('attributes.port_security_enabled', portSecurityEnabled);
+  }, [portSecurityEnabled, props.change]);
 
   const { data, isLoading } = useQuery({
     queryKey: ['network-step', props.offering.scope_uuid],
@@ -369,14 +374,40 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
           {...data}
         />
       </Form.Group>
-      <FormSecurityGroupsField
-        offering={props.offering}
-        change={props.change}
-        cardBordered={false}
-        minHeight="auto"
-        headerClassName="mx-0"
-        titleClassName="fs-6 text-gray-700"
-      />
+      <div className={!portSecurityEnabled ? 'opacity-50 pe-none' : ''}>
+        <FormSecurityGroupsField
+          offering={props.offering}
+          change={props.change}
+          cardBordered={false}
+          minHeight="auto"
+          headerClassName="mx-0"
+          titleClassName="fs-6 text-gray-700"
+          tableActions={
+            <div
+              style={
+                !portSecurityEnabled
+                  ? { opacity: 1, pointerEvents: 'auto' as const }
+                  : undefined
+              }
+            >
+              <AwesomeCheckbox
+                value={!portSecurityEnabled}
+                onChange={() => setPortSecurityEnabled(!portSecurityEnabled)}
+                size="sm"
+                className="align-self-center fw-normal"
+                label={translate('Disable port security')}
+              />
+            </div>
+          }
+        />
+      </div>
+      {!portSecurityEnabled && (
+        <Form.Text className="text-muted">
+          {translate(
+            'Port security is disabled. Security groups will not be applied. Use this for VM-based routers that manage their own firewall.',
+          )}
+        </Form.Text>
+      )}
     </VStepperFormStepCard>
   );
 };
