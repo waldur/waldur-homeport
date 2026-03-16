@@ -640,6 +640,20 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-reporting-settings',
+    url: 'reporting-settings/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./reporting/AdministrationReporting').then((module) => ({
+        default: module.AdministrationReporting,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Reporting settings'),
+    },
+  },
+
+  {
     name: 'admin-call-management-settings',
     url: 'call-management-settings/?tab&q',
     parent: 'admin-configuration',

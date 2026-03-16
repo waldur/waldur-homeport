@@ -1348,8 +1348,8 @@ export const SettingsDescription = [
       },
       {
         key: 'LLM_INFERENCES_BACKEND_TYPE',
-        description: translate('Type of LLM inference backend. For example: openai, ollama.'),
-        default: 'ollama',
+        description: translate('Type of LLM inference backend. For example: vllm, openai, ollama.'),
+        default: 'vllm',
         type: 'string',
       },
       {
@@ -1369,6 +1369,12 @@ export const SettingsDescription = [
         description: translate('Name of the LLM model to use for inference.'),
         default: 'gemma3:27b',
         type: 'string',
+      },
+      {
+        key: 'LLM_COMPLETION_KWARGS',
+        description: translate('Override keyword arguments merged on top of provider defaults for LLM chat completion. Supported keys: temperature, top_p, top_k, max_tokens, max_completion_tokens, presence_penalty, frequency_penalty, repetition_penalty, stop, seed, reasoning_effort, extra_body. Leave empty to use provider defaults.'),
+        default: {},
+        type: 'dict_field',
       },
       {
         key: 'LLM_TOKEN_LIMIT_DAILY',
@@ -1669,6 +1675,18 @@ export const SettingsDescription = [
         description: translate('If true, a support ticket is created when a user adds or removes an SSH public key.'),
         default: false,
         type: 'boolean',
+      },
+    ],
+  },
+  {
+    description: translate('Reporting'),
+    items: [
+      {
+        key: 'ENABLED_REPORTING_SCREENS',
+        description: translate('Select which reporting screens should be visible to users. Uncheck to disable specific reports.'),
+        default: ['resource-usage', 'user-usage', 'quotas', 'usage-monitoring', 'usage-trends', 'organization-summary', 'project-detail', 'resources-geography', 'project-classification', 'usage-by-customer', 'usage-by-org-type', 'usage-by-creator', 'call-performance', 'review-progress', 'resource-demand', 'capacity', 'provider-overview', 'provider-revenue', 'provider-orders', 'provider-resources', 'provider-customers', 'provider-offerings', 'openstack-instances', 'user-demographics', 'user-organizations', 'user-affiliations', 'user-roles', 'growth', 'revenue', 'pricelist', 'orders', 'offering-costs', 'maintenance-overview', 'provisioning-stats'],
+        type: 'multiple_choice_field',
+        options: [{ value: 'resource-usage', label: 'Resources: Usage' }, { value: 'user-usage', label: 'Resources: Usage by user' }, { value: 'quotas', label: 'Resources: Quotas' }, { value: 'usage-monitoring', label: 'Resources: Usage monitoring' }, { value: 'usage-trends', label: 'Resources: Usage trends' }, { value: 'organization-summary', label: 'Resources: Organization summary' }, { value: 'project-detail', label: 'Resources: Project detail' }, { value: 'resources-geography', label: 'Resources: Geographic distribution' }, { value: 'project-classification', label: 'Resources: Project classification' }, { value: 'usage-by-customer', label: 'Resources: Usage by customer' }, { value: 'usage-by-org-type', label: 'Resources: Usage by organization type' }, { value: 'usage-by-creator', label: 'Resources: Usage by creator' }, { value: 'call-performance', label: 'Proposals: Call performance' }, { value: 'review-progress', label: 'Proposals: Review progress' }, { value: 'resource-demand', label: 'Proposals: Resource demand' }, { value: 'capacity', label: 'Provider: Capacity' }, { value: 'provider-overview', label: 'Provider: Provider overview' }, { value: 'provider-revenue', label: 'Provider: Provider revenue' }, { value: 'provider-orders', label: 'Provider: Provider orders' }, { value: 'provider-resources', label: 'Provider: Provider resources' }, { value: 'provider-customers', label: 'Provider: Provider customers' }, { value: 'provider-offerings', label: 'Provider: Provider offerings' }, { value: 'openstack-instances', label: 'Provider: OpenStack instances' }, { value: 'user-demographics', label: 'Users: Demographics' }, { value: 'user-organizations', label: 'Users: Organizations' }, { value: 'user-affiliations', label: 'Users: Affiliations' }, { value: 'user-roles', label: 'Users: Role distribution' }, { value: 'growth', label: 'Financial: Growth' }, { value: 'revenue', label: 'Financial: Monthly revenue' }, { value: 'pricelist', label: 'Financial: Pricelist' }, { value: 'orders', label: 'Financial: Orders' }, { value: 'offering-costs', label: 'Financial: Offering costs' }, { value: 'maintenance-overview', label: 'Operations: Maintenance overview' }, { value: 'provisioning-stats', label: 'Operations: Provisioning statistics' }],
       },
     ],
   },

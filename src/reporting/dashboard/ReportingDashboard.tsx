@@ -51,6 +51,7 @@ import {
 } from '@waldur/workspace/selectors';
 
 import { AnalyticsMode } from '../analytics';
+import { isReportingScreenEnabled } from '../utils';
 
 interface ReportItem {
   uuid: string;
@@ -295,7 +296,7 @@ export const ReportingDashboard: FC = () => {
             ),
             state: 'reporting-usage-by-creator',
           },
-        ],
+        ].filter((report) => isReportingScreenEnabled(report.uuid)),
       });
     }
 
@@ -342,7 +343,7 @@ export const ReportingDashboard: FC = () => {
             ['what-if', 'why-so'],
             'reporting-resource-demand-analytics',
           ),
-        ],
+        ].filter((report) => isReportingScreenEnabled(report.uuid)),
       });
     }
 
@@ -413,7 +414,7 @@ export const ReportingDashboard: FC = () => {
             ),
             state: 'reporting-openstack-instances',
           },
-        ],
+        ].filter((report) => isReportingScreenEnabled(report.uuid)),
       });
     }
 
@@ -461,7 +462,7 @@ export const ReportingDashboard: FC = () => {
             description: translate('Member counts per organization'),
             state: 'reporting-user-roles',
           },
-        ],
+        ].filter((report) => isReportingScreenEnabled(report.uuid)),
       });
     }
 
@@ -476,7 +477,7 @@ export const ReportingDashboard: FC = () => {
           state: 'reporting-growth',
         },
         {
-          uuid: 'monthly-revenue',
+          uuid: 'revenue',
           icon: <ListBulletsIcon size={18} weight="bold" />,
           title: translate('Monthly revenue'),
           description: translate('Revenue breakdown by organization'),
@@ -513,7 +514,9 @@ export const ReportingDashboard: FC = () => {
       result.push({
         key: 'financial',
         title: translate('Financial'),
-        reports: financialReports,
+        reports: financialReports.filter((report) =>
+          isReportingScreenEnabled(report.uuid),
+        ),
       });
 
       // Infrastructure category
@@ -529,7 +532,7 @@ export const ReportingDashboard: FC = () => {
               description: translate('Virtual machine types across platform'),
               state: 'reporting-vm-overview',
             },
-          ],
+          ].filter((report) => isReportingScreenEnabled(report.uuid)),
         });
       }
 
@@ -556,11 +559,11 @@ export const ReportingDashboard: FC = () => {
             ),
             state: 'reporting-provisioning-stats',
           },
-        ],
+        ].filter((report) => isReportingScreenEnabled(report.uuid)),
       });
     }
 
-    return result;
+    return result.filter((category) => category.reports.length > 0);
   }, [
     showResources,
     showExperimental,

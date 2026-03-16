@@ -115,6 +115,7 @@ interface CoreConfiguration {
   ENFORCE_MANDATORY_USER_ATTRIBUTES?: boolean;
   SSH_KEY_ALLOWED_TYPES: string[];
   SSH_KEY_MIN_RSA_KEY_SIZE: number;
+  ENABLED_REPORTING_SCREENS: string[];
 }
 
 interface OpenStackConfiguration {

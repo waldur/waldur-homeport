@@ -1,7 +1,11 @@
 import _ from 'lodash';
 
 import { ENV } from '@waldur/core/config';
+import { DEFAULT_PRIMARY_COLORS } from '@waldur/core/constants';
 import { PhoneNumber } from '@waldur/workspace/types';
+
+export const getBrandColor = () =>
+  ENV.plugins?.WALDUR_CORE.BRAND_COLOR || DEFAULT_PRIMARY_COLORS[600];
 
 export function wait(amount = 0) {
   return new Promise((resolve) => setTimeout(resolve, amount));

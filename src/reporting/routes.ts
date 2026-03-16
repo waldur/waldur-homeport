@@ -6,6 +6,8 @@ import { MarketplaceFeatures, SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
+import { isReportingScreenEnabled } from './utils';
+
 export const states: StateDeclaration[] = [
   {
     name: 'reporting',
@@ -60,6 +62,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Usage'),
+      permissions: [() => isReportingScreenEnabled('resource-usage')],
     },
   },
   {
@@ -73,6 +76,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Usage by user'),
+      permissions: [() => isReportingScreenEnabled('user-usage')],
     },
   },
   {
@@ -86,6 +90,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Quotas'),
+      permissions: [() => isReportingScreenEnabled('quotas')],
     },
   },
   {
@@ -113,6 +118,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Usage monitoring'),
+      permissions: [() => isReportingScreenEnabled('usage-monitoring')],
     },
   },
   {
@@ -126,6 +132,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Usage trends'),
+      permissions: [() => isReportingScreenEnabled('usage-trends')],
     },
   },
   {
@@ -141,6 +148,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Organization summary'),
+      permissions: [() => isReportingScreenEnabled('organization-summary')],
     },
   },
   {
@@ -161,6 +169,7 @@ export const states: StateDeclaration[] = [
     },
     data: {
       breadcrumb: () => translate('Project detail'),
+      permissions: [() => isReportingScreenEnabled('project-detail')],
     },
   },
   {
@@ -174,6 +183,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Geographic distribution'),
+      permissions: [() => isReportingScreenEnabled('resources-geography')],
     },
   },
   {
@@ -189,6 +199,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Project classification'),
+      permissions: [() => isReportingScreenEnabled('project-classification')],
     },
   },
   {
@@ -202,6 +213,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Usage by customer'),
+      permissions: [() => isReportingScreenEnabled('usage-by-customer')],
     },
   },
   {
@@ -215,6 +227,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Usage by organization type'),
+      permissions: [() => isReportingScreenEnabled('usage-by-org-type')],
     },
   },
   {
@@ -228,6 +241,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Usage by creator'),
+      permissions: [() => isReportingScreenEnabled('usage-by-creator')],
     },
   },
 
@@ -258,6 +272,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Call performance'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [() => isReportingScreenEnabled('call-performance')],
     },
   },
   {
@@ -272,6 +287,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Review progress'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [() => isReportingScreenEnabled('review-progress')],
     },
   },
   {
@@ -286,6 +302,7 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Resource demand'),
       feature: MarketplaceFeatures.show_experimental_ui_components,
+      permissions: [() => isReportingScreenEnabled('resource-demand')],
     },
   },
   {
@@ -355,6 +372,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Capacity'),
+      permissions: [() => isReportingScreenEnabled('capacity')],
     },
   },
   {
@@ -382,6 +400,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Provider overview'),
+      permissions: [() => isReportingScreenEnabled('provider-overview')],
     },
   },
   {
@@ -395,6 +414,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Provider revenue'),
+      permissions: [() => isReportingScreenEnabled('provider-revenue')],
     },
   },
   {
@@ -408,6 +428,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Provider orders'),
+      permissions: [() => isReportingScreenEnabled('provider-orders')],
     },
   },
   {
@@ -421,6 +442,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Provider resources'),
+      permissions: [() => isReportingScreenEnabled('provider-resources')],
     },
   },
   {
@@ -434,6 +456,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Provider customers'),
+      permissions: [() => isReportingScreenEnabled('provider-customers')],
     },
   },
   {
@@ -447,6 +470,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Provider offerings'),
+      permissions: [() => isReportingScreenEnabled('provider-offerings')],
     },
   },
 
@@ -474,6 +498,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Demographics'),
+      permissions: [() => isReportingScreenEnabled('user-demographics')],
     },
   },
   {
@@ -501,6 +526,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Organizations'),
+      permissions: [() => isReportingScreenEnabled('user-organizations')],
     },
   },
   {
@@ -514,6 +540,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Affiliations'),
+      permissions: [() => isReportingScreenEnabled('user-affiliations')],
     },
   },
   {
@@ -527,6 +554,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Role distribution'),
+      permissions: [() => isReportingScreenEnabled('user-roles')],
     },
   },
 
@@ -554,6 +582,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Growth'),
+      permissions: [() => isReportingScreenEnabled('growth')],
     },
   },
   {
@@ -567,6 +596,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Monthly revenue'),
+      permissions: [() => isReportingScreenEnabled('revenue')],
     },
   },
   {
@@ -581,6 +611,7 @@ export const states: StateDeclaration[] = [
     data: {
       feature: SupportFeatures.pricelist,
       breadcrumb: () => translate('Pricelist'),
+      permissions: [() => isReportingScreenEnabled('pricelist')],
     },
   },
   {
@@ -594,6 +625,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Orders'),
+      permissions: [() => isReportingScreenEnabled('orders')],
     },
   },
   {
@@ -607,6 +639,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Offering costs'),
+      permissions: [() => isReportingScreenEnabled('offering-costs')],
     },
   },
 
@@ -635,6 +668,7 @@ export const states: StateDeclaration[] = [
     data: {
       feature: SupportFeatures.vm_type_overview,
       breadcrumb: () => translate('VM type overview'),
+      permissions: [() => isReportingScreenEnabled('vm-type-overview')],
     },
   },
   {
@@ -648,6 +682,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('OpenStack instances'),
+      permissions: [() => isReportingScreenEnabled('openstack-instances')],
     },
   },
 
@@ -677,6 +712,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Maintenance overview'),
+      permissions: [() => isReportingScreenEnabled('maintenance-overview')],
     },
   },
   {
@@ -690,6 +726,7 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Provisioning statistics'),
+      permissions: [() => isReportingScreenEnabled('provisioning-stats')],
     },
   },
 

@@ -5,6 +5,7 @@ import { getIconUrl } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
 import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
@@ -21,7 +22,7 @@ import './AnimatedGradientLayout.css';
 export const AnimatedGradientLayout = () => {
   const features = useAuthFeatures();
   const imageUrl = getIconUrl('login_logo');
-  const brandColor = ENV.plugins.WALDUR_CORE.BRAND_COLOR || '#307300';
+  const brandColor = getBrandColor();
 
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['IdentityProvidersConfigurations'],
