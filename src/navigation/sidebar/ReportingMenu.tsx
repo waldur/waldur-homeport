@@ -1,9 +1,11 @@
 import { ChartBarIcon } from '@phosphor-icons/react';
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
+
+import { hasAnyReportingEnabled } from '../../reporting/utils';
 
 import { MenuItem } from './MenuItem';
 
@@ -16,7 +18,9 @@ export const ReportingMenu: FC<ReportingMenuProps> = ({
   disabled,
   disabledTooltip,
 }) => {
-  const visible = useSelector(isStaffOrSupport);
+  const isStaff = useSelector(isStaffOrSupport);
+  const anyEnabled = useMemo(() => hasAnyReportingEnabled(), []);
+  const visible = isStaff && anyEnabled;
   if (!visible) {
     return null;
   }

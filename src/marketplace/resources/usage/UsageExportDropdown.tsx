@@ -9,7 +9,7 @@ import { sum } from 'lodash-es';
 import { useCallback } from 'react';
 import { ProjectUser } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 import { OfferingComponent } from '@waldur/marketplace/types';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -40,7 +40,7 @@ export interface UsageExportDropdownProps {
 }
 
 const exportAsPng = (props: UsageExportDropdownProps) => {
-  const color = ENV.plugins.WALDUR_CORE.BRAND_COLOR;
+  const color = getBrandColor();
   let exportSuccessed = false;
 
   props.data.components.forEach((component, index) => {

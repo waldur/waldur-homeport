@@ -3,10 +3,10 @@ import { DateTime } from 'luxon';
 import { dailyQuotasRetrieve, Invoice, InvoiceCost } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { DEFAULT_PRIMARY_COLORS } from '@waldur/core/constants';
 import { parseDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { generateBrandColors } from '@waldur/core/generateColors';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import {
@@ -218,8 +218,7 @@ export const getCreditChartAndOptions = (
 ) => {
   const chart = formatCreditChart(invoiceCosts, creditValue);
 
-  const brand =
-    ENV.plugins.WALDUR_CORE.BRAND_COLOR || DEFAULT_PRIMARY_COLORS[600];
+  const brand = getBrandColor();
   const brandColors = generateBrandColors(brand);
 
   const series: SeriesOption[] = [
@@ -244,8 +243,7 @@ export const getCostChartAndOptions = (
   chart: CostChart,
   hlines?: Array<{ label; value }>,
 ) => {
-  const brand =
-    ENV.plugins.WALDUR_CORE.BRAND_COLOR || DEFAULT_PRIMARY_COLORS[600];
+  const brand = getBrandColor();
   const brandColors = generateBrandColors(brand);
 
   const hasCompensations =

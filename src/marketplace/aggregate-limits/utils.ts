@@ -1,9 +1,8 @@
 import { useMemo } from 'react';
 import { ComponentsUsageStats } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { DEFAULT_PRIMARY_COLORS } from '@waldur/core/constants';
 import { generateBrandColors } from '@waldur/core/generateColors';
+import { getBrandColor } from '@waldur/core/utils';
 import { CHART_BAR_ROUNDING } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
@@ -28,8 +27,7 @@ export function useAggregateLimitChart(
       return null;
     }
 
-    const brand =
-      ENV.plugins.WALDUR_CORE.BRAND_COLOR || DEFAULT_PRIMARY_COLORS[600];
+    const brand = getBrandColor();
     const brandColors = generateBrandColors(brand);
 
     const xAxisData = components.map((component) => component.name);

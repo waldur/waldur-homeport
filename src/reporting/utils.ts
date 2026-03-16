@@ -1,5 +1,6 @@
 import { EChartsOption, graphic } from 'echarts';
 
+import { ENV } from '@waldur/core/config';
 import { formatUsageValue } from '@waldur/core/formatNumber';
 import { hexToRgb } from '@waldur/core/generateColors';
 import { CHART_LINE_COLOR } from '@waldur/dashboard/constants';
@@ -9,6 +10,16 @@ import { translate } from '@waldur/i18n';
 
 export const isMockDataEnabled = () =>
   isFeatureVisible(MarketplaceFeatures.show_experimental_ui_components);
+
+export const isReportingScreenEnabled = (screen: string) => {
+  const enabledScreens = ENV.plugins.WALDUR_CORE?.ENABLED_REPORTING_SCREENS;
+  return Array.isArray(enabledScreens) ? enabledScreens.includes(screen) : true;
+};
+
+export const hasAnyReportingEnabled = () => {
+  const enabledScreens = ENV.plugins.WALDUR_CORE?.ENABLED_REPORTING_SCREENS;
+  return Array.isArray(enabledScreens) ? enabledScreens.length > 0 : true;
+};
 
 export const usageTableTabs = [
   {
