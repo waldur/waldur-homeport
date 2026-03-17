@@ -15,7 +15,7 @@ export default mergeConfig(
       teardownTimeout: 10000,
       coverage: {
         provider: 'v8',
-        reporter: ['text', 'html', 'lcov', 'clover', 'cobertura'],
+        reporter: ['cobertura'],
         reportOnFailure: true,
         reportsDirectory: './coverage',
         exclude: [
