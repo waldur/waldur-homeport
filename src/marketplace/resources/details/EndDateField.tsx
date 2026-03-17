@@ -8,7 +8,8 @@ import { Field } from '@waldur/resource/summary';
 
 export const EndDateField = ({ resource }) => {
   const resourceTerminationDate = resource.end_date;
-  const projectEndDate = resource.project_end_date;
+  const projectEndDate =
+    resource.project_effective_end_date || resource.project_end_date;
 
   if (!resourceTerminationDate && !projectEndDate) {
     return null;

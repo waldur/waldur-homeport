@@ -17,15 +17,17 @@ export const ResourceTerminationDateField: FC<
   return (
     <>
       {format ? formatDate(row.end_date) : row.end_date}
-      {row.project_end_date && row.end_date > row.project_end_date && (
-        <WarnTip
-          id={row.uuid}
-          label={translate(
-            'Resource will terminate at project end as termination date exceeds project duration.',
-          )}
-          hasSpace
-        />
-      )}
+      {(row.project_effective_end_date || row.project_end_date) &&
+        row.end_date >
+          (row.project_effective_end_date || row.project_end_date) && (
+          <WarnTip
+            id={row.uuid}
+            label={translate(
+              'Resource will terminate at project end as termination date exceeds project duration.',
+            )}
+            hasSpace
+          />
+        )}
     </>
   );
 };

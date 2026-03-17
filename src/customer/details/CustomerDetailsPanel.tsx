@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { CheckOrX } from '@waldur/core/CheckOrX';
 import { ENV } from '@waldur/core/config';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -82,9 +82,7 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
           key: 'max_service_accounts',
           value: renderFieldOrDash(props.customer.max_service_accounts),
         },
-        isFeatureVisible(
-          MarketplaceFeatures.show_experimental_ui_components,
-        ) && {
+        {
           label: translate('Grace period (days)'),
           description: translate(
             'Number of extra days after project end date before resources are terminated',

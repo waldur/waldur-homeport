@@ -4,8 +4,6 @@ import { Project } from 'waldur-js-client';
 import { ENV } from '@waldur/core/config';
 import { parseDate } from '@waldur/core/dateUtils';
 import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import FormTable, { FormTableItemProps } from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { renderFieldOrDash } from '@waldur/table/utils';
@@ -66,9 +64,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             key: 'end_date',
             value: renderFieldOrDash(project.end_date),
           },
-          isFeatureVisible(
-            MarketplaceFeatures.show_experimental_ui_components,
-          ) && {
+          {
             label: translate('Grace period (days)'),
             description: translate(
               'Number of extra days after project end date before resources are terminated. Overrides customer-level setting.',
@@ -76,6 +72,15 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
             key: 'grace_period_days',
             value: project.grace_period_days,
           },
+          project.effective_end_date &&
+            project.grace_period_days > 0 && {
+              label: translate('Resource termination date'),
+              description: translate(
+                'The actual date when resources will be terminated, including the grace period.',
+              ),
+              key: 'effective_end_date',
+              value: renderFieldOrDash(project.effective_end_date),
+            },
           {
             label: translate('Description'),
             key: 'description',
@@ -117,6 +122,7 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
               'staff_notes',
               'max_service_accounts',
             ].includes(row.key);
+            const isReadOnlyField = row.key === 'effective_end_date';
 
             return (
               <FormTable.Item
@@ -125,16 +131,18 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
                 description={row.description}
                 value={row.value}
                 actions={
-                  <>
-                    {isStaffOnlyEditField && <StaffOnlyIndicator />}
-                    {(!isStaffOnlyEditField || user.is_staff) && (
-                      <FieldEditButton
-                        project={project}
-                        name={row.key}
-                        disabled={row.disabled}
-                      />
-                    )}
-                  </>
+                  isReadOnlyField ? null : (
+                    <>
+                      {isStaffOnlyEditField && <StaffOnlyIndicator />}
+                      {(!isStaffOnlyEditField || user.is_staff) && (
+                        <FieldEditButton
+                          project={project}
+                          name={row.key}
+                          disabled={row.disabled}
+                        />
+                      )}
+                    </>
+                  )
                 }
               />
             );

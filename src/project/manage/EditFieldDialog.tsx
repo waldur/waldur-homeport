@@ -7,8 +7,6 @@ import { Project } from 'waldur-js-client';
 import { formatISODate } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { useCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { SubmitButton } from '@waldur/form';
 import MarkdownEditor from '@waldur/form/MarkdownEditor';
 import { StringField } from '@waldur/form/StringField';
@@ -148,10 +146,7 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
                   min={0}
                 />
               </FormGroup>
-            ) : resolve.name === 'grace_period_days' &&
-              isFeatureVisible(
-                MarketplaceFeatures.show_experimental_ui_components,
-              ) ? (
+            ) : resolve.name === 'grace_period_days' ? (
               <FormGroup
                 label={translate('Grace period (days)')}
                 description={translate(
