@@ -26,7 +26,7 @@ const signin = async (values: FormData) => {
     return translate('Please enter username and password.');
   }
   if (values.signin_by === 'token' && !values.token) {
-    return translate('Please enter  access token.');
+    return translate('Please enter access token.');
   }
   try {
     if (values.signin_by === 'username') {

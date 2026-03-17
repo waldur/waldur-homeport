@@ -126,7 +126,7 @@ export const ServiceAccountFormDialog = reduxForm<
             e,
             isEdit
               ? translate('Unable to edit service account.')
-              : translate("'Unable to create service account.'"),
+              : translate('Unable to create service account.'),
           ),
         );
       }
