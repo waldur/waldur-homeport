@@ -26,7 +26,11 @@ export const TeamDropdownActions = ({ refetch }: TeamDropdownActionsProps) => {
     tableState?.pagination?.resultCount >= customer.max_service_accounts;
   return (
     <Dropdown placement="bottom-end">
-      <Dropdown.Toggle variant="primary" className="no-arrow btn-icon-right">
+      <Dropdown.Toggle
+        variant="primary"
+        size="lg"
+        className="no-arrow btn-icon-right"
+      >
         <span className="svg-icon svg-icon-2">
           <PlusCircleIcon weight="bold" />
         </span>

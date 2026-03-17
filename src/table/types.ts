@@ -188,6 +188,7 @@ export interface TableProps<RowType = any> extends TableState {
   openFiltersDrawer?: (filters: React.ReactNode) => void;
   renderFiltersDrawer?: (filters: React.ReactNode) => void;
   dropdownActions?: ReactNode;
+  dropdownActionsSize?: 'sm' | 'lg';
   tableActions?: React.ReactNode;
   verboseName?: string;
   className?: string;

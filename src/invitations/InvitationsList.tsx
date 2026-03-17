@@ -103,6 +103,7 @@ export const InvitationsList: FunctionComponent = () => {
       hasQuery={true}
       tableActions={<TeamDropdownActions refetch={props.fetch} />}
       dropdownActions={<CustomerPermissionsLogButton />}
+      dropdownActionsSize="lg"
       enableExport
       showExportInDropdown
       rowActions={({ row }) => (
