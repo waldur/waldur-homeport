@@ -211,7 +211,7 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           if (file?.length > 0) {
             parseCsvFile(file);
           }
-        }, []);
+        }, [file, parseCsvFile]);
 
         const resourceColumns = useMemo(() => {
           if (importType !== 'projects_with_resources' || !offering) {

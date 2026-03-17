@@ -96,7 +96,7 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
     if (field.input.value?.length > 0) {
       parseCsvFile(field.input.value);
     }
-  }, []);
+  }, [field.input.value, parseCsvFile]);
 
   const tableProps = useTable({
     table: 'ImportCoursesPreview',
