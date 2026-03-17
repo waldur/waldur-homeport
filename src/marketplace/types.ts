@@ -3,8 +3,8 @@ import {
   CategoryGroup as WaldurCategoryGroup,
   MarketplaceCategory as WaldurCategory,
   OrderDetails,
-  PublicOfferingDetails as Offering,
   PublicOfferingDetails,
+  ProviderOfferingDetails as Offering,
   ProviderPlanDetails as Plan,
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';

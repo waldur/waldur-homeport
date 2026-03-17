@@ -50,7 +50,7 @@ export const TableDropdownToggle = ({
   labeled = false,
   variant = 'tertiary',
   className = 'min-w-100px w-100',
-  size = 'sm',
+  size = 'lg',
   tooltip,
 }: TableDropdownToggleProps) => {
   const getTooltipMessage = () => {

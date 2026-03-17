@@ -21,6 +21,8 @@ interface ToolbarButtonProps {
   pending?: boolean;
   /** Bootstrap button variant */
   variant?: ButtonVariant;
+  /** Bootstrap button size */
+  size?: 'sm' | 'lg';
   /** Badge count to display (e.g., for filter count) */
   badge?: number | string;
   /** Additional CSS classes */
@@ -29,7 +31,6 @@ interface ToolbarButtonProps {
 
 /**
  * ToolbarButton - for table/panel toolbar actions.
- * Uses small size to match table header design.
  */
 export const ToolbarButton: FC<ToolbarButtonProps> = ({
   title,
@@ -39,6 +40,7 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
   disabled,
   pending,
   variant = 'tertiary',
+  size = 'lg',
   badge,
   className,
 }) => {
@@ -53,7 +55,7 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
         badge !== undefined && 'position-relative',
         { disabled: disabled || pending },
       )}
-      size="sm"
+      size={size}
       onClick={onClick}
       disabled={disabled || pending}
     >

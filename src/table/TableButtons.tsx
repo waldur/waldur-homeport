@@ -85,13 +85,18 @@ export const TableButtons: FunctionComponent<TableButtonsProps> = (props) => {
             <TableMoreActions
               {...props}
               actions={props.dropdownActions}
+              size={props.dropdownActionsSize}
               showExport
             />
           ) : (
             <>
               {props.enableExport && <TableExportButton {...props} />}
               {Boolean(props.dropdownActions) && (
-                <TableMoreActions {...props} actions={props.dropdownActions} />
+                <TableMoreActions
+                  {...props}
+                  actions={props.dropdownActions}
+                  size={props.dropdownActionsSize}
+                />
               )}
             </>
           )}

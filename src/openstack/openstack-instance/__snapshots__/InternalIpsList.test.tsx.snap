@@ -179,7 +179,7 @@ exports[`InternalIpsList > renders list 1`] = `
                     >
                       <button
                         aria-expanded="false"
-                        class="btn-icon no-arrow dropdown-toggle btn btn-text-secondary btn-sm"
+                        class="btn-icon no-arrow dropdown-toggle btn btn-text-secondary btn-lg"
                         id="react-aria-:r0:"
                         type="button"
                       >
