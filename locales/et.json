@@ -1,7 +1,7 @@
 {
   "\"Enable automatic creation of offering users\" must be enabled for GLAuth generation": "GLAuth genereerimiseks peab olema lubatud \"Luba pakkumise kasutajate automaatne loomine\"",
   "\"{trimmed}\" exceeds the {max_len} character FQDN limit": "\"{trimmed}\" ületab {max_len} tähemärgi FQDN piiri",
-  "'Unable to create service account.'": "Vabandust, teenusekontot ei saa luua.",
+  "Unable to create service account.": "Vabandust, teenusekontot ei saa luua.",
   "'{trimmed}' exceeds the {maxlen} character FQDN limit": "'{trimmed}' ületab {maxlen} tähemärgi FQDN piiri",
   "(VAT is not included)": "(ei sisalda käibemaksu)",
   "+{count} more": "+{count} veel",

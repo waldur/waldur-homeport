@@ -144593,8 +144593,8 @@
       "usage_count": 1
     }
   },
-  "Please enter  access token.": {
-    "message": "Please enter  access token.",
+  "Please enter access token.": {
+    "message": "Please enter access token.",
     "context": {
       "primary_ui_type": "unknown",
       "ui_types": [
@@ -188359,8 +188359,8 @@
       "This appears in a form with validation. Ensure message supports user guidance."
     ]
   },
-  "'Unable to create service account.'": {
-    "message": "'Unable to create service account.'",
+  "Unable to create service account.": {
+    "message": "Unable to create service account.",
     "context": {
       "primary_ui_type": "error_message",
       "ui_types": [
