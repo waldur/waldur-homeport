@@ -20,6 +20,15 @@ include:
 variables:
   COMPONENT_VERSION: "latest"
 
+stages:
+  - pre-test
+  - test
+  - build
+  - release
+  - validate
+  - deploy
+  - postdeploy
+
 image: registry.hpc.ut.ee/mirror/library/node:lts-alpine3.22
 
 cache:
@@ -149,7 +158,7 @@ Run E2E tests:
       - test-results/
 
 Build artifact:
-  stage: build
+  stage: pre-test
   interruptible: true
   rules:
     - if: '$SKIP_TESTS == "true" || $SKIP_TESTS == "yes"'
@@ -161,6 +170,37 @@ Build artifact:
     paths:
       - dist/
     expire_in: 1 week
+
+Publish YOLO docker image:
+  stage: test
+  interruptible: true
+  image:
+    name: quay.io/containers/buildah:latest
+    entrypoint: [""]
+  rules:
+    - if: '$CI_PIPELINE_SOURCE == "schedule"'
+      when: never
+    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+  variables:
+    BUILDAH_FORMAT: docker
+    BUILDAH_ISOLATION: chroot
+    DOCKER_HUB_REGISTRY: "docker.io"
+    IMAGE_TAG: "opennode/${CI_PROJECT_NAME}:yolo"
+  before_script:
+    - echo "[+] Build and publish YOLO docker image for ${CI_DEFAULT_BRANCH} branch"
+    # Log in to Docker Hub
+    - echo "${WALDUR_DOCKER_HUB_PASSWORD}" | buildah login -u "${WALDUR_DOCKER_HUB_USER}" --password-stdin "${DOCKER_HUB_REGISTRY}"
+  script:
+    - echo "[+] Building image ${IMAGE_TAG}"
+    - |
+      buildah bud \
+        --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
+        --build-arg COMMIT_INFO="${CI_COMMIT_SHA}" \
+        --build-arg VERSION="latest" \
+        -t "${IMAGE_TAG}" \
+        -f "${CI_PROJECT_DIR}/Dockerfile" \
+        "${CI_PROJECT_DIR}"
+    - buildah push "${IMAGE_TAG}" "docker://${IMAGE_TAG}"
 
 Publish latest docker image:
   stage: release
@@ -176,22 +216,13 @@ Publish latest docker image:
     BUILDAH_FORMAT: docker
     BUILDAH_ISOLATION: chroot
     DOCKER_HUB_REGISTRY: "docker.io"
-    IMAGE_TAG: "opennode/waldur-homeport:latest"
   before_script:
     - echo "[+] Build and publish latest docker image for ${CI_DEFAULT_BRANCH} branch"
-    # Log in to Docker Hub
     - echo "${WALDUR_DOCKER_HUB_PASSWORD}" | buildah login -u "${WALDUR_DOCKER_HUB_USER}" --password-stdin "${DOCKER_HUB_REGISTRY}"
   script:
-    - echo "[+] Building image ${IMAGE_TAG}"
-    - |
-      buildah bud \
-        --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
-        --build-arg COMMIT_INFO="${CI_COMMIT_SHA}" \
-        --build-arg VERSION="latest" \
-        -t "${IMAGE_TAG}" \
-        -f "${CI_PROJECT_DIR}/Dockerfile" \
-        "${CI_PROJECT_DIR}"
-    - buildah push "${IMAGE_TAG}" "docker://${IMAGE_TAG}"
+    - buildah pull "docker://opennode/${CI_PROJECT_NAME}:yolo"
+    - buildah tag "opennode/${CI_PROJECT_NAME}:yolo" "opennode/${CI_PROJECT_NAME}:latest"
+    - buildah push "opennode/${CI_PROJECT_NAME}:latest" "docker://opennode/${CI_PROJECT_NAME}:latest"
 
 Publish multiarch docker image with specific version:
   extends: .Publish multiarch docker image with specific version template
