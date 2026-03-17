@@ -1,10 +1,7 @@
 import { useCallback } from 'react';
 import { Card, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
-import type { ArrowSettings as _ArrowSettings } from 'waldur-js-client';
-
-// TODO: Remove after SDK regeneration — invoice_item_prefix is a new backend field
-type ArrowSettings = _ArrowSettings & { invoice_item_prefix?: string };
+import type { ArrowSettings } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';

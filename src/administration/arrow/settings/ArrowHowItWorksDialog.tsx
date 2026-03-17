@@ -582,9 +582,7 @@ export const ArrowHowItWorksDialog: FC = () => {
     () => getReconciliationDiagram(priceSource),
     [priceSource],
   );
-  // TODO: Remove cast after SDK regeneration — invoice_item_prefix is a new backend field
-  const invoiceItemPrefix =
-    (settings as any)?.invoice_item_prefix || 'Arrow consumption';
+  const invoiceItemPrefix = settings.invoice_item_prefix || 'Arrow consumption';
   const invoiceItemTypes = useMemo(
     () => getInvoiceItemTypes(priceSource, invoiceItemPrefix),
     [priceSource, invoiceItemPrefix],
