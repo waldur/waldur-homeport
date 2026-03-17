@@ -9,7 +9,7 @@ import { getAllPages } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { CustomerFeatures } from '@waldur/FeaturesEnums';
 import {
   NumberField,
   SelectField,
@@ -263,10 +263,7 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 min={0}
                 max={200}
               />
-            ) : props.resolve.name === 'grace_period_days' &&
-              isFeatureVisible(
-                MarketplaceFeatures.show_experimental_ui_components,
-              ) ? (
+            ) : props.resolve.name === 'grace_period_days' ? (
               <NumberField
                 name="grace_period_days"
                 label={translate('Grace period (days)')}

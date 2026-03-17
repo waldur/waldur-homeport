@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { marketplaceResourcesList, Project } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { Badge } from '@waldur/core/Badge';
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { WarnTip } from '@waldur/core/WarnTip';
 import { translate } from '@waldur/i18n';
@@ -45,6 +46,16 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
   return row.end_date ? (
     <>
       {formatDate(projectEndDate)}
+      {row.grace_period_days > 0 && (
+        <Badge variant="secondary" size="sm" pill outline className="ms-1">
+          {translate('+{count}d grace', { count: row.grace_period_days })}
+        </Badge>
+      )}
+      {row.is_in_grace_period && (
+        <Badge variant="warning" size="sm" pill outline className="ms-1">
+          {translate('In grace period')}
+        </Badge>
+      )}
       {endDates?.length
         ? endDates.some((date) => parseDate(date) > projectEndDate) && (
             <WarnTip

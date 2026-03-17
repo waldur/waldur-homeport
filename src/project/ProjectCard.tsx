@@ -2,6 +2,7 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
@@ -73,12 +74,38 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
                     : translate('End date')
               }
               value={
-                [
-                  project.start_date && formatDate(project.start_date),
-                  project.end_date && formatDate(project.end_date),
-                ]
-                  .filter(Boolean)
-                  .join('-') || DASH_ESCAPE_CODE
+                <>
+                  {[
+                    project.start_date && formatDate(project.start_date),
+                    project.end_date && formatDate(project.end_date),
+                  ]
+                    .filter(Boolean)
+                    .join('-') || DASH_ESCAPE_CODE}
+                  {project.grace_period_days > 0 && (
+                    <Badge
+                      variant="secondary"
+                      size="sm"
+                      pill
+                      outline
+                      className="ms-1"
+                    >
+                      {translate('+{count}d grace', {
+                        count: project.grace_period_days,
+                      })}
+                    </Badge>
+                  )}
+                  {project.is_in_grace_period && (
+                    <Badge
+                      variant="warning"
+                      size="sm"
+                      pill
+                      outline
+                      className="ms-1"
+                    >
+                      {translate('In grace period')}
+                    </Badge>
+                  )}
+                </>
               }
               space={2}
               labelCol={6}

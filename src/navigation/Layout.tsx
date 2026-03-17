@@ -10,6 +10,7 @@ import WarningBar from '@waldur/auth/WarningBar';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { DefaultLayoutConfig, useLayout } from '@waldur/metronic/layout/core';
 import { MasterLayout } from '@waldur/metronic/layout/MasterLayout';
+import { GracePeriodWarningBar } from '@waldur/project/GracePeriodWarningBar';
 import { RemovedProjectWarningBar } from '@waldur/project/RemovedProjectWarningBar';
 import { OfferingUsersWarningBar } from '@waldur/user/OfferingUsersWarningBar';
 import { ProfileCompletenessProvider } from '@waldur/user/ProfileCompletenessContext';
@@ -125,6 +126,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
                 <WarningBar />
                 <OfferingUsersWarningBar />
                 <RemovedProjectWarningBar />
+                <GracePeriodWarningBar />
                 <div
                   className={classNames(
                     'content d-flex flex-column flex-grow-1',

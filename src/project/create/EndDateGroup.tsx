@@ -15,7 +15,7 @@ export const EndDateGroup = ({ create }: { create?: boolean }) =>
     <FormGroup
       label={translate('End date')}
       help={translate(
-        'The date is inclusive. Once reached, all project resource will be scheduled for termination.',
+        'The date is inclusive. Once reached (plus any configured grace period), all project resources will be scheduled for termination.',
       )}
       required={isFeatureVisible(ProjectFeatures.mandatory_end_date)}
     >
