@@ -358,7 +358,9 @@ class FilterMapper {
         schemaEnumName ||
         this.proc.namedEnums.get(key) ||
         utils.toPascalCase(param.name);
-      finalEnumName = finalEnumName.replace(/Enum$/, '').replace(/Choices$/, '');
+      finalEnumName = finalEnumName
+        .replace(/Enum$/, '')
+        .replace(/Choices$/, '');
       if (!finalEnumName.endsWith('Options')) {
         finalEnumName += 'Options';
       }
@@ -507,7 +509,7 @@ class Generator {
             loadOptions={createSelectFetcher(${f.loadOptions}${searchParam}${extraQuery || (extraPath ? ', {}' : '')}${extraPath})}
             defaultOptions
             getOptionValue={(option${vType}) => String(option.${f.valueField || 'url'} || '')}
-            getOptionLabel={(option${vType}) => ${f.itemType === 'User' ? 'String(option.full_name || option.username || option.email || "")' : `String(option.${f.labelField || 'name'} || '')` }}
+            getOptionLabel={(option${vType}) => ${f.itemType === 'User' ? 'String(option.full_name || option.username || option.email || "")' : `String(option.${f.labelField || 'name'} || '')`}}
             value={fieldProps.input.value}
             onChange={(value) => fieldProps.input.onChange(value)}
             ${commonSelectProps}
@@ -637,14 +639,13 @@ ${jsx}    )}\n`
               type = 'string';
             else if (f.component === 'NumberField') type = 'number';
             else if (f.component === 'AwesomeCheckboxField') type = 'boolean';
-                        else if (
-                          f.optionsPlaceholder &&
-                          enumRegistry.has(f.optionsPlaceholder)
-                        ) {
-                          type = f.optionsPlaceholder.replace(/Options$/, 'Option');
-                          if (f.isMulti) type += '[]';
-                        }
-             else if (f.valueType) type = f.valueType;
+            else if (
+              f.optionsPlaceholder &&
+              enumRegistry.has(f.optionsPlaceholder)
+            ) {
+              type = f.optionsPlaceholder.replace(/Options$/, 'Option');
+              if (f.isMulti) type += '[]';
+            } else if (f.valueType) type = f.valueType;
             return `  ${f.name}: ${f.isMulti && !type.endsWith('[]') ? `${type}[]` : type};`;
           })
           .join('\n');

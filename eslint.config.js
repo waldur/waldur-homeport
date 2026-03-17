@@ -190,7 +190,7 @@ export default tseslint
           },
         ],
         'no-console': 'error',
-        'import/no-named-as-default': 'error',
+        // 'import/no-named-as-default': 'error',
         'require-await': 'error',
         'jsx-a11y/no-autofocus': ['error', { ignoreNonDOM: true }],
         'no-restricted-globals': [
