@@ -19,7 +19,6 @@ This document provides comprehensive guidelines for maintaining UI/UX consistenc
 13. [Report Filters](#13-report-filters)
 14. [Chart Composition](#14-chart-composition)
 15. [Report Page Layout](#15-report-page-layout)
-16. [Anti-Patterns](#16-anti-patterns)
 
 ---
 
@@ -1000,8 +999,6 @@ Various data-fetching components don't show `LoadingErred` on fetch failure.
 
 **Fix**: Audit all data-fetching components for proper error state handling
 
-
-
 ---
 
 ## 13. Report Filters
@@ -1264,11 +1261,11 @@ module.exports = {
 
 ### Spacing
 
-16px between blocks. Not enforceable via ESLint — enforce via design review.
+16px between blocks.
 
 ### State label placement
 
-Use existing label hierarchy from current mocks. Mocks must follow the same placement used in existing pages. Do not introduce new state layouts. Not enforceable via ESLint — enforce via design review.
+Use existing label hierarchy from current mocks. Mocks must follow the same placement used in existing pages. Do not introduce new state layouts.
 
 ---
 
