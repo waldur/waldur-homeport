@@ -347,9 +347,11 @@ Trigger integration tests:
     branch: main
     strategy: depend
   rules:
-    - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
-      variables:
-        WALDUR_HOMEPORT_IMAGE: "opennode/waldur-homeport:latest"
+    - when: never
+    # Temporarily disabled
+    # - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
+    #   variables:
+    #     WALDUR_HOMEPORT_IMAGE: "opennode/waldur-homeport:latest"
     # - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
     #   variables:
     #     WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}"
