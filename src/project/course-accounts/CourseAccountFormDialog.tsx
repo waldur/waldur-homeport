@@ -10,6 +10,7 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch, useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
 import {
+  CourseAccount,
   CourseAccountRequest,
   marketplaceCourseAccountsCreate,
   marketplaceCourseAccountsCreateBulk,
@@ -32,6 +33,7 @@ import { getProject } from '@waldur/workspace/selectors';
 import templateFile from './course_accounts_template.json';
 import { Step1UploadFile } from './Step1UploadFile';
 import { Step2PreviewAndCreate } from './Step2PreviewAndCreate';
+import { Step3CreationProgress } from './Step3CreationProgress';
 import {
   hasCourseAccountsErrors,
   RawCourseAccount,
@@ -53,6 +55,11 @@ const stepsBatch: ProgressStep[] = [
   {
     key: 'preview',
     label: translate('Preview & create'),
+    completed: false,
+  },
+  {
+    key: 'progress',
+    label: translate('Creation progress'),
     completed: false,
   },
 ];
@@ -131,6 +138,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
   const project = useSelector(getProject);
   const dispatch = useDispatch();
   const [activeTab, setActiveTab] = useState<'single' | 'batch'>('single');
+  const [createdAccounts, setCreatedAccounts] = useState<CourseAccount[]>([]);
 
   const save = useCallback(
     async (
@@ -159,19 +167,22 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
             dispatch(showInfo(translate('No valid course account to create.')));
             return;
           }
-          await marketplaceCourseAccountsCreateBulk({
+          const response = await marketplaceCourseAccountsCreateBulk({
             body: {
               course_accounts: validRecords,
               project: formData.project,
             },
           });
+          setCreatedAccounts(response.data);
+          setStep(2);
           dispatch(
             showSuccess(
-              translate('{n} course accounts has been created.', {
+              translate('{n} course accounts have been created.', {
                 n: validRecords.length,
               }),
             ),
           );
+          return;
         }
         dispatch(closeModalDialog());
         if (refetch) refetch();
@@ -219,7 +230,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
               closeButton
               footer={
                 <>
-                  {activeTab === 'batch' && step > 0 && (
+                  {activeTab === 'batch' && step === 1 && (
                     <ActionButton
                       title={translate('Back')}
                       action={prevStep}
@@ -228,27 +239,41 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                       className="w-125px me-auto"
                     />
                   )}
-                  <CloseDialogButton className="w-125px" />
-                  {activeTab === 'batch' && step === 0 ? (
+                  {activeTab === 'batch' && step === 2 ? (
                     <ActionButton
-                      title={translate('Next')}
-                      action={nextStep}
-                      iconNode={<CaretRightIcon weight="bold" />}
-                      iconRight
-                      disabled={invalid}
+                      title={translate('Close')}
+                      action={() => {
+                        if (refetch) refetch();
+                        dispatch(closeModalDialog());
+                      }}
                       variant="primary"
                       className="w-125px"
                     />
                   ) : (
-                    <SubmitButton
-                      submitting={submitting}
-                      disabled={
-                        invalid ||
-                        (activeTab === 'batch' && hasErrors && !skipErrors)
-                      }
-                      label={translate('Create')}
-                      className="btn btn-primary w-125px"
-                    />
+                    <>
+                      <CloseDialogButton className="w-125px" />
+                      {activeTab === 'batch' && step === 0 ? (
+                        <ActionButton
+                          title={translate('Next')}
+                          action={nextStep}
+                          iconNode={<CaretRightIcon weight="bold" />}
+                          iconRight
+                          disabled={invalid}
+                          variant="primary"
+                          className="w-125px"
+                        />
+                      ) : (
+                        <SubmitButton
+                          submitting={submitting}
+                          disabled={
+                            invalid ||
+                            (activeTab === 'batch' && hasErrors && !skipErrors)
+                          }
+                          label={translate('Create')}
+                          className="btn btn-primary w-125px"
+                        />
+                      )}
+                    </>
                   )}
                 </>
               }
@@ -285,15 +310,21 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                     value={stepsBatch[step]}
                     onClick={(_, index) => {
                       if (invalid) return;
+                      if (index === 2 && createdAccounts.length === 0) return;
                       setStep(index);
                     }}
                   />
                   {step === 0 ? (
                     <Step1UploadFile />
-                  ) : (
+                  ) : step === 1 ? (
                     <Step2PreviewAndCreate
                       skipErrors={skipErrors}
                       setSkipErrors={setSkipErrors}
+                    />
+                  ) : (
+                    <Step3CreationProgress
+                      createdAccounts={createdAccounts}
+                      projectUuid={project.uuid}
                     />
                   )}
                 </Tab>

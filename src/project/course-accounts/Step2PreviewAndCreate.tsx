@@ -105,6 +105,7 @@ export const Step2PreviewAndCreate = ({ skipErrors, setSkipErrors }) => {
         rows: data,
         resultCount: data.length,
       }),
+    filter: useMemo(() => ({ _rev: data }), [data]),
   });
 
   const columns = useMemo<Column<RawCourseAccount>[]>(

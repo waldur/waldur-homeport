@@ -21,6 +21,7 @@ import { CourseAccountActions } from './CourseAccountActions';
 import { CourseAccountExpandableRow } from './CourseAccountExpandableRow';
 
 const courseAccountState = {
+  Pending: { label: translate('Pending'), color: 'warning' },
   Closed: { label: translate('Closed'), color: 'default' },
   Erred: { label: translate('Erred'), color: 'danger' },
   OK: { label: translate('OK'), color: 'success' },
