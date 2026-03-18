@@ -116,6 +116,8 @@ interface CoreConfiguration {
   SSH_KEY_ALLOWED_TYPES: string[];
   SSH_KEY_MIN_RSA_KEY_SIZE: number;
   ENABLED_REPORTING_SCREENS: string[];
+  LLM_CHAT_ENABLED: boolean;
+  LLM_CHAT_ENABLED_ROLES: 'disabled' | 'staff' | 'staff_and_support' | 'all';
 }
 
 interface OpenStackConfiguration {
@@ -146,7 +148,6 @@ interface SupportConfiguration {
   ENABLED: boolean;
   DISPLAY_REQUEST_TYPE: boolean;
   ACTIVE_BACKEND_TYPE: 'atlassian' | 'zammad' | 'smax';
-  LLM_CHAT_ENABLED_ROLES: 'disabled' | 'staff' | 'staff_and_support' | 'all';
 }
 
 interface OpenPortalConfiguration {
