@@ -16,6 +16,10 @@ This document provides comprehensive guidelines for maintaining UI/UX consistenc
 10. [Accessibility](#10-accessibility)
 11. [Responsive Behavior](#11-responsive-behavior)
 12. [Anti-Patterns](#12-anti-patterns)
+13. [Report Filters](#13-report-filters)
+14. [Chart Composition](#14-chart-composition)
+15. [Report Page Layout](#15-report-page-layout)
+16. [Anti-Patterns](#16-anti-patterns)
 
 ---
 
@@ -995,6 +999,276 @@ organization: groupInvitation.scope_name || 'N/A'
 Various data-fetching components don't show `LoadingErred` on fetch failure.
 
 **Fix**: Audit all data-fetching components for proper error state handling
+
+
+
+---
+
+## 13. Report Filters
+
+### When to use which filter pattern
+
+| Pattern | Use |
+|---|---|
+| Page-level filters (top of page) | Used on report pages |
+| Header global filters | Used as system-wide filters affecting multiple pages |
+| Table dropdown filters | Used for table column filtering |
+
+### Standard filter component composition
+
+There is no fixed standard set — filters vary per report depending on the dataset.
+
+Filters used in reports:
+
+- Organization
+- Project
+- Date range (start–end)
+
+Optional shortcut selectors that populate the date range:
+
+- 7 days
+- 30 days
+- 1 year
+
+Other filters depend on the report dataset.
+
+### Filter visibility rules
+
+Filters are visible at the top of the page. Even when result data is empty, filters remain visible so the user can adjust them to change the dataset.
+
+**Fix**: Always render filter components unconditionally — never gate them on data state or loading.
+
+```tsx
+// ❌ BAD
+{data.length > 0 && <ReportFilters />}
+{!loading && <FilterBar />}
+
+// ✅ GOOD
+<ReportFilters />
+<FilterBar />
+```
+
+```js
+module.exports = {
+  create(context) {
+    return {
+      JSXExpressionContainer(node) {
+        const expr = node.expression;
+        if (expr.type === 'LogicalExpression' && expr.operator === '&&') {
+          const left = context.getSourceCode().getText(expr.left);
+          if (left.includes('.length') || left.includes('loading') || left.includes('isEmpty')) {
+            context.report({
+              node,
+              message: 'Filters must not be conditionally hidden based on data or loading state. Always render filters.',
+            });
+          }
+        }
+      },
+    };
+  },
+};
+```
+
+### Mobile behavior
+
+Report filters remain at the top of the page. On smaller screens filters may wrap to multiple rows, and remain visible above charts and tables. Filters must stay accessible without opening a separate panel.
+
+### Default filter states per report type
+
+| Default state | Meaning |
+|---|---|
+| No filters applied | Report loads full dataset |
+| Pre-filled date range | Report loads recent data (e.g. last 30 days) |
+| Required filters empty | User must select filters before results appear |
+
+---
+
+## 14. Chart Composition
+
+### When to use each chart type
+
+| Chart | Use |
+|---|---|
+| Donut / Pie | Showing how something breaks down as a share of the whole |
+| Bar | Comparing values across categories |
+| Line | Showing how something changes over time |
+| Stacked bar | Comparing totals AND showing what's inside each total |
+
+- Use **line** when continuity matters — when the shape of the trend is the point.
+- Use **stacked bar** only when both the total and the breakdown are meaningful. Keep it to 4–5 segments max, otherwise it gets hard to read.
+- Avoid **donut/pie** when you have more than 5 segments or when users need to compare values precisely — a bar chart does that job better.
+
+### Chart-to-filter binding
+
+Charts must reflect the same filtered dataset as the report. Filters affect charts and tables simultaneously. There is no separate filter state for charts.
+
+**Fix**: Charts must receive already-filtered data from the parent report, not manage filters themselves.
+
+```tsx
+// ❌ BAD
+const MyChart = () => {
+  const [filters, setFilters] = useState({});
+  const [dateRange, setDateRange] = useState(null);
+}
+
+// ✅ GOOD
+const MyChart = ({ data }) => {
+  // receives already-filtered data from parent report
+}
+```
+
+```js
+module.exports = {
+  create(context) {
+    return {
+      CallExpression(node) {
+        const isUseState =
+          node.callee.name === 'useState' ||
+          (node.callee.property && node.callee.property.name === 'useState');
+        if (!isUseState) return;
+
+        const varName = node.parent?.id?.elements?.[0]?.name || '';
+        const filterKeywords = ['filter', 'Filter', 'dateRange', 'DateRange', 'period', 'Period'];
+        const componentName = context.getScope().block?.id?.name || '';
+
+        if (
+          componentName.toLowerCase().includes('chart') &&
+          filterKeywords.some((k) => varName.includes(k))
+        ) {
+          context.report({
+            node,
+            message: 'Chart components must not manage their own filter state. Receive filtered data from the parent report instead.',
+          });
+        }
+      },
+    };
+  },
+};
+```
+
+### Data provenance display
+
+Charts should include:
+
+- Title describing the metric
+- Totals or summary values
+- Legend
+
+Tooltips show the specific value and aggregation context (e.g. *Sum of invoices in March — $12,400*).
+
+### Chart empty and loading states
+
+| State | UI |
+|---|---|
+| Loading | Chart skeleton |
+| Empty | "No data for selected filters. Try adjusting your filters." |
+| Error | Inline message or alert |
+
+Keep the chart container at its normal height even when empty. Never return `null` from a chart component.
+
+**Fix**: Always render the chart container. Show an empty state when there is no data.
+
+```tsx
+// ❌ BAD
+if (!data.length) return null;
+
+// ✅ GOOD
+{data.length === 0
+  ? <NoResult title={translate('No data for selected filters. Try adjusting your filters.')} />
+  : <Chart data={data} />
+}
+```
+
+```js
+module.exports = {
+  create(context) {
+    return {
+      ReturnStatement(node) {
+        const src = context.getSourceCode().getText(node);
+        const componentName = context.getScope().block?.id?.name || '';
+        if (componentName.toLowerCase().includes('chart') && src.includes('return null')) {
+          context.report({
+            node,
+            message: 'Chart components must not return null on empty data. Keep the container and show an empty state instead.',
+          });
+        }
+      },
+    };
+  },
+};
+```
+
+### Responsive chart behavior
+
+Charts should resize to container width and remain readable without horizontal scroll.
+
+---
+
+## 15. Report Page Layout
+
+### Standard page structure
+
+Page title → Report filters → Charts → Data table.
+
+**Fix**: Always follow this order — never render a chart or table before filters.
+
+```tsx
+// ❌ BAD
+const ReportPage = () => (
+  <>
+    <DataTable />
+    <ReportFilters />
+  </>
+);
+
+// ✅ GOOD
+const ReportPage = () => (
+  <>
+    <PageTitle />
+    <ReportFilters />
+    <Charts />
+    <DataTable />
+  </>
+);
+```
+
+```js
+module.exports = {
+  create(context) {
+    return {
+      JSXElement(node) {
+        const children = node.children.filter((c) => c.type === 'JSXElement');
+        const names = children.map((c) => c.openingElement?.name?.name || '');
+
+        const filterIdx = names.findIndex((n) => n.includes('Filter'));
+        const tableIdx = names.findIndex((n) => n.includes('Table') || n.includes('DataTable'));
+        const chartIdx = names.findIndex((n) => n.includes('Chart'));
+
+        if (filterIdx !== -1 && tableIdx !== -1 && tableIdx < filterIdx) {
+          context.report({
+            node,
+            message: 'DataTable must come after ReportFilters in report page layout.',
+          });
+        }
+        if (filterIdx !== -1 && chartIdx !== -1 && chartIdx < filterIdx) {
+          context.report({
+            node,
+            message: 'Chart must come after ReportFilters in report page layout.',
+          });
+        }
+      },
+    };
+  },
+};
+```
+
+### Spacing
+
+16px between blocks. Not enforceable via ESLint — enforce via design review.
+
+### State label placement
+
+Use existing label hierarchy from current mocks. Mocks must follow the same placement used in existing pages. Do not introduce new state layouts. Not enforceable via ESLint — enforce via design review.
 
 ---
 
