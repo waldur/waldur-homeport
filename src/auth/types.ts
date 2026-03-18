@@ -146,6 +146,7 @@ interface SupportConfiguration {
   ENABLED: boolean;
   DISPLAY_REQUEST_TYPE: boolean;
   ACTIVE_BACKEND_TYPE: 'atlassian' | 'zammad' | 'smax';
+  LLM_CHAT_ENABLED_ROLES: 'disabled' | 'staff' | 'staff_and_support' | 'all';
 }
 
 interface OpenPortalConfiguration {

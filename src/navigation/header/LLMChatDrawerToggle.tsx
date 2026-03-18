@@ -3,12 +3,15 @@ import React from 'react';
 import { useDispatch } from 'react-redux';
 
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
+import {
+  isLLMChatAllowedForUser,
+  getLLMChatMode,
+} from '@waldur/ai-assistant/utils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openDrawerDialog } from '@waldur/drawer/actions';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
+import { useUser } from '@waldur/workspace/hooks';
 
 const LLMChatDrawer = lazyComponent(() =>
   import('@waldur/ai-assistant/components/LLMChatDrawer').then((module) => ({
@@ -18,9 +21,10 @@ const LLMChatDrawer = lazyComponent(() =>
 
 export const LLMChatDrawerToggle: React.FC = () => {
   const dispatch = useDispatch();
+  const user = useUser();
   const { hasNewMessages, setHasNewMessages } = useThreadContext();
 
-  if (!isFeatureVisible(SupportFeatures.enable_llm_assistant)) {
+  if (!isLLMChatAllowedForUser(user, getLLMChatMode())) {
     return null;
   }
 
