@@ -1264,11 +1264,11 @@ module.exports = {
 
 ### Spacing
 
-16px between blocks.
+16px between blocks. Not enforceable via ESLint — enforce via design review.
 
 ### State label placement
 
-Use existing label hierarchy from current mocks. Mocks must follow the same placement used in existing pages. Do not introduce new state layouts.
+Use existing label hierarchy from current mocks. Mocks must follow the same placement used in existing pages. Do not introduce new state layouts. Not enforceable via ESLint — enforce via design review.
 
 ---
 
