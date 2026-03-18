@@ -1347,6 +1347,13 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'LLM_CHAT_ENABLED_ROLES',
+        description: translate('Controls which user roles can access the AI Assistant. \'disabled\': No role-based access. \'staff\': Staff users only. \'staff_and_support\': Staff and support users. \'all\': All authenticated users.'),
+        default: 'disabled',
+        type: 'choice_field',
+        options: [{ value: 'disabled', label: 'Disabled' }, { value: 'staff', label: 'Staff users' }, { value: 'staff_and_support', label: 'Staff and support users' }, { value: 'all', label: 'All users' }],
+      },
+      {
         key: 'LLM_INFERENCES_BACKEND_TYPE',
         description: translate('Type of LLM inference backend. For example: vllm, openai, ollama.'),
         default: 'vllm',
