@@ -264,7 +264,7 @@ export const FeaturesDescription: FeatureSection[] = [
       },
       {
         key: 'enable_llm_assistant',
-        description: translate('Enable LLM Assistant'),
+        description: translate('Enable AI Assistant'),
       },
       {
         key: 'pricelist',
