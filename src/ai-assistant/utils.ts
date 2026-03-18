@@ -5,9 +5,9 @@ import { User } from '@waldur/workspace/types';
 
 type LLMChatEnabledRoles = 'disabled' | 'staff' | 'staff_and_support' | 'all';
 
-/** Read LLM_CHAT_ENABLED_ROLES from public configuration */
+/** Read AI_ASSISTANT_ENABLED_ROLES from public configuration */
 export const getLLMChatMode = (): LLMChatEnabledRoles =>
-  ENV.plugins?.WALDUR_CORE?.LLM_CHAT_ENABLED_ROLES ?? 'disabled';
+  ENV.plugins?.WALDUR_CORE?.AI_ASSISTANT_ENABLED_ROLES ?? 'disabled';
 
 /** Is LLM chat allowed for a specific user based on the setting value? */
 export const isLLMChatAllowedForUser = (

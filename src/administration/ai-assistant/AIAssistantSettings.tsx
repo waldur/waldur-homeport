@@ -11,8 +11,8 @@ import { SettingsDescription } from '@waldur/SettingsDescription';
 
 import { FieldRow } from '../settings/FieldRow';
 
-const LLM_SETTINGS = SettingsDescription.find(
-  (group) => group.description === translate('LLM inference settings'),
+const AI_ASSISTANT_SETTINGS = SettingsDescription.find(
+  (group) => group.description === translate('AI assistant settings'),
 );
 
 const SettingsGroupCard = ({ group, data }) => {
@@ -61,6 +61,6 @@ export const AIAssistantSettings = () => {
       loadData={refetch}
     />
   ) : data ? (
-    <SettingsGroupCard group={LLM_SETTINGS} data={data} />
+    <SettingsGroupCard group={AI_ASSISTANT_SETTINGS} data={data} />
   ) : null;
 };
