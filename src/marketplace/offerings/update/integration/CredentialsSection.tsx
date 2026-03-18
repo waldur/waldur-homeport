@@ -13,7 +13,7 @@ import {
 import { openModalDialog } from '@waldur/modal/actions';
 import { TENANT_TYPE } from '@waldur/openstack/constants';
 import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
-import { GenerateSiteAgentConfigForOfferingButton } from '@waldur/site-agent/GenerateSiteAgentConfigForOfferingButton';
+import { SlurmOfferingActions } from '@waldur/site-agent/SlurmOfferingActions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import {
@@ -58,18 +58,12 @@ export const CredentialsSection: FC<OfferingEditPanelProps> = (props) => {
   const hideScopeState =
     !props.offering.scope_state && props.offering.type === SITE_AGENT_PLUGIN;
 
-  const isSlurmOffering = props.offering.type === SITE_AGENT_PLUGIN;
-
   return (
     <FormTable.Card
       title={getTitle()}
       actions={
         <div className="d-flex gap-2 align-items-center">
-          {isSlurmOffering && (
-            <GenerateSiteAgentConfigForOfferingButton
-              offering={props.offering}
-            />
-          )}
+          <SlurmOfferingActions offering={props.offering} />
           {props.offering.type === TENANT_TYPE && (
             <ActionButton
               action={() =>
