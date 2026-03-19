@@ -16,18 +16,9 @@
   justify-content: center;
 }
 
-// Checkbox header cell: 16px from table edge, no extra right padding
-// Use > thead to avoid leaking into nested/embedded tables
-.table.table-expandable > thead > tr > th:first-child {
-  padding-left: 16px !important;
-  padding-right: 0 !important;
-}
-
-// First sortable data header cell with arrow+text:
-// remove gx-8px / table default horizontal padding so inner 16/12 padding is exact.
-// Use > thead to avoid leaking into nested/embedded tables
-.table.table-expandable.gx-8px > thead > tr > th.sorting-column:first-of-type,
-.table.table-expandable > thead > tr > th.sorting-column:first-of-type {
+// First expandable data header cell (arrow + text) should have no outer padding.
+// Inner wrapper applies exact 16 / 12 spacing.
+.table.table-expandable > thead > tr > th.first-expandable-column {
   padding-left: 0 !important;
   padding-right: 0 !important;
 }

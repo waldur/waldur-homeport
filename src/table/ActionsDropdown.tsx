@@ -30,7 +30,7 @@ interface ActionsDropdownProps extends Partial<DropdownProps> {
   refetch?(): void;
   data?: Record<string, any>;
   variant?: Variant;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'lg';
   tooltip?: string | boolean;
 }
 
@@ -40,7 +40,7 @@ interface TableDropdownToggleProps {
   labeled?: boolean;
   variant?: Variant;
   className?: string;
-  size?: 'sm' | 'md' | 'lg';
+  size?: 'sm' | 'lg';
   tooltip?: string | boolean;
 }
 
@@ -66,7 +66,7 @@ export const TableDropdownToggle = ({
     labeled ? (
       <Dropdown.Toggle
         variant={variant}
-        size={size === 'md' ? undefined : size}
+        size={size}
         className={classNames('btn-icon-right no-arrow', className)}
         disabled={disabled}
       >
@@ -82,7 +82,7 @@ export const TableDropdownToggle = ({
         variant="text-secondary"
         className="btn-icon no-arrow"
         disabled={disabled}
-        size={size === 'md' ? undefined : size}
+        size={size}
       >
         <DotsThreeVerticalIcon size={22} weight="bold" />
       </Dropdown.Toggle>
