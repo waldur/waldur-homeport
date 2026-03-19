@@ -51,6 +51,10 @@ export const ResourcesGeographyPage: FC = () => {
 
   return (
     <>
+      <div className="table-standalone-header d-flex justify-content-between gap-4">
+        <h1 className="mb-0 fs-1x">{translate('Geographic distribution')}</h1>
+      </div>
+
       <ResourcesGeographySummaryCards summary={summary} />
 
       <Row className="g-6 mb-6">

@@ -1,5 +1,5 @@
 import { FC, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -55,42 +55,50 @@ export const ProjectClassificationPage: FC = () => {
 
   return (
     <>
+      <div className="table-standalone-header d-flex justify-content-between gap-4">
+        <h1 className="mb-0 fs-1x">{translate('Project classification')}</h1>
+      </div>
+
       <ClassificationSummaryCards summary={summary} />
 
-      <Tab.Container
-        activeKey={activeTab}
-        onSelect={(k) => setActiveTab(k as TabKey)}
-      >
-        <Nav variant="tabs" className="nav-line-tabs mb-6">
-          <Nav.Item>
-            <Nav.Link as="button" eventKey="oecd">
-              {translate('By OECD code')}
-            </Nav.Link>
-          </Nav.Item>
-          <Nav.Item>
-            <Nav.Link as="button" eventKey="industry">
-              {translate('By industry')}
-            </Nav.Link>
-          </Nav.Item>
-        </Nav>
-
-        <Tab.Content>
-          <Tab.Pane eventKey="oecd" mountOnEnter>
-            <OecdUsageTab
-              usages={data.oecdUsages}
-              limits={data.oecdLimits}
-              projectCounts={data.oecdProjectCounts}
-            />
-          </Tab.Pane>
-          <Tab.Pane eventKey="industry" mountOnEnter>
-            <IndustryUsageTab
-              usages={data.industryUsages}
-              limits={data.industryLimits}
-              projectCounts={data.industryProjectCounts}
-            />
-          </Tab.Pane>
-        </Tab.Content>
-      </Tab.Container>
+      <div className="my-6">
+        <ToggleButtonGroup
+          type="radio"
+          name="activeTab"
+          value={activeTab}
+          onChange={(v) => setActiveTab(v)}
+        >
+          <ToggleButton
+            id="tbg-oecd"
+            value="oecd"
+            variant="tertiary"
+            className="px-6"
+          >
+            {translate('By OECD code')}
+          </ToggleButton>
+          <ToggleButton
+            id="tbg-industry"
+            value="industry"
+            variant="tertiary"
+            className="px-6"
+          >
+            {translate('By industry')}
+          </ToggleButton>
+        </ToggleButtonGroup>
+      </div>
+      {activeTab === 'oecd' ? (
+        <OecdUsageTab
+          usages={data.oecdUsages}
+          limits={data.oecdLimits}
+          projectCounts={data.oecdProjectCounts}
+        />
+      ) : (
+        <IndustryUsageTab
+          usages={data.industryUsages}
+          limits={data.industryLimits}
+          projectCounts={data.industryProjectCounts}
+        />
+      )}
     </>
   );
 };

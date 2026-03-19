@@ -1,8 +1,10 @@
 import { CheckCircleIcon, ClockIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDate } from '@waldur/core/dateUtils';
+import { StatsCard } from '@waldur/core/StatsCard';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import Table from '@waldur/table/Table';
@@ -16,10 +18,6 @@ import {
 } from './mockData';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
 import { CallPerformanceData, CallState } from './types';
-
-const tableActions = (
-  <ProposalAnalyticsButtons analyticsState="reporting-call-performance-analytics" />
-);
 
 const CallStateColumn: FC<{ row: CallPerformanceData }> = ({ row }) => {
   const stateConfig: Record<
@@ -137,6 +135,41 @@ const columns: Column<CallPerformanceData>[] = [
   },
 ];
 
+const SummaryWidget: FC<{ summary }> = ({ summary }) => (
+  <Row className="g-4 mb-6">
+    <Col xs={12} sm={6} lg={2}>
+      <StatsCard
+        label={translate('Active calls')}
+        value={summary.activeCalls}
+      />
+    </Col>
+    <Col xs={12} sm={6} lg={2}>
+      <StatsCard
+        label={translate('Total proposals')}
+        value={summary.totalProposals}
+      />
+    </Col>
+    <Col xs={12} sm={6} lg={2}>
+      <StatsCard label={translate('Accepted')} value={summary.totalAccepted} />
+    </Col>
+    <Col xs={12} sm={6} lg={2}>
+      <StatsCard label={translate('In review')} value={summary.totalInReview} />
+    </Col>
+    <Col xs={12} sm={6} lg={2}>
+      <StatsCard
+        label={translate('Acceptance rate')}
+        value={`${summary.overallAcceptanceRate}%`}
+      />
+    </Col>
+    <Col xs={12} sm={6} lg={2}>
+      <StatsCard
+        label={translate('Avg review score')}
+        value={summary.averageScore}
+      />
+    </Col>
+  </Row>
+);
+
 export const CallPerformanceList: FC = () => {
   useReportBreadcrumbs({
     currentReport: 'call-performance',
@@ -160,72 +193,37 @@ export const CallPerformanceList: FC = () => {
 
   const noop = useCallback(() => {}, []);
 
-  const summaryWidget = useMemo(
-    () => (
-      <div className="d-flex flex-wrap gap-4 py-4 px-2">
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold text-primary">
-            {summary.activeCalls}
-          </span>
-          <span className="text-muted fs-7">{translate('Active calls')}</span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold">{summary.totalProposals}</span>
-          <span className="text-muted fs-7">
-            {translate('Total proposals')}
-          </span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold text-success">
-            {summary.totalAccepted}
-          </span>
-          <span className="text-muted fs-7">{translate('Accepted')}</span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold text-warning">
-            {summary.totalInReview}
-          </span>
-          <span className="text-muted fs-7">{translate('In review')}</span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold">{summary.overallAcceptanceRate}%</span>
-          <span className="text-muted fs-7">
-            {translate('Acceptance rate')}
-          </span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold">{summary.averageScore}</span>
-          <span className="text-muted fs-7">
-            {translate('Avg review score')}
-          </span>
-        </div>
-      </div>
-    ),
-    [summary],
-  );
-
   return (
-    <Table<CallPerformanceData>
-      title={translate('Call performance')}
-      columns={columns}
-      rows={filteredData}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
-      hasQuery
-      query={query}
-      setQuery={setQuery}
-      verboseName={translate('calls')}
-      filters={summaryWidget}
-      filterPosition="header"
-      tableActions={tableActions}
-    />
+    <>
+      <div className="table-standalone-header d-flex justify-content-between gap-4">
+        <h1 className="mb-0 fs-1x">{translate('Call performance')}</h1>
+      </div>
+
+      <SummaryWidget summary={summary} />
+      <Table<CallPerformanceData>
+        columns={columns}
+        rows={filteredData}
+        fetch={noop}
+        loading={false}
+        error={null}
+        activeColumns={{}}
+        columnPositions={[]}
+        resetSelection={noop}
+        setFilterPosition={noop}
+        initColumnPositions={noop}
+        resetPagination={noop}
+        hasPagination={false}
+        hasQuery
+        query={query}
+        setQuery={setQuery}
+        verboseName={translate('calls')}
+        hideTitle
+        hideRefresh
+        filterPosition="header"
+        tableActions={
+          <ProposalAnalyticsButtons analyticsState="reporting-call-performance-analytics" />
+        }
+      />
+    </>
   );
 };

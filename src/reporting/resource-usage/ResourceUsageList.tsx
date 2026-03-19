@@ -146,6 +146,7 @@ export const ResourceUsageList: FC = () => {
         <UsageExpandableRow row={row} type="resource-usage" />
       )}
       filters={<ResourceUsageFilter />}
+      standalone
     />
   );
 };

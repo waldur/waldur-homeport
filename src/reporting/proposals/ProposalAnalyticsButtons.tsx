@@ -1,9 +1,8 @@
-import { FlaskIcon, LightbulbIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
+import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 
@@ -47,13 +46,11 @@ export const ProposalAnalyticsButtons: FC<ProposalAnalyticsButtonsProps> = ({
             id="proposal-what-if-tip"
             label={translate('No data available for analysis')}
           >
-            <CompactSubmitButton
+            <SubmitButton
               submitting={false}
               type="button"
-              variant="primary"
+              variant="secondary"
               disabled
-              iconNode={<FlaskIcon weight="bold" />}
-              iconOnLeft
               label={translate('What if')}
             />
           </Tip>
@@ -61,9 +58,8 @@ export const ProposalAnalyticsButtons: FC<ProposalAnalyticsButtonsProps> = ({
           <Link
             state={analyticsState}
             params={{ mode: 'what-if' }}
-            className="btn btn-primary btn-sm"
+            className="btn btn-secondary"
           >
-            <FlaskIcon weight="bold" className="me-1" />
             {translate('What if')}
           </Link>
         ))}
@@ -73,13 +69,11 @@ export const ProposalAnalyticsButtons: FC<ProposalAnalyticsButtonsProps> = ({
             id="proposal-why-so-tip"
             label={translate('No data available for analysis')}
           >
-            <CompactSubmitButton
+            <SubmitButton
               submitting={false}
               type="button"
               variant="primary"
               disabled
-              iconNode={<LightbulbIcon weight="bold" />}
-              iconOnLeft
               label={translate('Why so')}
             />
           </Tip>
@@ -87,9 +81,8 @@ export const ProposalAnalyticsButtons: FC<ProposalAnalyticsButtonsProps> = ({
           <Link
             state={analyticsState}
             params={{ mode: 'why-so' }}
-            className="btn btn-primary btn-sm"
+            className="btn btn-primary"
           >
-            <LightbulbIcon weight="bold" className="me-1" />
             {translate('Why so')}
           </Link>
         ))}

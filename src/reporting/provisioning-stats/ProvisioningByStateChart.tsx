@@ -1,6 +1,7 @@
 import { EChartsOption } from 'echarts';
 import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
+import { OrderState } from 'waldur-js-client';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
@@ -19,12 +20,15 @@ const STATE_COLORS: { [key: string]: string } = {
   executing: '#009ef7',
 };
 
-const STATE_LABELS: { [key: string]: string } = {
+const STATE_LABELS: { [key in OrderState]: string } = {
   done: translate('Done'),
   erred: translate('Erred'),
   canceled: translate('Canceled'),
   rejected: translate('Rejected'),
-  pending: translate('Pending'),
+  'pending-project': translate('Pending project'),
+  'pending-start-date': translate('Pending start date'),
+  'pending-consumer': translate('Pending consumer'),
+  'pending-provider': translate('Pending provider'),
   executing: translate('Executing'),
 };
 
