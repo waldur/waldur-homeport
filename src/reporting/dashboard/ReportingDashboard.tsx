@@ -532,7 +532,7 @@ export const ReportingDashboard: FC = () => {
   return (
     <>
       <div className="table-standalone-header">
-        <h1 className="mb-0 fs-1x">{translate('Reports')}</h1>
+        <h1 className="mb-0 fs-1x">{translate('Reporting')}</h1>
       </div>
       <Card className="card-table card-bordered">
         <Card.Header>
