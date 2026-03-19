@@ -1,38 +1,7 @@
-import {
-  BuildingsIcon,
-  ChartLineUpIcon,
-  CheckCircleIcon,
-  ClipboardTextIcon,
-  CubeIcon,
-  CurrencyCircleDollarIcon,
-  FileTextIcon,
-  FlagIcon,
-  FlaskIcon,
-  FolderIcon,
-  GaugeIcon,
-  GraduationCapIcon,
-  LightbulbIcon,
-  ListBulletsIcon,
-  PackageIcon,
-  ShoppingCartIcon,
-  StackIcon,
-  TagIcon,
-  TrendUpIcon,
-  UsersIcon,
-  UsersThreeIcon,
-  WarningCircleIcon,
-  WrenchIcon,
-} from '@phosphor-icons/react';
+import { FlaskIcon, LightbulbIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
-import {
-  FC,
-  ReactNode,
-  useCallback,
-  useEffect,
-  useMemo,
-  useState,
-} from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { FC, useCallback, useEffect, useMemo, useState } from 'react';
+import { Card, Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
 import { Badge } from '@waldur/core/Badge';
@@ -42,8 +11,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures, SupportFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
+import { TableQuery } from '@waldur/table/TableQuery';
 import {
   hasAnyOrganizationAccess,
   isServiceProviderManager,
@@ -55,7 +23,6 @@ import { isReportingScreenEnabled } from '../utils';
 
 interface ReportItem {
   uuid: string;
-  icon: ReactNode;
   title: string;
   description: string;
   state: string;
@@ -71,22 +38,10 @@ interface ReportCategory {
   reports: ReportItem[];
 }
 
-const ReportColumn = ({ row }: { row: ReportItem }) => (
-  <Link state={row.state} className="d-flex align-items-center text-gray-800">
-    <span className="text-primary me-2">{row.icon}</span>
-    <span className="fw-semibold">{row.title}</span>
-  </Link>
-);
-
-const DescriptionColumn = ({ row }: { row: ReportItem }) => (
-  <span className="text-muted">{row.description}</span>
-);
-
 const AnalyticsColumn = ({ row }: { row: ReportItem }) => {
-  if (!row.analytics || row.analytics.length === 0 || !row.analyticsState) {
-    return <span className="text-muted">—</span>;
+  if (!row.analytics) {
+    return null;
   }
-
   const hasWhatIf = row.analytics.includes('what-if');
   const hasWhySo = row.analytics.includes('why-so');
 
@@ -124,26 +79,6 @@ const AnalyticsColumn = ({ row }: { row: ReportItem }) => {
   );
 };
 
-const getColumns = (showExperimental: boolean): Column<ReportItem>[] => {
-  const cols: Column<ReportItem>[] = [
-    {
-      title: translate('Report'),
-      render: ReportColumn,
-    },
-    {
-      title: translate('Description'),
-      render: DescriptionColumn,
-    },
-  ];
-  if (showExperimental) {
-    cols.push({
-      title: translate('Analytics'),
-      render: AnalyticsColumn,
-    });
-  }
-  return cols;
-};
-
 export const ReportingDashboard: FC = () => {
   const showResources = useSelector(hasAnyOrganizationAccess);
   const showProvider = useSelector(isServiceProviderManager);
@@ -165,11 +100,6 @@ export const ReportingDashboard: FC = () => {
   const showVmOverview = useMemo(
     () => isFeatureVisible(SupportFeatures.vm_type_overview),
     [],
-  );
-
-  const columns = useMemo(
-    () => getColumns(showExperimental),
-    [showExperimental],
   );
 
   const categories = useMemo(() => {
@@ -194,7 +124,6 @@ export const ReportingDashboard: FC = () => {
         reports: [
           {
             uuid: 'resource-usage',
-            icon: <ChartLineUpIcon size={18} weight="bold" />,
             title: translate('Usage'),
             description: translate(
               'Resource usage metrics across organizations',
@@ -203,7 +132,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'user-usage',
-            icon: <UsersIcon size={18} weight="bold" />,
             title: translate('Usage by user'),
             description: translate('Usage metrics broken down by user'),
             state: 'reporting-user-usage',
@@ -211,7 +139,6 @@ export const ReportingDashboard: FC = () => {
           withAnalytics(
             {
               uuid: 'quotas',
-              icon: <GaugeIcon size={18} weight="bold" />,
               title: translate('Quotas'),
               description: translate('Organization quota limits and usage'),
               state: 'reporting-quotas',
@@ -221,21 +148,18 @@ export const ReportingDashboard: FC = () => {
           ),
           {
             uuid: 'usage-monitoring',
-            icon: <WarningCircleIcon size={18} weight="bold" />,
             title: translate('Usage monitoring'),
             description: translate('Detect missing or anomalous usage reports'),
             state: 'reporting-usage-monitoring',
           },
           {
             uuid: 'usage-trends',
-            icon: <TrendUpIcon size={18} weight="bold" />,
             title: translate('Usage trends'),
             description: translate('Year-over-year usage analysis and growth'),
             state: 'reporting-usage-trends',
           },
           {
             uuid: 'organization-summary',
-            icon: <BuildingsIcon size={18} weight="bold" />,
             title: translate('Organization summary'),
             description: translate(
               'Resources, limits, and usage by organization',
@@ -244,7 +168,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'project-detail',
-            icon: <FolderIcon size={18} weight="bold" />,
             title: translate('Project detail'),
             description: translate(
               'Resource limit and usage history over time',
@@ -253,7 +176,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'resources-geography',
-            icon: <FlagIcon size={18} weight="bold" />,
             title: translate('Geographic distribution'),
             description: translate(
               'Resources by country, organization group, and offering',
@@ -262,7 +184,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'project-classification',
-            icon: <GraduationCapIcon size={18} weight="bold" />,
             title: translate('Project classification'),
             description: translate(
               'Project usage by OECD code and industry classification',
@@ -271,7 +192,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'usage-by-customer',
-            icon: <BuildingsIcon size={18} weight="bold" />,
             title: translate('Usage by customer'),
             description: translate(
               'Full resource breakdown per customer with usages, limits, and costs',
@@ -280,7 +200,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'usage-by-org-type',
-            icon: <TagIcon size={18} weight="bold" />,
             title: translate('Usage by organization type'),
             description: translate(
               'Resource usage grouped by creator organization type',
@@ -289,7 +208,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'usage-by-creator',
-            icon: <UsersIcon size={18} weight="bold" />,
             title: translate('Usage by creator'),
             description: translate(
               'Resource usage by creator affiliations and organization type',
@@ -309,7 +227,6 @@ export const ReportingDashboard: FC = () => {
           withAnalytics(
             {
               uuid: 'call-performance',
-              icon: <ChartLineUpIcon size={18} weight="bold" />,
               title: translate('Call performance'),
               description: translate(
                 'Submission statistics and acceptance rates across calls',
@@ -322,7 +239,6 @@ export const ReportingDashboard: FC = () => {
           withAnalytics(
             {
               uuid: 'review-progress',
-              icon: <ClipboardTextIcon size={18} weight="bold" />,
               title: translate('Review progress'),
               description: translate(
                 'Reviewer workload and completion metrics',
@@ -335,7 +251,6 @@ export const ReportingDashboard: FC = () => {
           withAnalytics(
             {
               uuid: 'resource-demand',
-              icon: <PackageIcon size={18} weight="bold" />,
               title: translate('Resource demand'),
               description: translate('Resources requested through proposals'),
               state: 'reporting-resource-demand',
@@ -355,7 +270,6 @@ export const ReportingDashboard: FC = () => {
           withAnalytics(
             {
               uuid: 'capacity',
-              icon: <CubeIcon size={18} weight="bold" />,
               title: translate('Capacity'),
               description: translate('Available capacity of offering plans'),
               state: 'reporting-capacity',
@@ -365,49 +279,42 @@ export const ReportingDashboard: FC = () => {
           ),
           {
             uuid: 'provider-overview',
-            icon: <GaugeIcon size={18} weight="bold" />,
             title: translate('Provider overview'),
             description: translate('KPI dashboard with key provider metrics'),
             state: 'reporting-provider-overview',
           },
           {
             uuid: 'provider-revenue',
-            icon: <CurrencyCircleDollarIcon size={18} weight="bold" />,
             title: translate('Provider revenue'),
             description: translate('Monthly revenue trends for provider'),
             state: 'reporting-provider-revenue',
           },
           {
             uuid: 'provider-orders',
-            icon: <ShoppingCartIcon size={18} weight="bold" />,
             title: translate('Provider orders'),
             description: translate('Order statistics and trends for provider'),
             state: 'reporting-provider-orders',
           },
           {
             uuid: 'provider-resources',
-            icon: <StackIcon size={18} weight="bold" />,
             title: translate('Provider resources'),
             description: translate('Resource statistics by state and offering'),
             state: 'reporting-provider-resources',
           },
           {
             uuid: 'provider-customers',
-            icon: <UsersThreeIcon size={18} weight="bold" />,
             title: translate('Provider customers'),
             description: translate('Customer acquisition and top customers'),
             state: 'reporting-provider-customers',
           },
           {
             uuid: 'provider-offerings',
-            icon: <PackageIcon size={18} weight="bold" />,
             title: translate('Provider offerings'),
             description: translate('Offering performance metrics'),
             state: 'reporting-provider-offerings',
           },
           {
             uuid: 'openstack-instances',
-            icon: <StackIcon size={18} weight="bold" />,
             title: translate('OpenStack instances'),
             description: translate(
               'OpenStack instance inventory and aggregated metrics',
@@ -427,7 +334,6 @@ export const ReportingDashboard: FC = () => {
           withAnalytics(
             {
               uuid: 'user-demographics',
-              icon: <UsersThreeIcon size={18} weight="bold" />,
               title: translate('Demographics'),
               description: translate(
                 'User distribution by authentication and identity',
@@ -439,7 +345,6 @@ export const ReportingDashboard: FC = () => {
           ),
           {
             uuid: 'user-organizations',
-            icon: <BuildingsIcon size={18} weight="bold" />,
             title: translate('Organizations'),
             description: translate(
               'User distribution by organization membership',
@@ -448,7 +353,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'user-affiliations',
-            icon: <TagIcon size={18} weight="bold" />,
             title: translate('Affiliations'),
             description: translate(
               'User distribution by affiliation type (faculty, student, staff, etc.)',
@@ -457,7 +361,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'user-roles',
-            icon: <UsersIcon size={18} weight="bold" />,
             title: translate('Role distribution'),
             description: translate('Member counts per organization'),
             state: 'reporting-user-roles',
@@ -471,14 +374,12 @@ export const ReportingDashboard: FC = () => {
       const financialReports: ReportItem[] = [
         {
           uuid: 'growth',
-          icon: <ChartLineUpIcon size={18} weight="bold" />,
           title: translate('Growth'),
           description: translate('Monthly revenue changes over time'),
           state: 'reporting-growth',
         },
         {
           uuid: 'revenue',
-          icon: <ListBulletsIcon size={18} weight="bold" />,
           title: translate('Monthly revenue'),
           description: translate('Revenue breakdown by organization'),
           state: 'reporting-revenue',
@@ -488,7 +389,6 @@ export const ReportingDashboard: FC = () => {
       if (showPricelist) {
         financialReports.push({
           uuid: 'pricelist',
-          icon: <FileTextIcon size={18} weight="bold" />,
           title: translate('Pricelist'),
           description: translate('Marketplace offering prices'),
           state: 'reporting-pricelist',
@@ -496,16 +396,7 @@ export const ReportingDashboard: FC = () => {
       }
 
       financialReports.push({
-        uuid: 'orders',
-        icon: <ShoppingCartIcon size={18} weight="bold" />,
-        title: translate('Orders'),
-        description: translate('Daily order trends and status distribution'),
-        state: 'reporting-orders',
-      });
-
-      financialReports.push({
         uuid: 'offering-costs',
-        icon: <CurrencyCircleDollarIcon size={18} weight="bold" />,
         title: translate('Offering costs'),
         description: translate('Cost metrics per offering'),
         state: 'reporting-offering-costs',
@@ -527,7 +418,6 @@ export const ReportingDashboard: FC = () => {
           reports: [
             {
               uuid: 'vm-type-overview',
-              icon: <CubeIcon size={18} weight="bold" />,
               title: translate('VM type overview'),
               description: translate('Virtual machine types across platform'),
               state: 'reporting-vm-overview',
@@ -542,8 +432,15 @@ export const ReportingDashboard: FC = () => {
         title: translate('Operations'),
         reports: [
           {
+            uuid: 'orders',
+            title: translate('Orders'),
+            description: translate(
+              'Daily order trends and status distribution',
+            ),
+            state: 'reporting-orders',
+          },
+          {
             uuid: 'maintenance-overview',
-            icon: <WrenchIcon size={18} weight="bold" />,
             title: translate('Maintenance overview'),
             description: translate(
               'Cross-provider maintenance analytics and timeline',
@@ -552,7 +449,6 @@ export const ReportingDashboard: FC = () => {
           },
           {
             uuid: 'provisioning-stats',
-            icon: <CheckCircleIcon size={18} weight="bold" />,
             title: translate('Provisioning statistics'),
             description: translate(
               'Order success rates and provisioning trends',
@@ -629,61 +525,73 @@ export const ReportingDashboard: FC = () => {
     ? filterReports(activeCategory.reports)
     : [];
 
-  const noop = useCallback(() => {}, []);
-
   if (categories.length === 0) {
     return null;
   }
 
-  const tabs = useMemo(
-    () => (
-      <Tab.Container activeKey={activeKey} onSelect={(k) => setActiveKey(k)}>
-        <div className="overflow-auto flex-grow-1 pb-2 pt-4">
-          <Nav
-            variant="tabs"
-            className="nav-line-tabs flex-nowrap mx-0 border-0"
-          >
-            {categoriesWithCounts.map((category) => (
-              <Nav.Item key={category.key} className="text-nowrap">
-                <Nav.Link as="button" eventKey={category.key}>
-                  {category.title}
-                  <Badge variant="default" pill outline className="ms-2">
-                    {category.filteredCount}
-                  </Badge>
-                </Nav.Link>
-              </Nav.Item>
-            ))}
-          </Nav>
-        </div>
-      </Tab.Container>
-    ),
-    [activeKey, categoriesWithCounts],
-  );
-
   return (
-    <Table
-      title={translate('Reporting')}
-      columns={columns}
-      rows={filteredReports}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
-      filters={tabs}
-      filterPosition="header"
-      hasQuery
-      query={query}
-      setQuery={setQuery}
-      verboseName={translate('reports')}
-      standalone
-      hideRefresh
-      cardBordered
-    />
+    <>
+      <div className="table-standalone-header">
+        <h1 className="mb-0 fs-1x">{translate('Reports')}</h1>
+      </div>
+      <Card className="card-table card-bordered">
+        <Card.Header>
+          <div className="table-toolbar-search">
+            <TableQuery query={query} setQuery={setQuery} />
+          </div>
+        </Card.Header>
+        <Card.Body>
+          <Tab.Container
+            activeKey={activeKey}
+            onSelect={(k) => setActiveKey(k)}
+          >
+            <div className="overflow-auto flex-grow-1 pb-2 pt-4">
+              <Nav
+                variant="tabs"
+                className="nav-line-tabs flex-nowrap mx-0 border-bottom "
+              >
+                {categoriesWithCounts.map((category) => (
+                  <Nav.Item key={category.key} className="text-nowrap">
+                    <Nav.Link as="button" eventKey={category.key}>
+                      {category.title}
+                      <Badge variant="default" pill outline className="ms-2">
+                        {category.filteredCount}
+                      </Badge>
+                    </Nav.Link>
+                  </Nav.Item>
+                ))}
+              </Nav>
+              <Tab.Content>
+                {categoriesWithCounts.map((category) => (
+                  <Tab.Pane
+                    key={category.key}
+                    eventKey={category.key}
+                    active={activeKey === category.key}
+                  >
+                    {filteredReports.map((report) => (
+                      <Link state={report.state}>
+                        <Card className="card-bordered card-solid mt-4 p-5 d-flex border-hover-brand cursor-pointer">
+                          <div className="flex-grow-1">
+                            <p className="text-dark fw-bold fs-4 mb-1">
+                              {report.title}
+                            </p>
+                            <p className="text-muted mb-0">
+                              {report.description}
+                            </p>
+                          </div>
+                          <div className="flex-shrink-0">
+                            <AnalyticsColumn row={report} />
+                          </div>
+                        </Card>
+                      </Link>
+                    ))}
+                  </Tab.Pane>
+                ))}
+              </Tab.Content>
+            </div>
+          </Tab.Container>
+        </Card.Body>
+      </Card>
+    </>
   );
 };
