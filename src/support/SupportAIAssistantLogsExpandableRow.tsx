@@ -189,7 +189,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
         })}
       >
         <span style={{ whiteSpace: 'pre-wrap' }}>
-          {selectedMessage.content.trim()}
+          {selectedMessage.content_display.trim()}
         </span>
       </div>
     </div>
