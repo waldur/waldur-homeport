@@ -176,7 +176,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
             />
           )}
           <CopyToClipboardButton
-            value={selectedMessage.content}
+            value={selectedMessage.content_display}
             verbose={translate('Message')}
             onlyButton
             size={14}
