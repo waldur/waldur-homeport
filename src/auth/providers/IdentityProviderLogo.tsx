@@ -10,9 +10,9 @@ import {
   SAML2_IDP,
   TARA_IDP,
 } from './constants';
-import EduteamsLogo from './EduteamsLogo.png';
 import FreeipaLogo from './FreeipaLogo.png';
 import KeycloakLogo from './KeycloakLogo.svg';
+import MyAccessIDLogo from './MyaccessidLogo.svg';
 import Saml2Logo from './Saml2Logo.svg';
 import TaraLogo from './TaraLogo.svg';
 
@@ -35,9 +35,7 @@ const KeycloakLogoComponent = (props) => {
 };
 
 const LogoMap = {
-  [EDUTEAMS_IDP]: (props) => (
-    <img src={EduteamsLogo} alt="eduteams" {...props} />
-  ),
+  [EDUTEAMS_IDP]: MyAccessIDLogo,
 
   [FREEIPA_IDP]: (props) => <img src={FreeipaLogo} alt="freeipa" {...props} />,
   [TARA_IDP]: TaraLogo,
