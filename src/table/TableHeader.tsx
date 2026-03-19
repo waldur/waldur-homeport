@@ -104,6 +104,7 @@ const TableTh = ({
       classNames(
         column.orderField && 'sorting-column',
         column.filter && filters && 'filter-column',
+        isFirstDataColumn && expandableRow && 'first-expandable-column',
       ) || undefined
     }
     style={style}
@@ -283,9 +284,11 @@ export const TableHeader: FC<TableHeaderProps> = ({
       <thead>
         <tr className="text-start text-muted fw-bolder fs-7 gs-0 align-middle">
           {fieldType ? (
-            <th style={{ width: '10px', paddingLeft: '16px' }} />
+            <th
+              style={{ width: '10px', paddingLeft: '16px', paddingRight: 0 }}
+            />
           ) : enableMultiSelect ? (
-            <th style={{ width: '10px', paddingLeft: '16px' }}>
+            <th style={{ width: '10px', paddingLeft: '16px', paddingRight: 0 }}>
               <FormCheck
                 ref={refCheck}
                 data-testid="select-all"

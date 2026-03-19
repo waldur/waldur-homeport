@@ -76,7 +76,6 @@ export const MaintenanceSaveAsDropdown: FC<OwnProps> = ({
       }
       className="min-w-125px"
       menuClassName="min-w-150px"
-      size="md"
       drop="down"
     >
       <ActionItem

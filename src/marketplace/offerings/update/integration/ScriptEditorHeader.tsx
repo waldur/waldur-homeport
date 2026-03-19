@@ -170,7 +170,6 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
         labeled
         menuStyle={{ zIndex: 1056 }}
         drop="down"
-        size="md"
       >
         <FilterBox
           type="search"

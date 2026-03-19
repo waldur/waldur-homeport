@@ -39,7 +39,7 @@ const serializePorts = (networks, portSecurityEnabled?: boolean) => {
     }
 
     if (portSecurityEnabled === false) {
-      port.port_security_enabled = false;
+      (port as any).port_security_enabled = false;
     }
 
     return port;
