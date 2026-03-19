@@ -142,7 +142,7 @@ const ProvidersTabContent = ({
     </Col>
     <Col xs={12} md={6} xl={4} className="mb-6">
       <ProviderCard
-        title="eduTEAMS"
+        title="MyAccessID"
         description={translate(
           'Global federation of identity providers for researchers.',
         )}
