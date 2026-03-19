@@ -136,47 +136,44 @@ export const OecdUsageTab: FC<OecdUsageTabProps> = ({
   const noop = () => {};
 
   return (
-    <>
-      <Row className="g-6 mb-6">
-        <Col xs={12}>
-          <Card>
-            <Card.Header>
-              <Card.Title>
-                {translate('Projects by OECD classification')}
-              </Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {aggregatedCounts.length > 0 ? (
-                <EChart options={chartOptions} height="400px" />
-              ) : (
-                <NoResult
-                  title={translate('No data available')}
-                  message={translate(
-                    'Try adjusting your filters or date range.',
-                  )}
-                />
-              )}
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-
-      <Table<ClassificationUsageRow>
-        columns={tableColumns}
-        rows={tableData}
-        fetch={noop}
-        loading={false}
-        error={null}
-        activeColumns={{}}
-        columnPositions={[]}
-        resetSelection={noop}
-        setFilterPosition={noop}
-        initColumnPositions={noop}
-        resetPagination={noop}
-        hasPagination={false}
-        title={translate('Usage by OECD classification')}
-        verboseName={translate('classifications')}
-      />
-    </>
+    <Row className="g-6 mb-6">
+      <Col xs={6}>
+        <Card>
+          <Card.Header>
+            <Card.Title>
+              {translate('Projects by OECD classification')}
+            </Card.Title>
+          </Card.Header>
+          <Card.Body>
+            {aggregatedCounts.length > 0 ? (
+              <EChart options={chartOptions} height="400px" />
+            ) : (
+              <NoResult
+                title={translate('No data available')}
+                message={translate('Try adjusting your filters or date range.')}
+              />
+            )}
+          </Card.Body>
+        </Card>
+      </Col>
+      <Col xs={6}>
+        <Table<ClassificationUsageRow>
+          columns={tableColumns}
+          rows={tableData}
+          fetch={noop}
+          loading={false}
+          error={null}
+          activeColumns={{}}
+          columnPositions={[]}
+          resetSelection={noop}
+          setFilterPosition={noop}
+          initColumnPositions={noop}
+          resetPagination={noop}
+          hasPagination={false}
+          title={translate('Usage by OECD classification')}
+          verboseName={translate('classifications')}
+        />
+      </Col>
+    </Row>
   );
 };

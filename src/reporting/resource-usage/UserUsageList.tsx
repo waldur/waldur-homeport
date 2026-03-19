@@ -119,6 +119,7 @@ export const UserUsageList: FC = () => {
         <UsageExpandableRow row={row} type="user-usage" />
       )}
       filters={<ResourceUsageFilter />}
+      standalone
     />
   );
 };

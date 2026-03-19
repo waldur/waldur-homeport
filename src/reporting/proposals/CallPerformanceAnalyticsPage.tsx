@@ -1,8 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
@@ -309,26 +307,14 @@ export const CallPerformanceAnalyticsPage: FC = () => {
 
   return (
     <>
-      <PublicDashboardHero
-        containerClassName="mb-5"
-        cardBordered
-        hideQuickSection
-        title={translate('Call Performance Analysis')}
-        actions={
-          <Link
-            state="reporting-call-performance"
-            className="btn btn-light btn-sm"
-          >
-            {translate('Back to Call Performance')}
-          </Link>
-        }
-      >
+      <div className="table-standalone-header">
+        <h1 className="mb-3 fs-1x">{translate('Call performance analysis')}</h1>
         <p className="text-muted mb-0">
           {translate(
             'Analyze call submission patterns and explore scenarios for optimizing acceptance rates.',
           )}
         </p>
-      </PublicDashboardHero>
+      </div>
 
       <AnalyticsPageContent
         activeMode={activeMode}

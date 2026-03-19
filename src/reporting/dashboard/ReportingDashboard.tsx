@@ -1,4 +1,4 @@
-import { FlaskIcon, LightbulbIcon } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
@@ -51,8 +51,8 @@ const AnalyticsColumn = ({ row }: { row: ReportItem }) => {
         <Tip id={`${row.uuid}-whatif`} label={translate('What-If analysis')}>
           <Link state={row.analyticsState} params={{ mode: 'what-if' }}>
             <Badge
-              variant="primary"
-              leftIcon={<FlaskIcon weight="bold" />}
+              variant="gray"
+              leftIcon={<QuestionIcon weight="bold" />}
               outline
               className="cursor-pointer"
             >
@@ -65,8 +65,8 @@ const AnalyticsColumn = ({ row }: { row: ReportItem }) => {
         <Tip id={`${row.uuid}-whyso`} label={translate('Why-So analysis')}>
           <Link state={row.analyticsState} params={{ mode: 'why-so' }}>
             <Badge
-              variant="success"
-              leftIcon={<LightbulbIcon weight="bold" />}
+              variant="gray"
+              leftIcon={<QuestionIcon weight="bold" />}
               outline
               className="cursor-pointer"
             >
@@ -570,7 +570,7 @@ export const ReportingDashboard: FC = () => {
                   >
                     {filteredReports.map((report) => (
                       <Link state={report.state}>
-                        <Card className="card-bordered card-solid mt-4 p-5 d-flex border-hover-brand cursor-pointer">
+                        <Card className="card-bordered card-solid mt-4 p-5 d-flex border-hover-brand cursor-pointer d-flex flex-row">
                           <div className="flex-grow-1">
                             <p className="text-dark fw-bold fs-4 mb-1">
                               {report.title}
@@ -579,9 +579,7 @@ export const ReportingDashboard: FC = () => {
                               {report.description}
                             </p>
                           </div>
-                          <div className="flex-shrink-0">
-                            <AnalyticsColumn row={report} />
-                          </div>
+                          <AnalyticsColumn row={report} />
                         </Card>
                       </Link>
                     ))}

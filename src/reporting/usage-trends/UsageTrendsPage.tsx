@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { FC, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -39,19 +39,16 @@ export const UsageTrendsPage: FC = () => {
 
   return (
     <>
-      <Card className="mb-6">
-        <Card.Header>
-          <Card.Title>{translate('Filters')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <div className="table-standalone-header d-flex justify-content-between gap-4">
+        <h1 className="mb-0 fs-1x">{translate('Usage trends')}</h1>
+        <div className="d-none d-sm-flex gap-4">
           <UsageTrendsFilter
             year={year}
             onYearChange={setYear}
             availableYears={availableYears}
           />
-        </Card.Body>
-      </Card>
-
+        </div>
+      </div>
       {isLoading ? (
         <LoadingSpinner />
       ) : error ? (
