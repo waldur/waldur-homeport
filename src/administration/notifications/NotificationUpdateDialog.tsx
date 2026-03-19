@@ -1,5 +1,5 @@
 import arrayMutators from 'final-form-arrays';
-import { useCallback } from 'react';
+import { useCallback, useMemo } from 'react';
 import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import {
@@ -38,10 +38,19 @@ export const NotificationUpdateDialog = ({
 }) => {
   const dispatch = useDispatch();
 
+  const normalizedTemplates = useMemo(
+    () =>
+      resolve.notification.templates.map((t) => ({
+        ...t,
+        content: t.content ?? t.original_content ?? '',
+      })),
+    [resolve.notification.templates],
+  );
+
   const onSubmit = useCallback(
     async (formData) => {
       const templatesToUpdate = findDifferentTemplates(formData, {
-        templates: resolve.notification.templates,
+        templates: normalizedTemplates,
       });
 
       if (templatesToUpdate.length === 0) {
@@ -68,7 +77,7 @@ export const NotificationUpdateDialog = ({
       dispatch(showSuccess(translate('Notification has been updated.')));
       dispatch(closeModalDialog());
     },
-    [dispatch, resolve],
+    [dispatch, resolve, normalizedTemplates],
   );
 
   // @ts-ignore
@@ -76,7 +85,7 @@ export const NotificationUpdateDialog = ({
   return (
     <Form
       onSubmit={onSubmit}
-      initialValues={{ templates: resolve.notification.templates }}
+      initialValues={{ templates: normalizedTemplates }}
       mutators={{
         ...arrayMutators,
       }}
