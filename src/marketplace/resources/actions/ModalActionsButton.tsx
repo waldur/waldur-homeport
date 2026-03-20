@@ -7,6 +7,7 @@ export const ModalActionsButton = (props) => (
     labeled={props.labeled}
     drop={props.drop}
     disabled={props.disabled}
+    size={props.size}
   >
     <ActionsPopover {...props} />
   </ActionsDropdownComponent>

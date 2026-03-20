@@ -22,6 +22,7 @@ interface ResourceActionsProps {
   labeled?: boolean;
   drop?: DropDirection;
   disabled?: boolean;
+  size?: 'sm' | 'lg';
 }
 
 export const ResourceActions: FC<ResourceActionsProps> = ({
@@ -31,6 +32,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
   drop,
   labeled = false,
   disabled,
+  size,
 }) => {
   const [open, onToggle] = useBoolean(false);
   const extraActions = useMemo(() => {
@@ -51,6 +53,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
         labeled
         drop={drop}
         disabled={disabled}
+        size={size}
       />
     );
   }
@@ -65,6 +68,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
         labeled={labeled}
         drop={drop}
         disabled={disabled}
+        size={size}
       />
     );
   }
@@ -82,6 +86,7 @@ export const ResourceActions: FC<ResourceActionsProps> = ({
       labeled={labeled}
       drop={drop}
       disabled={disabled}
+      size={size}
     />
   );
 };

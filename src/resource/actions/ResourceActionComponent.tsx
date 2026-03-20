@@ -26,6 +26,7 @@ interface ResourceActionComponentProps {
   refetch?(): void;
   labeled?: boolean;
   drop?: DropDirection;
+  size?: 'sm' | 'lg';
 }
 
 export const ResourceActionComponent: FunctionComponent<
@@ -43,6 +44,7 @@ export const ResourceActionComponent: FunctionComponent<
       onToggle={props.onToggle}
       disabled={props.disabled}
       drop={props.drop}
+      size={props.size}
     >
       {props.open ? (
         props.loading ? (
