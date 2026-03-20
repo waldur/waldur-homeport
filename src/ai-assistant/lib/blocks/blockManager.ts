@@ -14,11 +14,25 @@ import { randomUUID } from '@waldur/core/utils';
  * 2. Server sends { k: 'mermaid', c: 'graph TD...' } → Transition to streaming, set content
  * 3. Server sends { k: 'mermaid', c: 'A --> B' } → Append to existing mermaid block
  * 4. Server sends { k: 'markdown', c: 'Hello' } → New block type, create new block
+ *
+ * TOOL CALL FLOW:
+ * 1. Server sends { k: 'load', t: 'tool' } → We create a 'tool' loading block (inline spinner)
+ * 2. Server sends { k: 'table', h: [...], r: [...] } → Early guard strips the tool loading block,
+ *    then the normal handler creates the result block as usual
  */
 export function updateBlocks(
   existingBlocks: UIBlock[],
   part: ChatResponse,
 ): UIBlock[] {
+  // Strip tool loading block before any handler runs — the next event
+  // carries the actual result and will create the real block via normal paths.
+  if (part.k !== 'load') {
+    const lastBlock = existingBlocks[existingBlocks.length - 1];
+    if (lastBlock?.key === 'tool' && lastBlock.status === 'loading') {
+      existingBlocks = existingBlocks.slice(0, -1);
+    }
+  }
+
   // Handle 'load' key: create empty block with loading status
   if (part.k === 'load' && part.t) {
     return [
