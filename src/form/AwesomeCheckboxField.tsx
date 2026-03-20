@@ -42,7 +42,7 @@ export const AwesomeCheckboxField: FunctionComponent<
   >
     <Form.Check
       id={'check-' + input.name}
-      checked={input.value}
+      checked={input.checked ?? input.value}
       onChange={(e: React.ChangeEvent<any>) => {
         input.onChange(e.target.checked);
         if (onChange) onChange(e.target.checked);
