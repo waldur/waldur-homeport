@@ -76,6 +76,7 @@ export const ResourceDetailsHero = ({
               labeled
               drop="down"
               disabled={offering.state === 'Unavailable'}
+              size="sm"
             />
           </div>
         }

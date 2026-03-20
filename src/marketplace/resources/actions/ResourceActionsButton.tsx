@@ -17,6 +17,7 @@ interface ResourceActionsButtonProps {
   labeled?: boolean;
   drop?: DropDirection;
   disabled?: boolean;
+  size?: 'sm' | 'lg';
 }
 
 export const ResourceActionsButton: FunctionComponent<
@@ -36,6 +37,7 @@ export const ResourceActionsButton: FunctionComponent<
       labeled={props.labeled}
       drop={props.drop}
       disabled={props.disabled}
+      size={props.size}
     />
   );
 };
