@@ -109,21 +109,31 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
               uuid: resource?.uuid,
             },
             query: {
-              field: ['state', 'order_in_progress'],
+              field: [
+                'state',
+                'order_in_progress',
+                // provider_message is an Order field, not a Resource field,
+                // but the backend field filter also applies to the nested
+                // order_in_progress serializer, so including it here ensures
+                // the nested order object contains provider_message.
+                'provider_message' as any,
+              ],
             },
           }).then((r) => r.data)
         : null,
 
     refetchInterval: 10 * 1000,
-    enabled: resource?.state !== 'OK' && !!resource?.order_in_progress,
+    enabled: !!resource?.order_in_progress || resource?.state !== 'OK',
   });
-  // Check if resource state is changed
+  // Check if resource state or order details changed
   useEffect(() => {
     if (!resourceState || !resource) return;
     if (
       resourceState.state !== resource.state ||
       resourceState.order_in_progress?.state !==
-        resource.order_in_progress?.state
+        resource.order_in_progress?.state ||
+      resourceState.order_in_progress?.provider_message !==
+        resource.order_in_progress?.provider_message
     ) {
       refetchResource();
     }
