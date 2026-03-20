@@ -6,26 +6,22 @@ import { openstackInstancesUpdatePorts } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
-import { Option } from '@waldur/marketplace/common/registry';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { loadSubnets } from '@waldur/openstack/api';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
-import { formatSubnet } from '../../utils';
+interface PortFormEntry {
+  subnet: any;
+  fixed_ip?: string;
+}
 
 interface UpdatePortsFormData {
-  ports: Option[];
+  ports: PortFormEntry[];
 }
 
 export const useUpdatePortsForm = (resource: OpenStackInstance, refetch) => {
   const asyncState = useAsync(
-    () =>
-      loadSubnets({ tenant_uuid: resource.tenant_uuid }).then((subnets) =>
-        subnets.map((subnet) => ({
-          label: formatSubnet(subnet),
-          value: subnet.url,
-        })),
-      ),
+    () => loadSubnets({ tenant_uuid: resource.tenant_uuid }),
     [resource.tenant_uuid],
   );
   const dispatch = useDispatch();
@@ -34,9 +30,20 @@ export const useUpdatePortsForm = (resource: OpenStackInstance, refetch) => {
       await openstackInstancesUpdatePorts({
         path: { uuid: resource.uuid },
         body: {
-          ports: formData.ports.map((item) => ({
-            subnet: item.value,
-          })),
+          ports: formData.ports.map((item) => {
+            const port: any = {
+              subnet: item.subnet.url,
+            };
+            if (item.fixed_ip) {
+              port.fixed_ips = [
+                {
+                  ip_address: item.fixed_ip,
+                  subnet_id: item.subnet.backend_id,
+                },
+              ];
+            }
+            return port;
+          }),
         },
       });
       dispatch(
@@ -57,15 +64,27 @@ export const useUpdatePortsForm = (resource: OpenStackInstance, refetch) => {
       );
     }
   };
-  const initialValues = useMemo<UpdatePortsFormData>(
-    () => ({
-      ports: resource.ports.map((item) => ({
-        value: item.subnet,
-        label: formatSubnet({ name: item.subnet_name, cidr: item.subnet_cidr }),
-      })),
-    }),
-    [resource.ports],
-  );
+
+  // Build initial values by matching current ports to full subnet objects
+  const initialValues = useMemo<UpdatePortsFormData>(() => {
+    const subnets = asyncState.value;
+    return {
+      ports: resource.ports.map((item) => {
+        // Use full subnet object from the loaded list for backend_id/allocation_pools
+        const fullSubnet = subnets?.find((s) => s.uuid === item.subnet_uuid);
+        return {
+          subnet: fullSubnet || {
+            url: item.subnet,
+            name: item.subnet_name,
+            cidr: item.subnet_cidr,
+            uuid: item.subnet_uuid,
+          },
+          fixed_ip: item.fixed_ips?.[0]?.ip_address,
+        };
+      }),
+    };
+  }, [resource.ports, asyncState.value]);
+
   return { resource, asyncState, submitRequest, initialValues };
 };
 
@@ -78,4 +97,5 @@ export const connectForm = reduxForm<
   UpdateInternalIpsOwnProps
 >({
   form: FORM_NAME,
+  enableReinitialize: true,
 });
