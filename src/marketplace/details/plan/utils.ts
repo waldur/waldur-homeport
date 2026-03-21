@@ -381,7 +381,10 @@ export const getPrepaidCostParts = (
 
   // The component.amount is the total for the whole period.
   // We need the base amount per month for the details string.
-  const baseAmount = component.amount / durationInMonths;
+  const baseAmount =
+    durationInMonths > 0
+      ? component.amount / durationInMonths
+      : component.amount;
 
   const formattedPrice = formatCurrency(component.price, currency, 4);
   const calculationBase = `(${baseAmount} ${component.measured_unit} × ${formattedPrice})`;
