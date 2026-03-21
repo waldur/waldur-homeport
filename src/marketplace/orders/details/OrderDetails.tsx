@@ -159,7 +159,7 @@ const PageHero = ({ isRefetching, ...props }: OrderDetailsProps) => (
       </>
     }
   >
-    <OrderDetailsHeaderBody order={props.order} />
+    <OrderDetailsHeaderBody order={props.order} offering={props.offering} />
   </PublicDashboardHero>
 );
 

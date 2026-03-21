@@ -8,8 +8,41 @@ import { Field } from '@waldur/resource/summary';
 
 import { getOrderType } from '../utils';
 
-export const OrderDetailsHeaderBody = ({ order }) => {
+const PurchaseOrderBadge = ({ order, offering }) => {
+  const requireUpload = offering?.plugin_options?.require_purchase_order_upload;
+  const enableUpload = offering?.plugin_options?.enable_purchase_order_upload;
+
+  if (!enableUpload && !requireUpload) return null;
+
+  if (order.attachment) {
+    return (
+      <Badge variant="success" size="sm" pill outline>
+        {translate('Uploaded')}
+      </Badge>
+    );
+  }
+
+  if (requireUpload) {
+    return (
+      <Badge variant="warning" size="sm" pill outline>
+        {translate('Required')}
+      </Badge>
+    );
+  }
+
+  return (
+    <Badge variant="default" size="sm" pill outline>
+      {translate('Optional')}
+    </Badge>
+  );
+};
+
+export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
   const typeBadge = useMemo(() => getOrderType(order), [order]);
+
+  const showPurchaseOrder =
+    offering?.plugin_options?.enable_purchase_order_upload ||
+    offering?.plugin_options?.require_purchase_order_upload;
 
   return (
     <Row>
@@ -54,6 +87,17 @@ export const OrderDetailsHeaderBody = ({ order }) => {
           valueCol="auto"
         />
       </Col>
+      {showPurchaseOrder && (
+        <Col sm="auto">
+          <Field
+            label={translate('Purchase order')}
+            value={<PurchaseOrderBadge order={order} offering={offering} />}
+            labelClass="w-125px"
+            labelCol="auto"
+            valueCol="auto"
+          />
+        </Col>
+      )}
     </Row>
   );
 };

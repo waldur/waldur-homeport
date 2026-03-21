@@ -1,8 +1,9 @@
-import { InfoIcon } from '@phosphor-icons/react';
+import { InfoIcon, WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { ProgressSteps } from '@waldur/core/ProgressSteps';
 import { translate } from '@waldur/i18n';
@@ -62,7 +63,7 @@ const getTranslatedOrderType = (type) =>
       ? translate('Termination')
       : translate('Change');
 
-const getSteps = (resource: Resource) => {
+const getSteps = (resource: Resource, offering?: PublicOfferingDetails) => {
   const order = resource.order_in_progress;
   const steps: Array<{ label; description?; completed; variant? }> = [];
   steps.push({
@@ -77,19 +78,40 @@ const getSteps = (resource: Resource) => {
   });
 
   const isStep2Completed = order.state !== 'pending-consumer';
+  const purchaseOrderNeeded =
+    !isStep2Completed &&
+    offering?.plugin_options?.require_purchase_order_upload &&
+    !order.attachment;
+  const step2Description: any[] = [];
+  if (isStep2Completed) {
+    step2Description.push(
+      [
+        order.consumer_reviewed_by_full_name,
+        formatDateTime(order.consumer_reviewed_at),
+      ].join(', '),
+    );
+  } else {
+    step2Description.push(translate('Pending organization approval'));
+    if (purchaseOrderNeeded) {
+      step2Description.push(
+        <Badge
+          variant="warning"
+          size="sm"
+          leftIcon={<WarningIcon weight="bold" />}
+          outline
+        >
+          {translate('Purchase order required')}
+        </Badge>,
+      );
+    }
+  }
   steps.push({
     label: isStep2Completed
       ? translate('Approved')
       : translate('Pending approval'),
-    description: isStep2Completed
-      ? [
-          [
-            order.consumer_reviewed_by_full_name,
-            formatDateTime(order.consumer_reviewed_at),
-          ].join(', '),
-        ]
-      : [translate('Pending organization approval')],
+    description: step2Description,
     completed: isStep2Completed,
+    ...(purchaseOrderNeeded && { variant: 'warning' as const }),
   });
 
   const isStep3Completed = !['pending-consumer', 'pending-provider'].includes(
@@ -178,7 +200,7 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   if (!resource.order_in_progress) {
     return null;
   }
-  const steps = getSteps(resource);
+  const steps = getSteps(resource, offering);
   return (
     <div className="container-fluid mt-6">
       <Card className="card-bordered border-gray-300 border-dashed border-1 overflow-hidden">
