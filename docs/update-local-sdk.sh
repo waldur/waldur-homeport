@@ -29,22 +29,22 @@ echo "HomePort:   $WH2_PATH"
 echo ""
 
 # Step 1: Generate OpenAPI schema
-echo "[1/8] Generating OpenAPI schema..."
+echo "[1/9] Generating OpenAPI schema..."
 cd "$MASTERMIND_PATH"
 uv run waldur spectacular --file waldur-openapi-schema.yaml --fail-on-warn
 echo "      Schema generated: waldur-openapi-schema.yaml"
 
 # Step 2: Generate TypeScript code
-echo "[2/8] Generating TypeScript from schema..."
+echo "[2/9] Generating TypeScript from schema..."
 npx --yes @hey-api/openapi-ts@0.77.0
 
 # Step 3: Post-processing
-echo "[3/8] Post-processing generated code..."
+echo "[3/9] Post-processing generated code..."
 sed -i.bak '/querySerializer: {/,/},/d' waldur-typescript-sdk/sdk.gen.ts && rm waldur-typescript-sdk/sdk.gen.ts.bak
 sed -i.bak $'1i\\\nexport { formDataBodySerializer, RequestResult } from "./client";' waldur-typescript-sdk/index.ts && rm waldur-typescript-sdk/index.ts.bak
 
 # Step 4: Generate SDK reference catalog
-echo "[4/8] Generating SDK reference catalog..."
+echo "[4/9] Generating SDK reference catalog..."
 uv run python "$WH2_PATH/docs/generate-sdk-catalog.py" waldur-openapi-schema.yaml "$JS_CLIENT_PATH/SDK-REFERENCE.md"
 # Ensure SDK-REFERENCE.md is included in npm package
 python3 -c "
@@ -57,20 +57,34 @@ if 'SDK-REFERENCE.md' not in pkg.get('files', []):
     print('      Added SDK-REFERENCE.md to package.json files')
 "
 
-# Step 5: Copy to js-client and build
-echo "[5/8] Copying to js-client and building..."
+# Step 5: Generate CLAUDE.md for js-client
+echo "[5/9] Generating CLAUDE.md for js-client..."
+uv run python "$WH2_PATH/docs/generate-sdk-claude-md.py" waldur-openapi-schema.yaml "$JS_CLIENT_PATH/CLAUDE.md"
+# Ensure CLAUDE.md is included in npm package
+python3 -c "
+import json, pathlib
+p = pathlib.Path('$JS_CLIENT_PATH/package.json')
+pkg = json.loads(p.read_text())
+if 'CLAUDE.md' not in pkg.get('files', []):
+    pkg.setdefault('files', []).append('CLAUDE.md')
+    p.write_text(json.dumps(pkg, indent=2) + '\n')
+    print('      Added CLAUDE.md to package.json files')
+"
+
+# Step 6: Copy to js-client and build
+echo "[6/9] Copying to js-client and building..."
 cp -rf waldur-typescript-sdk/* "$JS_CLIENT_PATH/src/"
 cd "$JS_CLIENT_PATH"
 yarn build
 
-# Step 6: Link in HomePort
-echo "[6/8] Linking in HomePort..."
+# Step 7: Link in HomePort
+echo "[7/9] Linking in HomePort..."
 yarn link 2>/dev/null || true
 cd "$WH2_PATH"
 yarn link waldur-js-client
 
-# Step 7: Generate enums and descriptions from Mastermind
-echo "[7/8] Generating enums and descriptions..."
+# Step 8: Generate enums and descriptions from Mastermind
+echo "[8/9] Generating enums and descriptions..."
 cd "$MASTERMIND_PATH"
 export DJANGO_SETTINGS_MODULE=waldur_core.server.doc_settings
 
@@ -84,8 +98,8 @@ uv run waldur print_permissions_description > /tmp/PermissionOptions.tsx
 echo "      Generated: permission_enums.ts, EventsEnums.ts, FeaturesEnums.ts,"
 echo "                 FeaturesDescription.ts, SettingsDescription.ts, PermissionOptions.tsx"
 
-# Step 8: Copy generated files to HomePort
-echo "[8/8] Copying enums to HomePort..."
+# Step 9: Copy generated files to HomePort
+echo "[9/9] Copying enums to HomePort..."
 mv /tmp/permission_enums.ts "$WH2_PATH/src/permissions/enums.ts"
 mv /tmp/EventsEnums.ts "$WH2_PATH/src/EventsEnums.ts"
 mv /tmp/FeaturesEnums.ts "$WH2_PATH/src/FeaturesEnums.ts"
