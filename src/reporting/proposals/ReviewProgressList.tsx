@@ -1,7 +1,9 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 
 import { Badge } from '@waldur/core/Badge';
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
+import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
@@ -12,6 +14,7 @@ import {
   generateReviewProgressData,
 } from './mockData';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
+import { StatusBreakdown } from './StatusBreakdown';
 import { ReviewProgressData } from './types';
 
 const tableActions = (
@@ -28,28 +31,41 @@ const CompletionRateColumn: FC<{ row: ReviewProgressData }> = ({ row }) => {
   );
 };
 
-const ReviewStatsColumn: FC<{ row: ReviewProgressData }> = ({ row }) => {
+const ReviewProgressExpandableRow: FC<{ row: ReviewProgressData }> = ({
+  row,
+}) => {
+  const statuses = [
+    {
+      key: 'done',
+      label: translate('Done'),
+      value: row.completed,
+      variant: 'outline-moss',
+    },
+    {
+      key: 'active',
+      label: translate('Active'),
+      value: row.in_progress,
+      variant: 'outline-success',
+    },
+    {
+      key: 'pending',
+      label: translate('Pending'),
+      value: row.pending,
+      variant: 'outline-warning',
+    },
+    {
+      key: 'declined',
+      label: translate('Declined'),
+      value: row.declined,
+      variant: 'outline-error',
+      hidden: row.declined === 0,
+    },
+  ];
+
   return (
-    <div className="d-flex gap-3">
-      <div className="d-flex flex-column text-center">
-        <span className="fw-semibold text-success">{row.completed}</span>
-        <span className="text-muted fs-9">{translate('Done')}</span>
-      </div>
-      <div className="d-flex flex-column text-center">
-        <span className="fw-semibold text-primary">{row.in_progress}</span>
-        <span className="text-muted fs-9">{translate('Active')}</span>
-      </div>
-      <div className="d-flex flex-column text-center">
-        <span className="fw-semibold text-warning">{row.pending}</span>
-        <span className="text-muted fs-9">{translate('Pending')}</span>
-      </div>
-      {row.declined > 0 && (
-        <div className="d-flex flex-column text-center">
-          <span className="fw-semibold text-danger">{row.declined}</span>
-          <span className="text-muted fs-9">{translate('Declined')}</span>
-        </div>
-      )}
-    </div>
+    <ExpandableContainer>
+      <StatusBreakdown statuses={statuses} />
+    </ExpandableContainer>
   );
 };
 
@@ -68,10 +84,6 @@ const columns: Column<ReviewProgressData>[] = [
     render: ({ row }) => (
       <span className="fw-semibold">{row.total_assigned}</span>
     ),
-  },
-  {
-    title: translate('Status breakdown'),
-    render: ReviewStatsColumn,
   },
   {
     title: translate('Completion'),
@@ -124,78 +136,48 @@ export const ReviewProgressList: FC = () => {
 
   const noop = useCallback(() => {}, []);
 
-  const summaryWidget = useMemo(
-    () => (
-      <div className="d-flex flex-wrap gap-4 py-4 px-2">
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold text-primary">
-            {summary.totalReviewers}
-          </span>
-          <span className="text-muted fs-7">
-            {translate('Active reviewers')}
-          </span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold">{summary.totalAssigned}</span>
-          <span className="text-muted fs-7">{translate('Total assigned')}</span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold text-success">
-            {summary.totalCompleted}
-          </span>
-          <span className="text-muted fs-7">{translate('Completed')}</span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold text-primary">
-            {summary.totalInProgress}
-          </span>
-          <span className="text-muted fs-7">{translate('In progress')}</span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold text-warning">
-            {summary.totalPending}
-          </span>
-          <span className="text-muted fs-7">{translate('Pending')}</span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold">{summary.overallCompletionRate}%</span>
-          <span className="text-muted fs-7">
-            {translate('Completion rate')}
-          </span>
-        </div>
-        <div className="d-flex flex-column">
-          <span className="fs-2 fw-bold">{summary.averageReviewTimeDays}</span>
-          <span className="text-muted fs-7">
-            {translate('Avg days/review')}
-          </span>
-        </div>
-      </div>
-    ),
-    [summary],
+  const [toggled, setToggled] = useState<Record<string, boolean>>({});
+
+  const toggleRow = useCallback(
+    (id: string) => {
+      setToggled((prev) => ({ ...prev, [id]: !prev[id] }));
+    },
+    [setToggled],
   );
 
   return (
-    <Table<ReviewProgressData>
-      title={translate('Review progress')}
-      columns={columns}
-      rows={filteredData}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
-      hasQuery
-      query={query}
-      setQuery={setQuery}
-      verboseName={translate('reviewers')}
-      filters={summaryWidget}
-      filterPosition="header"
-      tableActions={tableActions}
-    />
+    <>
+      <div className="table-standalone-header">
+        <h1 className="mb-0 fs-1x">{translate('Review progress')}</h1>
+      </div>
+
+      <SummaryWidget stats={summary} />
+
+      <Table<ReviewProgressData>
+        columns={columns}
+        rows={filteredData}
+        fetch={noop}
+        loading={false}
+        error={null}
+        activeColumns={{}}
+        columnPositions={[]}
+        resetSelection={noop}
+        setFilterPosition={noop}
+        initColumnPositions={noop}
+        resetPagination={noop}
+        hasPagination={false}
+        hasQuery
+        query={query}
+        setQuery={setQuery}
+        verboseName={translate('reviewers')}
+        filterPosition="header"
+        tableActions={tableActions}
+        hideTitle
+        hideRefresh
+        expandableRow={ReviewProgressExpandableRow}
+        toggleRow={toggleRow}
+        toggled={toggled}
+      />
+    </>
   );
 };

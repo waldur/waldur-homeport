@@ -7,7 +7,7 @@ import {
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback } from 'react';
-import { Card, Form, InputGroup } from 'react-bootstrap';
+import { Card, Col, Form, InputGroup, Row } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
@@ -167,21 +167,26 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
   const isNegative = result.change < 0;
 
   return (
-    <div className="d-flex justify-content-between align-items-center py-2 border-bottom">
-      <div>
+    <div className="row align-items-center py-2 border-bottom">
+      {/* Column 1: Label */}
+      <div className="col-4">
         <span className="fw-semibold">{result.label}</span>
         {result.unit && (
           <span className="text-muted ms-1">({result.unit})</span>
         )}
       </div>
-      <div className="d-flex align-items-center gap-3">
-        <span className="text-muted">
-          {result.originalValue.toLocaleString()}
-        </span>
-        <span className="text-muted">&rarr;</span>
-        <span className="fw-bold">
+
+      {/* Column 2: Values */}
+      <div className="col-5 d-flex align-items-center gap-2 text-muted">
+        <span>{result.originalValue.toLocaleString()}</span>
+        <span>&rarr;</span>
+        <span className="fw-bold text-dark">
           {result.simulatedValue.toLocaleString()}
         </span>
+      </div>
+
+      {/* Column 3: Change */}
+      <div className="col-3 text-end">
         {(isPositive || isNegative) && (
           <span
             className={classNames(
@@ -227,60 +232,65 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
         />
       </div>
 
-      {/* Parameter inputs */}
-      <Card className="mb-4">
-        <Card.Body>
-          {params.map((param) => (
-            <div key={param.id} className="mb-3">
-              <Form.Label className="d-flex justify-content-between">
-                <span>{param.label}</span>
-                {param.description && (
-                  <small className="text-muted">{param.description}</small>
-                )}
-              </Form.Label>
-              <ParamInput
-                param={param}
-                value={paramValues[param.id]}
-                onChange={(value) => setParam(param.id, value)}
-              />
-            </div>
-          ))}
-
-          {hasChanges && (
-            <CompactSubmitButton
-              submitting={false}
-              type="button"
-              variant="outline-secondary"
-              onClick={resetParams}
-              className="mt-2"
-              iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
-              iconOnLeft
-              label={translate('Reset to defaults')}
-            />
-          )}
-        </Card.Body>
-      </Card>
-
-      {/* Results */}
-      {results.length > 0 && (
-        <>
-          <h6 className="mb-3">{translate('Projected impact')}</h6>
-          <Card>
+      <Row>
+        <Col>
+          {/* Parameter inputs */}
+          <Card className="mb-4">
             <Card.Body>
-              {results.map((result) => (
-                <ResultRow key={result.id} result={result} />
+              {params.map((param) => (
+                <div key={param.id} className="mb-3">
+                  <Form.Label className="d-flex justify-content-between">
+                    <span>{param.label}</span>
+                    {param.description && (
+                      <small className="text-muted">{param.description}</small>
+                    )}
+                  </Form.Label>
+                  <ParamInput
+                    param={param}
+                    value={paramValues[param.id]}
+                    onChange={(value) => setParam(param.id, value)}
+                  />
+                </div>
               ))}
+
+              {hasChanges && (
+                <CompactSubmitButton
+                  submitting={false}
+                  type="button"
+                  variant="outline-secondary"
+                  onClick={resetParams}
+                  className="mt-2"
+                  iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+                  iconOnLeft
+                  label={translate('Reset to defaults')}
+                />
+              )}
             </Card.Body>
           </Card>
-        </>
-      )}
+        </Col>
+        <Col>
+          {/* Results */}
+          {results.length > 0 && (
+            <>
+              <h6 className="mb-3">{translate('Projected impact')}</h6>
+              <Card>
+                <Card.Body>
+                  {results.map((result) => (
+                    <ResultRow key={result.id} result={result} />
+                  ))}
+                </Card.Body>
+              </Card>
+            </>
+          )}
 
-      {results.length === 0 && hasChanges && (
-        <NoResult
-          title={translate('No data available')}
-          message={translate('Adjust parameters to see projected impact.')}
-        />
-      )}
+          {results.length === 0 && hasChanges && (
+            <NoResult
+              title={translate('No data available')}
+              message={translate('Adjust parameters to see projected impact.')}
+            />
+          )}
+        </Col>
+      </Row>
     </div>
   );
 };

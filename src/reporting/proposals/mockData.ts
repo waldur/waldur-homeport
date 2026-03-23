@@ -3,6 +3,8 @@
  * These simulate realistic data based on the Waldur proposal domain model
  */
 
+import { translate } from '@waldur/i18n/translate';
+
 import { isMockDataEnabled } from '../utils';
 
 import {
@@ -326,12 +328,6 @@ export function calculateCallPerformanceSummary(data: CallPerformanceData[]) {
   const totalAccepted = data.reduce((sum, d) => sum + d.proposals_accepted, 0);
   const totalRejected = data.reduce((sum, d) => sum + d.proposals_rejected, 0);
   const totalInReview = data.reduce((sum, d) => sum + d.proposals_in_review, 0);
-  const totalReviewsCompleted = data.reduce(
-    (sum, d) => sum + d.reviews_completed,
-    0,
-  );
-  const totalReviews = data.reduce((sum, d) => sum + d.total_reviews, 0);
-
   const dataWithScores = data.filter((d) => d.average_score !== null);
   const avgScore =
     dataWithScores.length > 0
@@ -339,25 +335,25 @@ export function calculateCallPerformanceSummary(data: CallPerformanceData[]) {
         dataWithScores.length
       : 0;
 
-  return {
-    activeCalls: activeCalls.length,
-    totalCalls: data.length,
-    totalProposals,
-    totalAccepted,
-    totalRejected,
-    totalInReview,
-    overallAcceptanceRate:
-      totalAccepted + totalRejected > 0
-        ? Math.round(
-            (totalAccepted / (totalAccepted + totalRejected)) * 100 * 10,
-          ) / 10
-        : 0,
-    reviewCompletionRate:
-      totalReviews > 0
-        ? Math.round((totalReviewsCompleted / totalReviews) * 100 * 10) / 10
-        : 0,
-    averageScore: Math.round(avgScore * 10) / 10,
-  };
+  const overallAcceptanceRate =
+    totalAccepted + totalRejected > 0
+      ? Math.round(
+          (totalAccepted / (totalAccepted + totalRejected)) * 100 * 10,
+        ) / 10
+      : 0;
+  const averageScore = Math.round(avgScore * 10) / 10;
+
+  return [
+    { label: translate('Active calls'), value: activeCalls.length },
+    { label: translate('Total proposals'), value: totalProposals },
+    { label: translate('Accepted'), value: totalAccepted },
+    { label: translate('In review'), value: totalInReview },
+    {
+      label: translate('Acceptance rate'),
+      value: `${overallAcceptanceRate}%`,
+    },
+    { label: translate('Avg review score'), value: averageScore },
+  ];
 }
 
 /**
@@ -380,16 +376,28 @@ export function calculateReviewProgressSummary(data: ReviewProgressData[]) {
         ) / dataWithTime.length
       : 0;
 
-  return {
-    totalReviewers,
-    totalAssigned,
-    totalCompleted,
-    totalPending,
-    totalInProgress,
-    overallCompletionRate:
-      totalAssigned > 0
-        ? Math.round((totalCompleted / totalAssigned) * 100 * 10) / 10
-        : 0,
-    averageReviewTimeDays: Math.round(avgTime * 10) / 10,
-  };
+  const overallCompletionRate =
+    totalAssigned > 0
+      ? Math.round((totalCompleted / totalAssigned) * 100 * 10) / 10
+      : 0;
+  const averageReviewTimeDays = Math.round(avgTime * 10) / 10;
+
+  return [
+    {
+      label: translate('Active reviewers'),
+      value: totalReviewers,
+    },
+    { label: translate('Total assigned'), value: totalAssigned },
+    { label: translate('Completed'), value: totalCompleted },
+    { label: translate('In progress'), value: totalInProgress },
+    { label: translate('Pending'), value: totalPending },
+    {
+      label: translate('Completion rate'),
+      value: `${overallCompletionRate}%`,
+    },
+    {
+      label: translate('Avg days/review'),
+      value: averageReviewTimeDays,
+    },
+  ];
 }
