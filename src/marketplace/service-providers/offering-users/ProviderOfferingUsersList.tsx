@@ -79,6 +79,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
               label={row.offering_name}
             />
           ),
+          export: 'offering_name',
           filter: 'offering',
           inlineFilter: (row) => ({
             name: row.offering_name,
@@ -93,6 +94,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
           {
             title: translate('Organization'),
             render: ({ row }) => row.customer_name,
+            export: 'customer_name',
             filter: 'provider',
             inlineFilter: (row) => ({
               customer_name: row.customer_name,
@@ -107,6 +109,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
           {
             title: translate('Account state'),
             render: OfferingUserStateField,
+            export: 'state',
           },
         ]
       : [];
@@ -130,6 +133,8 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
               </Badge>
             );
           },
+          export: (row) =>
+            row.has_consent ? translate('Accepted') : translate('Not accepted'),
         },
       ]
     : [];
@@ -174,6 +179,10 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
               badge
             );
           },
+          export: (row) =>
+            row.is_profile_complete
+              ? translate('Complete')
+              : translate('Incomplete'),
         },
       ]
     : [];
@@ -183,20 +192,29 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     {
       title: translate('User'),
       render: ({ row }) => row.user_full_name,
+      export: 'user_full_name',
+    },
+    {
+      title: translate('Username'),
+      render: ({ row }) => renderFieldOrDash(row.user_username),
+      export: 'user_username',
     },
     {
       title: translate('External username'),
       render: ({ row }) => renderFieldOrDash(row.username),
+      export: 'username',
       orderField: 'username',
     },
     {
       title: translate('Created'),
       render: ({ row }) => formatDateTime(row.created),
+      export: (row) => formatDateTime(row.created),
       orderField: 'created',
     },
     {
       title: translate('Modified'),
       render: ({ row }) => formatDateTime(row.modified),
+      export: (row) => formatDateTime(row.modified),
       orderField: 'modified',
     },
     ...stateColumn,
@@ -214,6 +232,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     <Table
       {...tableProps}
       columns={columns}
+      title={translate('Offering users')}
       verboseName={translate('Offering users')}
       showPageSizeSelector={true}
       filters={
@@ -230,13 +249,13 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       tableActions={
         tableActions ? (
           typeof tableActions === 'function' ? (
-            tableActions(tableProps)
+            tableActions({ ...tableProps, columns })
           ) : (
             tableActions
           )
         ) : portal?.additionalActions ? (
           typeof portal.additionalActions === 'function' ? (
-            portal.additionalActions(tableProps)
+            portal.additionalActions({ ...tableProps, columns })
           ) : (
             portal.additionalActions
           )
@@ -251,7 +270,7 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
               <TosReportingButton providerUuid={provider.customer_uuid} />
             )}
             <UserImportButton refetch={tableProps.fetch} provider={provider} />
-            <TableExportButton {...tableProps} />
+            <TableExportButton {...tableProps} columns={columns} />
             <CreateProviderOfferingUserButton
               refetch={tableProps.fetch}
               provider={provider}
