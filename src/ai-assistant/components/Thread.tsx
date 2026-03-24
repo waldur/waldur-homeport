@@ -214,11 +214,13 @@ const Composer: FC = () => {
           <ComposerAction showUsage={showUsage} setShowUsage={setShowUsage} />
         </div>
       </ComposerPrimitive.Root>
-      <p className="text-muted fs-8 text-center mb-0 mt-1">
-        {translate(
-          'AI may produce inaccurate responses. Do not share sensitive credentials.',
-        )}
-      </p>
+      {!noMessages ? (
+        <p className="text-muted fs-8 text-center mb-0 mt-1">
+          {translate(
+            'AI may produce inaccurate responses. Do not share sensitive credentials.',
+          )}
+        </p>
+      ) : null}
     </div>
   );
 };
