@@ -1,14 +1,30 @@
-import { useQuery } from '@tanstack/react-query';
-import { FC, useMemo } from 'react';
-import { assignmentBatchesRetrieve } from 'waldur-js-client';
+import { ShieldWarning } from '@phosphor-icons/react';
+import { useQuery, useQueryClient } from '@tanstack/react-query';
+import { FC, useCallback, useMemo } from 'react';
+import { useDispatch } from 'react-redux';
+import {
+  assignmentBatchesRetrieve,
+  assignmentItemsForceUnblock,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { openModalDialog } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
+
+const StaffOverrideDialog = lazyComponent(() =>
+  import('@waldur/proposals/StaffOverrideDialog').then((m) => ({
+    default: m.StaffOverrideDialog,
+  })),
+);
 
 interface AssignmentBatchExpandableRowProps {
   row: { uuid: string };
@@ -44,6 +60,31 @@ const StatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   );
 };
 
+const OverrideIndicator: FC<{
+  overrideReason: string;
+  overriddenBy?: string;
+  uuid: string;
+}> = ({ overrideReason, overriddenBy, uuid }) => (
+  <Tip
+    id={`override-${uuid}`}
+    label={
+      overriddenBy
+        ? translate('Overridden by {user}: {reason}', {
+            user: overriddenBy,
+            reason: overrideReason,
+          })
+        : translate('Override reason: {reason}', {
+            reason: overrideReason,
+          })
+    }
+  >
+    <Badge variant="warning" outline>
+      <ShieldWarning size={14} weight="bold" className="me-1" />
+      {translate('Overridden')}
+    </Badge>
+  </Tip>
+);
+
 // Helper to create client-side paginated fetcher
 const createClientPaginatedFetcher =
   <T,>(allData: T[]) =>
@@ -58,6 +99,9 @@ const createClientPaginatedFetcher =
 export const AssignmentBatchExpandableRow: FC<
   AssignmentBatchExpandableRowProps
 > = ({ row }) => {
+  const dispatch = useDispatch();
+  const queryClient = useQueryClient();
+
   const { data: batch, isLoading } = useQuery({
     queryKey: ['assignmentBatchDetails', row.uuid],
     queryFn: () =>
@@ -66,6 +110,12 @@ export const AssignmentBatchExpandableRow: FC<
       ),
     staleTime: 30000,
   });
+
+  const refetchBatch = useCallback(() => {
+    queryClient.invalidateQueries({
+      queryKey: ['assignmentBatchDetails', row.uuid],
+    });
+  }, [queryClient, row.uuid]);
 
   const fetchData = useMemo(
     () => createClientPaginatedFetcher(batch?.items || []),
@@ -76,6 +126,33 @@ export const AssignmentBatchExpandableRow: FC<
     table: `assignmentBatchItems-${row.uuid}`,
     fetchData,
   });
+
+  const handleForceUnblock = useCallback(
+    (item: { uuid: string; proposal_name?: string }) => {
+      dispatch(
+        openModalDialog(StaffOverrideDialog, {
+          resolve: {
+            onSubmit: (reason: string) =>
+              assignmentItemsForceUnblock({
+                path: { uuid: item.uuid },
+                body: { override_reason: reason },
+              }),
+            title: translate('Force unblock assignment'),
+            description: translate(
+              'This assignment item is blocked due to a conflict of interest. Forcing an unblock will allow the reviewer to proceed with reviewing the proposal "{proposal}". A reason is required for audit purposes.',
+              { proposal: item.proposal_name || '' },
+            ),
+            successMessage: translate('Assignment item unblocked.'),
+            errorMessage: translate('Failed to unblock assignment item.'),
+            submitLabel: translate('Force unblock'),
+            fetch: refetchBatch,
+          },
+          size: 'lg',
+        }),
+      );
+    },
+    [dispatch, refetchBatch],
+  );
 
   if (isLoading) {
     return (
@@ -117,10 +194,19 @@ export const AssignmentBatchExpandableRow: FC<
           {
             title: translate('Status'),
             render: ({ row: item }) => (
-              <StatusBadge
-                status={item.status}
-                statusDisplay={item.status_display}
-              />
+              <div className="d-flex align-items-center gap-2">
+                <StatusBadge
+                  status={item.status}
+                  statusDisplay={item.status_display}
+                />
+                {item.override_reason && (
+                  <OverrideIndicator
+                    overrideReason={item.override_reason}
+                    overriddenBy={item.overridden_by_name}
+                    uuid={item.uuid}
+                  />
+                )}
+              </div>
             ),
           },
           {
@@ -156,6 +242,19 @@ export const AssignmentBatchExpandableRow: FC<
         verboseName={translate('assignment items')}
         hasActionBar={false}
         minHeight="auto"
+        rowActions={({ row: item }) =>
+          item.status === 'coi_blocked' ? (
+            <ActionsDropdownComponent>
+              <ActionItem
+                title={translate('Force unblock')}
+                action={() => handleForceUnblock(item)}
+                iconNode={<ShieldWarning weight="bold" />}
+                iconColor="warning"
+                className="text-warning"
+              />
+            </ActionsDropdownComponent>
+          ) : null
+        }
       />
     </ExpandableContainer>
   );

@@ -1,7 +1,18 @@
-import { ClockIcon, EnvelopeSimple, WarningIcon } from '@phosphor-icons/react';
+import {
+  ClockIcon,
+  CopyIcon,
+  EnvelopeSimple,
+  ShieldWarning,
+  UserCheck,
+  WarningIcon,
+} from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
-import { callReviewerPoolsList, CallReviewerPool } from 'waldur-js-client';
+import {
+  callReviewerPoolsList,
+  callReviewerPoolsForceAccept,
+  CallReviewerPool,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
@@ -10,6 +21,9 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { Call } from '@waldur/proposals/types';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { showSuccess } from '@waldur/store/notify';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import {
   CallReviewerPoolsFilter,
@@ -31,6 +45,12 @@ const DirectEmailInviteDialog = lazyComponent(() =>
   ),
 );
 
+const StaffOverrideDialog = lazyComponent(() =>
+  import('@waldur/proposals/StaffOverrideDialog').then((m) => ({
+    default: m.StaffOverrideDialog,
+  })),
+);
+
 interface ReviewerPoolSectionProps {
   call: Call;
   refetch: () => void;
@@ -42,6 +62,9 @@ type CallReviewerPoolExtended = CallReviewerPool & {
   coi_by_severity?: Record<string, number>;
   reviews_in_progress?: number;
   reviews_completed?: number;
+  override_reason?: string;
+  overridden_by_name?: string;
+  invitation_link?: string | null;
 };
 
 const InvitationStatusBadge: FC<{ status: string; statusDisplay: string }> = ({
@@ -85,6 +108,8 @@ const isExpired = (expiresAt: string | null): boolean => {
   return new Date(expiresAt) < new Date();
 };
 
+const FORCE_ACCEPT_STATUSES = ['pending', 'declined', 'expired'];
+
 export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
   const dispatch = useDispatch();
   const formFilters = useSelector(selectCallReviewerPoolsFilter);
@@ -112,6 +137,36 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
       }),
     );
   }, [call, tableProps.fetch, dispatch]);
+
+  const handleForceAccept = useCallback(
+    (row: CallReviewerPoolExtended) => {
+      dispatch(
+        openModalDialog(StaffOverrideDialog, {
+          resolve: {
+            onSubmit: (reason: string) =>
+              callReviewerPoolsForceAccept({
+                path: { uuid: row.uuid },
+                body: { override_reason: reason },
+              }),
+            title: translate('Force accept invitation'),
+            description: translate(
+              'This will force-accept the invitation for reviewer "{reviewer}", bypassing the normal invitation flow. A reason is required for audit purposes.',
+              {
+                reviewer:
+                  row.reviewer_name || row.invited_email || row.reviewer_email,
+              },
+            ),
+            successMessage: translate('Invitation force-accepted.'),
+            errorMessage: translate('Failed to force-accept invitation.'),
+            submitLabel: translate('Force accept'),
+            fetch: tableProps.fetch,
+          },
+          size: 'lg',
+        }),
+      );
+    },
+    [dispatch, tableProps.fetch],
+  );
 
   const columns = useMemo(
     () => [
@@ -160,7 +215,7 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
       {
         id: 'status',
         title: translate('Status'),
-        render: ({ row }: { row: CallReviewerPool }) => (
+        render: ({ row }: { row: CallReviewerPoolExtended }) => (
           <div className="d-flex align-items-center gap-2">
             <InvitationStatusBadge
               status={row.invitation_status}
@@ -187,6 +242,26 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
                   {translate('Expired')}
                 </Badge>
               )}
+            {row.override_reason && (
+              <Tip
+                id={`override-${row.uuid}`}
+                label={
+                  row.overridden_by_name
+                    ? translate('Overridden by {user}: {reason}', {
+                        user: row.overridden_by_name,
+                        reason: row.override_reason,
+                      })
+                    : translate('Override reason: {reason}', {
+                        reason: row.override_reason,
+                      })
+                }
+              >
+                <Badge variant="warning" outline>
+                  <ShieldWarning size={14} weight="bold" className="me-1" />
+                  {translate('Overridden')}
+                </Badge>
+              </Tip>
+            )}
           </div>
         ),
         filter: 'invitation_status',
@@ -328,6 +403,42 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
       filters={<CallReviewerPoolsFilter />}
       hasOptionalColumns
       expandableRow={ReviewerPoolExpandableRow}
+      rowActions={({ row }: { row: CallReviewerPoolExtended }) => {
+        const showCopyLink = !!row.invitation_link;
+        const showForceAccept =
+          FORCE_ACCEPT_STATUSES.includes(row.invitation_status) &&
+          row.reviewer_uuid;
+
+        if (!showCopyLink && !showForceAccept) return null;
+
+        return (
+          <ActionsDropdownComponent>
+            {showCopyLink && (
+              <ActionItem
+                title={translate('Copy invitation link')}
+                action={() => {
+                  const link = `${location.origin}${row.invitation_link}`;
+                  navigator.clipboard.writeText(link).then(() => {
+                    dispatch(
+                      showSuccess(translate('Invitation link has been copied')),
+                    );
+                  });
+                }}
+                iconNode={<CopyIcon weight="bold" />}
+              />
+            )}
+            {showForceAccept && (
+              <ActionItem
+                title={translate('Force accept')}
+                action={() => handleForceAccept(row)}
+                iconNode={<UserCheck weight="bold" />}
+                iconColor="warning"
+                className="text-warning"
+              />
+            )}
+          </ActionsDropdownComponent>
+        );
+      }}
       tableActions={
         <>
           <PoolSummaryButton />
