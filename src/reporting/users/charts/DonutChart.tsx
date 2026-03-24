@@ -1,10 +1,10 @@
 import { EChartsOption } from 'echarts';
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import React, { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
+import { generateBrandColors } from '@waldur/core/generateColors';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 interface DonutChartItem {
   name: string;
@@ -13,7 +13,6 @@ interface DonutChartItem {
 }
 
 interface DonutChartProps {
-  title: string;
   data: DonutChartItem[];
   height?: string;
   showTotal?: boolean;
@@ -41,105 +40,93 @@ function prepareChartData(data: DonutChartItem[]): DonutChartItem[] {
 /**
  * Reusable donut chart component with centered total
  */
-export const DonutChart: FC<DonutChartProps> = ({
-  title,
-  data,
-  height = '300px',
-  showTotal = true,
-}) => {
-  const total = useMemo(
-    () => data.reduce((sum, item) => sum + item.value, 0),
-    [data],
-  );
-
-  const chartData = useMemo(() => prepareChartData(data), [data]);
-
-  const options = useMemo<EChartsOption>(
-    () => ({
-      tooltip: {
-        trigger: 'item',
-        formatter: (params: any) => {
-          const percent = ((params.value / total) * 100).toFixed(1);
-          return `${params.name}: ${params.value.toLocaleString()} (${percent}%)`;
-        },
-      },
-      legend: {
-        orient: 'vertical',
-        right: 10,
-        top: 'center',
-        type: 'scroll',
-      },
-      series: [
-        {
-          type: 'pie',
-          radius: ['50%', '80%'],
-          center: ['35%', '50%'],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 4,
-            borderColor: '#fff',
-            borderWidth: 2,
-          },
-          label: showTotal
-            ? {
-                show: true,
-                position: 'center',
-                formatter: () =>
-                  `{total|${total.toLocaleString()}}\n{label|${translate('Total')}}`,
-                rich: {
-                  total: {
-                    fontSize: 24,
-                    fontWeight: 'bold',
-                    color: '#181C32',
-                    lineHeight: 32,
-                  },
-                  label: {
-                    fontSize: 12,
-                    color: '#A1A5B7',
-                    lineHeight: 20,
-                  },
-                },
-              }
-            : { show: false },
-          emphasis: {
-            label: {
-              show: true,
-            },
-          },
-          labelLine: {
-            show: false,
-          },
-          data: chartData,
-        },
-      ],
-    }),
-    [chartData, total, showTotal],
-  );
-
-  if (data.length === 0) {
-    return (
-      <Card className="h-100">
-        <Card.Header>
-          <Card.Title>{title}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        </Card.Body>
-      </Card>
+export const DonutChart = React.forwardRef<any, DonutChartProps>(
+  ({ data, height = '300px', showTotal = true }, ref) => {
+    const total = useMemo(
+      () => data.reduce((sum, item) => sum + item.value, 0),
+      [data],
     );
-  }
 
-  return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{title}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <EChart options={options} height={height} />
-      </Card.Body>
-    </Card>
-  );
-};
+    const chartData = useMemo(() => prepareChartData(data), [data]);
+
+    const brandColors = useMemo(() => generateBrandColors(getBrandColor()), []);
+    const palette = useMemo(
+      () => [
+        brandColors['600'],
+        brandColors['400'],
+        brandColors['800'],
+        brandColors['300'],
+        brandColors['900'],
+        brandColors['500'],
+        brandColors['700'],
+        brandColors['200'],
+      ],
+      [brandColors],
+    );
+
+    const options = useMemo<EChartsOption>(
+      () => ({
+        color: palette,
+        tooltip: {
+          trigger: 'item',
+          formatter: (params: any) => {
+            const percent = ((params.value / total) * 100).toFixed(1);
+            return `${params.name}: ${params.value.toLocaleString()} (${percent}%)`;
+          },
+        },
+        legend: {
+          orient: 'vertical',
+          right: 10,
+          top: 'center',
+          type: 'scroll',
+        },
+        series: [
+          {
+            type: 'pie',
+            radius: ['50%', '80%'],
+            center: ['35%', '50%'],
+            avoidLabelOverlap: false,
+            itemStyle: {
+              borderRadius: 4,
+              borderColor: '#fff',
+              borderWidth: 2,
+            },
+            label: showTotal
+              ? {
+                  show: true,
+                  position: 'center',
+                  formatter: () =>
+                    `{total|${total.toLocaleString()}}\n{label|${translate('Total')}}`,
+                  rich: {
+                    total: {
+                      fontSize: 24,
+                      fontWeight: 'bold',
+                      color: '#181C32',
+                      lineHeight: 32,
+                    },
+                    label: {
+                      fontSize: 12,
+                      color: '#A1A5B7',
+                      lineHeight: 20,
+                    },
+                  },
+                }
+              : { show: false },
+            emphasis: {
+              label: {
+                show: true,
+              },
+            },
+            labelLine: {
+              show: false,
+            },
+            data: chartData,
+          },
+        ],
+      }),
+      [chartData, total, showTotal],
+    );
+
+    return <EChart ref={ref} options={options} height={height} />;
+  },
+);

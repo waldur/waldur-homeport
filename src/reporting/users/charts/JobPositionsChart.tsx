@@ -1,10 +1,12 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 
 import { UserJobTitleCount } from '../types';
 
+import { ChartCard } from './ChartCard';
 import { DonutChart } from './DonutChart';
+import { getChartExportData } from './utils';
 
 interface JobPositionsChartProps {
   data: UserJobTitleCount[];
@@ -16,14 +18,25 @@ interface JobPositionsChartProps {
 export const JobPositionsChart: FC<JobPositionsChartProps> = ({ data }) => {
   const chartData = useMemo(
     () =>
-      data.map((item) => ({
+      (data || []).map((item) => ({
         name: item.job_title || translate('Not specified'),
         value: item.count,
       })),
     [data],
   );
 
+  const getExportData = useCallback(
+    () => getChartExportData(translate('Job position'), chartData),
+    [chartData],
+  );
+
   return (
-    <DonutChart title={translate('Users by job position')} data={chartData} />
+    <ChartCard
+      title={translate('Job positions')}
+      getExportData={getExportData}
+      isEmpty={!data || data.length === 0}
+    >
+      {(ref) => <DonutChart ref={ref} data={chartData} />}
+    </ChartCard>
   );
 };

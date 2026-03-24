@@ -1,12 +1,12 @@
 import { EChartsOption } from 'echarts';
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 import { OfferingCost } from 'waldur-js-client';
 
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 interface OfferingCostsChartProps {
   data: OfferingCost[];
@@ -63,7 +63,7 @@ export const OfferingCostsChart: FC<OfferingCostsChartProps> = ({ data }) => {
           type: 'bar',
           data: chartData.map((item) => item.cost),
           itemStyle: {
-            color: '#009ef7',
+            color: getBrandColor(),
             borderRadius: [0, 4, 4, 0],
           },
           label: {
@@ -77,30 +77,21 @@ export const OfferingCostsChart: FC<OfferingCostsChartProps> = ({ data }) => {
     [chartData, total],
   );
 
-  if (data.length === 0) {
-    return (
-      <Card className="h-100">
-        <Card.Header>
-          <Card.Title>{translate('Top offerings by cost')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        </Card.Body>
-      </Card>
-    );
-  }
+  const getExportData = useCallback(
+    () => ({
+      fields: [translate('Offering'), translate('Cost')],
+      data: data.map((item) => [item.offering_name, item.cost]),
+    }),
+    [data],
+  );
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('Top offerings by cost')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <EChart options={options} height="400px" />
-      </Card.Body>
-    </Card>
+    <ChartCard
+      title={translate('Top offerings by cost')}
+      getExportData={getExportData}
+      isEmpty={data.length === 0}
+    >
+      {(ref) => <EChart ref={ref} options={options} height="400px" />}
+    </ChartCard>
   );
 };

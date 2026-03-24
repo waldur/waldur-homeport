@@ -1,7 +1,9 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { formatFilesize } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface SummaryData {
   totalInstances: number;
@@ -11,61 +13,38 @@ interface SummaryData {
   totalDiskMb: number;
 }
 
-interface SummaryCardProps {
-  title: string;
-  value: number | string;
-  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info';
-}
-
-const SummaryCard: FC<SummaryCardProps> = ({
-  title,
-  value,
-  variant = 'primary',
-}) => {
-  const colorClasses: Record<string, string> = {
-    primary: 'bg-light-primary text-primary',
-    success: 'bg-light-success text-success',
-    warning: 'bg-light-warning text-warning',
-    danger: 'bg-light-danger text-danger',
-    info: 'bg-light-info text-info',
-  };
-
-  return (
-    <div className="col-sm-6 col-xl-2">
-      <div className={`card card-flush h-100 ${colorClasses[variant]}`}>
-        <div className="card-body py-5">
-          <div className="fs-4 fw-bold mb-2">{title}</div>
-          <div className="fs-2hx fw-bolder">{value}</div>
-        </div>
-      </div>
-    </div>
-  );
-};
-
 interface OpenstackInstancesSummaryCardsProps {
   summary: SummaryData;
 }
 
 export const OpenstackInstancesSummaryCards: FC<
   OpenstackInstancesSummaryCardsProps
-> = ({ summary }) => (
-  <div className="row g-5 mb-6">
-    <SummaryCard
-      title={translate('Total instances')}
-      value={summary.totalInstances}
-    />
-    <SummaryCard
-      title={translate('Active instances')}
-      value={summary.activeInstances}
-    />
-    <SummaryCard title={translate('Total vCPUs')} value={summary.totalCores} />
-    <SummaryCard
-      title={translate('Total RAM')}
-      value={formatFilesize(summary.totalRamMb)}
-    />
-    <SummaryCard
-      title={translate('Total disk')}
-      value={formatFilesize(summary.totalDiskMb)}
-    />
-  </div>
-);
+> = ({ summary }) => {
+  const stats = useMemo(
+    () => [
+      {
+        label: translate('Total instances'),
+        value: renderFieldOrDash(summary.totalInstances),
+      },
+      {
+        label: translate('Active instances'),
+        value: renderFieldOrDash(summary.activeInstances),
+      },
+      {
+        label: translate('Total vCPUs'),
+        value: renderFieldOrDash(summary.totalCores),
+      },
+      {
+        label: translate('Total RAM'),
+        value: renderFieldOrDash(formatFilesize(summary.totalRamMb)),
+      },
+      {
+        label: translate('Total disk'),
+        value: renderFieldOrDash(formatFilesize(summary.totalDiskMb)),
+      },
+    ],
+    [summary],
+  );
+
+  return <SummaryWidget stats={stats} />;
+};

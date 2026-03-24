@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -9,7 +8,6 @@ import {
   ProviderCustomerStats,
 } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -17,11 +15,14 @@ import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { useTitle } from '@waldur/navigation/title';
+import { ExportData } from '@waldur/table/exporters/types';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ChartCard } from '../users/charts/ChartCard';
 
+import { CustomerAcquisitionTrendChart } from './CustomerAcquisitionTrendChart';
 import { ProviderFilter } from './ProviderFilter';
 
 interface TopCustomer {
@@ -50,40 +51,25 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
     enabled: !!providerUuid,
   });
 
-  const monthlyChartOptions = useMemo(() => {
-    if (!data?.monthly || (data.monthly as unknown[]).length === 0) return null;
+  const getTopRevenueExportData = useMemo(
+    () => (): ExportData => ({
+      fields: [translate('Customer'), translate('Revenue')],
+      data: ((data?.top_by_revenue as unknown as TopCustomer[]) || []).map(
+        (c) => [c.customer_name, c.revenue || 0],
+      ),
+    }),
+    [data?.top_by_revenue],
+  );
 
-    const monthly = data.monthly as unknown as MonthlyData[];
-    const months = monthly.map((m) =>
-      DateTime.fromFormat(m.month, 'yyyy-MM').toFormat('MMM yyyy'),
-    );
-    const counts = monthly.map((m) => m.customer_count);
-
-    return {
-      tooltip: { trigger: 'axis' },
-      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-      xAxis: {
-        type: 'category',
-        data: months,
-        axisLabel: { rotate: 45 },
-      },
-      yAxis: {
-        type: 'value',
-        name: translate('New customers'),
-        minInterval: 1,
-      },
-      series: [
-        {
-          name: translate('New customers'),
-          type: 'line',
-          data: counts,
-          smooth: true,
-          itemStyle: { color: '#50cd89' },
-          areaStyle: { color: 'rgba(80, 205, 137, 0.1)' },
-        },
-      ],
-    };
-  }, [data]);
+  const getTopResourcesExportData = useMemo(
+    () => (): ExportData => ({
+      fields: [translate('Customer'), translate('Resources')],
+      data: ((data?.top_by_resources as unknown as TopCustomer[]) || []).map(
+        (c) => [c.customer_name, c.resource_count || 0],
+      ),
+    }),
+    [data?.top_by_resources],
+  );
 
   const revenueColumns: Column<TopCustomer>[] = useMemo(
     () => [
@@ -156,35 +142,20 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
 
       <Row className="g-4 mb-6">
         <Col xs={12}>
-          <Card>
-            <Card.Header>
-              <Card.Title>
-                {translate('Customer acquisition trend (12 months)')}
-              </Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {monthlyChartOptions ? (
-                <EChart options={monthlyChartOptions} height="300px" />
-              ) : (
-                <NoResult
-                  title={translate('No data available')}
-                  message={translate(
-                    'Try adjusting your filters or date range.',
-                  )}
-                />
-              )}
-            </Card.Body>
-          </Card>
+          <CustomerAcquisitionTrendChart
+            monthly={(data.monthly as unknown as MonthlyData[]) || []}
+          />
         </Col>
       </Row>
 
       <Row className="g-4">
         <Col xs={12} lg={6}>
-          <Card>
-            <Card.Header>
-              <Card.Title>{translate('Top customers by revenue')}</Card.Title>
-            </Card.Header>
-            <Card.Body className="p-0">
+          <ChartCard
+            title={translate('Top customers by revenue')}
+            getExportData={getTopRevenueExportData}
+            isEmpty={topByRevenue.length === 0}
+          >
+            {() => (
               <Table
                 columns={revenueColumns}
                 rows={topByRevenue}
@@ -200,15 +171,16 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
                 hasPagination={false}
                 hideRefresh
               />
-            </Card.Body>
-          </Card>
+            )}
+          </ChartCard>
         </Col>
         <Col xs={12} lg={6}>
-          <Card>
-            <Card.Header>
-              <Card.Title>{translate('Top customers by resources')}</Card.Title>
-            </Card.Header>
-            <Card.Body className="p-0">
+          <ChartCard
+            title={translate('Top customers by resources')}
+            getExportData={getTopResourcesExportData}
+            isEmpty={topByResources.length === 0}
+          >
+            {() => (
               <Table
                 columns={resourceColumns}
                 rows={topByResources}
@@ -224,8 +196,8 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
                 hasPagination={false}
                 hideRefresh
               />
-            </Card.Body>
-          </Card>
+            )}
+          </ChartCard>
         </Col>
       </Row>
     </>
@@ -242,7 +214,7 @@ export const ProviderCustomersPage: FC = () => {
   const providerUuid = formValues?.provider?.uuid;
 
   return (
-    <>
+    <div className="container-fluid py-6">
       <div className="d-flex flex-wrap gap-6 mb-6">
         <FormGroup
           label={translate('Provider')}
@@ -260,8 +232,9 @@ export const ProviderCustomersPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view customer statistics.',
           )}
+          callback={() => {}}
         />
       )}
-    </>
+    </div>
   );
 };

@@ -1,11 +1,10 @@
 import { EChartsOption } from 'echarts';
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 import { CustomerMemberCount } from 'waldur-js-client';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 interface RoleDistributionChartProps {
   data: CustomerMemberCount[];
@@ -79,44 +78,47 @@ export const RoleDistributionChart: FC<RoleDistributionChartProps> = ({
     [chartData, total],
   );
 
-  if (data.length === 0) {
-    return (
-      <Card className="h-100">
-        <Card.Header>
-          <Card.Title>{translate('Members by organization')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        </Card.Body>
-      </Card>
-    );
-  }
+  const getExportData = useCallback(
+    () => ({
+      fields: [
+        translate('Organization'),
+        translate('Members'),
+        translate('Abbreviation'),
+      ],
+      data: data.map((item) => [
+        item.name,
+        item.count,
+        item.abbreviation || '',
+      ]),
+    }),
+    [data],
+  );
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('Members by organization')}</Card.Title>
-        <div className="card-toolbar">
-          <span className="text-muted fs-7">
-            <span
-              className="bullet bullet-dot me-2"
-              style={{ backgroundColor: '#50cd89' }}
-            />
-            {translate('With resources')}
-            <span
-              className="bullet bullet-dot ms-4 me-2"
-              style={{ backgroundColor: '#a1a5b7' }}
-            />
-            {translate('Without resources')}
-          </span>
-        </div>
-      </Card.Header>
-      <Card.Body>
-        <EChart options={options} height="500px" />
-      </Card.Body>
-    </Card>
+    <ChartCard
+      title={translate('Members by organization')}
+      getExportData={getExportData}
+      isEmpty={data.length === 0}
+    >
+      {(ref) => (
+        <>
+          <div className="card-toolbar mb-4">
+            <span className="text-muted fs-7">
+              <span
+                className="bullet bullet-dot me-2"
+                style={{ backgroundColor: '#50cd89' }}
+              />
+              {translate('With resources')}
+              <span
+                className="bullet bullet-dot ms-4 me-2"
+                style={{ backgroundColor: '#a1a5b7' }}
+              />
+              {translate('Without resources')}
+            </span>
+          </div>
+          <EChart ref={ref} options={options} height="500px" />
+        </>
+      )}
+    </ChartCard>
   );
 };

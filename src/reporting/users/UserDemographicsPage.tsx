@@ -48,12 +48,10 @@ export const UserDemographicsPage: FC = () => {
   const summary = computeStatisticsSummary(data);
 
   return (
-    <div>
-      {/* Summary Cards */}
+    <>
       <SummaryCards summary={summary} />
 
-      {/* Authentication Charts Row */}
-      <Row className="mb-6 g-4">
+      <Row className="mb-6 g-6">
         <Col xs={12} lg={showIdentitySource ? 6 : 12}>
           <AuthMethodsChart data={data.authMethods} />
         </Col>
@@ -64,8 +62,7 @@ export const UserDemographicsPage: FC = () => {
         )}
       </Row>
 
-      {/* Status and Languages Row */}
-      <Row className="mb-6 g-4">
+      <Row className="mb-6 g-6">
         <Col xs={12} lg={6}>
           <ActiveStatusChart data={data.activeStatus} />
         </Col>
@@ -74,16 +71,14 @@ export const UserDemographicsPage: FC = () => {
         </Col>
       </Row>
 
-      {/* Registration Trend */}
-      <Row className="mb-6 g-4">
+      <Row className="mb-6 g-6">
         <Col xs={12}>
           <RegistrationTrendChart data={data.registrationTrend} />
         </Col>
       </Row>
 
-      {/* Organization Type and Job Position Row */}
       {(showOrganizationType || showJobTitle) && (
-        <Row className="mb-6 g-4">
+        <Row className="mb-6 g-6">
           {showOrganizationType && (
             <Col xs={12} lg={showJobTitle ? 6 : 12}>
               <OrganizationTypesChart data={data.organizationTypes} />
@@ -97,17 +92,13 @@ export const UserDemographicsPage: FC = () => {
         </Row>
       )}
 
-      {/* Link to analytics page when experimental is enabled */}
       {showExperimental && (
         <div className="mt-6 text-muted text-center">
-          <Link
-            state="reporting-user-demographics-analytics"
-            className="text-primary"
-          >
+          <Link state="reporting-user-analytics" className="text-primary">
             {translate('Advanced analytics available')}
           </Link>
         </div>
       )}
-    </div>
+    </>
   );
 };

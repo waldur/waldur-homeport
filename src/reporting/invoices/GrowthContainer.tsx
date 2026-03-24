@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useState } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { FC, useMemo, useState } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { invoicesGrowthRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
@@ -10,8 +10,10 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { ExportData } from '@waldur/table/exporters/types';
 
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ChartCard } from '../users/charts/ChartCard';
 
 import { formatGrowthChart } from './utils';
 
@@ -36,7 +38,7 @@ export const GrowthContainer: FC = () => {
   );
 
   const {
-    data: chartOptions,
+    data: growthData,
     isLoading,
     error,
     refetch,
@@ -50,38 +52,65 @@ export const GrowthContainer: FC = () => {
         },
         signal,
       });
-      return formatGrowthChart(response.data);
+      return response.data;
     },
   });
 
-  return (
-    <Card>
-      <Card.Header>
-        <Card.Title>{translate('Revenue growth')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <Row className="mb-6">
-          <Col sm={4} lg={3}>
-            <Select
-              placeholder={translate('Accounting status')}
-              value={accountingFilter}
-              onChange={(value: AccountingOption) => setAccountingFilter(value)}
-              options={accountingOptions}
-              isClearable={false}
-              className="metronic-select-container"
-              classNamePrefix="metronic-select"
-            />
-          </Col>
-        </Row>
+  const chartOptions = useMemo(
+    () => formatGrowthChart(growthData),
+    [growthData],
+  );
 
-        {isLoading ? (
-          <LoadingSpinner />
-        ) : error ? (
-          <LoadingErred loadData={refetch} />
-        ) : (
-          <EChart options={chartOptions} height="400px" />
-        )}
-      </Card.Body>
-    </Card>
+  const getExportData = (): ExportData => {
+    if (!growthData) return { fields: [], data: [] };
+    const fields = [
+      translate('Period'),
+      translate('Total'),
+      ...growthData.customer_periods.map((cp) => cp.name),
+      translate('Others'),
+    ];
+    const data = growthData.periods.map((period, i) => [
+      period,
+      growthData.total_periods[i],
+      ...growthData.customer_periods.map((cp) => cp.periods[i]),
+      growthData.other_periods[i],
+    ]);
+    return { fields, data };
+  };
+
+  return (
+    <ChartCard
+      title={translate('Revenue growth')}
+      getExportData={getExportData}
+      isEmpty={!growthData || growthData.periods.length === 0}
+    >
+      {(ref) => (
+        <>
+          <Row className="mb-6">
+            <Col sm={4} lg={3}>
+              <Select
+                placeholder={translate('Accounting status')}
+                value={accountingFilter}
+                onChange={(value: AccountingOption) =>
+                  setAccountingFilter(value)
+                }
+                options={accountingOptions}
+                isClearable={false}
+                className="metronic-select-container"
+                classNamePrefix="metronic-select"
+              />
+            </Col>
+          </Row>
+
+          {isLoading ? (
+            <LoadingSpinner />
+          ) : error ? (
+            <LoadingErred loadData={refetch} />
+          ) : (
+            <EChart ref={ref} options={chartOptions} height="400px" />
+          )}
+        </>
+      )}
+    </ChartCard>
   );
 };

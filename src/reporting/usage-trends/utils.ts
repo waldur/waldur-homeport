@@ -1,6 +1,8 @@
 import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 
+import { generateBrandColors } from '@waldur/core/generateColors';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import {
@@ -126,15 +128,6 @@ export const formatYearOverYearChart = (
         type: 'shadow',
       },
     },
-    toolbox: {
-      feature: {
-        saveAsImage: {
-          title: translate('Save'),
-          name: `usage-trends-${DateTime.now().toISODate()}`,
-          show: true,
-        },
-      },
-    },
     legend: {
       data: [String(currentYear), String(currentYear - 1)],
       top: 0,
@@ -160,7 +153,7 @@ export const formatYearOverYearChart = (
         type: 'bar',
         data: currentYearData,
         itemStyle: {
-          color: '#009ef7',
+          color: getBrandColor(),
         },
       },
       {
@@ -168,7 +161,7 @@ export const formatYearOverYearChart = (
         type: 'bar',
         data: previousYearData,
         itemStyle: {
-          color: '#7e8299',
+          color: generateBrandColors(getBrandColor())['300'],
         },
       },
     ],
@@ -235,10 +228,10 @@ export const formatUsageTrendChart = (
         data: usageValues,
         smooth: true,
         itemStyle: {
-          color: '#009ef7',
+          color: getBrandColor(),
         },
         areaStyle: {
-          color: 'rgba(0, 158, 247, 0.1)',
+          color: generateBrandColors(getBrandColor())['300'],
         },
       },
       {

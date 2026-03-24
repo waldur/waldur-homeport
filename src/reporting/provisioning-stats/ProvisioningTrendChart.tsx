@@ -1,19 +1,18 @@
 import { EChartsOption } from 'echarts';
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import React, { useMemo } from 'react';
 import { DailyOrderStats } from 'waldur-js-client';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 interface ProvisioningTrendChartProps {
   daily: DailyOrderStats[];
 }
 
-export const ProvisioningTrendChart: FC<ProvisioningTrendChartProps> = ({
-  daily,
-}) => {
+export const ProvisioningTrendChart = React.forwardRef<
+  any,
+  ProvisioningTrendChartProps
+>(({ daily }, ref) => {
   const chartData = useMemo(() => {
     // Calculate daily success rate using by_state
     return daily.map((day) => {
@@ -105,30 +104,5 @@ export const ProvisioningTrendChart: FC<ProvisioningTrendChartProps> = ({
     [chartData],
   );
 
-  if (daily.length === 0) {
-    return (
-      <Card className="h-100">
-        <Card.Header>
-          <Card.Title>{translate('Success rate trend')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        </Card.Body>
-      </Card>
-    );
-  }
-
-  return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('Success rate trend')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <EChart options={options} height="300px" />
-      </Card.Body>
-    </Card>
-  );
-};
+  return <EChart ref={ref} options={options} height="300px" />;
+});

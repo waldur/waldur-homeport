@@ -41,12 +41,13 @@ export const UserRolesPage: FC = () => {
       <NoResult
         title={translate('No role data found')}
         message={translate('There is no organization member data to display.')}
+        callback={refetch}
       />
     );
   }
 
   return (
-    <>
+    <div className="container-fluid py-6">
       <Alert variant="light" className="mb-6">
         <div className="d-flex align-items-center">
           <i className="fa fa-info-circle me-3 text-primary fs-4" />
@@ -60,7 +61,6 @@ export const UserRolesPage: FC = () => {
       </Alert>
 
       <UserRolesSummaryCards summary={summary} />
-
       <Row className="g-6 mb-6">
         <Col xs={12}>
           <RoleDistributionChart data={data.memberCounts} />
@@ -68,6 +68,6 @@ export const UserRolesPage: FC = () => {
       </Row>
 
       <RoleDistributionTable data={data.memberCounts} />
-    </>
+    </div>
   );
 };

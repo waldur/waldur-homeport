@@ -344,6 +344,14 @@ export const ReportingDashboard: FC = () => {
             'reporting-user-demographics-analytics',
           ),
           {
+            uuid: 'user-analytics',
+            title: translate('Analytics'),
+            description: translate(
+              'Interactive user statistics with export options',
+            ),
+            state: 'reporting-user-analytics',
+          },
+          {
             uuid: 'user-organizations',
             title: translate('Organizations'),
             description: translate(

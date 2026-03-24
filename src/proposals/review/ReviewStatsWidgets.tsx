@@ -1,12 +1,5 @@
-import {
-  CheckCircleIcon,
-  ClockIcon,
-  EnvelopeIcon,
-  PlayIcon,
-} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC } from 'react';
-import { Col, Row } from 'react-bootstrap';
+import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import {
   callReviewerPoolsList,
@@ -16,50 +9,9 @@ import {
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
-
-interface StatCardProps {
-  icon: React.ReactNode;
-  title: string;
-  value: string | number;
-  subtitle?: string;
-  variant?: 'success' | 'warning' | 'danger' | 'primary' | 'secondary';
-}
-
-const StatCard: FC<StatCardProps> = ({
-  icon,
-  title,
-  value,
-  subtitle,
-  variant = 'primary',
-}) => {
-  const variantClasses = {
-    success: 'bg-light-success text-success',
-    warning: 'bg-light-warning text-warning',
-    danger: 'bg-light-danger text-danger',
-    primary: 'bg-light-primary text-primary',
-    secondary: 'bg-light-secondary text-secondary',
-  };
-
-  return (
-    <div className="card card-bordered h-100">
-      <div className="card-body d-flex align-items-center gap-4">
-        <div
-          className={`d-flex align-items-center justify-content-center rounded-circle ${variantClasses[variant]}`}
-          style={{ width: 48, height: 48 }}
-        >
-          {icon}
-        </div>
-        <div>
-          <div className="text-muted small">{title}</div>
-          <div className="fs-3 fw-bold">{value}</div>
-          {subtitle && <div className="text-muted small">{subtitle}</div>}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export const ReviewStatsWidgets: FC = () => {
   const user = useSelector(getUser);
@@ -110,56 +62,42 @@ export const ReviewStatsWidgets: FC = () => {
     },
   });
 
-  if (profileLoading) {
-    return null;
-  }
-
   // Use stats from profile or default to zeros
-  const stats = profile?.stats ?? {
+  const statsFromProfile = profile?.stats ?? {
     total_reviews_completed: 0,
     average_review_time_days: null,
   };
 
-  return (
-    <Row className="g-4">
-      <Col xs={12} sm={6} lg>
-        <StatCard
-          icon={<EnvelopeIcon size={24} weight="bold" />}
-          title={translate('Invitations')}
-          value={invitationsCount}
-          variant="primary"
-        />
-      </Col>
-      <Col xs={12} sm={6} lg>
-        <StatCard
-          icon={<PlayIcon size={24} weight="bold" />}
-          title={translate('In progress')}
-          value={inProgressCount}
-          variant="warning"
-        />
-      </Col>
-      <Col xs={12} sm={6} lg>
-        <StatCard
-          icon={<CheckCircleIcon size={24} weight="bold" />}
-          title={translate('Completed')}
-          value={stats.total_reviews_completed}
-          variant="success"
-        />
-      </Col>
-      <Col xs={12} sm={6} lg>
-        <StatCard
-          icon={<ClockIcon size={24} weight="bold" />}
-          title={translate('Avg. review time')}
-          value={
-            stats.average_review_time_days !== null
-              ? translate('{days} days', {
-                  days: stats.average_review_time_days.toFixed(1),
-                })
-              : '-'
-          }
-          variant="secondary"
-        />
-      </Col>
-    </Row>
+  const summary = useMemo(
+    () => [
+      {
+        label: translate('Invitations'),
+        value: invitationsCount,
+      },
+      {
+        label: translate('In progress'),
+        value: inProgressCount,
+      },
+      {
+        label: translate('Completed'),
+        value: statsFromProfile.total_reviews_completed,
+      },
+      {
+        label: translate('Avg. review time'),
+        value:
+          statsFromProfile.average_review_time_days !== null
+            ? translate('{days} days', {
+                days: statsFromProfile.average_review_time_days.toFixed(1),
+              })
+            : '-',
+      },
+    ],
+    [invitationsCount, inProgressCount, statsFromProfile],
   );
+
+  if (profileLoading) {
+    return null;
+  }
+
+  return <SummaryWidget stats={summary} />;
 };

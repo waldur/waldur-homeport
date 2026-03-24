@@ -1,35 +1,48 @@
-import { FC } from 'react';
-import { Card } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
+import { DonutChart } from '@waldur/reporting/users/charts/DonutChart';
 
-import { formatOrdersTypeChart } from './utils';
+import { ORDER_TYPES, TYPE_COLORS } from './types';
 
 interface OrdersTypeChartProps {
   typeStats: Record<string, number>;
 }
 
 export const OrdersTypeChart: FC<OrdersTypeChartProps> = ({ typeStats }) => {
-  const chartOptions = formatOrdersTypeChart(typeStats);
-  const hasData = Object.values(typeStats).some((v) => v > 0);
+  const chartData = useMemo(
+    () =>
+      Object.entries(typeStats)
+        .filter(([, value]) => value > 0)
+        .map(([type, value]) => ({
+          name: ORDER_TYPES[type] || type,
+          value,
+          itemStyle: {
+            color: TYPE_COLORS[type] || '#7e8299',
+          },
+        })),
+    [typeStats],
+  );
+
+  const getExportData = useCallback(
+    () => ({
+      fields: [translate('Type'), translate('Count')],
+      data: Object.entries(typeStats).map(([type, count]) => [
+        ORDER_TYPES[type] || type,
+        count,
+      ]),
+    }),
+    [typeStats],
+  );
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('Orders by type')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        {hasData ? (
-          <EChart options={chartOptions} height="300px" />
-        ) : (
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        )}
-      </Card.Body>
-    </Card>
+    <ChartCard
+      title={translate('Orders by type')}
+      getExportData={getExportData}
+      isEmpty={Object.values(typeStats).every((v) => v === 0)}
+    >
+      {(ref) => <DonutChart ref={ref} data={chartData} height="300px" />}
+    </ChartCard>
   );
 };

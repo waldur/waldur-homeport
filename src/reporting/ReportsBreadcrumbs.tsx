@@ -159,6 +159,11 @@ const categoryConfig: Record<ReportCategory, CategoryConfig> = {
         state: 'reporting-growth',
       },
       {
+        key: 'growth-report',
+        title: translate('Growth Report'),
+        state: 'reporting-growth-report',
+      },
+      {
         key: 'monthly-revenue',
         title: translate('Monthly revenue'),
         state: 'reporting-revenue',

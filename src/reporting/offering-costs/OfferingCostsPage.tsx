@@ -1,4 +1,5 @@
 import { FC } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -42,6 +43,7 @@ export const OfferingCostsPage: FC = () => {
         message={translate(
           'There are no offerings with associated costs to display.',
         )}
+        callback={() => {}}
       />
     );
   }
@@ -49,9 +51,11 @@ export const OfferingCostsPage: FC = () => {
   return (
     <>
       <OfferingCostsSummaryCards summary={summary} />
-      <div className="mb-6">
-        <OfferingCostsChart data={data.offerings} />
-      </div>
+      <Row className="mb-6">
+        <Col xs={12}>
+          <OfferingCostsChart data={data.offerings} />
+        </Col>
+      </Row>
       <OfferingCostsTable data={data.offerings} />
     </>
   );

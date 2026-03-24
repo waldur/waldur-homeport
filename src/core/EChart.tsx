@@ -17,125 +17,123 @@ interface ChartProps {
   exportTitle?: string;
 }
 
-export const EChart: React.FC<ChartProps> = ({
-  width = '100%',
-  height = '100%',
-  options,
-  className,
-  ...props
-}) => {
-  const containerRef = useRef<HTMLDivElement | null>(null);
-  const chartRef = useRef<any>(null);
-  const resizeObserverRef = useRef<ResizeObserver | null>(null);
-  const [loading, setLoading] = useState(false);
-  const { theme } = useTheme();
+export const EChart = React.forwardRef<any, ChartProps>(
+  ({ width = '100%', height = '100%', options, className, ...props }, ref) => {
+    const containerRef = useRef<HTMLDivElement | null>(null);
+    const chartRef = useRef<any>(null);
+    const resizeObserverRef = useRef<ResizeObserver | null>(null);
+    const [loading, setLoading] = useState(false);
+    const { theme } = useTheme();
 
-  useEffect(() => {
-    drawChart();
+    React.useImperativeHandle(ref, () => chartRef.current);
 
-    return () => {
-      if (resizeObserverRef.current) {
-        resizeObserverRef.current.disconnect();
-        resizeObserverRef.current = null;
-      }
-      if (chartRef.current) {
-        chartRef.current.dispose();
-        chartRef.current = null;
-        containerRef.current = null;
-      }
-    };
-  }, []);
+    useEffect(() => {
+      drawChart();
 
-  // Update chart with new theme
-  useEffect(() => {
-    if (!containerRef.current) return;
+      return () => {
+        if (resizeObserverRef.current) {
+          resizeObserverRef.current.disconnect();
+          resizeObserverRef.current = null;
+        }
+        if (chartRef.current) {
+          chartRef.current.dispose();
+          chartRef.current = null;
+          containerRef.current = null;
+        }
+      };
+    }, []);
 
-    import('@waldur/echarts').then((module) => {
+    // Update chart with new theme
+    useEffect(() => {
       if (!containerRef.current) return;
-      const echarts = module.default;
 
+      import('@waldur/echarts').then((module) => {
+        if (!containerRef.current) return;
+        const echarts = module.default;
+
+        if (chartRef.current) {
+          chartRef.current.dispose();
+          chartRef.current = echarts.init(
+            containerRef.current,
+            `${theme}-metronic`,
+          );
+          renderChart();
+        } else {
+          drawChart();
+        }
+      });
+    }, [theme]);
+
+    useEffect(() => {
       if (chartRef.current) {
-        chartRef.current.dispose();
-        chartRef.current = echarts.init(
-          containerRef.current,
-          `${theme}-metronic`,
-        );
         renderChart();
-      } else {
+      } else if (!chartRef.current && !loading) {
         drawChart();
       }
-    });
-  }, [theme]);
+    }, [options, loading]);
 
-  useEffect(() => {
-    if (chartRef.current) {
-      renderChart();
-    } else if (!chartRef.current && !loading) {
-      drawChart();
-    }
-  }, [options, loading]);
-
-  const drawChart = () => {
-    setLoading(true);
-    import('@waldur/echarts').then((module) => {
-      setLoading(false);
-      if (!containerRef.current) {
-        return;
-      }
-      const echarts = module.default;
-      const chart = echarts.getInstanceByDom(containerRef.current);
-      if (!chart) {
-        chartRef.current = echarts.init(
-          containerRef.current,
-          `${theme}-metronic`,
-        );
-      }
-      renderChart();
-      if (!resizeObserverRef.current) {
-        resizeObserverRef.current = new ResizeObserver((entries) => {
-          entries.forEach(({ target }) => {
-            const instance = echarts.getInstanceByDom(target as HTMLElement);
-            if (instance) {
-              instance.resize();
-            }
+    const drawChart = () => {
+      setLoading(true);
+      import('@waldur/echarts').then((module) => {
+        setLoading(false);
+        if (!containerRef.current) {
+          return;
+        }
+        const echarts = module.default;
+        const chart = echarts.getInstanceByDom(containerRef.current);
+        if (!chart) {
+          chartRef.current = echarts.init(
+            containerRef.current,
+            `${theme}-metronic`,
+          );
+        }
+        renderChart();
+        if (!resizeObserverRef.current) {
+          resizeObserverRef.current = new ResizeObserver((entries) => {
+            entries.forEach(({ target }) => {
+              const instance = echarts.getInstanceByDom(target as HTMLElement);
+              if (instance) {
+                instance.resize();
+              }
+            });
           });
-        });
-      }
-      resizeObserverRef.current.observe(containerRef.current);
-    });
-  };
+        }
+        resizeObserverRef.current.observe(containerRef.current);
+      });
+    };
 
-  const renderChart = () => {
-    if (chartRef.current) {
-      chartRef.current.setOption(options, `${theme}-metronic`);
-    }
-  };
-
-  useEffect(() => {
-    const handleResize = () => {
+    const renderChart = () => {
       if (chartRef.current) {
-        chartRef.current.resize();
+        chartRef.current.setOption(options, `${theme}-metronic`);
       }
     };
 
-    window.addEventListener('resize', handleResize);
-    return () => window.removeEventListener('resize', handleResize);
-  }, [chartRef.current]);
+    useEffect(() => {
+      const handleResize = () => {
+        if (chartRef.current) {
+          chartRef.current.resize();
+        }
+      };
 
-  const style = { width, height };
+      window.addEventListener('resize', handleResize);
+      return () => window.removeEventListener('resize', handleResize);
+    }, [chartRef.current]);
 
-  return (
-    <div
-      className={classNames('content-center-center', className)}
-      style={style}
-    >
-      {loading && <LoadingSpinner />}
-      <EChartActions chartInstance={chartRef.current} {...props} />
+    const style = { width, height };
+
+    return (
       <div
-        className={classNames({ hidden: loading })}
+        className={classNames('content-center-center', className)}
         style={style}
-        ref={containerRef}
-      />
-    </div>
-  );
-};
+      >
+        {loading && <LoadingSpinner />}
+        <EChartActions chartInstance={chartRef.current} {...props} />
+        <div
+          className={classNames({ hidden: loading })}
+          style={style}
+          ref={containerRef}
+        />
+      </div>
+    );
+  },
+);

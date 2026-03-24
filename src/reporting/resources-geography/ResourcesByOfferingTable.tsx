@@ -1,7 +1,8 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { OfferingStats } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
@@ -26,28 +27,45 @@ export const ResourcesByOfferingTable: FC<ResourcesByOfferingTableProps> = ({
   data,
 }) => {
   const sortedData = useMemo(
-    () => [...data].sort((a, b) => b.count - a.count),
+    () => [...(data || [])].sort((a, b) => b.count - a.count),
     [data],
+  );
+
+  const getExportData = useCallback(
+    () => ({
+      fields: [translate('Offering'), translate('Count')],
+      data: sortedData.map((item) => [item.name, item.count]),
+    }),
+    [sortedData],
   );
 
   const noop = () => {};
 
   return (
-    <Table<OfferingStats>
-      columns={columns}
-      rows={sortedData}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
+    <ChartCard
       title={translate('Resources by offering')}
-      verboseName={translate('offerings')}
-    />
+      getExportData={getExportData}
+      isEmpty={!data || data.length === 0}
+    >
+      {() => (
+        <Table<OfferingStats>
+          columns={columns}
+          rows={sortedData}
+          fetch={noop}
+          loading={false}
+          error={null}
+          activeColumns={{}}
+          columnPositions={[]}
+          resetSelection={noop}
+          setFilterPosition={noop}
+          initColumnPositions={noop}
+          resetPagination={noop}
+          hasPagination={false}
+          verboseName={translate('offerings')}
+          hideTitle
+          hideRefresh
+        />
+      )}
+    </ChartCard>
   );
 };

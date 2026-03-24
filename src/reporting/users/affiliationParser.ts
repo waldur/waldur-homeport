@@ -186,7 +186,7 @@ function extractCountryFromDomain(domain: string): string | null {
 /**
  * Get human-readable country name
  */
-function getCountryLabel(countryCode: string | null): string {
+export function getCountryLabel(countryCode: string | null): string {
   if (!countryCode) return translate('Unknown');
   const labelFn = COUNTRY_NAMES[countryCode.toLowerCase()];
   return labelFn ? labelFn() : countryCode.toUpperCase();

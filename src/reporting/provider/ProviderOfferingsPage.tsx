@@ -11,7 +11,6 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
-import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -28,6 +27,8 @@ import { useTable } from '@waldur/table/useTable';
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
 import { ProviderFilter } from './ProviderFilter';
+import { TopOfferingsByResourcesChart } from './TopOfferingsByResourcesChart';
+import { TopOfferingsByRevenueChart } from './TopOfferingsByRevenueChart';
 
 interface OfferingStatsData {
   offering_uuid: string;
@@ -150,85 +151,6 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
     enabled: !!providerUuid,
   });
 
-  const resourceChartOptions = useMemo(() => {
-    if (!data?.offerings || (data.offerings as unknown[]).length === 0)
-      return null;
-
-    const allOfferings = data.offerings as unknown as OfferingStatsData[];
-    const offerings = allOfferings
-      .filter((o) => o.resource_count > 0)
-      .sort((a, b) => b.resource_count - a.resource_count)
-      .slice(0, 10);
-
-    if (offerings.length === 0) return null;
-
-    return {
-      tooltip: { trigger: 'axis', axisPointer: { type: 'shadow' } },
-      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-      xAxis: {
-        type: 'value',
-        name: translate('Resources'),
-        minInterval: 1,
-      },
-      yAxis: {
-        type: 'category',
-        data: offerings.map((o) => o.offering_name),
-        axisLabel: { width: 150, overflow: 'truncate' },
-      },
-      series: [
-        {
-          name: translate('Resources'),
-          type: 'bar',
-          data: offerings.map((o) => o.resource_count),
-          itemStyle: { color: '#009ef7' },
-        },
-      ],
-    };
-  }, [data]);
-
-  const revenueChartOptions = useMemo(() => {
-    if (!data?.offerings || (data.offerings as unknown[]).length === 0)
-      return null;
-
-    const allOfferings = data.offerings as unknown as OfferingStatsData[];
-    const offerings = allOfferings
-      .filter((o) => o.revenue > 0)
-      .sort((a, b) => b.revenue - a.revenue)
-      .slice(0, 10);
-
-    if (offerings.length === 0) return null;
-
-    return {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' },
-        formatter: (params) => {
-          const value = params[0].value;
-          return `${params[0].name}: ${defaultCurrency(value)}`;
-        },
-      },
-      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-      xAxis: {
-        type: 'value',
-        name: translate('Revenue'),
-        axisLabel: { formatter: (value) => defaultCurrency(value) },
-      },
-      yAxis: {
-        type: 'category',
-        data: offerings.map((o) => o.offering_name),
-        axisLabel: { width: 150, overflow: 'truncate' },
-      },
-      series: [
-        {
-          name: translate('Revenue'),
-          type: 'bar',
-          data: offerings.map((o) => o.revenue),
-          itemStyle: { color: '#50cd89' },
-        },
-      ],
-    };
-  }, [data]);
-
   if (isLoading) return <LoadingSpinner />;
   if (error) return <LoadingErred loadData={refetch} />;
   if (!data) return null;
@@ -292,42 +214,10 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
 
       <Row className="g-4 mb-6">
         <Col xs={12} lg={6}>
-          <Card>
-            <Card.Header>
-              <Card.Title>{translate('Top offerings by resources')}</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {resourceChartOptions ? (
-                <EChart options={resourceChartOptions} height="300px" />
-              ) : (
-                <NoResult
-                  title={translate('No data available')}
-                  message={translate(
-                    'Try adjusting your filters or date range.',
-                  )}
-                />
-              )}
-            </Card.Body>
-          </Card>
+          <TopOfferingsByResourcesChart offerings={offerings} />
         </Col>
         <Col xs={12} lg={6}>
-          <Card>
-            <Card.Header>
-              <Card.Title>{translate('Top offerings by revenue')}</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {revenueChartOptions ? (
-                <EChart options={revenueChartOptions} height="300px" />
-              ) : (
-                <NoResult
-                  title={translate('No data available')}
-                  message={translate(
-                    'Try adjusting your filters or date range.',
-                  )}
-                />
-              )}
-            </Card.Body>
-          </Card>
+          <TopOfferingsByRevenueChart offerings={offerings} />
         </Col>
       </Row>
     </>
@@ -345,7 +235,7 @@ export const ProviderOfferingsPage: FC = () => {
   const customerUuid = formValues?.provider?.customer_uuid;
 
   return (
-    <>
+    <div className="container-fluid py-6">
       <div className="d-flex flex-wrap gap-6 mb-6">
         <FormGroup
           label={translate('Provider')}
@@ -366,8 +256,9 @@ export const ProviderOfferingsPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view offering statistics.',
           )}
+          callback={() => {}}
         />
       )}
-    </>
+    </div>
   );
 };

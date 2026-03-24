@@ -1,10 +1,12 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 
 import { UserAuthMethodCount } from '../types';
 
+import { ChartCard } from './ChartCard';
 import { DonutChart } from './DonutChart';
+import { getChartExportData } from './utils';
 
 interface AuthMethodsChartProps {
   data: UserAuthMethodCount[];
@@ -13,14 +15,25 @@ interface AuthMethodsChartProps {
 export const AuthMethodsChart: FC<AuthMethodsChartProps> = ({ data }) => {
   const chartData = useMemo(
     () =>
-      data.map((item) => ({
+      (data || []).map((item) => ({
         name: item.method || translate('Unknown'),
         value: item.count,
       })),
     [data],
   );
 
+  const getExportData = useCallback(
+    () => getChartExportData(translate('Authentication method'), chartData),
+    [chartData],
+  );
+
   return (
-    <DonutChart title={translate('Authentication methods')} data={chartData} />
+    <ChartCard
+      title={translate('Authentication methods')}
+      getExportData={getExportData}
+      isEmpty={!data || data.length === 0}
+    >
+      {(ref) => <DonutChart ref={ref} data={chartData} />}
+    </ChartCard>
   );
 };

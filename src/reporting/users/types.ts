@@ -38,6 +38,8 @@ export interface UserStatistics {
   registrationTrend: UserRegistrationTrend[];
   organizationTypes: UserOrganizationTypeCount[];
   jobTitles: UserJobTitleCount[];
+  nationalities: Array<{ nationality: string; count: number }>;
+  residenceCountries: Array<{ country_of_residence: string; count: number }>;
 }
 
 /**

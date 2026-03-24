@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -9,7 +8,6 @@ import {
   ServiceProviderRevenues,
 } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -21,6 +19,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
 import { ProviderFilter } from './ProviderFilter';
+import { ProviderRevenueChart } from './ProviderRevenueChart';
 
 const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
   providerUuid,
@@ -35,54 +34,6 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
     },
     enabled: !!providerUuid,
   });
-
-  const chartOptions = useMemo(() => {
-    if (!data || data.length === 0) return null;
-
-    const months = data.map((d) =>
-      DateTime.fromObject({ year: d.year, month: d.month }).toFormat(
-        'MMM yyyy',
-      ),
-    );
-    const values = data.map((d) => d.total || 0);
-
-    return {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' },
-        formatter: (params) => {
-          const value = params[0].value;
-          return `${params[0].name}: ${defaultCurrency(value)}`;
-        },
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true,
-      },
-      xAxis: {
-        type: 'category',
-        data: months,
-        axisLabel: { rotate: 45 },
-      },
-      yAxis: {
-        type: 'value',
-        name: translate('Revenue'),
-        axisLabel: {
-          formatter: (value) => defaultCurrency(value),
-        },
-      },
-      series: [
-        {
-          name: translate('Revenue'),
-          type: 'bar',
-          data: values,
-          itemStyle: { color: '#50cd89' },
-        },
-      ],
-    };
-  }, [data]);
 
   const totalRevenue = useMemo(() => {
     if (!data) return 0;
@@ -103,6 +54,7 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
           <NoResult
             title={translate('No data available')}
             message={translate('No revenue data available for this provider.')}
+            callback={refetch}
           />
         </Card.Body>
       </Card>
@@ -138,14 +90,7 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
         </Col>
       </Row>
 
-      <Card>
-        <Card.Header>
-          <Card.Title>{translate('Monthly revenue trend')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          {chartOptions && <EChart options={chartOptions} height="400px" />}
-        </Card.Body>
-      </Card>
+      <ProviderRevenueChart data={data} />
     </>
   );
 };
@@ -178,6 +123,7 @@ export const ProviderRevenuePage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view revenue data.',
           )}
+          callback={() => {}}
         />
       )}
     </>

@@ -1,45 +1,12 @@
-import { FC } from 'react';
+import { FC, useMemo } from 'react';
 import { MaintenanceStatsResponse } from 'waldur-js-client';
 
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 
 interface MaintenanceSummaryCardsProps {
   stats: MaintenanceStatsResponse;
 }
-
-interface SummaryCardProps {
-  title: string;
-  value: number | string;
-  subtitle?: string;
-  variant?: 'primary' | 'success' | 'warning' | 'danger' | 'info';
-}
-
-const SummaryCard: FC<SummaryCardProps> = ({
-  title,
-  value,
-  subtitle,
-  variant = 'primary',
-}) => {
-  const colorClasses: Record<string, string> = {
-    primary: 'bg-light-primary text-primary',
-    success: 'bg-light-success text-success',
-    warning: 'bg-light-warning text-warning',
-    danger: 'bg-light-danger text-danger',
-    info: 'bg-light-info text-info',
-  };
-
-  return (
-    <div className="col-sm-6 col-xl-2">
-      <div className={`card card-flush h-100 ${colorClasses[variant]}`}>
-        <div className="card-body py-5">
-          <div className="fs-4 fw-bold mb-2">{title}</div>
-          <div className="fs-2hx fw-bolder">{value}</div>
-          {subtitle && <div className="fs-7 text-muted mt-1">{subtitle}</div>}
-        </div>
-      </div>
-    </div>
-  );
-};
 
 export const MaintenanceSummaryCards: FC<MaintenanceSummaryCardsProps> = ({
   stats,
@@ -69,48 +36,35 @@ export const MaintenanceSummaryCards: FC<MaintenanceSummaryCardsProps> = ({
     return `${rate.toFixed(0)}%`;
   };
 
-  return (
-    <div className="row g-5 mb-6">
-      <SummaryCard
-        title={translate('Total')}
-        value={summary.total}
-        variant="primary"
-      />
-      <SummaryCard
-        title={translate('Active')}
-        value={summary.active}
-        subtitle={translate('In progress')}
-        variant="info"
-      />
-      <SummaryCard
-        title={translate('Scheduled')}
-        value={summary.scheduled}
-        subtitle={translate('Upcoming')}
-        variant="warning"
-      />
-      <SummaryCard
-        title={translate('Completed')}
-        value={summary.completed}
-        variant="success"
-      />
-      <SummaryCard
-        title={translate('Avg duration')}
-        value={formatDuration(summary.average_duration_hours)}
-        variant="primary"
-      />
-      <SummaryCard
-        title={translate('On-time rate')}
-        value={formatRate(summary.on_time_completion_rate)}
-        variant={
-          summary.on_time_completion_rate === null
-            ? 'primary'
-            : summary.on_time_completion_rate >= 90
-              ? 'success'
-              : summary.on_time_completion_rate >= 70
-                ? 'warning'
-                : 'danger'
-        }
-      />
-    </div>
+  const statsList = useMemo(
+    () => [
+      {
+        label: translate('Total'),
+        value: summary.total,
+      },
+      {
+        label: translate('Active'),
+        value: summary.active,
+      },
+      {
+        label: translate('Scheduled'),
+        value: summary.scheduled,
+      },
+      {
+        label: translate('Completed'),
+        value: summary.completed,
+      },
+      {
+        label: translate('Avg duration'),
+        value: formatDuration(summary.average_duration_hours),
+      },
+      {
+        label: translate('On-time rate'),
+        value: formatRate(summary.on_time_completion_rate),
+      },
+    ],
+    [summary],
   );
+
+  return <SummaryWidget stats={statsList} />;
 };

@@ -1,5 +1,5 @@
 import { EChartsOption } from 'echarts';
-import { FC, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
 import { EChart } from '@waldur/core/EChart';
@@ -20,8 +20,12 @@ import {
 } from '../affiliationParser';
 import { UserAffiliationCount } from '../types';
 
+import { ChartCard } from './ChartCard';
+import { getChartExportData } from './utils';
+
 interface AffiliationsChartProps {
   data: UserAffiliationCount[];
+  refetch(): void;
 }
 
 interface AffiliationWithCount extends ParsedAffiliation {
@@ -146,7 +150,10 @@ const tableColumns: Column<AffiliationWithCount>[] = [
   },
 ];
 
-export const AffiliationsChart: FC<AffiliationsChartProps> = ({ data }) => {
+export const AffiliationsChart: FC<AffiliationsChartProps> = ({
+  data,
+  refetch,
+}) => {
   const [viewMode, setViewMode] = useState<ViewMode>('organization');
   const [countryFilter, setCountryFilter] = useState<string | null>(null);
   const [categoryFilter, setCategoryFilter] =
@@ -191,6 +198,19 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({ data }) => {
   const { names, values, total } = useMemo(
     () => prepareChartData(aggregatedData),
     [aggregatedData],
+  );
+
+  const getExportData = useCallback(
+    () =>
+      getChartExportData(
+        viewMode === 'organization'
+          ? translate('Organization')
+          : viewMode === 'country'
+            ? translate('Country')
+            : translate('Category'),
+        names.map((name, i) => ({ name, value: values[i] })),
+      ),
+    [viewMode, names, values],
   );
 
   const chartOptions = useMemo<EChartsOption>(
@@ -255,21 +275,27 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({ data }) => {
 
   if (data.length === 0) {
     return (
-      <Card className="h-100">
-        <Card.Header>
-          <Card.Title>{translate('User affiliations')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
+      <ChartCard
+        title={translate('User affiliations')}
+        getExportData={() => ({ fields: [], data: [] })}
+        isEmpty
+      >
+        {() => (
           <NoResult
             title={translate('No data available')}
             message={translate('Try adjusting your filters or date range.')}
+            callback={refetch}
+            buttonTitle={translate('Refresh')}
           />
-        </Card.Body>
-      </Card>
+        )}
+      </ChartCard>
     );
   }
 
-  const chartHeight = Math.min(400, Math.max(200, names.length * 35));
+  const chartHeight = useMemo(
+    () => Math.min(400, Math.max(200, names.length * 35)),
+    [names],
+  );
 
   return (
     <>
@@ -381,25 +407,25 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({ data }) => {
       </Row>
 
       {/* Chart */}
-      <Card className="mb-6">
-        <Card.Header>
-          <Card.Title>
-            {viewMode === 'organization' && translate('Users by organization')}
-            {viewMode === 'country' && translate('Users by country')}
-            {viewMode === 'category' && translate('Users by category')}
-          </Card.Title>
-        </Card.Header>
-        <Card.Body>
-          {aggregatedData.length > 0 ? (
-            <EChart options={chartOptions} height={`${chartHeight}px`} />
-          ) : (
-            <NoResult
-              title={translate('No data available')}
-              message={translate('Try adjusting your filters or date range.')}
-            />
-          )}
-        </Card.Body>
-      </Card>
+      <ChartCard
+        title={
+          viewMode === 'organization'
+            ? translate('Users by organization')
+            : viewMode === 'country'
+              ? translate('Users by country')
+              : translate('Users by category')
+        }
+        getExportData={getExportData}
+        isEmpty={aggregatedData.length === 0}
+      >
+        {(ref) => (
+          <EChart
+            ref={ref}
+            options={chartOptions}
+            height={`${chartHeight}px`}
+          />
+        )}
+      </ChartCard>
 
       {/* Details table */}
       <Table<AffiliationWithCount>
