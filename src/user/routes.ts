@@ -54,6 +54,14 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Credentials'),
       priority: 110,
+      permissions: [
+        (state) =>
+          isFeatureVisible(UserFeatures.ssh_keys) ||
+          ENV.plugins.WALDUR_CORE.FREEIPA_ENABLED ||
+          !isFeatureVisible(UserFeatures.conceal_remote_accounts) ||
+          isStaffOrSupport(state) ||
+          !isFeatureVisible(UserFeatures.conceal_api_token),
+      ],
     },
   },
 
@@ -222,6 +230,11 @@ export const states: StateDeclaration[] = [
     parent: 'profile-credentials',
     data: {
       breadcrumb: () => translate('Remote accounts'),
+      permissions: [
+        (state) =>
+          !isFeatureVisible(UserFeatures.conceal_remote_accounts) ||
+          isStaffOrSupport(state),
+      ],
     },
   },
   {
@@ -234,6 +247,11 @@ export const states: StateDeclaration[] = [
     ),
     data: {
       breadcrumb: () => translate('Permission requests'),
+      permissions: [
+        (state) =>
+          !isFeatureVisible(UserFeatures.conceal_permission_requests) ||
+          isStaffOrSupport(state),
+      ],
       priority: 130,
     },
   },
@@ -248,6 +266,11 @@ export const states: StateDeclaration[] = [
     parent: 'profile-credentials',
     data: {
       breadcrumb: () => translate('API token'),
+      permissions: [
+        (state) =>
+          !isFeatureVisible(UserFeatures.conceal_api_token) ||
+          isStaffOrSupport(state),
+      ],
     },
   },
   {
