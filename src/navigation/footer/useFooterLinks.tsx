@@ -55,7 +55,8 @@ export const useFooterLinks = () => {
 
     // 2. Specialized Logic for "Join Organization"
     // Requirement: Show based on invite count on mobile, or user perms on desktop
-    const showJoinOrg = isMd ? publicInvitesCount > 0 : !!user && canAccessOrg;
+    const showJoinOrg =
+      publicInvitesCount > 0 && (isMd || (!!user && canAccessOrg));
 
     const joinOrgItem = showJoinOrg
       ? {

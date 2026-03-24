@@ -82,6 +82,7 @@ describe('useFooterLinks', () => {
     vi.mocked(useUser).mockReturnValue({ username: 'user' });
     vi.mocked(isFeatureVisible).mockReturnValue(false); // hide_organization_information... = false
     vi.mocked(useSelector).mockReturnValue(true); // hasNonProjectPerms = true
+    vi.mocked(useQuery).mockReturnValue({ data: 3 } as any); // public invites exist
 
     const { result } = renderHook(() => useFooterLinks());
 
