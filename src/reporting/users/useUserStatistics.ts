@@ -4,8 +4,10 @@ import {
   marketplaceStatsUserAuthMethodCountList,
   marketplaceStatsUserIdentitySourceCountList,
   marketplaceStatsUserJobTitleCountList,
+  marketplaceStatsUserNationalityList,
   marketplaceStatsUserOrganizationCountList,
   marketplaceStatsUserOrganizationTypeCountList,
+  marketplaceStatsUserResidenceCountryList,
   UserAffiliationCount,
   UserOrganizationCount,
   usersUserActiveStatusCountList,
@@ -28,10 +30,13 @@ const STALE_TIME = 5 * 60 * 1000; // 5 minutes
  * Helper to safely fetch and return empty array on failure
  */
 async function safeFetch<T>(
-  fetchFn: () => Promise<{ data?: T[] }>,
+  fetchFn: () => Promise<{ data?: T[] } | T[]>,
 ): Promise<T[]> {
   try {
     const response = await fetchFn();
+    if (Array.isArray(response)) {
+      return response;
+    }
     return response.data ?? [];
   } catch {
     return [];
@@ -52,6 +57,7 @@ async function fetchUserStatistics(
   const showOrganization = isProfileAttributeEnabled('organization');
   const showOrganizationType = isProfileAttributeEnabled('organization_type');
   const showJobTitle = isProfileAttributeEnabled('job_title');
+  const showNationality = isProfileAttributeEnabled('nationality');
 
   const [
     authMethods,
@@ -63,6 +69,8 @@ async function fetchUserStatistics(
     registrationTrend,
     organizationTypes,
     jobTitles,
+    nationalities,
+    residenceCountries,
   ] = await Promise.all([
     // Core stats - always fetch
     safeFetch(() => marketplaceStatsUserAuthMethodCountList({ signal })),
@@ -89,6 +97,13 @@ async function fetchUserStatistics(
     showJobTitle
       ? safeFetch(() => marketplaceStatsUserJobTitleCountList({ signal }))
       : Promise.resolve([]),
+    // Nationality and Residence Country stats
+    showNationality
+      ? safeFetch(() => marketplaceStatsUserNationalityList({ signal }))
+      : Promise.resolve([]),
+    showNationality
+      ? safeFetch(() => marketplaceStatsUserResidenceCountryList({ signal }))
+      : Promise.resolve([]),
   ]);
 
   return {
@@ -101,6 +116,8 @@ async function fetchUserStatistics(
     registrationTrend,
     organizationTypes,
     jobTitles,
+    nationalities,
+    residenceCountries,
   };
 }
 

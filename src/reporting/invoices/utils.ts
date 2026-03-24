@@ -2,19 +2,12 @@ import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 
 import { ENV } from '@waldur/core/config';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
-export const formatGrowthChart = (growthChartData): EChartsOption => {
+export const formatGrowthChart = (growthChartData?): EChartsOption => {
+  if (!growthChartData) return {};
   return {
-    toolbox: {
-      feature: {
-        saveAsImage: {
-          title: translate('Save'),
-          name: `growth-chart-${DateTime.now().toISODate()}`,
-          show: true,
-        },
-      },
-    },
     tooltip: {
       trigger: 'axis',
       axisPointer: {
@@ -30,7 +23,7 @@ export const formatGrowthChart = (growthChartData): EChartsOption => {
         axisPointer: {
           type: 'shadow',
         },
-        data: growthChartData.periods.map((row, index) => {
+        data: (growthChartData.periods || []).map((row, index) => {
           const date = DateTime.fromFormat(row, 'yyyy-M');
           const monthName = date.toFormat('MMMM');
           const year = date.toFormat('yyyy');
@@ -69,7 +62,7 @@ export const formatGrowthChart = (growthChartData): EChartsOption => {
     legend: {
       data: [
         translate('Total'),
-        ...growthChartData.customer_periods.map((row) => row.name),
+        ...(growthChartData.customer_periods || []).map((row) => row.name),
         translate('Others'),
       ],
     },
@@ -79,8 +72,11 @@ export const formatGrowthChart = (growthChartData): EChartsOption => {
         type: 'line',
         yAxisIndex: 1,
         data: growthChartData.total_periods,
+        itemStyle: {
+          color: getBrandColor(),
+        },
       },
-      ...growthChartData.customer_periods.map((row) => ({
+      ...(growthChartData.customer_periods || []).map((row) => ({
         name: row.name,
         type: 'bar',
         data: row.periods,

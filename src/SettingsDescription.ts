@@ -244,13 +244,13 @@ export const SettingsDescription = [
       {
         key: 'DOCKER_CLIENT',
         description: translate('Options for docker client. See also: <https://docker-py.readthedocs.io/en/stable/client.html#docker.client.DockerClient>'),
-        default: {'base_url': 'unix:///var/run/docker.sock'},
+        default: { 'base_url': 'unix:///var/run/docker.sock' },
         type: 'dict_field',
       },
       {
         key: 'DOCKER_RUN_OPTIONS',
         description: translate('Options for docker runtime. See also: <https://docker-py.readthedocs.io/en/stable/containers.html#docker.models.containers.ContainerCollection.run>'),
-        default: {'mem_limit': '512m'},
+        default: { 'mem_limit': '512m' },
         type: 'dict_field',
       },
       {
@@ -268,7 +268,7 @@ export const SettingsDescription = [
       {
         key: 'DOCKER_IMAGES',
         description: translate('Key is command to execute script, value is a dictionary of image name and command.'),
-        default: {'python': {'image': 'python:3.12-alpine', 'command': 'python'}, 'shell': {'image': 'alpine:3', 'command': 'sh'}, 'ansible': {'image': 'alpine/ansible:2.18.6', 'command': 'ansible-playbook'}},
+        default: { 'python': { 'image': 'python:3.12-alpine', 'command': 'python' }, 'shell': { 'image': 'alpine:3', 'command': 'sh' }, 'ansible': { 'image': 'alpine/ansible:2.18.6', 'command': 'ansible-playbook' } },
         type: 'dict_field',
       },
       {

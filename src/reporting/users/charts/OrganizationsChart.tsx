@@ -1,10 +1,8 @@
 import { EChartsOption } from 'echarts';
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import React, { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 import { UserOrganizationCount } from '../types';
 
@@ -60,7 +58,10 @@ function prepareChartData(data: UserOrganizationCount[]): {
   };
 }
 
-export const OrganizationsChart: FC<OrganizationsChartProps> = ({ data }) => {
+export const OrganizationsChart = React.forwardRef<
+  any,
+  OrganizationsChartProps
+>(({ data }, ref) => {
   const { names, values, total } = useMemo(
     () => prepareChartData(data),
     [data],
@@ -70,9 +71,7 @@ export const OrganizationsChart: FC<OrganizationsChartProps> = ({ data }) => {
     () => ({
       tooltip: {
         trigger: 'axis',
-        axisPointer: {
-          type: 'shadow',
-        },
+        axisPointer: { type: 'shadow' },
         formatter: (params: any) => {
           const param = params[0];
           const percent =
@@ -106,9 +105,7 @@ export const OrganizationsChart: FC<OrganizationsChartProps> = ({ data }) => {
         {
           type: 'bar',
           data: values,
-          itemStyle: {
-            borderRadius: [0, 4, 4, 0],
-          },
+          itemStyle: { borderRadius: [0, 4, 4, 0] },
           label: {
             show: true,
             position: 'right',
@@ -124,33 +121,7 @@ export const OrganizationsChart: FC<OrganizationsChartProps> = ({ data }) => {
     [names, values, total],
   );
 
-  if (data.length === 0) {
-    return (
-      <Card className="h-100">
-        <Card.Header>
-          <Card.Title>{translate('User organizations')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        </Card.Body>
-      </Card>
-    );
-  }
-
-  // Calculate height based on number of items (min 200px, max 400px)
   const chartHeight = Math.min(400, Math.max(200, names.length * 35));
 
-  return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('User organizations')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <EChart options={options} height={`${chartHeight}px`} />
-      </Card.Body>
-    </Card>
-  );
-};
+  return <EChart ref={ref} options={options} height={`${chartHeight}px`} />;
+});

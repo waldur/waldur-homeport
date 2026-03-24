@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { DateTime } from 'luxon';
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
@@ -12,7 +11,6 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { EChart } from '@waldur/core/EChart';
 import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -29,22 +27,8 @@ import { useTable } from '@waldur/table/useTable';
 import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
 import { ProviderFilter } from './ProviderFilter';
-
-const RESOURCE_STATE_COLORS: Record<string, string> = {
-  OK: '#50cd89',
-  Updating: '#ffc700',
-  Erred: '#f1416c',
-  Creating: '#009ef7',
-  Terminated: '#7e8299',
-};
-
-const RESOURCE_STATE_LABELS: Record<string, string> = {
-  OK: translate('OK'),
-  Updating: translate('Updating'),
-  Erred: translate('Erred'),
-  Creating: translate('Creating'),
-  Terminated: translate('Terminated'),
-};
+import { ResourceCreationTrendChart } from './ResourceCreationTrendChart';
+import { ResourcesByStateChart } from './ResourcesByStateChart';
 
 interface MonthlyData {
   month: string;
@@ -146,76 +130,12 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
     enabled: !!providerUuid,
   });
 
-  const stateChartOptions = useMemo(() => {
-    if (!data?.by_state) return null;
-
-    const chartData = Object.entries(data.by_state)
-      .filter(([, value]) => (value as number) > 0)
-      .map(([state, value]) => ({
-        name: RESOURCE_STATE_LABELS[state] || state,
-        value,
-        itemStyle: { color: RESOURCE_STATE_COLORS[state] || '#7e8299' },
-      }));
-
-    return {
-      tooltip: { trigger: 'item', formatter: '{b}: {c} ({d}%)' },
-      legend: { orient: 'vertical', right: '5%', top: 'center' },
-      series: [
-        {
-          name: translate('Resources by State'),
-          type: 'pie',
-          radius: ['40%', '70%'],
-          data: chartData,
-          itemStyle: { borderRadius: 4, borderColor: '#fff', borderWidth: 2 },
-          label: { show: false },
-          emphasis: { label: { show: true, fontSize: 14, fontWeight: 'bold' } },
-        },
-      ],
-    };
-  }, [data]);
-
-  const monthlyChartOptions = useMemo(() => {
-    if (!data?.monthly || (data.monthly as unknown[]).length === 0) return null;
-
-    const monthly = data.monthly as unknown as MonthlyData[];
-    const months = monthly.map((m) =>
-      DateTime.fromFormat(m.month, 'yyyy-MM').toFormat('MMM yyyy'),
-    );
-    const counts = monthly.map((m) => m.count);
-
-    return {
-      tooltip: { trigger: 'axis' },
-      grid: { left: '3%', right: '4%', bottom: '3%', containLabel: true },
-      xAxis: {
-        type: 'category',
-        data: months,
-        axisLabel: { rotate: 45 },
-      },
-      yAxis: {
-        type: 'value',
-        name: translate('New resources'),
-        minInterval: 1,
-      },
-      series: [
-        {
-          name: translate('New resources'),
-          type: 'line',
-          data: counts,
-          smooth: true,
-          itemStyle: { color: '#009ef7' },
-          areaStyle: { color: 'rgba(0, 158, 247, 0.1)' },
-        },
-      ],
-    };
-  }, [data]);
-
   if (isLoading) return <LoadingSpinner />;
   if (error) return <LoadingErred loadData={refetch} />;
   if (!data) return null;
 
-  const byState = data.by_state as Record<string, number> | undefined;
-  const okCount = byState?.OK || 0;
-  const erredCount = byState?.Erred || 0;
+  const okCount = (data.by_state as any)?.OK || 0;
+  const erredCount = (data.by_state as any)?.Erred || 0;
 
   return (
     <>
@@ -250,44 +170,14 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
 
       <Row className="g-4 mb-6">
         <Col xs={12} lg={6}>
-          <Card className="h-100">
-            <Card.Header>
-              <Card.Title>{translate('Resources by state')}</Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {stateChartOptions ? (
-                <EChart options={stateChartOptions} height="300px" />
-              ) : (
-                <NoResult
-                  title={translate('No data available')}
-                  message={translate(
-                    'Try adjusting your filters or date range.',
-                  )}
-                />
-              )}
-            </Card.Body>
-          </Card>
+          <ResourcesByStateChart
+            byState={(data.by_state as Record<string, number>) || {}}
+          />
         </Col>
         <Col xs={12} lg={6}>
-          <Card className="h-100">
-            <Card.Header>
-              <Card.Title>
-                {translate('Resource creation trend (12 months)')}
-              </Card.Title>
-            </Card.Header>
-            <Card.Body>
-              {monthlyChartOptions ? (
-                <EChart options={monthlyChartOptions} height="300px" />
-              ) : (
-                <NoResult
-                  title={translate('No data available')}
-                  message={translate(
-                    'Try adjusting your filters or date range.',
-                  )}
-                />
-              )}
-            </Card.Body>
-          </Card>
+          <ResourceCreationTrendChart
+            monthly={(data.monthly as unknown as MonthlyData[]) || []}
+          />
         </Col>
       </Row>
     </>
@@ -325,6 +215,7 @@ export const ProviderResourcesPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view resource statistics.',
           )}
+          callback={() => {}}
         />
       )}
     </>

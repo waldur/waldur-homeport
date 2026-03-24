@@ -1,10 +1,14 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
+import { generateBrandColors } from '@waldur/core/generateColors';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 import { UserActiveStatusCount } from '../types';
 
+import { ChartCard } from './ChartCard';
 import { DonutChart } from './DonutChart';
+import { getChartExportData } from './utils';
 
 interface ActiveStatusChartProps {
   data: UserActiveStatusCount[];
@@ -13,18 +17,34 @@ interface ActiveStatusChartProps {
 export const ActiveStatusChart: FC<ActiveStatusChartProps> = ({ data }) => {
   const chartData = useMemo(
     () =>
-      data.map((item) => ({
+      (data || []).map((item) => ({
         name:
           item.status === 'active'
             ? translate('Active')
             : translate('Inactive'),
         value: item.count,
         itemStyle: {
-          color: item.status === 'active' ? '#50cd89' : '#f1416c',
+          color:
+            item.status === 'active'
+              ? getBrandColor()
+              : generateBrandColors(getBrandColor())[300],
         },
       })),
     [data],
   );
 
-  return <DonutChart title={translate('User status')} data={chartData} />;
+  const getExportData = useCallback(
+    () => getChartExportData(translate('Status'), chartData),
+    [chartData],
+  );
+
+  return (
+    <ChartCard
+      title={translate('Active status')}
+      getExportData={getExportData}
+      isEmpty={!data || data.length === 0}
+    >
+      {(ref) => <DonutChart ref={ref} data={chartData} />}
+    </ChartCard>
+  );
 };

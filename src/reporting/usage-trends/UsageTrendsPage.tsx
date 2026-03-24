@@ -39,7 +39,7 @@ export const UsageTrendsPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4">
+      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
         <h1 className="mb-0 fs-1x">{translate('Usage trends')}</h1>
         <div className="d-none d-sm-flex gap-4">
           <UsageTrendsFilter
@@ -57,7 +57,7 @@ export const UsageTrendsPage: FC = () => {
         <>
           <GrowthSummaryCards stats={growthStats} year={year} />
 
-          <Row className="g-4 mb-6">
+          <Row className="g-6 mb-6">
             <Col xs={12} lg={6}>
               <UsageTrendChart monthlyData={currentYearData} year={year} />
             </Col>

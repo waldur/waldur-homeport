@@ -516,6 +516,20 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    name: 'reporting-user-analytics',
+    url: 'user-analytics/',
+    parent: 'reporting-users',
+    component: lazyComponent(() =>
+      import('./users/UserAnalyticsPage').then((m) => ({
+        default: m.UserAnalyticsPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Analytics'),
+      permissions: [() => isReportingScreenEnabled('user-analytics')],
+    },
+  },
+  {
     name: 'reporting-user-organizations',
     url: 'user-organizations/',
     parent: 'reporting-users',
@@ -583,6 +597,20 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Growth'),
       permissions: [() => isReportingScreenEnabled('growth')],
+    },
+  },
+  {
+    name: 'reporting-growth-report',
+    url: 'growth-report/',
+    parent: 'reporting-financial',
+    component: lazyComponent(() =>
+      import('./GrowthPage').then((module) => ({
+        default: module.GrowthPage,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Growth Report'),
+      permissions: [() => isReportingScreenEnabled('growth')], // Reusing same permission for now
     },
   },
   {

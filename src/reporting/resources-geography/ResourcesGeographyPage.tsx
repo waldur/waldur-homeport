@@ -45,13 +45,15 @@ export const ResourcesGeographyPage: FC = () => {
       <NoResult
         title={translate('No resources found')}
         message={translate('There are no active resources to display.')}
+        callback={() => refetch()}
+        buttonTitle={translate('Refresh')}
       />
     );
   }
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4">
+      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
         <h1 className="mb-0 fs-1x">{translate('Geographic distribution')}</h1>
       </div>
 

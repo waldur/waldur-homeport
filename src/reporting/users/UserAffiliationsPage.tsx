@@ -26,6 +26,8 @@ export const UserAffiliationsPage: FC = () => {
         message={translate(
           'The affiliations profile attribute is not enabled for this platform.',
         )}
+        callback={refetch}
+        buttonTitle={translate('Refresh')}
       />
     );
   }
@@ -38,5 +40,5 @@ export const UserAffiliationsPage: FC = () => {
     return <LoadingErred loadData={refetch} />;
   }
 
-  return <AffiliationsChart data={data} />;
+  return <AffiliationsChart data={data} refetch={refetch} />;
 };

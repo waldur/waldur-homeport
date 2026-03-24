@@ -1,35 +1,48 @@
-import { FC } from 'react';
-import { Card } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
+import { DonutChart } from '@waldur/reporting/users/charts/DonutChart';
 
-import { formatOrdersStateChart } from './utils';
+import { ORDER_STATES, STATE_COLORS } from './types';
 
 interface OrdersStateChartProps {
   stateStats: Record<string, number>;
 }
 
 export const OrdersStateChart: FC<OrdersStateChartProps> = ({ stateStats }) => {
-  const chartOptions = formatOrdersStateChart(stateStats);
-  const hasData = Object.values(stateStats).some((v) => v > 0);
+  const chartData = useMemo(
+    () =>
+      Object.entries(stateStats)
+        .filter(([, value]) => value > 0)
+        .map(([state, value]) => ({
+          name: ORDER_STATES[state] || state,
+          value,
+          itemStyle: {
+            color: STATE_COLORS[state] || '#7e8299',
+          },
+        })),
+    [stateStats],
+  );
+
+  const getExportData = useCallback(
+    () => ({
+      fields: [translate('State'), translate('Count')],
+      data: Object.entries(stateStats).map(([state, count]) => [
+        ORDER_STATES[state] || state,
+        count,
+      ]),
+    }),
+    [stateStats],
+  );
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('Orders by state')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        {hasData ? (
-          <EChart options={chartOptions} height="300px" />
-        ) : (
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        )}
-      </Card.Body>
-    </Card>
+    <ChartCard
+      title={translate('Orders by state')}
+      getExportData={getExportData}
+      isEmpty={Object.values(stateStats).every((v) => v === 0)}
+    >
+      {(ref) => <DonutChart ref={ref} data={chartData} height="300px" />}
+    </ChartCard>
   );
 };

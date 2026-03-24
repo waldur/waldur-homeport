@@ -1,11 +1,9 @@
 import { EChartsOption } from 'echarts';
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import React, { useMemo } from 'react';
 import { OrderState } from 'waldur-js-client';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
 interface ProvisioningByStateChartProps {
   byState: { [key: string]: number };
@@ -32,9 +30,10 @@ const STATE_LABELS: { [key in OrderState]: string } = {
   executing: translate('Executing'),
 };
 
-export const ProvisioningByStateChart: FC<ProvisioningByStateChartProps> = ({
-  byState,
-}) => {
+export const ProvisioningByStateChart = React.forwardRef<
+  any,
+  ProvisioningByStateChartProps
+>(({ byState }, ref) => {
   const chartData = useMemo(() => {
     return Object.entries(byState)
       .filter(([, count]) => count > 0)
@@ -107,30 +106,5 @@ export const ProvisioningByStateChart: FC<ProvisioningByStateChartProps> = ({
     [chartData, total],
   );
 
-  if (chartData.length === 0) {
-    return (
-      <Card className="h-100">
-        <Card.Header>
-          <Card.Title>{translate('Orders by state')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        </Card.Body>
-      </Card>
-    );
-  }
-
-  return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('Orders by state')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        <EChart options={options} height="300px" />
-      </Card.Body>
-    </Card>
-  );
-};
+  return <EChart ref={ref} options={options} height="300px" />;
+});

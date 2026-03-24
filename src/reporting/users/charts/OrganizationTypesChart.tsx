@@ -1,11 +1,13 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { formatOrganizationType } from '@waldur/user/support/aai-constants';
 
 import { UserOrganizationTypeCount } from '../types';
 
+import { ChartCard } from './ChartCard';
 import { DonutChart } from './DonutChart';
+import { getChartExportData } from './utils';
 
 interface OrganizationTypesChartProps {
   data: UserOrganizationTypeCount[];
@@ -19,7 +21,7 @@ export const OrganizationTypesChart: FC<OrganizationTypesChartProps> = ({
 }) => {
   const chartData = useMemo(
     () =>
-      data.map((item) => ({
+      (data || []).map((item) => ({
         name:
           formatOrganizationType(item.organization_type) ||
           translate('Not specified'),
@@ -28,10 +30,18 @@ export const OrganizationTypesChart: FC<OrganizationTypesChartProps> = ({
     [data],
   );
 
+  const getExportData = useCallback(
+    () => getChartExportData(translate('Organization type'), chartData),
+    [chartData],
+  );
+
   return (
-    <DonutChart
-      title={translate('Users by organization type')}
-      data={chartData}
-    />
+    <ChartCard
+      title={translate('Organization types')}
+      getExportData={getExportData}
+      isEmpty={!data || data.length === 0}
+    >
+      {(ref) => <DonutChart ref={ref} data={chartData} />}
+    </ChartCard>
   );
 };

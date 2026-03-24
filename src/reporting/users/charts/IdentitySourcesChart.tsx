@@ -1,10 +1,12 @@
-import { FC, useMemo } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
 
 import { UserIdentitySourceCount } from '../types';
 
+import { ChartCard } from './ChartCard';
 import { DonutChart } from './DonutChart';
+import { getChartExportData } from './utils';
 
 interface IdentitySourcesChartProps {
   data: UserIdentitySourceCount[];
@@ -15,14 +17,25 @@ export const IdentitySourcesChart: FC<IdentitySourcesChartProps> = ({
 }) => {
   const chartData = useMemo(
     () =>
-      data.map((item) => ({
+      (data || []).map((item) => ({
         name: item.identity_source || translate('Unknown'),
         value: item.count,
       })),
     [data],
   );
 
+  const getExportData = useCallback(
+    () => getChartExportData(translate('Identity source'), chartData),
+    [chartData],
+  );
+
   return (
-    <DonutChart title={translate('Identity providers')} data={chartData} />
+    <ChartCard
+      title={translate('Identity sources')}
+      getExportData={getExportData}
+      isEmpty={!data || data.length === 0}
+    >
+      {(ref) => <DonutChart ref={ref} data={chartData} />}
+    </ChartCard>
   );
 };

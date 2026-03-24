@@ -1,12 +1,13 @@
-import { FC } from 'react';
-import { Card } from 'react-bootstrap';
+import { EChartsOption } from 'echarts';
+import { DateTime } from 'luxon';
+import { FC, useCallback, useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
+import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 import { DailyOrderStats } from './types';
-import { formatDailyCostChart } from './utils';
 
 interface OrdersDailyCostChartProps {
   dailyStats: DailyOrderStats[];
@@ -15,26 +16,72 @@ interface OrdersDailyCostChartProps {
 export const OrdersDailyCostChart: FC<OrdersDailyCostChartProps> = ({
   dailyStats,
 }) => {
-  const chartOptions = formatDailyCostChart(dailyStats);
-  const hasCosts = dailyStats.some(
-    (d) => d.total_cost && parseFloat(d.total_cost) > 0,
+  const chartOptions = useMemo((): EChartsOption => {
+    const dates = dailyStats.map((d) =>
+      DateTime.fromISO(d.date).toFormat('MMM dd'),
+    );
+    const costs = dailyStats.map((d) =>
+      d.total_cost ? parseFloat(d.total_cost) : 0,
+    );
+
+    return {
+      tooltip: {
+        trigger: 'axis',
+        axisPointer: { type: 'shadow' },
+        formatter: (params) => {
+          const value = params[0]?.value || 0;
+          return `${params[0]?.name}: ${defaultCurrency(value)}`;
+        },
+      },
+      grid: {
+        left: '3%',
+        right: '4%',
+        bottom: '3%',
+        containLabel: true,
+      },
+      xAxis: {
+        type: 'category',
+        data: dates,
+        axisLabel: { rotate: 45 },
+      },
+      yAxis: {
+        type: 'value',
+        name: translate('Cost'),
+        axisLabel: {
+          formatter: (value) => defaultCurrency(value),
+        },
+      },
+      series: [
+        {
+          name: translate('Cost'),
+          type: 'bar',
+          data: costs,
+          itemStyle: { color: '#50cd89' },
+        },
+      ],
+    };
+  }, [dailyStats]);
+
+  const getExportData = useCallback(
+    () => ({
+      fields: [translate('Date'), translate('Cost')],
+      data: dailyStats.map((d) => [
+        DateTime.fromISO(d.date).toFormat('MMM dd, yyyy'),
+        d.total_cost || 0,
+      ]),
+    }),
+    [dailyStats],
   );
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{translate('Daily order cost')}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        {hasCosts ? (
-          <EChart options={chartOptions} height="300px" />
-        ) : (
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        )}
-      </Card.Body>
-    </Card>
+    <ChartCard
+      title={translate('Daily order cost')}
+      getExportData={getExportData}
+      isEmpty={
+        !dailyStats.some((d) => d.total_cost && parseFloat(d.total_cost) > 0)
+      }
+    >
+      {(ref) => <EChart ref={ref} options={chartOptions} height="300px" />}
+    </ChartCard>
   );
 };

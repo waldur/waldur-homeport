@@ -1,9 +1,8 @@
-import { FC } from 'react';
-import { Card } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 import { YearlyComparison } from './types';
 import { formatYearOverYearChart } from './utils';
@@ -17,31 +16,38 @@ export const YearOverYearChart: FC<YearOverYearChartProps> = ({
   comparison,
   year,
 }) => {
-  const chartOptions = formatYearOverYearChart(comparison, year);
-  const hasData = comparison.some(
-    (c) => c.currentYear > 0 || c.previousYear > 0,
+  const chartOptions = useMemo(
+    () => formatYearOverYearChart(comparison, year),
+    [comparison, year],
+  );
+
+  const getExportData = useCallback(
+    () => ({
+      fields: [
+        translate('Month'),
+        translate('Current Year ({year})', { year }),
+        translate('Previous Year ({year})', { year: year - 1 }),
+        translate('Growth %'),
+      ],
+      data: (comparison || []).map((c) => [
+        c.monthName,
+        c.currentYear,
+        c.previousYear,
+        c.growthPercent.toFixed(1),
+      ]),
+    }),
+    [comparison, year],
   );
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>
-          {translate('Year-over-year comparison: {current} vs {previous}', {
-            current: year,
-            previous: year - 1,
-          })}
-        </Card.Title>
-      </Card.Header>
-      <Card.Body>
-        {hasData ? (
-          <EChart options={chartOptions} height="350px" />
-        ) : (
-          <NoResult
-            title={translate('No data available')}
-            message={translate('Try adjusting your filters or date range.')}
-          />
-        )}
-      </Card.Body>
-    </Card>
+    <ChartCard
+      title={translate('Year-over-year comparison: {current} vs {previous}', {
+        current: year,
+        previous: year - 1,
+      })}
+      getExportData={getExportData}
+    >
+      {(ref) => <EChart ref={ref} options={chartOptions} height="350px" />}
+    </ChartCard>
   );
 };

@@ -24,5 +24,9 @@ export const UserOrganizationsPage: FC = () => {
     return <LoadingErred loadData={refetch} />;
   }
 
-  return <OrganizationsChart data={data} />;
+  return (
+    <div className="container-fluid py-6">
+      <OrganizationsChart data={data} />
+    </div>
+  );
 };
