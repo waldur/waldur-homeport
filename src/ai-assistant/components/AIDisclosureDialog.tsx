@@ -87,7 +87,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
       >
         <AccordionSection
           icon={<ShieldWarningIcon size={18} weight="duotone" />}
-          title={translate('Experimental AI & External Processing')}
+          title={translate('Experimental AI & external processing')}
           defaultOpen
         >
           <p className="mb-4">
@@ -97,14 +97,14 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
           </p>
           <p className="mb-0">
             {translate(
-              'Only your messages are sent to an external LLM service for processing. Your Waldur data is not shared. Do not share information you would not want processed by a third-party service.',
+              'Only your messages are sent to an external LLM service for processing. Your personal data is not shared. Do not share information you would not want processed by a third-party service.',
             )}
           </p>
         </AccordionSection>
 
         <AccordionSection
           icon={<LockIcon size={18} weight="duotone" />}
-          title={translate('Privacy & Data Security: What Not to Share')}
+          title={translate('Privacy & data security: what not to share')}
         >
           <p className="mb-3">
             {translate(
@@ -123,7 +123,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
 
         <AccordionSection
           icon={<SparkleIcon size={18} weight="duotone" />}
-          title={translate('Safe Usage & Support')}
+          title={translate('Safe usage & support')}
         >
           <ul className="mb-4 ps-4">
             <li>
@@ -139,7 +139,7 @@ export const AIDisclosureBanner: FC<AIDisclosureBannerProps> = ({
           </ul>
           <p className="mb-0">
             {translate(
-              'If you need assistance beyond what the AI can provide, please contact your organization administrator or support team.',
+              'If you need assistance beyond what the AI can provide, please contact the helpdesk.',
             )}
           </p>
         </AccordionSection>
