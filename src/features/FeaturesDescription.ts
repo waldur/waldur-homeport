@@ -281,6 +281,18 @@ export const FeaturesDescription: FeatureSection[] = [
     description: translate('User workspace'),
     items: [
       {
+        key: 'conceal_api_token',
+        description: translate('Hide API token management tab from non-staff and non-support users.'),
+      },
+      {
+        key: 'conceal_permission_requests',
+        description: translate('Hide permission requests tab from non-staff and non-support users.'),
+      },
+      {
+        key: 'conceal_remote_accounts',
+        description: translate('Hide remote accounts tab from non-staff and non-support users.'),
+      },
+      {
         key: 'disable_user_termination',
         description: translate('Disable user termination in user workspace.'),
       },

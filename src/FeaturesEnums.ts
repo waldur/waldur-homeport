@@ -85,6 +85,9 @@ export enum SupportFeatures {
 }
 
 export enum UserFeatures {
+  conceal_api_token = 'user.conceal_api_token',
+  conceal_permission_requests = 'user.conceal_permission_requests',
+  conceal_remote_accounts = 'user.conceal_remote_accounts',
   disable_user_termination = 'user.disable_user_termination',
   notifications = 'user.notifications',
   pending_user_actions = 'user.pending_user_actions',
