@@ -5,6 +5,14 @@ import { User } from '@waldur/workspace/types';
 
 type LLMChatEnabledRoles = 'disabled' | 'staff' | 'staff_and_support' | 'all';
 
+const DISCLOSURE_KEY = 'waldur/ai-assistant/disclosure-acknowledged';
+
+export const isDisclosureAcknowledged = (): boolean =>
+  localStorage.getItem(DISCLOSURE_KEY) === 'true';
+
+export const acknowledgeDisclosure = (): void =>
+  localStorage.setItem(DISCLOSURE_KEY, 'true');
+
 /** Read AI_ASSISTANT_ENABLED_ROLES from public configuration */
 export const getLLMChatMode = (): LLMChatEnabledRoles =>
   ENV.plugins?.WALDUR_CORE?.AI_ASSISTANT_ENABLED_ROLES ?? 'disabled';
