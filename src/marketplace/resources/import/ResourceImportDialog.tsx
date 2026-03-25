@@ -13,6 +13,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { DataLoader } from '@waldur/navigation/sidebar/marketplace-popup/DataLoader';
 import { sidebarResourcesFilterSelector } from '@waldur/navigation/sidebar/resources-filter/utils';
+import { type RootState } from '@waldur/store/reducers';
 import { ActionButton } from '@waldur/table/ActionButton';
 
 import { ProjectFilter } from '../list/ProjectFilter';
@@ -22,11 +23,14 @@ import { ResourcesList } from './ResourcesList';
 import { ImportDialogProps } from './types';
 import { IMPORT_RESOURCE_FORM_ID, useImportDialog } from './useImportDialog';
 
-export const ResourceImportDialog = connect<{}, {}, ImportDialogProps>(
-  (state) => ({
-    initialValues: sidebarResourcesFilterSelector(state),
-  }),
-)(
+export const ResourceImportDialog = connect<
+  {},
+  {},
+  ImportDialogProps,
+  RootState
+>((state: RootState) => ({
+  initialValues: sidebarResourcesFilterSelector(state),
+}))(
   reduxForm<{}, ImportDialogProps>({
     form: IMPORT_RESOURCE_FORM_ID,
   })((props) => {
