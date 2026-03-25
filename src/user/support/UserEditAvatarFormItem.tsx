@@ -51,6 +51,11 @@ export const UserEditAvatarFormItem: React.FC<OwnProps> = ({
                 variant="primary"
                 iconRight
                 disabled={isTooLarge || disabled}
+                disabledReason={
+                  isTooLarge
+                    ? translate('File exceeds 2 MB size limit')
+                    : translate('Profile editing is currently disabled')
+                }
                 pending={isLoading}
                 action={() => callback({ image })}
                 title={translate('Save')}

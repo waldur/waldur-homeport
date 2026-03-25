@@ -54,6 +54,7 @@ export const SyncButton = ({ offering, refetch }) => {
       action={callback}
       variant="tertiary"
       disabled={!enabled}
+      disabledReason={translate('Synchronization is in progress')}
       pending={!enabled}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
       title={translate('Synchronize')}

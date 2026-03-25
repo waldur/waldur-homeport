@@ -30,6 +30,7 @@ export const ErrorDetailsTab = ({ order }) => {
         <NoResult
           title={translate('No errors found for this order')}
           message={null}
+          noAction
         />
       )}
     </Card>

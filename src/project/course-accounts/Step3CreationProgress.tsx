@@ -122,6 +122,7 @@ export const Step3CreationProgress: FC<Step3CreationProgressProps> = ({
           iconNode={<ArrowsClockwiseIcon weight="bold" />}
           variant="tertiary"
           disabled={isFetching}
+          disabledReason={translate('Refreshing...')}
           className="ms-auto"
         />
       </div>

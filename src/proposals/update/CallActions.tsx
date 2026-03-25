@@ -58,7 +58,7 @@ export const CallActions: FC<CallActionsProps> = ({
   );
 
   const tooltipMessage = !hasRounds
-    ? translate('Call must have a round to be activated.')
+    ? translate('Call must have a round to be activated')
     : null;
 
   if (call.state === 'draft') {
@@ -92,15 +92,14 @@ export const CallActions: FC<CallActionsProps> = ({
 
   if (call.state === 'archived') {
     return (
-      <Tip label={tooltipMessage} id="tooltip-activate" placement="top">
-        <ActionButton
-          title={translate('Activate')}
-          variant="primary"
-          action={() => editCallState('activate', translate('Activate'))}
-          className={className}
-          disabled={!hasRounds}
-        />
-      </Tip>
+      <ActionButton
+        title={translate('Activate')}
+        variant="primary"
+        action={() => editCallState('activate', translate('Activate'))}
+        className={className}
+        disabled={!hasRounds}
+        disabledReason={translate('Call must have a round to be activated')}
+      />
     );
   }
 

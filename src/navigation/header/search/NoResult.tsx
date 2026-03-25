@@ -14,6 +14,8 @@ interface NoResultProps {
   message?: ReactNode;
   actions?: ReactNode;
   buttonTitle?: string;
+  // Explicitly marks this empty state as having no actionable CTA.
+  noAction?: boolean;
   callback?(): void;
   isVisible?: boolean;
   className?: string;
@@ -29,7 +31,7 @@ export const NoResult: FC<NoResultProps> = ({
   isVisible = true,
   className,
   style,
-}) => {
+}: NoResultProps) => {
   return (
     <div
       className={classNames(

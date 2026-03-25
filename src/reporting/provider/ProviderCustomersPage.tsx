@@ -232,7 +232,7 @@ export const ProviderCustomersPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view customer statistics.',
           )}
-          callback={() => {}}
+          noAction
         />
       )}
     </div>

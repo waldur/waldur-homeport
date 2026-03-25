@@ -169,6 +169,7 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
           <NoResult
             title={translate('No data available')}
             message={translate('No usage data recorded for this resource.')}
+            noAction
           />
         )}
       </Card.Body>

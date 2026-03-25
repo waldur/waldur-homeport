@@ -178,6 +178,7 @@ export const ProviderOverviewPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view statistics.',
           )}
+          noAction
         />
       )}
     </>

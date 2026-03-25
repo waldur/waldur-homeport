@@ -61,6 +61,7 @@ export const HypervisorPlacementMapDialog: FC<Props> = ({ resolve }) => {
           message={translate(
             'There are no instances in this tenant to display.',
           )}
+          noAction
         />
       ) : (
         <HypervisorPlacementMapContent instances={data} />

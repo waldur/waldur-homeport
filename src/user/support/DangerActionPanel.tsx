@@ -5,6 +5,7 @@ import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Panel } from '@waldur/core/Panel';
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
@@ -29,6 +30,7 @@ export const DangerActionPanel: FC<DangerActionPanelProps> = (props) => {
           variant="danger"
           action={() => dispatch(openModalDialog(DangerActionDialog, props))}
           disabled={!confirm}
+          disabledReason={translate('Please confirm before proceeding')}
           iconNode={<TrashIcon weight="bold" />}
           title={props.buttonTitle}
         />

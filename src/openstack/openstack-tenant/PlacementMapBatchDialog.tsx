@@ -100,6 +100,7 @@ export const PlacementMapBatchDialog: FC<Props> = ({ resolve }) => {
         <NoResult
           title={translate('No instances found')}
           message={translate('There are no instances to display.')}
+          noAction
         />
       ) : (
         <HypervisorPlacementMapContent instances={enriched} />

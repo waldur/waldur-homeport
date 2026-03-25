@@ -91,6 +91,9 @@ const FieldsListGroup = ({ fields, components }: FieldsListGroupProps) => {
                           variant="danger"
                           action={() => removeRow(i)}
                           disabled={fields.length === 1}
+                          disabledReason={translate(
+                            'At least one component limit is required',
+                          )}
                           iconNode={<TrashIcon weight="bold" />}
                         />
                       </td>

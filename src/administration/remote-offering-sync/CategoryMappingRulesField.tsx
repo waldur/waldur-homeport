@@ -122,6 +122,9 @@ const FieldsListGroup = ({
                         variant="text-danger"
                         action={() => removeRow(actualIndex)}
                         disabled={fields.length < 2}
+                        disabledReason={translate(
+                          'At least one mapping is required',
+                        )}
                         iconNode={<TrashIcon weight="bold" />}
                       />
                     </td>
@@ -137,6 +140,7 @@ const FieldsListGroup = ({
           variant="text-primary"
           action={addRow}
           disabled={addDisabled}
+          disabledReason={translate('Complete existing mappings first')}
           iconNode={<PlusCircleIcon weight="bold" />}
           title={translate('Add new')}
         />

@@ -121,6 +121,11 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
                   title={translate('Save')}
                   action={handleSubmit}
                   disabled={invalid || submitting}
+                  disabledReason={
+                    submitting
+                      ? translate('Please wait...')
+                      : translate('Please fill in the required fields')
+                  }
                 />
               </>
             }

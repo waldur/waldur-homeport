@@ -43,7 +43,7 @@ export const OfferingCostsPage: FC = () => {
         message={translate(
           'There are no offerings with associated costs to display.',
         )}
-        callback={() => {}}
+        noAction
       />
     );
   }

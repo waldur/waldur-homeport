@@ -85,6 +85,7 @@ export const InvoiceItemsBulkDelete = ({
       iconNode={<TrashIcon weight="bold" />}
       variant="danger"
       disabled={isDeleting}
+      disabledReason={translate('Deletion in progress')}
     />
   );
 };

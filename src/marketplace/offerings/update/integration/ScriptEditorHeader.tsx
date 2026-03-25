@@ -146,6 +146,11 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           action={onReset}
           variant="secondary"
           disabled={submitting || !dirty}
+          disabledReason={
+            submitting
+              ? translate('Saving in progress')
+              : translate('No changes to reset')
+          }
           iconNode={<ArrowClockwiseIcon weight="bold" />}
           title={isSmallScr ? translate('Reset') : translate('Reset to saved')}
         />
@@ -153,6 +158,7 @@ export const ScriptEditorHeader: FC<ScriptEditorHeaderProps> = ({
           variant="secondary"
           action={onDryRun}
           disabled={submitting}
+          disabledReason={translate('Saving in progress')}
           pending={executing}
           className="text-nowrap"
           iconNode={<PlayIcon weight="bold" />}

@@ -438,6 +438,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
         title={translate('Import preset')}
         action={handleImportPreset}
         disabled={isImporting}
+        disabledReason={translate('Import in progress')}
         iconNode={<DownloadSimple weight="bold" />}
         variant="light"
       />

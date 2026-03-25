@@ -35,6 +35,7 @@ export const LimitsSection = ({
             title={translate('No limits found for this order')}
             buttonTitle={null}
             message={null}
+            noAction
           />
         </Card.Body>
       </Card>

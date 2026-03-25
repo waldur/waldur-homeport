@@ -105,6 +105,7 @@ export const MaintenanceReportingOverviewPage: FC = () => {
           message={translate(
             'No maintenance announcements found for the selected period.',
           )}
+          noAction
         />
       )}
     </>

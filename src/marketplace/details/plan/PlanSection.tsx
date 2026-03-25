@@ -74,6 +74,7 @@ export const PlanSection = (props: PlanDetailsProps) => {
             title={translate('No plans found for this order')}
             buttonTitle={null}
             message={null}
+            noAction
           />
         </Card.Body>
       </Card>

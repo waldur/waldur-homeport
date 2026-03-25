@@ -20,6 +20,7 @@ export const OutputTab = ({ order }) => {
         <NoResult
           title={translate('No outputs found for this order')}
           message={null}
+          noAction
         />
       )}
     </Card>

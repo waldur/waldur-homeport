@@ -60,6 +60,7 @@ export const CreatePageSidebar: FC<CreatePageSidebarProps> = ({
             variant="danger"
             className="w-100 mt-2"
             disabled={submitting}
+            disabledReason={translate('Please wait...')}
             pending={isRejecting}
           />
           <TosNotification className="text-center text-gray-500 mt-2" />

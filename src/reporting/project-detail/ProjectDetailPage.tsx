@@ -208,6 +208,7 @@ export const ProjectDetailPage: FC = () => {
           message={translate(
             'Choose an organization from the dropdown above to view its projects.',
           )}
+          noAction
         />
       );
     }
@@ -219,6 +220,7 @@ export const ProjectDetailPage: FC = () => {
           message={translate(
             'Choose a project from the dropdown above to view resource usage details.',
           )}
+          noAction
         />
       );
     }
@@ -238,6 +240,7 @@ export const ProjectDetailPage: FC = () => {
           message={translate(
             'This project has no resources with allocated limits.',
           )}
+          noAction
         />
       );
     }
@@ -249,6 +252,7 @@ export const ProjectDetailPage: FC = () => {
           message={translate(
             'Choose a resource from the dropdown above to view its limit and usage history.',
           )}
+          noAction
         />
       );
     }

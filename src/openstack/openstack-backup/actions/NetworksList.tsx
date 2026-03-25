@@ -19,6 +19,7 @@ const AddButton = ({ onClick, disabled }) => (
   <ActionButton
     action={onClick}
     disabled={disabled}
+    disabledReason={translate('No available subnets')}
     title={translate('Add')}
     iconNode={<PlusIcon weight="bold" />}
     variant="text-secondary"

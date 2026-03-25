@@ -34,6 +34,7 @@ export const WizardButtons: FunctionComponent<WizardButtonsProps> = ({
         action={goBack}
         iconNode={<CaretLeftIcon weight="bold" />}
         disabled={submitting}
+        disabledReason={translate('Submission in progress')}
         className="min-w-125px"
       />
     )}

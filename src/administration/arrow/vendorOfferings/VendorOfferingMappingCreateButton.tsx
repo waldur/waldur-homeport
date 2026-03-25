@@ -38,6 +38,7 @@ export const VendorOfferingMappingCreateButton = ({
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
       disabled={!settings?.uuid}
+      disabledReason={translate('Settings UUID is required')}
     />
   );
 };

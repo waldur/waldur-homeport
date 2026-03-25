@@ -86,6 +86,7 @@ export const CampaignFooter = ({
     <ActionButton
       action={() => setStep(1)}
       disabled={disabled}
+      disabledReason={translate('Please fill in the required fields')}
       title={translate('Continue')}
       iconNode={<CaretRightIcon weight="bold" />}
       iconRight
@@ -96,6 +97,7 @@ export const CampaignFooter = ({
       {!isUpdate ? (
         <ActionButton
           disabled={disabled}
+          disabledReason={translate('Please fill in the required fields')}
           action={handleSubmit(saveAndSend)}
           iconNode={<PaperPlaneTiltIcon weight="bold" />}
           title={translate('Create a campaign')}
@@ -104,6 +106,7 @@ export const CampaignFooter = ({
       ) : (
         <ActionButton
           disabled={disabled}
+          disabledReason={translate('Please fill in the required fields')}
           action={handleSubmit(saveAndUpdate)}
           iconNode={<PaperPlaneTiltIcon weight="bold" />}
           title={translate('Update a campaign')}

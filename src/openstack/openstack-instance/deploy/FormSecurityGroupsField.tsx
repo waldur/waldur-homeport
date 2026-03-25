@@ -69,6 +69,7 @@ const ShowPreviewButton = () => {
     <ActionButton
       action={callback}
       disabled={!securityGroups?.length}
+      disabledReason={translate('No security groups selected')}
       title={translate('Preview')}
       iconNode={<EyeIcon weight="bold" />}
       className="text-nowrap"

@@ -64,6 +64,7 @@ export const ProposalSidebar = (props: CompletionPageSidebarProps) => {
             variant="secondary"
             className="w-100 mt-2"
             disabled={props.submitting}
+            disabledReason={translate('Saving draft...')}
             pending={props.isSaving}
           />
           <TosNotification />

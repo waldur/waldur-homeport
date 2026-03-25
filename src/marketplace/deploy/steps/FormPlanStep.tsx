@@ -36,6 +36,7 @@ export const FormPlanStep = (props: FormStepProps) => {
             offering={props.offering}
             className="ms-auto"
             disabled={props.disabled}
+            disabledReason={props.disabledTooltip}
           />
         )
       }

@@ -259,6 +259,9 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                           iconNode={<CaretRightIcon weight="bold" />}
                           iconRight
                           disabled={invalid}
+                          disabledReason={translate(
+                            'Please fill in the required fields',
+                          )}
                           variant="primary"
                           className="w-125px"
                         />

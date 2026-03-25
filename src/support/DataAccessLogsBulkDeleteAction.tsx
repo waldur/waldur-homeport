@@ -87,6 +87,11 @@ export const DataAccessLogsBulkDeleteAction = ({
       iconNode={<TrashIcon weight="bold" />}
       variant="danger"
       disabled={isPending || rows.length === 0}
+      disabledReason={
+        rows.length === 0
+          ? translate('No logs selected')
+          : translate('Deletion in progress')
+      }
       pending={isPending}
     />
   );

@@ -51,7 +51,9 @@ export default {
 
         const hasTooltip = node.attributes.some(
           (attr) =>
-            attr.type === 'JSXAttribute' && attr.name.name === 'tooltip',
+            attr.type === 'JSXAttribute' &&
+            (attr.name.name === 'tooltip' ||
+              attr.name.name === 'disabledReason'),
         );
 
         if (!hasTooltip) {
@@ -69,7 +71,7 @@ export default {
                   const indent = line.match(/^\s*/)[0];
                   return fixer.insertTextAfter(
                     lastAttr,
-                    `\n${indent}tooltip={translate('TODO: explain why disabled')}`,
+                    `\n${indent}disabledReason={translate('TODO: explain why disabled')}`,
                   );
                 },
               },

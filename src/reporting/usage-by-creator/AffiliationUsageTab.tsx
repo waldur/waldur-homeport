@@ -28,6 +28,7 @@ export const AffiliationUsageTab: FC = () => {
         message={translate(
           'There is no resource usage data by affiliation to display.',
         )}
+        noAction
       />
     );
   }
