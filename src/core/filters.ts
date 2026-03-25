@@ -1,7 +1,7 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
-import { destroy, change } from 'redux-form';
+import { change, destroy } from 'redux-form';
 
 import { router } from '@waldur/router';
 
@@ -113,8 +113,11 @@ export const syncFiltersToURL = (form: any) => {
         searchParams.delete(key);
       }
     }
-    const newRelativePathQuery =
-      window.location.pathname + '?' + searchParams.toString();
+    const serialized = searchParams.toString();
+    if (!serialized) {
+      return;
+    }
+    const newRelativePathQuery = window.location.pathname + '?' + serialized;
     history.pushState(null, '', newRelativePathQuery);
   }
 };
