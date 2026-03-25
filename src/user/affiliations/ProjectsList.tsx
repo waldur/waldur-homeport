@@ -64,7 +64,9 @@ const mapStateToFilter = createSelector(
     ) {
       filter.is_removed = stateFilter.is_removed;
     }
-    filter.user_uuid = user.uuid;
+    if (user) {
+      filter.user_uuid = user.uuid;
+    }
     return filter;
   },
 );
