@@ -31,7 +31,7 @@ export type RunConfig = {
 
 export interface UIBlock {
   id: string; // Unique ID for React keys
-  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown', 'table')
+  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown', 'table', 'vm_order')
   content: string;
   tag?: string; // Optional metadata (e.g., language for code blocks)
   status: 'loading' | 'streaming' | 'complete'; // Controls rendering
@@ -39,6 +39,39 @@ export interface UIBlock {
   headers?: string[]; // Table column headers
   rows?: string[][]; // Table data rows
   totalCount?: number; // Total number of rows
+  // VM Order-specific fields (when key === 'vm_order')
+  order_id?: string; // Order UUID
+  name?: string; // VM name
+  flavor?: string; // VM flavor (e.g., "2 vCPU, 4 GB RAM")
+  image?: string; // VM image name
+  project?: string; // Project name
+  organization?: string; // Organization name
+  project_uuid?: string; // Project UUID
+  order_status?: string; // Order status (e.g., "pending", "executing", "form", "preview", "success", "error")
+  message?: string; // Success message
+  error?: string; // Error message
+  // VM Order form mode fields (when order_status === 'form')
+  flavors?: Array<{
+    name: string;
+    cores: number;
+    ram: number;
+  }>;
+  images?: Array<{
+    name: string;
+    min_disk: number;
+    min_ram: number;
+  }>;
+  // VM Order project form mode fields (when order_status === 'project_form')
+  projects?: Array<{
+    name: string;
+    organization: string;
+    uuid: string;
+  }>;
+  // VM Order offering form mode fields (when order_status === 'offering_form')
+  offerings?: Array<{
+    uuid: string;
+    name: string;
+  }>;
 }
 
 export interface UIBlockProps {

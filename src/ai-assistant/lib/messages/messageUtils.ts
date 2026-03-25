@@ -91,6 +91,46 @@ const blockExtractors: Record<string, (block: UIBlock) => string> = {
 
     return `${headers}\n${separator}\n${rows}`;
   },
+  vm_order: (block) => {
+    const lines: string[] = [];
+
+    // Add intro message if available
+    if (block.content) {
+      lines.push(block.content);
+      lines.push('');
+    }
+
+    // Add status-specific header
+    if (block.order_status === 'success' || block.order_status === 'error') {
+      lines.push(
+        block.order_status === 'success'
+          ? 'VM Order Created Successfully'
+          : 'VM Creation Failed',
+      );
+      lines.push('');
+    }
+
+    // Add VM details
+    if (block.name) lines.push(`VM Name: ${block.name}`);
+    if (block.project) lines.push(`Project: ${block.project}`);
+    if (block.flavor) lines.push(`Flavor: ${block.flavor}`);
+    if (block.image) lines.push(`Image: ${block.image}`);
+    if (block.order_id) lines.push(`Order ID: ${block.order_id}`);
+
+    // Add error message if present
+    if (block.error) {
+      lines.push('');
+      lines.push(`Error: ${block.error}`);
+    }
+
+    // Add success message if present
+    if (block.message && block.order_status === 'success') {
+      lines.push('');
+      lines.push(block.message);
+    }
+
+    return lines.join('\n');
+  },
 };
 
 export function extractTextFromBlocks(blocks: UIBlock[]): string {

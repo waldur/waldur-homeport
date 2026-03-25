@@ -28,7 +28,18 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       // Check table-specific fields
       prev.block.headers === next.block.headers &&
       prev.block.rows === next.block.rows &&
-      prev.block.totalCount === next.block.totalCount
+      prev.block.totalCount === next.block.totalCount &&
+      // Check vm_order-specific fields
+      prev.block.order_id === next.block.order_id &&
+      prev.block.name === next.block.name &&
+      prev.block.flavor === next.block.flavor &&
+      prev.block.image === next.block.image &&
+      prev.block.project === next.block.project &&
+      prev.block.organization === next.block.organization &&
+      prev.block.project_uuid === next.block.project_uuid &&
+      prev.block.order_status === next.block.order_status &&
+      prev.block.message === next.block.message &&
+      prev.block.error === next.block.error
     );
   },
 );
@@ -39,13 +50,20 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
   // Filter out empty blocks (memoized to prevent recalculation)
   // Allow loading blocks through even with empty content - they show their own loading UI
   // Allow table blocks with structured data (headers/rows) even if content is empty
+  // Allow vm_order blocks with structured data even if content is empty
   const validBlocks = useMemo(
     () =>
       blocks.filter(
         (block) =>
           block.content ||
           block.status === 'loading' ||
-          (block.key === 'table' && (block.headers || block.rows)),
+          (block.key === 'table' && (block.headers || block.rows)) ||
+          (block.key === 'vm_order' &&
+            (block.order_id ||
+              block.name ||
+              block.error ||
+              block.order_status ||
+              block.status === 'streaming')),
       ),
     [blocks],
   );
