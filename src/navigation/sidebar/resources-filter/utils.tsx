@@ -24,7 +24,7 @@ import { Customer, Project } from '@waldur/workspace/types';
 
 import { useOfferingCategories } from '../utils';
 
-export interface ResourceFilterValues {
+interface ResourceFilterValues {
   organization?: Customer;
   project?: Project;
 }
