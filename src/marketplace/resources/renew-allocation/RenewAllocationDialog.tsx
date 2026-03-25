@@ -192,7 +192,9 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
       acc[resource.uuid] = { limits: resource.limits };
       return acc;
     }, {}),
-    extension_months: 12,
+    extension_months:
+      resources[0]?.offering_components?.find((c) => c.is_prepaid)
+        ?.min_renewal_duration ?? 1,
   };
 
   return (

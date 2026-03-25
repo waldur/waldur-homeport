@@ -37,32 +37,56 @@ export const ComponentPrepaidFieldGroup = enhance(
           />
         </FormGroup>
         {props.isPrepaid ? (
-          <Row className="g-5">
-            <Col xs>
-              <FormGroup label={translate('Min duration')} spaceless>
-                <Field name="min_prepaid_duration" component={NumberField} />
-              </FormGroup>
-            </Col>
-            <Col xs>
-              <FormGroup label={translate('Max duration')} spaceless>
-                <Field name="max_prepaid_duration" component={NumberField} />
-              </FormGroup>
-            </Col>
-            <Col xs={5}>
-              <FormGroup label={translate('Overage component')} spaceless>
-                <Field
-                  name="overage_component"
-                  component={SelectField}
-                  options={props.offering.components.filter(
-                    (component) => component.billing_type == 'usage',
-                  )}
-                  getOptionValue={(option: OfferingComponent) => option.uuid}
-                  getOptionLabel={(option: OfferingComponent) => option.name}
-                  simpleValue
-                />
-              </FormGroup>
-            </Col>
-          </Row>
+          <>
+            <Row className="g-5 mb-5">
+              <Col xs>
+                <FormGroup label={translate('Min duration')} spaceless>
+                  <Field name="min_prepaid_duration" component={NumberField} />
+                </FormGroup>
+              </Col>
+              <Col xs>
+                <FormGroup label={translate('Max duration')} spaceless>
+                  <Field name="max_prepaid_duration" component={NumberField} />
+                </FormGroup>
+              </Col>
+              <Col xs>
+                <FormGroup label={translate('Duration step')} spaceless>
+                  <Field name="prepaid_duration_step" component={NumberField} />
+                </FormGroup>
+              </Col>
+              <Col xs={4}>
+                <FormGroup label={translate('Overage component')} spaceless>
+                  <Field
+                    name="overage_component"
+                    component={SelectField}
+                    options={props.offering.components.filter(
+                      (component) => component.billing_type == 'usage',
+                    )}
+                    getOptionValue={(option: OfferingComponent) => option.uuid}
+                    getOptionLabel={(option: OfferingComponent) => option.name}
+                    simpleValue
+                  />
+                </FormGroup>
+              </Col>
+            </Row>
+            <Row className="g-5">
+              <Col xs>
+                <FormGroup label={translate('Min renewal duration')} spaceless>
+                  <Field name="min_renewal_duration" component={NumberField} />
+                </FormGroup>
+              </Col>
+              <Col xs>
+                <FormGroup label={translate('Max renewal duration')} spaceless>
+                  <Field name="max_renewal_duration" component={NumberField} />
+                </FormGroup>
+              </Col>
+              <Col xs>
+                <FormGroup label={translate('Renewal duration step')} spaceless>
+                  <Field name="renewal_duration_step" component={NumberField} />
+                </FormGroup>
+              </Col>
+            </Row>
+          </>
         ) : // <>
         //   <FormGroup label={translate('Minimal prepaid duration')} space={5}>
         //     <Field name="min_prepaid_duration" component={NumberField} />

@@ -53,11 +53,12 @@ const getMonthOptions = (
 
   // 4. Generate the options
   const min = component?.min_prepaid_duration || 1;
+  const stepSize = component?.prepaid_duration_step || 1;
   // Ensure the loop doesn't run if the max duration is less than the min
   const max = Math.max(min, trueMaxDuration);
 
   const options = [];
-  for (let i = min; i <= max; i++) {
+  for (let i = min; i <= max; i += stepSize) {
     options.push({
       value: i,
       label: translate('{count} months', { count: i }),
