@@ -30,6 +30,10 @@ export const LanguageSelectorDropdown: FunctionComponent = () => {
   const { currentLanguage, languageChoices, setLanguage } =
     useLanguageSelector();
 
+  if (currentLanguage) {
+    return null;
+  }
+
   return (
     <div
       className="menu-item"
