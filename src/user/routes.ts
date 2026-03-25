@@ -333,7 +333,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'all-resources',
-    url: '/all-resources/?offering',
+    url: '/all-resources/',
     component: lazyComponent(() =>
       import('@waldur/marketplace/resources/list/AllResourcesList').then(
         (module) => ({ default: module.AllResourcesList }),
