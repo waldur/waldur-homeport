@@ -72,3 +72,7 @@ export const GroupInvitationTokenStorage = new StringStorageManager(
 );
 
 export const LanguageStorage = new StringStorageManager('waldur/i18n/lang');
+
+export const ResourcesFilterStorage = new JsonStorageManager<any>(
+  'waldur/filter/resources',
+);

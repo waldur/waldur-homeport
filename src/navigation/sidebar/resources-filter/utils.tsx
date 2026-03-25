@@ -1,9 +1,11 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useCallback, useEffect } from 'react';
 import { useDispatch, useSelector, batch } from 'react-redux';
+import { Dispatch } from 'redux';
 import { change } from 'redux-form';
 
 import { getQueryParams, syncFiltersToURL } from '@waldur/core/filters';
+import { ResourcesFilterStorage } from '@waldur/core/StorageManager';
 import { translate } from '@waldur/i18n';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
 import { setMarketplaceFilter } from '@waldur/marketplace/landing/filter/store/actions';
@@ -14,22 +16,34 @@ import {
   CATEGORY_RESOURCES_TABLE_ID,
   PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
 } from '@waldur/marketplace/resources/list/constants';
+import { RootState } from '@waldur/store/reducers';
 import { applyFilters, setFilter } from '@waldur/table/actions';
 import { selectFiltersStorage } from '@waldur/table/selectors';
 import { TableSidebarFilterValues } from '@waldur/table/TableFilterItem';
+import { Customer, Project } from '@waldur/workspace/types';
 
 import { useOfferingCategories } from '../utils';
 
-const key = 'waldur/filter/resources';
+export interface ResourceFilterValues {
+  organization?: Customer;
+  project?: Project;
+}
 
-const restoreFilter = () => {
-  const data = localStorage.getItem(key);
-  return data ? JSON.parse(data) : data;
-};
-const storeFilter = (values) =>
-  localStorage.setItem(key, JSON.stringify(values));
-
-const _setFilter = ({ table, form, label, name, value, dispatch }) => {
+const _setFilter = ({
+  table,
+  form,
+  label,
+  name,
+  value,
+  dispatch,
+}: {
+  table: string;
+  form: string;
+  label: string;
+  name: string;
+  value: any;
+  dispatch: Dispatch;
+}) => {
   dispatch(
     setFilter(table, {
       label,
@@ -53,14 +67,18 @@ const _setFilter = ({ table, form, label, name, value, dispatch }) => {
 
 export const useOrganizationAndProjectFiltersForResources = (
   from: 'all-resources' | 'category-resources' = null,
-) => {
+): {
+  syncResourceFilters: (formData: ResourceFilterValues) => void;
+  clearAllFilters: () => void;
+  removeFilter: (name: string) => void;
+} => {
   const dispatch = useDispatch();
   const categories = useOfferingCategories();
 
   const { state, params } = useCurrentStateAndParams();
 
   const syncResourceFilters = useCallback(
-    (formData) => {
+    (formData: ResourceFilterValues) => {
       batch(() => {
         // Update all resources table filter
         if (!from || from === 'category-resources') {
@@ -213,7 +231,7 @@ export const useOrganizationAndProjectFiltersForResources = (
         );
 
         // Save in local storage
-        storeFilter(formData);
+        ResourcesFilterStorage.set(formData);
 
         // Sync to URL so filters are visible and shareable
         syncFiltersToURL(formData);
@@ -236,7 +254,7 @@ export const useOrganizationAndProjectFiltersForResources = (
   }, [dispatch, filters, syncResourceFilters]);
 
   const removeFilter = useCallback(
-    (name) => {
+    (name: string) => {
       dispatch(change(MARKETPLACE_LANDING_FILTER_FORM, name, null, true));
       dispatch(setMarketplaceFilter({ name, value: null }));
       if (name === 'organization') {
@@ -257,8 +275,8 @@ export const useOrganizationAndProjectFiltersForResources = (
 
   useEffect(() => {
     // Normalize filter values - handle arrays from old data or different code paths
-    const normalizeFilter = (filter: any) => {
-      if (!filter) return filter;
+    const normalizeFilter = (filter: any): ResourceFilterValues => {
+      if (!filter) return { organization: null, project: null };
       return {
         ...filter,
         organization: Array.isArray(filter.organization)
@@ -279,10 +297,10 @@ export const useOrganizationAndProjectFiltersForResources = (
       const normalized = normalizeFilter(urlParams);
       syncResourceFilters(normalized);
       // Also save to localStorage for persistence
-      storeFilter(normalized);
+      ResourcesFilterStorage.set(normalized);
     } else {
       // Fall back to localStorage
-      const filter = restoreFilter();
+      const filter = ResourcesFilterStorage.get();
       const normalized = normalizeFilter(filter);
       syncResourceFilters(normalized);
       // Sync restored filters to URL so they are visible and shareable
@@ -295,7 +313,9 @@ export const useOrganizationAndProjectFiltersForResources = (
   return { syncResourceFilters, clearAllFilters, removeFilter };
 };
 
-export const sidebarResourcesFilterSelector = (state: any) => {
+export const sidebarResourcesFilterSelector = (
+  state: RootState,
+): ResourceFilterValues => {
   const filters = selectFiltersStorage(state, ALL_RESOURCES_TABLE_ID);
   if (!filters?.length) return null;
   const project = filters.find((item) => item.name === 'project');
