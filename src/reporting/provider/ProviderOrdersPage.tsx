@@ -51,6 +51,7 @@ export const ProviderOrdersPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view order statistics.',
           )}
+          noAction
         />
       ) : isLoading ? (
         <LoadingSpinner />
@@ -64,6 +65,7 @@ export const ProviderOrdersPage: FC = () => {
           message={translate(
             'No order statistics found for the selected provider and period.',
           )}
+          noAction
         />
       )}
     </>

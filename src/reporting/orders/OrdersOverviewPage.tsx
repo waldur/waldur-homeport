@@ -36,6 +36,7 @@ export const OrdersOverviewPage: FC = () => {
           message={translate(
             'No order statistics found for the selected period.',
           )}
+          noAction
         />
       )}
     </>

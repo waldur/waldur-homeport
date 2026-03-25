@@ -37,6 +37,7 @@ export default {
     messages: {
       addCallToAction:
         'NoResult component should include a call-to-action (callback or actions attribute) to guide users towards a next step.',
+      suggestNoAction: 'Add noAction prop (no CTA needed)',
       suggestCallback: 'Add callback prop',
       suggestActions: 'Add actions prop',
     },
@@ -49,12 +50,19 @@ export default {
         if (elementName === 'NoResult') {
           if (
             !hasAttribute(node, 'actions') &&
-            !hasAttribute(node, 'callback')
+            !hasAttribute(node, 'callback') &&
+            !hasAttribute(node, 'noAction')
           ) {
             context.report({
               node,
               messageId: 'addCallToAction',
               suggest: [
+                {
+                  messageId: 'suggestNoAction',
+                  fix(fixer) {
+                    return insertAttribute(context, node, fixer, 'noAction');
+                  },
+                },
                 {
                   messageId: 'suggestCallback',
                   fix(fixer) {

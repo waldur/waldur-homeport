@@ -25,6 +25,7 @@ export const TableExportButton: FunctionComponent<
       iconNode={<ExportIcon weight="bold" />}
       onClick={() => openExportDialog(props.table, 'clipboard', props)}
       disabled={props.rows?.length === 0}
+      disabledReason={translate('No data to export')}
     />
   );
 };

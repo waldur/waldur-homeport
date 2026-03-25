@@ -11,6 +11,8 @@ interface ToolbarButtonProps {
   title?: string;
   /** Tooltip text shown on hover */
   tooltip?: string;
+  /** Tooltip shown only when button is disabled/pending */
+  disabledReason?: string;
   /** Icon to display */
   iconNode: ReactNode;
   /** Click handler */
@@ -35,6 +37,7 @@ interface ToolbarButtonProps {
 export const ToolbarButton: FC<ToolbarButtonProps> = ({
   title,
   tooltip,
+  disabledReason,
   iconNode,
   onClick,
   disabled,
@@ -45,6 +48,8 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
   className,
 }) => {
   const isIconOnly = !title;
+  const isDisabled = disabled || pending;
+  const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
 
   const button = (
     <Button
@@ -53,11 +58,11 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
         className,
         isIconOnly && 'btn-icon',
         badge !== undefined && 'position-relative',
-        { disabled: disabled || pending },
+        { disabled: isDisabled },
       )}
       size={size}
       onClick={onClick}
-      disabled={disabled || pending}
+      disabled={isDisabled}
     >
       {pending ? (
         <LoadingSpinnerIcon />
@@ -73,9 +78,12 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
     </Button>
   );
 
-  if (tooltip) {
+  if (effectiveTooltip) {
     return (
-      <Tip id={`toolbar-btn-${tooltip.replace(/\s+/g, '-')}`} label={tooltip}>
+      <Tip
+        id={`toolbar-btn-${effectiveTooltip.replace(/\s+/g, '-')}`}
+        label={effectiveTooltip}
+      >
         {button}
       </Tip>
     );

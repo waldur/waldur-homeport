@@ -256,7 +256,7 @@ export const ProviderOfferingsPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view offering statistics.',
           )}
-          callback={() => {}}
+          noAction
         />
       )}
     </div>

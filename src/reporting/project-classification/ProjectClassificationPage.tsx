@@ -49,6 +49,7 @@ export const ProjectClassificationPage: FC = () => {
         message={translate(
           'There is no project classification data to display.',
         )}
+        noAction
       />
     );
   }

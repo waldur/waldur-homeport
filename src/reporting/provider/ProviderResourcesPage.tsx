@@ -215,7 +215,7 @@ export const ProviderResourcesPage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view resource statistics.',
           )}
-          callback={() => {}}
+          noAction
         />
       )}
     </>

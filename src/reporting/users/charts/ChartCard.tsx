@@ -87,6 +87,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
             title={translate('No data available')}
             message={translate('Try adjusting your filters or date range.')}
             className="py-10"
+            noAction
           />
         ) : (
           children(chartRef)

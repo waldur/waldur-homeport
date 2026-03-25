@@ -196,10 +196,10 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
         iconNode={<CheckCircle weight="bold" />}
         variant="primary"
         disabled={activateMutation.isPending || !inactiveCount}
-        tooltip={
+        disabledReason={
           !inactiveCount
-            ? translate('No inactive request types selected.')
-            : undefined
+            ? translate('No inactive request types selected')
+            : translate('Operation in progress')
         }
       />
       <ActionButton
@@ -208,10 +208,10 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
         iconNode={<XCircle weight="bold" />}
         variant="warning"
         disabled={deactivateMutation.isPending || !activeCount}
-        tooltip={
+        disabledReason={
           !activeCount
-            ? translate('No active request types selected.')
-            : undefined
+            ? translate('No active request types selected')
+            : translate('Operation in progress')
         }
       />
       <ActionButton
@@ -220,6 +220,11 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
         iconNode={<Trash weight="bold" />}
         variant="danger"
         disabled={deleteMutation.isPending || !rows.length}
+        disabledReason={
+          !rows.length
+            ? translate('No request types selected')
+            : translate('Deletion in progress')
+        }
       />
     </>
   );

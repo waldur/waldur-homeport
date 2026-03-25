@@ -262,6 +262,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                 <ActionButton
                   variant="secondary"
                   disabled
+                  disabledReason={translate('Read-only mode')}
                   action={() => {}}
                   title={translate('Save & dry run script')}
                 />
@@ -301,6 +302,7 @@ export const EditScriptDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
                   variant="tertiary"
                   action={closeDialog}
                   disabled={props.submitting}
+                  disabledReason={translate('Submission in progress')}
                   title={translate('Cancel')}
                 />
                 <SubmitButton

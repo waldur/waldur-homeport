@@ -90,12 +90,22 @@ export const BroadcastFormDialog: FC<BroadcastFormDialogProps> = ({
               action={() => saveAsTemplate(props.values)}
               variant="secondary"
               disabled={disabled}
+              disabledReason={
+                props.submitting
+                  ? translate('Submitting...')
+                  : translate('Please fill in all required fields')
+              }
               iconNode={<FloppyDiskIcon weight="bold" />}
               title={translate('Save as a template')}
             />
             <ActionButton
               action={props.handleSubmit}
               disabled={disabled}
+              disabledReason={
+                props.submitting
+                  ? translate('Submitting...')
+                  : translate('Please fill in all required fields')
+              }
               iconNode={<ArrowRightIcon weight="bold" />}
               title={translate('Select recipients')}
             />

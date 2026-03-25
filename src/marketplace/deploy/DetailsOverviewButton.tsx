@@ -31,6 +31,7 @@ export const DetailsOverviewButton = ({
       variant="tertiary"
       className={className}
       disabled={!offering}
+      disabledReason={translate('Offering information is not available')}
       action={() =>
         dispatch(
           openModalDialog(DetailsOverviewDialog, {

@@ -196,6 +196,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
           title={translate('Save')}
           iconNode={<CheckCircleIcon weight="bold" />}
           disabled={!newCount && !removedCount}
+          disabledReason={translate('No changes to save')}
           pending={isPending}
           className="min-w-125px"
         />

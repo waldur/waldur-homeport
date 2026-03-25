@@ -37,6 +37,7 @@ export const UsageByOrgTypePage: FC = () => {
         message={translate(
           'There is no resource usage data by organization type to display.',
         )}
+        noAction
       />
     );
   }

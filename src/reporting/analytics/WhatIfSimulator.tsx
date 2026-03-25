@@ -287,6 +287,7 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
             <NoResult
               title={translate('No data available')}
               message={translate('Adjust parameters to see projected impact.')}
+              noAction
             />
           )}
         </Col>

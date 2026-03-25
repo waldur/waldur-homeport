@@ -20,6 +20,8 @@ interface CompactSubmitButtonProps {
   variant?: string;
   /** Additional CSS classes */
   className?: string;
+  /** Tooltip shown only when button is disabled/pending */
+  disabledReason?: string;
   /** Button type - defaults to 'submit' */
   type?: 'submit' | 'button';
   /** Click handler */
@@ -45,6 +47,7 @@ export const CompactSubmitButton: FC<CompactSubmitButtonProps> = ({
   id,
   disabled,
   invalid,
+  disabledReason,
   variant = 'primary',
   className,
   type = 'submit',
@@ -61,6 +64,7 @@ export const CompactSubmitButton: FC<CompactSubmitButtonProps> = ({
     iconRight={!iconOnLeft}
     className={className}
     disabled={disabled || invalid}
+    disabledReason={disabledReason}
     variant={variant}
     pending={submitting}
     size="sm"

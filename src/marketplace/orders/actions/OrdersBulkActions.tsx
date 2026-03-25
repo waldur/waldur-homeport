@@ -108,6 +108,11 @@ export const OrdersBulkActions = ({
         iconNode={<CheckIcon weight="bold" />}
         variant="primary"
         disabled={isLoading || !isPendingOrderSelected}
+        disabledReason={
+          !isPendingOrderSelected
+            ? translate('No pending orders selected')
+            : translate('Operation in progress')
+        }
         pending={actionPending.approve}
       />
       <ActionButton
@@ -116,6 +121,11 @@ export const OrdersBulkActions = ({
         iconNode={<ProhibitIcon weight="bold" />}
         variant="danger"
         disabled={isLoading || !isPendingOrderSelected}
+        disabledReason={
+          !isPendingOrderSelected
+            ? translate('No pending orders selected')
+            : translate('Operation in progress')
+        }
         pending={actionPending.reject}
       />
     </>

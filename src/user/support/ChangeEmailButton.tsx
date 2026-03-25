@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
+import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionButton } from '@waldur/table/ActionButton';
 
@@ -38,6 +39,7 @@ export const ChangeEmailButton: FunctionComponent<ChangeEmailButtonProps> = (
       variant="secondary"
       className="btn-sm btn-icon"
       disabled={props.disabled}
+      disabledReason={translate('Profile editing is currently disabled')}
     />
   );
 };

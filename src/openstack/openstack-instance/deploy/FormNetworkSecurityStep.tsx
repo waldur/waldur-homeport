@@ -300,6 +300,7 @@ const renderNetworkRows = ({
       <ActionButton
         action={addRow}
         disabled={freeSubnets.length === 0}
+        disabledReason={translate('No available subnets')}
         title={translate('Add subnet')}
         iconNode={<PlusCircleIcon weight="bold" />}
         variant="text-primary"

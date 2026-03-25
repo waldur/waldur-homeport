@@ -279,6 +279,7 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
         <NoResult
           title={translate('No data available')}
           message={translate('No data available at this level.')}
+          noAction
         />
       )}
 

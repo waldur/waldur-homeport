@@ -63,6 +63,7 @@ const SortableField = ({ name, index, onRemove, disabled }) => {
           iconNode={<TrashIcon weight="bold" />}
           variant="text-danger"
           disabled={disabled}
+          disabledReason={translate('At least two options are required')}
         />
       </td>
     </tr>
@@ -132,6 +133,9 @@ const DraggableFieldsListGroup = ({
                     iconNode={<PlusIcon weight="bold" />}
                     variant="text-primary"
                     disabled={addDisabled}
+                    disabledReason={translate(
+                      'Fill in all options before adding more',
+                    )}
                   />
                 </td>
               </tr>

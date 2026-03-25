@@ -65,6 +65,7 @@ export const UserDelete = ({ user }: { user: User }) => {
           variant="danger"
           action={handleDeleteUser}
           disabled={isLoading}
+          disabledReason={translate('Deletion in progress')}
           pending={isLoading}
           iconNode={<TrashIcon weight="bold" />}
           title={translate('Delete')}

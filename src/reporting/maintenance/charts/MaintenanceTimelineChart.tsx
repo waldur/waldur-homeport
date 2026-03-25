@@ -23,6 +23,7 @@ export const MaintenanceTimelineChart: FC<MaintenanceTimelineChartProps> = ({
       <NoResult
         title={translate('No data available')}
         message={translate('Try adjusting your filters or date range.')}
+        noAction
       />
     );
   }

@@ -94,6 +94,7 @@ export const PublicationsBulkRemoveButton = ({
       iconNode={<TrashIcon weight="bold" />}
       variant="danger"
       disabled={isRemoving}
+      disabledReason={translate('Removal in progress')}
     />
   );
 };

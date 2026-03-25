@@ -17,6 +17,8 @@ interface CompactActionButtonProps {
   disabled?: boolean;
   /** Tooltip text */
   tooltip?: string;
+  /** Tooltip shown only when button is disabled/pending */
+  disabledReason?: string;
   /** Bootstrap button variant - defaults to 'tertiary' */
   variant?: string;
   /** Loading state - shows spinner and disables button */

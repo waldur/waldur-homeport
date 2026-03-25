@@ -225,6 +225,9 @@ export const EmailsListGroup = ({
                             variant="text-danger"
                             action={() => removeRow(i)}
                             disabled={fields.length === 1}
+                            disabledReason={translate(
+                              'At least one email is required',
+                            )}
                             iconNode={<TrashIcon weight="bold" />}
                           />
                         </td>
@@ -272,6 +275,9 @@ export const EmailsListGroup = ({
           <ActionButton
             variant="text-primary"
             disabled={warn}
+            disabledReason={translate(
+              'Fill in empty email fields before adding more',
+            )}
             action={addRow}
             title={
               fields.length > 0

@@ -45,6 +45,7 @@ const ResourceNameField = (props) => {
           variant="tertiary"
           action={() => suggestName()}
           disabled={isLoading}
+          disabledReason={translate('Loading suggestion')}
           iconNode={<LightbulbFilamentIcon weight="bold" />}
           title={translate('Suggest name')}
         />
@@ -56,6 +57,9 @@ const ResourceNameField = (props) => {
           <ActionButton
             variant="tertiary"
             disabled
+            disabledReason={translate(
+              'Organization and project selection required',
+            )}
             action={() => {}}
             iconNode={<LightbulbFilamentIcon weight="bold" />}
             title={translate('Suggest name')}

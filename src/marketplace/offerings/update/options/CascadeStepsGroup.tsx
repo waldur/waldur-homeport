@@ -80,6 +80,7 @@ export const CascadeStepsGroup = ({
                   variant="text-danger"
                   action={() => removeStep(index)}
                   disabled={fields.length <= 1}
+                  disabledReason={translate('At least one step is required')}
                   iconNode={<TrashIcon weight="bold" />}
                 />
               </div>

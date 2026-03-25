@@ -107,6 +107,7 @@ const FieldsListGroup = ({
           iconNode={<PlusIcon weight="bold" />}
           variant="text-primary"
           disabled={addDisabled}
+          disabledReason={translate('Complete all fields before adding more')}
         />
       </div>
     </>

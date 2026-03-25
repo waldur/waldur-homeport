@@ -80,6 +80,7 @@ export const ProvisioningStatsPage: FC = () => {
         message={translate(
           'There is no provisioning statistics data to display.',
         )}
+        noAction
       />
     );
   }

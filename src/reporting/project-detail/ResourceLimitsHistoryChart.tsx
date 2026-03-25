@@ -161,6 +161,7 @@ export const ResourceLimitsHistoryChart: FC<
             message={translate(
               'No limit changes recorded. Limits are captured when orders are processed.',
             )}
+            noAction
           />
         )}
       </Card.Body>

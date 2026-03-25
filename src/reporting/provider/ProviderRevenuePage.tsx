@@ -55,6 +55,7 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
             title={translate('No data available')}
             message={translate('No revenue data available for this provider.')}
             callback={refetch}
+            buttonTitle={translate('Retry')}
           />
         </Card.Body>
       </Card>
@@ -123,7 +124,7 @@ export const ProviderRevenuePage: FC = () => {
           message={translate(
             'Choose a provider from the dropdown above to view revenue data.',
           )}
-          callback={() => {}}
+          noAction
         />
       )}
     </>

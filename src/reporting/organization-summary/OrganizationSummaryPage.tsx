@@ -56,6 +56,7 @@ export const OrganizationSummaryPage: FC = () => {
           message={translate(
             'Choose an organization from the dropdown above to view resource statistics and usage data.',
           )}
+          noAction
         />
       )}
     </>

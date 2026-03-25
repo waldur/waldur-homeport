@@ -21,6 +21,8 @@ interface BaseButtonProps {
   disabled?: boolean;
   /** Tooltip text */
   tooltip?: string;
+  /** Tooltip shown only when button is disabled/pending — explains why the action is unavailable */
+  disabledReason?: string;
   /** Bootstrap button variant */
   variant?: ButtonVariant;
   /** Loading/pending state - shows spinner and disables button */
@@ -54,6 +56,7 @@ export const BaseButton: FC<BaseButtonProps> = ({
   className,
   disabled,
   tooltip,
+  disabledReason,
   variant,
   pending,
   size,
@@ -62,6 +65,9 @@ export const BaseButton: FC<BaseButtonProps> = ({
   form,
   ...rest
 }) => {
+  const isDisabled = disabled || pending;
+  const effectiveTooltip = isDisabled ? (disabledReason ?? tooltip) : tooltip;
+
   const iconSize = size === 'sm' ? '4' : '2';
   const iconElement = iconNode && (
     <span className={`svg-icon svg-icon-${iconSize}`}>{iconNode}</span>
@@ -73,19 +79,19 @@ export const BaseButton: FC<BaseButtonProps> = ({
   );
 
   return wrapTooltip(
-    tooltip,
+    effectiveTooltip,
     <Button
       id={id}
       type={type}
       className={classNames(className, {
-        disabled: disabled || pending,
+        disabled: isDisabled,
         'btn-icon': !label && iconNode,
         'btn-icon-right': iconRight && label,
       })}
       size={size}
       onClick={onClick}
       variant={variant}
-      disabled={disabled || pending}
+      disabled={isDisabled}
       form={form}
       {...dataProps}
     >

@@ -24,6 +24,8 @@ interface SubmitButtonProps {
   type?: 'submit' | 'button';
   /** Associates button with a form by ID (for buttons outside the form element) */
   form?: string;
+  /** Tooltip shown only when button is disabled/pending */
+  disabledReason?: string;
   /** Click handler */
   onClick?(event: React.MouseEvent<HTMLButtonElement>): void;
   /** Optional icon to display */
@@ -46,6 +48,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
   id,
   disabled,
   invalid,
+  disabledReason,
   variant = 'primary',
   className,
   type = 'submit',
@@ -63,6 +66,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
     iconRight={!iconOnLeft}
     className={className}
     disabled={disabled || invalid}
+    disabledReason={disabledReason}
     variant={variant}
     pending={submitting}
     size="lg"

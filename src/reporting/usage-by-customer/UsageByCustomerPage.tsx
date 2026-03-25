@@ -44,6 +44,7 @@ export const UsageByCustomerPage: FC = () => {
         message={translate(
           'There is no resource usage data by customer to display.',
         )}
+        noAction
       />
     );
   }
