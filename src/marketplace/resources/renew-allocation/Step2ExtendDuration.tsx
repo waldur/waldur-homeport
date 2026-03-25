@@ -19,7 +19,13 @@ import { WizardModal, WizardStepProps } from '@waldur/wizard';
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
 
-const MAX_MONTHS = 60; // 5 years
+const multipleOfStep = (step: number, base: number) => (value: number) =>
+  step > 1 && (value - base) % step !== 0
+    ? translate(
+        'Must be a multiple of {step} starting from {base} (e.g. {example}).',
+        { step, base, example: base + step },
+      )
+    : undefined;
 
 export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
   const resources: Resource[] = props.data.resources;
@@ -30,6 +36,15 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
     () => (resources[0].end_date ? formatDate(resources[0].end_date) : 'N/A'),
     [resources],
   );
+
+  const prepaidComponent = useMemo(
+    () => resources[0].offering_components?.find((c) => c.is_prepaid),
+    [resources],
+  );
+
+  const minMonths = prepaidComponent?.min_renewal_duration ?? 1;
+  const maxMonths = prepaidComponent?.max_renewal_duration ?? 60;
+  const step = prepaidComponent?.renewal_duration_step ?? 1;
 
   return (
     <WizardModal {...props}>
@@ -50,8 +65,9 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
             name="extension_months"
             validate={composeValidators(
               required,
-              greaterThanOrEqual(12),
-              lessThanOrEqual(MAX_MONTHS),
+              greaterThanOrEqual(minMonths),
+              lessThanOrEqual(maxMonths),
+              multipleOfStep(step, minMonths),
             )}
             render={({ input, meta }) => (
               <FormGroup
@@ -73,7 +89,12 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
                 }
                 meta={meta}
               >
-                <NumberField input={input as any} min={12} max={MAX_MONTHS} />
+                <NumberField
+                  input={input as any}
+                  min={minMonths}
+                  max={maxMonths}
+                  step={step}
+                />
               </FormGroup>
             )}
           />
