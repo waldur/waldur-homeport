@@ -114,11 +114,9 @@ export const syncFiltersToURL = (form: any) => {
       }
     }
     const serialized = searchParams.toString();
-    if (!serialized) {
-      return;
-    }
-    const newRelativePathQuery = window.location.pathname + '?' + serialized;
-    history.pushState(null, '', newRelativePathQuery);
+    const newRelativePathQuery =
+      window.location.pathname + (serialized ? '?' + serialized : '');
+    router.urlService.url(newRelativePathQuery);
   }
 };
 

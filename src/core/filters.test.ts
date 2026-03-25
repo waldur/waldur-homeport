@@ -5,6 +5,7 @@ vi.mock('@waldur/router', () => ({
   router: {
     urlService: {
       search: vi.fn(() => ({})),
+      url: vi.fn(),
     },
   },
 }));
@@ -26,17 +27,17 @@ describe('filters', () => {
       },
       writable: true,
     });
-    // Mock history.pushState
-    vi.spyOn(history, 'pushState').mockImplementation(() => {});
+    // Mock router.urlService.url
+    vi.mocked(router.urlService.url).mockClear();
   });
 
   describe('compactFilterValue (via syncFiltersToURL)', () => {
     it('stores string values directly', () => {
       syncFiltersToURL({ name: 'test' });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
-      expect(call[2]).toContain('name=test');
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
+      expect(call[0]).toContain('name=test');
     });
 
     it('stores object with uuid in compact format', () => {
@@ -44,10 +45,10 @@ describe('filters', () => {
         organization: { uuid: 'abc-123', name: 'My Org' },
       });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
       // Should be uuid::name format
-      expect(call[2]).toContain('organization=abc-123%3A%3AMy+Org');
+      expect(call[0]).toContain('organization=abc-123%3A%3AMy+Org');
     });
 
     it('stores object with uuid and title in compact format', () => {
@@ -55,17 +56,17 @@ describe('filters', () => {
         project: { uuid: 'proj-456', title: 'Project Title' },
       });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
-      expect(call[2]).toContain('project=proj-456%3A%3AProject+Title');
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
+      expect(call[0]).toContain('project=proj-456%3A%3AProject+Title');
     });
 
     it('stores true boolean values', () => {
       syncFiltersToURL({ active: true });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
-      expect(call[2]).toContain('active=true');
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
+      expect(call[0]).toContain('active=true');
     });
 
     it('removes false boolean values from URL (falsy)', () => {
@@ -79,10 +80,10 @@ describe('filters', () => {
 
       syncFiltersToURL({ archived: false });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
       // false is falsy, so it removes the param
-      expect(call[2]).not.toContain('archived=');
+      expect(call[0]).not.toContain('archived=');
     });
 
     it('stores arrays with compact uuid::name format', () => {
@@ -93,10 +94,10 @@ describe('filters', () => {
         ],
       });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
       // Array should be JSON with compact values
-      expect(call[2]).toContain('tags=');
+      expect(call[0]).toContain('tags=');
     });
 
     it('removes null/undefined values from URL', () => {
@@ -111,9 +112,9 @@ describe('filters', () => {
 
       syncFiltersToURL({ name: null });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
-      expect(call[2]).not.toContain('name=');
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
+      expect(call[0]).not.toContain('name=');
     });
   });
 
@@ -266,13 +267,13 @@ describe('filters', () => {
     it('does nothing when form is null', () => {
       syncFiltersToURL(null);
 
-      expect(history.pushState).not.toHaveBeenCalled();
+      expect(router.urlService.url).not.toHaveBeenCalled();
     });
 
     it('does nothing when form is empty object', () => {
       syncFiltersToURL({});
 
-      expect(history.pushState).not.toHaveBeenCalled();
+      expect(router.urlService.url).not.toHaveBeenCalled();
     });
 
     it('preserves existing URL params', () => {
@@ -286,10 +287,10 @@ describe('filters', () => {
 
       syncFiltersToURL({ newParam: 'new' });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
-      expect(call[2]).toContain('existing=value');
-      expect(call[2]).toContain('newParam=new');
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
+      expect(call[0]).toContain('existing=value');
+      expect(call[0]).toContain('newParam=new');
     });
 
     it('updates existing URL params', () => {
@@ -303,10 +304,10 @@ describe('filters', () => {
 
       syncFiltersToURL({ name: 'new' });
 
-      expect(history.pushState).toHaveBeenCalled();
-      const call = vi.mocked(history.pushState).mock.calls[0];
-      expect(call[2]).toContain('name=new');
-      expect(call[2]).not.toContain('name=old');
+      expect(router.urlService.url).toHaveBeenCalled();
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
+      expect(call[0]).toContain('name=new');
+      expect(call[0]).not.toContain('name=old');
     });
   });
 
