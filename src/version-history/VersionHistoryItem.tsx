@@ -1,6 +1,8 @@
+import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatMediumDateTime, formatRelative } from '@waldur/core/dateUtils';
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { getAbbreviation } from '@waldur/core/utils';
@@ -31,6 +33,20 @@ const hashStr = (str: string) => {
     hash |= 0;
   }
   return hash;
+};
+
+const isPolicyComment = (comment: string | undefined): boolean =>
+  !!comment?.startsWith('Policy action');
+
+const formatPolicyComment = (comment: string): string => {
+  const match = comment.match(
+    /^Policy action '(\w+)': (\w+) changed from (\S+) to (\S+)\. Policy: (\w+) [a-f0-9]+\.(?: Scope: ([^.]*)\.)?(?: Created by: [^.]*\.)?(.*)?$/,
+  );
+  if (!match) return comment;
+  const [, , field, oldVal, newVal, policyClass, scope, extra] = match;
+  let formatted = `${field}: ${oldVal} → ${newVal} (${scope || policyClass})`;
+  if (extra?.trim()) formatted += ` ${extra.trim()}`;
+  return formatted;
 };
 
 const VersionAvatar: FunctionComponent<{ version: VersionHistory }> = ({
@@ -92,13 +108,27 @@ export const VersionHistoryItem: FunctionComponent<VersionHistoryItemProps> = ({
           <div className="flex-grow-1">
             <div className="fs-7 text-muted">
               <span className="fw-bold fs-6 me-3">{userName}</span>
+              {isPolicyComment(version.revision_comment) && (
+                <Badge
+                  variant="warning"
+                  size="sm"
+                  leftIcon={<ShieldWarningIcon weight="bold" />}
+                  pill
+                  outline
+                  className="me-2"
+                >
+                  {translate('Policy')}
+                </Badge>
+              )}
               <span title={formatMediumDateTime(version.revision_date)}>
                 {formatRelative(version.revision_date)}
               </span>
             </div>
             {version.revision_comment && (
               <div className="fs-7 text-muted mt-1">
-                {version.revision_comment}
+                {isPolicyComment(version.revision_comment)
+                  ? formatPolicyComment(version.revision_comment)
+                  : version.revision_comment}
               </div>
             )}
           </div>
