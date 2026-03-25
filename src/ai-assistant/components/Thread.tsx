@@ -27,6 +27,10 @@ import { chatQuotaUsageRetrieve } from 'waldur-js-client';
 
 import { calculateQuotaPercentage } from '@waldur/administration/ai-assistant/AITokenExpandableRow';
 import { BlockRenderer } from '@waldur/ai-assistant/components/BlockRenderer';
+import {
+  VMOrderActions,
+  VMOrderFormProvider,
+} from '@waldur/ai-assistant/components/blocks/VMOrderBlock';
 import { LoadingDots } from '@waldur/ai-assistant/components/shared/LoadingDots';
 import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
 import { useVersionSelector } from '@waldur/ai-assistant/hooks/useVersionSelector';
@@ -400,19 +404,43 @@ const BlockBasedContent: FC = () => {
 };
 
 const AssistantMessage: FC = () => {
-  return (
-    <MessagePrimitive.Root asChild>
-      <div className="aui-assistant-message-root" data-role="assistant">
-        <div className="aui-assistant-message-content">
-          <BlockBasedContent />
-          <MessageError />
-        </div>
+  const metadata = useAssistantState((state) => {
+    return state.message.metadata?.custom as BlockBasedMetadata | undefined;
+  });
 
-        <div className="aui-assistant-message-footer">
-          <AssistantActionBar />
+  // Check if there's a vm_order block in preview/form state (not result state)
+  const vmOrderBlock = useMemo(() => {
+    const blocks = metadata?.blocks || [];
+    return blocks.find(
+      (block) =>
+        block.key === 'vm_order' &&
+        block.order_status !== 'success' &&
+        block.order_status !== 'error' &&
+        !block.error,
+    );
+  }, [metadata?.blocks]);
+
+  return (
+    <VMOrderFormProvider>
+      <MessagePrimitive.Root asChild>
+        <div className="aui-assistant-message-root" data-role="assistant">
+          <div className="aui-assistant-message-content">
+            <BlockBasedContent />
+            <MessageError />
+          </div>
+
+          <div className="aui-assistant-message-footer">
+            {vmOrderBlock ? (
+              <MessagePrimitive.If last>
+                <VMOrderActions block={vmOrderBlock} />
+              </MessagePrimitive.If>
+            ) : (
+              <AssistantActionBar />
+            )}
+          </div>
         </div>
-      </div>
-    </MessagePrimitive.Root>
+      </MessagePrimitive.Root>
+    </VMOrderFormProvider>
   );
 };
 

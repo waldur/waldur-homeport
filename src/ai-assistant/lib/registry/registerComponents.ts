@@ -3,6 +3,7 @@ import { MarkdownBlock } from '@waldur/ai-assistant/components/blocks/MarkdownBl
 import { MermaidBlock } from '@waldur/ai-assistant/components/blocks/MermaidBlock';
 import { TableBlock } from '@waldur/ai-assistant/components/blocks/TableBlock';
 import { ToolLoadingBlock } from '@waldur/ai-assistant/components/blocks/ToolLoadingBlock';
+import { VMOrderBlock } from '@waldur/ai-assistant/components/blocks/VMOrderBlock';
 
 import { uiRegistry } from './uiRegistry';
 
@@ -29,4 +30,9 @@ uiRegistry.register({
 uiRegistry.register({
   key: 'tool',
   component: ToolLoadingBlock,
+});
+
+uiRegistry.register({
+  key: 'vm_order',
+  component: VMOrderBlock,
 });

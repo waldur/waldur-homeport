@@ -81,6 +81,65 @@ export function updateBlocks(
     ];
   }
 
+  // Handle vm_order data with structured fields
+  // Backend sends: {"k":"vm_order","order_id":"...","name":"...","status":"...",...}
+  if (part.k === 'vm_order') {
+    const lastBlock = existingBlocks[existingBlocks.length - 1];
+
+    // Transition from loading to streaming or update existing vm_order
+    if (lastBlock?.key === 'vm_order') {
+      return [
+        ...existingBlocks.slice(0, -1),
+        {
+          ...lastBlock,
+          content: part.content ?? lastBlock.content ?? '',
+          order_id: part.order_id ?? lastBlock.order_id,
+          name: part.name ?? lastBlock.name,
+          flavor: part.flavor ?? lastBlock.flavor,
+          image: part.image ?? lastBlock.image,
+          project: part.project ?? lastBlock.project,
+          organization: part.organization ?? lastBlock.organization,
+          project_uuid: part.project_uuid ?? lastBlock.project_uuid,
+          order_status: part.status ?? lastBlock.order_status,
+          message: part.message ?? lastBlock.message,
+          error: part.error ?? lastBlock.error,
+          flavors: (part.flavors as UIBlock['flavors']) ?? lastBlock.flavors,
+          images: (part.images as UIBlock['images']) ?? lastBlock.images,
+          projects:
+            (part.projects as UIBlock['projects']) ?? lastBlock.projects,
+          offerings:
+            (part.offerings as UIBlock['offerings']) ?? lastBlock.offerings,
+          status: 'streaming',
+        },
+      ];
+    }
+
+    // Create new vm_order block
+    return [
+      ...existingBlocks,
+      {
+        id: randomUUID(),
+        key: 'vm_order',
+        content: part.content,
+        order_id: part.order_id,
+        name: part.name,
+        flavor: part.flavor,
+        image: part.image,
+        project: part.project,
+        organization: part.organization,
+        project_uuid: part.project_uuid,
+        order_status: part.status,
+        message: part.message,
+        error: part.error,
+        flavors: part.flavors as UIBlock['flavors'],
+        images: part.images as UIBlock['images'],
+        projects: part.projects as UIBlock['projects'],
+        offerings: part.offerings as UIBlock['offerings'],
+        status: 'streaming',
+      },
+    ];
+  }
+
   // Handle content key (for non-table blocks or markdown fallback)
   if (part.k && part.c !== undefined) {
     const lastBlock = existingBlocks[existingBlocks.length - 1];
