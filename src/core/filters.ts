@@ -114,8 +114,9 @@ export const syncFiltersToURL = (form: any) => {
       }
     }
     const serialized = searchParams.toString();
+    const currentRouterPath = router.urlService.path();
     const newRelativePathQuery =
-      window.location.pathname + (serialized ? '?' + serialized : '');
+      currentRouterPath + (serialized ? '?' + serialized : '');
     router.urlService.url(newRelativePathQuery);
   }
 };

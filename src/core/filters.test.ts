@@ -6,6 +6,8 @@ vi.mock('@waldur/router', () => ({
     urlService: {
       search: vi.fn(() => ({})),
       url: vi.fn(),
+      // 1. Mock the new path() method
+      path: vi.fn(() => '/test/'),
     },
   },
 }));
@@ -19,7 +21,7 @@ describe('filters', () => {
   beforeEach(() => {
     // Reset URL state before each test
     vi.clearAllMocks();
-    // Reset window.location.search
+    // Reset window.location (search is still used, pathname is kept for realistic environment)
     Object.defineProperty(window, 'location', {
       value: {
         search: '',
@@ -27,8 +29,9 @@ describe('filters', () => {
       },
       writable: true,
     });
-    // Mock router.urlService.url
+    // Reset router mocks
     vi.mocked(router.urlService.url).mockClear();
+    vi.mocked(router.urlService.path).mockReturnValue('/test/');
   });
 
   describe('compactFilterValue (via syncFiltersToURL)', () => {
@@ -308,6 +311,26 @@ describe('filters', () => {
       const call = vi.mocked(router.urlService.url).mock.calls[0];
       expect(call[0]).toContain('name=new');
       expect(call[0]).not.toContain('name=old');
+    });
+
+    // Validates that the fix for the double-prefix bug is functioning
+    it('appends query to the router path instead of window.location.pathname', () => {
+      // Simulate the bug scenario where window.location includes the base path
+      Object.defineProperty(window, 'location', {
+        value: {
+          search: '',
+          pathname: '/19388/profile/', // Browser's absolute path
+        },
+        writable: true,
+      });
+      // Simulate the router's internal relative path
+      vi.mocked(router.urlService.path).mockReturnValue('/profile/');
+
+      syncFiltersToURL({ filter: 'active' });
+
+      const call = vi.mocked(router.urlService.url).mock.calls[0];
+      // Expect it to use '/profile/' from the router, averting '/19388/19388/profile/'
+      expect(call[0]).toBe('/profile/?filter=active');
     });
   });
 
