@@ -14,57 +14,54 @@ import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useUser } from '@waldur/workspace/hooks';
 import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
 
-const MoveProjectDialog = lazyComponent(() =>
-  import('./MoveProjectDialog').then((module) => ({
-    default: module.MoveProjectDialog,
+const BatchMoveProjectDialog = lazyComponent(() =>
+  import('./BatchMoveProjectDialog').then((module) => ({
+    default: module.BatchMoveProjectDialog,
   })),
 );
 
-export const MoveProjectAction = ({
-  project,
+export const BatchMoveProjectAction = ({
+  rows,
   refetch,
 }: {
-  project: Project;
+  rows: Project[];
   refetch;
 }) => {
   const dispatch = useDispatch();
   const user = useUser();
   const isStaff = useSelector(isStaffSelector);
-  const hasSourcePermission = hasPermission(user, {
-    permission: PermissionEnum.CREATE_PROJECT,
-    customerId: project.customer_uuid,
-  });
+
+  // Check source: user has CREATE_PROJECT on all selected projects' orgs
+  const hasSourcePermission = rows.every(
+    (project) =>
+      isStaff ||
+      hasPermission(user, {
+        permission: PermissionEnum.CREATE_PROJECT,
+        customerId: project.customer_uuid,
+      }),
+  );
+
+  // Check target: user has CREATE_PROJECT on at least one org to move to
   const hasTargetPermission = hasPermissionOnAnyCustomer(
     user,
     PermissionEnum.CREATE_PROJECT,
   );
 
-  const isDisabled = !isStaff && (!hasSourcePermission || !hasTargetPermission);
+  if (!isStaff && (!hasSourcePermission || !hasTargetPermission)) {
+    return null;
+  }
 
-  const callback = () => {
+  const callback = () =>
     dispatch(
-      openModalDialog(MoveProjectDialog, {
-        resolve: { project, refetch },
+      openModalDialog(BatchMoveProjectDialog, {
+        resolve: { rows, refetch },
       }),
     );
-  };
 
   return (
     <ActionItem
-      title={translate('Move project')}
+      title={translate('Move to organization')}
       action={callback}
-      disabled={isDisabled}
-      tooltip={
-        isDisabled
-          ? !hasSourcePermission
-            ? translate(
-                'You do not have permission to move projects from this organization.',
-              )
-            : translate(
-                'You do not have permission to create projects in any organization.',
-              )
-          : undefined
-      }
       iconNode={<ArrowsOutCardinalIcon weight="bold" />}
     />
   );

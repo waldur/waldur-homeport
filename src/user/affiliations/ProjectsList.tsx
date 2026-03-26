@@ -18,6 +18,7 @@ import { MarketplaceFeatures, ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
 import { useTitle } from '@waldur/navigation/title';
+import { BatchProjectActions } from '@waldur/project/BatchProjectActions';
 import { PROJECTS_LIST } from '@waldur/project/constants';
 import { GlobalProjectCreateButton } from '@waldur/project/create/GlobalProjectCreateButton';
 import { ProjectImportButton } from '@waldur/project/import/ProjectImportButton';
@@ -359,6 +360,8 @@ export const ProjectsList = () => {
       rowActions={({ row }) => (
         <ProjectsListActions project={row} refetch={props.fetch} />
       )}
+      enableMultiSelect
+      multiSelectActions={BatchProjectActions}
     />
   );
 };
