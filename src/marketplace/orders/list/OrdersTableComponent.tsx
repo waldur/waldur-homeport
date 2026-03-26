@@ -33,8 +33,6 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'uuid',
   // Row actions
   'state',
-  'provider_uuid',
-  'marketplace_resource_uuid',
   // Expandable row
   'project_description',
   'customer_uuid',
