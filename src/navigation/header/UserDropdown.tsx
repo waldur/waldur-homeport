@@ -5,6 +5,8 @@ import { Badge } from '@waldur/core/Badge';
 import { ENV } from '@waldur/core/config';
 import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
 import { Link } from '@waldur/core/Link';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
 
@@ -135,7 +137,9 @@ export const UserDropdownMenu: FunctionComponent = () => {
         {user && (
           <>
             <div className="separator my-2" />
-            <UserToken token={user.token} />
+            {(!isFeatureVisible(UserFeatures.conceal_api_token) ||
+              user.is_staff ||
+              user.is_support) && <UserToken token={user.token} />}
             <UserIpAddress ip={user.ip_address} />
           </>
         )}
