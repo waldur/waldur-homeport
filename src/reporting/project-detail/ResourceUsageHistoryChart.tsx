@@ -1,11 +1,11 @@
 import { DateTime } from 'luxon';
-import { FC, useMemo } from 'react';
-import { Card } from 'react-bootstrap';
+import { FC, useMemo, useCallback } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { ExportData } from '@waldur/table/exporters/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { UsageHistoryPoint, ComponentLabelMap } from './types';
@@ -148,6 +148,25 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
     };
   }, [data, labelMap]);
 
+  const getExportData = useCallback((): ExportData => {
+    if (!data || data.length === 0) {
+      return { fields: [], data: [] };
+    }
+    const fields = [
+      translate('Date'),
+      translate('Type'),
+      translate('Monthly usage'),
+      translate('Cumulative usage'),
+    ];
+    const csvData = data.map((point) => [
+      point.date,
+      getTypeLabel(point.type, labelMap),
+      point.usage,
+      point.cumulative_usage,
+    ]);
+    return { fields, data: csvData };
+  }, [data, labelMap]);
+
   const hasData = data && data.length > 0;
   const title = componentType
     ? translate('Usage since creation: {type}', {
@@ -156,23 +175,20 @@ export const ResourceUsageHistoryChart: FC<ResourceUsageHistoryChartProps> = ({
     : translate('Resource usage since creation');
 
   return (
-    <Card className="h-100">
-      <Card.Header>
-        <Card.Title>{title}</Card.Title>
-      </Card.Header>
-      <Card.Body>
-        {isLoading ? (
-          <LoadingSpinner className="py-10" />
-        ) : hasData && chartOptions ? (
-          <EChart options={chartOptions} height="350px" />
-        ) : (
-          <NoResult
-            title={translate('No data available')}
-            message={translate('No usage data recorded for this resource.')}
-            noAction
-          />
-        )}
-      </Card.Body>
-    </Card>
+    <ChartCard
+      title={title}
+      getExportData={getExportData}
+      isEmpty={!isLoading && !hasData}
+    >
+      {(ref) => (
+        <>
+          {isLoading ? (
+            <LoadingSpinner className="py-10" />
+          ) : hasData && chartOptions ? (
+            <EChart ref={ref} options={chartOptions} height="350px" />
+          ) : null}
+        </>
+      )}
+    </ChartCard>
   );
 };

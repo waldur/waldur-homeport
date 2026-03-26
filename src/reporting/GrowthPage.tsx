@@ -9,6 +9,7 @@ import { useTitle } from '@waldur/navigation/title';
 import { ActiveUsersByProviderChart } from './growth/ActiveUsersByProviderChart';
 import { ProjectsOverTimeChart } from './growth/ProjectsOverTimeChart';
 import { ResourcesOverTimeChart } from './growth/ResourcesOverTimeChart';
+import { RevenueGrowthChart } from './growth/RevenueGrowthChart';
 import { TopOfferingsTable } from './growth/TopOfferingsTable';
 import { TopProvidersTable } from './growth/TopProvidersTable';
 import { UsersOverTimeChart } from './growth/UsersOverTimeChart';
@@ -19,7 +20,7 @@ export const GrowthPage: FC = () => {
   useTitle(translate('Growth report'));
   useReportBreadcrumbs({
     category: 'financial',
-    currentReport: 'growth-report',
+    currentReport: 'growth',
   });
 
   const { data, isLoading, error, refetch } = useGrowthStatistics();
@@ -29,6 +30,10 @@ export const GrowthPage: FC = () => {
 
   return (
     <div className="container-fluid py-6">
+      <div className="mb-6">
+        <RevenueGrowthChart />
+      </div>
+
       <Row className="g-6 mb-6">
         <Col lg={6}>
           <UsersOverTimeChart data={data?.userTrends} />

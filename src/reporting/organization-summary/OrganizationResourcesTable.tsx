@@ -1,10 +1,10 @@
-import { Check, X } from '@phosphor-icons/react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDateTime, formatDate } from '@waldur/core/dateUtils';
+import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -56,11 +56,11 @@ const BooleanIndicator: FC<{ value: boolean | undefined; label?: string }> = ({
   if (value === undefined || value === null) return <span>—</span>;
   return value ? (
     <Tip id={`bool-${label}`} label={label || translate('Yes')}>
-      <Check size={16} weight="bold" className="text-success" />
+      <CheckIcon size={16} weight="bold" className="text-success" />
     </Tip>
   ) : (
     <Tip id={`bool-${label}`} label={label || translate('No')}>
-      <X size={16} weight="bold" className="text-muted" />
+      <XIcon size={16} weight="bold" className="text-muted" />
     </Tip>
   );
 };
@@ -153,7 +153,7 @@ export const OrganizationResourcesTable: FC<
   const filter = useMemo(
     () => ({
       customer_uuid: customerUuid,
-      // Exclude terminated (state=6)
+      // Exclude terminated
       state: ['Creating', 'OK', 'Erred', 'Updating', 'Terminating'],
       field: [
         'uuid',
@@ -198,7 +198,7 @@ export const OrganizationResourcesTable: FC<
       {
         title: translate('Project'),
         render: ({ row }) => (
-          <div>
+          <div className="py-3">
             <Link
               state="project.dashboard"
               params={{ uuid: row.project_uuid }}
@@ -345,7 +345,7 @@ export const OrganizationResourcesTable: FC<
       {...tableProps}
       columns={columns}
       verboseName={translate('resources')}
-      title={translate('Organization Resources')}
+      title={translate('Organization resources')}
       showPageSizeSelector
       initialSorting={{ field: 'created', mode: 'asc' }}
       enableExport

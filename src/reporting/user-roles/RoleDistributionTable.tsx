@@ -3,7 +3,7 @@ import { CustomerMemberCount } from 'waldur-js-client';
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
 import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 
 interface RoleDistributionTableProps {
@@ -44,22 +44,10 @@ export const RoleDistributionTable: FC<RoleDistributionTableProps> = ({
     [data],
   );
 
-  const noop = () => {};
-
   return (
-    <Table<CustomerMemberCount>
+    <SimpleTable<CustomerMemberCount>
       columns={columns}
       rows={sortedData}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
       title={translate('Organization member counts')}
       verboseName={translate('organizations')}
     />

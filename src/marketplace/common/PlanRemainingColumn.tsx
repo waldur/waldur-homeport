@@ -4,7 +4,7 @@ import { Badge } from '@waldur/core/Badge';
 
 const getColor = (value) =>
   value === null
-    ? 'primary'
+    ? 'gray'
     : value < 0.6
       ? 'warning'
       : value < 0.8

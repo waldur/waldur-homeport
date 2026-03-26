@@ -2,11 +2,11 @@ import { EChartsOption } from 'echarts';
 import { FC, useCallback, useMemo } from 'react';
 import { OfferingCost } from 'waldur-js-client';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 interface OfferingCostsChartProps {
   data: OfferingCost[];

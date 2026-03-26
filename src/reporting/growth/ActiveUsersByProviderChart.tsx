@@ -1,8 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 import { BarChart } from '@waldur/reporting/users/charts/BarChart';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 interface ActiveUsersByProviderChartProps {
   data: { customer_name: string; count_users: number }[];
@@ -37,7 +37,7 @@ export const ActiveUsersByProviderChart: FC<
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
     >
-      {(ref) => <BarChart data={chartData} ref={ref} />}
+      {(ref) => <BarChart data={chartData} ref={ref} horizontal />}
     </ChartCard>
   );
 };

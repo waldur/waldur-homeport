@@ -1,10 +1,11 @@
 import { EChartsOption } from 'echarts';
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 interface OfferingStatsData {
   offering_uuid: string;
@@ -50,7 +51,7 @@ export const TopOfferingsByRevenueChart: FC<
           name: translate('Revenue'),
           type: 'bar',
           data: data.map((o) => o.revenue),
-          itemStyle: { color: '#50cd89' },
+          itemStyle: { color: getBrandColor() },
         },
       ],
     };

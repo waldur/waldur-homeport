@@ -2,10 +2,11 @@ import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 import { DailyOrderStats } from './types';
 
@@ -56,7 +57,7 @@ export const OrdersDailyCostChart: FC<OrdersDailyCostChartProps> = ({
           name: translate('Cost'),
           type: 'bar',
           data: costs,
-          itemStyle: { color: '#50cd89' },
+          itemStyle: { color: getBrandColor() },
         },
       ],
     };

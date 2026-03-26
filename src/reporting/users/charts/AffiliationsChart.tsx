@@ -1,12 +1,12 @@
-import { EChartsOption } from 'echarts';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { EChart } from '@waldur/core/EChart';
+import { ChartCard } from '@waldur/core/ChartCard';
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -20,7 +20,7 @@ import {
 } from '../affiliationParser';
 import { UserAffiliationCount } from '../types';
 
-import { ChartCard } from './ChartCard';
+import { BarChart } from './BarChart';
 import { getChartExportData } from './utils';
 
 interface AffiliationsChartProps {
@@ -79,42 +79,6 @@ function aggregateBy(
   return Array.from(aggregated.entries())
     .map(([name, value]) => ({ name, value }))
     .sort((a, b) => b.value - a.value);
-}
-
-/**
- * Prepare chart data (top 10 + Other)
- */
-function prepareChartData(items: Array<{ name: string; value: number }>): {
-  names: string[];
-  values: number[];
-  total: number;
-} {
-  const total = items.reduce((sum, item) => sum + item.value, 0);
-
-  if (items.length === 0) {
-    return { names: [], values: [], total: 0 };
-  }
-
-  let displayItems: Array<{ name: string; value: number }>;
-
-  if (items.length <= 10) {
-    displayItems = items;
-  } else {
-    const top9 = items.slice(0, 9);
-    const rest = items.slice(9);
-    const otherCount = rest.reduce((sum, item) => sum + item.value, 0);
-
-    displayItems = [...top9, { name: translate('Other'), value: otherCount }];
-  }
-
-  // Reverse for horizontal bar (first item at top)
-  const reversed = [...displayItems].reverse();
-
-  return {
-    names: reversed.map((item) => item.name),
-    values: reversed.map((item) => item.value),
-    total,
-  };
 }
 
 const tableColumns: Column<AffiliationWithCount>[] = [
@@ -195,10 +159,23 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
     [filteredData, viewMode],
   );
 
-  const { names, values, total } = useMemo(
-    () => prepareChartData(aggregatedData),
-    [aggregatedData],
-  );
+  // Prepare chart data (top 9 + Other)
+  const { chartData, total } = useMemo(() => {
+    const totalCount = aggregatedData.reduce(
+      (sum, item) => sum + item.value,
+      0,
+    );
+    if (aggregatedData.length <= 10) {
+      return { chartData: aggregatedData, total: totalCount };
+    }
+    const top9 = aggregatedData.slice(0, 9);
+    const rest = aggregatedData.slice(9);
+    const otherCount = rest.reduce((sum, item) => sum + item.value, 0);
+    return {
+      chartData: [...top9, { name: translate('Other'), value: otherCount }],
+      total: totalCount,
+    };
+  }, [aggregatedData]);
 
   const getExportData = useCallback(
     () =>
@@ -208,63 +185,9 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
           : viewMode === 'country'
             ? translate('Country')
             : translate('Category'),
-        names.map((name, i) => ({ name, value: values[i] })),
+        chartData,
       ),
-    [viewMode, names, values],
-  );
-
-  const chartOptions = useMemo<EChartsOption>(
-    () => ({
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' },
-        formatter: (params: any) => {
-          const param = params[0];
-          const percent =
-            total > 0 ? ((param.value / total) * 100).toFixed(1) : 0;
-          return `${param.name}: ${param.value.toLocaleString()} (${percent}%)`;
-        },
-      },
-      grid: {
-        left: '3%',
-        right: '15%',
-        bottom: '3%',
-        top: '3%',
-        containLabel: true,
-      },
-      xAxis: {
-        type: 'value',
-        axisLabel: {
-          formatter: (value: number) => value.toLocaleString(),
-        },
-      },
-      yAxis: {
-        type: 'category',
-        data: names,
-        axisLabel: {
-          width: 180,
-          overflow: 'truncate',
-          ellipsis: '...',
-        },
-      },
-      series: [
-        {
-          type: 'bar',
-          data: values,
-          itemStyle: { borderRadius: [0, 4, 4, 0] },
-          label: {
-            show: true,
-            position: 'right',
-            formatter: (params: any) => {
-              const percent =
-                total > 0 ? ((params.value / total) * 100).toFixed(1) : 0;
-              return `${percent}%`;
-            },
-          },
-        },
-      ],
-    }),
-    [names, values, total],
+    [viewMode, chartData],
   );
 
   const viewModeOptions = [
@@ -293,8 +216,8 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
   }
 
   const chartHeight = useMemo(
-    () => Math.min(400, Math.max(200, names.length * 35)),
-    [names],
+    () => Math.min(400, Math.max(200, chartData.length * 35)),
+    [chartData],
   );
 
   return (
@@ -360,89 +283,60 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
         </Card.Body>
       </Card>
 
-      {/* Summary stats */}
-      <Row className="g-4 mb-6">
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-primary">{total}</div>
-              <div className="text-muted fs-7">{translate('Total users')}</div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-success">
-                {orgOptions.length}
-              </div>
-              <div className="text-muted fs-7">
-                {translate('Organizations')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-info">
-                {countryOptions.length}
-              </div>
-              <div className="text-muted fs-7">{translate('Countries')}</div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-warning">
-                {filteredData.length}
-              </div>
-              <div className="text-muted fs-7">
-                {translate('Affiliations (filtered)')}
-              </div>
-            </Card.Body>
-          </Card>
+      <SummaryWidget
+        stats={[
+          { label: translate('Total users'), value: total },
+          { label: translate('Organizations'), value: orgOptions.length },
+          { label: translate('Countries'), value: countryOptions.length },
+          {
+            label: translate('Affiliations (filtered)'),
+            value: filteredData.length,
+          },
+        ]}
+      />
+
+      <Row className="mb-3">
+        <Col>
+          <ChartCard
+            title={
+              viewMode === 'organization'
+                ? translate('Users by organization')
+                : viewMode === 'country'
+                  ? translate('Users by country')
+                  : translate('Users by category')
+            }
+            getExportData={getExportData}
+            isEmpty={aggregatedData.length === 0}
+          >
+            {(ref) => (
+              <BarChart
+                ref={ref}
+                data={chartData}
+                horizontal={true}
+                height={`${chartHeight}px`}
+                showValueLabel={true}
+                isSorted={false}
+                labelFormatter={(params: any) => {
+                  const percent =
+                    total > 0 ? ((params.value / total) * 100).toFixed(1) : 0;
+                  return `${percent}%`;
+                }}
+                tooltipFormatter={(params: any) => {
+                  const param = params[0];
+                  const percent =
+                    total > 0 ? ((param.value / total) * 100).toFixed(1) : 0;
+                  return `${param.name}: ${param.value.toLocaleString()} (${percent}%)`;
+                }}
+              />
+            )}
+          </ChartCard>
         </Col>
       </Row>
 
-      {/* Chart */}
-      <ChartCard
-        title={
-          viewMode === 'organization'
-            ? translate('Users by organization')
-            : viewMode === 'country'
-              ? translate('Users by country')
-              : translate('Users by category')
-        }
-        getExportData={getExportData}
-        isEmpty={aggregatedData.length === 0}
-      >
-        {(ref) => (
-          <EChart
-            ref={ref}
-            options={chartOptions}
-            height={`${chartHeight}px`}
-          />
-        )}
-      </ChartCard>
-
-      {/* Details table */}
-      <Table<AffiliationWithCount>
+      <SimpleTable<AffiliationWithCount>
         columns={tableColumns}
         rows={filteredData.sort((a, b) => b.count - a.count)}
-        fetch={() => {}}
-        loading={false}
-        error={null}
-        activeColumns={{}}
-        columnPositions={[]}
-        resetSelection={() => {}}
-        setFilterPosition={() => {}}
-        initColumnPositions={() => {}}
-        resetPagination={() => {}}
-        hasPagination={false}
         title={translate('Affiliation details')}
-        verboseName={translate('affiliations')}
       />
     </>
   );

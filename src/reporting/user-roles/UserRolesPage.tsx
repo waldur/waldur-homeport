@@ -1,5 +1,5 @@
 import { FC } from 'react';
-import { Alert, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -48,18 +48,6 @@ export const UserRolesPage: FC = () => {
 
   return (
     <div className="container-fluid py-6">
-      <Alert variant="light" className="mb-6">
-        <div className="d-flex align-items-center">
-          <i className="fa fa-info-circle me-3 text-primary fs-4" />
-          <div>
-            <strong>{translate('Note')}:</strong>{' '}
-            {translate(
-              'This report shows member counts per organization. Detailed role distribution (Owner, Manager, Member) requires a backend endpoint that is not yet available.',
-            )}
-          </div>
-        </div>
-      </Alert>
-
       <UserRolesSummaryCards summary={summary} />
 
       <Row className="g-6 mb-6">

@@ -590,27 +590,13 @@ export const states: StateDeclaration[] = [
     url: 'growth/',
     parent: 'reporting-financial',
     component: lazyComponent(() =>
-      import('./invoices/GrowthContainer').then((module) => ({
-        default: module.GrowthContainer,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Growth'),
-      permissions: [() => isReportingScreenEnabled('growth')],
-    },
-  },
-  {
-    name: 'reporting-growth-report',
-    url: 'growth-report/',
-    parent: 'reporting-financial',
-    component: lazyComponent(() =>
       import('./GrowthPage').then((module) => ({
         default: module.GrowthPage,
       })),
     ),
     data: {
-      breadcrumb: () => translate('Growth Report'),
-      permissions: [() => isReportingScreenEnabled('growth')], // Reusing same permission for now
+      breadcrumb: () => translate('Growth'),
+      permissions: [() => isReportingScreenEnabled('growth')],
     },
   },
   {

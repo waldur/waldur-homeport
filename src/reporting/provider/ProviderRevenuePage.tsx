@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import {
@@ -11,6 +11,7 @@ import {
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
@@ -45,6 +46,20 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
     return totalRevenue / data.length;
   }, [data, totalRevenue]);
 
+  const stats = useMemo(
+    () => [
+      {
+        label: translate('Total revenue (12 months)'),
+        value: defaultCurrency(totalRevenue),
+      },
+      {
+        label: translate('Average monthly'),
+        value: defaultCurrency(avgMonthlyRevenue),
+      },
+    ],
+    [totalRevenue, avgMonthlyRevenue],
+  );
+
   if (isLoading) return <LoadingSpinner />;
   if (error) return <LoadingErred loadData={refetch} />;
   if (!data || data.length === 0) {
@@ -64,33 +79,7 @@ const ProviderRevenueContent: FC<{ providerUuid: string }> = ({
 
   return (
     <>
-      <Row className="g-4 mb-6">
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-success">
-                {defaultCurrency(totalRevenue)}
-              </div>
-              <div className="text-muted fs-7">
-                {translate('Total revenue (12 months)')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-primary">
-                {defaultCurrency(avgMonthlyRevenue)}
-              </div>
-              <div className="text-muted fs-7">
-                {translate('Average monthly')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
-
+      <SummaryWidget stats={stats} />
       <ProviderRevenueChart data={data} />
     </>
   );

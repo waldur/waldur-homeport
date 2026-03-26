@@ -1,8 +1,9 @@
-import { FC, useCallback } from 'react';
-import { Table } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
+import { SimpleTable } from '@waldur/table/SimpleTable';
+import { Column } from '@waldur/table/types';
 
 interface TopProvidersTableProps {
   data: any[];
@@ -11,6 +12,30 @@ interface TopProvidersTableProps {
 const TOP_COUNT = 5;
 
 export const TopProvidersTable: FC<TopProvidersTableProps> = ({ data }) => {
+  const columns: Column[] = useMemo(
+    () => [
+      {
+        title: translate('Service provider'),
+        render: ({ row }) => row.customer_name,
+      },
+      {
+        title: translate('Resources'),
+        render: ({ row }) => row.resources_count || 0,
+        className: 'text-end',
+        headerClassName: 'text-end',
+      },
+      {
+        title: translate('Projects'),
+        render: ({ row }) => row.projects_count || 0,
+        className: 'text-end',
+        headerClassName: 'text-end',
+      },
+    ],
+    [],
+  );
+
+  const rows = useMemo(() => (data || []).slice(0, TOP_COUNT), [data]);
+
   const getExportData = useCallback(
     () => ({
       fields: [
@@ -18,41 +43,23 @@ export const TopProvidersTable: FC<TopProvidersTableProps> = ({ data }) => {
         translate('Resources'),
         translate('Projects'),
       ],
-      data: (data || []).map((sp: any) => [
+      data: rows.map((sp: any) => [
         sp.customer_name,
         sp.resources_count || 0,
         sp.projects_count || 0,
       ]),
     }),
-    [data],
+    [rows],
   );
 
   return (
     <ChartCard
-      title={translate('Top 5 Service providers')}
+      title={translate('Top 5 service providers')}
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
+      showPNG={false}
     >
-      {() => (
-        <Table responsive className="align-middle table-row-dashed fs-6 gy-5">
-          <thead>
-            <tr className="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-              <th className="min-w-150px">{translate('Service provider')}</th>
-              <th className="text-end min-w-100px">{translate('Resources')}</th>
-              <th className="text-end min-w-100px">{translate('Projects')}</th>
-            </tr>
-          </thead>
-          <tbody className="fw-semibold text-gray-600">
-            {(data || []).slice(0, TOP_COUNT).map((sp: any) => (
-              <tr key={sp.customer_uuid}>
-                <td>{sp.customer_name}</td>
-                <td className="text-end">{sp.resources_count || 0}</td>
-                <td className="text-end">{sp.projects_count || 0}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+      {() => <SimpleTable columns={columns} rows={rows} />}
     </ChartCard>
   );
 };

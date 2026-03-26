@@ -1,8 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
 import { ResourceState } from 'waldur-js-client';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 import { DonutChart } from '@waldur/reporting/users/charts/DonutChart';
 
 const STATE_MAPPING: Partial<

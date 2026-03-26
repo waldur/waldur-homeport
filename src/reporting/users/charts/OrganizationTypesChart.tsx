@@ -1,11 +1,11 @@
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 import { formatOrganizationType } from '@waldur/user/support/aai-constants';
 
 import { UserOrganizationTypeCount } from '../types';
 
-import { ChartCard } from './ChartCard';
 import { DonutChart } from './DonutChart';
 import { getChartExportData } from './utils';
 

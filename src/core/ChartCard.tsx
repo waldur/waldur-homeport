@@ -13,6 +13,8 @@ interface ChartCardProps {
   children: (ref: React.RefObject<any>) => React.ReactNode;
   getExportData?: () => ExportData;
   isEmpty?: boolean;
+  actions?: React.ReactNode;
+  showPNG?: boolean;
 }
 
 export const ChartCard: React.FC<ChartCardProps> = ({
@@ -20,6 +22,8 @@ export const ChartCard: React.FC<ChartCardProps> = ({
   children,
   getExportData,
   isEmpty,
+  actions,
+  showPNG = true,
 }) => {
   const chartRef = useRef<any>(null);
 
@@ -52,7 +56,8 @@ export const ChartCard: React.FC<ChartCardProps> = ({
         <Card.Title className="align-items-start flex-column">
           <span className="card-label fw-bold text-gray-900">{title}</span>
         </Card.Title>
-        <div className="card-toolbar">
+        <div className="card-toolbar d-flex gap-4">
+          {actions}
           <ActionDropdownButton
             disabled={isEmpty}
             className="dropdown-btn"
@@ -65,9 +70,11 @@ export const ChartCard: React.FC<ChartCardProps> = ({
             id={`chart-export-${title.replace(/\s+/g, '-').toLowerCase()}`}
             align="end"
           >
-            <Dropdown.Item onClick={handleExportPNG}>
-              {translate('Export as PNG')}
-            </Dropdown.Item>
+            {showPNG && (
+              <Dropdown.Item onClick={handleExportPNG}>
+                {translate('Export as PNG')}
+              </Dropdown.Item>
+            )}
             {getExportData && (
               <>
                 <Dropdown.Item onClick={() => handleExportData('csv')}>

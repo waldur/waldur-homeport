@@ -1,9 +1,9 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -20,8 +20,6 @@ export const UsageByCustomerTable: FC<Props> = ({
   componentTypes,
   limitNames,
 }) => {
-  const noop = useCallback(() => {}, []);
-
   const columns = useMemo<Column<CustomerUsageRow>[]>(() => {
     const cols: Column<CustomerUsageRow>[] = [
       {
@@ -108,21 +106,10 @@ export const UsageByCustomerTable: FC<Props> = ({
   }, [componentTypes, limitNames]);
 
   return (
-    <Table<CustomerUsageRow>
+    <SimpleTable<CustomerUsageRow>
       title={translate('Usage by organization')}
       columns={columns}
       rows={data}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
-      verboseName={translate('organizations')}
     />
   );
 };

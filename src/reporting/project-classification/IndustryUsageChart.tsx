@@ -1,7 +1,7 @@
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 import { DonutChart } from '@waldur/reporting/users/charts/DonutChart';
 
 interface IndustryUsageChartProps {

@@ -1,7 +1,7 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -13,8 +13,6 @@ interface Props {
 }
 
 export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
-  const noop = useCallback(() => {}, []);
-
   const columns = useMemo<Column<OrgTypeAggregation>[]>(() => {
     const cols: Column<OrgTypeAggregation>[] = [
       {
@@ -62,21 +60,10 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
   }, [componentTypes]);
 
   return (
-    <Table<OrgTypeAggregation>
+    <SimpleTable<OrgTypeAggregation>
       title={translate('Usage by organization type')}
       columns={columns}
       rows={data}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
-      verboseName={translate('organization types')}
     />
   );
 };

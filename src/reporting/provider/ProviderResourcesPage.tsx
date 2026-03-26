@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import {
@@ -14,6 +14,7 @@ import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
@@ -130,43 +131,34 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
     enabled: !!providerUuid,
   });
 
+  const stats = useMemo(
+    () =>
+      data
+        ? [
+            {
+              label: translate('Total active resources'),
+              value: data.total,
+            },
+            {
+              label: translate('Healthy (OK)'),
+              value: (data.by_state as any)?.OK || 0,
+            },
+            {
+              label: translate('Erred'),
+              value: (data.by_state as any)?.Erred || 0,
+            },
+          ]
+        : [],
+    [data],
+  );
+
   if (isLoading) return <LoadingSpinner />;
   if (error) return <LoadingErred loadData={refetch} />;
   if (!data) return null;
 
-  const okCount = (data.by_state as any)?.OK || 0;
-  const erredCount = (data.by_state as any)?.Erred || 0;
-
   return (
     <>
-      <Row className="g-4 mb-6">
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-primary">{data.total}</div>
-              <div className="text-muted fs-7">
-                {translate('Total active resources')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-success">{okCount}</div>
-              <div className="text-muted fs-7">{translate('Healthy (OK)')}</div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-danger">{erredCount}</div>
-              <div className="text-muted fs-7">{translate('Erred')}</div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <SummaryWidget stats={stats} />
 
       <Row className="g-4 mb-6">
         <Col xs={12} lg={6}>
