@@ -2,6 +2,7 @@ import { EChartsOption, graphic } from 'echarts';
 import React, { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
+import { generateBrandColors } from '@waldur/core/generateColors';
 import { getBrandColor } from '@waldur/core/utils';
 
 interface AreaChartItem {
@@ -41,7 +42,7 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
         },
         grid: {
           left: '3%',
-          right: '4%',
+          right: 0,
           bottom: '3%',
           top: '5%',
           containLabel: true,
@@ -84,14 +85,14 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
               color: color,
             },
             lineStyle: {
-              width: 2,
+              width: 1,
               color: color,
             },
             areaStyle: {
               color: new graphic.LinearGradient(0, 0, 0, 1, [
                 {
                   offset: 0,
-                  color: color,
+                  color: generateBrandColors(color)['200'],
                 },
                 {
                   offset: 1,

@@ -1,4 +1,5 @@
 import { UIView } from '@uirouter/react';
+import React from 'react';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { StateDeclaration } from '@waldur/core/types';
@@ -22,14 +23,26 @@ export const states: StateDeclaration[] = [
     },
   },
 
+  {
+    name: 'reporting-dashboard-layout',
+    parent: 'reporting',
+    url: '',
+    abstract: true,
+    component: lazyComponent(() =>
+      import('./ReportingLayout').then((module) => ({
+        default: module.ReportingLayout,
+      })),
+    ),
+  },
+
   // Dashboard - landing page for reporting
   {
     name: 'reporting-dashboard',
     url: '?tab',
-    parent: 'reporting',
+    parent: 'reporting-dashboard-layout',
     component: lazyComponent(() =>
-      import('./dashboard/ReportingDashboard').then((module) => ({
-        default: module.ReportingDashboard,
+      import('./GrowthPage').then((module) => ({
+        default: module.GrowthPage,
       })),
     ),
     data: {
@@ -41,11 +54,27 @@ export const states: StateDeclaration[] = [
   // Resources category (consumer-facing)
   {
     name: 'reporting-resources',
-    abstract: true,
+    url: 'resources/',
     parent: 'reporting',
     component: UIView,
-    url: '',
-    redirectTo: 'reporting-resource-usage',
+    abstract: true,
+    data: {
+      breadcrumb: () => translate('Resources'),
+      priority: 100,
+    },
+  },
+  {
+    name: 'reporting-resources-list',
+    url: 'resources/',
+    parent: 'reporting-dashboard-layout',
+    component: lazyComponent(() =>
+      import('./ReportingReportList').then((module) => ({
+        default: () =>
+          React.createElement(module.ReportingReportList, {
+            category: 'resources',
+          }),
+      })),
+    ),
     data: {
       breadcrumb: () => translate('Resources'),
       priority: 100,
@@ -248,12 +277,29 @@ export const states: StateDeclaration[] = [
   // Proposals & Reviews category (feature-based visibility)
   // Requires both call management AND experimental flags since all children use mock data
   {
-    name: 'reporting-proposals-category',
-    abstract: true,
+    name: 'reporting-proposals',
+    url: 'proposals/',
     parent: 'reporting',
     component: UIView,
-    url: '',
-    redirectTo: 'reporting-call-performance',
+    abstract: true,
+    data: {
+      breadcrumb: () => translate('Proposals'),
+      priority: 200,
+      feature: MarketplaceFeatures.show_experimental_ui_components,
+    },
+  },
+  {
+    name: 'reporting-proposals-list',
+    url: 'proposals/',
+    parent: 'reporting-dashboard-layout',
+    component: lazyComponent(() =>
+      import('./ReportingReportList').then((module) => ({
+        default: () =>
+          React.createElement(module.ReportingReportList, {
+            category: 'proposals',
+          }),
+      })),
+    ),
     data: {
       breadcrumb: () => translate('Proposals'),
       priority: 200,
@@ -263,7 +309,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-call-performance',
     url: 'call-performance/',
-    parent: 'reporting-proposals-category',
+    parent: 'reporting-proposals',
     component: lazyComponent(() =>
       import('./proposals/CallPerformanceList').then((module) => ({
         default: module.CallPerformanceList,
@@ -278,7 +324,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-review-progress',
     url: 'review-progress/',
-    parent: 'reporting-proposals-category',
+    parent: 'reporting-proposals',
     component: lazyComponent(() =>
       import('./proposals/ReviewProgressList').then((module) => ({
         default: module.ReviewProgressList,
@@ -293,7 +339,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-resource-demand',
     url: 'resource-demand/',
-    parent: 'reporting-proposals-category',
+    parent: 'reporting-proposals',
     component: lazyComponent(() =>
       import('./proposals/ResourceDemandList').then((module) => ({
         default: module.ResourceDemandList,
@@ -308,7 +354,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-call-performance-analytics',
     url: 'call-performance-analytics/?mode',
-    parent: 'reporting-proposals-category',
+    parent: 'reporting-proposals',
     component: lazyComponent(() =>
       import('./proposals/CallPerformanceAnalyticsPage').then((module) => ({
         default: module.CallPerformanceAnalyticsPage,
@@ -322,7 +368,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-review-progress-analytics',
     url: 'review-progress-analytics/?mode',
-    parent: 'reporting-proposals-category',
+    parent: 'reporting-proposals',
     component: lazyComponent(() =>
       import('./proposals/ReviewProgressAnalyticsPage').then((module) => ({
         default: module.ReviewProgressAnalyticsPage,
@@ -336,7 +382,7 @@ export const states: StateDeclaration[] = [
   {
     name: 'reporting-resource-demand-analytics',
     url: 'resource-demand-analytics/?mode',
-    parent: 'reporting-proposals-category',
+    parent: 'reporting-proposals',
     component: lazyComponent(() =>
       import('./proposals/ResourceDemandAnalyticsPage').then((module) => ({
         default: module.ResourceDemandAnalyticsPage,
@@ -351,11 +397,27 @@ export const states: StateDeclaration[] = [
   // Provider category (service provider managers)
   {
     name: 'reporting-provider',
-    abstract: true,
+    url: 'provider/',
     parent: 'reporting',
     component: UIView,
-    url: '',
-    redirectTo: 'reporting-capacity',
+    abstract: true,
+    data: {
+      breadcrumb: () => translate('Provider'),
+      priority: 300,
+    },
+  },
+  {
+    name: 'reporting-provider-list',
+    url: 'provider/',
+    parent: 'reporting-dashboard-layout',
+    component: lazyComponent(() =>
+      import('./ReportingReportList').then((module) => ({
+        default: () =>
+          React.createElement(module.ReportingReportList, {
+            category: 'provider',
+          }),
+      })),
+    ),
     data: {
       breadcrumb: () => translate('Provider'),
       priority: 300,
@@ -477,11 +539,27 @@ export const states: StateDeclaration[] = [
   // Users category - Platform level (staff/support only)
   {
     name: 'reporting-users',
-    abstract: true,
+    url: 'users/',
     parent: 'reporting',
     component: UIView,
-    url: '',
-    redirectTo: 'reporting-user-demographics',
+    abstract: true,
+    data: {
+      breadcrumb: () => translate('Users'),
+      priority: 350,
+    },
+  },
+  {
+    name: 'reporting-users-list',
+    url: 'users/',
+    parent: 'reporting-dashboard-layout',
+    component: lazyComponent(() =>
+      import('./ReportingReportList').then((module) => ({
+        default: () =>
+          React.createElement(module.ReportingReportList, {
+            category: 'users',
+          }),
+      })),
+    ),
     data: {
       breadcrumb: () => translate('Users'),
       priority: 350,
@@ -489,7 +567,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'reporting-user-demographics',
-    url: 'user-demographics/',
+    url: 'demographics/',
     parent: 'reporting-users',
     component: lazyComponent(() =>
       import('./users/UserDemographicsPage').then((m) => ({
@@ -575,11 +653,27 @@ export const states: StateDeclaration[] = [
   // Financial category (staff/support only) - renamed from Platform
   {
     name: 'reporting-financial',
-    abstract: true,
+    url: 'financial/',
     parent: 'reporting',
     component: UIView,
-    url: '',
-    redirectTo: 'reporting-growth',
+    abstract: true,
+    data: {
+      breadcrumb: () => translate('Financial'),
+      priority: 400,
+    },
+  },
+  {
+    name: 'reporting-financial-list',
+    url: 'financial/',
+    parent: 'reporting-dashboard-layout',
+    component: lazyComponent(() =>
+      import('./ReportingReportList').then((module) => ({
+        default: () =>
+          React.createElement(module.ReportingReportList, {
+            category: 'financial',
+          }),
+      })),
+    ),
     data: {
       breadcrumb: () => translate('Financial'),
       priority: 400,
@@ -590,8 +684,8 @@ export const states: StateDeclaration[] = [
     url: 'growth/',
     parent: 'reporting-financial',
     component: lazyComponent(() =>
-      import('./GrowthPage').then((module) => ({
-        default: module.GrowthPage,
+      import('./growth/RevenueGrowthPage').then((m) => ({
+        default: m.RevenueGrowthPage,
       })),
     ),
     data: {
@@ -657,32 +751,20 @@ export const states: StateDeclaration[] = [
     },
   },
 
-  // Infrastructure category (staff/support only)
-  {
-    name: 'reporting-infrastructure',
-    abstract: true,
-    parent: 'reporting',
-    component: UIView,
-    url: '',
-    redirectTo: 'reporting-vm-overview',
-    data: {
-      breadcrumb: () => translate('Infrastructure'),
-      priority: 450,
-    },
-  },
   {
     name: 'reporting-vm-overview',
     url: 'vm-overview/',
-    parent: 'reporting-infrastructure',
+    parent: 'reporting-provider',
     component: lazyComponent(() =>
-      import('./openstack/VmTypeOverviewContainer').then((module) => ({
-        default: module.VmTypeOverviewContainer,
-      })),
+      import('./provider/vm-type-overview/VmTypeOverviewContainer').then(
+        (module) => ({
+          default: module.VmTypeOverviewContainer,
+        }),
+      ),
     ),
     data: {
       feature: SupportFeatures.vm_type_overview,
       breadcrumb: () => translate('VM type overview'),
-      permissions: [() => isReportingScreenEnabled('vm-type-overview')],
     },
   },
   {
@@ -703,11 +785,27 @@ export const states: StateDeclaration[] = [
   // Operations category (cross-provider maintenance reporting)
   {
     name: 'reporting-operations',
-    abstract: true,
+    url: 'operations/',
     parent: 'reporting',
     component: UIView,
-    url: '',
-    redirectTo: 'reporting-maintenance-overview',
+    abstract: true,
+    data: {
+      breadcrumb: () => translate('Operations'),
+      priority: 475,
+    },
+  },
+  {
+    name: 'reporting-operations-list',
+    url: 'operations/',
+    parent: 'reporting-dashboard-layout',
+    component: lazyComponent(() =>
+      import('./ReportingReportList').then((module) => ({
+        default: () =>
+          React.createElement(module.ReportingReportList, {
+            category: 'operations',
+          }),
+      })),
+    ),
     data: {
       breadcrumb: () => translate('Operations'),
       priority: 475,
@@ -741,92 +839,6 @@ export const states: StateDeclaration[] = [
     data: {
       breadcrumb: () => translate('Provisioning statistics'),
       permissions: [() => isReportingScreenEnabled('provisioning-stats')],
-    },
-  },
-
-  // Legacy redirect routes for backward compatibility
-  {
-    name: 'reporting.organizations',
-    url: 'organizations/',
-    abstract: true,
-    component: UIView,
-    redirectTo: 'reporting-revenue',
-    data: {
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'reporting.pricelist',
-    url: 'pricelist-old/',
-    abstract: true,
-    component: UIView,
-    redirectTo: 'reporting-pricelist',
-    data: {
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'reporting.quotas',
-    url: 'quotas-old/',
-    abstract: true,
-    component: UIView,
-    redirectTo: 'reporting-quotas',
-    data: {
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'reporting.vm-type-overview',
-    url: 'vm-type-overview-old/',
-    abstract: true,
-    component: UIView,
-    redirectTo: 'reporting-vm-overview',
-    data: {
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'invoicesGrowth',
-    url: 'growth-old/',
-    abstract: true,
-    parent: 'reporting',
-    component: UIView,
-    redirectTo: 'reporting-growth',
-    data: {
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'marketplace-support-plan-usages',
-    url: 'plan-usages/',
-    abstract: true,
-    parent: 'reporting',
-    component: UIView,
-    redirectTo: 'reporting-capacity',
-    data: {
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'marketplace-support-usage-reports',
-    url: 'usage-reports/',
-    abstract: true,
-    parent: 'reporting',
-    component: UIView,
-    redirectTo: 'reporting-resource-usage',
-    data: {
-      skipBreadcrumb: true,
-    },
-  },
-  {
-    name: 'marketplace-support-user-usage-reports',
-    url: 'user-reports/',
-    abstract: true,
-    parent: 'reporting',
-    component: UIView,
-    redirectTo: 'reporting-user-usage',
-    data: {
-      skipBreadcrumb: true,
     },
   },
 ];

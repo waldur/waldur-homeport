@@ -39,7 +39,7 @@ export const ProjectsOverTimeChart: FC<ProjectsOverTimeChartProps> = ({
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
     >
-      {(ref) => <AreaChart data={chartData} ref={ref} />}
+      {(ref) => <AreaChart height="160px" data={chartData} ref={ref} />}
     </ChartCard>
   );
 };

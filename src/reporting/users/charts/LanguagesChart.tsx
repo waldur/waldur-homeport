@@ -1,9 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
+import { UserLanguageCount } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-
-import { UserLanguageCount } from '../types';
 
 import { BarChart } from './BarChart';
 import { getChartExportData } from './utils';

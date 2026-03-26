@@ -1,11 +1,9 @@
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { useTitle } from '@waldur/navigation/title';
 import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
 
@@ -17,7 +15,6 @@ import { IdentitySourcesChart } from './charts/IdentitySourcesChart';
 import { JobPositionsChart } from './charts/JobPositionsChart';
 import { LanguagesChart } from './charts/LanguagesChart';
 import { OrganizationTypesChart } from './charts/OrganizationTypesChart';
-import { RegistrationTrendChart } from './charts/RegistrationTrendChart';
 import { SummaryCards } from './charts/SummaryCards';
 import {
   computeStatisticsSummary,
@@ -29,8 +26,6 @@ export const UserDemographicsPage: FC = () => {
   useReportBreadcrumbs({ category: 'users', currentReport: 'demographics' });
 
   const { data, isLoading, error, refetch } = useUserStatistics();
-
-  const showExperimental = isExperimentalUiComponentsVisible();
 
   // Check which profile attributes are enabled
   const showIdentitySource = isProfileAttributeEnabled('identity_source');
@@ -71,12 +66,6 @@ export const UserDemographicsPage: FC = () => {
         </Col>
       </Row>
 
-      <Row className="mb-6 g-6">
-        <Col xs={12}>
-          <RegistrationTrendChart data={data.registrationTrend} />
-        </Col>
-      </Row>
-
       {(showOrganizationType || showJobTitle) && (
         <Row className="mb-6 g-6">
           {showOrganizationType && (
@@ -90,14 +79,6 @@ export const UserDemographicsPage: FC = () => {
             </Col>
           )}
         </Row>
-      )}
-
-      {showExperimental && (
-        <div className="mt-6 text-muted text-center">
-          <Link state="reporting-user-analytics" className="text-primary">
-            {translate('Advanced analytics available')}
-          </Link>
-        </div>
       )}
     </>
   );

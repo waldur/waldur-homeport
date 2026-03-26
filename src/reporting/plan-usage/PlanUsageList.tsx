@@ -79,18 +79,23 @@ export const PlanUsageList: FunctionComponent = () => {
   ];
 
   return (
-    <Table<PlanUsageResponse>
-      {...props}
-      columns={columns}
-      verboseName={translate('plans')}
-      showPageSizeSelector={true}
-      enableExport={true}
-      initialSorting={{ field: 'usage', mode: 'desc' }}
-      rowActions={PlanUsageRowActions}
-      filters={<MarketplacePlansUsageStatsFilter />}
-      tableActions={
-        <PlanUsageAnalytics data={props.rows} loading={props.loading} />
-      }
-    />
+    <>
+      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
+        <h1 className="mb-0 fs-1x">{translate('Capacity')}</h1>
+      </div>
+      <Table<PlanUsageResponse>
+        {...props}
+        columns={columns}
+        verboseName={translate('plans')}
+        showPageSizeSelector={true}
+        enableExport={true}
+        initialSorting={{ field: 'usage', mode: 'desc' }}
+        rowActions={PlanUsageRowActions}
+        filters={<MarketplacePlansUsageStatsFilter />}
+        tableActions={
+          <PlanUsageAnalytics data={props.rows} loading={props.loading} />
+        }
+      />
+    </>
   );
 };

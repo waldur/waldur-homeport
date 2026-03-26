@@ -3,13 +3,13 @@ import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 
 import { ActiveUsersByProviderChart } from './growth/ActiveUsersByProviderChart';
 import { ProjectsOverTimeChart } from './growth/ProjectsOverTimeChart';
 import { ResourcesOverTimeChart } from './growth/ResourcesOverTimeChart';
-import { RevenueGrowthChart } from './growth/RevenueGrowthChart';
 import { TopOfferingsTable } from './growth/TopOfferingsTable';
 import { TopProvidersTable } from './growth/TopProvidersTable';
 import { UsersOverTimeChart } from './growth/UsersOverTimeChart';
@@ -29,10 +29,28 @@ export const GrowthPage: FC = () => {
   if (error) return <LoadingErred loadData={refetch} />;
 
   return (
-    <div className="container-fluid py-6">
-      <div className="mb-6">
-        <RevenueGrowthChart />
-      </div>
+    <>
+      <SummaryWidget
+        stats={[
+          {
+            label: translate('Service providers'),
+            value: data?.providersCount || 0,
+          },
+          { label: translate('Offerings'), value: data?.offeringsCount || 0 },
+          {
+            label: translate('Active users'),
+            value: data?.activeUsersCount || 0,
+          },
+          {
+            label: translate('Active projects'),
+            value: data?.projectsCount || 0,
+          },
+          {
+            label: translate('Active resources'),
+            value: data?.resourcesCount || 0,
+          },
+        ]}
+      />
 
       <Row className="g-6 mb-6">
         <Col lg={6}>
@@ -52,7 +70,7 @@ export const GrowthPage: FC = () => {
         </Col>
       </Row>
 
-      <Row className="g-6">
+      <Row className="g-6 mb-6">
         <Col lg={6}>
           <TopProvidersTable data={data?.topProviders} />
         </Col>
@@ -60,6 +78,6 @@ export const GrowthPage: FC = () => {
           <TopOfferingsTable data={data?.topOfferings} />
         </Col>
       </Row>
-    </div>
+    </>
   );
 };

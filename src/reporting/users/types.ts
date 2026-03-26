@@ -11,21 +11,6 @@ import {
 } from 'waldur-js-client';
 
 /**
- * Re-export SDK types for convenience
- */
-export type {
-  UserActiveStatusCount,
-  UserAffiliationCount,
-  UserAuthMethodCount,
-  UserIdentitySourceCount,
-  UserJobTitleCount,
-  UserLanguageCount,
-  UserOrganizationCount,
-  UserOrganizationTypeCount,
-  UserRegistrationTrend,
-};
-
-/**
  * Aggregated user statistics from all endpoints
  */
 export interface UserStatistics {

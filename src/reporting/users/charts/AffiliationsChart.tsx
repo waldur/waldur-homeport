@@ -1,5 +1,6 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
+import { UserAffiliationCount } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
 import { SummaryWidget } from '@waldur/core/SummaryWidget';
@@ -18,7 +19,6 @@ import {
   parseAffiliation,
   ParsedAffiliation,
 } from '../affiliationParser';
-import { UserAffiliationCount } from '../types';
 
 import { BarChart } from './BarChart';
 import { getChartExportData } from './utils';

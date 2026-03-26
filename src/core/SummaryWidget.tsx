@@ -8,12 +8,15 @@ export const SummaryWidget = ({
 }: {
   stats: Array<{ label: ReactNode; value: ReactNode }>;
 }) => {
-  const colWidth = Math.max(2, Math.floor(12 / Math.min(stats.length, 6)));
+  const colWidth =
+    stats.length === 5
+      ? null
+      : Math.max(2, Math.floor(12 / Math.min(stats.length, 6)));
 
   return (
     <Row className="g-4 mb-6">
       {stats.map((stat, index) => (
-        <Col key={index} xs={12} sm={colWidth}>
+        <Col key={index} sm={colWidth}>
           <StatsCard label={stat.label} value={stat.value} />
         </Col>
       ))}

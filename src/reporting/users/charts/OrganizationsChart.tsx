@@ -1,10 +1,9 @@
 import { EChartsOption } from 'echarts';
 import React, { useMemo } from 'react';
+import { UserOrganizationCount } from 'waldur-js-client';
 
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-
-import { UserOrganizationCount } from '../types';
 
 interface OrganizationsChartProps {
   data: UserOrganizationCount[];

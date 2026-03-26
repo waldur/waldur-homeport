@@ -49,7 +49,6 @@ export const RoleDistributionTable: FC<RoleDistributionTableProps> = ({
       columns={columns}
       rows={sortedData}
       title={translate('Organization member counts')}
-      verboseName={translate('organizations')}
     />
   );
 };

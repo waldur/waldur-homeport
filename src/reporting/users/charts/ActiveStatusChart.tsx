@@ -1,11 +1,10 @@
 import { FC, useCallback, useMemo } from 'react';
+import { UserActiveStatusCount } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
 import { generateBrandColors } from '@waldur/core/generateColors';
 import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-
-import { UserActiveStatusCount } from '../types';
 
 import { DonutChart } from './DonutChart';
 import { getChartExportData } from './utils';

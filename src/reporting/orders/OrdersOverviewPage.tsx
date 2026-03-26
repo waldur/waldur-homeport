@@ -22,7 +22,12 @@ export const OrdersOverviewPage: FC = () => {
 
   return (
     <>
-      <OrdersFilter days={days} onDaysChange={setDays} />
+      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
+        <h1 className="mb-0 fs-1x">{translate('Orders overview')}</h1>
+        <div className="d-none d-sm-flex gap-4">
+          <OrdersFilter days={days} onDaysChange={setDays} />
+        </div>
+      </div>
 
       {isLoading ? (
         <LoadingSpinner />

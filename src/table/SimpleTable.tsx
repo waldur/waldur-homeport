@@ -1,5 +1,9 @@
-import { Card, Table } from 'react-bootstrap';
+import { useCallback } from 'react';
+import { Col, Row, Table } from 'react-bootstrap';
 
+import { ChartCard } from '@waldur/core/ChartCard';
+
+import { ExportData } from './exporters/types';
 import { Column } from './types';
 
 export const SimpleTable = <T = any,>({
@@ -7,17 +11,33 @@ export const SimpleTable = <T = any,>({
   rows,
   rowKey = 'uuid',
   title,
-  bodyClassName,
 }: {
   columns: Column<T>[];
   rows: T[];
   rowKey?: string;
   title?: string;
-  bodyClassName?: string;
-  hideRefresh?: boolean;
-  hideTitle?: boolean;
-  verboseName?: string;
 }) => {
+  const getExportData = useCallback((): ExportData => {
+    const fields = columns
+      .filter((column) => column.export !== false)
+      .map((column) => column.exportTitle || (column.title as string));
+    const data = (rows || []).map((row) =>
+      columns
+        .filter((column) => column.export !== false)
+        .map((column) => {
+          if (typeof column.export === 'function') {
+            return column.export(row);
+          } else if (typeof column.export === 'string') {
+            return row[column.export];
+          } else if (column.export === true || column.export === undefined) {
+            return row[column.id] || row[column.orderField];
+          }
+          return '';
+        }),
+    );
+    return { fields, data } as ExportData;
+  }, [columns, rows]);
+
   const table = (
     <div className="table-responsive">
       <Table className="table table-row-bordered table-row-gray-200 align-middle gs-0 gy-3 p-0 m-0 text-start text-gray-600">
@@ -47,14 +67,18 @@ export const SimpleTable = <T = any,>({
 
   if (title) {
     return (
-      <Card className="card-bordered">
-        <Card.Header>
-          <Card.Title>
-            <h3>{title}</h3>
-          </Card.Title>
-        </Card.Header>
-        <Card.Body className={bodyClassName}>{table}</Card.Body>
-      </Card>
+      <Row>
+        <Col>
+          <ChartCard
+            title={title}
+            showPNG={false}
+            getExportData={getExportData}
+            isEmpty={!rows || rows.length === 0}
+          >
+            {() => table}
+          </ChartCard>
+        </Col>
+      </Row>
     );
   }
 

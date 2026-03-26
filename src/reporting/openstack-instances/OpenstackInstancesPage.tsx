@@ -28,6 +28,10 @@ export const OpenstackInstancesPage: FC = () => {
 
   return (
     <>
+      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
+        <h1 className="mb-0 fs-1x">{translate('OpenStack instances')}</h1>
+      </div>
+
       {summaryLoading ? (
         <LoadingSpinner />
       ) : (

@@ -8,6 +8,9 @@ import {
   usersUserRegistrationTrendList,
 } from 'waldur-js-client';
 
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
+import { count } from '@waldur/core/api';
+
 const STALE_TIME = 5 * 60 * 1000; // 5 minutes
 
 export const useGrowthStatistics = () => {
@@ -21,6 +24,11 @@ export const useGrowthStatistics = () => {
         offerings,
         activeUsers,
         projectTrends,
+        providersCount,
+        offeringsCount,
+        projectsCount,
+        resourcesCount,
+        activeUsersCount,
       ] = await Promise.all([
         usersUserRegistrationTrendList({ signal }).then((r) => r.data || []),
         marketplaceStatsAggregatedUsageTrendsList({ signal }).then(
@@ -40,6 +48,16 @@ export const useGrowthStatistics = () => {
         marketplaceStatsProjectCreationTrendList({ signal }).then(
           (r) => r.data || [],
         ),
+
+        count('/api/marketplace-service-providers/'),
+
+        count('/api/marketplace-public-offerings/'),
+
+        count('/api/projects/'),
+
+        count('/api/marketplace-resources/', { state: ['OK'] }),
+
+        count('/api/users/', { is_active: true }),
       ]);
 
       return {
@@ -49,6 +67,11 @@ export const useGrowthStatistics = () => {
         topOfferings: offerings,
         activeUsers,
         projectTrends,
+        providersCount,
+        offeringsCount,
+        projectsCount,
+        resourcesCount,
+        activeUsersCount,
       };
     },
     staleTime: STALE_TIME,
