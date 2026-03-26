@@ -58,15 +58,11 @@ export const formatConsentStatusChart = (stats: {
 }): EChartsOption => {
   const accepted = stats.accepted_consents_count;
   const revoked = stats.revoked_consents_count;
-  // Pending = total active users minus those who have accepted or revoked
-  const pending =
-    stats.active_users_count -
-    stats.accepted_consents_count -
-    stats.revoked_consents_count;
+  const notAccepted = Math.max(0, stats.total_users_count - accepted - revoked);
 
   const pieData = [
     { value: accepted, name: 'Accepted' },
-    { value: pending, name: 'Pending' },
+    { value: notAccepted, name: 'Not accepted' },
     { value: revoked, name: 'Revoked' },
   ];
 
