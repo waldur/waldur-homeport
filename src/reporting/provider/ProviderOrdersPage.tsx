@@ -5,7 +5,6 @@ import { getFormValues } from 'redux-form';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { useTitle } from '@waldur/navigation/title';
 import { OrdersContent } from '@waldur/reporting/orders/OrdersContent';
@@ -32,18 +31,28 @@ export const ProviderOrdersPage: FC = () => {
   });
 
   const providerFilter = (
-    <FormGroup label={translate('Provider')} className="flex-grow-1 mw-300px">
-      <ProviderFilter />
-    </FormGroup>
+    <div className="d-flex align-items-center gap-4">
+      <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+        {translate('Provider')}:
+      </label>
+      <div style={{ minWidth: 200 }}>
+        <ProviderFilter />
+      </div>
+    </div>
   );
 
   return (
     <>
-      <OrdersFilter
-        days={days}
-        onDaysChange={setDays}
-        extraFilters={providerFilter}
-      />
+      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
+        <h1 className="mb-0 fs-1x">{translate('Provider orders')}</h1>
+        <div className="d-none d-sm-flex gap-4">
+          <OrdersFilter
+            days={days}
+            onDaysChange={setDays}
+            extraFilters={providerFilter}
+          />
+        </div>
+      </div>
 
       {!providerUuid ? (
         <NoResult

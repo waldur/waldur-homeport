@@ -37,7 +37,9 @@ export const ActiveUsersByProviderChart: FC<
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
     >
-      {(ref) => <BarChart data={chartData} ref={ref} horizontal />}
+      {(ref) => (
+        <BarChart height="160px" data={chartData} ref={ref} horizontal />
+      )}
     </ChartCard>
   );
 };

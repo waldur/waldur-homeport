@@ -1,9 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
+import { UserJobTitleCount } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-
-import { UserJobTitleCount } from '../types';
 
 import { DonutChart } from './DonutChart';
 import { getChartExportData } from './utils';

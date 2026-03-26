@@ -1,9 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
+import { UserIdentitySourceCount } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-
-import { UserIdentitySourceCount } from '../types';
 
 import { DonutChart } from './DonutChart';
 import { getChartExportData } from './utils';
