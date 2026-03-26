@@ -1,11 +1,11 @@
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 
 import { UserLanguageCount } from '../types';
 
 import { BarChart } from './BarChart';
-import { ChartCard } from './ChartCard';
 import { getChartExportData } from './utils';
 
 interface LanguagesChartProps {

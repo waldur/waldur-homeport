@@ -84,7 +84,7 @@ export const AreaChart = React.forwardRef<any, AreaChartProps>(
               color: color,
             },
             lineStyle: {
-              width: 3,
+              width: 2,
               color: color,
             },
             areaStyle: {

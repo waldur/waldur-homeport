@@ -3,7 +3,7 @@ import { OfferingCost } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 
 interface OfferingCostsTableProps {
@@ -31,24 +31,11 @@ export const OfferingCostsTable: FC<OfferingCostsTableProps> = ({ data }) => {
     [data],
   );
 
-  const noop = () => {};
-
   return (
-    <Table<OfferingCost>
+    <SimpleTable<OfferingCost>
       columns={columns}
       rows={sortedData}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
       title={translate('Offering costs')}
-      verboseName={translate('offerings')}
     />
   );
 };

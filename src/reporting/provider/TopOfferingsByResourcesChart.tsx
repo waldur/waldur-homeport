@@ -1,9 +1,9 @@
 import { EChartsOption } from 'echarts';
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 interface OfferingStatsData {
   offering_uuid: string;

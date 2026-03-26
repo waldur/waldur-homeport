@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 
 import { UserRegistrationTrend } from '../types';
 
 import { AreaChart } from './AreaChart';
-import { ChartCard } from './ChartCard';
 import { getChartExportData } from './utils';
 
 interface RegistrationTrendChartProps {

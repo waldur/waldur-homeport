@@ -2,9 +2,9 @@ import { EChartsOption } from 'echarts';
 import { FC, useCallback, useMemo } from 'react';
 import { OpenStackInstanceAggregate } from 'waldur-js-client';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 interface AggregateChartProps {

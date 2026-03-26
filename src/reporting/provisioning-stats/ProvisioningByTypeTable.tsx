@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 
 interface ProvisioningByTypeTableProps {
@@ -43,24 +43,11 @@ export const ProvisioningByTypeTable: FC<ProvisioningByTypeTableProps> = ({
       .sort((a, b) => b.count - a.count);
   }, [byType]);
 
-  const noop = () => {};
-
   return (
-    <Table<TypeRow>
+    <SimpleTable
       columns={columns}
       rows={tableData}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
       title={translate('Orders by type')}
-      verboseName={translate('order types')}
     />
   );
 };

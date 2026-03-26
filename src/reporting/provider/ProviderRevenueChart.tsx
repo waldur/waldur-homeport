@@ -1,12 +1,12 @@
-import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
+import { Row } from 'react-bootstrap';
 import { ServiceProviderRevenues } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
+import { ChartCard } from '@waldur/core/ChartCard';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
+import { BarChart } from '@waldur/reporting/users/charts/BarChart';
 
 interface ProviderRevenueChartProps {
   data: ServiceProviderRevenues[];
@@ -15,51 +15,21 @@ interface ProviderRevenueChartProps {
 export const ProviderRevenueChart: FC<ProviderRevenueChartProps> = ({
   data,
 }) => {
-  const chartOptions = useMemo<EChartsOption>(() => {
-    const months = (data || []).map((d) =>
-      DateTime.fromObject({ year: d.year, month: d.month }).toFormat(
-        'MMM yyyy',
-      ),
-    );
-    const values = (data || []).map((d) => d.total || 0);
+  const chartData = useMemo(
+    () =>
+      (data || []).map((d) => ({
+        name: DateTime.fromObject({ year: d.year, month: d.month }).toFormat(
+          'MMM yyyy',
+        ),
+        value: d.total || 0,
+      })),
+    [data],
+  );
 
-    return {
-      tooltip: {
-        trigger: 'axis',
-        axisPointer: { type: 'shadow' },
-        formatter: (params: any) => {
-          const value = params[0].value;
-          return `${params[0].name}: ${defaultCurrency(value)}`;
-        },
-      },
-      grid: {
-        left: '3%',
-        right: '4%',
-        bottom: '3%',
-        containLabel: true,
-      },
-      xAxis: {
-        type: 'category',
-        data: months,
-        axisLabel: { rotate: 45 },
-      },
-      yAxis: {
-        type: 'value',
-        name: translate('Revenue'),
-        axisLabel: {
-          formatter: (value: any) => defaultCurrency(value),
-        },
-      },
-      series: [
-        {
-          name: translate('Revenue'),
-          type: 'bar',
-          data: values,
-          itemStyle: { color: '#50cd89' },
-        },
-      ],
-    };
-  }, [data]);
+  const tooltipFormatter = useCallback((params: any) => {
+    const param = Array.isArray(params) ? params[0] : params;
+    return `${param.name}: ${defaultCurrency(param.value)}`;
+  }, []);
 
   const getExportData = useCallback(
     () => ({
@@ -75,12 +45,22 @@ export const ProviderRevenueChart: FC<ProviderRevenueChartProps> = ({
   );
 
   return (
-    <ChartCard
-      title={translate('Revenue trend (12 months)')}
-      getExportData={getExportData}
-      isEmpty={!data || data.length === 0}
-    >
-      {(ref) => <EChart ref={ref} options={chartOptions} height="400px" />}
-    </ChartCard>
+    <Row>
+      <ChartCard
+        title={translate('Revenue trend (12 months)')}
+        getExportData={getExportData}
+        isEmpty={!data || data.length === 0}
+      >
+        {(ref) => (
+          <BarChart
+            ref={ref}
+            data={chartData}
+            height="400px"
+            isSorted={false}
+            tooltipFormatter={tooltipFormatter}
+          />
+        )}
+      </ChartCard>
+    </Row>
   );
 };

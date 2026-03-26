@@ -1,8 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 import { YearlyComparison } from './types';
 import { formatYearOverYearChart } from './utils';

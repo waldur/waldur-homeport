@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -13,7 +14,6 @@ import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
 
 import { getCountryLabel } from './affiliationParser';
 import { BarChart } from './charts/BarChart';
-import { ChartCard } from './charts/ChartCard';
 import { DonutChart } from './charts/DonutChart';
 import { useUserStatistics } from './useUserStatistics';
 

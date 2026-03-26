@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
 
 import { MonthlyUsageData } from './types';
 import { formatUsageTrendChart } from './utils';

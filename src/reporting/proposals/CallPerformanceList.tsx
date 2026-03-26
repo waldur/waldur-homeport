@@ -103,30 +103,30 @@ const columns: Column<CallPerformanceData>[] = [
 const CallPerformanceExpandableRow: FC<{ row: CallPerformanceData }> = ({
   row,
 }) => {
-  const statuses = [
-    {
-      key: 'accepted',
-      label: translate('Accepted'),
-      value: row.proposals_accepted,
-      variant: 'outline-secondary',
-    },
-    {
-      key: 'in_review',
-      label: translate('In review'),
-      value: row.proposals_in_review,
-      variant: 'outline-warning',
-    },
-    {
-      key: 'rejected',
-      label: translate('Rejected'),
-      value: row.proposals_rejected,
-      variant: 'outline-danger',
-    },
-  ];
-
   return (
     <ExpandableContainer>
-      <StatusBreakdown statuses={statuses} />
+      <StatusBreakdown
+        statuses={[
+          {
+            key: 'accepted',
+            label: translate('Accepted'),
+            value: row.proposals_accepted,
+            variant: 'outline-secondary',
+          },
+          {
+            key: 'in_review',
+            label: translate('In review'),
+            value: row.proposals_in_review,
+            variant: 'outline-warning',
+          },
+          {
+            key: 'rejected',
+            label: translate('Rejected'),
+            value: row.proposals_rejected,
+            variant: 'outline-danger',
+          },
+        ]}
+      />
     </ExpandableContainer>
   );
 };

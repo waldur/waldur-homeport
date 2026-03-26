@@ -1,8 +1,8 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
@@ -14,8 +14,6 @@ interface Props {
 }
 
 export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
-  const noop = useCallback(() => {}, []);
-
   const columns = useMemo<Column<AffiliationAggregation>[]>(() => {
     const cols: Column<AffiliationAggregation>[] = [
       {
@@ -66,21 +64,10 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
   }, [componentTypes]);
 
   return (
-    <Table<AffiliationAggregation>
+    <SimpleTable<AffiliationAggregation>
       title={translate('Usage by affiliation')}
       columns={columns}
       rows={data}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
-      verboseName={translate('affiliations')}
     />
   );
 };

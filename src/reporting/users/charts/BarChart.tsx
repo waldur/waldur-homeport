@@ -16,6 +16,9 @@ interface BarChartProps {
   horizontal?: boolean;
   color?: string;
   isSorted?: boolean;
+  showValueLabel?: boolean;
+  labelFormatter?: (params: any) => string;
+  tooltipFormatter?: (params: any) => string;
 }
 
 /**
@@ -29,6 +32,9 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
       horizontal = false,
       color = getBrandColor(),
       isSorted = true,
+      showValueLabel = false,
+      labelFormatter,
+      tooltipFormatter,
     },
     ref,
   ) => {
@@ -57,28 +63,40 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
           axisPointer: {
             type: 'shadow',
           },
+          formatter: tooltipFormatter,
         },
         grid: {
           left: '3%',
-          right: '4%',
+          right: '10%',
           bottom: '3%',
           top: '5%',
           containLabel: true,
         },
         xAxis: horizontal
-          ? { type: 'value' }
+          ? {
+              type: 'value',
+              axisLabel: {
+                formatter: (value: number) => value.toLocaleString(),
+              },
+            }
           : {
               type: 'category',
               data: categories,
               axisLabel: {
                 interval: 0,
-                rotate: categories.length > 1 ? 45 : 0,
+                rotate: categories.length > 5 ? 45 : 0,
               },
             },
         yAxis: horizontal
           ? {
               type: 'category',
               data: categories,
+              inverse: true,
+              axisLabel: {
+                width: 150,
+                overflow: 'truncate',
+                ellipsis: '...',
+              },
             }
           : { type: 'value' },
         series: [
@@ -87,13 +105,26 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
             type: 'bar',
             itemStyle: {
               color,
-              borderRadius: [4, 4, 0, 0],
+              borderRadius: horizontal ? [0, 4, 4, 0] : [4, 4, 0, 0],
             },
             barMaxWidth: 40,
+            label: {
+              show: showValueLabel,
+              position: horizontal ? 'right' : 'top',
+              formatter: labelFormatter,
+            },
           },
         ],
       }),
-      [categories, values, horizontal, color],
+      [
+        categories,
+        values,
+        horizontal,
+        color,
+        showValueLabel,
+        labelFormatter,
+        tooltipFormatter,
+      ],
     );
 
     return <EChart ref={ref} options={options} height={height} />;

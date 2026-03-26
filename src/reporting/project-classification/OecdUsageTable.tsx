@@ -6,7 +6,7 @@ import {
 
 import { translate } from '@waldur/i18n';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 
 import { ClassificationUsageRow } from './types';
@@ -68,24 +68,11 @@ export const OecdUsageTable: FC<OecdUsageTableProps> = ({ usages, limits }) => {
     [usages, limits],
   );
 
-  const noop = () => {};
-
   return (
-    <Table<ClassificationUsageRow>
+    <SimpleTable<ClassificationUsageRow>
       columns={tableColumns}
       rows={tableData}
-      fetch={noop}
-      loading={false}
-      error={null}
-      activeColumns={{}}
-      columnPositions={[]}
-      resetSelection={noop}
-      setFilterPosition={noop}
-      initColumnPositions={noop}
-      resetPagination={noop}
-      hasPagination={false}
       title={translate('Usage by OECD classification')}
-      verboseName={translate('classifications')}
     />
   );
 };

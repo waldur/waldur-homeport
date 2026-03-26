@@ -1,9 +1,9 @@
 import { FC, useCallback, useMemo } from 'react';
 import { OfferingStats } from 'waldur-js-client';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
-import Table from '@waldur/table/Table';
+import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 
 interface ResourcesByOfferingTableProps {
@@ -39,33 +39,14 @@ export const ResourcesByOfferingTable: FC<ResourcesByOfferingTableProps> = ({
     [sortedData],
   );
 
-  const noop = () => {};
-
   return (
     <ChartCard
       title={translate('Resources by offering')}
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
+      showPNG={false}
     >
-      {() => (
-        <Table<OfferingStats>
-          columns={columns}
-          rows={sortedData}
-          fetch={noop}
-          loading={false}
-          error={null}
-          activeColumns={{}}
-          columnPositions={[]}
-          resetSelection={noop}
-          setFilterPosition={noop}
-          initColumnPositions={noop}
-          resetPagination={noop}
-          hasPagination={false}
-          verboseName={translate('offerings')}
-          hideTitle
-          hideRefresh
-        />
-      )}
+      {() => <SimpleTable<OfferingStats> columns={columns} rows={sortedData} />}
     </ChartCard>
   );
 };

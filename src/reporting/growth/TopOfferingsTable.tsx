@@ -1,8 +1,9 @@
-import { FC, useCallback } from 'react';
-import { Table } from 'react-bootstrap';
+import { FC, useCallback, useMemo } from 'react';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-import { ChartCard } from '@waldur/reporting/users/charts/ChartCard';
+import { SimpleTable } from '@waldur/table/SimpleTable';
+import { Column } from '@waldur/table/types';
 
 interface TopOfferingsTableProps {
   data: any[];
@@ -11,41 +12,40 @@ interface TopOfferingsTableProps {
 const TOP_COUNT = 5;
 
 export const TopOfferingsTable: FC<TopOfferingsTableProps> = ({ data }) => {
+  const columns: Column[] = useMemo(
+    () => [
+      {
+        title: translate('Offering'),
+        render: ({ row }) => row.name,
+      },
+      {
+        title: translate('Resources'),
+        render: ({ row }) => row.count || 0,
+        className: 'text-end',
+        headerClassName: 'text-end',
+      },
+    ],
+    [],
+  );
+
+  const rows = useMemo(() => (data || []).slice(0, TOP_COUNT), [data]);
+
   const getExportData = useCallback(
     () => ({
       fields: [translate('Offering'), translate('Resources')],
-      data: (data || []).map((offering: any) => [
-        offering.name,
-        offering.count || 0,
-      ]),
+      data: rows.map((offering: any) => [offering.name, offering.count || 0]),
     }),
-    [data],
+    [rows],
   );
 
   return (
     <ChartCard
-      title={translate('Top 5 Offerings')}
+      title={translate('Top 5 offerings')}
       getExportData={getExportData}
       isEmpty={!data || data.length === 0}
+      showPNG={false}
     >
-      {() => (
-        <Table responsive className="align-middle table-row-dashed fs-6 gy-5">
-          <thead>
-            <tr className="text-start text-gray-400 fw-bold fs-7 text-uppercase gs-0">
-              <th className="min-w-150px">{translate('Offering')}</th>
-              <th className="text-end min-w-100px">{translate('Resources')}</th>
-            </tr>
-          </thead>
-          <tbody className="fw-semibold text-gray-600">
-            {(data || []).slice(0, TOP_COUNT).map((offering: any) => (
-              <tr key={offering.uuid}>
-                <td>{offering.name}</td>
-                <td className="text-end">{offering.count || 0}</td>
-              </tr>
-            ))}
-          </tbody>
-        </Table>
-      )}
+      {() => <SimpleTable columns={columns} rows={rows} />}
     </ChartCard>
   );
 };

@@ -1,6 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { Card, Col, Row } from 'react-bootstrap';
+import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import {
@@ -10,13 +10,15 @@ import {
   ProviderOfferingStats,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
+import { getLabel } from '@waldur/marketplace/common/registry';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { OfferingStateField } from '@waldur/marketplace/offerings/OfferingStateField';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
@@ -54,26 +56,12 @@ const CategoryColumn = ({ row }: { row: ProviderOffering }) => (
   <span className="text-muted">{row.category_title}</span>
 );
 
-const StateColumn = ({ row }: { row: ProviderOffering }) => {
-  const variant =
-    row.state === 'Active'
-      ? 'success'
-      : row.state === 'Paused'
-        ? 'warning'
-        : 'secondary';
-  return (
-    <Badge variant={variant} outline>
-      {row.state}
-    </Badge>
-  );
-};
-
 const ResourcesColumn = ({ row }: { row: ProviderOffering }) => (
   <span className="fw-bold text-primary">{row.resources_count || 0}</span>
 );
 
 const TypeColumn = ({ row }: { row: ProviderOffering }) => (
-  <span className="text-muted">{row.type}</span>
+  <span className="text-muted">{getLabel(row.type)}</span>
 );
 
 const columns: Column<ProviderOffering>[] = [
@@ -88,7 +76,7 @@ const columns: Column<ProviderOffering>[] = [
   },
   {
     title: translate('State'),
-    render: StateColumn,
+    render: ({ row }) => <OfferingStateField offering={row} />,
     orderField: 'state',
   },
   {
@@ -165,52 +153,17 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
 
   return (
     <>
-      <Row className="g-4 mb-6">
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-primary">
-                {offerings.length}
-              </div>
-              <div className="text-muted fs-7">
-                {translate('Total offerings')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-success">{activeOfferings}</div>
-              <div className="text-muted fs-7">
-                {translate('Active offerings')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-info">{totalResources}</div>
-              <div className="text-muted fs-7">
-                {translate('Total resources')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-        <Col xs={12} sm={6} lg={3}>
-          <Card className="card-flush h-100">
-            <Card.Body className="py-5">
-              <div className="fs-2 fw-bold text-warning">
-                {defaultCurrency(totalRevenue)}
-              </div>
-              <div className="text-muted fs-7">
-                {translate('Total revenue')}
-              </div>
-            </Card.Body>
-          </Card>
-        </Col>
-      </Row>
+      <SummaryWidget
+        stats={[
+          { label: translate('Total offerings'), value: offerings.length },
+          { label: translate('Active offerings'), value: activeOfferings },
+          { label: translate('Total resources'), value: totalResources },
+          {
+            label: translate('Total revenue'),
+            value: defaultCurrency(totalRevenue),
+          },
+        ]}
+      />
 
       <Row className="g-4 mb-6">
         <Col xs={12} lg={6}>

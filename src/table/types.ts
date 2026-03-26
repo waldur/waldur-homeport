@@ -70,6 +70,7 @@ export interface Column<RowType = any> {
   meta?: ReactNode;
   render: React.ComponentType<{ row: RowType }>;
   className?: string;
+  headerClassName?: string;
   orderField?: string;
   visible?: boolean;
   copyField?: (row: RowType) => string | number;

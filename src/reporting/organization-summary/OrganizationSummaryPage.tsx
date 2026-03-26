@@ -24,7 +24,7 @@ interface OrganizationFilterFormValues {
 }
 
 export const OrganizationSummaryPage: FC = () => {
-  useTitle(translate('Organization Summary'));
+  useTitle(translate('Organization summary'));
   useReportBreadcrumbs({
     category: 'resources',
     currentReport: 'organization-summary',
