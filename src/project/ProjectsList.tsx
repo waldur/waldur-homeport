@@ -17,6 +17,7 @@ import { formatLongText } from '@waldur/table/utils';
 import { getCustomer } from '@waldur/workspace/selectors';
 import { Customer } from '@waldur/workspace/types';
 
+import { BatchProjectActions } from './BatchProjectActions';
 import { ProjectCostField } from './ProjectCostField';
 import { ProjectKindField } from './ProjectKindField';
 import { ProjectLink } from './ProjectLink';
@@ -129,6 +130,8 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
       rowActions={({ row }) => (
         <ProjectsListActions project={row} refetch={props.fetch} />
       )}
+      enableMultiSelect
+      multiSelectActions={BatchProjectActions}
       enableExport={true}
       hasOptionalColumns
       {...props}

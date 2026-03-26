@@ -64,6 +64,21 @@ export const hasPermission = (user: User, request: PermissionRequest) => {
   }
 };
 
+export const hasPermissionOnAnyCustomer = (
+  user: User,
+  permission: string,
+): boolean => {
+  if (!user) return false;
+  if (user.is_staff) return true;
+  return (
+    user.permissions?.some((perm) => {
+      if (perm.scope_type !== 'customer') return false;
+      const role = ENV.roles.find(({ name }) => name === perm.role_name);
+      return role?.permissions.includes(permission);
+    }) ?? false
+  );
+};
+
 export const userHasRole = (user: User, role: string, scope_uuid: string) => {
   if (user?.is_staff) {
     return true;
