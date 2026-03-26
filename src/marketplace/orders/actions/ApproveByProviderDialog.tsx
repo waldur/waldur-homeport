@@ -4,7 +4,7 @@ import { FC } from 'react';
 import { Field, Form, useFormState } from 'react-final-form';
 import {
   marketplaceOrdersApproveByProvider,
-  marketplaceResourcesOfferingRetrieve,
+  marketplaceOrdersOfferingRetrieve,
   OrderDetails,
 } from 'waldur-js-client';
 
@@ -90,13 +90,10 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
 
   // Fetch offering to get resource_options (only if order supports options)
   const offeringQuery = useQuery({
-    queryKey: [
-      'order-offering-options',
-      resolve.order.marketplace_resource_uuid,
-    ],
+    queryKey: ['order-offering-options', resolve.order.uuid],
     queryFn: () =>
-      marketplaceResourcesOfferingRetrieve({
-        path: { uuid: resolve.order.marketplace_resource_uuid },
+      marketplaceOrdersOfferingRetrieve({
+        path: { uuid: resolve.order.uuid },
       }).then((response) => response.data),
     staleTime: 3 * 60 * 1000,
     enabled: isOptionsUpdateOrder,
