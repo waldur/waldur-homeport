@@ -13,6 +13,12 @@ import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetail
 import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
+import { ResourceViewChangeButton } from './ResourceViewChangeButton';
+import {
+  hasResourceChangePlanRequest,
+  hasResourceLimitChangeRequest,
+} from './utils';
+
 const OrderInProgressActions: FC<{
   resource: Resource;
   offering: PublicOfferingDetails;
@@ -53,6 +59,7 @@ const OrderInProgressActions: FC<{
 interface OrderInProgressViewProps {
   resource: Resource;
   offering: PublicOfferingDetails;
+  customerView?: boolean;
   refetch(): void;
 }
 
@@ -195,12 +202,15 @@ const getSteps = (resource: Resource, offering?: PublicOfferingDetails) => {
 export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
   resource,
   offering,
+  customerView,
   refetch,
 }) => {
   if (!resource.order_in_progress) {
     return null;
   }
   const steps = getSteps(resource, offering);
+  const hasChangePlanRequest = hasResourceChangePlanRequest(resource);
+  const hasLimitChangeRequest = hasResourceLimitChangeRequest(resource);
   return (
     <div className="container-fluid mt-6">
       <Card className="card-bordered border-gray-300 border-dashed border-1 overflow-hidden">
@@ -212,16 +222,25 @@ export const OrderInProgressView: FC<OrderInProgressViewProps> = ({
           />
 
           <div className="d-flex flex-sm-column gap-3 text-nowrap">
-            <OrderDetailsLink
-              order_uuid={resource.order_in_progress.uuid}
-              project_uuid={resource.order_in_progress.project_uuid}
-              className="btn btn-sm btn-tertiary"
-            >
-              <span className="svg-icon svg-icon-4">
-                <InfoIcon weight="bold" />
-              </span>
-              {translate('View order')}
-            </OrderDetailsLink>
+            {!customerView &&
+              (hasChangePlanRequest || hasLimitChangeRequest ? (
+                <ResourceViewChangeButton
+                  resource={resource}
+                  offering={offering}
+                  refetch={refetch}
+                />
+              ) : (
+                <OrderDetailsLink
+                  order_uuid={resource.order_in_progress.uuid}
+                  project_uuid={resource.order_in_progress.project_uuid}
+                  className="btn btn-sm btn-tertiary"
+                >
+                  <span className="svg-icon svg-icon-2">
+                    <InfoIcon weight="bold" />
+                  </span>
+                  {translate('View order')}
+                </OrderDetailsLink>
+              ))}
             <OrderInProgressActions
               resource={resource}
               offering={offering}

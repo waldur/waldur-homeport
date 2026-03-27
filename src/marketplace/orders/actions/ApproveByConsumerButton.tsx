@@ -13,7 +13,6 @@ import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { useNotify } from '@waldur/store/hooks';
-import { wrapTooltip } from '@waldur/table/ActionButton';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { OrderActionProps } from './types';
@@ -28,7 +27,7 @@ export const ApproveByConsumerButton: FC<
   OrderActionProps & { className?: string }
 > = ({ order, offering, as, className, refetch }) => {
   const user = useSelector(getUser);
-  const { openDialog } = useModal();
+  const { openDialog, closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
@@ -39,6 +38,8 @@ export const ApproveByConsumerButton: FC<
         if (refetch) {
           await refetch();
         }
+        // Close modal dialog, if performed action from there
+        closeDialog();
         showSuccess(translate('Order has been approved.'));
       } catch (error) {
         showErrorResponse(error, translate('Unable to approve order.'));
@@ -46,7 +47,7 @@ export const ApproveByConsumerButton: FC<
     },
   });
   const callback = () => {
-    if (offering?.plugin_options['enable_purchase_order_upload']) {
+    if (offering?.plugin_options?.['enable_purchase_order_upload']) {
       openDialog(UploadPurchaseOrderDialog, {
         order,
         refetch,
@@ -65,23 +66,20 @@ export const ApproveByConsumerButton: FC<
   ) {
     return null;
   }
-  return wrapTooltip(
-    translate('You need approval to finish purchasing of services.'),
-    <>
-      {isLoading ? (
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        <LoadingSpinnerIcon className="me-1" />
-      ) : (
-        <ActionItem
-          as={as}
-          className={classNames(className, 'w-100')}
-          title={translate('Approve')}
-          action={callback}
-          disabled={isLoading}
-          iconNode={<CheckCircleIcon weight="bold" />}
-          size="sm"
-        />
-      )}
-    </>,
+  return isLoading ? (
+    // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
+    <LoadingSpinnerIcon className="me-1" />
+  ) : (
+    <ActionItem
+      as={as}
+      className={classNames(className, 'w-100')}
+      title={translate('Approve')}
+      action={callback}
+      disabled={isLoading}
+      variant="primary"
+      iconNode={<CheckCircleIcon weight="bold" />}
+      tooltip={translate('You need approval to finish purchasing of services.')}
+      size="sm"
+    />
   );
 };

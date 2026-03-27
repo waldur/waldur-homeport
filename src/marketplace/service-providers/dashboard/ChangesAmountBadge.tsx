@@ -2,6 +2,8 @@ import { ArrowDownIcon, ArrowUpIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
+import { defaultCurrency } from '@waldur/core/formatCurrency';
+
 interface ChangesAmountBadgeProps {
   changes: number;
   showOnInfinity?: boolean;
@@ -11,6 +13,7 @@ interface ChangesAmountBadgeProps {
   /** Render changes number as it is */
   keepDecimals?: boolean;
   asBadge?: boolean;
+  asPrice?: boolean;
   badgeOutline?: boolean;
   badgePill?: boolean;
   badgeSm?: boolean;
@@ -25,6 +28,7 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   fractionDigits = 2,
   keepDecimals,
   asBadge = true,
+  asPrice,
   badgeOutline,
   badgePill,
   badgeSm,
@@ -51,7 +55,11 @@ export const ChangesAmountBadge: FC<ChangesAmountBadgeProps> = ({
   }
 
   const renderNumber = (num) =>
-    keepDecimals ? num : num.toFixed?.(fractionDigits);
+    asPrice
+      ? defaultCurrency(num)
+      : keepDecimals
+        ? num
+        : num.toFixed?.(fractionDigits);
 
   return changes === undefined || (changes !== 0 && !Number.isNaN(changes)) ? (
     changes < 0 ? (

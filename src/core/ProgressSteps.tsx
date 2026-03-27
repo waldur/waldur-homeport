@@ -58,7 +58,7 @@ export const ProgressSteps: FC<PropsWithChildren<ProgressStepsProps>> = ({
                           : '',
                         Boolean(onClick) && 'cursor-pointer',
                       )}
-                      onClick={() => onClick(step, i)}
+                      onClick={() => onClick && onClick(step, i)}
                       aria-hidden="true"
                     >
                       {step.icon ? (

@@ -1,15 +1,24 @@
 import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { Resource } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
 import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { PlanSection } from '@waldur/marketplace/details/plan/PlanSection';
+import { OrderErredView } from '@waldur/marketplace/resources/resource-pending/OrderErredView';
+import { OrderInProgressView } from '@waldur/marketplace/resources/resource-pending/OrderInProgressView';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
 import { useTitle } from '@waldur/navigation/title';
 import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
+import { RootState } from '@waldur/store/reducers';
+import {
+  isOwnerOrStaff,
+  isServiceManagerSelector,
+} from '@waldur/workspace/selectors';
 
 import { OrderActionsButton } from '../actions/OrderActionsButton';
 
@@ -35,7 +44,7 @@ const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
   const tabs = [
     {
       key: 'summary',
-      title: translate('Order summary'),
+      title: translate('Approvals'),
       component: () => (
         <OrderSummaryTab order={props.order} offering={props.offering} />
       ),
@@ -128,40 +137,64 @@ const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
 interface OrderDetailsProps {
   offering: any;
   order: any;
+  resource: Resource;
   limits: any;
   refetch: any;
   isRefetching: boolean;
 }
 
-const PageHero = ({ isRefetching, ...props }: OrderDetailsProps) => (
-  <PublicDashboardHero
-    hideQuickSection
-    cardBordered
-    className="container-fluid my-5 d-print-none"
-    logo={props.offering.thumbnail}
-    logoAlt={props.offering.name}
-    logoTooltip={props.offering.name}
-    logoCircle
-    title={<OrderDetailsHeaderTitle order={props.order} />}
-    actions={
-      <>
-        <RefreshButton refetch={props.refetch} isLoading={isRefetching} />
-
-        {props.order.attachment && props.order.state === 'pending-provider' ? (
-          <OrderReviewButton order={props.order} loadData={props.refetch} />
-        ) : (
-          <OrderActionsButton
-            order={props.order}
+const PageHero = ({ isRefetching, ...props }: OrderDetailsProps) => {
+  const isCustomer = useSelector(
+    (state: RootState) =>
+      !(isServiceManagerSelector(state) || isOwnerOrStaff(state)),
+  );
+  return (
+    <>
+      {isCustomer ? (
+        // Show only for customers
+        props.resource.order_in_progress ? (
+          <OrderInProgressView
+            customerView
+            resource={props.resource}
             offering={props.offering}
-            loadData={props.refetch}
+            refetch={props.refetch}
           />
-        )}
-      </>
-    }
-  >
-    <OrderDetailsHeaderBody order={props.order} offering={props.offering} />
-  </PublicDashboardHero>
-);
+        ) : props.resource.creation_order ? (
+          <OrderErredView resource={props.resource} />
+        ) : null
+      ) : null}
+
+      <PublicDashboardHero
+        hideQuickSection
+        cardBordered
+        className="container-fluid my-5 d-print-none"
+        logo={props.offering.thumbnail}
+        logoAlt={props.offering.name}
+        logoTooltip={props.offering.name}
+        logoCircle
+        title={<OrderDetailsHeaderTitle order={props.order} />}
+        actions={
+          <>
+            <RefreshButton refetch={props.refetch} isLoading={isRefetching} />
+
+            {props.order.attachment &&
+            props.order.state === 'pending-provider' ? (
+              <OrderReviewButton order={props.order} loadData={props.refetch} />
+            ) : (
+              <OrderActionsButton
+                order={props.order}
+                offering={props.offering}
+                loadData={props.refetch}
+              />
+            )}
+          </>
+        }
+      >
+        <OrderDetailsHeaderBody order={props.order} offering={props.offering} />
+      </PublicDashboardHero>
+    </>
+  );
+};
 
 export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
   useTitle(translate('Order details'));
@@ -169,6 +202,7 @@ export const OrderDetails: FunctionComponent<OrderDetailsProps> = (props) => {
     props.isRefetching,
     props.offering,
     props.order,
+    props.resource,
     props.refetch,
   ]);
 

@@ -28,13 +28,14 @@ interface FieldProps {
 
 export const Field: FunctionComponent<FieldProps> = ({
   labelTooltipLen = 20,
+  space = 1,
   ...props
 }) =>
   props.value || props.children ? (
     <Row
       className={classNames(
         'field-row g-0',
-        `mb-${props.space ?? 1}`,
+        space && `mb-${space}`,
         props.className,
       )}
     >

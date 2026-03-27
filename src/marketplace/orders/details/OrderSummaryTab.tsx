@@ -28,7 +28,7 @@ export const OrderSummaryTab = ({
 
   return (
     <Panel
-      title={translate('Order summary')}
+      title={translate('Approvals')}
       cardBordered
       actions={
         orderType.type === 'limits_update' && <ExportOrderComponentsButton />
@@ -37,6 +37,7 @@ export const OrderSummaryTab = ({
       <div className="d-flex flex-column gap-3">
         <Field
           label={translate('Offering')}
+          labelCol={1}
           value={
             <Link
               state="public-offering.marketplace-public-offering"
@@ -48,14 +49,23 @@ export const OrderSummaryTab = ({
           }
         />
         {user?.is_staff && (
-          <Field label={translate('Order UUID')} value={order.uuid} />
+          <Field
+            label={translate('Order UUID')}
+            value={order.uuid}
+            labelCol={1}
+          />
         )}
         {user?.is_staff && (
-          <Field label={translate('Order slug')} value={order.slug} />
+          <Field
+            label={translate('Order slug')}
+            value={order.slug}
+            labelCol={1}
+          />
         )}
         {order.offering_type === SUPPORT_OFFERING_TYPE && order.issue && (
           <Field
             label={translate('Issue')}
+            labelCol={1}
             value={
               <Link
                 state="support.detail"

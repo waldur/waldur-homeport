@@ -15,13 +15,7 @@ export const PriceField: FunctionComponent<PriceFieldProps> = ({
     {defaultCurrency(price)}
     <br />
     <sub>
-      {changedPrice !== 0 ? (
-        changedPrice > 0 ? (
-          <>+{defaultCurrency(changedPrice)}</>
-        ) : (
-          <>-{defaultCurrency(-changedPrice)}</>
-        )
-      ) : null}
+      {changedPrice !== 0 ? defaultCurrency(changedPrice, false, true) : null}
     </sub>
   </>
 );

@@ -1,6 +1,5 @@
-import { CheckIcon } from '@phosphor-icons/react';
+import { CheckCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersRetrieve, OrderDetails } from 'waldur-js-client';
 
@@ -8,6 +7,7 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
 import {
@@ -27,6 +27,7 @@ interface SupportOrderApproveButtonProps {
   row: OrderDetails;
   refetch?: () => void;
   as?: React.ComponentType;
+  size?: 'sm';
 }
 
 export const ApproveByProviderButton: FunctionComponent<
@@ -68,12 +69,11 @@ export const ApproveByProviderButton: FunctionComponent<
   return (
     <ActionItem
       as={props.as}
-      className={
-        props.as === Button ? 'btn-success btn-sm w-100' : 'text-success'
-      }
+      className={props.as === ActionButton ? 'w-100' : undefined}
       title={translate('Approve')}
       action={openApprovalDialog}
-      iconNode={<CheckIcon weight="bold" />}
+      variant="primary"
+      iconNode={<CheckCircleIcon weight="bold" />}
       iconColor="success"
     />
   );

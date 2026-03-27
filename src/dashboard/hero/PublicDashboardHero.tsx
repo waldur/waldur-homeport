@@ -30,11 +30,12 @@ interface PublicDashboardHeroProps {
 export const PublicDashboardHero: FC<
   PropsWithChildren<PublicDashboardHeroProps>
 > = (props) => {
+  const BodyElement = props.hideQuickSection ? 'div' : Row;
   return (
     <div
       className={classNames('public-dashboard-hero', props.containerClassName)}
     >
-      <Row
+      <BodyElement
         className={classNames('public-dashboard-hero-body', props.className)}
       >
         <Col
@@ -126,7 +127,7 @@ export const PublicDashboardHero: FC<
             </Card>
           </Col>
         )}
-      </Row>
+      </BodyElement>
     </div>
   );
 };

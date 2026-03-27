@@ -7,7 +7,7 @@ export const OrderStateField = ({
   order,
   pill,
   outline,
-  hasBullet,
+  hasBullet = false,
   size = undefined,
 }) => {
   return (

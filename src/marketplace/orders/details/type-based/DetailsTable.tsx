@@ -1,12 +1,44 @@
+import { ArrowUpIcon, ArrowDownIcon } from '@phosphor-icons/react';
 import { createElement, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
+import { Badge } from '@waldur/core/Badge';
+import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { Column } from '@waldur/table/types';
+
+interface ValueIndicatorProps {
+  value: string | number;
+  isPositive?: boolean;
+  isZero?: boolean;
+}
+
+export const ValueIndicator = ({
+  value,
+  isPositive = true,
+  isZero = false,
+}: ValueIndicatorProps) => {
+  if (isZero) {
+    return DASH_ESCAPE_CODE;
+  }
+
+  const variant = isPositive ? 'success' : 'danger';
+  const icon = isPositive ? (
+    <ArrowUpIcon weight="bold" size={16} />
+  ) : (
+    <ArrowDownIcon weight="bold" size={16} />
+  );
+
+  return (
+    <Badge variant={variant} size="sm" leftIcon={icon} pill outline>
+      {value}
+    </Badge>
+  );
+};
 
 interface DetailsTableProps<RowType> {
   columns: Column<RowType>[];
   rows: any[];
-  totalRow?: ReactNode;
+  totalRow?: ReactNode | ((columnCount: number) => ReactNode);
 }
 
 export const DetailsTable = <RowType,>({
@@ -14,6 +46,10 @@ export const DetailsTable = <RowType,>({
   rows,
   totalRow,
 }: DetailsTableProps<RowType>) => {
+  const columnCount = columns.length;
+  const resolvedTotalRow =
+    typeof totalRow === 'function' ? totalRow(columnCount) : totalRow;
+
   return (
     <Card className="card-table card-bordered">
       <Card.Body className="p-0">
@@ -37,7 +73,7 @@ export const DetailsTable = <RowType,>({
                     ))}
                   </tr>
                 ))}
-                {totalRow}
+                {resolvedTotalRow}
               </tbody>
             </table>
           </div>

@@ -14,7 +14,7 @@ import { PriceTooltip } from '@waldur/price/PriceTooltip';
 
 import { getPlanUnitAbbr } from '../../utils';
 
-import { DetailsTable } from './DetailsTable';
+import { DetailsTable, ValueIndicator } from './DetailsTable';
 import {
   OrderTypeBasedProps,
   RequestedByField,
@@ -102,6 +102,22 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
             render: ({ row }) =>
               data.newLimits[row.type] + ' ' + row.measured_unit,
           },
+          {
+            title: translate('Change'),
+            render: ({ row }) => {
+              const oldValue = row.limit ?? 0;
+              const newValue = data.newLimits[row.type];
+              const change = newValue - oldValue;
+              const isPositive = change > 0;
+              return (
+                <ValueIndicator
+                  value={`${Math.abs(change)} ${row.measured_unit}`}
+                  isPositive={isPositive}
+                  isZero={change === 0}
+                />
+              );
+            },
+          },
           ...(shouldConcealPrices
             ? []
             : [
@@ -124,12 +140,28 @@ export const LimitsUpdate = ({ order, offering }: OrderTypeBasedProps) => {
                   ),
                   render: ({ row }) => defaultCurrency(row.prices[0]),
                 },
+                {
+                  title: translate('Impact'),
+                  render: ({ row }) => {
+                    const oldPrice = row.prices[0] - row.changedPrices[0];
+                    const newPrice = row.prices[0];
+                    const priceChange = newPrice - oldPrice;
+                    const isPositive = priceChange > 0;
+                    return (
+                      <ValueIndicator
+                        value={defaultCurrency(Math.abs(priceChange))}
+                        isPositive={isPositive}
+                        isZero={priceChange === 0}
+                      />
+                    );
+                  },
+                },
               ]),
         ]}
-        totalRow={
+        totalRow={(columnCount) =>
           shouldConcealPrices ? null : (
             <tr className="fw-bolder">
-              <td colSpan={4} className="text-dark text-end">
+              <td colSpan={columnCount - 1} className="text-dark text-end">
                 {translate('Total cost')}
               </td>
               <td className="text-dark">

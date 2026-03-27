@@ -67,6 +67,7 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
           order={row}
           refetch={tableProps.fetch}
           as={Button}
+          size="sm"
         />
       )}
     />
