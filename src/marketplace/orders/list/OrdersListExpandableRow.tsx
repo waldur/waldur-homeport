@@ -1,6 +1,7 @@
 import { FunctionComponent } from 'react';
 import { OrderDetails } from 'waldur-js-client';
 
+import { FileDownloader } from '@waldur/form/upload/FileDownloader';
 import { translate } from '@waldur/i18n';
 import { OrderNameField } from '@waldur/marketplace/orders/list/OrderNameField';
 import { OrderStateCell } from '@waldur/marketplace/orders/list/OrderStateCell';
@@ -37,6 +38,19 @@ export const OrdersListExpandableRow: FunctionComponent<{
       label={translate('Plan')}
       value={renderFieldOrDash(order.plan_name)}
     />
+
+    {order.attachment ? (
+      <Field
+        label={translate('Purchase order')}
+        value={
+          <FileDownloader url={order.attachment} name={translate('PDF file')} />
+        }
+      />
+    ) : null}
+
+    {order.request_comment ? (
+      <Field label={translate('PO reference')} value={order.request_comment} />
+    ) : null}
 
     {order.state === 'pending-provider' && (
       <Field

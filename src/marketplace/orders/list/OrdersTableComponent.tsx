@@ -44,6 +44,8 @@ const mandatoryFields: MarketplaceOrdersListData['query']['field'] = [
   'resource_name',
   'type',
   'plan_name',
+  'attachment',
+  'request_comment',
 ];
 
 const formatName = (row: OrderDetails) =>
