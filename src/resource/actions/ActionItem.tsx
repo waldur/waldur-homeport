@@ -26,6 +26,7 @@ export interface ActionItemProps {
   size?: 'sm' | 'lg';
   actionId?: ResourceAction;
   resource?: any;
+  variant?: string;
 }
 
 export const ActionItem: FC<ActionItemProps> = (props) => {
@@ -67,6 +68,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
           iconNode={props.iconNode}
           title={props.title}
           tooltip={props.tooltip}
+          variant={props.variant}
         />
         {props.staff && <StaffOnlyIndicator className="text-dark ms-1 me-3" />}
       </div>

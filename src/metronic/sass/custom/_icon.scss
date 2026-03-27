@@ -21,10 +21,7 @@
 
     @include svg-icon-color($fg-success-primary);
 
-    svg {
-      width: 20px;
-      height: 20px;
-    }
+    @include svg-icon-size(20px);
   }
 
   &.featured-icon-sm {
@@ -35,10 +32,7 @@
       width: 24px;
       height: 24px;
 
-      svg {
-        width: 16px;
-        height: 16px;
-      }
+      @include svg-icon-size(16px);
     }
   }
   &.featured-icon-lg {
@@ -49,10 +43,7 @@
       width: 32px;
       height: 32px;
 
-      svg {
-        width: 24px;
-        height: 24px;
-      }
+      @include svg-icon-size(24px);
     }
   }
   &.featured-icon-xl {
@@ -63,20 +54,7 @@
       width: 36px;
       height: 36px;
 
-      svg {
-        width: 28px;
-        height: 28px;
-      }
-    }
-  }
-
-  &.featured-icon-lg {
-    width: 42px;
-    height: 42px;
-
-    > div {
-      width: 32px;
-      height: 32px;
+      @include svg-icon-size(28px);
     }
   }
 
@@ -153,18 +131,18 @@
 
 .icon-square {
   border: 1px solid $border-secondary;
-  padding: 10px;
+  padding: 9px;
   border-radius: 8px;
   background-color: transparent;
   line-height: 0.9;
 
-  svg {
-    color: $fg-secondary;
-  }
+  @include svg-icon-color($fg-secondary);
+  @include svg-icon-size(20px);
 
   &.icon-lg {
     padding: 11px;
     border-radius: 12px;
+    @include svg-icon-size(24px);
   }
 }
 

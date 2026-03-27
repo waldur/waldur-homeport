@@ -25,10 +25,12 @@ export const OrderTypeBasedDetails = ({
     <>
       <Field
         label={translate('Created by')}
+        labelCol={1}
         value={order.created_by_full_name + ` (${order.created_by_username})`}
       />
       <Field
         label={translate('Created at')}
+        labelCol={1}
         value={formatDateTime(order.created)}
       />
 

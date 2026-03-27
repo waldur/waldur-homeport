@@ -27,6 +27,7 @@ export const RequestedByField = ({
   return (
     <Component
       label={translate('Requested by')}
+      labelCol={1}
       value={order.created_by_full_name + ` (${order.created_by_username})`}
     />
   );
@@ -41,6 +42,7 @@ export const RequestCommentField = ({
     order.request_comment && (
       <Component
         label={translate('PO reference')}
+        labelCol={1}
         value={<FieldWithCopy value={order.request_comment} />}
       />
     )
@@ -56,6 +58,7 @@ export const DescriptionField = ({
   return (
     <Component
       label={translate('Description')}
+      labelCol={1}
       value={<OrderSummaryMessage order={order} offering={offering} />}
     />
   );
@@ -69,6 +72,7 @@ export const StartDateField = ({
   return (
     <Component
       label={translate('Start date')}
+      labelCol={1}
       value={formatDate(order.start_date)}
     />
   );
@@ -89,5 +93,11 @@ export const CostChangeField = ({
   }, [order]);
   if (shouldConcealPrices) return null;
   const Component = formTableItem ? FormTable.Item : Field;
-  return <Component label={translate('Cost change')} value={costChange} />;
+  return (
+    <Component
+      label={translate('Cost change')}
+      labelCol={1}
+      value={costChange}
+    />
+  );
 };

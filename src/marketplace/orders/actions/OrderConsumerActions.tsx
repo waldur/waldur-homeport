@@ -1,3 +1,4 @@
+import classNames from 'classnames';
 import { FC } from 'react';
 
 import { ActionButton } from '@waldur/table/ActionButton';
@@ -11,18 +12,20 @@ export const OrderConsumerActions: FC<OrderActionProps> = (props) =>
     <>
       <ApproveByConsumerButton
         {...props}
-        className={
-          props.as === ActionButton ? 'btn-success btn-sm' : 'text-success'
-        }
+        className={classNames(
+          props.as === ActionButton
+            ? { 'btn-primary': true, 'btn-sm': props.size === 'sm' }
+            : 'text-success',
+        )}
       />
 
       <RejectByConsumerButton
         {...props}
-        className={
+        className={classNames(
           props.as === ActionButton
-            ? 'btn-danger btn-sm flex-grow-1'
-            : 'text-danger flex-grow-1'
-        }
+            ? { 'btn-danger': true, 'btn-sm': props.size === 'sm' }
+            : 'text-danger',
+        )}
       />
     </>
   ) : null;

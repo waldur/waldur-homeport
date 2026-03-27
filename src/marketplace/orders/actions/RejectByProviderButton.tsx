@@ -1,7 +1,6 @@
-import { ProhibitIcon } from '@phosphor-icons/react';
+import { XCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
-import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceOrdersRejectByProvider,
@@ -16,16 +15,18 @@ import {
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
 } from '@waldur/marketplace/orders/list/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
+import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { ActionButton } from '@waldur/table/ActionButton';
 import { updateEntity } from '@waldur/table/actions';
 
 interface RejectByProviderButtonProps {
   row: OrderDetails;
   refetch?: () => void;
   as?: React.ComponentType;
+  size?: 'sm';
 }
 
 export const RejectByProviderButton: FunctionComponent<
@@ -82,6 +83,8 @@ export const RejectByProviderButton: FunctionComponent<
         );
 
         if (props.refetch) await props.refetch();
+        // Close modal dialog, if performed action from there
+        dispatch(closeModalDialog());
 
         dispatch(showSuccess(translate('Order has been rejected.')));
       } catch (response) {
@@ -94,13 +97,12 @@ export const RejectByProviderButton: FunctionComponent<
   return (
     <ActionItem
       as={props.as}
-      className={
-        props.as === Button ? 'btn-danger btn-sm w-100' : 'text-danger'
-      }
-      title={translate('Reject')}
+      className={props.as === ActionButton ? 'w-100' : undefined}
+      title={translate('Decline')}
       action={mutate}
       disabled={isLoading}
-      iconNode={<ProhibitIcon weight="bold" />}
+      variant="danger"
+      iconNode={<XCircleIcon weight="bold" />}
       iconColor="danger"
     />
   );

@@ -51,6 +51,14 @@ export const OrderProviderActions = ({
     );
   }, [order, offering, user]);
 
+  if (
+    !showApproveByProviderButton &&
+    !showRejectByProviderButton &&
+    !showRequestInfoButton
+  ) {
+    return null;
+  }
+
   return as === ActionButton ? (
     <>
       {showApproveByProviderButton && (

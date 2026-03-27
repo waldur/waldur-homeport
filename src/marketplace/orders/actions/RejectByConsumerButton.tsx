@@ -1,12 +1,13 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
+import classNames from 'classnames';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
+import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { hasPermission } from '@waldur/permissions/hasPermission';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -45,6 +46,8 @@ export const RejectByConsumerButton: FC<
         if (refetch) {
           await refetch();
         }
+        // Close modal dialog, if performed action from there
+        dispatch(closeModalDialog());
         dispatch(showSuccess(translate('Order has been rejected.')));
       } catch (error) {
         dispatch(
@@ -70,10 +73,11 @@ export const RejectByConsumerButton: FC<
       ) : (
         <ActionItem
           as={as}
-          className={className}
-          title={translate('Reject')}
+          className={classNames(className, 'w-100')}
+          title={translate('Decline')}
           action={mutate}
           disabled={isLoading}
+          variant="danger"
           iconNode={<XCircleIcon weight="bold" />}
           size="sm"
         />

@@ -6,6 +6,7 @@ import {
   marketplaceOrdersOfferingRetrieve,
   marketplaceOrdersRetrieve,
   marketplacePluginsList,
+  marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -20,6 +21,10 @@ import { OrderDetails } from './details/OrderDetails';
 async function loadOrder(order_uuid: string) {
   const order = await marketplaceOrdersRetrieve({
     path: { uuid: order_uuid },
+  }).then((response) => response.data);
+
+  const resource = await marketplaceResourcesRetrieve({
+    path: { uuid: order.marketplace_resource_uuid },
   }).then((response) => response.data);
 
   const offering = (await marketplaceOrdersOfferingRetrieve({
@@ -37,6 +42,7 @@ async function loadOrder(order_uuid: string) {
     order,
     offering,
     limits,
+    resource,
   };
 }
 
@@ -92,6 +98,7 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
       order={data.order}
       offering={data.offering}
       limits={data.limits}
+      resource={data.resource}
       isRefetching={isRefetching}
     />
   ) : null;

@@ -1,4 +1,3 @@
-import { useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from '@waldur/core/Badge';
@@ -6,7 +5,7 @@ import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field } from '@waldur/resource/summary';
 
-import { getOrderType } from '../utils';
+import { OrderDetailsQuickBody } from './OrderDetailsQuickBody';
 
 const PurchaseOrderBadge = ({ order, offering }) => {
   const requireUpload = offering?.plugin_options?.require_purchase_order_upload;
@@ -38,8 +37,6 @@ const PurchaseOrderBadge = ({ order, offering }) => {
 };
 
 export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
-  const typeBadge = useMemo(() => getOrderType(order), [order]);
-
   const showPurchaseOrder =
     offering?.plugin_options?.enable_purchase_order_upload ||
     offering?.plugin_options?.require_purchase_order_upload;
@@ -75,17 +72,7 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
           labelCol="auto"
           valueCol="auto"
         />
-        <Field
-          label={translate('Type')}
-          value={
-            <Badge variant={typeBadge.variant} size="sm" pill outline>
-              {typeBadge.label}
-            </Badge>
-          }
-          labelClass="w-100px"
-          labelCol="auto"
-          valueCol="auto"
-        />
+        <OrderDetailsQuickBody order={order} autoWidth />
       </Col>
       {showPurchaseOrder && (
         <Col sm="auto">

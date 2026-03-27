@@ -107,10 +107,10 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
                 },
               ]),
         ]}
-        totalRow={
+        totalRow={(columnCount) =>
           shouldConcealPrices ? null : (
             <tr className="fw-bolder">
-              <td colSpan={4} className="text-dark text-end">
+              <td colSpan={columnCount - 1} className="text-dark text-end">
                 {translate('Total cost')}
               </td>
               <td className="text-dark">
