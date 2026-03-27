@@ -14,7 +14,7 @@ import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 import { usageTableTabs } from '../utils';
 
 import { ResourceUsageFilter } from './ResourceUsageFilter';
@@ -22,10 +22,8 @@ import { mapStateToFilter } from './ResourceUsageList';
 import { UsageExpandableRow } from './UserUsageExpandableRow';
 
 export const UserUsageList: FC = () => {
-  useReportBreadcrumbs({ currentReport: 'user-usage', category: 'resources' });
-
   const filter = useSelector(mapStateToFilter);
-  const props = useTable({
+  const tableProps = useTable({
     table: 'UserUsageReports',
     fetchData: createFetcher(marketplaceComponentUserUsagesList),
     filter,
@@ -108,18 +106,20 @@ export const UserUsageList: FC = () => {
   ];
 
   return (
-    <Table
-      {...props}
-      columns={columns}
-      tabs={usageTableTabs}
-      verboseName={translate('Usages')}
-      showPageSizeSelector={true}
-      enableExport={true}
-      expandableRow={({ row }) => (
-        <UsageExpandableRow row={row} type="user-usage" />
-      )}
-      filters={<ResourceUsageFilter />}
-      standalone
-    />
+    <>
+      <ReportingTitle reportKey="user-usage" />
+      <Table
+        {...tableProps}
+        columns={columns}
+        tabs={usageTableTabs}
+        verboseName={translate('Usages')}
+        showPageSizeSelector={true}
+        enableExport={true}
+        expandableRow={({ row }) => (
+          <UsageExpandableRow row={row} type="user-usage" />
+        )}
+        filters={<ResourceUsageFilter />}
+      />
+    </>
   );
 };

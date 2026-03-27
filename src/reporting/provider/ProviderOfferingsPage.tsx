@@ -19,13 +19,12 @@ import { translate } from '@waldur/i18n';
 import { getLabel } from '@waldur/marketplace/common/registry';
 import { OfferingStateField } from '@waldur/marketplace/offerings/OfferingStateField';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ProviderFilter } from './ProviderFilter';
 import { TopOfferingsByResourcesChart } from './TopOfferingsByResourcesChart';
@@ -176,9 +175,6 @@ const ProviderOfferingsSummary: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderOfferingsPage: FC = () => {
-  useTitle(translate('Provider offerings'));
-  useReportBreadcrumbs({ category: 'provider', currentReport: 'offerings' });
-
   const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
     provider?: { uuid: string; customer_uuid: string };
   };
@@ -187,19 +183,16 @@ export const ProviderOfferingsPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Provider offerings')}</h1>
-        <div className="d-none d-sm-flex gap-4">
-          <div className="d-flex align-items-center gap-4">
-            <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
-              {translate('Provider')}:
-            </label>
-            <div style={{ minWidth: 200 }}>
-              <ProviderFilter />
-            </div>
+      <ReportingTitle reportKey="provider-offerings">
+        <div className="d-flex align-items-center gap-4">
+          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+            {translate('Provider')}:
+          </label>
+          <div style={{ minWidth: 200 }}>
+            <ProviderFilter />
           </div>
         </div>
-      </div>
+      </ReportingTitle>
 
       {providerUuid && customerUuid ? (
         <>

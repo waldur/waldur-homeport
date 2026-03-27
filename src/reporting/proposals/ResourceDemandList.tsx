@@ -10,7 +10,7 @@ import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { generateResourceDemandData } from './mockData';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
@@ -107,11 +107,6 @@ const columns: Column<ResourceDemandData>[] = [
 ];
 
 export const ResourceDemandList: FC = () => {
-  useReportBreadcrumbs({
-    currentReport: 'resource-demand',
-    category: 'proposals',
-  });
-
   const data = useMemo(() => generateResourceDemandData(), []);
 
   const summary = useMemo(() => {
@@ -179,14 +174,10 @@ export const ResourceDemandList: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header">
-        <h1 className="mb-0 fs-1x">{translate('Resource demand')}</h1>
-      </div>
-
+      <ReportingTitle reportKey="resource-demand" />
       <SummaryWidget stats={summary} />
 
       <Table<ResourceDemandData>
-        title={translate('')}
         columns={columns}
         rows={filteredData}
         fetch={noop}

@@ -7,16 +7,13 @@ import {
   PlanUsageResponse,
 } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { selectMarketplacePlansUsageStatsFilter } from '@waldur/table/generated/MarketplacePlansUsageStatsFilter';
 
 import { AnalyticsMode, AnalyticsPageContent } from '../analytics';
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import {
   getCapacityAnalyticsCapability,
@@ -42,8 +39,6 @@ const modeConfig: Record<
 };
 
 export const CapacityAnalyticsPage: FC = () => {
-  useTitle(translate('Capacity Analysis'));
-
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
@@ -78,19 +73,6 @@ export const CapacityAnalyticsPage: FC = () => {
     [planUsages],
   );
 
-  // Set up breadcrumbs with dropdown for switching reports
-  useReportBreadcrumbs({
-    currentReport: 'capacity',
-    category: 'provider',
-    additionalItems: [
-      {
-        key: 'analytics',
-        text: translate('Analytics'),
-        active: true,
-      },
-    ],
-  });
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -101,27 +83,17 @@ export const CapacityAnalyticsPage: FC = () => {
 
   return (
     <>
-      <PublicDashboardHero
-        containerClassName="mb-5"
-        cardBordered
-        hideQuickSection
-        title={
-          <div className="d-flex flex-wrap align-items-center gap-3">
-            <h3 className="mb-0">{translate('Capacity Analysis')}</h3>
-          </div>
-        }
-        actions={
-          <Link state="reporting-capacity" className="btn btn-light btn-sm">
-            {translate('Back to Capacity')}
-          </Link>
-        }
-      >
-        <p className="text-muted mb-0">
-          {translate(
-            'Analyze capacity usage patterns and explore scenarios for resource planning.',
-          )}
-        </p>
-      </PublicDashboardHero>
+      <ReportingTitle
+        reportKey="reporting-capacity-analytics"
+        backState="reporting-capacity"
+        additionalBreadcrumbs={[
+          {
+            key: 'analytics',
+            text: translate('Analytics'),
+            active: true,
+          },
+        ]}
+      />
 
       <AnalyticsPageContent
         activeMode={activeMode}

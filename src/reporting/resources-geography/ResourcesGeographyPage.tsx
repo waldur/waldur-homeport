@@ -5,9 +5,8 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ResourcesByCountryChart } from './ResourcesByCountryChart';
 import { ResourcesByOfferingTable } from './ResourcesByOfferingTable';
@@ -19,12 +18,6 @@ import {
 } from './useResourcesGeographyStats';
 
 export const ResourcesGeographyPage: FC = () => {
-  useTitle(translate('Geographic distribution'));
-  useReportBreadcrumbs({
-    category: 'resources',
-    currentReport: 'resources-geography',
-  });
-
   const { data, isLoading, error, refetch } = useResourcesGeographyStats();
   const {
     data: summary,
@@ -53,9 +46,7 @@ export const ResourcesGeographyPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Geographic distribution')}</h1>
-      </div>
+      <ReportingTitle reportKey="resources-geography" />
 
       <ResourcesGeographySummaryCards summary={summary} />
 

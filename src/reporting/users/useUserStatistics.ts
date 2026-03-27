@@ -9,7 +9,6 @@ import {
   marketplaceStatsUserOrganizationTypeCountList,
   marketplaceStatsUserResidenceCountryList,
   UserAffiliationCount,
-  UserOrganizationCount,
   usersUserActiveStatusCountList,
   usersUserLanguageCountList,
   usersUserRegistrationTrendList,
@@ -185,25 +184,6 @@ export function useUserAffiliations() {
       }
       return safeFetch(() =>
         marketplaceStatsUserAffiliationCountList({ signal }),
-      );
-    },
-    staleTime: STALE_TIME,
-  });
-}
-
-/**
- * Hook to fetch only user organizations data
- * Use this for the Organizations page
- */
-export function useUserOrganizations() {
-  return useQuery({
-    queryKey: ['userOrganizations'],
-    queryFn: ({ signal }): Promise<UserOrganizationCount[]> => {
-      if (!isProfileAttributeEnabled('organization')) {
-        return Promise.resolve([]);
-      }
-      return safeFetch(() =>
-        marketplaceStatsUserOrganizationCountList({ signal }),
       );
     },
     staleTime: STALE_TIME,

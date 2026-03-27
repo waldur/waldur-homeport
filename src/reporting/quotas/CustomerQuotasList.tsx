@@ -10,15 +10,13 @@ import {
 import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { getQuotas } from './constants';
 import { QuotasAnalytics } from './QuotasAnalytics';
 import { CustomerQuota } from './types';
 
 export const CustomerQuotasList = () => {
-  useReportBreadcrumbs({ currentReport: 'quotas', category: 'resources' });
-
   const filter = useSelector(selectCustomerQuotasFilter);
   const tableProps = useTable({
     table: 'CustomerQuotasList',
@@ -32,38 +30,44 @@ export const CustomerQuotasList = () => {
   );
 
   return (
-    <Table<CustomerQuota>
-      {...tableProps}
-      columns={[
-        {
-          title: translate('Name'),
-          render: ({ row }) => <>{row.customer_name}</>,
-          copyField: (row) => row.customer_name,
-          orderField: 'name',
-        },
-        {
-          title: translate('Abbreviation'),
-          render: ({ row }) => <>{row.customer_abbreviation}</>,
-        },
-        {
-          title: translate('Value'),
-          render: ({ row }) => (
-            <>
-              {activeQuota?.tooltipValueFormatter
-                ? activeQuota.tooltipValueFormatter(row.value)
-                : row.value}
-            </>
-          ),
+    <>
+      <ReportingTitle reportKey="quotas" />
+      <Table<CustomerQuota>
+        {...tableProps}
+        columns={[
+          {
+            title: translate('Name'),
+            render: ({ row }) => <>{row.customer_name}</>,
+            copyField: (row) => row.customer_name,
+            orderField: 'name',
+          },
+          {
+            title: translate('Abbreviation'),
+            render: ({ row }) => <>{row.customer_abbreviation}</>,
+          },
+          {
+            title: translate('Value'),
+            render: ({ row }) => (
+              <>
+                {activeQuota?.tooltipValueFormatter
+                  ? activeQuota.tooltipValueFormatter(row.value)
+                  : row.value}
+              </>
+            ),
 
-          orderField: 'value',
-        },
-      ]}
-      showPageSizeSelector={true}
-      filters={<CustomerQuotasFilter />}
-      hideClearFilters
-      tableActions={
-        <QuotasAnalytics data={tableProps.rows} loading={tableProps.loading} />
-      }
-    />
+            orderField: 'value',
+          },
+        ]}
+        showPageSizeSelector={true}
+        filters={<CustomerQuotasFilter />}
+        hideClearFilters
+        tableActions={
+          <QuotasAnalytics
+            data={tableProps.rows}
+            loading={tableProps.loading}
+          />
+        }
+      />
+    </>
   );
 };

@@ -608,20 +608,6 @@ export const states: StateDeclaration[] = [
     },
   },
   {
-    name: 'reporting-user-organizations',
-    url: 'user-organizations/',
-    parent: 'reporting-users',
-    component: lazyComponent(() =>
-      import('./users/UserOrganizationsPage').then((m) => ({
-        default: m.UserOrganizationsPage,
-      })),
-    ),
-    data: {
-      breadcrumb: () => translate('Organizations'),
-      permissions: [() => isReportingScreenEnabled('user-organizations')],
-    },
-  },
-  {
     name: 'reporting-user-affiliations',
     url: 'user-affiliations/',
     parent: 'reporting-users',

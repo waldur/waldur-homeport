@@ -1,12 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
-import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 
 import {
   AnalyticsCapability,
@@ -17,7 +14,7 @@ import {
   SimulationParam,
   SimulationResult,
 } from '../analytics';
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { UserStatistics } from './types';
 import {
@@ -213,8 +210,6 @@ const modeConfig: Record<
 };
 
 export const UserDemographicsAnalyticsPage: FC = () => {
-  useTitle(translate('User Demographics Analysis'));
-
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
@@ -228,14 +223,6 @@ export const UserDemographicsAnalyticsPage: FC = () => {
     [data],
   );
 
-  useReportBreadcrumbs({
-    category: 'users',
-    currentReport: 'demographics',
-    additionalItems: [
-      { key: 'analytics', text: translate('Analytics'), active: true },
-    ],
-  });
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -246,30 +233,13 @@ export const UserDemographicsAnalyticsPage: FC = () => {
 
   return (
     <>
-      <PublicDashboardHero
-        containerClassName="mb-5"
-        cardBordered
-        hideQuickSection
-        title={
-          <div className="d-flex flex-wrap align-items-center gap-3">
-            <h3 className="mb-0">{translate('User Demographics Analysis')}</h3>
-          </div>
-        }
-        actions={
-          <Link
-            state="reporting-user-demographics"
-            className="btn btn-light btn-sm"
-          >
-            {translate('Back to Demographics')}
-          </Link>
-        }
-      >
-        <p className="text-muted mb-0">
-          {translate(
-            'Analyze user distribution and explore growth scenarios for capacity planning.',
-          )}
-        </p>
-      </PublicDashboardHero>
+      <ReportingTitle
+        reportKey="reporting-user-demographics-analytics"
+        backState="reporting-user-demographics"
+        additionalBreadcrumbs={[
+          { key: 'analytics', text: translate('Analytics'), active: true },
+        ]}
+      />
 
       <AnalyticsPageContent
         activeMode={activeMode}

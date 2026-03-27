@@ -17,14 +17,12 @@ import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { PlanUsageAnalytics } from './PlanUsageAnalytics';
 import { PlanUsageRowActions } from './PlanUsageRowActions';
 
 export const PlanUsageList: FunctionComponent = () => {
-  useReportBreadcrumbs({ currentReport: 'capacity', category: 'provider' });
-
   const formFilter = useSelector(selectMarketplacePlansUsageStatsFilter);
   const props = useTable({
     table: 'PlanUsages',
@@ -80,9 +78,7 @@ export const PlanUsageList: FunctionComponent = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Capacity')}</h1>
-      </div>
+      <ReportingTitle reportKey="capacity" />
       <Table<PlanUsageResponse>
         {...props}
         columns={columns}

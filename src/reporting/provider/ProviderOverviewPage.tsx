@@ -9,9 +9,8 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ProviderFilter } from './ProviderFilter';
 
@@ -90,9 +89,6 @@ const ProviderOverviewContent: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderOverviewPage: FC = () => {
-  useTitle(translate('Provider overview'));
-  useReportBreadcrumbs({ category: 'provider', currentReport: 'overview' });
-
   const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
     provider?: { uuid: string };
   };
@@ -100,12 +96,9 @@ export const ProviderOverviewPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Provider overview')}</h1>
-        <div className="d-none d-sm-flex gap-4">
-          <ProviderFilter />
-        </div>
-      </div>
+      <ReportingTitle reportKey="provider-overview">
+        <ProviderFilter />
+      </ReportingTitle>
 
       {providerUuid ? (
         <ProviderOverviewContent providerUuid={providerUuid} />

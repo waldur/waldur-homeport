@@ -3,11 +3,9 @@ import { Col, Row } from 'react-bootstrap';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ActiveStatusChart } from './charts/ActiveStatusChart';
 import { AuthMethodsChart } from './charts/AuthMethodsChart';
@@ -22,9 +20,6 @@ import {
 } from './useUserStatistics';
 
 export const UserDemographicsPage: FC = () => {
-  useTitle(translate('User demographics'));
-  useReportBreadcrumbs({ category: 'users', currentReport: 'demographics' });
-
   const { data, isLoading, error, refetch } = useUserStatistics();
 
   // Check which profile attributes are enabled
@@ -44,6 +39,7 @@ export const UserDemographicsPage: FC = () => {
 
   return (
     <>
+      <ReportingTitle reportKey="user-demographics" />
       <SummaryCards summary={summary} />
 
       <Row className="mb-6 g-6">

@@ -16,6 +16,7 @@ import {
 
 // Stable empty array to avoid infinite re-renders
 const EMPTY_ITEMS: IBreadcrumbItem[] = [];
+const EMPTY_REPORTS: ReportDefinition[] = [];
 
 const categoryConfig = getCategoryConfig();
 
@@ -82,19 +83,21 @@ export const useReportBreadcrumbs = ({
   category,
   additionalItems = EMPTY_ITEMS,
 }: UseReportBreadcrumbsOptions) => {
-  const config = categoryConfig[category];
-  const currentReportDef = config.reports.find((r) => r.key === currentReport);
+  const config = category ? categoryConfig[category] : null;
+  const currentReportDef = config?.reports?.find(
+    (r) => r.key === currentReport,
+  );
   const reportTitle = currentReportDef?.title || currentReport;
 
   // Filter reports by feature visibility and profile attribute availability
   const visibleReports = useMemo(
     () =>
-      config.reports.filter(
+      config?.reports?.filter(
         (report) =>
           (!report.feature || isFeatureVisible(report.feature)) &&
           (!report.attribute || isProfileAttributeEnabled(report.attribute)),
-      ),
-    [config.reports],
+      ) || EMPTY_REPORTS,
+    [config?.reports],
   );
 
   // Only show dropdown if there are multiple visible reports and no additional items
@@ -102,33 +105,43 @@ export const useReportBreadcrumbs = ({
   const showDropdown = hasMultipleReports && additionalItems.length === 0;
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
-    () => [
-      {
-        key: 'reporting',
-        text: translate('Reporting'),
-        to: 'reporting-dashboard',
-      },
-      {
-        key: 'category',
-        text: config.title,
-        to: `reporting-${category}-list`,
-      },
-      {
-        key: 'report',
-        text: reportTitle,
-        active: additionalItems.length === 0,
-        dropdown: showDropdown
-          ? (close) => (
-              <ReportsDropdown
-                reports={visibleReports}
-                currentKey={currentReport}
-                close={close}
-              />
-            )
-          : undefined,
-      },
-      ...additionalItems,
-    ],
+    () =>
+      config
+        ? [
+            {
+              key: 'reporting',
+              text: translate('Reporting'),
+              to: 'reporting-dashboard',
+            },
+            {
+              key: 'category',
+              text: config.title,
+              to: `reporting-${category}-list`,
+            },
+            {
+              key: 'report',
+              text: reportTitle,
+              active: additionalItems.length === 0,
+              dropdown: showDropdown
+                ? (close) => (
+                    <ReportsDropdown
+                      reports={visibleReports}
+                      currentKey={currentReport}
+                      close={close}
+                    />
+                  )
+                : undefined,
+            },
+            ...additionalItems,
+          ]
+        : [
+            {
+              key: 'reporting',
+              text: translate('Reporting'),
+              to: 'reporting-dashboard',
+            },
+            ...additionalItems,
+          ],
     [
       config,
       reportTitle,

@@ -8,7 +8,7 @@ import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import {
   calculateCallPerformanceSummary,
@@ -132,11 +132,6 @@ const CallPerformanceExpandableRow: FC<{ row: CallPerformanceData }> = ({
 };
 
 export const CallPerformanceList: FC = () => {
-  useReportBreadcrumbs({
-    currentReport: 'call-performance',
-    category: 'proposals',
-  });
-
   const data = useMemo(() => generateCallPerformanceData(), []);
   const summary = useMemo(() => calculateCallPerformanceSummary(data), [data]);
 
@@ -165,10 +160,7 @@ export const CallPerformanceList: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header">
-        <h1 className="mb-0 fs-1x">{translate('Call performance')}</h1>
-      </div>
-
+      <ReportingTitle reportKey="call-performance" />
       <SummaryWidget stats={summary} />
 
       <Table<CallPerformanceData>

@@ -77,7 +77,8 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
       (report) =>
         (!report.feature || isFeatureVisible(report.feature)) &&
         (!report.attribute || isProfileAttributeEnabled(report.attribute)) &&
-        (!report.isExperimental || showExperimental),
+        (!report.isExperimental || showExperimental) &&
+        !report.isHidden,
     );
   }, [config, showExperimental]);
 

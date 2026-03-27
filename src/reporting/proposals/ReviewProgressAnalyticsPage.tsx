@@ -1,22 +1,18 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 
 import {
-  AnalyticsCapability,
   AnalyticsMode,
   AnalyticsPageContent,
-  createSimulationResult,
   DrillDownDataItem,
   DrillDownPath,
   SimulationParam,
   SimulationResult,
+  createSimulationResult,
 } from '../analytics';
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { generateReviewProgressData } from './mockData';
 import { ReviewProgressData } from './types';
@@ -230,7 +226,7 @@ function getReviewerBreakdown(
 
 function getReviewProgressAnalyticsCapability(
   reviewers: ReviewProgressData[],
-): AnalyticsCapability {
+): any {
   const drillDownPaths: DrillDownPath[] = [
     {
       from: translate('Reviewer'),
@@ -277,8 +273,6 @@ const modeConfig: Record<
 };
 
 export const ReviewProgressAnalyticsPage: FC = () => {
-  useTitle(translate('Review Progress Analysis'));
-
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
@@ -293,36 +287,15 @@ export const ReviewProgressAnalyticsPage: FC = () => {
     [reviewers],
   );
 
-  useReportBreadcrumbs({
-    currentReport: 'review-progress',
-    category: 'proposals',
-    additionalItems: [
-      { key: 'analytics', text: translate('Analytics'), active: true },
-    ],
-  });
-
   return (
     <>
-      <PublicDashboardHero
-        containerClassName="mb-5"
-        cardBordered
-        hideQuickSection
-        title={translate('Review Progress Analysis')}
-        actions={
-          <Link
-            state="reporting-review-progress"
-            className="btn btn-light btn-sm"
-          >
-            {translate('Back to Review Progress')}
-          </Link>
-        }
-      >
-        <p className="text-muted mb-0">
-          {translate(
-            'Analyze reviewer workload and explore scenarios for optimizing review capacity.',
-          )}
-        </p>
-      </PublicDashboardHero>
+      <ReportingTitle
+        reportKey="reporting-review-progress-analytics"
+        backState="reporting-review-progress"
+        additionalBreadcrumbs={[
+          { key: 'analytics', text: translate('Analytics'), active: true },
+        ]}
+      />
 
       <AnalyticsPageContent
         activeMode={activeMode}

@@ -13,9 +13,8 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { CustomerAcquisitionTrendChart } from './CustomerAcquisitionTrendChart';
 import { ProviderFilter } from './ProviderFilter';
@@ -87,9 +86,6 @@ const ProviderCustomersContent: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderCustomersPage: FC = () => {
-  useTitle(translate('Provider customers'));
-  useReportBreadcrumbs({ category: 'provider', currentReport: 'customers' });
-
   const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
     provider?: { uuid: string };
   };
@@ -97,19 +93,16 @@ export const ProviderCustomersPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Provider customers')}</h1>
-        <div className="d-none d-sm-flex gap-4">
-          <div className="d-flex align-items-center gap-4">
-            <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
-              {translate('Provider')}:
-            </label>
-            <div style={{ minWidth: 200 }}>
-              <ProviderFilter />
-            </div>
+      <ReportingTitle reportKey="provider-customers">
+        <div className="d-flex align-items-center gap-4">
+          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+            {translate('Provider')}:
+          </label>
+          <div style={{ minWidth: 200 }}>
+            <ProviderFilter />
           </div>
         </div>
-      </div>
+      </ReportingTitle>
 
       {providerUuid ? (
         <ProviderCustomersContent providerUuid={providerUuid} />

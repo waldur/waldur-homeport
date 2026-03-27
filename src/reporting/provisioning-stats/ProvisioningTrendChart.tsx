@@ -1,21 +1,40 @@
 import { EChartsOption } from 'echarts';
-import React, { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { DailyOrderStats } from 'waldur-js-client';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { translate } from '@waldur/i18n';
+import { ExportData } from '@waldur/table/exporters/types';
 
 interface ProvisioningTrendChartProps {
   daily: DailyOrderStats[];
 }
 
-export const ProvisioningTrendChart = React.forwardRef<
-  any,
-  ProvisioningTrendChartProps
->(({ daily }, ref) => {
+const getTrendExportData = (daily: DailyOrderStats[]): ExportData => ({
+  fields: [
+    translate('Date'),
+    translate('Total'),
+    translate('Done'),
+    translate('Erred'),
+    translate('Success rate (%)'),
+  ],
+  data: (daily || []).map((day) => {
+    const done = day.by_state?.done || 0;
+    const erred = day.by_state?.erred || 0;
+    const completed = done + erred;
+    const successRate =
+      completed > 0 ? Math.round((done / completed) * 100) : 100;
+    return [day.date, day.total, done, erred, successRate];
+  }),
+});
+
+export const ProvisioningTrendChart: FC<ProvisioningTrendChartProps> = ({
+  daily,
+}) => {
   const chartData = useMemo(() => {
     // Calculate daily success rate using by_state
-    return daily.map((day) => {
+    return (daily || []).map((day) => {
       const done = day.by_state?.done || 0;
       const erred = day.by_state?.erred || 0;
       const completed = done + erred;
@@ -30,6 +49,8 @@ export const ProvisioningTrendChart = React.forwardRef<
       };
     });
   }, [daily]);
+
+  const hasData = (daily || []).length > 0;
 
   const options = useMemo<EChartsOption>(
     () => ({
@@ -104,5 +125,13 @@ export const ProvisioningTrendChart = React.forwardRef<
     [chartData],
   );
 
-  return <EChart ref={ref} options={options} height="300px" />;
-});
+  return (
+    <ChartCard
+      title={translate('Success rate trend')}
+      getExportData={() => getTrendExportData(daily)}
+      isEmpty={!hasData}
+    >
+      {(cardRef) => <EChart ref={cardRef} options={options} height="300px" />}
+    </ChartCard>
+  );
+};

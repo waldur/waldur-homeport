@@ -1,22 +1,18 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 
 import {
-  AnalyticsCapability,
   AnalyticsMode,
   AnalyticsPageContent,
-  createSimulationResult,
   DrillDownDataItem,
   DrillDownPath,
   SimulationParam,
   SimulationResult,
+  createSimulationResult,
 } from '../analytics';
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { generateResourceDemandData } from './mockData';
 import { ResourceDemandData } from './types';
@@ -265,7 +261,7 @@ function getOfferingsByType(
 
 function getResourceDemandAnalyticsCapability(
   resources: ResourceDemandData[],
-): AnalyticsCapability {
+): any {
   const drillDownPaths: DrillDownPath[] = [
     {
       from: translate('Offering type'),
@@ -312,8 +308,6 @@ const modeConfig: Record<
 };
 
 export const ResourceDemandAnalyticsPage: FC = () => {
-  useTitle(translate('Resource Demand Analysis'));
-
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
@@ -328,36 +322,15 @@ export const ResourceDemandAnalyticsPage: FC = () => {
     [resources],
   );
 
-  useReportBreadcrumbs({
-    currentReport: 'resource-demand',
-    category: 'proposals',
-    additionalItems: [
-      { key: 'analytics', text: translate('Analytics'), active: true },
-    ],
-  });
-
   return (
     <>
-      <PublicDashboardHero
-        containerClassName="mb-5"
-        cardBordered
-        hideQuickSection
-        title={translate('Resource Demand Analysis')}
-        actions={
-          <Link
-            state="reporting-resource-demand"
-            className="btn btn-light btn-sm"
-          >
-            {translate('Back to Resource Demand')}
-          </Link>
-        }
-      >
-        <p className="text-muted mb-0">
-          {translate(
-            'Analyze resource requests and explore capacity planning scenarios.',
-          )}
-        </p>
-      </PublicDashboardHero>
+      <ReportingTitle
+        reportKey="reporting-resource-demand-analytics"
+        backState="reporting-resource-demand"
+        additionalBreadcrumbs={[
+          { key: 'analytics', text: translate('Analytics'), active: true },
+        ]}
+      />
 
       <AnalyticsPageContent
         activeMode={activeMode}

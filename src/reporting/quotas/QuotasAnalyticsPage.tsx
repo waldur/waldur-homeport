@@ -4,12 +4,9 @@ import { FC, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { customerQuotasList } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { selectCustomerQuotasFilter } from '@waldur/table/generated/CustomerQuotasFilter';
 
 import {
@@ -21,7 +18,7 @@ import {
   SimulationParam,
   SimulationResult,
 } from '../analytics';
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { CustomerQuota } from './types';
 
@@ -236,8 +233,6 @@ const modeConfig: Record<
 };
 
 export const QuotasAnalyticsPage: FC = () => {
-  useTitle(translate('Quota Analysis'));
-
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
@@ -271,19 +266,6 @@ export const QuotasAnalyticsPage: FC = () => {
     [quotas],
   );
 
-  // Set up breadcrumbs with dropdown for switching reports
-  useReportBreadcrumbs({
-    currentReport: 'quotas',
-    category: 'resources',
-    additionalItems: [
-      {
-        key: 'analytics',
-        text: translate('Analytics'),
-        active: true,
-      },
-    ],
-  });
-
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -294,27 +276,17 @@ export const QuotasAnalyticsPage: FC = () => {
 
   return (
     <>
-      <PublicDashboardHero
-        containerClassName="mb-5"
-        cardBordered
-        hideQuickSection
-        title={
-          <div className="d-flex flex-wrap align-items-center gap-3">
-            <h3 className="mb-0">{translate('Quota Analysis')}</h3>
-          </div>
-        }
-        actions={
-          <Link state="reporting-quotas" className="btn btn-light btn-sm">
-            {translate('Back to Quotas')}
-          </Link>
-        }
-      >
-        <p className="text-muted mb-0">
-          {translate(
-            'Analyze quota usage patterns and explore scenarios for capacity planning.',
-          )}
-        </p>
-      </PublicDashboardHero>
+      <ReportingTitle
+        reportKey="reporting-quotas-analytics"
+        backState="reporting-quotas"
+        additionalBreadcrumbs={[
+          {
+            key: 'analytics',
+            text: translate('Analytics'),
+            active: true,
+          },
+        ]}
+      />
 
       <AnalyticsPageContent
         activeMode={activeMode}
