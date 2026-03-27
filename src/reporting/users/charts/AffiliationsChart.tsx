@@ -9,7 +9,7 @@ import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { getSimpleExportData, renderFieldOrDash } from '@waldur/table/utils';
 
 import {
   AffiliationCategory,
@@ -108,9 +108,7 @@ const tableColumns: Column<AffiliationWithCount>[] = [
   },
   {
     title: translate('Users'),
-    render: ({ row }) => (
-      <span className="fw-bold text-primary">{row.count}</span>
-    ),
+    render: ({ row }) => <span className="fw-bold">{row.count}</span>,
   },
 ];
 
@@ -333,11 +331,28 @@ export const AffiliationsChart: FC<AffiliationsChartProps> = ({
         </Col>
       </Row>
 
-      <SimpleTable<AffiliationWithCount>
-        columns={tableColumns}
-        rows={filteredData.sort((a, b) => b.count - a.count)}
-        title={translate('Affiliation details')}
-      />
+      <Row>
+        <Col>
+          <ChartCard
+            title={translate('Affiliation details')}
+            getExportData={() =>
+              getSimpleExportData(
+                tableColumns,
+                filteredData.sort((a, b) => b.count - a.count),
+              )
+            }
+            showPNG={false}
+            isEmpty={!filteredData || filteredData.length === 0}
+          >
+            {() => (
+              <SimpleTable<AffiliationWithCount>
+                columns={tableColumns}
+                rows={filteredData.sort((a, b) => b.count - a.count)}
+              />
+            )}
+          </ChartCard>
+        </Col>
+      </Row>
     </>
   );
 };

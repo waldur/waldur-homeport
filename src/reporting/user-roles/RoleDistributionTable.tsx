@@ -1,10 +1,13 @@
 import { FC, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import { CustomerMemberCount } from 'waldur-js-client';
 
 import { BooleanBadge } from '@waldur/core/BooleanBadge';
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
+import { getSimpleExportData } from '@waldur/table/utils';
 
 interface RoleDistributionTableProps {
   data: CustomerMemberCount[];
@@ -25,7 +28,7 @@ const columns: Column<CustomerMemberCount>[] = [
   {
     title: translate('Members'),
     render: ({ row }) => (
-      <span className="fw-bold text-primary">
+      <span className="fw-bold">
         {row.count != null ? row.count.toLocaleString() : '—'}
       </span>
     ),
@@ -45,10 +48,22 @@ export const RoleDistributionTable: FC<RoleDistributionTableProps> = ({
   );
 
   return (
-    <SimpleTable<CustomerMemberCount>
-      columns={columns}
-      rows={sortedData}
-      title={translate('Organization member counts')}
-    />
+    <Row>
+      <Col>
+        <ChartCard
+          title={translate('Organization member counts')}
+          getExportData={() => getSimpleExportData(columns, sortedData)}
+          showPNG={false}
+          isEmpty={!sortedData || sortedData.length === 0}
+        >
+          {() => (
+            <SimpleTable<CustomerMemberCount>
+              columns={columns}
+              rows={sortedData}
+            />
+          )}
+        </ChartCard>
+      </Col>
+    </Row>
   );
 };

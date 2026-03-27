@@ -1,11 +1,13 @@
 import { FC, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { getSimpleExportData, renderFieldOrDash } from '@waldur/table/utils';
 
 import { CustomerUsageRow } from './types';
 
@@ -106,10 +108,19 @@ export const UsageByCustomerTable: FC<Props> = ({
   }, [componentTypes, limitNames]);
 
   return (
-    <SimpleTable<CustomerUsageRow>
-      title={translate('Usage by organization')}
-      columns={columns}
-      rows={data}
-    />
+    <Row>
+      <Col>
+        <ChartCard
+          title={translate('Usage by organization')}
+          getExportData={() => getSimpleExportData(columns, data)}
+          showPNG={false}
+          isEmpty={!data || data.length === 0}
+        >
+          {() => (
+            <SimpleTable<CustomerUsageRow> columns={columns} rows={data} />
+          )}
+        </ChartCard>
+      </Col>
+    </Row>
   );
 };

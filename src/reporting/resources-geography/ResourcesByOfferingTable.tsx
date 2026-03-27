@@ -13,13 +13,11 @@ interface ResourcesByOfferingTableProps {
 const columns: Column<OfferingStats>[] = [
   {
     title: translate('Offering'),
-    render: ({ row }) => <span className="fw-semibold">{row.name}</span>,
+    render: ({ row }) => row.name,
   },
   {
     title: translate('Resources'),
-    render: ({ row }) => (
-      <span className="fw-bold text-primary">{row.count.toLocaleString()}</span>
-    ),
+    render: ({ row }) => row.count,
   },
 ];
 

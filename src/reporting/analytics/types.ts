@@ -1,3 +1,5 @@
+import { ReactNode } from 'react';
+
 /**
  * Analytics modes supported by the reporting system
  * - what-if: Scenario analysis - "What would happen if...?"
@@ -56,25 +58,12 @@ export interface SimulationState {
 }
 
 /**
- * Drill-down level for Why-So analysis
- */
-export interface DrillDownLevel {
-  id: string;
-  label: string;
-  /** Current aggregation level (e.g., 'organization', 'project', 'resource') */
-  dimension: string;
-  /** Data at this level */
-  data: DrillDownDataItem[];
-  /** Breadcrumb path to this level */
-  breadcrumb: DrillDownBreadcrumb[];
-}
-
-/**
  * Single item in drill-down data
  */
 export interface DrillDownDataItem {
   id: string;
   label: string;
+  renderLabel?: (item: DrillDownDataItem) => ReactNode;
   value: number;
   /** Percentage of parent total */
   percentage: number;
@@ -88,15 +77,6 @@ export interface DrillDownDataItem {
     percent: number;
     direction: 'up' | 'down' | 'stable';
   };
-}
-
-/**
- * Breadcrumb item for drill-down navigation
- */
-export interface DrillDownBreadcrumb {
-  id: string;
-  label: string;
-  dimension: string;
 }
 
 /**
@@ -131,6 +111,8 @@ export interface AnalyticsCapability {
   whatIfDataSource?: DataSourceType;
   /** Description of What-If data source */
   whatIfDataSourceDescription?: string;
+  /** Custom label for the 'Value' column in Why-So mode */
+  whySoValueLabel?: string | ((total: number) => string);
   /** Data source indicator for Why-So mode */
   whySoDataSource?: DataSourceType;
   /** Description of Why-So data source */

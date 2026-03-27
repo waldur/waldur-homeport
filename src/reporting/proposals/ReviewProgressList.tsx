@@ -98,15 +98,13 @@ const columns: Column<ReviewProgressData>[] = [
     ),
   },
   {
-    title: translate('Avg time'),
+    title: translate('Avg days/review'),
     render: ({ row }) => (
       <span
         className={row.average_review_time_days !== null ? '' : 'text-muted'}
       >
         {row.average_review_time_days !== null
-          ? translate('{days} days', {
-              days: row.average_review_time_days.toFixed(1),
-            })
+          ? row.average_review_time_days.toFixed(1)
           : '—'}
       </span>
     ),

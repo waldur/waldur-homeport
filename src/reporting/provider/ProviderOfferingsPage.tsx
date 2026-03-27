@@ -56,7 +56,7 @@ const CategoryColumn = ({ row }: { row: ProviderOffering }) => (
 );
 
 const ResourcesColumn = ({ row }: { row: ProviderOffering }) => (
-  <span className="fw-bold text-primary">{row.resources_count || 0}</span>
+  <span className="fw-bold">{row.resources_count || 0}</span>
 );
 
 const TypeColumn = ({ row }: { row: ProviderOffering }) => (

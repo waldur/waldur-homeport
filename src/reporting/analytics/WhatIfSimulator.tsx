@@ -2,12 +2,13 @@ import {
   ArrowCounterClockwiseIcon,
   CaretDownIcon,
   CaretUpIcon,
+  QuestionIcon,
   TrendDownIcon,
   TrendUpIcon,
 } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC, useCallback } from 'react';
-import { Card, Col, Form, InputGroup, Row } from 'react-bootstrap';
+import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 
 import { Tip } from '@waldur/core/Tooltip';
 import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
@@ -17,6 +18,8 @@ import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { MockDataIndicator } from './MockDataIndicator';
 import { DataSourceType, SimulationParam, SimulationResult } from './types';
 import { formatSimulationChange, useSimulation } from './useSimulation';
+
+import './range.css';
 
 interface WhatIfSimulatorProps {
   /** Configuration of adjustable parameters */
@@ -60,9 +63,9 @@ const ParamInput: FC<{
   if (param.type === 'select' && param.options) {
     return (
       <Form.Select
+        className="w-50"
         value={value}
         onChange={(e) => onChange(e.target.value)}
-        size="sm"
       >
         {param.options.map((opt) => (
           <option key={opt.value} value={opt.value}>
@@ -86,18 +89,14 @@ const ParamInput: FC<{
           max={max}
           step={step}
           onChange={(e) => handleChange(parseFloat(e.target.value))}
-          className="flex-grow-1"
+          className="flex-grow-1 custom-filled-range"
+          // @ts-ignore
+          style={{ '--range-progress': `${percentage}%` }}
         />
         <span className="text-nowrap fw-semibold" style={{ minWidth: '60px' }}>
           {numValue}
           {param.unit && <span className="text-muted ms-1">{param.unit}</span>}
         </span>
-        <div className="progress" style={{ width: '60px', height: '6px' }}>
-          <div
-            className="progress-bar bg-primary"
-            style={{ width: `${percentage}%` }}
-          />
-        </div>
       </div>
     );
   }
@@ -167,7 +166,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
   const isNegative = result.change < 0;
 
   return (
-    <div className="row align-items-center py-2 border-bottom">
+    <div className="row align-items-center py-3">
       {/* Column 1: Label */}
       <div className="col-4">
         <span className="fw-semibold">{result.label}</span>
@@ -180,7 +179,7 @@ const ResultRow: FC<{ result: SimulationResult }> = ({ result }) => {
       <div className="col-5 d-flex align-items-center gap-2 text-muted">
         <span>{result.originalValue.toLocaleString()}</span>
         <span>&rarr;</span>
-        <span className="fw-bold text-dark">
+        <span className="text-dark">
           {result.simulatedValue.toLocaleString()}
         </span>
       </div>
@@ -225,7 +224,19 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
     <div className="what-if-simulator">
       {/* Data source indicator */}
       <div className="d-flex justify-content-between align-items-center mb-4">
-        <h6 className="mb-0">{translate('Scenario parameters')}</h6>
+        <h6 className="mb-0">
+          {translate('Scenario parameters')}
+          {hasChanges && (
+            <Tip label={translate('Reset to defaults')} id="reset-params">
+              <ArrowCounterClockwiseIcon
+                className="ms-2"
+                size={16}
+                weight="bold"
+                onClick={resetParams}
+              />
+            </Tip>
+          )}
+        </h6>
         <MockDataIndicator
           source={dataSource}
           description={dataSourceDescription}
@@ -235,51 +246,32 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
       <Row>
         <Col>
           {/* Parameter inputs */}
-          <Card className="mb-4">
-            <Card.Body>
-              {params.map((param) => (
-                <div key={param.id} className="mb-3">
-                  <Form.Label className="d-flex justify-content-between">
-                    <span>{param.label}</span>
-                    {param.description && (
-                      <small className="text-muted">{param.description}</small>
-                    )}
-                  </Form.Label>
-                  <ParamInput
-                    param={param}
-                    value={paramValues[param.id]}
-                    onChange={(value) => setParam(param.id, value)}
-                  />
-                </div>
-              ))}
-
-              {hasChanges && (
-                <CompactSubmitButton
-                  submitting={false}
-                  type="button"
-                  variant="outline-secondary"
-                  onClick={resetParams}
-                  className="mt-2"
-                  iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
-                  iconOnLeft
-                  label={translate('Reset to defaults')}
-                />
-              )}
-            </Card.Body>
-          </Card>
+          {params.map((param) => (
+            <div key={param.id} className="mb-3">
+              <Form.Label className="d-flex align-items-center gap-2 mb-2">
+                {param.label}
+                {param.description && (
+                  <Tip id={`${param.id}-help`} label={param.description}>
+                    <QuestionIcon size={16} weight="bold" />
+                  </Tip>
+                )}
+              </Form.Label>
+              <ParamInput
+                param={param}
+                value={paramValues[param.id]}
+                onChange={(value) => setParam(param.id, value)}
+              />
+            </div>
+          ))}
         </Col>
         <Col>
           {/* Results */}
           {results.length > 0 && (
             <>
               <h6 className="mb-3">{translate('Projected impact')}</h6>
-              <Card>
-                <Card.Body>
-                  {results.map((result) => (
-                    <ResultRow key={result.id} result={result} />
-                  ))}
-                </Card.Body>
-              </Card>
+              {results.map((result) => (
+                <ResultRow key={result.id} result={result} />
+              ))}
             </>
           )}
 

@@ -1,9 +1,11 @@
 import { FC, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { getSimpleExportData, renderFieldOrDash } from '@waldur/table/utils';
 
 import { OrgTypeAggregation } from './types';
 
@@ -60,10 +62,19 @@ export const UsageByOrgTypeTable: FC<Props> = ({ data, componentTypes }) => {
   }, [componentTypes]);
 
   return (
-    <SimpleTable<OrgTypeAggregation>
-      title={translate('Usage by organization type')}
-      columns={columns}
-      rows={data}
-    />
+    <Row>
+      <Col>
+        <ChartCard
+          title={translate('Usage by organization type')}
+          getExportData={() => getSimpleExportData(columns, data)}
+          showPNG={false}
+          isEmpty={!data || data.length === 0}
+        >
+          {() => (
+            <SimpleTable<OrgTypeAggregation> columns={columns} rows={data} />
+          )}
+        </ChartCard>
+      </Col>
+    </Row>
   );
 };

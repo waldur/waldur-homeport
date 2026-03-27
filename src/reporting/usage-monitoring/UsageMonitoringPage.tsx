@@ -23,7 +23,6 @@ const ResourceNameColumn = ({ row }: { row: ResourceMissingUsage }) => (
   <Link
     state="marketplace-resource-details"
     params={{ resource_uuid: row.uuid }}
-    className="text-dark text-hover-primary fw-semibold"
   >
     {row.name}
   </Link>
@@ -38,54 +37,36 @@ const ProviderColumn = ({ row }: { row: ResourceMissingUsage }) => (
 );
 
 const CustomerColumn = ({ row }: { row: ResourceMissingUsage }) => (
-  <Link
-    state="organization.dashboard"
-    params={{ uuid: row.customer_uuid }}
-    className="text-dark text-hover-primary"
-  >
+  <Link state="organization.dashboard" params={{ uuid: row.customer_uuid }}>
     {row.customer_name}
   </Link>
 );
 
-const getDaysSeverity = (
-  days: number | null,
-): 'success' | 'warning' | 'danger' => {
-  if (days === null) return 'danger';
-  if (days <= 7) return 'success';
-  if (days <= 30) return 'warning';
-  return 'danger';
-};
-
 const DaysSinceColumn = ({ row }: { row: ResourceMissingUsage }) => {
   const days = row.days_since_last_report;
-  const severity = getDaysSeverity(days);
 
   if (days === null) {
-    return (
-      <Badge variant="danger" outline>
-        {translate('Never reported')}
-      </Badge>
-    );
+    return translate('Never reported');
   }
 
-  return (
-    <Badge variant={severity} outline>
-      {days === 0
-        ? translate('Today')
-        : days === 1
-          ? translate('1 day ago')
-          : translate('{days} days ago', { days })}
-    </Badge>
-  );
+  if (days === 0) {
+    return translate('Today');
+  }
+
+  if (days === 1) {
+    return translate('1 day ago');
+  }
+
+  return translate('{days} days ago', { days });
+};
+
+const STATE_VARIANTS = {
+  OK: 'success',
+  Updating: 'warning',
 };
 
 const StateColumn = ({ row }: { row: ResourceMissingUsage }) => {
-  const stateVariant =
-    row.state === 'OK'
-      ? 'success'
-      : row.state === 'Updating'
-        ? 'warning'
-        : 'secondary';
+  const stateVariant = STATE_VARIANTS[row.state] || 'secondary';
 
   return (
     <Badge variant={stateVariant} outline>
