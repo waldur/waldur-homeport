@@ -42,9 +42,7 @@ export const MaintenanceTableView: FC<MaintenanceTableViewProps> = ({
     () => [
       {
         title: translate('Title'),
-        render: ({ row }) => (
-          <span className="fw-semibold text-dark">{row.name}</span>
-        ),
+        render: ({ row }) => row.name,
       },
       {
         title: translate('Provider'),

@@ -40,7 +40,6 @@ const ResourceNameColumn = ({ row }: { row: Resource }) => (
   <Link
     state="marketplace-public-resource-details"
     params={{ resource_uuid: row.uuid }}
-    className="text-dark text-hover-primary fw-semibold"
   >
     {row.name || row.offering_name}
   </Link>

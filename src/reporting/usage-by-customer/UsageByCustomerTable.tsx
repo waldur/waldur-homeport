@@ -30,7 +30,6 @@ export const UsageByCustomerTable: FC<Props> = ({
           <Link
             state="organization.dashboard"
             params={{ uuid: row.customer_uuid }}
-            className="text-dark fw-bold"
           >
             {row.customer_name}
           </Link>

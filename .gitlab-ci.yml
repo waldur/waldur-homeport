@@ -219,10 +219,13 @@ Publish latest docker image:
   before_script:
     - echo "[+] Build and publish latest docker image for ${CI_DEFAULT_BRANCH} branch"
     - echo "${WALDUR_DOCKER_HUB_PASSWORD}" | buildah login -u "${WALDUR_DOCKER_HUB_USER}" --password-stdin "${DOCKER_HUB_REGISTRY}"
+    - echo "${CI_REGISTRY_PASSWORD}" | buildah login -u "${CI_REGISTRY_USER}" --password-stdin "${CI_REGISTRY}"
   script:
     - buildah pull "docker://opennode/${CI_PROJECT_NAME}:yolo"
     - buildah tag "opennode/${CI_PROJECT_NAME}:yolo" "opennode/${CI_PROJECT_NAME}:latest"
     - buildah push "opennode/${CI_PROJECT_NAME}:latest" "docker://opennode/${CI_PROJECT_NAME}:latest"
+    - buildah tag "opennode/${CI_PROJECT_NAME}:yolo" "${CI_REGISTRY_IMAGE}:latest"
+    - buildah push "${CI_REGISTRY_IMAGE}:latest" "docker://${CI_REGISTRY_IMAGE}:latest"
 
 Publish multiarch docker image with specific version:
   extends: .Publish multiarch docker image with specific version template
@@ -349,10 +352,10 @@ Trigger integration tests:
   rules:
     - if: '$CI_COMMIT_BRANCH == $CI_DEFAULT_BRANCH'
       variables:
-        WALDUR_HOMEPORT_IMAGE: "opennode/waldur-homeport:latest"
-    # - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
-    #   variables:
-    #     WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}"
+        WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:latest"
+    - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
+      variables:
+        WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch"
 
 Test k8s deployment:
   stage: validate

@@ -199,11 +199,7 @@ export const OrganizationResourcesTable: FC<
         title: translate('Project'),
         render: ({ row }) => (
           <div className="py-3">
-            <Link
-              state="project.dashboard"
-              params={{ uuid: row.project_uuid }}
-              className="text-dark text-hover-primary fw-semibold"
-            >
+            <Link state="project.dashboard" params={{ uuid: row.project_uuid }}>
               {renderFieldOrDash(row.project_name)}
             </Link>
             <div className="d-flex align-items-center text-muted fs-8 mt-1">
@@ -229,7 +225,6 @@ export const OrganizationResourcesTable: FC<
             <Link
               state="marketplace-public-resource-details"
               params={{ resource_uuid: row.uuid }}
-              className="text-dark text-hover-primary fw-semibold"
             >
               {renderFieldOrDash(row.name || row.offering_name)}
             </Link>

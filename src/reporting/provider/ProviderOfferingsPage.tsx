@@ -45,7 +45,6 @@ const OfferingNameColumn = ({ row }: { row: ProviderOffering }) => (
   <Link
     state="marketplace-provider-offering-details"
     params={{ offering_uuid: row.uuid }}
-    className="text-dark text-hover-primary fw-semibold"
   >
     {row.name}
   </Link>
