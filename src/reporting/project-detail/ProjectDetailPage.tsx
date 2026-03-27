@@ -14,9 +14,8 @@ import {
 } from '@waldur/marketplace/common/autocompletes';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ResourceLimitsHistoryChart } from './ResourceLimitsHistoryChart';
 import { ResourceUsageHistoryChart } from './ResourceUsageHistoryChart';
@@ -42,12 +41,6 @@ interface ProjectOption {
 }
 
 export const ProjectDetailPage: FC = () => {
-  useTitle(translate('Project Resource Detail'));
-  useReportBreadcrumbs({
-    category: 'resources',
-    currentReport: 'project-detail',
-  });
-
   const { params } = useCurrentStateAndParams();
   const router = useRouter();
   const projectUuid = params.project_uuid;
@@ -285,6 +278,7 @@ export const ProjectDetailPage: FC = () => {
 
   return (
     <>
+      <ReportingTitle reportKey="project-detail" />
       {/* Filters */}
       <div className="d-flex flex-wrap gap-6 mb-6">
         <FormGroup

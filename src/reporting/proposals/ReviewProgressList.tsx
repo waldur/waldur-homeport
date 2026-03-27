@@ -7,7 +7,7 @@ import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import {
   calculateReviewProgressSummary,
@@ -112,11 +112,6 @@ const columns: Column<ReviewProgressData>[] = [
 ];
 
 export const ReviewProgressList: FC = () => {
-  useReportBreadcrumbs({
-    currentReport: 'review-progress',
-    category: 'proposals',
-  });
-
   const data = useMemo(() => generateReviewProgressData(), []);
   const summary = useMemo(() => calculateReviewProgressSummary(data), [data]);
 
@@ -145,10 +140,7 @@ export const ReviewProgressList: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header">
-        <h1 className="mb-0 fs-1x">{translate('Review progress')}</h1>
-      </div>
-
+      <ReportingTitle reportKey="review-progress" />
       <SummaryWidget stats={summary} />
 
       <Table<ReviewProgressData>

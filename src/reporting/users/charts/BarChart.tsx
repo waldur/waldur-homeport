@@ -4,7 +4,7 @@ import React, { useMemo } from 'react';
 import { EChart } from '@waldur/core/EChart';
 import { getBrandColor } from '@waldur/core/utils';
 
-interface BarChartItem {
+export interface BarChartItem {
   name: string;
   value: number;
   color?: string;
@@ -19,6 +19,7 @@ interface BarChartProps {
   showValueLabel?: boolean;
   labelFormatter?: (params: any) => string;
   tooltipFormatter?: (params: any) => string;
+  valueFormatter?: (value: number) => string;
 }
 
 /**
@@ -35,6 +36,7 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
       showValueLabel = false,
       labelFormatter,
       tooltipFormatter,
+      valueFormatter,
     },
     ref,
   ) => {
@@ -76,7 +78,8 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
           ? {
               type: 'value',
               axisLabel: {
-                formatter: (value: number) => value.toLocaleString(),
+                formatter:
+                  valueFormatter || ((value: number) => value.toLocaleString()),
               },
             }
           : {
@@ -98,7 +101,13 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
                 ellipsis: '...',
               },
             }
-          : { type: 'value' },
+          : {
+              type: 'value',
+              axisLabel: {
+                formatter:
+                  valueFormatter || ((value: number) => value.toLocaleString()),
+              },
+            },
         series: [
           {
             data: values,
@@ -124,6 +133,7 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
         showValueLabel,
         labelFormatter,
         tooltipFormatter,
+        valueFormatter,
       ],
     );
 

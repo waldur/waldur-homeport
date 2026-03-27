@@ -1,9 +1,10 @@
-import { EChartsOption } from 'echarts';
-import React, { useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { OrderState } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
+import { DonutChart } from '@waldur/reporting/users/charts/DonutChart';
+import { ExportData } from '@waldur/table/exporters/types';
 
 interface ProvisioningByStateChartProps {
   byState: { [key: string]: number };
@@ -30,81 +31,37 @@ const STATE_LABELS: { [key in OrderState]: string } = {
   executing: translate('Executing'),
 };
 
-export const ProvisioningByStateChart = React.forwardRef<
-  any,
-  ProvisioningByStateChartProps
->(({ byState }, ref) => {
+const getByStateExportData = (byState: {
+  [key: string]: number;
+}): ExportData => ({
+  fields: [translate('State'), translate('Count')],
+  data: Object.entries(byState || {}).map(([state, count]) => [state, count]),
+});
+
+export const ProvisioningByStateChart: FC<ProvisioningByStateChartProps> = ({
+  byState,
+}) => {
   const chartData = useMemo(() => {
     return Object.entries(byState)
-      .filter(([, count]) => count > 0)
+      .filter(([, count]) => (count as number) > 0)
       .map(([state, count]) => ({
         name: STATE_LABELS[state] || state,
-        value: count,
+        value: count as number,
         itemStyle: { color: STATE_COLORS[state] || '#a1a5b7' },
       }));
   }, [byState]);
 
-  const total = useMemo(
-    () => chartData.reduce((sum, item) => sum + item.value, 0),
-    [chartData],
-  );
+  const hasData = chartData.length > 0;
 
-  const options = useMemo<EChartsOption>(
-    () => ({
-      tooltip: {
-        trigger: 'item',
-        formatter: (params: any) => {
-          const percent =
-            total > 0 ? ((params.value / total) * 100).toFixed(1) : 0;
-          return `${params.name}: ${params.value.toLocaleString()} (${percent}%)`;
-        },
-      },
-      legend: {
-        orient: 'vertical',
-        right: 10,
-        top: 'center',
-        type: 'scroll',
-      },
-      series: [
-        {
-          type: 'pie',
-          radius: ['50%', '80%'],
-          center: ['35%', '50%'],
-          avoidLabelOverlap: false,
-          itemStyle: {
-            borderRadius: 4,
-            borderColor: '#fff',
-            borderWidth: 2,
-          },
-          label: {
-            show: true,
-            position: 'center',
-            formatter: () =>
-              `{total|${total.toLocaleString()}}\n{label|${translate('Total')}}`,
-            rich: {
-              total: {
-                fontSize: 24,
-                fontWeight: 'bold',
-                color: '#181C32',
-                lineHeight: 32,
-              },
-              label: {
-                fontSize: 12,
-                color: '#A1A5B7',
-                lineHeight: 20,
-              },
-            },
-          },
-          emphasis: {
-            label: { show: true },
-          },
-          labelLine: { show: false },
-          data: chartData,
-        },
-      ],
-    }),
-    [chartData, total],
+  return (
+    <ChartCard
+      title={translate('Orders by state')}
+      getExportData={() => getByStateExportData(byState)}
+      isEmpty={!hasData}
+    >
+      {(cardRef) => (
+        <DonutChart ref={cardRef} data={chartData} height="300px" />
+      )}
+    </ChartCard>
   );
-
-  return <EChart ref={ref} options={options} height="300px" />;
-});
+};

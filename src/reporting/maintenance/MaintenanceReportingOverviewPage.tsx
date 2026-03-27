@@ -6,9 +6,8 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { MaintenanceReportingFilter } from './MaintenanceReportingFilter';
 import { MaintenanceSummaryCards } from './MaintenanceSummaryCards';
@@ -25,12 +24,6 @@ const getDefaultDateRange = () => ({
 });
 
 export const MaintenanceReportingOverviewPage: FC = () => {
-  useTitle(translate('Maintenance overview'));
-  useReportBreadcrumbs({
-    category: 'operations',
-    currentReport: 'maintenance-overview',
-  });
-
   const [filter, setFilter] =
     useState<MaintenanceFilterState>(getDefaultDateRange);
   const [activeTab, setActiveTab] = useState<MaintenanceViewTab>('table');
@@ -57,14 +50,12 @@ export const MaintenanceReportingOverviewPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Maintenance overview')}</h1>
-      </div>
-
-      <MaintenanceReportingFilter
-        filter={filter}
-        onFilterChange={handleFilterChange}
-      />
+      <ReportingTitle reportKey="maintenance-overview">
+        <MaintenanceReportingFilter
+          filter={filter}
+          onFilterChange={handleFilterChange}
+        />
+      </ReportingTitle>
 
       {loading ? (
         <LoadingSpinner />

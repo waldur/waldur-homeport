@@ -333,7 +333,18 @@ Build test docker image:
     # Log in to GitLab Container Registry
     - echo "${CI_REGISTRY_PASSWORD}" | buildah login -u "${CI_REGISTRY_USER}" --password-stdin "${CI_REGISTRY}"
   script:
-    - echo "[+] Building image ${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}"
+    # 1. Build a standard image for E2E tests (No ASSET_PATH)
+    - echo "[+] Building standard image for E2E tests"
+    - |
+      buildah bud \
+        --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
+        -t "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-e2e" \
+        -f "${CI_PROJECT_DIR}/Dockerfile" \
+        "${CI_PROJECT_DIR}"
+    - buildah push "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-e2e"
+
+    # 2. Build the image with ASSET_PATH for the k8s preview environment
+    - echo "[+] Building image with ASSET_PATH for k8s preview"
     - |
       buildah bud \
         --build-arg DOCKER_REGISTRY="${DOCKER_REGISTRY}" \
@@ -355,7 +366,7 @@ Trigger integration tests:
         WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:latest"
     - if: '$CI_PIPELINE_SOURCE == "merge_request_event"'
       variables:
-        WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-multiarch"
+        WALDUR_HOMEPORT_IMAGE: "${CI_REGISTRY_IMAGE}:${CI_MERGE_REQUEST_ID}-e2e"
 
 Test k8s deployment:
   stage: validate

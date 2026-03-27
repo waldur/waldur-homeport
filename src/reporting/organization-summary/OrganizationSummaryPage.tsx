@@ -1,14 +1,11 @@
 import { FC } from 'react';
-import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import {
   OrganizationFilter,
@@ -24,12 +21,6 @@ interface OrganizationFilterFormValues {
 }
 
 export const OrganizationSummaryPage: FC = () => {
-  useTitle(translate('Organization summary'));
-  useReportBreadcrumbs({
-    category: 'resources',
-    currentReport: 'organization-summary',
-  });
-
   const formValues = useSelector(
     getFormValues(ORGANIZATION_FILTER_FORM),
   ) as OrganizationFilterFormValues;
@@ -37,16 +28,16 @@ export const OrganizationSummaryPage: FC = () => {
 
   return (
     <>
-      <Card className="mb-6">
-        <Card.Header>
-          <Card.Title>{translate('Filters')}</Card.Title>
-        </Card.Header>
-        <Card.Body>
-          <FormGroup label={translate('Organization')} className="mw-300px">
+      <ReportingTitle reportKey="organization-summary">
+        <div className="d-flex align-items-center gap-4">
+          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+            {translate('Organization')}:
+          </label>
+          <div style={{ minWidth: 200 }}>
             <OrganizationFilter />
-          </FormGroup>
-        </Card.Body>
-      </Card>
+          </div>
+        </div>
+      </ReportingTitle>
 
       {customerUuid ? (
         <OrganizationResourcesTable customerUuid={customerUuid} />

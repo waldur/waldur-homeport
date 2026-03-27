@@ -5,7 +5,6 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 
 import { ActiveUsersByProviderChart } from './growth/ActiveUsersByProviderChart';
 import { ProjectsOverTimeChart } from './growth/ProjectsOverTimeChart';
@@ -13,16 +12,10 @@ import { ResourcesOverTimeChart } from './growth/ResourcesOverTimeChart';
 import { TopOfferingsTable } from './growth/TopOfferingsTable';
 import { TopProvidersTable } from './growth/TopProvidersTable';
 import { UsersOverTimeChart } from './growth/UsersOverTimeChart';
-import { useReportBreadcrumbs } from './ReportsBreadcrumbs';
+import { ReportingTitle } from './ReportingTitle';
 import { useGrowthStatistics } from './useGrowthStatistics';
 
 export const GrowthPage: FC = () => {
-  useTitle(translate('Growth report'));
-  useReportBreadcrumbs({
-    category: 'financial',
-    currentReport: 'growth',
-  });
-
   const { data, isLoading, error, refetch } = useGrowthStatistics();
 
   if (isLoading) return <LoadingSpinner />;
@@ -30,6 +23,7 @@ export const GrowthPage: FC = () => {
 
   return (
     <>
+      <ReportingTitle reportKey="growth" />
       <SummaryWidget
         stats={[
           {

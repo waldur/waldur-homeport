@@ -8,13 +8,12 @@ import {
 import { Badge } from '@waldur/core/Badge';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { UsageMonitoringFilter } from './UsageMonitoringFilter';
 import { getCurrentBillingPeriod } from './utils';
@@ -103,12 +102,6 @@ const columns: Column<ResourceMissingUsage>[] = [
 ];
 
 export const UsageMonitoringPage: FC = () => {
-  useTitle(translate('Usage monitoring'));
-  useReportBreadcrumbs({
-    category: 'resources',
-    currentReport: 'usage-monitoring',
-  });
-
   const [billingPeriod, setBillingPeriod] = useState(getCurrentBillingPeriod());
 
   const filter = useMemo(
@@ -123,21 +116,20 @@ export const UsageMonitoringPage: FC = () => {
   });
 
   return (
-    <Table<ResourceMissingUsage>
-      {...tableProps}
-      columns={columns}
-      verboseName={translate('resources')}
-      title={translate('Usage monitoring')}
-      subtitle={translate('Resources with missing usage reports')}
-      showPageSizeSelector
-      standalone
-      hasQuery
-      tableActions={
+    <>
+      <ReportingTitle reportKey="usage-monitoring">
         <UsageMonitoringFilter
           billingPeriod={billingPeriod}
           onBillingPeriodChange={setBillingPeriod}
         />
-      }
-    />
+      </ReportingTitle>
+      <Table<ResourceMissingUsage>
+        {...tableProps}
+        columns={columns}
+        verboseName={translate('resources')}
+        showPageSizeSelector
+        hasQuery
+      />
+    </>
   );
 };

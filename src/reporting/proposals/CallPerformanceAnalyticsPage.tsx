@@ -2,20 +2,18 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { ProposalBadge } from '@waldur/proposals/proposal/ProposalBadge';
 
 import {
-  AnalyticsCapability,
   AnalyticsMode,
   AnalyticsPageContent,
-  createSimulationResult,
   DrillDownDataItem,
   DrillDownPath,
   SimulationParam,
   SimulationResult,
+  createSimulationResult,
 } from '../analytics';
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { generateCallPerformanceData } from './mockData';
 import { CallPerformanceData } from './types';
@@ -236,7 +234,7 @@ function getProposalStateBreakdown(
 
 function getCallPerformanceAnalyticsCapability(
   calls: CallPerformanceData[],
-): AnalyticsCapability {
+): any {
   const drillDownPaths: DrillDownPath[] = [
     {
       from: translate('Call'),
@@ -284,8 +282,6 @@ const modeConfig: Record<
 };
 
 export const CallPerformanceAnalyticsPage: FC = () => {
-  useTitle(translate('Call Performance Analysis'));
-
   const { params } = useCurrentStateAndParams();
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
@@ -300,24 +296,15 @@ export const CallPerformanceAnalyticsPage: FC = () => {
     [calls],
   );
 
-  useReportBreadcrumbs({
-    currentReport: 'call-performance',
-    category: 'proposals',
-    additionalItems: [
-      { key: 'analytics', text: translate('Analytics'), active: true },
-    ],
-  });
-
   return (
     <>
-      <div className="table-standalone-header">
-        <h1 className="mb-3 fs-1x">{translate('Call performance analysis')}</h1>
-        <p className="text-muted mb-0">
-          {translate(
-            'Analyze call submission patterns and explore scenarios for optimizing acceptance rates.',
-          )}
-        </p>
-      </div>
+      <ReportingTitle
+        reportKey="reporting-call-performance-analytics"
+        backState="reporting-call-performance"
+        additionalBreadcrumbs={[
+          { key: 'analytics', text: translate('Analytics'), active: true },
+        ]}
+      />
 
       <AnalyticsPageContent
         activeMode={activeMode}

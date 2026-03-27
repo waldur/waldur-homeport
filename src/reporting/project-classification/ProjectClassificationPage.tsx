@@ -5,9 +5,8 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ClassificationSummaryCards } from './ClassificationSummaryCards';
 import { IndustryUsageTab } from './IndustryUsageTab';
@@ -20,12 +19,6 @@ import {
 type TabKey = 'oecd' | 'industry';
 
 export const ProjectClassificationPage: FC = () => {
-  useTitle(translate('Project classification'));
-  useReportBreadcrumbs({
-    category: 'resources',
-    currentReport: 'project-classification',
-  });
-
   const [activeTab, setActiveTab] = useState<TabKey>('oecd');
   const { data, isLoading, error, refetch } = useProjectClassificationStats();
   const {
@@ -56,9 +49,7 @@ export const ProjectClassificationPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4">
-        <h1 className="mb-0 fs-1x">{translate('Project classification')}</h1>
-      </div>
+      <ReportingTitle reportKey="project-classification" />
 
       <ClassificationSummaryCards summary={summary} />
 

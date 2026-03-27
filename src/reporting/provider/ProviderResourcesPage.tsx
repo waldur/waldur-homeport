@@ -18,13 +18,12 @@ import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { translate } from '@waldur/i18n';
 import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ProviderFilter } from './ProviderFilter';
 import { ResourceCreationTrendChart } from './ResourceCreationTrendChart';
@@ -175,9 +174,6 @@ const ProviderResourcesContent: FC<{ providerUuid: string }> = ({
 };
 
 export const ProviderResourcesPage: FC = () => {
-  useTitle(translate('Provider resources'));
-  useReportBreadcrumbs({ category: 'provider', currentReport: 'resources' });
-
   const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
     provider?: { uuid: string };
   };
@@ -185,19 +181,16 @@ export const ProviderResourcesPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Provider resources')}</h1>
-        <div className="d-none d-sm-flex gap-4">
-          <div className="d-flex align-items-center gap-4">
-            <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
-              {translate('Provider')}:
-            </label>
-            <div style={{ minWidth: 200 }}>
-              <ProviderFilter />
-            </div>
+      <ReportingTitle reportKey="provider-resources">
+        <div className="d-flex align-items-center gap-4">
+          <label className="text-muted fs-7 fw-semibold whitespace-nowrap">
+            {translate('Provider')}:
+          </label>
+          <div style={{ minWidth: 200 }}>
+            <ProviderFilter />
           </div>
         </div>
-      </div>
+      </ReportingTitle>
 
       {providerUuid ? (
         <>

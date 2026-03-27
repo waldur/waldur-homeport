@@ -4,10 +4,9 @@ import { useSelector } from 'react-redux';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
 import { selectMarketplaceStatsOpenstackInstancesFilter } from '@waldur/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { useOpenstackInstancesSummary } from './api';
 import { OpenstackInstancesAggregateView } from './OpenstackInstancesAggregateView';
@@ -15,12 +14,6 @@ import { OpenstackInstancesSummaryCards } from './OpenstackInstancesSummaryCards
 import { OpenstackInstancesTable } from './OpenstackInstancesTable';
 
 export const OpenstackInstancesPage: FC = () => {
-  useTitle(translate('OpenStack instances'));
-  useReportBreadcrumbs({
-    category: 'provider',
-    currentReport: 'openstack-instances',
-  });
-
   const [activeTab, setActiveTab] = useState<string>('instances');
   const filter = useSelector(selectMarketplaceStatsOpenstackInstancesFilter);
   const { data: summary, isLoading: summaryLoading } =
@@ -28,9 +21,7 @@ export const OpenstackInstancesPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('OpenStack instances')}</h1>
-      </div>
+      <ReportingTitle reportKey="openstack-instances" />
 
       {summaryLoading ? (
         <LoadingSpinner />

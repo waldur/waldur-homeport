@@ -6,19 +6,15 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 import { OrdersContent } from '@waldur/reporting/orders/OrdersContent';
 import { OrdersFilter } from '@waldur/reporting/orders/OrdersFilter';
 import { useOrdersStats } from '@waldur/reporting/orders/useOrdersStats';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { ProviderFilter } from './ProviderFilter';
 
 export const ProviderOrdersPage: FC = () => {
-  useTitle(translate('Provider orders'));
-  useReportBreadcrumbs({ category: 'provider', currentReport: 'orders' });
-
   const [days, setDays] = useState(30);
   const formValues = useSelector(getFormValues('ProviderReportingFilter')) as {
     provider?: { uuid: string };
@@ -43,16 +39,13 @@ export const ProviderOrdersPage: FC = () => {
 
   return (
     <>
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
-        <h1 className="mb-0 fs-1x">{translate('Provider orders')}</h1>
-        <div className="d-none d-sm-flex gap-4">
-          <OrdersFilter
-            days={days}
-            onDaysChange={setDays}
-            extraFilters={providerFilter}
-          />
-        </div>
-      </div>
+      <ReportingTitle reportKey="provider-orders">
+        <OrdersFilter
+          days={days}
+          onDaysChange={setDays}
+          extraFilters={providerFilter}
+        />
+      </ReportingTitle>
 
       {!providerUuid ? (
         <NoResult

@@ -5,9 +5,8 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { OfferingCostsChart } from './OfferingCostsChart';
 import { OfferingCostsSummaryCards } from './OfferingCostsSummaryCards';
@@ -15,12 +14,6 @@ import { OfferingCostsTable } from './OfferingCostsTable';
 import { useOfferingCosts, useOfferingCostsSummary } from './useOfferingCosts';
 
 export const OfferingCostsPage: FC = () => {
-  useTitle(translate('Offering costs'));
-  useReportBreadcrumbs({
-    category: 'financial',
-    currentReport: 'offering-costs',
-  });
-
   const { data, isLoading, error, refetch } = useOfferingCosts();
   const {
     data: summary,
@@ -36,20 +29,24 @@ export const OfferingCostsPage: FC = () => {
     return <LoadingErred loadData={refetch} />;
   }
 
-  if (!data || !summary || summary.offeringCount === 0) {
+  if (data.offerings.length === 0) {
     return (
-      <NoResult
-        title={translate('No cost data found')}
-        message={translate(
-          'There are no offerings with associated costs to display.',
-        )}
-        noAction
-      />
+      <>
+        <ReportingTitle reportKey="offering-costs" />
+        <NoResult
+          title={translate('No cost data found')}
+          message={translate(
+            'There are no offerings with associated costs to display.',
+          )}
+          noAction
+        />
+      </>
     );
   }
 
   return (
     <>
+      <ReportingTitle reportKey="offering-costs" />
       <OfferingCostsSummaryCards summary={summary} />
       <Row className="mb-6">
         <Col xs={12}>

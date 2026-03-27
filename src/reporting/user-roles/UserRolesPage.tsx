@@ -5,9 +5,8 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
-import { useReportBreadcrumbs } from '../ReportsBreadcrumbs';
+import { ReportingTitle } from '../ReportingTitle';
 
 import { RoleDistributionChart } from './RoleDistributionChart';
 import { RoleDistributionTable } from './RoleDistributionTable';
@@ -15,12 +14,6 @@ import { UserRolesSummaryCards } from './UserRolesSummaryCards';
 import { useUserRoleStats, useUserRolesSummary } from './useUserRoleStats';
 
 export const UserRolesPage: FC = () => {
-  useTitle(translate('Role distribution'));
-  useReportBreadcrumbs({
-    category: 'users',
-    currentReport: 'user-roles',
-  });
-
   const { data, isLoading, error, refetch } = useUserRoleStats();
   const {
     data: summary,
@@ -47,7 +40,8 @@ export const UserRolesPage: FC = () => {
   }
 
   return (
-    <div className="container-fluid py-6">
+    <>
+      <ReportingTitle reportKey="user-roles" />
       <UserRolesSummaryCards summary={summary} />
 
       <Row className="g-6 mb-6">
@@ -57,6 +51,6 @@ export const UserRolesPage: FC = () => {
       </Row>
 
       <RoleDistributionTable data={data.memberCounts} />
-    </div>
+    </>
   );
 };

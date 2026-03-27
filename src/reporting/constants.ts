@@ -39,6 +39,8 @@ export interface ReportDefinition {
   isPrimary?: boolean;
   /** Flag to indicate if this report is experimental (hidden unless experimental UI is enabled) */
   isExperimental?: boolean;
+  /** Flag to indicate if this report is hidden from the main report list */
+  isHidden?: boolean;
 }
 
 interface CategoryConfig {
@@ -75,6 +77,15 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           state: 'reporting-quotas',
           analytics: ['what-if', 'why-so'],
           analyticsState: 'reporting-quotas-analytics',
+        },
+        {
+          key: 'reporting-quotas-analytics',
+          title: translate('Quota Analysis'),
+          description: translate(
+            'In-depth analysis of organization quota limits and usage projections',
+          ),
+          state: 'reporting-quotas-analytics',
+          isHidden: true,
         },
         {
           key: 'usage-monitoring',
@@ -156,6 +167,15 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           isPrimary: true,
           analytics: ['what-if', 'why-so'],
           analyticsState: 'reporting-capacity-analytics',
+        },
+        {
+          key: 'reporting-capacity-analytics',
+          title: translate('Capacity Analysis'),
+          description: translate(
+            'Detailed analysis of offering plan capacities and growth scenarios',
+          ),
+          state: 'reporting-capacity-analytics',
+          isHidden: true,
         },
         {
           key: 'provider-overview',
@@ -259,6 +279,15 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           isExperimental: true,
         },
         {
+          key: 'reporting-call-performance-analytics',
+          title: translate('Call Performance Analysis'),
+          description: translate(
+            'Statistical analysis of call submissions and acceptance patterns',
+          ),
+          state: 'reporting-call-performance-analytics',
+          isHidden: true,
+        },
+        {
           key: 'review-progress',
           title: translate('Review progress'),
           description: translate('Reviewer workload and completion metrics'),
@@ -268,6 +297,15 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           isExperimental: true,
         },
         {
+          key: 'reporting-review-progress-analytics',
+          title: translate('Review Progress Analysis'),
+          description: translate(
+            'Analysis of reviewer workload and review completion timelines',
+          ),
+          state: 'reporting-review-progress-analytics',
+          isHidden: true,
+        },
+        {
           key: 'resource-demand',
           title: translate('Resource demand'),
           description: translate('Resources requested through proposals'),
@@ -275,6 +313,15 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           analytics: ['what-if', 'why-so'],
           analyticsState: 'reporting-resource-demand-analytics',
           isExperimental: true,
+        },
+        {
+          key: 'reporting-resource-demand-analytics',
+          title: translate('Resource Demand Analysis'),
+          description: translate(
+            'Forecasting resource demand based on proposal trends',
+          ),
+          state: 'reporting-resource-demand-analytics',
+          isHidden: true,
         },
       ],
     },
@@ -294,20 +341,21 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           analyticsState: 'reporting-user-demographics-analytics',
         },
         {
+          key: 'reporting-user-demographics-analytics',
+          title: translate('Demographics Analysis'),
+          description: translate(
+            'Interactive analysis of user distribution by identity and education',
+          ),
+          state: 'reporting-user-demographics-analytics',
+          isHidden: true,
+        },
+        {
           key: 'user-analytics',
           title: translate('Analytics'),
           description: translate(
             'Interactive user statistics with export options',
           ),
           state: 'reporting-user-analytics',
-        },
-        {
-          key: 'user-organizations',
-          title: translate('Organizations'),
-          description: translate(
-            'User distribution by organization membership',
-          ),
-          state: 'reporting-user-organizations',
         },
         {
           key: 'user-affiliations',
@@ -356,9 +404,11 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
 
   // Apply isReportingScreenEnabled filtering globally
   Object.values(config).forEach((category) => {
-    category.reports = category.reports.filter((r) =>
-      isReportingScreenEnabled(r.key),
-    );
+    if (category?.reports) {
+      category.reports = category.reports.filter((r) =>
+        isReportingScreenEnabled(r.key),
+      );
+    }
   });
 
   return config;
