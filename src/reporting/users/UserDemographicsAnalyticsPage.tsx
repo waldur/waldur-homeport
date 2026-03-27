@@ -201,13 +201,13 @@ const modeConfig: Record<
   'what-if': {
     label: translate('What if'),
     description: translate(
-      'Explore user growth scenarios and federation adoption projections',
+      'Simulate user growth scenarios and federation adoption projections',
     ),
   },
   'why-so': {
     label: translate('Why so'),
     description: translate(
-      'Drill down into authentication methods and user distribution',
+      'Analyze authentication methods and user distribution patterns',
     ),
   },
 };

@@ -1,13 +1,16 @@
 import { FC, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 import {
   ProjectsLimitsGroupedByIndustryFlag,
   ProjectsUsagesGroupedByIndustryFlag,
 } from 'waldur-js-client';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
+import { getSimpleExportData } from '@waldur/table/utils';
 
 import { ClassificationUsageRow } from './types';
 
@@ -58,9 +61,7 @@ const tableColumns: Column<ClassificationUsageRow>[] = [
   },
   {
     title: translate('Usage'),
-    render: ({ row }) => (
-      <span className="fw-bold text-primary">{row.usage}</span>
-    ),
+    render: ({ row }) => <span className="fw-bold">{row.usage}</span>,
   },
   {
     title: translate('Limit'),
@@ -78,10 +79,22 @@ export const IndustryUsageTable: FC<IndustryUsageTableProps> = ({
   );
 
   return (
-    <SimpleTable<ClassificationUsageRow>
-      columns={tableColumns}
-      rows={tableData}
-      title={translate('Usage by industry classification')}
-    />
+    <Row>
+      <Col>
+        <ChartCard
+          title={translate('Usage by industry classification')}
+          getExportData={() => getSimpleExportData(tableColumns, tableData)}
+          showPNG={false}
+          isEmpty={!tableData || tableData.length === 0}
+        >
+          {() => (
+            <SimpleTable<ClassificationUsageRow>
+              columns={tableColumns}
+              rows={tableData}
+            />
+          )}
+        </ChartCard>
+      </Col>
+    </Row>
   );
 };

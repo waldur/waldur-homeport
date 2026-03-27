@@ -1,10 +1,12 @@
 import { FC, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { getSimpleExportData, renderFieldOrDash } from '@waldur/table/utils';
 
 import { AffiliationAggregation } from './types';
 
@@ -64,10 +66,22 @@ export const AffiliationUsageTable: FC<Props> = ({ data, componentTypes }) => {
   }, [componentTypes]);
 
   return (
-    <SimpleTable<AffiliationAggregation>
-      title={translate('Usage by affiliation')}
-      columns={columns}
-      rows={data}
-    />
+    <Row>
+      <Col>
+        <ChartCard
+          title={translate('Usage by affiliation')}
+          getExportData={() => getSimpleExportData(columns, data)}
+          showPNG={false}
+          isEmpty={!data || data.length === 0}
+        >
+          {() => (
+            <SimpleTable<AffiliationAggregation>
+              columns={columns}
+              rows={data}
+            />
+          )}
+        </ChartCard>
+      </Col>
+    </Row>
   );
 };

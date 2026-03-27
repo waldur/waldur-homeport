@@ -300,13 +300,13 @@ const modeConfig: Record<
   'what-if': {
     label: translate('What if'),
     description: translate(
-      'Explore how demand growth and capacity expansion affect resource fulfillment',
+      'Simulate how demand growth and capacity expansion affect resource fulfillment',
     ),
   },
   'why-so': {
     label: translate('Why so'),
     description: translate(
-      'Drill down from offering types to understand resource demand patterns',
+      'Identify root causes by drilling down into specific offering types and providers',
     ),
   },
 };

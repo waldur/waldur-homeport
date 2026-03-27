@@ -167,7 +167,7 @@ export function TableToolbarActions() {
                 fetch={actions.fetch}
                 standalone={config.standalone}
                 standaloneActionsInTable={config.standaloneActionsInTable}
-                renderFilterButton={isSm}
+                renderFilterButton={isSm || !config.hasQuery}
               />
             </div>
           )}

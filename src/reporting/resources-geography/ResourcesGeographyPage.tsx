@@ -68,7 +68,11 @@ export const ResourcesGeographyPage: FC = () => {
         </Col>
       </Row>
 
-      <ResourcesByOfferingTable data={data.byOffering} />
+      <Row>
+        <Col>
+          <ResourcesByOfferingTable data={data.byOffering} />
+        </Col>
+      </Row>
     </>
   );
 };

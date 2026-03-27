@@ -1,8 +1,11 @@
 import { FC, useMemo } from 'react';
+import { Col, Row } from 'react-bootstrap';
 
+import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
 import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
+import { getSimpleExportData } from '@waldur/table/utils';
 
 interface ProvisioningByTypeTableProps {
   byType: { [key: string]: number };
@@ -29,7 +32,7 @@ const columns: Column<TypeRow>[] = [
   {
     title: translate('Count'),
     render: ({ row }) => (
-      <span className="fw-bold text-primary">{row.count.toLocaleString()}</span>
+      <span className="fw-bold">{row.count.toLocaleString()}</span>
     ),
   },
 ];
@@ -44,10 +47,17 @@ export const ProvisioningByTypeTable: FC<ProvisioningByTypeTableProps> = ({
   }, [byType]);
 
   return (
-    <SimpleTable
-      columns={columns}
-      rows={tableData}
-      title={translate('Orders by type')}
-    />
+    <Row>
+      <Col>
+        <ChartCard
+          title={translate('Orders by type')}
+          getExportData={() => getSimpleExportData(columns, tableData)}
+          showPNG={false}
+          isEmpty={!tableData || tableData.length === 0}
+        >
+          {() => <SimpleTable columns={columns} rows={tableData} />}
+        </ChartCard>
+      </Col>
+    </Row>
   );
 };

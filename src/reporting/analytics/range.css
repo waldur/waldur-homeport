@@ -1,0 +1,26 @@
+.custom-filled-range {
+  /* Use the CSS variable passed from React, defaulting to 0% */
+  background: linear-gradient(
+    to right,
+    var(--bs-primary) 0%,
+    var(--bs-primary) var(--range-progress, 0%),
+    var(--bs-gray-200) var(--range-progress, 0%),
+    var(--bs-gray-200) 100%
+  ) !important;
+
+  height: 0.25rem !important;
+  border-radius: 0.125rem !important;
+  padding: 0 !important;
+  appearance: none !important;
+  -webkit-appearance: none !important;
+}
+
+.custom-filled-range::-webkit-slider-runnable-track {
+  background: transparent !important;
+  border: none !important;
+}
+
+.custom-filled-range::-moz-range-track {
+  background: transparent !important;
+  border: none !important;
+}

@@ -2,6 +2,9 @@ import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n/translate';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
+import { ExportData } from './exporters/types';
+import { Column } from './types';
+
 export const getId = (row, index) => {
   if (row.uuid) {
     return row.uuid;
@@ -69,3 +72,30 @@ export const getFiltersFormId = (filters: JSX.Element) => {
 
 export const getSavedFiltersKey = (table, formId) =>
   `waldur/table/filters/${table}/${formId}`;
+
+export const getSimpleExportData = <T = any,>(
+  columns: Column<T>[],
+  rows: T[],
+): ExportData => {
+  const fields = columns
+    .filter((column) => column.export !== false)
+    .map((column) => column.exportTitle || (column.title as string));
+  const data = (rows || []).map((row) =>
+    columns
+      .filter((column) => column.export !== false)
+      .map((column) => {
+        if (typeof column.export === 'function') {
+          return (column.export as any)(row);
+        } else if (typeof column.export === 'string') {
+          return row[column.export];
+        } else if (column.export === true || column.export === undefined) {
+          return (
+            (column.id && row[column.id]) ||
+            (column.orderField && row[column.orderField])
+          );
+        }
+        return '';
+      }),
+  );
+  return { fields, data } as ExportData;
+};

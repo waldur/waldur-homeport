@@ -1,6 +1,8 @@
-import { FlaskIcon, LightbulbIcon } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
+
+import { Tip } from '@waldur/core/Tooltip';
 
 import { AnalyticsCapability, AnalyticsMode, DrillDownDataItem } from './types';
 import { WhatIfSimulator } from './WhatIfSimulator';
@@ -47,9 +49,10 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
                     eventKey={mode}
                     className="d-flex align-items-center gap-2"
                   >
-                    {mode === 'what-if' && <FlaskIcon weight="bold" />}
-                    {mode === 'why-so' && <LightbulbIcon weight="bold" />}
                     {config.label}
+                    <Tip label={config.description} id={`help-${mode}`}>
+                      <QuestionIcon size={16} weight="bold" />
+                    </Tip>
                   </Nav.Link>
                 </Nav.Item>
               );
@@ -59,12 +62,6 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
       </Card.Header>
 
       <Card.Body>
-        <div className="mb-6 pb-4 border-bottom">
-          <p className="text-muted mb-0">
-            {modeConfig[activeMode].description}
-          </p>
-        </div>
-
         {activeMode === 'what-if' &&
           supportsWhatIf &&
           capability.simulationParams &&
@@ -86,6 +83,7 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
               initialDimension={capability.initialDimension}
               dataSource={capability.whySoDataSource}
               dataSourceDescription={capability.whySoDataSourceDescription}
+              valueLabel={capability.whySoValueLabel}
               onDrillDown={async (item, currentDimension) => {
                 const path = capability.drillDownPaths?.find(
                   (p) => p.from === currentDimension,

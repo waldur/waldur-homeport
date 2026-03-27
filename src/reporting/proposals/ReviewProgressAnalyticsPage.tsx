@@ -265,13 +265,13 @@ const modeConfig: Record<
   'what-if': {
     label: translate('What if'),
     description: translate(
-      'Explore how deadline and reviewer pool changes affect review completion and capacity',
+      'Simulate how review deadlines and reviewer pool size affect completion rates',
     ),
   },
   'why-so': {
     label: translate('Why so'),
     description: translate(
-      'Drill down into reviewer workload to identify bottlenecks and completion patterns',
+      'Analyze individual reviewer performance to find bottlenecks',
     ),
   },
 };

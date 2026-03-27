@@ -270,11 +270,7 @@ export const OrganizationResourcesTable: FC<
       render: ({ row }) => {
         const usages = row.current_usages || {};
         const usage = usages[type];
-        return (
-          <span className={usage ? 'text-primary' : ''}>
-            {formatNumber(usage)}
-          </span>
-        );
+        return formatNumber(usage);
       },
       export: (row) => {
         const usages = row.current_usages || {};

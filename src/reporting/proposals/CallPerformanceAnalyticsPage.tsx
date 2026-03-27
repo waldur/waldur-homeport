@@ -3,6 +3,7 @@ import { FC, useMemo, useState } from 'react';
 
 import { translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
+import { ProposalBadge } from '@waldur/proposals/proposal/ProposalBadge';
 
 import {
   AnalyticsCapability,
@@ -225,6 +226,7 @@ function getProposalStateBreakdown(
     .map((state) => ({
       id: state.id,
       label: state.label,
+      renderLabel: () => <ProposalBadge state={state.id} />,
       value: state.value,
       percentage: total > 0 ? (state.value / total) * 100 : 0,
       canDrillDown: false,
@@ -259,6 +261,7 @@ function getCallPerformanceAnalyticsCapability(
     whySoDataSourceDescription: translate(
       'Drill-down shows proposal distribution by state within each call.',
     ),
+    whySoValueLabel: (total) => translate('Proposals ({total})', { total }),
   };
 }
 
@@ -269,13 +272,13 @@ const modeConfig: Record<
   'what-if': {
     label: translate('What if'),
     description: translate(
-      'Explore how changes to acceptance thresholds and reviewer requirements affect outcomes',
+      'Simulate how thresholds and reviewer settings change outcomes',
     ),
   },
   'why-so': {
     label: translate('Why so'),
     description: translate(
-      'Drill down from calls to understand proposal distribution and acceptance patterns',
+      'Identify root causes by drilling down into specific calls and states',
     ),
   },
 };
