@@ -93,7 +93,14 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
     (component) => component.billing_type === 'usage',
   );
   const initialRows = props.components.filter(
-    (component) => component.billing_type === 'one',
+    (component) => component.billing_type === 'one' && !component.is_prepaid,
+  );
+  const prepaidRows = props.components.filter(
+    (component) => component.billing_type === 'one' && component.is_prepaid,
+  );
+  const prepaidTotal = prepaidRows.reduce(
+    (subTotal, component) => subTotal + component.subTotal,
+    0,
   );
   const switchRows = props.components.filter(
     (component) => component.billing_type === 'few',
@@ -198,6 +205,21 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
             <LimitlessComponentsTable
               components={initialRows}
               concealBillingInfo={props.concealBillingInfo}
+            />
+          </>
+        )}
+        {prepaidRows.length > 0 && (
+          <>
+            <p>
+              {translate(
+                'Prepaid fee applied on activation based on ordered quantity and duration.',
+              )}
+            </p>
+            <TotalLimitComponentsTable
+              components={prepaidRows}
+              total={prepaidTotal}
+              viewMode={true}
+              hidePrices={props.concealBillingInfo}
             />
           </>
         )}

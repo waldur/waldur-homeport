@@ -1,3 +1,4 @@
+import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from '@waldur/core/Badge';
@@ -15,9 +16,22 @@ const PurchaseOrderBadge = ({ order, offering }) => {
 
   if (order.attachment) {
     return (
-      <Badge variant="success" size="sm" pill outline>
-        {translate('Uploaded')}
-      </Badge>
+      <a
+        href={order.attachment}
+        target="_blank"
+        rel="noopener noreferrer"
+        className="d-inline-flex align-items-center gap-1 text-decoration-none"
+      >
+        <Badge
+          variant="success"
+          size="sm"
+          leftIcon={<DownloadSimpleIcon weight="bold" size={12} />}
+          pill
+          outline
+        >
+          {translate('Download')}
+        </Badge>
+      </a>
     );
   }
 
