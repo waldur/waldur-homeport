@@ -119,7 +119,8 @@ export const useMinimalConsumptionFields = (formId: string, initialValues) => {
     if (formValues.minimal_consumption_logic === 'linear') {
       if (
         formValues.end_date &&
-        parseDate(formValues.end_date) < getStartOfNextMonth()
+        parseDate(formValues.end_date) < getStartOfNextMonth() &&
+        formValues.end_date !== initialValues?.end_date
       ) {
         dispatch(change(formId, 'end_date', null));
       }
