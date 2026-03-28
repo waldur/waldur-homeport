@@ -6,6 +6,8 @@ import { useDispatch } from 'react-redux';
 import {
   Checklist,
   checklistsAdminQuestionOptionsCreate,
+  checklistsAdminQuestionOptionsDestroy,
+  checklistsAdminQuestionOptionsPartialUpdate,
   checklistsAdminQuestionsCreate,
   checklistsAdminQuestionsUpdate,
   onboardingQuestionMetadataCreate,
@@ -82,21 +84,78 @@ export const QuestionFormModal: FC<QuestionFormModalProps> = ({
         }).then((res) => res.data);
       }
 
-      // Handle options for select questions (only for new questions for now)
-      if (
-        !isEdit &&
-        ['single_select', 'multi_select'].includes(formData.question_type) &&
-        formData.options?.length
-      ) {
-        for (let i = 0; i < formData.options.length; i++) {
-          await checklistsAdminQuestionOptionsCreate({
-            body: {
-              question: savedQuestion.url,
-              label: formData.options[i],
-              order: i,
-            },
-          });
+      const isSelectType = ['single_select', 'multi_select'].includes(
+        formData.question_type,
+      );
+
+      if (isSelectType) {
+        const nextOptions = (formData.options || []).map((label, order) => ({
+          label,
+          order,
+        }));
+        const previousOptions = [...(question?.question_options || [])].sort(
+          (a, b) => a.order - b.order,
+        );
+
+        const optionsCount = previousOptions.length;
+        const optionsToCreate = nextOptions.slice(optionsCount);
+        const optionsToUpdate = nextOptions.filter((opt, index) => {
+          const previous = previousOptions[index];
+          if (!previous) {
+            return false;
+          }
+          return previous.label !== opt.label || previous.order !== opt.order;
+        });
+        const optionsToDelete = previousOptions.slice(nextOptions.length);
+
+        const optionRequests = [];
+
+        for (const opt of optionsToCreate) {
+          optionRequests.push(
+            checklistsAdminQuestionOptionsCreate({
+              body: {
+                question: savedQuestion.url,
+                label: opt.label,
+                order: opt.order,
+              },
+            }),
+          );
         }
+
+        for (const opt of optionsToUpdate) {
+          const previous = previousOptions.find(
+            (item) => item.order === opt.order,
+          );
+          if (!previous) {
+            continue;
+          }
+          optionRequests.push(
+            checklistsAdminQuestionOptionsPartialUpdate({
+              path: { uuid: previous.uuid },
+              body: {
+                label: opt.label,
+                order: opt.order,
+              },
+            }),
+          );
+        }
+
+        for (const opt of optionsToDelete) {
+          optionRequests.push(
+            checklistsAdminQuestionOptionsDestroy({
+              path: { uuid: opt.uuid },
+            }),
+          );
+        }
+
+        await Promise.all(optionRequests);
+      } else if (question?.question_options?.length) {
+        // If question type changed from select to another type, remove stale options.
+        await Promise.all(
+          question.question_options.map((opt) =>
+            checklistsAdminQuestionOptionsDestroy({ path: { uuid: opt.uuid } }),
+          ),
+        );
       }
 
       // Create or update metadata

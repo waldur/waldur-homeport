@@ -101,6 +101,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
               required: question.required || false,
               order: question.order || 0,
               options: question.question_options?.map((opt) => opt.label) || [],
+              question_options: question.question_options || [],
               maps_to_customer_field: metadata[0]?.maps_to_customer_field || '',
               intent_field: metadata[0]?.intent_field || '',
               metadata_uuid: metadata[0]?.uuid,

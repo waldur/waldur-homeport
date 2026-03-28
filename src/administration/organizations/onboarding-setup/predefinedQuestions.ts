@@ -13,6 +13,11 @@ export interface PredefinedQuestion {
   maps_to_customer_field?: string;
   intent_field?: string;
   metadata_uuid?: string; // UUID of the onboarding metadata (for updates)
+  question_options?: Array<{
+    uuid: string;
+    label: string;
+    order: number;
+  }>;
 }
 
 export const CUSTOMER_CHECKLIST_QUESTIONS: PredefinedQuestion[] = [
