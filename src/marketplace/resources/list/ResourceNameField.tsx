@@ -3,6 +3,8 @@ import { Resource } from 'waldur-js-client';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 
+import { ResourceFlags } from '../details/ResourceFlags';
+
 import { PublicResourceLink } from './PublicResourceLink';
 
 interface ResourceNameFieldProps {
@@ -13,12 +15,13 @@ export const ResourceNameField: FunctionComponent<ResourceNameFieldProps> = ({
   row,
 }) => {
   return (
-    <div className="d-flex align-items-center gap-1">
+    <div className="d-flex align-items-center gap-1 flex-wrap">
       <PublicResourceLink row={row} />
       <CopyToClipboardButton
         value={row.name}
-        className="ms-2 text-hover-primary cursor-pointer d-inline-block"
+        className="text-hover-primary cursor-pointer d-inline-block"
       />
+      <ResourceFlags resource={row} />
     </div>
   );
 };

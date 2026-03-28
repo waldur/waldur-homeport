@@ -45,6 +45,9 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'description', // EditAction
     'resource_type', // EditAction, TerminateAction, UnlinkActionItem, Mass-actions
     'resource_uuid', // Mass-actions
+    'paused', // ResourceFlags inline badge
+    'downscaled', // ResourceFlags inline badge
+    'restrict_member_access', // ResourceFlags inline badge
   ].filter(Boolean);
 
 export const getResourceAllListColumns = (
