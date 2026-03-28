@@ -84,6 +84,20 @@ export const SettingsDescription = [
         type: 'string',
       },
       {
+        key: 'MARKETPLACE_LAYOUT_MODE',
+        description: translate('Default marketplace layout mode.'),
+        default: 'classic',
+        type: 'choice_field',
+        options: [{ value: 'classic', label: 'Classic' }, { value: 'sidebar', label: 'Sidebar' }, { value: 'carousel', label: 'Carousel' }],
+      },
+      {
+        key: 'MARKETPLACE_CARD_STYLE',
+        description: translate('Default marketplace offering card style.'),
+        default: 'detailed',
+        type: 'choice_field',
+        options: [{ value: 'compact', label: 'Compact' }, { value: 'detailed', label: 'Detailed' }, { value: 'list', label: 'List' }, { value: 'minimal', label: 'Minimal' }],
+      },
+      {
         key: 'COUNTRIES',
         description: translate('It is used in organization creation dialog in order to limit country choices to predefined set.'),
         default: ['AL', 'AT', 'BA', 'BE', 'BG', 'CH', 'CY', 'CZ', 'DE', 'DK', 'EE', 'ES', 'EU', 'FI', 'FR', 'GB', 'GE', 'GR', 'HR', 'HU', 'IE', 'IS', 'IT', 'LT', 'LU', 'LV', 'MC', 'MK', 'MT', 'NL', 'NO', 'PL', 'PT', 'RO', 'RS', 'SE', 'SI', 'SK', 'UA'],
