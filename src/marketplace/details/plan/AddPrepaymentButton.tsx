@@ -4,7 +4,11 @@ import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { change } from 'redux-form';
 
-import { calculateMonthsDifference, formatDate } from '@waldur/core/dateUtils';
+import {
+  calculateMonthsDifference,
+  formatDate,
+  formatISODate,
+} from '@waldur/core/dateUtils';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { orderProjectSelector } from '@waldur/marketplace/deploy/selectors';
@@ -50,16 +54,18 @@ export const AddPrepaymentButton = ({
     dispatch(change(ORDER_FORM_ID, `attributes.end_date`, null));
   };
 
+  const effectiveStartDate = startDate || formatISODate(DateTime.now());
+
   const monthsDuration = useMemo(() => {
     if (endDate) {
-      return calculateMonthsDifference(startDate, endDate);
+      return calculateMonthsDifference(effectiveStartDate, endDate);
     }
     return null;
-  }, [startDate, endDate]);
+  }, [effectiveStartDate, endDate]);
 
   const dateRangeDisplay = useMemo(() => {
     if (!endDate) return '';
-    const start = DateTime.fromISO(startDate);
+    const start = DateTime.fromISO(effectiveStartDate);
     const end = DateTime.fromISO(endDate);
     if (start.year === end.year) {
       // Same year: format start date without year for brevity
@@ -74,9 +80,9 @@ export const AddPrepaymentButton = ({
       return `${formattedStart} - ${formattedEnd}`;
     } else {
       // Different years: show full dates for clarity
-      return `${formatDate(startDate)} - ${formatDate(endDate)}`;
+      return `${formatDate(effectiveStartDate)} - ${formatDate(endDate)}`;
     }
-  }, [startDate, endDate]);
+  }, [effectiveStartDate, endDate]);
 
   if (endDate) {
     return (
