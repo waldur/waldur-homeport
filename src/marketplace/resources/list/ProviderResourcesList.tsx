@@ -16,6 +16,7 @@ import { BackendIdTip } from '@waldur/core/Tooltip';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
+import { ResourceFlags } from '@waldur/marketplace/resources/details/ResourceFlags';
 import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import { Category, Offering } from '@waldur/marketplace/types';
@@ -67,7 +68,7 @@ const ResourceField = ({ row }) => {
     );
   };
   return (
-    <>
+    <div className="d-flex align-items-center gap-1">
       <ActionButton
         variant="flush"
         className="text-anchor fw-normal"
@@ -76,7 +77,8 @@ const ResourceField = ({ row }) => {
       />
       <BackendIdTip backendId={row.backend_id} />
       <EndDateTooltip end_date={row.end_date} />
-    </>
+      <ResourceFlags resource={row} />
+    </div>
   );
 };
 
@@ -334,6 +336,9 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'slug', // SetSlugAction
     'end_date', // EditResourceEndDateByProviderAction, EditResourceEndDateByStaffAction
     'resource_type', // TerminateAction
+    'paused', // ResourceFlags inline badge
+    'downscaled', // ResourceFlags inline badge
+    'restrict_member_access', // ResourceFlags inline badge
   ];
 
 export const ProviderResourcesList: React.ComponentType<any> = () => {

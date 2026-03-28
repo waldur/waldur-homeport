@@ -16,6 +16,7 @@ interface PolicyAttribution {
   action?: string;
   scope_name?: string;
   timestamp?: string;
+  limit_cost?: string;
 }
 
 const getAttribution = (
@@ -30,10 +31,25 @@ const getAttribution = (
   return pa?.[field] || null;
 };
 
+const POLICY_LABELS: Record<string, string> = {
+  ProjectEstimatedCostPolicy: 'Project cost policy',
+  CustomerEstimatedCostPolicy: 'Organization cost policy',
+  OfferingEstimatedCostPolicy: 'Offering cost policy',
+  OfferingUsagePolicy: 'Offering usage policy',
+  SlurmPeriodicUsagePolicy: 'SLURM usage policy',
+};
+
 const formatAttribution = (attr: PolicyAttribution): string => {
-  const policyLabel =
-    attr.scope_name || attr.policy_class || translate('policy');
-  const parts = [translate('Set by'), policyLabel];
+  const policyType = attr.policy_class
+    ? POLICY_LABELS[attr.policy_class] || attr.policy_class
+    : translate('policy');
+  const parts = [policyType];
+  if (attr.scope_name) {
+    parts.push(`(${attr.scope_name})`);
+  }
+  if (attr.limit_cost) {
+    parts.push(`— ${translate('limit')}: ${attr.limit_cost}`);
+  }
   if (attr.timestamp) {
     parts.push(translate('on'), formatMediumDateTime(attr.timestamp));
   }
@@ -63,18 +79,22 @@ const FlagBadge = ({
     </Badge>
   );
 
-  if (attribution) {
-    return (
-      <Tip id={tipId} label={formatAttribution(attribution)}>
-        {badge}
-      </Tip>
-    );
-  }
+  const tooltipLabel = attribution
+    ? formatAttribution(attribution)
+    : translate('Manually set');
 
-  return badge;
+  return (
+    <Tip id={tipId} label={tooltipLabel}>
+      {badge}
+    </Tip>
+  );
 };
 
 export const ResourceFlags = ({ resource }: { resource: Resource }) => {
+  const pluginOptions = resource.offering_plugin_options as any;
+  const supportsPausing = pluginOptions?.supports_pausing === true;
+  const supportsDownscaling = pluginOptions?.supports_downscaling === true;
+
   return (
     <>
       {resource.restrict_member_access && (
@@ -87,7 +107,7 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
           tipId="flag-restrict-member"
         />
       )}
-      {resource.paused && (
+      {supportsPausing && resource.paused && (
         <FlagBadge
           resource={resource}
           field="paused"
@@ -97,7 +117,7 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
           tipId="flag-paused"
         />
       )}
-      {resource.downscaled && (
+      {supportsDownscaling && resource.downscaled && (
         <FlagBadge
           resource={resource}
           field="downscaled"
