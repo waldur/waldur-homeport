@@ -35,6 +35,7 @@ import { setCurrentResource } from '@waldur/workspace/actions';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { fetchData, getResourceTabs } from './fetchData';
+import { PolicyAttributionBanner } from './PolicyAttributionBanner';
 import { ProfileCompletenessWarningBanner } from './ProfileCompletenessWarningBanner';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
@@ -303,9 +304,10 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
           <ServiceProviderCommentWarningBar offering={data.offering} />
         )}
         {messagingBar}
+        {resource && <PolicyAttributionBanner resource={resource} />}
       </>
     ),
-    [data, isLoading, messagingBar],
+    [data, isLoading, messagingBar, resource],
   );
 
   const openTeamModal = useCallback(() => {

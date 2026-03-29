@@ -10,7 +10,7 @@ import { formatMediumDateTime } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
-interface PolicyAttribution {
+export interface PolicyAttribution {
   policy_class?: string;
   policy_uuid?: string;
   action?: string;
@@ -19,7 +19,7 @@ interface PolicyAttribution {
   limit_cost?: string;
 }
 
-const getAttribution = (
+export const getAttribution = (
   resource: Resource,
   field: string,
 ): PolicyAttribution | null => {
@@ -31,7 +31,7 @@ const getAttribution = (
   return pa?.[field] || null;
 };
 
-const POLICY_LABELS: Record<string, string> = {
+export const POLICY_LABELS: Record<string, string> = {
   ProjectEstimatedCostPolicy: 'Project cost policy',
   CustomerEstimatedCostPolicy: 'Organization cost policy',
   OfferingEstimatedCostPolicy: 'Offering cost policy',
