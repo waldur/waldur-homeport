@@ -31,6 +31,7 @@ export const CreditsEnum = {
   allowed_offerings_have_been_updated: 'allowed_offerings_have_been_updated',
   automatic_credit_adjustment: 'automatic_credit_adjustment',
   create_of_credit_by_staff: 'create_of_credit_by_staff',
+  create_of_project_credit_by_staff: 'create_of_project_credit_by_staff',
   reduction_of_customer_credit: 'reduction_of_customer_credit',
   reduction_of_customer_credit_due_to_minimal_consumption: 'reduction_of_customer_credit_due_to_minimal_consumption',
   reduction_of_customer_expected_consumption: 'reduction_of_customer_expected_consumption',
@@ -41,12 +42,14 @@ export const CreditsEnum = {
   roll_back_project_credit: 'roll_back_project_credit',
   set_to_zero_overdue_credit: 'set_to_zero_overdue_credit',
   update_of_credit_by_staff: 'update_of_credit_by_staff',
+  update_of_project_credit_by_staff: 'update_of_project_credit_by_staff',
 };
 
 export const CustomersEnum = {
   allowed_offerings_have_been_updated: 'allowed_offerings_have_been_updated',
   automatic_credit_adjustment: 'automatic_credit_adjustment',
   create_of_credit_by_staff: 'create_of_credit_by_staff',
+  create_of_project_credit_by_staff: 'create_of_project_credit_by_staff',
   customer_creation_succeeded: 'customer_creation_succeeded',
   customer_deletion_succeeded: 'customer_deletion_succeeded',
   customer_permission_review_closed: 'customer_permission_review_closed',
@@ -64,12 +67,14 @@ export const CustomersEnum = {
   roll_back_project_credit: 'roll_back_project_credit',
   set_to_zero_overdue_credit: 'set_to_zero_overdue_credit',
   update_of_credit_by_staff: 'update_of_credit_by_staff',
+  update_of_project_credit_by_staff: 'update_of_project_credit_by_staff',
 };
 
 export const InvoicesEnum = {
   allowed_offerings_have_been_updated: 'allowed_offerings_have_been_updated',
   automatic_credit_adjustment: 'automatic_credit_adjustment',
   create_of_credit_by_staff: 'create_of_credit_by_staff',
+  create_of_project_credit_by_staff: 'create_of_project_credit_by_staff',
   invoice_canceled: 'invoice_canceled',
   invoice_created: 'invoice_created',
   invoice_item_created: 'invoice_item_created',
@@ -88,6 +93,7 @@ export const InvoicesEnum = {
   roll_back_project_credit: 'roll_back_project_credit',
   set_to_zero_overdue_credit: 'set_to_zero_overdue_credit',
   update_of_credit_by_staff: 'update_of_credit_by_staff',
+  update_of_project_credit_by_staff: 'update_of_project_credit_by_staff',
 };
 
 export const Offering_accountingEnum = {
