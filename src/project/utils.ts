@@ -132,6 +132,7 @@ export function useProjectCreditChart(project: Project) {
 
   return {
     credit: creditData,
+    costPolicies: costData?.costPolicies || [],
     isLoading: isCostLoading || isCreditLoading,
     error: costError || creditError,
     refetch: () => {
