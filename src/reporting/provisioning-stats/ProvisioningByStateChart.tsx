@@ -31,7 +31,7 @@ const STATE_LABELS: { [key in OrderState]: string } = {
   executing: translate('Executing'),
 };
 
-export const getByStateExportData = (byState: {
+const getByStateExportData = (byState: {
   [key: string]: number;
 }): ExportData => ({
   fields: [translate('State'), translate('Count')],

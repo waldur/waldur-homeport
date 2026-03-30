@@ -5,7 +5,6 @@ import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTitle } from '@waldur/navigation/title';
 
 import { ReportingTitle } from '../ReportingTitle';
 

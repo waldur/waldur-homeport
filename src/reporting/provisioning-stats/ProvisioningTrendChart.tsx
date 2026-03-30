@@ -11,7 +11,7 @@ interface ProvisioningTrendChartProps {
   daily: DailyOrderStats[];
 }
 
-export const getTrendExportData = (daily: DailyOrderStats[]): ExportData => ({
+const getTrendExportData = (daily: DailyOrderStats[]): ExportData => ({
   fields: [
     translate('Date'),
     translate('Total'),
