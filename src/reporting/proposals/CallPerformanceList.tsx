@@ -10,10 +10,8 @@ import { Column } from '@waldur/table/types';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import {
-  calculateCallPerformanceSummary,
-  generateCallPerformanceData,
-} from './mockData';
+import { useCallPerformanceStats } from './hooks';
+import { calculateCallPerformanceSummary } from './mockData';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
 import { StatusBreakdown } from './StatusBreakdown';
 import { CallPerformanceData, CallState } from './types';
@@ -132,12 +130,16 @@ const CallPerformanceExpandableRow: FC<{ row: CallPerformanceData }> = ({
 };
 
 export const CallPerformanceList: FC = () => {
-  const data = useMemo(() => generateCallPerformanceData(), []);
-  const summary = useMemo(() => calculateCallPerformanceSummary(data), [data]);
+  const { data, isLoading, error, refetch } = useCallPerformanceStats();
+  const summary = useMemo(
+    () => calculateCallPerformanceSummary(data || []),
+    [data],
+  );
 
   const [query, setQuery] = useState('');
 
   const filteredData = useMemo(() => {
+    if (!data) return [];
     if (!query.trim()) return data;
     const searchLower = query.toLowerCase().trim();
     return data.filter(
@@ -166,9 +168,9 @@ export const CallPerformanceList: FC = () => {
       <Table<CallPerformanceData>
         columns={columns}
         rows={filteredData}
-        fetch={noop}
-        loading={false}
-        error={null}
+        fetch={() => refetch()}
+        loading={isLoading}
+        error={error}
         activeColumns={{}}
         columnPositions={[]}
         resetSelection={noop}

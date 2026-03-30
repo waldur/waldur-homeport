@@ -107,19 +107,6 @@ export interface AnalyticsCapability {
   ) => SimulationResult[];
   /** Initial dimension for Why-So drill-down */
   initialDimension?: string;
-  /** Data source indicator for What-If mode */
-  whatIfDataSource?: DataSourceType;
-  /** Description of What-If data source */
-  whatIfDataSourceDescription?: string;
   /** Custom label for the 'Value' column in Why-So mode */
   whySoValueLabel?: string | ((total: number) => string);
-  /** Data source indicator for Why-So mode */
-  whySoDataSource?: DataSourceType;
-  /** Description of Why-So data source */
-  whySoDataSourceDescription?: string;
 }
-
-/**
- * Indicator for data source type
- */
-export type DataSourceType = 'real' | 'mocked' | 'calculated';

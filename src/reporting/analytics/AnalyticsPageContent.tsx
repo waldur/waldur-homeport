@@ -70,8 +70,6 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
               params={capability.simulationParams}
               calculate={capability.calculateSimulation}
               data={data}
-              dataSource={capability.whatIfDataSource}
-              dataSourceDescription={capability.whatIfDataSourceDescription}
             />
           )}
 
@@ -81,8 +79,6 @@ export const AnalyticsPageContent: FC<AnalyticsPageContentProps> = ({
             <WhySoDrillDown
               initialData={drillDownData}
               initialDimension={capability.initialDimension}
-              dataSource={capability.whySoDataSource}
-              dataSourceDescription={capability.whySoDataSourceDescription}
               valueLabel={capability.whySoValueLabel}
               onDrillDown={async (item, currentDimension) => {
                 const path = capability.drillDownPaths?.find(

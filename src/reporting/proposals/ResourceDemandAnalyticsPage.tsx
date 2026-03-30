@@ -1,7 +1,11 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+import { getLabel } from '@waldur/marketplace/common/registry';
 
 import {
   AnalyticsMode,
@@ -14,7 +18,7 @@ import {
 } from '../analytics';
 import { ReportingTitle } from '../ReportingTitle';
 
-import { generateResourceDemandData } from './mockData';
+import { useResourceDemandStats } from './hooks';
 import { ResourceDemandData } from './types';
 
 /**
@@ -86,41 +90,8 @@ function calculateResourceDemandSimulation(
   const totalPending = resources.reduce((sum, r) => sum + r.pending_count, 0);
   const currentApprovalRate = totalApproved / (totalApproved + totalPending);
 
-  // Sum key resource limits
-  let totalCpuRequested = 0;
-  let totalStorageRequested = 0;
-  let totalCpuApproved = 0;
-  let totalStorageApproved = 0;
-
-  resources.forEach((r) => {
-    Object.entries(r.total_requested_limits).forEach(([key, value]) => {
-      if (key.includes('cpu') || key.includes('vcpu')) {
-        totalCpuRequested += value;
-      }
-      if (key.includes('storage') || key.includes('gb') || key.includes('tb')) {
-        totalStorageRequested += value;
-      }
-    });
-    Object.entries(r.total_approved_limits).forEach(([key, value]) => {
-      if (key.includes('cpu') || key.includes('vcpu')) {
-        totalCpuApproved += value;
-      }
-      if (key.includes('storage') || key.includes('gb') || key.includes('tb')) {
-        totalStorageApproved += value;
-      }
-    });
-  });
-
   // Projected values
   const projectedRequests = Math.round(totalRequests * (1 + demandGrowthRate));
-  const projectedDemandCpu = Math.round(
-    totalCpuRequested * (1 + demandGrowthRate),
-  );
-  const projectedDemandStorage = Math.round(
-    totalStorageRequested * (1 + demandGrowthRate),
-  );
-
-  // Projected approvals based on target rate and capacity
   const maxApprovable = Math.round(
     (totalApproved + totalPending) * capacityMultiplier,
   );
@@ -130,19 +101,11 @@ function calculateResourceDemandSimulation(
   );
   const actualProjectedApprovalRate = projectedApproved / projectedRequests;
 
-  // Resource fulfillment
-  const projectedCpuApproved = Math.round(
-    totalCpuApproved * capacityMultiplier * (1 + demandGrowthRate * 0.5),
-  );
-  const projectedStorageApproved = Math.round(
-    totalStorageApproved * capacityMultiplier * (1 + demandGrowthRate * 0.5),
-  );
-
   // Unmet demand
   const currentUnmet = totalRequests - totalApproved;
   const projectedUnmet = projectedRequests - projectedApproved;
 
-  return [
+  const results = [
     createSimulationResult(
       'total-requests',
       translate('Total requests'),
@@ -168,21 +131,50 @@ function calculateResourceDemandSimulation(
       currentUnmet,
       projectedUnmet,
     ),
-    createSimulationResult(
-      'cpu-fulfilled',
-      translate('Compute fulfilled'),
-      Math.round((totalCpuApproved / totalCpuRequested) * 100),
-      Math.round((projectedCpuApproved / projectedDemandCpu) * 100),
-      '%',
-    ),
-    createSimulationResult(
-      'storage-fulfilled',
-      translate('Storage fulfilled'),
-      Math.round((totalStorageApproved / totalStorageRequested) * 100),
-      Math.round((projectedStorageApproved / projectedDemandStorage) * 100),
-      '%',
-    ),
   ];
+
+  // Dynamic resource fulfillment
+  const allResourceKeys = new Set<string>();
+  resources.forEach((r) => {
+    Object.keys(r.total_requested_limits).forEach((key) =>
+      allResourceKeys.add(key),
+    );
+  });
+
+  const sortedKeys = Array.from(allResourceKeys).sort();
+
+  sortedKeys.forEach((key) => {
+    let totalRequestedKey = 0;
+    let totalApprovedKey = 0;
+
+    resources.forEach((r) => {
+      totalRequestedKey += r.total_requested_limits[key] || 0;
+      totalApprovedKey += r.total_approved_limits[key] || 0;
+    });
+
+    if (totalRequestedKey > 0) {
+      const projectedRequestedKey = Math.round(
+        totalRequestedKey * (1 + demandGrowthRate),
+      );
+      const projectedApprovedKey = Math.round(
+        totalApprovedKey * capacityMultiplier * (1 + demandGrowthRate * 0.5),
+      );
+
+      results.push(
+        createSimulationResult(
+          `${key}-fulfilled`,
+          translate('{resource} fulfilled', {
+            resource: titleCase(key.replace(/_/g, ' ')),
+          }),
+          Math.round((totalApprovedKey / totalRequestedKey) * 100),
+          Math.round((projectedApprovedKey / projectedRequestedKey) * 100),
+          '%',
+        ),
+      );
+    }
+  });
+
+  return results;
 }
 
 /**
@@ -210,7 +202,7 @@ function transformResourcesToDrillDownByType(
   return Array.from(byType.entries())
     .map(([type, data]) => ({
       id: type,
-      label: type,
+      label: getLabel(type),
       value: data.requests,
       percentage: totalRequests > 0 ? (data.requests / totalRequests) * 100 : 0,
       canDrillDown: true,
@@ -278,14 +270,6 @@ function getResourceDemandAnalyticsCapability(
     calculateSimulation: calculateResourceDemandSimulation,
     initialDimension: translate('Offering type'),
     drillDownPaths,
-    whatIfDataSource: 'mocked',
-    whatIfDataSourceDescription: translate(
-      'Projections simulate demand growth and capacity expansion scenarios.',
-    ),
-    whySoDataSource: 'mocked',
-    whySoDataSourceDescription: translate(
-      'Drill-down shows resource requests grouped by offering type and provider.',
-    ),
   };
 }
 
@@ -312,7 +296,12 @@ export const ResourceDemandAnalyticsPage: FC = () => {
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
 
-  const resources = useMemo(() => generateResourceDemandData(), []);
+  const { data, isLoading, error, refetch } = useResourceDemandStats();
+  const resources = data || [];
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <LoadingErred loadData={refetch} />;
+
   const capability = useMemo(
     () => getResourceDemandAnalyticsCapability(resources),
     [resources],
@@ -322,14 +311,17 @@ export const ResourceDemandAnalyticsPage: FC = () => {
     [resources],
   );
 
+  const breadcrumbs = useMemo(
+    () => [{ key: 'analytics', text: translate('Analytics'), active: true }],
+    [],
+  );
+
   return (
     <>
       <ReportingTitle
         reportKey="reporting-resource-demand-analytics"
         backState="reporting-resource-demand"
-        additionalBreadcrumbs={[
-          { key: 'analytics', text: translate('Analytics'), active: true },
-        ]}
+        additionalBreadcrumbs={breadcrumbs}
       />
 
       <AnalyticsPageContent

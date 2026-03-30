@@ -9,10 +9,8 @@ import { Column } from '@waldur/table/types';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import {
-  calculateReviewProgressSummary,
-  generateReviewProgressData,
-} from './mockData';
+import { useReviewProgressStats } from './hooks';
+import { calculateReviewProgressSummary } from './mockData';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
 import { StatusBreakdown } from './StatusBreakdown';
 import { ReviewProgressData } from './types';
@@ -112,12 +110,16 @@ const columns: Column<ReviewProgressData>[] = [
 ];
 
 export const ReviewProgressList: FC = () => {
-  const data = useMemo(() => generateReviewProgressData(), []);
-  const summary = useMemo(() => calculateReviewProgressSummary(data), [data]);
+  const { data, isLoading, error, refetch } = useReviewProgressStats();
+  const summary = useMemo(
+    () => calculateReviewProgressSummary(data || []),
+    [data],
+  );
 
   const [query, setQuery] = useState('');
 
   const filteredData = useMemo(() => {
+    if (!data) return [];
     if (!query.trim()) return data;
     const searchLower = query.toLowerCase().trim();
     return data.filter(
@@ -146,9 +148,9 @@ export const ReviewProgressList: FC = () => {
       <Table<ReviewProgressData>
         columns={columns}
         rows={filteredData}
-        fetch={noop}
-        loading={false}
-        error={null}
+        fetch={() => refetch()}
+        loading={isLoading}
+        error={error}
         activeColumns={{}}
         columnPositions={[]}
         resetSelection={noop}

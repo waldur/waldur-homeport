@@ -4,12 +4,7 @@ import { ENV } from '@waldur/core/config';
 import { formatUsageValue } from '@waldur/core/formatNumber';
 import { hexToRgb } from '@waldur/core/generateColors';
 import { CHART_LINE_COLOR } from '@waldur/dashboard/constants';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-
-export const isMockDataEnabled = () =>
-  isFeatureVisible(MarketplaceFeatures.show_experimental_ui_components);
 
 export const isReportingScreenEnabled = (screen: string) => {
   const enabledScreens = ENV.plugins.WALDUR_CORE?.ENABLED_REPORTING_SCREENS;

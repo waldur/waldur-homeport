@@ -1,6 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ProposalBadge } from '@waldur/proposals/proposal/ProposalBadge';
 
@@ -15,7 +17,7 @@ import {
 } from '../analytics';
 import { ReportingTitle } from '../ReportingTitle';
 
-import { generateCallPerformanceData } from './mockData';
+import { useCallPerformanceStats } from './hooks';
 import { CallPerformanceData } from './types';
 
 /**
@@ -251,14 +253,6 @@ function getCallPerformanceAnalyticsCapability(
     calculateSimulation: calculateCallPerformanceSimulation,
     initialDimension: translate('Call'),
     drillDownPaths,
-    whatIfDataSource: 'mocked',
-    whatIfDataSourceDescription: translate(
-      'Projections are simulated based on historical acceptance patterns.',
-    ),
-    whySoDataSource: 'mocked',
-    whySoDataSourceDescription: translate(
-      'Drill-down shows proposal distribution by state within each call.',
-    ),
     whySoValueLabel: (total) => translate('Proposals ({total})', { total }),
   };
 }
@@ -286,7 +280,9 @@ export const CallPerformanceAnalyticsPage: FC = () => {
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
 
-  const calls = useMemo(() => generateCallPerformanceData(), []);
+  const { data, isLoading, error, refetch } = useCallPerformanceStats();
+  const calls = data || [];
+
   const capability = useMemo(
     () => getCallPerformanceAnalyticsCapability(calls),
     [calls],
@@ -296,14 +292,20 @@ export const CallPerformanceAnalyticsPage: FC = () => {
     [calls],
   );
 
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <LoadingErred loadData={refetch} />;
+
+  const breadcrumbs = useMemo(
+    () => [{ key: 'analytics', text: translate('Analytics'), active: true }],
+    [],
+  );
+
   return (
     <>
       <ReportingTitle
         reportKey="reporting-call-performance-analytics"
         backState="reporting-call-performance"
-        additionalBreadcrumbs={[
-          { key: 'analytics', text: translate('Analytics'), active: true },
-        ]}
+        additionalBreadcrumbs={breadcrumbs}
       />
 
       <AnalyticsPageContent

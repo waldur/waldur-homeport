@@ -14,8 +14,7 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
-import { MockDataIndicator } from './MockDataIndicator';
-import { DataSourceType, DrillDownDataItem } from './types';
+import { DrillDownDataItem } from './types';
 
 interface WhySoDrillDownProps {
   /** Initial data at root level */
@@ -27,10 +26,6 @@ interface WhySoDrillDownProps {
     item: DrillDownDataItem,
     currentDimension: string,
   ) => Promise<{ data: DrillDownDataItem[]; dimension: string } | null>;
-  /** Data source indicator */
-  dataSource?: DataSourceType;
-  /** Description of data source */
-  dataSourceDescription?: string;
   /** Custom label for the 'Value' column */
   valueLabel?: string | ((total: number) => string);
   /** Title for the analysis */
@@ -343,19 +338,12 @@ export const WhySoDrillDown: FC<WhySoDrillDownProps> = ({
   initialData,
   initialDimension,
   onDrillDown,
-  dataSource = 'real',
-  dataSourceDescription,
   valueLabel: initialValueLabel,
 }) => {
   return (
     <div className="why-so-drill-down">
       {/* Header with data source */}
-      <div className="d-flex justify-content-between align-items-center mb-4">
-        <MockDataIndicator
-          source={dataSource}
-          description={dataSourceDescription}
-        />
-      </div>
+      <div className="d-flex justify-content-between align-items-center mb-4" />
 
       <div className="mb-4">
         <Card className="card-bordered overflow-hidden">

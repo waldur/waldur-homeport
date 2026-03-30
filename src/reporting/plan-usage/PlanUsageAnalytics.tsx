@@ -247,15 +247,6 @@ export function getCapacityAnalyticsCapability(
         },
       },
     ],
-    // Indicate real data sources
-    whatIfDataSource: 'real',
-    whatIfDataSourceDescription: translate(
-      'All data from Plan Usage Statistics API',
-    ),
-    whySoDataSource: 'real',
-    whySoDataSourceDescription: translate(
-      'Drill-down data from Plan Usage Statistics API',
-    ),
   };
 }
 
