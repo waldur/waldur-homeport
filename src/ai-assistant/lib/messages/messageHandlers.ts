@@ -1,4 +1,5 @@
 import { AppendMessage } from '@assistant-ui/react';
+import { chatThreadsCancel } from 'waldur-js-client';
 
 import {
   addPreviousBlocks,
@@ -256,7 +257,10 @@ export const createOnCancel = (deps: MessageHandlerDependencies) => {
     deps.abortThread(threadId);
     deps.setIsRunning(threadId, false);
 
-    // small no-op await to satisfy eslint require-await
-    await Promise.resolve();
+    // Notify the backend so the background worker stops processing.
+    const backendUuid = deps.getBackendThreadId(threadId);
+    if (backendUuid) {
+      await chatThreadsCancel({ path: { uuid: backendUuid } });
+    }
   };
 };
