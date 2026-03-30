@@ -27,6 +27,8 @@ const mandatoryFields = [
   'name', // Actions
   'customer_name', // DeleteAction
   'customer_uuid', // DeleteAction
+  'url', // ChangeEndDateAction
+  'end_date', // ChangeEndDateRequestDialog
 ];
 
 interface ProjectsListProps extends Partial<TableProps> {

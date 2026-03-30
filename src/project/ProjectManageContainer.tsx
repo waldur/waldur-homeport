@@ -33,6 +33,11 @@ const ProjectDelete = lazyComponent(() =>
     default: module.ProjectDelete,
   })),
 );
+const ProjectEndDateChangeRequests = lazyComponent(() =>
+  import('./manage/ProjectEndDateChangeRequests').then((module) => ({
+    default: module.ProjectEndDateChangeRequests,
+  })),
+);
 
 export const ProjectManageContainer = () => {
   const project = useSelector(getProject);
@@ -59,6 +64,11 @@ export const ProjectManageContainer = () => {
           key: 'credit',
           component: ProjectCredit,
           title: translate('Credit management'),
+        },
+        !project?.is_removed && {
+          key: 'end-date-change-requests',
+          component: ProjectEndDateChangeRequests,
+          title: translate('End date change requests'),
         },
         !project?.is_removed && {
           key: 'remove',
