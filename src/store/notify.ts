@@ -43,8 +43,8 @@ export const showRedirectMessage = (title, message) =>
     dismissible: true,
   });
 
-export const showErrorResponse = (response: Response, message?: string) => {
-  const details = format(response);
+export const showErrorResponse = (error: unknown, message?: string) => {
+  const details = format(error);
   const errorMessage = message ? `${message} ${details}` : details;
   return showError(errorMessage);
 };

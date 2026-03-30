@@ -340,7 +340,11 @@ export const ProjectsList = () => {
       initialModeResolver={initialModeResolver}
       gridFixedWidth={true}
       gridItem={({ row }) => (
-        <ProjectCard project={row} onClickDetails={() => onClickDetails(row)} />
+        <ProjectCard
+          project={row}
+          onClickDetails={() => onClickDetails(row)}
+          refetch={props.fetch}
+        />
       )}
       hoverShadow={{ grid: false }}
       hasQuery={true}

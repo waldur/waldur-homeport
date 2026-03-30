@@ -4,11 +4,17 @@ import { Project } from 'waldur-js-client';
 import { translate } from '@waldur/i18n';
 import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 
+import { ChangeEndDateAction } from './ChangeEndDateAction';
 import { DeleteAction } from './DeleteAction';
 import { MoveProjectAction } from './MoveProjectAction';
 import { ProjectEditAction } from './ProjectEditAction';
 
-const ActionsList = [MoveProjectAction, ProjectEditAction, DeleteAction];
+const ActionsList = [
+  MoveProjectAction,
+  ProjectEditAction,
+  ChangeEndDateAction,
+  DeleteAction,
+];
 
 interface ProjectsListActionsProps {
   project: Project;

@@ -28,6 +28,12 @@
     }
   }
 
+  &.text-start {
+    .tooltip-inner {
+      text-align: start;
+    }
+  }
+
   // Dark Theme
   &.tooltip-dark {
     @include tooltip-theme($dark, $dark-inverse, $dark);

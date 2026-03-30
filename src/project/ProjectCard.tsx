@@ -15,17 +15,20 @@ import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { ChangeEndDateCardButton } from './ChangeEndDateCardButton';
 import { ProjectLink } from './ProjectLink';
 import { canEditProject } from './utils';
 
 interface ProjectCardProps {
   project: Project;
   onClickDetails?(row): void;
+  refetch?: () => void;
 }
 
 export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
   project,
   onClickDetails,
+  refetch = () => {},
 }) => {
   const user = useSelector(getUser);
   const shouldConcealPrices =
@@ -75,12 +78,18 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
               }
               value={
                 <>
-                  {[
-                    project.start_date && formatDate(project.start_date),
-                    project.end_date && formatDate(project.end_date),
-                  ]
-                    .filter(Boolean)
-                    .join('-') || DASH_ESCAPE_CODE}
+                  <span className="d-inline-flex align-items-center flex-wrap gap-1">
+                    {[
+                      project.start_date && formatDate(project.start_date),
+                      project.end_date && formatDate(project.end_date),
+                    ]
+                      .filter(Boolean)
+                      .join('-') || DASH_ESCAPE_CODE}
+                    <ChangeEndDateCardButton
+                      project={project}
+                      refetch={refetch}
+                    />
+                  </span>
                   {project.grace_period_days > 0 && (
                     <Badge
                       variant="secondary"
