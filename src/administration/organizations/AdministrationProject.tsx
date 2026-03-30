@@ -23,6 +23,9 @@ export const AdministrationProject = () => {
     );
 
   return data ? (
-    <SettingsCard groupNames={[translate('Project')]} settingsSource={data} />
+    <SettingsCard
+      groupNames={[translate('Project'), translate('Project Digest')]}
+      settingsSource={data}
+    />
   ) : null;
 };
