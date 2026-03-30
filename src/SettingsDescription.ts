@@ -1355,6 +1355,12 @@ export const SettingsDescription = [
     description: translate('AI assistant settings'),
     items: [
       {
+        key: 'AI_ASSISTANT_NAME',
+        description: translate('Display name for the AI Assistant persona (e.g. \'Mari\', \'Waldur Assistant\').'),
+        default: 'Waldur Assistant',
+        type: 'string',
+      },
+      {
         key: 'AI_ASSISTANT_ENABLED',
         description: translate('Enable AI Assistant feature and calls to the inference service.'),
         default: false,
