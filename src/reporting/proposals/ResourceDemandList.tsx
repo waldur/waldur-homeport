@@ -5,14 +5,14 @@ import { Badge } from '@waldur/core/Badge';
 import { SummaryWidget } from '@waldur/core/SummaryWidget';
 import { titleCase } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
-import { getOfferingTypes } from '@waldur/marketplace/common/registry';
+import { getLabel } from '@waldur/marketplace/common/registry';
 import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import { generateResourceDemandData } from './mockData';
+import { useResourceDemandStats } from './hooks';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
 import { ResourceDemandData } from './types';
 
@@ -92,9 +92,7 @@ const columns: Column<ResourceDemandData>[] = [
   },
   {
     title: translate('Type'),
-    render: ({ row }) =>
-      getOfferingTypes().find((op) => op.value === row.offering_type)?.label ||
-      row.offering_type,
+    render: ({ row }) => getLabel(row.offering_type),
   },
   {
     title: translate('Proposals'),
@@ -107,23 +105,24 @@ const columns: Column<ResourceDemandData>[] = [
 ];
 
 export const ResourceDemandList: FC = () => {
-  const data = useMemo(() => generateResourceDemandData(), []);
+  const { data, isLoading, error, refetch } = useResourceDemandStats();
+  const rawData = data || [];
 
   const summary = useMemo(() => {
-    const totalRequests = data.reduce((sum, d) => sum + d.request_count, 0);
-    const totalApproved = data.reduce((sum, d) => sum + d.approved_count, 0);
-    const totalPending = data.reduce((sum, d) => sum + d.pending_count, 0);
+    const totalRequests = rawData.reduce((sum, d) => sum + d.request_count, 0);
+    const totalApproved = rawData.reduce((sum, d) => sum + d.approved_count, 0);
+    const totalPending = rawData.reduce((sum, d) => sum + d.pending_count, 0);
     const totalDecisions = totalApproved + totalPending;
     const approvalRate =
       totalDecisions > 0 ? (totalApproved / totalDecisions) * 100 : 0;
 
     // Count unique offering types
-    const offeringTypes = new Set(data.map((d) => d.offering_type));
+    const offeringTypes = new Set(rawData.map((d) => d.offering_type));
 
     return [
       {
         label: translate('Offerings requested'),
-        value: data.length,
+        value: rawData.length,
       },
       {
         label: translate('Offering types'),
@@ -146,20 +145,20 @@ export const ResourceDemandList: FC = () => {
         value: `${Math.round(approvalRate * 10) / 10}%`,
       },
     ];
-  }, [data]);
+  }, [rawData]);
 
   const [query, setQuery] = useState('');
 
   const filteredData = useMemo(() => {
-    if (!query.trim()) return data;
+    if (!query.trim()) return rawData;
     const searchLower = query.toLowerCase().trim();
-    return data.filter(
+    return rawData.filter(
       (item) =>
         item.offering_name.toLowerCase().includes(searchLower) ||
         item.provider_name.toLowerCase().includes(searchLower) ||
         item.offering_type.toLowerCase().includes(searchLower),
     );
-  }, [data, query]);
+  }, [rawData, query]);
 
   const noop = useCallback(() => {}, []);
 
@@ -180,9 +179,9 @@ export const ResourceDemandList: FC = () => {
       <Table<ResourceDemandData>
         columns={columns}
         rows={filteredData}
-        fetch={noop}
-        loading={false}
-        error={null}
+        fetch={() => refetch()}
+        loading={isLoading}
+        error={error}
         activeColumns={{}}
         columnPositions={[]}
         resetSelection={noop}

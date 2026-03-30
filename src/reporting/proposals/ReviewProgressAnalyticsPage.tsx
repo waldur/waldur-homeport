@@ -1,6 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
+import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
 import {
@@ -14,7 +16,7 @@ import {
 } from '../analytics';
 import { ReportingTitle } from '../ReportingTitle';
 
-import { generateReviewProgressData } from './mockData';
+import { useReviewProgressStats } from './hooks';
 import { ReviewProgressData } from './types';
 
 /**
@@ -243,14 +245,6 @@ function getReviewProgressAnalyticsCapability(
     calculateSimulation: calculateReviewProgressSimulation,
     initialDimension: translate('Reviewer'),
     drillDownPaths,
-    whatIfDataSource: 'mocked',
-    whatIfDataSourceDescription: translate(
-      'Projections simulate workload distribution based on reviewer pool and deadline changes.',
-    ),
-    whySoDataSource: 'mocked',
-    whySoDataSourceDescription: translate(
-      'Drill-down shows review status breakdown for each reviewer.',
-    ),
   };
 }
 
@@ -277,7 +271,12 @@ export const ReviewProgressAnalyticsPage: FC = () => {
   const initialMode = (params.mode as AnalyticsMode) || 'what-if';
   const [activeMode, setActiveMode] = useState<AnalyticsMode>(initialMode);
 
-  const reviewers = useMemo(() => generateReviewProgressData(), []);
+  const { data, isLoading, error, refetch } = useReviewProgressStats();
+  const reviewers = data || [];
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <LoadingErred loadData={refetch} />;
+
   const capability = useMemo(
     () => getReviewProgressAnalyticsCapability(reviewers),
     [reviewers],
@@ -287,14 +286,17 @@ export const ReviewProgressAnalyticsPage: FC = () => {
     [reviewers],
   );
 
+  const breadcrumbs = useMemo(
+    () => [{ key: 'analytics', text: translate('Analytics'), active: true }],
+    [],
+  );
+
   return (
     <>
       <ReportingTitle
         reportKey="reporting-review-progress-analytics"
         backState="reporting-review-progress"
-        additionalBreadcrumbs={[
-          { key: 'analytics', text: translate('Analytics'), active: true },
-        ]}
+        additionalBreadcrumbs={breadcrumbs}
       />
 
       <AnalyticsPageContent

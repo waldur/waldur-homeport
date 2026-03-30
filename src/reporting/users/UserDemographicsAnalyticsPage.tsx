@@ -160,14 +160,6 @@ function getDemographicsAnalyticsCapability(): AnalyticsCapability {
     calculateSimulation: calculateDemographicsSimulation,
     initialDimension: translate('Authentication method'),
     drillDownPaths: [],
-    whatIfDataSource: 'calculated',
-    whatIfDataSourceDescription: translate(
-      'Projections are calculated from current user statistics.',
-    ),
-    whySoDataSource: 'real',
-    whySoDataSourceDescription: translate(
-      'Drill-down shows real data from API.',
-    ),
   };
 }
 
@@ -231,14 +223,17 @@ export const UserDemographicsAnalyticsPage: FC = () => {
     return <LoadingErred loadData={refetch} />;
   }
 
+  const breadcrumbs = useMemo(
+    () => [{ key: 'analytics', text: translate('Analytics'), active: true }],
+    [],
+  );
+
   return (
     <>
       <ReportingTitle
         reportKey="reporting-user-demographics-analytics"
         backState="reporting-user-demographics"
-        additionalBreadcrumbs={[
-          { key: 'analytics', text: translate('Analytics'), active: true },
-        ]}
+        additionalBreadcrumbs={breadcrumbs}
       />
 
       <AnalyticsPageContent

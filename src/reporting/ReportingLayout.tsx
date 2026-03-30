@@ -11,7 +11,7 @@ import { getCategoryConfig } from './constants';
 
 export const ReportingLayout: FC = () => {
   const router = useRouter();
-  const state = useSelector((s) => s);
+  const workspace = useSelector((s: any) => s.workspace);
 
   const tabs = useMemo(() => {
     const categories = getCategoryConfig();
@@ -23,7 +23,7 @@ export const ReportingLayout: FC = () => {
       if (category.feature && !isFeatureVisible(category.feature)) {
         return;
       }
-      if (category.permission && !category.permission(state)) {
+      if (category.permission && !category.permission({ workspace } as any)) {
         return;
       }
       if (category.reports.length > 0) {
@@ -35,7 +35,7 @@ export const ReportingLayout: FC = () => {
     });
 
     return result;
-  }, [state]);
+  }, [workspace]);
 
   return (
     <div className="container-fluid py-6">

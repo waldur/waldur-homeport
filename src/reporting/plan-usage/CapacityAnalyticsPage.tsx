@@ -73,6 +73,11 @@ export const CapacityAnalyticsPage: FC = () => {
     [planUsages],
   );
 
+  const breadcrumbs = useMemo(
+    () => [{ key: 'analytics', text: translate('Analytics'), active: true }],
+    [],
+  );
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -86,13 +91,7 @@ export const CapacityAnalyticsPage: FC = () => {
       <ReportingTitle
         reportKey="reporting-capacity-analytics"
         backState="reporting-capacity"
-        additionalBreadcrumbs={[
-          {
-            key: 'analytics',
-            text: translate('Analytics'),
-            active: true,
-          },
-        ]}
+        additionalBreadcrumbs={breadcrumbs}
       />
 
       <AnalyticsPageContent

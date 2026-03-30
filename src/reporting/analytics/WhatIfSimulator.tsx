@@ -15,8 +15,7 @@ import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
 
-import { MockDataIndicator } from './MockDataIndicator';
-import { DataSourceType, SimulationParam, SimulationResult } from './types';
+import { SimulationParam, SimulationResult } from './types';
 import { formatSimulationChange, useSimulation } from './useSimulation';
 
 import './range.css';
@@ -31,10 +30,6 @@ interface WhatIfSimulatorProps {
   ) => SimulationResult[];
   /** Data to use in calculations */
   data: unknown;
-  /** Data source indicator */
-  dataSource?: DataSourceType;
-  /** Description of data source */
-  dataSourceDescription?: string;
 }
 
 /**
@@ -214,8 +209,6 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
   params,
   calculate,
   data,
-  dataSource = 'real',
-  dataSourceDescription,
 }) => {
   const { paramValues, setParam, resetParams, results, hasChanges } =
     useSimulation({ params, calculate, data });
@@ -237,10 +230,6 @@ export const WhatIfSimulator: FC<WhatIfSimulatorProps> = ({
             </Tip>
           )}
         </h6>
-        <MockDataIndicator
-          source={dataSource}
-          description={dataSourceDescription}
-        />
       </div>
 
       <Row>

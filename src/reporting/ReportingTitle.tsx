@@ -12,6 +12,7 @@ interface ReportingTitleProps {
   backState?: string;
   backParams?: Record<string, any>;
   additionalBreadcrumbs?: IBreadcrumbItem[];
+  hideTitle?: boolean;
 }
 
 export const ReportingTitle: FC<ReportingTitleProps> = ({
@@ -20,6 +21,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
   backState,
   backParams,
   additionalBreadcrumbs,
+  hideTitle,
 }) => {
   const result = useReportDefinition(reportKey);
 
@@ -29,7 +31,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
     additionalItems: additionalBreadcrumbs,
   });
 
-  if (!result) {
+  if (!result || hideTitle) {
     return null;
   }
 

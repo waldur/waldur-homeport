@@ -175,14 +175,6 @@ function getQuotasAnalyticsCapability(): AnalyticsCapability {
     calculateSimulation: calculateQuotaSimulation,
     initialDimension: translate('Organization'),
     drillDownPaths: [],
-    whatIfDataSource: 'mocked',
-    whatIfDataSourceDescription: translate(
-      'Quota limits and growth projections are simulated. Real quota values from API.',
-    ),
-    whySoDataSource: 'mocked',
-    whySoDataSourceDescription: translate(
-      'Change indicators are simulated for demonstration. Backend support pending.',
-    ),
   };
 }
 
@@ -266,6 +258,11 @@ export const QuotasAnalyticsPage: FC = () => {
     [quotas],
   );
 
+  const breadcrumbs = useMemo(
+    () => [{ key: 'analytics', text: translate('Analytics'), active: true }],
+    [],
+  );
+
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -279,13 +276,7 @@ export const QuotasAnalyticsPage: FC = () => {
       <ReportingTitle
         reportKey="reporting-quotas-analytics"
         backState="reporting-quotas"
-        additionalBreadcrumbs={[
-          {
-            key: 'analytics',
-            text: translate('Analytics'),
-            active: true,
-          },
-        ]}
+        additionalBreadcrumbs={breadcrumbs}
       />
 
       <AnalyticsPageContent

@@ -23,7 +23,7 @@ export const GrowthPage: FC = () => {
 
   return (
     <>
-      <ReportingTitle reportKey="growth" />
+      <ReportingTitle reportKey="growth" hideTitle />
       <SummaryWidget
         stats={[
           {
