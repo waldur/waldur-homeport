@@ -1,5 +1,10 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { ArrowClockwiseIcon } from '@phosphor-icons/react';
+import {
+  ArchiveIcon,
+  ArrowClockwiseIcon,
+  PencilSimpleIcon,
+  ProhibitIcon,
+  TrashIcon,
+} from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -272,21 +277,25 @@ export const OfferingStateActions = ({
       <Dropdown.Toggle split variant="primary" className="px-4" />
       <Dropdown.Menu>
         {offering.state !== DRAFT && (
-          <Dropdown.Item onClick={() => setDraft()}>{draftTitle}</Dropdown.Item>
+          <ActionItem
+            title={draftTitle}
+            action={() => setDraft()}
+            iconNode={<PencilSimpleIcon weight="bold" />}
+          />
         )}
-
-        <Dropdown.Item onClick={() => archive()}>
-          {translate('Archive')}
-        </Dropdown.Item>
-
+        <ActionItem
+          title={translate('Archive')}
+          action={() => archive()}
+          iconNode={<ArchiveIcon weight="bold" />}
+        />
         {canManageOfferingLifecycle && (
-          <Dropdown.Item onClick={openChangeAvailabilityDialog}>
-            {translate('Make unavailable')}
-          </Dropdown.Item>
+          <ActionItem
+            title={translate('Make unavailable')}
+            action={openChangeAvailabilityDialog}
+            iconNode={<ProhibitIcon weight="bold" />}
+          />
         )}
-
-        {showDeleteAction && <Dropdown.Divider />}
-
+        {showDeleteAction && <div className="separator my-2" />}
         {showDeleteAction && (
           <ActionItem
             title={translate('Delete')}
