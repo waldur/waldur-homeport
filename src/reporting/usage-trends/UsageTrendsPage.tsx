@@ -46,7 +46,7 @@ export const UsageTrendsPage: FC = () => {
         <>
           <GrowthSummaryCards stats={growthStats} year={year} />
 
-          <Row className="g-6 mb-6">
+          <Row className="g-5 mb-5">
             <Col xs={12} lg={6}>
               <UsageTrendChart monthlyData={currentYearData} year={year} />
             </Col>

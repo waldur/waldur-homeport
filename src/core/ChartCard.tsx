@@ -4,7 +4,7 @@ import { Card, Dropdown } from 'react-bootstrap';
 
 import { translate } from '@waldur/i18n';
 import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
+import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
 import exportAs from '@waldur/table/exporters';
 import { ExportData } from '@waldur/table/exporters/types';
 
@@ -58,17 +58,19 @@ export const ChartCard: React.FC<ChartCardProps> = ({
         </Card.Title>
         <div className="card-toolbar d-flex gap-4">
           {actions}
-          <ActionDropdownButton
+          <ActionsDropdownComponent
+            labeled
             disabled={isEmpty}
-            className="dropdown-btn"
-            title={
+            align="end"
+            drop="down"
+            label={
               <>
-                <DownloadSimpleIcon size={18} weight="bold" className="me-2" />
+                <span className="svg-icon svg-icon-2 me-1">
+                  <DownloadSimpleIcon weight="bold" />
+                </span>
                 {translate('Export')}
               </>
             }
-            id={`chart-export-${title.replace(/\s+/g, '-').toLowerCase()}`}
-            align="end"
           >
             {showPNG && (
               <Dropdown.Item onClick={handleExportPNG}>
@@ -85,7 +87,7 @@ export const ChartCard: React.FC<ChartCardProps> = ({
                 </Dropdown.Item>
               </>
             )}
-          </ActionDropdownButton>
+          </ActionsDropdownComponent>
         </div>
       </Card.Header>
       <Card.Body className="pt-2">

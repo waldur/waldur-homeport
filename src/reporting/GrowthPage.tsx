@@ -46,7 +46,7 @@ export const GrowthPage: FC = () => {
         ]}
       />
 
-      <Row className="g-6 mb-6">
+      <Row className="g-5 mb-5">
         <Col lg={6}>
           <UsersOverTimeChart data={data?.userTrends} />
         </Col>
@@ -55,7 +55,7 @@ export const GrowthPage: FC = () => {
         </Col>
       </Row>
 
-      <Row className="g-6 mb-6">
+      <Row className="g-5 mb-5">
         <Col lg={6}>
           <ResourcesOverTimeChart data={data?.resourceTrends} />
         </Col>
@@ -64,7 +64,7 @@ export const GrowthPage: FC = () => {
         </Col>
       </Row>
 
-      <Row className="g-6 mb-6">
+      <Row className="g-5 mb-5">
         <Col lg={6}>
           <TopProvidersTable data={data?.topProviders} />
         </Col>

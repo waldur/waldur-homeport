@@ -87,7 +87,7 @@ export const ReportingReportList: FC<ReportingReportListProps> = ({
   }
 
   return (
-    <Row className="g-6">
+    <Row className="g-5">
       {filteredReports.map((report) => (
         <Col key={report.key} md={6} xl={4}>
           <Link state={report.state}>

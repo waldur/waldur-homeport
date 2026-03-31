@@ -81,7 +81,7 @@ export const UserAnalyticsPage: FC = () => {
       <ReportingTitle reportKey="user-analytics" />
       <div className="container-fluid pb-6">
         {(showNationality || showCountry) && (
-          <Row className="mb-6 g-6">
+          <Row className="mb-5 g-5">
             {showNationality && (
               <Col md={showCountry ? 6 : 12}>
                 <ChartCard
@@ -114,7 +114,7 @@ export const UserAnalyticsPage: FC = () => {
           </Row>
         )}
         {(showOrgType || showJobTitle) && (
-          <Row className="g-6">
+          <Row className="g-5">
             {showOrgType && (
               <Col md={showJobTitle ? 6 : 12}>
                 <ChartCard

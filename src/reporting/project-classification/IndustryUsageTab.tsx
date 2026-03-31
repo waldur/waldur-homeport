@@ -20,7 +20,7 @@ export const IndustryUsageTab: FC<IndustryUsageTabProps> = ({
   projectCounts,
 }) => {
   return (
-    <Row className="g-6 mb-6">
+    <Row className="g-5 mb-5">
       <Col xs={6}>
         <IndustryUsageChart projectCounts={projectCounts} />
       </Col>

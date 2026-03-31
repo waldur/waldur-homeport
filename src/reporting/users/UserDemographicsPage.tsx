@@ -42,7 +42,7 @@ export const UserDemographicsPage: FC = () => {
       <ReportingTitle reportKey="user-demographics" />
       <SummaryCards summary={summary} />
 
-      <Row className="mb-6 g-6">
+      <Row className="mb-5 g-5">
         <Col xs={12} lg={showIdentitySource ? 6 : 12}>
           <AuthMethodsChart data={data.authMethods} />
         </Col>
@@ -53,7 +53,7 @@ export const UserDemographicsPage: FC = () => {
         )}
       </Row>
 
-      <Row className="mb-6 g-6">
+      <Row className="mb-5 g-5">
         <Col xs={12} lg={6}>
           <ActiveStatusChart data={data.activeStatus} />
         </Col>
@@ -63,7 +63,7 @@ export const UserDemographicsPage: FC = () => {
       </Row>
 
       {(showOrganizationType || showJobTitle) && (
-        <Row className="mb-6 g-6">
+        <Row className="mb-5 g-5">
           {showOrganizationType && (
             <Col xs={12} lg={showJobTitle ? 6 : 12}>
               <OrganizationTypesChart data={data.organizationTypes} />

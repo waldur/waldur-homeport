@@ -20,7 +20,7 @@ export const OecdUsageTab: FC<OecdUsageTabProps> = ({
   projectCounts,
 }) => {
   return (
-    <Row className="g-6 mb-6">
+    <Row className="g-5 mb-5">
       <Col xs={6}>
         <OecdUsageChart projectCounts={projectCounts} />
       </Col>
