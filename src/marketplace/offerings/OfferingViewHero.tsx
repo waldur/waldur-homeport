@@ -180,14 +180,14 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         cardBordered
         mobileBottomActions
         logo={offering.thumbnail}
-        logoSize={100}
+        logoSize={48}
         logoAlt={offering.name}
         logoTooltip={offering.category_title}
         logoCircle
         title={
-          <>
-            <div className="d-flex flex-wrap align-items-center gap-2 mb-1">
-              <h3 className="mb-0">{offering.name}</h3>
+          <div className="d-flex flex-column">
+            <div className="d-flex flex-wrap align-items-center gap-2">
+              <h3 className="mb-0 lh-1">{offering.name}</h3>
               <CopyToClipboardButton
                 value={offering.name}
                 className="text-hover-primary cursor-pointer"
@@ -200,15 +200,42 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
               {translate('By {organization}', {
                 organization: offering.customer_name,
               })}
+              {offering.parent_name && offering.parent_uuid && (
+                <>
+                  <span className="mx-2">•</span>
+                  <ParentLink
+                    parent_name={offering.parent_name}
+                    state="public-offering.marketplace-public-offering"
+                    params={{ uuid: offering.parent_uuid }}
+                  />
+                </>
+              )}
             </p>
-            {offering.parent_name && offering.parent_uuid && (
-              <ParentLink
-                parent_name={offering.parent_name}
-                state="public-offering.marketplace-public-offering"
-                params={{ uuid: offering.parent_uuid }}
-              />
-            )}
-          </>
+            <Table className="mb-0 px-0 h-auto fs-7 w-auto mt-1">
+              <tbody>
+                {!props.isPublic && (
+                  <tr>
+                    <th className="fw-bold w-150px p-0 pe-3">
+                      {translate('Shared/Billing enabled')}:
+                    </th>
+                    <td className="text-muted p-0">
+                      {(offering.shared ? translate('Yes') : translate('No')) +
+                        '/' +
+                        (offering.billable
+                          ? translate('Yes')
+                          : translate('No'))}
+                    </td>
+                  </tr>
+                )}
+                <tr>
+                  <th className="fw-bold w-100px p-0 pe-3">
+                    {translate('Type')}:
+                  </th>
+                  <td className="text-muted p-0">{getLabel(offering.type)}</td>
+                </tr>
+              </tbody>
+            </Table>
+          </div>
         }
         actions={
           <>
@@ -235,28 +262,7 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
             />
           </>
         }
-      >
-        <Table className="mb-0 px-0 h-auto fs-7 w-auto">
-          <tbody>
-            {!props.isPublic && (
-              <tr>
-                <th className="fw-bold w-sm-175px">
-                  {translate('Shared/Billing enabled')}:
-                </th>
-                <td className="text-muted">
-                  {(offering.shared ? translate('Yes') : translate('No')) +
-                    '/' +
-                    (offering.billable ? translate('Yes') : translate('No'))}
-                </td>
-              </tr>
-            )}
-            <tr>
-              <th className="fw-bold w-sm-175px">{translate('Type')}:</th>
-              <td className="text-muted">{getLabel(offering.type)}</td>
-            </tr>
-          </tbody>
-        </Table>
-      </PublicDashboardHero>
+      />
     </div>
   );
 };

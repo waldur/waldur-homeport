@@ -38,7 +38,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
   const { report } = result;
 
   return (
-    <div className="table-standalone-header d-flex justify-content-between align-items-center gap-4 mb-6">
+    <div className="table-standalone-header d-flex justify-content-between align-items-center gap-4 mb-5">
       <div className="d-flex align-items-center gap-4">
         {backState && (
           <Link

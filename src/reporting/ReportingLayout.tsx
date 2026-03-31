@@ -6,10 +6,12 @@ import { useSelector } from 'react-redux';
 import { Link } from '@waldur/core/Link';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { translate } from '@waldur/i18n';
+import { useFullPage } from '@waldur/navigation/context';
 
 import { getCategoryConfig } from './constants';
 
 export const ReportingLayout: FC = () => {
+  useFullPage();
   const router = useRouter();
   const workspace = useSelector((s: any) => s.workspace);
 
@@ -38,22 +40,19 @@ export const ReportingLayout: FC = () => {
   }, [workspace]);
 
   return (
-    <div className="container-fluid py-6">
-      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-6">
+    <div className="container-fluid py-8">
+      <div className="table-standalone-header d-flex justify-content-between gap-4 mb-5">
         <h1>{translate('Reporting')}</h1>
       </div>
 
-      <Nav
-        variant="tabs"
-        className="nav-line-tabs nav-line-tabs-2x border-transparent fs-5 fw-bold mb-8"
-      >
+      <Nav variant="tabs" className="nav-line-tabs fs-5 fw-bold mb-5">
         {tabs.map((tab) => (
           <Nav.Item key={tab.state}>
             <Nav.Link
               as={Link}
               state={tab.state}
               active={router.stateService.includes(tab.state)}
-              className="text-active-primary py-3 me-6 text-decoration-none"
+              className="text-active-primary text-decoration-none"
             >
               <span>{tab.title}</span>
             </Nav.Link>

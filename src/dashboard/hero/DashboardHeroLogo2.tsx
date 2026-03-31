@@ -12,7 +12,7 @@ interface DashboardHeroLogo2Props {
 }
 
 export const DashboardHeroLogo2: FC<DashboardHeroLogo2Props> = ({
-  size = 100,
+  size = 48,
   ...props
 }) => {
   const logoAltAbbreviation = getAbbreviation(props.logoAlt, 4);

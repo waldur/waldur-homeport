@@ -81,10 +81,12 @@ export const PublicDashboardHero: FC<
                     </div>
                   )}
                 </div>
-                <div>
-                  {/* Details */}
-                  {props.children}
-                </div>
+                {props.children && (
+                  <div>
+                    {/* Details */}
+                    {props.children}
+                  </div>
+                )}
                 {/* Actions - at the end */}
                 {props.actions && props.mobileBottomActions && (
                   <div className="d-sm-none d-flex flex-wrap align-self-stretch align-self-sm-start justify-content-sm-end gap-3">
