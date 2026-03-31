@@ -15,7 +15,7 @@ export const DashboardHeroLogo2: FC<DashboardHeroLogo2Props> = ({
   size = 100,
   ...props
 }) => {
-  const logoAltAbbreviation = getAbbreviation(props.logoAlt, 4);
+  const logoAltAbbreviation = getAbbreviation(props.logoAlt, 3);
   return (
     <div className="dashboard-hero-logo-2 d-flex flex-column">
       {props.logo ? (

@@ -27,8 +27,8 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
       cardBordered
       title={
         <>
-          <div className="d-flex flex-wrap gap-2 mb-2 align-items-center">
-            <h3>{call.name}</h3>
+          <div className="d-flex flex-wrap gap-2 align-items-center">
+            <h3 className="mb-0 lh-1">{call.name}</h3>
             <StateIndicator
               variant={status.color}
               label={status.label}
@@ -36,7 +36,7 @@ export const PublicCallDetailsHero: FC<PublicCallDetailsHeroProps> = ({
               pill
             />
           </div>
-          <p className="text-muted">{call.customer_name}</p>
+          <p className="text-muted fs-7 mb-0">{call.customer_name}</p>
         </>
       }
       quickBody={
