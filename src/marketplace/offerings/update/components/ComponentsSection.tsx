@@ -50,8 +50,10 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
         setFirstFetch(false);
       }
 
+      const rows = freshComponents || props.offering.components;
       return Promise.resolve({
-        rows: freshComponents || props.offering.components,
+        rows,
+        resultCount: rows.length,
       });
     },
   });
