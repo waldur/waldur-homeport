@@ -119,6 +119,9 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     },
     mandatoryFields: resourcesListRequiredFields(),
   });
+  const isSpecified = (attribute) =>
+    ownProps.columns.some((c) => c.attribute === attribute);
+
   const columns: any[] = [
     {
       title: translate('Name'),
@@ -180,7 +183,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       keys: ['restrict_member_access'],
       optional: true,
     },
-  ];
+  ].filter((column) => !column.optional || !isSpecified(column.id));
 
   ownProps.columns.map((column: CategoryColumn) => {
     columns.push({
@@ -235,17 +238,16 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
       keys: ['created'],
       export: (row) => formatDateTime(row.created),
     },
-    {
-      title: translate('Termination date'),
-      render: ({ row }) =>
-        row.end_date ? formatDateTime(row.end_date) : 'N/A',
-      orderField: 'end_date',
-      id: 'end_date',
-      keys: ['end_date'],
-      optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
-    },
-    SLUG_COLUMN,
   );
+  columns.push({
+    title: translate('Termination date'),
+    render: ({ row }) => (row.end_date ? formatDateTime(row.end_date) : 'N/A'),
+    orderField: 'end_date',
+    id: 'end_date',
+    keys: ['end_date'],
+    optional: !isFeatureVisible(MarketplaceFeatures.show_resource_end_date),
+  });
+  columns.push(SLUG_COLUMN);
 
   const tableActions = (
     <>

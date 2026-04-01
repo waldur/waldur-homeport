@@ -22,7 +22,15 @@ import { CategoryCreateButton } from './CategoryCreateButton';
 import { CategoryRowActions } from './CategoryRowActions';
 
 const categoryFields: MarketplaceCategoriesListData['query'] = {
-  field: ['uuid', 'title', 'description', 'icon', 'offering_count', 'group'],
+  field: [
+    'uuid',
+    'title',
+    'description',
+    'icon',
+    'offering_count',
+    'group',
+    'url',
+  ],
 };
 
 export const AdminCategoriesPage: FunctionComponent = () => {
