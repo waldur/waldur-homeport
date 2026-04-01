@@ -29,6 +29,8 @@ export enum MarketplaceFeatures {
   catalogue_only = 'marketplace.catalogue_only',
   conceal_audit_log_from_end_users = 'marketplace.conceal_audit_log_from_end_users',
   conceal_offering_pricing_tab_in_public_view = 'marketplace.conceal_offering_pricing_tab_in_public_view',
+  conceal_pending_consumer_orders = 'marketplace.conceal_pending_consumer_orders',
+  conceal_pending_provider_orders = 'marketplace.conceal_pending_provider_orders',
   conceal_prices = 'marketplace.conceal_prices',
   conceal_resource_metadata = 'marketplace.conceal_resource_metadata',
   display_offering_partitions = 'marketplace.display_offering_partitions',

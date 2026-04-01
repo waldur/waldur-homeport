@@ -99,6 +99,14 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Conceal offering pricing tab in the offering\'s public view.'),
       },
       {
+        key: 'conceal_pending_consumer_orders',
+        description: translate('Hide pending consumer orders section from the pending confirmations drawer.'),
+      },
+      {
+        key: 'conceal_pending_provider_orders',
+        description: translate('Hide pending provider orders section from the pending confirmations drawer.'),
+      },
+      {
         key: 'conceal_prices',
         description: translate('Do not render prices in order details.'),
       },
