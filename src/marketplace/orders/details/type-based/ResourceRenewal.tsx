@@ -75,14 +75,17 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
       <StartDateField order={order} />
       <Field
         label={translate('Old end date')}
+        labelWidth={200}
         value={formatDate(attributes.old_end_date)}
       />
       <Field
         label={translate('New end date')}
+        labelWidth={200}
         value={formatDate(attributes.new_end_date)}
       />
       <Field
         label={translate('Extension')}
+        labelWidth={200}
         value={
           '+ ' +
           (attributes.extension_months === 1
@@ -95,6 +98,7 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
       {!shouldConcealPrices && (
         <Field
           label={translate('Renewal cost')}
+          labelWidth={200}
           value={defaultCurrency(attributes.renewal_cost)}
         />
       )}

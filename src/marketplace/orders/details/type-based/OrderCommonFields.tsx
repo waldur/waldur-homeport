@@ -23,13 +23,12 @@ export const RequestedByField = ({
   order,
   formTableItem,
 }: OrderTypeBasedProps) => {
-  const Component = formTableItem ? FormTable.Item : Field;
+  const value = order.created_by_full_name + ` (${order.created_by_username})`;
+  if (formTableItem) {
+    return <FormTable.Item label={translate('Requested by')} value={value} />;
+  }
   return (
-    <Component
-      label={translate('Requested by')}
-      labelCol={1}
-      value={order.created_by_full_name + ` (${order.created_by_username})`}
-    />
+    <Field label={translate('Requested by')} labelWidth={200} value={value} />
   );
 };
 
@@ -37,15 +36,13 @@ export const RequestCommentField = ({
   order,
   formTableItem,
 }: OrderTypeBasedProps) => {
-  const Component = formTableItem ? FormTable.Item : Field;
+  if (!order.request_comment) return null;
+  const value = <FieldWithCopy value={order.request_comment} />;
+  if (formTableItem) {
+    return <FormTable.Item label={translate('PO reference')} value={value} />;
+  }
   return (
-    order.request_comment && (
-      <Component
-        label={translate('PO reference')}
-        labelCol={1}
-        value={<FieldWithCopy value={order.request_comment} />}
-      />
-    )
+    <Field label={translate('PO reference')} labelWidth={200} value={value} />
   );
 };
 
@@ -54,13 +51,12 @@ export const DescriptionField = ({
   offering,
   formTableItem,
 }: OrderTypeBasedProps) => {
-  const Component = formTableItem ? FormTable.Item : Field;
+  const value = <OrderSummaryMessage order={order} offering={offering} />;
+  if (formTableItem) {
+    return <FormTable.Item label={translate('Description')} value={value} />;
+  }
   return (
-    <Component
-      label={translate('Description')}
-      labelCol={1}
-      value={<OrderSummaryMessage order={order} offering={offering} />}
-    />
+    <Field label={translate('Description')} labelWidth={200} value={value} />
   );
 };
 
@@ -68,13 +64,12 @@ export const StartDateField = ({
   order,
   formTableItem,
 }: OrderTypeBasedProps) => {
-  const Component = formTableItem ? FormTable.Item : Field;
+  const value = formatDate(order.start_date);
+  if (formTableItem) {
+    return <FormTable.Item label={translate('Start date')} value={value} />;
+  }
   return (
-    <Component
-      label={translate('Start date')}
-      labelCol={1}
-      value={formatDate(order.start_date)}
-    />
+    <Field label={translate('Start date')} labelWidth={200} value={value} />
   );
 };
 
@@ -92,11 +87,15 @@ export const CostChangeField = ({
     return amount + getPlanUnitAbbr(order.plan_unit);
   }, [order]);
   if (shouldConcealPrices) return null;
-  const Component = formTableItem ? FormTable.Item : Field;
+  if (formTableItem) {
+    return (
+      <FormTable.Item label={translate('Cost change')} value={costChange} />
+    );
+  }
   return (
-    <Component
+    <Field
       label={translate('Cost change')}
-      labelCol={1}
+      labelWidth={200}
       value={costChange}
     />
   );
