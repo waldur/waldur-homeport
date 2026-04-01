@@ -58,6 +58,15 @@ const mapStateToFilter = createSelector(
     if (filters?.organization) {
       result.customer_uuid = filters.organization.uuid;
     }
+    if (filters?.paused) {
+      result.paused = true;
+    }
+    if (filters?.downscaled) {
+      result.downscaled = true;
+    }
+    if (filters?.restrict_member_access) {
+      result.restrict_member_access = true;
+    }
     return result;
   },
 );

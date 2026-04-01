@@ -102,6 +102,39 @@ const PureProjectResourcesFilter = ({ category_uuid, initialValues }) => {
           label={translate('Exclude attached')}
         />
       </TableFilterItem>
+      <TableFilterItem
+        title={translate('Paused')}
+        name="paused"
+        badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
+      >
+        <Field
+          name="paused"
+          component={AwesomeCheckboxField}
+          label={translate('Paused')}
+        />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Downscaled')}
+        name="downscaled"
+        badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
+      >
+        <Field
+          name="downscaled"
+          component={AwesomeCheckboxField}
+          label={translate('Downscaled')}
+        />
+      </TableFilterItem>
+      <TableFilterItem
+        title={translate('Restrict member access')}
+        name="restrict_member_access"
+        badgeValue={(value) => (value ? translate('Yes') : translate('No'))}
+      >
+        <Field
+          name="restrict_member_access"
+          component={AwesomeCheckboxField}
+          label={translate('Restrict member access')}
+        />
+      </TableFilterItem>
     </>
   );
 };
