@@ -10,10 +10,12 @@ export const ResourceTerminate = ({ order }: OrderTypeBasedProps) => {
       <RequestedByField order={order} />
       <Field
         label={translate('Request to delete')}
+        labelWidth={200}
         value={getLabel(order.offering_type) + ' • ' + order.resource_name}
       />
       <Field
         label={[translate('Project'), '/', translate('Organization')].join(' ')}
+        labelWidth={200}
         value={order.project_name + ' • ' + order.customer_name}
       />
     </>

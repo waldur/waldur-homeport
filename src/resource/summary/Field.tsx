@@ -1,6 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import React, { FunctionComponent, ReactNode } from 'react';
+import React, { FunctionComponent, ReactNode, useMemo } from 'react';
 import { Col, ColProps, Row } from 'react-bootstrap';
 
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -22,6 +22,7 @@ interface FieldProps {
   isStuck?: boolean;
   labelCol?: number | 'auto';
   valueCol?: number | 'auto';
+  labelWidth?: number;
   xs?: ColProps['xs'];
   space?: number;
 }
@@ -29,9 +30,15 @@ interface FieldProps {
 export const Field: FunctionComponent<FieldProps> = ({
   labelTooltipLen = 20,
   space = 1,
+  labelWidth,
   ...props
-}) =>
-  props.value || props.children ? (
+}) => {
+  const labelStyle = useMemo(
+    () =>
+      labelWidth ? { width: labelWidth, minWidth: labelWidth } : undefined,
+    [labelWidth],
+  );
+  return props.value || props.children ? (
     <Row
       className={classNames(
         'field-row g-0',
@@ -41,7 +48,8 @@ export const Field: FunctionComponent<FieldProps> = ({
     >
       <Col
         xs={props.xs}
-        sm={props.isStuck ? 'auto' : props.labelCol || 3}
+        sm={props.isStuck || labelWidth ? 'auto' : props.labelCol || 3}
+        style={labelStyle}
         className={classNames(
           'field-label text-gray-700 fw-bold',
           props.labelClass,
@@ -81,3 +89,4 @@ export const Field: FunctionComponent<FieldProps> = ({
       </Col>
     </Row>
   ) : null;
+};

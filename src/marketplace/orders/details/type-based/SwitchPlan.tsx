@@ -36,6 +36,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
 
       <Field
         label={translate('Plan old')}
+        labelWidth={200}
         value={
           <Badge variant="default" pill outline>
             {order.old_plan_name}
@@ -44,6 +45,7 @@ export const SwitchPlan = ({ order, offering }: OrderTypeBasedProps) => {
       />
       <Field
         label={translate('Plan new')}
+        labelWidth={200}
         value={
           <Badge variant="moss" pill outline>
             {order.new_plan_name}

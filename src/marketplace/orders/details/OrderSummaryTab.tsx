@@ -37,7 +37,7 @@ export const OrderSummaryTab = ({
       <div className="d-flex flex-column gap-3">
         <Field
           label={translate('Offering')}
-          labelCol={1}
+          labelWidth={200}
           value={
             <Link
               state="public-offering.marketplace-public-offering"
@@ -52,20 +52,20 @@ export const OrderSummaryTab = ({
           <Field
             label={translate('Order UUID')}
             value={order.uuid}
-            labelCol={1}
+            labelWidth={200}
           />
         )}
         {user?.is_staff && (
           <Field
             label={translate('Order slug')}
             value={order.slug}
-            labelCol={1}
+            labelWidth={200}
           />
         )}
         {order.offering_type === SUPPORT_OFFERING_TYPE && order.issue && (
           <Field
             label={translate('Issue')}
-            labelCol={1}
+            labelWidth={200}
             value={
               <Link
                 state="support.detail"
