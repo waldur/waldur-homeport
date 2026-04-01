@@ -1,4 +1,6 @@
+import { TextColumns } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
+import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsList,
   MarketplaceProviderOfferingsListData,
@@ -6,11 +8,14 @@ import {
 } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import {
   getLabel,
   getOfferingTypes,
 } from '@waldur/marketplace/common/registry';
+import { openModalDialog } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { createFetcher } from '@waldur/table/api';
 import { BooleanField } from '@waldur/table/BooleanField';
 import { SLUG_COLUMN } from '@waldur/table/slug';
@@ -18,6 +23,7 @@ import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { useOfferingDropdownActions } from '../hooks';
 
@@ -26,6 +32,12 @@ import { OfferingActions } from './OfferingActions';
 import { OfferingNameColumn } from './OfferingNameColumn';
 import { OfferingStateCell } from './OfferingStateCell';
 import { getStates } from './OfferingStateFilter';
+
+const ArticleCodeUpdateDialog = lazyComponent(() =>
+  import('../article-codes/ArticleCodeUpdateDialog').then((module) => ({
+    default: module.ArticleCodeUpdateDialog,
+  })),
+);
 
 const mandatoryFields: MarketplaceProviderOfferingsListData['query']['field'] =
   ['customer_uuid', 'components', 'plans'];
@@ -133,7 +145,31 @@ export const BaseOfferingsList: FunctionComponent<{
     SLUG_COLUMN as Column<ProviderOfferingDetails>,
   ];
 
-  const dropdownActions = useOfferingDropdownActions(props.fetch);
+  const dispatch = useDispatch();
+  const user = useUser();
+  const providerDropdownActions = useOfferingDropdownActions(props.fetch);
+
+  const dropdownActions = [
+    ...(providerDropdownActions || []),
+    ...(user?.is_staff
+      ? [
+          <ActionItem
+            key="update-article-codes"
+            title={translate('Update article codes')}
+            action={() => {
+              dispatch(
+                openModalDialog(ArticleCodeUpdateDialog, {
+                  resolve: { refetch: props.fetch },
+                  size: 'xl',
+                }),
+              );
+            }}
+            iconNode={<TextColumns weight="bold" />}
+            staff
+          />,
+        ]
+      : []),
+  ];
 
   return (
     <Table
@@ -151,7 +187,7 @@ export const BaseOfferingsList: FunctionComponent<{
       }
       columns={columns}
       verboseName={translate('Offerings')}
-      dropdownActions={showActions && dropdownActions}
+      dropdownActions={dropdownActions.length > 0 ? dropdownActions : undefined}
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       rowActions={
