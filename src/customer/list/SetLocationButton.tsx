@@ -52,6 +52,7 @@ export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
 
   return (
     <CompactEditButton
+      variant="secondary"
       onClick={() => {
         dispatch(
           openModalDialog(SetLocationDialog, {

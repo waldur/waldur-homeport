@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditButton } from '@waldur/form/EditButton';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import { openModalDialog } from '@waldur/modal/actions';
 import { EditCallProps } from '@waldur/proposals/types';
 
@@ -21,5 +21,5 @@ export const EditGeneralInfoButton = (props: EditCallProps) => {
       }),
     );
   };
-  return <EditButton onClick={callback} btnIcon />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

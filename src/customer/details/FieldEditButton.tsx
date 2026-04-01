@@ -30,5 +30,5 @@ export const FieldEditButton = (props: EditCustomerProps) => {
       ),
     );
   };
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };
