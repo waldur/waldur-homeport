@@ -50,6 +50,9 @@ interface ResourceFilter {
   offering?: Offering;
   parent_offering?: Offering;
   include_terminated?: boolean;
+  paused?: boolean;
+  downscaled?: boolean;
+  restrict_member_access?: boolean;
 }
 
 const ResourceDetailsDialog = lazyComponent(() =>
@@ -132,6 +135,7 @@ const TableComponent: FunctionComponent<any> = (props) => {
       render: ({ row }) => <>{row.project_name}</>,
       keys: ['project_name'],
       filter: 'project_name',
+      orderField: 'project_name',
       inlineFilter: (row) => ({
         name: row.project_name,
         uuid: row.project_uuid,
@@ -187,6 +191,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Requested downscaling'),
       render: ({ row }) => <BooleanBadge value={row.downscaled} />,
+      filter: 'downscaled',
+      inlineFilter: () => true,
       export: 'downscaled',
       keys: ['downscaled'],
       exportKeys: ['downscaled'],
@@ -196,6 +202,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Restrict member access'),
       render: ({ row }) => <BooleanBadge value={row.restrict_member_access} />,
+      filter: 'restrict_member_access',
+      inlineFilter: () => true,
       export: 'restrict_member_access',
       keys: ['restrict_member_access'],
       exportKeys: ['restrict_member_access'],
@@ -205,6 +213,8 @@ const TableComponent: FunctionComponent<any> = (props) => {
     {
       title: translate('Requested pausing'),
       render: ({ row }) => <BooleanBadge value={row.paused} />,
+      filter: 'paused',
+      inlineFilter: () => true,
       export: 'paused',
       keys: ['paused'],
       exportKeys: ['paused'],
@@ -309,6 +319,15 @@ const mapStateToFilter = createSelector(
     }
     if (filters?.category) {
       filter.category_uuid = filters.category.uuid;
+    }
+    if (filters?.paused) {
+      filter.paused = true;
+    }
+    if (filters?.downscaled) {
+      filter.downscaled = true;
+    }
+    if (filters?.restrict_member_access) {
+      filter.restrict_member_access = true;
     }
     return filter;
   },

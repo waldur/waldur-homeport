@@ -48,6 +48,15 @@ const mapStateToFilter = createSelector(
         result.state = NON_TERMINATED_STATES;
       }
     }
+    if (filters?.paused) {
+      result.paused = true;
+    }
+    if (filters?.downscaled) {
+      result.downscaled = true;
+    }
+    if (filters?.restrict_member_access) {
+      result.restrict_member_access = true;
+    }
     return result;
   },
 );

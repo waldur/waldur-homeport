@@ -139,6 +139,7 @@ export const getResourceAllListColumns = (
               title: translate('Project'),
               render: ({ row }) => <>{row.project_name}</>,
               filter: 'project',
+              orderField: 'project_name',
               inlineFilter: (row) => ({
                 name: row.project_name,
                 uuid: row.project_uuid,
@@ -190,6 +191,8 @@ export const getResourceAllListColumns = (
       {
         title: translate('Paused'),
         render: ({ row }) => <BooleanField value={row.paused} />,
+        filter: 'paused',
+        inlineFilter: () => true,
         id: 'paused',
         keys: ['paused'],
         optional: true,
@@ -197,6 +200,8 @@ export const getResourceAllListColumns = (
       {
         title: translate('Downscaled'),
         render: ({ row }) => <BooleanField value={row.downscaled} />,
+        filter: 'downscaled',
+        inlineFilter: () => true,
         id: 'downscaled',
         keys: ['downscaled'],
         optional: true,

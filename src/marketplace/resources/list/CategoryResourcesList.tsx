@@ -87,6 +87,15 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     if (filterValues?.exclude_attached) {
       filter.is_attached = false;
     }
+    if (filterValues?.paused) {
+      filter.paused = true;
+    }
+    if (filterValues?.downscaled) {
+      filter.downscaled = true;
+    }
+    if (filterValues?.restrict_member_access) {
+      filter.restrict_member_access = true;
+    }
     return filter;
   }, [filterValues, ownProps.category_uuid]);
 
@@ -149,6 +158,8 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     {
       title: translate('Paused'),
       render: ({ row }) => <BooleanField value={row.paused} />,
+      filter: 'paused',
+      inlineFilter: () => true,
       id: 'paused',
       keys: ['paused'],
       optional: true,
@@ -156,6 +167,8 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     {
       title: translate('Downscaled'),
       render: ({ row }) => <BooleanField value={row.downscaled} />,
+      filter: 'downscaled',
+      inlineFilter: () => true,
       id: 'downscaled',
       keys: ['downscaled'],
       optional: true,
@@ -194,6 +207,7 @@ export const CategoryResourcesList: FunctionComponent<OwnProps> = (
     title: translate('Project'),
     render: ({ row }) => <>{row.project_name}</>,
     filter: 'project',
+    orderField: 'project_name',
     inlineFilter: (row) => ({ name: row.project_name, uuid: row.project_uuid }),
     id: 'project',
     keys: ['project_name', 'project_uuid'],
