@@ -132,14 +132,14 @@ const CallPerformanceExpandableRow: FC<{ row: CallPerformanceData }> = ({
 export const CallPerformanceList: FC = () => {
   const { data, isLoading, error, refetch } = useCallPerformanceStats();
   const summary = useMemo(
-    () => calculateCallPerformanceSummary(data || []),
+    () => calculateCallPerformanceSummary(Array.isArray(data) ? data : []),
     [data],
   );
 
   const [query, setQuery] = useState('');
 
   const filteredData = useMemo(() => {
-    if (!data) return [];
+    if (!Array.isArray(data)) return [];
     if (!query.trim()) return data;
     const searchLower = query.toLowerCase().trim();
     return data.filter(

@@ -106,7 +106,7 @@ const columns: Column<ResourceDemandData>[] = [
 
 export const ResourceDemandList: FC = () => {
   const { data, isLoading, error, refetch } = useResourceDemandStats();
-  const rawData = data || [];
+  const rawData = useMemo(() => (Array.isArray(data) ? data : []), [data]);
 
   const summary = useMemo(() => {
     const totalRequests = rawData.reduce((sum, d) => sum + d.request_count, 0);
@@ -150,6 +150,7 @@ export const ResourceDemandList: FC = () => {
   const [query, setQuery] = useState('');
 
   const filteredData = useMemo(() => {
+    if (!Array.isArray(data)) return [];
     if (!query.trim()) return rawData;
     const searchLower = query.toLowerCase().trim();
     return rawData.filter(
@@ -158,7 +159,7 @@ export const ResourceDemandList: FC = () => {
         item.provider_name.toLowerCase().includes(searchLower) ||
         item.offering_type.toLowerCase().includes(searchLower),
     );
-  }, [rawData, query]);
+  }, [data, rawData, query]);
 
   const noop = useCallback(() => {}, []);
 
