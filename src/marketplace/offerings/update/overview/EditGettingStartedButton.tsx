@@ -24,5 +24,5 @@ export const EditGettingStartedButton: FC<{ offering; refetch }> = (props) => {
       }),
     );
   };
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

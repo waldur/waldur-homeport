@@ -22,5 +22,5 @@ export const EditChecklistButton: FC<EditOfferingChecklistProps> = (props) => {
       }),
     );
   };
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

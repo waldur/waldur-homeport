@@ -45,6 +45,7 @@ export const FieldEditButton = (props: EditProjectProps) => {
       onClick={callback}
       disabled={isDisabled}
       tooltip={tooltip}
+      variant="secondary"
     />
   );
 };

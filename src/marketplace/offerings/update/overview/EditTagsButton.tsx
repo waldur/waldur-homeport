@@ -26,5 +26,5 @@ export const EditTagsButton = ({ offering, refetch }: EditTagsButtonProps) => {
       }),
     );
   };
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

@@ -48,6 +48,6 @@ export const OfferingMediaButton: FC<{
         customerId: customer.uuid,
       }))
   )
-    return <CompactEditButton onClick={callback} />;
+    return <CompactEditButton onClick={callback} variant="secondary" />;
   return null;
 };

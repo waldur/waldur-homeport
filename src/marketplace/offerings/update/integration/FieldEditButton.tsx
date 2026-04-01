@@ -21,5 +21,11 @@ export const FieldEditButton = (props: EditOfferingProps) => {
       }),
     );
   };
-  return <CompactEditButton onClick={callback} disabled={props.disabled} />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      disabled={props.disabled}
+      variant="secondary"
+    />
+  );
 };

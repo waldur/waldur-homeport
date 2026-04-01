@@ -25,5 +25,11 @@ export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
       }),
     );
   };
-  return <CompactEditButton onClick={callback} disabled={props.disabled} />;
+  return (
+    <CompactEditButton
+      onClick={callback}
+      disabled={props.disabled}
+      variant="secondary"
+    />
+  );
 };

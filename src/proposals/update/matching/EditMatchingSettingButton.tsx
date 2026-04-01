@@ -22,5 +22,5 @@ export const EditMatchingSettingButton = (props: EditMatchingSettingProps) => {
       }),
     );
   };
-  return <CompactEditButton onClick={callback} btnIcon />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

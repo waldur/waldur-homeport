@@ -22,5 +22,5 @@ export const EditCOISettingButton = (props: EditCOISettingProps) => {
       }),
     );
   };
-  return <CompactEditButton onClick={callback} btnIcon />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

@@ -44,6 +44,7 @@ export const UpdateCustomerOrganizationsGroupsButton = ({
       onClick={callback}
       disabled={disabled}
       tooltip={tooltip}
+      variant="secondary"
     />
   );
 };

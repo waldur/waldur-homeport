@@ -67,5 +67,5 @@ export const OfferingLocationButton = ({
   if (offering.state === ARCHIVED) {
     return null;
   }
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

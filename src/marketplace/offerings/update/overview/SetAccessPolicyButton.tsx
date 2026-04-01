@@ -50,6 +50,7 @@ export const SetAccessPolicyButton = ({
       onClick={callback}
       disabled={disabled}
       tooltip={tooltip}
+      variant="secondary"
     />
   );
 };
