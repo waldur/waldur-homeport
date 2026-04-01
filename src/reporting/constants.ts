@@ -35,8 +35,6 @@ export interface ReportDefinition {
   analytics?: AnalyticsMode[];
   /** State for analytics page navigation */
   analyticsState?: string;
-  /** Flag to indicate if this is the "primary" report for the category */
-  isPrimary?: boolean;
   /** Flag to indicate if this report is experimental (hidden unless experimental UI is enabled) */
   isExperimental?: boolean;
   /** Flag to indicate if this report is hidden from the main report list */
@@ -62,7 +60,6 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           title: translate('Usage'),
           description: translate('Resource usage metrics across organizations'),
           state: 'reporting-resource-usage',
-          isPrimary: true,
         },
         {
           key: 'user-usage',
@@ -164,7 +161,6 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           title: translate('Capacity'),
           description: translate('Available capacity of offering plans'),
           state: 'reporting-capacity',
-          isPrimary: true,
           analytics: ['what-if', 'why-so'],
           analyticsState: 'reporting-capacity-analytics',
         },
@@ -241,11 +237,10 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           state: 'reporting-growth',
         },
         {
-          key: 'monthly-revenue',
+          key: 'revenue',
           title: translate('Monthly revenue'),
           description: translate('Revenue breakdown by organization'),
           state: 'reporting-revenue',
-          isPrimary: true,
         },
         {
           key: 'pricelist',
@@ -273,7 +268,6 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
             'Submission statistics and acceptance rates across calls',
           ),
           state: 'reporting-call-performance',
-          isPrimary: true,
           analytics: ['what-if', 'why-so'],
           analyticsState: 'reporting-call-performance-analytics',
           isExperimental: true,
@@ -336,7 +330,6 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
             'User distribution by authentication and identity',
           ),
           state: 'reporting-user-demographics',
-          isPrimary: true,
           analytics: ['what-if', 'why-so'],
           analyticsState: 'reporting-user-demographics-analytics',
         },
@@ -390,7 +383,6 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
             'Cross-provider maintenance analytics and timeline',
           ),
           state: 'reporting-maintenance-overview',
-          isPrimary: true,
         },
         {
           key: 'provisioning-stats',
