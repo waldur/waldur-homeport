@@ -5,6 +5,8 @@ import { useAsync } from 'react-use';
 import { count } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openDrawerDialog } from '@waldur/drawer/actions';
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { countOrders } from '@waldur/marketplace/common/api';
 
@@ -23,23 +25,36 @@ const PendingConfirmationContainer = lazyComponent(() =>
 export const ConfirmationDrawerToggle: React.FC = () => {
   const dispatch = useDispatch();
 
+  const showConsumerOrders = !isFeatureVisible(
+    MarketplaceFeatures.conceal_pending_consumer_orders,
+  );
+  const showProviderOrders = !isFeatureVisible(
+    MarketplaceFeatures.conceal_pending_provider_orders,
+  );
+
   const { value: counters } = useAsync(async () => {
-    const pendingOrdersCount = await countOrders(
-      PENDING_CONSUMER_ORDERS_FILTER,
-    );
-    const pendingProvidersCount = await countOrders(
-      PENDING_PROVIDER_ORDERS_FILTER,
-    );
-    const pendingProjectUpdatesCount = await count(
-      '/api/marketplace-project-update-requests/',
-      { state: ['pending'] },
-    );
+    const pendingOrdersCount = showConsumerOrders
+      ? await countOrders(PENDING_CONSUMER_ORDERS_FILTER)
+      : 0;
+    const pendingProvidersCount = showProviderOrders
+      ? await countOrders(PENDING_PROVIDER_ORDERS_FILTER)
+      : 0;
+    const pendingProjectUpdatesCount =
+      showConsumerOrders || showProviderOrders
+        ? await count('/api/marketplace-project-update-requests/', {
+            state: ['pending'],
+          })
+        : 0;
     return {
       pendingOrdersCount,
       pendingProvidersCount,
       pendingProjectUpdatesCount,
     };
   });
+
+  if (!showConsumerOrders && !showProviderOrders) {
+    return null;
+  }
 
   const showBullet = Boolean(
     counters?.pendingOrdersCount ||

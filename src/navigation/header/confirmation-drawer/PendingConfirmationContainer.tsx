@@ -1,5 +1,7 @@
 import React from 'react';
 
+import { isFeatureVisible } from '@waldur/features/connect';
+import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 
 import { PendingConsumerOrders } from './PendingConsumerOrders';
@@ -19,9 +21,15 @@ const EmptyPendingItemsPlaceholder = () => {
 };
 
 export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
+  const showConsumerOrders = !isFeatureVisible(
+    MarketplaceFeatures.conceal_pending_consumer_orders,
+  );
+  const showProviderOrders = !isFeatureVisible(
+    MarketplaceFeatures.conceal_pending_provider_orders,
+  );
   const hasPendingItem = Boolean(
-    props.pendingOrdersCount ||
-    props.pendingProvidersCount ||
+    (showConsumerOrders && props.pendingOrdersCount) ||
+    (showProviderOrders && props.pendingProvidersCount) ||
     props.pendingProjectUpdatesCount,
   );
   if (!hasPendingItem) {
@@ -29,13 +37,13 @@ export const PendingConfirmationContainer: React.FC<OwnProps> = (props) => {
   }
   return (
     <div>
-      {props.pendingOrdersCount > 0 && (
+      {showConsumerOrders && props.pendingOrdersCount > 0 && (
         <div className="border-bottom pb-5 mb-5">
           <h4 className="mb-3">{translate('Pending consumer orders')}</h4>
           <PendingConsumerOrders />
         </div>
       )}
-      {props.pendingProvidersCount > 0 && (
+      {showProviderOrders && props.pendingProvidersCount > 0 && (
         <div className="border-bottom pb-5 mb-5">
           <h4 className="mb-3">{translate('Pending provider orders')}</h4>
           <PendingProviderOrders />
