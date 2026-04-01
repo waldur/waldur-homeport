@@ -112,14 +112,14 @@ const columns: Column<ReviewProgressData>[] = [
 export const ReviewProgressList: FC = () => {
   const { data, isLoading, error, refetch } = useReviewProgressStats();
   const summary = useMemo(
-    () => calculateReviewProgressSummary(data || []),
+    () => calculateReviewProgressSummary(Array.isArray(data) ? data : []),
     [data],
   );
 
   const [query, setQuery] = useState('');
 
   const filteredData = useMemo(() => {
-    if (!data) return [];
+    if (!Array.isArray(data)) return [];
     if (!query.trim()) return data;
     const searchLower = query.toLowerCase().trim();
     return data.filter(

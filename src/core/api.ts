@@ -124,9 +124,12 @@ export async function get<T = any>(endpoint: string): Promise<T> {
         }
       : {},
   );
+  if (!response.ok) {
+    throw response;
+  }
   const contentType = response.headers
     .get('content-type')
-    .toLowerCase()
+    ?.toLowerCase()
     .split(';')[0]
     .trim();
   if (contentType === 'application/json') {
