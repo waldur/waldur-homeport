@@ -353,7 +353,7 @@ const mandatoryFields: MarketplaceProviderResourcesListData['query']['field'] =
     'current_usages', // Expandable view
     'state', // Almost all actions
     'slug', // SetSlugAction
-    'end_date', // EditResourceEndDateByProviderAction, EditResourceEndDateByStaffAction
+    'end_date', // EditResourceEndDateByProviderAction
     'resource_type', // TerminateAction
     'paused', // ResourceFlags inline badge
     'downscaled', // ResourceFlags inline badge

@@ -21,7 +21,6 @@ import { RenewAllocationActionAction } from '../renew-allocation/RenewAllocation
 
 import { EditAction } from './EditAction';
 import { EditResourceEndDateByProviderAction } from './EditResourceEndDateByProviderAction';
-import { EditResourceEndDateByStaffAction } from './EditResourceEndDateByStaffAction';
 import { PullMarketplaceResourceAction } from './PullMarketplaceResourceAction';
 import { PullOrderAction } from './PullOrderAction';
 import { PullResourceAction } from './PullResourceAction';
@@ -79,7 +78,6 @@ export const StaffActions = [
   UnlinkActionItem,
   MoveResourceAction,
   SetSlugAction,
-  EditResourceEndDateByStaffAction,
   SetDownscaledAction,
   SetPausedAction,
   // Resource sync actions

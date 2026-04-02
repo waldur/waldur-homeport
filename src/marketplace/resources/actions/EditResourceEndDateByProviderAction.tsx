@@ -1,7 +1,7 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import {
-  marketplaceProviderResourcesSetEndDateByProvider,
+  marketplaceProviderResourcesSetEndDate,
   Resource,
 } from 'waldur-js-client';
 
@@ -38,7 +38,7 @@ export const EditResourceEndDateByProviderAction = ({
           resource,
           refetch,
           updateEndDate: (uuid, end_date) =>
-            marketplaceProviderResourcesSetEndDateByProvider({
+            marketplaceProviderResourcesSetEndDate({
               path: { uuid },
               body: { end_date },
             }),

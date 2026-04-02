@@ -1,6 +1,6 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
-import { marketplaceResourcesPartialUpdate } from 'waldur-js-client';
+import { marketplaceResourcesSetEndDate } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -36,7 +36,7 @@ export const EditResourceEndDateAction: ActionItemType = ({
           resource: _resource,
           refetch,
           updateEndDate: (uuid, end_date) =>
-            marketplaceResourcesPartialUpdate({
+            marketplaceResourcesSetEndDate({
               path: { uuid },
               body: { end_date },
             }),
@@ -45,10 +45,6 @@ export const EditResourceEndDateAction: ActionItemType = ({
     );
 
   if (
-    !hasPermission(user, {
-      permission: PermissionEnum.SET_RESOURCE_END_DATE,
-      customerId: _resource.provider_uuid,
-    }) &&
     !hasPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_END_DATE,
       customerId: _resource.customer_uuid,
