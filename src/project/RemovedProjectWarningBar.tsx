@@ -1,4 +1,7 @@
-import { TrashIcon, ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
+import {
+  WarningCircleIcon,
+  ArrowCounterClockwiseIcon,
+} from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
@@ -35,34 +38,29 @@ export const RemovedProjectWarningBar: FC = () => {
   };
 
   return (
-    <div className="removed-project-warning-bar bg-danger bg-opacity-10 border-danger border-opacity-25 border-bottom">
-      <div className="container-fluid">
-        <div className="d-flex justify-content-between align-items-center py-3">
-          <div className="d-flex align-items-center">
-            {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-            <FeaturedIcon
-              IconComponent={TrashIcon}
-              variant="danger"
-              size="sm"
-            />
-            <span className="ms-2 text-danger">
-              <strong>{translate('Project Removed')}:</strong>{' '}
-              {translate(
-                'This project has been removed. All resources have been terminated and user roles have been revoked.',
-              )}
-            </span>
-          </div>
-          {isExperimentalUiComponentsVisible() && (
-            <div>
-              <CompactActionButton
-                action={openRecoveryModal}
-                title={translate('Recover Project')}
-                iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
-                variant="danger"
-              />
-            </div>
+    <div className="layout-warning-bar bar-warning">
+      <div className="container-fluid w-100 d-flex align-items-center gap-2">
+        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
+        <FeaturedIcon
+          IconComponent={WarningCircleIcon}
+          variant="warning"
+          size="sm"
+        />
+        <p className="text-start fs-6 mb-0">
+          <strong className="fw-bold">{translate('Project Removed')}: </strong>
+          {translate(
+            'This project has been removed. All resources have been terminated and user roles have been revoked.',
           )}
-        </div>
+        </p>
+        {isExperimentalUiComponentsVisible() && (
+          <CompactActionButton
+            action={openRecoveryModal}
+            title={translate('Recover Project')}
+            iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+            variant="warning"
+            className="ms-auto"
+          />
+        )}
       </div>
     </div>
   );

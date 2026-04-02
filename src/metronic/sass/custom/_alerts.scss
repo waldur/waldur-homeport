@@ -1,3 +1,20 @@
+.layout-warning-bar {
+  min-height: 48px;
+  border-bottom: 1px solid var(--bs-border-color);
+  display: flex;
+  align-items: center;
+
+  &.bar-warning {
+    background-color: $bg-warning-primary;
+    color: if(isDarkMode(), $warning-700, $warning-800);
+  }
+
+  &.bar-danger {
+    background-color: $bg-error-primary;
+    color: if(isDarkMode(), $danger-700, $danger-800);
+  }
+}
+
 .announcements {
   .bar {
     min-height: 55px;

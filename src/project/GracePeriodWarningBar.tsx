@@ -1,4 +1,4 @@
-import { ClockCountdownIcon } from '@phosphor-icons/react';
+import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
@@ -33,27 +33,27 @@ export const GracePeriodWarningBar: FC = () => {
     : 0;
 
   return (
-    <div className="bg-warning bg-opacity-10 border-warning border-opacity-25 border-bottom">
-      <div className="container-fluid">
-        <div className="d-flex align-items-center py-3">
-          {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-          <FeaturedIcon
-            IconComponent={ClockCountdownIcon}
-            variant="warning"
-            size="sm"
-          />
-          <span className="ms-2 text-warning">
-            <strong>{translate('Grace period active')}:</strong>{' '}
-            {translate(
-              'This project ended on {endDate}. Resources will remain active until {effectiveEndDate} ({daysRemaining} days remaining).',
-              {
-                endDate,
-                effectiveEndDate,
-                daysRemaining: String(daysRemaining),
-              },
-            )}
-          </span>
-        </div>
+    <div className="layout-warning-bar bar-warning">
+      <div className="container-fluid w-100 d-flex align-items-center gap-2">
+        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
+        <FeaturedIcon
+          IconComponent={WarningCircleIcon}
+          variant="warning"
+          size="sm"
+        />
+        <p className="text-start fs-6 mb-0">
+          <strong className="fw-bold">
+            {translate('Grace period active')}:{' '}
+          </strong>
+          {translate(
+            'This project ended on {endDate}. Resources will remain active until {effectiveEndDate} ({daysRemaining} days remaining).',
+            {
+              endDate,
+              effectiveEndDate,
+              daysRemaining: String(daysRemaining),
+            },
+          )}
+        </p>
       </div>
     </div>
   );

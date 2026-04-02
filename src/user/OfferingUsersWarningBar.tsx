@@ -12,8 +12,6 @@ import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { usePendingOfferingUsers } from './hooks/usePendingOfferingUsers';
 
-import './OfferingUsersWarningBar.scss';
-
 export const OfferingUsersWarningBar: FC = () => {
   const { state } = useCurrentStateAndParams();
   const { data: pendingUsers, isLoading } = usePendingOfferingUsers();
@@ -54,31 +52,29 @@ export const OfferingUsersWarningBar: FC = () => {
   };
 
   return (
-    <div className="offering-users-warning-bar">
-      <div className="container-fluid">
-        <div className="d-flex justify-content-between align-items-center">
-          <div className="d-flex align-items-center">
-            {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-            <FeaturedIcon
-              IconComponent={WarningCircleIcon}
-              variant="warning"
-              size="sm"
-            />
-            <span className="ms-2">
-              <strong>{translate('Action required for some accounts.')}</strong>{' '}
-              {translate(
-                'You have {count} accounts that require attention to complete setup.',
-                { count },
-              )}
-            </span>
-          </div>
-          <CompactActionButton
-            variant="tertiary"
-            action={handleViewAccounts}
-            className="ms-3"
-            title={translate('View accounts')}
-          />
-        </div>
+    <div className="layout-warning-bar bar-warning">
+      <div className="container-fluid w-100 d-flex align-items-center gap-2">
+        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
+        <FeaturedIcon
+          IconComponent={WarningCircleIcon}
+          variant="warning"
+          size="sm"
+        />
+        <p className="text-start fs-6 mb-0">
+          <strong className="fw-bold">
+            {translate('Action required for some accounts.')}
+          </strong>{' '}
+          {translate(
+            'You have {count} accounts that require attention to complete setup.',
+            { count },
+          )}
+        </p>
+        <CompactActionButton
+          variant="tertiary"
+          action={handleViewAccounts}
+          className="ms-auto"
+          title={translate('View accounts')}
+        />
       </div>
     </div>
   );
