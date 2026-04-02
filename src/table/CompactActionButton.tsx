@@ -23,6 +23,8 @@ interface CompactActionButtonProps {
   variant?: string;
   /** Loading state - shows spinner and disables button */
   pending?: boolean;
+  /** Data test ID */
+  'data-testid'?: string;
 }
 
 /**
