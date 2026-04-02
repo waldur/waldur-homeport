@@ -75,6 +75,7 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       className={classNames(widthClass, className)}
       disabled={disabled}
       tooltip={tooltip}
+      {...rest}
     />
   ) : (
     <ActionButton
@@ -86,6 +87,7 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
       className={classNames(widthClass, className)}
       disabled={disabled}
       tooltip={tooltip}
+      {...rest}
     />
   );
 };
