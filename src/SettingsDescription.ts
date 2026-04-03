@@ -1028,6 +1028,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'OIDC_BLOCK_CREATION_OF_UNINVITED_USERS_RESPONSE_MESSAGE',
+        description: translate('The message to show when OIDC account creation is blocked for uninvited users.'),
+        default: 'Account creation is blocked for uninvited users.',
+        type: 'text_field',
+      },
+      {
         key: 'OIDC_MATCHMAKING_BY_EMAIL',
         description: translate('If true, when OIDC login fails to find a user by the primary lookup field, attempt a secondary lookup by email before creating a new user. On successful email match, the user\'s primary lookup field is updated to the OIDC claim value.'),
         default: false,
