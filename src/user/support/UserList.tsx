@@ -26,6 +26,7 @@ import { useTable } from '@waldur/table/useTable';
 
 import { IsdBadges } from './IsdBadges';
 import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';
+import { UserBulkActions } from './UserBulkActions';
 import { UserDetailsButton } from './UserDetailsButton';
 import { UserEditButton } from './UserEditButton';
 import { UserFilter } from './UserFilter';
@@ -461,6 +462,8 @@ export const UserList: FunctionComponent = () => {
       verboseName={translate('users')}
       enableExport={true}
       tableActions={<UserTableActions refetch={props.fetch} />}
+      enableMultiSelect
+      multiSelectActions={UserBulkActions}
       hasQuery={true}
       expandableRow={aiAssistantEnabled ? expandableRow : undefined}
       isRowExpandable={
