@@ -493,6 +493,24 @@ export const PermissionOptions = [
     ],
   },
   {
+    label: translate('Staff'),
+    options: [
+      {
+        label: translate('Access staff'),
+        value: 'STAFF.ACCESS',
+      },
+    ],
+  },
+  {
+    label: translate('Support'),
+    options: [
+      {
+        label: translate('Access support'),
+        value: 'SUPPORT.ACCESS',
+      },
+    ],
+  },
+  {
     label: translate('Team members'),
     options: [
       {

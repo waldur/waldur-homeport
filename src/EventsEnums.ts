@@ -11,6 +11,11 @@ export const AuthEnum = {
   auth_logged_in_with_username: 'auth_logged_in_with_username',
   auth_logged_out: 'auth_logged_out',
   auth_login_failed_with_username: 'auth_login_failed_with_username',
+  pat_created: 'pat_created',
+  pat_expired: 'pat_expired',
+  pat_revoked: 'pat_revoked',
+  pat_rotated: 'pat_rotated',
+  pat_used_from_new_ip: 'pat_used_from_new_ip',
   token_created: 'token_created',
   token_lifetime_updated: 'token_lifetime_updated',
 };

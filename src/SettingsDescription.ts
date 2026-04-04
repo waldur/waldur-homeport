@@ -1733,5 +1733,28 @@ export const SettingsDescription = [
       },
     ],
   },
+  {
+    description: translate('Personal Access Tokens'),
+    items: [
+      {
+        key: 'PAT_ENABLED',
+        description: translate('Enable Personal Access Token authentication.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
+        key: 'PAT_MAX_LIFETIME_DAYS',
+        description: translate('Maximum PAT lifetime in days.'),
+        default: 365,
+        type: 'integer',
+      },
+      {
+        key: 'PAT_MAX_TOKENS_PER_USER',
+        description: translate('Maximum number of active PATs per user.'),
+        default: 20,
+        type: 'integer',
+      },
+    ],
+  },
 ];
 
