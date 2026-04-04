@@ -12,6 +12,7 @@ import {
 
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { DateField } from '@waldur/form/DateField';
+import { RangeNumberField } from '@waldur/form/RangeNumberField';
 import {
   Select,
   AsyncPaginate,
@@ -48,6 +49,15 @@ export interface InjectionSeverityOption {
   label: string;
   value: InjectionSeverityEnum;
 }
+
+const formatRangeBadge = (value?: { min?: number; max?: number }) => {
+  if (!value) return '';
+  if (value.min != null && value.max != null)
+    return `${value.min} – ${value.max}`;
+  if (value.min != null) return `≥ ${value.min}`;
+  if (value.max != null) return `≤ ${value.max}`;
+  return '';
+};
 
 const PureChatThreadsFilter: FunctionComponent<{}> = () => (
   <>
@@ -145,6 +155,27 @@ const PureChatThreadsFilter: FunctionComponent<{}> = () => (
         parse={(v) => v || undefined}
       />
     </TableFilterItem>
+    <TableFilterItem
+      title={translate('Input tokens')}
+      name="input_tokens_range"
+      badgeValue={formatRangeBadge}
+    >
+      <Field name="input_tokens_range" component={RangeNumberField} min={0} />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Output tokens')}
+      name="output_tokens_range"
+      badgeValue={formatRangeBadge}
+    >
+      <Field name="output_tokens_range" component={RangeNumberField} min={0} />
+    </TableFilterItem>
+    <TableFilterItem
+      title={translate('Total tokens')}
+      name="total_tokens_range"
+      badgeValue={formatRangeBadge}
+    >
+      <Field name="total_tokens_range" component={RangeNumberField} min={0} />
+    </TableFilterItem>
   </>
 );
 
@@ -157,6 +188,9 @@ interface ChatThreadsFilterFormData {
   is_flagged: boolean;
   max_severity: InjectionSeverityOption;
   is_archived: boolean;
+  input_tokens_range: { min?: number; max?: number };
+  output_tokens_range: { min?: number; max?: number };
+  total_tokens_range: { min?: number; max?: number };
 }
 
 export const ChatThreadsFilter = reduxForm<ChatThreadsFilterFormData, {}>({
@@ -190,6 +224,24 @@ export const selectChatThreadsFilter = createSelector<
     }
     if (values.is_archived) {
       filter.is_archived = values.is_archived;
+    }
+    if (values.input_tokens_range?.min != null) {
+      filter.input_tokens_min = values.input_tokens_range.min;
+    }
+    if (values.input_tokens_range?.max != null) {
+      filter.input_tokens_max = values.input_tokens_range.max;
+    }
+    if (values.output_tokens_range?.min != null) {
+      filter.output_tokens_min = values.output_tokens_range.min;
+    }
+    if (values.output_tokens_range?.max != null) {
+      filter.output_tokens_max = values.output_tokens_range.max;
+    }
+    if (values.total_tokens_range?.min != null) {
+      filter.total_tokens_min = values.total_tokens_range.min;
+    }
+    if (values.total_tokens_range?.max != null) {
+      filter.total_tokens_max = values.total_tokens_range.max;
     }
   }
   return filter;

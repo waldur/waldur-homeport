@@ -311,6 +311,12 @@ overrides:
       - is_flagged
       - max_severity
       - is_archived
+      - input_tokens_min
+      - input_tokens_max
+      - output_tokens_min
+      - output_tokens_max
+      - total_tokens_min
+      - total_tokens_max
     user:
       searchParam: full_name
 
