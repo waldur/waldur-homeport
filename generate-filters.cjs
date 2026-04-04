@@ -215,7 +215,10 @@ class FilterMapper {
       });
     }
 
-    return this._deduplicateAndFinalize(filters);
+    return this._collapseRangePairs(
+      this._deduplicateAndFinalize(filters),
+      key,
+    );
   }
 
   mapParameter(param, opId, manualOverrides = {}) {
@@ -409,6 +412,43 @@ class FilterMapper {
     filters.forEach((f) => map.set(f.name, f));
     return Array.from(map.values());
   }
+
+  _collapseRangePairs(filters, opKey) {
+    const numberFilters = new Map();
+    for (const f of filters) {
+      if (f.component !== 'NumberField') continue;
+      const origName = f.mapTo || f.name;
+      if (origName.endsWith('_min') || origName.endsWith('_max')) {
+        const base = origName.replace(/_(min|max)$/, '');
+        if (!numberFilters.has(base)) numberFilters.set(base, {});
+        numberFilters.get(base)[origName.endsWith('_min') ? 'min' : 'max'] = f;
+      }
+    }
+
+    for (const [base, pair] of numberFilters) {
+      if (!pair.min || !pair.max) continue;
+      const overrides =
+        this.config.overrides[opKey]?.[pair.min.mapTo || pair.min.name] || {};
+      const rangeName = overrides.rangeName || `${base}_range`;
+      const rangeLabel =
+        overrides.rangeLabel || utils.humanize(base);
+      const merged = {
+        name: rangeName,
+        label: rangeLabel,
+        component: 'RangeNumberField',
+        rangeMinParam: pair.min.mapTo || pair.min.name,
+        rangeMaxParam: pair.max.mapTo || pair.max.name,
+      };
+      const minIdx = filters.indexOf(pair.min);
+      const maxIdx = filters.indexOf(pair.max);
+      const hi = Math.max(minIdx, maxIdx);
+      const lo = Math.min(minIdx, maxIdx);
+      filters.splice(hi, 1);
+      filters.splice(lo, 1, merged);
+    }
+
+    return filters;
+  }
 }
 
 // --- Generator Module ---
@@ -440,6 +480,8 @@ class Generator {
       valLabel = `badgeValue={(value) =>
       value ? translate("${trueLabel}") : translate("${falseLabel}")
     }\n      ellipsis={false}`;
+    } else if (f.component === 'RangeNumberField') {
+      valLabel = 'badgeValue={formatRangeBadge}';
     } else if (
       ['StringField', 'NumberField', 'DateField'].includes(f.component)
     ) {
@@ -459,7 +501,13 @@ class Generator {
     const validation = f.required ? 'validate={[required]}' : '';
 
     // Generate Field Inputs
-    if (
+    if (f.component === 'RangeNumberField') {
+      input = `      <Field
+        name="${f.name}"
+        component={RangeNumberField}
+        min={0}
+      />\n`;
+    } else if (
       [
         'StringField',
         'NumberField',
@@ -583,6 +631,16 @@ ${jsx}    )}\n`
     if (f.mapTo === false) {
       return '';
     }
+    if (f.component === 'RangeNumberField') {
+      return (
+        `      if (values.${f.name}?.min != null) {\n` +
+        `        filter.${f.rangeMinParam} = values.${f.name}.min;\n` +
+        `      }\n` +
+        `      if (values.${f.name}?.max != null) {\n` +
+        `        filter.${f.rangeMaxParam} = values.${f.name}.max;\n` +
+        `      }\n`
+      );
+    }
     if (f.mapTo === true) {
       logic = `        Object.assign(filter, values.${f.name}.value);\n`;
     } else if (typeof f.mapTo === 'object') {
@@ -638,6 +696,8 @@ ${jsx}    )}\n`
             if (['StringField', 'DateField'].includes(f.component))
               type = 'string';
             else if (f.component === 'NumberField') type = 'number';
+            else if (f.component === 'RangeNumberField')
+              type = '{ min?: number; max?: number }';
             else if (f.component === 'AwesomeCheckboxField') type = 'boolean';
             else if (
               f.optionsPlaceholder &&
@@ -729,13 +789,30 @@ ${filters.map(Generator.selector).join('')}    }
       })
       .join('\n');
 
+    const hasRangeField = opIds.some((id) =>
+      operationFilters[id].some((f) => f.component === 'RangeNumberField'),
+    );
+
+    const rangeHelper = hasRangeField
+      ? `const formatRangeBadge = (value?: { min?: number; max?: number }) => {
+  if (!value) return '';
+  if (value.min != null && value.max != null) return \`\${value.min} – \${value.max}\`;
+  if (value.min != null) return \`≥ \${value.min}\`;
+  if (value.max != null) return \`≤ \${value.max}\`;
+  return '';
+};`
+      : '';
+
     return [
       `// This file is auto-generated. Do not edit manually.`,
       `/* eslint-disable @typescript-eslint/no-unused-vars */`,
       this.imports(opIds, operationFilters, enumRegistry, config, processor),
       this.enums(enumRegistry, usedEnums),
+      rangeHelper,
       componentsCode,
-    ].join('\n\n');
+    ]
+      .filter(Boolean)
+      .join('\n\n');
   }
 
   static enums(reg, used) {
@@ -818,6 +895,10 @@ ${filters.map(Generator.selector).join('')}    }
       );
     if (hasComp('DateField'))
       lines.push(`import { DateField } from '@waldur/form/DateField';`);
+    if (hasComp('RangeNumberField'))
+      lines.push(
+        `import { RangeNumberField } from '@waldur/form/RangeNumberField';`,
+      );
     const formFields = [];
     if (hasComp('StringField')) formFields.push('StringField');
     if (hasComp('NumberField')) formFields.push('NumberField');

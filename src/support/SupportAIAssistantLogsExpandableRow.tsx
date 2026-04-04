@@ -15,6 +15,7 @@ import { Badge } from '@waldur/core/Badge';
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -76,6 +77,26 @@ interface MessageWithVersions {
   versions: Message[]; // ordered oldest → newest, last element = current
 }
 
+const TokenUsageBadge: FunctionComponent<{
+  id: string;
+  label: string;
+  inputTokens?: number | null;
+  outputTokens?: number | null;
+  prefix?: string;
+}> = ({ id, label, inputTokens, outputTokens, prefix }) => {
+  if (inputTokens == null && outputTokens == null) return null;
+  return (
+    <Tip id={id} label={label}>
+      <span className="text-muted small">
+        {prefix}
+        {inputTokens != null && <>↓ {formatUsageValue(inputTokens)}</>}
+        {inputTokens != null && outputTokens != null && ' / '}
+        {outputTokens != null && <>↑ {formatUsageValue(outputTokens)}</>}
+      </span>
+    </Tip>
+  );
+};
+
 const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
   messageGroup,
 }) => {
@@ -110,6 +131,13 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
             selectedMessage.created,
           )}
         </span>
+        <TokenUsageBadge
+          id={`tokens-${selectedMessage.uuid}`}
+          label={translate('Message input / output tokens')}
+          inputTokens={selectedMessage.input_tokens}
+          outputTokens={selectedMessage.output_tokens}
+          prefix="· "
+        />
         {selectedMessage.is_flagged && (
           <Tip
             id={`flag-detail-${messageGroup.current.uuid}`}
@@ -213,6 +241,7 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
           });
           return response.error ? [] : response.data;
         },
+        staleTime: 30_000,
       });
 
       // Group messages by sequence_index to build MessageWithVersions[]
@@ -255,6 +284,15 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
       return (
         <ExpandableContainer>
           <div className="d-flex flex-column gap-3">
+            <div className="d-flex align-items-center gap-2 pb-2 border-bottom">
+              <strong>{row.name}</strong>
+              <TokenUsageBadge
+                id={`title-gen-tokens-${row.uuid}`}
+                label={translate('Title input / output tokens')}
+                inputTokens={row.title_gen_input_tokens}
+                outputTokens={row.title_gen_output_tokens}
+              />
+            </div>
             {processedMessages.map((messageGroup) => (
               <MessageItem
                 key={messageGroup.current.uuid}
