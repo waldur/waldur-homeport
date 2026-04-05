@@ -23,9 +23,10 @@ async function loadData(offering_uuid: string) {
     path: { uuid: offering_uuid },
   }).then((response) => response.data)) as Offering;
   const plugins = await marketplacePluginsList();
-  const limits = plugins.data.find(
+  const pluginLimits = plugins.data.find(
     (plugin) => plugin.offering_type === offering.type,
   ).available_limits;
+  const limits = (offering as any).effective_available_limits || pluginLimits;
   return { offering, limits };
 }
 

@@ -32,8 +32,8 @@ export const EditComponentDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
           const data = formatComponent(formData);
           const { offering } = props.resolve;
           const payload =
-            offering.type === TENANT_TYPE
-              ? omit(data, ['billing_type', 'name', 'measured_unit', 'type'])
+            offering.type === TENANT_TYPE && props.resolve.component.is_builtin
+              ? omit(data, ['name', 'measured_unit', 'type'])
               : data;
           await marketplaceProviderOfferingsUpdateOfferingComponent({
             path: { uuid: offering.uuid },
@@ -71,10 +71,7 @@ export const EditComponentDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
             />
           }
         >
-          <ComponentForm
-            readOnly={props.resolve.offering.type === TENANT_TYPE}
-            offering={props.resolve.offering}
-          />
+          <ComponentForm offering={props.resolve.offering} />
         </ModalDialog>
       </form>
     );
