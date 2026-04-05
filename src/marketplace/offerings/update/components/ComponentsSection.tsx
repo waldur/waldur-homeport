@@ -13,9 +13,9 @@ import { OfferingSectionProps } from '../types';
 import { useOfferingAccountingTableTabs } from '../utils';
 
 import { AddComponentButton } from './AddComponentButton';
-import { ChangeStorageModeButton } from './ChangeStorageModeButton';
 import { DeleteComponentButton } from './DeleteComponentButton';
 import { EditComponentButton } from './EditComponentButton';
+import { SwitchModesDropdown } from './SwitchModesDropdown';
 
 const RowActions = ({ row, refetch, offering }) => {
   return (
@@ -25,11 +25,13 @@ const RowActions = ({ row, refetch, offering }) => {
         refetch={refetch}
         component={row}
       />
-      <DeleteComponentButton
-        offering={offering}
-        component={row}
-        refetch={refetch}
-      />
+      {!row.is_builtin && (
+        <DeleteComponentButton
+          offering={offering}
+          component={row}
+          refetch={refetch}
+        />
+      )}
     </ActionsDropdownComponent>
   );
 };
@@ -109,11 +111,9 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
       verboseName={translate('Components')}
       tableActions={
         <>
-          {!props.components.length && (
-            <AddComponentButton {...props} refetch={tableProps.fetch} />
-          )}
+          <AddComponentButton {...props} refetch={tableProps.fetch} />
           {props.offering.type === TENANT_TYPE ? (
-            <ChangeStorageModeButton {...props} />
+            <SwitchModesDropdown {...props} />
           ) : null}
         </>
       }
