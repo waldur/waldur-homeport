@@ -8,16 +8,12 @@ import {
   XIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { groupBy } from 'lodash-es';
-import { FC, useMemo } from 'react';
+import { FC } from 'react';
 import { ProgressBar } from 'react-bootstrap';
-import {
-  marketplaceOfferingUsersList,
-  marketplaceProviderResourcesList,
-  Offering,
-} from 'waldur-js-client';
+import { Offering } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
+import { get } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -57,16 +53,14 @@ const infoState = [
   },
 ];
 
-const InfoRow = ({ label, states }) => {
-  const statistics = useMemo(
-    () =>
-      Object.entries(groupBy(states)).map((state) => ({
-        label: state[0],
-        count: state[1].length,
-      })),
-    [states],
-  );
-  const max = states.length;
+const InfoRow = ({
+  label,
+  statistics,
+}: {
+  label: string;
+  statistics: Array<{ state: string; count: number }>;
+}) => {
+  const max = statistics.reduce((acc, item) => acc + item.count, 0);
   return (
     <>
       <FormTable.Item
@@ -82,9 +76,9 @@ const InfoRow = ({ label, states }) => {
           <ProgressBar className="shadow-none w-100 h-8px mb-5">
             {statistics.map((stat) => (
               <ProgressBar
-                key={stat.label}
+                key={stat.state}
                 variant={
-                  infoState.find((c) => c.states.includes(stat.label))
+                  infoState.find((c) => c.states.includes(stat.state))
                     ?.variant || 'default'
                 }
                 now={stat.count}
@@ -95,13 +89,13 @@ const InfoRow = ({ label, states }) => {
           <div className="d-flex flex-wrap gap-2">
             {statistics.map((stat) => {
               const state = infoState.find((c) =>
-                c.states.includes(stat.label),
+                c.states.includes(stat.state),
               );
-              const Icon = state.icon || WarningCircleIcon;
+              const Icon = state?.icon || WarningCircleIcon;
               return (
                 <Badge
-                  key={stat.label}
-                  variant={state.variant || 'default'}
+                  key={stat.state}
+                  variant={state?.variant || 'default'}
                   leftIcon={
                     // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
                     <Icon weight="bold" />
@@ -109,7 +103,7 @@ const InfoRow = ({ label, states }) => {
                   pill
                   outline
                 >
-                  {stat.label}
+                  {stat.state}
                   {': '}
                   {stat.count}
                 </Badge>
@@ -122,19 +116,11 @@ const InfoRow = ({ label, states }) => {
   );
 };
 
-const loadData = async (offering_uuid) => {
-  const resources = await getAllPages((page) =>
-    marketplaceProviderResourcesList({
-      query: { offering_uuid, page, page_size: MAX_PAGE_SIZE },
-    }),
-  );
-  const users = await getAllPages((page) =>
-    marketplaceOfferingUsersList({
-      query: { offering_uuid, page, page_size: MAX_PAGE_SIZE },
-    }),
-  );
-  return { resources, users };
-};
+const loadData = (offering_uuid: string) =>
+  get<{
+    resources: Array<{ state: string; count: number }>;
+    users: Array<{ state: string; count: number }>;
+  }>(`/marketplace-provider-offerings/${offering_uuid}/state_counters/`);
 
 export const OfferingResourcesAndUsers: FC<OwnProps> = ({ offering }) => {
   const { data, isLoading, error, refetch } = useQuery({
@@ -164,12 +150,9 @@ export const OfferingResourcesAndUsers: FC<OwnProps> = ({ offering }) => {
           <>
             <InfoRow
               label={translate('Total resources')}
-              states={data.resources.map((item) => item.state)}
+              statistics={data.resources}
             />
-            <InfoRow
-              label={translate('Total users')}
-              states={data.users.map((item) => item.state)}
-            />
+            <InfoRow label={translate('Total users')} statistics={data.users} />
           </>
         )}
       </FormTable>
