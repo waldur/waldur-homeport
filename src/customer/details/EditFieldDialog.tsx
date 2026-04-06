@@ -149,6 +149,23 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
               />
             ) : props.resolve.name === 'address' ? (
               <StringField name="address" label={translate('Address')} />
+            ) : props.resolve.name === 'city' ? (
+              <StringField name="city" label={translate('City')} />
+            ) : props.resolve.name === 'state' ? (
+              <StringField name="state" label={translate('State')} />
+            ) : props.resolve.name === 'parish' ? (
+              <StringField name="parish" label={translate('Parish')} />
+            ) : props.resolve.name === 'street' ? (
+              <StringField name="street" label={translate('Street')} />
+            ) : props.resolve.name === 'house_nr' ? (
+              <StringField name="house_nr" label={translate('House number')} />
+            ) : props.resolve.name === 'apartment_nr' ? (
+              <StringField
+                name="apartment_nr"
+                label={translate('Apartment number')}
+              />
+            ) : props.resolve.name === 'household' ? (
+              <StringField name="household" label={translate('Household')} />
             ) : props.resolve.name === 'country' ? (
               <SelectCountryField />
             ) : props.resolve.name === 'access_subnets' ? (
