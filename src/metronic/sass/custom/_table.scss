@@ -648,6 +648,17 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
   }
 }
 
+// Tables inside modals — add outer border
+.modal {
+  .table-responsive {
+    border: 1px solid $border-color;
+
+    .table {
+      margin-bottom: 0;
+    }
+  }
+}
+
 // Chat log message bubble inside expanded row
 .chat-log-bubble {
   background-color: $bg-tertiary;
