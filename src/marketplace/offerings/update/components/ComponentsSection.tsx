@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { OfferingComponent } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { showComponentsList } from '@waldur/marketplace/common/registry';
@@ -13,6 +14,7 @@ import { OfferingSectionProps } from '../types';
 import { useOfferingAccountingTableTabs } from '../utils';
 
 import { AddComponentButton } from './AddComponentButton';
+import { getLimitPeriods } from './ComponentLimitPeriodField';
 import { DeleteComponentButton } from './DeleteComponentButton';
 import { EditComponentButton } from './EditComponentButton';
 import { SwitchModesDropdown } from './SwitchModesDropdown';
@@ -67,7 +69,7 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
   }
 
   return (
-    <Table
+    <Table<OfferingComponent>
       {...tableProps}
       columns={[
         {
@@ -85,6 +87,18 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
         {
           title: translate('Billing type'),
           render: ({ row }) => <>{getBillingTypeLabel(row.billing_type)}</>,
+        },
+        {
+          title: translate('Limit period'),
+          render: ({ row }) => (
+            <>
+              {
+                getLimitPeriods().find(
+                  (period) => period.value === row.limit_period,
+                )?.label
+              }
+            </>
+          ),
         },
       ]}
       tabs={tableTabs}
