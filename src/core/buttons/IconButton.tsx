@@ -15,6 +15,8 @@ interface IconButtonProps {
   onClick: (event: React.MouseEvent) => void;
   /** Bootstrap button variant */
   variant?: ButtonVariant;
+  /** Optional inline styles */
+  style?: React.CSSProperties;
   /** Disabled state */
   disabled?: boolean;
   /** Loading/pending state - shows spinner */
@@ -49,6 +51,7 @@ export const IconButton: FC<IconButtonProps> = ({
   disabled,
   pending,
   className,
+  style,
   type = 'button',
   'data-testid': testId,
 }) => {
@@ -57,6 +60,7 @@ export const IconButton: FC<IconButtonProps> = ({
       <Button
         variant={variant}
         size="lg"
+        style={style}
         className={classNames('btn-icon', className, {
           disabled: disabled || pending,
         })}
