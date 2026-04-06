@@ -640,6 +640,22 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-personal-access-tokens-settings',
+    url: 'personal-access-tokens-settings/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./personal-access-tokens/AdministrationPersonalAccessTokens').then(
+        (module) => ({
+          default: module.AdministrationPersonalAccessTokens,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Personal access tokens'),
+    },
+  },
+
+  {
     name: 'admin-reporting-settings',
     url: 'reporting-settings/',
     parent: 'admin-configuration',

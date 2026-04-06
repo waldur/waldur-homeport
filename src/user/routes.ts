@@ -60,7 +60,8 @@ export const states: StateDeclaration[] = [
           ENV.plugins.WALDUR_CORE.FREEIPA_ENABLED ||
           !isFeatureVisible(UserFeatures.conceal_remote_accounts) ||
           isStaffOrSupport(state) ||
-          !isFeatureVisible(UserFeatures.conceal_api_token),
+          !isFeatureVisible(UserFeatures.conceal_api_token) ||
+          ENV.plugins.WALDUR_CORE.PAT_ENABLED,
       ],
     },
   },
@@ -273,6 +274,23 @@ export const states: StateDeclaration[] = [
       ],
     },
   },
+  {
+    name: 'profile-personal-access-tokens',
+    url: 'personal-access-tokens/',
+    component: lazyComponent(() =>
+      import('./personal-access-tokens/PersonalAccessTokensList').then(
+        (module) => ({
+          default: module.PersonalAccessTokensList,
+        }),
+      ),
+    ),
+    parent: 'profile-credentials',
+    data: {
+      breadcrumb: () => translate('Personal access tokens'),
+      permissions: [() => ENV.plugins.WALDUR_CORE.PAT_ENABLED],
+    },
+  },
+
   {
     name: 'projects',
     url: '/projects/',
