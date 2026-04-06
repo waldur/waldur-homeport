@@ -292,13 +292,13 @@ export const CallPerformanceAnalyticsPage: FC = () => {
     [calls],
   );
 
-  if (isLoading) return <LoadingSpinner />;
-  if (error) return <LoadingErred loadData={refetch} />;
-
   const breadcrumbs = useMemo(
     () => [{ key: 'analytics', text: translate('Analytics'), active: true }],
     [],
   );
+
+  if (isLoading) return <LoadingSpinner />;
+  if (error) return <LoadingErred loadData={refetch} />;
 
   return (
     <>

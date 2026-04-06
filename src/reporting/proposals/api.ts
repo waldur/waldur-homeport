@@ -9,15 +9,15 @@ import {
 
 export const getCallPerformanceStats = () =>
   get<CallPerformanceData[]>(
-    `/api/call-managing-organisations/global_stats_performance/`,
+    `/call-managing-organisations/global_stats_performance/`,
   );
 
 export const getReviewProgressStats = () =>
   get<ReviewProgressData[]>(
-    `/api/call-managing-organisations/global_stats_review_progress/`,
+    `/call-managing-organisations/global_stats_review_progress/`,
   );
 
 export const getResourceDemandStats = () =>
   get<ResourceDemandData[]>(
-    `/api/call-managing-organisations/global_stats_resource_demand/`,
+    `/call-managing-organisations/global_stats_resource_demand/`,
   );
