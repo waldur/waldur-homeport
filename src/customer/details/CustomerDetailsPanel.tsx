@@ -68,14 +68,49 @@ export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
           value: props.customer.address,
         },
         {
+          label: translate('Country'),
+          key: 'country',
+          value: props.customer.country_name,
+        },
+        {
+          label: translate('City'),
+          key: 'city',
+          value: props.customer.city,
+        },
+        {
+          label: translate('State'),
+          key: 'state',
+          value: props.customer.state,
+        },
+        {
+          label: translate('Parish'),
+          key: 'parish',
+          value: props.customer.parish,
+        },
+        {
+          label: translate('Street'),
+          key: 'street',
+          value: props.customer.street,
+        },
+        {
+          label: translate('House number'),
+          key: 'house_nr',
+          value: props.customer.house_nr,
+        },
+        {
           label: translate('Postal code'),
           key: 'postal',
           value: props.customer.postal,
         },
         {
-          label: translate('Country'),
-          key: 'country',
-          value: props.customer.country_name,
+          label: translate('Apartment number'),
+          key: 'apartment_nr',
+          value: props.customer.apartment_nr,
+        },
+        {
+          label: translate('Household'),
+          key: 'household',
+          value: props.customer.household,
         },
         user?.is_staff && {
           label: translate('Maximum number of service accounts'),
