@@ -12,4 +12,6 @@ type CompactEditButtonProps = Omit<EditButtonProps, 'size'>;
  */
 export const CompactEditButton: FunctionComponent<CompactEditButtonProps> = (
   props,
-) => <EditButton {...props} size="sm" data-testid="compact-edit-button" />;
+) => (
+  <EditButton {...props} size="sm" btnIcon data-testid="compact-edit-button" />
+);
