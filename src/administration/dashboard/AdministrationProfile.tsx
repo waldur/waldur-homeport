@@ -68,7 +68,10 @@ export const AdministrationProfile = ({
     return Promise.all(promises);
   });
 
-  const [staff, supports] = value || [];
+  const [staff, supports] = value || [
+    { options: [], totalItems: 0 },
+    { options: [], totalItems: 0 },
+  ];
 
   const goToUsers = useCallback(
     (isStaff = false, isSupport = false) => {
