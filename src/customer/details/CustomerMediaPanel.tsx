@@ -12,12 +12,16 @@ import { getItemAbbreviation } from '@waldur/navigation/workspace/context-select
 import { EDIT_CUSTOMER_IMAGE_ID } from './constants';
 import { CustomerEditPanelProps } from './types';
 
-export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
+interface CustomerMediaPanelOwnProps extends CustomerEditPanelProps {
+  embedded?: boolean;
+}
+
+export const CustomerMediaPanel = connect<{}, {}, CustomerMediaPanelOwnProps>(
   (_, ownProps) => ({
     initialValues: { image: ownProps.customer.image },
   }),
 )(
-  reduxForm<{ image }, CustomerEditPanelProps>({
+  reduxForm<{ image }, CustomerMediaPanelOwnProps>({
     form: EDIT_CUSTOMER_IMAGE_ID,
   })((props) => {
     const abbreviation = useMemo(
@@ -31,6 +35,37 @@ export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
       dispatch(props.change('image', props.customer.image));
     }, [dispatch, props.customer]);
 
+    const content = (
+      <form onSubmit={props.handleSubmit(props.callback)}>
+        <Field
+          name="image"
+          component={(fieldProps) => (
+            <WideImageField
+              alt={abbreviation}
+              initialValue={props.customer.image}
+              max={2 * 1024 * 1024} // 2MB
+              size={64}
+              extraActions={({ isChanged, isTooLarge }) =>
+                isChanged || props.submitting ? (
+                  <CompactSubmitButton
+                    submitting={props.submitting}
+                    label={translate('Save')}
+                    disabled={isTooLarge}
+                    iconNode={<UploadSimpleIcon weight="bold" />}
+                  />
+                ) : null
+              }
+              {...fieldProps}
+            />
+          )}
+        />
+      </form>
+    );
+
+    if (props.embedded) {
+      return <div className="p-7">{content}</div>;
+    }
+
     return (
       <Card className="card-bordered mb-5">
         <Card.Header>
@@ -38,32 +73,7 @@ export const CustomerMediaPanel = connect<{}, {}, CustomerEditPanelProps>(
             <h3>{translate('Logo')}</h3>
           </Card.Title>
         </Card.Header>
-        <Card.Body>
-          <form onSubmit={props.handleSubmit(props.callback)}>
-            <Field
-              name="image"
-              component={(fieldProps) => (
-                <WideImageField
-                  alt={abbreviation}
-                  initialValue={props.customer.image}
-                  max={2 * 1024 * 1024} // 2MB
-                  size={64}
-                  extraActions={({ isChanged, isTooLarge }) =>
-                    isChanged || props.submitting ? (
-                      <CompactSubmitButton
-                        submitting={props.submitting}
-                        label={translate('Save')}
-                        disabled={isTooLarge}
-                        iconNode={<UploadSimpleIcon weight="bold" />}
-                      />
-                    ) : null
-                  }
-                  {...fieldProps}
-                />
-              )}
-            />
-          </form>
-        </Card.Body>
+        <Card.Body>{content}</Card.Body>
       </Card>
     );
   }),
