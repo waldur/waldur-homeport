@@ -7,6 +7,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures, ProjectFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { PROJECTS_LIST } from '@waldur/project/constants';
+import { ProjectEndDateField } from '@waldur/project/ProjectEndDateField';
 import { ProjectsListActions } from '@waldur/project/ProjectsListActions';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
@@ -84,14 +85,11 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
     },
     {
       title: translate('End date'),
-      render: ({ row }) => (
-        <>{row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE}</>
-      ),
-
+      render: ProjectEndDateField,
       orderField: 'end_date',
       export: false,
       id: 'end_date',
-      keys: ['end_date'],
+      keys: ['end_date', 'grace_period_days', 'is_in_grace_period'],
     },
   ];
 
