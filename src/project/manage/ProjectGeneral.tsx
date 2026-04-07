@@ -66,11 +66,22 @@ export const ProjectGeneral: React.FC<ProjectGeneralProps> = ({ project }) => {
           },
           {
             label: translate('Grace period (days)'),
-            description: translate(
-              'Number of extra days after project end date before resources are terminated. Overrides customer-level setting.',
-            ),
+            description:
+              project.customer_grace_period_days != null
+                ? translate(
+                    'Number of extra days after project end date before resources are terminated. Overrides customer-level setting (organization default: {days} days).',
+                    {
+                      days: project.customer_grace_period_days,
+                    },
+                  )
+                : translate(
+                    'Number of extra days after project end date before resources are terminated. Overrides customer-level setting.',
+                  ),
             key: 'grace_period_days',
-            value: project.grace_period_days,
+            value:
+              project.grace_period_days ??
+              project.customer_grace_period_days ??
+              renderFieldOrDash(null),
           },
           project.effective_end_date &&
             project.grace_period_days > 0 && {
