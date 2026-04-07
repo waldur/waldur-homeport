@@ -3,7 +3,6 @@ import { Field } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 
-import { AddPrepaymentButton } from './AddPrepaymentButton';
 import { ComponentCost } from './ComponentCost';
 import { MeasuredUnitInput } from './MeasuredUnitInput';
 import { Component } from './types';
@@ -15,7 +14,6 @@ export const PrepaidRows = (props: { components: Component[] }) => {
   return (
     <>
       {props.components.map((component) => {
-        // Call the new function to get the cost parts
         const cost = getPrepaidCostParts(component, endDate);
         return (
           <tr key={component.type}>
@@ -31,9 +29,6 @@ export const PrepaidRows = (props: { components: Component[] }) => {
                 component={MeasuredUnitInput}
                 props={{ component }}
               />
-            </td>
-            <td>
-              <AddPrepaymentButton component={component} />
             </td>
             <td>
               <div className="fw-bolder">
