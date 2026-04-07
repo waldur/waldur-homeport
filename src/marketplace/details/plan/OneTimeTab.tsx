@@ -1,11 +1,14 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
 import FormTable from '@waldur/form/FormTable';
 import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
 
+import { AddPrepaymentButton } from './AddPrepaymentButton';
 import { ComponentRowTotal } from './ComponentRowTotal';
 import { ControlRows } from './ControlRows';
 import { FixedRows } from './FixedRows';
+import { mergePrepaidConstraints } from './prepaidConstraints';
 import { PrepaidRows } from './PrepaidRows';
 
 export const OneTimeTab = ({
@@ -15,6 +18,11 @@ export const OneTimeTab = ({
 }) => {
   const shouldConcealPrices =
     useSelector(concealPricesSelector) || concealBillingInfo;
+
+  const prepaidConstraints = useMemo(
+    () => mergePrepaidConstraints(oneTime.prepaidRows),
+    [oneTime.prepaidRows],
+  );
 
   return (
     <section className="plan-details-section">
@@ -29,7 +37,14 @@ export const OneTimeTab = ({
         )}
 
         {oneTime.prepaidRows.length > 0 && (
-          <PrepaidRows components={oneTime.prepaidRows} />
+          <>
+            <tr>
+              <td colSpan={3}>
+                <AddPrepaymentButton constraints={prepaidConstraints} />
+              </td>
+            </tr>
+            <PrepaidRows components={oneTime.prepaidRows} />
+          </>
         )}
 
         {/* Few */}

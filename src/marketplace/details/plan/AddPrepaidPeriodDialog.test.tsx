@@ -5,9 +5,9 @@ import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Project } from 'waldur-js-client';
 
 import { formatDate } from '@waldur/core/dateUtils';
-import { OfferingComponent } from '@waldur/marketplace/types';
 
 import { AddPrepaidPeriodDialog } from './AddPrepaidPeriodDialog';
+import { PrepaidConstraints } from './prepaidConstraints';
 
 // Mock child components to isolate our component's logic
 vi.mock('@waldur/form/DateField', () => ({
@@ -67,26 +67,26 @@ vi.mock('@waldur/i18n', () => ({
 
 // Helper to create fixtures
 const createFixtures = () => {
-  const component: OfferingComponent = {
-    type: 'ram',
-    name: 'RAM',
-    measured_unit: 'GB',
+  const constraints: PrepaidConstraints = {
+    min_prepaid_duration: 1,
+    max_prepaid_duration: null,
+    prepaid_duration_step: 1,
   };
   const project: Project = {
     url: '/api/projects/1/',
     uuid: 'uuid-project-1',
     name: 'Test Project',
   };
-  return { component, project };
+  return { constraints, project };
 };
 
 const renderComponent = (props) => {
   const onSubmit = vi.fn();
   const resolve = vi.fn();
-  const { component, project, startDate } = props;
+  const { constraints, project, startDate } = props;
   render(
     <AddPrepaidPeriodDialog
-      component={component}
+      constraints={constraints}
       project={project}
       startDate={startDate}
       onSubmit={onSubmit}
@@ -104,9 +104,9 @@ describe('AddPrepaidPeriodDialog', () => {
     // Freeze time to make test deterministic
     const today = '2024-01-15';
     vi.setSystemTime(new Date(today));
-    const { component, project } = createFixtures();
-    component.min_prepaid_duration = 3; // Set a different min duration
-    renderComponent({ component, project });
+    const { constraints, project } = createFixtures();
+    constraints.min_prepaid_duration = 3; // Set a different min duration
+    renderComponent({ constraints, project });
 
     const expectedEndDateISO = DateTime.fromISO(today)
       .plus({ months: 3 })
@@ -124,9 +124,9 @@ describe('AddPrepaidPeriodDialog', () => {
 
   it('uses provided start date for calculations', () => {
     const startDate = '2025-02-01';
-    const { component, project } = createFixtures();
-    component.min_prepaid_duration = 1;
-    renderComponent({ component, project, startDate });
+    const { constraints, project } = createFixtures();
+    constraints.min_prepaid_duration = 1;
+    renderComponent({ constraints, project, startDate });
 
     const expectedEndDateISO = DateTime.fromISO(startDate)
       .plus({ months: 1 })
@@ -147,11 +147,11 @@ describe('AddPrepaidPeriodDialog', () => {
     const today = '2024-01-15';
     vi.setSystemTime(new Date(today));
 
-    const { component, project } = createFixtures();
+    const { constraints, project } = createFixtures();
     project.end_date = '2024-05-15'; // 4 months from now
-    component.max_prepaid_duration = 6; // Offering allows more
+    constraints.max_prepaid_duration = 6; // Offering allows more
 
-    renderComponent({ component, project });
+    renderComponent({ constraints, project });
 
     // Switch to custom range
     const select = screen.getByTestId('select-field');
@@ -178,10 +178,10 @@ describe('AddPrepaidPeriodDialog', () => {
     const today = '2024-01-15';
     vi.setSystemTime(new Date(today));
 
-    const { component, project } = createFixtures();
-    component.min_prepaid_duration = 2;
+    const { constraints, project } = createFixtures();
+    constraints.min_prepaid_duration = 2;
 
-    const { onSubmit, resolve } = renderComponent({ component, project });
+    const { onSubmit, resolve } = renderComponent({ constraints, project });
 
     await user.click(screen.getByRole('button', { name: /Confirm/i }));
 
@@ -196,8 +196,8 @@ describe('AddPrepaidPeriodDialog', () => {
 
   it('submits with correct end date for custom range', async () => {
     const user = userEvent.setup();
-    const { component, project } = createFixtures();
-    const { onSubmit, resolve } = renderComponent({ component, project });
+    const { constraints, project } = createFixtures();
+    const { onSubmit, resolve } = renderComponent({ constraints, project });
 
     // Switch to custom
     const select = screen.getByTestId('select-field');
@@ -220,10 +220,10 @@ describe('AddPrepaidPeriodDialog', () => {
     const today = '2024-01-15';
     vi.setSystemTime(new Date(today));
 
-    const { component, project } = createFixtures();
+    const { constraints, project } = createFixtures();
     project.end_date = '2024-04-10'; // ~3 months from now
 
-    renderComponent({ component, project });
+    renderComponent({ constraints, project });
 
     const select = screen.getByTestId('select-field');
     const options = Array.from(select.querySelectorAll('option'));

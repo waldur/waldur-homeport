@@ -17,7 +17,7 @@ import { CompactActionButton } from '@waldur/table/CompactActionButton';
 
 import { ORDER_FORM_ID } from '../constants';
 
-import { Component } from './types';
+import { PrepaidConstraints } from './prepaidConstraints';
 import { getEndDate, getStartDate } from './utils';
 
 const AddPrepaidPeriodDialog = lazyComponent(() =>
@@ -27,9 +27,9 @@ const AddPrepaidPeriodDialog = lazyComponent(() =>
 );
 
 export const AddPrepaymentButton = ({
-  component,
+  constraints,
 }: {
-  component: Component;
+  constraints: PrepaidConstraints;
 }) => {
   const { openDialog, closeDialog } = useModal();
   const dispatch = useDispatch();
@@ -37,13 +37,12 @@ export const AddPrepaymentButton = ({
   const startDate = useSelector(getStartDate);
   const project = useSelector(orderProjectSelector);
 
-  const handleAddPrepayment = (component: Component) => {
+  const handleAddPrepayment = () => {
     openDialog(AddPrepaidPeriodDialog, {
-      component,
+      constraints,
       project,
       startDate,
       onSubmit: (data: { end_date: string }) => {
-        // Update the end_date field in the parent redux-form
         dispatch(change(ORDER_FORM_ID, `attributes.end_date`, data.end_date));
       },
       resolve: closeDialog,
@@ -68,7 +67,6 @@ export const AddPrepaymentButton = ({
     const start = DateTime.fromISO(effectiveStartDate);
     const end = DateTime.fromISO(endDate);
     if (start.year === end.year) {
-      // Same year: format start date without year for brevity
       const formattedStart = start.toLocaleString({
         month: 'short',
         day: 'numeric',
@@ -79,7 +77,6 @@ export const AddPrepaymentButton = ({
       });
       return `${formattedStart} - ${formattedEnd}`;
     } else {
-      // Different years: show full dates for clarity
       return `${formatDate(effectiveStartDate)} - ${formatDate(endDate)}`;
     }
   }, [effectiveStartDate, endDate]);
@@ -111,7 +108,7 @@ export const AddPrepaymentButton = ({
     <CompactActionButton
       variant="text-primary"
       className="mb-1"
-      action={() => handleAddPrepayment(component)}
+      action={handleAddPrepayment}
       iconNode={<CalendarPlusIcon weight="bold" />}
       title={translate('Add prepayment')}
     />
