@@ -87,6 +87,16 @@ export const getResourceSummaryFields = ({
       value: resource.end_date ? formatDate(resource.end_date) : null,
     },
     {
+      name: 'project_end_date',
+      label: translate('Project end date'),
+      value: resource.project_end_date
+        ? resource.project_effective_end_date &&
+          resource.project_effective_end_date !== resource.project_end_date
+          ? `${formatDate(resource.project_end_date)} (+${Math.round((new Date(resource.project_effective_end_date).getTime() - new Date(resource.project_end_date).getTime()) / 86400000)}d grace → ${formatDate(resource.project_effective_end_date)})`
+          : formatDate(resource.project_end_date)
+        : null,
+    },
+    {
       name: 'uuid',
       label: translate('UUID'),
       value: resource.uuid,

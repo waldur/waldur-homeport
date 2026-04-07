@@ -152,9 +152,26 @@ export const getResourceAllListColumns = (
         : []),
       {
         title: translate('Project end date'),
-        render: ({ row }) => <>{renderFieldOrDash(row.project_end_date)}</>,
+        render: ({ row }) => (
+          <>
+            {renderFieldOrDash(row.project_end_date)}
+            {row.project_effective_end_date &&
+              row.project_end_date &&
+              row.project_effective_end_date !== row.project_end_date && (
+                <span className="text-muted ms-1">
+                  (+
+                  {Math.round(
+                    (new Date(row.project_effective_end_date).getTime() -
+                      new Date(row.project_end_date).getTime()) /
+                      86400000,
+                  )}
+                  d)
+                </span>
+              )}
+          </>
+        ),
         id: 'project_end_date',
-        keys: ['project_end_date'],
+        keys: ['project_end_date', 'project_effective_end_date'],
         optional: true,
       },
       {
