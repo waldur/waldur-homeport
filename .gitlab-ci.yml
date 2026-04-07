@@ -14,6 +14,8 @@ include:
   - project: "waldur/waldur-pipelines"
     file: "/templates/deploy/dev-env-update.yml"
   - project: "waldur/waldur-pipelines"
+    file: "/templates/test/vulnerability-scan.yml"
+  - project: "waldur/waldur-pipelines"
     file: "/templates/sbom/upload-sboms-to-docs.yml"
   - project: "waldur/waldur-pipelines"
     file: "/templates/sbom/generate-image-sbom.yml"
@@ -42,6 +44,14 @@ before_script:
   - apk add git || echo "Non-Alpine image, skipping"
   - yarn config set cache-folder .yarn
   - yarn install --frozen-lockfile
+
+Scan JS dependencies:
+  extends: .Vulnerability scan template
+  variables:
+    LOCKFILE_PATH: "yarn.lock"
+  before_script:
+    - wget -q "https://github.com/google/osv-scanner/releases/download/v${OSV_SCANNER_VERSION}/osv-scanner_linux_amd64" -O /usr/local/bin/osv-scanner
+    - chmod +x /usr/local/bin/osv-scanner
 
 Run linters:
   stage: test
