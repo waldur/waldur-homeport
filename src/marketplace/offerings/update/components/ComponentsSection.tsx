@@ -126,7 +126,7 @@ export const ComponentsSection: FC<OfferingSectionProps & { components }> = (
       tableActions={
         <>
           <AddComponentButton {...props} refetch={tableProps.fetch} />
-          {props.offering.type === TENANT_TYPE ? (
+          {(props.offering.components || []).length > 0 ? (
             <SwitchModesDropdown {...props} />
           ) : null}
         </>
