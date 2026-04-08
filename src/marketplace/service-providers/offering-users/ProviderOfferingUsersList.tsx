@@ -198,6 +198,8 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
       title: translate('Username'),
       render: ({ row }) => renderFieldOrDash(row.user_username),
       export: 'user_username',
+      copyField: (row) => row.user_username,
+      ellipsis: false,
     },
     {
       title: translate('External username'),
