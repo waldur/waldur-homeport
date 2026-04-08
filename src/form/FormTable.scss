@@ -21,11 +21,19 @@
   }
 
   th {
-    color: var(--bs-gray-800);
+    color: var(--bs-gray-700);
     font-weight: 500;
 
     &:first-child {
       padding-left: 0;
+    }
+
+    .description {
+      color: var(--bs-gray-500);
+      display: -webkit-box;
+      -webkit-line-clamp: 2;
+      -webkit-box-orient: vertical;
+      overflow: hidden;
     }
   }
   td {
