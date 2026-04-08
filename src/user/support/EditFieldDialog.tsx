@@ -7,6 +7,7 @@ import { required } from '@waldur/core/validators';
 import { SubmitButton, TextField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { CountrySelectField } from '@waldur/form/CountrySelectField';
+import { DateField } from '@waldur/form/DateField';
 import { MultiCountrySelectField } from '@waldur/form/MultiCountrySelectField';
 import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
 import { StringField } from '@waldur/form/StringField';
@@ -172,6 +173,17 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
                 <Field
                   name="organization_type"
                   component={OrganizationTypeSelectField as any}
+                  validate={resolve.requiredMsg ? required : undefined}
+                />
+              </FormGroup>
+            ) : resolve.name === 'birth_date' ? (
+              <FormGroup
+                label={resolve.label}
+                required={Boolean(resolve.requiredMsg)}
+              >
+                <Field
+                  name="birth_date"
+                  component={DateField as any}
                   validate={resolve.requiredMsg ? required : undefined}
                 />
               </FormGroup>

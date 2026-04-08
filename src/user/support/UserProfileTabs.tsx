@@ -5,7 +5,7 @@ import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { formatDateTime } from '@waldur/core/dateUtils';
+import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -168,9 +168,10 @@ const BasicInfoTab = ({ user, disabled, isSelf }: TabContentProps) => {
 const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
   const hasPersonalTitle = isProfileAttributeEnabled('personal_title');
   const hasGender = isProfileAttributeEnabled('gender');
+  const hasBirthDate = isProfileAttributeEnabled('birth_date');
   const hasPlaceOfBirth = isProfileAttributeEnabled('place_of_birth');
 
-  if (!hasPersonalTitle && !hasGender && !hasPlaceOfBirth) {
+  if (!hasPersonalTitle && !hasGender && !hasBirthDate && !hasPlaceOfBirth) {
     return (
       <div className="text-muted text-center py-6">
         {translate('No personal identity fields are enabled.')}
@@ -209,6 +210,22 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
             isSelf
               ? translate('Your gender (ISO 5218)')
               : translate("The user's gender")
+          }
+        />
+      )}
+      {hasBirthDate && (
+        <UserEditRow
+          user={user}
+          label={translate('Birth date')}
+          name="birth_date"
+          value={user.birth_date ? formatDate(user.birth_date) : null}
+          disabled={disabled}
+          required={isRequired('birth_date')}
+          protected={fieldIsProtected(user, 'birth_date')}
+          description={
+            isSelf
+              ? translate('Your date of birth')
+              : translate("The user's date of birth")
           }
         />
       )}
@@ -453,7 +470,7 @@ const OrganizationTab = ({ user, disabled, isSelf }: TabContentProps) => {
 };
 
 // System Tab
-const SystemTab = ({ user, disabled, isSelf }: TabContentProps) => {
+const SystemTab = ({ user, disabled }: TabContentProps) => {
   const isVisibleStaffOrSupport = useSelector(isStaffOrSupport);
   const currentUser = useSelector(getUser);
   const hasEdupersonAssurance =
@@ -464,6 +481,15 @@ const SystemTab = ({ user, disabled, isSelf }: TabContentProps) => {
 
   return (
     <FormTable>
+      <UserEditRow
+        user={user}
+        label={translate('Username')}
+        name="username"
+        value={user.username}
+        disabled={disabled}
+        protected={true}
+        protectedMsg={translate('Read-only field')}
+      />
       {hasEdupersonAssurance && (
         <UserEditRow
           user={user}
@@ -501,11 +527,7 @@ const SystemTab = ({ user, disabled, isSelf }: TabContentProps) => {
           value={formatUserStatus(user)}
           disabled={disabled}
           protected={true}
-          description={
-            isSelf
-              ? translate('Describe your user account type')
-              : translate("Describe user's account type")
-          }
+          protectedMsg={translate('Read-only field')}
         />
       )}
       {user.civil_number && (
@@ -648,6 +670,12 @@ const useTabStats = (user: User): Record<TabKey, TabStats> => {
         label: translate('Gender'),
       },
       {
+        name: 'birth_date',
+        enabled: isProfileAttributeEnabled('birth_date'),
+        value: user.birth_date,
+        label: translate('Birth date'),
+      },
+      {
         name: 'place_of_birth',
         enabled: isProfileAttributeEnabled('place_of_birth'),
         value: user.place_of_birth,
@@ -711,6 +739,12 @@ const useTabStats = (user: User): Record<TabKey, TabStats> => {
 
     // System tab has no mandatory editable fields
     const systemFields = [
+      {
+        name: 'username',
+        enabled: true,
+        value: user.username,
+        label: translate('Username'),
+      },
       {
         name: 'date_joined',
         enabled: true,
@@ -787,6 +821,7 @@ export const UserProfileTabs = ({
   const hasPersonalFields =
     isProfileAttributeEnabled('personal_title') ||
     isProfileAttributeEnabled('gender') ||
+    isProfileAttributeEnabled('birth_date') ||
     isProfileAttributeEnabled('place_of_birth');
 
   const hasGeographicFields =
