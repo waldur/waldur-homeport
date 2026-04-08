@@ -47,11 +47,7 @@ export function getTerminationDateProps(
   return props;
 }
 
-const hasPrepaidComponents = (offering): boolean =>
-  offering?.components?.some((c) => c.is_prepaid);
-
 export const TerminationDateField = ({ offering }) => {
-  const isPrepaid = hasPrepaidComponents(offering);
   const dateFieldProps = getTerminationDateProps(offering.plugin_options);
 
   return (
@@ -59,17 +55,11 @@ export const TerminationDateField = ({ offering }) => {
       name="attributes.end_date"
       label={translate('Termination date')}
       component={FormGroup}
-      description={
-        isPrepaid
-          ? translate(
-              'Determined by the prepayment duration selected for this offering.',
-            )
-          : translate(
-              'The date is inclusive. Once reached, resource will be scheduled for termination.',
-            )
-      }
+      description={translate(
+        'The date is inclusive. Once reached, resource will be scheduled for termination.',
+      )}
     >
-      <DateField {...dateFieldProps} disabled={isPrepaid} />
+      <DateField {...dateFieldProps} />
     </Field>
   );
 };

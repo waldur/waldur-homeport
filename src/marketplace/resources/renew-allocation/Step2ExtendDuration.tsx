@@ -1,16 +1,9 @@
-import { FC, useMemo } from 'react';
-import { Col, Row } from 'react-bootstrap';
-import { Field as FormField, useFormState } from 'react-final-form';
+import { DateTime } from 'luxon';
+import { FC, useCallback, useMemo } from 'react';
+import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
-import {
-  composeValidators,
-  greaterThanOrEqual,
-  lessThanOrEqual,
-  required,
-} from '@waldur/core/validators';
-import { NumberField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { Field } from '@waldur/resource/summary';
@@ -19,18 +12,25 @@ import { WizardModal, WizardStepProps } from '@waldur/wizard';
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';
 
-const multipleOfStep = (step: number, base: number) => (value: number) =>
-  step > 1 && (value - base) % step !== 0
-    ? translate(
-        'Must be a multiple of {step} starting from {base} (e.g. {example}).',
-        { step, base, example: base + step },
-      )
-    : undefined;
+const SelectFieldInline = ({ input, options }) => (
+  <select
+    className="form-select"
+    value={input.value}
+    onChange={(e) => input.onChange(Number(e.target.value))}
+  >
+    {options.map((opt) => (
+      <option key={opt.value} value={opt.value}>
+        {opt.label}
+      </option>
+    ))}
+  </select>
+);
 
 export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
   const resources: Resource[] = props.data.resources;
   const isMulti = resources?.length > 1;
   const { values } = useFormState<RenewAllocationFormData>();
+  const form = useForm();
 
   const currentEndDate = useMemo(
     () => (resources[0].end_date ? formatDate(resources[0].end_date) : 'N/A'),
@@ -43,67 +43,80 @@ export const Step2ExtendDuration: FC<WizardStepProps> = (props) => {
   );
 
   const minMonths = prepaidComponent?.min_renewal_duration ?? 1;
-  const maxMonths = prepaidComponent?.max_renewal_duration ?? 60;
+  const maxMonths = prepaidComponent?.max_renewal_duration ?? 12;
   const step = prepaidComponent?.renewal_duration_step ?? 1;
+
+  const monthOptions = useMemo(() => {
+    const options = [];
+    for (let i = minMonths; i <= maxMonths; i += step) {
+      options.push({
+        value: i,
+        label:
+          i === 1
+            ? translate('1 month')
+            : translate('{count} months', { count: i }),
+      });
+    }
+    return options;
+  }, [minMonths, maxMonths, step]);
+
+  const handleMonthChange = useCallback(
+    (months: number) => {
+      form.change('extension_months', months);
+    },
+    [form],
+  );
+
+  const extensionMonths = Number(values.extension_months) || 0;
+
+  const newEndDateText = useMemo(() => {
+    if (!extensionMonths) return null;
+    const base = resources[0].end_date
+      ? parseDate(resources[0].end_date)
+      : DateTime.now();
+    return formatDate(base.plus({ months: extensionMonths }));
+  }, [extensionMonths, resources]);
 
   return (
     <WizardModal {...props}>
-      <Row>
-        <Col sm={6} md={5} lg={4}>
-          {!isMulti && (
-            <Field
-              label={translate('Current end date')}
-              value={currentEndDate}
-              labelCol="auto"
-              valueCol="auto"
-              valueClass="ms-auto"
-              className="mb-5"
-              xs="auto"
-            />
-          )}
-          <FormField
-            name="extension_months"
-            validate={composeValidators(
-              required,
-              greaterThanOrEqual(minMonths),
-              lessThanOrEqual(maxMonths),
-              multipleOfStep(step, minMonths),
-            )}
-            render={({ input, meta }) => (
-              <FormGroup
-                label={translate('Extension (months)')}
-                description={
-                  isMulti
-                    ? translate(
-                        'New end dates will be calculated automatically for all resources.',
-                      )
-                    : translate('New end date: {date}', {
-                        date: input.value
-                          ? formatDate(
-                              parseDate(resources[0].end_date).plus({
-                                months: Number(input.value),
-                              }),
-                            )
-                          : currentEndDate,
-                      })
-                }
-                meta={meta}
-              >
-                <NumberField
-                  input={input as any}
-                  min={minMonths}
-                  max={maxMonths}
-                  step={step}
-                />
-              </FormGroup>
-            )}
+      {!isMulti && (
+        <Field
+          label={translate('Current end date')}
+          value={currentEndDate}
+          labelCol="auto"
+          valueCol="auto"
+          valueClass="ms-auto"
+          className="mb-5"
+          xs="auto"
+        />
+      )}
+      <FormGroup
+        label={translate('Extension period')}
+        description={
+          isMulti
+            ? translate(
+                'New end dates will be calculated automatically for all resources.',
+              )
+            : newEndDateText
+              ? translate('New end date: {date}', { date: newEndDateText })
+              : null
+        }
+      >
+        <div style={{ maxWidth: 300 }}>
+          <SelectFieldInline
+            input={{
+              value: extensionMonths,
+              onChange: handleMonthChange,
+            }}
+            options={monthOptions}
           />
-        </Col>
-      </Row>
+        </div>
+      </FormGroup>
+
       {!isMulti && (
         <RenewalCostBreakdown
           resource={resources[0]}
-          extensionMonths={values.extension_months || 0}
+          extensionMonths={extensionMonths}
         />
       )}
     </WizardModal>

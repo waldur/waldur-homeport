@@ -142,37 +142,6 @@ describe('AddPrepaidPeriodDialog', () => {
     ).toBeInTheDocument();
   });
 
-  it('switches to custom range and shows date picker with correct constraints', async () => {
-    const user = userEvent.setup();
-    const today = '2024-01-15';
-    vi.setSystemTime(new Date(today));
-
-    const { constraints, project } = createFixtures();
-    project.end_date = '2024-05-15'; // 4 months from now
-    constraints.max_prepaid_duration = 6; // Offering allows more
-
-    renderComponent({ constraints, project });
-
-    // Switch to custom range
-    const select = screen.getByTestId('select-field');
-    await user.selectOptions(select, 'custom');
-
-    // Assert date picker is now visible and has correct constraints
-    const datePicker = screen.getByTestId('date-field');
-    expect(datePicker).toBeInTheDocument();
-
-    // Min date is today + 1 month (min_duration default)
-    const expectedMinDate = DateTime.fromISO(today)
-      .plus({ months: 1 })
-      .toISODate();
-    expect(datePicker).toHaveAttribute('data-mindate', expectedMinDate);
-
-    // Max date is capped by the project's end_date (2024-05-15)
-    // because it's earlier than today + max_duration (2024-07-15)
-    expect(datePicker).toHaveAttribute('data-maxdate', project.end_date);
-    vi.useRealTimers();
-  });
-
   it('submits with correct end date for fixed duration', async () => {
     const user = userEvent.setup();
     const today = '2024-01-15';
@@ -194,28 +163,6 @@ describe('AddPrepaidPeriodDialog', () => {
     vi.useRealTimers();
   });
 
-  it('submits with correct end date for custom range', async () => {
-    const user = userEvent.setup();
-    const { constraints, project } = createFixtures();
-    const { onSubmit, resolve } = renderComponent({ constraints, project });
-
-    // Switch to custom
-    const select = screen.getByTestId('select-field');
-    await user.selectOptions(select, 'custom');
-
-    // Enter a date
-    const datePicker = screen.getByTestId('date-field');
-    const customDate = '2024-10-10';
-    await user.clear(datePicker);
-    await user.type(datePicker, customDate);
-
-    // Submit
-    await user.click(screen.getByRole('button', { name: /Confirm/i }));
-
-    expect(onSubmit).toHaveBeenCalledWith({ end_date: customDate });
-    expect(resolve).toHaveBeenCalled();
-  });
-
   it('caps month options based on project end date', () => {
     const today = '2024-01-15';
     vi.setSystemTime(new Date(today));
@@ -229,8 +176,8 @@ describe('AddPrepaidPeriodDialog', () => {
     const options = Array.from(select.querySelectorAll('option'));
     const monthValues = options.map((opt) => opt.value);
 
-    // Should include 1, 2 months and 'custom'
-    expect(monthValues).toEqual(['1', '2', 'custom']);
+    // Should include 1, 2 months only (no custom range)
+    expect(monthValues).toEqual(['1', '2']);
     vi.useRealTimers();
   });
 });

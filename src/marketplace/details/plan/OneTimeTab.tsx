@@ -4,11 +4,11 @@ import { useSelector } from 'react-redux';
 import FormTable from '@waldur/form/FormTable';
 import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
 
-import { AddPrepaymentButton } from './AddPrepaymentButton';
 import { ComponentRowTotal } from './ComponentRowTotal';
 import { ControlRows } from './ControlRows';
 import { FixedRows } from './FixedRows';
 import { mergePrepaidConstraints } from './prepaidConstraints';
+import { PrepaidDurationSelector } from './PrepaidDurationSelector';
 import { PrepaidRows } from './PrepaidRows';
 
 export const OneTimeTab = ({
@@ -37,14 +37,7 @@ export const OneTimeTab = ({
         )}
 
         {oneTime.prepaidRows.length > 0 && (
-          <>
-            <tr>
-              <td colSpan={3}>
-                <AddPrepaymentButton constraints={prepaidConstraints} />
-              </td>
-            </tr>
-            <PrepaidRows components={oneTime.prepaidRows} />
-          </>
+          <PrepaidRows components={oneTime.prepaidRows} />
         )}
 
         {/* Few */}
@@ -63,6 +56,13 @@ export const OneTimeTab = ({
             hidePrices={Boolean(shouldConcealPrices)}
             viewMode={viewMode}
             activePriceIndex={0}
+          />
+        )}
+
+        {oneTime.prepaidRows.length > 0 && !viewMode && (
+          <PrepaidDurationSelector
+            constraints={prepaidConstraints}
+            components={oneTime.prepaidRows}
           />
         )}
 

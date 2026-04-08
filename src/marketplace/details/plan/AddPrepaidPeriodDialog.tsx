@@ -11,70 +11,12 @@ import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
-import { PrepaidConstraints } from './prepaidConstraints';
-
-const getMonthOptions = (
-  constraints: PrepaidConstraints,
-  project: Project,
-  startDate?: string,
-) => {
-  const effectiveStartDate = DateTime.fromISO(
-    startDate || formatISODate(DateTime.now()),
-  );
-
-  let maxMonthsAllowedByProject: number | null = null;
-  if (project?.end_date) {
-    const projectEndDate = DateTime.fromISO(project.end_date);
-    maxMonthsAllowedByProject = Math.floor(
-      projectEndDate.diff(effectiveStartDate, 'months').months,
-    );
-  }
-
-  const offeringMax = constraints.max_prepaid_duration;
-  let trueMaxDuration: number;
-
-  if (offeringMax && maxMonthsAllowedByProject) {
-    trueMaxDuration = Math.min(offeringMax, maxMonthsAllowedByProject);
-  } else if (offeringMax) {
-    trueMaxDuration = offeringMax;
-  } else if (maxMonthsAllowedByProject) {
-    trueMaxDuration = maxMonthsAllowedByProject;
-  } else {
-    trueMaxDuration = 12;
-  }
-
-  const min = constraints.min_prepaid_duration || 1;
-  const stepSize = constraints.prepaid_duration_step || 1;
-  const max = Math.max(min, trueMaxDuration);
-
-  const options = [];
-  for (let i = min; i <= max; i += stepSize) {
-    options.push({
-      value: i,
-      label:
-        i === 1
-          ? translate('1 month')
-          : translate('{count} months', { count: i }),
-    });
-  }
-
-  options.push({
-    value: 'custom',
-    label: translate('Custom range'),
-  });
-
-  return options;
-};
-
-const calculateMonthsDifference = (
-  startDate: string,
-  endDate: string,
-): number => {
-  const start = DateTime.fromISO(startDate);
-  const end = DateTime.fromISO(endDate);
-  const diff = end.diff(start, 'months').months;
-  return Math.ceil(diff);
-};
+import {
+  calculateMonthsDifference,
+  getDatePickerConstraints,
+  getMonthOptions,
+  PrepaidConstraints,
+} from './prepaidConstraints';
 
 interface PrepaidFormContentProps {
   constraints: PrepaidConstraints;
@@ -121,40 +63,10 @@ const PrepaidFormContent = ({
     return null;
   }, [isCustomRange, customEndDate, effectiveStartDate]);
 
-  const datePickerConstraints = useMemo(() => {
-    const start = DateTime.fromISO(effectiveStartDate);
-    const minDuration = constraints.min_prepaid_duration || 1;
-    const maxDuration = constraints.max_prepaid_duration;
-
-    const result: { minDate: string; maxDate?: string } = {
-      minDate: start.plus({ months: minDuration }).toISODate(),
-    };
-
-    const projectEndDate = project.end_date
-      ? DateTime.fromISO(project.end_date)
-      : null;
-    const offeringMaxEndDate = maxDuration
-      ? start.plus({ months: maxDuration })
-      : null;
-
-    if (projectEndDate && offeringMaxEndDate) {
-      result.maxDate =
-        projectEndDate < offeringMaxEndDate
-          ? projectEndDate.toISODate()
-          : offeringMaxEndDate.toISODate();
-    } else if (projectEndDate) {
-      result.maxDate = projectEndDate.toISODate();
-    } else if (offeringMaxEndDate) {
-      result.maxDate = offeringMaxEndDate.toISODate();
-    }
-
-    return result;
-  }, [
-    effectiveStartDate,
-    project.end_date,
-    constraints.min_prepaid_duration,
-    constraints.max_prepaid_duration,
-  ]);
+  const datePickerConstraints = useMemo(
+    () => getDatePickerConstraints(constraints, project, effectiveStartDate),
+    [effectiveStartDate, constraints, project],
+  );
 
   return (
     <>

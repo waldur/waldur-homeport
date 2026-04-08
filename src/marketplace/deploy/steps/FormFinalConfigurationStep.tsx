@@ -1,3 +1,4 @@
+import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
@@ -14,6 +15,11 @@ import { TerminationDateField } from './TerminationDateField';
 
 export const FormFinalConfigurationStep = (props: FormStepProps) => {
   const project = useSelector(orderProjectSelector);
+
+  const hasPrepaidComponents = useMemo(
+    () => props.offering?.components?.some((c) => c.is_prepaid),
+    [props.offering],
+  );
 
   return (
     <VStepperFormStepCard
@@ -40,7 +46,9 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
       </Field>
       <div className="mb-7 border-bottom" />
       <OrderStartDateField project={project} />
-      <TerminationDateField offering={props.offering} />
+      {!hasPrepaidComponents && (
+        <TerminationDateField offering={props.offering} />
+      )}
     </VStepperFormStepCard>
   );
 };

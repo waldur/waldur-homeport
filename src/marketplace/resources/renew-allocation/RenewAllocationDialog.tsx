@@ -1,5 +1,4 @@
 import { useQuery } from '@tanstack/react-query';
-import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useMemo } from 'react';
 import {
   marketplaceResourcesRenew,
@@ -10,14 +9,17 @@ import {
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { translate } from '@waldur/i18n';
-import { getFormLimitSerializer } from '@waldur/marketplace/common/registry';
+import {
+  getFormLimitParser,
+  getFormLimitSerializer,
+} from '@waldur/marketplace/common/registry';
 import { useModal } from '@waldur/modal/hooks';
 import { useNotify } from '@waldur/store/hooks';
 import { Wizard } from '@waldur/wizard';
 
 import { Step1UpdateLimits } from './Step1UpdateLimits';
 import { Step2ExtendDuration } from './Step2ExtendDuration';
-import { Step3PurchaseOrder } from './Step3PurchaseOrder';
+import { Step3ReviewConfirm } from './Step3ReviewConfirm';
 import { RenewAllocationFormData } from './types';
 
 interface RenewAllocationDialogProps {
@@ -32,7 +34,7 @@ interface RenewAllocationDialogProps {
 const WizardForms = [
   Step1UpdateLimits,
   Step2ExtendDuration,
-  Step3PurchaseOrder,
+  Step3ReviewConfirm,
 ];
 
 const steps: ProgressStep[] = [
@@ -43,53 +45,54 @@ const steps: ProgressStep[] = [
   },
   {
     key: 'duration',
-    label: translate('Extend duration'),
+    label: translate('Extension period'),
     completed: false,
   },
   {
-    key: 'purchase-order',
-    label: translate('Purchase order'),
+    key: 'review',
+    label: translate('Review & confirm'),
     completed: false,
   },
 ];
+
+const getResourceUuid = (resource) =>
+  resource.marketplace_resource_uuid || resource.uuid;
 
 export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
   resolve,
 }) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
-  const router = useRouter();
 
-  // Fetch resource by UUID if only UUID is provided
-  const shouldFetch =
-    !resolve.resource && !resolve.resources?.length && resolve.resource_uuid;
+  // Always fetch the marketplace resource to get end_date and other fields
+  // that may not be on the backend resource object (e.g. OpenStack tenant)
+  const marketplaceResourceUuid = resolve.resource
+    ? getResourceUuid(resolve.resource)
+    : resolve.resource_uuid;
 
   const {
     data: fetchedResource,
     isLoading,
     error,
   } = useQuery({
-    queryKey: ['renew-resource', resolve.resource_uuid],
+    queryKey: ['renew-resource', marketplaceResourceUuid],
     queryFn: () =>
       marketplaceResourcesRetrieve({
-        path: { uuid: resolve.resource_uuid },
+        path: { uuid: marketplaceResourceUuid },
       }).then((response) => response.data),
-    enabled: Boolean(shouldFetch),
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    enabled: Boolean(marketplaceResourceUuid),
+    staleTime: 5 * 60 * 1000,
   });
 
   const resources = useMemo(() => {
     if (resolve.resources?.length) {
       return resolve.resources;
     }
-    if (resolve.resource) {
-      return [resolve.resource];
-    }
     if (fetchedResource) {
       return [fetchedResource];
     }
     return [];
-  }, [resolve.resources, resolve.resource, fetchedResource]);
+  }, [resolve.resources, fetchedResource]);
 
   const isMulti = resources.length > 1;
 
@@ -97,16 +100,16 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
     async (formData: RenewAllocationFormData) => {
       try {
         const promises = resources.map((resource) => {
-          // Serialize limits (e.g., convert GB back to MB) based on offering type
+          const resourceUuid = getResourceUuid(resource);
           const limitSerializer = getFormLimitSerializer(
             resource.offering_type || '',
           );
           const serializedLimits = limitSerializer(
-            formData[resource.uuid]?.limits || {},
+            formData[resourceUuid]?.limits || {},
           );
 
           return marketplaceResourcesRenew({
-            path: { uuid: resource.uuid },
+            path: { uuid: resourceUuid },
             body: {
               extension_months: formData.extension_months,
               limits: serializedLimits,
@@ -137,31 +140,15 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
           showErrorResponse(errorResults[0].reason);
         } else {
           closeDialog();
-          // For single resource, redirect to the order detail page
-          if (!isMulti && successResults.length === 1) {
-            const orderUuid = successResults[0].value.data.order_uuid;
-            router.stateService.go('marketplace-orders.details', {
-              order_uuid: orderUuid,
-            });
-          }
         }
       } catch (e) {
         showErrorResponse(e, translate('Unable to send renewal request.'));
       }
     },
-    [
-      resources,
-      resolve,
-      showSuccess,
-      showErrorResponse,
-      closeDialog,
-      isMulti,
-      router,
-    ],
+    [resources, resolve, showSuccess, showErrorResponse, closeDialog, isMulti],
   );
 
-  // Show loading state when fetching resource
-  if (shouldFetch && isLoading) {
+  if (isLoading) {
     return (
       <div className="d-flex justify-content-center align-items-center p-10">
         <LoadingSpinner />
@@ -169,8 +156,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
     );
   }
 
-  // Show error if fetch failed
-  if (shouldFetch && error) {
+  if (error) {
     return (
       <div className="text-danger p-5">
         {translate('Failed to load resource. Please try again.')}
@@ -178,7 +164,6 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
     );
   }
 
-  // Don't render if no resources available
   if (!resources.length) {
     return (
       <div className="text-muted p-5">
@@ -189,7 +174,10 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   const initialValues = {
     ...resources.reduce((acc, resource) => {
-      acc[resource.uuid] = { limits: resource.limits };
+      const limitParser = getFormLimitParser(resource.offering_type || '');
+      acc[getResourceUuid(resource)] = {
+        limits: limitParser(resource.limits),
+      };
       return acc;
     }, {}),
     extension_months:
@@ -212,15 +200,9 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
               name: resources[0].name,
             })
       }
-      subtitle={
-        isMulti
-          ? translate(
-              'Choose renewal period and provide a purchase order for all selected resources.',
-            )
-          : translate(
-              'Extend the allocation period and optionally provide a purchase order.',
-            )
-      }
+      subtitle={translate(
+        'Extend the allocation period and optionally update limits.',
+      )}
       initialValues={initialValues as Partial<RenewAllocationFormData>}
       data={{ resources }}
       modalProps={{ bodyClassName: 'h-450px' }}

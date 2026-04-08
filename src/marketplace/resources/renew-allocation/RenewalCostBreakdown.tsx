@@ -75,13 +75,16 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
     project?.customer_display_billing_info_in_projects === false;
   const { values } = useFormState<RenewAllocationFormData>();
 
+  const resourceUuid =
+    (resource as any).marketplace_resource_uuid || resource.uuid;
+
   const serializedLimits = useMemo(() => {
-    const formLimits = values[resource.uuid]?.limits || {};
+    const formLimits = values[resourceUuid]?.limits || {};
     const limitSerializer = getFormLimitSerializer(
       resource.offering_type || '',
     );
     return limitSerializer(formLimits);
-  }, [values, resource.uuid, resource.offering_type]);
+  }, [values, resourceUuid, resource.offering_type]);
 
   const { data, isLoading } = useQuery({
     queryKey: [
@@ -98,7 +101,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
           limits: serializedLimits,
         },
       }).then((res) => res.data),
-    enabled: extensionMonths >= 12,
+    enabled: extensionMonths >= 1,
     staleTime: 30_000,
   });
 

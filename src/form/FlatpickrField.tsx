@@ -49,7 +49,9 @@ export const FlatpickrField: FC<FlatpickrFieldProps> = ({
         {...props}
       />
 
-      {props.input.value && typeof props.input.value === 'string' ? (
+      {props.input.value &&
+      typeof props.input.value === 'string' &&
+      !props.disabled ? (
         <button
           type="button"
           className="btn btn-icon btn-circle btn-color-muted w-25px h-25px bg-body shadow end-button"

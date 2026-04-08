@@ -34,6 +34,8 @@ export const getDefaultLimits = (
   for (const component of offering.components) {
     if (component.default_limit) {
       limits[component.type] = component.default_limit;
+    } else if (component.min_value) {
+      limits[component.type] = component.min_value;
     }
   }
   return limits;

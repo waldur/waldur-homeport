@@ -41,27 +41,37 @@ const serializeVolumeTypeLimits = (limits) =>
       {},
     );
 
-const limitSerializer = (limits) =>
-  limits && {
-    cores: limits.cores,
-    ram: limits.ram && limits.ram * 1024,
-    storage: limits.storage && limits.storage * 1024,
+const limitSerializer = (limits) => {
+  if (!limits) return limits;
+  const { cores, ram, storage, ...rest } = limits;
+  return {
+    ...rest,
+    cores,
+    ram: ram && ram * 1024,
+    storage: storage && storage * 1024,
     ...serializeVolumeTypeLimits(limits),
   };
+};
 
-const limitParser = (limits) =>
-  limits && {
-    cores: limits.cores,
-    ram: limits.ram && limits.ram / 1024,
-    storage: limits.storage && limits.storage / 1024,
+const limitParser = (limits) => {
+  if (!limits) return limits;
+  const { cores, ram, storage, ...rest } = limits;
+  return {
+    ...rest,
+    cores,
+    ram: ram && ram / 1024,
+    storage: storage && storage / 1024,
     ...serializeVolumeTypeLimits(limits),
   };
+};
+
+const BUILTIN_TYPES = ['ram', 'cores', 'storage'];
 
 const offeringComponentsFilter = (formData, components) => {
   const storageMode = (formData.plugin_options || {}).storage_mode || 'fixed';
   if (storageMode == 'fixed') {
-    return components.filter((c) =>
-      ['ram', 'cores', 'storage'].includes(c.type),
+    return components.filter(
+      (c) => BUILTIN_TYPES.includes(c.type) || !c.is_builtin,
     );
   } else {
     return components.filter((c) => c.type !== 'storage');
