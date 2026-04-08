@@ -2,7 +2,7 @@ import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { formatDateTime } from '@waldur/core/dateUtils';
+import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { UserFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -298,6 +298,23 @@ const PlaceOfBirthRow = ({ user, disabled, isSelf }) =>
     />
   ) : null;
 
+const BirthDateRow = ({ user, disabled, isSelf }) =>
+  isProfileAttributeEnabled('birth_date') ? (
+    <UserEditRow
+      user={user}
+      label={translate('Birth date')}
+      name="birth_date"
+      value={user.birth_date ? formatDate(user.birth_date) : null}
+      disabled={disabled}
+      protected={fieldIsProtected(user, 'birth_date')}
+      description={
+        isSelf
+          ? translate('Your date of birth')
+          : translate("The user's date of birth")
+      }
+    />
+  ) : null;
+
 const CountryOfResidenceRow = ({ user, disabled, isSelf }) =>
   isProfileAttributeEnabled('country_of_residence') ? (
     <UserEditRow
@@ -509,6 +526,7 @@ export const UserEditRows = ({
       {/* Personal Identity */}
       <PersonalTitleRow user={user} isSelf={isSelf} disabled={disabled} />
       <GenderRow user={user} isSelf={isSelf} disabled={disabled} />
+      <BirthDateRow user={user} isSelf={isSelf} disabled={disabled} />
       <PlaceOfBirthRow user={user} isSelf={isSelf} disabled={disabled} />
 
       {/* Contact Information */}
