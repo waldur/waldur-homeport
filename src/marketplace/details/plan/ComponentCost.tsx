@@ -1,3 +1,5 @@
+import classNames from 'classnames';
+
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 
@@ -13,5 +15,16 @@ export const ComponentCost = ({ component }: { component: Component }) => (
           })
         : defaultCurrency(component.price),
     })}
+    {component.discountDescription && (
+      <span
+        className={classNames(
+          'ms-2',
+          component.discountApplied ? 'text-success' : 'text-muted',
+        )}
+      >
+        {' | '}
+        {component.discountDescription}
+      </span>
+    )}
   </>
 );
