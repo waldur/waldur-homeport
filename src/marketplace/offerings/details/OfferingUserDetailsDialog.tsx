@@ -19,6 +19,7 @@ import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateFie
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { formatGender } from '@waldur/user/support/aai-constants';
 import { IsdBadges } from '@waldur/user/support/IsdBadges';
 
 interface OfferingUserDetailsDialogProps {
@@ -59,7 +60,7 @@ export const FIELD_MAPPING: Record<
   },
   gender: {
     label: () => translate('Gender'),
-    getValue: (user) => user.user_gender,
+    getValue: (user) => formatGender(user.user_gender),
   },
   personal_title: {
     label: () => translate('Personal title'),

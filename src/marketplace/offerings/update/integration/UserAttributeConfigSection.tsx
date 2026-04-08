@@ -102,7 +102,7 @@ const ALL_ATTRIBUTE_FIELDS: AttributeFieldDef[] = [
   {
     key: 'expose_gender',
     label: translate('Gender'),
-    description: translate("User's gender (ISO 5218)"),
+    description: translate("User's gender (male, female, or unknown)"),
     component: AwesomeCheckboxField,
     attribute: 'gender',
   },

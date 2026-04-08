@@ -1,4 +1,5 @@
 import { FC, useMemo } from 'react';
+import { type GenderEnum } from 'waldur-js-client';
 
 import { Select } from '@waldur/form/themed-select';
 import { FormField } from '@waldur/form/types';
@@ -20,7 +21,7 @@ export const GenderSelectField: FC<GenderSelectFieldProps> = ({
   return (
     <Select
       value={options.find((option) => option.value === input.value) || null}
-      onChange={(option: { value: number; label: string } | null) => {
+      onChange={(option: { value: GenderEnum; label: string } | null) => {
         input.onChange(option?.value ?? null);
         input.onBlur(option?.value ?? null);
       }}

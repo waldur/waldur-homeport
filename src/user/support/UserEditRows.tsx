@@ -274,9 +274,7 @@ const GenderRow = ({ user, disabled, isSelf }) =>
       disabled={disabled}
       protected={fieldIsProtected(user, 'gender')}
       description={
-        isSelf
-          ? translate('Your gender (ISO 5218)')
-          : translate("The user's gender")
+        isSelf ? translate('Your gender') : translate("The user's gender")
       }
     />
   ) : null;

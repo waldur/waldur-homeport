@@ -19,6 +19,7 @@ import { Wizard } from '@waldur/wizard';
 import { setCurrentUser } from '@waldur/workspace/actions';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { parseGender } from './aai-constants';
 import { AccountStep } from './create-user-steps/AccountStep';
 import { IdentityStep } from './create-user-steps/IdentityStep';
 import { PersonalInfoStep } from './create-user-steps/PersonalInfoStep';
@@ -202,7 +203,7 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
         phone_number: user.phone_number || '',
         description: user.description || '',
         personal_title: user.personal_title || '',
-        gender: (user.gender as GenderEnum) ?? undefined,
+        gender: parseGender(user.gender),
         place_of_birth: user.place_of_birth || '',
         country_of_residence: user.country_of_residence || '',
         nationality: user.nationality || '',
