@@ -52,6 +52,15 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
     ...oneTime.totalLimitedRows,
   ];
 
+  const totalDiscount = useMemo(
+    () =>
+      props.priceData.components.reduce(
+        (sum, c) => sum + (c.discountAmount || 0),
+        0,
+      ),
+    [props.priceData.components],
+  );
+
   const total = periodic.total + oneTime.oneTimeTotal;
 
   return (
@@ -132,6 +141,13 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
             }
           />
         )}
+      {totalDiscount > 0 && !shouldConcealPrices && (
+        <CheckoutPricingRow
+          label={translate('Volume discount savings')}
+          value={'-' + defaultCurrency(totalDiscount)}
+          className="text-success"
+        />
+      )}
       {!shouldConcealPrices && props.hasTotal && (
         <CheckoutPricingRow
           label={translate('Total')}

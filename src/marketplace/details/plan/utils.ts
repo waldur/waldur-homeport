@@ -85,8 +85,24 @@ export const combinePrices = (
       // (per the plan's unit field: hour, day, month, etc.).
       // The limit_period only defines how limits are evaluated/reset,
       // not how prices are denominated.
-      const subTotal = price * amount;
+      const rawSubTotal = price * amount;
+
+      // Look up discount info from plan components (backend provides
+      // discounted_price and discount_description via the serializer)
+      const planComponent = plan.components?.find(
+        (pc) => pc.type === component.type,
+      );
+      const discountThreshold = planComponent?.discount_threshold;
+      const discountRate = planComponent?.discount_rate;
+      const discountApplied =
+        !!discountThreshold && !!discountRate && amount >= discountThreshold;
+      const discountedPrice = discountApplied
+        ? Number(planComponent?.discounted_price ?? price)
+        : price;
+      const subTotal = discountApplied ? discountedPrice * amount : rawSubTotal;
+      const discountAmount = rawSubTotal - subTotal;
       const prices = multipliers.map((mult) => mult * subTotal);
+
       return {
         ...component,
         amount,
@@ -95,6 +111,9 @@ export const combinePrices = (
         price,
         min_value: offeringLimits[component.type].min,
         max_value: offeringLimits[component.type].max,
+        discountApplied,
+        discountAmount,
+        discountDescription: planComponent?.discount_description ?? null,
       };
     });
     const fixedComponents = components.filter(
