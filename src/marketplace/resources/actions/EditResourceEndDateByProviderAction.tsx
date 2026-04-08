@@ -1,7 +1,9 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import {
   marketplaceProviderResourcesSetEndDate,
+  marketplaceResourcesOfferingRetrieve,
   Resource,
 } from 'waldur-js-client';
 
@@ -31,6 +33,24 @@ export const EditResourceEndDateByProviderAction = ({
   const dispatch = useDispatch();
   const user = useSelector(getUser);
 
+  const resourceUuid =
+    (resource as any).marketplace_resource_uuid || resource.uuid;
+
+  const { data: offering } = useQuery({
+    queryKey: ['resource-offering', resourceUuid],
+    queryFn: () =>
+      marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resourceUuid },
+      }).then((response) => response.data),
+    enabled: Boolean(resourceUuid),
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+
+  const hasPrepaidComponents = offering?.components?.some(
+    (c) => c.is_prepaid === true,
+  );
+
   const callback = () =>
     dispatch(
       openModalDialog(EditResourceEndDateDialog, {
@@ -46,14 +66,26 @@ export const EditResourceEndDateByProviderAction = ({
       }),
     );
 
-  return hasPermission(user, {
-    permission: PermissionEnum.SET_RESOURCE_END_DATE,
-    customerId: resource.provider_uuid,
-  }) || user.is_support ? (
+  const hasPermissionToSet =
+    hasPermission(user, {
+      permission: PermissionEnum.SET_RESOURCE_END_DATE,
+      customerId: resource.provider_uuid,
+    }) || user.is_support;
+
+  if (!hasPermissionToSet) {
+    return null;
+  }
+
+  // For prepaid resources, only staff can manually change end date
+  if (hasPrepaidComponents && !user.is_staff) {
+    return null;
+  }
+
+  return (
     <ActionItem
       title={translate('Set termination date')}
       action={callback}
       iconNode={<CalendarBlankIcon weight="bold" />}
     />
-  ) : null;
+  );
 };

@@ -14,6 +14,7 @@ export const DateField: FunctionComponent<any> = (props) => {
     monthSelectorType: 'static',
     inline: props.inline,
     allowInvalidPreload: true,
+    clickOpens: !props.disabled,
   };
   if (props.enable) {
     options.enable = props.enable;
@@ -25,6 +26,7 @@ export const DateField: FunctionComponent<any> = (props) => {
       placeholder={props.placeholder}
       iconNode={<CalendarBlankIcon weight="bold" />}
       input={props.input}
+      disabled={props.disabled}
     />
   );
 };

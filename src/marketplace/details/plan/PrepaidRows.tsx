@@ -1,6 +1,7 @@
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
+import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
 import { ComponentCost } from './ComponentCost';
@@ -16,29 +17,28 @@ export const PrepaidRows = (props: { components: Component[] }) => {
       {props.components.map((component) => {
         const cost = getPrepaidCostParts(component, endDate);
         return (
-          <tr key={component.type}>
-            <td>
-              <div className="title fw-bolder">{component.name}</div>
-              <div className="description fw-normal">
-                <ComponentCost component={component} />
-              </div>
-            </td>
-            <td>
+          <FormTable.Item
+            key={component.type}
+            label={component.name}
+            description={<ComponentCost component={component} />}
+            value={
               <Field
                 name={`limits.${component.type}`}
                 component={MeasuredUnitInput}
                 props={{ component }}
               />
-            </td>
-            <td>
-              <div className="fw-bolder">
-                {translate('Total')}: {cost.total}
-              </div>
-              {cost.details && (
-                <div className="fw-normal text-muted">{cost.details}</div>
-              )}
-            </td>
-          </tr>
+            }
+            actions={
+              <>
+                <span className="d-block">
+                  {translate('Total')}: {cost.total}
+                </span>
+                {cost.details && (
+                  <span className="fw-normal text-muted">{cost.details}</span>
+                )}
+              </>
+            }
+          />
         );
       })}
     </>

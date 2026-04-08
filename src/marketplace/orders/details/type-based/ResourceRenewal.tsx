@@ -17,12 +17,7 @@ import { Field } from '@waldur/resource/summary';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
 import { DetailsTable } from './DetailsTable';
-import {
-  CostChangeField,
-  OrderTypeBasedProps,
-  RequestCommentField,
-  StartDateField,
-} from './OrderCommonFields';
+import { OrderTypeBasedProps, RequestCommentField } from './OrderCommonFields';
 
 interface RenewalAttributes {
   action: 'renew';
@@ -30,7 +25,6 @@ interface RenewalAttributes {
   new_end_date: string;
   old_end_date: string;
   old_limits: Record<string, any>;
-  renewal_cost: number;
 }
 
 export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
@@ -72,7 +66,6 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
 
   return (
     <>
-      <StartDateField order={order} />
       <Field
         label={translate('Old end date')}
         labelWidth={200}
@@ -94,17 +87,6 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
                 count: attributes.extension_months,
               }))
         }
-      />
-      {!shouldConcealPrices && (
-        <Field
-          label={translate('Renewal cost')}
-          labelWidth={200}
-          value={defaultCurrency(attributes.renewal_cost)}
-        />
-      )}
-      <CostChangeField
-        order={order}
-        shouldConcealPrices={shouldConcealPrices}
       />
       <RequestCommentField order={order} />
 
@@ -145,29 +127,45 @@ export const ResourceRenewal = ({ order, offering }: OrderTypeBasedProps) => {
           },
           ...(shouldConcealPrices
             ? []
-            : data.periods.map((period, i) => ({
-                title: (
-                  <>
-                    {period} <PriceTooltip />
-                  </>
-                ),
-                render: ({ row }) => defaultCurrency(row.prices[i]),
-              }))),
+            : [
+                {
+                  title: (
+                    <>
+                      {translate('Price per month')} <PriceTooltip />
+                    </>
+                  ),
+                  render: ({ row }) => defaultCurrency(row.prices[0]),
+                },
+                {
+                  title: (
+                    <>
+                      {translate('Cost for {count} months', {
+                        count: attributes.extension_months,
+                      })}{' '}
+                      <PriceTooltip />
+                    </>
+                  ),
+                  render: ({ row }) =>
+                    defaultCurrency(
+                      row.prices[0] * attributes.extension_months,
+                    ),
+                },
+              ]),
         ]}
         totalRow={(columnCount) =>
           shouldConcealPrices ? null : (
             <tr className="fw-bolder">
-              <td
-                colSpan={columnCount - data.totalPeriods.length}
-                className="text-dark text-end"
-              >
+              <td colSpan={columnCount - 2} className="text-dark text-end">
                 {translate('Total renewal cost')}
               </td>
-              {data.totalPeriods.map((total, index) => (
-                <td key={index} className="text-dark">
-                  {defaultCurrency(total)}
-                </td>
-              ))}
+              <td className="text-dark">
+                {defaultCurrency(data.totalPeriods[0])}
+              </td>
+              <td className="text-dark">
+                {defaultCurrency(
+                  data.totalPeriods[0] * attributes.extension_months,
+                )}
+              </td>
             </tr>
           )
         }

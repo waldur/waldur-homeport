@@ -36,6 +36,7 @@ import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
 import { ProviderConsumerInfoTab } from './ProviderConsumerInfoTab';
 import { RejectionDetailsTab } from './RejectionDetailsTab';
 import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
+import { ResourceRenewal } from './type-based/ResourceRenewal';
 import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
 import '@waldur/core/CustomCard.scss';
@@ -44,7 +45,7 @@ const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
   const tabs = [
     {
       key: 'summary',
-      title: translate('Approvals'),
+      title: translate('Summary'),
       component: () => (
         <OrderSummaryTab order={props.order} offering={props.offering} />
       ),
@@ -64,9 +65,18 @@ const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
     {
       key: 'accounting',
       title: translate('Accounting'),
-      component: () => (
-        <PlanSection offering={props.offering} order={props.order} />
-      ),
+      component: () => {
+        const isRenewal =
+          props.order.type === 'Update' &&
+          (props.order.attributes as any)?.action === 'renew';
+        return isRenewal ? (
+          <div className="d-flex flex-column gap-3">
+            <ResourceRenewal order={props.order} offering={props.offering} />
+          </div>
+        ) : (
+          <PlanSection offering={props.offering} order={props.order} />
+        );
+      },
     },
     {
       key: 'limits',

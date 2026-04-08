@@ -2,6 +2,7 @@ import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
 
 import { Badge } from '@waldur/core/Badge';
+import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { ResourceLink } from '@waldur/resource/ResourceLink';
 import { Field } from '@waldur/resource/summary';
@@ -87,6 +88,21 @@ export const OrderDetailsHeaderBody = ({ order, offering = undefined }) => {
           valueCol="auto"
         />
         <OrderDetailsQuickBody order={order} autoWidth />
+        <Field
+          label={translate('Offering')}
+          value={
+            <Link
+              state="public-offering.marketplace-public-offering"
+              params={{ uuid: order.offering_uuid }}
+              className="text-link"
+            >
+              {order.offering_name}
+            </Link>
+          }
+          labelClass="w-100px"
+          labelCol="auto"
+          valueCol="auto"
+        />
       </Col>
       {showPurchaseOrder && (
         <Col sm="auto">

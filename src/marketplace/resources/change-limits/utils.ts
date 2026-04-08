@@ -41,7 +41,7 @@ export const getLimitChangeRequirements = (
   const limitParser = getFormLimitParser(offering.type);
   const limitSerializer = getFormLimitSerializer(offering.type);
   const components = filterOfferingComponents(offering).filter(
-    (component) => component.billing_type === 'limit',
+    (component) => component.billing_type === 'limit' || component.is_prepaid,
   );
   const usages = limitParser(resource.current_usages || {});
   const resourceLimits = limitParser(resource.limits);
@@ -123,7 +123,7 @@ export const getLimitChangeData = (
 ): StateProps => {
   const { periods, multipliers } = getBillingPeriods(plan.unit);
   const offeringComponents = filterOfferingComponents(offering).filter(
-    (component) => component.billing_type === 'limit',
+    (component) => component.billing_type === 'limit' || component.is_prepaid,
   );
   const components = offeringComponents.map((component) => {
     const price = plan.prices[component.type] || 0;

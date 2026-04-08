@@ -40,9 +40,6 @@ export const requiredArray = (value) =>
 export const lessThanOrEqual = (n) => (value: number) =>
   value && value > n ? translate('Must be {n} or less.', { n }) : undefined;
 
-export const greaterThanOrEqual = (n) => (value: number) =>
-  value && value < n ? translate('Must be {n} or greater.', { n }) : undefined;
-
 export const greaterThan = (n) => (value: number) =>
   value && value <= n
     ? translate('Must be greater than {n}.', { n })

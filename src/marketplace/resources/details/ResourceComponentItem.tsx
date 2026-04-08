@@ -61,7 +61,8 @@ export const getQuotaCellProps = (
         : normalize(resource.current_usages[component.type], component.factor),
     limit:
       (component.billing_type === 'usage' && resource.limits[component.type]) ||
-      component.billing_type === 'limit'
+      component.billing_type === 'limit' ||
+      (component.billing_type === 'one' && component.is_prepaid)
         ? normalize(resource.limits[component.type], component.factor)
         : null,
     title: component.name,

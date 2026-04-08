@@ -10,6 +10,7 @@ import { PullMarketplaceResourceAction } from '@waldur/marketplace/resources/act
 import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
 import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
 import { ShowUsageAction } from '@waldur/marketplace/resources/list/ShowUsageAction';
+import { RenewAllocationActionAction } from '@waldur/marketplace/resources/renew-allocation/RenewAllocationAction';
 import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
 import { SetResourceErredAction } from '@waldur/resource/actions/SetResourceErredAction';
 import { SetResourceOkAction } from '@waldur/resource/actions/SetResourceOkAction';
@@ -33,6 +34,7 @@ export const OpenstackTenantActions = (props) => (
     <ActionGroup title={translate('Billing actions')}>
       <ChangePlanAction {...props} />
       <ChangeLimitsAction {...props} />
+      <RenewAllocationActionAction {...props} />
       <ShowUsageAction {...props} />
     </ActionGroup>
 

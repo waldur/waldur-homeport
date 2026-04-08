@@ -9,6 +9,7 @@ import { formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { OrderDetailsQuickBody } from '@waldur/marketplace/orders/details/OrderDetailsQuickBody';
 import { OrderStateField } from '@waldur/marketplace/orders/details/OrderStateField';
 import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
@@ -41,9 +42,19 @@ export const ResourceLimitChangeInfo = ({
     () => getLimitChangeRequirements(resource, offering),
     [resource, offering],
   );
+  const limitParser = useMemo(
+    () => getFormLimitParser(offering.type),
+    [offering.type],
+  );
+
+  const parsedNewLimits = useMemo(
+    () => limitParser(resource.order_in_progress?.limits),
+    [limitParser, resource.order_in_progress?.limits],
+  );
+
   const data = useMemo(() => {
     if (requirements) {
-      const newLimits = resource.order_in_progress.limits;
+      const newLimits = parsedNewLimits;
       const plan = offering.plans.find(
         (p) => p.uuid === resource.order_in_progress.plan_uuid,
       );
@@ -149,7 +160,7 @@ export const ResourceLimitChangeInfo = ({
                       </td>
                       {component.changedLimit ? (
                         <td>
-                          {order.limits[component.type]}{' '}
+                          {parsedNewLimits?.[component.type]}{' '}
                           {component.measured_unit}
                         </td>
                       ) : (

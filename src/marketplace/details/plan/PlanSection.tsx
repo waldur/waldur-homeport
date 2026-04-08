@@ -81,9 +81,15 @@ export const PlanSection = (props: PlanDetailsProps) => {
     );
   }
 
+  const isRenewal =
+    props.order.type === 'Update' &&
+    (props.order.attributes as any)?.action === 'renew';
+  const isPlanChange =
+    props.order.type === 'Update' && !isRenewal && old_plan_name;
+
   return (
     <>
-      {props.order.type === 'Update' ? (
+      {isPlanChange ? (
         <>
           <PlanCard
             title={translate('Old plan')}

@@ -1,0 +1,175 @@
+import { FC, useMemo } from 'react';
+import { Table } from 'react-bootstrap';
+import { Field, useFormState } from 'react-final-form';
+import { Resource } from 'waldur-js-client';
+
+import { formatDate, parseDate } from '@waldur/core/dateUtils';
+import { StringField } from '@waldur/form';
+import { translate } from '@waldur/i18n';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { Field as SummaryField } from '@waldur/resource/summary';
+import { WizardModal, WizardStepProps } from '@waldur/wizard';
+
+import { RenewalCostBreakdown } from './RenewalCostBreakdown';
+import { RenewAllocationFormData } from './types';
+
+const getResourceUuid = (resource) =>
+  resource.marketplace_resource_uuid || resource.uuid;
+
+const LimitChangesSummary: FC<{
+  resource: Resource;
+  newLimits: Record<string, number>;
+}> = ({ resource, newLimits }) => {
+  const changes = useMemo(() => {
+    const limitParser = getFormLimitParser(resource.offering_type || '');
+    const currentLimits = limitParser(resource.limits) || {};
+    const components = resource.offering_components || [];
+    return components
+      .map((c) => ({
+        name: c.name,
+        type: c.type,
+        unit: c.measured_unit,
+        current: currentLimits[c.type] || 0,
+        new: newLimits[c.type] || 0,
+      }))
+      .filter((c) => c.current !== c.new);
+  }, [resource, newLimits]);
+
+  if (changes.length === 0) {
+    return (
+      <p className="text-muted mb-4">
+        {translate('No limit changes — current limits will be maintained.')}
+      </p>
+    );
+  }
+
+  return (
+    <div className="mb-4">
+      <h6 className="mb-2">{translate('Limit changes')}</h6>
+      <Table size="sm" borderless className="mb-0">
+        <thead>
+          <tr className="border-bottom">
+            <th>{translate('Component')}</th>
+            <th className="text-end">{translate('Current')}</th>
+            <th className="text-center">{translate('')}</th>
+            <th className="text-end">{translate('New')}</th>
+          </tr>
+        </thead>
+        <tbody>
+          {changes.map((c) => (
+            <tr key={c.type}>
+              <td>{c.name}</td>
+              <td className="text-end text-muted">
+                {c.current} {c.unit}
+              </td>
+              <td className="text-center">→</td>
+              <td className="text-end fw-semibold">
+                {c.new} {c.unit}
+              </td>
+            </tr>
+          ))}
+        </tbody>
+      </Table>
+    </div>
+  );
+};
+
+export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
+  const resources = props.data?.resources;
+  const resource: Resource = resources?.[0];
+  const isMulti = resources && resources.length > 1;
+  const { values } = useFormState<RenewAllocationFormData>();
+
+  const extensionMonths = Number(values.extension_months) || 0;
+
+  const newEndDate = resource?.end_date
+    ? formatDate(parseDate(resource.end_date).plus({ months: extensionMonths }))
+    : extensionMonths
+      ? translate('{count} months from now', { count: extensionMonths })
+      : 'N/A';
+
+  const departmentToInvoice = [resource?.customer_name, resource?.project_name]
+    .filter(Boolean)
+    .join(' / ');
+
+  const pluginOptions = (resource as any)?.offering_plugin_options || {};
+  const showPurchaseOrder =
+    pluginOptions.enable_purchase_order_upload ||
+    pluginOptions.require_purchase_order_upload;
+
+  const newLimits = values[getResourceUuid(resource)]?.limits || {};
+
+  return (
+    <WizardModal {...props}>
+      {!isMulti && (
+        <div className="mb-6">
+          <SummaryField
+            label={translate('Resource')}
+            value={resource?.name}
+            labelCol={4}
+            valueCol={8}
+            className="mb-3"
+          />
+          <SummaryField
+            label={translate('Organization / Project')}
+            value={departmentToInvoice}
+            labelCol={4}
+            valueCol={8}
+            className="mb-3"
+          />
+          <SummaryField
+            label={translate('Extension')}
+            value={
+              extensionMonths === 1
+                ? translate('1 month')
+                : translate('{count} months', { count: extensionMonths })
+            }
+            labelCol={4}
+            valueCol={8}
+            className="mb-3"
+          />
+          <SummaryField
+            label={translate('New end date')}
+            value={newEndDate}
+            labelCol={4}
+            valueCol={8}
+            className="mb-3"
+          />
+
+          <hr className="my-4" />
+
+          <LimitChangesSummary resource={resource} newLimits={newLimits} />
+
+          <RenewalCostBreakdown
+            resource={resource}
+            extensionMonths={extensionMonths}
+          />
+        </div>
+      )}
+
+      {showPurchaseOrder && (
+        <FormGroup
+          label={translate('Purchase order reference')}
+          description={translate(
+            'Enter the PO number or name required by your organization to renew this subscription.',
+          )}
+          required={pluginOptions.require_purchase_order_upload}
+          spaceless
+        >
+          <div style={{ maxWidth: 300 }}>
+            <Field
+              name="purchase_order_reference"
+              component={StringField as any}
+              placeholder={
+                pluginOptions.require_purchase_order_upload
+                  ? translate('Required')
+                  : translate('Optional')
+              }
+            />
+          </div>
+        </FormGroup>
+      )}
+    </WizardModal>
+  );
+};

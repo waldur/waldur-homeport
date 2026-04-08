@@ -133,7 +133,7 @@ const UpdateLimitsTable: FC<{
   const hasLimitComponents = useMemo(() => {
     if (!data?.offering) return true; // Assume yes while loading
     const components = filterOfferingComponents(data.offering);
-    return components.some((c) => c.billing_type === 'limit');
+    return components.some((c) => c.billing_type === 'limit' || c.is_prepaid);
   }, [data?.offering]);
 
   // Sync parsed limits (e.g., MB→GB) to form when data loads

@@ -1,6 +1,10 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
 import { useSelector, useDispatch } from 'react-redux';
-import { marketplaceResourcesSetEndDate } from 'waldur-js-client';
+import {
+  marketplaceResourcesOfferingRetrieve,
+  marketplaceResourcesSetEndDate,
+} from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -29,6 +33,23 @@ export const EditResourceEndDateAction: ActionItemType = ({
   const dispatch = useDispatch();
   const user = useSelector(getUser);
 
+  const resourceUuid = _resource.marketplace_resource_uuid || _resource.uuid;
+
+  const { data: offering } = useQuery({
+    queryKey: ['resource-offering', resourceUuid],
+    queryFn: () =>
+      marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resourceUuid },
+      }).then((response) => response.data),
+    enabled: Boolean(resourceUuid),
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+
+  const hasPrepaidComponents = offering?.components?.some(
+    (c) => c.is_prepaid === true,
+  );
+
   const callback = () =>
     dispatch(
       openModalDialog(EditResourceEndDateDialog, {
@@ -52,6 +73,12 @@ export const EditResourceEndDateAction: ActionItemType = ({
   ) {
     return null;
   }
+
+  // For prepaid resources, only staff can manually change end date
+  if (hasPrepaidComponents && !user.is_staff) {
+    return null;
+  }
+
   return (
     <ActionItem
       title={translate('Set termination date')}

@@ -1,4 +1,6 @@
 import { TimerIcon } from '@phosphor-icons/react';
+import { useQuery } from '@tanstack/react-query';
+import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
@@ -59,8 +61,31 @@ export const ChangeLimitsAction: ActionItemType = ({
     return null;
   }
 
-  return (resource.plan_uuid || resource.marketplace_plan_uuid) &&
-    resource.is_limit_based ? (
-    <ActionItem {...buttonProps} {...rest} />
-  ) : null;
+  if (!(resource.plan_uuid || resource.marketplace_plan_uuid)) {
+    return null;
+  }
+
+  // Check if resource has limit-based or prepaid components
+  const resourceUuid = resource.marketplace_resource_uuid || resource.uuid;
+  const { data: offering } = useQuery({
+    queryKey: ['resource-offering', resourceUuid],
+    queryFn: () =>
+      marketplaceResourcesOfferingRetrieve({
+        path: { uuid: resourceUuid },
+      }).then((response) => response.data),
+    enabled: Boolean(resourceUuid),
+    staleTime: 5 * 60 * 1000,
+    refetchOnWindowFocus: false,
+  });
+
+  const hasEditableComponents = offering?.components?.some(
+    (c) => c.billing_type === 'limit' || c.is_prepaid,
+  );
+
+  // Show only when offering has limit-based or prepaid components
+  if (offering && !hasEditableComponents) {
+    return null;
+  }
+
+  return <ActionItem {...buttonProps} {...rest} />;
 };
