@@ -44,7 +44,7 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
         <th className={row ? 'col-md-4' : 'col-md-auto'} rowSpan={titleRowSpan}>
           <label
             htmlFor={props.htmlFor}
-            className="title fw-bolder mb-0 d-block"
+            className="title fw-medium mb-0 d-block"
           >
             {props.label}
             {props.required && <span className="text-danger ms-1">*</span>}
