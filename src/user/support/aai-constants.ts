@@ -1,11 +1,15 @@
+import { type GenderEnum } from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 
-// ISO 5218 Gender codes - use functions to defer translation
-export const getGenderChoices = () => [
-  { value: 0, label: translate('Not known') },
-  { value: 1, label: translate('Male') },
-  { value: 2, label: translate('Female') },
-  { value: 9, label: translate('Not applicable') },
+/** Matches backend `User.gender` - use functions to defer translation  */
+export const getGenderChoices = (): Array<{
+  value: GenderEnum;
+  label: string;
+}> => [
+  { value: 'male', label: translate('Male') },
+  { value: 'female', label: translate('Female') },
+  { value: 'unknown', label: translate('Unknown') },
 ];
 
 // Personal title options
@@ -49,10 +53,20 @@ export const getOrganizationTypeOptions = () => [
 ];
 
 // Helper functions
-export const formatGender = (value: number | null | undefined): string => {
-  if (value === null || value === undefined) return '';
+export const parseGender = (value: unknown): GenderEnum | undefined => {
+  if (value === null || value === undefined || typeof value !== 'string')
+    return undefined;
+  const v = value.trim();
+  const match = getGenderChoices().find((c) => c.value === v);
+  return match?.value;
+};
+
+export const formatGender = (value: unknown): string | undefined => {
+  const parsed = parseGender(value);
+  if (!parsed) return undefined;
+
   const choices = getGenderChoices();
-  return choices.find((c) => c.value === value)?.label || '';
+  return choices.find((c) => c.value === parsed)?.label;
 };
 
 export const formatOrganizationType = (

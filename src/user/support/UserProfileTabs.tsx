@@ -202,14 +202,12 @@ const PersonalTab = ({ user, disabled, isSelf }: TabContentProps) => {
           user={user}
           label={translate('Gender')}
           name="gender"
-          value={formatGender(user.gender as number | null | undefined)}
+          value={formatGender(user.gender)}
           disabled={disabled}
           required={isRequired('gender')}
           protected={fieldIsProtected(user, 'gender')}
           description={
-            isSelf
-              ? translate('Your gender (ISO 5218)')
-              : translate("The user's gender")
+            isSelf ? translate('Your gender') : translate("The user's gender")
           }
         />
       )}
