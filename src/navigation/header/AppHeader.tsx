@@ -1,12 +1,18 @@
-import { ListIcon } from '@phosphor-icons/react';
+import { CaretLeftIcon, ListIcon } from '@phosphor-icons/react';
+import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
-import { useSelector } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
+import { isDirty } from 'redux-form';
 
 import { getIconUrl } from '@waldur/core/api';
 import { GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { Link } from '@waldur/core/Link';
+import { translate } from '@waldur/i18n';
 import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
+import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
+import { waitForConfirmation } from '@waldur/modal/actions';
+import { RootState } from '@waldur/store/reducers';
 import { useUser } from '@waldur/workspace/hooks';
 
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
@@ -35,13 +41,45 @@ interface AppHeaderProps {
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   hasBreadcrumbs,
 }) => {
+  const dispatch = useDispatch();
+  const {
+    state: { name: stateName },
+  } = useCurrentStateAndParams();
   const user = useUser();
   const imageUrl = getIconUrl('sidebar_logo_mobile');
   const [errorImg, setErrorImg] = useState(false);
 
   const hasSupport = useSelector(hasSupportSelector);
+  const isOrderFormDirty = useSelector((state: RootState) =>
+    isDirty(ORDER_FORM_ID)(state),
+  );
 
   const isSmallScr = useMediaQuery({ maxWidth: GRID_BREAKPOINTS.lg });
+  const isResourceCreationView = stateName === 'marketplace-offering-public';
+
+  const onGoBack = async () => {
+    if (isOrderFormDirty) {
+      try {
+        await waitForConfirmation(
+          dispatch,
+          translate('Unsaved changes'),
+          translate(
+            'You have unsaved changes. If you leave this page, your changes will be lost.',
+          ),
+          {
+            size: 'sm',
+            positiveButtonVariant: 'warning',
+            positiveButton: translate('Leave page'),
+            negativeButton: translate('Stay'),
+          },
+        );
+      } catch {
+        return;
+      }
+    }
+
+    window.history.back();
+  };
 
   return (
     <div className="header align-items-stretch">
@@ -69,6 +107,18 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
         </div>
         <div className="d-flex align-items-stretch justify-content-between flex-grow-1">
           <div className="d-flex align-items-stretch justify-content-between flex-grow-1 flex-shrink-1">
+            {Boolean(user) && isResourceCreationView && (
+              <button
+                className="btn me-3 py-0 d-inline-flex align-items-center justify-content-center align-self-center gap-1 text-primary fw-semibold fs-5 border-0 bg-transparent"
+                type="button"
+                onClick={onGoBack}
+                title={translate('Go back')}
+                style={{ width: '108px', height: '36px' }}
+              >
+                <CaretLeftIcon size={18} weight="bold" />
+                <span>{translate('Go back')}</span>
+              </button>
+            )}
             {hasBreadcrumbs && <BreadcrumbMain />}
           </div>
           <div className="d-flex align-items-stretch flex-shrink-0">
