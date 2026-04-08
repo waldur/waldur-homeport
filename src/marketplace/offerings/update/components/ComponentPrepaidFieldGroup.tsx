@@ -13,6 +13,8 @@ import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 
 import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
+import { ComponentMaxValueField } from './ComponentMaxValueField';
+import { ComponentMinValueField } from './ComponentMinValueField';
 
 const enhance = formValues<any, { readOnly?: boolean }>(() => ({
   billingType: 'billing_type',
@@ -27,6 +29,14 @@ export const ComponentPrepaidFieldGroup = enhance(
   }) =>
     props.billingType?.value == 'one' ? (
       <ComponentAccountingTypeWrapper>
+        <Row className="g-5 mb-5">
+          <Col xs>
+            <ComponentMinValueField />
+          </Col>
+          <Col xs>
+            <ComponentMaxValueField />
+          </Col>
+        </Row>
         <FormGroup space={5}>
           <Field
             name="is_prepaid"
