@@ -4,9 +4,9 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import {
   marketplaceOrdersOfferingRetrieve,
+  marketplaceOrdersResourceRetrieve,
   marketplaceOrdersRetrieve,
   marketplacePluginsList,
-  marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -23,8 +23,8 @@ async function loadOrder(order_uuid: string) {
     path: { uuid: order_uuid },
   }).then((response) => response.data);
 
-  const resource = await marketplaceResourcesRetrieve({
-    path: { uuid: order.marketplace_resource_uuid },
+  const resource = await marketplaceOrdersResourceRetrieve({
+    path: { uuid: order_uuid },
   }).then((response) => response.data);
 
   const offering = (await marketplaceOrdersOfferingRetrieve({
