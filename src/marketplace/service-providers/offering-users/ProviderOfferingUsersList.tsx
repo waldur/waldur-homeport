@@ -190,9 +190,16 @@ export const ProviderOfferingUsersListComponent: FunctionComponent<
     ...offeringColumn,
     ...organizationColumn,
     {
-      title: translate('User'),
-      render: ({ row }) => row.user_full_name,
-      export: 'user_full_name',
+      title: translate('First name'),
+      render: ({ row }) => renderFieldOrDash(row.user_first_name),
+      export: 'user_first_name',
+      orderField: 'user_first_name',
+    },
+    {
+      title: translate('Last name'),
+      render: ({ row }) => renderFieldOrDash(row.user_last_name),
+      export: 'user_last_name',
+      orderField: 'user_last_name',
     },
     {
       title: translate('Username'),
