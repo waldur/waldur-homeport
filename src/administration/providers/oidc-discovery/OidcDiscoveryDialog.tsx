@@ -57,7 +57,7 @@ export const OidcDiscoveryDialog: FC<OidcDiscoveryDialogProps> = ({
       discovery_url: provider?.discovery_url || '',
       verify_ssl: provider?.verify_ssl ?? true,
       client_id: provider?.client_id || '',
-      client_secret: '',
+      client_secret: provider?.client_secret || '',
       // Discovery results (populated by DiscoveryStep)
       discoveryResult: null,
       manualClaims: [],
