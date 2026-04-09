@@ -51,20 +51,32 @@ const RowActions = ({ row }) => {
 interface OwnProps {
   scope: Customer | Project;
   context: 'organization' | 'project';
+  fetchData?: ReturnType<typeof createFetcher>;
+  filter?: Record<string, unknown>;
+  hideActions?: boolean;
 }
 
-export const SummaryTeamTable: FC<OwnProps> = ({ scope, context }) => {
+export const SummaryTeamTable: FC<OwnProps> = ({
+  scope,
+  context,
+  fetchData,
+  filter,
+  hideActions,
+}) => {
   const props = useTable({
     table:
       (context === 'organization' ? 'customer-users' : 'project-users') +
       '-' +
       scope.uuid,
-    fetchData: createFetcher(
-      context === 'organization' ? customersUsersList : projectsListUsersList,
-      context === 'organization'
-        ? { path: { customer_uuid: scope.uuid } }
-        : { path: { uuid: scope.uuid } },
-    ),
+    fetchData:
+      fetchData ??
+      createFetcher(
+        context === 'organization' ? customersUsersList : projectsListUsersList,
+        context === 'organization'
+          ? { path: { customer_uuid: scope.uuid } }
+          : { path: { uuid: scope.uuid } },
+      ),
+    filter,
     mandatoryFields:
       context === 'organization'
         ? organizationUserMandatoryFields
@@ -139,7 +151,7 @@ export const SummaryTeamTable: FC<OwnProps> = ({ scope, context }) => {
       }
       initialPageSize={5}
       minHeight="auto"
-      rowActions={RowActions}
+      rowActions={hideActions ? null : RowActions}
     />
   );
 };

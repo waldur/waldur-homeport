@@ -1,3 +1,4 @@
+import { useCallback } from 'react';
 import { marketplaceServiceProvidersProjectsList } from 'waldur-js-client';
 
 import { ProjectsListTable } from '@waldur/project/ProjectsList';
@@ -6,6 +7,7 @@ import { useTable } from '@waldur/table/useTable';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 
+import { ProviderProjectExpandableRow } from './ProviderProjectExpandableRow';
 import { PROVIDER_CUSTOMERS_TABLE_TABS } from './utils';
 
 const ProviderProjectsListComponent = ({ provider }) => {
@@ -17,12 +19,20 @@ const ProviderProjectsListComponent = ({ provider }) => {
     queryField: 'query',
   });
 
+  const ExpandableRow = useCallback(
+    ({ row }) => (
+      <ProviderProjectExpandableRow row={row} providerUuid={provider.uuid} />
+    ),
+    [provider.uuid],
+  );
+
   return (
     <ProjectsListTable
       {...tableProps}
       tabs={PROVIDER_CUSTOMERS_TABLE_TABS}
       tableActions={null}
       rowActions={null}
+      expandableRow={ExpandableRow}
     />
   );
 };
