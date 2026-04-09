@@ -47,22 +47,54 @@ export const AutoCreateProjectGroup = ({ disabled }) => {
         />
       </FormGroup>
       {values?.auto_create_project && (
-        <FormGroup
-          label={translate('Project name template')}
-          required
-          description={translate(
-            'Use variables like {full_name}, {email} to create dynamic project names',
-          )}
-          help={<NameTemplateTooltip />}
-        >
-          <Field
-            name="project_name_template"
-            component={StringField as any}
-            placeholder={translate('e.g. {full_name} Research project')}
-            disabled={disabled}
-            validate={required}
-          />
-        </FormGroup>
+        <>
+          <FormGroup
+            label={translate('Project name template')}
+            required
+            description={translate(
+              'Use variables like {full_name}, {email} to create dynamic project names',
+            )}
+            help={<NameTemplateTooltip />}
+          >
+            <Field
+              name="project_name_template"
+              component={StringField as any}
+              placeholder={translate('e.g. {full_name} Research project')}
+              disabled={disabled}
+              validate={required}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Field
+              name="allow_custom_project_details"
+              render={({ input }) => (
+                <AwesomeCheckboxField
+                  label={translate(
+                    'Allow users to provide custom project name and description',
+                  )}
+                  alignMiddle
+                  disabled={disabled}
+                  input={input as any}
+                />
+              )}
+            />
+          </FormGroup>
+          <FormGroup>
+            <Field
+              name="allow_multiple_requests"
+              render={({ input }) => (
+                <AwesomeCheckboxField
+                  label={translate(
+                    'Allow users to create multiple projects from this invitation',
+                  )}
+                  alignMiddle
+                  disabled={disabled}
+                  input={input as any}
+                />
+              )}
+            />
+          </FormGroup>
+        </>
       )}
     </>
   );

@@ -44,7 +44,7 @@ export const AvailableOrganizationsToJoin: FC = () => {
 
   const onSubmit = useCallback(
     (formData) => {
-      return requestToAccessOrganization(formData.invitation.uuid, dispatch);
+      return requestToAccessOrganization(formData.invitation, dispatch);
     },
     [dispatch],
   );

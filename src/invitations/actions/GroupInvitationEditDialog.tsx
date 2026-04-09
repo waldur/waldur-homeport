@@ -77,6 +77,9 @@ export const GroupInvitationEditDialog = ({
       project: initialProject,
       auto_create_project: invitation.auto_create_project ?? false,
       auto_approve: invitation.auto_approve ?? false,
+      allow_custom_project_details:
+        invitation.allow_custom_project_details ?? false,
+      allow_multiple_requests: invitation.allow_multiple_requests ?? false,
       project_name_template: invitation.project_name_template ?? '',
       user_affiliations: invitation.user_affiliations ?? [],
       user_email_patterns: invitation.user_email_patterns ?? [],
@@ -108,12 +111,17 @@ export const GroupInvitationEditDialog = ({
                   project_name_template: formData.project_name_template,
                   auto_create_project: formData.auto_create_project,
                   auto_approve: formData.auto_approve,
+                  allow_custom_project_details:
+                    formData.allow_custom_project_details,
+                  allow_multiple_requests: formData.allow_multiple_requests,
                   user_affiliations: formData.user_affiliations,
                   user_email_patterns: formData.user_email_patterns,
                 }
               : {
                   auto_create_project: false,
                   auto_approve: false,
+                  allow_custom_project_details: false,
+                  allow_multiple_requests: false,
                 }),
           },
         });

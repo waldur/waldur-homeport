@@ -38,6 +38,10 @@ export const UserPermissionRequestsList: FC<OwnProps> = ({
       render: ({ row }) => formatDateTime(row.created),
     },
     {
+      title: translate('Requested project'),
+      render: ({ row }) => row.project_name || null,
+    },
+    {
       title: translate('Reviewed at'),
       render: ({ row }) =>
         row.reviewed_at ? formatDateTime(row.reviewed_at) : 'N/A',

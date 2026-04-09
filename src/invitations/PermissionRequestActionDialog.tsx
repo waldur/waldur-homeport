@@ -100,6 +100,18 @@ const PurePermissionRequestActionDialog: FunctionComponent<
               value={permissionRequest.project_name_template}
               labelTooltipLen={false}
             />
+            {permissionRequest.project_name && (
+              <Field
+                label={translate('Requested project name')}
+                value={permissionRequest.project_name}
+              />
+            )}
+            {permissionRequest.project_description && (
+              <Field
+                label={translate('Requested project description')}
+                value={permissionRequest.project_description}
+              />
+            )}
           </>
         )}
         <Field
