@@ -36,6 +36,7 @@ export enum MarketplaceFeatures {
   display_offering_partitions = 'marketplace.display_offering_partitions',
   display_software_catalog = 'marketplace.display_software_catalog',
   display_user_tos = 'marketplace.display_user_tos',
+  hide_add_resource_button_from_end_users = 'marketplace.hide_add_resource_button_from_end_users',
   hide_marketplace_from_end_users = 'marketplace.hide_marketplace_from_end_users',
   hide_organization_information_from_project_members = 'marketplace.hide_organization_information_from_project_members',
   import_resources = 'marketplace.import_resources',

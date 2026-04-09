@@ -300,6 +300,10 @@ export const PermissionOptions = [
         value: 'ORDER.CANCEL',
       },
       {
+        label: translate('Create order'),
+        value: 'ORDER.CREATE',
+      },
+      {
         label: translate('Destroy order'),
         value: 'ORDER.DESTROY',
       },
