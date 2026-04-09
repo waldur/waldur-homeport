@@ -38,6 +38,8 @@ interface GroupInvitationCreateFormData {
   project_name_template: string;
   auto_create_project: boolean;
   auto_approve: boolean;
+  allow_custom_project_details: boolean;
+  allow_multiple_requests: boolean;
   user_affiliations: Array<string>;
   user_email_patterns: Array<string>;
   custom_text: string;
@@ -83,6 +85,9 @@ export const GroupInvitationCreateDialog = ({
                   project_name_template: formData.project_name_template,
                   auto_create_project: formData.auto_create_project,
                   auto_approve: formData.auto_approve,
+                  allow_custom_project_details:
+                    formData.allow_custom_project_details,
+                  allow_multiple_requests: formData.allow_multiple_requests,
                   user_affiliations: formData.user_affiliations,
                   user_email_patterns: formData.user_email_patterns,
                 }

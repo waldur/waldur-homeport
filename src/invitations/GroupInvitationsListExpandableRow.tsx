@@ -56,6 +56,18 @@ export const GroupInvitationsListExpandableRow: FunctionComponent<{
       labelClass="min-w-150px fw-bolder"
       space={5}
     />
+    <Field
+      label={translate('Custom project details')}
+      value={<BooleanField value={row.allow_custom_project_details} />}
+      labelClass="min-w-150px fw-bolder"
+      space={5}
+    />
+    <Field
+      label={translate('Multiple requests')}
+      value={<BooleanField value={row.allow_multiple_requests} />}
+      labelClass="min-w-150px fw-bolder"
+      space={5}
+    />
     {row.custom_text && (
       <Field
         label={translate('Custom text')}

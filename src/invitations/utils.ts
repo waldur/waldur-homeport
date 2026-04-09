@@ -1,4 +1,5 @@
 import {
+  userGroupInvitationsRetrieve,
   userGroupInvitationsSubmitRequest,
   userInvitationsAccept,
 } from 'waldur-js-client';
@@ -60,6 +61,12 @@ const GroupInvitationConfirmDialog = lazyComponent(() =>
   })),
 );
 
+const ProjectDetailsDialog = lazyComponent(() =>
+  import('./join-organization/ProjectDetailsDialog').then((module) => ({
+    default: module.ProjectDetailsDialog,
+  })),
+);
+
 export function getGroupInvitationLink(invitation) {
   return `${location.origin}/user-group-invitation/${invitation.uuid}/`;
 }
@@ -109,11 +116,32 @@ export function checkAndAccept(token) {
   }
 }
 
+function collectProjectDetails(token): Promise<{
+  project_name?: string;
+  project_description?: string;
+} | null> {
+  return userGroupInvitationsRetrieve({ path: { uuid: token } }).then((res) => {
+    const invitation = res.data;
+    if (!invitation.allow_custom_project_details) return null;
+    return new Promise((resolve) => {
+      store.dispatch(
+        openModalDialog(ProjectDetailsDialog, {
+          resolve: {
+            onSubmit: (data) => resolve(data),
+          },
+          size: 'md',
+        }),
+      );
+    });
+  });
+}
+
 export function submitPermissionRequest(token) {
   return confirmUserGroupInvitation(token)
-    .then((accept) => {
+    .then(async (accept) => {
       if (accept) {
-        submitGroupRequest(token)
+        const projectDetails = await collectProjectDetails(token);
+        submitGroupRequest(token, projectDetails || undefined)
           .then(() => {
             router.stateService.go('profile.details');
           })
@@ -198,8 +226,14 @@ export async function acceptInvitation(token) {
   }
 }
 
-function submitGroupRequest(token) {
-  return userGroupInvitationsSubmitRequest({ path: { uuid: token } })
+function submitGroupRequest(
+  token,
+  body?: { project_name?: string; project_description?: string },
+) {
+  return userGroupInvitationsSubmitRequest({
+    path: { uuid: token },
+    body: body || {},
+  })
     .then(async (res) => {
       if (res.data.auto_approved) {
         // Refresh user to get updated permissions from backend

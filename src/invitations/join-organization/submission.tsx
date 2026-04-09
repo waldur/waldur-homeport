@@ -1,30 +1,39 @@
 import { CheckCircleIcon, InfoIcon, XCircleIcon } from '@phosphor-icons/react';
-import { userGroupInvitationsSubmitRequest } from 'waldur-js-client';
+import {
+  GroupInvitation,
+  userGroupInvitationsRetrieve,
+  userGroupInvitationsSubmitRequest,
+} from 'waldur-js-client';
 
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
 import { FieldErrorMessage } from '@waldur/form/FieldError';
 import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
+import { openModalDialog } from '@waldur/modal/actions';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { UsersService } from '@waldur/user/UsersService';
+
+import { ProjectDetailsDialog } from './ProjectDetailsDialog';
 
 const isDuplicateOrConflictError = (errorMessage: unknown): boolean =>
   typeof errorMessage === 'string' &&
   (errorMessage.includes('already exists') ||
     errorMessage.includes('already has'));
 
-export const requestToAccessOrganization = (
+const submitRequest = (
   groupInvitationUuid: string,
   dispatch,
+  body?: { project_name?: string; project_description?: string },
 ) =>
-  // Call API directly instead of submitGroupRequest() to avoid duplicate toast notification
-  userGroupInvitationsSubmitRequest({ path: { uuid: groupInvitationUuid } })
+  userGroupInvitationsSubmitRequest({
+    path: { uuid: groupInvitationUuid },
+    body: body || {},
+  })
     .then((res) => res.data)
     .then(async (groupInvitation) => {
       GroupInvitationTokenStorage.remove();
       if (groupInvitation.auto_approved) {
-        // Refresh user to get updated permissions from backend
         await UsersService.refreshCurrentUser();
         await waitForConfirmation(
           dispatch,
@@ -48,7 +57,7 @@ export const requestToAccessOrganization = (
           dispatch,
           translate('Request has been sent for approval'),
           translate(
-            "Your request to join the organization {name} has been submitted. You’ll receive a notification once it's reviewed and approved.",
+            "Your request to join the organization {name} has been submitted. You'll receive a notification once it's reviewed and approved.",
             {
               name: (
                 <strong>{renderFieldOrDash(groupInvitation.scope_name)}</strong>
@@ -114,3 +123,36 @@ export const requestToAccessOrganization = (
         );
       }
     });
+
+export const requestToAccessOrganization = async (
+  invitationOrUuid: GroupInvitation | string,
+  dispatch,
+) => {
+  let invitation: GroupInvitation;
+  if (typeof invitationOrUuid === 'string') {
+    const res = await userGroupInvitationsRetrieve({
+      path: { uuid: invitationOrUuid },
+    });
+    invitation = res.data;
+  } else {
+    invitation = invitationOrUuid;
+  }
+
+  if (invitation.allow_custom_project_details) {
+    return new Promise<void>((resolve) => {
+      dispatch(
+        openModalDialog(ProjectDetailsDialog, {
+          resolve: {
+            onSubmit: (data) => {
+              submitRequest(invitation.uuid, dispatch, data).then(() =>
+                resolve(),
+              );
+            },
+          },
+          size: 'md',
+        }),
+      );
+    });
+  }
+  return submitRequest(invitation.uuid, dispatch);
+};
