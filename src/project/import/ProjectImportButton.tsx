@@ -27,6 +27,7 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
   refetch,
 }) => {
   const user = useSelector(getUser);
+  if (!user) return null;
   const disabled =
     customer &&
     !hasPermission(user, {
