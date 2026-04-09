@@ -152,8 +152,8 @@ export const getCostWidgetChartOptions = (
         color: '#555',
       },
       itemGap: 8,
-      left: '0%',
-      align: 'left',
+      top: 0,
+      left: 'center',
     },
     series: series.map((serie) => ({
       barCategoryGap: 6,
@@ -298,8 +298,8 @@ export const getCreditWidgetChartOptions = (
         color: '#555',
       },
       itemGap: 8,
-      left: '0%',
-      align: 'left',
+      top: 0,
+      left: 'center',
     },
     series: series.map((serie) => ({
       barCategoryGap: 6,

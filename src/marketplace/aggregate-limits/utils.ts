@@ -10,6 +10,29 @@ interface ChartResult {
   options: any;
 }
 
+type ComponentStats = ComponentsUsageStats['components'][number];
+
+export function getComponentKey(component: ComponentStats): string {
+  return `${component.type}__${component.billing_type}`;
+}
+
+export function getComponentDisplayName(
+  component: ComponentStats,
+  allComponents: ComponentStats[],
+): string {
+  const sameNameCount = allComponents.filter(
+    (c) => c.name === component.name,
+  ).length;
+  if (sameNameCount > 1) {
+    const suffix =
+      component.billing_type === 'limit'
+        ? translate('limit-based')
+        : translate('usage-based');
+    return `${component.name} (${suffix})`;
+  }
+  return component.name;
+}
+
 export function useAggregateLimitChart(
   data: ComponentsUsageStats | undefined,
   isMonthly = false,
@@ -30,7 +53,9 @@ export function useAggregateLimitChart(
     const brand = getBrandColor();
     const brandColors = generateBrandColors(brand);
 
-    const xAxisData = components.map((component) => component.name);
+    const xAxisData = components.map((component) =>
+      getComponentDisplayName(component, components),
+    );
 
     const usageData = [];
     const remainingData = [];
@@ -81,10 +106,7 @@ export function useAggregateLimitChart(
         },
         formatter: function (params) {
           const usageBar = params[0];
-          const compIndex = components.findIndex(
-            (c) => c.name === usageBar.name,
-          );
-          const component = components[compIndex];
+          const component = components[usageBar.dataIndex];
 
           if (!component) {
             return '';
@@ -119,14 +141,14 @@ export function useAggregateLimitChart(
           color: '#555',
         },
         itemGap: 8,
-        left: '0%',
-        align: 'left',
+        top: 0,
+        left: 'center',
       },
       grid: {
         left: 35,
         right: '0%',
         bottom: limit ? '0%' : '5%',
-        top: 30,
+        top: 40,
         containLabel: true,
       },
       xAxis: {
@@ -191,7 +213,7 @@ export function useAggregateLimitChart(
             borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
           },
           data: usageData,
-          color: brandColors[500],
+          color: brandColors[600],
         },
         {
           name: translate('Limit'),
@@ -204,7 +226,7 @@ export function useAggregateLimitChart(
             borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
           },
           data: remainingData,
-          color: brandColors[200],
+          color: `rgba(${brandColors['600-rgb']}, 0.25)`,
         },
       ],
     };
