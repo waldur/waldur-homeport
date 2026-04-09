@@ -21,6 +21,7 @@ import { NON_TERMINATED_STATES } from '../resources/list/constants';
 import { PublicResourceLink } from '../resources/list/PublicResourceLink';
 
 import { AggregateLimitsExpandableRow } from './AggregateLimitsExpandableRow';
+import { getComponentKey, getComponentDisplayName } from './utils';
 
 const requiredFields: MarketplaceResourcesListData['query']['field'] = [
   'name',
@@ -76,7 +77,7 @@ export const AggregateLimitDetailsDialog = ({
 
   const handleChange = (value) => {
     const selected = components.find(
-      (component) => component.type === value.value,
+      (component) => getComponentKey(component) === value.value,
     );
     setSelectedComponentType(selected || null);
   };
@@ -85,8 +86,8 @@ export const AggregateLimitDetailsDialog = ({
     if (!components) return [];
 
     return components.map((component) => ({
-      value: component.type,
-      label: component.name,
+      value: getComponentKey(component),
+      label: getComponentDisplayName(component, components),
     }));
   };
 
@@ -146,8 +147,11 @@ export const AggregateLimitDetailsDialog = ({
             value={
               selectedComponentType
                 ? {
-                    value: selectedComponentType.type,
-                    label: selectedComponentType.name,
+                    value: getComponentKey(selectedComponentType),
+                    label: getComponentDisplayName(
+                      selectedComponentType,
+                      components,
+                    ),
                   }
                 : null
             }
