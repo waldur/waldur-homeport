@@ -12,6 +12,12 @@
     margin-top: -0.77rem;
   }
 
+  &.alert-item-floating {
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.475rem;
+    padding: 1.23rem;
+  }
+
   .alert-actions {
     display: flex;
     align-items: start;

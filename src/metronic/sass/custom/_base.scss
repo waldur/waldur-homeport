@@ -1,5 +1,9 @@
 @import '@waldur/metronic/sass/core/components/_variables.scss';
 
+body {
+  overflow-x: hidden;
+}
+
 /* CARD */
 .card {
   .card-header {
@@ -162,10 +166,15 @@
     }
   }
 }
-// Icon button sizes — sm: 28px
+// Icon button sizes — sm: 28px, md: 36px, lg: 44px
 .btn.btn-icon.btn-sm {
   width: 28px;
   height: 28px;
+}
+
+.btn.btn-icon.btn-icon-md {
+  width: 36px;
+  height: 36px;
 }
 
 .text-btn {

@@ -4,7 +4,14 @@ import {
   ThreadMessageLike,
   useExternalStoreRuntime,
 } from '@assistant-ui/react';
-import { ReactNode, useCallback, useMemo, useRef, useState } from 'react';
+import {
+  ReactNode,
+  useCallback,
+  useEffect,
+  useMemo,
+  useRef,
+  useState,
+} from 'react';
 
 import {
   createOnCancel,
@@ -18,8 +25,8 @@ import { createThreadListAdapter } from '@waldur/ai-assistant/lib/thread/threadL
 import {
   useAbortControllers,
   useBackendThreadIds,
-  useThreadRunningState,
 } from '@waldur/ai-assistant/lib/thread/threadStateHooks';
+import { useThreadList } from '@waldur/ai-assistant/lib/thread/useThreadList';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
 import { isDrawerOpen } from '@waldur/drawer/utils';
 
@@ -33,15 +40,44 @@ export function ThreadRuntimeProvider({
     setCurrentThreadId,
     threads,
     setThreads,
-    setHasNewMessages,
+    addNotification,
+    clearNotification,
+    setLoadingThreadId,
+    getIsRunning,
+    setIsRunning,
   } = useThreadContext();
 
   const [threadList, setThreadList] = useState<
     ExternalStoreThreadData<'regular' | 'archived'>[]
   >([]);
 
-  // Thread state management hooks
-  const { getIsRunning, setIsRunning } = useThreadRunningState();
+  // Fetch real thread list from backend
+  const { data: backendThreads, refetch: refetchThreadList } = useThreadList();
+
+  // Sync backend threads into threadList state
+  useEffect(() => {
+    if (!backendThreads) return;
+
+    setThreadList((prev) => {
+      // Keep locally-created threads (not yet synced) and merge with backend threads
+      const localOnlyThreads = prev.filter(
+        (t) => !backendThreads.some((bt) => bt.uuid === t.id),
+      );
+
+      const backendEntries: ExternalStoreThreadData<'regular' | 'archived'>[] =
+        backendThreads.map((bt) => ({
+          id: bt.uuid!,
+          status: (bt.is_archived ? 'archived' : 'regular') as
+            | 'regular'
+            | 'archived',
+          title: bt.name || undefined,
+        }));
+
+      return [...backendEntries, ...localOnlyThreads];
+    });
+  }, [backendThreads]);
+
+  // Thread state management hooks (running state is now in ThreadProvider context)
   const { createController, abortThread, cleanupController } =
     useAbortControllers();
   const { getBackendThreadId, setBackendThreadId } = useBackendThreadIds();
@@ -56,6 +92,10 @@ export function ThreadRuntimeProvider({
   // Use ref to prevent handlers from recreating on every message update
   const messagesRef = useRef(messages);
   messagesRef.current = messages;
+
+  // Ref for currentThreadId so onStreamComplete can read the latest value
+  const currentThreadIdRef = useRef(currentThreadId);
+  currentThreadIdRef.current = currentThreadId;
 
   // Messages setter for current thread
   const setMessages: React.Dispatch<
@@ -93,6 +133,11 @@ export function ThreadRuntimeProvider({
     [abortThread, setIsRunning],
   );
 
+  // Stable refetch callback
+  const refetchCallback = useCallback(() => {
+    refetchThreadList();
+  }, [refetchThreadList]);
+
   // Thread list adapter
   const threadListAdapter = useMemo(
     () =>
@@ -104,6 +149,11 @@ export function ThreadRuntimeProvider({
         setCurrentThreadId,
         setThreads,
         abortThreadStream,
+        clearNotification,
+        getBackendThreadId,
+        setBackendThreadId,
+        refetchThreadList: refetchCallback,
+        setLoadingThreadId,
       }),
     [
       currentThreadId,
@@ -113,11 +163,15 @@ export function ThreadRuntimeProvider({
       setCurrentThreadId,
       setThreads,
       abortThreadStream,
+      clearNotification,
+      getBackendThreadId,
+      setBackendThreadId,
+      refetchCallback,
+      setLoadingThreadId,
     ],
   );
 
   // Message handler dependencies
-  // Handlers access messages via getter function that reads from messagesRef
   const handlerDeps = useMemo(
     () => ({
       get messages() {
@@ -131,9 +185,12 @@ export function ThreadRuntimeProvider({
       cleanupController,
       abortThread,
       onStreamComplete: () => {
-        if (!isDrawerOpen()) {
-          setHasNewMessages(true);
+        // Notify if drawer is closed or user switched to a different thread
+        if (!isDrawerOpen() || currentThreadIdRef.current !== currentThreadId) {
+          addNotification(currentThreadId);
         }
+        // Refetch thread list to pick up auto-generated title and updated modified date
+        refetchCallback();
       },
       getBackendThreadId,
       setBackendThreadId,
@@ -146,7 +203,8 @@ export function ThreadRuntimeProvider({
       createController,
       cleanupController,
       abortThread,
-      setHasNewMessages,
+      addNotification,
+      refetchCallback,
       getBackendThreadId,
       setBackendThreadId,
     ],

@@ -1,29 +1,4 @@
-import { useState } from 'react';
-
-export const useThreadRunningState = () => {
-  const [runningThreads, setRunningThreads] = useState<Map<string, boolean>>(
-    new Map(),
-  );
-
-  const getIsRunning = (threadId: string) =>
-    runningThreads.get(threadId) ?? false;
-
-  const setIsRunning = (
-    threadId: string,
-    value: boolean | ((prev: boolean) => boolean),
-  ) => {
-    setRunningThreads((prev) => {
-      const next = new Map(prev);
-      const currentRunning = prev.get(threadId) ?? false;
-      const newValue =
-        typeof value === 'function' ? value(currentRunning) : value;
-      next.set(threadId, newValue);
-      return next;
-    });
-  };
-
-  return { getIsRunning, setIsRunning };
-};
+import { useCallback, useRef, useState } from 'react';
 
 export const useAbortControllers = () => {
   const [abortControllers, setAbortControllers] = useState<
@@ -60,16 +35,20 @@ export const useAbortControllers = () => {
 };
 
 export const useBackendThreadIds = () => {
-  const [backendThreadIds, setBackendThreadIds] = useState<Map<string, string>>(
-    new Map(),
+  // Ref-backed: the mapping is never read for rendering, only looked up by
+  // message handlers. Using a ref keeps getter/setter identities stable so
+  // downstream memos (e.g. threadListAdapter) don't rebuild on every message.
+  const backendThreadIdsRef = useRef<Map<string, string>>(new Map());
+
+  const getBackendThreadId = useCallback(
+    (threadId: string) => backendThreadIdsRef.current.get(threadId),
+    [],
   );
 
-  const getBackendThreadId = (threadId: string) =>
-    backendThreadIds.get(threadId);
-
-  const setBackendThreadId = (threadId: string, uuid: string) => {
-    setBackendThreadIds((prev) => new Map(prev).set(threadId, uuid));
-  };
+  const setBackendThreadId = useCallback((threadId: string, uuid: string) => {
+    if (backendThreadIdsRef.current.get(threadId) === uuid) return;
+    backendThreadIdsRef.current.set(threadId, uuid);
+  }, []);
 
   return { getBackendThreadId, setBackendThreadId };
 };

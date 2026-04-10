@@ -1,0 +1,314 @@
+.aui-chat-page-layout {
+  display: flex;
+  height: 100%;
+  width: 100%;
+}
+
+// Sidebar hidden by default
+#kt_drawer:not([data-expanded='true']):not([data-history-open='true'])
+  .aui-history-sidebar {
+  display: none !important;
+}
+
+// Desktop: show sidebar and switch to row layout when drawer is expanded
+#kt_drawer[data-expanded='true'] .aui-chat-drawer {
+  flex-direction: row;
+}
+
+#kt_drawer[data-expanded='true'] .aui-history-sidebar {
+  display: flex;
+}
+
+// Shared full-width drawer styles for tablet and mobile
+@mixin full-width-drawer {
+  #kt_drawer.ai-chat-drawer-active {
+    width: 100% !important;
+    max-width: 100% !important;
+    right: 0 !important;
+    border-radius: 0 !important;
+    position: fixed !important;
+    top: get($header-config, fixed, outer-height, tablet-and-mobile) !important;
+    bottom: 0 !important;
+    height: auto !important;
+  }
+}
+
+// Tablet: full-width drawer, sidebar side-by-side when toggled open
+@media (min-width: 768px) and (max-width: 991px) {
+  @include full-width-drawer;
+
+  // Side-by-side layout when history is open
+  #kt_drawer[data-history-open='true'] .aui-chat-drawer {
+    flex-direction: row;
+  }
+
+  #kt_drawer[data-history-open='true'] .aui-history-sidebar {
+    display: flex !important;
+  }
+}
+
+// Mobile: full-screen drawer with sidebar as slide-in overlay
+@media (max-width: 767px) {
+  @include full-width-drawer;
+
+  #kt_drawer[data-history-open='true'] .aui-chat-drawer {
+    flex-direction: column;
+  }
+
+  #kt_drawer[data-history-open='true'] .aui-history-sidebar {
+    display: flex !important;
+    width: 100%;
+    min-width: 100%;
+    flex: 1;
+    border-right: none;
+  }
+
+  // Hide chat when history is open on mobile
+  #kt_drawer[data-history-open='true'] .aui-chat-drawer > .flex-grow-1 {
+    display: none !important;
+  }
+
+  .aui-history-header-title {
+    font-size: $h2-font-size !important;
+  }
+
+  .aui-history-item {
+    font-size: $h4-font-size !important;
+  }
+
+  .aui-history-new-chat {
+    height: $input-height-lg;
+    font-size: $h4-font-size !important;
+  }
+}
+
+// layout_ID0S3A: column, gap 40px, fixed width, fill height, right border
+.aui-history-sidebar {
+  width: 320px;
+  min-width: 320px;
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  padding: 0 16px;
+  border-right: 1px solid $border-color;
+  overflow-y: auto;
+}
+
+// layout_34I28W: column, stretch, gap 12px
+.aui-history-button-section {
+  display: flex;
+  flex-direction: column;
+  align-items: stretch;
+  gap: 8px;
+}
+
+// layout_3LSR4A: row, center, stretch, gap 10px
+.aui-history-header {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+// Toggle button — same style as sidebar collapse icon
+.aui-history-toggle-btn {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 8px;
+  border: none;
+  background: transparent;
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    color: $gray-400;
+  }
+
+  &:hover {
+    background-color: $gray-50;
+  }
+}
+
+.aui-icon-rotate-180 {
+  transform: rotate(180deg);
+}
+
+// Collapsed state — only show the toggle icon
+.aui-history-sidebar--collapsed {
+  width: auto;
+  min-width: auto;
+  gap: 0;
+}
+
+.aui-history-header-title {
+  font-family: $font-family-sans-serif;
+  font-weight: 500;
+  font-size: $h3-font-size;
+  line-height: 1.5;
+  color: $gray-700;
+}
+
+// Lower AI drawer z-index so header dropdowns (z-index: 105) render on top
+#kt_drawer.ai-chat-drawer-active {
+  z-index: 100 !important;
+}
+
+// Remove default drawer body padding for AI chat
+#kt_drawer.ai-chat-drawer-active #kt_drawer_body > .p-9 {
+  padding: 0 !important;
+}
+
+// AI chat drawer — buttons overlay inside the content area, no separate header
+#kt_drawer.ai-chat-drawer-active #kt_drawer_header {
+  position: absolute;
+  top: 16px;
+  right: 16px;
+  left: auto;
+  z-index: 1;
+  border: none;
+  background: transparent;
+  min-height: 0 !important;
+  padding: 0 !important;
+  margin: 0;
+
+  // Hide the title text
+  > div:first-child {
+    display: none;
+  }
+
+  .card-toolbar {
+    margin-left: auto;
+    gap: 8px !important;
+    margin-top: 0 !important;
+    margin-bottom: 0 !important;
+  }
+}
+
+// layout_O1PDTF: Tertiary Contained button (Size=Medium*, Color=Tertiary)
+// Uses btn btn-tertiary from design system, only layout overrides here
+.aui-history-new-chat {
+  width: 100%;
+  justify-content: center;
+  gap: 8px;
+}
+
+// History list — same 40px gap as parent Block between groups
+.aui-history-list {
+  display: flex;
+  flex-direction: column;
+  gap: 24px;
+  flex: 1;
+  overflow-y: auto;
+}
+
+// layout_BYY40X: column, gap 8px (internal gap between title and items)
+.aui-history-group {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+}
+
+.aui-history-item + .aui-history-item {
+  margin-top: -8px;
+}
+
+// layout_ED6H91: row, center, stretch, gap 8px
+
+// layout_AS578H: row, center, gap 8px, padding 10px 16px, width 320px, radius 8px
+// Text md / Normal: Inter 400 16px/1.5, color #101828
+.aui-history-item {
+  display: flex;
+  align-items: center;
+  width: 100%;
+  text-align: left;
+  gap: 8px;
+  padding: 10px 8px;
+  border: none;
+  background: transparent;
+  font-family: $font-family-sans-serif;
+  font-weight: 400;
+  font-size: $font-size-lg;
+  line-height: 1.5;
+  color: $gray-900;
+  border-radius: $border-radius-lg;
+  cursor: pointer;
+  overflow: visible;
+
+  &:hover {
+    background-color: $gray-50; // fill_VIWCCM
+  }
+
+  &.active {
+    background-color: $gray-50;
+    font-weight: 500;
+  }
+}
+
+// Search bar
+
+// Empty state
+.aui-history-empty {
+  padding: 16px;
+  text-align: center;
+  color: $gray-400;
+  font-size: $font-size-sm;
+}
+
+// Thread item layout — position relative for menu
+.aui-history-item {
+  position: relative;
+
+  &:hover .aui-history-item-menu-trigger {
+    opacity: 1;
+  }
+}
+
+.aui-history-item-title {
+  flex: 1;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  white-space: nowrap;
+}
+
+// Notification dot — expanding ring to signal unread messages
+.aui-history-item-dot {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $primary;
+  flex-shrink: 0;
+  animation: animationBlink 1s steps(5, start) infinite;
+}
+
+// Pulsing running indicator
+.aui-history-item-running {
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background-color: $primary;
+  flex-shrink: 0;
+  animation: aui-pulse 1.5s ease-in-out infinite;
+}
+
+@keyframes aui-pulse {
+  0%,
+  100% {
+    opacity: 1;
+  }
+  50% {
+    opacity: 0.3;
+  }
+}
+
+// Three-dot menu
+.aui-history-item-menu {
+  position: relative;
+  flex-shrink: 0;
+}
+
+.aui-history-item-menu-trigger {
+  opacity: 0;
+  transition: opacity 0.15s;
+}

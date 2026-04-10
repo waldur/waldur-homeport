@@ -1,6 +1,13 @@
-import { useEffect, useState } from 'react';
+import {
+  ArrowsInSimpleIcon,
+  ArrowsOutSimpleIcon,
+  ListIcon,
+  XIcon,
+} from '@phosphor-icons/react';
+import { FC, useCallback, useEffect, useState } from 'react';
 
 import { AIDisclosureBanner } from '@waldur/ai-assistant/components/AIDisclosureDialog';
+import { ChatHistorySidebar } from '@waldur/ai-assistant/components/ChatHistorySidebar';
 import { LLMErrorBoundary } from '@waldur/ai-assistant/components/LLMErrorBoundary';
 import { Thread } from '@waldur/ai-assistant/components/Thread';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
@@ -8,24 +15,214 @@ import {
   acknowledgeDisclosure,
   isDisclosureAcknowledged,
 } from '@waldur/ai-assistant/utils';
-import { isDrawerOpen } from '@waldur/drawer/utils';
+import { IconButton, MediumIconButton } from '@waldur/core/buttons/IconButton';
+import { translate } from '@waldur/i18n';
+import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
 
 interface LLMChatDrawerProps {
   close?: () => void;
 }
 
+const DRAWER_WIDTH_DEFAULT = '800px';
+
+const getExpandedWidth = () => {
+  const isMinimized =
+    document.body.getAttribute('data-kt-aside-minimize') === 'on';
+  const asideWidth = isMinimized ? 75 : 300;
+  return `calc(100% - ${asideWidth}px - 8px)`;
+};
+
+const setDrawerWidth = (width: string) => {
+  const drawer = document.getElementById('kt_drawer');
+  if (drawer) {
+    drawer.style.width = width;
+  }
+};
+
+const AI_DRAWER_CLASS = 'ai-chat-drawer-active';
+
+/** Reset all AI drawer DOM state to defaults. */
+export const resetDrawerDOM = () => {
+  const drawer = document.getElementById('kt_drawer');
+  if (!drawer) return;
+  drawer.classList.remove(AI_DRAWER_CLASS);
+  drawer.removeAttribute('data-expanded');
+  drawer.removeAttribute('data-history-open');
+  drawer.style.width = '';
+};
+
+export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
+  const [expanded, setExpanded] = useState(false);
+  const [historyOpen, setHistoryOpen] = useState(false);
+  const { hasNewMessages } = useThreadContext();
+
+  const toggleExpand = useCallback(() => {
+    const drawer = document.getElementById('kt_drawer');
+    const isCurrentlyExpanded = drawer?.dataset.expanded === 'true';
+    const next = !isCurrentlyExpanded;
+    setExpanded(next);
+    setDrawerWidth(next ? getExpandedWidth() : DRAWER_WIDTH_DEFAULT);
+    if (drawer) drawer.dataset.expanded = String(next);
+  }, []);
+
+  const toggleHistory = useCallback(() => {
+    const drawer = document.getElementById('kt_drawer');
+    const isOpen = drawer?.dataset.historyOpen === 'true';
+    const next = !isOpen;
+    setHistoryOpen(next);
+    if (drawer) {
+      if (next) {
+        drawer.dataset.historyOpen = 'true';
+      } else {
+        drawer.removeAttribute('data-history-open');
+      }
+    }
+  }, []);
+
+  // Collapse expanded view immediately on any window resize
+  useEffect(() => {
+    if (!expanded) return;
+
+    const collapse = () => {
+      setExpanded(false);
+      setDrawerWidth(DRAWER_WIDTH_DEFAULT);
+      const drawer = document.getElementById('kt_drawer');
+      if (drawer) drawer.dataset.expanded = 'false';
+    };
+
+    window.addEventListener('resize', collapse);
+    return () => {
+      window.removeEventListener('resize', collapse);
+    };
+  }, [expanded]);
+
+  // Close history sidebar when resizing from tablet to desktop
+  useEffect(() => {
+    if (!historyOpen) return;
+
+    const handleResize = () => {
+      if (window.innerWidth >= 992) {
+        setHistoryOpen(false);
+        const drawer = document.getElementById('kt_drawer');
+        drawer?.removeAttribute('data-history-open');
+      }
+    };
+
+    window.addEventListener('resize', handleResize);
+    return () => {
+      window.removeEventListener('resize', handleResize);
+    };
+  }, [historyOpen]);
+
+  useEffect(() => {
+    return () => {
+      // Only clean up what the toolbar owns — the class is LLMChatDrawer's responsibility
+      setDrawerWidth(DRAWER_WIDTH_DEFAULT);
+      const drawer = document.getElementById('kt_drawer');
+      drawer?.removeAttribute('data-expanded');
+      drawer?.removeAttribute('data-history-open');
+    };
+  }, []);
+
+  return (
+    <>
+      {/* Desktop: expand/collapse */}
+      <span className="d-none d-lg-inline-flex position-relative">
+        <MediumIconButton
+          iconNode={
+            expanded ? (
+              <ArrowsInSimpleIcon weight="bold" />
+            ) : (
+              <ArrowsOutSimpleIcon weight="bold" />
+            )
+          }
+          tooltip={
+            expanded
+              ? translate('Collapse to panel')
+              : translate('Expand to full screen')
+          }
+          onClick={toggleExpand}
+          variant="tertiary-ghost"
+          tooltipPlacement="bottom"
+        />
+        {hasNewMessages && !expanded && (
+          <HeaderButtonBullet className="pe-none" />
+        )}
+      </span>
+      {/* Tablet: compact history toggle */}
+      <span className="d-none d-md-inline-flex d-lg-none">
+        <MediumIconButton
+          iconNode={<ListIcon weight="bold" />}
+          tooltip={translate('Chat history')}
+          onClick={toggleHistory}
+          variant="tertiary-ghost"
+          tooltipPlacement="bottom"
+        />
+      </span>
+      {/* Mobile: large history toggle */}
+      <span className="d-inline-flex d-md-none">
+        <IconButton
+          iconNode={<ListIcon weight="bold" />}
+          tooltip={translate('Chat history')}
+          onClick={toggleHistory}
+          variant="tertiary-ghost"
+          tooltipPlacement="bottom"
+        />
+      </span>
+      {/* Tablet+Desktop: close */}
+      <span className="d-none d-md-inline-flex">
+        <MediumIconButton
+          iconNode={<XIcon weight="bold" />}
+          tooltip={translate('Close')}
+          onClick={close}
+          variant="tertiary-ghost"
+          tooltipPlacement="bottom"
+        />
+      </span>
+      {/* Mobile only: close (large) */}
+      <span className="d-inline-flex d-md-none">
+        <IconButton
+          iconNode={<XIcon weight="bold" />}
+          tooltip={translate('Close')}
+          onClick={close}
+          variant="tertiary-ghost"
+          tooltipPlacement="bottom"
+        />
+      </span>
+    </>
+  );
+};
+
+let cleanupTimeout: ReturnType<typeof setTimeout> | null = null;
+
 export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
-  const { hasNewMessages, setHasNewMessages } = useThreadContext();
   const [showDisclosure, setShowDisclosure] = useState(
     () => !isDisclosureAcknowledged(),
   );
 
-  // Clear notification if it gets set while drawer is shown
   useEffect(() => {
-    if (hasNewMessages && isDrawerOpen()) {
-      setHasNewMessages(false);
+    if (cleanupTimeout !== null) {
+      clearTimeout(cleanupTimeout);
+      cleanupTimeout = null;
     }
-  }, [hasNewMessages]);
+
+    // Ensure clean state on mount (e.g. after impersonation change)
+    setDrawerWidth(DRAWER_WIDTH_DEFAULT);
+    document.getElementById('kt_drawer')?.removeAttribute('data-expanded');
+
+    return () => {
+      const drawer = document.getElementById('kt_drawer');
+      if (drawer?.classList.contains('drawer-on')) {
+        resetDrawerDOM();
+      } else {
+        // Drawer already sliding out — delay class removal so CSS transition finishes
+        cleanupTimeout = setTimeout(() => {
+          resetDrawerDOM();
+          cleanupTimeout = null;
+        }, 350);
+      }
+    };
+  }, []);
 
   const handleAcknowledge = () => {
     acknowledgeDisclosure();
@@ -42,8 +239,8 @@ export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
 
   return (
     <div className="aui-chat-drawer">
-      {/* Chat messages area - grows to fill space */}
-      <div className="flex-grow-1 overflow-auto">
+      <ChatHistorySidebar />
+      <div className="flex-grow-1 d-flex flex-column overflow-hidden">
         <LLMErrorBoundary onClose={close}>
           <Thread />
         </LLMErrorBoundary>

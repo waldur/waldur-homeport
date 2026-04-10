@@ -4,6 +4,7 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isDirty } from 'redux-form';
 
+import { CompactIconButton } from '@waldur/core/buttons/IconButton';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { translate } from '@waldur/i18n';
 import { DrawerComponent } from '@waldur/metronic/components';
@@ -67,14 +68,17 @@ export const DrawerRoot: FunctionComponent = () => {
             )}
           </div>
 
-          <div className="card-toolbar">
-            <button
-              type="button"
-              className="btn btn-sm btn-icon btn-text-secondary"
-              onClick={onHide}
-            >
-              <XIcon size={18} weight="bold" />
-            </button>
+          <div className="card-toolbar gap-2">
+            {drawerProps.toolbar ? (
+              React.createElement(drawerProps.toolbar, { close: onHide })
+            ) : (
+              <CompactIconButton
+                iconNode={<XIcon weight="bold" />}
+                tooltip={translate('Close')}
+                onClick={onHide}
+                tooltipPlacement="bottom"
+              />
+            )}
           </div>
         </div>
         <div className="card-body scroll-y p-0" id="kt_drawer_body">

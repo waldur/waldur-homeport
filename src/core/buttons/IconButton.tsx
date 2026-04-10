@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip, TipProps } from '@waldur/core/Tooltip';
 
 interface IconButtonProps {
   /** Icon to display */
@@ -27,6 +27,8 @@ interface IconButtonProps {
   type?: 'button' | 'submit';
   /** Data test ID */
   'data-testid'?: string;
+  /** Tooltip placement */
+  tooltipPlacement?: TipProps['placement'];
 }
 
 /**
@@ -54,14 +56,63 @@ export const IconButton: FC<IconButtonProps> = ({
   style,
   type = 'button',
   'data-testid': testId,
+  tooltipPlacement,
 }) => {
   return (
-    <Tip id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`} label={tooltip}>
+    <Tip
+      id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`}
+      label={tooltip}
+      placement={tooltipPlacement}
+    >
       <Button
         variant={variant}
         size="lg"
         style={style}
         className={classNames('btn-icon', className, {
+          disabled: disabled || pending,
+        })}
+        onClick={onClick}
+        disabled={disabled || pending}
+        type={type}
+        data-testid={testId}
+        aria-label={tooltip}
+      >
+        {pending ? (
+          <LoadingSpinnerIcon />
+        ) : (
+          <span className="svg-icon svg-icon-2">{iconNode}</span>
+        )}
+      </Button>
+    </Tip>
+  );
+};
+
+/**
+ * MediumIconButton - for icon-only buttons at medium size (36px button, 20px icon).
+ * Use when sm (32px) is too small and lg (44px) is too large.
+ */
+export const MediumIconButton: FC<IconButtonProps> = ({
+  iconNode,
+  tooltip,
+  onClick,
+  variant = 'tertiary',
+  disabled,
+  pending,
+  className,
+  type = 'button',
+  'data-testid': testId,
+  tooltipPlacement,
+}) => {
+  return (
+    <Tip
+      id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`}
+      label={tooltip}
+      placement={tooltipPlacement}
+    >
+      <Button
+        variant={variant}
+        size="sm"
+        className={classNames('btn-icon btn-icon-md', className, {
           disabled: disabled || pending,
         })}
         onClick={onClick}
@@ -94,9 +145,14 @@ export const CompactIconButton: FC<IconButtonProps> = ({
   className,
   type = 'button',
   'data-testid': testId,
+  tooltipPlacement,
 }) => {
   return (
-    <Tip id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`} label={tooltip}>
+    <Tip
+      id={`icon-btn-${tooltip.replace(/\s+/g, '-')}`}
+      label={tooltip}
+      placement={tooltipPlacement}
+    >
       <Button
         variant={variant}
         size="sm"
@@ -112,7 +168,7 @@ export const CompactIconButton: FC<IconButtonProps> = ({
         {pending ? (
           <LoadingSpinnerIcon />
         ) : (
-          <span className="svg-icon svg-icon-4">{iconNode}</span>
+          <span className="svg-icon svg-icon-2">{iconNode}</span>
         )}
       </Button>
     </Tip>

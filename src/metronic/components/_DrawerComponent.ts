@@ -218,6 +218,7 @@ class DrawerComponent {
 
   private _createOverlay = () => {
     if (this._getOption('overlay') === true) {
+      this._deleteOverlay();
       this.overlayElement = document.createElement('DIV');
       const elementZIndex = getCSS(this.element, 'z-index');
       if (elementZIndex) {
