@@ -1,12 +1,14 @@
 import { RocketLaunchIcon } from '@phosphor-icons/react';
+import { Offering } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
 import { Tip } from '@waldur/core/Tooltip';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
-
-import { Offering } from '../types';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
+import { useUser } from '@waldur/workspace/hooks';
 
 export const DeployButton = ({
   offering,
@@ -14,7 +16,17 @@ export const DeployButton = ({
 }: {
   offering: Offering;
   disabled?: boolean;
-}) =>
+}) => {
+  const user = useUser();
+  const canCreateOrder = hasPermissionOnAnyScope(
+    user,
+    PermissionEnum.CREATE_ORDER,
+  );
+
+  if (!canCreateOrder) {
+    return null;
+  }
+
   isFeatureVisible(MarketplaceFeatures.catalogue_only) ? null : (
     <Tip
       id="tip-deploy"
@@ -33,3 +45,4 @@ export const DeployButton = ({
       </Link>
     </Tip>
   );
+};

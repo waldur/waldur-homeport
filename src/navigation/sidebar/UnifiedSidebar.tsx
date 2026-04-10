@@ -8,6 +8,8 @@ import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { MenuComponent } from '@waldur/metronic/components';
 import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
 import { useProfileCompletenessContext } from '@waldur/user/ProfileCompletenessContext';
 import { useUser } from '@waldur/workspace/hooks';
 import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
@@ -78,6 +80,11 @@ export const UnifiedSidebar = () => {
     !isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) ||
     user.is_staff;
 
+  const canCreateOrder = hasPermissionOnAnyScope(
+    user,
+    PermissionEnum.CREATE_ORDER,
+  );
+
   const canAccessOrganization =
     !isFeatureVisible(
       MarketplaceFeatures.hide_organization_information_from_project_members,
@@ -85,8 +92,7 @@ export const UnifiedSidebar = () => {
 
   return (
     <Sidebar>
-      {canAccessMarketplace &&
-      (user.is_staff || user.permissions?.length !== 0) ? (
+      {canCreateOrder && (user.is_staff || user.permissions?.length !== 0) ? (
         <MarketplaceTrigger
           disabled={shouldBlockNavigation}
           disabledTooltip={disabledTooltip}

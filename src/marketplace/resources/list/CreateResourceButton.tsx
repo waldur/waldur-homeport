@@ -7,6 +7,8 @@ import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { openModalDialog } from '@waldur/modal/actions';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
 import { useUser } from '@waldur/workspace/hooks';
 import { Customer } from '@waldur/workspace/types';
 
@@ -30,6 +32,10 @@ export const CreateResourceButton: FC<CreateResourceButtonProps> = (props) => {
     isFeatureVisible(MarketplaceFeatures.hide_marketplace_from_end_users) &&
     !user?.is_staff
   ) {
+    return null;
+  }
+
+  if (!hasPermissionOnAnyScope(user, PermissionEnum.CREATE_ORDER)) {
     return null;
   }
 
