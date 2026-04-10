@@ -127,10 +127,6 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable display of user terms of service in UI.'),
       },
       {
-        key: 'hide_add_resource_button_from_end_users',
-        description: translate('Hide add resource button from end users but allow staff/support access.'),
-      },
-      {
         key: 'hide_marketplace_from_end_users',
         description: translate('Hide marketplace functionality from end users but allow staff access.'),
       },
