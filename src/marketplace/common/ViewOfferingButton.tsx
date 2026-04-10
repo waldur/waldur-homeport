@@ -8,9 +8,11 @@ import { Offering } from '../types';
 export const ViewOfferingButton = ({
   offering,
   disabled,
+  disabledReason,
 }: {
   offering: Offering;
   disabled?: boolean;
+  disabledReason?: string;
 }) => {
   const router = useRouter();
 
@@ -29,7 +31,8 @@ export const ViewOfferingButton = ({
       variant="text-primary"
       disabled={disabled}
       onClick={handleClick}
-      label={translate('Details')}
+      label={translate('View offering')}
+      disabledReason={disabledReason}
     />
   );
 };

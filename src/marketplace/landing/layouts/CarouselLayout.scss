@@ -1,0 +1,102 @@
+.carousel-layout {
+  min-height: 100vh;
+  background-color: var(--bs-tertiary-bg);
+
+  .carousel-section {
+    > .card-header {
+      background-color: transparent;
+    }
+  }
+
+  .carousel-scroll {
+    overflow-x: auto;
+    scrollbar-width: none;
+    -ms-overflow-style: none;
+    -webkit-overflow-scrolling: touch;
+    padding: 4px 0;
+    margin: -4px 0;
+
+    &::-webkit-scrollbar {
+      display: none;
+    }
+  }
+
+  .carousel-items {
+    display: flex;
+    gap: 1rem;
+  }
+
+  .category-carousel-item {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    padding: 1rem;
+    min-width: 120px;
+    max-width: 120px;
+    background: var(--bs-body-bg);
+    border: 1px solid var(--bs-border-color);
+    border-radius: 8px;
+    text-decoration: none;
+    color: var(--bs-body-color);
+    transition: border-color 0.2s ease;
+    flex-shrink: 0;
+
+    &:hover {
+      border-color: var(--waldur-brand-color);
+    }
+
+    &:active {
+      outline: 2px solid var(--waldur-brand-color);
+      outline-offset: -2px;
+      border-color: transparent;
+    }
+
+    .category-icon-wrapper {
+      width: 40px;
+      height: 40px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      border: 1px solid var(--bs-border-color);
+      border-radius: 8px;
+      margin-bottom: 0.75rem;
+      color: var(--bs-secondary-color);
+    }
+
+    .category-title {
+      font-size: 0.875rem;
+      font-weight: 600;
+      text-align: center;
+      white-space: nowrap;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      max-width: 100%;
+    }
+  }
+
+  .offering-items {
+    gap: 1.5rem;
+  }
+
+  .offering-carousel-item {
+    min-width: 300px;
+    max-width: 300px;
+    flex-shrink: 0;
+    display: flex;
+
+    & > * {
+      width: 100%;
+    }
+
+    &--list {
+      min-width: 500px;
+      max-width: 500px;
+    }
+
+    &--compact {
+      min-width: 240px;
+      max-width: 240px;
+    }
+  }
+}

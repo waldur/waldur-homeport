@@ -751,6 +751,76 @@ const filterPosition = isSm && originalPosition === 'menu'
 
 ## 12. Anti-Patterns
 
+### 12.1 Anonymous User Actions
+
+When an action requires authentication (e.g., deploying a resource, ordering a service), **show a confirmation dialog** explaining that login is required, rather than silently redirecting or doing nothing.
+
+```tsx
+import { waitForConfirmation } from '@waldur/modal/actions';
+
+const handleClick = async () => {
+  if (!user) {
+    try {
+      await waitForConfirmation(
+        dispatch,
+        translate('Authentication required'),
+        translate(
+          'Please log in to order a resource. You will be redirected to the login page.',
+        ),
+        { positiveButton: translate('Log in') },
+      );
+      router.stateService.go('login');
+    } catch {
+      // User cancelled
+    }
+    return;
+  }
+  // Proceed with authenticated action
+};
+```
+
+**Key rules**:
+
+- Never silently redirect anonymous users — always explain what's happening
+- Use `waitForConfirmation` with a clear title and descriptive body
+- Label the positive button with the action ("Log in"), not generic "OK"
+- If the element is normally a `<Link>`, render a `<button>` for anonymous users to prevent navigation before the dialog
+
+### 12.2 Equal Card Heights in Flex Containers
+
+When cards are displayed in a row (carousel, grid), ensure they all have equal height regardless of content differences (description length, tags, badges).
+
+```scss
+// Carousel/flex container item wrapper
+.offering-carousel-item {
+  display: flex; // Makes child card stretch to full height
+}
+```
+
+```tsx
+// Card wrapper class needs height: 100%
+.offering-card-list {
+  height: 100%;
+}
+
+// Card itself needs h-100
+<Card className="card-bordered h-100">
+  <Card.Body className="d-flex flex-column">
+    {/* Use flex-grow-1 on variable-height content */}
+    <p className="flex-grow-1">{description}</p>
+    {/* Fixed footer stays at bottom */}
+  </Card.Body>
+</Card>
+```
+
+**Checklist**:
+
+- Flex container parent: default `align-items: stretch` (don't override)
+- Item wrapper: `display: flex` to propagate stretch
+- Card link/wrapper: `height: 100%`
+- Card element: `h-100` class
+- Variable content area: `flex-grow-1` to fill remaining space
+
 ### What NOT to Do
 
 | Anti-Pattern | Problem | Correct Approach |
@@ -763,6 +833,8 @@ const filterPosition = isSm && originalPosition === 'menu'
 | Hidden filters on empty tables | Can't discover filters | Show filter toggle |
 | Empty state without CTA | Dead end | Always provide next action |
 | `user.is_staff` checks everywhere | Inconsistent | Use `hasPermission()` utility |
+| Silent redirect for anonymous users | Confusing, "magical" | Show confirmation dialog before redirect |
+| Cards without `h-100` in flex rows | Uneven card heights | Use `display: flex` on wrapper + `h-100` on card |
 
 ### Code Examples - Bad vs Good
 

@@ -1,70 +1,38 @@
 .category-hero {
-  display: flex;
-  width: 100%;
-  height: 252px;
-  overflow: auto;
+  background-color: var(--bs-tertiary-bg);
+  border-bottom: 1px solid var(--bs-border-color);
+  padding: 1.5rem 0;
 
-  .category-hero__background-left {
-    width: 100%;
-    background-color: #2f4050;
-    background-image:
-      linear-gradient(to right, #000a, #000a),
-      url('../../dashboard/hero/marketplace-background.jpg');
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    display: table;
-    &.clipped {
-      width: 85%;
-      clip-path: polygon(0 0, 100% 0%, 85% 100%, 0% 100%);
-    }
+  .category-hero-icon {
+    width: 64px;
+    height: 64px;
+    object-fit: contain;
+    border-radius: 12px;
+    background: var(--bs-body-bg);
+    padding: 8px;
   }
 
-  .category-hero__background-right {
-    width: 65%;
-    background-color: #2f4050;
-    background-image: url('../../dashboard/hero/marketplace-background.jpg');
-    background-position: center top;
-    background-repeat: no-repeat;
-    background-size: cover;
-    clip-path: polygon(15% 0, 100% 0%, 100% 100%, 0 100%);
-    overflow: hidden;
-    margin-left: -15%;
+  .category-hero-title {
+    color: var(--bs-heading-color);
   }
 
-  .category-hero__table {
-    display: table-cell;
-    vertical-align: middle;
+  .category-hero-description {
+    color: var(--bs-secondary-color);
   }
 
-  .category-hero__main {
-    max-width: 1000px;
-    margin-right: auto;
-    margin-left: auto;
-    color: #fff;
-    padding: 2rem;
+  .category-hero-link {
+    padding: 0.25rem 0.75rem;
+    border: 1px solid var(--bs-border-color);
+    border-radius: 0.375rem;
+    color: var(--bs-body-color);
+    text-decoration: none;
+    font-size: 0.875rem;
+    transition: all 0.2s ease;
 
-    h1 {
-      color: #fff;
-      font-size: 38px;
-      padding-bottom: 10px;
-    }
-  }
-
-  @media (width <= 1200px) {
-    .category-hero__background-right {
-      display: none;
-    }
-
-    .category-hero__background-left {
-      width: 100%;
-      clip-path: none;
-    }
-  }
-
-  @media (width >= 992px) {
-    .category-hero__main {
-      padding-left: 4rem;
+    &:hover {
+      background-color: var(--bs-body-bg);
+      border-color: var(--bs-primary);
+      color: var(--bs-primary);
     }
   }
 }

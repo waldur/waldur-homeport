@@ -1,0 +1,14 @@
+.sidebar-layout {
+  min-height: 100vh;
+  background-color: var(--bs-tertiary-bg);
+
+  .input-group {
+    max-width: 500px;
+    margin-left: auto;
+
+    @media (max-width: 767px) {
+      margin-top: 1rem;
+      max-width: 100%;
+    }
+  }
+}

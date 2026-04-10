@@ -1,17 +1,30 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { FunctionComponent } from 'react';
+import { FunctionComponent, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import {
   marketplaceCategoriesList,
   marketplaceCategoryGroupsRetrieve,
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { ENV } from '@waldur/core/config';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
-import { useFullPage } from '@waldur/navigation/context';
+import {
+  useBreadcrumbs,
+  useExtraToolbar,
+  useFullPage,
+  useToolbarActions,
+} from '@waldur/navigation/context';
 import { useTitle } from '@waldur/navigation/title';
+import { IBreadcrumbItem } from '@waldur/navigation/types';
 
+import { CardStyleType } from '../common/cards/index';
+import { CardStyleProvider } from '../landing/CardStyleContext';
+import { PageBarFilters } from '../landing/filter/PageBarFilters';
+import { getMarketplaceFilters } from '../landing/filter/store/selectors';
+import { MarketplaceLandingFilter } from '../landing/MarketplaceLandingFilter';
 import { useMarketplacePublicTabs } from '../utils';
 
 import { CategoryGroupOfferingsList } from './CategoryGroupOfferingsList';
@@ -39,7 +52,33 @@ export const CategoryGroupPage: FunctionComponent = () => {
   useFullPage();
 
   useMarketplacePublicTabs();
+
+  const cardStyle: CardStyleType =
+    (ENV.plugins.WALDUR_CORE.MARKETPLACE_CARD_STYLE as CardStyleType) ||
+    'detailed';
+
+  const filters = useSelector(getMarketplaceFilters);
+  useToolbarActions(<MarketplaceLandingFilter />, []);
+  useExtraToolbar(filters.length ? <PageBarFilters /> : null, [filters]);
   useTitle(queryResult?.data?.title);
+
+  const breadcrumbItems = useMemo<IBreadcrumbItem[]>(
+    () => [
+      {
+        key: 'marketplace',
+        text: translate('Marketplace'),
+        to: 'public.marketplace-landing',
+      },
+      {
+        key: 'category-group',
+        text: queryResult?.data?.title || translate('Category group'),
+        active: true,
+        truncate: true,
+      },
+    ],
+    [queryResult?.data?.title],
+  );
+  useBreadcrumbs(breadcrumbItems);
 
   if (queryResult.isLoading) {
     return <LoadingSpinner />;
@@ -50,11 +89,11 @@ export const CategoryGroupPage: FunctionComponent = () => {
   }
 
   return (
-    <>
+    <CardStyleProvider cardStyle={cardStyle}>
       <HeroSection item={queryResult.data} />
-      <div className="container-fluid py-20">
+      <div className="container-fluid py-6">
         <CategoryGroupOfferingsList categoryGroup={queryResult.data} />
       </div>
-    </>
+    </CardStyleProvider>
   );
 };

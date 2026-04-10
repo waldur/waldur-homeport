@@ -87,6 +87,8 @@ interface CoreConfiguration {
   SITE_EMAIL: string;
   SITE_NAME: string;
   MARKETPLACE_LANDING_PAGE: string;
+  MARKETPLACE_LAYOUT_MODE: string;
+  MARKETPLACE_CARD_STYLE: string;
   TRANSLATION_DOMAIN: string;
   ORGANIZATION_SUBNETS_VISIBLE: boolean;
   CURRENCY_NAME: string;

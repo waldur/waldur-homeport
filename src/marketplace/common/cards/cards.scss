@@ -1,0 +1,156 @@
+// Offering Card Variants Styles
+
+// Common styles for all offering card variants
+.offering-card-compact,
+.offering-card-detailed,
+.offering-card-list,
+.offering-card-image {
+  // No hover shadow on cards — only 1px brand border
+  .card:hover {
+    box-shadow: none;
+  }
+
+  // Pressed/select state — 2px green border (outline to avoid layout shift)
+  .card:active {
+    outline: 2px solid var(--waldur-brand-color);
+    outline-offset: -2px;
+    border-color: transparent !important;
+    box-shadow: none;
+  }
+
+  // Common disabled state
+  &.disabled {
+    cursor: not-allowed;
+    pointer-events: none;
+    filter: grayscale(50%);
+
+    .card {
+      background-color: var(--bs-secondary-bg);
+    }
+
+    .fw-bold,
+    .fs-4,
+    .fs-5 {
+      color: var(--bs-secondary-color) !important;
+    }
+  }
+}
+
+// Compact Card
+.offering-card-compact {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+  overflow: hidden;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .compact-card-hover-action {
+    display: none;
+    flex-shrink: 0;
+  }
+
+  &:hover .compact-card-hover-action {
+    display: block;
+  }
+}
+
+// Detailed Card
+.offering-card-detailed {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .h-120px {
+    height: 120px;
+  }
+}
+
+// List Item Card
+.offering-card-list {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  width: 100%;
+  height: 100%;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .list-card-actions .btn {
+    width: 100%;
+    text-align: center;
+  }
+}
+
+// Image Card
+.offering-card-image {
+  display: block;
+  text-decoration: none;
+  color: inherit;
+  height: 100%;
+
+  &:hover {
+    text-decoration: none;
+    color: inherit;
+  }
+
+  .image-card-header {
+    height: 70px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    border-bottom: 1px solid var(--bs-border-color);
+    background-color: var(--bs-tertiary-bg);
+    overflow: hidden;
+  }
+}
+
+// Ellipsis utility classes
+.ellipsis-lines-2 {
+  display: -webkit-box;
+  -webkit-line-clamp: 2;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.ellipsis-lines-3 {
+  display: -webkit-box;
+  -webkit-line-clamp: 3;
+  -webkit-box-orient: vertical;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+// Solid footer border for image card
+.offering-card-image .card-footer {
+  border-top-style: solid;
+}
+
+// Solid footer border for detailed card
+.offering-card-detailed .card-footer {
+  border-top-style: solid;
+}
+
+// Height utility
+.h-120px {
+  height: 120px;
+}
+
+// Background light primary for dark mode compatibility
+.bg-light-primary {
+  background-color: var(--bs-tertiary-bg);
+}

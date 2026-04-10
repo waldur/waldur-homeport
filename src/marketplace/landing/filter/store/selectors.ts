@@ -23,6 +23,10 @@ export const getContextFiltersForOfferings = (
         });
       }
     }
+    const tagFilter = filters.find((item) => item.name === 'tag');
+    if (tagFilter) {
+      Object.assign(contextFilter, { tag: tagFilter.value?.uuid });
+    }
   } else {
     // If filter is empty, check url to see if there is any filter
     // Because when start time, the filters that are in the URL should be applied immediately (to reduce the requests).
@@ -36,6 +40,9 @@ export const getContextFiltersForOfferings = (
           project_uuid: urlFilters.project?.uuid,
         });
       }
+    }
+    if (urlFilters?.tag) {
+      Object.assign(contextFilter, { tag: urlFilters.tag?.uuid });
     }
   }
   return Object.keys(contextFilter).length > 0 ? contextFilter : null;
