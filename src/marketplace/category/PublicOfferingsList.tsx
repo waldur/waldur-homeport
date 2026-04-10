@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import {
   marketplacePublicOfferingsList,
   MarketplacePublicOfferingsListData,
+  NestedTag,
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
@@ -27,7 +28,10 @@ import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
+import { CardStyleType } from '../common/cards/index';
 import { OfferingCard } from '../common/OfferingCard';
+import { useCardStyle } from '../landing/CardStyleContext';
+import { getOfferingGridSize } from '../landing/utils';
 import { mapStateToFilter } from '../offerings/admin/AdminOfferingsList';
 import { OfferingsListFilter } from '../offerings/list/OfferingsListFilter';
 import { getStates } from '../offerings/list/OfferingStateFilter';
@@ -77,6 +81,7 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   // OfferingCard
   'uuid',
   'name',
+  'description',
   'state',
   'paused_reason',
   'customer_name',
@@ -85,6 +90,7 @@ const mandatoryFields: MarketplacePublicOfferingsListData['query']['field'] = [
   'image',
   'type',
   'tags',
+  'is_accessible',
   // OfferingCard and RowActions
   'customer_uuid',
   'shared',
@@ -96,7 +102,18 @@ export const PublicOfferingsList: FunctionComponent<{
   showCategory?;
   showOrganization?;
   initialMode?;
-}> = ({ filter, showCategory, showOrganization = true, initialMode }) => {
+  variant?: CardStyleType;
+  onTagClick?(tag: NestedTag): void;
+}> = ({
+  filter,
+  showCategory,
+  showOrganization = true,
+  initialMode,
+  variant,
+  onTagClick,
+}) => {
+  const contextCardStyle = useCardStyle();
+  const resolvedVariant = variant ?? contextCardStyle;
   const baseFilter = useSelector(mapStateToFilter);
 
   const mergedFilter = useMemo(
@@ -195,8 +212,14 @@ export const PublicOfferingsList: FunctionComponent<{
       columns={columns}
       verboseName={translate('offerings')}
       hasQuery={true}
-      gridSize={{ lg: 6, xl: 4 }}
-      gridItem={({ row }) => <OfferingCard offering={row} />}
+      gridSize={getOfferingGridSize(resolvedVariant)}
+      gridItem={({ row }) => (
+        <OfferingCard
+          offering={row}
+          variant={resolvedVariant}
+          onTagClick={onTagClick}
+        />
+      )}
       hoverShadow={{ grid: false }}
       filters={
         <OfferingsListFilter
@@ -206,7 +229,6 @@ export const PublicOfferingsList: FunctionComponent<{
       }
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialMode={initialMode === 'table' ? 'table' : 'grid'}
-      standalone
       showPageSizeSelector={true}
       title={translate('Offerings')}
       rowActions={RowActions}

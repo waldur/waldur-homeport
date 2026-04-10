@@ -1,0 +1,44 @@
+import { FC } from 'react';
+
+import { getIconUrl } from '@waldur/core/api';
+import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
+import DefaultDarkImage from '@waldur/dashboard/hero/servers-room-dark.png';
+import DefaultLightImage from '@waldur/dashboard/hero/servers-room-light.png';
+import { translate } from '@waldur/i18n';
+import { useTheme } from '@waldur/theme/useTheme';
+
+import { CategoriesList } from '../CategoriesList';
+import { OfferingsGroup } from '../OfferingsGroup';
+import { OfferingsSearchBox } from '../OfferingsSearchBox';
+
+import { MarketplaceLayoutProps } from './types';
+import { useMarketplaceTitle } from './useMarketplaceTitle';
+
+export const ClassicLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
+  const { theme } = useTheme();
+  const title = useMarketplaceTitle();
+
+  const backendImage = getIconUrl('marketplace_hero_image');
+  const defaultImage = theme === 'dark' ? DefaultDarkImage : DefaultLightImage;
+
+  return (
+    <div className="marketplace-landing-page">
+      <LandingHeroSection
+        header={translate('Welcome to')}
+        title={title}
+        context="marketplace"
+        backgroundImage={`url(${backendImage}), url(${defaultImage})`}
+      >
+        <div className="d-flex justify-content-center">
+          <OfferingsSearchBox />
+        </div>
+      </LandingHeroSection>
+      <div className="container-fluid">
+        <CategoriesList />
+      </div>
+      <div className="container-fluid mb-10">
+        <OfferingsGroup onTagClick={onTagClick} />
+      </div>
+    </div>
+  );
+};

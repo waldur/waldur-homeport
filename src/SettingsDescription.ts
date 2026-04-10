@@ -95,7 +95,7 @@ export const SettingsDescription = [
         description: translate('Default marketplace offering card style.'),
         default: 'detailed',
         type: 'choice_field',
-        options: [{ value: 'compact', label: 'Compact' }, { value: 'detailed', label: 'Detailed' }, { value: 'list', label: 'List' }, { value: 'minimal', label: 'Minimal' }],
+        options: [{ value: 'compact', label: 'Compact' }, { value: 'detailed', label: 'Detailed' }, { value: 'list', label: 'List' }, { value: 'minimal', label: 'Image' }],
       },
       {
         key: 'COUNTRIES',

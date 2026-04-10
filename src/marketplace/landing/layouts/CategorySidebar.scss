@@ -1,0 +1,64 @@
+.category-sidebar {
+  min-width: 280px;
+  max-width: 320px;
+  height: fit-content;
+  position: sticky;
+  top: 20px;
+
+  // Match card-table header height so titles align with Table component
+  > .card-header {
+    min-height: 77px;
+  }
+
+  .list-group-item {
+    border-left: 2px solid transparent;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+    color: var(--bs-gray-500);
+    font-weight: 600;
+    font-size: 14px;
+    padding: 10px 14px;
+    border-top: none;
+    border-bottom: none;
+    border-right: none;
+
+    &:hover:not(.active) {
+      background-color: transparent;
+      color: var(--bs-gray-700);
+    }
+
+    .badge {
+      background-color: var(--bs-tertiary-bg) !important;
+      color: var(--bs-body-color) !important;
+      border: 1px solid var(--bs-border-color);
+    }
+
+    &.active {
+      border-left-color: var(--waldur-brand-color, var(--bs-primary));
+      background-color: transparent;
+      color: var(--waldur-brand-color, var(--bs-primary));
+
+      .badge {
+        background-color: var(--bs-tertiary-bg) !important;
+        color: var(--bs-body-color) !important;
+        border: 1px solid var(--bs-border-color);
+      }
+    }
+  }
+
+  .category-icon {
+    width: 24px;
+    height: 24px;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    overflow: hidden;
+
+    img {
+      width: 24px;
+      height: 24px;
+      object-fit: contain;
+    }
+  }
+}

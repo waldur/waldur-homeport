@@ -31,10 +31,7 @@
     overflow: hidden;
     margin-bottom: 16px;
     border-radius: 8px;
-
-    &.no-image {
-      border: 1px solid var(--bs-border-color);
-    }
+    border: 1px solid var(--bs-border-color);
 
     svg {
       color: var(--bs-gray-600);
