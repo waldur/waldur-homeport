@@ -7,6 +7,7 @@ export interface DrawerStateProps<P = any> {
     title?: React.ReactNode;
     subtitle?: string;
     footer?: React.ComponentType;
+    toolbar?: React.ComponentType<{ close: () => void }>;
     width?: string;
     props?: any;
   };
@@ -43,7 +44,10 @@ export const reducer = (state = initialState, action): DrawerStateProps => {
         drawerProps: newProps,
       };
     case 'HIDE_DRAWER':
-      drawer.hide();
+      // Guarded: reducer can run before MasterInit's delayed bootstrap
+      // has created the drawer instance (see transitions.ts onSuccess,
+      // which dispatches HIDE_DRAWER on initial route entry).
+      drawer?.hide();
       return {
         drawerComponent: null,
         status: 'closed',

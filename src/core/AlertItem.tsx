@@ -16,6 +16,7 @@ interface AlertItemProps {
   body?: ReactNode;
   actions?: ReactNode;
   variant?: 'info' | 'warning' | 'error';
+  type?: 'full-width' | 'floating';
   className?: string;
 }
 
@@ -31,10 +32,17 @@ export const AlertItem: FC<AlertItemProps> = ({
   body,
   actions,
   variant = 'info',
+  type = 'full-width',
   className,
 }) => {
   return (
-    <div className={classNames('alert-item', className)}>
+    <div
+      className={classNames(
+        'alert-item',
+        type === 'floating' && 'alert-item-floating',
+        className,
+      )}
+    >
       {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
       <FeaturedIcon
         IconComponent={ALERT_ICON[variant].icon}

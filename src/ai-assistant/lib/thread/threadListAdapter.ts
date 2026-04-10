@@ -3,9 +3,12 @@ import {
   ExternalStoreThreadListAdapter,
   ThreadMessageLike,
 } from '@assistant-ui/react';
+import { chatThreadsArchive } from 'waldur-js-client';
 
 import { randomUUID } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
+
+import { fetchAndConvertMessages } from '../messages/messageLoader';
 
 interface CreateThreadListAdapterParams {
   currentThreadId: string;
@@ -19,16 +22,26 @@ interface CreateThreadListAdapterParams {
     React.SetStateAction<Map<string, ThreadMessageLike[]>>
   >;
   abortThreadStream: (threadId: string) => void;
+  clearNotification: (threadId: string) => void;
+  getBackendThreadId: (threadId: string) => string | undefined;
+  setBackendThreadId: (threadId: string, uuid: string) => void;
+  refetchThreadList: () => void;
+  setLoadingThreadId: (id: string | null) => void;
 }
 
-const deleteEmptyThread = (
+/**
+ * Delete empty threads that were created locally but never used.
+ * Backend-sourced threads are kept even if empty (they exist on the server).
+ */
+const deleteEmptyLocalThread = (
   threads: Map<string, ThreadMessageLike[]>,
   setThreads: React.Dispatch<
     React.SetStateAction<Map<string, ThreadMessageLike[]>>
   >,
+  backendThreadIds: Set<string>,
 ) => {
   threads.forEach((thread, threadId) => {
-    if (thread.length === 0) {
+    if (thread.length === 0 && !backendThreadIds.has(threadId)) {
       setThreads((prev) => {
         const next = new Map(prev);
         next.delete(threadId);
@@ -67,68 +80,116 @@ export const createThreadListAdapter = ({
   setCurrentThreadId,
   setThreads,
   abortThreadStream,
-}: CreateThreadListAdapterParams): ExternalStoreThreadListAdapter => ({
-  threadId: currentThreadId,
-  threads: threadList.filter(
-    (t): t is ExternalStoreThreadData<'regular'> => t.status === 'regular',
-  ),
-  archivedThreads: threadList.filter(
-    (t): t is ExternalStoreThreadData<'archived'> => t.status === 'archived',
-  ),
+  clearNotification,
+  getBackendThreadId,
+  setBackendThreadId,
+  refetchThreadList,
+  setLoadingThreadId,
+}: CreateThreadListAdapterParams): ExternalStoreThreadListAdapter => {
+  // Collect known backend thread IDs so we don't delete them when empty
+  const backendThreadIds = new Set<string>();
+  for (const t of threadList) {
+    backendThreadIds.add(t.id);
+  }
 
-  onSwitchToNewThread: () => {
-    const newId = randomUUID();
+  return {
+    threadId: currentThreadId,
+    threads: threadList.filter(
+      (t): t is ExternalStoreThreadData<'regular'> => t.status === 'regular',
+    ),
+    archivedThreads: threadList.filter(
+      (t): t is ExternalStoreThreadData<'archived'> => t.status === 'archived',
+    ),
 
-    // Remove current thread from if it has no messages
-    deleteEmptyThread(threads, setThreads);
+    onSwitchToNewThread: () => {
+      const newId = randomUUID();
+      deleteEmptyLocalThread(threads, setThreads, backendThreadIds);
 
-    // A thread is added to thread list when a new message is added, so we only need to create a thread here
-    setThreads((prev) => {
-      const next = new Map(prev);
-      next.set(newId, []);
-      return next;
-    });
-    setCurrentThreadId(newId);
-  },
+      setThreads((prev) => {
+        const next = new Map(prev);
+        next.set(newId, []);
+        return next;
+      });
+      setCurrentThreadId(newId);
+    },
 
-  onSwitchToThread: (threadId) => {
-    deleteEmptyThread(threads, setThreads);
-    setCurrentThreadId(threadId);
-  },
+    onSwitchToThread: async (threadId) => {
+      deleteEmptyLocalThread(threads, setThreads, backendThreadIds);
+      clearNotification(threadId);
 
-  onRename: (threadId, newTitle) => {
-    setThreadList((prev) =>
-      prev.map((t) => (t.id === threadId ? { ...t, title: newTitle } : t)),
-    );
-  },
+      // For backend-sourced threads, the threadId IS the backend UUID.
+      // Register this mapping so message handlers can find it.
+      if (backendThreadIds.has(threadId)) {
+        setBackendThreadId(threadId, threadId);
+      }
 
-  onArchive: (threadId) => {
-    abortThreadStream(threadId);
+      // If thread messages are not in memory, fetch from backend
+      if (!threads.has(threadId)) {
+        setLoadingThreadId(threadId);
+        setCurrentThreadId(threadId);
 
-    setThreadList((prev) =>
-      prev.map((t) =>
-        t.id === threadId ? { ...t, status: 'archived' as const } : t,
-      ),
-    );
+        try {
+          const backendUuid = getBackendThreadId(threadId) ?? threadId;
+          const messages = await fetchAndConvertMessages(backendUuid);
+          setThreads((prev) => {
+            const next = new Map(prev);
+            next.set(threadId, messages);
+            return next;
+          });
+        } finally {
+          setLoadingThreadId(null);
+        }
+      } else {
+        setCurrentThreadId(threadId);
+      }
+    },
 
-    if (currentThreadId === threadId) {
-      const regularThreads = threadList.filter(
-        (t) => t.status === 'regular' && t.id !== threadId,
+    onArchive: async (threadId) => {
+      abortThreadStream(threadId);
+
+      // Optimistic update
+      setThreadList((prev) =>
+        prev.map((t) =>
+          t.id === threadId ? { ...t, status: 'archived' as const } : t,
+        ),
       );
 
-      if (regularThreads.length > 0) {
-        setCurrentThreadId(regularThreads[0].id);
-      } else {
-        const newId = randomUUID();
-
-        setThreads((prev) => {
-          const next = new Map(prev);
-          next.set(newId, []);
-          return next;
-        });
-
-        setCurrentThreadId(newId);
+      try {
+        // Sync to backend
+        const backendUuid = getBackendThreadId(threadId) ?? threadId;
+        await chatThreadsArchive({ path: { uuid: backendUuid } });
+      } catch {
+        // Rollback via compensating operation — safer than snapshotting
+        // `prev`, since concurrent updates to threadList are preserved.
+        setThreadList((prev) =>
+          prev.map((t) =>
+            t.id === threadId ? { ...t, status: 'regular' as const } : t,
+          ),
+        );
+        return;
       }
-    }
-  },
-});
+
+      refetchThreadList();
+
+      if (currentThreadId === threadId) {
+        const regularThreads = threadList.filter(
+          (t) => t.status === 'regular' && t.id !== threadId,
+        );
+
+        if (regularThreads.length > 0) {
+          setCurrentThreadId(regularThreads[0].id);
+        } else {
+          const newId = randomUUID();
+
+          setThreads((prev) => {
+            const next = new Map(prev);
+            next.set(newId, []);
+            return next;
+          });
+
+          setCurrentThreadId(newId);
+        }
+      }
+    },
+  };
+};

@@ -428,6 +428,9 @@ $box-shadow-xs: 0 0.1rem 0.75rem 0.25rem rgba($black, 0.05) !default; // Custom 
 $box-shadow-sm: 0 0.1rem 1rem 0.25rem rgba($black, 0.05) !default;
 $box-shadow: 0 0.5rem 1.5rem 0.5rem rgba($black, 0.075) !default;
 $box-shadow-lg: 0 1rem 2rem 1rem rgba($black, 0.1) !default;
+$box-shadow-xl:
+  0 20px 24px -4px rgba(16, 24, 40, 0.1),
+  0 8px 8px -4px rgba(16, 24, 40, 0.04) !default;
 
 // Border settings
 $border-color: $gray-200 !default;

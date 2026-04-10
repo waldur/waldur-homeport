@@ -175,6 +175,15 @@ $button-variants: (
       'disabled': (bg: $btn-bg-disable, text: $fg-disabled),
     ),
   ),
+  'tertiary-ghost': (
+    'contained': (
+      'enabled': (bg: transparent, text: $text-secondary, icon: $fg-quaternary, border: transparent),
+      'hovered': (bg: $btn-tertiary-bg_hover, text: $text-secondary, icon: $fg-quaternary, border: transparent),
+      'focused': (bg: $btn-tertiary-bg_hover, text: $text-secondary, icon: $fg-quaternary, border: transparent, ring: $ring-gray-100),
+      'pressed': (bg: $btn-tertiary-bg_pressed, text: $text-secondary, icon: $fg-quaternary, border: transparent),
+      'disabled': (bg: transparent, text: $fg-disabled),
+    ),
+  ),
   'danger': (
     'contained': (
       'enabled': (bg: $btn-error-bg, text: $text-error-primary, border: $border-error),
