@@ -27,7 +27,7 @@ export const DeployButton = ({
     return null;
   }
 
-  isFeatureVisible(MarketplaceFeatures.catalogue_only) ? null : (
+  return isFeatureVisible(MarketplaceFeatures.catalogue_only) ? null : (
     <Tip
       id="tip-deploy"
       label={offering.state === 'Paused' ? offering.paused_reason : null}
