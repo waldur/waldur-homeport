@@ -20,7 +20,10 @@ import { SidebarLayout } from '@waldur/form/SidebarLayout';
 import { translate } from '@waldur/i18n';
 import { Offering, Plan } from '@waldur/marketplace/types';
 import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
 import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
+import { useUser } from '@waldur/workspace/hooks';
 import {
   getProject as currentProjectSelector,
   getCustomer as currentCustomerSelector,
@@ -75,6 +78,7 @@ export const BaseDeployPage = ({
 
   const isEdit = useMemo(() => Boolean(props.order), [props]);
 
+  const user = useUser();
   const customer = useSelector(orderCustomerSelector);
   const project = useSelector(orderProjectSelector);
 
@@ -91,6 +95,10 @@ export const BaseDeployPage = ({
   }, [project]);
 
   const noOrganizationOrProject = !customer || !project;
+  const canCreateOrder = hasPermissionOnAnyScope(
+    user,
+    PermissionEnum.CREATE_ORDER,
+  );
 
   const plans = useMemo(
     () => selectedOffering.plans.filter((plan) => plan.archived === false),
@@ -214,9 +222,9 @@ export const BaseDeployPage = ({
       formSteps.map(
         (step) =>
           step.id !== 'step-general' &&
-          (isProjectInactive || noOrganizationOrProject),
+          (isProjectInactive || noOrganizationOrProject || !canCreateOrder),
       ),
-    [formSteps, isProjectInactive, noOrganizationOrProject],
+    [formSteps, isProjectInactive, noOrganizationOrProject, canCreateOrder],
   );
 
   const setScroll = useCallback(() => {
@@ -332,7 +340,9 @@ export const BaseDeployPage = ({
                 params={step.params}
                 disabled={
                   step.id !== 'step-general' &&
-                  (isProjectInactive || noOrganizationOrProject)
+                  (isProjectInactive ||
+                    noOrganizationOrProject ||
+                    !canCreateOrder)
                 }
                 previewMode
               />
@@ -367,7 +377,9 @@ export const BaseDeployPage = ({
                   params={step.params}
                   disabled={
                     step.id !== 'step-general' &&
-                    (isProjectInactive || noOrganizationOrProject)
+                    (isProjectInactive ||
+                      noOrganizationOrProject ||
+                      !canCreateOrder)
                   }
                   disabledTooltip={
                     noOrganizationOrProject
@@ -376,7 +388,11 @@ export const BaseDeployPage = ({
                         )
                       : isProjectInactive
                         ? translate('Project has reached its end date.')
-                        : null
+                        : !canCreateOrder
+                          ? translate(
+                              'You are not allowed to create orders in this project.',
+                            )
+                          : null
                   }
                 />
               </div>

@@ -4,6 +4,9 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
 import { translate } from '@waldur/i18n';
+import { PermissionEnum } from '@waldur/permissions/enums';
+import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
+import { useUser } from '@waldur/workspace/hooks';
 
 import { Offering } from '../types';
 
@@ -15,8 +18,13 @@ export const DeployButton = ({
   disabled?: boolean;
 }) => {
   const router = useRouter();
+  const user = useUser();
 
   if (isFeatureVisible(MarketplaceFeatures.catalogue_only)) {
+    return null;
+  }
+
+  if (!hasPermissionOnAnyScope(user, PermissionEnum.CREATE_ORDER)) {
     return null;
   }
 
