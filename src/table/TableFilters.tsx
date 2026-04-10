@@ -55,7 +55,7 @@ export const TableFilters: FunctionComponent<TableFiltersProps> = (props) => {
   const clearLabel = isMd ? translate('Clear') : translate('Clear filters');
 
   return props.filterPosition === 'menu' || props.filtersStorage.length > 0 ? (
-    <Row className="card-toolbar w-100 my-4 g-0 gap-4">
+    <Row className="w-100 g-0 gap-4">
       <Col className={isMd ? 'd-flex scroll-x' : 'd-flex'}>
         <div
           className={
