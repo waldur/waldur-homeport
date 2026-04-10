@@ -114,7 +114,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
         </div>
       </Card.Header>
       <Card.Body className="min-h-300px">
-        {ports?.length && (
+        {ports?.length > 0 && (
           <TableTabsContainer
             onSelect={setActiveKey}
             defaultActiveKey="resource"

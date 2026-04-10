@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { ButtonGroup } from 'react-bootstrap';
 import {
   OpenStackSecurityGroup,
   openstackSecurityGroupsList,
@@ -94,14 +93,14 @@ export const SecurityGroupsList: FunctionComponent<{ resourceScope }> = ({
       showPageSizeSelector={true}
       hasQuery={true}
       tableActions={
-        <ButtonGroup>
+        <div className="d-flex gap-2">
           <CreateSecurityGroupAction
             resource={resourceScope}
             refetch={props.fetch}
           />
 
           <PullSecurityGroupsAction resource={resourceScope} />
-        </ButtonGroup>
+        </div>
       }
     />
   );
