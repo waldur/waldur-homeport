@@ -327,7 +327,7 @@ function TableInternal<RowType = any>(inputProps: TableInternalProps<RowType>) {
                 (props.filterPosition === 'sidebar' &&
                   props.filtersStorage.length > 0)) && (
                 <Card.Header
-                  className={classNames('border-bottom', {
+                  className={classNames('border-bottom min-h-auto py-2', {
                     'd-none':
                       !showFilterMenuToggle && props.filterPosition === 'menu',
                   })}

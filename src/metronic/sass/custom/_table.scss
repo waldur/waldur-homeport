@@ -313,18 +313,9 @@
         width: 44px;
         height: 44px;
       }
-      &.btn-add-filter.btn-icon,
-      &.btn-add-filter.btn-icon.btn-sm {
-        width: 44px !important;
-        height: 44px !important;
-
-        .svg-icon,
-        .svg-icon.svg-icon-4 {
-          svg {
-            width: 20px !important;
-            height: 20px !important;
-          }
-        }
+      &.btn-icon.btn-sm {
+        width: 28px;
+        height: 28px;
       }
     }
   }

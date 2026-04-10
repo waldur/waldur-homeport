@@ -162,6 +162,12 @@
     }
   }
 }
+// Icon button sizes — sm: 28px
+.btn.btn-icon.btn-sm {
+  width: 28px;
+  height: 28px;
+}
+
 .text-btn {
   background-color: transparent;
   color: $text-muted;
