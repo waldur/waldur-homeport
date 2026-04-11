@@ -29,7 +29,7 @@ export const mergePrepaidConstraints = (
 ): PrepaidConstraints => {
   let min = 1;
   let max: number | null = null;
-  let step = 1;
+  let step: number | null = null;
 
   for (const c of components) {
     if (c.min_prepaid_duration) {
@@ -42,14 +42,17 @@ export const mergePrepaidConstraints = (
           : Math.min(max, c.max_prepaid_duration);
     }
     if (c.prepaid_duration_step) {
-      step = gcd(step, c.prepaid_duration_step);
+      step =
+        step === null
+          ? c.prepaid_duration_step
+          : gcd(step, c.prepaid_duration_step);
     }
   }
 
   return {
     min_prepaid_duration: min,
     max_prepaid_duration: max,
-    prepaid_duration_step: step,
+    prepaid_duration_step: step ?? 1,
   };
 };
 

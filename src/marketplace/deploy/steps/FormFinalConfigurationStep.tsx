@@ -2,6 +2,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
+import { ENV } from '@waldur/core/config';
 import { FormGroup, TextField } from '@waldur/form';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
@@ -20,6 +21,11 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
     () => props.offering?.components?.some((c) => c.is_prepaid),
     [props.offering],
   );
+
+  // When prepaid is active and start date is enabled, the start date
+  // is embedded in the PrepaidDurationSelector instead.
+  const startDateEmbeddedInPrepaid =
+    hasPrepaidComponents && ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
 
   return (
     <VStepperFormStepCard
@@ -45,7 +51,7 @@ export const FormFinalConfigurationStep = (props: FormStepProps) => {
         <TextField />
       </Field>
       <div className="mb-7 border-bottom" />
-      <OrderStartDateField project={project} />
+      {!startDateEmbeddedInPrepaid && <OrderStartDateField project={project} />}
       {!hasPrepaidComponents && (
         <TerminationDateField offering={props.offering} />
       )}
