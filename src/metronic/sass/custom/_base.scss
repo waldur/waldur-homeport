@@ -177,6 +177,23 @@ body {
   height: 36px;
 }
 
+// Medium button size — 36px (between sm and lg)
+.btn.btn-md,
+.btn.btn-md.btn-lg,
+.btn.btn-md.btn-sm,
+.card-toolbar .btn.btn-md {
+  height: 36px !important;
+  min-height: 36px !important;
+  padding: 0.5rem 1rem !important;
+  font-size: $font-size-base !important;
+  line-height: 1.2 !important;
+
+  &.btn-icon {
+    width: 36px !important;
+    padding: 0 !important;
+  }
+}
+
 .text-btn {
   background-color: transparent;
   color: $text-muted;
