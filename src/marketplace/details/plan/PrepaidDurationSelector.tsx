@@ -68,6 +68,28 @@ export const PrepaidDurationSelector = ({
     }
   }, []);
 
+  // Recalculate end_date when start date changes
+  useEffect(() => {
+    const newEnd = DateTime.fromISO(effectiveStartDate)
+      .plus({ months: selectedMonths })
+      .toISODate();
+    dispatch(change(ORDER_FORM_ID, 'attributes.end_date', newEnd));
+  }, [effectiveStartDate]);
+
+  // Reset selected months if current selection is no longer valid
+  useEffect(() => {
+    if (monthOptions.length === 0) return;
+    const validValues = monthOptions.map((opt) => opt.value);
+    if (!validValues.includes(selectedMonths)) {
+      const newMonths = validValues[0];
+      setSelectedMonths(newMonths);
+      const newEnd = DateTime.fromISO(effectiveStartDate)
+        .plus({ months: newMonths })
+        .toISODate();
+      dispatch(change(ORDER_FORM_ID, 'attributes.end_date', newEnd));
+    }
+  }, [monthOptions]);
+
   const handleMonthChange = useCallback(
     (months: number) => {
       setSelectedMonths(months);

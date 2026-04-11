@@ -29,6 +29,7 @@ export const combinePrices = (
   usages: Limits,
   offering: PublicOfferingDetails,
   end_date?: string,
+  start_date?: string,
 ): PricesData => {
   if (plan && offering) {
     const { periods, multipliers, periodKeys } = getBillingPeriods(plan.unit);
@@ -36,8 +37,9 @@ export const combinePrices = (
     const offeringComponents = filterOfferingComponents(offering);
 
     // Calculate the duration multiplier based on the end_date
+    const effectiveStartDate = start_date || DateTime.now().toISODate();
     const durationInMonths = calculateMonthsDifference(
-      DateTime.now().toISODate(),
+      effectiveStartDate,
       end_date,
     );
 
@@ -181,9 +183,6 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   const fixedRows = prices.components.filter(
     (component) => component.billing_type === 'fixed',
   );
-  const usageRows = prices.components.filter(
-    (component) => component.billing_type === 'usage',
-  );
   const initialRows = prices.components.filter(
     (component) =>
       component.billing_type === 'one' && component.is_prepaid == false,
@@ -191,6 +190,19 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   const prepaidRows = prices.components.filter(
     (component) =>
       component.billing_type === 'one' && component.is_prepaid == true,
+  );
+
+  // Identify usage components that serve as overage for prepaid components
+  const overageTypes = new Set(
+    prepaidRows.map((c) => c.overage_component).filter(Boolean),
+  );
+  const overageRows = prices.components.filter(
+    (component) =>
+      component.billing_type === 'usage' && overageTypes.has(component.type),
+  );
+  const usageRows = prices.components.filter(
+    (component) =>
+      component.billing_type === 'usage' && !overageTypes.has(component.type),
   );
   const switchRows = prices.components.filter(
     (component) => component.billing_type === 'few',
@@ -313,6 +325,7 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
       hasOneTimeCost,
       initialRows,
       prepaidRows,
+      overageRows,
       switchRows,
       totalLimitedRows,
       initialTotalPeriods,
@@ -364,7 +377,8 @@ export const pricesSelector = (state, props): PricesData => {
   const plan: Plan = getPlan(state, props) || props.plan;
   const limits: Limits = getLimits(state, props) || props.limits;
   const endDate = getEndDate(state);
-  return combinePrices(plan, limits, {}, props.offering, endDate);
+  const startDate = getStartDate(state);
+  return combinePrices(plan, limits, {}, props.offering, endDate, startDate);
 };
 
 interface CostParts {
@@ -381,6 +395,7 @@ interface CostParts {
 export const getPrepaidCostParts = (
   component: Component,
   endDate: string,
+  startDate?: string,
 ): CostParts => {
   const currency = ENV.plugins.WALDUR_CORE.CURRENCY_NAME;
   const formattedTotal = formatCurrency(component.subTotal, currency, 4);
@@ -393,8 +408,9 @@ export const getPrepaidCostParts = (
     };
   }
 
+  const effectiveStartDate = startDate || DateTime.now().toISODate();
   const durationInMonths = calculateMonthsDifference(
-    DateTime.now().toISODate(),
+    effectiveStartDate,
     endDate,
   );
 

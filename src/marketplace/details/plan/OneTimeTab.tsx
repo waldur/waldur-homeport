@@ -1,7 +1,11 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
+import { ENV } from '@waldur/core/config';
 import FormTable from '@waldur/form/FormTable';
+import { translate } from '@waldur/i18n';
+import { orderProjectSelector } from '@waldur/marketplace/deploy/selectors';
+import { OrderStartDateField } from '@waldur/marketplace/deploy/steps/OrderStartDateField';
 import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
 
 import { ComponentRowTotal } from './ComponentRowTotal';
@@ -18,11 +22,17 @@ export const OneTimeTab = ({
 }) => {
   const shouldConcealPrices =
     useSelector(concealPricesSelector) || concealBillingInfo;
+  const project = useSelector(orderProjectSelector);
 
   const prepaidConstraints = useMemo(
     () => mergePrepaidConstraints(oneTime.prepaidRows),
     [oneTime.prepaidRows],
   );
+
+  const showStartDateHere =
+    oneTime.prepaidRows.length > 0 &&
+    !viewMode &&
+    ENV.plugins.WALDUR_CORE.ENABLE_ORDER_START_DATE;
 
   return (
     <section className="plan-details-section">
@@ -37,7 +47,10 @@ export const OneTimeTab = ({
         )}
 
         {oneTime.prepaidRows.length > 0 && (
-          <PrepaidRows components={oneTime.prepaidRows} />
+          <PrepaidRows
+            components={oneTime.prepaidRows}
+            overageComponents={oneTime.overageRows}
+          />
         )}
 
         {/* Few */}
@@ -56,6 +69,16 @@ export const OneTimeTab = ({
             hidePrices={Boolean(shouldConcealPrices)}
             viewMode={viewMode}
             activePriceIndex={0}
+          />
+        )}
+
+        {showStartDateHere && (
+          <FormTable.Item
+            label={translate('Start date')}
+            tooltip={translate(
+              'If not set, the order is processed immediately after approval.',
+            )}
+            value={<OrderStartDateField project={project} simple />}
           />
         )}
 
