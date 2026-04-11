@@ -128,6 +128,7 @@ function collectProjectDetails(token): Promise<{
         openModalDialog(ProjectDetailsDialog, {
           resolve: {
             onSubmit: (data) => resolve(data),
+            onCancel: () => resolve(null),
           },
           size: 'md',
         }),
