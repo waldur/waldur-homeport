@@ -7,7 +7,6 @@ import { StringField, TextField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
 
 interface ProjectDetailsDialogProps {
@@ -16,6 +15,7 @@ interface ProjectDetailsDialogProps {
       project_name?: string;
       project_description?: string;
     }) => void;
+    onCancel?: () => void;
     defaultProjectName?: string;
   };
 }
@@ -36,6 +36,11 @@ export const ProjectDetailsDialog: FC<ProjectDetailsDialogProps> = ({
     [resolve, dispatch],
   );
 
+  const onCancel = useCallback(() => {
+    dispatch(closeModalDialog());
+    resolve.onCancel?.();
+  }, [resolve, dispatch]);
+
   return (
     <Form
       onSubmit={onSubmit}
@@ -50,7 +55,13 @@ export const ProjectDetailsDialog: FC<ProjectDetailsDialogProps> = ({
             )}
             footer={
               <>
-                <CloseDialogButton />
+                <button
+                  type="button"
+                  className="btn btn-secondary"
+                  onClick={onCancel}
+                >
+                  {translate('Cancel')}
+                </button>
                 <button
                   type="submit"
                   className="btn btn-primary"

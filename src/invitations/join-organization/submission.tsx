@@ -148,6 +148,10 @@ export const requestToAccessOrganization = async (
                 resolve(),
               );
             },
+            onCancel: () => {
+              GroupInvitationTokenStorage.remove();
+              resolve();
+            },
           },
           size: 'md',
         }),
