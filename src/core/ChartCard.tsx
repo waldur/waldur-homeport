@@ -52,17 +52,18 @@ export const ChartCard: React.FC<ChartCardProps> = ({
 
   return (
     <Card className="h-100 card-bordered">
-      <Card.Header className="align-items-center border-0 pt-5">
-        <Card.Title className="align-items-start flex-column">
+      <Card.Header className="align-items-center border-0 pt-5 pb-2 min-h-60px">
+        <Card.Title className="align-items-start flex-column m-0">
           <span className="card-label fw-bold text-gray-900">{title}</span>
         </Card.Title>
-        <div className="card-toolbar d-flex gap-4">
+        <div className="card-toolbar d-flex gap-4 m-0">
           {actions}
           <ActionsDropdownComponent
             labeled
             disabled={isEmpty}
             align="end"
             drop="down"
+            className="btn-md"
             label={
               <>
                 <span className="svg-icon svg-icon-2 me-1">
