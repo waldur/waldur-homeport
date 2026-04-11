@@ -145,7 +145,7 @@ export const ResourceUsageList: FC = () => {
         expandableRow={({ row }) => (
           <UsageExpandableRow row={row} type="resource-usage" />
         )}
-        filters={<ResourceUsageFilter />}
+        filters={<ResourceUsageFilter form={FORM_ID} />}
       />
     </>
   );

@@ -17,7 +17,7 @@ import { useTable } from '@waldur/table/useTable';
 import { ReportingTitle } from '../ReportingTitle';
 import { usageTableTabs } from '../utils';
 
-import { ResourceUsageFilter } from './ResourceUsageFilter';
+import { FORM_ID, ResourceUsageFilter } from './ResourceUsageFilter';
 import { mapStateToFilter } from './ResourceUsageList';
 import { UsageExpandableRow } from './UserUsageExpandableRow';
 
@@ -118,7 +118,7 @@ export const UserUsageList: FC = () => {
         expandableRow={({ row }) => (
           <UsageExpandableRow row={row} type="user-usage" />
         )}
-        filters={<ResourceUsageFilter />}
+        filters={<ResourceUsageFilter form={FORM_ID} />}
       />
     </>
   );

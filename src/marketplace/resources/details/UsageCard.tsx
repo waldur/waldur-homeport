@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useMemo, useState } from 'react';
 import { Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useAsync } from 'react-use';
-import { marketplaceResourcesTeamList } from 'waldur-js-client';
+import { marketplaceResourcesTeamList, Resource } from 'waldur-js-client';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -16,7 +16,7 @@ import { UsageExportDropdown } from '../usage/UsageExportDropdown';
 import { getComponentsAndUsages } from '../usage/utils';
 import { getUsageHistoryPeriodOptions } from '../usage/utils';
 
-export const UsageCard = ({ resource }) => {
+export const UsageCard = ({ resource }: { resource: Resource }) => {
   const [mode, setMode] = useState<'chart' | 'table'>('chart');
   const resourceRef = useMemo(
     () => ({
@@ -68,7 +68,8 @@ export const UsageCard = ({ resource }) => {
     );
   }, [team, value]);
 
-  return resource.is_usage_based || resource.is_limit_based ? (
+  return (resource.is_usage_based || resource.is_limit_based) &&
+    resource.state !== 'Creating' ? (
     <Card className="card-bordered">
       <Card.Header>
         <Card.Title>

@@ -94,8 +94,8 @@ describe('useUsageExport', () => {
     expect(exportAs).toHaveBeenCalledWith('csv', 'Usage history - {resource}', {
       fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
       data: [
-        ['user_1', '1 - 2024', 5, 4],
-        ['Total of {label}', '1 - 2024', 10, 8],
+        ['user_1', 'January 2024', 5, 4],
+        ['Total of {label}', 'January 2024', 10, 8],
         ['Total', '01/2024', 10, 8],
       ],
     });
@@ -140,7 +140,7 @@ describe('useUsageExport', () => {
       {
         fields: ['Date', 'CPU/cores', 'RAM/GB'],
         data: [
-          ['1 - 2024', 10, 8],
+          ['January 2024', 10, 8],
           ['Total', 10, 8],
         ],
       },
@@ -179,8 +179,8 @@ describe('useUsageExport', () => {
     expect(exportAs).toHaveBeenCalledWith('pdf', 'Usage history - {resource}', {
       fields: ['Username', 'Date', 'CPU', 'RAM'],
       data: [
-        ['user_1', '1 - 2024', 5, 4],
-        ['Total of {label}', '1 - 2024', 10, 8],
+        ['user_1', 'January 2024', 5, 4],
+        ['Total of {label}', 'January 2024', 10, 8],
         ['Total', '01/2024', 10, 8],
       ],
     });
@@ -203,8 +203,8 @@ describe('useUsageExport', () => {
     expect(exportAs).toHaveBeenCalledWith('csv', 'Usage history - {resource}', {
       fields: ['Username', 'Date', 'CPU/cores', 'RAM/GB'],
       data: [
-        ['user_1', '1 - 2024', 5, '0'],
-        ['Total of {label}', '1 - 2024', 10, 'N/A'],
+        ['user_1', 'January 2024', 5, '0'],
+        ['Total of {label}', 'January 2024', 10, 'N/A'],
         ['Total', '01/2024', 10, 'N/A'],
       ],
     });

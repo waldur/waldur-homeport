@@ -535,6 +535,20 @@ export const states: StateDeclaration[] = [
       permissions: [() => isReportingScreenEnabled('provider-offerings')],
     },
   },
+  {
+    name: 'reporting-offering-usage',
+    url: 'offering-usage/?tab',
+    parent: 'reporting-provider',
+    component: lazyComponent(() =>
+      import('./provider/OfferingComponentUsageList').then((module) => ({
+        default: module.OfferingComponentUsageList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Offering component usage'),
+      permissions: [() => isReportingScreenEnabled('offering-usage')],
+    },
+  },
 
   // Users category - Platform level (staff/support only)
   {
