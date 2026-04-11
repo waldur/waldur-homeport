@@ -6,6 +6,7 @@ import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { ResourceImportButton } from '@waldur/marketplace/resources/import/ResourceImportButton';
+import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
 import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
 import Table from '@waldur/table/Table';
 import { TableProps } from '@waldur/table/types';
@@ -48,6 +49,7 @@ export const ResourcesAllListTable: FC<ResourcesAllListTableProps> = (
       {...props}
       filters={
         <ProjectResourcesAllFilter
+          form={PROJECT_RESOURCES_ALL_FILTER_FORM_ID}
           hasProjectFilter={props.hasProjectColumn}
           hasCustomerFilter={props.hasCustomerColumn}
           customer={customer}

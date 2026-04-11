@@ -17,6 +17,7 @@ import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { ComponentsUsage } from './ComponentsUsage';
 import { OfferingAgentInfo } from './OfferingAgentInfo';
 import { OfferingAlerts } from './OfferingAlerts';
+import { OfferingComponentUsagePanel } from './OfferingComponentUsagePanel';
 import { OfferingResourcesAndUsers } from './OfferingResourcesAndUsers';
 import { OfferingServices } from './OfferingServices';
 
@@ -78,6 +79,9 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
                 setAgentIdentity={setAgentIdentity}
               />
               <OfferingResourcesAndUsers offering={offering} />
+              {showExperimentalUiComponents && (
+                <OfferingComponentUsagePanel offering={offering} />
+              )}
               <OfferingServices agentIdentity={agentIdentity} />
             </>
           ) : (
@@ -98,6 +102,9 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
               />
             )}
             <OfferingResourcesAndUsers offering={offering} />
+            {showExperimentalUiComponents && (
+              <OfferingComponentUsagePanel offering={offering} />
+            )}
           </Col>
           <Col md={6}>
             {showAgentData ? (

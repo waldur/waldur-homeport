@@ -8,6 +8,7 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { parseDate } from '@waldur/core/dateUtils';
+import { formatUsageValue } from '@waldur/core/formatNumber';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/update/components/ComponentAccountingTypeField';
@@ -32,7 +33,9 @@ const formatChart = (
   color: string,
   labels: string[],
   usages: RowData[],
-  serieName: string = undefined,
+  limits: RowData[] = [],
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
+  _serieName: string = undefined,
   openDialog?: (details) => void,
 ) => ({
   tooltip: {
@@ -67,42 +70,44 @@ const formatChart = (
     },
     formatter: (params) => {
       const date = params[0].axisValue;
-      const value = params[0].data.value;
-      const description = params[0].data.description;
-      const details: RowData['details'] = params[0].data.details;
-      if (!value) {
-        return null;
-      }
-      let tooltip =
-        `${translate('Date')}: ${date}` +
-        `<br/>${translate('Value')}: ${value}` +
-        `${
-          description ? `<br/>${translate('Description')}: ${description}` : ''
-        }`;
-      const hasMoreBtn =
-        details?.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);
-      if (details?.length) {
-        tooltip += `<br/><b>${translate('Details')}:</b><br/>`;
-        tooltip += `<ul class="mb-0">`;
-        const len = hasMoreBtn ? MAX_SHOW_ITEMS : Infinity;
-        details.slice(0, len).forEach((d) => {
-          tooltip += `<li>${d.username} - ${d.usage} ${d.measured_unit}</li>`;
-        });
-        tooltip += `</ul>`;
-      }
-      if (hasMoreBtn) {
-        tooltip += `<div class="text-center mt-3">`;
-        tooltip += `<button id="see-more-btn" class="btn btn-link btn-icon-right py-0">${translate('See more')}`;
-        tooltip += `<span class="svg-icon svg-icon-2 svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm48.49-108.49a12,12,0,0,1,0,17l-40,40a12,12,0,0,1-17,0l-40-40a12,12,0,0,1,17-17L128,135l31.51-31.52A12,12,0,0,1,176.49,103.51Z"></path></svg></span>`;
-        tooltip += `</button></div>`;
+      let tooltip = `<div class="mb-1"><b>${date}</b></div>`;
 
-        setTimeout(() => {
-          const btn = document.getElementById('see-more-btn');
-          if (btn) {
-            btn.onclick = () => openDialog(details);
+      params.forEach((param) => {
+        const val = param.data.value;
+        const description = param.data.description;
+        const details: RowData['details'] = param.data.details;
+
+        tooltip += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(val, true)}</b>`;
+        if (description) {
+          tooltip += ` (${description})`;
+        }
+
+        if (details?.length) {
+          tooltip += `<br/><div class="mt-2 text-decoration-underline"><b>${translate('Details')}:</b></div>`;
+          tooltip += `<ul class="mb-0">`;
+          const hasMoreBtn =
+            details.length > MAX_SHOW_ITEMS + 1 && Boolean(openDialog);
+          const len = hasMoreBtn ? MAX_SHOW_ITEMS : Infinity;
+          details.slice(0, len).forEach((d) => {
+            tooltip += `<li>${d.username} - ${formatUsageValue(d.usage, true)} ${d.measured_unit}</li>`;
+          });
+          tooltip += `</ul>`;
+
+          if (hasMoreBtn) {
+            tooltip += `<div class="text-center mt-3">`;
+            tooltip += `<button id="see-more-btn" class="btn btn-link btn-icon-right py-0">${translate('See more')}`;
+            tooltip += `<span class="svg-icon svg-icon-2 svg-icon-primary"><svg xmlns="http://www.w3.org/2000/svg" width="1em" height="1em" fill="currentColor" viewBox="0 0 256 256"><path d="M128,20A108,108,0,1,0,236,128,108.12,108.12,0,0,0,128,20Zm0,192a84,84,0,1,1,84-84A84.09,84.09,0,0,1,128,212Zm48.49-108.49a12,12,0,0,1,0,17l-40,40a12,12,0,0,1-17,0l-40-40a12,12,0,0,1,17-17L128,135l31.51-31.52A12,12,0,0,1,176.49,103.51Z"></path></svg></span>`;
+            tooltip += `</button></div>`;
+
+            setTimeout(() => {
+              const btn = document.getElementById('see-more-btn');
+              if (btn) {
+                btn.onclick = () => openDialog(details);
+              }
+            }, 100);
           }
-        }, 100);
-      }
+        }
+      });
 
       return tooltip;
     },
@@ -130,9 +135,21 @@ const formatChart = (
   series: [
     {
       type: 'bar',
-      name: serieName,
+      name: translate('Limit'),
+      data: limits,
+      color: '#e0e0e0', // Light gray for limit bars
+      barMaxWidth: 50,
+    },
+    {
+      type: 'line',
+      name: translate('Usage'),
       data: usages,
       color,
+      smooth: true,
+      lineStyle: {
+        width: 3,
+      },
+      symbolSize: 8,
     },
   ],
 });
@@ -149,6 +166,8 @@ export const getFormattedUsages = (
   periods: DateTime[],
   usages: ComponentUsage[],
   userUsages: ComponentUserUsage[] = [],
+  valueSelector: (usage: ComponentUsage) => number = (u) =>
+    u.total_consumed || u.usage,
 ): RowData[] => {
   return periods.map((period) => {
     const matchingUsage = usages.find(
@@ -165,7 +184,7 @@ export const getFormattedUsages = (
       );
 
       return {
-        value: matchingUsage.usage,
+        value: valueSelector(matchingUsage) || 0,
         description: matchingUsage.description,
         details,
       };
@@ -196,7 +215,7 @@ export const getUsagePeriods = (
     numberOfMonths = Math.ceil(Math.abs(_months));
   }
   const periods = getMonthsPeriods(numberOfMonths);
-  const labels = periods.map((date) => `${date.month} - ${date.year}`);
+  const labels = periods.map((date) => date.toFormat('LLLL yyyy'));
   return { periods, labels };
 };
 
@@ -209,16 +228,33 @@ export const getEChartOptions = (
   openDialog?: (userUsage: ComponentUserUsage[]) => void,
 ) => {
   const { labels, periods } = getUsagePeriods(usages, months);
+  const filteredUsages = usages.filter(
+    (usage) => (usage.component_type || usage.type) === component.type,
+  );
+  const filteredUserUsages = userUsages?.filter(
+    (usage) => usage.component_type === component.type,
+  );
+
   const formattedUsages = getFormattedUsages(
     periods,
-    usages.filter((usage) => usage.type === component.type),
-    userUsages?.filter((usage) => usage.component_type === component.type),
+    filteredUsages,
+    filteredUserUsages,
+    (u) => u.total_consumed || u.usage,
   );
+
+  const formattedLimits = getFormattedUsages(
+    periods,
+    filteredUsages,
+    [],
+    (u) => u.total_allocated,
+  );
+
   return formatChart(
     component.measured_unit,
     color,
     labels,
     formattedUsages,
+    formattedLimits,
     component.name,
     openDialog,
   );
@@ -306,6 +342,9 @@ export const getComponentsAndUsages = async (
       path: { uuid: resource_uuid },
     }).then((response) => response.data);
   } catch (error) {
+    if (error?.response?.status === 404) {
+      return { components: [], usages: [], userUsages: [] };
+    }
     throw new Error(`Error while getting offering, ${error.message}`);
   }
 
@@ -347,6 +386,9 @@ export const getComponentsAndUsages = async (
       }),
     );
   } catch (error) {
+    if (error?.response?.status === 404) {
+      return { components, usages: [], userUsages: [] };
+    }
     throw new Error(
       `Error while getting usages for resource: ${resource_uuid}, ${error.message}`,
     );

@@ -2,14 +2,14 @@ import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
-import { marketplaceProviderOfferingsComponentStatsList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { generateColors } from '@waldur/core/generateColors';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
 import { Offering } from '@waldur/marketplace/types';
+
+import { getComponentUsageMonthlyList } from '../api';
 
 interface OfferingUsageChartProps {
   offering: Offering;
@@ -24,20 +24,22 @@ export const OfferingUsageChart: FunctionComponent<OfferingUsageChartProps> = ({
     value: usages,
   } = useAsync(
     () =>
-      getAllPages((page) =>
-        marketplaceProviderOfferingsComponentStatsList({
-          path: { uuid: offering.uuid },
-          query: {
-            page,
-            page_size: MAX_PAGE_SIZE,
-            start: DateTime.now()
-              .minus({ months: 12 })
-              .startOf('month')
-              .toFormat('yyyy-MM'),
-            end: DateTime.now().endOf('month').toFormat('yyyy-MM'),
-          },
-        }),
-      ),
+      getComponentUsageMonthlyList({
+        query: {
+          offering_uuid: offering.uuid,
+          start: DateTime.now()
+            .minus({ months: 12 })
+            .startOf('month')
+            .toFormat('yyyy-MM'),
+          end: DateTime.now().endOf('month').toFormat('yyyy-MM'),
+          field: [
+            'component_type',
+            'total_consumed',
+            'total_allocated',
+            'billing_period',
+          ],
+        },
+      }).then((response) => response.data),
     [offering],
   );
 

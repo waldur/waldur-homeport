@@ -224,6 +224,14 @@ export const getCategoryConfig = (): Record<ReportCategory, CategoryConfig> => {
           state: 'reporting-vm-overview',
           feature: SupportFeatures.vm_type_overview,
         },
+        {
+          key: 'offering-usage',
+          title: translate('Offering component usage'),
+          description: translate(
+            'Aggregated allocated and consumed units per component',
+          ),
+          state: 'reporting-offering-usage',
+        },
       ],
     },
     financial: {

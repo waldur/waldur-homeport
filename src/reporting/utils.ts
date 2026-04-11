@@ -31,16 +31,56 @@ export const usageTableTabs = [
 
 export const getUsageLineChartOptions = (
   dates: string[],
-  values: (string | number)[],
+  usageValues: (string | number)[],
+  limitValues: (string | number)[] = [],
 ): EChartsOption => {
   const color = CHART_LINE_COLOR;
   const rgb = hexToRgb(color);
+  const series: any[] = [
+    {
+      type: 'line',
+      name: translate('Usage'),
+      data: usageValues,
+      color,
+      smooth: true,
+      showSymbol: false,
+      areaStyle: {
+        origin: 'start',
+        color: new graphic.LinearGradient(0, 0, 0, 1, [
+          { offset: 0, color: `rgba(${rgb}, 0.2)` },
+          { offset: 1, color: `rgba(${rgb}, 0)` },
+        ]),
+      },
+    },
+  ];
+
+  if (limitValues?.length && limitValues.some((v) => Number(v) > 0)) {
+    series.push({
+      type: 'line',
+      name: translate('Limit'),
+      data: limitValues,
+      color: '#e0e0e0', // Light gray for limit
+      smooth: true,
+      showSymbol: false,
+      lineStyle: {
+        type: 'dashed',
+        width: 1,
+      },
+    });
+  }
+
   return {
     tooltip: {
       trigger: 'axis',
-      formatter: (params) => {
-        const point = params[0];
-        return `${point.axisValue}<br/>${formatUsageValue(point.data)}`;
+      order: 'seriesDesc',
+      formatter: (params: any) => {
+        let res = `${params[0].axisValue}`;
+        params.forEach((param) => {
+          res += `<br/>${param.marker} ${param.seriesName}: <b>${formatUsageValue(
+            param.data,
+          )}</b>`;
+        });
+        return res;
       },
     },
     grid: {
@@ -68,21 +108,6 @@ export const getUsageLineChartOptions = (
         },
       },
     },
-    series: [
-      {
-        type: 'line',
-        data: values,
-        color,
-        smooth: true,
-        showSymbol: false,
-        areaStyle: {
-          origin: 'start',
-          color: new graphic.LinearGradient(0, 0, 0, 1, [
-            { offset: 0, color: `rgba(${rgb}, 0.2)` },
-            { offset: 1, color: `rgba(${rgb}, 0)` },
-          ]),
-        },
-      },
-    ],
+    series,
   };
 };
