@@ -3,7 +3,7 @@ import React, { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
 import { generateBrandColors } from '@waldur/core/generateColors';
-import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 
 interface AreaChartItem {
   name: string;
@@ -22,7 +22,12 @@ interface AreaChartProps {
  */
 export const AreaChart = React.forwardRef<any, AreaChartProps>(
   (
-    { data, height = '300px', color = getBrandColor(), showPoints = false },
+    {
+      data,
+      height = '300px',
+      color = getChartBrandColor(),
+      showPoints = false,
+    },
     ref,
   ) => {
     const categories = useMemo(() => data.map((item) => item.name), [data]);

@@ -3,6 +3,7 @@ import { DateTime } from 'luxon';
 
 import { generateBrandColors } from '@waldur/core/generateColors';
 import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 import {
@@ -153,7 +154,7 @@ export const formatYearOverYearChart = (
         type: 'bar',
         data: currentYearData,
         itemStyle: {
-          color: getBrandColor(),
+          color: getChartBrandColor(),
         },
       },
       {
@@ -228,7 +229,7 @@ export const formatUsageTrendChart = (
         data: usageValues,
         smooth: true,
         itemStyle: {
-          color: getBrandColor(),
+          color: getChartBrandColor(),
         },
         areaStyle: {
           color: generateBrandColors(getBrandColor())['300'],

@@ -142,7 +142,7 @@ export function useAggregateLimitChart(
         },
         itemGap: 8,
         top: 0,
-        left: 'center',
+        right: 0,
       },
       grid: {
         left: 35,
@@ -213,7 +213,7 @@ export function useAggregateLimitChart(
             borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
           },
           data: usageData,
-          color: brandColors[600],
+          color: brandColors[300],
         },
         {
           name: translate('Limit'),
@@ -226,7 +226,7 @@ export function useAggregateLimitChart(
             borderRadius: [CHART_BAR_ROUNDING, CHART_BAR_ROUNDING, 0, 0],
           },
           data: remainingData,
-          color: `rgba(${brandColors['600-rgb']}, 0.25)`,
+          color: '#d0d5dd', // gray-300
         },
       ],
     };

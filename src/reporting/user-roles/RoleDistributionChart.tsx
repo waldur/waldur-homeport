@@ -4,7 +4,7 @@ import { CustomerMemberCount } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
-import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 interface RoleDistributionChartProps {
@@ -62,7 +62,7 @@ export const RoleDistributionChart: FC<RoleDistributionChartProps> = ({
           data: chartData.map((item) => ({
             value: item.count,
             itemStyle: {
-              color: item.has_resources ? getBrandColor() : '#a1a5b7',
+              color: item.has_resources ? getChartBrandColor() : '#d0d5dd', // gray-300
             },
           })),
           itemStyle: {

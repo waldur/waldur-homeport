@@ -2,8 +2,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { UserActiveStatusCount } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
-import { generateBrandColors } from '@waldur/core/generateColors';
-import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 import { DonutChart } from './DonutChart';
@@ -23,10 +22,7 @@ export const ActiveStatusChart: FC<ActiveStatusChartProps> = ({ data }) => {
             : translate('Inactive'),
         value: item.count,
         itemStyle: {
-          color:
-            item.status === 'active'
-              ? getBrandColor()
-              : generateBrandColors(getBrandColor())[300],
+          color: item.status === 'active' ? getChartBrandColor() : '#d0d5dd', // gray-300
         },
       })),
     [data],

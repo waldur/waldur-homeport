@@ -256,7 +256,7 @@ export const getCostChartAndOptions = (
       type: 'bar',
       stack: 'cost',
       data: chart.incurred.slice(0, chart.incurred.length - 1),
-      color: brandColors[600],
+      color: brandColors[300],
     },
     hasCompensations && {
       name: translate('Compensation'),
@@ -272,7 +272,7 @@ export const getCostChartAndOptions = (
       data: Array.from({ length: chart.incurred.length - 1 }).concat(
         chart.incurred[chart.incurred.length - 1],
       ),
-      color: '#98a2b3', // gray-400
+      color: '#d0d5dd', // gray-300
     },
     hasCompensations && {
       name: translate('Estimated compensation'),
