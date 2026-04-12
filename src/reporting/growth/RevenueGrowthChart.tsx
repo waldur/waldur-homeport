@@ -10,7 +10,7 @@ import { ENV } from '@waldur/core/config';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { ExportData } from '@waldur/table/exporters/types';
@@ -85,7 +85,7 @@ const formatGrowthChart = (growthChartData?): EChartsOption => {
         type: 'line',
         yAxisIndex: 1,
         data: growthChartData.total_periods,
-        itemStyle: { color: getBrandColor() },
+        itemStyle: { color: getChartBrandColor() },
       },
       ...(growthChartData.customer_periods || []).map((row) => ({
         name: row.name,

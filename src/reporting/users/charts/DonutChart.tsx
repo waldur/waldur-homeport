@@ -2,8 +2,6 @@ import { EChartsOption } from 'echarts';
 import React, { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
-import { generateBrandColors } from '@waldur/core/generateColors';
-import { getBrandColor } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
 
 interface DonutChartItem {
@@ -49,19 +47,18 @@ export const DonutChart = React.forwardRef<any, DonutChartProps>(
 
     const chartData = useMemo(() => prepareChartData(data), [data]);
 
-    const brandColors = useMemo(() => generateBrandColors(getBrandColor()), []);
     const palette = useMemo(
       () => [
-        brandColors['600'],
-        brandColors['400'],
-        brandColors['800'],
-        brandColors['300'],
-        brandColors['900'],
-        brandColors['500'],
-        brandColors['700'],
-        brandColors['200'],
+        '#97bf89', // primary-300
+        '#84caff', // blue-300
+        '#5fe9d0', // teal-300
+        '#bdb4fe', // info-300
+        '#faa7e0', // pink-300
+        '#a4bcfd', // indigo-300
+        '#acdc79', // moss-300
+        '#fea3b4', // rose-300
       ],
-      [brandColors],
+      [],
     );
 
     const options = useMemo<EChartsOption>(

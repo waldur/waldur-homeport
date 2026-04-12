@@ -4,7 +4,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 interface OfferingStatsData {
@@ -51,7 +51,7 @@ export const TopOfferingsByRevenueChart: FC<
           name: translate('Revenue'),
           type: 'bar',
           data: data.map((o) => o.revenue),
-          itemStyle: { color: getBrandColor() },
+          itemStyle: { color: getChartBrandColor() },
         },
       ],
     };

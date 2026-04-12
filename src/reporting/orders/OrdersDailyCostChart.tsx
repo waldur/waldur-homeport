@@ -5,7 +5,7 @@ import { FC, useCallback, useMemo } from 'react';
 import { ChartCard } from '@waldur/core/ChartCard';
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 import { DailyOrderStats } from './types';
@@ -57,7 +57,7 @@ export const OrdersDailyCostChart: FC<OrdersDailyCostChartProps> = ({
           name: translate('Cost'),
           type: 'bar',
           data: costs,
-          itemStyle: { color: getBrandColor() },
+          itemStyle: { color: getChartBrandColor() },
         },
       ],
     };

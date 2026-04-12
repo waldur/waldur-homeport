@@ -2,7 +2,7 @@ import { EChartsOption } from 'echarts';
 import React, { useMemo } from 'react';
 
 import { EChart } from '@waldur/core/EChart';
-import { getBrandColor } from '@waldur/core/utils';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 
 export interface BarChartItem {
   name: string;
@@ -31,7 +31,7 @@ export const BarChart = React.forwardRef<any, BarChartProps>(
       data,
       height = '300px',
       horizontal = false,
-      color = getBrandColor(),
+      color = getChartBrandColor(),
       isSorted = true,
       showValueLabel = false,
       labelFormatter,

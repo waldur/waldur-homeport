@@ -3,7 +3,7 @@ import { EChartsOption, graphic } from 'echarts';
 import { ENV } from '@waldur/core/config';
 import { formatUsageValue } from '@waldur/core/formatNumber';
 import { hexToRgb } from '@waldur/core/generateColors';
-import { CHART_LINE_COLOR } from '@waldur/dashboard/constants';
+import { getChartBrandColor } from '@waldur/dashboard/constants';
 import { translate } from '@waldur/i18n';
 
 export const isReportingScreenEnabled = (screen: string) => {
@@ -34,7 +34,7 @@ export const getUsageLineChartOptions = (
   usageValues: (string | number)[],
   limitValues: (string | number)[] = [],
 ): EChartsOption => {
-  const color = CHART_LINE_COLOR;
+  const color = getChartBrandColor();
   const rgb = hexToRgb(color);
   const series: any[] = [
     {
