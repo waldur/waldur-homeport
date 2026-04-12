@@ -6,6 +6,7 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
 import { ANNOUNCEMENT_ICON } from '@waldur/administration/utils';
+import { ENV } from '@waldur/core/config';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -179,6 +180,11 @@ export const OfferingViewHero: FC<OfferingViewHeroProps> = (props) => {
         hideQuickSection
         cardBordered
         mobileBottomActions
+        backgroundImage={
+          ENV.plugins?.WALDUR_CORE?.SHOW_OFFERING_COVER_IMAGE
+            ? offering.image
+            : undefined
+        }
         logo={offering.thumbnail}
         logoSize={48}
         logoAlt={offering.name}

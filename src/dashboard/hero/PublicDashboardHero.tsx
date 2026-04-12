@@ -49,6 +49,13 @@ export const PublicDashboardHero: FC<
               props.cardBordered && 'card-bordered',
             )}
           >
+            {props.backgroundImage && (
+              <Card.Img
+                variant="top"
+                src={props.backgroundImage}
+                style={{ height: 160, objectFit: 'cover' }}
+              />
+            )}
             <Card.Body className="d-flex flex-column flex-sm-row align-items-stretch flex-grow-1">
               {props.logo || props.logoAlt ? (
                 <Tip
