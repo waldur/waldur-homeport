@@ -82,7 +82,7 @@ export const combinePrices = (
               : 1;
         }
       }
-      const price = plan.prices[component.type] || 0;
+      const price = Number(plan.prices[component.type]) || 0;
       // The price from the plan component is always per billing unit
       // (per the plan's unit field: hour, day, month, etc.).
       // The limit_period only defines how limits are evaluated/reset,

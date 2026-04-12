@@ -1,0 +1,11 @@
+// Resource List Block Styles
+
+.aui-resource-list-block {
+  width: 100%;
+  overflow-x: auto;
+
+  > .card {
+    margin-bottom: 0;
+    min-width: $spacer * 30; // Prevents columns from collapsing below a readable width
+  }
+}

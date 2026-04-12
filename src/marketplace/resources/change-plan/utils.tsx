@@ -155,10 +155,10 @@ export const getPlanSwitchData = (order: OrderDetails, offering: Offering) => {
 
   const components = offeringComponents.map((component) => {
     const currentLimit = order.limits[component.type] || 0;
-    const oldPrice = oldPlan.prices[component.type] || 0;
+    const oldPrice = Number(oldPlan.prices[component.type]) || 0;
     const oldSubTotal = oldPrice * currentLimit || 0;
     const oldPrices = multipliers.map((mult) => mult * oldSubTotal);
-    const newPrice = newPlan.prices[component.type] || 0;
+    const newPrice = Number(newPlan.prices[component.type]) || 0;
     const newSubTotal = newPrice * currentLimit || 0;
     const newPrices = newMultipliers.map((mult) => mult * newSubTotal);
     const changedSubTotal = newSubTotal - oldSubTotal;

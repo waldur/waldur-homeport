@@ -41,18 +41,6 @@ const convertToolResultToBlock = (
   const key = result.k as string;
   if (!key) return null;
 
-  if (key === 'table') {
-    return {
-      id: randomUUID(),
-      key: 'table',
-      content: (result.c as string) ?? '',
-      headers: result.h as string[],
-      rows: result.r as string[][],
-      totalCount: result.n as number,
-      status: 'complete',
-    };
-  }
-
   if (key === 'vm_order') {
     return {
       id: randomUUID(),
@@ -72,6 +60,19 @@ const convertToolResultToBlock = (
       images: result.images as UIBlock['images'],
       projects: result.projects as UIBlock['projects'],
       offerings: result.offerings as UIBlock['offerings'],
+      status: 'complete',
+    };
+  }
+
+  if (key === 'resource_list') {
+    return {
+      id: randomUUID(),
+      key: 'resource_list',
+      content: '',
+      project_uuid: result.project_uuid as string,
+      customer_uuid: result.customer_uuid as string,
+      category_uuid: result.category_uuid as string,
+      state: result.state as string[],
       status: 'complete',
     };
   }
