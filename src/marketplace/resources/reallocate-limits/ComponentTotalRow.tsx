@@ -17,7 +17,7 @@ export const ComponentTotalRow: FC<ComponentTotalRowProps> = ({
 }) => {
   const total = useMemo(() => {
     return components.reduce((sum, component) => {
-      const price = plan?.prices?.[component.type] || 0;
+      const price = Number(plan?.prices?.[component.type]) || 0;
       const newLimit = component.changedLimit;
       return sum + price * newLimit;
     }, 0);

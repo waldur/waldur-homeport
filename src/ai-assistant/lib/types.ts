@@ -31,14 +31,10 @@ export type RunConfig = {
 
 export interface UIBlock {
   id: string; // Unique ID for React keys
-  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown', 'table', 'vm_order')
+  key: string; // Component type (e.g., 'code', 'mermaid', 'markdown', 'resource_list', 'vm_order')
   content: string;
   tag?: string; // Optional metadata (e.g., language for code blocks)
   status: 'loading' | 'streaming' | 'complete'; // Controls rendering
-  // Table-specific fields (when key === 'table')
-  headers?: string[]; // Table column headers
-  rows?: string[][]; // Table data rows
-  totalCount?: number; // Total number of rows
   // VM Order-specific fields (when key === 'vm_order')
   order_id?: string; // Order UUID
   name?: string; // VM name
@@ -72,6 +68,11 @@ export interface UIBlock {
     uuid: string;
     name: string;
   }>;
+  // Resource List fields (when key === 'resource_list')
+  customer_uuid?: string;
+  category_uuid?: string;
+  state?: string[];
+  // project_uuid already exists from vm_order
 }
 
 export interface UIBlockProps {

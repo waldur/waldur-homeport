@@ -40,8 +40,9 @@ export const ResourceRateField: FC<ResourceRateFieldProps> = ({
   const plan = offering.plans?.find(
     (p: BasePublicPlan) => p.uuid === row.plan_uuid,
   );
-  const price = plan?.prices?.[component.type];
-  if (price == null) return <>—</>;
+  const priceStr = plan?.prices?.[component.type];
+  if (priceStr == null) return <>—</>;
+  const price = Number(priceStr);
 
   const rawLimit = row.limits?.[component.type] ?? 0;
   const limit = normalize(rawLimit, component.factor);

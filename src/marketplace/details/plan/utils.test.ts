@@ -31,7 +31,9 @@ describe('combinePrices', () => {
   ): BasePublicPlan =>
     ({
       quotas,
-      prices,
+      prices: Object.fromEntries(
+        Object.entries(prices).map(([k, v]) => [k, String(v)]),
+      ),
       unit,
     }) as BasePublicPlan;
 

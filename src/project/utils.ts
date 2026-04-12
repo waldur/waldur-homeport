@@ -61,7 +61,7 @@ export function useProjectCostChart(project: Project) {
         ? defaultCurrency(item.project_credit)
         : null;
 
-      const totalCost = item.limit_cost + (item.project_credit || 0);
+      const totalCost = item.limit_cost + (Number(item.project_credit) || 0);
       const totalCostFormatted = defaultCurrency(totalCost);
       const action = getCostPolicyActionOptions().find(
         (option) => option.value === item.actions,

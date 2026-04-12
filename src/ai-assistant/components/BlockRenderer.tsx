@@ -25,10 +25,6 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       prev.block.status === next.block.status &&
       prev.block.key === next.block.key &&
       prev.block.tag === next.block.tag &&
-      // Check table-specific fields
-      prev.block.headers === next.block.headers &&
-      prev.block.rows === next.block.rows &&
-      prev.block.totalCount === next.block.totalCount &&
       // Check vm_order-specific fields
       prev.block.order_id === next.block.order_id &&
       prev.block.name === next.block.name &&
@@ -39,7 +35,11 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       prev.block.project_uuid === next.block.project_uuid &&
       prev.block.order_status === next.block.order_status &&
       prev.block.message === next.block.message &&
-      prev.block.error === next.block.error
+      prev.block.error === next.block.error &&
+      // Check resource_list-specific fields
+      prev.block.customer_uuid === next.block.customer_uuid &&
+      prev.block.category_uuid === next.block.category_uuid &&
+      prev.block.state?.join(',') === next.block.state?.join(',')
     );
   },
 );
@@ -49,7 +49,6 @@ MemoizedBlock.displayName = 'MemoizedBlock';
 export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
   // Filter out empty blocks (memoized to prevent recalculation)
   // Allow loading blocks through even with empty content - they show their own loading UI
-  // Allow table blocks with structured data (headers/rows) even if content is empty
   // Allow vm_order blocks with structured data even if content is empty
   const validBlocks = useMemo(
     () =>
@@ -57,13 +56,13 @@ export const BlockRenderer: FC<BlockRendererProps> = ({ blocks }) => {
         (block) =>
           block.content ||
           block.status === 'loading' ||
-          (block.key === 'table' && (block.headers || block.rows)) ||
           (block.key === 'vm_order' &&
             (block.order_id ||
               block.name ||
               block.error ||
               block.order_status ||
-              block.status === 'streaming')),
+              block.status === 'streaming')) ||
+          block.key === 'resource_list',
       ),
     [blocks],
   );

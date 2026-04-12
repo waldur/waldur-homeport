@@ -17,7 +17,7 @@ import { randomUUID } from '@waldur/core/utils';
  *
  * TOOL CALL FLOW:
  * 1. Server sends { k: 'load', t: 'tool' } → We create a 'tool' loading block (inline spinner)
- * 2. Server sends { k: 'table', h: [...], r: [...] } → Early guard strips the tool loading block,
+ * 2. Server sends the result event → Early guard strips the tool loading block,
  *    then the normal handler creates the result block as usual
  */
 export function updateBlocks(
@@ -43,40 +43,6 @@ export function updateBlocks(
         content: '',
         tag: part.t,
         status: 'loading',
-      },
-    ];
-  }
-
-  // Handle table data with structured fields (h, r, n)
-  if (part.k === 'table' && (part.h || part.r || part.n !== undefined)) {
-    const lastBlock = existingBlocks[existingBlocks.length - 1];
-
-    // Transition from loading to streaming or update existing table
-    if (lastBlock?.key === 'table') {
-      return [
-        ...existingBlocks.slice(0, -1),
-        {
-          ...lastBlock,
-          content: part.c ?? lastBlock.content ?? '',
-          headers: (part.h as string[]) ?? lastBlock.headers,
-          rows: (part.r as string[][]) ?? lastBlock.rows,
-          totalCount: part.n ?? lastBlock.totalCount,
-          status: 'streaming',
-        },
-      ];
-    }
-
-    // Create new table block (shouldn't happen if load event was sent first, but handle it)
-    return [
-      ...existingBlocks,
-      {
-        id: randomUUID(),
-        key: 'table',
-        content: part.c ?? '',
-        headers: part.h as string[],
-        rows: part.r as string[][],
-        totalCount: part.n,
-        status: 'streaming',
       },
     ];
   }
@@ -135,6 +101,39 @@ export function updateBlocks(
         images: part.images as UIBlock['images'],
         projects: part.projects as UIBlock['projects'],
         offerings: part.offerings as UIBlock['offerings'],
+        status: 'streaming',
+      },
+    ];
+  }
+
+  // Handle resource_list data with structured fields
+  if (part.k === 'resource_list') {
+    const lastBlock = existingBlocks[existingBlocks.length - 1];
+
+    if (lastBlock?.key === 'resource_list') {
+      return [
+        ...existingBlocks.slice(0, -1),
+        {
+          ...lastBlock,
+          project_uuid: part.project_uuid ?? lastBlock.project_uuid,
+          customer_uuid: part.customer_uuid ?? lastBlock.customer_uuid,
+          category_uuid: part.category_uuid ?? lastBlock.category_uuid,
+          state: (part.state as string[]) ?? lastBlock.state,
+          status: 'streaming',
+        },
+      ];
+    }
+
+    return [
+      ...existingBlocks,
+      {
+        id: randomUUID(),
+        key: 'resource_list',
+        content: '',
+        project_uuid: part.project_uuid,
+        customer_uuid: part.customer_uuid,
+        category_uuid: part.category_uuid,
+        state: part.state as string[],
         status: 'streaming',
       },
     ];
