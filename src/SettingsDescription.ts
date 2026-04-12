@@ -115,12 +115,6 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
-        key: 'SHOW_OFFERING_COVER_IMAGE',
-        description: translate('Show offering cover image as a banner above the name on the offering page.'),
-        default: false,
-        type: 'boolean',
-      },
-      {
         key: 'ANONYMOUS_USER_CAN_VIEW_PLANS',
         description: translate('Allow anonymous users to see plans'),
         default: true,
@@ -132,6 +126,12 @@ export const SettingsDescription = [
         default: 'show_all',
         type: 'choice_field',
         options: [{ value: 'show_all', label: 'Show all shared offerings' }, { value: 'show_restricted_disabled', label: 'Show all but mark inaccessible as disabled' }, { value: 'hide_inaccessible', label: 'Hide offerings user cannot access' }, { value: 'require_membership', label: 'Hide all unless user belongs to an organization/project' }],
+      },
+      {
+        key: 'SHOW_OFFERING_COVER_IMAGE',
+        description: translate('Show offering cover image as a banner above the name on the offering page.'),
+        default: false,
+        type: 'boolean',
       },
       {
         key: 'ENFORCE_USER_CONSENT_FOR_OFFERINGS',
