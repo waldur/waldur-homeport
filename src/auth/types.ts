@@ -51,6 +51,7 @@ interface CoreConfiguration {
   LOGIN_PAGE_CAROUSEL_SLIDES: LoginPageCarouselSlide[];
   LOGIN_PAGE_NEWS: LoginPageNewsItem[];
   ANONYMOUS_USER_CAN_VIEW_OFFERINGS: boolean;
+  SHOW_OFFERING_COVER_IMAGE?: boolean;
   RESTRICTED_OFFERING_VISIBILITY_MODE?: OfferingVisibilityMode;
   MATOMO_URL_BASE: string;
   MATOMO_SITE_ID: number;

@@ -115,6 +115,12 @@ export const SettingsDescription = [
         type: 'boolean',
       },
       {
+        key: 'SHOW_OFFERING_COVER_IMAGE',
+        description: translate('Show offering cover image as a banner above the name on the offering page.'),
+        default: false,
+        type: 'boolean',
+      },
+      {
         key: 'ANONYMOUS_USER_CAN_VIEW_PLANS',
         description: translate('Allow anonymous users to see plans'),
         default: true,
