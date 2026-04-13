@@ -40,7 +40,7 @@ export const ReportingLayout: FC = () => {
   }, [workspace]);
 
   return (
-    <div className="container-fluid py-8">
+    <div className="container-fluid py-9">
       <div className="table-standalone-header d-flex justify-content-between gap-4 mb-5">
         <h1>{translate('Reporting')}</h1>
       </div>
