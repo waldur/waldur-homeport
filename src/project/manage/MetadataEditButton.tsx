@@ -35,5 +35,5 @@ export const MetadataEditButton = ({
     });
   }, [project, question]);
 
-  return <CompactEditButton onClick={callback} />;
+  return <CompactEditButton onClick={callback} variant="secondary" />;
 };

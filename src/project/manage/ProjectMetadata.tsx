@@ -1,13 +1,17 @@
 import { useQuery } from '@tanstack/react-query';
-import React from 'react';
+import React, { useCallback } from 'react';
+import { useDispatch } from 'react-redux';
 import { Project, projectsChecklistRetrieve } from 'waldur-js-client';
 
+import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { ProjectFeatures } from '@waldur/FeaturesEnums';
+import { CompactEditButton } from '@waldur/form/CompactEditButton';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
+import { openModalDialog } from '@waldur/modal/actions';
 import { PermissionEnum } from '@waldur/permissions/enums';
 import { usePermission } from '@waldur/permissions/hooks';
 import { useNotify } from '@waldur/store/hooks';
@@ -19,6 +23,12 @@ import { ParsedAnswer } from '../metadata/ParsedAnswer';
 import { FieldEditButton } from './FieldEditButton';
 import { MetadataEditButton } from './MetadataEditButton';
 
+const UpdateAffiliatedOrganizationsDialog = lazyComponent(() =>
+  import('./UpdateAffiliatedOrganizationsDialog').then((module) => ({
+    default: module.UpdateAffiliatedOrganizationsDialog,
+  })),
+);
+
 const getMetadataLoadErrorMsg = () =>
   translate('Unable to load full metadata.');
 
@@ -29,6 +39,7 @@ interface ProjectMetadataProps {
 export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
   project,
 }) => {
+  const dispatch = useDispatch();
   const user = useUser();
   const { showErrorResponse } = useNotify();
   const { data, isLoading, error, refetch } = useQuery({
@@ -52,6 +63,31 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
     customerId: project.customer_uuid,
     projectId: project.uuid,
   });
+
+  const canUpdateProject =
+    user.is_staff ||
+    hasPermission({
+      permission: PermissionEnum.UPDATE_PROJECT,
+      customerId: project.customer_uuid,
+      projectId: project.uuid,
+    });
+
+  const affiliatedOrgsDisplay = project.affiliated_organizations?.length
+    ? project.affiliated_organizations
+        .map((org) =>
+          org.abbreviation ? `${org.name} (${org.abbreviation})` : org.name,
+        )
+        .join(', ')
+    : null;
+
+  const openAffiliatedOrgsDialog = useCallback(() => {
+    dispatch(
+      openModalDialog(UpdateAffiliatedOrganizationsDialog, {
+        resolve: { project },
+        size: 'lg',
+      }),
+    );
+  }, [dispatch, project]);
 
   return (
     <FormTable.Card className="card-bordered">
@@ -82,6 +118,25 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
           actions={
             user.is_staff ? (
               <FieldEditButton project={project} name="slug" />
+            ) : null
+          }
+        />
+
+        <FormTable.Item
+          label={translate('Affiliated organizations')}
+          value={renderFieldOrDash(affiliatedOrgsDisplay)}
+          actions={
+            canUpdateProject ? (
+              <CompactEditButton
+                onClick={openAffiliatedOrgsDialog}
+                disabled={project.is_removed}
+                tooltip={
+                  project.is_removed
+                    ? translate('Action is disabled for removed project')
+                    : undefined
+                }
+                variant="secondary"
+              />
             ) : null
           }
         />
