@@ -2,6 +2,21 @@
   position: relative;
 }
 
+.table-content-refetching {
+  opacity: 0.5;
+  pointer-events: none;
+  transition: opacity 0.15s ease;
+}
+
+.table-loading-overlay {
+  position: absolute;
+  inset: 0;
+  z-index: 10;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
 .dataTables_info {
   padding-top: 8px;
   margin-bottom: 8px;
