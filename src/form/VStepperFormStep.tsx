@@ -78,7 +78,7 @@ export const VStepperFormStepCard: FC<PropsWithChildren<StepCardProps>> = (
             )}
           </div>
           {props.actions && (
-            <div className="d-flex flex-grow-1">{props.actions}</div>
+            <div className="d-flex ms-auto">{props.actions}</div>
           )}
         </Card.Header>
         <Card.Body>
