@@ -671,7 +671,7 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
 
 // Standalone table header
 .table-standalone-header {
-  margin-bottom: get($content-spacing, desktop);
+  margin-bottom: 24px;
 
   .btn {
     height: 44px;
