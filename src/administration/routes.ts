@@ -538,6 +538,21 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    name: 'admin-affiliated-organizations',
+    url: 'affiliated-organizations/',
+    parent: 'admin-organizations-compliance',
+    component: lazyComponent(() =>
+      import('./affiliated-organizations/AffiliatedOrganizationsList').then(
+        (module) => ({
+          default: module.AffiliatedOrganizationsList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Affiliated organizations'),
+    },
+  },
+  {
     name: 'admin-organization-cost-policies',
     url: 'organization-cost-policies/',
     parent: 'admin-organizations-compliance',
