@@ -1,3 +1,4 @@
+import { capitalize, lowerCase } from 'lodash-es';
 import { FunctionComponent } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
@@ -18,6 +19,16 @@ export interface StateIndicatorProps {
   'data-testid'?: string;
 }
 
+/** Normalize backend state strings — e.g. "ACTIVE" → "Active", "OK" stays "OK" */
+const normalizeLabel = (label: string): string => {
+  if (!label) return label;
+  // Short all-caps acronyms (2-3 chars) stay as-is: OK, N/A
+  if (label.length <= 3 && label === label.toUpperCase()) return label;
+  // If the label is all uppercase, convert to title case
+  if (label === label.toUpperCase()) return capitalize(lowerCase(label));
+  return label;
+};
+
 export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
   active,
   ...props
@@ -37,6 +48,6 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
     {...props}
     data-testid={props['data-testid'] || 'default-state-indicator'}
   >
-    {props.label}
+    {normalizeLabel(props.label)}
   </Badge>
 );
