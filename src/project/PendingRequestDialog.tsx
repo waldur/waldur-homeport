@@ -62,6 +62,7 @@ export const PendingRequestDialog: FC<PendingRequestDialogProps> = ({
             action={() => cancelMutation.mutate()}
             variant="danger"
             disabled={cancelMutation.isPending}
+            disabledReason={translate('The request is being processed')}
             pending={cancelMutation.isPending}
           />
         </>

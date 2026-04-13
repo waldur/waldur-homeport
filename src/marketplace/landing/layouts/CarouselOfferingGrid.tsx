@@ -43,6 +43,8 @@ export const CarouselOfferingGrid: FC<CarouselOfferingGridProps> = ({
       <NoResult
         title={translate('No offerings')}
         message={translate('There are no offerings available in this section.')}
+        callback={tableProps.fetch}
+        buttonTitle={translate('Refresh')}
       />
     ) : null;
   }
