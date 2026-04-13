@@ -10,6 +10,12 @@ interface PricesTableProps {
   plan: Plan;
 }
 
+const formatPrice = (value) => {
+  if (value === undefined || value === null || value === '') return '0';
+  const num = parseFloat(value);
+  return isNaN(num) ? String(value) : String(num);
+};
+
 export const PricesTable: FC<PricesTableProps> = (props) => (
   <table className="table table-borderless">
     <thead>
@@ -26,7 +32,7 @@ export const PricesTable: FC<PricesTableProps> = (props) => (
           <td>
             <div className="form-control-static">{component.name}</div>
           </td>
-          <td>{props.plan.prices[component.type]}</td>
+          <td>{formatPrice(props.plan.prices[component.type])}</td>
           <td>
             <Field
               component="input"

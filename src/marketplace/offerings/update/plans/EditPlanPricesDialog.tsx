@@ -12,13 +12,18 @@ import { useNotify } from '@waldur/store/hooks';
 import { EDIT_PLAN_FORM_ID } from './constants';
 import { PricesTable } from './PricesTable';
 
+const parsePrice = (value: unknown): number => {
+  const num = parseFloat(String(value ?? 0));
+  return isNaN(num) ? 0 : num;
+};
+
 const getInitialValues = (plan: Plan, components: OfferingComponent[]) => {
   const availableComponentTypes = new Set(components.map((c) => c.type));
   const filterPrices = (prices) =>
     Object.fromEntries(
-      Object.entries(prices || {}).filter(([key]) =>
-        availableComponentTypes.has(key),
-      ),
+      Object.entries(prices || {})
+        .filter(([key]) => availableComponentTypes.has(key))
+        .map(([key, value]) => [key, parsePrice(value)]),
     );
 
   const filteredPrices = filterPrices(plan.prices);
