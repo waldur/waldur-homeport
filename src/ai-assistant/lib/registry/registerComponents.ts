@@ -1,4 +1,5 @@
 import { CodeBlock } from '@waldur/ai-assistant/components/blocks/CodeBlock';
+import { HomePortNavBlock } from '@waldur/ai-assistant/components/blocks/HomePortNavBlock';
 import { MarkdownBlock } from '@waldur/ai-assistant/components/blocks/MarkdownBlock';
 import { MermaidBlock } from '@waldur/ai-assistant/components/blocks/MermaidBlock';
 import { ResourceListBlock } from '@waldur/ai-assistant/components/blocks/ResourceListBlock';
@@ -30,6 +31,11 @@ uiRegistry.register({
 uiRegistry.register({
   key: 'vm_order',
   component: VMOrderBlock,
+});
+
+uiRegistry.register({
+  key: 'homeport_nav',
+  component: HomePortNavBlock,
 });
 
 uiRegistry.register({
