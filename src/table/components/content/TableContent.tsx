@@ -2,6 +2,7 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
+import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { ErrorView } from '@waldur/ErrorView';
 
@@ -33,6 +34,8 @@ export function TableContent() {
     display,
     filtersStorage,
   } = useTableContext();
+
+  const isRefetching = loading && hasRows;
 
   const tableHover = useMemo(
     () =>
@@ -83,14 +86,25 @@ export function TableContent() {
     );
   }
 
+  // Refetch loading overlay
+  const refetchOverlay = isRefetching ? (
+    <div className="table-loading-overlay">
+      <h1 className="mb-0">
+        <LoadingSpinnerIcon />
+      </h1>
+    </div>
+  ) : null;
+
   // Render grid mode
   if (mode === 'grid' && slots.gridItem) {
     return (
       <ErrorBoundary fallback={ErrorMessage}>
+        {refetchOverlay}
         <div
           className={classNames(
             'table-container',
             gridHover && 'grid-hover-shadow',
+            isRefetching && 'table-content-refetching',
           )}
         >
           <GridBody
@@ -108,10 +122,12 @@ export function TableContent() {
   // Render table mode
   return (
     <ErrorBoundary fallback={ErrorMessage}>
+      {refetchOverlay}
       <div
         className={classNames(
           'table-container',
           tableHover && 'table-hover-shadow',
+          isRefetching && 'table-content-refetching',
         )}
       >
         <TableView />
