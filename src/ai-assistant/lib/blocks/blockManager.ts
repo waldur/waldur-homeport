@@ -47,6 +47,23 @@ export function updateBlocks(
     ];
   }
 
+  // Handle homeport_nav data — navigation links to HomePort pages
+  // Backend sends: {"k":"homeport_nav","links":[{label,url,variant}],"context":"..."}
+  if (part.k === 'homeport_nav') {
+    return [
+      ...existingBlocks.filter((b) => b.key !== 'tool'),
+      {
+        id: randomUUID(),
+        key: 'homeport_nav',
+        content: ((part as Record<string, unknown>).context as string) || '',
+        nav_links: (part as Record<string, unknown>)
+          .links as UIBlock['nav_links'],
+        nav_context: (part as Record<string, unknown>).context as string,
+        status: 'complete',
+      },
+    ];
+  }
+
   // Handle vm_order data with structured fields
   // Backend sends: {"k":"vm_order","order_id":"...","name":"...","status":"...",...}
   if (part.k === 'vm_order') {
