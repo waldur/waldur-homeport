@@ -85,7 +85,24 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
         )}
         // Workaround for rendering tooltips for disabled dropdown menu items.
         // See also: https://stackoverflow.com/questions/57349166/
-        onClick={() => !props.disabled && props.action()}
+        onClick={(event) => {
+          if (props.disabled) {
+            return;
+          }
+
+          props.action();
+
+          // Fix: Dropdown toggle may stay focused after pointer selection,
+          // making button state look stuck until next click.
+          if (event.detail > 0) {
+            requestAnimationFrame(() => {
+              const activeElement = document.activeElement;
+              if (activeElement instanceof HTMLElement) {
+                activeElement.blur();
+              }
+            });
+          }
+        }}
         disabled={props.disabled}
       >
         <div className={props.disabled ? 'opacity-50' : undefined}>

@@ -6,6 +6,7 @@ import {
   TrashIcon,
 } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
+import type { MouseEvent } from 'react';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
@@ -78,6 +79,18 @@ export const OfferingStateActions = ({
   refreshOffering,
   className = undefined,
 }) => {
+  const runActionAndBlurOnPointerClick = (
+    event: MouseEvent<HTMLElement>,
+    action: () => void,
+  ) => {
+    action();
+
+    // Keep keyboard focus behavior; blur only for pointer interactions.
+    if (event.detail > 0) {
+      event.currentTarget.blur();
+    }
+  };
+
   const dispatch = useDispatch();
   const user = useUser();
   const router = useRouter();
@@ -260,7 +273,7 @@ export const OfferingStateActions = ({
     return (
       <ActionButton
         variant="tertiary"
-        action={() => setDraft()}
+        action={(event) => runActionAndBlurOnPointerClick(event, setDraft)}
         className={className}
         title={draftTitle}
       />
@@ -270,7 +283,7 @@ export const OfferingStateActions = ({
     <Dropdown as={ButtonGroup} className={className}>
       <ActionButton
         variant="primary"
-        action={() => callback()}
+        action={(event) => runActionAndBlurOnPointerClick(event, callback)}
         title={title}
         data-testid="offering-primary-state-action"
       />
