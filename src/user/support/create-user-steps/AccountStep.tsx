@@ -5,6 +5,7 @@ import {
 import { FC, useCallback } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
+import { Badge } from '@waldur/core/Badge';
 import { generatePassword } from '@waldur/core/generatePassword';
 import { composeValidators, email, required } from '@waldur/core/validators';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
@@ -114,14 +115,18 @@ export const AccountStep: FC<WizardStepProps> = (props) => {
         {editMode && (
           <span className="ms-2">
             {user?.has_usable_password ? (
-              <span className="badge badge-light-success fs-8 fw-semibold">
-                <ShieldCheckIcon weight="bold" className="me-1" />
+              <Badge
+                variant="success"
+                size="sm"
+                leftIcon={<ShieldCheckIcon weight="bold" />}
+                light
+              >
                 {translate('Set')}
-              </span>
+              </Badge>
             ) : (
-              <span className="badge badge-light-warning fs-8 fw-semibold">
+              <Badge variant="warning" size="sm" light>
                 {translate('Not set')}
-              </span>
+              </Badge>
             )}
           </span>
         )}

@@ -4,6 +4,7 @@ import {
   marketplaceOfferingTermsOfServiceList,
 } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
@@ -39,17 +40,17 @@ export const TosManagementSection: FC<OfferingSectionProps> = ({
         {
           title: translate('Status'),
           render: ({ row }) => (
-            <span
-              className={`badge ${
+            <Badge
+              variant={
                 row.is_active
-                  ? 'badge-success'
+                  ? 'success'
                   : row.is_active === false
-                    ? 'badge-warning'
-                    : 'badge-secondary'
-              }`}
+                    ? 'warning'
+                    : 'secondary'
+              }
             >
               {row.is_active ? translate('Active') : translate('Inactive')}
-            </span>
+            </Badge>
           ),
         },
       ]}

@@ -3,6 +3,7 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert, Table as BTable } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
+import { Badge } from '@waldur/core/Badge';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form/SubmitButton';
 import { Select } from '@waldur/form/themed-select';
@@ -176,9 +177,9 @@ export const Step2CustomerDiscovery: FC<WizardStepProps> = (props) => {
                     <td>
                       <strong>{customer.companyName}</strong>
                       {suggestion?.existing_mapping && (
-                        <span className="badge bg-info ms-2">
+                        <Badge variant="info" className="ms-2">
                           {translate('Already mapped')}
-                        </span>
+                        </Badge>
                       )}
                     </td>
                     <td>{customer.reference}</td>

@@ -4,6 +4,7 @@ import {
   PersonalAccessToken,
 } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
 import { formatDate, formatRelative } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -22,16 +23,22 @@ const TokenStatus: FunctionComponent<{ row: PersonalAccessToken }> = ({
 }) => {
   if (!row.is_active) {
     return (
-      <span className="badge badge-light-danger">{translate('Revoked')}</span>
+      <Badge variant="danger" light>
+        {translate('Revoked')}
+      </Badge>
     );
   }
   if (new Date(row.expires_at) < new Date()) {
     return (
-      <span className="badge badge-light-warning">{translate('Expired')}</span>
+      <Badge variant="warning" light>
+        {translate('Expired')}
+      </Badge>
     );
   }
   return (
-    <span className="badge badge-light-success">{translate('Active')}</span>
+    <Badge variant="success" light>
+      {translate('Active')}
+    </Badge>
   );
 };
 

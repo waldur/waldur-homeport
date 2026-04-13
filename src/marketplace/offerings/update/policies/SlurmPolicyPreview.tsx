@@ -315,11 +315,9 @@ const DateProjections: FC<DateProjectionsProps> = ({
             <span className="text-muted">
               {translate('Current QoS Status')}:{' '}
             </span>
-            <span
-              className={`badge bg-${getQosStatusBadge(currentQosStatus).variant}`}
-            >
+            <Badge variant={getQosStatusBadge(currentQosStatus).variant}>
               {getQosStatusBadge(currentQosStatus).label}
-            </span>
+            </Badge>
             {usagePercentage !== undefined && (
               <span className="ms-2 text-muted">
                 ({usagePercentage.toFixed(1)}% {translate('of allocation')})
