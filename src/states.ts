@@ -9,6 +9,7 @@ import { states as issuesRoutes } from '@waldur/issues/routes';
 import { states as marketplaceRoutes } from '@waldur/marketplace/routes';
 import { states as marketplaceChecklistRoutes } from '@waldur/marketplace-checklist/routes';
 import { states as marketplaceRemoteRoutes } from '@waldur/marketplace-remote/routes';
+import { states as openportalRoutes } from '@waldur/openportal/routes';
 import { states as projectRoutes } from '@waldur/project/routes';
 import { states as proposalsRoutes } from '@waldur/proposals/routes';
 import { states as rancherRoutes } from '@waldur/rancher/routes';
@@ -36,6 +37,7 @@ export const states: StateDeclaration[] = [
   ...administrationRoutes,
   ...rancherRoutes,
   ...reportingRoutes,
+  ...openportalRoutes,
   ...aboutRoutes,
   ...errorRoutes,
 ];
