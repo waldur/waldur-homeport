@@ -151,6 +151,7 @@ export const UserProposalsList: FC = () => {
       columns={columns}
       title={translate('My proposals')}
       verboseName={translate('Proposals')}
+      standalone
       hasQuery={true}
       hasOptionalColumns
       showPageSizeSelector={true}

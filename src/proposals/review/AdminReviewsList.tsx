@@ -116,6 +116,7 @@ export const AdminReviewsList: FC = () => {
       ]}
       title={translate('All reviews')}
       verboseName={translate('Reviews')}
+      standalone
       hasQuery={true}
       filters={<ProposalReviewsFilter />}
       rowActions={ReviewsRowActions}

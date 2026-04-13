@@ -14,7 +14,7 @@ export const SummaryWidget = ({
       : Math.max(2, Math.floor(12 / Math.min(stats.length, 6)));
 
   return (
-    <Row className="g-4 mb-5">
+    <Row className="g-4">
       {stats.map((stat, index) => (
         <Col key={index} sm={colWidth}>
           <StatsCard label={stat.label} value={stat.value} />

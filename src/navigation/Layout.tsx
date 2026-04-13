@@ -75,7 +75,7 @@ export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const layout = useLayout();
   const tabs = useTabs();
 
-  const showToolbar = Boolean(actions || tabs?.length || extraTabs?.length);
+  const showToolbar = Boolean(actions || tabs?.length > 1 || extraTabs?.length);
 
   useEffect(() => {
     layout.setLayout({

@@ -61,7 +61,7 @@ export const MyReviewsPage: FC = () => {
   }
 
   return (
-    <div className="d-flex flex-column gap-6">
+    <div className="d-flex flex-column" style={{ gap: 16 }}>
       {/* Reviewer profile summary */}
       <ReviewerProfileSummaryCard onProfileStatus={handleProfileStatus} />
 
