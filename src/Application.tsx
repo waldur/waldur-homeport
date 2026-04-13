@@ -6,7 +6,6 @@ import { Provider } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { ThreadProvider } from '@waldur/ai-assistant/logic/ThreadProvider';
-import { ThreadRuntimeProvider } from '@waldur/ai-assistant/logic/ThreadRuntimeProvider';
 import { queryClient } from '@waldur/core/queryClient';
 import { DrawerRoot } from '@waldur/drawer/DrawerRoot';
 import { ModalRoot } from '@waldur/modal/ModalRoot';
@@ -39,14 +38,12 @@ export const Application: FunctionComponent = () => {
             <LayoutProvider>
               <ThemeProvider>
                 <ThreadProvider>
-                  <ThreadRuntimeProvider>
-                    <NotificationContainer />
-                    <ModalRoot />
-                    <ConfirmModalRoot />
-                    <DrawerRoot />
-                    <UIView />
-                    <MasterInit />
-                  </ThreadRuntimeProvider>
+                  <NotificationContainer />
+                  <ModalRoot />
+                  <ConfirmModalRoot />
+                  <DrawerRoot />
+                  <UIView />
+                  <MasterInit />
                 </ThreadProvider>
               </ThemeProvider>
             </LayoutProvider>

@@ -11,6 +11,7 @@ import { ChatHistorySidebar } from '@waldur/ai-assistant/components/ChatHistoryS
 import { LLMErrorBoundary } from '@waldur/ai-assistant/components/LLMErrorBoundary';
 import { Thread } from '@waldur/ai-assistant/components/Thread';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
+import { ThreadRuntimeProvider } from '@waldur/ai-assistant/logic/ThreadRuntimeProvider';
 import {
   acknowledgeDisclosure,
   isDisclosureAcknowledged,
@@ -238,13 +239,15 @@ export const LLMChatDrawer: React.FC<LLMChatDrawerProps> = ({ close }) => {
   }
 
   return (
-    <div className="aui-chat-drawer">
-      <ChatHistorySidebar />
-      <div className="flex-grow-1 d-flex flex-column overflow-hidden">
-        <LLMErrorBoundary onClose={close}>
-          <Thread />
-        </LLMErrorBoundary>
+    <ThreadRuntimeProvider>
+      <div className="aui-chat-drawer">
+        <ChatHistorySidebar />
+        <div className="flex-grow-1 d-flex flex-column overflow-hidden">
+          <LLMErrorBoundary onClose={close}>
+            <Thread />
+          </LLMErrorBoundary>
+        </div>
       </div>
-    </div>
+    </ThreadRuntimeProvider>
   );
 };
