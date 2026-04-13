@@ -141,6 +141,7 @@ export const AdminProposalsList: FC = () => {
       ]}
       title={translate('All proposals')}
       verboseName={translate('Proposals')}
+      standalone
       hasQuery={true}
       filters={<ProposalProposalsFilter />}
       rowActions={({ row }) => (

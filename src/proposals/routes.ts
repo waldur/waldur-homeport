@@ -275,7 +275,6 @@ export const states: StateDeclaration[] = [
       })),
     ),
     data: {
-      breadcrumb: () => translate('My reviews'),
       priority: 100,
     },
   },
@@ -288,9 +287,6 @@ export const states: StateDeclaration[] = [
         default: module.MyAssignmentsPage,
       })),
     ),
-    data: {
-      breadcrumb: () => translate('Assignments'),
-    },
   },
   {
     name: 'reviews-invitations',
@@ -301,9 +297,6 @@ export const states: StateDeclaration[] = [
         default: module.MyInvitationsPage,
       })),
     ),
-    data: {
-      breadcrumb: () => translate('Invitations'),
-    },
   },
   {
     name: 'reviews-calls',
@@ -314,9 +307,6 @@ export const states: StateDeclaration[] = [
         default: module.MyCallsPage,
       })),
     ),
-    data: {
-      breadcrumb: () => translate('Calls'),
-    },
   },
 
   // Admin routes for staff/support/call managers
