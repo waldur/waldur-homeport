@@ -1,4 +1,4 @@
-import { ArrowRightIcon, UserCircleIcon } from '@phosphor-icons/react';
+import { ArrowRightIcon, UserIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
@@ -67,7 +67,7 @@ export const ReviewerProfileSummaryCard: FC<
               className="d-flex align-items-center justify-content-center rounded-circle bg-warning text-white"
               style={{ width: 56, height: 56, minWidth: 56 }}
             >
-              <UserCircleIcon size={32} weight="bold" />
+              <UserIcon size={28} weight="regular" />
             </div>
             <div className="flex-grow-1">
               <h4 className="mb-1">{translate('Reviewer profile required')}</h4>
@@ -97,10 +97,10 @@ export const ReviewerProfileSummaryCard: FC<
         <div className="d-flex align-items-center gap-4">
           {/* Avatar/Icon */}
           <div
-            className="d-flex align-items-center justify-content-center rounded-circle bg-light-primary text-primary"
+            className="d-flex align-items-center justify-content-center rounded-circle bg-tertiary text-quaternary"
             style={{ width: 56, height: 56, minWidth: 56 }}
           >
-            <UserCircleIcon size={32} weight="bold" />
+            <UserIcon size={28} weight="regular" />
           </div>
 
           {/* Profile info */}

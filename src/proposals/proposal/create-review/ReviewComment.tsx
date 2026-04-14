@@ -28,7 +28,7 @@ export const ReviewComment: FC<PropsWithChildren<ReviewCommentProps>> = (
       )}
     >
       <Avatar
-        labelClassName="bg-primary-200 text-primary-700"
+        labelClassName="bg-tertiary text-quaternary"
         name={props.title}
         size={32}
         circle

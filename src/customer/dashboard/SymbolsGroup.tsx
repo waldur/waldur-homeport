@@ -17,19 +17,6 @@ interface SymbolsGroupProps {
   onClick?(): void;
 }
 
-const colorClasses = [
-  'bg-primary text-inverse-primary',
-  'bg-warning text-inverse-warning',
-  'bg-success text-inverse-success',
-  'bg-danger text-inverse-danger',
-  'bg-dark text-inverse-dark',
-  'bg-info text-inverse-info',
-];
-
-const getSymbolColorClass = (index: number) => {
-  return colorClasses[index % colorClasses.length];
-};
-
 export const SymbolsGroup: FC<SymbolsGroupProps> = ({
   max = 8,
   nameKey = 'full_name',
@@ -61,11 +48,7 @@ export const SymbolsGroup: FC<SymbolsGroupProps> = ({
           />
         ) : (
           <div className={`symbol symbol-circle symbol-${size}px`}>
-            <div
-              className={`symbol-label fs-4 fw-bold ${getSymbolColorClass(
-                index,
-              )}`}
-            >
+            <div className="symbol-label fs-4 fw-bold bg-tertiary text-quaternary">
               {item[emailKey] ? item[emailKey][0].toUpperCase() : '?'}
             </div>
           </div>
