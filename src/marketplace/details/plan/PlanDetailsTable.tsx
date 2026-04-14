@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
-import { connect, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
@@ -13,13 +13,12 @@ import { ComponentRow } from './ComponentRow';
 import { LimitlessComponentsTable } from './LimitlessComponentsTable';
 import { TotalLimitComponentsTable } from './TotalLimitComponentsTable';
 import { Component, PlanDetailsTableProps } from './types';
-import { pricesSelector } from './utils';
 
 const HeaderRow = (props: {
   periods?: string[];
   concealBillingInfo?: boolean;
 }) => (
-  <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
+  <tr className="align-middle">
     <th className="col-sm-1" style={{ width: '5%' }}>
       {translate('Component name')}
     </th>
@@ -169,7 +168,11 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
         )}
         {usageRows.length > 0 && (
           <>
-            <p>
+            <LimitlessComponentsTable
+              components={usageRows}
+              concealBillingInfo={props.concealBillingInfo}
+            />
+            <p className="text-muted mt-2 mb-4 fs-7">
               {hasExtraRows
                 ? translate(
                     'Additionally service provider can charge for usage of the following components',
@@ -178,63 +181,61 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
                     'Service provider can charge for usage of the following components',
                   )}
             </p>
-            <LimitlessComponentsTable
-              components={usageRows}
-              concealBillingInfo={props.concealBillingInfo}
-            />
           </>
         )}
         {totalLimitedRows.length > 0 && (
           <>
-            <p>
-              {translate(
-                'Fee applied according to the maximum value reported by service provider over the whole active state of resource.',
-              )}
-            </p>
             <TotalLimitComponentsTable
               components={totalLimitedRows}
               total={totalLimitTotal}
               viewMode={props.viewMode}
               hidePrices={props.concealBillingInfo}
             />
+            <p className="text-muted mt-2 mb-4 fs-7">
+              {translate(
+                'Fee applied according to the maximum value reported by service provider over the whole active state of resource.',
+              )}
+            </p>
           </>
         )}
         {initialRows.length > 0 && (
           <>
-            <p>{translate('A one-time fee applied on activation.')}</p>
             <LimitlessComponentsTable
               components={initialRows}
               concealBillingInfo={props.concealBillingInfo}
             />
+            <p className="text-muted mt-2 mb-4 fs-7">
+              {translate('A one-time fee applied on activation.')}
+            </p>
           </>
         )}
         {prepaidRows.length > 0 && (
           <>
-            <p>
-              {translate(
-                'Prepaid fee applied on activation based on ordered quantity and duration.',
-              )}
-            </p>
             <TotalLimitComponentsTable
               components={prepaidRows}
               total={prepaidTotal}
               viewMode={true}
               hidePrices={props.concealBillingInfo}
             />
+            <p className="text-muted mt-2 mb-4 fs-7">
+              {translate(
+                'Prepaid fee applied on activation based on ordered quantity and duration.',
+              )}
+            </p>
           </>
         )}
         {switchRows.length > 0 && (
           <>
-            <p>{translate('Fee applied each time this plan is activated.')}</p>
             <LimitlessComponentsTable
               components={switchRows}
               concealBillingInfo={props.concealBillingInfo}
             />
+            <p className="text-muted mt-2 mb-4 fs-7">
+              {translate('Fee applied each time this plan is activated.')}
+            </p>
           </>
         )}
       </div>
     </div>
   );
 };
-
-export const PlanDetailsTable = connect(pricesSelector)(PureDetailsTable);
