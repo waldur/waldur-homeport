@@ -1,9 +1,15 @@
 import { FC } from 'react';
+import { reduxForm, Field } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
+import { SelectField } from '@waldur/form/SelectField';
 import { translate } from '@waldur/i18n';
+import { TableFilterItem } from '@waldur/table/TableFilterItem';
 
-import { formatBillingPeriod, getPreviousBillingPeriods } from './utils';
+import {
+  getCurrentBillingPeriod,
+  formatBillingPeriod,
+  getPreviousBillingPeriods,
+} from './utils';
 
 interface BillingPeriodOption {
   value: string;
@@ -17,30 +23,31 @@ const billingPeriodOptions: BillingPeriodOption[] = getPreviousBillingPeriods(
   label: formatBillingPeriod(period),
 }));
 
-interface UsageMonitoringFilterProps {
-  billingPeriod: string;
-  onBillingPeriodChange: (period: string) => void;
-}
+export const FORM_ID = 'UsageMonitoringFilter';
 
-export const UsageMonitoringFilter: FC<UsageMonitoringFilterProps> = ({
-  billingPeriod,
-  onBillingPeriodChange,
-}) => {
-  const selectedPeriod = billingPeriodOptions.find(
-    (o) => o.value === billingPeriod,
-  );
-
-  return (
-    <Select
-      placeholder={translate('Billing period')}
-      value={selectedPeriod}
-      onChange={(option: BillingPeriodOption | null) =>
-        option && onBillingPeriodChange(option.value)
-      }
+const PureUsageMonitoringFilter: FC = () => (
+  <TableFilterItem
+    title={translate('Billing period')}
+    name="billing_period"
+    badgeValue={(value) => value?.label}
+    ellipsis={false}
+  >
+    <Field
+      name="billing_period"
+      component={SelectField}
       options={billingPeriodOptions}
       isClearable={false}
-      className="metronic-select-container"
-      classNamePrefix="metronic-select"
+      placeholder={translate('Billing period')}
     />
-  );
-};
+  </TableFilterItem>
+);
+
+export const UsageMonitoringFilter = reduxForm({
+  form: FORM_ID,
+  initialValues: {
+    billing_period:
+      billingPeriodOptions.find((o) => o.value === getCurrentBillingPeriod()) ||
+      billingPeriodOptions[0],
+  },
+  destroyOnUnmount: false,
+})(PureUsageMonitoringFilter);

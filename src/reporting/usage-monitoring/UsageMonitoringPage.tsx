@@ -1,5 +1,7 @@
-import { useMemo } from 'react';
-import { FC, useState } from 'react';
+import { FC, useMemo } from 'react';
+import { useSelector } from 'react-redux';
+import { getFormValues } from 'redux-form';
+import { createSelector } from 'reselect';
 import {
   marketplaceStatsResourcesMissingUsageList,
   ResourceMissingUsage,
@@ -15,8 +17,7 @@ import { useTable } from '@waldur/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 
-import { UsageMonitoringFilter } from './UsageMonitoringFilter';
-import { getCurrentBillingPeriod } from './utils';
+import { FORM_ID, UsageMonitoringFilter } from './UsageMonitoringFilter';
 
 const ResourceNameColumn = ({ row }: { row: ResourceMissingUsage }) => (
   <Link
@@ -74,40 +75,19 @@ const StateColumn = ({ row }: { row: ResourceMissingUsage }) => {
   );
 };
 
-const columns: Column<ResourceMissingUsage>[] = [
-  {
-    title: translate('Resource'),
-    render: ResourceNameColumn,
+const mapStateToFilter = createSelector(
+  getFormValues(FORM_ID),
+  (filterValues: any) => {
+    const filter: any = {};
+    if (filterValues?.billing_period) {
+      filter.billing_period = filterValues.billing_period.value;
+    }
+    return filter;
   },
-  {
-    title: translate('Offering'),
-    render: OfferingColumn,
-  },
-  {
-    title: translate('Provider'),
-    render: ProviderColumn,
-  },
-  {
-    title: translate('Organization'),
-    render: CustomerColumn,
-  },
-  {
-    title: translate('Last reported'),
-    render: DaysSinceColumn,
-  },
-  {
-    title: translate('State'),
-    render: StateColumn,
-  },
-];
+);
 
 export const UsageMonitoringPage: FC = () => {
-  const [billingPeriod, setBillingPeriod] = useState(getCurrentBillingPeriod());
-
-  const filter = useMemo(
-    () => ({ billing_period: billingPeriod }),
-    [billingPeriod],
-  );
+  const filter = useSelector(mapStateToFilter);
 
   const tableProps = useTable({
     table: 'MissingUsageTable',
@@ -115,20 +95,59 @@ export const UsageMonitoringPage: FC = () => {
     filter,
   });
 
+  const columns = useMemo<Column<ResourceMissingUsage>[]>(
+    () => [
+      {
+        title: translate('Resource'),
+        render: ResourceNameColumn,
+        export: 'name',
+      },
+      {
+        title: translate('Offering'),
+        render: OfferingColumn,
+        export: 'offering_name',
+      },
+      {
+        title: translate('Provider'),
+        render: ProviderColumn,
+        export: 'provider_name',
+      },
+      {
+        title: translate('Organization'),
+        render: CustomerColumn,
+        export: 'customer_name',
+      },
+      {
+        title: translate('Last reported'),
+        render: DaysSinceColumn,
+        export: (row) => {
+          const days = row.days_since_last_report;
+          if (days === null) return translate('Never reported');
+          if (days === 0) return translate('Today');
+          if (days === 1) return translate('1 day ago');
+          return translate('{days} days ago', { days });
+        },
+      },
+      {
+        title: translate('State'),
+        render: StateColumn,
+        export: 'state',
+      },
+    ],
+    [],
+  );
+
   return (
     <>
-      <ReportingTitle reportKey="usage-monitoring">
-        <UsageMonitoringFilter
-          billingPeriod={billingPeriod}
-          onBillingPeriodChange={setBillingPeriod}
-        />
-      </ReportingTitle>
+      <ReportingTitle reportKey="usage-monitoring" />
       <Table<ResourceMissingUsage>
         {...tableProps}
         columns={columns}
         verboseName={translate('resources')}
         showPageSizeSelector
         hasQuery
+        enableExport
+        filters={<UsageMonitoringFilter />}
       />
     </>
   );
