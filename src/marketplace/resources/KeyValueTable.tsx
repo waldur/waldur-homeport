@@ -9,7 +9,7 @@ export const KeyValueTable: FunctionComponent<any> = (props) => (
     className="table align-middle table-row-bordered fs-6 gy-4 no-footer"
   >
     <thead>
-      <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
+      <tr className="align-middle">
         <th>{translate('Key')}</th>
         <th>{translate('Value')}</th>
       </tr>

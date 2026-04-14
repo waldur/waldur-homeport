@@ -51,7 +51,7 @@ export const LimitsSection = ({
       <Card.Body>
         <table className="table align-middle table-row-bordered fs-6 gy-4 no-footer">
           <thead>
-            <tr className="text-start text-muted bg-light fw-bolder fs-7 text-uppercase gs-0">
+            <tr className="align-middle">
               <th className="col-sm-1">{translate('Name')}</th>
               <th className="col-sm-1">{translate('Measured unit')}</th>
               <th className="col-sm-1">{translate('Limit')}</th>
