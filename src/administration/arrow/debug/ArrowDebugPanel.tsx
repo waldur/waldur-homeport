@@ -1,4 +1,4 @@
-import { ArrowsClockwise, Trash } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon, TrashIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 import { Alert, Card, Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
@@ -97,7 +97,7 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
                   <ActionButton
                     action={handleTriggerConsumptionSync}
                     title={translate('Sync consumption')}
-                    iconNode={<ArrowsClockwise />}
+                    iconNode={<ArrowsClockwiseIcon weight="bold" />}
                     variant="primary"
                     pending={triggerConsumptionSync.isPending}
                   />
@@ -115,7 +115,7 @@ export const ArrowDebugPanel = ({ settings }: ArrowDebugPanelProps) => {
                   <ActionButton
                     action={handleCleanupConsumption}
                     title={translate('Cleanup')}
-                    iconNode={<Trash />}
+                    iconNode={<TrashIcon weight="bold" />}
                     variant="danger"
                     pending={cleanupConsumption.isPending}
                   />

@@ -1,4 +1,4 @@
-import { Check, Trash, X } from '@phosphor-icons/react';
+import { CheckIcon, TrashIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -99,7 +99,7 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
             isConfirming ? translate('Confirming...') : translate('Confirm')
           }
           action={handleConfirm}
-          iconNode={<Check weight="bold" />}
+          iconNode={<CheckIcon weight="bold" />}
           iconColor="success"
           className="text-success"
           disabled={isLoading}
@@ -107,7 +107,7 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
         <ActionItem
           title={translate('Reject')}
           action={handleReject}
-          iconNode={<X weight="bold" />}
+          iconNode={<XIcon weight="bold" />}
           iconColor="danger"
           className="text-danger"
           disabled={isLoading}
@@ -115,7 +115,7 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
         <ActionItem
           title={isDeleting ? translate('Deleting...') : translate('Delete')}
           action={handleDelete}
-          iconNode={<Trash weight="bold" />}
+          iconNode={<TrashIcon weight="bold" />}
           disabled={isLoading}
         />
       </ActionsDropdownComponent>
@@ -128,7 +128,7 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
       <ActionItem
         title={isDeleting ? translate('Deleting...') : translate('Delete')}
         action={handleDelete}
-        iconNode={<Trash weight="bold" />}
+        iconNode={<TrashIcon weight="bold" />}
         disabled={isDeleting}
       />
     </ActionsDropdownComponent>

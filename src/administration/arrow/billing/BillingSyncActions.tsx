@@ -1,4 +1,4 @@
-import { Eye } from '@phosphor-icons/react';
+import { EyeIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import type { ArrowBillingSync } from 'waldur-js-client';
@@ -36,7 +36,7 @@ export const BillingSyncActions = ({ row }: BillingSyncActionsProps) => {
       <ActionButton
         action={handleViewItems}
         title={translate('View items')}
-        iconNode={<Eye />}
+        iconNode={<EyeIcon weight="bold" />}
         variant="secondary"
       />
     </ActionsDropdown>

@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -35,7 +35,7 @@ export const ForceImportConsumptionButton = ({
     <ActionButton
       action={handleClick}
       title={translate('Force import')}
-      iconNode={<ArrowsClockwise weight="bold" />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
       variant="primary"
     />
   );

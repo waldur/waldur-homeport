@@ -1,4 +1,4 @@
-import { ShieldCheck } from '@phosphor-icons/react';
+import { ShieldCheckIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
@@ -14,7 +14,7 @@ export const AdminAccessInfoCard: FC<AdminAccessInfoCardProps> = ({
   <Card className="card-bordered mb-4">
     <Card.Body>
       <div className="d-flex align-items-center gap-3">
-        <ShieldCheck size={32} weight="duotone" className="text-primary" />
+        <ShieldCheckIcon size={32} weight="duotone" className="text-primary" />
         <div>
           <h5 className="mb-1">{translate('Administrative staff')}</h5>
           <p className="text-muted mb-0 fs-7">{description}</p>

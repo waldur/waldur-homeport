@@ -1,4 +1,4 @@
-import { TextColumns } from '@phosphor-icons/react';
+import { TextColumnsIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -164,7 +164,7 @@ export const BaseOfferingsList: FunctionComponent<{
                 }),
               );
             }}
-            iconNode={<TextColumns weight="bold" />}
+            iconNode={<TextColumnsIcon weight="bold" />}
             staff
           />,
         ]

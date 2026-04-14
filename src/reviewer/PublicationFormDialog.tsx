@@ -1,4 +1,4 @@
-import { PencilSimple, PlusCircle } from '@phosphor-icons/react';
+import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
 import {
   nestedReviewerProfilePublicationsCreate,
@@ -105,9 +105,9 @@ export const PublicationFormDialog = ({
             closeButton
             iconNode={
               isEdit ? (
-                <PencilSimple weight="bold" />
+                <PencilSimpleIcon weight="bold" />
               ) : (
-                <PlusCircle weight="bold" />
+                <PlusCircleIcon weight="bold" />
               )
             }
             iconColor={isEdit ? 'warning' : 'success'}

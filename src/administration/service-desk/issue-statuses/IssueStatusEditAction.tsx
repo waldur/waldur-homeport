@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -25,7 +25,7 @@ export const IssueStatusEditAction = ({
   return (
     <ActionItem
       title={translate('Edit')}
-      iconNode={<PencilSimple />}
+      iconNode={<PencilSimpleIcon weight="bold" />}
       action={() =>
         dispatch(
           openModalDialog(IssueStatusFormDialog, {

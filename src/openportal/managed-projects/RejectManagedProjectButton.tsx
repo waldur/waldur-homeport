@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { openportalManagedProjectsReject } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { waitForConfirmation } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
@@ -54,8 +54,7 @@ export const RejectManagedProjectButton = ({ row, as, className, refetch }) => {
     translate('Click to reject this project.'),
     <>
       {isLoading ? (
-        /* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */
-        <LoadingSpinnerIcon className="me-1" />
+        <LoadingSpinnerSimple className="me-1" />
       ) : (
         <ActionItem
           as={as}

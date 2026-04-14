@@ -4,7 +4,7 @@ import { useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
 import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
 import { SubmitButton } from '@waldur/form';
@@ -140,8 +140,8 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
                     children={
                       loading ? (
                         <span className="svg-icon svg-icon-2">
-                          {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-                          <LoadingSpinnerIcon />
+                          {}
+                          <LoadingSpinnerSimple />
                         </span>
                       ) : props.step !== props.steps.length - 1 ? (
                         <span className="svg-icon svg-icon-2">
@@ -198,8 +198,8 @@ const WizardFormPure: FC<WizardFormProps> = ({ modalProps, ...props }) => {
                 children={
                   loading ? (
                     <span className="svg-icon svg-icon-2">
-                      {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-                      <LoadingSpinnerIcon />
+                      {}
+                      <LoadingSpinnerSimple />
                     </span>
                   ) : props.step !== props.steps.length - 1 ? (
                     <span className="svg-icon svg-icon-2">

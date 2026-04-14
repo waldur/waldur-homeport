@@ -3,7 +3,7 @@ import { FunctionComponent } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
 import { Badge } from './Badge';
-import { LoadingSpinnerIcon } from './LoadingSpinner';
+import { LoadingSpinnerSimple } from './LoadingSpinner';
 
 export interface StateIndicatorProps {
   label: string;
@@ -36,7 +36,7 @@ export const StateIndicator: FunctionComponent<StateIndicatorProps> = ({
   <Badge
     rightIcon={
       active ? (
-        <LoadingSpinnerIcon
+        <LoadingSpinnerSimple
           className={
             props.light || props.outline
               ? `text-${props.variant}`

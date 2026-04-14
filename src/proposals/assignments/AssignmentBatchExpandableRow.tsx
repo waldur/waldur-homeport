@@ -1,4 +1,4 @@
-import { ShieldWarning } from '@phosphor-icons/react';
+import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
@@ -78,8 +78,11 @@ const OverrideIndicator: FC<{
           })
     }
   >
-    <Badge variant="warning" outline>
-      <ShieldWarning size={14} weight="bold" className="me-1" />
+    <Badge
+      variant="warning"
+      leftIcon={<ShieldWarningIcon size={14} weight="bold" />}
+      outline
+    >
       {translate('Overridden')}
     </Badge>
   </Tip>
@@ -248,7 +251,7 @@ export const AssignmentBatchExpandableRow: FC<
               <ActionItem
                 title={translate('Force unblock')}
                 action={() => handleForceUnblock(item)}
-                iconNode={<ShieldWarning weight="bold" />}
+                iconNode={<ShieldWarningIcon weight="bold" />}
                 iconColor="warning"
                 className="text-warning"
               />

@@ -3,7 +3,7 @@ import { FC, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersCancel } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showSuccess, showErrorResponse } from '@waldur/store/notify';
@@ -33,8 +33,7 @@ export const CancelOrderButton: FC<CancelOrderButtonProps> = (props) => {
   return (
     <>
       {loading ? (
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        <LoadingSpinnerIcon className="me-1" />
+        <LoadingSpinnerSimple className="me-1" />
       ) : (
         <ActionItem
           className="text-danger"

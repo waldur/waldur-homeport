@@ -1,4 +1,4 @@
-import { ArrowCounterClockwise } from '@phosphor-icons/react';
+import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -69,7 +69,7 @@ export const PubSubMetricsResetButton: FC = () => {
       variant="secondary"
       onClick={handleReset}
       label={translate('Reset metrics')}
-      iconNode={<ArrowCounterClockwise weight="bold" />}
+      iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
       iconOnLeft
     />
   );

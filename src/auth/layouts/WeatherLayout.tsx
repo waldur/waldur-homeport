@@ -1,3 +1,9 @@
+import {
+  SunIcon,
+  CloudIcon,
+  CloudRainIcon,
+  SnowflakeIcon,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useEffect, useState } from 'react';
 
@@ -23,26 +29,26 @@ type WeatherType = 'sunny' | 'cloudy' | 'rainy' | 'snowy';
 
 const WEATHER_THEMES: Record<
   WeatherType,
-  { gradient: string; icon: string; animation: string }
+  { gradient: string; icon: any; animation: string }
 > = {
   sunny: {
     gradient: 'linear-gradient(135deg, #f6d365 0%, #fda085 100%)',
-    icon: 'fa-sun',
+    icon: SunIcon,
     animation: 'sunny',
   },
   cloudy: {
     gradient: 'linear-gradient(135deg, #bdc3c7 0%, #2c3e50 100%)',
-    icon: 'fa-cloud',
+    icon: CloudIcon,
     animation: 'cloudy',
   },
   rainy: {
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
-    icon: 'fa-cloud-rain',
+    icon: CloudRainIcon,
     animation: 'rainy',
   },
   snowy: {
     gradient: 'linear-gradient(135deg, #e0e5ec 0%, #a8c0d1 100%)',
-    icon: 'fa-snowflake',
+    icon: SnowflakeIcon,
     animation: 'snowy',
   },
 };
@@ -112,7 +118,7 @@ export const WeatherLayout = () => {
       <div className="layout-weather-header">
         <LanguageSelectorBox />
         <div className="layout-weather-indicator">
-          <i className={`fa ${theme.icon}`} />
+          <theme.icon size={24} />
         </div>
         <ThemeSwitcherButton />
       </div>

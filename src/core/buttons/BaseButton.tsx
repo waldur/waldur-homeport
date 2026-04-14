@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 
 interface BaseButtonProps {
@@ -95,7 +95,9 @@ export const BaseButton: FC<BaseButtonProps> = ({
       form={form}
       {...dataProps}
     >
-      {pending && <LoadingSpinnerIcon className={label ? 'me-1' : undefined} />}
+      {pending && (
+        <LoadingSpinnerSimple className={label ? 'me-1' : undefined} />
+      )}
       {!pending && !iconRight && iconElement}
       {label}
       {!pending && iconRight && iconElement}

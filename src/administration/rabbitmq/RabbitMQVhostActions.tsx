@@ -1,4 +1,4 @@
-import { Eraser, Trash } from '@phosphor-icons/react';
+import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
@@ -238,7 +238,7 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
               onClick={() => handlePurgePattern(preset.pattern)}
               disabled={count === 0}
             >
-              <Eraser size={18} weight="bold" className="me-2" />
+              <EraserIcon size={18} weight="bold" className="me-2" />
               {translate('Purge {label}', { label: preset.label })}{' '}
               <span className="text-muted">({count})</span>
             </Dropdown.Item>
@@ -255,7 +255,7 @@ export const RabbitMQVhostActions: FC<RabbitMQVhostActionsProps> = ({
               disabled={count === 0}
               className="text-danger"
             >
-              <Trash size={18} weight="bold" className="me-2" />
+              <TrashIcon size={18} weight="bold" className="me-2" />
               {translate('Delete {label}', { label: preset.label })}{' '}
               <span className="text-muted">({count})</span>
             </Dropdown.Item>

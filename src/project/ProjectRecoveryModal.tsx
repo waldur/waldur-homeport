@@ -1,4 +1,8 @@
-import { ArrowCounterClockwiseIcon } from '@phosphor-icons/react';
+import {
+  ArrowCounterClockwiseIcon,
+  CheckIcon,
+  WarningIcon,
+} from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
@@ -149,20 +153,20 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
               </p>
               <ul className="list-unstyled">
                 <li className="mb-2">
-                  <i className="fa fa-check text-success me-2" />
+                  <CheckIcon className="text-success me-2" weight="bold" />
                   {translate('Restore project access and functionality')}
                 </li>
                 <li className="mb-2">
-                  <i className="fa fa-check text-success me-2" />
+                  <CheckIcon className="text-success me-2" weight="bold" />
                   {translate('Re-enable project management capabilities')}
                 </li>
                 <li className="mb-2">
-                  <i className="fa fa-exclamation-triangle text-warning me-2" />
+                  <WarningIcon className="text-warning me-2" weight="bold" />
                   {translate('Resources will need to be manually recreated')}
                 </li>
                 {!hasTerminationMetadata && (
                   <li className="mb-2">
-                    <i className="fa fa-exclamation-triangle text-warning me-2" />
+                    <WarningIcon className="text-warning me-2" weight="bold" />
                     {translate(
                       'User roles will need to be manually reassigned',
                     )}

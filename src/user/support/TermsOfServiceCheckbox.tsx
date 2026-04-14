@@ -4,7 +4,7 @@ import { User } from 'waldur-js-client';
 
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { formatJsx, translate } from '@waldur/i18n';
 
 import { useUpdateUser } from './useUpdateUser';
@@ -57,7 +57,7 @@ export const TermsOfServiceCheckbox: FunctionComponent<
       </Form.Check>
 
       {isLoading && (
-        <LoadingSpinnerIcon className="ms-2" data-testid="tos-spinner" />
+        <LoadingSpinnerSimple className="ms-2" data-testid="tos-spinner" />
       )}
     </div>
   );

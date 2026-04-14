@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
 import { Link } from '@waldur/core/Link';
@@ -46,7 +47,7 @@ export const ReportingTitle: FC<ReportingTitleProps> = ({
             params={backParams}
             className="btn btn-icon btn-white btn-color-gray-600 btn-active-primary shadow-sm h-40px w-40px"
           >
-            <i className="fa fa-arrow-left fs-4" />
+            <ArrowLeftIcon size={20} weight="bold" />
           </Link>
         )}
         <div>

@@ -8,7 +8,7 @@ import { Badge } from '@waldur/core/Badge';
 import { formatDate } from '@waldur/core/dateUtils';
 import {
   LoadingSpinner,
-  LoadingSpinnerIcon,
+  LoadingSpinnerSimple,
 } from '@waldur/core/LoadingSpinner';
 import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
 import { translate } from '@waldur/i18n';
@@ -32,14 +32,8 @@ const NavItem = ({ title, eventKey, count, countLoading }) => (
   <Nav.Item className="text-nowrap">
     <Nav.Link eventKey={eventKey}>
       {title}
-      <Badge
-        variant="default"
-        pill
-        outline
-        onlyIcon={countLoading}
-        className="ms-2"
-      >
-        {countLoading ? <LoadingSpinnerIcon /> : count || 0}
+      <Badge variant="default" pill outline className="ms-2">
+        {countLoading ? <LoadingSpinnerSimple /> : count || 0}
       </Badge>
     </Nav.Link>
   </Nav.Item>

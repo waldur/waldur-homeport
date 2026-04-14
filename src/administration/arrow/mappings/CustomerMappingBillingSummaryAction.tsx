@@ -1,4 +1,4 @@
-import { ChartBar } from '@phosphor-icons/react';
+import { ChartBarIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
@@ -33,7 +33,7 @@ export const CustomerMappingBillingSummaryAction = ({
     <ActionItem
       title={translate('Billing summary')}
       action={handleClick}
-      iconNode={<ChartBar />}
+      iconNode={<ChartBarIcon weight="bold" />}
     />
   );
 };

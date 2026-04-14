@@ -1,4 +1,4 @@
-import { Gear, PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react';
+import { GearIcon, PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 
@@ -102,7 +102,7 @@ export const useOfferingDropdownActions = (refetch?) => {
           }),
         );
       }}
-      iconNode={<Gear weight="bold" />}
+      iconNode={<GearIcon weight="bold" />}
       disabled={!serviceProvider}
     />,
   ];

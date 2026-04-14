@@ -7,7 +7,7 @@ import { ProjectsListData } from 'waldur-js-client';
 import { getResourcesCount } from '@waldur/administration/api';
 import { count } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { getStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
 import { PermissionEnum } from '@waldur/permissions/enums';
@@ -27,14 +27,8 @@ export const NavItem = ({ title, eventKey, count, countLoading }) => (
   <Nav.Item className="text-nowrap">
     <Nav.Link eventKey={eventKey}>
       {title}
-      <Badge
-        variant="default"
-        pill
-        outline
-        onlyIcon={countLoading}
-        className="ms-2"
-      >
-        {countLoading ? <LoadingSpinnerIcon /> : count || 0}
+      <Badge variant="default" pill outline className="ms-2">
+        {countLoading ? <LoadingSpinnerSimple /> : count || 0}
       </Badge>
     </Nav.Link>
   </Nav.Item>

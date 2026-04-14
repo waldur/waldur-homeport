@@ -1,7 +1,7 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -86,8 +86,8 @@ export const WizardModal: FC<WizardModalProps> = ({ modalProps, ...props }) => {
                   children={
                     props.loading ? (
                       <span className="svg-icon svg-icon-2">
-                        {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-                        <LoadingSpinnerIcon />
+                        {}
+                        <LoadingSpinnerSimple />
                       </span>
                     ) : !isLastStep ? (
                       <span className="svg-icon svg-icon-2">

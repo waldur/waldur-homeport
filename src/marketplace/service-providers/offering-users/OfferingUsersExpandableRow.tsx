@@ -8,7 +8,7 @@ import {
 
 import { ENV } from '@waldur/core/config';
 import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -74,7 +74,7 @@ export const OfferingUsersExpandableRow = ({
             label={translate('ToS version')}
             value={
               isLoadingConsent ? (
-                <LoadingSpinnerIcon />
+                <LoadingSpinnerSimple />
               ) : (
                 renderFieldOrDash(consent?.version)
               )
@@ -85,7 +85,7 @@ export const OfferingUsersExpandableRow = ({
             label={translate('ToS consent date')}
             value={
               isLoadingConsent ? (
-                <LoadingSpinnerIcon />
+                <LoadingSpinnerSimple />
               ) : consent?.agreement_date ? (
                 formatDateTime(consent.agreement_date)
               ) : (

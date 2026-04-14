@@ -1,10 +1,10 @@
 import {
-  ClockCounterClockwise,
+  ClockCounterClockwiseIcon,
   EyeIcon,
-  Lightning,
-  Play,
-  Question,
-  Warning,
+  LightningIcon,
+  PlayIcon,
+  QuestionIcon,
+  WarningIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import arrayMutators from 'final-form-arrays';
@@ -106,7 +106,7 @@ const EvaluateButton: FC<{ policyUuid: string }> = ({ policyUuid }) => {
       onClick={openEvaluate}
       submitting={false}
       type="button"
-      iconNode={<Play weight="bold" />}
+      iconNode={<PlayIcon weight="bold" />}
       iconOnLeft
     >
       {translate('Evaluate')}
@@ -192,7 +192,7 @@ const PolicyInfoDropdown: FC<{
   return (
     <ActionDropdownButton title={translate('Policy info')}>
       <Dropdown.Item onClick={openSummary}>
-        <Question weight="bold" className="me-2" />
+        <QuestionIcon weight="bold" className="me-2" />
         {translate('How it works')}
       </Dropdown.Item>
       <Dropdown.Item onClick={openPreview}>
@@ -203,7 +203,7 @@ const PolicyInfoDropdown: FC<{
         <>
           <Dropdown.Divider />
           <Dropdown.Item onClick={openExecutionLog}>
-            <ClockCounterClockwise weight="bold" className="me-2" />
+            <ClockCounterClockwiseIcon weight="bold" className="me-2" />
             {translate('Execution log')}
           </Dropdown.Item>
         </>
@@ -231,7 +231,7 @@ const PresetSelector: FC = () => {
   return (
     <div className="mb-6">
       <div className="d-flex align-items-center gap-2 mb-3">
-        <Lightning weight="bold" className="text-primary" />
+        <LightningIcon weight="bold" className="text-primary" />
         <span className="fw-semibold">{translate('Quick Configuration')}</span>
       </div>
       <div className="row g-3">
@@ -723,7 +723,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           {enableToggle}
           {existingPolicy?.warnings?.length > 0 && (
             <div className="alert alert-warning d-flex align-items-start mb-4">
-              <Warning
+              <WarningIcon
                 weight="bold"
                 className="me-2 mt-1 flex-shrink-0"
                 size={20}

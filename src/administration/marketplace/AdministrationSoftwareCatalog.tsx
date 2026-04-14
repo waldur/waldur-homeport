@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useCallback, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
@@ -75,7 +75,7 @@ const UpdateCatalogButton = ({
     <ActionButton
       action={handleUpdate}
       title={translate('Update')}
-      iconNode={<ArrowsClockwise weight="bold" />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
       pending={pending}
     />
   );
@@ -145,7 +145,7 @@ const CatalogsTab = () => {
         <ActionButton
           action={openDiscover}
           title={translate('Check for updates')}
-          iconNode={<ArrowsClockwise weight="bold" />}
+          iconNode={<ArrowsClockwiseIcon weight="bold" />}
         />
       }
     />

@@ -1,4 +1,4 @@
-import { ArrowCounterClockwise, Warning } from '@phosphor-icons/react';
+import { ArrowCounterClockwiseIcon, WarningIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -63,7 +63,7 @@ export const PubSubCircuitBreakerResetButton: FC<
         </>,
         {
           type: 'warning',
-          iconNode: <Warning weight="bold" />,
+          iconNode: <WarningIcon weight="bold" />,
           positiveButton: translate('Reset circuit breaker'),
           positiveButtonVariant: 'warning',
         },
@@ -87,7 +87,7 @@ export const PubSubCircuitBreakerResetButton: FC<
       variant="warning"
       onClick={handleReset}
       label={translate('Reset circuit breaker')}
-      iconNode={<ArrowCounterClockwise weight="bold" />}
+      iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
       iconOnLeft
     />
   );

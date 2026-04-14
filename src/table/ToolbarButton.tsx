@@ -4,7 +4,7 @@ import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 
 interface ToolbarButtonProps {
@@ -66,7 +66,7 @@ export const ToolbarButton: FC<ToolbarButtonProps> = ({
       disabled={isDisabled}
     >
       {pending ? (
-        <LoadingSpinnerIcon />
+        <LoadingSpinnerSimple />
       ) : (
         <span className="svg-icon svg-icon-2">{iconNode}</span>
       )}

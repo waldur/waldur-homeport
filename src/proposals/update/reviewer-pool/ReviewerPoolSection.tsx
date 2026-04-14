@@ -1,9 +1,9 @@
 import {
   ClockIcon,
   CopyIcon,
-  EnvelopeSimple,
-  ShieldWarning,
-  UserCheck,
+  EnvelopeSimpleIcon,
+  ShieldWarningIcon,
+  UserCheckIcon,
   WarningIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
@@ -256,8 +256,11 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
                       })
                 }
               >
-                <Badge variant="warning" outline>
-                  <ShieldWarning size={14} weight="bold" className="me-1" />
+                <Badge
+                  variant="warning"
+                  leftIcon={<ShieldWarningIcon size={14} weight="bold" />}
+                  outline
+                >
                   {translate('Overridden')}
                 </Badge>
               </Tip>
@@ -431,7 +434,7 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
               <ActionItem
                 title={translate('Force accept')}
                 action={() => handleForceAccept(row)}
-                iconNode={<UserCheck weight="bold" />}
+                iconNode={<UserCheckIcon weight="bold" />}
                 iconColor="warning"
                 className="text-warning"
               />
@@ -446,7 +449,7 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
             className="btn btn-primary btn-sm"
             onClick={handleInviteByEmail}
           >
-            <EnvelopeSimple size={16} weight="bold" className="me-1" />
+            <EnvelopeSimpleIcon size={16} weight="bold" className="me-1" />
             {translate('Invite by email')}
           </button>
         </>

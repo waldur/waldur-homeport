@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { checklistsAdminRetrieve } from 'waldur-js-client';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
 
@@ -33,7 +33,7 @@ export const CustomerChecklistPanel: FC<CustomerEditPanelProps> = (props) => {
               isLoading ? (
                 <>
                   {props.customer.project_metadata_checklist}{' '}
-                  <LoadingSpinnerIcon />
+                  <LoadingSpinnerSimple />
                 </>
               ) : error ? (
                 <LoadingErred
