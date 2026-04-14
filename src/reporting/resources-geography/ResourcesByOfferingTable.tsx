@@ -1,50 +1,45 @@
-import { FC, useCallback, useMemo } from 'react';
-import { OfferingStats } from 'waldur-js-client';
+import { FC } from 'react';
+import {
+  marketplaceStatsCountActiveResourcesGroupedByOfferingList,
+  OfferingStats,
+} from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
 import { translate } from '@waldur/i18n';
-import { SimpleTable } from '@waldur/table/SimpleTable';
+import { createFetcher } from '@waldur/table/api';
+import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
-
-interface ResourcesByOfferingTableProps {
-  data: OfferingStats[];
-}
+import { useTable } from '@waldur/table/useTable';
 
 const columns: Column<OfferingStats>[] = [
   {
     title: translate('Offering'),
     render: ({ row }) => row.name,
+    export: (row) => row.name,
   },
   {
     title: translate('Resources'),
     render: ({ row }) => row.count,
+    export: (row) => row.count,
   },
 ];
 
-export const ResourcesByOfferingTable: FC<ResourcesByOfferingTableProps> = ({
-  data,
-}) => {
-  const sortedData = useMemo(
-    () => [...(data || [])].sort((a, b) => b.count - a.count),
-    [data],
-  );
-
-  const getExportData = useCallback(
-    () => ({
-      fields: [translate('Offering'), translate('Count')],
-      data: sortedData.map((item) => [item.name, item.count]),
-    }),
-    [sortedData],
-  );
+export const ResourcesByOfferingTable: FC = () => {
+  const tableProps = useTable({
+    table: 'ResourcesByOfferingTable',
+    fetchData: createFetcher(
+      marketplaceStatsCountActiveResourcesGroupedByOfferingList,
+    ),
+  });
 
   return (
-    <ChartCard
+    <Table<OfferingStats>
+      {...tableProps}
+      columns={columns}
       title={translate('Resources by offering')}
-      getExportData={getExportData}
-      isEmpty={!data || data.length === 0}
-      showPNG={false}
-    >
-      {() => <SimpleTable<OfferingStats> columns={columns} rows={sortedData} />}
-    </ChartCard>
+      verboseName={translate('offerings')}
+      showPageSizeSelector
+      enableExport
+      initialSorting={{ field: 'count', mode: 'desc' }}
+    />
   );
 };

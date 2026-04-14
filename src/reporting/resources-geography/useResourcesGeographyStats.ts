@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import {
   marketplaceStatsCountActiveResourcesGroupedByOfferingCountryList,
-  marketplaceStatsCountActiveResourcesGroupedByOfferingList,
   marketplaceStatsCountActiveResourcesGroupedByOrganizationGroupList,
   marketplaceStatsResourcesGeographySummaryRetrieve,
   ResourcesGeographySummary as ApiResourcesGeographySummary,
@@ -14,19 +13,16 @@ const STALE_TIME = 5 * 60 * 1000; // 5 minutes
 async function fetchResourcesGeographyStats(
   signal?: AbortSignal,
 ): Promise<ResourcesGeographyStats> {
-  const [byOfferingResponse, byCountryResponse, byOrgGroupResponse] =
-    await Promise.all([
-      marketplaceStatsCountActiveResourcesGroupedByOfferingList({ signal }),
-      marketplaceStatsCountActiveResourcesGroupedByOfferingCountryList({
-        signal,
-      }),
-      marketplaceStatsCountActiveResourcesGroupedByOrganizationGroupList({
-        signal,
-      }),
-    ]);
+  const [byCountryResponse, byOrgGroupResponse] = await Promise.all([
+    marketplaceStatsCountActiveResourcesGroupedByOfferingCountryList({
+      signal,
+    }),
+    marketplaceStatsCountActiveResourcesGroupedByOrganizationGroupList({
+      signal,
+    }),
+  ]);
 
   return {
-    byOffering: byOfferingResponse.data ?? [],
     byCountry: byCountryResponse.data ?? [],
     byOrgGroup: byOrgGroupResponse.data ?? [],
   };
