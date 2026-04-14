@@ -6,20 +6,20 @@ import { getTerminationDateProps } from './TerminationDateField';
 const NOW = DateTime.fromISO('2026-02-23');
 
 describe('getTerminationDateProps', () => {
-  it('sets minDate to 1 week from now when not required', () => {
+  it('sets minDate to today when not required', () => {
     const result = getTerminationDateProps(undefined, NOW);
-    expect(result.minDate).toBe('2026-03-02');
+    expect(result.minDate).toBe('2026-02-23');
     expect(result.maxDate).toBeUndefined();
     expect(result.defaultDate).toBeUndefined();
     expect(result.isClearable).toBeUndefined();
   });
 
-  it('sets minDate to 1 week from now when required is false', () => {
+  it('sets minDate to today when required is false', () => {
     const result = getTerminationDateProps(
       { is_resource_termination_date_required: false },
       NOW,
     );
-    expect(result.minDate).toBe('2026-03-02');
+    expect(result.minDate).toBe('2026-02-23');
     expect(result.maxDate).toBeUndefined();
     expect(result.defaultDate).toBeUndefined();
   });
@@ -33,7 +33,7 @@ describe('getTerminationDateProps', () => {
         },
         NOW,
       );
-      expect(result.minDate).toBe('2026-03-02');
+      expect(result.minDate).toBe('2026-02-23');
       expect(result.defaultDate).toBe('2026-05-24'); // 2026-02-23 + 90 days
       expect(result.maxDate).toBeUndefined();
       expect(result.isClearable).toBe(false);
@@ -41,7 +41,7 @@ describe('getTerminationDateProps', () => {
 
     it('does not set maxDate when max_resource_termination_offset_in_days is undefined (bug fix)', () => {
       // This was the original bug: undefined maxOffsetDays caused
-      // maxDate = today, which is before minDate = today + 1 week
+      // maxDate = today, which is before minDate
       const result = getTerminationDateProps(
         {
           is_resource_termination_date_required: true,
@@ -113,11 +113,11 @@ describe('getTerminationDateProps', () => {
         },
         NOW,
       );
-      expect(result.minDate).toBe('2026-03-02');
+      expect(result.minDate).toBe('2026-02-23');
       expect(result.defaultDate).toBe('2026-05-24');
       expect(result.maxDate).toBe('2031-02-01');
       expect(result.isClearable).toBe(false);
-      // Critical: maxDate must be after minDate for the date picker to work
+      // maxDate must be after minDate for the date picker to work
       expect(result.maxDate > result.minDate).toBe(true);
     });
 
@@ -130,7 +130,7 @@ describe('getTerminationDateProps', () => {
         },
         NOW,
       );
-      // minDate = 2026-03-02, maxDate = 2026-04-24 (60 days from now)
+      // minDate = 2026-02-23, maxDate = 2026-04-24 (60 days from now)
       expect(result.maxDate > result.minDate).toBe(true);
     });
   });
@@ -138,7 +138,7 @@ describe('getTerminationDateProps', () => {
   describe('edge cases', () => {
     it('handles empty plugin_options', () => {
       const result = getTerminationDateProps({}, NOW);
-      expect(result.minDate).toBe('2026-03-02');
+      expect(result.minDate).toBe('2026-02-23');
       expect(result.maxDate).toBeUndefined();
       expect(result.defaultDate).toBeUndefined();
     });

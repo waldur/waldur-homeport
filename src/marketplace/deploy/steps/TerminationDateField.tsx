@@ -24,7 +24,7 @@ export function getTerminationDateProps(
     pluginOptions?.is_resource_termination_date_required;
 
   const props: any = {
-    minDate: now.plus({ weeks: 1 }).toISODate(),
+    minDate: now.toISODate(),
   };
 
   if (isTerminationDateRequired === true) {
