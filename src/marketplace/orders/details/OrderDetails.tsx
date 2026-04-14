@@ -1,5 +1,4 @@
 import { FunctionComponent, useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
 import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
@@ -14,11 +13,6 @@ import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/u
 import { useTitle } from '@waldur/navigation/title';
 import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { RootState } from '@waldur/store/reducers';
-import {
-  isOwnerOrStaff,
-  isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
 
 import { OrderActionsButton } from '../actions/OrderActionsButton';
 
@@ -154,24 +148,17 @@ interface OrderDetailsProps {
 }
 
 const PageHero = ({ isRefetching, ...props }: OrderDetailsProps) => {
-  const isCustomer = useSelector(
-    (state: RootState) =>
-      !(isServiceManagerSelector(state) || isOwnerOrStaff(state)),
-  );
   return (
     <>
-      {isCustomer ? (
-        // Show only for customers
-        props.resource.order_in_progress ? (
-          <OrderInProgressView
-            customerView
-            resource={props.resource}
-            offering={props.offering}
-            refetch={props.refetch}
-          />
-        ) : props.resource.creation_order ? (
-          <OrderErredView resource={props.resource} />
-        ) : null
+      {props.resource.order_in_progress ? (
+        <OrderInProgressView
+          customerView
+          resource={props.resource}
+          offering={props.offering}
+          refetch={props.refetch}
+        />
+      ) : props.resource.creation_order ? (
+        <OrderErredView resource={props.resource} />
       ) : null}
 
       <PublicDashboardHero
