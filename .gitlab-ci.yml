@@ -53,7 +53,7 @@ Scan JS dependencies:
     - wget -q "https://github.com/google/osv-scanner/releases/download/v${OSV_SCANNER_VERSION}/osv-scanner_linux_amd64" -O /usr/local/bin/osv-scanner
     - chmod +x /usr/local/bin/osv-scanner
 
-Run linters:
+.linter-rules: &linter-rules
   stage: test
   interruptible: true
   rules:
@@ -73,11 +73,23 @@ Run linters:
         - vite.config.ts
         - .eslintrc.cjs
         - .eslintignore
+        - .gitlab-ci.yml
+
+Run type checking:
+  <<: *linter-rules
+  script:
+    - yarn tsc -b
+
+Run JS linters:
+  <<: *linter-rules
   script:
     - yarn oxlint
     - yarn format:check
-    - yarn tsc -b
     - yarn lint:check
+
+Run style and dependency checks:
+  <<: *linter-rules
+  script:
     - yarn style:check
     - yarn deps:unused
     - yarn deps:circular
