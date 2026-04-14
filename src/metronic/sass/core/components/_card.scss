@@ -23,12 +23,14 @@
     background-color: transparent;
     border-bottom: $card-border-width $card-border-style $card-border-color;
 
-    // Title
+    // Title — 18px semibold per design system (text,lg)
     .card-title {
       display: flex;
       align-items: center;
       margin: $card-header-py;
       margin-left: 0;
+      font-size: $h3-font-size;
+      font-weight: $font-weight-bolder;
 
       &.flex-column {
         align-items: flex-start;

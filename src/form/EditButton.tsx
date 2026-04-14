@@ -30,7 +30,7 @@ export const EditButton: FunctionComponent<EditButtonProps> = (props) => {
     params,
     iconRight = true,
     variant = 'tertiary',
-    size = 'lg',
+    size = 'sm',
     width = 90,
     btnIcon,
     className,
