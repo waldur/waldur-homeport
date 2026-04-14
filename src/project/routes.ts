@@ -79,7 +79,7 @@ export const states: StateDeclaration[] = [
   },
   {
     name: 'project-manage',
-    url: 'manage/?tab',
+    url: 'manage/?tab&subtab',
     parent: 'project-manage-container',
     component: lazyComponent(() =>
       import('./ProjectManage').then((module) => ({

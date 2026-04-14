@@ -1,7 +1,7 @@
 import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import { Nav } from 'react-bootstrap';
+import { useCurrentStateAndParams } from '@uirouter/react';
+import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import {
   projectEndDateChangeRequestsApprove,
@@ -32,8 +32,17 @@ const isPending = (row: { state: string }) =>
   row.state?.toLowerCase() === 'pending';
 
 const TABLE_TABS = [
-  { key: 'pending' as const, title: translate('Pending'), default: true },
-  { key: 'all' as const, title: translate('All') },
+  {
+    key: 'pending',
+    title: translate('Pending'),
+    default: true,
+    params: { tab: 'end-date-change-requests', subtab: 'pending' },
+  },
+  {
+    key: 'all',
+    title: translate('All'),
+    params: { tab: 'end-date-change-requests', subtab: 'all' },
+  },
 ];
 
 export const ProjectEndDateChangeRequests: FunctionComponent<
@@ -41,7 +50,8 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
 > = ({ project }) => {
   const dispatch = useDispatch();
   const queryClient = useQueryClient();
-  const [activeTab, setActiveTab] = useState<'pending' | 'all'>('pending');
+  const { params } = useCurrentStateAndParams();
+  const activeTab = params.subtab || 'pending';
 
   const filter = useMemo(
     () => ({
@@ -140,128 +150,111 @@ export const ProjectEndDateChangeRequests: FunctionComponent<
   );
 
   return (
-    <>
-      <div className="overflow-auto flex-grow-1 pb-2 pt-4">
-        <Nav variant="tabs" className="nav-line-tabs flex-nowrap mx-0 border-0">
-          {TABLE_TABS.map((tab) => (
-            <Nav.Item key={tab.key} className="text-nowrap">
-              <Nav.Link
-                as="button"
-                eventKey={tab.key}
-                active={activeTab === tab.key}
-                onClick={() => setActiveTab(tab.key as 'pending' | 'all')}
-              >
-                {tab.title}
-              </Nav.Link>
-            </Nav.Item>
-          ))}
-        </Nav>
-      </div>
-      <Table
-        {...tableProps}
-        title={translate('End date change requests')}
-        columns={[
-          {
-            title: translate('Created'),
-            render: ({ row }) => <>{formatDateTime(row.created)}</>,
-            export: (row) => formatDateTime(row.created),
-          },
-          {
-            title: translate('Requested end date'),
-            render: ({ row }) => (
-              <>
-                {renderFieldOrDash(
-                  row.requested_end_date
-                    ? formatDate(row.requested_end_date)
-                    : null,
-                )}
-              </>
-            ),
-            export: (row) =>
-              renderFieldOrDash(
+    <Table
+      {...tableProps}
+      title={translate('End date change requests')}
+      tabs={TABLE_TABS}
+      columns={[
+        {
+          title: translate('Created'),
+          render: ({ row }) => <>{formatDateTime(row.created)}</>,
+          export: (row) => formatDateTime(row.created),
+        },
+        {
+          title: translate('Requested end date'),
+          render: ({ row }) => (
+            <>
+              {renderFieldOrDash(
                 row.requested_end_date
                   ? formatDate(row.requested_end_date)
                   : null,
-              ),
-          },
-          {
-            title: translate('Created by'),
-            render: ({ row }) => (
-              <>{renderFieldOrDash(row.created_by_full_name)}</>
+              )}
+            </>
+          ),
+          export: (row) =>
+            renderFieldOrDash(
+              row.requested_end_date
+                ? formatDate(row.requested_end_date)
+                : null,
             ),
-            export: (row) => renderFieldOrDash(row.created_by_full_name),
-          },
-          {
-            title: translate('Reason for modifying'),
-            render: ({ row }) => (
-              <>
-                {renderFieldOrDash(
-                  row.comment ? (
-                    <Tip
-                      label={row.comment}
-                      id={`comment-tip-${row.uuid}`}
-                      delay={{ show: 0, hide: 0 }}
-                      tipClassName="text-start"
+        },
+        {
+          title: translate('Created by'),
+          render: ({ row }) => (
+            <>{renderFieldOrDash(row.created_by_full_name)}</>
+          ),
+          export: (row) => renderFieldOrDash(row.created_by_full_name),
+        },
+        {
+          title: translate('Reason for modifying'),
+          render: ({ row }) => (
+            <>
+              {renderFieldOrDash(
+                row.comment ? (
+                  <Tip
+                    label={row.comment}
+                    id={`comment-tip-${row.uuid}`}
+                    delay={{ show: 0, hide: 0 }}
+                    tipClassName="text-start"
+                  >
+                    <span
+                      className="ellipsis d-inline-block"
+                      style={{ width: 150 }}
                     >
-                      <span
-                        className="ellipsis d-inline-block"
-                        style={{ width: 150 }}
-                      >
-                        {row.comment}
-                      </span>
-                    </Tip>
-                  ) : null,
-                )}
-              </>
-            ),
-            export: (row) => renderFieldOrDash(row.comment),
-          },
-          {
-            title: translate('State'),
-            render: ({ row }) => <>{renderFieldOrDash(row.state)}</>,
-            export: (row) => renderFieldOrDash(row.state),
-          },
-          {
-            title: translate('Reviewed by'),
-            render: ({ row }) => (
-              <>{renderFieldOrDash(row.reviewed_by_full_name)}</>
-            ),
-            export: (row) => renderFieldOrDash(row.reviewed_by_full_name),
-          },
-          {
-            title: translate('Reviewed at'),
-            render: ({ row }) => (
-              <>
-                {renderFieldOrDash(
-                  row.reviewed_at ? formatDateTime(row.reviewed_at) : null,
-                )}
-              </>
-            ),
-            export: (row) =>
-              renderFieldOrDash(
+                      {row.comment}
+                    </span>
+                  </Tip>
+                ) : null,
+              )}
+            </>
+          ),
+          export: (row) => renderFieldOrDash(row.comment),
+        },
+        {
+          title: translate('State'),
+          render: ({ row }) => <>{renderFieldOrDash(row.state)}</>,
+          export: (row) => renderFieldOrDash(row.state),
+        },
+        {
+          title: translate('Reviewed by'),
+          render: ({ row }) => (
+            <>{renderFieldOrDash(row.reviewed_by_full_name)}</>
+          ),
+          export: (row) => renderFieldOrDash(row.reviewed_by_full_name),
+        },
+        {
+          title: translate('Reviewed at'),
+          render: ({ row }) => (
+            <>
+              {renderFieldOrDash(
                 row.reviewed_at ? formatDateTime(row.reviewed_at) : null,
-              ),
-          },
-        ]}
-        verboseName={translate('end date change requests')}
-        enableExport={false}
-        rowActions={({ row }) =>
-          isPending(row) ? (
-            <ActionsDropdown row={row}>
-              <ActionItem
-                action={() => handleApprove(row)}
-                title={translate('Approve')}
-                iconNode={<CheckIcon weight="bold" />}
-              />
-              <ActionItem
-                action={() => handleReject(row)}
-                title={translate('Reject')}
-                iconNode={<XIcon weight="bold" />}
-              />
-            </ActionsDropdown>
-          ) : null
-        }
-      />
-    </>
+              )}
+            </>
+          ),
+          export: (row) =>
+            renderFieldOrDash(
+              row.reviewed_at ? formatDateTime(row.reviewed_at) : null,
+            ),
+        },
+      ]}
+      verboseName={translate('end date change requests')}
+      enableExport={false}
+      rowActions={({ row }) =>
+        isPending(row) ? (
+          <ActionsDropdown row={row}>
+            <ActionItem
+              action={() => handleApprove(row)}
+              title={translate('Approve')}
+              iconNode={<CheckIcon weight="bold" />}
+            />
+            <ActionItem
+              action={() => handleReject(row)}
+              title={translate('Reject')}
+              iconNode={<XIcon weight="bold" />}
+            />
+          </ActionsDropdown>
+        ) : null
+      }
+    />
   );
 };
