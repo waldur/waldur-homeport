@@ -13,7 +13,10 @@ async function fetchOfferingCosts(
   signal?: AbortSignal,
 ): Promise<OfferingCostsStats> {
   const response =
-    await marketplaceStatsTotalCostOfActiveResourcesPerOfferingList({ signal });
+    await marketplaceStatsTotalCostOfActiveResourcesPerOfferingList({
+      query: { page_size: 10 },
+      signal,
+    });
   return {
     offerings: response.data ?? [],
   };
