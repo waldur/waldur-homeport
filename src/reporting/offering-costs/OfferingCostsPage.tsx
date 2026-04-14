@@ -53,7 +53,7 @@ export const OfferingCostsPage: FC = () => {
           <OfferingCostsChart data={data.offerings} />
         </Col>
       </Row>
-      <OfferingCostsTable data={data.offerings} />
+      <OfferingCostsTable />
     </>
   );
 };
