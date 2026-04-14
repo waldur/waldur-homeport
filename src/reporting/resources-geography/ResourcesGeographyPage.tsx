@@ -61,7 +61,7 @@ export const ResourcesGeographyPage: FC = () => {
 
       <Row>
         <Col>
-          <ResourcesByOfferingTable data={data.byOffering} />
+          <ResourcesByOfferingTable />
         </Col>
       </Row>
     </>

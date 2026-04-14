@@ -1,11 +1,6 @@
-import {
-  CountStats,
-  OfferingCountryStats,
-  OfferingStats,
-} from 'waldur-js-client';
+import { CountStats, OfferingCountryStats } from 'waldur-js-client';
 
 export interface ResourcesGeographyStats {
-  byOffering: OfferingStats[];
   byCountry: OfferingCountryStats[];
   byOrgGroup: CountStats[];
 }
