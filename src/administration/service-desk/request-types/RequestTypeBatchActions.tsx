@@ -1,4 +1,4 @@
-import { CheckCircle, Trash, XCircle } from '@phosphor-icons/react';
+import { CheckCircleIcon, TrashIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
@@ -193,7 +193,7 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
       <ActionButton
         title={translate('Activate')}
         action={() => activateMutation.mutate()}
-        iconNode={<CheckCircle weight="bold" />}
+        iconNode={<CheckCircleIcon weight="bold" />}
         variant="primary"
         disabled={activateMutation.isPending || !inactiveCount}
         disabledReason={
@@ -205,7 +205,7 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
       <ActionButton
         title={translate('Deactivate')}
         action={() => deactivateMutation.mutate()}
-        iconNode={<XCircle weight="bold" />}
+        iconNode={<XCircleIcon weight="bold" />}
         variant="warning"
         disabled={deactivateMutation.isPending || !activeCount}
         disabledReason={
@@ -217,7 +217,7 @@ export const RequestTypeBatchActions: FC<RequestTypeBatchActionsProps> = ({
       <ActionButton
         title={translate('Delete')}
         action={() => deleteMutation.mutate()}
-        iconNode={<Trash weight="bold" />}
+        iconNode={<TrashIcon weight="bold" />}
         variant="danger"
         disabled={deleteMutation.isPending || !rows.length}
         disabledReason={

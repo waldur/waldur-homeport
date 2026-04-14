@@ -1,8 +1,8 @@
 import {
   CaretDownIcon,
-  EnvelopeSimple,
-  MagnifyingGlass,
-  PaperPlaneTilt,
+  EnvelopeSimpleIcon,
+  MagnifyingGlassIcon,
+  PaperPlaneTiltIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useState } from 'react';
 import { Dropdown } from 'react-bootstrap';
@@ -100,13 +100,13 @@ export const ReviewerDiscoveryActions: FC<ReviewerDiscoveryActionsProps> = ({
       <Dropdown.Menu>
         <Dropdown.Item onClick={handleGenerate}>
           <span className="svg-icon svg-icon-2 me-2">
-            <MagnifyingGlass weight="bold" />
+            <MagnifyingGlassIcon weight="bold" />
           </span>
           {translate('Generate matches')}
         </Dropdown.Item>
         <Dropdown.Item onClick={handleSendInvitations} disabled={isSending}>
           <span className="svg-icon svg-icon-2 me-2">
-            <PaperPlaneTilt weight="bold" />
+            <PaperPlaneTiltIcon weight="bold" />
           </span>
           {isSending
             ? translate('Sending...')
@@ -114,7 +114,7 @@ export const ReviewerDiscoveryActions: FC<ReviewerDiscoveryActionsProps> = ({
         </Dropdown.Item>
         <Dropdown.Item onClick={handleDirectInvite}>
           <span className="svg-icon svg-icon-2 me-2">
-            <EnvelopeSimple weight="bold" />
+            <EnvelopeSimpleIcon weight="bold" />
           </span>
           {translate('Invite by email')}
         </Dropdown.Item>

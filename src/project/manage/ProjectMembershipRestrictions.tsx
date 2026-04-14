@@ -1,4 +1,4 @@
-import { Buildings, QuestionIcon } from '@phosphor-icons/react';
+import { BuildingsIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
@@ -145,7 +145,7 @@ export const ProjectMembershipRestrictions: FC<
         <ActionButton
           action={openOrganizationRestrictionsDialog}
           title={translate('Organization restrictions')}
-          iconNode={<Buildings weight="bold" />}
+          iconNode={<BuildingsIcon weight="bold" />}
           variant="tertiary"
         />
       }

@@ -1,4 +1,4 @@
-import { ArrowRight, Info } from '@phosphor-icons/react';
+import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Resource } from 'waldur-js-client';
 
@@ -53,7 +53,7 @@ const PendingChangeValue: FC<{
       <span className="text-muted">
         <OptionValue option={option} value={oldValue} />
       </span>
-      <ArrowRight size={16} className="text-muted" />
+      <ArrowRightIcon size={16} className="text-muted" weight="bold" />
       <span>
         <OptionValue option={option} value={newValue} />
       </span>
@@ -61,7 +61,11 @@ const PendingChangeValue: FC<{
         id={`pending-change-${option.name}`}
         label={translate('This value was changed in a pending order')}
       >
-        <Info size={16} weight="fill" className="text-info cursor-pointer" />
+        <InfoIcon
+          size={16}
+          weight="fill"
+          className="text-info cursor-pointer"
+        />
       </Tip>
     </span>
   );

@@ -1,7 +1,4 @@
-import {
-  ChartBar as ChartBarIcon,
-  Table as TableIcon,
-} from '@phosphor-icons/react';
+import { ChartBarIcon, TableIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
 import { Modal } from 'react-bootstrap';

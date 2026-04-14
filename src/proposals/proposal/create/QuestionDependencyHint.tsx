@@ -1,4 +1,4 @@
-import { ArrowBendDownRight } from '@phosphor-icons/react';
+import { ArrowBendDownRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
@@ -46,7 +46,7 @@ export const QuestionDependencyHint: FC<QuestionDependencyHintProps> = ({
 
   return (
     <div className="d-flex align-items-center gap-1 text-muted small mb-2">
-      <ArrowBendDownRight size={14} weight="bold" />
+      <ArrowBendDownRightIcon size={14} weight="bold" />
       <span>
         {translate('Shown based on: {questions}', {
           questions: dependencyText,

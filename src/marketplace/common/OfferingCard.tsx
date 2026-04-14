@@ -1,7 +1,7 @@
 import { FunctionComponent, Suspense } from 'react';
 import { NestedTag } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 
 import { Offering } from '../types';
 
@@ -29,7 +29,7 @@ export const OfferingCard: FunctionComponent<OfferingCardProps> = ({
     <Suspense
       fallback={
         <div className="d-flex justify-content-center align-items-center h-100">
-          <LoadingSpinnerIcon />
+          <LoadingSpinnerSimple />
         </div>
       }
     >

@@ -1,4 +1,4 @@
-import { Trash, Warning } from '@phosphor-icons/react';
+import { TrashIcon, WarningIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -76,7 +76,7 @@ export const RabbitMQDeleteAllButton: FC<RabbitMQDeleteAllButtonProps> = ({
         </>,
         {
           type: 'danger',
-          iconNode: <Warning weight="bold" />,
+          iconNode: <WarningIcon weight="bold" />,
           positiveButton: translate('Delete all queues'),
           positiveButtonVariant: 'danger',
           showInput: true,
@@ -109,7 +109,7 @@ export const RabbitMQDeleteAllButton: FC<RabbitMQDeleteAllButtonProps> = ({
       onClick={handleDeleteAll}
       disabled={mutation.isPending || data.total_queues === 0}
     >
-      <Trash size={16} weight="bold" />
+      <TrashIcon size={16} weight="bold" />
       {translate('Delete all queues')}
     </button>
   );

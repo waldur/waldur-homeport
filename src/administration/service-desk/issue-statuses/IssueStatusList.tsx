@@ -1,4 +1,4 @@
-import { Info } from '@phosphor-icons/react';
+import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { Badge } from '@waldur/core/Badge';
@@ -63,7 +63,11 @@ export const IssueStatusList: FC = () => {
               'Map your service desk status names to Waldur outcome types. "Resolved" statuses complete orders successfully. "Canceled" statuses terminate resources.',
             )}
           >
-            <Info size={18} className="text-muted cursor-pointer" />
+            <InfoIcon
+              size={18}
+              className="text-muted cursor-pointer"
+              weight="bold"
+            />
           </Tip>
         </span>
       }

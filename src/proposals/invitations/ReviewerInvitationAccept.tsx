@@ -1,4 +1,4 @@
-import { Check, X } from '@phosphor-icons/react';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { useMutation, useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback } from 'react';
@@ -177,7 +177,7 @@ export const ReviewerInvitationAccept: FC = () => {
     return null;
   }
 
-  // Check if invitation is already processed
+  // CheckIcon if invitation is already processed
   if (invitation.invitation_status !== 'pending') {
     return (
       <Container className="py-10">
@@ -274,7 +274,7 @@ export const ReviewerInvitationAccept: FC = () => {
           disabled={!canAccept || declineMutation.isPending}
           submitting={acceptMutation.isPending}
           label={translate('Accept invitation')}
-          iconNode={<Check weight="bold" />}
+          iconNode={<CheckIcon weight="bold" />}
           iconOnLeft
         />
         <SubmitButton
@@ -284,7 +284,7 @@ export const ReviewerInvitationAccept: FC = () => {
           disabled={acceptMutation.isPending}
           submitting={declineMutation.isPending}
           label={translate('Decline invitation')}
-          iconNode={<X weight="bold" />}
+          iconNode={<XIcon weight="bold" />}
           iconOnLeft
         />
       </div>

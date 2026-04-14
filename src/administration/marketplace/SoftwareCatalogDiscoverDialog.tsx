@@ -1,4 +1,4 @@
-import { DownloadSimple } from '@phosphor-icons/react';
+import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -46,7 +46,7 @@ const ImportCatalogAction = ({
     <ActionItem
       title={translate('Import')}
       action={handleImport}
-      iconNode={<DownloadSimple weight="bold" />}
+      iconNode={<DownloadSimpleIcon weight="bold" />}
       disabled={row.existing || pending}
       tooltip={
         row.existing ? translate('Catalog is already imported.') : undefined

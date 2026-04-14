@@ -1,3 +1,4 @@
+import { UploadSimpleIcon, CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useRef, useState } from 'react';
 
 import FormTable from '@waldur/form/FormTable';
@@ -156,7 +157,7 @@ export const ImportKeycloakSettingsDialog: FC<
             className="btn btn-light-primary"
             onClick={() => fileInputRef.current?.click()}
           >
-            <i className="fa fa-upload me-2" />
+            <UploadSimpleIcon className="me-2" weight="bold" />
             {translate('Select JSON file')}
           </button>
           <p className="text-muted mt-3 mb-0">
@@ -175,7 +176,7 @@ export const ImportKeycloakSettingsDialog: FC<
             className="btn btn-light-primary"
             onClick={() => fileInputRef.current?.click()}
           >
-            <i className="fa fa-upload me-2" />
+            <UploadSimpleIcon className="me-2" weight="bold" />
             {translate('Try another file')}
           </button>
         </div>
@@ -189,7 +190,7 @@ export const ImportKeycloakSettingsDialog: FC<
               className="btn btn-sm btn-light"
               onClick={() => fileInputRef.current?.click()}
             >
-              <i className="fa fa-upload me-2" />
+              <UploadSimpleIcon className="me-2" weight="bold" />
               {translate('Choose different file')}
             </button>
           </div>
@@ -209,9 +210,9 @@ export const ImportKeycloakSettingsDialog: FC<
                       )
                     ) : field.isCheckbox ? (
                       value ? (
-                        <i className="fa fa-check text-success" />
+                        <CheckIcon className="text-success" weight="bold" />
                       ) : (
-                        <i className="fa fa-times text-danger" />
+                        <XIcon className="text-danger" weight="bold" />
                       )
                     ) : value !== undefined &&
                       value !== null &&

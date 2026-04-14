@@ -1,9 +1,10 @@
+import { CheckCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useState, useMemo } from 'react';
 import { Alert, Form as BSForm } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { Select } from '@waldur/form/AsyncSelectField';
 import { SubmitButton } from '@waldur/form/SubmitButton';
@@ -127,7 +128,7 @@ export const CustomerMappingCreateDialog = ({
     return (
       <ModalDialog title={translate('Create Customer Mapping')}>
         <div className="d-flex align-items-center justify-content-center py-10">
-          <LoadingSpinnerIcon className="me-2" />
+          <LoadingSpinnerSimple className="me-2" />
           {translate('Loading Arrow customers...')}
         </div>
       </ModalDialog>
@@ -325,7 +326,7 @@ export const CustomerMappingCreateDialog = ({
                 if (isSuggested && suggestion && suggestion.confidence > 0.6) {
                   return (
                     <Alert variant="success" className="mb-4">
-                      <i className="fa fa-check-circle me-2" />
+                      <CheckCircleIcon className="me-2" weight="bold" />
                       {translate('Auto-matched with {confidence}% confidence', {
                         confidence: Math.round(suggestion.confidence * 100),
                       })}

@@ -1,4 +1,4 @@
-import { Gear } from '@phosphor-icons/react';
+import { GearIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
@@ -139,7 +139,7 @@ export const RabbitMQQueueConfigPopover: FC<
       overlay={popover}
     >
       <span className="cursor-pointer text-info">
-        <Gear size={18} weight="bold" />
+        <GearIcon size={18} weight="bold" />
       </span>
     </OverlayTrigger>
   );

@@ -2,6 +2,8 @@ import {
   DownloadSimpleIcon,
   PlugsConnectedIcon,
   UploadSimpleIcon,
+  CheckIcon,
+  XIcon,
 } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { get } from 'lodash-es';
@@ -178,9 +180,9 @@ export const KeycloakIntegrationSection: FC<OfferingEditPanelProps> = (
                   <PlainSecretField value={value} />
                 ) : field.isCheckbox ? (
                   value ? (
-                    <i className="fa fa-check text-success" />
+                    <CheckIcon className="text-success" weight="bold" />
                   ) : (
-                    <i className="fa fa-times text-danger" />
+                    <XIcon className="text-danger" weight="bold" />
                   )
                 ) : (
                   value || DASH_ESCAPE_CODE

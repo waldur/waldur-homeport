@@ -1,4 +1,4 @@
-import { CheckCircle, XCircle } from '@phosphor-icons/react';
+import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import {
   RequestTypeAdmin,
   RequestTypeAdminRequest,
@@ -48,7 +48,13 @@ export const RequestTypeToggleAction = ({
   return (
     <ActionItem
       title={row.is_active ? translate('Deactivate') : translate('Activate')}
-      iconNode={row.is_active ? <XCircle /> : <CheckCircle />}
+      iconNode={
+        row.is_active ? (
+          <XCircleIcon weight="bold" />
+        ) : (
+          <CheckCircleIcon weight="bold" />
+        )
+      }
       action={handleToggle}
     />
   );

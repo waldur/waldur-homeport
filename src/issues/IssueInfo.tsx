@@ -1,4 +1,7 @@
-import { ArrowsClockwise, ClockCounterClockwise } from '@phosphor-icons/react';
+import {
+  ArrowsClockwiseIcon,
+  ClockCounterClockwiseIcon,
+} from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
@@ -93,7 +96,7 @@ export const IssueLogButton = ({ issue }) => {
       variant="secondary"
       onClick={callback}
       label={translate('Show log')}
-      iconNode={<ClockCounterClockwise weight="bold" />}
+      iconNode={<ClockCounterClockwiseIcon weight="bold" />}
       iconOnLeft
     />
   );
@@ -138,7 +141,7 @@ export const IssueSyncButton = ({
       onClick={() => mutate()}
       disabled={isPending}
       label={translate('Sync')}
-      iconNode={<ArrowsClockwise weight="bold" />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
       iconOnLeft
     />
   );

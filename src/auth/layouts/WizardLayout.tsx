@@ -1,3 +1,4 @@
+import { ShieldIcon, KeyIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useState } from 'react';
 
@@ -71,7 +72,7 @@ export const WizardLayout = () => {
                   setStep('login');
                 }}
               >
-                <i className="fa fa-shield" />
+                <ShieldIcon size={24} weight="bold" />
                 <span>{translate('Single Sign-On')}</span>
                 <small>{translate('Use your organization account')}</small>
               </button>
@@ -83,7 +84,7 @@ export const WizardLayout = () => {
                   setStep('login');
                 }}
               >
-                <i className="fa fa-key" />
+                <KeyIcon size={24} weight="bold" />
                 <span>{translate('Username & Password')}</span>
                 <small>{translate('Use local credentials')}</small>
               </button>

@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { Tip, TipProps } from '@waldur/core/Tooltip';
 
 interface IconButtonProps {
@@ -78,7 +78,7 @@ export const IconButton: FC<IconButtonProps> = ({
         aria-label={tooltip}
       >
         {pending ? (
-          <LoadingSpinnerIcon />
+          <LoadingSpinnerSimple />
         ) : (
           <span className="svg-icon svg-icon-2">{iconNode}</span>
         )}
@@ -122,7 +122,7 @@ export const MediumIconButton: FC<IconButtonProps> = ({
         aria-label={tooltip}
       >
         {pending ? (
-          <LoadingSpinnerIcon />
+          <LoadingSpinnerSimple />
         ) : (
           <span className="svg-icon svg-icon-2">{iconNode}</span>
         )}
@@ -166,7 +166,7 @@ export const CompactIconButton: FC<IconButtonProps> = ({
         aria-label={tooltip}
       >
         {pending ? (
-          <LoadingSpinnerIcon />
+          <LoadingSpinnerSimple />
         ) : (
           <span className="svg-icon svg-icon-2">{iconNode}</span>
         )}

@@ -1,4 +1,4 @@
-import { ArrowsClockwise } from '@phosphor-icons/react';
+import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
@@ -33,7 +33,7 @@ export const BillingSyncButton = ({ refetch }: BillingSyncButtonProps) => {
     <ActionButton
       action={handleClick}
       title={translate('Sync billing')}
-      iconNode={<ArrowsClockwise weight="bold" />}
+      iconNode={<ArrowsClockwiseIcon weight="bold" />}
       variant="primary"
     />
   );

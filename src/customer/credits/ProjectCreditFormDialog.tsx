@@ -8,7 +8,7 @@ import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import {
   LoadingSpinner,
-  LoadingSpinnerIcon,
+  LoadingSpinnerSimple,
 } from '@waldur/core/LoadingSpinner';
 import { FieldError, FormContainer, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -121,7 +121,7 @@ export const ProjectCreditFormDialog = connect<
                     <div className="fw-bolder">
                       {translate('Project cost history')}
                       {isLoadingChart && (
-                        <LoadingSpinnerIcon className="ms-2" />
+                        <LoadingSpinnerSimple className="ms-2" />
                       )}
                     </div>
                   </Accordion.Header>

@@ -6,7 +6,7 @@ import { useSelector } from 'react-redux';
 import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { useModal } from '@waldur/modal/hooks';
 import { PermissionEnum } from '@waldur/permissions/enums';
@@ -67,8 +67,7 @@ export const ApproveByConsumerButton: FC<
     return null;
   }
   return isLoading ? (
-    // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-    <LoadingSpinnerIcon className="me-1" />
+    <LoadingSpinnerSimple className="me-1" />
   ) : (
     <ActionItem
       as={as}

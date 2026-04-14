@@ -1,4 +1,4 @@
-import { Eraser, Trash } from '@phosphor-icons/react';
+import { EraserIcon, TrashIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
@@ -144,12 +144,12 @@ export const RabbitMQQueueActions: FC<RabbitMQQueueActionsProps> = ({
       <TableDropdownToggle disabled={isPending} />
       <Dropdown.Menu>
         <Dropdown.Item onClick={handlePurge}>
-          <Eraser size={18} weight="bold" className="me-2" />
+          <EraserIcon size={18} weight="bold" className="me-2" />
           {translate('Purge messages')}
         </Dropdown.Item>
         <Dropdown.Divider />
         <Dropdown.Item onClick={handleDelete} className="text-danger">
-          <Trash size={18} weight="bold" className="me-2" />
+          <TrashIcon size={18} weight="bold" className="me-2" />
           {translate('Delete queue')}
         </Dropdown.Item>
       </Dropdown.Menu>

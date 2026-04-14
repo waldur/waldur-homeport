@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { CallCoiConfiguration } from 'waldur-js-client';
 
@@ -28,7 +28,7 @@ export const COISummaryButton = ({ config }: COISummaryButtonProps) => {
         )
       }
       title={translate('How it works')}
-      iconNode={<Question weight="bold" />}
+      iconNode={<QuestionIcon weight="bold" />}
     />
   );
 };

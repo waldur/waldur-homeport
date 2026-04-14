@@ -4,7 +4,7 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { openportalManagedProjectsApprove } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
@@ -48,8 +48,7 @@ export const ApproveManagedProjectButton = ({
     translate('Click to approve this project.'),
     <>
       {isLoading ? (
-        /* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */
-        <LoadingSpinnerIcon className="me-1" />
+        <LoadingSpinnerSimple className="me-1" />
       ) : (
         <ActionItem
           as={as}

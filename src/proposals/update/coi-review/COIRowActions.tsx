@@ -1,4 +1,4 @@
-import { X, Shield, UserMinus } from '@phosphor-icons/react';
+import { XIcon, ShieldIcon, UserMinusIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
@@ -188,13 +188,13 @@ export const COIRowActions: FC<COIRowActionsProps> = ({ row, fetch }) => {
       <ActionItem
         title={isDismissing ? translate('Dismissing...') : translate('Dismiss')}
         action={handleDismiss}
-        iconNode={<X weight="bold" />}
+        iconNode={<XIcon weight="bold" />}
         disabled={isLoading}
       />
       <ActionItem
         title={translate('Waive')}
         action={handleWaive}
-        iconNode={<Shield weight="bold" />}
+        iconNode={<ShieldIcon weight="bold" />}
         iconColor="warning"
         className="text-warning"
         disabled={isLoading}
@@ -202,7 +202,7 @@ export const COIRowActions: FC<COIRowActionsProps> = ({ row, fetch }) => {
       <ActionItem
         title={isRecusing ? translate('Recusing...') : translate('Recuse')}
         action={handleRecuse}
-        iconNode={<UserMinus weight="bold" />}
+        iconNode={<UserMinusIcon weight="bold" />}
         iconColor="danger"
         className="text-danger"
         disabled={isLoading}

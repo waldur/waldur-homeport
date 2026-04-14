@@ -7,7 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { getPlanUnitAbbr } from '@waldur/marketplace/orders/utils';
 
@@ -26,7 +26,7 @@ export const ResourceRateField: FC<ResourceRateFieldProps> = ({
   isLoading,
 }) => {
   if (isLoading) {
-    return <LoadingSpinnerIcon />;
+    return <LoadingSpinnerSimple />;
   }
 
   const offering = data?.find((o) => o.uuid === row.offering_uuid);

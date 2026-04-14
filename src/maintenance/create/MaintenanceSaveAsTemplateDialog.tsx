@@ -18,7 +18,7 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { getUUID } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
 import {
@@ -309,8 +309,8 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
               children={
                 isLoadingOfferings ? (
                   <span className="svg-icon svg-icon-2">
-                    {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-                    <LoadingSpinnerIcon />
+                    {}
+                    <LoadingSpinnerSimple />
                   </span>
                 ) : null
               }

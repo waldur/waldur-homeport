@@ -8,7 +8,7 @@ import { useSettingsUrlSync } from '@waldur/administration/settings/useSettingsU
 import { CheckOrX } from '@waldur/core/CheckOrX';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { getUUID } from '@waldur/core/utils';
 import FormTable from '@waldur/form/FormTable';
@@ -357,8 +357,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
                           <CheckIcon weight="bold" className="text-info" />
                         )}
                         {isLoading ? (
-                          // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-                          <LoadingSpinnerIcon />
+                          <LoadingSpinnerSimple />
                         ) : error ? (
                           <LoadingErred
                             loadData={refetch}

@@ -6,7 +6,7 @@ import { formValueSelector, reduxForm } from 'redux-form';
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { FieldError, FormContainer, SubmitButton } from '@waldur/form';
 import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
@@ -101,7 +101,7 @@ export const CreditFormDialog = reduxForm<
                 <Accordion.Header>
                   <div className="fw-bolder">
                     {translate('Organization invoice history')}
-                    {isLoading && <LoadingSpinnerIcon className="ms-2" />}
+                    {isLoading && <LoadingSpinnerSimple className="ms-2" />}
                   </div>
                 </Accordion.Header>
                 <Accordion.Body>

@@ -1,4 +1,4 @@
-import { Trash } from '@phosphor-icons/react';
+import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { supportIssueStatusesDestroy } from 'waldur-js-client';
 
@@ -47,7 +47,7 @@ export const IssueStatusDeleteAction = ({
   return (
     <ActionItem
       title={translate('Delete')}
-      iconNode={<Trash />}
+      iconNode={<TrashIcon weight="bold" />}
       action={handleDelete}
       className="text-danger"
     />

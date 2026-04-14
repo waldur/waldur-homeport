@@ -1,4 +1,4 @@
-import { Link } from '@phosphor-icons/react';
+import { LinkIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
@@ -27,9 +27,9 @@ export const LinkResourcesAction = ({ row }: { row: ArrowCustomerMapping }) => {
 
   return (
     <ActionItem
-      title={translate('Link resources')}
+      title={translate('LinkIcon resources')}
       action={handleClick}
-      iconNode={<Link />}
+      iconNode={<LinkIcon weight="bold" />}
     />
   );
 };

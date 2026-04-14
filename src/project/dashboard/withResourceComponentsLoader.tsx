@@ -4,7 +4,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 
 interface EnhancedProps {
   row: Resource;
@@ -24,7 +24,7 @@ export const withResourceComponentsLoader = <P extends object>(
     ...restProps
   }: EnhancedProps) => {
     if (isLoading) {
-      return <LoadingSpinnerIcon />;
+      return <LoadingSpinnerSimple />;
     }
     // FIX THIS: use the first limit/usage-based component for now
     const components =

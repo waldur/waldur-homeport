@@ -1,4 +1,9 @@
-import { Pause, PencilSimple, Play, Trash } from '@phosphor-icons/react';
+import {
+  PauseIcon,
+  PencilSimpleIcon,
+  PlayIcon,
+  TrashIcon,
+} from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import type { ArrowSettings } from 'waldur-js-client';
@@ -89,7 +94,7 @@ export const ArrowSettingsActions = ({
         <ActionButton
           action={handlePauseSync}
           title={translate('Pause sync')}
-          iconNode={<Pause weight="bold" />}
+          iconNode={<PauseIcon weight="bold" />}
           variant="secondary"
           pending={pauseSync.isPending}
         />
@@ -97,7 +102,7 @@ export const ArrowSettingsActions = ({
         <ActionButton
           action={handleResumeSync}
           title={translate('Resume sync')}
-          iconNode={<Play weight="bold" />}
+          iconNode={<PlayIcon weight="bold" />}
           variant="secondary"
           pending={resumeSync.isPending}
         />
@@ -105,13 +110,13 @@ export const ArrowSettingsActions = ({
       <ActionButton
         action={handleEdit}
         title={translate('Edit')}
-        iconNode={<PencilSimple weight="bold" />}
+        iconNode={<PencilSimpleIcon weight="bold" />}
         variant="secondary"
       />
       <ActionButton
         action={handleDelete}
         title={translate('Delete')}
-        iconNode={<Trash weight="bold" />}
+        iconNode={<TrashIcon weight="bold" />}
         variant="danger"
         pending={deleteSettings.isPending}
       />

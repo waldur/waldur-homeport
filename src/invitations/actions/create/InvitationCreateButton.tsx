@@ -1,7 +1,7 @@
 import { AtIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { PermissionMap } from '@waldur/permissions/enums';
 import { getPermissionDisabledTooltip } from '@waldur/permissions/utils';
@@ -27,8 +27,7 @@ export const InvitationCreateButton: FC<
       action={loadingProjects ? null : callback}
       title={translate('Invite by mail')}
       iconNode={
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        loadingProjects ? <LoadingSpinnerIcon /> : <AtIcon weight="bold" />
+        loadingProjects ? <LoadingSpinnerSimple /> : <AtIcon weight="bold" />
       }
       disabled={!canInvite}
       tooltip={tooltip}

@@ -4,7 +4,7 @@ import { useAsync } from 'react-use';
 import { billingTotalCostRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ServiceProvider } from '@waldur/marketplace/types';
 import { type RootState } from '@waldur/store/reducers';
@@ -68,7 +68,7 @@ const TotalCostComponent: React.FC<CustomerListComponentProps> = (props) => {
   if (loading) {
     return (
       <>
-        {translate('Loading total cost')} <LoadingSpinnerIcon />
+        {translate('Loading total cost')} <LoadingSpinnerSimple />
       </>
     );
   }

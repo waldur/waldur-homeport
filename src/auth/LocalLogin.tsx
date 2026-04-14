@@ -1,3 +1,4 @@
+import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
 import { translate } from '@waldur/i18n';
@@ -33,7 +34,7 @@ export const LocalLoginForm: FC<LocalLoginFormProps> = ({ onBack }) => (
         className="btn btn-link text-muted mt-2"
         onClick={onBack}
       >
-        <i className="fa fa-arrow-left me-2" />
+        <ArrowLeftIcon className="me-2" weight="bold" />
         {translate('Back to all sign-in options')}
       </button>
     )}

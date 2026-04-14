@@ -2,7 +2,7 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { ErrorMessage } from '@waldur/ErrorMessage';
 import { ErrorView } from '@waldur/ErrorView';
 
@@ -90,7 +90,7 @@ export function TableContent() {
   const refetchOverlay = isRefetching ? (
     <div className="table-loading-overlay">
       <h1 className="mb-0">
-        <LoadingSpinnerIcon />
+        <LoadingSpinnerSimple />
       </h1>
     </div>
   ) : null;

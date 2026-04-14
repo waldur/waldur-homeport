@@ -5,7 +5,7 @@ import { projectsListUsersList, projectsRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
 import { Link } from '@waldur/core/Link';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
 import { translate } from '@waldur/i18n';
 
@@ -94,8 +94,8 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
     >
       {isLoading ? (
         <div className="d-flex align-items-center justify-content-center py-4">
-          {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-          <LoadingSpinnerIcon />
+          {}
+          <LoadingSpinnerSimple />
           <span className="ms-2 text-muted">
             {translate('Loading project details...')}
           </span>

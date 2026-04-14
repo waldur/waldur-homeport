@@ -1,3 +1,4 @@
+import { PuzzlePieceIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Offering, SoftwarePackage } from 'waldur-js-client';
 
@@ -147,11 +148,10 @@ export const SoftwarePackageExpandableRow: FC<OwnProps> = ({
           label={translate('Extensions')}
           value={
             <div className="text-info">
-              <i className="fa fa-puzzle-piece me-1" />
-              {translate(
-                '%s extension packages available',
-                row.extension_count,
-              )}
+              <PuzzlePieceIcon className="me-1" weight="bold" />
+              {translate('{count} extension packages available', {
+                count: row.extension_count,
+              })}
             </div>
           }
         />

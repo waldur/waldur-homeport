@@ -1,8 +1,8 @@
 import {
-  ArrowRight,
-  CheckCircle,
-  FileText,
-  Users,
+  ArrowRightIcon,
+  CheckCircleIcon,
+  FileTextIcon,
+  UsersIcon,
 } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Card, Collapse } from 'react-bootstrap';
@@ -49,7 +49,11 @@ export const TwoStageWorkflowCard: FC = () => {
                   <div className="card-body">
                     <div className="d-flex align-items-center gap-3 mb-3">
                       <div className="rounded-circle bg-primary p-3">
-                        <Users size={24} weight="bold" className="text-white" />
+                        <UsersIcon
+                          size={24}
+                          weight="bold"
+                          className="text-white"
+                        />
                       </div>
                       <div>
                         <span className="badge badge-primary mb-1">
@@ -65,7 +69,7 @@ export const TwoStageWorkflowCard: FC = () => {
                     </p>
                     <ul className="mb-0">
                       <li className="d-flex align-items-start gap-2 mb-2">
-                        <CheckCircle
+                        <CheckCircleIcon
                           size={18}
                           weight="bold"
                           className="text-success mt-1 flex-shrink-0"
@@ -77,7 +81,7 @@ export const TwoStageWorkflowCard: FC = () => {
                         </span>
                       </li>
                       <li className="d-flex align-items-start gap-2 mb-2">
-                        <CheckCircle
+                        <CheckCircleIcon
                           size={18}
                           weight="bold"
                           className="text-success mt-1 flex-shrink-0"
@@ -89,7 +93,7 @@ export const TwoStageWorkflowCard: FC = () => {
                         </span>
                       </li>
                       <li className="d-flex align-items-start gap-2">
-                        <CheckCircle
+                        <CheckCircleIcon
                           size={18}
                           weight="bold"
                           className="text-success mt-1 flex-shrink-0"
@@ -107,10 +111,14 @@ export const TwoStageWorkflowCard: FC = () => {
 
               {/* Arrow */}
               <div className="d-none d-md-flex align-items-center">
-                <ArrowRight size={32} weight="bold" className="text-muted" />
+                <ArrowRightIcon
+                  size={32}
+                  weight="bold"
+                  className="text-muted"
+                />
               </div>
               <div className="d-flex d-md-none justify-content-center">
-                <ArrowRight
+                <ArrowRightIcon
                   size={32}
                   weight="bold"
                   className="text-muted"
@@ -124,7 +132,7 @@ export const TwoStageWorkflowCard: FC = () => {
                   <div className="card-body">
                     <div className="d-flex align-items-center gap-3 mb-3">
                       <div className="rounded-circle bg-success p-3">
-                        <FileText
+                        <FileTextIcon
                           size={24}
                           weight="bold"
                           className="text-white"
@@ -146,7 +154,7 @@ export const TwoStageWorkflowCard: FC = () => {
                     </p>
                     <ul className="mb-0">
                       <li className="d-flex align-items-start gap-2 mb-2">
-                        <CheckCircle
+                        <CheckCircleIcon
                           size={18}
                           weight="bold"
                           className="text-success mt-1 flex-shrink-0"
@@ -158,7 +166,7 @@ export const TwoStageWorkflowCard: FC = () => {
                         </span>
                       </li>
                       <li className="d-flex align-items-start gap-2 mb-2">
-                        <CheckCircle
+                        <CheckCircleIcon
                           size={18}
                           weight="bold"
                           className="text-success mt-1 flex-shrink-0"
@@ -170,7 +178,7 @@ export const TwoStageWorkflowCard: FC = () => {
                         </span>
                       </li>
                       <li className="d-flex align-items-start gap-2">
-                        <CheckCircle
+                        <CheckCircleIcon
                           size={18}
                           weight="bold"
                           className="text-success mt-1 flex-shrink-0"

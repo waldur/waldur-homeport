@@ -1,8 +1,8 @@
 import {
-  ArrowLeft,
-  CheckCircle,
-  CopySimple,
-  DownloadSimple,
+  ArrowLeftIcon,
+  CheckCircleIcon,
+  CopySimpleIcon,
+  DownloadSimpleIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useState } from 'react';
 import { Alert } from 'react-bootstrap';
@@ -62,7 +62,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
           <BaseButton
             variant="tertiary"
             onClick={onBack}
-            iconNode={<ArrowLeft />}
+            iconNode={<ArrowLeftIcon weight="bold" />}
             label={translate('Back')}
             size="lg"
           />
@@ -70,7 +70,13 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
             <BaseButton
               variant="tertiary"
               onClick={handleCopy}
-              iconNode={copied ? <CheckCircle weight="fill" /> : <CopySimple />}
+              iconNode={
+                copied ? (
+                  <CheckCircleIcon weight="fill" />
+                ) : (
+                  <CopySimpleIcon weight="bold" />
+                )
+              }
               label={
                 copied ? translate('Copied!') : translate('Copy to Clipboard')
               }
@@ -79,7 +85,7 @@ export const SiteAgentConfigPreview: FC<SiteAgentConfigPreviewProps> = ({
             <BaseButton
               variant="primary"
               onClick={handleDownload}
-              iconNode={<DownloadSimple />}
+              iconNode={<DownloadSimpleIcon weight="bold" />}
               label={translate('Download YAML')}
               size="lg"
             />

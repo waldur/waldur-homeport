@@ -8,7 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { ActionButton } from '@waldur/table/ActionButton';
 import exportExcel from '@waldur/table/exporters/excel';
@@ -76,8 +76,7 @@ export const ExportFullPriceList: FunctionComponent<
   return (
     <div className="exportFullPriceList">
       {loading ? (
-        // eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight
-        <LoadingSpinnerIcon />
+        <LoadingSpinnerSimple />
       ) : error ? (
         <>{translate('Unable to load full price list')}</>
       ) : components ? (

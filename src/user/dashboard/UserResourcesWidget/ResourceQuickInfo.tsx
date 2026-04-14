@@ -14,7 +14,7 @@ import {
 } from 'waldur-js-client';
 
 import { Link } from '@waldur/core/Link';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { getQuotaCellProps } from '@waldur/marketplace/resources/details/ResourceComponentItem';
@@ -104,8 +104,8 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
         {/* Components section */}
         {isLoadingOffering ? (
           <div className="d-flex align-items-center text-muted mb-3">
-            {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
-            <LoadingSpinnerIcon className="me-2" />
+            {}
+            <LoadingSpinnerSimple className="me-2" />
             <span className="fs-7">{translate('Loading details...')}</span>
           </div>
         ) : (

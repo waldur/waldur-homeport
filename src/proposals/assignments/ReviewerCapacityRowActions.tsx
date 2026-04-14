@@ -1,4 +1,4 @@
-import { PencilSimple } from '@phosphor-icons/react';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { CallReviewerPool } from 'waldur-js-client';
 
@@ -19,7 +19,7 @@ export const ReviewerCapacityRowActions: FC<
       <ActionItem
         title={translate('Edit capacity')}
         action={onEdit}
-        iconNode={<PencilSimple />}
+        iconNode={<PencilSimpleIcon weight="bold" />}
       />
     </ActionsDropdownComponent>
   );

@@ -1,4 +1,4 @@
-import { Question } from '@phosphor-icons/react';
+import { QuestionIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@waldur/core/lazyComponent';
@@ -33,7 +33,7 @@ export const MatchingSummaryButton = ({
         )
       }
       title={translate('How it works')}
-      iconNode={<Question weight="bold" />}
+      iconNode={<QuestionIcon weight="bold" />}
     />
   );
 };

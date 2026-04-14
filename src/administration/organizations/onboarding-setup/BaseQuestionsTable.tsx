@@ -1,4 +1,8 @@
-import { PencilSimple, Trash, DownloadSimple } from '@phosphor-icons/react';
+import {
+  PencilSimpleIcon,
+  TrashIcon,
+  DownloadSimpleIcon,
+} from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
 import { useDispatch } from 'react-redux';
@@ -421,12 +425,12 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
       <ActionItem
         action={() => handleEditQuestion(row)}
         title={translate('Edit')}
-        iconNode={<PencilSimple weight="bold" />}
+        iconNode={<PencilSimpleIcon weight="bold" />}
       />
       <ActionItem
         action={() => handleDeleteQuestion(row)}
         title={translate('Delete')}
-        iconNode={<Trash weight="bold" />}
+        iconNode={<TrashIcon weight="bold" />}
         className="text-danger"
         iconColor="danger"
       />
@@ -440,7 +444,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
         action={handleImportPreset}
         disabled={isImporting}
         disabledReason={translate('Import in progress')}
-        iconNode={<DownloadSimple weight="bold" />}
+        iconNode={<DownloadSimpleIcon weight="bold" />}
         variant="light"
       />
       <AddButton action={handleAddQuestion} />

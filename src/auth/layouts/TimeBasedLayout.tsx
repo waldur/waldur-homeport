@@ -1,3 +1,9 @@
+import {
+  SunIcon,
+  CloudSunIcon,
+  CloudMoonIcon,
+  MoonIcon,
+} from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
@@ -23,27 +29,27 @@ type TimeOfDay = 'morning' | 'afternoon' | 'evening' | 'night';
 
 const TIME_THEMES: Record<
   TimeOfDay,
-  { gradient: string; greeting: string; icon: string }
+  { gradient: string; greeting: string; icon: any }
 > = {
   morning: {
     gradient: 'linear-gradient(135deg, #667eea 0%, #764ba2 100%)',
     greeting: 'Good Morning',
-    icon: 'fa-sun',
+    icon: SunIcon,
   },
   afternoon: {
     gradient: 'linear-gradient(135deg, #f093fb 0%, #f5576c 100%)',
     greeting: 'Good Afternoon',
-    icon: 'fa-cloud-sun',
+    icon: CloudSunIcon,
   },
   evening: {
     gradient: 'linear-gradient(135deg, #4facfe 0%, #00f2fe 100%)',
     greeting: 'Good Evening',
-    icon: 'fa-cloud-moon',
+    icon: CloudMoonIcon,
   },
   night: {
     gradient: 'linear-gradient(135deg, #0c0c1e 0%, #1a1a3e 100%)',
     greeting: 'Good Night',
-    icon: 'fa-moon',
+    icon: MoonIcon,
   },
 };
 
@@ -75,7 +81,7 @@ export const TimeBasedLayout = () => {
       </div>
       <div className="layout-time-based-content">
         <div className="layout-time-based-greeting">
-          <i className={`fa ${theme.icon}`} />
+          <theme.icon size={32} />
           <h2>{theme.greeting}</h2>
         </div>
         <div className="layout-time-based-card">

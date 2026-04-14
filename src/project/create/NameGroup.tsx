@@ -2,7 +2,7 @@ import { useCallback } from 'react';
 import { Field } from 'react-final-form';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { StringField } from '@waldur/form';
 import { FormFieldError } from '@waldur/form/FormFieldError';
 import { translate } from '@waldur/i18n';
@@ -51,7 +51,7 @@ export const NameGroup = ({
             <small className="text-muted me-2">
               {translate('Loading projects')}
             </small>
-            <LoadingSpinnerIcon className="mb-2 w-20px h-20px" />
+            <LoadingSpinnerSimple className="mb-2 w-20px h-20px" />
           </div>
         ) : null
       }

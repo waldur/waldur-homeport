@@ -1,4 +1,8 @@
-import { CalendarPlus, EnvelopeSimple, X } from '@phosphor-icons/react';
+import {
+  CalendarPlusIcon,
+  EnvelopeSimpleIcon,
+  XIcon,
+} from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
@@ -104,7 +108,7 @@ export const AssignmentBatchRowActions: FC<AssignmentBatchRowActionsProps> = ({
         <ActionItem
           title={translate('Send')}
           action={handleSend}
-          iconNode={<EnvelopeSimple weight="bold" />}
+          iconNode={<EnvelopeSimpleIcon weight="bold" />}
           disabled={sendMutation.isPending}
         />
       )}
@@ -112,14 +116,14 @@ export const AssignmentBatchRowActions: FC<AssignmentBatchRowActionsProps> = ({
         <ActionItem
           title={translate('Extend deadline')}
           action={handleExtendDeadline}
-          iconNode={<CalendarPlus weight="bold" />}
+          iconNode={<CalendarPlusIcon weight="bold" />}
         />
       )}
       {canCancel && (
         <ActionItem
           title={translate('Cancel')}
           action={handleCancel}
-          iconNode={<X weight="bold" />}
+          iconNode={<XIcon weight="bold" />}
           className="text-danger"
           iconColor="danger"
           disabled={cancelMutation.isPending}

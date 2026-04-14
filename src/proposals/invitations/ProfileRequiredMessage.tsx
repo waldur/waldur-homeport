@@ -1,4 +1,4 @@
-import { Warning } from '@phosphor-icons/react';
+import { WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
@@ -27,7 +27,7 @@ export const ProfileRequiredMessage: FC<ProfileRequiredMessageProps> = ({
     <Card className="card-bordered mb-6">
       <Card.Body className="text-center py-10">
         <div className="mb-4">
-          <Warning size={64} className="text-warning" weight="duotone" />
+          <WarningIcon size={64} className="text-warning" weight="duotone" />
         </div>
         <h3 className="mb-4">{translate('Profile required')}</h3>
         <p className="text-muted mb-6">
