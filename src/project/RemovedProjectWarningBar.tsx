@@ -8,7 +8,6 @@ import { useDispatch, useSelector } from 'react-redux';
 
 import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
 import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { openModalDialog } from '@waldur/modal/actions';
 import { CompactActionButton } from '@waldur/table/CompactActionButton';
 import { getProject } from '@waldur/workspace/selectors';
@@ -52,15 +51,13 @@ export const RemovedProjectWarningBar: FC = () => {
             'This project has been removed. All resources have been terminated and user roles have been revoked.',
           )}
         </p>
-        {isExperimentalUiComponentsVisible() && (
-          <CompactActionButton
-            action={openRecoveryModal}
-            title={translate('Recover Project')}
-            iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
-            variant="warning"
-            className="ms-auto"
-          />
-        )}
+        <CompactActionButton
+          action={openRecoveryModal}
+          title={translate('Recover Project')}
+          iconNode={<ArrowCounterClockwiseIcon weight="bold" />}
+          variant="warning"
+          className="ms-auto"
+        />
       </div>
     </div>
   );
