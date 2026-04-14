@@ -81,8 +81,8 @@ body {
 }
 
 .image-placeholder {
-  color: if(isDarkMode(), $brand-500, $brand);
-  background-color: if(isDarkMode(), $gray-100, $brand-50);
+  color: $gray-500;
+  background-color: $gray-100;
 }
 
 /* Typography */
