@@ -96,8 +96,8 @@ const AllResultsTabContent = ({
             <SubmitButton
               submitting={false}
               type="button"
-              variant="link"
-              className="ms-8"
+              variant="text-primary"
+              className="btn-sm ms-5"
               onClick={addCurrentPageFavorite}
               label={translate('Add current page')}
               iconNode={<PlusIcon weight="bold" />}
