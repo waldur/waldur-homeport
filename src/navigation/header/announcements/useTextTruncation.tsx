@@ -1,7 +1,7 @@
 import { useEffect, useRef, useState } from 'react';
 
 export const useTextTruncation = () => {
-  const textRef = useRef<HTMLParagraphElement>(null);
+  const textRef = useRef<HTMLDivElement>(null);
   const [isTruncated, setIsTruncated] = useState(false);
 
   useEffect(() => {

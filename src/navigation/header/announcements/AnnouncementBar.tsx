@@ -1,5 +1,7 @@
 import { Icon } from '@phosphor-icons/react';
 import classNames from 'classnames';
+import DOMPurify from 'dompurify';
+import Markdown from 'markdown-to-jsx';
 import { FC, ReactNode, useMemo } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
@@ -8,31 +10,10 @@ import { translate } from '@waldur/i18n';
 
 import { useTextTruncation } from './useTextTruncation';
 
-// Simple function to strip markdown and convert to plain text for truncated display
-const stripMarkdown = (markdown: string): string => {
-  return (
-    markdown
-      // Remove headers
-      .replace(/#{1,6}\s+/g, '')
-      // Remove bold/italic
-      .replace(/\*\*([^*]+)\*\*/g, '$1')
-      .replace(/\*([^*]+)\*/g, '$1')
-      .replace(/__([^_]+)__/g, '$1')
-      .replace(/_([^_]+)_/g, '$1')
-      // Remove links but keep text
-      .replace(/\[([^\]]+)\]\([^)]+\)/g, '$1')
-      // Remove code blocks and inline code
-      .replace(/```[\s\S]*?```/g, '')
-      .replace(/`([^`]+)`/g, '$1')
-      // Remove list markers
-      .replace(/^\s*[-*+]\s+/gm, '')
-      .replace(/^\s*\d+\.\s+/gm, '')
-      // Replace multiple whitespace with single space
-      .replace(/\s+/g, ' ')
-      // Remove line breaks for single line display
-      .replace(/\n/g, ' ')
-      .trim()
-  );
+const decodeHtmlEntities = (value: string): string => {
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = value;
+  return textarea.value;
 };
 
 interface AnnouncementBarProps {
@@ -57,11 +38,14 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   hasColon,
 }) => {
   const { textRef, isTruncated } = useTextTruncation();
-
-  // Convert markdown to plain text for single-line display
-  const plainTextDescription = useMemo(
-    () => stripMarkdown(description),
+  const decodedDescription = useMemo(
+    () => decodeHtmlEntities(description),
     [description],
+  );
+
+  const safeDescription = useMemo(
+    () => DOMPurify.sanitize(decodedDescription),
+    [decodedDescription],
   );
 
   const showMoreButton = onShowMore && isTruncated;
@@ -82,18 +66,22 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
         {/* eslint-disable-next-line waldur-custom/enforce-phosphor-icon-weight */}
         <FeaturedIcon IconComponent={icon} variant={variant} />
 
-        <p
+        <div
           ref={textRef}
-          className={classNames('text-start fs-6', ellipsis && 'ellipsis')}
+          className={classNames('text-start fs-6 mb-0', ellipsis && 'ellipsis')}
         >
           <strong className="fw-bold">
             {label}
             {hasColon ? ': ' : ' '}
           </strong>
-          <span className={variant && colored ? undefined : 'text-muted'}>
-            {plainTextDescription}
-          </span>
-        </p>
+
+          <Markdown
+            options={{ forceInline: true }}
+            className={variant && colored ? undefined : 'text-muted'}
+          >
+            {safeDescription}
+          </Markdown>
+        </div>
         {showMoreButton && (
           <button
             type="button"
