@@ -4,11 +4,21 @@ import React from 'react';
 
 import './SafeMarkdown.scss';
 
+const decodeHtmlEntities = (value: string): string => {
+  if (typeof document === 'undefined') {
+    return value;
+  }
+
+  const textarea = document.createElement('textarea');
+  textarea.innerHTML = value;
+  return textarea.value;
+};
+
 export const SafeMarkdown: React.FC<{ text: string; smallTitles?: boolean }> = (
   props,
 ) => {
   const html = React.useMemo(
-    () => DOMPurify.sanitize(props.text),
+    () => DOMPurify.sanitize(decodeHtmlEntities(props.text)),
     [props.text],
   );
   return (
