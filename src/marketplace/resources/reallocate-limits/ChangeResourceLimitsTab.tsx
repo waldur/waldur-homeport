@@ -5,8 +5,9 @@ import { formValueSelector } from 'redux-form';
 
 import { translate } from '@waldur/i18n';
 import { Limits } from '@waldur/marketplace/common/types';
+import { getBillingPeriods } from '@waldur/marketplace/common/utils';
 
-import { FetchedData } from '../change-limits/utils';
+import { FetchedData, getRemainingMonths } from '../change-limits/utils';
 
 import { ComponentRow } from './ComponentRow';
 import { ComponentTotalRow } from './ComponentTotalRow';
@@ -30,6 +31,7 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
   ) as Limits;
 
   const {
+    resource,
     offering,
     plan,
     limits: currentLimits,
@@ -61,6 +63,32 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
     });
   }, [offering, plan, currentLimits, newLimits, usages]);
 
+  const { periodLabels, secondaryMultiplier } = useMemo(() => {
+    if (!plan)
+      return {
+        periodLabels: [
+          translate('Price per month'),
+          translate('Price per year'),
+        ],
+        secondaryMultiplier: 12,
+      };
+    let { periods } = getBillingPeriods(plan.unit);
+    let mult = 12;
+    const hasPrepaid = offering?.components?.some((c) => c.is_prepaid);
+    if (hasPrepaid && resource?.end_date && plan.unit === 'month') {
+      mult = getRemainingMonths(resource.end_date);
+      periods = [
+        periods[0],
+        mult > 0
+          ? translate('Price for remaining {count} months', {
+              count: mult,
+            })
+          : translate('Prepaid period expired'),
+      ];
+    }
+    return { periodLabels: periods.slice(0, 2), secondaryMultiplier: mult };
+  }, [plan, offering, resource]);
+
   const freedCapacity = useMemo(() => {
     if (!newLimits) return {};
     return calculateFreedCapacity(currentLimits, newLimits);
@@ -89,8 +117,8 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
               <th>{translate('Current limit')}</th>
               <th>{translate('New limit')}</th>
               <th>{translate('Change')}</th>
-              <th>{translate('Price per month')}</th>
-              <th>{translate('Price per year')}</th>
+              <th>{periodLabels[0]}</th>
+              <th>{periodLabels[1]}</th>
             </tr>
           </thead>
           <tbody>
@@ -101,9 +129,14 @@ export const ChangeResourceLimitsTab: FC<ChangeResourceLimitsTabProps> = ({
                 limits={offeringLimits[component.type]}
                 offeringLimits={offeringLimits}
                 plan={plan}
+                secondaryMultiplier={secondaryMultiplier}
               />
             ))}
-            <ComponentTotalRow components={components} plan={plan} />
+            <ComponentTotalRow
+              components={components}
+              plan={plan}
+              secondaryMultiplier={secondaryMultiplier}
+            />
           </tbody>
         </Table>
       </div>

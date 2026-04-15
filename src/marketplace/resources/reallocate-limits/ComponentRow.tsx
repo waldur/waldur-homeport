@@ -29,6 +29,7 @@ interface ComponentRowProps {
   limits: Limits;
   offeringLimits: OfferingLimits;
   plan: BasePublicPlan;
+  secondaryMultiplier?: number;
 }
 
 const CellWrapper: FC<any> = (props) => {
@@ -87,10 +88,11 @@ export const ComponentRow: FC<ComponentRowProps> = ({
   component,
   limits,
   plan,
+  secondaryMultiplier = 12,
 }) => {
   const price = Number(plan?.prices?.[component.type]) || 0;
   const pricePerMonth = Number(price) || 0;
-  const pricePerYear = pricePerMonth * 12;
+  const pricePerSecondary = pricePerMonth * secondaryMultiplier;
 
   const baseValidators = getResourceComponentValidator(limits);
   const currentLimitValidator = (value: number) => {
@@ -127,7 +129,7 @@ export const ComponentRow: FC<ComponentRowProps> = ({
         <ChangedLimitField changedLimit={component.changedLimit} />
       </td>
       <td>EUR {pricePerMonth.toFixed(2)}</td>
-      <td>EUR {pricePerYear.toFixed(2)}</td>
+      <td>EUR {pricePerSecondary.toFixed(2)}</td>
     </tr>
   );
 };

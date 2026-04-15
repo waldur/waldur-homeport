@@ -66,6 +66,8 @@ export const ResourceLimitChangeInfo = ({
         currentLimits,
         usages,
         true,
+        false,
+        resource.end_date,
       );
     }
     return {

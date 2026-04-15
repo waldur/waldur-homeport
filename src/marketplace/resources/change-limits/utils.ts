@@ -1,3 +1,4 @@
+import { DateTime } from 'luxon';
 import {
   BasePublicPlan,
   marketplacePublicOfferingsPlansRetrieve,
@@ -11,6 +12,7 @@ import {
 
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { translate } from '@waldur/i18n';
 import {
   filterOfferingComponents,
   getFormLimitParser,
@@ -33,6 +35,12 @@ export interface FetchedData {
   offeringLimits: OfferingLimits;
   concealBillingInfo: boolean;
 }
+
+export const getRemainingMonths = (endDate: string): number => {
+  const now = DateTime.now();
+  const end = DateTime.fromISO(endDate);
+  return Math.max(0, Math.ceil(end.diff(now, 'months').months));
+};
 
 export const getLimitChangeRequirements = (
   resource: Resource,
@@ -120,11 +128,30 @@ export const getLimitChangeData = (
   usages,
   orderCanBeApproved,
   concealBillingInfo = false,
+  resourceEndDate?: string,
 ): StateProps => {
-  const { periods, multipliers } = getBillingPeriods(plan.unit);
+  let { periods, multipliers } = getBillingPeriods(plan.unit);
   const offeringComponents = filterOfferingComponents(offering).filter(
     (component) => component.billing_type === 'limit' || component.is_prepaid,
   );
+
+  // For prepaid resources, replace the annual price column with the remaining prepaid period
+  const hasPrepaidComponents = offeringComponents.some((c) => c.is_prepaid);
+  if (hasPrepaidComponents && resourceEndDate) {
+    const remainingMonths = getRemainingMonths(resourceEndDate);
+    if (plan.unit === 'month' && periods.length >= 2) {
+      periods = [
+        periods[0],
+        remainingMonths > 0
+          ? translate('Price for remaining {count} months', {
+              count: remainingMonths,
+            })
+          : translate('Prepaid period expired'),
+      ];
+      multipliers = [multipliers[0], remainingMonths];
+    }
+  }
+
   const components = offeringComponents.map((component) => {
     const price = plan.prices[component.type] || 0;
     const subTotal = price * newLimits[component.type] || 0;
