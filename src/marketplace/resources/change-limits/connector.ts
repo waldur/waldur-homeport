@@ -50,6 +50,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
   if (ownProps.asyncState.value) {
     const newLimits = formSelector(state, 'limits');
     const {
+      resource,
       offering,
       plan,
       usages,
@@ -64,6 +65,7 @@ const mapStateToProps = (state, ownProps: OwnProps): StateProps => {
       usages,
       orderCanBeApproved,
       concealBillingInfo,
+      resource.end_date,
     );
   }
   const shouldConcealPrices = isFeatureVisible(

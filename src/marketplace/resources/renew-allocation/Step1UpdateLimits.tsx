@@ -157,6 +157,7 @@ const UpdateLimitsTable: FC<{
         usages,
         true,
         data.concealBillingInfo,
+        data.resource.end_date,
       );
     }
     const shouldConcealPrices = isFeatureVisible(

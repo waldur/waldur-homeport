@@ -9,11 +9,13 @@ interface ComponentTotalRowProps {
     changedLimit: number;
   }>;
   plan: BasePublicPlan;
+  secondaryMultiplier?: number;
 }
 
 export const ComponentTotalRow: FC<ComponentTotalRowProps> = ({
   components,
   plan,
+  secondaryMultiplier = 12,
 }) => {
   const total = useMemo(() => {
     return components.reduce((sum, component) => {
@@ -29,7 +31,9 @@ export const ComponentTotalRow: FC<ComponentTotalRowProps> = ({
         {translate('Total:')}
       </td>
       <td className="fw-bold">EUR {total.toFixed(2)}</td>
-      <td className="fw-bold">EUR {(total * 12).toFixed(2)}</td>
+      <td className="fw-bold">
+        EUR {(total * secondaryMultiplier).toFixed(2)}
+      </td>
     </tr>
   );
 };
