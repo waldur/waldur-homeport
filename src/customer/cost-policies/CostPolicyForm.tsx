@@ -128,7 +128,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           validate={required}
           required
           placeholder={translate('Search and select project...')}
-          loadOptions={(query, prevOptions, { page }) =>
+          loadOptions={(query, prevOptions, page) =>
             projectAutocomplete(
               currentOrganization?.uuid,
               query,
@@ -169,7 +169,7 @@ export const CostPolicyForm: FC<CostPolicyFormProps> = (props) => {
           validate={required}
           required
           placeholder={translate('Search and select organization...')}
-          loadOptions={(query, prevOptions, { page }) =>
+          loadOptions={(query, prevOptions, page) =>
             organizationAutocomplete(query, prevOptions, page, {
               field: [
                 'name',
