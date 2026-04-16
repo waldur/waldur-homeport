@@ -6,7 +6,7 @@ Use this agent when working with modern state management patterns, component arc
 
 This agent specializes in:
 - **Modern State Management**: React Query, React Final Form, local component state
-- **Legacy System Understanding**: Redux/Redux Saga (for maintenance only - deprecated for new development)
+- **Legacy System Understanding**: Redux (for maintenance only - deprecated for new development)
 - **Component Architecture**: Container vs Presentation component patterns
 - **State Management Migration**: Moving from Redux to React Query patterns
 - **Navigation & Routing**: UI-Router React state-based routing
@@ -17,10 +17,10 @@ This agent specializes in:
 
 Use this agent when:
 - **New Development**: Implementing React Query, custom hooks, local state patterns
-- **Legacy Maintenance**: Understanding existing Redux/Saga code (do not extend)
+- **Legacy Maintenance**: Understanding existing Redux code (do not extend)
 - **Architecture Decisions**: Choosing between React Query vs local state
 - **Component Design**: Container vs presentation component patterns
-- **State Migration**: Moving from Redux/Saga to modern patterns
+- **State Migration**: Moving from Redux to modern patterns
 - **Navigation**: Setting up UI-Router React routing patterns
 - **Module Organization**: Structuring feature-based folders
 - **Data Flow**: Understanding modern async operation patterns
@@ -35,7 +35,6 @@ Use this agent when:
 
 ### Legacy State Management (Maintenance Only - Do Not Extend)
 - **Redux Store**: Global application state (legacy - avoid for new features)
-- **Redux Saga**: Async operations (legacy - use React Query instead)
 - **Table Store**: Specialized table data management (`src/table/` - legacy pattern)
 
 ### Component Architecture
@@ -59,7 +58,7 @@ Feature-based structure under `src/`:
 ## Technology Stack
 
 - **React 18.3.0** with TypeScript 5.7.3
-- **Redux 4.2.1** with Redux Saga 1.3.0
+- **Redux 4.2.1** for legacy state management
 - **UI Router React 1.0.7** for navigation
 - **React Bootstrap 2.10.9** for UI components
 - **TanStack React Query 5.80.6** for server state
@@ -84,20 +83,6 @@ const { data, isLoading, error, refetch } = useQuery({
 });
 ```
 
-### Legacy Pattern (Maintenance Only - Do Not Extend)
-**Redux Saga** (deprecated):
-- Centralized API calls through actions and sagas
-- Table data management with specialized store
-- Periodic polling and real-time updates
-
-```typescript
-// Legacy pattern - DO NOT USE FOR NEW DEVELOPMENT
-// Only for understanding existing code
-function* fetchData(action) {
-  // ... saga implementation
-}
-```
-
 ## Performance Optimizations
 
 ### Modern Optimizations
@@ -120,12 +105,12 @@ function* fetchData(action) {
 - Use React Final Form for forms
 
 ### ❌ DON'T for New Components
-- Don't add new Redux actions/reducers/sagas
+- Don't add new Redux actions/reducers
 - Don't extend existing Redux patterns
 - Don't create new table store implementations
 - Don't use Redux Form (use React Final Form instead)
 
 ### 🔧 Legacy Maintenance
-- Understand Redux/Saga for bug fixes only
+- Understand Redux for bug fixes only
 - Gradually migrate components to modern patterns
 - Don't break existing Redux functionality

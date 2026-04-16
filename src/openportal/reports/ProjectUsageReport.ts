@@ -6,13 +6,14 @@
  * filter and aggregate the data client-side without re-fetching.
  */
 
-import { secondsToHours } from './storage';
 import {
-  DailyProjectUsageReportJson,
-  ProjectUsageReportJson,
+  DailyProjectUsageReport as DailyProjectUsageReportJson,
+  ProjectUsageReport as ProjectUsageReportJson,
   Usage,
-  UsageReportApiItem,
-} from './types';
+  CachedProjectUsageReport as UsageReportApiItem,
+} from 'waldur-js-client';
+
+import { secondsToHours } from './storage';
 
 // ─── DailyProjectUsageReport ─────────────────────────────────────────────────
 

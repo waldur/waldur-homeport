@@ -11,75 +11,53 @@
  */
 
 /* eslint-disable waldur-custom/no-direct-client-usage */
-import { get, fixURL, getHeaders } from '@waldur/core/api';
+import {
+  openportalProjectUsageReportsList,
+  openportalProjectStorageReportsList,
+  OpenportalProjectUsageReportsListData,
+  OpenportalProjectStorageReportsListData,
+  CachedProjectUsageReport,
+  CachedProjectStorageReport,
+  Project,
+} from 'waldur-js-client';
+
+import { get, getAllPages } from '@waldur/core/api';
+import type { ProgressCallback } from '@waldur/core/api';
 
 import { getCached, setCached, TTL } from './localStorageCache';
 import { ProjectStorageReport } from './ProjectStorageReport';
 import { ProjectUsageReport } from './ProjectUsageReport';
-import type { ProjectAccountingSummary } from './types';
-import {
-  StorageReportApiItem,
-  StorageReportFilters,
-  UsageReportApiItem,
-  UsageReportFilters,
-} from './types';
 
-async function getAllWithProgress<T>(
-  endpoint: string,
-  onProgress?: (page: number, totalPages: number | undefined) => void,
-): Promise<T[]> {
-  const results: T[] = [];
-  let url: string | null = fixURL(`/api${endpoint}`);
-  let page = 0;
-  let totalPages: number | undefined;
-  while (url) {
-    const response = await fetch(url, { headers: getHeaders() });
-    if (!response.ok) throw new Error(`Fetch failed: ${response.status}`);
-    const data: T[] = await response.json();
-    results.push(...data);
-    page += 1;
-    const linkHeader = response.headers.get('Link');
-    const countHeader = response.headers.get('X-Result-Count');
-    const pageSize = data.length;
-    if (countHeader && pageSize > 0) {
-      totalPages = Math.ceil(parseInt(countHeader) / pageSize);
-    }
-    if (onProgress) onProgress(page, totalPages);
-    const match = linkHeader?.match(/<([^>]+)>;\s*rel="next"/);
-    url = match ? match[1] : null;
-  }
-  return results;
+/** Extends the SDK Project type with OpenPortal-specific optional fields */
+export interface OpenPortalProject extends Project {
+  start_date?: string | null;
+  end_date?: string | null;
+  is_expired?: boolean;
+  is_in_grace_period?: boolean;
 }
 
-function getAll<T>(endpoint: string): Promise<T[]> {
-  return getAllWithProgress<T>(endpoint);
-}
+type UsageReportFilters = OpenportalProjectUsageReportsListData['query'];
 
-function buildQuery(filters: object): string {
-  const params = new URLSearchParams(
-    Object.entries(filters)
-      .filter(([, v]) => v !== undefined && v !== null)
-      .map(([k, v]) => [k, String(v)]),
-  );
-  const s = params.toString();
-  return s ? `?${s}` : '';
-}
+type StorageReportFilters = OpenportalProjectStorageReportsListData['query'];
 
 /**
  * Fetch cached usage reports matching the given filters.
  * Returns one ProjectUsageReport per API envelope item.
  * Use ProjectUsageReport.combine() to merge them if needed.
  */
-type ProgressCallback = (page: number, totalPages: number | undefined) => void;
 
 export const fetchUsageReports = async (
   filters: UsageReportFilters = {},
   onProgress?: ProgressCallback,
 ): Promise<ProjectUsageReport[]> => {
-  const endpoint = `/openportal-project-usage-reports/${buildQuery(filters)}`;
-  const items = onProgress
-    ? await getAllWithProgress<UsageReportApiItem>(endpoint, onProgress)
-    : await getAll<UsageReportApiItem>(endpoint);
+  const fetchPage = (page: number) =>
+    openportalProjectUsageReportsList({
+      query: { ...filters, page, page_size: 100 },
+    });
+  const items = await getAllPages<CachedProjectUsageReport>(
+    fetchPage,
+    onProgress,
+  );
   return items.map(ProjectUsageReport.fromApiResponse);
 };
 
@@ -92,10 +70,14 @@ export const fetchStorageReports = async (
   filters: StorageReportFilters = {},
   onProgress?: ProgressCallback,
 ): Promise<ProjectStorageReport[]> => {
-  const endpoint = `/openportal-project-storage-reports/${buildQuery(filters)}`;
-  const items = onProgress
-    ? await getAllWithProgress<StorageReportApiItem>(endpoint, onProgress)
-    : await getAll<StorageReportApiItem>(endpoint);
+  const fetchPage = (page: number) =>
+    openportalProjectStorageReportsList({
+      query: { ...filters, page, page_size: 100 },
+    });
+  const items = await getAllPages<CachedProjectStorageReport>(
+    fetchPage,
+    onProgress,
+  );
   return items.map(ProjectStorageReport.fromApiResponse);
 };
 
@@ -200,15 +182,3 @@ export const fetchUserMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
 ) => fetchMappingBatched<UserInfo>('user_mapping', ids, onProgress);
-
-// ── Accounting Summary stub (replace after mastermind MR1 + SDK regen) ────────
-
-/** Stub for openportalAccountingSummaryList — will be replaced by SDK-generated function */
-export const openportalAccountingSummaryList = (
-  // eslint-disable-next-line @typescript-eslint/no-unused-vars
-  _options: {
-    query?: { customer_uuid?: string; page_size?: number; page?: number };
-  },
-): Promise<{ data: ProjectAccountingSummary[]; response: Response }> => {
-  return Promise.resolve({ data: [], response: new Response() });
-};

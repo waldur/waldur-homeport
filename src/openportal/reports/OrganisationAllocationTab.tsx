@@ -34,7 +34,11 @@ import {
   Tabs,
 } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { projectsList } from 'waldur-js-client';
+import type { ProjectAccountingSummary } from 'waldur-js-client';
+import {
+  openportalAccountingSummaryList,
+  projectsList,
+} from 'waldur-js-client';
 
 import { getNextPageUrl } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
@@ -42,21 +46,20 @@ import { ENV } from '@waldur/core/config';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { Tip } from '@waldur/core/Tooltip';
-import { translate, formatJsxTemplate } from '@waldur/i18n';
+import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { getCustomer } from '@waldur/workspace/selectors';
 
-import { openportalAccountingSummaryList } from './api';
+import type { OpenPortalProject } from './api';
 import {
+  clearCached,
+  formatCacheAge,
+  getCacheAge,
   getCached,
   setCached,
-  clearCached,
-  getCacheAge,
-  formatCacheAge,
   TTL,
 } from './localStorageCache';
 import { downloadAllocationExcel } from './reportExcel';
 import { StageProgress } from './StageProgress';
-import type { ProjectAccountingSummary, OpenPortalProject } from './types';
 
 // ── Helpers ───────────────────────────────────────────────────────────────────
 

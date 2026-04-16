@@ -4,15 +4,16 @@
  * and templemeads/src/storage.rs (Quota).
  */
 
+import {
+  DailyStorageReport as DailyStorageReportJson,
+  ProjectStorageReport as ProjectStorageReportJson,
+  OpenPortalQuota as QuotaJson,
+  CachedProjectStorageReport as StorageReportApiItem,
+} from 'waldur-js-client';
+
 import { translate } from '@waldur/i18n';
 
 import { formatStorageBytes, parseStorageBytes } from './storage';
-import {
-  DailyStorageReportJson,
-  ProjectStorageReportJson,
-  QuotaJson,
-  StorageReportApiItem,
-} from './types';
 
 // ─── Quota ────────────────────────────────────────────────────────────────────
 

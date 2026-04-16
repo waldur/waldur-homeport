@@ -54,7 +54,7 @@ docs/
 - BaseDeployPage step definitions
 
 ### Architecture Guides
-- Redux/Saga patterns and data flow
+- Redux patterns and data flow (legacy)
 - React Query integration strategies
 - Component architecture decisions
 - State management patterns
@@ -83,7 +83,7 @@ docs/
 - **Component Examples**: Show proper TypeScript interfaces and React patterns
 - **Form Examples**: React Final Form with FormGroup and validation
 - **API Examples**: React Query hooks with Waldur JS Client
-- **State Examples**: Redux/Saga patterns and React Query integration
+- **State Examples**: Redux patterns and React Query integration
 
 ## Verification Process
 

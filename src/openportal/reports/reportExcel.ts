@@ -25,6 +25,7 @@
  */
 
 import JSZip from 'jszip';
+import type { ProjectAccountingSummary } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
 import { SharedStrings, getSheetData } from '@waldur/table/exporters/excel';
@@ -33,7 +34,6 @@ import { saveFile } from '@waldur/table/exporters/saveFile';
 import { ProjectStorageReport } from './ProjectStorageReport';
 import { ProjectUsageReport } from './ProjectUsageReport';
 import { secondsToHours } from './storage';
-import type { ProjectAccountingSummary } from './types';
 import { isDayWaitSpurious, NameMaps } from './usageChartOptions';
 
 // ── XML escaping ─────────────────────────────────────────────────────────────
