@@ -7,6 +7,7 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
+import { fetchResultCount } from '@waldur/core/api';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
 
@@ -57,18 +58,11 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
     staleTime: 30000,
   });
 
-  const reviewerPoolCount = parseInt(
-    reviewerPoolData?.response?.headers?.get('x-result-count') ?? '0',
-    10,
-  );
-  const proposalsCount = parseInt(
-    proposalsData?.response?.headers?.get('x-result-count') ?? '0',
-    10,
-  );
-  const reviewsCount = parseInt(
-    reviewsData?.response?.headers?.get('x-result-count') ?? '0',
-    10,
-  );
+  const reviewerPoolCount = reviewerPoolData
+    ? fetchResultCount(reviewerPoolData)
+    : 0;
+  const proposalsCount = proposalsData ? fetchResultCount(proposalsData) : 0;
+  const reviewsCount = reviewsData ? fetchResultCount(reviewsData) : 0;
 
   return (
     <Row className="mb-6">

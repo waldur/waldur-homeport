@@ -11,7 +11,6 @@ This agent specializes in:
 - **CRUD Operations**: Create, read, update, delete patterns with refresh
 - **Error Handling**: Consistent error display and retry mechanisms
 - **Data Loading**: Custom hooks and async form field loading
-- **Migration Patterns**: Redux Saga to React Query transition
 
 ## When to Use
 
@@ -22,7 +21,6 @@ Use this agent when:
 - Handling CRUD operations with proper refresh mechanisms
 - Creating custom hooks for data fetching logic
 - Debugging API integration issues and error handling
-- Migrating from Redux Saga to React Query patterns
 
 ## Data Loading Patterns
 
@@ -57,11 +55,11 @@ export const useOrganizationGroups = () => {
 };
 ```
 
-### Legacy Redux Saga Pattern
+### Table Data Loading
 Used for table data management with:
 - Centralized state in Redux store
 - Automatic pagination and filtering
-- Periodic polling with `pullInterval`
+- Periodic polling with `refetchInterval` in React Query
 
 ## CRUD Operation Patterns
 

@@ -63,7 +63,7 @@ export function useTableQuery(
   // Debounce query to avoid too many requests
   const debouncedQuery = useDebouncedValue(query, 100);
 
-  // Build fields array (same logic as saga)
+  // Build fields array
   const fields = useMemo(() => {
     let result: string[] = [];
     if (filter?.field || Object.keys(activeColumns).length) {
@@ -79,7 +79,7 @@ export function useTableQuery(
     return result;
   }, [filter?.field, activeColumns, mandatoryFields]);
 
-  // Build request (same logic as saga)
+  // Build request
   const buildRequest = useCallback(
     (signal: AbortSignal): TableRequest => {
       const request: TableRequest = {

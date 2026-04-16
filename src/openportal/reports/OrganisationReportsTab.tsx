@@ -33,6 +33,7 @@ import {
   fetchUserMapping,
   mappingBatchCount,
 } from './api';
+import type { OpenPortalProject } from './api';
 import {
   clearCached,
   clearMappingCache,
@@ -55,7 +56,6 @@ import {
 } from './ReportPreFilters';
 import { StageProgress } from './StageProgress';
 import { StorageReportVis } from './StorageReportVis';
-import type { OpenPortalProject } from './types';
 import { NameMaps } from './usageChartOptions';
 import { UsageReportVis } from './UsageReportVis';
 

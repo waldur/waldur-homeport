@@ -4,6 +4,7 @@ import { FC, useState } from 'react';
 import { projectsListUsersList, projectsRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { fetchResultCount } from '@waldur/core/api';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
@@ -56,10 +57,9 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
         },
       });
       // Get total count from response headers if available
-      const resultCountHeader =
-        response.response?.headers?.get('x-result-count');
-      const totalCount = resultCountHeader
-        ? parseInt(resultCountHeader, 10)
+      const count = fetchResultCount(response as any);
+      const totalCount = !Number.isNaN(count)
+        ? count
         : response.data?.length || 0;
       return {
         members: response.data || [],

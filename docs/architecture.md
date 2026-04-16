@@ -6,7 +6,7 @@ This guide covers the application architecture, design patterns, and organizatio
 
 - **React** with TypeScript for component development
 - **Vite** for build tooling and development server
-- **Redux** with Redux Saga for legacy state management
+- **Redux** for legacy state management
 - **UI Router React** for navigation (state-based routing)
 - **React Bootstrap** (Bootstrap 5) for UI components
 - **React Final Form** for modern form handling
@@ -33,7 +33,7 @@ The codebase follows a feature-based folder structure under `src/`:
 - Each domain (customer, project, marketplace, etc.) has its own folder
 - Components are co-located with their specific business logic
 - Shared utilities are in `core/` and `table/`
-- API interactions use Redux patterns with sagas
+- Legacy API interactions might use Redux patterns
 
 ### State Management
 
@@ -47,7 +47,6 @@ The codebase follows a feature-based folder structure under `src/`:
 #### Legacy Patterns (Maintenance Only - Do Not Extend)
 
 - **Redux Store**: Global state with dynamic reducer injection (legacy - avoid for new features)
-- **Redux Saga**: Async operations and side effects (legacy - use React Query instead)
 - **Table Store**: Specialized table data management in `src/table/` (legacy pattern)
 
 ### Navigation & Routing
@@ -182,9 +181,9 @@ return <Component {...props} />;
 
 #### Legacy Approach (Maintenance Only)
 
-- **Redux Actions/Sagas**: Centralized API calls (legacy - use React Query instead)
+- **Redux Actions**: Centralized API calls (legacy - use React Query instead)
 - **Table Store**: Standardized data loading patterns (legacy pattern)
-- **Periodic Polling**: Real-time updates through sagas (use React Query polling instead)
+- **Periodic Polling**: Real-time updates via legacy polling (use React Query polling instead)
 
 ## Component Architecture
 

@@ -11,6 +11,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { Button, Card, Container, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
+import {
+  CachedProjectStorageReport as StorageReportApiItem,
+  CachedProjectUsageReport as UsageReportApiItem,
+} from 'waldur-js-client';
 
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -35,7 +39,6 @@ import {
 import { ProjectStorageReport } from './ProjectStorageReport';
 import { ProjectUsageReport } from './ProjectUsageReport';
 import { StorageReportVis } from './StorageReportVis';
-import { StorageReportApiItem, UsageReportApiItem } from './types';
 import { NameMaps } from './usageChartOptions';
 import { UsageReportVis } from './UsageReportVis';
 

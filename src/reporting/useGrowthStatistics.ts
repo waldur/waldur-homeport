@@ -35,11 +35,11 @@ export const useGrowthStatistics = () => {
           (r) => r.data || [],
         ),
         marketplaceStatsTopServiceProvidersByResourcesList({
-          query: { limit: 5 },
+          query: { page_size: 5 },
           signal,
         }).then((r) => r.data || []),
         marketplaceStatsCountActiveResourcesGroupedByOfferingList({
-          query: { limit: 5 },
+          query: { page_size: 5 },
           signal,
         }).then((r) => r.data || []),
         marketplaceStatsCountUniqueUsersConnectedWithActiveResourcesOfServiceProviderList(

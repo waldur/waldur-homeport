@@ -1,5 +1,6 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useState } from 'react';
+import { invoicesImportUsage } from 'waldur-js-client';
 
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
@@ -7,7 +8,6 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { showError, showSuccess } from '@waldur/store/notify';
 
-import { importComponentUsage } from './api';
 import { Step1UploadFile } from './Step1UploadFile';
 import { Step2ColumnMapping } from './Step2ColumnMapping';
 import { Step3PreviewAndImport } from './Step3PreviewAndImport';
@@ -90,7 +90,7 @@ export const ComponentUsageImportDialog: FC<ComponentUsageImportDialogProps> = (
           })),
         };
 
-        const result = await importComponentUsage(payload);
+        const result = (await invoicesImportUsage({ body: payload })).data;
 
         if (result.created > 0) {
           dispatch(

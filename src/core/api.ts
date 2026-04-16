@@ -14,6 +14,7 @@ import {
 import { cleanObject } from '@waldur/core/utils';
 import { router } from '@waldur/router';
 
+/** Maximum number of items allowed in a single page request. */
 export const MAX_PAGE_SIZE = 300;
 
 const querySerializer = (params) =>
@@ -38,6 +39,11 @@ const getAuthHeader = () => {
   }
 };
 
+/**
+ * Generates default HTTP headers for API requests.
+ * @param impersonate Whether to include impersonation headers if active.
+ * @returns An object containing common headers like Accept and Accept-Language.
+ */
 export function getHeaders(impersonate = true) {
   const headers = {
     Accept: 'application/json',
@@ -55,6 +61,10 @@ export function getHeaders(impersonate = true) {
   return headers;
 }
 
+/**
+ * Initializes the global API client configuration.
+ * Sets up base URL, authentication headers, and query serialization logic.
+ */
 export function initApiClient() {
   const headers = getHeaders();
   client.setConfig({
@@ -99,6 +109,12 @@ client.interceptors.response.use((response) => {
   return response;
 });
 
+/**
+ * Constructs a URL for a specific icon by name.
+ * @param name Icon identifier.
+ * @param language Optional language code for localized icons.
+ * @returns Fully qualified icon URL.
+ */
 export const getIconUrl = (name: string, language?: string) => {
   const baseUrl = `${ENV.apiEndpoint}api/icons/${name}/`;
   if (language) {
@@ -107,14 +123,31 @@ export const getIconUrl = (name: string, language?: string) => {
   return baseUrl;
 };
 
+/**
+ * Ensures an endpoint URL is absolute and properly prefixed with the API base.
+ * @param endpoint Relative or absolute endpoint path.
+ * @returns Fully qualified absolute URL.
+ */
 export const fixURL = (endpoint: string) =>
   endpoint.startsWith('http')
     ? endpoint
     : `${ENV.apiEndpoint}${endpoint.startsWith('/api') ? '' : 'api'}${endpoint}`;
 
+/**
+ * Extracts the total item count from the API response headers.
+ * Uses the 'x-result-count' header which is standard for Waldur collection endpoints.
+ * @param result The API request result object.
+ * @returns The total number of items available for the query.
+ */
 export const fetchResultCount = (result: Awaited<RequestResult>): number =>
   parseInt(result.response.headers.get('x-result-count'), 10);
 
+/**
+ * Generic GET request helper using native fetch.
+ * Handles both JSON and binary (blob) responses automatically based on content type.
+ * @param endpoint The API endpoint to fetch.
+ * @returns Typed result or Blob.
+ */
 export async function get<T = any>(endpoint: string): Promise<T> {
   const response = await fetch(
     fixURL(endpoint),
@@ -139,6 +172,11 @@ export async function get<T = any>(endpoint: string): Promise<T> {
   }
 }
 
+/**
+ * Transforms an API response into a format suitable for selection components.
+ * @param result The API request result containing data and response headers.
+ * @returns An object with 'options' (the raw items) and 'totalItems' (count from headers).
+ */
 export function parseSelectData<TData = {}>(
   result: Awaited<RequestResult<TData>>,
 ) {
@@ -148,6 +186,11 @@ export function parseSelectData<TData = {}>(
   };
 }
 
+/**
+ * Simple POST request helper using native fetch.
+ * @param endpoint The API endpoint to post to.
+ * @param data Optional request body.
+ */
 export async function post(endpoint: string, data?: object) {
   await fetch(fixURL(endpoint), {
     method: 'POST',
@@ -159,6 +202,11 @@ export async function post(endpoint: string, data?: object) {
   });
 }
 
+/**
+ * extracts the 'next' page URL from the standard Link header.
+ * @param response The raw Response object.
+ * @returns The absolute URL for the next page or null if not available.
+ */
 export const getNextPageUrl = (response) => {
   // Extract next page URL from header links
   const link = response.headers['link'] || response.headers.get('link');
@@ -176,26 +224,59 @@ export const getNextPageUrl = (response) => {
   return nextLink.split(';')[0].slice(1, -1);
 };
 
+/**
+ * Callback function to monitor the progress of a multi-page API fetching operation.
+ * @param page The index of the page currently processed.
+ * @param totalPages Total estimated number of pages, computed heuristically based on 'x-result-count'.
+ */
+export type ProgressCallback = (
+  page: number,
+  totalPages: number | undefined,
+) => void;
+
+/**
+ * Fetches all pages for a collection endpoint iteratively.
+ * @param fetchPage Callback that performs the request for a specific page.
+ * @param onProgress Optional callback to track the loading status across multiple pages.
+ * @returns A flattened array containing items from all pages.
+ */
 export async function getAllPages<T>(
-  fetchPage: (page: number) => Promise<{ data: T[]; response }>,
+  fetchPage: (page: number) => Promise<{ data?: T[]; response: any }>,
+  onProgress?: ProgressCallback,
 ): Promise<T[]> {
-  let results: T[] = [];
-  let nextUrl: string | undefined;
+  const results: T[] = [];
   let page = 1;
+  let totalPages: number | undefined;
+  let hasNext = true;
 
-  do {
+  while (hasNext) {
     const result = await fetchPage(page);
-    results = results.concat(result.data);
+    const pageData = result.data || [];
+    results.push(...pageData);
 
-    page += 1;
-    if (result.response) {
-      nextUrl = getNextPageUrl(result.response);
+    if (onProgress) {
+      const totalItems = fetchResultCount(result as any);
+      const pageSize = pageData.length;
+      if (!Number.isNaN(totalItems) && pageSize > 0) {
+        totalPages = Math.ceil(totalItems / pageSize);
+      }
+      onProgress(page, totalPages);
     }
-  } while (nextUrl);
 
+    if (result.response) {
+      hasNext = Boolean(getNextPageUrl(result.response));
+    } else {
+      hasNext = false;
+    }
+    page += 1;
+  }
   return results;
 }
 
+/**
+ * Default options for multipart/form-data requests.
+ * Explicitly clears Content-Type header to allow browser to set boundary automatically.
+ */
 export const formDataOptions = {
   ...formDataBodySerializer,
   headers: {
@@ -203,6 +284,11 @@ export const formDataOptions = {
   },
 };
 
+/**
+ * Serializes file/image fields for form submissions.
+ * @param image The input value (File object, null or existing URL string).
+ * @returns The File object, an empty string (to clear), or undefined.
+ */
 export const fileSerializer = (image) => {
   if (image === null) {
     return '' as null;
@@ -213,6 +299,11 @@ export const fileSerializer = (image) => {
   }
 };
 
+/**
+ * Parses a numeric page identifier from a given URL string.
+ * @param link The URL containing a 'page' query parameter.
+ * @returns The page number or null.
+ */
 export function getNextPageNumber(link: string): number {
   if (link) {
     const parts = Qs.parse(link.split('/?')[1]);
@@ -224,9 +315,19 @@ export function getNextPageNumber(link: string): number {
   }
 }
 
+/**
+ * Helper to parse the next page number directly from an API result.
+ * @param result The SDK RequestResult.
+ */
 export const parseNextPage = (result) =>
   getNextPageNumber(getNextPageUrl(result.response));
 
+/**
+ * Performs a HEAD request specifically to fetch the total item count of a collection.
+ * @param url The resource endpoint.
+ * @param query Optional filters.
+ * @returns The total number of items as returned by 'x-result-count'.
+ */
 export const count = (url: string, query?) =>
   client
     .head({

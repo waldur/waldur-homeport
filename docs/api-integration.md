@@ -4,7 +4,7 @@ This guide covers data loading patterns, API client usage, and refresh mechanism
 
 ## API Data Loading and Refresh Patterns
 
-The application uses multiple approaches for loading data from REST APIs in forms and handling data refresh operations, showing evolution from legacy Redux patterns to modern React Query implementations.
+The application utilizes React Query efficiently for loading data from REST APIs, rendering forms, and handling real-time data refresh operations.
 
 ## Data Loading Patterns
 
@@ -62,37 +62,6 @@ export const useOrganizationGroups = () => {
 - **Reusability**: Shared across multiple components
 - **Centralized Error Handling**: Consistent error management
 
-### Redux/Redux Saga Pattern (Legacy)
-
-Used primarily for table data management:
-
-```typescript
-function* fetchList(action) {
-  const { table, extraFilter, pullInterval, force } = action.payload;
-
-  try {
-    const state = yield select(getTableState(table));
-    const request = {
-      currentPage: state.pagination.currentPage,
-      pageSize: state.pagination.pageSize,
-      filter: { ...extraFilter, field: fields },
-    };
-
-    const { rows, resultCount } = yield call(options.fetchData, request);
-    yield put(actions.fetchListDone(table, entities, order, resultCount));
-  } catch (error) {
-    yield put(actions.fetchListError(table, error));
-  }
-}
-```
-
-**Characteristics:**
-
-- **Centralized State**: Redux store for table data
-- **Automatic Pagination**: Built-in pagination and filtering
-- **Request Cancellation**: AbortController support
-- **Periodic Polling**: Configurable refresh intervals
-
 ## Data Refresh Mechanisms
 
 ### CRUD Operations Refresh
@@ -125,9 +94,6 @@ const onSubmit = async (formData: ProjectFormData) => {
 **Edit Operations:**
 
 ```typescript
-// Optimistic updates in Redux
-yield put(actions.entityUpdate(table, entity));
-
 // Manual refresh after edit
 await updateResource(resourceData);
 refetch(); // Refresh data
@@ -150,7 +116,7 @@ dispatch(showSuccess(translate('Component has been removed.')));
 |----------|----------------|----------|
 | **Explicit Refetch** | `const { refetch } = useQuery(...); await refetch();` | Manual refresh after CRUD operations |
 | **Table Refresh Button** | `<TableRefreshButton onClick={() => props.fetch(true)} />` | User-initiated refresh |
-| **Automatic Polling** | `pullInterval` in Redux saga | Real-time data updates |
+| **Automatic Polling** | `refetchInterval` in React Query | Real-time data updates |
 | **Query Invalidation** | `queryClient.invalidateQueries(['queryKey'])` | Cache invalidation |
 
 ## Error Handling and Loading States
@@ -250,17 +216,4 @@ Dynamic data loading for form fields:
 6. **API Integration**: Prefer `waldur-js-client` over direct fetch calls
 7. **Form Validation**: Use async validation with API dependency checking
 
-This data loading architecture demonstrates the application's evolution toward modern React patterns while maintaining backward compatibility with existing table infrastructure and Redux-based components.
-
-## Migration Patterns
-
-The application shows clear migration from Redux to React Query:
-
-| Aspect | Redux Pattern | React Query Pattern |
-|--------|---------------|---------------------|
-| **Data Loading** | Redux actions + sagas | `useQuery` hooks |
-| **Caching** | Redux store | Query cache |
-| **Error Handling** | Redux error actions | Query error states |
-| **Loading States** | Redux loading flags | `isLoading` state |
-| **Refresh** | Dispatch actions | `refetch()` function |
-| **Polling** | Saga intervals | Query refetch intervals |
+This data loading architecture demonstrates the application's comprehensive utilization of modern React patterns for seamless API integrations.

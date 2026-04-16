@@ -30,7 +30,7 @@ For detailed guidance, see `docs/`:
 
 - `development-workflow.md` - Planning, TDD, problem-solving
 - `code-quality.md` - Testing, linting, TypeScript
-- `architecture.md` - Redux/Saga, component patterns
+- `architecture.md` - Redux, component patterns
 - `component-library.md` - UI components, BaseDeployPage
 - `api-integration.md` - React Query, CRUD patterns
 - `form-migration.md` - Redux → React Final Form
