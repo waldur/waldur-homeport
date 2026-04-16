@@ -245,7 +245,7 @@
     "@xmldom/xmldom": "^0.8.12",
     "flatted": "^3.4.2",
     "smol-toml": "^1.6.1",
-    "dompurify": "^3.3.2",
+    "dompurify": "^3.4.0",
     "sass/immutable": "^5.1.5",
     "vite": "^7.3.2",
     "serve/ajv": "^8.18.0",

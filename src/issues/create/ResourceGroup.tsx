@@ -40,7 +40,7 @@ export const ResourceGroup = ({ disabled }) => {
           component={AsyncSelectField}
           isClearable={true}
           defaultOptions
-          loadOptions={(query, prevOptions, { page }) =>
+          loadOptions={(query, prevOptions, page) =>
             resourceAutocomplete(
               {
                 project_uuid: project.uuid,

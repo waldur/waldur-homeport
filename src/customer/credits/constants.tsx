@@ -195,7 +195,7 @@ export const useCustomerCreditOfferingsField = () => {
       name="offerings"
       label={translate('Offering(s)')}
       placeholder={translate('All')}
-      loadOptions={(query, prevOptions, { page }) =>
+      loadOptions={(query, prevOptions, page) =>
         providerOfferingsAutocomplete(
           { name: query, billable: true },
           prevOptions,

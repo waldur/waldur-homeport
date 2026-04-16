@@ -84,7 +84,7 @@ export const CreditFormDialog = reduxForm<
             label={translate('Organization')}
             validate={required}
             required
-            loadOptions={(query, prevOptions, { page }) =>
+            loadOptions={(query, prevOptions, page) =>
               organizationAutocomplete(query, prevOptions, page, {
                 field: ['name', 'uuid', 'url'],
               })

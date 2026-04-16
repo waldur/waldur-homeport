@@ -22,7 +22,7 @@ export const MoveToProjectAutocomplete: FunctionComponent<
       name="project"
       validate={required}
       placeholder={translate('Select project...')}
-      loadOptions={(query, prevOptions, { page }) =>
+      loadOptions={(query, prevOptions, page) =>
         moveToProjectAutocomplete(query, prevOptions, page)
       }
       getOptionValue={(option) => option.url}

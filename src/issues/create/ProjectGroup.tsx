@@ -37,7 +37,7 @@ export const ProjectGroup = ({ disabled }) => {
           component={AsyncSelectField}
           isClearable={true}
           defaultOptions
-          loadOptions={(query, prevOptions, { page }) =>
+          loadOptions={(query, prevOptions, page) =>
             projectAutocomplete(customer.uuid, query, prevOptions, page, {
               field: ['name', 'url', 'uuid', 'customer_uuid'],
             })
