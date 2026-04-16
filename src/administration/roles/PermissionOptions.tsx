@@ -268,11 +268,15 @@ export const PermissionOptions = [
     ],
   },
   {
-    label: translate('Openstack_instance'),
+    label: translate('Openstack'),
     options: [
       {
         label: translate('Console access'),
         value: 'OPENSTACK_INSTANCE.CONSOLE_ACCESS',
+      },
+      {
+        label: translate('Manage gateway for openstack router'),
+        value: 'OPENSTACK_ROUTER.MANAGE_GATEWAY',
       },
       {
         label: translate('Manage openstack instance'),
