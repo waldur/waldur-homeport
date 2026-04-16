@@ -1,33 +1,23 @@
-import DOMPurify from 'dompurify';
-import Markdown from 'markdown-to-jsx';
 import React from 'react';
 
+import { parseMarkdown } from './sanitize';
 import './SafeMarkdown.scss';
 
-const decodeHtmlEntities = (value: string): string => {
-  if (typeof document === 'undefined') {
-    return value;
-  }
-
-  const textarea = document.createElement('textarea');
-  textarea.innerHTML = value;
-  return textarea.value;
-};
-
+/**
+ * Renders user-supplied Markdown safely.
+ *
+ * Pipeline: markdown → marked → DOMPurify (PURIFY_CONFIG) → dangerouslySetInnerHTML
+ * See sanitize.ts for the shared config and rationale.
+ */
 export const SafeMarkdown: React.FC<{ text: string; smallTitles?: boolean }> = (
   props,
 ) => {
-  const html = React.useMemo(
-    () => DOMPurify.sanitize(decodeHtmlEntities(props.text)),
-    [props.text],
-  );
+  const html = React.useMemo(() => parseMarkdown(props.text), [props.text]);
+
   return (
-    <Markdown
-      className={
-        'md-content' + (props.smallTitles ? ' md-small-titles' : undefined)
-      }
-    >
-      {html}
-    </Markdown>
+    <div
+      className={'md-content' + (props.smallTitles ? ' md-small-titles' : '')}
+      dangerouslySetInnerHTML={{ __html: html }}
+    />
   );
 };
