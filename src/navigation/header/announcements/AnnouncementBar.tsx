@@ -1,20 +1,13 @@
 import { Icon } from '@phosphor-icons/react';
 import classNames from 'classnames';
-import DOMPurify from 'dompurify';
-import Markdown from 'markdown-to-jsx';
 import { FC, ReactNode, useMemo } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
 import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
+import { parseMarkdownLinksOnly } from '@waldur/core/sanitize';
 import { translate } from '@waldur/i18n';
 
 import { useTextTruncation } from './useTextTruncation';
-
-const decodeHtmlEntities = (value: string): string => {
-  const textarea = document.createElement('textarea');
-  textarea.innerHTML = value;
-  return textarea.value;
-};
 
 interface AnnouncementBarProps {
   icon: Icon;
@@ -38,14 +31,9 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   hasColon,
 }) => {
   const { textRef, isTruncated } = useTextTruncation();
-  const decodedDescription = useMemo(
-    () => decodeHtmlEntities(description),
-    [description],
-  );
-
   const safeDescription = useMemo(
-    () => DOMPurify.sanitize(decodedDescription),
-    [decodedDescription],
+    () => parseMarkdownLinksOnly(description),
+    [description],
   );
 
   const showMoreButton = onShowMore && isTruncated;
@@ -75,12 +63,10 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
             {hasColon ? ': ' : ' '}
           </strong>
 
-          <Markdown
-            options={{ forceInline: true }}
+          <span
             className={variant && colored ? undefined : 'text-muted'}
-          >
-            {safeDescription}
-          </Markdown>
+            dangerouslySetInnerHTML={{ __html: safeDescription }}
+          />
         </div>
         {showMoreButton && (
           <button

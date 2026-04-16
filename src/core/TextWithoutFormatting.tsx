@@ -1,10 +1,8 @@
-import DOMPurify from 'dompurify';
 import React from 'react';
 
+import { stripHtml } from './sanitize';
+
 export const TextWithoutFormatting: React.FC<{ html: string }> = (props) => {
-  const text = React.useMemo(
-    () => DOMPurify.sanitize(props.html, { ALLOWED_TAGS: ['#text'] }),
-    [props.html],
-  );
+  const text = React.useMemo(() => stripHtml(props.html), [props.html]);
   return <>{text}</>;
 };

@@ -58,13 +58,36 @@ describe('AnnouncementBar rendering', () => {
     );
 
     const link = screen.queryByRole('link', { name: 'bad' });
-    if (!link) {
-      expect(link).toBeNull();
-      return;
+    // DOMPurify either strips the href or the element entirely.
+    // Either outcome is acceptable — what must never happen is a live javascript: href.
+    if (link) {
+      expect((link.getAttribute('href') ?? '').toLowerCase()).not.toContain(
+        'javascript:',
+      );
     }
+  });
 
-    expect((link.getAttribute('href') || '').toLowerCase()).not.toContain(
-      'javascript:',
+  it('strips formatting but keeps links', () => {
+    render(
+      <AnnouncementBar
+        icon={WarningCircleIcon}
+        variant="warning"
+        label="Warning"
+        description="**Bold** _italic_ [link](https://example.com) `code`"
+      />,
     );
+
+    expect(screen.getByText(/Bold/)).toBeTruthy();
+    expect(screen.getByText(/italic/)).toBeTruthy();
+    expect(screen.getByText(/code/)).toBeTruthy();
+
+    // The main container span should show the text
+    const descriptionContainer = screen.getByText(/Bold/).closest('span');
+    expect(descriptionContainer?.querySelector('strong')).toBeNull();
+    expect(descriptionContainer?.querySelector('em')).toBeNull();
+    expect(descriptionContainer?.querySelector('code')).toBeNull();
+
+    const link = screen.getByRole('link', { name: 'link' });
+    expect(link.getAttribute('href')).toBe('https://example.com');
   });
 });
