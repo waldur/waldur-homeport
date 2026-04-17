@@ -1,9 +1,4 @@
-const getUserLocale = (): string => {
-  if (typeof navigator !== 'undefined') {
-    return navigator.language || 'en';
-  }
-  return 'en';
-};
+import { getUserLocale } from '@waldur/i18n/LanguageUtilsService';
 
 /**
  * Format a numeric value with locale-aware thousands separators.
