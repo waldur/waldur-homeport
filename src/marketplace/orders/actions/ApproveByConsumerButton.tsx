@@ -1,6 +1,5 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import classNames from 'classnames';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplaceOrdersApproveByConsumer } from 'waldur-js-client';
@@ -25,7 +24,7 @@ const UploadPurchaseOrderDialog = lazyComponent(() =>
 
 export const ApproveByConsumerButton: FC<
   OrderActionProps & { className?: string }
-> = ({ order, offering, as, className, refetch }) => {
+> = ({ order, offering, as, className, refetch, size }) => {
   const user = useSelector(getUser);
   const { openDialog, closeDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
@@ -71,14 +70,14 @@ export const ApproveByConsumerButton: FC<
   ) : (
     <ActionItem
       as={as}
-      className={classNames(className, 'w-100')}
+      className={className}
       title={translate('Approve')}
       action={callback}
       disabled={isLoading}
-      variant="primary"
+      variant="secondary"
       iconNode={<CheckCircleIcon weight="bold" />}
       tooltip={translate('You need approval to finish purchasing of services.')}
-      size="sm"
+      size={size}
     />
   );
 };

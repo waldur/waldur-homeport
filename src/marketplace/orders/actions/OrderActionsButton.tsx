@@ -109,7 +109,12 @@ export const OrderActionsButton = ({
     showMarkAsDoneButton ||
     showConsumerActions ||
     showRetryButton ? (
-    <ActionsDropdownComponent label={translate('Actions')} labeled size="lg">
+    <ActionsDropdownComponent
+      label={translate('Actions')}
+      labeled
+      size="lg"
+      drop="down"
+    >
       {showRetryButton && <RetryOrderButton row={order} refetch={loadData} />}
       {showMarkAsDoneButton && (
         <MarkAsDoneButton row={order} refetch={loadData} />
