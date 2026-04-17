@@ -1,16 +1,9 @@
 import { ENV } from '@waldur/core/config';
+import { getUserLocale } from '@waldur/i18n/LanguageUtilsService';
 
 // Check if currency is an ISO 4217 code (3 uppercase letters)
 const isIsoCurrencyCode = (currency: string): boolean =>
   /^[A-Z]{3}$/.test(currency);
-
-// Get user's locale from browser, fallback to 'en'
-const getUserLocale = (): string => {
-  if (typeof navigator !== 'undefined') {
-    return navigator.language || 'en';
-  }
-  return 'en';
-};
 
 export const formatCurrency = (
   value: string | number,

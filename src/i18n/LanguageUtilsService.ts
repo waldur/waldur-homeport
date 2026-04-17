@@ -8,8 +8,21 @@ function getLocaleData(locale) {
   return import(`../../locales/${locale}.json`);
 }
 
+/**
+ * Returns the current user locale.
+ * Priority: 1. Application-selected language, 2. Browser language, 3. Default 'en'.
+ */
+export const getUserLocale = (): string => {
+  return (
+    LanguageUtilsService.getCurrentLanguage()?.code ||
+    navigator.language ||
+    'en'
+  );
+};
+
 class LanguageUtilsServiceClass {
   currentLanguage: LanguageOption;
+
   dictionary: Record<string, string> = {};
 
   getCurrentLanguage() {
