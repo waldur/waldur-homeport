@@ -127,9 +127,7 @@ export const OfferingCreateDialog = reduxForm<
         <FormContainer submitting={submitting}>
           {showProvider && (
             <div className="form-group mb-5">
-              <Form.Label className="form-label">
-                {translate('Service provider')}
-              </Form.Label>
+              <Form.Label>{translate('Service provider')}</Form.Label>
               <Field
                 name="organisation"
                 validate={required}

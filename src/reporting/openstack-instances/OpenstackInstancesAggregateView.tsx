@@ -1,4 +1,5 @@
 import { FC, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { OpenStackInstanceAggregateGroupByEnum } from 'waldur-js-client';
 
@@ -40,7 +41,7 @@ export const OpenstackInstancesAggregateView: FC = () => {
   return (
     <div>
       <div className="mb-6" style={{ maxWidth: 300 }}>
-        <label className="form-label">{translate('Group by')}</label>
+        <Form.Label>{translate('Group by')}</Form.Label>
         <Select
           value={selectedOption}
           options={GROUP_BY_OPTIONS}

@@ -1,5 +1,5 @@
 import { FC, useMemo } from 'react';
-import { Col, Row, Table as BsTable } from 'react-bootstrap';
+import { Col, Form, Row, Table as BsTable } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
 import { required } from '@waldur/core/validators';
@@ -55,10 +55,10 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
 
             <Row className="mb-4">
               <Col md={6} className="mb-3">
-                <label className="form-label">
+                <Form.Label>
                   {translate('Customer name')}{' '}
                   <span className="text-danger">*</span>
-                </label>
+                </Form.Label>
                 <Field
                   name="customerColumn"
                   component={SelectField}
@@ -69,10 +69,10 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                 />
               </Col>
               <Col md={6} className="mb-3">
-                <label className="form-label">
+                <Form.Label>
                   {translate('Item name')}{' '}
                   <span className="text-danger">*</span>
-                </label>
+                </Form.Label>
                 <Field
                   name="itemNameColumn"
                   component={SelectField}
@@ -83,9 +83,9 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                 />
               </Col>
               <Col md={6} className="mb-3">
-                <label className="form-label">
+                <Form.Label>
                   {translate('Amount')} <span className="text-danger">*</span>
-                </label>
+                </Form.Label>
                 <Field
                   name="amountColumn"
                   component={SelectField}
@@ -96,9 +96,9 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                 />
               </Col>
               <Col md={6} className="mb-3">
-                <label className="form-label">
+                <Form.Label>
                   {translate('Article code')} ({translate('optional')})
-                </label>
+                </Form.Label>
                 <Field
                   name="articleCodeColumn"
                   component={SelectField}
@@ -108,9 +108,9 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                 />
               </Col>
               <Col md={6} className="mb-3">
-                <label className="form-label">
+                <Form.Label>
                   {translate('Service provider')} ({translate('optional')})
-                </label>
+                </Form.Label>
                 <Field
                   name="serviceProviderColumn"
                   component={SelectField}
@@ -120,9 +120,9 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                 />
               </Col>
               <Col md={6} className="mb-3">
-                <label className="form-label">
+                <Form.Label>
                   {translate('Offering')} ({translate('optional')})
-                </label>
+                </Form.Label>
                 <Field
                   name="offeringColumn"
                   component={SelectField}
@@ -132,9 +132,9 @@ export const Step2ColumnMapping: FC<Step2Props> = (props) => {
                 />
               </Col>
               <Col md={6} className="mb-3">
-                <label className="form-label">
+                <Form.Label>
                   {translate('Plan')} ({translate('optional')})
-                </label>
+                </Form.Label>
                 <Field
                   name="planColumn"
                   component={SelectField}

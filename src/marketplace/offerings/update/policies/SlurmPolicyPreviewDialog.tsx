@@ -1,5 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { Resource, marketplaceResourcesList } from 'waldur-js-client';
 
 import { SelectField } from '@waldur/form';
@@ -57,7 +58,7 @@ export const SlurmPolicyPreviewDialog: FC<SlurmPolicyPreviewDialogProps> = ({
     >
       {resourceOptions.length > 0 && (
         <div className="mb-4">
-          <label className="form-label">{translate('Select Resource')}</label>
+          <Form.Label>{translate('Select Resource')}</Form.Label>
           <SelectField
             input={{
               value: selectedResource

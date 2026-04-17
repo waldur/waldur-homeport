@@ -1,4 +1,5 @@
-import { Field, Form } from 'react-final-form';
+import { Form } from 'react-bootstrap';
+import { Field, Form as ReactFinalForm } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { userAgreementsPartialUpdate } from 'waldur-js-client';
 
@@ -44,7 +45,7 @@ export const UserAgreementsEditDialog = ({
   };
 
   return (
-    <Form
+    <ReactFinalForm
       onSubmit={onSubmit}
       initialValues={resolve.initialValues}
       render={({ handleSubmit, submitting }) => (
@@ -56,19 +57,19 @@ export const UserAgreementsEditDialog = ({
             }
           >
             <div className="mb-7">
-              <label className="form-label">{translate('Language')}</label>
+              <Form.Label>{translate('Language')}</Form.Label>
               <p className="form-control-plaintext">
                 {getLanguageLabel(resolve.initialValues.language)}
               </p>
             </div>
             <div className="mb-7">
-              <label className="form-label">
+              <Form.Label>
                 {
                   agreementTypeLabelMap[
                     resolve.initialValues.agreement_type.toLowerCase()
                   ]
                 }
-              </label>
+              </Form.Label>
               <Field name="content" component={MarkdownEditor as any} />
             </div>
           </ModalDialog>

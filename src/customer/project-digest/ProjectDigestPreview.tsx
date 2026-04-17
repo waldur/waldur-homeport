@@ -1,5 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { FC, useMemo, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProjectDigestPreviewResponse } from 'waldur-js-client';
 
@@ -67,9 +68,9 @@ export const ProjectDigestPreview: FC<ProjectDigestPreviewProps> = ({
   return (
     <>
       <div className="mb-5">
-        <label className="form-label">
+        <Form.Label>
           {translate('Select a project to preview the digest')}
-        </label>
+        </Form.Label>
         <Select
           options={projects}
           getOptionLabel={(option) => option.name}

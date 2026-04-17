@@ -1,6 +1,7 @@
 import { DateTime } from 'luxon';
 import { useMemo } from 'react';
-import { Form, Field, useFormState } from 'react-final-form';
+import { Form } from 'react-bootstrap';
+import { Form as ReactFinalForm, Field, useFormState } from 'react-final-form';
 import { Project } from 'waldur-js-client';
 
 import { formatDate, formatISODate } from '@waldur/core/dateUtils';
@@ -71,7 +72,7 @@ const PrepaidFormContent = ({
   return (
     <>
       <div className="mb-4">
-        <label className="form-label">{translate('Subscription period')}</label>
+        <Form.Label>{translate('Subscription period')}</Form.Label>
         <Field
           name="months"
           component={SelectField}
@@ -85,7 +86,7 @@ const PrepaidFormContent = ({
         <div className="mb-4">
           <div className="row">
             <div className="col-md-6">
-              <label className="form-label">{translate('From')}</label>
+              <Form.Label>{translate('From')}</Form.Label>
               <input
                 type="text"
                 className="form-control"
@@ -94,7 +95,7 @@ const PrepaidFormContent = ({
               />
             </div>
             <div className="col-md-6">
-              <label className="form-label">{translate('To')}</label>
+              <Form.Label>{translate('To')}</Form.Label>
               <Field
                 name="end_date"
                 component={DateField}
@@ -151,7 +152,7 @@ export const AddPrepaidPeriodDialog = ({
   };
 
   return (
-    <Form
+    <ReactFinalForm
       onSubmit={handleSubmit}
       initialValues={{
         months: constraints.min_prepaid_duration || 1,
@@ -180,6 +181,6 @@ export const AddPrepaidPeriodDialog = ({
           </ModalDialog>
         </form>
       )}
-    </Form>
+    </ReactFinalForm>
   );
 };

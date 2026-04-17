@@ -1,6 +1,7 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { DateTime } from 'luxon';
 import { FunctionComponent, useState } from 'react';
+import { Form } from 'react-bootstrap';
 import Flatpickr from 'react-flatpickr';
 import { VersionHistory } from 'waldur-js-client';
 
@@ -45,9 +46,9 @@ export const VersionStateAtTimestamp: FunctionComponent<
 
   return (
     <div className="d-flex align-items-center gap-3">
-      <label className="form-label mb-0 text-nowrap text-muted fs-7">
+      <Form.Label className="mb-0 text-nowrap text-muted fs-7">
         {translate('State at:')}
-      </label>
+      </Form.Label>
       <div style={{ position: 'relative' }}>
         <Flatpickr
           value={timestamp}

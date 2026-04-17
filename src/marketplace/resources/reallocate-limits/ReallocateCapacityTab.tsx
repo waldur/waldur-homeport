@@ -1,5 +1,5 @@
 import { FC, useEffect, useMemo, useState } from 'react';
-import { Nav, Tab } from 'react-bootstrap';
+import { Form, Nav, Tab } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import { Resource } from 'waldur-js-client';
@@ -169,9 +169,9 @@ export const ReallocateCapacityTab: FC<ReallocateCapacityTabProps> = ({
   return (
     <div>
       <div className="mb-4">
-        <label className="form-label mb-2">
+        <Form.Label className="mb-2">
           {translate('Find target resource(s)')}
-        </label>
+        </Form.Label>
         <AsyncPaginate
           placeholder={translate('Search and select resources...')}
           loadOptions={async (query, prevOptions, { page }) => {
