@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { openstackInstancesList } from 'waldur-js-client';
 
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -40,7 +41,7 @@ export const HypervisorPlacementMapDialog: FC<Props> = ({ resolve }) => {
           ],
         },
       }),
-    staleTime: 30_000,
+    staleTime: FAST_STALE_TIME,
   });
 
   return (

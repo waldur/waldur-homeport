@@ -3,6 +3,7 @@ import { FC, useMemo } from 'react';
 import { OfferingState, marketplaceOfferingUsersList } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { FIELD_MAPPING } from '@waldur/marketplace/offerings/details/OfferingUserDetailsDialog';
 import { router } from '@waldur/router';
@@ -58,7 +59,7 @@ export const ProfileCompletenessWarningBanner: FC<
         },
       }).then((response) => response.data?.[0] || null),
     enabled,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const shouldShowBanner = useMemo(

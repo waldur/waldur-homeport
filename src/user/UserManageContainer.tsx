@@ -4,6 +4,7 @@ import { useMemo } from 'react';
 import { usersRetrieve } from 'waldur-js-client';
 
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -83,7 +84,7 @@ export const UserManageContainer = ({ isPersonal }) => {
     queryKey: ['User', user_uuid],
     queryFn: () =>
       isPersonal ? null : usersRetrieve({ path: { uuid: user_uuid } }),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     refetchOnWindowFocus: false,
   });
 

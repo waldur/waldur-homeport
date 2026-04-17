@@ -6,6 +6,8 @@ import {
   marketplaceStatsAggregatedUsageTrendsList,
 } from 'waldur-js-client';
 
+import { LONG_STALE_TIME } from '@waldur/core/constants';
+
 import { MonthlyUsageData } from './types';
 import {
   calculateYearOverYearComparison,
@@ -46,7 +48,7 @@ export const useUsageTrends = (options: UseUsageTrendsOptions = {}) => {
         }),
       );
     },
-    staleTime: 10 * 60 * 1000, // 10 minutes
+    staleTime: LONG_STALE_TIME, // 10 minutes
   });
 
   // Filter and process data by year

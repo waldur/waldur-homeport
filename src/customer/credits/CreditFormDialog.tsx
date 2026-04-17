@@ -3,6 +3,7 @@ import { Accordion, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { EChart } from '@waldur/core/EChart';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -42,7 +43,7 @@ export const CreditFormDialog = reduxForm<
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['customerDashboardCharts', customer?.uuid, true],
     queryFn: () => (isEdit && customer ? useCustomerCostChart(customer) : null),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
   const CONSUMPTION_FIELDS = useMinimalConsumptionFields(
     props.form,

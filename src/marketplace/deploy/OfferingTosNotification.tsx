@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { formatJsx, translate } from '@waldur/i18n';
 
@@ -23,7 +24,7 @@ export const OfferingTosNotification: FC<OfferingTosNotificationProps> = ({
       marketplaceOfferingTermsOfServiceList({
         query: { offering_uuid: offering.uuid, is_active: true },
       }).then((response) => response.data),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const activeTos = useMemo(() => {

@@ -4,6 +4,7 @@ import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
 import { Badge } from '@waldur/core/Badge';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
@@ -14,7 +15,7 @@ export const PubSubDeadLetterQueueCard: FC = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['PubSubDeadLetterQueue'],
     queryFn: getDeadLetterQueue,
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   const messageCount = data?.total_dlq_messages ?? 0;

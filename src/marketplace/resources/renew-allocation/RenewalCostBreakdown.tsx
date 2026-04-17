@@ -9,6 +9,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { FAST_STALE_TIME, STALE_TIME } from '@waldur/core/constants';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -67,7 +68,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
           }).then((response) => response.data)
         : null,
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const shouldConcealPrices =
@@ -102,7 +103,7 @@ export const RenewalCostBreakdown: FC<RenewalCostBreakdownProps> = ({
         },
       }).then((res) => res.data),
     enabled: extensionMonths >= 1,
-    staleTime: 30_000,
+    staleTime: FAST_STALE_TIME,
   });
 
   if (shouldConcealPrices) return null;

@@ -3,6 +3,7 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Project, projectsChecklistRetrieve } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -53,7 +54,7 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
           }
           throw err;
         }),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     retry: false,
   });
 

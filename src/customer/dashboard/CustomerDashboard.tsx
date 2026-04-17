@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { customersStatsRetrieve } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { COMMON_WIDGET_HEIGHT } from '@waldur/dashboard/constants';
 import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
 import { ProjectsList } from '@waldur/project/ProjectsList';
@@ -42,7 +43,7 @@ export const CustomerDashboard: FunctionComponent = () => {
       ),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const {
@@ -60,7 +61,7 @@ export const CustomerDashboard: FunctionComponent = () => {
       }).then((r) => r.data),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const currentMonthFilteredData = filterComponentsWithUsage(

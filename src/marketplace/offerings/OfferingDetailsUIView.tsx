@@ -9,6 +9,7 @@ import {
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -240,7 +241,7 @@ export const OfferingDetailsUIView = ({
     queryKey: [PROVIDER_OFFERING_DATA_QUERY_KEY, offering_uuid],
     queryFn: () => loadOfferingData(offering_uuid),
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
   const {
     isLoading: isLoadingPlansUsage,
@@ -259,7 +260,7 @@ export const OfferingDetailsUIView = ({
       ),
 
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const refetch = useCallback(() => {

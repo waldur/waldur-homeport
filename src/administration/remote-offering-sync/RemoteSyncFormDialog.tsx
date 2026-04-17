@@ -12,6 +12,7 @@ import {
   remoteWaldurApiRemoteCustomers,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import {
   FieldError,
@@ -169,7 +170,7 @@ const RemoteSyncRenderer = ({
           }).then((response) => response.data)
         : [],
 
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
     refetchOnWindowFocus: false,
     retry: false,
     enabled: false,
@@ -190,7 +191,7 @@ const RemoteSyncRenderer = ({
           }).then((response) => response.data)
         : [],
 
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
     refetchOnWindowFocus: false,
     retry: false,
     enabled: false,

@@ -12,6 +12,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { STALE_TIME } from '@waldur/core/constants';
 import { parseDate } from '@waldur/core/dateUtils';
 import { translate } from '@waldur/i18n';
 
@@ -64,7 +65,7 @@ export const useProjectResources = (projectUuid?: string) => {
         );
     },
     enabled: !!projectUuid,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 };
 
@@ -100,7 +101,7 @@ export const useResourceOfferingComponents = (resourceUuid?: string) => {
       return { components, labelMap };
     },
     enabled: !!resourceUuid,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 };
 
@@ -144,7 +145,7 @@ export const useResourceComponentTypes = (resourceUuid?: string) => {
       return types;
     },
     enabled: !!resourceUuid,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 };
 
@@ -221,7 +222,7 @@ export const useResourceLimitsHistory = ({
       return limitHistory;
     },
     enabled: enabled && !!resourceUuid,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 };
 
@@ -294,7 +295,7 @@ export const useResourceUsageHistory = ({
       return result;
     },
     enabled: enabled && !!resourceUuid,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 };
 

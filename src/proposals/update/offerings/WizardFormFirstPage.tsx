@@ -3,6 +3,7 @@ import { FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
@@ -16,7 +17,7 @@ export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   const queryData = useQuery({
     queryKey: ['categories'],
     queryFn: getCategories,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

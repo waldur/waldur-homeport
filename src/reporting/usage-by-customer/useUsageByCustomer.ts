@@ -5,9 +5,9 @@ import {
   ResourceUsageByCustomer,
 } from 'waldur-js-client';
 
-import { UsageByCustomerSummary } from './types';
+import { STALE_TIME } from '@waldur/core/constants';
 
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+import { UsageByCustomerSummary } from './types'; // 5 minutes
 
 function computeSummary(
   data: ResourceUsageByCustomer[],

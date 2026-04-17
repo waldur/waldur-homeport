@@ -5,6 +5,7 @@ import { Col, Row } from 'react-bootstrap';
 import { projectsListUsersList } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -57,7 +58,7 @@ export const ProjectUsersBadge = (props: OwnProps) => {
         }),
       ),
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     enabled: Boolean(props.projectId),
   });
 

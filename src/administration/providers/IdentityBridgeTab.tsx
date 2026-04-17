@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { formatRelativeWithHour } from '@waldur/core/dateUtils';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -49,7 +50,7 @@ export const IdentityBridgeTab: FC = () => {
       identityBridgeStatsRetrieve().then(
         (res) => res.data as IdentityBridgeStats,
       ),
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   if (isLoading) return <LoadingSpinner />;

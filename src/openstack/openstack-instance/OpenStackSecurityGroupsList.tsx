@@ -3,6 +3,7 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { Card, Nav } from 'react-bootstrap';
 import { OpenStackInstance, openstackPortsRetrieve } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { getUUID } from '@waldur/core/utils';
@@ -81,7 +82,7 @@ export const OpenStackSecurityGroupsList: FunctionComponent<OwnProps> = (
           }).then((res) => res.data)
         : null,
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   return (

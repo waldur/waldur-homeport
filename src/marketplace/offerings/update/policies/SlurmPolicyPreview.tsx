@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { SECOND } from '@waldur/core/constants';
 import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -400,7 +401,7 @@ export const SlurmPolicyPreview: FC<SlurmPolicyPreviewProps> = ({
       );
       return response.data;
     },
-    staleTime: 5000,
+    staleTime: 5 * SECOND,
   });
 
   if (isLoading) {

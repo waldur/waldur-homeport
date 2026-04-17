@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { router } from '@waldur/router';
 import { setFilterQuery } from '@waldur/table/actions';
@@ -42,7 +43,7 @@ export const TosConsentWarningBanner: FC<TosConsentWarningBannerProps> = ({
       });
       return (response.data?.length || 0) > 0;
     },
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
   const handleViewTos = () => {
     router.stateService.go('profile.tos-management').then(() => {

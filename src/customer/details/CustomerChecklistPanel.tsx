@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { checklistsAdminRetrieve } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import FormTable from '@waldur/form/FormTable';
@@ -20,7 +21,7 @@ export const CustomerChecklistPanel: FC<CustomerEditPanelProps> = (props) => {
             path: { uuid: props.customer.project_metadata_checklist },
           }).then((response) => response.data)
         : null,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

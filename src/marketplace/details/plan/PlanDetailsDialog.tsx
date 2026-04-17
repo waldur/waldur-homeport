@@ -6,6 +6,7 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
+import { STALE_TIME, UI_STALE_TIME } from '@waldur/core/constants';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -69,7 +70,7 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
     queryKey: ['resource-plan-data', props.resolve.resourceId],
     queryFn: () => loadData(props.resolve.resourceId),
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   // Use the same caching pattern as ResourceDetailsHeaderBody for project data
@@ -84,7 +85,7 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
         : null,
     enabled: !!data?.resource?.project_uuid,
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const concealBillingInfo =

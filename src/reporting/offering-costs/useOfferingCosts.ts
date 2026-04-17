@@ -5,9 +5,9 @@ import {
   OfferingCostsSummary as ApiOfferingCostsSummary,
 } from 'waldur-js-client';
 
-import { OfferingCostsSummary, OfferingCostsStats } from './types';
+import { STALE_TIME } from '@waldur/core/constants';
 
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+import { OfferingCostsSummary, OfferingCostsStats } from './types'; // 5 minutes
 
 async function fetchOfferingCosts(
   signal?: AbortSignal,

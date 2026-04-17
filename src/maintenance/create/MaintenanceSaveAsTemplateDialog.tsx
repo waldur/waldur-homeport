@@ -17,6 +17,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { getUUID } from '@waldur/core/utils';
@@ -78,7 +79,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
           },
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     refetchOnWindowFocus: false,
   });
 
@@ -102,7 +103,7 @@ export const MaintenanceSaveAsTemplateDialog = reduxForm<IForm, OwnProps>({
               },
             }),
           ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     refetchOnWindowFocus: false,
   });
 

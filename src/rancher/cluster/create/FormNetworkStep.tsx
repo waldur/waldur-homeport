@@ -4,6 +4,7 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField } from '@waldur/form';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -22,7 +23,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
   const { data, isLoading } = useQuery({
     queryKey: ['network-step', tenant?.url],
     queryFn: () => (tenant ? formatSubnets(tenant.uuid) : []),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   useEffect(() => {

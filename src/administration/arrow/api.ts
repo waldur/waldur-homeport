@@ -36,6 +36,8 @@ import {
   type LinkResourceRequestRequest,
 } from 'waldur-js-client';
 
+import { FAST_STALE_TIME, SHORT_STALE_TIME } from '@waldur/core/constants';
+
 // === Query Keys ===
 export const arrowQueryKeys = {
   all: ['arrow'] as const,
@@ -71,7 +73,7 @@ export const useArrowSettings = () =>
       // Return first settings or null if none exist
       return response.data?.[0] ?? null;
     },
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
 /** Fetch available Arrow customers (not yet mapped) with suggestions */
@@ -83,7 +85,7 @@ export const useAvailableArrowCustomers = () =>
         await adminArrowCustomerMappingsAvailableCustomersRetrieve();
       return response.data;
     },
-    staleTime: 60000,
+    staleTime: SHORT_STALE_TIME,
   });
 
 /** Fetch fresh Arrow data for a customer */
@@ -97,7 +99,7 @@ export const useFetchCustomerArrowData = (mappingUuid: string) =>
       return response.data;
     },
     enabled: Boolean(mappingUuid),
-    staleTime: 60000, // Cache for 1 minute
+    staleTime: SHORT_STALE_TIME, // Cache for 1 minute
   });
 
 /** Discover Arrow licenses for a customer */
@@ -116,7 +118,7 @@ export const useDiscoverLicenses = (mappingUuid: string) =>
       return response.data;
     },
     enabled: Boolean(mappingUuid),
-    staleTime: 60000,
+    staleTime: SHORT_STALE_TIME,
   });
 
 /** Link a Waldur resource to an Arrow license */
@@ -166,7 +168,7 @@ export const useArrowBillingSyncItems = (billingSyncUuid?: string) =>
       return response.data;
     },
     enabled: Boolean(billingSyncUuid),
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
 /** Fetch consumption status */
@@ -177,7 +179,7 @@ export const useArrowConsumptionStatus = () =>
       const response = await adminArrowBillingSyncsConsumptionStatusRetrieve();
       return response.data;
     },
-    staleTime: 60000,
+    staleTime: SHORT_STALE_TIME,
   });
 
 /** Fetch resource consumption history (last 12 months) */
@@ -191,7 +193,7 @@ export const useResourceConsumptionHistory = (resourceUuid: string) =>
       return response.data;
     },
     enabled: Boolean(resourceUuid),
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
 // === Mutation Hooks ===

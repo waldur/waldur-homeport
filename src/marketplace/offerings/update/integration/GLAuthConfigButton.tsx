@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsGlauthUsersConfigRetrieve } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { translate } from '@waldur/i18n';
@@ -36,7 +37,7 @@ export const GLAuthConfigButton: FC<{
         : null,
 
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const dispatch = useDispatch();

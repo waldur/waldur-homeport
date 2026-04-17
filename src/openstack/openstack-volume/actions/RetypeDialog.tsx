@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import { openstackVolumesRetype } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { Select } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
@@ -36,7 +37,7 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
           .filter((choice) => choice.value !== resource.type),
       };
     },
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const submitRequest = async (formData) => {

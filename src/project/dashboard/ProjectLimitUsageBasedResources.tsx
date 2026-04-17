@@ -8,6 +8,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { formatDate } from '@waldur/core/dateUtils';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -96,7 +97,7 @@ export const ProjectLimitUsageBasedResources: FC<{ showCost?: boolean }> = ({
           }).then((response) => response.data)
         : [],
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const columns = useMemo(

@@ -7,6 +7,7 @@ import { arrayPush, arrayRemoveAll, Field, FieldArray } from 'redux-form';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { FormGroup, SelectField, StringField } from '@waldur/form';
 import { BoxNumberField } from '@waldur/form/BoxNumberField';
@@ -188,7 +189,7 @@ export const FormNodesStep = (props: FormStepProps) => {
         }),
       ),
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
   const { data: flavors, isLoading } = useQuery({
     queryKey: ['nodes-step-flavors', tenant?.url, props.offering.uuid],
@@ -198,7 +199,7 @@ export const FormNodesStep = (props: FormStepProps) => {
         ? filterFlavors(tenant.uuid, props.offering)
         : [],
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const onSelectTemplate = useCallback(

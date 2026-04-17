@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
@@ -37,7 +38,7 @@ export const AttachDialog: FC<ActionDialogProps> = ({
         })),
       };
     },
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const fields = asyncState.data

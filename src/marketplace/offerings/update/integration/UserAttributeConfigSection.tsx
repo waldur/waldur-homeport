@@ -10,6 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { CheckOrX } from '@waldur/core/CheckOrX';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
@@ -227,7 +228,7 @@ export const UserAttributeConfigSection: FC<OfferingEditPanelProps> = ({
       marketplaceProviderOfferingsUserAttributeConfigRetrieve({
         path: { uuid: offering.uuid },
       }).then((response) => response.data),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     refetchOnWindowFocus: false,
   });
 

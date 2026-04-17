@@ -8,7 +8,7 @@ import * as AuthService from '@waldur/auth/AuthService';
 // eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { count } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GRID_BREAKPOINTS, SHORT_STALE_TIME } from '@waldur/core/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
@@ -30,7 +30,7 @@ export const useFooterLinks = () => {
       }),
     // On desktop, we only show organization links if user is logged in
     // On mobile/login page, we check the public invitations count
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const config = useMemo(() => {

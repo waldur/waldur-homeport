@@ -7,6 +7,7 @@ import { Field, formValueSelector } from 'redux-form';
 import { openstackPortsCreate, OpenStackSubNet } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { isMatchPattern, required } from '@waldur/core/validators';
 import { FormGroup, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -118,7 +119,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
         field: ['name', 'uuid', 'url'],
       }),
 
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const { data: subnets } = useQuery({
@@ -133,7 +134,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
       });
     },
 
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const networkOptions = useMemo(

@@ -8,6 +8,7 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { Link } from '@waldur/core/Link';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
@@ -97,7 +98,7 @@ export const ProposalExpandableRow: React.FC<ProposalExpandableRowProps> = ({
           }
           return null; // Silently fail for other errors in expandable row
         }),
-    staleTime: 60000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const reviewsCount = tableProps.pagination.resultCount ?? 0;

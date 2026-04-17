@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import FormTable from '@waldur/form/FormTable';
 import { translate } from '@waldur/i18n';
@@ -44,7 +45,7 @@ export const ComplianceSummary: FC<ComplianceSummaryProps> = ({ proposal }) => {
           throw err;
         }),
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   if (isLoading) {

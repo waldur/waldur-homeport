@@ -4,6 +4,7 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { projectsRetrieve } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDate } from '@waldur/core/dateUtils';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -21,8 +22,6 @@ import { getLabel } from '../common/registry';
 import { Offering } from '../types';
 
 import './DetailsOverviewDialog.scss';
-
-const STALE_TIME = 5 * 60 * 1000;
 
 const withCopy = (value) => {
   return (

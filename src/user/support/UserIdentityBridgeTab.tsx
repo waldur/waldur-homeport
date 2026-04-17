@@ -12,6 +12,7 @@ import {
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { Badge } from '@waldur/core/Badge';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -218,7 +219,7 @@ export const UserIdentityBridgeTab: FC<{ user: User }> = ({ user }) => {
       usersIdentityBridgeStatusRetrieve({
         path: { uuid: user.uuid },
       }).then((res) => res.data as IdentityBridgeUserStatus),
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   if (isLoading) return <LoadingSpinner />;

@@ -1,6 +1,7 @@
 import { FC } from 'react';
 import { marketplacePublicOfferingsList, NestedTag } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
 import { createFetcher } from '@waldur/table/api';
@@ -27,7 +28,7 @@ export const OfferingsGroup: FC<OfferingsGroupProps> = ({ onTagClick }) => {
     table: 'marketplace-landing-offerings',
     filter,
     fetchData: createFetcher(marketplacePublicOfferingsList),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     mandatoryFields: OFFERING_CARD_MANDATORY_FIELDS,
   });
 

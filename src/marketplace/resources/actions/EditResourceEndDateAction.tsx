@@ -6,6 +6,7 @@ import {
   marketplaceResourcesSetEndDate,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -42,7 +43,7 @@ export const EditResourceEndDateAction: ActionItemType = ({
         path: { uuid: resourceUuid },
       }).then((response) => response.data),
     enabled: Boolean(resourceUuid),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
     refetchOnWindowFocus: false,
   });
 

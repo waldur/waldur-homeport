@@ -6,6 +6,7 @@ import { Field } from 'redux-form';
 import { openstackImagesList } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
@@ -42,7 +43,7 @@ export const FormImageStep = (props: FormStepProps) => {
           )
         : Promise.resolve([]),
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const choices = useMemo(() => generateSystemImageChoices(data), [data]);

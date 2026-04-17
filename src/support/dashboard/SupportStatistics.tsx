@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Col, Row } from 'react-bootstrap';
 import { supportStatisticsRetrieve } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
@@ -21,7 +22,7 @@ export const SupportStatistics = () => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['support-statistics'],
     queryFn: () => supportStatisticsRetrieve().then((r) => r.data),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return (

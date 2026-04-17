@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -27,7 +28,7 @@ export const SlurmPolicyStatusSummary: FC<SlurmPolicyStatusSummaryProps> = ({
         });
       return response.data;
     },
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
     enabled: !!policyUuid,
   });
 

@@ -3,6 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
 import { count } from '@waldur/core/api';
+import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
@@ -48,7 +49,7 @@ export const AdminStatistics = () => {
       };
     },
 
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return (

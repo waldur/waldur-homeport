@@ -13,6 +13,7 @@ import {
 } from 'waldur-js-client';
 
 import { formDataOptions } from '@waldur/core/api';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { useAccordionUrlState } from '@waldur/core/useAccordionUrlState';
 import { isEmpty } from '@waldur/core/utils';
 import { SidebarLayout } from '@waldur/form/SidebarLayout';
@@ -139,7 +140,7 @@ export const ProposalSubmissionStep: FC<{
           throw err;
         }),
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const initialValues = useMemo(() => {

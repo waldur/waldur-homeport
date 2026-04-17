@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
@@ -21,7 +22,7 @@ export const FormRancherSecurityGroupsStep = (props: FormStepProps) => {
     queryFn: () =>
       tenant ? loadSecurityGroups({ tenant: tenant.url, name: 'default' }) : [],
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   // Select default security group initially

@@ -3,6 +3,7 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { Col, FormLabel } from 'react-bootstrap';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
+import { STALE_TIME, UI_STALE_TIME } from '@waldur/core/constants';
 import { format } from '@waldur/core/ErrorMessageFormatter';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { FormContainer, SelectField } from '@waldur/form';
@@ -19,7 +20,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
   const categoriesQuery = useQuery({
     queryKey: ['marketplaceCategories'],
     queryFn: getCategories,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const rule = props.data.rule;
@@ -48,7 +49,7 @@ export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
                     setOfferingError(er);
                     return null;
                   }),
-          staleTime: 3 * 60 * 1000,
+          staleTime: UI_STALE_TIME,
           retry: false,
         });
 

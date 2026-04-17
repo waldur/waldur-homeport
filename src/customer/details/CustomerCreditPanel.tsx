@@ -5,6 +5,7 @@ import { customerCreditsList } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import { ENV } from '@waldur/core/config';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import FormTable from '@waldur/form/FormTable';
@@ -35,7 +36,7 @@ export const CustomerCreditPanel: FC<CustomerEditPanelProps> = (props) => {
       }).then((response) => response.data.length > 0 && response.data[0]),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const rows = useMemo(

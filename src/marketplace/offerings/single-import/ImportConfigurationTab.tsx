@@ -4,6 +4,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change, Field } from 'redux-form';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { SelectField } from '@waldur/form';
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormContainer } from '@waldur/form/FormContainer';
@@ -21,7 +22,7 @@ export const ImportConfigurationTab: FunctionComponent = () => {
   const categoriesQuery = useQuery({
     queryKey: ['marketplaceCategories'],
     queryFn: getCategories,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const dispatch = useDispatch();

@@ -9,6 +9,7 @@ import {
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import {
   NumberField,
@@ -55,7 +56,7 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
       }).then((response) => response.data),
     enabled:
       resolve.name === 'compliance_checklist' && !!resolve.call?.customer_uuid,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const processRequest = useCallback(

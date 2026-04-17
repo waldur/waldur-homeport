@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
@@ -44,7 +45,7 @@ export const FormSchedulingStep = (props: FormStepProps) => {
     fetchData: createFetcher(openstackServerGroupsList),
     queryField: 'name',
     filter,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const serverGroup = useSelector((state) =>

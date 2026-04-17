@@ -5,11 +5,10 @@ import {
   ResourceUsageByAffiliation,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 
-import { AffiliationAggregation, UsageByAffiliationSummary } from './types';
-
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+import { AffiliationAggregation, UsageByAffiliationSummary } from './types'; // 5 minutes
 
 export function useUsageByAffiliation() {
   const queryResult = useQuery({

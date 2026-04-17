@@ -12,6 +12,7 @@ import {
 } from 'waldur-js-client';
 
 import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
@@ -288,7 +289,7 @@ export const QuestionVisibilityForm = ({
       checklistsAdminQuestionsList({
         query: { checklist_uuid: checklistUuid },
       }).then((res) => res.data),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   if (isLoading) {

@@ -15,6 +15,7 @@ import { Offering } from 'waldur-js-client';
 // eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { get } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import FormTable from '@waldur/form/FormTable';
@@ -126,7 +127,7 @@ export const OfferingResourcesAndUsers: FC<OwnProps> = ({ offering }) => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['ResourcesAndUsersStat', offering.uuid],
     queryFn: () => loadData(offering.uuid),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

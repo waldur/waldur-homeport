@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { vmwareNetworksList } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
@@ -28,7 +29,7 @@ export const FormNetworkStep = (props: FormStepProps) => {
     table: 'deploy-security-groups',
     fetchData: createFetcher(vmwareNetworksList),
     filter,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

@@ -26,6 +26,7 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { AtLeast } from '@waldur/core/types';
@@ -82,7 +83,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             }),
           )
         : null,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   // Load onboarding metadata (For edit mode - if checklist is onboarding type)
@@ -103,7 +104,7 @@ export const QuestionFormDialog: FC<QuestionFormDialogProps> = ({
             query: { question_uuid: question.uuid },
           }).then((response) => response.data[0] || null)
         : null,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
     enabled: Boolean(question?.uuid) && isOnboardingChecklist,
   });
 

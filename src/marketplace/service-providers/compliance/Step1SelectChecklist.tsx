@@ -3,6 +3,7 @@ import { FC, useEffect } from 'react';
 import { Checklist, checklistsAdminList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
@@ -23,7 +24,7 @@ export const Step1SelectChecklist: FC<WizardFormStepProps> = (props) => {
           },
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const tableProps = useTable({

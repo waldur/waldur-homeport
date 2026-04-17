@@ -14,6 +14,7 @@ import {
   usersUserRegistrationTrendList,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
 
 import { UserStatistics, UserStatisticsSummary } from './types';
@@ -21,9 +22,7 @@ import { UserStatistics, UserStatisticsSummary } from './types';
 /**
  * Known federated authentication methods
  */
-const FEDERATED_AUTH_METHODS = ['saml2', 'oidc', 'keycloak', 'eduteams'];
-
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+const FEDERATED_AUTH_METHODS = ['saml2', 'oidc', 'keycloak', 'eduteams']; // 5 minutes
 
 /**
  * Helper to safely fetch and return empty array on failure

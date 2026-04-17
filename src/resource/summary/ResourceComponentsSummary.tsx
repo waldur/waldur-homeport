@@ -7,6 +7,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ResourceComponentItem } from '@waldur/marketplace/resources/details/ResourceComponentItem';
@@ -49,7 +50,7 @@ export const ResourceComponentsSummary: FC<ResourceComponentsSummaryProps> = ({
       }).then((response) => response.data);
     },
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   if (isLoading) {

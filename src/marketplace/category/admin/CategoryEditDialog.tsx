@@ -10,6 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { formDataOptions, fileSerializer } from '@waldur/core/api';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
@@ -57,7 +58,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
           )
         : null,
 
-    staleTime: 30 * 1000,
+    staleTime: FAST_STALE_TIME,
   });
 
   const {
@@ -68,7 +69,7 @@ export const CategoryEditDialog: FC<CategoryEditDialogProps> = ({
   } = useQuery({
     queryKey: ['MarketplaceCategoryGroups'],
     queryFn: () => getCategoryGroups(),
-    staleTime: 30 * 1000,
+    staleTime: FAST_STALE_TIME,
   });
 
   const onSubmit = async (formData: MarketplaceCategoryRequest) => {

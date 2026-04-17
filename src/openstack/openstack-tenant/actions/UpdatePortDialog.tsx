@@ -4,6 +4,7 @@ import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 import { OpenStackPort, openstackPortsUpdatePortIp } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { loadSubnets } from '@waldur/openstack/api';
@@ -35,7 +36,7 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
       });
     },
 
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   useEffect(() => {

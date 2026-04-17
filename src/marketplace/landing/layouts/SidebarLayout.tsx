@@ -2,6 +2,7 @@ import { FC, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { useDebouncedValue } from '@waldur/core/useDebouncedValue';
 import { FilterBox } from '@waldur/form/FilterBox';
 import { translate } from '@waldur/i18n';
@@ -46,7 +47,7 @@ export const SidebarLayout: FC<MarketplaceLayoutProps> = ({ onTagClick }) => {
     table: 'marketplace-sidebar-offerings',
     filter,
     fetchData: createFetcher(marketplacePublicOfferingsList),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     mandatoryFields: OFFERING_CARD_MANDATORY_FIELDS,
   });
 
