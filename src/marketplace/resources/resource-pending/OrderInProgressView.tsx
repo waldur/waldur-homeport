@@ -26,7 +26,7 @@ const OrderInProgressActions: FC<{
 }> = ({ resource, offering, refetch }) => {
   if (resource.order_in_progress.state === 'pending-consumer') {
     return (
-      <ActionsDropdownComponent labeled size="sm">
+      <ActionsDropdownComponent labeled size="sm" drop="down">
         <OrderConsumerActions
           order={resource.order_in_progress}
           offering={offering}

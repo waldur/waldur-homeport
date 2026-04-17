@@ -52,10 +52,11 @@ export const PendingConsumerOrders: React.FC<{}> = () => {
           render: OrderStateCell,
         },
       ]}
-      title={translate('Orders')}
+      title={translate('Pending consumer orders')}
       verboseName={translate('Orders')}
       initialSorting={{ field: 'created', mode: 'desc' }}
       initialPageSize={5}
+      minHeight="auto"
       tableActions={
         <BulkConsumerActions
           orders={tableProps.rows}

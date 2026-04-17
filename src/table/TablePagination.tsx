@@ -33,9 +33,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
         <Row className="d-flex px-0 align-items-center">
           <Col
             sm="auto"
-            lg={6}
-            xl={3}
-            className="d-flex align-items-start justify-content-start order-lg-2 order-xl-1"
+            className="d-flex align-items-start justify-content-start"
           >
             {props.showPageSizeSelector && (
               <TablePageSize
@@ -46,7 +44,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
               />
             )}
           </Col>
-          <Col sm lg={12} xl={6} className="order-lg-1 order-xl-2">
+          <Col sm>
             {props.hasRows && props.resultCount > props.pageSize && (
               <Pagination
                 totalPages={totalPages}
@@ -59,7 +57,7 @@ export const TablePagination: FunctionComponent<TablePaginationProps> = (
               />
             )}
           </Col>
-          <Col sm="auto" lg={6} xl={3} className="order-3">
+          <Col sm="auto">
             <div className="d-flex align-items-center justify-content-end">
               {props.hasRows && (
                 <div className="text-muted text-nowrap fs-7 me-8">

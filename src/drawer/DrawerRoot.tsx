@@ -58,7 +58,7 @@ export const DrawerRoot: FunctionComponent = () => {
       <div className="card shadow-none rounded-0 w-100">
         <div className="card-header" id="kt_drawer_header">
           <div>
-            <h3 className="card-title fw-bolder text-dark">
+            <h3 className="card-title fw-bolder text-dark fs-3">
               {drawerProps.title}
             </h3>
             {drawerProps.subtitle && (
@@ -82,7 +82,7 @@ export const DrawerRoot: FunctionComponent = () => {
           </div>
         </div>
         <div className="card-body scroll-y p-0" id="kt_drawer_body">
-          <div className="p-9 pe-4">
+          <div className="p-8">
             <ErrorBoundary fallback={ErrorMessage}>
               {drawerComponent
                 ? React.createElement(drawerComponent, {

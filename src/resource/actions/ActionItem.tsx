@@ -62,7 +62,7 @@ export const ActionItem: FC<ActionItemProps> = (props) => {
     return (
       <div className="d-flex align-items-center">
         <ButtonComponent
-          className={classNames('d-flex gap-3', props.className)}
+          className={props.className}
           action={props.action}
           disabled={props.disabled}
           iconNode={props.iconNode}

@@ -1,6 +1,5 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import classNames from 'classnames';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
@@ -18,7 +17,7 @@ import { OrderActionProps } from './types';
 
 export const RejectByConsumerButton: FC<
   OrderActionProps & { className?: string }
-> = ({ order, as, className, refetch }) => {
+> = ({ order, as, className, refetch, size }) => {
   const dispatch = useDispatch();
   const user = useSelector(getUser);
   const { mutate, isPending: isLoading } = useMutation({
@@ -72,13 +71,14 @@ export const RejectByConsumerButton: FC<
       ) : (
         <ActionItem
           as={as}
-          className={classNames(className, 'w-100')}
+          className={className ?? 'text-danger'}
           title={translate('Decline')}
           action={mutate}
           disabled={isLoading}
           variant="danger"
           iconNode={<XCircleIcon weight="bold" />}
-          size="sm"
+          iconColor="danger"
+          size={size}
         />
       )}
     </>
