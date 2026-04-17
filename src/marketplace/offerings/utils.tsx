@@ -47,6 +47,9 @@ export const getDefaultLimits = (
 ): Record<string, number> => {
   const limits: Record<string, number> = {};
   for (const component of offering.components) {
+    if (component.offering_uuid && component.offering_uuid !== offering.uuid) {
+      continue;
+    }
     if (
       component.billing_type === 'limit' ||
       (component.billing_type === 'one' && component.is_prepaid)
