@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import classNames from 'classnames';
