@@ -1,20 +1,20 @@
 import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
+import { supportIssueStatusesList } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
+import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import {
-  IssueStatusAdmin,
-  issueStatusesFetcher,
-  IssueStatusTypes,
-} from './api';
+import { IssueStatusAdmin, IssueStatusTypes } from './api';
 import { IssueStatusCreateButton } from './IssueStatusCreateButton';
 import { IssueStatusRowActions } from './IssueStatusRowActions';
+
+const issueStatusesFetcher = createFetcher(supportIssueStatusesList);
 
 const renderType = ({ row }: { row: IssueStatusAdmin }) => (
   <Badge

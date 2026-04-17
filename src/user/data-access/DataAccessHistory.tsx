@@ -1,10 +1,12 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
+import { usersDataAccessHistoryList } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { createFetcher } from '@waldur/table/api';
 import {
   UserDataAccessHistoryFilter,
   selectUserDataAccessHistoryFilter,
@@ -13,7 +15,6 @@ import Table from '@waldur/table/Table';
 import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
-import { dataAccessHistoryFetcher } from './api';
 import { DataAccessHistoryEntry } from './types';
 import {
   formatFieldName,
@@ -30,18 +31,17 @@ export const DataAccessHistory: FC<DataAccessHistoryProps> = ({
   userUuid,
   isViewerStaffOrSupport,
 }) => {
-  const filterValues = useSelector(selectUserDataAccessHistoryFilter);
+  const filter = useSelector(selectUserDataAccessHistoryFilter);
 
-  const filter = useMemo(
-    () => ({
-      ...filterValues,
-    }),
-    [filterValues],
+  const fetchData = useMemo(
+    () =>
+      createFetcher(usersDataAccessHistoryList, { path: { uuid: userUuid } }),
+    [userUuid],
   );
 
   const tableProps = useTable({
     table: `dataAccessHistory-${userUuid}`,
-    fetchData: dataAccessHistoryFetcher(userUuid),
+    fetchData,
     filter,
   });
 
