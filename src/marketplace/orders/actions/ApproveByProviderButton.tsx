@@ -74,7 +74,6 @@ export const ApproveByProviderButton: FunctionComponent<
       action={openApprovalDialog}
       variant="primary"
       iconNode={<CheckCircleIcon weight="bold" />}
-      iconColor="success"
     />
   );
 };

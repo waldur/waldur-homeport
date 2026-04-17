@@ -8,6 +8,7 @@ import {
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { TableDropdownToggle } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 import Table from '@waldur/table/Table';
@@ -184,9 +185,13 @@ export const OrdersTableComponent: FC<OrdersTableComponentProps> = ({
       initialSorting={{ field: 'created', mode: 'desc' }}
       enableExport={true}
       expandableRow={OrdersListExpandableRow}
-      rowActions={({ row }) => (
-        <OrderProviderActions order={row} refetch={props.fetch} size="sm" />
-      )}
+      rowActions={({ row }) =>
+        row.state === 'pending-provider' ? (
+          <OrderProviderActions order={row} refetch={props.fetch} size="sm" />
+        ) : (
+          <TableDropdownToggle size="sm" disabled tooltip />
+        )
+      }
       hasOptionalColumns
       {...rest}
     />

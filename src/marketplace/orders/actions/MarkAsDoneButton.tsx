@@ -46,13 +46,12 @@ export const MarkAsDoneButton: FunctionComponent<MarkAsDoneButtonProps> = (
     <ActionItem
       as={props.as}
       className={
-        props.as === Button ? 'btn-light-success btn-sm w-100' : 'text-success'
+        props.as === Button ? 'btn-light-success btn-sm w-100' : undefined
       }
       title={translate('Mark as done')}
       action={mutate}
       disabled={isLoading}
       iconNode={<CheckCircleIcon weight="bold" />}
-      iconColor="success"
     />
   );
 };
