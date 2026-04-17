@@ -5,7 +5,7 @@ import {
   ResourceUsageByCustomer,
 } from 'waldur-js-client';
 
-import { CustomerUsageRow, UsageByCustomerSummary } from './types';
+import { UsageByCustomerSummary } from './types';
 
 const STALE_TIME = 5 * 60 * 1000; // 5 minutes
 
@@ -45,7 +45,7 @@ export function useUsageByCustomer() {
     staleTime: STALE_TIME,
   });
 
-  const rows: CustomerUsageRow[] = useMemo(() => {
+  const rows: ResourceUsageByCustomer[] = useMemo(() => {
     if (!queryResult.data) return [];
     return queryResult.data;
   }, [queryResult.data]);

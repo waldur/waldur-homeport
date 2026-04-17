@@ -1,5 +1,6 @@
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
+import { ResourceUsageByCustomer } from 'waldur-js-client';
 
 import { ChartCard } from '@waldur/core/ChartCard';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
@@ -9,10 +10,8 @@ import { SimpleTable } from '@waldur/table/SimpleTable';
 import { Column } from '@waldur/table/types';
 import { getSimpleExportData, renderFieldOrDash } from '@waldur/table/utils';
 
-import { CustomerUsageRow } from './types';
-
 interface Props {
-  data: CustomerUsageRow[];
+  data: ResourceUsageByCustomer[];
   componentTypes: string[];
   limitNames: string[];
 }
@@ -22,8 +21,8 @@ export const UsageByCustomerTable: FC<Props> = ({
   componentTypes,
   limitNames,
 }) => {
-  const columns = useMemo<Column<CustomerUsageRow>[]>(() => {
-    const cols: Column<CustomerUsageRow>[] = [
+  const columns = useMemo<Column<ResourceUsageByCustomer>[]>(() => {
+    const cols: Column<ResourceUsageByCustomer>[] = [
       {
         title: translate('Organization'),
         render: ({ row }) => (
@@ -44,16 +43,14 @@ export const UsageByCustomerTable: FC<Props> = ({
       {
         title: translate('Resources OK'),
         render: ({ row }) => (
-          <span className="text-success fw-semibold">{row.resources_ok}</span>
+          <span className="fw-semibold">{row.resources_ok}</span>
         ),
         export: (row) => row.resources_ok,
       },
       {
         title: translate('Resources erred'),
         render: ({ row }) => (
-          <span
-            className={row.resources_erred > 0 ? 'text-danger fw-semibold' : ''}
-          >
+          <span className={row.resources_erred > 0 ? 'fw-semibold' : ''}>
             {row.resources_erred}
           </span>
         ),
@@ -116,7 +113,10 @@ export const UsageByCustomerTable: FC<Props> = ({
           isEmpty={!data || data.length === 0}
         >
           {() => (
-            <SimpleTable<CustomerUsageRow> columns={columns} rows={data} />
+            <SimpleTable<ResourceUsageByCustomer>
+              columns={columns}
+              rows={data}
+            />
           )}
         </ChartCard>
       </Col>
