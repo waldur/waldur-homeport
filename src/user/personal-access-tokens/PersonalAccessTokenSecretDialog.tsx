@@ -4,7 +4,7 @@ import {
   WarningCircleIcon,
 } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
-import { Card } from 'react-bootstrap';
+import { Card, Form } from 'react-bootstrap';
 
 import { ENV } from '@waldur/core/config';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -64,12 +64,12 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       </Card>
 
       <div className="mb-3">
-        <label className="form-label fw-bold">{translate('Token name')}</label>
+        <Form.Label className="fw-bold">{translate('Token name')}</Form.Label>
         <div>{tokenName}</div>
       </div>
 
       <div className="mb-3">
-        <label className="form-label fw-bold">{translate('Your token')}</label>
+        <Form.Label className="fw-bold">{translate('Your token')}</Form.Label>
         <div className="d-flex align-items-center gap-2 p-3 bg-light rounded">
           <button
             className="text-btn flex-shrink-0"
@@ -90,9 +90,9 @@ export const PersonalAccessTokenSecretDialog: FunctionComponent<
       </div>
 
       <div>
-        <label className="form-label fw-bold">
+        <Form.Label className="fw-bold">
           {translate('Example usage')}
-        </label>
+        </Form.Label>
         <div className="d-flex align-items-start gap-2 p-3 bg-light rounded">
           <code className="flex-grow-1 text-break">
             {showSecret ? curlExample : maskedCurlExample}

@@ -172,10 +172,10 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
         )}
         {showRouterSelect && (
           <div className="mt-3">
-            <label className="form-label">
+            <Form.Label>
               {translate('Router')}{' '}
               <span className="text-muted">({translate('Optional')})</span>
-            </label>
+            </Form.Label>
             <AsyncPaginate
               value={routerValue}
               onChange={setRouterValue}
