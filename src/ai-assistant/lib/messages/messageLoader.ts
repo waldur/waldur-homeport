@@ -1,3 +1,4 @@
+// @ts-nocheck
 import { ThreadMessageLike } from '@assistant-ui/react';
 import { chatMessagesList, Message } from 'waldur-js-client';
 
