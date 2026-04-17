@@ -6,6 +6,11 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useState } from 'react';
 import { Alert, Card } from 'react-bootstrap';
+import {
+  AccessResponse,
+  AccessProject,
+  openportalAccessForEmailList,
+} from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
 import { useDebouncedValue } from '@waldur/core/useDebouncedValue';
@@ -14,16 +19,14 @@ import { formatJsxTemplate, translate } from '@waldur/i18n';
 import { useTitle } from '@waldur/navigation/title';
 import { Field } from '@waldur/resource/summary/Field';
 
-import { getAccessForEmail, Project, UserData } from './api';
-
 // Type definitions
 interface UserInfoCardProps {
-  userData: UserData;
+  userData: AccessResponse;
   index?: number | null;
 }
 
 interface ProjectsCardProps {
-  projects: Record<string, Project>;
+  projects: Record<string, AccessProject>;
 }
 
 // Reusable component to display user information
@@ -197,9 +200,14 @@ export const AccessForEmail: FunctionComponent<{}> = () => {
   const debouncedQuery = useDebouncedValue(searchValue.trim(), 500);
 
   // React Query implementation
-  const { data, isFetching, error } = useQuery<UserData[], Error>({
+  const { data, isFetching, error } = useQuery<AccessResponse[], Error>({
     queryKey: ['accessForEmail', debouncedQuery],
-    queryFn: () => getAccessForEmail(debouncedQuery),
+    queryFn: async () => {
+      const response = await openportalAccessForEmailList({
+        query: { q: debouncedQuery },
+      });
+      return response.data;
+    },
     // Only execute the query if there is a query string
     enabled: Boolean(debouncedQuery),
   });
