@@ -1,16 +1,20 @@
 import { FC } from 'react';
 import { Badge, Card } from 'react-bootstrap';
+import { supportRequestTypesAdminList } from 'waldur-js-client';
 
 import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
+import { createFetcher } from '@waldur/table/api';
 import Table from '@waldur/table/Table';
 import { Column } from '@waldur/table/types';
 import { useTable } from '@waldur/table/useTable';
 
-import { requestTypesAdminFetcher, RequestTypeAdmin } from './api';
+import { RequestTypeAdmin } from './api';
 import { RequestTypeBatchActions } from './RequestTypeBatchActions';
 import { RequestTypeCreateButton } from './RequestTypeCreateButton';
 import { RequestTypeRowActions } from './RequestTypeRowActions';
+
+const requestTypesAdminFetcher = createFetcher(supportRequestTypesAdminList);
 
 const renderSyncStatus = ({ row }: { row: RequestTypeAdmin }) => (
   <Badge bg={row.is_synced ? 'info' : 'secondary'}>
