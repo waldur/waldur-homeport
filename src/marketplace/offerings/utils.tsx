@@ -27,15 +27,35 @@ export const articleCodeValidator = (value: string) => {
   }
 };
 
+/**
+ * Collects initial limit values for an offering based on its components.
+ *
+ * This function only includes components that are managed via the 'limits' dictionary
+ * in the backend. Specifically:
+ * 1. Components with billing_type 'limit' (standard marketplace quotas).
+ * 2. Components with billing_type 'one' (one-time) that are marked as 'is_prepaid'.
+ *
+ * Non-prepaid one-time components, fixed-price components, and usage-based components
+ * are excluded because sending them in the 'limits' dictionary during order submission
+ * would trigger 'Invalid types' validation errors on the backend.
+ *
+ * @param offering The offering to get default limits for.
+ * @returns A dictionary of component types and their default/minimum values.
+ */
 export const getDefaultLimits = (
   offering: Offering,
 ): Record<string, number> => {
   const limits: Record<string, number> = {};
   for (const component of offering.components) {
-    if (component.default_limit) {
-      limits[component.type] = component.default_limit;
-    } else if (component.min_value) {
-      limits[component.type] = component.min_value;
+    if (
+      component.billing_type === 'limit' ||
+      (component.billing_type === 'one' && component.is_prepaid)
+    ) {
+      if (component.default_limit) {
+        limits[component.type] = component.default_limit;
+      } else if (component.min_value) {
+        limits[component.type] = component.min_value;
+      }
     }
   }
   return limits;
