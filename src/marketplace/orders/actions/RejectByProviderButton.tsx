@@ -97,7 +97,7 @@ export const RejectByProviderButton: FunctionComponent<
   return (
     <ActionItem
       as={props.as}
-      className={props.as === ActionButton ? 'w-100' : undefined}
+      className={props.as === ActionButton ? 'w-100' : 'text-danger'}
       title={translate('Decline')}
       action={mutate}
       disabled={isLoading}

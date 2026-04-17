@@ -450,6 +450,7 @@ const TableRow = memo<TableRowProps>(
               COLUMN_ACTIONS_KEY in pinnedColumns && 'pinned',
               pinnedColumns[COLUMN_ACTIONS_KEY] && 'is-floating',
             )}
+            onClick={(e) => e.stopPropagation()}
           >
             <div aria-hidden="true">
               {React.createElement(rowActions, { row, fetch })}
