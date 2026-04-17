@@ -8,6 +8,7 @@ import {
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import { ENV } from '@waldur/core/config';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { FormContainer, SelectField } from '@waldur/form';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
@@ -59,7 +60,7 @@ export const FormAdvancedOptionsStep = (props: FormStepProps) => {
       };
     },
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

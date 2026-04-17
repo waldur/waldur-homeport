@@ -8,6 +8,7 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { BackendIdField } from './BackendIdField';
@@ -35,7 +36,7 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
           }).then((response) => response.data)
         : null,
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
   const { data: offeringUser } = useQuery({
     queryKey: ['fetchOfferingUser', user?.uuid, offering?.uuid],
@@ -50,7 +51,7 @@ export const ResourceDetailsHeaderBody: FunctionComponent<
           }).then((response) => response.data[0] || null)
         : null,
     enabled: !!(user?.uuid && offering?.uuid),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return (

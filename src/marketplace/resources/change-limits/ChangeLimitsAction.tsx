@@ -2,6 +2,7 @@ import { TimerIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
@@ -74,7 +75,7 @@ export const ChangeLimitsAction: ActionItemType = ({
         path: { uuid: resourceUuid },
       }).then((response) => response.data),
     enabled: Boolean(resourceUuid),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
     refetchOnWindowFocus: false,
   });
 

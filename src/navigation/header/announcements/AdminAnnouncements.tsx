@@ -8,6 +8,7 @@ import {
   getAnnouncementTypeLabel,
 } from '@waldur/administration/utils';
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { STALE_TIME, HOUR } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { openModalDialog } from '@waldur/modal/actions';
 
@@ -32,10 +33,10 @@ export const AdminAnnouncements = () => {
         }),
       ),
 
-    staleTime: 1000 * 60 * 5,
+    staleTime: STALE_TIME,
 
     // Keep cached data for 60 minutes
-    gcTime: 1000 * 60 * 60,
+    gcTime: HOUR,
 
     // Retry failed requests twice before showing error
     retry: 2,

@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { marketplaceOfferingUsersProfileFieldWarningsRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { STALE_TIME } from '@waldur/core/constants';
 
 interface OfferingWarning {
   offering_uuid: string;
@@ -19,6 +20,6 @@ export const useProfileFieldWarnings = () => {
       ),
     enabled:
       !!ENV.plugins.WALDUR_CORE.ENFORCE_OFFERING_USER_PROFILE_COMPLETENESS,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 };

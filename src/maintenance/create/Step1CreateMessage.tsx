@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required, url } from '@waldur/core/validators';
 import { SelectField, StringField, TextField } from '@waldur/form';
@@ -50,7 +51,7 @@ export const Step1CreateMessage: FC<WizardStepProps> = (props) => {
           },
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     refetchOnWindowFocus: false,
   });
 

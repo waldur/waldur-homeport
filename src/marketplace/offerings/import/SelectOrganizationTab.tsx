@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 import { remoteWaldurApiRemoteCustomers } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
@@ -29,7 +30,7 @@ export const SelectOrganizationTab = () => {
       );
     },
 
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
     retry: false,
   });
 

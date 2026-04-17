@@ -22,6 +22,7 @@ import {
   type ResourcePlanPeriod,
 } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { parseDate } from '@waldur/core/dateUtils';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { Tip } from '@waldur/core/Tooltip';
@@ -137,7 +138,7 @@ export const ResourceUsageForm: FunctionComponent<ResourceUsageFormProps> = (
           }).then((r) => r.data)
         : null,
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const { data: userUsages } = useQuery({

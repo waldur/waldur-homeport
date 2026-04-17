@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Offering } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { formatUsageValue } from '@waldur/core/formatNumber';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -32,7 +33,7 @@ export const OfferingComponentUsagePanel: FC<
           ],
         },
       }).then((response) => response.data),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

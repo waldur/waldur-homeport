@@ -1,6 +1,7 @@
 import { FC, useMemo } from 'react';
 import { marketplacePublicOfferingsList, NestedTag } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { useCardStyle } from '@waldur/marketplace/landing/CardStyleContext';
 import {
   OFFERING_CARD_MANDATORY_FIELDS,
@@ -54,7 +55,7 @@ export const CategoryCarouselSection: FC<CategoryCarouselSectionProps> = ({
     table: tableId,
     filter,
     fetchData: createFetcher(marketplacePublicOfferingsList),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     mandatoryFields: OFFERING_CARD_MANDATORY_FIELDS,
   });
 

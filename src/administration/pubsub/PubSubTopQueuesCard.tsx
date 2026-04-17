@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
@@ -13,7 +14,7 @@ export const PubSubTopQueuesCard: FC = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['PubSubTopQueues'],
     queryFn: getTopQueues,
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   return (

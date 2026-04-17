@@ -9,6 +9,7 @@ import {
   projectCreditsList,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME, STALE_TIME } from '@waldur/core/constants';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { getCostPolicyActionOptions } from '@waldur/customer/cost-policies/utils';
 import { getLineChartOptions } from '@waldur/dashboard/chart';
@@ -48,7 +49,7 @@ export function useProjectCostChart(project: Project) {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['ProjectCostData', project?.uuid],
     queryFn: () => (project ? getProjectCostData(project) : null),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const chartData = useMemo(() => {
@@ -105,7 +106,7 @@ export function useProjectCreditChart(project: Project) {
   } = useQuery({
     queryKey: ['ProjectCostData', project.uuid],
     queryFn: () => getProjectCostData(project),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const {
@@ -122,7 +123,7 @@ export function useProjectCreditChart(project: Project) {
       }).then((response) => response.data.length > 0 && response.data[0]),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const chartData = useMemo(() => {

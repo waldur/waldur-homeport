@@ -4,6 +4,7 @@ import { FC } from 'react';
 import { Col } from 'react-bootstrap';
 
 import { IconButton } from '@waldur/core/buttons/IconButton';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -49,7 +50,7 @@ export const TeamWidget: FC<TeamWidgetProps> = ({
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['TeamWidget', scope?.uuid],
     queryFn: api,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const count = data?.totalItems ?? 0;

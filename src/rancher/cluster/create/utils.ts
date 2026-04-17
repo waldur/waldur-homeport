@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
 import {
@@ -99,7 +100,7 @@ export const useVolumeDataLoader = (tenant) => {
       };
     },
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 };
 

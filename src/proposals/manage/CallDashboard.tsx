@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
 import { translate } from '@waldur/i18n';
 
@@ -29,7 +30,7 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
           page_size: 1,
         },
       }),
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   // Fetch proposals count
@@ -42,7 +43,7 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
           page_size: 1,
         },
       }),
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   // Fetch reviews count
@@ -55,7 +56,7 @@ export const CallDashboard: FC<CallDashboardProps> = ({ call }) => {
           page_size: 1,
         },
       }),
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   const reviewerPoolCount = reviewerPoolData

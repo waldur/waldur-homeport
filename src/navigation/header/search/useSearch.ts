@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { fetchResultCount } from '@waldur/core/api';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { isStaffOrSupport } from '@waldur/workspace/selectors';
 
 const queryFn =
@@ -106,7 +107,7 @@ export const useSearch = () => {
   const result = useQuery<{}, {}, Awaited<ReturnType<QueryResult>>>({
     queryKey: ['global-search', debouncedQuery],
     queryFn: queryFn(debouncedQuery),
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
     placeholderData: keepPreviousData,
     enabled: show && debouncedQuery.length > 0,
   });
@@ -136,7 +137,7 @@ export const useSearch = () => {
       };
     },
     enabled: show && isStaffOrSupportUser && debouncedQuery.length > 0,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
     placeholderData: keepPreviousData,
   });
 

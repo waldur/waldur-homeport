@@ -4,6 +4,7 @@ import { Card, Tab, Tabs } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -126,7 +127,7 @@ const UpdateLimitsTable: FC<{
     queryKey: ['ChangeLimitsData', getUuid(resource)],
     queryFn: () => loadData(getUuid(resource)),
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   // Check if offering has any limit-type components

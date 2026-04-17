@@ -4,6 +4,7 @@ import { Field } from 'redux-form';
 import { VmwareTemplate, vmwareTemplatesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
@@ -46,7 +47,7 @@ export const FormTemplateStep = (props: FormStepProps) => {
           )
         : Promise.resolve([]),
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const choices = useMemo(() => {

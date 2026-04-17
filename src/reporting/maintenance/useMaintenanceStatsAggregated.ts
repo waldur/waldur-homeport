@@ -4,6 +4,8 @@ import {
   MaintenanceStatsResponse,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
+
 import { MaintenanceFilterState } from './types';
 
 type UseMaintenanceStatsAggregatedOptions = Pick<
@@ -30,7 +32,7 @@ export const useMaintenanceStatsAggregated = (
 
       return response.data as MaintenanceStatsResponse;
     },
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return {

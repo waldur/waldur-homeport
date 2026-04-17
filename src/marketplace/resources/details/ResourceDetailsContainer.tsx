@@ -8,6 +8,7 @@ import { marketplaceResourcesRetrieve } from 'waldur-js-client';
 
 import { ANNOUNCEMENT_ICON } from '@waldur/administration/utils';
 import { usePermissionView } from '@waldur/auth/PermissionLayout';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ErrorView } from '@waldur/ErrorView';
@@ -68,7 +69,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
       }).then((r) => r.data),
 
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
   const {
     data,
@@ -80,7 +81,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     queryKey: ['resource-details-page', resource?.uuid],
     queryFn: () => (resource?.uuid ? fetchData(resource) : null),
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const isLoading = useMemo(

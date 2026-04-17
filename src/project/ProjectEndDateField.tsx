@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { marketplaceResourcesList, Project } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { WarnTip } from '@waldur/core/WarnTip';
@@ -39,7 +40,7 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
       ).then((res) => res.map((item) => item.end_date));
     },
 
-    staleTime: 30 * 1000,
+    staleTime: FAST_STALE_TIME,
     refetchOnWindowFocus: false,
   });
 

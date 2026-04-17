@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { chatThreadsList, ThreadSession } from 'waldur-js-client';
 
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { useUser } from '@waldur/workspace/hooks';
 
@@ -33,7 +34,7 @@ export const useThreadList = ({
       return response.data ?? [];
     },
     enabled,
-    staleTime: 30_000,
+    staleTime: FAST_STALE_TIME,
   });
 };
 

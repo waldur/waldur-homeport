@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { Image } from '@waldur/core/Image';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
@@ -30,7 +31,7 @@ export const FormDetailsOverviewStep = (props: FormStepProps) => {
           })
         : null,
 
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   if (props.offering.shared) {

@@ -9,6 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
@@ -398,14 +399,14 @@ export const OfferingEditUIView = ({
     queryKey: [PROVIDER_OFFERING_DATA_QUERY_KEY, offering_uuid],
     queryFn: () => getOfferingData(offering_uuid),
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const { data: plugins } = useQuery({
     queryKey: ['marketplacePlugins'],
     queryFn: () => marketplacePluginsList(),
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const components = useMemo(

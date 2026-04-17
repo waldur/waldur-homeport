@@ -10,6 +10,7 @@ import {
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME, STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
@@ -57,7 +58,7 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
           query: { customer_uuid: customer.uuid },
         }).then((response) => response.data[0]),
 
-      staleTime: 60 * 1000,
+      staleTime: SHORT_STALE_TIME,
     });
 
     const isExperimentalUiEnabled = isExperimentalUiComponentsVisible();
@@ -75,7 +76,7 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
           },
         }).then((response) => response.data),
       enabled: isExperimentalUiEnabled && !!customer?.uuid,
-      staleTime: 5 * 60 * 1000,
+      staleTime: STALE_TIME,
     });
     const isEdit = Boolean(props.resolve.call?.uuid);
 

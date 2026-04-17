@@ -8,6 +8,7 @@ import {
   AgentIdentity,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { required } from '@waldur/core/validators';
 import { StringField, TextField, FieldError, SubmitButton } from '@waldur/form';
@@ -44,7 +45,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
         path: { uuid: resolve.identity.offering },
       }).then((response) => response.data),
     enabled: isEdit && Boolean(resolve.identity?.offering),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const initialValues = isEdit

@@ -6,6 +6,7 @@ import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
@@ -111,7 +112,7 @@ export const SelectCategoryTab = () => {
         }),
       ),
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
   const formData = useSelector(importOfferingSelector);
 

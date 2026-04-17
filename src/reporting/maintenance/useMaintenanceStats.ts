@@ -1,6 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { maintenanceAnnouncementsList } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
+
 import { MaintenanceFilterState } from './types';
 
 type UseMaintenanceStatsOptions = MaintenanceFilterState;
@@ -33,7 +35,7 @@ export const useMaintenanceStats = (options: UseMaintenanceStatsOptions) => {
 
       return response.data || [];
     },
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return {

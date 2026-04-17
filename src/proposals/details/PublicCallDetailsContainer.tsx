@@ -3,6 +3,7 @@ import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isFeatureVisible } from '@waldur/features/connect';
@@ -89,7 +90,7 @@ export const PublicCallDetailsContainer: FC = () => {
       ),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   useTitle(call ? call.name : translate('Call details'));

@@ -13,6 +13,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { LONG_STALE_TIME } from '@waldur/core/constants';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
@@ -48,7 +49,7 @@ export const ResourceQuickInfo: FC<ResourceQuickInfoProps> = ({ resource }) => {
       });
       return response.data;
     },
-    staleTime: 10 * 60 * 1000, // Cache for 10 minutes
+    staleTime: LONG_STALE_TIME, // Cache for 10 minutes
   });
 
   const endpoints = useMemo(

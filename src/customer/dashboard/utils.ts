@@ -6,6 +6,7 @@ import {
   invoicesList,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { getLineChartOptions } from '@waldur/dashboard/chart';
 import { Scope } from '@waldur/dashboard/types';
 import {
@@ -36,7 +37,7 @@ export function useCustomerCostChart(customer: Scope) {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['CustomerCostData', customer.url],
     queryFn: () => getCustomerCostData(customer),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const chartData = useMemo(() => {
@@ -58,7 +59,7 @@ export function useCustomerCreditChart(customer: Customer) {
   } = useQuery({
     queryKey: ['CustomerCostData', customer.url],
     queryFn: () => getCustomerCostData(customer),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const chartData = useMemo(() => {
@@ -85,7 +86,7 @@ export const useCustomerTeamChart = (customer) => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['CustomerTeamChart', customer.url],
     queryFn: () => getTeamSizeChart(customer),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const chartData = useMemo(

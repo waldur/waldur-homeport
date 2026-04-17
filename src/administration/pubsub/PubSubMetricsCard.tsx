@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 
@@ -13,7 +14,7 @@ export const PubSubMetricsCard: FC = () => {
   const { data, isLoading } = useQuery({
     queryKey: ['PubSubMetrics'],
     queryFn: getPubSubMetrics,
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   return (

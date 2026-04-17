@@ -2,6 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { User } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 
@@ -22,7 +23,7 @@ export const DataAccessDialogContent: FC<DataAccessDialogContentProps> = ({
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['data-access-visibility', user.uuid],
     queryFn: () => fetchDataAccessVisibility(user.uuid),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   if (isLoading) {

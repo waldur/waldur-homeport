@@ -8,6 +8,7 @@ import {
   ReviewerPublication,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { ExternalLink } from '@waldur/core/ExternalLink';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { OrcidLogo } from '@waldur/core/OrcidLogo';
@@ -179,7 +180,7 @@ export const ReviewerExpandableRow: FC<ReviewerExpandableRowProps> = ({
       reviewerProfilesList({ query: { user_uuid: row.user_uuid } }).then(
         (response) => response.data?.[0],
       ),
-    staleTime: 60000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const affiliationsCount = useMemo(

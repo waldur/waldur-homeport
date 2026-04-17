@@ -35,3 +35,13 @@ export const ACCEPTED_FILE_TYPES = {
   'application/msword': ['.doc'],
   'application/vnd.oasis.opendocument.text': ['.odt'],
 };
+
+export const MINUTE = 60 * 1000;
+export const HOUR = 60 * MINUTE;
+export const SECOND = 1000;
+
+export const FAST_STALE_TIME = 30 * 1000;
+export const SHORT_STALE_TIME = 1 * MINUTE;
+export const UI_STALE_TIME = 3 * MINUTE;
+export const STALE_TIME = 5 * MINUTE;
+export const LONG_STALE_TIME = 10 * MINUTE;

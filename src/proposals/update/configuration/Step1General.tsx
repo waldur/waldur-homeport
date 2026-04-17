@@ -6,6 +6,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField, StringField } from '@waldur/form';
 import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
@@ -23,7 +24,7 @@ export const Step1General: FC<WizardFormStepProps> = (props) => {
   const offeringsQuery = useQuery({
     queryKey: ['proposalRequestedOfferings', props.data.call?.uuid],
     queryFn: () => getOfferings(props.data.call?.uuid),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const offeringOptions = useMemo(

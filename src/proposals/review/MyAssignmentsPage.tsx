@@ -12,6 +12,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -151,7 +152,7 @@ const BatchExpandableRow: FC<BatchExpandableRowProps> = ({ row }) => {
       myAssignmentBatchesRetrieve({ path: { uuid: row.uuid } }).then(
         (r) => r.data,
       ),
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   const handleItemSuccess = useCallback(() => {

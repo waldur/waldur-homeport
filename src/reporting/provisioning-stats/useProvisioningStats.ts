@@ -6,9 +6,9 @@ import {
   OrderStatsResponse,
 } from 'waldur-js-client';
 
-import { ProvisioningSummary } from './types';
+import { STALE_TIME } from '@waldur/core/constants';
 
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+import { ProvisioningSummary } from './types'; // 5 minutes
 
 interface UseProvisioningStatsOptions {
   days?: number;

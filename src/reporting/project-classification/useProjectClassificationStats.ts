@@ -10,9 +10,9 @@ import {
   ProjectClassificationSummary as ApiProjectClassificationSummary,
 } from 'waldur-js-client';
 
-import { ClassificationSummary, ProjectClassificationStats } from './types';
+import { STALE_TIME } from '@waldur/core/constants';
 
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+import { ClassificationSummary, ProjectClassificationStats } from './types'; // 5 minutes
 
 async function fetchProjectClassificationStats(
   signal?: AbortSignal,

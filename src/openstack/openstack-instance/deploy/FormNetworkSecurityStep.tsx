@@ -8,6 +8,7 @@ import { Field, FieldArray } from 'redux-form';
 import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { required } from '@waldur/core/validators';
 import { FieldError, FormGroup, SelectField, StringField } from '@waldur/form';
@@ -334,7 +335,7 @@ export const FormNetworkSecurityStep = (props: FormStepProps) => {
       }));
     },
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

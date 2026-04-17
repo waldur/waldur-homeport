@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { organizationGroupsList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { STALE_TIME } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { getUser } from '@waldur/workspace/selectors';
 
@@ -96,7 +97,7 @@ export const useOrganizationGroups = () => {
         })),
       ),
 
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const disabled = query.data?.length === 0 && !user.is_staff;

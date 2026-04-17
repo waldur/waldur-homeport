@@ -15,6 +15,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
 import Avatar from '@waldur/core/Avatar';
 import { Badge } from '@waldur/core/Badge';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
@@ -125,7 +126,7 @@ export const OfferingKeycloakMembershipList: FunctionComponent<{
           },
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const scopeTypes = useMemo(() => {

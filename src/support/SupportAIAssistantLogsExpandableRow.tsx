@@ -12,7 +12,7 @@ import {
 
 import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
 import { Badge } from '@waldur/core/Badge';
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { FAST_STALE_TIME, GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
 import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
 import { formatUsageValue } from '@waldur/core/formatNumber';
@@ -241,7 +241,7 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
           });
           return response.error ? [] : response.data;
         },
-        staleTime: 30_000,
+        staleTime: FAST_STALE_TIME,
       });
 
       // Group messages by sequence_index to build MessageWithVersions[]

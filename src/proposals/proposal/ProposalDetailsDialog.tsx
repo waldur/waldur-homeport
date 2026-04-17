@@ -3,6 +3,7 @@ import { FC } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
@@ -34,7 +35,7 @@ export const ProposalDetailsDialog: FC<ProposalDetailsDialogProps> = ({
       ),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   return (

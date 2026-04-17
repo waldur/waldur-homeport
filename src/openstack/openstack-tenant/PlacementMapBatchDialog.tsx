@@ -6,6 +6,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
@@ -71,7 +72,7 @@ export const PlacementMapBatchDialog: FC<Props> = ({ resolve }) => {
           }).then((res) => res.data as OpenStackInstance),
         ),
       ),
-    staleTime: 30_000,
+    staleTime: FAST_STALE_TIME,
   });
 
   // Enrich instances with offering_name from Resource rows

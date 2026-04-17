@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import { ENV } from '@waldur/core/config';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -136,7 +137,7 @@ export const OfferingUserDetailsDialog: FC<OfferingUserDetailsDialogProps> = ({
       marketplaceProviderOfferingsUserAttributeConfigRetrieve({
         path: { uuid: offeringUuid },
       }).then((response) => response.data),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const exposedUserAttributes = useMemo(() => {

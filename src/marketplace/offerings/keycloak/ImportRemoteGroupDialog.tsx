@@ -14,6 +14,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { SHORT_STALE_TIME, UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { required } from '@waldur/core/validators';
 import { SelectField, StringField, SubmitButton } from '@waldur/form';
@@ -52,7 +53,7 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
         Array.isArray(response.data) ? response.data : []
       ) as RemoteGroup[];
     },
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const {
@@ -72,7 +73,7 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
           },
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const scopeTypes = useMemo(() => {
@@ -98,7 +99,7 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
           },
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const save = useCallback(

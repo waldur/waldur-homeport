@@ -6,6 +6,7 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import { marketplaceBookingsList } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
 import { FormStepProps } from '@waldur/marketplace/deploy/types';
@@ -130,7 +131,7 @@ export const FormPeriodsStep = (props: FormStepProps) => {
         (r) => r.data,
       ),
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   return (

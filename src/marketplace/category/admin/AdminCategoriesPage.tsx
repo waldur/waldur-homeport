@@ -7,6 +7,7 @@ import {
 } from 'waldur-js-client';
 
 import Avatar from '@waldur/core/Avatar';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { Link } from '@waldur/core/Link';
 import { truncate } from '@waldur/core/utils';
 import { translate } from '@waldur/i18n';
@@ -42,7 +43,7 @@ export const AdminCategoriesPage: FunctionComponent = () => {
   } = useQuery({
     queryKey: ['MarketplaceCategoryGroups'],
     queryFn: () => getCategoryGroups(),
-    staleTime: 30 * 1000,
+    staleTime: FAST_STALE_TIME,
   });
 
   const tableProps = useTable({

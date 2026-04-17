@@ -7,6 +7,11 @@ import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
 import { count, parseSelectData } from '@waldur/core/api';
 import { Badge } from '@waldur/core/Badge';
+import {
+  SHORT_STALE_TIME,
+  STALE_TIME,
+  UI_STALE_TIME,
+} from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { Panel } from '@waldur/core/Panel';
 import { TruncatedMarkdown } from '@waldur/core/TruncatedMarkdown';
@@ -83,7 +88,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
   const { data: teamData } = useQuery({
     queryKey: ['projectTeamData', project?.uuid],
     queryFn: () => getProjectTeamChart(project),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const { callback, canInvite, loadingProjects } = useCreateInvitation({
@@ -107,7 +112,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       ),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const {
@@ -125,7 +130,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       }).then((r) => r.data),
 
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const currentMonthFilteredData = filterComponentsWithUsage(
@@ -151,7 +156,7 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
           })
         : 0,
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     enabled: Boolean(project?.uuid),
   });
 

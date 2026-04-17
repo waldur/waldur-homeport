@@ -15,6 +15,8 @@ import {
   VersionHistory,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
+
 import { HistoryEntityType } from './types';
 
 type HistoryListFn = (options: {
@@ -55,7 +57,7 @@ export const useVersionHistory = (
       const result = await fn({ path: { uuid: entityUuid } });
       return result.data;
     },
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 };
 
@@ -75,6 +77,6 @@ export const useVersionAtTimestamp = (
       return result.data;
     },
     enabled: !!timestamp,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 };

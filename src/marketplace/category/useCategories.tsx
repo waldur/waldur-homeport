@@ -3,6 +3,7 @@ import { useSelector } from 'react-redux';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { getCategoryGroups } from '@waldur/marketplace/common/api';
 
 import {
@@ -36,6 +37,6 @@ export const useCategories = () => {
         getGroupedCategories(categories, categoryGroups),
       ),
 
-    staleTime: 1 * 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 };

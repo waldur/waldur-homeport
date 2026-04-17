@@ -10,6 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { STALE_TIME } from '@waldur/core/constants';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { truncate } from '@waldur/core/utils';
@@ -45,7 +46,7 @@ export const SupportSystemLogsList = () => {
   const { data: settings } = useQuery({
     queryKey: ['SystemLogSettings'],
     queryFn: () => overrideSettingsRetrieve().then((res) => res.data),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const isEnabled = settings?.SYSTEM_LOG_ENABLED ?? true;

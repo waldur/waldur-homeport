@@ -10,6 +10,7 @@ import {
   ToggleButtonGroup,
 } from 'react-bootstrap';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { EChart } from '@waldur/core/EChart';
 import { formatUsageValue } from '@waldur/core/formatNumber';
 import { Link } from '@waldur/core/Link';
@@ -59,7 +60,7 @@ export const OfferingComponentUsageExpandableRow: FC<
           field: ['total_consumed', 'total_allocated', 'billing_period'],
         },
       }).then((response) => response.data),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const chartOptions = useMemo(() => {

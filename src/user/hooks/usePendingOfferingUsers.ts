@@ -4,6 +4,7 @@ import {
   OfferingUserState,
 } from 'waldur-js-client';
 
+import { MINUTE } from '@waldur/core/constants';
 import { useUser } from '@waldur/workspace/hooks';
 
 const PENDING_STATES: OfferingUserState[] = [
@@ -30,6 +31,6 @@ export const usePendingOfferingUsers = () => {
       return response.data;
     },
     enabled: !!user?.uuid,
-    staleTime: 2 * 60 * 1000,
+    staleTime: 2 * MINUTE,
   });
 };

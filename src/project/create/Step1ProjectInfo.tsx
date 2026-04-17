@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { fetchCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 import { Customer } from '@waldur/workspace/types';
@@ -39,7 +40,7 @@ export const Step1ProjectInfo: FC<WizardStepProps> = (props) => {
         : selectedCustomer?.projects
           ? Promise.resolve(selectedCustomer.projects)
           : fetchCustomerProjects(selectedCustomer.uuid),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const customer = useMemo(() => {

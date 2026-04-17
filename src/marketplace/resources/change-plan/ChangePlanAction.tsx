@@ -5,6 +5,7 @@ import {
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
@@ -52,7 +53,7 @@ export const ChangePlanAction: ActionItemType = ({ resource, refetch }) => {
       return { resource: resourceData, offering: offeringData };
     },
     enabled: Boolean(resource.marketplace_resource_uuid),
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    staleTime: STALE_TIME, // Cache for 5 minutes
     refetchOnWindowFocus: false,
   });
 

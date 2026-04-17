@@ -2,6 +2,7 @@ import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { marketplaceResourcesOfferingRetrieve } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { translate } from '@waldur/i18n';
 import { PermissionEnum } from '@waldur/permissions/enums';
@@ -35,7 +36,7 @@ const useRenewAllocationAction = ({ resource, refetch }) => {
         path: { uuid: resource.marketplace_resource_uuid || resource.uuid },
       }).then((response) => response.data),
     enabled: Boolean(resource.marketplace_resource_uuid || resource.uuid),
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    staleTime: STALE_TIME, // Cache for 5 minutes
     refetchOnWindowFocus: false,
   });
 

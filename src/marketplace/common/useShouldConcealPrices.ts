@@ -1,6 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { projectsRetrieve } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { isFeatureVisible } from '@waldur/features/connect';
 import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
 
@@ -26,7 +27,7 @@ export const useShouldConcealPrices = (projectUuid?: string) => {
         }),
     enabled: !!projectUuid && !globalConceal,
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return (

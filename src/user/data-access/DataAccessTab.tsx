@@ -3,6 +3,7 @@ import { FC, useState } from 'react';
 import { Alert, Card, Nav, Tab } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -35,7 +36,7 @@ export const DataAccessTab: FC<DataAccessTabProps> = ({ user }) => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['data-access-visibility', user.uuid],
     queryFn: () => fetchDataAccessVisibility(user.uuid),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   if (isLoading) {

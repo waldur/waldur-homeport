@@ -12,6 +12,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { FieldReviewComments } from '@waldur/proposals/proposal/create-review/FieldReviewComments';
@@ -114,7 +115,7 @@ export const ResourceRequestTemplates: FC<ResourceRequestTemplatesProps> = ({
         (r) => r.data,
       ),
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const tableProps = useTable({

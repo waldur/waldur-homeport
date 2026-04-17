@@ -10,8 +10,7 @@ import {
 
 // eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { count } from '@waldur/core/api';
-
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+import { STALE_TIME } from '@waldur/core/constants'; // 5 minutes
 
 export const useGrowthStatistics = () => {
   return useQuery({

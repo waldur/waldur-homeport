@@ -3,6 +3,7 @@ import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { CategoryGroup } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { translate } from '@waldur/i18n';
@@ -41,7 +42,7 @@ export const DataLoader = ({
         ? null
         : fetchLastNOfferings(customer, project),
 
-    staleTime: 1 * 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const {
@@ -52,7 +53,7 @@ export const DataLoader = ({
   } = useQuery({
     queryKey: ['MarketplaceCategoryGroups'],
     queryFn: () => getCategoryGroups(),
-    staleTime: 1 * 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const {
@@ -69,7 +70,7 @@ export const DataLoader = ({
       project?.uuid,
     ],
     queryFn: () => fetchCategories(customer, project, filter),
-    staleTime: 1 * 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
     placeholderData: keepPreviousData,
   });
 

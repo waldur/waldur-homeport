@@ -7,6 +7,7 @@ import {
   marketplaceOfferingUsersList,
 } from 'waldur-js-client';
 
+import { MINUTE } from '@waldur/core/constants';
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
 import { getUser } from '@waldur/workspace/selectors';
@@ -41,7 +42,7 @@ export const ServiceProviderCommentWarningBar: FC<
           }).then((response) => response.data[0] || null)
         : null,
     enabled: !!(user?.uuid && offering?.uuid),
-    staleTime: 2 * 60 * 1000,
+    staleTime: 2 * MINUTE,
   });
 
   if (isLoading || !offeringUser || !offeringUser.service_provider_comment) {

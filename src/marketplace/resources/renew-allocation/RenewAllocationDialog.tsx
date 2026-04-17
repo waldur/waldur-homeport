@@ -6,6 +6,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
 import { translate } from '@waldur/i18n';
@@ -81,7 +82,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
         path: { uuid: marketplaceResourceUuid },
       }).then((response) => response.data),
     enabled: Boolean(marketplaceResourceUuid),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const resources = useMemo(() => {

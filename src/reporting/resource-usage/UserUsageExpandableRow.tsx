@@ -19,7 +19,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@waldur/core/constants';
 import { EChart } from '@waldur/core/EChart';
 import { formatUsageValue } from '@waldur/core/formatNumber';
 import { LoadingErred } from '@waldur/core/LoadingErred';
@@ -121,7 +121,7 @@ export const UsageExpandableRow = ({
             )
         : [],
     refetchOnWindowFocus: false,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const chartOptions = useMemo(() => {

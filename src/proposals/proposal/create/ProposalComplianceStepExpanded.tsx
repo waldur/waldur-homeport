@@ -4,6 +4,7 @@ import { Field } from 'react-final-form';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isEmpty } from '@waldur/core/utils';
 import { StringField, TextField, NumberField, SelectField } from '@waldur/form';
@@ -114,7 +115,7 @@ export const ProposalComplianceStepExpanded: FC<VStepperFormStepProps> = (
           throw err;
         }),
     refetchOnWindowFocus: false,
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   // Build a map of question UUID to form field name for dependency lookup

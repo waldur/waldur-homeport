@@ -11,6 +11,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { composeValidators, required } from '@waldur/core/validators';
@@ -66,7 +67,7 @@ export const ComponentPolicyForm: FC<ComponentPolicyFormProps> = ({
         );
       }),
     refetchOnWindowFocus: false,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const { data, isLoading, error, refetch } = useQuery<{}, {}, string[]>({

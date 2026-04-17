@@ -4,6 +4,7 @@ import { useSelector, connect } from 'react-redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 import { customerCreditsList } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { EChart } from '@waldur/core/EChart';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import {
@@ -56,7 +57,7 @@ export const ProjectCreditFormDialog = connect<
           query: { customer_uuid: customer?.uuid },
         }).then((r) => r.data[0]),
 
-      staleTime: 60 * 1000,
+      staleTime: SHORT_STALE_TIME,
     });
 
     const isEdit = Boolean(props.initialValues);

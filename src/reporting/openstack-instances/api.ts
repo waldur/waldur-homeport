@@ -6,6 +6,7 @@ import {
   marketplaceStatsOpenstackInstancesList,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { createFetcher } from '@waldur/table/api';
 
 export const openstackInstancesFetcher = createFetcher(
@@ -29,7 +30,7 @@ export const useOpenstackInstancesAggregate = (
   useQuery({
     queryKey: ['openstackInstancesAggregate', groupBy, filter],
     queryFn: () => fetchAggregate(groupBy, filter),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
 export const useOpenstackInstancesSummary = (filter?: Record<string, any>) =>
@@ -61,5 +62,5 @@ export const useOpenstackInstancesSummary = (filter?: Record<string, any>) =>
         totalDiskMb,
       };
     },
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });

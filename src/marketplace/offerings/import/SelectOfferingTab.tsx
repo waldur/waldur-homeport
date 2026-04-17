@@ -4,6 +4,7 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change } from 'redux-form';
 import { remoteWaldurApiSharedOfferings } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { FormContainer, SelectField } from '@waldur/form';
 import { MultiSelectOption } from '@waldur/form/themed-select';
@@ -50,7 +51,7 @@ export const SelectOfferingTab = () => {
       );
     },
 
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
     retry: false,
   });
 

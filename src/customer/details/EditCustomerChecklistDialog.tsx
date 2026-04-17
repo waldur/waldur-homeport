@@ -6,6 +6,7 @@ import { SubmissionError, reduxForm } from 'redux-form';
 import { checklistsAdminList } from 'waldur-js-client';
 
 import { getAllPages } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SelectField, SubmitButton } from '@waldur/form';
@@ -56,7 +57,7 @@ export const EditCustomerChecklistDialog = connect<
             query: { page, checklist_type: 'project_metadata' },
           }),
         ),
-      staleTime: 3 * 60 * 1000,
+      staleTime: UI_STALE_TIME,
     });
 
     return (

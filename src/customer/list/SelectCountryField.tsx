@@ -5,6 +5,7 @@ import { components } from 'react-select';
 import { Field } from 'redux-form';
 import { customersCountriesList } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { WindowedSelect } from '@waldur/form/themed-select';
 import { translate } from '@waldur/i18n';
 import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
@@ -41,7 +42,7 @@ export const SelectCountryField: FunctionComponent = () => {
   const { isLoading, data } = useQuery({
     queryKey: ['countries'],
     queryFn: () => customersCountriesList().then((r) => r.data),
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
   return (
     <Form.Group className="mb-7">

@@ -6,6 +6,7 @@ import { checklistsAdminRetrieve } from 'waldur-js-client';
 
 import { useSettingsUrlSync } from '@waldur/administration/settings/useSettingsUrlSync';
 import { CheckOrX } from '@waldur/core/CheckOrX';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { FormattedHtml } from '@waldur/core/FormattedHtml';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
@@ -186,7 +187,7 @@ export const OverviewSection: FC<OfferingSectionProps> = (props) => {
             path: { uuid: getUUID(props.offering.compliance_checklist) },
           }).then((response) => response.data)
         : null,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   useEffect(() => {

@@ -8,6 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
+import { FAST_STALE_TIME } from '@waldur/core/constants';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { Tip } from '@waldur/core/Tooltip';
@@ -111,7 +112,7 @@ export const AssignmentBatchExpandableRow: FC<
       assignmentBatchesRetrieve({ path: { uuid: row.uuid } }).then(
         (r) => r.data,
       ),
-    staleTime: 30000,
+    staleTime: FAST_STALE_TIME,
   });
 
   const refetchBatch = useCallback(() => {

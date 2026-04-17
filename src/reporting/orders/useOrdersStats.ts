@@ -6,6 +6,8 @@ import {
   OrderStatsResponse,
 } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
+
 interface UseOrdersStatsOptions {
   days?: number;
   provider_uuid?: string;
@@ -36,7 +38,7 @@ export const useOrdersStats = (options: UseOrdersStatsOptions = {}) => {
 
       return response.data as OrderStatsResponse;
     },
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return {

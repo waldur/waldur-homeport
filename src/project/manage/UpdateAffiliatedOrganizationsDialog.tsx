@@ -9,6 +9,7 @@ import {
   projectsUpdateAffiliatedOrganizations,
 } from 'waldur-js-client';
 
+import { SHORT_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { SubmitButton } from '@waldur/form';
@@ -41,7 +42,7 @@ export const UpdateAffiliatedOrganizationsDialog: FunctionComponent<
       affiliatedOrganizationsList({ query: { page_size: 200 } }).then(
         (res) => res.data,
       ),
-    staleTime: 60 * 1000,
+    staleTime: SHORT_STALE_TIME,
   });
 
   const currentOrgUuids = useMemo(

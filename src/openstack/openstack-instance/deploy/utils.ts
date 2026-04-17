@@ -3,6 +3,7 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { orderFormAttributesSelector } from '@waldur/marketplace/deploy/selectors';
 import { loadVolumeTypes } from '@waldur/openstack/api';
 import { TENANT_TYPE } from '@waldur/openstack/constants';
@@ -61,6 +62,6 @@ export const useVolumeDataLoader = (offering: PublicOfferingDetails) => {
       };
     },
 
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 };

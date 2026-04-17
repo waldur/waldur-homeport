@@ -3,6 +3,7 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { callManagingOrganisationsStatsRetrieve } from 'waldur-js-client';
 
+import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { StatisticsCard } from '@waldur/core/StatisticsCard';
@@ -71,7 +72,7 @@ export const CallManagementDashboard = () => {
         path: { uuid: customer.call_managing_organization_uuid },
       }).then((response) => response.data),
 
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   return (

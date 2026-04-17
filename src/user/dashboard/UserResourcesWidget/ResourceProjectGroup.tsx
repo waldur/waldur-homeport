@@ -5,6 +5,7 @@ import { projectsListUsersList, projectsRetrieve } from 'waldur-js-client';
 
 import { AccordionCard } from '@waldur/core/AccordionCard';
 import { fetchResultCount } from '@waldur/core/api';
+import { STALE_TIME } from '@waldur/core/constants';
 import { Link } from '@waldur/core/Link';
 import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
 import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
@@ -36,7 +37,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
       return response.data;
     },
     enabled: isOpen,
-    staleTime: 5 * 60 * 1000, // Cache for 5 minutes
+    staleTime: STALE_TIME, // Cache for 5 minutes
   });
 
   // Lazy load team members when accordion is opened
@@ -67,7 +68,7 @@ export const ResourceProjectGroup: FC<ResourceProjectGroupProps> = ({
       };
     },
     enabled: isOpen,
-    staleTime: 5 * 60 * 1000,
+    staleTime: STALE_TIME,
   });
 
   const title = (

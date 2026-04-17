@@ -9,7 +9,7 @@ import {
 } from 'waldur-js-client';
 
 import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@waldur/core/constants';
 import { LoadingErred } from '@waldur/core/LoadingErred';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
@@ -46,7 +46,7 @@ export const OfferingDashboard: FC<OwnProps> = ({ offering }) => {
           },
         }),
       ),
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   useEffect(() => {

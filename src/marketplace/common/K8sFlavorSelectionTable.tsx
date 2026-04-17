@@ -11,6 +11,7 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { Tip } from '@waldur/core/Tooltip';
 import { formatFilesize } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
@@ -93,7 +94,7 @@ const FlavorSelectionModal = reduxForm<{}, FlavorSelectionModalProps>({
     table: `k8s-flavor-selection-${offeringUuid}`,
     fetchData: createFetcher(openstackFlavorsList),
     filter,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const handleConfirmSelection = (formData) => {

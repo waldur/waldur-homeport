@@ -6,9 +6,9 @@ import {
   ResourcesGeographySummary as ApiResourcesGeographySummary,
 } from 'waldur-js-client';
 
-import { ResourcesGeographyStats, ResourcesGeographySummary } from './types';
+import { STALE_TIME } from '@waldur/core/constants';
 
-const STALE_TIME = 5 * 60 * 1000; // 5 minutes
+import { ResourcesGeographyStats, ResourcesGeographySummary } from './types'; // 5 minutes
 
 async function fetchResourcesGeographyStats(
   signal?: AbortSignal,

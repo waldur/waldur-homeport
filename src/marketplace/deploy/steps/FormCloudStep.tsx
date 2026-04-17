@@ -10,6 +10,7 @@ import {
 } from 'waldur-js-client';
 
 import { parseNextPage } from '@waldur/core/api';
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { required } from '@waldur/core/validators';
 import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
 import { translate } from '@waldur/i18n';
@@ -67,7 +68,7 @@ export const FormCloudStep = (props: FormStepProps) => {
     queryFn: loadData,
     initialPageParam: 1,
     getNextPageParam: (lastPage) => lastPage.nextPage,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
     meta: {
       project_uuid: project?.uuid,
       type: props.params?.type,

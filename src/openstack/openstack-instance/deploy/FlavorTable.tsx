@@ -1,6 +1,7 @@
 import { useCallback, useMemo } from 'react';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@waldur/core/constants';
 import { formatFilesize } from '@waldur/core/utils';
 import { required } from '@waldur/core/validators';
 import { translate } from '@waldur/i18n';
@@ -38,7 +39,7 @@ export const FlavorTable = ({
     table: 'deploy-openstack-flavors',
     fetchData: createFetcher(openstackFlavorsList),
     filter,
-    staleTime: 3 * 60 * 1000,
+    staleTime: UI_STALE_TIME,
   });
 
   const { vcpuQuota, ramQuota } = useQuotasData(offering);
