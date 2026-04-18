@@ -24,6 +24,7 @@ export const useThreadList = ({
     queryFn: async () => {
       const response = await chatThreadsList({
         query: {
+          scope: 'own',
           is_archived: isArchived,
           o: ['-created'],
           page_size: 100,

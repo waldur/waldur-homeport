@@ -1,4 +1,5 @@
 import { ThreadMessageLike } from '@assistant-ui/react';
+import { Message } from 'waldur-js-client';
 
 import {
   UIBlock,
@@ -122,6 +123,36 @@ const blockExtractors: Record<string, (block: UIBlock) => string> = {
     return lines.join('\n');
   },
 };
+
+/**
+ * The backend persists tool blocks as self-contained records with the result
+ * nested inside (`{key: 'tool', tool: {...}, result: {key: 'table', ...}}`),
+ * but the live-streaming path emits results as siblings of the tool marker
+ * and BlockRenderer iterates a flat array. Unwrap each `tool` block by
+ * emitting the tool block without its nested payload followed by the result
+ * as a sibling.
+ */
+const flattenToolBlocks = (
+  rawBlocks: readonly unknown[] | null | undefined,
+): UIBlock[] => {
+  if (!rawBlocks?.length) return [];
+  const raw = rawBlocks as Array<UIBlock & { result?: UIBlock }>;
+  return raw.flatMap((block) => {
+    if (block.key === 'tool' && block.result) {
+      const { result, ...toolOnly } = block;
+      return [toolOnly, result];
+    }
+    return [block];
+  });
+};
+
+/**
+ * Extract flattened UI blocks from a backend Message. The SDK types
+ * `Message.blocks` loosely (id/key/status + additionalProperties) because
+ * JSON fields can't be narrowed at schema-gen time, so we cast here.
+ */
+export const messageBlocks = (message: Message): UIBlock[] =>
+  flattenToolBlocks(message.blocks as unknown as readonly unknown[]);
 
 export function extractTextFromBlocks(blocks: UIBlock[]): string {
   if (!blocks || blocks.length === 0) return '';

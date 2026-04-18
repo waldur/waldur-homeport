@@ -54,11 +54,13 @@ type SuggestionItem = {
 };
 
 export const Thread: FC = () => {
-  const isEmpty = useAssistantState(
-    ({ thread }) => thread.messages.length === 0,
-  );
-  const { loadingThreadId, currentThreadId } = useThreadContext();
-  const isLoadingThread = loadingThreadId === currentThreadId;
+  const { loadingThreadId, currentThreadId, threads } = useThreadContext();
+  const isLoadingThread = loadingThreadId !== null;
+
+  const isSettledEmpty =
+    !isLoadingThread &&
+    threads.has(currentThreadId) &&
+    threads.get(currentThreadId)!.length === 0;
 
   if (isLoadingThread) {
     return (
@@ -72,11 +74,9 @@ export const Thread: FC = () => {
 
   return (
     <ThreadPrimitive.Root className="aui-root aui-thread-root">
-      {!isEmpty && <ThreadHeader />}
+      {!isSettledEmpty && <ThreadHeader />}
       <ThreadPrimitive.Viewport className="aui-thread-viewport">
-        <ThreadPrimitive.If empty>
-          <ThreadWelcome />
-        </ThreadPrimitive.If>
+        {isSettledEmpty && <ThreadWelcome />}
 
         <ThreadPrimitive.Messages
           components={{
@@ -301,7 +301,7 @@ const ComposerAction: FC<{
         aria-label={translate('Show Token Usage')}
       >
         <CoinsIcon weight="bold" />
-        <span>{translate('Show Tokens')}</span>
+        <span>{translate('Show usage')}</span>
       </button>
 
       <ThreadPrimitive.If running={false}>

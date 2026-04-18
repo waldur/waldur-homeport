@@ -4,7 +4,8 @@ import {
   ListIcon,
   XIcon,
 } from '@phosphor-icons/react';
-import { FC, useCallback, useEffect, useState } from 'react';
+import { FC, useCallback, useEffect, useRef, useState } from 'react';
+import { useDispatch } from 'react-redux';
 
 import { AIDisclosureBanner } from '@waldur/ai-assistant/components/AIDisclosureDialog';
 import { ChatHistorySidebar } from '@waldur/ai-assistant/components/ChatHistorySidebar';
@@ -17,7 +18,9 @@ import {
   isDisclosureAcknowledged,
 } from '@waldur/ai-assistant/utils';
 import { IconButton, MediumIconButton } from '@waldur/core/buttons/IconButton';
+import { closeDrawerDialog } from '@waldur/drawer/actions';
 import { translate } from '@waldur/i18n';
+import { useLayout } from '@waldur/metronic/layout/core';
 import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
 
 interface LLMChatDrawerProps {
@@ -56,6 +59,21 @@ export const LLMChatDrawerToolbar: FC<{ close: () => void }> = ({ close }) => {
   const [expanded, setExpanded] = useState(false);
   const [historyOpen, setHistoryOpen] = useState(false);
   const { hasNewMessages } = useThreadContext();
+  const dispatch = useDispatch();
+  const { config } = useLayout();
+  const isFirstAsideChange = useRef(true);
+
+  // Close the drawer when the main aside minimize state flips. The drawer's
+  // layout is anchored to the main content area's width; when that changes,
+  // closing is cleaner than trying to reflow. Same pattern as the
+  // impersonation-change handler in LLMChatDrawerToggle.
+  useEffect(() => {
+    if (isFirstAsideChange.current) {
+      isFirstAsideChange.current = false;
+      return;
+    }
+    dispatch(closeDrawerDialog());
+  }, [config.aside.minimized, dispatch]);
 
   const toggleExpand = useCallback(() => {
     const drawer = document.getElementById('kt_drawer');

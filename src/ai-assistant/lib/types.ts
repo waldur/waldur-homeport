@@ -47,12 +47,12 @@ export interface UIBlock {
   message?: string; // Success message
   error?: string; // Error message
   // HomePort navigation links (when key === 'homeport_nav')
-  nav_links?: Array<{
+  // The caption for the nav block lives in `content` (shared across all blocks).
+  links?: Array<{
     label: string;
     url: string;
     variant?: 'primary' | 'secondary' | 'info';
   }>;
-  nav_context?: string;
   // VM Order form mode fields (when order_status === 'form')
   flavors?: Array<{
     name: string;
