@@ -2,7 +2,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
 import { translate } from '@waldur/i18n';
-import { showComponentsList } from '@waldur/marketplace/common/registry';
+import {
+  showComponentsList,
+  getFormLimitParser,
+} from '@waldur/marketplace/common/registry';
 
 import { getAccountingTypeOptions } from './components/ComponentAccountingTypeField';
 import { getLimitPeriods } from './components/ComponentLimitPeriodField';
@@ -20,9 +23,10 @@ export const parseAttribute = (attribute, value) => {
   return value;
 };
 
-export const parseComponent = (component) => {
+export const parseComponent = (component, offering) => {
   const options = getAccountingTypeOptions();
   const limitPeriods = getLimitPeriods();
+  const limitParser = offering ? getFormLimitParser(offering.type) : (x) => x;
   return {
     ...component,
     billing_type: options.find(
@@ -31,6 +35,15 @@ export const parseComponent = (component) => {
     limit_period: limitPeriods.find(
       (option) => option.value === component.limit_period,
     ),
+    min_value: limitParser({ [component.type]: component.min_value })[
+      component.type
+    ],
+    max_value: limitParser({ [component.type]: component.max_value })[
+      component.type
+    ],
+    limit_amount: limitParser({ [component.type]: component.limit_amount })[
+      component.type
+    ],
   };
 };
 

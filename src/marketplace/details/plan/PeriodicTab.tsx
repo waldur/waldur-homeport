@@ -21,13 +21,17 @@ export const PeriodicTab = ({
   periods,
   viewMode,
   concealBillingInfo = false,
+  offering,
 }: {
   periodic: ReturnType<typeof useComponentsDetailPrices>['periodic'];
   customer;
   /** If set, only render components of this period (fixed & usage components are also rendered for monthly period) */
   limitPeriod?: LimitPeriodEnum;
   concealBillingInfo?: boolean;
-} & Pick<PlanDetailsTableProps, 'periodKeys' | 'periods' | 'viewMode'>) => {
+} & Pick<
+  PlanDetailsTableProps,
+  'periodKeys' | 'periods' | 'viewMode' | 'offering'
+>) => {
   const [selectedPeriod, setSelectedPeriod] = useState<PlanPeriod>('monthly');
 
   const activeFixedPriceProfile =
@@ -103,6 +107,7 @@ export const PeriodicTab = ({
             viewMode={viewMode}
             period={selectedPeriod}
             activePriceIndex={activePriceIndex}
+            offering={offering}
           />
         )}
 

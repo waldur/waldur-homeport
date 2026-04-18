@@ -1,5 +1,7 @@
 import { BillingUnit } from 'waldur-js-client';
 
+import { getFormLimitSerializer } from '@waldur/marketplace/common/registry';
+
 import { PlanFormData, OptionFormData } from './types';
 
 export const formatPlan = (plan: PlanFormData) => ({
@@ -91,9 +93,23 @@ export const formatAttribute = (attribute, value) => {
 const getBillingTypeValue = (option) =>
   typeof option === 'object' ? option.value : option;
 
-export const formatComponent = (component) => ({
-  ...component,
-  billing_type: getBillingTypeValue(component.billing_type),
-  limit_period: component.limit_period ? component.limit_period.value : null,
-  uuid: component.uuid,
-});
+export const formatComponent = (component, offering?) => {
+  const limitSerializer = offering
+    ? getFormLimitSerializer(offering.type)
+    : (x) => x;
+  return {
+    ...component,
+    billing_type: getBillingTypeValue(component.billing_type),
+    limit_period: component.limit_period ? component.limit_period.value : null,
+    min_value: limitSerializer({ [component.type]: component.min_value })[
+      component.type
+    ],
+    max_value: limitSerializer({ [component.type]: component.max_value })[
+      component.type
+    ],
+    limit_amount: limitSerializer({ [component.type]: component.limit_amount })[
+      component.type
+    ],
+    uuid: component.uuid,
+  };
+};

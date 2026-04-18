@@ -28,7 +28,7 @@ export const AddComponentDialog = reduxForm<
       try {
         await marketplaceProviderOfferingsCreateOfferingComponent({
           path: { uuid: props.resolve.offering.uuid },
-          body: formatComponent(formData),
+          body: formatComponent(formData, props.resolve.offering),
         });
         dispatch(
           showSuccess(

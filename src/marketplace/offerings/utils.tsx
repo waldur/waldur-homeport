@@ -2,6 +2,7 @@ import { change } from 'redux-form';
 import { User } from 'waldur-js-client';
 
 import { translate } from '@waldur/i18n';
+import { getFormLimitParser } from '@waldur/marketplace/common/registry';
 import { Offering } from '@waldur/marketplace/types';
 import { IBreadcrumbItem } from '@waldur/navigation/types';
 import { checkCustomerUser } from '@waldur/workspace/selectors';
@@ -61,7 +62,8 @@ export const getDefaultLimits = (
       }
     }
   }
-  return limits;
+  const limitParser = getFormLimitParser(offering.type);
+  return limitParser(limits);
 };
 
 export const scrollToSectionById = (section: string, extraOffset = 180) => {

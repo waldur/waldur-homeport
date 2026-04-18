@@ -20,7 +20,10 @@ import { EDIT_COMPONENT_FORM_ID } from './constants';
 type OwnProps = { resolve: { offering; component; refetch } };
 
 export const EditComponentDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
-  initialValues: parseComponent(ownProps.resolve.component),
+  initialValues: parseComponent(
+    ownProps.resolve.component,
+    ownProps.resolve.offering,
+  ),
 }))(
   reduxForm<{}, OwnProps>({
     form: EDIT_COMPONENT_FORM_ID,
@@ -29,7 +32,7 @@ export const EditComponentDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
     const update = useCallback(
       async (formData) => {
         try {
-          const data = formatComponent(formData);
+          const data = formatComponent(formData, props.resolve.offering);
           const { offering } = props.resolve;
           const payload =
             offering.type === TENANT_TYPE && props.resolve.component.is_builtin

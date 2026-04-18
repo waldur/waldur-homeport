@@ -1,6 +1,7 @@
 import React, { useMemo } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
+import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
 import {
@@ -18,6 +19,7 @@ interface ComponentEditRowProps {
   hidePrices?: boolean;
   period?: PlanPeriod;
   activePriceIndex?: number;
+  offering?: PublicOfferingDetails;
 }
 
 const RowWrapper = (
@@ -60,6 +62,7 @@ export const ComponentEditRow: React.FC<ComponentEditRowProps> = (props) => {
       validate={validate}
       component={RowWrapper}
       offeringComponent={props.component}
+      offering={props.offering}
     />
   );
 };
@@ -70,6 +73,7 @@ const RowWrapper2 = (
     hidePrices?: boolean;
     period?: PlanPeriod;
     activePriceIndex?: number;
+    offering: PublicOfferingDetails;
   },
 ) => (
   <ComponentRow2
@@ -111,6 +115,7 @@ export const ComponentEditRow2: React.FC<ComponentEditRowProps> = (props) => {
       hidePrices={props.hidePrices}
       period={props.period}
       activePriceIndex={props.activePriceIndex}
+      offering={props.offering}
     />
   );
 };
