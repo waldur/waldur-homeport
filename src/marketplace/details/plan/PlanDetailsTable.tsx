@@ -1,7 +1,9 @@
+import { DateTime } from 'luxon';
 import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
+import { calculateMonthsDifference, formatDate } from '@waldur/core/dateUtils';
 import { defaultCurrency } from '@waldur/core/formatCurrency';
 import { translate } from '@waldur/i18n';
 import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
@@ -218,9 +220,32 @@ export const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (
               hidePrices={props.concealBillingInfo}
             />
             <p className="text-muted mt-2 mb-4 fs-7">
-              {translate(
-                'Prepaid fee applied on activation based on ordered quantity and duration.',
-              )}
+              {props.startDate && props.endDate
+                ? (() => {
+                    const totalMonths = calculateMonthsDifference(
+                      props.startDate,
+                      props.endDate,
+                    );
+                    const remainingMonths = Math.max(
+                      0,
+                      calculateMonthsDifference(
+                        DateTime.now().toISODate(),
+                        props.endDate,
+                      ),
+                    );
+                    return translate(
+                      'Prepaid for {totalMonths} months ({startDate} — {endDate}). {remainingMonths} months remaining.',
+                      {
+                        totalMonths,
+                        startDate: formatDate(props.startDate),
+                        endDate: formatDate(props.endDate),
+                        remainingMonths,
+                      },
+                    );
+                  })()
+                : translate(
+                    'Prepaid fee applied on activation based on ordered quantity and duration.',
+                  )}
             </p>
           </>
         )}
