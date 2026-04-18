@@ -19,6 +19,7 @@ export const OneTimeTab = ({
   oneTime,
   viewMode,
   concealBillingInfo = false,
+  offering,
 }) => {
   const shouldConcealPrices =
     useSelector(concealPricesSelector) || concealBillingInfo;
@@ -69,6 +70,7 @@ export const OneTimeTab = ({
             hidePrices={Boolean(shouldConcealPrices)}
             viewMode={viewMode}
             activePriceIndex={0}
+            offering={offering}
           />
         )}
 

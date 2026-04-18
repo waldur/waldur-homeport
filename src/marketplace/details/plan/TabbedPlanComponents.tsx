@@ -58,6 +58,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
             oneTime={oneTime}
             viewMode={props.viewMode}
             concealBillingInfo
+            offering={props.offering}
           />
         )}
         {periodic.hasPeriodicCost &&
@@ -73,6 +74,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
                   periodKeys={props.periodKeys}
                   periods={props.periods}
                   concealBillingInfo
+                  offering={props.offering}
                 />
               ),
           )}
@@ -131,6 +133,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
                 oneTime={oneTime}
                 viewMode={props.viewMode}
                 concealBillingInfo={props.concealBillingInfo}
+                offering={props.offering}
               />
             </Tab.Pane>
           ) : null}
@@ -148,6 +151,7 @@ const PureDetailsTable: FunctionComponent<PlanDetailsTableProps> = (props) => {
                         periodKeys={props.periodKeys}
                         periods={props.periods}
                         concealBillingInfo={props.concealBillingInfo}
+                        offering={props.offering}
                       />
                     </Tab.Pane>
                   ),

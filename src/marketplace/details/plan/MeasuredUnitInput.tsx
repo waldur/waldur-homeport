@@ -1,4 +1,5 @@
 import { Form, InputGroup } from 'react-bootstrap';
+import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { Component } from './types';
 
@@ -8,6 +9,7 @@ export const MeasuredUnitInput = ({
 }: {
   input: any;
   component: Component;
+  offering?: PublicOfferingDetails;
 }) => (
   <InputGroup className="mw-200px">
     <Form.Control
