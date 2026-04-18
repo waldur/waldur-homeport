@@ -35,6 +35,8 @@ async function loadData(resourceId: string) {
           'plan_uuid',
           'limits',
           'current_usages',
+          'end_date',
+          'created',
         ],
       },
     }).then((r) => r.data),
@@ -61,6 +63,8 @@ async function loadData(resourceId: string) {
       limitParser(resource.limits),
       limitParser(resource.current_usages),
       offering,
+      resource.end_date,
+      resource.created,
     ),
   };
 }
@@ -140,6 +144,8 @@ export const PlanDetailsDialog: React.FC<PlanDetailsDialogProps> = (props) => {
             {...data}
             viewMode={true}
             concealBillingInfo={concealBillingInfo}
+            endDate={data.resource.end_date}
+            startDate={data.resource.created}
           />
         </>
       )}
