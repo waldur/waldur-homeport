@@ -35,7 +35,7 @@ const MemoizedBlock: FC<UIBlockProps> = memo(
       prev.block.project_uuid === next.block.project_uuid &&
       prev.block.order_status === next.block.order_status &&
       // Check homeport_nav fields
-      prev.block.nav_links === next.block.nav_links &&
+      prev.block.links === next.block.links &&
       prev.block.message === next.block.message &&
       prev.block.error === next.block.error &&
       // Check resource_list-specific fields

@@ -7,11 +7,20 @@ import { useMediaQuery } from 'react-responsive';
 import {
   ActionTakenEnum,
   chatMessagesList,
-  Message,
   ThreadSession,
 } from 'waldur-js-client';
 
+import { MessageDataInspector } from '@waldur/ai-assistant/components/shared/MessageDataInspector';
 import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
+import {
+  groupBySequenceIndex,
+  MessageWithVersions,
+} from '@waldur/ai-assistant/lib/messages/messageLoader';
+import {
+  extractTextFromBlocks,
+  messageBlocks,
+} from '@waldur/ai-assistant/lib/messages/messageUtils';
+import { uiRegistry } from '@waldur/ai-assistant/lib/registry/uiRegistry';
 import { Badge } from '@waldur/core/Badge';
 import { FAST_STALE_TIME, GRID_BREAKPOINTS } from '@waldur/core/constants';
 import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
@@ -73,11 +82,6 @@ const actionLabels: Record<ActionTakenEnum, string> = {
   allow: translate('Allow'),
 };
 
-interface MessageWithVersions {
-  current: Message;
-  versions: Message[]; // ordered oldest → newest, last element = current
-}
-
 const TokenUsageBadge: FunctionComponent<{
   id: string;
   label: string;
@@ -109,17 +113,23 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
   const clampedIndex = Math.min(selectedVersionIndex, lastIndex);
   const selectedMessage = messageGroup.versions[clampedIndex];
 
+  const blocks = useMemo(
+    () => (selectedMessage ? messageBlocks(selectedMessage) : []),
+    [selectedMessage],
+  );
+  const copyText = useMemo(() => extractTextFromBlocks(blocks), [blocks]);
+  const hasHistoricalFlag = useMemo(
+    () =>
+      !selectedMessage?.is_flagged &&
+      messageGroup.versions.slice(0, -1).some((v) => v.is_flagged),
+    [selectedMessage?.is_flagged, messageGroup.versions],
+  );
+
   if (!selectedMessage) return null;
 
   const isAssistant = selectedMessage.role === 'assistant';
   const isViewingHistory = clampedIndex < messageGroup.versions.length - 1;
   const hasVersions = messageGroup.versions.length > 1;
-  const hasHistoricalFlag = useMemo(
-    () =>
-      !selectedMessage.is_flagged &&
-      messageGroup.versions.slice(0, -1).some((v) => v.is_flagged),
-    [selectedMessage.is_flagged, messageGroup.versions],
-  );
 
   return (
     <div>
@@ -205,7 +215,7 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
             />
           )}
           <CopyToClipboardButton
-            value={selectedMessage.content_display}
+            value={copyText}
             verbose={translate('Message')}
             onlyButton
             size={14}
@@ -217,9 +227,18 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
           'border-start border-3 border-danger': selectedMessage.is_flagged,
         })}
       >
-        <span style={{ whiteSpace: 'pre-wrap' }}>
-          {selectedMessage.content_display.trim()}
-        </span>
+        {blocks.length === 0 ? (
+          <span className="text-muted">{translate('(empty message)')}</span>
+        ) : isAssistant ? (
+          blocks.map((block) => {
+            const Component = uiRegistry.getComponent(block.key);
+            return <Component key={block.id} block={block} />;
+          })
+        ) : (
+          // User messages are plain input
+          <div style={{ whiteSpace: 'pre-wrap' }}>{copyText}</div>
+        )}
+        {isAssistant && <MessageDataInspector blocks={blocks} />}
       </div>
     </div>
   );
@@ -245,28 +264,10 @@ export const SupportAIAssistantLogsExpandableRow: FunctionComponent<OwnProps> =
         staleTime: FAST_STALE_TIME,
       });
 
-      // Group messages by sequence_index to build MessageWithVersions[]
-      const processedMessages: MessageWithVersions[] = useMemo(() => {
-        if (!allMessages?.length) return [];
-
-        // Group by sequence_index, sort within group by created (oldest first)
-        const groups = new Map<number, Message[]>();
-        for (const msg of allMessages) {
-          const key = msg.sequence_index;
-          if (!groups.has(key)) groups.set(key, []);
-          groups.get(key)!.push(msg);
-        }
-
-        return Array.from(groups.entries())
-          .sort(([a], [b]) => a - b)
-          .map(([, versions]) => {
-            const sorted = versions.sort(
-              (a, b) =>
-                new Date(a.created).getTime() - new Date(b.created).getTime(),
-            );
-            return { current: sorted[sorted.length - 1], versions: sorted };
-          });
-      }, [allMessages]);
+      const processedMessages: MessageWithVersions[] = useMemo(
+        () => groupBySequenceIndex(allMessages ?? []),
+        [allMessages],
+      );
 
       if (isLoading) {
         return <LoadingSpinner />;
