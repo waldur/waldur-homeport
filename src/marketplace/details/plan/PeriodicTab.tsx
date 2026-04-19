@@ -42,10 +42,10 @@ export const PeriodicTab = ({
     concealBillingInfo ||
     customer?.display_billing_info_in_projects === false;
 
-  const activePriceIndex = useMemo(
-    () => periodKeys.indexOf(selectedPeriod) ?? 0,
-    [periodKeys, selectedPeriod],
-  );
+  const activePriceIndex = useMemo(() => {
+    const index = periodKeys.indexOf(selectedPeriod);
+    return index > -1 ? index : 0;
+  }, [periodKeys, selectedPeriod]);
 
   /**
    * Total amount for the selected limitPeriod.
@@ -59,7 +59,7 @@ export const PeriodicTab = ({
     if (limitPeriod === 'month') {
       return periodic.totalPeriods.map(
         (_, i) =>
-          (periodic.limitedRowsByPeriod[limitPeriod].total[i] ?? 0) +
+          (periodic.limitedRowsByPeriod[limitPeriod].totalPeriods[i] ?? 0) +
           (periodic.fixedTotalPeriods[i] ?? 0),
       );
     }

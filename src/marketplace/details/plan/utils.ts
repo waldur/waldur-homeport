@@ -221,7 +221,7 @@ export const useComponentsDetailPrices = (prices: PricesData) => {
   const periodicLimitedRowsByPeriod = useMemo<
     Record<
       LimitPeriodEnum,
-      { rows: Component[]; totalPeriods: number[]; total: number[] }
+      { rows: Component[]; totalPeriods: number[]; total: number }
     >
   >(
     () =>
