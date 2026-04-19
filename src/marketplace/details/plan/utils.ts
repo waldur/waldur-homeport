@@ -96,8 +96,17 @@ export const combinePrices = (
       );
       const discountThreshold = planComponent?.discount_threshold;
       const discountRate = planComponent?.discount_rate;
+      // Use the raw component value (before duration multiplication) for the
+      // discount threshold check, so that e.g. 10 units × 12 months doesn't
+      // incorrectly trigger a threshold of 100.
+      const componentValue =
+        component.is_prepaid && durationInMonths > 0
+          ? amount / durationInMonths
+          : amount;
       const discountApplied =
-        !!discountThreshold && !!discountRate && amount >= discountThreshold;
+        !!discountThreshold &&
+        !!discountRate &&
+        componentValue >= discountThreshold;
       const discountedPrice = discountApplied
         ? Number(planComponent?.discounted_price ?? price)
         : price;
