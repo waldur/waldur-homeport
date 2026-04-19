@@ -1029,7 +1029,7 @@ export const SettingsDescription = [
       },
       {
         key: 'OIDC_BLOCK_CREATION_OF_UNINVITED_USERS',
-        description: translate('If true, block creation of an account on OIDC login if user email is not provided or provided and is not in the list of one of the active invitations.'),
+        description: translate('If true, block creation of an account on OIDC login if user email is not provided or provided and is not in the list of one of the active invitations or matching active group invitation email patterns.'),
         default: false,
         type: 'boolean',
       },
