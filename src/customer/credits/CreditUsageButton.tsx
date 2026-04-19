@@ -22,7 +22,7 @@ export const CreditUsageButton = ({ row, scope }) => {
           size: 'xl',
           creditUuid: row.uuid,
           ...(row?.project_uuid
-            ? { projectUuid: row.project_uuid }
+            ? { projectUuid: row.project_uuid, projectName: row.project_name }
             : {
                 customerUuid: row.customer_uuid,
                 customerName: row.customer_name,

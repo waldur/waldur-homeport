@@ -54,14 +54,20 @@ export const CreditUsageDialog: FC<CreditUsageDialogProps> = (props) => {
 
   const filter = useMemo(() => {
     const result: InvoiceItemsListData['query'] = {
-      credit_uuid: props.creditUuid,
-      customer_uuid: props.customerUuid,
-      project_uuid: props.projectUuid,
+      ...(props.scope === 'project'
+        ? { project_uuid: props.projectUuid }
+        : { credit_uuid: props.creditUuid, customer_uuid: props.customerUuid }),
       ...formValues,
     };
 
     return result;
-  }, [props.creditUuid, props.customerUuid, props.projectUuid, formValues]);
+  }, [
+    props.scope,
+    props.creditUuid,
+    props.customerUuid,
+    props.projectUuid,
+    formValues,
+  ]);
 
   const tableProps = useTable({
     table: 'credit-usage-' + props.creditUuid,
