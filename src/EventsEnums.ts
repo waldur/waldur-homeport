@@ -26,6 +26,7 @@ export const CallEnum = {
 };
 
 export const ChatEnum = {
+  chat_feedback_submitted: 'chat_feedback_submitted',
   chat_injection_detected: 'chat_injection_detected',
   chat_pii_detected: 'chat_pii_detected',
   chat_session_accessed: 'chat_session_accessed',
