@@ -18,6 +18,8 @@ interface SubmitButtonProps {
   invalid?: boolean;
   /** Bootstrap button variant - defaults to 'primary' */
   variant?: string;
+  /** Bootstrap button size - defaults to 'lg' */
+  size?: 'sm' | 'lg';
   /** Additional CSS classes */
   className?: string;
   /** Button type - defaults to 'submit' */
@@ -56,6 +58,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
   onClick,
   iconNode,
   iconOnLeft = false,
+  size = 'lg',
   ...rest
 }) => (
   <BaseButton
@@ -69,7 +72,7 @@ export const SubmitButton: FC<SubmitButtonProps> = ({
     disabledReason={disabledReason}
     variant={variant}
     pending={submitting}
-    size="lg"
+    size={size}
     type={type}
     form={form}
     {...rest}

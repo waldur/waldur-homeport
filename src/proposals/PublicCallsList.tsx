@@ -9,6 +9,7 @@ import { Badge } from '@waldur/core/Badge';
 import { formatDateTime } from '@waldur/core/dateUtils';
 import { Link } from '@waldur/core/Link';
 import { translate } from '@waldur/i18n';
+import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
 import { createFetcher } from '@waldur/table/api';
 import {
   ProposalPublicCallsFilter,
@@ -19,7 +20,7 @@ import { useTable } from '@waldur/table/useTable';
 import { renderFieldOrDash } from '@waldur/table/utils';
 
 import { CallCard } from './CallCard';
-import { PublicCallApplyButton } from './details/PublicCallApplyButton';
+import { PublicCallApplyAction } from './details/PublicCallApplyAction';
 import { PublicCallExpandableRow } from './PublicCallExpandableRow';
 import { Call } from './types';
 import {
@@ -142,12 +143,9 @@ export const PublicCallsList: FunctionComponent<PublicCallsListProps> = (
       expandableRow={PublicCallExpandableRow}
       filters={<ProposalPublicCallsFilter />}
       rowActions={({ row }) => (
-        <PublicCallApplyButton
-          call={row}
-          title={translate('Apply')}
-          variant="flush"
-          className="text-btn"
-        />
+        <ActionsDropdown row={row} size="sm">
+          <PublicCallApplyAction call={row} />
+        </ActionsDropdown>
       )}
     />
   );
