@@ -80,7 +80,7 @@ export const CallCard: FC<{ call: Call }> = ({ call }) => {
                 call={call}
                 title={translate('Apply')}
                 variant="text-primary"
-                className="btn-sm"
+                size="sm"
               />
 
               <CallLink call={call} asButton>
