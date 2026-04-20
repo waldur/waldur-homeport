@@ -23,6 +23,7 @@ import {
 import store from '@waldur/store/store';
 import { UsersService, getCurrentUser } from '@waldur/user/UsersService';
 import { setCurrentUser } from '@waldur/workspace/actions';
+import { getUser } from '@waldur/workspace/selectors';
 
 // Backend error messages mapped to translated frontend strings
 const BACKEND_ERROR_TRANSLATIONS: Record<string, string> = {
@@ -116,6 +117,15 @@ export function checkAndAccept(token) {
   }
 }
 
+function resolveProjectNameTemplate(template: string): string {
+  const user = getUser(store.getState());
+  if (!user || !template) return '';
+  return template
+    .replace(/\{username\}/g, user.username || '')
+    .replace(/\{email\}/g, user.email || '')
+    .replace(/\{full_name\}/g, user.full_name || user.username || '');
+}
+
 function collectProjectDetails(token): Promise<{
   project_name?: string;
   project_description?: string;
@@ -123,12 +133,16 @@ function collectProjectDetails(token): Promise<{
   return userGroupInvitationsRetrieve({ path: { uuid: token } }).then((res) => {
     const invitation = res.data;
     if (!invitation.allow_custom_project_details) return null;
+    const defaultProjectName = invitation.project_name_template
+      ? resolveProjectNameTemplate(invitation.project_name_template)
+      : '';
     return new Promise((resolve) => {
       store.dispatch(
         openModalDialog(ProjectDetailsDialog, {
           resolve: {
             onSubmit: (data) => resolve(data),
             onCancel: () => resolve(null),
+            defaultProjectName,
           },
           size: 'md',
         }),
