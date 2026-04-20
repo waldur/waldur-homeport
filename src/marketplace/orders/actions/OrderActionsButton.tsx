@@ -19,6 +19,7 @@ import { MarkAsDoneButton } from './MarkAsDoneButton';
 import { OrderConsumerActions } from './OrderConsumerActions';
 import { OrderProviderActions } from './OrderProviderActions';
 import { RetryOrderButton } from './RetryOrderButton';
+import { SetAsErredButton } from './SetAsErredButton';
 
 export const OrderActionsButton = ({
   order,
@@ -69,6 +70,20 @@ export const OrderActionsButton = ({
     );
   }, [order, user, hideProviderActions]);
 
+  const showSetAsErredButton = useMemo(() => {
+    if (hideProviderActions) {
+      return false;
+    }
+    return (
+      order.state === 'executing' &&
+      order.offering_type === SITE_AGENT_PLUGIN &&
+      hasPermission(user, {
+        permission: PermissionEnum.APPROVE_ORDER,
+        customerId: order.provider_uuid,
+      })
+    );
+  }, [order, user, hideProviderActions]);
+
   const showRetryButton = useMemo(() => {
     if (order.state !== 'erred') return false;
     if (![BASIC_OFFERING_TYPE, SITE_AGENT_PLUGIN].includes(order.offering_type))
@@ -107,6 +122,7 @@ export const OrderActionsButton = ({
 
   return showCancelButton ||
     showMarkAsDoneButton ||
+    showSetAsErredButton ||
     showConsumerActions ||
     showRetryButton ? (
     <ActionsDropdownComponent
@@ -118,6 +134,9 @@ export const OrderActionsButton = ({
       {showRetryButton && <RetryOrderButton row={order} refetch={loadData} />}
       {showMarkAsDoneButton && (
         <MarkAsDoneButton row={order} refetch={loadData} />
+      )}
+      {showSetAsErredButton && (
+        <SetAsErredButton row={order} refetch={loadData} />
       )}
       {showCancelButton && (
         <CancelOrderButton uuid={order.uuid} loadData={loadData} />
