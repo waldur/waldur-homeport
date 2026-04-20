@@ -152,7 +152,7 @@
     "got": "^14.4.7",
     "husky": "^9.1.7",
     "jsdom": "^25.0.1",
-    "knip": "^5.44.1",
+    "knip": "^6.5.0",
     "lint-staged": "^15.4.3",
     "madge": "^8.0.0",
     "mock-match-media": "^0.4.3",
@@ -202,17 +202,11 @@
       ]
     },
     "ignore": [
-      "**/*.spec.ts",
-      "**/*.spec.tsx",
-      "**/*.fixture.ts",
-      "**/*.fixture.tsx",
       "src/metronic/**",
       "src/EventsEnums.ts",
-      "src/FeaturesEnums.ts",
       "locales/tools/*.cjs",
       "src/sass/mediaqueries.scss",
       "src/sass/variables.scss",
-      "src/core/_timeline-item.scss",
       "generate-filters.cjs",
       "src/table/generated/*.tsx"
     ]

@@ -77,7 +77,7 @@ export class Quota {
  * Appears as values of ProjectStorageReport.daily_reports.
  * Same shape as ProjectStorageReport but without the `users` identity map.
  */
-export class DailyStorageReport {
+class DailyStorageReport {
   constructor(
     readonly date: string,
     private readonly json: DailyStorageReportJson,
