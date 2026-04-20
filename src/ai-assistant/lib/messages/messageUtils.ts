@@ -165,22 +165,29 @@ export function extractTextFromBlocks(blocks: UIBlock[]): string {
     .join('\n\n');
 }
 
-export const setBackendUuid = (
+const patchMessageMetadata = (
   setMessages: MessageHandlerDependencies['setMessages'],
-  messageId: string,
-  backendUuid: string,
+  predicate: (m: ThreadMessageLike) => boolean,
+  patch: Record<string, unknown>,
 ) => {
   setMessages((prev) =>
     prev.map((m) =>
-      m.id === messageId
+      predicate(m)
         ? {
             ...m,
             metadata: {
               ...m.metadata,
-              custom: { ...m.metadata?.custom, backendUuid },
+              custom: { ...m.metadata?.custom, ...patch },
             },
           }
         : m,
     ),
   );
 };
+
+export const setBackendUuid = (
+  setMessages: MessageHandlerDependencies['setMessages'],
+  messageId: string,
+  backendUuid: string,
+) =>
+  patchMessageMetadata(setMessages, (m) => m.id === messageId, { backendUuid });

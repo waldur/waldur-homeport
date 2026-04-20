@@ -311,6 +311,7 @@ overrides:
       - is_flagged
       - max_severity
       - is_archived
+      - has_feedback
       - input_tokens_min
       - input_tokens_max
       - output_tokens_min

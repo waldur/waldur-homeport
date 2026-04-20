@@ -156,6 +156,21 @@ const PureChatThreadsFilter: FunctionComponent<{}> = () => (
       />
     </TableFilterItem>
     <TableFilterItem
+      title={translate('Has feedback')}
+      name="has_feedback"
+      badgeValue={(value) =>
+        value ? translate('Has feedback') : translate('All')
+      }
+      ellipsis={false}
+    >
+      <Field
+        name="has_feedback"
+        component={AwesomeCheckboxField}
+        label={translate('Has feedback')}
+        parse={(v) => v || undefined}
+      />
+    </TableFilterItem>
+    <TableFilterItem
       title={translate('Input tokens')}
       name="input_tokens_range"
       badgeValue={formatRangeBadge}
@@ -188,6 +203,7 @@ interface ChatThreadsFilterFormData {
   is_flagged: boolean;
   max_severity: InjectionSeverityOption;
   is_archived: boolean;
+  has_feedback: boolean;
   input_tokens_range: { min?: number; max?: number };
   output_tokens_range: { min?: number; max?: number };
   total_tokens_range: { min?: number; max?: number };
@@ -224,6 +240,9 @@ export const selectChatThreadsFilter = createSelector<
     }
     if (values.is_archived) {
       filter.is_archived = values.is_archived;
+    }
+    if (values.has_feedback) {
+      filter.has_feedback = values.has_feedback;
     }
     if (values.input_tokens_range?.min != null) {
       filter.input_tokens_min = values.input_tokens_range.min;

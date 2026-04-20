@@ -22,10 +22,7 @@ import {
 import { convertMessage } from '@waldur/ai-assistant/lib/messages/messageUtils';
 import '@waldur/ai-assistant/lib/registry/registerComponents';
 import { createThreadListAdapter } from '@waldur/ai-assistant/lib/thread/threadListAdapter';
-import {
-  useAbortControllers,
-  useBackendThreadIds,
-} from '@waldur/ai-assistant/lib/thread/threadStateHooks';
+import { useAbortControllers } from '@waldur/ai-assistant/lib/thread/threadStateHooks';
 import { useThreadList } from '@waldur/ai-assistant/lib/thread/useThreadList';
 import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
 import { isDrawerOpen } from '@waldur/drawer/utils';
@@ -45,6 +42,8 @@ export function ThreadRuntimeProvider({
     setLoadingThreadId,
     getIsRunning,
     setIsRunning,
+    getBackendThreadId,
+    setBackendThreadId,
   } = useThreadContext();
 
   const [threadList, setThreadList] = useState<
@@ -77,10 +76,10 @@ export function ThreadRuntimeProvider({
     });
   }, [backendThreads]);
 
-  // Thread state management hooks (running state is now in ThreadProvider context)
+  // Thread state management hooks (running state and backend thread IDs
+  // live in ThreadProvider context so they survive drawer close/open).
   const { createController, abortThread, cleanupController } =
     useAbortControllers();
-  const { getBackendThreadId, setBackendThreadId } = useBackendThreadIds();
 
   // Get current thread state
   const isRunning = getIsRunning(currentThreadId);

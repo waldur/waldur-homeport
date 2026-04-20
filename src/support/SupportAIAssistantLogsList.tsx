@@ -13,6 +13,7 @@ import { formatUsageValue } from '@waldur/core/formatNumber';
 import { translate } from '@waldur/i18n';
 import { SupportAIAssistantLogsExpandableRow } from '@waldur/support/SupportAIAssistantLogsExpandableRow';
 import { createFetcher } from '@waldur/table/api';
+import { BooleanField } from '@waldur/table/BooleanField';
 import {
   ChatThreadsFilter as SupportAIAssistantLogsFilter,
   selectChatThreadsFilter as selectSupportAIAssistantLogsFilter,
@@ -137,6 +138,15 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
         keys: ['is_flagged'],
       },
       {
+        title: translate('Feedback'),
+        render: ({ row }) => <BooleanField value={row.has_feedback} />,
+        export: (row) =>
+          row.has_feedback ? translate('Yes') : translate('No'),
+        filter: 'has_feedback',
+        id: 'feedback',
+        keys: ['has_feedback'],
+      },
+      {
         title: translate('Max severity'),
         render: ({ row }) => {
           if (!row.is_flagged) return renderFieldOrDash(undefined);
@@ -155,6 +165,7 @@ export const SupportAIAssistantLogsList: FunctionComponent = () => {
         filter: 'max_severity',
         id: 'max_severity',
         keys: ['max_severity'],
+        optional: true,
       },
       {
         title: translate('Archived'),
