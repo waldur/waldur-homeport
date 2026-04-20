@@ -319,6 +319,10 @@ export const PermissionOptions = [
         label: translate('Reject order'),
         value: 'ORDER.REJECT',
       },
+      {
+        label: translate('Set consumer info for order'),
+        value: 'ORDER.SET_CONSUMER_INFO',
+      },
     ],
   },
   {
