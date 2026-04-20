@@ -71,11 +71,12 @@ const convertToThreadMessage = (
         blocks,
         backendUuid: current.uuid,
         ...(warning ? { warning } : {}),
+        feedback_score: current.feedback_score ?? null,
+        feedback_comment: current.feedback_comment ?? null,
+        feedback_category: current.feedback_category ?? null,
+        feedback_submitted_at: current.feedback_submitted_at ?? null,
         ...(blockHistory.length > 0 ? { blockHistory } : {}),
-      } as BlockBasedMetadata & { backendUuid: string } & Record<
-          string,
-          unknown
-        >,
+      } as BlockBasedMetadata & Record<string, unknown>,
     };
 
     return {

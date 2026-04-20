@@ -21,7 +21,14 @@ import {
   CoinsIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import React, { type FC, ReactNode, useEffect, useMemo } from 'react';
+import React, {
+  createContext,
+  type FC,
+  ReactNode,
+  useContext,
+  useEffect,
+  useMemo,
+} from 'react';
 import { chatQuotaUsageRetrieve } from 'waldur-js-client';
 
 import { calculateQuotaPercentage } from '@waldur/administration/ai-assistant/AITokenExpandableRow';
@@ -30,10 +37,12 @@ import {
   VMOrderActions,
   VMOrderFormProvider,
 } from '@waldur/ai-assistant/components/blocks/VMOrderBlock';
+import { FeedbackButtons } from '@waldur/ai-assistant/components/FeedbackButtons';
 import { LoadingDots } from '@waldur/ai-assistant/components/shared/LoadingDots';
 import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
 import { useVersionSelector } from '@waldur/ai-assistant/hooks/useVersionSelector';
 import { extractTextFromBlocks } from '@waldur/ai-assistant/lib/messages/messageUtils';
+import { isThreadLoading } from '@waldur/ai-assistant/lib/thread/isThreadLoading';
 import {
   BlockBasedMetadata,
   BlockHistoryEntry,
@@ -55,7 +64,11 @@ type SuggestionItem = {
 
 export const Thread: FC = () => {
   const { loadingThreadId, currentThreadId, threads } = useThreadContext();
-  const isLoadingThread = loadingThreadId !== null;
+  const isLoadingThread = isThreadLoading(
+    loadingThreadId,
+    currentThreadId,
+    threads,
+  );
 
   const isSettledEmpty =
     !isLoadingThread &&
@@ -349,28 +362,31 @@ const MessageError: FC = () => {
 const EMPTY_BLOCKS: never[] = [];
 const EMPTY_HISTORY: BlockHistoryEntry[] = [];
 
+interface AssistantMessageContextValue {
+  isViewingHistory: boolean;
+}
+
+const AssistantMessageContext = createContext<AssistantMessageContextValue>({
+  isViewingHistory: false,
+});
+
+type VersionSelector = ReturnType<typeof useVersionSelector>;
+
+interface BlockBasedContentProps {
+  selector: VersionSelector;
+}
+
 /**
  * Core component for rendering block-based assistant messages with version history.
  * Uses stable empty arrays and memoization to prevent infinite update loops.
  */
-const BlockBasedContent: FC = () => {
+const BlockBasedContent: FC<BlockBasedContentProps> = ({ selector }) => {
   const metadata = useAssistantState((state) => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
   const isRunning = useAssistantState(({ thread }) => thread.isRunning);
   const messageStatus = useAssistantState(({ message }) => message.status);
   const hasErrors = messageStatus?.type === 'incomplete' && messageStatus.error;
-
-  // Memoize blocks and history extraction
-  const currentBlocks = useMemo(
-    () => metadata?.blocks || EMPTY_BLOCKS,
-    [metadata?.blocks],
-  );
-
-  const blockHistory = useMemo(
-    () => (metadata?.blockHistory as BlockHistoryEntry[]) || EMPTY_HISTORY,
-    [metadata?.blockHistory],
-  );
 
   const {
     displayedBlocks,
@@ -382,7 +398,7 @@ const BlockBasedContent: FC = () => {
     goToPreviousVersion,
     goToNextVersion,
     totalVersions,
-  } = useVersionSelector({ currentBlocks, blockHistory });
+  } = selector;
 
   const activeWarning = isViewingHistory ? displayedWarning : metadata?.warning;
   const hasHistory = totalVersions > 1;
@@ -433,38 +449,58 @@ const AssistantMessage: FC = () => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
 
+  const currentBlocks = useMemo(
+    () => metadata?.blocks || EMPTY_BLOCKS,
+    [metadata?.blocks],
+  );
+
+  const blockHistory = useMemo(
+    () => (metadata?.blockHistory as BlockHistoryEntry[]) || EMPTY_HISTORY,
+    [metadata?.blockHistory],
+  );
+
+  const selector = useVersionSelector({ currentBlocks, blockHistory });
+
+  const contextValue = useMemo(
+    () => ({ isViewingHistory: selector.isViewingHistory }),
+    [selector.isViewingHistory],
+  );
+
   // Check if there's a vm_order block in preview/form state (not result state)
-  const vmOrderBlock = useMemo(() => {
-    const blocks = metadata?.blocks || [];
-    return blocks.find(
-      (block) =>
-        block.key === 'vm_order' &&
-        block.order_status !== 'success' &&
-        block.order_status !== 'error' &&
-        !block.error,
-    );
-  }, [metadata?.blocks]);
+  const vmOrderBlock = useMemo(
+    () =>
+      currentBlocks.find(
+        (block) =>
+          block.key === 'vm_order' &&
+          block.order_status !== 'success' &&
+          block.order_status !== 'error' &&
+          !block.error,
+      ),
+    [currentBlocks],
+  );
 
   return (
-    <VMOrderFormProvider>
-      <MessagePrimitive.Root asChild>
-        <div className="aui-assistant-message-root" data-role="assistant">
-          <div className="aui-assistant-message-content">
-            <BlockBasedContent />
-            <MessageError />
-            <AssistantActionBar />
-          </div>
-
-          {vmOrderBlock && (
-            <div className="aui-assistant-message-footer">
-              <MessagePrimitive.If last>
-                <VMOrderActions block={vmOrderBlock} />
-              </MessagePrimitive.If>
+    <AssistantMessageContext.Provider value={contextValue}>
+      <VMOrderFormProvider>
+        <MessagePrimitive.Root asChild>
+          <div className="aui-assistant-message-root" data-role="assistant">
+            <div className="aui-assistant-message-content">
+              <BlockBasedContent selector={selector} />
+              <MessageError />
+              <AssistantActionBar />
             </div>
-          )}
-        </div>
-      </MessagePrimitive.Root>
-    </VMOrderFormProvider>
+
+            {vmOrderBlock && (
+              <div className="aui-assistant-message-footer">
+                <MessagePrimitive.If last>
+                  <VMOrderActions block={vmOrderBlock} />
+                </MessagePrimitive.If>
+              </div>
+            )}
+          </div>
+        </MessagePrimitive.Root>
+      </VMOrderFormProvider>
+    </AssistantMessageContext.Provider>
   );
 };
 
@@ -473,6 +509,7 @@ const AssistantActionBar: FC = () => {
     return state.message.metadata?.custom as BlockBasedMetadata | undefined;
   });
   const messageStatus = useAssistantState(({ message }) => message.status);
+  const { isViewingHistory } = useContext(AssistantMessageContext);
 
   const hasErrors = messageStatus?.type === 'incomplete' && messageStatus.error;
   let text: string;
@@ -509,6 +546,15 @@ const AssistantActionBar: FC = () => {
           </button>
         </ActionBarPrimitive.Reload>
       </MessagePrimitive.If>
+
+      {metadata?.backendUuid && !isViewingHistory && (
+        <FeedbackButtons
+          messageUuid={metadata.backendUuid}
+          feedbackScore={metadata.feedback_score ?? null}
+          feedbackComment={metadata.feedback_comment ?? null}
+          feedbackCategory={metadata.feedback_category ?? null}
+        />
+      )}
     </ActionBarPrimitive.Root>
   );
 };

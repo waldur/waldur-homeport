@@ -841,3 +841,17 @@ body:has(#kt_drawer.ai-chat-drawer-active) > .drawer-overlay {
     color: inherit !important;
   }
 }
+
+.aui-message-action-btn[aria-pressed='true'] {
+  outline: 1px solid currentColor;
+
+  &.is-positive {
+    color: var(--bs-success) !important;
+    background-color: var(--bs-success-bg-subtle);
+  }
+
+  &.is-negative {
+    color: var(--bs-danger) !important;
+    background-color: var(--bs-danger-bg-subtle);
+  }
+}

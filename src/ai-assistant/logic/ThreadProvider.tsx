@@ -19,14 +19,12 @@ interface ThreadContextType {
   setThreads: React.Dispatch<
     React.SetStateAction<Map<string, ThreadMessageLike[]>>
   >;
-  // Per-thread notifications
   threadNotifications: Set<string>;
   addNotification: (threadId: string) => void;
   clearNotification: (threadId: string) => void;
   // Backward-compatible global indicator
   hasNewMessages: boolean;
   setHasNewMessages: (hasNew: boolean) => void;
-  // Thread loading state
   loadingThreadId: string | null;
   setLoadingThreadId: (id: string | null) => void;
   // Per-thread running state (lifted from threadStateHooks for sidebar access)
@@ -34,6 +32,19 @@ interface ThreadContextType {
   setIsRunning: (
     threadId: string,
     value: boolean | ((prev: boolean) => boolean),
+  ) => void;
+  // Local threadId -> backend thread UUID mapping. Lives here (app level)
+  // so it survives drawer close/open — otherwise a closed-then-reopened
+  // drawer would lose the mapping and the next message would spawn a new
+  // backend thread.
+  getBackendThreadId: (threadId: string) => string | undefined;
+  setBackendThreadId: (threadId: string, uuid: string) => void;
+  // Patch a message's metadata.custom across all threads by its backend UUID.
+  // Used for out-of-band server updates (e.g. feedback submissions) where the
+  // caller has the backend UUID but not the local thread id.
+  patchMessageByBackendUuid: (
+    backendUuid: string,
+    patch: Record<string, unknown>,
   ) => void;
 }
 
@@ -55,6 +66,11 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
   const [runningThreads, setRunningThreads] = useState<Map<string, boolean>>(
     new Map(),
   );
+  // Ref-backed mapping: never read for rendering, only looked up inside
+  // message handlers. Keeping this at the provider level (rather than inside
+  // ThreadRuntimeProvider) means closing/reopening the drawer no longer
+  // discards the local-id -> backend-uuid mapping.
+  const backendThreadIdsRef = useRef<Map<string, string>>(new Map());
 
   // Reset all state when user changes (impersonation, logout/login)
   useEffect(() => {
@@ -67,6 +83,7 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
     setThreadNotifications(new Set());
     setLoadingThreadId(null);
     setRunningThreads(new Map());
+    backendThreadIdsRef.current = new Map();
   }, [user?.uuid]);
 
   const addNotification = useCallback((threadId: string) => {
@@ -113,6 +130,54 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
     [],
   );
 
+  const getBackendThreadId = useCallback(
+    (threadId: string) => backendThreadIdsRef.current.get(threadId),
+    [],
+  );
+
+  const setBackendThreadId = useCallback((threadId: string, uuid: string) => {
+    if (backendThreadIdsRef.current.get(threadId) === uuid) return;
+    backendThreadIdsRef.current.set(threadId, uuid);
+  }, []);
+
+  const patchMessageByBackendUuid = useCallback(
+    (backendUuid: string, patch: Record<string, unknown>) => {
+      const definedPatch: Record<string, unknown> = {};
+      for (const [key, value] of Object.entries(patch)) {
+        if (value !== undefined) definedPatch[key] = value;
+      }
+      if (Object.keys(definedPatch).length === 0) return;
+
+      setThreads((prev) => {
+        const next = new Map(prev);
+        let anyChanged = false;
+        for (const [threadId, messages] of prev) {
+          let changed = false;
+          const updated = messages.map((m) => {
+            const custom = m.metadata?.custom as
+              | { backendUuid?: string }
+              | undefined;
+            if (custom?.backendUuid !== backendUuid) return m;
+            changed = true;
+            return {
+              ...m,
+              metadata: {
+                ...m.metadata,
+                custom: { ...m.metadata?.custom, ...definedPatch },
+              },
+            };
+          });
+          if (changed) {
+            next.set(threadId, updated);
+            anyChanged = true;
+          }
+        }
+        return anyChanged ? next : prev;
+      });
+    },
+    [],
+  );
+
   return (
     <ThreadContext.Provider
       value={{
@@ -129,6 +194,9 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
         setLoadingThreadId,
         getIsRunning,
         setIsRunning,
+        getBackendThreadId,
+        setBackendThreadId,
+        patchMessageByBackendUuid,
       }}
     >
       {children}

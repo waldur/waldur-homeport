@@ -655,6 +655,122 @@ $mobile-spacing: get($content-spacing, tablet-and-mobile);
   background-color: $bg-tertiary;
 }
 
+// Conversation log turn: fixed left gutter for metadata, body on the right.
+.message-item {
+  display: grid;
+  // `minmax(0, 1fr)` lets the body column respect the grid track instead of
+  // growing to fit wide children (e.g. resource tables).
+  grid-template-columns: 150px minmax(0, 1fr);
+  gap: 20px;
+  padding: 1rem;
+
+  & + & {
+    border-top: 1px solid $border-secondary;
+  }
+
+  // Override the 14px inherited from `.table td` — gutter text is 1rem (13px).
+  .message-gutter {
+    font-size: 1rem;
+  }
+
+  .message-actions {
+    opacity: 0;
+    transition: opacity 150ms ease;
+  }
+
+  &:hover .message-actions,
+  &:focus-within .message-actions {
+    opacity: 1;
+  }
+}
+
+// Query container for the feedback row below — queries resolve against the
+// body column's inline size, which matches the feedback row's actual width.
+.message-body {
+  container-type: inline-size;
+  container-name: message-body;
+}
+
+// Feedback summary row: label pill + (optional category pill) + quote + timestamp.
+.message-feedback {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 10px;
+}
+
+.message-feedback-label,
+.message-feedback-category {
+  flex: none;
+}
+
+.message-feedback-comment {
+  flex: 1 1 260px;
+  min-width: 0;
+  overflow-wrap: anywhere;
+  word-break: break-word;
+
+  &.is-clickable {
+    cursor: pointer;
+  }
+}
+
+.message-feedback-time {
+  margin-left: auto;
+  white-space: nowrap;
+  flex: none;
+
+  .time-short {
+    display: none;
+  }
+}
+
+// When the body column is narrow, drop the timestamp to its own full-width line
+// and swap to the compact date format.
+@container message-body (max-width: 460px) {
+  .message-feedback-time {
+    margin-left: 0;
+    width: 100%;
+    text-align: right;
+
+    .time-full {
+      display: none;
+    }
+    .time-short {
+      display: inline;
+    }
+  }
+}
+
+// Viewport fallback for browsers without container-query support.
+@media (max-width: 460px) {
+  .message-feedback-time {
+    margin-left: 0;
+    width: 100%;
+    text-align: right;
+
+    .time-full {
+      display: none;
+    }
+    .time-short {
+      display: inline;
+    }
+  }
+}
+
+@include media-breakpoint-down(md) {
+  .message-item {
+    grid-template-columns: 1fr;
+    gap: 0.5rem;
+
+    .message-gutter {
+      flex-direction: row !important;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+  }
+}
+
 // Dark mode
 @if (isDarkMode()) {
   // Another table inside expanded view

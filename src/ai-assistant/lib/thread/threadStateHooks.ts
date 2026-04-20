@@ -1,4 +1,4 @@
-import { useCallback, useRef, useState } from 'react';
+import { useState } from 'react';
 
 export const useAbortControllers = () => {
   const [abortControllers, setAbortControllers] = useState<
@@ -32,23 +32,4 @@ export const useAbortControllers = () => {
   };
 
   return { createController, abortThread, cleanupController };
-};
-
-export const useBackendThreadIds = () => {
-  // Ref-backed: the mapping is never read for rendering, only looked up by
-  // message handlers. Using a ref keeps getter/setter identities stable so
-  // downstream memos (e.g. threadListAdapter) don't rebuild on every message.
-  const backendThreadIdsRef = useRef<Map<string, string>>(new Map());
-
-  const getBackendThreadId = useCallback(
-    (threadId: string) => backendThreadIdsRef.current.get(threadId),
-    [],
-  );
-
-  const setBackendThreadId = useCallback((threadId: string, uuid: string) => {
-    if (backendThreadIdsRef.current.get(threadId) === uuid) return;
-    backendThreadIdsRef.current.set(threadId, uuid);
-  }, []);
-
-  return { getBackendThreadId, setBackendThreadId };
 };

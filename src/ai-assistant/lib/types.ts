@@ -3,6 +3,7 @@ import {
   ThreadMessageLike,
 } from '@assistant-ui/react';
 import React from 'react';
+import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
 export interface MessageHandlerDependencies {
   messages: readonly ThreadMessageLike[];
@@ -96,4 +97,9 @@ export interface BlockBasedMetadata {
   blocks?: UIBlock[];
   blockHistory?: BlockHistoryEntry[];
   warning?: string;
+  backendUuid?: string;
+  feedback_score?: boolean | null;
+  feedback_comment?: string | null;
+  feedback_category?: FeedbackCategoryEnum | null;
+  feedback_submitted_at?: string | null;
 }
