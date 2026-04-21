@@ -290,6 +290,14 @@ export const EditFieldDialog = connect<{}, {}, { resolve: EditCustomerProps }>(
                 )}
                 min={0}
               />
+            ) : props.resolve.name === 'project_slug_template' ? (
+              <StringField
+                name="project_slug_template"
+                label={translate('Project slug template')}
+                description={translate(
+                  'Placeholders: {customer_slug}, {project_name}, {year}, {month}, {counter}, {counter_padded}. Leave empty for default name-based slug.',
+                )}
+              />
             ) : null}
           </FormContainer>
         </ModalDialog>

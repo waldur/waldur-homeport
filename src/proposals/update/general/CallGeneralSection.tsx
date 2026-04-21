@@ -81,6 +81,24 @@ export const CallGeneralSection: FC<CallGeneralSectionProps> = (props) => {
                 </div>
               </td>
             </tr>
+            <tr>
+              <td className="col-md-3">
+                {translate('Proposal slug template')}
+              </td>
+              <td className="col-md-9">
+                {renderFieldOrDash(props.call.proposal_slug_template)}
+              </td>
+              <td className="row-actions">
+                <div>
+                  <EditGeneralInfoButton
+                    call={props.call}
+                    name="proposal_slug_template"
+                    title={translate('Edit proposal slug template')}
+                    refetch={props.refetch}
+                  />
+                </div>
+              </td>
+            </tr>
             {isFeatureVisible(MarketplaceFeatures.call_only) && (
               <tr>
                 <td className="col-md-3">{translate('External URL')}</td>
