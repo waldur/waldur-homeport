@@ -60,7 +60,7 @@ export const Step1ProjectInfo: FC<WizardStepProps> = (props) => {
         error={error}
         refetch={refetchProjects}
       />
-      <SlugGroup />
+      <SlugGroup customer={customer} />
       <DescriptionGroup create />
       <IndustryGroup />
       <OecdCodeGroup />
