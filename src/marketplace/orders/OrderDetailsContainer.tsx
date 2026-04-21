@@ -1,6 +1,6 @@
 import { CheckCircleIcon, EnvelopeIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCurrentStateAndParams } from '@uirouter/react';
+import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 import {
   marketplaceOrdersOfferingRetrieve,
@@ -48,6 +48,7 @@ async function loadOrder(order_uuid: string) {
 }
 
 export const OrderDetailsContainer: React.FC<{}> = () => {
+  const router = useRouter();
   const {
     params: { order_uuid },
   } = useCurrentStateAndParams();
@@ -60,6 +61,12 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
     const order = data?.order;
     if (order?.state !== 'pending-provider' || !order?.provider_message)
       return null;
+
+    const goToProviderInfo = () =>
+      router.stateService.go('marketplace-orders.details', {
+        order_uuid,
+        tab: 'provider-info',
+      });
     const plainMessage = order.provider_message.replace(/<[^>]*>/g, '');
     const description = order.provider_message_url
       ? `${plainMessage} — ${order.provider_message_url}`
@@ -72,6 +79,8 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
         variant="success"
         label={translate('Customer responded')}
         description={description}
+        actionLabel={translate('Read more')}
+        onAction={goToProviderInfo}
         colored
       />
     ) : (
@@ -80,10 +89,12 @@ export const OrderDetailsContainer: React.FC<{}> = () => {
         variant="warning"
         label={translate('Information requested')}
         description={description}
+        actionLabel={translate('Read more')}
+        onAction={goToProviderInfo}
         colored
       />
     );
-  }, [data?.order]);
+  }, [data?.order, order_uuid, router]);
 
   useExtraAnnouncementBar(messagingBar, [messagingBar]);
 
