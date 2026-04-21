@@ -58,7 +58,7 @@ const useTabStats = (isStaff: boolean) => {
     const address = 11; // address, country, city, state, parish, street, house_nr, postal, apartment_nr, household, location
 
     let settings = 1; // grace_period_days
-    if (isStaff) settings += 2; // max_service_accounts, display_billing_info_in_projects
+    if (isStaff) settings += 3; // max_service_accounts, display_billing_info_in_projects, project_slug_template
 
     const identifiers = 5; // uuid, slug, registration_code, agreement_number, sponsor_number
 
@@ -73,6 +73,7 @@ const STAFF_ONLY_FIELDS = [
   'agreement_number',
   'domain',
   'sponsor_number',
+  'project_slug_template',
 ];
 
 const FieldActions: FC<{
@@ -280,6 +281,14 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
           value: (
             <CheckOrX value={props.customer.display_billing_info_in_projects} />
           ),
+        },
+        user?.is_staff && {
+          label: translate('Project slug template'),
+          description: translate(
+            'Template for auto-generating project slugs when new projects are created.',
+          ),
+          key: 'project_slug_template',
+          value: renderFieldOrDash(props.customer.project_slug_template),
         },
       ].filter(Boolean),
     [props.customer, user?.is_staff],

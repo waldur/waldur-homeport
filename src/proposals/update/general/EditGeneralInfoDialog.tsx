@@ -21,6 +21,7 @@ import {
 import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
 import { FormContainer } from '@waldur/form/FormContainer';
 import MarkdownEditor from '@waldur/form/MarkdownEditor';
+import { SlugTemplateHelpText } from '@waldur/form/SlugTemplateHelpText';
 import { translate } from '@waldur/i18n';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
@@ -29,11 +30,34 @@ import { ModalDialog } from '@waldur/modal/ModalDialog';
 import { EditCallProps } from '@waldur/proposals/types';
 import { showErrorResponse, showSuccess } from '@waldur/store/notify';
 
+const PROPOSAL_SLUG_PLACEHOLDERS = [
+  { name: 'call_slug', description: 'Call slug', example: 'TEST-CALL' },
+  {
+    name: 'round_slug',
+    description: 'Round slug',
+    example: 'TEST-ROUND-202401',
+  },
+  { name: 'org_slug', description: 'Organization slug', example: 'acme' },
+  { name: 'year', description: 'Current year (4-digit)', example: '2026' },
+  { name: 'month', description: 'Current month (2-digit)', example: '04' },
+  {
+    name: 'counter',
+    description: 'Sequential proposal number',
+    example: '3',
+  },
+  {
+    name: 'counter_padded',
+    description: 'Zero-padded 3-digit counter',
+    example: '003',
+  },
+];
+
 interface FormData {
   name: string;
   description: string;
   fixed_duration_in_days?: number | null;
   compliance_checklist?: string;
+  proposal_slug_template?: string;
 }
 
 interface Props {
@@ -239,6 +263,25 @@ export const EditGeneralInfoDialog = ({ resolve }: Props) => {
                       'Optional checklist for proposal compliance evaluation. Can only be changed when no proposals exist for this call.',
                     )}
                   </div>
+                </FormGroup>
+              )}
+              {resolve.name === 'proposal_slug_template' && (
+                <FormGroup label={translate('Proposal slug template')}>
+                  <Field
+                    name="proposal_slug_template"
+                    component={StringField as any}
+                  />
+                  <Field
+                    name="proposal_slug_template"
+                    component={({ meta }) =>
+                      meta.touched && meta.error ? (
+                        <FieldError error={meta.error} />
+                      ) : null
+                    }
+                  />
+                  <SlugTemplateHelpText
+                    placeholders={PROPOSAL_SLUG_PLACEHOLDERS}
+                  />
                 </FormGroup>
               )}
             </FormContainer>
