@@ -91,7 +91,7 @@ export const ProjectsList = () => {
   const props = useTable({
     table: PROJECTS_LIST,
     fetchData: createFetcher(projectsList),
-    queryField: 'name',
+    queryField: 'query',
     filter,
     mandatoryFields: [
       'uuid',
