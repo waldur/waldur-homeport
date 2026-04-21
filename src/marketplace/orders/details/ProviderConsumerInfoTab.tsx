@@ -39,7 +39,7 @@ export const ProviderConsumerInfoTab: FC<ProviderConsumerInfoTabProps> = ({
       order.provider_message &&
       offering?.plugin_options?.['enable_provider_consumer_messaging'] &&
       hasPermission(user, {
-        permission: PermissionEnum.APPROVE_ORDER,
+        permission: PermissionEnum.SET_CONSUMER_ORDER_INFO,
         customerId: order.customer_uuid,
         projectId: order.project_uuid,
       })

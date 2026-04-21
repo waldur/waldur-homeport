@@ -15,6 +15,8 @@ interface AnnouncementBarProps {
   label: ReactNode;
   description: string;
   onShowMore?: () => void;
+  actionLabel?: ReactNode;
+  onAction?: () => void;
   ellipsis?: boolean;
   colored?: boolean;
   hasColon?: boolean;
@@ -24,6 +26,8 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
   label,
   description,
   onShowMore,
+  actionLabel,
+  onAction,
   icon,
   variant,
   ellipsis,
@@ -67,6 +71,15 @@ export const AnnouncementBar: FC<AnnouncementBarProps> = ({
             className={variant && colored ? undefined : 'text-muted'}
             dangerouslySetInnerHTML={{ __html: safeDescription }}
           />
+          {onAction && actionLabel ? (
+            <button
+              type="button"
+              className="text-anchor border-0 bg-transparent p-0 ms-1"
+              onClick={onAction}
+            >
+              {actionLabel}
+            </button>
+          ) : null}
         </div>
         {showMoreButton && (
           <button
