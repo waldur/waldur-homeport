@@ -45,6 +45,7 @@ export const combinePrices = (
 
     const components: Component[] = offeringComponents.map((component) => {
       let amount = 0;
+      let displayAmount: number | undefined;
       if (
         component.billing_type === 'limit' &&
         limits &&
@@ -70,6 +71,7 @@ export const combinePrices = (
         // If the one-time component is prepaid, take its value from limits.
         if (component.is_prepaid && limits && limits[component.type]) {
           amount = limits[component.type];
+          displayAmount = amount;
           if (durationInMonths) {
             amount *= durationInMonths;
           }
@@ -117,6 +119,8 @@ export const combinePrices = (
       return {
         ...component,
         amount,
+        displayAmount,
+        durationInMonths: displayAmount != null ? durationInMonths : undefined,
         prices,
         subTotal,
         price,

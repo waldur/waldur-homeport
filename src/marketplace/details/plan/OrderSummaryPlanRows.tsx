@@ -19,8 +19,14 @@ interface OrderSummaryPlanRowsProps {
   concealPrices?: boolean;
 }
 
-const getRowLabel = (component: Component) =>
-  `${component.name} ${component.amount} ${component.measured_unit}`;
+const getRowLabel = (component: Component) => {
+  const qty = component.displayAmount ?? component.amount;
+  const base = `${component.name} ${qty} ${component.measured_unit}`;
+  if (component.displayAmount != null && component.durationInMonths) {
+    return `${base} × ${translate('{count} months', { count: component.durationInMonths })}`;
+  }
+  return base;
+};
 
 const getPerLimitPeriod = (limitPeriod: LimitPeriodEnum) =>
   limitPeriod === 'annual'
@@ -79,7 +85,7 @@ export const OrderSummaryPlanRows = (props: OrderSummaryPlanRowsProps) => {
                 <CheckoutPricingRow
                   key={i}
                   label={row.name}
-                  value={`${row.amount} ${row.measured_unit}`}
+                  value={`${row.displayAmount ?? row.amount} ${row.measured_unit}`}
                 />
               ))}
         </div>
