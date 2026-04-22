@@ -8,6 +8,8 @@ export interface Component extends OfferingComponent {
   amount: number;
   prices: number[];
   subTotal: number;
+  displayAmount?: number;
+  durationInMonths?: number;
   discountApplied?: boolean;
   discountAmount?: number;
   discountDescription?: string | null;
