@@ -2,8 +2,8 @@ import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import {
+  marketplaceProviderResourcesOfferingRetrieve,
   marketplaceProviderResourcesSetEndDate,
-  marketplaceResourcesOfferingRetrieve,
   Resource,
 } from 'waldur-js-client';
 
@@ -40,7 +40,7 @@ export const EditResourceEndDateByProviderAction = ({
   const { data: offering } = useQuery({
     queryKey: ['resource-offering', resourceUuid],
     queryFn: () =>
-      marketplaceResourcesOfferingRetrieve({
+      marketplaceProviderResourcesOfferingRetrieve({
         path: { uuid: resourceUuid },
       }).then((response) => response.data),
     enabled: Boolean(resourceUuid),
