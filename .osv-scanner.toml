@@ -1,0 +1,4 @@
+[[IgnoredVulns]]
+id = "GHSA-w5hq-g745-h8pq"
+ignoreUntil = 2026-05-07T00:00:00Z
+reason = "uuid is a transitive dep of mermaid (^11.1.0); fix requires major version 14.0.0. The CVE is about buffer bounds checks in v3/v5/v6 with caller-provided buffers — not relevant to our usage."
