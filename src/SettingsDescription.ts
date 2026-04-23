@@ -1410,6 +1410,12 @@ export const SettingsDescription = [
         type: 'string',
       },
       {
+        key: 'AI_ASSISTANT_SYSTEM_PROMPT_CUSTOM_INSTRUCTIONS',
+        description: translate('Additional instructions injected into the AI Assistant system prompt. Use this for organisation-specific context, terminology, FAQ content, or behavioural guidelines. Supports {assistant_name} and {organization} placeholders. Overridden by the active SystemPrompt record when set.'),
+        default: '',
+        type: 'text_field',
+      },
+      {
         key: 'AI_ASSISTANT_COMPLETION_KWARGS',
         description: translate('Override keyword arguments merged on top of provider defaults for AI Assistant chat completion. Supported keys: temperature, top_p, top_k, max_tokens, max_completion_tokens, presence_penalty, frequency_penalty, repetition_penalty, stop, seed, reasoning_effort, extra_body. Leave empty to use provider defaults.'),
         default: {},
