@@ -2,6 +2,7 @@ import {
   SignInIcon,
   BuildingsIcon,
   RocketLaunchIcon,
+  CertificateIcon,
 } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
@@ -9,6 +10,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import {
   marketplaceGlobalCategoriesRetrieve,
+  marketplacePublicOfferingsList,
   onboardingVerificationsList,
   userInvitationsList,
 } from 'waldur-js-client';
@@ -16,7 +18,11 @@ import {
 import { fetchResultCount } from '@waldur/core/api';
 import { lazyComponent } from '@waldur/core/lazyComponent';
 import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures, UserFeatures } from '@waldur/FeaturesEnums';
+import {
+  CustomerFeatures,
+  MarketplaceFeatures,
+  UserFeatures,
+} from '@waldur/FeaturesEnums';
 import { translate } from '@waldur/i18n';
 import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
 import { openModalDialog } from '@waldur/modal/actions';
@@ -45,6 +51,8 @@ export const UserDashboard: FC = () => {
     useState<number>(0);
   const [_isLoadingVerifications, setIsLoadingVerifications] =
     useState<boolean>(true);
+  const [pendingConsentsCount, setPendingConsentsCount] = useState<number>(0);
+  const [_isLoadingConsents, setIsLoadingConsents] = useState<boolean>(true);
 
   // Reuse the same query as sidebar ResourcesMenu for resource counts
   const { data: counters } = useQuery({
@@ -66,6 +74,7 @@ export const UserDashboard: FC = () => {
   const showOnboardingWidgets = isFeatureVisible(
     CustomerFeatures.show_onboarding,
   );
+  const showTosWidget = isFeatureVisible(MarketplaceFeatures.display_user_tos);
 
   useEffect(() => {
     if (!user) return;
@@ -73,10 +82,10 @@ export const UserDashboard: FC = () => {
       try {
         setIsLoadingInvitations(true);
         const response = await userInvitationsList({
-          method: 'HEAD',
           query: {
             email_exact: user.email,
             state: ['pending', 'project'],
+            page_size: 1,
           },
         });
         const invitationCount = fetchResultCount(response);
@@ -97,10 +106,10 @@ export const UserDashboard: FC = () => {
       try {
         setIsLoadingVerifications(true);
         const response = await onboardingVerificationsList({
-          method: 'HEAD',
           query: {
             user_uuid: user.uuid,
             status: ['Escalated for manual validation'],
+            page_size: 1,
           },
         });
         const count = fetchResultCount(response);
@@ -115,6 +124,30 @@ export const UserDashboard: FC = () => {
     fetchEscalatedVerificationsCount();
   }, [user?.uuid, showOnboardingWidgets]);
 
+  useEffect(() => {
+    if (!user || !showTosWidget) return;
+    const fetchPendingConsentsCount = async () => {
+      try {
+        setIsLoadingConsents(true);
+        const response = await marketplacePublicOfferingsList({
+          query: {
+            has_active_terms_of_service: true,
+            user_has_offering_user: true,
+            user_has_consent: false,
+            page_size: 1,
+          },
+        });
+        setPendingConsentsCount(fetchResultCount(response));
+      } catch {
+        setPendingConsentsCount(0);
+      } finally {
+        setIsLoadingConsents(false);
+      }
+    };
+
+    fetchPendingConsentsCount();
+  }, [user?.uuid, showTosWidget]);
+
   if (!user) {
     return null;
   }
@@ -122,6 +155,7 @@ export const UserDashboard: FC = () => {
   const hasActiveInvitations = invitationsCount > 0;
   const hasEscalatedVerifications = escalatedVerificationsCount > 0;
   const hasResources = resourcesCount > 0;
+  const hasPendingConsents = pendingConsentsCount > 0;
 
   const openActiveInvitations = () => {
     dispatch(
@@ -136,6 +170,10 @@ export const UserDashboard: FC = () => {
     router.stateService.go('profile.onboarding-applications');
   };
 
+  const goToTosManagement = () => {
+    router.stateService.go('profile.tos-management');
+  };
+
   const openResourcesDialog = () => {
     dispatch(openModalDialog(UserResourcesDialog, { resolve: {}, size: 'lg' }));
   };
@@ -146,12 +184,13 @@ export const UserDashboard: FC = () => {
   const showOtherWidgets =
     showDashboardWidgets &&
     (hasActiveInvitations ||
-      (showOnboardingWidgets && hasEscalatedVerifications));
+      (showOnboardingWidgets && hasEscalatedVerifications) ||
+      (showTosWidget && hasPendingConsents));
 
   return (
     <>
       {(hasResources || showOtherWidgets) && (
-        <Row className="mb-5">
+        <Row className="mb-5 gy-4">
           {hasResources && (
             <Col md={4}>
               <DashboardCard
@@ -204,6 +243,22 @@ export const UserDashboard: FC = () => {
                 />
               </Col>
             )}
+          {showTosWidget && hasPendingConsents && (
+            <Col md={4}>
+              <DashboardCard
+                title={translate('Pending terms of service')}
+                message={translate(
+                  'You have {count} offering(s) with unaccepted terms of service',
+                  { count: pendingConsentsCount },
+                )}
+                icon={<CertificateIcon size={32} color="white" weight="bold" />}
+                isLoading={false}
+                hasItems={true}
+                backgroundColor="bg-danger"
+                onClick={goToTosManagement}
+              />
+            </Col>
+          )}
         </Row>
       )}
 
