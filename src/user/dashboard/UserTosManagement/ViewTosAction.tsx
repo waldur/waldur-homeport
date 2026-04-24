@@ -6,13 +6,17 @@ import { TosViewDialog } from '@waldur/marketplace/offerings/update/tos/shared/T
 import { openModalDialog } from '@waldur/modal/actions';
 import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
-export const ViewTosAction = ({ tos }) => {
+export const ViewTosAction = ({
+  tos,
+  offering = undefined,
+  refetch = undefined,
+}) => {
   const dispatch = useDispatch();
 
   const handleView = () => {
     dispatch(
       openModalDialog(TosViewDialog, {
-        resolve: { tos },
+        resolve: { tos, offering, refetch },
         size: 'lg',
       }),
     );
