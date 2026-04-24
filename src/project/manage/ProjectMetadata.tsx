@@ -107,6 +107,17 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
           }
         />
 
+        {isFeatureVisible(ProjectFeatures.science_domain) && (
+          <FormTable.Item
+            label={translate('Science domain')}
+            value={renderFieldOrDash(
+              project.science_domain_name && project.science_sub_domain_name
+                ? `${project.science_domain_name} > ${project.science_sub_domain_name}`
+                : null,
+            )}
+          />
+        )}
+
         <FormTable.Item
           label={translate('Backend ID')}
           value={renderFieldOrDash(project.backend_id)}

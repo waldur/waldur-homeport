@@ -37,6 +37,7 @@ interface ProjectFormData {
   customer: { url: string };
   type?: { url: string };
   oecd_fos_2007_code?: { value: string };
+  science_sub_domain?: { uuid: string };
   is_industry: boolean;
   image?: File | Blob;
   project_credit?: string;
@@ -92,6 +93,7 @@ export const ProjectCreateDialog = ({
             customer: formData.customer.url,
             type: formData.type?.url,
             oecd_fos_2007_code: formData.oecd_fos_2007_code?.value,
+            science_sub_domain: formData.science_sub_domain?.uuid,
             is_industry: formData.is_industry,
             kind: formData.kind,
             image: fileSerializer(formData.image),

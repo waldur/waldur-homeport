@@ -15,6 +15,7 @@ import { KindGroup } from './KindGroup';
 import { NameGroup } from './NameGroup';
 import { OecdCodeGroup } from './OecdCodeGroup';
 import { OrganizationGroup } from './OrganizationGroup';
+import { ScienceDomainGroup } from './ScienceDomainGroup';
 import { SlugGroup } from './SlugGroup';
 import { StartDateGroup } from './StartDateGroup';
 import { TypeGroup } from './TypeGroup';
@@ -64,6 +65,7 @@ export const Step1ProjectInfo: FC<WizardStepProps> = (props) => {
       <DescriptionGroup create />
       <IndustryGroup />
       <OecdCodeGroup />
+      <ScienceDomainGroup />
       <KindGroup create />
 
       <TypeGroup create />

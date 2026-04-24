@@ -553,6 +553,19 @@ export const states: StateDeclaration[] = [
     },
   },
   {
+    name: 'admin-science-domains',
+    url: 'science-domains/',
+    parent: 'admin-organizations-compliance',
+    component: lazyComponent(() =>
+      import('./science-domains/ScienceDomainsList').then((module) => ({
+        default: module.ScienceDomainsList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Science domains'),
+    },
+  },
+  {
     name: 'admin-organization-cost-policies',
     url: 'organization-cost-policies/',
     parent: 'admin-organizations-compliance',
