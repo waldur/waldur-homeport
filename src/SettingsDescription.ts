@@ -1674,6 +1674,17 @@ export const SettingsDescription = [
     ],
   },
   {
+    description: translate('Usage Polling'),
+    items: [
+      {
+        key: 'USAGE_POLL_RECORD_RETENTION_MONTHS',
+        description: translate('Number of months to retain usage poll records before automatic cleanup.'),
+        default: 3,
+        type: 'integer',
+      },
+    ],
+  },
+  {
     description: translate('Identity Bridge'),
     items: [
       {

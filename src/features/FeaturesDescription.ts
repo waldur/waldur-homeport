@@ -187,6 +187,10 @@ export const FeaturesDescription: FeatureSection[] = [
         description: translate('Enable OECD code.'),
       },
       {
+        key: 'science_domain',
+        description: translate('Enable science domain/sub-domain selection for projects.'),
+      },
+      {
         key: 'show_credit_in_create_dialog',
         description: translate('Show credit field in project create dialog.'),
       },
