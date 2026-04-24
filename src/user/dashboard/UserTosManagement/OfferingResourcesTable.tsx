@@ -26,16 +26,16 @@ const mandatoryFields: MarketplaceResourcesListData['query']['field'] = [
 ];
 
 interface OfferingResourcesTableProps {
-  offeringUuid: string;
+  offering: { uuid: string };
 }
 
 export const OfferingResourcesTable: FC<OfferingResourcesTableProps> = memo(
-  ({ offeringUuid }) => {
+  ({ offering }) => {
     const filter = useMemo(
       () => ({
-        offering_uuid: [offeringUuid],
+        offering_uuid: [offering.uuid],
       }),
-      [offeringUuid],
+      [offering.uuid],
     );
 
     const columns = useMemo(
@@ -51,7 +51,7 @@ export const OfferingResourcesTable: FC<OfferingResourcesTableProps> = memo(
         },
         {
           title: translate('Category'),
-          render: ({ row }) => <>{row.category_title}</>,
+          render: ({ row }) => <>{renderFieldOrDash(row.category_title)}</>,
         },
         {
           title: translate('Created'),
@@ -70,7 +70,7 @@ export const OfferingResourcesTable: FC<OfferingResourcesTableProps> = memo(
     );
 
     const tableProps = useTable({
-      table: 'OfferingResources-' + offeringUuid,
+      table: 'OfferingResources-' + offering.uuid,
       fetchData: createFetcher(marketplaceResourcesList),
       filter,
       mandatoryFields,

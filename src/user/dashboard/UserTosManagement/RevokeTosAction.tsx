@@ -1,9 +1,9 @@
 import { XIcon } from '@phosphor-icons/react';
-import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
 import { translate } from '@waldur/i18n';
 import { openModalDialog } from '@waldur/modal/actions';
+import { ActionItem } from '@waldur/resource/actions/ActionItem';
 
 import { RevokeTosDialog } from './RevokeTosDialog';
 
@@ -20,9 +20,12 @@ export const RevokeTosAction = ({ tos, offering, refetch, offeringUuid }) => {
   };
 
   return (
-    <Dropdown.Item onClick={handleClick} className="text-danger">
-      <XIcon size={16} className="me-2" weight="bold" />
-      {translate('Revoke')}
-    </Dropdown.Item>
+    <ActionItem
+      title={translate('Revoke')}
+      action={handleClick}
+      iconNode={<XIcon weight="bold" />}
+      iconColor="danger"
+      className="text-danger"
+    />
   );
 };

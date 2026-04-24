@@ -5,7 +5,9 @@ import {
   marketplacePublicOfferingsList,
 } from 'waldur-js-client';
 
+import { StateIndicator } from '@waldur/core/StateIndicator';
 import { translate } from '@waldur/i18n';
+import { NoResult } from '@waldur/navigation/header/search/NoResult';
 import { createFetcher } from '@waldur/table/api';
 import {
   UserTosFiltersFilter,
@@ -82,11 +84,23 @@ export const UserTosManagementSection: FC = () => {
         render: ({ row }) => {
           if (row.user_has_consent === true) {
             return (
-              <span className="text-success">{translate('Accepted')}</span>
+              <StateIndicator
+                variant="success"
+                label={translate('Accepted')}
+                hasBullet
+                pill
+                outline
+              />
             );
           } else if (row.user_has_consent === false) {
             return (
-              <span className="text-danger"> {translate('Not Accepted')}</span>
+              <StateIndicator
+                variant="danger"
+                label={translate('Not Accepted')}
+                hasBullet
+                pill
+                outline
+              />
             );
           }
           return <span className="text-muted">-</span>;
@@ -116,11 +130,13 @@ export const UserTosManagementSection: FC = () => {
       expandableRow={expandableRow}
       hasQuery
       placeholderComponent={
-        <div className="text-center py-5">
-          <p className="text-muted">
-            {translate('No connected offerings with Terms of Service found.')}
-          </p>
-        </div>
+        <NoResult
+          title={translate('No offerings found')}
+          message={translate(
+            'No connected offerings with Terms of Service found.',
+          )}
+          noAction
+        />
       }
     />
   );
