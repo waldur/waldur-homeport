@@ -70,14 +70,17 @@ const FormTableItem: FC<PropsWithChildren<FormTableItemProps>> = ({
               )}
             {props.colon && ':'}
           </label>
-          <div
-            className={classNames(
-              'description fw-normal',
-              props.descriptionClassName,
-            )}
-          >
-            {props.description}
-          </div>
+          {wrapTooltip(
+            props.description,
+            <div
+              className={classNames(
+                'description fw-normal',
+                props.descriptionClassName,
+              )}
+            >
+              {props.description}
+            </div>,
+          )}
         </th>
       ) : i === 0 && props.label ? (
         <th className="title col-md-3" rowSpan={titleRowSpan}>
