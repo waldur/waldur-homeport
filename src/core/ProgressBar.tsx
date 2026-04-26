@@ -19,6 +19,7 @@ export const ProgressBar: FC<ProgressBarProps> = ({
   compact,
   unit = '%',
   variant,
+  className,
 }) => {
   const value = Number((now / max) * 100) || 0;
   return (
@@ -26,7 +27,11 @@ export const ProgressBar: FC<ProgressBarProps> = ({
       <BsProgressBar
         now={now}
         max={max}
-        className={classNames('w-100 mt-1', variant && `bg-light-${variant}`)}
+        className={classNames(
+          'w-100 mt-1',
+          variant && `bg-light-${variant}`,
+          className,
+        )}
         variant={variant}
       />
       {showValue && (

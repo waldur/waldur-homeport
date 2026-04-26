@@ -2,3 +2,11 @@
   border-top-right-radius: 8px;
   border-bottom-right-radius: 8px;
 }
+
+.progress.progress-themed {
+  background-color: var(--progress-track-color, #{$progress-bg});
+
+  .progress-bar {
+    background-color: var(--progress-bar-color, #{$progress-bar-bg});
+  }
+}

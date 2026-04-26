@@ -18,6 +18,7 @@ import { Offering, ServiceProvider } from '@waldur/marketplace/types';
 import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
 import { PageBarTab } from '@waldur/navigation/types';
 import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
+import { TENANT_TYPE } from '@waldur/openstack/constants';
 
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from './constants';
 import { getOfferingBreadcrumbItems } from './hooks';
@@ -95,6 +96,31 @@ const SlurmPolicySection = lazyComponent(() =>
     default: module.SlurmPolicySection,
   })),
 );
+const TenantImagesTable = lazyComponent(() =>
+  import('./openstack-tenant/TenantImagesTable').then((module) => ({
+    default: module.TenantImagesTable,
+  })),
+);
+const TenantFlavorsTable = lazyComponent(() =>
+  import('./openstack-tenant/TenantFlavorsTable').then((module) => ({
+    default: module.TenantFlavorsTable,
+  })),
+);
+const TenantVolumeTypesTable = lazyComponent(() =>
+  import('./openstack-tenant/TenantVolumeTypesTable').then((module) => ({
+    default: module.TenantVolumeTypesTable,
+  })),
+);
+const TenantServerGroupsTable = lazyComponent(() =>
+  import('./openstack-tenant/TenantServerGroupsTable').then((module) => ({
+    default: module.TenantServerGroupsTable,
+  })),
+);
+const TenantHypervisorsTab = lazyComponent(() =>
+  import('./openstack-tenant/TenantHypervisorsTab').then((module) => ({
+    default: module.TenantHypervisorsTab,
+  })),
+);
 
 async function loadOfferingData(offering_uuid: string) {
   const offering = (await marketplaceProviderOfferingsRetrieve({
@@ -119,6 +145,45 @@ const getTabs = (offering: Offering): PageBarTab[] => {
           title: translate('Bookings'),
           key: 'bookings',
           component: OfferingBookingResourcesCalendarContainer,
+        }
+      : null,
+    offering.type === TENANT_TYPE
+      ? {
+          key: 'system_information',
+          title: translate('System information'),
+          defaultKey: 'images',
+          children: [
+            {
+              key: 'images',
+              component: TenantImagesTable,
+              title: translate('Images'),
+              visible: true,
+            },
+            {
+              key: 'flavors',
+              component: TenantFlavorsTable,
+              title: translate('Flavors'),
+              visible: true,
+            },
+            {
+              key: 'volume-types',
+              component: TenantVolumeTypesTable,
+              title: translate('Volume types'),
+              visible: true,
+            },
+            {
+              key: 'server-groups',
+              component: TenantServerGroupsTable,
+              title: translate('Server groups'),
+              visible: true,
+            },
+            {
+              key: 'hypervisors',
+              component: TenantHypervisorsTab,
+              title: translate('Hypervisors'),
+              visible: true,
+            },
+          ],
         }
       : null,
     {
