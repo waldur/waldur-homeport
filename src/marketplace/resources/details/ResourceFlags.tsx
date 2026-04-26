@@ -1,12 +1,15 @@
 import {
   ArrowsInSimpleIcon,
+  CalendarXIcon,
+  ClockCountdownIcon,
   PauseCircleIcon,
+  WarningCircleIcon,
   XCircleIcon,
 } from '@phosphor-icons/react';
 import { Resource } from 'waldur-js-client';
 
 import { Badge } from '@waldur/core/Badge';
-import { formatMediumDateTime } from '@waldur/core/dateUtils';
+import { formatDate, formatMediumDateTime } from '@waldur/core/dateUtils';
 import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 
@@ -90,10 +93,46 @@ const FlagBadge = ({
   );
 };
 
+const LifecycleBadge = ({
+  variant,
+  icon,
+  label,
+  tooltip,
+  tipId,
+}: {
+  variant: 'warning' | 'danger';
+  icon: React.ReactNode;
+  label: string;
+  tooltip: string;
+  tipId: string;
+}) => (
+  <Tip id={tipId} label={tooltip}>
+    <Badge variant={variant} size="sm" leftIcon={icon} pill outline>
+      {label}
+    </Badge>
+  </Tip>
+);
+
+const TERMINAL_STATES = new Set(['Terminated', 'Terminating']);
+
 export const ResourceFlags = ({ resource }: { resource: Resource }) => {
   const pluginOptions = resource.offering_plugin_options as any;
   const supportsPausing = pluginOptions?.supports_pausing === true;
   const supportsDownscaling = pluginOptions?.supports_downscaling === true;
+
+  const today = new Date();
+  const projectEffectiveEnd = resource.project_effective_end_date
+    ? new Date(resource.project_effective_end_date)
+    : null;
+  const resourceEnd = resource.end_date ? new Date(resource.end_date) : null;
+  const isTerminal = TERMINAL_STATES.has(resource.state as string);
+
+  const showInGrace = resource.project_is_in_grace_period === true;
+  const showExpired =
+    !showInGrace && projectEffectiveEnd && projectEffectiveEnd < today;
+  const showConflict =
+    resourceEnd && projectEffectiveEnd && resourceEnd > projectEffectiveEnd;
+  const showOverdue = resourceEnd && resourceEnd < today && !isTerminal;
 
   return (
     <>
@@ -125,6 +164,61 @@ export const ResourceFlags = ({ resource }: { resource: Resource }) => {
           icon={<ArrowsInSimpleIcon weight="bold" />}
           label={translate('Downscaled')}
           tipId="flag-downscaled"
+        />
+      )}
+      {showInGrace && (
+        <LifecycleBadge
+          variant="warning"
+          icon={<ClockCountdownIcon weight="bold" />}
+          label={translate('In grace')}
+          tooltip={translate(
+            'Project is in its grace period. Resource will be terminated on {date}.',
+            {
+              date: resource.project_effective_end_date
+                ? formatDate(resource.project_effective_end_date)
+                : '',
+            },
+          )}
+          tipId="flag-in-grace"
+        />
+      )}
+      {showExpired && (
+        <LifecycleBadge
+          variant="danger"
+          icon={<WarningCircleIcon weight="bold" />}
+          label={translate('Expired')}
+          tooltip={translate(
+            'Project expired on {date}. Resource is scheduled for termination.',
+            { date: formatDate(resource.project_effective_end_date) },
+          )}
+          tipId="flag-expired"
+        />
+      )}
+      {showConflict && (
+        <LifecycleBadge
+          variant="warning"
+          icon={<CalendarXIcon weight="bold" />}
+          label={translate('Ends with project')}
+          tooltip={translate(
+            'Resource end date ({resourceEnd}) extends past project effective end ({projectEnd}). Will be terminated with the project.',
+            {
+              resourceEnd: formatDate(resource.end_date),
+              projectEnd: formatDate(resource.project_effective_end_date),
+            },
+          )}
+          tipId="flag-ends-with-project"
+        />
+      )}
+      {showOverdue && (
+        <LifecycleBadge
+          variant="danger"
+          icon={<WarningCircleIcon weight="bold" />}
+          label={translate('Overdue')}
+          tooltip={translate(
+            'Resource end date ({date}) has passed but it is still active. Awaiting termination.',
+            { date: formatDate(resource.end_date) },
+          )}
+          tipId="flag-overdue"
         />
       )}
     </>
