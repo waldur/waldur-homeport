@@ -1,11 +1,15 @@
 import { useDispatch } from 'react-redux';
-import { InjectedFormProps } from 'redux-form';
+import { Field, InjectedFormProps } from 'redux-form';
 import { marketplaceResourcesUpdateLimits } from 'waldur-js-client';
 
+import { fileSerializer, formDataOptions } from '@waldur/core/api';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
+import { StringField, SubmitButton } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { Limits } from '@waldur/marketplace/common/types';
+import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { AttachmentRow } from '@waldur/marketplace/resources/common/AttachmentRow';
+import { getPurchaseOrderConfig } from '@waldur/marketplace/resources/common/purchaseOrderConfig';
 import { closeModalDialog } from '@waldur/modal/actions';
 import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 import { ModalDialog } from '@waldur/modal/ModalDialog';
@@ -22,13 +26,26 @@ interface DialogBodyProps extends OwnProps, InjectedFormProps, StateProps {
 
 export const DialogBody = connector((props: DialogBodyProps) => {
   const dispatch = useDispatch();
+
+  const resource = props.asyncState.value?.resource;
+  const { showPurchaseOrder } = getPurchaseOrderConfig(resource);
+
   const submitRequest = async (formData) => {
     try {
+      const body: Record<string, unknown> = {
+        limits: props.asyncState.value.limitSerializer(formData.limits),
+      };
+      if (formData.request_comment) {
+        body.request_comment = formData.request_comment;
+      }
+      if (formData.attachment) {
+        body.attachment = fileSerializer(formData.attachment);
+      }
+      const hasFile = formData.attachment instanceof File;
       await marketplaceResourcesUpdateLimits({
-        path: { uuid: props.asyncState.value?.resource?.uuid },
-        body: {
-          limits: props.asyncState.value.limitSerializer(formData.limits),
-        },
+        path: { uuid: resource?.uuid },
+        body: body as any,
+        ...(hasFile ? formDataOptions : {}),
       });
       dispatch(
         showSuccess(
@@ -74,16 +91,53 @@ export const DialogBody = connector((props: DialogBodyProps) => {
         ) : props.asyncState.error ? (
           <h3>{translate('Unable to load data.')}</h3>
         ) : (
-          <ChangeLimitsComponent
-            plan={props.asyncState.value.plan}
-            periods={props.periods}
-            components={props.components}
-            orderCanBeApproved={props.orderCanBeApproved}
-            totalPeriods={props.totalPeriods}
-            changedTotalPeriods={props.changedTotalPeriods}
-            offeringLimits={props.asyncState.value.offeringLimits}
-            shouldConcealPrices={props.shouldConcealPrices}
-          />
+          <>
+            <ChangeLimitsComponent
+              plan={props.asyncState.value.plan}
+              periods={props.periods}
+              components={props.components}
+              orderCanBeApproved={props.orderCanBeApproved}
+              totalPeriods={props.totalPeriods}
+              changedTotalPeriods={props.changedTotalPeriods}
+              offeringLimits={props.asyncState.value.offeringLimits}
+              shouldConcealPrices={props.shouldConcealPrices}
+            />
+            {showPurchaseOrder && (
+              <>
+                <FormGroup
+                  label={translate('Comment')}
+                  description={translate(
+                    'Optional note for the service provider, e.g. a PO number.',
+                  )}
+                >
+                  <div style={{ maxWidth: 300 }}>
+                    <Field
+                      name="request_comment"
+                      component={StringField as any}
+                      placeholder={translate('Optional')}
+                    />
+                  </div>
+                </FormGroup>
+                <FormGroup
+                  label={translate('Purchase order document')}
+                  description={translate(
+                    'Attach a PDF purchase order document.',
+                  )}
+                  spaceless
+                >
+                  <Field
+                    name="attachment"
+                    component={({ input }) => (
+                      <AttachmentRow
+                        value={input.value || null}
+                        onChange={input.onChange}
+                      />
+                    )}
+                  />
+                </FormGroup>
+              </>
+            )}
+          </>
         )}
       </ModalDialog>
     </form>

@@ -6,6 +6,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
+import { fileSerializer, formDataOptions } from '@waldur/core/api';
 import { STALE_TIME } from '@waldur/core/constants';
 import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 import { ProgressStep } from '@waldur/core/ProgressSteps';
@@ -109,13 +110,21 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
             formData[resourceUuid]?.limits || {},
           );
 
+          const body: Record<string, unknown> = {
+            extension_months: formData.extension_months,
+            limits: serializedLimits,
+          };
+          if (formData.request_comment) {
+            body.request_comment = formData.request_comment;
+          }
+          if (formData.attachment) {
+            body.attachment = fileSerializer(formData.attachment);
+          }
+          const hasFile = formData.attachment instanceof File;
           return marketplaceResourcesRenew({
             path: { uuid: resourceUuid },
-            body: {
-              extension_months: formData.extension_months,
-              limits: serializedLimits,
-              request_comment: formData.purchase_order_reference,
-            },
+            body: body as any,
+            ...(hasFile ? formDataOptions : {}),
           });
         });
 

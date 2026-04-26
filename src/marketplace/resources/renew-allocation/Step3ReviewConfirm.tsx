@@ -7,7 +7,9 @@ import { formatDate, parseDate } from '@waldur/core/dateUtils';
 import { StringField } from '@waldur/form';
 import { translate } from '@waldur/i18n';
 import { getFormLimitParser } from '@waldur/marketplace/common/registry';
+import { OrderAttachmentField } from '@waldur/marketplace/deploy/steps/OrderAttachmentField';
 import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { getPurchaseOrderConfig } from '@waldur/marketplace/resources/common/purchaseOrderConfig';
 import { Field as SummaryField } from '@waldur/resource/summary';
 import { WizardModal, WizardStepProps } from '@waldur/wizard';
 
@@ -93,10 +95,7 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
     .filter(Boolean)
     .join(' / ');
 
-  const pluginOptions = (resource as any)?.offering_plugin_options || {};
-  const showPurchaseOrder =
-    pluginOptions.enable_purchase_order_upload ||
-    pluginOptions.require_purchase_order_upload;
+  const { showPurchaseOrder, isRequired } = getPurchaseOrderConfig(resource);
 
   const newLimits = values[getResourceUuid(resource)]?.limits || {};
 
@@ -149,26 +148,29 @@ export const Step3ReviewConfirm: FC<WizardStepProps> = (props) => {
       )}
 
       {showPurchaseOrder && (
-        <FormGroup
-          label={translate('Purchase order reference')}
-          description={translate(
-            'Enter the PO number or name required by your organization to renew this subscription.',
-          )}
-          required={pluginOptions.require_purchase_order_upload}
-          spaceless
-        >
-          <div style={{ maxWidth: 300 }}>
-            <Field
-              name="purchase_order_reference"
-              component={StringField as any}
-              placeholder={
-                pluginOptions.require_purchase_order_upload
-                  ? translate('Required')
-                  : translate('Optional')
-              }
-            />
-          </div>
-        </FormGroup>
+        <>
+          <FormGroup
+            label={translate('Comment')}
+            description={translate(
+              'Optional note for the service provider, e.g. a PO number.',
+            )}
+          >
+            <div style={{ maxWidth: 300 }}>
+              <Field
+                name="request_comment"
+                component={StringField as any}
+                placeholder={translate('Optional')}
+              />
+            </div>
+          </FormGroup>
+          <FormGroup
+            label={translate('Purchase order document')}
+            description={translate('Attach a PDF purchase order document.')}
+            spaceless
+          >
+            <OrderAttachmentField required={isRequired} />
+          </FormGroup>
+        </>
       )}
     </WizardModal>
   );
