@@ -2,6 +2,8 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplaceSoftwarePackagesList } from 'waldur-js-client';
 
+import { Badge } from '@waldur/core/Badge';
+import { Tip } from '@waldur/core/Tooltip';
 import { translate } from '@waldur/i18n';
 import { Offering } from '@waldur/marketplace/types';
 import { createFetcher } from '@waldur/table/api';
@@ -94,13 +96,37 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
           orderField: 'name',
           id: 'name',
           keys: ['name'],
+          width: '15%',
+        },
+        {
+          title: translate('Extension'),
+          render: ({ row }) =>
+            row.is_extension ? (
+              <Badge variant="primary" pill outline>
+                {translate('Extension')}
+              </Badge>
+            ) : (
+              '—'
+            ),
+          orderField: 'is_extension',
+          id: 'is_extension',
+          keys: ['is_extension'],
+          width: '10%',
         },
         {
           title: translate('Description'),
-          render: ({ row }) => <>{renderFieldOrDash(row.description)}</>,
+          render: ({ row }) =>
+            row.description ? (
+              <Tip id={`desc-${row.uuid}`} label={row.description} autoWidth>
+                <span>{row.description}</span>
+              </Tip>
+            ) : (
+              renderFieldOrDash(row.description)
+            ),
           orderField: 'description',
           id: 'description',
-          keys: ['description'],
+          keys: ['description', 'uuid'],
+          width: '40%',
         },
         {
           title: translate('Catalog'),
@@ -144,6 +170,7 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
         },
         {
           title: translate('Homepage'),
+          width: '20%',
           render: ({ row }) =>
             row.homepage ? (
               <a href={row.homepage} target="_blank" rel="noopener noreferrer">
@@ -160,7 +187,6 @@ export const PublicOfferingSoftwareCatalogTable: FunctionComponent<
       title={translate('Software packages')}
       verboseName={translate('Software packages')}
       subtitle={getTableSubtitle()}
-      equalColWidth
       hasQuery
       showPageSizeSelector
       enableExport

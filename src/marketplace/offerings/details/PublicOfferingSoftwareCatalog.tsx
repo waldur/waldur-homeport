@@ -17,9 +17,5 @@ export const PublicOfferingSoftwareCatalog: FunctionComponent<
     return <LoadingSpinner />;
   }
 
-  return (
-    <div className="container-fluid">
-      <PublicOfferingSoftwareCatalogTable offering={data.offering} />
-    </div>
-  );
+  return <PublicOfferingSoftwareCatalogTable offering={data.offering} />;
 };
