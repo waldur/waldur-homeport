@@ -268,12 +268,12 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
           value: renderFieldOrDash(props.customer.max_service_accounts),
         },
         {
-          label: translate('Grace period (days)'),
+          label: translate('Default grace period (days)'),
           description: translate(
-            'Number of extra days after project end date before resources are terminated',
+            'Default grace period applied to projects that do not set their own. Resources are terminated this many days after the project end date.',
           ),
           key: 'grace_period_days',
-          value: props.customer.grace_period_days,
+          value: renderFieldOrDash(props.customer.grace_period_days),
         },
         user?.is_staff && {
           label: translate('Display billing info in projects'),
