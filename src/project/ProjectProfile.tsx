@@ -99,6 +99,53 @@ const ProjectKindCard = ({ project }: ProjectProfileProps) => {
   );
 };
 
+const APPROACHING_DAYS = 30;
+
+const ProjectEndDate = ({ project }: ProjectProfileProps) => {
+  const today = new Date();
+  const endDateObj = new Date(project.end_date);
+  const effectiveEndDateObj = project.effective_end_date
+    ? new Date(project.effective_end_date)
+    : endDateObj;
+  const daysToEnd = Math.ceil(
+    (endDateObj.getTime() - today.getTime()) / 86400000,
+  );
+  const daysSinceEffectiveEnd = Math.floor(
+    (today.getTime() - effectiveEndDateObj.getTime()) / 86400000,
+  );
+
+  let className = '';
+  let suffix: string | null = null;
+  if (project.is_in_grace_period) {
+    className = 'text-warning fw-semibold';
+    const daysLeft = Math.max(
+      0,
+      Math.ceil((effectiveEndDateObj.getTime() - today.getTime()) / 86400000),
+    );
+    suffix = translate('(in grace period, {n} days left)', {
+      n: String(daysLeft),
+    });
+  } else if (daysSinceEffectiveEnd > 0) {
+    className = 'text-danger fw-semibold';
+    suffix = translate('(expired {n} days ago)', {
+      n: String(daysSinceEffectiveEnd),
+    });
+  } else if (daysToEnd >= 0 && daysToEnd <= APPROACHING_DAYS) {
+    className = 'text-warning fw-semibold';
+    suffix =
+      daysToEnd === 0
+        ? translate('(today)')
+        : translate('(in {n} days)', { n: String(daysToEnd) });
+  }
+
+  return (
+    <span className={className || undefined}>
+      {translate('End date:')} {formatDate(project.end_date)}
+      {suffix && <span className="ms-1">{suffix}</span>}
+    </span>
+  );
+};
+
 export const ProjectProfile = ({ project }: ProjectProfileProps) => {
   const abbreviation = useMemo(() => getItemAbbreviation(project), [project]);
 
@@ -128,11 +175,7 @@ export const ProjectProfile = ({ project }: ProjectProfileProps) => {
             {translate('Start date:')} {formatDate(project.start_date)}
           </span>
         )}
-        {project.end_date && (
-          <span>
-            {translate('End date:')} {formatDate(project.end_date)}
-          </span>
-        )}
+        {project.end_date && <ProjectEndDate project={project} />}
       </Stack>
     </PublicDashboardHero>
   );
