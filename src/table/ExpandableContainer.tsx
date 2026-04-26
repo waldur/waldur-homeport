@@ -1,5 +1,5 @@
 import classNames from 'classnames';
-import { FC, PropsWithChildren } from 'react';
+import { CSSProperties, FC, PropsWithChildren } from 'react';
 
 import './ExpandableContainer.scss';
 
@@ -7,11 +7,12 @@ interface ExpandableContainerProps {
   asTable?: boolean;
   hasMultiSelect?: boolean;
   className?: string;
+  style?: CSSProperties;
 }
 
 export const ExpandableContainer: FC<
   PropsWithChildren<ExpandableContainerProps>
-> = ({ asTable, hasMultiSelect, children, className }) => (
+> = ({ asTable, hasMultiSelect, children, className, style }) => (
   <div
     className={classNames(
       'expandable-container',
@@ -19,6 +20,7 @@ export const ExpandableContainer: FC<
       hasMultiSelect && 'has-multiselect',
       className,
     )}
+    style={style}
   >
     {asTable ? <div>{children}</div> : children}
   </div>
