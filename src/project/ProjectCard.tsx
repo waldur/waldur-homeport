@@ -16,6 +16,7 @@ import { renderFieldOrDash } from '@waldur/table/utils';
 import { getUser } from '@waldur/workspace/selectors';
 
 import { ChangeEndDateCardButton } from './ChangeEndDateCardButton';
+import { ProjectLifecycleBadge } from './ProjectLifecycleBadge';
 import { ProjectLink } from './ProjectLink';
 import { canEditProject } from './utils';
 
@@ -90,30 +91,24 @@ export const ProjectCard: FunctionComponent<ProjectCardProps> = ({
                       refetch={refetch}
                     />
                   </span>
-                  {project.grace_period_days > 0 && (
-                    <Badge
-                      variant="secondary"
-                      size="sm"
-                      pill
-                      outline
-                      className="ms-1"
-                    >
-                      {translate('+{count}d grace', {
-                        count: project.grace_period_days,
-                      })}
-                    </Badge>
-                  )}
-                  {project.is_in_grace_period && (
-                    <Badge
-                      variant="warning"
-                      size="sm"
-                      pill
-                      outline
-                      className="ms-1"
-                    >
-                      {translate('In grace period')}
-                    </Badge>
-                  )}
+                  {project.end_date &&
+                    project.grace_period_days > 0 &&
+                    !project.is_in_grace_period &&
+                    (!project.effective_end_date ||
+                      new Date(project.effective_end_date) >= new Date()) && (
+                      <Badge
+                        variant="secondary"
+                        size="sm"
+                        pill
+                        outline
+                        className="ms-1"
+                      >
+                        {translate('+{count}d grace', {
+                          count: project.grace_period_days,
+                        })}
+                      </Badge>
+                    )}
+                  <ProjectLifecycleBadge project={project} className="ms-1" />
                 </>
               }
               space={2}

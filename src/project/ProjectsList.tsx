@@ -89,7 +89,12 @@ export const ProjectsListTable: FC<TableProps & ProjectsListProps> = ({
       orderField: 'end_date',
       export: false,
       id: 'end_date',
-      keys: ['end_date', 'grace_period_days', 'is_in_grace_period'],
+      keys: [
+        'end_date',
+        'grace_period_days',
+        'is_in_grace_period',
+        'effective_end_date',
+      ],
     },
   ];
 

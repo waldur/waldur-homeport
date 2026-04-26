@@ -191,7 +191,12 @@ export const ProjectsList = () => {
       title: translate('End date'),
       orderField: 'end_date',
       render: ProjectEndDateField,
-      keys: ['end_date', 'grace_period_days', 'is_in_grace_period'],
+      keys: [
+        'end_date',
+        'grace_period_days',
+        'is_in_grace_period',
+        'effective_end_date',
+      ],
       id: 'end_date',
       export: (row) =>
         row.end_date ? formatDate(row.end_date) : DASH_ESCAPE_CODE,
