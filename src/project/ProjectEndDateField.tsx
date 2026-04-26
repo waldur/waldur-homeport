@@ -11,6 +11,8 @@ import { translate } from '@waldur/i18n';
 import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
 import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
 
+import { ProjectLifecycleBadge } from './ProjectLifecycleBadge';
+
 export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
   const projectEndDate = row.end_date
     ? parseDate(row.end_date)
@@ -55,22 +57,26 @@ export const ProjectEndDateField: FC<{ row: Project }> = ({ row }) => {
         )
       : 0;
 
+  // Hide the +Nd grace-duration indicator when the lifecycle badge already
+  // conveys the project's state (in-grace or expired). It would otherwise
+  // be redundant ('In grace' badge + '+23d') or misleading on expired
+  // projects (the configured grace is over).
+  const showGraceDuration =
+    graceDays > 0 &&
+    !row.is_in_grace_period &&
+    (!row.effective_end_date || new Date(row.effective_end_date) >= new Date());
+
   return row.end_date ? (
     <>
       {formatDate(projectEndDate)}
-      {graceDays > 0 && (
+      <ProjectLifecycleBadge project={row} className="ms-1" />
+      {showGraceDuration && (
         <Tip
           id={`grace-${row.uuid}`}
-          className={`ms-1 fs-8 ${row.is_in_grace_period ? 'text-warning' : 'text-muted'}`}
-          label={
-            row.is_in_grace_period
-              ? translate('In grace period. Resources active until {date}.', {
-                  date: formatDate(row.effective_end_date),
-                })
-              : translate('Grace period until {date}', {
-                  date: formatDate(row.effective_end_date),
-                })
-          }
+          className="ms-1 fs-8 text-muted"
+          label={translate('Grace period until {date}', {
+            date: formatDate(row.effective_end_date),
+          })}
         >
           +{graceDays}d
         </Tip>
