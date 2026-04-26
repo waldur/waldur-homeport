@@ -48,6 +48,9 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'paused', // ResourceFlags inline badge
     'downscaled', // ResourceFlags inline badge
     'restrict_member_access', // ResourceFlags inline badge
+    'project_is_in_grace_period', // ResourceFlags inline badge
+    'project_effective_end_date', // ResourceFlags inline badge (expired/conflict)
+    'state', // ResourceFlags overdue badge skips terminating/terminated
   ].filter(Boolean);
 
 export const getResourceAllListColumns = (
