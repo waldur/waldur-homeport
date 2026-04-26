@@ -15,22 +15,21 @@ export const GracePeriodWarningBar: FC = () => {
   const isProjectPage =
     state?.name?.startsWith('project.') || state?.name?.startsWith('project-');
 
-  if (!project || !project.is_in_grace_period || !isProjectPage) {
+  if (!project || !isProjectPage || !project.effective_end_date) {
+    return null;
+  }
+
+  const today = new Date();
+  const effectiveEndDateObj = new Date(project.effective_end_date);
+  const isExpired = effectiveEndDateObj < today;
+  const isInGracePeriod = project.is_in_grace_period;
+
+  if (!isExpired && !isInGracePeriod) {
     return null;
   }
 
   const endDate = formatDate(project.end_date);
   const effectiveEndDate = formatDate(project.effective_end_date);
-  const daysRemaining = project.effective_end_date
-    ? Math.max(
-        0,
-        Math.ceil(
-          (new Date(project.effective_end_date).getTime() -
-            new Date().getTime()) /
-            (1000 * 60 * 60 * 24),
-        ),
-      )
-    : 0;
 
   return (
     <div className="layout-warning-bar bar-warning">
@@ -42,19 +41,61 @@ export const GracePeriodWarningBar: FC = () => {
           size="sm"
         />
         <p className="text-start fs-6 mb-0">
-          <strong className="fw-bold">
-            {translate('Grace period active')}:{' '}
-          </strong>
-          {translate(
-            'This project ended on {endDate}. Resources will remain active until {effectiveEndDate} ({daysRemaining} days remaining).',
-            {
-              endDate,
-              effectiveEndDate,
-              daysRemaining: String(daysRemaining),
-            },
+          {isExpired ? (
+            <>
+              <strong className="fw-bold text-danger">
+                {translate('Project expired')}:{' '}
+              </strong>
+              {translate(
+                'This project expired on {effectiveEndDate}. Active resources are scheduled for termination.',
+                { effectiveEndDate },
+              )}
+            </>
+          ) : (
+            <GracePeriodMessage
+              endDate={endDate}
+              effectiveEndDate={effectiveEndDate}
+              effectiveEndDateObj={effectiveEndDateObj}
+            />
           )}
         </p>
       </div>
     </div>
+  );
+};
+
+const GracePeriodMessage: FC<{
+  endDate: string;
+  effectiveEndDate: string;
+  effectiveEndDateObj: Date;
+}> = ({ endDate, effectiveEndDate, effectiveEndDateObj }) => {
+  const daysRemaining = Math.max(
+    0,
+    Math.ceil(
+      (effectiveEndDateObj.getTime() - new Date().getTime()) /
+        (1000 * 60 * 60 * 24),
+    ),
+  );
+  const urgencyClass =
+    daysRemaining <= 3
+      ? 'text-danger fw-bold'
+      : daysRemaining <= 7
+        ? 'text-warning fw-bold'
+        : 'fw-bold';
+
+  return (
+    <>
+      <strong className="fw-bold">{translate('Grace period active')}: </strong>
+      {translate(
+        'This project ended on {endDate}. Resources will remain active until {effectiveEndDate}.',
+        { endDate, effectiveEndDate },
+      )}{' '}
+      <span className={urgencyClass}>
+        {translate('{daysRemaining} days remaining', {
+          daysRemaining: String(daysRemaining),
+        })}
+      </span>
+      .
+    </>
   );
 };

@@ -85,6 +85,36 @@ export const getResourceSummaryFields = ({
       name: 'end_date',
       label: translate('Termination date'),
       value: resource.end_date ? formatDate(resource.end_date) : null,
+      tooltip:
+        resource.end_date &&
+        resource.project_effective_end_date &&
+        new Date(resource.end_date) >
+          new Date(resource.project_effective_end_date)
+          ? translate(
+              'Resource will be terminated with the project on {date}, before its own end date.',
+              { date: formatDate(resource.project_effective_end_date) },
+            )
+          : undefined,
+    },
+    {
+      name: 'effective_termination',
+      label: translate('Scheduled termination'),
+      value: (() => {
+        const candidates = [
+          resource.end_date,
+          resource.project_effective_end_date,
+        ].filter(Boolean) as string[];
+        if (candidates.length === 0) return null;
+        return formatDate(
+          candidates.reduce((a, b) => (new Date(a) < new Date(b) ? a : b)),
+        );
+      })(),
+      tooltip:
+        !resource.end_date && resource.project_effective_end_date
+          ? translate(
+              'Resource has no own end date — it will be terminated when the project reaches its effective end date.',
+            )
+          : undefined,
     },
     {
       name: 'project_end_date',
@@ -131,6 +161,15 @@ export const getResourceSummaryFields = ({
       name: 'paused',
       label: translate('Paused'),
       value: resource.paused,
+      tooltip:
+        resource.paused && resource.project_is_in_grace_period
+          ? translate('Paused due to project grace period')
+          : undefined,
+    },
+    {
+      name: 'project_is_in_grace_period',
+      label: translate('Project in grace period'),
+      value: resource.project_is_in_grace_period,
     },
     {
       name: 'downscaled',
