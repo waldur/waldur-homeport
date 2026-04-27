@@ -10,10 +10,11 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { ProgressBar } from 'react-bootstrap';
-import { Offering } from 'waldur-js-client';
+import {
+  marketplaceProviderOfferingsStateCountersRetrieve,
+  Offering,
+} from 'waldur-js-client';
 
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { get } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingErred } from '@/core/LoadingErred';
@@ -117,16 +118,13 @@ const InfoRow = ({
   );
 };
 
-const loadData = (offering_uuid: string) =>
-  get<{
-    resources: Array<{ state: string; count: number }>;
-    users: Array<{ state: string; count: number }>;
-  }>(`/marketplace-provider-offerings/${offering_uuid}/state_counters/`);
-
 export const OfferingResourcesAndUsers: FC<OwnProps> = ({ offering }) => {
   const { data, isLoading, error, refetch } = useQuery({
     queryKey: ['ResourcesAndUsersStat', offering.uuid],
-    queryFn: () => loadData(offering.uuid),
+    queryFn: () =>
+      marketplaceProviderOfferingsStateCountersRetrieve({
+        path: { uuid: offering.uuid },
+      }).then((r) => r.data),
     staleTime: UI_STALE_TIME,
   });
 
