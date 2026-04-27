@@ -17,7 +17,7 @@ import {
 import { ReportingTitle } from '../ReportingTitle';
 
 import { useReviewProgressStats } from './hooks';
-import { ReviewProgressData } from './types';
+import { ReviewProgressStat } from './types';
 
 /**
  * Simulation parameters for Review Progress "What if" analysis
@@ -67,7 +67,7 @@ function calculateReviewProgressSimulation(
   params: Record<string, number | string>,
   data: unknown,
 ): SimulationResult[] {
-  const reviewers = data as ReviewProgressData[];
+  const reviewers = data as ReviewProgressStat[];
   if (!reviewers || reviewers.length === 0) return [];
 
   const deadlineDays = Number(params.reviewDeadlineDays);
@@ -159,7 +159,7 @@ function calculateReviewProgressSimulation(
  * Transform reviewer data for drill-down analysis by completion status
  */
 function transformReviewersToDrillDownItems(
-  reviewers: ReviewProgressData[],
+  reviewers: ReviewProgressStat[],
 ): DrillDownDataItem[] {
   const totalAssigned = reviewers.reduce((sum, r) => sum + r.total_assigned, 0);
 
@@ -191,7 +191,7 @@ function transformReviewersToDrillDownItems(
  * Generate drill-down data for review states within a reviewer
  */
 function getReviewerBreakdown(
-  reviewers: ReviewProgressData[],
+  reviewers: ReviewProgressStat[],
   reviewerId: string,
 ): DrillDownDataItem[] {
   const reviewer = reviewers.find((r) => r.reviewer_uuid === reviewerId);
@@ -227,7 +227,7 @@ function getReviewerBreakdown(
 }
 
 function getReviewProgressAnalyticsCapability(
-  reviewers: ReviewProgressData[],
+  reviewers: ReviewProgressStat[],
 ): any {
   const drillDownPaths: DrillDownPath[] = [
     {

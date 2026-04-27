@@ -1,12 +1,12 @@
 import { translate } from '@/i18n/translate';
 
-import { CallPerformanceData, ReviewProgressData } from './types';
+import { CallPerformanceStat, ReviewProgressStat } from './types';
 
 /**
  * Calculate summary statistics from call performance data
  * Handles empty arrays gracefully by returning zeros
  */
-export function calculateCallPerformanceSummary(data: CallPerformanceData[]) {
+export function calculateCallPerformanceSummary(data: CallPerformanceStat[]) {
   const activeCalls = data.filter((d) => d.state === 'active');
   const totalProposals = data.reduce((sum, d) => sum + d.total_proposals, 0);
   const totalAccepted = data.reduce((sum, d) => sum + d.proposals_accepted, 0);
@@ -44,7 +44,7 @@ export function calculateCallPerformanceSummary(data: CallPerformanceData[]) {
  * Calculate summary statistics from review progress data
  * Handles empty arrays gracefully by returning zeros
  */
-export function calculateReviewProgressSummary(data: ReviewProgressData[]) {
+export function calculateReviewProgressSummary(data: ReviewProgressStat[]) {
   const totalReviewers = data.length;
   const totalAssigned = data.reduce((sum, d) => sum + d.total_assigned, 0);
   const totalCompleted = data.reduce((sum, d) => sum + d.completed, 0);

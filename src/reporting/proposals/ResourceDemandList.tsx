@@ -14,9 +14,9 @@ import { ReportingTitle } from '../ReportingTitle';
 
 import { useResourceDemandStats } from './hooks';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
-import { ResourceDemandData } from './types';
+import { ResourceDemandStat } from './types';
 
-const ApprovalRateColumn: FC<{ row: ResourceDemandData }> = ({ row }) => {
+const ApprovalRateColumn: FC<{ row: ResourceDemandStat }> = ({ row }) => {
   const total = row.approved_count + row.pending_count;
   const rate = total > 0 ? (row.approved_count / total) * 100 : 0;
   const variant = rate >= 70 ? 'success' : rate >= 40 ? 'warning' : 'danger';
@@ -44,7 +44,7 @@ const formatLimit = (key: string, value: number): string => {
   return value.toString();
 };
 
-const ResourceDemandExpandableRow: FC<{ row: ResourceDemandData }> = ({
+const ResourceDemandExpandableRow: FC<{ row: ResourceDemandStat }> = ({
   row,
 }) => {
   return (
@@ -80,7 +80,7 @@ const ResourceDemandExpandableRow: FC<{ row: ResourceDemandData }> = ({
   );
 };
 
-const columns: Column<ResourceDemandData>[] = [
+const columns: Column<ResourceDemandStat>[] = [
   {
     title: translate('Offering'),
     render: ({ row }) => (
@@ -177,7 +177,7 @@ export const ResourceDemandList: FC = () => {
       <ReportingTitle reportKey="resource-demand" />
       <SummaryWidget stats={summary} />
 
-      <Table<ResourceDemandData>
+      <Table<ResourceDemandStat>
         columns={columns}
         rows={filteredData}
         fetch={() => refetch()}

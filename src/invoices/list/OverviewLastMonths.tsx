@@ -1,9 +1,10 @@
+import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
-import { useAsync } from 'react-use';
 import { invoicesList } from 'waldur-js-client';
 
+import { UI_STALE_TIME } from '@/core/constants';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { getCustomer } from '@/workspace/selectors';
@@ -12,46 +13,49 @@ import { MonthOverview } from './MonthOverview';
 
 export const OverviewLastMonths: FunctionComponent = () => {
   const customer = useSelector(getCustomer);
-  const { loading, error, value } = useAsync(() =>
-    invoicesList({
-      query: {
-        page: 1,
-        page_size: 2,
-        customer: customer.url,
-        field: [
-          'uuid',
-          'items',
-          'month',
-          'year',
-          'invoice_date',
-          'state',
-          'price',
-          'total',
-          'tax',
-        ],
-      },
-    }).then((response) => response.data),
-  );
+  const {
+    isLoading,
+    error,
+    data: value,
+  } = useQuery({
+    queryKey: ['OverviewLastMonths', customer?.uuid],
+    queryFn: () =>
+      invoicesList({
+        query: {
+          page: 1,
+          page_size: 2,
+          customer: customer.url,
+          field: [
+            'uuid',
+            'items',
+            'month',
+            'year',
+            'invoice_date',
+            'state',
+            'price',
+            'total',
+            'tax',
+          ],
+        },
+      }).then((response) => response.data),
+    staleTime: UI_STALE_TIME,
+  });
 
-  const lastMonthTotalCompare: -1 | 0 | 1 = useMemo(() => {
-    if (!value) return 0;
-    else if (value.length === 1) {
-      return value[0].total > 0 ? 1 : 0;
-    } else if (value.length > 1) {
-      if (value[0].total > value[1].total) return 1;
-      else if (value[0].total === value[1].total) return 0;
-      else return -1;
-    }
-    return 0;
+  const lastMonthTotalCompare = useMemo(() => {
+    if (!value?.length) return 0;
+    const current = parseFloat(value[0].total) || 0;
+    if (value.length === 1) return current > 0 ? 1 : 0;
+    const previous = parseFloat(value[1].total) || 0;
+    return Math.sign(current - previous) as -1 | 0 | 1;
   }, [value]);
 
-  if (loading) {
+  if (isLoading) {
     return <LoadingSpinner />;
   }
   if (error) {
     return <>{translate('Unable to load data')}</>;
   }
-  if (!value.length) {
+  if (!value?.length) {
     return null;
   }
 

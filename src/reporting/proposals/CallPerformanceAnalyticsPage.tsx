@@ -18,7 +18,7 @@ import {
 import { ReportingTitle } from '../ReportingTitle';
 
 import { useCallPerformanceStats } from './hooks';
-import { CallPerformanceData } from './types';
+import { CallPerformanceStat } from './types';
 
 /**
  * Simulation parameters for Call Performance "What if" analysis
@@ -68,7 +68,7 @@ function calculateCallPerformanceSimulation(
   params: Record<string, number | string>,
   data: unknown,
 ): SimulationResult[] {
-  const calls = data as CallPerformanceData[];
+  const calls = data as CallPerformanceStat[];
   if (!calls || calls.length === 0) return [];
 
   const threshold = Number(params.acceptanceThreshold);
@@ -152,7 +152,7 @@ function calculateCallPerformanceSimulation(
  * Transform call data for drill-down analysis
  */
 function transformCallsToDrillDownItems(
-  calls: CallPerformanceData[],
+  calls: CallPerformanceStat[],
 ): DrillDownDataItem[] {
   const totalProposals = calls.reduce((sum, c) => sum + c.total_proposals, 0);
 
@@ -184,7 +184,7 @@ function transformCallsToDrillDownItems(
  * Generate drill-down data for proposal states within a call
  */
 function getProposalStateBreakdown(
-  calls: CallPerformanceData[],
+  calls: CallPerformanceStat[],
   callId: string,
 ): DrillDownDataItem[] {
   const call = calls.find((c) => c.call_uuid === callId);
@@ -235,7 +235,7 @@ function getProposalStateBreakdown(
 }
 
 function getCallPerformanceAnalyticsCapability(
-  calls: CallPerformanceData[],
+  calls: CallPerformanceStat[],
 ): any {
   const drillDownPaths: DrillDownPath[] = [
     {

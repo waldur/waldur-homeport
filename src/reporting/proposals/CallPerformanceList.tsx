@@ -14,20 +14,20 @@ import { useCallPerformanceStats } from './hooks';
 import { calculateCallPerformanceSummary } from './mockData';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
 import { StatusBreakdown } from './StatusBreakdown';
-import { CallPerformanceData, CallState } from './types';
+import { CallPerformanceStat, CallStates } from './types';
 
-const CallStateColumn: FC<{ row: CallPerformanceData }> = ({ row }) => {
-  const stateConfig: Record<CallState, { variant: string; label: string }> = {
+const CallStateColumn: FC<{ row: CallPerformanceStat }> = ({ row }) => {
+  const stateConfig: Record<CallStates, { variant: string; label: string }> = {
     active: { variant: 'outline-secondary', label: translate('Active') },
     draft: { variant: 'gray', label: translate('Draft') },
     archived: { variant: 'outline-default', label: translate('Archived') },
   };
 
-  const config = stateConfig[row.state];
+  const config = stateConfig[row.state as CallStates];
   return <Badge variant={config.variant}>{config.label}</Badge>;
 };
 
-const AcceptanceRateColumn: FC<{ row: CallPerformanceData }> = ({ row }) => {
+const AcceptanceRateColumn: FC<{ row: CallPerformanceStat }> = ({ row }) => {
   const rate = row.acceptance_rate;
   const variant = rate >= 80 ? 'success' : rate >= 60 ? 'warning' : 'danger';
   return (
@@ -37,7 +37,7 @@ const AcceptanceRateColumn: FC<{ row: CallPerformanceData }> = ({ row }) => {
   );
 };
 
-const ReviewProgressColumn: FC<{ row: CallPerformanceData }> = ({ row }) => {
+const ReviewProgressColumn: FC<{ row: CallPerformanceStat }> = ({ row }) => {
   const progress =
     row.total_reviews > 0
       ? Math.round((row.reviews_completed / row.total_reviews) * 100)
@@ -55,7 +55,7 @@ const ReviewProgressColumn: FC<{ row: CallPerformanceData }> = ({ row }) => {
   );
 };
 
-const columns: Column<CallPerformanceData>[] = [
+const columns: Column<CallPerformanceStat>[] = [
   {
     title: translate('Call'),
     render: ({ row }) => (
@@ -98,7 +98,7 @@ const columns: Column<CallPerformanceData>[] = [
   },
 ];
 
-const CallPerformanceExpandableRow: FC<{ row: CallPerformanceData }> = ({
+const CallPerformanceExpandableRow: FC<{ row: CallPerformanceStat }> = ({
   row,
 }) => {
   return (
@@ -165,7 +165,7 @@ export const CallPerformanceList: FC = () => {
       <ReportingTitle reportKey="call-performance" />
       <SummaryWidget stats={summary} />
 
-      <Table<CallPerformanceData>
+      <Table<CallPerformanceStat>
         columns={columns}
         rows={filteredData}
         fetch={() => refetch()}

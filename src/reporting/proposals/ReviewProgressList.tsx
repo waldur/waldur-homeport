@@ -13,13 +13,13 @@ import { useReviewProgressStats } from './hooks';
 import { calculateReviewProgressSummary } from './mockData';
 import { ProposalAnalyticsButtons } from './ProposalAnalyticsButtons';
 import { StatusBreakdown } from './StatusBreakdown';
-import { ReviewProgressData } from './types';
+import { ReviewProgressStat } from './types';
 
 const tableActions = (
   <ProposalAnalyticsButtons analyticsState="reporting-review-progress-analytics" />
 );
 
-const CompletionRateColumn: FC<{ row: ReviewProgressData }> = ({ row }) => {
+const CompletionRateColumn: FC<{ row: ReviewProgressStat }> = ({ row }) => {
   const rate = row.completion_rate;
   const variant = rate >= 75 ? 'success' : rate >= 50 ? 'warning' : 'danger';
   return (
@@ -29,7 +29,7 @@ const CompletionRateColumn: FC<{ row: ReviewProgressData }> = ({ row }) => {
   );
 };
 
-const ReviewProgressExpandableRow: FC<{ row: ReviewProgressData }> = ({
+const ReviewProgressExpandableRow: FC<{ row: ReviewProgressStat }> = ({
   row,
 }) => {
   const statuses = [
@@ -67,7 +67,7 @@ const ReviewProgressExpandableRow: FC<{ row: ReviewProgressData }> = ({
   );
 };
 
-const columns: Column<ReviewProgressData>[] = [
+const columns: Column<ReviewProgressStat>[] = [
   {
     title: translate('Reviewer'),
     render: ({ row }) => (
@@ -145,7 +145,7 @@ export const ReviewProgressList: FC = () => {
       <ReportingTitle reportKey="review-progress" />
       <SummaryWidget stats={summary} />
 
-      <Table<ReviewProgressData>
+      <Table<ReviewProgressStat>
         columns={columns}
         rows={filteredData}
         fetch={() => refetch()}

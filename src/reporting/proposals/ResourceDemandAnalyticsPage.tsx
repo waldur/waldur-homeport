@@ -19,7 +19,7 @@ import {
 import { ReportingTitle } from '../ReportingTitle';
 
 import { useResourceDemandStats } from './hooks';
-import { ResourceDemandData } from './types';
+import { ResourceDemandStat } from './types';
 
 /**
  * Simulation parameters for Resource Demand "What if" analysis
@@ -76,7 +76,7 @@ function calculateResourceDemandSimulation(
   params: Record<string, number | string>,
   data: unknown,
 ): SimulationResult[] {
-  const resources = data as ResourceDemandData[];
+  const resources = data as ResourceDemandStat[];
   if (!resources || resources.length === 0) return [];
 
   const demandGrowthRate = Number(params.demandGrowth) / 100;
@@ -181,7 +181,7 @@ function calculateResourceDemandSimulation(
  * Transform resource data for drill-down analysis by offering type
  */
 function transformResourcesToDrillDownByType(
-  resources: ResourceDemandData[],
+  resources: ResourceDemandStat[],
 ): DrillDownDataItem[] {
   // Group by offering type
   const byType = new Map<string, { requests: number; approved: number }>();
@@ -228,7 +228,7 @@ function transformResourcesToDrillDownByType(
  * Generate drill-down data for offerings within a type
  */
 function getOfferingsByType(
-  resources: ResourceDemandData[],
+  resources: ResourceDemandStat[],
   offeringType: string,
 ): DrillDownDataItem[] {
   const filtered = resources.filter((r) => r.offering_type === offeringType);
@@ -252,7 +252,7 @@ function getOfferingsByType(
 }
 
 function getResourceDemandAnalyticsCapability(
-  resources: ResourceDemandData[],
+  resources: ResourceDemandStat[],
 ): any {
   const drillDownPaths: DrillDownPath[] = [
     {

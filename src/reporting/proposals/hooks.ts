@@ -8,20 +8,27 @@ import {
 export const useCallPerformanceStats = () => {
   return useQuery({
     queryKey: ['callPerformanceStats'],
-    queryFn: () => callManagingOrganisationsGlobalStatsPerformanceList(),
+    queryFn: () =>
+      callManagingOrganisationsGlobalStatsPerformanceList().then((r) => r.data),
   });
 };
 
 export const useReviewProgressStats = () => {
   return useQuery({
     queryKey: ['reviewProgressStats'],
-    queryFn: () => callManagingOrganisationsGlobalStatsReviewProgressList(),
+    queryFn: () =>
+      callManagingOrganisationsGlobalStatsReviewProgressList().then(
+        (r) => r.data,
+      ),
   });
 };
 
 export const useResourceDemandStats = () => {
   return useQuery({
     queryKey: ['resourceDemandStats'],
-    queryFn: () => callManagingOrganisationsGlobalStatsResourceDemandList(),
+    queryFn: () =>
+      callManagingOrganisationsGlobalStatsResourceDemandList().then(
+        (r) => r.data,
+      ),
   });
 };
