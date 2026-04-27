@@ -1,7 +1,7 @@
 /**
  * ESLint rule to enforce use of renderFieldOrDash() for table cells.
  * Detects inline fallback patterns like || 'N/A', ?? '-', value ? value : '—'
- * and suggests using renderFieldOrDash(value) from @waldur/table/utils instead.
+ * and suggests using renderFieldOrDash(value) from @/table/utils instead.
  */
 
 const FALLBACK_LITERALS = new Set(['N/A', 'n/a', '-', '—', '–']);
@@ -130,7 +130,7 @@ export default {
     return {
       ImportDeclaration(node) {
         if (
-          node.source.value === '@waldur/table/utils' &&
+          node.source.value === '@/table/utils' &&
           node.specifiers.some(
             (specifier) =>
               specifier.type === 'ImportSpecifier' &&

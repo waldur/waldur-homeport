@@ -16,7 +16,7 @@ export default {
     schema: [],
     messages: {
       noSizeOverride:
-        'Do not override EditButton size. Use CompactEditButton from @waldur/form/CompactEditButton for compact edit buttons in forms and settings.',
+        'Do not override EditButton size. Use CompactEditButton from @/form/CompactEditButton for compact edit buttons in forms and settings.',
     },
   },
 

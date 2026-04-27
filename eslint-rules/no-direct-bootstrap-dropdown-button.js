@@ -22,7 +22,7 @@ export default {
         'Avoid importing DropdownButton directly from react-bootstrap. Use Waldur wrapper components instead:\n' +
         '  - ActionDropdownButton: for panel/card header dropdown menus (large size)\n' +
         '  - CompactActionDropdownButton: for inline contexts like table cells (small size)\n' +
-        'Import from @waldur/table/ActionDropdownButton',
+        'Import from @/table/ActionDropdownButton',
     },
   },
 

@@ -55,7 +55,7 @@ export default {
 
     return {
       ImportDeclaration(node) {
-        if (node.source.value === '@waldur/core/api') {
+        if (node.source.value === '@/core/api') {
           node.specifiers.forEach((specifier) => {
             if (
               specifier.type === 'ImportSpecifier' &&

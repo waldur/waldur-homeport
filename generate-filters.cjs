@@ -314,8 +314,8 @@ class FilterMapper {
       schema['x-enum-descriptions'] ||
       (schema.items?.$ref
         ? utils.resolveRef(schema.items.$ref, this.proc.schema)?.[
-            'x-enum-descriptions'
-          ]
+        'x-enum-descriptions'
+        ]
         : schema.items?.['x-enum-descriptions']);
 
     if (overrides.options || overrides.enumOverrides || enumOptions) {
@@ -468,8 +468,8 @@ class Generator {
     let input = '';
     const customProps = f.props
       ? Object.entries(f.props)
-          .map(([k, v]) => `${k}={${v}}`)
-          .join('\n        ')
+        .map(([k, v]) => `${k}={${v}}`)
+        .join('\n        ')
       : '';
 
     // Determine Badge/Label logic
@@ -539,8 +539,8 @@ class Generator {
         .join('\n            ');
       const autocompleteProps = f.props
         ? Object.entries(f.props)
-            .map(([k, v]) => `${k}={${v}}`)
-            .join('\n            ')
+          .map(([k, v]) => `${k}={${v}}`)
+          .join('\n            ')
         : '';
 
       const searchParam =
@@ -572,8 +572,8 @@ class Generator {
       const vType = f.valueType ? `: ${f.valueType}` : '';
       const selectProps = f.props
         ? Object.entries(f.props)
-            .map(([k, v]) => `${k}={${v}}`)
-            .join('\n            ')
+          .map(([k, v]) => `${k}={${v}}`)
+          .join('\n            ')
         : '';
 
       input = `      <Field
@@ -864,24 +864,24 @@ ${filters.map(Generator.selector).join('')}    }
     );
 
     const lines = [
-      `import { RootState } from '@waldur/store/reducers';`,
-      `import { translate } from '@waldur/i18n';`,
       `import { FunctionComponent } from 'react';`,
       `import { Field, getFormValues, reduxForm } from 'redux-form';`,
       `import { createSelector } from 'reselect';`,
-      `import { TableFilterItem } from '@waldur/table/TableFilterItem';`,
+      `import { translate } from '@/i18n';`,
+      `import { RootState } from '@/store/reducers';`,
+      `import { TableFilterItem } from '@/table/TableFilterItem';`,
     ];
 
     if (hasRequired) {
-      lines.push(`import { required } from '@waldur/core/validators';`);
+      lines.push(`import { required } from '@/core/validators';`);
     }
 
     if (comps.has('feature')) {
       lines.push(
-        `import { isFeatureVisible } from '@waldur/features/connect';`,
+        `import { isFeatureVisible } from '@/features/connect';`,
       );
       lines.push(
-        `import { MarketplaceFeatures } from '@waldur/FeaturesEnums';`,
+        `import { MarketplaceFeatures } from '@/FeaturesEnums';`,
       );
     }
 
@@ -891,35 +891,35 @@ ${filters.map(Generator.selector).join('')}    }
       );
     if (hasComp('AwesomeCheckboxField'))
       lines.push(
-        `import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';`,
+        `import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';`,
       );
     if (hasComp('DateField'))
-      lines.push(`import { DateField } from '@waldur/form/DateField';`);
+      lines.push(`import { DateField } from '@/form/DateField';`);
     if (hasComp('RangeNumberField'))
       lines.push(
-        `import { RangeNumberField } from '@waldur/form/RangeNumberField';`,
+        `import { RangeNumberField } from '@/form/RangeNumberField';`,
       );
     const formFields = [];
     if (hasComp('StringField')) formFields.push('StringField');
     if (hasComp('NumberField')) formFields.push('NumberField');
     if (formFields.length)
-      lines.push(`import { ${formFields.join(', ')} } from '@waldur/form';`);
+      lines.push(`import { ${formFields.join(', ')} } from '@/form';`);
 
     const themed = [
       comps.has('Select') && 'Select',
       comps.has('AsyncPaginate') && 'AsyncPaginate',
       (comps.has('Select') || comps.has('AsyncPaginate')) &&
-        'REACT_SELECT_TABLE_FILTER',
+      'REACT_SELECT_TABLE_FILTER',
     ].filter(Boolean);
 
     if (themed.length > 0) {
       lines.push(
-        `import { ${themed.join(', ')} } from '@waldur/form/themed-select';`,
+        `import { ${themed.join(', ')} } from '@/form/themed-select';`,
       );
     }
 
     if (comps.has('AsyncPaginate'))
-      lines.push(`import { createSelectFetcher } from '@waldur/table/api';`);
+      lines.push(`import { createSelectFetcher } from '@/table/api';`);
     lines.push(
       `import { ${Array.from(sdk).sort().join(', ')} } from 'waldur-js-client';`,
     );
