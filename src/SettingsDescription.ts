@@ -1,6 +1,6 @@
 // WARNING: This file is auto-generated from src/waldur_core/core/management/commands/print_settings_description.py
 // Do not edit it manually. All manual changes would be overridden.
-import { translate } from '@/i18n';
+import { translate } from '@waldur/i18n';
 
 export const SettingsDescription = [
   {
