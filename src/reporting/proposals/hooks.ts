@@ -1,28 +1,27 @@
 import { useQuery } from '@tanstack/react-query';
-
 import {
-  getCallPerformanceStats,
-  getReviewProgressStats,
-  getResourceDemandStats,
-} from './api';
+  callManagingOrganisationsGlobalStatsPerformanceList,
+  callManagingOrganisationsGlobalStatsResourceDemandList,
+  callManagingOrganisationsGlobalStatsReviewProgressList,
+} from 'waldur-js-client';
 
 export const useCallPerformanceStats = () => {
   return useQuery({
     queryKey: ['callPerformanceStats'],
-    queryFn: () => getCallPerformanceStats(),
+    queryFn: () => callManagingOrganisationsGlobalStatsPerformanceList(),
   });
 };
 
 export const useReviewProgressStats = () => {
   return useQuery({
     queryKey: ['reviewProgressStats'],
-    queryFn: () => getReviewProgressStats(),
+    queryFn: () => callManagingOrganisationsGlobalStatsReviewProgressList(),
   });
 };
 
 export const useResourceDemandStats = () => {
   return useQuery({
     queryKey: ['resourceDemandStats'],
-    queryFn: () => getResourceDemandStats(),
+    queryFn: () => callManagingOrganisationsGlobalStatsResourceDemandList(),
   });
 };
