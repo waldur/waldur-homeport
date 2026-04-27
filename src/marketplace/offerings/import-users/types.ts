@@ -1,6 +1,6 @@
 import { OfferingUser } from 'waldur-js-client';
 
-import { AtLeast } from '@waldur/core/types';
+import { AtLeast } from '@/core/types';
 
 export type OfferingUserRecord = AtLeast<
   OfferingUser,

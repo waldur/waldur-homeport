@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { openstackInstancesUpdate } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
-import { createDescriptionField } from '@waldur/resource/actions/base';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
+import { createDescriptionField } from '@/resource/actions/base';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { UpdateResourceDialog } from '@/resource/actions/UpdateResourceDialog';
 
 const MAX_LEN = 150;
 

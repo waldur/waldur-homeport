@@ -19,20 +19,20 @@ import {
   ChecklistTypeEnum,
 } from 'waldur-js-client';
 
-import { AddButton } from '@waldur/core/AddButton';
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import Table from '@waldur/table/Table';
-import { TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { AddButton } from '@/core/AddButton';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { PredefinedQuestion } from './predefinedQuestions';
 import { QuestionFormModal } from './QuestionFormModal';

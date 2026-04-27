@@ -2,8 +2,8 @@ import { ArrowSquareOutIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
 
 import { PublicOfferingCardTitle } from './PublicOfferingCardTitle';
 

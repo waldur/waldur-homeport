@@ -3,10 +3,10 @@ import { useState } from 'react';
 import { Alert, Card, Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import {
   useArrowSettings,

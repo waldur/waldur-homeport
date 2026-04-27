@@ -1,11 +1,11 @@
 import { Form, Stack } from 'react-bootstrap';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatMediumDateTime } from '@waldur/core/dateUtils';
-import { SecretField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatMediumDateTime } from '@/core/dateUtils';
+import { SecretField } from '@/form';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
 
 interface OwnProps {
   resolve: { username; token; expiresAt };

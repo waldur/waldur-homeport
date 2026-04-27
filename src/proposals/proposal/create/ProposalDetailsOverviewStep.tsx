@@ -2,17 +2,17 @@ import { EyeIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { lazyComponent } from '@/core/lazyComponent';
 import {
   VStepperFormStepCard,
   VStepperFormStepProps,
-} from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { EndingField } from '@waldur/proposals/EndingField';
-import { Proposal } from '@waldur/proposals/types';
-import { Field } from '@waldur/resource/summary';
-import { ActionButton } from '@waldur/table/ActionButton';
+} from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { EndingField } from '@/proposals/EndingField';
+import { Proposal } from '@/proposals/types';
+import { Field } from '@/resource/summary';
+import { ActionButton } from '@/table/ActionButton';
 
 const ProposalDetailsDialog = lazyComponent(() =>
   import('../ProposalDetailsDialog').then((module) => ({

@@ -1,15 +1,15 @@
 import { useDispatch } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Field } from '@waldur/resource/summary';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { truncate } from '@/core/utils';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { Field } from '@/resource/summary';
 
 const OfferingDetailsDialog = lazyComponent(() =>
-  import('@waldur/marketplace/offerings/details/OfferingDetailsDialog').then(
+  import('@/marketplace/offerings/details/OfferingDetailsDialog').then(
     (module) => ({
       default: module.OfferingDetailsDialog,
     }),

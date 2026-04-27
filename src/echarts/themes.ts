@@ -8,7 +8,7 @@ import * as echarts from 'echarts';
 import {
   CHART_SPLIT_LINE_COLOR_DARK,
   CHART_SPLIT_LINE_COLOR_LIGHT,
-} from '@waldur/dashboard/constants';
+} from '@/dashboard/constants';
 
 function registerDarkTheme() {
   if (!echarts) {

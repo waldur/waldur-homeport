@@ -17,22 +17,18 @@ import {
   marketplaceProviderOfferingsUnpause,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import {
-  showError,
-  showErrorResponse,
-  showSuccess,
-} from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { useUser } from '@waldur/workspace/hooks';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { useUser } from '@/workspace/hooks';
 
 import {
   ACTIVE,
@@ -43,7 +39,7 @@ import {
 } from '../store/constants';
 
 const RequestActionDialog = lazyComponent(() =>
-  import('@waldur/marketplace/offerings/actions/RequestActionDialog').then(
+  import('@/marketplace/offerings/actions/RequestActionDialog').then(
     (module) => ({ default: module.RequestActionDialog }),
   ),
 );

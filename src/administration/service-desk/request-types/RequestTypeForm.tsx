@@ -8,14 +8,14 @@ import {
   supportRequestTypesAdminPartialUpdate,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { NumberField, StringField, SubmitButton } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { required } from '@/core/validators';
+import { NumberField, StringField, SubmitButton } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 interface RequestTypeFormProps {
   resolve: {

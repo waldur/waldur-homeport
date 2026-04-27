@@ -8,11 +8,11 @@ import {
   PatchedAccessSubnetRequest,
 } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export interface AccessSubnetFormData {
   refetch(): void;

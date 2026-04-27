@@ -2,16 +2,16 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { SubmitButton } from '@waldur/form';
-import { WideImageField } from '@waldur/form/WideImageField';
-import { translate } from '@waldur/i18n';
-import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { formDataOptions } from '@/core/api';
+import { ENV } from '@/core/config';
+import { SubmitButton } from '@/form';
+import { WideImageField } from '@/form/WideImageField';
+import { translate } from '@/i18n';
+import { LanguageUtilsService } from '@/i18n/LanguageUtilsService';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { getKeyTitle } from './utils';
 

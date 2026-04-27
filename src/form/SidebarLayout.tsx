@@ -3,7 +3,7 @@ import { FC, PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { useFullPage } from '@waldur/navigation/context';
+import { useFullPage } from '@/navigation/context';
 
 import './SidebarLayout.scss';
 

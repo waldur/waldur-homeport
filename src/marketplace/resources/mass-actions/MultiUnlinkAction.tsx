@@ -3,10 +3,10 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesUnlink } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { ResourceAction } from '@/marketplace/resources/actions/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 export const MultiUnlinkAction = ({ rows, refetch }) => {
   const dispatch = useDispatch();

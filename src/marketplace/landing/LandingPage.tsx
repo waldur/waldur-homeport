@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change, getFormValues } from 'redux-form';
 import { NestedTag } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { syncFiltersToURL } from '@waldur/core/filters';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
+import { ENV } from '@/core/config';
+import { syncFiltersToURL } from '@/core/filters';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useMarketplacePublicTabs } from '@/marketplace/utils';
 import {
   useExtraToolbar,
   useFullPage,
   useToolbarActions,
-} from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
+} from '@/navigation/context';
+import { useTitle } from '@/navigation/title';
 
 import { CardStyleType } from '../common/cards/index';
 import { MARKETPLACE_LANDING_FILTER_FORM } from '../constants';

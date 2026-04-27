@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { CompactIconButton } from '@/core/buttons/IconButton';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
 
 interface AttachmentItemPendingProps {
   file: File;

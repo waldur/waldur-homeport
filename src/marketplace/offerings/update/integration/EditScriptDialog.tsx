@@ -9,21 +9,17 @@ import {
   MergedSecretOptionsRequest,
 } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Tip } from '@waldur/core/Tooltip';
-import { wait } from '@waldur/core/utils';
-import { SubmitButton } from '@waldur/form';
-import { MonacoField } from '@waldur/form/MonacoField';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import {
-  showError,
-  showErrorResponse,
-  showSuccess,
-} from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Tip } from '@/core/Tooltip';
+import { wait } from '@/core/utils';
+import { SubmitButton } from '@/form';
+import { MonacoField } from '@/form/MonacoField';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import { EDIT_SCRIPT_FORM_ID } from './constants';
 import { ScriptEditorHeader } from './ScriptEditorHeader';

@@ -1,9 +1,9 @@
 import { padStart, uniqueId } from 'lodash-es';
 import { DateTime, Duration } from 'luxon';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { Option } from '@waldur/marketplace/common/registry';
+import { parseDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { Option } from '@/marketplace/common/registry';
 
 import { BookedItem, BookingProps, EventInput } from './types';
 

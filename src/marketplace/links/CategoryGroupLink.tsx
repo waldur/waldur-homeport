@@ -1,6 +1,6 @@
 import React, { PropsWithChildren } from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 interface OwnProps {
   item;

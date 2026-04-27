@@ -2,8 +2,8 @@ import { useIsActive } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { Tip } from '@waldur/core/Tooltip';
+import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
 
 interface MenuItemProps {
   title: ReactNode;

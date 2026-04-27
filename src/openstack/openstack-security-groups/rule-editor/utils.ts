@@ -10,11 +10,11 @@ import {
   SecurityGroupRuleProtocolEnum,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { type RootState } from '@waldur/store/reducers';
+import { getAllPages } from '@/core/api';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { type RootState } from '@/store/reducers';
 
 import { SecurityGroupRulesFormData, Rule } from './types';
 

@@ -1,8 +1,8 @@
 import { FC, ReactNode } from 'react';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 import { SubmitButton } from './SubmitButton';
 

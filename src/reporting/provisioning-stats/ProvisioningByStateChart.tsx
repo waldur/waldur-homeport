@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
 import { OrderState } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { DonutChart } from '@waldur/reporting/users/charts/DonutChart';
-import { ExportData } from '@waldur/table/exporters/types';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { DonutChart } from '@/reporting/users/charts/DonutChart';
+import { ExportData } from '@/table/exporters/types';
 
 interface ProvisioningByStateChartProps {
   byState: { [key: string]: number };

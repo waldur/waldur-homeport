@@ -4,12 +4,12 @@ import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
 import { RancherHpa, rancherHpasUpdate } from 'waldur-js-client';
 
-import { StringField, SelectField, NumberField, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { updateEntity } from '@waldur/table/actions';
+import { StringField, SelectField, NumberField, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { updateEntity } from '@/table/actions';
 
 import { MetricOption, HPAUpdateFormData } from './types';
 import {

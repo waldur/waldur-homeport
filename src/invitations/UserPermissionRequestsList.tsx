@@ -1,14 +1,14 @@
 import { FC, useMemo } from 'react';
 import { userPermissionRequestsList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@waldur/invitations/constants';
-import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
-import { UserPermissionRequestRowActions } from '@waldur/invitations/UserPermissionRequestRowActions';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@/invitations/constants';
+import { PermissionRequestStateField } from '@/invitations/PermissionRequestStateField';
+import { UserPermissionRequestRowActions } from '@/invitations/UserPermissionRequestRowActions';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface OwnProps {
   groupInvitationUuid: string;

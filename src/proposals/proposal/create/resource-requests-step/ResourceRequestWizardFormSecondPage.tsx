@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, useEffect } from 'react';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getUUID } from '@waldur/core/utils';
-import { FormContainer } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getUUID } from '@/core/utils';
+import { FormContainer } from '@/form';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
+import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 
 export const ResourceRequestWizardFormSecondPage: FunctionComponent<
   WizardFormStepProps

@@ -1,7 +1,7 @@
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { ResourceLink } from '@/resource/ResourceLink';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
 
 export const OpenStackBackupSummary = ({
   resource,

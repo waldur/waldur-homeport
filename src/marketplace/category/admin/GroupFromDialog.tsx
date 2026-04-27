@@ -7,17 +7,17 @@ import {
   marketplaceCategoryGroupsPartialUpdate,
 } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { ImageField } from '@waldur/form/ImageField';
-import { StringField } from '@waldur/form/StringField';
-import { TextField } from '@waldur/form/TextField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { required } from '@/core/validators';
+import { SubmitButton } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import { ImageField } from '@/form/ImageField';
+import { StringField } from '@/form/StringField';
+import { TextField } from '@/form/TextField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const GroupFromDialog = connect<
   {},

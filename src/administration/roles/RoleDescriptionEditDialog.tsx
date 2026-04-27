@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import { rolesUpdateDescriptionsUpdate } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { StringField, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { ENV } from '@/core/config';
+import { StringField, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { getRoles } from './utils';
 

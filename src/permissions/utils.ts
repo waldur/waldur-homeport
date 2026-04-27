@@ -1,6 +1,6 @@
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { ROLE_TYPES } from '@waldur/permissions/constants';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { ROLE_TYPES } from '@/permissions/constants';
 
 import { RoleEnum } from './enums';
 import { RoleType } from './types';

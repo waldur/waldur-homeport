@@ -1,8 +1,8 @@
 import { useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
 
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
-import { GenericPermission, Role } from '@waldur/permissions/types';
+import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
+import { GenericPermission, Role } from '@/permissions/types';
 
 export const UserRoleGroup = ({
   role,

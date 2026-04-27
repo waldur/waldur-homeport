@@ -4,17 +4,17 @@ import {
   ServiceProviderRevenues,
 } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getScopeChartOptions } from '@waldur/dashboard/chart';
-import { Chart } from '@waldur/dashboard/types';
+import { parseDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { getScopeChartOptions } from '@/dashboard/chart';
+import { Chart } from '@/dashboard/types';
 import {
   padMissingValues,
   DateValuePair,
   formatCostChartLabel,
-} from '@waldur/dashboard/utils';
-import { translate } from '@waldur/i18n';
-import { ServiceProvider } from '@waldur/marketplace/types';
+} from '@/dashboard/utils';
+import { translate } from '@/i18n';
+import { ServiceProvider } from '@/marketplace/types';
 
 const formatCostChart = (records: ServiceProviderRevenues[]): Chart => {
   let items: DateValuePair[] = records.map((record) => ({

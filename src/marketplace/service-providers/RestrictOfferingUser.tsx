@@ -3,10 +3,10 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOfferingUsersUpdateRestricted } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const RestrictOfferingUserButton: FC<{
   row: any;

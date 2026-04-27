@@ -2,16 +2,16 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { vmwareNetworksList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { createFetcher } from '@waldur/table/api';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { ENV } from '@/core/config';
+import { UI_STALE_TIME } from '@/core/constants';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { createFetcher } from '@/table/api';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 export const FormNetworkStep = (props: FormStepProps) => {
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();

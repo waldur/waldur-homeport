@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { Category } from '@waldur/marketplace/types';
-import { useOfferingCategories } from '@waldur/navigation/sidebar/utils';
-import { TableWithPortal } from '@waldur/table/types';
+import { translate } from '@/i18n';
+import { Category } from '@/marketplace/types';
+import { useOfferingCategories } from '@/navigation/sidebar/utils';
+import { TableWithPortal } from '@/table/types';
 
 import { BaseQuestionsTable } from './BaseQuestionsTable';
 import {

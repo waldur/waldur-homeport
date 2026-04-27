@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { callProposalProjectRoleMappingsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { translate } from '@waldur/i18n';
+import { DeleteButton } from '@/core/buttons';
+import { translate } from '@/i18n';
 
 export const RoleMappingDeleteAction: FunctionComponent<{ row; refetch }> = ({
   row,

@@ -1,8 +1,8 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
 
 interface LoadingErredProps {
   loadData: () => void;

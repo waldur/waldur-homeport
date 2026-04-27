@@ -1,6 +1,6 @@
 import { createSelector } from 'reselect';
 
-import { type RootState } from '@waldur/store/reducers';
+import { type RootState } from '@/store/reducers';
 
 import { INITIAL_STATE } from './constants';
 import { type StateTables, type TableState } from './types';

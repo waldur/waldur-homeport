@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Offering } from '@waldur/marketplace/types';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Offering } from '@/marketplace/types';
 
 import { PublicOfferingSoftwareCatalogTable } from './PublicOfferingSoftwareCatalogTable';
 

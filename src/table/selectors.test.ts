@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
-import { type RootState } from '@waldur/store/reducers';
-import { makeSelectTableRows } from '@waldur/table/selectors';
+import { type RootState } from '@/store/reducers';
+import { makeSelectTableRows } from '@/table/selectors';
 
 describe('makeSelectTableRows', () => {
   it('should return rows composed from entities by order', () => {

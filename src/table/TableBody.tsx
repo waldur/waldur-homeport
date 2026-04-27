@@ -16,10 +16,10 @@ import React, {
 import { FormCheck } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/components';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { MenuComponent } from '@/metronic/components';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFilterContext } from './FilterContextProvider';

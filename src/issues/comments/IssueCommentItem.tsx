@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { formatMediumDateTime, formatRelative } from '@waldur/core/dateUtils';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { FormattedJira } from '@waldur/core/FormattedJira';
-import { getAbbreviation } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { openUserPopover } from '@waldur/user/actions';
+import { ENV } from '@/core/config';
+import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { FormattedJira } from '@/core/FormattedJira';
+import { getAbbreviation } from '@/core/utils';
+import { translate } from '@/i18n';
+import { openUserPopover } from '@/user/actions';
 
 import { CommentActions } from './CommentActions';
 import { Comment } from './types';

@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { DefaultOfferingEditPanel } from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
-import { OfferingEditField } from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
-import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
+import { translate } from '@/i18n';
+import { DefaultOfferingEditPanel } from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { OfferingEditField } from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
 
 import { OpenStackExternalIpsField } from './OpenStackExternalIpsField';
 

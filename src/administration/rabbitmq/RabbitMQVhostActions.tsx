@@ -4,10 +4,10 @@ import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
-import { TableDropdownToggle } from '@waldur/table/ActionsDropdown';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showError, showSuccess } from '@/store/notify';
+import { TableDropdownToggle } from '@/table/ActionsDropdown';
 
 import {
   deleteRabbitMQQueues,

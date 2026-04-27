@@ -1,17 +1,17 @@
 import { useSelector } from 'react-redux';
 import { AdminAnnouncement, adminAnnouncementsList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { formatDateTime } from '@/core/dateUtils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   AdminAnnouncementsFilter,
   selectAdminAnnouncementsFilter,
-} from '@waldur/table/generated/AdminAnnouncementsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/AdminAnnouncementsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { AnnouncementTypeOptions } from '../utils';
 

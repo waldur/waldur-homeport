@@ -2,11 +2,11 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { getAbbreviation } from '@waldur/core/utils';
-import { OfferingDetailsLink } from '@waldur/marketplace/links/OfferingDetailsLink';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { Image } from '@/core/Image';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { getAbbreviation } from '@/core/utils';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { wrapTooltip } from '@/table/ActionButton';
 
 import { DeployButton } from '../DeployButton';
 import { ViewOfferingButton } from '../ViewOfferingButton';

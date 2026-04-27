@@ -2,14 +2,14 @@ import { FC, useState } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { url, required } from '@waldur/core/validators';
-import { StringField } from '@waldur/form';
-import { SecretField } from '@waldur/form/SecretField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { url, required } from '@/core/validators';
+import { StringField } from '@/form';
+import { SecretField } from '@/form/SecretField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { useValidateArrowCredentials } from '../api';
 import type { ArrowSetupFormValues } from '../types';

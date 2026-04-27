@@ -3,11 +3,11 @@ import { FC } from 'react';
 import { Card, ListGroup } from 'react-bootstrap';
 import { CategoryGroup } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useCategories } from '@waldur/marketplace/category/useCategories';
-import { Category } from '@waldur/marketplace/types';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useCategories } from '@/marketplace/category/useCategories';
+import { Category } from '@/marketplace/types';
 
 import { CategoryThumbnail } from './CategoryThumbnail';
 import './CategorySidebar.scss';

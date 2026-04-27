@@ -1,8 +1,8 @@
 import mermaid from 'mermaid';
 import { FC, useEffect, useRef, useState } from 'react';
 
-import { SkeletonLoader } from '@waldur/ai-assistant/components/shared/SkeletonLoader';
-import { translate } from '@waldur/i18n';
+import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
+import { translate } from '@/i18n';
 
 mermaid.initialize({
   theme: 'default',

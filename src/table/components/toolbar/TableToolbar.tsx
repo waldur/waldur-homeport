@@ -4,10 +4,10 @@ import { createElement, useCallback } from 'react';
 import { Card, Col, Row, Stack } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { titleCase } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { CompactIconButton } from '@/core/buttons/IconButton';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { titleCase } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import { useTableContext } from '../../context';
 import { TableButtons } from '../../TableButtons';

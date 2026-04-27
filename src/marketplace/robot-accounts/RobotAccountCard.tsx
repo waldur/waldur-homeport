@@ -1,6 +1,6 @@
 import { useAsync } from 'react-use';
 
-import { countRobotAccounts } from '@waldur/marketplace/common/api';
+import { countRobotAccounts } from '@/marketplace/common/api';
 
 import { RobotAccountList } from './RobotAccountList';
 

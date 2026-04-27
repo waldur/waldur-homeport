@@ -17,9 +17,9 @@
 import { FileArrowDownIcon, FileXlsIcon } from '@phosphor-icons/react';
 import { FC, useEffect, useMemo, useRef, useState } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { EChart } from '@/core/EChart';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 import { ProjectStorageReport } from './ProjectStorageReport';
 import { downloadStorageExcel, downloadJson } from './reportExcel';

@@ -1,11 +1,11 @@
 import { ArrowsLeftRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { OpenstackFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { OpenstackFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 
 import { TenantActionProps } from './types';
 

@@ -2,7 +2,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { Resource } from 'waldur-js-client';
 
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { OfferingComponent } from '@/marketplace/types';
 
 import { ResourceComponentItem } from './ResourceComponentItem';
 import { ResourceShowMoreComponents } from './ResourceShowMoreComponents';

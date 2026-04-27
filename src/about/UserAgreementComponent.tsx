@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { userAgreementsList } from 'waldur-js-client';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { LanguageUtilsService } from '@/i18n/LanguageUtilsService';
 
 import { LoadingSpinner } from '../core/LoadingSpinner';
 import { translate } from '../i18n';

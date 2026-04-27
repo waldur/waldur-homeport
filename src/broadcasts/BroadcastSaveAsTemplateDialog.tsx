@@ -6,13 +6,13 @@ import {
   MessageTemplateRequest,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { required } from '@/core/validators';
+import { FormContainer, StringField, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { BroadcastFormData } from './types';
 

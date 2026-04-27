@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 import { remoteWaldurApiRemoteCustomers } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { FormContainer, SelectField } from '@/form';
+import { translate } from '@/i18n';
 
 import { ErredRemoteConnection } from './ErredRemoteConnection';
 import { importOfferingSelector } from './selectors';

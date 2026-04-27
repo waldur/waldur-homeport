@@ -3,18 +3,18 @@ import { useEffect, useMemo } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { ENV } from '@waldur/core/config';
-import { isEmpty } from '@waldur/core/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { SelectField, StringField, TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { OECD_FOS_2007_CODES } from '@waldur/project/OECD_FOS_2007_CODES';
-import { Call, ProposalReview } from '@waldur/proposals/types';
+import { AccordionCard } from '@/core/AccordionCard';
+import { ENV } from '@/core/config';
+import { isEmpty } from '@/core/utils';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { SelectField, StringField, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { VStepperFormStepProps } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { OECD_FOS_2007_CODES } from '@/project/OECD_FOS_2007_CODES';
+import { Call, ProposalReview } from '@/proposals/types';
 
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 

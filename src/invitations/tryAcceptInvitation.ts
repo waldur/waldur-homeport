@@ -1,5 +1,5 @@
-import { InvitationTokenStorage } from '@waldur/core/StorageManager';
-import store from '@waldur/store/store';
+import { InvitationTokenStorage } from '@/core/StorageManager';
+import store from '@/store/store';
 
 import { translate } from '../i18n';
 import { showError } from '../store/notify';

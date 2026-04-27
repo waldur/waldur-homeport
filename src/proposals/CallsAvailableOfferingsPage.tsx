@@ -7,20 +7,20 @@ import {
   MarketplacePublicOfferingsListData,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { Link } from '@waldur/core/Link';
-import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
-import { translate } from '@waldur/i18n';
-import { OfferingStateCell } from '@waldur/marketplace/offerings/list/OfferingStateCell';
-import { getStates } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
-import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
-import { useFullPage } from '@waldur/navigation/context';
-import { AvailableOfferingCard } from '@waldur/proposals/AvailableOfferingCard';
-import { createFetcher } from '@waldur/table/api';
-import { MarketplaceProviderOfferingsFilter } from '@waldur/table/generated/MarketplaceProviderOfferingsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ENV } from '@/core/config';
+import { Link } from '@/core/Link';
+import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
+import { translate } from '@/i18n';
+import { OfferingStateCell } from '@/marketplace/offerings/list/OfferingStateCell';
+import { getStates } from '@/marketplace/offerings/list/OfferingStateFilter';
+import { PUBLIC_OFFERINGS_FILTER_FORM_ID } from '@/marketplace/offerings/store/constants';
+import { useFullPage } from '@/navigation/context';
+import { AvailableOfferingCard } from '@/proposals/AvailableOfferingCard';
+import { createFetcher } from '@/table/api';
+import { MarketplaceProviderOfferingsFilter } from '@/table/generated/MarketplaceProviderOfferingsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 const mapStateToFilter = createSelector(
   getFormValues(PUBLIC_OFFERINGS_FILTER_FORM_ID),

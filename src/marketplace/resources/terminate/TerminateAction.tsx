@@ -1,15 +1,15 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { validateState } from '@waldur/resource/actions/base';
-import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
-import { useValidators } from '@waldur/resource/actions/useValidators';
-import { useUser } from '@waldur/workspace/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { validateState } from '@/resource/actions/base';
+import { useModalDialogCallback } from '@/resource/actions/useModalDialogCallback';
+import { useValidators } from '@/resource/actions/useValidators';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceAction } from '../actions/constants';
 

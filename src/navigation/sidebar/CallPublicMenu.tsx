@@ -2,13 +2,13 @@ import { ChatTeardropTextIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { MenuAccordion } from '@waldur/navigation/sidebar/MenuAccordion';
-import { MenuItem } from '@waldur/navigation/sidebar/MenuItem';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { useUser } from '@waldur/workspace/hooks';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { MenuAccordion } from '@/navigation/sidebar/MenuAccordion';
+import { MenuItem } from '@/navigation/sidebar/MenuItem';
+import { RoleEnum } from '@/permissions/enums';
+import { useUser } from '@/workspace/hooks';
 
 import { isDescendantOf } from '../useTabs';
 

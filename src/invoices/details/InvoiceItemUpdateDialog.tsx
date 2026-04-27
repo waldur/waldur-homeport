@@ -4,10 +4,10 @@ import {
   PatchedInvoiceItemUpdateRequest,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const InvoiceItemUpdateDialog = ({
   resolve: { resource, refreshInvoiceItems },

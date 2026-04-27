@@ -3,9 +3,9 @@ import { useCallback, useRef, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse } from '@/store/notify';
 
 import { RestrictionsInfoCard } from '../RestrictionsInfoCard';
 import { GroupInviteRow, InvitationContext } from '../types';

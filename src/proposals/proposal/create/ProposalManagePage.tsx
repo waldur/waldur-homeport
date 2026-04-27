@@ -8,16 +8,16 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { getQueryParams } from '@waldur/core/filters';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SidebarLayout } from '@waldur/form/SidebarLayout';
-import { translate } from '@waldur/i18n';
-import { PageBarProvider } from '@waldur/marketplace/context';
-import { useTitle } from '@waldur/navigation/title';
-import { Proposal } from '@waldur/proposals/types';
-import { getUser } from '@waldur/workspace/selectors';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { getQueryParams } from '@/core/filters';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SidebarLayout } from '@/form/SidebarLayout';
+import { translate } from '@/i18n';
+import { PageBarProvider } from '@/marketplace/context';
+import { useTitle } from '@/navigation/title';
+import { Proposal } from '@/proposals/types';
+import { getUser } from '@/workspace/selectors';
 
 import { ProposalDetails } from '../ProposalDetails';
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';

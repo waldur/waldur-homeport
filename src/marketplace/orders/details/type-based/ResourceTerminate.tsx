@@ -1,6 +1,6 @@
-import { translate } from '@waldur/i18n';
-import { getLabel } from '@waldur/marketplace/common/registry';
-import { Field } from '@waldur/resource/summary';
+import { translate } from '@/i18n';
+import { getLabel } from '@/marketplace/common/registry';
+import { Field } from '@/resource/summary';
 
 import { OrderTypeBasedProps, RequestedByField } from './OrderCommonFields';
 

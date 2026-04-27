@@ -1,8 +1,8 @@
 import React from 'react';
 import { ComponentsUsageStats } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { EChart } from '@/core/EChart';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { useAggregateLimitChart } from './utils';
 

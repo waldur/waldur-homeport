@@ -19,8 +19,8 @@ import { useState, FC, useEffect, forwardRef } from 'react';
 import { Modal, FormLabel } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
 
 import { StringField } from './StringField';
 

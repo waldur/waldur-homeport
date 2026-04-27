@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
+import { BaseEventsList } from '@/events/BaseEventsList';
 
 export const ResourceEvents: FC<{
   marketplaceResource;

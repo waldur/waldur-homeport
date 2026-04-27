@@ -2,12 +2,12 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesPull } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { validateState } from '@waldur/resource/actions/base';
-import { ActionContext } from '@waldur/resource/actions/types';
-import { useValidators } from '@waldur/resource/actions/useValidators';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { validateState } from '@/resource/actions/base';
+import { ActionContext } from '@/resource/actions/types';
+import { useValidators } from '@/resource/actions/useValidators';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 const SUPPORTED_OFFERING_TYPES = [
   'Marketplace.Slurm',

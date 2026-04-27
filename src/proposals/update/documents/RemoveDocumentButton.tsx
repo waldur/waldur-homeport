@@ -2,10 +2,10 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { proposalProtectedCallsDetachDocuments } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const RemoveDocumentAction = ({ row, call, refetch }) => {
   const dispatch = useDispatch();

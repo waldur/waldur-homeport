@@ -1,8 +1,8 @@
 import { DiscountTypeEnum } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { CampaignFormData } from '@waldur/marketplace/service-providers/types';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
+import { translate } from '@/i18n';
+import { CampaignFormData } from '@/marketplace/service-providers/types';
+import { IBreadcrumbItem } from '@/navigation/types';
 
 export const serializeCampaign = (formData: CampaignFormData) => ({
   name: formData.name,

@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 import { UserAgreement, userAgreementsList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { ENV } from '@/core/config';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { UserAgreementCreateButton } from './UserAgreementCreateButton';
 import { UserAgreementDeleteButton } from './UserAgreementDeleteButton';

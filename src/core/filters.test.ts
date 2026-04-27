@@ -1,7 +1,7 @@
 import { describe, it, expect, beforeEach, vi } from 'vitest';
 
 // Mock the router module before importing filters
-vi.mock('@waldur/router', () => ({
+vi.mock('@/router', () => ({
   router: {
     urlService: {
       search: vi.fn(() => ({})),
@@ -13,7 +13,7 @@ vi.mock('@waldur/router', () => ({
 }));
 
 // Import after mocking
-import { router } from '@waldur/router';
+import { router } from '@/router';
 
 import { getQueryParams, syncFiltersToURL, getInitialValues } from './filters';
 

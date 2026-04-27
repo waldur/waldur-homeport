@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import { FC, useMemo, useState } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 import {
   CustomComponentInputProps,
   FilterOptions,
   SelectDialogFieldChoice,
   SelectDialogFieldColumn,
-} from '@waldur/form/types';
+} from '@/form/types';
 
 import './ChoicesTable.scss';
 import { ChoicesTableFilter } from './ChoicesTableFilter';

@@ -1,13 +1,13 @@
 import { useQuery } from '@tanstack/react-query';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { SupportFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SettingsDescription } from '@waldur/SettingsDescription';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { SupportFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SettingsDescription } from '@/SettingsDescription';
 
 import { FieldRow } from '../settings/FieldRow';
 

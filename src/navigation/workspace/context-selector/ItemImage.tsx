@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { Image } from '@/core/Image';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 
 import { getItemAbbreviation } from './utils';
 

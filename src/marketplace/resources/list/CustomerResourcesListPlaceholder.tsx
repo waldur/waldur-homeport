@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import Illustration from '@waldur/images/table-placeholders/undraw_data_report_bi6l.svg';
-import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
+import { translate } from '@/i18n';
+import Illustration from '@/images/table-placeholders/undraw_data_report_bi6l.svg';
+import { ImageTablePlaceholder } from '@/table/ImageTablePlaceholder';
 
 export const CustomerResourcesListPlaceholder: FunctionComponent = () => (
   <ImageTablePlaceholder

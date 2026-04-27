@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 import { BasePublicPlan } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { FieldError } from '@waldur/form';
-import { Select } from '@waldur/form/themed-select';
+import { required } from '@/core/validators';
+import { FieldError } from '@/form';
+import { Select } from '@/form/themed-select';
 
 interface PlanSelectFieldProps {
   plans: BasePublicPlan[];

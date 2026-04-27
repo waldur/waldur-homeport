@@ -1,4 +1,4 @@
-import { titleCase } from '@waldur/core/utils';
+import { titleCase } from '@/core/utils';
 
 /**
  * Parse a comma-separated string into an array.

@@ -8,7 +8,7 @@
  * 4. Per-Datacenter Worker/Storage Groups with flavor selection
  */
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export interface LocalOpenStackFlavor {
   uuid: string;

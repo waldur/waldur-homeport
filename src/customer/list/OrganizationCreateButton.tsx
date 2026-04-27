@@ -4,17 +4,17 @@ import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n/translate';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n/translate';
+import { useModal } from '@/modal/hooks';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionButton } from '@/table/ActionButton';
+import { getUser } from '@/workspace/selectors';
 
 const CustomerCreateDialog = lazyComponent(() =>
-  import('@waldur/customer/create/CustomerCreateDialog').then((module) => ({
+  import('@/customer/create/CustomerCreateDialog').then((module) => ({
     default: module.CustomerCreateDialog,
   })),
 );

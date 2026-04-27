@@ -13,18 +13,15 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { LONG_STALE_TIME } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { getQuotaCellProps } from '@waldur/marketplace/resources/details/ResourceComponentItem';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import {
-  getResourceAccessEndpoints,
-  isSshFormat,
-} from '@waldur/resource/utils';
-import { showSuccess } from '@waldur/store/notify';
+import { LONG_STALE_TIME } from '@/core/constants';
+import { Link } from '@/core/Link';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { getQuotaCellProps } from '@/marketplace/resources/details/ResourceComponentItem';
+import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { getResourceAccessEndpoints, isSshFormat } from '@/resource/utils';
+import { showSuccess } from '@/store/notify';
 
 interface ResourceQuickInfoProps {
   resource: Resource;

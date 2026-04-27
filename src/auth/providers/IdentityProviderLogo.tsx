@@ -1,7 +1,7 @@
 import React from 'react';
 
-import { ENV } from '@waldur/core/config';
-import WaldurLogo from '@waldur/images/logo.svg';
+import { ENV } from '@/core/config';
+import WaldurLogo from '@/images/logo.svg';
 
 import {
   EDUTEAMS_IDP,

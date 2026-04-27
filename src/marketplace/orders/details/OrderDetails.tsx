@@ -1,18 +1,18 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { translate } from '@waldur/i18n';
-import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { PlanSection } from '@waldur/marketplace/details/plan/PlanSection';
-import { OrderErredView } from '@waldur/marketplace/resources/resource-pending/OrderErredView';
-import { OrderInProgressView } from '@waldur/marketplace/resources/resource-pending/OrderInProgressView';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
-import { useTitle } from '@waldur/navigation/title';
-import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { translate } from '@/i18n';
+import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { PlanSection } from '@/marketplace/details/plan/PlanSection';
+import { OrderErredView } from '@/marketplace/resources/resource-pending/OrderErredView';
+import { OrderInProgressView } from '@/marketplace/resources/resource-pending/OrderInProgressView';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { useTitle } from '@/navigation/title';
+import { IBreadcrumbItem, PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 
 import { OrderActionsButton } from '../actions/OrderActionsButton';
 
@@ -33,7 +33,7 @@ import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceRenewal } from './type-based/ResourceRenewal';
 import { UserSubmittedFieldsTab } from './UserSubmittedFieldsTab';
 
-import '@waldur/core/CustomCard.scss';
+import '@/core/CustomCard.scss';
 
 const getOrderPageTabs = (props: OrderDetailsProps): PageBarTab[] => {
   const tabs = [

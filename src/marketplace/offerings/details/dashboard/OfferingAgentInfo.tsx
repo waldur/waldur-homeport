@@ -1,14 +1,14 @@
 import { FC, useCallback } from 'react';
 import { AgentIdentity } from 'waldur-js-client';
 
-import { formatDateTime, formatUptime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import FormTable from '@waldur/form/FormTable';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime, formatUptime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import FormTable from '@/form/FormTable';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { renderFieldOrDash } from '@/table/utils';
 
 const AgentPackagesDialog = lazyComponent(() =>
   import('./AgentPackagesDialog').then((module) => ({

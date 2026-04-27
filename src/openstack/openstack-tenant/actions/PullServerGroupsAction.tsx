@@ -2,9 +2,9 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { openstackTenantsPullServerGroups } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { AsyncActionButton } from '@waldur/resource/actions/AsyncActionButton';
-import { validateState } from '@waldur/resource/actions/base';
+import { translate } from '@/i18n';
+import { AsyncActionButton } from '@/resource/actions/AsyncActionButton';
+import { validateState } from '@/resource/actions/base';
 
 import { TenantActionProps } from './types';
 

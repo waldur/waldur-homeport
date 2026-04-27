@@ -1,19 +1,19 @@
 import { useCallback } from 'react';
 import { reduxForm } from 'redux-form';
 
-import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { SelectField, StringField, TextField } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { MonacoField } from '@waldur/form/MonacoField';
-import { NumberField } from '@waldur/form/NumberField';
-import { TimezoneField } from '@waldur/form/TimezoneField';
-import { translate } from '@waldur/i18n';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
+import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { SelectField, StringField, TextField } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { DateTimeField } from '@/form/DateTimeField';
+import { MonacoField } from '@/form/MonacoField';
+import { NumberField } from '@/form/NumberField';
+import { TimezoneField } from '@/form/TimezoneField';
+import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
 
 import { RESOURCE_ACTION_FORM } from './constants';
 

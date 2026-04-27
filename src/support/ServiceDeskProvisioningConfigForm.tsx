@@ -1,13 +1,13 @@
 import { FC } from 'react';
 
-import { TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
+import { TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
 import {
   DefaultOfferingEditPanel,
   OfferingEditField,
-} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
-import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
+} from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
 
 const fields: OfferingEditField[] = [
   {

@@ -1,9 +1,9 @@
 import { FC, useCallback, useMemo } from 'react';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { SimpleTable } from '@waldur/table/SimpleTable';
-import { Column } from '@waldur/table/types';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
 
 interface TopProvidersTableProps {
   data: any[];

@@ -6,7 +6,7 @@ import {
   OrderStatsResponse,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
+import { STALE_TIME } from '@/core/constants';
 
 import { ProvisioningSummary } from './types'; // 5 minutes
 

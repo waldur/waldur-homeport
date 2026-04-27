@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { DestroyInstanceParams } from '@waldur/openstack/api';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { DestroyInstanceParams } from '@/openstack/api';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 import { getDeleteField } from './utils';
 

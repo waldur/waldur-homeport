@@ -8,18 +8,18 @@ import {
   AgentIdentity,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { StringField, TextField, FieldError, SubmitButton } from '@waldur/form';
-import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { providerOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { StringField, TextField, FieldError, SubmitButton } from '@/form';
+import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { useInvalidateAgentIdentities } from './utils';
 

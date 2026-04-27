@@ -8,18 +8,18 @@ import {
   CustomerUser,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Role } from '@waldur/permissions/types';
-import { getCustomerRoles } from '@waldur/permissions/utils';
-import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
-import { RoleGroup } from '@waldur/project/team/RoleGroup';
-import { useNotify } from '@waldur/store/hooks';
-import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Role } from '@/permissions/types';
+import { getCustomerRoles } from '@/permissions/utils';
+import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
+import { RoleGroup } from '@/project/team/RoleGroup';
+import { useNotify } from '@/store/hooks';
+import { getCustomer } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 import { UserGroup } from './UserGroup';
 

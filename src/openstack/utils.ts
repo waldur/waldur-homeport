@@ -1,9 +1,9 @@
-import { ENV } from '@waldur/core/config';
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionContext } from '@waldur/resource/actions/types';
+import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionContext } from '@/resource/actions/types';
 
 import { listToDict } from '../core/utils';
 

@@ -2,8 +2,8 @@ import { difference, isNumber, uniq, uniqueId } from 'lodash-es';
 import Papa from 'papaparse';
 import { Offering } from 'waldur-js-client';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
 
 const TYPE_FIELD = 'type';
 const ORG_FIELD = 'customer_uuid';

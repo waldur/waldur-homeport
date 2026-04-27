@@ -4,12 +4,12 @@ import { Alert, Form, Stack } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { required } from '@waldur/core/validators';
-import { SelectField, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { ChecklistQuestionForm } from '@waldur/marketplace-checklist/types';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { required } from '@/core/validators';
+import { SelectField, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
+import { ActionButton } from '@/table/ActionButton';
 
 interface FieldValue {
   answer?;

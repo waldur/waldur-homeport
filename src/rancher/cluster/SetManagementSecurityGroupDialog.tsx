@@ -3,17 +3,17 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { rancherClustersCreateManagementSecurityGroup } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
 import {
   getCIDRPlaceholder,
   validateIPv4CIDR,
   validateIPv6CIDR,
-} from '@waldur/openstack/openstack-security-groups/rule-editor/CIDRField';
-import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RootState } from '@waldur/store/reducers';
+} from '@/openstack/openstack-security-groups/rule-editor/CIDRField';
+import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RootState } from '@/store/reducers';
 
 const selector = formValueSelector(RESOURCE_ACTION_FORM);
 

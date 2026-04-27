@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { CallCoiConfiguration } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { MermaidChart } from '@waldur/core/MermaidChart';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { Badge } from '@/core/Badge';
+import { MermaidChart } from '@/core/MermaidChart';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface Props {
   resolve: {

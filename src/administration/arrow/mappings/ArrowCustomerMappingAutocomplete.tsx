@@ -3,8 +3,8 @@ import { Props as SelectProps } from 'react-select';
 import { BaseFieldProps, Field } from 'redux-form';
 import { adminArrowCustomerMappingsList } from 'waldur-js-client';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 interface ArrowCustomerMappingAutocompleteProps {
   name?: string;

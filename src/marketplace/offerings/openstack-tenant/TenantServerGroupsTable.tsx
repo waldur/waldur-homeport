@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { OpenstackServerGroupsListData } from 'waldur-js-client';
 
-import { OfferingServerGroupsList } from '@waldur/openstack/openstack-server-groups/OfferingServerGroupsList';
+import { OfferingServerGroupsList } from '@/openstack/openstack-server-groups/OfferingServerGroupsList';
 
 export const TenantServerGroupsTable: FunctionComponent<{ offering }> = ({
   offering,

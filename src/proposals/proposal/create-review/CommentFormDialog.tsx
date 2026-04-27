@@ -1,12 +1,12 @@
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { SubmitButton, TextField } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { required } from '@/core/validators';
+import { SubmitButton, TextField } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface OwnProps {
   resolve: { title?; onSubmit; value? };

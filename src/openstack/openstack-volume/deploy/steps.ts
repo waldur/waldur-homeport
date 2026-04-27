@@ -1,12 +1,12 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
-import { VOLUME_TYPE } from '@waldur/openstack/constants';
-import { getVolumeNameValidators } from '@waldur/openstack/utils';
+} from '@/marketplace/deploy/steps/constants';
+import { FormCloudStep } from '@/marketplace/deploy/steps/FormCloudStep';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
+import { VOLUME_TYPE } from '@/openstack/constants';
+import { getVolumeNameValidators } from '@/openstack/utils';
 
 import { FormVolumeStep } from './FormVolumeStep';
 

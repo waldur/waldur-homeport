@@ -1,12 +1,12 @@
 import { LinkSimpleIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { getUser } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { DialogActionItem } from '@/resource/actions/DialogActionItem';
+import { ActionItemType } from '@/resource/actions/types';
+import { getUser } from '@/workspace/selectors';
 
 const LinkDialog = lazyComponent(() =>
   import('./LinkDialog').then((module) => ({ default: module.LinkDialog })),

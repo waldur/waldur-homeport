@@ -2,11 +2,11 @@ import { Col, Form, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { marketplaceOfferingPermissionsList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
-import { translate } from '@waldur/i18n';
-import { Customer } from '@waldur/workspace/types';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
+import { translate } from '@/i18n';
+import { Customer } from '@/workspace/types';
 
 export const ProviderOfferingPermissions = ({
   customer,

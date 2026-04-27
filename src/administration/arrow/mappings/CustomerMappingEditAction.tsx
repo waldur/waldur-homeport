@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { EditModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
 
 const CustomerMappingEditDialog = lazyComponent(() =>
   import('./CustomerMappingEditDialog').then((module) => ({

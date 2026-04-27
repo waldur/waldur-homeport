@@ -5,13 +5,13 @@ import { useAsync } from 'react-use';
 import { change, Field, formValueSelector, isSubmitting } from 'redux-form';
 import { supportTemplatesList, Template } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { InputGroup } from '@waldur/customer/create/InputGroup';
-import { SelectField, TextField } from '@waldur/form';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { InputGroup } from '@/customer/create/InputGroup';
+import { SelectField, TextField } from '@/form';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { RootState } from '@/store/reducers';
 
 import { TEMPLATE_TYPE_TO_NAME } from '../types/constants';
 

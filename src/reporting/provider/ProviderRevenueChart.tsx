@@ -3,10 +3,10 @@ import { FC, useCallback, useMemo } from 'react';
 import { Row } from 'react-bootstrap';
 import { ServiceProviderRevenues } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { BarChart } from '@waldur/reporting/users/charts/BarChart';
+import { ChartCard } from '@/core/ChartCard';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { BarChart } from '@/reporting/users/charts/BarChart';
 
 interface ProviderRevenueChartProps {
   data: ServiceProviderRevenues[];

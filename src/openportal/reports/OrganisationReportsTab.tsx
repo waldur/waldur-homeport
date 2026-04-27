@@ -19,11 +19,11 @@ import {
 import { useSelector } from 'react-redux';
 import { projectsList } from 'waldur-js-client';
 
-import { getNextPageUrl } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { translate } from '@waldur/i18n';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getNextPageUrl } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { LoadingErred } from '@/core/LoadingErred';
+import { translate } from '@/i18n';
+import { getCustomer } from '@/workspace/selectors';
 
 import {
   fetchOfferingMapping,

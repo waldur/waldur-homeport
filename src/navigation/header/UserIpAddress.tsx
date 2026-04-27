@@ -1,5 +1,5 @@
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { translate } from '@waldur/i18n';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { translate } from '@/i18n';
 
 export const UserIpAddress = ({ ip }) => (
   <div className="menu-item" data-kt-menu-trigger="click">

@@ -1,5 +1,5 @@
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { UserDetailsButton } from '@waldur/user/UserDetailsButton';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { UserDetailsButton } from '@/user/UserDetailsButton';
 
 import { EditUserButton } from './EditUserButton';
 import { UserRemoveButton } from './UserRemoveButton';

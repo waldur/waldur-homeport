@@ -7,23 +7,23 @@ import { useToggle } from 'react-use';
 import { Field, FieldArray } from 'redux-form';
 import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { Tip } from '@waldur/core/Tooltip';
-import { required } from '@waldur/core/validators';
-import { FieldError, FormGroup, SelectField, StringField } from '@waldur/form';
-import { Select } from '@waldur/form/themed-select';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { loadFloatingIps, loadSubnets } from '@waldur/openstack/api';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { UI_STALE_TIME } from '@/core/constants';
+import { Tip } from '@/core/Tooltip';
+import { required } from '@/core/validators';
+import { FieldError, FormGroup, SelectField, StringField } from '@/form';
+import { Select } from '@/form/themed-select';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { loadFloatingIps, loadSubnets } from '@/openstack/api';
 import {
   getIPsInRange,
   isIPInRange,
-} from '@waldur/openstack/openstack-network/utils';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/openstack/openstack-network/utils';
+import { ActionButton } from '@/table/ActionButton';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { getDefaultFloatingIps, formatSubnet } from '../utils';
 

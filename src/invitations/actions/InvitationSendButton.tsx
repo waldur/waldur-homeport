@@ -3,10 +3,10 @@ import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { userInvitationsSend } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { getCustomer, getUser, getProject } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { getCustomer, getUser, getProject } from '@/workspace/selectors';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 

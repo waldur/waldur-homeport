@@ -2,16 +2,16 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { keysList, SshKey } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { KeysListExpandableRow } from '@waldur/user/keys/KeysListExpandableRow';
-import { useUser } from '@waldur/workspace/hooks';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { KeysListExpandableRow } from '@/user/keys/KeysListExpandableRow';
+import { useUser } from '@/workspace/hooks';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { KeyCreateButton } from './KeyCreateButton';
 import { KeyRemoveButton } from './KeyRemoveButton';

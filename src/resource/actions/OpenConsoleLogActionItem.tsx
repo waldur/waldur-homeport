@@ -2,8 +2,8 @@ import { CodeBlockIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { showErrorResponse } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { showErrorResponse } from '@/store/notify';
 
 import { ActionItem } from './ActionItem';
 import { ActionValidator } from './types';

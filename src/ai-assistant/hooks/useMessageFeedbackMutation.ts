@@ -5,8 +5,8 @@ import {
   type FeedbackCategoryEnum,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface FeedbackSubmitBody {
   score: boolean;

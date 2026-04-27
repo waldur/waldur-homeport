@@ -3,19 +3,19 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { marketplaceOfferingUsersList, User } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
-import { PROVIDER_OFFERING_USERS_FORM_ID } from '@waldur/marketplace/service-providers/constants';
-import { OfferingUsersExpandableRow } from '@waldur/marketplace/service-providers/offering-users/OfferingUsersExpandableRow';
-import { ProviderOfferingUsersFilter } from '@waldur/marketplace/service-providers/offering-users/ProviderOfferingUsersFilter';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { useUser } from '@waldur/workspace/hooks';
+import { formatDateTime } from '@/core/dateUtils';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
+import { PROVIDER_OFFERING_USERS_FORM_ID } from '@/marketplace/service-providers/constants';
+import { OfferingUsersExpandableRow } from '@/marketplace/service-providers/offering-users/OfferingUsersExpandableRow';
+import { ProviderOfferingUsersFilter } from '@/marketplace/service-providers/offering-users/ProviderOfferingUsersFilter';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
   user?: User;

@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Offering } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { UI_STALE_TIME } from '@/core/constants';
+import { formatUsageValue } from '@/core/formatNumber';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 import { getComponentUsageMonthlyList } from '../../api';
 

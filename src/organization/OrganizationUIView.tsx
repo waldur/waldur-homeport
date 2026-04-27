@@ -8,21 +8,21 @@ import { FunctionComponent, useMemo } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { CustomerProfile } from '@waldur/customer/dashboard/CustomerProfile';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { isDescendantOf } from '@waldur/navigation/useTabs';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
+import { CustomerProfile } from '@/customer/dashboard/CustomerProfile';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { IBreadcrumbItem } from '@/navigation/types';
+import { isDescendantOf } from '@/navigation/useTabs';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import {
   checkIsServiceManager,
   getCustomer,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 const getDashboardState = (state: StateDeclaration) => {
   if (state.name === 'organization-manage') {

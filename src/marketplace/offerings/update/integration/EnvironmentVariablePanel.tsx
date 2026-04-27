@@ -2,9 +2,9 @@ import { XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Field, FormSection } from 'redux-form';
 
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface OwnProps {
   index: number;

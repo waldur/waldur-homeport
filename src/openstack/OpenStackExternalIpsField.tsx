@@ -2,8 +2,8 @@ import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
 import { Form } from 'react-bootstrap';
 import { BaseFieldArrayProps, FieldArray, FormSection } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { StringField } from './StringField';
 

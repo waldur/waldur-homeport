@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SecretValueField } from '@waldur/marketplace/SecretValueField';
-import { OrderDetailsProps } from '@waldur/marketplace/types';
-import { BooleanField } from '@waldur/table/BooleanField';
+import { ENV } from '@/core/config';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SecretValueField } from '@/marketplace/SecretValueField';
+import { OrderDetailsProps } from '@/marketplace/types';
+import { BooleanField } from '@/table/BooleanField';
 
 export const OpenStackTenantDetails: FunctionComponent<OrderDetailsProps> = ({
   order: { attributes },

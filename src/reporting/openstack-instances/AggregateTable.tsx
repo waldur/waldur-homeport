@@ -1,12 +1,12 @@
 import { FC, useCallback } from 'react';
 import { OpenStackInstanceAggregate } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { SimpleTable } from '@waldur/table/SimpleTable';
-import { Column } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ChartCard } from '@/core/ChartCard';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface AggregateTableProps {
   data: OpenStackInstanceAggregate[];

@@ -1,12 +1,12 @@
-import { virtualMachineName } from '@waldur/azure/common/validators';
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
+import { virtualMachineName } from '@/azure/common/validators';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
   PlanStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
+} from '@/marketplace/deploy/steps/constants';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
 import { FormHardwareStep } from './FormHardwareStep';
 import { FormLocationStep } from './FormLocationStep';

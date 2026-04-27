@@ -4,10 +4,10 @@ import { Dropdown } from 'react-bootstrap';
 import { SubmissionError } from 'redux-form';
 import { CustomerCredit, customerCreditsUpdate } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
 
 import { getCreditInitialValues, serializeCustomerCredit } from './utils';
 

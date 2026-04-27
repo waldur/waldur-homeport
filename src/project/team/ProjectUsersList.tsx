@@ -5,15 +5,15 @@ import {
   UserRoleDetails,
 } from 'waldur-js-client';
 
-import { TeamTableComponent } from '@waldur/customer/team/TeamTableComponent';
-import { getProjectRoles } from '@waldur/permissions/utils';
-import { createFetcher } from '@waldur/table/api';
+import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
+import { getProjectRoles } from '@/permissions/utils';
+import { createFetcher } from '@/table/api';
 import {
   ProjectsListUsersFilter,
   selectProjectsListUsersFilter,
-} from '@waldur/table/generated/ProjectsListUsersFilter';
-import { useTable } from '@waldur/table/useTable';
-import { getProject } from '@waldur/workspace/selectors';
+} from '@/table/generated/ProjectsListUsersFilter';
+import { useTable } from '@/table/useTable';
+import { getProject } from '@/workspace/selectors';
 
 import { ProjectPermisionActions } from './ProjectPermisionActions';
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';

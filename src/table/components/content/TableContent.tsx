@@ -2,9 +2,9 @@ import { ErrorBoundary } from '@sentry/react';
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { ErrorMessage } from '@waldur/ErrorMessage';
-import { ErrorView } from '@waldur/ErrorView';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { ErrorMessage } from '@/ErrorMessage';
+import { ErrorView } from '@/ErrorView';
 
 import { useTableContext } from '../../context';
 import { GridBody } from '../../GridBody';

@@ -99,8 +99,8 @@ React Final Form requires all form-related components within `<Form>` context:
 ## FormGroup Components
 
 ### Available FormGroup Types
-1. **`@waldur/form/FormGroup`** - Redux Form wrapper with state management
-2. **`@waldur/marketplace/offerings/FormGroup`** - Simple wrapper for labels/help
+1. **`@/form/FormGroup`** - Redux Form wrapper with state management
+2. **`@/marketplace/offerings/FormGroup`** - Simple wrapper for labels/help
 
 ### FormGroup Benefits
 - **Reduced Code Duplication**: Eliminates repetitive label/field structures

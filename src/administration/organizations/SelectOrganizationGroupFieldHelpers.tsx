@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { components } from 'react-select';
 
-import { organizationGroupAutocomplete } from '@waldur/customer/list/autcompletes';
-import { RIGHT_ARROW_HTML } from '@waldur/customer/list/constants';
-import { translate } from '@waldur/i18n';
+import { organizationGroupAutocomplete } from '@/customer/list/autcompletes';
+import { RIGHT_ARROW_HTML } from '@/customer/list/constants';
+import { translate } from '@/i18n';
 
 export const OrganizationGroupFieldOption: FC<any> = (props) => (
   <components.Option {...props}>

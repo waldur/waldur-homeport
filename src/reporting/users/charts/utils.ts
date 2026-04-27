@@ -1,5 +1,5 @@
-import { translate } from '@waldur/i18n';
-import { ExportData } from '@waldur/table/exporters/types';
+import { translate } from '@/i18n';
+import { ExportData } from '@/table/exporters/types';
 
 /**
  * Common helper to format chart data for export (XLSX, CSV)

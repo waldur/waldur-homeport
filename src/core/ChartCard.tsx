@@ -2,11 +2,11 @@ import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import React, { useCallback, useRef } from 'react';
 import { Card, Dropdown } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import exportAs from '@waldur/table/exporters';
-import { ExportData } from '@waldur/table/exporters/types';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import exportAs from '@/table/exporters';
+import { ExportData } from '@/table/exporters/types';
 
 interface ChartCardProps {
   title: string;

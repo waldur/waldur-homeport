@@ -9,11 +9,11 @@ import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { proposalProtectedCallsSendInvitations } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
-import { useNotify } from '@waldur/store/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
+import { useNotify } from '@/store/hooks';
 
 const DirectEmailInviteDialog = lazyComponent(() =>
   import('./DirectEmailInviteDialog').then((m) => ({

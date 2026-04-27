@@ -7,22 +7,22 @@ import {
   assignmentItemsForceUnblock,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 const StaffOverrideDialog = lazyComponent(() =>
-  import('@waldur/proposals/StaffOverrideDialog').then((m) => ({
+  import('@/proposals/StaffOverrideDialog').then((m) => ({
     default: m.StaffOverrideDialog,
   })),
 );

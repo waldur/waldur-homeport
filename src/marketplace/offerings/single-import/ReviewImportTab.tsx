@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Col, Row, Alert } from 'react-bootstrap';
 
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
 
 import { useFormData } from './utils';
 

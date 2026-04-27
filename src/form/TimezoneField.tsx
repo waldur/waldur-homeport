@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { useMemo, FunctionComponent } from 'react';
 
-import { TIMEZONES } from '@waldur/core/timezones';
-import { WindowedSelect } from '@waldur/form/themed-select';
+import { TIMEZONES } from '@/core/timezones';
+import { WindowedSelect } from '@/form/themed-select';
 
 function getTimezoneMetadata(zone: string) {
   const zonedDate = DateTime.utc().setZone(zone);

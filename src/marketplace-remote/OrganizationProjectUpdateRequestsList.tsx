@@ -4,8 +4,8 @@ import { useSelector } from 'react-redux';
 import {
   MarketplaceProjectUpdateRequestsFilter,
   selectMarketplaceProjectUpdateRequestsFilter,
-} from '@waldur/table/generated/MarketplaceProjectUpdateRequestsFilter';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/MarketplaceProjectUpdateRequestsFilter';
+import { getCustomer } from '@/workspace/selectors';
 
 import { BaseProjectUpdateRequestsList } from './BaseProjectUpdateRequestsList';
 

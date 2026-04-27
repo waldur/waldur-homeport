@@ -1,12 +1,12 @@
 import { FunctionComponent, useMemo } from 'react';
 import { AccessSubnet, accessSubnetsList } from 'waldur-js-client';
 
-import { CustomerEditPanelProps } from '@waldur/customer/details/types';
-import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { CustomerEditPanelProps } from '@/customer/details/types';
+import { FilteredEventsButton } from '@/events/FilteredEventsButton';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { AccessSubnetCreateButton } from './AccessSubnetCreateButton';
 import { AccessSubnetRowActions } from './AccessSubnetRowActions';

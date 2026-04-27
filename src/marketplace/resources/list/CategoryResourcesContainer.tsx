@@ -3,8 +3,8 @@ import React from 'react';
 import { useAsync } from 'react-use';
 import { marketplaceCategoriesRetrieve } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import { CategoryResourcesList } from './CategoryResourcesList';
 

@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { ExternalLink } from '@/core/ExternalLink';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { ExpandableEventField } from './ExpandableEventField';
 import { Event } from './types';

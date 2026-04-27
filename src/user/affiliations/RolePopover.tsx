@@ -2,12 +2,12 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { Accordion, Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { PermissionOptions } from '@waldur/administration/roles/PermissionOptions';
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { PermissionOptions } from '@/administration/roles/PermissionOptions';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 const RoleDetailsDialog = ({ role }) => (
   <ModalDialog

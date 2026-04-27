@@ -1,12 +1,12 @@
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { useOrganizationGroups } from '@/marketplace/common/utils';
+import { openModalDialog } from '@/modal/actions';
 
 const SetAccessPolicyDialog = lazyComponent(() =>
-  import('@waldur/marketplace/offerings/actions/SetAccessPolicyDialog').then(
+  import('@/marketplace/offerings/actions/SetAccessPolicyDialog').then(
     (module) => ({
       default: module.SetAccessPolicyDialog,
     }),

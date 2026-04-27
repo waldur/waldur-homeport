@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { NestedPartition } from 'waldur-js-client';
 
-import { CheckOrX } from '@waldur/core/CheckOrX';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { CheckOrX } from '@/core/CheckOrX';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface OwnProps {
   row: NestedPartition;

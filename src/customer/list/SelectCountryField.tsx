@@ -5,10 +5,10 @@ import { components } from 'react-select';
 import { Field } from 'redux-form';
 import { customersCountriesList } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { WindowedSelect } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
+import { STALE_TIME } from '@/core/constants';
+import { WindowedSelect } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
 
 const CountryRenderer = (option) => (
   <span>

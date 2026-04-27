@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import type { ToSConsentDashboard } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 type TableType =
   | 'versionAdoption'

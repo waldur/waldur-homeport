@@ -4,8 +4,8 @@ import {
   OfferingUserState,
 } from 'waldur-js-client';
 
-import { MINUTE } from '@waldur/core/constants';
-import { useUser } from '@waldur/workspace/hooks';
+import { MINUTE } from '@/core/constants';
+import { useUser } from '@/workspace/hooks';
 
 const PENDING_STATES: OfferingUserState[] = [
   'Pending account linking',

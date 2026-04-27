@@ -4,11 +4,11 @@ import {
   supportIssuesCreate,
 } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { router } from '@waldur/router';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { formDataOptions } from '@/core/api';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { router } from '@/router';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const sendIssueCreateRequest = async (
   payload: IssueRequest,

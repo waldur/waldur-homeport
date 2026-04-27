@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsDeleteEndpoint } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 export const DeleteEndpointButton = ({ endpoint, offering, refetch }) => {
   const dispatch = useDispatch();

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { projectsRetrieve } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { STALE_TIME } from '@/core/constants';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 
 export const useShouldConcealPrices = (projectUuid?: string) => {
   const globalConceal = isFeatureVisible(MarketplaceFeatures.conceal_prices);

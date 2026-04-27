@@ -4,29 +4,29 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { paymentsPartialUpdate } from 'waldur-js-client';
 
-import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { formatISODate } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { EDIT_PAYMENT_FORM_ID } from '@waldur/customer/payments/constants';
-import { PaymentProofRenderer } from '@waldur/customer/payments/PaymentProofRenderer';
+import { formDataOptions, fileSerializer } from '@/core/api';
+import { formatISODate } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { EDIT_PAYMENT_FORM_ID } from '@/customer/payments/constants';
+import { PaymentProofRenderer } from '@/customer/payments/PaymentProofRenderer';
 import {
   getInitialValues,
   updatePaymentsList,
-} from '@waldur/customer/payments/utils';
+} from '@/customer/payments/utils';
 import {
   FileUploadField,
   FormContainer,
   NumberField,
   SubmitButton,
-} from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
-import { Payment } from '@waldur/workspace/types';
+} from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
+import { Payment } from '@/workspace/types';
 
 const PaymentUpdateDialog: FunctionComponent<
   InjectedFormProps & { resolve: Payment }

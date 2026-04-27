@@ -2,9 +2,9 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { maintenanceAnnouncementsDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 export const MaintenanceDeleteAction = ({ row, refetch }) => {
   const dispatch = useDispatch();

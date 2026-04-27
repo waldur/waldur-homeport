@@ -1,6 +1,6 @@
-import { EventGroup } from '@waldur/events/types';
-import { getProjectContext } from '@waldur/events/utils';
-import { translate } from '@waldur/i18n';
+import { EventGroup } from '@/events/types';
+import { getProjectContext } from '@/events/utils';
+import { translate } from '@/i18n';
 
 import { ProjectsEnum } from '../EventsEnums';
 

@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { SelectField } from '@/form';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { ROLE_TYPES } from '../../permissions/constants';
 

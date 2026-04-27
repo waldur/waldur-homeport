@@ -4,11 +4,11 @@ import { useDispatch, useStore } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { adminArrowCustomerMappingsImportLicense } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showError, showSuccess } from '@/store/notify';
 
 import { Step1SelectCustomer } from './Step1SelectCustomer';
 import { Step2SelectVendorOffering } from './Step2SelectVendorOffering';

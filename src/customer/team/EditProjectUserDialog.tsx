@@ -9,16 +9,16 @@ import {
   projectsUpdateUser,
 } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Role } from '@waldur/permissions/types';
-import { getProjectRoles } from '@waldur/permissions/utils';
-import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
-import { RoleGroup } from '@waldur/project/team/RoleGroup';
-import { showErrorResponse } from '@waldur/store/notify';
+import { FormContainer, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Role } from '@/permissions/types';
+import { getProjectRoles } from '@/permissions/utils';
+import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
+import { RoleGroup } from '@/project/team/RoleGroup';
+import { showErrorResponse } from '@/store/notify';
 
 import { ProjectGroup } from './ProjectGroup';
 import { UserGroup } from './UserGroup';

@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { projectEndDateChangeRequestsList, Project } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getUser } from '@waldur/workspace/selectors';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getUser } from '@/workspace/selectors';
 
 import { ChangeEndDateRequestDialog } from './ChangeEndDateRequestDialog';
 import { PendingRequestDialog } from './PendingRequestDialog';

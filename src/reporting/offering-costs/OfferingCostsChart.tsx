@@ -1,9 +1,9 @@
 import { FC, useCallback, useMemo } from 'react';
 import { OfferingCost } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
+import { ChartCard } from '@/core/ChartCard';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
 
 import { BarChart, BarChartItem } from '../users/charts/BarChart';
 

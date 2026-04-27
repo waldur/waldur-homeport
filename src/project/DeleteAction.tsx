@@ -1,7 +1,7 @@
 import { TrashIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { useProjectDelete } from './useProjectDelete';
 

@@ -3,9 +3,9 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { usersScimSyncAll } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 export const ScimSyncButton = () => {
   const dispatch = useDispatch();

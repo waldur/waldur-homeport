@@ -4,26 +4,26 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { InvitationPolicyService } from '@waldur/invitations/actions/InvitationPolicyService';
-import { formatInvitationState } from '@waldur/invitations/choices';
-import { choices } from '@waldur/invitations/choices';
-import { InvitationActions } from '@waldur/invitations/InvitationActions';
-import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
-import { InvitationsMultiSelectActions } from '@waldur/invitations/InvitationsMultiSelectActions';
-import { createFetcher } from '@waldur/table/api';
+import Avatar from '@/core/Avatar';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { InvitationPolicyService } from '@/invitations/actions/InvitationPolicyService';
+import { formatInvitationState } from '@/invitations/choices';
+import { choices } from '@/invitations/choices';
+import { InvitationActions } from '@/invitations/InvitationActions';
+import { InvitationExpandableRow } from '@/invitations/InvitationExpandableRow';
+import { InvitationsMultiSelectActions } from '@/invitations/InvitationsMultiSelectActions';
+import { createFetcher } from '@/table/api';
 import {
   selectUserInvitationsFilter,
   UserInvitationsFilter,
-} from '@waldur/table/generated/UserInvitationsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
-import { useUser } from '@waldur/workspace/hooks';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
+} from '@/table/generated/UserInvitationsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { RoleField } from '@/user/affiliations/RoleField';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { ProjectPermissionsLogButton } from './ProjectPermissionsLogButton';
 import { useTeamTableTabs } from './tabs';

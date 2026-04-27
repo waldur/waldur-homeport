@@ -5,7 +5,7 @@ import { describe, expect, it, vi, beforeEach } from 'vitest';
 import { SupportMenu } from './SupportMenu';
 
 vi.mock('react-redux');
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {
@@ -27,10 +27,10 @@ vi.mock('./FooterDropdown', () => ({
 vi.mock('./IssuesLink', () => ({
   IssuesLink: () => <div data-testid="issues-link">Issues</div>,
 }));
-vi.mock('@waldur/navigation/header/DocsLink', () => ({
+vi.mock('@/navigation/header/DocsLink', () => ({
   DocsLink: () => <div data-testid="docs-link">Docs</div>,
 }));
-vi.mock('@waldur/store/notify', () => ({
+vi.mock('@/store/notify', () => ({
   showSuccess: vi.fn(),
 }));
 

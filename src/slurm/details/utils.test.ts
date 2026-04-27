@@ -9,7 +9,7 @@ import userUsages from './fixtures/user-usages.json';
 import { loadCharts } from './utils';
 
 vi.mock('waldur-js-client');
-vi.mock('@waldur/marketplace/common/api');
+vi.mock('@/marketplace/common/api');
 
 describe('SLURM allocation usage chart formatter', () => {
   beforeEach(() => {

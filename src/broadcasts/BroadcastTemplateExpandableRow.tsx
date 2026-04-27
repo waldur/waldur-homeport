@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { BroadcastMessage } from 'waldur-js-client';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import './BroadcastTemplateExpandableRow.scss';
 

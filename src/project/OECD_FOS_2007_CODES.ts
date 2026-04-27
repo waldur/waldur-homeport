@@ -1,4 +1,4 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const OECD_FOS_2007_CODES = [
   { value: '1.1', label: translate('Mathematics') },

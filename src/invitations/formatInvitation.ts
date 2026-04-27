@@ -1,6 +1,6 @@
-import { translate } from '@waldur/i18n';
-import { RoleType } from '@waldur/permissions/types';
-import { formatRoleType } from '@waldur/permissions/utils';
+import { translate } from '@/i18n';
+import { RoleType } from '@/permissions/types';
+import { formatRoleType } from '@/permissions/utils';
 
 // Minimal interface for invitation formatting
 // Works with Invitation, GroupInvitation, and VisibleInvitationDetails

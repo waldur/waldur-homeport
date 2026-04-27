@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { getProviderUsageComponents } from './api';
 import { ResourceUsageFormContainer } from './ResourceUsageFormContainer';

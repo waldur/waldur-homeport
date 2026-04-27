@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 import { User } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 import {
   isProfileAttributeEnabled,
   ProfileAttribute,
-} from '@waldur/user/support/profileAttributes';
+} from '@/user/support/profileAttributes';
 
 interface ProfileCompleteness {
   is_complete: boolean;

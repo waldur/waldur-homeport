@@ -2,9 +2,9 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { User } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 
 import { fetchDataAccessVisibility } from './api';
 import { DataAccessVisibility } from './DataAccessVisibility';

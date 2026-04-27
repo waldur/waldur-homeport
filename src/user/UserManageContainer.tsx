@@ -3,70 +3,70 @@ import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import { usersRetrieve } from 'waldur-js-client';
 
-import { usePermissionView } from '@waldur/auth/PermissionLayout';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures, UserFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { IBreadcrumbItem, PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { UserProfileHero } from '@waldur/user/dashboard/UserProfileHero';
-import { useUser } from '@waldur/workspace/hooks';
+import { usePermissionView } from '@/auth/PermissionLayout';
+import { UI_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures, UserFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { IBreadcrumbItem, PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { UserProfileHero } from '@/user/dashboard/UserProfileHero';
+import { useUser } from '@/workspace/hooks';
 
 import { CompleteYourProfileBanner } from './CompleteYourProfileBanner';
 import { useProfileCompleteness } from './useProfileCompleteness';
 
 const UserDetailsTable = lazyComponent(() =>
-  import('@waldur/user/support/UserDetailsTable').then((module) => ({
+  import('@/user/support/UserDetailsTable').then((module) => ({
     default: module.UserDetailsTable,
   })),
 );
 const UserEditTab = lazyComponent(() =>
-  import('@waldur/user/support/UserEditTab').then((module) => ({
+  import('@/user/support/UserEditTab').then((module) => ({
     default: module.UserEditTab,
   })),
 );
 const UserTermination = lazyComponent(() =>
-  import('@waldur/user/support/UserTermination').then((module) => ({
+  import('@/user/support/UserTermination').then((module) => ({
     default: module.UserTermination,
   })),
 );
 const UserDeleteAccount = lazyComponent(() =>
-  import('@waldur/user/support/UserDeleteAccount').then((module) => ({
+  import('@/user/support/UserDeleteAccount').then((module) => ({
     default: module.UserDeleteAccount,
   })),
 );
 const UserEvents = lazyComponent(() =>
-  import('@waldur/user/dashboard/UserEvents').then((module) => ({
+  import('@/user/dashboard/UserEvents').then((module) => ({
     default: module.UserEvents,
   })),
 );
 const KeysList = lazyComponent(() =>
-  import('@waldur/user/keys/KeysList').then((module) => ({
+  import('@/user/keys/KeysList').then((module) => ({
     default: module.KeysList,
   })),
 );
 const UserOfferingList = lazyComponent(() =>
-  import('@waldur/user/UserOfferingList').then((module) => ({
+  import('@/user/UserOfferingList').then((module) => ({
     default: module.UserOfferingList,
   })),
 );
 const UserAffiliationsList = lazyComponent(() =>
-  import('@waldur/user/affiliations/UserAffiliationsList').then((module) => ({
+  import('@/user/affiliations/UserAffiliationsList').then((module) => ({
     default: module.UserAffiliationsList,
   })),
 );
 const ReviewerProfileTab = lazyComponent(() =>
-  import('@waldur/user/ReviewerProfileTab').then((module) => ({
+  import('@/user/ReviewerProfileTab').then((module) => ({
     default: module.ReviewerProfileTab,
   })),
 );
 const DataAccessTab = lazyComponent(() =>
-  import('@waldur/user/data-access/DataAccessTab').then((module) => ({
+  import('@/user/data-access/DataAccessTab').then((module) => ({
     default: module.DataAccessTab,
   })),
 );

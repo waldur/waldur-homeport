@@ -3,15 +3,15 @@ import userEvent from '@testing-library/user-event';
 import { Form } from 'react-final-form';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import * as config from '@waldur/core/config';
+import * as config from '@/core/config';
 
 import { UsernameGroup, validateUsername } from './UsernameGroup';
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: vi.fn((str) => str),
 }));
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {

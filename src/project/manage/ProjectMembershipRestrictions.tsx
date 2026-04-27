@@ -4,23 +4,23 @@ import { FC, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { customersRetrieve, Project } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
+import { STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Panel } from '@/core/Panel';
 import {
   getRestrictionsArray,
   MembershipRestrictionFormItems,
   RestrictionField,
-} from '@waldur/core/restrictions';
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { usePermission } from '@waldur/permissions/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+} from '@/core/restrictions';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { usePermission } from '@/permissions/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 import { getInitialValues } from './restrictions/EditProjectMembershipRestrictionsDialog';
 

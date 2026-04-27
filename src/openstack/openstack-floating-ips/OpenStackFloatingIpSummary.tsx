@@ -1,7 +1,7 @@
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const OpenStackFloatingIpSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;

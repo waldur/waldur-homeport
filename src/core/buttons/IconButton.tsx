@@ -3,8 +3,8 @@ import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { Tip, TipProps } from '@waldur/core/Tooltip';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { Tip, TipProps } from '@/core/Tooltip';
 
 interface IconButtonProps {
   /** Icon to display */

@@ -2,8 +2,8 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { formatJsxTemplate } from '@waldur/i18n/translate';
+import { translate } from '@/i18n';
+import { formatJsxTemplate } from '@/i18n/translate';
 
 import type { RmqStatsResponse } from './api';
 import { getQueueHealth } from './RabbitMQQueueHealthBadge';

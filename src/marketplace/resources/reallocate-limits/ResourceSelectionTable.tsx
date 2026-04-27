@@ -9,11 +9,11 @@ import {
   Tooltip,
 } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { Limits } from '@waldur/marketplace/common/types';
+import { Badge } from '@/core/Badge';
+import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { Limits } from '@/marketplace/common/types';
 
 import { ResourceSelection } from './types';
 

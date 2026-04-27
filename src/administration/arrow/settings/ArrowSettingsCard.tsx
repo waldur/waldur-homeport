@@ -3,17 +3,17 @@ import { Card, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import type { ArrowSettings } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDateTime } from '@/core/dateUtils';
+import { ExternalLink } from '@/core/ExternalLink';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { useArrowSettings } from '../api';
 

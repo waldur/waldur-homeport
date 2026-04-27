@@ -1,5 +1,5 @@
-import { WarnCard } from '@waldur/core/WarnCard';
-import { translate } from '@waldur/i18n';
+import { WarnCard } from '@/core/WarnCard';
+import { translate } from '@/i18n';
 
 interface AcceptTosWarningProps {
   isSelf?: boolean;

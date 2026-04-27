@@ -7,10 +7,10 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { StatisticsCard } from '@waldur/core/StatisticsCard';
-import { translate } from '@waldur/i18n';
+import { fetchResultCount } from '@/core/api';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { StatisticsCard } from '@/core/StatisticsCard';
+import { translate } from '@/i18n';
 
 import { Call } from '../types';
 

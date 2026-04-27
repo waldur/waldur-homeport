@@ -1,6 +1,6 @@
 import { type GenderEnum } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 /** Matches backend `User.gender` - use functions to defer translation  */
 export const getGenderChoices = (): Array<{

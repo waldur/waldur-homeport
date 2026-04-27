@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon';
 import { Field } from 'redux-form';
 
-import { FormGroup } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
+import { FormGroup } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
 
 interface PluginOptions {
   default_resource_termination_offset_in_days?: number;

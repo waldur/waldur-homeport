@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { Accordion, Card } from 'react-bootstrap';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
 
 import { PermissionOptions } from './PermissionOptions';
 

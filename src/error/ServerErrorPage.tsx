@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { goBack } from '@waldur/error/utils';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
+import { goBack } from '@/error/utils';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
 
 import { ErrorPageView } from './ErrorPageView';
 

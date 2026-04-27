@@ -5,10 +5,10 @@ import {
   supportFeedbackReportRetrieve,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
-import { translate } from '@waldur/i18n';
-import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Panel } from '@/core/Panel';
+import { translate } from '@/i18n';
+import { RateStars } from '@/proposals/proposal/create-review/RateStars';
 
 import './CustomerSupportRating.scss';
 

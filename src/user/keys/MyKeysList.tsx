@@ -1,4 +1,4 @@
-import { useUser } from '@waldur/workspace/hooks';
+import { useUser } from '@/workspace/hooks';
 
 import { KeysList } from './KeysList';
 

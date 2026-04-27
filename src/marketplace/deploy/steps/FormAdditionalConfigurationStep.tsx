@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Tip } from '@waldur/core/Tooltip';
-import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Tip } from '@/core/Tooltip';
+import { OptionsForm } from '@/marketplace/common/OptionsForm';
 
 import { orderCustomerSelector } from '../selectors';
 import { FormStepProps } from '../types';

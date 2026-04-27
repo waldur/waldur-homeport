@@ -10,9 +10,9 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showInfo, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { showErrorResponse, showInfo, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 export const OrdersBulkActions = ({
   rows,

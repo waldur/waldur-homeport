@@ -16,10 +16,10 @@ import {
   CachedProjectUsageReport as UsageReportApiItem,
 } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getProject } from '@waldur/workspace/selectors';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getProject } from '@/workspace/selectors';
 
 import {
   fetchUsageReports,

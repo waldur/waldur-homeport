@@ -2,19 +2,19 @@ import { MagnifyingGlassIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StringField } from '@waldur/form';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StringField } from '@/form';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 import {
   getCredentialsForm,
   showBackendId,
-} from '@waldur/marketplace/common/registry';
-import { openModalDialog } from '@waldur/modal/actions';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
-import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
-import { SlurmOfferingActions } from '@waldur/site-agent/SlurmOfferingActions';
-import { ActionButton } from '@waldur/table/ActionButton';
+} from '@/marketplace/common/registry';
+import { openModalDialog } from '@/modal/actions';
+import { TENANT_TYPE } from '@/openstack/constants';
+import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { SlurmOfferingActions } from '@/site-agent/SlurmOfferingActions';
+import { ActionButton } from '@/table/ActionButton';
 
 import {
   DefaultOfferingEditPanel,
@@ -27,7 +27,7 @@ import { OfferingEditPanelProps } from './types';
 import { useUpdateOfferingIntegration } from './utils';
 
 const OpenStackDiscoveryDialog = lazyComponent(() =>
-  import('@waldur/openstack/openstack-discovery/OpenStackDiscoveryDialog').then(
+  import('@/openstack/openstack-discovery/OpenStackDiscoveryDialog').then(
     (module) => ({
       default: module.OpenStackDiscoveryDialog,
     }),

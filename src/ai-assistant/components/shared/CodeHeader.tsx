@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 
 interface CodeHeaderProps {
   language?: string;

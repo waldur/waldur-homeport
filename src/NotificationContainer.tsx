@@ -9,7 +9,7 @@ import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import NotificationsSystem, { dismissNotification } from 'reapop';
 
-import { useTheme } from '@waldur/theme/useTheme';
+import { useTheme } from '@/theme/useTheme';
 
 import { FeaturedIcon } from './core/FeaturedIcon';
 import { lightTheme, darkTheme } from './notification/theme';

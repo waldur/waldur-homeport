@@ -6,12 +6,12 @@ import {
   ProtectedRoundRequest,
 } from 'waldur-js-client';
 
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
-import { WizardFormThirdPage } from '@waldur/proposals/update/rounds/WizardFormThirdPage';
-import { getRoundInitialValues } from '@waldur/proposals/utils';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
+import { WizardFormThirdPage } from '@/proposals/update/rounds/WizardFormThirdPage';
+import { getRoundInitialValues } from '@/proposals/utils';
 
 interface EditRoundAllocationDialogProps {
   resolve: {

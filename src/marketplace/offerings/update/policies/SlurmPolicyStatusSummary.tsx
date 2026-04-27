@@ -6,11 +6,11 @@ import {
   SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 interface SlurmPolicyStatusSummaryProps {
   policyUuid: string;

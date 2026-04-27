@@ -3,18 +3,15 @@ import { Form, InputGroup } from 'react-bootstrap';
 import { Field as FormField } from 'redux-form';
 import { BasePublicPlan } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
-import { translate } from '@waldur/i18n';
-import { Limits } from '@waldur/marketplace/common/types';
-import {
-  parseIntField,
-  formatIntField,
-} from '@waldur/marketplace/common/utils';
-import { getResourceComponentValidator } from '@waldur/marketplace/offerings/store/limits';
-import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
-import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/ChangedLimitField';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import { translate } from '@/i18n';
+import { Limits } from '@/marketplace/common/types';
+import { parseIntField, formatIntField } from '@/marketplace/common/utils';
+import { getResourceComponentValidator } from '@/marketplace/offerings/store/limits';
+import { OfferingLimits } from '@/marketplace/offerings/store/types';
+import { ChangedLimitField } from '@/marketplace/resources/change-limits/ChangedLimitField';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface ComponentRowProps {
   component: {

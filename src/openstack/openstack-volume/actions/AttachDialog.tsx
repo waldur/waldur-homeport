@@ -6,13 +6,13 @@ import {
   openstackVolumesAttach,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { getAllPages } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const AttachDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },

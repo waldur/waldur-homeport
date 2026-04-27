@@ -1,9 +1,9 @@
 import { CircleIcon } from '@phosphor-icons/react';
 import { Col, FormGroup, FormLabel, Row } from 'react-bootstrap';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 export const ConnectionStatusIndicator = ({ status }) => {
   const getStatusClassName = (integrationStatus) => {

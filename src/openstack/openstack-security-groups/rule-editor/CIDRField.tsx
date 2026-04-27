@@ -1,7 +1,7 @@
 import { Field } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { EthernetType } from '@waldur/openstack/types';
+import { translate } from '@/i18n';
+import { EthernetType } from '@/openstack/types';
 
 import { FormField } from './FormField';
 

@@ -3,13 +3,13 @@ import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Proposal, ProposalReview } from '@waldur/proposals/types';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { useUser } from '@waldur/workspace/hooks';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { Proposal, ProposalReview } from '@/proposals/types';
+import { ActionButton } from '@/table/ActionButton';
+import { useUser } from '@/workspace/hooks';
 
 import { RateStars } from '../create-review/RateStars';
 

@@ -2,7 +2,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
+import { Badge } from '@/core/Badge';
 
 interface NetworkStatisticsCardProps {
   title: string;

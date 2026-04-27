@@ -1,9 +1,9 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 interface PriceTooltipProps {
   estimated?: boolean;

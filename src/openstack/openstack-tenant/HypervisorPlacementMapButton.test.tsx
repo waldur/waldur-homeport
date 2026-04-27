@@ -7,7 +7,7 @@ import { HypervisorPlacementMapButton } from './HypervisorPlacementMapButton';
 
 const mockStore = configureMockStore();
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 

@@ -1,7 +1,7 @@
 import { CubeIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import Avatar from '@waldur/core/Avatar';
+import Avatar from '@/core/Avatar';
 
 interface CategoryThumbnailProps {
   title: string;

@@ -4,14 +4,14 @@ import { FC, useCallback } from 'react';
 import { Form } from 'react-final-form';
 import { customersAddUser, customersCreate } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { useNotify } from '@waldur/store/hooks';
-import { getCurrentUser } from '@waldur/user/UsersService';
-import { useSetUser, useUser } from '@waldur/workspace/hooks';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { RoleEnum } from '@/permissions/enums';
+import { useNotify } from '@/store/hooks';
+import { getCurrentUser } from '@/user/UsersService';
+import { useSetUser, useUser } from '@/workspace/hooks';
 
 import * as constants from './constants';
 import { CustomerCreateForm } from './CustomerCreateForm';

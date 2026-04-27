@@ -4,18 +4,18 @@ import { FC, useEffect } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import { checklistsAdminRetrieve } from 'waldur-js-client';
 
-import { useSettingsUrlSync } from '@waldur/administration/settings/useSettingsUrlSync';
-import { CheckOrX } from '@waldur/core/CheckOrX';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { getUUID } from '@waldur/core/utils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { useSettingsUrlSync } from '@/administration/settings/useSettingsUrlSync';
+import { CheckOrX } from '@/core/CheckOrX';
+import { UI_STALE_TIME } from '@/core/constants';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { getUUID } from '@/core/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { OfferingSectionProps } from '../types';
 

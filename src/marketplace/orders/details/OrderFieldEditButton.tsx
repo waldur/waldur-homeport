@@ -1,8 +1,8 @@
 import { useDispatch } from 'react-redux';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { openModalDialog } from '@waldur/modal/actions';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { openModalDialog } from '@/modal/actions';
 
 import { EditOrderFieldDialog } from './EditOrderFieldDialog';
 

@@ -10,15 +10,15 @@ import {
   CreateModalButton,
   DeleteButton,
   EditModalButton,
-} from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const ScienceSubDomainForm = lazyComponent(() =>
   import('./ScienceSubDomainForm').then((module) => ({

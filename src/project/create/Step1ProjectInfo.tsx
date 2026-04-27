@@ -1,10 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { fetchCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
-import { Customer } from '@waldur/workspace/types';
+import { STALE_TIME } from '@/core/constants';
+import { fetchCustomerProjects } from '@/customer/workspace/fetchCustomer';
+import { WizardModal, WizardStepProps } from '@/wizard';
+import { Customer } from '@/workspace/types';
 
 import { CreditGroup } from './CreditGroup';
 import { DescriptionGroup } from './DescriptionGroup';

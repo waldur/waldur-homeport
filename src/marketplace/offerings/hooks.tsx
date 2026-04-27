@@ -2,15 +2,15 @@ import { GearIcon, PlusIcon, UploadSimpleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useUser } from '@waldur/workspace/hooks';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { IBreadcrumbItem } from '@/navigation/types';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 import { getServiceProviderByCustomer } from '../common/api';
 import { Offering, ServiceProvider } from '../types';
@@ -20,7 +20,7 @@ import { OfferingBreadcrumbPopover } from './OfferingBreadcrumbPopover';
 import { SINGLE_OFFERING_IMPORT_FORM_ID } from './single-import/constants';
 
 const SiteAgentConfigDialog = lazyComponent(() =>
-  import('@waldur/site-agent/SiteAgentConfigDialog').then((module) => ({
+  import('@/site-agent/SiteAgentConfigDialog').then((module) => ({
     default: module.SiteAgentConfigDialog,
   })),
 );

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { initialState } from '@waldur/table/store.fixture';
+import { initialState } from '@/table/store.fixture';
 
 import * as actions from './actions';
 import { getTableState } from './selectors';

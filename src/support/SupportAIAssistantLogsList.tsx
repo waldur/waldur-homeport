@@ -7,21 +7,21 @@ import {
   ThreadSession,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { translate } from '@waldur/i18n';
-import { SupportAIAssistantLogsExpandableRow } from '@waldur/support/SupportAIAssistantLogsExpandableRow';
-import { createFetcher } from '@waldur/table/api';
-import { BooleanField } from '@waldur/table/BooleanField';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { formatUsageValue } from '@/core/formatNumber';
+import { translate } from '@/i18n';
+import { SupportAIAssistantLogsExpandableRow } from '@/support/SupportAIAssistantLogsExpandableRow';
+import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
 import {
   ChatThreadsFilter as SupportAIAssistantLogsFilter,
   selectChatThreadsFilter as selectSupportAIAssistantLogsFilter,
-} from '@waldur/table/generated/ChatThreadsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/ChatThreadsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const severityLabels: Record<InjectionSeverityEnum, string> = {
   critical: translate('Critical'),

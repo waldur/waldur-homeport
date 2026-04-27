@@ -6,20 +6,20 @@ import {
   ProposalProposalsListData,
 } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 import {
   getNonCanceledProposalStates,
   getProposalStateOptions,
-} from '@waldur/proposals/utils';
-import { createFetcher } from '@waldur/table/api';
+} from '@/proposals/utils';
+import { createFetcher } from '@/table/api';
 import {
   ProposalProposalsFilter,
   selectProposalProposalsFilter,
-} from '@waldur/table/generated/ProposalProposalsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/ProposalProposalsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';

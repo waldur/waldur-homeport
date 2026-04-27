@@ -3,14 +3,11 @@ import { useMutation } from '@tanstack/react-query';
 import { Stack } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { getHeaders } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse } from '@waldur/store/notify';
-import {
-  UsersService,
-  clearImpersonationData,
-} from '@waldur/user/UsersService';
-import { getImpersonatorUser, getUser } from '@waldur/workspace/selectors';
+import { getHeaders } from '@/core/api';
+import { translate } from '@/i18n';
+import { showErrorResponse } from '@/store/notify';
+import { UsersService, clearImpersonationData } from '@/user/UsersService';
+import { getImpersonatorUser, getUser } from '@/workspace/selectors';
 
 import './ImpersonationBar.scss';
 

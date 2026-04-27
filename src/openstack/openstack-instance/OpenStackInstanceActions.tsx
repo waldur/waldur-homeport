@@ -3,17 +3,17 @@ import {
   openstackInstancesSetOk,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionGroup } from '@waldur/marketplace/resources/actions/ActionGroup';
-import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
-import { ProviderActionsGroup } from '@waldur/marketplace/resources/actions/ProviderActionsGroup';
-import { PullMarketplaceResourceAction } from '@waldur/marketplace/resources/actions/PullMarketplaceResourceAction';
-import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
-import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { ShowUsageAction } from '@waldur/marketplace/resources/list/ShowUsageAction';
-import { SetResourceErredAction } from '@waldur/resource/actions/SetResourceErredAction';
-import { SetResourceOkAction } from '@waldur/resource/actions/SetResourceOkAction';
-import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
+import { translate } from '@/i18n';
+import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
+import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
+import { ProviderActionsGroup } from '@/marketplace/resources/actions/ProviderActionsGroup';
+import { PullMarketplaceResourceAction } from '@/marketplace/resources/actions/PullMarketplaceResourceAction';
+import { ChangeLimitsAction } from '@/marketplace/resources/change-limits/ChangeLimitsAction';
+import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
+import { ShowUsageAction } from '@/marketplace/resources/list/ShowUsageAction';
+import { SetResourceErredAction } from '@/resource/actions/SetResourceErredAction';
+import { SetResourceOkAction } from '@/resource/actions/SetResourceOkAction';
+import { UnlinkActionItem } from '@/resource/actions/UnlinkActionItem';
 
 import { ChangeFlavorAction } from './actions/ChangeFlavorAction';
 import { ConsoleAction } from './actions/ConsoleAction';

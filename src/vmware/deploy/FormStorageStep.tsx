@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { Field, formValues } from 'redux-form';
 
-import { FieldError } from '@waldur/form';
-import { StaticField } from '@waldur/form/StaticField';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { maxAmount } from '@waldur/marketplace/common/utils';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { FieldError } from '@/form';
+import { StaticField } from '@/form/StaticField';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { maxAmount } from '@/marketplace/common/utils';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 import { useVMwareLimitsLoader } from './utils';
 

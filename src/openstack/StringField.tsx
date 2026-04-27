@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { FormControl } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
+import { required } from '@/core/validators';
 
 // eslint-disable-next-line @typescript-eslint/no-unused-vars
 const FormField: FC<WrappedFieldProps> = ({ input, meta, ...rest }) => (

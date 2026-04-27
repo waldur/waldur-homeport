@@ -5,13 +5,13 @@ import {
   MaintenanceAnnouncementOffering,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { isOwnerOrStaff } from '@/workspace/selectors';
 
 import { IMPACT_LABELS } from './utils';
 

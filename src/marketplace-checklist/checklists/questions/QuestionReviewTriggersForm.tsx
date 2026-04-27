@@ -1,8 +1,8 @@
 import { Field } from 'react-final-form';
 
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const QuestionReviewTriggersForm = () => (
   <FormGroup

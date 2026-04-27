@@ -5,21 +5,17 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   providerOfferingsAutocomplete,
   userAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import {
-  showError,
-  showErrorResponse,
-  showSuccess,
-} from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
+} from '@/marketplace/common/autocompletes';
+import { closeModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
   resolve: {

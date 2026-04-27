@@ -3,7 +3,7 @@ import { Table } from 'react-bootstrap';
 import { FormName, FormSection, WrappedFieldArrayProps } from 'redux-form';
 import { OpenStackSecurityGroup } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { RuleAddButton } from './RuleAddButton';
 import { RuleRow } from './RuleRow';

@@ -1,6 +1,6 @@
-import { required } from '@waldur/core/validators';
-import { FormContainer, StringField, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { FormContainer, StringField, TextField } from '@/form';
+import { translate } from '@/i18n';
 
 export const BroadcastTemplateForm = ({
   submitting,

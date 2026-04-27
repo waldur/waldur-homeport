@@ -8,19 +8,19 @@ import React, { useState } from 'react';
 import { Form, Alert } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { required } from '@waldur/core/validators';
-import { SelectField, TextField } from '@waldur/form';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { validateIPv4CIDR } from '@waldur/openstack/openstack-security-groups/rule-editor/CIDRField';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { useUser } from '@waldur/workspace/hooks';
+import { AccordionCard } from '@/core/AccordionCard';
+import { required } from '@/core/validators';
+import { SelectField, TextField } from '@/form';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { validateIPv4CIDR } from '@/openstack/openstack-security-groups/rule-editor/CIDRField';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { useUser } from '@/workspace/hooks';
 
 import { validateNumberOrRange } from './multi-datacenter-k8s-types';
 

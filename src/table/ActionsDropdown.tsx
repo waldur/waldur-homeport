@@ -14,7 +14,7 @@ import {
 import { Variant } from 'react-bootstrap/esm/types';
 import { createPortal } from 'react-dom';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { DropdownActionItemType } from './types';
 

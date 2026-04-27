@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface SummaryData {
   totalInstances: number;

@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { Invoice } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
+import { translate } from '@/i18n';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 interface ResourceActionComponentProps {
   onToggle: (isOpen: boolean) => void;

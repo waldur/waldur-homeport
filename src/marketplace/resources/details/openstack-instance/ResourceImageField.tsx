@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { SYSTEM_IMAGES } from '@waldur/marketplace/deploy/utils';
+import { SYSTEM_IMAGES } from '@/marketplace/deploy/utils';
 
 import './ResourceImageField.scss';
 

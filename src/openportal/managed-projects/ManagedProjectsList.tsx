@@ -1,19 +1,19 @@
 import { useSelector } from 'react-redux';
 import { openportalManagedProjectsList } from 'waldur-js-client';
 
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   OpenportalManagedProjectsFilter,
   selectOpenportalManagedProjectsFilter,
-} from '@waldur/table/generated/OpenportalManagedProjectsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/OpenportalManagedProjectsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ManagedProjectActions } from './ManagedProjectActions';
 import { ManagedProjectExpandableRow } from './ManagedProjectExpandableRow';

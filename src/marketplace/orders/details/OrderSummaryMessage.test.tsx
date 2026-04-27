@@ -3,7 +3,7 @@ import { BillingTypeEnum } from 'waldur-js-client';
 
 import { getUpdateSummary } from './OrderSummaryMessage';
 
-vi.mock('@waldur/core/formatCurrency', () => ({
+vi.mock('@/core/formatCurrency', () => ({
   defaultCurrency: (val) => val,
 }));
 

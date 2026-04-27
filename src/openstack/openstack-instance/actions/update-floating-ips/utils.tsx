@@ -5,11 +5,11 @@ import { formValueSelector, reduxForm } from 'redux-form';
 import { openstackInstancesUpdateFloatingIps } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { loadFloatingIps } from '@waldur/openstack/api';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { type RootState } from '@waldur/store/reducers';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { loadFloatingIps } from '@/openstack/api';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { type RootState } from '@/store/reducers';
 
 import { formatSubnet } from '../../utils';
 

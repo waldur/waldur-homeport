@@ -1,16 +1,16 @@
 import { FunctionComponent } from 'react';
 import { reduxForm } from 'redux-form';
 
-import { getInitialValues } from '@waldur/core/filters';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
+import { getInitialValues } from '@/core/filters';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
 import {
   OfferingStateFilter,
   getStates,
-} from '@waldur/marketplace/offerings/list/OfferingStateFilter';
-import { TagFilter } from '@waldur/marketplace/tags/TagFilter';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+} from '@/marketplace/offerings/list/OfferingStateFilter';
+import { TagFilter } from '@/marketplace/tags/TagFilter';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { PROVIDER_OFFERINGS_FORM_ID } from './constants';
 

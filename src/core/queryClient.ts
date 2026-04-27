@@ -1,6 +1,6 @@
 import { QueryCache, QueryClient } from '@tanstack/react-query';
 
-import { router } from '@waldur/router';
+import { router } from '@/router';
 
 export const queryClient = new QueryClient({
   queryCache: new QueryCache({

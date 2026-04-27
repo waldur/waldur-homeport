@@ -3,23 +3,23 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { financialReportsList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatDate } from '@waldur/core/dateUtils';
-import { FinancialReportSendButton } from '@waldur/customer/list/FinancialReportSendButton';
-import { translate } from '@waldur/i18n';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { createFetcher } from '@waldur/table/api';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { ENV } from '@/core/config';
+import { formatDate } from '@/core/dateUtils';
+import { FinancialReportSendButton } from '@/customer/list/FinancialReportSendButton';
+import { translate } from '@/i18n';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 import {
   FinancialReportsFilter,
   FinancialReportsFilterFormId,
   selectFinancialReportsFilter,
-} from '@waldur/table/generated/FinancialReportsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { Customer } from '@waldur/workspace/types';
+} from '@/table/generated/FinancialReportsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { Customer } from '@/workspace/types';
 
 import { CurrentCostField } from './CurrentCostField';
 import { CustomerExpandableRow } from './CustomerExpandableRow';

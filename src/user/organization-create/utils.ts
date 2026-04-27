@@ -15,8 +15,8 @@ import {
   BlankEnum,
 } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
+import { formDataOptions } from '@/core/api';
+import { translate } from '@/i18n';
 
 import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';
 

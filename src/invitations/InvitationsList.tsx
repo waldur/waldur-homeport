@@ -2,24 +2,24 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { userInvitationsList } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDate } from '@waldur/core/dateUtils';
-import { CustomerPermissionsLogButton } from '@waldur/customer/team/CustomerPermissionsLogButton';
-import { useTeamTableTabs } from '@waldur/customer/team/tabs';
-import { TeamDropdownActions } from '@waldur/customer/team/TeamDropdownActions';
-import { translate } from '@waldur/i18n';
-import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
-import { useTitle } from '@waldur/navigation/title';
-import { createFetcher } from '@waldur/table/api';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDate } from '@/core/dateUtils';
+import { CustomerPermissionsLogButton } from '@/customer/team/CustomerPermissionsLogButton';
+import { useTeamTableTabs } from '@/customer/team/tabs';
+import { TeamDropdownActions } from '@/customer/team/TeamDropdownActions';
+import { translate } from '@/i18n';
+import { InvitationExpandableRow } from '@/invitations/InvitationExpandableRow';
+import { useTitle } from '@/navigation/title';
+import { createFetcher } from '@/table/api';
 import {
   selectUserInvitationsFilter,
   UserInvitationsFilter,
-} from '@waldur/table/generated/UserInvitationsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
-import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/UserInvitationsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { RoleField } from '@/user/affiliations/RoleField';
+import { exportRoleField } from '@/user/affiliations/RolePopover';
+import { getCustomer } from '@/workspace/selectors';
 
 import { formatInvitationState } from './choices';
 import { InvitationActions } from './InvitationActions';

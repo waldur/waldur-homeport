@@ -2,8 +2,8 @@ import { MinusIcon, PlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
-import { translate } from '@waldur/i18n';
+import { CompactIconButton } from '@/core/buttons/IconButton';
+import { translate } from '@/i18n';
 
 import { FormField } from './types';
 

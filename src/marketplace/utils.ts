@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { useExtraTabs } from '@waldur/navigation/context';
-import { useOfferingCategories } from '@waldur/navigation/sidebar/utils';
-import { Tab } from '@waldur/navigation/Tab';
-import { getUser } from '@waldur/workspace/selectors';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { useExtraTabs } from '@/navigation/context';
+import { useOfferingCategories } from '@/navigation/sidebar/utils';
+import { Tab } from '@/navigation/Tab';
+import { getUser } from '@/workspace/selectors';
 
 import { getCategoryItems } from './category/utils';
 

@@ -12,25 +12,25 @@ import {
   remoteWaldurApiRemoteCustomers,
 } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
 import {
   FieldError,
   SecretField,
   SelectField,
   StringField,
   SubmitButton,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { providerAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Category, ServiceProvider } from '@waldur/marketplace/types';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+} from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { providerAutocomplete } from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { Category, ServiceProvider } from '@/marketplace/types';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { CategoryMappingRulesField } from './CategoryMappingRulesField';
 

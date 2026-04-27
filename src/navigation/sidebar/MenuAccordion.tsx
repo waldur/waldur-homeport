@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 interface MenuAccordionProps {
   title: ReactNode;

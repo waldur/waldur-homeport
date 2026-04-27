@@ -6,7 +6,7 @@ import { reduxForm } from 'redux-form';
 import {
   AccountingRunningField,
   getOptions,
-} from '@waldur/customer/list/AccountingRunningField';
+} from '@/customer/list/AccountingRunningField';
 
 const PureCustomersListFilter: FunctionComponent = () => (
   <form className="form-inline min-w-200px">

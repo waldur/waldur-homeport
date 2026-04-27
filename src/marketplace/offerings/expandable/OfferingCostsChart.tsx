@@ -6,12 +6,12 @@ import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 import { marketplaceProviderOfferingsCostsList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { EChart } from '@waldur/core/EChart';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { type RootState } from '@waldur/store/reducers';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { EChart } from '@/core/EChart';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { type RootState } from '@/store/reducers';
 
 import { OFFERING_CUSTOMERS_LIST_FILTER } from './constants';
 import { OfferingCustomersListFilter } from './OfferingCustomersListFilter';

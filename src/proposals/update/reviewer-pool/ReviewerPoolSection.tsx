@@ -14,31 +14,31 @@ import {
   CallReviewerPool,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate, formatRelative } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess } from '@waldur/store/notify';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { formatDate, formatRelative } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess } from '@/store/notify';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
 import {
   CallReviewerPoolsFilter,
   selectCallReviewerPoolsFilter,
   InvitationStatusOptions,
-} from '@waldur/table/generated/CallReviewerPoolsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/CallReviewerPoolsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { PoolSummaryButton } from './PoolSummaryButton';
 import { ReviewerPoolExpandableRow } from './ReviewerPoolExpandableRow';
 import { useReviewerPoolTabs } from './tabs';
 
 const DirectEmailInviteDialog = lazyComponent(() =>
-  import('@waldur/proposals/manage/reviewer-discovery/DirectEmailInviteDialog').then(
+  import('@/proposals/manage/reviewer-discovery/DirectEmailInviteDialog').then(
     (m) => ({
       default: m.DirectEmailInviteDialog,
     }),
@@ -46,7 +46,7 @@ const DirectEmailInviteDialog = lazyComponent(() =>
 );
 
 const StaffOverrideDialog = lazyComponent(() =>
-  import('@waldur/proposals/StaffOverrideDialog').then((m) => ({
+  import('@/proposals/StaffOverrideDialog').then((m) => ({
     default: m.StaffOverrideDialog,
   })),
 );

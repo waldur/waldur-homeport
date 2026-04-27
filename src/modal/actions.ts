@@ -1,7 +1,7 @@
 import { ReactNode } from 'react';
 import { ModalProps } from 'react-bootstrap';
 
-import { createDeferred } from '@waldur/core/utils';
+import { createDeferred } from '@/core/utils';
 
 import { ConfirmationDialog } from './ConfirmationDialog';
 import { DeleteConfirmationDialog } from './DeleteConfirmationDialog';

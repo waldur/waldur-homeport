@@ -2,10 +2,10 @@ import { CaretDownIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useBoolean } from 'react-use';
 
-import { translate } from '@waldur/i18n';
-import { PriceField } from '@waldur/marketplace/resources/change-limits/PriceField';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { translate } from '@/i18n';
+import { PriceField } from '@/marketplace/resources/change-limits/PriceField';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { StateProps } from './connector';
 

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import type { TableSize } from './api';
 

@@ -3,11 +3,11 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { QuotasTable } from './QuotasTable';
 
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useTheme: () => 'light',
 }));
 
-vi.mock('@waldur/core/EChart', () => ({
+vi.mock('@/core/EChart', () => ({
   EChart: ({ options }) => (
     <div data-testid="echart">{JSON.stringify(options)}</div>
   ),

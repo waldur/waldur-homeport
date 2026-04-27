@@ -2,14 +2,14 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { userActionsList, UserAction } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   UserPendingActionsFilter,
   selectUserPendingActionsFilter,
-} from '@waldur/table/generated/UserPendingActionsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/UserPendingActionsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { PendingActionAlertItem } from './PendingActionAlertItem';
 import { RecalculateUserActionsButton } from './RecalculateUserActionsButton';

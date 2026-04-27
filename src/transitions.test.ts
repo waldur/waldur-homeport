@@ -11,7 +11,7 @@ const onStartHandlers: Array<{ criteria: any; callback: any }> = [];
 const onSuccessHandlers: Array<{ criteria: any; callback: any }> = [];
 const onErrorHandlers: Array<{ criteria: any; callback: any }> = [];
 
-vi.mock('@waldur/store/store', () => ({
+vi.mock('@/store/store', () => ({
   default: { dispatch: vi.fn(), getState: vi.fn() },
 }));
 

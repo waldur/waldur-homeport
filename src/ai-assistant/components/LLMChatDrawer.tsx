@@ -7,21 +7,21 @@ import {
 import { FC, useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AIDisclosureBanner } from '@waldur/ai-assistant/components/AIDisclosureDialog';
-import { ChatHistorySidebar } from '@waldur/ai-assistant/components/ChatHistorySidebar';
-import { LLMErrorBoundary } from '@waldur/ai-assistant/components/LLMErrorBoundary';
-import { Thread } from '@waldur/ai-assistant/components/Thread';
-import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
-import { ThreadRuntimeProvider } from '@waldur/ai-assistant/logic/ThreadRuntimeProvider';
+import { AIDisclosureBanner } from '@/ai-assistant/components/AIDisclosureDialog';
+import { ChatHistorySidebar } from '@/ai-assistant/components/ChatHistorySidebar';
+import { LLMErrorBoundary } from '@/ai-assistant/components/LLMErrorBoundary';
+import { Thread } from '@/ai-assistant/components/Thread';
+import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { ThreadRuntimeProvider } from '@/ai-assistant/logic/ThreadRuntimeProvider';
 import {
   acknowledgeDisclosure,
   isDisclosureAcknowledged,
-} from '@waldur/ai-assistant/utils';
-import { IconButton, MediumIconButton } from '@waldur/core/buttons/IconButton';
-import { closeDrawerDialog } from '@waldur/drawer/actions';
-import { translate } from '@waldur/i18n';
-import { useLayout } from '@waldur/metronic/layout/core';
-import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
+} from '@/ai-assistant/utils';
+import { IconButton, MediumIconButton } from '@/core/buttons/IconButton';
+import { closeDrawerDialog } from '@/drawer/actions';
+import { translate } from '@/i18n';
+import { useLayout } from '@/metronic/layout/core';
+import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 
 interface LLMChatDrawerProps {
   close?: () => void;

@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 
-import { SdkFunction } from '@waldur/table/api';
+import { SdkFunction } from '@/table/api';
 
 /**
  * Extracts the type of a single item from the data array

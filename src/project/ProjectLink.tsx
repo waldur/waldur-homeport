@@ -4,12 +4,12 @@ import { FC, PropsWithChildren } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { AtLeast } from '@waldur/core/types';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { AtLeast } from '@/core/types';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
 
 import { projectKindOptions } from './utils';
 

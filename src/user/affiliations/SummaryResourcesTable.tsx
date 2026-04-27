@@ -6,15 +6,15 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import { getStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { Customer } from '@waldur/workspace/types';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
+import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { Customer } from '@/workspace/types';
 
 import { ResourcesListActions } from './ResourcesListActions';
 

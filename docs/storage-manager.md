@@ -40,7 +40,7 @@ import {
   InvitationTokenStorage,
   GroupInvitationTokenStorage,
   LanguageStorage,
-} from '@waldur/core/StorageManager';
+} from '@/core/StorageManager';
 ```
 
 ### String Storage
@@ -311,7 +311,7 @@ This ensures your application doesn't crash due to corrupted storage data.
 When testing code that uses Storage Managers:
 
 ```typescript
-import { AuthTokenStorage } from '@waldur/core/StorageManager';
+import { AuthTokenStorage } from '@/core/StorageManager';
 
 // Mock the storage
 jest.spyOn(AuthTokenStorage, 'get').mockReturnValue('mock-token');
@@ -324,7 +324,7 @@ expect(AuthTokenStorage.get()).toBe('mock-token');
 For JSON storage:
 
 ```typescript
-import { RedirectStorage } from '@waldur/core/StorageManager';
+import { RedirectStorage } from '@/core/StorageManager';
 
 jest.spyOn(RedirectStorage, 'get').mockReturnValue({
   toState: 'home',

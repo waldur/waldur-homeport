@@ -1,6 +1,6 @@
-import { escapeHtml } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { Attachment } from '@waldur/issues/attachments/types';
+import { escapeHtml } from '@/core/utils';
+import { translate } from '@/i18n';
+import { Attachment } from '@/issues/attachments/types';
 
 // Simplified URL pattern to avoid catastrophic backtracking
 // Matches URLs starting with http://, https://, or www.

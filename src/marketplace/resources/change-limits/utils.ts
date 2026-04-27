@@ -10,19 +10,19 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
 import {
   filterOfferingComponents,
   getFormLimitParser,
   getFormLimitSerializer,
-} from '@waldur/marketplace/common/registry';
-import { LimitParser, Limits } from '@waldur/marketplace/common/types';
-import { getBillingPeriods } from '@waldur/marketplace/common/utils';
-import { parseOfferingLimits } from '@waldur/marketplace/offerings/store/limits';
-import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
-import { StateProps } from '@waldur/marketplace/resources/change-limits/connector';
+} from '@/marketplace/common/registry';
+import { LimitParser, Limits } from '@/marketplace/common/types';
+import { getBillingPeriods } from '@/marketplace/common/utils';
+import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
+import { OfferingLimits } from '@/marketplace/offerings/store/types';
+import { StateProps } from '@/marketplace/resources/change-limits/connector';
 
 export interface FetchedData {
   resource: Resource;

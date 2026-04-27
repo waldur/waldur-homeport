@@ -14,12 +14,12 @@ import {
   onboardingQuestionMetadataUpdate,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { QuestionGeneralForm } from '@waldur/marketplace-checklist/checklists/questions/QuestionGeneralForm';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { QuestionGeneralForm } from '@/marketplace-checklist/checklists/questions/QuestionGeneralForm';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { PredefinedQuestion } from './predefinedQuestions';
 

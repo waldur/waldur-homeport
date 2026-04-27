@@ -1,15 +1,15 @@
 import classNames from 'classnames';
 import React, { PropsWithChildren, useEffect, useRef, useState } from 'react';
 
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 import {
   DrawerComponent,
   MenuComponent,
   ScrollComponent,
   ToggleComponent,
-} from '@waldur/metronic/components';
-import { useLayout } from '@waldur/metronic/layout/core';
-import { useTheme } from '@waldur/theme/useTheme';
+} from '@/metronic/components';
+import { useLayout } from '@/metronic/layout/core';
+import { useTheme } from '@/theme/useTheme';
 
 import { BrandName } from './BrandName';
 import { SidebarFooter } from './SidebarFooter';

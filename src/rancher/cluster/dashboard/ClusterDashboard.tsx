@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 
 import { ClusterStatistics } from './ClusterStatistics';
 import { ClusterSummary } from './ClusterSummary';

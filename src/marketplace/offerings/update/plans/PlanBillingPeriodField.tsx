@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form/SelectField';
+import { required } from '@/core/validators';
+import { SelectField } from '@/form/SelectField';
 
 import { getBillingPeriods } from './constants';
 

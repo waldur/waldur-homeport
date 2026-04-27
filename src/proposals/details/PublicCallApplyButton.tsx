@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Variant } from 'react-bootstrap/types';
 import { ProtectedRound } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
 
 import { Call } from '../types';
 

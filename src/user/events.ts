@@ -1,6 +1,6 @@
-import { EventGroup } from '@waldur/events/types';
-import { getAffectedUserContext, getUserContext } from '@waldur/events/utils';
-import { translate } from '@waldur/i18n';
+import { EventGroup } from '@/events/types';
+import { getAffectedUserContext, getUserContext } from '@/events/utils';
+import { translate } from '@/i18n';
 
 import { SshEnum, UsersEnum } from '../EventsEnums';
 

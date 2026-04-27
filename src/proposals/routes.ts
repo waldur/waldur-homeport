@@ -1,12 +1,12 @@
 import { UIView } from '@uirouter/react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { fetchCustomer } from '@waldur/customer/workspace/fetchCustomer';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { fetchCustomer } from '@/customer/workspace/fetchCustomer';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
 
 export const states: StateDeclaration[] = [
   {
@@ -14,7 +14,7 @@ export const states: StateDeclaration[] = [
     url: '/call-management/:uuid/',
     parent: 'layout',
     component: lazyComponent(() =>
-      import('@waldur/organization/OrganizationUIView').then((module) => ({
+      import('@/organization/OrganizationUIView').then((module) => ({
         default: module.OrganizationUIView,
       })),
     ),

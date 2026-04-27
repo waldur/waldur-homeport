@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { Pagination } from '@waldur/table/types';
+import { translate } from '@/i18n';
+import { Pagination } from '@/table/types';
 import './TablePageSize.scss';
 
 const PAGE_SIZES = [5, 10, 25, 50, 100];

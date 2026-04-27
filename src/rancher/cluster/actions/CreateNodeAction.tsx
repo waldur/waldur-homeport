@@ -2,10 +2,10 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { RancherCluster } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { DialogActionButton } from '@/resource/actions/DialogActionButton';
 
 const CreateNodeDialog = lazyComponent(() =>
   import('../create/CreateNodeDialog').then((module) => ({

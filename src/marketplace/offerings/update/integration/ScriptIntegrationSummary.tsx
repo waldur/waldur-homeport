@@ -1,7 +1,7 @@
-import { CheckOrX } from '@waldur/core/CheckOrX';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { CheckOrX } from '@/core/CheckOrX';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { EditScriptButton } from './EditScriptButton';
 import { EditVarsButton } from './EditVarsButton';

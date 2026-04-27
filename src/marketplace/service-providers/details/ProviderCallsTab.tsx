@@ -1,4 +1,4 @@
-import { PublicCallsList } from '@waldur/proposals/PublicCallsList';
+import { PublicCallsList } from '@/proposals/PublicCallsList';
 
 export const ProviderCallsTab = (props) => {
   return (

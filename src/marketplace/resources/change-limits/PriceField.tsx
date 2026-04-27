@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { defaultCurrency } from '@/core/formatCurrency';
 
 interface PriceFieldProps {
   price: number;

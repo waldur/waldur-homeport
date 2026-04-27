@@ -15,11 +15,11 @@ import {
   ServiceProviderStatistics,
 } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getStates as getResourceStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { Link } from '@/core/Link';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getStates as getResourceStates } from '@/marketplace/resources/list/ResourceStateFilter';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 
 import { ChangesAmountBadge } from './ChangesAmountBadge';
 import IconPendingApproval from './icons/pending-approval.svg';

@@ -1,6 +1,6 @@
-import { EventGroup } from '@waldur/events/types';
-import { getCustomerContext } from '@waldur/events/utils';
-import { translate } from '@waldur/i18n';
+import { EventGroup } from '@/events/types';
+import { getCustomerContext } from '@/events/utils';
+import { translate } from '@/i18n';
 
 import { CustomersEnum } from '../EventsEnums';
 

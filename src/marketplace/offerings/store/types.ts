@@ -1,7 +1,7 @@
 import { CascadeConfig, ComponentMultiplierConfig } from 'waldur-js-client';
 
-import { K8sDefaultConfiguration } from '@waldur/marketplace/common/multi-datacenter-k8s-types';
-import { Option } from '@waldur/marketplace/common/registry';
+import { K8sDefaultConfiguration } from '@/marketplace/common/multi-datacenter-k8s-types';
+import { Option } from '@/marketplace/common/registry';
 
 export interface PlanFormData {
   archived: boolean;

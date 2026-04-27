@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import { getIconUrl } from '@waldur/core/api';
-import { LandingHeroSection } from '@waldur/dashboard/hero/LandingHeroSection';
-import DefaultDarkImage from '@waldur/dashboard/hero/servers-room-dark.png';
-import DefaultLightImage from '@waldur/dashboard/hero/servers-room-light.png';
-import { translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+import { getIconUrl } from '@/core/api';
+import { LandingHeroSection } from '@/dashboard/hero/LandingHeroSection';
+import DefaultDarkImage from '@/dashboard/hero/servers-room-dark.png';
+import DefaultLightImage from '@/dashboard/hero/servers-room-light.png';
+import { translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
 
 import { CategoriesList } from '../CategoriesList';
 import { OfferingsGroup } from '../OfferingsGroup';

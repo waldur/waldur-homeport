@@ -22,23 +22,23 @@ import {
   type ResourcePlanPeriod,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { parseDate } from '@waldur/core/dateUtils';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { Tip } from '@waldur/core/Tooltip';
-import { required } from '@waldur/core/validators';
+import { UI_STALE_TIME } from '@/core/constants';
+import { parseDate } from '@/core/dateUtils';
+import { LoadingErred } from '@/core/LoadingErred';
+import { Tip } from '@/core/Tooltip';
+import { required } from '@/core/validators';
 import {
   FieldError,
   NumberField,
   SelectField,
   StringField,
   TextField,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
+} from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { OfferingComponent } from '@/marketplace/types';
+import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
 
 import { getPeriodRange } from './api';
 import { UsageReportContext } from './types';

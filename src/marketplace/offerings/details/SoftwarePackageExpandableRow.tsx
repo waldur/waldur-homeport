@@ -6,11 +6,11 @@ import {
   SoftwarePackage,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { Badge } from '@/core/Badge';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 const SoftwarePackageList: FC<{ packages: NestedParentSoftware[] }> = ({
   packages,

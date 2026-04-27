@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 const getStorage = (): Storage => {
   if (ENV.authStorage === 'localStorage') {

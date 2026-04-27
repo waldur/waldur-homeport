@@ -7,10 +7,10 @@ import {
   PlanUsageResponse,
 } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { selectMarketplacePlansUsageStatsFilter } from '@waldur/table/generated/MarketplacePlansUsageStatsFilter';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { selectMarketplacePlansUsageStatsFilter } from '@/table/generated/MarketplacePlansUsageStatsFilter';
 
 import { AnalyticsMode, AnalyticsPageContent } from '../analytics';
 import { ReportingTitle } from '../ReportingTitle';

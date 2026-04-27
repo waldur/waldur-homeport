@@ -8,10 +8,10 @@ import {
   broadcastMessagesUpdate,
 } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { BroadcastFormData, BroadcastRequestData } from './types';
 

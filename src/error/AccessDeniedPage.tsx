@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
 
 import { ErrorPageView } from './ErrorPageView';
 

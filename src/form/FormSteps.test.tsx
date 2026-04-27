@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { FormSteps } from './FormSteps';
 
 // Mock PageBarTabs to render tabs content directly
-vi.mock('@waldur/marketplace/common/PageBarTabs', () => ({
+vi.mock('@/marketplace/common/PageBarTabs', () => ({
   PageBarTabs: ({
     tabs,
   }: {
@@ -21,7 +21,7 @@ vi.mock('@waldur/marketplace/common/PageBarTabs', () => ({
 }));
 
 // Mock Tooltip to render children directly
-vi.mock('@waldur/core/Tooltip', () => ({
+vi.mock('@/core/Tooltip', () => ({
   Tip: ({ children }: { children: React.ReactNode }) => <>{children}</>,
 }));
 

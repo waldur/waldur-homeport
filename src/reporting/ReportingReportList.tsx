@@ -2,13 +2,13 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { Tip } from '@waldur/core/Tooltip';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
+import { isFeatureVisible } from '@/features/connect';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import {
   getCategoryConfig,

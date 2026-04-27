@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { Screenshot } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 interface ImageThumbnailProps {
   image: Screenshot;

@@ -1,11 +1,11 @@
 import { startCase } from 'lodash';
 import { CustomerCredit, ProjectCredit } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { BooleanField } from '@waldur/table/BooleanField';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { BooleanField } from '@/table/BooleanField';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const CreditExpandableRow = ({
   row,

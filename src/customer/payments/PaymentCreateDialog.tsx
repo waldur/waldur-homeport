@@ -3,22 +3,22 @@ import { useDispatch, useSelector } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { paymentsCreate } from 'waldur-js-client';
 
-import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { formatISODate } from '@waldur/core/dateUtils';
-import { ADD_PAYMENT_FORM_ID } from '@waldur/customer/payments/constants';
+import { formDataOptions, fileSerializer } from '@/core/api';
+import { formatISODate } from '@/core/dateUtils';
+import { ADD_PAYMENT_FORM_ID } from '@/customer/payments/constants';
 import {
   FileUploadField,
   FormContainer,
   NumberField,
   SubmitButton,
-} from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
 
 import { updatePaymentsList } from './utils';
 

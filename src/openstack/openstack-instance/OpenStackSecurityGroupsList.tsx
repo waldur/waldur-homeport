@@ -3,14 +3,14 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { Card, Nav } from 'react-bootstrap';
 import { OpenStackInstance, openstackPortsRetrieve } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getUUID } from '@waldur/core/utils';
-import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
-import { translate } from '@waldur/i18n';
-import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { TablePlaceholder } from '@waldur/table/TablePlaceholder';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getUUID } from '@/core/utils';
+import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
+import { translate } from '@/i18n';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
+import { TablePlaceholder } from '@/table/TablePlaceholder';
 
 import { OpenStackSecurityGroupsTable } from '../openstack-security-groups/OpenStackSecurityGroupsDialog';
 

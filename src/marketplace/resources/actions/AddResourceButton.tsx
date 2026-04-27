@@ -2,10 +2,10 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useAsync } from 'react-use';
 import { marketplaceResourcesOfferingForSubresourcesList } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n/translate';
-import { OfferingLink } from '@waldur/marketplace/links/OfferingLink';
-import { Resource } from '@waldur/resource/types';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n/translate';
+import { OfferingLink } from '@/marketplace/links/OfferingLink';
+import { Resource } from '@/resource/types';
+import { ActionButton } from '@/table/ActionButton';
 
 interface AddResourceButtonProps {
   resource: Resource;

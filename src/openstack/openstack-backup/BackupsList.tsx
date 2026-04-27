@@ -1,15 +1,15 @@
 import { FunctionComponent, useMemo } from 'react';
 import { OpenStackBackup, openstackBackupsList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
-import { ResourceName } from '@waldur/resource/ResourceName';
-import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ResourceRowActions } from '@/resource/actions/ResourceRowActions';
+import { ResourceName } from '@/resource/ResourceName';
+import { ResourceState } from '@/resource/state/ResourceState';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { INSTANCE_TYPE } from '../constants';
 import { CreateBackupAction } from '../openstack-instance/actions/CreateBackupAction';

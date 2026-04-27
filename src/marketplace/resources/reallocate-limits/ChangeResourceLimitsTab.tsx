@@ -3,9 +3,9 @@ import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { Limits } from '@waldur/marketplace/common/types';
-import { getBillingPeriods } from '@waldur/marketplace/common/utils';
+import { translate } from '@/i18n';
+import { Limits } from '@/marketplace/common/types';
+import { getBillingPeriods } from '@/marketplace/common/utils';
 
 import { FetchedData, getRemainingMonths } from '../change-limits/utils';
 

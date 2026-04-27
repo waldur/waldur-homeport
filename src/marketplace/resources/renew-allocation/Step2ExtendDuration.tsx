@@ -3,11 +3,11 @@ import { FC, useCallback, useMemo } from 'react';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { formatDate, parseDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Field } from '@waldur/resource/summary';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { formatDate, parseDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { Field } from '@/resource/summary';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';

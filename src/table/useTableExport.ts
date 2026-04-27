@@ -2,12 +2,12 @@ import { isEqual } from 'lodash-es';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { isEmpty, orderByFilter } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { type RootState } from '@waldur/store/reducers';
-import { fetchAll } from '@waldur/table/api';
+import { isEmpty, orderByFilter } from '@/core/utils';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { type RootState } from '@/store/reducers';
+import { fetchAll } from '@/table/api';
 
 import { DASH_ESCAPE_CODE } from './constants';
 import exportAs from './exporters';

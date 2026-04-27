@@ -1,9 +1,9 @@
 import { useCallback } from 'react';
 import { marketplaceServiceProvidersProjectsList } from 'waldur-js-client';
 
-import { ProjectsListTable } from '@waldur/project/ProjectsList';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
+import { ProjectsListTable } from '@/project/ProjectsList';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 

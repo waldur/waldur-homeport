@@ -1,12 +1,12 @@
 import { supportTemplatesList, Template } from 'waldur-js-client';
 
-import { IssueTemplateTypeOptions } from '@waldur/administration/utils';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { IssueTemplateTypeOptions } from '@/administration/utils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { IssueTemplateCreateButton } from './IssueTemplateCreateButton';
 import { IssueTemplateRowActions } from './IssueTemplateRowActions';

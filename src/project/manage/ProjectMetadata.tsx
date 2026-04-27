@@ -3,21 +3,21 @@ import React, { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { Project, projectsChecklistRetrieve } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { usePermission } from '@waldur/permissions/hooks';
-import { useNotify } from '@waldur/store/hooks';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { useUser } from '@waldur/workspace/hooks';
+import { UI_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { usePermission } from '@/permissions/hooks';
+import { useNotify } from '@/store/hooks';
+import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 import { ParsedAnswer } from '../metadata/ParsedAnswer';
 

@@ -5,7 +5,7 @@ import {
   formatSecurityGroupProtocol,
   formatSecurityGroupRuleDirection,
   formatSecurityGroupRulePortRange,
-} from '@waldur/openstack/openstack-security-groups/utils';
+} from '@/openstack/openstack-security-groups/utils';
 
 export const SecurityGroupRuleCell: React.FC<{
   rule: OpenStackSecurityGroupRuleCreate;

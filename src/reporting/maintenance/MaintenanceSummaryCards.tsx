@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 import { MaintenanceStatsResponse } from 'waldur-js-client';
 
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { formatJsxTemplate, translate } from '@/i18n';
 
 interface MaintenanceSummaryCardsProps {
   stats: MaintenanceStatsResponse;

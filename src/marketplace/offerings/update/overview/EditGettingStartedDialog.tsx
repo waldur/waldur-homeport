@@ -5,13 +5,13 @@ import { connect, useDispatch, useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
-import { CodePreview } from '@waldur/core/CodePreview';
-import { Tip } from '@waldur/core/Tooltip';
-import { FormContainer, FormFooter, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { CodePreview } from '@/core/CodePreview';
+import { Tip } from '@/core/Tooltip';
+import { FormContainer, FormFooter, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { GETTING_STARTED_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';

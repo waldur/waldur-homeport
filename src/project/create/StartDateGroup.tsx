@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const StartDateGroup = ({ create }: { create?: boolean }) =>
   !create ||

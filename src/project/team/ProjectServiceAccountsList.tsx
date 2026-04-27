@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { ServiceAccountsList } from '@waldur/customer/service-accounts/ServiceAccountsList';
-import { getProject } from '@waldur/workspace/selectors';
+import { ServiceAccountsList } from '@/customer/service-accounts/ServiceAccountsList';
+import { getProject } from '@/workspace/selectors';
 
 export const ProjectServiceAccountsList = () => {
   const project = useSelector(getProject);

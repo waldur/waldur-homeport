@@ -3,11 +3,11 @@ import { FC, useState } from 'react';
 import { Alert, Card, Nav, Tab } from 'react-bootstrap';
 import { User } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useUser } from '@waldur/workspace/hooks';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
 
 import { fetchDataAccessVisibility } from './api';
 import { DataAccessSummaryCards } from './components/DataAccessSummaryCards';

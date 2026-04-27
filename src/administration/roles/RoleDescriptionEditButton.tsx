@@ -2,10 +2,10 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n/translate';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n/translate';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const RoleDescriptionEditDialog = lazyComponent(() =>
   import('./RoleDescriptionEditDialog').then((module) => ({

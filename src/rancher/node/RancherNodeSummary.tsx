@@ -1,8 +1,8 @@
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { KeyValueButton } from '@waldur/marketplace/resources/KeyValueButton';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { KeyValueButton } from '@/marketplace/resources/KeyValueButton';
+import { ResourceLink } from '@/resource/ResourceLink';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
 
 import { NodeRoleField } from './NodeRoleField';
 

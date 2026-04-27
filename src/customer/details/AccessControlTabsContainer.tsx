@@ -3,12 +3,12 @@ import { FC, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import { AccessSubnet, accessSubnetsList } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Tip } from '@/core/Tooltip';
+import { FilteredEventsButton } from '@/events/FilteredEventsButton';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { AccessSubnetCreateButton } from './AccessSubnetCreateButton';
 import { AccessSubnetRowActions } from './AccessSubnetRowActions';

@@ -4,9 +4,9 @@ import { Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { isDirty } from 'redux-form';
 
-import { ErrorMessage } from '@waldur/ErrorMessage';
-import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
+import { ErrorMessage } from '@/ErrorMessage';
+import { translate } from '@/i18n';
+import { type RootState } from '@/store/reducers';
 
 import { closeModalDialog, waitForConfirmation } from './actions';
 

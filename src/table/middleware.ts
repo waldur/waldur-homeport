@@ -1,6 +1,6 @@
 import { Middleware } from 'redux';
 
-import { queryClient } from '@waldur/core/queryClient';
+import { queryClient } from '@/core/queryClient';
 
 import { FETCH_LIST_START } from './actions';
 

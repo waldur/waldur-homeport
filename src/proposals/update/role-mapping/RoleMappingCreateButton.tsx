@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { CreateModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { CreateModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
 
 const RoleMappingFormDialog = lazyComponent(() =>
   import('./RoleMappingFormDialog').then((module) => ({

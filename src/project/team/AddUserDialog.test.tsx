@@ -13,7 +13,7 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store hooks
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useNotify: () => ({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),
@@ -21,19 +21,19 @@ vi.mock('@waldur/store/hooks', () => ({
 }));
 
 // Mock modal hooks
-vi.mock('@waldur/modal/hooks', () => ({
+vi.mock('@/modal/hooks', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
 }));
 
 // Mock translation
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (str: string) => str,
 }));
 
 // Mock workspace hooks and selectors
-vi.mock('@waldur/workspace/hooks', () => ({
+vi.mock('@/workspace/hooks', () => ({
   useUser: () => ({
     uuid: 'user-uuid',
     is_staff: true,
@@ -43,7 +43,7 @@ vi.mock('@waldur/workspace/hooks', () => ({
   }),
 }));
 
-vi.mock('@waldur/workspace/selectors', () => ({
+vi.mock('@/workspace/selectors', () => ({
   getProject: () => ({
     uuid: 'project-uuid',
     name: 'Test Project',
@@ -57,7 +57,7 @@ vi.mock('@waldur/workspace/selectors', () => ({
 }));
 
 // Mock customer team utils
-vi.mock('@waldur/customer/team/utils', () => ({
+vi.mock('@/customer/team/utils', () => ({
   usersAutocomplete: vi.fn().mockResolvedValue({
     options: [
       {
@@ -73,20 +73,20 @@ vi.mock('@waldur/customer/team/utils', () => ({
 }));
 
 // Mock permissions
-vi.mock('@waldur/permissions/hasPermission', () => ({
+vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: vi.fn().mockReturnValue(true),
 }));
 
 // Mock other dependencies
-vi.mock('@waldur/core/api', () => ({
+vi.mock('@/core/api', () => ({
   parseSelectData: vi.fn((data) => data),
 }));
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: { pageSize: 10 },
 }));
 
-vi.mock('@waldur/core/utils', () => ({
+vi.mock('@/core/utils', () => ({
   returnReactSelectAsyncPaginateObject: vi.fn(
     (options, _prevOptions, page) => ({
       options,
@@ -96,18 +96,18 @@ vi.mock('@waldur/core/utils', () => ({
   ),
 }));
 
-vi.mock('@waldur/core/validators', () => ({
+vi.mock('@/core/validators', () => ({
   required: vi.fn(),
 }));
 
-vi.mock('@waldur/user/UsersService', () => ({
+vi.mock('@/user/UsersService', () => ({
   getCurrentUser: vi.fn().mockResolvedValue({
     uuid: 'user-uuid',
     full_name: 'Test User',
   }),
 }));
 
-vi.mock('@waldur/workspace/actions', () => ({
+vi.mock('@/workspace/actions', () => ({
   setCurrentUser: vi.fn(),
 }));
 
@@ -125,14 +125,14 @@ vi.mock('./UserListOptionInline', () => ({
 }));
 
 // Mock the customer workspace hook
-vi.mock('@waldur/customer/workspace/fetchCustomer', () => ({
+vi.mock('@/customer/workspace/fetchCustomer', () => ({
   useCustomerProjects: () => ({
     loading: false,
   }),
 }));
 
 // Mock permissions utils
-vi.mock('@waldur/permissions/utils', () => ({
+vi.mock('@/permissions/utils', () => ({
   getRoles: (types) =>
     types.map((type) => ({
       name: `${type}_role`,
@@ -146,7 +146,7 @@ vi.mock('./utils', () => ({
 }));
 
 // Mock form components using shared implementations
-vi.mock('@waldur/form/AsyncSelectField', () => ({
+vi.mock('@/form/AsyncSelectField', () => ({
   AsyncSelectFieldFinal: ({ name, label, placeholder }) => (
     <div data-testid={`async-select-${name}`}>
       <label>{label}</label>
@@ -157,7 +157,7 @@ vi.mock('@waldur/form/AsyncSelectField', () => ({
   ),
 }));
 
-vi.mock('@waldur/form/AwesomeCheckboxField', () => ({
+vi.mock('@/form/AwesomeCheckboxField', () => ({
   AwesomeCheckboxField: ({ name, label, className }) => (
     <div data-testid={`checkbox-${name}`} className={className}>
       <input type="checkbox" />
@@ -166,7 +166,7 @@ vi.mock('@waldur/form/AwesomeCheckboxField', () => ({
   ),
 }));
 
-vi.mock('@waldur/form/SelectField', () => ({
+vi.mock('@/form/SelectField', () => ({
   SelectField: ({ options, getOptionLabel }) => (
     <select data-testid="role-select">
       {options?.map((option, index) => (
@@ -178,13 +178,13 @@ vi.mock('@waldur/form/SelectField', () => ({
   ),
 }));
 
-vi.mock('@waldur/form/DateField', () => ({
+vi.mock('@/form/DateField', () => ({
   DateField: ({ placeholder }) => (
     <input type="date" placeholder={placeholder} data-testid="date-field" />
   ),
 }));
 
-vi.mock('@waldur/form', () => ({
+vi.mock('@/form', () => ({
   FormGroup: ({ children, label, required }) => (
     <div data-testid="form-group">
       {label && (

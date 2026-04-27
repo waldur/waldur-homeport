@@ -1,6 +1,6 @@
-import { required } from '@waldur/core/validators';
-import { StringField, FormContainer, SecretField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { StringField, FormContainer, SecretField } from '@/form';
+import { translate } from '@/i18n';
 
 export const CredentialsTab = () => (
   <FormContainer submitting={false} clearOnUnmount={false} className="size-lg">

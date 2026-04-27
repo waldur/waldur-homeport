@@ -4,8 +4,8 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { getCustomer } from '@waldur/customer/utils';
-import { Customer } from '@waldur/workspace/types';
+import { getCustomer } from '@/customer/utils';
+import { Customer } from '@/workspace/types';
 
 import { MarketplaceFilterItem } from '../landing/filter/types';
 

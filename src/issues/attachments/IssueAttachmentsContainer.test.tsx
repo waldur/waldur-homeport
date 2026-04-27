@@ -14,16 +14,13 @@ vi.mock('./api', () => ({
 }));
 
 // Mock the child components
-vi.mock(
-  '@waldur/marketplace/offerings/update/components/RefreshButton',
-  () => ({
-    RefreshButton: ({ loading }: { loading: boolean }) => (
-      <button data-testid="reload-btn" disabled={loading}>
-        Reload
-      </button>
-    ),
-  }),
-);
+vi.mock('@/marketplace/offerings/update/components/RefreshButton', () => ({
+  RefreshButton: ({ loading }: { loading: boolean }) => (
+    <button data-testid="reload-btn" disabled={loading}>
+      Reload
+    </button>
+  ),
+}));
 
 vi.mock('./IssueAttachmentsList', () => ({
   IssueAttachmentsList: ({
@@ -48,11 +45,11 @@ vi.mock('./IssueAttachmentsList', () => ({
   ),
 }));
 
-vi.mock('@waldur/core/LoadingSpinner', () => ({
+vi.mock('@/core/LoadingSpinner', () => ({
   LoadingSpinner: () => <div data-testid="loading-spinner">Loading...</div>,
 }));
 
-vi.mock('@waldur/form/upload/UploadContainer', () => ({
+vi.mock('@/form/upload/UploadContainer', () => ({
   UploadContainer: ({
     onDrop,
     disabled,

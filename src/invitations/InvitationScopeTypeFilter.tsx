@@ -1,9 +1,9 @@
 import { Field } from 'redux-form';
 
-import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { ROLE_TYPES } from '@waldur/permissions/constants';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { ROLE_TYPES } from '@/permissions/constants';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const InvitationScopeTypeFilter = (props) => (
   <TableFilterItem title={translate('Scope type')} name="scope_type">

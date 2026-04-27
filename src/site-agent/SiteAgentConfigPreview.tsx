@@ -7,11 +7,11 @@ import {
 import { FC, useCallback, useState } from 'react';
 import { Alert } from 'react-bootstrap';
 
-import { BaseButton } from '@waldur/core/buttons/BaseButton';
-import { MonacoEditor } from '@waldur/form/MonacoEditor';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { BaseButton } from '@/core/buttons/BaseButton';
+import { MonacoEditor } from '@/form/MonacoEditor';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface SiteAgentConfigPreviewProps {
   config: string;

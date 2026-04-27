@@ -3,9 +3,9 @@ import { Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { selectSelectedSavedFilter } from './selectors';

@@ -3,20 +3,20 @@ import { Field, Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { marketplaceProviderOfferingsAddUser } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { usersAutocomplete } from '@waldur/customer/team/utils';
-import { SubmitButton } from '@waldur/form';
-import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { translate } from '@waldur/i18n';
-import { providerOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { useNotify } from '@waldur/store/hooks';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { required } from '@/core/validators';
+import { usersAutocomplete } from '@/customer/team/utils';
+import { SubmitButton } from '@/form';
+import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { DateTimeField } from '@/form/DateTimeField';
+import { translate } from '@/i18n';
+import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { RoleEnum } from '@/permissions/enums';
+import { useNotify } from '@/store/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 interface OwnProps {
   resolve: {

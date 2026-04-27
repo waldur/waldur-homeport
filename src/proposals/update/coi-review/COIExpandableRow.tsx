@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { ConflictOfInterest } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface COIExpandableRowProps {
   row: ConflictOfInterest;

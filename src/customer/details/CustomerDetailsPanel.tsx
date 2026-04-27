@@ -3,16 +3,16 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { CheckOrX } from '@waldur/core/CheckOrX';
-import { ENV } from '@waldur/core/config';
-import { Tip } from '@waldur/core/Tooltip';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
-import { getUser } from '@waldur/workspace/selectors';
+import { CheckOrX } from '@/core/CheckOrX';
+import { ENV } from '@/core/config';
+import { Tip } from '@/core/Tooltip';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
+import { getUser } from '@/workspace/selectors';
 
 import { CustomerChecklistPanel } from './CustomerChecklistPanel';
 import { CustomerLocationRow } from './CustomerLocationRow';

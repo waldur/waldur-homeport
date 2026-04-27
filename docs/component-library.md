@@ -69,7 +69,7 @@ The application uses a unified button system. **Never import Bootstrap Button di
 #### ActionButton Usage
 
 ```tsx
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionButton } from '@/table/ActionButton';
 
 // Basic usage
 <ActionButton
@@ -99,7 +99,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 #### SubmitButton Usage
 
 ```tsx
-import { SubmitButton } from '@waldur/form';
+import { SubmitButton } from '@/form';
 
 // In a form
 <SubmitButton
@@ -123,7 +123,7 @@ import { SubmitButton } from '@waldur/form';
 #### CloseDialogButton Usage
 
 ```tsx
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 // Simple close
 <Modal.Footer>
@@ -141,7 +141,7 @@ import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
 #### IconButton Usage
 
 ```tsx
-import { IconButton } from '@waldur/core/buttons/IconButton';
+import { IconButton } from '@/core/buttons/IconButton';
 
 // Toolbar refresh button
 <IconButton
@@ -180,8 +180,8 @@ Generic button factories that reduce boilerplate for common CRUD operations:
 #### CreateModalButton Usage
 
 ```tsx
-import { CreateModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { CreateModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
 
 const MyDialog = lazyComponent(() =>
   import('./MyDialog').then((m) => ({ default: m.MyDialog })),
@@ -199,7 +199,7 @@ export const MyCreateButton = ({ refetch }) => (
 #### EditModalButton Usage
 
 ```tsx
-import { EditModalButton } from '@waldur/core/buttons';
+import { EditModalButton } from '@/core/buttons';
 
 export const MyEditButton = ({ row, refetch }) => (
   <EditModalButton
@@ -216,7 +216,7 @@ export const MyEditButton = ({ row, refetch }) => (
 #### DeleteButton Usage
 
 ```tsx
-import { DeleteButton } from '@waldur/core/buttons';
+import { DeleteButton } from '@/core/buttons';
 import { myItemDestroy } from 'waldur-js-client';
 
 export const MyDeleteButton = ({ row, refetch }) => (
@@ -631,7 +631,7 @@ Prop tables extracted from TypeScript interfaces. Use these to generate correct 
 #### ActionButton
 
 ```ts
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionButton } from '@/table/ActionButton';
 ```
 
 | Prop | Type | Required | Default | Description |
@@ -653,7 +653,7 @@ import { ActionButton } from '@waldur/table/ActionButton';
 #### CompactActionButton
 
 ```ts
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 ```
 
 Same props as `ActionButton` (without `visibility`). Use for tight spaces — renders at `sm` size.
@@ -675,7 +675,7 @@ Same props as `ActionButton` (without `visibility`). Use for tight spaces — re
 #### SubmitButton
 
 ```ts
-import { SubmitButton } from '@waldur/form';
+import { SubmitButton } from '@/form';
 ```
 
 | Prop | Type | Required | Default | Description |
@@ -700,7 +700,7 @@ import { SubmitButton } from '@waldur/form';
 #### CompactSubmitButton
 
 ```ts
-import { CompactSubmitButton } from '@waldur/form';
+import { CompactSubmitButton } from '@/form';
 ```
 
 Same props as `SubmitButton` (without `form`). Renders at `sm` size — use inside popovers and inline forms.
@@ -725,7 +725,7 @@ Same props as `SubmitButton` (without `form`). Renders at `sm` size — use insi
 #### IconButton
 
 ```ts
-import { IconButton } from '@waldur/core/buttons/IconButton';
+import { IconButton } from '@/core/buttons/IconButton';
 ```
 
 | Prop | Type | Required | Default | Description |
@@ -745,7 +745,7 @@ import { IconButton } from '@waldur/core/buttons/IconButton';
 #### CompactIconButton
 
 ```ts
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
+import { CompactIconButton } from '@/core/buttons/IconButton';
 ```
 
 Identical props to `IconButton`. Renders at `sm` size.
@@ -755,7 +755,7 @@ Identical props to `IconButton`. Renders at `sm` size.
 #### ToolbarButton
 
 ```ts
-import { ToolbarButton } from '@waldur/table/ToolbarButton';
+import { ToolbarButton } from '@/table/ToolbarButton';
 ```
 
 | Prop | Type | Required | Default | Description |
@@ -775,7 +775,7 @@ import { ToolbarButton } from '@waldur/table/ToolbarButton';
 #### BaseButton
 
 ```ts
-import { BaseButton } from '@waldur/core/buttons/BaseButton';
+import { BaseButton } from '@/core/buttons/BaseButton';
 ```
 
 **Do not use in feature code.** This is an internal primitive used by the higher-level button components. Feature code must use the specific button components (`ActionButton`, `SubmitButton`, `ToolbarButton`, etc.) which already cover all use cases.
@@ -804,7 +804,7 @@ import { BaseButton } from '@waldur/core/buttons/BaseButton';
 #### Badge
 
 ```ts
-import { Badge } from '@waldur/core/Badge';
+import { Badge } from '@/core/Badge';
 ```
 
 | Prop | Type | Required | Default | Description |
@@ -828,7 +828,7 @@ import { Badge } from '@waldur/core/Badge';
 #### StateIndicator
 
 ```ts
-import { StateIndicator } from '@waldur/core/StateIndicator';
+import { StateIndicator } from '@/core/StateIndicator';
 ```
 
 | Prop | Type | Required | Default | Description |
@@ -849,7 +849,7 @@ import { StateIndicator } from '@waldur/core/StateIndicator';
 #### NoResult
 
 ```ts
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { NoResult } from '@/navigation/header/search/NoResult';
 ```
 
 Use for **all empty states**. Always provide an actionable CTA via `callback`+`buttonTitle` or `actions`.
@@ -872,7 +872,7 @@ Use for **all empty states**. Always provide an actionable CTA via `callback`+`b
 #### Table
 
 ```ts
-import { Table } from '@waldur/table';
+import { Table } from '@/table';
 ```
 
 Key configuration props. Full interface is large — these are the most commonly used.
@@ -921,10 +921,10 @@ Key configuration props. Full interface is large — these are the most commonly
 #### FormGroup (React Final Form)
 
 ```ts
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 ```
 
-Use this version inside React Final Form. **Do not use `FormContainer` from `@waldur/form`** — that is redux-form only and will cause errors.
+Use this version inside React Final Form. **Do not use `FormContainer` from `@/form`** — that is redux-form only and will cause errors.
 
 | Prop | Type | Required | Default | Description |
 |------|------|----------|---------|-------------|
@@ -946,7 +946,7 @@ Use this version inside React Final Form. **Do not use `FormContainer` from `@wa
 #### SelectField
 
 ```ts
-import { SelectField } from '@waldur/form';
+import { SelectField } from '@/form';
 ```
 
 Redux Form field component. In React Final Form use `<Field name="..." component={SelectField as any} />`.
@@ -968,7 +968,7 @@ Redux Form field component. In React Final Form use `<Field name="..." component
 #### StringField
 
 ```ts
-import { StringField } from '@waldur/form';
+import { StringField } from '@/form';
 ```
 
 Redux Form field component. In React Final Form use `<Field name="..." component={StringField as any} />`.

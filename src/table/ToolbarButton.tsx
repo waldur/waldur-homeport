@@ -3,9 +3,9 @@ import { FC, ReactNode } from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
 
 interface ToolbarButtonProps {
   /** Button text label (optional for icon-only buttons) */

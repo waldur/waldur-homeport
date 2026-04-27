@@ -9,26 +9,26 @@ import {
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { BackendIdTip } from '@waldur/core/Tooltip';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ResourceFlags } from '@waldur/marketplace/resources/details/ResourceFlags';
-import { ExpandableResourceSummary } from '@waldur/marketplace/resources/list/ExpandableResourceSummary';
-import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
-import { Category, Offering } from '@waldur/marketplace/types';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { BackendIdTip } from '@/core/Tooltip';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ResourceFlags } from '@/marketplace/resources/details/ResourceFlags';
+import { ExpandableResourceSummary } from '@/marketplace/resources/list/ExpandableResourceSummary';
+import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
+import { Category, Offering } from '@/marketplace/types';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getCustomer } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 import {
   PROVIDER_RESOURCES_LIST_FILTER_FORM_ID,

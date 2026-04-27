@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { tryJoinOrganization } from '@waldur/invitations/tryJoinOrganization';
-import { useNotify } from '@waldur/store/hooks';
-import { setCurrentUser } from '@waldur/workspace/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { translate } from '@/i18n';
+import { tryJoinOrganization } from '@/invitations/tryJoinOrganization';
+import { useNotify } from '@/store/hooks';
+import { setCurrentUser } from '@/workspace/actions';
+import { getUser } from '@/workspace/selectors';
 
 export const useUpdateUser = (user: User) => {
   const dispatch = useDispatch();

@@ -2,11 +2,11 @@ import { createFilter } from 'react-select';
 import { Field } from 'redux-form';
 import { apiAuthSaml2ProvidersList } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 const getSaml2IdentityProviders = async (
   name: string,

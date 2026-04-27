@@ -1,20 +1,18 @@
 import { FunctionComponent } from 'react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 interface OwnProps {
   resource: string;
 }
 
 const PlanDetailsDialog = lazyComponent(() =>
-  import('@waldur/marketplace/details/plan/PlanDetailsDialog').then(
-    (module) => ({
-      default: module.PlanDetailsDialog,
-    }),
-  ),
+  import('@/marketplace/details/plan/PlanDetailsDialog').then((module) => ({
+    default: module.PlanDetailsDialog,
+  })),
 );
 
 export const PlanDetailsLink: FunctionComponent<OwnProps> = ({ resource }) => {

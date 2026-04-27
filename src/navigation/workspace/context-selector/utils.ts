@@ -1,4 +1,4 @@
-import { getAbbreviation } from '@waldur/core/utils';
+import { getAbbreviation } from '@/core/utils';
 
 export const getItemAbbreviation = (item, key = null) => {
   if (typeof item !== 'object') {

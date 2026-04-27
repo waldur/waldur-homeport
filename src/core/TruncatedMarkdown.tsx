@@ -1,8 +1,8 @@
 import { FC, useRef, useState, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 import { Badge } from './Badge';
 import { SafeMarkdown } from './SafeMarkdown';

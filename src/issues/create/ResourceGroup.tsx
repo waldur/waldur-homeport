@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change, Field, formValueSelector } from 'redux-form';
 import { MarketplaceResourcesListData } from 'waldur-js-client';
 
-import { Select as AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { resourceAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
-import { formatResourceShort } from '@waldur/marketplace/utils';
-import { RootState } from '@waldur/store/reducers';
+import { Select as AsyncSelectField } from '@/form/AsyncSelectField';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { formatResourceShort } from '@/marketplace/utils';
+import { RootState } from '@/store/reducers';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 

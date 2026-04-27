@@ -3,12 +3,12 @@ import { connect, useDispatch } from 'react-redux';
 import { FieldArray, reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
-import { pick } from '@waldur/core/utils';
-import { FormContainer, FormFooter } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { pick } from '@/core/utils';
+import { FormContainer, FormFooter } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { EDIT_SCHEDULES_FORM_ID } from './constants';
 import { OfferingScheduler } from './OfferingScheduler';

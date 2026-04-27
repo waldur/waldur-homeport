@@ -1,5 +1,5 @@
-import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
-import store from '@waldur/store/store';
+import { GroupInvitationTokenStorage } from '@/core/StorageManager';
+import store from '@/store/store';
 
 import { UsersService } from '../user/UsersService';
 

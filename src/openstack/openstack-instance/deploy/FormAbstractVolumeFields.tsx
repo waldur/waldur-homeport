@@ -4,15 +4,15 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { OpenstackFeatures } from '@waldur/FeaturesEnums';
-import { FormGroup, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { required } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { OpenstackFeatures } from '@/FeaturesEnums';
+import { FormGroup, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { QuotaUsageBarChart } from '@/quotas/QuotaUsageBarChart';
 
 import { VolumeTypeChoice } from '../utils';
 

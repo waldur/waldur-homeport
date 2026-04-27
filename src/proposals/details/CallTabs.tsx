@@ -3,10 +3,10 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
-import { checkCustomerUser, getUser } from '@waldur/workspace/selectors';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { type RootState } from '@/store/reducers';
+import { checkCustomerUser, getUser } from '@/workspace/selectors';
 
 import { Call } from '../types';
 import { checkIsCallManager } from '../utils';

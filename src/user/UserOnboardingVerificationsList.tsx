@@ -5,16 +5,16 @@ import {
   onboardingVerificationsList,
 } from 'waldur-js-client';
 
-import { OnboardingVerificationExpandableRow } from '@waldur/administration/organizations/OnboardingVerificationExpandableRow';
-import { getOnboardingVerificationColumns } from '@waldur/administration/organizations/OrganizationOnboardingVerificationsList';
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { router } from '@waldur/router';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { useUser } from '@waldur/workspace/hooks';
+import { OnboardingVerificationExpandableRow } from '@/administration/organizations/OnboardingVerificationExpandableRow';
+import { getOnboardingVerificationColumns } from '@/administration/organizations/OrganizationOnboardingVerificationsList';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { router } from '@/router';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { useUser } from '@/workspace/hooks';
 
 const UserOnboardingVerificationView = ({ row }) => (
   <ActionItem

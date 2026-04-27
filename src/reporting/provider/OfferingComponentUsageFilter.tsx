@@ -7,14 +7,14 @@ import {
   reduxForm,
 } from 'redux-form';
 
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { InputField } from '@waldur/form/InputField';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { providerAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { InputField } from '@/form/InputField';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { providerAutocomplete } from '@/marketplace/common/autocompletes';
+import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
+import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const COMPONENT_USAGE_FILTER_FORM_ID = 'OfferingComponentUsageFilter';
 

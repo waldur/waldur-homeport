@@ -7,13 +7,13 @@ import {
   conflictsOfInterestRecuse,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 const WaiveCOIDialog = lazyComponent(() =>
   import('./WaiveCOIDialog').then((module) => ({

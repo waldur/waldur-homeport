@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { rolesUpdateDescriptionsUpdate } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 import { RoleDescriptionEditDialog } from './RoleDescriptionEditDialog';
 import { getRoles } from './utils';
@@ -14,13 +14,13 @@ vi.mock('./utils');
 
 vi.mock('waldur-js-client');
 
-vi.mock('@waldur/modal/hooks', () => ({
+vi.mock('@/modal/hooks', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
 }));
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 

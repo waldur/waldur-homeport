@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { OnboardingJustificationApprove } from './OnboardingJustificationApprove';
 import { OnboardingJustificationReject } from './OnboardingJustificationReject';

@@ -10,23 +10,20 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import {
-  getLabel,
-  getOfferingTypes,
-} from '@waldur/marketplace/common/registry';
-import { createFetcher } from '@waldur/table/api';
-import { BooleanField } from '@waldur/table/BooleanField';
-import { SLUG_COLUMN } from '@waldur/table/slug';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
+import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
+import { SLUG_COLUMN } from '@/table/slug';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
 
 import { CardStyleType } from '../common/cards/index';
 import { OfferingCard } from '../common/OfferingCard';

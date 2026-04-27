@@ -2,19 +2,16 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { formatPhoneNumber } from '@waldur/core/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
-import {
-  formatUserIsActive,
-  formatUserStatus,
-} from '@waldur/user/support/utils';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { formatDateTime } from '@/core/dateUtils';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { formatPhoneNumber } from '@/core/utils';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { type RootState } from '@/store/reducers';
+import { formatUserIsActive, formatUserStatus } from '@/user/support/utils';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { isProfileAttributeEnabled } from './profileAttributes';
 

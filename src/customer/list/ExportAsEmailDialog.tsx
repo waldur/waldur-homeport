@@ -9,18 +9,18 @@ import {
   invoicesList,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { AccountingPeriodField } from '@waldur/customer/list/AccountingPeriodField';
-import { getOptions } from '@waldur/customer/list/AccountingRunningField';
-import { EXPORT_AS_EMAIL_FORM_ID } from '@waldur/customer/list/constants';
-import { makeAccountingPeriods } from '@waldur/customer/list/utils';
-import { SubmitButton } from '@waldur/form';
-import { EmailField } from '@waldur/form/EmailField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { AccountingPeriodField } from '@/customer/list/AccountingPeriodField';
+import { getOptions } from '@/customer/list/AccountingRunningField';
+import { EXPORT_AS_EMAIL_FORM_ID } from '@/customer/list/constants';
+import { makeAccountingPeriods } from '@/customer/list/utils';
+import { SubmitButton } from '@/form';
+import { EmailField } from '@/form/EmailField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 async function oldestInvoice() {
   const response = (

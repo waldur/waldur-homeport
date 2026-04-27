@@ -2,15 +2,15 @@ import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 
-import { Select } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
+import { Select } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
   providerOfferingsAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+} from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { RecipientsList } from '../RecipientsList';
 import { BroadcastFormData } from '../types';

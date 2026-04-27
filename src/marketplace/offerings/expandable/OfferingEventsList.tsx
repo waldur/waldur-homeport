@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react';
 import { Offering } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
-import eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
-import { TableProps } from '@waldur/table/types';
+import { formatDateTime } from '@/core/dateUtils';
+import { BaseEventsList } from '@/events/BaseEventsList';
+import eventsRegistry from '@/events/registry';
+import { translate } from '@/i18n';
+import { TableProps } from '@/table/types';
 
 interface OfferingEventsListProps extends Partial<TableProps> {
   offering: Offering;

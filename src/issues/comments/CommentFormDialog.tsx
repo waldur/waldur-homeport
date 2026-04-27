@@ -8,13 +8,13 @@ import {
   supportIssuesComment,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse } from '@waldur/store/notify';
+import { required } from '@/core/validators';
+import { FormContainer, SubmitButton, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse } from '@/store/notify';
 
 import { Comment } from './types';
 

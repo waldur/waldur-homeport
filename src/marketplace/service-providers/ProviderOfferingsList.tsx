@@ -4,17 +4,14 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { marketplaceServiceProvidersOfferingsList } from 'waldur-js-client';
 
-import { useDestroyFilterOnLeave } from '@waldur/core/filters';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import {
-  getLabel,
-  getOfferingTypes,
-} from '@waldur/marketplace/common/registry';
-import { createFetcher } from '@waldur/table/api';
-import { SLUG_COLUMN } from '@waldur/table/slug';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { useDestroyFilterOnLeave } from '@/core/filters';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { getLabel, getOfferingTypes } from '@/marketplace/common/registry';
+import { createFetcher } from '@/table/api';
+import { SLUG_COLUMN } from '@/table/slug';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { useOfferingDropdownActions } from '../offerings/hooks';
 import { CreateOfferingButton } from '../offerings/list/CreateOfferingButton';

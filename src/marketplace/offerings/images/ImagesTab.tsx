@@ -3,7 +3,7 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { NestedScreenshot } from 'waldur-js-client';
 
-import { openModalDialog } from '@waldur/modal/actions';
+import { openModalDialog } from '@/modal/actions';
 
 import { ImageDetailsDialog } from './ImageDetailsDialog';
 

@@ -1,20 +1,20 @@
 import { FC, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
-import { EditSchedulesButton } from '@waldur/booking/EditSchedulesButton';
-import { NumberField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { EditSchedulesButton } from '@/booking/EditSchedulesButton';
+import { NumberField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 import {
   DefaultOfferingEditPanel,
   OfferingEditField,
-} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
-import { GoogleCalendarActions } from '@waldur/marketplace/offerings/update/integration/GoogleCalendarActions';
-import { RemoteActions } from '@waldur/marketplace/offerings/update/integration/RemoteActions';
-import { OfferingEditPanelProps } from '@waldur/marketplace/offerings/update/integration/types';
-import { useUpdateOfferingIntegration } from '@waldur/marketplace/offerings/update/integration/utils';
+} from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { GoogleCalendarActions } from '@/marketplace/offerings/update/integration/GoogleCalendarActions';
+import { RemoteActions } from '@/marketplace/offerings/update/integration/RemoteActions';
+import { OfferingEditPanelProps } from '@/marketplace/offerings/update/integration/types';
+import { useUpdateOfferingIntegration } from '@/marketplace/offerings/update/integration/utils';
 
 import { OpenStackExternalIpsField } from './OpenStackExternalIpsField';
 

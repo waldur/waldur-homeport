@@ -2,11 +2,11 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paymentsDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 import { updatePaymentsList } from './utils';
 

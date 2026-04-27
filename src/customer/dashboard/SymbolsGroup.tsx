@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { User } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { Tip } from '@waldur/core/Tooltip';
+import Avatar from '@/core/Avatar';
+import { Tip } from '@/core/Tooltip';
 
 interface SymbolsGroupProps {
   items: object[];

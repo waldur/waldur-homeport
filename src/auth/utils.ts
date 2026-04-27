@@ -1,7 +1,7 @@
 import { IdentityProvider } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
+import { ENV } from '@/core/config';
+import { LanguageUtilsService } from '@/i18n/LanguageUtilsService';
 
 export const getOauthURL = (provider: Pick<IdentityProvider, 'provider'>) => {
   const baseUrl = `${ENV.apiEndpoint}api-auth/${provider.provider}/init/`;

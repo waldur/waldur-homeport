@@ -1,9 +1,9 @@
 import { Field } from 'redux-form';
 
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { FormGroup } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
+import { ExternalLink } from '@/core/ExternalLink';
+import { FormGroup } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
 
 export const InstallLonghornField = () => (
   <Field

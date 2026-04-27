@@ -1,4 +1,4 @@
-import { useTitle } from '@waldur/navigation/title';
+import { useTitle } from '@/navigation/title';
 
 import { translate } from '../i18n';
 

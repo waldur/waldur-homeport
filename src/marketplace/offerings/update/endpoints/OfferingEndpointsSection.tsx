@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';

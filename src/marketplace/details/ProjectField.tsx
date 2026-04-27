@@ -2,11 +2,11 @@ import { FC, useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { ProjectCreateButton } from '@waldur/project/create/ProjectCreateButton';
-import { setCurrentProject } from '@waldur/workspace/actions';
+import { required } from '@/core/validators';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
+import { setCurrentProject } from '@/workspace/actions';
 
 import { projectAutocomplete } from '../common/autocompletes';
 import { orderCustomerSelector } from '../deploy/selectors';

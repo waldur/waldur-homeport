@@ -3,14 +3,14 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { translate } from '@waldur/i18n';
-import { getComponentUsageMonthlyList } from '@waldur/marketplace/offerings/api';
-import { OfferingComponentUsage } from '@waldur/marketplace/offerings/types';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { formatUsageValue } from '@/core/formatNumber';
+import { translate } from '@/i18n';
+import { getComponentUsageMonthlyList } from '@/marketplace/offerings/api';
+import { OfferingComponentUsage } from '@/marketplace/offerings/types';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 

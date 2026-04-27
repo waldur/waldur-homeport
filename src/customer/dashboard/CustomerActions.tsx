@@ -2,9 +2,9 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 import { Customer } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { hasSupport } from '@waldur/issues/hooks';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { hasSupport } from '@/issues/hooks';
 
 interface CustomerActionsProps {
   customer: Customer;

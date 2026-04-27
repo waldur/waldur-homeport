@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { ModelCard1 } from '@waldur/core/ModelCard1';
-import { translate } from '@waldur/i18n';
-import { OfferingDetailsLink } from '@waldur/marketplace/links/OfferingDetailsLink';
+import { Link } from '@/core/Link';
+import { ModelCard1 } from '@/core/ModelCard1';
+import { translate } from '@/i18n';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
 
 export const AvailableOfferingCard: FC<{ availableOffering }> = ({
   availableOffering,

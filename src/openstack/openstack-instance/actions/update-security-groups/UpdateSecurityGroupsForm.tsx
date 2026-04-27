@@ -1,10 +1,10 @@
 import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { OPENSTACK_PORT_TYPE } from '@waldur/openstack/constants';
-import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { OPENSTACK_PORT_TYPE } from '@/openstack/constants';
+import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { connectForm } from './utils';
 

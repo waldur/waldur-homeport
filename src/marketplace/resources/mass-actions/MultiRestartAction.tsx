@@ -1,6 +1,6 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 
-import { getProps } from '@waldur/openstack/openstack-instance/actions/RestartAction';
+import { getProps } from '@/openstack/openstack-instance/actions/RestartAction';
 
 import { VirtualMachineMultiAction } from './VirtualMachineMultiAction';
 

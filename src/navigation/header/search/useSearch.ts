@@ -8,9 +8,9 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { fetchResultCount } from '@/core/api';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 const queryFn =
   (query) =>

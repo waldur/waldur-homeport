@@ -2,12 +2,12 @@ import { TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { post } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { GenericPermission } from '@waldur/permissions/types';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { post } from '@/core/api';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { GenericPermission } from '@/permissions/types';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface UserRemoveButtonProps {
   permission: GenericPermission;

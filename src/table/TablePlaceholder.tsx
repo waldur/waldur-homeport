@@ -1,7 +1,7 @@
 import { FunctionComponent, ReactNode } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { TableProps } from './types';
 import { getNoResultMessage, getNoResultTitle } from './utils';

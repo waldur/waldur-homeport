@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { IPList } from '@waldur/resource/IPList';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { IPList } from '@/resource/IPList';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
 
 export const OpenStackRouterSummary: FunctionComponent<ResourceSummaryProps> = (
   props,

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { PlanUsageResponse } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 
 import {
   AnalyticsCapability,

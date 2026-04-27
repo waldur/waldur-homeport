@@ -1,11 +1,11 @@
 import React from 'react';
 import { Invitation } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
-import { translate } from '@waldur/i18n';
-import { formatRoleType } from '@waldur/permissions/utils';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { ENV } from '@/core/config';
+import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { translate } from '@/i18n';
+import { formatRoleType } from '@/permissions/utils';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const InvitationExpandableRow: React.FC<{
   row: Invitation;

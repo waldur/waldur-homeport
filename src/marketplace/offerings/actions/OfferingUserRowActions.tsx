@@ -1,16 +1,16 @@
 import { useSelector } from 'react-redux';
 import { OfferingUser } from 'waldur-js-client';
 
-import { OfferingUserDetailsButton } from '@waldur/marketplace/offerings/details/OfferingUserDetailsButton';
-import { ProviderOfferingUserDeleteButton } from '@waldur/marketplace/service-providers/ProviderOfferingUserDeleteButton';
-import { ProviderOfferingUserUpdateButton } from '@waldur/marketplace/service-providers/ProviderOfferingUserUpdateButton';
-import { RestrictOfferingUserButton } from '@waldur/marketplace/service-providers/RestrictOfferingUser';
-import { ServiceProvider } from '@waldur/marketplace/types';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { useUser } from '@waldur/workspace/hooks';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { OfferingUserDetailsButton } from '@/marketplace/offerings/details/OfferingUserDetailsButton';
+import { ProviderOfferingUserDeleteButton } from '@/marketplace/service-providers/ProviderOfferingUserDeleteButton';
+import { ProviderOfferingUserUpdateButton } from '@/marketplace/service-providers/ProviderOfferingUserUpdateButton';
+import { RestrictOfferingUserButton } from '@/marketplace/service-providers/RestrictOfferingUser';
+import { ServiceProvider } from '@/marketplace/types';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 type OfferingUserRowActionsProps = {
   row: OfferingUser;

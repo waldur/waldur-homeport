@@ -75,7 +75,7 @@ docs/
 
 ### Code Examples
 - Use actual TypeScript/React code from the project
-- Include necessary imports (`@waldur/*`, `waldur-js-client`)
+- Include necessary imports (`@/*`, `waldur-js-client`)
 - Show React Final Form patterns: `<Field component={NumberField as any} />`
 - Demonstrate SDK type usage: `import { type ComponentUsage } from 'waldur-js-client'`
 
@@ -107,7 +107,7 @@ Before finalizing documentation:
 ## Usage
 ```typescript
 // Minimal working example with imports
-import { SomeComponent } from '@waldur/core/SomeComponent';
+import { SomeComponent } from '@/core/SomeComponent';
 import { type ComponentProps } from 'waldur-js-client';
 
 export const ExampleUsage = () => (

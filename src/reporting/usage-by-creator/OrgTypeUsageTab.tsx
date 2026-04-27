@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { UsageByOrgTypeSummaryCards } from '../usage-by-org-type/UsageByOrgTypeSummaryCards';
 import { UsageByOrgTypeTable } from '../usage-by-org-type/UsageByOrgTypeTable';

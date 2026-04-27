@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { change, destroy } from 'redux-form';
 
-import { router } from '@waldur/router';
+import { router } from '@/router';
 
 import { isEmpty } from './utils';
 

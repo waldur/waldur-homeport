@@ -2,10 +2,10 @@ import Papa from 'papaparse';
 import { FC, useEffect } from 'react';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { TemplateUploaderField } from '@waldur/project/import/TemplateUploaderField';
+import { required } from '@/core/validators';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { TemplateUploaderField } from '@/project/import/TemplateUploaderField';
 
 const MAX_LENGTH = 1000;
 

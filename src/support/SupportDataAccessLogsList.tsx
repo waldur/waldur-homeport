@@ -2,22 +2,22 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { dataAccessLogsList, GlobalUserDataAccessLog } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   DataAccessLogsFilter as SupportDataAccessLogsFilter,
   selectDataAccessLogsFilter as selectSupportDataAccessLogsFilter,
-} from '@waldur/table/generated/DataAccessLogsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/DataAccessLogsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 import {
   getAccessorCategory,
   getAccessorTypeBadgeVariant,
-} from '@waldur/user/data-access/utils';
+} from '@/user/data-access/utils';
 
 import { DataAccessLogsBulkDeleteAction } from './DataAccessLogsBulkDeleteAction';
 import { DataAccessLogsRowActions } from './DataAccessLogsRowActions';

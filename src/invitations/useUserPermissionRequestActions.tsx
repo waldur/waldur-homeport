@@ -5,9 +5,9 @@ import {
   userPermissionRequestsReject,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const useUserPermissionRequestActions = (permissionRequest, refetch) => {
   const dispatch = useDispatch();

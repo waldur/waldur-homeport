@@ -1,9 +1,9 @@
 import Qs from 'qs';
 import { useEffect } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getQueryString } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getQueryString } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import { useSaml2 } from '../saml2/hooks';
 

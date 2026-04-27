@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { User } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
 
 import { DangerActionPanel } from './DangerActionPanel';
 

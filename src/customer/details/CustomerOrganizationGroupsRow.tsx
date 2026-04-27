@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse } from '@waldur/store/notify';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { showErrorResponse } from '@/store/notify';
+import { setCurrentCustomer } from '@/workspace/actions';
 
 import { getCustomer } from '../utils';
 

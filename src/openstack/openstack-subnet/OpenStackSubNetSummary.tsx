@@ -1,9 +1,9 @@
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { formatAllocationPool } from '@waldur/openstack/openstack-network/utils';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
-import { formatDefault } from '@waldur/resource/utils';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { formatAllocationPool } from '@/openstack/openstack-network/utils';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { formatDefault } from '@/resource/utils';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const OpenStackSubNetSummary = (props: ResourceSummaryProps) => {
   const { resource } = props;

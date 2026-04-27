@@ -4,9 +4,9 @@ import {
   AzureVirtualMachine,
 } from 'waldur-js-client';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
 
 export function PureAzureResourceSummary(
   props: ResourceSummaryProps<

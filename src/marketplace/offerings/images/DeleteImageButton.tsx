@@ -2,14 +2,14 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { marketplaceScreenshotsDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 export const DeleteImageAction = ({ row, refetch, offering }) => {
   const user = useUser();

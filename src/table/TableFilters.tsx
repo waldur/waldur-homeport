@@ -5,9 +5,9 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { change, getFormValues } from 'redux-form';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { TableFiltersMenu } from './TableFiltersMenu';
 import { TableProps } from './types';

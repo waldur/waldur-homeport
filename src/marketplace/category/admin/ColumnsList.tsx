@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { translate } from '@waldur/i18n';
-import { Category } from '@waldur/marketplace/types';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { translate } from '@/i18n';
+import { Category } from '@/marketplace/types';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { ColumnRow } from './ColumnRow';
 

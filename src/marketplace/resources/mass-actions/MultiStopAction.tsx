@@ -1,6 +1,6 @@
 import { StopIcon } from '@phosphor-icons/react';
 
-import { getProps } from '@waldur/openstack/openstack-instance/actions/StopAction';
+import { getProps } from '@/openstack/openstack-instance/actions/StopAction';
 
 import { VirtualMachineMultiAction } from './VirtualMachineMultiAction';
 

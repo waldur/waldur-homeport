@@ -1,11 +1,11 @@
 import { Form } from 'react-bootstrap';
 import { Field, FieldArray } from 'redux-form';
 
-import { getLatinNameValidators } from '@waldur/core/validators';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { RulesList } from '@waldur/openstack/openstack-security-groups/rule-editor/RulesList';
-import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
+import { getLatinNameValidators } from '@/core/validators';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { RulesList } from '@/openstack/openstack-security-groups/rule-editor/RulesList';
+import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { connectForm } from './utils';
 

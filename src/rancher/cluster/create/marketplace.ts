@@ -1,12 +1,12 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { OfferingConfiguration } from '@waldur/marketplace/common/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { MARKETPLACE_RANCHER } from './constants';
 import { rancherOrderSerializer } from './serializers';
 
 const RancherCredentialsForm = lazyComponent(() =>
-  import('@waldur/rancher/RancherCredentialsForm').then((module) => ({
+  import('@/rancher/RancherCredentialsForm').then((module) => ({
     default: module.RancherCredentialsForm,
   })),
 );

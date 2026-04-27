@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { Component } from 'react';
 
-import { FilterOptions } from '@waldur/form/types';
+import { FilterOptions } from '@/form/types';
 
 interface ChoicesTableFilterProps {
   filterOptions: FilterOptions;

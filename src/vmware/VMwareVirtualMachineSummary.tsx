@@ -1,10 +1,10 @@
 import { VmwareVirtualMachine } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
-import { formatSummary } from '@waldur/resource/utils';
+import { ENV } from '@/core/config';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { formatSummary } from '@/resource/utils';
 
 export const VMwareVirtualMachineSummary = (
   props: ResourceSummaryProps<VmwareVirtualMachine>,

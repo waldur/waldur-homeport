@@ -11,19 +11,19 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { FieldReviewComments } from '@waldur/proposals/proposal/create-review/FieldReviewComments';
-import { ProposalReview } from '@waldur/proposals/types';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { selectAllRows } from '@waldur/table/actions';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { getTableState } from '@waldur/table/selectors';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { FieldReviewComments } from '@/proposals/proposal/create-review/FieldReviewComments';
+import { ProposalReview } from '@/proposals/types';
+import { ActionButton } from '@/table/ActionButton';
+import { selectAllRows } from '@/table/actions';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { getTableState } from '@/table/selectors';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { useSubmitProposalResourcesFromTemplates } from '../utils';
 

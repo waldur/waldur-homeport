@@ -1,14 +1,14 @@
 import { useEffect, FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { openIssueCreateDialog } from '@waldur/issues/create/actions';
-import { ISSUE_IDS } from '@waldur/issues/types/constants';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { openIssueCreateDialog } from '@/issues/create/actions';
+import { ISSUE_IDS } from '@/issues/types/constants';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 export const RequestActionDialog: FunctionComponent<{
   resolve: { offering; offeringRequestMode };

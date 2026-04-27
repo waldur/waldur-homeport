@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { OfferingState, marketplaceOfferingUsersList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { FIELD_MAPPING } from '@waldur/marketplace/offerings/details/OfferingUserDetailsDialog';
-import { router } from '@waldur/router';
-import { useUser } from '@waldur/workspace/hooks';
+import { ENV } from '@/core/config';
+import { STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { FIELD_MAPPING } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
+import { router } from '@/router';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceWarningBar } from './ResourceWarningBar';
 

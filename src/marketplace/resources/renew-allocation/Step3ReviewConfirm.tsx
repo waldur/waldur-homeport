@@ -3,15 +3,15 @@ import { Table } from 'react-bootstrap';
 import { Field, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { formatDate, parseDate } from '@waldur/core/dateUtils';
-import { StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { OrderAttachmentField } from '@waldur/marketplace/deploy/steps/OrderAttachmentField';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { getPurchaseOrderConfig } from '@waldur/marketplace/resources/common/purchaseOrderConfig';
-import { Field as SummaryField } from '@waldur/resource/summary';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { formatDate, parseDate } from '@/core/dateUtils';
+import { StringField } from '@/form';
+import { translate } from '@/i18n';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { OrderAttachmentField } from '@/marketplace/deploy/steps/OrderAttachmentField';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';
+import { Field as SummaryField } from '@/resource/summary';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { RenewalCostBreakdown } from './RenewalCostBreakdown';
 import { RenewAllocationFormData } from './types';

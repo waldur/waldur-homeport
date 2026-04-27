@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Customer } from 'waldur-js-client';
 
-import { getRestrictionsArray } from '@waldur/core/restrictions';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { getRestrictionsArray } from '@/core/restrictions';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface OrganizationRestrictionsDialogProps {
   resolve: {

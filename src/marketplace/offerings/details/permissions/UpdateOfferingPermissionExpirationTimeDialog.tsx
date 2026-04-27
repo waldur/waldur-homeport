@@ -2,13 +2,13 @@ import { FC, useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
 import { marketplaceProviderOfferingsUpdateUser } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { SubmitButton } from '@/form';
+import { DateTimeField } from '@/form/DateTimeField';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { FormGroup } from '../../FormGroup';
 

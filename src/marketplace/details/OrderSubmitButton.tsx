@@ -1,13 +1,13 @@
 import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { removeEmptyObjects } from '@waldur/core/utils';
-import { SubmitButton } from '@waldur/form';
-import { FieldErrorMessage } from '@waldur/form/FieldError';
-import { FloatingButton } from '@waldur/form/FloatingButton';
-import { translate } from '@waldur/i18n';
+import { parseDate } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { removeEmptyObjects } from '@/core/utils';
+import { SubmitButton } from '@/form';
+import { FieldErrorMessage } from '@/form/FieldError';
+import { FloatingButton } from '@/form/FloatingButton';
+import { translate } from '@/i18n';
 
 import { OrderSummaryProps } from './types';
 

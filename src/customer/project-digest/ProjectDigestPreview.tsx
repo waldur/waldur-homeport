@@ -4,12 +4,12 @@ import { Form } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { ProjectDigestPreviewResponse } from 'waldur-js-client';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { showErrorResponse } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
 
 import { useCustomerProjects } from '../workspace/fetchCustomer';
 

@@ -12,22 +12,22 @@ import { useEffectOnce } from 'react-use';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import { OrderDetails } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getCustomer } from '@waldur/customer/utils';
-import { SidebarLayout } from '@waldur/form/SidebarLayout';
-import { translate } from '@waldur/i18n';
-import { Offering, Plan } from '@waldur/marketplace/types';
-import { calculateSystemVolumeSize } from '@waldur/openstack/openstack-instance/utils';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
-import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
-import { useUser } from '@waldur/workspace/hooks';
+import { parseDate } from '@/core/dateUtils';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getCustomer } from '@/customer/utils';
+import { SidebarLayout } from '@/form/SidebarLayout';
+import { translate } from '@/i18n';
+import { Offering, Plan } from '@/marketplace/types';
+import { calculateSystemVolumeSize } from '@/openstack/openstack-instance/utils';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
+import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
+import { useUser } from '@/workspace/hooks';
 import {
   getProject as currentProjectSelector,
   getCustomer as currentCustomerSelector,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { getOrderFormComponent } from '../common/registry';
 import { DeployFormData, Limits } from '../common/types';

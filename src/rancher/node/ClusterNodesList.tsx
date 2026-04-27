@@ -6,16 +6,16 @@ import {
   RancherNodesListData,
 } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
-import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
-import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { INSTANCE_TYPE } from '@/openstack/constants';
+import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
+import { ResourceState } from '@/resource/state/ResourceState';
+import { ResourceSummary } from '@/resource/summary/ResourceSummary';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { CreateNodeAction } from '../cluster/actions/CreateNodeAction';
 

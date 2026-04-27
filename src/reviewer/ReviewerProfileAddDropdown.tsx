@@ -9,10 +9,10 @@ import { useQueryClient } from '@tanstack/react-query';
 import { Dropdown } from 'react-bootstrap';
 import { ReviewerProfile } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const AffiliationFormDialog = lazyComponent(() =>
   import('./AffiliationFormDialog').then((module) => ({

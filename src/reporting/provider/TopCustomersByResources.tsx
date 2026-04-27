@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { ExportData } from '@waldur/table/exporters/types';
-import { SimpleTable } from '@waldur/table/SimpleTable';
-import { Column } from '@waldur/table/types';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { ExportData } from '@/table/exporters/types';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
 
 import { TopCustomer } from './types';
 

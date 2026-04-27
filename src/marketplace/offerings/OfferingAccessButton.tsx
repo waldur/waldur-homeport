@@ -1,6 +1,6 @@
 import { ArrowSquareOutIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const OfferingAccessButton = ({ offering }) =>
   offering.access_url ? (

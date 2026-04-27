@@ -7,12 +7,12 @@ import { AppFooter } from './AppFooter';
 
 vi.mock('react-redux');
 vi.mock('waldur-js-client');
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     buildId: '1.2.3',
   },
 }));
-vi.mock('@waldur/core/Tooltip', () => ({
+vi.mock('@/core/Tooltip', () => ({
   Tip: ({ children, label }: any) => <div title={label}>{children}</div>,
 }));
 vi.mock('./DisclaimerArea', () => ({

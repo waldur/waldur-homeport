@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { FC, useCallback, useEffect, useMemo, useRef } from 'react';
 import { FormCheck } from 'react-bootstrap';
 
-import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
-import { translate } from '@waldur/i18n';
+import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableFiltersMenu } from './TableFiltersMenu';

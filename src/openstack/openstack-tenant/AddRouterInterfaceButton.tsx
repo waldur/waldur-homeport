@@ -2,10 +2,10 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { OpenStackRouter } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionItemType } from '@/resource/actions/types';
 
 import { AddRouterInterfaceDialog } from './AddRouterInterfaceDialog';
 

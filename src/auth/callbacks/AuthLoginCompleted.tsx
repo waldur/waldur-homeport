@@ -1,9 +1,9 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent, useEffect } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { tryJoinOrganization } from '@waldur/invitations/tryJoinOrganization';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { tryJoinOrganization } from '@/invitations/tryJoinOrganization';
 
 import { loginUser } from '../AuthService';
 

@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { invoicesList } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getCustomer } from '@/workspace/selectors';
 
 import { MonthOverview } from './MonthOverview';
 

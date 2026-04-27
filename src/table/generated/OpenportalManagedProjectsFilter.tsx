@@ -8,10 +8,10 @@ import {
   RemoteProjectUpdateRequestStateEnum,
 } from 'waldur-js-client';
 
-import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { RootState } from '@/store/reducers';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const RemoteProjectUpdateRequestStateOptions: RemoteProjectUpdateRequestStateOption[] =
   [

@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import azureIcon from '@waldur/images/appstore/icon-azure.png';
-import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
-import rancherIcon from '@waldur/images/appstore/icon-rancher.png';
-import slurmIcon from '@waldur/images/appstore/icon-slurm.png';
-import vmwareIcon from '@waldur/images/appstore/icon-vmware.png';
+import { Tip } from '@/core/Tooltip';
+import azureIcon from '@/images/appstore/icon-azure.png';
+import openstackIcon from '@/images/appstore/icon-openstack.png';
+import rancherIcon from '@/images/appstore/icon-rancher.png';
+import slurmIcon from '@/images/appstore/icon-slurm.png';
+import vmwareIcon from '@/images/appstore/icon-vmware.png';
 
 import { formatResourceType, formatDefault } from './utils';
 

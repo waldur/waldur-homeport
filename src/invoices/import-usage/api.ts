@@ -1,6 +1,6 @@
 import { customersList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages } from '@/core/api';
 
 import { CustomerLookup } from './types';
 

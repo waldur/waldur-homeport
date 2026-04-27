@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap';
 
-import { BookingResourcesCalendar } from '@waldur/booking/offering/BookingResourcesCalendar';
-import { translate } from '@waldur/i18n';
+import { BookingResourcesCalendar } from '@/booking/offering/BookingResourcesCalendar';
+import { translate } from '@/i18n';
 
 export const BookingMainComponent = ({ resource, refetch }) => {
   return (

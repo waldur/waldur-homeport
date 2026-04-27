@@ -6,14 +6,14 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ResourceNameField } from '@waldur/marketplace/orders/list/ResourceNameField';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { ResourcesListActions } from '@waldur/user/affiliations/ResourcesListActions';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ResourceNameField } from '@/marketplace/orders/list/ResourceNameField';
+import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { ResourcesListActions } from '@/user/affiliations/ResourcesListActions';
 
 interface OwnProps {
   row: ProviderPlanDetails;

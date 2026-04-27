@@ -3,11 +3,11 @@ import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 import { marketplaceProviderOfferingsList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
-import { useTitle } from '@waldur/navigation/title';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getServiceProviderByCustomer } from '@/marketplace/common/api';
+import { useTitle } from '@/navigation/title';
 
 import { ProviderDetailsBody } from './ProviderDetailsBody';
 

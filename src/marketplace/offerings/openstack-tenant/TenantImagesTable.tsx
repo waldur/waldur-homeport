@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { OpenstackImagesListData } from 'waldur-js-client';
 
-import { TenantImagesList } from '@waldur/openstack/openstack-tenant/TenantImagesList';
+import { TenantImagesList } from '@/openstack/openstack-tenant/TenantImagesList';
 
 export const TenantImagesTable: FunctionComponent<{ offering }> = ({
   offering,

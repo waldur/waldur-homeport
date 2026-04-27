@@ -6,13 +6,13 @@ import {
   ProtectedRoundRequest,
 } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { parseDate } from '@/core/dateUtils';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';

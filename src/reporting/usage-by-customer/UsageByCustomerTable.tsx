@@ -2,13 +2,13 @@ import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { ResourceUsageByCustomer } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { SimpleTable } from '@waldur/table/SimpleTable';
-import { Column } from '@waldur/table/types';
-import { getSimpleExportData, renderFieldOrDash } from '@waldur/table/utils';
+import { ChartCard } from '@/core/ChartCard';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
+import { getSimpleExportData, renderFieldOrDash } from '@/table/utils';
 
 interface Props {
   data: ResourceUsageByCustomer[];

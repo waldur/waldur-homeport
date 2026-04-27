@@ -1,11 +1,11 @@
 import { ExternalLink, externalLinksList } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import Avatar from '@/core/Avatar';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { QuickShortcutCreateButton } from './QuickShortcutCreateButton';
 import { QuickShortcutsRowActions } from './QuickShortcutsRowActions';

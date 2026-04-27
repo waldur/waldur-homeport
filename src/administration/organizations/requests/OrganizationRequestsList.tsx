@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { userPermissionRequestsList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
-import { UserPermissionRequestRowActions } from '@waldur/invitations/UserPermissionRequestRowActions';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { PermissionRequestStateField } from '@/invitations/PermissionRequestStateField';
+import { UserPermissionRequestRowActions } from '@/invitations/UserPermissionRequestRowActions';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { RoleField } from '@/user/affiliations/RoleField';
 
 export const OrganizationRequestsList: FC = () => {
   const props = useTable({

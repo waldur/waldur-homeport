@@ -4,15 +4,15 @@ import { Card, Tab, Tabs } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { Resource } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { UI_STALE_TIME } from '@/core/constants';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { filterOfferingComponents } from '@/marketplace/common/registry';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { ChangeLimitsComponent } from '../change-limits/ChangeLimitsComponent';
 import { getLimitChangeData, loadData } from '../change-limits/utils';

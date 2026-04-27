@@ -3,10 +3,10 @@ import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { freeipaProfilesUpdateSshKeys } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { Tip } from '@/core/Tooltip';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const SyncProfile: FunctionComponent<{
   profile;

@@ -3,21 +3,21 @@ import { FC, useCallback } from 'react';
 import { Form } from 'react-final-form';
 import { RoleDetails } from 'waldur-js-client';
 
-import { post } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { required } from '@waldur/core/validators';
-import { usersAutocomplete } from '@waldur/customer/team/utils';
-import { SubmitButton } from '@waldur/form';
-import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ExpirationTimeGroup } from '@waldur/project/team/ExpirationTimeGroup';
-import { RoleGroup } from '@waldur/project/team/RoleGroup';
-import { UserListOptionInline } from '@waldur/project/team/UserListOptionInline';
-import { useNotify } from '@waldur/store/hooks';
+import { post } from '@/core/api';
+import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
+import { usersAutocomplete } from '@/customer/team/utils';
+import { SubmitButton } from '@/form';
+import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ExpirationTimeGroup } from '@/project/team/ExpirationTimeGroup';
+import { RoleGroup } from '@/project/team/RoleGroup';
+import { UserListOptionInline } from '@/project/team/UserListOptionInline';
+import { useNotify } from '@/store/hooks';
 
 import { AddUserDialogProps } from './types';
 

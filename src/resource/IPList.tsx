@@ -1,4 +1,4 @@
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 
 export const IPList = ({ value }) => {
   if (Array.isArray(value) && value.filter(Boolean).length > 0) {

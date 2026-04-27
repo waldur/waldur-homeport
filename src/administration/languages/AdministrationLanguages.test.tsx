@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { overrideSettings } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 import { AdministrationLanguages } from './AdministrationLanguages';
 
 // Mock dependencies
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {
@@ -25,17 +25,17 @@ vi.mock('@waldur/core/config', () => ({
 
 vi.mock('waldur-js-client');
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key: string) => key,
 }));
 
-vi.mock('@waldur/i18n/useLanguageSelector', () => ({
+vi.mock('@/i18n/useLanguageSelector', () => ({
   useLanguageSelector: () => ({
     currentLanguage: { code: 'en' },
   }),
 }));
 
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useNotify: () => ({
     showError: vi.fn(),
     showSuccess: vi.fn(),

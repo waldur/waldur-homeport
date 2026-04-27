@@ -2,19 +2,19 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { InvoiceItemDetail, invoiceItemsList } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
-import { PeriodOption } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { ComponentUsageImportButton } from '@waldur/invoices/import-usage';
-import { createFetcher } from '@waldur/table/api';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Link } from '@/core/Link';
+import { PeriodOption } from '@/form/types';
+import { translate } from '@/i18n';
+import { ComponentUsageImportButton } from '@/invoices/import-usage';
+import { createFetcher } from '@/table/api';
 import {
   selectInvoiceItemsFilter,
   InvoiceItemsFilter,
-} from '@waldur/table/generated/InvoiceItemsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/InvoiceItemsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface SupportInvoiceItemsListProps {
   initialValues: { accounting_period: { label: string; value: PeriodOption } };

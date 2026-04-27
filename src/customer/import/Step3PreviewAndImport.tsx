@@ -3,15 +3,15 @@ import { useDispatch } from 'react-redux';
 import { useToggle } from 'react-use';
 import { Customer } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { SkipErrorsCheck } from '@waldur/project/import/SkipErrorsCheck';
-import { showError } from '@waldur/store/notify';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
+import { showError } from '@/store/notify';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import {
   getCustomerOptionalFields,

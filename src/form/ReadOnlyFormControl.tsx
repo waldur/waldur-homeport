@@ -8,7 +8,7 @@ import {
 } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 interface ReadOnlyFormControlProps {
   label: string;

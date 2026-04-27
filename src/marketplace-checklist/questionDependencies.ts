@@ -1,4 +1,4 @@
-import { isEmpty } from '@waldur/core/utils';
+import { isEmpty } from '@/core/utils';
 
 export interface DependencyCondition {
   question_description: string;

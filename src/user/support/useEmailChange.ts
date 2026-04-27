@@ -2,11 +2,11 @@ import { useState, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { usersCancelChangeEmail, usersChangeEmail } from 'waldur-js-client';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
-import { setCurrentUser } from '@waldur/workspace/actions';
+import { format } from '@/core/ErrorMessageFormatter';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showError, showSuccess } from '@/store/notify';
+import { setCurrentUser } from '@/workspace/actions';
 
 export const useEmailChange = (user) => {
   const [email, setEmail] = useState('');

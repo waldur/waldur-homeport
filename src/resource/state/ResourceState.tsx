@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { Resource } from '@waldur/resource/types';
+import { StateIndicator } from '@/core/StateIndicator';
+import { Resource } from '@/resource/types';
 
 import { getResourceState } from './utils';
 

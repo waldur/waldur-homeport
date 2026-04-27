@@ -1,10 +1,10 @@
-import { CodeBlock } from '@waldur/ai-assistant/components/blocks/CodeBlock';
-import { HomePortNavBlock } from '@waldur/ai-assistant/components/blocks/HomePortNavBlock';
-import { MarkdownBlock } from '@waldur/ai-assistant/components/blocks/MarkdownBlock';
-import { MermaidBlock } from '@waldur/ai-assistant/components/blocks/MermaidBlock';
-import { ResourceListBlock } from '@waldur/ai-assistant/components/blocks/ResourceListBlock';
-import { ToolLoadingBlock } from '@waldur/ai-assistant/components/blocks/ToolLoadingBlock';
-import { VMOrderBlock } from '@waldur/ai-assistant/components/blocks/VMOrderBlock';
+import { CodeBlock } from '@/ai-assistant/components/blocks/CodeBlock';
+import { HomePortNavBlock } from '@/ai-assistant/components/blocks/HomePortNavBlock';
+import { MarkdownBlock } from '@/ai-assistant/components/blocks/MarkdownBlock';
+import { MermaidBlock } from '@/ai-assistant/components/blocks/MermaidBlock';
+import { ResourceListBlock } from '@/ai-assistant/components/blocks/ResourceListBlock';
+import { ToolLoadingBlock } from '@/ai-assistant/components/blocks/ToolLoadingBlock';
+import { VMOrderBlock } from '@/ai-assistant/components/blocks/VMOrderBlock';
 
 import { uiRegistry } from './uiRegistry';
 

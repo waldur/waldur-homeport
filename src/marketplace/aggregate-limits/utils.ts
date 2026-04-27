@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { ComponentsUsageStats } from 'waldur-js-client';
 
-import { generateBrandColors } from '@waldur/core/generateColors';
-import { getBrandColor } from '@waldur/core/utils';
-import { CHART_BAR_ROUNDING } from '@waldur/dashboard/constants';
-import { translate } from '@waldur/i18n';
+import { generateBrandColors } from '@/core/generateColors';
+import { getBrandColor } from '@/core/utils';
+import { CHART_BAR_ROUNDING } from '@/dashboard/constants';
+import { translate } from '@/i18n';
 
 interface ChartResult {
   options: any;

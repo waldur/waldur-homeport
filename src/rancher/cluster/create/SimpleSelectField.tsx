@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { FieldError } from '@waldur/form';
-import { Select } from '@waldur/form/themed-select';
+import { FieldError } from '@/form';
+import { Select } from '@/form/themed-select';
 
 export const SimpleSelectField: FunctionComponent<any> = (props) => (
   <>

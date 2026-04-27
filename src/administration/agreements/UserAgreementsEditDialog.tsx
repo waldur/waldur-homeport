@@ -3,13 +3,13 @@ import { Field, Form as ReactFinalForm } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { userAgreementsPartialUpdate } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { SubmitButton } from '@waldur/form';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess } from '@waldur/store/notify';
+import { ENV } from '@/core/config';
+import { SubmitButton } from '@/form';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess } from '@/store/notify';
 
 interface UserAgreementsEditDialogOwnProps {
   resolve: {

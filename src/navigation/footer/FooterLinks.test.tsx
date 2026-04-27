@@ -5,7 +5,7 @@ import { FooterLinks } from './FooterLinks';
 import { useFooterLinks } from './useFooterLinks';
 
 vi.mock('./useFooterLinks');
-vi.mock('@waldur/metronic/components', () => ({
+vi.mock('@/metronic/components', () => ({
   MenuComponent: { reinitialization: vi.fn() },
   DrawerComponent: { getInstance: vi.fn() },
 }));

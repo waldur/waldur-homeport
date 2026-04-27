@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { CustomerUser } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { RoleField } from '@/user/affiliations/RoleField';
 
 import { AddProjectUserButton } from './AddProjectUserButton';
 import { DeleteProjectUserButton } from './DeleteProjectUserButton';

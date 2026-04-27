@@ -1,6 +1,6 @@
 import { Fragment, ReactNode } from 'react';
 
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 import { LanguageUtilsService } from './LanguageUtilsService';
 import { Translate } from './types';

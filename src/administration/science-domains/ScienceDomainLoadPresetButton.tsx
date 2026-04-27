@@ -8,15 +8,15 @@ import {
   scienceDomainsPresetsList,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { FormGroup, SubmitButton } from '@waldur/form';
-import { SelectField } from '@waldur/form/SelectField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { required } from '@/core/validators';
+import { FormGroup, SubmitButton } from '@/form';
+import { SelectField } from '@/form/SelectField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { openModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 const LoadPresetDialog = ({ resolve }) => {
   const dispatch = useDispatch();

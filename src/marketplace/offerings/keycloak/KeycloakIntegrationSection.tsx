@@ -12,16 +12,16 @@ import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { offeringKeycloakGroupsTestConnection } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SecretField as PlainSecretField } from '@waldur/marketplace/common/SecretField';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SecretField as PlainSecretField } from '@/marketplace/common/SecretField';
+import { openModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { FieldEditButton } from '../update/integration/FieldEditButton';
 import { OfferingEditPanelProps } from '../update/integration/types';

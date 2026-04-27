@@ -4,10 +4,10 @@ import { PublicOfferingDetails } from 'waldur-js-client';
 import {
   filterOfferingComponents,
   getFormLimitParser,
-} from '@waldur/marketplace/common/registry';
-import { Limits } from '@waldur/marketplace/common/types';
-import { maxAmount, minAmount } from '@waldur/marketplace/common/utils';
-import { OfferingComponent } from '@waldur/marketplace/types';
+} from '@/marketplace/common/registry';
+import { Limits } from '@/marketplace/common/types';
+import { maxAmount, minAmount } from '@/marketplace/common/utils';
+import { OfferingComponent } from '@/marketplace/types';
 
 import { OfferingLimits } from './types';
 

@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { CostPolicyDeleteButton } from './CostPolicyDeleteButton';
 import { CostPolicyEditButton } from './CostPolicyEditButton';

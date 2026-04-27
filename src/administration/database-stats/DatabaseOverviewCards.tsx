@@ -2,8 +2,8 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import type { DatabaseStatsResponse } from './api';
 import {

@@ -9,23 +9,23 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { GroupInvitation, userGroupInvitationsList } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { CustomerPermissionsLogButton } from '@waldur/customer/team/CustomerPermissionsLogButton';
-import { TeamDropdownActions } from '@waldur/customer/team/TeamDropdownActions';
-import { translate } from '@waldur/i18n';
-import { GroupInvitationRowActions } from '@waldur/invitations/GroupInvitationRowActions';
-import { GroupInvitationsListExpandableRow } from '@waldur/invitations/GroupInvitationsListExpandableRow';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { CustomerPermissionsLogButton } from '@/customer/team/CustomerPermissionsLogButton';
+import { TeamDropdownActions } from '@/customer/team/TeamDropdownActions';
+import { translate } from '@/i18n';
+import { GroupInvitationRowActions } from '@/invitations/GroupInvitationRowActions';
+import { GroupInvitationsListExpandableRow } from '@/invitations/GroupInvitationsListExpandableRow';
+import { createFetcher } from '@/table/api';
 import {
   UserGroupInvitationsFilter,
   selectUserGroupInvitationsFilter,
-} from '@waldur/table/generated/UserGroupInvitationsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
-import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/UserGroupInvitationsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { RoleField } from '@/user/affiliations/RoleField';
+import { exportRoleField } from '@/user/affiliations/RolePopover';
+import { getCustomer } from '@/workspace/selectors';
 
 import { useTeamTableTabs } from '../customer/team/tabs';
 

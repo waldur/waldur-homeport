@@ -7,10 +7,10 @@ import {
   OpenstackHypervisorsListData,
 } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { EChart } from '@/core/EChart';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import { computeUsage, formatMemory } from './utils';
 

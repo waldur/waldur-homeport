@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
+import { Link } from '@/core/Link';
+import { IBreadcrumbItem } from '@/navigation/types';
 
 interface HiddenItemsPopoverProps {
   items: IBreadcrumbItem[];

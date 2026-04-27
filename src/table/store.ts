@@ -2,8 +2,8 @@ import { arrayMove } from '@dnd-kit/sortable';
 import { isEqual } from 'lodash-es';
 import { Reducer } from 'redux';
 
-import { ALL_RESOURCES_TABLE_ID } from '@waldur/marketplace/resources/list/constants';
-import { createByKey } from '@waldur/store/utils';
+import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
+import { createByKey } from '@/store/utils';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';

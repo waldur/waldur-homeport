@@ -7,9 +7,9 @@ import {
   onboardingVerificationsRetrieve,
 } from 'waldur-js-client';
 
-import { OnboardingJustificationDetails } from '@waldur/administration/organizations/OnboardingJustificationDetails';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse } from '@waldur/store/notify';
+import { OnboardingJustificationDetails } from '@/administration/organizations/OnboardingJustificationDetails';
+import { translate } from '@/i18n';
+import { showErrorResponse } from '@/store/notify';
 
 export const UserOnboardingJustificationDetailsPage = () => {
   const {

@@ -4,15 +4,15 @@ import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { AsyncPaginate, Select } from '@waldur/form/themed-select';
-import { PeriodOption } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { resourceAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { SubmitButton } from '@/form';
+import { AsyncPaginate, Select } from '@/form/themed-select';
+import { PeriodOption } from '@/form/types';
+import { translate } from '@/i18n';
+import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { useTriggerBillingSync, useTriggerReconciliation } from '../api';
 

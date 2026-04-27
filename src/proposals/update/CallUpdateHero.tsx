@@ -1,10 +1,10 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { getCallStatus } from '@waldur/proposals/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { StateIndicator } from '@/core/StateIndicator';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { getCallStatus } from '@/proposals/utils';
+import { getCustomer } from '@/workspace/selectors';
 
 import { CallDetailsHeaderBody } from '../details/CallDetailsHeaderBody';
 import { Call } from '../types';

@@ -1,9 +1,9 @@
 import { azureSqlServersDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { validateState } from '@waldur/resource/actions/base';
-import { DestroyActionItem } from '@waldur/resource/actions/DestroyActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { translate } from '@/i18n';
+import { validateState } from '@/resource/actions/base';
+import { DestroyActionItem } from '@/resource/actions/DestroyActionItem';
+import { ActionItemType } from '@/resource/actions/types';
 
 const validators = [validateState('OK', 'ERRED')];
 

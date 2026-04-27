@@ -3,12 +3,12 @@ import { Field as FinalField } from 'react-final-form';
 import { OptionProps, components } from 'react-select';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form/SelectField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Role, RoleType } from '@waldur/permissions/types';
-import { getRoles } from '@waldur/permissions/utils';
+import { required } from '@/core/validators';
+import { SelectField } from '@/form/SelectField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { Role, RoleType } from '@/permissions/types';
+import { getRoles } from '@/permissions/utils';
 
 const renderRoleType = (roleType: RoleType) =>
   ({

@@ -3,10 +3,10 @@ import { useDispatch } from 'react-redux';
 import { userInvitationsCreate } from 'waldur-js-client';
 import { userInvitationsCheckDuplicates } from 'waldur-js-client/sdk.gen';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 import { GroupInvitationFormData, InvitationContext } from './types';

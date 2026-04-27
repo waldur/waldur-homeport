@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Accordion } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { Report } from '@waldur/marketplace/resources/types';
+import { translate } from '@/i18n';
+import { Report } from '@/marketplace/resources/types';
 
 interface ShowReportComponentProps {
   report: Report;

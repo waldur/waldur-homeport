@@ -1,10 +1,10 @@
 import { NestedSection, PublicOfferingDetails } from 'waldur-js-client';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ImagesTab } from '@waldur/marketplace/offerings/images/ImagesTab';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ImagesTab } from '@/marketplace/offerings/images/ImagesTab';
 
 import { PublicOfferingComponentsTable } from '../offerings/details/PublicOfferingComponentsTable';
 import { PublicOfferingPricing } from '../offerings/details/PublicOfferingPricing';

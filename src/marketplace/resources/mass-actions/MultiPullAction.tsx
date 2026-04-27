@@ -7,14 +7,10 @@ import {
   openstackVolumesPull,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import {
-  INSTANCE_TYPE,
-  TENANT_TYPE,
-  VOLUME_TYPE,
-} from '@waldur/openstack/constants';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const apiMethods = {
   [INSTANCE_TYPE]: (uuid: string) => openstackInstancesPull({ path: { uuid } }),

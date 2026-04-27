@@ -9,14 +9,14 @@ import {
   callManagingOrganisationsList,
 } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse } from '@waldur/store/notify';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse } from '@/store/notify';
+import { setCurrentCustomer } from '@/workspace/actions';
+import { getCustomer } from '@/workspace/selectors';
 
 import { getCustomer as getCustomerApi } from '../utils';
 

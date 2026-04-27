@@ -1,7 +1,7 @@
 import { Store } from 'redux';
 
-import * as api from '@waldur/openstack/api';
-import { createActionStore } from '@waldur/resource/actions/testUtils';
+import * as api from '@/openstack/api';
+import { createActionStore } from '@/resource/actions/testUtils';
 
 import {
   DialogFixture,
@@ -9,7 +9,7 @@ import {
   fakeInstance,
 } from './UpdateFloatingIpsDialog.fixture';
 
-vi.mock('@waldur/openstack/api');
+vi.mock('@/openstack/api');
 
 const apiMock = vi.mocked(api);
 

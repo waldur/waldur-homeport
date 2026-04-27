@@ -3,11 +3,11 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { required } from '@waldur/core/validators';
-import { TextField } from '@waldur/form';
-import { MonacoField } from '@waldur/form/MonacoField';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { required } from '@/core/validators';
+import { TextField } from '@/form';
+import { MonacoField } from '@/form/MonacoField';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { VariablesPane } from './VariablesPane';
 

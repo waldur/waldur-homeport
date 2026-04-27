@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Validator } from 'redux-form';
 
-import { useTheme } from '@waldur/theme/useTheme';
+import { useTheme } from '@/theme/useTheme';
 
 import { MonacoEditor } from './MonacoEditor';
 

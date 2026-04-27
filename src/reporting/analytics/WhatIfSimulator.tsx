@@ -10,10 +10,10 @@ import classNames from 'classnames';
 import { FC, useCallback } from 'react';
 import { Col, Form, InputGroup, Row } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { Tip } from '@/core/Tooltip';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { SimulationParam, SimulationResult } from './types';
 import { formatSimulationChange, useSimulation } from './useSimulation';

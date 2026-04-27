@@ -5,17 +5,17 @@ import { FormLabel } from 'react-bootstrap';
 import { Field } from 'redux-form';
 import { openstackImagesList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { BoxRadioField } from '@waldur/marketplace/deploy/steps/BoxRadioField';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { generateSystemImageChoices } from '@waldur/marketplace/deploy/utils';
+import { getAllPages } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { FilterBox } from '@/form/FilterBox';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { BoxRadioField } from '@/marketplace/deploy/steps/BoxRadioField';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { generateSystemImageChoices } from '@/marketplace/deploy/utils';
 
 export const FormImageStep = (props: FormStepProps) => {
   const [query, setQuery] = useState('');

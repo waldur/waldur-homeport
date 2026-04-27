@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { loadData } from './loadData';
 import { ModalActionsDialog } from './ModalActionsDialog';

@@ -1,8 +1,8 @@
 import type { ComponentType } from 'react';
 
-import { FeaturesEnum } from '@waldur/FeaturesEnums';
-import { Offering } from '@waldur/marketplace/types';
-import { TableProps } from '@waldur/table/types';
+import { FeaturesEnum } from '@/FeaturesEnums';
+import { Offering } from '@/marketplace/types';
+import { TableProps } from '@/table/types';
 
 interface ResourceTabProps extends Partial<TableProps> {
   resource?: any;

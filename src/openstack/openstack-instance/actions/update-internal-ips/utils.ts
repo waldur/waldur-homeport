@@ -5,10 +5,10 @@ import { reduxForm } from 'redux-form';
 import { openstackInstancesUpdatePorts } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { loadSubnets } from '@waldur/openstack/api';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { loadSubnets } from '@/openstack/api';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface PortFormEntry {
   subnet: any;

@@ -1,8 +1,8 @@
 import { ArrowBendDownRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { DependencyCondition } from '@waldur/marketplace-checklist/questionDependencies';
+import { translate } from '@/i18n';
+import { DependencyCondition } from '@/marketplace-checklist/questionDependencies';
 
 interface QuestionDependencyInfo {
   logic: 'and' | 'or';

@@ -4,9 +4,9 @@ import { useDispatch } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { userInvitationsReject } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const InvitationReject: FunctionComponent = () => {
   const router = useRouter();

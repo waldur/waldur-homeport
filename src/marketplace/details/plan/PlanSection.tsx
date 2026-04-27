@@ -1,17 +1,17 @@
 import { connect } from 'react-redux';
 import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
-import { Panel } from '@waldur/core/Panel';
-import { translate } from '@waldur/i18n';
-import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
-import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
+import { Panel } from '@/core/Panel';
+import { translate } from '@/i18n';
+import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
+import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
 import {
   ComponentsSection,
   useGroupedComponents,
-} from '@waldur/marketplace/orders/details/type-based/ComponentsSection';
-import { Offering } from '@waldur/marketplace/types';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { Field } from '@waldur/resource/summary';
+} from '@/marketplace/orders/details/type-based/ComponentsSection';
+import { Offering } from '@/marketplace/types';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { Field } from '@/resource/summary';
 
 import { PricesData } from './types';
 import { pricesSelector } from './utils';

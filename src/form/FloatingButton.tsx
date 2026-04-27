@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { FC, PropsWithChildren, useRef } from 'react';
 
-import useOnScreen from '@waldur/core/useOnScreen';
+import useOnScreen from '@/core/useOnScreen';
 
 import './FloatingButton.scss';
 

@@ -1,11 +1,11 @@
-import { getLatinNameValidators, max } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
+import { getLatinNameValidators, max } from '@/core/validators';
+import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
   PlanStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
+} from '@/marketplace/deploy/steps/constants';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
 import { FormInternalNetworkStep } from './FormInternalNetworkStep';
 

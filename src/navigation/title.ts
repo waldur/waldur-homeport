@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { type RootState } from '@waldur/store/reducers';
+import { ENV } from '@/core/config';
+import { type RootState } from '@/store/reducers';
 
 const SET_TITLE = 'waldur/navigation/SET_TITLE';
 

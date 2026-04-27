@@ -9,26 +9,26 @@ import {
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
+import { STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
 import {
   NumberField,
   SelectField,
   SubmitButton,
   StringField,
   FieldError,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { FormContainer } from '@waldur/form/FormContainer';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { SlugTemplateHelpText } from '@waldur/form/SlugTemplateHelpText';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { EditCallProps } from '@waldur/proposals/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+} from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { FormContainer } from '@/form/FormContainer';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { SlugTemplateHelpText } from '@/form/SlugTemplateHelpText';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { EditCallProps } from '@/proposals/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 const PROPOSAL_SLUG_PLACEHOLDERS = [
   { name: 'call_slug', description: 'Call slug', example: 'TEST-CALL' },

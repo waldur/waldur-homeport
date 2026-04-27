@@ -2,11 +2,11 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { getUUID } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
+import { formatDateTime } from '@/core/dateUtils';
+import { getUUID } from '@/core/utils';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
 
 import { AffectedOfferingsTable } from '../create/AffectedOfferingsTable';
 import { InternalNotes } from '../InternalNotesField';

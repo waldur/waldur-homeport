@@ -3,17 +3,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { projectsDestroy } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { getCustomer as getCustomerApi } from '@waldur/customer/utils';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import {
-  setCurrentCustomer,
-  setCurrentProject,
-} from '@waldur/workspace/actions';
-import { getProject, getUser } from '@waldur/workspace/selectors';
+import { getCustomer as getCustomerApi } from '@/customer/utils';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { setCurrentCustomer, setCurrentProject } from '@/workspace/actions';
+import { getProject, getUser } from '@/workspace/selectors';
 
 export const useProjectDelete = ({
   project,

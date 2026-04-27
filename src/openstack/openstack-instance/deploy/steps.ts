@@ -1,12 +1,12 @@
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
+} from '@/marketplace/deploy/steps/constants';
+import { FormCloudStep } from '@/marketplace/deploy/steps/FormCloudStep';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
+import { INSTANCE_TYPE } from '@/openstack/constants';
 
 import { validateOpenstackInstanceName } from '../utils';
 

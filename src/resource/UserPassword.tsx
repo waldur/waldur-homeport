@@ -2,7 +2,7 @@ import { EyeIcon, EyeSlashIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useToggle } from 'react-use';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface UserPasswordProps {
   password: string;

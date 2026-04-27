@@ -2,10 +2,10 @@ import { CopyIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import { SelectField } from './SelectField';
 import { getPairSelector } from './utils';

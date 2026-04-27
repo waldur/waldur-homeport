@@ -2,12 +2,12 @@ import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplacePlansUpdatePrices } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { Offering, OfferingComponent, Plan } from '@waldur/marketplace/types';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { Offering, OfferingComponent, Plan } from '@/marketplace/types';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { EDIT_PLAN_FORM_ID } from './constants';
 import { PricesTable } from './PricesTable';

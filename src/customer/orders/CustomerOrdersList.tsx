@@ -4,11 +4,11 @@ import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import { MarketplaceOrdersListData } from 'waldur-js-client';
 
-import { OrdersBulkActions } from '@waldur/marketplace/orders/actions/OrdersBulkActions';
-import { CustomerOrdersListFilter } from '@waldur/marketplace/orders/list/MarketplaceOrdersListFilter';
-import { OrdersTableComponent } from '@waldur/marketplace/orders/list/OrdersTableComponent';
-import { RootState } from '@waldur/store/reducers';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { OrdersBulkActions } from '@/marketplace/orders/actions/OrdersBulkActions';
+import { CustomerOrdersListFilter } from '@/marketplace/orders/list/MarketplaceOrdersListFilter';
+import { OrdersTableComponent } from '@/marketplace/orders/list/OrdersTableComponent';
+import { RootState } from '@/store/reducers';
+import { getCustomer } from '@/workspace/selectors';
 
 import {
   CUSTOMER_ORDERS_LIST_FILTER_FORM_ID,

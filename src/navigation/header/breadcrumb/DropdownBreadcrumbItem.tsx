@@ -2,8 +2,8 @@ import { CaretDownIcon } from '@phosphor-icons/react';
 import { useCallback, useEffect, useRef, useState } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
-import { TruncatedText } from '@waldur/core/TruncatedText';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
+import { TruncatedText } from '@/core/TruncatedText';
+import { IBreadcrumbItem } from '@/navigation/types';
 
 import { BreadcrumbItem } from './BreadcrumbItem';
 

@@ -10,14 +10,14 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { renderFieldOrDash } from '@/table/utils';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
 

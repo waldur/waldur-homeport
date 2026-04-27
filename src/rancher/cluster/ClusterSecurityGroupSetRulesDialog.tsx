@@ -2,13 +2,13 @@ import { useDispatch } from 'react-redux';
 import { FieldArray, reduxForm } from 'redux-form';
 import { rancherClusterSecurityGroupsUpdate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { RulesList } from '@waldur/openstack/openstack-security-groups/rule-editor/RulesList';
-import { SecurityGroupRulesFormData } from '@waldur/openstack/openstack-security-groups/rule-editor/types';
-import { serializeRulesPayload } from '@waldur/openstack/openstack-security-groups/rule-editor/utils';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
+import { closeModalDialog } from '@/modal/actions';
+import { RulesList } from '@/openstack/openstack-security-groups/rule-editor/RulesList';
+import { SecurityGroupRulesFormData } from '@/openstack/openstack-security-groups/rule-editor/types';
+import { serializeRulesPayload } from '@/openstack/openstack-security-groups/rule-editor/utils';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const ClusterSecurityGroupSetRulesDialog = reduxForm<{}, { resolve }>({
   form: 'ClusterSecurityGroupSetRulesDialog',

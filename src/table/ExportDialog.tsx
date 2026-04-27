@@ -2,14 +2,14 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { required } from '@waldur/core/validators';
-import { SelectField, SubmitButton } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { type RootState } from '@waldur/store/reducers';
+import { Tip } from '@/core/Tooltip';
+import { required } from '@/core/validators';
+import { SelectField, SubmitButton } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { type RootState } from '@/store/reducers';
 
 import { EXPORT_OPTIONS } from './exporters/constants';
 import { ExportConfig, ExportFormat } from './exporters/types';

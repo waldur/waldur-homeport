@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FILTER_OFFERING_RESOURCE } from '@waldur/marketplace/details/constants';
-import { ResourceStateFilter } from '@waldur/marketplace/resources/list/ResourceStateFilter';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FILTER_OFFERING_RESOURCE } from '@/marketplace/details/constants';
+import { ResourceStateFilter } from '@/marketplace/resources/list/ResourceStateFilter';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureOfferingResourcesFilter: FunctionComponent = () => (
   <>

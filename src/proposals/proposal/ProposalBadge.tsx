@@ -1,4 +1,4 @@
-import { Badge } from '@waldur/core/Badge';
+import { Badge } from '@/core/Badge';
 
 import { formatProposalState } from '../utils';
 

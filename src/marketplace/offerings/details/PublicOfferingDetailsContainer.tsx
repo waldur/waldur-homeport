@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
-import { translate } from '@waldur/i18n';
-import { PublicOfferingDetails } from '@waldur/marketplace/offerings/details/PublicOfferingDetails';
-import { Category, Offering } from '@waldur/marketplace/types';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { InvalidRoutePage } from '@/error/InvalidRoutePage';
+import { translate } from '@/i18n';
+import { PublicOfferingDetails } from '@/marketplace/offerings/details/PublicOfferingDetails';
+import { Category, Offering } from '@/marketplace/types';
 
 interface OwnProps {
   data: {

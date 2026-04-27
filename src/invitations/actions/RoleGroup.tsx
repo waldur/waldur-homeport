@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Role } from '@waldur/permissions/types';
+import { required } from '@/core/validators';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { Role } from '@/permissions/types';
 
 export const RoleGroup: FunctionComponent<{ roles: Role[]; disabled }> = ({
   roles,

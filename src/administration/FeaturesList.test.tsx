@@ -3,19 +3,19 @@ import userEvent from '@testing-library/user-event';
 import { vi, describe, expect, beforeEach, it } from 'vitest';
 import { featureValues } from 'waldur-js-client';
 
-import { useNotify } from '@waldur/store/hooks';
+import { useNotify } from '@/store/hooks';
 
 import { FeaturesList } from './FeaturesList';
 
 // Mock dependencies
 vi.mock('waldur-js-client');
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),
   }),
 }));
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (message) => message,
 }));
 vi.mock('@uirouter/react', async (importOriginal) => {
@@ -33,7 +33,7 @@ vi.mock('@uirouter/react', async (importOriginal) => {
     }),
   };
 });
-vi.mock('@waldur/features/FeaturesDescription', () => ({
+vi.mock('@/features/FeaturesDescription', () => ({
   FeaturesDescription: [
     {
       key: 'billing',
@@ -57,7 +57,7 @@ vi.mock('@waldur/features/FeaturesDescription', () => ({
     },
   ],
 }));
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     FEATURES: {
       billing: {

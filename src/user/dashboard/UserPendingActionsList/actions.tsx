@@ -3,11 +3,11 @@ import { useRouter } from '@uirouter/react';
 import { useDispatch } from 'react-redux';
 import { UserAction, userActionsExecuteAction } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 import { SilenceAction } from './SilenceAction';
 import {
@@ -20,7 +20,7 @@ import { UnsilenceAction } from './UnsilenceAction';
 import { ACTION_CATEGORY_CONFIG } from './utils';
 
 const RenewAllocationDialog = lazyComponent(() =>
-  import('@waldur/marketplace/resources/renew-allocation/RenewAllocationDialog').then(
+  import('@/marketplace/resources/renew-allocation/RenewAllocationDialog').then(
     (m) => ({
       default: m.RenewAllocationDialog,
     }),

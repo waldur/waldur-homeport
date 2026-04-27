@@ -2,9 +2,9 @@ import { CopySimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
 
 import { ResourceDetailsTable } from './ResourceDetailsTable';
 

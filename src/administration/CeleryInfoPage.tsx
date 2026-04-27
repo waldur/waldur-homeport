@@ -3,8 +3,8 @@ import { useQuery } from '@tanstack/react-query';
 import { Alert } from 'react-bootstrap';
 import { celeryStatsRetrieve } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import { CeleryOverviewCards } from './celery/CeleryOverviewCards';
 import { CeleryResourceUsage } from './celery/CeleryResourceUsage';

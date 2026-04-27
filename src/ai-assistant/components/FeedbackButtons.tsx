@@ -4,8 +4,8 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 import { FeedbackDialog } from './FeedbackDialog';
 

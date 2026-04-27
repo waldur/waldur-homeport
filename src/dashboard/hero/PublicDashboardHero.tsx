@@ -2,7 +2,7 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 import { DashboardHeroLogo2 } from './DashboardHeroLogo2';
 import './PublicDashboardHero.scss';

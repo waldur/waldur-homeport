@@ -1,6 +1,6 @@
 import { useState, useMemo } from 'react';
 
-import { UIBlock, BlockHistoryEntry } from '@waldur/ai-assistant/lib/types';
+import { UIBlock, BlockHistoryEntry } from '@/ai-assistant/lib/types';
 
 interface UseVersionSelectorOptions {
   currentBlocks: UIBlock[];

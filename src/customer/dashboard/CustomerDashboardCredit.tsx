@@ -1,22 +1,22 @@
 import { EyeIcon, WarningOctagonIcon } from '@phosphor-icons/react';
 import { Col } from 'react-bootstrap';
 
-import { EChart } from '@waldur/core/EChart';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { COMMON_WIDGET_HEIGHT } from '@waldur/dashboard/constants';
-import { WidgetCard } from '@waldur/dashboard/WidgetCard';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { Customer } from '@waldur/workspace/types';
+import { EChart } from '@/core/EChart';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
+import { WidgetCard } from '@/dashboard/WidgetCard';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { Customer } from '@/workspace/types';
 
 import { useCustomerCreditChart } from './utils';
 
 const FilteredEventsDialog = lazyComponent(() =>
-  import('@waldur/customer/credits/CreditUsageDialog').then((module) => ({
+  import('@/customer/credits/CreditUsageDialog').then((module) => ({
     default: module.CreditUsageDialog,
   })),
 );

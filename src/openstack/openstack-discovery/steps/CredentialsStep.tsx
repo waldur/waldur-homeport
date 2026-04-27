@@ -3,14 +3,14 @@ import { Alert } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { openstackDiscoveryValidateCredentials } from 'waldur-js-client';
 
-import { SelectField, StringField, TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { SecretField } from '@waldur/form/SecretField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { SelectField, StringField, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SecretField } from '@/form/SecretField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
 

@@ -1,4 +1,4 @@
-import WaldurLogo from '@waldur/images/logo.svg';
+import WaldurLogo from '@/images/logo.svg';
 
 import AtlassianLogo from './AtlassianLogo.svg';
 import SMAXLogo from './OpentextLogo.svg';

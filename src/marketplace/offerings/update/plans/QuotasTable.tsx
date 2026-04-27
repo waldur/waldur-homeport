@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Field } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   validateNonNegative,
   parseIntField,
   formatIntField,
-} from '@waldur/marketplace/common/utils';
-import { OfferingComponent } from '@waldur/marketplace/types';
+} from '@/marketplace/common/utils';
+import { OfferingComponent } from '@/marketplace/types';
 
 interface QuotasTableProps {
   components: OfferingComponent[];

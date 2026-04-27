@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
-import { translate } from '@waldur/i18n';
-import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Panel } from '@/core/Panel';
+import { translate } from '@/i18n';
+import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { getRabbitMQStats } from './api';
 import { RabbitMQClusterOverview } from './RabbitMQClusterOverview';

@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 
 export const useOfferingCategories = () => {
   const { data: categories } = useQuery({

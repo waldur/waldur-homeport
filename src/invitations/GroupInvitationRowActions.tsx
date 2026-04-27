@@ -2,13 +2,13 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { GroupInvitation } from 'waldur-js-client';
 
-import { GroupInvitationEditButton } from '@waldur/invitations/actions/GroupInvitationEditButton';
-import { GroupInvitationCancelButton } from '@waldur/invitations/GroupInvitationCancelButton';
-import { GroupInvitationDeleteButton } from '@waldur/invitations/GroupInvitationDeleteButton';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { GroupInvitationEditButton } from '@/invitations/actions/GroupInvitationEditButton';
+import { GroupInvitationCancelButton } from '@/invitations/GroupInvitationCancelButton';
+import { GroupInvitationDeleteButton } from '@/invitations/GroupInvitationDeleteButton';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 interface GroupInvitationRowActionsProps {
   refetch;

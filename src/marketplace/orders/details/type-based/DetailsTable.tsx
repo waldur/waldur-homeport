@@ -2,9 +2,9 @@ import { ArrowUpIcon, ArrowDownIcon } from '@phosphor-icons/react';
 import { createElement, ReactNode } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { Column } from '@waldur/table/types';
+import { Badge } from '@/core/Badge';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { Column } from '@/table/types';
 
 interface ValueIndicatorProps {
   value: string | number;

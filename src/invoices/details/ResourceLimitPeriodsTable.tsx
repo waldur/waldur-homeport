@@ -1,7 +1,7 @@
 import { BillingUnit, ResourceLimitPeriod } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
 
 const getBillingPeriodTitle = (unit: BillingUnit) =>
   ({

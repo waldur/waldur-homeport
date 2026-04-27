@@ -6,13 +6,13 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getTabs } from '@waldur/marketplace/details/OfferingTabs';
-import { OfferingTabsComponent } from '@waldur/marketplace/details/OfferingTabsComponent';
-import { OfferingDetailsLink } from '@waldur/marketplace/links/OfferingDetailsLink';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getTabs } from '@/marketplace/details/OfferingTabs';
+import { OfferingTabsComponent } from '@/marketplace/details/OfferingTabsComponent';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
 
 interface OfferingDetailsDialogProps {
   resolve: { offering: PublicOfferingDetails; concealBillingInfo?: boolean };

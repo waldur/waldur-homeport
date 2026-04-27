@@ -2,11 +2,11 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { isProjectMember } from '@waldur/permissions/isProjectMember';
-import { getUser } from '@waldur/workspace/selectors';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { isProjectMember } from '@/permissions/isProjectMember';
+import { getUser } from '@/workspace/selectors';
 
 import { ChangeEndDateRequestFlowDialog } from './ChangeEndDateRequestFlowDialog';
 

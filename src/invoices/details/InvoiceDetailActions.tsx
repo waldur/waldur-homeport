@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
+import { FilteredEventsButton } from '@/events/FilteredEventsButton';
 
 import { Invoice } from '../types';
 

@@ -2,22 +2,22 @@ import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 import { Invitation, userInvitationsList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { formatInvitationState } from '@waldur/invitations/choices';
-import { useTitle } from '@waldur/navigation/title';
-import { RoleType } from '@waldur/permissions/types';
-import { formatRoleType } from '@waldur/permissions/utils';
-import { createFetcher } from '@waldur/table/api';
+import { ENV } from '@/core/config';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { formatInvitationState } from '@/invitations/choices';
+import { useTitle } from '@/navigation/title';
+import { RoleType } from '@/permissions/types';
+import { formatRoleType } from '@/permissions/utils';
+import { createFetcher } from '@/table/api';
 import {
   selectUserInvitationsFilter,
   UserInvitationsFilter,
-} from '@waldur/table/generated/UserInvitationsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
+} from '@/table/generated/UserInvitationsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { RoleField } from '@/user/affiliations/RoleField';
 
 import { InvitationScopeLink } from './InvitationScopeLink';
 

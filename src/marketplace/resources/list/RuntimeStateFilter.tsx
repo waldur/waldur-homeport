@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 import { marketplaceRuntimeStatesList } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { getProject } from '@waldur/workspace/selectors';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { getProject } from '@/workspace/selectors';
 
 export const RuntimeStateFilter: React.FC<{}> = () => {
   const { params } = useCurrentStateAndParams();

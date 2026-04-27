@@ -11,7 +11,7 @@ import { Card, Stack } from 'react-bootstrap';
 import { createPortal } from 'react-dom';
 import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GRID_BREAKPOINTS } from '@/core/constants';
 
 import { TableContent } from './components/content';
 import { TableToolbar, TableToolbarActions } from './components/toolbar';

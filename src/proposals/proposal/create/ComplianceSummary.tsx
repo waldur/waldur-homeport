@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
-import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
-import { Proposal } from '@waldur/proposals/types';
-import { useNotify } from '@waldur/store/hooks';
+import { AccordionCard } from '@/core/AccordionCard';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
+import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { Proposal } from '@/proposals/types';
+import { useNotify } from '@/store/hooks';
 
 interface ComplianceSummaryProps {
   proposal: Proposal;

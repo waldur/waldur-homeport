@@ -3,12 +3,12 @@ import { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import FormTable from '@waldur/form/FormTable';
-import { WideImageField } from '@waldur/form/WideImageField';
-import { translate } from '@waldur/i18n';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { getUser } from '@waldur/workspace/selectors';
+import FormTable from '@/form/FormTable';
+import { WideImageField } from '@/form/WideImageField';
+import { translate } from '@/i18n';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { getUser } from '@/workspace/selectors';
 
 import { useUpdateUser } from './useUpdateUser';
 

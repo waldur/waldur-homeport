@@ -11,18 +11,18 @@ import {
   ReviewerPublication,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { OrcidLogo } from '@waldur/core/OrcidLogo';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { TableRequest } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { ExternalLink } from '@/core/ExternalLink';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { OrcidLogo } from '@/core/OrcidLogo';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { TableRequest } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface ReviewerPoolExpandableRowProps {
   row: CallReviewerPool;

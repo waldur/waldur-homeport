@@ -6,17 +6,17 @@ import {
   MarketplacePublicOfferingsListData,
 } from 'waldur-js-client';
 
-import { AsyncSearchBox } from '@waldur/core/async/AsyncSearchBox';
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
-import { Tip } from '@waldur/core/Tooltip';
-import { truncate } from '@waldur/core/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import { AsyncSearchBox } from '@/core/async/AsyncSearchBox';
+import { Image } from '@/core/Image';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
+import { Tip } from '@/core/Tooltip';
+import { truncate } from '@/core/utils';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { OfferingDetailsLink } from '../links/OfferingDetailsLink';
 import { OfferingLink } from '../links/OfferingLink';

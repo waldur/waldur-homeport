@@ -1,8 +1,8 @@
 import Select from 'react-select';
 import { Store } from 'redux';
 
-import * as api from '@waldur/openstack/api';
-import { createActionStore } from '@waldur/resource/actions/testUtils';
+import * as api from '@/openstack/api';
+import { createActionStore } from '@/resource/actions/testUtils';
 
 import {
   DialogFixture,
@@ -10,7 +10,7 @@ import {
   fakeSecurityGroups,
 } from './UpdateSecurityGroupsDialog.fixture';
 
-vi.mock('@waldur/openstack/api');
+vi.mock('@/openstack/api');
 
 const apiMock = vi.mocked(api);
 

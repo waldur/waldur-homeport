@@ -1,17 +1,17 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
 
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { ServiceProvider } from '@waldur/marketplace/types';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
-import { PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { Field } from '@waldur/resource/summary';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { ServiceProvider } from '@/marketplace/types';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { useTitle } from '@/navigation/title';
+import { PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { Field } from '@/resource/summary';
 
 import { getProviderBreadcrumbItems } from '../utils';
 
@@ -20,7 +20,7 @@ import { ProviderDashboardTab } from './ProviderDashboardTab';
 import { ProviderOfferingsTab } from './ProviderOfferingsTab';
 import { ProviderOrdersTab } from './ProviderOrdersTab';
 
-import '@waldur/core/CustomCard.scss';
+import '@/core/CustomCard.scss';
 
 interface ProviderDetailsProps {
   provider: ServiceProvider;

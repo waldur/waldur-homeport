@@ -1,23 +1,23 @@
 import { FunctionComponent, MouseEvent, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
-import { ModelCard1 } from '@waldur/core/ModelCard1';
+import { formatDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Link } from '@/core/Link';
+import { ModelCard1 } from '@/core/ModelCard1';
 import {
   OrganizationLink,
   useOrganizationLink,
-} from '@waldur/customer/list/OrganizationLink';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+} from '@/customer/list/OrganizationLink';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 interface OrganizationCardProps {
   organization: Customer;

@@ -1,10 +1,10 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { getDataVolumes } from './utils';
 

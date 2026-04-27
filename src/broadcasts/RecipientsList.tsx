@@ -1,11 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 import { broadcastMessagesRecipientsRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const BadgesList = ({ items }) => (
   <>

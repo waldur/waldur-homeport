@@ -3,13 +3,13 @@ import { Alert, Form, Stack } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, Field, formValueSelector, isSubmitting } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { ProjectGroup } from '@waldur/issues/create/ProjectGroup';
-import { RootState } from '@waldur/store/reducers';
-import { getUser } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { ProjectGroup } from '@/issues/create/ProjectGroup';
+import { RootState } from '@/store/reducers';
+import { getUser } from '@/workspace/selectors';
 
 import { IssueTypeChoice } from '../types/constants';
 

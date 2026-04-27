@@ -36,7 +36,7 @@ import {
   type LinkResourceRequestRequest,
 } from 'waldur-js-client';
 
-import { FAST_STALE_TIME, SHORT_STALE_TIME } from '@waldur/core/constants';
+import { FAST_STALE_TIME, SHORT_STALE_TIME } from '@/core/constants';
 
 // === Query Keys ===
 export const arrowQueryKeys = {

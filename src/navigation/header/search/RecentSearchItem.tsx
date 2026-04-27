@@ -6,9 +6,9 @@ import {
   UserIcon,
 } from '@phosphor-icons/react';
 
-import { Link } from '@waldur/core/Link';
-import { useModal } from '@waldur/modal/hooks';
-import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
+import { Link } from '@/core/Link';
+import { useModal } from '@/modal/hooks';
+import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
 
 import { getResourceFilterFromSearchItem } from './utils';
 

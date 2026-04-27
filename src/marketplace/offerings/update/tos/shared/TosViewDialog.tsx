@@ -3,13 +3,13 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceUserOfferingConsentsCreate } from 'waldur-js-client';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const TosViewDialog = ({
   resolve: { tos, offering = undefined, refetch = undefined },

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 
-import { FieldError } from '@waldur/form';
+import { FieldError } from '@/form';
 
 export const IntegerUnitField: FunctionComponent<any> = (props) => (
   <>

@@ -2,11 +2,11 @@ import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { EChart } from '@waldur/core/EChart';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getChartBrandColor } from '@waldur/dashboard/constants';
-import { translate } from '@waldur/i18n';
+import { ChartCard } from '@/core/ChartCard';
+import { EChart } from '@/core/EChart';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { getChartBrandColor } from '@/dashboard/constants';
+import { translate } from '@/i18n';
 
 import { DailyOrderStats } from './types';
 

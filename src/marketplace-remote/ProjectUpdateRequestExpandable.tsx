@@ -1,7 +1,7 @@
 import { Table } from 'react-bootstrap';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
 
 export const ProjectUpdateRequestExpandable = ({ row }) => (
   <Table>

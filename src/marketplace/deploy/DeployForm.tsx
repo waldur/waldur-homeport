@@ -7,10 +7,10 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { formatOrderForCreate } from '../details/utils';
 import { scrollToSectionById } from '../offerings/utils';

@@ -1,11 +1,11 @@
 import Papa from 'papaparse';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { formatFilesize } from '@waldur/core/utils';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import saveAsCsv from '@waldur/table/exporters/csv';
+import { formatDate } from '@/core/dateUtils';
+import { formatFilesize } from '@/core/utils';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import saveAsCsv from '@/table/exporters/csv';
 
 import { DownloadTemplateItem } from './DownloadTemplateItem';
 import { generateTemplateData } from './utils';

@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { change, reduxForm, Field } from 'redux-form';
 import { adminArrowVendorOfferingMappingsCreate } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { FormContainer, SubmitButton } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { publicOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { required } from '@/core/validators';
+import { FormContainer, SubmitButton } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import {
   MappingFormData,

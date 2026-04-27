@@ -2,10 +2,10 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { marketplaceScriptSyncResource } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ResourceAction } from './constants';
 

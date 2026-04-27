@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { Form, InputGroup, OverlayTrigger, Tooltip } from 'react-bootstrap';
 import { Field, FieldRenderProps } from 'react-final-form';
 
-import { ENV } from '@waldur/core/config';
-import { FieldError } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { ENV } from '@/core/config';
+import { FieldError } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 // These limitations are imposed by underlying operating system
 const MAXIMUM_USERNAME_LENGTH = 32;

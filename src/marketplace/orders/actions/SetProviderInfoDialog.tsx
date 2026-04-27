@@ -8,18 +8,18 @@ import {
   OrderProviderInfoRequest,
 } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { decodeFileName } from '@waldur/core/utils';
-import { SubmitButton, TextField } from '@waldur/form';
-import { StringField } from '@waldur/form/StringField';
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { decodeFileName } from '@/core/utils';
+import { SubmitButton, TextField } from '@/form';
+import { StringField } from '@/form/StringField';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 interface SetProviderInfoDialogProps {
   resolve: {

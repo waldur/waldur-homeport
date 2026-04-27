@@ -1,10 +1,10 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { Col, Form, Row, Stack } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { NumberField, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { Badge } from '@/core/Badge';
+import { NumberField, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { FormGroup } from '../offerings/FormGroup';
 

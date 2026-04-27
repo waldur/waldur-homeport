@@ -4,16 +4,16 @@ import { Alert, Form as BSForm } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/AsyncSelectField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { Select } from '@/form/AsyncSelectField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import {
   useArrowSettings,

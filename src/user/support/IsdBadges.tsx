@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 /** Strip `isd:` prefix and capitalize first letter */
 export const formatIsdName = (source: string): string => {

@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { chatThreadsList, ThreadSession } from 'waldur-js-client';
 
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { useUser } from '@waldur/workspace/hooks';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
 
 interface UseThreadListOptions {
   enabled?: boolean;

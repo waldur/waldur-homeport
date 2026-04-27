@@ -9,24 +9,24 @@ import {
   reviewerSuggestionsDestroy,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
-import { PoolSummaryButton } from '@waldur/proposals/update/reviewer-pool/PoolSummaryButton';
-import { useReviewerPoolTabs } from '@waldur/proposals/update/reviewer-pool/tabs';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { formatDate } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
+import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
+import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { createFetcher } from '@/table/api';
 import {
   ReviewerSuggestionsFilter,
   selectReviewerSuggestionsFilter,
   ReviewerSuggestionStatusOptions,
-} from '@waldur/table/generated/ReviewerSuggestionsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/ReviewerSuggestionsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { ReviewerDiscoveryActions } from './ReviewerDiscoveryActions';
 import { SuggestionExpandableRow } from './SuggestionExpandableRow';

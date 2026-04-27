@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderConsumerActions';
-import { OrderProviderActions } from '@waldur/marketplace/orders/actions/OrderProviderActions';
-import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
+import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
+import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
+import { ActionButton } from '@/table/ActionButton';
 
 import { ResourceLimitChangeInfo } from './ResourceLimitChangeInfo';
 import { ResourcePlanChangeInfo } from './ResourcePlanChangeInfo';

@@ -1,20 +1,20 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
-import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/ChangedLimitField';
+import { formatDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
+import { ChangedLimitField } from '@/marketplace/resources/change-limits/ChangedLimitField';
 import {
   getLimitChangeData,
   getLimitChangeRequirements,
-} from '@waldur/marketplace/resources/change-limits/utils';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { Field } from '@waldur/resource/summary';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+} from '@/marketplace/resources/change-limits/utils';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { Field } from '@/resource/summary';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { DetailsTable } from './DetailsTable';
 import { OrderTypeBasedProps, RequestCommentField } from './OrderCommonFields';

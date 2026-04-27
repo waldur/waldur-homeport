@@ -10,19 +10,19 @@ import {
   ProviderOfferingStats,
 } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { translate } from '@waldur/i18n';
-import { getLabel } from '@waldur/marketplace/common/registry';
-import { OfferingStateField } from '@waldur/marketplace/offerings/OfferingStateField';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Link } from '@/core/Link';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { translate } from '@/i18n';
+import { getLabel } from '@/marketplace/common/registry';
+import { OfferingStateField } from '@/marketplace/offerings/OfferingStateField';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 

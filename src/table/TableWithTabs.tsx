@@ -11,7 +11,7 @@ import {
 } from 'react';
 import { Card, Col, Nav, Row, Tab } from 'react-bootstrap';
 
-import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
+import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
 
 import { TableProps } from './types';
 

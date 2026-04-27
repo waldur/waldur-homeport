@@ -1,7 +1,7 @@
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import './LocalLogin.css';
 

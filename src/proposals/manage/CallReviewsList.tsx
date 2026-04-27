@@ -2,19 +2,19 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { proposalReviewsList } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { EndingField } from '@waldur/proposals/EndingField';
-import { ProposalReview } from '@waldur/proposals/types';
-import { createFetcher } from '@waldur/table/api';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { EndingField } from '@/proposals/EndingField';
+import { ProposalReview } from '@/proposals/types';
+import { createFetcher } from '@/table/api';
 import {
   ProposalReviewsFilter,
   selectProposalReviewsFilter,
   ProposalReviewStateOptions,
-} from '@waldur/table/generated/ProposalReviewsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/ProposalReviewsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ReviewsRowActions } from '../review/ReviewsRowActons';
 import { ReviewStateRenderer } from '../review/ReviewStateRenderer';

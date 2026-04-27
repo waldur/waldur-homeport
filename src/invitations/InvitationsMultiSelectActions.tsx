@@ -1,8 +1,8 @@
 import { Invitation } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { useUser } from '@/workspace/hooks';
 
 import { MultiCancelAction } from './MultiCancelAction';
 import { MultiDeleteAction } from './MultiDeleteAction';

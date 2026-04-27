@@ -1,6 +1,6 @@
 import accept from 'attr-accept';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const validateFiles = (
   files: File[] = [],

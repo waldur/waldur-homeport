@@ -1,7 +1,7 @@
 import { describe, it, expect } from 'vitest';
 
-import { RoleEnum } from '@waldur/permissions/enums';
-import { type RootState } from '@waldur/store/reducers';
+import { RoleEnum } from '@/permissions/enums';
+import { type RootState } from '@/store/reducers';
 
 import {
   canAccessReporting,

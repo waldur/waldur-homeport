@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Checklist, checklistsAdminDestroy } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 interface OwnProps {
   rows: Checklist[];

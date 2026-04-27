@@ -1,9 +1,9 @@
 import { EChartsOption, graphic } from 'echarts';
 import React, { useMemo } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
-import { generateBrandColors } from '@waldur/core/generateColors';
-import { getChartBrandColor } from '@waldur/dashboard/constants';
+import { EChart } from '@/core/EChart';
+import { generateBrandColors } from '@/core/generateColors';
+import { getChartBrandColor } from '@/dashboard/constants';
 
 interface AreaChartItem {
   name: string;

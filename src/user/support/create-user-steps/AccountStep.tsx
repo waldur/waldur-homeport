@@ -5,15 +5,15 @@ import {
 import { FC, useCallback } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { Badge } from '@waldur/core/Badge';
-import { generatePassword } from '@waldur/core/generatePassword';
-import { composeValidators, email, required } from '@waldur/core/validators';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { SecretField } from '@waldur/form/SecretField';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { Badge } from '@/core/Badge';
+import { generatePassword } from '@/core/generatePassword';
+import { composeValidators, email, required } from '@/core/validators';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SecretField } from '@/form/SecretField';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { UserFormData, UserFormDialogData } from '../UserFormDialog';
 

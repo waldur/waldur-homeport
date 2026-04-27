@@ -3,18 +3,18 @@ import { FC, useEffect, useMemo, useState } from 'react';
 import { Col, FormLabel } from 'react-bootstrap';
 import { marketplacePublicOfferingsRetrieve } from 'waldur-js-client';
 
-import { STALE_TIME, UI_STALE_TIME } from '@waldur/core/constants';
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { FormContainer, SelectField } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
-import { publicOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
-import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
+import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
+import { format } from '@/core/ErrorMessageFormatter';
+import { LoadingErred } from '@/core/LoadingErred';
+import { FormContainer, SelectField } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { getCategories } from '@/marketplace/common/api';
+import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
+import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
+import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
+import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 
 export const Step1OfferingAndPlan: FC<WizardFormStepProps> = (props) => {
   const categoriesQuery = useQuery({

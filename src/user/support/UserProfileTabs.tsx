@@ -4,21 +4,17 @@ import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { formatUserStatus } from '@waldur/user/support/utils';
-import {
-  getUser,
-  isStaffOrSupport,
-  isStaff,
-} from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { formatUserStatus } from '@/user/support/utils';
+import { getUser, isStaffOrSupport, isStaff } from '@/workspace/selectors';
 
 import {
   formatGender,

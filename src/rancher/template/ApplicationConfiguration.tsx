@@ -1,8 +1,8 @@
 import React from 'react';
 import { Row } from 'react-bootstrap';
 
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
 
 import { RancherProject, Namespace } from '../types';
 

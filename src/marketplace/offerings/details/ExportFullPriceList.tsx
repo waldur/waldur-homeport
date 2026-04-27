@@ -7,11 +7,11 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
-import exportExcel from '@waldur/table/exporters/excel';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
+import exportExcel from '@/table/exporters/excel';
 
 interface ExportFullPriceListProps {
   offering: PublicOfferingDetails;

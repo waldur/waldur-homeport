@@ -4,8 +4,8 @@ import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { getUser } from '@waldur/workspace/selectors';
+import { Link } from '@/core/Link';
+import { getUser } from '@/workspace/selectors';
 
 interface OwnProps {
   uuid: string;

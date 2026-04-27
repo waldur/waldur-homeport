@@ -3,11 +3,11 @@ import { useMemo } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { IBreadcrumbItem } from '@/navigation/types';
+import { getCustomer, getProject, getUser } from '@/workspace/selectors';
 
 import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
 import { ProjectProfile } from './ProjectProfile';

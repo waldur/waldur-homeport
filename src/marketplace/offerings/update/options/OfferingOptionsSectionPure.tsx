@@ -1,9 +1,9 @@
 import { FC, useContext } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { FormFieldsContext } from '@waldur/form/context';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { FormFieldsContext } from '@/form/context';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';

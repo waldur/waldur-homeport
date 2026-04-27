@@ -7,13 +7,13 @@ import {
   ResourceMissingUsage,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 

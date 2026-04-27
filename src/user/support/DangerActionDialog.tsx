@@ -4,14 +4,14 @@ import { FunctionComponent, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { IssueTypeEnum, supportIssuesCreate } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { ISSUE_IDS } from '@waldur/issues/types/constants';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { ENV } from '@/core/config';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { ISSUE_IDS } from '@/issues/types/constants';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { DangerActionPanelProps } from './DangerActionPanelProps';
 

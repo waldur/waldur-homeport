@@ -9,17 +9,17 @@ import {
   openstackTenantsCreateServerGroup,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { getAllPages } from '@/core/api';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
 import {
   EthernetType,
   SecurityGroupDirection,
   SecurityGroupProtocol,
-} from '@waldur/openstack/types';
-import { ActionContext } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+} from '@/openstack/types';
+import { ActionContext } from '@/resource/actions/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { OpenStackTenant } from '../types';
 

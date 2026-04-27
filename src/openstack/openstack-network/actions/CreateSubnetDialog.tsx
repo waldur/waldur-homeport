@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { openstackNetworksCreateSubnet } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { InternalNetworkAllocationPool } from '@waldur/openstack/openstack-subnet/AllocationPoolsField';
-import { getFields } from '@waldur/openstack/openstack-subnet/fields';
-import { networkAutocomplete } from '@waldur/openstack/openstack-subnet/networkAutocomplete';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { InternalNetworkAllocationPool } from '@/openstack/openstack-subnet/AllocationPoolsField';
+import { getFields } from '@/openstack/openstack-subnet/fields';
+import { networkAutocomplete } from '@/openstack/openstack-subnet/networkAutocomplete';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 type CreateSubnetDialogResolve = {
   resource: any;

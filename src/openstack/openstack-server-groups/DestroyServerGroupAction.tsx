@@ -1,7 +1,7 @@
 import { openstackServerGroupsDestroy } from 'waldur-js-client';
 
-import { DestroyActionItem } from '@waldur/resource/actions/DestroyActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { DestroyActionItem } from '@/resource/actions/DestroyActionItem';
+import { ActionItemType } from '@/resource/actions/types';
 
 export const DestroyServerGroupAction: ActionItemType = ({
   resource,

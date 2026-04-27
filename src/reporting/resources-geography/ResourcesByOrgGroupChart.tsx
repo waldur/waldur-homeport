@@ -1,9 +1,9 @@
 import { FC, useCallback, useMemo } from 'react';
 import { CountStats } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { BarChart } from '@waldur/reporting/users/charts/BarChart';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { BarChart } from '@/reporting/users/charts/BarChart';
 
 interface ResourcesByOrgGroupChartProps {
   data: CountStats[];

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { userAgreementsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
+import { DeleteButton } from '@/core/buttons';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
 
 const agreementTypeLabels = {
   PP: translate('Privacy policy'),

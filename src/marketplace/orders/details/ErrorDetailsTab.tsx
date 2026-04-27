@@ -1,7 +1,7 @@
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 export const ErrorDetailsTab = ({ order }) => {
   return (

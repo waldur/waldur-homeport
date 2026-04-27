@@ -7,10 +7,10 @@ import { useContext, useEffect, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 
-import { ENV } from '@waldur/core/config';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { router } from '@waldur/router';
-import store from '@waldur/store/store';
+import { ENV } from '@/core/config';
+import { isFeatureVisible } from '@/features/connect';
+import { router } from '@/router';
+import store from '@/store/store';
 
 import { LayoutContext } from './context';
 import { Tab } from './Tab';

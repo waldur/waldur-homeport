@@ -6,12 +6,12 @@ import {
 } from '@phosphor-icons/react';
 import { Col, Row, Stack } from 'react-bootstrap';
 
-import { formatPhoneNumber } from '@waldur/core/utils';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { ProviderOfferingPermissions } from '@waldur/marketplace/service-providers/dashboard/ProviderOfferingPermissions';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { Customer } from '@waldur/workspace/types';
+import { formatPhoneNumber } from '@/core/utils';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { ProviderOfferingPermissions } from '@/marketplace/service-providers/dashboard/ProviderOfferingPermissions';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
+import { Customer } from '@/workspace/types';
 
 import { CustomerActions } from './CustomerActions';
 

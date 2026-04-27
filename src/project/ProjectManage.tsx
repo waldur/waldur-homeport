@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getProject } from '@waldur/workspace/selectors';
+import { getProject } from '@/workspace/selectors';
 
 interface OwnProps {
   tabSpec;

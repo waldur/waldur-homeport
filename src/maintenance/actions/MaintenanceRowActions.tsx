@@ -1,4 +1,4 @@
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { MaintenanceDeleteAction } from './MaintenanceDeleteAction';
 import { MaintenanceEditAction } from './MaintenanceEditAction';

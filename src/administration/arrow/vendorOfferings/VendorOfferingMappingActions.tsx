@@ -1,6 +1,6 @@
 import type { ArrowVendorOfferingMapping } from 'waldur-js-client';
 
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { VendorOfferingMappingDeleteAction } from './VendorOfferingMappingDeleteAction';
 import { VendorOfferingMappingEditAction } from './VendorOfferingMappingEditAction';

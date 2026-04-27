@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { Invitation, User, userInvitationsList } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import { InvitationAlertItem } from './InvitationAlertItem';
 

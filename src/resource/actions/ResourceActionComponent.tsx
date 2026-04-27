@@ -3,9 +3,9 @@ import { Dropdown } from 'react-bootstrap';
 import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { getUser } from '@/workspace/selectors';
 
 import { ActionItemType } from './types';
 

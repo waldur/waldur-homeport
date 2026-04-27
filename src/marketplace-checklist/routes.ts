@@ -1,7 +1,7 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { translate } from '@waldur/i18n';
-import { isStaff } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { translate } from '@/i18n';
+import { isStaff } from '@/workspace/selectors';
 
 export const states: StateDeclaration[] = [
   {
@@ -9,7 +9,7 @@ export const states: StateDeclaration[] = [
     url: 'organization-checklist-management/',
     parent: 'admin-organizations-compliance',
     component: lazyComponent(() =>
-      import('@waldur/marketplace-checklist/ChecklistManagementTable').then(
+      import('@/marketplace-checklist/ChecklistManagementTable').then(
         (module) => ({
           default: module.ChecklistManagementTable,
         }),

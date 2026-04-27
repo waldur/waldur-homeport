@@ -3,10 +3,10 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { OnboardingVerification } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { RadialBg } from '@/navigation/header/search/RadialBg';
 
 import './OrganizationReviewStatus.scss';
 

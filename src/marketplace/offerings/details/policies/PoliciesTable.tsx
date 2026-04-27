@@ -2,15 +2,15 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo } from 'react';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { policyPeriodOptions } from '@waldur/customer/cost-policies/utils';
-import { translate } from '@waldur/i18n';
-import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
-import Table from '@waldur/table/Table';
-import { TableProps } from '@waldur/table/types';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { policyPeriodOptions } from '@/customer/cost-policies/utils';
+import { translate } from '@/i18n';
+import { useOrganizationGroups } from '@/marketplace/common/utils';
+import Table from '@/table/Table';
+import { TableProps } from '@/table/types';
 
 import { getOfferingPolicyActionOptions } from '../utils';
 

@@ -1,4 +1,4 @@
-import { Offering, ServiceProvider } from '@waldur/marketplace/types';
+import { Offering, ServiceProvider } from '@/marketplace/types';
 
 interface Campaign {
   uuid?: string;

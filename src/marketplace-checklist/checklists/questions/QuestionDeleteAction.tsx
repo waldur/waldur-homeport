@@ -3,11 +3,11 @@ import { useQueryClient } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { checklistsAdminQuestionsDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { CHECKLIST_TABLE_ID } from '@waldur/marketplace-checklist/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { updateEntity } from '@waldur/table/actions';
+import { translate } from '@/i18n';
+import { CHECKLIST_TABLE_ID } from '@/marketplace-checklist/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { updateEntity } from '@/table/actions';
 
 export const QuestionDeleteAction = ({ row, refetch }) => {
   const dispatch = useDispatch();

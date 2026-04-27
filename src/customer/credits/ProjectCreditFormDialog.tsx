@@ -4,19 +4,16 @@ import { useSelector, connect } from 'react-redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 import { customerCreditsList } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { EChart } from '@waldur/core/EChart';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import {
-  LoadingSpinner,
-  LoadingSpinnerSimple,
-} from '@waldur/core/LoadingSpinner';
-import { FieldError, FormContainer, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useProjectCostChart } from '@waldur/project/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { EChart } from '@/core/EChart';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner, LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { FieldError, FormContainer, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useProjectCostChart } from '@/project/utils';
+import { getCustomer } from '@/workspace/selectors';
 
 import { OrganizationProjectSelectField } from '../team/OrganizationProjectSelectField';
 

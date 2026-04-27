@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { isOwnerOrStaff } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
+import { isOwnerOrStaff } from '@/workspace/selectors';
 
 export const InternalNotes = ({ maintenance, space = undefined }) => {
   const show = useSelector(isOwnerOrStaff);

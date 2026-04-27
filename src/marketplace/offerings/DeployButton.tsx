@@ -3,15 +3,15 @@ import { useRouter } from '@uirouter/react';
 import { useDispatch } from 'react-redux';
 import { Offering } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { Tip } from '@waldur/core/Tooltip';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
-import { useUser } from '@waldur/workspace/hooks';
+import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 export const DeployButton = ({
   offering,

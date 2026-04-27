@@ -1,8 +1,8 @@
 import { ComponentType, ReactNode } from 'react';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
-import { AppModalProps } from '@waldur/modal/actions';
-import { DialogSizeType } from '@waldur/modal/types';
+import { AppModalProps } from '@/modal/actions';
+import { DialogSizeType } from '@/modal/types';
 
 export interface CreateModalButtonProps<
   TResolve extends Record<string, unknown>,

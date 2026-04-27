@@ -1,11 +1,11 @@
 import { AzureVirtualMachine } from 'waldur-js-client';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { IPList } from '@waldur/resource/IPList';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
-import { UserPassword } from '@waldur/resource/UserPassword';
-import { formatSummary } from '@waldur/resource/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { IPList } from '@/resource/IPList';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { UserPassword } from '@/resource/UserPassword';
+import { formatSummary } from '@/resource/utils';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
 

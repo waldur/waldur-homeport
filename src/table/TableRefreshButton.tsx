@@ -1,9 +1,9 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { IconButton } from '@waldur/core/buttons/IconButton';
-import { translate } from '@waldur/i18n';
-import { Sorting } from '@waldur/table/types';
+import { IconButton } from '@/core/buttons/IconButton';
+import { translate } from '@/i18n';
+import { Sorting } from '@/table/types';
 
 export const LoadingSpinner: FunctionComponent = () => (
   <IconButton

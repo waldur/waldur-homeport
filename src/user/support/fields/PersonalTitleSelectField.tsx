@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 
-import { Select } from '@waldur/form/themed-select';
-import { FormField } from '@waldur/form/types';
+import { Select } from '@/form/themed-select';
+import { FormField } from '@/form/types';
 
 import { getPersonalTitleOptions } from '../aai-constants';
 

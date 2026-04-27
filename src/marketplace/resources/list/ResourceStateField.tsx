@@ -1,8 +1,8 @@
 import { capitalize, lowerCase } from 'lodash-es';
 import { Resource } from 'waldur-js-client';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
 
 export const ResourceStateField = ({
   resource,

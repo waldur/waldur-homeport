@@ -7,10 +7,10 @@ import {
   marketplaceOfferingUsersList,
 } from 'waldur-js-client';
 
-import { MINUTE } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { MINUTE } from '@/core/constants';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { getUser } from '@/workspace/selectors';
 
 import { ResourceWarningBar } from './ResourceWarningBar';
 import { ServiceProviderCommentModal } from './ServiceProviderCommentModal';

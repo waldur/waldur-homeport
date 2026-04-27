@@ -1,12 +1,12 @@
 import { useMemo, useState } from 'react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { CustomerResourcesListPlaceholder } from '@waldur/marketplace/resources/list/CustomerResourcesListPlaceholder';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { MetadataGroupBy } from '@waldur/project/metadata/MetadataGroupBy';
-import { TableWithTabs } from '@waldur/table/TableWithTabs';
-import { TableTab } from '@waldur/table/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { CustomerResourcesListPlaceholder } from '@/marketplace/resources/list/CustomerResourcesListPlaceholder';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { MetadataGroupBy } from '@/project/metadata/MetadataGroupBy';
+import { TableWithTabs } from '@/table/TableWithTabs';
+import { TableTab } from '@/table/types';
 
 import { ProviderOfferingUsersListComponent } from './ProviderOfferingUsersList';
 

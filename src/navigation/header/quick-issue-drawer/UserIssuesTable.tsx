@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { IssuesList } from '@waldur/issues/list/IssuesList';
-import { PAGE_SIZE_FULL } from '@waldur/table/constants';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { IssuesList } from '@/issues/list/IssuesList';
+import { PAGE_SIZE_FULL } from '@/table/constants';
+import { useUser } from '@/workspace/hooks';
 
 export const UserIssuesTable: FC = () => {
   const user = useUser();

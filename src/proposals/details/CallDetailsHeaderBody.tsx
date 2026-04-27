@@ -1,9 +1,9 @@
 import { Table } from 'react-bootstrap';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
 
 import { Call } from '../types';
 import { getRoundsWithStatus } from '../utils';

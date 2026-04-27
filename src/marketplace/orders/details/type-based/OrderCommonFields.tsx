@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
+import { formatDate } from '@/core/dateUtils';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { defaultCurrency } from '@/core/formatCurrency';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
 
 import { getPlanUnitAbbr } from '../../utils';
 import { OrderSummaryMessage } from '../OrderSummaryMessage';

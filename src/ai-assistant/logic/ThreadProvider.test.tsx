@@ -5,7 +5,7 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ThreadProvider, useThreadContext } from './ThreadProvider';
 
-vi.mock('@waldur/workspace/hooks', () => ({
+vi.mock('@/workspace/hooks', () => ({
   useUser: () => ({ uuid: 'user-1', first_name: 'Test' }),
 }));
 

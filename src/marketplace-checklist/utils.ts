@@ -5,7 +5,7 @@ import {
   QuestionTypeEnum,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const checklistTypeOptions: Array<{ label; value: ChecklistTypeEnum }> =
   [

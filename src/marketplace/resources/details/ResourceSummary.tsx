@@ -1,8 +1,8 @@
 import { Fragment, FunctionComponent, PropsWithChildren, useMemo } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import FormTable from '@waldur/form/FormTable';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import FormTable from '@/form/FormTable';
 
 import { getResourceSummaryFields } from './utils';
 

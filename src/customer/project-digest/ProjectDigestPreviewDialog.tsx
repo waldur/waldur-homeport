@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { getCustomer } from '@/workspace/selectors';
 
 import { ProjectDigestPreview } from './ProjectDigestPreview';
 

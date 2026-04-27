@@ -1,8 +1,8 @@
 import { UIView } from '@uirouter/react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { isFeatureVisible } from '@waldur/features/connect';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { isFeatureVisible } from '@/features/connect';
 import {
   CustomerFeatures,
   InvitationsFeatures,
@@ -10,10 +10,10 @@ import {
   ResellerFeatures,
   SupportFeatures,
   UserFeatures,
-} from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { hasSupport } from '@waldur/issues/hooks';
-import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
+} from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { hasSupport } from '@/issues/hooks';
+import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
 export const states: StateDeclaration[] = [
   {
@@ -392,7 +392,7 @@ export const states: StateDeclaration[] = [
     name: 'admin-user-lexis-links-list',
     url: 'lexis-links/',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/resources/lexis/BasicLexisLinkList').then(
+      import('@/marketplace/resources/lexis/BasicLexisLinkList').then(
         (module) => ({ default: module.BasicLexisLinkList }),
       ),
     ),
@@ -444,7 +444,7 @@ export const states: StateDeclaration[] = [
     url: 'category-groups',
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/category/admin/CategoryGroupsList').then(
+      import('@/marketplace/category/admin/CategoryGroupsList').then(
         (module) => ({ default: module.CategoryGroupsList }),
       ),
     ),
@@ -458,7 +458,7 @@ export const states: StateDeclaration[] = [
     url: 'categories/',
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/category/admin/AdminCategoriesPage').then(
+      import('@/marketplace/category/admin/AdminCategoriesPage').then(
         (module) => ({ default: module.AdminCategoriesPage }),
       ),
     ),
@@ -472,7 +472,7 @@ export const states: StateDeclaration[] = [
     url: 'tags/',
     parent: 'admin-marketplace',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/tags/admin/TagsList').then((module) => ({
+      import('@/marketplace/tags/admin/TagsList').then((module) => ({
         default: module.TagsList,
       })),
     ),
@@ -793,7 +793,7 @@ export const states: StateDeclaration[] = [
     url: 'support-feedback/',
     parent: 'admin-user-interface',
     component: lazyComponent(() =>
-      import('@waldur/issues/feedback/SupportFeedbackList').then((module) => ({
+      import('@/issues/feedback/SupportFeedbackList').then((module) => ({
         default: module.SupportFeedbackList,
       })),
     ),

@@ -2,11 +2,11 @@ import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { MaintenanceAnnouncement, ServiceProvider } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { parseDate } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { EditAction } from '@/form/EditAction';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 import {
   getMaintenanceOfferingFormFields,

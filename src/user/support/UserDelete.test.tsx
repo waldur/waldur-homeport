@@ -5,8 +5,8 @@ import { useDispatch } from 'react-redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { usersDestroy } from 'waldur-js-client';
 
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { useNotify } from '@waldur/store/hooks';
+import { waitForConfirmation } from '@/modal/actions';
+import { useNotify } from '@/store/hooks';
 
 import { UserDelete } from './UserDelete';
 
@@ -19,11 +19,11 @@ vi.mock('@uirouter/react', async (importOriginal) => {
   };
 });
 vi.mock('@tanstack/react-query');
-vi.mock('@waldur/modal/actions');
-vi.mock('@waldur/navigation/useTabs', () => ({
+vi.mock('@/modal/actions');
+vi.mock('@/navigation/useTabs', () => ({
   isDescendantOf: vi.fn(),
 }));
-vi.mock('@waldur/store/hooks');
+vi.mock('@/store/hooks');
 vi.mock('waldur-js-client');
 
 describe('UserDelete', () => {

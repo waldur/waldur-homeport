@@ -5,18 +5,18 @@ import {
   callProposalProjectRoleMappingsPartialUpdate,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { FormGroup, SelectField, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { required } from '@/core/validators';
+import { FormGroup, SelectField, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
 import {
   formatRole,
   getProjectRoles,
   getProposalRoles,
-} from '@waldur/permissions/utils';
-import { useNotify } from '@waldur/store/hooks';
+} from '@/permissions/utils';
+import { useNotify } from '@/store/hooks';
 
 export const RoleMappingFormDialog = ({ resolve }) => {
   const { showErrorResponse, showSuccess } = useNotify();

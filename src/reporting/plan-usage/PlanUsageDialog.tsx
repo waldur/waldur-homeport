@@ -2,10 +2,10 @@ import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 import { PlanUsageResponse } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { EChart } from '@/core/EChart';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 const getChartData = (props: { row: PlanUsageResponse }): EChartsOption => ({
   toolbox: {

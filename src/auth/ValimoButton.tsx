@@ -1,9 +1,9 @@
 import { DeviceMobileIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
 
 import { LoginButton } from './LoginButton';
 

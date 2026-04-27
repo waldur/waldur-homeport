@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { FormGroupWithError } from '@waldur/marketplace/offerings/FormGroupWithError';
+import { translate } from '@/i18n';
+import { FormGroupWithError } from '@/marketplace/offerings/FormGroupWithError';
 
 interface ComponentMeasuredUnitFieldProps {
   disabled?: boolean;

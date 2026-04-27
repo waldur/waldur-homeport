@@ -1,8 +1,8 @@
 import React from 'react';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { getCheckoutSummaryComponent } from '../common/registry';
 

@@ -8,16 +8,16 @@ import {
   Project,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   ALL_RESOURCES_TABLE_ID,
   PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
-} from '@waldur/marketplace/resources/list/constants';
-import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
-import { useTitle } from '@waldur/navigation/title';
-import { createFetcher } from '@waldur/table/api';
-import { TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+} from '@/marketplace/resources/list/constants';
+import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useTitle } from '@/navigation/title';
+import { createFetcher } from '@/table/api';
+import { TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { NON_TERMINATED_STATES } from './constants';
 import { ResourcesAllListTable } from './ResourcesAllListTable';

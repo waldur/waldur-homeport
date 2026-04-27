@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as sdk from 'waldur-js-client';
 
-import * as modalActions from '@waldur/modal/actions';
+import * as modalActions from '@/modal/actions';
 
 import { FeedbackButtons } from './FeedbackButtons';
 

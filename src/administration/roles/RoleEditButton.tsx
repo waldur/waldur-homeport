@@ -3,11 +3,11 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { RoleModifyRequest, rolesUpdate } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n/translate';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n/translate';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { getRoles } from './utils';
 

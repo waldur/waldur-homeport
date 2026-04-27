@@ -8,11 +8,11 @@ import {
   Offering,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 
 import { ComponentsUsage } from './ComponentsUsage';
 import { OfferingAgentInfo } from './OfferingAgentInfo';

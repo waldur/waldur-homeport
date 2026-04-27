@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { CourseAccount, marketplaceCourseAccountsList } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { TeamDropdownActions } from '@waldur/project/team/TeamDropdownActions';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { getProject } from '@waldur/workspace/selectors';
+import { Badge } from '@/core/Badge';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { TeamDropdownActions } from '@/project/team/TeamDropdownActions';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { getProject } from '@/workspace/selectors';
 
 import { ProjectLink } from '../ProjectLink';
 import { ProjectPermissionsLogButton } from '../team/ProjectPermissionsLogButton';

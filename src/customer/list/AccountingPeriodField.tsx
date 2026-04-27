@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
-import { PeriodOption } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
+import { Select } from '@/form/themed-select';
+import { PeriodOption } from '@/form/types';
+import { translate } from '@/i18n';
 
 interface AccountingPeriodFieldProps {
   options: { label: string; value: PeriodOption }[];

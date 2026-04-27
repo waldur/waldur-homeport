@@ -1,6 +1,6 @@
-import { CostPoliciesListTable } from '@waldur/customer/cost-policies/CostPoliciesList';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { CostPoliciesListTable } from '@/customer/cost-policies/CostPoliciesList';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 export const CostPoliciesDetailsDialog = ({ resolve: { project } }) => {
   return (

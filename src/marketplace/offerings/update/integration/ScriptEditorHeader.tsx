@@ -13,16 +13,16 @@ import { FC, useMemo, useState } from 'react';
 import { DropdownItem } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { Link } from '@waldur/core/Link';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { Link } from '@/core/Link';
+import { FilterBox } from '@/form/FilterBox';
+import { SubmitButton } from '@/form/SubmitButton';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { ActionButton } from '@/table/ActionButton';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { SCRIPT_ROWS } from './utils';
 

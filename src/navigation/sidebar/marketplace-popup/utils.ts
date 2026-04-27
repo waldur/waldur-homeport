@@ -5,9 +5,9 @@ import {
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE, parseSelectData } from '@waldur/core/api';
-import { Category, Offering } from '@waldur/marketplace/types';
-import { Customer } from '@waldur/workspace/types';
+import { getAllPages, MAX_PAGE_SIZE, parseSelectData } from '@/core/api';
+import { Category, Offering } from '@/marketplace/types';
+import { Customer } from '@/workspace/types';
 
 export const fetchCategories = (
   customer: Customer,

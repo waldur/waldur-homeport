@@ -2,11 +2,11 @@ import { Field as FinalField } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { FieldError, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { required } from '@/core/validators';
+import { FieldError, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { getCustomer } from '@/workspace/selectors';
 
 import { useCustomerProjects } from '../workspace/fetchCustomer';
 

@@ -3,12 +3,12 @@ import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 import { usersRetrieve } from 'waldur-js-client';
 
-import { usePageHero } from '@waldur/navigation/context';
-import { router } from '@waldur/router';
-import store from '@waldur/store/store';
-import { setCurrentUser } from '@waldur/workspace/actions';
-import { useUser } from '@waldur/workspace/hooks';
-import { getUser } from '@waldur/workspace/selectors';
+import { usePageHero } from '@/navigation/context';
+import { router } from '@/router';
+import store from '@/store/store';
+import { setCurrentUser } from '@/workspace/actions';
+import { useUser } from '@/workspace/hooks';
+import { getUser } from '@/workspace/selectors';
 
 import { UserProfileHero } from './dashboard/UserProfileHero';
 

@@ -4,14 +4,14 @@ import { FunctionComponent, useCallback, useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { userInvitationsDetailsRetrieve } from 'waldur-js-client';
 
-import { getInvitationLinkProps } from '@waldur/administration/getInvitationLinkProps';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { InvitationTokenStorage } from '@waldur/core/StorageManager';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { getUser } from '@waldur/workspace/selectors';
+import { getInvitationLinkProps } from '@/administration/getInvitationLinkProps';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { InvitationTokenStorage } from '@/core/StorageManager';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { getUser } from '@/workspace/selectors';
 
 import { formatInvitationState } from './choices';
 import { InvitationButtons } from './InvitationButtons';

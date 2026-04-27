@@ -8,12 +8,12 @@ import {
   MarketplaceSoftwarePackagesListData,
 } from 'waldur-js-client';
 
-import { StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { RootState } from '@/store/reducers';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const CatalogTypeOptions: CatalogTypeOption[] = [
   {

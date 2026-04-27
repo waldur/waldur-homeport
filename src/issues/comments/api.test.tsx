@@ -11,8 +11,8 @@ import {
   supportCommentsDestroy,
 } from 'waldur-js-client';
 
-import { showErrorResponse } from '@waldur/store/notify';
-import store from '@waldur/store/store';
+import { showErrorResponse } from '@/store/notify';
+import store from '@/store/store';
 
 import {
   useIssueComments,
@@ -30,12 +30,12 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store notify
-vi.mock('@waldur/store/notify', () => ({
+vi.mock('@/store/notify', () => ({
   showErrorResponse: vi.fn(() => ({ type: 'SHOW_ERROR' })),
 }));
 
 // Mock store
-vi.mock('@waldur/store/store', () => ({
+vi.mock('@/store/store', () => ({
   default: {
     dispatch: vi.fn(),
   },

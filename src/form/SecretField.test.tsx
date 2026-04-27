@@ -4,7 +4,7 @@ import { describe, expect, it, vi } from 'vitest';
 import { SecretField } from './SecretField';
 
 // Mock translation function
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (text: string) => text,
 }));
 

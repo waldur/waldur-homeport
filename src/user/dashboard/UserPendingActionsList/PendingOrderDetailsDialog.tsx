@@ -12,23 +12,23 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { getOrderType } from '@waldur/marketplace/orders/utils';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Field } from '@waldur/resource/summary';
-import { useNotify } from '@waldur/store/hooks';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { getOrderType } from '@/marketplace/orders/utils';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ResourceLink } from '@/resource/ResourceLink';
+import { Field } from '@/resource/summary';
+import { useNotify } from '@/store/hooks';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ExtendedUserAction } from './types';
 

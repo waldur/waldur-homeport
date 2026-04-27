@@ -2,11 +2,11 @@ import { useRouter } from '@uirouter/react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Proposal, ProposalReview, PublicCall } from 'waldur-js-client';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { userHasRole } from '@waldur/permissions/hasPermission';
-import { useUser } from '@waldur/workspace/hooks';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { userHasRole } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 export const ProposalRoleBasedTabs = ({
   proposal,

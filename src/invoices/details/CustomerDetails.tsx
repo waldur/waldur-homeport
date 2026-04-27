@@ -1,10 +1,10 @@
 import React from 'react';
 import { CustomerDetails as CustomerDetailsType } from 'waldur-js-client';
 
-import { formatPhoneNumber } from '@waldur/core/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
+import { formatPhoneNumber } from '@/core/utils';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
 
 interface CustomerDetailsProps {
   customer: CustomerDetailsType;

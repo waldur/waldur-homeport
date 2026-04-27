@@ -2,8 +2,8 @@ import { ChartBarIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { hasAnyReportingEnabled } from '../../reporting/utils';
 

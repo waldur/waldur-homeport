@@ -1,15 +1,15 @@
 import { Field } from 'react-final-form';
 import { Checklist } from 'waldur-js-client';
 
-import { AtLeast } from '@waldur/core/types';
-import { greaterThan, required } from '@waldur/core/validators';
-import { NumberField, SelectField, StringField, TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { FormFieldError } from '@waldur/form/FormFieldError';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { ChecklistQuestionForm } from '@waldur/marketplace-checklist/types';
-import { questionTypeOptions } from '@waldur/marketplace-checklist/utils';
+import { AtLeast } from '@/core/types';
+import { greaterThan, required } from '@/core/validators';
+import { NumberField, SelectField, StringField, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { FormFieldError } from '@/form/FormFieldError';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
+import { questionTypeOptions } from '@/marketplace-checklist/utils';
 
 import { QuestionAnswerOptions } from './QuestionAnswerOptions';
 

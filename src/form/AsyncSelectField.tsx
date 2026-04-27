@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { Field as FinalField } from 'react-final-form';
 import { Field } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 export const Select = ({ input, loadOptions, ...rest }) => (
   <AsyncPaginate

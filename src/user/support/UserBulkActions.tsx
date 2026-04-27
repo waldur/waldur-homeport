@@ -4,9 +4,9 @@ import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { User, usersPartialUpdate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 export const UserBulkActions = ({
   rows,

@@ -2,12 +2,12 @@ import Papa from 'papaparse';
 import { FC, useEffect } from 'react';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
-import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
 
 import { TemplateUploaderField } from './TemplateUploaderField';
 import { generateTemplateData } from './utils';

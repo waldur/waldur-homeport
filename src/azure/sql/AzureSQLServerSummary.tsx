@@ -1,12 +1,12 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { AzureSqlServer } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { formatFilesize } from '@waldur/core/utils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Field, ResourceSummaryProps } from '@waldur/resource/summary';
-import { UserPassword } from '@waldur/resource/UserPassword';
+import { Tip } from '@/core/Tooltip';
+import { formatFilesize } from '@/core/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Field, ResourceSummaryProps } from '@/resource/summary';
+import { UserPassword } from '@/resource/UserPassword';
 
 import { PureAzureResourceSummary } from '../AzureResourceSummary';
 

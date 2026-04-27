@@ -3,11 +3,11 @@ import { Modal } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { StringField, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { StringField, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface ProjectDetailsDialogProps {
   resolve: {

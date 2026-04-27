@@ -1,14 +1,14 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { Link } from '@/core/Link';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import type { RmqQueueStats, RmqVhostStats } from './api';
 import { RabbitMQQueueActions } from './RabbitMQQueueActions';

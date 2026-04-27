@@ -3,18 +3,18 @@ import { Accordion, Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { EChart } from '@waldur/core/EChart';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { FieldError, FormContainer, SubmitButton } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { STALE_TIME } from '@/core/constants';
+import { EChart } from '@/core/EChart';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { FieldError, FormContainer, SubmitButton } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { useCustomerCostChart } from '../dashboard/utils';
 

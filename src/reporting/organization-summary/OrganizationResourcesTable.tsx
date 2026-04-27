@@ -2,18 +2,18 @@ import { CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ComponentMap } from './types';
 

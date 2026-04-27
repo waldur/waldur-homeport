@@ -8,14 +8,14 @@ import {
   Project,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse } from '@waldur/store/notify';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse } from '@/store/notify';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { NON_TERMINATED_STATES } from '../resources/list/constants';
 import { PublicResourceLink } from '../resources/list/PublicResourceLink';

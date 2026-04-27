@@ -1,8 +1,8 @@
 import { rolesDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { ENV } from '@waldur/core/config';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { DeleteButton } from '@/core/buttons';
+import { ENV } from '@/core/config';
+import { formatJsxTemplate, translate } from '@/i18n';
 
 import { getRoles } from './utils';
 

@@ -3,13 +3,13 @@ import { Field } from 'react-final-form';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { notificationMessagesTemplatesList } from 'waldur-js-client';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { validateMaxLength } from '@waldur/core/validators';
-import { TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { validateMaxLength } from '@/core/validators';
+import { TextField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const CustomMessageWrapper = () => {
   const [{ loading, error, value }, loadTemplate] = useAsyncFn(() =>

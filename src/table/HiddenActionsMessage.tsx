@@ -1,8 +1,8 @@
 import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
 
 import { COLUMN_ACTIONS_KEY } from './constants';
 import { TableProps } from './types';

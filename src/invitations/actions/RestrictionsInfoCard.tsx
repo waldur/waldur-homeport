@@ -3,12 +3,9 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Customer, Project } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import {
-  getRestrictionsArray,
-  RestrictionsValue,
-} from '@waldur/core/restrictions';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { getRestrictionsArray, RestrictionsValue } from '@/core/restrictions';
+import { translate } from '@/i18n';
 
 interface RestrictionsInfoCardProps {
   customer: Customer;

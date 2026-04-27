@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { OfferingLogo } from '@/marketplace/common/OfferingLogo';
 
 export const TemplateHeader: FunctionComponent<any> = (props) => (
   <Row>

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Col, ProgressBar, Row, Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { translate } from '@/i18n';
 
 import type { CachePerformance } from './api';
 import { formatPercent, getCacheHealth } from './utils';

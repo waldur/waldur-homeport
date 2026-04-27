@@ -1,11 +1,11 @@
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 import * as ThemeStorage from './ThemeStorage';
 import { ThemeName } from './types';
 
 const hrefs = {
-  dark: () => import('@waldur/metronic/sass/style.dark.scss?url'),
-  light: () => import('@waldur/metronic/sass/style.scss?url'),
+  dark: () => import('@/metronic/sass/style.dark.scss?url'),
+  light: () => import('@/metronic/sass/style.scss?url'),
 };
 
 let styleTag: HTMLLinkElement;

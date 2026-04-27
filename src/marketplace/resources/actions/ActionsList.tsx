@@ -1,15 +1,15 @@
-import { EditResourceEndDateAction } from '@waldur/marketplace/resources/actions/EditResourceEndDateAction';
-import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
-import { SyncResourceAction } from '@waldur/marketplace/resources/actions/SyncResourceAction';
-import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { CreateLexisLinkAction } from '@waldur/marketplace/resources/lexis/CreateLexisLinkAction';
-import { SubmitReportAction } from '@waldur/marketplace/resources/report/SubmitReportAction';
-import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
-import { SetSlugAction } from '@waldur/marketplace/resources/SetSlugAction';
-import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
-import { CreateRobotAccountAction } from '@waldur/marketplace/robot-accounts/CreateRobotAccountAction';
-import { SetErredActionItem } from '@waldur/resource/actions/SetErredActionItem';
-import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
+import { EditResourceEndDateAction } from '@/marketplace/resources/actions/EditResourceEndDateAction';
+import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
+import { SyncResourceAction } from '@/marketplace/resources/actions/SyncResourceAction';
+import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
+import { CreateLexisLinkAction } from '@/marketplace/resources/lexis/CreateLexisLinkAction';
+import { SubmitReportAction } from '@/marketplace/resources/report/SubmitReportAction';
+import { SetBackendIdAction } from '@/marketplace/resources/SetBackendIdAction';
+import { SetSlugAction } from '@/marketplace/resources/SetSlugAction';
+import { TerminateAction } from '@/marketplace/resources/terminate/TerminateAction';
+import { CreateRobotAccountAction } from '@/marketplace/robot-accounts/CreateRobotAccountAction';
+import { SetErredActionItem } from '@/resource/actions/SetErredActionItem';
+import { UnlinkActionItem } from '@/resource/actions/UnlinkActionItem';
 
 import { ChangeLimitsAction } from '../change-limits/ChangeLimitsAction';
 import { ResourceDetailsAction } from '../details/popup/ResourceDetailsAction';

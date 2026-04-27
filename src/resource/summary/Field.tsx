@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import React, { FunctionComponent, ReactNode, useMemo } from 'react';
 import { Col, ColProps, Row } from 'react-bootstrap';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { Tip } from '@waldur/core/Tooltip';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { Tip } from '@/core/Tooltip';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import './Field.css';
 

@@ -1,15 +1,12 @@
 import { SwapIcon } from '@phosphor-icons/react';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { validateOpenStackInstanceManagePermission } from '@waldur/openstack/utils';
-import {
-  validateState,
-  validateRuntimeState,
-} from '@waldur/resource/actions/base';
-import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { ActionContext, ActionItemType } from '@waldur/resource/actions/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { validateOpenStackInstanceManagePermission } from '@/openstack/utils';
+import { validateState, validateRuntimeState } from '@/resource/actions/base';
+import { DialogActionItem } from '@/resource/actions/DialogActionItem';
+import { ActionContext, ActionItemType } from '@/resource/actions/types';
 
 const ChangeFlavorDialog = lazyComponent(() =>
   import('./ChangeFlavorDialog').then((module) => ({

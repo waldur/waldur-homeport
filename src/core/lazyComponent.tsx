@@ -1,8 +1,8 @@
 import { ErrorBoundary } from '@sentry/react';
 import React, { ComponentType, LazyExoticComponent } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ErrorMessage } from '@waldur/ErrorMessage';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { ErrorMessage } from '@/ErrorMessage';
 
 // Based on https://github.com/facebook/react/issues/14254#issuecomment-538710039
 export function lazyComponent<T = any>(

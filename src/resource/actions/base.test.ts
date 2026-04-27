@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { BaseResource } from '@waldur/resource/types';
+import { BaseResource } from '@/resource/types';
 
 import { validateState, validateRuntimeState } from './base';
 

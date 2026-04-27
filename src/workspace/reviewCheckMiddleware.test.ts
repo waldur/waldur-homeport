@@ -13,27 +13,27 @@ vi.mock('waldur-js-client', () => ({
     mockCustomerPermissionsReviewsList(...args),
 }));
 
-vi.mock('@waldur/features/connect', () => ({
+vi.mock('@/features/connect', () => ({
   isFeatureVisible: (...args) => mockIsFeatureVisible(...args),
 }));
 
-vi.mock('@waldur/permissions/hasPermission', () => ({
+vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: (...args) => mockHasPermission(...args),
 }));
 
-vi.mock('@waldur/modal/actions', () => ({
+vi.mock('@/modal/actions', () => ({
   openModalDialog: (...args) => mockOpenModalDialog(...args),
 }));
 
-vi.mock('@waldur/core/lazyComponent', () => ({
+vi.mock('@/core/lazyComponent', () => ({
   lazyComponent: (fn) => fn,
 }));
 
-vi.mock('@waldur/core/PendingMembershipReviewDialog', () => ({
+vi.mock('@/core/PendingMembershipReviewDialog', () => ({
   PendingMembershipReviewDialog: 'PendingMembershipReviewDialog',
 }));
 
-import { PermissionEnum } from '@waldur/permissions/enums';
+import { PermissionEnum } from '@/permissions/enums';
 
 import { SET_CURRENT_PROJECT, SET_CURRENT_CUSTOMER } from './constants';
 import { reviewCheckMiddleware } from './reviewCheckMiddleware';

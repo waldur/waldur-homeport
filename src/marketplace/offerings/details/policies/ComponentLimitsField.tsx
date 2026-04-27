@@ -4,11 +4,11 @@ import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { required } from '@waldur/core/validators';
-import { NumberField, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { required } from '@/core/validators';
+import { NumberField, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { OfferingComponent } from '@/marketplace/types';
+import { ActionButton } from '@/table/ActionButton';
 
 interface ComponentLimitsFieldProps extends FieldArrayRenderProps<
   any,

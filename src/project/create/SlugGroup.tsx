@@ -1,10 +1,10 @@
 import { Field } from 'react-final-form';
 
-import { StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useUser } from '@waldur/workspace/hooks';
-import { Customer } from '@waldur/workspace/types';
+import { StringField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useUser } from '@/workspace/hooks';
+import { Customer } from '@/workspace/types';
 
 export const SlugGroup = ({ customer }: { customer?: Customer }) => {
   const user = useUser();

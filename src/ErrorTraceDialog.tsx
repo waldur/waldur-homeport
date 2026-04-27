@@ -1,6 +1,6 @@
 import { FallbackRender } from '@sentry/react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { ModalDialog } from './modal/ModalDialog';
 

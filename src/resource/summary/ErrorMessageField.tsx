@@ -1,9 +1,9 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 import { Field } from './Field';
 import { ResourceSummaryProps } from './types';

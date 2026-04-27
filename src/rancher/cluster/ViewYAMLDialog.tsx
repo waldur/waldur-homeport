@@ -3,14 +3,14 @@ import { useDispatch } from 'react-redux';
 import { useAsyncFn, useToggle } from 'react-use';
 import { reduxForm, Field } from 'redux-form';
 
-import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { SubmitButton } from '@waldur/form';
-import { MonacoField } from '@waldur/form/MonacoField';
-import { translate } from '@waldur/i18n';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { CopyToClipboard } from '@/core/CopyToClipboard';
+import { LoadingErred } from '@/core/LoadingErred';
+import { SubmitButton } from '@/form';
+import { MonacoField } from '@/form/MonacoField';
+import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
+import { closeModalDialog } from '@/modal/actions';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const ViewYAMLDialog = reduxForm<
   { yaml: string },

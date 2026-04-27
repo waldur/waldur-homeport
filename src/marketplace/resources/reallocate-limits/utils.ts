@@ -1,4 +1,4 @@
-import { Limits } from '@waldur/marketplace/common/types';
+import { Limits } from '@/marketplace/common/types';
 
 export function calculateFreedCapacity(
   currentLimits: Limits,

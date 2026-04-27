@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { Field as FinalField } from 'react-final-form';
 import { Field } from 'redux-form';
 
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const ExpirationTimeGroup: FunctionComponent<{
   disabled?: boolean;

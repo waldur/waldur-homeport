@@ -11,15 +11,15 @@ import {
   SAML2_IDP,
   SETTINGS_FREEIPA_GROUP_NAME,
   TARA_IDP,
-} from '@waldur/auth/providers/constants';
-import { ENV } from '@waldur/core/config';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SettingsDescription } from '@waldur/SettingsDescription';
+} from '@/auth/providers/constants';
+import { ENV } from '@/core/config';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SettingsDescription } from '@/SettingsDescription';
 
 import { getIdentityProviders } from '../api';
 import { FieldRow } from '../settings/FieldRow';

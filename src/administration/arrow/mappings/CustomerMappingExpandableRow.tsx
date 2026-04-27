@@ -2,12 +2,12 @@ import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { Badge } from '@/core/Badge';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { useFetchCustomerArrowData } from '../api';
 

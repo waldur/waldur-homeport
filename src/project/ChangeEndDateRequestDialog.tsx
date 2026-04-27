@@ -5,16 +5,16 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { projectEndDateChangeRequestsCreate, Project } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatDate, formatISODate } from '@waldur/core/dateUtils';
-import { SubmitButton, TextField } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { ENV } from '@/core/config';
+import { formatDate, formatISODate } from '@/core/dateUtils';
+import { SubmitButton, TextField } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 interface ChangeEndDateRequestDialogProps {
   project: Project;

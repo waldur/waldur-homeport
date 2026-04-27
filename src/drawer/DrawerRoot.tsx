@@ -4,11 +4,11 @@ import React, { FunctionComponent, useEffect } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { isDirty } from 'redux-form';
 
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
-import { ErrorMessage } from '@waldur/ErrorMessage';
-import { translate } from '@waldur/i18n';
-import { DrawerComponent } from '@waldur/metronic/components';
-import { type RootState } from '@waldur/store/reducers';
+import { CompactIconButton } from '@/core/buttons/IconButton';
+import { ErrorMessage } from '@/ErrorMessage';
+import { translate } from '@/i18n';
+import { DrawerComponent } from '@/metronic/components';
+import { type RootState } from '@/store/reducers';
 
 import { closeDrawerDialog } from './actions';
 import { DrawerStateProps } from './reducer';

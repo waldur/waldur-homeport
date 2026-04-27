@@ -4,23 +4,23 @@ import { useDispatch, useSelector, batch } from 'react-redux';
 import { Dispatch } from 'redux';
 import { change } from 'redux-form';
 
-import { getQueryParams, syncFiltersToURL } from '@waldur/core/filters';
-import { ResourcesFilterStorage } from '@waldur/core/StorageManager';
-import { translate } from '@waldur/i18n';
-import { MARKETPLACE_LANDING_FILTER_FORM } from '@waldur/marketplace/constants';
-import { setMarketplaceFilter } from '@waldur/marketplace/landing/filter/store/actions';
-import { getMarketplaceFilters } from '@waldur/marketplace/landing/filter/store/selectors';
+import { getQueryParams, syncFiltersToURL } from '@/core/filters';
+import { ResourcesFilterStorage } from '@/core/StorageManager';
+import { translate } from '@/i18n';
+import { MARKETPLACE_LANDING_FILTER_FORM } from '@/marketplace/constants';
+import { setMarketplaceFilter } from '@/marketplace/landing/filter/store/actions';
+import { getMarketplaceFilters } from '@/marketplace/landing/filter/store/selectors';
 import {
   ALL_RESOURCES_TABLE_ID,
   CATEGORY_RESOURCES_ALL_FILTER_FORM_ID,
   CATEGORY_RESOURCES_TABLE_ID,
   PROJECT_RESOURCES_ALL_FILTER_FORM_ID,
-} from '@waldur/marketplace/resources/list/constants';
-import { RootState } from '@waldur/store/reducers';
-import { applyFilters, setFilter } from '@waldur/table/actions';
-import { selectFiltersStorage } from '@waldur/table/selectors';
-import { TableSidebarFilterValues } from '@waldur/table/TableFilterItem';
-import { Customer, Project } from '@waldur/workspace/types';
+} from '@/marketplace/resources/list/constants';
+import { RootState } from '@/store/reducers';
+import { applyFilters, setFilter } from '@/table/actions';
+import { selectFiltersStorage } from '@/table/selectors';
+import { TableSidebarFilterValues } from '@/table/TableFilterItem';
+import { Customer, Project } from '@/workspace/types';
 
 import { useOfferingCategories } from '../utils';
 

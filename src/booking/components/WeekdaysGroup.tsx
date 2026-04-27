@@ -1,10 +1,10 @@
 import { Info } from 'luxon';
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { range } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { Tip } from '@/core/Tooltip';
+import { range } from '@/core/utils';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { handleWeekDays } from '../utils';
 

@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon';
 import { Project } from 'waldur-js-client';
 
-import { formatISODate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { formatISODate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { OfferingComponent } from '@/marketplace/types';
 
 export interface PrepaidConstraints {
   min_prepaid_duration: number;

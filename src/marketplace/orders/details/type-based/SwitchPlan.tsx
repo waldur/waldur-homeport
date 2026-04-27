@@ -1,14 +1,14 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
-import { getPlanSwitchData } from '@waldur/marketplace/resources/change-plan/utils';
-import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
-import { Field } from '@waldur/resource/summary';
+import { Badge } from '@/core/Badge';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
+import { getPlanSwitchData } from '@/marketplace/resources/change-plan/utils';
+import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
+import { Field } from '@/resource/summary';
 
 import { getPlanUnitAbbr } from '../../utils';
 

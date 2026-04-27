@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { ReferralsList } from '@waldur/marketplace/referral/ReferralsList';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { translate } from '@/i18n';
+import { ReferralsList } from '@/marketplace/referral/ReferralsList';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { Offering } from '../types';
 

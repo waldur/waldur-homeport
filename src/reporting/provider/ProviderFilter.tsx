@@ -1,9 +1,9 @@
 import { FC, useEffect } from 'react';
 import { Field, WrappedFieldProps, reduxForm } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { providerAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 
 const ProviderSelectField: FC<WrappedFieldProps> = (fieldProps) => {
   useEffect(() => {

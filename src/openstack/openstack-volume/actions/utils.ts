@@ -1,7 +1,7 @@
 import { OpenStackVolume } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionContext } from '@waldur/resource/actions/types';
+import { translate } from '@/i18n';
+import { ActionContext } from '@/resource/actions/types';
 
 export function isBootable(ctx: ActionContext<OpenStackVolume>): string {
   if (ctx.resource.bootable) {

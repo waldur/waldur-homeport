@@ -2,13 +2,13 @@ import { PlusMinusIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { defaultCurrency, formatCurrency } from '@waldur/core/formatCurrency';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ENV } from '@/core/config';
+import { defaultCurrency, formatCurrency } from '@/core/formatCurrency';
+import { lazyComponent } from '@/core/lazyComponent';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
 
 import { Component, PlanPeriod } from './types';
 

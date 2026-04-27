@@ -3,16 +3,16 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/components';
-import { CallPublicMenu } from '@waldur/navigation/sidebar/CallPublicMenu';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermissionOnAnyScope } from '@waldur/permissions/hasPermission';
-import { useProfileCompletenessContext } from '@waldur/user/ProfileCompletenessContext';
-import { useUser } from '@waldur/workspace/hooks';
-import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { MenuComponent } from '@/metronic/components';
+import { CallPublicMenu } from '@/navigation/sidebar/CallPublicMenu';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
+import { useProfileCompletenessContext } from '@/user/ProfileCompletenessContext';
+import { useUser } from '@/workspace/hooks';
+import { hasNonProjectPermissions } from '@/workspace/selectors';
 
 import { MarketplaceTrigger } from './marketplace-popup/MarketplaceTrigger';
 import { MenuItem } from './MenuItem';

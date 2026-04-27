@@ -1,7 +1,7 @@
 import { LimitPeriodEnum, OfferingComponent, Resource } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
+import { translate } from '@/i18n';
+import { TENANT_TYPE } from '@/openstack/constants';
 
 import { getBillingTypeLabel } from '../usage/utils';
 

@@ -1,7 +1,7 @@
-import { PAYMENTS_TABLE } from '@waldur/customer/details/constants';
-import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
-import { fetchListStart } from '@waldur/table/actions';
-import { Customer } from '@waldur/workspace/types';
+import { PAYMENTS_TABLE } from '@/customer/details/constants';
+import { getActivePaymentProfile } from '@/invoices/details/utils';
+import { fetchListStart } from '@/table/actions';
+import { Customer } from '@/workspace/types';
 
 export const getInitialValues = (props) => ({
   date_of_payment: props.resolve.date_of_payment,

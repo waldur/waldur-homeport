@@ -8,15 +8,15 @@ import {
   rancherWorkloadsList,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { StringField, SelectField, NumberField, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { Resource } from '@waldur/resource/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { type RootState } from '@waldur/store/reducers';
-import { createEntity } from '@waldur/table/actions';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { StringField, SelectField, NumberField, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
+import { closeModalDialog } from '@/modal/actions';
+import { Resource } from '@/resource/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { type RootState } from '@/store/reducers';
+import { createEntity } from '@/table/actions';
 
 import { MetricOption, HPACreateFormData } from './types';
 import {

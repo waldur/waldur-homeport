@@ -6,16 +6,16 @@ import {
   openportalManagedProjectsAttach,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { useNotify } from '@waldur/store/hooks';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { required } from '@/core/validators';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useNotify } from '@/store/hooks';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 import { ProjectAutocompleteField } from './ProjectAutocompleteField';
 

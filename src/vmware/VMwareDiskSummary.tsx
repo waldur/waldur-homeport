@@ -1,7 +1,7 @@
-import { formatFilesize } from '@waldur/core/utils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
+import { formatFilesize } from '@/core/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
 
 export const VMwareDiskSummary = (props) => {
   const { resource } = props;

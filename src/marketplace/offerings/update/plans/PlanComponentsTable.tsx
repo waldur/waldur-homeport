@@ -2,8 +2,8 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OfferingComponent, ProviderPlanDetails } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 interface OwnProps {
   row: ProviderPlanDetails;

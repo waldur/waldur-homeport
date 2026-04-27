@@ -5,14 +5,14 @@ import {
   marketplaceComponentUserUsagesList,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { translate } from '@waldur/i18n';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { formatUsageValue } from '@/core/formatNumber';
+import { translate } from '@/i18n';
+import { ResourceLink } from '@/resource/ResourceLink';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 import { usageTableTabs } from '../utils';

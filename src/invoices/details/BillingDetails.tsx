@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { useAsyncFn } from 'react-use';
 import { invoicesRetrieve } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { ENV } from '@/core/config';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
+import { showError, showSuccess } from '@/store/notify';
 
 import { BillingRecordDetails } from './BillingRecordDetails';
 import { InvoiceDetails } from './InvoiceDetails';

@@ -2,8 +2,8 @@ import { useCallback, useEffect, useRef, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { OptionField } from 'waldur-js-client';
 
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
 
 import { orderFormDataSelector } from '../deploy/selectors';
 

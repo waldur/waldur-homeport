@@ -2,8 +2,8 @@ import { Fragment, FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { OpenStackNestedSecurityGroup } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { SecurityGroupRuleCell } from './SecurityGroupRuleCell';
 import { SecurityGroupRuleHeader } from './SecurityGroupRuleHeader';

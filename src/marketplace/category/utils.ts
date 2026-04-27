@@ -8,11 +8,11 @@ import {
   marketplaceCategoryColumnsUpdate,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { Category, CategoryGroup } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { translate } from '@/i18n';
+import { Category, CategoryGroup } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const countSelectedFilters = (filterValues) => {
   const selectedFilters = [];

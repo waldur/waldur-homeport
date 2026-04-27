@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
+import { Badge } from '@/core/Badge';
 
 const getColor = (value) =>
   value === null

@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { paymentProfilesPartialUpdate } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { EDIT_PAYMENT_PROFILE_FORM_ID } from '@waldur/customer/payment-profiles/constants';
+import { required } from '@/core/validators';
+import { EDIT_PAYMENT_PROFILE_FORM_ID } from '@/customer/payment-profiles/constants';
 import {
   getInitialValues,
   getPaymentProfileTypeOptions,
-} from '@waldur/customer/payment-profiles/utils';
+} from '@/customer/payment-profiles/utils';
 import {
   FormContainer,
   NumberField,
@@ -16,15 +16,15 @@ import {
   StringField,
   SubmitButton,
   TextField,
-} from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { setCurrentCustomer } from '@/workspace/actions';
+import { getCustomer } from '@/workspace/selectors';
 
 import { getCustomer as getCustomerApi } from '../utils';
 

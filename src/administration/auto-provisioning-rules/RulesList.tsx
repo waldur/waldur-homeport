@@ -1,13 +1,13 @@
 import { CheckIcon, MinusIcon } from '@phosphor-icons/react';
 import { autoprovisioningRulesList, Rule } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { RoleField } from '@/user/affiliations/RoleField';
 
 import { RuleActions } from './RuleActions';
 import { RuleCreateButton } from './RuleCreateButton';

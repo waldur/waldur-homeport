@@ -2,9 +2,9 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 import { IssueFormData } from './types';

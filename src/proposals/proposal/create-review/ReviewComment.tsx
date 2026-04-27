@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren } from 'react';
 import { FormLabel } from 'react-bootstrap';
 
-import Avatar from '@waldur/core/Avatar';
-import { translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+import Avatar from '@/core/Avatar';
+import { translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
 
 import { RateStars } from './RateStars';
 

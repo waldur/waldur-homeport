@@ -18,17 +18,17 @@ import {
   SshKey,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getUUID } from '@waldur/core/utils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { OrderDetailsProps } from '@waldur/marketplace/types';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getUUID } from '@/core/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { OrderDetailsProps } from '@/marketplace/types';
 import {
   formatSubnet,
   formatVolumeTypeLabel,
   getDefaultFloatingIps,
-} from '@waldur/openstack/openstack-instance/utils';
-import { formatFlavor } from '@waldur/resource/utils';
+} from '@/openstack/openstack-instance/utils';
+import { formatFlavor } from '@/resource/utils';
 
 export const OpenstackInstanceDetails = (props: OrderDetailsProps) => {
   const {

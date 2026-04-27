@@ -8,11 +8,11 @@ import {
   marketplacePublicOfferingsRetrieve,
 } from 'waldur-js-client';
 
-import { usePermissionView } from '@waldur/auth/PermissionLayout';
-import { formatDate, parseDate } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
+import { usePermissionView } from '@/auth/PermissionLayout';
+import { formatDate, parseDate } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
 
 import { DeployPage } from '../deploy/DeployPage';
 import { orderProjectSelector } from '../deploy/selectors';

@@ -1,6 +1,6 @@
 import { ProposalReview } from 'waldur-js-client';
 
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { ShowReviewCommentsAction } from './ShowReviewCommentsAction';
 

@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { userPermissionsList, UserPermissionsListData } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { formatRoleType } from '@waldur/permissions/utils';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDate } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { formatRoleType } from '@/permissions/utils';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { RolePopover } from './RolePopover';
 import { UserAffiliationsBulkRemoveButton } from './UserAffiliationsBulkRemoveButton';

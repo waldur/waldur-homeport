@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const BillingPeriod: FunctionComponent<any> = (props) => {
   const labels = {

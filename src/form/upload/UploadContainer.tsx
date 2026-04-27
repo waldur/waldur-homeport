@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { useRef } from 'react';
 import Dropzone, { DropzoneOptions, DropzoneRef } from 'react-dropzone';
 
-import { formatJsx, translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+import { formatJsx, translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
 
 import './UploadContainer.scss';
 

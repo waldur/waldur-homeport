@@ -8,10 +8,10 @@ import {
 } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { RoleEnum } from '@waldur/permissions/enums';
+import { translate } from '@/i18n';
+import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { IBreadcrumbItem } from '@/navigation/types';
+import { RoleEnum } from '@/permissions/enums';
 import {
   Call,
   CallOfferingState,
@@ -20,7 +20,7 @@ import {
   RoundAllocationStrategy,
   RoundAllocationTime,
   RoundReviewStrategy,
-} from '@waldur/proposals/types';
+} from '@/proposals/types';
 
 export const getRoundReviewStrategyOptions = () =>
   [

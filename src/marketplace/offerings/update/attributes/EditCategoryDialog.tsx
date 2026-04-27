@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import { change, Field, reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateDescription } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { FormFooter, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { FormFooter, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { getCategories } from '@/marketplace/common/api';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { CATEGORY_FORM_ID } from './constants';
 

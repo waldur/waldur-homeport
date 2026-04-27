@@ -5,7 +5,7 @@
 
 import type { EChartsOption } from 'echarts';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { ProjectUsageReport } from './ProjectUsageReport';
 import { secondsToHours } from './storage';

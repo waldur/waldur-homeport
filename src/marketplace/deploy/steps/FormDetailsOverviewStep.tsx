@@ -2,15 +2,15 @@ import { useQuery } from '@tanstack/react-query';
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { Image } from '@waldur/core/Image';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
-import { CustomerField } from '@waldur/marketplace/details/CustomerField';
-import { ProjectField } from '@waldur/marketplace/details/ProjectField';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { STALE_TIME } from '@/core/constants';
+import { Image } from '@/core/Image';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { getServiceProviderByCustomer } from '@/marketplace/common/api';
+import { CustomerField } from '@/marketplace/details/CustomerField';
+import { ProjectField } from '@/marketplace/details/ProjectField';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { DetailsOverviewButton } from '../DetailsOverviewButton';
 import { orderCustomerSelector } from '../selectors';

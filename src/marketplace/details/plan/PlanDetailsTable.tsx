@@ -3,12 +3,12 @@ import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { calculateMonthsDifference, formatDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { calculateMonthsDifference, formatDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { getCustomer } from '@/workspace/selectors';
 
 import { ComponentEditRow } from './ComponentEditRow';
 import { ComponentRow } from './ComponentRow';

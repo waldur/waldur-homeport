@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { decodeFileName, formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { CompactIconButton } from '@/core/buttons/IconButton';
+import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { decodeFileName, formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 import { FileDownloader } from './FileDownloader';
 import { ImageFetcher } from './ImageFetcher';

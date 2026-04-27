@@ -11,14 +11,14 @@ import {
   QuestionAdmin,
 } from 'waldur-js-client';
 
-import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { formatISODate } from '@waldur/core/dateUtils';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
-import { Wizard } from '@waldur/wizard';
-import { Customer } from '@waldur/workspace/types';
+import { formDataOptions, fileSerializer } from '@/core/api';
+import { formatISODate } from '@/core/dateUtils';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
+import { Wizard } from '@/wizard';
+import { Customer } from '@/workspace/types';
 
 import { Step1ProjectInfo } from './Step1ProjectInfo';
 import { Step2Metadata } from './Step2Metadata';

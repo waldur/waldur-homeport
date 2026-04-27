@@ -4,13 +4,13 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { proposalProposalsResourcesDestroy } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { Proposal, ProposalResource } from '@waldur/proposals/types';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { lazyComponent } from '@/core/lazyComponent';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { Proposal, ProposalResource } from '@/proposals/types';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 const ResourceRequestFormDialog = lazyComponent(() =>
   import('./ResourceRequestFormDialog').then((module) => ({

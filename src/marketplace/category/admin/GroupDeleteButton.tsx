@@ -1,8 +1,8 @@
 import { marketplaceCategoryGroupsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { CategoryGroup } from '@waldur/marketplace/types';
+import { DeleteButton } from '@/core/buttons';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { CategoryGroup } from '@/marketplace/types';
 
 interface GroupDeleteButtonProps {
   row: CategoryGroup;

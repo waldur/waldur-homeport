@@ -5,10 +5,10 @@ import { Form } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import { freeipaProfilesCreate } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { useNotify } from '@waldur/store/hooks';
-import { getUser } from '@waldur/workspace/selectors';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { useNotify } from '@/store/hooks';
+import { getUser } from '@/workspace/selectors';
 
 import { UsernameGroup } from './UsernameGroup';
 

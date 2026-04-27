@@ -2,9 +2,9 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { Panel } from '@waldur/core/Panel';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { Panel } from '@/core/Panel';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { useProjectDelete } from '../useProjectDelete';
 

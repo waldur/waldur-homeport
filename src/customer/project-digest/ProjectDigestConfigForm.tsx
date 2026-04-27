@@ -3,12 +3,12 @@ import { FormCheck } from 'react-bootstrap';
 import { Field, Form, FormSpy } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { NumberField } from '@waldur/form/NumberField';
-import { SelectField } from '@waldur/form/SelectField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { NumberField } from '@/form/NumberField';
+import { SelectField } from '@/form/SelectField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ProjectDigestConfig, updateProjectDigestConfig } from './api';
 

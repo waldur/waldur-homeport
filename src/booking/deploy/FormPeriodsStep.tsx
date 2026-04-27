@@ -6,11 +6,11 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { Field, FieldArray } from 'redux-form';
 import { marketplaceBookingsList } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { UI_STALE_TIME } from '@/core/constants';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { ActionButton } from '@/table/ActionButton';
 
 import { BookingProps } from '../types';
 import {

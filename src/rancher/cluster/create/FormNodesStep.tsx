@@ -6,22 +6,19 @@ import { useDispatch, useSelector } from 'react-redux';
 import { arrayPush, arrayRemoveAll, Field, FieldArray } from 'redux-form';
 import { rancherClusterTemplatesList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { FormGroup, SelectField, StringField } from '@waldur/form';
-import { BoxNumberField } from '@waldur/form/BoxNumberField';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { FormGroup, SelectField, StringField } from '@/form';
+import { BoxNumberField } from '@/form/BoxNumberField';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
 
 import { NODES_FIELD_ARRAY } from './constants';
 import { RANCHER_NODE_ROLES } from './RANCHER_NODE_ROLES';

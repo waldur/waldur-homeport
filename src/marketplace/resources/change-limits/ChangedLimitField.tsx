@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
+import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
 interface ChangedLimitFieldProps {
   changedLimit: number;

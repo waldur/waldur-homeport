@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { formatJsx, translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { formatJsx, translate } from '@/i18n';
 
 export const UserAuthWarning: FunctionComponent = () => (
   <p>

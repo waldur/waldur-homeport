@@ -1,12 +1,12 @@
 import { useCallback } from 'react';
 import { Field } from 'react-final-form';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { StringField } from '@waldur/form';
-import { FormFieldError } from '@waldur/form/FormFieldError';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { StringField } from '@/form';
+import { FormFieldError } from '@/form/FormFieldError';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { validateProjectName } from '../validators';
 

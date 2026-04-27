@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { CourseAccount } from 'waldur-js-client';
 
-import { hasManageCourseAccountPermission } from '@waldur/customer/team/utils';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { hasManageCourseAccountPermission } from '@/customer/team/utils';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { CourseAccountDeleteAction } from './CourseAccountDeleteAction';
 

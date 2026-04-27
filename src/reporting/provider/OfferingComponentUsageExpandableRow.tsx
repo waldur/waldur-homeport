@@ -10,19 +10,19 @@ import {
   ToggleButtonGroup,
 } from 'react-bootstrap';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { EChart } from '@waldur/core/EChart';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { Link } from '@waldur/core/Link';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getOfferingTypes } from '@waldur/marketplace/common/registry';
-import { getComponentUsageMonthlyList } from '@waldur/marketplace/offerings/api';
-import { OfferingComponentUsage } from '@waldur/marketplace/offerings/types';
-import { getLimitPeriods } from '@waldur/marketplace/offerings/update/components/ComponentLimitPeriodField';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { STALE_TIME } from '@/core/constants';
+import { EChart } from '@/core/EChart';
+import { formatUsageValue } from '@/core/formatNumber';
+import { Link } from '@/core/Link';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getOfferingTypes } from '@/marketplace/common/registry';
+import { getComponentUsageMonthlyList } from '@/marketplace/offerings/api';
+import { OfferingComponentUsage } from '@/marketplace/offerings/types';
+import { getLimitPeriods } from '@/marketplace/offerings/update/components/ComponentLimitPeriodField';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { getUsageLineChartOptions } from '../utils';
 

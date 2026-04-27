@@ -6,21 +6,21 @@ import {
   MarketplaceCustomerServiceAccountsRetrieveResponse,
 } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDate } from '@waldur/core/dateUtils';
-import { CustomerPermissionsLogButton } from '@waldur/customer/team/CustomerPermissionsLogButton';
-import { useTeamTableTabs } from '@waldur/customer/team/tabs';
-import { TeamDropdownActions } from '@waldur/customer/team/TeamDropdownActions';
-import { translate } from '@waldur/i18n';
-import { ProjectLink } from '@waldur/project/ProjectLink';
-import { ProjectPermissionsLogButton } from '@waldur/project/team/ProjectPermissionsLogButton';
-import { useTeamTableTabs as useProjectTeamTableTabs } from '@waldur/project/team/tabs';
-import { TeamDropdownActions as ProjectTeamDropdownActions } from '@waldur/project/team/TeamDropdownActions';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDate } from '@/core/dateUtils';
+import { CustomerPermissionsLogButton } from '@/customer/team/CustomerPermissionsLogButton';
+import { useTeamTableTabs } from '@/customer/team/tabs';
+import { TeamDropdownActions } from '@/customer/team/TeamDropdownActions';
+import { translate } from '@/i18n';
+import { ProjectLink } from '@/project/ProjectLink';
+import { ProjectPermissionsLogButton } from '@/project/team/ProjectPermissionsLogButton';
+import { useTeamTableTabs as useProjectTeamTableTabs } from '@/project/team/tabs';
+import { TeamDropdownActions as ProjectTeamDropdownActions } from '@/project/team/TeamDropdownActions';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { getCustomer } from '@/workspace/selectors';
 
 import { OrganizationLink } from '../list/OrganizationLink';
 

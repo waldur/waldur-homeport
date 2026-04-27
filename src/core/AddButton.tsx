@@ -1,8 +1,8 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { ComponentProps } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 interface AddButtonProps extends Omit<
   ComponentProps<typeof ActionButton>,

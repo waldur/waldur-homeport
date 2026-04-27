@@ -4,15 +4,15 @@ import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { FormGroup, SelectField } from '@waldur/form';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { UI_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { FormGroup, SelectField } from '@/form';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { formTenantSelector, formatSubnets } from './utils';
 

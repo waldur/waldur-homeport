@@ -2,11 +2,11 @@ import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { Dropdown } from 'react-bootstrap';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { isDescendantOf } from '@waldur/navigation/useTabs';
-import { AddOrganizationButton } from '@waldur/user/dashboard/AddOrganizationButton';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { isDescendantOf } from '@/navigation/useTabs';
+import { AddOrganizationButton } from '@/user/dashboard/AddOrganizationButton';
 
 export const UserAffiliationsDropdownActions = () => {
   const { state } = useCurrentStateAndParams();

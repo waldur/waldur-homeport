@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Form, FormControlProps } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { FormField } from './types';
 

@@ -2,12 +2,12 @@ import React, { useEffect } from 'react';
 import { Field, reduxForm, InjectedFormProps } from 'redux-form';
 import { ProposalReview, ReviewSubmitRequest } from 'waldur-js-client';
 
-import { Panel } from '@waldur/core/Panel';
-import { FormGroup, TextField } from '@waldur/form';
-import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { REVIEW_SUMMARY_FORM_ID } from '@waldur/proposals/constants';
-import { isReviewInFinalState } from '@waldur/proposals/utils';
+import { Panel } from '@/core/Panel';
+import { FormGroup, TextField } from '@/form';
+import { VStepperFormStepProps } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { REVIEW_SUMMARY_FORM_ID } from '@/proposals/constants';
+import { isReviewInFinalState } from '@/proposals/utils';
 
 import { RateStars } from '../RateStars';
 

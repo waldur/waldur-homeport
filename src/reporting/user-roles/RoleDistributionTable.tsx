@@ -2,12 +2,12 @@ import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { CustomerMemberCount } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { SimpleTable } from '@waldur/table/SimpleTable';
-import { Column } from '@waldur/table/types';
-import { getSimpleExportData } from '@waldur/table/utils';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
+import { getSimpleExportData } from '@/table/utils';
 
 interface RoleDistributionTableProps {
   data: CustomerMemberCount[];

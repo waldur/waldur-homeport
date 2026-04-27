@@ -9,21 +9,21 @@ import {
   projectCreditsList,
 } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME, STALE_TIME } from '@waldur/core/constants';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getCostPolicyActionOptions } from '@waldur/customer/cost-policies/utils';
-import { getLineChartOptions } from '@waldur/dashboard/chart';
+import { SHORT_STALE_TIME, STALE_TIME } from '@/core/constants';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
+import { getLineChartOptions } from '@/dashboard/chart';
 import {
   formatProjectCostChart,
   getTeamSizeChart,
   getCreditChartAndOptions,
   getCostChartAndOptions,
-} from '@waldur/dashboard/utils';
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { Project, User } from '@waldur/workspace/types';
+} from '@/dashboard/utils';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { Project, User } from '@/workspace/types';
 
 async function getProjectCostData(project: Project) {
   const [invoices, costPolicies] = await Promise.all([

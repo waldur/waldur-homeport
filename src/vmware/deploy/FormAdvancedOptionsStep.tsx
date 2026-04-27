@@ -6,13 +6,13 @@ import {
   vmwareFoldersList,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { FormContainer, SelectField } from '@waldur/form';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { ENV } from '@/core/config';
+import { UI_STALE_TIME } from '@/core/constants';
+import { FormContainer, SelectField } from '@/form';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 export const FormAdvancedOptionsStep = (props: FormStepProps) => {
   const advancedMode = !ENV.plugins.WALDUR_VMWARE.BASIC_MODE;

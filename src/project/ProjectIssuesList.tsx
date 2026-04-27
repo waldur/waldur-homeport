@@ -1,8 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { IssuesList } from '@waldur/issues/list/IssuesList';
-import { getProject } from '@waldur/workspace/selectors';
+import { IssuesList } from '@/issues/list/IssuesList';
+import { getProject } from '@/workspace/selectors';
 
 export const ProjectIssuesList: FunctionComponent = () => {
   const project = useSelector(getProject);

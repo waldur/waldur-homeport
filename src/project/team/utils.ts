@@ -3,7 +3,7 @@ import { useEffect } from 'react';
 import { createSelector } from 'reselect';
 import { Project } from 'waldur-js-client';
 
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 export const hasCurrentCustomerPermission = createSelector(
   getUser,

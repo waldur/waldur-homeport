@@ -1,8 +1,8 @@
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SecretField } from '@waldur/marketplace/common/SecretField';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SecretField } from '@/marketplace/common/SecretField';
 
 import { ConfigurationEditButton } from './ConfigurationEditButton';
 import { CountryListField } from './CountryListField';

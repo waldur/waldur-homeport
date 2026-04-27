@@ -6,12 +6,12 @@ import {
   proposalProtectedCallsArchive,
 } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 import { Call } from '../types';
 import { getCallStateActions } from '../utils';

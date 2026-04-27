@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
-import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
-import { NodeRole } from '@waldur/rancher/types';
-import { type RootState } from '@waldur/store/reducers';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { CheckoutPricingRow } from '@/marketplace/deploy/CheckoutPricingRow';
+import { OrderSummary } from '@/marketplace/details/OrderSummary';
+import { NodeRole } from '@/rancher/types';
+import { type RootState } from '@/store/reducers';
 
 import { formNodesSelector } from './utils';
 

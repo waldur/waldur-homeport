@@ -63,7 +63,7 @@ yarn info vitest @testing-library/react cypress version```
 - Extract shared test data into separate files (e.g., `test-utils.ts`)
 - Only mock what's actually imported by the component under test
 - Don't mock exports that aren't used - it adds unnecessary complexity
-- Verify import paths match actual usage (e.g., `./constants` vs `@waldur/marketplace/common/constants`)
+- Verify import paths match actual usage (e.g., `./constants` vs `@/marketplace/common/constants`)
 
 **Vitest Mocking Constraints**:
 
@@ -98,7 +98,7 @@ vi.mock('./constants', () => ({
 
 ### TypeScript Configuration
 
-- Uses `@waldur/*` path mapping for internal imports
+- Uses `@/*` path mapping for internal imports
 - Strict TypeScript checking disabled for legacy compatibility
 - Module resolution set to "Bundler" for Vite compatibility
 

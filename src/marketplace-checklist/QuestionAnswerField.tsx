@@ -8,19 +8,19 @@ import {
   SelectField,
   StringField,
   TextField,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CountrySelectField } from '@waldur/form/CountrySelectField';
-import { DateField } from '@waldur/form/DateField';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { EmailField } from '@waldur/form/EmailField';
-import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
-import { YearField } from '@waldur/form/YearField';
-import { translate } from '@waldur/i18n';
+} from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CountrySelectField } from '@/form/CountrySelectField';
+import { DateField } from '@/form/DateField';
+import { DateTimeField } from '@/form/DateTimeField';
+import { EmailField } from '@/form/EmailField';
+import { PhoneNumberField } from '@/form/PhoneNumberField';
+import { YearField } from '@/form/YearField';
+import { translate } from '@/i18n';
 import {
   isQuestionSelectType,
   useQuestionNumberValidator,
-} from '@waldur/marketplace-checklist/utils';
+} from '@/marketplace-checklist/utils';
 
 const questionComponent: Record<QuestionTypeEnum, ComponentType> = {
   text_input: StringField,

@@ -1,5 +1,5 @@
-import { Badge } from '@waldur/core/Badge';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { renderFieldOrDash } from '@/table/utils';
 
 const STATUS_COLORS = {
   Open: 'primary',

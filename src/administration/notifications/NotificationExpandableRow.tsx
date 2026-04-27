@@ -2,10 +2,10 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card, Tab, Tabs } from 'react-bootstrap';
 
-import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { CopyToClipboard } from '@/core/CopyToClipboard';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { formatHeader } from './NotificationForm';
 

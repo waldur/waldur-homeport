@@ -1,8 +1,8 @@
 import { InfiniteData, UseInfiniteQueryResult } from '@tanstack/react-query';
 import { ComponentType, Fragment, ReactNode } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { DataPage } from '@waldur/table/api';
+import { translate } from '@/i18n';
+import { DataPage } from '@/table/api';
 
 export const InfiniteList = <RowType,>({
   context,

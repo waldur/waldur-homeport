@@ -2,10 +2,10 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { FC, useContext } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 import { IssueCommentsContext } from './IssueCommentsContext';
 

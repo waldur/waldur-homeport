@@ -6,11 +6,11 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { NumberField, SelectField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { NumberField, SelectField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { ComponentAccountingTypeWrapper } from './ComponentAccountingTypeWrapper';
 import { ComponentMaxValueField } from './ComponentMaxValueField';

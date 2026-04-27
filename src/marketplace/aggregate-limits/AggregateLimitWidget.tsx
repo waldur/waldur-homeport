@@ -4,16 +4,16 @@ import { useDispatch } from 'react-redux';
 import { ComponentsUsageStats } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { WidgetCard } from '@waldur/dashboard/WidgetCard';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { Customer } from '@waldur/workspace/types';
+import { EChart } from '@/core/EChart';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { WidgetCard } from '@/dashboard/WidgetCard';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { Customer } from '@/workspace/types';
 
 import { useAggregateLimitChart } from './utils';
 

@@ -1,13 +1,13 @@
 import { FC, useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ExportData } from '@waldur/table/exporters/types';
-import { formatOrganizationType } from '@waldur/user/support/aai-constants';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
+import { ChartCard } from '@/core/ChartCard';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ExportData } from '@/table/exporters/types';
+import { formatOrganizationType } from '@/user/support/aai-constants';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import { ReportingTitle } from '../ReportingTitle';
 

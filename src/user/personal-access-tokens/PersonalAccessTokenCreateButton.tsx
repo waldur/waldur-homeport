@@ -2,8 +2,8 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n/translate';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n/translate';
+import { ActionButton } from '@/table/ActionButton';
 
 import { personalAccessTokenCreateDialog } from './actions';
 

@@ -1,7 +1,7 @@
 import mermaid from 'mermaid';
 import { FC, useEffect, useId, useState } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface MermaidChartProps {
   code: string;

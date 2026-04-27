@@ -1,13 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 import { marketplaceScreenshotsList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { IMAGES_TABLE_NAME } from '@waldur/marketplace/offerings/store/constants';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { IMAGES_TABLE_NAME } from '@/marketplace/offerings/store/constants';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { CreateImageButton } from './CreateImageButton';
 import { DeleteImageAction } from './DeleteImageButton';

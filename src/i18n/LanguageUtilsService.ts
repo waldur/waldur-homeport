@@ -1,8 +1,8 @@
 import { Settings } from 'luxon';
 
-import { ENV } from '@waldur/core/config';
-import { LanguageStorage } from '@waldur/core/StorageManager';
-import { LanguageOption } from '@waldur/core/types';
+import { ENV } from '@/core/config';
+import { LanguageStorage } from '@/core/StorageManager';
+import { LanguageOption } from '@/core/types';
 
 function getLocaleData(locale) {
   return import(`../../locales/${locale}.json`);

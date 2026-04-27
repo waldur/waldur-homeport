@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { Card, Stack } from 'react-bootstrap';
 
-import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
+import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
 interface StatWidgetCardProps {
   label: string;

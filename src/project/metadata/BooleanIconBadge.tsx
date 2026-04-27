@@ -1,6 +1,6 @@
 import { MinusIcon, WarningIcon } from '@phosphor-icons/react';
 
-import { Badge } from '@waldur/core/Badge';
+import { Badge } from '@/core/Badge';
 
 export const BooleanIconBadge = ({ value }) => (
   <Badge variant={value ? 'pink' : 'default'} size="sm" pill outline onlyIcon>

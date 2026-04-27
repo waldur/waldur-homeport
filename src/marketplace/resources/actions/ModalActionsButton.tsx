@@ -1,4 +1,4 @@
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { ActionsPopover } from './ActionsPopover';
 

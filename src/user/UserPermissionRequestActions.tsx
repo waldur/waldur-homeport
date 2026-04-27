@@ -2,11 +2,11 @@ import { XCircleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { userPermissionRequestsCancelRequest } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 const UserPermissionRequestCancel = ({ row, refetch }) => {
   const dispatch = useDispatch();

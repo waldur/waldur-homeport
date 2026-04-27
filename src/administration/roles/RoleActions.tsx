@@ -1,4 +1,4 @@
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { RoleDeleteButton } from './RoleDeleteButton';
 import { RoleDescriptionEditButton } from './RoleDescriptionEditButton';

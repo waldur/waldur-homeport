@@ -1,7 +1,7 @@
 import { FC } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface StageProgressProps {
   stage: number;

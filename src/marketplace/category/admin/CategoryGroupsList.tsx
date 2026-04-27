@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react';
 import { marketplaceCategoryGroupsList } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { Link } from '@waldur/core/Link';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { CategoryGroup } from '@waldur/marketplace/types';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import Avatar from '@/core/Avatar';
+import { Link } from '@/core/Link';
+import { truncate } from '@/core/utils';
+import { translate } from '@/i18n';
+import { CategoryGroup } from '@/marketplace/types';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { CategoryGroupsRowActions } from './CategoryGroupsRowActions';
 import { GroupCreateButton } from './GroupCreateButton';

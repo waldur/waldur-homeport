@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useDispatch, useSelector } from 'react-redux';
 import { invoiceItemsMigrateTo, invoicesList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
 
 const formatDate = (invoice) => `${invoice.year}-${invoice.month}`;
 

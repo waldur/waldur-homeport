@@ -3,13 +3,13 @@ import classNames from 'classnames';
 import { useEffect, useMemo, useState } from 'react';
 import { CategoryGroup } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getGroupedCategories } from '@waldur/marketplace/category/utils';
-import { getCategoryGroups } from '@waldur/marketplace/common/api';
-import { Category } from '@waldur/marketplace/types';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getGroupedCategories } from '@/marketplace/category/utils';
+import { getCategoryGroups } from '@/marketplace/common/api';
+import { Category } from '@/marketplace/types';
 
 import { CategoriesPanel } from './CategoriesPanel';
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';

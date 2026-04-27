@@ -2,11 +2,11 @@ import { useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { FormSection } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { required } from '@/core/validators';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 import {
   FormNodeStorageRow,

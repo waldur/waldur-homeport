@@ -1,21 +1,21 @@
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { AzureSQLServerOffering } from '@waldur/azure/sql/marketplace';
-import { AzureVirtualMachineOffering } from '@waldur/azure/vm/marketplace';
-import { BookingOffering } from '@waldur/booking/marketplace';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { RemoteOffering } from '@waldur/marketplace-remote/marketplace';
-import { ScriptOffering } from '@waldur/marketplace-script/marketplace';
-import { OpenPortalOffering } from '@waldur/openportal/marketplace';
-import { OpenPortalRemoteOffering } from '@waldur/openportal-remote/marketplace';
-import { OpenStackTenantOffering } from '@waldur/openstack/marketplace';
-import { OpenStackInstanceOffering } from '@waldur/openstack/openstack-instance/marketplace';
-import { OpenStackVolumeOffering } from '@waldur/openstack/openstack-volume/marketplace';
-import { RancherOffering } from '@waldur/rancher/cluster/create/marketplace';
-import { SiteAgentOffering } from '@waldur/site-agent/marketplace';
-import { SlurmOffering } from '@waldur/slurm/marketplace';
-import { BasicOffering, SupportOffering } from '@waldur/support/marketplace';
-import { vmWareOffering } from '@waldur/vmware/marketplace';
+import { AzureSQLServerOffering } from '@/azure/sql/marketplace';
+import { AzureVirtualMachineOffering } from '@/azure/vm/marketplace';
+import { BookingOffering } from '@/booking/marketplace';
+import { OfferingComponent } from '@/marketplace/types';
+import { RemoteOffering } from '@/marketplace-remote/marketplace';
+import { ScriptOffering } from '@/marketplace-script/marketplace';
+import { OpenPortalOffering } from '@/openportal/marketplace';
+import { OpenPortalRemoteOffering } from '@/openportal-remote/marketplace';
+import { OpenStackTenantOffering } from '@/openstack/marketplace';
+import { OpenStackInstanceOffering } from '@/openstack/openstack-instance/marketplace';
+import { OpenStackVolumeOffering } from '@/openstack/openstack-volume/marketplace';
+import { RancherOffering } from '@/rancher/cluster/create/marketplace';
+import { SiteAgentOffering } from '@/site-agent/marketplace';
+import { SlurmOffering } from '@/slurm/marketplace';
+import { BasicOffering, SupportOffering } from '@/support/marketplace';
+import { vmWareOffering } from '@/vmware/marketplace';
 
 import { OfferingConfiguration } from './types';
 

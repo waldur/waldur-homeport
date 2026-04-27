@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
-import { required, url as urlValidator } from '@waldur/core/validators';
-import { SecretField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { required, url as urlValidator } from '@/core/validators';
+import { SecretField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 export const ConnectionStep: FC<WizardStepProps> = (props) => {
   const existingProvider = props.data?.existingProvider;

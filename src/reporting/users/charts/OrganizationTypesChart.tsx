@@ -1,9 +1,9 @@
 import { FC, useCallback, useMemo } from 'react';
 import { UserOrganizationTypeCount } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { formatOrganizationType } from '@waldur/user/support/aai-constants';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { formatOrganizationType } from '@/user/support/aai-constants';
 
 import { DonutChart } from './DonutChart';
 import { getChartExportData } from './utils';

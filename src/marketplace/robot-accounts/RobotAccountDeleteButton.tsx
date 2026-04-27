@@ -1,10 +1,10 @@
 import { marketplaceRobotAccountsDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ResourceDeleteButton } from '@waldur/resource/actions/ResourceDeleteButton';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ResourceDeleteButton } from '@/resource/actions/ResourceDeleteButton';
+import { useUser } from '@/workspace/hooks';
 
 export const RobotAccountDeleteButton = ({ row, refetch }) => {
   const user = useUser();

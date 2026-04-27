@@ -1,6 +1,6 @@
 import { BillingUnit } from 'waldur-js-client';
 
-import { getFormLimitSerializer } from '@waldur/marketplace/common/registry';
+import { getFormLimitSerializer } from '@/marketplace/common/registry';
 
 import { PlanFormData, OptionFormData } from './types';
 

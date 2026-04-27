@@ -1,8 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 import { OfferingSectionProps } from '../types';
 

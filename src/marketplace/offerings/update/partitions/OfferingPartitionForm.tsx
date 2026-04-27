@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { NumberField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { validateNonNegative } from '@waldur/marketplace/common/utils';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { NumberField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { validateNonNegative } from '@/marketplace/common/utils';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 const GroupHeader = ({ children }) => (
   <h4 className="text-gray-700 mb-4">{children}</h4>

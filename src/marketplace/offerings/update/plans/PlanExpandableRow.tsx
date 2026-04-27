@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import { OfferingComponent, ProviderPlanDetails } from 'waldur-js-client';
 
-import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { PlanComponentsTable } from './PlanComponentsTable';
 import { PlanResourcesTable } from './PlanResourcesTable';

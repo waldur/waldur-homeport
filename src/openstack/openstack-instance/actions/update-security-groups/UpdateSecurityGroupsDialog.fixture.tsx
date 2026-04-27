@@ -1,9 +1,10 @@
-import { actWait, updateWrapper } from '@waldur/core/testUtils';
-import { SecurityGroup } from '@waldur/openstack/openstack-security-groups/types';
 import { mount, ReactWrapper } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import { OpenStackInstance } from 'waldur-js-client';
+
+import { actWait, updateWrapper } from '@/core/testUtils';
+import { SecurityGroup } from '@/openstack/openstack-security-groups/types';
 
 import { UpdateSecurityGroupsDialog } from './UpdateSecurityGroupsDialog';
 

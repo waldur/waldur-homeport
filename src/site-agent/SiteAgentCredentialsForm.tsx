@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
+import { ENV } from '@/core/config';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
 
 export const SiteAgentCredentialsForm: FunctionComponent<
   OfferingEditPanelFormProps

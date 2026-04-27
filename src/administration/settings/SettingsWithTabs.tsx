@@ -4,12 +4,12 @@ import { FC, ReactNode, useMemo } from 'react';
 import { Badge, Card, Nav, Tab } from 'react-bootstrap';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SettingsDescription } from '@waldur/SettingsDescription';
-import { TableQuery } from '@waldur/table/TableQuery';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SettingsDescription } from '@/SettingsDescription';
+import { TableQuery } from '@/table/TableQuery';
 
 import { FieldRow } from './FieldRow';
 import { useSettingsUrlSync } from './useSettingsUrlSync';

@@ -7,16 +7,16 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { SubmitButton } from '@waldur/form';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { resourceAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showError, showSuccess } from '@waldur/store/notify';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { SubmitButton } from '@/form';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showError, showSuccess } from '@/store/notify';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 type Phase = 'form' | 'preview' | 'result';
 

@@ -2,17 +2,17 @@ import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
 import {
   hasPermission,
   hasPermissionOnAnyCustomer,
-} from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useUser } from '@waldur/workspace/hooks';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+} from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useUser } from '@/workspace/hooks';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 const BatchMoveProjectDialog = lazyComponent(() =>
   import('./BatchMoveProjectDialog').then((module) => ({

@@ -2,10 +2,10 @@ import { Card, Col, Row } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { required } from '@waldur/core/validators';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { required } from '@/core/validators';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 export const StorageDataTypeArrayField = ({
   fields,

@@ -4,12 +4,12 @@ import { Alert, Card, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { identityProvidersDiscoverMetadata } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { WarnCard } from '@waldur/core/WarnCard';
-import { translate } from '@waldur/i18n';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { Badge } from '@/core/Badge';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { WarnCard } from '@/core/WarnCard';
+import { translate } from '@/i18n';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { OidcFormValues } from '../types';
 

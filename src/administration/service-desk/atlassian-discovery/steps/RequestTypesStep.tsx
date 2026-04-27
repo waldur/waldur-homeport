@@ -4,11 +4,11 @@ import { Alert, FormCheck, Spinner, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 import { supportSettingsAtlassianDiscoverRequestTypes } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { renderFieldOrDash } from '@/table/utils';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { AtlassianFormValues } from '../types';
 

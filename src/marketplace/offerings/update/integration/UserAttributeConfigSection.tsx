@@ -9,22 +9,22 @@ import {
   OfferingUserAttributeConfig,
 } from 'waldur-js-client';
 
-import { CheckOrX } from '@waldur/core/CheckOrX';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
-import { Tip } from '@waldur/core/Tooltip';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { FeaturesEnum, UserFeatures } from '@waldur/FeaturesEnums';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { CheckOrX } from '@/core/CheckOrX';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
+import { Tip } from '@/core/Tooltip';
+import { isFeatureVisible } from '@/features/connect';
+import { FeaturesEnum, UserFeatures } from '@/FeaturesEnums';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 import {
   isProfileAttributeEnabled,
   ProfileAttribute,
-} from '@waldur/user/support/profileAttributes';
-import { getUser } from '@waldur/workspace/selectors';
+} from '@/user/support/profileAttributes';
+import { getUser } from '@/workspace/selectors';
 
 import { OfferingEditField } from '../DefaultOfferingEditPanel';
 

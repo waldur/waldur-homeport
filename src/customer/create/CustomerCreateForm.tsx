@@ -6,10 +6,10 @@ import {
   email,
   getNameFieldValidators,
   required,
-} from '@waldur/core/validators';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { DecoratedLabel } from '@waldur/rancher/template/DecoratedLabel';
+} from '@/core/validators';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { DecoratedLabel } from '@/rancher/template/DecoratedLabel';
 
 export const CustomerCreateForm = () => {
   return (

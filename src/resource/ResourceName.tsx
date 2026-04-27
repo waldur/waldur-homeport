@@ -1,8 +1,8 @@
 import { WarningIcon } from '@phosphor-icons/react';
 
-import { Link } from '@waldur/core/Link';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 import { ResourceIconName } from './ResourceIconName';
 import { ResourceLink } from './ResourceLink';

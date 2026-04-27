@@ -3,11 +3,11 @@ import { useMutation } from '@tanstack/react-query';
 import { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse } from '@waldur/store/notify';
-import { setImpersonatorUser } from '@waldur/workspace/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse } from '@/store/notify';
+import { setImpersonatorUser } from '@/workspace/actions';
+import { getUser } from '@/workspace/selectors';
 
 import { UsersService, setImpersonationData } from '../UsersService';
 

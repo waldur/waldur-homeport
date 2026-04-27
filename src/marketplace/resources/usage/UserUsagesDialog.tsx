@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { OfferingComponent } from '@/marketplace/types';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { ComponentUserUsage } from './types';
 

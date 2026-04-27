@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import { Answer, QuestionAdmin } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { BooleanIconBadge } from '@waldur/project/metadata/BooleanIconBadge';
-import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { BooleanIconBadge } from '@/project/metadata/BooleanIconBadge';
+import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { AnswerRowActions } from './AnswerRowActions';
 

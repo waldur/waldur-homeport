@@ -9,12 +9,12 @@ import {
 } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Option } from '@waldur/marketplace/common/registry';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { loadSecurityGroups } from '@waldur/openstack/api';
-import { OPENSTACK_PORT_TYPE } from '@waldur/openstack/constants';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { Option } from '@/marketplace/common/registry';
+import { closeModalDialog } from '@/modal/actions';
+import { loadSecurityGroups } from '@/openstack/api';
+import { OPENSTACK_PORT_TYPE } from '@/openstack/constants';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface UpdateSecurityGroupsFormData {
   security_groups: Option[];

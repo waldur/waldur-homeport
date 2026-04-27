@@ -9,13 +9,13 @@ import { useTable } from './useTable';
 import { useTableQuery } from './useTableQuery';
 
 // Mock the drawer actions
-vi.mock('@waldur/drawer/actions', () => ({
+vi.mock('@/drawer/actions', () => ({
   openDrawerDialog: vi.fn(() => ({ type: 'OPEN_DRAWER' })),
   renderDrawerDialog: vi.fn(() => ({ type: 'RENDER_DRAWER' })),
 }));
 
 // Mock router
-vi.mock('@waldur/router', () => ({
+vi.mock('@/router', () => ({
   router: {
     globals: {
       $current: {
@@ -27,14 +27,14 @@ vi.mock('@waldur/router', () => ({
 }));
 
 // Mock navigation title
-vi.mock('@waldur/navigation/title', () => ({
+vi.mock('@/navigation/title', () => ({
   getTitle: () => 'Test Page',
   reducer: (state = { title: '', subtitle: '' }) => state,
   effects: function* () {},
 }));
 
 // Mock queryClient
-vi.mock('@waldur/core/queryClient', () => ({
+vi.mock('@/core/queryClient', () => ({
   queryClient: {
     invalidateQueries: vi.fn(),
   },

@@ -1,5 +1,5 @@
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
-import { translate } from '@waldur/i18n';
+import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
+import { translate } from '@/i18n';
 
 export const CustomerMembersColumn = ({ row }) =>
   row.users_count === 0 ? (

@@ -1,6 +1,6 @@
 import { OpenStackSecurityGroupRuleCreate as SecurityGroupRule } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 const COMMON_PORTS = {
   22: 'SSH',

@@ -2,9 +2,9 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
 
 interface ProfileRequiredMessageProps {
   hasProfile: boolean;

@@ -1,15 +1,15 @@
 import React from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { SelectField } from '@waldur/form';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { SelectField } from '@/form';
 import {
   REACT_MULTI_SELECT_TABLE_FILTER,
   REACT_SELECT_TABLE_FILTER,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+} from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 const getIsRemovedFilterOptions = () => [
   {

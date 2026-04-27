@@ -1,8 +1,8 @@
 import { ProposalDocumentation } from 'waldur-js-client';
 
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { AttachmentItemPending } from '@waldur/form/upload/AttachmentItemPending';
-import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
+import { AttachmentsList } from '@/form/upload/AttachmentsList';
 
 interface DocumentationFilesProps {
   files: Array<ProposalDocumentation>;

@@ -9,15 +9,15 @@ import {
   adminAnnouncementsUpdate,
 } from 'waldur-js-client';
 
-import { SelectField, SubmitButton } from '@waldur/form';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@waldur/navigation/header/announcements/queryKeys';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { SelectField, SubmitButton } from '@/form';
+import { DateTimeField } from '@/form/DateTimeField';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@/navigation/header/announcements/queryKeys';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { AnnouncementTypeOptions } from '../utils';
 

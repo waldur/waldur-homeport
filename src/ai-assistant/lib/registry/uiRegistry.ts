@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { UIBlockProps } from '@waldur/ai-assistant/lib/types';
+import { UIBlockProps } from '@/ai-assistant/lib/types';
 
 interface UIComponent {
   key: string;

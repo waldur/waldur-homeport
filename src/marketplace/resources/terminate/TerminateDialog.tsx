@@ -2,14 +2,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
-import { FormFooter } from '@waldur/form';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { orderCanBeApproved as orderCanBeApprovedSelector } from '@waldur/marketplace/orders/actions/selectors';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ReactComponent as TenantSubtitle } from '@waldur/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
-import { ReactComponent as ClusterSubtitle } from '@waldur/rancher/cluster/actions/DestroyActionSubtitle.md';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { FormFooter } from '@/form';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { orderCanBeApproved as orderCanBeApprovedSelector } from '@/marketplace/orders/actions/selectors';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ReactComponent as TenantSubtitle } from '@/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
+import { ReactComponent as ClusterSubtitle } from '@/rancher/cluster/actions/DestroyActionSubtitle.md';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const TerminateDialog = reduxForm<
   {},

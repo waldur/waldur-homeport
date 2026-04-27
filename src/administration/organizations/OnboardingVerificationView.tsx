@@ -1,8 +1,8 @@
 import { EyeIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { router } from '@waldur/router';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { router } from '@/router';
 
 export const OnboardingVerificationView = ({ row }) => {
   const callback = () => {

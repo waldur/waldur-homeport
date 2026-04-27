@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { getBackendHealthStatus } from '@waldur/navigation/footer/BackendHealthStatusIndicator';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { getBackendHealthStatus } from '@/navigation/footer/BackendHealthStatusIndicator';
 
 export const BackendHealthStatusDialog: FunctionComponent = () => {
   const [{ loading, value }, reFetch] = useAsyncFn(getBackendHealthStatus, []);

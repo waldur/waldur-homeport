@@ -3,9 +3,9 @@ import { useCallback } from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/notify';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
+import { showSuccess } from '@/store/notify';
 
 export const UserToken = ({ token }) => {
   const dispatch = useDispatch();

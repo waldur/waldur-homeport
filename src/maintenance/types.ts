@@ -5,7 +5,7 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const MAINTENANCE_TYPE = {
   1: translate('Scheduled'),

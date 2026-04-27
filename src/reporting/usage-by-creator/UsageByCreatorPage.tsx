@@ -1,7 +1,7 @@
 import { FC, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { ReportingTitle } from '../ReportingTitle';
 

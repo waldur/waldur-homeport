@@ -2,16 +2,12 @@ import { FC, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import {
-  required,
-  validateRedirectURLs,
-  redirectURI,
-} from '@waldur/core/validators';
-import { StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { required, validateRedirectURLs, redirectURI } from '@/core/validators';
+import { StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { OidcFormValues } from '../types';
 

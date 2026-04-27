@@ -1,16 +1,12 @@
 import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
-import {
-  required,
-  redirectURI,
-  validateRedirectURLs,
-} from '@waldur/core/validators';
-import { WarnCard } from '@waldur/core/WarnCard';
-import { SecretField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required, redirectURI, validateRedirectURLs } from '@/core/validators';
+import { WarnCard } from '@/core/WarnCard';
+import { SecretField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 // Component for allowed redirects field with individual URL entries
 const AllowedRedirectsField = () => {

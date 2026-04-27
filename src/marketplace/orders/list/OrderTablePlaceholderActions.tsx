@@ -1,5 +1,5 @@
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 
 export const OrderTablePlaceholderActions = () => (
   <Link

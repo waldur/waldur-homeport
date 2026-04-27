@@ -10,7 +10,7 @@ import reactDisplayNamePlugin from './vite-plugin-react-displayname';
 export default defineConfig({
   resolve: {
     alias: {
-      '@waldur': path.resolve(__dirname, './src/'),
+      '@': path.resolve(__dirname, './src/'),
       'react-windowed-select': path.resolve(
         'node_modules/react-windowed-select/dist/main.js',
       ),

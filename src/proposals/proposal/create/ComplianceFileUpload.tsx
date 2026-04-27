@@ -2,12 +2,12 @@ import { FileIcon, TrashIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { FieldInputProps, FieldMetaState } from 'react-final-form';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
-import '@waldur/form/upload/AttachmentsList.scss';
+import '@/form/upload/AttachmentsList.scss';
 
 // Format for new file uploads (before backend processing)
 interface FileUploadData {

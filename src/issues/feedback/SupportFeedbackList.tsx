@@ -2,20 +2,20 @@ import { FC } from 'react';
 import { useSelector } from 'react-redux';
 import { Feedback, supportFeedbacksList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { SUPPORT_FEEDBACK_LIST } from '@waldur/issues/feedback/constants';
-import { IssueField } from '@waldur/issues/feedback/IssueField';
-import { SupportFeedbackListExpandableRow } from '@waldur/issues/feedback/SupportFeedbackListExpandableRow';
-import { makeLastTwelveMonthsFilterPeriodsAsCreatedRange } from '@waldur/issues/utils';
-import { createFetcher } from '@waldur/table/api';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { SUPPORT_FEEDBACK_LIST } from '@/issues/feedback/constants';
+import { IssueField } from '@/issues/feedback/IssueField';
+import { SupportFeedbackListExpandableRow } from '@/issues/feedback/SupportFeedbackListExpandableRow';
+import { makeLastTwelveMonthsFilterPeriodsAsCreatedRange } from '@/issues/utils';
+import { createFetcher } from '@/table/api';
 import {
   selectSupportFeedbacksFilter,
   SupportFeedbacksFilter,
-} from '@waldur/table/generated/SupportFeedbacksFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/SupportFeedbacksFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { feedbackOptions } from './utils';
 

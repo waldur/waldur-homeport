@@ -9,10 +9,10 @@ import {
   marketplacePluginsList,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useExtraAnnouncementBar } from '@waldur/navigation/context';
-import { AnnouncementBar } from '@waldur/navigation/header/announcements/AnnouncementBar';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useExtraAnnouncementBar } from '@/navigation/context';
+import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 
 import { Offering } from '../types';
 

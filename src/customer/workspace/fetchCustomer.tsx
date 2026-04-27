@@ -8,13 +8,13 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
-import { fetchResultCount, getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
-import { showErrorResponse } from '@waldur/store/notify';
-import store from '@waldur/store/store';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { getCustomer as getCustomerSelector } from '@waldur/workspace/selectors';
+import { fetchResultCount, getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { translate } from '@/i18n';
+import { router } from '@/router';
+import { showErrorResponse } from '@/store/notify';
+import store from '@/store/store';
+import { setCurrentCustomer } from '@/workspace/actions';
+import { getCustomer as getCustomerSelector } from '@/workspace/selectors';
 
 import { getCustomer } from '../utils';
 

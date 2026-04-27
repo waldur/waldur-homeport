@@ -6,13 +6,13 @@ import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 import { rancherAppsCreate } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
-import { TemplateQuestions } from '@waldur/rancher/template/TemplateQuestions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { type RootState } from '@waldur/store/reducers';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
+import { TemplateQuestions } from '@/rancher/template/TemplateQuestions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { type RootState } from '@/store/reducers';
 
 import { FORM_ID } from './constants';
 import { TemplateHeader } from './TemplateHeader';

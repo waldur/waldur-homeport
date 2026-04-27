@@ -6,13 +6,13 @@ import {
   OfferingState,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
-import { setFilterQuery } from '@waldur/table/actions';
-import { USER_TOS_MANAGEMENT_TABLE_ID } from '@waldur/user/constants';
-import { useUser } from '@waldur/workspace/hooks';
+import { ENV } from '@/core/config';
+import { STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { router } from '@/router';
+import { setFilterQuery } from '@/table/actions';
+import { USER_TOS_MANAGEMENT_TABLE_ID } from '@/user/constants';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceWarningBar } from './ResourceWarningBar';
 

@@ -1,6 +1,6 @@
-import { StateProps } from '@waldur/marketplace/resources/change-limits/connector';
-import { Offering } from '@waldur/marketplace/types';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
+import { StateProps } from '@/marketplace/resources/change-limits/connector';
+import { Offering } from '@/marketplace/types';
+import { TENANT_TYPE } from '@/openstack/constants';
 
 export const plan = {
   prices: {

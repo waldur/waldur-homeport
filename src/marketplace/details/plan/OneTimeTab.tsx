@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { orderProjectSelector } from '@waldur/marketplace/deploy/selectors';
-import { OrderStartDateField } from '@waldur/marketplace/deploy/steps/OrderStartDateField';
-import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
+import { ENV } from '@/core/config';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { orderProjectSelector } from '@/marketplace/deploy/selectors';
+import { OrderStartDateField } from '@/marketplace/deploy/steps/OrderStartDateField';
+import { concealPricesSelector } from '@/marketplace/deploy/utils';
 
 import { ComponentRowTotal } from './ComponentRowTotal';
 import { ControlRows } from './ControlRows';

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useAsync } from 'react-use';
 
-import { countLexisLinks } from '@waldur/marketplace/common/api';
+import { countLexisLinks } from '@/marketplace/common/api';
 
 import { BasicLexisLinkList } from './BasicLexisLinkList';
 

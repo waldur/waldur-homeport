@@ -1,6 +1,6 @@
 import { Form } from 'react-bootstrap';
 
-import { FieldError } from '@waldur/form';
+import { FieldError } from '@/form';
 
 import { FormGroup } from './FormGroup';
 

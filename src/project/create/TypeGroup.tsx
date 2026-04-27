@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { Field } from 'react-final-form';
 import { projectTypesList } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const TypeGroup = ({ create }: { create?: boolean }) => {
   if (create && !isFeatureVisible(ProjectFeatures.show_type_in_create_dialog)) {

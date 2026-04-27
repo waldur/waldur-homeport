@@ -13,26 +13,26 @@ import {
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { formatDate, formatISODate, parseDate } from '@waldur/core/dateUtils';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { selectSelectedRows } from '@waldur/table/selectors';
-import Table from '@waldur/table/Table';
-import { TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { setCurrentProject } from '@waldur/workspace/actions';
+import { getAllPages } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { formatDate, formatISODate, parseDate } from '@/core/dateUtils';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
+import { selectSelectedRows } from '@/table/selectors';
+import Table from '@/table/Table';
+import { TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { setCurrentProject } from '@/workspace/actions';
 
 import { EditProjectProps } from '../types';
 

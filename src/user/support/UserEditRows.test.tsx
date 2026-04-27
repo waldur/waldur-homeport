@@ -3,19 +3,19 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ENV } from '@waldur/core/config';
-import * as features from '@waldur/features/connect';
+import { ENV } from '@/core/config';
+import * as features from '@/features/connect';
 
 import * as profileAttributes from './profileAttributes';
 import { UserEditRows } from './UserEditRows';
 
 // Mock dependencies
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 
-vi.mock('@waldur/features/connect');
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/features/connect');
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {
@@ -29,7 +29,7 @@ vi.mock('@waldur/core/config', () => ({
 vi.mock('./profileAttributes', () => ({
   isProfileAttributeEnabled: vi.fn(),
 }));
-vi.mock('@waldur/user/support/selectors', () => ({
+vi.mock('@/user/support/selectors', () => ({
   isRequired: () => false,
 }));
 

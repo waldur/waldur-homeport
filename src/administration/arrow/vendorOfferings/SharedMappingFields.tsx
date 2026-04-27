@@ -4,8 +4,8 @@ import {
   marketplacePublicOfferingsPlansList,
 } from 'waldur-js-client';
 
-import { AsyncCreatablePaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { AsyncCreatablePaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 interface VendorChoice {
   value: string;

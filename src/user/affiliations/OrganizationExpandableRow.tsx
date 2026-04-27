@@ -4,17 +4,17 @@ import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { ProjectsListData } from 'waldur-js-client';
 
-import { getResourcesCount } from '@waldur/administration/api';
-import { count } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { getUser } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { getResourcesCount } from '@/administration/api';
+import { count } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { getUser } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 import { TableTabsContainer } from '../../customer/list/TableTabsContainer';
 import { getCustomerUsersCount } from '../../customer/team/utils';

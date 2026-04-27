@@ -7,11 +7,11 @@ import {
   MarketplaceResourcesListData,
 } from 'waldur-js-client';
 
-import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@waldur/marketplace/resources/list/constants';
-import { createFetcher } from '@waldur/table/api';
-import { TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { PROJECT_RESOURCES_ALL_FILTER_FORM_ID } from '@/marketplace/resources/list/constants';
+import { createFetcher } from '@/table/api';
+import { TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { getCustomer } from '@/workspace/selectors';
 
 import { NON_TERMINATED_STATES } from './constants';
 import { ResourcesAllListTable } from './ResourcesAllListTable';

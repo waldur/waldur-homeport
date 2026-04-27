@@ -1,8 +1,8 @@
 import { Resource } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
+import { Link } from '@/core/Link';
+import { formatJsxTemplate, translate } from '@/i18n';
+import openstackIcon from '@/images/appstore/icon-openstack.png';
 
 interface ParentLinkProps {
   parent_name: string;

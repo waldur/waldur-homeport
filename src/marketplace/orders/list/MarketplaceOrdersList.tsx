@@ -7,8 +7,8 @@ import { MarketplaceOrdersListData } from 'waldur-js-client';
 import {
   MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID,
   TABLE_MARKETPLACE_ORDERS,
-} from '@waldur/marketplace/orders/list/constants';
-import { useMarketplacePublicTabs } from '@waldur/marketplace/utils';
+} from '@/marketplace/orders/list/constants';
+import { useMarketplacePublicTabs } from '@/marketplace/utils';
 
 import { OrdersBulkActions } from '../actions/OrdersBulkActions';
 

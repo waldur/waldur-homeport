@@ -1,4 +1,4 @@
-import { Proposal } from '@waldur/proposals/types';
+import { Proposal } from '@/proposals/types';
 
 import { EntityHeader } from '../EntityHeader';
 import { ProposalBadge } from '../ProposalBadge';

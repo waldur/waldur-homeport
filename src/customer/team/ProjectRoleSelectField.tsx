@@ -1,12 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
-import {
-  REACT_MULTI_SELECT_TABLE_FILTER,
-  Select,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { getProjectRoles } from '@waldur/permissions/utils';
+import { REACT_MULTI_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { getProjectRoles } from '@/permissions/utils';
 
 export const ProjectRoleSelectField: FunctionComponent = () => (
   <Field

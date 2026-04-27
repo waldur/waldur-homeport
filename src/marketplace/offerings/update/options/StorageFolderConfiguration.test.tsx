@@ -3,12 +3,12 @@ import arrayMutators from 'final-form-arrays';
 import { Form } from 'react-final-form';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { Offering } from '@waldur/marketplace/types';
+import { Offering } from '@/marketplace/types';
 
 import { StorageFolderConfiguration } from './StorageFolderConfiguration';
 
 // Mock translate
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: vi.fn((str) => str),
 }));
 

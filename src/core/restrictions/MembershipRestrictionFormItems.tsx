@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 import { RestrictionsValue } from './RestrictionsValue';
 import { RestrictionField } from './types';

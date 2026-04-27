@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 import { RobotAccountDetails, SshKey } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const RobotAccountExpandable: FC<{ row: RobotAccountDetails }> = ({
   row,

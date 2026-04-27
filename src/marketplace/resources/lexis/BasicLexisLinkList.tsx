@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
 import { lexisLinksList } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { LexisLinkDeleteAction } from '@waldur/marketplace/resources/lexis/LexisLinkDeleteButton';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { LexisLinkDeleteAction } from '@/marketplace/resources/lexis/LexisLinkDeleteButton';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const BasicLexisLinkList: FunctionComponent<{ filter? }> = ({
   filter,

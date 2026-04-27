@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 import { FormLabel } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ProposalReview } from '@waldur/proposals/types';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ProposalReview } from '@/proposals/types';
 
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 import { RateStars } from '../create-review/RateStars';

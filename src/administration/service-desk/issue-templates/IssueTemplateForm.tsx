@@ -10,27 +10,22 @@ import {
   supportTemplatesUpdate,
 } from 'waldur-js-client';
 
-import { IssueTemplateTypeOptions } from '@waldur/administration/utils';
-import { formDataOptions } from '@waldur/core/api';
-import { ACCEPTED_FILE_TYPES } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import {
-  SelectField,
-  StringField,
-  SubmitButton,
-  TextField,
-} from '@waldur/form';
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { AttachmentItemPending } from '@waldur/form/upload/AttachmentItemPending';
-import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
-import { Attachment, AttachmentUploading } from '@waldur/form/upload/types';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { IssueTemplateTypeOptions } from '@/administration/utils';
+import { formDataOptions } from '@/core/api';
+import { ACCEPTED_FILE_TYPES } from '@/core/constants';
+import { required } from '@/core/validators';
+import { SelectField, StringField, SubmitButton, TextField } from '@/form';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
+import { AttachmentsList } from '@/form/upload/AttachmentsList';
+import { Attachment, AttachmentUploading } from '@/form/upload/types';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 interface IssueTemplateFormProps {
   resolve: { issueTemplate?; refetch };

@@ -1,4 +1,4 @@
-import { useTheme } from '@waldur/theme/useTheme';
+import { useTheme } from '@/theme/useTheme';
 
 import Bg from './Background.svg';
 import BgDark from './BackgroundDark.svg';

@@ -6,9 +6,9 @@ import {
   rancherClustersRetrieve,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
 
 import { CatalogTemplatesList } from './CatalogTemplateList';
 

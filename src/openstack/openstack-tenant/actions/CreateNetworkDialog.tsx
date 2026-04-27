@@ -2,15 +2,15 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { openstackTenantsCreateNetwork } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
 import {
   createLatinNameField,
   createDescriptionField,
-} from '@waldur/resource/actions/base';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+} from '@/resource/actions/base';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const CreateNetworkDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },

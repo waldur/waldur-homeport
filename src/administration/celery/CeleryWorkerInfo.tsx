@@ -1,9 +1,9 @@
 import { CeleryWorkerStats } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Badge } from '@waldur/core/Badge';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Badge } from '@/core/Badge';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 interface CeleryWorkerInfoProps {
   workerName: string;

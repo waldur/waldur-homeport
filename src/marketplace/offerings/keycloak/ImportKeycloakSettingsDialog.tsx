@@ -1,12 +1,12 @@
 import { UploadSimpleIcon, CheckIcon, XIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useRef, useState } from 'react';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SecretField as PlainSecretField } from '@waldur/marketplace/common/SecretField';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SecretField as PlainSecretField } from '@/marketplace/common/SecretField';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { KEYCLOAK_FIELDS } from './constants';
 

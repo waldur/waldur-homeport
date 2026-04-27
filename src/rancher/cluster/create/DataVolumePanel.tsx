@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { FormSection } from 'redux-form';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { RancherFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { RemoveButton } from '@waldur/marketplace/offerings/RemoveButton';
+import { isFeatureVisible } from '@/features/connect';
+import { RancherFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { RemoveButton } from '@/marketplace/offerings/RemoveButton';
 
 import { VolumeMountPointGroup } from './VolumeMountPointGroup';
 import { VolumeSizeGroup } from './VolumeSizeGroup';

@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { rolesDisable, rolesEnable } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const RoleToggleButton: FunctionComponent<{
   row;

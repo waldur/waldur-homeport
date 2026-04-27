@@ -4,9 +4,9 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { MarketplacePublicOfferingsListData } from 'waldur-js-client';
 
-import { CardStyleType } from '@waldur/marketplace/common/cards';
-import { RootState } from '@waldur/store/reducers';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import { CardStyleType } from '@/marketplace/common/cards';
+import { RootState } from '@/store/reducers';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import {
   getContextFiltersForOfferings,

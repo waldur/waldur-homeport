@@ -1,9 +1,9 @@
 import { PrinterIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
 
 export const PrintInvoiceButton: FunctionComponent = () => (
   <SubmitButton

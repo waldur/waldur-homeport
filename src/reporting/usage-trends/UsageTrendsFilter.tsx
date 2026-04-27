@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 interface YearOption {
   value: number;

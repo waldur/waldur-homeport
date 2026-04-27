@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { hooksList } from 'waldur-js-client';
 
-import { HooksRowActions } from '@waldur/administration/hooks/HooksRowActions';
-import { titleCase } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
+import { HooksRowActions } from '@/administration/hooks/HooksRowActions';
+import { titleCase } from '@/core/utils';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
 
 import { HOOK_LIST_ID } from './constants';
 import { HookCreateButton } from './HookCreateButton';

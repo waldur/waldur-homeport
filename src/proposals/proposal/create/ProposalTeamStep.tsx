@@ -1,8 +1,8 @@
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { TeamSection } from '@waldur/proposals/team/TeamSection';
-import { Proposal, ProposalReview } from '@waldur/proposals/types';
+import { AccordionCard } from '@/core/AccordionCard';
+import { VStepperFormStepProps } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { TeamSection } from '@/proposals/team/TeamSection';
+import { Proposal, ProposalReview } from '@/proposals/types';
 
 import { StepHeaderContent } from './StepHeaderContent';
 

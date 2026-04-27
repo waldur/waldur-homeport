@@ -1,6 +1,6 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { translate } from '@waldur/i18n';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { translate } from '@/i18n';
 
 export const states: StateDeclaration[] = [
   {

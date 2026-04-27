@@ -2,11 +2,11 @@ import { WrenchIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { Category } from '@waldur/marketplace/types';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { Category } from '@/marketplace/types';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const CategoryManageColumnsDialog = lazyComponent(() =>
   import('./CategoryManageColumnsDialog').then((module) => ({

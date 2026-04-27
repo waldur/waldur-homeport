@@ -11,19 +11,19 @@ import { Card, Dropdown, Nav, Tab } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { featureValues } from 'waldur-js-client';
 
-import { TelemetryExampleButton } from '@waldur/administration/TelemetryExampleButton';
-import { Badge } from '@waldur/core/Badge';
-import { ENV } from '@waldur/core/config';
-import { SaveButton } from '@waldur/core/SaveButton';
-import { FeaturesDescription } from '@waldur/features/FeaturesDescription';
-import { FeatureSection } from '@waldur/features/types';
-import { DeploymentFeatures } from '@waldur/FeaturesEnums';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useNotify } from '@waldur/store/hooks';
-import { TableQuery } from '@waldur/table/TableQuery';
+import { TelemetryExampleButton } from '@/administration/TelemetryExampleButton';
+import { Badge } from '@/core/Badge';
+import { ENV } from '@/core/config';
+import { SaveButton } from '@/core/SaveButton';
+import { FeaturesDescription } from '@/features/FeaturesDescription';
+import { FeatureSection } from '@/features/types';
+import { DeploymentFeatures } from '@/FeaturesEnums';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { useNotify } from '@/store/hooks';
+import { TableQuery } from '@/table/TableQuery';
 
 import { useSettingsUrlSync } from './settings/useSettingsUrlSync';
 

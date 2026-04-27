@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Col, Row } from 'react-bootstrap';
 import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 
-import { count } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { StatisticsCard } from '@waldur/core/StatisticsCard';
-import { translate } from '@waldur/i18n';
+import { count } from '@/core/api';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { StatisticsCard } from '@/core/StatisticsCard';
+import { translate } from '@/i18n';
 
 import * as api from '../api';
 

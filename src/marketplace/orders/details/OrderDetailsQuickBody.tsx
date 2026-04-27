@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { SUPPORT_OFFERING_TYPE } from '@/support/constants';
 
 import { getOrderType } from '../utils';
 

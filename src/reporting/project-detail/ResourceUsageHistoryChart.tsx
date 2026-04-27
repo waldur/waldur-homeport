@@ -1,12 +1,12 @@
 import { DateTime } from 'luxon';
 import { FC, useMemo, useCallback } from 'react';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { EChart } from '@waldur/core/EChart';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ExportData } from '@waldur/table/exporters/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ChartCard } from '@/core/ChartCard';
+import { EChart } from '@/core/EChart';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ExportData } from '@/table/exporters/types';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { UsageHistoryPoint, ComponentLabelMap } from './types';
 

@@ -7,11 +7,11 @@ import {
   supportAttachmentsList,
 } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { showError, showErrorResponse } from '@waldur/store/notify';
-import store from '@waldur/store/store';
+import { formDataOptions } from '@/core/api';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { showError, showErrorResponse } from '@/store/notify';
+import store from '@/store/store';
 
 import { Attachment, IssueAttachmentUploading } from './types';
 import { validateFiles, getErrorMessage } from './utils';

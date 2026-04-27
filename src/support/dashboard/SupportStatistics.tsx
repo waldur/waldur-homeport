@@ -2,12 +2,12 @@ import { useQuery } from '@tanstack/react-query';
 import { Col, Row } from 'react-bootstrap';
 import { supportStatisticsRetrieve } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { StatisticsCard } from '@waldur/core/StatisticsCard';
-import { translate } from '@waldur/i18n';
-import { StatusOptions } from '@waldur/table/generated/SupportIssuesFilter';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { StatisticsCard } from '@/core/StatisticsCard';
+import { translate } from '@/i18n';
+import { StatusOptions } from '@/table/generated/SupportIssuesFilter';
 
 const getIssueState = (states: string[]) => ({
   state: 'support-list',

@@ -1,6 +1,6 @@
 import { StudentIcon } from '@phosphor-icons/react';
 
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 import { LoginButton } from './LoginButton';
 import { useSaml2 } from './saml2/hooks';

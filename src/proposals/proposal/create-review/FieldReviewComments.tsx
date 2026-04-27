@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-import { formatRelative } from '@waldur/core/dateUtils';
-import { ProposalReview } from '@waldur/proposals/types';
+import { formatRelative } from '@/core/dateUtils';
+import { ProposalReview } from '@/proposals/types';
 
 import { ReviewComment } from './ReviewComment';
 

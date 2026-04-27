@@ -6,12 +6,12 @@ import { useDispatch } from 'react-redux';
 import { usersDestroy } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { Panel } from '@waldur/core/Panel';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { isDescendantOf } from '@waldur/navigation/useTabs';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { Panel } from '@/core/Panel';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { isDescendantOf } from '@/navigation/useTabs';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 import { TermsOfService } from './TermsOfService';
 

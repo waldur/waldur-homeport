@@ -2,7 +2,7 @@ import { EnvelopeSimpleIcon, LinkSimpleIcon } from '@phosphor-icons/react';
 import { useMemo, FunctionComponent } from 'react';
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const HookTypeField: FunctionComponent<{ input; defaultValue }> = ({
   input,

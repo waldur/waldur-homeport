@@ -6,16 +6,16 @@ import {
   BroadcastMessagesListData,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { formatDateTime } from '@/core/dateUtils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   BroadcastMessagesFilter,
   selectBroadcastMessagesFilter,
-} from '@waldur/table/generated/BroadcastMessagesFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/BroadcastMessagesFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { BroadcastCreateButton } from './BroadcastCreateButton';
 import { BroadcastExpandableRow } from './BroadcastExpandableRow';

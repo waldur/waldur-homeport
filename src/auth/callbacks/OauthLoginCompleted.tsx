@@ -2,12 +2,12 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import Qs from 'qs';
 import { FunctionComponent, useEffect, useState } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { RedirectStorage } from '@waldur/core/StorageManager';
-import { getQueryString } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { tryJoinOrganization } from '@waldur/invitations/tryJoinOrganization';
+import { Link } from '@/core/Link';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { RedirectStorage } from '@/core/StorageManager';
+import { getQueryString } from '@/core/utils';
+import { translate } from '@/i18n';
+import { tryJoinOrganization } from '@/invitations/tryJoinOrganization';
 
 import * as AuthService from '../AuthService';
 import { loginUser } from '../AuthService';

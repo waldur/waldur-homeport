@@ -1,6 +1,6 @@
 import { OrderDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { ORDER_STATE_LABELS } from '../OrderStates';
 

@@ -1,12 +1,12 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { EChart } from '@waldur/core/EChart';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { getEChartOptions } from '@waldur/marketplace/resources/usage/utils';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { openModalDialog } from '@waldur/modal/actions';
+import { EChart } from '@/core/EChart';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { getEChartOptions } from '@/marketplace/resources/usage/utils';
+import { OfferingComponent } from '@/marketplace/types';
+import { openModalDialog } from '@/modal/actions';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 

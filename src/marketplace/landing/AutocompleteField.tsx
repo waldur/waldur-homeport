@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { components, Props as SelectProps } from 'react-select';
 
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
 import {
   AsyncPaginate,
   FilterSelectClearIndicator,
   FilterSelectControl,
-} from '@waldur/form/themed-select';
+} from '@/form/themed-select';
 
 const renderIcon = (src: string, imgStyle: any) =>
   src ? (

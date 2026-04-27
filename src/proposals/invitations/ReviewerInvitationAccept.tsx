@@ -12,13 +12,13 @@ import {
   reviewerProfilesPublish,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
-import { router } from '@waldur/router';
-import { useNotify } from '@waldur/store/hooks';
-import { getUser } from '@waldur/workspace/selectors';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
+import { router } from '@/router';
+import { useNotify } from '@/store/hooks';
+import { getUser } from '@/workspace/selectors';
 
 import { COIPolicyCard } from './COIPolicyCard';
 import { ProfileRequiredMessage } from './ProfileRequiredMessage';

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { isOfferingRestrictedToProject } from '@waldur/marketplace/offerings/utils';
-import { Offering } from '@waldur/marketplace/types';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { isOfferingRestrictedToProject } from '@/marketplace/offerings/utils';
+import { Offering } from '@/marketplace/types';
+import { getUser } from '@/workspace/selectors';
 
 interface OfferingAccessibility {
   isRestricted: boolean;

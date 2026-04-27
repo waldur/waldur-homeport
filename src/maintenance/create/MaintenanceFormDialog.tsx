@@ -11,13 +11,13 @@ import {
   maintenanceAnnouncementOfferingsPartialUpdate,
 } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { getUUID } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { Wizard } from '@waldur/wizard';
+import { parseDate } from '@/core/dateUtils';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { getUUID } from '@/core/utils';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { Wizard } from '@/wizard';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
 import { getMaintenanceOfferings } from '../utils';

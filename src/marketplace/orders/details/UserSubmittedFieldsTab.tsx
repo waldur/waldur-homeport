@@ -1,6 +1,6 @@
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 export const UserSubmittedFieldsTab = ({ order }) => {
   return (

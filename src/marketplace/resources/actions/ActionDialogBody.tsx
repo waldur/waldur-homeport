@@ -1,8 +1,8 @@
 import { FC, PropsWithChildren, useMemo, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import { FilterBox } from '@waldur/form/FilterBox';
-import { translate } from '@waldur/i18n';
+import { FilterBox } from '@/form/FilterBox';
+import { translate } from '@/i18n';
 
 import { ResourceActionMenuContext } from './ResourceActionMenuContext';
 

@@ -10,15 +10,15 @@ import {
 } from 'redux-form';
 import { Resource } from 'waldur-js-client';
 
-import { formatISODate, parseDate } from '@waldur/core/dateUtils';
-import { WarnCard } from '@waldur/core/WarnCard';
-import { FormContainer, SubmitButton } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { formatISODate, parseDate } from '@/core/dateUtils';
+import { WarnCard } from '@/core/WarnCard';
+import { FormContainer, SubmitButton } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { EDIT_RESOURCE_END_DATE_FORM_ID } from './constants';
 

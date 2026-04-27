@@ -7,7 +7,7 @@ import {
 } from 'react';
 import { useSelector } from 'react-redux';
 
-import { getUser } from '@waldur/workspace/selectors';
+import { getUser } from '@/workspace/selectors';
 
 import { getProfileCompleteness } from './useProfileCompleteness';
 

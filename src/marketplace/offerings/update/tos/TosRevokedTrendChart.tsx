@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import type { ToSConsentDashboard } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
-import { translate } from '@waldur/i18n';
+import { EChart } from '@/core/EChart';
+import { translate } from '@/i18n';
 
 import { formatRevokedTrendChart } from './utils';
 

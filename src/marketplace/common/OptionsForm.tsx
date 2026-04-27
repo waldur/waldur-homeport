@@ -10,31 +10,28 @@ import {
   lessThanField,
   lessThanOrEqualField,
   required,
-} from '@waldur/core/validators';
+} from '@/core/validators';
 import {
   FormContainer,
   NumberField,
   SelectField,
   StringField,
   TextField,
-} from '@waldur/form';
+} from '@/form';
 import {
   AsyncSelectField,
   AsyncSelectFieldFinal,
-} from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { DateField } from '@waldur/form/DateField';
-import { FormFieldError } from '@waldur/form/FormFieldError';
-import { FormGroupProps } from '@waldur/form/FormGroup';
-import { SelectMultiCheckboxGroup } from '@waldur/form/SelectMultiCheckboxGroup';
-import { TimeSelectField } from '@waldur/form/TimeSelectField';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { DateField } from '@/form/DateField';
+import { FormFieldError } from '@/form/FormFieldError';
+import { FormGroupProps } from '@/form/FormGroup';
+import { SelectMultiCheckboxGroup } from '@/form/SelectMultiCheckboxGroup';
+import { TimeSelectField } from '@/form/TimeSelectField';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
+import { getCustomer } from '@/workspace/selectors';
 
 import { FormGroup } from '../offerings/FormGroup';
 import { Offering } from '../types';

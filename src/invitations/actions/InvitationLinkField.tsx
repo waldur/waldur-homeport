@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { translate } from '@waldur/i18n';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { translate } from '@/i18n';
 
 import { getGroupInvitationLink } from '../utils';
 

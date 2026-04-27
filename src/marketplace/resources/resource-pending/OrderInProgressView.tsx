@@ -3,15 +3,15 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { PublicOfferingDetails, Resource } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { ProgressSteps } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
-import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderConsumerActions';
-import { OrderProviderActions } from '@waldur/marketplace/orders/actions/OrderProviderActions';
-import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
-import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { ProgressSteps } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
+import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
+import { OrderProviderActions } from '@/marketplace/orders/actions/OrderProviderActions';
+import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
+import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { ResourceViewChangeButton } from './ResourceViewChangeButton';
 import {

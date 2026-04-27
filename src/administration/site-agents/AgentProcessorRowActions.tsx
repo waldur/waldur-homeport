@@ -4,9 +4,9 @@ import {
   marketplaceSiteAgentProcessorsDestroy,
 } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { DeleteButton } from '@/core/buttons';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { useInvalidateAgentProcessors } from './utils';
 

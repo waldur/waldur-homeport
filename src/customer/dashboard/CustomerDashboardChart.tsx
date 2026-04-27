@@ -3,16 +3,16 @@ import { FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 import { customersUsersList } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { EChart } from '@waldur/core/EChart';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { COMMON_WIDGET_HEIGHT } from '@waldur/dashboard/constants';
-import { TeamWidget } from '@waldur/dashboard/TeamWidget';
-import { WidgetCard } from '@waldur/dashboard/WidgetCard';
-import { translate } from '@waldur/i18n';
-import { useCreateInvitation } from '@waldur/invitations/actions/useCreateInvitation';
-import { Customer, User } from '@waldur/workspace/types';
+import { parseSelectData } from '@/core/api';
+import { EChart } from '@/core/EChart';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
+import { TeamWidget } from '@/dashboard/TeamWidget';
+import { WidgetCard } from '@/dashboard/WidgetCard';
+import { translate } from '@/i18n';
+import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
+import { Customer, User } from '@/workspace/types';
 
 import { useCustomerCostChart, useCustomerTeamChart } from './utils';
 

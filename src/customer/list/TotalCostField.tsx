@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { PriceTooltip } from '@/price/PriceTooltip';
 
 interface TotalCostFieldProps {
   total: number;

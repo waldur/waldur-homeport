@@ -4,14 +4,14 @@ import { Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { GroupInvitation } from 'waldur-js-client';
 
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
-import { getAbbreviation } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
-import { BoxRadioField } from '@waldur/marketplace/deploy/steps/BoxRadioField';
-import { openModalDialog } from '@waldur/modal/actions';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { lazyComponent } from '@/core/lazyComponent';
+import { TruncatedDescription } from '@/core/TruncatedDescription';
+import { getAbbreviation } from '@/core/utils';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
+import { BoxRadioField } from '@/marketplace/deploy/steps/BoxRadioField';
+import { openModalDialog } from '@/modal/actions';
 
 const GroupInvitationDetails = lazyComponent(() =>
   import('./GroupInvitationDetails').then((module) => ({

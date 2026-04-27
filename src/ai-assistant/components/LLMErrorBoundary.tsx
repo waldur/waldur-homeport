@@ -1,7 +1,7 @@
 import { XIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import React, { Component, ReactNode } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface Props {
   children: ReactNode;

@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { DropdownItem } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { Invoice } from '../types';
 

@@ -1,5 +1,5 @@
-import { getInitialValues } from '@waldur/core/filters';
-import { type RootState } from '@waldur/store/reducers';
+import { getInitialValues } from '@/core/filters';
+import { type RootState } from '@/store/reducers';
 
 import { MarketplaceFilterItem } from '../types';
 

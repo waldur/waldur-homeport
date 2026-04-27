@@ -1,5 +1,5 @@
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
 
 import { projectKindOptions } from './utils';
 

@@ -5,14 +5,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { components, OptionProps } from 'react-select';
 import { change, clearFields, getFormValues, reset } from 'redux-form';
 
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
+import { CompactIconButton } from '@/core/buttons/IconButton';
 import {
   REACT_SELECT_TABLE_FILTER,
   WindowedSelect,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse } from '@waldur/store/notify';
+} from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse } from '@/store/notify';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import {

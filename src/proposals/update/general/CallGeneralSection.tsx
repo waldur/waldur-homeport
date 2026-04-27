@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
-import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { Call } from '@waldur/proposals/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
+import { Call } from '@/proposals/types';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { EditGeneralInfoButton } from './EditGeneralInfoButton';
 

@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/notify';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { showSuccess } from '@/store/notify';
 
 interface OwnProps {
   value;

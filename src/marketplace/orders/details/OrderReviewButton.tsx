@@ -1,7 +1,7 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
 
 const OrderReviewDialog = lazyComponent(() =>
   import('./OrderReviewDialog').then((module) => ({

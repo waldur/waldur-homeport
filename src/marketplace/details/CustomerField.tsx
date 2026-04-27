@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, change } from 'redux-form';
 import { projectsList } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
+import { required } from '@/core/validators';
+import { AsyncPaginate } from '@/form/themed-select';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
 
 import { organizationAutocomplete } from '../common/autocompletes';
 import { orderCustomerSelector } from '../deploy/selectors';

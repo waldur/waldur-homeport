@@ -1,7 +1,7 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { OfferingConfiguration } from '@waldur/marketplace/common/types';
-import { SLURM_PLUGIN } from '@waldur/slurm/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { OfferingConfiguration } from '@/marketplace/common/types';
+import { SLURM_PLUGIN } from '@/slurm/constants';
 
 const SlurmCredentialsForm = lazyComponent(() =>
   import('./SlurmCredentialsForm').then((module) => ({

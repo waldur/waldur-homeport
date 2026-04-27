@@ -7,14 +7,14 @@ import {
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { Wizard, WizardFooterRenderProps } from '@waldur/wizard';
+import { lazyComponent } from '@/core/lazyComponent';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ActionButton } from '@/table/ActionButton';
+import { Wizard, WizardFooterRenderProps } from '@/wizard';
 
 import { MessageStep, RecipientsStep } from './steps';
 import { BroadcastFormData } from './types';

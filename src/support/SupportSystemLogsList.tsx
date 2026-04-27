@@ -9,20 +9,20 @@ import {
   SystemLog,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { truncate } from '@/core/utils';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   SystemLogsFilter as SupportSystemLogsFilter,
   selectSystemLogsFilter as selectSupportSystemLogsFilter,
   SystemLogsFilterFormId as SupportSystemLogsFilterFormId,
-} from '@waldur/table/generated/SystemLogsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/SystemLogsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { SupportSystemLogsExpandableRow } from './SupportSystemLogsExpandableRow';
 

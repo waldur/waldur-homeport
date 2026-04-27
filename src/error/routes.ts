@@ -1,7 +1,7 @@
 import { UIView } from '@uirouter/react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
 
 export const states: StateDeclaration[] = [
   {

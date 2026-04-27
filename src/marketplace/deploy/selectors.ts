@@ -6,7 +6,7 @@ import {
   isValid,
 } from 'redux-form';
 
-import type { RootState } from '@waldur/store/reducers';
+import type { RootState } from '@/store/reducers';
 
 import { DeployFormData } from '../common/types';
 import { ORDER_FORM_ID } from '../details/constants';

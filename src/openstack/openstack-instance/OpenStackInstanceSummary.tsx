@@ -1,15 +1,15 @@
 import { OpenStackNestedVolume } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { OpenStackSecurityGroupsLink } from '@waldur/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { OpenStackSecurityGroupsLink } from '@/openstack/openstack-security-groups/OpenStackSecurityGroupsLink';
+import { ResourceLink } from '@/resource/ResourceLink';
 import {
   Field,
   ResourceSummaryProps,
   PureVirtualMachineSummary,
-} from '@waldur/resource/summary';
+} from '@/resource/summary';
 
 import { OpenStackInstanceVolumeBadge } from './OpenStackInstanceVolumeBadge';
 

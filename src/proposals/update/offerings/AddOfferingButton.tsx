@@ -1,10 +1,10 @@
 import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { AddButton } from '@waldur/core/AddButton';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
+import { AddButton } from '@/core/AddButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
 
 const CallOfferingCreateDialog = lazyComponent(() =>
   import('./CallOfferingCreateDialog').then((module) => ({

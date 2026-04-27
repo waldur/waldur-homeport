@@ -1,11 +1,11 @@
 import { SubmissionError } from 'redux-form';
 import { projectCreditsCreate } from 'waldur-js-client';
 
-import { AddButton } from '@waldur/core/AddButton';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
+import { AddButton } from '@/core/AddButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
 
 const ProjectCreditFormDialog = lazyComponent(() =>
   import('./ProjectCreditFormDialog').then((module) => ({

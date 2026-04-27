@@ -3,10 +3,10 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
 import * as api from './utils';
 
-vi.mock('@waldur/core/formatCurrency', () => ({
+vi.mock('@/core/formatCurrency', () => ({
   defaultCurrency: (val) => `EUR${val}`,
 }));
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: { plugins: { WALDUR_CORE: { BRAND_COLOR: '#12B76A' } } },
 }));
 

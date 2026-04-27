@@ -2,13 +2,13 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { supportIssueStatusesList } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { IssueStatusAdmin, IssueStatusTypes } from './api';
 import { IssueStatusCreateButton } from './IssueStatusCreateButton';

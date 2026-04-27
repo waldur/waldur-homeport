@@ -2,8 +2,8 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { FormSection, WrappedFieldArrayProps } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { FloatingIpRow } from './FloatingIpRow';
 

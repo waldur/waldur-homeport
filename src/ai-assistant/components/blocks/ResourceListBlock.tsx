@@ -5,14 +5,14 @@ import {
   marketplaceResourcesList,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
-import { getResourceAllListColumns } from '@waldur/marketplace/resources/list/utils';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { UI_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { getResourceAllListColumns } from '@/marketplace/resources/list/utils';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { UIBlockProps } from '../../lib/types';
 

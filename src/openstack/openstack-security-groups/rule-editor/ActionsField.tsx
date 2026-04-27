@@ -1,8 +1,8 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface ActionsFieldProps {
   onRemove(): void;

@@ -18,17 +18,17 @@ import {
   marketplaceResourcesRetrieve,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@waldur/core/constants';
-import { EChart } from '@waldur/core/EChart';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getUsageHistoryPeriodOptions } from '@waldur/marketplace/resources/usage/utils';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { getAllPages } from '@/core/api';
+import { GRID_BREAKPOINTS, UI_STALE_TIME } from '@/core/constants';
+import { EChart } from '@/core/EChart';
+import { formatUsageValue } from '@/core/formatNumber';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getUsageHistoryPeriodOptions } from '@/marketplace/resources/usage/utils';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { getUsageLineChartOptions } from '../utils';
 

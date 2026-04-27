@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import type { RmqStatsResponse, RmqVhostStats } from './api';
 import { UserLink } from './RabbitMQEntityLinks';

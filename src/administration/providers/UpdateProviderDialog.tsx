@@ -3,13 +3,13 @@ import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { identityProvidersUpdate, overrideSettings } from 'waldur-js-client';
 
-import { FREEIPA_IDP } from '@waldur/auth/providers/constants';
-import { ENV } from '@waldur/core/config';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { FREEIPA_IDP } from '@/auth/providers/constants';
+import { ENV } from '@/core/config';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ProviderForm } from './ProviderForm';
 import { ProviderFreeIPAForm } from './ProviderFreeIPAForm';

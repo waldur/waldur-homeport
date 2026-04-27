@@ -74,7 +74,7 @@ For simple styling, use Bootstrap utility classes that automatically adapt to th
 For third-party libraries that need explicit theme values:
 
 ```tsx
-import { useTheme } from '@waldur/theme/useTheme';
+import { useTheme } from '@/theme/useTheme';
 
 const MyComponent = () => {
   const { theme } = useTheme();

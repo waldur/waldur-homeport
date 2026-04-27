@@ -1,5 +1,5 @@
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
 
 export const AnnouncementError = ({ refetch }) => (
   <div className="bar bar-warning">

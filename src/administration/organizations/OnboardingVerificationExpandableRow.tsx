@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { OnboardingVerification } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const OnboardingVerificationExpandableRow: FC<{
   row: OnboardingVerification;

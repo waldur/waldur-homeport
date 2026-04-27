@@ -1,8 +1,8 @@
 import classNames from 'classnames';
 import React, { useEffect, useRef, useState } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useTheme } from '@waldur/theme/useTheme';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { useTheme } from '@/theme/useTheme';
 
 import { EChartActions } from './EChartActions';
 
@@ -47,7 +47,7 @@ export const EChart = React.forwardRef<any, ChartProps>(
     useEffect(() => {
       if (!containerRef.current) return;
 
-      import('@waldur/echarts').then((module) => {
+      import('@/echarts').then((module) => {
         if (!containerRef.current) return;
         const echarts = module.default;
 
@@ -74,7 +74,7 @@ export const EChart = React.forwardRef<any, ChartProps>(
 
     const drawChart = () => {
       setLoading(true);
-      import('@waldur/echarts').then((module) => {
+      import('@/echarts').then((module) => {
         setLoading(false);
         if (!containerRef.current) {
           return;

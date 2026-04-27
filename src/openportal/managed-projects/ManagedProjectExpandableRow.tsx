@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { ManagedProject } from 'waldur-js-client';
 
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n/translate';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n/translate';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface OwnProps {
   row: ManagedProject;

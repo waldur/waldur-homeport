@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Link } from '@/core/Link';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const IssueLinkRenderer: FunctionComponent<{ row }> = ({ row }) =>
   row.issue ? (

@@ -5,18 +5,18 @@ import {
   OpenstackInstancesListData,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
-import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
-import { HypervisorPlacementMapButton } from '@waldur/openstack/openstack-tenant/HypervisorPlacementMapButton';
-import { IPList } from '@waldur/resource/IPList';
-import { ResourceName } from '@waldur/resource/ResourceName';
-import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { ResourceSummaryField } from '@waldur/resource/summary/VirtualMachineSummary';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { AddResourceButton } from '@/marketplace/resources/actions/AddResourceButton';
+import { ModalActionsRouter } from '@/marketplace/resources/actions/ModalActionsRouter';
+import { HypervisorPlacementMapButton } from '@/openstack/openstack-tenant/HypervisorPlacementMapButton';
+import { IPList } from '@/resource/IPList';
+import { ResourceName } from '@/resource/ResourceName';
+import { ResourceState } from '@/resource/state/ResourceState';
+import { ResourceSummary } from '@/resource/summary/ResourceSummary';
+import { ResourceSummaryField } from '@/resource/summary/VirtualMachineSummary';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { INSTANCE_TYPE } from '../constants';
 

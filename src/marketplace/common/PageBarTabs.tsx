@@ -13,8 +13,8 @@ import {
 // eslint-disable-next-line waldur-custom/no-direct-bootstrap-button -- Navigation button with Metronic menu data attributes
 import { Button, Nav, TabContainer } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
-import { useDOMChangeObserver } from '@waldur/core/useDomChangeObserver';
+import { Link } from '@/core/Link';
+import { useDOMChangeObserver } from '@/core/useDomChangeObserver';
 
 import { PageBarContext, PageBarTab } from '../context';
 import { scrollToSectionById } from '../offerings/utils';

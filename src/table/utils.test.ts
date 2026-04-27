@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { transformRows } from '@waldur/table/utils';
+import { transformRows } from '@/table/utils';
 
 describe('transformRows', () => {
   it('should return object with entities and order properties by UUID', () => {

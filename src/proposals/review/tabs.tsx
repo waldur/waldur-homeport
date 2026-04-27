@@ -7,11 +7,11 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { TableTab } from '@waldur/table/types';
-import { getUser } from '@waldur/workspace/selectors';
+import { fetchResultCount } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { TableTab } from '@/table/types';
+import { getUser } from '@/workspace/selectors';
 
 interface TabLabelWithCountProps {
   label: string;

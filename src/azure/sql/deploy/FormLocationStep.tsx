@@ -1,9 +1,9 @@
-import { loadLocationOptions } from '@waldur/azure/vm/utils';
-import { required } from '@waldur/core/validators';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { loadLocationOptions } from '@/azure/vm/utils';
+import { required } from '@/core/validators';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 export const FormLocationStep = (props: FormStepProps) => (
   <VStepperFormStepCard

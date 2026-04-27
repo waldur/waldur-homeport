@@ -2,14 +2,14 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { marketplaceResourcesList, Project } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { formatDate, parseDate } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { WarnTip } from '@waldur/core/WarnTip';
-import { translate } from '@waldur/i18n';
-import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { getAllPages } from '@/core/api';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { formatDate, parseDate } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { WarnTip } from '@/core/WarnTip';
+import { translate } from '@/i18n';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { ProjectLifecycleBadge } from './ProjectLifecycleBadge';
 

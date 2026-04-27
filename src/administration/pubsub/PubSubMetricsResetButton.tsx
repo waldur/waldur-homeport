@@ -3,10 +3,10 @@ import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showError, showSuccess } from '@/store/notify';
 
 import { resetPubSubMetrics } from './api';
 

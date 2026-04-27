@@ -3,19 +3,19 @@ import { useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { required } from '@waldur/core/validators';
-import { SubmitButton, TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CountrySelectField } from '@waldur/form/CountrySelectField';
-import { DateField } from '@waldur/form/DateField';
-import { MultiCountrySelectField } from '@waldur/form/MultiCountrySelectField';
-import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { required } from '@/core/validators';
+import { SubmitButton, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CountrySelectField } from '@/form/CountrySelectField';
+import { DateField } from '@/form/DateField';
+import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
+import { PhoneNumberField } from '@/form/PhoneNumberField';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { EditUserProps } from '../types';
 

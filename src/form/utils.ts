@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 
-import { PeriodOption } from '@waldur/form/types';
+import { PeriodOption } from '@/form/types';
 
 export const makeLastTwelveMonthsFilterPeriods = (): {
   label: string;

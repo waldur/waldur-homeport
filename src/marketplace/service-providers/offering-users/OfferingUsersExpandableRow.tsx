@@ -6,23 +6,23 @@ import {
   QuestionWithAnswer,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { FIELD_MAPPING } from '@waldur/marketplace/offerings/details/OfferingUserDetailsDialog';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { BooleanIconBadge } from '@waldur/project/metadata/BooleanIconBadge';
-import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
-import { Field } from '@waldur/resource/summary';
-import { createFetcher } from '@waldur/table/api';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ENV } from '@/core/config';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { TruncatedDescription } from '@/core/TruncatedDescription';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { FIELD_MAPPING } from '@/marketplace/offerings/details/OfferingUserDetailsDialog';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { BooleanIconBadge } from '@/project/metadata/BooleanIconBadge';
+import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { Field } from '@/resource/summary';
+import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { AnswerRowActions } from './AnswerRowActions';
 

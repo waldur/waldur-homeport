@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { translate } from '@waldur/i18n';
-import { LeafletMap } from '@waldur/map/LeafletMap';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { translate } from '@/i18n';
+import { LeafletMap } from '@/map/LeafletMap';
 
 interface ProviderLocationTabProps {
   offering: PublicOfferingDetails;

@@ -2,12 +2,12 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { TosNotification } from '@waldur/form/TosNotification';
-import { translate } from '@waldur/i18n';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Tip } from '@/core/Tooltip';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { TosNotification } from '@/form/TosNotification';
+import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { OfferingTosNotification } from './OfferingTosNotification';
 

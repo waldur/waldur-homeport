@@ -1,10 +1,10 @@
 import { EChartsOption, graphic } from 'echarts';
 
-import { ENV } from '@waldur/core/config';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { hexToRgb } from '@waldur/core/generateColors';
-import { getChartBrandColor } from '@waldur/dashboard/constants';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { formatUsageValue } from '@/core/formatNumber';
+import { hexToRgb } from '@/core/generateColors';
+import { getChartBrandColor } from '@/dashboard/constants';
+import { translate } from '@/i18n';
 
 export const isReportingScreenEnabled = (screen: string) => {
   const enabledScreens = ENV.plugins.WALDUR_CORE?.ENABLED_REPORTING_SCREENS;

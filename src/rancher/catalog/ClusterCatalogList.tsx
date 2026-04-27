@@ -1,13 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 import { RancherCatalog, rancherCatalogsList } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column, TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column, TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { CatalogCreateButton } from './CatalogCreateButton';
 import { CatalogDeleteAction } from './CatalogDeleteButton';

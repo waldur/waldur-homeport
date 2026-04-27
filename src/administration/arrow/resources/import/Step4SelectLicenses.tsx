@@ -3,12 +3,12 @@ import { Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { useDiscoverLicenses } from '../../api';
 

@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { FunctionComponent, useMemo } from 'react';
 
-import { usePermissionView } from '@waldur/auth/PermissionLayout';
-import { translate } from '@waldur/i18n';
-import { Category, Offering } from '@waldur/marketplace/types';
+import { usePermissionView } from '@/auth/PermissionLayout';
+import { translate } from '@/i18n';
+import { Category, Offering } from '@/marketplace/types';
 
 interface PublicOfferingDetailsProps {
   offering: Offering;

@@ -7,9 +7,9 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
-import { Limits } from '@waldur/marketplace/details/types';
+import { translate } from '@/i18n';
+import { concealPricesSelector } from '@/marketplace/deploy/utils';
+import { Limits } from '@/marketplace/details/types';
 
 import { OneTimeTab } from './OneTimeTab';
 import { PeriodicTab } from './PeriodicTab';

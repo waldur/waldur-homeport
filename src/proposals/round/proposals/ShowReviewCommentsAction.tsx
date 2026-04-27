@@ -2,11 +2,11 @@ import { EyeIcon, InfoIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { ProposalReview } from 'waldur-js-client';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 interface ShowReviewCommentsActionProps {
   review: ProposalReview;

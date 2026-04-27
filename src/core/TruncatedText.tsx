@@ -1,8 +1,8 @@
 import { debounce, uniqueId } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useRef, useState } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { truncate } from '@waldur/core/utils';
+import { Tip } from '@/core/Tooltip';
+import { truncate } from '@/core/utils';
 
 const LETTER_WIDTH = 7.1; // px - approximate width per character
 

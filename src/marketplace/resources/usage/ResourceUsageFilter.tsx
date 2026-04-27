@@ -1,11 +1,11 @@
 import { Field, reduxForm } from 'redux-form';
 
-import { AccountingPeriodField } from '@waldur/customer/list/AccountingPeriodField';
-import { StringField } from '@waldur/form';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { makeLastTwelveMonthsFilterPeriods } from '@waldur/form/utils';
-import { translate } from '@waldur/i18n';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { AccountingPeriodField } from '@/customer/list/AccountingPeriodField';
+import { StringField } from '@/form';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
+import { translate } from '@/i18n';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 const options = makeLastTwelveMonthsFilterPeriods();
 

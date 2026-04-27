@@ -1,4 +1,4 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const QUOTA_NAMES = {
   floating_ip_count: translate('Floating IP count'),

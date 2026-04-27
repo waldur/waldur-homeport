@@ -2,14 +2,14 @@ import { DateTime } from 'luxon';
 import { FC } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/AsyncSelectField';
-import { DateField } from '@waldur/form/DateField';
-import { StringField } from '@waldur/form/StringField';
-import { TextField } from '@waldur/form/TextField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { required } from '@/core/validators';
+import { Select } from '@/form/AsyncSelectField';
+import { DateField } from '@/form/DateField';
+import { StringField } from '@/form/StringField';
+import { TextField } from '@/form/TextField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { templateAutocomplete } from '../autocomplete';
 import { BroadcastFormData, MessageTemplate } from '../types';

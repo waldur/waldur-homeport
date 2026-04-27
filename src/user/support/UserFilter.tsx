@@ -2,16 +2,16 @@ import { FunctionComponent } from 'react';
 import { compose } from 'redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 
-import { OrganizationRoleSelectField } from '@waldur/customer/team/OrganizationRoleSelectField';
-import { ProjectRoleSelectField } from '@waldur/customer/team/ProjectRoleSelectField';
-import { SelectField } from '@waldur/form';
+import { OrganizationRoleSelectField } from '@/customer/team/OrganizationRoleSelectField';
+import { ProjectRoleSelectField } from '@/customer/team/ProjectRoleSelectField';
+import { SelectField } from '@/form';
 import {
   REACT_MULTI_SELECT_TABLE_FILTER,
   REACT_SELECT_TABLE_FILTER,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+} from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { getRoleFilterOptions, getUserStatusFilterOptions } from './utils';
 

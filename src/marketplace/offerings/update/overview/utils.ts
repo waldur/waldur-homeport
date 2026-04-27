@@ -1,4 +1,4 @@
-import { pick } from '@waldur/core/utils';
+import { pick } from '@/core/utils';
 
 export const pickOverview = pick([
   'name',

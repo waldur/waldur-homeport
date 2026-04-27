@@ -2,14 +2,14 @@ import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
-import { FormSteps } from '@waldur/form/FormSteps';
-import { SidebarLayout } from '@waldur/form/SidebarLayout';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { AccordionCard } from '@/core/AccordionCard';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Panel } from '@/core/Panel';
+import { FormSteps } from '@/form/FormSteps';
+import { SidebarLayout } from '@/form/SidebarLayout';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { ProposalUsersListSummary } from '../team/ProposalUsersListSummary';
 import { Proposal, ProposalReview } from '../types';

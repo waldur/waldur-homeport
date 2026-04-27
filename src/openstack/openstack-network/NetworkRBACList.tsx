@@ -5,14 +5,14 @@ import {
   openstackNetworkRbacPoliciesList,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ResourceDeleteButton } from '@waldur/resource/actions/ResourceDeleteButton';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ResourceDeleteButton } from '@/resource/actions/ResourceDeleteButton';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const POLICY_TYPE = {
   access_as_shared: { color: 'blue', label: translate('Shared') },

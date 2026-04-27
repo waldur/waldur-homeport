@@ -1,10 +1,10 @@
 import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { OfferingComponent } from '@/marketplace/types';
+import { openModalDialog } from '@/modal/actions';
 
 const ResourceComponentsDialog = lazyComponent(() =>
   import('./ResourceComponentsDialog').then((module) => ({

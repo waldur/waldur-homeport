@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { FilteredEventsButton } from '@/events/FilteredEventsButton';
+import { getCustomer } from '@/workspace/selectors';
 
 export const CustomerPermissionsLogButton = () => {
   const customer = useSelector(getCustomer);

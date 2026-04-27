@@ -2,11 +2,11 @@ import { EyeIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { useModal } from '@/modal/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 interface PlanDescriptionButtonProps {
   planDescription?: string;

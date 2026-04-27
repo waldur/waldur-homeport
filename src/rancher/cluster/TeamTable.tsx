@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { TableWithTabs } from '@waldur/table/TableWithTabs';
+import { TableWithTabs } from '@/table/TableWithTabs';
 
 import { getRancherTabsAndTitle } from './utils';
 

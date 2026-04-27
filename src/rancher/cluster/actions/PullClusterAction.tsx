@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 import { rancherClustersPull } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { PullActionItem } from '@waldur/resource/actions/PullActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { getUser } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { PullActionItem } from '@/resource/actions/PullActionItem';
+import { ActionItemType } from '@/resource/actions/types';
+import { getUser } from '@/workspace/selectors';
 
 export const PullClusterAction: ActionItemType = ({ resource }) => {
   const user = useSelector(getUser);

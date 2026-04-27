@@ -5,28 +5,24 @@ import { Nav, Tab, Table } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 
-import { ANNOUNCEMENT_ICON } from '@waldur/administration/utils';
-import { ENV } from '@waldur/core/config';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { translate } from '@waldur/i18n';
-import { ParentLink } from '@waldur/marketplace/resources/details/ParentResourceLink';
-import { useExtraAnnouncementBar } from '@waldur/navigation/context';
-import { AnnouncementBar } from '@waldur/navigation/header/announcements/AnnouncementBar';
-import { useTitle } from '@waldur/navigation/title';
-import { isDescendantOf } from '@waldur/navigation/useTabs';
-import {
-  INSTANCE_TYPE,
-  TENANT_TYPE,
-  VOLUME_TYPE,
-} from '@waldur/openstack/constants';
+import { ANNOUNCEMENT_ICON } from '@/administration/utils';
+import { ENV } from '@/core/config';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { translate } from '@/i18n';
+import { ParentLink } from '@/marketplace/resources/details/ParentResourceLink';
+import { useExtraAnnouncementBar } from '@/navigation/context';
+import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
+import { useTitle } from '@/navigation/title';
+import { isDescendantOf } from '@/navigation/useTabs';
+import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
 import {
   isOwnerOrStaff,
   isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { RefreshButton } from '../common/RefreshButton';
 import { getLabel } from '../common/registry';

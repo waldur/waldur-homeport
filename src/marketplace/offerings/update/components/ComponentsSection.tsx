@@ -1,14 +1,14 @@
 import { FC, useState } from 'react';
 import { OfferingComponent } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { showComponentsList } from '@waldur/marketplace/common/registry';
-import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
-import { getBillingTypeLabel } from '@waldur/marketplace/resources/usage/utils';
-import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@waldur/openstack/constants';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { showComponentsList } from '@/marketplace/common/registry';
+import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
+import { getBillingTypeLabel } from '@/marketplace/resources/usage/utils';
+import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@/openstack/constants';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { OfferingSectionProps } from '../types';
 import { useOfferingAccountingTableTabs } from '../utils';

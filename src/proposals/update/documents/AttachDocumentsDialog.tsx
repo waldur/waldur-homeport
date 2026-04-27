@@ -2,20 +2,20 @@ import { useCallback, useState } from 'react';
 import { Field, reduxForm } from 'redux-form';
 import { proposalProtectedCallsAttachDocuments } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { ACCEPTED_FILE_TYPES } from '@waldur/core/constants';
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { FormContainer, StringField, SubmitButton } from '@waldur/form';
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { AttachmentItemPending } from '@waldur/form/upload/AttachmentItemPending';
-import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
-import { Attachment, AttachmentUploading } from '@waldur/form/upload/types';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { formDataOptions } from '@/core/api';
+import { ACCEPTED_FILE_TYPES } from '@/core/constants';
+import { format } from '@/core/ErrorMessageFormatter';
+import { FormContainer, StringField, SubmitButton } from '@/form';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
+import { AttachmentsList } from '@/form/upload/AttachmentsList';
+import { Attachment, AttachmentUploading } from '@/form/upload/types';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 interface AttachDocumentsFormData {
   files: { file: File }[];

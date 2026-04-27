@@ -24,9 +24,9 @@ import {
 import BaseWindowedSelect from 'react-windowed-select';
 import { BaseFieldProps } from 'redux-form';
 
-import { Tag } from '@waldur/core/Tag';
-import { translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+import { Tag } from '@/core/Tag';
+import { translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
 
 const REACT_SELECT_MENU_PORTALING: Partial<SelectProps> = {
   menuPortalTarget: document.body,

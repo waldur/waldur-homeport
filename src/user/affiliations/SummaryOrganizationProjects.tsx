@@ -1,17 +1,17 @@
 import { EyeIcon, PlusIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { ProjectCreateButton } from '@waldur/project/create/ProjectCreateButton';
-import { ProjectsList } from '@waldur/project/ProjectsList';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { ProjectCreateButton } from '@/project/create/ProjectCreateButton';
+import { ProjectsList } from '@/project/ProjectsList';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 const ProjectDetailsDialog = lazyComponent(() =>
-  import('@waldur/project/details/ProjectDetailsDialog').then((module) => ({
+  import('@/project/details/ProjectDetailsDialog').then((module) => ({
     default: module.ProjectDetailsDialog,
   })),
 );

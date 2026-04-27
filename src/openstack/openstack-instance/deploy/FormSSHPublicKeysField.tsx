@@ -4,16 +4,16 @@ import { useDispatch, useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { keysList, KeysListData } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { keyCreateDialog } from '@waldur/user/keys/actions';
-import { keysListTable } from '@waldur/user/keys/constants';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { ActionButton } from '@/table/ActionButton';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { keyCreateDialog } from '@/user/keys/actions';
+import { keysListTable } from '@/user/keys/constants';
+import { getUser } from '@/workspace/selectors';
 
 const filtersSelector = createSelector(getUser, (user) => {
   const result: KeysListData['query'] = {};

@@ -4,14 +4,14 @@ import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { usePagination } from '@waldur/core/usePagination';
-import { required, requiredArray } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { categoryAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { TablePagination } from '@waldur/table/TablePagination';
+import { usePagination } from '@/core/usePagination';
+import { required, requiredArray } from '@/core/validators';
+import { SelectField } from '@/form';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { categoryAutocomplete } from '@/marketplace/common/autocompletes';
+import { ActionButton } from '@/table/ActionButton';
+import { TablePagination } from '@/table/TablePagination';
 
 interface FieldValue {
   remote_category?;

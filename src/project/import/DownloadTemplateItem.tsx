@@ -1,7 +1,7 @@
 import { DownloadSimpleIcon, FileCsvIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface DownloadTemplateItemProps {
   name: string;

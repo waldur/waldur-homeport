@@ -4,14 +4,14 @@ import { useCallback } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { EChart } from '@waldur/core/EChart';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { WidgetCard } from '@waldur/dashboard/WidgetCard';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
+import { EChart } from '@/core/EChart';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { WidgetCard } from '@/dashboard/WidgetCard';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
 
 import { useProjectCostChart } from './utils';
 

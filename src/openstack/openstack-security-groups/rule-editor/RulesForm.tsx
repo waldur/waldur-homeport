@@ -1,7 +1,7 @@
 import { FieldArray } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
+import { translate } from '@/i18n';
+import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { RulesList } from './RulesList';
 import { connectForm } from './utils';

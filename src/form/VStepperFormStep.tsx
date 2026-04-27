@@ -2,9 +2,9 @@ import classNames from 'classnames';
 import React, { FC, PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 
 import './VStepperFormStep.scss';
 

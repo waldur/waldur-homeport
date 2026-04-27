@@ -9,12 +9,12 @@ import React, {
 import { Form } from 'react-bootstrap';
 import { rolesList } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { AsyncPaginate } from '@/form/themed-select';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
 
 interface RoleMapping {
   [key: string]: any;

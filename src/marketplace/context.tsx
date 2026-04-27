@@ -7,7 +7,7 @@ import {
   useState,
 } from 'react';
 
-import useScrollTracker from '@waldur/core/useScrollTracker';
+import useScrollTracker from '@/core/useScrollTracker';
 
 export interface PageBarTab {
   key: string;

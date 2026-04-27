@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
-import { translate } from '@waldur/i18n';
+import { EChart } from '@/core/EChart';
+import { translate } from '@/i18n';
 
 import { MaintenanceTimelineItem, TimelineGrouping } from '../types';
 import { formatTimelineChart } from '../utils';

@@ -1,14 +1,14 @@
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Table as BootstrapTable } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { titleCase } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { getLabel } from '@waldur/marketplace/common/registry';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
+import { Badge } from '@/core/Badge';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { titleCase } from '@/core/utils';
+import { translate } from '@/i18n';
+import { getLabel } from '@/marketplace/common/registry';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
 
 import { ReportingTitle } from '../ReportingTitle';
 

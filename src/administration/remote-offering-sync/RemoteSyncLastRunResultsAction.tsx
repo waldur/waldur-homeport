@@ -1,10 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { RemoteSyncActionProps } from './types';
 

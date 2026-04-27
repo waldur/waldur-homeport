@@ -16,8 +16,8 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { Customer } from '@waldur/workspace/types';
+import { formDataOptions } from '@/core/api';
+import { Customer } from '@/workspace/types';
 
 import { ProjectCreateDialog } from './ProjectCreateDialog';
 
@@ -43,7 +43,7 @@ const mockConfig = vi.hoisted(() => ({
   },
 }));
 
-vi.mock('@waldur/core/config', () => mockConfig);
+vi.mock('@/core/config', () => mockConfig);
 
 describe('ProjectCreateDialog', () => {
   const mockedRefetch = vi.fn();

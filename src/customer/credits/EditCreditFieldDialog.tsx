@@ -9,13 +9,13 @@ import {
   useCustomerAllocateCreditField,
   useCustomerCreditOfferingsField,
   useMinimalConsumptionFields,
-} from '@waldur/customer/credits/constants';
-import { FormContainer, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+} from '@/customer/credits/constants';
+import { FormContainer, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { EditCustomerCreditProps } from '../details/types';
 

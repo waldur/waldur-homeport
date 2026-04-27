@@ -1,9 +1,9 @@
 import { MoonIcon, SunIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
 
 export const ThemeSwitcher: FunctionComponent = () => {
   const { theme, toggleTheme } = useTheme();

@@ -4,7 +4,7 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import {
   RATING_STAR_ACTIVE_COLOR,
   RATING_STAR_INACTIVE_COLOR,
-} from '@waldur/core/constants';
+} from '@/core/constants';
 
 interface RateStarsProps {
   value: string | number;

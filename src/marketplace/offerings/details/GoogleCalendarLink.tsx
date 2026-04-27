@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { CopyToClipboard } from '@waldur/marketplace/common/CopyToClipboard';
+import { translate } from '@/i18n';
+import { CopyToClipboard } from '@/marketplace/common/CopyToClipboard';
 import './GoogleCalendarLink.scss';
 
 interface GoogleCalendarLinkProps {

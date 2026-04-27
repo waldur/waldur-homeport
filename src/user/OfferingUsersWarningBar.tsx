@@ -4,11 +4,11 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
-import { PROVIDER_OFFERING_USERS_FORM_ID } from '@waldur/marketplace/service-providers/constants';
-import { router } from '@waldur/router';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
+import { PROVIDER_OFFERING_USERS_FORM_ID } from '@/marketplace/service-providers/constants';
+import { router } from '@/router';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { usePendingOfferingUsers } from './hooks/usePendingOfferingUsers';
 

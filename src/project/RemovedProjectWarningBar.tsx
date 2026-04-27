@@ -6,11 +6,11 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { getProject } from '@waldur/workspace/selectors';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { getProject } from '@/workspace/selectors';
 
 import { ProjectRecoveryModal } from './ProjectRecoveryModal';
 

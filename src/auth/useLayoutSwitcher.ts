@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 import { DEFAULT_LAYOUT, LandingPageLayout, LAYOUT_OPTIONS } from './layouts';
 

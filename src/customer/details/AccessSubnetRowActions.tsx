@@ -1,4 +1,4 @@
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { AccessSubnetDeleteButton } from './AccessSubnetDeleteButton';
 import { AccessSubnetEditButton } from './AccessSubnetEditButton';

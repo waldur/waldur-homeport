@@ -1,5 +1,5 @@
-import { translate } from '@waldur/i18n';
-import { BaseProjectUpdateRequestsList } from '@waldur/marketplace-remote/BaseProjectUpdateRequestsList';
+import { translate } from '@/i18n';
+import { BaseProjectUpdateRequestsList } from '@/marketplace-remote/BaseProjectUpdateRequestsList';
 
 const filter = {
   state: 'pending',

@@ -7,31 +7,28 @@ import {
   openstackVolumeTypesNamesRetrieve,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
+import { parseSelectData } from '@/core/api';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { required } from '@/core/validators';
 import {
   SecretField,
   StringField,
   TextField,
   NumberField,
   SelectField,
-} from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { BoxNumberField } from '@waldur/form/BoxNumberField';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
+} from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { BoxNumberField } from '@/form/BoxNumberField';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import {
   DefaultOfferingEditPanel,
   OfferingEditField,
-} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
-import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
-import { RANCHER_NODE_DISK_DRIVER_OPTIONS } from '@waldur/rancher/RancherCredentialsForm';
+} from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
+import { TENANT_TYPE } from '@/openstack/constants';
+import { RANCHER_NODE_DISK_DRIVER_OPTIONS } from '@/rancher/RancherCredentialsForm';
 
 const VOLUME_TYPE_FIELD: Partial<OfferingEditField> = {
   component: AsyncSelectField,

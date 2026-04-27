@@ -7,13 +7,13 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   getPluginOptionsSerializer,
   getSecretOptionsSerializer,
-} from '@waldur/marketplace/common/registry';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showError, showSuccess } from '@waldur/store/notify';
+} from '@/marketplace/common/registry';
+import { closeModalDialog } from '@/modal/actions';
+import { showError, showSuccess } from '@/store/notify';
 
 export const SCRIPT_ROWS = [
   { label: translate('Script language'), type: 'language' },

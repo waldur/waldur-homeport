@@ -5,13 +5,13 @@ import { createStore } from 'redux';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { freeipaProfilesCreate } from 'waldur-js-client';
 
-import * as config from '@waldur/core/config';
+import * as config from '@/core/config';
 
 import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
 
 // Mock API calls and dependencies
 vi.mock('waldur-js-client');
-vi.mock('@waldur/core/config');
+vi.mock('@/core/config');
 
 describe('FreeIPAAccountCreate', () => {
   const mockOnProfileAdded = vi.fn();

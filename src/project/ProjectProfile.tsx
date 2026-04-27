@@ -9,15 +9,15 @@ import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
+import { Badge } from '@/core/Badge';
+import { formatDate } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
+import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
 
 import { ProjectActions } from './dashboard/ProjectActions';
 

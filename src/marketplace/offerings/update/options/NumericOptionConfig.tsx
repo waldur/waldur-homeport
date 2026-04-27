@@ -1,8 +1,8 @@
 import { Field } from 'react-final-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
 
 import { FormGroup } from '../../FormGroup';
 

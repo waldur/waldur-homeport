@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { OrderStateField } from './OrderStateField';
 

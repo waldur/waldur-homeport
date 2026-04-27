@@ -5,10 +5,10 @@ import {
   OpenStackNestedFloatingIp,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { UpdateFloatingIpsActionButton } from '@waldur/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsActionButton';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { UpdateFloatingIpsActionButton } from '@/openstack/openstack-instance/actions/update-floating-ips/UpdateFloatingIpsActionButton';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 export const FloatingIpsList: FunctionComponent<{
   resourceScope: OpenStackInstance;

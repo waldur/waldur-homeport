@@ -3,15 +3,15 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { showError } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getCustomer, isStaff } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { showError } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { getCustomer, isStaff } from '@/workspace/selectors';
 
 const CustomerRemoveDialog = lazyComponent(() =>
-  import('@waldur/customer/details/CustomerRemoveDialog').then((module) => ({
+  import('@/customer/details/CustomerRemoveDialog').then((module) => ({
     default: module.CustomerRemoveDialog,
   })),
 );

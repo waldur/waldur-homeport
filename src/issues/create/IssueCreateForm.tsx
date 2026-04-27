@@ -3,14 +3,14 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
-import { StepsList } from '@waldur/marketplace/common/StepsList';
-import { useWizard } from '@waldur/marketplace/offerings/import/useWizard';
-import { WizardButtons } from '@waldur/marketplace/offerings/import/WizardButtons';
-import { WizardTabs } from '@waldur/marketplace/offerings/import/WizardTabs';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { getUser } from '@waldur/workspace/selectors';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
+import { StepsList } from '@/marketplace/common/StepsList';
+import { useWizard } from '@/marketplace/offerings/import/useWizard';
+import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
+import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { getUser } from '@/workspace/selectors';
 
 import { useRequestTypes } from '../api';
 import { IssueCreateButtonProps } from '../list/IssueCreateButton';

@@ -1,4 +1,4 @@
-import store from '@waldur/store/store';
+import store from '@/store/store';
 
 import { MatomoInstance } from './afterBootstrap';
 import * as AuthService from './auth/AuthService';

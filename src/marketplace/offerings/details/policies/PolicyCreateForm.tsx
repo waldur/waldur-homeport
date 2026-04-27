@@ -2,16 +2,16 @@ import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field, FormRenderProps } from 'react-final-form';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { policyPeriodOptions } from '@waldur/customer/cost-policies/utils';
-import { NumberField, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Offering } from '@waldur/marketplace/types';
+import { ENV } from '@/core/config';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { policyPeriodOptions } from '@/customer/cost-policies/utils';
+import { NumberField, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { useOrganizationGroups } from '@/marketplace/common/utils';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { Offering } from '@/marketplace/types';
 
 import { getOfferingPolicyActionOptions } from '../utils';
 

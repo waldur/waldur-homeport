@@ -1,11 +1,11 @@
 import { connect } from 'react-redux';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
-import { PricesData } from '@waldur/marketplace/details/plan/types';
-import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
-import { Field } from '@waldur/resource/summary';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
+import { PricesData } from '@/marketplace/details/plan/types';
+import { pricesSelector } from '@/marketplace/details/plan/utils';
+import { Field } from '@/resource/summary';
 
 import { OrderFieldEditButton } from '../OrderFieldEditButton';
 

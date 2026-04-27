@@ -2,11 +2,11 @@ import { EChartsOption } from 'echarts';
 import { useMemo } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/config';
-import { EChart } from '@waldur/core/EChart';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+import { ENV } from '@/core/config';
+import { EChart } from '@/core/EChart';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
 
 import { QUOTA_CATEGORIES } from './constants';
 import { Quota } from './types';

@@ -1,11 +1,11 @@
 import { CookieIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { Link } from '@waldur/core/Link';
-import { SubmitButton } from '@waldur/form';
-import { formatJsx, translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { ENV } from '@/core/config';
+import { Link } from '@/core/Link';
+import { SubmitButton } from '@/form';
+import { formatJsx, translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import './CookiesConsent.css';
 

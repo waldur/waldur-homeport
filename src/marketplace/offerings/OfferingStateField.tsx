@@ -1,4 +1,4 @@
-import { StateIndicator } from '@waldur/core/StateIndicator';
+import { StateIndicator } from '@/core/StateIndicator';
 
 import { Offering } from '../types';
 

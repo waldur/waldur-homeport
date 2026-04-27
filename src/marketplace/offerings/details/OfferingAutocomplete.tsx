@@ -7,13 +7,13 @@ import {
   MarketplacePublicOfferingsListData,
 } from 'waldur-js-client';
 
-import { FieldError } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { FieldError } from '@/form';
+import { translate } from '@/i18n';
 import {
   providerOfferingsAutocomplete,
   publicOfferingsAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
-import { AutocompleteField } from '@waldur/marketplace/landing/AutocompleteField';
+} from '@/marketplace/common/autocompletes';
+import { AutocompleteField } from '@/marketplace/landing/AutocompleteField';
 
 interface OfferingAutocompleteProps {
   offeringFilter?: object;

@@ -6,17 +6,17 @@ import {
   invoicesList,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { getLineChartOptions } from '@waldur/dashboard/chart';
-import { Scope } from '@waldur/dashboard/types';
+import { STALE_TIME } from '@/core/constants';
+import { getLineChartOptions } from '@/dashboard/chart';
+import { Scope } from '@/dashboard/types';
 import {
   formatOrganizationCostChart,
   getCostChartAndOptions,
   getCreditChartAndOptions,
   getTeamSizeChart,
-} from '@waldur/dashboard/utils';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { Customer } from '@waldur/workspace/types';
+} from '@/dashboard/utils';
+import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { Customer } from '@/workspace/types';
 
 async function getCustomerCostData(customer: Scope) {
   if (!getActiveFixedPricePaymentProfile(customer.payment_profiles)) {

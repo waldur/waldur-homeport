@@ -8,26 +8,26 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { formatDate } from '@waldur/core/dateUtils';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
-import { ResourceActionsButton } from '@waldur/marketplace/resources/list/ResourceActionsButton';
-import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
-import { ResourceTerminationDateField } from '@waldur/marketplace/resources/list/ResourceTerminationDateField';
-import { resourcesListRequiredFields } from '@waldur/marketplace/resources/list/utils';
-import { createFetcher } from '@waldur/table/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { formatDate } from '@/core/dateUtils';
+import { LoadingErred } from '@/core/LoadingErred';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { ResourceActionsButton } from '@/marketplace/resources/list/ResourceActionsButton';
+import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
+import { ResourceTerminationDateField } from '@/marketplace/resources/list/ResourceTerminationDateField';
+import { resourcesListRequiredFields } from '@/marketplace/resources/list/utils';
+import { createFetcher } from '@/table/api';
 import {
   ProjectResourcesFilter,
   selectProjectResourcesFilter,
-} from '@waldur/table/generated/ProjectResourcesFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { getProject } from '@waldur/workspace/selectors';
+} from '@/table/generated/ProjectResourcesFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { getProject } from '@/workspace/selectors';
 
 import { ResourceQuotaField } from './ResourceQuotaField';
 import { ResourceRateField } from './ResourceRateField';

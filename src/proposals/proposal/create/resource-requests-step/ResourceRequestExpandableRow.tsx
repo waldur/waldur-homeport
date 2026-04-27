@@ -1,9 +1,9 @@
-import { translate } from '@waldur/i18n';
-import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
-import { ProposalResource } from '@waldur/proposals/types';
-import { BooleanField } from '@waldur/table/BooleanField';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
+import { ProposalResource } from '@/proposals/types';
+import { BooleanField } from '@/table/BooleanField';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 const UserInputs = ({ callOffering, optionsValues }) => (
   <section>

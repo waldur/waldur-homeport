@@ -1,5 +1,5 @@
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
 
 import { ORDER_STATE_LABELS } from '../OrderStates';
 

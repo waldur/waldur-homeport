@@ -3,10 +3,10 @@ import { FC, useMemo } from 'react';
 import { Nav } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
-import { useFullPage } from '@waldur/navigation/context';
+import { Link } from '@/core/Link';
+import { isFeatureVisible } from '@/features/connect';
+import { translate } from '@/i18n';
+import { useFullPage } from '@/navigation/context';
 
 import { getCategoryConfig } from './constants';
 

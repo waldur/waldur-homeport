@@ -1,8 +1,8 @@
 import { vmwareVirtualMachineConsoleRetrieve } from 'waldur-js-client';
 
-import { validateState } from '@waldur/resource/actions/base';
-import { OpenConsoleActionItem } from '@waldur/resource/actions/OpenConsoleActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { validateState } from '@/resource/actions/base';
+import { OpenConsoleActionItem } from '@/resource/actions/OpenConsoleActionItem';
+import { ActionItemType } from '@/resource/actions/types';
 
 const validators = [validateState('OK')];
 

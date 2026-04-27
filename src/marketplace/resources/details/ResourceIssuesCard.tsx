@@ -2,12 +2,12 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { openIssueCreateDialog } from '@waldur/issues/create/actions';
-import { hasSupport } from '@waldur/issues/hooks';
-import { IssuesList } from '@waldur/issues/list/IssuesList';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { PAGE_SIZE_COMPACT } from '@waldur/table/constants';
+import { translate } from '@/i18n';
+import { openIssueCreateDialog } from '@/issues/create/actions';
+import { hasSupport } from '@/issues/hooks';
+import { IssuesList } from '@/issues/list/IssuesList';
+import { ActionButton } from '@/table/ActionButton';
+import { PAGE_SIZE_COMPACT } from '@/table/constants';
 
 const CreateIssueButton = ({ resource }) => {
   const dispatch = useDispatch();

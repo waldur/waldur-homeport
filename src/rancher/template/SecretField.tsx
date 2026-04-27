@@ -4,9 +4,9 @@ import { useAsync } from 'react-use';
 import { formValueSelector, clearFields } from 'redux-form';
 import { rancherProjectsSecretsRetrieve } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { type RootState } from '@/store/reducers';
 
 import { FieldProps } from '../types';
 

@@ -1,12 +1,12 @@
 import { useSelector } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { DeployPageTotalCard } from '@waldur/marketplace/deploy/DeployPageTotalCard';
-import { formIsValidSelector } from '@waldur/marketplace/deploy/selectors';
-import { formErrorsSelector } from '@waldur/marketplace/deploy/selectors';
-import { orderFormDataSelector } from '@waldur/marketplace/deploy/selectors';
-import { OrderSubmitButton } from '@waldur/marketplace/details/OrderSubmitButton';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { DeployPageTotalCard } from '@/marketplace/deploy/DeployPageTotalCard';
+import { formIsValidSelector } from '@/marketplace/deploy/selectors';
+import { formErrorsSelector } from '@/marketplace/deploy/selectors';
+import { orderFormDataSelector } from '@/marketplace/deploy/selectors';
+import { OrderSubmitButton } from '@/marketplace/details/OrderSubmitButton';
 
 interface CheckoutSummaryProps {
   offering: PublicOfferingDetails;

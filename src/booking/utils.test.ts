@@ -1,7 +1,7 @@
 import { DateTime } from 'luxon';
 import { describe, it, expect, vi, afterEach, beforeEach } from 'vitest';
 
-import { handlePastSlotsForBookingOffering } from '@waldur/booking/marketplace';
+import { handlePastSlotsForBookingOffering } from '@/booking/marketplace';
 
 import attributesAfter from './fixtures/attributes-after.json';
 import attributesBefore from './fixtures/attributes-before.json';

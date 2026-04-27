@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
 
 export const ImportButton: FunctionComponent<{
   disabled?;

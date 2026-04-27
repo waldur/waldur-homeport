@@ -1,7 +1,7 @@
 import { PublicOfferingDetails } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { Offering, Plan } from '@waldur/marketplace/types';
+import { Offering, Plan } from '@/marketplace/types';
 
 import { DeployFormData } from '../common/types';
 

@@ -1,7 +1,7 @@
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { formatFilesize } from '@waldur/core/utils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { formatFilesize } from '@/core/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 interface CeleryResourceUsageProps {
   rusage: Record<string, number>;

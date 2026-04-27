@@ -9,8 +9,8 @@ import React, {
   useState,
 } from 'react';
 
-import { randomUUID } from '@waldur/core/utils';
-import { useUser } from '@waldur/workspace/hooks';
+import { randomUUID } from '@/core/utils';
+import { useUser } from '@/workspace/hooks';
 
 interface ThreadContextType {
   currentThreadId: string;

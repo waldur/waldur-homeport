@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 import { Form, FormLabel } from 'react-bootstrap';
 
-import { FormField } from '@waldur/form/types';
-import { Choice } from '@waldur/marketplace/offerings/types';
+import { FormField } from '@/form/types';
+import { Choice } from '@/marketplace/offerings/types';
 
 import { Tip } from './Tooltip';
 

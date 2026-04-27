@@ -2,7 +2,7 @@ import { ShieldCheckIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface AdminAccessInfoCardProps {
   description: string;

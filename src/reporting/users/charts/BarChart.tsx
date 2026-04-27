@@ -1,8 +1,8 @@
 import { EChartsOption } from 'echarts';
 import React, { useMemo } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
-import { getChartBrandColor } from '@waldur/dashboard/constants';
+import { EChart } from '@/core/EChart';
+import { getChartBrandColor } from '@/dashboard/constants';
 
 export interface BarChartItem {
   name: string;

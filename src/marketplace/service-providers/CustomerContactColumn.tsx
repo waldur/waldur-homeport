@@ -1,5 +1,5 @@
-import { formatPhoneNumber } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { formatPhoneNumber } from '@/core/utils';
+import { translate } from '@/i18n';
 
 export const CustomerContactColumn = ({ row }) => (
   <>

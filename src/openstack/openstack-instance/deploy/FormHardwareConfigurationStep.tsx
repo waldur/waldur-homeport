@@ -3,11 +3,11 @@ import { useCallback, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { OpenStackFlavor, OpenStackImage } from 'waldur-js-client';
 
-import { FilterBox } from '@waldur/form/FilterBox';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { FilterBox } from '@/form/FilterBox';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 import { calculateSystemVolumeSize } from '../utils';
 

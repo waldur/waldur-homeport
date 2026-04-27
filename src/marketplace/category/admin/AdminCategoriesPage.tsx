@@ -6,18 +6,18 @@ import {
   MarketplaceCategoriesListData,
 } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { getCategoryGroups } from '@waldur/marketplace/common/api';
-import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
-import { Category } from '@waldur/marketplace/types';
-import { createFetcher } from '@waldur/table/api';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import Avatar from '@/core/Avatar';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { Link } from '@/core/Link';
+import { truncate } from '@/core/utils';
+import { translate } from '@/i18n';
+import { getCategoryGroups } from '@/marketplace/common/api';
+import { CategoryLink } from '@/marketplace/links/CategoryLink';
+import { Category } from '@/marketplace/types';
+import { createFetcher } from '@/table/api';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { CategoryCreateButton } from './CategoryCreateButton';
 import { CategoryRowActions } from './CategoryRowActions';

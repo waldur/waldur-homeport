@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { Call } from '@waldur/proposals/types';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { Call } from '@/proposals/types';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { RoundExpandableRow } from '../update/rounds/RoundExpandableRow';
 import { getRoundsWithStatus } from '../utils';

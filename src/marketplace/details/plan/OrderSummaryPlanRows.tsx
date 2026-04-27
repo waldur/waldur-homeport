@@ -2,12 +2,12 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
-import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
-import { Customer } from '@waldur/workspace/types';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { CheckoutPricingRow } from '@/marketplace/deploy/CheckoutPricingRow';
+import { concealPricesSelector } from '@/marketplace/deploy/utils';
+import { Customer } from '@/workspace/types';
 
 import { Component, PricesData } from './types';
 import { useComponentsDetailPrices } from './utils';

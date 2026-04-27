@@ -2,10 +2,10 @@ import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field, isSubmitting } from 'redux-form';
 
-import { AttachmentItemPending } from '@waldur/form/upload/AttachmentItemPending';
-import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
+import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
+import { AttachmentsList } from '@/form/upload/AttachmentsList';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
 
 import { ISSUE_CREATION_FORM_ID } from './constants';
 

@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { getLimitChangeData } from '@waldur/marketplace/resources/change-limits/utils';
+import { getLimitChangeData } from '@/marketplace/resources/change-limits/utils';
 
 import * as fixtures from './fixtures';
 

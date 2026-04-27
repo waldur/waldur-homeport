@@ -1,5 +1,5 @@
-import { translate } from '@waldur/i18n';
-import { FormFinalConfigurationStep } from '@waldur/marketplace/deploy/steps/FormFinalConfigurationStep';
+import { translate } from '@/i18n';
+import { FormFinalConfigurationStep } from '@/marketplace/deploy/steps/FormFinalConfigurationStep';
 
 import { FormAdditionalConfigurationStep } from './FormAdditionalConfigurationStep';
 import { FormDetailsOverviewStep } from './FormDetailsOverviewStep';

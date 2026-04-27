@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { getAbbreviation } from '@waldur/core/utils';
+import { Image } from '@/core/Image';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { getAbbreviation } from '@/core/utils';
 
 interface DashboardHeroLogo2Props {
   logo: string;

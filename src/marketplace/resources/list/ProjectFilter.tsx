@@ -3,11 +3,11 @@ import React from 'react';
 import { Props as SelectProps } from 'react-select';
 import { BaseFieldProps, Field } from 'redux-form';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { projectAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { projectAutocomplete } from '@/marketplace/common/autocompletes';
 
 interface ProjectFilterProps {
   customer_uuid?: string;

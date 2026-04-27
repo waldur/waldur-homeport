@@ -2,13 +2,13 @@ import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { proposalProtectedCallsOfferingsSet } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { Call, CallOfferingFormData } from '@waldur/proposals/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ENV } from '@/core/config';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { Call, CallOfferingFormData } from '@/proposals/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';

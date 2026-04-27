@@ -3,13 +3,13 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { ResourceAction } from '@/marketplace/resources/actions/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useUser } from '@/workspace/hooks';
 
 export const MultiDestroyAction = ({ rows, refetch }) => {
   const dispatch = useDispatch();

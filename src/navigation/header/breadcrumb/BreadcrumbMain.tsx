@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { useContext } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { LayoutContext } from '@waldur/navigation/context';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { LayoutContext } from '@/navigation/context';
 
 import { Breadcrumbs } from './Breadcrumbs';
 

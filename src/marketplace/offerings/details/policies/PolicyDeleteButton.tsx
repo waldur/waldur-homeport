@@ -5,10 +5,10 @@ import {
   marketplaceOfferingUsagePoliciesDestroy,
 } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse } from '@waldur/store/notify';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse } from '@/store/notify';
 
 import { OfferingPolicyType } from './types';
 

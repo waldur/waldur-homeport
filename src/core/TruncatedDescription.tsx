@@ -2,7 +2,7 @@ import { truncate } from 'lodash-es';
 import { FC } from 'react';
 import { useToggle } from 'react-use';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface TruncatedDescriptionProps {
   text: string;

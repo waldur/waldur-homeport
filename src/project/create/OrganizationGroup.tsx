@@ -1,11 +1,11 @@
 import { Field } from 'react-final-form';
 import { Customer } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { Select } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 interface OrganizationGroupProps {
   onChange?(customer: Customer): void;

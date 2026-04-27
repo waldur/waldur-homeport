@@ -16,20 +16,20 @@ import {
   AssignmentBatchList,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PoolSummaryButton } from '@waldur/proposals/update/reviewer-pool/PoolSummaryButton';
-import { useReviewerPoolTabs } from '@waldur/proposals/update/reviewer-pool/tabs';
-import { useNotify } from '@waldur/store/hooks';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { TableTabs } from '@waldur/table/TableTabs';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
+import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
+import { useNotify } from '@/store/hooks';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { TableTabs } from '@/table/TableTabs';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { Call } from '../types';
 

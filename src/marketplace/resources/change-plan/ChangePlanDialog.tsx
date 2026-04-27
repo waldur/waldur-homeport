@@ -3,15 +3,15 @@ import { Field, Form } from 'react-final-form';
 import { useAsync } from 'react-use';
 import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { FormFooter } from '@waldur/form';
-import { ChoicesTable } from '@waldur/form/ChoicesTable';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { usePermission } from '@waldur/permissions/hooks';
-import { useNotify } from '@waldur/store/hooks';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { FormFooter } from '@/form';
+import { ChoicesTable } from '@/form/ChoicesTable';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { PermissionEnum } from '@/permissions/enums';
+import { usePermission } from '@/permissions/hooks';
+import { useNotify } from '@/store/hooks';
 
 import { FetchedData, loadData } from './utils';
 

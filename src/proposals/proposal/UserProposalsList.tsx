@@ -3,22 +3,22 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Proposal, proposalProposalsList } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { getProposalStateOptions } from '@waldur/proposals/utils';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Link } from '@/core/Link';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { getProposalStateOptions } from '@/proposals/utils';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   ProposalsFilter,
   selectProposalsFilter,
   ProposalStatesOptions,
-} from '@waldur/table/generated/ProposalsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/ProposalsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { EndingField } from '../EndingField';
 

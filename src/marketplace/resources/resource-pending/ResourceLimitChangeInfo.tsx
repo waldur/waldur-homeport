@@ -4,19 +4,19 @@ import { Card } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { formatDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { OrderDetailsQuickBody } from '@waldur/marketplace/orders/details/OrderDetailsQuickBody';
-import { OrderStateField } from '@waldur/marketplace/orders/details/OrderStateField';
-import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { Field } from '@waldur/resource/summary';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { useUser } from '@waldur/workspace/hooks';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { formatDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { OrderDetailsQuickBody } from '@/marketplace/orders/details/OrderDetailsQuickBody';
+import { OrderStateField } from '@/marketplace/orders/details/OrderStateField';
+import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { Field } from '@/resource/summary';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { useUser } from '@/workspace/hooks';
 
 import { ChangedLimitField } from '../change-limits/ChangedLimitField';
 import {

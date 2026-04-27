@@ -1,4 +1,4 @@
-import { fixURL } from '@waldur/core/api';
+import { fixURL } from '@/core/api';
 
 export const getCustomerURL = (customer) => {
   if (!customer) {

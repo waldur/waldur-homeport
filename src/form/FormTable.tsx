@@ -3,8 +3,8 @@ import classNames from 'classnames';
 import { FC, PropsWithChildren, ReactNode } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
+import { wrapTooltip } from '@/table/ActionButton';
 
 import './FormTable.scss';
 

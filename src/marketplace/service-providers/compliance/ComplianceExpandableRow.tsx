@@ -2,11 +2,11 @@ import { FC, useEffect } from 'react';
 import { ProgressBar, Stack } from 'react-bootstrap';
 import { ServiceProviderComplianceOverview } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const dummyData = [
   { offering_name: 'Offering #1', overall_score: 82, status: 'Overdue' },

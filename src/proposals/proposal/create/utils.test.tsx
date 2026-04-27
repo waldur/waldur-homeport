@@ -8,20 +8,20 @@ import {
   proposalProposalsReject,
 } from 'waldur-js-client';
 
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { waitForConfirmation } from '@/modal/actions';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 import { useProposalDecisionActions } from './utils';
 
 const mockStore = configureMockStore();
 
 vi.mock('waldur-js-client');
-vi.mock('@waldur/modal/actions');
-vi.mock('@waldur/store/notify', () => ({
+vi.mock('@/modal/actions');
+vi.mock('@/store/notify', () => ({
   showSuccess: vi.fn(() => ({ type: 'SHOW_SUCCESS' })),
   showErrorResponse: vi.fn(() => ({ type: 'SHOW_ERROR_RESPONSE' })),
 }));
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key: string, context?: any) => {
     if (context) {
       return key.replace(/\{(\w+)\}/g, (match, prop) => context[prop] || match);

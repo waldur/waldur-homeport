@@ -1,11 +1,8 @@
 import { vmwareVirtualMachineDestroy } from 'waldur-js-client';
 
-import {
-  validateRuntimeState,
-  validateState,
-} from '@waldur/resource/actions/base';
-import { DestroyActionItem } from '@waldur/resource/actions/DestroyActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { validateRuntimeState, validateState } from '@/resource/actions/base';
+import { DestroyActionItem } from '@/resource/actions/DestroyActionItem';
+import { ActionItemType } from '@/resource/actions/types';
 
 const validators = [
   validateState('OK', 'ERRED'),

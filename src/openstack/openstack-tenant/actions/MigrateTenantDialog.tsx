@@ -9,21 +9,21 @@ import {
   openstackNetworksList,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { FormGroup, SelectField, SubmitButton } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { publicOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { loadVolumeTypes } from '@waldur/openstack/api';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
-import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { type RootState } from '@waldur/store/reducers';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { FormGroup, SelectField, SubmitButton } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { loadVolumeTypes } from '@/openstack/api';
+import { TENANT_TYPE } from '@/openstack/constants';
+import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { type RootState } from '@/store/reducers';
 
 import { SubnetsTable } from './SubnetsTable';
 import { VolumeTypesTable } from './VolumeTypesTable';

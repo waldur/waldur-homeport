@@ -1,10 +1,10 @@
 import { Card } from 'react-bootstrap';
 import { Issue } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
-import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 
 import { useIssueAttachments, useUploadAttachments } from './api';
 import { IssueAttachmentsContext } from './IssueAttachmentsContext';

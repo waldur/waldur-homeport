@@ -1,11 +1,11 @@
 import { AtIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { PermissionMap } from '@waldur/permissions/enums';
-import { getPermissionDisabledTooltip } from '@waldur/permissions/utils';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { PermissionMap } from '@/permissions/enums';
+import { getPermissionDisabledTooltip } from '@/permissions/utils';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { InvitationContext } from '../types';
 import { useCreateInvitation } from '../useCreateInvitation';

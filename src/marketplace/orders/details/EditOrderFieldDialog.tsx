@@ -9,21 +9,18 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { composeValidators } from '@waldur/core/validators';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { useOrderStartDateBounds } from '@waldur/marketplace/deploy/steps/OrderStartDateField';
-import { getOfferingComponentValidator } from '@waldur/marketplace/offerings/store/limits';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { composeValidators } from '@/core/validators';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/OrderStartDateField';
+import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 interface EditOrderFieldDialogProps {
   resolve: {

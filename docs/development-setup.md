@@ -181,7 +181,7 @@ For containerized development:
 
 ### IDE Configuration
 
-- TypeScript support with path mapping for `@waldur/*` imports
+- TypeScript support with path mapping for `@/*` imports
 - ESLint and Prettier integration for code formatting
 - Vitest integration for test running and debugging
 

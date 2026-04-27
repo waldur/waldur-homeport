@@ -1,4 +1,4 @@
-import { ApplicationConfigurationOptions } from '@waldur/core/types';
+import { ApplicationConfigurationOptions } from '@/core/types';
 
 export const ENV: ApplicationConfigurationOptions = {
   apiEndpoint: 'http://localhost:8080/',

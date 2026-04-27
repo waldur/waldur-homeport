@@ -1,10 +1,10 @@
 import { reduxForm } from 'redux-form';
 import { BasePublicPlan, PublicOfferingDetails } from 'waldur-js-client';
 
-import { Panel } from '@waldur/core/Panel';
-import { useWrappedTabs } from '@waldur/core/WrappedTabs';
-import { translate } from '@waldur/i18n';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
+import { Panel } from '@/core/Panel';
+import { useWrappedTabs } from '@/core/WrappedTabs';
+import { translate } from '@/i18n';
+import { ORDER_FORM_ID } from '@/marketplace/details/constants';
 
 import { ExportFullPriceList } from './ExportFullPriceList';
 import { PublicOfferingPricingPlanItem } from './PublicOfferingPricingPlanItem';

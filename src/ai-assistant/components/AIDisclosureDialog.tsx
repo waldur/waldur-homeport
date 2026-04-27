@@ -7,7 +7,7 @@ import {
 } from '@phosphor-icons/react';
 import { FC, ReactNode, useState } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface AIDisclosureBannerProps {
   onAcknowledge: () => void;

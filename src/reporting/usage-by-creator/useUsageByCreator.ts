@@ -5,8 +5,8 @@ import {
   ResourceUsageByAffiliation,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
+import { STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
 
 import { AffiliationAggregation, UsageByAffiliationSummary } from './types'; // 5 minutes
 

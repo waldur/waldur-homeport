@@ -1,10 +1,10 @@
 import { debounce } from 'lodash';
 import { FunctionComponent, useCallback, useMemo } from 'react';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { AsyncPaginate } from '@/form/themed-select';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
 interface OrganizationAutocompleteProps extends FormField {
   placeholder?: string;

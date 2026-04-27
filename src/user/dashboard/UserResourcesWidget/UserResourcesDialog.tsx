@@ -4,13 +4,13 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { router } from '@waldur/router';
+import { fetchResultCount } from '@/core/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { router } from '@/router';
 
 import { ResourceProjectGroup } from './ResourceProjectGroup';
 import { ACTIVE_RESOURCE_STATES, groupResourcesByProject } from './utils';

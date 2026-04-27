@@ -3,18 +3,18 @@ import {
   openstackTenantsSetOk,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionGroup } from '@waldur/marketplace/resources/actions/ActionGroup';
-import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
-import { PullMarketplaceResourceAction } from '@waldur/marketplace/resources/actions/PullMarketplaceResourceAction';
-import { ChangeLimitsAction } from '@waldur/marketplace/resources/change-limits/ChangeLimitsAction';
-import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { ShowUsageAction } from '@waldur/marketplace/resources/list/ShowUsageAction';
-import { RenewAllocationActionAction } from '@waldur/marketplace/resources/renew-allocation/RenewAllocationAction';
-import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
-import { SetResourceErredAction } from '@waldur/resource/actions/SetResourceErredAction';
-import { SetResourceOkAction } from '@waldur/resource/actions/SetResourceOkAction';
-import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
+import { translate } from '@/i18n';
+import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
+import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
+import { PullMarketplaceResourceAction } from '@/marketplace/resources/actions/PullMarketplaceResourceAction';
+import { ChangeLimitsAction } from '@/marketplace/resources/change-limits/ChangeLimitsAction';
+import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
+import { ShowUsageAction } from '@/marketplace/resources/list/ShowUsageAction';
+import { RenewAllocationActionAction } from '@/marketplace/resources/renew-allocation/RenewAllocationAction';
+import { TerminateAction } from '@/marketplace/resources/terminate/TerminateAction';
+import { SetResourceErredAction } from '@/resource/actions/SetResourceErredAction';
+import { SetResourceOkAction } from '@/resource/actions/SetResourceOkAction';
+import { UnlinkActionItem } from '@/resource/actions/UnlinkActionItem';
 
 import { ProviderActionsGroup } from '../../marketplace/resources/actions/ProviderActionsGroup';
 

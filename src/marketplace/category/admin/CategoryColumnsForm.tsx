@@ -5,9 +5,9 @@ import { FieldArray } from 'react-final-form-arrays';
 import { AsyncState } from 'react-use/lib/useAsync';
 import { CategoryColumn } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Category } from '@waldur/marketplace/types';
-import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
+import { translate } from '@/i18n';
+import { Category } from '@/marketplace/types';
+import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 
 import { ColumnsList } from './ColumnsList';
 

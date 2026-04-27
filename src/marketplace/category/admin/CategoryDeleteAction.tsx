@@ -3,11 +3,11 @@ import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceCategoriesDestroy } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { Category } from '@waldur/marketplace/types';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse } from '@waldur/store/notify';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { Category } from '@/marketplace/types';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse } from '@/store/notify';
 
 interface CategoryDeleteActionProps {
   row: Category;

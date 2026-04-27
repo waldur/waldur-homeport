@@ -3,7 +3,7 @@ import { DropDirection } from 'react-bootstrap/esm/DropdownContext';
 import { useBoolean } from 'react-use';
 import { Resource } from 'waldur-js-client';
 
-import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
+import { ResourceActionComponent } from '@/resource/actions/ResourceActionComponent';
 
 import {
   CustomerResourceActions,

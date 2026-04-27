@@ -4,7 +4,7 @@ import React from 'react';
 import { Form } from 'react-bootstrap';
 import { useToggle } from 'react-use';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface SecretValueFieldProps {
   value: string;

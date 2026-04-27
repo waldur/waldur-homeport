@@ -3,18 +3,18 @@ import { Fragment, useCallback, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 
-import { ENV } from '@waldur/core/config';
-import { Tip } from '@waldur/core/Tooltip';
-import { usePagination } from '@waldur/core/usePagination';
-import { composeValidators, email, required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { InvitationsFeatures } from '@waldur/FeaturesEnums';
-import { EmailField } from '@waldur/form/EmailField';
-import { FieldError } from '@waldur/form/FieldError';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { TablePagination } from '@waldur/table/TablePagination';
+import { ENV } from '@/core/config';
+import { Tip } from '@/core/Tooltip';
+import { usePagination } from '@/core/usePagination';
+import { composeValidators, email, required } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { InvitationsFeatures } from '@/FeaturesEnums';
+import { EmailField } from '@/form/EmailField';
+import { FieldError } from '@/form/FieldError';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
+import { TablePagination } from '@/table/TablePagination';
 
 import { RoleAndProjectSelectField } from './RoleAndProjectSelectField';
 

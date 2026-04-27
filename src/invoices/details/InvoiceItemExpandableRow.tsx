@@ -2,10 +2,10 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OverlayTrigger, Popover } from 'react-bootstrap';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { Invoice, InvoiceItem, InvoiceTableItem } from '../types';
 

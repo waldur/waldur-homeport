@@ -1,9 +1,9 @@
 import { marketplaceResourcesList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/BreadcrumbDropdown';
-import { BreadcrumbSearchItem } from '@waldur/navigation/header/breadcrumb/BreadcrumbSearchItem';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { BreadcrumbDropdown } from '@/navigation/header/breadcrumb/BreadcrumbDropdown';
+import { BreadcrumbSearchItem } from '@/navigation/header/breadcrumb/BreadcrumbSearchItem';
 
 export const ResourceBreadcrumbPopover = ({ resource, close }) => (
   <BreadcrumbDropdown

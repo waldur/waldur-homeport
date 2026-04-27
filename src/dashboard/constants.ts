@@ -1,5 +1,5 @@
-import { generateBrandColors } from '@waldur/core/generateColors';
-import { getBrandColor } from '@waldur/core/utils';
+import { generateBrandColors } from '@/core/generateColors';
+import { getBrandColor } from '@/core/utils';
 
 export const getChartBrandColor = () =>
   generateBrandColors(getBrandColor())['300'];

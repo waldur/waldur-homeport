@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { useSelector } from 'react-redux';
 import { organizationGroupsList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { getUser } from '@waldur/workspace/selectors';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { getUser } from '@/workspace/selectors';
 
 // See also: https://github.com/erikras/redux-form/issues/1852
 export const parseIntField = (value) => parseInt(value, 10) || 0;

@@ -1,9 +1,9 @@
 import { OpenStackNestedPort, OpenStackVolumeType } from 'waldur-js-client';
 import { OpenStackFloatingIp } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { formatFlavor } from '@waldur/resource/utils';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { formatFlavor } from '@/resource/utils';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { Quota } from '../types';
 

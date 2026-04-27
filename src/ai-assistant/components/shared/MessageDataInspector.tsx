@@ -1,9 +1,9 @@
 import { CaretDownIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useId, useState } from 'react';
 
-import { UIBlock } from '@waldur/ai-assistant/lib/types';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { translate } from '@waldur/i18n';
+import { UIBlock } from '@/ai-assistant/lib/types';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { translate } from '@/i18n';
 
 interface MessageDataInspectorProps {
   blocks: UIBlock[];

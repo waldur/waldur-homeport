@@ -11,10 +11,10 @@ import {
   type BaseComponentUsage,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { OfferingComponent } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ResourceUsageForm } from './ResourceUsageForm';
 import { ResourceUsageSubmitButton } from './ResourceUsageSubmitButton';

@@ -5,10 +5,10 @@ import {
   positive,
   required,
   validateMaxLength,
-} from '@waldur/core/validators';
-import { NumberField, StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+} from '@/core/validators';
+import { NumberField, StringField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { PROJECT_TEMPLATE_FIELD_CONSTRAINTS } from '../constants';
 

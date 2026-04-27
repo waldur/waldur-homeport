@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { NestedPartition } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { Offering } from '../../types';
 import { OfferingPartitionExpandableRow } from '../update/partitions/OfferingPartitionExpandableRow';

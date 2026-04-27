@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { components } from 'react-select';
 import { customersCountriesList } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
+import { STALE_TIME } from '@/core/constants';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
 
 import { WindowedSelect } from './themed-select';
 import { FormField } from './types';

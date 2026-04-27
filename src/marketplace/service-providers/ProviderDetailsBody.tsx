@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Col, Row, Container } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { OfferingGrid } from '@waldur/marketplace/common/OfferingGrid';
-import { Field } from '@waldur/resource/summary';
+import { translate } from '@/i18n';
+import { OfferingGrid } from '@/marketplace/common/OfferingGrid';
+import { Field } from '@/resource/summary';
 
 import { OfferingLogo } from '../common/OfferingLogo';
 

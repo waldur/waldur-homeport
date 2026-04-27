@@ -1,10 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 const TelemetryExampleDialog = lazyComponent(() =>
   import('./TelemetryExampleDialog').then((module) => ({

@@ -1,7 +1,7 @@
 import { render, screen } from '@testing-library/react';
 import { describe, it, expect } from 'vitest';
 
-import { quotas } from '@waldur/openstack/openstack-instance/storyFixtures';
+import { quotas } from '@/openstack/openstack-instance/storyFixtures';
 import {
   exceeds,
   getSummary,
@@ -10,7 +10,7 @@ import {
   getAvailable,
   ProgressTooltipMessage,
   QuotaUsageBarChartDescription,
-} from '@waldur/quotas/QuotaUsageBarChart';
+} from '@/quotas/QuotaUsageBarChart';
 
 describe('exceeds', () => {
   it("should return false if quota's usage and required sum is less than limit", () => {

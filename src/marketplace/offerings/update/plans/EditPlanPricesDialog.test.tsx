@@ -13,7 +13,7 @@ vi.mock('waldur-js-client', () => ({
   formDataBodySerializer: vi.fn(),
 }));
 
-vi.mock('@waldur/modal/hooks', () => ({
+vi.mock('@/modal/hooks', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),

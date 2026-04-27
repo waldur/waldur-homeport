@@ -15,13 +15,13 @@ import {
   OfferingUser,
 } from 'waldur-js-client';
 
-import { url } from '@waldur/core/validators';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { url } from '@/core/validators';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { ServiceProvider } from '../types';
 

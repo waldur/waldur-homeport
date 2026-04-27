@@ -2,7 +2,7 @@ import { ArrowDownIcon, ArrowUpIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FC } from 'react';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { defaultCurrency } from '@/core/formatCurrency';
 
 interface ChangesAmountBadgeProps {
   changes: number;

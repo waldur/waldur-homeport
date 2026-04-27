@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Select } from '@waldur/form/themed-select';
+import { Select } from '@/form/themed-select';
 
 export const SelectField: FunctionComponent<any> = (props) => {
   const { input, simpleValue, options, ...rest } = props;

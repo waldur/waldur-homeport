@@ -2,19 +2,19 @@ import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { canRegisterServiceProviderForCustomer } from '@waldur/marketplace/service-providers/selectors';
-import { PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures, MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
+import { PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 import {
   getCustomer,
   getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isStaff,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 const CustomerDetailsPanel = lazyComponent(() =>
   import('./CustomerDetailsPanel').then((module) => ({

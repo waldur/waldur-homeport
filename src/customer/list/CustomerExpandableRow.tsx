@@ -5,11 +5,11 @@ import { useAsync } from 'react-use';
 import { formValueSelector } from 'redux-form';
 import { invoicesList } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { AgreementInfo } from '@waldur/invoices/list/AgreementInfo';
-import { InvoicesStatsList } from '@waldur/invoices/list/InvoicesStatsList';
-import { type RootState } from '@waldur/store/reducers';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { AgreementInfo } from '@/invoices/list/AgreementInfo';
+import { InvoicesStatsList } from '@/invoices/list/InvoicesStatsList';
+import { type RootState } from '@/store/reducers';
 
 export const CustomerExpandableRow = memo((props: any) => {
   const accountingPeriod = useSelector((state: RootState) =>

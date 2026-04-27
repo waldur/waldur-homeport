@@ -1,5 +1,5 @@
-import { CallOfferingDeleteButton } from '@waldur/proposals/details/CallOfferingDeleteButton';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { CallOfferingDeleteButton } from '@/proposals/details/CallOfferingDeleteButton';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 export const CallOfferingRowActions = ({ row, refetch }) => {
   return (

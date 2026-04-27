@@ -9,25 +9,20 @@ import {
   MarketplaceCategoryRequest,
 } from 'waldur-js-client';
 
-import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import {
-  SelectField,
-  StringField,
-  SubmitButton,
-  TextField,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { ImageField } from '@waldur/form/ImageField';
-import { translate } from '@waldur/i18n';
-import { getCategoryGroups } from '@waldur/marketplace/common/api';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { formDataOptions, fileSerializer } from '@/core/api';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { SelectField, StringField, SubmitButton, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { ImageField } from '@/form/ImageField';
+import { translate } from '@/i18n';
+import { getCategoryGroups } from '@/marketplace/common/api';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface CategoryEditDialogProps {
   resolve: {

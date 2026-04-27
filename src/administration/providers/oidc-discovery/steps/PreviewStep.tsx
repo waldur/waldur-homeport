@@ -2,9 +2,9 @@ import { FC } from 'react';
 import { Alert, Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { FieldMappingChoice, OidcFormValues } from '../types';
 

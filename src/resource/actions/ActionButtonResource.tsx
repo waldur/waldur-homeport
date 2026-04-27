@@ -2,11 +2,11 @@ import React from 'react';
 import { useAsyncFn, useBoolean } from 'react-use';
 import { marketplaceResourcesRetrieve } from 'waldur-js-client';
 
-import { get } from '@waldur/core/api';
+import { get } from '@/core/api';
 import {
   CustomerResourceActions,
   StaffActions,
-} from '@waldur/marketplace/resources/actions/ActionsList';
+} from '@/marketplace/resources/actions/ActionsList';
 
 import { getActions } from './registry';
 import { ResourceActionComponent } from './ResourceActionComponent';

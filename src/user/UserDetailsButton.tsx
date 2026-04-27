@@ -2,9 +2,9 @@ import { EyeIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { openUserPopover } from '@waldur/user/actions';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { openUserPopover } from '@/user/actions';
 
 interface UserDetailsButtonProps {
   userId: string;

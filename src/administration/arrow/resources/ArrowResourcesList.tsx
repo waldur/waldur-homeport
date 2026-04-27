@@ -3,19 +3,19 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { marketplaceResourcesList, Resource } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { translate } from '@/i18n';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { ResourceLink } from '@/resource/ResourceLink';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   MarketplaceResourcesFilter,
   selectMarketplaceResourcesFilter,
   MarketplaceResourcesFilterFormId,
-} from '@waldur/table/generated/MarketplaceResourcesFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/MarketplaceResourcesFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { ArrowResourceImportButton } from './ArrowResourceImportButton';
 import { ArrowResourcesActions } from './ArrowResourcesActions';

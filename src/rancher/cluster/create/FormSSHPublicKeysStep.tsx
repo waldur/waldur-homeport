@@ -1,7 +1,7 @@
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { FormSSHPublicKeysField } from '@waldur/openstack/openstack-instance/deploy/FormSSHPublicKeysField';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { FormSSHPublicKeysField } from '@/openstack/openstack-instance/deploy/FormSSHPublicKeysField';
 
 export const FormSSHPublicKeysStep = (props: FormStepProps) => {
   return (

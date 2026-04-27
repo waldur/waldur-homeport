@@ -5,14 +5,14 @@ import { Alert, Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { Badge } from '@waldur/core/Badge';
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { Badge } from '@/core/Badge';
+import { ExternalLink } from '@/core/ExternalLink';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { arrowQueryKeys, useSaveArrowSettings } from '../api';
 import type { ArrowSetupFormValues } from '../types';

@@ -6,10 +6,10 @@ import {
   azureSizesList,
 } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { formatFlavor } from '@waldur/resource/utils';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { formatFlavor } from '@/resource/utils';
 
 export const getSizeLabel = (size: AzureSize): string => {
   const summary = formatFlavor({

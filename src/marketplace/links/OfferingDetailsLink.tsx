@@ -1,7 +1,7 @@
 import React, { PropsWithChildren } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
 
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 interface OwnProps {
   offering_uuid: string;

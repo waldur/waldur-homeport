@@ -1,7 +1,7 @@
 import { CheckIcon } from '@phosphor-icons/react';
 import React, { useMemo } from 'react';
 
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 import { LayoutPreview } from './LayoutPreview';
 import { LAYOUT_OPTIONS, LandingPageLayout } from './layouts';

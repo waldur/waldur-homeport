@@ -1,11 +1,11 @@
 import { UIView } from '@uirouter/react';
 import React from 'react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { MarketplaceFeatures, SupportFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { MarketplaceFeatures, SupportFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { isReportingScreenEnabled } from './utils';
 

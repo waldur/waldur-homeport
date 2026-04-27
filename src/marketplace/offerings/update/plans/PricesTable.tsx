@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Field } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { validateNonNegative } from '@waldur/marketplace/common/utils';
-import { OfferingComponent, Plan } from '@waldur/marketplace/types';
+import { translate } from '@/i18n';
+import { validateNonNegative } from '@/marketplace/common/utils';
+import { OfferingComponent, Plan } from '@/marketplace/types';
 
 interface PricesTableProps {
   components: OfferingComponent[];

@@ -2,10 +2,10 @@ import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { getUser } from '@waldur/workspace/selectors';
+import { ExternalLink } from '@/core/ExternalLink';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { getUser } from '@/workspace/selectors';
 
 import { AcceptTosWarning } from './AcceptTosWarning';
 import { IdentityProviderIndicator } from './IdentityProviderIndicator';

@@ -1,19 +1,16 @@
 import { FunctionComponent } from 'react';
 import { Field, reduxForm } from 'redux-form';
 
-import {
-  syncFiltersToURL,
-  useReinitializeFilterFromUrl,
-} from '@waldur/core/filters';
-import { SelectField } from '@waldur/form';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { OfferingTypeAutocomplete } from '@waldur/marketplace/offerings/details/OfferingTypeAutocomplete';
-import { OfferingStateFilter } from '@waldur/marketplace/offerings/list/OfferingStateFilter';
-import { ServiceProviderAutocomplete } from '@waldur/marketplace/offerings/ServiceProviderAutocomplete';
-import { CategoryFilter } from '@waldur/marketplace/resources/list/CategoryFilter';
-import { TagFilter } from '@waldur/marketplace/tags/TagFilter';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { syncFiltersToURL, useReinitializeFilterFromUrl } from '@/core/filters';
+import { SelectField } from '@/form';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { OfferingTypeAutocomplete } from '@/marketplace/offerings/details/OfferingTypeAutocomplete';
+import { OfferingStateFilter } from '@/marketplace/offerings/list/OfferingStateFilter';
+import { ServiceProviderAutocomplete } from '@/marketplace/offerings/ServiceProviderAutocomplete';
+import { CategoryFilter } from '@/marketplace/resources/list/CategoryFilter';
+import { TagFilter } from '@/marketplace/tags/TagFilter';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { OFFERINGS_FILTER_FORM_ID } from '../constants';
 

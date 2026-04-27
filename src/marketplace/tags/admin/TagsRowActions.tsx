@@ -1,6 +1,6 @@
 import { Tag } from 'waldur-js-client';
 
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { TagDeleteButton } from './TagDeleteButton';
 import { TagEditButton } from './TagEditButton';

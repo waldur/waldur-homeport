@@ -8,15 +8,15 @@ import {
   projectsUpdateUser,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { GenericPermission, Role } from '@waldur/permissions/types';
-import { getProjectRoles } from '@waldur/permissions/utils';
-import { useNotify } from '@waldur/store/hooks';
-import { getProject } from '@waldur/workspace/selectors';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { GenericPermission, Role } from '@/permissions/types';
+import { getProjectRoles } from '@/permissions/utils';
+import { useNotify } from '@/store/hooks';
+import { getProject } from '@/workspace/selectors';
 
 import { ExpirationTimeGroup } from './ExpirationTimeGroup';
 import { RoleGroup } from './RoleGroup';

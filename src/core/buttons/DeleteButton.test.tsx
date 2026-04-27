@@ -10,32 +10,29 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { waitForConfirmation } from '@/modal/actions';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 import { DeleteButton } from './DeleteButton';
 
-vi.mock('@waldur/modal/actions', () => ({
+vi.mock('@/modal/actions', () => ({
   waitForConfirmation: vi.fn(),
 }));
 
-vi.mock('@waldur/store/notify', () => ({
+vi.mock('@/store/notify', () => ({
   showSuccess: vi.fn(() => ({ type: 'SHOW_SUCCESS' })),
   showErrorResponse: vi.fn(() => ({ type: 'SHOW_ERROR' })),
 }));
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (str: string) => str,
 }));
 
-vi.mock(
-  '@waldur/marketplace/resources/actions/ResourceActionMenuContext',
-  () => ({
-    ResourceActionMenuContext: {
-      Provider: ({ children }: { children: React.ReactNode }) => children,
-    },
-  }),
-);
+vi.mock('@/marketplace/resources/actions/ResourceActionMenuContext', () => ({
+  ResourceActionMenuContext: {
+    Provider: ({ children }: { children: React.ReactNode }) => children,
+  },
+}));
 
 interface MockRow {
   uuid: string;

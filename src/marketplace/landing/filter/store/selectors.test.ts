@@ -4,7 +4,7 @@ import { MarketplaceFilterItem } from '../types';
 
 import { getContextFiltersForOfferings } from './selectors';
 
-vi.mock('@waldur/core/filters', () => ({
+vi.mock('@/core/filters', () => ({
   getInitialValues: () => ({}),
 }));
 
@@ -58,7 +58,7 @@ describe('getContextFiltersForOfferings', () => {
 
   it('handles tag filter from URL when filters are empty', async () => {
     // Re-mock to return tag from URL
-    const filtersModule = await import('@waldur/core/filters');
+    const filtersModule = await import('@/core/filters');
     vi.spyOn(filtersModule, 'getInitialValues').mockReturnValue({
       tag: { uuid: 'url-tag-1', name: 'URL Tag' },
     } as any);
