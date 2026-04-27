@@ -196,8 +196,6 @@
       "src/metronic/**",
       "src/EventsEnums.ts",
       "locales/tools/*.cjs",
-      "src/sass/mediaqueries.scss",
-      "src/sass/variables.scss",
       "generate-filters.cjs",
       "src/table/generated/*.tsx"
     ]
