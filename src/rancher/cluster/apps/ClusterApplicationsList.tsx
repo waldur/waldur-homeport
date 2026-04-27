@@ -5,14 +5,14 @@ import {
   RancherCluster,
 } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import { RancherClusterFilter } from '@waldur/table/generated/RancherClusterFilter';
-import Table from '@waldur/table/Table';
-import { TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import { RancherClusterFilter } from '@/table/generated/RancherClusterFilter';
+import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { useClusterResourceFilter } from '../ClusterFilterHooks';
 

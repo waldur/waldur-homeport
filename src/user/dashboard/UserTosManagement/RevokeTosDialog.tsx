@@ -7,17 +7,17 @@ import {
   marketplaceUserOfferingConsentsRevoke,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { ResourceNameField } from '@waldur/marketplace/resources/list/ResourceNameField';
-import { ResourceStateField } from '@waldur/marketplace/resources/list/ResourceStateField';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { ResourceNameField } from '@/marketplace/resources/list/ResourceNameField';
+import { ResourceStateField } from '@/marketplace/resources/list/ResourceStateField';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const RevokeTosDialog = ({
   resolve: { tos, offering, refetch, offeringUuid },

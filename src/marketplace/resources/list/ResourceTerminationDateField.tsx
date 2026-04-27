@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { WarnTip } from '@waldur/core/WarnTip';
-import { translate } from '@waldur/i18n';
+import { formatDate } from '@/core/dateUtils';
+import { WarnTip } from '@/core/WarnTip';
+import { translate } from '@/i18n';
 
 interface ResourceTerminationDateFieldProps {
   row: Resource;

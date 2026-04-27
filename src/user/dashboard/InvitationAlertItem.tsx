@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Invitation, RoleType } from 'waldur-js-client';
 
-import { AlertItem } from '@waldur/core/AlertItem';
-import { translate } from '@waldur/i18n';
-import { formatRoleType } from '@waldur/permissions/utils';
+import { AlertItem } from '@/core/AlertItem';
+import { translate } from '@/i18n';
+import { formatRoleType } from '@/permissions/utils';
 
 import { ExpiryBadge } from './ExpiryBadge';
 

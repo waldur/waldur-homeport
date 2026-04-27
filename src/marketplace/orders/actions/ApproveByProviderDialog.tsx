@@ -8,22 +8,22 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { FormFieldError } from '@waldur/form/FormFieldError';
-import { translate } from '@waldur/i18n';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { FormFieldError } from '@/form/FormFieldError';
+import { translate } from '@/i18n';
 import {
   buildOptionValidator,
   getComponentAndParams,
   OptionsForm,
-} from '@waldur/marketplace/common/OptionsForm';
-import { OptionValue } from '@waldur/marketplace/resources/options/OptionValue';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+} from '@/marketplace/common/OptionsForm';
+import { OptionValue } from '@/marketplace/resources/options/OptionValue';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 interface ApproveByProviderDialogProps {
   resolve: {

@@ -4,7 +4,7 @@ import {
   ProviderOfferingDetails,
 } from 'waldur-js-client';
 
-import { HypervisorsTab } from '@waldur/openstack/openstack-hypervisors/HypervisorsTab';
+import { HypervisorsTab } from '@/openstack/openstack-hypervisors/HypervisorsTab';
 
 export const TenantHypervisorsTab: FunctionComponent<{
   offering: ProviderOfferingDetails;

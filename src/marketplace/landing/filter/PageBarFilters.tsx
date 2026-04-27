@@ -2,11 +2,11 @@ import { XIcon } from '@phosphor-icons/react';
 import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { RemoveFilterBadgeButton } from '@/table/TableFilterItem';
 
 import { getMarketplaceFilters } from './store/selectors';
 

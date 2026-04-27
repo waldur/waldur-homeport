@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { AgentIdentity } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface AgentIdentityExpandableRowProps {
   row: AgentIdentity;

@@ -3,23 +3,23 @@ import userEvent from '@testing-library/user-event';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { customersAddUser, customersCreate } from 'waldur-js-client';
 
-import { RoleEnum } from '@waldur/permissions/enums';
-import { getCurrentUser } from '@waldur/user/UsersService';
+import { RoleEnum } from '@/permissions/enums';
+import { getCurrentUser } from '@/user/UsersService';
 
 import * as constants from './constants';
 import { CustomerCreateDialog } from './CustomerCreateDialog';
 
 // Mock API calls
 vi.mock('waldur-js-client');
-vi.mock('@waldur/user/UsersService');
-vi.mock('@waldur/modal/hooks', () => ({
+vi.mock('@/user/UsersService');
+vi.mock('@/modal/hooks', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
 }));
 
 // Mock i18n
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (message: string) => message,
 }));
 
@@ -46,14 +46,14 @@ vi.mock('@uirouter/react', async (importOriginal) => {
   };
 });
 
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useNotify: () => ({
     showSuccess: mockShowSuccess,
     showErrorResponse: mockShowErrorResponse,
   }),
 }));
 
-vi.mock('@waldur/workspace/hooks', () => ({
+vi.mock('@/workspace/hooks', () => ({
   useUser: () => mockUser,
   useSetUser: () => mockSetUser,
 }));

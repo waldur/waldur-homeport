@@ -2,9 +2,9 @@ import { Icon, WarningCircleIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { PropsWithChildren, ReactNode } from 'react';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
 
-import '@waldur/user/OfferingUsersWarningBar.scss';
+import '@/user/OfferingUsersWarningBar.scss';
 
 interface ResourceWarningBarProps extends PropsWithChildren {
   actions?: ReactNode;

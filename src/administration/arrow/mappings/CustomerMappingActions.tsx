@@ -1,6 +1,6 @@
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { CustomerMappingBillingSummaryAction } from './CustomerMappingBillingSummaryAction';
 import { CustomerMappingDeleteAction } from './CustomerMappingDeleteAction';

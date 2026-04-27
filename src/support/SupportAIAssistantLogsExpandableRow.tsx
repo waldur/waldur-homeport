@@ -20,32 +20,32 @@ import {
   ThreadSession,
 } from 'waldur-js-client';
 
-import { OfflineBlockContext } from '@waldur/ai-assistant/components/blocks/ResourceListBlock';
-import { MessageDataInspector } from '@waldur/ai-assistant/components/shared/MessageDataInspector';
-import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
-import { getFeedbackCategoryLabel } from '@waldur/ai-assistant/lib/feedback/categories';
+import { OfflineBlockContext } from '@/ai-assistant/components/blocks/ResourceListBlock';
+import { MessageDataInspector } from '@/ai-assistant/components/shared/MessageDataInspector';
+import { VersionSelector } from '@/ai-assistant/components/shared/VersionSelector';
+import { getFeedbackCategoryLabel } from '@/ai-assistant/lib/feedback/categories';
 import {
   groupBySequenceIndex,
   MessageWithVersions,
-} from '@waldur/ai-assistant/lib/messages/messageLoader';
+} from '@/ai-assistant/lib/messages/messageLoader';
 import {
   extractTextFromBlocks,
   messageBlocks,
-} from '@waldur/ai-assistant/lib/messages/messageUtils';
-import { uiRegistry } from '@waldur/ai-assistant/lib/registry/uiRegistry';
-import { Badge } from '@waldur/core/Badge';
-import { FAST_STALE_TIME, GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDateTime, formatShortDateTime } from '@waldur/core/dateUtils';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+} from '@/ai-assistant/lib/messages/messageUtils';
+import { uiRegistry } from '@/ai-assistant/lib/registry/uiRegistry';
+import { Badge } from '@/core/Badge';
+import { FAST_STALE_TIME, GRID_BREAKPOINTS } from '@/core/constants';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDateTime, formatShortDateTime } from '@/core/dateUtils';
+import { formatUsageValue } from '@/core/formatNumber';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 import {
   getSeverityBadgeVariant,
   severityLabels,
-} from '@waldur/support/SupportAIAssistantLogsList';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+} from '@/support/SupportAIAssistantLogsList';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 const formatDetectionCategories = (
   injectionCategories: unknown,

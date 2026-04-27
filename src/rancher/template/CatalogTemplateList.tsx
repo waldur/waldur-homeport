@@ -1,12 +1,12 @@
 import { FC, useMemo } from 'react';
 import { RancherTemplate, rancherTemplatesList } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { OfferingLogo } from '@waldur/marketplace/common/OfferingLogo';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { OfferingLogo } from '@/marketplace/common/OfferingLogo';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface OwnProps {
   clusterUuid: string;

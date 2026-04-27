@@ -4,10 +4,10 @@ import { FC, useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { customerQuotasList } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { selectCustomerQuotasFilter } from '@waldur/table/generated/CustomerQuotasFilter';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { selectCustomerQuotasFilter } from '@/table/generated/CustomerQuotasFilter';
 
 import {
   AnalyticsCapability,

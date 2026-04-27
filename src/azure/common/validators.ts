@@ -1,4 +1,4 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 const VIRTUAL_MACHINE_NAME_PATTERNS = new RegExp(
   '^[a-zA-Z][a-zA-Z0-9-]*[a-zA-Z0-9]?$',

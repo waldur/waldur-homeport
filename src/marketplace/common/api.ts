@@ -9,8 +9,8 @@ import {
   MarketplaceServiceProvidersListData,
 } from 'waldur-js-client';
 
-import { getAllPages, count } from '@waldur/core/api';
-import { ServiceProvider } from '@waldur/marketplace/types';
+import { getAllPages, count } from '@/core/api';
+import { ServiceProvider } from '@/marketplace/types';
 
 export const getCategoryGroups = (
   query?: MarketplaceCategoryGroupsListData['query'],

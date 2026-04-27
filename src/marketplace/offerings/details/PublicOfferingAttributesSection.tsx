@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { translate } from '@waldur/i18n';
-import { CopyToClipboard } from '@waldur/marketplace/common/CopyToClipboard';
-import { GoogleCalendarLink } from '@waldur/marketplace/offerings/details/GoogleCalendarLink';
-import { ReferralDetailsButton } from '@waldur/marketplace/referral/ReferralDetailsButton';
-import { Offering } from '@waldur/marketplace/types';
+import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
+import { translate } from '@/i18n';
+import { CopyToClipboard } from '@/marketplace/common/CopyToClipboard';
+import { GoogleCalendarLink } from '@/marketplace/offerings/details/GoogleCalendarLink';
+import { ReferralDetailsButton } from '@/marketplace/referral/ReferralDetailsButton';
+import { Offering } from '@/marketplace/types';
 import './PublicOfferingAttributesSection.scss';
 
 interface PublicOfferingAttributesSectionProps {

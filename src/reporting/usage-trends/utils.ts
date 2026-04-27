@@ -1,10 +1,10 @@
 import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 
-import { generateBrandColors } from '@waldur/core/generateColors';
-import { getBrandColor } from '@waldur/core/utils';
-import { getChartBrandColor } from '@waldur/dashboard/constants';
-import { translate } from '@waldur/i18n';
+import { generateBrandColors } from '@/core/generateColors';
+import { getBrandColor } from '@/core/utils';
+import { getChartBrandColor } from '@/dashboard/constants';
+import { translate } from '@/i18n';
 
 import {
   MonthlyUsageData,

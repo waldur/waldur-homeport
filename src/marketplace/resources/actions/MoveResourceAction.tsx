@@ -1,12 +1,12 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionItemType } from '@/resource/actions/types';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { ResourceAction } from './constants';
 

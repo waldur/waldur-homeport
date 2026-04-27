@@ -1,15 +1,15 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { OrganizationExpandableRow } from './OrganizationExpandableRow';
 

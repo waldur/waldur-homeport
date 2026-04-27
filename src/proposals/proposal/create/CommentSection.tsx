@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 
-import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
-import { Proposal, ProposalReview } from '@waldur/proposals/types';
+import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
+import { Proposal, ProposalReview } from '@/proposals/types';
 
 import { AddCommentButton } from '../create-review/AddCommentButton';
 import { FieldReviewComments } from '../create-review/FieldReviewComments';

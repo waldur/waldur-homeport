@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import { Props as SelectProps } from 'react-select';
 import { BaseFieldProps, Field } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { AsyncPaginate } from '@/form/themed-select';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
 interface OrganizationAutocompleteProps extends FormField {
   name?: string;

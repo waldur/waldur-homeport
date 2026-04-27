@@ -2,10 +2,10 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
-import { FormGroup, TextField } from '@waldur/form';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { FormGroup, TextField } from '@/form';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
 
 import { orderProjectSelector } from '../selectors';
 import { FormStepProps } from '../types';

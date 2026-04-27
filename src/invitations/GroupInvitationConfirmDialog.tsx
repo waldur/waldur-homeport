@@ -2,10 +2,10 @@ import { useCallback, FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 import { userGroupInvitationsRetrieve } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { GroupInvitationButtons } from './GroupinvitationButtons';
 import { GroupInvitationErrorMessage } from './GroupInvitationErrorMessage';

@@ -2,10 +2,10 @@ import { ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { Select } from '@waldur/form/themed-select';
-import { getOptions } from '@waldur/form/TimeSelectField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { Select } from '@/form/themed-select';
+import { getOptions } from '@/form/TimeSelectField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 interface BusinessHoursGroupProps {
   startTime: string;

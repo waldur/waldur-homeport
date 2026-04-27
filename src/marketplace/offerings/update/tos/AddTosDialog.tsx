@@ -4,20 +4,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { marketplaceOfferingTermsOfServiceCreate } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import {
-  StringField,
-  SubmitButton,
-  SelectField,
-  NumberField,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { required } from '@/core/validators';
+import { StringField, SubmitButton, SelectField, NumberField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { FormGroup } from '../../FormGroup';
 

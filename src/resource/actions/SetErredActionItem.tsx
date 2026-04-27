@@ -3,13 +3,13 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceProviderResourcesSetAsErred } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { ResourceAction } from '@/marketplace/resources/actions/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getUser } from '@/workspace/selectors';
 
 import { formatResourceType } from '../utils';
 

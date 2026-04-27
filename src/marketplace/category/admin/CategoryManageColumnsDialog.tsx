@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { Category } from '@waldur/marketplace/types';
+import { Category } from '@/marketplace/types';
 
 import { useCategoryColumnsEditor } from '../utils';
 

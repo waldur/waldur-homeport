@@ -3,14 +3,14 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Col } from 'react-bootstrap';
 
-import { IconButton } from '@waldur/core/buttons/IconButton';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { EChart } from '@waldur/core/EChart';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
+import { IconButton } from '@/core/buttons/IconButton';
+import { UI_STALE_TIME } from '@/core/constants';
+import { EChart } from '@/core/EChart';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
 import { Chart } from './types';
 import { WidgetCard } from './WidgetCard';

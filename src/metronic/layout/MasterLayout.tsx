@@ -1,7 +1,7 @@
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
 import { useEffect } from 'react';
 
-import { PermissionLayout } from '@waldur/auth/PermissionLayout';
+import { PermissionLayout } from '@/auth/PermissionLayout';
 
 import { MenuComponent } from '../components';
 

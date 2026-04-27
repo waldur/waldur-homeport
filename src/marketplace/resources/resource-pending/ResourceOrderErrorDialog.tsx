@@ -1,6 +1,6 @@
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
 
 export const ResourceOrderErrorDialog = ({ resolve }) => {
   return (

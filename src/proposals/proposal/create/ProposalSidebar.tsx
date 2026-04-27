@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 
-import { Panel } from '@waldur/core/Panel';
-import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
-import { FormSteps } from '@waldur/form/FormSteps';
-import { SidebarProps } from '@waldur/form/SidebarProps';
-import { TosNotification } from '@waldur/form/TosNotification';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { Panel } from '@/core/Panel';
+import { FloatingSubmitButton } from '@/form/FloatingSubmitButton';
+import { FormSteps } from '@/form/FormSteps';
+import { SidebarProps } from '@/form/SidebarProps';
+import { TosNotification } from '@/form/TosNotification';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 interface CompletionPageSidebarProps extends SidebarProps {
   saveAsDraft(): void;

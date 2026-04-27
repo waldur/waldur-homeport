@@ -1,6 +1,6 @@
 import { ComponentType } from 'react';
 
-import { Resource } from '@waldur/resource/types';
+import { Resource } from '@/resource/types';
 
 export interface ResourceSummaryProps<T extends Resource = any> {
   resource: T;

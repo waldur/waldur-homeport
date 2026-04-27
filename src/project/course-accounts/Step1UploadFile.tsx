@@ -2,10 +2,10 @@ import { FileCsvIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { translate } from '@waldur/i18n';
-import { TemplateUploaderField } from '@waldur/project/import/TemplateUploaderField';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import saveAsCsv from '@waldur/table/exporters/csv';
+import { translate } from '@/i18n';
+import { TemplateUploaderField } from '@/project/import/TemplateUploaderField';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import saveAsCsv from '@/table/exporters/csv';
 
 import templateFile from './course_accounts_template.json';
 

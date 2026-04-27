@@ -4,16 +4,16 @@ import { Col, Row } from 'react-bootstrap';
 import Select from 'react-select';
 import { projectsRetrieve } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
   projectAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+} from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { ReportingTitle } from '../ReportingTitle';
 

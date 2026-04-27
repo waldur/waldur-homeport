@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import FormTable from '@waldur/form/FormTable';
-import { SettingsDescription } from '@waldur/SettingsDescription';
+import FormTable from '@/form/FormTable';
+import { SettingsDescription } from '@/SettingsDescription';
 
 import { FieldRow } from './FieldRow';
 

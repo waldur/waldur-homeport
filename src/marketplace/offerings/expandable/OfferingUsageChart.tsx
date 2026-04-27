@@ -3,11 +3,11 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
-import { generateColors } from '@waldur/core/generateColors';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
-import { Offering } from '@waldur/marketplace/types';
+import { generateColors } from '@/core/generateColors';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ResourceUsageTabs } from '@/marketplace/resources/usage/ResourceUsageTabs';
+import { Offering } from '@/marketplace/types';
 
 import { getComponentUsageMonthlyList } from '../api';
 

@@ -9,13 +9,13 @@ import {
   FormContainer,
   FormFooter,
   TextField,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+} from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { OVERVIEW_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';

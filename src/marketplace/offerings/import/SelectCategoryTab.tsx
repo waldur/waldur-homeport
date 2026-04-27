@@ -5,15 +5,15 @@ import { useSelector } from 'react-redux';
 import { Field, FieldArray, WrappedFieldArrayProps } from 'redux-form';
 import { marketplaceCategoriesList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { required, requiredArray } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { Category, Offering } from '@waldur/marketplace/types';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { required, requiredArray } from '@/core/validators';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { Category, Offering } from '@/marketplace/types';
 
 import { importOfferingSelector } from './selectors';
 

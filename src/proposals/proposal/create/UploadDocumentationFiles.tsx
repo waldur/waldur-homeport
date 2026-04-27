@@ -6,10 +6,10 @@ import {
   ProposalDocumentation,
 } from 'waldur-js-client';
 
-import { ACCEPTED_FILE_TYPES } from '@waldur/core/constants';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ACCEPTED_FILE_TYPES } from '@/core/constants';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { DocumentationFiles } from './DocumentationFiles';
 

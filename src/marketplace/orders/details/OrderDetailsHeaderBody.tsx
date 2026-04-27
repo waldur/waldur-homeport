@@ -1,11 +1,11 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { Col, Row } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { Field } from '@waldur/resource/summary';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { ResourceLink } from '@/resource/ResourceLink';
+import { Field } from '@/resource/summary';
 
 import { OrderDetailsQuickBody } from './OrderDetailsQuickBody';
 

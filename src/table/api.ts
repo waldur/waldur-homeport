@@ -1,9 +1,9 @@
 import { RequestResult } from 'waldur-js-client';
 
-import { fetchResultCount, parseNextPage } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { queryClient } from '@waldur/core/queryClient';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
+import { fetchResultCount, parseNextPage } from '@/core/api';
+import { ENV } from '@/core/config';
+import { queryClient } from '@/core/queryClient';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 
 import { Fetcher, FetcherOptions, TableRequest } from './types';
 

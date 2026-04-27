@@ -2,7 +2,7 @@ import React from 'react';
 import { Col, Form } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
+import { required } from '@/core/validators';
 
 import { FieldProps } from '../types';
 

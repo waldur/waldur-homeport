@@ -3,10 +3,10 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { Field, change } from 'redux-form';
 
-import { FormContainer } from '@waldur/form/FormContainer';
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
+import { FormContainer } from '@/form/FormContainer';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
 
 import { SINGLE_OFFERING_IMPORT_FORM_ID } from './constants';
 import { validateOfferingExportFile, ValidationResult } from './fileValidation';

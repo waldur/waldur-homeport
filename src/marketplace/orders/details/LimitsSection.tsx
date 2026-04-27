@@ -2,11 +2,11 @@ import { isEmpty } from 'lodash-es';
 import { Card } from 'react-bootstrap';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Limits } from '@waldur/marketplace/common/types';
-import { OrderFieldEditButton } from '@waldur/marketplace/orders/details/OrderFieldEditButton';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { translate } from '@/i18n';
+import { Limits } from '@/marketplace/common/types';
+import { OrderFieldEditButton } from '@/marketplace/orders/details/OrderFieldEditButton';
+import { OfferingComponent } from '@/marketplace/types';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { useOrderEditable } from './hooks';
 

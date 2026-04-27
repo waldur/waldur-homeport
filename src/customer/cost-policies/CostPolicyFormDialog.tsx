@@ -1,10 +1,10 @@
 import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { CostPolicyForm } from './CostPolicyForm';
 import { CostPolicyFormData, CostPolicyType } from './types';

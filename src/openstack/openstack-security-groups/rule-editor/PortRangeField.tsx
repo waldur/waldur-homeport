@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { Field } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { FormField } from './FormField';
 import { Rule } from './types';

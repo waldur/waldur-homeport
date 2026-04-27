@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
 
 interface DueDateBadgeProps {
   dueDate: string;

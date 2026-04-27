@@ -7,9 +7,9 @@ import {
   MarketplaceProjectEstimatedCostPoliciesCreateData,
 } from 'waldur-js-client';
 
-import { AddButton } from '@waldur/core/AddButton';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
+import { AddButton } from '@/core/AddButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
 
 import { CostPolicyFormData, CostPolicyType } from './types';
 

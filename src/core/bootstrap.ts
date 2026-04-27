@@ -1,7 +1,7 @@
 import { configurationRetrieve } from 'waldur-js-client';
 
-import { afterBootstrap } from '@waldur/afterBootstrap';
-import { ENV } from '@waldur/core/config';
+import { afterBootstrap } from '@/afterBootstrap';
+import { ENV } from '@/core/config';
 
 import { initApiClient } from './api';
 

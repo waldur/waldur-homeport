@@ -2,9 +2,9 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { IconButton } from '@waldur/core/buttons/IconButton';
-import { translate } from '@waldur/i18n';
-import Pagination from '@waldur/table/Pagination';
+import { IconButton } from '@/core/buttons/IconButton';
+import { translate } from '@/i18n';
+import Pagination from '@/table/Pagination';
 
 import { PAGE_SIZE_COMPACT } from './constants';
 import { TablePageSize } from './TablePageSize';

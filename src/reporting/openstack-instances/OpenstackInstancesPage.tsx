@@ -2,9 +2,9 @@ import { FC, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { selectMarketplaceStatsOpenstackInstancesFilter } from '@waldur/table/generated/MarketplaceStatsOpenstackInstancesFilter';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { selectMarketplaceStatsOpenstackInstancesFilter } from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 
 import { ReportingTitle } from '../ReportingTitle';
 

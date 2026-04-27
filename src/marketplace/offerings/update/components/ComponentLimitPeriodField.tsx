@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export interface LimitPeriodOption {
   value: string;

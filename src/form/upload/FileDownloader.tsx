@@ -1,10 +1,10 @@
 import { FileArrowDownIcon } from '@phosphor-icons/react';
 import { useState } from 'react';
 
-import { get } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useNotify } from '@waldur/store/hooks';
+import { get } from '@/core/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useNotify } from '@/store/hooks';
 
 export const FileDownloader = ({ url, name, size = 20 }) => {
   const { showErrorResponse } = useNotify();

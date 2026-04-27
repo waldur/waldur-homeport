@@ -7,7 +7,7 @@ import {
 } from '@uirouter/react';
 import { describe, expect, it } from 'vitest';
 
-import { TermsOfService } from '@waldur/user/support/TermsOfService';
+import { TermsOfService } from '@/user/support/TermsOfService';
 
 const renderComponent = (props?) => {
   const router = new UIRouterReact();

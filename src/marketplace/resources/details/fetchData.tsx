@@ -5,26 +5,23 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
+import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
 import {
   MarketplaceFeatures,
   OpenstackFeatures,
   SlurmFeatures,
-} from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { hasSupport } from '@waldur/issues/hooks';
-import {
-  countLexisLinks,
-  countRobotAccounts,
-} from '@waldur/marketplace/common/api';
-import { PageBarTab } from '@waldur/navigation/types';
-import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
-import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
-import { getTabs } from '@waldur/resource/tabs/registry';
-import { getResourceAccessEndpoints } from '@waldur/resource/utils';
-import { SLURM_PLUGIN } from '@waldur/slurm/constants';
+} from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { hasSupport } from '@/issues/hooks';
+import { countLexisLinks, countRobotAccounts } from '@/marketplace/common/api';
+import { PageBarTab } from '@/navigation/types';
+import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
+import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
+import { getTabs } from '@/resource/tabs/registry';
+import { getResourceAccessEndpoints } from '@/resource/utils';
+import { SLURM_PLUGIN } from '@/slurm/constants';
 
 export const getResourceTabs = ({
   resource,
@@ -101,7 +98,7 @@ export const getResourceTabs = ({
       key: 'allocation-users',
       title: translate('Allocation users'),
       component: lazyComponent(() =>
-        import('@waldur/slurm/details/AllocationUsersTable').then((module) => ({
+        import('@/slurm/details/AllocationUsersTable').then((module) => ({
           default: module.AllocationUsersTable,
         })),
       ),
@@ -112,11 +109,9 @@ export const getResourceTabs = ({
         key: 'jobs',
         title: translate('Jobs'),
         component: lazyComponent(() =>
-          import('@waldur/slurm/details/AllocationJobsTable').then(
-            (module) => ({
-              default: module.AllocationJobsTable,
-            }),
-          ),
+          import('@/slurm/details/AllocationJobsTable').then((module) => ({
+            default: module.AllocationJobsTable,
+          })),
         ),
       });
     }
@@ -125,7 +120,7 @@ export const getResourceTabs = ({
       key: 'dashboard',
       title: translate('Dashboard'),
       component: lazyComponent(() =>
-        import('@waldur/rancher/cluster/dashboard/ClusterDashboard').then(
+        import('@/rancher/cluster/dashboard/ClusterDashboard').then(
           (module) => ({
             default: module.ClusterDashboard,
           }),
@@ -137,7 +132,7 @@ export const getResourceTabs = ({
         key: 'security_groups',
         title: translate('Security groups'),
         component: lazyComponent(() =>
-          import('@waldur/rancher/cluster/ClusterSecurityGroupsList').then(
+          import('@/rancher/cluster/ClusterSecurityGroupsList').then(
             (module) => ({
               default: module.ClusterSecurityGroupsList,
             }),
@@ -168,7 +163,7 @@ export const getResourceTabs = ({
       key: 'robot-accounts',
       title: translate('Robot accounts'),
       component: lazyComponent(() =>
-        import('@waldur/marketplace/robot-accounts/RobotAccountCard').then(
+        import('@/marketplace/robot-accounts/RobotAccountCard').then(
           (module) => ({ default: module.RobotAccountCard }),
         ),
       ),
@@ -204,7 +199,7 @@ export const getResourceTabs = ({
       title: translate('Roles'),
       component: keycloakEnabled
         ? lazyComponent(() =>
-            import('@waldur/marketplace/offerings/keycloak/OfferingKeycloakMembershipList').then(
+            import('@/marketplace/offerings/keycloak/OfferingKeycloakMembershipList').then(
               (module) => ({
                 default: module.OfferingKeycloakMembershipList,
               }),
@@ -256,7 +251,7 @@ export const getResourceTabs = ({
           key: 'order-history',
           title: translate('Order history'),
           component: lazyComponent(() =>
-            import('@waldur/marketplace/orders/list/ResourceOrders').then(
+            import('@/marketplace/orders/list/ResourceOrders').then(
               (module) => ({
                 default: module.ResourceOrders,
               }),
@@ -276,7 +271,7 @@ export const getResourceTabs = ({
       key: 'replications',
       title: translate('Replications'),
       component: lazyComponent(() =>
-        import('@waldur/openstack/openstack-tenant/TenantMigrationsList').then(
+        import('@/openstack/openstack-tenant/TenantMigrationsList').then(
           (module) => ({ default: module.TenantMigrationsList }),
         ),
       ),
@@ -287,7 +282,7 @@ export const getResourceTabs = ({
       key: 'longhorn',
       title: translate('Longhorn'),
       component: lazyComponent(() =>
-        import('@waldur/rancher/cluster/ClusterLonghornTab').then((module) => ({
+        import('@/rancher/cluster/ClusterLonghornTab').then((module) => ({
           default: module.ClusterLonghornTab,
         })),
       ),

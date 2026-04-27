@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { required } from '@waldur/core/validators';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { moveToProjectAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { required } from '@/core/validators';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { moveToProjectAutocomplete } from '@/marketplace/common/autocompletes';
 
 interface MoveToProjectAutocompleteProps {
   isDisabled: boolean;

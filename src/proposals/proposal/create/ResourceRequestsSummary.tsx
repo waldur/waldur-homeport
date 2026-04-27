@@ -1,16 +1,12 @@
 import { proposalProposalsResourcesList } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { translate } from '@waldur/i18n';
-import {
-  Proposal,
-  ProposalResource,
-  ProposalReview,
-} from '@waldur/proposals/types';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { AccordionCard } from '@/core/AccordionCard';
+import { translate } from '@/i18n';
+import { Proposal, ProposalResource, ProposalReview } from '@/proposals/types';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { FieldReviewComments } from '../create-review/FieldReviewComments';
 

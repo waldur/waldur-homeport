@@ -3,15 +3,15 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useMemo } from 'react';
 import { proposalProtectedCallsRetrieve } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { InvalidRoutePage } from '@waldur/error/InvalidRoutePage';
-import { translate } from '@waldur/i18n';
-import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
-import { PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { RoleEnum } from '@waldur/permissions/enums';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { InvalidRoutePage } from '@/error/InvalidRoutePage';
+import { translate } from '@/i18n';
+import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { useTitle } from '@/navigation/title';
+import { PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { RoleEnum } from '@/permissions/enums';
 
 import { CallTabs } from '../details/CallTabs';
 import { TeamSection } from '../team/TeamSection';

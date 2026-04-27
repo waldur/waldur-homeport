@@ -2,9 +2,9 @@ import { PlusIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { FieldArrayFieldsProps } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { EthernetType } from '@waldur/openstack/types';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { translate } from '@/i18n';
+import { EthernetType } from '@/openstack/types';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { Rule } from './types';
 

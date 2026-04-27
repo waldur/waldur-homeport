@@ -1,10 +1,10 @@
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
+} from '@/marketplace/deploy/steps/constants';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
 import { FormAdvancedOptionsStep } from './FormAdvancedOptionsStep';
 import { FormMemoryStep } from './FormMemoryStep';

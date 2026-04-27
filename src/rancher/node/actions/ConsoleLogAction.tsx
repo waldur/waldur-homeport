@@ -1,8 +1,8 @@
 import { rancherNodesConsoleLogRetrieve } from 'waldur-js-client';
 
-import { validateState } from '@waldur/resource/actions/base';
-import { OpenConsoleLogActionItem } from '@waldur/resource/actions/OpenConsoleLogActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { validateState } from '@/resource/actions/base';
+import { OpenConsoleLogActionItem } from '@/resource/actions/OpenConsoleLogActionItem';
+import { ActionItemType } from '@/resource/actions/types';
 
 const validators = [validateState('OK')];
 

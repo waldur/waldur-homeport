@@ -1,14 +1,14 @@
 import { useSelector } from 'react-redux';
 import { customerQuotasList } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   CustomerQuotasFilter,
   selectCustomerQuotasFilter,
-} from '@waldur/table/generated/CustomerQuotasFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/CustomerQuotasFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { ReportingTitle } from '../ReportingTitle';
 

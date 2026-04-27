@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { MaintenanceList } from '@waldur/maintenance/MaintenanceList';
+import { MaintenanceList } from '@/maintenance/MaintenanceList';
 
 export const ProviderMaintenanceList: FC<{ provider }> = ({ provider }) => {
   if (!provider) return null;

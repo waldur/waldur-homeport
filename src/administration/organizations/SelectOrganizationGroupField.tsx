@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Field } from 'react-final-form';
 import { OrganizationGroup } from 'waldur-js-client';
 
-import { organizationGroupAutocomplete } from '@waldur/customer/list/autcompletes';
-import { AsyncPaginate } from '@waldur/form/themed-select';
+import { organizationGroupAutocomplete } from '@/customer/list/autcompletes';
+import { AsyncPaginate } from '@/form/themed-select';
 
 import {
   commonAsyncPaginateProps,

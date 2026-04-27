@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
+import { Badge } from '@/core/Badge';
 
 import { Quota } from './types';
 import { formatQuota } from './utils';

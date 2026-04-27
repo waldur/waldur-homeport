@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { translate } from '@/i18n';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { ChangeEndDateAction } from './ChangeEndDateAction';
 import { DeleteAction } from './DeleteAction';

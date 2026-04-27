@@ -2,13 +2,13 @@ import { FC, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { OrdersContent } from '@waldur/reporting/orders/OrdersContent';
-import { OrdersFilter } from '@waldur/reporting/orders/OrdersFilter';
-import { useOrdersStats } from '@waldur/reporting/orders/useOrdersStats';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { OrdersContent } from '@/reporting/orders/OrdersContent';
+import { OrdersFilter } from '@/reporting/orders/OrdersFilter';
+import { useOrdersStats } from '@/reporting/orders/useOrdersStats';
 
 import { ReportingTitle } from '../ReportingTitle';
 

@@ -5,13 +5,13 @@ import { AdminAnnouncement } from 'waldur-js-client';
 import {
   ANNOUNCEMENT_ICON,
   getAnnouncementTypeLabel,
-} from '@waldur/administration/utils';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/administration/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const AnnouncementDetailsDialog: FC<{
   resolve: {

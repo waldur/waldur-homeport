@@ -5,16 +5,16 @@ import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { openstackVolumesRetype, OpenStackVolumeType } from 'waldur-js-client';
 import { OpenStackVolume } from 'waldur-js-client';
 
-import { useModal } from '@waldur/modal/hooks';
-import * as api from '@waldur/openstack/api';
-import { useNotify } from '@waldur/store/hooks';
+import { useModal } from '@/modal/hooks';
+import * as api from '@/openstack/api';
+import { useNotify } from '@/store/hooks';
 
 import { RetypeDialog } from './RetypeDialog';
 
 vi.mock('waldur-js-client');
-vi.mock('@waldur/openstack/api');
-vi.mock('@waldur/store/hooks');
-vi.mock('@waldur/modal/hooks');
+vi.mock('@/openstack/api');
+vi.mock('@/store/hooks');
+vi.mock('@/modal/hooks');
 
 const apiMock = vi.mocked(api);
 

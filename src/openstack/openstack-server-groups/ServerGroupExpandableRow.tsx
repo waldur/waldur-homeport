@@ -4,11 +4,11 @@ import {
   OpenStackServerGroup,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface ServerGroupExpandableRowProps {
   row: OpenStackServerGroup;

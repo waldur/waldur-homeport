@@ -2,20 +2,20 @@ import { FC, ReactNode, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { invoicesItemsRetrieve } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getUUID } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { ResourceLink } from '@waldur/resource/ResourceLink';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { getUUID } from '@/core/utils';
+import { translate } from '@/i18n';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { ResourceLink } from '@/resource/ResourceLink';
+import { createFetcher } from '@/table/api';
 import {
   InvoicesItemsFilter,
   selectInvoicesItemsFilter,
-} from '@waldur/table/generated/InvoicesItemsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+} from '@/table/generated/InvoicesItemsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 import { Invoice, InvoiceTableItem } from '../types';
 import { formatPeriod } from '../utils';

@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { TableTab } from '@waldur/table/types';
+import { translate } from '@/i18n';
+import { TableTab } from '@/table/types';
 
 export const useReviewerPoolTabs = (): TableTab[] => {
   return useMemo(

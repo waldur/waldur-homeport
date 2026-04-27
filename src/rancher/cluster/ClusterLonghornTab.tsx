@@ -1,8 +1,8 @@
 import { Card } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { DangerActionPanel } from '@waldur/user/support/DangerActionPanel';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { DangerActionPanel } from '@/user/support/DangerActionPanel';
 
 export const ClusterLonghornTab = ({ resource }) =>
   !resource.attributes.install_longhorn ? (

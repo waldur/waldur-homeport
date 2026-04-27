@@ -1,18 +1,18 @@
 import { UIView } from '@uirouter/react';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { isFeatureVisible } from '@waldur/features/connect';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { isFeatureVisible } from '@/features/connect';
 import {
   CustomerFeatures,
   InvitationsFeatures,
   MarketplaceFeatures,
-} from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
-import { hasSupport } from '@waldur/issues/hooks';
-import { PermissionEnum } from '@waldur/permissions/enums';
+} from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { getActivePaymentProfile } from '@/invoices/details/utils';
+import { hasSupport } from '@/issues/hooks';
+import { PermissionEnum } from '@/permissions/enums';
 import {
   getCustomer,
   isOwnerOrStaff,
@@ -20,7 +20,7 @@ import {
   isStaffOrSupport,
   isOwner,
   hasNonProjectPermissions,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { userHasCustomerPermission } from './utils';
 import { fetchCustomer } from './workspace/fetchCustomer';
@@ -54,7 +54,7 @@ export const states: StateDeclaration[] = [
     },
     parent: 'layout',
     component: lazyComponent(() =>
-      import('@waldur/organization/OrganizationUIView').then((module) => ({
+      import('@/organization/OrganizationUIView').then((module) => ({
         default: module.OrganizationUIView,
       })),
     ),
@@ -176,7 +176,7 @@ export const states: StateDeclaration[] = [
     name: 'organization.projects',
     url: 'projects/',
     component: lazyComponent(() =>
-      import('@waldur/project/ProjectsList').then((module) => ({
+      import('@/project/ProjectsList').then((module) => ({
         default: module.ProjectsList,
       })),
     ),

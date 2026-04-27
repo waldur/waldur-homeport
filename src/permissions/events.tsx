@@ -1,13 +1,13 @@
-import { Link } from '@waldur/core/Link';
-import { EventGroup } from '@waldur/events/types';
+import { Link } from '@/core/Link';
+import { EventGroup } from '@/events/types';
 import {
   AffectedUserContext,
   getAffectedUserContext,
   getUserContext,
   UserContext,
-} from '@waldur/events/utils';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { RolePopover } from '@waldur/user/affiliations/RolePopover';
+} from '@/events/utils';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { RolePopover } from '@/user/affiliations/RolePopover';
 
 import { PermissionsEnum } from '../EventsEnums';
 

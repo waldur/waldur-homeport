@@ -3,12 +3,12 @@ import { Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import type { ArrowBillingSync, ArrowBillingSyncItem } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ActionButton } from '@/table/ActionButton';
 
 import { useArrowBillingSyncItems } from '../api';
 

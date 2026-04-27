@@ -7,10 +7,10 @@ import {
   marketplaceProviderOfferingsTosStatsRetrieve,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 import { TosAcceptedTrendChart } from './TosAcceptedTrendChart';
 import { TosConsentStatusChart } from './TosConsentStatusChart';

@@ -1,7 +1,7 @@
 import { formValues } from 'redux-form';
 
-import { FormField } from '@waldur/form/types';
-import { getDefaultAllocationPool } from '@waldur/openstack/openstack-network/utils';
+import { FormField } from '@/form/types';
+import { getDefaultAllocationPool } from '@/openstack/openstack-network/utils';
 
 const enhance = formValues<any, any, FormField>('attributes.subnet_cidr');
 

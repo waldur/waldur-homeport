@@ -2,8 +2,8 @@ import classNames from 'classnames';
 import { FC, ReactNode } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { RadialBg } from '@/navigation/header/search/RadialBg';
 
 interface ModalDialogProps {
   title?: ReactNode;

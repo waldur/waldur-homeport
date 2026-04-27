@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { selectRancherClusterFilter } from '@waldur/table/generated/RancherClusterFilter';
+import { selectRancherClusterFilter } from '@/table/generated/RancherClusterFilter';
 
 export const useClusterFilter = (cluster) => {
   const filterValues = useSelector(selectRancherClusterFilter);

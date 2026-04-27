@@ -1,18 +1,18 @@
 import { useCallback, useMemo } from 'react';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { formatFilesize } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
-import { DeployFormData } from '@waldur/marketplace/common/types';
-import { Offering } from '@waldur/marketplace/types';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
-import { QuotaUsageBarChart } from '@waldur/quotas/QuotaUsageBarChart';
-import { createFetcher } from '@waldur/table/api';
-import { PAGE_SIZE_FULL } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { UI_STALE_TIME } from '@/core/constants';
+import { formatFilesize } from '@/core/utils';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
+import { DeployFormData } from '@/marketplace/common/types';
+import { Offering } from '@/marketplace/types';
+import { TENANT_TYPE } from '@/openstack/constants';
+import { QuotaUsageBarChart } from '@/quotas/QuotaUsageBarChart';
+import { createFetcher } from '@/table/api';
+import { PAGE_SIZE_FULL } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { flavorValidator } from '../utils';
 

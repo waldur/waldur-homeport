@@ -1,8 +1,8 @@
 import { FC, useCallback } from 'react';
 
-import { AddButton } from '@waldur/core/AddButton';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { useModal } from '@waldur/modal/hooks';
+import { AddButton } from '@/core/AddButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { useModal } from '@/modal/hooks';
 
 import { CHECKLIST_FORM_ID } from './constants';
 

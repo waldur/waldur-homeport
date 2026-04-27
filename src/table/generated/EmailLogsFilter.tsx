@@ -5,11 +5,11 @@ import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import { EmailLogsListData } from 'waldur-js-client';
 
-import { StringField } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { StringField } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { RootState } from '@/store/reducers';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureEmailLogsFilter: FunctionComponent<{}> = () => (
   <>

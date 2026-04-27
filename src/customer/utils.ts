@@ -4,11 +4,11 @@ import {
   Options,
 } from 'waldur-js-client';
 
-import { hasPermission } from '@waldur/permissions/hasPermission';
+import { hasPermission } from '@/permissions/hasPermission';
 import {
   getCustomer as getCustomerSelector,
   getUser,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 export const userHasCustomerPermission = (permission) => (state) => {
   const user = getUser(state);

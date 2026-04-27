@@ -3,7 +3,7 @@ import { OrderCreateRequest } from 'waldur-js-client';
 import {
   getFormLimitSerializer,
   getFormSerializer,
-} from '@waldur/marketplace/common/registry';
+} from '@/marketplace/common/registry';
 
 import { OrderSummaryProps } from './types';
 

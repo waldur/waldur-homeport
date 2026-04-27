@@ -1,12 +1,12 @@
 import { FC, useEffect } from 'react';
 import { Card, Form } from 'react-bootstrap';
 
-import { required } from '@waldur/core/validators';
-import { FormContainer } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { OfferingsAutocompleteCommonFields } from '@waldur/marketplace/common/autocompletes';
-import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
+import { required } from '@/core/validators';
+import { FormContainer } from '@/form';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { OfferingsAutocompleteCommonFields } from '@/marketplace/common/autocompletes';
+import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 
 export const Step2SelectOffering: FC<WizardFormStepProps> = (props) => {
   return (

@@ -1,10 +1,10 @@
 import { BookOpenTextIcon } from '@phosphor-icons/react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionButton } from '@/table/ActionButton';
 
 const FilteredEventsDialog = lazyComponent(() =>
   import('./FilteredEventsDialog').then((module) => ({

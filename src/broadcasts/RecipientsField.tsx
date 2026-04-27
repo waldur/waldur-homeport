@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { BroadcastMessage } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Field } from '@waldur/resource/summary';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { Field } from '@/resource/summary';
 
 import { RecipientsListDialog } from './RecipientsListDialog';
 

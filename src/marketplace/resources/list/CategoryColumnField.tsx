@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { CategoryColumn } from '@waldur/marketplace/types';
-import { validateIP } from '@waldur/marketplace/utils';
-import { IPList } from '@waldur/resource/IPList';
-import { BooleanField } from '@waldur/table/BooleanField';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { CategoryColumn } from '@/marketplace/types';
+import { validateIP } from '@/marketplace/utils';
+import { IPList } from '@/resource/IPList';
+import { BooleanField } from '@/table/BooleanField';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface CategoryColumnFieldProps {
   row: Resource;

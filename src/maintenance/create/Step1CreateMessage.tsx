@@ -7,16 +7,16 @@ import {
   maintenanceAnnouncementTemplateOfferingsList,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { required, url } from '@waldur/core/validators';
-import { SelectField, StringField, TextField } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { TimeField } from '@waldur/form/TimeField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { required, url } from '@/core/validators';
+import { SelectField, StringField, TextField } from '@/form';
+import { DateField } from '@/form/DateField';
+import { TimeField } from '@/form/TimeField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { MaintenanceForm } from '../types';
 import { getMaintenanceOfferingFormFields } from '../utils';

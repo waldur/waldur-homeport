@@ -5,10 +5,10 @@ import { uniqueId } from 'lodash-es';
 import { PropsWithChildren, forwardRef } from 'react';
 import { Breadcrumb, BreadcrumbItemProps } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { TruncatedText } from '@waldur/core/TruncatedText';
-import { truncate as truncateText } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { Tip } from '@/core/Tooltip';
+import { TruncatedText } from '@/core/TruncatedText';
+import { truncate as truncateText } from '@/core/utils';
+import { translate } from '@/i18n';
 
 interface OwnProps extends BreadcrumbItemProps {
   ellipsis?: 'md' | 'xl' | 'xxl';

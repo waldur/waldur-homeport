@@ -1,5 +1,5 @@
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { translate } from '@waldur/i18n';
+import { formatUsageValue } from '@/core/formatNumber';
+import { translate } from '@/i18n';
 
 import { getUsagePercentOfLimitComponent } from './QuotaCell';
 import { QuotaProgressBar } from './QuotaProgressBar';

@@ -5,19 +5,19 @@ import {
   projectsListUsersList,
 } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { renderRoleExpirationDate } from '@waldur/customer/team/TeamTableComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
-import { UserDetailsButton } from '@waldur/user/UserDetailsButton';
-import { Customer } from '@waldur/workspace/types';
+import Avatar from '@/core/Avatar';
+import { renderRoleExpirationDate } from '@/customer/team/TeamTableComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { RoleField } from '@/user/affiliations/RoleField';
+import { UserDetailsButton } from '@/user/UserDetailsButton';
+import { Customer } from '@/workspace/types';
 
 const organizationUserMandatoryFields = [
   'uuid',

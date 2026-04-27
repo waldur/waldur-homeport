@@ -1,6 +1,6 @@
-import { Link } from '@waldur/core/Link';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { useUser } from '@waldur/workspace/hooks';
+import { Link } from '@/core/Link';
+import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 export const UserDetailsLink = ({ uuid, name }) => {
   const currentUser = useUser();

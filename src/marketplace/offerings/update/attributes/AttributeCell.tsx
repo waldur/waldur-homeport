@@ -1,8 +1,8 @@
 import { Field } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { FieldError } from '@waldur/form';
-import { InputField } from '@waldur/form/InputField';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { FieldError } from '@/form';
+import { InputField } from '@/form/InputField';
 
 import { configAttrField } from './utils';
 

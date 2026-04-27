@@ -3,10 +3,10 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { change } from 'redux-form';
 
-import { formatDate, formatISODate } from '@waldur/core/dateUtils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { orderProjectSelector } from '@waldur/marketplace/deploy/selectors';
+import { formatDate, formatISODate } from '@/core/dateUtils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { orderProjectSelector } from '@/marketplace/deploy/selectors';
 
 import { ORDER_FORM_ID } from '../constants';
 

@@ -6,9 +6,9 @@ import {
   slurmAllocationUserUsageList,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { palette } from '@waldur/slurm/details/constants';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { translate } from '@/i18n';
+import { palette } from '@/slurm/details/constants';
 
 import { Period, Usage } from './types';
 

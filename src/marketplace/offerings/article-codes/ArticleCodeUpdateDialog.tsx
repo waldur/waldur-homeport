@@ -1,8 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
-import { Wizard } from '@waldur/wizard';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
+import { Wizard } from '@/wizard';
 
 import { FindReplaceStep } from './FindReplaceStep';
 import { PreviewApplyStep } from './PreviewApplyStep';

@@ -1,8 +1,8 @@
 import { FC, useCallback, useMemo } from 'react';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { DonutChart } from '@waldur/reporting/users/charts/DonutChart';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { DonutChart } from '@/reporting/users/charts/DonutChart';
 
 import { ORDER_TYPES, TYPE_COLORS } from './types';
 

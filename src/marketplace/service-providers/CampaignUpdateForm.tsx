@@ -1,7 +1,7 @@
 import { reduxForm } from 'redux-form';
 
-import { CAMPAIGN_FORM_ID } from '@waldur/marketplace/service-providers/constants';
-import { CampaignFormData } from '@waldur/marketplace/service-providers/types';
+import { CAMPAIGN_FORM_ID } from '@/marketplace/service-providers/constants';
+import { CampaignFormData } from '@/marketplace/service-providers/types';
 
 import { CampaignForm } from './CampaignForm';
 

@@ -14,14 +14,14 @@ import {
   groupThreadsByDate,
   THREAD_LIST_QUERY_KEY,
   useThreadList,
-} from '@waldur/ai-assistant/lib/thread/useThreadList';
-import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
-import { MediumIconButton } from '@waldur/core/buttons/IconButton';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SidebarToggleGraphic } from '@waldur/core/SidebarToggleGraphic';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+} from '@/ai-assistant/lib/thread/useThreadList';
+import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { MediumIconButton } from '@/core/buttons/IconButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
+import { FilterBox } from '@/form/FilterBox';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 interface ThreadItemMenuProps {
   threadId: string;

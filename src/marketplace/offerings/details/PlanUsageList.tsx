@@ -3,8 +3,8 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { PlanUsageResponse } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface OwnProps {
   plansUsage: PlanUsageResponse[];

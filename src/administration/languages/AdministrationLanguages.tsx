@@ -2,16 +2,16 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { CountryFlagIcon } from '@waldur/core/CountryFlagIcon';
-import { Panel } from '@waldur/core/Panel';
-import { SaveButton } from '@waldur/core/SaveButton';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
-import { LanguageCountry } from '@waldur/navigation/header/LanguageSelectorDropdown';
-import { useNotify } from '@waldur/store/hooks';
-import { TableQuery } from '@waldur/table/TableQuery';
+import { ENV } from '@/core/config';
+import { CountryFlagIcon } from '@/core/CountryFlagIcon';
+import { Panel } from '@/core/Panel';
+import { SaveButton } from '@/core/SaveButton';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { useLanguageSelector } from '@/i18n/useLanguageSelector';
+import { LanguageCountry } from '@/navigation/header/LanguageSelectorDropdown';
+import { useNotify } from '@/store/hooks';
+import { TableQuery } from '@/table/TableQuery';
 
 export const AdministrationLanguages: FunctionComponent = () => {
   const [query, setQuery] = useState('');

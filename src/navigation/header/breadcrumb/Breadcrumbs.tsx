@@ -2,10 +2,10 @@ import { useContext, useMemo } from 'react';
 import { Breadcrumb } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { useLayout } from '@waldur/metronic/layout/core';
-import { LayoutContext } from '@waldur/navigation/context';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { useLayout } from '@/metronic/layout/core';
+import { LayoutContext } from '@/navigation/context';
+import { IBreadcrumbItem } from '@/navigation/types';
 
 import { BreadcrumbItem } from './BreadcrumbItem';
 import { DropdownBreadcrumbItem } from './DropdownBreadcrumbItem';

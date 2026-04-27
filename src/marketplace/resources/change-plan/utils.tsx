@@ -9,16 +9,13 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import {
-  SelectDialogFieldColumn,
-  SelectDialogFieldChoice,
-} from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { filterOfferingComponents } from '@waldur/marketplace/common/registry';
-import { getBillingPeriods } from '@waldur/marketplace/common/utils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { SelectDialogFieldColumn, SelectDialogFieldChoice } from '@/form/types';
+import { translate } from '@/i18n';
+import { filterOfferingComponents } from '@/marketplace/common/registry';
+import { getBillingPeriods } from '@/marketplace/common/utils';
 
 export interface FetchedData {
   resource: Resource;

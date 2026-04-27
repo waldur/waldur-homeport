@@ -1,10 +1,10 @@
 import { FunctionComponent, useMemo, useState } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { useVersionHistory } from './api';
 import { VersionHistoryDialogProps } from './types';

@@ -1,6 +1,6 @@
 import { FormLabel, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface GroupByButton {
   value: string;

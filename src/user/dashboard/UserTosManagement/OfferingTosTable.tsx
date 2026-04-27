@@ -2,15 +2,15 @@ import { FC, memo, useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { TosViewDialog } from '@waldur/marketplace/offerings/update/tos/shared/TosViewDialog';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDate } from '@/core/dateUtils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { TosViewDialog } from '@/marketplace/offerings/update/tos/shared/TosViewDialog';
+import { openModalDialog } from '@/modal/actions';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { RevokeTosAction } from './RevokeTosAction';
 import { ViewTosAction } from './ViewTosAction';

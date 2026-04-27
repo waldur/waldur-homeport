@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { PaymentsPanel } from '@waldur/customer/payments/PaymentsPanel';
+import { PaymentsPanel } from '@/customer/payments/PaymentsPanel';
 
 export const CustomerPayments: FunctionComponent = () => {
   return <PaymentsPanel />;

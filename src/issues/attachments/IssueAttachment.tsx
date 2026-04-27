@@ -1,6 +1,6 @@
 import { FunctionComponent, useContext } from 'react';
 
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
 
 import { useDeleteAttachment } from './api';
 import { IssueAttachmentsContext } from './IssueAttachmentsContext';

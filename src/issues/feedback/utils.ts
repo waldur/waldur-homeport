@@ -1,4 +1,4 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const feedbackOptions = () => [
   { value: 10, label: translate('10 - Very positive') },

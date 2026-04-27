@@ -6,15 +6,15 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
-import { IssueLinkRenderer } from '@waldur/marketplace/orders/list/IssueLinkRenderer';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
+import { IssueLinkRenderer } from '@/marketplace/orders/list/IssueLinkRenderer';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { ResourceOrderRowActions } from '../actions/ResourceOrdersRowActions';
 

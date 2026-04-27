@@ -2,7 +2,7 @@
  * Utility functions for storage size parsing and formatting,
  * or the special value "unlimited".
  */
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 const BYTES_PER_UNIT: Record<string, number> = {
   B: 1,

@@ -1,9 +1,9 @@
 import { Dropdown } from 'react-bootstrap';
 
-import { hidePlanAddButton } from '@waldur/marketplace/common/registry';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { TableDropdownToggle } from '@waldur/table/ActionsDropdown';
+import { hidePlanAddButton } from '@/marketplace/common/registry';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { TableDropdownToggle } from '@/table/ActionsDropdown';
 
 import { ArchivePlanButton } from './ArchivePlanButton';
 import { ClonePlanButton } from './ClonePlanButton';

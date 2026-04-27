@@ -1,6 +1,6 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { ResourceTabsConfiguration } from '@waldur/resource/tabs/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { ResourceTabsConfiguration } from '@/resource/tabs/types';
 
 const DisksList = lazyComponent(() =>
   import('./DisksList').then((module) => ({ default: module.DisksList })),

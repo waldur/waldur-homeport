@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { EditSchedulesButton } from '@waldur/booking/EditSchedulesButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
+import { EditSchedulesButton } from '@/booking/EditSchedulesButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 import {
   getProvisioningConfigForm,
   getProvisioningConfigSection,
-} from '@waldur/marketplace/common/registry';
-import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
+} from '@/marketplace/common/registry';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 
 import { GoogleCalendarActions } from './GoogleCalendarActions';
 import { RemoteActions } from './RemoteActions';

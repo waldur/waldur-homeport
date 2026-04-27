@@ -1,4 +1,4 @@
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { OfferingPermissionRemoveButton } from './OfferingPermissionRemoveButton';
 import { UpdateOfferingPermissionExpirationTimeButton } from './UpdateOfferingPermissionExpirationTimeButton';

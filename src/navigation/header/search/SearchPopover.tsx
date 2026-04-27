@@ -4,10 +4,10 @@ import { groupBy, isEmpty } from 'lodash-es';
 import { Fragment, useCallback } from 'react';
 import { Col, Nav, Row, Tab } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatPhoneNumber } from '@waldur/core/utils';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { formatPhoneNumber } from '@/core/utils';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 

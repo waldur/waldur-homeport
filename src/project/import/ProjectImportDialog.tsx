@@ -7,18 +7,14 @@ import {
   projectsCreate,
 } from 'waldur-js-client';
 
-import { formatISODate } from '@waldur/core/dateUtils';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { getCustomer } from '@waldur/customer/utils';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { formatOrderForCreate } from '@waldur/marketplace/details/utils';
-import { closeModalDialog } from '@waldur/modal/actions';
-import {
-  showError,
-  showErrorResponse,
-  showSuccess,
-} from '@waldur/store/notify';
+import { formatISODate } from '@/core/dateUtils';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { getCustomer } from '@/customer/utils';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { formatOrderForCreate } from '@/marketplace/details/utils';
+import { closeModalDialog } from '@/modal/actions';
+import { showError, showErrorResponse, showSuccess } from '@/store/notify';
 
 import { Step1ImportType } from './Step1ImportType';
 import { Step2SelectOffering } from './Step2SelectOffering';

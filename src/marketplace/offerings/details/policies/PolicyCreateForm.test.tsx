@@ -8,7 +8,7 @@ import configureMockStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { client } from 'waldur-js-client/client.gen';
 
-import { waitForSpinner } from '@waldur/core/test-utils';
+import { waitForSpinner } from '@/core/test-utils';
 
 import { PolicyCreateDialog } from './PolicyCreateDialog';
 
@@ -35,7 +35,7 @@ const fillAndSubmitCostForm = async () => {
   await userEvent.click(screen.getByRole('button', { name: 'Create' }));
 };
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     apiEndpoint: 'http://example.com',
     plugins: {
@@ -46,7 +46,7 @@ vi.mock('@waldur/core/config', () => ({
   },
 }));
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: vi.fn((str) => str),
 }));
 

@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import { BroadcastTemplateDeleteButton } from '@waldur/broadcasts/BroadcastTemplateDeleteButton';
-import { BroadcastTemplateUpdateButton } from '@waldur/broadcasts/BroadcastTemplateUpdateButton';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { BroadcastTemplateDeleteButton } from '@/broadcasts/BroadcastTemplateDeleteButton';
+import { BroadcastTemplateUpdateButton } from '@/broadcasts/BroadcastTemplateUpdateButton';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 export const BroadcastTemplateActions = ({ row, refetch }) => {
   const isStaff = useSelector(isStaffSelector);

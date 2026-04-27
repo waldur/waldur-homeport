@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { openportalProjectTemplateDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { translate } from '@waldur/i18n';
+import { DeleteButton } from '@/core/buttons';
+import { translate } from '@/i18n';
 
 export const ProjectTemplateDeleteButton: FC<{ row; refetch }> = ({
   row,

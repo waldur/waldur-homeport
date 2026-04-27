@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 import {
   BASIC_OFFERING_TYPE,
   SUPPORT_OFFERING_TYPE,
-} from '@waldur/support/constants';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { getUser } from '@waldur/workspace/selectors';
+} from '@/support/constants';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { getUser } from '@/workspace/selectors';
 
 import { CancelOrderButton } from '../details/CancelOrderButton';
 

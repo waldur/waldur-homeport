@@ -1,19 +1,19 @@
 import { useMemo } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { OfferingCard } from '@waldur/marketplace/common/OfferingCard';
-import { getLabel } from '@waldur/marketplace/common/registry';
-import { OfferingStateField } from '@waldur/marketplace/offerings/OfferingStateField';
-import { Offering } from '@waldur/marketplace/types';
-import { PublicCallsList } from '@waldur/proposals/PublicCallsList';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Link } from '@/core/Link';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { OfferingCard } from '@/marketplace/common/OfferingCard';
+import { getLabel } from '@/marketplace/common/registry';
+import { OfferingStateField } from '@/marketplace/offerings/OfferingStateField';
+import { Offering } from '@/marketplace/types';
+import { PublicCallsList } from '@/proposals/PublicCallsList';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const ProviderOfferingsList = (props) => {
   const columns = [

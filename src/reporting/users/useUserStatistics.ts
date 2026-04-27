@@ -14,8 +14,8 @@ import {
   usersUserRegistrationTrendList,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
+import { STALE_TIME } from '@/core/constants';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import { UserStatistics, UserStatisticsSummary } from './types';
 

@@ -4,14 +4,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change } from 'redux-form';
 import { remoteWaldurApiSharedOfferings } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField } from '@waldur/form';
-import { MultiSelectOption } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { getLabel } from '@waldur/marketplace/common/registry';
-import { Offering } from '@waldur/marketplace/types';
-import { Field } from '@waldur/resource/summary';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { FormContainer, SelectField } from '@/form';
+import { MultiSelectOption } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { getLabel } from '@/marketplace/common/registry';
+import { Offering } from '@/marketplace/types';
+import { Field } from '@/resource/summary';
 
 import { OFFERING_IMPORT_FORM_ID } from './constants';
 import { ErredRemoteConnection } from './ErredRemoteConnection';

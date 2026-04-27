@@ -15,17 +15,13 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { getTitle } from '@waldur/navigation/title';
-import { isDescendantOf } from '@waldur/navigation/useTabs';
-import store from '@waldur/store/store';
-import { useUser } from '@waldur/workspace/hooks';
-import {
-  getCustomer,
-  getProject,
-  getResource,
-} from '@waldur/workspace/selectors';
-import { Customer, Project, User } from '@waldur/workspace/types';
+import { translate } from '@/i18n';
+import { getTitle } from '@/navigation/title';
+import { isDescendantOf } from '@/navigation/useTabs';
+import store from '@/store/store';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer, getProject, getResource } from '@/workspace/selectors';
+import { Customer, Project, User } from '@/workspace/types';
 
 const FAVORITE_PAGES_KEY = 'waldur/favorite/pages';
 

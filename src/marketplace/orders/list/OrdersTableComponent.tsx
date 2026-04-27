@@ -5,15 +5,15 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { TableDropdownToggle } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { Column, TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { TableDropdownToggle } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { Column, TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { OrderProviderActions } from '../actions/OrderProviderActions';
 import { OrderStateField } from '../details/OrderStateField';

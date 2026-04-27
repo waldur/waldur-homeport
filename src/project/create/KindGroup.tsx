@@ -1,12 +1,12 @@
 import { Field } from 'react-final-form';
 
-import { ENV } from '@waldur/core/config';
-import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { projectKindOptions } from '../utils';
 

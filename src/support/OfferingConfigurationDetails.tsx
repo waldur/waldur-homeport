@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import FormTable from '@waldur/form/FormTable';
-import { OrderDetailsProps } from '@waldur/marketplace/types';
-import { BooleanField } from '@waldur/table/BooleanField';
+import FormTable from '@/form/FormTable';
+import { OrderDetailsProps } from '@/marketplace/types';
+import { BooleanField } from '@/table/BooleanField';
 
 const renderValue = (value) => (value ? value : <>&mdash;</>);
 

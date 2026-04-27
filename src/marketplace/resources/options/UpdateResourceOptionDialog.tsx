@@ -7,12 +7,12 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { OptionsForm } from '@waldur/marketplace/common/OptionsForm';
-import { Offering } from '@waldur/marketplace/types';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { OptionsForm } from '@/marketplace/common/OptionsForm';
+import { Offering } from '@/marketplace/types';
+import { ActionDialog } from '@/modal/ActionDialog';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export interface UpdateResourceOptionDialogProps {
   resolve: {

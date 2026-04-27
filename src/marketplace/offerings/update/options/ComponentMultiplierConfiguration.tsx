@@ -1,10 +1,10 @@
 import { Field } from 'react-final-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { InputField } from '@waldur/form/InputField';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { InputField } from '@/form/InputField';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 import { FormGroup } from '../../FormGroup';
 

@@ -2,9 +2,9 @@ import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 import { openstackTenantsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { getAllPages } from '@/core/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import { formatServiceProviders } from './utils';
 import { VmOverviewFilter } from './VmOverviewFilter';

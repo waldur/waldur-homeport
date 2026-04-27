@@ -1,6 +1,6 @@
 import { DefaultPermissionEnum, OptionFieldTypeEnum } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 // Storage folder permission choices - values from SDK DefaultPermissionEnum
 export const STORAGE_FOLDER_PERMISSIONS: Array<{

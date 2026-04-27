@@ -3,8 +3,8 @@ import { DateTime } from 'luxon';
 import { FC, ReactNode } from 'react';
 import Flatpickr, { DateTimePickerProps } from 'react-flatpickr';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 import { FormField } from './types';
 import { useFlatpickrTheme } from './useFlatpickrTheme';

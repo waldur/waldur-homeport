@@ -1,4 +1,4 @@
-import { ModalActionsButton } from '@waldur/marketplace/resources/actions/ModalActionsButton';
+import { ModalActionsButton } from '@/marketplace/resources/actions/ModalActionsButton';
 
 import { ActionsLists } from './ActionsLists';
 

@@ -2,11 +2,11 @@ import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
-import { FormGroup } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { Project } from '@waldur/workspace/types';
+import { ENV } from '@/core/config';
+import { FormGroup } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { Project } from '@/workspace/types';
 
 interface OrderStartDateFieldProps {
   project: Project;

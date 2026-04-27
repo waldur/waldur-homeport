@@ -1,9 +1,9 @@
 import { ReactNode } from 'react';
 import { ButtonVariant, Variant } from 'react-bootstrap/esm/types';
 
-import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
-import { DialogSizeType } from '@waldur/modal/types';
-import { ActionValidator } from '@waldur/resource/actions/types';
+import { ResourceAction } from '@/marketplace/resources/actions/constants';
+import { DialogSizeType } from '@/modal/types';
+import { ActionValidator } from '@/resource/actions/types';
 
 type ModalComponentProps<T> = React.ComponentType<{
   resolve: any & { resource: T };

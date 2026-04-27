@@ -40,14 +40,14 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
-import { getNextPageUrl } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { ENV } from '@waldur/core/config';
-import { EChart } from '@waldur/core/EChart';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { Tip } from '@waldur/core/Tooltip';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { getNextPageUrl } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { ENV } from '@/core/config';
+import { EChart } from '@/core/EChart';
+import { LoadingErred } from '@/core/LoadingErred';
+import { Tip } from '@/core/Tooltip';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { getCustomer } from '@/workspace/selectors';
 
 import type { OpenPortalProject } from './api';
 import {

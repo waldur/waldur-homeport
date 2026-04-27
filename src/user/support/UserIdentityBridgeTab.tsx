@@ -10,23 +10,23 @@ import {
   usersPartialUpdate,
 } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { Badge } from '@waldur/core/Badge';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import FormTable from '@waldur/form/FormTable';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Badge } from '@/core/Badge';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import FormTable from '@/form/FormTable';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { formatIsdName, IsdBadges } from './IsdBadges';
 

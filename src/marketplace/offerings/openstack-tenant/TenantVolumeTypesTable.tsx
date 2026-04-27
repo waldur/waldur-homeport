@@ -1,7 +1,7 @@
 import { FunctionComponent, useMemo } from 'react';
 import { OpenstackVolumeTypesListData } from 'waldur-js-client';
 
-import { TenantVolumeTypesList } from '@waldur/openstack/openstack-volume/TenantVolumeTypesList';
+import { TenantVolumeTypesList } from '@/openstack/openstack-volume/TenantVolumeTypesList';
 
 export const TenantVolumeTypesTable: FunctionComponent<{ offering }> = ({
   offering,

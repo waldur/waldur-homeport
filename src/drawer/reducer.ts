@@ -1,4 +1,4 @@
-import { DrawerComponent } from '@waldur/metronic/components';
+import { DrawerComponent } from '@/metronic/components';
 
 export interface DrawerStateProps<P = any> {
   drawerComponent: React.ComponentType<P>;

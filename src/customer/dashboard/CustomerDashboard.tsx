@@ -4,16 +4,16 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { customersStatsRetrieve } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { COMMON_WIDGET_HEIGHT } from '@waldur/dashboard/constants';
-import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
-import { ProjectsList } from '@waldur/project/ProjectsList';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
+import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
+import { ProjectsList } from '@/project/ProjectsList';
 import {
   checkIsServiceManager,
   getCustomer,
   getUser,
   isOwnerOrStaff,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { CustomerDashboardChart } from './CustomerDashboardChart';
 import { CustomerDashboardCredit } from './CustomerDashboardCredit';

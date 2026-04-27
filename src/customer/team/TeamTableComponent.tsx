@@ -1,17 +1,17 @@
 import { useMemo } from 'react';
 
-import Avatar from '@waldur/core/Avatar';
-import { ENV } from '@waldur/core/config';
-import { formatDate } from '@waldur/core/dateUtils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { GenericPermission } from '@waldur/permissions/types';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { Column, TableProps } from '@waldur/table/types';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
-import { exportRoleField } from '@waldur/user/affiliations/RolePopover';
+import Avatar from '@/core/Avatar';
+import { ENV } from '@/core/config';
+import { formatDate } from '@/core/dateUtils';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { GenericPermission } from '@/permissions/types';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { Column, TableProps } from '@/table/types';
+import { RoleField } from '@/user/affiliations/RoleField';
+import { exportRoleField } from '@/user/affiliations/RolePopover';
 
 export const renderRoleExpirationDate = (row) => {
   return row.expiration_time

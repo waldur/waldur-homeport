@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
-import { translate } from '@waldur/i18n';
+import { BaseEventsList } from '@/events/BaseEventsList';
+import { translate } from '@/i18n';
 
 import { Call } from '../types';
 

@@ -1,9 +1,9 @@
-import { ENV } from '@waldur/core/config';
-import { formatCurrency } from '@waldur/core/formatCurrency';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { ENV } from '@/core/config';
+import { formatCurrency } from '@/core/formatCurrency';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { PriceTooltip } from '@/price/PriceTooltip';
 
 import { Component } from './types';
 

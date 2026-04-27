@@ -2,11 +2,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { checklistsAdminRetrieve } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 import { FieldEditButton } from './FieldEditButton';
 import { StaffOnlyIndicator } from './StaffOnlyIndicator';

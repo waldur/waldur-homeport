@@ -1,7 +1,7 @@
 /**
  * Multi-sheet Excel export for ProjectUsageReport and ProjectStorageReport.
  *
- * Uses the same JSZip-based XLSX approach as @waldur/table/exporters/excel,
+ * Uses the same JSZip-based XLSX approach as @/table/exporters/excel,
  * extended to support multiple worksheets.
  *
  * Usage report sheets:
@@ -27,9 +27,9 @@
 import JSZip from 'jszip';
 import type { ProjectAccountingSummary } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { SharedStrings, getSheetData } from '@waldur/table/exporters/excel';
-import { saveFile } from '@waldur/table/exporters/saveFile';
+import { translate } from '@/i18n';
+import { SharedStrings, getSheetData } from '@/table/exporters/excel';
+import { saveFile } from '@/table/exporters/saveFile';
 
 import { ProjectStorageReport } from './ProjectStorageReport';
 import { ProjectUsageReport } from './ProjectUsageReport';

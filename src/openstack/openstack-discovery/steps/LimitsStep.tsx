@@ -2,12 +2,12 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
-import { NumberField } from '@waldur/form';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { NumberField } from '@/form';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { OpenStackDiscoveryFormValues } from '../types';
 

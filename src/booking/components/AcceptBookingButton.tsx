@@ -2,13 +2,13 @@ import { FC, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { bookingResourcesAccept } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 interface AcceptBookingButtonProps {
   resourceUuid: string;

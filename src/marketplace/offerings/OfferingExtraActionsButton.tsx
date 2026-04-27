@@ -2,15 +2,15 @@ import { ClockCounterClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/hooks';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { Offering } from '../types';
 
@@ -21,7 +21,7 @@ const PreviewOfferingDialog = lazyComponent(() =>
 );
 
 const VersionHistoryDialog = lazyComponent(() =>
-  import('@waldur/version-history/VersionHistoryDialog').then((module) => ({
+  import('@/version-history/VersionHistoryDialog').then((module) => ({
     default: module.VersionHistoryDialog,
   })),
 );

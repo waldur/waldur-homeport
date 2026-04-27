@@ -3,22 +3,22 @@ import { FormControl } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 import { overrideSettings } from 'waldur-js-client';
 
-import { VisualLayoutSelector } from '@waldur/auth/VisualLayoutSelector';
-import { formDataOptions } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { WarnCard } from '@waldur/core/WarnCard';
-import { SelectField, SubmitButton, TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { MonacoField } from '@waldur/form/MonacoField';
-import { StringField } from '@waldur/form/StringField';
-import { WideImageField } from '@waldur/form/WideImageField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { VisualLayoutSelector } from '@/auth/VisualLayoutSelector';
+import { formDataOptions } from '@/core/api';
+import { ENV } from '@/core/config';
+import { WarnCard } from '@/core/WarnCard';
+import { SelectField, SubmitButton, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { MonacoField } from '@/form/MonacoField';
+import { StringField } from '@/form/StringField';
+import { WideImageField } from '@/form/WideImageField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import {
   formatListFieldValue,

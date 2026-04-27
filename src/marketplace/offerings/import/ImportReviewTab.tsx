@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { importOfferingSelector } from './selectors';
 

@@ -3,10 +3,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
-import { getProject } from '@waldur/workspace/selectors';
+import { formatDate } from '@/core/dateUtils';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
+import { getProject } from '@/workspace/selectors';
 
 export const GracePeriodWarningBar: FC = () => {
   const project = useSelector(getProject);

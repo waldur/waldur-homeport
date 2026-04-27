@@ -2,9 +2,9 @@ import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
-import FormTable from '@waldur/form/FormTable';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
+import FormTable from '@/form/FormTable';
+import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { concealPricesSelector } from '@/marketplace/deploy/utils';
 
 import { ComponentRowTotal } from './ComponentRowTotal';
 import { ControlRows } from './ControlRows';

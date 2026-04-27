@@ -1,6 +1,6 @@
 import * as L from 'leaflet';
 
-import iconBlue from '@waldur/images/marker-icon-blue.png';
+import iconBlue from '@/images/marker-icon-blue.png';
 
 export const CustomMarkerIcon = () =>
   L.icon({

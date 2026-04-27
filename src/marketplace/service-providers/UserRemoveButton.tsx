@@ -3,15 +3,15 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceServiceProvidersDeleteUser } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { GenericPermission } from '@waldur/permissions/types';
-import { getPermissionDisabledTooltip } from '@waldur/permissions/utils';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { GenericPermission } from '@/permissions/types';
+import { getPermissionDisabledTooltip } from '@/permissions/utils';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 interface UserRemoveButtonProps {
   user: GenericPermission;

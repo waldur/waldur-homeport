@@ -2,8 +2,8 @@ import { DateTime } from 'luxon';
 import { FC, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 
 import { ReportingTitle } from '../ReportingTitle';
 

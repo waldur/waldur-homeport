@@ -1,14 +1,14 @@
 import { FunctionComponent } from 'react';
 
-import Avatar from '@waldur/core/Avatar';
-import { Badge } from '@waldur/core/Badge';
-import { ENV } from '@waldur/core/config';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { useUser } from '@waldur/workspace/hooks';
+import Avatar from '@/core/Avatar';
+import { Badge } from '@/core/Badge';
+import { ENV } from '@/core/config';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { Link } from '@/core/Link';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
 
 import { ThemeSwitcher } from '../../theme/ThemeSwitcher';
 

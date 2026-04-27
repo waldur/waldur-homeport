@@ -5,20 +5,20 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { marketplaceOfferingTermsOfServiceUpdate } from 'waldur-js-client';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { required } from '@waldur/core/validators';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { NumberField } from '@waldur/form/NumberField';
-import { SelectField } from '@waldur/form/SelectField';
-import { StringField } from '@waldur/form/StringField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { required } from '@/core/validators';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { NumberField } from '@/form/NumberField';
+import { SelectField } from '@/form/SelectField';
+import { StringField } from '@/form/StringField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 const addAsOptions = [
   { value: 'markdown', label: translate('Markdown') },

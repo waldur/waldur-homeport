@@ -1,9 +1,9 @@
 import { FC, useState } from 'react';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { ReportingTitle } from '../ReportingTitle';
 

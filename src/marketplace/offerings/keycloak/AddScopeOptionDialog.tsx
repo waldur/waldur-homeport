@@ -6,14 +6,14 @@ import {
   marketplaceProviderResourcesSetKeycloakScopes,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { StringField, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { required } from '@/core/validators';
+import { StringField, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 export type ScopeOption = KeycloakScopeOptionRequest;
 

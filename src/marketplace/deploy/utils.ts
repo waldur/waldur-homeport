@@ -1,14 +1,14 @@
 import { createElement } from 'react';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import CentOS from '@waldur/images/appstore/centos.svg';
-import Debian from '@waldur/images/appstore/debian.svg';
-import FreeBSD from '@waldur/images/appstore/freebsd-1.svg';
-import Oracle from '@waldur/images/appstore/oracle.svg';
-import Rocky from '@waldur/images/appstore/rocky.svg';
-import Ubuntu from '@waldur/images/appstore/ubuntu.svg';
-import Windows from '@waldur/images/appstore/windows.svg';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import CentOS from '@/images/appstore/centos.svg';
+import Debian from '@/images/appstore/debian.svg';
+import FreeBSD from '@/images/appstore/freebsd-1.svg';
+import Oracle from '@/images/appstore/oracle.svg';
+import Rocky from '@/images/appstore/rocky.svg';
+import Ubuntu from '@/images/appstore/ubuntu.svg';
+import Windows from '@/images/appstore/windows.svg';
 
 import { BoxRadioChoice } from './steps/BoxRadioField';
 import { OfferingConfigurationFormStep } from './types';

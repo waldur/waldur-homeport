@@ -4,10 +4,10 @@ import { compose } from 'redux';
 import { formValueSelector, reduxForm } from 'redux-form';
 import { Offering } from 'waldur-js-client';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { Limits } from '@waldur/marketplace/common/types';
-import { orderCanBeApproved as getOrderCanBeApproved } from '@waldur/marketplace/orders/actions/selectors';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { Limits } from '@/marketplace/common/types';
+import { orderCanBeApproved as getOrderCanBeApproved } from '@/marketplace/orders/actions/selectors';
 
 import { FetchedData, getLimitChangeData } from './utils';
 

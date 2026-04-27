@@ -9,15 +9,15 @@ import {
   customersUpdateOrganizationGroups,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { SET_ACCESS_POLICY_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
-import { formatRequestBodyForSetAccessPolicyForm } from '@waldur/marketplace/offerings/actions/utils';
-import { Offering, Plan } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { SET_ACCESS_POLICY_FORM_ID } from '@/marketplace/offerings/actions/constants';
+import { formatRequestBodyForSetAccessPolicyForm } from '@/marketplace/offerings/actions/utils';
+import { Offering, Plan } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { SetAccessPolicyFormContainer } from './SetAccessPolicyFormContainer';
 

@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 export const OrganizationNameLink: FunctionComponent<{ row }> = ({ row }) => (
   <Link

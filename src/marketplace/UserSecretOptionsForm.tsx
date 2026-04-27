@@ -1,8 +1,8 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { DefaultOfferingEditPanel } from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { StringField } from '@/form';
+import { translate } from '@/i18n';
+import { DefaultOfferingEditPanel } from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
 
 import { OfferingEditPanelFormProps } from './offerings/update/integration/types';
 

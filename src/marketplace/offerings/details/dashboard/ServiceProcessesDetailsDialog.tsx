@@ -6,15 +6,15 @@ import {
   NestedAgentService,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { UI_STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const TableComponent = ({
   processors,

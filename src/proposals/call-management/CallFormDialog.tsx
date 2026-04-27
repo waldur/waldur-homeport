@@ -10,23 +10,23 @@ import {
   proposalProtectedCallsPartialUpdate,
 } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME, STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { SubmitButton } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { SelectField } from '@waldur/form/SelectField';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { SHORT_STALE_TIME, STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { SubmitButton } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { SelectField } from '@/form/SelectField';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
 
 interface FormData {
   name: string;

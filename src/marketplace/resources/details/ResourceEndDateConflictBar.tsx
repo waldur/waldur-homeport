@@ -1,8 +1,8 @@
 import { WarningCircleIcon, XIcon } from '@phosphor-icons/react';
 import { useToggle } from 'react-use';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
 
 export const ResourceEndDateConflictBar = () => {
   const [show, toggle] = useToggle(true);

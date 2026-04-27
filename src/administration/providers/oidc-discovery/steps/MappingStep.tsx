@@ -2,13 +2,13 @@ import { FC, useEffect, useMemo } from 'react';
 import { Card, Form } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
 import {
   isProfileAttributeEnabled,
   ProfileAttribute,
-} from '@waldur/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+} from '@/user/support/profileAttributes';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type {
   FieldMappingChoice,

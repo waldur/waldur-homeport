@@ -1,8 +1,8 @@
 import { FC, Fragment } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
+import { translate } from '@/i18n';
+import { AttributeCell } from '@/marketplace/common/AttributeCell';
 
 import { RefreshButton } from '../components/RefreshButton';
 import { OfferingSectionProps } from '../types';

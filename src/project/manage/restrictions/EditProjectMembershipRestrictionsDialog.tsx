@@ -7,15 +7,15 @@ import {
   fieldConfig,
   getRestrictionsArray,
   RestrictionField,
-} from '@waldur/core/restrictions';
-import { SubmitButton } from '@waldur/form';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { setCurrentProject } from '@waldur/workspace/actions';
+} from '@/core/restrictions';
+import { SubmitButton } from '@/form';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { setCurrentProject } from '@/workspace/actions';
 
 const FORM_ID = 'EditProjectMembershipRestrictionsDialog';
 

@@ -3,12 +3,9 @@ import { Form } from 'react-bootstrap';
 import { Field, WrappedFieldProps } from 'redux-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { getOfferingComponentValidator } from '@waldur/marketplace/offerings/store/limits';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 
 import { ComponentRow, ComponentRow2 } from './ComponentRow';
 import { MeasuredUnitInput } from './MeasuredUnitInput';

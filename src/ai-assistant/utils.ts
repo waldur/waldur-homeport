@@ -1,7 +1,7 @@
-import { ENV } from '@waldur/core/config';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { SupportFeatures } from '@waldur/FeaturesEnums';
-import { User } from '@waldur/workspace/types';
+import { ENV } from '@/core/config';
+import { isFeatureVisible } from '@/features/connect';
+import { SupportFeatures } from '@/FeaturesEnums';
+import { User } from '@/workspace/types';
 
 type LLMChatEnabledRoles = 'disabled' | 'staff' | 'staff_and_support' | 'all';
 

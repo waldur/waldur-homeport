@@ -3,7 +3,7 @@ import { clamp } from 'lodash-es';
 import { CSSProperties, FunctionComponent } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 
-import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
+import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
 
 import { FormField } from './types';
 

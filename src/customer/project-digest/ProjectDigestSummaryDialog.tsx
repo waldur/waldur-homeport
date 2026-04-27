@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 export const ProjectDigestSummaryDialog: FC = () => {
   return (

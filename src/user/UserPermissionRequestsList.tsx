@@ -2,19 +2,19 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { userPermissionRequestsList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { PermissionRequestStateField } from '@waldur/invitations/PermissionRequestStateField';
-import { createFetcher } from '@waldur/table/api';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { PermissionRequestStateField } from '@/invitations/PermissionRequestStateField';
+import { createFetcher } from '@/table/api';
 import {
   UserPermissionRequestsFilter,
   selectUserPermissionRequestsFilter,
   UserPermissionRequestsRemoteProjectUpdateRequestStateOptions as RemoteProjectUpdateRequestStateOptions,
-} from '@waldur/table/generated/UserPermissionRequestsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@waldur/user/constants';
-import { getUser } from '@waldur/workspace/selectors';
+} from '@/table/generated/UserPermissionRequestsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { USER_PERMISSION_REQUESTS_TABLE_ID } from '@/user/constants';
+import { getUser } from '@/workspace/selectors';
 
 import { UserPermissionRequestActions } from './UserPermissionRequestActions';
 import { UserPermissionRequestExpandableRow } from './UserPermissionRequestExpandableRow';

@@ -6,19 +6,19 @@ import {
   ArrowConsumptionRecord,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   AdminArrowConsumptionRecordsFilter as ConsumptionRecordsFilter,
   selectAdminArrowConsumptionRecordsFilter as selectConsumptionRecordsFilter,
-} from '@waldur/table/generated/AdminArrowConsumptionRecordsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/AdminArrowConsumptionRecordsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { ForceImportConsumptionButton } from './ForceImportConsumptionButton';
 

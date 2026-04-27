@@ -3,7 +3,7 @@ import { omit } from 'lodash-es';
 import { FC, useCallback } from 'react';
 import { Form, FormControlProps, InputGroup } from 'react-bootstrap';
 
-import { formatPhoneNumber } from '@waldur/core/utils';
+import { formatPhoneNumber } from '@/core/utils';
 
 import { FormField } from './types';
 

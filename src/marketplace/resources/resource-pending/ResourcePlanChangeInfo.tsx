@@ -1,11 +1,11 @@
 import { ArrowRightIcon } from '@phosphor-icons/react';
 import { Resource } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { OrderDetailsQuickBody } from '@waldur/marketplace/orders/details/OrderDetailsQuickBody';
-import { Field } from '@waldur/resource/summary';
+import { Badge } from '@/core/Badge';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { OrderDetailsQuickBody } from '@/marketplace/orders/details/OrderDetailsQuickBody';
+import { Field } from '@/resource/summary';
 
 import { CostEstimatedChangeView } from './CostEstimatedChangeView';
 

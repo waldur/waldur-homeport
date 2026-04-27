@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { GroupInvitation } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { UserPermissionRequestsList } from '@waldur/invitations/UserPermissionRequestsList';
-import { Field } from '@waldur/resource/summary';
-import { BooleanField } from '@waldur/table/BooleanField';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { UserPermissionRequestsList } from '@/invitations/UserPermissionRequestsList';
+import { Field } from '@/resource/summary';
+import { BooleanField } from '@/table/BooleanField';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { getGroupInvitationLink } from './utils';
 

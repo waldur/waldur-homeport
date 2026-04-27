@@ -1,8 +1,8 @@
 import React from 'react';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
 
 import { PendingConsumerOrders } from './PendingConsumerOrders';
 import { PendingProjectUpdates } from './PendingProjectUpdates';

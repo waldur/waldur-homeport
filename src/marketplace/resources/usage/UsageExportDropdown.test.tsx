@@ -1,8 +1,8 @@
 import { renderHook } from '@testing-library/react';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { useNotify } from '@waldur/store/hooks';
-import exportAs from '@waldur/table/exporters';
+import { useNotify } from '@/store/hooks';
+import exportAs from '@/table/exporters';
 
 import {
   UsageExportDropdownProps,
@@ -10,13 +10,13 @@ import {
 } from './UsageExportDropdown';
 
 // Mock dependencies
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 
-vi.mock('@waldur/table/exporters');
+vi.mock('@/table/exporters');
 
-vi.mock('@waldur/store/hooks');
+vi.mock('@/store/hooks');
 
 const mockShowError = vi.fn();
 

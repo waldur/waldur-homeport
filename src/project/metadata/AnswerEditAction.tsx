@@ -1,12 +1,12 @@
 import { FC, useCallback } from 'react';
 import { Answer, QuestionAdmin } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { useModal } from '@waldur/modal/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { EditAction } from '@/form/EditAction';
+import { useModal } from '@/modal/hooks';
 
 const AnswerFormDialog = lazyComponent(() =>
-  import('@waldur/marketplace-checklist/AnswerFormDialog').then((module) => ({
+  import('@/marketplace-checklist/AnswerFormDialog').then((module) => ({
     default: module.AnswerFormDialog,
   })),
 );

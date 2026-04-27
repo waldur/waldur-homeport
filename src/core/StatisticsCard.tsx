@@ -1,8 +1,8 @@
 import React from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 
 interface StatisticsCardProps {
   title: string;

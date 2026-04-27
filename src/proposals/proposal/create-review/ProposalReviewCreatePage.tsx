@@ -13,27 +13,27 @@ import {
   PublicCall,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Form } from '@waldur/form/Form';
-import { SidebarLayout } from '@waldur/form/SidebarLayout';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { PageBarProvider } from '@waldur/marketplace/context';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Form } from '@/form/Form';
+import { SidebarLayout } from '@/form/SidebarLayout';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { PageBarProvider } from '@/marketplace/context';
 import {
   closeModalDialog,
   openModalDialog,
   waitForConfirmation,
-} from '@waldur/modal/actions';
-import { useTitle } from '@waldur/navigation/title';
+} from '@/modal/actions';
+import { useTitle } from '@/navigation/title';
 import {
   PROPOSAL_UPDATE_REVIEW_FORM_ID,
   REVIEW_SUMMARY_FORM_ID,
-} from '@waldur/proposals/constants';
-import { ProposalReview } from '@waldur/proposals/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RootState } from '@waldur/store/reducers';
-import store from '@waldur/store/store';
+} from '@/proposals/constants';
+import { ProposalReview } from '@/proposals/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RootState } from '@/store/reducers';
+import store from '@/store/store';
 
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
 

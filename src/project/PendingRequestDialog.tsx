@@ -6,13 +6,13 @@ import {
   ProjectEndDateChangeRequest,
 } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 interface PendingRequestDialogProps {
   request: ProjectEndDateChangeRequest;

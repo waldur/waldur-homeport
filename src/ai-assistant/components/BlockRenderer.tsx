@@ -1,7 +1,7 @@
 import { FC, memo, useMemo } from 'react';
 
-import { uiRegistry } from '@waldur/ai-assistant/lib/registry/uiRegistry';
-import { UIBlock, UIBlockProps } from '@waldur/ai-assistant/lib/types';
+import { uiRegistry } from '@/ai-assistant/lib/registry/uiRegistry';
+import { UIBlock, UIBlockProps } from '@/ai-assistant/lib/types';
 
 interface BlockRendererProps {
   blocks: UIBlock[];

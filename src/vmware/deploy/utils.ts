@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 import { vmwareLimitsRetrieve } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { minAmount } from '@waldur/marketplace/common/utils';
+import { UI_STALE_TIME } from '@/core/constants';
+import { minAmount } from '@/marketplace/common/utils';
 
 export const minOne = minAmount(1);
 

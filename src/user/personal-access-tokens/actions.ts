@@ -1,5 +1,5 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
 
 const PersonalAccessTokenCreateDialog = lazyComponent(() =>
   import('./PersonalAccessTokenCreateDialog').then((module) => ({

@@ -2,23 +2,23 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Issue, supportIssuesList } from 'waldur-js-client';
 
-import { formatDate, formatRelative } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { IssueLinkField } from '@waldur/issues/list/IssueLinkField';
-import { IssuesListExpandableRow } from '@waldur/issues/list/IssuesListExpandableRow';
-import { StatusColumn } from '@waldur/issues/list/StatusColumn';
-import { TitleColumn } from '@waldur/issues/list/TitleColumn';
-import { createFetcher } from '@waldur/table/api';
+import { formatDate, formatRelative } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { IssueLinkField } from '@/issues/list/IssueLinkField';
+import { IssuesListExpandableRow } from '@/issues/list/IssuesListExpandableRow';
+import { StatusColumn } from '@/issues/list/StatusColumn';
+import { TitleColumn } from '@/issues/list/TitleColumn';
+import { createFetcher } from '@/table/api';
 import {
   SupportIssuesFilter as IssuesFilter,
   selectSupportIssuesFilter as selectIssuesFilter,
   StatusOptions,
-} from '@waldur/table/generated/SupportIssuesFilter';
-import Table from '@waldur/table/Table';
-import { Column, TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
+} from '@/table/generated/SupportIssuesFilter';
+import Table from '@/table/Table';
+import { Column, TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
 
 import { IssueCreateButton } from './IssueCreateButton';
 

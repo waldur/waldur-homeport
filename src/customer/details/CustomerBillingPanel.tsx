@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDate } from '@/core/dateUtils';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { FieldEditButton } from './FieldEditButton';
 import { StaffOnlyIndicator } from './StaffOnlyIndicator';

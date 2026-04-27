@@ -7,17 +7,17 @@ import {
   openstackServerGroupsList,
 } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { AccordionCard } from '@/core/AccordionCard';
+import { UI_STALE_TIME } from '@/core/constants';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { ActionButton } from '@/table/ActionButton';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const policyTooltips: Record<string, string> = {
   affinity: translate(

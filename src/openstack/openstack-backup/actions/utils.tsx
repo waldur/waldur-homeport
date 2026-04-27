@@ -7,13 +7,13 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { Option } from '@waldur/marketplace/common/registry';
+import { getAllPages } from '@/core/api';
+import { translate } from '@/i18n';
+import { Option } from '@/marketplace/common/registry';
 import {
   formatFlavorTitle,
   formatSubnet,
-} from '@waldur/openstack/openstack-instance/utils';
+} from '@/openstack/openstack-instance/utils';
 
 const AUTO_ASSIGN_FLOATING_IP = 'AUTO_ASSIGN_FLOATING_IP';
 

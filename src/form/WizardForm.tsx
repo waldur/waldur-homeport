@@ -4,17 +4,17 @@ import { useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
 import { getFormValues, InjectedFormProps, reduxForm } from 'redux-form';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { StepsList } from '@waldur/marketplace/common/StepsList';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { VerticalProgressSteps } from '@/core/VerticalProgressSteps';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { StepsList } from '@/marketplace/common/StepsList';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { wrapTooltip } from '@/table/ActionButton';
 
-import '@waldur/wizard/wizard.scss';
+import '@/wizard/wizard.scss';
 
 export interface WizardFormStepProps extends Pick<
   InjectedFormProps,

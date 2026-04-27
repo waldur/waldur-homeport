@@ -6,7 +6,7 @@ import {
   OrderStatsResponse,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
+import { STALE_TIME } from '@/core/constants';
 
 interface UseOrdersStatsOptions {
   days?: number;

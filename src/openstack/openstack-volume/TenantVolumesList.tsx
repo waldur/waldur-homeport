@@ -5,18 +5,18 @@ import {
   OpenstackVolumesListData,
 } from 'waldur-js-client';
 
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { AddResourceButton } from '@waldur/marketplace/resources/actions/AddResourceButton';
-import { ModalActionsRouter } from '@waldur/marketplace/resources/actions/ModalActionsRouter';
-import { ResourceName } from '@waldur/resource/ResourceName';
-import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { createFetcher } from '@waldur/table/api';
-import { BooleanField } from '@waldur/table/BooleanField';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { AddResourceButton } from '@/marketplace/resources/actions/AddResourceButton';
+import { ModalActionsRouter } from '@/marketplace/resources/actions/ModalActionsRouter';
+import { ResourceName } from '@/resource/ResourceName';
+import { ResourceState } from '@/resource/state/ResourceState';
+import { ResourceSummary } from '@/resource/summary/ResourceSummary';
+import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { VOLUME_TYPE } from '../constants';
 

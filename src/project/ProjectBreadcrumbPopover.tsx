@@ -1,8 +1,8 @@
 import { projectsList } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { BreadcrumbDropdown } from '@waldur/navigation/header/breadcrumb/BreadcrumbDropdown';
-import { BreadcrumbSearchItem } from '@waldur/navigation/header/breadcrumb/BreadcrumbSearchItem';
+import { translate } from '@/i18n';
+import { BreadcrumbDropdown } from '@/navigation/header/breadcrumb/BreadcrumbDropdown';
+import { BreadcrumbSearchItem } from '@/navigation/header/breadcrumb/BreadcrumbSearchItem';
 
 export const ProjectBreadcrumbPopover = ({ project, close }) => (
   <BreadcrumbDropdown

@@ -4,26 +4,22 @@ import {
   userInvitationsAccept,
 } from 'waldur-js-client';
 
-import * as AuthService from '@waldur/auth/AuthService';
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import * as AuthService from '@/auth/AuthService';
+import { format } from '@/core/ErrorMessageFormatter';
+import { lazyComponent } from '@/core/lazyComponent';
 import {
   GroupInvitationTokenStorage,
   InvitationTokenStorage,
-} from '@waldur/core/StorageManager';
-import { createDeferred } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { router } from '@waldur/router';
-import {
-  showError,
-  showRedirectMessage,
-  showSuccess,
-} from '@waldur/store/notify';
-import store from '@waldur/store/store';
-import { UsersService, getCurrentUser } from '@waldur/user/UsersService';
-import { setCurrentUser } from '@waldur/workspace/actions';
-import { getUser } from '@waldur/workspace/selectors';
+} from '@/core/StorageManager';
+import { createDeferred } from '@/core/utils';
+import { translate } from '@/i18n';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { router } from '@/router';
+import { showError, showRedirectMessage, showSuccess } from '@/store/notify';
+import store from '@/store/store';
+import { UsersService, getCurrentUser } from '@/user/UsersService';
+import { setCurrentUser } from '@/workspace/actions';
+import { getUser } from '@/workspace/selectors';
 
 // Backend error messages mapped to translated frontend strings
 const BACKEND_ERROR_TRANSLATIONS: Record<string, string> = {

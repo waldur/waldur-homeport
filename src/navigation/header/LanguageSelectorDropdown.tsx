@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { FunctionComponent } from 'react';
 
-import { CountryFlagIcon } from '@waldur/core/CountryFlagIcon';
-import { translate } from '@waldur/i18n';
-import { useLanguageSelector } from '@waldur/i18n/useLanguageSelector';
+import { CountryFlagIcon } from '@/core/CountryFlagIcon';
+import { translate } from '@/i18n';
+import { useLanguageSelector } from '@/i18n/useLanguageSelector';
 
 export const LanguageCountry = {
   ar: 'sa',

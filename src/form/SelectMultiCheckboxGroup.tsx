@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
 
 export const SelectMultiCheckboxGroup: FunctionComponent<any> = (props) => (
   <div className="d-flex flex-column gap-6">

@@ -11,18 +11,18 @@ import {
   Project,
 } from 'waldur-js-client';
 
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { setCurrentProject } from '@waldur/workspace/actions';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { setCurrentProject } from '@/workspace/actions';
 
 interface ProjectEndDateChangeRequestsProps {
   project: Project;

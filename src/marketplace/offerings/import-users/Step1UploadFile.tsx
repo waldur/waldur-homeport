@@ -2,15 +2,15 @@ import Papa from 'papaparse';
 import { FC, useEffect, useMemo } from 'react';
 import { Field } from 'redux-form';
 
-import { formatFilesize } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
-import { FieldError } from '@waldur/form';
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { DownloadTemplateItem } from '@waldur/project/import/DownloadTemplateItem';
-import saveAsCsv from '@waldur/table/exporters/csv';
+import { formatFilesize } from '@/core/utils';
+import { required } from '@/core/validators';
+import { FieldError } from '@/form';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
+import saveAsCsv from '@/table/exporters/csv';
 
 import templateFile from './offering_users_template.json';
 

@@ -6,12 +6,12 @@ import {
   OpenstackHypervisorsListData,
 } from 'waldur-js-client';
 
-import { ProgressBar } from '@waldur/core/ProgressBar';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { ProgressBar } from '@/core/ProgressBar';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { toGb } from './utils';
 

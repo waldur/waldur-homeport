@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { openstackVolumesAttach, openstackVolumesList } from 'waldur-js-client';
 import { OpenStackVolume } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { getAllPages } from '@/core/api';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 const getAttachableVolumes = (instanceId, query) =>
   getAllPages((page) =>

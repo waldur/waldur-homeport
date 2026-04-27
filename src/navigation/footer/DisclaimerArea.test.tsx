@@ -1,11 +1,11 @@
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
-import { ENV } from '@waldur/core/config';
-import * as features from '@waldur/features/connect';
-import { DeploymentFeatures } from '@waldur/FeaturesEnums';
+import { ENV } from '@/core/config';
+import * as features from '@/features/connect';
+import { DeploymentFeatures } from '@/FeaturesEnums';
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {
@@ -20,11 +20,11 @@ vi.mock('@waldur/core/config', () => ({
 const mockGetIconUrl = vi.fn(
   (name: string) => `https://api.example.com/api/icons/${name}/`,
 );
-vi.mock('@waldur/core/api', () => ({
+vi.mock('@/core/api', () => ({
   getIconUrl: (name: string) => mockGetIconUrl(name),
 }));
 
-vi.mock('@waldur/features/connect');
+vi.mock('@/features/connect');
 
 import { DisclaimerArea } from './DisclaimerArea';
 

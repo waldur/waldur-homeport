@@ -1,11 +1,11 @@
 import { UIView } from '@uirouter/react';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { SupportFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { isStaff, isStaffOrSupport } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { SupportFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { isStaff, isStaffOrSupport } from '@/workspace/selectors';
 
 import { hasSupport } from './hooks';
 
@@ -72,7 +72,7 @@ export const states: StateDeclaration[] = [
     url: '',
     parent: 'support',
     component: lazyComponent(() =>
-      import('@waldur/support/dashboard/SupportDashboard').then((module) => ({
+      import('@/support/dashboard/SupportDashboard').then((module) => ({
         default: module.SupportDashboard,
       })),
     ),
@@ -100,7 +100,7 @@ export const states: StateDeclaration[] = [
     name: 'supportFeedback',
     url: '/support/feedback/?token&evaluation',
     component: lazyComponent(() =>
-      import('@waldur/issues/feedback/SupportFeedback').then((module) => ({
+      import('@/issues/feedback/SupportFeedback').then((module) => ({
         default: module.SupportFeedback,
       })),
     ),
@@ -114,7 +114,7 @@ export const states: StateDeclaration[] = [
     url: 'list/?{status}',
     parent: 'support-communication',
     component: lazyComponent(() =>
-      import('@waldur/issues/SupportIssues').then((module) => ({
+      import('@/issues/SupportIssues').then((module) => ({
         default: module.SupportIssues,
       })),
     ),
@@ -157,7 +157,7 @@ export const states: StateDeclaration[] = [
     url: 'audit-logs/',
     parent: 'support-logs',
     component: lazyComponent(() =>
-      import('@waldur/support/SupportEventsList').then((module) => ({
+      import('@/support/SupportEventsList').then((module) => ({
         default: module.SupportEventsList,
       })),
     ),
@@ -170,7 +170,7 @@ export const states: StateDeclaration[] = [
     url: 'email-logs/',
     parent: 'support-logs',
     component: lazyComponent(() =>
-      import('@waldur/support/SupportEmailLogsList').then((module) => ({
+      import('@/support/SupportEmailLogsList').then((module) => ({
         default: module.SupportEmailLogsList,
       })),
     ),
@@ -183,7 +183,7 @@ export const states: StateDeclaration[] = [
     url: 'data-access-logs/',
     parent: 'support-logs',
     component: lazyComponent(() =>
-      import('@waldur/support/SupportDataAccessLogsList').then((module) => ({
+      import('@/support/SupportDataAccessLogsList').then((module) => ({
         default: module.SupportDataAccessLogsList,
       })),
     ),
@@ -197,7 +197,7 @@ export const states: StateDeclaration[] = [
     url: 'system-logs/',
     parent: 'support-logs',
     component: lazyComponent(() =>
-      import('@waldur/support/SupportSystemLogsList').then((module) => ({
+      import('@/support/SupportSystemLogsList').then((module) => ({
         default: module.SupportSystemLogsList,
       })),
     ),
@@ -211,7 +211,7 @@ export const states: StateDeclaration[] = [
     url: 'ai-assistant-logs/',
     parent: 'support-logs',
     component: lazyComponent(() =>
-      import('@waldur/support/SupportAIAssistantLogsList').then((module) => ({
+      import('@/support/SupportAIAssistantLogsList').then((module) => ({
         default: module.SupportAIAssistantLogsList,
       })),
     ),
@@ -227,7 +227,7 @@ export const states: StateDeclaration[] = [
     url: 'users/?role',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/user/support/UserList').then((module) => ({
+      import('@/user/support/UserList').then((module) => ({
         default: module.UserList,
       })),
     ),
@@ -241,7 +241,7 @@ export const states: StateDeclaration[] = [
     url: '',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/user/UserManageContainer').then((module) => ({
+      import('@/user/UserManageContainer').then((module) => ({
         default: module.UserManageContainer,
       })),
     ),
@@ -256,7 +256,7 @@ export const states: StateDeclaration[] = [
     url: 'users/:user_uuid/?tab',
     parent: 'support-user-manage-container',
     component: lazyComponent(() =>
-      import('@waldur/user/UserManage').then((module) => ({
+      import('@/user/UserManage').then((module) => ({
         default: module.UserManage,
       })),
     ),
@@ -267,7 +267,7 @@ export const states: StateDeclaration[] = [
     url: 'users/active-sessions/',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/administration/TokensList').then((module) => ({
+      import('@/administration/TokensList').then((module) => ({
         default: module.TokensList,
       })),
     ),
@@ -281,11 +281,9 @@ export const states: StateDeclaration[] = [
     url: 'freeipa-users/',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/administration/users/FreeIPAUsersList').then(
-        (module) => ({
-          default: module.FreeIPAUsersList,
-        }),
-      ),
+      import('@/administration/users/FreeIPAUsersList').then((module) => ({
+        default: module.FreeIPAUsersList,
+      })),
     ),
     data: {
       breadcrumb: () => translate('FreeIPA users'),
@@ -298,7 +296,7 @@ export const states: StateDeclaration[] = [
     url: 'robot-accounts/',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/robot-accounts/ProviderRobotAccountList').then(
+      import('@/marketplace/robot-accounts/ProviderRobotAccountList').then(
         (module) => ({
           default: module.ProviderRobotAccountList,
         }),
@@ -314,11 +312,9 @@ export const states: StateDeclaration[] = [
     url: 'offering-users/',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/administration/users/OfferingUsersList').then(
-        (module) => ({
-          default: module.OfferingUsersList,
-        }),
-      ),
+      import('@/administration/users/OfferingUsersList').then((module) => ({
+        default: module.OfferingUsersList,
+      })),
     ),
     data: {
       breadcrumb: () => translate('Offering users'),
@@ -330,7 +326,7 @@ export const states: StateDeclaration[] = [
     url: 'invitations/',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/administration/InvitationList').then((module) => ({
+      import('@/administration/InvitationList').then((module) => ({
         default: module.InvitationList,
       })),
     ),
@@ -344,7 +340,7 @@ export const states: StateDeclaration[] = [
     url: 'notification-messages/',
     parent: 'support-user-management',
     component: lazyComponent(() =>
-      import('@waldur/administration/notifications/NotificationList').then(
+      import('@/administration/notifications/NotificationList').then(
         (module) => ({
           default: module.NotificationList,
         }),
@@ -361,7 +357,7 @@ export const states: StateDeclaration[] = [
     url: 'announcements/',
     parent: 'support-communication',
     component: lazyComponent(() =>
-      import('@waldur/administration/announcements/AnnouncementsList').then(
+      import('@/administration/announcements/AnnouncementsList').then(
         (module) => ({
           default: module.AnnouncementsList,
         }),
@@ -378,7 +374,7 @@ export const states: StateDeclaration[] = [
     url: 'onboarding/?tab',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import('@waldur/administration/organizations/OrganizationOnboardingTabs').then(
+      import('@/administration/organizations/OrganizationOnboardingTabs').then(
         (module) => ({
           default: module.OrganizationOnboardingTabs,
         }),
@@ -394,7 +390,7 @@ export const states: StateDeclaration[] = [
     url: 'onboarding/justifications/:uuid/',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import('@waldur/administration/organizations/OnboardingJustificationDetailsPage').then(
+      import('@/administration/organizations/OnboardingJustificationDetailsPage').then(
         (module) => ({
           default: module.OnboardingJustificationDetailsPage,
         }),
@@ -411,7 +407,7 @@ export const states: StateDeclaration[] = [
     url: 'organization-requests/',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import('@waldur/administration/organizations/requests/OrganizationRequestsList').then(
+      import('@/administration/organizations/requests/OrganizationRequestsList').then(
         (module) => ({
           default: module.OrganizationRequestsList,
         }),
@@ -428,7 +424,7 @@ export const states: StateDeclaration[] = [
     url: 'organization-credits/',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import('@waldur/administration/organizations/OrganizationCreditsList').then(
+      import('@/administration/organizations/OrganizationCreditsList').then(
         (module) => ({
           default: module.OrganizationCreditsList,
         }),
@@ -445,7 +441,7 @@ export const states: StateDeclaration[] = [
     url: 'invoices/',
     parent: 'support-customer-support',
     component: lazyComponent(() =>
-      import('@waldur/support/invoices').then((module) => ({
+      import('@/support/invoices').then((module) => ({
         default: module.SupportInvoiceItemsContainer,
       })),
     ),

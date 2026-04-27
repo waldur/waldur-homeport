@@ -3,10 +3,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { paymentProfilesCreate, paymentProfilesEnable } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { required } from '@waldur/core/validators';
-import { ADD_PAYMENT_PROFILE_FORM_ID } from '@waldur/customer/payment-profiles/constants';
-import { getPaymentProfileTypeOptions } from '@waldur/customer/payment-profiles/utils';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { required } from '@/core/validators';
+import { ADD_PAYMENT_PROFILE_FORM_ID } from '@/customer/payment-profiles/constants';
+import { getPaymentProfileTypeOptions } from '@/customer/payment-profiles/utils';
 import {
   FormContainer,
   NumberField,
@@ -14,15 +14,15 @@ import {
   StringField,
   SubmitButton,
   TextField,
-} from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { setCurrentCustomer } from '@/workspace/actions';
+import { getCustomer } from '@/workspace/selectors';
 
 import { getCustomer as getCustomerApi } from '../utils';
 

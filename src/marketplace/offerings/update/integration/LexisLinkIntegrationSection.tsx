@@ -1,13 +1,13 @@
 import { get } from 'lodash-es';
 import { FC } from 'react';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { SecretField, StringField } from '@waldur/form';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SecretField as PlainSecretField } from '@waldur/marketplace/common/SecretField';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { SecretField, StringField } from '@/form';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SecretField as PlainSecretField } from '@/marketplace/common/SecretField';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { FieldEditButton } from './FieldEditButton';
 import { OfferingEditPanelProps } from './types';

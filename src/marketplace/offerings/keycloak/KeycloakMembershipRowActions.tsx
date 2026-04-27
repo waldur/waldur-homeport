@@ -5,11 +5,11 @@ import {
   offeringKeycloakMembershipsDestroy,
 } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 const DeleteKeycloakMembershipAction = ({
   row,

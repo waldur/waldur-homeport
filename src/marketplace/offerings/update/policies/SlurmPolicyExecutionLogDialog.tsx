@@ -7,12 +7,12 @@ import {
   SlurmPolicyEvaluationLog,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface SlurmPolicyExecutionLogDialogProps {
   resolve: {

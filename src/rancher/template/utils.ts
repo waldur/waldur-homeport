@@ -7,7 +7,7 @@ import {
   rancherTemplateVersionsRetrieve,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 
 import { Question, QuestionType } from '../types';
 

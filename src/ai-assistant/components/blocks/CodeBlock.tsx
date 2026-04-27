@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { CodeHeader } from '@waldur/ai-assistant/components/shared/CodeHeader';
-import { SkeletonLoader } from '@waldur/ai-assistant/components/shared/SkeletonLoader';
-import { UIBlockProps } from '@waldur/ai-assistant/lib/types';
+import { CodeHeader } from '@/ai-assistant/components/shared/CodeHeader';
+import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
+import { UIBlockProps } from '@/ai-assistant/lib/types';
 
 export const CodeBlock: FC<UIBlockProps> = ({ block }) => {
   const isLoading = block.status === 'loading';

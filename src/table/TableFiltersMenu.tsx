@@ -20,12 +20,12 @@ import { Button } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/components';
-import { openModalDialog } from '@waldur/modal/actions';
+import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { MenuComponent } from '@/metronic/components';
+import { openModalDialog } from '@/modal/actions';
 
 import { selectSavedFilter, setSavedFilters } from './actions';
 import { COLUMN_FILTER_TOGGLE_CLASS } from './constants';

@@ -3,11 +3,11 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { invoiceItemsDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { getUser } from '@/workspace/selectors';
 
 import { InvoiceTableItem } from '../types';
 

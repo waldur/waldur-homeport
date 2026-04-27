@@ -1,8 +1,8 @@
 import { ArrowLeftIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
+import { Link } from '@/core/Link';
+import { IBreadcrumbItem } from '@/navigation/types';
 
 import { useReportBreadcrumbs } from './ReportsBreadcrumbs';
 import { useReportDefinition } from './useReportDefinition';

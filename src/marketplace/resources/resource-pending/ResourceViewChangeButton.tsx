@@ -2,10 +2,10 @@ import { InfoIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { Offering, Resource } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ToolbarButton } from '@waldur/table/ToolbarButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ToolbarButton } from '@/table/ToolbarButton';
 
 interface ResourceViewChangeButtonProps {
   resource: Resource;

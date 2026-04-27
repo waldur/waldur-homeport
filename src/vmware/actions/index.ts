@@ -1,4 +1,4 @@
-import { ActionConfiguration } from '@waldur/resource/actions/types';
+import { ActionConfiguration } from '@/resource/actions/types';
 
 import { ConsoleAction } from './ConsoleAction';
 import { DestroyVirtualMachineAction } from './DestroyVirtualMachineAction';

@@ -2,10 +2,10 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
+import { required } from '@/core/validators';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
 
 export const Step3SelectProject: FC<WizardFormStepProps> = (props) => {
   const formValues = useSelector(getFormValues(props.form)) as {

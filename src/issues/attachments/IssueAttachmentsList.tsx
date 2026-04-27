@@ -1,6 +1,6 @@
 import { FunctionComponent, useCallback } from 'react';
 
-import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
+import { AttachmentsList } from '@/form/upload/AttachmentsList';
 
 import { IssueAttachment } from './IssueAttachment';
 import { IssueAttachmentPending } from './IssueAttachmentPending';

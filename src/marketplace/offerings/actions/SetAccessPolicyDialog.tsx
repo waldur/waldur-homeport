@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 import { Customer } from 'waldur-js-client';
 
-import { OrganizationGroupCreateButton } from '@waldur/administration/organizations/OrganizationGroupCreateButton';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
-import { SetAccessPolicyDialogForm } from '@waldur/marketplace/offerings/actions/SetAccessPolicyDialogForm';
-import { Offering, Plan } from '@waldur/marketplace/types';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { OrganizationGroupCreateButton } from '@/administration/organizations/OrganizationGroupCreateButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { useOrganizationGroups } from '@/marketplace/common/utils';
+import { SetAccessPolicyDialogForm } from '@/marketplace/offerings/actions/SetAccessPolicyDialogForm';
+import { Offering, Plan } from '@/marketplace/types';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 export interface SetAccessPolicyDialogProps {
   resolve: {

@@ -2,15 +2,15 @@ import { FunctionComponent, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { IssueTypeEnum } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { SubmitButton } from '@waldur/form';
-import { translate, formatJsxTemplate } from '@waldur/i18n';
-import { sendIssueCreateRequest } from '@waldur/issues/create/utils';
-import { ISSUE_IDS } from '@waldur/issues/types/constants';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { SubmitButton } from '@/form';
+import { translate, formatJsxTemplate } from '@/i18n';
+import { sendIssueCreateRequest } from '@/issues/create/utils';
+import { ISSUE_IDS } from '@/issues/types/constants';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
 
 export const CustomerErrorDialog: FunctionComponent<{ resolve }> = ({
   resolve,

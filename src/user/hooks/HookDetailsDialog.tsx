@@ -10,16 +10,16 @@ import {
   hooksWebPartialUpdate,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { titleCase } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
-import { StringField, SubmitButton } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { titleCase } from '@/core/utils';
+import { required } from '@/core/validators';
+import { StringField, SubmitButton } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { HookTypeField } from './HookTypeField';
 import { MultiSelectField } from './MultiSelectField';

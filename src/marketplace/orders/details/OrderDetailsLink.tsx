@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 export const OrderDetailsLink: FunctionComponent<any> = (props) => (
   <Link

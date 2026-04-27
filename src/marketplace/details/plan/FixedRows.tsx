@@ -1,4 +1,4 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { ComponentRow2 } from './ComponentRow';
 import { Component, PlanPeriod } from './types';

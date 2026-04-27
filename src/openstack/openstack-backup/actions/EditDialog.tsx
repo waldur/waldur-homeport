@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { openstackBackupsUpdate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   createNameField,
   createDescriptionField,
-} from '@waldur/resource/actions/base';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
+} from '@/resource/actions/base';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { UpdateResourceDialog } from '@/resource/actions/UpdateResourceDialog';
 
 export const EditDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },

@@ -1,9 +1,9 @@
 import { DateTime } from 'luxon';
 import { FC, useCallback, useMemo } from 'react';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { AreaChart } from '@waldur/reporting/users/charts/AreaChart';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { AreaChart } from '@/reporting/users/charts/AreaChart';
 
 interface MonthlyData {
   month: string;

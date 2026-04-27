@@ -1,6 +1,6 @@
 import { marketplaceResourcesRetrieve, Resource } from 'waldur-js-client';
 
-import { get } from '@waldur/core/api';
+import { get } from '@/core/api';
 
 export async function loadData(url: string) {
   try {

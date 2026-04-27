@@ -5,15 +5,15 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { isDirty } from 'redux-form';
 
-import { getIconUrl } from '@waldur/core/api';
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { hasSupport as hasSupportSelector } from '@waldur/issues/hooks';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { RootState } from '@waldur/store/reducers';
-import { useUser } from '@waldur/workspace/hooks';
+import { getIconUrl } from '@/core/api';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { hasSupport as hasSupportSelector } from '@/issues/hooks';
+import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { waitForConfirmation } from '@/modal/actions';
+import { RootState } from '@/store/reducers';
+import { useUser } from '@/workspace/hooks';
 
 import { BreadcrumbMain } from './breadcrumb/BreadcrumbMain';
 import { ConfirmationDrawerToggle } from './ConfirmationDrawerToggle';

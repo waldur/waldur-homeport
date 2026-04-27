@@ -3,11 +3,11 @@ import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 import { ACTIVE, PAUSED } from '../store/constants';
 

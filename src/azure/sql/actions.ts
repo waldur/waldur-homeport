@@ -1,4 +1,4 @@
-import { ActionConfiguration } from '@waldur/resource/actions/types';
+import { ActionConfiguration } from '@/resource/actions/types';
 
 import { AZURE_SQL_TYPE } from '../constants';
 

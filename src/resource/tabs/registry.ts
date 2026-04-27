@@ -1,9 +1,9 @@
-import { isFeatureVisible } from '@waldur/features/connect';
-import { OpenStackInstanceTabConfiguration } from '@waldur/openstack/openstack-instance/tabs';
-import { OpenStackTenantTabConfiguration } from '@waldur/openstack/openstack-tenant/tabs';
-import { OpenStackVolumeTabConfiguration } from '@waldur/openstack/openstack-volume/tabs';
-import { RancherClusterTabConfiguration } from '@waldur/rancher/cluster/tabs';
-import { VMwareVirtualMachineTabConfiguration } from '@waldur/vmware/tabs';
+import { isFeatureVisible } from '@/features/connect';
+import { OpenStackInstanceTabConfiguration } from '@/openstack/openstack-instance/tabs';
+import { OpenStackTenantTabConfiguration } from '@/openstack/openstack-tenant/tabs';
+import { OpenStackVolumeTabConfiguration } from '@/openstack/openstack-volume/tabs';
+import { RancherClusterTabConfiguration } from '@/rancher/cluster/tabs';
+import { VMwareVirtualMachineTabConfiguration } from '@/vmware/tabs';
 
 import { ResourceParentTab, ResourceTabsConfiguration } from './types';
 

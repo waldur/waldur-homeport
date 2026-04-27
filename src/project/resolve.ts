@@ -2,13 +2,10 @@ import { Transition } from '@uirouter/react';
 import { projectsRetrieve } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { getCustomer } from '@waldur/customer/utils';
-import { router } from '@waldur/router';
-import store from '@waldur/store/store';
-import {
-  setCurrentCustomer,
-  setCurrentProject,
-} from '@waldur/workspace/actions';
+import { getCustomer } from '@/customer/utils';
+import { router } from '@/router';
+import store from '@/store/store';
+import { setCurrentCustomer, setCurrentProject } from '@/workspace/actions';
 
 export function loadProject(transition: Transition) {
   if (!transition.params().uuid) {

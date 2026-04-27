@@ -3,11 +3,11 @@ import { FC, useMemo } from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { required } from '@/core/validators';
+import { renderValidationWrapper } from '@/form/FieldValidationWrapper';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { validateIPv4 } from '../utils';
 

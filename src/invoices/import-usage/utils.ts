@@ -1,7 +1,7 @@
 import readXlsxFile from 'read-excel-file/browser';
 import { v4 as uuidv4 } from 'uuid';
 
-import { COMPONENT_USAGE_IMPORT_FORM_ID } from '@waldur/invoices/constants';
+import { COMPONENT_USAGE_IMPORT_FORM_ID } from '@/invoices/constants';
 
 import {
   ColumnMapping,

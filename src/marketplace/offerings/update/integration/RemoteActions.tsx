@@ -10,14 +10,14 @@ import {
   remoteWaldurApiPushProjectData,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 import {
   getUser,
   isOwner as isOwnerSelector,
   isServiceManagerSelector,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { ActionsDropdown } from '../../actions/ActionsDropdown';
 

@@ -3,13 +3,13 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { CeleryTask } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/notify';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { showSuccess } from '@/store/notify';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface CeleryTaskTableProps {
   tasks: CeleryTask[];

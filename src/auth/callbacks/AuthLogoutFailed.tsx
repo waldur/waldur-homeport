@@ -2,8 +2,8 @@ import { SignOutIcon } from '@phosphor-icons/react';
 import Qs from 'qs';
 import { FunctionComponent } from 'react';
 
-import { getQueryString } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { getQueryString } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import * as AuthService from '../AuthService';
 

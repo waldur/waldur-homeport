@@ -3,13 +3,13 @@ import { FunctionComponent, useMemo } from 'react';
 import { Field } from 'redux-form';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { FormContainer, SelectField } from '@/form';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
 
 export const ResourceRequestWizardFormFirstPage: FunctionComponent<
   WizardFormStepProps

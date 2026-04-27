@@ -1,9 +1,9 @@
 import { FC, ReactNode } from 'react';
 
-import { TeamTableComponent } from '@waldur/customer/team/TeamTableComponent';
-import { translate } from '@waldur/i18n';
-import { GenericPermission } from '@waldur/permissions/types';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
+import { translate } from '@/i18n';
+import { GenericPermission } from '@/permissions/types';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { UserRemoveButton } from './UserRemoveButton';
 

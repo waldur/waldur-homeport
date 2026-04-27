@@ -6,14 +6,14 @@ import { useDispatch } from 'react-redux';
 import { projectsPartialUpdate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { WideImageField } from '@waldur/form/WideImageField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { useNotify } from '@waldur/store/hooks';
-import { setCurrentProject } from '@waldur/workspace/actions';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { WideImageField } from '@/form/WideImageField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
+import { useNotify } from '@/store/hooks';
+import { setCurrentProject } from '@/workspace/actions';
 
 interface FormData {
   image;

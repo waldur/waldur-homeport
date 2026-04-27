@@ -12,7 +12,7 @@ Ensures consistent, accessible UI across Waldur HomePort.
 **Null/Empty Values**
 ```tsx
 // ALWAYS use renderFieldOrDash - never || 'N/A' or || ''
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { renderFieldOrDash } from '@/table/utils';
 {renderFieldOrDash(value)}
 ```
 
@@ -85,10 +85,10 @@ Before completing UI work, verify:
 ## Key Imports
 
 ```tsx
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { Tip } from '@waldur/core/Tooltip';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { LoadingErred } from '@waldur/core/LoadingErred';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { renderFieldOrDash } from '@/table/utils';
+import { Tip } from '@/core/Tooltip';
+import { hasPermission } from '@/permissions/hasPermission';
+import { StateIndicator } from '@/core/StateIndicator';
+import { LoadingErred } from '@/core/LoadingErred';
 ```

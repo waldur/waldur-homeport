@@ -5,10 +5,10 @@ import { useSelector } from 'react-redux';
 import { Field, getFormValues } from 'redux-form';
 import { adminArrowVendorOfferingMappingsList } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
 
 const VendorOfferingSelect = ({
   input,

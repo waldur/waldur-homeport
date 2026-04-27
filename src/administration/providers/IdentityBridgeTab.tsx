@@ -5,15 +5,15 @@ import {
   identityBridgeStatsRetrieve,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { formatRelativeWithHour } from '@waldur/core/dateUtils';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { formatIsdName, IsdBadges } from '@waldur/user/support/IsdBadges';
+import { Badge } from '@/core/Badge';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { formatRelativeWithHour } from '@/core/dateUtils';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
+import { formatIsdName, IsdBadges } from '@/user/support/IsdBadges';
 
 const HealthIndicator: FC<{
   staleCount: number;

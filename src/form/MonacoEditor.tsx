@@ -1,8 +1,8 @@
 import { Editor } from '@monaco-editor/react';
 import { useEffect, useState } from 'react';
 
-import { initMonaco } from '@waldur/form/monacoSetup';
-import { LoadingSpinner } from '@waldur/table/TableRefreshButton';
+import { initMonaco } from '@/form/monacoSetup';
+import { LoadingSpinner } from '@/table/TableRefreshButton';
 
 // Django HTML language configuration based on official Django documentation
 const configureDjangoHTML = (monaco) => {

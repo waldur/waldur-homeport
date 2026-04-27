@@ -4,10 +4,10 @@ import { FunctionComponent, useEffect, useMemo, useRef, useState } from 'react';
 import { Nav, Table } from 'react-bootstrap';
 import { VersionHistory } from 'waldur-js-client';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { initMonaco } from '@waldur/form/monacoSetup';
-import { translate } from '@waldur/i18n';
-import { LoadingSpinner } from '@waldur/table/TableRefreshButton';
+import { StateIndicator } from '@/core/StateIndicator';
+import { initMonaco } from '@/form/monacoSetup';
+import { translate } from '@/i18n';
+import { LoadingSpinner } from '@/table/TableRefreshButton';
 
 import { HistoryEntityType } from './types';
 import { computeFieldDiffs, formatFieldValue, serializeForDiff } from './utils';

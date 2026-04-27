@@ -3,10 +3,10 @@ import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { marketplaceTagsDestroy, Tag } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 interface TagsBulkDeleteActionProps {
   rows: Tag[];

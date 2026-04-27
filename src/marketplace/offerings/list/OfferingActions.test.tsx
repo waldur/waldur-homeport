@@ -3,11 +3,11 @@ import { Provider } from 'react-redux';
 import { createStore } from 'redux';
 import { describe, expect, it, vi } from 'vitest';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { OfferingActions } from './OfferingActions';
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {
@@ -17,7 +17,7 @@ vi.mock('@waldur/core/config', () => ({
   },
 }));
 
-vi.mock('@waldur/permissions/hasPermission', () => ({
+vi.mock('@/permissions/hasPermission', () => ({
   hasPermission: vi.fn(() => true),
 }));
 

@@ -1,6 +1,6 @@
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import { QuotaChoice } from './types';
 

@@ -12,12 +12,12 @@ import { type DateTimePickerProps } from 'react-flatpickr';
 import { usePrevious } from 'react-use';
 import { Field, WrappedFieldArrayProps } from 'redux-form';
 
-import { CustomRangeDatePicker } from '@waldur/booking/deploy/CustomRangeDatePicker';
-import { BookingProps } from '@waldur/booking/types';
-import { createBooking, getDurationOptions } from '@waldur/booking/utils';
-import { parseDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { CustomRangeDatePicker } from '@/booking/deploy/CustomRangeDatePicker';
+import { BookingProps } from '@/booking/types';
+import { createBooking, getDurationOptions } from '@/booking/utils';
+import { parseDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { BusinessHoursGroup } from './components/BusinessHoursGroup';
 import { SlotDurationGroup } from './components/SlotDurationGroup';

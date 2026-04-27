@@ -1,12 +1,12 @@
 /**
- * @deprecated Use `useWizard` from '@waldur/wizard' instead.
+ * @deprecated Use `useWizard` from '@/wizard' instead.
  *
  * This file re-exports the useWizard hook for backward compatibility.
- * Import from '@waldur/wizard' for new code:
+ * Import from '@/wizard' for new code:
  *
  * ```tsx
- * import { useWizard } from '@waldur/wizard';
+ * import { useWizard } from '@/wizard';
  * ```
  */
 
-export { useWizard } from '@waldur/wizard';
+export { useWizard } from '@/wizard';

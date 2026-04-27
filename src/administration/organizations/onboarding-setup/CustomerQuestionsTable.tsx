@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { TableWithPortal } from '@waldur/table/types';
+import { translate } from '@/i18n';
+import { TableWithPortal } from '@/table/types';
 
 import { BaseQuestionsTable } from './BaseQuestionsTable';
 import {

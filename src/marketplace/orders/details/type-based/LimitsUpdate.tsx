@@ -1,16 +1,16 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { useShouldConcealPrices } from '@waldur/marketplace/common/useShouldConcealPrices';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { useShouldConcealPrices } from '@/marketplace/common/useShouldConcealPrices';
 import {
   getLimitChangeRequirements,
   getLimitChangeData,
-} from '@waldur/marketplace/resources/change-limits/utils';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
+} from '@/marketplace/resources/change-limits/utils';
+import { PriceTooltip } from '@/price/PriceTooltip';
 
 import { getPlanUnitAbbr } from '../../utils';
 

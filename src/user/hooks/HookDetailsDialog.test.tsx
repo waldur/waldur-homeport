@@ -9,7 +9,7 @@ import {
   hooksWebPartialUpdate,
 } from 'waldur-js-client';
 
-import { useNotify } from '@waldur/store/hooks';
+import { useNotify } from '@/store/hooks';
 
 import { HookDetailsDialog } from './HookDetailsDialog';
 import { HookResponse } from './types';
@@ -18,10 +18,10 @@ import { loadEventGroupsOptions } from './utils';
 // Mock the required modules
 vi.mock('waldur-js-client');
 vi.mock('./utils');
-vi.mock('@waldur/modal/actions', () => ({
+vi.mock('@/modal/actions', () => ({
   closeModalDialog: vi.fn(),
 }));
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),

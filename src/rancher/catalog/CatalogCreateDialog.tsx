@@ -3,13 +3,13 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { rancherCatalogsCreate } from 'waldur-js-client';
 
-import { StringField, TextField, SecretField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { Resource } from '@waldur/resource/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { createEntity } from '@waldur/table/actions';
+import { StringField, TextField, SecretField } from '@/form';
+import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
+import { closeModalDialog } from '@/modal/actions';
+import { Resource } from '@/resource/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { createEntity } from '@/table/actions';
 
 interface FormData {
   name: string;

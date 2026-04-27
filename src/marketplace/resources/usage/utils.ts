@@ -6,15 +6,15 @@ import {
   marketplaceComponentUsagesList,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { parseDate } from '@waldur/core/dateUtils';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { getAccountingTypeOptions } from '@waldur/marketplace/offerings/update/components/ComponentAccountingTypeField';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { parseDate } from '@/core/dateUtils';
+import { formatUsageValue } from '@/core/formatNumber';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { getAccountingTypeOptions } from '@/marketplace/offerings/update/components/ComponentAccountingTypeField';
+import { OfferingComponent } from '@/marketplace/types';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 

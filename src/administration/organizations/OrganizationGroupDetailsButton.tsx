@@ -3,10 +3,10 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { OrganizationGroup } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const OrganizationGroupDetailsDialog = lazyComponent(() =>
   import('./OrganizationGroupDetailsDialog').then((module) => ({

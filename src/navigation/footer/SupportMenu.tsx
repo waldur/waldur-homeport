@@ -1,10 +1,10 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { DocsLink } from '@waldur/navigation/header/DocsLink';
-import { showSuccess } from '@waldur/store/notify';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { DocsLink } from '@/navigation/header/DocsLink';
+import { showSuccess } from '@/store/notify';
 
 import { FooterDropdown } from './FooterDropdown';
 import { IssuesLink } from './IssuesLink';

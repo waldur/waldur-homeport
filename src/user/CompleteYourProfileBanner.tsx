@@ -1,7 +1,7 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
 
 // Field name to human-readable label mapping
 const FIELD_LABELS: Record<string, () => string> = {

@@ -1,13 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { isEmpty } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { AttributesList } from '@waldur/marketplace/offerings/details/AttributesList';
-import { PublicOfferingAttributesSection } from '@waldur/marketplace/offerings/details/PublicOfferingAttributesSection';
-import { isValidAttribute } from '@waldur/marketplace/offerings/details/utils';
-import { Category, Offering } from '@waldur/marketplace/types';
+import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
+import { isEmpty } from '@/core/utils';
+import { translate } from '@/i18n';
+import { AttributesList } from '@/marketplace/offerings/details/AttributesList';
+import { PublicOfferingAttributesSection } from '@/marketplace/offerings/details/PublicOfferingAttributesSection';
+import { isValidAttribute } from '@/marketplace/offerings/details/utils';
+import { Category, Offering } from '@/marketplace/types';
 
 import './PublicOfferingAttributes.scss';
 

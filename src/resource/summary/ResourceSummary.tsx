@@ -1,9 +1,9 @@
 import { ComponentType, FunctionComponent, ReactNode } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { translate } from '@/i18n';
+import * as ResourceSummaryRegistry from '@/resource/summary/registry';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { ResourceSummaryBase } from './ResourceSummaryBase';
 

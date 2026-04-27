@@ -2,9 +2,9 @@ import { CaretCircleDownIcon, CaretCircleUpIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { useCategories } from '../category/useCategories';
 import { CategoryGroupLink } from '../links/CategoryGroupLink';

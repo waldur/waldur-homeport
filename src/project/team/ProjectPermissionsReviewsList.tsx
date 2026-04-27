@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { projectPermissionsReviewsList } from 'waldur-js-client';
 
-import { PermissionsReviewsList } from '@waldur/core/PermissionsReviewsList';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
-import { getProject } from '@waldur/workspace/selectors';
+import { PermissionsReviewsList } from '@/core/PermissionsReviewsList';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
+import { getProject } from '@/workspace/selectors';
 
 const mapStateToProps = createSelector(getProject, (project) => ({
   project_uuid: project.uuid,

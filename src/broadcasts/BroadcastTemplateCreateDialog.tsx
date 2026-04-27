@@ -6,12 +6,12 @@ import {
   MessageTemplateRequest,
 } from 'waldur-js-client';
 
-import { BroadcastTemplateForm } from '@waldur/broadcasts/BroadcastTemplateForm';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { BroadcastTemplateForm } from '@/broadcasts/BroadcastTemplateForm';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { BROADCAST_TEMPLATE_CREATE_FORM_ID } from './constants';
 

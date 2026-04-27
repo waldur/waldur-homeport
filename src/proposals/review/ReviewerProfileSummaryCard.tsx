@@ -5,14 +5,14 @@ import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { reviewerProfilesMeRetrieve, ReviewerProfile } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { OrcidLogo } from '@waldur/core/OrcidLogo';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
-import { getUser } from '@waldur/workspace/selectors';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { OrcidLogo } from '@/core/OrcidLogo';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { router } from '@/router';
+import { getUser } from '@/workspace/selectors';
 
 interface ReviewerProfileSummaryCardProps {
   onProfileStatus?: (hasProfile: boolean) => void;

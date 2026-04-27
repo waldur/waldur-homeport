@@ -1,10 +1,10 @@
 import { useAsync } from 'react-use';
 import { openstackVolumeTypesRetrieve } from 'waldur-js-client';
 
-import { formatFilesize, getUUID } from '@waldur/core/utils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { OrderDetailsProps } from '@waldur/marketplace/types';
+import { formatFilesize, getUUID } from '@/core/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { OrderDetailsProps } from '@/marketplace/types';
 
 import { formatVolumeTypeLabel } from '../openstack-instance/utils';
 

@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { ProposalReview } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { RateStars } from '@/proposals/proposal/create-review/RateStars';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface CallReviewExpandableRowProps {
   row: ProposalReview;

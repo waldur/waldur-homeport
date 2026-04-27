@@ -2,14 +2,14 @@ import { FC, useState } from 'react';
 import { Card } from 'react-bootstrap';
 import { ReviewerProfile } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { AffiliationsSection } from '@waldur/reviewer/AffiliationsSection';
-import { ExpertiseSection } from '@waldur/reviewer/ExpertiseSection';
-import { ProfileInfoSection } from '@waldur/reviewer/ProfileInfoSection';
-import { PublicationsSection } from '@waldur/reviewer/PublicationsSection';
-import { ReviewerProfilePanel } from '@waldur/reviewer/ReviewerProfilePanel';
-import { useReviewerProfile } from '@waldur/reviewer/useReviewerProfile';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { AffiliationsSection } from '@/reviewer/AffiliationsSection';
+import { ExpertiseSection } from '@/reviewer/ExpertiseSection';
+import { ProfileInfoSection } from '@/reviewer/ProfileInfoSection';
+import { PublicationsSection } from '@/reviewer/PublicationsSection';
+import { ReviewerProfilePanel } from '@/reviewer/ReviewerProfilePanel';
+import { useReviewerProfile } from '@/reviewer/useReviewerProfile';
 
 interface ReviewerProfileTabProps {
   user: any;

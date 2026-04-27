@@ -4,14 +4,14 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getUser } from '@waldur/workspace/selectors';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getUser } from '@/workspace/selectors';
 
 import { OrderActionProps } from './types';
 

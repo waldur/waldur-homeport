@@ -1,5 +1,5 @@
-import { detectOS, formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { detectOS, formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
 
 export const getResourceAccessEndpoints = (resource, offering) => {
   const os = detectOS();

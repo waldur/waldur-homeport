@@ -1,13 +1,10 @@
 import { apiAuthPassword } from 'waldur-js-client';
 
-import { initApiClient } from '@waldur/core/api';
-import { router } from '@waldur/router';
-import store from '@waldur/store/store';
-import {
-  clearImpersonationData,
-  UsersService,
-} from '@waldur/user/UsersService';
-import { setCurrentUser } from '@waldur/workspace/actions';
+import { initApiClient } from '@/core/api';
+import { router } from '@/router';
+import store from '@/store/store';
+import { clearImpersonationData, UsersService } from '@/user/UsersService';
+import { setCurrentUser } from '@/workspace/actions';
 
 import {
   RedirectStorage,

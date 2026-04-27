@@ -16,11 +16,11 @@ import {
   Select,
   AsyncPaginate,
   REACT_SELECT_TABLE_FILTER,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { createSelectFetcher } from '@waldur/table/api';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+} from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { RootState } from '@/store/reducers';
+import { createSelectFetcher } from '@/table/api';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const InvitationStateOptions: InvitationStateOption[] = [
   {

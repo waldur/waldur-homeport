@@ -5,7 +5,7 @@ import {
   CustomerMemberSummary as ApiCustomerMemberSummary,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
+import { STALE_TIME } from '@/core/constants';
 
 import { UserRolesStats, UserRolesSummary } from './types'; // 5 minutes
 

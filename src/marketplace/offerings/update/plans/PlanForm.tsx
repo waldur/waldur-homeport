@@ -1,9 +1,9 @@
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
 
 import { ArticleCodeField } from '../../ArticleCodeField';
 import { FormGroup } from '../../FormGroup';

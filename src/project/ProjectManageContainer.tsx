@@ -2,11 +2,11 @@ import { UIView } from '@uirouter/react';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { getProject } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { getProject } from '@/workspace/selectors';
 
 const ProjectGeneral = lazyComponent(() =>
   import('./manage/ProjectGeneral').then((module) => ({

@@ -2,7 +2,7 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Alert } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import type { TableAlert } from './utils';
 

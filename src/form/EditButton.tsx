@@ -4,10 +4,10 @@ import { FunctionComponent } from 'react';
 import { ButtonProps } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 export interface EditButtonProps extends ButtonProps {
   disabled?: boolean;

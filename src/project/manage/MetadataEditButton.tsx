@@ -1,13 +1,13 @@
 import { useCallback } from 'react';
 import { Answer, Project, QuestionWithAnswer } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
 
 const AnswerFormDialog = lazyComponent(() =>
-  import('@waldur/marketplace-checklist/AnswerFormDialog').then((module) => ({
+  import('@/marketplace-checklist/AnswerFormDialog').then((module) => ({
     default: module.AnswerFormDialog,
   })),
 );

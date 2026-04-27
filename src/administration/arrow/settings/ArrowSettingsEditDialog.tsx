@@ -4,16 +4,16 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import type { ArrowSettings, InvoicePriceSourceEnum } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { SecretField, SelectField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { required } from '@/core/validators';
+import { SecretField, SelectField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import { useUpdateArrowSettings } from '../api';
 

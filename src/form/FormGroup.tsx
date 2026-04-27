@@ -12,7 +12,7 @@ import { Form } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { clearFields, WrappedFieldMetaProps } from 'redux-form';
 
-import { Tip, TipProps } from '@waldur/core/Tooltip';
+import { Tip, TipProps } from '@/core/Tooltip';
 
 import { FormFieldsContext } from './context';
 import { FieldError } from './FieldError';

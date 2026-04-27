@@ -8,19 +8,19 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   TABLE_MARKETPLACE_ORDERS,
   TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
-} from '@waldur/marketplace/orders/list/constants';
-import { closeModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { updateEntity } from '@waldur/table/actions';
+} from '@/marketplace/orders/list/constants';
+import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { updateEntity } from '@/table/actions';
 
 interface RejectByProviderButtonProps {
   row: OrderDetails;

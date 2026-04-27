@@ -2,7 +2,7 @@ import { FunctionComponent } from 'react';
 import { useBoolean } from 'react-use';
 import { Resource } from 'waldur-js-client';
 
-import { ResourceActionComponent } from '@waldur/resource/actions/ResourceActionComponent';
+import { ResourceActionComponent } from '@/resource/actions/ResourceActionComponent';
 
 import { StaffActions, ProviderActionsList } from '../actions/ActionsList';
 

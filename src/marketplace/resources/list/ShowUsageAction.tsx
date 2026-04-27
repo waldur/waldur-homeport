@@ -2,15 +2,15 @@ import { ChartPieIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { ResourceAction } from '../actions/constants';
 
 const ResourceShowUsageDialog = lazyComponent(() =>
-  import('@waldur/marketplace/resources/usage/ResourceShowUsageDialog').then(
+  import('@/marketplace/resources/usage/ResourceShowUsageDialog').then(
     (module) => ({ default: module.ResourceShowUsageDialog }),
   ),
 );

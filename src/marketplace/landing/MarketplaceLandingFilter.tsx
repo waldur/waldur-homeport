@@ -6,13 +6,13 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import { Project } from 'waldur-js-client';
 
-import { getInitialValues, syncFiltersToURL } from '@waldur/core/filters';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { getInitialValues, syncFiltersToURL } from '@/core/filters';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { ActionButton } from '@/table/ActionButton';
+import { getUser } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 import { MARKETPLACE_LANDING_FILTER_FORM } from '../constants';
 import { OrganizationAutocomplete } from '../orders/OrganizationAutocomplete';

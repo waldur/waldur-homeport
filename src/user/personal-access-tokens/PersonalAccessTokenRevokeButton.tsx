@@ -1,7 +1,7 @@
 import { personalAccessTokensDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { translate } from '@waldur/i18n';
+import { DeleteButton } from '@/core/buttons';
+import { translate } from '@/i18n';
 
 export const PersonalAccessTokenRevokeButton = ({ row, refetch }) => (
   <DeleteButton

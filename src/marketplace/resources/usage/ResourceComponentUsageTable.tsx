@@ -4,13 +4,13 @@ import {
   MarketplaceComponentUsagesListData,
 } from 'waldur-js-client';
 
-import { formatMonth } from '@waldur/core/dateUtils';
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { formatMonth } from '@/core/dateUtils';
+import { formatUsageValue } from '@/core/formatNumber';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 export const ResourceComponentUsageTable: FC<TableWithPortal<any>> = ({
   portal,

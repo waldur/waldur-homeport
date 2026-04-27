@@ -1,5 +1,5 @@
-import { getIconUrl } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
+import { getIconUrl } from '@/core/api';
+import { ENV } from '@/core/config';
 
 // Image is taken from https://www.flickr.com/photos/visitestonia/33974817076
 import DefaultHeroImage from './estonian-bog.jpg';

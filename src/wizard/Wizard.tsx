@@ -2,7 +2,7 @@ import { useState, createElement } from 'react';
 import { Form } from 'react-final-form';
 import { useToggle } from 'react-use';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import type {
   WizardFooterRenderProps,

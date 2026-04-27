@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { formatShortDateTime } from '@waldur/core/dateUtils';
+import { formatShortDateTime } from '@/core/dateUtils';
 
 export const OfferingPeriodsRenderer: FunctionComponent<{ schedules }> = ({
   schedules,

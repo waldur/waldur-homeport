@@ -1,12 +1,12 @@
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
 import {
   AdditionalConfigurationStep,
   DetailsOverviewStep,
   FinalConfigurationStep,
   PlanStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
+} from '@/marketplace/deploy/steps/constants';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
 import { FormLonghornStep } from './FormLonghornStep';
 import { ManagedFormNodesStep } from './ManagedFormNodesStep';

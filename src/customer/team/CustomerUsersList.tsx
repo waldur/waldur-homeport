@@ -7,19 +7,19 @@ import {
   customersUsersList,
 } from 'waldur-js-client';
 
-import { CustomerUsersListExpandableRow } from '@waldur/customer/team/CustomerUsersListExpandableRow';
-import { useTeamTableTabs } from '@waldur/customer/team/tabs';
-import { getCustomerRoles, getProjectRoles } from '@waldur/permissions/utils';
-import { createFetcher } from '@waldur/table/api';
+import { CustomerUsersListExpandableRow } from '@/customer/team/CustomerUsersListExpandableRow';
+import { useTeamTableTabs } from '@/customer/team/tabs';
+import { getCustomerRoles, getProjectRoles } from '@/permissions/utils';
+import { createFetcher } from '@/table/api';
 import {
   CustomersUsersFilter,
   selectCustomersUsersFilter,
-} from '@waldur/table/generated/CustomersUsersFilter';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/CustomersUsersFilter';
+import { useTable } from '@/table/useTable';
 import {
   getCustomer,
   isOwnerOrStaff as isOwnerOrStaffSelector,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { CustomerPermissionsLogButton } from './CustomerPermissionsLogButton';
 import { CustomerUserRowActions } from './CustomerUserRowActions';

@@ -1,7 +1,7 @@
 import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { FieldError } from '@waldur/form';
+import { FieldError } from '@/form';
 
 export const InputGroup = (props) => (
   <Form.Group className="mb-7">

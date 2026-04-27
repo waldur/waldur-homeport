@@ -6,21 +6,21 @@ import {
   marketplaceCustomerEstimatedCostPoliciesList,
 } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import { CostPolicyActions } from '@waldur/customer/cost-policies/CostPolicyActions';
-import { CostPolicyCreateButton } from '@waldur/customer/cost-policies/CostPolicyCreateButton';
-import { getCostPolicyActionOptions } from '@waldur/customer/cost-policies/utils';
-import { OrganizationNameLink } from '@waldur/customer/list/OrganizationNameLink';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import { CostPolicyActions } from '@/customer/cost-policies/CostPolicyActions';
+import { CostPolicyCreateButton } from '@/customer/cost-policies/CostPolicyCreateButton';
+import { getCostPolicyActionOptions } from '@/customer/cost-policies/utils';
+import { OrganizationNameLink } from '@/customer/list/OrganizationNameLink';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   MarketplaceCustomerEstimatedCostPoliciesFilter,
   selectMarketplaceCustomerEstimatedCostPoliciesFilter,
-} from '@waldur/table/generated/MarketplaceCustomerEstimatedCostPoliciesFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/MarketplaceCustomerEstimatedCostPoliciesFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 export const OrganizationCostPoliciesList: FC = () => {
   const filter = useSelector(

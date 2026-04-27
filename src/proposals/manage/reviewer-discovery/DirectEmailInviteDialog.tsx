@@ -7,14 +7,14 @@ import {
   proposalProtectedCallsInviteByEmail,
 } from 'waldur-js-client';
 
-import { StringField, SubmitButton, TextField } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { StringField, SubmitButton, TextField } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { Call } from '../../types';
 

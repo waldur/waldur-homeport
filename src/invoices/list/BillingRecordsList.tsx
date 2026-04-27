@@ -3,19 +3,19 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { invoicesList } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
 import {
   InvoicesFilter,
   InvoicesFilterFormId,
-} from '@waldur/table/generated/InvoicesFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/InvoicesFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { getCustomer } from '@/workspace/selectors';
 
 import { formatPeriod } from '../utils';
 

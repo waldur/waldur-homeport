@@ -2,10 +2,10 @@ import { ClockCountdownIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { RadialBg } from '@waldur/navigation/header/search/RadialBg';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { RadialBg } from '@/navigation/header/search/RadialBg';
+import { ActionButton } from '@/table/ActionButton';
+import { renderFieldOrDash } from '@/table/utils';
 
 import './OrganizationReviewStatus.scss';
 

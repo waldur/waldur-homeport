@@ -1,11 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { CreateOfferingUserButton } from '@waldur/marketplace/offerings/details/CreateOfferingUserButton';
-import { TosReportingButton } from '@waldur/marketplace/offerings/update/tos/TosReportingButton';
-import { ProviderOfferingUsersListComponent } from '@waldur/marketplace/service-providers/offering-users/ProviderOfferingUsersList';
-import { TableExportButton } from '@waldur/table/TableExportButton';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { CreateOfferingUserButton } from '@/marketplace/offerings/details/CreateOfferingUserButton';
+import { TosReportingButton } from '@/marketplace/offerings/update/tos/TosReportingButton';
+import { ProviderOfferingUsersListComponent } from '@/marketplace/service-providers/offering-users/ProviderOfferingUsersList';
+import { TableExportButton } from '@/table/TableExportButton';
 
 export const OfferingUsersTable: FunctionComponent<{ offering }> = ({
   offering,

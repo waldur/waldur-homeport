@@ -5,9 +5,9 @@ import {
   rancherIngressesYamlUpdate,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ResourceDeleteButton } from '@waldur/resource/actions/ResourceDeleteButton';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { translate } from '@/i18n';
+import { ResourceDeleteButton } from '@/resource/actions/ResourceDeleteButton';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { ViewYAMLButton } from './ViewYAMLButton';
 

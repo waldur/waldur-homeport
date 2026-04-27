@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
-import { MonacoField } from '@waldur/form/MonacoField';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { CopyToClipboard } from '@/core/CopyToClipboard';
+import { MonacoField } from '@/form/MonacoField';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 type OwnProps = { resolve: { offering: Offering; config: string } };
 

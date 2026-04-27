@@ -18,14 +18,14 @@ import {
   createOnEdit,
   createOnNew,
   createOnReload,
-} from '@waldur/ai-assistant/lib/messages/messageHandlers';
-import { convertMessage } from '@waldur/ai-assistant/lib/messages/messageUtils';
-import '@waldur/ai-assistant/lib/registry/registerComponents';
-import { createThreadListAdapter } from '@waldur/ai-assistant/lib/thread/threadListAdapter';
-import { useAbortControllers } from '@waldur/ai-assistant/lib/thread/threadStateHooks';
-import { useThreadList } from '@waldur/ai-assistant/lib/thread/useThreadList';
-import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
-import { isDrawerOpen } from '@waldur/drawer/utils';
+} from '@/ai-assistant/lib/messages/messageHandlers';
+import { convertMessage } from '@/ai-assistant/lib/messages/messageUtils';
+import '@/ai-assistant/lib/registry/registerComponents';
+import { createThreadListAdapter } from '@/ai-assistant/lib/thread/threadListAdapter';
+import { useAbortControllers } from '@/ai-assistant/lib/thread/threadStateHooks';
+import { useThreadList } from '@/ai-assistant/lib/thread/useThreadList';
+import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { isDrawerOpen } from '@/drawer/utils';
 
 const EMPTY_MESSAGES: ThreadMessageLike[] = [];
 

@@ -3,8 +3,8 @@ import {
   type ProtectedCall as Call,
 } from 'waldur-js-client';
 
-import { Limits } from '@waldur/marketplace/details/types';
-import { AttributesType, Offering, Plan } from '@waldur/marketplace/types';
+import { Limits } from '@/marketplace/details/types';
+import { AttributesType, Offering, Plan } from '@/marketplace/types';
 
 export {
   type Proposal,

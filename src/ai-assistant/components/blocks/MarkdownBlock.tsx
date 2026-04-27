@@ -1,7 +1,7 @@
 import Markdown, { RuleType } from 'markdown-to-jsx';
 import { FC } from 'react';
 
-import { UIBlockProps } from '@waldur/ai-assistant/lib/types';
+import { UIBlockProps } from '@/ai-assistant/lib/types';
 
 export const MarkdownBlock: FC<UIBlockProps> = ({ block }) => {
   return (

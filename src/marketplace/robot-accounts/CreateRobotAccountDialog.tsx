@@ -2,16 +2,16 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceRobotAccountsCreate, usersList } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
 import {
   LATIN_NAME_PATTERN,
   returnReactSelectAsyncPaginateObject,
-} from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+} from '@/core/utils';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export interface RobotAccountFormData {
   type: string;

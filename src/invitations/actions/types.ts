@@ -1,5 +1,5 @@
-import { Role } from '@waldur/permissions/types';
-import { Customer, Project, User } from '@waldur/workspace/types';
+import { Role } from '@/permissions/types';
+import { Customer, Project, User } from '@/workspace/types';
 
 import { GenericInvitationContext } from '../types';
 

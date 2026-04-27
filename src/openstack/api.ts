@@ -13,7 +13,7 @@ import {
   OpenstackVolumeTypesListData,
 } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
+import { getAllPages } from '@/core/api';
 
 export interface DestroyInstanceParams {
   delete_volumes?: boolean;

@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Badge } from '@waldur/core/Badge';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Badge } from '@/core/Badge';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import type { ReplicationStats } from './api';
 

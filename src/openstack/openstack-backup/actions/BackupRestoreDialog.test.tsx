@@ -14,8 +14,8 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
 
 import { BackupRestoreDialog } from './BackupRestoreDialog';
 
@@ -81,9 +81,9 @@ const fakeFlavors = [
 ] as unknown as OpenStackFlavor[];
 
 vi.mock('waldur-js-client');
-vi.mock('@waldur/modal/hooks');
+vi.mock('@/modal/hooks');
 
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),

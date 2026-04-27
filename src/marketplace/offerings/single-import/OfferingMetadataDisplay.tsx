@@ -2,8 +2,8 @@ import { CheckIcon, XIcon, ClockIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Alert, Card, Badge, Row, Col } from 'react-bootstrap';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
 
 interface OfferingMetadata {
   offering_name: string;

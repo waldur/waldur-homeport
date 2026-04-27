@@ -1,15 +1,12 @@
 import { Field } from 'redux-form';
 import { rolesList } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import {
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 const roleAutocomplete = async (query: string, prevOptions, { page }) => {
   const response = await rolesList({

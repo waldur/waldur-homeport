@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { useSelector } from 'react-redux';
 
-import { BroadcastList } from '@waldur/broadcasts/BroadcastList';
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { IssuesList } from '@waldur/issues/list/IssuesList';
-import { PAGE_SIZE_COMPACT } from '@waldur/table/constants';
-import { getUser } from '@waldur/workspace/selectors';
+import { BroadcastList } from '@/broadcasts/BroadcastList';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { IssuesList } from '@/issues/list/IssuesList';
+import { PAGE_SIZE_COMPACT } from '@/table/constants';
+import { getUser } from '@/workspace/selectors';
 
 import { SupportStatistics } from './SupportStatistics';
 

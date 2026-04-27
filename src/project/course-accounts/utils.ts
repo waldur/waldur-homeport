@@ -1,4 +1,4 @@
-import { email } from '@waldur/core/validators';
+import { email } from '@/core/validators';
 
 export interface RawCourseAccount {
   email: string;

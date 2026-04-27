@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { EventSubscription } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface EventSubscriptionExpandableRowProps {
   row: EventSubscription;

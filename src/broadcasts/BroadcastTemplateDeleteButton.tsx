@@ -1,7 +1,7 @@
 import { broadcastMessageTemplatesDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
+import { DeleteButton } from '@/core/buttons';
+import { formatJsxTemplate, translate } from '@/i18n';
 
 export const BroadcastTemplateDeleteButton = ({ row, refetch }) => (
   <DeleteButton

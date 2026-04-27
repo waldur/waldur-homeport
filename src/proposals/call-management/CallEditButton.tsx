@@ -1,4 +1,4 @@
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
+import { CompactEditButton } from '@/form/CompactEditButton';
 
 export const CallEditButton = ({ row }) => (
   <CompactEditButton

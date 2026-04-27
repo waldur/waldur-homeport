@@ -5,10 +5,10 @@ import { Field, getFormValues, reduxForm } from 'redux-form';
 import { createSelector } from 'reselect';
 import { UserGroupInvitationsListData } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { RootState } from '@/store/reducers';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureUserGroupInvitationsFilter: FunctionComponent<{}> = () => (
   <TableFilterItem

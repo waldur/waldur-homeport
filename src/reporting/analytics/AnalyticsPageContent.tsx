@@ -2,7 +2,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 import { AnalyticsCapability, AnalyticsMode, DrillDownDataItem } from './types';
 import { WhatIfSimulator } from './WhatIfSimulator';

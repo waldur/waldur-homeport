@@ -1,6 +1,6 @@
 import { FieldArray } from 'react-final-form-arrays';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { FormGroup } from '../../FormGroup';
 

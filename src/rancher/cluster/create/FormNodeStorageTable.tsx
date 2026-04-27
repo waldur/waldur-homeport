@@ -3,15 +3,12 @@ import { FC, PropsWithChildren, useEffect } from 'react';
 import { Form } from 'react-bootstrap';
 import { BaseFieldProps, Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
-import { SelectField, StringField } from '@waldur/form';
-import { BoxNumberField } from '@waldur/form/BoxNumberField';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ENV } from '@/core/config';
+import { SelectField, StringField } from '@/form';
+import { BoxNumberField } from '@/form/BoxNumberField';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { ActionButton } from '@/table/ActionButton';
 
 interface FormNodeStorageTableProps {
   title?: string;

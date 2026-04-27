@@ -3,9 +3,9 @@ import { Modal } from 'react-bootstrap';
 import { Field, reduxForm } from 'redux-form';
 import { OfferingExportParametersRequest } from 'waldur-js-client';
 
-import { FormFooter } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
+import { FormFooter } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
 
 const ExportOfferingForm: FC<any> = ({ handleSubmit, submitting, resolve }) => {
   const onSubmit = (formData: OfferingExportParametersRequest) => {

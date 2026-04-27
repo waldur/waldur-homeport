@@ -1,10 +1,10 @@
 import { marketplaceResourcesList } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { getStates } from '@waldur/marketplace/resources/list/ResourceStateFilter';
-import { INSTANCE_TYPE, TENANT_TYPE } from '@waldur/openstack/constants';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { getStates } from '@/marketplace/resources/list/ResourceStateFilter';
+import { INSTANCE_TYPE, TENANT_TYPE } from '@/openstack/constants';
 
 const tenantSerializer = ({ name, backend_id, project_name }) => ({
   backend_id,

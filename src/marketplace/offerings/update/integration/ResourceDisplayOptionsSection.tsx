@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react';
 
-import { SelectField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { getResourceActionOptions } from '@waldur/marketplace/resources/actions/utils';
-import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
+import { SelectField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { getResourceActionOptions } from '@/marketplace/resources/actions/utils';
+import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 
 import {
   DefaultOfferingEditPanel,

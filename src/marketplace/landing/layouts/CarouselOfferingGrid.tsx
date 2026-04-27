@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { NestedTag } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { CardStyleType } from '@waldur/marketplace/common/cards';
-import { OfferingCard } from '@waldur/marketplace/common/OfferingCard';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { useTable } from '@waldur/table/useTable';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { CardStyleType } from '@/marketplace/common/cards';
+import { OfferingCard } from '@/marketplace/common/OfferingCard';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { useTable } from '@/table/useTable';
 
 interface CarouselOfferingGridProps {
   tableProps: ReturnType<typeof useTable>;

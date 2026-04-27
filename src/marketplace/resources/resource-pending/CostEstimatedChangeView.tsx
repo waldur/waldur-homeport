@@ -2,8 +2,8 @@ import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
 import { Card } from 'react-bootstrap';
 import { OrderDetails } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
 
 export const CostEstimatedChangeView = ({
   order,

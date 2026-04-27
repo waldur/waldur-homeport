@@ -9,14 +9,14 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { parseNextPage } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { getProject } from '@waldur/workspace/selectors';
+import { parseNextPage } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { getProject } from '@/workspace/selectors';
 
 import { orderProjectSelector } from '../selectors';
 import { FormStepProps } from '../types';

@@ -24,30 +24,25 @@ import {
   SlurmPeriodicUsagePolicy,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
-import { SaveButton } from '@waldur/core/SaveButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Panel } from '@/core/Panel';
+import { SaveButton } from '@/core/SaveButton';
 import {
   policyPeriodOptions,
   validateEmails,
-} from '@waldur/customer/cost-policies/utils';
-import {
-  NumberField,
-  SelectField,
-  StringField,
-  SubmitButton,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { MultiSelectValue } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
-import { ComponentLimitsField } from '@waldur/marketplace/offerings/details/policies/ComponentLimitsField';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { openModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
-import { getUser } from '@waldur/workspace/selectors';
+} from '@/customer/cost-policies/utils';
+import { NumberField, SelectField, StringField, SubmitButton } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { MultiSelectValue } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { useOrganizationGroups } from '@/marketplace/common/utils';
+import { ComponentLimitsField } from '@/marketplace/offerings/details/policies/ComponentLimitsField';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { openModalDialog } from '@/modal/actions';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { getUser } from '@/workspace/selectors';
 
 import { OfferingSectionProps } from '../types';
 

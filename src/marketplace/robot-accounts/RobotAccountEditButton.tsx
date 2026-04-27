@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { useUser } from '@waldur/workspace/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { EditAction } from '@/form/EditAction';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 const RobotAccountEditDialog = lazyComponent(() =>
   import('./RobotAccountEditDialog').then((module) => ({

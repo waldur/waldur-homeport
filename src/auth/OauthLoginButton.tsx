@@ -1,6 +1,6 @@
 import { IdentityProvider } from 'waldur-js-client';
 
-import { IdentityProviderLogo } from '@waldur/auth/providers/IdentityProviderLogo';
+import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
 
 import { LoginButton } from './LoginButton';
 import { getOauthURL } from './utils';

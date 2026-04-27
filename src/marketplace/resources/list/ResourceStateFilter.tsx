@@ -3,11 +3,8 @@ import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 import { ResourceState } from 'waldur-js-client';
 
-import {
-  REACT_MULTI_SELECT_TABLE_FILTER,
-  Select,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { REACT_MULTI_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 export const getStates = (): Array<{ value: ResourceState; label: string }> => [
   { value: 'Creating', label: translate('Creating') },

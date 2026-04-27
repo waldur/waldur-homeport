@@ -6,13 +6,13 @@ import {
   promotionsCampaignsUpdate,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import * as api from '@waldur/marketplace/common/api';
-import { serializeCampaign } from '@waldur/marketplace/service-providers/utils';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import * as api from '@/marketplace/common/api';
+import { serializeCampaign } from '@/marketplace/service-providers/utils';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { getCustomer } from '@/workspace/selectors';
 
 import { CampaignFormData } from './types';
 

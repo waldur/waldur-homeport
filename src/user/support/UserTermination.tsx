@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { getUser } from '@waldur/workspace/selectors';
+import { getUser } from '@/workspace/selectors';
 
 import { UserDelete } from './UserDelete';
 import { UserStatus } from './UserStatus';

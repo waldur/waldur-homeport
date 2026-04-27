@@ -2,11 +2,11 @@ import { MoneyIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { getUser } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { getUser } from '@/workspace/selectors';
 
 const MarkAsPaidDialog = lazyComponent(() =>
   import('./MarkAsPaidDialog').then((module) => ({

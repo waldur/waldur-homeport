@@ -1,8 +1,8 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
 
-import { AssignmentBatchesSection } from '@waldur/proposals/assignments/AssignmentBatchesSection';
-import { Call } from '@waldur/proposals/types';
+import { AssignmentBatchesSection } from '@/proposals/assignments/AssignmentBatchesSection';
+import { Call } from '@/proposals/types';
 
 import { ReviewerDiscoverySection } from '../../manage/reviewer-discovery';
 import { COIReviewSection } from '../coi-review/COIReviewSection';

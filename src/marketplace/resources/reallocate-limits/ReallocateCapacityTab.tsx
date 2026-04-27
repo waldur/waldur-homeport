@@ -4,12 +4,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change, formValueSelector } from 'redux-form';
 import { Resource } from 'waldur-js-client';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { resourceAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { Limits } from '@waldur/marketplace/common/types';
-import { formatResourceShort } from '@waldur/marketplace/utils';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { Limits } from '@/marketplace/common/types';
+import { formatResourceShort } from '@/marketplace/utils';
 
 import { FetchedData } from '../change-limits/utils';
 

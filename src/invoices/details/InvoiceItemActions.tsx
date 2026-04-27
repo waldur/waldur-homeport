@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { getUser } from '@waldur/workspace/selectors';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { getUser } from '@/workspace/selectors';
 
 import { InvoiceItemCompensation } from './InvoiceItemCompensation';
 import { InvoiceItemDelete } from './InvoiceItemDelete';

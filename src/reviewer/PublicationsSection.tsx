@@ -5,14 +5,14 @@ import {
   ReviewerPublication,
 } from 'waldur-js-client';
 
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ExternalLink } from '@/core/ExternalLink';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { PublicationDeleteAction } from './PublicationDeleteAction';
 import { PublicationEditAction } from './PublicationEditAction';

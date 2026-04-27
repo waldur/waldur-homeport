@@ -2,8 +2,8 @@ import { EChartsOption } from 'echarts';
 import { DateTime } from 'luxon';
 import { ProviderOfferingCosts } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
 
 export const formatOfferingCostsChart = (
   offeringCostsChartData: ProviderOfferingCosts[],

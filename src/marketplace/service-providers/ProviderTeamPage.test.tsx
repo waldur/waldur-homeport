@@ -15,7 +15,7 @@ const createTestQueryClient = () =>
   });
 
 // Mock useTableQuery to not make actual API calls
-vi.mock('@waldur/table/useTableQuery', () => ({
+vi.mock('@/table/useTableQuery', () => ({
   useTableQuery: () => ({
     data: undefined,
     isLoading: false,
@@ -25,7 +25,7 @@ vi.mock('@waldur/table/useTableQuery', () => ({
   }),
 }));
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {},

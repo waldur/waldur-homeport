@@ -1,6 +1,6 @@
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatFilesize } from '@waldur/core/utils';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { formatDateTime } from '@/core/dateUtils';
+import { formatFilesize } from '@/core/utils';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { FileDownloader } from './FileDownloader';
 import { ImageFetcher } from './ImageFetcher';

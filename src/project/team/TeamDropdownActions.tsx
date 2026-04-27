@@ -3,10 +3,10 @@ import { Dropdown } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { ServiceAccountCreateButton } from '@waldur/customer/service-accounts/ServiceAccountCreateAction';
-import { translate } from '@waldur/i18n';
-import { InvitationCreateButton } from '@waldur/invitations/actions/create/InvitationCreateButton';
-import { getTableState } from '@waldur/table/selectors';
+import { ServiceAccountCreateButton } from '@/customer/service-accounts/ServiceAccountCreateAction';
+import { translate } from '@/i18n';
+import { InvitationCreateButton } from '@/invitations/actions/create/InvitationCreateButton';
+import { getTableState } from '@/table/selectors';
 
 import { CourseAccountCreateButton } from '../course-accounts/CourseAccountCreateAction';
 

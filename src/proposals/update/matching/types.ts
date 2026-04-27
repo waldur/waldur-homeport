@@ -4,8 +4,8 @@ import {
   MatchingConfiguration,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Call } from '@waldur/proposals/types';
+import { translate } from '@/i18n';
+import { Call } from '@/proposals/types';
 
 // Use Partial to allow default configs without readonly server fields
 export type MatchingConfig = Partial<MatchingConfiguration>;

@@ -1,21 +1,21 @@
 import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { ENV } from '@waldur/core/config';
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
-import { QuotaBadge } from '@waldur/quotas/QuotaBadge';
-import { Quota } from '@waldur/quotas/types';
-import { formatQuota } from '@waldur/quotas/utils';
+import { Badge } from '@/core/Badge';
+import { ENV } from '@/core/config';
+import { ExternalLink } from '@/core/ExternalLink';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import openstackIcon from '@/images/appstore/icon-openstack.png';
+import { QuotaBadge } from '@/quotas/QuotaBadge';
+import { Quota } from '@/quotas/types';
+import { formatQuota } from '@/quotas/utils';
 import {
   Field,
   ResourceSummaryBase,
   ResourceSummaryProps,
-} from '@waldur/resource/summary';
-import { UserPassword } from '@waldur/resource/UserPassword';
+} from '@/resource/summary';
+import { UserPassword } from '@/resource/UserPassword';
 
 import { OpenStackTenant } from './types';
 

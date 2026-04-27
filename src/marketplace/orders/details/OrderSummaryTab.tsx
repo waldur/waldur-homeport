@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { Panel } from '@waldur/core/Panel';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { SUPPORT_OFFERING_TYPE } from '@waldur/support/constants';
-import { useUser } from '@waldur/workspace/hooks';
+import { Link } from '@/core/Link';
+import { Panel } from '@/core/Panel';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { SUPPORT_OFFERING_TYPE } from '@/support/constants';
+import { useUser } from '@/workspace/hooks';
 
 import { getOrderType } from '../utils';
 

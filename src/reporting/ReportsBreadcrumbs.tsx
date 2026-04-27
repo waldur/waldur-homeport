@@ -1,12 +1,12 @@
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { translate } from '@waldur/i18n';
-import { useBreadcrumbs } from '@waldur/navigation/context';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
+import { Link } from '@/core/Link';
+import { isFeatureVisible } from '@/features/connect';
+import { translate } from '@/i18n';
+import { useBreadcrumbs } from '@/navigation/context';
+import { IBreadcrumbItem } from '@/navigation/types';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import {
   getCategoryConfig,

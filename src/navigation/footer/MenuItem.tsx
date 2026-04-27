@@ -1,4 +1,4 @@
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 export const MenuItem = ({
   label,

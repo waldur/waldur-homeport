@@ -12,12 +12,12 @@ import {
   openportalAccessForEmailList,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { useDebouncedValue } from '@waldur/core/useDebouncedValue';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { useTitle } from '@waldur/navigation/title';
-import { Field } from '@waldur/resource/summary/Field';
+import { Badge } from '@/core/Badge';
+import { useDebouncedValue } from '@/core/useDebouncedValue';
+import { FilterBox } from '@/form/FilterBox';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { useTitle } from '@/navigation/title';
+import { Field } from '@/resource/summary/Field';
 
 // Type definitions
 interface UserInfoCardProps {

@@ -5,16 +5,16 @@ import {
   externalLinksPartialUpdate,
 } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { composeValidators, url, required } from '@waldur/core/validators';
-import { StringField, TextField, FieldError, SubmitButton } from '@waldur/form';
-import { ImageField } from '@waldur/form/ImageField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { composeValidators, url, required } from '@/core/validators';
+import { StringField, TextField, FieldError, SubmitButton } from '@/form';
+import { ImageField } from '@/form/ImageField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { useInvalidateShortcuts } from './utils';
 

@@ -1,6 +1,6 @@
 import { OpenStackSubNet, Offering } from 'waldur-js-client';
 
-import { DataVolume, NodeField } from '@waldur/rancher/types';
+import { DataVolume, NodeField } from '@/rancher/types';
 
 import {
   SelfManagedRancherOrderFormData,

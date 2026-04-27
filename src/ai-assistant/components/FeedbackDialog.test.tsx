@@ -8,7 +8,7 @@ import thunk from 'redux-thunk';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import * as sdk from 'waldur-js-client';
 
-vi.mock('@waldur/form/SelectField', () => ({
+vi.mock('@/form/SelectField', () => ({
   SelectField: ({ input, options, placeholder }: any) => (
     <select
       data-testid="category-select"
@@ -26,7 +26,7 @@ vi.mock('@waldur/form/SelectField', () => ({
 }));
 
 const patchMessageByBackendUuid = vi.fn();
-vi.mock('@waldur/ai-assistant/logic/ThreadProvider', () => ({
+vi.mock('@/ai-assistant/logic/ThreadProvider', () => ({
   useThreadContext: () => ({ patchMessageByBackendUuid }),
 }));
 

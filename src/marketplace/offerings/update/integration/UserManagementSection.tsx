@@ -1,11 +1,11 @@
 import { FC } from 'react';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 import {
   getPluginOptionsForm,
   getSecretOptionsForm,
-} from '@waldur/marketplace/common/registry';
+} from '@/marketplace/common/registry';
 
 import { GLAuthConfigButton } from './GLAuthConfigButton';
 import { OfferingEditPanelProps } from './types';

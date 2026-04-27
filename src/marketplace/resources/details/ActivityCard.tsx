@@ -1,5 +1,5 @@
-import { translate } from '@waldur/i18n';
-import { ResourceEvents } from '@waldur/resource/tabs/ResourceEvents';
+import { translate } from '@/i18n';
+import { ResourceEvents } from '@/resource/tabs/ResourceEvents';
 
 export const ActivityCard = ({ resource }) => (
   <ResourceEvents

@@ -4,19 +4,16 @@ import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsRetrieve } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { DeployFormData } from '@waldur/marketplace/common/types';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { PureOfferingConfiguratorProps } from '@waldur/marketplace/details/types';
-import {
-  Offering,
-  OfferingConfigurationFormProps,
-} from '@waldur/marketplace/types';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { type RootState } from '@waldur/store/reducers';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { DeployFormData } from '@/marketplace/common/types';
+import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { PureOfferingConfiguratorProps } from '@/marketplace/details/types';
+import { Offering, OfferingConfigurationFormProps } from '@/marketplace/types';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { type RootState } from '@/store/reducers';
 
 import { DeployPage } from '../../deploy/DeployPage';
 import { getDefaultLimits } from '../utils';

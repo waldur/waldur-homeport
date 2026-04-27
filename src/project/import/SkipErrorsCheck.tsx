@@ -1,6 +1,6 @@
 import { FormCheck } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const SkipErrorsCheck = ({ checked, onChange }) => (
   <FormCheck

@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { getCallStatus } from '@waldur/proposals/utils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { getCallStatus } from '@/proposals/utils';
 
 import { CallProposalsButton } from '../CallProposalsButton';
 import { Call } from '../types';

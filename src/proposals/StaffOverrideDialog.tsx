@@ -2,10 +2,10 @@ import { FC, useCallback, useState } from 'react';
 import { Form, Modal } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface StaffOverrideDialogProps {
   resolve: {

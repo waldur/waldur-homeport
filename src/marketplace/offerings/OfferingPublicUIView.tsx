@@ -9,18 +9,18 @@ import {
   marketplacePublicOfferingsRetrieve,
 } from 'waldur-js-client';
 
-import { isAuthenticated } from '@waldur/auth/AuthService';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isEmpty } from '@waldur/core/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { isValidAttribute } from '@waldur/marketplace/offerings/details/utils';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import { getUser } from '@waldur/workspace/selectors';
+import { isAuthenticated } from '@/auth/AuthService';
+import { UI_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isEmpty } from '@/core/utils';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { isValidAttribute } from '@/marketplace/offerings/details/utils';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { getUser } from '@/workspace/selectors';
 
 import { Category, Offering } from '../types';
 

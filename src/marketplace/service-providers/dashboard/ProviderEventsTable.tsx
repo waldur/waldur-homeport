@@ -1,7 +1,7 @@
 import { useMemo } from 'react';
 
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
-import { translate } from '@waldur/i18n';
+import { BaseEventsList } from '@/events/BaseEventsList';
+import { translate } from '@/i18n';
 
 export const ProviderEventsTable = ({ provider }) => {
   const filter = useMemo(

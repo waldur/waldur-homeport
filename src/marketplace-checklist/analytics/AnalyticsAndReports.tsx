@@ -8,8 +8,8 @@ import {
   Col,
 } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { ChecklistUsageAnalyticsTable } from './ChecklistUsageAnalyticsTable';
 import { OrgPerformanceTable } from './OrgPerformanceTable';

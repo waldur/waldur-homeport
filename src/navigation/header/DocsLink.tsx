@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
 
 export const DocsLink: FunctionComponent = () => {
   const link = ENV.plugins.WALDUR_CORE.DOCS_URL;

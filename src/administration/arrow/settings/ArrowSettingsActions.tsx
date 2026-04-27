@@ -8,11 +8,11 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import type { ArrowSettings } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import {
   useArrowSettings,

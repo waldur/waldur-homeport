@@ -2,19 +2,19 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { proposalProposalsList } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { getNonCanceledProposalStates } from '@waldur/proposals/utils';
-import { createFetcher } from '@waldur/table/api';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { getNonCanceledProposalStates } from '@/proposals/utils';
+import { createFetcher } from '@/table/api';
 import {
   ProposalsFilter,
   selectProposalsFilter,
   ProposalStatesOptions,
-} from '@waldur/table/generated/ProposalsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/ProposalsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getCustomer } from '@/workspace/selectors';
 
 import { EndingField } from '../EndingField';
 import { ProposalExpandableRow } from '../round/proposals/ProposalExpandableRow';

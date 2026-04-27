@@ -1,8 +1,9 @@
-import { actWait, updateWrapper } from '@waldur/core/testUtils';
 import { mount, ReactWrapper } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import { OpenStackInstance, OpenStackSubnet } from 'waldur-js-client';
+
+import { actWait, updateWrapper } from '@/core/testUtils';
 
 import { UpdateInternalIpsDialog } from './UpdateInternalIpsDialog';
 

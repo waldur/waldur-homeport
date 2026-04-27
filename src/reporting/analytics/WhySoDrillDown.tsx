@@ -7,12 +7,12 @@ import classNames from 'classnames';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Card, Table } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { CaretUpDownButtons } from '@waldur/core/CaretUpDownButtons';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { Badge } from '@/core/Badge';
+import { CaretUpDownButtons } from '@/core/CaretUpDownButtons';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 import { DrillDownDataItem } from './types';
 

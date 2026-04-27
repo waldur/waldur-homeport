@@ -4,13 +4,13 @@ import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { openstackFloatingIpsDestroy } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { validateState } from '@waldur/resource/actions/base';
-import { parseValidators } from '@waldur/resource/actions/utils';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { validateState } from '@/resource/actions/base';
+import { parseValidators } from '@/resource/actions/utils';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { useUser } from '@/workspace/hooks';
 
 const validators = [validateState('OK', 'ERRED')];
 

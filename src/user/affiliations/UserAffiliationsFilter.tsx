@@ -1,14 +1,14 @@
 import { Field, reduxForm } from 'redux-form';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { StringField } from '@waldur/form';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { InvitationRoleFilter } from '@waldur/invitations/InvitationRoleFilter';
-import { InvitationScopeTypeFilter } from '@waldur/invitations/InvitationScopeTypeFilter';
-import { ROLE_TYPES } from '@waldur/permissions/constants';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { StringField } from '@/form';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { InvitationRoleFilter } from '@/invitations/InvitationRoleFilter';
+import { InvitationScopeTypeFilter } from '@/invitations/InvitationScopeTypeFilter';
+import { ROLE_TYPES } from '@/permissions/constants';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const UserAffiliationsFilter = reduxForm<any, {}>({
   form: 'UserAffiliationsFilter',

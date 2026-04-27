@@ -4,12 +4,12 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change, Field } from 'redux-form';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { SelectField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
+import { STALE_TIME } from '@/core/constants';
+import { SelectField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
+import { getCategories } from '@/marketplace/common/api';
 
 import { FormGroup } from '../FormGroup';
 

@@ -17,16 +17,13 @@ vi.mock('./IssueCommentButton', () => ({
   IssueCommentButton: () => <button data-testid="add-comment-btn">Add</button>,
 }));
 
-vi.mock(
-  '@waldur/marketplace/offerings/update/components/RefreshButton',
-  () => ({
-    RefreshButton: ({ loading }: { loading: boolean }) => (
-      <button data-testid="reload-btn" disabled={loading}>
-        Reload
-      </button>
-    ),
-  }),
-);
+vi.mock('@/marketplace/offerings/update/components/RefreshButton', () => ({
+  RefreshButton: ({ loading }: { loading: boolean }) => (
+    <button data-testid="reload-btn" disabled={loading}>
+      Reload
+    </button>
+  ),
+}));
 
 vi.mock('./IssueCommentsList', () => ({
   IssueCommentsList: ({ comments }: { comments: any[] }) => (
@@ -40,7 +37,7 @@ vi.mock('./IssueCommentsList', () => ({
   ),
 }));
 
-vi.mock('@waldur/core/LoadingSpinner', () => ({
+vi.mock('@/core/LoadingSpinner', () => ({
   LoadingSpinner: () => <div data-testid="loading-spinner">Loading...</div>,
 }));
 

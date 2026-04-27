@@ -2,15 +2,15 @@ import { UserIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { MarketplaceServiceProviderUser } from 'waldur-js-client';
 
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { IsdBadges } from '@waldur/user/support/IsdBadges';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { IsdBadges } from '@/user/support/IsdBadges';
 
 interface ProviderUserDetailsDialogProps {
   resolve: { user: MarketplaceServiceProviderUser };

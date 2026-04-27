@@ -4,11 +4,11 @@ import { useDispatch } from 'react-redux';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { Panel } from '@waldur/core/Panel';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { useNotify } from '@waldur/store/hooks';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Panel } from '@/core/Panel';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { useNotify } from '@/store/hooks';
 
 const getConfirmationText = (isActive: boolean, name: string): string => {
   return isActive

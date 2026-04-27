@@ -4,12 +4,12 @@ import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { remoteWaldurApiImportOffering } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { StepsList } from '@waldur/marketplace/common/StepsList';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { StepsList } from '@/marketplace/common/StepsList';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 import { OFFERING_IMPORT_FORM_ID } from './constants';
 import { importOfferingSelector } from './selectors';

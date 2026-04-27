@@ -12,14 +12,13 @@ import { FC } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { get } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
+import { get } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
 
 interface OwnProps {
   offering: Offering;

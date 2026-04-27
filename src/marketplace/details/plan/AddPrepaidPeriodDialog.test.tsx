@@ -4,13 +4,13 @@ import { DateTime } from 'luxon';
 import { afterEach, describe, expect, it, vi } from 'vitest';
 import { Project } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
+import { formatDate } from '@/core/dateUtils';
 
 import { AddPrepaidPeriodDialog } from './AddPrepaidPeriodDialog';
 import { PrepaidConstraints } from './prepaidConstraints';
 
 // Mock child components to isolate our component's logic
-vi.mock('@waldur/form/DateField', () => ({
+vi.mock('@/form/DateField', () => ({
   // Render props as data-attributes so we can assert them
   DateField: (props) => (
     <input
@@ -24,7 +24,7 @@ vi.mock('@waldur/form/DateField', () => ({
   ),
 }));
 
-vi.mock('@waldur/form/SelectField', () => ({
+vi.mock('@/form/SelectField', () => ({
   SelectField: (props) => (
     <select
       data-testid="select-field"
@@ -40,7 +40,7 @@ vi.mock('@waldur/form/SelectField', () => ({
   ),
 }));
 
-vi.mock('@waldur/modal/ModalDialog', () => ({
+vi.mock('@/modal/ModalDialog', () => ({
   ModalDialog: ({ children, footer }) => (
     <div>
       {children}
@@ -50,13 +50,13 @@ vi.mock('@waldur/modal/ModalDialog', () => ({
 }));
 
 // Mock other simple components
-vi.mock('@waldur/form', () => ({
+vi.mock('@/form', () => ({
   SubmitButton: ({ label }) => <button>{label}</button>,
 }));
-vi.mock('@waldur/modal/CloseDialogButton', () => ({
+vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: () => <button>Close</button>,
 }));
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key: string, context?: any) => {
     if (context) {
       return key.replace(/\{(\w+)\}/g, (match, prop) => context[prop] || match);

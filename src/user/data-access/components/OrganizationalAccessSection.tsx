@@ -1,12 +1,12 @@
 import { FC, useMemo } from 'react';
 import { OrganizationalAccess, OrganizationalUser } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface OrganizationalAccessSectionProps {
   scopes: OrganizationalAccess[];

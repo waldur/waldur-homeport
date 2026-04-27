@@ -1,4 +1,4 @@
-import { Resource } from '@waldur/resource/types';
+import { Resource } from '@/resource/types';
 
 export interface Network extends Resource {
   type: string;

@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { CheckoutPricingRow } from '@waldur/marketplace/deploy/CheckoutPricingRow';
-import { OfferingPeriodsRenderer } from '@waldur/marketplace/details/OfferingPeriodsRenderer';
-import { OrderSummary } from '@waldur/marketplace/details/OrderSummary';
+import { translate } from '@/i18n';
+import { CheckoutPricingRow } from '@/marketplace/deploy/CheckoutPricingRow';
+import { OfferingPeriodsRenderer } from '@/marketplace/details/OfferingPeriodsRenderer';
+import { OrderSummary } from '@/marketplace/details/OrderSummary';
 
 const BookingExtraComponent: FunctionComponent<any> = (props) => (
   <>

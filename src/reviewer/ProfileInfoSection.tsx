@@ -9,16 +9,16 @@ import {
   ReviewerProfile,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { OrcidLogo } from '@waldur/core/OrcidLogo';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser } from '@waldur/workspace/selectors';
+import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { OrcidLogo } from '@/core/OrcidLogo';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
+import { getUser } from '@/workspace/selectors';
 
 const ProfileEditFieldDialog = lazyComponent(() =>
   import('./ProfileEditFieldDialog').then((module) => ({

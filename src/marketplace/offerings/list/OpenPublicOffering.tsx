@@ -2,7 +2,7 @@ import { ShoppingCartIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { DropdownLink } from './DropdownLink';
 

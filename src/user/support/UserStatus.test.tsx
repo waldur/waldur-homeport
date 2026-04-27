@@ -4,16 +4,16 @@ import { useDispatch } from 'react-redux';
 import { vi, describe, it, expect, beforeEach } from 'vitest';
 import { usersPartialUpdate } from 'waldur-js-client';
 
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { useNotify } from '@waldur/store/hooks';
+import { waitForConfirmation } from '@/modal/actions';
+import { useNotify } from '@/store/hooks';
 
 import { UserStatus } from './UserStatus';
 
 vi.mock('waldur-js-client');
 vi.mock('@tanstack/react-query');
 vi.mock('react-redux');
-vi.mock('@waldur/modal/actions');
-vi.mock('@waldur/store/hooks');
+vi.mock('@/modal/actions');
+vi.mock('@/store/hooks');
 
 describe('UserStatus', () => {
   let user;

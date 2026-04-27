@@ -3,17 +3,17 @@ import { Form as FinalForm, Field, FormSpy } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import type { FeedbackCategoryEnum } from 'waldur-js-client';
 
-import { useMessageFeedbackMutation } from '@waldur/ai-assistant/hooks/useMessageFeedbackMutation';
-import { FEEDBACK_SELECT_OPTIONS } from '@waldur/ai-assistant/lib/feedback/categories';
-import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
-import { SelectField } from '@waldur/form/SelectField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { TextField } from '@waldur/form/TextField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { useMessageFeedbackMutation } from '@/ai-assistant/hooks/useMessageFeedbackMutation';
+import { FEEDBACK_SELECT_OPTIONS } from '@/ai-assistant/lib/feedback/categories';
+import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { SelectField } from '@/form/SelectField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { TextField } from '@/form/TextField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 const COMMENT_MAX = 2000;
 const COUNTER_ID = 'feedback-comment-counter';

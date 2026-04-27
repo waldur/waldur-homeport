@@ -1,6 +1,6 @@
 import { useEffect } from 'react';
 
-import { MenuComponent } from '@waldur/metronic/components';
+import { MenuComponent } from '@/metronic/components';
 
 import { MenuItem } from './MenuItem';
 import { MobileMenu } from './MobileMenu';

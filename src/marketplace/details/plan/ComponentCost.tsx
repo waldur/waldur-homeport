@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
 
 import { Component } from './types';
 

@@ -5,15 +5,15 @@ import { FC, useMemo, useState, useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { invoicesGrowthRetrieve } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { ENV } from '@waldur/core/config';
-import { EChart } from '@waldur/core/EChart';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { getChartBrandColor } from '@waldur/dashboard/constants';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { ExportData } from '@waldur/table/exporters/types';
+import { ChartCard } from '@/core/ChartCard';
+import { ENV } from '@/core/config';
+import { EChart } from '@/core/EChart';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { getChartBrandColor } from '@/dashboard/constants';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { ExportData } from '@/table/exporters/types';
 
 interface AccountingOption {
   value: boolean | undefined;

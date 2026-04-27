@@ -1,9 +1,9 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { PermissionOptions } from '@waldur/administration/roles/PermissionOptions';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { PermissionOptions } from '@/administration/roles/PermissionOptions';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 const scopeLabelMap = new Map<string, string>();
 for (const group of PermissionOptions) {

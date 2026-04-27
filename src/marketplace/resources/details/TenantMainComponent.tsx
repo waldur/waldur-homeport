@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { QuotasTable } from '@waldur/quotas/QuotasTable';
+import { translate } from '@/i18n';
+import { QuotasTable } from '@/quotas/QuotasTable';
 
 export const TenantMainComponent = ({ resourceScope }) => {
   return resourceScope ? (

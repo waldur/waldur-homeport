@@ -5,16 +5,16 @@ import { connect } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
 import { checklistsAdminList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SelectField, SubmitButton } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { getAllPages } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SelectField, SubmitButton } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { EDIT_CUSTOMER_FORM_ID } from './constants';
 import { EditCustomerProps } from './types';

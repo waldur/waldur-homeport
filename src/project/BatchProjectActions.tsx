@@ -1,8 +1,8 @@
 import { DropdownDivider } from 'react-bootstrap';
 import { Project } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
+import { translate } from '@/i18n';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 import { BatchDeleteProjectAction } from './BatchDeleteProjectAction';
 import { BatchMoveProjectAction } from './BatchMoveProjectAction';

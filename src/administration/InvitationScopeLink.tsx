@@ -1,4 +1,4 @@
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 import { getInvitationLinkProps } from './getInvitationLinkProps';
 

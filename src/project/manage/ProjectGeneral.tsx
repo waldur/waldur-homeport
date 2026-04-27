@@ -1,13 +1,13 @@
 import React, { useMemo } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { parseDate } from '@waldur/core/dateUtils';
-import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
-import FormTable, { FormTableItemProps } from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { useUser } from '@waldur/workspace/hooks';
+import { ENV } from '@/core/config';
+import { parseDate } from '@/core/dateUtils';
+import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
+import FormTable, { FormTableItemProps } from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 import { projectKindOptions } from '../utils';
 

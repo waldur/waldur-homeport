@@ -12,15 +12,15 @@ import {
   ProposalReview,
 } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { useAccordionUrlState } from '@waldur/core/useAccordionUrlState';
-import { isEmpty } from '@waldur/core/utils';
-import { SidebarLayout } from '@waldur/form/SidebarLayout';
-import { translate } from '@waldur/i18n';
-import { evaluateCondition } from '@waldur/marketplace-checklist/questionDependencies';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { formDataOptions } from '@/core/api';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { useAccordionUrlState } from '@/core/useAccordionUrlState';
+import { isEmpty } from '@/core/utils';
+import { SidebarLayout } from '@/form/SidebarLayout';
+import { translate } from '@/i18n';
+import { evaluateCondition } from '@/marketplace-checklist/questionDependencies';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { extractComplianceAnswers } from './complianceUtils';
 import { ProposalSidebar } from './ProposalSidebar';

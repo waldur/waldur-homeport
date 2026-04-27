@@ -2,7 +2,7 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { useModal } from './hooks';
 

@@ -4,7 +4,7 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 
 interface EnhancedProps {
   row: Resource;

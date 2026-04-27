@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { OfferingComponent, Resource } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { TableWithTabs } from '@waldur/table/TableWithTabs';
+import { translate } from '@/i18n';
+import { TableWithTabs } from '@/table/TableWithTabs';
 
 import { useResourceUsageTabs } from './utils';
 

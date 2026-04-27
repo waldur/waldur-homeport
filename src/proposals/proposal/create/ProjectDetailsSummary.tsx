@@ -1,12 +1,12 @@
 import { FC } from 'react';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { ReadOnlyFormControl } from '@waldur/form/ReadOnlyFormControl';
-import { translate } from '@waldur/i18n';
-import { Proposal, ProposalReview } from '@waldur/proposals/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { AccordionCard } from '@/core/AccordionCard';
+import { TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { ReadOnlyFormControl } from '@/form/ReadOnlyFormControl';
+import { translate } from '@/i18n';
+import { Proposal, ProposalReview } from '@/proposals/types';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { CommentSection } from './CommentSection';
 import { DocumentationFiles } from './DocumentationFiles';

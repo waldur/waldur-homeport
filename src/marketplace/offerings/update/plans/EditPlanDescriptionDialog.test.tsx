@@ -13,7 +13,7 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock config to prevent errors from ENV access
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {
@@ -24,7 +24,7 @@ vi.mock('@waldur/core/config', () => ({
 }));
 
 // Mock store hooks
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useNotify: () => ({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),
@@ -32,14 +32,14 @@ vi.mock('@waldur/store/hooks', () => ({
 }));
 
 // Mock modal hooks
-vi.mock('@waldur/modal/hooks', () => ({
+vi.mock('@/modal/hooks', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
 }));
 
 // Mock translation
-vi.mock('@waldur/core/translate', () => ({
+vi.mock('@/core/translate', () => ({
   translate: (str: string) => str,
 }));
 
@@ -54,7 +54,7 @@ vi.mock('./constants', () => ({
 }));
 
 // Mock marketplace utils
-vi.mock('@waldur/marketplace/offerings/store/utils', () => ({
+vi.mock('@/marketplace/offerings/store/utils', () => ({
   formatPlan: (data: any) => ({
     name: data.name,
     unit: data.unit?.value || data.unit,
@@ -64,7 +64,7 @@ vi.mock('@waldur/marketplace/offerings/store/utils', () => ({
 }));
 
 // Mock plan validation utils
-vi.mock('@waldur/marketplace/offerings/update/plans/utils', () => ({
+vi.mock('@/marketplace/offerings/update/plans/utils', () => ({
   articleCodeValidator: () => {},
 }));
 

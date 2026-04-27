@@ -1,6 +1,6 @@
 import { OrderState } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const ORDER_STATE_LABELS: Record<OrderState, string> = {
   'pending-consumer': translate('Pending consumer approval'),

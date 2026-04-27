@@ -10,7 +10,7 @@ import {
   supportAttachmentsDestroy,
 } from 'waldur-js-client';
 
-import { showError, showErrorResponse } from '@waldur/store/notify';
+import { showError, showErrorResponse } from '@/store/notify';
 
 import {
   useIssueAttachments,
@@ -26,25 +26,25 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store notify
-vi.mock('@waldur/store/notify', () => ({
+vi.mock('@/store/notify', () => ({
   showError: vi.fn(() => ({ type: 'SHOW_ERROR' })),
   showErrorResponse: vi.fn(() => ({ type: 'SHOW_ERROR_RESPONSE' })),
 }));
 
 // Mock store
-vi.mock('@waldur/store/store', () => ({
+vi.mock('@/store/store', () => ({
   default: {
     dispatch: vi.fn(),
   },
 }));
 
 // Mock core/api
-vi.mock('@waldur/core/api', () => ({
+vi.mock('@/core/api', () => ({
   formDataOptions: { headers: { 'Content-Type': 'multipart/form-data' } },
 }));
 
 // Mock core/config
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     excludedAttachmentTypes: ['.exe', '.bat'],
   },

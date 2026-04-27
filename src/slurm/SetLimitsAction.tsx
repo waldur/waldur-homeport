@@ -1,13 +1,13 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { validateStaffAction } from '@waldur/marketplace/resources/actions/utils';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { validateState } from '@waldur/resource/actions/base';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
-import { useValidators } from '@waldur/resource/actions/useValidators';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { validateStaffAction } from '@/marketplace/resources/actions/utils';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { validateState } from '@/resource/actions/base';
+import { ActionItemType } from '@/resource/actions/types';
+import { useModalDialogCallback } from '@/resource/actions/useModalDialogCallback';
+import { useValidators } from '@/resource/actions/useValidators';
 
 const SetLimitsDialog = lazyComponent(() =>
   import('./SetLimitsDialog').then((module) => ({

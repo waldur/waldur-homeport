@@ -1,12 +1,8 @@
-import { AZURE_VM_TYPE } from '@waldur/azure/constants';
-import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
-import {
-  INSTANCE_TYPE,
-  TENANT_TYPE,
-  VOLUME_TYPE,
-} from '@waldur/openstack/constants';
-import { MARKETPLACE_RANCHER } from '@waldur/rancher/cluster/create/constants';
-import { SLURM_PLUGIN } from '@waldur/slurm/constants';
+import { AZURE_VM_TYPE } from '@/azure/constants';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
+import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { MARKETPLACE_RANCHER } from '@/rancher/cluster/create/constants';
+import { SLURM_PLUGIN } from '@/slurm/constants';
 
 export const VALID_OFFERING_TYPES = [
   TENANT_TYPE,

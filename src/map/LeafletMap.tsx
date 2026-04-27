@@ -3,8 +3,8 @@ import React from 'react';
 import { MapContainer, Marker, Popup } from 'react-leaflet';
 import 'leaflet/dist/leaflet.css';
 
-import { translate } from '@waldur/i18n';
-import { CustomMarkerIcon } from '@waldur/map/CustomMarkerIcon';
+import { translate } from '@/i18n';
+import { CustomMarkerIcon } from '@/map/CustomMarkerIcon';
 
 import './LeafletMap.scss';
 

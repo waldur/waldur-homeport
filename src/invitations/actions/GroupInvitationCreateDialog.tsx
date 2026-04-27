@@ -5,17 +5,17 @@ import { useSelector } from 'react-redux';
 import { userGroupInvitationsCreate } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
-import { required, validateMaxLength } from '@waldur/core/validators';
-import { useCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
-import { SubmitButton, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { invitationTypeOptions } from '@waldur/invitations/actions/constants';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Role } from '@waldur/permissions/types';
-import { useNotify } from '@waldur/store/hooks';
-import { getCustomer, isStaff } from '@waldur/workspace/selectors';
+import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
+import { required, validateMaxLength } from '@/core/validators';
+import { useCustomerProjects } from '@/customer/workspace/fetchCustomer';
+import { SubmitButton, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { invitationTypeOptions } from '@/invitations/actions/constants';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Role } from '@/permissions/types';
+import { useNotify } from '@/store/hooks';
+import { getCustomer, isStaff } from '@/workspace/selectors';
 
 import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';
 import { AutoCreateProjectGroup } from './AutoCreateProjectGroup';

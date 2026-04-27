@@ -5,13 +5,13 @@ import { Card, Col, Form, Row, Stack } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { usersList, versionRetrieve } from 'waldur-js-client';
 
-import { getIconUrl, parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
-import { DashboardHeroLogo } from '@waldur/dashboard/hero/DashboardHeroLogo';
-import { translate } from '@waldur/i18n';
-import { getRoleFilterOptions } from '@waldur/user/support/utils';
+import { getIconUrl, parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
+import { DashboardHeroLogo } from '@/dashboard/hero/DashboardHeroLogo';
+import { translate } from '@/i18n';
+import { getRoleFilterOptions } from '@/user/support/utils';
 
 interface AdministrationProfileProps {
   healthy?: boolean;

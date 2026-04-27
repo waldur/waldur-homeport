@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { getIconUrl } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
+import { getIconUrl } from '@/core/api';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
 import './PoweredBy.scss';
 
 export const PoweredBy: FunctionComponent = () =>

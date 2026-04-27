@@ -1,9 +1,9 @@
 import { ChatsCircleIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openDrawerDialog } from '@waldur/drawer/actions';
-import { translate } from '@waldur/i18n';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openDrawerDialog } from '@/drawer/actions';
+import { translate } from '@/i18n';
 
 const QuickIssueContainer = lazyComponent(() =>
   import('./quick-issue-drawer/QuickIssueContainer').then((module) => ({

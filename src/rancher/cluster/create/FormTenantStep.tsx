@@ -4,14 +4,14 @@ import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 import { openstackTenantsList } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { FormGroup, SelectField } from '@waldur/form';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { orderProjectSelector } from '@waldur/marketplace/deploy/selectors';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { FormGroup, SelectField } from '@/form';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { orderProjectSelector } from '@/marketplace/deploy/selectors';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 export const FormTenantStep = (props: FormStepProps) => {
   const project = useSelector(orderProjectSelector);

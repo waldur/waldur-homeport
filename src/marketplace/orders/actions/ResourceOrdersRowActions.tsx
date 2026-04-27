@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { getUser } from '@waldur/workspace/selectors';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { getUser } from '@/workspace/selectors';
 
 import { CancelTerminationOrderButton } from './CancelTerminationOrderButton';
 import { OrderUnlinkButton } from './OrderUnlinkButton';

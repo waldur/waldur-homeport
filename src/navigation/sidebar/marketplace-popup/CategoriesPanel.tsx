@@ -9,10 +9,10 @@ import {
   useAccordionButton,
 } from 'react-bootstrap';
 
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { Category, CategoryGroup } from '@waldur/marketplace/types';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { truncate } from '@/core/utils';
+import { translate } from '@/i18n';
+import { Category, CategoryGroup } from '@/marketplace/types';
 
 import { BaseList } from './BaseList';
 

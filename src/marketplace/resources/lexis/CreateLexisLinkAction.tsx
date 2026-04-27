@@ -1,15 +1,15 @@
 import { LinkSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { validateState } from '@waldur/resource/actions/base';
-import { useModalDialogCallback } from '@waldur/resource/actions/useModalDialogCallback';
-import { useValidators } from '@waldur/resource/actions/useValidators';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { validateState } from '@/resource/actions/base';
+import { useModalDialogCallback } from '@/resource/actions/useModalDialogCallback';
+import { useValidators } from '@/resource/actions/useValidators';
 
 const CreateLexisLinkDialog = lazyComponent(() =>
   import('./CreateLexisLinkDialog').then((module) => ({

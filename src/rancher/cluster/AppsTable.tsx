@@ -1,6 +1,6 @@
 import { FC, useMemo } from 'react';
 
-import { TableWithTabs } from '@waldur/table/TableWithTabs';
+import { TableWithTabs } from '@/table/TableWithTabs';
 
 import { getRancherTabsAndTitle } from './utils';
 

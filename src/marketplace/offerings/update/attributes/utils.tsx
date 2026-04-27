@@ -1,12 +1,9 @@
 import { Validator } from 'redux-form';
 
-import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import {
-  parseIntField,
-  formatIntField,
-} from '@waldur/marketplace/common/utils';
+import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { parseIntField, formatIntField } from '@/marketplace/common/utils';
 
 interface AttrConfig {
   type?: string;

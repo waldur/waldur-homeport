@@ -11,12 +11,12 @@ import { Field } from 'react-final-form';
 import { FieldRenderProps } from 'react-final-form';
 import { Project } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/components';
-import { Role } from '@waldur/permissions/types';
-import { Customer } from '@waldur/workspace/types';
+import { Tip } from '@/core/Tooltip';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
+import { MenuComponent } from '@/metronic/components';
+import { Role } from '@/permissions/types';
+import { Customer } from '@/workspace/types';
 
 interface RoleAndProjectSelectPopupProps {
   roles: (Role & { tooltip? })[];

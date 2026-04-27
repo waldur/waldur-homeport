@@ -2,10 +2,10 @@ import { DateTime } from 'luxon';
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { formatTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { formatTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { InternalNotes } from '../InternalNotesField';
 import { MAINTENANCE_TYPE, MaintenanceForm } from '../types';

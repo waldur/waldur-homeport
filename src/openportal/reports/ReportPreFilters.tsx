@@ -2,8 +2,8 @@ import { Info } from 'luxon';
 import { FC } from 'react';
 import { Form } from 'react-bootstrap';
 
-import { range } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { range } from '@/core/utils';
+import { translate } from '@/i18n';
 
 const CURRENT_YEAR = new Date().getFullYear();
 

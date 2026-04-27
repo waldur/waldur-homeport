@@ -7,10 +7,10 @@ import {
   type ResourceReallocateLimitsRequest,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Limits } from '@waldur/marketplace/common/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { Limits } from '@/marketplace/common/types';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { FetchedData } from '../change-limits/utils';
 

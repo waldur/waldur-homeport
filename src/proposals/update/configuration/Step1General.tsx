@@ -5,12 +5,12 @@ import {
   RequestedOffering,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField, StringField } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { FormContainer, SelectField, StringField } from '@/form';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
 
 const getOfferings = (call_uuid: string) =>
   getAllPages<RequestedOffering>((page) =>

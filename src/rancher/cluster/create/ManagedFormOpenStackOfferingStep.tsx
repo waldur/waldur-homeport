@@ -5,10 +5,10 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { SelectField } from '@waldur/form/SelectField';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { SelectField } from '@/form/SelectField';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 export const ManagedFormOpenStackOfferingStep = (props: FormStepProps) => {
   const { data: offerings, isLoading } = useQuery<

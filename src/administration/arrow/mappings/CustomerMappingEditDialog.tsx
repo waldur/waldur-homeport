@@ -4,18 +4,18 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { StringField } from '@waldur/form';
-import { Select } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { required } from '@/core/validators';
+import { StringField } from '@/form';
+import { Select } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import { useUpdateCustomerMapping } from '../api';
 

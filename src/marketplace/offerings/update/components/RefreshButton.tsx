@@ -1,6 +1,6 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 
-import { LoadingSpinner } from '@waldur/table/TableRefreshButton';
+import { LoadingSpinner } from '@/table/TableRefreshButton';
 
 interface RefreshButtonProps {
   refetch;

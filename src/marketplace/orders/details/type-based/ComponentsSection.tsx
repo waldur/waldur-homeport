@@ -1,11 +1,11 @@
 import { useMemo } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { formatCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { Component } from '@waldur/marketplace/details/plan/types';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ENV } from '@/core/config';
+import { formatCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { Component } from '@/marketplace/details/plan/types';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { DetailsTable } from './DetailsTable';
 

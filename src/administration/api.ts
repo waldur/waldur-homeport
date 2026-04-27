@@ -3,7 +3,7 @@ import {
   MarketplaceResourcesListData,
 } from 'waldur-js-client';
 
-import { count, getAllPages } from '@waldur/core/api';
+import { count, getAllPages } from '@/core/api';
 
 export const getResourcesCount = (
   query?: MarketplaceResourcesListData['query'],

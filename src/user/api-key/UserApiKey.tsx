@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { useUser } from '@waldur/workspace/hooks';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { useUser } from '@/workspace/hooks';
 
 import { AuthenticationEvents } from './AuthenticationEvents';
 import { UserTokenLifetime } from './UserTokenLifetime';

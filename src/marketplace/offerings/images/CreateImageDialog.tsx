@@ -2,21 +2,16 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { reduxForm } from 'redux-form';
 import { marketplaceScreenshotsCreate } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { required } from '@waldur/core/validators';
-import {
-  FormContainer,
-  StringField,
-  SubmitButton,
-  TextField,
-} from '@waldur/form';
-import { ImageField } from '@waldur/form/ImageField';
-import { translate } from '@waldur/i18n';
-import { OFFERING_IMAGES_FORM_ID } from '@waldur/marketplace/offerings/store/constants';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { required } from '@/core/validators';
+import { FormContainer, StringField, SubmitButton, TextField } from '@/form';
+import { ImageField } from '@/form/ImageField';
+import { translate } from '@/i18n';
+import { OFFERING_IMAGES_FORM_ID } from '@/marketplace/offerings/store/constants';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 export const CreateImageDialog = reduxForm<
   {},

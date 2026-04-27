@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { marketplaceProjectServiceAccountsList } from 'waldur-js-client';
 
-import { ServiceAccountsTableComponent } from '@waldur/customer/service-accounts/ServiceAccountsList';
-import { createFetcher } from '@waldur/table/api';
-import { TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { ServiceAccountsTableComponent } from '@/customer/service-accounts/ServiceAccountsList';
+import { createFetcher } from '@/table/api';
+import { TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 export const ProjectsServiceAccountsList: FC<TableWithPortal> = ({
   portal,

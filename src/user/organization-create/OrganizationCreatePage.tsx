@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { onboardingVerificationsDestroy } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { VerticalProgressSteps } from '@waldur/core/VerticalProgressSteps';
-import { SidebarLayout } from '@waldur/form/SidebarLayout';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { useNotify } from '@waldur/store/hooks';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { VerticalProgressSteps } from '@/core/VerticalProgressSteps';
+import { SidebarLayout } from '@/form/SidebarLayout';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { useNotify } from '@/store/hooks';
 
 import { ORGANIZATION_ONBOARDING_FORM_ID } from '../constants';
 

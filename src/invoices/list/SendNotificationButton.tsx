@@ -3,10 +3,10 @@ import { FunctionComponent } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { invoicesSendNotification } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { getUser } from '@/workspace/selectors';
 
 export const SendNotificationButton: FunctionComponent<{ row }> = ({ row }) => {
   const user = useSelector(getUser);

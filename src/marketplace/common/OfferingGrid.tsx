@@ -2,8 +2,8 @@ import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import { OfferingCard } from './OfferingCard';
 

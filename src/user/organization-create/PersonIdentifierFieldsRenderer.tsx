@@ -2,11 +2,11 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { DateField } from '@waldur/form/DateField';
-import { FormGroup } from '@waldur/form/FormGroup';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { DateField } from '@/form/DateField';
+import { FormGroup } from '@/form/FormGroup';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
 
 export interface PersonIdentifierFieldConfig {
   validation_method: string;

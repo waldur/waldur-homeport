@@ -7,11 +7,11 @@ import { uniqueId } from 'lodash-es';
 import { FC } from 'react';
 import { Offering } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface OwnProps {
   offering: Offering;

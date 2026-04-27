@@ -2,14 +2,11 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { validateOpenStackInstanceManagePermission } from '@waldur/openstack/utils';
-import {
-  validateRuntimeState,
-  validateState,
-} from '@waldur/resource/actions/base';
-import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { validateOpenStackInstanceManagePermission } from '@/openstack/utils';
+import { validateRuntimeState, validateState } from '@/resource/actions/base';
+import { DialogActionButton } from '@/resource/actions/DialogActionButton';
 
 const AttachVolumeDialog = lazyComponent(() =>
   import('./AttachVolumeDialog').then((module) => ({

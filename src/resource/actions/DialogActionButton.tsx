@@ -1,6 +1,6 @@
 import { ReactElement } from 'react';
 
-import { ActionButton } from '@waldur/table/ActionButton';
+import { ActionButton } from '@/table/ActionButton';
 
 import { ActionItem } from './ActionItem';
 import { DialogActionProps } from './DialogActionProps';

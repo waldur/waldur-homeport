@@ -1,6 +1,6 @@
 import { describe, it, expect } from 'vitest';
 
-import { Limits } from '@waldur/marketplace/common/types';
+import { Limits } from '@/marketplace/common/types';
 
 import { calculateFreedCapacity } from './utils';
 

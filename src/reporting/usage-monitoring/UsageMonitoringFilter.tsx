@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { reduxForm, Field } from 'redux-form';
 
-import { SelectField } from '@waldur/form/SelectField';
-import { translate } from '@waldur/i18n';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { SelectField } from '@/form/SelectField';
+import { translate } from '@/i18n';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 import {
   getCurrentBillingPeriod,

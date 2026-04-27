@@ -2,14 +2,14 @@ import { FC, useCallback, useMemo, useState } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { UserAffiliationCount } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { SimpleTable } from '@waldur/table/SimpleTable';
-import { Column } from '@waldur/table/types';
-import { getSimpleExportData, renderFieldOrDash } from '@waldur/table/utils';
+import { ChartCard } from '@/core/ChartCard';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
+import { getSimpleExportData, renderFieldOrDash } from '@/table/utils';
 
 import {
   AffiliationCategory,

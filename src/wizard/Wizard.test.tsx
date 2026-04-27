@@ -10,7 +10,7 @@ import { Wizard } from './Wizard';
 import { WizardModal } from './WizardModal';
 
 // Mock CloseDialogButton since it uses modal context
-vi.mock('@waldur/modal/CloseDialogButton', () => ({
+vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: ({ className }: { className?: string }) => (
     <button type="button" className={className} data-testid="close-button">
       Close
@@ -19,7 +19,7 @@ vi.mock('@waldur/modal/CloseDialogButton', () => ({
 }));
 
 // Mock ModalDialog to simplify testing - render footer directly without wrapper
-vi.mock('@waldur/modal/ModalDialog', () => ({
+vi.mock('@/modal/ModalDialog', () => ({
   ModalDialog: ({
     title,
     subtitle,

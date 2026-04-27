@@ -2,10 +2,10 @@ import { FunctionComponent, useMemo } from 'react';
 import { Field } from 'redux-form';
 import { OrganizationGroup } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface SetAccessPolicyFormContainerProps {
   organizationGroups: OrganizationGroup[];

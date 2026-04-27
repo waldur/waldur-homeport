@@ -1,7 +1,7 @@
 import React from 'react';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { FormTableItemProps } from '@waldur/form/FormTable';
+import { FormTableItemProps } from '@/form/FormTable';
 
 export interface ScriptEditorProps {
   offering: ProviderOfferingDetails;

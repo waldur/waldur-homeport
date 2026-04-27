@@ -3,12 +3,12 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useAsyncFn, useBoolean } from 'react-use';
 import { Invoice, invoicesList, paymentsLinkToInvoice } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { InvoicesDropdown } from '@waldur/customer/payments/InvoicesDropdown';
-import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { getAllPages } from '@/core/api';
+import { InvoicesDropdown } from '@/customer/payments/InvoicesDropdown';
+import { translate } from '@/i18n';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { getCustomer, getUser } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 import { updatePaymentsList } from './utils';
 

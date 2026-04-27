@@ -1,10 +1,10 @@
 import { PaperclipIcon, XIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { formatFilesize } from '@waldur/core/utils';
-import { FileUploadField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { formatFilesize } from '@/core/utils';
+import { FileUploadField } from '@/form';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 interface AttachmentRowProps {
   value: File | null | undefined;

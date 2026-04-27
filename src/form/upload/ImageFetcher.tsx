@@ -1,9 +1,9 @@
 import { useState, useEffect } from 'react';
 
-import { get } from '@waldur/core/api';
-import { Image } from '@waldur/core/Image';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { get } from '@/core/api';
+import { Image } from '@/core/Image';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 export const ImageFetcher = ({ url, name, thumb = false, iconSize = 20 }) => {
   const [imageUrl, setImageUrl] = useState(null);

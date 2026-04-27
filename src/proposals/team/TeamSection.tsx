@@ -7,16 +7,16 @@ import {
   userInvitationsList,
 } from 'waldur-js-client';
 
-import { TableTabsContainer } from '@waldur/customer/list/TableTabsContainer';
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { GenericInvitationContext } from '@waldur/invitations/types';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { createFetcher } from '@waldur/table/api';
-import { TableTabs } from '@waldur/table/TableTabs';
-import { useTable } from '@waldur/table/useTable';
+import { TableTabsContainer } from '@/customer/list/TableTabsContainer';
+import { BaseEventsList } from '@/events/BaseEventsList';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { GenericInvitationContext } from '@/invitations/types';
+import { RoleEnum } from '@/permissions/enums';
+import { createFetcher } from '@/table/api';
+import { TableTabs } from '@/table/TableTabs';
+import { useTable } from '@/table/useTable';
 
 import { CALL_REVIEWERS_QUERY_KEY } from '../constants';
 import { AddCommentButton } from '../proposal/create-review/AddCommentButton';

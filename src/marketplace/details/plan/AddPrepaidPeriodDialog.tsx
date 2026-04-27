@@ -4,13 +4,13 @@ import { Form } from 'react-bootstrap';
 import { Form as ReactFinalForm, Field, useFormState } from 'react-final-form';
 import { Project } from 'waldur-js-client';
 
-import { formatDate, formatISODate } from '@waldur/core/dateUtils';
-import { SubmitButton } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { SelectField } from '@waldur/form/SelectField';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { formatDate, formatISODate } from '@/core/dateUtils';
+import { SubmitButton } from '@/form';
+import { DateField } from '@/form/DateField';
+import { SelectField } from '@/form/SelectField';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import {
   calculateMonthsDifference,

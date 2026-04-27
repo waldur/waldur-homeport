@@ -5,18 +5,18 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { keysCreate, SshKeyRequest } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { required } from '@waldur/core/validators';
-import { StringField } from '@waldur/form/StringField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { TextField } from '@waldur/form/TextField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { createEntity } from '@waldur/table/actions';
+import { ENV } from '@/core/config';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { required } from '@/core/validators';
+import { StringField } from '@/form/StringField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { TextField } from '@/form/TextField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { createEntity } from '@/table/actions';
 
 import * as constants from './constants';
 

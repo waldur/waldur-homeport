@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
-import { Panel } from '@waldur/core/Panel';
-import { FloatingSubmitButton } from '@waldur/form/FloatingSubmitButton';
-import { TosNotification } from '@waldur/form/TosNotification';
-import { translate } from '@waldur/i18n';
-import { PageBarTabs } from '@waldur/marketplace/common/PageBarTabs';
-import { useReviewActions } from '@waldur/proposals/review/utils';
-import { ProposalReview } from '@waldur/proposals/types';
-import { isReviewInFinalState } from '@waldur/proposals/utils';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { Panel } from '@/core/Panel';
+import { FloatingSubmitButton } from '@/form/FloatingSubmitButton';
+import { TosNotification } from '@/form/TosNotification';
+import { translate } from '@/i18n';
+import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
+import { useReviewActions } from '@/proposals/review/utils';
+import { ProposalReview } from '@/proposals/types';
+import { isReviewInFinalState } from '@/proposals/utils';
+import { ActionButton } from '@/table/ActionButton';
 
 import { createReviewSteps } from './steps/steps';
 

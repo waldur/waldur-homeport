@@ -6,11 +6,11 @@ import {
   marketplaceSlurmPeriodicUsagePoliciesPreviewImpact,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { SECOND } from '@waldur/core/constants';
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { SECOND } from '@/core/constants';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import './SlurmPolicyPreview.scss';
 

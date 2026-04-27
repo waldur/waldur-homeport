@@ -3,8 +3,8 @@ import { FunctionComponent } from 'react';
 import { Card } from 'react-bootstrap';
 import { CategoryGroup } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import Avatar from '@/core/Avatar';
+import { wrapTooltip } from '@/table/ActionButton';
 
 import { Category } from '../types';
 

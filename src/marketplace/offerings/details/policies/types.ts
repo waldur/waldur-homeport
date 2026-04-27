@@ -1,4 +1,4 @@
-import { PolicyPeriod } from '@waldur/customer/cost-policies/types';
+import { PolicyPeriod } from '@/customer/cost-policies/types';
 
 export interface OfferingCostPolicyFormData {
   scope: string;

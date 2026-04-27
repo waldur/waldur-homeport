@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 
 import { AnalyticsButtons, AnalyticsMode } from '../analytics';
 

@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 export const canRegisterServiceProviderForCustomer = createSelector(
   getUser,

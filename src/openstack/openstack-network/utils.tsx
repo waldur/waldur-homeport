@@ -1,6 +1,6 @@
 import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const formatAllocationPool = (pools) =>
   pools.length === 0

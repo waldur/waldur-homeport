@@ -5,10 +5,10 @@ import {
 } from 'waldur-js-client';
 import { OpenStackNestedPort } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { UpdateInternalIpsAction } from './actions/update-internal-ips/UpdateInternalIpsSetAction';
 import { SetAllowedAddressPairsButton } from './SetAllowedAddressPairsButton';

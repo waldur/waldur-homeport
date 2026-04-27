@@ -1,9 +1,9 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { FormContainer, TextField } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
+import { FormContainer, TextField } from '@/form';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
 
 export const Step3FinalConfig: FC<WizardFormStepProps> = (props) => {
   return (

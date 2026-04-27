@@ -7,15 +7,15 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { useMemo } from 'react';
 
-import { getIdentityProviders } from '@waldur/administration/api';
-import { getIconUrl } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { LanguageSelectorBox } from '@waldur/i18n/LanguageSelectorBox';
-import { FooterLinks } from '@waldur/navigation/footer/FooterLinks';
-import { ThemeSwitcherButton } from '@waldur/theme/ThemeSwitcher';
+import { getIdentityProviders } from '@/administration/api';
+import { getIconUrl } from '@/core/api';
+import { ENV } from '@/core/config';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { LanguageSelectorBox } from '@/i18n/LanguageSelectorBox';
+import { FooterLinks } from '@/navigation/footer/FooterLinks';
+import { ThemeSwitcherButton } from '@/theme/ThemeSwitcher';
 
 import { AuthHeader } from '../AuthHeader';
 import { LoginMethods } from '../LoginMethods';

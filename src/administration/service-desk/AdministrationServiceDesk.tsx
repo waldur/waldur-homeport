@@ -4,16 +4,16 @@ import { Card, Col, Dropdown, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
-import { ServiceDeskProviderLogo } from '@waldur/administration/service-desk/ServiceDeskProviderLogo';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { hasSupport } from '@waldur/issues/hooks';
-import { openModalDialog } from '@waldur/modal/actions';
-import { SettingsDescription } from '@waldur/SettingsDescription';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
+import { ServiceDeskProviderLogo } from '@/administration/service-desk/ServiceDeskProviderLogo';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { hasSupport } from '@/issues/hooks';
+import { openModalDialog } from '@/modal/actions';
+import { SettingsDescription } from '@/SettingsDescription';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 import { FieldRow } from '../settings/FieldRow';
 

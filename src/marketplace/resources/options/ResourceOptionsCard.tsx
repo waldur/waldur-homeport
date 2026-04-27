@@ -2,10 +2,10 @@ import { ArrowRightIcon, InfoIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
 
 import { MultiEditOptionsAction } from '../mass-actions/MultiEditOptionsAction';
 

@@ -2,12 +2,12 @@ import { FC } from 'react';
 import { Card, Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { OIDC_TYPES } from '@waldur/auth/providers/constants';
-import { IdentityProviderLogo } from '@waldur/auth/providers/IdentityProviderLogo';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
+import { OIDC_TYPES } from '@/auth/providers/constants';
+import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
 const CreateProviderDialog = lazyComponent(() =>
   import('./CreateProviderDialog').then((module) => ({

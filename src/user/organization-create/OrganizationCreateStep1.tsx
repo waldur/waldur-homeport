@@ -11,14 +11,14 @@ import { useDispatch, useSelector } from 'react-redux';
 import { change, Field, formValueSelector } from 'redux-form';
 import { BlankEnum, ValidationMethodEnum } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { FormGroup } from '@waldur/form/FormGroup';
-import { SelectField } from '@waldur/form/SelectField';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { useNotify } from '@waldur/store/hooks';
+import { ENV } from '@/core/config';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { FormGroup } from '@/form/FormGroup';
+import { SelectField } from '@/form/SelectField';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { useNotify } from '@/store/hooks';
 
 import { getValidationMethodInfo } from './constants';
 import { PersonIdentifierFieldConfig } from './PersonIdentifierFieldsRenderer';

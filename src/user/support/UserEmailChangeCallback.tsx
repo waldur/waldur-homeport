@@ -3,12 +3,12 @@ import { useEffect, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { usersConfirmEmail } from 'waldur-js-client';
 
-import * as AuthService from '@waldur/auth/AuthService';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { wait } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { setCurrentUser } from '@waldur/workspace/actions';
+import * as AuthService from '@/auth/AuthService';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { wait } from '@/core/utils';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { setCurrentUser } from '@/workspace/actions';
 
 import { getCurrentUser } from '../UsersService';
 

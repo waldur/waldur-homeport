@@ -3,15 +3,15 @@ import { useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { customersDeleteUser, projectsDeleteUser } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { useUser } from '@waldur/workspace/hooks';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 export const UsersBulkRemoveButton = ({ rows, refetch }) => {
   const currentUser = useUser();

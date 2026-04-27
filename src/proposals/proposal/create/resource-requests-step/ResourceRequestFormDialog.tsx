@@ -6,17 +6,17 @@ import {
   proposalProposalsResourcesSet,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
 import {
   Proposal,
   ProposalResource,
   ProposalResourceFormData,
-} from '@waldur/proposals/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+} from '@/proposals/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ResourceRequestWizardFormFirstPage } from './ResourceRequestWizardFormFirstPage';
 import { ResourceRequestWizardFormSecondPage } from './ResourceRequestWizardFormSecondPage';

@@ -2,8 +2,8 @@ import { CpuIcon, QuestionIcon, UsersThreeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { formatRam, groupByHypervisor } from './HypervisorPlacementMapUtils';
 

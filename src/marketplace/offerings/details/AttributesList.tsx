@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { NestedSection as Section } from 'waldur-js-client';
 
-import { AttributeItem } from '@waldur/marketplace/offerings/details/AttributeItem';
+import { AttributeItem } from '@/marketplace/offerings/details/AttributeItem';
 
 interface AttributesListProps {
   sections: Section[];

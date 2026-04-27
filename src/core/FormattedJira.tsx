@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { formatJiraMarkup } from '@waldur/issues/comments/utils';
+import { formatJiraMarkup } from '@/issues/comments/utils';
 
 import { sanitizeHtml } from './sanitize';
 

@@ -1,8 +1,8 @@
-import { ENV } from '@waldur/core/config';
-import { VStepperFormStep } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { Call } from '@waldur/proposals/types';
+import { ENV } from '@/core/config';
+import { VStepperFormStep } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { Call } from '@/proposals/types';
 
 import { ProjectDetailsStep } from './ProjectDetailsStep';
 import { ProposalComplianceStepExpanded } from './ProposalComplianceStepExpanded';

@@ -2,11 +2,11 @@ import { LockIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Stack } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate, formatRelativeWithHour } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { ModelCard1 } from '@waldur/core/ModelCard1';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { formatDate, formatRelativeWithHour } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { ModelCard1 } from '@/core/ModelCard1';
+import { translate } from '@/i18n';
 
 import { PublicCallApplyButton } from './details/PublicCallApplyButton';
 import { Call } from './types';

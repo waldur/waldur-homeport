@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
 
 import { ReportingTitle } from '../ReportingTitle';
 

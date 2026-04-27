@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 
 import { EditProjectProps } from '../types';
 

@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 const SubNetRow = ({ SubNet: subnet, onRemove }) => (
   <tr>

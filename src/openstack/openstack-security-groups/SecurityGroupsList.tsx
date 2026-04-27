@@ -5,12 +5,12 @@ import {
   OpenstackSecurityGroupsListData,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
-import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
+import { ResourceState } from '@/resource/state/ResourceState';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { CreateSecurityGroupAction } from '../openstack-tenant/actions/CreateSecurityGroupAction';
 import { PullSecurityGroupsAction } from '../openstack-tenant/actions/PullSecurityGroupsAction';

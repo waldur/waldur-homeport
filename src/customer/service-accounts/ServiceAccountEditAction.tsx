@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { EditAction } from '@/form/EditAction';
+import { openModalDialog } from '@/modal/actions';
 
 import { ServiceAccountsProps } from './type';
 

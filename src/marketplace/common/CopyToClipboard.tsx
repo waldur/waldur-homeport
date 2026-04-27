@@ -2,9 +2,9 @@ import { CopyIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/notify';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { showSuccess } from '@/store/notify';
 
 import './CopyToClipboard.scss';
 

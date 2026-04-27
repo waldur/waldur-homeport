@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 const SelectFlavorField: FC<any> = (props) => (
   <Select

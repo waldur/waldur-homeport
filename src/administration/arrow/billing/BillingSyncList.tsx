@@ -2,19 +2,19 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { adminArrowBillingSyncsList, ArrowBillingSync } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { getPreviousBillingPeriods } from '@waldur/reporting/usage-monitoring/utils';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { getPreviousBillingPeriods } from '@/reporting/usage-monitoring/utils';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   AdminArrowBillingSyncsFilter as BillingSyncFilter,
   selectAdminArrowBillingSyncsFilter as selectBillingSyncFilter,
-} from '@waldur/table/generated/AdminArrowBillingSyncsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/AdminArrowBillingSyncsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import {
   getBillingSyncStateLabel,

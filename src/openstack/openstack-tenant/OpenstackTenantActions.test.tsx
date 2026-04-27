@@ -8,15 +8,15 @@ import { OpenstackTenantActions } from './OpenstackTenantActions';
 
 const mockStore = configureMockStore();
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 
-vi.mock('@waldur/features/connect', () => ({
+vi.mock('@/features/connect', () => ({
   isFeatureVisible: () => true,
 }));
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {

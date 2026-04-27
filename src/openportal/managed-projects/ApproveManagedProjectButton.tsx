@@ -4,11 +4,11 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { openportalManagedProjectsApprove } from 'waldur-js-client';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { wrapTooltip } from '@/table/ActionButton';
 
 export const ApproveManagedProjectButton = ({
   row,

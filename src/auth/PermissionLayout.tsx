@@ -12,15 +12,15 @@ import {
 import { Card } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { isDescendantOf } from '@waldur/navigation/useTabs';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { isDescendantOf } from '@/navigation/useTabs';
 import {
   getCustomer,
   getProject,
   getUser,
   isStaffOrSupport,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 type Permission = 'allowed' | 'limited' | 'restricted' | 'custom';
 interface PermissionMessage {

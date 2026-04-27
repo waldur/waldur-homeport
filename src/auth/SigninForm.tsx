@@ -1,11 +1,11 @@
 import { ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
 
-import { ENV } from '@waldur/core/config';
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { ENV } from '@/core/config';
+import { format } from '@/core/ErrorMessageFormatter';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import * as AuthService from './AuthService';
 import { InputGroup } from './InputGroup';

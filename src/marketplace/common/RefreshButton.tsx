@@ -1,9 +1,9 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
 
 interface RefreshButtonProps {
   size?: 'sm' | 'lg';

@@ -2,13 +2,13 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { callManagingOrganisationsListUsersList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { TeamTableComponent } from '@waldur/customer/team/TeamTableComponent';
-import { translate } from '@waldur/i18n';
-import { GenericPermission } from '@waldur/permissions/types';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { TeamTableComponent } from '@/customer/team/TeamTableComponent';
+import { translate } from '@/i18n';
+import { GenericPermission } from '@/permissions/types';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
+import { getCustomer } from '@/workspace/selectors';
 
 import { UserAddButton } from './UserAddButton';
 

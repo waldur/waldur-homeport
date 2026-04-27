@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { Alert, Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Badge } from '@waldur/core/Badge';
-import { formatDate } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Badge } from '@/core/Badge';
+import { formatDate } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 
 import { ServiceProviderAccess } from '../types';
 import { formatFieldName } from '../utils';

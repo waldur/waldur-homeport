@@ -5,17 +5,17 @@ import {
   marketplacePublicOfferingsList,
 } from 'waldur-js-client';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { createFetcher } from '@waldur/table/api';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { createFetcher } from '@/table/api';
 import {
   UserTosFiltersFilter,
   selectUserTosFiltersFilter,
-} from '@waldur/table/generated/UserTosFiltersFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { USER_TOS_MANAGEMENT_TABLE_ID } from '@waldur/user/constants';
+} from '@/table/generated/UserTosFiltersFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { USER_TOS_MANAGEMENT_TABLE_ID } from '@/user/constants';
 
 import { OfferingTosExpandableRow } from './OfferingTosExpandableRow';
 

@@ -2,11 +2,11 @@ import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
 import { useContext } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { getUser } from '@/workspace/selectors';
 
 import { useDeleteComment } from './api';
 import { IssueCommentsContext } from './IssueCommentsContext';

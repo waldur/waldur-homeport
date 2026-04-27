@@ -16,23 +16,18 @@ import {
   ServiceProvider,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { getUUID } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
-import {
-  FormContainer,
-  SelectField,
-  StringField,
-  SubmitButton,
-} from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { getUUID } from '@/core/utils';
+import { required } from '@/core/validators';
+import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import { MaintenanceForm, MaintenanceFormDialogProps } from '../types';
 import {

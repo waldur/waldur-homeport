@@ -1,13 +1,13 @@
-import { ENV } from '@waldur/core/config';
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
   PlanStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { FormCloudStep } from '@waldur/marketplace/deploy/steps/FormCloudStep';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
+} from '@/marketplace/deploy/steps/constants';
+import { FormCloudStep } from '@/marketplace/deploy/steps/FormCloudStep';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
 import { MARKETPLACE_RANCHER } from './constants';
 import { FormDataStorageStep } from './FormDataStorageStep';

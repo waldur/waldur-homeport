@@ -4,12 +4,12 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsGlauthUsersConfigRetrieve } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingErred } from '@/core/LoadingErred';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
 
 const GLAuthConfigDialog = lazyComponent(() =>
   import('./GLAuthConfigDialog').then((module) => ({

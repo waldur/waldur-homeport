@@ -1,11 +1,11 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { PermissionDetails } from '@waldur/user/affiliations/PermissionDetails';
-import { getUser } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { PermissionDetails } from '@/user/affiliations/PermissionDetails';
+import { getUser } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 export const OrganizationExpandableRow: React.FC<{
   row: Customer;

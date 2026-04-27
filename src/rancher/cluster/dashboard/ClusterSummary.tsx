@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const ClusterSummary: FC<{
   resourceScope: RancherCluster;

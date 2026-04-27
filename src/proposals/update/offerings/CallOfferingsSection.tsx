@@ -4,13 +4,13 @@ import {
   proposalProtectedCallsOfferingsList,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { CallOfferingStateField } from '@waldur/proposals/details/CallOfferingStateField';
-import { Call } from '@waldur/proposals/types';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { CallOfferingStateField } from '@/proposals/details/CallOfferingStateField';
+import { Call } from '@/proposals/types';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { AddOfferingButton } from './AddOfferingButton';
 import { CallOfferingExpandableRow } from './CallOfferingExpandableRow';

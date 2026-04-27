@@ -13,13 +13,13 @@
 import { describe, it, expect, vi, beforeEach } from 'vitest';
 
 // Mock all dependencies that have side effects
-vi.mock('@waldur/Application', () => ({
+vi.mock('@/Application', () => ({
   queryClient: {
     fetchQuery: vi.fn(),
   },
 }));
 
-vi.mock('@waldur/core/api', () => ({
+vi.mock('@/core/api', () => ({
   fetchResultCount: vi.fn(),
   parseNextPage: vi.fn(),
 }));

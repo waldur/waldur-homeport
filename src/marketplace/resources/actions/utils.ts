@@ -1,5 +1,5 @@
-import { translate } from '@waldur/i18n/translate';
-import { ActionContext } from '@waldur/resource/actions/types';
+import { translate } from '@/i18n/translate';
+import { ActionContext } from '@/resource/actions/types';
 
 import { ResourceAction } from './constants';
 

@@ -1,8 +1,8 @@
 import { useState, useEffect, useCallback, useRef } from 'react';
 
-import { Select } from '@waldur/form/themed-select';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
+import { Select } from '@/form/themed-select';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
 
 import { FormGroup } from '../offerings/FormGroup';
 

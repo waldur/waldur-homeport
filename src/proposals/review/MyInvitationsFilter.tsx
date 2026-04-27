@@ -1,8 +1,8 @@
 import { Field, reduxForm } from 'redux-form';
 
-import { Select, REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { Select, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 export const MY_INVITATIONS_FILTER_FORM_ID = 'MyInvitationsFilter';
 

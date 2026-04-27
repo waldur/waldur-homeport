@@ -8,7 +8,7 @@ import {
   SshKey,
 } from 'waldur-js-client';
 
-import { NodeField } from '@waldur/rancher/types';
+import { NodeField } from '@/rancher/types';
 
 export interface SelfManagedRancherOrderFormData {
   nodes: NodeField[];

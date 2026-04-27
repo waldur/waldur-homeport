@@ -9,11 +9,11 @@ import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { formatPhoneNumber } from '@waldur/core/utils';
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { StateIndicator } from '@/core/StateIndicator';
+import { formatPhoneNumber } from '@/core/utils';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { formatUserIsActive } from '../support/utils';
 

@@ -1,16 +1,16 @@
 import { reduxForm } from 'redux-form';
 
-import { syncFiltersToURL } from '@waldur/core/filters';
-import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/customer/constants';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { OFFERING_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/orders/list/constants';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
-import { PROVIDER_ORDERS_LIST_FILTER_FORM_ID } from '@waldur/marketplace/service-providers/constants';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { syncFiltersToURL } from '@/core/filters';
+import { CUSTOMER_ORDERS_LIST_FILTER_FORM_ID } from '@/customer/constants';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { OFFERING_ORDERS_LIST_FILTER_FORM_ID } from '@/marketplace/details/constants';
+import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
+import { MARKETPLACE_ORDERS_LIST_FILTER_FORM_ID } from '@/marketplace/orders/list/constants';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { PROVIDER_ORDERS_LIST_FILTER_FORM_ID } from '@/marketplace/service-providers/constants';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { createOrderStateOptions } from '../OrderStates';
 import { ProviderAutocomplete } from '../ProviderAutocomplete';

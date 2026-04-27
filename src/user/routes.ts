@@ -1,20 +1,20 @@
 import { UIView } from '@uirouter/react';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { isFeatureVisible } from '@waldur/features/connect';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { isFeatureVisible } from '@/features/connect';
 import {
   CustomerFeatures,
   MarketplaceFeatures,
   UserFeatures,
-} from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { hasSupport } from '@waldur/issues/hooks';
+} from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { hasSupport } from '@/issues/hooks';
 import {
   hasNonProjectPermissions,
   isStaffOrSupport,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { UsersService } from './UsersService';
 
@@ -128,7 +128,7 @@ export const states: StateDeclaration[] = [
     name: 'profile.issues',
     url: 'issues/',
     component: lazyComponent(() =>
-      import('@waldur/navigation/header/quick-issue-drawer/UserIssuesTable').then(
+      import('@/navigation/header/quick-issue-drawer/UserIssuesTable').then(
         (module) => ({
           default: module.UserIssuesTable,
         }),
@@ -210,7 +210,7 @@ export const states: StateDeclaration[] = [
     name: 'profile-freeipa',
     url: 'freeipa-account/',
     component: lazyComponent(() =>
-      import('@waldur/freeipa/FreeIPAAccount').then((module) => ({
+      import('@/freeipa/FreeIPAAccount').then((module) => ({
         default: module.FreeIpaAccount,
       })),
     ),
@@ -295,7 +295,7 @@ export const states: StateDeclaration[] = [
     name: 'projects',
     url: '/projects/',
     component: lazyComponent(() =>
-      import('@waldur/user/affiliations/ProjectsList').then((module) => ({
+      import('@/user/affiliations/ProjectsList').then((module) => ({
         default: module.ProjectsList,
       })),
     ),
@@ -305,7 +305,7 @@ export const states: StateDeclaration[] = [
     name: 'organizations',
     url: '/organizations/',
     component: lazyComponent(() =>
-      import('@waldur/user/affiliations/OrganizationsList').then((module) => ({
+      import('@/user/affiliations/OrganizationsList').then((module) => ({
         default: module.OrganizationsList,
       })),
     ),
@@ -343,7 +343,7 @@ export const states: StateDeclaration[] = [
     name: 'category-resources',
     url: '/resources/:category_uuid/',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/resources/list/CategoryResourcesContainer').then(
+      import('@/marketplace/resources/list/CategoryResourcesContainer').then(
         (module) => ({ default: module.CategoryResourcesContainer }),
       ),
     ),
@@ -353,7 +353,7 @@ export const states: StateDeclaration[] = [
     name: 'all-resources',
     url: '/all-resources/',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/resources/list/AllResourcesList').then(
+      import('@/marketplace/resources/list/AllResourcesList').then(
         (module) => ({ default: module.AllResourcesList }),
       ),
     ),

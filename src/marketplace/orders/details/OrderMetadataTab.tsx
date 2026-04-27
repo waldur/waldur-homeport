@@ -3,13 +3,13 @@ import {
   PublicOfferingDetails as Offering,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { getDetailsComponent } from '@waldur/marketplace/common/registry';
-import { OrderStateField } from '@waldur/marketplace/orders/details/OrderStateField';
+import { formatDateTime } from '@/core/dateUtils';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { getDetailsComponent } from '@/marketplace/common/registry';
+import { OrderStateField } from '@/marketplace/orders/details/OrderStateField';
 
 export const OrderMetadataTab = ({
   order,

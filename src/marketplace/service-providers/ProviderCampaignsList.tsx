@@ -2,20 +2,20 @@ import { FunctionComponent, useCallback, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Campaign, promotionsCampaignsList } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { CampaignCreateButton } from '@waldur/marketplace/service-providers/CampaignCreateButton';
-import { ProviderCampaignActions } from '@waldur/marketplace/service-providers/ProviderCampaignActions';
-import { ProviderCampaignResourceExpandable } from '@waldur/marketplace/service-providers/ProviderCampaignResourceExpandable';
-import { createFetcher } from '@waldur/table/api';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { CampaignCreateButton } from '@/marketplace/service-providers/CampaignCreateButton';
+import { ProviderCampaignActions } from '@/marketplace/service-providers/ProviderCampaignActions';
+import { ProviderCampaignResourceExpandable } from '@/marketplace/service-providers/ProviderCampaignResourceExpandable';
+import { createFetcher } from '@/table/api';
 import {
   PromotionsCampaignsFilter,
   selectPromotionsCampaignsFilter,
   CampaignStateOptions,
-} from '@waldur/table/generated/PromotionsCampaignsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/PromotionsCampaignsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { CustomerResourcesListPlaceholder } from '../resources/list/CustomerResourcesListPlaceholder';
 

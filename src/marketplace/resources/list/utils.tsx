@@ -1,13 +1,13 @@
 import { Resource } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { BooleanField } from '@waldur/table/BooleanField';
-import { SLUG_COLUMN } from '@waldur/table/slug';
-import { Column } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { BooleanField } from '@/table/BooleanField';
+import { SLUG_COLUMN } from '@/table/slug';
+import { Column } from '@/table/types';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ResourceNameField } from './ResourceNameField';
 import { ResourceStateField } from './ResourceStateField';

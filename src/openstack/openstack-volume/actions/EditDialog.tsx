@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { openstackVolumesUpdate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   createLatinNameField,
   createDescriptionField,
-} from '@waldur/resource/actions/base';
-import { ActionDialogProps, ActionField } from '@waldur/resource/actions/types';
-import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
+} from '@/resource/actions/base';
+import { ActionDialogProps, ActionField } from '@/resource/actions/types';
+import { UpdateResourceDialog } from '@/resource/actions/UpdateResourceDialog';
 
 function createBootableField(): ActionField {
   return {

@@ -13,15 +13,12 @@ import {
   projectsList,
 } from 'waldur-js-client';
 
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import {
-  AsyncPaginate,
-  REACT_SELECT_TABLE_FILTER,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { RootState } from '@waldur/store/reducers';
-import { createSelectFetcher } from '@waldur/table/api';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { AsyncPaginate, REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { RootState } from '@/store/reducers';
+import { createSelectFetcher } from '@/table/api';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 const PureInvoicesItemsFilter: FunctionComponent<InvoicesItemsFilterProps> = (
   props,

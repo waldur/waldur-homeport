@@ -4,15 +4,15 @@ import { useDispatch } from 'react-redux';
 import { marketplaceOrdersApproveByProvider } from 'waldur-js-client';
 import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   TABLE_PENDING_PROVIDER_PUBLIC_ORDERS,
   TABLE_PENDING_PUBLIC_ORDERS,
   TABLE_PUBLIC_ORDERS,
-} from '@waldur/marketplace/orders/list/constants';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { fetchListStart, resetPagination } from '@waldur/table/actions';
+} from '@/marketplace/orders/list/constants';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { fetchListStart, resetPagination } from '@/table/actions';
 
 interface ApproveAllButtonProps {
   orders: OrderResponse[];

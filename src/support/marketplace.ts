@@ -1,31 +1,29 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { OfferingConfiguration } from '@waldur/marketplace/common/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { BASIC_OFFERING_TYPE, SUPPORT_OFFERING_TYPE } from './constants';
 import { serializer } from './serializer';
 
 const OfferingConfigurationDetails = lazyComponent(() =>
-  import('@waldur/support/OfferingConfigurationDetails').then((module) => ({
+  import('@/support/OfferingConfigurationDetails').then((module) => ({
     default: module.OfferingConfigurationDetails,
   })),
 );
 const UserPluginOptionsForm = lazyComponent(() =>
-  import('@waldur/marketplace/UserPluginOptionsForm').then((module) => ({
+  import('@/marketplace/UserPluginOptionsForm').then((module) => ({
     default: module.UserPluginOptionsForm,
   })),
 );
 const UserSecretOptionsForm = lazyComponent(() =>
-  import('@waldur/marketplace/UserSecretOptionsForm').then((module) => ({
+  import('@/marketplace/UserSecretOptionsForm').then((module) => ({
     default: module.UserSecretOptionsForm,
   })),
 );
 const ServiceDeskProvisioningConfigForm = lazyComponent(() =>
-  import('@waldur/support/ServiceDeskProvisioningConfigForm').then(
-    (module) => ({
-      default: module.ServiceDeskProvisioningConfigForm,
-    }),
-  ),
+  import('@/support/ServiceDeskProvisioningConfigForm').then((module) => ({
+    default: module.ServiceDeskProvisioningConfigForm,
+  })),
 );
 const RequestOrderForm = lazyComponent(() =>
   import('./RequestOrderForm').then((module) => ({

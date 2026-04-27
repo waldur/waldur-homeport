@@ -8,13 +8,13 @@ import {
   openstackSubnetsList,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { RootState } from '@waldur/store/reducers';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RootState } from '@/store/reducers';
+import { renderFieldOrDash } from '@/table/utils';
 
 const selector = formValueSelector(RESOURCE_ACTION_FORM);
 const typeSelector = (state: RootState): string => selector(state, 'type');

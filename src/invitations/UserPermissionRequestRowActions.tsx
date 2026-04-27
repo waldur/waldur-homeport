@@ -1,11 +1,11 @@
 import { FunctionComponent } from 'react';
 
-import { UserPermissionRequestApproveButton } from '@waldur/invitations/UserPermissionRequestApproveButton';
-import { UserPermissionRequestRejectButton } from '@waldur/invitations/UserPermissionRequestRejectButton';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { useUser } from '@waldur/workspace/hooks';
+import { UserPermissionRequestApproveButton } from '@/invitations/UserPermissionRequestApproveButton';
+import { UserPermissionRequestRejectButton } from '@/invitations/UserPermissionRequestRejectButton';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
 
 import { UserPermissionRequestDeleteButton } from './UserPermissionRequestDeleteButton';
 import { UserPermissionRequestReviewButton } from './UserPermissionRequestReviewButton';

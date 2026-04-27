@@ -18,7 +18,7 @@ import {
 } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 interface ReferralTypeIconProps {
   resourceType: string;

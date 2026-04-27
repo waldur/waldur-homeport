@@ -5,12 +5,12 @@ import {
   rancherTemplatesList,
 } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 export const ClusterTemplatesList: FunctionComponent<
   TableWithPortal<{ resourceScope: RancherCluster }>

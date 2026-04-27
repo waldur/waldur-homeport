@@ -2,11 +2,11 @@ import { DateTime } from 'luxon';
 import { useMemo } from 'react';
 import { Issue } from 'waldur-js-client';
 
-import { getUUID } from '@waldur/core/utils';
-import { PeriodOption } from '@waldur/form/types';
-import { makeLastTwelveMonthsFilterPeriods } from '@waldur/form/utils';
-import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
+import { getUUID } from '@/core/utils';
+import { PeriodOption } from '@/form/types';
+import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
+import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { IBreadcrumbItem } from '@/navigation/types';
 
 export const getStartAndEndDatesOfMonth = (period: PeriodOption) => {
   const { year, month } = period;

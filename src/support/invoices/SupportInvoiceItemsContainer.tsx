@@ -3,9 +3,9 @@ import { FunctionComponent } from 'react';
 import { useAsync } from 'react-use';
 import { invoicesList } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { makeAccountingPeriods } from '@waldur/customer/list/utils';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { makeAccountingPeriods } from '@/customer/list/utils';
+import { translate } from '@/i18n';
 
 import { SupportInvoiceItemsList } from './SupportInvoiceItemsList';
 

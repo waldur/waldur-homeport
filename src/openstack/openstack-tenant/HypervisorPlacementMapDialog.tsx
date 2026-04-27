@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { openstackInstancesList } from 'waldur-js-client';
 
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { createFetcher, fetchAll } from '@waldur/table/api';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { createFetcher, fetchAll } from '@/table/api';
 
 import { HypervisorPlacementMapContent } from './HypervisorPlacementMapContent';
 

@@ -2,13 +2,13 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { EventsListData } from 'waldur-js-client';
 
-import { isEmpty } from '@waldur/core/utils';
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
+import { isEmpty } from '@/core/utils';
+import { BaseEventsList } from '@/events/BaseEventsList';
 import {
   CustomerEventsFilter,
   selectCustomerEventsFilter,
-} from '@waldur/table/generated/CustomerEventsFilter';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/CustomerEventsFilter';
+import { getCustomer } from '@/workspace/selectors';
 
 const mapStateToFilter = createSelector(
   getCustomer,

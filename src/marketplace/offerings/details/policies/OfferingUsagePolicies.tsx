@@ -1,11 +1,11 @@
 import { FC, useMemo } from 'react';
 import { marketplaceOfferingUsagePoliciesList } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
 
 import { PoliciesTable } from './PoliciesTable';
 import { PolicyDeleteAction } from './PolicyDeleteButton';

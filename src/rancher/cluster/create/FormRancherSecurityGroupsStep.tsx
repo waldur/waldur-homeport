@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { useSelector } from 'react-redux';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { loadSecurityGroups } from '@waldur/openstack/api';
-import { FormSecurityGroupsField } from '@waldur/openstack/openstack-instance/deploy/FormSecurityGroupsField';
+import { UI_STALE_TIME } from '@/core/constants';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { loadSecurityGroups } from '@/openstack/api';
+import { FormSecurityGroupsField } from '@/openstack/openstack-instance/deploy/FormSecurityGroupsField';
 
 import { formTenantSelector } from './utils';
 

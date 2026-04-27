@@ -10,9 +10,9 @@ import {
   User,
 } from 'waldur-js-client';
 
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { RoleType } from '@waldur/permissions/types';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { RoleType } from '@/permissions/types';
 
 export const canDeletePermission = (user: User, perm: Permission) => {
   const scopeType = perm.scope_type as RoleType;

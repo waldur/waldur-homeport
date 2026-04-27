@@ -3,15 +3,15 @@ import { FC } from 'react';
 import { Form } from 'react-final-form';
 import { Answer, projectsSubmitAnswers, QuestionAdmin } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { FieldError, SubmitButton } from '@waldur/form';
-import { FormFieldError } from '@waldur/form/FormFieldError';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { formDataOptions } from '@/core/api';
+import { FieldError, SubmitButton } from '@/form';
+import { FormFieldError } from '@/form/FormFieldError';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { QuestionAnswerField } from './QuestionAnswerField';
 

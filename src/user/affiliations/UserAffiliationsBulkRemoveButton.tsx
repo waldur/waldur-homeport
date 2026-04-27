@@ -3,12 +3,12 @@ import { useMemo, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Permission } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 
 import { canDeletePermission, revokePermission } from './utils';
 

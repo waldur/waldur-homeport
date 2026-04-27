@@ -3,10 +3,10 @@ import { Card } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 import { BasePublicPlan } from 'waldur-js-client';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { OfferingLimits } from '@waldur/marketplace/offerings/store/types';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { translate } from '@/i18n';
+import { OfferingLimits } from '@/marketplace/offerings/store/types';
+import { PriceTooltip } from '@/price/PriceTooltip';
 
 import { ComponentRow } from './ComponentRow';
 import { ComponentTotalRow } from './ComponentTotalRow';

@@ -3,15 +3,15 @@ import { Alert, Card, Table } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import type { ArrowCustomerMapping } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { useDiscoverLicenses, useLinkResource } from '../api';
 

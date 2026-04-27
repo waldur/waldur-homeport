@@ -12,21 +12,21 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import Avatar from '@waldur/core/Avatar';
-import { Badge } from '@waldur/core/Badge';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import Avatar from '@/core/Avatar';
+import { Badge } from '@/core/Badge';
+import { UI_STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
 
 import { AddKeycloakMembershipButton } from './AddKeycloakMembershipButton';
 import { KeycloakMembershipBulkRemoveAction } from './KeycloakMembershipBulkRemoveAction';

@@ -7,10 +7,10 @@ import {
 import { FC } from 'react';
 import { Resource } from 'waldur-js-client';
 
-import { formatMediumDateTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { AnnouncementBar } from '@waldur/navigation/header/announcements/AnnouncementBar';
+import { formatMediumDateTime } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
 
 import {
   getAttribution,

@@ -1,10 +1,10 @@
 import { LockIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
-import { parseDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { parseDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 export const EndingField = ({
   endDate,

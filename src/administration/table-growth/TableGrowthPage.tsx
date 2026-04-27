@@ -5,16 +5,16 @@ import { Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { overrideSettingsRetrieve, statsTableGrowth } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { STALE_TIME } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Panel } from '@waldur/core/Panel';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
-import { useNotify } from '@waldur/store/hooks';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { Badge } from '@/core/Badge';
+import { STALE_TIME } from '@/core/constants';
+import { Link } from '@/core/Link';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Panel } from '@/core/Panel';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { useNotify } from '@/store/hooks';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { getTableGrowth } from './api';
 import { TableGrowthAlerts } from './TableGrowthAlerts';

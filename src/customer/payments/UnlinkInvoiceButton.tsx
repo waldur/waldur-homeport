@@ -2,10 +2,10 @@ import { FileTextIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { paymentsUnlinkFromInvoice } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 import { updatePaymentsList } from './utils';
 

@@ -1,11 +1,11 @@
 import Papa from 'papaparse';
 import { FC, useMemo } from 'react';
 
-import { formatFilesize } from '@waldur/core/utils';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { DownloadTemplateItem } from '@waldur/project/import/DownloadTemplateItem';
-import saveAsCsv from '@waldur/table/exporters/csv';
+import { formatFilesize } from '@/core/utils';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { DownloadTemplateItem } from '@/project/import/DownloadTemplateItem';
+import saveAsCsv from '@/table/exporters/csv';
 
 import templateFile from './organizations_template.json';
 

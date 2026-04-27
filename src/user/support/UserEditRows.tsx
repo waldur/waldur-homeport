@@ -1,18 +1,14 @@
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { formatUserStatus } from '@waldur/user/support/utils';
-import {
-  getUser,
-  isStaffOrSupport,
-  isStaff,
-} from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { formatUserStatus } from '@/user/support/utils';
+import { getUser, isStaffOrSupport, isStaff } from '@/workspace/selectors';
 
 import {
   formatGender,

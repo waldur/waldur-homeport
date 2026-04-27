@@ -4,15 +4,15 @@ import {
   proposalProtectedCallsRoundsList,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { ValidationIcon } from '@waldur/marketplace/common/ValidationIcon';
-import { Call } from '@waldur/proposals/types';
-import { getRoundStatus } from '@waldur/proposals/utils';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { ValidationIcon } from '@/marketplace/common/ValidationIcon';
+import { Call } from '@/proposals/types';
+import { getRoundStatus } from '@/proposals/utils';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { RoundCreateButton } from './RoundCreateButton';
 import { RoundExpandableRow } from './RoundExpandableRow';

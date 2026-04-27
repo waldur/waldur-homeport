@@ -9,19 +9,19 @@ import {
   usersList,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { Tip } from '@waldur/core/Tooltip';
-import { truncate } from '@waldur/core/utils';
-import { deleteDuplicateRecords } from '@waldur/customer/import/utils';
-import { FieldErrorMessage } from '@waldur/form/FieldError';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { SkipErrorsCheck } from '@waldur/project/import/SkipErrorsCheck';
-import { showError } from '@waldur/store/notify';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { Tip } from '@/core/Tooltip';
+import { truncate } from '@/core/utils';
+import { deleteDuplicateRecords } from '@/customer/import/utils';
+import { FieldErrorMessage } from '@/form/FieldError';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
+import { showError } from '@/store/notify';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { OfferingUserRecord, RecordStatus } from './types';
 import {

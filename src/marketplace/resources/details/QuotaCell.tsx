@@ -1,7 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { Tip } from '@waldur/core/Tooltip';
+import { formatUsageValue } from '@/core/formatNumber';
+import { Tip } from '@/core/Tooltip';
 
 import { QuotaProgressBar } from './QuotaProgressBar';
 

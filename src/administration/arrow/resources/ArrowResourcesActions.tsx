@@ -1,7 +1,7 @@
 import type { Resource } from 'waldur-js-client';
 
-import { SetBackendIdAction } from '@waldur/marketplace/resources/SetBackendIdAction';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { SetBackendIdAction } from '@/marketplace/resources/SetBackendIdAction';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { SyncConsumptionHistoryAction } from './SyncConsumptionHistoryAction';
 import { ViewConsumptionHistoryAction } from './ViewConsumptionHistoryAction';

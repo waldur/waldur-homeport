@@ -10,14 +10,14 @@ import { useSelector } from 'react-redux';
 import { useBoolean } from 'react-use';
 import { Field, getFormValues } from 'redux-form';
 
-import { InfiniteList } from '@waldur/core/async/InfiniteList';
-import { BaseAsyncListProps, RowData } from '@waldur/core/async/types';
-import { IconButton } from '@waldur/core/buttons/IconButton';
-import { isEmpty } from '@waldur/core/utils';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { Form } from '@waldur/form/Form';
-import { translate } from '@waldur/i18n';
-import { DataPage, processApiResponse, SdkFunction } from '@waldur/table/api';
+import { InfiniteList } from '@/core/async/InfiniteList';
+import { BaseAsyncListProps, RowData } from '@/core/async/types';
+import { IconButton } from '@/core/buttons/IconButton';
+import { isEmpty } from '@/core/utils';
+import { FilterBox } from '@/form/FilterBox';
+import { Form } from '@/form/Form';
+import { translate } from '@/i18n';
+import { DataPage, processApiResponse, SdkFunction } from '@/table/api';
 
 import { useFavoritePages } from '../favorite-pages/FavoritePageService';
 import { HeaderButtonBullet } from '../HeaderButtonBullet';

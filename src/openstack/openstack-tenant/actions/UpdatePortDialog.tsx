@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 import { OpenStackPort, openstackPortsUpdatePortIp } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { loadSubnets } from '@waldur/openstack/api';
-import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { loadSubnets } from '@/openstack/api';
+import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 import { FixedIPsField } from './CreatePortDialog';
 

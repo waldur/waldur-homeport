@@ -6,9 +6,9 @@ import {
   supportRequestTypesAdminDeactivate,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useNotify } from '@waldur/store/hooks';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useNotify } from '@/store/hooks';
 
 export const RequestTypeToggleAction = ({
   row,

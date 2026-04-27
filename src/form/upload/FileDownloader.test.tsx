@@ -2,13 +2,13 @@ import { fireEvent, render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import * as api from '@waldur/core/api';
-import * as store from '@waldur/store/hooks';
+import * as api from '@/core/api';
+import * as store from '@/store/hooks';
 
 import { FileDownloader } from './FileDownloader';
 
-vi.mock('@waldur/core/api');
-vi.mock('@waldur/store/hooks');
+vi.mock('@/core/api');
+vi.mock('@/store/hooks');
 
 describe('FileDownloader', () => {
   const mockUrl = 'http://example.com/file';

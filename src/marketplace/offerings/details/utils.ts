@@ -1,5 +1,5 @@
-import { isEmpty } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { isEmpty } from '@/core/utils';
+import { translate } from '@/i18n';
 
 export const isValidAttribute = (data: any): boolean => {
   if (typeof data === 'string' && data.trim().length > 0) {

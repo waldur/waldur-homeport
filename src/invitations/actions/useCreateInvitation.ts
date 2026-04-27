@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { useCustomerProjects } from '@waldur/customer/workspace/fetchCustomer';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionMap } from '@waldur/permissions/enums';
-import { checkScope } from '@waldur/permissions/hasPermission';
-import { getCustomer, getProject, getUser } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { useCustomerProjects } from '@/customer/workspace/fetchCustomer';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionMap } from '@/permissions/enums';
+import { checkScope } from '@/permissions/hasPermission';
+import { getCustomer, getProject, getUser } from '@/workspace/selectors';
 
 import { InvitationContext } from './types';
 

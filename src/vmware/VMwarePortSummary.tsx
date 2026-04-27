@@ -1,6 +1,6 @@
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
 
 export const VMwarePortSummary = (props) => {
   const { resource } = props;

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { BasePublicPlan, PublicOfferingDetails } from 'waldur-js-client';
 
-import { Panel } from '@waldur/core/Panel';
-import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
+import { Panel } from '@/core/Panel';
+import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
+import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 
 interface PricingPlanItemProps {
   offering: PublicOfferingDetails;

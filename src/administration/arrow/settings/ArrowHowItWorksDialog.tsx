@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 
-import { MermaidChart } from '@waldur/core/MermaidChart';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { MermaidChart } from '@/core/MermaidChart';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { useArrowSettings } from '../api';
 

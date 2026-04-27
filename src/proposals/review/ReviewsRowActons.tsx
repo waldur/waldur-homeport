@@ -1,10 +1,10 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { getUser } from '@waldur/workspace/selectors';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { getUser } from '@/workspace/selectors';
 
 import { ReviewDeleteAction } from './ReviewDeleteAction';
 import { ReviewViewAction } from './ReviewViewAction';

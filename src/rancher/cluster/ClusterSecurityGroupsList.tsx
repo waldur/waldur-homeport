@@ -5,12 +5,12 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { SecurityGroupRulesList } from '@waldur/openstack/openstack-security-groups/SecurityGroupRulesList';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { SecurityGroupRulesList } from '@/openstack/openstack-security-groups/SecurityGroupRulesList';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { ClusterSecurityGroupSetRulesButton } from './ClusterSecurityGroupSetRulesButton';
 import { SetManagementSecurityGroupButton } from './SetManagementSecurityGroupButton';

@@ -5,13 +5,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import { Project } from 'waldur-js-client';
 
-import { FilterBox } from '@waldur/form/FilterBox';
-import { translate } from '@waldur/i18n';
-import { setMarketplaceFilter } from '@waldur/marketplace/landing/filter/store/actions';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Customer } from '@waldur/workspace/types';
+import { FilterBox } from '@/form/FilterBox';
+import { translate } from '@/i18n';
+import { setMarketplaceFilter } from '@/marketplace/landing/filter/store/actions';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Customer } from '@/workspace/types';
 
 import { sidebarResourcesFilterSelector } from '../resources-filter/utils';
 

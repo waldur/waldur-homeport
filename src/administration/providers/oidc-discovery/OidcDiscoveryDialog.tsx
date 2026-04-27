@@ -7,11 +7,11 @@ import {
   IdentityProviderRequest,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { Wizard } from '@waldur/wizard';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { Wizard } from '@/wizard';
 
 import { ConfigurationStep } from './steps/ConfigurationStep';
 import { ConnectionStep } from './steps/ConnectionStep';

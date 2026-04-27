@@ -1,8 +1,8 @@
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
 
 import { FormGroup } from '../../FormGroup';
 

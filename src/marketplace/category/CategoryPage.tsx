@@ -4,17 +4,17 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplaceCategoriesRetrieve } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 import {
   useBreadcrumbs,
   useExtraToolbar,
   useFullPage,
   useToolbarActions,
-} from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
+} from '@/navigation/context';
+import { useTitle } from '@/navigation/title';
+import { IBreadcrumbItem } from '@/navigation/types';
 
 import { CardStyleType } from '../common/cards/index';
 import { CardStyleProvider } from '../landing/CardStyleContext';

@@ -4,9 +4,9 @@ import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { OpenStackFlavor } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
-import { type RootState } from '@waldur/store/reducers';
+import { translate } from '@/i18n';
+import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { type RootState } from '@/store/reducers';
 
 export const LonghornWorkerWarning: FunctionComponent<{}> = () => {
   const flavor: OpenStackFlavor = useSelector((state: RootState) =>

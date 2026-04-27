@@ -9,12 +9,12 @@ import {
   reviewerProfilesUnpublish,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ReviewerProfileAddDropdown } from './ReviewerProfileAddDropdown';
 

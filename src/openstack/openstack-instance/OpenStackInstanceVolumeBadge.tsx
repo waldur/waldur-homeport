@@ -1,12 +1,12 @@
 import { OpenStackNestedVolume } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { Tip } from '@waldur/core/Tooltip';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import openstackIcon from '@waldur/images/appstore/icon-openstack.png';
-import { Field } from '@waldur/resource/summary';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { Tip } from '@/core/Tooltip';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import openstackIcon from '@/images/appstore/icon-openstack.png';
+import { Field } from '@/resource/summary';
 
 interface VolumeBadgeProps {
   volume: OpenStackNestedVolume;

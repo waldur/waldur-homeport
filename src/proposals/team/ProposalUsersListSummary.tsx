@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { proposalProposalsListUsersList } from 'waldur-js-client';
 
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
 
 import { FieldReviewComments } from '../proposal/create-review/FieldReviewComments';
 

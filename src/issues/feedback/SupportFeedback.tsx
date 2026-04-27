@@ -5,13 +5,13 @@ import { compose } from 'redux';
 import { Field, reduxForm } from 'redux-form';
 import { supportFeedbacksCreate } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { SUPPORT_FEEDBACK_FORM_ID } from '@waldur/issues/feedback/constants';
-import { useTitle } from '@waldur/navigation/title';
-import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
-import { router } from '@waldur/router';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { FormContainer, SubmitButton, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { SUPPORT_FEEDBACK_FORM_ID } from '@/issues/feedback/constants';
+import { useTitle } from '@/navigation/title';
+import { RateStars } from '@/proposals/proposal/create-review/RateStars';
+import { router } from '@/router';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import './SupportFeedback.scss';
 

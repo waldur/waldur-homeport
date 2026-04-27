@@ -2,14 +2,14 @@ import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import { Answer, QuestionWithAnswer } from 'waldur-js-client';
 
-import { SubmitButton, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
-import { useNotify } from '@waldur/store/hooks';
+import { SubmitButton, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { useNotify } from '@/store/hooks';
 
 interface AnswerReviewDialogProps {
   resolve: {

@@ -1,4 +1,4 @@
-import { getUserLocale } from '@waldur/i18n/LanguageUtilsService';
+import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
 /**
  * Format a numeric value with locale-aware thousands separators.

@@ -15,13 +15,13 @@ import {
 } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { SkeletonLoader } from '@waldur/ai-assistant/components/shared/SkeletonLoader';
-import { UIBlockProps } from '@waldur/ai-assistant/lib/types';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { Link } from '@waldur/core/Link';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/notify';
+import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
+import { UIBlockProps } from '@/ai-assistant/lib/types';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { Link } from '@/core/Link';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { showSuccess } from '@/store/notify';
 
 // Utility: Generate avatar initials from VM name
 const getInitials = (name: string): string => {

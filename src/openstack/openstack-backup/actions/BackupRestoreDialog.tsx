@@ -6,12 +6,12 @@ import { FieldArray } from 'react-final-form-arrays';
 import { useAsync } from 'react-use';
 import { OpenStackBackup, openstackBackupsRestore } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { required } from '@/core/validators';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
+import { useNotify } from '@/store/hooks';
 
 import { NetworksList } from './NetworksList';
 import {

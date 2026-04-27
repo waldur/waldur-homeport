@@ -5,8 +5,8 @@ import { Form } from 'react-bootstrap';
 import Flatpickr from 'react-flatpickr';
 import { VersionHistory } from 'waldur-js-client';
 
-import { useFlatpickrTheme } from '@waldur/form/useFlatpickrTheme';
-import { translate } from '@waldur/i18n';
+import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
+import { translate } from '@/i18n';
 
 import { useVersionAtTimestamp } from './api';
 import { HistoryEntityType } from './types';

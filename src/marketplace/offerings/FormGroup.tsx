@@ -5,8 +5,8 @@ import { ReactNode, FC, PropsWithChildren } from 'react';
 import { Form } from 'react-bootstrap';
 import { FieldMetaState } from 'react-final-form';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { FieldError } from '@waldur/form';
+import { Tip } from '@/core/Tooltip';
+import { FieldError } from '@/form';
 
 interface FormGroupProps {
   label?: ReactNode;

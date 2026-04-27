@@ -2,20 +2,20 @@ import { FC, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { useDebouncedValue } from '@waldur/core/useDebouncedValue';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { translate } from '@waldur/i18n';
-import { OfferingCard } from '@waldur/marketplace/common/OfferingCard';
-import { useCardStyle } from '@waldur/marketplace/landing/CardStyleContext';
+import { UI_STALE_TIME } from '@/core/constants';
+import { useDebouncedValue } from '@/core/useDebouncedValue';
+import { FilterBox } from '@/form/FilterBox';
+import { translate } from '@/i18n';
+import { OfferingCard } from '@/marketplace/common/OfferingCard';
+import { useCardStyle } from '@/marketplace/landing/CardStyleContext';
 import {
   OFFERING_CARD_MANDATORY_FIELDS,
   getOfferingGridSize,
   useOfferingListFilter,
-} from '@waldur/marketplace/landing/utils';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/marketplace/landing/utils';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { CategorySelection, CategorySidebar } from './CategorySidebar';
 import './SidebarLayout.scss';

@@ -1,7 +1,7 @@
 import { uniqueId } from 'lodash-es';
 import Papa from 'papaparse';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import templateFile from './offering_users_template.json';
 import { OfferingUserRecord } from './types';

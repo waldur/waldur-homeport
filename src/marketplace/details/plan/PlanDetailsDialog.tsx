@@ -6,15 +6,15 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
-import { STALE_TIME, UI_STALE_TIME } from '@waldur/core/constants';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { BillingPeriod } from '@waldur/marketplace/common/BillingPeriod';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { VersionHistoryButton } from '@waldur/version-history';
+import { STALE_TIME, UI_STALE_TIME } from '@/core/constants';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { BillingPeriod } from '@/marketplace/common/BillingPeriod';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { VersionHistoryButton } from '@/version-history';
 
 import { PureDetailsTable } from './PlanDetailsTable';
 import { combinePrices } from './utils';

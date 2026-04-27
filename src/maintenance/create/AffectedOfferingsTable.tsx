@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import { AtLeast } from '@waldur/core/types';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { AtLeast } from '@/core/types';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { MaintenanceForm, MAINTENANCE_IMPACT_LEVEL } from '../types';
 

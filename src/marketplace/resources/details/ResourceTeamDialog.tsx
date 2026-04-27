@@ -1,7 +1,7 @@
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { ProjectUsersList } from '@waldur/project/team/ProjectUsersList';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { ProjectUsersList } from '@/project/team/ProjectUsersList';
 
 export const ResourceTeamDialog = ({ resolve }) => {
   return (

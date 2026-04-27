@@ -15,8 +15,8 @@ import { useRouter } from '@uirouter/react';
 import { useEffect, FunctionComponent } from 'react';
 import { apiAuthLogout } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import * as AuthService from './AuthService';
 

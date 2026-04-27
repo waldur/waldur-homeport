@@ -3,7 +3,7 @@ import { FC, ReactNode } from 'react';
 import BsBadge, { BadgeProps } from 'react-bootstrap/Badge';
 import type { Variant } from 'react-bootstrap/types';
 
-import { Tip, TipProps } from '@waldur/core/Tooltip';
+import { Tip, TipProps } from '@/core/Tooltip';
 
 interface OwnProps extends BadgeProps {
   leftIcon?: ReactNode;

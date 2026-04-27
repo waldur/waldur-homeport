@@ -3,11 +3,11 @@ import { FC, useState } from 'react';
 import { Form } from 'react-bootstrap';
 import { Resource, marketplaceResourcesList } from 'waldur-js-client';
 
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { SlurmPolicyPreview } from './SlurmPolicyPreview';
 

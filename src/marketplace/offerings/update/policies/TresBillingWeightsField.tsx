@@ -4,10 +4,10 @@ import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { IconButton } from '@waldur/core/buttons/IconButton';
-import { required } from '@waldur/core/validators';
-import { NumberField, StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { IconButton } from '@/core/buttons/IconButton';
+import { required } from '@/core/validators';
+import { NumberField, StringField } from '@/form';
+import { translate } from '@/i18n';
 
 interface TresWeight {
   key: string;

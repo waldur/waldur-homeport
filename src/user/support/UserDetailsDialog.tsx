@@ -4,19 +4,19 @@ import { Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { UserEvents } from '@waldur/user/dashboard/UserEvents';
-import { DataAccessDialogContent } from '@waldur/user/data-access/DataAccessDialogContent';
-import { KeysList } from '@waldur/user/keys/KeysList';
-import { UserDetailsTable } from '@waldur/user/support/UserDetailsTable';
-import { UserOfferingList } from '@waldur/user/UserOfferingList';
-import { getUser } from '@waldur/workspace/selectors';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { renderFieldOrDash } from '@/table/utils';
+import { UserEvents } from '@/user/dashboard/UserEvents';
+import { DataAccessDialogContent } from '@/user/data-access/DataAccessDialogContent';
+import { KeysList } from '@/user/keys/KeysList';
+import { UserDetailsTable } from '@/user/support/UserDetailsTable';
+import { UserOfferingList } from '@/user/UserOfferingList';
+import { getUser } from '@/workspace/selectors';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 

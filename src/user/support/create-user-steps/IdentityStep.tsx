@@ -1,19 +1,19 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { CountrySelectField } from '@waldur/form/CountrySelectField';
-import { MultiCountrySelectField } from '@waldur/form/MultiCountrySelectField';
-import { SelectField } from '@waldur/form/SelectField';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { CountrySelectField } from '@/form/CountrySelectField';
+import { MultiCountrySelectField } from '@/form/MultiCountrySelectField';
+import { SelectField } from '@/form/SelectField';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import {
   getGenderChoices,
   getOrganizationTypeOptions,
   getPersonalTitleOptions,
-} from '@waldur/user/support/aai-constants';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+} from '@/user/support/aai-constants';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 export const IdentityStep: FC<WizardStepProps> = (props) => {
   const hasAnyField =

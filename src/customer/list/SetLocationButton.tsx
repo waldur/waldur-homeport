@@ -2,18 +2,18 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { customersPartialUpdate } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { translate } from '@waldur/i18n';
-import { GeolocationPoint } from '@waldur/map/types';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { getCustomer } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
+import { GeolocationPoint } from '@/map/types';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { setCurrentCustomer } from '@/workspace/actions';
+import { getCustomer } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 const SetLocationDialog = lazyComponent(() =>
-  import('@waldur/map/SetLocationDialog').then((module) => ({
+  import('@/map/SetLocationDialog').then((module) => ({
     default: module.SetLocationDialog,
   })),
 );

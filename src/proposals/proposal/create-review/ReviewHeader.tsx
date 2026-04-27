@@ -1,11 +1,11 @@
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { Proposal, ProposalReview } from '@waldur/proposals/types';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { Proposal, ProposalReview } from '@/proposals/types';
 import {
   formatReviewState,
   getReviewStateBadgeVariant,
   isReviewInFinalState,
-} from '@waldur/proposals/utils';
+} from '@/proposals/utils';
 
 import { EntityHeader } from '../EntityHeader';
 

@@ -1,9 +1,9 @@
 import { useMemo } from 'react';
 import { OrderDetails } from 'waldur-js-client';
 
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { useUser } from '@waldur/workspace/hooks';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 import { getOrderType } from '../utils';
 

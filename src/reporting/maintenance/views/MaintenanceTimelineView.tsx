@@ -2,11 +2,11 @@ import { DateTime } from 'luxon';
 import { FC, useMemo, useState, useCallback } from 'react';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { ExportData } from '@waldur/table/exporters/types';
+import { ChartCard } from '@/core/ChartCard';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { ExportData } from '@/table/exporters/types';
 
 import { MaintenanceTimelineChart } from '../charts/MaintenanceTimelineChart';
 import { TimelineGrouping } from '../types';

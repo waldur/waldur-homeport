@@ -4,14 +4,14 @@ import {
   getInitialValues,
   syncFiltersToURL,
   useSyncInitialFiltersToURL,
-} from '@waldur/core/filters';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { parentOfferingFilter } from '@waldur/marketplace/offerings/utils';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+} from '@/core/filters';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
+import { parentOfferingFilter } from '@/marketplace/offerings/utils';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { CATEGORY_RESOURCES_ALL_FILTER_FORM_ID } from './constants';
 import { OfferingFilter } from './OfferingFilter';

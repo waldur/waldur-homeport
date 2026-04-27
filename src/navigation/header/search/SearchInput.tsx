@@ -2,8 +2,8 @@ import { MagnifyingGlassIcon, XIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { useMemo } from 'react';
 
-import { StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { StringField } from '@/form';
+import { translate } from '@/i18n';
 
 import { SearchResult } from './useSearch';
 

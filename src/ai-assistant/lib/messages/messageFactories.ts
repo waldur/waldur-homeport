@@ -1,6 +1,6 @@
 import { ThreadMessageLike } from '@assistant-ui/react';
 
-import { randomUUID } from '@waldur/core/utils';
+import { randomUUID } from '@/core/utils';
 
 export const createUserMessage = (text: string): ThreadMessageLike => ({
   id: randomUUID(),

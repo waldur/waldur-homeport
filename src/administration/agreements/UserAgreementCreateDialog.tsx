@@ -2,15 +2,15 @@ import { useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
 import { userAgreementsCreate } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { required } from '@waldur/core/validators';
-import { SelectField, SubmitButton } from '@waldur/form';
-import MarkdownEditor from '@waldur/form/MarkdownEditor';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { ENV } from '@/core/config';
+import { required } from '@/core/validators';
+import { SelectField, SubmitButton } from '@/form';
+import MarkdownEditor from '@/form/MarkdownEditor';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 export const UserAgreementCreateDialog = ({ resolve }) => {
   const { showErrorResponse, showSuccess } = useNotify();

@@ -5,8 +5,8 @@ import {
 } from '@assistant-ui/react';
 import { chatThreadsArchive } from 'waldur-js-client';
 
-import { randomUUID } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { randomUUID } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import { fetchAndConvertMessages } from '../messages/messageLoader';
 

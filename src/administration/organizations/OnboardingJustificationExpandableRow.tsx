@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { OnboardingJustification } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { decodeFileName } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { formatDateTime } from '@/core/dateUtils';
+import { ExternalLink } from '@/core/ExternalLink';
+import { decodeFileName } from '@/core/utils';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const OnboardingJustificationExpandableRow: FC<{
   row: OnboardingJustification;

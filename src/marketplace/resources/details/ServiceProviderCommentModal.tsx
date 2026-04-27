@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import { SafeMarkdown } from '@waldur/core/SafeMarkdown';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { SafeMarkdown } from '@/core/SafeMarkdown';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface ServiceProviderCommentModalProps {
   comment: string;

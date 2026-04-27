@@ -14,15 +14,15 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ProgressSteps } from '@waldur/core/ProgressSteps';
-import { omit } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { OrderDetailsLink } from '@waldur/marketplace/orders/details/OrderDetailsLink';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { ProgressSteps } from '@/core/ProgressSteps';
+import { omit } from '@/core/utils';
+import { translate } from '@/i18n';
+import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 const ResourceOrderErrorDialog = lazyComponent(() =>
   import('./ResourceOrderErrorDialog').then((module) => ({

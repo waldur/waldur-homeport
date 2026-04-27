@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { IssueCommentItem } from './IssueCommentItem';
 import { Comment } from './types';

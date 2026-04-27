@@ -3,15 +3,15 @@ import { FC, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { OrderDetails } from 'waldur-js-client';
 
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getUser } from '@waldur/workspace/selectors';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { lazyComponent } from '@/core/lazyComponent';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionButton } from '@/table/ActionButton';
+import { getUser } from '@/workspace/selectors';
 
 const SetConsumerInfoDialog = lazyComponent(() =>
   import('../actions/SetConsumerInfoDialog').then((module) => ({

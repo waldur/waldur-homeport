@@ -9,7 +9,7 @@
 
 import type { EChartsOption } from 'echarts';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { ProjectStorageReport, Quota } from './ProjectStorageReport';
 import {

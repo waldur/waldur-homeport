@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Accordion, Table } from 'react-bootstrap';
 
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { ExternalLink } from '@/core/ExternalLink';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 const ApplicationDetailsTable = ({ application }) => (
   <Table bordered responsive>

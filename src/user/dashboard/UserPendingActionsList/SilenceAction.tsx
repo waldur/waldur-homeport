@@ -3,9 +3,9 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { UserAction, userActionsSilence } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const SilenceAction: FC<{ row: UserAction; refetch?: () => void }> = ({
   row,

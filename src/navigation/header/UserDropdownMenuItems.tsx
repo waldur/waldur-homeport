@@ -2,7 +2,7 @@
 import { UISrefActive, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 import { getTabs } from '../useTabs';
 

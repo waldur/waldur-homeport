@@ -2,7 +2,7 @@ import { FormApi } from 'final-form';
 import { FC, ReactNode } from 'react';
 import { FormRenderProps } from 'react-final-form';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
+import { ProgressStep } from '@/core/ProgressSteps';
 
 /**
  * WizardStep is an alias for ProgressStep to maintain compatibility.

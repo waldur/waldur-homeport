@@ -1,13 +1,10 @@
 import { FunctionComponent } from 'react';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
-import {
-  parseIntField,
-  formatIntField,
-} from '@waldur/marketplace/common/utils';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { required } from '@/core/validators';
+import { translate } from '@/i18n';
+import { parseIntField, formatIntField } from '@/marketplace/common/utils';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 import { IntegerUnitField } from './IntegerUnitField';
 

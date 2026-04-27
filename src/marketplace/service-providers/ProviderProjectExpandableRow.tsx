@@ -6,12 +6,12 @@ import {
   marketplaceServiceProvidersProjectPermissionsList,
 } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { NavItem } from '@waldur/user/affiliations/OrganizationExpandableRow';
-import { SummaryTeamTable } from '@waldur/user/affiliations/SummaryTeamTable';
+import { fetchResultCount } from '@/core/api';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { NavItem } from '@/user/affiliations/OrganizationExpandableRow';
+import { SummaryTeamTable } from '@/user/affiliations/SummaryTeamTable';
 
 import { TableTabsContainer } from '../../customer/list/TableTabsContainer';
 

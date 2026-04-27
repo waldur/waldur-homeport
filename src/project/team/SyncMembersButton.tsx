@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { useSelector } from 'react-redux';
 import { Project, projectsSyncUserRoles } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 interface SyncMembersButtonProps {
   project: Project;

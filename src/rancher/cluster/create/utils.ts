@@ -8,23 +8,23 @@ import {
   rancherClusterTemplatesList,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { orderFormSelector } from '@/marketplace/deploy/selectors';
 import {
   loadFlavors,
   loadSecurityGroups,
   loadSubnets,
   loadVolumeTypes,
-} from '@waldur/openstack/api';
+} from '@/openstack/api';
 import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
-} from '@waldur/openstack/openstack-instance/utils';
-import { NodeField } from '@waldur/rancher/types';
-import { formatFlavor } from '@waldur/resource/utils';
-import { type RootState } from '@waldur/store/reducers';
+} from '@/openstack/openstack-instance/utils';
+import { NodeField } from '@/rancher/types';
+import { formatFlavor } from '@/resource/utils';
+import { type RootState } from '@/store/reducers';
 
 const CLUSTER_NAME_PATTERN = new RegExp('^[a-z0-9]([-a-z0-9])+[a-z0-9]$');
 

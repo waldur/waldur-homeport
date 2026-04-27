@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 
-import Avatar from '@waldur/core/Avatar';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { InvitationActions } from '@waldur/invitations/InvitationActions';
-import { InvitationExpandableRow } from '@waldur/invitations/InvitationExpandableRow';
-import Table from '@waldur/table/Table';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
+import Avatar from '@/core/Avatar';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { InvitationActions } from '@/invitations/InvitationActions';
+import { InvitationExpandableRow } from '@/invitations/InvitationExpandableRow';
+import Table from '@/table/Table';
+import { RoleField } from '@/user/affiliations/RoleField';
 
 export const InvitationsList: FunctionComponent<{
   table;

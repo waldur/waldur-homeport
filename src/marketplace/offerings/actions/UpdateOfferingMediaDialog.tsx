@@ -6,16 +6,16 @@ import {
   marketplaceProviderOfferingsUpdateThumbnail,
 } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { FormContainer, SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { UPDATE_OFFERING_MEDIA_FORM_ID } from '@waldur/marketplace/offerings/actions/constants';
-import { ImageUploadField } from '@waldur/marketplace/offerings/update/ImageUploadField';
-import { Offering } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { formDataOptions } from '@/core/api';
+import { FormContainer, SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { UPDATE_OFFERING_MEDIA_FORM_ID } from '@/marketplace/offerings/actions/constants';
+import { ImageUploadField } from '@/marketplace/offerings/update/ImageUploadField';
+import { Offering } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { MediaType } from '../update/overview/types';
 

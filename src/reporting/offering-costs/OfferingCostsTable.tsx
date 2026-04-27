@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { OfferingCost } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { offeringCostsFetcher } from './api';
 

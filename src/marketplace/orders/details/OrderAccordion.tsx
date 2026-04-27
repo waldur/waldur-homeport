@@ -1,6 +1,6 @@
 import { Col, Row } from 'react-bootstrap';
 
-import { OrderDetailsProps } from '@waldur/marketplace/types';
+import { OrderDetailsProps } from '@/marketplace/types';
 
 import { OrderDetailsSummary } from './OrderDetailsSummary';
 

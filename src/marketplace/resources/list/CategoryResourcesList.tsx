@@ -3,20 +3,20 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ResourceMultiSelectAction } from '@waldur/marketplace/resources/mass-actions/ResourceMultiSelectAction';
-import { CategoryColumn } from '@waldur/marketplace/types';
-import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
-import { useTitle } from '@waldur/navigation/title';
-import { createFetcher } from '@waldur/table/api';
-import { BooleanField } from '@waldur/table/BooleanField';
-import { SLUG_COLUMN } from '@waldur/table/slug';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ResourceMultiSelectAction } from '@/marketplace/resources/mass-actions/ResourceMultiSelectAction';
+import { CategoryColumn } from '@/marketplace/types';
+import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useTitle } from '@/navigation/title';
+import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
+import { SLUG_COLUMN } from '@/table/slug';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ResourceImportButton } from '../import/ResourceImportButton';
 

@@ -1,11 +1,11 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useState, FunctionComponent, useEffect } from 'react';
 
-import { initMatomoTracker, MatomoInstance } from '@waldur/afterBootstrap';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { DeploymentFeatures } from '@waldur/FeaturesEnums';
-import { useModal } from '@waldur/modal/hooks';
+import { initMatomoTracker, MatomoInstance } from '@/afterBootstrap';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { DeploymentFeatures } from '@/FeaturesEnums';
+import { useModal } from '@/modal/hooks';
 
 import { getConsent, setConsent } from './CookiesStorage';
 

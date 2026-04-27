@@ -10,16 +10,16 @@ import {
   openstackDiscoveryDiscoverVolumeTypes,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { formatFilesize } from '@waldur/core/utils';
-import { SelectField } from '@waldur/form';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { Badge } from '@/core/Badge';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { formatFilesize } from '@/core/utils';
+import { SelectField } from '@/form';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { renderFieldOrDash } from '@/table/utils';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { extractCredentials, OpenStackDiscoveryFormValues } from '../types';
 

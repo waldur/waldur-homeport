@@ -1,12 +1,12 @@
 import { Field, useFormState } from 'react-final-form';
 
-import { validateEmailPatterns } from '@waldur/administration/auto-provisioning-rules/utils';
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { FormFieldError } from '@waldur/form/FormFieldError';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { validateEmailPatterns } from '@/administration/auto-provisioning-rules/utils';
+import { AccordionCard } from '@/core/AccordionCard';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { FormFieldError } from '@/form/FormFieldError';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const AdvancedSettingsGroup = ({ disabled }) => {
   const { values } = useFormState();

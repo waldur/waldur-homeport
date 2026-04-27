@@ -4,19 +4,19 @@ import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 
-import * as AuthService from '@waldur/auth/AuthService';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { useUser } from '@waldur/workspace/hooks';
+import * as AuthService from '@/auth/AuthService';
+import { isFeatureVisible } from '@/features/connect';
+import { useUser } from '@/workspace/hooks';
 
 import { useFooterLinks } from './useFooterLinks';
 
-vi.mock('@waldur/auth/AuthService');
-vi.mock('@waldur/workspace/hooks');
-vi.mock('@waldur/features/connect');
+vi.mock('@/auth/AuthService');
+vi.mock('@/workspace/hooks');
+vi.mock('@/features/connect');
 vi.mock('react-redux');
 vi.mock('react-responsive');
 vi.mock('@tanstack/react-query');
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_CORE: {

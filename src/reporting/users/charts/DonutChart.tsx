@@ -1,8 +1,8 @@
 import { EChartsOption } from 'echarts';
 import React, { useMemo } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
-import { translate } from '@waldur/i18n';
+import { EChart } from '@/core/EChart';
+import { translate } from '@/i18n';
 
 interface DonutChartItem {
   name: string;

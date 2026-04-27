@@ -1,7 +1,7 @@
 import { ChatResponse } from 'waldur-js-client';
 
-import { UIBlock } from '@waldur/ai-assistant/lib/types';
-import { randomUUID } from '@waldur/core/utils';
+import { UIBlock } from '@/ai-assistant/lib/types';
+import { randomUUID } from '@/core/utils';
 
 /**
  * updateBlocks - Manages incremental block state updates during streaming

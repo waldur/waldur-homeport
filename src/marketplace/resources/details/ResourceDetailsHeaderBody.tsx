@@ -8,8 +8,8 @@ import {
   projectsRetrieve,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { getUser } from '@waldur/workspace/selectors';
+import { STALE_TIME } from '@/core/constants';
+import { getUser } from '@/workspace/selectors';
 
 import { BackendIdField } from './BackendIdField';
 import { EndDateField } from './EndDateField';

@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { ProviderCampaignUpdateButton } from '@waldur/marketplace/service-providers/ProviderCampaignUpdateButton';
-import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@waldur/workspace/selectors';
+import { ProviderCampaignUpdateButton } from '@/marketplace/service-providers/ProviderCampaignUpdateButton';
+import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
 
 export const ProviderCampaignActions = ({ row, fetch }) => {
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);

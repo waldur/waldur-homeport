@@ -1,6 +1,6 @@
 import { useMemo } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { DetailsTable } from './DetailsTable';
 import {

@@ -3,18 +3,18 @@ import { useSelector } from 'react-redux';
 import { Field, InjectedFormProps, reduxForm } from 'redux-form';
 import { OfferingUserState } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { SelectField } from '@waldur/form/SelectField';
+import { ENV } from '@/core/config';
+import { SelectField } from '@/form/SelectField';
 import {
   REACT_MULTI_SELECT_TABLE_FILTER,
   REACT_SELECT_TABLE_FILTER,
   Select,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { ProviderAutocomplete } from '@waldur/marketplace/orders/ProviderAutocomplete';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
+import { ProviderAutocomplete } from '@/marketplace/orders/ProviderAutocomplete';
+import { TableFilterItem } from '@/table/TableFilterItem';
+import { getCustomer } from '@/workspace/selectors';
 
 import { PROVIDER_OFFERING_USERS_FORM_ID } from '../constants';
 

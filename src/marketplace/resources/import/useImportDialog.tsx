@@ -7,12 +7,12 @@ import {
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Offering, Plan } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { createEntity } from '@waldur/table/actions';
-import { Customer } from '@waldur/workspace/types';
+import { translate } from '@/i18n';
+import { Offering, Plan } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { createEntity } from '@/table/actions';
+import { Customer } from '@/workspace/types';
 
 export const IMPORT_RESOURCE_FORM_ID = 'ResourceImportDialog';
 

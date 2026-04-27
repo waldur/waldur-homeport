@@ -1,8 +1,8 @@
 import { applyMiddleware, combineReducers, createStore } from 'redux';
 import thunk from 'redux-thunk';
 
-import { tableMiddleware } from '@waldur/table/middleware';
-import { reviewCheckMiddleware } from '@waldur/workspace/reviewCheckMiddleware';
+import { tableMiddleware } from '@/table/middleware';
+import { reviewCheckMiddleware } from '@/workspace/reviewCheckMiddleware';
 
 import { staticReducers } from './reducers';
 

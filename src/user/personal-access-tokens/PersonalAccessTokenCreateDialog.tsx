@@ -7,17 +7,17 @@ import {
   PersonalAccessTokenCreateRequest,
 } from 'waldur-js-client';
 
-import { PermissionOptions } from '@waldur/administration/roles/PermissionOptions';
-import { required } from '@waldur/core/validators';
-import { DateField } from '@waldur/form/DateField';
-import { SelectField } from '@waldur/form/SelectField';
-import { StringField } from '@waldur/form/StringField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { PermissionOptions } from '@/administration/roles/PermissionOptions';
+import { required } from '@/core/validators';
+import { DateField } from '@/form/DateField';
+import { SelectField } from '@/form/SelectField';
+import { StringField } from '@/form/StringField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 import { personalAccessTokenSecretDialog } from './secretActions';
 

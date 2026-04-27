@@ -1,12 +1,12 @@
 import { usersList, UsersListData } from 'waldur-js-client';
 
-import { count, parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { RootState } from '@waldur/store/reducers';
-import { getUser } from '@waldur/workspace/selectors';
+import { count, parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { RootState } from '@/store/reducers';
+import { getUser } from '@/workspace/selectors';
 
 export const usersAutocomplete = async (
   query: UsersListData['query'],

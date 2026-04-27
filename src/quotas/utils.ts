@@ -1,5 +1,5 @@
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { titleCase, formatFilesize } from '@waldur/core/utils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { titleCase, formatFilesize } from '@/core/utils';
 
 import { QUOTA_NAMES, QUOTA_FILTERS } from './constants';
 import { Quota } from './types';

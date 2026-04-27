@@ -9,7 +9,7 @@ import classNames from 'classnames';
 import { isMatch } from 'lodash-es';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 import { isDescendantOf, useTabs } from './useTabs';
 

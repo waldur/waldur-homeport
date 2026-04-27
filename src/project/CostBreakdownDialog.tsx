@@ -1,9 +1,9 @@
 import { InvoiceCostItem, BillingUnit } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { getPlanUnitAbbr } from '@waldur/marketplace/orders/utils';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { getPlanUnitAbbr } from '@/marketplace/orders/utils';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 export const CostBreakdownDialog = ({
   resolve: { items },

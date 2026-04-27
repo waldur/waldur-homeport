@@ -6,11 +6,11 @@ import { FieldArray, Field, formValueSelector, change } from 'redux-form';
 import { FieldArrayFieldsProps, FieldArrayMetaProps } from 'redux-form';
 import { OpenStackSubNetAllocationPool } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
-import { RootState } from '@waldur/store/reducers';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { translate } from '@/i18n';
+import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
+import { RootState } from '@/store/reducers';
+import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import {
   getDefaultAllocationPool,

@@ -2,9 +2,9 @@ import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { useEffectOnce } from 'react-use';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
 
 import { submitPermissionRequest } from './utils';
 

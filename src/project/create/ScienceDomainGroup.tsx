@@ -2,11 +2,11 @@ import { useCallback, useEffect, useState } from 'react';
 import { Field, useForm } from 'react-final-form';
 import { scienceDomainsList, scienceSubDomainsList } from 'waldur-js-client';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const ScienceDomainGroup = () => {
   const form = useForm();

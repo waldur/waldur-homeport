@@ -1,24 +1,24 @@
 import { DateTime } from 'luxon';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { OfferingConfiguration } from '@waldur/marketplace/common/types';
+import { parseDate } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { OFFERING_TYPE_BOOKING } from './constants';
 
 const BookingDetails = lazyComponent(() =>
-  import('@waldur/booking/BookingDetails').then((module) => ({
+  import('@/booking/BookingDetails').then((module) => ({
     default: module.BookingDetails,
   })),
 );
 const BookingCheckoutSummary = lazyComponent(() =>
-  import('@waldur/booking/BookingCheckoutSummary').then((module) => ({
+  import('@/booking/BookingCheckoutSummary').then((module) => ({
     default: module.BookingCheckoutSummary,
   })),
 );
 const UserPluginOptionsForm = lazyComponent(() =>
-  import('@waldur/marketplace/UserPluginOptionsForm').then((module) => ({
+  import('@/marketplace/UserPluginOptionsForm').then((module) => ({
     default: module.UserPluginOptionsForm,
   })),
 );

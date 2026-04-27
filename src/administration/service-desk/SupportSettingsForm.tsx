@@ -1,10 +1,10 @@
 import { Field } from 'react-final-form';
 
-import { NumberField, SecretField, StringField, TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { EmailField } from '@waldur/form/EmailField';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { SettingsDescription } from '@waldur/SettingsDescription';
+import { NumberField, SecretField, StringField, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { EmailField } from '@/form/EmailField';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { SettingsDescription } from '@/SettingsDescription';
 
 import { getKeyTitle } from '../settings/utils';
 

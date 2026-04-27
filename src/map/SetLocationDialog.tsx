@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import { connect } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { FormFooter } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { LocationContainer } from '@waldur/map/LocationContainer';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { FormFooter } from '@/form';
+import { translate } from '@/i18n';
+import { LocationContainer } from '@/map/LocationContainer';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import './SetLocationDialog.scss';
 import { GeolocationPoint } from './types';

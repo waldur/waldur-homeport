@@ -1,10 +1,10 @@
 import { Field } from 'react-final-form';
 
-import { SETTINGS_FREEIPA_GROUP_NAME } from '@waldur/auth/providers/constants';
-import { SecretField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { SettingsDescription } from '@waldur/SettingsDescription';
+import { SETTINGS_FREEIPA_GROUP_NAME } from '@/auth/providers/constants';
+import { SecretField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { SettingsDescription } from '@/SettingsDescription';
 
 import { getKeyTitle } from '../settings/utils';
 

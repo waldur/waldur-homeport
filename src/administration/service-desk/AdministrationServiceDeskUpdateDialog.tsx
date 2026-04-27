@@ -4,13 +4,13 @@ import { Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { overrideSettings } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { formDataOptions } from '@/core/api';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { SupportSettingsForm } from './SupportSettingsForm';
 

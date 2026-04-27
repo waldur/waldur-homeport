@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { GrowthStats } from './types';
 

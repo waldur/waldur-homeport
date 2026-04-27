@@ -2,8 +2,8 @@ import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { translate } from '@/i18n';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { useChangeEndDateRequest } from './useChangeEndDateRequest';
 

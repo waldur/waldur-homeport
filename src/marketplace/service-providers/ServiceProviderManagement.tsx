@@ -8,17 +8,17 @@ import {
   serviceProviderApiSecretCodeRetrieve,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
-import { FieldEditButton } from '@waldur/customer/details/FieldEditButton';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { ServiceProvider } from '@waldur/marketplace/types';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer, isStaff } from '@waldur/workspace/selectors';
+import { formatDateTime } from '@/core/dateUtils';
+import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
+import { FieldEditButton } from '@/customer/details/FieldEditButton';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { ServiceProvider } from '@/marketplace/types';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { renderFieldOrDash } from '@/table/utils';
+import { getCustomer, isStaff } from '@/workspace/selectors';
 
 import { SecretValueField } from '../SecretValueField';
 

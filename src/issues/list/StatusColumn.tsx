@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { IssueTypeIcon } from '@waldur/issues/types/IssueTypeIcon';
-import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Tip } from '@/core/Tooltip';
+import { IssueTypeIcon } from '@/issues/types/IssueTypeIcon';
+import { RateStars } from '@/proposals/proposal/create-review/RateStars';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const StatusColumn: FunctionComponent<{ row }> = ({ row }) => (
   <>

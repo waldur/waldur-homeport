@@ -2,10 +2,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { useExtraToolbar, useToolbarActions } from '@waldur/navigation/context';
-import { useTitle } from '@waldur/navigation/title';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { useExtraToolbar, useToolbarActions } from '@/navigation/context';
+import { useTitle } from '@/navigation/title';
 
 import { CardStyleType } from '../common/cards/index';
 import { CardStyleProvider } from '../landing/CardStyleContext';

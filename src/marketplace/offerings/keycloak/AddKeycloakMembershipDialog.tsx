@@ -13,19 +13,19 @@ import {
   UserRoleDetails,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { required } from '@waldur/core/validators';
-import { SelectField, StringField, SubmitButton } from '@waldur/form';
-import { EmailField } from '@waldur/form/EmailField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { UserListOptionInline } from '@waldur/project/team/UserListOptionInline';
-import { useNotify } from '@waldur/store/hooks';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { required } from '@/core/validators';
+import { SelectField, StringField, SubmitButton } from '@/form';
+import { EmailField } from '@/form/EmailField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { UserListOptionInline } from '@/project/team/UserListOptionInline';
+import { useNotify } from '@/store/hooks';
 
 import { ScopeOption } from './AddScopeOptionDialog';
 

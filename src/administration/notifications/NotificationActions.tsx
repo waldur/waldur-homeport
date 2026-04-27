@@ -1,7 +1,7 @@
 import { useSelector } from 'react-redux';
 
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { NotificationToggleButton } from './NotificationToggleButton';
 import { NotificationUpdateButton } from './NotificationUpdateButton';

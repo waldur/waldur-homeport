@@ -1,10 +1,10 @@
 import { LinkIcon } from '@phosphor-icons/react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { useUser } from '@waldur/workspace/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { DialogActionItem } from '@/resource/actions/DialogActionItem';
+import { ActionItemType } from '@/resource/actions/types';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceAction } from './actions/constants';
 

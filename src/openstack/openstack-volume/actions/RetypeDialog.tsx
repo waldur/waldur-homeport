@@ -3,16 +3,16 @@ import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import { openstackVolumesRetype } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useModal } from '@waldur/modal/hooks';
-import { loadVolumeTypes } from '@waldur/openstack/api';
-import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { useNotify } from '@waldur/store/hooks';
+import { UI_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/hooks';
+import { loadVolumeTypes } from '@/openstack/api';
+import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { useNotify } from '@/store/hooks';
 
 export const RetypeDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },

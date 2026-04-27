@@ -5,14 +5,14 @@ import {
   addPreviousBlocks,
   extractTextFromMessageContent,
   setBackendUuid,
-} from '@waldur/ai-assistant/lib/messages/messageUtils';
-import { parseAssistantStream } from '@waldur/ai-assistant/lib/streaming/parseAssistantStream';
-import { addThreadToListIfNotExists } from '@waldur/ai-assistant/lib/thread/threadListAdapter';
+} from '@/ai-assistant/lib/messages/messageUtils';
+import { parseAssistantStream } from '@/ai-assistant/lib/streaming/parseAssistantStream';
+import { addThreadToListIfNotExists } from '@/ai-assistant/lib/thread/threadListAdapter';
 import {
   MessageHandlerDependencies,
   RunConfig,
   UIBlock,
-} from '@waldur/ai-assistant/lib/types';
+} from '@/ai-assistant/lib/types';
 
 import {
   createUserMessage,

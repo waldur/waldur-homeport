@@ -3,15 +3,15 @@ import { useSelector, useDispatch } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import { Project } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { SIDEBAR_RESOURCES_FILTER_FORM } from '@waldur/marketplace/constants';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Customer } from '@waldur/workspace/types';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { SIDEBAR_RESOURCES_FILTER_FORM } from '@/marketplace/constants';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Customer } from '@/workspace/types';
 
 import { useOrganizationAndProjectFiltersForResources } from './utils';
 

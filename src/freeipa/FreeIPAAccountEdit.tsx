@@ -1,8 +1,8 @@
 import React from 'react';
 import { Form } from 'react-bootstrap';
 
-import { FormContainer } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { FormContainer } from '@/form';
+import { translate } from '@/i18n';
 
 interface FreeIPAAccountEditOwnProps {
   profile: any;

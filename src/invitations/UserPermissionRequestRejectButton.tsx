@@ -1,8 +1,8 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { useUserPermissionRequestActions } from './useUserPermissionRequestActions';
 

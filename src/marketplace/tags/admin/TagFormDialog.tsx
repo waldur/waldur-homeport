@@ -8,15 +8,15 @@ import {
   TagRequest,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { StringField } from '@waldur/form/StringField';
-import { TextField } from '@waldur/form/TextField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { required } from '@/core/validators';
+import { SubmitButton } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import { StringField } from '@/form/StringField';
+import { TextField } from '@/form/TextField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface OwnProps {
   resolve: { tag?: Tag; refetch: () => void };

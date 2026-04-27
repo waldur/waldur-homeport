@@ -1,11 +1,11 @@
 import { change } from 'redux-form';
 import { User } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { getFormLimitParser } from '@waldur/marketplace/common/registry';
-import { Offering } from '@waldur/marketplace/types';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { checkCustomerUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { getFormLimitParser } from '@/marketplace/common/registry';
+import { Offering } from '@/marketplace/types';
+import { IBreadcrumbItem } from '@/navigation/types';
+import { checkCustomerUser } from '@/workspace/selectors';
 
 import { OFFERINGS_FILTER_FORM_ID } from './constants';
 import { PublicOfferingBreadcrumbPopover } from './PublicOfferingBreadcrumbPopover';

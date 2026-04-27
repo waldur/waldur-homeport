@@ -1,10 +1,10 @@
 import Papa from 'papaparse';
 import { Customer } from 'waldur-js-client';
 
-import { email } from '@waldur/core/validators';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
+import { email } from '@/core/validators';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
 
 import templateFile from './organizations_template.json';
 

@@ -3,17 +3,17 @@ import { Col, Row } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { overrideSettings } from 'waldur-js-client';
 
-import { formDataOptions } from '@waldur/core/api';
-import { SubmitButton } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { SettingsDescription } from '@waldur/SettingsDescription';
-import { useNotify } from '@waldur/store/hooks';
-import { TableQuery } from '@waldur/table/TableQuery';
+import { formDataOptions } from '@/core/api';
+import { SubmitButton } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { SettingsDescription } from '@/SettingsDescription';
+import { useNotify } from '@/store/hooks';
+import { TableQuery } from '@/table/TableQuery';
 
 // Get the list of all available country codes from settings configuration default value
 const AVAILABLE_COUNTRIES =

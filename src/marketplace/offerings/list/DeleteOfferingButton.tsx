@@ -2,14 +2,14 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsDestroy } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 export const DeleteOfferingButton = ({ row, refetch }) => {
   const user = useUser();

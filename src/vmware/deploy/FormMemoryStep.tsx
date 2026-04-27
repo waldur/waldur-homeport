@@ -1,16 +1,16 @@
 import { useMemo } from 'react';
 import { Field } from 'redux-form';
 
-import { FormGroup } from '@waldur/form';
-import { SliderNumberField } from '@waldur/form/SliderNumberField';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
+import { FormGroup } from '@/form';
+import { SliderNumberField } from '@/form/SliderNumberField';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
 import {
   formatIntField,
   maxAmount,
   parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+} from '@/marketplace/common/utils';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 import { minOne, useVMwareLimitsLoader } from './utils';
 

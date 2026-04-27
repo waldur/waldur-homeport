@@ -1,14 +1,12 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
 
 const PlanDetailsDialog = lazyComponent(() =>
-  import('@waldur/marketplace/details/plan/PlanDetailsDialog').then(
-    (module) => ({
-      default: module.PlanDetailsDialog,
-    }),
-  ),
+  import('@/marketplace/details/plan/PlanDetailsDialog').then((module) => ({
+    default: module.PlanDetailsDialog,
+  })),
 );
 
 export const PlanDetailsField = ({ resource }) => {

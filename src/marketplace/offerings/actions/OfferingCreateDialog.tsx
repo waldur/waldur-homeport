@@ -10,25 +10,20 @@ import {
   marketplaceProviderOfferingsCreate,
 } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import {
-  FormContainer,
-  SelectField,
-  StringField,
-  SubmitButton,
-} from '@waldur/form';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { getCreatableOfferings } from '@waldur/marketplace/common/registry';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { FormContainer, SelectField, StringField, SubmitButton } from '@/form';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { getCategories } from '@/marketplace/common/api';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { getCreatableOfferings } from '@/marketplace/common/registry';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
 
 import { OFFERING_CREATE_FORM_ID } from './constants';
 import { OfferingCreateFormData } from './types';

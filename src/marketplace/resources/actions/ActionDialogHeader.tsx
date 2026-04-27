@@ -1,8 +1,8 @@
 import { Modal } from 'react-bootstrap';
 
-import { Image } from '@waldur/core/Image';
-import { Tip } from '@waldur/core/Tooltip';
-import { getMarketplaceResourceLogo } from '@waldur/marketplace/resources/details/MarketplaceResourceLogo';
+import { Image } from '@/core/Image';
+import { Tip } from '@/core/Tooltip';
+import { getMarketplaceResourceLogo } from '@/marketplace/resources/details/MarketplaceResourceLogo';
 
 import { ResourceStateField } from '../list/ResourceStateField';
 

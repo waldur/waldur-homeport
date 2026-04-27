@@ -3,21 +3,21 @@ import { FC, useCallback, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { proposalProposalsChecklistRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isEmpty } from '@waldur/core/utils';
-import { StringField, TextField, NumberField, SelectField } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { VStepperFormStepProps } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
+import { AccordionCard } from '@/core/AccordionCard';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isEmpty } from '@/core/utils';
+import { StringField, TextField, NumberField, SelectField } from '@/form';
+import { DateField } from '@/form/DateField';
+import { VStepperFormStepProps } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import {
   DependencyInfo,
   evaluateQuestionVisibility,
-} from '@waldur/marketplace-checklist/questionDependencies';
-import { useNotify } from '@waldur/store/hooks';
+} from '@/marketplace-checklist/questionDependencies';
+import { useNotify } from '@/store/hooks';
 
 import { ComplianceFileUpload } from './ComplianceFileUpload';
 import { QuestionDependencyHint } from './QuestionDependencyHint';

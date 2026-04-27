@@ -4,20 +4,20 @@ import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { bookingStateAliases } from '@waldur/booking/BookingStateField';
-import { BookingResource, EventInput } from '@waldur/booking/types';
-import { Badge } from '@waldur/core/Badge';
-import { parseDate } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { bookingStateAliases } from '@/booking/BookingStateField';
+import { BookingResource, EventInput } from '@/booking/types';
+import { Badge } from '@/core/Badge';
+import { parseDate } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 const ONE_HOUR_HEIGHT = 40; // 40px
 const ONE_MINUTE_HEIGHT = ONE_HOUR_HEIGHT / 60;
 
 const BookingResourceDetailsDialog = lazyComponent(() =>
-  import('@waldur/booking/components/BookingResourceDetailsDialog').then(
+  import('@/booking/components/BookingResourceDetailsDialog').then(
     (module) => ({ default: module.BookingResourceDetailsDialog }),
   ),
 );

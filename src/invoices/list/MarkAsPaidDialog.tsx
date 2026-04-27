@@ -3,15 +3,15 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { invoicesPaid } from 'waldur-js-client';
 
-import { formDataOptions, fileSerializer } from '@waldur/core/api';
-import { formatISODate } from '@waldur/core/dateUtils';
-import { FileUploadField, FormContainer, FormFooter } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { MARK_AS_PAID_FORM_ID } from '@waldur/invoices/constants';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { formDataOptions, fileSerializer } from '@/core/api';
+import { formatISODate } from '@/core/dateUtils';
+import { FileUploadField, FormContainer, FormFooter } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { MARK_AS_PAID_FORM_ID } from '@/invoices/constants';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 const MarkAsPaidDialogContainer: FunctionComponent<any> = (props) => {
   const dispatch = useDispatch();

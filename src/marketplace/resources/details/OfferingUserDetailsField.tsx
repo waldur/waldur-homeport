@@ -1,10 +1,10 @@
 import { OfferingUser } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { translate } from '@waldur/i18n';
-import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { translate } from '@/i18n';
+import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const OfferingUserDetailsField = ({
   offeringUser,

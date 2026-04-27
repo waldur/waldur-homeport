@@ -1,6 +1,6 @@
-import { CallDocumentsCard } from '@waldur/proposals/details/CallDocumentsCard';
-import { RemoveDocumentAction } from '@waldur/proposals/update/documents/RemoveDocumentButton';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { CallDocumentsCard } from '@/proposals/details/CallDocumentsCard';
+import { RemoveDocumentAction } from '@/proposals/update/documents/RemoveDocumentButton';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { AttachDocumentsButton } from './AttachDocumentsButton';
 

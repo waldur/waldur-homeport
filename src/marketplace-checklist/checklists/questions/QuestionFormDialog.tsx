@@ -24,22 +24,22 @@ import {
   QuestionAdminRequest,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { AtLeast } from '@waldur/core/types';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CHECKLIST_TABLE_ID } from '@waldur/marketplace-checklist/constants';
-import { ChecklistQuestionForm } from '@waldur/marketplace-checklist/types';
-import { CHECKLIST_FLAGS } from '@waldur/marketplace-checklist/utils';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { fetchListStart, updateEntity } from '@waldur/table/actions';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { AtLeast } from '@/core/types';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CHECKLIST_TABLE_ID } from '@/marketplace-checklist/constants';
+import { ChecklistQuestionForm } from '@/marketplace-checklist/types';
+import { CHECKLIST_FLAGS } from '@/marketplace-checklist/utils';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { fetchListStart, updateEntity } from '@/table/actions';
 
 import { QuestionGeneralForm } from './QuestionGeneralForm';
 import { QuestionGuidanceForm } from './QuestionGuidanceForm';

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Rule } from 'waldur-js-client';
 
-import { EditModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
 
 const RuleFormDialog = lazyComponent(() =>
   import('./RuleFormDialog').then((module) => ({

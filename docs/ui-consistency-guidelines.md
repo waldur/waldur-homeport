@@ -41,7 +41,7 @@ Empty states are critical touchpoints that can either frustrate users or guide t
 Use the `NoResult` component for all table empty states:
 
 ```tsx
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
+import { NoResult } from '@/navigation/header/search/NoResult';
 
 // Basic usage - let NoResult provide defaults
 <NoResult />
@@ -78,7 +78,7 @@ import { NoResult } from '@waldur/navigation/header/search/NoResult';
 **Utility functions** (from `src/table/utils.tsx`):
 
 ```tsx
-import { getNoResultTitle, getNoResultMessage } from '@waldur/table/utils';
+import { getNoResultTitle, getNoResultMessage } from '@/table/utils';
 
 // For filtered tables
 getNoResultTitle({ verboseName: 'users', hasFilter: true });
@@ -97,8 +97,8 @@ getNoResultMessage({ verboseName: 'projects', customEmpty: translate('Start by c
 **Standard**: Use `DASH_ESCAPE_CODE` (—) for null/undefined values in displays:
 
 ```tsx
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { renderFieldOrDash } from '@/table/utils';
 
 // In table columns
 {
@@ -164,8 +164,8 @@ The decision to hide vs disable a button significantly impacts user experience. 
 **ALWAYS provide a tooltip explaining WHY the button is disabled.**
 
 ```tsx
-import { useValidators } from '@waldur/resource/actions/useValidators';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { useValidators } from '@/resource/actions/useValidators';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 // Using useValidators hook for state-based validation
 const validators = [
@@ -208,8 +208,8 @@ const MyAction = ({ resource }) => {
 Use `hasPermission()` utility consistently:
 
 ```tsx
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { useUser } from '@waldur/workspace/hooks';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 const MyComponent = ({ project }) => {
   const user = useUser();
@@ -229,7 +229,7 @@ const MyComponent = ({ project }) => {
 **Staff-only actions**:
 
 ```tsx
-import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
+import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 
 // For staff-only actions that should still be visible
 <ActionItem
@@ -258,7 +258,7 @@ Consistent loading feedback prevents user confusion and maintains perceived perf
 // Spinner shown when: loading === true && rows.length === 0
 
 // For manual control in custom components:
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 
 {loading && !data.length ? (
   <LoadingSpinner />
@@ -279,8 +279,8 @@ import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
 Use the `pending` prop on buttons:
 
 ```tsx
-import { SubmitButton } from '@waldur/form';
-import { BaseButton } from '@waldur/core/buttons/BaseButton';
+import { SubmitButton } from '@/form';
+import { BaseButton } from '@/core/buttons/BaseButton';
 
 // Form submit button
 <SubmitButton
@@ -308,7 +308,7 @@ import { BaseButton } from '@waldur/core/buttons/BaseButton';
 Use `LoadingErred` component for recoverable errors:
 
 ```tsx
-import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingErred } from '@/core/LoadingErred';
 
 // In data-fetching components
 if (error) {
@@ -385,7 +385,7 @@ if (error) {
 ### 4.3 Pagination Rules
 
 ```tsx
-import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@waldur/table/constants';
+import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@/table/constants';
 
 // PAGE_SIZE_COMPACT = 5 (for embedded/secondary tables)
 // PAGE_SIZE_FULL = 10 (for primary tables)
@@ -406,7 +406,7 @@ import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@waldur/table/constants';
 ### 5.1 Confirmation Dialog Pattern
 
 ```tsx
-import { waitForConfirmation } from '@waldur/modal/actions';
+import { waitForConfirmation } from '@/modal/actions';
 
 // Destructive action (deletion) - name the object being deleted
 const handleDelete = async () => {
@@ -465,7 +465,7 @@ await waitForConfirmation(
 
 ## 6. Notifications
 
-Use the notification utilities from `@waldur/store/notify`:
+Use the notification utilities from `@/store/notify`:
 
 ```tsx
 import {
@@ -473,7 +473,7 @@ import {
   showError,
   showErrorResponse,
   showInfo
-} from '@waldur/store/notify';
+} from '@/store/notify';
 
 // Success - action completed
 dispatch(showSuccess(translate('Project created successfully')));
@@ -511,7 +511,7 @@ dispatch(showInfo(translate('Changes will take effect after refresh')));
 ### 7.1 StateIndicator Component
 
 ```tsx
-import { StateIndicator } from '@waldur/core/StateIndicator';
+import { StateIndicator } from '@/core/StateIndicator';
 
 // Basic usage
 <StateIndicator
@@ -571,7 +571,7 @@ Use tooltips for:
 - **Complex terms**: Provide definitions
 
 ```tsx
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 // Basic tooltip
 <Tip label={translate('Copy to clipboard')} id="copy-btn">
@@ -619,7 +619,7 @@ import { QuestionIcon } from '@phosphor-icons/react';
 ### 9.1 Text Truncation
 
 ```tsx
-import { formatLongText } from '@waldur/table/utils';
+import { formatLongText } from '@/table/utils';
 
 // For text > 100 characters - shows tooltip with full text
 {formatLongText(description)}
@@ -638,7 +638,7 @@ import { formatLongText } from '@waldur/table/utils';
 All user-facing text must use `translate()`:
 
 ```tsx
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 // Simple string
 translate('Save changes')
@@ -702,7 +702,7 @@ translate('{count} item', '{count} items', { count })
 ### 11.1 Breakpoints
 
 ```tsx
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GRID_BREAKPOINTS } from '@/core/constants';
 
 // GRID_BREAKPOINTS = { xs: 0, sm: 576, md: 768, lg: 992, xl: 1200, xxl: 1400 }
 
@@ -756,7 +756,7 @@ const filterPosition = isSm && originalPosition === 'menu'
 When an action requires authentication (e.g., deploying a resource, ordering a service), **show a confirmation dialog** explaining that login is required, rather than silently redirecting or doing nothing.
 
 ```tsx
-import { waitForConfirmation } from '@waldur/modal/actions';
+import { waitForConfirmation } from '@/modal/actions';
 
 const handleClick = async () => {
   if (!user) {
@@ -892,42 +892,42 @@ if (hasPermission(user, { permission: 'resource.admin', projectId })) { ... }
 
 ```tsx
 // Empty states
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { renderFieldOrDash, getNoResultTitle, getNoResultMessage } from '@waldur/table/utils';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { renderFieldOrDash, getNoResultTitle, getNoResultMessage } from '@/table/utils';
 
 // Buttons & Actions
-import { BaseButton } from '@waldur/core/buttons/BaseButton';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useValidators } from '@waldur/resource/actions/useValidators';
+import { BaseButton } from '@/core/buttons/BaseButton';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useValidators } from '@/resource/actions/useValidators';
 
 // Loading & Errors
-import { LoadingSpinner, LoadingSpinnerIcon } from '@waldur/core/LoadingSpinner';
-import { LoadingErred } from '@waldur/core/LoadingErred';
+import { LoadingSpinner, LoadingSpinnerIcon } from '@/core/LoadingSpinner';
+import { LoadingErred } from '@/core/LoadingErred';
 
 // Indicators
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { Badge } from '@waldur/core/Badge';
+import { StateIndicator } from '@/core/StateIndicator';
+import { Badge } from '@/core/Badge';
 
 // Tooltips
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 // Permissions
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
+import { hasPermission } from '@/permissions/hasPermission';
+import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 
 // Notifications
-import { showSuccess, showError, showErrorResponse, showInfo } from '@waldur/store/notify';
+import { showSuccess, showError, showErrorResponse, showInfo } from '@/store/notify';
 
 // Modals
-import { waitForConfirmation } from '@waldur/modal/actions';
+import { waitForConfirmation } from '@/modal/actions';
 
 // i18n
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 // Constants
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
-import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@waldur/table/constants';
+import { GRID_BREAKPOINTS } from '@/core/constants';
+import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@/table/constants';
 ```
 
 ### Decision Trees

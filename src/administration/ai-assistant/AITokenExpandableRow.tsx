@@ -8,20 +8,20 @@ import {
   TokenQuotaUsageResponse,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { NumberField } from '@waldur/form';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { QuotaProgressBar } from '@waldur/marketplace/resources/details/QuotaProgressBar';
-import { useNotify } from '@waldur/store/hooks';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { UI_STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { NumberField } from '@/form';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
+import { useNotify } from '@/store/hooks';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 interface FormValues {
   daily_limit: number | null;

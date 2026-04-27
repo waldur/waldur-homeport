@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { PriceList } from '@waldur/marketplace/offerings/PriceList';
+import { PriceList } from '@/marketplace/offerings/PriceList';
 
 import { ReportingTitle } from '../ReportingTitle';
 

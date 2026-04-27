@@ -2,13 +2,13 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { getUser } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { getUser } from '@/workspace/selectors';
 
 const UserActionsDialog = lazyComponent(() =>
   import('./UserActionsDialog').then((module) => ({

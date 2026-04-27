@@ -1,11 +1,11 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
 import {
   ActionsDropdown,
   ActionsDropdownComponent,
-} from '@waldur/table/ActionsDropdown';
+} from '@/table/ActionsDropdown';
 
 import { useProposalDecisionActions } from './create/utils';
 

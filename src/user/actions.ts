@@ -1,8 +1,8 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
 
 const UserPopover = lazyComponent(() =>
-  import('@waldur/user/UserPopover').then((module) => ({
+  import('@/user/UserPopover').then((module) => ({
     default: module.UserPopover,
   })),
 );

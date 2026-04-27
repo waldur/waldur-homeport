@@ -5,12 +5,12 @@ import {
   ProjectsUsagesGroupedByIndustryFlag,
 } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { translate } from '@waldur/i18n';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { SimpleTable } from '@waldur/table/SimpleTable';
-import { Column } from '@waldur/table/types';
-import { getSimpleExportData } from '@waldur/table/utils';
+import { ChartCard } from '@/core/ChartCard';
+import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { SimpleTable } from '@/table/SimpleTable';
+import { Column } from '@/table/types';
+import { getSimpleExportData } from '@/table/utils';
 
 import { ClassificationUsageRow } from './types';
 

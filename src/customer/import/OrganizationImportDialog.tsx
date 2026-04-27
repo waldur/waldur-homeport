@@ -1,16 +1,12 @@
 import { FC, useCallback, useState } from 'react';
 import { Customer, CustomerRequest, customersCreate } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { cleanObjectEmptyFields } from '@waldur/project/import/utils';
-import {
-  showError,
-  showErrorResponse,
-  showSuccess,
-} from '@waldur/store/notify';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { cleanObjectEmptyFields } from '@/project/import/utils';
+import { showError, showErrorResponse, showSuccess } from '@/store/notify';
 
 import { Step1DownloadTemplate } from './Step1DownloadTemplate';
 import { Step2UploadFile } from './Step2UploadFile';

@@ -1,9 +1,9 @@
 import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { InvitationCreateButton } from '@waldur/invitations/actions/create/InvitationCreateButton';
-import { GenericInvitationContext } from '@waldur/invitations/types';
+import { translate } from '@/i18n';
+import { InvitationCreateButton } from '@/invitations/actions/create/InvitationCreateButton';
+import { GenericInvitationContext } from '@/invitations/types';
 
 import { AddUserButton } from './AddUserButton';
 

@@ -30,8 +30,8 @@ import {
 } from '@mdxeditor/editor';
 import { FC, useRef } from 'react';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
 
 import InsertLinkPopover from './InsertLinkPopover';
 import { FormField } from './types';

@@ -3,13 +3,13 @@ import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Alert, Table as BTable } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
 
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form/SubmitButton';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { useDiscoverArrowCustomers } from '../api';
 import type { ArrowSetupFormValues } from '../types';

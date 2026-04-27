@@ -1,9 +1,9 @@
 import React from 'react';
 import { Field } from 'redux-form';
 
-import { REACT_SELECT_TABLE_FILTER, Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { CallOffering } from '@waldur/proposals/types';
+import { REACT_SELECT_TABLE_FILTER, Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { CallOffering } from '@/proposals/types';
 
 export const CallOfferingFilter: React.FC<{
   options: Partial<Pick<CallOffering, 'offering_name' | 'offering_uuid'>>[];

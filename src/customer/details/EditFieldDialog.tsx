@@ -5,28 +5,23 @@ import { connect } from 'react-redux';
 import { SubmissionError, reduxForm } from 'redux-form';
 import { organizationGroupsList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import {
-  NumberField,
-  SelectField,
-  SubmitButton,
-  TextField,
-} from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { DateField } from '@waldur/form/DateField';
-import { EmailField } from '@waldur/form/EmailField';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { getAllPages } from '@/core/api';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import { NumberField, SelectField, SubmitButton, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { DateField } from '@/form/DateField';
+import { EmailField } from '@/form/EmailField';
+import { FormContainer } from '@/form/FormContainer';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { SelectCountryField } from '../list/SelectCountryField';
 

@@ -1,10 +1,10 @@
 import { useSelector } from 'react-redux';
 
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
+import { BaseEventsList } from '@/events/BaseEventsList';
 import {
   EventsFilter as SupportEventsFilter,
   selectEventsFilter as selectSupportEventsFilter,
-} from '@waldur/table/generated/EventsFilter';
+} from '@/table/generated/EventsFilter';
 
 export const SupportEventsList = () => {
   const filter = useSelector(selectSupportEventsFilter);

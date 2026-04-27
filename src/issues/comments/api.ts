@@ -7,9 +7,9 @@ import {
   supportIssuesComment,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { showErrorResponse } from '@waldur/store/notify';
-import store from '@waldur/store/store';
+import { translate } from '@/i18n';
+import { showErrorResponse } from '@/store/notify';
+import store from '@/store/store';
 
 import { Comment } from './types';
 

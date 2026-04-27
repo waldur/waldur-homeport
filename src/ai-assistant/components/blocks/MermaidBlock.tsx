@@ -1,8 +1,8 @@
 import { FC } from 'react';
 
-import { MermaidDiagram } from '@waldur/ai-assistant/components/MermaidDiagram';
-import { CodeHeader } from '@waldur/ai-assistant/components/shared/CodeHeader';
-import { UIBlockProps } from '@waldur/ai-assistant/lib/types';
+import { MermaidDiagram } from '@/ai-assistant/components/MermaidDiagram';
+import { CodeHeader } from '@/ai-assistant/components/shared/CodeHeader';
+import { UIBlockProps } from '@/ai-assistant/lib/types';
 
 export const MermaidBlock: FC<UIBlockProps> = ({ block }) => {
   const isComplete = block.status === 'complete';

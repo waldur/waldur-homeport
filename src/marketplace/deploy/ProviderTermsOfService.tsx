@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
+import { ExternalLink } from '@/core/ExternalLink';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
 
 const TermsOfServiceDialog = lazyComponent(() =>
-  import('@waldur/marketplace/orders/TermsOfServiceDialog').then((module) => ({
+  import('@/marketplace/orders/TermsOfServiceDialog').then((module) => ({
     default: module.TermsOfServiceDialog,
   })),
 );

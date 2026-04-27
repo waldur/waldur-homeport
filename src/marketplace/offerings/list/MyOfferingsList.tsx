@@ -5,8 +5,8 @@ import { MarketplaceProviderOfferingsListData } from 'waldur-js-client';
 import {
   MarketplaceProviderOfferingsFilter,
   selectMarketplaceProviderOfferingsFilter,
-} from '@waldur/table/generated/MarketplaceProviderOfferingsFilter';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/MarketplaceProviderOfferingsFilter';
+import { getCustomer } from '@/workspace/selectors';
 
 import { BaseOfferingsList } from './OfferingsList';
 

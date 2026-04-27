@@ -1,4 +1,4 @@
-import { ProjectCourseAccountsList } from '@waldur/project/course-accounts/ProjectCourseAccountsList';
+import { ProjectCourseAccountsList } from '@/project/course-accounts/ProjectCourseAccountsList';
 
 export const CourseAccountsTable = () => {
   return <ProjectCourseAccountsList admin />;

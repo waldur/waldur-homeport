@@ -3,18 +3,18 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceResourcesSwitchPlan } from 'waldur-js-client';
 
-import { useModal } from '@waldur/modal/hooks';
-import { usePermission } from '@waldur/permissions/hooks';
-import { useNotify } from '@waldur/store/hooks';
+import { useModal } from '@/modal/hooks';
+import { usePermission } from '@/permissions/hooks';
+import { useNotify } from '@/store/hooks';
 
 import { ChangePlanDialog } from './ChangePlanDialog';
 import { loadData } from './utils';
 
 vi.mock('./utils');
 vi.mock('waldur-js-client');
-vi.mock('@waldur/store/hooks');
-vi.mock('@waldur/modal/hooks');
-vi.mock('@waldur/permissions/hooks');
+vi.mock('@/store/hooks');
+vi.mock('@/modal/hooks');
+vi.mock('@/permissions/hooks');
 
 const mockData = {
   resource: {

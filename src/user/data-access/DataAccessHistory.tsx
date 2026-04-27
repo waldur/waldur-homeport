@@ -2,18 +2,18 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { usersDataAccessHistoryList } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   UserDataAccessHistoryFilter,
   selectUserDataAccessHistoryFilter,
-} from '@waldur/table/generated/UserDataAccessHistoryFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/UserDataAccessHistoryFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { DataAccessHistoryEntry } from './types';
 import {

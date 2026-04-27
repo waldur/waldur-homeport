@@ -1,11 +1,11 @@
-import { translate } from '@waldur/i18n';
-import { ActionGroup } from '@waldur/marketplace/resources/actions/ActionGroup';
-import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
-import { ProviderActionsGroup } from '@waldur/marketplace/resources/actions/ProviderActionsGroup';
-import { ChangePlanAction } from '@waldur/marketplace/resources/change-plan/ChangePlanAction';
-import { ShowUsageAction } from '@waldur/marketplace/resources/list/ShowUsageAction';
-import { TerminateAction } from '@waldur/marketplace/resources/terminate/TerminateAction';
-import { UnlinkActionItem } from '@waldur/resource/actions/UnlinkActionItem';
+import { translate } from '@/i18n';
+import { ActionGroup } from '@/marketplace/resources/actions/ActionGroup';
+import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
+import { ProviderActionsGroup } from '@/marketplace/resources/actions/ProviderActionsGroup';
+import { ChangePlanAction } from '@/marketplace/resources/change-plan/ChangePlanAction';
+import { ShowUsageAction } from '@/marketplace/resources/list/ShowUsageAction';
+import { TerminateAction } from '@/marketplace/resources/terminate/TerminateAction';
+import { UnlinkActionItem } from '@/resource/actions/UnlinkActionItem';
 
 import { EditAction } from './EditAction';
 import { PullAllocationAction } from './PullAllocationAction';

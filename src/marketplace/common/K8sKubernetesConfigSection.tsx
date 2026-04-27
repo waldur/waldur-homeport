@@ -2,9 +2,9 @@ import { InfoIcon } from '@phosphor-icons/react';
 import React from 'react';
 import { Alert } from 'react-bootstrap';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { SelectField } from '@/form';
+import { translate } from '@/i18n';
 
 import { FormGroup } from '../offerings/FormGroup';
 

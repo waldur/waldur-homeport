@@ -10,8 +10,8 @@ import { Provider } from 'react-redux';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 import { marketplaceComponentUsagesSetUsage } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { createActionStore } from '@waldur/resource/actions/testUtils';
+import { translate } from '@/i18n';
+import { createActionStore } from '@/resource/actions/testUtils';
 
 import { getProviderUsageComponents } from './api';
 import { ResourceCreateUsageDialog } from './ResourceCreateUsageDialog';

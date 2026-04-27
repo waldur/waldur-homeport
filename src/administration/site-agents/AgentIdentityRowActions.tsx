@@ -4,10 +4,10 @@ import {
   marketplaceSiteAgentIdentitiesDestroy,
 } from 'waldur-js-client';
 
-import { DeleteButton, EditModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { DeleteButton, EditModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { useInvalidateAgentIdentities } from './utils';
 

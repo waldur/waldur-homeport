@@ -9,13 +9,13 @@ import {
   MarketplaceGlobalCategoriesRetrieveData,
 } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { getGroupedCategories } from '@waldur/marketplace/category/utils';
-import { getCategoryGroups } from '@waldur/marketplace/common/api';
-import { ALL_RESOURCES_TABLE_ID } from '@waldur/marketplace/resources/list/constants';
-import { selectFiltersStorage } from '@waldur/table/selectors';
-import { getResource } from '@waldur/workspace/selectors';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { getGroupedCategories } from '@/marketplace/category/utils';
+import { getCategoryGroups } from '@/marketplace/common/api';
+import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
+import { selectFiltersStorage } from '@/table/selectors';
+import { getResource } from '@/workspace/selectors';
 
 import { MenuAccordion } from './MenuAccordion';
 import { MenuItem } from './MenuItem';

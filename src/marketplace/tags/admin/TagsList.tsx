@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { marketplaceTagsList, Tag } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { truncate } from '@/core/utils';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { TagCreateButton } from './TagCreateButton';
 import { TagExpandableRow } from './TagExpandableRow';

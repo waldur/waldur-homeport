@@ -1,12 +1,12 @@
 import { FC, useMemo } from 'react';
 import { marketplaceOfferingEstimatedCostPoliciesList } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
 
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';
 import { PoliciesTable } from './PoliciesTable';

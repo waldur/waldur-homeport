@@ -1,10 +1,10 @@
 import { ReactNode } from 'react';
 import { OptionField, OptionFieldTypeEnum } from 'waldur-js-client';
 
-import { formatDate, formatTime } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { translate } from '@waldur/i18n';
+import { formatDate, formatTime } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { translate } from '@/i18n';
 
 const OptionValueRenders: Record<OptionFieldTypeEnum, (value) => ReactNode> = {
   integer: (value) => value,

@@ -6,7 +6,7 @@ import {
   WrenchIcon,
 } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { RequestType } from '../api';
 

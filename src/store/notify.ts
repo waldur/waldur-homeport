@@ -1,6 +1,6 @@
 import { notify } from 'reapop';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
+import { format } from '@/core/ErrorMessageFormatter';
 
 export const showSuccess = (title, message = undefined) =>
   notify({

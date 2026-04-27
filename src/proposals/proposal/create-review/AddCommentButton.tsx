@@ -1,8 +1,8 @@
 import { ChatDotsIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
-import { isReviewInFinalState } from '@waldur/proposals/utils';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { isReviewInFinalState } from '@/proposals/utils';
+import { ActionButton } from '@/table/ActionButton';
 
 export const AddCommentButton = ({
   review,

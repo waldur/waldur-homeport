@@ -1,7 +1,7 @@
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { FormAbstractVolumeFields } from '@waldur/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
 
 export const FormVolumeStep = (props: FormStepProps) => (
   <VStepperFormStepCard

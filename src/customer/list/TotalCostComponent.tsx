@@ -3,13 +3,13 @@ import { connect } from 'react-redux';
 import { useAsync } from 'react-use';
 import { billingTotalCostRetrieve } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ServiceProvider } from '@waldur/marketplace/types';
-import { type RootState } from '@waldur/store/reducers';
-import { selectFiltersStorage } from '@waldur/table/selectors';
-import { FilterItem } from '@waldur/table/types';
+import { ENV } from '@/core/config';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ServiceProvider } from '@/marketplace/types';
+import { type RootState } from '@/store/reducers';
+import { selectFiltersStorage } from '@/table/selectors';
+import { FilterItem } from '@/table/types';
 
 import { TotalCostField } from './TotalCostField';
 

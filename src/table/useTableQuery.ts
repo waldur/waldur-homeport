@@ -2,8 +2,8 @@ import { useQuery } from '@tanstack/react-query';
 import { concat, uniq } from 'lodash-es';
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 
-import { useDebouncedValue } from '@waldur/core/useDebouncedValue';
-import { orderByFilter } from '@waldur/core/utils';
+import { useDebouncedValue } from '@/core/useDebouncedValue';
+import { orderByFilter } from '@/core/utils';
 
 import { Fetcher, Sorting, TableRequest } from './types';
 import { transformRows } from './utils';

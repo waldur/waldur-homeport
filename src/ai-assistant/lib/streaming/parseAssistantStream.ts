@@ -1,14 +1,14 @@
 import {
   markBlocksComplete,
   updateBlocks,
-} from '@waldur/ai-assistant/lib/blocks/blockManager';
-import { streamChat } from '@waldur/ai-assistant/lib/streaming/streamChat';
+} from '@/ai-assistant/lib/blocks/blockManager';
+import { streamChat } from '@/ai-assistant/lib/streaming/streamChat';
 import {
   BlockBasedMetadata,
   MessageHandlerDependencies,
   UIBlock,
-} from '@waldur/ai-assistant/lib/types';
-import { translate } from '@waldur/i18n';
+} from '@/ai-assistant/lib/types';
+import { translate } from '@/i18n';
 
 interface ParseAssistantStreamParams extends Pick<
   MessageHandlerDependencies,

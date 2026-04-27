@@ -7,10 +7,10 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ResourceComponentItem } from '@waldur/marketplace/resources/details/ResourceComponentItem';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { ResourceComponentItem } from '@/marketplace/resources/details/ResourceComponentItem';
 
 interface ResourceComponentsSummaryProps {
   resource: Resource;

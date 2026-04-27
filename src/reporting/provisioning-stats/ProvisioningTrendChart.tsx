@@ -2,10 +2,10 @@ import { EChartsOption } from 'echarts';
 import { FC, useMemo } from 'react';
 import { DailyOrderStats } from 'waldur-js-client';
 
-import { ChartCard } from '@waldur/core/ChartCard';
-import { EChart } from '@waldur/core/EChart';
-import { translate } from '@waldur/i18n';
-import { ExportData } from '@waldur/table/exporters/types';
+import { ChartCard } from '@/core/ChartCard';
+import { EChart } from '@/core/EChart';
+import { translate } from '@/i18n';
+import { ExportData } from '@/table/exporters/types';
 
 interface ProvisioningTrendChartProps {
   daily: DailyOrderStats[];

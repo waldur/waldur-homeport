@@ -1,21 +1,21 @@
-import { AzureSqlServerActions } from '@waldur/azure/sql/actions';
-import { AzureVirtualMachineActions } from '@waldur/azure/vm/actions';
-import { OpenStackBackupActions } from '@waldur/openstack/openstack-backup/actions';
-import { OpenStackFloatingIPActions } from '@waldur/openstack/openstack-floating-ips/actions';
-import { OpenStackNetworkActions } from '@waldur/openstack/openstack-network/actions';
-import { OpenStackSecurityGroupActions } from '@waldur/openstack/openstack-security-groups/actions';
-import { OpenStackServerGroupActions } from '@waldur/openstack/openstack-server-groups/actions';
-import { OpenStackSnapshotActions } from '@waldur/openstack/openstack-snapshot/actions';
-import { OpenStackSubNetActions } from '@waldur/openstack/openstack-subnet/actions';
-import { OpenStackPortActions } from '@waldur/openstack/openstack-tenant/ports';
-import { OpenStackRouterActions } from '@waldur/openstack/openstack-tenant/tenant-routers';
-import { RancherClusterActions } from '@waldur/rancher/cluster/actions';
-import { RancherNodeActions } from '@waldur/rancher/node/actions';
+import { AzureSqlServerActions } from '@/azure/sql/actions';
+import { AzureVirtualMachineActions } from '@/azure/vm/actions';
+import { OpenStackBackupActions } from '@/openstack/openstack-backup/actions';
+import { OpenStackFloatingIPActions } from '@/openstack/openstack-floating-ips/actions';
+import { OpenStackNetworkActions } from '@/openstack/openstack-network/actions';
+import { OpenStackSecurityGroupActions } from '@/openstack/openstack-security-groups/actions';
+import { OpenStackServerGroupActions } from '@/openstack/openstack-server-groups/actions';
+import { OpenStackSnapshotActions } from '@/openstack/openstack-snapshot/actions';
+import { OpenStackSubNetActions } from '@/openstack/openstack-subnet/actions';
+import { OpenStackPortActions } from '@/openstack/openstack-tenant/ports';
+import { OpenStackRouterActions } from '@/openstack/openstack-tenant/tenant-routers';
+import { RancherClusterActions } from '@/rancher/cluster/actions';
+import { RancherNodeActions } from '@/rancher/node/actions';
 import {
   VMwareDiskActions,
   VMwarePortActions,
   VMwareVirtualMachineActions,
-} from '@waldur/vmware/actions';
+} from '@/vmware/actions';
 
 import { ActionConfiguration, ActionItemType } from './types';
 

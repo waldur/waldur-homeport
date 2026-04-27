@@ -17,7 +17,7 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store hooks
-vi.mock('@waldur/store/hooks', () => ({
+vi.mock('@/store/hooks', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
@@ -28,12 +28,12 @@ vi.mock('@waldur/store/hooks', () => ({
 }));
 
 // Mock translation
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (str: string) => str,
 }));
 
 // Mock table constants
-vi.mock('@waldur/table/constants', () => ({
+vi.mock('@/table/constants', () => ({
   DASH_ESCAPE_CODE: '—',
   INITIAL_STATE: {
     entities: {},
@@ -65,7 +65,7 @@ vi.mock('@waldur/table/constants', () => ({
 }));
 
 // Mock workspace selectors
-vi.mock('@waldur/workspace/selectors', () => ({
+vi.mock('@/workspace/selectors', () => ({
   getProject: () => ({
     uuid: 'project-uuid',
     name: 'Test Project',
@@ -79,7 +79,7 @@ vi.mock('react-redux', () => ({
 }));
 
 // Mock permissions utils
-vi.mock('@waldur/permissions/utils', () => ({
+vi.mock('@/permissions/utils', () => ({
   getProjectRoles: () => [
     {
       name: 'admin',
@@ -101,7 +101,7 @@ vi.mock('@waldur/permissions/utils', () => ({
 }));
 
 // Mock form components - simplified inline to avoid duplication detection
-vi.mock('@waldur/form/SelectField', () => ({
+vi.mock('@/form/SelectField', () => ({
   SelectField: ({ options, getOptionLabel }) => (
     <select data-testid="select">
       {options?.map((opt, i) => (
@@ -113,13 +113,13 @@ vi.mock('@waldur/form/SelectField', () => ({
   ),
 }));
 
-vi.mock('@waldur/form/DateField', () => ({
+vi.mock('@/form/DateField', () => ({
   DateField: ({ placeholder }) => (
     <input type="date" placeholder={placeholder} data-testid="date" />
   ),
 }));
 
-vi.mock('@waldur/form', () => ({
+vi.mock('@/form', () => ({
   FormGroup: ({ children, label, required }) => (
     <div data-testid="group">
       {label && (
@@ -145,11 +145,11 @@ vi.mock('@waldur/form', () => ({
   ),
 }));
 
-vi.mock('@waldur/modal/CloseDialogButton', () => ({
+vi.mock('@/modal/CloseDialogButton', () => ({
   CloseDialogButton: () => <button data-testid="close">Close</button>,
 }));
 
-vi.mock('@waldur/modal/ModalDialog', () => ({
+vi.mock('@/modal/ModalDialog', () => ({
   ModalDialog: ({ title, children, footer }) => (
     <div data-testid="modal">
       <h2>{title}</h2>

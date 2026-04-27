@@ -2,16 +2,16 @@ import React from 'react';
 import { Button } from 'react-bootstrap';
 import { marketplaceOrdersList, OrderDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { OrderConsumerActions } from '@waldur/marketplace/orders/actions/OrderConsumerActions';
-import { TABLE_PENDING_PUBLIC_ORDERS } from '@waldur/marketplace/orders/list/constants';
-import { OrderNameField } from '@waldur/marketplace/orders/list/OrderNameField';
-import { OrderStateCell } from '@waldur/marketplace/orders/list/OrderStateCell';
-import { OrderTypeCell } from '@waldur/marketplace/orders/list/OrderTypeCell';
-import { ResourceNameField } from '@waldur/marketplace/orders/list/ResourceNameField';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { OrderConsumerActions } from '@/marketplace/orders/actions/OrderConsumerActions';
+import { TABLE_PENDING_PUBLIC_ORDERS } from '@/marketplace/orders/list/constants';
+import { OrderNameField } from '@/marketplace/orders/list/OrderNameField';
+import { OrderStateCell } from '@/marketplace/orders/list/OrderStateCell';
+import { OrderTypeCell } from '@/marketplace/orders/list/OrderTypeCell';
+import { ResourceNameField } from '@/marketplace/orders/list/ResourceNameField';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { BulkConsumerActions } from './BulkConsumerActions';
 import { PENDING_CONSUMER_ORDERS_FILTER } from './constants';

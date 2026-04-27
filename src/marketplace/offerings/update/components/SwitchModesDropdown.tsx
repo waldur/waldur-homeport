@@ -5,12 +5,12 @@ import {
 } from '@phosphor-icons/react';
 import { FC } from 'react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@waldur/openstack/constants';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@/openstack/constants';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { OfferingSectionProps } from '../types';
 

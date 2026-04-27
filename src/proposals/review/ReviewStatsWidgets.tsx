@@ -8,10 +8,10 @@ import {
   ReviewerProfile,
 } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { translate } from '@waldur/i18n';
-import { getUser } from '@waldur/workspace/selectors';
+import { fetchResultCount } from '@/core/api';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { translate } from '@/i18n';
+import { getUser } from '@/workspace/selectors';
 
 export const ReviewStatsWidgets: FC = () => {
   const user = useSelector(getUser);

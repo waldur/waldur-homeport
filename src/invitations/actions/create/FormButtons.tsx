@@ -1,10 +1,10 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ActionButton } from '@/table/ActionButton';
 
 interface FormButtonsProps {
   step: 1 | 2;

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { UserAction } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 
 import { ExtendedUserAction } from './types';
 

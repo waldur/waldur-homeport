@@ -3,17 +3,17 @@ import { Field, Form } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsMoveOffering } from 'waldur-js-client';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { required } from '@waldur/core/validators';
-import { FormFooter } from '@waldur/form';
-import { Select } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showError, showSuccess } from '@waldur/store/notify';
+import { format } from '@/core/ErrorMessageFormatter';
+import { required } from '@/core/validators';
+import { FormFooter } from '@/form';
+import { Select } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showError, showSuccess } from '@/store/notify';
 
 export const MoveOfferingDialog: FunctionComponent<{
   resolve: { offering; refetch };

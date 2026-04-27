@@ -4,18 +4,18 @@ import { useCallback, useEffect } from 'react';
 import { reduxForm } from 'redux-form';
 import { NestedRound, proposalProposalsCreate } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { EndingField } from '@waldur/proposals/EndingField';
-import { Call } from '@waldur/proposals/types';
-import { Field } from '@waldur/resource/summary';
-import { useNotify } from '@waldur/store/hooks';
-import { UsersService } from '@waldur/user/UsersService';
+import { required } from '@/core/validators';
+import { SubmitButton } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { EndingField } from '@/proposals/EndingField';
+import { Call } from '@/proposals/types';
+import { Field } from '@/resource/summary';
+import { useNotify } from '@/store/hooks';
+import { UsersService } from '@/user/UsersService';
 
 interface FormData {
   name: string;

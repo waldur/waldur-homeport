@@ -6,16 +6,16 @@ import {
   MarketplaceProviderResourcesListData,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   FILTER_OFFERING_RESOURCE,
   TABLE_OFFERING_RESOURCE,
-} from '@waldur/marketplace/details/constants';
-import { ResourceKeycloakScopesRow } from '@waldur/marketplace/offerings/keycloak/ResourceKeycloakScopesRow';
-import { Offering } from '@waldur/marketplace/types';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/marketplace/details/constants';
+import { ResourceKeycloakScopesRow } from '@/marketplace/offerings/keycloak/ResourceKeycloakScopesRow';
+import { Offering } from '@/marketplace/types';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { NON_TERMINATED_STATES } from '../resources/list/constants';
 import { ProviderResourceActions } from '../resources/list/ProviderResourceActions';

@@ -6,14 +6,14 @@ import {
   bookingOfferingsUnshareGoogleCalendar,
 } from 'waldur-js-client';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { translate } from '@waldur/i18n';
-import { isOfferingTypeSchedulable } from '@waldur/marketplace/common/registry';
-import { ARCHIVED } from '@waldur/marketplace/offerings/store/constants';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
-import { isOwner as isOwnerSelector } from '@waldur/workspace/selectors';
+import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
+import { translate } from '@/i18n';
+import { isOfferingTypeSchedulable } from '@/marketplace/common/registry';
+import { ARCHIVED } from '@/marketplace/offerings/store/constants';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
+import { isOwner as isOwnerSelector } from '@/workspace/selectors';
 
 import { ActionsDropdown } from '../../actions/ActionsDropdown';
 

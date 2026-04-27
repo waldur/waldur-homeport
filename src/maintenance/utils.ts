@@ -3,8 +3,8 @@ import {
   MaintenanceAnnouncementStateEnum,
 } from 'waldur-js-client';
 
-import { getUUID } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { getUUID } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import { MaintenanceForm } from './types';
 

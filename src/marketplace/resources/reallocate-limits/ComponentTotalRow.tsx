@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 import { BasePublicPlan } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface ComponentTotalRowProps {
   components: Array<{

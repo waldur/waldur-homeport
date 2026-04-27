@@ -4,10 +4,10 @@ import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { ListGroup } from 'react-bootstrap';
 import Flatpickr, { type DateTimePickerProps } from 'react-flatpickr';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { FormField } from '@waldur/form/types';
-import { useFlatpickrTheme } from '@waldur/form/useFlatpickrTheme';
-import { translate } from '@waldur/i18n';
+import { parseDate } from '@/core/dateUtils';
+import { FormField } from '@/form/types';
+import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
+import { translate } from '@/i18n';
 
 import { getTimeOptions } from '../utils';
 

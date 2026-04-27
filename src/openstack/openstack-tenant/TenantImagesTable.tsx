@@ -5,7 +5,7 @@ import { OpenstackImagesListData } from 'waldur-js-client';
 import {
   OpenstackImagesFilter,
   selectOpenstackImagesFilter,
-} from '@waldur/table/generated/OpenstackImagesFilter';
+} from '@/table/generated/OpenstackImagesFilter';
 
 import { TenantImagesList } from './TenantImagesList';
 

@@ -1,8 +1,8 @@
 import { vi, describe, it, expect, afterEach, beforeEach } from 'vitest';
 
-import { formatOrganizationCostChart } from '@waldur/dashboard/utils';
+import { formatOrganizationCostChart } from '@/dashboard/utils';
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: { WALDUR_CORE: { CURRENCY_NAME: 'EUR' } },
   },

@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { Sorting } from '@waldur/table/types';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { Sorting } from '@/table/types';
 
 interface TableLoadingSpinnerContainerProps {
   loading?: boolean;

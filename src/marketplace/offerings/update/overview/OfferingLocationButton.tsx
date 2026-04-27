@@ -4,18 +4,18 @@ import {
   Offering,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { translate } from '@waldur/i18n';
-import { GeolocationPoint } from '@waldur/map/types';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { translate } from '@/i18n';
+import { GeolocationPoint } from '@/map/types';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { ARCHIVED } from '../../store/constants';
 
 const SetLocationDialog = lazyComponent(() =>
-  import('@waldur/map/SetLocationDialog').then((module) => ({
+  import('@/map/SetLocationDialog').then((module) => ({
     default: module.SetLocationDialog,
   })),
 );

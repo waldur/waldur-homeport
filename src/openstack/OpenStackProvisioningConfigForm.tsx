@@ -1,14 +1,14 @@
 import { FC } from 'react';
 
-import { NumberField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { translate } from '@waldur/i18n';
+import { NumberField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { translate } from '@/i18n';
 import {
   DefaultOfferingEditPanel,
   OfferingEditField,
-} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
-import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
+} from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
 
 import { OpenStackPluginOptionsForm } from './OpenStackPluginOptionsForm';
 import { OpenStackSecretOptionsForm } from './OpenStackSecretOptionsForm';

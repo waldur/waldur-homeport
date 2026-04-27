@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { Customer } from '@waldur/workspace/types';
+import { ENV } from '@/core/config';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { Customer } from '@/workspace/types';
 
 export const EstimatedCostField: FunctionComponent<{ row: Customer }> = ({
   row,

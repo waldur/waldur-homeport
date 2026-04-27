@@ -1,5 +1,5 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { ResourceSummaryConfiguration } from '@waldur/resource/summary/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { ResourceSummaryConfiguration } from '@/resource/summary/types';
 
 import { OPENSTACK_PORT_TYPE } from '../constants';
 

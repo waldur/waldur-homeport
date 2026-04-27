@@ -6,18 +6,18 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { STALE_TIME } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
 import {
   getFormLimitParser,
   getFormLimitSerializer,
-} from '@waldur/marketplace/common/registry';
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
-import { Wizard } from '@waldur/wizard';
+} from '@/marketplace/common/registry';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
+import { Wizard } from '@/wizard';
 
 import { Step1UpdateLimits } from './Step1UpdateLimits';
 import { Step2ExtendDuration } from './Step2ExtendDuration';

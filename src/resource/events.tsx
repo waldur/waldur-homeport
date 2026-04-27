@@ -1,6 +1,6 @@
-import { Link } from '@waldur/core/Link';
-import { getUserContext } from '@waldur/events/utils';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { getUserContext } from '@/events/utils';
+import { translate } from '@/i18n';
 
 import { ResourcesEnum } from '../EventsEnums';
 

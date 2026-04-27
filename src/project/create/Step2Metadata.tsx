@@ -5,14 +5,14 @@ import {
   QuestionAdmin,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { FormFieldError } from '@waldur/form/FormFieldError';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { QuestionAnswerField } from '@waldur/marketplace-checklist/QuestionAnswerField';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { FormFieldError } from '@/form/FormFieldError';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { QuestionAnswerField } from '@/marketplace-checklist/QuestionAnswerField';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 export const Step2Metadata: FC<WizardStepProps> = (props) => {
   // Fetch customer checklist questions

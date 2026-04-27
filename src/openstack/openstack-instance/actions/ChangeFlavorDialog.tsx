@@ -6,14 +6,14 @@ import {
   openstackInstancesChangeFlavor,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { loadFlavors } from '@waldur/openstack/api';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { formatFlavor } from '@waldur/resource/utils';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { UI_STALE_TIME } from '@/core/constants';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { loadFlavors } from '@/openstack/api';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { formatFlavor } from '@/resource/utils';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 import { OpenStackInstanceCurrentFlavor } from '../OpenStackInstanceCurrentFlavor';
 

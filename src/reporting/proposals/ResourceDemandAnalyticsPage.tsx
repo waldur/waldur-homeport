@@ -1,11 +1,11 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useMemo, useState } from 'react';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { titleCase } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { getLabel } from '@waldur/marketplace/common/registry';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { titleCase } from '@/core/utils';
+import { translate } from '@/i18n';
+import { getLabel } from '@/marketplace/common/registry';
 
 import {
   AnalyticsMode,

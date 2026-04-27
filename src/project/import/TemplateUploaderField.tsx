@@ -1,7 +1,7 @@
-import { FieldError } from '@waldur/form';
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { translate } from '@waldur/i18n';
+import { FieldError } from '@/form';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { translate } from '@/i18n';
 
 export const TemplateUploaderField = ({
   input: { value, onChange },

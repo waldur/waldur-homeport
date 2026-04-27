@@ -2,8 +2,8 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ActionItem, ActionItemProps } from './ActionItem';
 import { validateState } from './base';

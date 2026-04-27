@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
 
-import { formatISOWithoutZone } from '@waldur/core/dateUtils';
-import { required } from '@waldur/core/validators';
-import { FormContainer, NumberField, SelectField } from '@waldur/form';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
+import { formatISOWithoutZone } from '@/core/dateUtils';
+import { required } from '@/core/validators';
+import { FormContainer, NumberField, SelectField } from '@/form';
+import { DateTimeField } from '@/form/DateTimeField';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
 import {
   getRoundAllocationStrategyOptions,
   getRoundAllocationTimeOptions,
-} from '@waldur/proposals/utils';
+} from '@/proposals/utils';
 
 export const WizardFormThirdPage: FunctionComponent<WizardFormStepProps> = (
   props,

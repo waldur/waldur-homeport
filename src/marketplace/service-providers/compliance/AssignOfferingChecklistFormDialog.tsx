@@ -6,11 +6,11 @@ import {
   marketplaceProviderOfferingsUpdateComplianceChecklist,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ASSIGN_CHECKLIST_TO_OFFERINGS_FORM_ID } from '../constants';
 

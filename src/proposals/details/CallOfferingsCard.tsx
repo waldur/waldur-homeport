@@ -1,10 +1,10 @@
 import { FC } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { OfferingDetailsLink } from '@waldur/marketplace/links/OfferingDetailsLink';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { CallOffering, Call } from '../types';
 

@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 
-import { Panel } from '@waldur/core/Panel';
-import { ProgressSteps as MainProgressSteps } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
-import { Proposal } from '@waldur/proposals/types';
+import { Panel } from '@/core/Panel';
+import { ProgressSteps as MainProgressSteps } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
+import { Proposal } from '@/proposals/types';
 
 interface ProgressStepsProps {
   proposal: Proposal;

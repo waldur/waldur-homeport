@@ -2,11 +2,11 @@ import { BellSlashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { UserAction } from 'waldur-js-client';
 
-import { AlertItem } from '@waldur/core/AlertItem';
-import { Badge } from '@waldur/core/Badge';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { AlertItem } from '@/core/AlertItem';
+import { Badge } from '@/core/Badge';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 import { ActionContext } from './ActionContext';
 import { usePendingActionActions, PrimaryActionInfo } from './actions';

@@ -1,6 +1,6 @@
 import { useSelector } from 'react-redux';
 
-import { getUser } from '@waldur/workspace/selectors';
+import { getUser } from '@/workspace/selectors';
 
 import { UserEvents } from './UserEvents';
 

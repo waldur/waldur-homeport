@@ -1,7 +1,7 @@
 import { formValueSelector } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
+import { translate } from '@/i18n';
+import { type RootState } from '@/store/reducers';
 
 import { MetricsFormData } from './types';
 

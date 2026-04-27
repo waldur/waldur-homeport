@@ -1,6 +1,6 @@
-import { PermissionMap } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { Role } from '@waldur/permissions/types';
+import { PermissionMap } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { Role } from '@/permissions/types';
 
 import { Invitation } from '../types';
 

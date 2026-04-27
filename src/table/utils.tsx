@@ -1,6 +1,6 @@
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n/translate';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n/translate';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { ExportData } from './exporters/types';
 import { Column } from './types';

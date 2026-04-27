@@ -5,18 +5,18 @@ import {
   RobotAccountDetails,
 } from 'waldur-js-client';
 
-import { CopyToClipboardContainer } from '@waldur/core/CopyToClipboardContainer';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { CopyToClipboardContainer } from '@/core/CopyToClipboardContainer';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   MarketplaceRobotAccountsFilter,
   selectMarketplaceRobotAccountsFilter,
-} from '@waldur/table/generated/MarketplaceRobotAccountsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/MarketplaceRobotAccountsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getCustomer } from '@/workspace/selectors';
 
 import { RobotAccountActions } from './RobotAccountActions';
 import { RobotAccountExpandable } from './RobotAccountExpandable';

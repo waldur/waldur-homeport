@@ -5,12 +5,12 @@ import { Card, ToggleButton, ToggleButtonGroup } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 import { marketplaceResourcesTeamList, Resource } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { ResourceUsageTabsContainer } from '../usage/ResourceUsageTabsContainer';
 import { UsageExportDropdown } from '../usage/UsageExportDropdown';

@@ -5,11 +5,11 @@ import React, { ReactNode, useCallback, useEffect, useState } from 'react';
 import { FormCheck } from 'react-bootstrap';
 import FormCheckInput from 'react-bootstrap/esm/FormCheckInput';
 
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { Select } from '@waldur/form/themed-select';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/components';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { Select } from '@/form/themed-select';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
+import { MenuComponent } from '@/metronic/components';
 
 import './BoxRadioField.scss';
 

@@ -2,18 +2,18 @@ import { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
-import { getLatinNameValidators } from '@waldur/core/validators';
-import { translate } from '@waldur/i18n';
-import { OrderFormComponentProps } from '@waldur/marketplace/common/types';
-import { BaseDeployPage } from '@waldur/marketplace/deploy/DeployPage';
+import { getLatinNameValidators } from '@/core/validators';
+import { translate } from '@/i18n';
+import { OrderFormComponentProps } from '@/marketplace/common/types';
+import { BaseDeployPage } from '@/marketplace/deploy/DeployPage';
 import {
   AdditionalConfigurationStep,
   DetailsOverviewStep,
   PlanStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { FinalConfigurationStep } from '@waldur/openportal/constants';
+} from '@/marketplace/deploy/steps/constants';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
+import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { FinalConfigurationStep } from '@/openportal/constants';
 
 const deployOfferingSteps: OfferingConfigurationFormStep[] = [
   DetailsOverviewStep,

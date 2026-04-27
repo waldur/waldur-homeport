@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { ReactNode } from 'react';
 
-import { Image } from '@waldur/core/Image';
+import { Image } from '@/core/Image';
 import './DashboardHeroLogo.scss';
-import { SVGImagePlaceholder } from '@waldur/core/SVGImagePlaceholder';
+import { SVGImagePlaceholder } from '@/core/SVGImagePlaceholder';
 
 interface DashboardHeroLogoProps {
   logo: string;

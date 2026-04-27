@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { openModalDialog } from '@waldur/modal/actions';
-import { EditCallProps } from '@waldur/proposals/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { openModalDialog } from '@/modal/actions';
+import { EditCallProps } from '@/proposals/types';
 
 const EditGeneralInfoDialog = lazyComponent(() =>
   import('./EditGeneralInfoDialog').then((module) => ({

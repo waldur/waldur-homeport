@@ -6,7 +6,7 @@ import {
 import classNames from 'classnames';
 import { FunctionComponent, useCallback, useEffect, useRef } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { FormField } from './types';
 

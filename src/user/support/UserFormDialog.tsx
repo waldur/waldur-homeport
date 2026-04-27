@@ -11,13 +11,13 @@ import {
   UserRequest,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { useNotify } from '@waldur/store/hooks';
-import { Wizard } from '@waldur/wizard';
-import { setCurrentUser } from '@waldur/workspace/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { useNotify } from '@/store/hooks';
+import { Wizard } from '@/wizard';
+import { setCurrentUser } from '@/workspace/actions';
+import { getUser } from '@/workspace/selectors';
 
 import { parseGender } from './aai-constants';
 import { AccountStep } from './create-user-steps/AccountStep';

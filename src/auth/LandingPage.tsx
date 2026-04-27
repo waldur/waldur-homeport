@@ -1,8 +1,8 @@
 import { useEffect } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { getQueryParams } from '@waldur/core/filters';
-import { CookiesConsent } from '@waldur/navigation/cookies/CookiesConsent';
+import { ENV } from '@/core/config';
+import { getQueryParams } from '@/core/filters';
+import { CookiesConsent } from '@/navigation/cookies/CookiesConsent';
 
 import * as AuthService from './AuthService';
 import {

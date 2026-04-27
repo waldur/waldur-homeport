@@ -7,11 +7,11 @@ import {
   marketplaceCourseAccountsList,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
+import { renderFieldOrDash } from '@/table/utils';
 
 const stateConfig: Record<string, { label: string; color: string }> = {
   Pending: { label: translate('Pending'), color: 'warning' },

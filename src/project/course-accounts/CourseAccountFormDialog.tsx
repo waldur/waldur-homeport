@@ -16,19 +16,19 @@ import {
   marketplaceCourseAccountsCreateBulk,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { required } from '@waldur/core/validators';
-import { SubmitButton, TextField } from '@waldur/form';
-import { EmailField } from '@waldur/form/EmailField';
-import { translate } from '@waldur/i18n';
-import { StepsList } from '@waldur/marketplace/common/StepsList';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showInfo, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { getProject } from '@waldur/workspace/selectors';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { required } from '@/core/validators';
+import { SubmitButton, TextField } from '@/form';
+import { EmailField } from '@/form/EmailField';
+import { translate } from '@/i18n';
+import { StepsList } from '@/marketplace/common/StepsList';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showInfo, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { getProject } from '@/workspace/selectors';
 
 import templateFile from './course_accounts_template.json';
 import { Step1UploadFile } from './Step1UploadFile';

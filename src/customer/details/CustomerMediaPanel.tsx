@@ -4,10 +4,10 @@ import { Card } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { WideImageField } from '@waldur/form/WideImageField';
-import { translate } from '@waldur/i18n';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { WideImageField } from '@/form/WideImageField';
+import { translate } from '@/i18n';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 
 import { EDIT_CUSTOMER_IMAGE_ID } from './constants';
 import { CustomerEditPanelProps } from './types';

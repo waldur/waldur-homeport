@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { translate } from '@waldur/i18n';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { translate } from '@/i18n';
 
 import { ActiveUsersByProviderChart } from './growth/ActiveUsersByProviderChart';
 import { ProjectsOverTimeChart } from './growth/ProjectsOverTimeChart';

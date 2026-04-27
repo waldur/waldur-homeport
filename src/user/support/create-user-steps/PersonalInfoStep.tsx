@@ -1,12 +1,12 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { StringField } from '@waldur/form/StringField';
-import { TextField } from '@waldur/form/TextField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { StringField } from '@/form/StringField';
+import { TextField } from '@/form/TextField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 export const PersonalInfoStep: FC<WizardStepProps> = (props) => {
   return (

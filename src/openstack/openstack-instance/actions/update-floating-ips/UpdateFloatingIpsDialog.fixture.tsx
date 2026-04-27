@@ -1,14 +1,10 @@
-import {
-  actWait,
-  findButtonByText,
-  updateWrapper,
-} from '@waldur/core/testUtils';
 import { mount, ReactWrapper } from 'enzyme';
 import { Provider } from 'react-redux';
 import { Store } from 'redux';
 import { OpenStackFloatingIp, OpenStackInstance } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { actWait, findButtonByText, updateWrapper } from '@/core/testUtils';
 
 import { UpdateFloatingIpsDialog } from './UpdateFloatingIpsDialog';
 

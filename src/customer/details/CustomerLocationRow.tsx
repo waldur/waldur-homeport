@@ -4,12 +4,12 @@ import { FC } from 'react';
 import { Spinner } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { Customer } from '@waldur/workspace/types';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { Customer } from '@/workspace/types';
 
 import { SetLocationButton } from '../list/SetLocationButton';
 

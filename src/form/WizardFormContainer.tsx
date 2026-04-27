@@ -10,9 +10,9 @@ import {
 import { useDispatch, useStore } from 'react-redux';
 import { change, destroy, getFormValues } from 'redux-form';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
 
 interface WizardFormContainerProps {
   form: string;

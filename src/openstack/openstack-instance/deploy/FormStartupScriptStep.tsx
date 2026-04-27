@@ -2,13 +2,13 @@ import classNames from 'classnames';
 import { useState } from 'react';
 import { Field } from 'redux-form';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { Tip } from '@waldur/core/Tooltip';
-import { FormGroup, TextField } from '@waldur/form';
-import { MonacoField } from '@waldur/form/MonacoField';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { AccordionCard } from '@/core/AccordionCard';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { Tip } from '@/core/Tooltip';
+import { FormGroup, TextField } from '@/form';
+import { MonacoField } from '@/form/MonacoField';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 export const FormStartupScriptStep = (props: FormStepProps) => {
   const [scriptEnabled, setScriptEnabled] = useState(false);

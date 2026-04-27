@@ -31,30 +31,30 @@ import React, {
 } from 'react';
 import { chatQuotaUsageRetrieve } from 'waldur-js-client';
 
-import { calculateQuotaPercentage } from '@waldur/administration/ai-assistant/AITokenExpandableRow';
-import { BlockRenderer } from '@waldur/ai-assistant/components/BlockRenderer';
+import { calculateQuotaPercentage } from '@/administration/ai-assistant/AITokenExpandableRow';
+import { BlockRenderer } from '@/ai-assistant/components/BlockRenderer';
 import {
   VMOrderActions,
   VMOrderFormProvider,
-} from '@waldur/ai-assistant/components/blocks/VMOrderBlock';
-import { FeedbackButtons } from '@waldur/ai-assistant/components/FeedbackButtons';
-import { LoadingDots } from '@waldur/ai-assistant/components/shared/LoadingDots';
-import { VersionSelector } from '@waldur/ai-assistant/components/shared/VersionSelector';
-import { useVersionSelector } from '@waldur/ai-assistant/hooks/useVersionSelector';
-import { extractTextFromBlocks } from '@waldur/ai-assistant/lib/messages/messageUtils';
-import { isThreadLoading } from '@waldur/ai-assistant/lib/thread/isThreadLoading';
+} from '@/ai-assistant/components/blocks/VMOrderBlock';
+import { FeedbackButtons } from '@/ai-assistant/components/FeedbackButtons';
+import { LoadingDots } from '@/ai-assistant/components/shared/LoadingDots';
+import { VersionSelector } from '@/ai-assistant/components/shared/VersionSelector';
+import { useVersionSelector } from '@/ai-assistant/hooks/useVersionSelector';
+import { extractTextFromBlocks } from '@/ai-assistant/lib/messages/messageUtils';
+import { isThreadLoading } from '@/ai-assistant/lib/thread/isThreadLoading';
 import {
   BlockBasedMetadata,
   BlockHistoryEntry,
-} from '@waldur/ai-assistant/lib/types';
-import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
-import { AlertItem } from '@waldur/core/AlertItem';
-import { Badge } from '@waldur/core/Badge';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { QuotaProgressBar } from '@waldur/marketplace/resources/details/QuotaProgressBar';
-import { useUser } from '@waldur/workspace/hooks';
+} from '@/ai-assistant/lib/types';
+import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { AlertItem } from '@/core/AlertItem';
+import { Badge } from '@/core/Badge';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { QuotaProgressBar } from '@/marketplace/resources/details/QuotaProgressBar';
+import { useUser } from '@/workspace/hooks';
 
 type SuggestionItem = {
   label: string;

@@ -3,14 +3,14 @@ import { useCallback, useEffect, useMemo, useState } from 'react';
 import { useField, useForm } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { SkipErrorsCheck } from '@waldur/project/import/SkipErrorsCheck';
-import { showError } from '@waldur/store/notify';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
+import { showError } from '@/store/notify';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import templateFile from './course_accounts_template.json';
 import {

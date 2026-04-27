@@ -1,13 +1,13 @@
 import { useCallback, useEffect, useMemo, useRef } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { queryClient } from '@waldur/core/queryClient';
-import { openDrawerDialog, renderDrawerDialog } from '@waldur/drawer/actions';
-import { translate } from '@waldur/i18n';
-import { getTitle } from '@waldur/navigation/title';
-import { router } from '@waldur/router';
-import { type RootState } from '@waldur/store/reducers';
-import { makeSelectTableRows, getTableState } from '@waldur/table/selectors';
+import { queryClient } from '@/core/queryClient';
+import { openDrawerDialog, renderDrawerDialog } from '@/drawer/actions';
+import { translate } from '@/i18n';
+import { getTitle } from '@/navigation/title';
+import { router } from '@/router';
+import { type RootState } from '@/store/reducers';
+import { makeSelectTableRows, getTableState } from '@/table/selectors';
 
 import * as actions from './actions';
 import { INITIAL_STATE } from './constants';

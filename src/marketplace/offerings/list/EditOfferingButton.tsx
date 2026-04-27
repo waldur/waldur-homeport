@@ -3,10 +3,10 @@ import { useCurrentStateAndParams } from '@uirouter/react';
 import { Dropdown } from 'react-bootstrap';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 
 import { DropdownLink } from './DropdownLink';
 

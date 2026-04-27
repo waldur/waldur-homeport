@@ -1,7 +1,7 @@
-import { StateIndicatorProps } from '@waldur/core/StateIndicator';
-import { translate } from '@waldur/i18n';
-import { Resource } from '@waldur/resource/types';
-import { formatResourceType } from '@waldur/resource/utils';
+import { StateIndicatorProps } from '@/core/StateIndicator';
+import { translate } from '@/i18n';
+import { Resource } from '@/resource/types';
+import { formatResourceType } from '@/resource/utils';
 
 import { getStateMessages } from './constants';
 

@@ -6,14 +6,14 @@ import {
   OrderDetails,
 } from 'waldur-js-client';
 
-import { fileSerializer, formDataOptions } from '@waldur/core/api';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { OrderAttachmentField } from '@waldur/marketplace/deploy/steps/OrderAttachmentField';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { fileSerializer, formDataOptions } from '@/core/api';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { OrderAttachmentField } from '@/marketplace/deploy/steps/OrderAttachmentField';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 export const UploadPurchaseOrderDialog = ({
   order,

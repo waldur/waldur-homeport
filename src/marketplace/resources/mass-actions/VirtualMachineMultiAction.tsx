@@ -1,12 +1,12 @@
 import { useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { parseValidators } from '@waldur/resource/actions/utils';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { INSTANCE_TYPE } from '@/openstack/constants';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { parseValidators } from '@/resource/actions/utils';
+import { getUser } from '@/workspace/selectors';
 
 export const VirtualMachineMultiAction = ({
   rows,

@@ -1,6 +1,6 @@
 import { type ResourceReallocateTargetRequest } from 'waldur-js-client';
 
-import { Limits } from '@waldur/marketplace/common/types';
+import { Limits } from '@/marketplace/common/types';
 
 // resource name to be shown in the review and confirm tab
 interface ReallocateTarget extends ResourceReallocateTargetRequest {

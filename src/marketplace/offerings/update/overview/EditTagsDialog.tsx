@@ -10,16 +10,16 @@ import {
   Tag,
 } from 'waldur-js-client';
 
-import { FormFooter } from '@waldur/form';
+import { FormFooter } from '@/form';
 import {
   AsyncCreatablePaginate,
   MultiSelectOption,
-} from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { tagAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+} from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { tagAutocomplete } from '@/marketplace/common/autocompletes';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 // Custom Option that shows regular label for "create new" items, checkbox for existing items
 const CreatableMultiSelectOption = (props) => {

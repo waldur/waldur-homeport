@@ -1,15 +1,15 @@
 import { connect } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { formIsValidSelector } from '@waldur/marketplace/deploy/selectors';
-import { orderFormDataSelector } from '@waldur/marketplace/deploy/selectors';
-import { SummaryTable } from '@waldur/marketplace/details/OrderSummary';
-import { pricesSelector } from '@waldur/marketplace/details/plan/utils';
-import { OrderSummaryProps } from '@waldur/marketplace/details/types';
-import { RootState } from '@waldur/store/reducers';
-import { getCustomer, getProject } from '@waldur/workspace/selectors';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { formIsValidSelector } from '@/marketplace/deploy/selectors';
+import { orderFormDataSelector } from '@/marketplace/deploy/selectors';
+import { SummaryTable } from '@/marketplace/details/OrderSummary';
+import { pricesSelector } from '@/marketplace/details/plan/utils';
+import { OrderSummaryProps } from '@/marketplace/details/types';
+import { RootState } from '@/store/reducers';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 type StateProps = ReturnType<typeof mapStateToProps>;
 

@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 import { FieldErrorMessage } from './FieldError';
 import { FloatingButton } from './FloatingButton';

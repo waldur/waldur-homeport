@@ -1,22 +1,17 @@
 import { useSelector } from 'react-redux';
 import { FormName } from 'redux-form';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { required, requiredArray } from '@waldur/core/validators';
-import {
-  FormContainer,
-  NumberField,
-  SelectField,
-  StringField,
-} from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { providerOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { StepsList } from '@waldur/marketplace/common/StepsList';
-import { CampaignFormData } from '@waldur/marketplace/service-providers/types';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { required, requiredArray } from '@/core/validators';
+import { FormContainer, NumberField, SelectField, StringField } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
+import { StepsList } from '@/marketplace/common/StepsList';
+import { CampaignFormData } from '@/marketplace/service-providers/types';
+import { getCustomer } from '@/workspace/selectors';
 
 const steps: ProgressStep[] = [
   { key: 'type', label: translate('Select type'), completed: false },

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { Answer, QuestionAdmin } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { formatFilesize } from '@waldur/core/utils';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { formatFilesize } from '@/core/utils';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface ParsedAnswerProps {
   question: QuestionAdmin;

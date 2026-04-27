@@ -2,14 +2,14 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Field, useFormState } from 'react-final-form';
 
-import { NumberField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { NumberField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { OpenStackDiscoveryFormValues } from '../types';
 

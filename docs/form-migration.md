@@ -253,8 +253,8 @@ const comp = fields.value[i];
 
 **Two Types Available**:
 
-1. **`@waldur/form/FormGroup`** - Redux Form wrapper with comprehensive state management
-2. **`@waldur/marketplace/offerings/FormGroup`** - Simple wrapper for labels/help text (preferred for React Final Form)
+1. **`@/form/FormGroup`** - Redux Form wrapper with comprehensive state management
+2. **`@/marketplace/offerings/FormGroup`** - Simple wrapper for labels/help text (preferred for React Final Form)
 
 ### FormGroup Migration Patterns
 

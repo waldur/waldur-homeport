@@ -2,23 +2,23 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { conflictsOfInterestList, ConflictOfInterest } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { Call } from '@waldur/proposals/types';
-import { PoolSummaryButton } from '@waldur/proposals/update/reviewer-pool/PoolSummaryButton';
-import { useReviewerPoolTabs } from '@waldur/proposals/update/reviewer-pool/tabs';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { formatDate } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { Call } from '@/proposals/types';
+import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
+import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
+import { createFetcher } from '@/table/api';
 import {
   ConflictsOfInterestFilter,
   CoiSeverityLevelOptions,
   ConflictOfInterestStatusOptions,
   CoiTypeOptions,
   selectConflictsOfInterestFilter,
-} from '@waldur/table/generated/ConflictsOfInterestFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/ConflictsOfInterestFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { COIExpandableRow } from './COIExpandableRow';
 import { COIRowActions } from './COIRowActions';

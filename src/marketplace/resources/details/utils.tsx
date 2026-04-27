@@ -1,9 +1,9 @@
 import { Resource } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { CreatedField } from '@waldur/resource/summary/CreatedField';
-import { formatResourceType } from '@waldur/resource/utils';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { CreatedField } from '@/resource/summary/CreatedField';
+import { formatResourceType } from '@/resource/utils';
 
 import { KeyValueButton } from '../KeyValueButton';
 import { ResourceStateField } from '../list/ResourceStateField';

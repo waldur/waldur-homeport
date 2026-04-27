@@ -9,12 +9,12 @@ import {
   rancherWorkloadsYamlUpdate,
 } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { deleteEntity } from '@waldur/table/actions';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { deleteEntity } from '@/table/actions';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { ViewYAMLButton } from './ViewYAMLButton';
 

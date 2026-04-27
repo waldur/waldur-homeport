@@ -3,16 +3,16 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Badge } from '@waldur/core/Badge';
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { Tip } from '@waldur/core/Tooltip';
-import { getAbbreviation } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import Placeholder from '@waldur/images/logo_w.svg';
-import { OfferingDetailsLink } from '@waldur/marketplace/links/OfferingDetailsLink';
-import { TagBadges } from '@waldur/marketplace/tags/TagBadges';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { Badge } from '@/core/Badge';
+import { Image } from '@/core/Image';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { Tip } from '@/core/Tooltip';
+import { getAbbreviation } from '@/core/utils';
+import { translate } from '@/i18n';
+import Placeholder from '@/images/logo_w.svg';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { TagBadges } from '@/marketplace/tags/TagBadges';
+import { wrapTooltip } from '@/table/ActionButton';
 
 import { DeployButton } from '../DeployButton';
 import { getOfferingImage } from '../getOfferingImage';

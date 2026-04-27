@@ -1,7 +1,7 @@
 import { marketplaceRobotAccountsPartialUpdate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
+import { translate } from '@/i18n';
+import { UpdateResourceDialog } from '@/resource/actions/UpdateResourceDialog';
 
 import {
   RobotAccountFormData,

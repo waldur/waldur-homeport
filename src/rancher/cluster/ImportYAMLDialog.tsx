@@ -3,11 +3,11 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { rancherClustersImportYaml } from 'waldur-js-client';
 
-import { MonacoField } from '@waldur/form/MonacoField';
-import { translate } from '@waldur/i18n';
-import { ActionDialog } from '@waldur/modal/ActionDialog';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { MonacoField } from '@/form/MonacoField';
+import { translate } from '@/i18n';
+import { ActionDialog } from '@/modal/ActionDialog';
+import { closeModalDialog } from '@/modal/actions';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const ImportYAMLDialog = reduxForm<
   { yaml: string },

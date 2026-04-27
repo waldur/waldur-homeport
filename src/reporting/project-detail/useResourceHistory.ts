@@ -11,10 +11,10 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants';
-import { parseDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { STALE_TIME } from '@/core/constants';
+import { parseDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
 
 import {
   ResourceOption,

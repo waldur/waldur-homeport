@@ -6,8 +6,8 @@ import {
   marketplaceStatsOpenstackInstancesList,
 } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
-import { createFetcher } from '@waldur/table/api';
+import { STALE_TIME } from '@/core/constants';
+import { createFetcher } from '@/table/api';
 
 export const openstackInstancesFetcher = createFetcher(
   marketplaceStatsOpenstackInstancesList,

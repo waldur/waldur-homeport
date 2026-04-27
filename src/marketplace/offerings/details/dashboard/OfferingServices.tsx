@@ -1,13 +1,13 @@
 import { FC, useCallback } from 'react';
 import { AgentIdentity, AgentServiceState } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { Badge } from '@/core/Badge';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 const ServiceProcessesDetailsDialog = lazyComponent(() =>
   import('./ServiceProcessesDetailsDialog').then((module) => ({

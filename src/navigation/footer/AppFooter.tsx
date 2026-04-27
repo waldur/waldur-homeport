@@ -3,15 +3,15 @@ import { FunctionComponent, useEffect, useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import { versionRetrieve } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { BackendHealthStatusIndicator } from '@waldur/navigation/footer/BackendHealthStatusIndicator';
-import { showError } from '@waldur/store/notify';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { format } from '@/core/ErrorMessageFormatter';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { BackendHealthStatusIndicator } from '@/navigation/footer/BackendHealthStatusIndicator';
+import { showError } from '@/store/notify';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { DisclaimerArea } from './DisclaimerArea';
 import { FooterLinks } from './FooterLinks';

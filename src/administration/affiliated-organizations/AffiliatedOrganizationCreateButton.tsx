@@ -1,5 +1,5 @@
-import { CreateModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { CreateModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
 
 const AffiliatedOrganizationForm = lazyComponent(() =>
   import('./AffiliatedOrganizationForm').then((module) => ({

@@ -1,7 +1,7 @@
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface PlanDescriptionProps {
   resolve: {

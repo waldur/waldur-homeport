@@ -1,11 +1,11 @@
 import { FC } from 'react';
 import { MigrationDetails } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { ErrorMessageField } from '@waldur/resource/summary/ErrorMessageField';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { ErrorMessageField } from '@/resource/summary/ErrorMessageField';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 export const MigrationExpandableRow: FC<{
   row: MigrationDetails;

@@ -3,10 +3,10 @@ import { FunctionComponent, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import Flatpickr from 'react-flatpickr';
 
-import { getTimeOptions } from '@waldur/booking/utils';
-import { parseDate } from '@waldur/core/dateUtils';
-import { useFlatpickrTheme } from '@waldur/form/useFlatpickrTheme';
-import { translate } from '@waldur/i18n';
+import { getTimeOptions } from '@/booking/utils';
+import { parseDate } from '@/core/dateUtils';
+import { useFlatpickrTheme } from '@/form/useFlatpickrTheme';
+import { translate } from '@/i18n';
 
 import { BookingResource } from '../types';
 

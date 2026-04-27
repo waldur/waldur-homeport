@@ -2,18 +2,15 @@ import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { ENV } from '@waldur/core/config';
-import { formatCurrency } from '@waldur/core/formatCurrency';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ENV } from '@/core/config';
+import { formatCurrency } from '@/core/formatCurrency';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { PriceTooltip } from '@/price/PriceTooltip';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { Component } from './types';
 

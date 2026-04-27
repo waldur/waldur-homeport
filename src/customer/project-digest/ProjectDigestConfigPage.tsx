@@ -2,16 +2,16 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useEffect, useState } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { renderFieldOrDash } from '@/table/utils';
+import { getCustomer } from '@/workspace/selectors';
 
 import { getProjectDigestConfig, sendTestDigest } from './api';
 import {

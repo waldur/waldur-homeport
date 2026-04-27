@@ -1,9 +1,9 @@
 import flatpickr from 'flatpickr';
 import { useEffect } from 'react';
 
-import { LanguageUtilsService } from '@waldur/i18n/LanguageUtilsService';
-import { ThemeName } from '@waldur/theme/types';
-import { useTheme } from '@waldur/theme/useTheme';
+import { LanguageUtilsService } from '@/i18n/LanguageUtilsService';
+import { ThemeName } from '@/theme/types';
+import { useTheme } from '@/theme/useTheme';
 
 const hrefs = {
   dark: () => import('flatpickr/dist/themes/dark.css?url'),

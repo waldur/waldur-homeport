@@ -1,7 +1,7 @@
 import { Card } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
 
 import { ResourceImageField } from './ResourceImageField';
 

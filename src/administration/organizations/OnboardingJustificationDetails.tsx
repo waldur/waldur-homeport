@@ -7,13 +7,13 @@ import {
   OnboardingVerification,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { AttachmentItem } from '@waldur/form/upload/AttachmentItem';
-import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form/SubmitButton';
+import { AttachmentItem } from '@/form/upload/AttachmentItem';
+import { AttachmentsList } from '@/form/upload/AttachmentsList';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface OnboardingJustificationDetailsProps {
   justification: OnboardingJustification | null;

@@ -1,14 +1,14 @@
 import { FC } from 'react';
 import { useFormState } from 'react-final-form';
 
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 import {
   formatGender,
   formatOrganizationType,
-} from '@waldur/user/support/aai-constants';
-import { isProfileAttributeEnabled } from '@waldur/user/support/profileAttributes';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+} from '@/user/support/aai-constants';
+import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import { UserFormData, UserFormDialogData } from '../UserFormDialog';
 

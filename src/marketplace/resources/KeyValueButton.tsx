@@ -1,9 +1,9 @@
 import { useCallback, FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
 
 import { MarketplaceKeyValueDialog } from './MarketplaceKeyValueDialog';
 

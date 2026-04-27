@@ -1,4 +1,4 @@
-import { Field } from '@waldur/resource/summary';
+import { Field } from '@/resource/summary';
 
 import { IdNamePair } from './types';
 

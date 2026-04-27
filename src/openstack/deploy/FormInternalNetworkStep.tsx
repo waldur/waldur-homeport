@@ -1,12 +1,12 @@
 import { useToggle } from 'react-use';
 import { Field } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { FormGroup } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { FormGroup } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { FormStepProps } from '@/marketplace/deploy/types';
 
 import { OpenStackAllocationPool } from '../OpenStackAllocationPool';
 import { OpenStackSubnetField } from '../OpenStackSubnetField';

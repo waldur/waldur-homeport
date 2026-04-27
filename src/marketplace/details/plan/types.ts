@@ -1,7 +1,7 @@
 import { ComponentType, ReactNode } from 'react';
 import { Customer, PublicOfferingDetails } from 'waldur-js-client';
 
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { OfferingComponent } from '@/marketplace/types';
 
 export interface Component extends OfferingComponent {
   price: number;

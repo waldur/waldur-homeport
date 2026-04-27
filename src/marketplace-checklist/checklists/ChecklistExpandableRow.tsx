@@ -5,11 +5,11 @@ import {
   QuestionAdmin,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { questionTypeOptions } from '../utils';
 

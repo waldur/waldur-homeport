@@ -3,14 +3,14 @@ import { FC } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { proposalPublicCallsRetrieve } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Proposal } from '@waldur/proposals/types';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Proposal } from '@/proposals/types';
 
 import { EndingField } from '../EndingField';
 

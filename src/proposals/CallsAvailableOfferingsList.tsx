@@ -4,13 +4,13 @@ import {
   MarketplacePublicOfferingsListData,
 } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { AvailableOfferingCard } from '@waldur/proposals/AvailableOfferingCard';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { UI_STALE_TIME } from '@/core/constants';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { AvailableOfferingCard } from '@/proposals/AvailableOfferingCard';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 export const CallsAvailableOfferingsList: FC = () => {
   const filter = useMemo(

@@ -9,11 +9,11 @@ import {
 } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { Customer } from '@waldur/workspace/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { Customer } from '@/workspace/types';
 
 import { CostPolicyType, PolicyPeriod } from './types';
 import { getCostPolicyActionOptions } from './utils';

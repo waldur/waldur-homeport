@@ -1,10 +1,10 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
-import { formatRelative } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { formatSummary } from '@waldur/resource/utils';
+import { formatRelative } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { formatSummary } from '@/resource/utils';
 
 import { IPList } from '../IPList';
 

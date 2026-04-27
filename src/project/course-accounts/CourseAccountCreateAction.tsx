@@ -3,13 +3,13 @@ import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { hasManageCourseAccountPermission } from '@waldur/customer/team/utils';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { InvitationsFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { hasManageCourseAccountPermission } from '@/customer/team/utils';
+import { isFeatureVisible } from '@/features/connect';
+import { InvitationsFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const CourseAccountFormDialog = lazyComponent(() =>
   import('./CourseAccountFormDialog').then((module) => ({

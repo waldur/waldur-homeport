@@ -3,11 +3,11 @@ import { connect } from 'react-redux';
 import { isSubmitting } from 'redux-form';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { ORDER_FORM_ID } from '@waldur/marketplace/details/constants';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { ORDER_FORM_ID } from '@/marketplace/details/constants';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { DeployPageTotalCard } from '../deploy/DeployPageTotalCard';
 import { formIsValidSelector } from '../deploy/selectors';

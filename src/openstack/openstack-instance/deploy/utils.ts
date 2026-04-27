@@ -3,16 +3,16 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { orderFormAttributesSelector } from '@waldur/marketplace/deploy/selectors';
-import { loadVolumeTypes } from '@waldur/openstack/api';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
+import { UI_STALE_TIME } from '@/core/constants';
+import { orderFormAttributesSelector } from '@/marketplace/deploy/selectors';
+import { loadVolumeTypes } from '@/openstack/api';
+import { TENANT_TYPE } from '@/openstack/constants';
 import {
   formatVolumeTypeChoices,
   getDefaultVolumeType,
   getQuotas,
-} from '@waldur/openstack/openstack-instance/utils';
-import { parseQuotas, parseQuotasUsage } from '@waldur/openstack/utils';
+} from '@/openstack/openstack-instance/utils';
+import { parseQuotas, parseQuotasUsage } from '@/openstack/utils';
 
 export const getOfferingLimit = (
   offering: PublicOfferingDetails,

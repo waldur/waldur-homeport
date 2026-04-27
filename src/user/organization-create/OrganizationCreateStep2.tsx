@@ -4,22 +4,22 @@ import { Card, Col, Form as BootstrapForm, Row } from 'react-bootstrap';
 import { useDispatch, useSelector, shallowEqual } from 'react-redux';
 import { change, Field, formValueSelector } from 'redux-form';
 
-import { ACCEPTED_FILE_TYPES } from '@waldur/core/constants';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
+import { ACCEPTED_FILE_TYPES } from '@/core/constants';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
 import {
   composeValidators,
   getNameFieldValidators,
   required,
-} from '@waldur/core/validators';
-import { StringField } from '@waldur/form';
-import { FormGroup } from '@waldur/form/FormGroup';
-import { AttachmentItemPending } from '@waldur/form/upload/AttachmentItemPending';
-import { AttachmentsList } from '@waldur/form/upload/AttachmentsList';
-import { AttachmentUploading } from '@waldur/form/upload/types';
-import { UploadContainer } from '@waldur/form/upload/UploadContainer';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { useUser } from '@waldur/workspace/hooks';
+} from '@/core/validators';
+import { StringField } from '@/form';
+import { FormGroup } from '@/form/FormGroup';
+import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
+import { AttachmentsList } from '@/form/upload/AttachmentsList';
+import { AttachmentUploading } from '@/form/upload/types';
+import { UploadContainer } from '@/form/upload/UploadContainer';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
 
 import { ChecklistQuestionField } from './ChecklistQuestionField';
 import { getAuthMethodInfo } from './constants';

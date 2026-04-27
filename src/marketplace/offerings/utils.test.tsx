@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 
-import { Offering } from '@waldur/marketplace/types';
+import { Offering } from '@/marketplace/types';
 
 import { getDefaultLimits } from './utils';
 

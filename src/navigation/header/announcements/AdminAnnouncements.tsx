@@ -6,11 +6,11 @@ import { adminAnnouncementsList } from 'waldur-js-client';
 import {
   ANNOUNCEMENT_ICON,
   getAnnouncementTypeLabel,
-} from '@waldur/administration/utils';
-import { getAllPages, MAX_PAGE_SIZE } from '@waldur/core/api';
-import { STALE_TIME, HOUR } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
+} from '@/administration/utils';
+import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
+import { STALE_TIME, HOUR } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
 
 import { AnnouncementBar } from './AnnouncementBar';
 import { AnnouncementError } from './AnnouncementError';

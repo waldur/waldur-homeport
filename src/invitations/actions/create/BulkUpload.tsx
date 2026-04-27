@@ -9,11 +9,11 @@ import { FC, useCallback, useState } from 'react';
 import { Col, Row, Stack } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { FileUploadField } from '@waldur/form';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { showError } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import saveAsCsv from '@waldur/table/exporters/csv';
+import { FileUploadField } from '@/form';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { showError } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import saveAsCsv from '@/table/exporters/csv';
 
 import example_file from './example_file.json';
 

@@ -1,8 +1,8 @@
 import { CallResourceTemplate } from 'waldur-js-client';
 
-import { EditModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Call } from '@waldur/proposals/types';
+import { EditModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Call } from '@/proposals/types';
 
 const ResourceTemplateFormDialog = lazyComponent(() =>
   import('./ResourceTemplateFormDialog').then((module) => ({

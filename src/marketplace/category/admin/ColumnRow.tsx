@@ -3,12 +3,12 @@ import { Field } from 'react-final-form';
 import { useDispatch } from 'react-redux';
 import { marketplaceCategoryColumnsDestroy } from 'waldur-js-client';
 
-import { SelectField } from '@waldur/form/SelectField';
-import { StringField } from '@waldur/form/StringField';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { SelectField } from '@/form/SelectField';
+import { StringField } from '@/form/StringField';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 export const ColumnRow = ({ column, fields, index, name }) => {
   const dispatch = useDispatch();

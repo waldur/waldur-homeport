@@ -3,10 +3,10 @@ import { Dropdown } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { projectCreditsDestroy } from 'waldur-js-client';
 
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
 
 export const ProjectDeleteCreditButton = ({ row, refetch }) => {
   const customer = useSelector(getCustomer);

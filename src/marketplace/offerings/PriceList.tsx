@@ -2,16 +2,16 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplacePlanComponentsList, PlanComponent } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
 import {
   MarketplacePlanComponentsFilter,
   selectMarketplacePlanComponentsFilter,
-} from '@waldur/table/generated/MarketplacePlanComponentsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/MarketplacePlanComponentsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { BillingPeriod } from '../common/BillingPeriod';
 import { getBillingTypeLabel } from '../resources/usage/utils';

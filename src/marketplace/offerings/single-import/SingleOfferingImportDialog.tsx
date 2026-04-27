@@ -7,16 +7,12 @@ import {
   OfferingExportDataRequest,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { StepsList } from '@waldur/marketplace/common/StepsList';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import {
-  showError,
-  showErrorResponse,
-  showSuccess,
-} from '@waldur/store/notify';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { StepsList } from '@/marketplace/common/StepsList';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { getCustomer } from '@/workspace/selectors';
 
 import { useWizard } from '../import/useWizard';
 import { WizardButtons } from '../import/WizardButtons';

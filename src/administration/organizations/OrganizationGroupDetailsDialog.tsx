@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 import { OrganizationGroup } from 'waldur-js-client';
 
-import { OrganizationGroupOrganizationsList } from '@waldur/administration/organizations/OrganizationGroupOrganizationsList';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { OrganizationGroupOrganizationsList } from '@/administration/organizations/OrganizationGroupOrganizationsList';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface OrganizationGroupDetailsDialogProps {
   resolve: { organizationGroup: OrganizationGroup };

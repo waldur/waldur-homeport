@@ -1,17 +1,17 @@
 import { FC } from 'react';
 import { Field } from 'react-final-form';
 
-import { required } from '@waldur/core/validators';
-import { SelectField } from '@waldur/form';
-import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { StringField } from '@waldur/form/StringField';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Role } from '@waldur/permissions/types';
-import { getProjectRoles } from '@waldur/permissions/utils';
+import { required } from '@/core/validators';
+import { SelectField } from '@/form';
+import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { StringField } from '@/form/StringField';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { Role } from '@/permissions/types';
+import { getProjectRoles } from '@/permissions/utils';
 
 import { validateEmailPatterns } from './utils';
 

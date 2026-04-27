@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { Checklist } from 'waldur-js-client';
 
-import { EditModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { EditModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
 
 import { CHECKLIST_FORM_ID } from '../constants';
 

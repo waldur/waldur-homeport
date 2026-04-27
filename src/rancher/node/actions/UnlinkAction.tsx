@@ -2,13 +2,13 @@ import { LinkBreakIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 import { rancherNodesUnlinkOpenstack } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getUser } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionItemType } from '@/resource/actions/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getUser } from '@/workspace/selectors';
 
 export const UnlinkAction: ActionItemType = ({ resource, refetch }) => {
   const user = useSelector(getUser);

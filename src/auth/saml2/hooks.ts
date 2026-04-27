@@ -1,9 +1,9 @@
 import { useDispatch } from 'react-redux';
 import { apiAuthSaml2Login } from 'waldur-js-client';
 
-import { redirectPost } from '@waldur/auth/saml2/utils';
-import { translate } from '@waldur/i18n';
-import { showErrorResponse } from '@waldur/store/notify';
+import { redirectPost } from '@/auth/saml2/utils';
+import { translate } from '@/i18n';
+import { showErrorResponse } from '@/store/notify';
 
 export const useSaml2 = () => {
   const dispatch = useDispatch();

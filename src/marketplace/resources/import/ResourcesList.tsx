@@ -4,14 +4,14 @@ import {
   marketplaceProviderOfferingsImportableResourcesList,
 } from 'waldur-js-client';
 
-import { requiredArray } from '@waldur/core/validators';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { ResourceIconName } from '@waldur/resource/ResourceIconName';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { requiredArray } from '@/core/validators';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { ResourceIconName } from '@/resource/ResourceIconName';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const NameField = ({ row }: { row: ImportableResource }) =>
   row.type ? (

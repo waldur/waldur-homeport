@@ -8,18 +8,18 @@ import {
   invoiceItemsTotalPriceRetrieve,
 } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { createFetcher } from '@waldur/table/api';
+import { parseDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { createFetcher } from '@/table/api';
 import {
   CreditUsageFilter,
   selectCreditUsageFilter,
-} from '@waldur/table/generated/CreditUsageFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/CreditUsageFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface CreditUsageDialogProps {
   creditUuid: string;

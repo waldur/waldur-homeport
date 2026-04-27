@@ -1,11 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 import { UsernameGenerationPolicyEnum } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { SelectField, NumberField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { translate } from '@waldur/i18n';
-import { SITE_AGENT_PLUGIN } from '@waldur/site-agent/constants';
+import { required } from '@/core/validators';
+import { SelectField, NumberField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { translate } from '@/i18n';
+import { SITE_AGENT_PLUGIN } from '@/site-agent/constants';
 
 import { DefaultOfferingEditPanel } from './offerings/update/DefaultOfferingEditPanel';
 import { OfferingEditPanelFormProps } from './offerings/update/integration/types';

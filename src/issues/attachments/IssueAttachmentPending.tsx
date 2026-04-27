@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { AttachmentItemPending } from '@waldur/form/upload/AttachmentItemPending';
+import { AttachmentItemPending } from '@/form/upload/AttachmentItemPending';
 
 interface IssueAttachmentPendingProps {
   file: File;

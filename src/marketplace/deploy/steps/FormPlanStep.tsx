@@ -1,12 +1,12 @@
 import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { OrderSummaryButton } from '@waldur/marketplace/details/OrderSummaryButton';
-import { PlanDescriptionButton } from '@waldur/marketplace/details/plan/PlanDescriptionButton';
-import { PlanSelectField } from '@waldur/marketplace/details/plan/PlanSelectField';
-import { TabbedPlanComponents } from '@waldur/marketplace/details/plan/TabbedPlanComponents';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { OrderSummaryButton } from '@/marketplace/details/OrderSummaryButton';
+import { PlanDescriptionButton } from '@/marketplace/details/plan/PlanDescriptionButton';
+import { PlanSelectField } from '@/marketplace/details/plan/PlanSelectField';
+import { TabbedPlanComponents } from '@/marketplace/details/plan/TabbedPlanComponents';
 
 import { orderCustomerSelector } from '../selectors';
 import { FormStepProps } from '../types';

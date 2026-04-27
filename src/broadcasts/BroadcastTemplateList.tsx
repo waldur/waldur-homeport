@@ -1,13 +1,13 @@
 import { FC } from 'react';
 import { broadcastMessageTemplatesList } from 'waldur-js-client';
 
-import { BroadcastTemplateActions } from '@waldur/broadcasts/BroadcastTemplateActions';
-import { BroadcastTemplateCreateButton } from '@waldur/broadcasts/BroadcastTemplateCreateButton';
-import { BroadcastTemplateExpandableRow } from '@waldur/broadcasts/BroadcastTemplateExpandableRow';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { BroadcastTemplateActions } from '@/broadcasts/BroadcastTemplateActions';
+import { BroadcastTemplateCreateButton } from '@/broadcasts/BroadcastTemplateCreateButton';
+import { BroadcastTemplateExpandableRow } from '@/broadcasts/BroadcastTemplateExpandableRow';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface BroadcastTemplateListProps {
   standalone?: boolean;

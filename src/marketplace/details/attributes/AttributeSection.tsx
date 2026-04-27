@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { NestedSection } from 'waldur-js-client';
 
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { AttributeRow } from './AttributeRow';
 

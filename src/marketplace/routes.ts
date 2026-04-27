@@ -1,16 +1,16 @@
 import { UIView } from '@uirouter/react';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { userHasCustomerPermission } from '@waldur/customer/utils';
-import { fetchCustomer } from '@waldur/customer/workspace/fetchCustomer';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@waldur/marketplace/constants';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { isOwnerOrStaff, isStaff } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { userHasCustomerPermission } from '@/customer/utils';
+import { fetchCustomer } from '@/customer/workspace/fetchCustomer';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ANONYMOUS_LAYOUT_ROUTE_CONFIG } from '@/marketplace/constants';
+import { PermissionEnum } from '@/permissions/enums';
+import { isOwnerOrStaff, isStaff } from '@/workspace/selectors';
 
 import { fetchProvider } from './resolve';
 
@@ -204,7 +204,7 @@ export const states: StateDeclaration[] = [
     url: '/providers/:uuid/',
     parent: 'layout',
     component: lazyComponent(() =>
-      import('@waldur/organization/OrganizationUIView').then((module) => ({
+      import('@/organization/OrganizationUIView').then((module) => ({
         default: module.OrganizationUIView,
       })),
     ),
@@ -248,7 +248,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-dashboard',
     url: 'dashboard/',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/service-providers/dashboard/ProviderDashboard').then(
+      import('@/marketplace/service-providers/dashboard/ProviderDashboard').then(
         (module) => ({ default: module.ProviderDashboard }),
       ),
     ),
@@ -460,7 +460,7 @@ export const states: StateDeclaration[] = [
     parent: 'marketplace-provider-user-manage-container',
     url: 'users/:user_uuid/?tab',
     component: lazyComponent(() =>
-      import('@waldur/user/UserManage').then((module) => ({
+      import('@/user/UserManage').then((module) => ({
         default: module.UserManage,
       })),
     ),
@@ -503,7 +503,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-projects',
     url: 'marketplace-projects/',
     component: lazyComponent(() =>
-      import('@waldur/project/ProjectsListWithTabs').then((module) => ({
+      import('@/project/ProjectsListWithTabs').then((module) => ({
         default: module.ProjectsListWithTabs,
       })),
     ),
@@ -579,7 +579,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-robots',
     url: 'robots/',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/robot-accounts/ProviderRobotAccountList').then(
+      import('@/marketplace/robot-accounts/ProviderRobotAccountList').then(
         (module) => ({ default: module.ProviderRobotAccountList }),
       ),
     ),
@@ -593,7 +593,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-orders',
     url: 'orders/',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/service-providers/ProviderOrdersList').then(
+      import('@/marketplace/service-providers/ProviderOrdersList').then(
         (module) => ({ default: module.ProviderOrdersList }),
       ),
     ),
@@ -610,7 +610,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-offering-requests',
     url: 'offering-requests/',
     component: lazyComponent(() =>
-      import('@waldur/proposals/offering-requests/OfferingRequestsList').then(
+      import('@/proposals/offering-requests/OfferingRequestsList').then(
         (module) => ({ default: module.OfferingRequestsList }),
       ),
     ),
@@ -625,7 +625,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-managed-projects',
     url: 'managed-projects/',
     component: lazyComponent(() =>
-      import('@waldur/openportal/managed-projects/ManagedProjectsList').then(
+      import('@/openportal/managed-projects/ManagedProjectsList').then(
         (module) => ({ default: module.ManagedProjectsList }),
       ),
     ),
@@ -640,7 +640,7 @@ export const states: StateDeclaration[] = [
     name: 'marketplace-provider-project-templates',
     url: 'project-templates/',
     component: lazyComponent(() =>
-      import('@waldur/openportal/project-templates/ProjectTemplateList').then(
+      import('@/openportal/project-templates/ProjectTemplateList').then(
         (module) => ({ default: module.ProjectTemplateList }),
       ),
     ),
@@ -667,7 +667,7 @@ export const states: StateDeclaration[] = [
     url: '/resource-details/:resource_uuid?tab',
     parent: 'marketplace-resource-container',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/resources/details/ResourceDetailsPage').then(
+      import('@/marketplace/resources/details/ResourceDetailsPage').then(
         (module) => ({ default: module.ResourceDetailsPage }),
       ),
     ),
@@ -682,7 +682,7 @@ export const states: StateDeclaration[] = [
     parent: 'admin-marketplace',
     url: 'offerings/',
     component: lazyComponent(() =>
-      import('@waldur/marketplace/offerings/admin/AdminOfferingsList').then(
+      import('@/marketplace/offerings/admin/AdminOfferingsList').then(
         (module) => ({ default: module.AdminOfferingsList }),
       ),
     ),

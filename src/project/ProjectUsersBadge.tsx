@@ -4,12 +4,12 @@ import { FC, PropsWithChildren } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { projectsListUsersList } from 'waldur-js-client';
 
-import { getAllPages } from '@waldur/core/api';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getProjectRoles } from '@waldur/permissions/utils';
+import { getAllPages } from '@/core/api';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getProjectRoles } from '@/permissions/utils';
 
 import { UserRoleGroup } from './UserRoleGroup';
 

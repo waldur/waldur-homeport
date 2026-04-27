@@ -2,13 +2,13 @@ import { Form } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { Customer } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { ProjectFeatures } from '@waldur/FeaturesEnums';
-import { NumberField } from '@waldur/form';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { ENV } from '@/core/config';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { isFeatureVisible } from '@/features/connect';
+import { ProjectFeatures } from '@/FeaturesEnums';
+import { NumberField } from '@/form';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 export const CreditGroup = ({ customer }: { customer: Customer }) => {
   if (

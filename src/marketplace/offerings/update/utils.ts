@@ -1,11 +1,11 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   showComponentsList,
   getFormLimitParser,
-} from '@waldur/marketplace/common/registry';
+} from '@/marketplace/common/registry';
 
 import { getAccountingTypeOptions } from './components/ComponentAccountingTypeField';
 import { getLimitPeriods } from './components/ComponentLimitPeriodField';

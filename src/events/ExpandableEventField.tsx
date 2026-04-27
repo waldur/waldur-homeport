@@ -1,7 +1,7 @@
 import React, { FunctionComponent } from 'react';
 
-import { Link } from '@waldur/core/Link';
-import { Field } from '@waldur/resource/summary';
+import { Link } from '@/core/Link';
+import { Field } from '@/resource/summary';
 
 interface ExpandableEventFieldProps {
   label: string;

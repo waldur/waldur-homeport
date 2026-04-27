@@ -1,9 +1,9 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { getServiceProviderByCustomer } from '@waldur/marketplace/common/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { getServiceProviderByCustomer } from '@/marketplace/common/api';
 
 import { ServiceProviderDetails } from './ServiceProviderDetails';
 

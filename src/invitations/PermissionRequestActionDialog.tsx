@@ -2,12 +2,12 @@ import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { reduxForm, InjectedFormProps } from 'redux-form';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { USER_PERMISSION_REQUESTS_ACTION_FORM_ID } from '@waldur/invitations/constants';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { Field } from '@waldur/resource/summary';
+import { formatDateTime } from '@/core/dateUtils';
+import { FormContainer, SubmitButton, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { USER_PERMISSION_REQUESTS_ACTION_FORM_ID } from '@/invitations/constants';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { Field } from '@/resource/summary';
 
 import { useUserPermissionRequestActions } from './useUserPermissionRequestActions';
 

@@ -4,7 +4,7 @@ import {
   marketplaceComponentUsagesList,
 } from 'waldur-js-client';
 
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { OfferingComponent } from '@/marketplace/types';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 import {

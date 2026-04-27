@@ -5,9 +5,9 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { generateColors } from '@waldur/core/generateColors';
-import { ResourceMetaInfo } from '@waldur/marketplace/resources/usage/ResourceMetaInfo';
-import { ResourceUsageTabs } from '@waldur/marketplace/resources/usage/ResourceUsageTabs';
+import { generateColors } from '@/core/generateColors';
+import { ResourceMetaInfo } from '@/marketplace/resources/usage/ResourceMetaInfo';
+import { ResourceUsageTabs } from '@/marketplace/resources/usage/ResourceUsageTabs';
 
 interface ResourceUsageTabsContainerProps {
   resource: {

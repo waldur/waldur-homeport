@@ -2,10 +2,10 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { FileUploadField } from '@waldur/form';
-import { FileUploadFieldProps } from '@waldur/form/FileUploadField';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { FileUploadField } from '@/form';
+import { FileUploadFieldProps } from '@/form/FileUploadField';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 const getImageUrl = (image) => {
   if (image instanceof File) {

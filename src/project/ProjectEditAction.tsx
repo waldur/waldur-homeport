@@ -3,11 +3,11 @@ import { useRouter } from '@uirouter/react';
 import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n/translate';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n/translate';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { getUser } from '@/workspace/selectors';
 
 export const ProjectEditAction = ({ project }: { project: Project }) => {
   const router = useRouter();

@@ -1,6 +1,6 @@
 import { EChartsOption, MarkLineComponentOption, SeriesOption } from 'echarts';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { CHART_BAR_ROUNDING, getChartBrandColor } from './constants';
 import { Chart, ChartData } from './types';

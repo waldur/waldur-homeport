@@ -3,14 +3,14 @@ import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { autoprovisioningRulesPartialUpdate, Rule } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { AtLeast } from '@waldur/core/types';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { Category, Offering, Plan } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceRequestWizardFormThirdPage as Step2AdditionalConfig } from '@waldur/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { AtLeast } from '@/core/types';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { Category, Offering, Plan } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceRequestWizardFormThirdPage as Step2AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { Step1OfferingAndPlan } from './Step1OfferingAndPlan';
 import { Step3FinalConfig } from './Step3FinalConfig';

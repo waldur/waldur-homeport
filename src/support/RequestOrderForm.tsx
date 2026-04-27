@@ -1,5 +1,5 @@
-import { OrderFormComponentProps } from '@waldur/marketplace/common/types';
-import { BaseDeployPage } from '@waldur/marketplace/deploy/DeployPage';
+import { OrderFormComponentProps } from '@/marketplace/common/types';
+import { BaseDeployPage } from '@/marketplace/deploy/DeployPage';
 
 import { deployOfferingSteps } from './deploy-steps';
 

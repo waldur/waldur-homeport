@@ -1,6 +1,6 @@
 import { FC, ReactNode } from 'react';
 
-import { BaseButton } from '@waldur/core/buttons/BaseButton';
+import { BaseButton } from '@/core/buttons/BaseButton';
 
 interface CompactActionButtonProps {
   /** Button text */

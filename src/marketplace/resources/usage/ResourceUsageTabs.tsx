@@ -2,9 +2,9 @@ import { QuestionIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { ResourceUsageChart } from '@waldur/marketplace/resources/usage/ResourceUsageChart';
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { Tip } from '@/core/Tooltip';
+import { ResourceUsageChart } from '@/marketplace/resources/usage/ResourceUsageChart';
+import { OfferingComponent } from '@/marketplace/types';
 
 import { ResourceUsageTable } from './ResourceUsageTable';
 import { ComponentUsage, ComponentUserUsage } from './types';

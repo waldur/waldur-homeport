@@ -2,18 +2,18 @@ import { FC, useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
 import { marketplaceResourceUsersCreate, usersList } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
-import { SelectField, SubmitButton } from '@waldur/form';
-import { AsyncSelectFieldFinal } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { required } from '@/core/validators';
+import { SelectField, SubmitButton } from '@/form';
+import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 export const AddUserDialog: FC<{
   resolve: { resource; offering; refetch };

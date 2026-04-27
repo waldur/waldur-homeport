@@ -11,23 +11,23 @@ import {
   QuestionTypeEnum,
 } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { required } from '@waldur/core/validators';
-import { FileUploadField, NumberField, SelectField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import { DateField } from '@waldur/form/DateField';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { YearField } from '@waldur/form/YearField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { questionConditionOperatorOptions } from '@waldur/marketplace-checklist/utils';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
+import { UI_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { required } from '@/core/validators';
+import { FileUploadField, NumberField, SelectField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import { DateField } from '@/form/DateField';
+import { DateTimeField } from '@/form/DateTimeField';
+import { YearField } from '@/form/YearField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { questionConditionOperatorOptions } from '@/marketplace-checklist/utils';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 interface FieldValue {
   depends_on_question?;

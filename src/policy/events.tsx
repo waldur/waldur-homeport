@@ -1,7 +1,7 @@
-import { Link } from '@waldur/core/Link';
-import { getUserContext } from '@waldur/events/utils';
-import { ResourcesEnum } from '@waldur/EventsEnums';
-import { translate } from '@waldur/i18n';
+import { Link } from '@/core/Link';
+import { getUserContext } from '@/events/utils';
+import { ResourcesEnum } from '@/EventsEnums';
+import { translate } from '@/i18n';
 
 const getPolicyContext = (event) => ({
   ...getUserContext(event),

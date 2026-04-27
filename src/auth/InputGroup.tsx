@@ -4,10 +4,10 @@ import { FormControl } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { useToggle } from 'react-use';
 
-import { StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { StringField } from '@/form';
+import { translate } from '@/i18n';
 
-import '@waldur/form/SecretField.scss';
+import '@/form/SecretField.scss';
 
 const PasswordField = ({ placeholder, input, autoFocus = false }) => {
   const [showSecret, onToggle] = useToggle(false);

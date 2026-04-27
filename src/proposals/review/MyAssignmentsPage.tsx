@@ -11,18 +11,18 @@ import {
   MyAssignmentItem,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { FAST_STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { createFetcher } from '@waldur/table/api';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { Badge } from '@/core/Badge';
+import { FAST_STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { createFetcher } from '@/table/api';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { ReviewerProfileSummaryCard } from './ReviewerProfileSummaryCard';
 import { ReviewStatsWidgets } from './ReviewStatsWidgets';

@@ -6,10 +6,10 @@ import {
   ReviewerAffiliation,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
 
 interface OwnProps {
   rows: ReviewerAffiliation[];

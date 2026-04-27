@@ -1,7 +1,7 @@
 import debounce from 'lodash/debounce';
 import { projectsList } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 const checkPattern = (value: string) => {
   if (!value) {

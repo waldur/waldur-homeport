@@ -2,7 +2,7 @@ import { WarningCircleIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import type { TableGrowthStatsResponse } from './api';
 import type { TableAlert } from './utils';

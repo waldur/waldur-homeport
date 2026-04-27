@@ -8,10 +8,10 @@ import {
 } from '@phosphor-icons/react';
 import { Resource } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatDate, formatMediumDateTime } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { formatDate, formatMediumDateTime } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 export interface PolicyAttribution {
   policy_class?: string;

@@ -15,7 +15,7 @@ import {
   VersionHistory,
 } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
+import { SHORT_STALE_TIME } from '@/core/constants';
 
 import { HistoryEntityType } from './types';
 

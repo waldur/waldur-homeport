@@ -4,12 +4,12 @@ import classNames from 'classnames';
 import { useDispatch } from 'react-redux';
 import { openportalManagedProjectsReject } from 'waldur-js-client';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { wrapTooltip } from '@/table/ActionButton';
 
 export const RejectManagedProjectButton = ({ row, as, className, refetch }) => {
   const project = row; // Assuming row is the project object

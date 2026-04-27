@@ -6,7 +6,7 @@ import {
   isStaff as isStaffSelector,
   isSupport as isSupportSelector,
   isOwner as isOwnerSelector,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { PaymentProfileDetails } from './PaymentProfileDetails';
 import { PaymentProfileList } from './PaymentProfileList';

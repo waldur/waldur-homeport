@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 
-import { formatTime } from '@waldur/core/dateUtils';
-import { SelectField } from '@waldur/form';
-import { FormField } from '@waldur/form/types';
+import { formatTime } from '@/core/dateUtils';
+import { SelectField } from '@/form';
+import { FormField } from '@/form/types';
 
 function getMomentDayRange(interval = 5) {
   let start = DateTime.utc().startOf('day');

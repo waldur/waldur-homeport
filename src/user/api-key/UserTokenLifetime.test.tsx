@@ -4,11 +4,11 @@ import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { useNotify } from '@waldur/store/hooks';
+import { useNotify } from '@/store/hooks';
 
 import { UserTokenLifetime } from './UserTokenLifetime';
 
-vi.mock('@waldur/store/hooks');
+vi.mock('@/store/hooks');
 
 vi.mock('waldur-js-client');
 

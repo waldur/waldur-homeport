@@ -1,13 +1,13 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
-import { translate } from '@waldur/i18n';
+import { BaseEventsList } from '@/events/BaseEventsList';
+import { translate } from '@/i18n';
 import {
   selectEventsFilter as selectSupportEventsFilter,
   EventsFilter as SupportEventsFilter,
-} from '@waldur/table/generated/EventsFilter';
-import { getProject } from '@waldur/workspace/selectors';
+} from '@/table/generated/EventsFilter';
+import { getProject } from '@/workspace/selectors';
 
 export const ProjectEventsView: FunctionComponent = () => {
   const project = useSelector(getProject);

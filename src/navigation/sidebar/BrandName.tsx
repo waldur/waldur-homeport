@@ -10,15 +10,15 @@ import {
 import { Dropdown } from 'react-bootstrap';
 import { externalLinksList } from 'waldur-js-client';
 
-import { SHORTCUTS_QUERY_KEY } from '@waldur/administration/quick-shortcuts/utils';
-import { getIconUrl } from '@waldur/core/api';
-import Avatar from '@waldur/core/Avatar';
-import { ENV } from '@waldur/core/config';
-import { Link } from '@waldur/core/Link';
-import { SidebarToggleGraphic } from '@waldur/core/SidebarToggleGraphic';
-import { translate } from '@waldur/i18n';
-import { useLayout } from '@waldur/metronic/layout/core';
-import { useTheme } from '@waldur/theme/useTheme';
+import { SHORTCUTS_QUERY_KEY } from '@/administration/quick-shortcuts/utils';
+import { getIconUrl } from '@/core/api';
+import Avatar from '@/core/Avatar';
+import { ENV } from '@/core/config';
+import { Link } from '@/core/Link';
+import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
+import { translate } from '@/i18n';
+import { useLayout } from '@/metronic/layout/core';
+import { useTheme } from '@/theme/useTheme';
 
 interface BrandNameProps {
   isAsideHovered?: boolean;

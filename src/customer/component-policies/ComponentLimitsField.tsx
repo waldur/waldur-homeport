@@ -4,12 +4,12 @@ import { Field } from 'react-final-form';
 import { FieldArray, FieldArrayRenderProps } from 'react-final-form-arrays';
 import { OfferingComponent } from 'waldur-js-client';
 
-import { composeValidators, required } from '@waldur/core/validators';
-import { NumberField, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { validateNonNegative } from '@waldur/marketplace/common/utils';
-import { useComponentLimitsArrayFieldFunctions } from '@waldur/marketplace/offerings/details/policies/ComponentLimitsField';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { composeValidators, required } from '@/core/validators';
+import { NumberField, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { validateNonNegative } from '@/marketplace/common/utils';
+import { useComponentLimitsArrayFieldFunctions } from '@/marketplace/offerings/details/policies/ComponentLimitsField';
+import { ActionButton } from '@/table/ActionButton';
 
 import { policyPeriodOptions } from '../cost-policies/utils';
 

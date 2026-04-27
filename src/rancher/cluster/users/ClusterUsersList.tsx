@@ -1,12 +1,12 @@
 import { FunctionComponent, useMemo } from 'react';
 import { RancherCluster, rancherUsersList } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { TableWithPortal } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { TableWithPortal } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { RolesRenderer } from './RolesRenderer';
 

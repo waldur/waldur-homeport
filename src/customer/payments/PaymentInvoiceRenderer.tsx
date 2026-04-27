@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 import { Payment } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Link } from '@/core/Link';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 export const PaymentInvoiceRenderer: FunctionComponent<{ row: Payment }> = ({
   row,

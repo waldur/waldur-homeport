@@ -1,6 +1,6 @@
 import { CoreStates as ResourceState } from 'waldur-js-client';
 
-import { Quota } from '@waldur/quotas/types';
+import { Quota } from '@/quotas/types';
 
 export interface BaseResource {
   name?: string;

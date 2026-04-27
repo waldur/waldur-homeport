@@ -105,7 +105,7 @@ Use this agent when:
 - **Lint-staged**: Pre-commit formatting
 
 ### IDE Configuration
-- **TypeScript**: Path mapping for `@waldur/*` imports
+- **TypeScript**: Path mapping for `@/*` imports
 - **Module Resolution**: "Bundler" mode for Vite compatibility
 - **Integration**: ESLint, Prettier, Vitest support
 

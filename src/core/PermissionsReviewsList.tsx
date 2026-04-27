@@ -1,16 +1,16 @@
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { ReviewCloseAction } from '@waldur/customer/team/ReviewCloseButton';
-import { useTeamTableTabs } from '@waldur/customer/team/tabs';
-import { translate } from '@waldur/i18n';
-import { useTeamTableTabs as useProjectTeamTableTabs } from '@waldur/project/team/tabs';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getProject } from '@waldur/workspace/selectors';
+import { formatDateTime } from '@/core/dateUtils';
+import { ReviewCloseAction } from '@/customer/team/ReviewCloseButton';
+import { useTeamTableTabs } from '@/customer/team/tabs';
+import { translate } from '@/i18n';
+import { useTeamTableTabs as useProjectTeamTableTabs } from '@/project/team/tabs';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getProject } from '@/workspace/selectors';
 
 interface PermissionsReviewsListProps {
   tableProps: ReturnType<typeof useTable>;

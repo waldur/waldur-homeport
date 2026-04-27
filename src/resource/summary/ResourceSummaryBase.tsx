@@ -1,9 +1,9 @@
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { Link } from '@waldur/core/Link';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { Resource } from '@waldur/resource/types';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { Link } from '@/core/Link';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { ResourceState } from '@/resource/state/ResourceState';
+import { Resource } from '@/resource/types';
 
 import { CreatedField } from './CreatedField';
 import { ErrorMessageField } from './ErrorMessageField';

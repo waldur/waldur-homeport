@@ -2,13 +2,13 @@ import { BellIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { count } from '@waldur/core/api';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openDrawerDialog } from '@waldur/drawer/actions';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { countOrders } from '@waldur/marketplace/common/api';
+import { count } from '@/core/api';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openDrawerDialog } from '@/drawer/actions';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { countOrders } from '@/marketplace/common/api';
 
 import {
   PENDING_CONSUMER_ORDERS_FILTER,

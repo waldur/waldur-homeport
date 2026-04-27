@@ -1,4 +1,4 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export interface PredefinedQuestion {
   uuid?: string; // Present when editing existing question

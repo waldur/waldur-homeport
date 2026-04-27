@@ -1,13 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 import { Event, eventsList } from 'waldur-js-client';
 
-import { formatRelative } from '@waldur/core/dateUtils';
-import eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatRelative } from '@/core/dateUtils';
+import eventsRegistry from '@/events/registry';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 const EventDateField = ({ row }) => <>{formatRelative(row.created)}</>;
 

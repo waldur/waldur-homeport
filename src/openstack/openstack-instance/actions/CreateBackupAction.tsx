@@ -2,12 +2,12 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { validateOpenStackInstanceManagePermission } from '@waldur/openstack/utils';
-import { validateState } from '@waldur/resource/actions/base';
-import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
-import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { validateOpenStackInstanceManagePermission } from '@/openstack/utils';
+import { validateState } from '@/resource/actions/base';
+import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
+import { DialogActionButton } from '@/resource/actions/DialogActionButton';
 
 const CreateBackupDialog = lazyComponent(() =>
   import('./CreateBackupDialog').then((module) => ({

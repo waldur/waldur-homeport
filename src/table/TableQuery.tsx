@@ -1,8 +1,8 @@
 import { debounce } from 'lodash-es';
 import { Component } from 'react';
 
-import { FilterBox } from '@waldur/form/FilterBox';
-import { translate } from '@waldur/i18n';
+import { FilterBox } from '@/form/FilterBox';
+import { translate } from '@/i18n';
 
 interface TableQueryProps {
   query: string;

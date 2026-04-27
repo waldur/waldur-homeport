@@ -3,13 +3,13 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useState } from 'react';
 import { projectsListUsersList, projectsRetrieve } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { fetchResultCount } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { SymbolsGroup } from '@waldur/customer/dashboard/SymbolsGroup';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { fetchResultCount } from '@/core/api';
+import { STALE_TIME } from '@/core/constants';
+import { Link } from '@/core/Link';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { SymbolsGroup } from '@/customer/dashboard/SymbolsGroup';
+import { translate } from '@/i18n';
 
 import { ResourceQuickInfo } from './ResourceQuickInfo';
 import { ProjectInfo } from './utils';

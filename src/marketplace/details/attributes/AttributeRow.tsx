@@ -1,7 +1,7 @@
 import { FunctionComponent } from 'react';
 import { NestedAttribute } from 'waldur-js-client';
 
-import { AttributeCell } from '@waldur/marketplace/common/AttributeCell';
+import { AttributeCell } from '@/marketplace/common/AttributeCell';
 
 interface AttributeRowProps {
   value: any;

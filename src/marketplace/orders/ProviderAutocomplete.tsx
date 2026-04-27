@@ -2,9 +2,9 @@ import React from 'react';
 import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { providerAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { providerAutocomplete } from '@/marketplace/common/autocompletes';
 
 interface ProviderAutocompleteProps {
   reactSelectProps?: Partial<SelectProps>;

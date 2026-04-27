@@ -2,7 +2,7 @@ import { ArrowClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useState } from 'react';
 import { Modal } from 'react-bootstrap';
 
-import Illustration from '@waldur/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
+import Illustration from '@/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
 
 import { lazyComponent } from './core/lazyComponent';
 import { SubmitButton } from './form';
@@ -11,7 +11,7 @@ import './LoadingScreen.css';
 import { ThemeProvider } from './theme/ThemeProvider';
 
 const ErrorTraceDialog = lazyComponent(() =>
-  import('@waldur/ErrorTraceDialog').then((module) => ({
+  import('@/ErrorTraceDialog').then((module) => ({
     default: module.ErrorTraceDialog,
   })),
 );

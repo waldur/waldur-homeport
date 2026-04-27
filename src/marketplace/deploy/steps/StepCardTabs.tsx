@@ -1,7 +1,7 @@
 import classNames from 'classnames';
 import React from 'react';
 
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 export interface TabSpec<T = any> {
   title: string;

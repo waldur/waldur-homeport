@@ -6,19 +6,19 @@ import {
   marketplaceServiceProvidersDestroy,
 } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import * as api from '@waldur/marketplace/common/api';
-import { canRegisterServiceProviderForCustomer } from '@waldur/marketplace/service-providers/selectors';
-import { ServiceProviderManagement } from '@waldur/marketplace/service-providers/ServiceProviderManagement';
-import { ServiceProvider } from '@waldur/marketplace/types';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import * as api from '@/marketplace/common/api';
+import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
+import { ServiceProviderManagement } from '@/marketplace/service-providers/ServiceProviderManagement';
+import { ServiceProvider } from '@/marketplace/types';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
+import { setCurrentCustomer } from '@/workspace/actions';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
   const customer = useSelector(getCustomer);

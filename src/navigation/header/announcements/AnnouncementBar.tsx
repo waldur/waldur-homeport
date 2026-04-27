@@ -3,9 +3,9 @@ import classNames from 'classnames';
 import { FC, ReactNode, useMemo } from 'react';
 import { Variant } from 'react-bootstrap/types';
 
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { parseMarkdownLinksOnly } from '@waldur/core/sanitize';
-import { translate } from '@waldur/i18n';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { parseMarkdownLinksOnly } from '@/core/sanitize';
+import { translate } from '@/i18n';
 
 import { useTextTruncation } from './useTextTruncation';
 

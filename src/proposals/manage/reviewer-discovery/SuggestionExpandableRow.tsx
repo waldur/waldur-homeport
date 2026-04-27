@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 import { ReviewerSuggestion } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface TopMatchingProposal {
   uuid: string;

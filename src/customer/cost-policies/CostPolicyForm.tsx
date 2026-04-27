@@ -7,25 +7,25 @@ import {
   invoiceItemsProjectCostsForPeriodRetrieve,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { required } from '@waldur/core/validators';
+import { ENV } from '@/core/config';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { required } from '@/core/validators';
 import {
   FormContainer,
   FieldError,
   NumberField,
   SelectField,
   StringField,
-} from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
+} from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
 import {
   organizationAutocomplete,
   projectAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
-import { Option } from '@waldur/marketplace/common/registry';
-import { ProjectCostField } from '@waldur/project/ProjectCostField';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/marketplace/common/autocompletes';
+import { Option } from '@/marketplace/common/registry';
+import { ProjectCostField } from '@/project/ProjectCostField';
+import { getCustomer } from '@/workspace/selectors';
 
 import { CostPolicyFormData, CostPolicyType } from './types';
 import {

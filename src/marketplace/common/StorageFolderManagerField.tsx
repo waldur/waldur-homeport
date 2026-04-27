@@ -4,11 +4,11 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { OptionField, StorageFolderConfig } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { Select } from '@waldur/form/themed-select';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { STORAGE_FOLDER_PERMISSIONS } from '@waldur/marketplace/offerings/update/options/constants';
+import { Tip } from '@/core/Tooltip';
+import { Select } from '@/form/themed-select';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
+import { STORAGE_FOLDER_PERMISSIONS } from '@/marketplace/offerings/update/options/constants';
 
 import { orderFormDataSelector } from '../deploy/selectors';
 

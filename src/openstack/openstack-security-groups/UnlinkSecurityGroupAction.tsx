@@ -2,10 +2,10 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { openstackSecurityGroupsUnlink } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionItemType } from '@/resource/actions/types';
 
 export const UnlinkSecurityGroupAction: ActionItemType = ({
   resource,

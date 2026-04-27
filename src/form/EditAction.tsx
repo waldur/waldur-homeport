@@ -1,7 +1,7 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 export const EditAction = (props) => {
   return (

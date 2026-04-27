@@ -2,10 +2,10 @@ import { TrashIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 import { AuthToken, authTokensDestroy } from 'waldur-js-client';
 
-import { getUUID } from '@waldur/core/utils';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { getUUID } from '@/core/utils';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 export const TokenDeleteButton = ({
   row,

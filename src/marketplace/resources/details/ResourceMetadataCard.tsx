@@ -1,7 +1,7 @@
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { ResourceSummaryBase } from '@waldur/resource/summary';
-import * as ResourceSummaryRegistry from '@waldur/resource/summary/registry';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { ResourceSummaryBase } from '@/resource/summary';
+import * as ResourceSummaryRegistry from '@/resource/summary/registry';
 
 import { ResourceSummary } from './ResourceSummary';
 

@@ -4,12 +4,12 @@ import { useDispatch } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { freeipaProfilesList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
-import { showError } from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
+import { ENV } from '@/core/config';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { router } from '@/router';
+import { showError } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
 import { FreeIPAAccountEdit } from './FreeIPAAccountEdit';

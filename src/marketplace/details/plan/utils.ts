@@ -7,19 +7,19 @@ import {
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { calculateMonthsDifference } from '@waldur/core/dateUtils';
-import { formatCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { calculateMonthsDifference } from '@/core/dateUtils';
+import { formatCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
 import {
   filterOfferingComponents,
   getFormLimitParser,
-} from '@waldur/marketplace/common/registry';
-import { getBillingPeriods } from '@waldur/marketplace/common/utils';
-import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
-import { Limits } from '@waldur/marketplace/details/types';
-import { parseOfferingLimits } from '@waldur/marketplace/offerings/store/limits';
-import { Plan } from '@waldur/marketplace/types';
+} from '@/marketplace/common/registry';
+import { getBillingPeriods } from '@/marketplace/common/utils';
+import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { Limits } from '@/marketplace/details/types';
+import { parseOfferingLimits } from '@/marketplace/offerings/store/limits';
+import { Plan } from '@/marketplace/types';
 
 import { Component, PricesData } from './types';
 

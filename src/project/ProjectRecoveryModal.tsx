@@ -13,17 +13,17 @@ import {
   ProjectRecoveryRequest,
 } from 'waldur-js-client';
 
-import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
-import { SubmitButton } from '@waldur/form';
-import { DateField } from '@waldur/form/DateField';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
-import { RoleField } from '@waldur/user/affiliations/RoleField';
-import { getUser } from '@waldur/workspace/selectors';
+import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
+import { SubmitButton } from '@/form';
+import { DateField } from '@/form/DateField';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
+import { RoleField } from '@/user/affiliations/RoleField';
+import { getUser } from '@/workspace/selectors';
 
 interface ProjectRecoveryModalProps {
   resolve: { project: Project };

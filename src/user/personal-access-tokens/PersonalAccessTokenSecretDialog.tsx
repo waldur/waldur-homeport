@@ -6,12 +6,12 @@ import {
 import { FunctionComponent, useCallback, useMemo, useState } from 'react';
 import { Card, Form } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/config';
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { FeaturedIcon } from '@waldur/core/FeaturedIcon';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { ENV } from '@/core/config';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { FeaturedIcon } from '@/core/FeaturedIcon';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 interface PersonalAccessTokenSecretDialogProps {
   resolve: {

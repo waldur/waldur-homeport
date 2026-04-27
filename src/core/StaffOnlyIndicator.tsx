@@ -1,8 +1,8 @@
 import { IdentificationBadgeIcon } from '@phosphor-icons/react';
 import { uniqueId } from 'lodash-es';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 interface StaffOnlyIndicatorProps {
   className?: string;

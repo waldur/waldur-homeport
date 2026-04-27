@@ -3,15 +3,15 @@ import { fireEvent, render, screen } from '@testing-library/react';
 import { FC } from 'react';
 import { describe, expect, it, vi, beforeEach, Mock } from 'vitest';
 
-import { useModal } from '@waldur/modal/hooks';
+import { useModal } from '@/modal/hooks';
 
 import { CreateModalButton } from './CreateModalButton';
 
-vi.mock('@waldur/modal/hooks', () => ({
+vi.mock('@/modal/hooks', () => ({
   useModal: vi.fn(),
 }));
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (str: string) => str,
 }));
 

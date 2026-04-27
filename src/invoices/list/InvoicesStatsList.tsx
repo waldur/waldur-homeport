@@ -1,15 +1,15 @@
 import { useMemo } from 'react';
 import { invoicesStatsList } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
-import { INVOICES_STATS_TABLE } from '@waldur/invoices/constants';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { ENV } from '@/core/config';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
+import { INVOICES_STATS_TABLE } from '@/invoices/constants';
+import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 const CostField = ({ invoiceStats, organization }) =>
   getActiveFixedPricePaymentProfile(organization.payment_profiles)

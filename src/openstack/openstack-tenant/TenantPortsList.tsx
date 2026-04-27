@@ -5,14 +5,14 @@ import {
   OpenstackPortsListData,
 } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { ResourceRowActions } from '@waldur/resource/actions/ResourceRowActions';
-import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { ResourceRowActions } from '@/resource/actions/ResourceRowActions';
+import { ResourceSummary } from '@/resource/summary/ResourceSummary';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { CreatePortAction } from './actions/CreatePortAction';
 

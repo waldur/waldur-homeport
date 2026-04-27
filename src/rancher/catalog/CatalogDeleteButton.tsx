@@ -3,11 +3,11 @@ import { FunctionComponent, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { rancherCatalogsDestroy } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { ENV } from '@/core/config';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const CatalogDeleteAction: FunctionComponent<{ row; refetch }> = ({
   row,

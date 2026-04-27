@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const RulesHeader: FC = () => (
   <tr>

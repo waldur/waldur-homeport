@@ -3,13 +3,13 @@ import { Fragment, useCallback } from 'react';
 import { useSelector } from 'react-redux';
 import { FieldArray, FormSection } from 'redux-form';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { RancherFeatures } from '@waldur/FeaturesEnums';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import { StepCardPlaceholder } from '@waldur/marketplace/deploy/steps/StepCardPlaceholder';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { isFeatureVisible } from '@/features/connect';
+import { RancherFeatures } from '@/FeaturesEnums';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { ActionButton } from '@/table/ActionButton';
 
 import {
   FormNodeStorageRow,

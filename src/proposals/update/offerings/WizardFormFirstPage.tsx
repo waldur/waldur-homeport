@@ -3,13 +3,13 @@ import { FunctionComponent } from 'react';
 import { Col } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { required } from '@waldur/core/validators';
-import { FormContainer, SelectField } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { getCategories } from '@waldur/marketplace/common/api';
-import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
+import { UI_STALE_TIME } from '@/core/constants';
+import { required } from '@/core/validators';
+import { FormContainer, SelectField } from '@/form';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { getCategories } from '@/marketplace/common/api';
+import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
 
 export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   props,

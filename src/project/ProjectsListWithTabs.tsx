@@ -1,10 +1,10 @@
 import { useMemo, useState } from 'react';
 import { useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { TableWithTabs } from '@waldur/table/TableWithTabs';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { TableWithTabs } from '@/table/TableWithTabs';
+import { getCustomer } from '@/workspace/selectors';
 
 import { MetadataGroupBy } from './metadata/MetadataGroupBy';
 

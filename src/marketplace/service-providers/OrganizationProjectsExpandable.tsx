@@ -1,13 +1,13 @@
 import { useMemo } from 'react';
 import { marketplaceServiceProvidersCustomerProjectsList } from 'waldur-js-client';
 
-import { formatDate } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { ProjectCostField } from '@waldur/project/ProjectCostField';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDate } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { ProjectCostField } from '@/project/ProjectCostField';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ResourcesColumn } from './ResourcesColumn';
 

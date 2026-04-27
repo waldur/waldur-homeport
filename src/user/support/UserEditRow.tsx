@@ -6,16 +6,16 @@ import {
 import { useDispatch } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Tip } from '@waldur/core/Tooltip';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Tip } from '@/core/Tooltip';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { formatIsdName } from './IsdBadges';
 

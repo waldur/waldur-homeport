@@ -10,7 +10,6 @@
  * losing the entire mapping dictionary.
  */
 
-/* eslint-disable waldur-custom/no-direct-client-usage */
 import {
   openportalProjectUsageReportsList,
   openportalProjectStorageReportsList,
@@ -21,8 +20,8 @@ import {
   Project,
 } from 'waldur-js-client';
 
-import { get, getAllPages } from '@waldur/core/api';
-import type { ProgressCallback } from '@waldur/core/api';
+import { get, getAllPages } from '@/core/api';
+import type { ProgressCallback } from '@/core/api';
 
 import { getCached, setCached, TTL } from './localStorageCache';
 import { ProjectStorageReport } from './ProjectStorageReport';

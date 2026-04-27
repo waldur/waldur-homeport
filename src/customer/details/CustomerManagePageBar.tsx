@@ -1,9 +1,9 @@
 import { useSelector } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { PageBarTabs } from '@waldur/marketplace/common/PageBarTabs';
-import { VersionHistoryButton } from '@waldur/version-history';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
+import { VersionHistoryButton } from '@/version-history';
+import { getCustomer } from '@/workspace/selectors';
 
 const tabs = [
   {

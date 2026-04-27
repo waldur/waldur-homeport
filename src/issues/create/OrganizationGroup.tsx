@@ -1,10 +1,10 @@
 import { Form } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { Select } from '@waldur/form/AsyncSelectField';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
+import { required } from '@/core/validators';
+import { Select } from '@/form/AsyncSelectField';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 
 export const OrganizationGroup = ({ disabled }) => (
   <Form.Group className="mb-5 flex-equal">

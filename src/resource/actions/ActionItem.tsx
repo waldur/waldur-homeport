@@ -5,12 +5,12 @@ import { FC, ReactNode, useContext } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { Variant } from 'react-bootstrap/esm/types';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { StaffOnlyIndicator } from '@waldur/customer/details/StaffOnlyIndicator';
-import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
-import { ResourceActionMenuContext } from '@waldur/marketplace/resources/actions/ResourceActionMenuContext';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { Tip } from '@/core/Tooltip';
+import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
+import { ResourceAction } from '@/marketplace/resources/actions/constants';
+import { ResourceActionMenuContext } from '@/marketplace/resources/actions/ResourceActionMenuContext';
+import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 export interface ActionItemProps {
   title: string;

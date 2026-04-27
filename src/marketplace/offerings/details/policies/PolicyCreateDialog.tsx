@@ -2,11 +2,11 @@ import arrayMutators from 'final-form-arrays';
 import { FC } from 'react';
 import { Form } from 'react-final-form';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { PolicyCreateForm } from './PolicyCreateForm';
 import {

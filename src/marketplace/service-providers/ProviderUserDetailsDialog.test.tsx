@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import {
   formatValue,
@@ -11,7 +11,7 @@ import {
   SP_USER_FIELDS,
 } from './ProviderUserDetailsDialog';
 
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: { WALDUR_CORE: {} },
     roles: [],

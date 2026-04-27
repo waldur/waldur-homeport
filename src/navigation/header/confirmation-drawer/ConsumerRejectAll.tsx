@@ -3,9 +3,9 @@ import { useMutation } from '@tanstack/react-query';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersRejectByConsumer } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { translate } from '@/i18n';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 export const ConsumerRejectAll = ({ orders, refetch }) => {
   const dispatch = useDispatch();

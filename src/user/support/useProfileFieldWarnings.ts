@@ -1,8 +1,8 @@
 import { useQuery } from '@tanstack/react-query';
 import { marketplaceOfferingUsersProfileFieldWarningsRetrieve } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { STALE_TIME } from '@waldur/core/constants';
+import { ENV } from '@/core/config';
+import { STALE_TIME } from '@/core/constants';
 
 interface OfferingWarning {
   offering_uuid: string;

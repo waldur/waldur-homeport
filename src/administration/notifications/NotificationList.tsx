@@ -3,17 +3,17 @@ import { uniqueId } from 'lodash-es';
 import { useSelector } from 'react-redux';
 import { Notification, notificationMessagesList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { BooleanField } from '@waldur/table/BooleanField';
+import { formatDateTime } from '@/core/dateUtils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { BooleanField } from '@/table/BooleanField';
 import {
   NotificationMessagesFilter,
   selectNotificationMessagesFilter,
-} from '@waldur/table/generated/NotificationMessagesFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+} from '@/table/generated/NotificationMessagesFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { NotificationActions } from './NotificationActions';
 import { NotificationExpandableRow } from './NotificationExpandableRow';

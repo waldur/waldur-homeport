@@ -5,15 +5,15 @@ import { useDispatch } from 'react-redux';
 import type { ArticleCodeUpdatePreviewItem } from 'waldur-js-client';
 import { marketplaceArticleCodeUpdateApply } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@waldur/marketplace/offerings/constants';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { useNotify } from '@waldur/store/hooks';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@/marketplace/offerings/constants';
+import { closeModalDialog } from '@/modal/actions';
+import { useNotify } from '@/store/hooks';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { ArticleCodeFormValues } from './types';
 

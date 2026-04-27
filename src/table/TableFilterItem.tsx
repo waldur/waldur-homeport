@@ -14,10 +14,10 @@ import { useDispatch, useSelector } from 'react-redux';
 import { useDebounce } from 'react-use';
 import { Field, change, formValueSelector } from 'redux-form';
 
-import { Badge } from '@waldur/core/Badge';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { MenuComponent } from '@waldur/metronic/components';
+import { Badge } from '@/core/Badge';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { MenuComponent } from '@/metronic/components';
 
 import { TableFilterContext } from './FilterContextProvider';
 

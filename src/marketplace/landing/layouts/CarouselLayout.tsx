@@ -2,20 +2,20 @@ import { CaretRightIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { useCategories } from '@waldur/marketplace/category/useCategories';
-import { useCardStyle } from '@waldur/marketplace/landing/CardStyleContext';
+import { UI_STALE_TIME } from '@/core/constants';
+import { Link } from '@/core/Link';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { useCategories } from '@/marketplace/category/useCategories';
+import { useCardStyle } from '@/marketplace/landing/CardStyleContext';
 import {
   OFFERING_CARD_MANDATORY_FIELDS,
   useOfferingListFilter,
-} from '@waldur/marketplace/landing/utils';
-import { CategoryLink } from '@waldur/marketplace/links/CategoryLink';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
+} from '@/marketplace/landing/utils';
+import { CategoryLink } from '@/marketplace/links/CategoryLink';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
 
 import './CarouselLayout.scss';
 import { CarouselOfferingGrid } from './CarouselOfferingGrid';

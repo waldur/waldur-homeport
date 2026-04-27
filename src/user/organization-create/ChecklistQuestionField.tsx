@@ -1,26 +1,26 @@
 import { FC, useMemo } from 'react';
 import { Field } from 'redux-form';
 
-import { composeValidators, email, required } from '@waldur/core/validators';
-import { FileUploadField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CountrySelectField } from '@waldur/form/CountrySelectField';
-import { DateField } from '@waldur/form/DateField';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { EmailField } from '@waldur/form/EmailField';
-import { FormGroup } from '@waldur/form/FormGroup';
-import { NumberField } from '@waldur/form/NumberField';
-import { PhoneNumberField } from '@waldur/form/PhoneNumberField';
-import { SelectField } from '@waldur/form/SelectField';
-import { StringField } from '@waldur/form/StringField';
-import { TextField } from '@waldur/form/TextField';
-import { YearField } from '@waldur/form/YearField';
-import { translate } from '@waldur/i18n';
+import { composeValidators, email, required } from '@/core/validators';
+import { FileUploadField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CountrySelectField } from '@/form/CountrySelectField';
+import { DateField } from '@/form/DateField';
+import { DateTimeField } from '@/form/DateTimeField';
+import { EmailField } from '@/form/EmailField';
+import { FormGroup } from '@/form/FormGroup';
+import { NumberField } from '@/form/NumberField';
+import { PhoneNumberField } from '@/form/PhoneNumberField';
+import { SelectField } from '@/form/SelectField';
+import { StringField } from '@/form/StringField';
+import { TextField } from '@/form/TextField';
+import { YearField } from '@/form/YearField';
+import { translate } from '@/i18n';
 import {
   DependencyInfo,
   evaluateQuestionVisibility,
-} from '@waldur/marketplace-checklist/questionDependencies';
-import { useQuestionNumberValidator } from '@waldur/marketplace-checklist/utils';
+} from '@/marketplace-checklist/questionDependencies';
+import { useQuestionNumberValidator } from '@/marketplace-checklist/utils';
 
 import { QuestionWithMetadata } from './utils';
 

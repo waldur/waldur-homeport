@@ -2,11 +2,11 @@ import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceProviderResourcesSubmitReport } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const SubmitReportDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },

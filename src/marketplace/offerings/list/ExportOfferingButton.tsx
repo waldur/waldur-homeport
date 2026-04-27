@@ -8,12 +8,12 @@ import {
   OfferingExportResponse,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { ExportOfferingDialog } from './ExportOfferingDialog';
 

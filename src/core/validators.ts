@@ -1,6 +1,6 @@
-import { ENV } from '@waldur/core/config';
-import { LATIN_NAME_PATTERN } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { LATIN_NAME_PATTERN } from '@/core/utils';
+import { translate } from '@/i18n';
 
 export const composeValidators =
   (...validators) =>

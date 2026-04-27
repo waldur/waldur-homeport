@@ -1,7 +1,7 @@
 import { useState, useMemo, useCallback } from 'react';
 
-import { ENV } from '@waldur/core/config';
-import { LanguageOption } from '@waldur/core/types';
+import { ENV } from '@/core/config';
+import { LanguageOption } from '@/core/types';
 
 import { LanguageUtilsService } from './LanguageUtilsService';
 

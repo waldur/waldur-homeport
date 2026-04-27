@@ -1,7 +1,7 @@
 import { EChartsOption, PieSeriesOption } from 'echarts';
 import { useMemo, FC } from 'react';
 
-import { EChart } from '@waldur/core/EChart';
+import { EChart } from '@/core/EChart';
 
 interface PieChartProps {
   width?: string;

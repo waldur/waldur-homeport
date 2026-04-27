@@ -1,6 +1,6 @@
 import { BillingUnit, OrderDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface OrderType {
   label: string;

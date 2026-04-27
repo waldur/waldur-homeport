@@ -3,17 +3,17 @@ import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { reduxForm } from 'redux-form';
 
-import { AccountingPeriodField } from '@waldur/customer/list/AccountingPeriodField';
-import { REACT_SELECT_TABLE_FILTER } from '@waldur/form/themed-select';
-import { PeriodOption } from '@waldur/form/types';
-import { makeLastTwelveMonthsFilterPeriods } from '@waldur/form/utils';
-import { translate } from '@waldur/i18n';
-import { OfferingAutocomplete } from '@waldur/marketplace/offerings/details/OfferingAutocomplete';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { ProjectFilter } from '@waldur/marketplace/resources/list/ProjectFilter';
-import { ResourceAutocomplete } from '@waldur/resource/ResourceAutocomplete';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
-import { Customer } from '@waldur/workspace/types';
+import { AccountingPeriodField } from '@/customer/list/AccountingPeriodField';
+import { REACT_SELECT_TABLE_FILTER } from '@/form/themed-select';
+import { PeriodOption } from '@/form/types';
+import { makeLastTwelveMonthsFilterPeriods } from '@/form/utils';
+import { translate } from '@/i18n';
+import { OfferingAutocomplete } from '@/marketplace/offerings/details/OfferingAutocomplete';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
+import { ResourceAutocomplete } from '@/resource/ResourceAutocomplete';
+import { TableFilterItem } from '@/table/TableFilterItem';
+import { Customer } from '@/workspace/types';
 
 interface ResourceUsageFilterProps {
   options: { label: string; value: PeriodOption }[];

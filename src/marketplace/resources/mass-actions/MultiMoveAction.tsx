@@ -2,12 +2,12 @@ import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { ResourceAction } from '@waldur/marketplace/resources/actions/constants';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { ResourceAction } from '@/marketplace/resources/actions/constants';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 const MultiMoveDialog = lazyComponent(() =>
   import('./MultiMoveDialog').then((module) => ({

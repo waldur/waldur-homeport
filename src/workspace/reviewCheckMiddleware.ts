@@ -6,19 +6,19 @@ import {
   projectPermissionsReviewsList,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures } from '@waldur/FeaturesEnums';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { RootState } from '@waldur/store/reducers';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures } from '@/FeaturesEnums';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { RootState } from '@/store/reducers';
 
 import { SET_CURRENT_CUSTOMER, SET_CURRENT_PROJECT } from './constants';
 import { checkIsOwner, getUser } from './selectors';
 
 const PendingReviewDialog = lazyComponent(() =>
-  import('@waldur/core/PendingMembershipReviewDialog').then((module) => ({
+  import('@/core/PendingMembershipReviewDialog').then((module) => ({
     default: module.PendingMembershipReviewDialog,
   })),
 );

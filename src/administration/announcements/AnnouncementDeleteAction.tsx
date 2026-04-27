@@ -1,9 +1,9 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { adminAnnouncementsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@waldur/core/buttons';
-import { translate } from '@waldur/i18n';
-import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@waldur/navigation/header/announcements/queryKeys';
+import { DeleteButton } from '@/core/buttons';
+import { translate } from '@/i18n';
+import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@/navigation/header/announcements/queryKeys';
 
 export const AnnouncementDeleteAction = ({ row, refetch }) => {
   const queryClient = useQueryClient();

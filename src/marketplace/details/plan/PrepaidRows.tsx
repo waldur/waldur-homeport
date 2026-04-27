@@ -2,14 +2,11 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { getOfferingComponentValidator } from '@waldur/marketplace/offerings/store/limits';
+import { defaultCurrency } from '@/core/formatCurrency';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
 
 import { ComponentCost } from './ComponentCost';
 import { MeasuredUnitInput } from './MeasuredUnitInput';

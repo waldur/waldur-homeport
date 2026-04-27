@@ -1,5 +1,5 @@
-import { getTabs } from '@waldur/resource/tabs/registry';
-import { TableTab } from '@waldur/table/types';
+import { getTabs } from '@/resource/tabs/registry';
+import { TableTab } from '@/table/types';
 
 export const getRancherTabsAndTitle = (
   group: 'cluster' | 'apps' | 'service-discovery' | 'team',

@@ -3,15 +3,15 @@ import { FC, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { customerCreditsList } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { ENV } from '@waldur/core/config';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { ENV } from '@/core/config';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
 
 import { minimalConsumptionLogicOptions } from '../credits/constants';
 import { CreditFieldEditButton } from '../credits/CreditFieldEditButton';

@@ -3,12 +3,12 @@ import { FC, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { Permission } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
+import { useUser } from '@/workspace/hooks';
 
 import {
   canDeletePermission as canDeletePermissionFn,

@@ -7,15 +7,15 @@ import {
   affiliatedOrganizationsPartialUpdate,
 } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { FormGroup, SubmitButton } from '@waldur/form';
-import { CountrySelectField } from '@waldur/form/CountrySelectField';
-import { StringField } from '@waldur/form/StringField';
-import { TextField } from '@waldur/form/TextField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { required } from '@/core/validators';
+import { FormGroup, SubmitButton } from '@/form';
+import { CountrySelectField } from '@/form/CountrySelectField';
+import { StringField } from '@/form/StringField';
+import { TextField } from '@/form/TextField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const AffiliatedOrganizationForm = ({ resolve }) => {
   const isEdit = Boolean(resolve.affiliatedOrganization?.uuid);

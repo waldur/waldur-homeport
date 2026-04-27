@@ -3,30 +3,30 @@ import { useSelector } from 'react-redux';
 import { createSelector } from 'reselect';
 import { Customer, customersList, CustomersListData } from 'waldur-js-client';
 
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { formatPhoneNumber } from '@waldur/core/utils';
-import { OrganizationImportButton } from '@waldur/customer/import/OrganizationImportButton';
-import { OrganizationCard } from '@waldur/customer/list/OrganizationCard';
-import { OrganizationCreateButton } from '@waldur/customer/list/OrganizationCreateButton';
-import { OrganizationLink } from '@waldur/customer/list/OrganizationLink';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { CustomerFeatures, MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { CountryFlag } from '@waldur/marketplace/common/CountryFlag';
-import { useOrganizationAndProjectFiltersForResources } from '@waldur/navigation/sidebar/resources-filter/utils';
-import { useTitle } from '@waldur/navigation/title';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { formatPhoneNumber } from '@/core/utils';
+import { OrganizationImportButton } from '@/customer/import/OrganizationImportButton';
+import { OrganizationCard } from '@/customer/list/OrganizationCard';
+import { OrganizationCreateButton } from '@/customer/list/OrganizationCreateButton';
+import { OrganizationLink } from '@/customer/list/OrganizationLink';
+import { isFeatureVisible } from '@/features/connect';
+import { CustomerFeatures, MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { CountryFlag } from '@/marketplace/common/CountryFlag';
+import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
+import { useTitle } from '@/navigation/title';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 import {
   CustomersFilter,
   selectCustomersFilter,
-} from '@waldur/table/generated/CustomersFilter';
-import { SLUG_COLUMN } from '@waldur/table/slug';
-import Table from '@waldur/table/Table';
-import { Column, DisplayMode } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getUser } from '@waldur/workspace/selectors';
+} from '@/table/generated/CustomersFilter';
+import { SLUG_COLUMN } from '@/table/slug';
+import Table from '@/table/Table';
+import { Column, DisplayMode } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
+import { getUser } from '@/workspace/selectors';
 
 import { OrganizationExpandableRow } from './OrganizationExpandableRow';
 

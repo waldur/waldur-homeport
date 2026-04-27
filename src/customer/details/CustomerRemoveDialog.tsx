@@ -4,14 +4,14 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { customersDestroy } from 'waldur-js-client';
 
-import { FormContainer, SubmitButton, TextField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse } from '@waldur/store/notify';
-import { setCurrentCustomer } from '@waldur/workspace/actions';
-import { Customer } from '@waldur/workspace/types';
+import { FormContainer, SubmitButton, TextField } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse } from '@/store/notify';
+import { setCurrentCustomer } from '@/workspace/actions';
+import { Customer } from '@/workspace/types';
 
 import { DELETE_CUSTOMER_FORM_ID } from './constants';
 

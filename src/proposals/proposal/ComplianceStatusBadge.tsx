@@ -1,7 +1,7 @@
 import { FC } from 'react';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
 
 interface ComplianceStatus {
   has_checklist: boolean;

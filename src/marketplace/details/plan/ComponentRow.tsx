@@ -3,14 +3,14 @@ import React, { PropsWithChildren } from 'react';
 import { useSelector } from 'react-redux';
 import { LimitPeriodEnum } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { formatCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { getActiveFixedPricePaymentProfile } from '@waldur/invoices/details/utils';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { formatCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { getActiveFixedPricePaymentProfile } from '@/invoices/details/utils';
+import { renderFieldOrDash } from '@/table/utils';
+import { getCustomer } from '@/workspace/selectors';
 
 import { ComponentCost } from './ComponentCost';
 import { Component, PlanPeriod } from './types';

@@ -3,7 +3,7 @@ import { describe, it, expect, vi } from 'vitest';
 
 import { PhoneNumberField } from './PhoneNumberField';
 
-vi.mock('@waldur/core/utils', () => ({
+vi.mock('@/core/utils', () => ({
   formatPhoneNumber: (value: string) => {
     if (!value) return null;
     // Simple mock: just add spaces for testing

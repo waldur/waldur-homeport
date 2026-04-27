@@ -3,11 +3,11 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import type { ArrowBillingSync } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 const BillingSyncItemsDialog = lazyComponent(() =>
   import('./BillingSyncItemsDialog').then((module) => ({

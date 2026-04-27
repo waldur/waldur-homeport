@@ -1,8 +1,8 @@
 import { createSelector } from 'reselect';
 
-import { AtLeast } from '@waldur/core/types';
-import { RoleEnum } from '@waldur/permissions/enums';
-import { type RootState } from '@waldur/store/reducers';
+import { AtLeast } from '@/core/types';
+import { RoleEnum } from '@/permissions/enums';
+import { type RootState } from '@/store/reducers';
 
 import { Customer, Project, User } from './types';
 

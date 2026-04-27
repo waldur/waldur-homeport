@@ -1,15 +1,15 @@
 import { FunctionComponent, useMemo } from 'react';
 import { VmwareDisk, vmwareDisksList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { ActionButtonResource } from '@waldur/resource/actions/ActionButtonResource';
-import { ResourceState } from '@waldur/resource/state/ResourceState';
-import { ResourceSummary } from '@waldur/resource/summary/ResourceSummary';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
+import { ActionButtonResource } from '@/resource/actions/ActionButtonResource';
+import { ResourceState } from '@/resource/state/ResourceState';
+import { ResourceSummary } from '@/resource/summary/ResourceSummary';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { CreateDiskAction } from './actions/CreateDiskAction';
 

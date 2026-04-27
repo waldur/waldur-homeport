@@ -4,15 +4,15 @@ import { Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { marketplacePublicOfferingsList } from 'waldur-js-client';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { MAX_PAGE_SIZE } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { SelectField } from '@waldur/form';
-import { FormField } from '@waldur/form/types';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { AccordionCard } from '@/core/AccordionCard';
+import { MAX_PAGE_SIZE } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { SelectField } from '@/form';
+import { FormField } from '@/form/types';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import { getCustomer } from '@/workspace/selectors';
 
 import { FormGroup } from '../offerings/FormGroup';
 

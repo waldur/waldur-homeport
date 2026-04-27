@@ -1,5 +1,5 @@
-import { ENV } from '@waldur/core/config';
-import { FeaturesEnum } from '@waldur/FeaturesEnums';
+import { ENV } from '@/core/config';
+import { FeaturesEnum } from '@/FeaturesEnums';
 
 export const isFeatureVisible = (feature: FeaturesEnum) => {
   if (feature === undefined || feature === null) {

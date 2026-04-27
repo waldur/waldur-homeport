@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { BackendIdTip } from '@waldur/core/Tooltip';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { Link } from '@/core/Link';
+import { BackendIdTip } from '@/core/Tooltip';
+import { getCustomer } from '@/workspace/selectors';
 
 export const OfferingNameColumn = ({ row }) => {
   const customer = useSelector(getCustomer);

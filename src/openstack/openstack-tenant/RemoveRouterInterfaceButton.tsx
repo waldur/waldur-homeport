@@ -5,13 +5,13 @@ import {
   openstackRoutersRemoveRouterInterface,
 } from 'waldur-js-client';
 
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { showErrorResponse, showInfo, showSuccess } from '@waldur/store/notify';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionItemType } from '@/resource/actions/types';
+import { showErrorResponse, showInfo, showSuccess } from '@/store/notify';
+import { renderFieldOrDash } from '@/table/utils';
 
 const BodyComponent = (router, setOption) => {
   return (

@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/config';
-import { formatDate } from '@waldur/core/dateUtils';
-import { FormattedHtml } from '@waldur/core/FormattedHtml';
-import { FormattedJira } from '@waldur/core/FormattedJira';
-import { translate } from '@waldur/i18n';
-import { linkify } from '@waldur/issues/utils';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { ENV } from '@/core/config';
+import { formatDate } from '@/core/dateUtils';
+import { FormattedHtml } from '@/core/FormattedHtml';
+import { FormattedJira } from '@/core/FormattedJira';
+import { translate } from '@/i18n';
+import { linkify } from '@/issues/utils';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const IssuesListExpandableRow: FunctionComponent<{
   row;

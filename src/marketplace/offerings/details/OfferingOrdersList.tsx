@@ -7,10 +7,10 @@ import { MarketplaceOrdersListData } from 'waldur-js-client';
 import {
   OFFERING_ORDERS_LIST_FILTER_FORM_ID,
   TABLE_OFFERING_ORDERS,
-} from '@waldur/marketplace/details/constants';
-import { OfferingOrdersListFilter } from '@waldur/marketplace/orders/list/MarketplaceOrdersListFilter';
-import { OrdersTableComponent } from '@waldur/marketplace/orders/list/OrdersTableComponent';
-import { Offering } from '@waldur/marketplace/types';
+} from '@/marketplace/details/constants';
+import { OfferingOrdersListFilter } from '@/marketplace/orders/list/MarketplaceOrdersListFilter';
+import { OrdersTableComponent } from '@/marketplace/orders/list/OrdersTableComponent';
+import { Offering } from '@/marketplace/types';
 
 interface OwnProps {
   offering: Offering;

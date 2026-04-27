@@ -1,8 +1,8 @@
 import { FC } from 'react';
 import { reduxForm } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
-import { TableFilterItem } from '@waldur/table/TableFilterItem';
+import { translate } from '@/i18n';
+import { TableFilterItem } from '@/table/TableFilterItem';
 
 import { CallOfferingFilter } from './CallOfferingFilter';
 

@@ -3,10 +3,10 @@ import { FormControl } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { Field, formValueSelector } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { FieldError } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { type RootState } from '@waldur/store/reducers';
+import { required } from '@/core/validators';
+import { FieldError } from '@/form';
+import { translate } from '@/i18n';
+import { type RootState } from '@/store/reducers';
 
 import { Namespace } from '../types';
 

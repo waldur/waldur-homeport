@@ -1,11 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { Call } from '@waldur/proposals/types';
-import { Field } from '@waldur/resource/summary';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { Call } from '@/proposals/types';
+import { Field } from '@/resource/summary';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import {
   formatRoundAllocationStrategy,

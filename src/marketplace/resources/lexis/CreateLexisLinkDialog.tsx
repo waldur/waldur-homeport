@@ -2,12 +2,12 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { lexisLinksCreate } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { FormFooter } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ENV } from '@/core/config';
+import { FormFooter } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const CreateLexisLinkDialog = reduxForm<
   {},

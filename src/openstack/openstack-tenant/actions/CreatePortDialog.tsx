@@ -6,26 +6,26 @@ import { useToggle } from 'react-use';
 import { Field, formValueSelector } from 'redux-form';
 import { openstackPortsCreate, OpenStackSubNet } from 'waldur-js-client';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { isMatchPattern, required } from '@waldur/core/validators';
-import { FormGroup, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { loadNetworks, loadSubnets } from '@waldur/openstack/api';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { isMatchPattern, required } from '@/core/validators';
+import { FormGroup, SelectField } from '@/form';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { loadNetworks, loadSubnets } from '@/openstack/api';
 import {
   CustomIpField,
   SubnetValueContainer,
-} from '@waldur/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
+} from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
 import {
   createLatinNameField,
   createDescriptionField,
-} from '@waldur/resource/actions/base';
-import { RESOURCE_ACTION_FORM } from '@waldur/resource/actions/constants';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { RootState } from '@waldur/store/reducers';
+} from '@/resource/actions/base';
+import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { RootState } from '@/store/reducers';
 
 const MAC_ADDRESS_PATTERN = new RegExp(
   '^([0-9a-fA-F][0-9a-fA-F]:){5}([0-9a-fA-F][0-9a-fA-F])$',

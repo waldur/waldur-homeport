@@ -1,4 +1,4 @@
-import { router } from '@waldur/router';
+import { router } from '@/router';
 
 let state;
 let params;

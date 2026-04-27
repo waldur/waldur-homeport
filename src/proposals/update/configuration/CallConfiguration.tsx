@@ -1,9 +1,9 @@
 import { FC } from 'react';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { Call } from '@waldur/proposals/types';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { Call } from '@/proposals/types';
 
 import { EditGeneralInfoButton } from '../general/EditGeneralInfoButton';
 

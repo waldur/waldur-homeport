@@ -1,9 +1,9 @@
 import { FC, useMemo } from 'react';
 
-import { formatPhoneNumber } from '@waldur/core/utils';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatPhoneNumber } from '@/core/utils';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { FieldEditButton } from './FieldEditButton';
 import { CustomerEditPanelProps } from './types';

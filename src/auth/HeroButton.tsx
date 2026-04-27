@@ -1,5 +1,5 @@
-import { ENV } from '@waldur/core/config';
-import { translate } from '@waldur/i18n';
+import { ENV } from '@/core/config';
+import { translate } from '@/i18n';
 
 export const HeroButton = () =>
   ENV.plugins.WALDUR_CORE.HERO_LINK_URL ? (

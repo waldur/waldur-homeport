@@ -2,11 +2,11 @@ import { UploadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { isStaff } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
+import { isStaff } from '@/workspace/selectors';
 
 const ComponentUsageImportDialog = lazyComponent(() =>
   import('./ComponentUsageImportDialog').then((module) => ({

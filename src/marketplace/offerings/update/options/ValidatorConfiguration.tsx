@@ -4,10 +4,10 @@ import { Field, useFormState } from 'react-final-form';
 import { FieldArray } from 'react-final-form-arrays';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
-import { BaseButton } from '@waldur/core/buttons/BaseButton';
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { BaseButton } from '@/core/buttons/BaseButton';
+import { CompactIconButton } from '@/core/buttons/IconButton';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 import { FormGroup } from '../../FormGroup';
 

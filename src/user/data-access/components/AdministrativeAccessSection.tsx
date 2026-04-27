@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Badge } from '@waldur/core/Badge';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Badge } from '@/core/Badge';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 
 import { AdministrativeAccess, AccessType } from '../types';
 import { formatAccessType, getAccessTypeBadgeVariant } from '../utils';

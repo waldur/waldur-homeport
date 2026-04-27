@@ -7,16 +7,16 @@ import {
   MarketplaceProjectEstimatedCostPoliciesListData,
 } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { ProjectLink } from '@waldur/project/ProjectLink';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { ProjectLink } from '@/project/ProjectLink';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { getCustomer } from '@/workspace/selectors';
 
 import { CostPolicyActions } from './CostPolicyActions';
 import { CostPolicyCreateButton } from './CostPolicyCreateButton';

@@ -2,9 +2,9 @@ import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, useRef } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { CompactIconButton } from '@waldur/core/buttons/IconButton';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
+import { CompactIconButton } from '@/core/buttons/IconButton';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
 
 interface CarouselSectionProps {
   title: string;

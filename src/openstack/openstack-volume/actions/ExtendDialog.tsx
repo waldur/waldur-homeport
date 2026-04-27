@@ -4,17 +4,14 @@ import { useDispatch } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
 import { OpenStackVolume, openstackVolumesExtend } from 'waldur-js-client';
 
-import { formatFilesize } from '@waldur/core/utils';
-import { FormFooter } from '@waldur/form';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import {
-  parseIntField,
-  formatIntField,
-} from '@waldur/marketplace/common/utils';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { formatFilesize } from '@/core/utils';
+import { FormFooter } from '@/form';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { parseIntField, formatIntField } from '@/marketplace/common/utils';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 interface VolumeExtendDialogOwnProps {
   resolve: { resource: OpenStackVolume; refetch };

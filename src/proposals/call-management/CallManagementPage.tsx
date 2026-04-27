@@ -6,18 +6,18 @@ import {
   ProposalProtectedCallsListData,
 } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { Call } from '@waldur/proposals/types';
-import { createFetcher } from '@waldur/table/api';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { Call } from '@/proposals/types';
+import { createFetcher } from '@/table/api';
 import {
   ProposalPublicCallsFilter,
   selectProposalPublicCallsFilter,
-} from '@waldur/table/generated/ProposalPublicCallsFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+} from '@/table/generated/ProposalPublicCallsFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { getCustomer } from '@/workspace/selectors';
 
 import { formatCallState, getCallStateOptions } from '../utils';
 

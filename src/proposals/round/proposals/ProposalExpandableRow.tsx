@@ -8,19 +8,19 @@ import {
   proposalReviewsList,
 } from 'waldur-js-client';
 
-import { SHORT_STALE_TIME } from '@waldur/core/constants';
-import { Link } from '@waldur/core/Link';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { CHECKLIST_NO_CONFIGURED_MSG } from '@waldur/marketplace-checklist/constants';
-import { ParsedAnswer } from '@waldur/project/metadata/ParsedAnswer';
-import { RateStars } from '@waldur/proposals/proposal/create-review/RateStars';
-import { ReviewStateRenderer } from '@waldur/proposals/review/ReviewStateRenderer';
-import { Field } from '@waldur/resource/summary';
-import { createFetcher } from '@waldur/table/api';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { SHORT_STALE_TIME } from '@/core/constants';
+import { Link } from '@/core/Link';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
+import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
+import { RateStars } from '@/proposals/proposal/create-review/RateStars';
+import { ReviewStateRenderer } from '@/proposals/review/ReviewStateRenderer';
+import { Field } from '@/resource/summary';
+import { createFetcher } from '@/table/api';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import { ProposalReviewsRowActions } from './ProposalReviewsRowActions';
 

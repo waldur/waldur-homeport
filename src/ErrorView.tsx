@@ -6,16 +6,16 @@ import {
 import { FC } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import '@waldur/navigation/header/search/NoResult.scss';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import '@/navigation/header/search/NoResult.scss';
 
 import { lazyComponent } from './core/lazyComponent';
 import { openModalDialog } from './modal/actions';
 import { RadialBg } from './navigation/header/search/RadialBg';
 
 const ErrorTraceDialog = lazyComponent(() =>
-  import('@waldur/ErrorTraceDialog').then((module) => ({
+  import('@/ErrorTraceDialog').then((module) => ({
     default: module.ErrorTraceDialog,
   })),
 );

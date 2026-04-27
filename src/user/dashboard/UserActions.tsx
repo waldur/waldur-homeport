@@ -2,10 +2,10 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { hasSupport } from '@waldur/issues/hooks';
-import { VersionHistoryButton } from '@waldur/version-history';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { hasSupport } from '@/issues/hooks';
+import { VersionHistoryButton } from '@/version-history';
 
 interface UserActionsProps {
   user?: User;

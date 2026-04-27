@@ -1,5 +1,5 @@
-import { Option } from '@waldur/marketplace/common/registry';
-import { Category } from '@waldur/marketplace/types';
+import { Option } from '@/marketplace/common/registry';
+import { Category } from '@/marketplace/types';
 
 export interface OfferingAction {
   label: string;

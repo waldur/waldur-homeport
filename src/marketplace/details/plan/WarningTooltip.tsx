@@ -1,11 +1,11 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import { useSelector } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { FieldError } from '@waldur/form';
-import { formSubmitErrorsSelector } from '@waldur/marketplace/deploy/selectors';
-import { concealPricesSelector } from '@waldur/marketplace/deploy/utils';
-import { PriceTooltip } from '@waldur/price/PriceTooltip';
+import { Tip } from '@/core/Tooltip';
+import { FieldError } from '@/form';
+import { formSubmitErrorsSelector } from '@/marketplace/deploy/selectors';
+import { concealPricesSelector } from '@/marketplace/deploy/utils';
+import { PriceTooltip } from '@/price/PriceTooltip';
 
 export const WarningTooltip = () => {
   const submitErrors = useSelector(formSubmitErrorsSelector);

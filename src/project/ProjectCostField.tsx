@@ -1,4 +1,4 @@
-import { defaultCurrency } from '@waldur/core/formatCurrency';
+import { defaultCurrency } from '@/core/formatCurrency';
 
 export const ProjectCostField = ({ row }) =>
   defaultCurrency(

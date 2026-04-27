@@ -6,9 +6,9 @@ import {
   projectPermissionsReviewsClose,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface ReviewCloseActionProps {
   row: { uuid: string };

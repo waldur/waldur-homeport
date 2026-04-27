@@ -8,9 +8,8 @@ import {
   usersUserRegistrationTrendList,
 } from 'waldur-js-client';
 
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { count } from '@waldur/core/api';
-import { STALE_TIME } from '@waldur/core/constants'; // 5 minutes
+import { count } from '@/core/api';
+import { STALE_TIME } from '@/core/constants'; // 5 minutes
 
 export const useGrowthStatistics = () => {
   return useQuery({

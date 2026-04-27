@@ -3,19 +3,19 @@ import { useCallback, useEffect, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { change, getFormValues } from 'redux-form';
 
-import { AwesomeRadioButton } from '@waldur/core/AwesomeRadioButton';
-import { ENV } from '@waldur/core/config';
-import { formatDate, parseDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { lessThanOrEqual, required } from '@waldur/core/validators';
-import { NumberField } from '@waldur/form';
-import { AsyncSelectField } from '@waldur/form/AsyncSelectField';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { DateField } from '@waldur/form/DateField';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { providerOfferingsAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { Column } from '@waldur/table/types';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { AwesomeRadioButton } from '@/core/AwesomeRadioButton';
+import { ENV } from '@/core/config';
+import { formatDate, parseDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { lessThanOrEqual, required } from '@/core/validators';
+import { NumberField } from '@/form';
+import { AsyncSelectField } from '@/form/AsyncSelectField';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { DateField } from '@/form/DateField';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
+import { Column } from '@/table/types';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { BaseCreditFormData } from './types';
 

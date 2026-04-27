@@ -4,11 +4,11 @@ import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { required } from '@waldur/core/validators';
-import { InputField } from '@waldur/form/InputField';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { required } from '@/core/validators';
+import { InputField } from '@/form/InputField';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { FormGroup } from '../../FormGroup';
 

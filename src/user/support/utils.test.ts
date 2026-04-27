@@ -5,8 +5,8 @@ import {
   staffUser,
   supportAndStaffUser,
   supportUser,
-} from '@waldur/user/support/fixtures';
-import { formatLifetime, formatUserStatus } from '@waldur/user/support/utils';
+} from '@/user/support/fixtures';
+import { formatLifetime, formatUserStatus } from '@/user/support/utils';
 
 describe('Utils functions', () => {
   it('should return appropriate user status', () => {

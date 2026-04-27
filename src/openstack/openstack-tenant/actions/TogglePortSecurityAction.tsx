@@ -6,13 +6,13 @@ import {
   openstackPortsEnablePortSecurity,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { validateState } from '@waldur/resource/actions/base';
-import { ActionItemType } from '@waldur/resource/actions/types';
-import { useValidators } from '@waldur/resource/actions/useValidators';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { validateState } from '@/resource/actions/base';
+import { ActionItemType } from '@/resource/actions/types';
+import { useValidators } from '@/resource/actions/useValidators';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 const validators = [validateState('OK')];
 

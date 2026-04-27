@@ -1,11 +1,11 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
-import { required } from '@waldur/core/validators';
-import { FormContainer, NumberField, SelectField } from '@waldur/form';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { getRoundReviewStrategyOptions } from '@waldur/proposals/utils';
+import { formatDateTime, parseDate } from '@/core/dateUtils';
+import { required } from '@/core/validators';
+import { FormContainer, NumberField, SelectField } from '@/form';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { getRoundReviewStrategyOptions } from '@/proposals/utils';
 
 export const WizardFormSecondPage: FunctionComponent<WizardFormStepProps> = (
   props,

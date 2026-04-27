@@ -3,12 +3,12 @@ import { Form } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { OpenStackInstanceAggregateGroupByEnum } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { NoResult } from '@waldur/navigation/header/search/NoResult';
-import { selectMarketplaceStatsOpenstackInstancesFilter } from '@waldur/table/generated/MarketplaceStatsOpenstackInstancesFilter';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
+import { selectMarketplaceStatsOpenstackInstancesFilter } from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
 
 import { AggregateChart } from './AggregateChart';
 import { AggregateTable } from './AggregateTable';

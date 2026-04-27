@@ -8,8 +8,8 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Alert, Button, Card, Container, Form } from 'react-bootstrap';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { translate } from '@waldur/i18n';
+import { LoadingErred } from '@/core/LoadingErred';
+import { translate } from '@/i18n';
 
 import {
   fetchOfferingMapping,

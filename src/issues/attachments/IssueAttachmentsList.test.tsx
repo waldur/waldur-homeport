@@ -3,7 +3,7 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, expect, it, vi } from 'vitest';
 
-import { RootState } from '@waldur/store/reducers';
+import { RootState } from '@/store/reducers';
 
 import { attachmentUploading } from './fixture';
 import { IssueAttachmentsList } from './IssueAttachmentsList';

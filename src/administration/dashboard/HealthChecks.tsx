@@ -5,7 +5,7 @@ import {
 } from '@phosphor-icons/react';
 import { Card, Col, OverlayTrigger, Tooltip } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 const parseHealthStatus = (status: string) => {
   if (status === 'working') {

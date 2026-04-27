@@ -4,13 +4,13 @@ import { useDispatch, useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 import { marketplaceResourcesSuggestName } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { getNameFieldValidators } from '@waldur/core/validators';
-import { FormGroup, StringField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { orderFormAttributesSelector } from '@waldur/marketplace/deploy/selectors';
-import { showErrorResponse } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { Tip } from '@/core/Tooltip';
+import { getNameFieldValidators } from '@/core/validators';
+import { FormGroup, StringField } from '@/form';
+import { translate } from '@/i18n';
+import { orderFormAttributesSelector } from '@/marketplace/deploy/selectors';
+import { showErrorResponse } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 const ResourceNameField = (props) => {
   const dispatch = useDispatch();

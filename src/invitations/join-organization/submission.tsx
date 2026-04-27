@@ -5,14 +5,14 @@ import {
   userGroupInvitationsSubmitRequest,
 } from 'waldur-js-client';
 
-import { format } from '@waldur/core/ErrorMessageFormatter';
-import { GroupInvitationTokenStorage } from '@waldur/core/StorageManager';
-import { FieldErrorMessage } from '@waldur/form/FieldError';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { openModalDialog } from '@waldur/modal/actions';
-import { renderFieldOrDash } from '@waldur/table/utils';
-import { UsersService } from '@waldur/user/UsersService';
+import { format } from '@/core/ErrorMessageFormatter';
+import { GroupInvitationTokenStorage } from '@/core/StorageManager';
+import { FieldErrorMessage } from '@/form/FieldError';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { openModalDialog } from '@/modal/actions';
+import { renderFieldOrDash } from '@/table/utils';
+import { UsersService } from '@/user/UsersService';
 
 import { ProjectDetailsDialog } from './ProjectDetailsDialog';
 

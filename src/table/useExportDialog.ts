@@ -1,7 +1,7 @@
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
 
 import { ExportFormat } from './exporters/types';
 import { TableState } from './types';

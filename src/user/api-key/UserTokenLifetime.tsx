@@ -4,13 +4,13 @@ import { Card, Col, Form, Row } from 'react-bootstrap';
 import { usersPartialUpdate } from 'waldur-js-client';
 import { User } from 'waldur-js-client';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { SubmitButton } from '@waldur/form';
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { SecretField } from '@waldur/marketplace/common/SecretField';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { useNotify } from '@waldur/store/hooks';
+import { Tip } from '@/core/Tooltip';
+import { SubmitButton } from '@/form';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { SecretField } from '@/marketplace/common/SecretField';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useNotify } from '@/store/hooks';
 
 const TOKEN_OPTIONS = [
   { label: translate('{count} minutes', { count: 10 }), value: 600 },

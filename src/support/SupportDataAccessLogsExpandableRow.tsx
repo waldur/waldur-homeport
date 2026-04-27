@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { GlobalUserDataAccessLog } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { formatFieldName } from '@waldur/user/data-access/utils';
+import { Badge } from '@/core/Badge';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { formatFieldName } from '@/user/data-access/utils';
 
 interface SupportDataAccessLogsExpandableRowProps {
   row: GlobalUserDataAccessLog;

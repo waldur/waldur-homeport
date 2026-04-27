@@ -2,8 +2,8 @@ import { FC, useMemo, useState } from 'react';
 import { Col, Nav, Row, Stack, Tab } from 'react-bootstrap';
 import { RancherCluster } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { useTheme } from '@waldur/theme/useTheme';
+import { translate } from '@/i18n';
+import { useTheme } from '@/theme/useTheme';
 
 import { NetworkStatisticsCard } from './NetworkStatisticsCard';
 import { PieChart } from './PieChart';

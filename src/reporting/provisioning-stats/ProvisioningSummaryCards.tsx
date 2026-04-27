@@ -1,7 +1,7 @@
 import { FC, useMemo } from 'react';
 
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { translate } from '@waldur/i18n';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { translate } from '@/i18n';
 
 import { ProvisioningSummary } from './types';
 

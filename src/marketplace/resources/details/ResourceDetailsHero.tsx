@@ -4,10 +4,10 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { PublicDashboardHero } from '@waldur/dashboard/hero/PublicDashboardHero';
-import { RefreshButton } from '@waldur/marketplace/common/RefreshButton';
-import { INSTANCE_TYPE, VOLUME_TYPE } from '@waldur/openstack/constants';
-import { formatResourceType } from '@waldur/resource/utils';
+import { PublicDashboardHero } from '@/dashboard/hero/PublicDashboardHero';
+import { RefreshButton } from '@/marketplace/common/RefreshButton';
+import { INSTANCE_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { formatResourceType } from '@/resource/utils';
 
 import { OrderErredView } from '../resource-pending/OrderErredView';
 import { OrderInProgressView } from '../resource-pending/OrderInProgressView';

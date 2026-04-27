@@ -1,7 +1,7 @@
 import { useMemo, useState } from 'react';
 import { FieldArrayRenderProps } from 'react-final-form-arrays';
 
-import { PAGE_SIZE_COMPACT } from '@waldur/table/constants';
+import { PAGE_SIZE_COMPACT } from '@/table/constants';
 
 export const usePagination = <
   T extends FieldArrayRenderProps<any, any>['fields'] | any[],

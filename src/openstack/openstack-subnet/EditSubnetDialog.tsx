@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { openstackSubnetsUpdate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionDialogProps } from '@waldur/resource/actions/types';
-import { UpdateResourceDialog } from '@waldur/resource/actions/UpdateResourceDialog';
+import { translate } from '@/i18n';
+import { ActionDialogProps } from '@/resource/actions/types';
+import { UpdateResourceDialog } from '@/resource/actions/UpdateResourceDialog';
 
 import { InternalNetworkAllocationPool } from './AllocationPoolsField';
 import { getFields } from './fields';

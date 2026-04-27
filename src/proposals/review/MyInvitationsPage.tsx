@@ -11,14 +11,14 @@ import {
   callReviewerPoolsList,
 } from 'waldur-js-client';
 
-import { formatDate, formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { createFetcher } from '@waldur/table/api';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { formatDate, formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { createFetcher } from '@/table/api';
+import { CompactActionButton } from '@/table/CompactActionButton';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import {
   MyInvitationsFilter,

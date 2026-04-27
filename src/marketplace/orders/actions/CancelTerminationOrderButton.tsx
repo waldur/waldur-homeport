@@ -4,11 +4,11 @@ import { useDispatch, useSelector } from 'react-redux';
 import { remoteWaldurApiCancelTermination } from 'waldur-js-client';
 import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { REMOTE_OFFERING_TYPE } from '@waldur/marketplace-remote/constants';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { getUser } from '@waldur/workspace/selectors';
+import { translate } from '@/i18n';
+import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { getUser } from '@/workspace/selectors';
 
 export const CancelTerminationOrderButton = ({
   row,

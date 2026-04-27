@@ -1,18 +1,18 @@
 import { FC, useCallback, useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
+import { lazyComponent } from '@/core/lazyComponent';
 import {
   getRestrictionsArray,
   MembershipRestrictionFormItems,
   RestrictionField,
-} from '@waldur/core/restrictions';
-import FormTable from '@waldur/form/FormTable';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { getUser } from '@waldur/workspace/selectors';
-import { Customer } from '@waldur/workspace/types';
+} from '@/core/restrictions';
+import FormTable from '@/form/FormTable';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { getUser } from '@/workspace/selectors';
+import { Customer } from '@/workspace/types';
 
 import { getInitialValues } from './restrictions/EditMembershipRestrictionsDialog';
 

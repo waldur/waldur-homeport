@@ -3,18 +3,18 @@ import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { OpenStackInstanceReport } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { formatFilesize } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { formatFilesize } from '@/core/utils';
+import { translate } from '@/i18n';
 import {
   MarketplaceStatsOpenstackInstancesFilter,
   MarketplaceStatsOpenstackInstancesFilterFormId,
   selectMarketplaceStatsOpenstackInstancesFilter,
-} from '@waldur/table/generated/MarketplaceStatsOpenstackInstancesFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/MarketplaceStatsOpenstackInstancesFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { openstackInstancesFetcher } from './api';
 

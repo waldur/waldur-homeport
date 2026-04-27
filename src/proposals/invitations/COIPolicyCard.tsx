@@ -3,7 +3,7 @@ import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 import { InvitationCoiConfiguration } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 interface COIPolicyCardProps {
   config?: InvitationCoiConfiguration | null;

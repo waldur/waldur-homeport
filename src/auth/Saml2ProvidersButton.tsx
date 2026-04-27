@@ -1,8 +1,8 @@
 import { GlobeIcon } from '@phosphor-icons/react';
 import { useDispatch } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openModalDialog } from '@waldur/modal/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openModalDialog } from '@/modal/actions';
 
 import { LoginButton } from './LoginButton';
 

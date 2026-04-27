@@ -1,6 +1,6 @@
-import { AZURE_VM_TYPE } from '@waldur/azure/constants';
-import { MoveResourceAction } from '@waldur/marketplace/resources/actions/MoveResourceAction';
-import { ActionConfiguration } from '@waldur/resource/actions/types';
+import { AZURE_VM_TYPE } from '@/azure/constants';
+import { MoveResourceAction } from '@/marketplace/resources/actions/MoveResourceAction';
+import { ActionConfiguration } from '@/resource/actions/types';
 
 import { DestroyAction } from './DestroyAction';
 import { PullAction } from './PullAction';

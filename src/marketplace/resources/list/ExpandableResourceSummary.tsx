@@ -3,18 +3,18 @@ import { useAsync } from 'react-use';
 import { marketplaceResourcesDetailsRetrieve } from 'waldur-js-client';
 import { Resource } from 'waldur-js-client';
 
-import { CopyToClipboardButton } from '@waldur/core/CopyToClipboardButton';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { PlanDetailsLink } from '@waldur/marketplace/details/plan/PlanDetailsLink';
-import { Field } from '@waldur/resource/summary';
-import { ResourceComponentsSummary } from '@waldur/resource/summary/ResourceComponentsSummary';
-import { ResourceSummary as ResourceSummaryResources } from '@waldur/resource/summary/ResourceSummary';
+import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { PlanDetailsLink } from '@/marketplace/details/plan/PlanDetailsLink';
+import { Field } from '@/resource/summary';
+import { ResourceComponentsSummary } from '@/resource/summary/ResourceComponentsSummary';
+import { ResourceSummary as ResourceSummaryResources } from '@/resource/summary/ResourceSummary';
 import {
   BASIC_OFFERING_TYPE,
   SUPPORT_OFFERING_TYPE,
-} from '@waldur/support/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+} from '@/support/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 import { KeyValueButton } from '../KeyValueButton';
 

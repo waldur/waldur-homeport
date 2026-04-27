@@ -1,6 +1,6 @@
 import { OfferingUserState } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
+import { Badge } from '@/core/Badge';
 
 const getStateBadgeVariant = (state: OfferingUserState) => {
   switch (state) {

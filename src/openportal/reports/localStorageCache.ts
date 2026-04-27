@@ -8,7 +8,7 @@
 
 import { DateTime } from 'luxon';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 const CACHE_VERSION = 1;
 const PREFIX = `openportal-v${CACHE_VERSION}-`;

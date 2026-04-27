@@ -8,9 +8,9 @@ import {
 import classNames from 'classnames';
 import { FC, useMemo } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { flattenObject } from '@waldur/core/utils';
-import { PageBarTabs } from '@waldur/marketplace/common/PageBarTabs';
+import { Tip } from '@/core/Tooltip';
+import { flattenObject } from '@/core/utils';
+import { PageBarTabs } from '@/marketplace/common/PageBarTabs';
 
 import { FieldErrorMessage } from './FieldError';
 import { VStepperFormStep } from './VStepperFormStep';

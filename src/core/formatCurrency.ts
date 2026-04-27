@@ -1,5 +1,5 @@
-import { ENV } from '@waldur/core/config';
-import { getUserLocale } from '@waldur/i18n/LanguageUtilsService';
+import { ENV } from '@/core/config';
+import { getUserLocale } from '@/i18n/LanguageUtilsService';
 
 // Check if currency is an ISO 4217 code (3 uppercase letters)
 const isIsoCurrencyCode = (currency: string): boolean =>

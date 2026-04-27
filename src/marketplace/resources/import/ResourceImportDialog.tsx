@@ -4,17 +4,17 @@ import { Col, Row } from 'react-bootstrap';
 import { connect, useDispatch } from 'react-redux';
 import { Form, reduxForm } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { OrganizationAutocomplete } from '@waldur/marketplace/orders/OrganizationAutocomplete';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { DataLoader } from '@waldur/navigation/sidebar/marketplace-popup/DataLoader';
-import { sidebarResourcesFilterSelector } from '@waldur/navigation/sidebar/resources-filter/utils';
-import { type RootState } from '@waldur/store/reducers';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { required } from '@/core/validators';
+import { FilterBox } from '@/form/FilterBox';
+import { SubmitButton } from '@/form/SubmitButton';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { DataLoader } from '@/navigation/sidebar/marketplace-popup/DataLoader';
+import { sidebarResourcesFilterSelector } from '@/navigation/sidebar/resources-filter/utils';
+import { type RootState } from '@/store/reducers';
+import { ActionButton } from '@/table/ActionButton';
 
 import { ProjectFilter } from '../list/ProjectFilter';
 

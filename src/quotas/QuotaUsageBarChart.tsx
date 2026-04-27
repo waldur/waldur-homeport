@@ -2,10 +2,10 @@ import { WarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { Quota } from '@waldur/openstack/types';
-import { formatQuotaName, formatQuotaValue } from '@waldur/quotas/utils';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { Quota } from '@/openstack/types';
+import { formatQuotaName, formatQuotaValue } from '@/quotas/utils';
 
 interface QuotaUsageBarChartProps {
   quotas: Quota[];

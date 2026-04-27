@@ -7,13 +7,13 @@ import {
   MarketplaceProjectEstimatedCostPoliciesListData,
 } from 'waldur-js-client';
 
-import { BooleanBadge } from '@waldur/core/BooleanBadge';
-import { translate } from '@waldur/i18n';
-import { ActionsDropdown } from '@waldur/table/ActionsDropdown';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { getCustomer } from '@waldur/workspace/selectors';
+import { BooleanBadge } from '@/core/BooleanBadge';
+import { translate } from '@/i18n';
+import { ActionsDropdown } from '@/table/ActionsDropdown';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { getCustomer } from '@/workspace/selectors';
 
 import { ComponentPolicyCreateButton } from './ComponentPolicyCreateButton';
 import { ComponentPolicyDeleteButton } from './ComponentPolicyDeleteButton';

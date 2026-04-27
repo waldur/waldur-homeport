@@ -1,6 +1,6 @@
 import { ListIcon, GridFourIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { ToolbarButton } from './ToolbarButton';
 import { TableProps } from './types';

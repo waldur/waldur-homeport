@@ -8,15 +8,15 @@ import {
   marketplaceProviderOfferingsListUsersList,
 } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { EstimatedCostField } from '@waldur/customer/list/EstimatedCostField';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { ProjectsListTable } from '@waldur/project/ProjectsList';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { Link } from '@/core/Link';
+import { EstimatedCostField } from '@/customer/list/EstimatedCostField';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { ProjectsListTable } from '@/project/ProjectsList';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { CustomerContactColumn } from '../../service-providers/CustomerContactColumn';
 import { CustomerNameColumn } from '../../service-providers/CustomerNameColumn';

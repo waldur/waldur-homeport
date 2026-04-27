@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { supportRequestTypesList, type RequestType } from 'waldur-js-client';
 
-import { STALE_TIME } from '@waldur/core/constants';
+import { STALE_TIME } from '@/core/constants';
 
 export type { RequestType };
 

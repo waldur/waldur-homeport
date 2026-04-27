@@ -1,6 +1,6 @@
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { translate } from '@waldur/i18n';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { translate } from '@/i18n';
 
 import { PlanPeriod } from './types';
 

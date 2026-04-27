@@ -10,15 +10,15 @@ import {
   openstackInstancesUpdateAllowedAddressPairs,
 } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { renderValidationWrapper } from '@waldur/form/FieldValidationWrapper';
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { SubmitButton } from '@/form';
+import { renderValidationWrapper } from '@/form/FieldValidationWrapper';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 
 import { validatePrivateCIDR } from '../utils';
 

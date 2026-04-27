@@ -1,7 +1,7 @@
 import { User } from 'waldur-js-client';
 
-import { isFeatureVisible } from '@waldur/features/connect';
-import { SupportFeatures } from '@waldur/FeaturesEnums';
+import { isFeatureVisible } from '@/features/connect';
+import { SupportFeatures } from '@/FeaturesEnums';
 
 import { IssueTypeChoice } from './constants';
 

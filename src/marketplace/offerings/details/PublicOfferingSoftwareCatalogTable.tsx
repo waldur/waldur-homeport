@@ -2,18 +2,18 @@ import { FunctionComponent, useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { marketplaceSoftwarePackagesList } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { createFetcher } from '@waldur/table/api';
+import { Badge } from '@/core/Badge';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { createFetcher } from '@/table/api';
 import {
   MarketplaceSoftwarePackagesFilter,
   selectMarketplaceSoftwarePackagesFilter,
-} from '@waldur/table/generated/MarketplaceSoftwarePackagesFilter';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/MarketplaceSoftwarePackagesFilter';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { SoftwarePackageExpandableRow } from './SoftwarePackageExpandableRow';
 

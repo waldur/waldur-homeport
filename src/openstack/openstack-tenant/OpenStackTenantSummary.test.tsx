@@ -2,13 +2,13 @@ import { screen, render } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { ENV } from '@waldur/core/config';
-import { useModal } from '@waldur/modal/hooks';
+import { ENV } from '@/core/config';
+import { useModal } from '@/modal/hooks';
 
 import { OpenStackTenantSummary } from './OpenStackTenantSummary';
 
 // Mock ENV configuration
-vi.mock('@waldur/core/config', () => ({
+vi.mock('@/core/config', () => ({
   ENV: {
     plugins: {
       WALDUR_OPENSTACK: {
@@ -18,7 +18,7 @@ vi.mock('@waldur/core/config', () => ({
     },
   },
 }));
-vi.mock('@waldur/modal/hooks');
+vi.mock('@/modal/hooks');
 
 const mockTenant = {
   name: 'Test tenant',

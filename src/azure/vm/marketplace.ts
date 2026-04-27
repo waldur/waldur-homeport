@@ -1,6 +1,6 @@
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { OfferingConfiguration } from '@waldur/marketplace/common/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { OfferingConfiguration } from '@/marketplace/common/types';
 
 import { AZURE_VM_TYPE } from '../constants';
 

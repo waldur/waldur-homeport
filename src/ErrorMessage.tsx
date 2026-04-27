@@ -1,10 +1,10 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FallbackRender } from '@sentry/react';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import Illustration from '@waldur/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
-import { ImageTablePlaceholder } from '@waldur/table/ImageTablePlaceholder';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import Illustration from '@/images/table-placeholders/undraw_fixing_bugs_w7gi.svg';
+import { ImageTablePlaceholder } from '@/table/ImageTablePlaceholder';
 
 export const ErrorMessage: FallbackRender = (props) => (
   <>

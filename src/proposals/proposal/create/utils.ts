@@ -11,14 +11,14 @@ import {
   RequestedResource,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { Call } from '@waldur/proposals/types';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
-import { fetchListStart } from '@waldur/table/actions';
-import { useUser } from '@waldur/workspace/hooks';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { Call } from '@/proposals/types';
+import { showSuccess, showErrorResponse } from '@/store/notify';
+import { fetchListStart } from '@/table/actions';
+import { useUser } from '@/workspace/hooks';
 
 export const useProposalDecisionActions = (
   proposal: Proposal,

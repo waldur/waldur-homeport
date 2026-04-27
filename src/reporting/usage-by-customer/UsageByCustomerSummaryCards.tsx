@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { translate } from '@waldur/i18n';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { translate } from '@/i18n';
 
 import { UsageByCustomerSummary } from './types';
 

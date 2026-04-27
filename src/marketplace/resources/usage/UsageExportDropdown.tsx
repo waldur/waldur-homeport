@@ -9,14 +9,14 @@ import { sum } from 'lodash-es';
 import { useCallback } from 'react';
 import { ProjectUser } from 'waldur-js-client';
 
-import { getBrandColor } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { OfferingComponent } from '@waldur/marketplace/types';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionDropdownButton } from '@waldur/table/ActionDropdownButton';
-import exportAs from '@waldur/table/exporters';
-import { ExportData } from '@waldur/table/exporters/types';
+import { getBrandColor } from '@/core/utils';
+import { translate } from '@/i18n';
+import { OfferingComponent } from '@/marketplace/types';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useNotify } from '@/store/hooks';
+import { ActionDropdownButton } from '@/table/ActionDropdownButton';
+import exportAs from '@/table/exporters';
+import { ExportData } from '@/table/exporters/types';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 import {

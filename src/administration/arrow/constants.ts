@@ -1,6 +1,6 @@
 import type { ArrowBillingSyncStateEnum } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 const BILLING_SYNC_STATE_LABELS: Record<ArrowBillingSyncStateEnum, string> = {
   1: translate('Pending'),

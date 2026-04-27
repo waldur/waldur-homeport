@@ -7,8 +7,8 @@ import {
   ReviewerProfile,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { useNotify } from '@waldur/store/hooks';
+import { translate } from '@/i18n';
+import { useNotify } from '@/store/hooks';
 
 export const useReviewerProfile = () => {
   const queryClient = useQueryClient();

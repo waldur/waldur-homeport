@@ -1,4 +1,4 @@
-import { ENV } from '@waldur/core/config';
+import { ENV } from '@/core/config';
 
 // Core attributes always enabled
 const CORE_PROFILE_ATTRIBUTES = [

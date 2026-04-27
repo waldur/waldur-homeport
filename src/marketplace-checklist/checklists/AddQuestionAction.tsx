@@ -2,10 +2,10 @@ import { PlusSquareIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { Checklist } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { QUESTION_FORM_ID } from '../constants';
 

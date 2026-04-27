@@ -1,6 +1,6 @@
 import { FunctionComponent } from 'react';
 
-import { Tip } from '@waldur/core/Tooltip';
+import { Tip } from '@/core/Tooltip';
 
 import { getIconForType } from './constants';
 

@@ -1,12 +1,12 @@
 import { FunctionComponent } from 'react';
 import { Container } from 'react-bootstrap';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 const InfoSummary: FunctionComponent<{ infoObj }> = ({ infoObj }) => {
   const entries = Object.entries(infoObj);

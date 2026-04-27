@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { SecretValueField } from '@waldur/marketplace/SecretValueField';
-import { OrderDetailsProps } from '@waldur/marketplace/types';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { SecretValueField } from '@/marketplace/SecretValueField';
+import { OrderDetailsProps } from '@/marketplace/types';
 
 export const AzureDetailsComponent: FunctionComponent<OrderDetailsProps> = (
   props,

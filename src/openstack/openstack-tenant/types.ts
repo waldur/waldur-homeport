@@ -1,4 +1,4 @@
-import { Resource } from '@waldur/resource/types';
+import { Resource } from '@/resource/types';
 
 import { Quota } from '../types';
 

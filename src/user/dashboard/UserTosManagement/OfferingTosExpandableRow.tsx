@@ -2,13 +2,13 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { TableWithTabs } from '@waldur/table/TableWithTabs';
-import { TableTab } from '@waldur/table/types';
+import { fetchResultCount } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { TableWithTabs } from '@/table/TableWithTabs';
+import { TableTab } from '@/table/types';
 
 import { OfferingResourcesTable } from './OfferingResourcesTable';
 import { OfferingTosTable } from './OfferingTosTable';

@@ -2,8 +2,8 @@ import { FunctionComponent } from 'react';
 import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
-import { Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
 
 export const getOptions = () => [
   { value: undefined, label: translate('All') },

@@ -1,14 +1,14 @@
 import { useCallback } from 'react';
 import { reduxForm } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { StringField, SubmitButton } from '@waldur/form';
-import { FormContainer } from '@waldur/form/FormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showSuccess } from '@waldur/store/notify';
+import { required } from '@/core/validators';
+import { StringField, SubmitButton } from '@/form';
+import { FormContainer } from '@/form/FormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showSuccess } from '@/store/notify';
 
 interface SaveFilterDialogProps {
   resolve: {

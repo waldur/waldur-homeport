@@ -1,7 +1,7 @@
 import { FC, PropsWithChildren } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export const ComponentAccountingTypeWrapper: FC<PropsWithChildren> = ({
   children,

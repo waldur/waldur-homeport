@@ -5,9 +5,9 @@ import { Button } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersSetStateDone, OrderDetails } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showSuccess, showErrorResponse } from '@/store/notify';
 
 interface MarkAsDoneButtonProps {
   row: OrderDetails;

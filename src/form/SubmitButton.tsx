@@ -1,7 +1,7 @@
 import { FC, ReactNode } from 'react';
 
-import { BaseButton } from '@waldur/core/buttons/BaseButton';
-import { translate } from '@waldur/i18n';
+import { BaseButton } from '@/core/buttons/BaseButton';
+import { translate } from '@/i18n';
 
 interface SubmitButtonProps {
   /** Loading/submitting state - shows spinner and disables button */

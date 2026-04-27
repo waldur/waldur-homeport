@@ -3,7 +3,7 @@ import { Card, Tab, Tabs } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { FlavorsList } from './FlavorsList';
 import { ImagesList } from './ImagesList';

@@ -1,12 +1,12 @@
 import { FC, useMemo } from 'react';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Badge } from '@waldur/core/Badge';
-import { CopyToClipboard } from '@waldur/core/CopyToClipboard';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Badge } from '@/core/Badge';
+import { CopyToClipboard } from '@/core/CopyToClipboard';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import type { ActiveQuery, ActiveQueriesStats } from './api';
 import { formatDuration, getQueryDurationHealth } from './utils';

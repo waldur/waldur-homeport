@@ -1,16 +1,16 @@
 import { UIView } from '@uirouter/react';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { StateDeclaration } from '@waldur/core/types';
-import { isFeatureVisible } from '@waldur/features/connect';
+import { lazyComponent } from '@/core/lazyComponent';
+import { StateDeclaration } from '@/core/types';
+import { isFeatureVisible } from '@/features/connect';
 import {
   MarketplaceFeatures,
   ProjectFeatures,
   InvitationsFeatures,
-} from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { hasSupport } from '@waldur/issues/hooks';
-import { getProject, isStaffOrSupport } from '@waldur/workspace/selectors';
+} from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { hasSupport } from '@/issues/hooks';
+import { getProject, isStaffOrSupport } from '@/workspace/selectors';
 
 import { loadProject } from './resolve';
 

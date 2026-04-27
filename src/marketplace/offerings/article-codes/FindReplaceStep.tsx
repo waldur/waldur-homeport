@@ -2,19 +2,19 @@ import { FC, useState } from 'react';
 import { Field, useForm, useFormState } from 'react-final-form';
 import { marketplaceArticleCodeUpdatePreview } from 'waldur-js-client';
 
-import { required } from '@waldur/core/validators';
-import { SubmitButton } from '@waldur/form';
-import { StringField } from '@waldur/form';
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
+import { required } from '@/core/validators';
+import { SubmitButton } from '@/form';
+import { StringField } from '@/form';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
 import {
   categoryAutocomplete,
   organizationAutocomplete,
-} from '@waldur/marketplace/common/autocompletes';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { OfferingStateOptions } from '@waldur/table/generated/MarketplaceProviderOfferingsFilter';
-import { WizardModal, WizardStepProps } from '@waldur/wizard';
+} from '@/marketplace/common/autocompletes';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { OfferingStateOptions } from '@/table/generated/MarketplaceProviderOfferingsFilter';
+import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { ArticleCodeFormValues } from './types';
 

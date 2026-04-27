@@ -2,15 +2,15 @@ import classNames from 'classnames';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
 
-import { Image } from '@waldur/core/Image';
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { Tip } from '@waldur/core/Tooltip';
-import { getAbbreviation } from '@waldur/core/utils';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
-import { OfferingDetailsLink } from '@waldur/marketplace/links/OfferingDetailsLink';
-import { TagBadges } from '@waldur/marketplace/tags/TagBadges';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { Image } from '@/core/Image';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { Tip } from '@/core/Tooltip';
+import { getAbbreviation } from '@/core/utils';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
+import { OfferingDetailsLink } from '@/marketplace/links/OfferingDetailsLink';
+import { TagBadges } from '@/marketplace/tags/TagBadges';
+import { wrapTooltip } from '@/table/ActionButton';
 
 import { OfferingCardVariantProps } from './types';
 import { useOfferingAccessibility } from './useOfferingAccessibility';

@@ -1,11 +1,11 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 
-import { get } from '@waldur/core/api';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { get } from '@/core/api';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 import { ResourceSummary } from './ResourceSummary';
 

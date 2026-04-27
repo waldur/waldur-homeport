@@ -8,17 +8,17 @@ import {
   marketplaceProviderOfferingsRetrieve,
 } from 'waldur-js-client';
 
-import { OFFERING_TYPE_BOOKING } from '@waldur/booking/constants';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { Offering, ServiceProvider } from '@waldur/marketplace/types';
-import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
-import { useBreadcrumbs, usePageHero } from '@waldur/navigation/context';
-import { PageBarTab } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
+import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
+import { UI_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { Offering, ServiceProvider } from '@/marketplace/types';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
+import { useBreadcrumbs, usePageHero } from '@/navigation/context';
+import { PageBarTab } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
 
 import {
   getCredentialsForm,

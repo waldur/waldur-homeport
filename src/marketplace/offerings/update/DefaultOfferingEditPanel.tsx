@@ -2,18 +2,18 @@ import { get } from 'lodash-es';
 import { FunctionComponent } from 'react';
 import { useSelector } from 'react-redux';
 
-import { CheckOrX } from '@waldur/core/CheckOrX';
-import { StaffOnlyIndicator } from '@waldur/core/StaffOnlyIndicator';
-import { TruncatedDescription } from '@waldur/core/TruncatedDescription';
-import { SecretField, SelectField, TextField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { CommaSeparatedListField } from '@waldur/form/CommaSeparatedListField';
-import FormTable from '@waldur/form/FormTable';
-import { SecretField as PlainSecretField } from '@waldur/marketplace/common/SecretField';
-import { FieldEditButton } from '@waldur/marketplace/offerings/update/integration/FieldEditButton';
-import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { isStaff as isStaffSelector } from '@waldur/workspace/selectors';
+import { CheckOrX } from '@/core/CheckOrX';
+import { StaffOnlyIndicator } from '@/core/StaffOnlyIndicator';
+import { TruncatedDescription } from '@/core/TruncatedDescription';
+import { SecretField, SelectField, TextField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
+import FormTable from '@/form/FormTable';
+import { SecretField as PlainSecretField } from '@/marketplace/common/SecretField';
+import { FieldEditButton } from '@/marketplace/offerings/update/integration/FieldEditButton';
+import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 export interface OfferingEditField {
   key: string;

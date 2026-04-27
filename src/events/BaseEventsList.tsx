@@ -1,14 +1,14 @@
 import { FunctionComponent, useMemo } from 'react';
 import { eventsList } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import eventsRegistry from '@waldur/events/registry';
-import { translate } from '@waldur/i18n';
-import { createFetcher } from '@waldur/table/api';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import Table from '@waldur/table/Table';
-import { TableProps } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
+import { formatDateTime } from '@/core/dateUtils';
+import eventsRegistry from '@/events/registry';
+import { translate } from '@/i18n';
+import { createFetcher } from '@/table/api';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import Table from '@/table/Table';
+import { TableProps } from '@/table/types';
+import { useTable } from '@/table/useTable';
 
 import { ExpandableEventDetails } from './ExpandableEventDetails';
 

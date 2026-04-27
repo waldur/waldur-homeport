@@ -11,17 +11,17 @@ import {
   ProtectedRound,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { openModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { openModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 const EditRoundSubmissionDialog = lazyComponent(() =>
-  import('@waldur/proposals/round/submission/EditRoundSubmissionDialog').then(
+  import('@/proposals/round/submission/EditRoundSubmissionDialog').then(
     (m) => ({
       default: m.EditRoundSubmissionDialog,
     }),
@@ -29,13 +29,13 @@ const EditRoundSubmissionDialog = lazyComponent(() =>
 );
 
 const EditRoundReviewDialog = lazyComponent(() =>
-  import('@waldur/proposals/round/review/EditRoundReviewDialog').then((m) => ({
+  import('@/proposals/round/review/EditRoundReviewDialog').then((m) => ({
     default: m.EditRoundReviewDialog,
   })),
 );
 
 const EditRoundAllocationDialog = lazyComponent(() =>
-  import('@waldur/proposals/round/allocation/EditRoundAllocationDialog').then(
+  import('@/proposals/round/allocation/EditRoundAllocationDialog').then(
     (m) => ({
       default: m.EditRoundAllocationDialog,
     }),

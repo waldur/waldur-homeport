@@ -1,10 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ActionButton } from '@/table/ActionButton';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { CreateModalButtonProps } from './types';
 

@@ -3,21 +3,18 @@ import { useCallback, useState } from 'react';
 import { useSelector } from 'react-redux';
 import { Field } from 'redux-form';
 
-import { required } from '@waldur/core/validators';
-import { BoxNumberField } from '@waldur/form/BoxNumberField';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { VStepperFormStepCard } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
-import {
-  formatIntField,
-  parseIntField,
-} from '@waldur/marketplace/common/utils';
-import { orderFormSelector } from '@waldur/marketplace/deploy/selectors';
-import { FormStepProps } from '@waldur/marketplace/deploy/types';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
-import { Offering } from '@waldur/marketplace/types';
-import { FlavorTable } from '@waldur/openstack/openstack-instance/deploy/FlavorTable';
-import { FormAbstractVolumeFields } from '@waldur/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
+import { required } from '@/core/validators';
+import { BoxNumberField } from '@/form/BoxNumberField';
+import { FilterBox } from '@/form/FilterBox';
+import { VStepperFormStepCard } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
+import { formatIntField, parseIntField } from '@/marketplace/common/utils';
+import { orderFormSelector } from '@/marketplace/deploy/selectors';
+import { FormStepProps } from '@/marketplace/deploy/types';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { Offering } from '@/marketplace/types';
+import { FlavorTable } from '@/openstack/openstack-instance/deploy/FlavorTable';
+import { FormAbstractVolumeFields } from '@/openstack/openstack-instance/deploy/FormAbstractVolumeFields';
 
 import { LonghornWorkerWarning } from './LonghornWorkerWarning';
 

@@ -99,7 +99,7 @@ export default tseslint
         },
         'import/resolver': {
           alias: {
-            map: [['@waldur', './src']],
+            map: [['@', './src']],
             extensions: ['.ts', '.tsx', '.js', '.jsx', '.json'],
           },
           typescript: {
@@ -170,7 +170,7 @@ export default tseslint
             'newlines-between': 'always',
             pathGroups: [
               {
-                pattern: '@waldur/**',
+                pattern: '@/**',
                 group: 'internal',
                 position: 'after',
               },

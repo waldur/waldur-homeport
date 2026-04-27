@@ -2,11 +2,11 @@ import { ShieldWarningIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { VersionHistory } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { formatMediumDateTime, formatRelative } from '@waldur/core/dateUtils';
-import { StateIndicator } from '@waldur/core/StateIndicator';
-import { getAbbreviation } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
+import { Badge } from '@/core/Badge';
+import { formatMediumDateTime, formatRelative } from '@/core/dateUtils';
+import { StateIndicator } from '@/core/StateIndicator';
+import { getAbbreviation } from '@/core/utils';
+import { translate } from '@/i18n';
 
 import './VersionHistoryItem.scss';
 

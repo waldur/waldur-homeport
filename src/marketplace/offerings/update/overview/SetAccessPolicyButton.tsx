@@ -1,10 +1,10 @@
 import { useDispatch, useSelector } from 'react-redux';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { CompactEditButton } from '@waldur/form/CompactEditButton';
-import { useOrganizationGroups } from '@waldur/marketplace/common/utils';
-import { openModalDialog } from '@waldur/modal/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { lazyComponent } from '@/core/lazyComponent';
+import { CompactEditButton } from '@/form/CompactEditButton';
+import { useOrganizationGroups } from '@/marketplace/common/utils';
+import { openModalDialog } from '@/modal/actions';
+import { getUser } from '@/workspace/selectors';
 
 import { SetAccessPolicyDialogProps } from '../../actions/SetAccessPolicyDialog';
 import { isVisible } from '../../actions/utils';

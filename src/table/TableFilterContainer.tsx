@@ -2,7 +2,7 @@ import { FC } from 'react';
 import { Accordion } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GRID_BREAKPOINTS } from '@/core/constants';
 
 import { TableFilterContext } from './FilterContextProvider';
 import { SavedFilterSelect } from './SavedFilterSelect';

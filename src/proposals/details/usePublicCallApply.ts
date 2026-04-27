@@ -3,21 +3,21 @@ import { useCallback, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { NestedRound, ProtectedRound } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { showInfo } from '@waldur/store/notify';
-import { useUser } from '@waldur/workspace/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { showInfo } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
 import { getRoundsWithStatus } from '../utils';
 
 const ProposalCreateDialog = lazyComponent(() =>
-  import('@waldur/proposals/proposal/create/AddProposalDialog').then(
-    (module) => ({ default: module.AddProposalDialog }),
-  ),
+  import('@/proposals/proposal/create/AddProposalDialog').then((module) => ({
+    default: module.AddProposalDialog,
+  })),
 );
 
 export const usePublicCallApply = (

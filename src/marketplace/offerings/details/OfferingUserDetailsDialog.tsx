@@ -6,22 +6,22 @@ import {
   OfferingUser,
 } from 'waldur-js-client';
 
-import { ENV } from '@waldur/core/config';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { FieldWithCopy } from '@waldur/core/FieldWithCopy';
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { UserFeatures } from '@waldur/FeaturesEnums';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { OfferingUserStateField } from '@waldur/marketplace/OfferingUserStateField';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { formatGender } from '@waldur/user/support/aai-constants';
-import { IsdBadges } from '@waldur/user/support/IsdBadges';
+import { ENV } from '@/core/config';
+import { UI_STALE_TIME } from '@/core/constants';
+import { formatDateTime } from '@/core/dateUtils';
+import { FieldWithCopy } from '@/core/FieldWithCopy';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { UserFeatures } from '@/FeaturesEnums';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { OfferingUserStateField } from '@/marketplace/OfferingUserStateField';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { formatGender } from '@/user/support/aai-constants';
+import { IsdBadges } from '@/user/support/IsdBadges';
 
 interface OfferingUserDetailsDialogProps {
   resolve: { offeringUser: OfferingUser; offeringUuid: string };

@@ -2,13 +2,13 @@ import { FunctionComponent, useMemo } from 'react';
 import { Field } from 'react-final-form';
 import { marketplaceSoftwareCatalogsList, Offering } from 'waldur-js-client';
 
-import { parseSelectData } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { returnReactSelectAsyncPaginateObject } from '@waldur/core/utils';
-import { SelectField } from '@waldur/form';
-import { AsyncPaginate, Select } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { parseSelectData } from '@/core/api';
+import { ENV } from '@/core/config';
+import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
+import { SelectField } from '@/form';
+import { AsyncPaginate, Select } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 // Architecture options with target counts
 const ARCHITECTURE_OPTIONS = [

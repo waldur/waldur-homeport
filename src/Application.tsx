@@ -5,11 +5,11 @@ import { FunctionComponent } from 'react';
 import { Provider } from 'react-redux';
 import { useAsync } from 'react-use';
 
-import { ThreadProvider } from '@waldur/ai-assistant/logic/ThreadProvider';
-import { queryClient } from '@waldur/core/queryClient';
-import { DrawerRoot } from '@waldur/drawer/DrawerRoot';
-import { ModalRoot } from '@waldur/modal/ModalRoot';
-import store from '@waldur/store/store';
+import { ThreadProvider } from '@/ai-assistant/logic/ThreadProvider';
+import { queryClient } from '@/core/queryClient';
+import { DrawerRoot } from '@/drawer/DrawerRoot';
+import { ModalRoot } from '@/modal/ModalRoot';
+import store from '@/store/store';
 
 import { loadConfig } from './core/bootstrap';
 import { ErrorMessage } from './ErrorMessage';

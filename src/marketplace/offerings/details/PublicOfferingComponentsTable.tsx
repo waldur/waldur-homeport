@@ -1,10 +1,10 @@
 import { FunctionComponent } from 'react';
 
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface PublicOfferingComponentsTableProps {
   offering: Offering;

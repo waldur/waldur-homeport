@@ -1,6 +1,6 @@
 import * as yaml from 'js-yaml';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 export interface ValidationResult {
   isValid: boolean;

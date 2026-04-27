@@ -2,17 +2,17 @@ import Qs from 'qs';
 import { formDataBodySerializer, RequestResult } from 'waldur-js-client';
 import { client } from 'waldur-js-client/client.gen';
 
-import { localLogout } from '@waldur/auth/AuthService';
-import { ENV } from '@waldur/core/config';
+import { localLogout } from '@/auth/AuthService';
+import { ENV } from '@/core/config';
 import {
   ImpersonationStorage,
   RedirectStorage,
   AuthTokenStorage,
   LanguageStorage,
   AuthMethodStorage,
-} from '@waldur/core/StorageManager';
-import { cleanObject } from '@waldur/core/utils';
-import { router } from '@waldur/router';
+} from '@/core/StorageManager';
+import { cleanObject } from '@/core/utils';
+import { router } from '@/router';
 
 /** Maximum number of items allowed in a single page request. */
 export const MAX_PAGE_SIZE = 300;

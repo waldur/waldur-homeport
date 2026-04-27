@@ -6,13 +6,13 @@ import {
   marketplaceOrdersRejectByProvider,
 } from 'waldur-js-client';
 
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { FileDownloader } from '@waldur/form/upload/FileDownloader';
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { useNotify } from '@waldur/store/hooks';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { FileDownloader } from '@/form/upload/FileDownloader';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/hooks';
 
 export const OrderReviewDialog = ({ order, loadData }) => {
   const dispatch = useDispatch();

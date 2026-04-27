@@ -7,10 +7,10 @@ import { FC, useCallback, useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { showSuccess } from '@waldur/store/notify';
-import { CompactActionButton } from '@waldur/table/CompactActionButton';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { showSuccess } from '@/store/notify';
+import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { getResourceAccessEndpoints, isSshFormat } from './utils';
 

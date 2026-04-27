@@ -2,11 +2,11 @@ import { useMemo } from 'react';
 import { Stack } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { ALL_RESOURCES_TABLE_ID } from '@waldur/marketplace/resources/list/constants';
-import { selectFiltersStorage } from '@waldur/table/selectors';
-import { RemoveFilterBadgeButton } from '@waldur/table/TableFilterItem';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { ALL_RESOURCES_TABLE_ID } from '@/marketplace/resources/list/constants';
+import { selectFiltersStorage } from '@/table/selectors';
+import { RemoveFilterBadgeButton } from '@/table/TableFilterItem';
 
 import { useOrganizationAndProjectFiltersForResources } from './utils';
 

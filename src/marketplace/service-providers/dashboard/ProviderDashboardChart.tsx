@@ -2,9 +2,9 @@ import { FunctionComponent } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 import { useAsync } from 'react-use';
 
-import { EChart } from '@waldur/core/EChart';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ServiceProvider } from '@waldur/marketplace/types';
+import { EChart } from '@/core/EChart';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { ServiceProvider } from '@/marketplace/types';
 
 import { ChangesAmountBadge } from './ChangesAmountBadge';
 import { loadProviderCharts } from './utils';

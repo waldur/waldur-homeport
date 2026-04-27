@@ -12,12 +12,12 @@ import {
   AssignmentBatchList,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog, waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useNotify } from '@/store/hooks';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 const ExtendDeadlineDialog = lazyComponent(() =>
   import('./ExtendDeadlineDialog').then((m) => ({

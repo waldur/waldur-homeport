@@ -3,14 +3,14 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOfferingEstimatedCostPoliciesCreate } from 'waldur-js-client';
 
-import { AddButton } from '@waldur/core/AddButton';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { PolicyPeriod } from '@waldur/customer/cost-policies/types';
-import { policyPeriodOptions } from '@waldur/customer/cost-policies/utils';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { showErrorResponse } from '@waldur/store/notify';
+import { AddButton } from '@/core/AddButton';
+import { lazyComponent } from '@/core/lazyComponent';
+import { PolicyPeriod } from '@/customer/cost-policies/types';
+import { policyPeriodOptions } from '@/customer/cost-policies/utils';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { showErrorResponse } from '@/store/notify';
 
 import { OfferingCostPolicyFormData } from './types';
 

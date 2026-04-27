@@ -15,19 +15,19 @@ import {
   userInvitationsList,
 } from 'waldur-js-client';
 
-import { fetchResultCount } from '@waldur/core/api';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { isFeatureVisible } from '@waldur/features/connect';
+import { fetchResultCount } from '@/core/api';
+import { lazyComponent } from '@/core/lazyComponent';
+import { isFeatureVisible } from '@/features/connect';
 import {
   CustomerFeatures,
   MarketplaceFeatures,
   UserFeatures,
-} from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { isExperimentalUiComponentsVisible } from '@waldur/marketplace/utils';
-import { openModalDialog } from '@waldur/modal/actions';
-import { router } from '@waldur/router';
-import { useUser } from '@waldur/workspace/hooks';
+} from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
+import { openModalDialog } from '@/modal/actions';
+import { router } from '@/router';
+import { useUser } from '@/workspace/hooks';
 
 import { UserAffiliationsList } from '../affiliations/UserAffiliationsList';
 

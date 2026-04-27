@@ -2,16 +2,16 @@ import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { ProtectedRound } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { translate } from '@/i18n';
 import {
   formatRoundAllocationStrategy,
   formatRoundAllocationTime,
   formatRoundReviewStrategy,
-} from '@waldur/proposals/utils';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/proposals/utils';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 interface RoundExpandableRowProps {
   row: ProtectedRound;

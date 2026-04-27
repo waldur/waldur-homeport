@@ -1,10 +1,10 @@
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 import {
   DetailsOverviewStep,
   FinalConfigurationStep,
   PlanStep,
-} from '@waldur/marketplace/deploy/steps/constants';
-import { OfferingConfigurationFormStep } from '@waldur/marketplace/deploy/types';
+} from '@/marketplace/deploy/steps/constants';
+import { OfferingConfigurationFormStep } from '@/marketplace/deploy/types';
 
 import { FormPeriodsStep } from './FormPeriodsStep';
 

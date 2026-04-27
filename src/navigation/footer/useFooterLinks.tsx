@@ -4,16 +4,15 @@ import { useMemo } from 'react';
 import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
-import * as AuthService from '@waldur/auth/AuthService';
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { count } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { GRID_BREAKPOINTS, SHORT_STALE_TIME } from '@waldur/core/constants';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { useUser } from '@waldur/workspace/hooks';
-import { hasNonProjectPermissions } from '@waldur/workspace/selectors';
+import * as AuthService from '@/auth/AuthService';
+import { count } from '@/core/api';
+import { ENV } from '@/core/config';
+import { GRID_BREAKPOINTS, SHORT_STALE_TIME } from '@/core/constants';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { useUser } from '@/workspace/hooks';
+import { hasNonProjectPermissions } from '@/workspace/selectors';
 
 export const useFooterLinks = () => {
   const user = useUser();

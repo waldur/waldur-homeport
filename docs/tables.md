@@ -6,10 +6,10 @@
 ```ts
 import { rolesList } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
 
 export const RolesList = () => {
   const tableProps = useTable({
@@ -51,7 +51,7 @@ The recommended way is to use `createFetcher` with SDK functions from `waldur-js
 
 ```ts
 import { usersList } from 'waldur-js-client';
-import { createFetcher } from '@waldur/table/api';
+import { createFetcher } from '@/table/api';
 
 const tableProps = useTable({
   table: 'UsersList',
@@ -357,14 +357,14 @@ Filter badges rendered from filtersStorage
 
 ### URL query parameter sync
 
-Filters can be synced to URL query parameters for shareable links. Use utilities from `@waldur/core/filters`:
+Filters can be synced to URL query parameters for shareable links. Use utilities from `@/core/filters`:
 
 ```ts
 import {
   syncFiltersToURL,
   useReinitializeFilterFromUrl,
   getQueryParams,
-} from '@waldur/core/filters';
+} from '@/core/filters';
 
 const FILTER_FORM_ID = 'MyFilterForm';
 
@@ -511,7 +511,7 @@ Table component supports tabs for switching between different views or data sets
 Define tabs using an array of `TableTab` objects:
 
 ```ts
-import { TableTab } from '@waldur/table/types';
+import { TableTab } from '@/table/types';
 
 const tabs: TableTab[] = [
   {
@@ -695,11 +695,11 @@ import { FC, useCallback } from 'react';
 import { PencilSimple, Trash, EnvelopeSimple } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
 
-import { translate } from '@waldur/i18n';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { useNotify } from '@waldur/store/hooks';
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { translate } from '@/i18n';
+import { waitForConfirmation } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { useNotify } from '@/store/hooks';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 interface RowActionsProps {
   row: MyRowType;

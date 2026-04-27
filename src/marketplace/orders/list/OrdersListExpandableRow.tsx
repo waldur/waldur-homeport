@@ -1,15 +1,15 @@
 import { FunctionComponent } from 'react';
 import { OrderDetails } from 'waldur-js-client';
 
-import { FileDownloader } from '@waldur/form/upload/FileDownloader';
-import { translate } from '@waldur/i18n';
-import { OrderNameField } from '@waldur/marketplace/orders/list/OrderNameField';
-import { OrderStateCell } from '@waldur/marketplace/orders/list/OrderStateCell';
-import { OrderTypeCell } from '@waldur/marketplace/orders/list/OrderTypeCell';
-import { ResourceNameField } from '@waldur/marketplace/orders/list/ResourceNameField';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { FileDownloader } from '@/form/upload/FileDownloader';
+import { translate } from '@/i18n';
+import { OrderNameField } from '@/marketplace/orders/list/OrderNameField';
+import { OrderStateCell } from '@/marketplace/orders/list/OrderStateCell';
+import { OrderTypeCell } from '@/marketplace/orders/list/OrderTypeCell';
+import { ResourceNameField } from '@/marketplace/orders/list/ResourceNameField';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { OrderProviderActions } from '../actions/OrderProviderActions';
 

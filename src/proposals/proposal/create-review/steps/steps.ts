@@ -1,5 +1,5 @@
-import { VStepperFormStep } from '@waldur/form/VStepperFormStep';
-import { translate } from '@waldur/i18n';
+import { VStepperFormStep } from '@/form/VStepperFormStep';
+import { translate } from '@/i18n';
 
 import { ProposalDetailsOverviewStep } from '../../create/ProposalDetailsOverviewStep';
 import { FormResourceRequestsStep } from '../../create/resource-requests-step/FormResourceRequestsStep';

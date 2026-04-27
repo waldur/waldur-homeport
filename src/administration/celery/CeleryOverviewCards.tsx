@@ -1,8 +1,8 @@
 import { Col, Row } from 'react-bootstrap';
 import { CeleryStatsResponse } from 'waldur-js-client';
 
-import { StatisticsCard } from '@waldur/core/StatisticsCard';
-import { translate } from '@waldur/i18n';
+import { StatisticsCard } from '@/core/StatisticsCard';
+import { translate } from '@/i18n';
 
 interface CeleryOverviewCardsProps {
   data: CeleryStatsResponse;

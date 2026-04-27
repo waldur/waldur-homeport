@@ -1,7 +1,7 @@
 import { FunctionComponent, useCallback } from 'react';
 import { useMediaQuery } from 'react-responsive';
 
-import { GRID_BREAKPOINTS } from '@waldur/core/constants';
+import { GRID_BREAKPOINTS } from '@/core/constants';
 
 import { TableColumnButton } from './TableColumnsButton';
 import { TableDisplayModeButton } from './TableDisplayModeButton';

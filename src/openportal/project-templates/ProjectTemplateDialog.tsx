@@ -7,15 +7,15 @@ import {
   openportalProjectTemplateRetrieve,
 } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { useNotify } from '@waldur/store/hooks';
-import { getCustomer, getUser } from '@waldur/workspace/selectors';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useNotify } from '@/store/hooks';
+import { getCustomer, getUser } from '@/workspace/selectors';
 
 import { getCustomerURL } from '../utils';
 

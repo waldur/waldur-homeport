@@ -1,6 +1,6 @@
 import React from 'react';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { K8sFormSection } from './K8sFormSection';
 import K8sSecurityRulesField from './K8sSecurityRulesField';

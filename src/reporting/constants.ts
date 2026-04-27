@@ -2,14 +2,14 @@ import {
   MarketplaceFeatures,
   SupportFeatures,
   FeaturesEnum,
-} from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { ProfileAttribute } from '@waldur/user/support/profileAttributes';
+} from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { ProfileAttribute } from '@/user/support/profileAttributes';
 import {
   hasAnyOrganizationAccess,
   isServiceProviderManager,
   isStaffOrSupport,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 import { AnalyticsMode } from './analytics';
 import { isReportingScreenEnabled } from './utils';

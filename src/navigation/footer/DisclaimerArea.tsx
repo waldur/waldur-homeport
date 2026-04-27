@@ -1,9 +1,9 @@
 import { FunctionComponent } from 'react';
 
-import { getIconUrl } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { DeploymentFeatures } from '@waldur/FeaturesEnums';
+import { getIconUrl } from '@/core/api';
+import { ENV } from '@/core/config';
+import { isFeatureVisible } from '@/features/connect';
+import { DeploymentFeatures } from '@/FeaturesEnums';
 
 export const DisclaimerArea: FunctionComponent = () => {
   if (!isFeatureVisible(DeploymentFeatures.enable_disclaimer_area)) {

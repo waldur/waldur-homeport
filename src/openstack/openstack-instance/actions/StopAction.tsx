@@ -2,17 +2,14 @@ import { StopIcon } from '@phosphor-icons/react';
 import { openstackInstancesStop } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { validateOpenStackInstancePowerPermission } from '@waldur/openstack/utils';
+import { translate } from '@/i18n';
+import { validateOpenStackInstancePowerPermission } from '@/openstack/utils';
 import {
   AsyncActionItem,
   AsyncActionItemProps,
-} from '@waldur/resource/actions/AsyncActionItem';
-import {
-  validateState,
-  validateRuntimeState,
-} from '@waldur/resource/actions/base';
-import { ActionContext, ActionItemType } from '@waldur/resource/actions/types';
+} from '@/resource/actions/AsyncActionItem';
+import { validateState, validateRuntimeState } from '@/resource/actions/base';
+import { ActionContext, ActionItemType } from '@/resource/actions/types';
 
 function validate(ctx: ActionContext<OpenStackInstance>): string {
   if (ctx.resource.state === 'OK' && ctx.resource.runtime_state === 'SHUTOFF') {

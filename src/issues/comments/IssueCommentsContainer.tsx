@@ -1,9 +1,9 @@
 import { Card } from 'react-bootstrap';
 import { Issue } from 'waldur-js-client';
 
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { RefreshButton } from '@waldur/marketplace/offerings/update/components/RefreshButton';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { RefreshButton } from '@/marketplace/offerings/update/components/RefreshButton';
 
 import { useIssueComments } from './api';
 import { IssueCommentButton } from './IssueCommentButton';

@@ -4,8 +4,8 @@ import React, { FunctionComponent } from 'react';
 import { Modal } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 
-import { ErrorMessage } from '@waldur/ErrorMessage';
-import { type RootState } from '@waldur/store/reducers';
+import { ErrorMessage } from '@/ErrorMessage';
+import { type RootState } from '@/store/reducers';
 
 import { closeModalDialog } from './actions';
 

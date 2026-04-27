@@ -5,7 +5,7 @@ import {
   OfferingComponent,
 } from 'waldur-js-client';
 
-import { formatDateTime, parseDate } from '@waldur/core/dateUtils';
+import { formatDateTime, parseDate } from '@/core/dateUtils';
 
 import { ResourcePlanPeriod, UsageReportContext } from './types';
 

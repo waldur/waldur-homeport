@@ -1,7 +1,7 @@
-import { IdentityProviderLogo } from '@waldur/auth/providers/IdentityProviderLogo';
-import { ExternalLink } from '@waldur/core/ExternalLink';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
+import { IdentityProviderLogo } from '@/auth/providers/IdentityProviderLogo';
+import { ExternalLink } from '@/core/ExternalLink';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
 
 interface IdentityProviderIndicatorProps {
   user: {

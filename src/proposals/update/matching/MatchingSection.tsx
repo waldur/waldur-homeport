@@ -5,12 +5,12 @@ import { FC, useCallback, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 import { proposalProtectedCallsMatchingConfigurationRetrieve } from 'waldur-js-client';
 
-import { LoadingErred } from '@waldur/core/LoadingErred';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { Call } from '@waldur/proposals/types';
+import { LoadingErred } from '@/core/LoadingErred';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { Call } from '@/proposals/types';
 
 import { EditMatchingSettingButton } from './EditMatchingSettingButton';
 import { MatchingSummaryButton } from './MatchingSummaryButton';

@@ -1,7 +1,7 @@
 import { CheckIcon } from '@phosphor-icons/react';
 
-import { translate } from '@waldur/i18n';
-import { DialogActionButton } from '@waldur/resource/actions/DialogActionButton';
+import { translate } from '@/i18n';
+import { DialogActionButton } from '@/resource/actions/DialogActionButton';
 
 import { ReviewDialog } from './ReviewDialog';
 

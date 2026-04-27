@@ -1,8 +1,8 @@
 import { useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { FilteredEventsButton } from '@waldur/events/FilteredEventsButton';
-import { getProject } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { FilteredEventsButton } from '@/events/FilteredEventsButton';
+import { getProject } from '@/workspace/selectors';
 
 export const ProjectPermissionsLogButton = ({
   projectId,

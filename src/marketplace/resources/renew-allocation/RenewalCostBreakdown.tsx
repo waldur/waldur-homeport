@@ -9,13 +9,13 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { FAST_STALE_TIME, STALE_TIME } from '@waldur/core/constants';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { translate } from '@waldur/i18n';
-import { getFormLimitSerializer } from '@waldur/marketplace/common/registry';
+import { FAST_STALE_TIME, STALE_TIME } from '@/core/constants';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { translate } from '@/i18n';
+import { getFormLimitSerializer } from '@/marketplace/common/registry';
 
 import { RenewAllocationFormData } from './types';
 

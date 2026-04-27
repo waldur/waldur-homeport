@@ -3,10 +3,10 @@ import { useSelector } from 'react-redux';
 import { useDispatch } from 'react-redux';
 import { Field, reduxForm, change } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { organizationAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { getUser, isStaffOrSupport } from '@waldur/workspace/selectors';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
+import { getUser, isStaffOrSupport } from '@/workspace/selectors';
 
 export const ORGANIZATION_FILTER_FORM = 'OrganizationSummaryFilter';
 

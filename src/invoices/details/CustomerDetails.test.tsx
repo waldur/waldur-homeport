@@ -5,7 +5,7 @@ import {
   CustomerDetails as CustomerDetailsType,
 } from 'waldur-js-client';
 
-import { Customer } from '@waldur/workspace/types';
+import { Customer } from '@/workspace/types';
 
 import { CustomerDetails } from './CustomerDetails';
 

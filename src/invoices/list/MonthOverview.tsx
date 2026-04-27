@@ -2,12 +2,12 @@ import { ArrowDownIcon, ArrowUpIcon, MinusIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useMemo } from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
 
-import { ENV } from '@waldur/core/config';
-import { parseDate } from '@waldur/core/dateUtils';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { Customer } from '@waldur/workspace/types';
+import { ENV } from '@/core/config';
+import { parseDate } from '@/core/dateUtils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { Customer } from '@/workspace/types';
 
 import { groupInvoiceItems } from '../details/utils';
 import { Invoice } from '../types';

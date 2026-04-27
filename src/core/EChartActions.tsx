@@ -2,10 +2,10 @@ import { FileCsvIcon, FileXlsIcon, PrinterIcon } from '@phosphor-icons/react';
 import { FC, useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { translate } from '@waldur/i18n';
-import { showInfo } from '@waldur/store/notify';
-import exportAs from '@waldur/table/exporters';
-import { ExportData } from '@waldur/table/exporters/types';
+import { translate } from '@/i18n';
+import { showInfo } from '@/store/notify';
+import exportAs from '@/table/exporters';
+import { ExportData } from '@/table/exporters/types';
 
 import { Tip } from './Tooltip';
 
@@ -19,7 +19,7 @@ interface EChartActionsProps {
 
 const generatePDF = async (image: any, title?: string) => {
   const pdfmake = await import('pdfmake/build/pdfmake.min');
-  const { getFonts } = await import('@waldur/table/exporters/pdf');
+  const { getFonts } = await import('@/table/exporters/pdf');
 
   const docDefinition = {
     pageSize: 'A4',

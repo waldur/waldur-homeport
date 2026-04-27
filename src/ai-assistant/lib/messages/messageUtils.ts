@@ -6,7 +6,7 @@ import {
   BlockBasedMetadata,
   BlockHistoryEntry,
   MessageHandlerDependencies,
-} from '@waldur/ai-assistant/lib/types';
+} from '@/ai-assistant/lib/types';
 
 /**
  * Maximum number of block history entries to retain per message.

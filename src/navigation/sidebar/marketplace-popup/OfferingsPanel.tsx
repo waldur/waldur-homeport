@@ -6,13 +6,13 @@ import { ListGroupItem, Stack } from 'react-bootstrap';
 import { FixedSizeList as List } from 'react-window';
 import paginate from 'react-window-paginated';
 
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { TextWithoutFormatting } from '@waldur/core/TextWithoutFormatting';
-import { Tip } from '@waldur/core/Tooltip';
-import { truncate } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { Offering } from '@waldur/marketplace/types';
-import { getItemAbbreviation } from '@waldur/navigation/workspace/context-selector/utils';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { TextWithoutFormatting } from '@/core/TextWithoutFormatting';
+import { Tip } from '@/core/Tooltip';
+import { truncate } from '@/core/utils';
+import { translate } from '@/i18n';
+import { Offering } from '@/marketplace/types';
+import { getItemAbbreviation } from '@/navigation/workspace/context-selector/utils';
 
 import { RECENTLY_ADDED_OFFERINGS_UUID } from './constants';
 import { fetchOfferingsByPage } from './utils';

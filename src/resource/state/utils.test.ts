@@ -1,7 +1,7 @@
 import { describe, expect, it } from 'vitest';
 
-import { INSTANCE_TYPE } from '@waldur/openstack/constants';
-import { Resource } from '@waldur/resource/types';
+import { INSTANCE_TYPE } from '@/openstack/constants';
+import { Resource } from '@/resource/types';
 
 import { getResourceState } from './utils';
 

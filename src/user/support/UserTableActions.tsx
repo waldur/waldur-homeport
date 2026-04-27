@@ -1,12 +1,12 @@
 import { PlusIcon, UserPlusIcon } from '@phosphor-icons/react';
 import { useDispatch, useSelector } from 'react-redux';
 
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { isStaff } from '@waldur/workspace/selectors';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionButton } from '@/table/ActionButton';
+import { isStaff } from '@/workspace/selectors';
 
 const AddRemoteUserDialog = lazyComponent(() =>
   import('./AddRemoteUserDialog').then((module) => ({

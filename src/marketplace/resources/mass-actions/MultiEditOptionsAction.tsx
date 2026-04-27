@@ -3,14 +3,14 @@ import { useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { EditAction } from '@waldur/form/EditAction';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { useUser } from '@waldur/workspace/hooks';
+import { lazyComponent } from '@/core/lazyComponent';
+import { EditAction } from '@/form/EditAction';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { ActionButton } from '@/table/ActionButton';
+import { useUser } from '@/workspace/hooks';
 
 const MultiEditOptionsDialog = lazyComponent(() =>
   import('./MultiEditOptionsDialog').then((module) => ({

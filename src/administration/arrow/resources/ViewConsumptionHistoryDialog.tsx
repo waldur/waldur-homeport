@@ -1,12 +1,12 @@
 import type { Resource, ArrowConsumptionRecord } from 'waldur-js-client';
 
-import { Badge } from '@waldur/core/Badge';
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { useResourceConsumptionHistory } from '../api';
 

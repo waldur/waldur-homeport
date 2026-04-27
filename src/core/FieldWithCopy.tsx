@@ -1,4 +1,4 @@
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { CopyToClipboardButton } from './CopyToClipboardButton';
 

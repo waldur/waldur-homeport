@@ -1,9 +1,9 @@
 import { FC } from 'react';
 // import { QuestionAdmin } from 'waldur-js-client';
 
-import { EditModalButton } from '@waldur/core/buttons';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { QUESTION_FORM_ID } from '@waldur/marketplace-checklist/constants';
+import { EditModalButton } from '@/core/buttons';
+import { lazyComponent } from '@/core/lazyComponent';
+import { QUESTION_FORM_ID } from '@/marketplace-checklist/constants';
 
 const QuestionFormDialog = lazyComponent(() =>
   import('./QuestionFormDialog').then((module) => ({

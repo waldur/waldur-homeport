@@ -2,10 +2,10 @@ import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Col, Row, Table } from 'react-bootstrap';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { AccordionCard } from '@/core/AccordionCard';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 import {
   getRabbitMQOverview,

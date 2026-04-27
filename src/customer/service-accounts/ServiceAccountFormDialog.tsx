@@ -13,19 +13,14 @@ import {
   ProjectServiceAccountRequest,
 } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import {
-  FormContainer,
-  StringField,
-  SubmitButton,
-  TextField,
-} from '@waldur/form';
-import { EmailField } from '@waldur/form/EmailField';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { lazyComponent } from '@/core/lazyComponent';
+import { FormContainer, StringField, SubmitButton, TextField } from '@/form';
+import { EmailField } from '@/form/EmailField';
+import { translate } from '@/i18n';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ServiceAccountsProps } from './type';
 

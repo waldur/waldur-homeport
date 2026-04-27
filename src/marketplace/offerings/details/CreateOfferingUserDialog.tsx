@@ -1,11 +1,11 @@
 import { useDispatch } from 'react-redux';
 import { marketplaceOfferingUsersCreate } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { userAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceActionDialog } from '@waldur/resource/actions/ResourceActionDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { translate } from '@/i18n';
+import { userAutocomplete } from '@/marketplace/common/autocompletes';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const CreateOfferingUserDialog = ({
   resolve: { offering, onSuccess },

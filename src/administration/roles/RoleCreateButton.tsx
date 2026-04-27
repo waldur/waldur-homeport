@@ -2,10 +2,10 @@ import { useCallback } from 'react';
 import { useDispatch } from 'react-redux';
 import { rolesCreate } from 'waldur-js-client';
 
-import { AddButton } from '@waldur/core/AddButton';
-import { ENV } from '@waldur/core/config';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { closeModalDialog, openModalDialog } from '@waldur/modal/actions';
+import { AddButton } from '@/core/AddButton';
+import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
+import { closeModalDialog, openModalDialog } from '@/modal/actions';
 
 import { getRoles } from './utils';
 

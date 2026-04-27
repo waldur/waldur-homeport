@@ -1,8 +1,8 @@
 import { FC, useMemo } from 'react';
 import { OrderStatsSummary } from 'waldur-js-client';
 
-import { SummaryWidget } from '@waldur/core/SummaryWidget';
-import { translate } from '@waldur/i18n';
+import { SummaryWidget } from '@/core/SummaryWidget';
+import { translate } from '@/i18n';
 
 interface OrdersSummaryCardsProps {
   stats: OrderStatsSummary;

@@ -1,9 +1,9 @@
 import { FC } from 'react';
 import { ProjectTemplate } from 'waldur-js-client';
 
-import { Link } from '@waldur/core/Link';
-import { translate } from '@waldur/i18n';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { Link } from '@/core/Link';
+import { translate } from '@/i18n';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface OwnProps {
   row: ProjectTemplate;

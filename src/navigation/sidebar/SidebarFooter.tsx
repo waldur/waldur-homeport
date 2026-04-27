@@ -1,9 +1,9 @@
 import classNames from 'classnames';
 import { useSelector } from 'react-redux';
 
-import { AdminMenu } from '@waldur/navigation/sidebar/AdminMenu';
-import { SupportMenu } from '@waldur/navigation/sidebar/SupportMenu';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { AdminMenu } from '@/navigation/sidebar/AdminMenu';
+import { SupportMenu } from '@/navigation/sidebar/SupportMenu';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 export const SidebarFooter = ({ menuClassNames }) => {
   const visible = useSelector(isStaffOrSupport);

@@ -1,13 +1,10 @@
 import { PlugsIcon } from '@phosphor-icons/react';
 import { openstackVolumesDetach } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { AsyncActionItem } from '@waldur/resource/actions/AsyncActionItem';
-import {
-  validateRuntimeState,
-  validateState,
-} from '@waldur/resource/actions/base';
-import { ActionItemType } from '@waldur/resource/actions/types';
+import { translate } from '@/i18n';
+import { AsyncActionItem } from '@/resource/actions/AsyncActionItem';
+import { validateRuntimeState, validateState } from '@/resource/actions/base';
+import { ActionItemType } from '@/resource/actions/types';
 
 import { isBootable } from './utils';
 

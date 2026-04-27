@@ -1,6 +1,6 @@
 import { FC } from 'react';
 
-import { CustomerListContainer } from '@waldur/customer/list/CustomerListContainer';
+import { CustomerListContainer } from '@/customer/list/CustomerListContainer';
 
 import { ReportingTitle } from '../ReportingTitle';
 

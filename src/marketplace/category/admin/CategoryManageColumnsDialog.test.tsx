@@ -8,10 +8,10 @@ import {
 } from 'waldur-js-client';
 import { marketplaceCategoryColumnsList } from 'waldur-js-client';
 
-import { Category } from '@waldur/marketplace/types';
-import { waitForConfirmation } from '@waldur/modal/actions';
-import { createActionStore } from '@waldur/resource/actions/testUtils';
-import { useNotify } from '@waldur/store/hooks';
+import { Category } from '@/marketplace/types';
+import { waitForConfirmation } from '@/modal/actions';
+import { createActionStore } from '@/resource/actions/testUtils';
+import { useNotify } from '@/store/hooks';
 
 import { CategoryManageColumnsDialog } from './CategoryManageColumnsDialog';
 
@@ -22,8 +22,8 @@ const category = {
 } as Category;
 
 vi.mock('waldur-js-client');
-vi.mock('@waldur/store/hooks');
-vi.mock('@waldur/modal/actions');
+vi.mock('@/store/hooks');
+vi.mock('@/modal/actions');
 
 describe('CategoryManageColumnsDialog', () => {
   const renderDialog = () => {

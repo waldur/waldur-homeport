@@ -7,13 +7,13 @@ import { Table } from 'react-bootstrap';
 import { useDispatch, useSelector } from 'react-redux';
 import { Issue, supportIssuesSync } from 'waldur-js-client';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { isStaffOrSupport } from '@waldur/workspace/selectors';
+import { formatDateTime } from '@/core/dateUtils';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 interface ProcessingLogEntry {
   event: string;

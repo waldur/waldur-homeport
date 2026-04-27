@@ -5,14 +5,14 @@ import {
   UsersMeRetrieveData,
 } from 'waldur-js-client';
 
-import { getRoles } from '@waldur/administration/roles/utils';
-import { getHeaders, initApiClient } from '@waldur/core/api';
-import { ENV } from '@waldur/core/config';
-import { ImpersonationStorage } from '@waldur/core/StorageManager';
-import store from '@waldur/store/store';
-import { getProfileCompleteness } from '@waldur/user/useProfileCompleteness';
-import { setCurrentUser, setImpersonatorUser } from '@waldur/workspace/actions';
-import { getUser } from '@waldur/workspace/selectors';
+import { getRoles } from '@/administration/roles/utils';
+import { getHeaders, initApiClient } from '@/core/api';
+import { ENV } from '@/core/config';
+import { ImpersonationStorage } from '@/core/StorageManager';
+import store from '@/store/store';
+import { getProfileCompleteness } from '@/user/useProfileCompleteness';
+import { setCurrentUser, setImpersonatorUser } from '@/workspace/actions';
+import { getUser } from '@/workspace/selectors';
 
 export const getCurrentUser = async (
   options?: Options<UsersMeRetrieveData>,

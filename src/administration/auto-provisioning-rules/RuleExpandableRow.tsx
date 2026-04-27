@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { Col, Row } from 'react-bootstrap';
 import { Rule } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { Field } from '@waldur/resource/summary';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
+import { translate } from '@/i18n';
+import { Field } from '@/resource/summary';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
 
 interface RuleExpandableRowProps {
   row: Rule;

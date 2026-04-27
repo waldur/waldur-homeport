@@ -1,6 +1,6 @@
-import { BaseEventsList } from '@waldur/events/BaseEventsList';
-import { translate } from '@waldur/i18n';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
+import { BaseEventsList } from '@/events/BaseEventsList';
+import { translate } from '@/i18n';
+import { ModalDialog } from '@/modal/ModalDialog';
 
 export const FilteredEventsDialog = ({ filter }) => (
   <ModalDialog headerLess bodyClassName="p-0">

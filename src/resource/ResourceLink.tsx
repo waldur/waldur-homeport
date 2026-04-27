@@ -1,6 +1,6 @@
 import React, { FunctionComponent } from 'react';
 
-import { Link } from '@waldur/core/Link';
+import { Link } from '@/core/Link';
 
 interface ResourceLinkProps {
   uuid: string;

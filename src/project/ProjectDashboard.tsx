@@ -5,31 +5,27 @@ import { Col, Row } from 'react-bootstrap';
 import { useSelector, useDispatch } from 'react-redux';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
-import { count, parseSelectData } from '@waldur/core/api';
-import { Badge } from '@waldur/core/Badge';
-import {
-  SHORT_STALE_TIME,
-  STALE_TIME,
-  UI_STALE_TIME,
-} from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { Panel } from '@waldur/core/Panel';
-import { TruncatedMarkdown } from '@waldur/core/TruncatedMarkdown';
-import { filterComponentsWithUsage } from '@waldur/customer/dashboard/utils';
-import { COMMON_WIDGET_HEIGHT } from '@waldur/dashboard/constants';
-import { TeamWidget } from '@waldur/dashboard/TeamWidget';
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { EditButton } from '@waldur/form/EditButton';
-import { translate } from '@waldur/i18n';
-import { useCreateInvitation } from '@waldur/invitations/actions/useCreateInvitation';
-import { AggregateLimitWidget } from '@waldur/marketplace/aggregate-limits/AggregateLimitWidget';
-import { NON_TERMINATED_STATES } from '@waldur/marketplace/resources/list/constants';
-import { openModalDialog } from '@waldur/modal/actions';
-import { PermissionEnum } from '@waldur/permissions/enums';
-import { hasPermission } from '@waldur/permissions/hasPermission';
-import { useUser } from '@waldur/workspace/hooks';
-import { getProject, getUser } from '@waldur/workspace/selectors';
+import { count, parseSelectData } from '@/core/api';
+import { Badge } from '@/core/Badge';
+import { SHORT_STALE_TIME, STALE_TIME, UI_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { Panel } from '@/core/Panel';
+import { TruncatedMarkdown } from '@/core/TruncatedMarkdown';
+import { filterComponentsWithUsage } from '@/customer/dashboard/utils';
+import { COMMON_WIDGET_HEIGHT } from '@/dashboard/constants';
+import { TeamWidget } from '@/dashboard/TeamWidget';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { EditButton } from '@/form/EditButton';
+import { translate } from '@/i18n';
+import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
+import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
+import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
+import { openModalDialog } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
+import { getProject, getUser } from '@/workspace/selectors';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';

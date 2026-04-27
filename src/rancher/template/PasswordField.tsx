@@ -3,9 +3,9 @@ import { FormControl, InputGroup } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 
-import { range } from '@waldur/core/utils';
-import { translate } from '@waldur/i18n';
-import { ActionButton } from '@waldur/table/ActionButton';
+import { range } from '@/core/utils';
+import { translate } from '@/i18n';
+import { ActionButton } from '@/table/ActionButton';
 
 import { FieldProps } from '../types';
 

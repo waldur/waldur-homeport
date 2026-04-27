@@ -1,10 +1,10 @@
 import { ClockCounterClockwiseIcon } from '@phosphor-icons/react';
 import type { Resource } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { DialogActionItem } from '@waldur/resource/actions/DialogActionItem';
-import { DropdownActionItemType } from '@waldur/table/types';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { DialogActionItem } from '@/resource/actions/DialogActionItem';
+import { DropdownActionItemType } from '@/table/types';
 
 const ViewConsumptionHistoryDialog = lazyComponent(() =>
   import('./ViewConsumptionHistoryDialog').then((module) => ({

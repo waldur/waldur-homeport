@@ -9,10 +9,10 @@ import {
   useRef,
 } from 'react';
 
-import { ImagePlaceholder } from '@waldur/core/ImagePlaceholder';
-import { formatFilesize } from '@waldur/core/utils';
-import { CompactSubmitButton } from '@waldur/form/CompactSubmitButton';
-import { translate } from '@waldur/i18n';
+import { ImagePlaceholder } from '@/core/ImagePlaceholder';
+import { formatFilesize } from '@/core/utils';
+import { CompactSubmitButton } from '@/form/CompactSubmitButton';
+import { translate } from '@/i18n';
 
 import { FormField } from './types';
 import './ImageField.scss';

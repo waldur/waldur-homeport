@@ -1,8 +1,8 @@
 import { useContext } from 'react';
 import { AccordionContext } from 'react-bootstrap';
 
-import { OrderDetailsProps } from '@waldur/marketplace/types';
-import { OfferingConfigurationDetails } from '@waldur/support/OfferingConfigurationDetails';
+import { OrderDetailsProps } from '@/marketplace/types';
+import { OfferingConfigurationDetails } from '@/support/OfferingConfigurationDetails';
 
 import { BookingResourcesCalendar } from './offering/BookingResourcesCalendar';
 

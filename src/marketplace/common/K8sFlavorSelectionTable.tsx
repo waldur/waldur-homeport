@@ -11,20 +11,20 @@ import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { OpenStackFlavor, openstackFlavorsList } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { Tip } from '@waldur/core/Tooltip';
-import { formatFilesize } from '@waldur/core/utils';
-import { required } from '@waldur/core/validators';
-import { FilterBox } from '@waldur/form/FilterBox';
-import { SubmitButton } from '@waldur/form/SubmitButton';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { useModal } from '@waldur/modal/hooks';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { createFetcher } from '@waldur/table/api';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { UI_STALE_TIME } from '@/core/constants';
+import { Tip } from '@/core/Tooltip';
+import { formatFilesize } from '@/core/utils';
+import { required } from '@/core/validators';
+import { FilterBox } from '@/form/FilterBox';
+import { SubmitButton } from '@/form/SubmitButton';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useModal } from '@/modal/hooks';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { createFetcher } from '@/table/api';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 import {
   LocalOpenStackFlavor,

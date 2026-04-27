@@ -2,10 +2,10 @@ import { FunctionComponent } from 'react';
 import { Table } from 'react-bootstrap';
 import { Field } from 'redux-form';
 
-import { InputField } from '@waldur/form/InputField';
-import { translate } from '@waldur/i18n';
-import { parseIntField } from '@waldur/marketplace/common/utils';
-import { OfferingComponent } from '@waldur/marketplace/types';
+import { InputField } from '@/form/InputField';
+import { translate } from '@/i18n';
+import { parseIntField } from '@/marketplace/common/utils';
+import { OfferingComponent } from '@/marketplace/types';
 
 interface DiscountsTableProps {
   components: OfferingComponent[];

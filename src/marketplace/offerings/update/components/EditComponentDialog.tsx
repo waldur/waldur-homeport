@@ -4,13 +4,13 @@ import { connect, useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateOfferingComponent } from 'waldur-js-client';
 
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { formatComponent } from '@waldur/marketplace/offerings/store/utils';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { TENANT_TYPE } from '@waldur/openstack/constants';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { formatComponent } from '@/marketplace/offerings/store/utils';
+import { closeModalDialog } from '@/modal/actions';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { TENANT_TYPE } from '@/openstack/constants';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { parseComponent } from '../utils';
 

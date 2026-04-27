@@ -3,12 +3,12 @@ import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceOrdersRetrieve, OrderDetails } from 'waldur-js-client';
 
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
-import { ActionItem } from '@waldur/resource/actions/ActionItem';
-import { ActionButton } from '@waldur/table/ActionButton';
-import { updateEntity } from '@waldur/table/actions';
+import { lazyComponent } from '@/core/lazyComponent';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
+import { ActionItem } from '@/resource/actions/ActionItem';
+import { ActionButton } from '@/table/ActionButton';
+import { updateEntity } from '@/table/actions';
 
 import {
   TABLE_MARKETPLACE_ORDERS,

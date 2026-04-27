@@ -1,8 +1,8 @@
-import { isFeatureVisible } from '@waldur/features/connect';
-import { MarketplaceFeatures } from '@waldur/FeaturesEnums';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { router } from '@waldur/router';
+import { isFeatureVisible } from '@/features/connect';
+import { MarketplaceFeatures } from '@/FeaturesEnums';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { router } from '@/router';
 
 export const CallProposalsButton = ({ call }) =>
   isFeatureVisible(MarketplaceFeatures.call_only) ? null : (

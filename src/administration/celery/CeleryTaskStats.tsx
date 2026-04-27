@@ -1,10 +1,10 @@
 import { useMemo } from 'react';
 
-import { AccordionCard } from '@waldur/core/AccordionCard';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import Table from '@waldur/table/Table';
-import { useTable } from '@waldur/table/useTable';
+import { AccordionCard } from '@/core/AccordionCard';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import Table from '@/table/Table';
+import { useTable } from '@/table/useTable';
 
 interface CeleryTaskStatsProps {
   total: Record<string, number>;

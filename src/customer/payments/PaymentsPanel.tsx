@@ -2,16 +2,16 @@ import { useEffect, useState, FunctionComponent } from 'react';
 import { Alert } from 'react-bootstrap';
 import { useSelector } from 'react-redux';
 
-import { Link } from '@waldur/core/Link';
-import { PaymentsList } from '@waldur/customer/payments/PaymentsList';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { getActivePaymentProfile } from '@waldur/invoices/details/utils';
+import { Link } from '@/core/Link';
+import { PaymentsList } from '@/customer/payments/PaymentsList';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { getActivePaymentProfile } from '@/invoices/details/utils';
 import {
   getCustomer,
   isStaff as isStaffSelector,
   isSupport as isSupportSelector,
   isOwner as isOwnerSelector,
-} from '@waldur/workspace/selectors';
+} from '@/workspace/selectors';
 
 export const PaymentsPanel: FunctionComponent = () => {
   const customer = useSelector(getCustomer);

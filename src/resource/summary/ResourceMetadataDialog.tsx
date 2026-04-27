@@ -1,7 +1,7 @@
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { OpenStackTenant } from '@waldur/openstack/openstack-tenant/types';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { OpenStackTenant } from '@/openstack/openstack-tenant/types';
 
 import { Resource } from '../types';
 

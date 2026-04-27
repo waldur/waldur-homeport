@@ -1,12 +1,12 @@
 import { CaretLeftIcon, CaretRightIcon } from '@phosphor-icons/react';
 import { FC, ReactNode } from 'react';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { translate } from '@waldur/i18n';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { wrapTooltip } from '@waldur/table/ActionButton';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { translate } from '@/i18n';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { wrapTooltip } from '@/table/ActionButton';
 
 import type { WizardStepProps } from './types';
 import { WizardStepIndicator } from './WizardStepIndicator';

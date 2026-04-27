@@ -1,13 +1,13 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { formatISOWithoutZone, parseDate } from '@waldur/core/dateUtils';
-import { required } from '@waldur/core/validators';
-import { FormContainer } from '@waldur/form';
-import { DateTimeField } from '@waldur/form/DateTimeField';
-import { TimezoneField } from '@waldur/form/TimezoneField';
-import { WizardForm, WizardFormStepProps } from '@waldur/form/WizardForm';
-import { translate } from '@waldur/i18n';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { formatISOWithoutZone, parseDate } from '@/core/dateUtils';
+import { required } from '@/core/validators';
+import { FormContainer } from '@/form';
+import { DateTimeField } from '@/form/DateTimeField';
+import { TimezoneField } from '@/form/TimezoneField';
+import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
+import { translate } from '@/i18n';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const WizardFormFirstPage: FunctionComponent<WizardFormStepProps> = (
   props,

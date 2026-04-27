@@ -8,16 +8,16 @@ import {
   offeringKeycloakMembershipsList,
 } from 'waldur-js-client';
 
-import Avatar from '@waldur/core/Avatar';
-import { Badge } from '@waldur/core/Badge';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { SubmitButton } from '@waldur/form';
-import { formatJsxTemplate, translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { CloseDialogButton } from '@waldur/modal/CloseDialogButton';
-import { ModalDialog } from '@waldur/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import Avatar from '@/core/Avatar';
+import { Badge } from '@/core/Badge';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { SubmitButton } from '@/form';
+import { formatJsxTemplate, translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { ModalDialog } from '@/modal/ModalDialog';
+import { showErrorResponse, showSuccess } from '@/store/notify';
+import { renderFieldOrDash } from '@/table/utils';
 
 export const DeleteRoleDialog = ({
   resolve: { row, refetch },

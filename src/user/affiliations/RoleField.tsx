@@ -1,5 +1,5 @@
-import { Badge } from '@waldur/core/Badge';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { Badge } from '@/core/Badge';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { getRoleColor } from '../utils';
 

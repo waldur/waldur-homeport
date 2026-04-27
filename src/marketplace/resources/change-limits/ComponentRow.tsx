@@ -5,20 +5,17 @@ import { Field as FinalFormField } from 'react-final-form';
 import { useBoolean } from 'react-use';
 import { Field as FormField } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { composeValidators } from '@waldur/core/validators';
-import { NumberField } from '@waldur/form';
-import { Limits } from '@waldur/marketplace/common/types';
-import {
-  parseIntField,
-  formatIntField,
-} from '@waldur/marketplace/common/utils';
-import { getResourceComponentValidator } from '@waldur/marketplace/offerings/store/limits';
-import { ChangedLimitField } from '@waldur/marketplace/resources/change-limits/ChangedLimitField';
-import { PriceField } from '@waldur/marketplace/resources/change-limits/PriceField';
-import { Field } from '@waldur/resource/summary';
-import { ExpandableContainer } from '@waldur/table/ExpandableContainer';
-import { renderFieldOrDash } from '@waldur/table/utils';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { composeValidators } from '@/core/validators';
+import { NumberField } from '@/form';
+import { Limits } from '@/marketplace/common/types';
+import { parseIntField, formatIntField } from '@/marketplace/common/utils';
+import { getResourceComponentValidator } from '@/marketplace/offerings/store/limits';
+import { ChangedLimitField } from '@/marketplace/resources/change-limits/ChangedLimitField';
+import { PriceField } from '@/marketplace/resources/change-limits/PriceField';
+import { Field } from '@/resource/summary';
+import { ExpandableContainer } from '@/table/ExpandableContainer';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ComponentRowType } from './connector';
 

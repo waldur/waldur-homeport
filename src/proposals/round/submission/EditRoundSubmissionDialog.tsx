@@ -7,13 +7,13 @@ import {
   ProtectedRoundRequest,
 } from 'waldur-js-client';
 
-import { parseDate } from '@waldur/core/dateUtils';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { Call } from '@waldur/proposals/types';
-import { WizardFormFirstPage } from '@waldur/proposals/update/rounds/WizardFormFirstPage';
-import { getRoundInitialValues } from '@waldur/proposals/utils';
+import { parseDate } from '@/core/dateUtils';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { closeModalDialog } from '@/modal/actions';
+import { Call } from '@/proposals/types';
+import { WizardFormFirstPage } from '@/proposals/update/rounds/WizardFormFirstPage';
+import { getRoundInitialValues } from '@/proposals/utils';
 
 interface EditRoundSubmissionDialogProps {
   resolve: {

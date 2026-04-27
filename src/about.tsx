@@ -1,5 +1,5 @@
-import { StateDeclaration } from '@waldur/core/types';
-import { translate } from '@waldur/i18n';
+import { StateDeclaration } from '@/core/types';
+import { translate } from '@/i18n';
 
 import { lazyComponent } from './core/lazyComponent';
 
@@ -9,7 +9,7 @@ export const states: StateDeclaration[] = [
     url: '',
     abstract: true,
     component: lazyComponent(() =>
-      import('@waldur/navigation/Layout').then((module) => ({
+      import('@/navigation/Layout').then((module) => ({
         default: module.Layout,
       })),
     ),

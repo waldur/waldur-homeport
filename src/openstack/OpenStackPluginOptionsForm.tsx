@@ -1,12 +1,12 @@
 import { FunctionComponent, useMemo } from 'react';
 
-import { NumberField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { NumberField } from '@/form';
+import { translate } from '@/i18n';
 import {
   DefaultOfferingEditPanel,
   OfferingEditField,
-} from '@waldur/marketplace/offerings/update/DefaultOfferingEditPanel';
-import { OfferingEditPanelFormProps } from '@waldur/marketplace/offerings/update/integration/types';
+} from '@/marketplace/offerings/update/DefaultOfferingEditPanel';
+import { OfferingEditPanelFormProps } from '@/marketplace/offerings/update/integration/types';
 
 export const OpenStackPluginOptionsForm: FunctionComponent<
   OfferingEditPanelFormProps

@@ -1,7 +1,7 @@
 import { FunctionComponent, Suspense } from 'react';
 import { NestedTag } from 'waldur-js-client';
 
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 
 import { Offering } from '../types';
 

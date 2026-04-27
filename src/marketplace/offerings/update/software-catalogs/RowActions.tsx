@@ -1,4 +1,4 @@
-import { ActionsDropdownComponent } from '@waldur/table/ActionsDropdown';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 import { DeleteSoftwareCatalogButton } from './DeleteSoftwareCatalogButton';
 import { EditSoftwareCatalogButton } from './EditSoftwareCatalogButton';

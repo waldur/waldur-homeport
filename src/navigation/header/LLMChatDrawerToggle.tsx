@@ -2,27 +2,24 @@ import { SparkleIcon } from '@phosphor-icons/react';
 import React, { useEffect, useRef } from 'react';
 import { useDispatch } from 'react-redux';
 
-import { resetDrawerDOM } from '@waldur/ai-assistant/components/LLMChatDrawer';
-import { useThreadContext } from '@waldur/ai-assistant/logic/ThreadProvider';
-import {
-  isLLMChatAllowedForUser,
-  getLLMChatMode,
-} from '@waldur/ai-assistant/utils';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { openDrawerDialog, closeDrawerDialog } from '@waldur/drawer/actions';
-import { isDrawerOpen } from '@waldur/drawer/utils';
-import { translate } from '@waldur/i18n';
-import { HeaderButtonBullet } from '@waldur/navigation/header/HeaderButtonBullet';
-import { useUser } from '@waldur/workspace/hooks';
+import { resetDrawerDOM } from '@/ai-assistant/components/LLMChatDrawer';
+import { useThreadContext } from '@/ai-assistant/logic/ThreadProvider';
+import { isLLMChatAllowedForUser, getLLMChatMode } from '@/ai-assistant/utils';
+import { lazyComponent } from '@/core/lazyComponent';
+import { openDrawerDialog, closeDrawerDialog } from '@/drawer/actions';
+import { isDrawerOpen } from '@/drawer/utils';
+import { translate } from '@/i18n';
+import { HeaderButtonBullet } from '@/navigation/header/HeaderButtonBullet';
+import { useUser } from '@/workspace/hooks';
 
 const LLMChatDrawer = lazyComponent(() =>
-  import('@waldur/ai-assistant/components/LLMChatDrawer').then((module) => ({
+  import('@/ai-assistant/components/LLMChatDrawer').then((module) => ({
     default: module.LLMChatDrawer,
   })),
 );
 
 const LLMChatDrawerToolbar = lazyComponent(() =>
-  import('@waldur/ai-assistant/components/LLMChatDrawer').then((module) => ({
+  import('@/ai-assistant/components/LLMChatDrawer').then((module) => ({
     default: module.LLMChatDrawerToolbar,
   })),
 );

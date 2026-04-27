@@ -5,7 +5,7 @@ import { describe, expect, it, vi } from 'vitest';
 
 import { ComponentMultiplierConfiguration } from './ComponentMultiplierConfiguration';
 
-vi.mock('@waldur/i18n', () => ({
+vi.mock('@/i18n', () => ({
   translate: (key) => key,
 }));
 

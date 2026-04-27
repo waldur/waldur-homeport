@@ -1,10 +1,10 @@
 import { FC } from 'react';
 import { Card, ProgressBar } from 'react-bootstrap';
 
-import { formatUsageValue } from '@waldur/core/formatNumber';
-import { Tip } from '@waldur/core/Tooltip';
-import { translate } from '@waldur/i18n';
-import { ChangesAmountBadge } from '@waldur/marketplace/service-providers/dashboard/ChangesAmountBadge';
+import { formatUsageValue } from '@/core/formatNumber';
+import { Tip } from '@/core/Tooltip';
+import { translate } from '@/i18n';
+import { ChangesAmountBadge } from '@/marketplace/service-providers/dashboard/ChangesAmountBadge';
 
 interface StatisticsCardProps {
   title: string;

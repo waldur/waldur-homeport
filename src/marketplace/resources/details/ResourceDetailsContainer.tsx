@@ -6,34 +6,30 @@ import { FunctionComponent, useCallback, useEffect, useMemo } from 'react';
 import { useDispatch } from 'react-redux';
 import { marketplaceResourcesRetrieve } from 'waldur-js-client';
 
-import { ANNOUNCEMENT_ICON } from '@waldur/administration/utils';
-import { usePermissionView } from '@waldur/auth/PermissionLayout';
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { lazyComponent } from '@waldur/core/lazyComponent';
-import { LoadingSpinner } from '@waldur/core/LoadingSpinner';
-import { ErrorView } from '@waldur/ErrorView';
-import { translate } from '@waldur/i18n';
-import { openModalDialog } from '@waldur/modal/actions';
+import { ANNOUNCEMENT_ICON } from '@/administration/utils';
+import { usePermissionView } from '@/auth/PermissionLayout';
+import { UI_STALE_TIME } from '@/core/constants';
+import { lazyComponent } from '@/core/lazyComponent';
+import { LoadingSpinner } from '@/core/LoadingSpinner';
+import { ErrorView } from '@/ErrorView';
+import { translate } from '@/i18n';
+import { openModalDialog } from '@/modal/actions';
 import {
   useBreadcrumbs,
   usePageHero,
   useToolbarActions,
   useExtraAnnouncementBar,
-} from '@waldur/navigation/context';
-import { AnnouncementBar } from '@waldur/navigation/header/announcements/AnnouncementBar';
-import { usePresetBreadcrumbItems } from '@waldur/navigation/header/breadcrumb/utils';
-import { useTitle } from '@waldur/navigation/title';
-import { IBreadcrumbItem } from '@waldur/navigation/types';
-import { usePageTabsTransmitter } from '@waldur/navigation/usePageTabsTransmitter';
-import {
-  INSTANCE_TYPE,
-  TENANT_TYPE,
-  VOLUME_TYPE,
-} from '@waldur/openstack/constants';
-import { ProjectUsersBadge } from '@waldur/project/ProjectUsersBadge';
-import { router } from '@waldur/router';
-import { setCurrentResource } from '@waldur/workspace/actions';
-import { useUser } from '@waldur/workspace/hooks';
+} from '@/navigation/context';
+import { AnnouncementBar } from '@/navigation/header/announcements/AnnouncementBar';
+import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
+import { useTitle } from '@/navigation/title';
+import { IBreadcrumbItem } from '@/navigation/types';
+import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { INSTANCE_TYPE, TENANT_TYPE, VOLUME_TYPE } from '@/openstack/constants';
+import { ProjectUsersBadge } from '@/project/ProjectUsersBadge';
+import { router } from '@/router';
+import { setCurrentResource } from '@/workspace/actions';
+import { useUser } from '@/workspace/hooks';
 
 import { fetchData, getResourceTabs } from './fetchData';
 import { PolicyAttributionBanner } from './PolicyAttributionBanner';

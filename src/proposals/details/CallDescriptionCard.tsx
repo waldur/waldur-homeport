@@ -1,7 +1,7 @@
 import Markdown from 'markdown-to-jsx';
 import { Card } from 'react-bootstrap';
 
-import { translate } from '@waldur/i18n';
+import { translate } from '@/i18n';
 
 import { Call } from '../types';
 

@@ -1,8 +1,8 @@
 import { FunctionComponent } from 'react';
 
-import { formatDateTime } from '@waldur/core/dateUtils';
-import { Link } from '@waldur/core/Link';
-import { formatJsx, translate } from '@waldur/i18n';
+import { formatDateTime } from '@/core/dateUtils';
+import { Link } from '@/core/Link';
+import { formatJsx, translate } from '@/i18n';
 
 interface TermsOfServiceProps {
   initial?: boolean;

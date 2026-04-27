@@ -1,13 +1,13 @@
 import { FC, useMemo } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
 
-import { useSettingsUrlSync } from '@waldur/administration/settings/useSettingsUrlSync';
-import { NumberField, StringField } from '@waldur/form';
-import { AwesomeCheckboxField } from '@waldur/form/AwesomeCheckboxField';
-import { DateField } from '@waldur/form/DateField';
-import FormTable from '@waldur/form/FormTable';
-import { translate } from '@waldur/i18n';
-import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@waldur/marketplace-script/constants';
+import { useSettingsUrlSync } from '@/administration/settings/useSettingsUrlSync';
+import { NumberField, StringField } from '@/form';
+import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
+import { DateField } from '@/form/DateField';
+import FormTable from '@/form/FormTable';
+import { translate } from '@/i18n';
+import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
 
 import {
   DefaultOfferingEditPanel,

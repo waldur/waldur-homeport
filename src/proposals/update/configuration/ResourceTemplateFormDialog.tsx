@@ -8,15 +8,15 @@ import {
   ProviderRequestedOffering,
 } from 'waldur-js-client';
 
-import { ProgressStep } from '@waldur/core/ProgressSteps';
-import { WizardFormContainer } from '@waldur/form/WizardFormContainer';
-import { translate } from '@waldur/i18n';
-import { Offering, Plan } from '@waldur/marketplace/types';
-import { closeModalDialog } from '@waldur/modal/actions';
-import { ResourceRequestWizardFormSecondPage as Step2Plan } from '@waldur/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage';
-import { ResourceRequestWizardFormThirdPage as Step3AdditionalConfig } from '@waldur/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
-import { Call } from '@waldur/proposals/types';
-import { showErrorResponse, showSuccess } from '@waldur/store/notify';
+import { ProgressStep } from '@/core/ProgressSteps';
+import { WizardFormContainer } from '@/form/WizardFormContainer';
+import { translate } from '@/i18n';
+import { Offering, Plan } from '@/marketplace/types';
+import { closeModalDialog } from '@/modal/actions';
+import { ResourceRequestWizardFormSecondPage as Step2Plan } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormSecondPage';
+import { ResourceRequestWizardFormThirdPage as Step3AdditionalConfig } from '@/proposals/proposal/create/resource-requests-step/ResourceRequestWizardFormThirdPage';
+import { Call } from '@/proposals/types';
+import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { Step1General } from './Step1General';
 import { Step4FinalConfig } from './Step4FinalConfig';

@@ -61,7 +61,7 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
 - Use **generated filters** for table filter components (see `docs/filter-migration-guide.md`):
   1. Add config to `generate-filters-config.yaml`
   2. Run `node generate-filters.cjs`
-  3. Import from `@waldur/table/generated/` — never write manual filter components
+  3. Import from `@/table/generated/` — never write manual filter components
 
 - Follow UI/UX consistency patterns (see `docs/ui-consistency-guidelines.md`):
   - Use `renderFieldOrDash()` for null/undefined values (never `|| 'N/A'` or `|| ''`)
@@ -102,12 +102,12 @@ This script:
 
 ## Wizard Migration Patterns
 
-When migrating wizard dialogs to use `@waldur/wizard`, follow these patterns:
+When migrating wizard dialogs to use `@/wizard`, follow these patterns:
 
 ### Basic Pattern (Standard Wizards)
 
 ```tsx
-import { Wizard, WizardModal, WizardStepProps } from '@waldur/wizard';
+import { Wizard, WizardModal, WizardStepProps } from '@/wizard';
 
 // Define steps
 const steps: ProgressStep[] = [
@@ -196,14 +196,14 @@ For wizards with non-standard buttons (e.g., "Save as Draft", "Save as Template"
 
 ### Form Field Layout (React Final Form)
 
-**NEVER use `FormContainer` from `@waldur/form`** - it wraps children with redux-form's `Field` internally and will cause "Field must be inside a component decorated with reduxForm()" errors.
+**NEVER use `FormContainer` from `@/form`** - it wraps children with redux-form's `Field` internally and will cause "Field must be inside a component decorated with reduxForm()" errors.
 
 **Correct pattern for React Final Form:**
 
 ```tsx
 import { Field } from 'react-final-form';
-import { StringField, SelectField, TextField } from '@waldur/form';
-import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
+import { StringField, SelectField, TextField } from '@/form';
+import { FormGroup } from '@/marketplace/offerings/FormGroup';
 
 // Each field wrapped in FormGroup for labels, descriptions, spacing
 <FormGroup label={translate('Name')} required>
@@ -244,7 +244,7 @@ import { FormGroup } from '@waldur/marketplace/offerings/FormGroup';
 3. **Footer buttons use `type="button"`** - Prevent accidental form submission
 4. **Extract credentials helper** - Create reusable object from form values for API calls
 5. **Reset downstream state** - When user changes earlier step selection, clear dependent data
-6. **Use FormGroup, not FormContainer** - `FormContainer` is redux-form only; use `FormGroup` from `@waldur/marketplace/offerings/FormGroup` for React Final Form
+6. **Use FormGroup, not FormContainer** - `FormContainer` is redux-form only; use `FormGroup` from `@/marketplace/offerings/FormGroup` for React Final Form
 
 ## Exposing New Fields from Backend to Frontend
 

@@ -5,17 +5,17 @@ import {
   PlanUsageResponse,
 } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { PlanRemainingColumn } from '@waldur/marketplace/common/PlanRemainingColumn';
-import { createFetcher } from '@waldur/table/api';
+import { translate } from '@/i18n';
+import { PlanRemainingColumn } from '@/marketplace/common/PlanRemainingColumn';
+import { createFetcher } from '@/table/api';
 import {
   MarketplacePlansUsageStatsFilter,
   selectMarketplacePlansUsageStatsFilter,
-} from '@waldur/table/generated/MarketplacePlansUsageStatsFilter';
-import Table from '@waldur/table/Table';
-import { Column } from '@waldur/table/types';
-import { useTable } from '@waldur/table/useTable';
-import { renderFieldOrDash } from '@waldur/table/utils';
+} from '@/table/generated/MarketplacePlansUsageStatsFilter';
+import Table from '@/table/Table';
+import { Column } from '@/table/types';
+import { useTable } from '@/table/useTable';
+import { renderFieldOrDash } from '@/table/utils';
 
 import { ReportingTitle } from '../ReportingTitle';
 

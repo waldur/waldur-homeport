@@ -6,10 +6,10 @@ import {
   Resource,
 } from 'waldur-js-client';
 
-import { defaultCurrency } from '@waldur/core/formatCurrency';
-import { LoadingSpinnerSimple } from '@waldur/core/LoadingSpinner';
-import { Tip } from '@waldur/core/Tooltip';
-import { getPlanUnitAbbr } from '@waldur/marketplace/orders/utils';
+import { defaultCurrency } from '@/core/formatCurrency';
+import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
+import { Tip } from '@/core/Tooltip';
+import { getPlanUnitAbbr } from '@/marketplace/orders/utils';
 
 interface ResourceRateFieldProps {
   row: Resource;

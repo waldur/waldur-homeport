@@ -1,15 +1,15 @@
 import { FC, useMemo } from 'react';
 import { marketplacePublicOfferingsList, NestedTag } from 'waldur-js-client';
 
-import { UI_STALE_TIME } from '@waldur/core/constants';
-import { useCardStyle } from '@waldur/marketplace/landing/CardStyleContext';
+import { UI_STALE_TIME } from '@/core/constants';
+import { useCardStyle } from '@/marketplace/landing/CardStyleContext';
 import {
   OFFERING_CARD_MANDATORY_FIELDS,
   useOfferingListFilter,
-} from '@waldur/marketplace/landing/utils';
-import { Category, CategoryGroup } from '@waldur/marketplace/types';
-import { createFetcher } from '@waldur/table/api';
-import { useTable } from '@waldur/table/useTable';
+} from '@/marketplace/landing/utils';
+import { Category, CategoryGroup } from '@/marketplace/types';
+import { createFetcher } from '@/table/api';
+import { useTable } from '@/table/useTable';
 
 import { CarouselOfferingGrid } from './CarouselOfferingGrid';
 import { CarouselSection } from './CarouselSection';

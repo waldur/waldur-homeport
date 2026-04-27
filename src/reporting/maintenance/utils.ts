@@ -1,8 +1,8 @@
 import { DateTime } from 'luxon';
 import { MaintenanceAnnouncement } from 'waldur-js-client';
 
-import { translate } from '@waldur/i18n';
-import { DASH_ESCAPE_CODE } from '@waldur/table/constants';
+import { translate } from '@/i18n';
+import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { MaintenanceTimelineItem } from './types';
 

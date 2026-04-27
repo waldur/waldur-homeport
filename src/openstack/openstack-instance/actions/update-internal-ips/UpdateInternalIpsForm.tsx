@@ -4,17 +4,17 @@ import { Col, Form, Row } from 'react-bootstrap';
 import { useToggle } from 'react-use';
 import { Field, FieldArray } from 'redux-form';
 
-import { AwesomeCheckbox } from '@waldur/core/AwesomeCheckbox';
-import { required } from '@waldur/core/validators';
-import { FormGroup, SelectField } from '@waldur/form';
-import { translate } from '@waldur/i18n';
+import { AwesomeCheckbox } from '@/core/AwesomeCheckbox';
+import { required } from '@/core/validators';
+import { FormGroup, SelectField } from '@/form';
+import { translate } from '@/i18n';
 import {
   CustomIpField,
   SubnetValueContainer,
-} from '@waldur/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
-import { formatSubnet } from '@waldur/openstack/openstack-instance/utils';
-import { AsyncActionDialog } from '@waldur/resource/actions/AsyncActionDialog';
-import { ActionButton } from '@waldur/table/ActionButton';
+} from '@/openstack/openstack-instance/deploy/FormNetworkSecurityStep';
+import { formatSubnet } from '@/openstack/openstack-instance/utils';
+import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
+import { ActionButton } from '@/table/ActionButton';
 
 import { connectForm } from './utils';
 

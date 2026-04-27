@@ -2,10 +2,10 @@ import { FC } from 'react';
 import { Props as SelectProps } from 'react-select';
 import { Field } from 'redux-form';
 
-import { AsyncPaginate } from '@waldur/form/themed-select';
-import { translate } from '@waldur/i18n';
-import { resourceAutocomplete } from '@waldur/marketplace/common/autocompletes';
-import { formatResourceShort } from '@waldur/marketplace/utils';
+import { AsyncPaginate } from '@/form/themed-select';
+import { translate } from '@/i18n';
+import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
+import { formatResourceShort } from '@/marketplace/utils';
 
 interface ResourceAutocompleteProps {
   params?: Record<string, any>;
