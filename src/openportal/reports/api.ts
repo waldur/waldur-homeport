@@ -18,10 +18,15 @@ import {
   CachedProjectUsageReport,
   CachedProjectStorageReport,
   Project,
+  openportalOfferingMappingRetrieve,
+  openportalProjectMappingRetrieve,
+  openportalUserMappingRetrieve,
+  OfferingMappingResponse,
+  ProjectMappingResponse,
+  UserMappingResponse,
 } from 'waldur-js-client';
 
-// eslint-disable-next-line waldur-custom/no-direct-client-usage
-import { get, getAllPages } from '@/core/api';
+import { getAllPages } from '@/core/api';
 import type { ProgressCallback } from '@/core/api';
 
 import { getCached, setCached, TTL } from './localStorageCache';
@@ -104,8 +109,9 @@ type MappingProgressCallback = (batchesDone: number) => void;
  * the denominator computed by `mappingBatchCount(ids)` stays accurate.
  */
 async function fetchMappingBatched<T>(
-  endpoint: string,
+  cachePrefix: string,
   identifiers: string[],
+  fetcher: (identifiers: string[]) => Promise<Record<string, T>>,
   onProgress?: MappingProgressCallback,
 ): Promise<Record<string, T>> {
   if (identifiers.length === 0) return {};
@@ -115,7 +121,7 @@ async function fetchMappingBatched<T>(
 
   // Check per-identifier cache first
   for (const id of identifiers) {
-    const cached = getCached<T>(`map-${endpoint}-${id}`, TTL.MAPPINGS);
+    const cached = getCached<T>(`map-${cachePrefix}-${id}`, TTL.MAPPINGS);
     if (cached !== null) {
       result[id] = cached;
     } else {
@@ -133,13 +139,9 @@ async function fetchMappingBatched<T>(
   // Fetch uncached identifiers in batches
   for (let i = 0; i < uncachedIds.length; i += MAPPING_BATCH_SIZE) {
     const chunk = uncachedIds.slice(i, i + MAPPING_BATCH_SIZE);
-    const params = new URLSearchParams();
-    for (const id of chunk) params.append('identifier', id);
-    const data = await get<Record<string, T>>(
-      `/openportal/${endpoint}/?${params}`,
-    );
+    const data = await fetcher(chunk);
     for (const [id, value] of Object.entries(data)) {
-      setCached(`map-${endpoint}-${id}`, value);
+      setCached(`map-${cachePrefix}-${id}`, value);
       result[id] = value as T;
     }
     if (onProgress)
@@ -149,36 +151,44 @@ async function fetchMappingBatched<T>(
   return result;
 }
 
-interface OfferingInfo {
-  uuid: string;
-  name: string;
-  description: string;
-  slug: string;
-}
-
-interface ProjectInfo {
-  uuid: string;
-  name: string;
-  customer_uuid: string;
-  customer_name: string;
-}
-
-interface UserInfo {
-  uuid: string;
-  full_name: string;
-  username: string;
-  email: string;
-}
-
 export const fetchOfferingMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
-) => fetchMappingBatched<OfferingInfo>('offering_mapping', ids, onProgress);
+) =>
+  fetchMappingBatched<OfferingMappingResponse>(
+    'offering_mapping',
+    ids,
+    (identifier) =>
+      openportalOfferingMappingRetrieve({ query: { identifier } }).then(
+        (res) => res.data as unknown as Record<string, OfferingMappingResponse>,
+      ),
+    onProgress,
+  );
+
 export const fetchProjectMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
-) => fetchMappingBatched<ProjectInfo>('project_mapping', ids, onProgress);
+) =>
+  fetchMappingBatched<ProjectMappingResponse>(
+    'project_mapping',
+    ids,
+    (identifier) =>
+      openportalProjectMappingRetrieve({ query: { identifier } }).then(
+        (res) => res.data as unknown as Record<string, ProjectMappingResponse>,
+      ),
+    onProgress,
+  );
+
 export const fetchUserMapping = (
   ids: string[],
   onProgress?: MappingProgressCallback,
-) => fetchMappingBatched<UserInfo>('user_mapping', ids, onProgress);
+) =>
+  fetchMappingBatched<UserMappingResponse>(
+    'user_mapping',
+    ids,
+    (identifier) =>
+      openportalUserMappingRetrieve({ query: { identifier } }).then(
+        (res) => res.data as unknown as Record<string, UserMappingResponse>,
+      ),
+    onProgress,
+  );
