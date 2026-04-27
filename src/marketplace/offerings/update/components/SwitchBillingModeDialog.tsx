@@ -106,11 +106,7 @@ export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
 
-  const availableModes = BILLING_MODES.filter(
-    (mode) =>
-      mode.value !== 'usage' ||
-      props.resolve.offering.type !== 'OpenStack.Tenant',
-  );
+  const availableModes = BILLING_MODES;
 
   return (
     <Form<{ billing_mode: string }>
