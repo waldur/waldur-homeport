@@ -1,3 +1,4 @@
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { get } from '@/core/api';
 
 import {

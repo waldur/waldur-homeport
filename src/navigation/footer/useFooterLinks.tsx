@@ -5,6 +5,7 @@ import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 
 import * as AuthService from '@/auth/AuthService';
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { count } from '@/core/api';
 import { ENV } from '@/core/config';
 import { GRID_BREAKPOINTS, SHORT_STALE_TIME } from '@/core/constants';

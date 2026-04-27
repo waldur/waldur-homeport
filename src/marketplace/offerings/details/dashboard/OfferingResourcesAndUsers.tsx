@@ -12,6 +12,7 @@ import { FC } from 'react';
 import { ProgressBar } from 'react-bootstrap';
 import { Offering } from 'waldur-js-client';
 
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { get } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { UI_STALE_TIME } from '@/core/constants';

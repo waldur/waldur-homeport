@@ -20,6 +20,7 @@ import {
   Project,
 } from 'waldur-js-client';
 
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { get, getAllPages } from '@/core/api';
 import type { ProgressCallback } from '@/core/api';
 

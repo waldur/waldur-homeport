@@ -8,6 +8,7 @@ import {
   usersUserRegistrationTrendList,
 } from 'waldur-js-client';
 
+// eslint-disable-next-line waldur-custom/no-direct-client-usage
 import { count } from '@/core/api';
 import { STALE_TIME } from '@/core/constants'; // 5 minutes
 
