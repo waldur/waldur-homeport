@@ -26,6 +26,7 @@ export const UserDetailsButton: React.FC<UserDetailsButtonProps> = ({
       title={translate('Details')}
       action={callback}
       iconNode={<EyeIcon weight="bold" />}
+      staff
     />
   );
 };
