@@ -50,6 +50,7 @@ export const resourcesListRequiredFields = (hasExpandableView = true) =>
     'restrict_member_access', // ResourceFlags inline badge
     'project_is_in_grace_period', // ResourceFlags inline badge
     'project_effective_end_date', // ResourceFlags inline badge (expired/conflict)
+    'project_uuid', // rowActions permissions check
     'state', // ResourceFlags overdue badge skips terminating/terminated
   ].filter(Boolean);
 
