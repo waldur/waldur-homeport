@@ -1,11 +1,9 @@
 import {
-  CaretDownIcon,
   EnvelopeSimpleIcon,
   MagnifyingGlassIcon,
   PaperPlaneTiltIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useState } from 'react';
-import { Dropdown } from 'react-bootstrap';
 import { useDispatch } from 'react-redux';
 import { proposalProtectedCallsSendInvitations } from 'waldur-js-client';
 
@@ -13,7 +11,9 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { openModalDialog } from '@/modal/actions';
 import { Call } from '@/proposals/types';
+import { ActionItem } from '@/resource/actions/ActionItem';
 import { useNotify } from '@/store/hooks';
+import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 const DirectEmailInviteDialog = lazyComponent(() =>
   import('./DirectEmailInviteDialog').then((m) => ({
@@ -87,38 +87,27 @@ export const ReviewerDiscoveryActions: FC<ReviewerDiscoveryActionsProps> = ({
   }, [call, refetch, dispatch]);
 
   return (
-    <Dropdown>
-      <Dropdown.Toggle
-        variant="light-primary"
-        className="no-arrow btn-icon-right"
-      >
-        {translate('Actions')}
-        <span className="svg-icon svg-icon-2 rotate-180">
-          <CaretDownIcon weight="bold" />
-        </span>
-      </Dropdown.Toggle>
-      <Dropdown.Menu>
-        <Dropdown.Item onClick={handleGenerate}>
-          <span className="svg-icon svg-icon-2 me-2">
-            <MagnifyingGlassIcon weight="bold" />
-          </span>
-          {translate('Generate matches')}
-        </Dropdown.Item>
-        <Dropdown.Item onClick={handleSendInvitations} disabled={isSending}>
-          <span className="svg-icon svg-icon-2 me-2">
-            <PaperPlaneTiltIcon weight="bold" />
-          </span>
-          {isSending
+    <ActionsDropdownComponent labeled drop="down" variant="secondary">
+      <ActionItem
+        title={translate('Generate matches')}
+        action={handleGenerate}
+        iconNode={<MagnifyingGlassIcon weight="bold" />}
+      />
+      <ActionItem
+        title={
+          isSending
             ? translate('Sending...')
-            : translate('Send confirmed invitations')}
-        </Dropdown.Item>
-        <Dropdown.Item onClick={handleDirectInvite}>
-          <span className="svg-icon svg-icon-2 me-2">
-            <EnvelopeSimpleIcon weight="bold" />
-          </span>
-          {translate('Invite by email')}
-        </Dropdown.Item>
-      </Dropdown.Menu>
-    </Dropdown>
+            : translate('Send confirmed invitations')
+        }
+        action={handleSendInvitations}
+        disabled={isSending}
+        iconNode={<PaperPlaneTiltIcon weight="bold" />}
+      />
+      <ActionItem
+        title={translate('Invite by email')}
+        action={handleDirectInvite}
+        iconNode={<EnvelopeSimpleIcon weight="bold" />}
+      />
+    </ActionsDropdownComponent>
   );
 };
