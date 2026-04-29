@@ -47,6 +47,10 @@ export interface UIBlock {
   order_status?: string; // Order status (e.g., "pending", "executing", "form", "preview", "success", "error")
   message?: string; // Success message
   error?: string; // Error message
+  // Optional VM configuration fields
+  network?: string; // Network name or "default"
+  ssh_key_name?: string; // SSH key name for VM access
+  system_volume_size?: number | string; // System volume size in GB
   // HomePort navigation links (when key === 'homeport_nav')
   // The caption for the nav block lives in `content` (shared across all blocks).
   links?: Array<{
@@ -81,6 +85,24 @@ export interface UIBlock {
   category_uuid?: string;
   state?: string[];
   // project_uuid already exists from vm_order
+
+  // Ask-User Form fields (when key === 'ask_user_form')
+  // Backend (waldur_mastermind.chat.tools.ask_user) emits this contract
+  // verbatim — see plan: max 4 questions, options optional (free-form when
+  // absent), 2–20 options when present, optional value for UUIDs.
+  questions?: Array<{
+    id: string;
+    question: string;
+    header?: string;
+    multiSelect?: boolean;
+    options?: Array<{
+      id: string;
+      label: string;
+      description?: string;
+      value?: string;
+    }>;
+  }>;
+  context?: string;
 }
 
 export interface UIBlockProps {

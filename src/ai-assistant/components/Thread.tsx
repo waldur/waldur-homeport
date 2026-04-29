@@ -5,6 +5,7 @@ import {
   MessagePrimitive,
   ThreadPrimitive,
   useAssistantState,
+  useComposerRuntime,
 } from '@assistant-ui/react';
 import {
   ArrowClockwiseIcon,
@@ -197,6 +198,28 @@ const ThreadSuggestions: FC = () => {
   );
 };
 
+// Bridges the assistant-ui composer text with ThreadProvider's draft store so
+// the in-progress message survives drawer close/open (the runtime is
+// recreated on every drawer remount). Also preserves drafts per-thread when
+// the user switches threads in the history sidebar.
+const useComposerDraftPersistence = () => {
+  const { currentThreadId, getComposerDraft, setComposerDraft } =
+    useThreadContext();
+  const composerRuntime = useComposerRuntime();
+
+  useEffect(() => {
+    const saved = getComposerDraft(currentThreadId);
+    if (saved && composerRuntime.getState().text !== saved) {
+      composerRuntime.setText(saved);
+    }
+
+    const unsubscribe = composerRuntime.subscribe(() => {
+      setComposerDraft(currentThreadId, composerRuntime.getState().text);
+    });
+    return unsubscribe;
+  }, [currentThreadId, composerRuntime, getComposerDraft, setComposerDraft]);
+};
+
 const Composer: FC = () => {
   const isRunning = useAssistantState(({ thread }) => thread.isRunning);
   const noMessages = useAssistantState(
@@ -204,6 +227,8 @@ const Composer: FC = () => {
   );
   const [showUsage, setShowUsage] = React.useState(false);
   const user = useUser();
+
+  useComposerDraftPersistence();
 
   const { data: quota, refetch: refetchQuota } = useQuery({
     queryKey: ['chatQuota'],
@@ -491,11 +516,11 @@ const AssistantMessage: FC = () => {
             </div>
 
             {vmOrderBlock && (
-              <div className="aui-assistant-message-footer">
-                <MessagePrimitive.If last>
+              <MessagePrimitive.If last>
+                <div className="aui-assistant-message-footer">
                   <VMOrderActions block={vmOrderBlock} />
-                </MessagePrimitive.If>
-              </div>
+                </div>
+              </MessagePrimitive.If>
             )}
           </div>
         </MessagePrimitive.Root>

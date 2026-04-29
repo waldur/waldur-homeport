@@ -1,5 +1,5 @@
 import { TableIcon } from '@phosphor-icons/react';
-import { FC, createContext, useContext, useMemo } from 'react';
+import { FC, useContext, useMemo } from 'react';
 import {
   MarketplaceResourcesListData,
   marketplaceResourcesList,
@@ -16,9 +16,7 @@ import { useTable } from '@/table/useTable';
 
 import { UIBlockProps } from '../../lib/types';
 
-// Provided by the support/audit log view to suppress live data fetches.
-// Live (chat drawer) rendering ignores this — consumer defaults to `false`.
-export const OfflineBlockContext = createContext(false);
+import { OfflineBlockContext } from './offlineBlockContext';
 
 export const ResourceListBlock: FC<UIBlockProps> = ({ block }) => {
   const isOffline = useContext(OfflineBlockContext);

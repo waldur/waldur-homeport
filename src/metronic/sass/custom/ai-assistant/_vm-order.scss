@@ -26,7 +26,7 @@
     background-color: $bg-tertiary;
     border-radius: 0.9rem;
     transition: background-color 0.2s ease;
-    border: 1px solid $border-secondary;
+    border: 1px solid $border-primary;
 
     &:hover {
       background-color: $bg-quaternary;
@@ -65,17 +65,40 @@
       }
     }
 
-    // Badge (flavor/size)
-    .aui-vm-order-preview-badge {
-      padding: 0.15rem 0.615rem;
+    // Details box (flavor, OS, network, SSH key, volume)
+    .aui-vm-order-preview-details {
+      margin-left: 2.5rem;
+      display: inline-flex;
+      flex-direction: column;
+      gap: 0.6rem;
+      align-items: flex-end;
       background-color: $blue-50;
       color: $blue-700;
-      border-radius: 1rem;
       border: 1px solid $blue-200;
+      border-radius: 0.5rem;
+      padding: 1rem 1.25rem;
       font-size: 1rem;
-      font-weight: 500;
-      white-space: nowrap;
       flex-shrink: 0;
+    }
+
+    .aui-vm-order-preview-detail-row {
+      display: flex;
+      align-items: baseline;
+      gap: 1.5rem;
+      white-space: nowrap;
+      width: 100%;
+    }
+
+    .aui-vm-order-preview-detail-label {
+      font-weight: 500;
+      color: $blue-700;
+      opacity: 0.7;
+      min-width: 4rem;
+    }
+
+    .aui-vm-order-preview-detail-value {
+      margin-left: auto;
+      font-weight: 500;
     }
 
     // Success variant
@@ -98,7 +121,7 @@
     padding: 0.75rem 1rem;
     background-color: $bg-tertiary;
     border-radius: 0.5rem;
-    border: 1px solid $border-secondary;
+    border: 1px solid $border-primary;
 
     .aui-vm-order-id-label {
       font-size: 0.875rem;
