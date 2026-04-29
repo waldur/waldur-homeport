@@ -1,13 +1,8 @@
 import { useAssistantRuntime } from '@assistant-ui/react';
-import {
-  ArrowCounterClockwiseIcon,
-  DotsThreeVerticalIcon,
-  PlusIcon,
-  TrashIcon,
-} from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo, useState } from 'react';
-import { Dropdown, Nav } from 'react-bootstrap';
+import { Nav } from 'react-bootstrap';
 import { chatThreadsArchive, chatThreadsUnarchive } from 'waldur-js-client';
 
 import {
@@ -21,49 +16,8 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SidebarToggleGraphic } from '@/core/SidebarToggleGraphic';
 import { FilterBox } from '@/form/FilterBox';
 import { translate } from '@/i18n';
-import { ActionItem } from '@/resource/actions/ActionItem';
 
-interface ThreadItemMenuProps {
-  threadId: string;
-  onAction: (threadId: string) => void;
-  isArchived?: boolean;
-}
-
-const ThreadItemMenu: FC<ThreadItemMenuProps> = ({
-  threadId,
-  onAction,
-  isArchived,
-}) => {
-  return (
-    // eslint-disable-next-line jsx-a11y/click-events-have-key-events, jsx-a11y/no-static-element-interactions -- stopPropagation wrapper
-    <div className="aui-history-item-menu" onClick={(e) => e.stopPropagation()}>
-      <Dropdown drop="down" align="end">
-        <Dropdown.Toggle
-          variant="text-secondary"
-          className="btn-icon no-arrow aui-history-item-menu-trigger"
-          size="sm"
-        >
-          <DotsThreeVerticalIcon weight="bold" size={22} />
-        </Dropdown.Toggle>
-        <Dropdown.Menu>
-          <ActionItem
-            title={isArchived ? translate('Unarchive') : translate('Archive')}
-            action={() => onAction(threadId)}
-            iconNode={
-              isArchived ? (
-                <ArrowCounterClockwiseIcon weight="bold" />
-              ) : (
-                <TrashIcon weight="bold" />
-              )
-            }
-            iconColor={isArchived ? 'gray-400' : 'danger'}
-            className={isArchived ? undefined : 'text-danger'}
-          />
-        </Dropdown.Menu>
-      </Dropdown>
-    </div>
-  );
-};
+import { ThreadListItem } from './ThreadListItem';
 
 export const ChatHistorySidebar: FC = () => {
   const [collapsed, setCollapsed] = useState(false);
@@ -220,28 +174,18 @@ export const ChatHistorySidebar: FC = () => {
                       !showArchived && threadNotifications.has(thread.uuid!);
 
                     return (
-                      <button
+                      <ThreadListItem
                         key={thread.uuid}
-                        className={`aui-history-item ${isActive ? 'active' : ''}`}
-                        onClick={() => handleSwitchThread(thread.uuid!)}
-                      >
-                        <span className="aui-history-item-title">
-                          {thread.name || translate('Untitled')}
-                        </span>
-                        {isRunning && (
-                          <span className="aui-history-item-running" />
-                        )}
-                        {!isRunning && hasNotification && (
-                          <span className="aui-history-item-dot" />
-                        )}
-                        <ThreadItemMenu
-                          threadId={thread.uuid!}
-                          onAction={
-                            showArchived ? handleUnarchive : handleArchive
-                          }
-                          isArchived={showArchived}
-                        />
-                      </button>
+                        thread={thread}
+                        isActive={isActive}
+                        isRunning={isRunning}
+                        hasNotification={hasNotification}
+                        onSwitch={handleSwitchThread}
+                        onAction={
+                          showArchived ? handleUnarchive : handleArchive
+                        }
+                        isArchived={showArchived}
+                      />
                     );
                   })}
                 </div>

@@ -20,7 +20,7 @@ import {
   ThreadSession,
 } from 'waldur-js-client';
 
-import { OfflineBlockContext } from '@/ai-assistant/components/blocks/ResourceListBlock';
+import { OfflineBlockContext } from '@/ai-assistant/components/blocks/offlineBlockContext';
 import { MessageDataInspector } from '@/ai-assistant/components/shared/MessageDataInspector';
 import { VersionSelector } from '@/ai-assistant/components/shared/VersionSelector';
 import { getFeedbackCategoryLabel } from '@/ai-assistant/lib/feedback/categories';

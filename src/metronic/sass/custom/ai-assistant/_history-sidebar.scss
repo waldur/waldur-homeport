@@ -216,25 +216,22 @@
 
 // layout_ED6H91: row, center, stretch, gap 8px
 
-// layout_AS578H: row, center, gap 8px, padding 10px 16px, width 320px, radius 8px
-// Text md / Normal: Inter 400 16px/1.5, color #101828
+// Row wrapper — non-interactive container holding the main click area + menu sibling.
+// Interactive controls live inside so HTML forbids nesting them in a <button>.
 .aui-history-item {
   display: flex;
   align-items: center;
   width: 100%;
-  text-align: left;
   gap: 8px;
   padding: 10px 8px;
-  border: none;
-  background: transparent;
+  border-radius: $border-radius-lg;
+  overflow: visible;
+  position: relative;
   font-family: $font-family-sans-serif;
   font-weight: 400;
   font-size: $font-size-lg;
   line-height: 1.5;
   color: $gray-900;
-  border-radius: $border-radius-lg;
-  cursor: pointer;
-  overflow: visible;
 
   &:hover {
     background-color: $gray-50; // fill_VIWCCM
@@ -244,6 +241,27 @@
     background-color: $gray-50;
     font-weight: 500;
   }
+
+  &:hover .aui-history-item-menu-trigger {
+    opacity: 1;
+  }
+}
+
+// Main click area — button reset that fills remaining row width.
+// Inherits font-family/weight/size/color from the wrapper so .active still bolds.
+.aui-history-item-main {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+  flex: 1;
+  min-width: 0;
+  padding: 0;
+  border: none;
+  background: transparent;
+  color: inherit;
+  font: inherit;
+  text-align: left;
+  cursor: pointer;
 }
 
 // Search bar
@@ -254,15 +272,6 @@
   text-align: center;
   color: $gray-400;
   font-size: $font-size-sm;
-}
-
-// Thread item layout — position relative for menu
-.aui-history-item {
-  position: relative;
-
-  &:hover .aui-history-item-menu-trigger {
-    opacity: 1;
-  }
 }
 
 .aui-history-item-title {

@@ -1,0 +1,239 @@
+.aui-ask-user-block {
+  --aui-ask-user-radius: 8px;
+  --aui-ask-user-pad: 1rem;
+
+  width: 100%;
+  max-width: 680px;
+  margin-bottom: 1rem;
+  padding: var(--aui-ask-user-pad);
+  background-color: $bg-tertiary;
+  border: 1px solid $border-primary;
+  border-radius: var(--aui-ask-user-radius);
+  font-size: $font-size-base;
+  line-height: 1.75;
+  color: $text-primary;
+
+  &[data-submitted='1'] {
+    background-color: $bg-secondary;
+  }
+
+  .aui-ask-user-context {
+    display: flex;
+    align-items: flex-start;
+    gap: 0.4rem;
+    margin-bottom: 0.875rem;
+    font-size: 1rem;
+    line-height: 1.5;
+    color: $text-secondary;
+
+    > i,
+    > svg {
+      flex-shrink: 0;
+      margin-top: 0.125rem;
+      color: $text-tertiary;
+    }
+  }
+
+  .aui-ask-user-questions {
+    display: flex;
+    flex-direction: column;
+    gap: 1.125rem;
+  }
+
+  .aui-ask-user-question {
+    display: flex;
+    flex-direction: column;
+    gap: 0.5rem;
+  }
+
+  .aui-ask-user-q-header {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 0.25rem;
+  }
+
+  .aui-ask-user-chip {
+    display: inline-flex;
+    align-items: center;
+    padding: 0.125rem 0.5rem;
+    font-size: 0.75rem;
+    font-weight: 500;
+    line-height: 1.6;
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    color: $text-secondary;
+    background-color: $bg-quaternary;
+    border-radius: 4px;
+  }
+
+  .aui-ask-user-q-text {
+    margin: 0;
+    font-size: 1rem;
+    font-weight: 600;
+    line-height: 1.4;
+    color: $text-primary;
+  }
+
+  .aui-ask-user-pill {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.375rem;
+    height: 34px;
+    padding: 0 0.875rem;
+    font-size: 0.9375rem;
+    font-weight: 500;
+    line-height: 1;
+    color: $text-primary;
+    background-color: $bg-secondary;
+    border: 1px solid $border-secondary;
+    border-radius: 6px;
+    cursor: pointer;
+    white-space: nowrap;
+    transition:
+      background-color 0.12s,
+      border-color 0.12s,
+      color 0.12s;
+
+    &:hover:not(:disabled) {
+      background-color: $bg-tertiary;
+      border-color: $border-primary;
+    }
+
+    &[data-picked='1'] {
+      color: $primary-700;
+      background-color: $primary-50;
+      border-color: $primary;
+    }
+
+    &:disabled {
+      cursor: default;
+      opacity: 0.7;
+    }
+
+    &[data-dimmed='1'] {
+      opacity: 0.35;
+    }
+  }
+
+  .aui-ask-user-check {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    flex-shrink: 0;
+    width: 14px;
+    height: 14px;
+    color: $bg-secondary;
+    background-color: $bg-secondary;
+    border: 1px solid $border-secondary;
+    border-radius: 3px;
+  }
+
+  .aui-ask-user-pill[data-picked='1'] .aui-ask-user-check {
+    color: #fff;
+    background-color: $primary;
+    border-color: $primary;
+  }
+
+  .aui-ask-user-list {
+    .form-control {
+      width: 100%;
+    }
+  }
+
+  .aui-ask-user-input-row {
+    border-top: 1px solid $border-primary;
+    padding-top: 0.625rem;
+    margin-top: 0.25rem;
+
+    &[data-has-value='1'] .aui-ask-user-text {
+      border-color: $primary;
+      color: $text-primary;
+    }
+  }
+
+  .aui-ask-user-text {
+    height: 34px;
+
+    &:focus {
+      border-color: $primary;
+      box-shadow: 0 0 0 0.2rem rgba($primary, 0.25);
+    }
+  }
+
+  .aui-ask-user-other-toggle {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.3125rem;
+    height: 34px;
+    padding: 0 0.75rem;
+    font-size: 0.875rem;
+    font-weight: 500;
+    color: $text-secondary;
+    background-color: transparent;
+    border: 1px dashed $border-primary;
+    border-radius: 6px;
+    cursor: pointer;
+    transition:
+      color 0.12s,
+      border-color 0.12s,
+      background-color 0.12s;
+
+    &:hover {
+      color: $text-primary;
+      background-color: $bg-tertiary;
+      border-color: $border-primary;
+    }
+
+    &--compact {
+      height: auto;
+      padding: 0;
+      font-size: 0.8125rem;
+      border: 0;
+
+      &:hover {
+        background-color: transparent;
+      }
+    }
+  }
+
+  .aui-ask-user-footer {
+    display: flex;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 0.75rem;
+    margin-top: 1rem;
+    padding-top: 0.875rem;
+    border-top: 1px solid $border-primary;
+
+    &--submitted {
+      justify-content: flex-start;
+      gap: 0.375rem;
+      font-size: 0.9375rem;
+      color: $text-secondary;
+
+      > svg {
+        color: $primary;
+      }
+    }
+  }
+
+  // Pushes the submit button to the right edge regardless of whether the
+  // progress count is shown.
+  .aui-ask-user-progress {
+    margin-right: auto;
+    font-size: 0.875rem;
+    color: $text-tertiary;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .aui-ask-user-submit {
+    display: inline-flex;
+    align-items: center;
+    gap: 0.4375rem;
+
+    &:disabled {
+      cursor: not-allowed;
+    }
+  }
+}

@@ -84,6 +84,10 @@ export function updateBlocks(
           order_status: part.status ?? lastBlock.order_status,
           message: part.message ?? lastBlock.message,
           error: part.error ?? lastBlock.error,
+          network: part.network ?? lastBlock.network,
+          ssh_key_name: part.ssh_key_name ?? lastBlock.ssh_key_name,
+          system_volume_size:
+            part.system_volume_size ?? lastBlock.system_volume_size,
           flavors: (part.flavors as UIBlock['flavors']) ?? lastBlock.flavors,
           images: (part.images as UIBlock['images']) ?? lastBlock.images,
           projects:
@@ -112,11 +116,33 @@ export function updateBlocks(
         order_status: part.status,
         message: part.message,
         error: part.error,
+        network: part.network,
+        ssh_key_name: part.ssh_key_name,
+        system_volume_size: part.system_volume_size,
         flavors: part.flavors as UIBlock['flavors'],
         images: part.images as UIBlock['images'],
         projects: part.projects as UIBlock['projects'],
         offerings: part.offerings as UIBlock['offerings'],
         status: 'streaming',
+      },
+    ];
+  }
+
+  // Handle ask_user_form data — interactive clarifying-question form
+  // emitted by the universal ``ask_user`` meta-tool.
+  if (part.k === 'ask_user_form') {
+    return [
+      ...existingBlocks.filter((b) => b.key !== 'tool'),
+      {
+        id: randomUUID(),
+        key: 'ask_user_form',
+        content: '',
+        questions:
+          ((part as Record<string, unknown>)
+            .questions as UIBlock['questions']) ?? [],
+        context:
+          ((part as Record<string, unknown>).context as string) || undefined,
+        status: 'complete',
       },
     ];
   }

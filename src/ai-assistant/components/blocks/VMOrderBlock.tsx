@@ -41,7 +41,23 @@ const VMPreviewCard: FC<{
   orderId?: string;
   success?: boolean;
   className?: string;
-}> = ({ name, project, organization, flavor, orderId, success, className }) => (
+  image?: string;
+  network?: string;
+  ssh_key_name?: string;
+  system_volume_size?: number | string;
+}> = ({
+  name,
+  project,
+  organization,
+  flavor,
+  orderId,
+  success,
+  className,
+  image,
+  network,
+  ssh_key_name,
+  system_volume_size,
+}) => (
   <div
     className={[
       'aui-vm-order-preview',
@@ -78,7 +94,52 @@ const VMPreviewCard: FC<{
         </div>
       )}
     </div>
-    {flavor && <div className="aui-vm-order-preview-badge">{flavor}</div>}
+    <div className="aui-vm-order-preview-details">
+      {flavor && (
+        <div className="aui-vm-order-preview-detail-row">
+          <span className="aui-vm-order-preview-detail-label">
+            {translate('Size')}
+          </span>
+          <span className="aui-vm-order-preview-detail-value">{flavor}</span>
+        </div>
+      )}
+      {image && (
+        <div className="aui-vm-order-preview-detail-row">
+          <span className="aui-vm-order-preview-detail-label">
+            {translate('OS')}
+          </span>
+          <span className="aui-vm-order-preview-detail-value">{image}</span>
+        </div>
+      )}
+      {network && (
+        <div className="aui-vm-order-preview-detail-row">
+          <span className="aui-vm-order-preview-detail-label">
+            {translate('Network')}
+          </span>
+          <span className="aui-vm-order-preview-detail-value">{network}</span>
+        </div>
+      )}
+      {ssh_key_name && (
+        <div className="aui-vm-order-preview-detail-row">
+          <span className="aui-vm-order-preview-detail-label">
+            {translate('SSH Key')}
+          </span>
+          <span className="aui-vm-order-preview-detail-value">
+            {ssh_key_name}
+          </span>
+        </div>
+      )}
+      {system_volume_size && (
+        <div className="aui-vm-order-preview-detail-row">
+          <span className="aui-vm-order-preview-detail-label">
+            {translate('Volume')}
+          </span>
+          <span className="aui-vm-order-preview-detail-value">
+            {system_volume_size} GB
+          </span>
+        </div>
+      )}
+    </div>
   </div>
 );
 
@@ -205,10 +266,15 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   }
 
   const hasError = !!block.error;
+  // `order_status` is only set on the live path (blockManager renames the wire
+  // `status` field). The audit log reads the raw persisted block where that
+  // rename hasn't happened, so fall back to `order_id` — only present once
+  // the VM creation has completed — as a result-state signal.
   const isResult =
     block.order_status === 'success' ||
     block.order_status === 'error' ||
-    hasError;
+    hasError ||
+    !!block.order_id;
 
   // Project form mode - show project selector
   if (block.order_status === 'project_form' && block.projects) {
@@ -275,6 +341,10 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
           name={block.name}
           project={block.project}
           organization={block.organization}
+          image={block.image}
+          network={block.network}
+          ssh_key_name={block.ssh_key_name}
+          system_volume_size={block.system_volume_size}
           className="mb-4"
         />
 
@@ -379,6 +449,10 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
               project={block.project}
               organization={block.organization}
               flavor={block.flavor}
+              image={block.image}
+              network={block.network}
+              ssh_key_name={block.ssh_key_name}
+              system_volume_size={block.system_volume_size}
               orderId={block.order_id}
               success
             />
@@ -421,6 +495,10 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
         project={block.project}
         organization={block.organization}
         flavor={block.flavor}
+        image={block.image}
+        network={block.network}
+        ssh_key_name={block.ssh_key_name}
+        system_volume_size={block.system_volume_size}
       />
 
       {/* Confirmation question */}
@@ -458,7 +536,7 @@ const ContinueButton: FC<{ prompt?: string }> = ({ prompt }) =>
 // Reusable Modify button for both form and preview modes
 const ModifyButton: FC = () => (
   <ThreadPrimitive.Suggestion
-    prompt={translate('modify the VM configuration')}
+    prompt={translate('I want to modify VM configuration. What can i change?')}
     send
     clearComposer={false}
     asChild
@@ -477,6 +555,18 @@ const ModifyButton: FC = () => (
 export const VMOrderActions: FC<UIBlockProps> = ({ block }) => {
   const { selectedFlavor, selectedImage, selectedProject, selectedOffering } =
     useVMOrderForm();
+
+  // Hide actions once the order has finalized — success, failure, or any
+  // path that already produced an order_id. Mirrors VMOrderBlock's isResult
+  // check so the footer doesn't outlive the result card.
+  if (
+    block.order_status === 'success' ||
+    block.order_status === 'error' ||
+    block.error ||
+    block.order_id
+  ) {
+    return null;
+  }
 
   if (block.order_status === 'offering_form') {
     return (

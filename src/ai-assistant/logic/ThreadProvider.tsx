@@ -46,6 +46,11 @@ interface ThreadContextType {
     backendUuid: string,
     patch: Record<string, unknown>,
   ) => void;
+  // Per-thread composer draft text. Lives here (app level) so the in-progress
+  // message survives drawer close/open — the assistant-ui runtime (and its
+  // composer state) is recreated every time the drawer remounts.
+  getComposerDraft: (threadId: string) => string;
+  setComposerDraft: (threadId: string, text: string) => void;
 }
 
 const ThreadContext = createContext<ThreadContextType | null>(null);
@@ -71,6 +76,10 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
   // ThreadRuntimeProvider) means closing/reopening the drawer no longer
   // discards the local-id -> backend-uuid mapping.
   const backendThreadIdsRef = useRef<Map<string, string>>(new Map());
+  // Ref-backed: composer text updates on every keystroke, so state would
+  // thrash every consumer of ThreadContext. Only read on drawer remount /
+  // thread switch, so a ref is enough.
+  const composerDraftsRef = useRef<Map<string, string>>(new Map());
 
   // Reset all state when user changes (impersonation, logout/login)
   useEffect(() => {
@@ -84,6 +93,7 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
     setLoadingThreadId(null);
     setRunningThreads(new Map());
     backendThreadIdsRef.current = new Map();
+    composerDraftsRef.current = new Map();
   }, [user?.uuid]);
 
   const addNotification = useCallback((threadId: string) => {
@@ -138,6 +148,19 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
   const setBackendThreadId = useCallback((threadId: string, uuid: string) => {
     if (backendThreadIdsRef.current.get(threadId) === uuid) return;
     backendThreadIdsRef.current.set(threadId, uuid);
+  }, []);
+
+  const getComposerDraft = useCallback(
+    (threadId: string) => composerDraftsRef.current.get(threadId) ?? '',
+    [],
+  );
+
+  const setComposerDraft = useCallback((threadId: string, text: string) => {
+    if (text) {
+      composerDraftsRef.current.set(threadId, text);
+    } else {
+      composerDraftsRef.current.delete(threadId);
+    }
   }, []);
 
   const patchMessageByBackendUuid = useCallback(
@@ -197,6 +220,8 @@ export function ThreadProvider({ children }: { children: ReactNode }) {
         getBackendThreadId,
         setBackendThreadId,
         patchMessageByBackendUuid,
+        getComposerDraft,
+        setComposerDraft,
       }}
     >
       {children}
