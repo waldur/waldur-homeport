@@ -24,6 +24,7 @@ import { IndustryGroup } from '../create/IndustryGroup';
 import { KindGroup } from '../create/KindGroup';
 import { NameGroup } from '../create/NameGroup';
 import { OecdCodeGroup } from '../create/OecdCodeGroup';
+import { ScienceDomainGroup } from '../create/ScienceDomainGroup';
 import { StartDateGroup } from '../create/StartDateGroup';
 import { EditProjectProps } from '../types';
 
@@ -41,6 +42,8 @@ const formatValue = (key, value) => {
       return formatISODate(value);
     case 'oecd_fos_2007_code':
       return value.value;
+    case 'science_sub_domain':
+      return value?.uuid ?? null;
     default:
       return value;
   }
@@ -121,6 +124,8 @@ export const EditFieldDialog = ({ resolve }: { resolve: EditProjectProps }) => {
               <EndDateGroup />
             ) : resolve.name === 'oecd_fos_2007_code' ? (
               <OecdCodeGroup />
+            ) : resolve.name === 'science_sub_domain' ? (
+              <ScienceDomainGroup />
             ) : resolve.name === 'backend_id' ? (
               <FormGroup label={translate('Backend ID')}>
                 <Field component={StringField as any} name="backend_id" />

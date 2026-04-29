@@ -115,6 +115,9 @@ export const ProjectMetadata: React.FC<ProjectMetadataProps> = ({
                 ? `${project.science_domain_name} > ${project.science_sub_domain_name}`
                 : null,
             )}
+            actions={
+              <FieldEditButton project={project} name="science_sub_domain" />
+            }
           />
         )}
 
