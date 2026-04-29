@@ -7,7 +7,7 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
+import { useDispatch, useSelector } from 'react-redux';
 import {
   marketplaceOrdersCreate,
   OrderCreateRequest,
@@ -21,8 +21,11 @@ import { omit } from '@/core/utils';
 import { translate } from '@/i18n';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
 import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { PermissionEnum } from '@/permissions/enums';
+import { hasPermission } from '@/permissions/hasPermission';
 import { showErrorResponse, showSuccess } from '@/store/notify';
 import { CompactActionButton } from '@/table/CompactActionButton';
+import { getUser } from '@/workspace/selectors';
 
 const ResourceOrderErrorDialog = lazyComponent(() =>
   import('./ResourceOrderErrorDialog').then((module) => ({
@@ -112,6 +115,12 @@ const getSteps = (resource: Resource) => {
 export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
   const dispatch = useDispatch();
   const router = useRouter();
+  const user = useSelector(getUser);
+  const canCreateOrder = hasPermission(user, {
+    permission: PermissionEnum.CREATE_ORDER,
+    projectId: resource.project_uuid,
+    customerId: resource.customer_uuid,
+  });
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       await waitForConfirmation(
@@ -162,13 +171,15 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
           />
 
           <div className="d-flex flex-sm-column gap-3 text-nowrap">
-            <CompactActionButton
-              variant="tertiary"
-              action={() => mutate()}
-              pending={isLoading}
-              iconNode={<ArrowsClockwiseIcon weight="bold" />}
-              title={translate('Retry')}
-            />
+            {canCreateOrder && (
+              <CompactActionButton
+                variant="tertiary"
+                action={() => mutate()}
+                pending={isLoading}
+                iconNode={<ArrowsClockwiseIcon weight="bold" />}
+                title={translate('Retry')}
+              />
+            )}
             <OrderDetailsLink
               order_uuid={resource.creation_order.uuid}
               project_uuid={resource.creation_order.project_uuid}
