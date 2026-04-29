@@ -2,6 +2,7 @@ import {
   ClockIcon,
   CopyIcon,
   EnvelopeSimpleIcon,
+  QuestionIcon,
   ShieldWarningIcon,
   UserCheckIcon,
   WarningIcon,
@@ -23,6 +24,7 @@ import { openModalDialog } from '@/modal/actions';
 import { Call } from '@/proposals/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { showSuccess } from '@/store/notify';
+import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import {
@@ -87,7 +89,23 @@ const InvitationStatusBadge: FC<{ status: string; statusDisplay: string }> = ({
   }, [status]);
 
   return (
-    <Badge variant={variant} pill outline>
+    <Badge
+      variant={variant}
+      rightIcon={
+        status === 'pending' ? (
+          <Tip
+            id={`pending-info-${statusDisplay}`}
+            label={translate(
+              'This reviewer has not yet accepted the invitation or created a profile.',
+            )}
+          >
+            <QuestionIcon size={14} weight="bold" />
+          </Tip>
+        ) : undefined
+      }
+      pill
+      outline
+    >
       {statusDisplay}
     </Badge>
   );
@@ -192,9 +210,6 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
               <div className="fw-bold">
                 {row.invited_email || row.reviewer_email}
               </div>
-              <Badge variant="warning" outline className="mt-1">
-                {translate('Awaiting profile')}
-              </Badge>
               {row.invited_user_name && (
                 <div className="text-muted small mt-1">
                   {translate('Matched user: {name}', {
@@ -216,7 +231,10 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
         id: 'status',
         title: translate('Status'),
         render: ({ row }: { row: CallReviewerPoolExtended }) => (
-          <div className="d-flex align-items-center gap-2">
+          <div
+            className="d-flex align-items-center gap-2"
+            style={{ minWidth: 220 }}
+          >
             <InvitationStatusBadge
               status={row.invitation_status}
               statusDisplay={row.invitation_status_display}
@@ -412,10 +430,16 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
           FORCE_ACCEPT_STATUSES.includes(row.invitation_status) &&
           row.reviewer_uuid;
 
-        if (!showCopyLink && !showForceAccept) return null;
+        if (!showCopyLink && !showForceAccept) {
+          return (
+            <ActionsDropdownComponent size="sm" disabled tooltip>
+              {null}
+            </ActionsDropdownComponent>
+          );
+        }
 
         return (
-          <ActionsDropdownComponent>
+          <ActionsDropdownComponent size="sm">
             {showCopyLink && (
               <ActionItem
                 title={translate('Copy invitation link')}
@@ -445,13 +469,12 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
       tableActions={
         <>
           <PoolSummaryButton />
-          <button
-            className="btn btn-primary btn-sm"
-            onClick={handleInviteByEmail}
-          >
-            <EnvelopeSimpleIcon size={16} weight="bold" className="me-1" />
-            {translate('Invite by email')}
-          </button>
+          <ActionButton
+            action={handleInviteByEmail}
+            title={translate('Invite by email')}
+            iconNode={<EnvelopeSimpleIcon weight="bold" />}
+            variant="primary"
+          />
         </>
       }
     />

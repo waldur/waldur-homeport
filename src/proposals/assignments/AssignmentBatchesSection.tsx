@@ -25,6 +25,7 @@ import { openModalDialog } from '@/modal/actions';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
 import { useNotify } from '@/store/hooks';
+import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { TableTabs } from '@/table/TableTabs';
@@ -306,30 +307,29 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   const batchesTableActions = (
     <>
       <PoolSummaryButton />
-      <button
-        className="btn btn-secondary btn-sm"
-        onClick={handleManualAssignment}
-      >
-        <UserPlusIcon size={16} weight="bold" className="me-1" />
-        {translate('Manual assignment')}
-      </button>
-      <button
-        className="btn btn-primary btn-sm"
-        onClick={() => generateMutation.mutate()}
+      <ActionButton
+        action={handleManualAssignment}
+        title={translate('Manual assignment')}
+        iconNode={<UserPlusIcon weight="bold" />}
+        variant="secondary"
+      />
+      <ActionButton
+        action={() => generateMutation.mutate()}
+        title={translate('Generate assignments')}
+        iconNode={<SparkleIcon weight="bold" />}
+        variant="primary"
         disabled={generateMutation.isPending}
-      >
-        <SparkleIcon size={16} weight="bold" className="me-1" />
-        {translate('Generate assignments')}
-      </button>
+        pending={generateMutation.isPending}
+      />
       {draftCount > 0 && (
-        <button
-          className="btn btn-success btn-sm"
-          onClick={() => sendAllMutation.mutate()}
+        <ActionButton
+          action={() => sendAllMutation.mutate()}
+          title={`${translate('Send all drafts')} (${draftCount})`}
+          iconNode={<EnvelopeSimpleIcon weight="bold" />}
+          variant="success"
           disabled={sendAllMutation.isPending}
-        >
-          <EnvelopeSimpleIcon size={16} weight="bold" className="me-1" />
-          {translate('Send all drafts')} ({draftCount})
-        </button>
+          pending={sendAllMutation.isPending}
+        />
       )}
     </>
   );

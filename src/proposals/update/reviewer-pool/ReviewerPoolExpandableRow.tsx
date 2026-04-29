@@ -17,6 +17,7 @@ import { ExternalLink } from '@/core/ExternalLink';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { OrcidLogo } from '@/core/OrcidLogo';
 import { translate } from '@/i18n';
+import { NoResult } from '@/navigation/header/search/NoResult';
 import { Field } from '@/resource/summary';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -327,11 +328,13 @@ export const ReviewerPoolExpandableRow: FC<ReviewerPoolExpandableRowProps> = ({
   if (!row.reviewer_uuid) {
     return (
       <ExpandableContainer>
-        <p className="text-muted">
-          {translate(
+        <NoResult
+          title={translate('No profile data')}
+          message={translate(
             'This reviewer has not yet accepted the invitation or created a profile.',
           )}
-        </p>
+          noAction
+        />
       </ExpandableContainer>
     );
   }
