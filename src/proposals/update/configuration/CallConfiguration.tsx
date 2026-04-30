@@ -4,6 +4,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { Call } from '@/proposals/types';
+import { ApplicantVisibilitySection } from '@/proposals/update/applicant-visibility/ApplicantVisibilitySection';
 
 import { EditGeneralInfoButton } from '../general/EditGeneralInfoButton';
 
@@ -81,6 +82,8 @@ export const CallConfiguration: FC<CallConfigurationProps> = (props) => {
           ))}
         </FormTable>
       </FormTable.Card>
+
+      <ApplicantVisibilitySection call={props.call} refetch={props.refetch} />
 
       <CallResourceTemplates call={props.call} />
     </>
