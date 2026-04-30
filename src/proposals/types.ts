@@ -1,7 +1,4 @@
-import {
-  RequestedOffering,
-  type ProtectedCall as Call,
-} from 'waldur-js-client';
+import { RequestedOffering, type ProtectedCall } from 'waldur-js-client';
 
 import { Limits } from '@/marketplace/details/types';
 import { AttributesType, Offering, Plan } from '@/marketplace/types';
@@ -9,8 +6,10 @@ import { AttributesType, Offering, Plan } from '@/marketplace/types';
 export {
   type Proposal,
   ProposalReview,
-  ProtectedCall as Call,
+  type ProtectedCall as Call,
 } from 'waldur-js-client';
+
+type Call = ProtectedCall;
 
 export type RoundReviewStrategy = 'after_round' | 'after_proposal';
 
