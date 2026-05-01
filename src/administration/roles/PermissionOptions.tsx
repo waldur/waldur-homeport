@@ -530,12 +530,28 @@ export const PermissionOptions = [
         value: 'CUSTOMER.CREATE_PERMISSION',
       },
       {
+        label: translate('Create permission for resource'),
+        value: 'RESOURCE.CREATE_PERMISSION',
+      },
+      {
+        label: translate('Create permission for resource project'),
+        value: 'RESOURCE_PROJECT.CREATE_PERMISSION',
+      },
+      {
         label: translate('Create permission project'),
         value: 'PROJECT.CREATE_PERMISSION',
       },
       {
         label: translate('Delete permission customer'),
         value: 'CUSTOMER.DELETE_PERMISSION',
+      },
+      {
+        label: translate('Delete permission for resource'),
+        value: 'RESOURCE.DELETE_PERMISSION',
+      },
+      {
+        label: translate('Delete permission for resource project'),
+        value: 'RESOURCE_PROJECT.DELETE_PERMISSION',
       },
       {
         label: translate('Delete permission project'),
@@ -552,6 +568,14 @@ export const PermissionOptions = [
       {
         label: translate('Update permission customer'),
         value: 'CUSTOMER.UPDATE_PERMISSION',
+      },
+      {
+        label: translate('Update permission for resource'),
+        value: 'RESOURCE.UPDATE_PERMISSION',
+      },
+      {
+        label: translate('Update permission for resource project'),
+        value: 'RESOURCE_PROJECT.UPDATE_PERMISSION',
       },
       {
         label: translate('Update permission project'),
