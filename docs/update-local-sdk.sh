@@ -88,7 +88,7 @@ echo "[8/9] Generating enums and descriptions..."
 cd "$MASTERMIND_PATH"
 export DJANGO_SETTINGS_MODULE=waldur_core.server.doc_settings
 
-python3 src/waldur_core/permissions/print_permission_enums.py > /tmp/permission_enums.ts
+uv run python src/waldur_core/permissions/print_permission_enums.py > /tmp/permission_enums.ts
 uv run waldur print_events_enums > /tmp/EventsEnums.ts
 uv run waldur print_features_enums > /tmp/FeaturesEnums.ts
 uv run waldur print_features_description > /tmp/FeaturesDescription.ts
