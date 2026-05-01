@@ -138,6 +138,7 @@ export const InvoicesList: FunctionComponent = () => {
       verboseName={translate('invoices')}
       enableExport={true}
       rowActions={RowActions}
+      showPageSizeSelector
     />
   );
 };
