@@ -126,6 +126,7 @@ export const TeamTableComponent = <
       hasQuery={true}
       enableExport
       hasOptionalColumns
+      showPageSizeSelector
       {...props}
     />
   );

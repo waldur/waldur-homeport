@@ -51,6 +51,7 @@ export const ProjectCreditsList: FC = () => {
       verboseName={translate('Credits')}
       hasQuery
       enableExport
+      showPageSizeSelector
       rowActions={ProjectCreditActions}
       expandableRow={CreditExpandableRow}
       tableActions={

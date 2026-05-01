@@ -117,6 +117,7 @@ export const BillingRecordsList: FunctionComponent = () => {
       verboseName={translate('records')}
       title={translate('Invoices')}
       enableExport={true}
+      showPageSizeSelector
     />
   );
 };
