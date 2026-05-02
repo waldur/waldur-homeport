@@ -1,34 +1,17 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { useQuery } from '@tanstack/react-query';
-import {
-  marketplaceOfferingRolesDestroy,
-  OfferingKeycloakMembership,
-  offeringKeycloakMembershipsList,
-} from 'waldur-js-client';
+import { marketplaceOfferingRolesDestroy } from 'waldur-js-client';
 
-import Avatar from '@/core/Avatar';
-import { Badge } from '@/core/Badge';
-import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
-import { formatJsxTemplate, translate } from '@/i18n';
+import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { useManagedMutation } from '@/modal/useManagedMutation';
-import { renderFieldOrDash } from '@/table/utils';
 
 export const DeleteRoleDialog = ({
   resolve: { row, refetch },
 }: {
   resolve: { row; refetch };
 }) => {
-  const { data: memberships, isLoading } = useQuery({
-    queryKey: ['keycloak-memberships-for-role', row.uuid],
-    queryFn: () =>
-      offeringKeycloakMembershipsList({
-        query: { role_uuid: row.uuid },
-      }).then((r) => r.data),
-  });
-
   const deleteMutation = useManagedMutation<any, any, void>({
     mutationFn: () =>
       marketplaceOfferingRolesDestroy({ path: { uuid: row.uuid } }),
@@ -47,7 +30,6 @@ export const DeleteRoleDialog = ({
           <CloseDialogButton className="flex-equal" />
           <SubmitButton
             submitting={deleteMutation.isPending}
-            disabled={isLoading}
             variant="danger"
             className="flex-equal"
             onClick={() => deleteMutation.mutate()}
@@ -57,70 +39,7 @@ export const DeleteRoleDialog = ({
         </>
       }
     >
-      {isLoading ? (
-        <div className="text-center py-4">
-          <LoadingSpinner />
-          <p className="text-muted mt-2">
-            {translate('Loading affected memberships...')}
-          </p>
-        </div>
-      ) : memberships && memberships.length > 0 ? (
-        <>
-          <div className="alert alert-warning mb-4">
-            {translate(
-              'Deleting this role will revoke Keycloak access for {count} user(s). This action cannot be undone.',
-              { count: <b>{memberships.length}</b> },
-              formatJsxTemplate,
-            )}
-          </div>
-          <h6 className="mb-3">{translate('Affected users')}</h6>
-          <div className="card card-table card-bordered">
-            <div className="card-body p-0">
-              <table className="table align-middle mb-0">
-                <thead>
-                  <tr className="align-middle">
-                    <th>{translate('User')}</th>
-                    <th>{translate('Email')}</th>
-                    <th>{translate('Status')}</th>
-                  </tr>
-                </thead>
-                <tbody>
-                  {memberships.map((m: OfferingKeycloakMembership) => (
-                    <tr key={m.uuid}>
-                      <td>
-                        <div className="d-flex align-items-center gap-1">
-                          <Avatar name={m.email} size={30} circle />
-                          <span>
-                            {renderFieldOrDash(
-                              [m.first_name, m.last_name]
-                                .filter(Boolean)
-                                .join(' '),
-                            )}
-                          </span>
-                        </div>
-                      </td>
-                      <td>{m.email}</td>
-                      <td>
-                        {m.state === 'active' ? (
-                          <Badge variant="success" pill outline>
-                            {translate('Active')}
-                          </Badge>
-                        ) : (
-                          <Badge variant="warning" pill outline>
-                            {translate('Pending')}
-                          </Badge>
-                        )}
-                      </td>
-                    </tr>
-                  ))}
-                </tbody>
-              </table>
-            </div>
-          </div>
-        </>
-      ) : (
-        <p>{translate('Are you sure you want to delete this role?')}</p>
-      )}
+      <p>{translate('Are you sure you want to delete this role?')}</p>
     </ModalDialog>
   );
 };

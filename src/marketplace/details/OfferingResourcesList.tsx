@@ -11,7 +11,6 @@ import {
   FILTER_OFFERING_RESOURCE,
   TABLE_OFFERING_RESOURCE,
 } from '@/marketplace/details/constants';
-import { ResourceKeycloakScopesRow } from '@/marketplace/offerings/keycloak/ResourceKeycloakScopesRow';
 import { Offering } from '@/marketplace/types';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -37,10 +36,6 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     getFormValues(FILTER_OFFERING_RESOURCE),
   );
 
-  const keycloakEnabled = Boolean(
-    (ownProps.offering.plugin_options as any)?.keycloak_enabled,
-  );
-
   const filter = useMemo(() => {
     const filter: MarketplaceProviderResourcesListData['query'] = {};
     if (filterValues?.state) {
@@ -64,7 +59,7 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
     fetchData: createFetcher(marketplaceProviderResourcesList),
     filter,
     queryField: 'query',
-    mandatoryFields: resourcesListRequiredFields(keycloakEnabled),
+    mandatoryFields: resourcesListRequiredFields(false),
   });
 
   return (
@@ -83,7 +78,6 @@ export const OfferingResourcesList: FunctionComponent<OwnProps> = (
         <ProviderResourceActions resource={row} refetch={tableProps.fetch} />
       )}
       filters={<OfferingResourcesFilter />}
-      expandableRow={keycloakEnabled ? ResourceKeycloakScopesRow : undefined}
     />
   );
 };

@@ -217,18 +217,6 @@ export const getResourceTabs = ({
         ),
       ),
     });
-  } else if ((offering.plugin_options as any)?.keycloak_enabled) {
-    tabs.push({
-      key: 'users',
-      title: translate('Roles'),
-      component: lazyComponent(() =>
-        import('@/marketplace/offerings/keycloak/OfferingKeycloakMembershipList').then(
-          (module) => ({
-            default: module.OfferingKeycloakMembershipList,
-          }),
-        ),
-      ),
-    });
   }
 
   if (
