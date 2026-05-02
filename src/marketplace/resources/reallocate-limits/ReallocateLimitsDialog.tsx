@@ -1,15 +1,17 @@
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm, formValueSelector } from 'redux-form';
 
 import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
 import { StepsList } from '@/marketplace/common/StepsList';
-import { useWizard } from '@/marketplace/offerings/import/useWizard';
 import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
 import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useNotify } from '@/store/notify';
+import { useWizard } from '@/wizard/useWizard';
 
 import { loadData } from '../change-limits/utils';
 
@@ -60,7 +62,8 @@ export const ReallocateLimitsDialog = reduxForm<
 >({
   form: REALLOCATE_LIMITS_FORM_ID,
 })(({ resolve, handleSubmit, submitting, invalid, initialize }) => {
-  const dispatch = useDispatch();
+  const { showSuccess, showErrorResponse } = useNotify();
+  const { closeDialog } = useModal();
   const asyncState = useAsync(
     () => loadData(resolve.resource.marketplace_resource_uuid),
     [resolve.resource.marketplace_resource_uuid],
@@ -138,7 +141,7 @@ export const ReallocateLimitsDialog = reduxForm<
           asyncState: { value: asyncState.value },
           resolve,
         },
-        dispatch,
+        { showSuccess, showErrorResponse, closeDialog },
       );
     } else {
       goNext();

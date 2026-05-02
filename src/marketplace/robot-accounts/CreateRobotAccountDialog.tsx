@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceRobotAccountsCreate, usersList } from 'waldur-js-client';
 
 import { parseSelectData } from '@/core/api';
@@ -9,9 +8,8 @@ import {
   returnReactSelectAsyncPaginateObject,
 } from '@/core/utils';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export interface RobotAccountFormData {
   type: string;
@@ -92,8 +90,28 @@ export const useRobotAccountFields = (resource) => {
   ];
 };
 
-export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
-  const dispatch = useDispatch();
+export const CreateRobotAccountDialog = ({
+  resolve: { resource, refetch },
+}: {
+  resolve: { resource: any; refetch?: () => void };
+}) => {
+  const mutation = useManagedMutation<any, any, RobotAccountFormData>({
+    mutationFn: (formData) =>
+      marketplaceRobotAccountsCreate({
+        body: {
+          ...formData,
+          resource: resource.url,
+          users: formData.users?.map(({ url }) => url),
+          responsible_user: formData.responsible_user?.url,
+          keys: formData.keys ? formData.keys.split(/\r?\n/) : [],
+        },
+      }),
+
+    successMessage: translate('Robot account has been created.'),
+    errorMessage: translate('Unable to create robot account.'),
+    refetch: refetch,
+  });
+
   const fields = useRobotAccountFields(resource);
   return (
     <ResourceActionDialog
@@ -104,26 +122,7 @@ export const CreateRobotAccountDialog = ({ resolve: { resource } }) => {
       initialValues={{
         type: 'cicd',
       }}
-      submitForm={async (formData: RobotAccountFormData) => {
-        const keys = formData.keys?.trim();
-        try {
-          await marketplaceRobotAccountsCreate({
-            body: {
-              ...formData,
-              resource: resource.url,
-              users: formData.users?.map(({ url }) => url),
-              responsible_user: formData.responsible_user.url,
-              keys: keys ? keys.split(/\r?\n/) : [],
-            },
-          });
-          dispatch(showSuccess(translate('Robot account has been created.')));
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(
-            showErrorResponse(e, translate('Unable to create robot account.')),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

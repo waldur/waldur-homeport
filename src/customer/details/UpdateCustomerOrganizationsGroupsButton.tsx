@@ -1,9 +1,7 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const SetAccessPolicyDialog = lazyComponent(() =>
   import('@/marketplace/offerings/actions/SetAccessPolicyDialog').then(
@@ -25,20 +23,18 @@ export const UpdateCustomerOrganizationsGroupsButton = ({
     tooltip,
     refetch: refetchGroups,
   } = useOrganizationGroups();
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(SetAccessPolicyDialog, {
-        resolve: {
-          organizationGroups,
-          loading: isLoading,
-          error: isError,
-          customer,
-          refetch,
-          refetchGroups,
-        },
-      }),
-    );
+    openDialog(SetAccessPolicyDialog, {
+      resolve: {
+        organizationGroups,
+        loading: isLoading,
+        error: isError,
+        customer,
+        refetch,
+        refetchGroups,
+      },
+    });
   return (
     <CompactEditButton
       onClick={callback}

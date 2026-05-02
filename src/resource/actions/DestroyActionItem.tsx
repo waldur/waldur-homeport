@@ -1,10 +1,8 @@
 import { FileXIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatResourceType } from '../utils';
 
@@ -47,38 +45,29 @@ export const DestroyActionItem: <T extends { uuid?: string }>(
   dialogSubtitle,
   refetch,
 }) => {
-  const dispatch = useDispatch();
   const validationState = useValidators(validators, resource);
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Destroy resource'),
-        getConfirmationText(resource) + (dialogSubtitle || ''),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
 
-    try {
-      await apiMethod(resource.uuid);
-      dispatch(showSuccess(translate('Resource deletion has been scheduled.')));
-      if (refetch) {
-        await refetch();
-      }
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to delete resource.')));
-    }
-  };
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => apiMethod(resource.uuid),
+    successMessage: translate('Resource deletion has been scheduled.'),
+    errorMessage: translate('Unable to delete resource.'),
+    refetch,
+    confirmation: {
+      title: translate('Destroy resource'),
+      body: getConfirmationText(resource) + (dialogSubtitle || ''),
+      options: { forDeletion: true },
+    },
+  });
+
   return (
     <ActionItem
       title={translate('Destroy')}
-      action={callback}
+      action={() => deleteMutation.mutate()}
       className="text-danger"
       iconNode={<FileXIcon weight="bold" />}
       iconColor="danger"
       {...validationState}
+      disabled={deleteMutation.isPending || validationState.disabled}
     />
   );
 };

@@ -1,11 +1,10 @@
 import { Card } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import { User } from 'waldur-js-client';
 
 import { ExternalLink } from '@/core/ExternalLink';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { AcceptTosWarning } from './AcceptTosWarning';
 import { IdentityProviderIndicator } from './IdentityProviderIndicator';
@@ -17,7 +16,7 @@ interface UserEditTabProps {
 }
 
 export const UserEditTab: React.FC<UserEditTabProps> = ({ user }) => {
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
 
   const isSelf = currentUser.uuid === user.uuid;
   // Disable editing if viewing own profile and haven't accepted ToS

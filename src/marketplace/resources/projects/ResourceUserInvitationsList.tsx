@@ -1,6 +1,6 @@
 import { XCircleIcon } from '@phosphor-icons/react';
-import { FC, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { FC, useMemo } from 'react';
+import { useSelector } from 'react-redux';
 import {
   Invitation,
   Resource,
@@ -11,9 +11,8 @@ import {
 import { formatJsxTemplate, translate } from '@/i18n';
 import { getInvitationColumns } from '@/invitations/columns';
 import { InvitationExpandableRow } from '@/invitations/InvitationExpandableRow';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import {
@@ -30,41 +29,30 @@ const CancelInvitationAction: FC<{
   row: Invitation;
   refetch(): void;
 }> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-
-  const handler = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Cancel invitation for {email}?',
-          { email: <b>{row.email}</b> },
-          formatJsxTemplate,
-        ),
-      );
-    } catch {
-      return;
-    }
-    try {
-      await userInvitationsCancel({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Invitation canceled.')));
-      await refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to cancel invitation.')),
-      );
-    }
-  }, [dispatch, row, refetch]);
+  const cancelMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => userInvitationsCancel({ path: { uuid: row.uuid } }),
+    successMessage: translate('Invitation canceled.'),
+    errorMessage: translate('Unable to cancel invitation.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Cancel invitation for {email}?',
+        { email: <b>{row.email}</b> },
+        formatJsxTemplate,
+      ),
+    },
+  });
 
   if (row.state !== 'pending') return null;
 
   return (
     <ActionItem
       title={translate('Cancel')}
-      action={handler}
+      action={() => cancelMutation.mutate()}
       iconNode={<XCircleIcon weight="bold" />}
       className="text-danger"
+      disabled={cancelMutation.isPending}
     />
   );
 };

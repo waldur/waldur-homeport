@@ -1,13 +1,11 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useState } from 'react';
 import { Form, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { ConflictOfInterest, conflictsOfInterestWaive } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface WaiveCOIDialogProps {
   resolve: {
@@ -17,36 +15,23 @@ interface WaiveCOIDialogProps {
 }
 
 export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
-  const dispatch = useDispatch();
   const [managementPlan, setManagementPlan] = useState('');
   const [reviewNotes, setReviewNotes] = useState('');
-  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = useCallback(async () => {
-    if (!managementPlan.trim()) {
-      return;
-    }
-    setSubmitting(true);
-    try {
-      await conflictsOfInterestWaive({
+  const waiveMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      conflictsOfInterestWaive({
         path: { uuid: resolve.coi.uuid },
         body: {
           status: 'waived',
           management_plan: managementPlan,
           review_notes: reviewNotes,
         },
-      });
-      dispatch(showSuccess(translate('Conflict of interest waived.')));
-      dispatch(closeModalDialog());
-      resolve.fetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Failed to waive conflict.')),
-      );
-    } finally {
-      setSubmitting(false);
-    }
-  }, [resolve, managementPlan, reviewNotes, dispatch]);
+      }),
+    successMessage: translate('Conflict of interest waived.'),
+    errorMessage: translate('Failed to waive conflict.'),
+    refetch: resolve.fetch,
+  });
 
   return (
     <>
@@ -114,12 +99,12 @@ export const WaiveCOIDialog: FC<WaiveCOIDialogProps> = ({ resolve }) => {
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <CloseDialogButton disabled={submitting} />
+        <CloseDialogButton disabled={waiveMutation.isPending} />
         <SubmitButton
-          submitting={submitting}
+          submitting={waiveMutation.isPending}
           disabled={!managementPlan.trim()}
           label={translate('Waive conflict')}
-          onClick={handleSubmit}
+          onClick={() => waiveMutation.mutate()}
         />
       </Modal.Footer>
     </>

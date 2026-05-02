@@ -8,7 +8,7 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import {
   createAnswersFromFormData,

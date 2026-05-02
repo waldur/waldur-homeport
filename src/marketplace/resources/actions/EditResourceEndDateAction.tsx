@@ -1,6 +1,5 @@
 import { CalendarBlankIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useSelector, useDispatch } from 'react-redux';
 import {
   marketplaceResourcesOfferingRetrieve,
   marketplaceResourcesSetEndDate,
@@ -9,12 +8,12 @@ import {
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionItemType } from '@/resource/actions/types';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceAction } from './constants';
 
@@ -31,8 +30,8 @@ export const EditResourceEndDateAction: ActionItemType = ({
 }) => {
   const _resource = marketplaceResource || resource;
 
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
 
   const resourceUuid = _resource.marketplace_resource_uuid || _resource.uuid;
 
@@ -52,19 +51,17 @@ export const EditResourceEndDateAction: ActionItemType = ({
   );
 
   const callback = () =>
-    dispatch(
-      openModalDialog(EditResourceEndDateDialog, {
-        resolve: {
-          resource: _resource,
-          refetch,
-          updateEndDate: (uuid, end_date) =>
-            marketplaceResourcesSetEndDate({
-              path: { uuid },
-              body: { end_date },
-            }),
-        },
-      }),
-    );
+    openDialog(EditResourceEndDateDialog, {
+      resolve: {
+        resource: _resource,
+        refetch,
+        updateEndDate: (uuid, end_date) =>
+          marketplaceResourcesSetEndDate({
+            path: { uuid },
+            body: { end_date },
+          }),
+      },
+    });
 
   if (
     !hasPermission(user, {

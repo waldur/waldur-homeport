@@ -1,15 +1,14 @@
-import { PencilSimpleIcon, TrashIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
+import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { proposalProposalsResourcesDestroy } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Proposal, ProposalResource } from '@/proposals/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 
 const ResourceRequestFormDialog = lazyComponent(() =>
@@ -25,16 +24,14 @@ interface ResourceRequestItemActionsProps {
 }
 
 const EditResourceRequestAction = ({ row, proposal, refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openEditResourceDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(ResourceRequestFormDialog, {
-          resolve: { resourceRequest: row, proposal, refetch },
-          size: 'lg',
-        }),
-      ),
-    [dispatch, row, proposal, refetch],
+      openDialog(ResourceRequestFormDialog, {
+        resolve: { resourceRequest: row, proposal, refetch },
+        size: 'lg',
+      }),
+    [row, proposal, refetch],
   );
   return (
     <ActionItem
@@ -46,48 +43,31 @@ const EditResourceRequestAction = ({ row, proposal, refetch }) => {
 };
 
 const RemoveResourceRequestAction = ({ row, proposal, refetch }) => {
-  const dispatch = useDispatch();
-  const { mutate: remove, isPending: isRemoving } = useMutation({
-    mutationFn: async () => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Removing resource request'),
-          translate(
-            'Are you sure you want to remove the {name} resource request?',
-            {
-              name: <b>{row.requested_offering.offering_name}</b>,
-            },
-            formatJsxTemplate,
-          ),
-        );
-      } catch {
-        return;
-      }
-      try {
-        await proposalProposalsResourcesDestroy({
-          path: { uuid: proposal.uuid, obj_uuid: row.uuid },
-        });
-        if (refetch) refetch();
-        dispatch(showSuccess(translate('Resource request has been deleted.')));
-      } catch (response) {
-        dispatch(
-          showErrorResponse(
-            response,
-            translate('Unable to delete resource request.'),
-          ),
-        );
-      }
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      proposalProposalsResourcesDestroy({
+        path: { uuid: proposal.uuid, obj_uuid: row.uuid },
+      }),
+    confirmation: {
+      title: translate('Removing resource request'),
+      body: translate(
+        'Are you sure you want to remove the {name} resource request?',
+        {
+          name: <b>{row.requested_offering.offering_name}</b>,
+        },
+        formatJsxTemplate,
+      ),
     },
+    successMessage: translate('Resource request has been deleted.'),
+    errorMessage: translate('Unable to delete resource request.'),
+    refetch,
   });
 
   return (
-    <ActionItem
-      action={remove}
+    <RemovalActionItem
+      action={mutate}
       title={translate('Remove')}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      disabled={isRemoving}
+      disabled={isPending}
     />
   );
 };

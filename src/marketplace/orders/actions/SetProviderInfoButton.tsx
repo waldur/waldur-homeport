@@ -5,7 +5,7 @@ import { marketplaceOrdersRetrieve, OrderDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { updateEntity } from '@/table/actions';
 
@@ -33,6 +33,8 @@ export const SetProviderInfoButton: FunctionComponent<
 > = (props) => {
   const dispatch = useDispatch();
 
+  const { openDialog: openModal } = useModal();
+
   const refetchAndUpdateTables = async () => {
     const newOrder = await marketplaceOrdersRetrieve({
       path: { uuid: props.row.uuid },
@@ -53,15 +55,13 @@ export const SetProviderInfoButton: FunctionComponent<
   };
 
   const openDialog = () => {
-    dispatch(
-      openModalDialog(SetProviderInfoDialog, {
-        resolve: {
-          order: props.row,
-          refetch: refetchAndUpdateTables,
-        },
-        size: 'lg',
-      }),
-    );
+    openModal(SetProviderInfoDialog, {
+      resolve: {
+        order: props.row,
+        refetch: refetchAndUpdateTables,
+      },
+      size: 'lg',
+    });
   };
 
   return (

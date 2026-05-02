@@ -1,14 +1,13 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
 import { useMutation } from '@tanstack/react-query';
-import { useDispatch, useSelector } from 'react-redux';
 import { remoteWaldurApiCancelTermination } from 'waldur-js-client';
 import { OrderDetails as OrderResponse } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getUser } from '@/workspace/selectors';
+import { useNotify } from '@/store/notify';
+import { useUser } from '@/workspace/hooks';
 
 export const CancelTerminationOrderButton = ({
   row,
@@ -17,19 +16,17 @@ export const CancelTerminationOrderButton = ({
   row: OrderResponse;
   fetch;
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
       try {
         await remoteWaldurApiCancelTermination({ path: { uuid: row.uuid } });
         await fetch();
-        dispatch(showSuccess(translate('Order has been canceled.')));
+        showSuccess(translate('Order has been canceled.'));
       } catch (response) {
-        dispatch(
-          showErrorResponse(response, translate('Unable to cancel order.')),
-        );
+        showErrorResponse(response, translate('Unable to cancel order.'));
       }
     },
   });

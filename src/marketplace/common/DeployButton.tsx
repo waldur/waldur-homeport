@@ -1,11 +1,10 @@
 import { useRouter } from '@uirouter/react';
-import { useDispatch } from 'react-redux';
 
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
@@ -21,9 +20,9 @@ export const DeployButton = ({
   disabled?: boolean;
   disabledReason?: string;
 }) => {
+  const { confirm } = useModal();
   const router = useRouter();
   const user = useUser();
-  const dispatch = useDispatch();
 
   if (isFeatureVisible(MarketplaceFeatures.catalogue_only)) {
     return null;
@@ -38,8 +37,7 @@ export const DeployButton = ({
     e.preventDefault();
     if (!user) {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Authentication required'),
           translate(
             'Please log in to order a resource. You will be redirected to the login page.',

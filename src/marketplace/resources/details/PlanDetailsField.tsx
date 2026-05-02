@@ -1,7 +1,7 @@
 import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 const PlanDetailsDialog = lazyComponent(() =>
   import('@/marketplace/details/plan/PlanDetailsDialog').then((module) => ({

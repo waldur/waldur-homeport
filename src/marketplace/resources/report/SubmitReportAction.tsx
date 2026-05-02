@@ -1,5 +1,4 @@
 import { FileTextIcon } from '@phosphor-icons/react';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
@@ -8,7 +7,7 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { validateState } from '@/resource/actions/base';
 import { DialogActionItem } from '@/resource/actions/DialogActionItem';
 import { ActionItemType } from '@/resource/actions/types';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceAction } from '../actions/constants';
 import { validateStaffAction } from '../actions/utils';
@@ -26,7 +25,7 @@ export const SubmitReportAction: ActionItemType = ({
   refetch,
   marketplaceResource,
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   if (
     !hasPermission(user, {
       permission: PermissionEnum.SUBMIT_RESOURCE_REPORT,

@@ -1,13 +1,11 @@
-import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { lexisLinksCreate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { FormFooter } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const CreateLexisLinkDialog = reduxForm<
   {},
@@ -16,30 +14,20 @@ export const CreateLexisLinkDialog = reduxForm<
   form: 'CreateLexisLinkDialog',
 })((props) => {
   const resource = props.resolve.resource;
-  const dispatch = useDispatch();
-  const callback = async () => {
-    try {
+  const createLinkMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
       const resource_url = `${ENV.apiEndpoint}api/marketplace-resources/${resource.marketplace_resource_uuid}/`;
-
-      await lexisLinksCreate({ body: { resource: resource_url } });
-      dispatch(
-        showSuccess(
-          translate('LEXIS link creation request has been submitted.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to submit LEXIS link creation request.'),
-        ),
-      );
-    }
-  };
+      return lexisLinksCreate({ body: { resource: resource_url } });
+    },
+    successMessage: translate(
+      'LEXIS link creation request has been submitted.',
+    ),
+    errorMessage: translate('Unable to submit LEXIS link creation request.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(callback)}>
+    <form onSubmit={props.handleSubmit(() => createLinkMutation.mutateAsync())}>
       <ModalDialog
         title={translate('Create LEXIS Link for the resource {resourceName}', {
           resourceName: resource.name,

@@ -3,8 +3,9 @@ import {
   affiliatedOrganizationsDestroy,
 } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 interface AffiliatedOrganizationDeleteButtonProps {
   row: AffiliatedOrganization;
@@ -13,22 +14,38 @@ interface AffiliatedOrganizationDeleteButtonProps {
 
 export const AffiliatedOrganizationDeleteButton = (
   props: AffiliatedOrganizationDeleteButtonProps,
-) => (
-  <DeleteButton
-    row={props.row}
-    apiFunction={(r) =>
-      affiliatedOrganizationsDestroy({ path: { uuid: r.uuid } })
-    }
-    refetch={props.refetch}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+) => {
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      affiliatedOrganizationsDestroy({ path: { uuid: props.row.uuid } }),
+    refetch: props.refetch,
+
+    confirmation: {
+      title: translate('Confirmation'),
+
+      body: translate(
         'Are you sure you want to delete the {name} affiliated organization?',
-        { name: <strong>{r.name}</strong> },
+        { name: <strong>{props.row.name}</strong> },
         formatJsxTemplate,
-      )
-    }
-    errorMessage={translate('Unable to remove affiliated organization.')}
-    title={translate('Remove')}
-  />
-);
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
+
+    errorMessage: translate('Unable to remove affiliated organization.'),
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
+    />
+  );
+};

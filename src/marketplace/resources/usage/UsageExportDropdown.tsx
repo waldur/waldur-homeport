@@ -13,7 +13,7 @@ import { getBrandColor } from '@/core/utils';
 import { translate } from '@/i18n';
 import { OfferingComponent } from '@/marketplace/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 import exportAs from '@/table/exporters';
 import { ExportData } from '@/table/exporters/types';

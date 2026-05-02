@@ -1,66 +1,74 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import {
   userPermissionRequestsApprove,
   userPermissionRequestsReject,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-export const useUserPermissionRequestActions = (permissionRequest, refetch) => {
-  const dispatch = useDispatch();
-
-  const approveRequest = async (
-    comment?: string,
-    hasConfirmation?: boolean,
-  ) => {
-    try {
-      if (hasConfirmation) {
-        await waitForConfirmation(
-          dispatch,
-          translate('Approve permission request by {name}', {
+export const useApprovePermissionRequest = (
+  permissionRequest,
+  refetch,
+  { confirm = false } = {},
+) => {
+  const { mutateAsync, isPending } = useManagedMutation<
+    any,
+    any,
+    { comment?: string }
+  >({
+    mutationFn: (variables) =>
+      userPermissionRequestsApprove({
+        path: { uuid: permissionRequest.uuid },
+        body: variables.comment ? { comment: variables.comment } : undefined,
+      }),
+    confirmation: confirm
+      ? {
+          title: translate('Approve permission request by {name}', {
             name: permissionRequest.created_by_full_name,
           }),
-          null,
-          {
+          body: null,
+          options: {
             type: 'success',
             size: 'sm',
             positiveButton: translate('Approve'),
             negativeButton: translate('Cancel'),
             iconNode: <CheckCircleIcon weight="bold" />,
           },
-        );
-      }
+        }
+      : undefined,
+    successMessage: translate('Permission request has been approved.'),
+    errorMessage: translate('Unable to approve permission request.'),
+    refetch,
+  });
 
-      await userPermissionRequestsApprove({
+  const approveRequest = (comment?: string) => mutateAsync({ comment });
+
+  return { approveRequest, isPending };
+};
+
+export const useRejectPermissionRequest = (
+  permissionRequest,
+  refetch,
+  { confirm = false } = {},
+) => {
+  const { mutateAsync, isPending } = useManagedMutation<
+    any,
+    any,
+    { comment?: string }
+  >({
+    mutationFn: (variables) =>
+      userPermissionRequestsReject({
         path: { uuid: permissionRequest.uuid },
-        body: comment ? { comment } : undefined,
-      });
-      dispatch(showSuccess(translate('Permission request has been approved.')));
-      dispatch(closeModalDialog());
-      refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to approve permission request.'),
-        ),
-      );
-    }
-  };
-
-  const rejectRequest = async (comment?: string, hasConfirmation?: boolean) => {
-    try {
-      if (hasConfirmation) {
-        await waitForConfirmation(
-          dispatch,
-          translate('Decline permission request by {name}', {
+        body: variables.comment ? { comment: variables.comment } : undefined,
+      }),
+    confirmation: confirm
+      ? {
+          title: translate('Decline permission request by {name}', {
             name: permissionRequest.created_by_full_name,
           }),
-          null,
-          {
+          body: null,
+          options: {
             type: 'danger',
             size: 'sm',
             positiveButton: translate('Decline'),
@@ -68,22 +76,14 @@ export const useUserPermissionRequestActions = (permissionRequest, refetch) => {
             positiveButtonVariant: 'danger',
             iconNode: <XCircleIcon weight="bold" />,
           },
-        );
-      }
+        }
+      : undefined,
+    successMessage: translate('Permission request has been rejected.'),
+    errorMessage: translate('Unable to reject permission request.'),
+    refetch,
+  });
 
-      await userPermissionRequestsReject({
-        path: { uuid: permissionRequest.uuid },
-        body: comment ? { comment } : undefined,
-      });
-      dispatch(showSuccess(translate('Permission request has been rejected.')));
-      dispatch(closeModalDialog());
-      refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to reject permission request.')),
-      );
-    }
-  };
+  const rejectRequest = (comment?: string) => mutateAsync({ comment });
 
-  return { approveRequest, rejectRequest };
+  return { rejectRequest, isPending };
 };

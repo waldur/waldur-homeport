@@ -1,23 +1,13 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
-
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { useModal } from '@/modal/actions';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 import { DeleteRoleDialog } from './DeleteRoleDialog';
 
 export const DeleteRoleAction = ({ row, refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const handler = () => {
-    dispatch(openModalDialog(DeleteRoleDialog, { resolve: { row, refetch } }));
+    openDialog(DeleteRoleDialog, { resolve: { row, refetch } });
   };
-  return (
-    <ActionItem
-      title={translate('Delete')}
-      action={handler}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-    />
-  );
+  return <RemovalActionItem title={translate('Delete')} action={handler} />;
 };

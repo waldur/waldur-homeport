@@ -1,12 +1,11 @@
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateAttributes } from 'waldur-js-client';
 
 import { FormFooter } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatAttribute } from '../../store/utils';
 import { parseAttribute } from '../utils';
@@ -31,11 +30,9 @@ export const EditAttributeDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
   reduxForm<FormData, OwnProps>({
     form: ATTRIBUTE_FORM_ID,
   })(({ resolve, handleSubmit, invalid, submitting }) => {
-    const dispatch = useDispatch();
-
-    const submitRequest = async (formData: FormData) => {
-      try {
-        await marketplaceProviderOfferingsUpdateAttributes({
+    const updateMutation = useManagedMutation<any, any, FormData>({
+      mutationFn: (formData) =>
+        marketplaceProviderOfferingsUpdateAttributes({
           path: { uuid: resolve.offering.uuid },
           body: {
             ...resolve.offering.attributes,
@@ -44,21 +41,16 @@ export const EditAttributeDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
               formData.value,
             ),
           },
-        });
-        if (resolve.refetch) {
-          await resolve.refetch();
-        }
-        dispatch(showSuccess(translate('Attribute has been updated.')));
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to update attribute')),
-        );
-      }
-    };
+        }),
+      successMessage: translate('Attribute has been updated.'),
+      errorMessage: translate('Unable to update attribute'),
+      refetch: resolve.refetch,
+    });
 
     return (
-      <form onSubmit={handleSubmit(submitRequest)}>
+      <form
+        onSubmit={handleSubmit((values) => updateMutation.mutateAsync(values))}
+      >
         <ModalDialog
           title={translate('Edit attribute')}
           footer={

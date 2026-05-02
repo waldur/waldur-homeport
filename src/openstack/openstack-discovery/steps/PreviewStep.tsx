@@ -1,9 +1,7 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
 import { Alert, Card, Spinner, Table } from 'react-bootstrap';
 import { useForm, useFormState } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
   openstackDiscoveryPreviewServiceAttributes,
@@ -13,9 +11,8 @@ import {
 import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { renderFieldOrDash } from '@/table/utils';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
@@ -27,13 +24,10 @@ interface PreviewStepProps extends WizardStepProps {
 }
 
 export const PreviewStep: FC<PreviewStepProps> = (props) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
   const form = useForm<OpenStackDiscoveryFormValues>();
   const { values } = useFormState<OpenStackDiscoveryFormValues>();
   const [loading, setLoading] = useState(true);
   const [previewError, setPreviewError] = useState<string | null>(null);
-  const [saving, setSaving] = useState(false);
 
   useEffect(() => {
     const loadPreview = async () => {
@@ -69,60 +63,60 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
     loadPreview();
   }, []);
 
-  const handleApply = async () => {
-    if (!values.previewResult) return;
+  const applyMutation = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
+      if (!values.previewResult) return;
 
-    // Merge provisioning settings into service_attributes
-    const serviceAttributes = {
-      ...values.previewResult.service_attributes,
-      ...(values.flavor_exclude_regex && {
-        flavor_exclude_regex: values.flavor_exclude_regex,
-      }),
-      ...(values.volume_type_blacklist && {
-        volume_type_blacklist: values.volume_type_blacklist,
-      }),
-      ...(values.console_type && { console_type: values.console_type }),
-      ...(values.console_domain_override && {
-        console_domain_override: values.console_domain_override,
-      }),
-      ...(values.dns_nameservers?.length && {
-        dns_nameservers: values.dns_nameservers,
-      }),
-      create_ha_routers: values.create_ha_routers,
-      live_resize_of_volumes_enabled: values.live_resize_of_volumes_enabled,
-      ...(values.max_concurrent_provision_instance != null && {
-        max_concurrent_provision_instance:
-          values.max_concurrent_provision_instance,
-      }),
-      ...(values.max_concurrent_provision_volume != null && {
-        max_concurrent_provision_volume: values.max_concurrent_provision_volume,
-      }),
-      ...(values.max_concurrent_provision_snapshot != null && {
-        max_concurrent_provision_snapshot:
-          values.max_concurrent_provision_snapshot,
-      }),
-    };
+      // Merge provisioning settings into service_attributes
+      const serviceAttributes = {
+        ...values.previewResult.service_attributes,
+        ...(values.flavor_exclude_regex && {
+          flavor_exclude_regex: values.flavor_exclude_regex,
+        }),
+        ...(values.volume_type_blacklist && {
+          volume_type_blacklist: values.volume_type_blacklist,
+        }),
+        ...(values.console_type && { console_type: values.console_type }),
+        ...(values.console_domain_override && {
+          console_domain_override: values.console_domain_override,
+        }),
+        ...(values.dns_nameservers?.length && {
+          dns_nameservers: values.dns_nameservers,
+        }),
+        create_ha_routers: values.create_ha_routers,
+        live_resize_of_volumes_enabled: values.live_resize_of_volumes_enabled,
+        ...(values.max_concurrent_provision_instance != null && {
+          max_concurrent_provision_instance:
+            values.max_concurrent_provision_instance,
+        }),
+        ...(values.max_concurrent_provision_volume != null && {
+          max_concurrent_provision_volume:
+            values.max_concurrent_provision_volume,
+        }),
+        ...(values.max_concurrent_provision_snapshot != null && {
+          max_concurrent_provision_snapshot:
+            values.max_concurrent_provision_snapshot,
+        }),
+      };
 
-    // Merge limits into plugin_options
-    const pluginOptions = {
-      ...values.previewResult.plugin_options,
-      ...(values.default_internal_network_mtu != null && {
-        default_internal_network_mtu: values.default_internal_network_mtu,
-      }),
-      ...(values.snapshot_size_limit_gb != null && {
-        snapshot_size_limit_gb: values.snapshot_size_limit_gb,
-      }),
-      ...(values.max_instances != null && {
-        max_instances: values.max_instances,
-      }),
-      ...(values.max_volumes != null && {
-        max_volumes: values.max_volumes,
-      }),
-    };
+      // Merge limits into plugin_options
+      const pluginOptions = {
+        ...values.previewResult.plugin_options,
+        ...(values.default_internal_network_mtu != null && {
+          default_internal_network_mtu: values.default_internal_network_mtu,
+        }),
+        ...(values.snapshot_size_limit_gb != null && {
+          snapshot_size_limit_gb: values.snapshot_size_limit_gb,
+        }),
+        ...(values.max_instances != null && {
+          max_instances: values.max_instances,
+        }),
+        ...(values.max_volumes != null && {
+          max_volumes: values.max_volumes,
+        }),
+      };
 
-    setSaving(true);
-    try {
-      await marketplaceProviderOfferingsUpdateIntegration({
+      return await marketplaceProviderOfferingsUpdateIntegration({
         path: { uuid: props.offering.uuid },
         body: {
           service_attributes: serviceAttributes as unknown as Record<
@@ -132,27 +126,18 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
           plugin_options: pluginOptions as unknown as Record<string, string>,
         },
       });
+    },
 
-      queryClient.invalidateQueries({
+    successMessage: translate('OpenStack configuration applied successfully.'),
+    errorMessage: translate('Failed to apply OpenStack configuration.'),
+    refetch: props.refetch,
+
+    invalidateQueries: [
+      {
         queryKey: ['OfferingDetails'],
-      });
-
-      dispatch(
-        showSuccess(translate('OpenStack configuration applied successfully.')),
-      );
-      if (props.refetch) await props.refetch();
-      dispatch(closeModalDialog());
-    } catch (e: any) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Failed to apply OpenStack configuration.'),
-        ),
-      );
-    } finally {
-      setSaving(false);
-    }
-  };
+      },
+    ],
+  });
 
   const renderFooter = () => (
     <>
@@ -168,10 +153,10 @@ export const PreviewStep: FC<PreviewStepProps> = (props) => {
       />
       <CloseDialogButton className="min-w-125px" />
       <SubmitButton
-        submitting={saving}
+        submitting={applyMutation.isPending}
         disabled={loading || !!previewError || !values.previewResult}
         label={translate('Apply Configuration')}
-        onClick={handleApply}
+        onClick={() => applyMutation.mutate()}
         type="button"
         data-testid="discovery-apply-btn"
       />

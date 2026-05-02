@@ -9,9 +9,8 @@ import { ImageField } from '@/form/ImageField';
 import { translate } from '@/i18n';
 import { OFFERING_IMAGES_FORM_ID } from '@/marketplace/offerings/store/constants';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const CreateImageDialog = reduxForm<
   {},
@@ -19,11 +18,9 @@ export const CreateImageDialog = reduxForm<
 >({
   form: OFFERING_IMAGES_FORM_ID,
 })((props) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-  const submitRequest = async (formData) => {
-    try {
-      await marketplaceScreenshotsCreate({
+  const submitRequestMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceScreenshotsCreate({
         body: {
           image: fileSerializer(formData.image),
           name: formData.name,
@@ -31,16 +28,17 @@ export const CreateImageDialog = reduxForm<
           offering: props.resolve.offering.url,
         },
         ...formDataOptions,
-      });
-      props.resolve.refetch();
-      showSuccess(translate('Image has been added.'));
-      closeDialog();
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to add image.'));
-    }
-  };
+      }),
+    successMessage: translate('Image has been added.'),
+    errorMessage: translate('Unable to add image.'),
+    refetch: props.resolve.refetch,
+  });
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        submitRequestMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Add offering image')}
         iconNode={<PlusCircleIcon weight="bold" />}

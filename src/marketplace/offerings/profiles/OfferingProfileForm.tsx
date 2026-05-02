@@ -1,6 +1,5 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOfferingProfilesCreate,
   marketplaceOfferingProfilesPartialUpdate,
@@ -9,10 +8,9 @@ import {
 import { required } from '@/core/validators';
 import { StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { FormGroup } from '../FormGroup';
 
@@ -24,46 +22,40 @@ interface FormResolve {
 export const OfferingProfileForm: FC<{ resolve: FormResolve }> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
   const isEdit = !!resolve.profile;
 
-  const submit = useCallback(
-    async (values) => {
-      try {
-        if (isEdit) {
-          await marketplaceOfferingProfilesPartialUpdate({
-            path: { uuid: resolve.profile!.uuid },
-            body: { name: values.name, description: values.description || '' },
-          });
-          dispatch(showSuccess(translate('Profile updated.')));
-        } else {
-          await marketplaceOfferingProfilesCreate({
-            body: {
-              name: values.name,
-              description: values.description || '',
-            } as any,
-          });
-          dispatch(showSuccess(translate('Profile created.')));
-        }
-        if (resolve.refetch) await resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            isEdit
-              ? translate('Unable to update profile.')
-              : translate('Unable to create profile.'),
-          ),
-        );
+  const mutation = useManagedMutation<any, any, any>({
+    mutationFn: (values) => {
+      if (isEdit) {
+        return marketplaceOfferingProfilesPartialUpdate({
+          path: { uuid: resolve.profile!.uuid },
+          body: { name: values.name, description: values.description || '' },
+        });
+      } else {
+        return marketplaceOfferingProfilesCreate({
+          body: {
+            name: values.name,
+            description: values.description || '',
+          } as any,
+        });
       }
     },
-    [dispatch, resolve, isEdit],
-  );
+    successMessage: isEdit
+      ? translate('Profile updated.')
+      : translate('Profile created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update profile.')
+      : translate('Unable to create profile.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={submit}
+      onSubmit={(values) =>
+        mutation.mutateAsync(values).catch(() => {
+          /* error handled by useManagedMutation */
+        })
+      }
       initialValues={
         resolve.profile
           ? {

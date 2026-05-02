@@ -1,7 +1,8 @@
 import { ScienceDomain, scienceDomainsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 interface ScienceDomainDeleteButtonProps {
   row: ScienceDomain;
@@ -10,20 +11,37 @@ interface ScienceDomainDeleteButtonProps {
 
 export const ScienceDomainDeleteButton = (
   props: ScienceDomainDeleteButtonProps,
-) => (
-  <DeleteButton
-    row={props.row}
-    apiFunction={(r) => scienceDomainsDestroy({ path: { uuid: r.uuid } })}
-    refetch={props.refetch}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+) => {
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () => scienceDomainsDestroy({ path: { uuid: props.row.uuid } }),
+    refetch: props.refetch,
+
+    confirmation: {
+      title: translate('Confirmation'),
+
+      body: translate(
         'Are you sure you want to delete the {name} science domain? This will also delete all its sub-domains.',
-        { name: <strong>{r.name}</strong> },
+        { name: <strong>{props.row.name}</strong> },
         formatJsxTemplate,
-      )
-    }
-    errorMessage={translate('Unable to remove science domain.')}
-    title={translate('Remove')}
-  />
-);
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
+
+    errorMessage: translate('Unable to remove science domain.'),
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
+    />
+  );
+};

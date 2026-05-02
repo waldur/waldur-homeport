@@ -1,10 +1,9 @@
 import { InfoIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { Offering, Resource } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ToolbarButton } from '@/table/ToolbarButton';
 
 interface ResourceViewChangeButtonProps {
@@ -24,14 +23,12 @@ export const ResourceViewChangeButton = ({
   offering,
   refetch,
 }: ResourceViewChangeButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(ResourceViewChangeDialog, {
-        resolve: { resource, offering, refetch },
-        size: 'lg',
-      }),
-    );
+    openDialog(ResourceViewChangeDialog, {
+      resolve: { resource, offering, refetch },
+      size: 'lg',
+    });
 
   return (
     <ToolbarButton

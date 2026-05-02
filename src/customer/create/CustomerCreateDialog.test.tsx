@@ -12,7 +12,7 @@ import { CustomerCreateDialog } from './CustomerCreateDialog';
 // Mock API calls
 vi.mock('waldur-js-client');
 vi.mock('@/user/UsersService');
-vi.mock('@/modal/hooks', () => ({
+vi.mock('@/modal/actions', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
@@ -46,7 +46,7 @@ vi.mock('@uirouter/react', async (importOriginal) => {
   };
 });
 
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useNotify: () => ({
     showSuccess: mockShowSuccess,
     showErrorResponse: mockShowErrorResponse,

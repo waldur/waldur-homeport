@@ -1,15 +1,13 @@
-import { useQueryClient } from '@tanstack/react-query';
-import { FC, useCallback, useMemo, useState } from 'react';
+import { FC, useCallback, useMemo } from 'react';
 import { useFormState } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import type { ArticleCodeUpdatePreviewItem } from 'waldur-js-client';
 import { marketplaceArticleCodeUpdateApply } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { PROVIDER_OFFERING_DATA_QUERY_KEY } from '@/marketplace/offerings/constants';
-import { closeModalDialog } from '@/modal/actions';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -23,42 +21,44 @@ const ApplyAction = ({
   rows: ArticleCodeUpdatePreviewItem[];
   refetch: () => void;
 }) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-  const { showSuccess, showErrorResponse } = useNotify();
+  const { showSuccess } = useNotify();
   const { values } = useFormState<ArticleCodeFormValues>();
-  const [applying, setApplying] = useState(false);
 
-  const handleApply = useCallback(async () => {
-    if (rows.length === 0) return;
-    setApplying(true);
-    try {
-      const response = await marketplaceArticleCodeUpdateApply({
+  const applyMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceArticleCodeUpdateApply({
         body: {
           search: values.search?.trim(),
           replace: values.replace ?? '',
           component_uuids: rows.map((r) => r.component_uuid),
         },
-      });
+      }),
+
+    errorMessage: translate('Failed to apply changes'),
+
+    onSuccess: (response) => {
       showSuccess(
         translate('{count} article code(s) updated.', {
           count: response.data?.updated_count ?? rows.length,
         }),
       );
-      queryClient.invalidateQueries({
+    },
+
+    invalidateQueries: [
+      {
         queryKey: [PROVIDER_OFFERING_DATA_QUERY_KEY],
-      });
-      dispatch(closeModalDialog());
-    } catch (error) {
-      showErrorResponse(error, translate('Failed to apply changes'));
-    } finally {
-      setApplying(false);
-    }
-  }, [dispatch, queryClient, rows, values, showSuccess, showErrorResponse]);
+      },
+    ],
+  });
+
+  const handleApply = useCallback(() => {
+    if (rows.length === 0) return;
+    applyMutation.mutate();
+  }, [rows, applyMutation]);
 
   return (
     <SubmitButton
-      submitting={applying}
+      submitting={applyMutation.isPending}
       type="button"
       variant="success"
       onClick={handleApply}

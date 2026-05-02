@@ -8,7 +8,8 @@ import { UserFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { CountryFlag } from '@/marketplace/common/CountryFlag';
 import { formatUserStatus } from '@/user/support/utils';
-import { getUser, isStaffOrSupport, isStaff } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { isStaffOrSupport, isStaff } from '@/workspace/selectors';
 
 import {
   formatGender,
@@ -507,7 +508,7 @@ export const UserEditRows = ({
   user: User;
   disabled?: boolean;
 }) => {
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const isSelf = currentUser.uuid === user.uuid;
 
   return (

@@ -1,8 +1,10 @@
-import { useCallback, useState } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
-import type { ArrowSettings, InvoicePriceSourceEnum } from 'waldur-js-client';
+import {
+  type ArrowSettings,
+  type InvoicePriceSourceEnum,
+  adminArrowSettingsPartialUpdate,
+} from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { SecretField, SelectField, StringField } from '@/form';
@@ -10,12 +12,12 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
-import { useUpdateArrowSettings } from '../api';
+import { arrowQueryKeys } from '../api';
 
 interface ArrowSettingsEditDialogProps {
   resolve: {
@@ -25,8 +27,8 @@ interface ArrowSettingsEditDialogProps {
 }
 
 const INVOICE_PRICE_SOURCE_OPTIONS = [
-  { value: 'sell', label: 'Sell price' },
-  { value: 'buy', label: 'Buy price' },
+  { value: 'sell', label: translate('Sell price') },
+  { value: 'buy', label: translate('Buy price') },
 ];
 
 interface FormValues {
@@ -41,50 +43,39 @@ interface FormValues {
 export const ArrowSettingsEditDialog = ({
   resolve,
 }: ArrowSettingsEditDialogProps) => {
-  const dispatch = useDispatch();
-  const [error, setError] = useState<string | null>(null);
-  const updateSettings = useUpdateArrowSettings();
+  const { closeDialog } = useModal();
   const { settings, refetch } = resolve;
 
-  const handleSubmit = useCallback(
-    async (values: FormValues) => {
-      setError(null);
-      try {
-        await updateSettings.mutateAsync({
-          uuid: settings.uuid,
-          data: {
-            api_url: values.api_url,
-            // Only include api_key if provided (non-empty)
-            ...(values.api_key ? { api_key: values.api_key } : {}),
-            export_type_reference: values.export_type_reference || undefined,
-            classification_filter: values.classification_filter || undefined,
-            sync_enabled: values.sync_enabled,
-            invoice_price_source: (values.invoice_price_source?.value ||
-              'sell') as InvoicePriceSourceEnum,
-          },
-        });
-        dispatch(showSuccess(translate('Arrow settings updated')));
-        refetch();
-        dispatch(closeModalDialog());
-      } catch (e: any) {
-        setError(
-          e.response?.data?.detail ||
-            e.message ||
-            translate('Failed to update settings'),
-        );
-      }
-    },
-    [updateSettings, settings.uuid, dispatch, refetch],
-  );
+  const submitMutation = useManagedMutation<any, any, FormValues>({
+    mutationFn: (values) =>
+      adminArrowSettingsPartialUpdate({
+        path: { uuid: settings.uuid },
+        body: {
+          api_url: values.api_url,
+          ...(values.api_key ? { api_key: values.api_key } : {}),
+          export_type_reference: values.export_type_reference || undefined,
+          classification_filter: values.classification_filter || undefined,
+          sync_enabled: values.sync_enabled,
+          invoice_price_source: (values.invoice_price_source?.value ||
+            'sell') as InvoicePriceSourceEnum,
+        },
+      }),
 
-  const handleClose = useCallback(() => {
-    dispatch(closeModalDialog());
-  }, [dispatch]);
+    successMessage: translate('Arrow settings updated'),
+    refetch,
+    invalidateQueries: [{ queryKey: arrowQueryKeys.settings() }],
+  });
+
+  const mutationError = submitMutation.error
+    ? (submitMutation.error as any).response?.data?.detail ||
+      (submitMutation.error as any).message ||
+      translate('Failed to update settings')
+    : null;
 
   return (
     <ModalDialog title={translate('Edit Arrow Settings')}>
-      <Form
-        onSubmit={handleSubmit}
+      <Form<FormValues>
+        onSubmit={(values) => submitMutation.mutateAsync(values)}
         initialValues={{
           api_url: settings.api_url,
           api_key: settings.api_key || '',
@@ -162,20 +153,20 @@ export const ArrowSettingsEditDialog = ({
               />
             </FormGroup>
 
-            {error && (
+            {mutationError && (
               <Alert variant="danger" className="mb-4">
-                {error}
+                {mutationError}
               </Alert>
             )}
 
             <div className="d-flex justify-content-end gap-2">
               <ActionButton
-                action={handleClose}
+                action={closeDialog}
                 variant="secondary"
                 title={translate('Cancel')}
               />
               <SubmitButton
-                submitting={updateSettings.isPending}
+                submitting={submitMutation.isPending}
                 disabled={invalid}
                 label={translate('Save')}
               />

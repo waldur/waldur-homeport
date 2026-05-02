@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   proposalProtectedCallsRoundsUpdate,
   ProtectedRound,
@@ -10,7 +9,7 @@ import {
 import { parseDate } from '@/core/dateUtils';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
 import { WizardFormFirstPage } from '@/proposals/update/rounds/WizardFormFirstPage';
 import { getRoundInitialValues } from '@/proposals/utils';
@@ -34,7 +33,7 @@ const validate = (values: ProtectedRoundRequest) => {
 export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
   props,
 ) => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const submit = useCallback(
     (formData: ProtectedRoundRequest, _dispatch, formProps) => {
       return proposalProtectedCallsRoundsUpdate({
@@ -48,11 +47,11 @@ export const EditRoundSubmissionDialog: FC<EditRoundSubmissionDialogProps> = (
         },
       }).then(() => {
         formProps.destroy();
-        dispatch(closeModalDialog());
+        closeDialog();
         props.resolve.refetch();
       });
     },
-    [dispatch, props.resolve],
+    [],
   );
 
   return (

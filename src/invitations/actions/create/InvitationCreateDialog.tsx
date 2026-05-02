@@ -1,11 +1,10 @@
 import arrayMutators from 'final-form-arrays';
 import { useCallback, useRef, useState } from 'react';
 import { Form, FormSpy } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { RestrictionsInfoCard } from '../RestrictionsInfoCard';
 import { GroupInviteRow, InvitationContext } from '../types';
@@ -25,7 +24,7 @@ interface OwnProps {
 const initialValues = { rows: [{}] };
 
 export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
   const {
     checkDuplicates,
     createInvitations,
@@ -108,18 +107,16 @@ export const InvitationCreateDialog = ({ resolve }: OwnProps) => {
         formApi.change('_duplicateEmails', undefined);
         return true;
       } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to check for duplicate invitations.'),
-          ),
+        showErrorResponse(
+          e,
+          translate('Unable to check for duplicate invitations.'),
         );
         return false;
       } finally {
         setIsCheckingDuplicates(false);
       }
     },
-    [checkDuplicates, dispatch],
+    [checkDuplicates],
   );
 
   const populateRows = useCallback(

@@ -1,6 +1,5 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   CallReviewerPool,
   callReviewerPoolsPartialUpdate,
@@ -10,10 +9,9 @@ import { NumberField, SubmitButton } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface EditCapacityDialogProps {
   resolve: {
@@ -29,33 +27,22 @@ interface FormValues {
 export const EditCapacityDialog: FC<EditCapacityDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
   const { poolMember, refetch } = resolve;
 
-  const handleSubmit = useCallback(
-    async (values: FormValues) => {
-      try {
-        await callReviewerPoolsPartialUpdate({
-          path: { uuid: poolMember.uuid },
-          body: { max_assignments: values.max_assignments },
-        });
-        dispatch(
-          showSuccess(translate('Reviewer capacity updated successfully.')),
-        );
-        refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Failed to update capacity.')),
-        );
-      }
-    },
-    [poolMember.uuid, refetch, dispatch],
-  );
+  const handleSubmitMutation = useManagedMutation<any, any, FormValues>({
+    mutationFn: (values) =>
+      callReviewerPoolsPartialUpdate({
+        path: { uuid: poolMember.uuid },
+        body: { max_assignments: values.max_assignments },
+      }),
+    successMessage: translate('Reviewer capacity updated successfully.'),
+    errorMessage: translate('Failed to update capacity.'),
+    refetch,
+  });
 
   return (
     <Form<FormValues>
-      onSubmit={handleSubmit}
+      onSubmit={(values) => handleSubmitMutation.mutateAsync(values)}
       initialValues={{ max_assignments: poolMember.max_assignments }}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>

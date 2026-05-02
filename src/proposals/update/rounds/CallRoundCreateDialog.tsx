@@ -1,6 +1,5 @@
 import { DateTime } from 'luxon';
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   proposalProtectedCallsRoundsSet,
   ProtectedRoundRequest,
@@ -10,9 +9,8 @@ import { parseDate } from '@/core/dateUtils';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { WizardFormFirstPage } from './WizardFormFirstPage';
 import { WizardFormSecondPage } from './WizardFormSecondPage';
@@ -60,23 +58,31 @@ const validate = (values: ProtectedRoundRequest) => {
 export const CallRoundCreateDialog: FC<CallRoundCreateDialogProps> = (
   props,
 ) => {
-  const dispatch = useDispatch();
+  const createRoundMutation = useManagedMutation<
+    any,
+    any,
+    ProtectedRoundRequest
+  >({
+    mutationFn: (formData) =>
+      proposalProtectedCallsRoundsSet({
+        path: { uuid: props.resolve.call.uuid },
+        body: formData,
+      }),
+    successMessage: translate('Round has been created.'),
+    errorMessage: translate('Unable to create round.'),
+    refetch: props.resolve.refetch,
+  });
+
   const createRound = useCallback(
     async (formData: ProtectedRoundRequest, _dispatch, formProps) => {
       try {
-        await proposalProtectedCallsRoundsSet({
-          path: { uuid: props.resolve.call.uuid },
-          body: formData,
-        });
+        await createRoundMutation.mutateAsync(formData);
         formProps.destroy();
-        dispatch(closeModalDialog());
-        props.resolve.refetch();
-        dispatch(showSuccess(translate('Round has been created.')));
-      } catch (e) {
-        dispatch(showErrorResponse(e));
+      } catch {
+        // Error handled by useManagedMutation
       }
     },
-    [dispatch, props.resolve],
+    [createRoundMutation],
   );
   return (
     <WizardFormContainer

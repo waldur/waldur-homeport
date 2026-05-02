@@ -1,5 +1,3 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import {
   OpenStackRouter,
   openstackRoutersRemoveRouterInterface,
@@ -7,10 +5,11 @@ import {
 
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionItemType } from '@/resource/actions/types';
-import { showErrorResponse, showInfo, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { renderFieldOrDash } from '@/table/utils';
 
 const BodyComponent = (router, setOption) => {
@@ -39,13 +38,23 @@ const BodyComponent = (router, setOption) => {
 export const RemoveRouterInterfaceButton: ActionItemType<OpenStackRouter> = ({
   resource,
 }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+  const { showInfo } = useNotify();
+
+  const { mutate, isPending = false } = useManagedMutation<any, any, any>({
+    mutationFn: (port) =>
+      openstackRoutersRemoveRouterInterface({
+        path: { uuid: resource.uuid },
+        body: { port: port.value },
+      }),
+    successMessage: translate('Router interface was removed.'),
+    errorMessage: translate('Unable to remove router interface.'),
+  });
 
   const removeInterface = async () => {
     let port = null;
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Remove router interface'),
         BodyComponent(resource, (value) => {
           port = value;
@@ -56,29 +65,16 @@ export const RemoveRouterInterfaceButton: ActionItemType<OpenStackRouter> = ({
       return;
     }
     if (!port) {
-      dispatch(showInfo(translate('Please select a port to remove.')));
+      showInfo(translate('Please select a port to remove.'));
       return;
     }
-
-    try {
-      await openstackRoutersRemoveRouterInterface({
-        path: { uuid: resource.uuid },
-        body: { port: port.value },
-      });
-      dispatch(showSuccess(translate('Router interface was removed.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to remove router interface.')),
-      );
-    }
+    mutate(port);
   };
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Remove router interface')}
       action={removeInterface}
-      iconNode={<TrashIcon weight="bold" />}
-      iconColor="danger"
-      className="text-danger"
+      disabled={isPending}
     />
   );
 };

@@ -1,6 +1,5 @@
 import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import {
   EventGroupsEnum,
@@ -17,9 +16,8 @@ import { StringField, SubmitButton } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { HookTypeField } from './HookTypeField';
 import { MultiSelectField } from './MultiSelectField';
@@ -27,15 +25,13 @@ import { HookFormData, HookResponse, HookType } from './types';
 import { loadEventGroupsOptions } from './utils';
 
 const useHookForm = (hook, refetch) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const dispatch = useDispatch();
-  const saveHook = async (formData: HookFormData) => {
-    const hookType = hook ? hook.hook_type : formData.hook_type;
-    const event_groups = Object.keys(
-      formData.event_groups,
-    ) as EventGroupsEnum[];
-    if (hook) {
-      try {
+  const saveHookMutation = useManagedMutation<any, any, HookFormData>({
+    mutationFn: async (formData) => {
+      const hookType = hook ? hook.hook_type : formData.hook_type;
+      const event_groups = Object.keys(
+        formData.event_groups,
+      ) as EventGroupsEnum[];
+      if (hook) {
         if (hookType == 'email') {
           await hooksEmailPartialUpdate({
             path: { uuid: hook.uuid },
@@ -55,14 +51,7 @@ const useHookForm = (hook, refetch) => {
             },
           });
         }
-        await refetch();
-        showSuccess(translate('Notification has been updated.'));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to update notification.'));
-      }
-    } else {
-      try {
+      } else {
         if (hookType == 'email') {
           await hooksEmailCreate({
             body: {
@@ -80,14 +69,16 @@ const useHookForm = (hook, refetch) => {
             },
           });
         }
-        await refetch();
-        showSuccess(translate('Notification has been created.'));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to create notification.'));
       }
-    }
-  };
+    },
+    successMessage: hook
+      ? translate('Notification has been updated.')
+      : translate('Notification has been created.'),
+    errorMessage: hook
+      ? translate('Unable to update notification.')
+      : translate('Unable to create notification.'),
+    refetch,
+  });
   const initialValues = hook
     ? {
         is_active: hook.is_active,
@@ -104,7 +95,14 @@ const useHookForm = (hook, refetch) => {
         event_groups: {},
       };
   const state = useAsync(loadEventGroupsOptions);
-  return { saveHook, initialValues, state };
+  return {
+    saveHook: (values) =>
+      saveHookMutation.mutateAsync(values).catch(() => {
+        /* error handled by useManagedMutation */
+      }),
+    initialValues,
+    state,
+  };
 };
 
 export const HookDetailsDialog: FunctionComponent<{

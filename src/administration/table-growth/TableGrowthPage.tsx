@@ -13,7 +13,7 @@ import { Panel } from '@/core/Panel';
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
 import { RefreshButton } from '@/marketplace/common/RefreshButton';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
 
 import { getTableGrowth } from './api';

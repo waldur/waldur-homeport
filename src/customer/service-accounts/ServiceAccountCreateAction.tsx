@@ -1,12 +1,12 @@
 import { RobotIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { InvitationsFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 import { hasManageServiceAccountPermission } from '../team/utils';
@@ -36,13 +36,11 @@ export const ServiceAccountCreateButton: FC<
   if (!showServiceAccounts) {
     return null;
   }
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(ServiceAccountFormDialog, {
-        resolve: { context, scope, refetch },
-      }),
-    );
+    openDialog(ServiceAccountFormDialog, {
+      resolve: { context, scope, refetch },
+    });
 
   return (
     <ActionItem

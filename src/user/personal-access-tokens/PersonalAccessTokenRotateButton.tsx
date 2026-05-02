@@ -1,58 +1,46 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { personalAccessTokensRotate } from 'waldur-js-client';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
-import { personalAccessTokenSecretDialog } from './secretActions';
+const PersonalAccessTokenSecretDialog = lazyComponent(() =>
+  import('./PersonalAccessTokenSecretDialog').then((module) => ({
+    default: module.PersonalAccessTokenSecretDialog,
+  })),
+);
 
 export const PersonalAccessTokenRotateButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const [loading, setLoading] = useState(false);
+  const { openDialog } = useModal();
 
-  const handleRotate = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Rotate token'),
-        translate(
-          'Are you sure you want to rotate this token? The current token will stop working immediately and a new token will be generated.',
-        ),
-      );
-    } catch {
-      return;
-    }
-
-    setLoading(true);
-    try {
-      const response = await personalAccessTokensRotate({
-        path: { uuid: row.uuid },
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => personalAccessTokensRotate({ path: { uuid: row.uuid } }),
+    successMessage: translate('Token has been rotated.'),
+    errorMessage: translate('Unable to rotate token.'),
+    refetch,
+    onSuccess: (response) => {
+      openDialog(PersonalAccessTokenSecretDialog, {
+        size: 'lg',
+        resolve: { token: response.data.token, tokenName: response.data.name },
       });
-      dispatch(showSuccess(translate('Token has been rotated.')));
-      await refetch?.();
-      dispatch(
-        personalAccessTokenSecretDialog(
-          response.data.token,
-          response.data.name,
-        ),
-      );
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to rotate token.')));
-    } finally {
-      setLoading(false);
-    }
-  }, [dispatch, row, refetch]);
+    },
+    confirmation: {
+      title: translate('Rotate token'),
+      body: translate(
+        'Are you sure you want to rotate this token? The current token will stop working immediately and a new token will be generated.',
+      ),
+    },
+  });
 
   return (
     <ActionItem
       title={translate('Rotate')}
-      action={handleRotate}
+      action={mutate}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
-      disabled={loading || !row.is_active}
+      disabled={isPending || !row.is_active}
       tooltip={
         !row.is_active ? translate('Cannot rotate a revoked token.') : undefined
       }

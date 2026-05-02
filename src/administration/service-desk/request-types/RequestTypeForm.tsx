@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form as FinalForm } from 'react-final-form';
 import {
   PatchedRequestTypeAdminRequest,
@@ -13,9 +13,8 @@ import { NumberField, StringField, SubmitButton } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface RequestTypeFormProps {
   resolve: {
@@ -25,38 +24,33 @@ interface RequestTypeFormProps {
 }
 
 export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
   const isEdit = Boolean(resolve.requestType?.uuid);
 
-  const submitForm = useCallback(
-    async (values: Partial<RequestTypeAdmin>) => {
-      try {
-        if (isEdit) {
-          await supportRequestTypesAdminPartialUpdate({
-            path: { uuid: resolve.requestType!.uuid },
-            body: values as PatchedRequestTypeAdminRequest,
-          });
-          showSuccess(translate('Request type has been updated.'));
-        } else {
-          await supportRequestTypesAdminCreate({
-            body: values as RequestTypeAdminRequest,
-          });
-          showSuccess(translate('Request type has been created.'));
-        }
-        resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(
-          error,
-          isEdit
-            ? translate('Unable to update request type.')
-            : translate('Unable to create request type.'),
-        );
+  const saveRequestTypeMutation = useManagedMutation<
+    any,
+    any,
+    Partial<RequestTypeAdmin>
+  >({
+    mutationFn: (values) => {
+      if (isEdit) {
+        return supportRequestTypesAdminPartialUpdate({
+          path: { uuid: resolve.requestType!.uuid },
+          body: values as PatchedRequestTypeAdminRequest,
+        });
+      } else {
+        return supportRequestTypesAdminCreate({
+          body: values as RequestTypeAdminRequest,
+        });
       }
     },
-    [resolve, isEdit, showSuccess, showErrorResponse, closeDialog],
-  );
+    successMessage: isEdit
+      ? translate('Request type has been updated.')
+      : translate('Request type has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update request type.')
+      : translate('Unable to create request type.'),
+    refetch: resolve.refetch,
+  });
 
   const initialValues = useMemo(() => {
     if (isEdit && resolve.requestType) {
@@ -76,7 +70,10 @@ export const RequestTypeForm: FC<RequestTypeFormProps> = ({ resolve }) => {
   }, [isEdit, resolve.requestType]);
 
   return (
-    <FinalForm onSubmit={submitForm} initialValues={initialValues}>
+    <FinalForm
+      onSubmit={(values) => saveRequestTypeMutation.mutateAsync(values)}
+      initialValues={initialValues}
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

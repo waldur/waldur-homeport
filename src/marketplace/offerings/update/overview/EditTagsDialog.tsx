@@ -17,9 +17,9 @@ import {
 } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { tagAutocomplete } from '@/marketplace/common/autocompletes';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 // Custom Option that shows regular label for "create new" items, checkbox for existing items
 const CreatableMultiSelectOption = (props) => {
@@ -43,35 +43,31 @@ export const EditTagsDialog = reduxForm<FormData, OwnProps>({
   form: EDIT_TAGS_FORM_ID,
 })(({ resolve, handleSubmit, invalid, submitting }) => {
   const dispatch = useDispatch();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const [isCreating, setIsCreating] = useState(false);
 
-  const submitRequest = useCallback(
-    async (formData: FormData) => {
-      try {
-        const tagUuids = (formData.tags || [])
-          .map((tag) => tag.uuid)
-          .filter((uuid): uuid is string => Boolean(uuid));
-        await marketplaceProviderOfferingsUpdateTags({
-          path: { uuid: resolve.offering.uuid },
-          body: { tags: tagUuids },
-        });
-        dispatch(showSuccess(translate('Tags have been updated.')));
-        dispatch(closeModalDialog());
-        if (resolve.refetch) {
-          await resolve.refetch();
-        }
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to update tags')));
-      }
+  const updateMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (formData) => {
+      const tagUuids = (formData.tags || [])
+        .map((tag) => tag.uuid)
+        .filter((uuid): uuid is string => Boolean(uuid));
+      return marketplaceProviderOfferingsUpdateTags({
+        path: { uuid: resolve.offering.uuid },
+        body: { tags: tagUuids },
+      });
     },
-    [resolve, dispatch],
-  );
+    successMessage: translate('Tags have been updated.'),
+    errorMessage: translate('Unable to update tags'),
+    refetch: resolve.refetch,
+  });
 
   useEffect(() => {
     if (resolve.offering.tags) {
       dispatch(change(EDIT_TAGS_FORM_ID, 'tags', resolve.offering.tags));
     }
-  }, [dispatch, resolve.offering.tags]);
+  }, [resolve.offering.tags]);
 
   const handleCreateTag = useCallback(
     async (
@@ -86,22 +82,22 @@ export const EditTagsDialog = reduxForm<FormData, OwnProps>({
         });
         const newTag = response.data;
         onChange([...(currentValue || []), newTag]);
-        dispatch(
-          showSuccess(
-            translate('Tag "{name}" has been created.', { name: inputValue }),
-          ),
+        showSuccess(
+          translate('Tag "{name}" has been created.', { name: inputValue }),
         );
       } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to create tag')));
+        showErrorResponse(error, translate('Unable to create tag'));
       } finally {
         setIsCreating(false);
       }
     },
-    [dispatch],
+    [],
   );
 
   return (
-    <form onSubmit={handleSubmit(submitRequest)}>
+    <form
+      onSubmit={handleSubmit((values) => updateMutation.mutateAsync(values))}
+    >
       <ModalDialog
         title={translate('Edit tags')}
         footer={

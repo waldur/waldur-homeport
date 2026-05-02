@@ -1,10 +1,8 @@
-import { useSelector } from 'react-redux';
-
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { UserEvents } from './UserEvents';
 
 export const UserEventsWrapper = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   return <UserEvents user={user} />;
 };

@@ -7,7 +7,7 @@ import Papa from 'papaparse';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Tab, Tabs } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
 import {
   CourseAccount,
@@ -23,10 +23,10 @@ import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
 import { StepsList } from '@/marketplace/common/StepsList';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showInfo, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { getProject } from '@/workspace/selectors';
 
@@ -136,7 +136,11 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
   resolve: { refetch },
 }) => {
   const project = useSelector(getProject);
-  const dispatch = useDispatch();
+
+  const { showErrorResponse, showSuccess, showInfo } = useNotify();
+
+  const { closeDialog } = useModal();
+
   const [activeTab, setActiveTab] = useState<'single' | 'batch'>('single');
   const [createdAccounts, setCreatedAccounts] = useState<CourseAccount[]>([]);
 
@@ -155,7 +159,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
               description: formData.description,
             },
           });
-          dispatch(showSuccess(translate('Course account has been created.')));
+          showSuccess(translate('Course account has been created.'));
         } else {
           const validRecords: RawCourseAccount[] = formData.data.filter(
             (row) => {
@@ -164,7 +168,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
             },
           );
           if (!validRecords.length) {
-            dispatch(showInfo(translate('No valid course account to create.')));
+            showInfo(translate('No valid course account to create.'));
             return;
           }
           const response = await marketplaceCourseAccountsCreateBulk({
@@ -175,24 +179,20 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
           });
           setCreatedAccounts(response.data);
           setStep(2);
-          dispatch(
-            showSuccess(
-              translate('{n} course accounts have been created.', {
-                n: validRecords.length,
-              }),
-            ),
+          showSuccess(
+            translate('{n} course accounts have been created.', {
+              n: validRecords.length,
+            }),
           );
           return;
         }
-        dispatch(closeModalDialog());
+        closeDialog();
         if (refetch) refetch();
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to create course account.')),
-        );
+        showErrorResponse(e, translate('Unable to create course account.'));
       }
     },
-    [dispatch, refetch, activeTab],
+    [refetch, activeTab],
   );
 
   // Batch import method
@@ -218,7 +218,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
       render={({ handleSubmit, submitting, invalid, values }) => {
         const hasErrors = useMemo(
           () => hasCourseAccountsErrors(values.data),
-          [values.data],
+          [],
         );
 
         return (
@@ -244,7 +244,7 @@ export const CourseAccountFormDialog: FC<OwnProps> = ({
                       title={translate('Close')}
                       action={() => {
                         if (refetch) refetch();
-                        dispatch(closeModalDialog());
+                        closeDialog();
                       }}
                       variant="primary"
                       className="w-125px"

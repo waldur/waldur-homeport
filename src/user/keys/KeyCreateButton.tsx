@@ -1,15 +1,23 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
-import { keyCreateDialog } from './actions';
+const KeyCreateDialog = lazyComponent(() =>
+  import('./KeyCreateDialog').then((module) => ({
+    default: module.KeyCreateDialog,
+  })),
+);
 
 export const KeyCreateButton: FunctionComponent = () => {
-  const dispatch = useDispatch();
-  const openFormDialog = useCallback(() => dispatch(keyCreateDialog()), []);
+  const { openDialog } = useModal();
+  const openFormDialog = useCallback(
+    () => openDialog(KeyCreateDialog, { size: 'lg' }),
+    [openDialog],
+  );
 
   return (
     <ActionButton

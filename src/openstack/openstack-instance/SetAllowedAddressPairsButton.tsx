@@ -1,11 +1,10 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const SetAllowedAddressPairsDialog = lazyComponent(() =>
@@ -18,17 +17,15 @@ export const SetAllowedAddressPairsButton: FunctionComponent<{
   instance: OpenStackInstance;
   port;
 }> = ({ instance, port }) => {
-  const dispatch = useDispatch();
+  const { openDialog: openModal } = useModal();
   const openDialog = () =>
-    dispatch(
-      openModalDialog(SetAllowedAddressPairsDialog, {
-        resolve: {
-          instance,
-          port,
-        },
-        size: 'lg',
-      }),
-    );
+    openModal(SetAllowedAddressPairsDialog, {
+      resolve: {
+        instance,
+        port,
+      },
+      size: 'lg',
+    });
   return (
     <ActionItem
       title={translate('Set allowed address pairs')}

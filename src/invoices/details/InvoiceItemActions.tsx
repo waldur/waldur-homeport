@@ -1,7 +1,5 @@
-import { useSelector } from 'react-redux';
-
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { InvoiceItemCompensation } from './InvoiceItemCompensation';
 import { InvoiceItemDelete } from './InvoiceItemDelete';
@@ -9,7 +7,7 @@ import { InvoiceItemMove } from './InvoiceItemMove';
 import { InvoiceItemUpdate } from './InvoiceItemUpdate';
 
 export const InvoiceItemActions = ({ invoice, item, refreshInvoiceItems }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   if (!user.is_staff) {
     return null;
   }

@@ -1,11 +1,10 @@
-import { FC, useCallback, useState } from 'react';
+import { FC, useState } from 'react';
 import { Form, Modal } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { CloseDialogButton } from '@/modal/CloseDialogButton';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface StaffOverrideDialogProps {
   resolve: {
@@ -22,26 +21,14 @@ interface StaffOverrideDialogProps {
 export const StaffOverrideDialog: FC<StaffOverrideDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
   const [overrideReason, setOverrideReason] = useState('');
-  const [submitting, setSubmitting] = useState(false);
 
-  const handleSubmit = useCallback(async () => {
-    if (!overrideReason.trim()) {
-      return;
-    }
-    setSubmitting(true);
-    try {
-      await resolve.onSubmit(overrideReason);
-      dispatch(showSuccess(resolve.successMessage));
-      dispatch(closeModalDialog());
-      resolve.fetch();
-    } catch (error) {
-      dispatch(showErrorResponse(error, resolve.errorMessage));
-    } finally {
-      setSubmitting(false);
-    }
-  }, [resolve, overrideReason, dispatch]);
+  const submitMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => resolve.onSubmit(overrideReason),
+    successMessage: resolve.successMessage,
+    errorMessage: resolve.errorMessage,
+    refetch: resolve.fetch,
+  });
 
   return (
     <>
@@ -69,19 +56,15 @@ export const StaffOverrideDialog: FC<StaffOverrideDialogProps> = ({
         </Form.Group>
       </Modal.Body>
       <Modal.Footer>
-        <button
-          type="button"
-          className="btn btn-secondary"
-          onClick={() => dispatch(closeModalDialog())}
-          disabled={submitting}
-        >
-          {translate('Cancel')}
-        </button>
+        <CloseDialogButton
+          variant="secondary"
+          disabled={submitMutation.isPending}
+        />
         <SubmitButton
-          submitting={submitting}
+          submitting={submitMutation.isPending}
           disabled={!overrideReason.trim()}
           label={resolve.submitLabel}
-          onClick={handleSubmit}
+          onClick={() => submitMutation.mutate()}
         />
       </Modal.Footer>
     </>

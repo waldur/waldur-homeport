@@ -6,14 +6,13 @@ import {
 import classNames from 'classnames';
 import React, { useState } from 'react';
 import { Form, Alert } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { AccordionCard } from '@/core/AccordionCard';
 import { required } from '@/core/validators';
 import { SelectField, TextField } from '@/form';
 import { FormField } from '@/form/types';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { validateIPv4CIDR } from '@/openstack/openstack-security-groups/rule-editor/CIDRField';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
@@ -145,7 +144,9 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
   input,
   className,
 }) => {
+  const { confirm } = useModal();
   const user = useUser();
+
   const rules: K8sSecurityRule[] = input?.value || [];
 
   const tableProps = useTable({
@@ -228,14 +229,11 @@ const K8sSecurityRulesField: React.FC<K8sSecurityRulesFieldProps> = ({
       input.onChange(newRules);
     }
   };
-
-  const dispatch = useDispatch();
   const addDescription = async (ruleUuid: string) => {
     const rule = rules.find((rule) => rule.uuid === ruleUuid);
     let description = rule?.description || '';
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Description for security rule {name}', {
           name: rule?.name || DASH_ESCAPE_CODE,
         }),

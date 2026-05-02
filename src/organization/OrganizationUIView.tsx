@@ -17,10 +17,10 @@ import { IBreadcrumbItem } from '@/navigation/types';
 import { isDescendantOf } from '@/navigation/useTabs';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
+import { useUser } from '@/workspace/hooks';
 import {
   checkIsServiceManager,
   getCustomer,
-  getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@/workspace/selectors';
 
@@ -42,7 +42,7 @@ const PageHero = ({ customer }) => {
   const goTo = (state) =>
     router.stateService.go(state, { uuid: customer.uuid });
 
-  const user = useSelector(getUser);
+  const user = useUser();
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
 
   const showCallManagement =

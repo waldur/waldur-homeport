@@ -1,17 +1,15 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { marketplaceCategoryColumnsDestroy } from 'waldur-js-client';
 
 import { SelectField } from '@/form/SelectField';
 import { StringField } from '@/form/StringField';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { useNotify } from '@/store/hooks';
-import { ActionButton } from '@/table/ActionButton';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 export const ColumnRow = ({ column, fields, index, name }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const onRemove = async () => {
     if (!column?.uuid) {
@@ -19,8 +17,7 @@ export const ColumnRow = ({ column, fields, index, name }) => {
       return;
     }
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Confirmation'),
         translate(
           'Are you sure you want to remove this column: {title}?',
@@ -52,7 +49,6 @@ export const ColumnRow = ({ column, fields, index, name }) => {
           placeholder={translate('Title is rendered as column header')}
         />
       </td>
-
       <td>
         <Field
           name={`${name}.attribute`}
@@ -62,7 +58,6 @@ export const ColumnRow = ({ column, fields, index, name }) => {
           )}
         />
       </td>
-
       <td>
         <Field
           name={`${name}.widget`}
@@ -82,7 +77,6 @@ export const ColumnRow = ({ column, fields, index, name }) => {
           isClearable
         />
       </td>
-
       <td>
         <Field
           name={`${name}.index`}
@@ -90,13 +84,8 @@ export const ColumnRow = ({ column, fields, index, name }) => {
           placeholder={translate('Index allows to reorder columns')}
         />
       </td>
-
       <td>
-        <ActionButton
-          variant="danger"
-          action={onRemove}
-          iconNode={<TrashIcon weight="bold" />}
-        />
+        <RemovalActionButton action={onRemove} />
       </td>
     </tr>
   );

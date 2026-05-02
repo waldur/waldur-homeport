@@ -1,13 +1,12 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { ACTIVE, PAUSED } from '../store/constants';
 
@@ -21,7 +20,7 @@ export const PreviewOfferingButton = ({
 }: {
   row: ProviderOfferingDetails;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   if (![ACTIVE, PAUSED].includes(row.state)) {
     return null;
@@ -33,12 +32,10 @@ export const PreviewOfferingButton = ({
     <Dropdown.Item
       as="button"
       onClick={() => {
-        dispatch(
-          openModalDialog(PreviewOfferingDialog, {
-            resolve: { offering: row },
-            size: 'lg',
-          }),
-        );
+        openDialog(PreviewOfferingDialog, {
+          resolve: { offering: row },
+          size: 'lg',
+        });
       }}
     >
       <span className="svg-icon svg-icon-2">

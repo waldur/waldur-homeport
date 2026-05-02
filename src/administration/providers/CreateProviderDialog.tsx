@@ -1,7 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   IdentityProviderRequest,
   identityProvidersCreate,
@@ -10,9 +8,8 @@ import {
 import { EDUTEAMS_IDP, TARA_IDP } from '@/auth/providers/constants';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ProviderForm } from './ProviderForm';
 
@@ -28,39 +25,26 @@ const DEFAULT_URLS = {
 };
 
 export const CreateProviderDialog = (props) => {
-  const dispatch = useDispatch();
-
-  const onSubmit = useCallback(
-    async (formData: IdentityProviderRequest) => {
-      try {
-        await identityProvidersCreate({
-          body: {
-            provider: props.resolve.type,
-            ...formData,
-          },
-        });
-        dispatch(
-          showSuccess(
-            translate('Identity provider has been added successfully.'),
-          ),
-        );
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to add identity provider.'),
-          ),
-        );
-      }
-    },
-    [dispatch, props.resolve],
-  );
+  const createProviderMutation = useManagedMutation<
+    any,
+    any,
+    IdentityProviderRequest
+  >({
+    mutationFn: (formData) =>
+      identityProvidersCreate({
+        body: {
+          provider: props.resolve.type,
+          ...formData,
+        },
+      }),
+    successMessage: translate('Identity provider has been added successfully.'),
+    errorMessage: translate('Unable to add identity provider.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<IdentityProviderRequest>
+      onSubmit={(values) => createProviderMutation.mutateAsync(values)}
       initialValues={{
         is_active: true,
         verify_ssl: true,

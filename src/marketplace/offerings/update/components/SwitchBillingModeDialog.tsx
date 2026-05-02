@@ -9,9 +9,8 @@ import {
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 const BILLING_MODES = [
   {
@@ -103,26 +102,22 @@ interface SwitchBillingModeDialogProps {
 export const SwitchBillingModeDialog: FC<SwitchBillingModeDialogProps> = (
   props,
 ) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const availableModes = BILLING_MODES;
+
+  const switchBillingModeMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsSwitchBillingMode({
+        path: { uuid: props.resolve.offering.uuid },
+        body: formData as any,
+      }),
+    successMessage: translate('Billing mode has been updated.'),
+    errorMessage: translate('Unable to update billing mode.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
     <Form<{ billing_mode: string }>
-      onSubmit={async (formData) => {
-        try {
-          await marketplaceProviderOfferingsSwitchBillingMode({
-            path: { uuid: props.resolve.offering.uuid },
-            body: formData as any,
-          });
-          showSuccess(translate('Billing mode has been updated.'));
-          closeDialog();
-          props.resolve.refetch();
-        } catch (error) {
-          showErrorResponse(error, translate('Unable to update billing mode.'));
-        }
-      }}
+      onSubmit={(values) => switchBillingModeMutation.mutateAsync(values)}
       initialValues={{ billing_mode: props.resolve.currentMode }}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>

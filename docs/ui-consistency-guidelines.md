@@ -403,99 +403,161 @@ import { PAGE_SIZE_COMPACT, PAGE_SIZE_FULL } from '@/table/constants';
 
 ## 5. Dialogs and Confirmations
 
-### 5.1 Confirmation Dialog Pattern
+### 5.1 Confirmation and Mutation Pattern
+
+The preferred way to handle mutations that require user confirmation is the `useManagedMutation` hook. It centralizes confirmation logic, loading states, and notifications.
 
 ```tsx
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { translate } from '@/i18n';
 
-// Destructive action (deletion) - name the object being deleted
-const handleDelete = async () => {
-  try {
-    await waitForConfirmation(
-      dispatch,
-      translate('Delete {type}', { type: 'project' }),
-      translate('"{name}" will be permanently deleted. This action cannot be undone.', { name: resource.name }),
-      {
-        forDeletion: true,  // Red styling, warning icon
-        size: 'sm',
-        positiveButton: translate('Delete'),  // Clear action label
-      }
-    );
-    // User confirmed - proceed with deletion
-    await deleteResource(resource.uuid);
-    dispatch(showSuccess(translate('Resource deleted')));
-  } catch {
-    // User cancelled - do nothing
-    return;
-  }
+export const DeleteProjectButton = ({ project, refetch }) => {
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => deleteProject(project.uuid),
+    successMessage: translate('Project has been deleted.'),
+    errorMessage: translate('Could not delete project.'),
+    refetch,
+    confirmation: {
+      title: translate('Delete project {name}?', { name: project.name }),
+      body: translate('This action cannot be undone.'),
+      options: {
+        forDeletion: true,
+        positiveButton: translate('Delete'),
+      },
+    },
+  });
+
+  return (
+    <Button
+      variant="danger"
+      onClick={() => mutate()}
+      disabled={isPending}
+    >
+      {translate('Delete')}
+    </Button>
+  );
 };
-
-// Non-destructive confirmation
-await waitForConfirmation(
-  dispatch,
-  translate('Confirm action'),
-  translate('This will restart all services. Continue?'),
-  {
-    positiveButton: translate('Restart'),
-  }
-);
 ```
 
-**Button order**: Cancel (left), Confirm (right)
+### 5.2 Batch Mutation Pattern
 
-**Clear action labels**: Use "Delete", "Restart", "Submit" - not "OK" or "Yes"
+For operations involving multiple items (bulk actions), use the `useBatchMutation` hook. It handles partial successes gracefully and standardizes bulk confirmation dialogs.
+
+```tsx
+import { useBatchMutation } from '@/modal/useBatchMutation';
+import { translate } from '@/i18n';
+
+export const BulkDeleteProjectsButton = ({ projects, refetch }) => {
+  const { mutate, isPending } = useBatchMutation<any, any, void>({
+    rows: projects,
+    mutationFn: (project) => deleteProject(project.uuid),
+    successMessage: translate('Selected projects have been deleted.'),
+    errorMessage: translate('Some projects could not be deleted.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} projects have been deleted.', { n }),
+    refetch,
+    confirmation: {
+      title: translate('Delete selected projects'),
+      body: (
+        <div>
+          <p>{translate('You are about to delete these projects:')}</p>
+          <ul>
+            {projects.map((p) => (
+              <li key={p.uuid}>{p.name}</li>
+            ))}
+          </ul>
+        </div>
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
+  return (
+    <Button
+      variant="danger"
+      onClick={() => mutate()}
+      disabled={isPending}
+    >
+      {translate('Delete selected')}
+    </Button>
+  );
+};
+```
 
 ### 5.2 Form Dialog Pattern
 
+Use the `useModal` hook to manage dialog state:
+
 ```tsx
-// Standard form dialog footer
-<div className="d-flex gap-2 justify-content-end">
-  <Button variant="tertiary" onClick={closeDialog}>
-    {translate('Cancel')}
-  </Button>
-  <SubmitButton
-    label={translate('Save changes')}
-    submitting={isSubmitting}
-    disabled={!isValid}
-  />
-</div>
+import { useModal } from '@/modal/actions';
+
+export const MyDialog: FC = () => {
+  const { closeDialog } = useModal();
+
+  return (
+    <ModalDialog
+      title={translate('Title')}
+      footer={
+        <div className="d-flex gap-2 justify-content-end">
+          <Button variant="tertiary" onClick={closeDialog}>
+            {translate('Cancel')}
+          </Button>
+          <SubmitButton
+            label={translate('Save changes')}
+            submitting={isSubmitting}
+            disabled={!isValid}
+          />
+        </div>
+      }
+    >
+      {/* Form content */}
+    </ModalDialog>
+  );
+};
 ```
 
 ---
 
 ## 6. Notifications
 
-Use the notification utilities from `@/store/notify`:
+### 6.1 Standard Mutation Pattern
+
+For most API actions, use `useManagedMutation` even if no confirmation is required. This ensures consistent loading state and notification handling.
 
 ```tsx
-import {
-  showSuccess,
-  showError,
-  showErrorResponse,
-  showInfo
-} from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-// Success - action completed
-dispatch(showSuccess(translate('Project created successfully')));
+export const ApproveButton = ({ resource }) => {
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => approveResource(resource.uuid),
+    successMessage: translate('Resource approved'),
+    errorMessage: translate('Could not approve resource'),
+  });
 
-// Success with details
-dispatch(showSuccess(
-  translate('Resource deployed'),
-  translate('Your resource will be ready in a few minutes.')
-));
+  return (
+    <Button onClick={() => mutate()} disabled={isPending}>
+      {translate('Approve')}
+    </Button>
+  );
+};
+```
 
-// Error - action failed
-dispatch(showError(translate('Unable to save changes')));
+### 6.2 Benefits of Managed Mutations
 
-// Error with API response details
-try {
-  await saveData();
-} catch (error) {
-  dispatch(showErrorResponse(error, translate('Unable to save changes.')));
-}
+- **Declarative Logic**: Focus on the action and messages rather than managing `try/catch` blocks and loading states manually.
+- **UX Consistency**: Standardizes how confirmations look and how success/error notifications are displayed.
+- **Robustness**: `useBatchMutation` handles partial failures (using `Promise.allSettled`) ensuring the user knows exactly what succeeded and what failed.
+- **Automatic Sync**: Integrated support for `refetch` and query invalidation ensures the UI stays up to date after the mutation.
+- **Type Safety**: Fully typed hooks reduce runtime errors when passing variables or handling results.
 
-// Info - informational only
-dispatch(showInfo(translate('Changes will take effect after refresh')));
+For non-component usage (utility functions, services), use `NotifyService`:
+
+```tsx
+import { NotifyService } from '@/store/notify';
+
+export const standaloneHelper = async (error) => {
+  NotifyService.errorResponse(error, translate('Background task failed'));
+};
 ```
 
 **Configuration**:
@@ -756,13 +818,14 @@ const filterPosition = isSm && originalPosition === 'menu'
 When an action requires authentication (e.g., deploying a resource, ordering a service), **show a confirmation dialog** explaining that login is required, rather than silently redirecting or doing nothing.
 
 ```tsx
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+
+const { confirm } = useModal();
 
 const handleClick = async () => {
   if (!user) {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Authentication required'),
         translate(
           'Please log in to order a resource. You will be redirected to the login page.',
@@ -782,7 +845,7 @@ const handleClick = async () => {
 **Key rules**:
 
 - Never silently redirect anonymous users — always explain what's happening
-- Use `waitForConfirmation` with a clear title and descriptive body
+- Use `confirm` from `useModal()` hook with a clear title and descriptive body
 - Label the positive button with the action ("Log in"), not generic "OK"
 - If the element is normally a `<Link>`, render a `<button>` for anonymous users to prevent navigation before the dialog
 
@@ -917,10 +980,10 @@ import { hasPermission } from '@/permissions/hasPermission';
 import { StaffOnlyIndicator } from '@/customer/details/StaffOnlyIndicator';
 
 // Notifications
-import { showSuccess, showError, showErrorResponse, showInfo } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 // Modals
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 // i18n
 import { translate } from '@/i18n';

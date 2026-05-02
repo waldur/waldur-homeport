@@ -12,7 +12,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SelectField, SubmitButton } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -33,12 +33,13 @@ export const EditCustomerChecklistDialog = connect<
   reduxForm<FormData, { resolve: EditCustomerProps }>({
     form: EDIT_CUSTOMER_FORM_ID,
   })((props) => {
+    const { closeDialog } = useModal();
     const processRequest = useCallback(
       (values: FormData, dispatch) => {
         return props.resolve
           .callback(values, dispatch)
           .then(() => {
-            dispatch(closeModalDialog());
+            closeDialog();
           })
           .catch((e) => {
             if (e.response && e.response.status === 400) {
@@ -46,7 +47,7 @@ export const EditCustomerChecklistDialog = connect<
             }
           });
       },
-      [props.resolve.callback],
+      [props.resolve.callback, closeDialog],
     );
 
     const { isLoading, error, data, refetch } = useQuery({

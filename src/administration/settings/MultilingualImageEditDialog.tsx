@@ -9,9 +9,8 @@ import { WideImageField } from '@/form/WideImageField';
 import { translate } from '@/i18n';
 import { LanguageUtilsService } from '@/i18n/LanguageUtilsService';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { getKeyTitle } from './utils';
 
@@ -26,8 +25,6 @@ export const MultilingualImageEditDialog: FC<
   MultilingualImageEditDialogProps
 > = ({ resolve }) => {
   const item = resolve.item;
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
 
   // Get available languages from configuration
   const languageChoices = useMemo(
@@ -45,7 +42,6 @@ export const MultilingualImageEditDialog: FC<
     resolve.initialValues || {},
   );
   const [activeTab, setActiveTab] = useState(languageChoices[0]?.code || 'en');
-  const [submitting, setSubmitting] = useState(false);
 
   const handleImageChange = useCallback(
     (langCode: string, value: File | string | null) => {
@@ -57,9 +53,8 @@ export const MultilingualImageEditDialog: FC<
     [],
   );
 
-  const onSubmit = async () => {
-    setSubmitting(true);
-    try {
+  const onSubmitMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
       // Build body with bracket notation keys: LOGIN_LOGO_MULTILINGUAL[de], etc.
       // The formDataBodySerializer will convert this to FormData
       // Include all values (files and strings) since backend replaces the entire setting
@@ -77,20 +72,17 @@ export const MultilingualImageEditDialog: FC<
         }
       }
 
-      await overrideSettings({
+      return overrideSettings({
         body,
         ...formDataOptions,
       });
-
-      showSuccess(translate('Multilingual logos have been updated.'));
-      closeDialog();
+    },
+    successMessage: translate('Multilingual logos have been updated.'),
+    errorMessage: translate('Unable to update multilingual logos.'),
+    onSuccess: () => {
       location.reload();
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to update multilingual logos.'));
-    } finally {
-      setSubmitting(false);
-    }
-  };
+    },
+  });
 
   const hasChanges = useMemo(() => {
     const initial = resolve.initialValues || {};
@@ -108,10 +100,10 @@ export const MultilingualImageEditDialog: FC<
         <>
           <CloseDialogButton className="flex-equal" />
           <SubmitButton
-            submitting={submitting}
+            submitting={onSubmitMutation.isPending}
             disabled={!hasChanges}
             className="flex-equal"
-            onClick={onSubmit}
+            onClick={() => onSubmitMutation.mutate()}
             type="button"
             label={translate('Confirm')}
           />

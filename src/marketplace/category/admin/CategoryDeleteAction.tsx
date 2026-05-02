@@ -1,13 +1,9 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceCategoriesDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
 import { Category } from '@/marketplace/types';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 interface CategoryDeleteActionProps {
   row: Category;
@@ -15,43 +11,28 @@ interface CategoryDeleteActionProps {
 }
 
 export const CategoryDeleteAction = (props: CategoryDeleteActionProps) => {
-  const dispatch = useDispatch();
-  const [removing, setRemoving] = useState(false);
-
-  const openDialog = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete the {title} category?',
-          { title: <strong>{props.row.title}</strong> },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    setRemoving(true);
-    try {
-      await marketplaceCategoriesDestroy({ path: { uuid: props.row.uuid } });
-      props.refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to remove category.')));
-    } finally {
-      setRemoving(false);
-    }
-  }, [dispatch, setRemoving, props]);
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceCategoriesDestroy({ path: { uuid: props.row.uuid } }),
+    successMessage: translate('Category has been deleted.'),
+    errorMessage: translate('Unable to remove category.'),
+    refetch: props.refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete the {title} category?',
+        { title: <strong>{props.row.title}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Remove')}
-      className="text-danger"
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
-      iconColor="danger"
-      disabled={removing}
+      action={mutate}
+      disabled={isPending}
     />
   );
 };

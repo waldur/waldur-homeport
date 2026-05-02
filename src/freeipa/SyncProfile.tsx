@@ -1,45 +1,43 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { useCallback, FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
+import { FunctionComponent, useEffect } from 'react';
 import { freeipaProfilesUpdateSshKeys } from 'waldur-js-client';
 
 import { Tip } from '@/core/Tooltip';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 export const SyncProfile: FunctionComponent<{
   profile;
   setLoading;
   refreshProfile;
 }> = ({ profile, setLoading, refreshProfile }) => {
-  const dispatch = useDispatch();
-  const callback = useCallback(async () => {
-    setLoading(true);
-    try {
-      const result = await freeipaProfilesUpdateSshKeys({
-        path: { uuid: profile.uuid },
-      });
-      if (result.response.status === 204) {
-        dispatch(
+  const { showSuccess } = useNotify();
+
+  const { mutate: syncProfile, isPending } = useManagedMutation<any, any, void>(
+    {
+      mutationFn: () =>
+        freeipaProfilesUpdateSshKeys({
+          path: { uuid: profile.uuid },
+        }),
+      onSuccess: (result) => {
+        if (result.response.status === 204) {
           showSuccess(
             translate('Your FreeIPA has been removed in FreeIPA server.'),
-          ),
-        );
-        return refreshProfile();
-      } else {
-        dispatch(
-          showSuccess(translate('Your FreeIPA has been synced successfully.')),
-        );
-      }
-      setLoading(false);
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to sync FreeIPA profile.')),
-      );
-      setLoading(false);
-    }
-  }, [dispatch, setLoading, refreshProfile, profile.uuid]);
+          );
+          refreshProfile();
+        } else {
+          showSuccess(translate('Your FreeIPA has been synced successfully.'));
+        }
+      },
+      errorMessage: translate('Unable to sync FreeIPA profile.'),
+    },
+  );
+
+  useEffect(() => {
+    setLoading(isPending);
+  }, [isPending, setLoading]);
 
   return (
     <Tip
@@ -47,11 +45,11 @@ export const SyncProfile: FunctionComponent<{
       id="freeipa-sync-profile"
     >
       <SubmitButton
-        submitting={false}
+        submitting={isPending}
         type="button"
         variant="primary"
         className="ms-2"
-        onClick={callback}
+        onClick={() => syncProfile()}
         label={translate('Sync profile')}
         iconNode={<ArrowsClockwiseIcon weight="bold" />}
         iconOnLeft

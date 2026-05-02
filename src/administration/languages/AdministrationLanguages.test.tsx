@@ -35,7 +35,7 @@ vi.mock('@/i18n/useLanguageSelector', () => ({
   }),
 }));
 
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useNotify: () => ({
     showError: vi.fn(),
     showSuccess: vi.fn(),

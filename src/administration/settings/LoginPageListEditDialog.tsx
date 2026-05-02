@@ -1,4 +1,4 @@
-import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { overrideSettings } from 'waldur-js-client';
@@ -6,11 +6,10 @@ import { overrideSettings } from 'waldur-js-client';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
-import { ActionButton } from '@/table/ActionButton';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { CompactActionButton } from '@/table/CompactActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { getKeyTitle } from './utils';
 
@@ -70,11 +69,9 @@ const StatsEditor: FC<{
               onChange={(e) => updateItem(index, 'label', e.target.value)}
               placeholder={translate('Label (e.g., Active Users)')}
             />
-            <ActionButton
-              variant="danger"
+            <RemovalActionButton
               action={() => removeItem(index)}
               tooltip={translate('Remove')}
-              iconNode={<TrashIcon weight="bold" />}
             />
           </InputGroup>
         </div>
@@ -121,11 +118,9 @@ const CarouselSlidesEditor: FC<{
                 onChange={(e) => updateItem(index, 'title', e.target.value)}
                 placeholder={translate('e.g., Welcome to Our Platform')}
               />
-              <ActionButton
-                variant="danger"
+              <RemovalActionButton
                 action={() => removeItem(index)}
                 tooltip={translate('Remove')}
-                iconNode={<TrashIcon weight="bold" />}
               />
             </InputGroup>
           </Form.Group>
@@ -185,11 +180,9 @@ const NewsItemsEditor: FC<{
                 onChange={(e) => updateItem(index, 'title', e.target.value)}
                 placeholder={translate('e.g., New Feature Released')}
               />
-              <ActionButton
-                variant="danger"
+              <RemovalActionButton
                 action={() => removeItem(index)}
                 tooltip={translate('Remove')}
-                iconNode={<TrashIcon weight="bold" />}
               />
             </InputGroup>
           </Form.Group>
@@ -259,25 +252,17 @@ export const LoginPageListEditDialog: FC<LoginPageListEditDialogProps> = ({
 }) => {
   const { item, value: initialValue } = resolve;
   const [items, setItems] = useState<any[]>(initialValue || []);
-  const [submitting, setSubmitting] = useState(false);
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
-
-  const handleSubmit = async () => {
-    setSubmitting(true);
-    try {
-      await overrideSettings({
+  const submitMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      overrideSettings({
         body: { [item.key]: items },
-      });
-      showSuccess(translate('Configuration has been updated.'));
-      closeDialog();
+      }),
+    successMessage: translate('Configuration has been updated.'),
+    errorMessage: translate('Unable to update configuration.'),
+    onSuccess: () => {
       location.reload();
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to update configuration.'));
-    } finally {
-      setSubmitting(false);
-    }
-  };
+    },
+  });
 
   const renderEditor = () => {
     switch (item.key) {
@@ -299,9 +284,9 @@ export const LoginPageListEditDialog: FC<LoginPageListEditDialogProps> = ({
         <>
           <CloseDialogButton className="flex-equal" />
           <SubmitButton
-            submitting={submitting}
+            submitting={submitMutation.isPending}
             className="flex-equal"
-            onClick={handleSubmit}
+            onClick={() => submitMutation.mutate()}
             type="button"
             label={translate('Confirm')}
           />

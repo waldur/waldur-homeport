@@ -1,8 +1,6 @@
-import { useDispatch } from 'react-redux';
-
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const RemoteSyncFormDialog = lazyComponent(() =>
   import('./RemoteSyncFormDialog').then((module) => ({
@@ -11,16 +9,14 @@ const RemoteSyncFormDialog = lazyComponent(() =>
 );
 
 export const RemoteSyncCreateButton = ({ refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <AddButton
       action={() =>
-        dispatch(
-          openModalDialog(RemoteSyncFormDialog, {
-            refetch,
-            size: 'lg',
-          }),
-        )
+        openDialog(RemoteSyncFormDialog, {
+          refetch,
+          size: 'lg',
+        })
       }
     />
   );

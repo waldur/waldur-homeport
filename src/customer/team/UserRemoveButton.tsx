@@ -1,6 +1,6 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   customersDeleteUser,
   CustomerUser,
@@ -8,12 +8,12 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 interface UserRemoveButtonProps {
   customer: CustomerUser;
@@ -24,31 +24,11 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
   customer,
   refetch,
 }) => {
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const currentCustomer = useSelector(getCustomer);
-  const dispatch = useDispatch();
-  if (
-    !hasPermission(currentUser, {
-      permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,
-      customerId: currentCustomer.uuid,
-    })
-  ) {
-    return null;
-  }
 
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate('Are you sure you want to remove {userName}?', {
-          userName: customer.full_name || customer.username,
-        }),
-      );
-    } catch {
-      return;
-    }
-    try {
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
       await Promise.all(
         (customer.projects || []).map((project) =>
           projectsDeleteUser({
@@ -69,20 +49,33 @@ export const UserRemoveButton: React.FC<UserRemoveButtonProps> = ({
           },
         });
       }
-      await refetch();
-      dispatch(showSuccess(translate('Team member has been removed.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete team member.')),
-      );
-    }
-  };
+    },
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Are you sure you want to remove {userName}?', {
+        userName: customer.full_name || customer.username,
+      }),
+    },
+    successMessage: translate('Team member has been removed.'),
+    errorMessage: translate('Unable to delete team member.'),
+    refetch,
+  });
+
+  if (
+    !hasPermission(currentUser, {
+      permission: PermissionEnum.DELETE_CUSTOMER_PERMISSION,
+      customerId: currentCustomer.uuid,
+    })
+  ) {
+    return null;
+  }
   return (
     <ActionItem
       className="text-danger border-top"
       iconColor="danger"
       title={translate('Remove')}
-      action={callback}
+      action={mutate}
+      disabled={isPending}
       iconNode={<TrashIcon weight="bold" />}
     />
   );

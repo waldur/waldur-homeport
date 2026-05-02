@@ -1,9 +1,8 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { OVERVIEW_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';
@@ -15,15 +14,13 @@ const EditOverviewDialog = lazyComponent(() =>
 );
 
 export const EditOverviewButton: FC<EditOfferingProps> = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(EditOverviewDialog, {
-        resolve: props,
-        formId: OVERVIEW_FORM_ID,
-        size: 'lg',
-      }),
-    );
+    openDialog(EditOverviewDialog, {
+      resolve: props,
+      formId: OVERVIEW_FORM_ID,
+      size: 'lg',
+    });
   };
   return (
     <CompactEditButton

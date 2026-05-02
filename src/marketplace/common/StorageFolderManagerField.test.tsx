@@ -23,6 +23,7 @@ const createMockField = (overrides = {}): OptionField =>
   ({
     type: 'storage_folder_manager',
     label: 'Storage Configuration',
+
     storage_folder_config: {
       component_type: 'storage',
       default_hard_quota_multiplier: 1.0,
@@ -34,6 +35,7 @@ const createMockField = (overrides = {}): OptionField =>
       ],
       default_permission: '2770',
     },
+
     ...overrides,
   }) as OptionField;
 

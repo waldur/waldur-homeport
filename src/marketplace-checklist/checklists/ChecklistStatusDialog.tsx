@@ -5,9 +5,8 @@ import { required } from '@/core/validators';
 import { SelectField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ChecklistStatusDialogProps {
   resolve: {
@@ -21,29 +20,21 @@ export const ChecklistStatusDialog: FC<ChecklistStatusDialogProps> = ({
   resolve: { checklistUuid, refetch },
   initialValues,
 }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
-
-  // FIX THIS: not available atm
-  const onSubmit = async (formData) => {
-    try {
-      await Promise.resolve({
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      Promise.resolve({
         path: { uuid: checklistUuid },
         body: { status: formData.status },
         data: 'test',
-      }).then((response) => response.data);
-
-      refetch();
-      showSuccess(translate('Checklist status has been updated.'));
-      closeDialog();
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to update checklist status.'));
-    }
-  };
+      }).then((response) => response.data),
+    successMessage: translate('Checklist status has been updated.'),
+    errorMessage: translate('Unable to update checklist status.'),
+    refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={initialValues}
       render={({ handleSubmit, submitting, pristine, invalid }) => (
         <form onSubmit={handleSubmit}>

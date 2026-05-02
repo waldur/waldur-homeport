@@ -1,23 +1,42 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   openstackNetworkRbacPoliciesCreate,
   openstackTenantsList,
+  PolicyTypeEnum,
 } from 'waldur-js-client';
 
 import { parseSelectData } from '@/core/api';
 import { ENV } from '@/core/config';
 import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const ShareNetworkDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<
+    any,
+    any,
+    {
+      policy_type: string;
+      target_tenant: { url: string };
+    }
+  >({
+    mutationFn: (formData) =>
+      openstackNetworkRbacPoliciesCreate({
+        body: {
+          network: resource.url,
+          policy_type: formData.policy_type as PolicyTypeEnum,
+          target_tenant: formData.target_tenant.url,
+        },
+      }),
+
+    successMessage: translate('Network has been shared.'),
+    errorMessage: translate('Unable to share the network.'),
+    refetch: refetch,
+  });
 
   return (
     <ResourceActionDialog
@@ -62,26 +81,7 @@ export const ShareNetworkDialog: FC<ActionDialogProps> = ({
           spaceless: true,
         },
       ]}
-      submitForm={async (formData) => {
-        try {
-          await openstackNetworkRbacPoliciesCreate({
-            body: {
-              network: resource.url,
-              policy_type: formData.policy_type,
-              target_tenant: formData.target_tenant.url,
-            },
-          });
-          dispatch(showSuccess(translate('Network has been shared.')));
-          dispatch(closeModalDialog());
-          if (refetch) {
-            await refetch();
-          }
-        } catch (e) {
-          dispatch(
-            showErrorResponse(e, translate('Unable to share the network.')),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

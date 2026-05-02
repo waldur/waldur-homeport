@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   customersList,
   marketplaceCategoriesRetrieve,
@@ -20,7 +20,7 @@ import { isValidAttribute } from '@/marketplace/offerings/details/utils';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { Category, Offering } from '../types';
 
@@ -198,7 +198,7 @@ export const OfferingPublicUIView = () => {
     params: { uuid },
   } = useCurrentStateAndParams();
 
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const { isLoading, error, data, refetch, isRefetching } = useQuery({
     queryKey: [PUBLIC_OFFERING_DATA_QUERY_KEY, uuid, user?.uuid],

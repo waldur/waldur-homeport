@@ -2,7 +2,6 @@ import classNames from 'classnames';
 import { cloneDeep } from 'lodash-es';
 import { DateTime } from 'luxon';
 import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { bookingStateAliases } from '@/booking/BookingStateField';
 import { BookingResource, EventInput } from '@/booking/types';
@@ -10,7 +9,7 @@ import { Badge } from '@/core/Badge';
 import { parseDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 const ONE_HOUR_HEIGHT = 40; // 40px
@@ -118,20 +117,18 @@ export const BookingResourceListItem = ({
   refetch?;
 }) => {
   const state = bookingStateAliases(item.state);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const onClickSeeMore = useCallback(() => {
-    dispatch(
-      openModalDialog(BookingResourceDetailsDialog, {
-        resolve: {
-          bookingResource: item,
-          fromServiceProvider: true,
-          refetch,
-        },
-        size: 'lg',
-      }),
-    );
-  }, [dispatch, refetch, item]);
+    openDialog(BookingResourceDetailsDialog, {
+      resolve: {
+        bookingResource: item,
+        fromServiceProvider: true,
+        refetch,
+      },
+      size: 'lg',
+    });
+  }, [refetch, item]);
 
   const itemLayouts = useMemo(
     () => calculateEventItemLayouts(item, date),

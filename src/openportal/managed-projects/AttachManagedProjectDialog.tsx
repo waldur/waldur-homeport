@@ -1,4 +1,4 @@
-import { useMemo, useCallback } from 'react';
+import { useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
 import { useSelector } from 'react-redux';
 import {
@@ -10,12 +10,12 @@ import { required } from '@/core/validators';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { useNotify } from '@/store/hooks';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 import { ProjectAutocompleteField } from './ProjectAutocompleteField';
 
@@ -49,10 +49,8 @@ export const AttachManagedProjectDialog: React.FC<
     );
   }
 
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
   const currentCustomer = useSelector(getCustomer);
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const projectTemplate = useMemo(() => {
     return project?.project_template_data;
@@ -102,25 +100,19 @@ export const AttachManagedProjectDialog: React.FC<
     [user, targetCustomer?.uuid],
   );
 
-  const handleSubmit = useCallback(
-    async (formValues: AttachProjectFormValues) => {
-      try {
-        await openportalManagedProjectsAttach({
-          path: {
-            identifier: project.identifier,
-            destination: project.destination,
-          },
-          body: { project_uuid: formValues.project.uuid },
-        });
-        showSuccess(translate('Project has been attached.'));
-        closeDialog();
-        await resolve.refetch();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to attach the project.'));
-      }
-    },
-    [currentCustomer, showSuccess, showErrorResponse, closeDialog, resolve],
-  );
+  const attachMutation = useManagedMutation<any, any, AttachProjectFormValues>({
+    mutationFn: (formValues) =>
+      openportalManagedProjectsAttach({
+        path: {
+          identifier: project.identifier,
+          destination: project.destination,
+        },
+        body: { project_uuid: formValues.project.uuid },
+      }),
+    successMessage: translate('Project has been attached.'),
+    errorMessage: translate('Unable to attach the project.'),
+    refetch: resolve.refetch,
+  });
 
   // Permission check
   if (!canEditCustomer) {
@@ -159,8 +151,8 @@ export const AttachManagedProjectDialog: React.FC<
   );
 
   return (
-    <Form
-      onSubmit={handleSubmit}
+    <Form<AttachProjectFormValues>
+      onSubmit={(values) => attachMutation.mutateAsync(values)}
       initialValues={INITIAL_VALUES}
       subscription={{ submitting: true, invalid: true, pristine: true }}
       render={({ handleSubmit, submitting, invalid }) => (

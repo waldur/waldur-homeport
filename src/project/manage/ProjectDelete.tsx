@@ -1,10 +1,9 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
 import { Project } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
-import { ActionButton } from '@/table/ActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { useProjectDelete } from '../useProjectDelete';
 
@@ -20,11 +19,9 @@ export const ProjectDelete: FC<ProjectDeleteProps> = ({ project }) => {
       title={translate('Delete project')}
       cardBordered
       actions={
-        <ActionButton
+        <RemovalActionButton
           action={callback}
           title={translate('Delete')}
-          iconNode={<TrashIcon weight="bold" />}
-          variant="danger"
           disabled={!canDelete}
           tooltip={
             project.is_removed

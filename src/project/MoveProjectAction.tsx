@@ -1,10 +1,10 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import {
   hasPermission,
@@ -27,7 +27,7 @@ export const MoveProjectAction = ({
   project: Project;
   refetch;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
   const isStaff = useSelector(isStaffSelector);
   const hasSourcePermission = hasPermission(user, {
@@ -42,11 +42,9 @@ export const MoveProjectAction = ({
   const isDisabled = !isStaff && (!hasSourcePermission || !hasTargetPermission);
 
   const callback = () => {
-    dispatch(
-      openModalDialog(MoveProjectDialog, {
-        resolve: { project, refetch },
-      }),
-    );
+    openDialog(MoveProjectDialog, {
+      resolve: { project, refetch },
+    });
   };
 
   return (

@@ -8,7 +8,7 @@ import {
   WarningIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   callReviewerPoolsList,
   callReviewerPoolsForceAccept,
@@ -20,10 +20,10 @@ import { formatDate, formatRelative } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
@@ -129,7 +129,10 @@ const isExpired = (expiresAt: string | null): boolean => {
 const FORCE_ACCEPT_STATUSES = ['pending', 'declined', 'expired'];
 
 export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
+
+  const { openDialog } = useModal();
+
   const formFilters = useSelector(selectCallReviewerPoolsFilter);
   const tabs = useReviewerPoolTabs();
 
@@ -138,7 +141,7 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
       call_uuid: call.uuid,
       ...formFilters,
     }),
-    [call.uuid, formFilters],
+    [formFilters],
   );
 
   const tableProps = useTable({
@@ -148,42 +151,38 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
   });
 
   const handleInviteByEmail = useCallback(() => {
-    dispatch(
-      openModalDialog(DirectEmailInviteDialog, {
-        resolve: { call, refetch: tableProps.fetch },
-        size: 'lg',
-      }),
-    );
-  }, [call, tableProps.fetch, dispatch]);
+    openDialog(DirectEmailInviteDialog, {
+      resolve: { call, refetch: tableProps.fetch },
+      size: 'lg',
+    });
+  }, [call, tableProps.fetch]);
 
   const handleForceAccept = useCallback(
     (row: CallReviewerPoolExtended) => {
-      dispatch(
-        openModalDialog(StaffOverrideDialog, {
-          resolve: {
-            onSubmit: (reason: string) =>
-              callReviewerPoolsForceAccept({
-                path: { uuid: row.uuid },
-                body: { override_reason: reason },
-              }),
-            title: translate('Force accept invitation'),
-            description: translate(
-              'This will force-accept the invitation for reviewer "{reviewer}", bypassing the normal invitation flow. A reason is required for audit purposes.',
-              {
-                reviewer:
-                  row.reviewer_name || row.invited_email || row.reviewer_email,
-              },
-            ),
-            successMessage: translate('Invitation force-accepted.'),
-            errorMessage: translate('Failed to force-accept invitation.'),
-            submitLabel: translate('Force accept'),
-            fetch: tableProps.fetch,
-          },
-          size: 'lg',
-        }),
-      );
+      openDialog(StaffOverrideDialog, {
+        resolve: {
+          onSubmit: (reason: string) =>
+            callReviewerPoolsForceAccept({
+              path: { uuid: row.uuid },
+              body: { override_reason: reason },
+            }),
+          title: translate('Force accept invitation'),
+          description: translate(
+            'This will force-accept the invitation for reviewer "{reviewer}", bypassing the normal invitation flow. A reason is required for audit purposes.',
+            {
+              reviewer:
+                row.reviewer_name || row.invited_email || row.reviewer_email,
+            },
+          ),
+          successMessage: translate('Invitation force-accepted.'),
+          errorMessage: translate('Failed to force-accept invitation.'),
+          submitLabel: translate('Force accept'),
+          fetch: tableProps.fetch,
+        },
+        size: 'lg',
+      });
     },
-    [dispatch, tableProps.fetch],
+    [call, tableProps.fetch],
   );
 
   const columns = useMemo(
@@ -446,9 +445,7 @@ export const ReviewerPoolSection: FC<ReviewerPoolSectionProps> = ({ call }) => {
                 action={() => {
                   const link = `${location.origin}${row.invitation_link}`;
                   navigator.clipboard.writeText(link).then(() => {
-                    dispatch(
-                      showSuccess(translate('Invitation link has been copied')),
-                    );
+                    showSuccess(translate('Invitation link has been copied'));
                   });
                 }}
                 iconNode={<CopyIcon weight="bold" />}

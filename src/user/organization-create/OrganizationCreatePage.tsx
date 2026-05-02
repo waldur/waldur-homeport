@@ -1,6 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useRef, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
 import { onboardingVerificationsDestroy } from 'waldur-js-client';
 
@@ -9,8 +9,8 @@ import { VerticalProgressSteps } from '@/core/VerticalProgressSteps';
 import { SidebarLayout } from '@/form/SidebarLayout';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { useNotify } from '@/store/hooks';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { ORGANIZATION_ONBOARDING_FORM_ID } from '../constants';
 
@@ -27,8 +27,9 @@ import {
 } from './utils';
 
 export const OrganizationCreatePage: FC = () => {
+  const { confirm } = useModal();
+
   const router = useRouter();
-  const dispatch = useDispatch();
   const { showSuccess, showErrorResponse } = useNotify();
 
   const selector = formValueSelector(ORGANIZATION_ONBOARDING_FORM_ID);
@@ -210,8 +211,7 @@ export const OrganizationCreatePage: FC = () => {
   );
 
   const handleCancel = useCallback(async () => {
-    await waitForConfirmation(
-      dispatch,
+    await confirm(
       translate('Cancel organization creation'),
       translate(
         'Are you sure you want to cancel? All entered data will be lost.',
@@ -222,7 +222,7 @@ export const OrganizationCreatePage: FC = () => {
     await cleanupVerification();
 
     router.stateService.go('profile.details');
-  }, [dispatch, router, cleanupVerification]);
+  }, [router, cleanupVerification]);
 
   const createOnboardingVerification = useCallback(
     async (formData, _dispatch, formProps) => {

@@ -1,5 +1,3 @@
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { reduxForm } from 'redux-form';
 import { RancherCluster, rancherNodesCreate } from 'waldur-js-client';
@@ -8,10 +6,9 @@ import { OpenStackFlavor } from 'waldur-js-client';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { NodeFlavorGroup } from './NodeFlavorGroup';
 import { NodeRoleGroup } from './NodeRoleGroup';
@@ -56,24 +53,19 @@ export const CreateNodeDialog = reduxForm<FormData, OwnProps>({
   const cluster = props.resolve.resource;
   const state = useAsync(() => loadNodeCreateData(cluster), [cluster]);
 
-  const dispatch = useDispatch();
-
-  const callback = useCallback(
-    async (formData: FormData) => {
-      try {
-        await rancherNodesCreate({ body: serializeNode(cluster, formData) });
-      } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to create node.')));
-        return;
-      }
-      dispatch(showSuccess(translate('Node has been created.')));
-      dispatch(closeModalDialog());
-    },
-    [dispatch, cluster],
-  );
+  const createNodeMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (formData) =>
+      rancherNodesCreate({ body: serializeNode(cluster, formData) }),
+    successMessage: translate('Node has been created.'),
+    errorMessage: translate('Unable to create node.'),
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(callback)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        createNodeMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Create node')}
         footer={

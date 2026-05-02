@@ -1,15 +1,14 @@
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceResourcesTerminate } from 'waldur-js-client';
 
 import { FormFooter } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { orderCanBeApproved as orderCanBeApprovedSelector } from '@/marketplace/orders/actions/selectors';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ReactComponent as TenantSubtitle } from '@/openstack/openstack-tenant/actions/DestroyActionSubtitle.md';
 import { ReactComponent as ClusterSubtitle } from '@/rancher/cluster/actions/DestroyActionSubtitle.md';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const TerminateDialog = reduxForm<
   {},
@@ -26,35 +25,25 @@ export const TerminateDialog = reduxForm<
       <ClusterSubtitle />
     ) : null;
 
-  const dispatch = useDispatch();
-  const callback = async () => {
-    try {
-      await marketplaceResourcesTerminate({
+  const mutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceResourcesTerminate({
         path: { uuid: resource.marketplace_resource_uuid },
         body: {
           attributes: {
             accepting_terms_of_service: true,
           },
         },
-      });
-      dispatch(
-        showSuccess(
-          translate('Resource termination request has been submitted.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to submit resource termination request.'),
-        ),
-      );
-    }
-  };
+      }),
+    successMessage: translate(
+      'Resource termination request has been submitted.',
+    ),
+    errorMessage: translate('Unable to submit resource termination request.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(callback)}>
+    <form onSubmit={props.handleSubmit(() => mutation.mutateAsync())}>
       <ModalDialog
         title={translate(
           'Terminate resource {resourceName} from {projectName} ({customerName})',

@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceCustomerEstimatedCostPoliciesCreate,
   MarketplaceCustomerEstimatedCostPoliciesCreateData,
@@ -9,7 +8,7 @@ import {
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { CostPolicyFormData, CostPolicyType } from './types';
 
@@ -55,23 +54,21 @@ export const CostPolicyCreateButton = ({
   refetch,
   type,
 }: CostPolicyCreateButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog, closeDialog } = useModal();
   const openCostPolicyFormDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(CostPolicyFormDialog, {
-          size: 'lg',
-          formId: 'CostPolicyCreateForm',
-          submitFn: (formData) => {
-            return submit(formData, type).then(() => {
-              dispatch(closeModalDialog());
-              refetch();
-            });
-          },
-          type,
-        }),
-      ),
-    [dispatch],
+      openDialog(CostPolicyFormDialog, {
+        size: 'lg',
+        formId: 'CostPolicyCreateForm',
+        submitFn: (formData) => {
+          return submit(formData, type).then(() => {
+            closeDialog();
+            refetch();
+          });
+        },
+        type,
+      }),
+    [],
   );
 
   return <AddButton action={openCostPolicyFormDialog} />;

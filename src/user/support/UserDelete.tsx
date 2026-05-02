@@ -1,59 +1,41 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
-import { usersDestroy } from 'waldur-js-client';
-import { User } from 'waldur-js-client';
+import { User, usersDestroy } from 'waldur-js-client';
 
 import { Panel } from '@/core/Panel';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { isDescendantOf } from '@/navigation/useTabs';
-import { useNotify } from '@/store/hooks';
-import { ActionButton } from '@/table/ActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { TermsOfService } from './TermsOfService';
 
 export const UserDelete = ({ user }: { user: User }) => {
   const queryClient = useQueryClient();
   const router = useRouter();
-  const { showErrorResponse, showSuccess } = useNotify();
-  const [isLoading, setLoading] = useState(false);
-  const dispatch = useDispatch();
 
-  const handleDeleteUser = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete {name}?',
-          { name: <strong>{user.full_name}</strong> },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      // swallow
-      return;
-    }
-    try {
-      setLoading(true);
-      await usersDestroy({ path: { uuid: user.uuid } });
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => usersDestroy({ path: { uuid: user.uuid } }),
+    successMessage: translate('User has been deleted.'),
+    errorMessage: translate('Unable to delete user.'),
+    onSuccess: () => {
       queryClient.setQueryData(['User', user.uuid], undefined);
-      showSuccess(translate('User has been deleted.'));
       if (isDescendantOf('marketplace-provider', router.globals.current)) {
         router.stateService.go('marketplace-provider-users');
       } else {
         router.stateService.go('admin-user-users');
       }
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to delete user.'));
-    } finally {
-      setLoading(false);
-    }
-  };
+    },
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete {name}?',
+        { name: <strong>{user.full_name}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
     <Panel
@@ -61,13 +43,11 @@ export const UserDelete = ({ user }: { user: User }) => {
       className="mb-5"
       cardBordered
       actions={
-        <ActionButton
-          variant="danger"
-          action={handleDeleteUser}
-          disabled={isLoading}
+        <RemovalActionButton
+          action={deleteMutation.mutate}
+          disabled={deleteMutation.isPending}
           disabledReason={translate('Deletion in progress')}
-          pending={isLoading}
-          iconNode={<TrashIcon weight="bold" />}
+          pending={deleteMutation.isPending}
           title={translate('Delete')}
         />
       }

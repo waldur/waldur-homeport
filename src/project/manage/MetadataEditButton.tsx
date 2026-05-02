@@ -4,7 +4,7 @@ import { Answer, Project, QuestionWithAnswer } from 'waldur-js-client';
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 const AnswerFormDialog = lazyComponent(() =>
   import('@/marketplace-checklist/AnswerFormDialog').then((module) => ({

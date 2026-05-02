@@ -1,6 +1,5 @@
 import { EyeIcon, QuestionIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { ComponentsUsageStats } from 'waldur-js-client';
 import { Project } from 'waldur-js-client';
 
@@ -11,7 +10,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { Tip } from '@/core/Tooltip';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import { Customer } from '@/workspace/types';
 
@@ -48,7 +47,7 @@ export const AggregateLimitWidget = ({
   refetch,
   type = 'all',
 }: AggregateLimitWidgetProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const isProject = !!project;
   const isMonthly = type === 'monthly';
 
@@ -62,43 +61,37 @@ export const AggregateLimitWidget = ({
   const viewDetails = useCallback(
     () =>
       isProject
-        ? dispatch(
-            openModalDialog(AggregateLimitDetailsDialog, {
-              resolve: {
-                project,
-                components: data?.components,
-              },
-              size: 'lg',
-            }),
-          )
-        : dispatch(
-            openModalDialog(AggregateLimitDetailsDialog, {
-              resolve: {
-                customer,
-                components: data?.components,
-              },
-              size: 'lg',
-            }),
-          ),
-    [dispatch, project, customer, data, isProject],
+        ? openDialog(AggregateLimitDetailsDialog, {
+            resolve: {
+              project,
+              components: data?.components,
+            },
+            size: 'lg',
+          })
+        : openDialog(AggregateLimitDetailsDialog, {
+            resolve: {
+              customer,
+              components: data?.components,
+            },
+            size: 'lg',
+          }),
+    [project, customer, data, isProject],
   );
 
   const viewAllComponents = useCallback(
     () =>
-      dispatch(
-        openModalDialog(AggregateLimitChartModal, {
-          resolve: {
-            data,
-            isMonthly,
-            title:
-              type === 'monthly'
-                ? translate("Current month's usage")
-                : translate('Aggregate usage and limits'),
-          },
-          size: 'xl',
-        }),
-      ),
-    [dispatch, data, isMonthly, type],
+      openDialog(AggregateLimitChartModal, {
+        resolve: {
+          data,
+          isMonthly,
+          title:
+            type === 'monthly'
+              ? translate("Current month's usage")
+              : translate('Aggregate usage and limits'),
+        },
+        size: 'xl',
+      }),
+    [data, isMonthly, type],
   );
 
   if (isLoading) {

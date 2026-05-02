@@ -72,7 +72,12 @@ export const PaymentsList: FunctionComponent = () => {
       columns={columns}
       verboseName={translate('payments')}
       showPageSizeSelector={true}
-      tableActions={<CreatePaymentButton activePaymentProfile={profile} />}
+      tableActions={
+        <CreatePaymentButton
+          activePaymentProfile={profile}
+          refetch={props.fetch}
+        />
+      }
       rowActions={({ row }) => (
         <PaymentActions refetch={props.fetch} row={row} />
       )}

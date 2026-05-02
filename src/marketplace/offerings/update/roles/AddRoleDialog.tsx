@@ -1,15 +1,13 @@
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { marketplaceOfferingRolesCreate } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
 import { SelectField, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { FormGroup } from '../../FormGroup';
 
@@ -24,32 +22,34 @@ interface AddRoleResolve {
 }
 
 export const AddRoleDialog: FC<{ resolve: AddRoleResolve }> = ({ resolve }) => {
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
-
-  const submit = useCallback(
-    async (formData) => {
-      try {
-        await marketplaceOfferingRolesCreate({
-          body: {
-            offering: resolve.offering.uuid,
-            name: formData.name,
-            content_type_input: formData.scope?.value || 'resource_project',
-            description: formData.description || '',
-          } as any,
-        });
-        showSuccess(translate('Role has been added successfully.'));
-        if (resolve.refetch) await resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to add role.'));
-      }
-    },
-    [dispatch, resolve, showSuccess, showErrorResponse],
-  );
+  const addRoleMutation = useManagedMutation<
+    any,
+    any,
+    { name: string; scope: any; description?: string }
+  >({
+    mutationFn: (formData) =>
+      marketplaceOfferingRolesCreate({
+        body: {
+          offering: resolve.offering.uuid,
+          name: formData.name,
+          content_type_input: formData.scope?.value || 'resource_project',
+          description: formData.description || '',
+        } as any,
+      }),
+    successMessage: translate('Role has been added successfully.'),
+    errorMessage: translate('Unable to add role.'),
+    refetch: resolve.refetch,
+  });
 
   return (
-    <Form onSubmit={submit} initialValues={{ scope: SCOPE_OPTIONS[1] }}>
+    <Form
+      onSubmit={(values: any) =>
+        addRoleMutation.mutateAsync(values).catch(() => {
+          /* handled */
+        })
+      }
+      initialValues={{ scope: SCOPE_OPTIONS[1] }}
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

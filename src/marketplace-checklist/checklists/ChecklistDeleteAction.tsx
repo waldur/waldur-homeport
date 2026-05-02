@@ -1,38 +1,31 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { checklistsAdminDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const ChecklistDeleteAction = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete the checklist {name}? This action cannot be undone.',
-          { name: <b>{row.name}</b> },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    await checklistsAdminDestroy({ path: { uuid: row.uuid } });
-    await refetch();
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => checklistsAdminDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Checklist has been deleted.'),
+    errorMessage: translate('Unable to delete checklist.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete the checklist {name}? This action cannot be undone.',
+        { name: <b>{row.name}</b> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      iconColor="danger"
+      action={mutate}
+      disabled={isPending}
     />
   );
 };

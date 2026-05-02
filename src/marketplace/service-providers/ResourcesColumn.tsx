@@ -1,8 +1,6 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const ProviderProjectResourcesDialog = lazyComponent(() =>
   import('./ProviderProjectResourcesDialog').then((module) => ({
@@ -11,21 +9,19 @@ const ProviderProjectResourcesDialog = lazyComponent(() =>
 );
 
 export const ResourcesColumn = ({ row, provider_customer_uuid }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   return (
     <button
       className="btn btn-link"
       onClick={() =>
-        dispatch(
-          openModalDialog(ProviderProjectResourcesDialog, {
-            resolve: {
-              project_uuid: row.uuid,
-              provider_customer_uuid,
-            },
-            size: 'lg',
-          }),
-        )
+        openDialog(ProviderProjectResourcesDialog, {
+          resolve: {
+            project_uuid: row.uuid,
+            provider_customer_uuid,
+          },
+          size: 'lg',
+        })
       }
     >
       {translate('{count} resources', {

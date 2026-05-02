@@ -14,7 +14,7 @@ import { invitationTypeOptions } from '@/invitations/actions/constants';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Role } from '@/permissions/types';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { getCustomer, isStaff } from '@/workspace/selectors';
 
 import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';

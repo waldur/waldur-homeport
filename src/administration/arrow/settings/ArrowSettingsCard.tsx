@@ -1,6 +1,5 @@
 import { useCallback } from 'react';
 import { Card, Table } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import type { ArrowSettings } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
@@ -11,7 +10,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -27,14 +26,12 @@ const ArrowSetupDialog = lazyComponent(() =>
 );
 
 const ArrowSetupButton = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openSetupDialog = useCallback(() => {
-    dispatch(
-      openModalDialog(ArrowSetupDialog, {
-        size: 'lg',
-      }),
-    );
-  }, [dispatch]);
+    openDialog(ArrowSetupDialog, {
+      size: 'lg',
+    });
+  }, []);
 
   return (
     <ActionButton

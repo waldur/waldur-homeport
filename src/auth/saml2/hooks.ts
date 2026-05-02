@@ -1,12 +1,11 @@
-import { useDispatch } from 'react-redux';
 import { apiAuthSaml2Login } from 'waldur-js-client';
 
 import { redirectPost } from '@/auth/saml2/utils';
 import { translate } from '@/i18n';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 export const useSaml2 = () => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
   async function handleSaml2Login(providerUrl) {
     try {
       /* We support only 2 SAML2 bindings: HTTP redirect and HTTP POST.
@@ -26,11 +25,9 @@ export const useSaml2 = () => {
         });
       }
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to login via SAML2 protocol.'),
-        ),
+      showErrorResponse(
+        error,
+        translate('Unable to login via SAML2 protocol.'),
       );
     }
   }

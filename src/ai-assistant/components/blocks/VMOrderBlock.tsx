@@ -13,7 +13,6 @@ import {
   useMemo,
   useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { SkeletonLoader } from '@/ai-assistant/components/shared/SkeletonLoader';
 import { UIBlockProps } from '@/ai-assistant/lib/types';
@@ -21,7 +20,7 @@ import { CopyToClipboardButton } from '@/core/CopyToClipboardButton';
 import { Link } from '@/core/Link';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 // Utility: Generate avatar initials from VM name
 const getInitials = (name: string): string => {
@@ -237,7 +236,7 @@ const useVMOrderForm = () => {
  * Shows form mode (flavor/image selection), preview mode, or result state.
  */
 export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
   const {
     selectedFlavor,
     setSelectedFlavor,
@@ -252,9 +251,9 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
   // Show success notification when VM creation completes
   useEffect(() => {
     if (block.order_status === 'success' && !block.error) {
-      dispatch(showSuccess(translate('Operation completed successfully')));
+      showSuccess(translate('Operation completed successfully'));
     }
-  }, [block.order_status, block.error, dispatch]);
+  }, [block.order_status, block.error]);
 
   const isLoading = block.status === 'loading';
   if (isLoading) {
@@ -438,11 +437,9 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
             {block.message && (
               <div className="aui-vm-order-intro mb-3">{block.message}</div>
             )}
-
             <h4 className="aui-vm-order-heading mb-3">
               {translate('VM order created successfully!')}
             </h4>
-
             {/* Preview-style card with avatar and badge */}
             <VMPreviewCard
               name={block.name}
@@ -456,7 +453,6 @@ export const VMOrderBlock: FC<UIBlockProps> = ({ block }) => {
               orderId={block.order_id}
               success
             />
-
             {/* Order ID with copy button */}
             {block.order_id && (
               <div className="aui-vm-order-id mt-3">

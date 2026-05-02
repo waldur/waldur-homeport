@@ -1,7 +1,8 @@
 import { OrganizationGroup, organizationGroupsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 interface OrganizationGroupDeleteButtonProps {
   row: OrganizationGroup;
@@ -10,20 +11,38 @@ interface OrganizationGroupDeleteButtonProps {
 
 export const OrganizationGroupDeleteButton = (
   props: OrganizationGroupDeleteButtonProps,
-) => (
-  <DeleteButton
-    row={props.row}
-    apiFunction={(r) => organizationGroupsDestroy({ path: { uuid: r.uuid } })}
-    refetch={props.refetch}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+) => {
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      organizationGroupsDestroy({ path: { uuid: props.row.uuid } }),
+    refetch: props.refetch,
+
+    confirmation: {
+      title: translate('Confirmation'),
+
+      body: translate(
         'Are you sure you want to delete the {name} organization group?',
-        { name: <strong>{r.name}</strong> },
+        { name: <strong>{props.row.name}</strong> },
         formatJsxTemplate,
-      )
-    }
-    errorMessage={translate('Unable to remove organization group.')}
-    title={translate('Remove')}
-  />
-);
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
+
+    errorMessage: translate('Unable to remove organization group.'),
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
+    />
+  );
+};

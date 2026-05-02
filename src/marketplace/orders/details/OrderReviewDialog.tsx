@@ -1,6 +1,5 @@
 import { useMutation } from '@tanstack/react-query';
 import { Stack } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOrdersApproveByProvider,
   marketplaceOrdersRejectByProvider,
@@ -9,20 +8,19 @@ import {
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { FileDownloader } from '@/form/upload/FileDownloader';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 export const OrderReviewDialog = ({ order, loadData }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const { mutate: rejectOrder } = useMutation({
     mutationFn: async () => {
       let result;
       try {
-        result = await waitForConfirmation(
-          dispatch,
+        result = await confirm(
           translate('Reject order'),
           translate('Are you sure you want to reject this order?'),
           {

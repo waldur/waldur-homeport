@@ -1,11 +1,9 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { showSuccess } from '@/store/notify';
-
+import { useNotify } from '@/store/notify';
 import './CopyToClipboard.scss';
 
 interface CopyToClipboardProps {
@@ -15,12 +13,12 @@ interface CopyToClipboardProps {
 export const CopyToClipboard: FunctionComponent<CopyToClipboardProps> = ({
   value,
 }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
   const onClick = useCallback(() => {
     navigator.clipboard.writeText(value).then(() => {
-      dispatch(showSuccess(translate('Text has been copied')));
+      showSuccess(translate('Text has been copied'));
     });
-  }, [dispatch, value]);
+  }, [value]);
   return (
     <div className="copyToClipboard">
       <button className="text-btn" type="button" onClick={onClick}>

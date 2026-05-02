@@ -2,7 +2,7 @@ import { BookOpenTextIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const SetManagementSecurityGroupDialog = lazyComponent(() =>

@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
 
 const CallOfferingCreateDialog = lazyComponent(() =>
@@ -21,16 +20,14 @@ export const AddOfferingButton = ({
   call,
   refetch,
 }: AddOfferingButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openOfferingCreateDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(CallOfferingCreateDialog, {
-          resolve: { call, refetch },
-          size: 'lg',
-        }),
-      ),
-    [dispatch],
+      openDialog(CallOfferingCreateDialog, {
+        resolve: { call, refetch },
+        size: 'lg',
+      }),
+    [],
   );
 
   return <AddButton action={openOfferingCreateDialog} />;

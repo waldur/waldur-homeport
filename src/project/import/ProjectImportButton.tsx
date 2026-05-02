@@ -1,14 +1,13 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 const ProjectImportDialog = lazyComponent(() =>
@@ -26,7 +25,7 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
   customer,
   refetch,
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   if (!user) return null;
   const disabled =
     customer &&
@@ -46,7 +45,7 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
             customerId: perm.scope_uuid,
           }),
       );
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   if (disabled || hasNoPermission) {
     return null;
@@ -56,16 +55,14 @@ export const ProjectImportButton: FC<ProjectImportButtonProps> = ({
     <ActionButton
       title={translate('Bulk import')}
       action={() =>
-        dispatch(
-          openModalDialog(ProjectImportDialog, {
-            size: 'lg',
-            formId: 'BulkImportProjects',
-            resolve: {
-              customer,
-              refetch,
-            },
-          }),
-        )
+        openDialog(ProjectImportDialog, {
+          size: 'lg',
+          formId: 'BulkImportProjects',
+          resolve: {
+            customer,
+            refetch,
+          },
+        })
       }
       iconNode={<DownloadSimpleIcon weight="bold" />}
     />

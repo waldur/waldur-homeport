@@ -6,7 +6,7 @@ import {
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback, useMemo, useState } from 'react';
 import { Nav, Tab } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
 import {
@@ -21,10 +21,10 @@ import { formatDateTime } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -121,7 +121,7 @@ const InnerTabs: FC<{
 export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   call,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const queryClient = useQueryClient();
   const formFilters = useSelector(filtersSelector);
@@ -133,7 +133,7 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
       call_uuid: call.uuid,
       ...formFilters,
     }),
-    [call.uuid, formFilters],
+    [formFilters],
   );
 
   const tableProps = useTable({
@@ -191,12 +191,10 @@ export const AssignmentBatchesSection: FC<AssignmentBatchesSectionProps> = ({
   });
 
   const handleManualAssignment = useCallback(() => {
-    dispatch(
-      openModalDialog(CreateManualAssignmentDialog, {
-        resolve: { call, refetch: tableProps.fetch },
-      }),
-    );
-  }, [dispatch, call, tableProps.fetch]);
+    openDialog(CreateManualAssignmentDialog, {
+      resolve: { call, refetch: tableProps.fetch },
+    });
+  }, [call, tableProps.fetch]);
 
   const columns = useMemo(
     () => [

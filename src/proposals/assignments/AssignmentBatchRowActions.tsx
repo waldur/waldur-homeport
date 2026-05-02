@@ -3,9 +3,7 @@ import {
   EnvelopeSimpleIcon,
   XIcon,
 } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   assignmentBatchesSend,
   assignmentBatchesCancel,
@@ -14,9 +12,9 @@ import {
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/hooks';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 const ExtendDeadlineDialog = lazyComponent(() =>
@@ -34,65 +32,42 @@ export const AssignmentBatchRowActions: FC<AssignmentBatchRowActionsProps> = ({
   row,
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
+  const { openDialog } = useModal();
 
-  const sendMutation = useMutation({
-    mutationFn: () =>
-      assignmentBatchesSend({
-        path: { uuid: row.uuid },
-        body: {},
-      }),
-    onSuccess: () => {
-      showSuccess(translate('Assignment batch sent successfully.'));
-      refetch();
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Failed to send assignment batch.'));
-    },
+  const { mutate: handleSend, isPending: isSending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () => assignmentBatchesSend({ path: { uuid: row.uuid } }),
+    successMessage: translate('Assignment batch sent successfully.'),
+    errorMessage: translate('Failed to send assignment batch.'),
+    refetch,
   });
 
-  const cancelMutation = useMutation({
-    mutationFn: () =>
-      assignmentBatchesCancel({
-        path: { uuid: row.uuid },
-      }),
-    onSuccess: () => {
-      showSuccess(translate('Assignment batch cancelled.'));
-      refetch();
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Failed to cancel assignment batch.'));
+  const { mutate: handleCancel, isPending: isCancelling } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () => assignmentBatchesCancel({ path: { uuid: row.uuid } }),
+    successMessage: translate('Assignment batch cancelled.'),
+    errorMessage: translate('Failed to cancel assignment batch.'),
+    refetch,
+    confirmation: {
+      title: translate('Cancel assignment batch'),
+      body: translate(
+        'Are you sure you want to cancel this assignment batch for {reviewer}?',
+        { reviewer: row.reviewer_name || row.reviewer_email },
+      ),
     },
   });
-
-  const handleSend = useCallback(() => {
-    sendMutation.mutate();
-  }, [sendMutation]);
-
-  const handleCancel = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Cancel assignment batch'),
-        translate(
-          'Are you sure you want to cancel this assignment batch for {reviewer}?',
-          { reviewer: row.reviewer_name || row.reviewer_email },
-        ),
-      );
-      cancelMutation.mutate();
-    } catch {
-      // User cancelled confirmation
-    }
-  }, [dispatch, row, cancelMutation]);
 
   const handleExtendDeadline = useCallback(() => {
-    dispatch(
-      openModalDialog(ExtendDeadlineDialog, {
-        resolve: { batch: row, refetch },
-      }),
-    );
-  }, [dispatch, row, refetch]);
+    openDialog(ExtendDeadlineDialog, {
+      resolve: { batch: row, refetch },
+    });
+  }, [row, refetch]);
 
   const canSend = row.status === 'draft';
   const canCancel = row.status === 'draft' || row.status === 'sent';
@@ -107,9 +82,9 @@ export const AssignmentBatchRowActions: FC<AssignmentBatchRowActionsProps> = ({
       {canSend && (
         <ActionItem
           title={translate('Send')}
-          action={handleSend}
+          action={() => handleSend()}
           iconNode={<EnvelopeSimpleIcon weight="bold" />}
-          disabled={sendMutation.isPending}
+          disabled={isSending}
         />
       )}
       {canExtendDeadline && (
@@ -122,11 +97,11 @@ export const AssignmentBatchRowActions: FC<AssignmentBatchRowActionsProps> = ({
       {canCancel && (
         <ActionItem
           title={translate('Cancel')}
-          action={handleCancel}
+          action={() => handleCancel()}
           iconNode={<XIcon weight="bold" />}
           className="text-danger"
           iconColor="danger"
-          disabled={cancelMutation.isPending}
+          disabled={isCancelling}
         />
       )}
     </ActionsDropdownComponent>

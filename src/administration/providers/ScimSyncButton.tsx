@@ -1,40 +1,22 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import { usersScimSyncAll } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 export const ScimSyncButton = () => {
-  const dispatch = useDispatch();
-  const [pending, setPending] = useState(false);
-
-  const handleSync = useCallback(async () => {
-    setPending(true);
-    try {
-      await usersScimSyncAll();
-      dispatch(
-        showSuccess(translate('SCIM user synchronization has been scheduled.')),
-      );
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to schedule SCIM user synchronization.'),
-        ),
-      );
-    } finally {
-      setPending(false);
-    }
-  }, [dispatch]);
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => usersScimSyncAll(),
+    successMessage: translate('SCIM user synchronization has been scheduled.'),
+    errorMessage: translate('Unable to schedule SCIM user synchronization.'),
+  });
 
   return (
     <ActionButton
-      action={handleSync}
+      action={mutate}
       variant="primary"
-      pending={pending}
+      pending={isPending}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
       title={translate('Sync all users')}
     />

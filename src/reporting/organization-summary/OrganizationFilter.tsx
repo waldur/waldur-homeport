@@ -6,7 +6,8 @@ import { Field, reduxForm, change } from 'redux-form';
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
-import { getUser, isStaffOrSupport } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { isStaffOrSupport } from '@/workspace/selectors';
 
 export const ORGANIZATION_FILTER_FORM = 'OrganizationSummaryFilter';
 
@@ -22,7 +23,7 @@ interface OrganizationFilterProps {
  * - Organization owners: Can only select their own organizations
  */
 const PureOrganizationFilter: FC<OrganizationFilterProps> = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const canSelectAny = useSelector(isStaffOrSupport);
   const dispatch = useDispatch();
 

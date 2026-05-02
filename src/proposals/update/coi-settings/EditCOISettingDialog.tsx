@@ -2,7 +2,6 @@ import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { useCallback, useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   proposalProtectedCallsCoiConfigurationRetrieve,
   proposalProtectedCallsCoiConfigurationPartialUpdate,
@@ -14,11 +13,11 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Call } from '@/proposals/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 export interface EditCOISettingProps {
   call: Call;
@@ -137,7 +136,10 @@ const SELECT_FIELD_OPTIONS: Record<string, { value: string; label: string }[]> =
   };
 
 export const EditCOISettingDialog = ({ resolve }: Props) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
+
   const queryClient = useQueryClient();
 
   const { data: config, isLoading } = useQuery({
@@ -159,7 +161,7 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
       };
     }
     return { [resolve.name]: value };
-  }, [config, resolve.name, isArrayField]);
+  }, [config, isArrayField, resolve.name]);
 
   const processRequest = useCallback(
     async (values: Record<string, any>) => {
@@ -181,19 +183,17 @@ export const EditCOISettingDialog = ({ resolve }: Props) => {
         await queryClient.invalidateQueries({
           queryKey: ['coiConfiguration', resolve.call.uuid],
         });
-        dispatch(showSuccess(translate('COI setting has been updated.')));
-        dispatch(closeModalDialog());
+        showSuccess(translate('COI setting has been updated.'));
+        closeDialog();
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to update COI setting.')),
-        );
+        showErrorResponse(e, translate('Unable to update COI setting.'));
         if (e.response && e.response.status === 400) {
           return { [FORM_ERROR]: e.response.data };
         }
         return { [FORM_ERROR]: translate('Unable to update COI setting.') };
       }
     },
-    [resolve, dispatch, isArrayField, queryClient],
+    [resolve, isArrayField, queryClient],
   );
 
   const isNumberField = NUMBER_FIELDS.includes(resolve.name);

@@ -1,10 +1,5 @@
-import {
-  PencilSimpleIcon,
-  PlusCircleIcon,
-  TrashIcon,
-} from '@phosphor-icons/react';
+import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   KeycloakScopeOptionRequest,
   marketplaceProviderResourcesSetKeycloakScopes,
@@ -12,10 +7,10 @@ import {
 } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import Table from '@/table/Table';
@@ -29,20 +24,18 @@ interface ResourceKeycloakScopesRowProps {
 }
 
 const EditScopeAction = ({ row }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('Edit')}
       action={() =>
-        dispatch(
-          openModalDialog(AddScopeOptionDialog, {
-            resolve: {
-              resourceUuid: (row as any)._resourceUuid,
-              existingScopes: (row as any)._allScopes,
-              editScope: row,
-            },
-          }),
-        )
+        openDialog(AddScopeOptionDialog, {
+          resolve: {
+            resourceUuid: (row as any)._resourceUuid,
+            existingScopes: (row as any)._allScopes,
+            editScope: row,
+          },
+        })
       }
       iconNode={<PencilSimpleIcon weight="bold" />}
     />
@@ -50,49 +43,35 @@ const EditScopeAction = ({ row }) => {
 };
 
 const RemoveScopeAction = ({ row, refetch }) => {
-  const dispatch = useDispatch();
+  const removeMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
+      const allScopes: ScopeOption[] = (row as any)._allScopes;
+      const resourceUuid: string = (row as any)._resourceUuid;
+      const newScopes = allScopes.filter((s) => s.scope_id !== row.scope_id);
+      return marketplaceProviderResourcesSetKeycloakScopes({
+        path: { uuid: resourceUuid },
+        body: { keycloak_available_scopes: newScopes },
+      });
+    },
+    successMessage: translate('Scope option has been removed.'),
+    errorMessage: translate('Unable to remove scope option.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to remove scope {label}?',
+        { label: <strong>{row.label}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Remove')}
-      action={async () => {
-        try {
-          await waitForConfirmation(
-            dispatch,
-            translate('Confirmation'),
-            translate(
-              'Are you sure you want to remove scope {label}?',
-              { label: <strong>{row.label}</strong> },
-              formatJsxTemplate,
-            ),
-            { forDeletion: true },
-          );
-        } catch {
-          return;
-        }
-        try {
-          const allScopes: ScopeOption[] = (row as any)._allScopes;
-          const resourceUuid: string = (row as any)._resourceUuid;
-          const newScopes = allScopes.filter(
-            (s) => s.scope_id !== row.scope_id,
-          );
-          await marketplaceProviderResourcesSetKeycloakScopes({
-            path: { uuid: resourceUuid },
-            body: { keycloak_available_scopes: newScopes },
-          });
-          dispatch(showSuccess(translate('Scope option has been removed.')));
-          refetch();
-        } catch (error) {
-          dispatch(
-            showErrorResponse(
-              error,
-              translate('Unable to remove scope option.'),
-            ),
-          );
-        }
-      }}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      iconColor="danger"
+      action={() => removeMutation.mutate()}
+      disabled={removeMutation.isPending}
     />
   );
 };
@@ -109,21 +88,19 @@ export const ResourceKeycloakScopesRow: FC<ResourceKeycloakScopesRowProps> = ({
   row,
   fetch: parentFetch,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const availableScopes: ScopeOption[] =
     (row.options as any)?.keycloak_available_scopes || [];
 
   const handleAdd = useCallback(() => {
-    dispatch(
-      openModalDialog(AddScopeOptionDialog, {
-        resolve: {
-          resourceUuid: row.uuid,
-          existingScopes: availableScopes,
-        },
-      }),
-    );
-  }, [dispatch, row.uuid, availableScopes]);
+    openDialog(AddScopeOptionDialog, {
+      resolve: {
+        resourceUuid: row.uuid,
+        existingScopes: availableScopes,
+      },
+    });
+  }, [availableScopes, row.uuid]);
 
   // Enrich rows with metadata needed by row actions
   const rows = useMemo(
@@ -133,7 +110,7 @@ export const ResourceKeycloakScopesRow: FC<ResourceKeycloakScopesRowProps> = ({
         _allScopes: availableScopes,
         _resourceUuid: row.uuid,
       })),
-    [availableScopes, row.uuid],
+    [availableScopes],
   );
 
   const fetcher = useCallback(

@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { capitalize } from 'lodash-es';
 import { Card, Col, Dropdown, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { overrideSettingsRetrieve } from 'waldur-js-client';
 
 import { ServiceDeskProviderLogo } from '@/administration/service-desk/ServiceDeskProviderLogo';
@@ -11,7 +10,7 @@ import { LoadingSpinner } from '@/core/LoadingSpinner';
 import FormTable from '@/form/FormTable';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { hasSupport } from '@/issues/hooks';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { SettingsDescription } from '@/SettingsDescription';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
@@ -37,26 +36,22 @@ const INTEGRATION_SETTINGS = SettingsDescription.find(
 );
 
 const ServiceDeskProviderCard = ({ serviceDeskProvider, initialValues }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const openConfigure = () => {
-    dispatch(
-      openModalDialog(AdministrationServiceDeskUpdateDialog, {
-        size: 'lg',
-        resolve: {
-          initialValues,
-          name: serviceDeskProvider,
-        },
-      }),
-    );
+    openDialog(AdministrationServiceDeskUpdateDialog, {
+      size: 'lg',
+      resolve: {
+        initialValues,
+        name: serviceDeskProvider,
+      },
+    });
   };
 
   const openDiscovery = () => {
-    dispatch(
-      openModalDialog(AtlassianDiscoveryDialog, {
-        size: 'xl',
-      }),
-    );
+    openDialog(AtlassianDiscoveryDialog, {
+      size: 'xl',
+    });
   };
 
   return (

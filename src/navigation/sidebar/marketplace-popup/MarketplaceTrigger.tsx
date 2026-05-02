@@ -1,14 +1,12 @@
 import { PlusIcon } from '@phosphor-icons/react';
 import classNames from 'classnames';
 import { FunctionComponent, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-
+import { useModal } from '@/modal/actions';
 import './MarketplaceTrigger.scss';
 
 const MarketplacePopup = lazyComponent(() =>
@@ -26,15 +24,13 @@ export const MarketplaceTrigger: FunctionComponent<MarketplaceTriggerProps> = ({
   disabled,
   disabledTooltip,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openFormDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(MarketplacePopup, {
-          size: 'lg',
-        }),
-      ),
-    [dispatch],
+      openDialog(MarketplacePopup, {
+        size: 'lg',
+      }),
+    [],
   );
   const sidebarStyle = ENV.plugins.WALDUR_CORE.SIDEBAR_STYLE || 'dark';
 

@@ -1,6 +1,6 @@
 import { InfoIcon, UserIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   reviewerSuggestionsList,
   ReviewerSuggestion,
@@ -14,11 +14,11 @@ import { formatDate } from '@/core/dateUtils';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { Call } from '@/proposals/types';
 import { PoolSummaryButton } from '@/proposals/update/reviewer-pool/PoolSummaryButton';
 import { useReviewerPoolTabs } from '@/proposals/update/reviewer-pool/tabs';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { createFetcher } from '@/table/api';
 import {
   ReviewerSuggestionsFilter,
@@ -117,82 +117,64 @@ interface BulkActionsProps {
 }
 
 const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
-  const dispatch = useDispatch();
-
   const pendingRows = rows.filter((r) => r.status === 'pending');
 
-  const handleBulkConfirm = useCallback(async () => {
-    try {
-      await Promise.all(
-        pendingRows.map((row) =>
-          reviewerSuggestionsConfirm({
-            path: { uuid: row.uuid },
-          }),
-        ),
-      );
-      dispatch(
-        showSuccess(
-          translate('Confirmed {count} suggestions.', {
-            count: pendingRows.length,
-          }),
-        ),
-      );
-      refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to confirm suggestions.')),
-      );
-    }
-  }, [pendingRows, dispatch, refetch]);
+  const { mutate: handleBulkConfirm, isPending: isConfirming } =
+    useBatchMutation<ReviewerSuggestion, void>({
+      rows: pendingRows,
+      refetch,
+      mutationFn: (row) =>
+        reviewerSuggestionsConfirm({ path: { uuid: row.uuid } }),
+      successMessage: translate('Confirmed {count} suggestions.', {
+        count: pendingRows.length,
+      }),
+      renderPartialSuccessMessage: (n) =>
+        translate('Successfully confirmed {n} suggestions.', { n }),
+      errorMessage: translate('Unable to confirm suggestions.'),
+    });
+  const { mutate: handleBulkReject, isPending: isRejecting } = useBatchMutation<
+    ReviewerSuggestion,
+    void
+  >({
+    rows: pendingRows,
+    refetch,
+    mutationFn: (row) =>
+      reviewerSuggestionsReject({
+        path: { uuid: row.uuid },
+        body: { reason: translate('Bulk rejected') },
+      }),
+    successMessage: translate('Rejected {count} suggestions.', {
+      count: pendingRows.length,
+    }),
+    renderPartialSuccessMessage: (n) =>
+      translate('Successfully rejected {n} suggestions.', { n }),
+    errorMessage: translate('Unable to reject suggestions.'),
+  });
 
-  const handleBulkReject = useCallback(async () => {
-    try {
-      await Promise.all(
-        pendingRows.map((row) =>
-          reviewerSuggestionsReject({
-            path: { uuid: row.uuid },
-            body: { reason: translate('Bulk rejected') },
-          }),
-        ),
-      );
-      dispatch(
-        showSuccess(
-          translate('Rejected {count} suggestions.', {
-            count: pendingRows.length,
-          }),
-        ),
-      );
-      refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to reject suggestions.')),
-      );
-    }
-  }, [pendingRows, dispatch, refetch]);
+  const { mutate: handleBulkDelete, isPending: isDeleting } = useBatchMutation<
+    ReviewerSuggestion,
+    void
+  >({
+    rows,
+    refetch,
+    mutationFn: (row) =>
+      reviewerSuggestionsDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Deleted {count} suggestions.', {
+      count: rows.length,
+    }),
+    renderPartialSuccessMessage: (n) =>
+      translate('Successfully deleted {n} suggestions.', { n }),
+    errorMessage: translate('Unable to delete suggestions.'),
+    confirmation: {
+      title: translate('Delete suggestions'),
+      body: translate('Are you sure you want to delete {count} suggestions?', {
+        count: rows.length,
+      }),
+      options: { forDeletion: true },
+    },
+  });
 
-  const handleBulkDelete = useCallback(async () => {
-    try {
-      await Promise.all(
-        rows.map((row) =>
-          reviewerSuggestionsDestroy({
-            path: { uuid: row.uuid },
-          }),
-        ),
-      );
-      dispatch(
-        showSuccess(
-          translate('Deleted {count} suggestions.', {
-            count: rows.length,
-          }),
-        ),
-      );
-      refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to delete suggestions.')),
-      );
-    }
-  }, [rows, dispatch, refetch]);
+  const isLoading = isConfirming || isRejecting || isDeleting;
 
   if (rows.length === 0) {
     return (
@@ -209,16 +191,25 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
         <>
           <button
             className="btn btn-sm btn-success"
-            onClick={handleBulkConfirm}
+            onClick={() => handleBulkConfirm()}
+            disabled={isLoading}
           >
             {translate('Confirm all')} ({pendingRows.length})
           </button>
-          <button className="btn btn-sm btn-danger" onClick={handleBulkReject}>
+          <button
+            className="btn btn-sm btn-danger"
+            onClick={() => handleBulkReject()}
+            disabled={isLoading}
+          >
             {translate('Reject all')} ({pendingRows.length})
           </button>
         </>
       )}
-      <button className="btn btn-sm btn-danger" onClick={handleBulkDelete}>
+      <button
+        className="btn btn-sm btn-danger"
+        onClick={() => handleBulkDelete()}
+        disabled={isLoading}
+      >
         {translate('Delete all')} ({rows.length})
       </button>
     </div>
@@ -228,7 +219,7 @@ const BulkActions: FC<BulkActionsProps> = ({ rows, refetch }) => {
 export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
   call,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const formFilters = useSelector(selectReviewerSuggestionsFilter);
   const tabs = useReviewerPoolTabs();
 
@@ -237,7 +228,7 @@ export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
       call_uuid: call?.uuid,
       ...formFilters,
     }),
-    [call?.uuid, formFilters],
+    [formFilters, call?.uuid],
   );
 
   const tableProps = useTable({
@@ -248,14 +239,12 @@ export const ReviewerDiscoverySection: FC<ReviewerDiscoverySectionProps> = ({
 
   const handleViewProfile = useCallback(
     (row: ReviewerSuggestion) => {
-      dispatch(
-        openModalDialog(ReviewerProfileDialog, {
-          resolve: { suggestion: row },
-          size: 'lg',
-        }),
-      );
+      openDialog(ReviewerProfileDialog, {
+        resolve: { suggestion: row },
+        size: 'lg',
+      });
     },
-    [dispatch],
+    [openDialog],
   );
 
   const columns = useMemo(

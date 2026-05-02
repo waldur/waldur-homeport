@@ -67,36 +67,3 @@ export interface EditModalButtonProps<
   /** Render mode: 'action-item' for dropdown menu, 'button' for standalone */
   renderAs?: 'action-item' | 'button';
 }
-
-export interface DeleteButtonProps<TRow> {
-  /** The row data being deleted */
-  row: TRow;
-  /** API function to call for deletion */
-  apiFunction: (row: TRow) => Promise<unknown>;
-  /** Confirmation dialog title */
-  confirmTitle?: ReactNode | ((row: TRow) => ReactNode);
-  /** Confirmation dialog message (required) */
-  confirmMessage: ReactNode | ((row: TRow) => ReactNode);
-  /** Success notification message */
-  successMessage?: string | ((row: TRow) => string);
-  /** Error notification message */
-  errorMessage?: string | ((row: TRow) => string);
-  /** Callback after successful deletion */
-  refetch?: () => void | Promise<void>;
-  /** Additional success callback */
-  onSuccess?: () => void;
-  /** Button title (defaults to 'Delete') */
-  title?: string;
-  /** Custom icon (defaults to TrashIcon) */
-  iconNode?: ReactNode;
-  /** Disabled state */
-  disabled?: boolean;
-  /** Tooltip shown on hover */
-  tooltip?: string;
-  /** Button size */
-  buttonSize?: 'sm' | 'lg';
-  /** Render mode: 'action-item' for dropdown menu, 'button' for standalone */
-  renderAs?: 'action-item' | 'button';
-  /** Skip confirmation dialog */
-  skipConfirmation?: boolean;
-}

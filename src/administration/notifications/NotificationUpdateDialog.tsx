@@ -1,7 +1,6 @@
 import arrayMutators from 'final-form-arrays';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   Notification,
   notificationMessagesTemplatesOverride,
@@ -10,9 +9,8 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { NotificationForm } from './NotificationForm';
 
@@ -36,8 +34,6 @@ export const NotificationUpdateDialog = ({
 }: {
   resolve: { notification: Notification; refetch };
 }) => {
-  const dispatch = useDispatch();
-
   const normalizedTemplates = useMemo(
     () =>
       resolve.notification.templates.map((t) => ({
@@ -47,44 +43,34 @@ export const NotificationUpdateDialog = ({
     [resolve.notification.templates],
   );
 
-  const onSubmit = useCallback(
-    async (formData) => {
+  const { mutateAsync } = useManagedMutation<any, any, any>({
+    mutationFn: async (formData) => {
       const templatesToUpdate = findDifferentTemplates(formData, {
         templates: normalizedTemplates,
       });
 
       if (templatesToUpdate.length === 0) {
-        dispatch(closeModalDialog());
         return;
       }
 
       for (const template of templatesToUpdate) {
-        try {
-          await notificationMessagesTemplatesOverride({
-            path: { uuid: template.uuid },
-            body: {
-              content: template.content,
-            },
-          });
-        } catch (e) {
-          dispatch(
-            showErrorResponse(e, translate('Unable to update a notification.')),
-          );
-          return;
-        }
+        await notificationMessagesTemplatesOverride({
+          path: { uuid: template.uuid },
+          body: {
+            content: template.content,
+          },
+        });
       }
-      await resolve.refetch();
-      dispatch(showSuccess(translate('Notification has been updated.')));
-      dispatch(closeModalDialog());
     },
-    [dispatch, resolve, normalizedTemplates],
-  );
+    refetch: resolve.refetch,
+    successMessage: translate('Notification has been updated.'),
+    errorMessage: translate('Unable to update a notification.'),
+  });
 
-  // @ts-ignore
   const contextSchema = resolve.notification.context_schema;
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => mutateAsync(values)}
       initialValues={{ templates: normalizedTemplates }}
       mutators={{
         ...arrayMutators,

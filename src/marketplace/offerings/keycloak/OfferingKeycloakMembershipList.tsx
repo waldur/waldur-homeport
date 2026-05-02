@@ -2,7 +2,6 @@ import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FunctionComponent, memo, useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 import {
   marketplaceOfferingRolesList,
   OfferingKeycloakMembership,
@@ -26,7 +25,7 @@ import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { AddKeycloakMembershipButton } from './AddKeycloakMembershipButton';
 import { KeycloakMembershipBulkRemoveAction } from './KeycloakMembershipBulkRemoveAction';
@@ -91,7 +90,7 @@ export const OfferingKeycloakMembershipList: FunctionComponent<{
   offering: PublicOfferingDetails;
   portal?: any;
 }> = ({ resource, offering, portal }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const canManageUsers = hasPermission(user, {
     permission: PermissionEnum.MANAGE_RESOURCE_USERS,
     customerId: offering.customer_uuid,

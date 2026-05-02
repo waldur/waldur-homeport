@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useState } from 'react';
 import { Alert, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
   Resource,
@@ -9,10 +8,10 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 interface SyncConsumptionHistoryDialogProps {
   resolve: {
@@ -37,7 +36,9 @@ export const SyncConsumptionHistoryDialog = ({
   resolve,
 }: SyncConsumptionHistoryDialogProps) => {
   const { resource, refetch } = resolve;
-  const dispatch = useDispatch();
+  const { showError, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
 
   const defaultRange = getDefaultDateRange();
   const [periodFrom, setPeriodFrom] = useState(defaultRange.start);
@@ -63,16 +64,16 @@ export const SyncConsumptionHistoryDialog = ({
           skipped: data.periods_skipped,
         },
       );
-      dispatch(showSuccess(message));
+      showSuccess(message);
       refetch?.();
-      dispatch(closeModalDialog());
+      closeDialog();
     },
     onError: (error: any) => {
       const errorMessage =
         error?.response?.data?.error ||
         error?.message ||
         translate('Failed to sync consumption history');
-      dispatch(showError(errorMessage));
+      showError(errorMessage);
     },
   });
 

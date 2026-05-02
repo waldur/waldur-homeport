@@ -8,7 +8,6 @@ import {
   useRef,
   useState,
 } from 'react';
-import { useDispatch } from 'react-redux';
 import { useToggle } from 'react-use';
 import { Offering, Project, Resource } from 'waldur-js-client';
 
@@ -20,7 +19,7 @@ import { isFeatureVisible } from '@/features/connect';
 import { ProjectFeatures } from '@/FeaturesEnums';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
-import { showError } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
@@ -41,7 +40,7 @@ const ExpandableRow = (columns) =>
   ));
 
 export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
-  const dispatch = useDispatch();
+  const { showError } = useNotify();
   const [data, setData] = useState<ImportedProject[]>([]);
   const [skipErrors, setSkipErrors] = useToggle(false);
 
@@ -56,12 +55,12 @@ export const Step5PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       const _file = acceptedFiles[0];
 
       if (!_file) {
-        dispatch(showError(translate('No file has been imported')));
+        showError(translate('No file has been imported'));
         return;
       }
       parseProjectsAndResourcesFile(_file).then((_data) => setData(_data));
     },
-    [dispatch, setData],
+    [setData],
   );
 
   const refToolbar = useRef<HTMLDivElement>(null);

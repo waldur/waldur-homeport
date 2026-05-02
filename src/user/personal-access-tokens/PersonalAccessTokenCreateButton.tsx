@@ -1,19 +1,28 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
-import { personalAccessTokenCreateDialog } from './actions';
+const PersonalAccessTokenCreateDialog = lazyComponent(() =>
+  import('./PersonalAccessTokenCreateDialog').then((module) => ({
+    default: module.PersonalAccessTokenCreateDialog,
+  })),
+);
 
 export const PersonalAccessTokenCreateButton: FunctionComponent<{
   refetch?;
 }> = ({ refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openFormDialog = useCallback(
-    () => dispatch(personalAccessTokenCreateDialog(refetch)),
-    [dispatch, refetch],
+    () =>
+      openDialog(PersonalAccessTokenCreateDialog, {
+        size: 'lg',
+        resolve: { refetch },
+      }),
+    [openDialog, refetch],
   );
 
   return (

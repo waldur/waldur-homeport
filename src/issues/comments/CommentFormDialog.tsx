@@ -1,7 +1,5 @@
-import { useQueryClient } from '@tanstack/react-query';
-import { FC } from 'react';
-import { useDispatch } from 'react-redux';
-import { InjectedFormProps, reduxForm } from 'redux-form';
+import { FC, useMemo } from 'react';
+import { Field, Form } from 'react-final-form';
 import {
   Issue,
   supportCommentsUpdate,
@@ -9,116 +7,100 @@ import {
 } from 'waldur-js-client';
 
 import { required } from '@/core/validators';
-import { FormContainer, SubmitButton, TextField } from '@/form';
+import { SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
+import { ISSUE_COMMENTS_QUERY_KEY } from './constants';
 import { Comment } from './types';
 
-const FORM_ID = 'ISSUE_COMMENTS_FORM_MAIN';
-const COMMENT_FIELD = 'COMMENT';
+interface CommentFormData {
+  description: string;
+}
 
-interface CommentFormDialogOwnProps {
+interface CommentFormDialogProps {
   resolve: { comment?: Comment; issue?: Issue };
 }
 
-interface CommentFormDialogProps
-  extends
-    InjectedFormProps<Record<string, string>, CommentFormDialogOwnProps>,
-    CommentFormDialogOwnProps {}
-
-const PureCommentFormDialog: FC<CommentFormDialogProps> = (props) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
+export const CommentFormDialog: FC<CommentFormDialogProps> = (props) => {
   const isEdit = Boolean(props.resolve?.comment);
   const issue = props.resolve?.issue;
 
-  const onSubmit = async (data: { [key: string]: string }) => {
-    if (isEdit) {
-      try {
-        await supportCommentsUpdate({
+  const commentMutation = useManagedMutation<any, any, CommentFormData>({
+    mutationFn: (data) => {
+      if (isEdit) {
+        return supportCommentsUpdate({
           path: { uuid: props.resolve.comment.uuid },
           body: {
             is_public: true,
-            description: data[COMMENT_FIELD],
+            description: data.description,
           },
         });
-        queryClient.invalidateQueries({
-          queryKey: ['issueComments', props.resolve.comment.issue],
-        });
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to edit comment.')),
-        );
-      }
-    } else {
-      try {
-        await supportIssuesComment({
+      } else {
+        return supportIssuesComment({
           path: { uuid: issue.uuid },
           body: {
             is_public: true,
-            description: data[COMMENT_FIELD],
+            description: data.description,
           },
         });
-        queryClient.invalidateQueries({
-          queryKey: ['issueComments', issue.url],
-        });
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to post comment.')),
-        );
       }
-    }
-  };
+    },
+    errorMessage: isEdit
+      ? translate('Unable to edit comment.')
+      : translate('Unable to post comment.'),
+    invalidateQueries: [
+      {
+        queryKey: [
+          ISSUE_COMMENTS_QUERY_KEY,
+          isEdit ? props.resolve.comment.issue : issue.url,
+        ],
+      },
+    ],
+  });
+
+  const initialValues = useMemo(() => {
+    return props.resolve?.comment
+      ? { description: props.resolve.comment.description }
+      : {};
+  }, [props.resolve]);
 
   return (
-    <form onSubmit={props.handleSubmit(onSubmit)}>
-      <ModalDialog
-        title={isEdit ? translate('Change comment') : translate('Add comment')}
-        footer={
-          <>
-            <CloseDialogButton variant="tertiary" className="flex-equal" />
-            <SubmitButton
-              submitting={props.submitting}
-              disabled={props.invalid || props.submitting}
-              label={translate('Confirm')}
-              className="btn btn-primary flex-equal"
+    <Form<CommentFormData>
+      onSubmit={(values) => commentMutation.mutateAsync(values)}
+      initialValues={initialValues}
+      render={({ handleSubmit, submitting, invalid, pristine }) => (
+        <form onSubmit={handleSubmit}>
+          <ModalDialog
+            title={
+              isEdit ? translate('Change comment') : translate('Add comment')
+            }
+            footer={
+              <>
+                <CloseDialogButton variant="tertiary" className="flex-equal" />
+                <SubmitButton
+                  submitting={submitting}
+                  disabled={invalid || submitting || pristine}
+                  label={translate('Confirm')}
+                  className="btn btn-primary flex-equal"
+                />
+              </>
+            }
+          >
+            <Field
+              name="description"
+              spaceless
+              hideLabel
+              placeholder={translate('Enter a comment...')}
+              validate={required}
+              component={TextField as any}
+              autoFocus
             />
-          </>
-        }
-      >
-        <FormContainer submitting={props.submitting}>
-          <TextField
-            name={COMMENT_FIELD}
-            spaceless
-            hideLabel
-            placeholder={translate('Enter a comment...')}
-            validate={required}
-            autoFocus
-          />
-        </FormContainer>
-      </ModalDialog>
-    </form>
+          </ModalDialog>
+        </form>
+      )}
+    />
   );
 };
-
-export const CommentFormDialog = reduxForm<
-  Record<string, string>,
-  CommentFormDialogOwnProps
->({
-  form: FORM_ID,
-  destroyOnUnmount: true,
-  initialValues: {},
-})((props) => {
-  const initialValues = props.resolve?.comment
-    ? { [COMMENT_FIELD]: props.resolve.comment.description }
-    : {};
-
-  return <PureCommentFormDialog {...props} initialValues={initialValues} />;
-});

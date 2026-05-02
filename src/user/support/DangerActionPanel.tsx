@@ -1,13 +1,11 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FC, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { Panel } from '@/core/Panel';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
+import { useModal } from '@/modal/actions';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { DangerActionPanelProps } from './DangerActionPanelProps';
 
@@ -18,7 +16,7 @@ const DangerActionDialog = lazyComponent(() =>
 );
 
 export const DangerActionPanel: FC<DangerActionPanelProps> = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const [confirm, setConfirm] = useState(false);
 
   return (
@@ -26,12 +24,10 @@ export const DangerActionPanel: FC<DangerActionPanelProps> = (props) => {
       title={props.panelTitle}
       cardBordered
       actions={
-        <ActionButton
-          variant="danger"
-          action={() => dispatch(openModalDialog(DangerActionDialog, props))}
+        <RemovalActionButton
+          action={() => openDialog(DangerActionDialog, props)}
           disabled={!confirm}
           disabledReason={translate('Please confirm before proceeding')}
-          iconNode={<TrashIcon weight="bold" />}
           title={props.buttonTitle}
         />
       }

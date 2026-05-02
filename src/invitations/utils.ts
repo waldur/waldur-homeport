@@ -13,9 +13,9 @@ import {
 } from '@/core/StorageManager';
 import { createDeferred } from '@/core/utils';
 import { translate } from '@/i18n';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { ModalService } from '@/modal/actions';
 import { router } from '@/router';
-import { showError, showRedirectMessage, showSuccess } from '@/store/notify';
+import { NotifyService } from '@/store/notify';
 import store from '@/store/store';
 import { UsersService, getCurrentUser } from '@/user/UsersService';
 import { setCurrentUser } from '@/workspace/actions';
@@ -96,19 +96,15 @@ export function checkAndAccept(token) {
       })
       .catch(() => {
         InvitationTokenStorage.remove();
-        store.dispatch(
-          showError(translate('Invitation is not valid anymore.')),
-        );
+        NotifyService.error(translate('Invitation is not valid anymore.'));
         router.stateService.go('profile.details');
       });
   } else {
     InvitationTokenStorage.set(token);
     router.stateService.go('login');
-    store.dispatch(
-      showRedirectMessage(
-        translate('Authentication required.'),
-        translate('To accept the invitation, please sign in to your account.'),
-      ),
+    NotifyService.warning(
+      translate('Authentication required.'),
+      translate('To accept the invitation, please sign in to your account.'),
     );
   }
 }
@@ -133,16 +129,14 @@ function collectProjectDetails(token): Promise<{
       ? resolveProjectNameTemplate(invitation.project_name_template)
       : '';
     return new Promise((resolve) => {
-      store.dispatch(
-        openModalDialog(ProjectDetailsDialog, {
-          resolve: {
-            onSubmit: (data) => resolve(data),
-            onCancel: () => resolve(null),
-            defaultProjectName,
-          },
-          size: 'md',
-        }),
-      );
+      ModalService.open(ProjectDetailsDialog, {
+        resolve: {
+          onSubmit: (data) => resolve(data),
+          onCancel: () => resolve(null),
+          defaultProjectName,
+        },
+        size: 'md',
+      });
     });
   });
 }
@@ -160,8 +154,7 @@ export function submitPermissionRequest(token) {
             const errorMessage = format(error);
             if (isDuplicateOrConflictError(errorMessage)) {
               try {
-                await waitForConfirmation(
-                  store.dispatch,
+                await ModalService.confirm(
                   translate('You already have access'),
                   translate(
                     'You already have the requested role or a pending request for this organization.',
@@ -179,8 +172,7 @@ export function submitPermissionRequest(token) {
               }
             } else {
               try {
-                await waitForConfirmation(
-                  store.dispatch,
+                await ModalService.confirm(
                   translate('Access restricted'),
                   translateBackendError(errorMessage) ||
                     translate(
@@ -215,22 +207,20 @@ export function submitPermissionRequest(token) {
 export async function acceptInvitation(token) {
   try {
     await userInvitationsAccept({ path: { uuid: token } });
-    store.dispatch(showSuccess(translate('Your invitation was accepted.')));
+    NotifyService.success(translate('Your invitation was accepted.'));
     InvitationTokenStorage.remove();
     const newUser = await getCurrentUser();
     store.dispatch(setCurrentUser(newUser));
   } catch (error) {
     if (error.response?.status === 404) {
-      store.dispatch(showError(translate('Invitation is not found.')));
+      NotifyService.error(translate('Invitation is not found.'));
     } else if (error.response?.status === 400) {
       InvitationTokenStorage.remove();
-      store.dispatch(showError(translate('Invitation is not valid.')));
+      NotifyService.error(translate('Invitation is not valid.'));
     } else if (error.response?.status === 500) {
-      store.dispatch(
-        showError(
-          translate(
-            'Internal server error occurred. Please try again or contact support.',
-          ),
+      NotifyService.error(
+        translate(
+          'Internal server error occurred. Please try again or contact support.',
         ),
       );
     }
@@ -249,34 +239,28 @@ function submitGroupRequest(
       if (res.data.auto_approved) {
         // Refresh user to get updated permissions from backend
         await UsersService.refreshCurrentUser();
-        store.dispatch(
-          showSuccess(
-            translate('You have successfully joined {organization}', {
-              organization: res.data.scope_name,
-            }),
-          ),
+        NotifyService.success(
+          translate('You have successfully joined {organization}', {
+            organization: res.data.scope_name,
+          }),
         );
       } else {
-        store.dispatch(
-          showSuccess(
-            translate(
-              'Request has been sent. You’ll be notified once it’s approved.',
-            ),
-            translate('You are requested to join {organization}', {
-              organization: res.data.scope_name,
-            }),
+        NotifyService.success(
+          translate(
+            'Request has been sent. You’ll be notified once it’s approved.',
           ),
+          translate('You are requested to join {organization}', {
+            organization: res.data.scope_name,
+          }),
         );
       }
       return res.data;
     })
     .catch((error) => {
       if (error.response?.status === 500) {
-        store.dispatch(
-          showError(
-            translate(
-              'Internal server error occurred. Please try again or contact support.',
-            ),
+        NotifyService.error(
+          translate(
+            'Internal server error occurred. Please try again or contact support.',
           ),
         );
       }
@@ -286,28 +270,24 @@ function submitGroupRequest(
 
 export function confirmInvitation(token) {
   const deferred = createDeferred();
-  store.dispatch(
-    openModalDialog(InvitationConfirmDialog, {
-      resolve: {
-        token,
-        deferred,
-      },
-      backdrop: 'static',
-    }),
-  );
+  ModalService.open(InvitationConfirmDialog, {
+    resolve: {
+      token,
+      deferred,
+    },
+    backdrop: 'static',
+  });
   return deferred.promise;
 }
 
 function confirmUserGroupInvitation(token) {
   const deferred = createDeferred();
-  store.dispatch(
-    openModalDialog(GroupInvitationConfirmDialog, {
-      resolve: {
-        token,
-        deferred,
-      },
-      backdrop: 'static',
-    }),
-  );
+  ModalService.open(GroupInvitationConfirmDialog, {
+    resolve: {
+      token,
+      deferred,
+    },
+    backdrop: 'static',
+  });
   return deferred.promise;
 }

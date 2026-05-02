@@ -1,7 +1,6 @@
 import { InfoIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { getFormValues, reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateOverview } from 'waldur-js-client';
 
@@ -9,9 +8,8 @@ import { CodePreview } from '@/core/CodePreview';
 import { Tip } from '@/core/Tooltip';
 import { FormContainer, FormFooter, TextField } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { GETTING_STARTED_FORM_ID } from './constants';
 import { EditOfferingProps } from './types';
@@ -31,33 +29,26 @@ export const EditGettingStartedDialog = connect<
   reduxForm<{}, { resolve: EditOfferingProps }>({
     form: GETTING_STARTED_FORM_ID,
   })((props) => {
-    const dispatch = useDispatch();
-    const update = useCallback(
-      async (formData) => {
-        try {
-          await marketplaceProviderOfferingsUpdateOverview({
-            path: { uuid: props.resolve.offering.uuid },
-            body: {
-              ...pickOverview(props.resolve.offering),
-              getting_started: formData.template,
-            },
-          });
-          dispatch(
-            showSuccess(translate('Offering has been updated successfully.')),
-          );
-          await props.resolve.refetch();
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(error, translate('Unable to update offering.')),
-          );
-        }
-      },
-      [dispatch],
-    );
+    const updateMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplaceProviderOfferingsUpdateOverview({
+          path: { uuid: props.resolve.offering.uuid },
+          body: {
+            ...pickOverview(props.resolve.offering),
+            getting_started: formData.template,
+          },
+        }),
+      successMessage: translate('Offering has been updated successfully.'),
+      errorMessage: translate('Unable to update offering.'),
+      refetch: props.resolve.refetch,
+    });
     const formValues = useSelector(formValuesSelector) as any;
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form
+        onSubmit={props.handleSubmit((values) =>
+          updateMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={translate('Getting started instructions')}
           footer={

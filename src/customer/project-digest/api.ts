@@ -1,6 +1,5 @@
 import {
   customersProjectDigestConfigRetrieve,
-  customersUpdateProjectDigestConfigUpdate,
   customersProjectDigestConfigPreview,
   customersProjectDigestConfigSendTest,
 } from 'waldur-js-client';
@@ -10,17 +9,6 @@ export type { ProjectDigestConfig } from 'waldur-js-client';
 export async function getProjectDigestConfig(customerUuid: string) {
   const response = await customersProjectDigestConfigRetrieve({
     path: { uuid: customerUuid },
-  });
-  return response.data;
-}
-
-export async function updateProjectDigestConfig(
-  customerUuid: string,
-  data: Record<string, unknown>,
-) {
-  const response = await customersUpdateProjectDigestConfigUpdate({
-    path: { uuid: customerUuid },
-    body: data as any,
   });
   return response.data;
 }

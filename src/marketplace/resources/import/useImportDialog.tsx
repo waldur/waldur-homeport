@@ -9,8 +9,8 @@ import { Project } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { Offering, Plan } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { createEntity } from '@/table/actions';
 import { Customer } from '@/workspace/types';
 
@@ -27,6 +27,10 @@ export const useImportDialog = () => {
   const [offering, setOffering] = useState<Offering>();
   const [plans, setPlans] = useState<Record<string, Plan>>({});
   const dispatch = useDispatch();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
 
   const formValues = useSelector((state) =>
     getFormValues(IMPORT_RESOURCE_FORM_ID)(state),
@@ -49,13 +53,10 @@ export const useImportDialog = () => {
         ? offering
         : false;
 
-  const selectOffering = useCallback(
-    (value: Offering) => {
-      setOffering(value);
-      dispatch(change(IMPORT_RESOURCE_FORM_ID, 'resources', []));
-    },
-    [dispatch],
-  );
+  const selectOffering = useCallback((value: Offering) => {
+    setOffering(value);
+    dispatch(change(IMPORT_RESOURCE_FORM_ID, 'resources', []));
+  }, []);
 
   const assignPlan = (resource: ImportableResource, plan: Plan) =>
     setPlans({ ...plans, [resource.backend_id]: plan });
@@ -83,16 +84,14 @@ export const useImportDialog = () => {
             ),
           );
         }
-        dispatch(showSuccess(translate('All resources have been imported.')));
+        showSuccess(translate('All resources have been imported.'));
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Resources import has failed.')),
-        );
+        showErrorResponse(e, translate('Resources import has failed.'));
         return;
       }
-      dispatch(closeModalDialog());
+      closeDialog();
     },
-    [dispatch, offering, plans],
+    [offering, plans],
   );
 
   return {

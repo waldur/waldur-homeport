@@ -1,7 +1,6 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Alert } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   CallApplicantVisibilityConfigRequest,
   proposalProtectedCallsPartialUpdate,
@@ -10,8 +9,8 @@ import {
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { UserAttributeVisibilityTable } from '@/marketplace/user-attributes/UserAttributeVisibilityTable';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { Call } from '@/proposals/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface ApplicantVisibilitySectionProps {
   call: Call;
@@ -36,30 +35,23 @@ const TITLE = (
 export const ApplicantVisibilitySection: FC<
   ApplicantVisibilitySectionProps
 > = ({ call, refetch }) => {
-  const dispatch = useDispatch();
   const config = call.applicant_visibility_config;
   const isDefault = Boolean(config?.is_default);
 
-  const update = useCallback(
-    async (formData: Partial<CallApplicantVisibilityConfigRequest>) => {
-      try {
-        await proposalProtectedCallsPartialUpdate({
-          path: { uuid: call.uuid },
-          body: { applicant_visibility_config: formData },
-        });
-        refetch();
-        dispatch(
-          showSuccess(
-            translate('Applicant visibility setting has been updated.'),
-          ),
-        );
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to update setting.')));
-        throw e;
-      }
-    },
-    [call.uuid, refetch, dispatch],
-  );
+  const { mutateAsync: update } = useManagedMutation<
+    any,
+    any,
+    Partial<CallApplicantVisibilityConfigRequest>
+  >({
+    mutationFn: (formData) =>
+      proposalProtectedCallsPartialUpdate({
+        path: { uuid: call.uuid },
+        body: { applicant_visibility_config: formData },
+      }),
+    refetch,
+    successMessage: translate('Applicant visibility setting has been updated.'),
+    errorMessage: translate('Unable to update setting.'),
+  });
 
   return (
     <UserAttributeVisibilityTable

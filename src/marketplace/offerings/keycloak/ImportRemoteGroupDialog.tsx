@@ -1,6 +1,6 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   marketplaceOfferingRolesList,
@@ -21,9 +21,8 @@ import { SelectField, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ImportRemoteGroupDialogProps {
   resolve: {
@@ -35,9 +34,6 @@ interface ImportRemoteGroupDialogProps {
 export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
   resolve,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const {
     data: remoteGroups,
     isLoading: isLoadingRemote,
@@ -102,39 +98,34 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
     staleTime: UI_STALE_TIME,
   });
 
-  const save = useCallback(
-    async (formData) => {
-      try {
-        const body: {
-          offering_uuid: string;
-          role_uuid: string;
-          remote_group_id: string;
-          resource_uuid?: string;
-          scope_id?: string;
-        } = {
-          offering_uuid: resolve.offering.uuid,
-          role_uuid: formData.role.uuid,
-          remote_group_id: formData.remote_group.id,
-        };
-        if (formData.resource) {
-          body.resource_uuid = formData.resource.uuid;
-        }
-        if (formData.scope_id) {
-          body.scope_id = formData.scope_id;
-        }
-        await offeringKeycloakGroupsImportRemote({ body });
-        showSuccess(translate('Remote group has been imported.'));
-        await resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to import remote group.'));
+  const saveMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
+      const body: {
+        offering_uuid: string;
+        role_uuid: string;
+        remote_group_id: string;
+        resource_uuid?: string;
+        scope_id?: string;
+      } = {
+        offering_uuid: resolve.offering.uuid,
+        role_uuid: formData.role.uuid,
+        remote_group_id: formData.remote_group.id,
+      };
+      if (formData.resource) {
+        body.resource_uuid = formData.resource.uuid;
       }
+      if (formData.scope_id) {
+        body.scope_id = formData.scope_id;
+      }
+      return offeringKeycloakGroupsImportRemote({ body });
     },
-    [resolve, showSuccess, showErrorResponse, closeDialog],
-  );
+    successMessage: translate('Remote group has been imported.'),
+    errorMessage: translate('Unable to import remote group.'),
+    refetch: resolve.refetch,
+  });
 
   return (
-    <Form onSubmit={save}>
+    <Form onSubmit={(values) => saveMutation.mutateAsync(values)}>
       {({ handleSubmit, submitting, invalid, values }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

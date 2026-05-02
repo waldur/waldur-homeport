@@ -1,37 +1,29 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { openstackPortsUnlink } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 
 export const UnlinkPortAction: ActionItemType = ({ resource, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to unlink the port? Unlinking will only remove object from the database, it will not trigger any cleanup',
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    await openstackPortsUnlink({ path: { uuid: resource.uuid } });
-    refetch();
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => openstackPortsUnlink({ path: { uuid: resource.uuid } }),
+    successMessage: translate('Port has been unlinked.'),
+    errorMessage: translate('Unable to unlink port.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to unlink the port? Unlinking will only remove object from the database, it will not trigger any cleanup',
+      ),
+      options: { forDeletion: true },
+    },
+  });
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Unlink')}
-      className="text-danger"
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
-      iconColor="danger"
+      action={mutate}
+      disabled={isPending}
       staff
     />
   );

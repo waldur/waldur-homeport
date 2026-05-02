@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   AffiliatedOrganizationRequest,
   affiliatedOrganizationsCreate,
@@ -13,48 +12,35 @@ import { CountrySelectField } from '@/form/CountrySelectField';
 import { StringField } from '@/form/StringField';
 import { TextField } from '@/form/TextField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const AffiliatedOrganizationForm = ({ resolve }) => {
   const isEdit = Boolean(resolve.affiliatedOrganization?.uuid);
-  const dispatch = useDispatch();
-
-  const onSubmit = async (values: AffiliatedOrganizationRequest) => {
-    try {
-      if (isEdit) {
-        await affiliatedOrganizationsPartialUpdate({
-          path: { uuid: resolve.affiliatedOrganization.uuid },
-          body: values,
-        });
-      } else {
-        await affiliatedOrganizationsCreate({ body: values });
-      }
-      resolve.refetch();
-      dispatch(
-        showSuccess(
-          isEdit
-            ? translate('The affiliated organization has been updated.')
-            : translate('The affiliated organization has been created.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          isEdit
-            ? translate('Unable to update affiliated organization.')
-            : translate('Unable to create affiliated organization.'),
-        ),
-      );
-    }
-  };
+  const onSubmitMutation = useManagedMutation<
+    any,
+    any,
+    AffiliatedOrganizationRequest
+  >({
+    mutationFn: (values) =>
+      isEdit
+        ? affiliatedOrganizationsPartialUpdate({
+            path: { uuid: resolve.affiliatedOrganization.uuid },
+            body: values,
+          })
+        : affiliatedOrganizationsCreate({ body: values }),
+    successMessage: isEdit
+      ? translate('The affiliated organization has been updated.')
+      : translate('The affiliated organization has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update affiliated organization.')
+      : translate('Unable to create affiliated organization.'),
+    refetch: resolve.refetch,
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<AffiliatedOrganizationRequest>
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={
         resolve.affiliatedOrganization
           ? {

@@ -1,7 +1,5 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
-import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOfferingRolesDestroy,
   OfferingKeycloakMembership,
@@ -13,10 +11,9 @@ import { Badge } from '@/core/Badge';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { renderFieldOrDash } from '@/table/utils';
 
 export const DeleteRoleDialog = ({
@@ -24,9 +21,6 @@ export const DeleteRoleDialog = ({
 }: {
   resolve: { row; refetch };
 }) => {
-  const dispatch = useDispatch();
-  const [submitting, setSubmitting] = useState(false);
-
   const { data: memberships, isLoading } = useQuery({
     queryKey: ['keycloak-memberships-for-role', row.uuid],
     queryFn: () =>
@@ -35,19 +29,13 @@ export const DeleteRoleDialog = ({
       }).then((r) => r.data),
   });
 
-  const handleDelete = useCallback(async () => {
-    setSubmitting(true);
-    try {
-      await marketplaceOfferingRolesDestroy({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Role has been removed.')));
-      if (refetch) await refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to remove role.')));
-    } finally {
-      setSubmitting(false);
-    }
-  }, [dispatch, row.uuid, refetch]);
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceOfferingRolesDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Role has been removed.'),
+    errorMessage: translate('Unable to remove role.'),
+    refetch,
+  });
 
   return (
     <ModalDialog
@@ -58,11 +46,11 @@ export const DeleteRoleDialog = ({
         <>
           <CloseDialogButton className="flex-equal" />
           <SubmitButton
-            submitting={submitting}
+            submitting={deleteMutation.isPending}
             disabled={isLoading}
             variant="danger"
             className="flex-equal"
-            onClick={handleDelete}
+            onClick={() => deleteMutation.mutate()}
             type="button"
             label={translate('Delete')}
           />

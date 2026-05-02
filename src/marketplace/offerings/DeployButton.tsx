@@ -1,6 +1,5 @@
 import { RocketLaunchIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
-import { useDispatch } from 'react-redux';
 import { Offering } from 'waldur-js-client';
 
 import { Link } from '@/core/Link';
@@ -8,7 +7,7 @@ import { Tip } from '@/core/Tooltip';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermissionOnAnyScope } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
@@ -20,8 +19,8 @@ export const DeployButton = ({
   offering: Offering;
   disabled?: boolean;
 }) => {
+  const { confirm } = useModal();
   const user = useUser();
-  const dispatch = useDispatch();
   const router = useRouter();
 
   if (user && !hasPermissionOnAnyScope(user, PermissionEnum.CREATE_ORDER)) {
@@ -34,8 +33,7 @@ export const DeployButton = ({
 
   const handleAnonClick = async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Authentication required'),
         translate(
           'Please log in to order a resource. You will be redirected to the login page.',

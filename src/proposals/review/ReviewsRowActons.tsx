@@ -1,10 +1,9 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
-import { useSelector } from 'react-redux';
 
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ReviewDeleteAction } from './ReviewDeleteAction';
 import { ReviewViewAction } from './ReviewViewAction';
@@ -12,7 +11,7 @@ import { ReviewViewAction } from './ReviewViewAction';
 export const ReviewsRowActions = ({ row, fetch }) => {
   const { state } = useCurrentStateAndParams();
 
-  const user = useSelector(getUser);
+  const user = useUser();
   const canDelete = hasPermission(user, {
     permission: PermissionEnum.MANAGE_PROPOSAL_REVIEW,
     scopeId: row.call_uuid,

@@ -1,4 +1,4 @@
-import { PlusCircleIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Fragment } from 'react';
 import { Form, FormLabel } from 'react-bootstrap';
 import { Field } from 'react-final-form';
@@ -9,6 +9,7 @@ import { NumberField, SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { OfferingComponent } from '@/marketplace/types';
 import { ActionButton } from '@/table/ActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 interface ComponentLimitsFieldProps extends FieldArrayRenderProps<
   any,
@@ -100,15 +101,13 @@ const FieldsListGroup = ({ fields, components }: ComponentLimitsFieldProps) => {
                           />
                         </td>
                         <td>
-                          <ActionButton
+                          <RemovalActionButton
                             title={translate('Remove')}
-                            variant="danger"
                             action={() => removeRow(i)}
                             disabled={fields.length === 1}
                             disabledReason={translate(
                               'At least one component limit is required',
                             )}
-                            iconNode={<TrashIcon weight="bold" />}
                           />
                         </td>
                       </tr>

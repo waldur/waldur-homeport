@@ -1,4 +1,4 @@
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Field, Form as FinalForm } from 'react-final-form';
 import {
   IssueStatusCreateRequest,
@@ -12,9 +12,8 @@ import { required } from '@/core/validators';
 import { SelectField, StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { IssueStatusAdmin, IssueStatusTypeChoices } from './api';
 
@@ -26,48 +25,43 @@ interface IssueStatusFormProps {
 }
 
 export const IssueStatusForm: FC<IssueStatusFormProps> = ({ resolve }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
   const isEdit = Boolean(resolve.issueStatus?.uuid);
 
-  const submitForm = useCallback(
-    async (values: { name: string; type: { value: number } }) => {
-      try {
-        const payload = {
-          name: values.name,
-          type: values.type.value,
-        };
-        if (isEdit) {
-          await supportIssueStatusesPartialUpdate({
-            path: { uuid: resolve.issueStatus!.uuid },
-            body: {
-              ...payload,
-              type: payload.type as IssueStatusType,
-            } as PatchedIssueStatusRequest,
-          });
-          showSuccess(translate('Issue status has been updated.'));
-        } else {
-          await supportIssueStatusesCreate({
-            body: {
-              ...payload,
-              type: payload.type as IssueStatusType,
-            } as IssueStatusCreateRequest,
-          });
-          showSuccess(translate('Issue status has been created.'));
-        }
-        resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(
-          error,
-          isEdit
-            ? translate('Unable to update issue status.')
-            : translate('Unable to create issue status.'),
-        );
+  const saveIssueStatusMutation = useManagedMutation<
+    any,
+    any,
+    { name: string; type: { value: number } }
+  >({
+    mutationFn: (values) => {
+      const payload = {
+        name: values.name,
+        type: values.type.value,
+      };
+      if (isEdit) {
+        return supportIssueStatusesPartialUpdate({
+          path: { uuid: resolve.issueStatus!.uuid },
+          body: {
+            ...payload,
+            type: payload.type as IssueStatusType,
+          } as PatchedIssueStatusRequest,
+        });
+      } else {
+        return supportIssueStatusesCreate({
+          body: {
+            ...payload,
+            type: payload.type as IssueStatusType,
+          } as IssueStatusCreateRequest,
+        });
       }
     },
-    [resolve, isEdit, showSuccess, showErrorResponse, closeDialog],
-  );
+    successMessage: isEdit
+      ? translate('Issue status has been updated.')
+      : translate('Issue status has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update issue status.')
+      : translate('Unable to create issue status.'),
+    refetch: resolve.refetch,
+  });
 
   const initialValues = useMemo(() => {
     if (isEdit && resolve.issueStatus) {
@@ -86,7 +80,10 @@ export const IssueStatusForm: FC<IssueStatusFormProps> = ({ resolve }) => {
   }, [isEdit, resolve.issueStatus]);
 
   return (
-    <FinalForm onSubmit={submitForm} initialValues={initialValues}>
+    <FinalForm<{ name: string; type: { value: number } }>
+      onSubmit={(values) => saveIssueStatusMutation.mutateAsync(values)}
+      initialValues={initialValues}
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

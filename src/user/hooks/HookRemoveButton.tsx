@@ -1,12 +1,9 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import { hooksEmailDestroy, hooksWebDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 interface HookRemoveButtonProps {
   refetch();
@@ -17,48 +14,34 @@ export const HookRemoveButton: FC<HookRemoveButtonProps> = ({
   row: hook,
   refetch,
 }) => {
-  const [removing, setRemoving] = useState(false);
-  const dispatch = useDispatch();
-
-  const action = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Hook removal'),
-        translate('Are you sure you would like to delete the hook?'),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      setRemoving(true);
+  const removeMutation = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
       if (hook.hook_type == 'email') {
-        await hooksEmailDestroy({
+        return await hooksEmailDestroy({
           path: { uuid: hook.uuid },
         });
       } else {
-        await hooksWebDestroy({
+        return await hooksWebDestroy({
           path: { uuid: hook.uuid },
         });
       }
-      await refetch();
-      dispatch(showSuccess(translate('Hook has been removed.')));
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to remove hook.')));
-    }
-    setRemoving(false);
-  };
+    },
+    successMessage: translate('Hook has been removed.'),
+    errorMessage: translate('Unable to remove hook.'),
+    refetch,
+    confirmation: {
+      title: translate('Hook removal'),
+      body: translate('Are you sure you would like to delete the hook?'),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Remove')}
-      action={action}
-      disabled={removing}
-      iconNode={<TrashIcon weight="bold" />}
+      action={() => removeMutation.mutate()}
+      disabled={removeMutation.isPending}
       size="sm"
-      className="text-danger"
-      iconColor="danger"
     />
   );
 };

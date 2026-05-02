@@ -1,4 +1,3 @@
-import { useMutation } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { change, reduxForm, Field } from 'redux-form';
@@ -9,9 +8,8 @@ import { FormContainer, SubmitButton } from '@/form';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import {
   MappingFormData,
@@ -35,12 +33,13 @@ export const VendorOfferingMappingCreateDialog = reduxForm<
   form: FORM_ID,
 })(({ resolve, submitting, handleSubmit }) => {
   const dispatch = useDispatch();
+
   const [selectedOfferingUuid, setSelectedOfferingUuid] = useState<
     string | null
   >(null);
 
-  const { mutateAsync } = useMutation({
-    mutationFn: (data: MappingFormData) => {
+  const createMappingMutation = useManagedMutation<any, any, MappingFormData>({
+    mutationFn: (data) => {
       // Handle both object (from dropdown) and string (from creatable)
       const vendorName =
         typeof data.arrow_vendor_name === 'string'
@@ -57,6 +56,9 @@ export const VendorOfferingMappingCreateDialog = reduxForm<
         },
       });
     },
+    successMessage: translate('Vendor offering mapping created.'),
+    errorMessage: translate('Unable to create vendor offering mapping.'),
+    refetch: resolve.refetch,
   });
 
   const loadOfferings = useCallback(
@@ -74,27 +76,12 @@ export const VendorOfferingMappingCreateDialog = reduxForm<
     [dispatch],
   );
 
-  const onSubmit = useCallback(
-    async (formData: MappingFormData) => {
-      try {
-        await mutateAsync(formData);
-        dispatch(showSuccess(translate('Vendor offering mapping created.')));
-        resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to create vendor offering mapping.'),
-          ),
-        );
-      }
-    },
-    [dispatch, mutateAsync, resolve],
-  );
-
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit((values) =>
+        createMappingMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Create vendor offering mapping')}
         footer={

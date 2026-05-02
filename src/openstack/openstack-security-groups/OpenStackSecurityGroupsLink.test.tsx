@@ -4,14 +4,14 @@ import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { afterEach, beforeEach, describe, expect, it, vi } from 'vitest';
 
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 import { OpenStackSecurityGroupsLink } from './OpenStackSecurityGroupsLink';
 
 const mockStore = configureStore();
 const store = mockStore();
 
-vi.mock('@/modal/hooks');
+vi.mock('@/modal/actions');
 
 export const renderLink = (props) => {
   return render(

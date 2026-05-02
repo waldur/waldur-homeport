@@ -1,4 +1,3 @@
-// @ts-nocheck
 import {
   ShieldWarningIcon,
   ThumbsDownIcon,
@@ -17,6 +16,7 @@ import { useMediaQuery } from 'react-responsive';
 import {
   ActionTakenEnum,
   chatMessagesList,
+  FeedbackCategoryEnum,
   ThreadSession,
 } from 'waldur-js-client';
 
@@ -327,14 +327,16 @@ const MessageItem: FunctionComponent<{ messageGroup: MessageWithVersions }> = ({
             >
               {feedbackLabel}
             </Badge>
-            {selectedMessage.feedback_category && (
+            {typeof selectedMessage.feedback_category === 'string' && (
               <Badge
                 variant={feedbackVariant}
                 size="sm"
                 outline
                 className="message-feedback-category"
               >
-                {getFeedbackCategoryLabel(selectedMessage.feedback_category)}
+                {getFeedbackCategoryLabel(
+                  selectedMessage.feedback_category as FeedbackCategoryEnum,
+                )}
               </Badge>
             )}
             {selectedMessage.feedback_comment &&

@@ -7,7 +7,7 @@ import { FC } from 'react';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { STORAGE_MODE_OPTIONS, TENANT_TYPE } from '@/openstack/constants';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';

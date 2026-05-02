@@ -1,7 +1,6 @@
 import { WarningCircleIcon } from '@phosphor-icons/react';
 import React, { ReactNode, useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   openstackRoutersList,
   OpenstackRoutersListData,
@@ -13,7 +12,7 @@ import { returnReactSelectAsyncPaginateObject } from '@/core/utils';
 import { SubmitButton } from '@/form';
 import { AsyncPaginate } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 import { ModalDialog } from './ModalDialog';
@@ -62,8 +61,8 @@ export const ConfirmationDialog: React.FC<ConfirmationDialogProps> = ({
     tenantUuid,
   },
 }) => {
-  const dispatch = useDispatch();
-  const closeDialog = () => dispatch(closeModalDialog('HIDE_CONFIRM'));
+  const { closeDialog: closeModal } = useModal();
+  const closeDialog = () => closeModal('HIDE_CONFIRM');
   const [inputValue, setInputValue] = useState('');
   const [routerValue, setRouterValue] = useState(null);
 

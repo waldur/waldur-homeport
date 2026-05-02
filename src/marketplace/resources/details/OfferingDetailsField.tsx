@@ -1,11 +1,10 @@
-import { useDispatch } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { Field } from '@/resource/summary';
 
 const OfferingDetailsDialog = lazyComponent(() =>
@@ -23,7 +22,7 @@ export const OfferingDetailsField = ({
   offering: PublicOfferingDetails;
   concealBillingInfo?: boolean;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <Field
       label={translate('Offering name')}
@@ -39,12 +38,10 @@ export const OfferingDetailsField = ({
             className="text-link"
             type="button"
             onClick={() =>
-              dispatch(
-                openModalDialog(OfferingDetailsDialog, {
-                  resolve: { offering, concealBillingInfo },
-                  size: 'lg',
-                }),
-              )
+              openDialog(OfferingDetailsDialog, {
+                resolve: { offering, concealBillingInfo },
+                size: 'lg',
+              })
             }
           >
             [{translate('Show offering')}]

@@ -1,6 +1,6 @@
 import { DateTime } from 'luxon';
 import { FunctionComponent, useMemo } from 'react';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { compose } from 'redux';
 import {
   Field,
@@ -15,10 +15,9 @@ import { WarnCard } from '@/core/WarnCard';
 import { FormContainer, SubmitButton } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { EDIT_RESOURCE_END_DATE_FORM_ID } from './constants';
 
@@ -42,7 +41,6 @@ const endDateSelector = (state) =>
 const PureEditResourceEndDateDialog: FunctionComponent<
   InjectedFormProps<{}> & OwnProps & StateProps
 > = (props) => {
-  const dispatch = useDispatch();
   const value = useSelector(endDateSelector);
 
   const exceedsProjectEndDate = useMemo(() => {
@@ -52,30 +50,28 @@ const PureEditResourceEndDateDialog: FunctionComponent<
     );
   }, [value, props.resolve.resource]);
 
-  const submitRequest = async (formData: FormData) => {
-    try {
-      await props.resolve.updateEndDate(
+  const updateMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (formData) =>
+      props.resolve.updateEndDate(
         props.resolve.resource.uuid,
         formData.end_date ? formatISODate(formData.end_date) : null,
-      );
-      dispatch(
-        showSuccess(
-          translate('{resourceName} resource has been updated successfully.', {
-            resourceName: props.resolve.resource.name,
-          }),
-        ),
-      );
-      if (props.resolve.refetch) {
-        await props.resolve.refetch();
-      }
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to edit resource.')));
-    }
-  };
+      ),
+    successMessage: translate(
+      '{resourceName} resource has been updated successfully.',
+      {
+        resourceName: props.resolve.resource.name,
+      },
+    ),
+    errorMessage: translate('Unable to edit resource.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
+    <form
+      onSubmit={props.handleSubmit((values: FormData) =>
+        updateMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Set termination date')}
         subtitle={

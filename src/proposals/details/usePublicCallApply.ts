@@ -1,14 +1,13 @@
 import { useRouter } from '@uirouter/react';
 import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { NestedRound, ProtectedRound } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { showInfo } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
 import { Call } from '../types';
@@ -26,7 +25,9 @@ export const usePublicCallApply = (
 ) => {
   const user = useUser();
   const router = useRouter();
-  const dispatch = useDispatch();
+
+  const { openDialog } = useModal();
+  const { showInfo } = useNotify();
 
   const activeRound = useMemo(() => {
     if (call.state !== 'active') return null;
@@ -54,7 +55,7 @@ export const usePublicCallApply = (
           toState: 'calls-for-proposals',
           toParams: { call_uuid: call.uuid },
         });
-        dispatch(showInfo(translate('Please log in to submit a proposal.')));
+        showInfo(translate('Please log in to submit a proposal.'));
         e?.preventDefault();
         return;
       }
@@ -64,18 +65,16 @@ export const usePublicCallApply = (
       ) {
         document.location.href = call.external_url;
       } else if (activeRound) {
-        dispatch(
-          openModalDialog(ProposalCreateDialog, {
-            resolve: {
-              call,
-              round: activeRound as unknown as NestedRound,
-            },
-          }),
-        );
+        openDialog(ProposalCreateDialog, {
+          resolve: {
+            call,
+            round: activeRound as unknown as NestedRound,
+          },
+        });
       }
       e?.preventDefault();
     },
-    [dispatch, activeRound, user, router, call],
+    [activeRound, user, router, call],
   );
 
   return { activeRound, hidden, handleApply };

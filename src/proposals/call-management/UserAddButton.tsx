@@ -1,13 +1,14 @@
 import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { AddButton } from '@/core/AddButton';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 interface UserAddButtonProps {
   refetch;
@@ -22,8 +23,8 @@ const AddUserDialog = lazyComponent(() =>
 export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
   const customer = useSelector(getCustomer);
   const canAddUser = hasPermission(user, {
     permission: PermissionEnum.CREATE_CUSTOMER_PERMISSION,
@@ -32,13 +33,11 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
   return (
     <AddButton
       action={() =>
-        dispatch(
-          openModalDialog(AddUserDialog, {
-            refetch,
-            level: 'call_organizer',
-            title: translate('Add member'),
-          }),
-        )
+        openDialog(AddUserDialog, {
+          refetch,
+          level: 'call_organizer',
+          title: translate('Add member'),
+        })
       }
       disabled={!canAddUser}
     />

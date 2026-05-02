@@ -1,10 +1,9 @@
 import { CopyIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
 import { DocsLink } from '@/navigation/header/DocsLink';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { FooterDropdown } from './FooterDropdown';
 import { IssuesLink } from './IssuesLink';
@@ -28,7 +27,7 @@ const SupportSubMenuItem = ({ title, onCopy }) =>
   ) : null;
 
 export const SupportMenu = () => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
 
   const showSupport = !!(
     ENV.plugins.WALDUR_CORE.DOCS_URL ||
@@ -38,7 +37,7 @@ export const SupportMenu = () => {
 
   const copyText = (text: string) => {
     navigator.clipboard.writeText(text).then(() => {
-      dispatch(showSuccess(translate('Text has been copied')));
+      showSuccess(translate('Text has been copied'));
     });
   };
 

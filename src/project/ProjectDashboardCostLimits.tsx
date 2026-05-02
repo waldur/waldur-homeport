@@ -1,7 +1,7 @@
 import { EyeIcon, GearSixIcon, ListBulletsIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { useCallback } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Project } from 'waldur-js-client';
 
 import { EChart } from '@/core/EChart';
@@ -10,7 +10,7 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { WidgetCard } from '@/dashboard/WidgetCard';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { isOwnerOrStaff as isOwnerOrStaffSelector } from '@/workspace/selectors';
 
 import { useProjectCostChart } from './utils';
@@ -38,27 +38,23 @@ export const ProjectDashboardCostLimits = ({
   const { chart, options, error, isLoading, refetch, currentMonthItems } =
     useProjectCostChart(project);
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const viewPolicies = useCallback(
     () =>
-      dispatch(
-        openModalDialog(CostPoliciesDetailsDialog, {
-          resolve: { project },
-          size: 'lg',
-        }),
-      ),
-    [dispatch, project],
+      openDialog(CostPoliciesDetailsDialog, {
+        resolve: { project },
+        size: 'lg',
+      }),
+    [project],
   );
 
   const viewBreakdown = useCallback(
     () =>
-      dispatch(
-        openModalDialog(CostBreakdownDialog, {
-          resolve: { items: currentMonthItems },
-          size: 'lg',
-        }),
-      ),
-    [dispatch, currentMonthItems],
+      openDialog(CostBreakdownDialog, {
+        resolve: { items: currentMonthItems },
+        size: 'lg',
+      }),
+    [currentMonthItems],
   );
 
   if (isLoading) {

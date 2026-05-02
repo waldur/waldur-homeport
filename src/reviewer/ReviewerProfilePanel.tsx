@@ -2,7 +2,6 @@ import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { useQueryClient } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { Card, Nav } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   ReviewerProfile,
   reviewerProfilesPublish,
@@ -13,8 +12,8 @@ import { Badge } from '@/core/Badge';
 import { formatDateTime } from '@/core/dateUtils';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { ReviewerProfileAddDropdown } from './ReviewerProfileAddDropdown';
 
@@ -44,7 +43,10 @@ export const ReviewerProfilePanel = ({
   onTabChange,
   children,
 }: ReviewerProfilePanelProps) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const queryClient = useQueryClient();
   const [isPublishing, setIsPublishing] = useState(false);
   const [isRefreshing, setIsRefreshing] = useState(false);
@@ -59,8 +61,7 @@ export const ReviewerProfilePanel = ({
 
   const handlePublish = useCallback(async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Publish reviewer profile'),
         translate(
           'Publishing your profile will make it visible to call managers who are looking for reviewers. They will be able to see your expertise, affiliations, and publications when searching for potential reviewers. You can unpublish your profile at any time to stop receiving new review invitations.',
@@ -73,27 +74,22 @@ export const ReviewerProfilePanel = ({
     setIsPublishing(true);
     try {
       await reviewerProfilesPublish();
-      dispatch(
-        showSuccess(
-          translate(
-            'Profile published successfully. Your profile is now discoverable by call managers.',
-          ),
+      showSuccess(
+        translate(
+          'Profile published successfully. Your profile is now discoverable by call managers.',
         ),
       );
       refetch?.();
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to publish profile.')),
-      );
+      showErrorResponse(error, translate('Unable to publish profile.'));
     } finally {
       setIsPublishing(false);
     }
-  }, [dispatch, refetch]);
+  }, [refetch]);
 
   const handleUnpublish = useCallback(async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Unpublish reviewer profile'),
         translate(
           'Unpublishing your profile will hide it from call managers searching for reviewers. You will no longer appear in reviewer discovery searches and will not receive new review invitations. Your existing review assignments will not be affected.',
@@ -110,16 +106,14 @@ export const ReviewerProfilePanel = ({
     setIsPublishing(true);
     try {
       await reviewerProfilesUnpublish();
-      dispatch(showSuccess(translate('Profile unpublished successfully.')));
+      showSuccess(translate('Profile unpublished successfully.'));
       refetch?.();
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to unpublish profile.')),
-      );
+      showErrorResponse(error, translate('Unable to unpublish profile.'));
     } finally {
       setIsPublishing(false);
     }
-  }, [dispatch, refetch]);
+  }, [refetch]);
 
   const tabs: { key: TabKey; title: string }[] = [
     { key: 'info', title: translate('Profile info') },

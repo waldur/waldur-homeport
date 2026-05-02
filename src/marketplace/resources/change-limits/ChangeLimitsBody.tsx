@@ -1,4 +1,3 @@
-import { useDispatch } from 'react-redux';
 import { Field, InjectedFormProps } from 'redux-form';
 import { marketplaceResourcesUpdateLimits } from 'waldur-js-client';
 
@@ -10,10 +9,9 @@ import { Limits } from '@/marketplace/common/types';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { AttachmentRow } from '@/marketplace/resources/common/AttachmentRow';
 import { getPurchaseOrderConfig } from '@/marketplace/resources/common/purchaseOrderConfig';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ChangeLimitsComponent } from './ChangeLimitsComponent';
 import { connector, OwnProps, StateProps } from './connector';
@@ -25,13 +23,11 @@ interface DialogBodyProps extends OwnProps, InjectedFormProps, StateProps {
 }
 
 export const DialogBody = connector((props: DialogBodyProps) => {
-  const dispatch = useDispatch();
-
   const resource = props.asyncState.value?.resource;
   const { showPurchaseOrder } = getPurchaseOrderConfig(resource);
 
-  const submitRequest = async (formData) => {
-    try {
+  const changeLimitsMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
       const body: Record<string, unknown> = {
         limits: props.asyncState.value.limitSerializer(formData.limits),
       };
@@ -42,32 +38,25 @@ export const DialogBody = connector((props: DialogBodyProps) => {
         body.attachment = fileSerializer(formData.attachment);
       }
       const hasFile = formData.attachment instanceof File;
-      await marketplaceResourcesUpdateLimits({
+      return marketplaceResourcesUpdateLimits({
         path: { uuid: resource?.uuid },
         body: body as any,
         ...(hasFile ? formDataOptions : {}),
       });
-      dispatch(
-        showSuccess(
-          translate('Resource limits change request has been submitted.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-      if (props.refetch) {
-        await props.refetch();
-      }
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to submit limits change request.'),
-        ),
-      );
-    }
-  };
+    },
+    successMessage: translate(
+      'Resource limits change request has been submitted.',
+    ),
+    errorMessage: translate('Unable to submit limits change request.'),
+    refetch: props.refetch ? () => props.refetch() : undefined,
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        changeLimitsMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Change resource limits')}
         footer={

@@ -23,9 +23,9 @@ import { SelectField } from '@/form/SelectField';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { getCustomer } from '@/workspace/selectors';
 
 interface FormData {
@@ -43,6 +43,9 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
   reduxForm<FormData, { resolve: { call?; refetch } }>({
     form: 'ProposalCallForm',
   })((props) => {
+    const { showErrorResponse, showSuccess } = useNotify();
+    const { closeDialog } = useModal();
+
     const customer = useSelector(getCustomer);
     const router = useRouter();
     const {
@@ -87,7 +90,7 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
     }, [manager, isEdit]);
 
     const processRequest = React.useCallback(
-      (values: FormData, dispatch) => {
+      (values: FormData) => {
         // Transform compliance_checklist from SelectField format {value, label} to just UUID
         const requestBody = {
           ...values,
@@ -110,14 +113,12 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
         return action
           .then((res) => {
             if (isEdit) props.resolve.refetch();
-            dispatch(
-              showSuccess(
-                isEdit
-                  ? translate('The call has been updated.')
-                  : translate('The call has been created.'),
-              ),
+            showSuccess(
+              isEdit
+                ? translate('The call has been updated.')
+                : translate('The call has been created.'),
             );
-            dispatch(closeModalDialog());
+            closeDialog();
             if (!isEdit && res.data?.uuid) {
               router.stateService.go('protected-call.main', {
                 call_uuid: res.data.uuid,
@@ -125,20 +126,18 @@ export const CallFormDialog = connect<{}, {}, { resolve: { call?; refetch } }>(
             }
           })
           .catch((e) => {
-            dispatch(
-              showErrorResponse(
-                e,
-                isEdit
-                  ? translate('Unable to update call.')
-                  : translate('Unable to create call.'),
-              ),
+            showErrorResponse(
+              e,
+              isEdit
+                ? translate('Unable to update call.')
+                : translate('Unable to create call.'),
             );
             if (e.response && e.response.status === 400) {
               throw new SubmissionError(e.response.data);
             }
           });
       },
-      [props.resolve, router],
+      [props.resolve, router, showSuccess, showErrorResponse, closeDialog],
     );
 
     if (loadingManager || (isExperimentalUiEnabled && loadingChecklists)) {

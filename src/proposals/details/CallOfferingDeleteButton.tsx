@@ -3,8 +3,9 @@ import {
   RequestedOffering,
 } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const CallOfferingDeleteButton = ({
   row,
@@ -12,25 +13,41 @@ export const CallOfferingDeleteButton = ({
 }: {
   row: RequestedOffering;
   refetch(): void;
-}) => (
-  <DeleteButton
-    row={row}
-    apiFunction={(r) =>
-      proposalRequestedOfferingsCancel({ path: { uuid: r.uuid } })
-    }
-    refetch={refetch}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+}) => {
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      proposalRequestedOfferingsCancel({ path: { uuid: row.uuid } }),
+    refetch: refetch,
+
+    confirmation: {
+      title: translate('Confirmation'),
+
+      body: translate(
         'Are you sure you want to delete the offering {offering_name} ?',
         {
-          offering_name: <strong>{r.offering_name}</strong>,
+          offering_name: <strong>{row.offering_name}</strong>,
         },
         formatJsxTemplate,
-      )
-    }
-    successMessage={translate('Requested offering has been removed.')}
-    errorMessage={translate('Unable to delete requested offering.')}
-    title={translate('Remove')}
-  />
-);
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
+
+    successMessage: translate('Requested offering has been removed.'),
+    errorMessage: translate('Unable to delete requested offering.'),
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
+    />
+  );
+};

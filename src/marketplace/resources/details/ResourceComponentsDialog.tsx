@@ -1,8 +1,8 @@
 import { Col, Row } from 'react-bootstrap';
 import { useMediaQuery } from 'react-responsive';
+import { Resource } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { Limits } from '@/marketplace/common/types';
 import { OfferingComponent } from '@/marketplace/types';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
@@ -11,7 +11,7 @@ import { ResourceComponentItem } from './ResourceComponentItem';
 
 interface ResourceComponentsDialogProps {
   resolve: {
-    resource: { current_usages: Limits; limits: Limits; limit_usage: Limits };
+    resource: Pick<Resource, 'current_usages' | 'limits' | 'limit_usage'>;
     components: OfferingComponent[];
   };
 }
@@ -36,7 +36,7 @@ export const ResourceComponentsDialog: React.FC<
             lg={3}
           >
             <ResourceComponentItem
-              resource={resolve.resource}
+              resource={resolve.resource as any}
               component={component}
             />
           </Col>

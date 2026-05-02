@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   remoteWaldurApiPullOfferingDetails,
   remoteWaldurApiPullOfferingOrders,
@@ -12,198 +11,112 @@ import {
 
 import { translate } from '@/i18n';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useUser } from '@/workspace/hooks';
 import {
-  getUser,
   isOwner as isOwnerSelector,
   isServiceManagerSelector,
 } from '@/workspace/selectors';
 
 import { ActionsDropdown } from '../../actions/ActionsDropdown';
 
-const usePullRemoteOfferingDetails = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPullOfferingDetails({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Offering details synchronization has been scheduled.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize offering details.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-const usePullRemoteOfferingUsers = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPullOfferingUsers({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Offering users synchronization has been scheduled.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize offering users.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-const usePushRemoteOfferingProjectData = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPushProjectData({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate(
-              'Offering project data synchronization has been scheduled.',
-            ),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize offering project data.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-const usePullRemoteOfferingUsage = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPullOfferingUsage({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Offering usage synchronization has been scheduled.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize offering usage.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-const usePullRemoteOfferingResources = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPullOfferingResources({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Offering resources synchronization has been scheduled.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize offering resources.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-const usePullRemoteOfferingOrders = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPullOfferingOrders({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Offering orders synchronization has been scheduled.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize offering orders.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-
-const usePullRemoteOfferingRobotAccounts = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await remoteWaldurApiPullOfferingRobotAccounts({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Robot accounts synchronization has been scheduled.'),
-          ),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to synchronize robot accounts.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
-};
-
 export const RemoteActions = ({ offering }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const isOwner = useSelector(isOwnerSelector);
   const isServiceManager = useSelector(isServiceManagerSelector);
-  const pullRemoteOfferingDetails = usePullRemoteOfferingDetails();
-  const pullRemoteOfferingUsers = usePullRemoteOfferingUsers();
-  const pushRemoteOfferingProjectData = usePushRemoteOfferingProjectData();
-  const pullRemoteOfferingUsage = usePullRemoteOfferingUsage();
-  const pullRemoteOfferingResources = usePullRemoteOfferingResources();
-  const pullRemoteOfferingOrders = usePullRemoteOfferingOrders();
-  const pullRemoteOfferingRobotAccounts = usePullRemoteOfferingRobotAccounts();
+
+  const { mutate: pullRemoteOfferingDetails } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      remoteWaldurApiPullOfferingDetails({ path: { uuid: offering.uuid } }),
+    successMessage: translate(
+      'Offering details synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize offering details.'),
+  });
+
+  const { mutate: pullRemoteOfferingUsers } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      remoteWaldurApiPullOfferingUsers({ path: { uuid: offering.uuid } }),
+    successMessage: translate(
+      'Offering users synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize offering users.'),
+  });
+
+  const { mutate: pushRemoteOfferingProjectData } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      remoteWaldurApiPushProjectData({ path: { uuid: offering.uuid } }),
+    successMessage: translate(
+      'Offering project data synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize offering project data.'),
+  });
+
+  const { mutate: pullRemoteOfferingUsage } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      remoteWaldurApiPullOfferingUsage({ path: { uuid: offering.uuid } }),
+    successMessage: translate(
+      'Offering usage synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize offering usage.'),
+  });
+
+  const { mutate: pullRemoteOfferingResources } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      remoteWaldurApiPullOfferingResources({ path: { uuid: offering.uuid } }),
+    successMessage: translate(
+      'Offering resources synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize offering resources.'),
+  });
+
+  const { mutate: pullRemoteOfferingOrders } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      remoteWaldurApiPullOfferingOrders({ path: { uuid: offering.uuid } }),
+    successMessage: translate(
+      'Offering orders synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize offering orders.'),
+  });
+
+  const { mutate: pullRemoteOfferingRobotAccounts } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      remoteWaldurApiPullOfferingRobotAccounts({
+        path: { uuid: offering.uuid },
+      }),
+    successMessage: translate(
+      'Robot accounts synchronization has been scheduled.',
+    ),
+    errorMessage: translate('Unable to synchronize robot accounts.'),
+  });
   const isVisible =
     offering.type === REMOTE_OFFERING_TYPE &&
     (user?.is_staff || isOwner || isServiceManager);
@@ -213,31 +126,31 @@ export const RemoteActions = ({ offering }) => {
   const actions = [
     {
       label: translate('Pull offering details'),
-      handler: () => pullRemoteOfferingDetails(offering.uuid),
+      handler: () => pullRemoteOfferingDetails(),
     },
     {
       label: translate('Pull offering users'),
-      handler: () => pullRemoteOfferingUsers(offering.uuid),
+      handler: () => pullRemoteOfferingUsers(),
     },
     {
       label: translate('Pull usage'),
-      handler: () => pullRemoteOfferingUsage(offering.uuid),
+      handler: () => pullRemoteOfferingUsage(),
     },
     {
       label: translate('Pull resources'),
-      handler: () => pullRemoteOfferingResources(offering.uuid),
+      handler: () => pullRemoteOfferingResources(),
     },
     {
       label: translate('Pull orders'),
-      handler: () => pullRemoteOfferingOrders(offering.uuid),
+      handler: () => pullRemoteOfferingOrders(),
     },
     {
       label: translate('Push project data'),
-      handler: () => pushRemoteOfferingProjectData(offering.uuid),
+      handler: () => pushRemoteOfferingProjectData(),
     },
     {
       label: translate('Pull robot accounts'),
-      handler: () => pullRemoteOfferingRobotAccounts(offering.uuid),
+      handler: () => pullRemoteOfferingRobotAccounts(),
     },
   ];
 

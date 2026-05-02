@@ -1,10 +1,10 @@
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
@@ -27,18 +27,16 @@ export const OfferingMediaButton: FC<{
 }> = (props) => {
   const user = useUser();
   const customer = useSelector(getCustomer);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const callback = () =>
-    dispatch(
-      openModalDialog(UpdateOfferingMediaDialog, {
-        resolve: {
-          offering: props.offering,
-          refetch: props.refetch,
-          mediaType: props.mediaType,
-        },
-      }),
-    );
+    openDialog(UpdateOfferingMediaDialog, {
+      resolve: {
+        offering: props.offering,
+        refetch: props.refetch,
+        mediaType: props.mediaType,
+      },
+    });
 
   if (
     user.is_staff ||

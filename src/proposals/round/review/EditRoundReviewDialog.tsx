@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   proposalProtectedCallsRoundsUpdate,
   ProtectedRound,
@@ -8,7 +7,7 @@ import {
 
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { Call } from '@/proposals/types';
 import { WizardFormSecondPage } from '@/proposals/update/rounds/WizardFormSecondPage';
 import { getRoundInitialValues } from '@/proposals/utils';
@@ -26,9 +25,9 @@ export const EditRoundReviewDialog: FC<EditRoundReviewDialogProps> = (
 ) => {
   const initialValues = useMemo(
     () => getRoundInitialValues(props.resolve.round),
-    [props.resolve],
+    [],
   );
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const submit = useCallback(
     (formData: ProtectedRoundRequest, _dispatch, formProps) => {
       return proposalProtectedCallsRoundsUpdate({
@@ -42,11 +41,11 @@ export const EditRoundReviewDialog: FC<EditRoundReviewDialogProps> = (
         },
       }).then(() => {
         formProps.destroy();
-        dispatch(closeModalDialog());
+        closeDialog();
         props.resolve.refetch();
       });
     },
-    [dispatch, props.resolve, initialValues],
+    [initialValues],
   );
 
   return (

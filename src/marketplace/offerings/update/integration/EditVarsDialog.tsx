@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { FieldArray, reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
@@ -10,10 +9,9 @@ import {
 import { IconButton } from '@/core/buttons/IconButton';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ENVIRON_FORM_ID } from './constants';
 import { EnvironmentVariablesList } from './EnvironmentVariablesList';
@@ -32,47 +30,33 @@ export const EditVarsDialog = connect<{}, {}, EditVarsDialogOwnProps>(
   reduxForm<{}, EditVarsDialogOwnProps>({
     form: ENVIRON_FORM_ID,
   })((props) => {
-    const dispatch = useDispatch();
-    const update = useCallback(
-      async (formData) => {
-        try {
-          await marketplaceProviderOfferingsUpdateIntegration({
-            path: { uuid: props.resolve.offering.uuid },
-            body: {
-              // @ts-ignore
-              secret_options: {
-                ...props.resolve.offering.secret_options,
-                environ: formData.environ,
-              },
+    const updateMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplaceProviderOfferingsUpdateIntegration({
+          path: { uuid: props.resolve.offering.uuid },
+          body: {
+            // @ts-ignore
+            secret_options: {
+              ...props.resolve.offering.secret_options,
+              environ: formData.environ,
             },
-          });
-          dispatch(
-            showSuccess(
-              translate(
-                'Environment variables have been updated successfully.',
-              ),
-            ),
-          );
-          if (props.resolve.refetch) {
-            await props.resolve.refetch();
-          }
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(
-              error,
-              translate('Unable to update environment variables.'),
-            ),
-          );
-        }
-      },
-      [dispatch],
-    );
+          },
+        }),
+      successMessage: translate(
+        'Environment variables have been updated successfully.',
+      ),
+      errorMessage: translate('Unable to update environment variables.'),
+      refetch: props.resolve.refetch,
+    });
     return (
       <FieldArray
         name="environ"
         component={(nestedProps) => (
-          <form onSubmit={props.handleSubmit(update)}>
+          <form
+            onSubmit={props.handleSubmit((values) =>
+              updateMutation.mutateAsync(values),
+            )}
+          >
             <ModalDialog
               title={translate('Edit environment variables')}
               actions={

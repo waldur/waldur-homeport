@@ -1,6 +1,5 @@
 import React from 'react';
 import { Card, Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { useAsyncFn, useEffectOnce } from 'react-use';
 import { freeipaProfilesList } from 'waldur-js-client';
 
@@ -8,7 +7,7 @@ import { ENV } from '@/core/config';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { router } from '@/router';
-import { showError } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
 import { FreeIPAAccountCreate } from './FreeIPAAccountCreate';
@@ -17,10 +16,10 @@ import { SyncProfile } from './SyncProfile';
 
 export const FreeIpaAccount = () => {
   const user = useUser();
-  const dispatch = useDispatch();
+  const { showError } = useNotify();
 
   if (!ENV.plugins.WALDUR_CORE.FREEIPA_ENABLED) {
-    dispatch(showError(translate('FreeIPA extension is disabled.')));
+    showError(translate('FreeIPA extension is disabled.'));
     router.stateService.go('errorPage.notFound');
   }
 

@@ -17,7 +17,7 @@ import { FieldErrorMessage } from '@/form/FieldError';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
 import { SkipErrorsCheck } from '@/project/import/SkipErrorsCheck';
-import { showError } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { Column } from '@/table/types';
@@ -88,6 +88,9 @@ const WithTooltip = ({ label = '', len = 24 }) =>
 
 export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
   const dispatch = useDispatch();
+
+  const { showError } = useNotify();
+
   const [data, setData] = useState<OfferingUserRecord[]>([]);
   const [loading, setLoading] = useToggle(false);
   const [skipErrors, setSkipErrors] = useToggle(false);
@@ -160,7 +163,7 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
       const _file = acceptedFiles[0];
 
       if (!_file) {
-        dispatch(showError(translate('No file has been imported')));
+        showError(translate('No file has been imported'));
         return;
       }
       setLoading(true);
@@ -213,12 +216,10 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           );
 
           if (duplicates) {
-            dispatch(
-              showError(
-                translate('{count} duplicate records were removed.', {
-                  count: duplicates,
-                }),
-              ),
+            showError(
+              translate('{count} duplicate records were removed.', {
+                count: duplicates,
+              }),
             );
           }
 
@@ -231,7 +232,7 @@ export const Step2PreviewAndImport: FC<WizardFormStepProps> = (props) => {
           setLoading(false);
         });
     },
-    [dispatch, setData, setLoading],
+    [setData, setLoading],
   );
 
   const validation = useMemo(() => {

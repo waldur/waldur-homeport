@@ -7,7 +7,7 @@ import {
 } from '@phosphor-icons/react';
 
 import { Link } from '@/core/Link';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
 
 import { getResourceFilterFromSearchItem } from './utils';

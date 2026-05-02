@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   ScienceDomainRequest,
   scienceDomainsCreate,
@@ -11,48 +10,34 @@ import { required } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const ScienceDomainForm = ({ resolve }) => {
   const isEdit = Boolean(resolve.scienceDomain?.uuid);
-  const dispatch = useDispatch();
 
-  const onSubmit = async (values: ScienceDomainRequest) => {
-    try {
-      if (isEdit) {
-        await scienceDomainsPartialUpdate({
-          path: { uuid: resolve.scienceDomain.uuid },
-          body: values,
-        });
-      } else {
-        await scienceDomainsCreate({ body: values });
-      }
-      resolve.refetch();
-      dispatch(
-        showSuccess(
-          isEdit
-            ? translate('The science domain has been updated.')
-            : translate('The science domain has been created.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          isEdit
-            ? translate('Unable to update science domain.')
-            : translate('Unable to create science domain.'),
-        ),
-      );
-    }
-  };
+  const onSubmitMutation = useManagedMutation<any, any, ScienceDomainRequest>({
+    mutationFn: (values) =>
+      isEdit
+        ? scienceDomainsPartialUpdate({
+            path: { uuid: resolve.scienceDomain.uuid },
+            body: values,
+          })
+        : scienceDomainsCreate({ body: values }),
+    successMessage: isEdit
+      ? translate('The science domain has been updated.')
+      : translate('The science domain has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update science domain.')
+      : translate('Unable to create science domain.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values: ScienceDomainRequest) =>
+        onSubmitMutation.mutateAsync(values)
+      }
       initialValues={
         resolve.scienceDomain
           ? {

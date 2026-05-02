@@ -9,17 +9,16 @@ import { useMutation } from '@tanstack/react-query';
 import { get } from 'lodash-es';
 import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import { offeringKeycloakGroupsTestConnection } from 'waldur-js-client';
 
 import { Badge } from '@/core/Badge';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { SecretField as PlainSecretField } from '@/marketplace/common/SecretField';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -69,7 +68,7 @@ const TestConnectionResultDialog: FC<{
 export const KeycloakIntegrationSection: FC<OfferingEditPanelProps> = (
   props,
 ) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const { update } = useUpdateOfferingIntegration(
     props.offering,
     props.refetch,
@@ -117,12 +116,10 @@ export const KeycloakIntegrationSection: FC<OfferingEditPanelProps> = (
   }, [props.offering]);
 
   const handleImport = useCallback(() => {
-    dispatch(
-      openModalDialog(ImportKeycloakSettingsDialog, {
-        resolve: { update },
-      }),
-    );
-  }, [dispatch, update]);
+    openDialog(ImportKeycloakSettingsDialog, {
+      resolve: { update },
+    });
+  }, [update]);
 
   const { mutate: testConnection, isPending: isTesting } = useMutation({
     mutationFn: () =>
@@ -131,11 +128,9 @@ export const KeycloakIntegrationSection: FC<OfferingEditPanelProps> = (
       }),
     onSuccess: (response) => {
       const { groups_count, groups } = response.data;
-      dispatch(
-        openModalDialog(TestConnectionResultDialog, {
-          resolve: { groups: groups || [], groups_count },
-        }),
-      );
+      openDialog(TestConnectionResultDialog, {
+        resolve: { groups: groups || [], groups_count },
+      });
     },
     onError: (error) => {
       showErrorResponse(error, translate('Connection test failed.'));

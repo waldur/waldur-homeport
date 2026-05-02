@@ -1,12 +1,10 @@
 import { LinkBreakIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { openstackInstancesUnlink } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
 const getConfirmationText = (resource) => {
@@ -26,37 +24,25 @@ const getConfirmationText = (resource) => {
 export const UnlinkOpenStackInstanceAction: FC<{ resource }> = ({
   resource,
 }) => {
-  const dispatch = useDispatch();
   const user = useUser();
   if (!user.is_staff || resource.marketplace_resource_uuid) {
     return null;
   }
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Unlink resource'),
-        getConfirmationText(resource),
-      );
-    } catch {
-      return;
-    }
-
-    try {
-      await openstackInstancesUnlink({
-        path: { uuid: resource.uuid },
-      });
-      dispatch(showSuccess(translate('OpenStack instance has been unlinked.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to unlink OpenStack instance.')),
-      );
-    }
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      openstackInstancesUnlink({ path: { uuid: resource.uuid } }),
+    successMessage: translate('OpenStack instance has been unlinked.'),
+    errorMessage: translate('Unable to unlink OpenStack instance.'),
+    confirmation: {
+      title: translate('Unlink resource'),
+      body: getConfirmationText(resource),
+    },
+  });
   return (
     <ActionItem
       title={translate('Unlink')}
-      action={callback}
+      action={mutate}
+      disabled={isPending}
       className="text-danger"
       staff
       iconNode={<LinkBreakIcon weight="bold" />}

@@ -1,6 +1,5 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import {
   CustomerServiceAccount,
@@ -17,10 +16,10 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { FormContainer, StringField, SubmitButton, TextField } from '@/form';
 import { EmailField } from '@/form/EmailField';
 import { translate } from '@/i18n';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { ServiceAccountsProps } from './type';
 
@@ -54,7 +53,9 @@ export const ServiceAccountFormDialog = reduxForm<
   submitting,
   handleSubmit,
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { openDialog, closeDialog } = useModal();
 
   const isEdit = useMemo(() => !!row?.uuid, [row]);
 
@@ -87,46 +88,40 @@ export const ServiceAccountFormDialog = reduxForm<
             path: { uuid: row.uuid },
             body,
           });
-          dispatch(closeModalDialog());
+          closeDialog();
         } else {
           const api =
             context === 'customer'
               ? marketplaceCustomerServiceAccountsCreate
               : marketplaceProjectServiceAccountsCreate;
           response = await api({ body } as any);
-          dispatch(closeModalDialog());
+          closeDialog();
           // Open a dialog to show the API key
-          dispatch(
-            openModalDialog(ServiceAccountShowInfoDialog, {
-              resolve: {
-                username: response.data.username,
-                token: response.data.token,
-                expiresAt: response.data.expires_at,
-              },
-            }),
-          );
+          openDialog(ServiceAccountShowInfoDialog, {
+            resolve: {
+              username: response.data.username,
+              token: response.data.token,
+              expiresAt: response.data.expires_at,
+            },
+          });
         }
 
-        dispatch(
-          showSuccess(
-            isEdit
-              ? translate('Service account has been updated.')
-              : translate('Service account has been created.'),
-          ),
+        showSuccess(
+          isEdit
+            ? translate('Service account has been updated.')
+            : translate('Service account has been created.'),
         );
         if (refetch) refetch();
       } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            isEdit
-              ? translate('Unable to edit service account.')
-              : translate('Unable to create service account.'),
-          ),
+        showErrorResponse(
+          e,
+          isEdit
+            ? translate('Unable to edit service account.')
+            : translate('Unable to create service account.'),
         );
       }
     },
-    [dispatch, scope, refetch, isEdit, row],
+    [scope, refetch, isEdit, row],
   );
 
   return (

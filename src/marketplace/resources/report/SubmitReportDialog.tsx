@@ -1,36 +1,31 @@
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceProviderResourcesSubmitReport } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const SubmitReportDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<any, any, { report?: string }>({
+    mutationFn: (formData) =>
+      marketplaceProviderResourcesSubmitReport({
+        path: { uuid: resource.uuid },
+        body: {
+          report: formData.report ? JSON.parse(formData.report) : undefined,
+        },
+      }),
+
+    successMessage: translate('Report has been submitted'),
+    errorMessage: translate('Unable to submit report.'),
+    refetch: refetch,
+  });
+
   return (
     <ResourceActionDialog
-      submitForm={async (formData) => {
-        try {
-          await marketplaceProviderResourcesSubmitReport({
-            path: { uuid: resource.uuid },
-            body: {
-              report: formData.report ? JSON.parse(formData.report) : undefined,
-            },
-          });
-          dispatch(showSuccess(translate('Report has been submitted')));
-          if (refetch) {
-            await refetch();
-          }
-          dispatch(closeModalDialog());
-        } catch (e) {
-          dispatch(showErrorResponse(e, translate('Unable to submit report.')));
-        }
-      }}
+      submitForm={mutation.mutateAsync}
       dialogTitle={translate('Submit report')}
       formFields={[
         {

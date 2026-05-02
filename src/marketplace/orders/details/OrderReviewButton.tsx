@@ -1,7 +1,7 @@
 import { lazyComponent } from '@/core/lazyComponent';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 const OrderReviewDialog = lazyComponent(() =>
   import('./OrderReviewDialog').then((module) => ({

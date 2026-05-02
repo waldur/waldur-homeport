@@ -10,7 +10,7 @@ import { Tip } from '@/core/Tooltip';
 import { truncate } from '@/core/utils';
 import { WizardForm, WizardFormStepProps } from '@/form/WizardForm';
 import { translate } from '@/i18n';
-import { showError } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -78,6 +78,9 @@ const SkipErrorsCheck = ({ checked, onChange }) => (
 
 export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
   const dispatch = useDispatch();
+
+  const { showError } = useNotify();
+
   const [data, setData] = useState<UsageImportRow[]>([]);
   const [loading, setLoading] = useToggle(true);
   const [skipErrors, setSkipErrors] = useToggle(false);
@@ -170,7 +173,7 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
         change(COMPONENT_USAGE_IMPORT_FORM_ID, 'mappedData', mappedRows),
       );
     },
-    [props.data?.parseResult, dispatch],
+    [],
   );
 
   const summary = useMemo(() => getImportSummary(data), [data]);
@@ -199,7 +202,7 @@ export const Step3PreviewAndImport: FC<Step3Props> = (props) => {
               const customersList = await fetchAllCustomers();
               processData(wizardProps.formValues, customersList);
             } catch {
-              dispatch(showError(translate('Failed to load customers')));
+              showError(translate('Failed to load customers'));
             } finally {
               setLoading(false);
             }

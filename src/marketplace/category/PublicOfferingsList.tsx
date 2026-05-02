@@ -23,7 +23,7 @@ import Table from '@/table/Table';
 import { Column } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { CardStyleType } from '../common/cards/index';
 import { OfferingCard } from '../common/OfferingCard';
@@ -37,7 +37,7 @@ import { isOfferingRestrictedToProject } from '../offerings/utils';
 import { Offering } from '../types';
 
 const RowActions = ({ row }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const router = useRouter();
   const { isAllowed } = isOfferingRestrictedToProject(row, user);
   if (isFeatureVisible(MarketplaceFeatures.catalogue_only)) {

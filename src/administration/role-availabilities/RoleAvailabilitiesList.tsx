@@ -1,6 +1,4 @@
 import { TrashIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   roleAvailabilitiesDestroy,
   roleAvailabilitiesList,
@@ -8,9 +6,8 @@ import {
 
 import { Badge } from '@/core/Badge';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { useNotify } from '@/store/hooks';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -18,43 +15,32 @@ import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
 
 const DeleteAvailabilityAction = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
-  const handler = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Delete availability of role "{role}" for {scope_type} "{scope}"? Active user role grants tied to this availability will be revoked asynchronously.',
-          {
-            role: row.role_name,
-            scope_type: row.scope_type,
-            scope: row.scope_name || row.scope_uuid || '?',
-          },
-        ),
-      );
-    } catch {
-      return;
-    }
-    try {
-      await roleAvailabilitiesDestroy({ path: { uuid: row.uuid } });
-      showSuccess(translate('Role availability has been removed.'));
-      await refetch();
-    } catch (error) {
-      showErrorResponse(
-        error,
-        translate('Unable to delete role availability.'),
-      );
-    }
-  }, [dispatch, row, refetch, showSuccess, showErrorResponse]);
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => roleAvailabilitiesDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Role availability has been removed.'),
+    errorMessage: translate('Unable to delete role availability.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Delete availability of role "{role}" for {scope_type} "{scope}"? Active user role grants tied to this availability will be revoked asynchronously.',
+        {
+          role: row.role_name,
+          scope_type: row.scope_type,
+          scope: row.scope_name || row.scope_uuid || '?',
+        },
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
     <ActionItem
       title={translate('Delete')}
-      action={handler}
+      action={() => deleteMutation.mutate()}
       iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
+      disabled={deleteMutation.isPending}
     />
   );
 };

@@ -1,12 +1,11 @@
 import { FC, useCallback } from 'react';
 import { Modal } from 'react-bootstrap';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 
 import { StringField, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 
 interface ProjectDetailsDialogProps {
@@ -23,23 +22,23 @@ interface ProjectDetailsDialogProps {
 export const ProjectDetailsDialog: FC<ProjectDetailsDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
 
   const onSubmit = useCallback(
     (formData) => {
-      dispatch(closeModalDialog());
+      closeDialog();
       resolve.onSubmit({
         project_name: formData.project_name || '',
         project_description: formData.project_description || '',
       });
     },
-    [resolve, dispatch],
+    [resolve],
   );
 
   const onCancel = useCallback(() => {
-    dispatch(closeModalDialog());
+    closeDialog();
     resolve.onCancel?.();
-  }, [resolve, dispatch]);
+  }, [resolve]);
 
   return (
     <Form

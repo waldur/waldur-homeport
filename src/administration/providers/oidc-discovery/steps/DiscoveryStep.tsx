@@ -142,7 +142,6 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
           'The following information was discovered from your identity provider.',
         )}
       </p>
-
       {/* Endpoints Card */}
       <Card className="mb-4">
         <Card.Header>
@@ -167,7 +166,6 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
           </Table>
         </Card.Body>
       </Card>
-
       {/* Claims Card */}
       <Card className="mb-4">
         <Card.Header>
@@ -235,7 +233,6 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
           </div>
         </Card.Body>
       </Card>
-
       {/* Suggested Scopes Card */}
       {discoveryResult.suggested_scopes &&
         discoveryResult.suggested_scopes.length > 0 && (
@@ -259,7 +256,6 @@ export const DiscoveryStep: FC<WizardStepProps> = (props) => {
             </Card.Body>
           </Card>
         )}
-
       {/* Waldur Fields Card */}
       {discoveryResult.waldur_fields &&
         discoveryResult.waldur_fields.length > 0 && (

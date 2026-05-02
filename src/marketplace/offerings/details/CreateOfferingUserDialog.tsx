@@ -1,16 +1,32 @@
-import { useDispatch } from 'react-redux';
 import { marketplaceOfferingUsersCreate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { userAutocomplete } from '@/marketplace/common/autocompletes';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 export const CreateOfferingUserDialog = ({
   resolve: { offering, onSuccess },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<
+    any,
+    any,
+    { user: { url: string }; username?: string }
+  >({
+    mutationFn: (formData) =>
+      marketplaceOfferingUsersCreate({
+        body: {
+          offering: offering.url,
+          user: formData.user.url,
+          username: formData.username,
+        },
+      }),
+
+    successMessage: translate('Offering user has been created.'),
+    errorMessage: translate('Unable to create offering user.'),
+    refetch: onSuccess,
+  });
+
   const fields = [
     {
       name: 'user',
@@ -31,24 +47,7 @@ export const CreateOfferingUserDialog = ({
     <ResourceActionDialog
       dialogTitle={translate('Create offering user')}
       formFields={fields}
-      submitForm={async (formData) => {
-        try {
-          await marketplaceOfferingUsersCreate({
-            body: {
-              offering: offering.url,
-              user: formData.user.url,
-              username: formData.username,
-            },
-          });
-          dispatch(showSuccess(translate('Offering user has been created.')));
-          dispatch(closeModalDialog());
-          onSuccess();
-        } catch (e) {
-          dispatch(
-            showErrorResponse(e, translate('Unable to create offering user.')),
-          );
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

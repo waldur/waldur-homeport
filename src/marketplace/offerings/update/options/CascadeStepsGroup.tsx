@@ -1,4 +1,4 @@
-import { PlusIcon, TrashIcon } from '@phosphor-icons/react';
+import { PlusIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { Card } from 'react-bootstrap';
 import { Field } from 'react-final-form';
@@ -9,6 +9,7 @@ import { InputField } from '@/form/InputField';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { ActionButton } from '@/table/ActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 import { FormGroup } from '../../FormGroup';
 
@@ -76,12 +77,10 @@ export const CascadeStepsGroup = ({
                 {translate('Step {index}', { index: index + 1 })}
               </h6>
               <div className="card-toolbar m-0">
-                <ActionButton
-                  variant="text-danger"
+                <RemovalActionButton
                   action={() => removeStep(index)}
                   disabled={fields.length <= 1}
                   disabledReason={translate('At least one step is required')}
-                  iconNode={<TrashIcon weight="bold" />}
                 />
               </div>
             </Card.Header>

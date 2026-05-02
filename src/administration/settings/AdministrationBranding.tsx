@@ -1,10 +1,9 @@
 import { useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { SettingsTab, SettingsWithTabs } from './SettingsWithTabs';
 
@@ -64,7 +63,7 @@ const BRANDING_TABS: SettingsTab[] = [
 ];
 
 export const AdministrationBranding = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const getItemValue = useCallback((item, data) => {
     if (item.type === 'country_list_field') {
@@ -83,34 +82,30 @@ export const AdministrationBranding = () => {
       if (item.type === 'country_list_field') {
         return () => {
           const countries = data?.COUNTRIES || [];
-          dispatch(
-            openModalDialog(CountrySelector, {
-              resolve: {
-                value: countries,
-                settingKey: 'COUNTRIES',
-              },
-              size: 'lg',
-            }),
-          );
+          openDialog(CountrySelector, {
+            resolve: {
+              value: countries,
+              settingKey: 'COUNTRIES',
+            },
+            size: 'lg',
+          });
         };
       }
       if (item.type === 'json_list_field') {
         return () => {
           const value = ENV.plugins.WALDUR_CORE[item.key] || [];
-          dispatch(
-            openModalDialog(LoginPageListEditDialog, {
-              resolve: {
-                item,
-                value,
-              },
-              size: 'md',
-            }),
-          );
+          openDialog(LoginPageListEditDialog, {
+            resolve: {
+              item,
+              value,
+            },
+            size: 'md',
+          });
         };
       }
       return undefined;
     };
-  }, [dispatch]);
+  }, []);
 
   const getItemIsLoading = useCallback((item, isLoading) => {
     return isLoading && item.type === 'country_list_field';

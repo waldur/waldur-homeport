@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { act, fireEvent, render, screen } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import { createStore } from 'redux';
@@ -37,6 +38,7 @@ vi.mock('@uirouter/react', async (importOriginal) => {
 });
 
 const renderOfferingActions = (props?) => {
+  const queryClient = new QueryClient();
   const store = createStore(() => ({
     workspace: {
       user: {
@@ -45,18 +47,20 @@ const renderOfferingActions = (props?) => {
     },
   }));
   return render(
-    <Provider store={store}>
-      <OfferingActions
-        row={{
-          uuid: 'offering_uuid',
-          customer_uuid: 'customer_uuid',
-          state: 'Active',
-          resources_count: 0,
-        }}
-        refetch={() => {}}
-        {...props}
-      />
-    </Provider>,
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>
+        <OfferingActions
+          row={{
+            uuid: 'offering_uuid',
+            customer_uuid: 'customer_uuid',
+            state: 'Active',
+            resources_count: 0,
+          }}
+          refetch={() => {}}
+          {...props}
+        />
+      </Provider>
+    </QueryClientProvider>,
   );
 };
 

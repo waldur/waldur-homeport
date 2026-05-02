@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { adminAnnouncementsList } from 'waldur-js-client';
 
 import {
@@ -10,7 +9,7 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { STALE_TIME, HOUR } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { AnnouncementBar } from './AnnouncementBar';
 import { AnnouncementError } from './AnnouncementError';
@@ -45,14 +44,12 @@ export const AdminAnnouncements = () => {
     refetchOnReconnect: false,
   });
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = useCallback((announcement) => {
-    dispatch(
-      openModalDialog(AnnouncementDetailsDialog, {
-        resolve: { announcement },
-        size: 'lg',
-      }),
-    );
+    openDialog(AnnouncementDetailsDialog, {
+      resolve: { announcement },
+      size: 'lg',
+    });
   }, []);
 
   if (error) {

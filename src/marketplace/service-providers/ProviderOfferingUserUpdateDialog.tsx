@@ -1,5 +1,4 @@
-import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import {
   marketplaceOfferingUsersBeginCreating,
   marketplaceOfferingUsersPartialUpdate,
@@ -13,19 +12,19 @@ import {
   marketplaceOfferingUsersSetPendingAdditionalValidation,
   marketplaceOfferingUsersUpdateCommentsPartialUpdate,
   OfferingUser,
+  OfferingUserState,
 } from 'waldur-js-client';
 
 import { url } from '@/core/validators';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 import { ServiceProvider } from '../types';
 
-const STATE_TRANSITIONS = {
+const STATE_TRANSITIONS: Record<OfferingUserState, OfferingUserState[]> = {
   Requested: ['Creating', 'OK', 'Error creating'],
   Creating: [
     'OK',
@@ -56,20 +55,23 @@ const STATE_TRANSITIONS = {
   Deleted: [],
 };
 
-const getAvailableStateOptions = (currentState: string) => {
-  const allOptions = [
-    { label: 'OK', value: 'OK' },
-    { label: 'Creating', value: 'Creating' },
-    { label: 'Pending account linking', value: 'Pending account linking' },
+const getAvailableStateOptions = (currentState: OfferingUserState) => {
+  const allOptions: { label: string; value: OfferingUserState }[] = [
+    { label: translate('OK'), value: 'OK' },
+    { label: translate('Creating'), value: 'Creating' },
     {
-      label: 'Pending additional validation',
+      label: translate('Pending account linking'),
+      value: 'Pending account linking',
+    },
+    {
+      label: translate('Pending additional validation'),
       value: 'Pending additional validation',
     },
-    { label: 'Error creating', value: 'Error creating' },
-    { label: 'Error deleting', value: 'Error deleting' },
-    { label: 'Deleted', value: 'Deleted' },
-    { label: 'Deleting', value: 'Deleting' },
-    { label: 'Requested deletion', value: 'Requested deletion' },
+    { label: translate('Error creating'), value: 'Error creating' },
+    { label: translate('Error deleting'), value: 'Error deleting' },
+    { label: translate('Deleted'), value: 'Deleted' },
+    { label: translate('Deleting'), value: 'Deleting' },
+    { label: translate('Requested deletion'), value: 'Requested deletion' },
   ];
 
   const availableStates = STATE_TRANSITIONS[currentState] || [];
@@ -86,7 +88,7 @@ export interface ProviderOfferingUserUpdateDialogProps {
   };
 }
 
-const UPDATE_FIELDS = (currentState?: string) => ({
+const UPDATE_FIELDS = (currentState?: OfferingUserState) => ({
   username: {
     title: translate('Set external username'),
     fields: [
@@ -126,37 +128,37 @@ const UPDATE_FIELDS = (currentState?: string) => ({
         options: currentState
           ? getAvailableStateOptions(currentState)
           : [
-              { label: 'OK', value: 'OK' },
+              { label: translate('OK'), value: 'OK' },
               {
-                label: 'Creating',
+                label: translate('Creating'),
                 value: 'Creating',
               },
               {
-                label: 'Pending account linking',
+                label: translate('Pending account linking'),
                 value: 'Pending account linking',
               },
               {
-                label: 'Pending additional validation',
+                label: translate('Pending additional validation'),
                 value: 'Pending additional validation',
               },
               {
-                label: 'Error creating',
+                label: translate('Error creating'),
                 value: 'Error creating',
               },
               {
-                label: 'Error deleting',
+                label: translate('Error deleting'),
                 value: 'Error deleting',
               },
               {
-                label: 'Deleted',
+                label: translate('Deleted'),
                 value: 'Deleted',
               },
               {
-                label: 'Deleting',
+                label: translate('Deleting'),
                 value: 'Deleting',
               },
               {
-                label: 'Requested deletion',
+                label: translate('Requested deletion'),
                 value: 'Requested deletion',
               },
             ],
@@ -168,82 +170,80 @@ const UPDATE_FIELDS = (currentState?: string) => ({
 export const ProviderOfferingUserUpdateDialog: FC<
   ProviderOfferingUserUpdateDialogProps
 > = ({ resolve: { row, refetch, updateScope = 'username' } }) => {
-  const dispatch = useDispatch();
-
   const currentState = row.state;
   const updateFields = UPDATE_FIELDS(currentState);
   const fields = updateFields[updateScope]?.fields || [];
 
-  const submit = useCallback(
-    async (formData) => {
-      try {
-        if (updateScope === 'username') {
-          // Username
-          await marketplaceOfferingUsersPartialUpdate({
-            path: { uuid: row.uuid },
-            body: {
-              username: formData.username,
-            },
-          });
-          dispatch(showSuccess(translate('Username has been updated.')));
-        } else if (updateScope === 'comment') {
-          // Comment
-          await marketplaceOfferingUsersUpdateCommentsPartialUpdate({
-            path: { uuid: row.uuid },
-            body: {
-              service_provider_comment: formData.service_provider_comment || '',
-              service_provider_comment_url:
-                formData.service_provider_comment_url || '',
-            },
-          });
-          dispatch(showSuccess(translate('Comment has been updated.')));
-        } else if (updateScope === 'state') {
-          // Update state
-          let api;
-          switch (formData.state) {
-            case 'OK':
-              api = marketplaceOfferingUsersSetOk;
-              break;
-            case 'Creating':
-              api = marketplaceOfferingUsersBeginCreating;
-              break;
-            case 'Pending account linking':
-              api = marketplaceOfferingUsersSetPendingAccountLinking;
-              break;
-            case 'Pending additional validation':
-              api = marketplaceOfferingUsersSetPendingAdditionalValidation;
-              break;
-            case 'Error creating':
-              api = marketplaceOfferingUsersSetErrorCreating;
-              break;
-            case 'Error deleting':
-              api = marketplaceOfferingUsersSetErrorDeleting;
-              break;
-            case 'Deleted':
-              api = marketplaceOfferingUsersSetDeleted;
-              break;
-            case 'Deleting':
-              api = marketplaceOfferingUsersSetDeleting;
-              break;
-            case 'Requested deletion':
-              api = marketplaceOfferingUsersRequestDeletion;
-              break;
-          }
-          await api({ path: { uuid: row.uuid } });
-          dispatch(showSuccess(translate('Account state has been updated.')));
+  const mutation = useManagedMutation<
+    any,
+    any,
+    {
+      username?: string;
+      service_provider_comment?: string;
+      service_provider_comment_url?: string;
+      state?: string;
+    }
+  >({
+    mutationFn: (formData) => {
+      if (updateScope === 'username') {
+        return marketplaceOfferingUsersPartialUpdate({
+          path: { uuid: row.uuid },
+          body: {
+            username: formData.username,
+          },
+        });
+      } else if (updateScope === 'comment') {
+        return marketplaceOfferingUsersUpdateCommentsPartialUpdate({
+          path: { uuid: row.uuid },
+          body: {
+            service_provider_comment: formData.service_provider_comment || '',
+            service_provider_comment_url:
+              formData.service_provider_comment_url || '',
+          },
+        });
+      } else if (updateScope === 'state') {
+        let api;
+        switch (formData.state) {
+          case 'OK':
+            api = marketplaceOfferingUsersSetOk;
+            break;
+          case 'Creating':
+            api = marketplaceOfferingUsersBeginCreating;
+            break;
+          case 'Pending account linking':
+            api = marketplaceOfferingUsersSetPendingAccountLinking;
+            break;
+          case 'Pending additional validation':
+            api = marketplaceOfferingUsersSetPendingAdditionalValidation;
+            break;
+          case 'Error creating':
+            api = marketplaceOfferingUsersSetErrorCreating;
+            break;
+          case 'Error deleting':
+            api = marketplaceOfferingUsersSetErrorDeleting;
+            break;
+          case 'Deleted':
+            api = marketplaceOfferingUsersSetDeleted;
+            break;
+          case 'Deleting':
+            api = marketplaceOfferingUsersSetDeleting;
+            break;
+          case 'Requested deletion':
+            api = marketplaceOfferingUsersRequestDeletion;
+            break;
         }
-        dispatch(closeModalDialog());
-        if (refetch) {
-          await refetch();
-        }
-      } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to update offering user.')),
-        );
+        return api({ path: { uuid: row.uuid } });
       }
     },
-    [row, updateScope, refetch, dispatch],
-  );
+    successMessage:
+      updateScope === 'username'
+        ? translate('Username has been updated.')
+        : updateScope === 'comment'
+          ? translate('Comment has been updated.')
+          : translate('Account state has been updated.'),
+    errorMessage: translate('Unable to update offering user.'),
+    refetch,
+  });
 
   return (
     <ResourceActionDialog
@@ -253,7 +253,7 @@ export const ProviderOfferingUserUpdateDialog: FC<
         acc[field.name] = row[field.name];
         return acc;
       }, {})}
-      submitForm={submit}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

@@ -1,8 +1,6 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { DateTime } from 'luxon';
 import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { projectEndDateChangeRequestsCreate, Project } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -11,10 +9,9 @@ import { SubmitButton, TextField } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ChangeEndDateRequestDialogProps {
   project: Project;
@@ -29,15 +26,11 @@ interface FormData {
 export const ChangeEndDateRequestDialog: FC<
   ChangeEndDateRequestDialogProps
 > = ({ project, refetch }) => {
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
-  const queryClient = useQueryClient();
-
   const projectUrl =
     project.url || `${ENV.apiEndpoint}api/projects/${project.uuid}/`;
 
-  const createMutation = useMutation({
-    mutationFn: (data: FormData) =>
+  const createMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (data) =>
       projectEndDateChangeRequestsCreate({
         body: {
           project: projectUrl,
@@ -45,24 +38,23 @@ export const ChangeEndDateRequestDialog: FC<
           ...(data.comment?.trim() && { comment: data.comment.trim() }),
         },
       }),
-    onSuccess: () => {
-      showSuccess(
-        translate('Project end date change request has been submitted.'),
-      );
-      dispatch(closeModalDialog());
-      refetch();
-      queryClient.invalidateQueries({
-        queryKey: ['project-end-date-change-requests'],
-      });
-    },
-    onError: (error) => {
-      showErrorResponse(error);
-    },
-  });
 
-  const onSubmit = (formData: FormData) => {
-    createMutation.mutate(formData);
-  };
+    successMessage: translate(
+      'Project end date change request has been submitted.',
+    ),
+
+    errorMessage: translate(
+      'Unable to submit project end date change request.',
+    ),
+
+    refetch,
+
+    invalidateQueries: [
+      {
+        queryKey: ['project-end-date-change-requests'],
+      },
+    ],
+  });
 
   const validate = (values: FormData) => {
     const errors: Partial<Record<keyof FormData, string>> = {};
@@ -86,7 +78,7 @@ export const ChangeEndDateRequestDialog: FC<
 
   return (
     <Form<FormData>
-      onSubmit={onSubmit}
+      onSubmit={(values) => createMutation.mutateAsync(values)}
       validate={validate}
       initialValues={{ requested_end_date: '', comment: '' }}
       subscription={{ submitting: true, invalid: true }}

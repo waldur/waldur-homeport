@@ -3,17 +3,17 @@ import userEvent from '@testing-library/user-event';
 import { vi, describe, expect, beforeEach, it } from 'vitest';
 import { featureValues } from 'waldur-js-client';
 
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { FeaturesList } from './FeaturesList';
 
 // Mock dependencies
 vi.mock('waldur-js-client');
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),
-  }),
+  } as any),
 }));
 vi.mock('@/i18n', () => ({
   translate: (message) => message,
@@ -71,21 +71,21 @@ vi.mock('@/core/config', () => ({
 }));
 
 describe('FeaturesList', () => {
+  const mockShowSuccess = vi.fn();
+  const mockShowErrorResponse = vi.fn();
+
   // Setup mocks before each test
   beforeEach(() => {
+    vi.clearAllMocks();
     // Mock notifications
-    const mockShowSuccess = vi.fn();
-    const mockShowErrorResponse = vi.fn();
     vi.mocked(useNotify).mockReturnValue({
       showError: vi.fn(),
       showSuccess: mockShowSuccess,
       showErrorResponse: mockShowErrorResponse,
-    });
+    } as any);
 
     // Mock post function
     vi.mocked(featureValues).mockReset();
-
-    vi.spyOn(window, 'location', 'get');
   });
 
   it('renders all feature sections', () => {
@@ -117,8 +117,6 @@ describe('FeaturesList', () => {
   });
 
   it('handles successful form submission', async () => {
-    const { showSuccess } = useNotify();
-
     render(<FeaturesList />);
 
     // Get checkboxes
@@ -151,12 +149,13 @@ describe('FeaturesList', () => {
 
     // Verify success notification
     await waitFor(() => {
-      expect(showSuccess).toHaveBeenCalledWith('Features have been updated.');
+      expect(mockShowSuccess).toHaveBeenCalledWith(
+        'Features have been updated.',
+      );
     });
   });
 
   it('handles failed form submission', async () => {
-    const { showErrorResponse } = useNotify();
     const error = new Error('API Error');
     vi.mocked(featureValues).mockRejectedValueOnce(error as never);
 
@@ -168,7 +167,7 @@ describe('FeaturesList', () => {
 
     // Verify error handling
     await waitFor(() => {
-      expect(showErrorResponse).toHaveBeenCalledWith(
+      expect(mockShowErrorResponse).toHaveBeenCalledWith(
         error,
         'Unable to update features.',
       );

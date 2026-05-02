@@ -1,15 +1,13 @@
 import { CloudXIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { marketplaceProviderResourcesSetAsErred } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { ResourceAction } from '@/marketplace/resources/actions/constants';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { formatResourceType } from '../utils';
 
@@ -31,16 +29,31 @@ export const SetErredActionItem: FC<{
   marketplaceResource;
   refetch;
 }> = ({ resource, marketplaceResource, refetch }) => {
+  const user = useUser();
+
   // if the parent is OpenStack resource actionslist then we use marketplaceResource here, otherwise resource param is already marketplace resource object
   const resource_uuid = marketplaceResource
     ? marketplaceResource.uuid
     : resource.uuid;
+
   const customer_uuid = marketplaceResource
     ? marketplaceResource.provider_uuid
     : resource.provider_uuid;
 
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceProviderResourcesSetAsErred({
+        path: { uuid: resource_uuid },
+      }),
+    confirmation: {
+      title: translate('Set as erred'),
+      body: getConfirmationText(resource),
+    },
+    successMessage: translate('Resource has been set as erred.'),
+    errorMessage: translate('Unable to set resource to erred state.'),
+    refetch,
+  });
+
   if (
     !hasPermission(user, {
       permission: PermissionEnum.SET_RESOURCE_STATE,
@@ -50,36 +63,12 @@ export const SetErredActionItem: FC<{
   ) {
     return null;
   }
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Set as erred'),
-        getConfirmationText(resource),
-      );
-    } catch {
-      return;
-    }
 
-    try {
-      await marketplaceProviderResourcesSetAsErred({
-        path: { uuid: resource_uuid },
-      });
-      refetch();
-      dispatch(showSuccess(translate('Resource has been set as erred.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to set resource to erred state.'),
-        ),
-      );
-    }
-  };
   return (
     <ActionItem
       title={translate('Set as erred')}
-      action={callback}
+      action={mutate}
+      disabled={isPending}
       className="text-danger"
       iconNode={<CloudXIcon weight="bold" />}
       iconColor="danger"

@@ -1,22 +1,17 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { openstackFloatingIpsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { validateState } from '@/resource/actions/base';
 import { parseValidators } from '@/resource/actions/utils';
-import { showErrorResponse, showSuccess } from '@/store/notify';
-import { ActionButton } from '@/table/ActionButton';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 import { useUser } from '@/workspace/hooks';
 
 const validators = [validateState('OK', 'ERRED')];
 
 export const DestroyBulkFloatingIpsAction = ({ rows, refetch }) => {
   const user = useUser();
-  const dispatch = useDispatch();
 
   const rowsData = useMemo(() => {
     let error;
@@ -30,59 +25,43 @@ export const DestroyBulkFloatingIpsAction = ({ rows, refetch }) => {
     return { error, rows: _rows };
   }, [rows, user]);
 
-  const { mutate, isPending } = useMutation({
-    mutationFn: async () => {
-      try {
-        const rowsList = rowsData.rows.map((row) => (
-          <li key={row.uuid}>{row.name || row.address}</li>
-        ));
-
-        const confirmationText = translate(
+  const formattedMessage = (
+    <div>
+      <p>
+        {translate(
           'You are about to remove these floating IPs from the resource.',
-        );
+        )}
+      </p>
+      <ul>
+        {rowsData.rows.map((row) => (
+          <li key={row.uuid}>{row.name || row.address}</li>
+        ))}
+      </ul>
+    </div>
+  );
 
-        const formattedMessage = (
-          <div>
-            <p>{confirmationText}</p>
-            <ul>{rowsList}</ul>
-          </div>
-        );
-
-        await waitForConfirmation(
-          dispatch,
-          translate('Remove selected floating IPs'),
-          formattedMessage,
-          { forDeletion: true },
-        );
-      } catch {
-        return;
-      }
-      try {
-        const promises = rowsData.rows.map((row) =>
-          openstackFloatingIpsDestroy({ path: { uuid: row.uuid } }),
-        );
-        await Promise.all(promises);
-        refetch();
-        dispatch(
-          showSuccess(translate('Floating IPs removal has been scheduled.')),
-        );
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to remove floating IPs from resource.'),
-          ),
-        );
-      }
+  const { mutate, isPending } = useBatchMutation<any, void>({
+    rows: rowsData.rows,
+    refetch,
+    mutationFn: (row) =>
+      openstackFloatingIpsDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Floating IPs removal has been scheduled.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} floating IPs removal has been scheduled.', { n }),
+    errorMessage: translate('Unable to remove floating IPs from resource.'),
+    renderErrorMessage: (n) =>
+      translate('Unable to remove {n} floating IPs from resource.', { n }),
+    confirmation: {
+      title: translate('Remove selected floating IPs'),
+      body: formattedMessage,
+      options: { forDeletion: true },
     },
   });
 
   return (
-    <ActionButton
+    <RemovalActionButton
       title={translate('Remove')}
       action={mutate}
-      iconNode={<TrashIcon weight="bold" />}
-      variant="danger"
       disabled={isPending || rowsData.error}
       tooltip={rowsData.error}
     />

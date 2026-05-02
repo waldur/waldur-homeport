@@ -11,7 +11,7 @@ import {
 import { fetchResultCount, getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { translate } from '@/i18n';
 import { router } from '@/router';
-import { showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import store from '@/store/store';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { getCustomer as getCustomerSelector } from '@/workspace/selectors';
@@ -63,7 +63,8 @@ export function fetchCustomerProjects(customerUuid) {
 }
 
 /** Get customer's project permissions for the selected customer separately */
-export function useCustomerProjects() {
+export const useCustomerProjects = () => {
+  const { showErrorResponse } = useNotify();
   const customer = useSelector(getCustomerSelector);
   const [loading, setLoading] = useState(false);
   useEffect(() => {
@@ -76,9 +77,7 @@ export function useCustomerProjects() {
         store.dispatch(setCurrentCustomer(updatedCustomer));
       })
       .catch((err) => {
-        store.dispatch(
-          showErrorResponse(err, translate('Unable to load projects')),
-        );
+        showErrorResponse(err, translate('Unable to load projects'));
       })
       .finally(() => {
         setLoading(false);
@@ -86,4 +85,4 @@ export function useCustomerProjects() {
   }, [customer]);
 
   return { loading };
-}
+};

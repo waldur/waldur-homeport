@@ -1,38 +1,28 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { marketplaceScreenshotsDestroy } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { useUser } from '@/workspace/hooks';
 
 export const DeleteImageAction = ({ row, refetch, offering }) => {
   const user = useUser();
-  const dispatch = useDispatch();
-  const handler = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate('Are you sure you want to delete the image?'),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await marketplaceScreenshotsDestroy({ path: { uuid: row.uuid } });
-      refetch();
-      dispatch(showSuccess(translate('Image has been removed.')));
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to remove image.')));
-    }
-  };
+
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceScreenshotsDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Image has been removed.'),
+    errorMessage: translate('Unable to remove image.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Are you sure you want to delete the image?'),
+      options: { forDeletion: true },
+    },
+  });
 
   if (
     !hasPermission(user, {
@@ -45,11 +35,10 @@ export const DeleteImageAction = ({ row, refetch, offering }) => {
   }
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      action={handler}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
+      action={mutate}
+      disabled={isPending}
     />
   );
 };

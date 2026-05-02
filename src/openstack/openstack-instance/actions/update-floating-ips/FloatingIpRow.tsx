@@ -1,10 +1,10 @@
 import { CopyIcon, TrashIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 
 import { SelectField } from './SelectField';
@@ -13,16 +13,13 @@ import { getPairSelector } from './utils';
 export const FloatingIpRow = ({ row, subnets, floatingIps, onRemove }) => {
   const pair = useSelector(getPairSelector(row));
 
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
 
-  const onClick = useCallback(
-    (value) => {
-      navigator.clipboard.writeText(value).then(() => {
-        dispatch(showSuccess(translate('Text has been copied')));
-      });
-    },
-    [dispatch],
-  );
+  const onClick = useCallback((value) => {
+    navigator.clipboard.writeText(value).then(() => {
+      showSuccess(translate('Text has been copied'));
+    });
+  }, []);
   return (
     <tr>
       <td className="col-md-6 ps-0">

@@ -12,9 +12,9 @@ import { SubmitButton } from '@/form';
 import { CommaSeparatedListField } from '@/form/CommaSeparatedListField';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { Customer } from '@/workspace/types';
 
@@ -38,6 +38,11 @@ export const EditMembershipRestrictionsDialog = reduxForm<
   form: FORM_ID,
 })(({ resolve, handleSubmit, submitting, invalid, dirty }) => {
   const dispatch = useDispatch();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
+
   const { field } = resolve;
   const config = fieldConfig[field];
 
@@ -63,25 +68,19 @@ export const EditMembershipRestrictionsDialog = reduxForm<
             [field]: arrayValue,
           },
         });
-        dispatch(
-          showSuccess(
-            translate('Membership restrictions updated successfully.'),
-          ),
-        );
+        showSuccess(translate('Membership restrictions updated successfully.'));
         if (response.data) {
           dispatch(setCurrentCustomer(response.data));
         }
-        dispatch(closeModalDialog());
+        closeDialog();
       } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Failed to update membership restrictions.'),
-          ),
+        showErrorResponse(
+          e,
+          translate('Failed to update membership restrictions.'),
         );
       }
     },
-    [resolve.customer.uuid, field, dispatch],
+    [field],
   );
 
   return (
@@ -93,7 +92,7 @@ export const EditMembershipRestrictionsDialog = reduxForm<
             <button
               type="button"
               className="btn btn-secondary flex-equal"
-              onClick={() => dispatch(closeModalDialog())}
+              onClick={() => closeDialog()}
             >
               {translate('Cancel')}
             </button>

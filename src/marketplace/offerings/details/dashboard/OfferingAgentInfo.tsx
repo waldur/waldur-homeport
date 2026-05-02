@@ -6,7 +6,7 @@ import { lazyComponent } from '@/core/lazyComponent';
 import FormTable from '@/form/FormTable';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 

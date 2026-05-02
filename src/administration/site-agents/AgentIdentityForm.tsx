@@ -17,11 +17,8 @@ import { translate } from '@/i18n';
 import { providerOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
-
-import { useInvalidateAgentIdentities } from './utils';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface AgentIdentityFormProps {
   resolve: {
@@ -31,10 +28,6 @@ interface AgentIdentityFormProps {
 }
 
 export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-  const invalidateAgentIdentities = useInvalidateAgentIdentities();
-
   const isEdit = Boolean(resolve.identity);
 
   // Fetch offering details when editing to display the offering name
@@ -62,44 +55,36 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
       }
     : undefined;
 
-  const onSubmit = async (formValues) => {
-    try {
+  const onSubmitMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formValues) => {
+      const payload = {
+        offering: formValues.offering?.uuid,
+        name: formValues.name,
+        version: formValues.version || null,
+        config_file_path: formValues.config_file_path || null,
+        config_file_content: formValues.config_file_content || null,
+      };
+
       if (isEdit) {
-        await marketplaceSiteAgentIdentitiesUpdate({
+        return marketplaceSiteAgentIdentitiesUpdate({
           path: { uuid: resolve.identity.uuid },
-          body: {
-            offering: formValues.offering?.uuid,
-            name: formValues.name,
-            version: formValues.version || null,
-            config_file_path: formValues.config_file_path || null,
-            config_file_content: formValues.config_file_content || null,
-          },
+          body: payload,
         });
-        showSuccess(translate('Agent identity has been updated'));
       } else {
-        await marketplaceSiteAgentIdentitiesCreate({
-          body: {
-            offering: formValues.offering?.uuid,
-            name: formValues.name,
-            version: formValues.version || null,
-            config_file_path: formValues.config_file_path || null,
-            config_file_content: formValues.config_file_content || null,
-          },
+        return marketplaceSiteAgentIdentitiesCreate({
+          body: payload,
         });
-        showSuccess(translate('Agent identity has been created'));
       }
-      closeDialog();
-      await resolve.refetch();
-      invalidateAgentIdentities();
-    } catch (error) {
-      showErrorResponse(
-        error,
-        isEdit
-          ? translate('Unable to update the agent identity.')
-          : translate('Unable to create an agent identity.'),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('Agent identity has been updated')
+      : translate('Agent identity has been created'),
+    errorMessage: isEdit
+      ? translate('Unable to update the agent identity.')
+      : translate('Unable to create an agent identity.'),
+    refetch: resolve.refetch,
+    invalidateQueries: [{ queryKey: ['agent-identities'] }],
+  });
 
   // Show loading state while fetching offering details in edit mode
   if (isEdit && resolve.identity?.offering && offeringQuery.isLoading) {
@@ -119,7 +104,7 @@ export const AgentIdentityForm = ({ resolve }: AgentIdentityFormProps) => {
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

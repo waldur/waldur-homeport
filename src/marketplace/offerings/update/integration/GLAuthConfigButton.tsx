@@ -1,14 +1,13 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsGlauthUsersConfigRetrieve } from 'waldur-js-client';
 
 import { STALE_TIME } from '@/core/constants';
 import { lazyComponent } from '@/core/lazyComponent';
 import { LoadingErred } from '@/core/LoadingErred';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const GLAuthConfigDialog = lazyComponent(() =>
@@ -40,14 +39,12 @@ export const GLAuthConfigButton: FC<{
     staleTime: STALE_TIME,
   });
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(GLAuthConfigDialog, {
-        resolve: { offering, config: data },
-        size: 'lg',
-      }),
-    );
+    openDialog(GLAuthConfigDialog, {
+      resolve: { offering, config: data },
+      size: 'lg',
+    });
   };
   return error ? (
     <LoadingErred loadData={refetch} />

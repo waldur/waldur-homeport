@@ -1,12 +1,11 @@
 import { CheckCircleIcon, EyeIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { Proposal, ProposalReview } from '@/proposals/types';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
@@ -49,7 +48,7 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
     ).toPrecision(2);
   }, [reviews]);
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <Card className="card-bordered">
       <Card.Body>
@@ -79,12 +78,10 @@ export const ProposalDecisionResult: FC<ProposalDecisionResultProps> = ({
             </span>
             <ActionButton
               action={() =>
-                dispatch(
-                  openModalDialog(ProposalReviewDialog, {
-                    reviews,
-                    size: 'sm',
-                  }),
-                )
+                openDialog(ProposalReviewDialog, {
+                  reviews,
+                  size: 'sm',
+                })
               }
               title={translate('More details')}
               iconNode={<EyeIcon weight="bold" />}

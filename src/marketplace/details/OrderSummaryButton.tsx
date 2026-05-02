@@ -1,10 +1,9 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { PublicOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const OrderSummaryDialog = lazyComponent(() =>
@@ -26,14 +25,12 @@ export const OrderSummaryButton = ({
   disabled?: boolean;
   disabledReason?: string;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionButton
       variant="tertiary"
       className={className}
-      action={() =>
-        dispatch(openModalDialog(OrderSummaryDialog, { offering, size: 'sm' }))
-      }
+      action={() => openDialog(OrderSummaryDialog, { offering, size: 'sm' })}
       disabled={disabled}
       disabledReason={disabledReason}
       title={label}

@@ -1,7 +1,6 @@
 import { pick } from 'lodash-es';
 import { useCallback } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 
 import { required } from '@/core/validators';
 import { SubmitButton, TextField } from '@/form';
@@ -13,7 +12,7 @@ import { PhoneNumberField } from '@/form/PhoneNumberField';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 
@@ -44,7 +43,8 @@ interface EditFieldDialogProps {
 export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
+  const { closeDialog, confirm } = useModal();
+
   const { callback } = useUpdateUser(resolve.user);
   const { data: fieldWarnings } = useProfileFieldWarnings();
 
@@ -65,8 +65,7 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
               .map((o) => o.offering_name)
               .join(', ');
             try {
-              await waitForConfirmation(
-                dispatch,
+              await confirm(
                 translate('Field required by offerings'),
                 translate(
                   '"{field}" is required by: {offerings}. Without it, service providers will not be able to see your user account.',
@@ -88,14 +87,14 @@ export const EditFieldDialog: React.FC<EditFieldDialogProps> = ({
         }
 
         await callback(values);
-        dispatch(closeModalDialog());
+        closeDialog();
       } catch (e) {
         if (e.response && e.response.status === 400) {
           return e.response.data;
         }
       }
     },
-    [resolve, dispatch, fieldWarnings],
+    [resolve, fieldWarnings],
   );
 
   return (

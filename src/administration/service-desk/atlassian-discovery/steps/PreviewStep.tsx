@@ -1,16 +1,13 @@
 import { CaretLeftIcon } from '@phosphor-icons/react';
-import { useQueryClient } from '@tanstack/react-query';
-import { FC, useState } from 'react';
+import { FC } from 'react';
 import { Alert, Card, Table } from 'react-bootstrap';
 import { useFormState } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { supportSettingsAtlassianSaveSettings } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form/SubmitButton';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { WizardModal, WizardStepProps } from '@/wizard';
 
 import type { AtlassianFormValues } from '../types';
@@ -21,10 +18,7 @@ import type { AtlassianFormValues } from '../types';
  * Shows a summary of all configured settings and saves to the backend.
  */
 export const PreviewStep: FC<WizardStepProps> = (props) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
   const { values } = useFormState<AtlassianFormValues>();
-  const [saving, setSaving] = useState(false);
 
   const selectedProject = values.projects.find(
     (p) => p.id === values.selectedProjectId,
@@ -34,10 +28,9 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
     (values.selectedRequestTypeIds || []).includes(rt.id),
   );
 
-  const handleSave = async () => {
-    setSaving(true);
-    try {
-      await supportSettingsAtlassianSaveSettings({
+  const saveSettingsMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      supportSettingsAtlassianSaveSettings({
         body: {
           api_url: values.api_url,
           auth_method: values.auth_method,
@@ -63,22 +56,17 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
             values.fieldMappings?.default_offering_issue_type,
           confirm_save: true,
         },
-      });
+      }),
 
-      queryClient.invalidateQueries({
+    successMessage: translate('Atlassian settings saved successfully'),
+    errorMessage: translate('Failed to save Atlassian settings'),
+
+    invalidateQueries: [
+      {
         queryKey: ['AdministrationServiceDesk'],
-      });
-
-      dispatch(showSuccess(translate('Atlassian settings saved successfully')));
-      dispatch(closeModalDialog());
-    } catch (e: any) {
-      dispatch(
-        showErrorResponse(e, translate('Failed to save Atlassian settings')),
-      );
-    } finally {
-      setSaving(false);
-    }
-  };
+      },
+    ],
+  });
 
   // Custom footer for this step
   const renderFooter = () => (
@@ -95,9 +83,9 @@ export const PreviewStep: FC<WizardStepProps> = (props) => {
       />
       <CloseDialogButton className="min-w-125px" />
       <SubmitButton
-        submitting={saving}
+        submitting={saveSettingsMutation.isPending}
         label={translate('Save Settings')}
-        onClick={handleSave}
+        onClick={() => saveSettingsMutation.mutate()}
         type="button"
       />
     </>

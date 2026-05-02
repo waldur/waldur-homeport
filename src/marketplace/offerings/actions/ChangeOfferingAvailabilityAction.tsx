@@ -1,10 +1,10 @@
 import { ArrowClockwiseIcon, ArrowFatDownIcon } from '@phosphor-icons/react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Offering } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { isStaff } from '@/workspace/selectors';
 
@@ -21,15 +21,13 @@ export const ChangeOfferingAvailabilityAction = ({
   row: Offering;
   refetch;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const callback = () => {
-    dispatch(
-      openModalDialog(ChangeOfferingAvailabilityDialog, {
-        resolve: { offering: row, refetch },
-        size: 'lg',
-      }),
-    );
+    openDialog(ChangeOfferingAvailabilityDialog, {
+      resolve: { offering: row, refetch },
+      size: 'lg',
+    });
   };
 
   const isUserStaff = useSelector(isStaff);

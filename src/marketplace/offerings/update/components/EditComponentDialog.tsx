@@ -1,16 +1,14 @@
 import { omit } from 'lodash-es';
-import { useCallback } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { marketplaceProviderOfferingsUpdateOfferingComponent } from 'waldur-js-client';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { formatComponent } from '@/marketplace/offerings/store/utils';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { TENANT_TYPE } from '@/openstack/constants';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { parseComponent } from '../utils';
 
@@ -28,42 +26,31 @@ export const EditComponentDialog = connect<{}, {}, OwnProps>((_, ownProps) => ({
   reduxForm<{}, OwnProps>({
     form: EDIT_COMPONENT_FORM_ID,
   })((props) => {
-    const dispatch = useDispatch();
-    const update = useCallback(
-      async (formData) => {
-        try {
-          const data = formatComponent(formData, props.resolve.offering);
-          const { offering } = props.resolve;
-          const payload =
-            offering.type === TENANT_TYPE && props.resolve.component.is_builtin
-              ? omit(data, ['name', 'measured_unit', 'type'])
-              : data;
-          await marketplaceProviderOfferingsUpdateOfferingComponent({
-            path: { uuid: offering.uuid },
-            body: payload,
-          });
-          dispatch(
-            showSuccess(
-              translate('Billing component has been updated successfully.'),
-            ),
-          );
-          if (props.resolve.refetch) {
-            await props.resolve.refetch();
-          }
-          dispatch(closeModalDialog());
-        } catch (error) {
-          dispatch(
-            showErrorResponse(
-              error,
-              translate('Unable to update billing component.'),
-            ),
-          );
-        }
+    const updateMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) => {
+        const data = formatComponent(formData, props.resolve.offering);
+        const { offering } = props.resolve;
+        const payload =
+          offering.type === TENANT_TYPE && props.resolve.component.is_builtin
+            ? omit(data, ['name', 'measured_unit', 'type'])
+            : data;
+        return marketplaceProviderOfferingsUpdateOfferingComponent({
+          path: { uuid: offering.uuid },
+          body: payload,
+        });
       },
-      [dispatch],
-    );
+      successMessage: translate(
+        'Billing component has been updated successfully.',
+      ),
+      errorMessage: translate('Unable to update billing component.'),
+      refetch: props.resolve.refetch,
+    });
     return (
-      <form onSubmit={props.handleSubmit(update)}>
+      <form
+        onSubmit={props.handleSubmit((values) =>
+          updateMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={translate('Edit component')}
           footer={

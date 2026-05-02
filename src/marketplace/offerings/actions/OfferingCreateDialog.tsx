@@ -2,7 +2,7 @@ import { PlusCircleIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { Form } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { Field } from 'redux-form';
 import {
@@ -19,10 +19,9 @@ import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { getCreatableOfferings } from '@/marketplace/common/registry';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { getCustomer } from '@/workspace/selectors';
 
 import { OFFERING_CREATE_FORM_ID } from './constants';
@@ -50,17 +49,19 @@ export const OfferingCreateDialog = reduxForm<
   });
 
   const customer = useSelector(getCustomer);
-  const dispatch = useDispatch();
   const router = useRouter();
-  const saveOffering = async (formData: OfferingCreateFormData) => {
-    // create a default plan while creating offering [WAL-7969]
-    const plan_payload = {
-      name: 'Default',
-      unit: 'month' as BillingUnit,
-    };
 
-    try {
-      const response = await marketplaceProviderOfferingsCreate({
+  const saveOfferingMutation = useManagedMutation<
+    any,
+    any,
+    OfferingCreateFormData
+  >({
+    mutationFn: (formData) => {
+      const plan_payload = {
+        name: 'Default',
+        unit: 'month' as BillingUnit,
+      };
+      return marketplaceProviderOfferingsCreate({
         body: {
           name: formData.name,
           customer: formData.organisation
@@ -71,21 +72,19 @@ export const OfferingCreateDialog = reduxForm<
           plans: [plan_payload],
         },
       });
-      dispatch(showSuccess(translate('Offering has been created.')));
-      if (fetch) {
-        await fetch();
-      }
-      dispatch(closeModalDialog());
+    },
+    successMessage: translate('Offering has been created.'),
+    errorMessage: translate('Unable to create offering.'),
+    refetch: fetch,
+    onSuccess: (response, formData) => {
       router.stateService.go('marketplace-offering-update', {
         uuid: formData.organisation
           ? formData.organisation.uuid
           : customer.uuid,
         offering_uuid: response.data.uuid,
       });
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to create offering.')));
-    }
-  };
+    },
+  });
   if (isLoading) {
     return <LoadingSpinner />;
   }
@@ -100,7 +99,9 @@ export const OfferingCreateDialog = reduxForm<
   }
   return (
     <form
-      onSubmit={handleSubmit(saveOffering)}
+      onSubmit={handleSubmit((values) =>
+        saveOfferingMutation.mutateAsync(values),
+      )}
       data-testid="offering-create-dialog"
     >
       <ModalDialog

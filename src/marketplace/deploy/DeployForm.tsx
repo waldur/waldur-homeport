@@ -9,8 +9,8 @@ import {
 
 import { fileSerializer, formDataOptions } from '@/core/api';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { formatOrderForCreate } from '../details/utils';
 import { scrollToSectionById } from '../offerings/utils';
@@ -18,10 +18,13 @@ import { scrollToSectionById } from '../offerings/utils';
 export const DeployForm: FC<
   PropsWithChildren<{ offering: PublicOfferingDetails; handleSubmit }>
 > = ({ offering, handleSubmit, children }) => {
+  const { confirm } = useModal();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const router = useRouter();
-  const mutate = async (values, dispatch) => {
-    await waitForConfirmation(
-      dispatch,
+  const mutate = async (values) => {
+    await confirm(
       translate('Confirmation'),
       translate('Are you sure you want to submit the order?'),
     );
@@ -41,13 +44,13 @@ export const DeployForm: FC<
           ...formDataOptions,
         });
       }
-      dispatch(showSuccess(translate('Order has been submitted.')));
+      showSuccess(translate('Order has been submitted.'));
       router.stateService.go('marketplace-resource-details', {
         resource_uuid: order.data.marketplace_resource_uuid,
       });
     } catch (error) {
       const errorMessage = translate('Unable to submit order.');
-      dispatch(showErrorResponse(error, errorMessage));
+      showErrorResponse(error, errorMessage);
       const errorData = {} as any;
       const _errorData = error?.response?.data;
       if (_errorData && typeof _errorData === 'object') {

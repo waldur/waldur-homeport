@@ -1,7 +1,6 @@
 import classNames from 'classnames';
-import { FunctionComponent, useCallback, useMemo } from 'react';
+import { FunctionComponent, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsMakeAvailable,
   marketplaceProviderOfferingsMakeUnavailable,
@@ -14,10 +13,9 @@ import { SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -84,34 +82,26 @@ const OfferingResourcesTable = ({ offering }) => {
 export const ChangeOfferingAvailabilityDialog: FunctionComponent<{
   resolve: { offering: Offering; refetch };
 }> = ({ resolve: { offering, refetch } }) => {
-  const dispatch = useDispatch();
-  const onSubmit = useCallback(async () => {
-    try {
+  const availabilityMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => {
       if (offering.state === 'Unavailable') {
-        await marketplaceProviderOfferingsMakeAvailable({
+        return marketplaceProviderOfferingsMakeAvailable({
           path: { uuid: offering.uuid },
-          // query: { reason: formData.reason }, // Not supported in backend atm
         });
       } else {
-        await marketplaceProviderOfferingsMakeUnavailable({
+        return marketplaceProviderOfferingsMakeUnavailable({
           path: { uuid: offering.uuid },
-          // query: { reason: formData.reason }, // Not supported in backend atm
         });
       }
-
-      dispatch(showSuccess(translate('Offering state has been updated.')));
-      await refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to update offering state.')),
-      );
-    }
-  }, [dispatch, offering]);
+    },
+    successMessage: translate('Offering state has been updated.'),
+    errorMessage: translate('Unable to update offering state.'),
+    refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={() => availabilityMutation.mutateAsync(undefined)}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

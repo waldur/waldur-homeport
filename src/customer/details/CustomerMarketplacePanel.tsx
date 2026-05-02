@@ -14,16 +14,22 @@ import * as api from '@/marketplace/common/api';
 import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
 import { ServiceProviderManagement } from '@/marketplace/service-providers/ServiceProviderManagement';
 import { ServiceProvider } from '@/marketplace/types';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { setCurrentCustomer } from '@/workspace/actions';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
+  const { confirm } = useModal();
+
   const customer = useSelector(getCustomer);
-  const user = useSelector(getUser);
+  const user = useUser();
   const dispatch = useDispatch();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const canRegisterServiceProvider = useSelector(
     canRegisterServiceProviderForCustomer,
   );
@@ -49,13 +55,11 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
 
   useEffect(() => {
     if (error)
-      dispatch(
-        showErrorResponse(
-          error as any,
-          translate('Unable to load service provider.'),
-        ),
+      showErrorResponse(
+        error as any,
+        translate('Unable to load service provider.'),
       );
-  }, [error, dispatch]);
+  }, [error]);
 
   const setServiceProvider = (data: ServiceProvider) => {
     queryClient.setQueryData(['ServiceProvider', customer?.uuid], data);
@@ -75,7 +79,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
             },
           });
           setServiceProvider(serviceProvider.data);
-          dispatch(showSuccess(successMessage));
+          showSuccess(successMessage);
           dispatch(
             setCurrentCustomer({
               ...customer,
@@ -83,7 +87,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
             }),
           );
         } catch (error) {
-          dispatch(showErrorResponse(error, errorMessage));
+          showErrorResponse(error, errorMessage);
         }
       },
     });
@@ -91,8 +95,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
   const { mutate: deleteServiceProvider, isPending: isDeleting } = useMutation({
     mutationFn: async () => {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Disable service provider profile'),
           translate(
             'Are you sure you want to remove service provider profile?',
@@ -108,9 +111,7 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
           path: { uuid: serviceProvider.uuid },
         });
         setServiceProvider(null);
-        dispatch(
-          showSuccess(translate('Service provider profile has been disabled.')),
-        );
+        showSuccess(translate('Service provider profile has been disabled.'));
         dispatch(
           setCurrentCustomer({
             ...customer,
@@ -118,11 +119,9 @@ export const CustomerMarketplacePanel: FunctionComponent<{}> = () => {
           }),
         );
       } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to disable service provider profile.'),
-          ),
+        showErrorResponse(
+          error,
+          translate('Unable to disable service provider profile.'),
         );
       }
     },

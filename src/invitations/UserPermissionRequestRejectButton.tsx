@@ -4,7 +4,7 @@ import { FunctionComponent } from 'react';
 import { translate } from '@/i18n';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
-import { useUserPermissionRequestActions } from './useUserPermissionRequestActions';
+import { useRejectPermissionRequest } from './useUserPermissionRequestActions';
 
 interface UserPermissionRequestRejectButtonProps {
   row: any;
@@ -14,14 +14,15 @@ interface UserPermissionRequestRejectButtonProps {
 export const UserPermissionRequestRejectButton: FunctionComponent<
   UserPermissionRequestRejectButtonProps
 > = ({ row: permissionRequest, refetch }) => {
-  const { rejectRequest } = useUserPermissionRequestActions(
+  const { rejectRequest } = useRejectPermissionRequest(
     permissionRequest,
     refetch,
+    { confirm: true },
   );
 
   return (
     <ActionItem
-      action={() => rejectRequest(null, true)}
+      action={() => rejectRequest()}
       title={translate('Decline')}
       iconNode={<XCircleIcon weight="bold" />}
       iconColor="danger"

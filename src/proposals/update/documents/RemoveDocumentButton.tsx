@@ -1,60 +1,42 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { proposalProtectedCallsDetachDocuments } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const RemoveDocumentAction = ({ row, call, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = async () => {
-    try {
-      if (row.uuid) {
-        try {
-          await waitForConfirmation(
-            dispatch,
-            translate('Confirmation'),
-            translate(
-              'Are you sure you want to remove {document} document from {call}?',
-              {
-                document: row.file_name
-                  .split('/')
-                  .pop()
-                  .replace(/_[^_]+\./, '.'),
-                call: call.name,
-              },
-            ),
-            { forDeletion: true },
-          );
-        } catch {
-          return;
-        }
-        await proposalProtectedCallsDetachDocuments({
-          path: { uuid: call.uuid },
-          body: { documents: [row.uuid] },
-        });
-      }
-      dispatch(showSuccess(translate('Documents have been removed.')));
-      refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate(
-            'An error occurred while removing documents. Please try again.',
-          ),
-        ),
-      );
-    }
-  };
+  const removeMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      proposalProtectedCallsDetachDocuments({
+        path: { uuid: call.uuid },
+        body: { documents: [row.uuid] },
+      }),
+    successMessage: translate('Documents have been removed.'),
+    errorMessage: translate(
+      'An error occurred while removing documents. Please try again.',
+    ),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to remove {document} document from {call}?',
+        {
+          document: row.file_name
+            .split('/')
+            .pop()
+            .replace(/_[^_]+\./, '.'),
+          call: call.name,
+        },
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
   return (
-    <ActionItem
-      action={callback}
+    <RemovalActionItem
+      disabled={removeMutation.isPending}
+      action={() => removeMutation.mutate()}
       title={translate('Remove')}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
     />
   );
 };

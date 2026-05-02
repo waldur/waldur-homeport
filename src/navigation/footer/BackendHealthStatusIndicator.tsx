@@ -1,11 +1,10 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const BackendHealthStatusDialog = lazyComponent(() =>
   import('./BackendHealthStatusDialog').then((module) => ({
@@ -29,7 +28,7 @@ export const isWorking = (data: Record<string, string>): boolean => {
 };
 
 export const BackendHealthStatusIndicator: FC = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const { value } = useAsync(getBackendHealthStatus, []);
 
   if (!value) return null;
@@ -39,9 +38,7 @@ export const BackendHealthStatusIndicator: FC = () => {
       <button
         type="button"
         className="text-btn"
-        onClick={() =>
-          dispatch(openModalDialog(BackendHealthStatusDialog, { size: 'lg' }))
-        }
+        onClick={() => openDialog(BackendHealthStatusDialog, { size: 'lg' })}
       >
         {isWorking(value) ? (
           <CheckCircleIcon size={20} weight="bold" className="text-success" />

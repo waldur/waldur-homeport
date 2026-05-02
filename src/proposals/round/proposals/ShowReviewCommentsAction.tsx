@@ -1,10 +1,9 @@
 import { EyeIcon, InfoIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { ProposalReview } from 'waldur-js-client';
 
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
@@ -109,14 +108,12 @@ export const ShowReviewCommentsAction = (props) => {
     props.row.comment_resource_requests ||
     props.row.comment_team;
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const handleShowComments = () =>
-    dispatch(
-      openModalDialog(ShowReviewCommentsDialog, {
-        review: props.row,
-        size: 'lg',
-      }),
-    );
+    openDialog(ShowReviewCommentsDialog, {
+      review: props.row,
+      size: 'lg',
+    });
   return (
     <ActionItem
       action={handleShowComments}

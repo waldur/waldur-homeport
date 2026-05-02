@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
 import { useEffect } from 'react';
 import { Form } from 'react-bootstrap';
-import { connect, useDispatch, useSelector } from 'react-redux';
+import { connect, useSelector } from 'react-redux';
 import { Field, FieldArray, formValueSelector, reduxForm } from 'redux-form';
 import {
   Offering,
@@ -16,13 +16,12 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { InputField } from '@/form/InputField';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadVolumeTypes } from '@/openstack/api';
 import { TENANT_TYPE } from '@/openstack/constants';
 import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { type RootState } from '@/store/reducers';
 
 import { SubnetsTable } from './SubnetsTable';
@@ -50,12 +49,11 @@ export const MigrateTenantDialog = connect<
       resolve: { resource, refetch },
       change,
     }) => {
-      const dispatch = useDispatch();
       const offering = useSelector(offeringSelector);
 
-      const submitForm = async (formData) => {
-        try {
-          await openstackMigrationsCreate({
+      const migrateMutation = useManagedMutation<any, any, any>({
+        mutationFn: (formData) =>
+          openstackMigrationsCreate({
             body: {
               name: formData.name,
               src_resource: resource.marketplace_resource_uuid,
@@ -75,23 +73,11 @@ export const MigrateTenantDialog = connect<
                 networks: formData.networks?.map(({ value }) => value),
               },
             },
-          });
-          dispatch(
-            showSuccess(translate('OpenStack replication has been initiated.')),
-          );
-          dispatch(closeModalDialog());
-          if (refetch) {
-            await refetch();
-          }
-        } catch (e) {
-          dispatch(
-            showErrorResponse(
-              e,
-              translate('Unable to replicate OpenStack tenant.'),
-            ),
-          );
-        }
-      };
+          }),
+        successMessage: translate('OpenStack replication has been initiated.'),
+        errorMessage: translate('Unable to replicate OpenStack tenant.'),
+        refetch,
+      });
 
       useEffect(() => {
         change('plan', offering ? offering.plans[0] : null);
@@ -125,7 +111,11 @@ export const MigrateTenantDialog = connect<
       });
 
       return (
-        <form onSubmit={handleSubmit(submitForm)}>
+        <form
+          onSubmit={handleSubmit((values) =>
+            migrateMutation.mutateAsync(values),
+          )}
+        >
           <ModalDialog
             title={translate(
               'Replicate tenant to another OpenStack deployment',

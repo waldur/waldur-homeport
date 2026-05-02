@@ -1,27 +1,34 @@
 import { useEffect, FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ENV } from '@/core/config';
+import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openIssueCreateDialog } from '@/issues/create/actions';
+import { ISSUE_CREATION_FORM_ID } from '@/issues/create/constants';
 import { ISSUE_IDS } from '@/issues/types/constants';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
+
+const IssueCreateDialog = lazyComponent(() =>
+  import('@/issues/create/IssueCreateDialog').then((module) => ({
+    default: module.IssueCreateDialog,
+  })),
+);
 
 export const RequestActionDialog: FunctionComponent<{
   resolve: { offering; offeringRequestMode };
 }> = ({ resolve: { offering, offeringRequestMode } }) => {
-  const dispatch = useDispatch();
-  const { closeDialog } = useModal();
+  const { openDialog, closeDialog } = useModal();
   const customer = useSelector(getCustomer);
-  const user = useSelector(getUser);
+  const user = useUser();
   useEffect(() => {
     if (ENV.plugins.WALDUR_SUPPORT.ENABLED) {
       closeDialog();
-      dispatch(
-        openIssueCreateDialog({
+      openDialog(IssueCreateDialog, {
+        resolve: {
           issue: {
             type: ISSUE_IDS.SERVICE_REQUEST,
             summary: translate('Request {mode} of public offering', {
@@ -71,10 +78,13 @@ export const RequestActionDialog: FunctionComponent<{
             descriptionLabel: translate('Description'),
             hideTitle: true,
           },
-        }),
-      );
+        },
+        dialogClassName: 'modal-dialog-centered mw-650px',
+        formId: ISSUE_CREATION_FORM_ID,
+      });
     }
-  });
+  }, [closeDialog, openDialog, offering, offeringRequestMode, customer, user]);
+
   return (
     <ModalDialog
       title={translate('Request {mode} of {name}', {

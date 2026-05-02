@@ -1,20 +1,19 @@
 import { CopyIcon } from '@phosphor-icons/react';
 import { useCallback } from 'react';
 import { FormControl, InputGroup } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 export const UserToken = ({ token }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
 
   const onClick = useCallback(() => {
     navigator.clipboard.writeText(token).then(() => {
-      dispatch(showSuccess(translate('Token has been copied')));
+      showSuccess(translate('Token has been copied'));
     });
-  }, [dispatch, token]);
+  }, [token]);
 
   return (
     <div className="menu-item" data-kt-menu-trigger="click">

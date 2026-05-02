@@ -1,4 +1,4 @@
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { compose } from 'redux';
 import { FieldArray, reduxForm } from 'redux-form';
 import {
@@ -9,9 +9,8 @@ import {
 
 import { FormFooter } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { StaticRoutesTable } from './StaticRoutesTable';
 
@@ -36,26 +35,24 @@ const enhance = compose(
 
 export const SetRoutesDialog = enhance(
   ({ resolve, invalid, submitting, handleSubmit }) => {
-    const dispatch = useDispatch();
-    const setRoutes = async (formData: FormData) => {
-      try {
-        await openstackRoutersSetRoutes({
+    const setRoutesMutation = useManagedMutation<any, any, FormData>({
+      mutationFn: (formData) =>
+        openstackRoutersSetRoutes({
           path: { uuid: resolve.router.uuid },
           body: {
             routes: formData.routes,
           },
-        });
-        dispatch(showSuccess(translate('Static routes update was scheduled.')));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to update static routes.')),
-        );
-      }
-    };
+        }),
+      successMessage: translate('Static routes update was scheduled.'),
+      errorMessage: translate('Unable to update static routes.'),
+    });
 
     return (
-      <form onSubmit={handleSubmit(setRoutes)}>
+      <form
+        onSubmit={handleSubmit((values) =>
+          setRoutesMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           title={translate('Update static routes')}
           footer={

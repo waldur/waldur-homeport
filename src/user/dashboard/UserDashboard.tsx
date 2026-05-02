@@ -7,7 +7,6 @@ import {
 import { useQuery } from '@tanstack/react-query';
 import { FC, useEffect, useMemo, useState } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceGlobalCategoriesRetrieve,
   marketplacePublicOfferingsList,
@@ -25,7 +24,7 @@ import {
 } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { router } from '@/router';
 import { useUser } from '@/workspace/hooks';
 
@@ -42,7 +41,7 @@ const ActiveInvitationsDialog = lazyComponent(() =>
 );
 
 export const UserDashboard: FC = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
   const [invitationsCount, setInvitationsCount] = useState<number>(0);
   const [_isLoadingInvitations, setIsLoadingInvitations] =
@@ -158,12 +157,10 @@ export const UserDashboard: FC = () => {
   const hasPendingConsents = pendingConsentsCount > 0;
 
   const openActiveInvitations = () => {
-    dispatch(
-      openModalDialog(ActiveInvitationsDialog, {
-        size: 'lg',
-        resolve: { user },
-      }),
-    );
+    openDialog(ActiveInvitationsDialog, {
+      size: 'lg',
+      resolve: { user },
+    });
   };
 
   const goToOnboardingApplications = () => {
@@ -175,7 +172,7 @@ export const UserDashboard: FC = () => {
   };
 
   const openResourcesDialog = () => {
-    dispatch(openModalDialog(UserResourcesDialog, { resolve: {}, size: 'lg' }));
+    openDialog(UserResourcesDialog, { resolve: {}, size: 'lg' });
   };
 
   const showDashboardWidgets = isExperimentalUiComponentsVisible();

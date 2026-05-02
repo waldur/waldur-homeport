@@ -1,7 +1,7 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 
 import { lazyComponent } from '@/core/lazyComponent';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 const OpenStackSecurityGroupsDialog = lazyComponent(() =>
   import('./OpenStackSecurityGroupsDialog').then((module) => ({

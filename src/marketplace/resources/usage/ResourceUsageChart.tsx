@@ -1,12 +1,11 @@
 import { FunctionComponent, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { EChart } from '@/core/EChart';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { getEChartOptions } from '@/marketplace/resources/usage/utils';
 import { OfferingComponent } from '@/marketplace/types';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { ComponentUsage, ComponentUserUsage } from './types';
 
@@ -35,19 +34,17 @@ export const ResourceUsageChart: FunctionComponent<ResourceUsageChartProps> = ({
   chartColor,
   hasExport,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openUserUsagesDetailsDialog = useCallback(
     (userUsages: ComponentUserUsage[]) =>
-      dispatch(
-        openModalDialog(UserUsagesDialog, {
-          resolve: {
-            userUsages,
-            component: offeringComponent,
-          },
-          size: 'sm',
-        }),
-      ),
-    [dispatch],
+      openDialog(UserUsagesDialog, {
+        resolve: {
+          userUsages,
+          component: offeringComponent,
+        },
+        size: 'sm',
+      }),
+    [],
   );
 
   const options = useMemo(

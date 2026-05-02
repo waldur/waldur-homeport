@@ -1,6 +1,5 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useDispatch } from 'react-redux';
 import {
   CustomerUser,
   NestedProjectPermission,
@@ -8,9 +7,8 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 interface DeleteProjectUserButtonProps {
   customer: CustomerUser;
@@ -21,43 +19,36 @@ interface DeleteProjectUserButtonProps {
 export const DeleteProjectUserButton: React.FC<
   DeleteProjectUserButtonProps
 > = ({ project, customer, refetch }) => {
-  const dispatch = useDispatch();
-  const callback = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate('Are you sure you want to remove {user} from {project}?', {
-          user: customer.full_name || customer.username,
-          project: project.name,
-        }),
-      );
-    } catch {
-      return;
-    }
-
-    try {
-      await projectsDeleteUser({
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      projectsDeleteUser({
         path: { uuid: project.uuid },
         body: {
           user: customer.uuid,
           role: project.role_name,
         },
-      });
-      refetch();
-      dispatch(showSuccess(translate('Team member has been removed.')));
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete team member.')),
-      );
-    }
-  };
+      }),
+    successMessage: translate('Team member has been removed.'),
+    errorMessage: translate('Unable to delete team member.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to remove {user} from {project}?',
+        {
+          user: customer.full_name || customer.username,
+          project: project.name,
+        },
+      ),
+    },
+  });
   return (
     <ActionItem
       className="text-danger border-top"
       iconColor="danger"
       title={translate('Remove')}
-      action={callback}
+      action={() => deleteMutation.mutate()}
+      disabled={deleteMutation.isPending}
       iconNode={<TrashIcon weight="bold" />}
     />
   );

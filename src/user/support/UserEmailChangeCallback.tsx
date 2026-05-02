@@ -7,13 +7,16 @@ import * as AuthService from '@/auth/AuthService';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { wait } from '@/core/utils';
 import { translate } from '@/i18n';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { setCurrentUser } from '@/workspace/actions';
 
 import { getCurrentUser } from '../UsersService';
 
 export const UserEmailChangeCallback: FunctionComponent = () => {
   const dispatch = useDispatch();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const router = useRouter();
 
   useEffect(() => {
@@ -24,11 +27,9 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
             code: router.globals.params.token,
           },
         });
-        dispatch(showSuccess(translate('Email has been updated.')));
+        showSuccess(translate('Email has been updated.'));
       } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to confirm email.')),
-        );
+        showErrorResponse(error, translate('Unable to confirm email.'));
       }
 
       if (!AuthService.isAuthenticated()) {
@@ -40,9 +41,7 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
       try {
         currentUser = await getCurrentUser();
       } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to fetch current user.')),
-        );
+        showErrorResponse(error, translate('Unable to fetch current user.'));
       }
 
       if (currentUser) {
@@ -52,7 +51,7 @@ export const UserEmailChangeCallback: FunctionComponent = () => {
       router.stateService.go('profile-manage');
     }
     load();
-  }, [dispatch]);
+  }, []);
 
   return (
     <div className="middle-box text-center">

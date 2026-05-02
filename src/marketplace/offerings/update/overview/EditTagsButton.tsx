@@ -1,9 +1,8 @@
-import { useDispatch } from 'react-redux';
 import { ProviderOfferingDetails } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const EditTagsDialog = lazyComponent(() =>
   import('./EditTagsDialog').then((module) => ({
@@ -17,14 +16,12 @@ interface EditTagsButtonProps {
 }
 
 export const EditTagsButton = ({ offering, refetch }: EditTagsButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(EditTagsDialog, {
-        resolve: { offering, refetch },
-        size: 'lg',
-      }),
-    );
+    openDialog(EditTagsDialog, {
+      resolve: { offering, refetch },
+      size: 'lg',
+    });
   };
   return <CompactEditButton onClick={callback} variant="secondary" />;
 };

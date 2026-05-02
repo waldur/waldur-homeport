@@ -1,9 +1,8 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { ActionItem } from '../actions/ActionItem';
 import { ActionItemType } from '../actions/types';
@@ -15,13 +14,11 @@ const ResourceSummaryModal = lazyComponent(() =>
 );
 
 export const ResourceSummaryAction: ActionItemType = ({ resource }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const showDetailsModal = () => {
-    dispatch(
-      openModalDialog(ResourceSummaryModal, {
-        resolve: { url: resource.url },
-      }),
-    );
+    openDialog(ResourceSummaryModal, {
+      resolve: { url: resource.url },
+    });
   };
   return (
     <ActionItem

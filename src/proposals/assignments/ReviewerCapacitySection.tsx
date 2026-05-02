@@ -1,10 +1,9 @@
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { callReviewerPoolsList, CallReviewerPool } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
@@ -27,14 +26,14 @@ interface ReviewerCapacitySectionProps {
 export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
   call,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const filter = useMemo(
     () => ({
       call_uuid: call.uuid,
       invitation_status: 'accepted',
     }),
-    [call.uuid],
+    [],
   );
 
   const tableProps = useTable({
@@ -43,16 +42,11 @@ export const ReviewerCapacitySection: FC<ReviewerCapacitySectionProps> = ({
     filter,
   });
 
-  const handleEditCapacity = useCallback(
-    (row: CallReviewerPool) => {
-      dispatch(
-        openModalDialog(EditCapacityDialog, {
-          resolve: { poolMember: row, refetch: tableProps.fetch },
-        }),
-      );
-    },
-    [dispatch, tableProps.fetch],
-  );
+  const handleEditCapacity = useCallback((row: CallReviewerPool) => {
+    openDialog(EditCapacityDialog, {
+      resolve: { poolMember: row, refetch: tableProps.fetch },
+    });
+  }, []);
 
   const columns = useMemo(
     () => [

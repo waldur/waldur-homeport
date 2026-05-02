@@ -18,7 +18,7 @@ import Table from '@/table/Table';
 import { Column, TableProps } from '@/table/types';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { IssueCreateButton } from './IssueCreateButton';
 
@@ -39,7 +39,7 @@ interface OwnProps {
 
 export const IssuesList: FC<OwnProps & Partial<TableProps>> = (props) => {
   const { hiddenColumns = [], standalone = true } = props;
-  const user = useSelector(getUser);
+  const user = useUser();
   const supportOrStaff = user?.is_staff || user?.is_support || false;
 
   const filter = useSelector(selectIssuesFilter);

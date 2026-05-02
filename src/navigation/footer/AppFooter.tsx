@@ -1,6 +1,6 @@
 import { ArrowCircleUpIcon } from '@phosphor-icons/react';
 import { FunctionComponent, useEffect, useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { versionRetrieve } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
@@ -8,9 +8,9 @@ import { format } from '@/core/ErrorMessageFormatter';
 import { lazyComponent } from '@/core/lazyComponent';
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { BackendHealthStatusIndicator } from '@/navigation/footer/BackendHealthStatusIndicator';
-import { showError } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { isStaffOrSupport } from '@/workspace/selectors';
 
 import { DisclaimerArea } from './DisclaimerArea';
@@ -30,7 +30,10 @@ const compareVersions = (current: string, latest: string) => {
 };
 
 export const AppFooter: FunctionComponent = () => {
-  const dispatch = useDispatch();
+  const { showError } = useNotify();
+
+  const { openDialog } = useModal();
+
   const isUserStaffOrSupport = useSelector(isStaffOrSupport);
   const [versionInfo, setVersionInfo] = useState<{
     version?: string;
@@ -50,35 +53,29 @@ export const AppFooter: FunctionComponent = () => {
         } catch (error) {
           // API can return html error in case of 404 which is not handled by ErrorMessageFormatter
           if (typeof error === 'string' && error.includes('<!doctype html>')) {
-            dispatch(
-              showError(translate('Version check endpoint is not available.')),
-            );
+            showError(translate('Version check endpoint is not available.'));
           } else {
             const errorMessage = format(error);
-            dispatch(
-              showError(
-                translate('Unable to check version update: {error}', {
-                  error: errorMessage,
-                }),
-              ),
+            showError(
+              translate('Unable to check version update: {error}', {
+                error: errorMessage,
+              }),
             );
           }
         }
       }
     };
     checkVersion();
-  }, [isUserStaffOrSupport, dispatch]);
+  }, [isUserStaffOrSupport]);
 
   const showUpgradeAvailable =
     versionInfo?.latest_version &&
     compareVersions(ENV.buildId, versionInfo.latest_version);
 
   const openUpgradeDialog = () => {
-    dispatch(
-      openModalDialog(UpgradeNotificationDialog, {
-        resolve: { version: versionInfo.latest_version },
-      }),
-    );
+    openDialog(UpgradeNotificationDialog, {
+      resolve: { version: versionInfo.latest_version },
+    });
   };
 
   return (

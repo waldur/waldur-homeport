@@ -1,28 +1,37 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { adminAnnouncementsDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@/navigation/header/announcements/queryKeys';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const AnnouncementDeleteAction = ({ row, refetch }) => {
-  const queryClient = useQueryClient();
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () => adminAnnouncementsDestroy({ path: { uuid: row.uuid } }),
+    refetch,
+    invalidateQueries: [
+      {
+        queryKey: ADMIN_ANNOUNCEMENTS_QUERY_KEY,
+      },
+    ],
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Are you sure you want to delete the announcement?'),
+      options: {
+        forDeletion: true,
+      },
+    },
+  });
 
   return (
-    <DeleteButton
-      row={row}
-      apiFunction={(r) => adminAnnouncementsDestroy({ path: { uuid: r.uuid } })}
-      refetch={refetch}
-      onSuccess={() =>
-        queryClient.invalidateQueries({
-          queryKey: ADMIN_ANNOUNCEMENTS_QUERY_KEY,
-        })
-      }
-      confirmTitle={translate('Confirmation')}
-      confirmMessage={translate(
-        'Are you sure you want to delete the announcement?',
-      )}
+    <RemovalActionItem
       title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
     />
   );
 };

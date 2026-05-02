@@ -1,7 +1,6 @@
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC, useCallback, useEffect, useMemo, useState } from 'react';
 import { Card, Nav, Tab } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { CheckOrX } from '@/core/CheckOrX';
 import { ENV } from '@/core/config';
@@ -12,7 +11,7 @@ import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { renderFieldOrDash } from '@/table/utils';
 import { isProfileAttributeEnabled } from '@/user/support/profileAttributes';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { CustomerChecklistPanel } from './CustomerChecklistPanel';
 import { CustomerLocationRow } from './CustomerLocationRow';
@@ -99,7 +98,7 @@ const FieldActions: FC<{
 
 const BasicInfoTab: FC<CustomerEditPanelProps> = (props) => {
   const nativeNameVisible = isProfileAttributeEnabled('native_name');
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const rows = useMemo(
     () =>
@@ -171,7 +170,7 @@ const BasicInfoTab: FC<CustomerEditPanelProps> = (props) => {
 };
 
 const AddressTab: FC<CustomerEditPanelProps> = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const rows = useMemo(
     () => [
@@ -257,7 +256,7 @@ const AddressTab: FC<CustomerEditPanelProps> = (props) => {
 };
 
 const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const rows = useMemo(
     () =>
@@ -318,7 +317,7 @@ const SettingsTab: FC<CustomerEditPanelProps> = (props) => {
 };
 
 const IdentifiersTab: FC<CustomerEditPanelProps> = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const rows = useMemo(
     () => [
@@ -387,7 +386,7 @@ const IdentifiersTab: FC<CustomerEditPanelProps> = (props) => {
 
 export const CustomerDetailsPanel: FC<CustomerEditPanelProps> = (props) => {
   const { params } = useCurrentStateAndParams();
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const initialTab =
     params.section && TAB_KEYS.includes(params.section as TabKey)

@@ -119,6 +119,7 @@ Subagents in `.claude/agents/` provide deep expertise for each area.
   - Use `NoResult` component for all empty states with actionable CTAs
   - Use `hasPermission()` utility for permission checks (not direct `user.is_staff`)
   - Hide buttons when user permanently lacks permission; disable when temporary/fixable
+  - Use `useManagedMutation` for all API mutation requests inside modals to cleanly encapsulate success/error notifications, table data reload (`refetch`), and automatic dialog closures. You can also pass `invalidateQueries: [{ queryKey: ['my-key'] }]` to automatically invalidate React Query cache upon success.
 
 ## Sentry Issue Workflow
 

@@ -1,13 +1,12 @@
 import { ClockCounterClockwiseIcon, EyeIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { MarketplaceFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import { isStaffOrSupport } from '@/workspace/selectors';
@@ -33,7 +32,6 @@ interface OfferingExtraActionsButtonProps {
 export const OfferingExtraActionsButton: FC<
   OfferingExtraActionsButtonProps
 > = ({ offering }) => {
-  const dispatch = useDispatch();
   const { openDialog } = useModal();
   const showVersionHistory = useSelector(isStaffOrSupport);
   const showPreview = !isFeatureVisible(MarketplaceFeatures.catalogue_only);
@@ -49,12 +47,10 @@ export const OfferingExtraActionsButton: FC<
           title={translate('Preview order form')}
           iconNode={<EyeIcon weight="bold" />}
           action={() =>
-            dispatch(
-              openModalDialog(PreviewOfferingDialog, {
-                resolve: { offering },
-                size: 'lg',
-              }),
-            )
+            openDialog(PreviewOfferingDialog, {
+              resolve: { offering },
+              size: 'lg',
+            })
           }
         />
       )}

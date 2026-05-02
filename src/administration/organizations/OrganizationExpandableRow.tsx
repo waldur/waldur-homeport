@@ -1,16 +1,15 @@
 import React from 'react';
-import { useSelector } from 'react-redux';
 
 import { translate } from '@/i18n';
 import { ExpandableContainer } from '@/table/ExpandableContainer';
 import { PermissionDetails } from '@/user/affiliations/PermissionDetails';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 export const OrganizationExpandableRow: React.FC<{
   row: Customer;
 }> = ({ row }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const permissions =
     user.permissions?.filter(
       (permission) =>

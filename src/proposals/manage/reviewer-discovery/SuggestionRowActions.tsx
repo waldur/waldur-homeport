@@ -1,6 +1,5 @@
-import { CheckIcon, TrashIcon, XIcon } from '@phosphor-icons/react';
-import { FC, useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { CheckIcon, XIcon } from '@phosphor-icons/react';
+import { FC, useCallback } from 'react';
 import {
   reviewerSuggestionsConfirm,
   reviewerSuggestionsDestroy,
@@ -9,9 +8,10 @@ import {
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 
 interface SuggestionRowActionsProps {
@@ -29,66 +29,40 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
   row,
   fetch,
 }) => {
-  const dispatch = useDispatch();
-  const [isConfirming, setIsConfirming] = useState(false);
-  const [isDeleting, setIsDeleting] = useState(false);
+  const { openDialog } = useModal();
 
-  const handleConfirm = useCallback(async () => {
-    setIsConfirming(true);
-    try {
-      await reviewerSuggestionsConfirm({
+  const confirmMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      reviewerSuggestionsConfirm({
         path: { uuid: row.uuid },
-      });
-      dispatch(
-        showSuccess(
-          translate('Confirmed suggestion for {name}.', {
-            name: row.reviewer_name,
-          }),
-        ),
-      );
-      fetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to confirm suggestion.')),
-      );
-    } finally {
-      setIsConfirming(false);
-    }
-  }, [row.uuid, row.reviewer_name, dispatch, fetch]);
+      }),
+    successMessage: translate('Confirmed suggestion for {name}.', {
+      name: row.reviewer_name,
+    }),
+    errorMessage: translate('Unable to confirm suggestion.'),
+    refetch: fetch,
+  });
+
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      reviewerSuggestionsDestroy({
+        path: { uuid: row.uuid },
+      }),
+    successMessage: translate('Deleted suggestion for {name}.', {
+      name: row.reviewer_name,
+    }),
+    errorMessage: translate('Unable to delete suggestion.'),
+    refetch: fetch,
+  });
 
   const handleReject = useCallback(() => {
-    dispatch(
-      openModalDialog(SuggestionRejectDialog, {
-        resolve: { suggestion: row, refetch: fetch },
-        size: 'sm',
-      }),
-    );
-  }, [row, fetch, dispatch]);
+    openDialog(SuggestionRejectDialog, {
+      resolve: { suggestion: row, refetch: fetch },
+      size: 'sm',
+    });
+  }, [row, fetch]);
 
-  const handleDelete = useCallback(async () => {
-    setIsDeleting(true);
-    try {
-      await reviewerSuggestionsDestroy({
-        path: { uuid: row.uuid },
-      });
-      dispatch(
-        showSuccess(
-          translate('Deleted suggestion for {name}.', {
-            name: row.reviewer_name,
-          }),
-        ),
-      );
-      fetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to delete suggestion.')),
-      );
-    } finally {
-      setIsDeleting(false);
-    }
-  }, [row.uuid, row.reviewer_name, dispatch, fetch]);
-
-  const isLoading = isConfirming || isDeleting;
+  const isLoading = confirmMutation.isPending || deleteMutation.isPending;
 
   // Show confirm/reject actions for pending suggestions
   if (row.status === 'pending') {
@@ -96,9 +70,11 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
       <ActionsDropdownComponent>
         <ActionItem
           title={
-            isConfirming ? translate('Confirming...') : translate('Confirm')
+            confirmMutation.isPending
+              ? translate('Confirming...')
+              : translate('Confirm')
           }
-          action={handleConfirm}
+          action={() => confirmMutation.mutate()}
           iconNode={<CheckIcon weight="bold" />}
           iconColor="success"
           className="text-success"
@@ -112,10 +88,13 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
           className="text-danger"
           disabled={isLoading}
         />
-        <ActionItem
-          title={isDeleting ? translate('Deleting...') : translate('Delete')}
-          action={handleDelete}
-          iconNode={<TrashIcon weight="bold" />}
+        <RemovalActionItem
+          title={
+            deleteMutation.isPending
+              ? translate('Deleting...')
+              : translate('Delete')
+          }
+          action={() => deleteMutation.mutate()}
           disabled={isLoading}
         />
       </ActionsDropdownComponent>
@@ -125,11 +104,14 @@ export const SuggestionRowActions: FC<SuggestionRowActionsProps> = ({
   // For non-pending statuses, only show delete
   return (
     <ActionsDropdownComponent>
-      <ActionItem
-        title={isDeleting ? translate('Deleting...') : translate('Delete')}
-        action={handleDelete}
-        iconNode={<TrashIcon weight="bold" />}
-        disabled={isDeleting}
+      <RemovalActionItem
+        title={
+          deleteMutation.isPending
+            ? translate('Deleting...')
+            : translate('Delete')
+        }
+        action={() => deleteMutation.mutate()}
+        disabled={deleteMutation.isPending}
       />
     </ActionsDropdownComponent>
   );

@@ -1,50 +1,34 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 import { proposalProtectedCallsResourceTemplatesDestroy } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const ResourceTemplateDeleteButton = ({ row, refetch, call }) => {
-  const dispatch = useDispatch();
-  const openDialog = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete the resource template {name}?',
-          { name: <strong>{row.name}</strong> },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-
-    try {
-      await proposalProtectedCallsResourceTemplatesDestroy({
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      proposalProtectedCallsResourceTemplatesDestroy({
         path: { obj_uuid: row.uuid, uuid: call.uuid },
-      });
-      dispatch(showSuccess(translate('Resource template deleted')));
-      refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete resource template.')),
-      );
-    }
-  };
+      }),
+    successMessage: translate('Resource template deleted'),
+    errorMessage: translate('Unable to delete resource template.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete the resource template {name}?',
+        { name: <strong>{row.name}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      action={openDialog}
-      iconNode={<TrashIcon weight="bold" />}
-      iconColor="danger"
-      className="text-danger"
+      action={() => deleteMutation.mutate()}
+      disabled={deleteMutation.isPending}
     />
   );
 };

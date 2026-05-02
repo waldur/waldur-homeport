@@ -1,6 +1,5 @@
 import { FC, useCallback } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   proposalProtectedCallsActivate,
   proposalProtectedCallsArchive,
@@ -8,8 +7,8 @@ import {
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
 
@@ -27,14 +26,16 @@ export const CallActions: FC<CallActionsProps> = ({
   refetch,
   className,
 }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const hasRounds = call.rounds.length > 0;
 
   const editCallState = useCallback(
     async (state, label: string) => {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Confirmation'),
           translate('Are you sure you want to {action} this call?', {
             action: label.toLowerCase(),
@@ -45,16 +46,14 @@ export const CallActions: FC<CallActionsProps> = ({
         } else if (state === 'archive') {
           proposalProtectedCallsArchive({ path: { uuid: call.uuid } });
         }
-        dispatch(showSuccess(translate('Call state updated.')));
+        showSuccess(translate('Call state updated.'));
         refetch();
       } catch (er) {
         if (!er) return;
-        dispatch(
-          showErrorResponse(er, translate('Unable to update call state.')),
-        );
+        showErrorResponse(er, translate('Unable to update call state.'));
       }
     },
-    [dispatch, call, refetch],
+    [call, refetch],
   );
 
   const tooltipMessage = !hasRounds

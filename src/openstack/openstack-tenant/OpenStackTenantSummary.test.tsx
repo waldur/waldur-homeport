@@ -3,7 +3,7 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import { ENV } from '@/core/config';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 
 import { OpenStackTenantSummary } from './OpenStackTenantSummary';
 
@@ -18,7 +18,7 @@ vi.mock('@/core/config', () => ({
     },
   },
 }));
-vi.mock('@/modal/hooks');
+vi.mock('@/modal/actions');
 
 const mockTenant = {
   name: 'Test tenant',

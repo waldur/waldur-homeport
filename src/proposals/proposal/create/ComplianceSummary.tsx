@@ -10,7 +10,7 @@ import { translate } from '@/i18n';
 import { CHECKLIST_NO_CONFIGURED_MSG } from '@/marketplace-checklist/constants';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
 import { Proposal } from '@/proposals/types';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 interface ComplianceSummaryProps {
   proposal: Proposal;

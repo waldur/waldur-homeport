@@ -1,29 +1,46 @@
 import { rolesDestroy } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { ENV } from '@/core/config';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 import { getRoles } from './utils';
 
-export const RoleDeleteButton = ({ row, refetch }) => (
-  <DeleteButton
-    row={row}
-    apiFunction={(r) => rolesDestroy({ path: { uuid: r.uuid } })}
-    refetch={refetch}
-    onSuccess={async () => {
+export const RoleDeleteButton = ({ row, refetch }) => {
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () => rolesDestroy({ path: { uuid: row.uuid } }),
+    refetch: refetch,
+
+    onSuccess: async () => {
       ENV.roles = await getRoles();
-    }}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+    },
+
+    confirmation: {
+      title: translate('Confirmation'),
+
+      body: translate(
         'Are you sure you want to delete the role {name}?',
-        { name: <strong>{r.name}</strong> },
+        { name: <strong>{row.name}</strong> },
         formatJsxTemplate,
-      )
-    }
-    title={translate('Remove')}
-    disabled={row.users_count > 0}
-    tooltip={translate('Users should be revoked before role is removed.')}
-  />
-);
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
+      tooltip={translate('Users should be revoked before role is removed.')}
+    />
+  );
+};

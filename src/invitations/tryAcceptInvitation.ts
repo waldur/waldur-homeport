@@ -1,8 +1,7 @@
 import { InvitationTokenStorage } from '@/core/StorageManager';
-import store from '@/store/store';
+import { NotifyService } from '@/store/notify';
 
 import { translate } from '../i18n';
-import { showError } from '../store/notify';
 import { UsersService } from '../user/UsersService';
 
 import { acceptInvitation, confirmInvitation } from './utils';
@@ -26,9 +25,7 @@ export function tryAcceptInvitation() {
         })
         .catch(() => {
           InvitationTokenStorage.remove();
-          store.dispatch(
-            showError(translate('Invitation could not be accepted')),
-          );
+          NotifyService.error(translate('Invitation could not be accepted'));
         });
     }
   });

@@ -1,47 +1,36 @@
-import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsDeleteEndpoint } from 'waldur-js-client';
 
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 export const DeleteEndpointButton = ({ endpoint, offering, refetch }) => {
-  const dispatch = useDispatch();
-  const handler = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete endpoint {name}?',
-          {
-            name: <b>{endpoint.name}</b>,
-          },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await marketplaceProviderOfferingsDeleteEndpoint({
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceProviderOfferingsDeleteEndpoint({
         path: { uuid: offering.uuid },
         body: { uuid: endpoint.uuid },
-      });
-      dispatch(showSuccess(translate('Endpoint has been removed.')));
-      await refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to remove endpoint.')),
-      );
-    }
-  };
+      }),
+    successMessage: translate('Endpoint has been removed.'),
+    errorMessage: translate('Unable to remove endpoint.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete endpoint {name}?',
+        {
+          name: <b>{endpoint.name}</b>,
+        },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
   return (
     <CompactActionButton
       variant="danger"
-      action={handler}
+      action={() => deleteMutation.mutate()}
+      pending={deleteMutation.isPending}
       title={translate('Delete')}
     />
   );

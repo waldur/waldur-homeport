@@ -1,12 +1,11 @@
 import { ProhibitIcon } from '@phosphor-icons/react';
-import { FC, useState } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import { marketplaceOrdersCancel } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 interface CancelOrderButtonProps {
   uuid: string;
@@ -14,32 +13,23 @@ interface CancelOrderButtonProps {
 }
 
 export const CancelOrderButton: FC<CancelOrderButtonProps> = (props) => {
-  const [loading, setLoading] = useState(false);
-  const dispatch = useDispatch();
-  const callback = async () => {
-    setLoading(true);
-    try {
-      await marketplaceOrdersCancel({ path: { uuid: props.uuid } });
-      dispatch(showSuccess(translate('Order has been canceled.')));
-      props.loadData();
-    } catch (response) {
-      dispatch(
-        showErrorResponse(response, translate('Unable to cancel order.')),
-      );
-    }
-    setLoading(false);
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => marketplaceOrdersCancel({ path: { uuid: props.uuid } }),
+    successMessage: translate('Order has been canceled.'),
+    errorMessage: translate('Unable to cancel order.'),
+    onSuccess: props.loadData,
+  });
 
   return (
     <>
-      {loading ? (
+      {isPending ? (
         <LoadingSpinnerSimple className="me-1" />
       ) : (
         <ActionItem
           className="text-danger"
           title={translate('Cancel')}
-          action={callback}
-          disabled={loading}
+          action={mutate}
+          disabled={isPending}
           iconNode={<ProhibitIcon weight="bold" />}
           iconColor="danger"
         />

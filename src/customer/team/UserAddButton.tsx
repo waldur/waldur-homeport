@@ -1,16 +1,16 @@
 import { UserPlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
+import { useUser } from '@/workspace/hooks';
 import {
   getCustomer,
-  getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
 } from '@/workspace/selectors';
 
@@ -27,8 +27,8 @@ const AddUserDialog = lazyComponent(() =>
 export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
   const customer = useSelector(getCustomer);
 
   const isOwnerOrStaff = useSelector(isOwnerOrStaffSelector);
@@ -47,13 +47,11 @@ export const UserAddButton: FunctionComponent<UserAddButtonProps> = ({
     <ActionItem
       title={translate('Member')}
       action={() =>
-        dispatch(
-          openModalDialog(AddUserDialog, {
-            refetch,
-            level: 'customer',
-            title: translate('Add member'),
-          }),
-        )
+        openDialog(AddUserDialog, {
+          refetch,
+          level: 'customer',
+          title: translate('Add member'),
+        })
       }
       iconNode={<UserPlusIcon weight="bold" />}
       disabled={!canAddUser || !isOwnerOrStaff}

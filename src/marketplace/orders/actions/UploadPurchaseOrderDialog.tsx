@@ -3,7 +3,7 @@ import { Form } from 'react-final-form';
 import {
   marketplaceOrdersApproveByConsumer,
   marketplaceOrdersUpdateAttachment,
-  OrderDetails,
+  type OrderDetails,
 } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
@@ -11,9 +11,8 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { OrderAttachmentField } from '@/marketplace/deploy/steps/OrderAttachmentField';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const UploadPurchaseOrderDialog = ({
   order,
@@ -24,10 +23,8 @@ export const UploadPurchaseOrderDialog = ({
   refetch(): void | Promise<void>;
   required: boolean;
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-  const callback = async (formData) => {
-    try {
+  const approveMutation = useManagedMutation<any, any, any>({
+    mutationFn: async (formData) => {
       await marketplaceOrdersUpdateAttachment({
         path: { uuid: order.uuid },
         body: {
@@ -39,18 +36,14 @@ export const UploadPurchaseOrderDialog = ({
       await marketplaceOrdersApproveByConsumer({
         path: { uuid: order.uuid },
       });
-      if (refetch) {
-        await refetch();
-      }
-      closeDialog();
-      showSuccess(translate('Order has been approved.'));
-    } catch (error) {
-      showErrorResponse(error, translate('Unable to approve order.'));
-    }
-  };
+    },
+    successMessage: translate('Order has been approved.'),
+    errorMessage: translate('Unable to approve order.'),
+    refetch,
+  });
   return (
     <Form
-      onSubmit={callback}
+      onSubmit={(values) => approveMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

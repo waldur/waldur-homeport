@@ -1,11 +1,6 @@
-import {
-  PencilSimpleIcon,
-  TrashIcon,
-  DownloadSimpleIcon,
-} from '@phosphor-icons/react';
+import { PencilSimpleIcon, DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   Checklist,
   checklistsAdminChecklistQuestions,
@@ -24,10 +19,10 @@ import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { Badge } from '@/core/Badge';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
 import Table from '@/table/Table';
@@ -51,7 +46,10 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
   predefinedQuestions,
   getMappingDisplay,
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { openDialog, confirm } = useModal();
+
   const queryClient = useQueryClient();
   const [isImporting, setIsImporting] = useState(false);
 
@@ -128,8 +126,7 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
   const handleImportPreset = async () => {
     const hasExistingQuestions = questions && questions.length > 0;
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Import preset questions?'),
         hasExistingQuestions
           ? translate(
@@ -254,26 +251,22 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
 
       // Show results
       if (errors.length > 0) {
-        dispatch(
-          showSuccess(
-            translate(
-              'Import completed with {errorCount} errors. {count} questions created.',
-              {
-                count: successCount,
-                errorCount: errors.length,
-              },
-            ),
+        showSuccess(
+          translate(
+            'Import completed with {errorCount} errors. {count} questions created.',
+            {
+              count: successCount,
+              errorCount: errors.length,
+            },
           ),
         );
       } else {
-        dispatch(
-          showSuccess(
-            translate(
-              'Preset questions imported successfully. {count} questions created.',
-              {
-                count: successCount,
-              },
-            ),
+        showSuccess(
+          translate(
+            'Preset questions imported successfully. {count} questions created.',
+            {
+              count: successCount,
+            },
           ),
         );
       }
@@ -287,50 +280,40 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
       });
       await refetch();
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Failed to import preset questions.'),
-        ),
-      );
+      showErrorResponse(error, translate('Failed to import preset questions.'));
     } finally {
       setIsImporting(false);
     }
   };
 
   const handleAddQuestion = () => {
-    dispatch(
-      openModalDialog(QuestionFormModal, {
-        resolve: {
-          checklistType,
-          checklist,
-          onSave: async () => {
-            await refetch();
-          },
+    openDialog(QuestionFormModal, {
+      resolve: {
+        checklistType,
+        checklist,
+        onSave: async () => {
+          await refetch();
         },
-      }),
-    );
+      },
+    });
   };
 
   const handleEditQuestion = (question: PredefinedQuestion) => {
-    dispatch(
-      openModalDialog(QuestionFormModal, {
-        resolve: {
-          question,
-          checklistType,
-          checklist,
-          onSave: async () => {
-            await refetch();
-          },
+    openDialog(QuestionFormModal, {
+      resolve: {
+        question,
+        checklistType,
+        checklist,
+        onSave: async () => {
+          await refetch();
         },
-      }),
-    );
+      },
+    });
   };
 
   const handleDeleteQuestion = async (question: PredefinedQuestion) => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Delete question?'),
         translate(
           'Are you sure you want to delete this question: {description}?',
@@ -347,12 +330,10 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
       await checklistsAdminQuestionsDestroy({
         path: { uuid: question.uuid },
       });
-      dispatch(showSuccess(translate('Question has been deleted.')));
+      showSuccess(translate('Question has been deleted.'));
       await refetch();
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Failed to delete question.')),
-      );
+      showErrorResponse(error, translate('Failed to delete question.'));
     }
   };
 
@@ -427,12 +408,9 @@ export const BaseQuestionsTable: FC<BaseQuestionsTableProps> = ({
         title={translate('Edit')}
         iconNode={<PencilSimpleIcon weight="bold" />}
       />
-      <ActionItem
+      <RemovalActionItem
         action={() => handleDeleteQuestion(row)}
         title={translate('Delete')}
-        iconNode={<TrashIcon weight="bold" />}
-        className="text-danger"
-        iconColor="danger"
       />
     </ActionsDropdownComponent>
   );

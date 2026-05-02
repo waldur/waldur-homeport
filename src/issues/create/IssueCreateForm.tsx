@@ -1,16 +1,15 @@
 import { WarningIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 
 import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
 import { StepsList } from '@/marketplace/common/StepsList';
-import { useWizard } from '@/marketplace/offerings/import/useWizard';
 import { WizardButtons } from '@/marketplace/offerings/import/WizardButtons';
 import { WizardTabs } from '@/marketplace/offerings/import/WizardTabs';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { getUser } from '@/workspace/selectors';
+import { useWizard } from '@/wizard/useWizard';
+import { useUser } from '@/workspace/hooks';
 
 import { useRequestTypes } from '../api';
 import { IssueCreateButtonProps } from '../list/IssueCreateButton';
@@ -55,7 +54,7 @@ export const IssueCreateForm = reduxForm<IssueFormData, OwnProps>({
     useWizard(steps);
 
   // Fetch request types at form level to control wizard navigation
-  const user = useSelector(getUser);
+  const user = useUser();
   const showAllTypes = getShowAllTypes(user);
   const { data: requestTypes, isLoading, error } = useRequestTypes();
 

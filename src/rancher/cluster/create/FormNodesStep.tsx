@@ -17,7 +17,7 @@ import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { StepCardPlaceholder } from '@/marketplace/deploy/steps/StepCardPlaceholder';
 import { FormStepProps } from '@/marketplace/deploy/types';
 import { ORDER_FORM_ID } from '@/marketplace/details/constants';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 import { NODES_FIELD_ARRAY } from './constants';
@@ -172,6 +172,8 @@ const renderNodeRows = ({ fields, flavors }: any) => {
 };
 
 export const FormNodesStep = (props: FormStepProps) => {
+  const { confirm } = useModal();
+
   const dispatch = useDispatch();
   const tenant = useSelector(formTenantSelector);
 
@@ -205,8 +207,7 @@ export const FormNodesStep = (props: FormStepProps) => {
         return;
       }
 
-      waitForConfirmation(
-        dispatch,
+      confirm(
         translate('Confirmation'),
         translate(
           'Are you sure you want to select template? Note this will reset the node plan.',

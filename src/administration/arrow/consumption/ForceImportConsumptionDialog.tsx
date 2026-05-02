@@ -1,7 +1,6 @@
 import { useMutation } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { Alert, Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   adminArrowBillingSyncsSyncResourceHistoricalConsumption,
   Resource,
@@ -15,7 +14,7 @@ import { translate } from '@/i18n';
 import { resourceAutocomplete } from '@/marketplace/common/autocompletes';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
 type Phase = 'form' | 'preview' | 'result';
@@ -51,7 +50,7 @@ export const ForceImportConsumptionDialog = ({
   resolve,
 }: ForceImportConsumptionDialogProps) => {
   const { refetch } = resolve;
-  const dispatch = useDispatch();
+  const { showError, showSuccess } = useNotify();
 
   const defaultRange = getDefaultDateRange();
   const [phase, setPhase] = useState<Phase>('form');
@@ -98,7 +97,7 @@ export const ForceImportConsumptionDialog = ({
         error?.response?.data?.error ||
         error?.message ||
         translate('Failed to preview consumption data');
-      dispatch(showError(errorMessage));
+      showError(errorMessage);
     },
   });
 
@@ -128,7 +127,7 @@ export const ForceImportConsumptionDialog = ({
             synced: data.periods_synced,
             skipped: data.periods_skipped,
           });
-      dispatch(showSuccess(message));
+      showSuccess(message);
       refetch?.();
       setPhase('result');
     },
@@ -137,7 +136,7 @@ export const ForceImportConsumptionDialog = ({
         error?.response?.data?.error ||
         error?.message ||
         translate('Failed to force import consumption data');
-      dispatch(showError(errorMessage));
+      showError(errorMessage);
     },
   });
 

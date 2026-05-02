@@ -1,6 +1,5 @@
 import { useState } from 'react';
 import { Form } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   accessSubnetsCreate,
   accessSubnetsPartialUpdate,
@@ -10,9 +9,8 @@ import {
 
 import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export interface AccessSubnetFormData {
   refetch(): void;
@@ -30,7 +28,7 @@ interface AccessSubnetFormProps {
 
 export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => {
   const { refetch, customer_url, row } = resolve;
-  const dispatch = useDispatch();
+
   const isEditMode = !!row;
   const [formData, setFormData] = useState<
     AccessSubnetRequest | PatchedAccessSubnetRequest
@@ -41,6 +39,28 @@ export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => {
   });
 
   const [error, setError] = useState('');
+
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      isEditMode
+        ? accessSubnetsPartialUpdate({
+            path: { uuid: row.uuid },
+            body: formData,
+          })
+        : accessSubnetsCreate({
+            body: {
+              ...(formData as AccessSubnetRequest),
+              customer: customer_url!,
+            },
+          }),
+    successMessage: isEditMode
+      ? translate('Access subnet has been updated.')
+      : translate('Access subnet has been created.'),
+    errorMessage: isEditMode
+      ? translate('Unable to update access subnet.')
+      : translate('Unable to create access subnet.'),
+    refetch,
+  });
 
   const handleInputChange = (e) => {
     setFormData({
@@ -54,42 +74,14 @@ export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => {
     }
   };
 
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
 
     if (!formData.inet.endsWith('/32')) {
       setError(translate('Only /32 mask is allowed.'));
       return;
     }
-
-    try {
-      if (isEditMode) {
-        await accessSubnetsPartialUpdate({
-          path: { uuid: row.uuid },
-          body: formData,
-        });
-        dispatch(showSuccess(translate('Access subnet has been updated.')));
-      } else {
-        await accessSubnetsCreate({
-          body: {
-            ...(formData as AccessSubnetRequest),
-            customer: customer_url!,
-          },
-        });
-        dispatch(showSuccess(translate('Access subnet has been created.')));
-      }
-      refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          isEditMode
-            ? translate('Unable to update access subnet.')
-            : translate('Unable to create access subnet.'),
-        ),
-      );
-    }
+    mutate();
   };
 
   return (
@@ -103,7 +95,7 @@ export const AccessSubnetForm = ({ resolve }: AccessSubnetFormProps) => {
         closeButton
         footer={
           <CompactSubmitButton
-            submitting={false}
+            submitting={isPending}
             label={isEditMode ? translate('Update') : translate('Create')}
           />
         }

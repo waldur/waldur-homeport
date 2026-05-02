@@ -1,17 +1,16 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useEffect } from 'react';
+import { FC, useEffect } from 'react';
 import { useDispatch } from 'react-redux';
 import { change } from 'redux-form';
 import { OpenStackPort, openstackPortsUpdatePortIp } from 'waldur-js-client';
 
 import { SHORT_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadSubnets } from '@/openstack/api';
 import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 import { FixedIPsField } from './CreatePortDialog';
 
@@ -55,29 +54,25 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
     }
   }, [subnets, resource]);
 
-  const submitForm = useCallback(
-    async (formData) => {
-      const body = {
-        subnet: formData.fixed_ips.subnet.url,
-        ip_address: formData.fixed_ips?.fixed_ip,
-      };
-
-      try {
-        await openstackPortsUpdatePortIp({
-          path: { uuid: resource.uuid },
-          body,
-        });
-        dispatch(showSuccess(translate('Port has been updated.')));
-        dispatch(closeModalDialog());
-        if (refetch) {
-          await refetch();
-        }
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to update port.')));
-      }
-    },
-    [dispatch, refetch, resource],
-  );
+  const mutation = useManagedMutation<
+    any,
+    any,
+    {
+      fixed_ips: { subnet: { url: string }; fixed_ip?: string };
+    }
+  >({
+    mutationFn: (formData) =>
+      openstackPortsUpdatePortIp({
+        path: { uuid: resource.uuid },
+        body: {
+          subnet: formData.fixed_ips.subnet.url,
+          ip_address: formData.fixed_ips?.fixed_ip,
+        },
+      }),
+    successMessage: translate('Port has been updated.'),
+    errorMessage: translate('Unable to update port.'),
+    refetch,
+  });
 
   return (
     <ResourceActionDialog
@@ -85,7 +80,7 @@ export const UpdatePortDialog: FC<ActionDialogProps<OpenStackPort>> = ({
       loading={isLoading}
       error={error}
       refetch={refetchSubnets}
-      submitForm={submitForm}
+      submitForm={mutation.mutateAsync}
       dialogSubmitLabel={translate('Save')}
       formFields={[
         {

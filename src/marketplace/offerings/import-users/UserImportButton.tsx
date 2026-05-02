@@ -1,15 +1,14 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { ServiceProvider } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n/translate';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const UserImportDialog = lazyComponent(() =>
   import('./UserImportDialog').then((module) => ({
@@ -26,8 +25,8 @@ export const UserImportButton: FC<UserImportButtonProps> = ({
   provider,
   refetch,
 }) => {
-  const user = useSelector(getUser);
-  const dispatch = useDispatch();
+  const user = useUser();
+  const { openDialog } = useModal();
 
   const canCreateOfferingUser = hasPermission(user, {
     permission: PermissionEnum.CREATE_OFFERING_USER,
@@ -38,13 +37,11 @@ export const UserImportButton: FC<UserImportButtonProps> = ({
     <ActionButton
       title={translate('Bulk import')}
       action={() =>
-        dispatch(
-          openModalDialog(UserImportDialog, {
-            size: 'lg',
-            formId: 'BulkImportOfferingUsers',
-            resolve: { provider, refetch },
-          }),
-        )
+        openDialog(UserImportDialog, {
+          size: 'lg',
+          formId: 'BulkImportOfferingUsers',
+          resolve: { provider, refetch },
+        })
       }
       iconNode={<DownloadSimpleIcon weight="bold" />}
       disabled={!canCreateOfferingUser}

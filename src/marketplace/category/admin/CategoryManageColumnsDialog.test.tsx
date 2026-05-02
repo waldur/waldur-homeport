@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, fireEvent } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
@@ -5,13 +6,12 @@ import { describe, it, expect, vi, beforeEach } from 'vitest';
 import {
   marketplaceCategoryColumnsCreate,
   marketplaceCategoryColumnsDestroy,
+  marketplaceCategoryColumnsList,
 } from 'waldur-js-client';
-import { marketplaceCategoryColumnsList } from 'waldur-js-client';
 
 import { Category } from '@/marketplace/types';
-import { waitForConfirmation } from '@/modal/actions';
 import { createActionStore } from '@/resource/actions/testUtils';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { CategoryManageColumnsDialog } from './CategoryManageColumnsDialog';
 
@@ -21,16 +21,29 @@ const category = {
   columns: [],
 } as Category;
 
+const mockConfirm = vi.fn();
+
 vi.mock('waldur-js-client');
-vi.mock('@/store/hooks');
-vi.mock('@/modal/actions');
+vi.mock('@/store/notify');
+vi.mock('@/modal/actions', () => ({
+  useModal: () => ({ closeDialog: vi.fn(), confirm: mockConfirm }),
+}));
 
 describe('CategoryManageColumnsDialog', () => {
   const renderDialog = () => {
+    const queryClient = new QueryClient({
+      defaultOptions: {
+        queries: { retry: false },
+        mutations: { retry: false },
+      },
+    });
+
     return render(
-      <Provider store={createActionStore()}>
-        <CategoryManageColumnsDialog resolve={{ category }} />
-      </Provider>,
+      <QueryClientProvider client={queryClient}>
+        <Provider store={createActionStore()}>
+          <CategoryManageColumnsDialog resolve={{ category }} />
+        </Provider>
+      </QueryClientProvider>,
     );
   };
 
@@ -41,7 +54,7 @@ describe('CategoryManageColumnsDialog', () => {
       showError: vi.fn(),
       showSuccess: vi.fn(),
       showErrorResponse: vi.fn(),
-    });
+    } as any);
   });
 
   it('renders dialog with title and form', async () => {
@@ -109,7 +122,7 @@ describe('CategoryManageColumnsDialog', () => {
     } as any);
 
     // Mock confirmation dialog to resolve (accept)
-    vi.mocked(waitForConfirmation).mockResolvedValue(undefined);
+    mockConfirm.mockResolvedValue(undefined);
 
     const { container } = renderDialog();
     await screen.findByText('Set columns in Test Category category');

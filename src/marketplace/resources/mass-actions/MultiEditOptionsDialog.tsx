@@ -15,9 +15,8 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface MultiEditOptionsDialogOwnProps {
   resolve: {
@@ -29,28 +28,24 @@ interface MultiEditOptionsDialogOwnProps {
 export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
   resolve,
 }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-  const submitRequest = (formData: { attributes }) => {
-    return Promise.all(
-      resolve.rows.map((row) =>
-        marketplaceResourcesUpdateOptions({
-          path: { uuid: row.uuid },
-          body: { options: formData.attributes },
-        }),
+  const updateOptionsMutation = useManagedMutation<
+    any,
+    any,
+    { attributes: any }
+  >({
+    mutationFn: (formData) =>
+      Promise.all(
+        resolve.rows.map((row) =>
+          marketplaceResourcesUpdateOptions({
+            path: { uuid: row.uuid },
+            body: { options: formData.attributes },
+          }),
+        ),
       ),
-    )
-      .then(() => {
-        showSuccess(translate('Options have been updated'));
-        resolve.refetch();
-        closeDialog();
-      })
-      .catch((e) => {
-        showErrorResponse(e, translate('Unable to update options.'));
-        // Throw submit errors to the form ui
-        return { attributes: e.options };
-      });
-  };
+    successMessage: translate('Options have been updated'),
+    errorMessage: translate('Unable to update options.'),
+    refetch: resolve.refetch,
+  });
 
   // Fetch related offering
   const offeringQuery = useQuery({
@@ -64,7 +59,9 @@ export const MultiEditOptionsDialog: FC<MultiEditOptionsDialogOwnProps> = ({
 
   return (
     <Form
-      onSubmit={submitRequest}
+      onSubmit={(values: { attributes: any }) =>
+        updateOptionsMutation.mutateAsync(values)
+      }
       initialValues={
         resolve.rows.length === 1
           ? { attributes: { ...(resolve.rows[0].options as object) } }

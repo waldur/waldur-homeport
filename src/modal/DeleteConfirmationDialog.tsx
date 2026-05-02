@@ -1,10 +1,9 @@
 import { TrashIcon } from '@phosphor-icons/react';
 import React, { ReactNode } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 
 import { ModalDialog } from './ModalDialog';
@@ -24,8 +23,8 @@ interface DeleteConfirmationDialogProps {
 export const DeleteConfirmationDialog: React.FC<
   DeleteConfirmationDialogProps
 > = ({ resolve: { title, body, deferred, iconNode } }) => {
-  const dispatch = useDispatch();
-  const closeDialog = () => dispatch(closeModalDialog('HIDE_CONFIRM'));
+  const { closeDialog: closeModal } = useModal();
+  const closeDialog = () => closeModal('HIDE_CONFIRM');
 
   const handleSubmit = () => {
     deferred.resolve();

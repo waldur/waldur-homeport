@@ -6,7 +6,7 @@ import { projectsList } from 'waldur-js-client';
 import { required } from '@/core/validators';
 import { AsyncPaginate } from '@/form/themed-select';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { organizationAutocomplete } from '../common/autocompletes';
 import { orderCustomerSelector } from '../deploy/selectors';
@@ -15,6 +15,8 @@ import { FormGroup } from '../offerings/FormGroup';
 import { ORDER_FORM_ID } from './constants';
 
 const CustomerSelect = ({ input, organizationGroups }) => {
+  const { confirm } = useModal();
+
   const dispatch = useDispatch();
   const customer = useSelector(orderCustomerSelector);
 
@@ -31,8 +33,7 @@ const CustomerSelect = ({ input, organizationGroups }) => {
         return;
       }
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Organization change'),
           translate(
             "You're switching to the {name} organization. This will discard any entered data. Do you want to proceed?",

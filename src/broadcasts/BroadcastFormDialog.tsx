@@ -5,13 +5,12 @@ import {
   ShareIcon,
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { ProgressStep } from '@/core/ProgressSteps';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ActionButton } from '@/table/ActionButton';
 import { Wizard, WizardFooterRenderProps } from '@/wizard';
@@ -49,25 +48,20 @@ export const BroadcastFormDialog: FC<BroadcastFormDialogProps> = ({
   initialValues,
   resolve,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const isEdit = Boolean(resolve.uuid);
   const onSubmit = useBroadcastFormSubmit(resolve.refetch, resolve.uuid);
 
-  const saveAsTemplate = useCallback(
-    (formValues: BroadcastFormData) => {
-      dispatch(
-        openModalDialog(BroadcastSaveAsTemplateDialog, {
-          dialogClassName: 'modal-dialog-centered',
-          resolve: {
-            refetch: resolve.refetch,
-            broadcastData: formValues,
-          },
-          size: 'lg',
-        }),
-      );
-    },
-    [dispatch, resolve.refetch],
-  );
+  const saveAsTemplate = useCallback((formValues: BroadcastFormData) => {
+    openDialog(BroadcastSaveAsTemplateDialog, {
+      dialogClassName: 'modal-dialog-centered',
+      resolve: {
+        refetch: resolve.refetch,
+        broadcastData: formValues,
+      },
+      size: 'lg',
+    });
+  }, []);
 
   const renderFooter = useCallback(
     (props: WizardFooterRenderProps<BroadcastFormData>) => {

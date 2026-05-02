@@ -8,7 +8,7 @@ import { translate } from '@/i18n';
 import { SIDEBAR_RESOURCES_FILTER_FORM } from '@/marketplace/constants';
 import { OrganizationAutocomplete } from '@/marketplace/orders/OrganizationAutocomplete';
 import { ProjectFilter } from '@/marketplace/resources/list/ProjectFilter';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Customer } from '@/workspace/types';
@@ -25,6 +25,9 @@ export const FilterByOrgAndProjectDialog = reduxForm<FormData>({
   destroyOnUnmount: true,
 })((props) => {
   const dispatch = useDispatch<any>();
+
+  const { closeDialog } = useModal();
+
   const { syncResourceFilters } =
     useOrganizationAndProjectFiltersForResources();
 
@@ -36,10 +39,10 @@ export const FilterByOrgAndProjectDialog = reduxForm<FormData>({
     (formData) => {
       if (formData) {
         syncResourceFilters(formData);
-        dispatch(closeModalDialog());
+        closeDialog();
       }
     },
-    [dispatch],
+    [syncResourceFilters, closeDialog],
   );
 
   // Clear project filter if organization is cleared

@@ -1,15 +1,11 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   nestedReviewerProfileAffiliationsDestroy,
   ReviewerAffiliation,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { useNotify } from '@/store/hooks';
-import { ActionButton } from '@/table/ActionButton';
+import { useBatchMutation } from '@/modal/useBatchMutation';
+import { RemovalActionButton } from '@/table/RemovalActionButton';
 
 interface OwnProps {
   rows: ReviewerAffiliation[];
@@ -22,84 +18,48 @@ export const AffiliationsBulkRemoveButton = ({
   refetch,
   profile,
 }: OwnProps) => {
-  const [isRemoving, setIsRemoving] = useState(false);
-  const { showSuccess, showErrorResponse } = useNotify();
-  const dispatch = useDispatch();
-
-  const callback = async () => {
-    try {
-      const itemsList = rows.map((row) => (
-        <li key={row.uuid}>
-          {row.organization_name_display}
-          {row.position_title && ` - ${row.position_title}`}
-        </li>
-      ));
-
-      const formattedMessage = (
+  const { mutate, isPending } = useBatchMutation({
+    rows,
+    refetch,
+    mutationFn: (row) =>
+      nestedReviewerProfileAffiliationsDestroy({
+        path: {
+          reviewer_profile_uuid: profile.uuid,
+          uuid: row.uuid,
+        },
+      }),
+    successMessage: translate(
+      'Selected affiliations have been successfully removed.',
+    ),
+    renderPartialSuccessMessage: (n) =>
+      translate('{n} affiliations have been removed.', { n }),
+    errorMessage: translate('Some affiliations could not be removed.'),
+    confirmation: {
+      title: translate('Remove selected affiliations'),
+      body: (
         <div>
           <p>{translate('You are about to remove these affiliations:')}</p>
-          <ul>{itemsList}</ul>
+          <ul>
+            {rows.map((row) => (
+              <li key={row.uuid}>
+                {row.organization_name_display}
+                {row.position_title && ` - ${row.position_title}`}
+              </li>
+            ))}
+          </ul>
         </div>
-      );
-
-      await waitForConfirmation(
-        dispatch,
-        translate('Remove selected affiliations'),
-        formattedMessage,
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      setIsRemoving(true);
-      const promises = rows.map((row) =>
-        nestedReviewerProfileAffiliationsDestroy({
-          path: {
-            reviewer_profile_uuid: profile.uuid,
-            uuid: row.uuid,
-          },
-        }),
-      );
-
-      await Promise.allSettled(promises).then((results) => {
-        const errors = results.filter((res) => res.status === 'rejected');
-        const success = results.filter((res) => res.status === 'fulfilled');
-
-        if (errors.length) {
-          if (success.length) {
-            showSuccess(
-              translate('{n} affiliations have been removed.', {
-                n: success.length,
-              }),
-            );
-          }
-          showErrorResponse(
-            (errors[0] as PromiseRejectedResult).reason,
-            translate('Some affiliations could not be removed.'),
-          );
-        } else {
-          showSuccess(
-            translate('Selected affiliations have been successfully removed.'),
-          );
-        }
-      });
-      refetch();
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to remove affiliations.'));
-    } finally {
-      setIsRemoving(false);
-    }
-  };
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionButton
+    <RemovalActionButton
       title={translate('Remove')}
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
-      variant="danger"
-      disabled={isRemoving}
-      disabledReason={translate('Removal in progress')}
+      action={mutate}
+      pending={isPending}
+      disabled={isPending}
+      disabledReason={isPending ? translate('Removal in progress') : undefined}
     />
   );
 };

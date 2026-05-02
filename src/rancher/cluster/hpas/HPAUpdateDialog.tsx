@@ -1,4 +1,4 @@
-import { useState, useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { useDispatch, useSelector } from 'react-redux';
 import { useEffectOnce } from 'react-use';
 import { reduxForm } from 'redux-form';
@@ -7,8 +7,7 @@ import { RancherHpa, rancherHpasUpdate } from 'waldur-js-client';
 import { StringField, SelectField, NumberField, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { ActionDialog } from '@/modal/ActionDialog';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { updateEntity } from '@/table/actions';
 
 import { MetricOption, HPAUpdateFormData } from './types';
@@ -27,44 +26,31 @@ interface OwnProps {
 }
 
 const useHPAUpdateDialog = (originalHPA: RancherHpa) => {
-  const [submitting, setSubmitting] = useState(false);
   const dispatch = useDispatch();
-  const callback = useCallback(
-    async (formData: HPAUpdateFormData) => {
-      try {
-        setSubmitting(true);
-        const response = await rancherHpasUpdate({
-          path: { uuid: originalHPA.uuid },
-          body: {
-            name: formData.name,
-            description: formData.description,
-            min_replicas: formData.min_replicas,
-            max_replicas: formData.max_replicas,
-            metrics: serializeMetrics(formData),
-          },
-        });
-        const hpa = response.data;
-        dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to update horizontal pod autoscaler.'),
-          ),
-        );
-        setSubmitting(false);
-        return;
-      }
-      dispatch(
-        showSuccess(translate('Horizontal pod autoscaler has been updated.')),
-      );
-      dispatch(closeModalDialog());
+
+  const updateHPAMutation = useManagedMutation<any, any, HPAUpdateFormData>({
+    mutationFn: (formData) =>
+      rancherHpasUpdate({
+        path: { uuid: originalHPA.uuid },
+        body: {
+          name: formData.name,
+          description: formData.description,
+          min_replicas: formData.min_replicas,
+          max_replicas: formData.max_replicas,
+          metrics: serializeMetrics(formData),
+        },
+      }),
+    successMessage: translate('Horizontal pod autoscaler has been updated.'),
+    errorMessage: translate('Unable to update horizontal pod autoscaler.'),
+    onSuccess: (response: any) => {
+      const hpa = response.data;
+      dispatch(updateEntity('rancher-hpas', hpa.uuid, hpa));
     },
-    [dispatch],
-  );
+  });
+
   return {
-    submitting,
-    callback,
+    submitting: updateHPAMutation.isPending,
+    callback: (formData) => updateHPAMutation.mutateAsync(formData),
   };
 };
 

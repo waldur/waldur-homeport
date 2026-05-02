@@ -1,9 +1,8 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditAction } from '@/form/EditAction';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { RemoteSyncActionProps } from './types';
 
@@ -17,17 +16,15 @@ export const RemoteSyncEditAction = ({
   row,
   refetch,
 }: RemoteSyncActionProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openFormDialog = useCallback(
     () =>
-      dispatch(
-        openModalDialog(RemoteSyncFormDialog, {
-          remoteSync: row,
-          refetch,
-          size: 'lg',
-        }),
-      ),
-    [dispatch],
+      openDialog(RemoteSyncFormDialog, {
+        remoteSync: row,
+        refetch,
+        size: 'lg',
+      }),
+    [],
   );
 
   return <EditAction action={openFormDialog} />;

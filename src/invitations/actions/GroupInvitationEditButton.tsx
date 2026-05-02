@@ -1,14 +1,15 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { GroupInvitation } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
@@ -22,9 +23,9 @@ export const GroupInvitationEditButton: FC<{
   row: GroupInvitation;
   refetch(): void;
 }> = ({ row, refetch }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const roles = useMemo(
     () =>
@@ -43,15 +44,13 @@ export const GroupInvitationEditButton: FC<{
   );
 
   const callback = () =>
-    dispatch(
-      openModalDialog(GroupInvitationEditDialog, {
-        resolve: {
-          refetch,
-          roles,
-          invitation: row,
-        },
-      }),
-    );
+    openDialog(GroupInvitationEditDialog, {
+      resolve: {
+        refetch,
+        roles,
+        invitation: row,
+      },
+    });
 
   return (
     <ActionItem

@@ -17,9 +17,8 @@ import { AsyncSelectFieldFinal } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 type Scope = 'resource' | 'resource_project';
 
@@ -32,9 +31,6 @@ interface AddUserResolve {
 }
 
 export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   const targetContentType =
     resolve.scope === 'resource_project' ? 'resource_project' : 'resource';
 
@@ -55,29 +51,24 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
     },
   });
 
-  const submit = useCallback(
-    async (formData) => {
-      try {
-        const apiFn =
-          resolve.scope === 'resource_project'
-            ? marketplaceResourceProjectsAddUser
-            : marketplaceResourcesAddUser;
-        await apiFn({
-          path: { uuid: resolve.scopeUuid },
-          body: {
-            user: formData.user.uuid,
-            role: formData.role.uuid,
-          } as any,
-        });
-        showSuccess(translate('User has been assigned successfully.'));
-        await resolve.refetch();
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(error, translate('Unable to assign user.'));
-      }
+  const assignMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
+      const apiFn =
+        resolve.scope === 'resource_project'
+          ? marketplaceResourceProjectsAddUser
+          : marketplaceResourcesAddUser;
+      return apiFn({
+        path: { uuid: resolve.scopeUuid },
+        body: {
+          user: formData.user.uuid,
+          role: formData.role.uuid,
+        } as any,
+      });
     },
-    [resolve, showSuccess, showErrorResponse, closeDialog],
-  );
+    successMessage: translate('User has been assigned successfully.'),
+    errorMessage: translate('Unable to assign user.'),
+    refetch: resolve.refetch,
+  });
 
   const loadUsers = useCallback(
     (query, prevOptions, page) =>
@@ -101,7 +92,13 @@ export const AddUserDialog: FC<{ resolve: AddUserResolve }> = ({ resolve }) => {
   );
 
   return (
-    <Form onSubmit={submit}>
+    <Form
+      onSubmit={(values) =>
+        assignMutation.mutateAsync(values).catch(() => {
+          /* handled */
+        })
+      }
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

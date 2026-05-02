@@ -4,18 +4,18 @@ import {
 } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { FeaturedIcon } from '@/core/FeaturedIcon';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CompactActionButton } from '@/table/CompactActionButton';
 import { getProject } from '@/workspace/selectors';
 
 import { ProjectRecoveryModal } from './ProjectRecoveryModal';
 
 export const RemovedProjectWarningBar: FC = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const project = useSelector(getProject);
   const { state } = useCurrentStateAndParams();
 
@@ -28,12 +28,10 @@ export const RemovedProjectWarningBar: FC = () => {
   }
 
   const openRecoveryModal = () => {
-    dispatch(
-      openModalDialog(ProjectRecoveryModal, {
-        resolve: { project },
-        size: 'lg',
-      }),
-    );
+    openDialog(ProjectRecoveryModal, {
+      resolve: { project },
+      size: 'lg',
+    });
   };
 
   return (

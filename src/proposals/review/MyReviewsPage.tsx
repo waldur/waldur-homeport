@@ -15,6 +15,7 @@ import {
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 import { renderFieldOrDash } from '@/table/utils';
+import { useUser } from '@/workspace/hooks';
 import { getUser } from '@/workspace/selectors';
 
 import { EndingField } from '../EndingField';
@@ -39,7 +40,7 @@ const filtersSelector = createSelector(
 const mandatoryFields = ['uuid', 'proposal_name', 'state'];
 
 export const MyReviewsPage: FC = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const filter = useSelector(filtersSelector);
   const [hasProfile, setHasProfile] = useState<boolean | null>(null);
   const tabs = useMyReviewsTabs();

@@ -1,11 +1,11 @@
-import { useMutation } from '@tanstack/react-query';
 import {
   adminArrowVendorOfferingMappingsDestroy,
   ArrowVendorOfferingMapping,
 } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const VendorOfferingMappingDeleteAction = ({
   row,
@@ -14,24 +14,30 @@ export const VendorOfferingMappingDeleteAction = ({
   row: ArrowVendorOfferingMapping;
   refetch: () => void;
 }) => {
-  const { mutateAsync } = useMutation({
-    mutationFn: (uuid: string) =>
-      adminArrowVendorOfferingMappingsDestroy({ path: { uuid } }),
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      adminArrowVendorOfferingMappingsDestroy({ path: { uuid: row.uuid } }),
+    refetch,
+
+    confirmation: {
+      title: translate('Confirm deletion'),
+
+      body: translate(
+        'Are you sure you want to delete the mapping for "{vendor}"?',
+        { vendor: row.arrow_vendor_name },
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
   });
 
   return (
-    <DeleteButton
-      row={row}
-      apiFunction={async (r) => {
-        await mutateAsync(r.uuid);
-      }}
-      refetch={refetch}
-      confirmTitle={translate('Confirm deletion')}
-      confirmMessage={translate(
-        'Are you sure you want to delete the mapping for "{vendor}"?',
-        { vendor: row.arrow_vendor_name },
-      )}
+    <RemovalActionItem
       title={translate('Delete')}
+      action={mutate}
+      disabled={isPending}
     />
   );
 };

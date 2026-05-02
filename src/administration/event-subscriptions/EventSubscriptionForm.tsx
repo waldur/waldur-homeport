@@ -5,11 +5,10 @@ import { TextField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { useInvalidateEventSubscriptions } from './utils';
+import { EVENT_SUBSCRIPTIONS_QUERY_KEY } from './utils';
 
 interface EventSubscriptionFormProps {
   resolve: {
@@ -21,10 +20,6 @@ interface EventSubscriptionFormProps {
 export const EventSubscriptionForm = ({
   resolve,
 }: EventSubscriptionFormProps) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-  const invalidateEventSubscriptions = useInvalidateEventSubscriptions();
-
   const isEdit = Boolean(resolve.subscription);
 
   const initialValues = isEdit
@@ -33,36 +28,36 @@ export const EventSubscriptionForm = ({
       }
     : undefined;
 
-  const onSubmit = async (formValues) => {
-    try {
+  const onSubmitMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formValues) => {
       if (isEdit) {
-        // Note: Currently there's no partialUpdate for event subscriptions in the SDK
-        showSuccess(translate('Event subscription has been updated'));
+        return Promise.resolve() as any;
       } else {
-        await eventSubscriptionsCreate({
+        return eventSubscriptionsCreate({
           body: {
             description: formValues.description || undefined,
           },
         });
-        showSuccess(translate('Event subscription has been created'));
       }
-      closeDialog();
-      await resolve.refetch();
-      invalidateEventSubscriptions();
-    } catch (error) {
-      showErrorResponse(
-        error,
-        isEdit
-          ? translate('Unable to update the event subscription.')
-          : translate('Unable to create an event subscription.'),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('Event subscription has been updated')
+      : translate('Event subscription has been created'),
+    errorMessage: isEdit
+      ? translate('Unable to update the event subscription.')
+      : translate('Unable to create an event subscription.'),
+    refetch: resolve.refetch,
+    invalidateQueries: [
+      {
+        queryKey: EVENT_SUBSCRIPTIONS_QUERY_KEY,
+      },
+    ],
+  });
 
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

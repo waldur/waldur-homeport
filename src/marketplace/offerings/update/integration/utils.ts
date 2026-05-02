@@ -1,5 +1,4 @@
 import { useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 import { SubmissionError } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateIntegration,
@@ -12,8 +11,8 @@ import {
   getPluginOptionsSerializer,
   getSecretOptionsSerializer,
 } from '@/marketplace/common/registry';
-import { closeModalDialog } from '@/modal/actions';
-import { showError, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 export const SCRIPT_ROWS = [
   { label: translate('Script language'), type: 'language' },
@@ -45,7 +44,10 @@ export const useUpdateOfferingIntegration = (
   offering: ProviderOfferingDetails,
   refetch?,
 ) => {
-  const dispatch = useDispatch();
+  const { showError, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
+
   const update = useCallback(
     async (formData: OfferingIntegrationUpdateRequest) => {
       if (formData.plugin_options) {
@@ -65,17 +67,15 @@ export const useUpdateOfferingIntegration = (
           path: { uuid: offering.uuid },
           body: formData,
         });
-        dispatch(
-          showSuccess(translate('Offering has been updated successfully.')),
-        );
+        showSuccess(translate('Offering has been updated successfully.'));
         if (refetch) await refetch();
-        dispatch(closeModalDialog());
+        closeDialog();
       } catch (error) {
-        dispatch(showError(translate('Unable to update offering.')));
+        showError(translate('Unable to update offering.'));
         throw new SubmissionError(error);
       }
     },
-    [dispatch, offering, refetch],
+    [offering, refetch],
   );
 
   return { update };

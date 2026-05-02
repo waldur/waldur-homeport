@@ -1,5 +1,5 @@
 import { useMemo } from 'react';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import {
   marketplaceResourcesUpdateOptions,
@@ -11,8 +11,7 @@ import { translate } from '@/i18n';
 import { OptionsForm } from '@/marketplace/common/OptionsForm';
 import { Offering } from '@/marketplace/types';
 import { ActionDialog } from '@/modal/ActionDialog';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export interface UpdateResourceOptionDialogProps {
   resolve: {
@@ -48,30 +47,26 @@ export const UpdateResourceOptionDialog = connect<
       };
     }, [name, option]);
 
-    const dispatch = useDispatch();
-    const submitForm = async (formData) => {
-      try {
-        await marketplaceResourcesUpdateOptions({
+    const updateMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        marketplaceResourcesUpdateOptions({
           path: { uuid: props.resolve.resource.uuid },
           body: {
             options: formData.attributes,
           },
-        });
-        dispatch(showSuccess(translate('Options have been updated')));
-        if (props.resolve.refetch) {
-          await props.resolve.refetch();
-        }
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to update options.')));
-      }
-    };
+        }),
+      successMessage: translate('Options have been updated'),
+      errorMessage: translate('Unable to update options.'),
+      refetch: props.resolve.refetch,
+    });
 
     return (
       <ActionDialog
         title={translate('Update option')}
         submitLabel={translate('Update')}
-        onSubmit={props.handleSubmit(submitForm)}
+        onSubmit={props.handleSubmit((values: any) =>
+          updateMutation.mutateAsync(values),
+        )}
         submitting={props.submitting}
         invalid={props.invalid}
       >

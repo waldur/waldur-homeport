@@ -1,9 +1,10 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import {
   marketplaceResourcesRenew,
   marketplaceResourcesRetrieve,
   Resource,
+  ResourceRenewRequest,
 } from 'waldur-js-client';
 
 import { fileSerializer, formDataOptions } from '@/core/api';
@@ -15,8 +16,7 @@ import {
   getFormLimitParser,
   getFormLimitSerializer,
 } from '@/marketplace/common/registry';
-import { useModal } from '@/modal/hooks';
-import { useNotify } from '@/store/hooks';
+import { useBatchMutation } from '@/modal/useBatchMutation';
 import { Wizard } from '@/wizard';
 
 import { Step1UpdateLimits } from './Step1UpdateLimits';
@@ -63,9 +63,6 @@ const getResourceUuid = (resource) =>
 export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
   resolve,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
   // Always fetch the marketplace resource to get end_date and other fields
   // that may not be on the backend resource object (e.g. OpenStack tenant)
   const marketplaceResourceUuid = resolve.resource
@@ -98,65 +95,48 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   const isMulti = resources.length > 1;
 
-  const onSubmit = useCallback(
-    async (formData: RenewAllocationFormData) => {
-      try {
-        const promises = resources.map((resource) => {
-          const resourceUuid = getResourceUuid(resource);
-          const limitSerializer = getFormLimitSerializer(
-            resource.offering_type || '',
-          );
-          const serializedLimits = limitSerializer(
-            formData[resourceUuid]?.limits || {},
-          );
+  const { mutateAsync } = useBatchMutation({
+    rows: resources,
+    refetch: resolve.refetch,
+    mutationFn: (resource, formData: RenewAllocationFormData) => {
+      const resourceUuid = getResourceUuid(resource);
+      const limitSerializer = getFormLimitSerializer(
+        resource.offering_type || '',
+      );
+      const serializedLimits = limitSerializer(
+        formData[resourceUuid]?.limits || {},
+      );
 
-          const body: Record<string, unknown> = {
-            extension_months: formData.extension_months,
-            limits: serializedLimits,
-          };
-          if (formData.request_comment) {
-            body.request_comment = formData.request_comment;
-          }
-          if (formData.attachment) {
-            body.attachment = fileSerializer(formData.attachment);
-          }
-          const hasFile = formData.attachment instanceof File;
-          return marketplaceResourcesRenew({
-            path: { uuid: resourceUuid },
-            body: body as any,
-            ...(hasFile ? formDataOptions : {}),
-          });
-        });
-
-        const results = await Promise.allSettled(promises);
-        const errorResults = results.filter((res) => res.status === 'rejected');
-        const successResults = results.filter(
-          (res) => res.status === 'fulfilled',
-        );
-
-        if (successResults.length) {
-          resolve.refetch?.();
-          if (isMulti) {
-            showSuccess(
-              translate('Renewal request has been created for {n} resources.', {
-                n: successResults.length,
-              }),
-            );
-          } else {
-            showSuccess(translate('Renewal request has been created.'));
-          }
-        }
-        if (errorResults.length) {
-          showErrorResponse(errorResults[0].reason);
-        } else {
-          closeDialog();
-        }
-      } catch (e) {
-        showErrorResponse(e, translate('Unable to send renewal request.'));
+      const body: ResourceRenewRequest = {
+        extension_months: formData.extension_months,
+        limits: serializedLimits,
+      };
+      if (formData.request_comment) {
+        body.request_comment = formData.request_comment;
       }
+      if (formData.attachment) {
+        body.attachment = fileSerializer(formData.attachment);
+      }
+      const hasFile = formData.attachment instanceof File;
+      return marketplaceResourcesRenew({
+        path: { uuid: resourceUuid },
+        body,
+        ...(hasFile ? formDataOptions : {}),
+      });
     },
-    [resources, resolve, showSuccess, showErrorResponse, closeDialog, isMulti],
-  );
+    successMessage: () =>
+      isMulti
+        ? translate('Renewal request has been created for {n} resources.', {
+            n: resources.length,
+          })
+        : translate('Renewal request has been created.'),
+    renderPartialSuccessMessage: (n) =>
+      translate('Renewal request has been created for {n} resources.', {
+        n,
+      }),
+    renderErrorMessage: (n) =>
+      translate('{n} renewal requests could not be created.', { n }),
+  });
 
   if (isLoading) {
     return (
@@ -197,7 +177,7 @@ export const RenewAllocationDialog: FC<RenewAllocationDialogProps> = ({
 
   return (
     <Wizard<RenewAllocationFormData>
-      onSubmit={onSubmit}
+      onSubmit={(formData) => mutateAsync(formData)}
       submitLabel={translate('Confirm')}
       steps={steps}
       wizardForms={WizardForms}

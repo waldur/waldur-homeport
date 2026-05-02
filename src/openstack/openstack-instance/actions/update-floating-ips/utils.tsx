@@ -1,14 +1,12 @@
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { useAsync } from 'react-use';
 import { formValueSelector, reduxForm } from 'redux-form';
 import { openstackInstancesUpdateFloatingIps } from 'waldur-js-client';
 import { OpenStackInstance } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadFloatingIps } from '@/openstack/api';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { type RootState } from '@/store/reducers';
 
 import { formatSubnet } from '../../utils';
@@ -56,7 +54,7 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
       })),
     ],
 
-    [resource.ports],
+    [],
   );
 
   const initialValues = useMemo<FloatingIPsFormData>(
@@ -68,14 +66,12 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
         subnet_name: floating_ip.subnet_name,
       })),
     }),
-    [resource.floating_ips],
+    [],
   );
 
-  const dispatch = useDispatch();
-
-  const submitRequest = async (formData: FloatingIPsFormData) => {
-    try {
-      await openstackInstancesUpdateFloatingIps({
+  const updateMutation = useManagedMutation<any, any, FloatingIPsFormData>({
+    mutationFn: (formData) =>
+      openstackInstancesUpdateFloatingIps({
         path: { uuid: resource.uuid },
         body: {
           floating_ips: formData.floating_ips
@@ -93,20 +89,14 @@ export const useFloatingIpsEditor = (resource: OpenStackInstance, refetch?) => {
               }
             }),
         },
-      });
-      dispatch(
-        showSuccess(translate('Floating IPs update has been scheduled.')),
-      );
-      if (refetch) {
-        await refetch();
-      }
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to update floating IPs.')),
-      );
-    }
-  };
+      }),
+    successMessage: translate('Floating IPs update has been scheduled.'),
+    errorMessage: translate('Unable to update floating IPs.'),
+    refetch,
+  });
+
+  const submitRequest = (formData: FloatingIPsFormData) =>
+    updateMutation.mutateAsync(formData);
   return { asyncState, initialValues, subnets, submitRequest, resource };
 };
 

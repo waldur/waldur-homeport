@@ -1,12 +1,11 @@
 import { FC, memo, useCallback, useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceOfferingTermsOfServiceList } from 'waldur-js-client';
 
 import { formatDate } from '@/core/dateUtils';
 import { StateIndicator } from '@/core/StateIndicator';
 import { translate } from '@/i18n';
 import { TosViewDialog } from '@/marketplace/offerings/update/tos/shared/TosViewDialog';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
 import Table from '@/table/Table';
@@ -22,11 +21,11 @@ interface OfferingTosTableProps {
 
 export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
   ({ offering, onTosAction }) => {
-    const dispatch = useDispatch();
+    const { openDialog } = useModal();
 
     const filter = useMemo(
       () => ({ offering_uuid: offering.uuid, is_active: true }),
-      [offering.uuid],
+      [],
     );
 
     const tableProps = useTable({
@@ -42,14 +41,12 @@ export const OfferingTosTable: FC<OfferingTosTableProps> = memo(
 
     const openViewDialog = useCallback(
       (tos) => {
-        dispatch(
-          openModalDialog(TosViewDialog, {
-            resolve: { tos, offering, refetch: handleRefetch },
-            size: 'lg',
-          }),
-        );
+        openDialog(TosViewDialog, {
+          resolve: { tos, offering, refetch: handleRefetch },
+          size: 'lg',
+        });
       },
-      [dispatch, offering, handleRefetch],
+      [offering, handleRefetch],
     );
 
     const columns = useMemo(

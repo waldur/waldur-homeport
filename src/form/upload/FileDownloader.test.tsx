@@ -3,12 +3,12 @@ import userEvent from '@testing-library/user-event';
 import { beforeEach, describe, expect, it, vi } from 'vitest';
 
 import * as api from '@/core/api';
-import * as store from '@/store/hooks';
+import * as store from '@/store/notify';
 
 import { FileDownloader } from './FileDownloader';
 
 vi.mock('@/core/api');
-vi.mock('@/store/hooks');
+vi.mock('@/store/notify');
 
 describe('FileDownloader', () => {
   const mockUrl = 'http://example.com/file';

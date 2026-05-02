@@ -1,14 +1,13 @@
 import { RocketLaunchIcon } from '@phosphor-icons/react';
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { marketplaceResourcesList } from 'waldur-js-client';
 
 import { fetchResultCount } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { router } from '@/router';
 
@@ -18,7 +17,7 @@ import { ACTIVE_RESOURCE_STATES, groupResourcesByProject } from './utils';
 const MAX_RESOURCES_DISPLAY = 5;
 
 export const UserResourcesDialog: FC = () => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
 
   const { data, isLoading, error } = useQuery({
     queryKey: ['user-resources-onboarding'],
@@ -39,7 +38,7 @@ export const UserResourcesDialog: FC = () => {
   });
 
   const handleViewAllResources = () => {
-    dispatch(closeModalDialog());
+    closeDialog();
     router.stateService.go('all-resources');
   };
 

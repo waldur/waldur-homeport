@@ -1,9 +1,8 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 const VendorOfferingMappingCreateDialog = lazyComponent(() =>
@@ -21,20 +20,16 @@ export const VendorOfferingMappingCreateButton = ({
   settings,
   refetch,
 }: VendorOfferingMappingCreateButtonProps) => {
-  const dispatch = useDispatch();
-
-  const openDialog = () => {
-    dispatch(
-      openModalDialog(VendorOfferingMappingCreateDialog, {
-        resolve: { settings, refetch },
-      }),
-    );
-  };
+  const { openDialog } = useModal();
 
   return (
     <ActionButton
       title={translate('Add mapping')}
-      action={openDialog}
+      action={() =>
+        openDialog(VendorOfferingMappingCreateDialog, {
+          resolve: { settings, refetch },
+        })
+      }
       iconNode={<PlusCircleIcon weight="bold" />}
       variant="primary"
       disabled={!settings?.uuid}

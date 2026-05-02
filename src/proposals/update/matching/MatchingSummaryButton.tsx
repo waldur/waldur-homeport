@@ -1,9 +1,8 @@
 import { QuestionIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 import type { MatchingConfig } from './types';
@@ -21,16 +20,14 @@ interface MatchingSummaryButtonProps {
 export const MatchingSummaryButton = ({
   config,
 }: MatchingSummaryButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionButton
       action={() =>
-        dispatch(
-          openModalDialog(MatchingSummaryDialog, {
-            resolve: { config },
-            size: 'xl',
-          }),
-        )
+        openDialog(MatchingSummaryDialog, {
+          resolve: { config },
+          size: 'xl',
+        })
       }
       title={translate('How it works')}
       iconNode={<QuestionIcon weight="bold" />}

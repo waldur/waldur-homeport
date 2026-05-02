@@ -12,17 +12,12 @@ import { ImageField } from '@/form/ImageField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { useInvalidateShortcuts } from './utils';
+import { SHORTCUTS_QUERY_KEY } from './utils';
 
 export const QuickShortcutForm = ({ resolve }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-  const invalidateShortcuts = useInvalidateShortcuts();
-
   const isEdit = Boolean(resolve.shortcut);
 
   const initialValues = isEdit
@@ -34,49 +29,42 @@ export const QuickShortcutForm = ({ resolve }) => {
       }
     : undefined;
 
-  const onSubmit = async (formValues) => {
-    try {
+  const onSubmitMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formValues) => {
+      const payload = {
+        name: formValues.name,
+        description: formValues.description,
+        link: formValues.link,
+        image: fileSerializer(formValues.image),
+      };
+
       if (isEdit) {
-        await externalLinksPartialUpdate({
+        return externalLinksPartialUpdate({
           path: { uuid: resolve.shortcut.uuid },
-          body: {
-            name: formValues.name,
-            description: formValues.description,
-            link: formValues.link,
-            image: fileSerializer(formValues.image),
-          },
+          body: payload,
           ...formDataOptions,
         });
-        showSuccess(translate('Quick shortcut has been updated'));
       } else {
-        await externalLinksCreate({
-          body: {
-            name: formValues.name,
-            description: formValues.description,
-            link: formValues.link,
-            image: fileSerializer(formValues.image),
-          },
+        return externalLinksCreate({
+          body: payload,
           ...formDataOptions,
         });
-        showSuccess(translate('Quick shortcut has been created'));
       }
-      closeDialog();
-      await resolve.refetch();
-      invalidateShortcuts();
-    } catch (error) {
-      showErrorResponse(
-        error,
-        isEdit
-          ? translate('Unable to update the quick shortcut.')
-          : translate('Unable to create a quick shortcut.'),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('Quick shortcut has been updated')
+      : translate('Quick shortcut has been created'),
+    errorMessage: isEdit
+      ? translate('Unable to update the quick shortcut.')
+      : translate('Unable to create a quick shortcut.'),
+    refetch: resolve.refetch,
+    invalidateQueries: [{ queryKey: SHORTCUTS_QUERY_KEY }],
+  });
 
   return (
     <Form
       initialValues={initialValues}
-      onSubmit={onSubmit}
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

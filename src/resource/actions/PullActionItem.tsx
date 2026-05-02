@@ -1,11 +1,10 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { ReactElement } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { ActionItem, ActionItemProps } from './ActionItem';
+import { ActionItem } from './ActionItem';
 import { validateState } from './base';
 import { ActionContext } from './types';
 import { useValidators } from './useValidators';
@@ -26,42 +25,27 @@ const hasBackendId = (ctx: ActionContext) =>
 
 const validators = [validateState('OK', 'ERRED'), hasBackendId];
 
-const usePull = ({
-  resource,
-  apiMethod,
-  refetch,
-}: Pick<PullActionItemProps<any>, 'resource' | 'apiMethod' | 'refetch'>) => {
-  const dispatch = useDispatch();
-  const action = async () => {
-    try {
-      await apiMethod(resource.uuid);
-      dispatch(showSuccess(translate('Synchronisation has been scheduled.')));
-      if (refetch) {
-        await refetch();
-      }
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to synchronise resource.')),
-      );
-    }
-  };
-  const { tooltip, disabled } = useValidators(validators, resource);
-  return {
-    action,
-    title: translate('Synchronise'),
-    tooltip,
-    disabled,
-    important: true,
-  } as ActionItemProps;
-};
-
-export const PullActionItem: <T extends { uuid?: string; backend_id?: string }>(
+export const PullActionItem = <
+  T extends { uuid?: string; backend_id?: string },
+>(
   props: PullActionItemProps<T>,
-) => ReactElement = (props) => {
-  const buttonProps = usePull(props);
+): ReactElement => {
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => props.apiMethod(props.resource.uuid),
+    successMessage: translate('Synchronisation has been scheduled.'),
+    errorMessage: translate('Unable to synchronise resource.'),
+    refetch: props.refetch,
+  });
+
+  const { tooltip, disabled } = useValidators(validators, props.resource);
+
   return (
     <ActionItem
-      {...buttonProps}
+      title={translate('Synchronise')}
+      action={mutate}
+      disabled={disabled || isPending}
+      tooltip={tooltip}
+      important
       as={props.as}
       staff={props.staff}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}

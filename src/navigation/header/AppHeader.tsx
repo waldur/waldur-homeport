@@ -1,7 +1,7 @@
 import { CaretLeftIcon, ListIcon } from '@phosphor-icons/react';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { FunctionComponent, useState } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useMediaQuery } from 'react-responsive';
 import { isDirty } from 'redux-form';
 
@@ -11,7 +11,7 @@ import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { hasSupport as hasSupportSelector } from '@/issues/hooks';
 import { ORDER_FORM_ID } from '@/marketplace/details/constants';
-import { waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { RootState } from '@/store/reducers';
 import { useUser } from '@/workspace/hooks';
 
@@ -41,7 +41,7 @@ interface AppHeaderProps {
 export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   hasBreadcrumbs,
 }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
   const {
     state: { name: stateName },
   } = useCurrentStateAndParams();
@@ -60,8 +60,7 @@ export const AppHeader: FunctionComponent<AppHeaderProps> = ({
   const onGoBack = async () => {
     if (isOrderFormDirty) {
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Unsaved changes'),
           translate(
             'You have unsaved changes. If you leave this page, your changes will be lost.',

@@ -8,18 +8,14 @@ import { required } from '@/core/validators';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { useModal } from '@/modal/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadVolumeTypes } from '@/openstack/api';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { useNotify } from '@/store/hooks';
 
 export const RetypeDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-
   const asyncState = useQuery({
     queryKey: ['volumeTypes', resource.tenant_uuid, resource.type],
     queryFn: async () => {
@@ -40,25 +36,24 @@ export const RetypeDialog: FC<ActionDialogProps> = ({
     staleTime: UI_STALE_TIME,
   });
 
-  const submitRequest = async (formData) => {
-    try {
-      await openstackVolumesRetype({
+  const retypeMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      openstackVolumesRetype({
         path: { uuid: resource.uuid },
         body: { type: formData.type.value },
-      });
-      showSuccess(translate('Volume has been retyped.'));
-      closeDialog();
-      if (refetch) {
-        await refetch();
-      }
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to retype volume.'));
-    }
-  };
+      }),
+    successMessage: translate('Volume has been retyped.'),
+    errorMessage: translate('Unable to retype volume.'),
+    refetch,
+  });
 
   return (
     <Form
-      onSubmit={submitRequest}
+      onSubmit={(values) =>
+        retypeMutation.mutateAsync(values).catch(() => {
+          /* error handled by useManagedMutation */
+        })
+      }
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <AsyncActionDialog

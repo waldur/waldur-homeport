@@ -12,7 +12,7 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useBreadcrumbs } from '@/navigation/context';
 import { IBreadcrumbItem } from '@/navigation/types';
-import { showRedirectMessage } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { createFetcher } from '@/table/api';
 import { CompactActionButton } from '@/table/CompactActionButton';
@@ -50,20 +50,19 @@ export const AvailableOrganizationsToJoin: FC = () => {
   );
 
   const router = useRouter();
+  const { showRedirectMessage } = useNotify();
   const continueToAutentification = useCallback(
     (invitation: GroupInvitation) => {
-      dispatch(
-        showRedirectMessage(
-          translate('You are requesting to join {name}', {
-            name: invitation.customer_name,
-          }),
-          translate('Log in to proceed with your request.'),
-        ),
+      showRedirectMessage(
+        translate('You are requesting to join {name}', {
+          name: invitation.customer_name,
+        }),
+        translate('Log in to proceed with your request.'),
       );
       GroupInvitationTokenStorage.set(invitation.uuid);
       router.stateService.go('login');
     },
-    [router],
+    [router, showRedirectMessage],
   );
 
   const breadcrumbItems = useMemo<IBreadcrumbItem[]>(() => {

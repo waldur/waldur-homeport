@@ -10,9 +10,8 @@ import { required } from '@/core/validators';
 import { FormFooter, SelectField } from '@/form';
 import { translate } from '@/i18n';
 import { getCategories } from '@/marketplace/common/api';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { CATEGORY_FORM_ID } from './constants';
 
@@ -29,25 +28,18 @@ export const EditCategoryDialog = reduxForm<FormData, OwnProps>({
 })(({ resolve, handleSubmit, invalid, submitting }) => {
   const dispatch = useDispatch();
 
-  const submitRequest = async (formData: FormData) => {
-    try {
-      await marketplaceProviderOfferingsUpdateDescription({
+  const submitRequestMutation = useManagedMutation<any, any, FormData>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsUpdateDescription({
         path: { uuid: resolve.offering.uuid },
         body: {
           category: formData.category.url,
         },
-      });
-      dispatch(showSuccess(translate('Category has been updated.')));
-      dispatch(closeModalDialog());
-      if (resolve.refetch) {
-        await resolve.refetch();
-      }
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to update category')),
-      );
-    }
-  };
+      }),
+    successMessage: translate('Category has been updated.'),
+    errorMessage: translate('Unable to update category'),
+    refetch: resolve.refetch,
+  });
 
   const queryData = useQuery({
     queryKey: ['EditCategoryDialog'],
@@ -64,10 +56,14 @@ export const EditCategoryDialog = reduxForm<FormData, OwnProps>({
         ),
       );
     }
-  }, [queryData.data, dispatch, resolve.offering.category]);
+  }, [queryData.data, resolve.offering.category]);
 
   return (
-    <form onSubmit={handleSubmit(submitRequest)}>
+    <form
+      onSubmit={handleSubmit((values) =>
+        submitRequestMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Edit category')}
         footer={

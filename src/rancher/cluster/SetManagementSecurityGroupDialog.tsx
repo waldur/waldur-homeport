@@ -1,10 +1,12 @@
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { formValueSelector } from 'redux-form';
-import { rancherClustersCreateManagementSecurityGroup } from 'waldur-js-client';
+import {
+  RancherClusterRequest,
+  rancherClustersCreateManagementSecurityGroup,
+} from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import {
   getCIDRPlaceholder,
   validateIPv4CIDR,
@@ -12,7 +14,6 @@ import {
 } from '@/openstack/openstack-security-groups/rule-editor/CIDRField';
 import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { RootState } from '@/store/reducers';
 
 const selector = formValueSelector(RESOURCE_ACTION_FORM);
@@ -21,35 +22,24 @@ const ethertypeSelector = (state: RootState) => selector(state, 'ethertype');
 
 export const SetManagementSecurityGroupDialog = ({ clusterId }) => {
   const ethertype = useSelector(ethertypeSelector);
-  const dispatch = useDispatch();
-
-  const submitForm = useCallback(
-    async (formData) => {
-      try {
-        await rancherClustersCreateManagementSecurityGroup({
-          path: { uuid: clusterId },
-          body: formData,
-        });
-        dispatch(
-          showSuccess(translate('Management security group has been updated.')),
-        );
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to update management security group.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
+  const submitFormMutation = useManagedMutation<
+    any,
+    any,
+    RancherClusterRequest
+  >({
+    mutationFn: (formData) =>
+      rancherClustersCreateManagementSecurityGroup({
+        path: { uuid: clusterId },
+        body: formData,
+      }),
+    successMessage: translate('Management security group has been updated.'),
+    errorMessage: translate('Unable to update management security group.'),
+  });
 
   return (
     <ResourceActionDialog
       dialogTitle={translate('Set management security group')}
-      submitForm={submitForm}
+      submitForm={(values) => submitFormMutation.mutateAsync(values)}
       formFields={[
         {
           name: 'ethertype',
@@ -59,7 +49,6 @@ export const SetManagementSecurityGroupDialog = ({ clusterId }) => {
             { value: 'IPv4', label: translate('IPv4') },
             { value: 'IPv6', label: translate('IPv6') },
           ],
-
           required: true,
         },
         {

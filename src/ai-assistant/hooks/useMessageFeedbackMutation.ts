@@ -1,12 +1,10 @@
-import { useMutation, useQueryClient } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import {
   chatMessagesFeedback,
   type FeedbackCategoryEnum,
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface FeedbackSubmitBody {
   score: boolean;
@@ -15,11 +13,8 @@ interface FeedbackSubmitBody {
 }
 
 export const useMessageFeedbackMutation = (messageUuid: string) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
-  const mutation = useMutation({
-    mutationFn: async (body: FeedbackSubmitBody) => {
+  const mutation = useManagedMutation<any, any, FeedbackSubmitBody>({
+    mutationFn: async (body) => {
       const response = await chatMessagesFeedback({
         path: { uuid: messageUuid },
         body,
@@ -29,18 +24,12 @@ export const useMessageFeedbackMutation = (messageUuid: string) => {
       }
       return response.data;
     },
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Feedback has been submitted')));
-      void queryClient.invalidateQueries({
-        queryKey: ['table', 'SupportAIAssistantLogsList'],
-      });
-      void queryClient.invalidateQueries({ queryKey: ['chatMessages'] });
-    },
-    onError: (error) => {
-      dispatch(
-        showErrorResponse(error, translate('Unable to submit feedback.')),
-      );
-    },
+    successMessage: translate('Feedback has been submitted'),
+    errorMessage: translate('Unable to submit feedback.'),
+    invalidateQueries: [
+      { queryKey: ['table', 'SupportAIAssistantLogsList'] },
+      { queryKey: ['chatMessages'] },
+    ],
   });
 
   return {

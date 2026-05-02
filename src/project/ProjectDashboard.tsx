@@ -2,7 +2,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Col, Row } from 'react-bootstrap';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { projectsListUsersList, projectsStatsRetrieve } from 'waldur-js-client';
 
 import { count, parseSelectData } from '@/core/api';
@@ -21,11 +21,11 @@ import { translate } from '@/i18n';
 import { useCreateInvitation } from '@/invitations/actions/useCreateInvitation';
 import { AggregateLimitWidget } from '@/marketplace/aggregate-limits/AggregateLimitWidget';
 import { NON_TERMINATED_STATES } from '@/marketplace/resources/list/constants';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { useUser } from '@/workspace/hooks';
-import { getProject, getUser } from '@/workspace/selectors';
+import { getProject } from '@/workspace/selectors';
 
 import { ProjectLimitUsageBasedResources } from './dashboard/ProjectLimitUsageBasedResources';
 import { ProjectDashboardCostLimits } from './ProjectDashboardCostLimits';
@@ -43,9 +43,9 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
     MarketplaceFeatures.conceal_prices,
   );
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
-  const userFromSelector = useSelector(getUser);
+  const userFromSelector = useUser();
   const project = useSelector(getProject);
 
   const router = useRouter();
@@ -64,21 +64,17 @@ export const ProjectDashboard: FunctionComponent<{}> = () => {
       }));
 
   const handleEditStaffNotes = () => {
-    dispatch(
-      openModalDialog(EditFieldDialog, {
-        resolve: { project, name: 'staff_notes' },
-        size: 'lg',
-      }),
-    );
+    openDialog(EditFieldDialog, {
+      resolve: { project, name: 'staff_notes' },
+      size: 'lg',
+    });
   };
 
   const handleEditDescription = () => {
-    dispatch(
-      openModalDialog(EditFieldDialog, {
-        resolve: { project, name: 'description' },
-        size: 'lg',
-      }),
-    );
+    openDialog(EditFieldDialog, {
+      resolve: { project, name: 'description' },
+      size: 'lg',
+    });
   };
 
   const { data: teamData } = useQuery({

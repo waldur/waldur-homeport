@@ -1,27 +1,46 @@
 import { marketplaceTagsDestroy, Tag } from 'waldur-js-client';
 
-import { DeleteButton } from '@/core/buttons';
 import { formatJsxTemplate, translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 interface TagDeleteButtonProps {
   row: Tag;
   refetch: () => void;
 }
 
-export const TagDeleteButton = (props: TagDeleteButtonProps) => (
-  <DeleteButton
-    row={props.row}
-    apiFunction={(r) => marketplaceTagsDestroy({ path: { uuid: r.uuid } })}
-    refetch={props.refetch}
-    confirmTitle={translate('Confirmation')}
-    confirmMessage={(r) =>
-      translate(
+export const TagDeleteButton = (props: TagDeleteButtonProps) => {
+  const { mutate: mutate, isPending: isPending } = useManagedMutation<
+    any,
+    any,
+    void
+  >({
+    mutationFn: () =>
+      marketplaceTagsDestroy({ path: { uuid: props.row.uuid } }),
+    refetch: props.refetch,
+
+    confirmation: {
+      title: translate('Confirmation'),
+
+      body: translate(
         'Are you sure you want to delete the {name} tag?',
-        { name: <strong>{r.name}</strong> },
+        { name: <strong>{props.row.name}</strong> },
         formatJsxTemplate,
-      )
-    }
-    errorMessage={translate('Unable to remove tag.')}
-    title={translate('Remove')}
-  />
-);
+      ),
+
+      options: {
+        forDeletion: true,
+      },
+    },
+
+    errorMessage: translate('Unable to remove tag.'),
+  });
+
+  return (
+    <RemovalActionItem
+      title={translate('Remove')}
+      action={mutate}
+      disabled={isPending}
+    />
+  );
+};

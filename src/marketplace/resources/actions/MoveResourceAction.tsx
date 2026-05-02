@@ -1,9 +1,9 @@
 import { ArrowsOutCardinalIcon } from '@phosphor-icons/react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionItemType } from '@/resource/actions/types';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
@@ -17,18 +17,16 @@ const MoveResourceDialog = lazyComponent(() =>
 );
 
 export const MoveResourceAction: ActionItemType = ({ resource, refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const isStaff = useSelector(isStaffSelector);
 
   const callback = () =>
-    dispatch(
-      openModalDialog(MoveResourceDialog, {
-        resolve: {
-          resource,
-          refetch,
-        },
-      }),
-    );
+    openDialog(MoveResourceDialog, {
+      resolve: {
+        resource,
+        refetch,
+      },
+    });
 
   return isStaff ? (
     <ActionItem

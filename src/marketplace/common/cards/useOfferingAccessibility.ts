@@ -1,9 +1,7 @@
-import { useSelector } from 'react-redux';
-
 import { translate } from '@/i18n';
 import { isOfferingRestrictedToProject } from '@/marketplace/offerings/utils';
 import { Offering } from '@/marketplace/types';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface OfferingAccessibility {
   isRestricted: boolean;
@@ -17,7 +15,7 @@ interface OfferingAccessibility {
 export function useOfferingAccessibility(
   offering: Offering,
 ): OfferingAccessibility {
-  const user = useSelector(getUser);
+  const user = useUser();
   const { isRestricted, isAllowed } = isOfferingRestrictedToProject(
     offering,
     user,

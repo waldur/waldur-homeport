@@ -25,13 +25,13 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { RestrictionsInfoCard } from '@/invitations/actions/RestrictionsInfoCard';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { Role, RoleType } from '@/permissions/types';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { getCurrentUser } from '@/user/UsersService';
 import { setCurrentUser } from '@/workspace/actions';
 import { useUser } from '@/workspace/hooks';
@@ -147,7 +147,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
           page,
         );
       } catch (error) {
-        dispatch(showErrorResponse(error, translate('Unable to load users.')));
+        showErrorResponse(error, translate('Unable to load users.'));
         return {
           options: [],
           hasMore: false,
@@ -155,7 +155,7 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
         };
       }
     },
-    [dispatch, hasCustomerPermission, resolvedProject, resolvedCustomerUuid],
+    [hasCustomerPermission, resolvedProject, resolvedCustomerUuid],
   );
 
   const getOptionLabel = (option) =>
@@ -255,7 +255,6 @@ export const AddUserDialog: FC<AddUserDialogProps> = ({
       resolvedProject,
       resolvedCustomer,
       currentUser,
-      dispatch,
     ],
   );
 

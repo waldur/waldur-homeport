@@ -4,14 +4,13 @@ import {
   WarningCircleIcon,
 } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import '@/navigation/header/search/NoResult.scss';
+import { useModal } from '@/modal/actions';
 
 import { lazyComponent } from './core/lazyComponent';
-import { openModalDialog } from './modal/actions';
 import { RadialBg } from './navigation/header/search/RadialBg';
 
 const ErrorTraceDialog = lazyComponent(() =>
@@ -25,9 +24,9 @@ interface ErrorViewProps {
 }
 
 export const ErrorView: FC<ErrorViewProps> = ({ error }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openErrorTraceDialog = () =>
-    dispatch(openModalDialog(ErrorTraceDialog, { error } as any));
+    openDialog(ErrorTraceDialog, { error } as any);
 
   return (
     <div className="search-error">

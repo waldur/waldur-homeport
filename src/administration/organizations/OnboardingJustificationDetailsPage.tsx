@@ -1,6 +1,5 @@
 import { useCurrentStateAndParams, useRouter } from '@uirouter/react';
 import { useCallback, useEffect, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   OnboardingJustification,
   OnboardingVerification,
@@ -12,8 +11,8 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 import { OnboardingJustificationDetails } from './OnboardingJustificationDetails';
 
@@ -22,13 +21,14 @@ export const OnboardingJustificationDetailsPage = () => {
     params: { uuid },
   } = useCurrentStateAndParams();
   const router = useRouter();
-  const dispatch = useDispatch();
+
+  const { showErrorResponse } = useNotify();
+
   const [justification, setJustification] =
     useState<OnboardingJustification>(null);
   const [verification, setVerification] =
     useState<OnboardingVerification>(null);
   const [loading, setLoading] = useState(true);
-  const [actionLoading, setActionLoading] = useState(false);
 
   const fetchData = useCallback(async () => {
     if (!uuid) return;
@@ -73,104 +73,79 @@ export const OnboardingJustificationDetailsPage = () => {
         }
       }
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Unable to load verification details.'),
-        ),
+      showErrorResponse(
+        error,
+        translate('Unable to load verification details.'),
       );
     } finally {
       setLoading(false);
     }
-  }, [uuid, dispatch]);
+  }, [uuid]);
 
   useEffect(() => {
     fetchData();
   }, [fetchData]);
 
-  const handleApprove = async (formValues) => {
-    if (!justification) {
-      return;
-    }
-    setActionLoading(true);
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Approve justification'),
-        translate(
-          'Are you sure you want to approve this onboarding justification? This will create the organization automatically.',
-        ),
-      );
-
+  const { mutate: approve, isPending: approvePending } = useManagedMutation<
+    any,
+    any,
+    any
+  >({
+    mutationFn: async (formValues) => {
       await onboardingJustificationsApprove({
         path: { uuid: justification.uuid },
         body: { staff_notes: formValues.staff_notes },
       });
-      await onboardingVerificationsCreateCustomer({
+      return await onboardingVerificationsCreateCustomer({
         path: { uuid: justification.verification_uuid },
       });
-      dispatch(
-        showSuccess(
-          translate(
-            'Onboarding justification approved. Organization created successfully.',
-          ),
-        ),
-      );
+    },
+    confirmation: {
+      title: translate('Approve justification'),
+      body: translate(
+        'Are you sure you want to approve this onboarding justification? This will create the organization automatically.',
+      ),
+    },
+    successMessage: translate(
+      'Onboarding justification approved. Organization created successfully.',
+    ),
+    errorMessage: translate('Unable to complete onboarding approval.'),
+    onSuccess: () => {
       router.stateService.go('support-onboarding', { tab: 'justifications' });
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to complete onboarding approval.'),
-        ),
-      );
-    } finally {
-      setActionLoading(false);
-    }
-  };
+    },
+  });
 
-  const handleReject = async (formValues) => {
-    if (!justification) {
-      return;
-    }
-    setActionLoading(true);
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Reject justification'),
-        translate(
-          'Are you sure you want to reject this onboarding justification?',
-        ),
-      );
-
-      await onboardingJustificationsReject({
+  const { mutate: reject, isPending: rejectPending } = useManagedMutation<
+    any,
+    any,
+    any
+  >({
+    mutationFn: (formValues) =>
+      onboardingJustificationsReject({
         path: { uuid: justification.uuid },
         body: { staff_notes: formValues.staff_notes },
-      });
-      dispatch(
-        showSuccess(translate('Onboarding justification has been rejected.')),
-      );
+      }),
+    confirmation: {
+      title: translate('Reject justification'),
+      body: translate(
+        'Are you sure you want to reject this onboarding justification?',
+      ),
+    },
+    successMessage: translate('Onboarding justification has been rejected.'),
+    errorMessage: translate('Unable to reject onboarding justification.'),
+    onSuccess: () => {
       router.stateService.go('support-onboarding', { tab: 'justifications' });
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to reject onboarding justification.'),
-        ),
-      );
-    } finally {
-      setActionLoading(false);
-    }
-  };
+    },
+  });
 
   return (
     <OnboardingJustificationDetails
       justification={justification}
       verification={verification}
       loading={loading}
-      actionLoading={actionLoading}
-      onApprove={handleApprove}
-      onReject={handleReject}
+      actionLoading={approvePending || rejectPending}
+      onApprove={approve}
+      onReject={reject}
     />
   );
 };

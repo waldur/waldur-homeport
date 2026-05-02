@@ -1,6 +1,6 @@
 import { EyeIcon, WarningCircleIcon } from '@phosphor-icons/react';
 import { useCallback, useMemo, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   OpenStackSecurityGroup,
   openstackSecurityGroupsList,
@@ -12,7 +12,7 @@ import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
 import { orderFormSelector } from '@/marketplace/deploy/selectors';
 import { FormStepProps } from '@/marketplace/deploy/types';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
@@ -32,14 +32,12 @@ interface ShowSecurityGroupsButtonProps {
 }
 
 const ShowSecurityGroupsButton = (props: ShowSecurityGroupsButtonProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(OpenStackSecurityGroupsDialog, {
-        resolve: { securityGroups: [props.row] },
-        size: 'xl',
-      }),
-    );
+    openDialog(OpenStackSecurityGroupsDialog, {
+      resolve: { securityGroups: [props.row] },
+      size: 'xl',
+    });
   };
   return (
     <ActionsDropdownComponent>
@@ -56,14 +54,12 @@ const ShowPreviewButton = () => {
   const securityGroups = useSelector((state) =>
     orderFormSelector(state, 'attributes.security_groups'),
   );
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = useCallback(() => {
-    dispatch(
-      openModalDialog(OpenStackSecurityGroupsDialog, {
-        resolve: { securityGroups: securityGroups },
-        size: 'xl',
-      }),
-    );
+    openDialog(OpenStackSecurityGroupsDialog, {
+      resolve: { securityGroups: securityGroups },
+      size: 'xl',
+    });
   }, [securityGroups]);
 
   return (

@@ -1,8 +1,7 @@
 import { ClipboardTextIcon } from '@phosphor-icons/react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
 import { Col, Row, Tab, Tabs } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOrdersApproveByConsumer,
   marketplaceOrdersRejectByConsumer,
@@ -22,12 +21,11 @@ import { CompactSubmitButton } from '@/form/CompactSubmitButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { getOrderType } from '@/marketplace/orders/utils';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceLink } from '@/resource/ResourceLink';
 import { Field } from '@/resource/summary';
-import { useNotify } from '@/store/hooks';
 import { renderFieldOrDash } from '@/table/utils';
 
 import { ExtendedUserAction } from './types';
@@ -266,9 +264,6 @@ const OrderMetadataTab: FC<{
 export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
   resolve: { row, refetch },
 }) => {
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
-
   // Get order_uuid from route_params
   const orderUuid = row.route_params?.order_uuid as string;
 
@@ -299,40 +294,29 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
     enabled: Boolean(order?.offering_uuid),
   });
 
-  const { mutate: approveOrder, isPending: isApproving } = useMutation({
-    mutationFn: async () => {
-      await marketplaceOrdersApproveByConsumer({
+  const approveOrderMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceOrdersApproveByConsumer({
         path: { uuid: orderUuid },
-      });
-    },
-    onSuccess: () => {
-      showSuccess(translate('Order has been approved.'));
-      refetch?.();
-      dispatch(closeModalDialog());
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Unable to approve order.'));
-    },
+      }),
+    successMessage: translate('Order has been approved.'),
+    errorMessage: translate('Unable to approve order.'),
+    refetch,
   });
 
-  const { mutate: rejectOrder, isPending: isRejecting } = useMutation({
-    mutationFn: async () => {
-      await marketplaceOrdersRejectByConsumer({
+  const rejectOrderMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceOrdersRejectByConsumer({
         path: { uuid: orderUuid },
-      });
-    },
-    onSuccess: () => {
-      showSuccess(translate('Order has been rejected.'));
-      refetch?.();
-      dispatch(closeModalDialog());
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Unable to reject order.'));
-    },
+      }),
+    successMessage: translate('Order has been rejected.'),
+    errorMessage: translate('Unable to reject order.'),
+    refetch,
   });
 
   const isLoading = isLoadingOrder || isLoadingOffering;
-  const isSubmitting = isApproving || isRejecting;
+  const isSubmitting =
+    approveOrderMutation.isPending || rejectOrderMutation.isPending;
 
   return (
     <ModalDialog
@@ -347,20 +331,20 @@ export const PendingOrderDetailsDialog: FC<PendingOrderDetailsDialogProps> = ({
         <>
           <CloseDialogButton className="min-w-100px" disabled={isSubmitting} />
           <CompactSubmitButton
-            submitting={isRejecting}
+            submitting={rejectOrderMutation.isPending}
             disabled={isSubmitting || !order}
             variant="danger"
             className="min-w-100px"
-            onClick={() => rejectOrder()}
+            onClick={() => rejectOrderMutation.mutate()}
             type="button"
             label={translate('Reject')}
           />
           <CompactSubmitButton
-            submitting={isApproving}
+            submitting={approveOrderMutation.isPending}
             disabled={isSubmitting || !order}
             variant="success"
             className="min-w-100px"
-            onClick={() => approveOrder()}
+            onClick={() => approveOrderMutation.mutate()}
             type="button"
             label={translate('Approve')}
           />

@@ -10,7 +10,7 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { useLanguageSelector } from '@/i18n/useLanguageSelector';
 import { LanguageCountry } from '@/navigation/header/LanguageSelectorDropdown';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { TableQuery } from '@/table/TableQuery';
 
 export const AdministrationLanguages: FunctionComponent = () => {

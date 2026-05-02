@@ -1,15 +1,16 @@
 import { UsersThreeIcon } from '@phosphor-icons/react';
 import { FC, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
@@ -22,9 +23,9 @@ const GroupInvitationCreateDialog = lazyComponent(() =>
 export const GroupInvitationCreateButton: FC<{
   refetch(): void;
 }> = ({ refetch }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const roles = useMemo(
     () =>
       ENV.roles.filter(
@@ -41,18 +42,16 @@ export const GroupInvitationCreateButton: FC<{
     [customer, user],
   );
   const callback = () =>
-    dispatch(
-      openModalDialog(GroupInvitationCreateDialog, {
-        resolve: {
-          refetch,
-          roles,
-        },
-        initialValues: {
-          role: roles[0],
-          type: 'private',
-        },
-      }),
-    );
+    openDialog(GroupInvitationCreateDialog, {
+      resolve: {
+        refetch,
+        roles,
+      },
+      initialValues: {
+        role: roles[0],
+        type: 'private',
+      },
+    });
 
   const canManage =
     hasPermission(user, {

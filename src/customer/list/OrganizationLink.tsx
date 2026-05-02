@@ -2,10 +2,9 @@ import { useRouter } from '@uirouter/react';
 import classNames from 'classnames';
 import { FC, PropsWithChildren, useCallback, useMemo } from 'react';
 import { Variant } from 'react-bootstrap/esm/types';
-import { useSelector } from 'react-redux';
 
 import { Link } from '@/core/Link';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface OwnProps {
   uuid: string;
@@ -25,7 +24,7 @@ const PERMISSION_MAP = {
 const PERMISSION_PRIORITY = ['customer', 'project', 'call_organizer', 'call'];
 
 const useOrganizationLinkState = (uuid: string) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   return useMemo(() => {
     // Staff and support have the highest priority access

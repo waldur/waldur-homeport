@@ -1,11 +1,10 @@
 import { TrashIcon, WarningIcon } from '@phosphor-icons/react';
 import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showError, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { purgeRabbitMQQueues, type RmqStatsResponse } from './api';
 
@@ -18,38 +17,36 @@ const CONFIRMATION_TEXT = 'PURGE ALL';
 export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
   data,
 }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showError, showSuccess } = useNotify();
+
   const queryClient = useQueryClient();
 
   const mutation = useMutation({
     mutationFn: () =>
       purgeRabbitMQQueues({ purge_all_subscription_queues: true }),
     onSuccess: (data) => {
-      dispatch(
-        showSuccess(
-          translate('Purged {messages} messages from {queues} queues', {
-            messages: data.purged_messages.toLocaleString(),
-            queues: data.purged_queues,
-          }),
-        ),
+      showSuccess(
+        translate('Purged {messages} messages from {queues} queues', {
+          messages: data.purged_messages.toLocaleString(),
+          queues: data.purged_queues,
+        }),
       );
       queryClient.invalidateQueries({ queryKey: ['RabbitMQStats'] });
     },
     onError: (error) => {
-      dispatch(
-        showError(
-          translate('Failed to purge all queues: {error}', {
-            error: error instanceof Error ? error.message : String(error),
-          }),
-        ),
+      showError(
+        translate('Failed to purge all queues: {error}', {
+          error: error instanceof Error ? error.message : String(error),
+        }),
       );
     },
   });
 
   const handlePurgeAll = useCallback(async () => {
     try {
-      const typedValue = await waitForConfirmation(
-        dispatch,
+      const typedValue = await confirm(
         translate('WARNING: Mass queue purge'),
         <>
           <p className="text-danger fw-bold">
@@ -87,12 +84,10 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
       );
 
       if (typedValue !== CONFIRMATION_TEXT) {
-        dispatch(
-          showError(
-            translate('Confirmation text does not match. Expected "{text}"', {
-              text: CONFIRMATION_TEXT,
-            }),
-          ),
+        showError(
+          translate('Confirmation text does not match. Expected "{text}"', {
+            text: CONFIRMATION_TEXT,
+          }),
         );
         return;
       }
@@ -101,7 +96,7 @@ export const RabbitMQPurgeAllButton: FC<RabbitMQPurgeAllButtonProps> = ({
     } catch {
       // User cancelled
     }
-  }, [dispatch, data, mutation]);
+  }, [data, mutation]);
 
   return (
     <button

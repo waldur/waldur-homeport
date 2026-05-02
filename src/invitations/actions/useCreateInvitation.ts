@@ -1,12 +1,13 @@
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { useCustomerProjects } from '@/customer/workspace/fetchCustomer';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionMap } from '@/permissions/enums';
 import { checkScope } from '@/permissions/hasPermission';
-import { getCustomer, getProject, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { InvitationContext } from './types';
 
@@ -19,18 +20,16 @@ const InvitationCreateDialog = lazyComponent(() =>
 export const useCreateInvitation = (
   context: Omit<InvitationContext, 'customer' | 'user'>,
 ) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
   const { loading: loadingProjects } = useCustomerProjects();
   const project = useSelector(getProject);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(InvitationCreateDialog, {
-        size: 'xl',
-        resolve: { ...context, user, customer },
-      }),
-    );
+    openDialog(InvitationCreateDialog, {
+      size: 'xl',
+      resolve: { ...context, user, customer },
+    });
 
   const canInvite = useMemo(
     () =>

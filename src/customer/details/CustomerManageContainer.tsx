@@ -9,9 +9,9 @@ import { translate } from '@/i18n';
 import { canRegisterServiceProviderForCustomer } from '@/marketplace/service-providers/selectors';
 import { PageBarTab } from '@/navigation/types';
 import { usePageTabsTransmitter } from '@/navigation/usePageTabsTransmitter';
+import { useUser } from '@/workspace/hooks';
 import {
   getCustomer,
-  getUser,
   isOwnerOrStaff as isOwnerOrStaffSelector,
   isStaff,
 } from '@/workspace/selectors';
@@ -63,7 +63,7 @@ const ProjectDigestConfigPage = lazyComponent(() =>
 );
 
 export const CustomerManageContainer = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
   const isUserStaff = useSelector(isStaff);
   const canRegisterServiceProvider = useSelector(

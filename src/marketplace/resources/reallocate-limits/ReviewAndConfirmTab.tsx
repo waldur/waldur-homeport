@@ -9,8 +9,6 @@ import {
 
 import { translate } from '@/i18n';
 import { Limits } from '@/marketplace/common/types';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { FetchedData } from '../change-limits/utils';
 
@@ -160,7 +158,7 @@ export const submitReallocation = async (
       refetch?(): void;
     };
   },
-  dispatch: any,
+  { showSuccess, showErrorResponse, closeDialog },
 ) => {
   const {
     resource,
@@ -170,11 +168,9 @@ export const submitReallocation = async (
   const { limits: newLimits, targets } = formData;
 
   if (!newLimits || !targets || targets.length === 0) {
-    dispatch(
-      showErrorResponse(
-        { detail: translate('Please complete all steps.') } as any,
-        translate('Unable to reallocate limits.'),
-      ),
+    showErrorResponse(
+      { detail: translate('Please complete all steps.') } as any,
+      translate('Unable to reallocate limits.'),
     );
     return;
   }
@@ -214,21 +210,17 @@ export const submitReallocation = async (
       body: requestBody,
     });
 
-    dispatch(
-      showSuccess(
-        translate('Resource limits reallocation request has been submitted.'),
-      ),
+    showSuccess(
+      translate('Resource limits reallocation request has been submitted.'),
     );
-    dispatch(closeModalDialog());
+    closeDialog();
     if (context.resolve.refetch) {
       await context.resolve.refetch();
     }
   } catch (error) {
-    dispatch(
-      showErrorResponse(
-        error,
-        translate('Unable to submit reallocation request.'),
-      ),
+    showErrorResponse(
+      error,
+      translate('Unable to submit reallocation request.'),
     );
   }
 };

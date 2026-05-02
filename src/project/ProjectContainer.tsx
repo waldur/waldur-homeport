@@ -7,14 +7,15 @@ import { translate } from '@/i18n';
 import { useBreadcrumbs, usePageHero } from '@/navigation/context';
 import { usePresetBreadcrumbItems } from '@/navigation/header/breadcrumb/utils';
 import { IBreadcrumbItem } from '@/navigation/types';
-import { getCustomer, getProject, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { ProjectBreadcrumbPopover } from './ProjectBreadcrumbPopover';
 import { ProjectProfile } from './ProjectProfile';
 import { canEditProject } from './utils';
 
 const PageHero = ({ project }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
 
   const canEdit = canEditProject(user, { customer, project });

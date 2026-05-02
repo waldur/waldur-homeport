@@ -1,11 +1,10 @@
 import { ArrowClockwiseIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useDispatch } from 'react-redux';
 import { Resource } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
@@ -24,7 +23,7 @@ export const MultiRenewAllocationsAction = ({
   rows: Resource[];
   refetch;
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const user = useUser();
 
   const validResources = useMemo(
@@ -42,16 +41,14 @@ export const MultiRenewAllocationsAction = ({
   );
 
   const callback = () =>
-    dispatch(
-      openModalDialog(RenewAllocationDialog, {
-        resolve: {
-          resources: validResources,
-          refetch,
-        },
-        size: 'xl',
-        fullscreen: 'lg-down',
-      }),
-    );
+    openDialog(RenewAllocationDialog, {
+      resolve: {
+        resources: validResources,
+        refetch,
+      },
+      size: 'xl',
+      fullscreen: 'lg-down',
+    });
 
   if (!validResources.length) return null;
 

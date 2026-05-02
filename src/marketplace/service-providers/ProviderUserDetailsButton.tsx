@@ -1,11 +1,10 @@
 import { EyeIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { MarketplaceServiceProviderUser } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 const ProviderUserDetailsDialog = lazyComponent(() =>
@@ -21,14 +20,12 @@ interface ProviderUserDetailsButtonProps {
 export const ProviderUserDetailsButton: FC<ProviderUserDetailsButtonProps> = ({
   row,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(ProviderUserDetailsDialog, {
-        resolve: { user: row },
-        size: 'lg',
-      }),
-    );
+    openDialog(ProviderUserDetailsDialog, {
+      resolve: { user: row },
+      size: 'lg',
+    });
 
   return (
     <ActionItem

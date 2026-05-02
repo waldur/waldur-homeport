@@ -2,16 +2,15 @@ import { CaretDownIcon, PlusCircleIcon } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import { FunctionComponent } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { isFeatureVisible } from '@/features/connect';
 import { CustomerFeatures } from '@/FeaturesEnums';
 import { translate } from '@/i18n/translate';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const CustomerCreateDialog = lazyComponent(() =>
   import('@/customer/create/CustomerCreateDialog').then((module) => ({
@@ -20,7 +19,7 @@ const CustomerCreateDialog = lazyComponent(() =>
 );
 
 export const OrganizationCreateButton: FunctionComponent = () => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const { openDialog } = useModal();
   const router = useRouter();
   const showOnboarding = isFeatureVisible(CustomerFeatures.show_onboarding);

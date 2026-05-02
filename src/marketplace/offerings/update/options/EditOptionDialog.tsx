@@ -1,7 +1,6 @@
 import arrayMutators from 'final-form-arrays';
-import { useCallback, useMemo } from 'react';
+import { useMemo } from 'react';
 import { Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsUpdateOptions,
   marketplaceProviderOfferingsUpdateResourceOptions,
@@ -9,9 +8,8 @@ import {
 
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { formatOption } from '../../store/utils';
 
@@ -39,8 +37,6 @@ const serializeCascadeConfig = (cascadeConfig) => {
 };
 
 export const EditOptionDialog = ({ resolve }) => {
-  const dispatch = useDispatch();
-
   const initialValues = useMemo(
     () => ({
       ...resolve.option,
@@ -57,11 +53,11 @@ export const EditOptionDialog = ({ resolve }) => {
         ? serializeCascadeConfig(resolve.option.cascade_config)
         : undefined,
     }),
-    [resolve.option],
+    [],
   );
 
-  const update = useCallback(
-    async (formData) => {
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
       const oldOptions = resolve.offering[resolve.type];
       const newOptions = {
         order: oldOptions.order,
@@ -70,39 +66,31 @@ export const EditOptionDialog = ({ resolve }) => {
           [resolve.option.name]: formatOption(formData),
         },
       };
-      try {
-        if (resolve.type === 'options') {
-          await marketplaceProviderOfferingsUpdateOptions({
-            path: { uuid: resolve.offering.uuid },
-            body: {
-              options: newOptions,
-            },
-          });
-        } else if (resolve.type === 'resource_options') {
-          await marketplaceProviderOfferingsUpdateResourceOptions({
-            path: { uuid: resolve.offering.uuid },
-            body: {
-              resource_options: newOptions,
-            },
-          });
-        }
-        dispatch(
-          showSuccess(translate('Option has been updated successfully.')),
-        );
-        if (resolve.refetch) await resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to update an option.')),
-        );
+      if (resolve.type === 'options') {
+        return marketplaceProviderOfferingsUpdateOptions({
+          path: { uuid: resolve.offering.uuid },
+          body: {
+            options: newOptions,
+          },
+        });
+      } else if (resolve.type === 'resource_options') {
+        return marketplaceProviderOfferingsUpdateResourceOptions({
+          path: { uuid: resolve.offering.uuid },
+          body: {
+            resource_options: newOptions,
+          },
+        });
       }
+      return Promise.reject(new Error('Unknown option type'));
     },
-    [dispatch, resolve],
-  );
+    successMessage: translate('Option has been updated successfully.'),
+    errorMessage: translate('Unable to update an option.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={update}
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={initialValues}
       validate={validateOptionForm}
       mutators={{ ...arrayMutators }}

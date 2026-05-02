@@ -3,8 +3,7 @@ import {
   PlusCircleIcon,
   TrashIcon,
 } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import {
   marketplaceOfferingProfilesDestroy,
   marketplaceOfferingProfilesList,
@@ -13,9 +12,9 @@ import {
 import { lazyComponent } from '@/core/lazyComponent';
 import { Link } from '@/core/Link';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { ActionsDropdown } from '@/table/ActionsDropdown';
 import { createFetcher } from '@/table/api';
@@ -33,64 +32,54 @@ const DeleteProfileAction: FC<{ row; refetch(): void }> = ({
   row,
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const handler = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Delete service profile {name}? This will unbind {count} offering(s) and revoke role grants for those offerings.',
-          {
-            name: <b>{row.name}</b>,
-            count: <b>{row.offerings_count}</b>,
-          },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await marketplaceOfferingProfilesDestroy({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Profile deleted.')));
-      await refetch();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to delete profile.')),
-      );
-    }
-  }, [dispatch, row, refetch]);
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceOfferingProfilesDestroy({ path: { uuid: row.uuid } }),
+    successMessage: translate('Profile deleted.'),
+    errorMessage: translate('Unable to delete profile.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Delete service profile {name}? This will unbind {count} offering(s) and revoke role grants for those offerings.',
+        {
+          name: <b>{row.name}</b>,
+          count: <b>{row.offerings_count}</b>,
+        },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
+
   return (
     <ActionItem
       title={translate('Delete')}
-      action={handler}
+      action={() => deleteMutation.mutate()}
       iconNode={<TrashIcon weight="bold" />}
       className="text-danger"
+      disabled={deleteMutation.isPending}
     />
   );
 };
 
 const EditProfileAction: FC<{ row; refetch(): void }> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <ActionItem
       title={translate('Edit')}
       iconNode={<PencilSimpleIcon weight="bold" />}
       action={() =>
-        dispatch(
-          openModalDialog(OfferingProfileForm, {
-            resolve: { profile: row, refetch },
-          }),
-        )
+        openDialog(OfferingProfileForm, {
+          resolve: { profile: row, refetch },
+        })
       }
     />
   );
 };
 
 export const OfferingProfilesList: FC = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const tableProps = useTable({
     table: 'OfferingProfilesList',
     fetchData: createFetcher(marketplaceOfferingProfilesList),
@@ -139,11 +128,9 @@ export const OfferingProfilesList: FC = () => {
           title={translate('Create profile')}
           iconNode={<PlusCircleIcon weight="bold" />}
           action={() =>
-            dispatch(
-              openModalDialog(OfferingProfileForm, {
-                resolve: { refetch: tableProps.fetch },
-              }),
-            )
+            openDialog(OfferingProfileForm, {
+              resolve: { refetch: tableProps.fetch },
+            })
           }
         />
       }

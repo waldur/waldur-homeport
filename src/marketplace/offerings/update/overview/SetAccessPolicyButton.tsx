@@ -1,10 +1,8 @@
-import { useDispatch, useSelector } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
-import { openModalDialog } from '@/modal/actions';
-import { getUser } from '@/workspace/selectors';
+import { useModal } from '@/modal/actions';
+import { useUser } from '@/workspace/hooks';
 
 import { SetAccessPolicyDialogProps } from '../../actions/SetAccessPolicyDialog';
 import { isVisible } from '../../actions/utils';
@@ -27,21 +25,19 @@ export const SetAccessPolicyButton = ({
     tooltip,
     refetch: refetchGroups,
   } = useOrganizationGroups();
-  const user = useSelector(getUser);
-  const dispatch = useDispatch();
+  const user = useUser();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(SetAccessPolicyDialog, {
-        resolve: {
-          organizationGroups,
-          loading: isLoading,
-          error: isError,
-          offering,
-          refetch,
-          refetchGroups,
-        },
-      }),
-    );
+    openDialog(SetAccessPolicyDialog, {
+      resolve: {
+        organizationGroups,
+        loading: isLoading,
+        error: isError,
+        offering,
+        refetch,
+        refetchGroups,
+      },
+    });
   if (!isVisible(offering.state, user.is_staff)) {
     return null;
   }

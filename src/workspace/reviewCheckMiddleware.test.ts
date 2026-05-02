@@ -4,7 +4,7 @@ const mockProjectPermissionsReviewsList = vi.fn();
 const mockCustomerPermissionsReviewsList = vi.fn();
 const mockIsFeatureVisible = vi.fn();
 const mockHasPermission = vi.fn();
-const mockOpenModalDialog = vi.fn();
+const mockOpenDialog = vi.fn();
 
 vi.mock('waldur-js-client', () => ({
   projectPermissionsReviewsList: (...args) =>
@@ -22,7 +22,9 @@ vi.mock('@/permissions/hasPermission', () => ({
 }));
 
 vi.mock('@/modal/actions', () => ({
-  openModalDialog: (...args) => mockOpenModalDialog(...args),
+  ModalService: {
+    open: (...args) => mockOpenDialog(...args),
+  },
 }));
 
 vi.mock('@/core/lazyComponent', () => ({
@@ -173,15 +175,13 @@ describe('reviewCheckMiddleware', () => {
       mockProjectPermissionsReviewsList.mockResolvedValue({
         data: [{ uuid: 'review-123' }],
       });
-      mockOpenModalDialog.mockReturnValue({ type: 'OPEN_MODAL' });
 
       const middleware = reviewCheckMiddleware(mockStore)(mockNext);
       middleware(projectAction);
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockStore.dispatch).toHaveBeenCalled();
-      expect(mockOpenModalDialog).toHaveBeenCalledWith(
+      expect(mockOpenDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-123', scope: 'project' },
@@ -205,7 +205,7 @@ describe('reviewCheckMiddleware', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockStore.dispatch).not.toHaveBeenCalled();
+      expect(mockOpenDialog).not.toHaveBeenCalled();
     });
 
     it('should silently handle API errors', async () => {
@@ -227,7 +227,7 @@ describe('reviewCheckMiddleware', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockStore.dispatch).not.toHaveBeenCalled();
+      expect(mockOpenDialog).not.toHaveBeenCalled();
     });
   });
 
@@ -331,15 +331,13 @@ describe('reviewCheckMiddleware', () => {
       mockCustomerPermissionsReviewsList.mockResolvedValue({
         data: [{ uuid: 'review-456' }],
       });
-      mockOpenModalDialog.mockReturnValue({ type: 'OPEN_MODAL' });
 
       const middleware = reviewCheckMiddleware(mockStore)(mockNext);
       middleware(customerAction);
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockStore.dispatch).toHaveBeenCalled();
-      expect(mockOpenModalDialog).toHaveBeenCalledWith(
+      expect(mockOpenDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-456', scope: 'customer' },
@@ -374,7 +372,7 @@ describe('reviewCheckMiddleware', () => {
 
       await new Promise((resolve) => setTimeout(resolve, 10));
 
-      expect(mockStore.dispatch).not.toHaveBeenCalled();
+      expect(mockOpenDialog).not.toHaveBeenCalled();
     });
   });
 
@@ -414,7 +412,6 @@ describe('reviewCheckMiddleware', () => {
       mockProjectPermissionsReviewsList
         .mockReturnValueOnce(firstPromise)
         .mockResolvedValueOnce({ data: [{ uuid: 'review-B' }] });
-      mockOpenModalDialog.mockReturnValue({ type: 'OPEN_MODAL' });
 
       const projectActionA = {
         type: SET_CURRENT_PROJECT,
@@ -441,8 +438,8 @@ describe('reviewCheckMiddleware', () => {
       await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Should only show modal for Project B, not Project A
-      expect(mockOpenModalDialog).toHaveBeenCalledTimes(1);
-      expect(mockOpenModalDialog).toHaveBeenCalledWith(
+      expect(mockOpenDialog).toHaveBeenCalledTimes(1);
+      expect(mockOpenDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-B', scope: 'project' },
@@ -481,7 +478,6 @@ describe('reviewCheckMiddleware', () => {
       mockCustomerPermissionsReviewsList
         .mockReturnValueOnce(firstPromise)
         .mockResolvedValueOnce({ data: [{ uuid: 'review-B' }] });
-      mockOpenModalDialog.mockReturnValue({ type: 'OPEN_MODAL' });
 
       const customerActionA = {
         type: SET_CURRENT_CUSTOMER,
@@ -508,8 +504,8 @@ describe('reviewCheckMiddleware', () => {
       await new Promise((resolve) => setTimeout(resolve, 10));
 
       // Should only show modal for Customer B, not Customer A
-      expect(mockOpenModalDialog).toHaveBeenCalledTimes(1);
-      expect(mockOpenModalDialog).toHaveBeenCalledWith(
+      expect(mockOpenDialog).toHaveBeenCalledTimes(1);
+      expect(mockOpenDialog).toHaveBeenCalledWith(
         expect.anything(),
         expect.objectContaining({
           resolve: { reviewId: 'review-B', scope: 'customer' },

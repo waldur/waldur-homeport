@@ -6,7 +6,6 @@ import {
 import { FC, useMemo } from 'react';
 import { Alert } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useSelector } from 'react-redux';
 import {
   Project,
   projectsRecover,
@@ -18,12 +17,12 @@ import { SubmitButton } from '@/form';
 import { DateField } from '@/form/DateField';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { RoleField } from '@/user/affiliations/RoleField';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 interface ProjectRecoveryModalProps {
   resolve: { project: Project };
@@ -34,7 +33,7 @@ export const ProjectRecoveryModal: FC<ProjectRecoveryModalProps> = ({
 }) => {
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const handleRecover = async (values: any) => {
     try {

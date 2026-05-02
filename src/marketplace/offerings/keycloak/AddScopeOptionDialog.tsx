@@ -1,5 +1,5 @@
 import { PencilSimpleIcon, PlusCircleIcon } from '@phosphor-icons/react';
-import { FC, useCallback } from 'react';
+import { FC } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
   KeycloakScopeOptionRequest,
@@ -11,9 +11,8 @@ import { StringField, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export type ScopeOption = KeycloakScopeOptionRequest;
 
@@ -29,40 +28,33 @@ interface AddScopeOptionDialogProps {
 export const AddScopeOptionDialog: FC<AddScopeOptionDialogProps> = ({
   resolve,
 }) => {
-  const { showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
   const isEdit = Boolean(resolve.editScope);
 
-  const save = useCallback(
-    async (formData: ScopeOption) => {
-      try {
-        let newScopes: ScopeOption[];
-        if (resolve.editScope) {
-          newScopes = resolve.existingScopes.map((s) =>
-            s.scope_id === resolve.editScope.scope_id ? formData : s,
-          );
-        } else {
-          newScopes = [...resolve.existingScopes, formData];
-        }
-        await marketplaceProviderResourcesSetKeycloakScopes({
-          path: { uuid: resolve.resourceUuid },
-          body: { keycloak_available_scopes: newScopes },
-        });
-        closeDialog();
-      } catch (error) {
-        showErrorResponse(
-          error,
-          isEdit
-            ? translate('Unable to update scope option.')
-            : translate('Unable to add scope option.'),
+  const saveMutation = useManagedMutation<any, any, ScopeOption>({
+    mutationFn: (formData) => {
+      let newScopes: ScopeOption[];
+      if (resolve.editScope) {
+        newScopes = resolve.existingScopes.map((s) =>
+          s.scope_id === resolve.editScope.scope_id ? formData : s,
         );
+      } else {
+        newScopes = [...resolve.existingScopes, formData];
       }
+      return marketplaceProviderResourcesSetKeycloakScopes({
+        path: { uuid: resolve.resourceUuid },
+        body: { keycloak_available_scopes: newScopes },
+      });
     },
-    [resolve, isEdit, showErrorResponse, closeDialog],
-  );
+    errorMessage: isEdit
+      ? translate('Unable to update scope option.')
+      : translate('Unable to add scope option.'),
+  });
 
   return (
-    <Form onSubmit={save} initialValues={resolve.editScope}>
+    <Form<ScopeOption>
+      onSubmit={(values) => saveMutation.mutateAsync(values)}
+      initialValues={resolve.editScope}
+    >
       {({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

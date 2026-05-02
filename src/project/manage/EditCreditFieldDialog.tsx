@@ -1,6 +1,6 @@
 import { useQueryClient } from '@tanstack/react-query';
 import { pick } from 'lodash-es';
-import { connect, useDispatch } from 'react-redux';
+import { connect } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import { projectCreditsPartialUpdate } from 'waldur-js-client';
 
@@ -11,10 +11,9 @@ import {
 } from '@/customer/credits/constants';
 import { FormContainer, SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { EditProjectCreditProps } from '../types';
 
@@ -29,29 +28,25 @@ export const EditCreditFieldDialog = connect<
     destroyOnUnmount: true,
     form: 'EditProjectCredit',
   })(({ resolve, ...props }) => {
-    const dispatch = useDispatch();
     const queryClient = useQueryClient();
-    const { showSuccess, showErrorResponse } = useNotify();
 
-    const onSubmit = async (formData: FormData) => {
-      try {
-        const credit = await projectCreditsPartialUpdate({
+    const onSubmitMutation = useManagedMutation<any, any, any>({
+      mutationFn: (formData) =>
+        projectCreditsPartialUpdate({
           path: { uuid: resolve.credit.uuid },
           body: {
             [resolve.name]: formData[resolve.name],
           },
-        });
-        // Update cached data
+        }),
+      successMessage: translate('Project credit has been updated.'),
+      errorMessage: translate('Project credit could not be updated.'),
+      onSuccess: (credit) => {
         queryClient.setQueryData(
           ['ProjectCreditData', resolve.credit.project_uuid],
           credit.data,
         );
-        showSuccess(translate('Project credit has been updated.'));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        showErrorResponse(e, translate('Project credit could not be updated.'));
-      }
-    };
+      },
+    });
 
     const fieldIndex = getMinimalConsumptionFieldIndex(resolve.name);
 
@@ -65,7 +60,11 @@ export const EditCreditFieldDialog = connect<
     );
 
     return (
-      <form onSubmit={props.handleSubmit(onSubmit)}>
+      <form
+        onSubmit={props.handleSubmit((values) =>
+          onSubmitMutation.mutateAsync(values),
+        )}
+      >
         <ModalDialog
           headerLess
           footer={

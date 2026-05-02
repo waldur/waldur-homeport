@@ -7,7 +7,6 @@ import { useMutation } from '@tanstack/react-query';
 import { useRouter } from '@uirouter/react';
 import { FC } from 'react';
 import { Card } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   marketplaceOrdersCreate,
   OrderCreateRequest,
@@ -20,12 +19,12 @@ import { ProgressSteps } from '@/core/ProgressSteps';
 import { omit } from '@/core/utils';
 import { translate } from '@/i18n';
 import { OrderDetailsLink } from '@/marketplace/orders/details/OrderDetailsLink';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { CompactActionButton } from '@/table/CompactActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const ResourceOrderErrorDialog = lazyComponent(() =>
   import('./ResourceOrderErrorDialog').then((module) => ({
@@ -38,14 +37,12 @@ interface OrderErredViewProps {
 }
 
 const ShowErrorButton = ({ resource }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const showErrorDialog = () => {
-    dispatch(
-      openModalDialog(ResourceOrderErrorDialog, {
-        resolve: { resource },
-        size: 'lg',
-      }),
-    );
+    openDialog(ResourceOrderErrorDialog, {
+      resolve: { resource },
+      size: 'lg',
+    });
   };
   return (
     <CompactActionButton
@@ -113,9 +110,12 @@ const getSteps = (resource: Resource) => {
 };
 
 export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const router = useRouter();
-  const user = useSelector(getUser);
+  const user = useUser();
   const canCreateOrder = hasPermission(user, {
     permission: PermissionEnum.CREATE_ORDER,
     projectId: resource.project_uuid,
@@ -123,8 +123,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
   });
   const { mutate, isPending: isLoading } = useMutation({
     mutationFn: async () => {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Confirmation'),
         translate(
           'Are you sure you want to retry to submit this order? This will create a new resource, it will not remove current one.',
@@ -140,14 +139,12 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             limits: resource.limits,
           },
         });
-        dispatch(showSuccess(translate('Order has been submitted.')));
+        showSuccess(translate('Order has been submitted.'));
         router.stateService.go('marketplace-resource-details', {
           resource_uuid: order.data.marketplace_resource_uuid,
         });
       } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to submit order.')),
-        );
+        showErrorResponse(error, translate('Unable to submit order.'));
       }
     },
   });
@@ -174,7 +171,7 @@ export const OrderErredView: FC<OrderErredViewProps> = ({ resource }) => {
             {canCreateOrder && (
               <CompactActionButton
                 variant="tertiary"
-                action={() => mutate()}
+                action={mutate}
                 pending={isLoading}
                 iconNode={<ArrowsClockwiseIcon weight="bold" />}
                 title={translate('Retry')}

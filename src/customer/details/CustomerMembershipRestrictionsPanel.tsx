@@ -1,5 +1,4 @@
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import {
@@ -8,10 +7,10 @@ import {
   RestrictionField,
 } from '@/core/restrictions';
 import FormTable from '@/form/FormTable';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { getInitialValues } from './restrictions/EditMembershipRestrictionsDialog';
@@ -29,8 +28,8 @@ const EditMembershipRestrictionsDialog = lazyComponent(() =>
 export const CustomerMembershipRestrictionsPanel: FC<
   CustomerMembershipRestrictionsPanelProps
 > = ({ customer }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
 
   const canEdit = hasPermission(user, {
     permission: PermissionEnum.UPDATE_CUSTOMER,
@@ -53,14 +52,12 @@ export const CustomerMembershipRestrictionsPanel: FC<
 
   const openEditDialog = useCallback(
     (field: RestrictionField) => {
-      dispatch(
-        openModalDialog(EditMembershipRestrictionsDialog, {
-          resolve: { customer, field },
-          initialValues: getInitialValues(customer, field),
-        }),
-      );
+      openDialog(EditMembershipRestrictionsDialog, {
+        resolve: { customer, field },
+        initialValues: getInitialValues(customer, field),
+      });
     },
-    [dispatch, customer],
+    [customer],
   );
 
   return (

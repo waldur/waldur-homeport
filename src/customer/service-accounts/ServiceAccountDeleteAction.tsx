@@ -1,37 +1,15 @@
-import { TrashIcon } from '@phosphor-icons/react';
-import { useCallback, useState } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceCustomerServiceAccountsDestroy,
   marketplaceProjectServiceAccountsDestroy,
 } from 'waldur-js-client';
 
 import { translate, formatJsxTemplate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
 
 export const ServiceAccountDeleteAction = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const [removing, setRemoving] = useState(false);
-
-  const openDialog = useCallback(async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate(
-          'Are you sure you want to delete the {name} service account?',
-          { name: <strong>{row.name || row.username || row.uuid}</strong> },
-          formatJsxTemplate,
-        ),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    setRemoving(true);
-    try {
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
       if ('project' in row) {
         await marketplaceProjectServiceAccountsDestroy({
           path: { uuid: row.uuid },
@@ -41,25 +19,26 @@ export const ServiceAccountDeleteAction = ({ row, refetch }) => {
           path: { uuid: row.uuid },
         });
       }
-      dispatch(showSuccess(translate('Service account has been deleted.')));
-      refetch();
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to delete service account.')),
-      );
-    } finally {
-      setRemoving(false);
-    }
-  }, [dispatch, setRemoving, row, refetch]);
+    },
+    successMessage: translate('Service account has been deleted.'),
+    errorMessage: translate('Unable to delete service account.'),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate(
+        'Are you sure you want to delete the {name} service account?',
+        { name: <strong>{row.name || row.username || row.uuid}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { forDeletion: true },
+    },
+  });
 
   return (
-    <ActionItem
-      action={openDialog}
+    <RemovalActionItem
+      action={() => deleteMutation.mutate()}
       title={translate('Delete')}
-      iconNode={<TrashIcon weight="bold" />}
-      className="text-danger"
-      iconColor="danger"
-      disabled={removing}
+      disabled={deleteMutation.isPending}
     />
   );
 };

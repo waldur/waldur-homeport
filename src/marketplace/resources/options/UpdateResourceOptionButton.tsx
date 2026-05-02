@@ -1,13 +1,12 @@
 import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { EditButton } from '@/form/EditButton';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { UpdateResourceOptionDialogProps } from './UpdateResourceOptionDialog';
 
@@ -20,7 +19,7 @@ const UpdateResourceOptionDialog = lazyComponent(() =>
 export const UpdateResourceOptionButton: FunctionComponent<
   UpdateResourceOptionDialogProps['resolve']
 > = (props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const hasPerms = hasPermission(user, {
     permission: PermissionEnum.UPDATE_RESOURCE_OPTIONS,
     projectId: props.resource.project_uuid,
@@ -29,13 +28,11 @@ export const UpdateResourceOptionButton: FunctionComponent<
   const isResourceOk = props.resource.state === 'OK';
   const disabled = !hasPerms || !isResourceOk;
 
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(UpdateResourceOptionDialog, {
-        resolve: props,
-      }),
-    );
+    openDialog(UpdateResourceOptionDialog, {
+      resolve: props,
+    });
   };
 
   let tooltip: string | undefined;

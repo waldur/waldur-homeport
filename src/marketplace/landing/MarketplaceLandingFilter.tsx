@@ -11,7 +11,7 @@ import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
 import { useOrganizationAndProjectFiltersForResources } from '@/navigation/sidebar/resources-filter/utils';
 import { ActionButton } from '@/table/ActionButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 import { Customer } from '@/workspace/types';
 
 import { MARKETPLACE_LANDING_FILTER_FORM } from '../constants';
@@ -37,7 +37,7 @@ export const MarketplaceLandingFilter = reduxForm<FormData>({
   destroyOnUnmount: false,
   initialValues: getInitialValues(),
 })((props) => {
-  const user = useSelector(getUser);
+  const user = useUser();
   const dispatch = useDispatch<any>();
   const [show, setShow] = useState(false);
 

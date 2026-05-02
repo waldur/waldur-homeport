@@ -1,9 +1,8 @@
 import { EyeIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { translate } from '@/i18n';
 import { TosViewDialog } from '@/marketplace/offerings/update/tos/shared/TosViewDialog';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
 
 export const ViewTosAction = ({
@@ -11,15 +10,13 @@ export const ViewTosAction = ({
   offering = undefined,
   refetch = undefined,
 }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
   const handleView = () => {
-    dispatch(
-      openModalDialog(TosViewDialog, {
-        resolve: { tos, offering, refetch },
-        size: 'lg',
-      }),
-    );
+    openDialog(TosViewDialog, {
+      resolve: { tos, offering, refetch },
+      size: 'lg',
+    });
   };
 
   return (

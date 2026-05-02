@@ -6,16 +6,16 @@ import { remoteWaldurApiImportOffering } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
 import { StepsList } from '@/marketplace/common/StepsList';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
+import { useWizard } from '@/wizard/useWizard';
 import { getCustomer } from '@/workspace/selectors';
 
 import { OFFERING_IMPORT_FORM_ID } from './constants';
 import { importOfferingSelector } from './selectors';
 import { OFFERING_IMPORT_STEPS, OFFERING_IMPORT_TABS } from './tabs';
 import { OfferingImportFormData } from './types';
-import { useWizard } from './useWizard';
 import { WizardButtons } from './WizardButtons';
 import { WizardTabs } from './WizardTabs';
 

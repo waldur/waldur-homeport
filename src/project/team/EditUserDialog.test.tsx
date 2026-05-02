@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen } from '@testing-library/react';
 import { describe, expect, it, vi, beforeEach } from 'vitest';
 import {
@@ -17,7 +18,7 @@ vi.mock('waldur-js-client', () => ({
 }));
 
 // Mock store hooks
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useModal: () => ({
     closeDialog: vi.fn(),
   }),
@@ -187,13 +188,28 @@ const mockResolve = {
   refetch: vi.fn(),
 };
 
+const renderDialog = (resolve = mockResolve) => {
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <EditUserDialog resolve={resolve} />
+    </QueryClientProvider>,
+  );
+};
+
 describe('EditUserDialog (Project)', () => {
   beforeEach(() => {
     vi.clearAllMocks();
   });
 
   it('renders dialog with correct title and user information', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Edit project member')).toBeInTheDocument();
     expect(screen.getByText('User')).toBeInTheDocument();
@@ -209,28 +225,28 @@ describe('EditUserDialog (Project)', () => {
   });
 
   it('renders role selection with project roles', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Role')).toBeInTheDocument();
     expect(screen.getByTestId('select')).toBeInTheDocument();
   });
 
   it('renders expiration time field', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Role expires on')).toBeInTheDocument();
     expect(screen.getByTestId('date')).toBeInTheDocument();
   });
 
   it('renders submit and close buttons', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     expect(screen.getByText('Save')).toBeInTheDocument();
     expect(screen.getByText('Close')).toBeInTheDocument();
   });
 
   it('pre-populates form with existing permission data', () => {
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // The form should be initialized with current permission values
     // This would require more detailed form testing to verify field values
@@ -241,7 +257,7 @@ describe('EditUserDialog (Project)', () => {
     const mockProjectsUpdateUser = vi.mocked(projectsUpdateUser);
     mockProjectsUpdateUser.mockResolvedValue({} as any);
 
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // This would require form interaction to actually submit
     // For now, we just verify the mock is available
@@ -255,7 +271,7 @@ describe('EditUserDialog (Project)', () => {
     mockProjectsDeleteUser.mockResolvedValue({} as any);
     mockProjectsAddUser.mockResolvedValue({} as any);
 
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // This would require form interaction to test role change logic
     expect(mockProjectsDeleteUser).toHaveBeenCalledTimes(0);
@@ -267,7 +283,7 @@ describe('EditUserDialog (Project)', () => {
     const mockError = new Error('API Error');
     mockProjectsUpdateUser.mockRejectedValue(mockError);
 
-    render(<EditUserDialog resolve={mockResolve} />);
+    renderDialog();
 
     // Error handling would be tested through form submission
     expect(screen.getByText('Edit project member')).toBeInTheDocument();
@@ -277,13 +293,9 @@ describe('EditUserDialog (Project)', () => {
     const permissionWithoutEmail = {
       ...mockPermission,
       user_email: null,
-    } as const;
+    };
 
-    render(
-      <EditUserDialog
-        resolve={{ ...mockResolve, permission: permissionWithoutEmail }}
-      />,
-    );
+    renderDialog({ ...mockResolve, permission: permissionWithoutEmail });
 
     expect(
       screen.getByText((content) => content.includes('John Doe')),
@@ -296,13 +308,9 @@ describe('EditUserDialog (Project)', () => {
     const permissionWithoutName = {
       ...mockPermission,
       user_full_name: null,
-    } as const;
+    };
 
-    render(
-      <EditUserDialog
-        resolve={{ ...mockResolve, permission: permissionWithoutName }}
-      />,
-    );
+    renderDialog({ ...mockResolve, permission: permissionWithoutName });
 
     expect(
       screen.getByText((content) => content.includes('—')),

@@ -1,7 +1,5 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceCustomerServiceAccountsRotateApiKey,
   marketplaceProjectServiceAccountsRotateApiKey,
@@ -9,9 +7,9 @@ import {
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { ServiceAccountsProps } from './type';
 
@@ -24,55 +22,42 @@ const ServiceAccountShowInfoDialog = lazyComponent(() =>
 export const ServiceAccountRotateApiKeyAction: FC<
   ServiceAccountsProps & { row; refetch }
 > = ({ context, row }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
 
-  const { mutate } = useMutation({
-    mutationFn: async () => {
-      try {
-        await waitForConfirmation(
-          dispatch,
-          translate('Rotate API key'),
-          translate(
-            'You are about to rotate API key for {username} service account. Are you sure you want to proceed?',
-            { username: <strong>{row.username}</strong> },
-            formatJsxTemplate,
-          ),
-          { positiveButton: translate('Yes') },
-        );
-      } catch {
-        return;
-      }
-      try {
-        const api =
-          context === 'customer'
-            ? marketplaceCustomerServiceAccountsRotateApiKey
-            : marketplaceProjectServiceAccountsRotateApiKey;
-        const response = await api({ path: { uuid: row.uuid } });
-        dispatch(showSuccess(translate('API key rotated successfully')));
-        // Open a dialog to show the new API key
-        dispatch(
-          openModalDialog(ServiceAccountShowInfoDialog, {
-            resolve: {
-              username: response.data.username,
-              token: response.data.token,
-              expiresAt: response.data.expires_at,
-            },
-          }),
-        );
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to rotate API key for service account.'),
-          ),
-        );
-      }
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => {
+      const api =
+        context === 'customer'
+          ? marketplaceCustomerServiceAccountsRotateApiKey
+          : marketplaceProjectServiceAccountsRotateApiKey;
+      return api({ path: { uuid: row.uuid } });
+    },
+    confirmation: {
+      title: translate('Rotate API key'),
+      body: translate(
+        'You are about to rotate API key for {username} service account. Are you sure you want to proceed?',
+        { username: <strong>{row.username}</strong> },
+        formatJsxTemplate,
+      ),
+      options: { positiveButton: translate('Yes') },
+    },
+    successMessage: translate('API key rotated successfully'),
+    errorMessage: translate('Unable to rotate API key for service account.'),
+    onSuccess: (response) => {
+      openDialog(ServiceAccountShowInfoDialog, {
+        resolve: {
+          username: response.data.username,
+          token: response.data.token,
+          expiresAt: response.data.expires_at,
+        },
+      });
     },
   });
 
   return (
     <ActionItem
       action={mutate}
+      disabled={isPending}
       title={translate('Rotate API key')}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
     />

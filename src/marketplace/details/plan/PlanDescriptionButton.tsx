@@ -5,7 +5,7 @@ import { getFormValues } from 'redux-form';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { ORDER_FORM_ID } from '@/marketplace/details/constants';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ActionButton } from '@/table/ActionButton';
 
 interface PlanDescriptionButtonProps {

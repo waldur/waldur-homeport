@@ -2,7 +2,6 @@ import { useQuery } from '@tanstack/react-query';
 import { FORM_ERROR } from 'final-form';
 import { FC, useCallback, useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   proposalProposalsList,
   proposalProtectedCallsGenerateSuggestions,
@@ -14,10 +13,10 @@ import { SelectField, StringField, SubmitButton } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 import { Call } from '../../types';
 
@@ -85,7 +84,9 @@ interface FormValues {
 export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
   resolve,
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
 
   // Fetch proposals for this call
   const { data: proposals, isLoading: proposalsLoading } = useQuery({
@@ -149,29 +150,25 @@ export const GenerateMatchesDialog: FC<GenerateMatchesDialogProps> = ({
         };
 
         resolve.refetch();
-        dispatch(
-          showSuccess(
-            translate(
-              'Checked {checked} reviewers, generated {created} suggestions.',
-              {
-                checked: data.reviewers_evaluated,
-                created: data.suggestions_created,
-              },
-            ),
+        showSuccess(
+          translate(
+            'Checked {checked} reviewers, generated {created} suggestions.',
+            {
+              checked: data.reviewers_evaluated,
+              created: data.suggestions_created,
+            },
           ),
         );
-        dispatch(closeModalDialog());
+        closeDialog();
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to generate matches.')),
-        );
+        showErrorResponse(e, translate('Unable to generate matches.'));
         if (e.response?.status === 400) {
           return { [FORM_ERROR]: e.response.data };
         }
         return { [FORM_ERROR]: translate('Unable to generate matches.') };
       }
     },
-    [resolve, dispatch],
+    [resolve],
   );
 
   const validate = useCallback((values: FormValues) => {

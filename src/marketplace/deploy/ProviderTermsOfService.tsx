@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 
 import { ExternalLink } from '@/core/ExternalLink';
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 const TermsOfServiceDialog = lazyComponent(() =>
   import('@/marketplace/orders/TermsOfServiceDialog').then((module) => ({
@@ -20,15 +19,13 @@ interface ProviderTermsOfServiceProps {
 export const ProviderTermsOfService: FunctionComponent<
   ProviderTermsOfServiceProps
 > = (props) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const onClick = (e) => {
     e.preventDefault();
-    dispatch(
-      openModalDialog(TermsOfServiceDialog, {
-        resolve: { content: props.termsOfService },
-        size: 'lg',
-      }),
-    );
+    openDialog(TermsOfServiceDialog, {
+      resolve: { content: props.termsOfService },
+      size: 'lg',
+    });
   };
 
   return props.termsOfServiceLink ? (

@@ -4,7 +4,7 @@ import { useState } from 'react';
 import { get } from '@/core/api';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 export const FileDownloader = ({ url, name, size = 20 }) => {
   const { showErrorResponse } = useNotify();

@@ -1,32 +1,29 @@
 import { ShareIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { userInvitationsSend } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
-import { getCustomer, getUser, getProject } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer, getProject } from '@/workspace/selectors';
 
 import { InvitationPolicyService } from './InvitationPolicyService';
 
 const statesForResend = ['pending', 'expired', 'canceled'];
 
 export const InvitationSendButton = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const user = useUser();
   const customer = useSelector(getCustomer);
   const project = useSelector(getProject);
 
-  const callback = async () => {
-    try {
-      await userInvitationsSend({ path: { uuid: row.uuid } });
-      dispatch(showSuccess(translate('Invitation has been sent again.')));
-      refetch();
-    } catch (e) {
-      dispatch(showErrorResponse(e, translate('Unable to resend invitation.')));
-    }
-  };
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => userInvitationsSend({ path: { uuid: row.uuid } }),
+    successMessage: translate('Invitation has been sent again.'),
+    errorMessage: translate('Unable to resend invitation.'),
+    refetch,
+  });
 
   const isDisabled = useMemo(() => {
     if (
@@ -41,7 +38,7 @@ export const InvitationSendButton = ({ row, refetch }) => {
       return true;
     }
     return false;
-  }, [user, customer, row]);
+  }, [user, customer, project, row]);
 
   const tooltip = useMemo(() => {
     if (
@@ -58,14 +55,14 @@ export const InvitationSendButton = ({ row, refetch }) => {
         'Only pending, expired and canceled invitations can be sent again.',
       );
     }
-  }, [user, customer, row]);
+  }, [user, customer, project, row]);
 
   return (
     <ActionItem
-      action={callback}
+      action={mutate}
       title={translate('Resend')}
       iconNode={<ShareIcon weight="bold" />}
-      disabled={isDisabled}
+      disabled={isDisabled || isPending}
       tooltip={tooltip}
     />
   );

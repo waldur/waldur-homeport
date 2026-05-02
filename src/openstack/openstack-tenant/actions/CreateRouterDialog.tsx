@@ -1,46 +1,32 @@
-import { FC, useCallback } from 'react';
-import { useDispatch } from 'react-redux';
+import { FC } from 'react';
 import { openstackRoutersCreate, OpenStackTenant } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { createLatinNameField } from '@/resource/actions/base';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const CreateRouterDialog: FC<ActionDialogProps<OpenStackTenant>> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
-
-  const submitForm = useCallback(
-    async (formData) => {
-      try {
-        await openstackRoutersCreate({
-          body: {
-            name: formData.name,
-            tenant: resource.url,
-          },
-        });
-        dispatch(showSuccess(translate('OpenStack router has been created.')));
-        dispatch(closeModalDialog());
-        if (refetch) {
-          await refetch();
-        }
-      } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to create OpenStack router.')),
-        );
-      }
-    },
-    [dispatch, refetch],
-  );
+  const mutation = useManagedMutation<any, any, { name: string }>({
+    mutationFn: (formData) =>
+      openstackRoutersCreate({
+        body: {
+          name: formData.name,
+          tenant: resource.url,
+        },
+      }),
+    successMessage: translate('OpenStack router has been created.'),
+    errorMessage: translate('Unable to create OpenStack router.'),
+    refetch,
+  });
 
   return (
     <ResourceActionDialog
       dialogTitle={translate('Create new router')}
-      submitForm={submitForm}
+      submitForm={mutation.mutateAsync}
       formFields={[createLatinNameField()]}
     />
   );

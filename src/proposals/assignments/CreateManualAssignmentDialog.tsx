@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   callReviewerPoolsList,
   proposalProposalsList,
@@ -15,10 +14,10 @@ import { SelectField, StringField, SubmitButton } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 import { Call } from '../types';
 
@@ -51,7 +50,8 @@ interface FormValues {
 export const CreateManualAssignmentDialog: FC<
   CreateManualAssignmentDialogProps
 > = ({ resolve }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
+
   const { call, refetch } = resolve;
 
   // Fetch accepted reviewers from pool
@@ -105,53 +105,39 @@ export const CreateManualAssignmentDialog: FC<
     [proposals],
   );
 
-  const handleSubmit = useCallback(
-    async (values: FormValues) => {
-      try {
-        const response = await proposalProtectedCallsCreateManualAssignment({
-          path: { uuid: call.uuid },
-          body: {
-            reviewer_pool_entry_uuid: values.reviewer.value,
-            proposal_uuids: values.proposals.map((p) => p.value),
-            manager_notes: values.manager_notes || '',
-          },
-        });
-
-        const data = response.data;
-        if (data.skipped_proposals && data.skipped_proposals.length > 0) {
-          dispatch(
-            showSuccess(
-              translate(
-                'Created assignment batch with {count} items. {skipped} proposals were skipped.',
-                {
-                  count: data.items_created,
-                  skipped: data.skipped_proposals.length,
-                },
-              ),
-            ),
-          );
-        } else {
-          dispatch(
-            showSuccess(
-              translate('Created assignment batch with {count} items.', {
-                count: data.items_created,
-              }),
-            ),
-          );
-        }
-        refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Failed to create manual assignment.'),
+  const createAssignmentMutation = useManagedMutation<any, any, FormValues>({
+    mutationFn: (values) =>
+      proposalProtectedCallsCreateManualAssignment({
+        path: { uuid: call.uuid },
+        body: {
+          reviewer_pool_entry_uuid: values.reviewer.value,
+          proposal_uuids: values.proposals.map((p) => p.value),
+          manager_notes: values.manager_notes || '',
+        },
+      }),
+    errorMessage: translate('Failed to create manual assignment.'),
+    refetch,
+    onSuccess: (response) => {
+      const data = response.data;
+      if (data.skipped_proposals && data.skipped_proposals.length > 0) {
+        showSuccess(
+          translate(
+            'Created assignment batch with {count} items. {skipped} proposals were skipped.',
+            {
+              count: data.items_created,
+              skipped: data.skipped_proposals.length,
+            },
           ),
+        );
+      } else {
+        showSuccess(
+          translate('Created assignment batch with {count} items.', {
+            count: data.items_created,
+          }),
         );
       }
     },
-    [call.uuid, refetch, dispatch],
-  );
+  });
 
   const formatReviewerLabel = useCallback((option: ReviewerOption) => {
     return (
@@ -167,7 +153,7 @@ export const CreateManualAssignmentDialog: FC<
 
   return (
     <Form<FormValues>
-      onSubmit={handleSubmit}
+      onSubmit={(values) => createAssignmentMutation.mutateAsync(values)}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

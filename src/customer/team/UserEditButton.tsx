@@ -1,15 +1,16 @@
 import { PencilSimpleIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { CustomerUser } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { getCustomer, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getCustomer } from '@/workspace/selectors';
 
 const EditUserDialog = lazyComponent(() =>
   import('./EditUserDialog').then((module) => ({
@@ -26,18 +27,16 @@ export const UserEditButton: React.FC<UserEditButtonProps> = ({
   customer,
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
   const currentCustomer = useSelector(getCustomer);
   const callback = () =>
-    dispatch(
-      openModalDialog(EditUserDialog, {
-        resolve: {
-          customer,
-          refetch,
-        },
-      }),
-    );
+    openDialog(EditUserDialog, {
+      resolve: {
+        customer,
+        refetch,
+      },
+    });
   if (
     !hasPermission(user, {
       permission: PermissionEnum.UPDATE_CUSTOMER_PERMISSION,

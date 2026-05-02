@@ -5,8 +5,8 @@ import { projectCreditsUpdate } from 'waldur-js-client';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
-import { useNotify } from '@/store/hooks';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { getCreditInitialValues } from './utils';
 

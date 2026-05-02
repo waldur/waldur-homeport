@@ -1,62 +1,38 @@
-import { TrashIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
-import { useAsyncFn } from 'react-use';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
-import { ActionItem } from './ActionItem';
+import { RemovalActionItem } from './RemovalActionItem';
 
 export const ResourceDeleteButton: FunctionComponent<{
   apiFunction;
   resourceType;
   refetch?;
 }> = ({ apiFunction, resourceType, refetch }) => {
-  const dispatch = useDispatch();
-  const deleteApp = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Confirmation'),
-        translate('Are you sure you want to delete this {resourceType}?', {
-          resourceType,
-        }),
-        { forDeletion: true },
-      );
-    } catch {
-      return;
-    }
-    try {
-      await apiFunction();
-      dispatch(
-        showSuccess(
-          translate('{resourceType} has been deleted.', { resourceType }),
-        ),
-      );
-      if (refetch) {
-        refetch();
-      }
-    } catch (response) {
-      dispatch(
-        showErrorResponse(
-          response,
-          translate('Unable to delete {resourceType}.', { resourceType }),
-        ),
-      );
-    }
-  };
-  const [{ loading }, callback] = useAsyncFn(deleteApp);
+  const deleteMutation = useManagedMutation<any, any, void>({
+    mutationFn: apiFunction,
+    successMessage: translate('{resourceType} has been deleted.', {
+      resourceType,
+    }),
+    errorMessage: translate('Unable to delete {resourceType}.', {
+      resourceType,
+    }),
+    refetch,
+    confirmation: {
+      title: translate('Confirmation'),
+      body: translate('Are you sure you want to delete this {resourceType}?', {
+        resourceType,
+      }),
+      options: { forDeletion: true },
+    },
+  });
   return (
-    <ActionItem
+    <RemovalActionItem
       title={translate('Delete')}
-      disabled={loading}
-      action={callback}
-      iconNode={<TrashIcon weight="bold" />}
+      disabled={deleteMutation.isPending}
+      action={() => deleteMutation.mutate()}
       size="sm"
-      className="text-danger"
-      iconColor="danger"
     />
   );
 };

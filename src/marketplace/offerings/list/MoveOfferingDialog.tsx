@@ -1,9 +1,7 @@
-import { FunctionComponent, useCallback } from 'react';
+import { FunctionComponent } from 'react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { marketplaceProviderOfferingsMoveOffering } from 'waldur-js-client';
 
-import { format } from '@/core/ErrorMessageFormatter';
 import { required } from '@/core/validators';
 import { FormFooter } from '@/form';
 import { Select } from '@/form/AsyncSelectField';
@@ -11,48 +9,42 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { organizationAutocomplete } from '@/marketplace/common/autocompletes';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useNotify } from '@/store/notify';
 
 export const MoveOfferingDialog: FunctionComponent<{
   resolve: { offering; refetch };
 }> = ({ resolve: { offering, refetch } }) => {
-  const dispatch = useDispatch();
-  const onSubmit = useCallback(
-    async (formData) => {
-      try {
-        await marketplaceProviderOfferingsMoveOffering({
-          path: { uuid: offering.uuid },
-          body: {
-            customer: formData.organization.url,
-            preserve_permissions: formData.preserve_permissions,
+  const { showSuccess } = useNotify();
+
+  const moveOfferingMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) =>
+      marketplaceProviderOfferingsMoveOffering({
+        path: { uuid: offering.uuid },
+        body: {
+          customer: formData.organization.url,
+          preserve_permissions: formData.preserve_permissions,
+        },
+      }),
+    errorMessage: translate('Offering could not be moved.'),
+    refetch,
+    onSuccess: (_data, variables) => {
+      showSuccess(
+        translate(
+          '{offeringName} offering has been moved to {organizationName} organization.',
+          {
+            offeringName: offering.name,
+            organizationName: variables.organization.name,
           },
-        });
-        dispatch(
-          showSuccess(
-            translate(
-              '{offeringName} offering has been moved to {organizationName} organization.',
-              {
-                offeringName: offering.name,
-                organizationName: formData.organization.name,
-              },
-            ),
-          ),
-        );
-        await refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        const errorMessage = `${translate('Offering could not be moved.')} ${format(error)}`;
-        dispatch(showError(errorMessage));
-      }
+        ),
+      );
     },
-    [dispatch, offering],
-  );
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => moveOfferingMutation.mutateAsync(values)}
       initialValues={{ preserve_permissions: false }}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

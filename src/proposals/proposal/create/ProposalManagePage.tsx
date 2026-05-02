@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { useCurrentStateAndParams } from '@uirouter/react';
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import {
   proposalProposalsRetrieve,
   proposalPublicCallsRetrieve,
@@ -17,7 +16,7 @@ import { translate } from '@/i18n';
 import { PageBarProvider } from '@/marketplace/context';
 import { useTitle } from '@/navigation/title';
 import { Proposal } from '@/proposals/types';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { ProposalDetails } from '../ProposalDetails';
 import { ProposalRoleBasedTabs } from '../ProposalRoleBasedTabs';
@@ -54,7 +53,7 @@ export const ProposalManagePage = () => {
       : translate('View proposal');
   useTitle(title);
 
-  const user = useSelector(getUser);
+  const user = useUser();
 
   const isEditPage = state.name === 'proposals.manage-proposal';
   const hasPermissionToSubmit =

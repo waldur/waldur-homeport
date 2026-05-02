@@ -9,8 +9,8 @@ import {
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { formatJsxTemplate, translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 
 import { Step1UploadFile } from './Step1UploadFile';
 import { Step2PreviewAndImport } from './Step2PreviewAndImport';
@@ -43,13 +43,16 @@ const steps: ProgressStep[] = [
 ];
 
 export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
+  const { showError, showErrorResponse, showSuccess } = useNotify();
+  const { closeDialog } = useModal();
+
   // Save created users (to avoid recreation) when we make modifications on the file after a failed submission
   const [createdUsers, setCreatedUsers] = useState<OfferingUser[]>([]);
   // When the submission is failed, we keep the returned status of records here - including errors
   const [status, setStatus] = useState<RecordStatus[]>([]);
 
   const submitForm = useCallback(
-    async (formData, dispatch, formProps) => {
+    async (formData, formProps) => {
       try {
         const validRecords: OfferingUserRecord[] = formData.payload.filter(
           (row) => {
@@ -102,7 +105,7 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
           );
         });
         if (promises.length === 0 && createdUsers.length === 0) {
-          dispatch(showError(translate('No valid offering user to import')));
+          showError(translate('No valid offering user to import'));
           return;
         }
 
@@ -114,29 +117,36 @@ export const UserImportDialog: FC<UserImportDialogProps> = (props) => {
 
           if (success.length) {
             props.resolve.refetch();
-            dispatch(
-              showSuccess(
-                translate('Successfully imported {n} records', {
-                  n: success.length,
-                }),
-              ),
+            showSuccess(
+              translate('Successfully imported {n} records', {
+                n: success.length,
+              }),
             );
           }
           if (error.length) {
-            dispatch(showErrorResponse(error[0].reason));
+            showErrorResponse(error[0].reason);
           }
 
           if (!error.length) {
             formProps.destroy();
-            dispatch(closeModalDialog());
+            closeDialog();
           }
           return results;
         });
       } catch (err) {
-        dispatch(showErrorResponse(err));
+        showErrorResponse(err);
       }
     },
-    [createdUsers, setCreatedUsers, setStatus, props.resolve.refetch],
+    [
+      createdUsers,
+      setCreatedUsers,
+      setStatus,
+      props.resolve.refetch,
+      showError,
+      showErrorResponse,
+      showSuccess,
+      closeDialog,
+    ],
   );
 
   return (

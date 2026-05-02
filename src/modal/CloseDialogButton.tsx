@@ -3,8 +3,7 @@ import { Button } from 'react-bootstrap';
 import { ButtonVariant } from 'react-bootstrap/esm/types';
 
 import { translate } from '@/i18n';
-
-import { useModal } from './hooks';
+import { useModal } from '@/modal/actions';
 
 interface CloseDialogButtonProps {
   /** Button label - defaults to 'Cancel' */

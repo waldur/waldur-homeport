@@ -22,10 +22,9 @@ import { Attachment, AttachmentUploading } from '@/form/upload/types';
 import { UploadContainer } from '@/form/upload/UploadContainer';
 import { formatJsxTemplate, translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { openModalDialog, waitForConfirmation } from '@/modal/actions';
-import { useModal } from '@/modal/hooks';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 interface IssueTemplateFormProps {
   resolve: { issueTemplate?; refetch };
@@ -33,7 +32,7 @@ interface IssueTemplateFormProps {
 
 export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
   const dispatch = useDispatch();
-  const { closeDialog } = useModal();
+  const { openDialog, closeDialog, confirm } = useModal();
   const { showSuccess, showErrorResponse } = useNotify();
   const isEdit = Boolean(resolve.issueTemplate?.uuid);
 
@@ -86,8 +85,7 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
       }
 
       try {
-        await waitForConfirmation(
-          dispatch,
+        await confirm(
           translate('Confirmation'),
           translate(
             'Are you sure you want to remove {doc_name}?',
@@ -113,12 +111,16 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
         const response = await supportTemplatesRetrieve({
           path: { uuid: resolve.issueTemplate.uuid },
         });
-        reopenEditDialog(response.data, resolve.refetch, dispatch);
+        openDialog(IssueTemplateForm, {
+          dialogClassName: 'modal-dialog-centered',
+          resolve: { issueTemplate: response.data, refetch: resolve.refetch },
+          size: 'lg',
+        });
       } catch (e) {
         showErrorResponse(e, translate('Unable to remove document.'));
       }
     },
-    [dispatch, resolve, cancelFile, showSuccess, showErrorResponse],
+    [resolve, cancelFile, showSuccess, showErrorResponse, dispatch, openDialog],
   );
 
   const attachFiles = async (templateUuid) => {
@@ -280,15 +282,5 @@ export const IssueTemplateForm: FC<IssueTemplateFormProps> = ({ resolve }) => {
         </form>
       )}
     </FinalForm>
-  );
-};
-
-const reopenEditDialog = (issueTemplate, refetch, dispatch) => {
-  dispatch(
-    openModalDialog(IssueTemplateForm, {
-      dialogClassName: 'modal-dialog-centered',
-      resolve: { issueTemplate, refetch },
-      size: 'lg',
-    }),
   );
 };

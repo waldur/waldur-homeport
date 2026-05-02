@@ -15,7 +15,8 @@ import { RemovedProjectWarningBar } from '@/project/RemovedProjectWarningBar';
 import { OfferingUsersWarningBar } from '@/user/OfferingUsersWarningBar';
 import { ProfileCompletenessProvider } from '@/user/ProfileCompletenessContext';
 import { UsersService } from '@/user/UsersService';
-import { getImpersonatorUser, getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
+import { getImpersonatorUser } from '@/workspace/selectors';
 
 import { LayoutContext, LayoutContextInterface } from './context';
 import { CookiesConsent } from './cookies/CookiesConsent';
@@ -32,7 +33,7 @@ import { useTabs } from './useTabs';
 
 export const Layout: React.FC<PropsWithChildren> = ({ children }) => {
   const { state } = useCurrentStateAndParams();
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const impersonatorUser = useSelector(getImpersonatorUser);
   const [actions, setActions] = useState(null);
   const [breadcrumbs, setBreadcrumbs] = useState<IBreadcrumbItem[]>([]);

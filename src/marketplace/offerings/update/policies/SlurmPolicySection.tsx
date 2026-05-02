@@ -11,7 +11,6 @@ import arrayMutators from 'final-form-arrays';
 import { FC, useState, useEffect, useMemo, useCallback } from 'react';
 import { Card, Dropdown, FormCheck } from 'react-bootstrap';
 import { Field, Form, useFormState, useForm } from 'react-final-form';
-import { useDispatch, useSelector } from 'react-redux';
 import { components } from 'react-select';
 import {
   marketplaceSlurmPeriodicUsagePoliciesCreate,
@@ -39,10 +38,10 @@ import { translate } from '@/i18n';
 import { useOrganizationGroups } from '@/marketplace/common/utils';
 import { ComponentLimitsField } from '@/marketplace/offerings/details/policies/ComponentLimitsField';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { openModalDialog } from '@/modal/actions';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { ActionDropdownButton } from '@/table/ActionDropdownButton';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { OfferingSectionProps } from '../types';
 
@@ -79,17 +78,15 @@ const SlurmPolicySummaryDialog = lazyComponent(() =>
 
 // Staff-only button to open evaluate/dry-run dialog
 const EvaluateButton: FC<{ policyUuid: string }> = ({ policyUuid }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
 
   const openEvaluate = useCallback(() => {
-    dispatch(
-      openModalDialog(SlurmPolicyEvaluateDialog, {
-        resolve: { policyUuid },
-        size: 'xl',
-      }),
-    );
-  }, [dispatch, policyUuid]);
+    openDialog(SlurmPolicyEvaluateDialog, {
+      resolve: { policyUuid },
+      size: 'xl',
+    });
+  }, [policyUuid]);
 
   if (!user?.is_staff) {
     return null;
@@ -114,7 +111,7 @@ const PolicyInfoDropdown: FC<{
   offering: OfferingSectionProps['offering'];
   policyUuid?: string;
 }> = ({ offering, policyUuid }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const formState = useFormState();
 
   const planAllocations = useMemo(() => {
@@ -133,56 +130,50 @@ const PolicyInfoDropdown: FC<{
           })),
       }))
       .filter((plan) => plan.components.length > 0);
-  }, [offering?.plans]);
+  }, [policyUuid, offering?.plans]);
 
   const openSummary = useCallback(() => {
-    dispatch(
-      openModalDialog(SlurmPolicySummaryDialog, {
-        resolve: {
-          config: {
-            limit_type: formState.values.limit_type,
-            tres_billing_enabled: formState.values.tres_billing_enabled,
-            carryover_factor: formState.values.carryover_factor,
-            grace_ratio: formState.values.grace_ratio,
-            carryover_enabled: formState.values.carryover_enabled,
-            raw_usage_reset: formState.values.raw_usage_reset,
-            qos_strategy: formState.values.qos_strategy,
-            apply_to_all: formState.values.apply_to_all,
-            actions: formState.values.actions,
-            period: formState.values.period,
-          },
-          planAllocations,
+    openDialog(SlurmPolicySummaryDialog, {
+      resolve: {
+        config: {
+          limit_type: formState.values.limit_type,
+          tres_billing_enabled: formState.values.tres_billing_enabled,
+          carryover_factor: formState.values.carryover_factor,
+          grace_ratio: formState.values.grace_ratio,
+          carryover_enabled: formState.values.carryover_enabled,
+          raw_usage_reset: formState.values.raw_usage_reset,
+          qos_strategy: formState.values.qos_strategy,
+          apply_to_all: formState.values.apply_to_all,
+          actions: formState.values.actions,
+          period: formState.values.period,
         },
-        size: 'xl',
-      }),
-    );
-  }, [dispatch, formState.values, planAllocations]);
+        planAllocations,
+      },
+      size: 'xl',
+    });
+  }, [planAllocations]);
 
   const openPreview = useCallback(() => {
-    dispatch(
-      openModalDialog(SlurmPolicyPreviewDialog, {
-        resolve: {
-          formValues: {
-            grace_ratio: formState.values.grace_ratio,
-            carryover_factor: formState.values.carryover_factor,
-            carryover_enabled: formState.values.carryover_enabled,
-          },
-          offering,
+    openDialog(SlurmPolicyPreviewDialog, {
+      resolve: {
+        formValues: {
+          grace_ratio: formState.values.grace_ratio,
+          carryover_factor: formState.values.carryover_factor,
+          carryover_enabled: formState.values.carryover_enabled,
         },
-        size: 'lg',
-      }),
-    );
-  }, [dispatch, formState.values, offering]);
+        offering,
+      },
+      size: 'lg',
+    });
+  }, [offering]);
 
   const openExecutionLog = useCallback(() => {
     if (!policyUuid) return;
-    dispatch(
-      openModalDialog(SlurmPolicyExecutionLogDialog, {
-        resolve: { policyUuid },
-        size: 'xl',
-      }),
-    );
-  }, [dispatch, policyUuid]);
+    openDialog(SlurmPolicyExecutionLogDialog, {
+      resolve: { policyUuid },
+      size: 'xl',
+    });
+  }, [policyUuid]);
 
   return (
     <ActionDropdownButton title={translate('Policy info')}>
@@ -477,7 +468,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
 }) => {
   const [isSubmitting, setIsSubmitting] = useState(false);
   const [isPolicyEnabled, setIsPolicyEnabled] = useState(false);
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
 
   const { isLoading: groupsLoading, data: organizationGroups } =
     useOrganizationGroups();
@@ -554,11 +545,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
               }),
             ),
           );
-          dispatch(
-            showSuccess(
-              translate('SLURM policy has been disabled and removed.'),
-            ),
-          );
+          showSuccess(translate('SLURM policy has been disabled and removed.'));
         }
         setIsPolicyEnabled(false);
         await refetchPolicies();
@@ -569,11 +556,9 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
         refetch();
       }
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Failed to update SLURM policy. Please try again.'),
-        ),
+      showErrorResponse(
+        error,
+        translate('Failed to update SLURM policy. Please try again.'),
       );
     } finally {
       setIsSubmitting(false);
@@ -604,9 +589,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
           path: { uuid: existingPolicy.uuid },
           body: apiData,
         });
-        dispatch(
-          showSuccess(translate('SLURM policy has been updated successfully.')),
-        );
+        showSuccess(translate('SLURM policy has been updated successfully.'));
       } else {
         // Create new policy
         const policyData = {
@@ -618,9 +601,7 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
         await marketplaceSlurmPeriodicUsagePoliciesCreate({
           body: policyData,
         });
-        dispatch(
-          showSuccess(translate('SLURM policy has been created successfully.')),
-        );
+        showSuccess(translate('SLURM policy has been created successfully.'));
       }
 
       await refetchPolicies();
@@ -630,11 +611,9 @@ export const SlurmPolicySection: FC<OfferingSectionProps> = ({
         refetch();
       }
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Failed to save SLURM policy. Please try again.'),
-        ),
+      showErrorResponse(
+        error,
+        translate('Failed to save SLURM policy. Please try again.'),
       );
     } finally {
       setIsSubmitting(false);

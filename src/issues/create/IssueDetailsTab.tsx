@@ -9,7 +9,7 @@ import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import { translate } from '@/i18n';
 import { ProjectGroup } from '@/issues/create/ProjectGroup';
 import { RootState } from '@/store/reducers';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { IssueTypeChoice } from '../types/constants';
 
@@ -41,7 +41,7 @@ export const IssueDetailsTab = ({
   const standaloneIssue = useSelector(standaloneIssueSelector);
   const type = useSelector(typeSelector);
 
-  const user = useSelector(getUser);
+  const user = useUser();
   const isStaffOrSupport = user?.is_staff || user?.is_support;
   const submitting = useSelector(isSubmitting(ISSUE_CREATION_FORM_ID));
 

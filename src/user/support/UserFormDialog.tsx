@@ -1,6 +1,6 @@
 import { PencilSimpleIcon, UserPlusIcon } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import {
   GenderEnum,
   User,
@@ -13,11 +13,11 @@ import {
 
 import { ProgressStep } from '@/core/ProgressSteps';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
-import { useNotify } from '@/store/hooks';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { Wizard } from '@/wizard';
 import { setCurrentUser } from '@/workspace/actions';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { parseGender } from './aai-constants';
 import { AccountStep } from './create-user-steps/AccountStep';
@@ -113,7 +113,7 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
   resolve: { user, refetch },
 }) => {
   const dispatch = useDispatch();
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
   const { showSuccess, showErrorResponse } = useNotify();
   const { closeDialog } = useModal();
 
@@ -179,7 +179,6 @@ export const UserFormDialog: FC<UserFormDialogProps> = ({
       editMode,
       user,
       currentUser,
-      dispatch,
       showSuccess,
       showErrorResponse,
       closeDialog,

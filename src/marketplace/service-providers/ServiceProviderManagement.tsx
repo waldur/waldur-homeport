@@ -1,6 +1,6 @@
 import { useMutation, useQuery, useQueryClient } from '@tanstack/react-query';
 import { FC, useEffect } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { SubmissionError } from 'redux-form';
 import {
   marketplaceServiceProvidersPartialUpdate,
@@ -14,8 +14,8 @@ import { FieldEditButton } from '@/customer/details/FieldEditButton';
 import FormTable from '@/form/FormTable';
 import { translate } from '@/i18n';
 import { ServiceProvider } from '@/marketplace/types';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { renderFieldOrDash } from '@/table/utils';
 import { getCustomer, isStaff } from '@/workspace/selectors';
@@ -31,7 +31,10 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
   serviceProvider,
   setServiceProvider,
 }) => {
-  const dispatch = useDispatch();
+  const { confirm } = useModal();
+
+  const { showErrorResponse, showSuccess } = useNotify();
+
   const queryClient = useQueryClient();
   const customer = useSelector(getCustomer);
   const isStaffUser = useSelector(isStaff);
@@ -51,21 +54,18 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
 
   useEffect(() => {
     if (error) {
-      dispatch(
-        showErrorResponse(
-          error as any,
-          translate('Unable to retrieve service provider API secret code.'),
-        ),
+      showErrorResponse(
+        error as any,
+        translate('Unable to retrieve service provider API secret code.'),
       );
     }
-  }, [error, dispatch]);
+  }, [error]);
 
   const { mutate: regenerateSecretCode, isPending: isGenerating } = useMutation(
     {
       mutationFn: async () => {
         try {
-          await waitForConfirmation(
-            dispatch,
+          await confirm(
             translate('Regenerate secret API code'),
             translate(
               'After secret API code has been regenerated, it will not be possible to submit usage with the old key.',
@@ -88,17 +88,13 @@ export const ServiceProviderManagement: FC<OwnProps> = ({
             ['ServiceProviderSecretCode', serviceProvider?.uuid],
             data,
           );
-          dispatch(
-            showSuccess(
-              translate('Service provider API secret code has been generated.'),
-            ),
+          showSuccess(
+            translate('Service provider API secret code has been generated.'),
           );
         } catch (error) {
-          dispatch(
-            showErrorResponse(
-              error,
-              translate('Unable to generate service provider API secret code.'),
-            ),
+          showErrorResponse(
+            error,
+            translate('Unable to generate service provider API secret code.'),
           );
         }
       },

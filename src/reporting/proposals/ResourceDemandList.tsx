@@ -55,7 +55,6 @@ const ResourceDemandExpandableRow: FC<{ row: ResourceDemandStat }> = ({
         {translate('approved')} / {row.approved_count + row.pending_count}{' '}
         {translate('reviewed')})
       </p>
-
       <BootstrapTable className="table-row-bordered table-expandable table-rounded border border-gray-200 overflow-hidden">
         <thead className="align-middle">
           <tr>

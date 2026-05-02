@@ -1,11 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { Offering } from '@/marketplace/types';
 import { REMOTE_OFFERING_TYPE } from '@/marketplace-remote/constants';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
@@ -24,13 +23,11 @@ interface CreateImageButtonProps {
 
 export const CreateImageButton = (props: CreateImageButtonProps) => {
   const user = useUser();
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () =>
-    dispatch(
-      openModalDialog(CreateImageDialog, {
-        resolve: props,
-      }),
-    );
+    openDialog(CreateImageDialog, {
+      resolve: props,
+    });
 
   if (
     !hasPermission(user, {

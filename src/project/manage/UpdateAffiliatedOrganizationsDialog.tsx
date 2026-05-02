@@ -14,10 +14,9 @@ import { LoadingErred } from '@/core/LoadingErred';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { SubmitButton } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentProject } from '@/workspace/actions';
 
 interface UpdateAffiliatedOrganizationsDialogProps {
@@ -52,7 +51,6 @@ export const UpdateAffiliatedOrganizationsDialog: FunctionComponent<
 
   const [selectedUuids, setSelectedUuids] =
     useState<Set<string>>(currentOrgUuids);
-  const [submitting, setSubmitting] = useState(false);
 
   const toggleOrg = useCallback((uuid: string) => {
     setSelectedUuids((prev) => {
@@ -66,35 +64,25 @@ export const UpdateAffiliatedOrganizationsDialog: FunctionComponent<
     });
   }, []);
 
-  const handleSubmit = useCallback(async () => {
-    setSubmitting(true);
-    try {
+  const updateMutation = useManagedMutation<any, any, void>({
+    mutationFn: async () => {
       const selectedOrgs = allOrgs?.filter((o) => selectedUuids.has(o.uuid));
-      await projectsUpdateAffiliatedOrganizations({
+      return await projectsUpdateAffiliatedOrganizations({
         path: { uuid: project.uuid },
         body: {
           affiliated_organizations: selectedOrgs?.map((o) => o.uuid) || [],
         },
       });
+    },
+    successMessage: translate('Affiliated organizations have been updated.'),
+    errorMessage: translate('Unable to update affiliated organizations.'),
+    onSuccess: async () => {
       const response = await projectsRetrieve({
         path: { uuid: project.uuid },
       });
       dispatch(setCurrentProject(response.data as unknown as Project));
-      dispatch(
-        showSuccess(translate('Affiliated organizations have been updated.')),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to update affiliated organizations.'),
-        ),
-      );
-    } finally {
-      setSubmitting(false);
-    }
-  }, [allOrgs, selectedUuids, project.uuid, dispatch]);
+    },
+  });
 
   return (
     <ModalDialog
@@ -104,10 +92,10 @@ export const UpdateAffiliatedOrganizationsDialog: FunctionComponent<
         <>
           <CloseDialogButton />
           <SubmitButton
-            disabled={submitting}
-            submitting={submitting}
+            disabled={updateMutation.isPending}
+            submitting={updateMutation.isPending}
             label={translate('Save')}
-            onClick={handleSubmit}
+            onClick={() => updateMutation.mutate()}
           />
         </>
       }

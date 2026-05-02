@@ -1,49 +1,22 @@
 import { FC, useState } from 'react';
-import { Card } from 'react-bootstrap';
 import { ReviewerProfile } from 'waldur-js-client';
 
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
 import { AffiliationsSection } from '@/reviewer/AffiliationsSection';
+import { CreateProfilePrompt } from '@/reviewer/CreateProfilePrompt';
 import { ExpertiseSection } from '@/reviewer/ExpertiseSection';
 import { ProfileInfoSection } from '@/reviewer/ProfileInfoSection';
 import { PublicationsSection } from '@/reviewer/PublicationsSection';
 import { ReviewerProfilePanel } from '@/reviewer/ReviewerProfilePanel';
 import { useReviewerProfile } from '@/reviewer/useReviewerProfile';
+import { useUpdateReviewerProfile } from '@/reviewer/useUpdateReviewerProfile';
 
 interface ReviewerProfileTabProps {
   user: any;
 }
 
 type TabKey = 'info' | 'affiliations' | 'expertise' | 'publications';
-
-const CreateProfilePrompt: FC<{
-  onCreate: () => void;
-  isCreating: boolean;
-}> = ({ onCreate, isCreating }) => (
-  <Card className="card-bordered">
-    <Card.Body className="text-center py-10">
-      <h3 className="mb-5">
-        {translate('You do not have a reviewer profile yet.')}
-      </h3>
-      <p className="text-muted mb-5">
-        {translate(
-          'Create a reviewer profile to manage your affiliations, expertise, and publications for proposal reviews.',
-        )}
-      </p>
-      <button
-        type="button"
-        className="btn btn-primary"
-        onClick={onCreate}
-        disabled={isCreating}
-      >
-        {isCreating
-          ? translate('Creating...')
-          : translate('Create reviewer profile')}
-      </button>
-    </Card.Body>
-  </Card>
-);
 
 interface ProfileContentProps {
   profile: ReviewerProfile;
@@ -97,16 +70,9 @@ const ProfileContent: FC<ProfileContentProps> = ({
 };
 
 export const ReviewerProfileTab: FC<ReviewerProfileTabProps> = () => {
-  const {
-    profile,
-    isLoading,
-    error,
-    refetch,
-    createProfile,
-    isCreating,
-    updateProfile,
-    isUpdating,
-  } = useReviewerProfile();
+  const { profile, isLoading, error, refetch } = useReviewerProfile();
+  const { mutate: updateProfile, isPending: isUpdating } =
+    useUpdateReviewerProfile();
 
   if (isLoading) {
     return <LoadingSpinner />;
@@ -117,9 +83,7 @@ export const ReviewerProfileTab: FC<ReviewerProfileTabProps> = () => {
   }
 
   if (!profile) {
-    return (
-      <CreateProfilePrompt onCreate={createProfile} isCreating={isCreating} />
-    );
+    return <CreateProfilePrompt />;
   }
 
   return (

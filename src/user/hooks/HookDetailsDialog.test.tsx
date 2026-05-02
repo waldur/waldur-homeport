@@ -1,3 +1,4 @@
+import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
 import { render, screen, waitFor } from '@testing-library/react';
 import userEvent from '@testing-library/user-event';
 import { Provider } from 'react-redux';
@@ -9,7 +10,7 @@ import {
   hooksWebPartialUpdate,
 } from 'waldur-js-client';
 
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 
 import { HookDetailsDialog } from './HookDetailsDialog';
 import { HookResponse } from './types';
@@ -19,20 +20,33 @@ import { loadEventGroupsOptions } from './utils';
 vi.mock('waldur-js-client');
 vi.mock('./utils');
 vi.mock('@/modal/actions', () => ({
-  closeModalDialog: vi.fn(),
+  useModal: () => ({
+    closeDialog: vi.fn(),
+  }),
 }));
-vi.mock('@/store/hooks', () => ({
+vi.mock('@/store/notify', () => ({
   useNotify: vi.fn().mockReturnValue({
     showSuccess: vi.fn(),
     showErrorResponse: vi.fn(),
-  }),
+  } as any),
 }));
 
 const mockStore = configureStore([]);
 const store = mockStore({});
 
 const renderWithRedux = (ui) => {
-  return render(<Provider store={store}>{ui}</Provider>);
+  const queryClient = new QueryClient({
+    defaultOptions: {
+      queries: { retry: false },
+      mutations: { retry: false },
+    },
+  });
+
+  return render(
+    <QueryClientProvider client={queryClient}>
+      <Provider store={store}>{ui}</Provider>
+    </QueryClientProvider>,
+  );
 };
 
 const mockEventGroups = [
@@ -60,7 +74,7 @@ describe('HookDetailsDialog', () => {
       showSuccess: mockShowSuccess,
       showError: mockShowError,
       showErrorResponse: mockShowErrorResponse,
-    });
+    } as any);
     store.clearActions();
   });
 
@@ -198,10 +212,12 @@ describe('HookDetailsDialog', () => {
       // Submit form without changes
       const submitButton = screen.getByText('Update');
       await userEvent.click(submitButton);
-      expect(mockShowErrorResponse).toHaveBeenCalledWith(
-        error,
-        'Unable to update notification.',
-      );
+      await waitFor(() => {
+        expect(mockShowErrorResponse).toHaveBeenCalledWith(
+          error,
+          'Unable to update notification.',
+        );
+      });
     });
   });
 });

@@ -1,8 +1,6 @@
-import { useQueryClient } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Row } from 'react-bootstrap';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   AdminAnnouncementRequest,
   adminAnnouncementsCreate,
@@ -14,10 +12,9 @@ import { DateTimeField } from '@/form/DateTimeField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ADMIN_ANNOUNCEMENTS_QUERY_KEY } from '@/navigation/header/announcements/queryKeys';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { AnnouncementTypeOptions } from '../utils';
 
@@ -27,52 +24,44 @@ interface AnnouncementFormProps {
 
 export const AnnouncementForm: FC<AnnouncementFormProps> = ({ resolve }) => {
   const isEdit = Boolean(resolve.announcement?.uuid);
-  const queryClient = useQueryClient();
-  const dispatch = useDispatch();
 
   const initialValues = resolve?.announcement
     ? { ...resolve.announcement }
     : undefined;
 
-  const onSubmit = async (values: AdminAnnouncementRequest) => {
-    let action;
-    if (isEdit) {
-      action = adminAnnouncementsUpdate({
-        path: {
-          uuid: resolve.announcement.uuid,
-        },
-        body: values,
-      });
-    } else {
-      action = adminAnnouncementsCreate({ body: values });
-    }
+  const onSubmitMutation = useManagedMutation<
+    any,
+    any,
+    AdminAnnouncementRequest
+  >({
+    mutationFn: (values) =>
+      isEdit
+        ? adminAnnouncementsUpdate({
+            path: { uuid: resolve.announcement.uuid },
+            body: values,
+          })
+        : adminAnnouncementsCreate({ body: values }),
 
-    try {
-      await action;
-      resolve.refetch();
-      // Invalidate React Query cache to update announcements in header
-      queryClient.invalidateQueries({
+    successMessage: isEdit
+      ? translate('The announcement has been updated.')
+      : translate('New announcement has been created.'),
+
+    errorMessage: isEdit
+      ? translate('Unable to update announcement.')
+      : translate('Unable to create announcement.'),
+
+    refetch: resolve.refetch,
+
+    invalidateQueries: [
+      {
         queryKey: ADMIN_ANNOUNCEMENTS_QUERY_KEY,
-      });
-      showSuccess(
-        isEdit
-          ? translate('The announcement has been updated.')
-          : translate('New announcement has been created.'),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      showErrorResponse(
-        e,
-        isEdit
-          ? translate('Unable to update announcement.')
-          : translate('Unable to create announcement.'),
-      );
-    }
-  };
+      },
+    ],
+  });
 
   return (
-    <Form
-      onSubmit={onSubmit}
+    <Form<AdminAnnouncementRequest>
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

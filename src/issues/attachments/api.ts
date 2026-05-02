@@ -10,8 +10,7 @@ import {
 import { formDataOptions } from '@/core/api';
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { showError, showErrorResponse } from '@/store/notify';
-import store from '@/store/store';
+import { useNotify } from '@/store/notify';
 
 import { Attachment, IssueAttachmentUploading } from './types';
 import { validateFiles, getErrorMessage } from './utils';
@@ -33,6 +32,8 @@ export const useIssueAttachments = (issueUrl: string) => {
 };
 
 export const useUploadAttachments = (issueUrl: string) => {
+  const { showError, showErrorResponse } = useNotify();
+
   const queryClient = useQueryClient();
   const [uploading, setUploading] = useState<IssueAttachmentUploading[]>([]);
 
@@ -57,11 +58,9 @@ export const useUploadAttachments = (issueUrl: string) => {
             item.key === key ? { ...item, error, progress: 0 } : item,
           ),
         );
-        store.dispatch(
-          showErrorResponse(
-            error as Response,
-            translate('Unable to upload attachment.'),
-          ),
+        showErrorResponse(
+          error as Response,
+          translate('Unable to upload attachment.'),
         );
         throw error;
       }
@@ -78,7 +77,7 @@ export const useUploadAttachments = (issueUrl: string) => {
 
       if (rejected.length) {
         const message = getErrorMessage(rejected);
-        store.dispatch(showError(message));
+        showError(message);
       }
 
       if (accepted.length === 0) {
@@ -130,6 +129,8 @@ export const useUploadAttachments = (issueUrl: string) => {
 };
 
 export const useDeleteAttachment = (issueUrl: string) => {
+  const { showErrorResponse } = useNotify();
+
   const queryClient = useQueryClient();
   const [deleting, setDeleting] = useState<Set<string>>(new Set());
 
@@ -148,9 +149,7 @@ export const useDeleteAttachment = (issueUrl: string) => {
       });
     },
     onError: (error: Response) => {
-      store.dispatch(
-        showErrorResponse(error, translate('Unable to delete attachment.')),
-      );
+      showErrorResponse(error, translate('Unable to delete attachment.'));
     },
     onSettled: (_data, _error, uuid) => {
       // Clear deleting state

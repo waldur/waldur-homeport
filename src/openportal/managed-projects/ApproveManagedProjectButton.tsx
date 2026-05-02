@@ -1,13 +1,11 @@
 import { CheckCircleIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
 import classNames from 'classnames';
-import { useDispatch } from 'react-redux';
 import { openportalManagedProjectsApprove } from 'waldur-js-client';
 
 import { LoadingSpinnerSimple } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { wrapTooltip } from '@/table/ActionButton';
 
 export const ApproveManagedProjectButton = ({
@@ -18,31 +16,22 @@ export const ApproveManagedProjectButton = ({
 }) => {
   const project = row; // Assuming row is the project object
 
+  const { mutate, isPending: isLoading } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      openportalManagedProjectsApprove({
+        path: {
+          identifier: project.identifier,
+          destination: project.destination,
+        },
+      }),
+    refetch,
+    successMessage: translate('Project has been approved.'),
+    errorMessage: translate('Unable to approve project.'),
+  });
+
   if (!project) {
     return null;
   }
-
-  const dispatch = useDispatch();
-  const { mutate, isPending: isLoading } = useMutation({
-    mutationFn: async () => {
-      try {
-        await openportalManagedProjectsApprove({
-          path: {
-            identifier: project.identifier,
-            destination: project.destination,
-          },
-        });
-        if (refetch) {
-          await refetch();
-        }
-        dispatch(showSuccess(translate('Project has been approved.')));
-      } catch (error) {
-        dispatch(
-          showErrorResponse(error, translate('Unable to approve project.')),
-        );
-      }
-    },
-  });
 
   return wrapTooltip(
     translate('Click to approve this project.'),

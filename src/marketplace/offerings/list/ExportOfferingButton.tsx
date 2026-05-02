@@ -1,7 +1,6 @@
 import { DownloadSimpleIcon } from '@phosphor-icons/react';
 import { useEffect, useRef } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsExportOffering,
   OfferingExportParametersRequest,
@@ -9,10 +8,10 @@ import {
 } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { useUser } from '@/workspace/hooks';
 
 import { ExportOfferingDialog } from './ExportOfferingDialog';
@@ -23,7 +22,10 @@ interface ExportOfferingButtonProps {
 
 export const ExportOfferingButton = ({ row }: ExportOfferingButtonProps) => {
   const user = useUser();
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { openDialog } = useModal();
+
   const blobUrlsRef = useRef<string[]>([]);
 
   // Cleanup blob URLs on unmount
@@ -75,14 +77,10 @@ export const ExportOfferingButton = ({ row }: ExportOfferingButtonProps) => {
         // Remove from tracking since already cleaned up
         blobUrlsRef.current = blobUrlsRef.current.filter((u) => u !== url);
 
-        dispatch(
-          showSuccess(translate('Offering exported successfully as YAML.')),
-        );
+        showSuccess(translate('Offering exported successfully as YAML.'));
       }
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Error while exporting offering.')),
-      );
+      showErrorResponse(error, translate('Error while exporting offering.'));
     }
   };
 
@@ -261,14 +259,12 @@ export const ExportOfferingButton = ({ row }: ExportOfferingButtonProps) => {
   };
 
   const openExportDialog = () => {
-    dispatch(
-      openModalDialog(ExportOfferingDialog, {
-        resolve: {
-          offering: row,
-          onExport: exportOffering,
-        },
-      }),
-    );
+    openDialog(ExportOfferingDialog, {
+      resolve: {
+        offering: row,
+        onExport: exportOffering,
+      },
+    });
   };
 
   return (

@@ -1,12 +1,10 @@
-import { useCallback } from 'react';
 import { Table } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import type { ArrowBillingSync, ArrowBillingSyncItem } from 'waldur-js-client';
 
 import { defaultCurrency } from '@/core/formatCurrency';
 import { LoadingSpinner } from '@/core/LoadingSpinner';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { ActionButton } from '@/table/ActionButton';
 
@@ -21,13 +19,9 @@ interface BillingSyncItemsDialogProps {
 export const BillingSyncItemsDialog = ({
   resolve,
 }: BillingSyncItemsDialogProps) => {
-  const dispatch = useDispatch();
+  const { closeDialog } = useModal();
   const { billingSync } = resolve;
   const { data: items, isLoading } = useArrowBillingSyncItems(billingSync.uuid);
-
-  const handleClose = useCallback(() => {
-    dispatch(closeModalDialog());
-  }, [dispatch]);
 
   // Use embedded items if available, otherwise use fetched items
   const displayItems = billingSync.items || items || [];
@@ -39,7 +33,7 @@ export const BillingSyncItemsDialog = ({
       })}
       footer={
         <ActionButton
-          action={handleClose}
+          action={closeDialog}
           variant="secondary"
           title={translate('Close')}
         />

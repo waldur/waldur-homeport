@@ -20,6 +20,6 @@ export const FEEDBACK_SELECT_OPTIONS = FEEDBACK_CATEGORIES.map((c) => ({
   label: c.label,
 }));
 
-export const getFeedbackCategoryLabel = (key: string): string => {
+export const getFeedbackCategoryLabel = (key: FeedbackCategoryEnum): string => {
   return FEEDBACK_CATEGORIES.find((c) => c.key === key)?.label ?? key;
 };

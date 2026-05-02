@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { Field, reduxForm } from 'redux-form';
 import { marketplaceOfferingTermsOfServiceCreate } from 'waldur-js-client';
 
@@ -9,10 +8,9 @@ import { StringField, SubmitButton, SelectField, NumberField } from '@/form';
 import { AwesomeCheckboxField } from '@/form/AwesomeCheckboxField';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { FormGroup } from '../../FormGroup';
 
@@ -30,7 +28,6 @@ export const AddTosDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
     grace_period_days: 60,
   },
 })((props) => {
-  const dispatch = useDispatch();
   const addAsValue = useSelector(
     (state: any) => state.form[TOS_FORM_ID]?.values?.add_as || 'markdown',
   );
@@ -39,48 +36,38 @@ export const AddTosDialog = reduxForm<{}, { resolve: { offering; refetch } }>({
       state.form[TOS_FORM_ID]?.values?.requires_reconsent || false,
   );
 
-  const update = useCallback(
-    async (formData) => {
-      try {
-        const body: any = {
-          offering: props.resolve.offering.url,
-          version: formData.version,
-          is_active: formData.is_active || false,
-          requires_reconsent: formData.requires_reconsent || false,
-        };
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
+      const body: any = {
+        offering: props.resolve.offering.url,
+        version: formData.version,
+        is_active: formData.is_active || false,
+        requires_reconsent: formData.requires_reconsent || false,
+      };
 
-        if (formData.add_as === 'markdown') {
-          body.terms_of_service = formData.terms_of_service;
-        } else {
-          body.terms_of_service_link = formData.terms_of_service_link;
-        }
-
-        if (formData.requires_reconsent && formData.grace_period_days) {
-          body.grace_period_days = formData.grace_period_days;
-        }
-
-        await marketplaceOfferingTermsOfServiceCreate({ body });
-        dispatch(
-          showSuccess(
-            translate('Terms of service has been added successfully.'),
-          ),
-        );
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to add Terms of Service.'),
-          ),
-        );
+      if (formData.add_as === 'markdown') {
+        body.terms_of_service = formData.terms_of_service;
+      } else {
+        body.terms_of_service_link = formData.terms_of_service_link;
       }
+
+      if (formData.requires_reconsent && formData.grace_period_days) {
+        body.grace_period_days = formData.grace_period_days;
+      }
+
+      return marketplaceOfferingTermsOfServiceCreate({ body });
     },
-    [dispatch],
-  );
+    successMessage: translate('Terms of service has been added successfully.'),
+    errorMessage: translate('Unable to add Terms of Service.'),
+    refetch: props.resolve.refetch,
+  });
 
   return (
-    <form onSubmit={props.handleSubmit(update)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        updateMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={translate('Add Terms of Service')}
         iconNode={<PlusCircleIcon weight="bold" />}

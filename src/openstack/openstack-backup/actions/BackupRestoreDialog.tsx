@@ -9,9 +9,8 @@ import { OpenStackBackup, openstackBackupsRestore } from 'waldur-js-client';
 import { required } from '@/core/validators';
 import { Select } from '@/form/themed-select';
 import { translate } from '@/i18n';
-import { useModal } from '@/modal/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { AsyncActionDialog } from '@/resource/actions/AsyncActionDialog';
-import { useNotify } from '@/store/hooks';
 
 import { NetworksList } from './NetworksList';
 import {
@@ -25,22 +24,23 @@ export const BackupRestoreDialog: FC<{
   resolve: { resource: OpenStackBackup; refetch?(): void };
 }> = ({ resolve: { resource, refetch } }) => {
   const asyncState = useAsync(() => loadData(resource), [resource]);
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
+
+  const mutation = useManagedMutation<any, any, BackupRestoreFormData>({
+    mutationFn: (formData) =>
+      openstackBackupsRestore({
+        path: { uuid: resource.uuid },
+        body: serializeBackupRestoreFormData(formData),
+      }),
+    successMessage: translate('VM snapshot restoration has been scheduled.'),
+    errorMessage: translate('Unable to restore VM snapshot.'),
+    refetch,
+  });
 
   const submitRequest = async (formData: BackupRestoreFormData) => {
     try {
-      await openstackBackupsRestore({
-        path: { uuid: resource.uuid },
-        body: serializeBackupRestoreFormData(formData),
-      });
-      showSuccess(translate('VM snapshot restoration has been scheduled.'));
-      closeDialog();
-      if (refetch) {
-        await refetch();
-      }
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to restore VM snapshot.'));
+      await mutation.mutateAsync(formData);
+    } catch {
+      // Error is handled by useManagedMutation
     }
   };
 

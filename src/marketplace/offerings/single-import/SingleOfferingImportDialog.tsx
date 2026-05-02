@@ -1,6 +1,6 @@
 import { useRouter } from '@uirouter/react';
 import * as yaml from 'js-yaml';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsImportOffering,
@@ -9,12 +9,11 @@ import {
 
 import { translate } from '@/i18n';
 import { StepsList } from '@/marketplace/common/StepsList';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
+import { useWizard } from '@/wizard/useWizard';
 import { getCustomer } from '@/workspace/selectors';
 
-import { useWizard } from '../import/useWizard';
 import { WizardButtons } from '../import/WizardButtons';
 import { WizardTabs } from '../import/WizardTabs';
 
@@ -54,19 +53,17 @@ export const SingleOfferingImportDialog = reduxForm<
   const { step, setStep, goBack, goNext, isFirstStep, isLastStep } = useWizard(
     SINGLE_OFFERING_IMPORT_STEPS,
   );
-  const dispatch = useDispatch();
-  const { closeDialog } = useModal();
   const customer = useSelector(getCustomer);
   const router = useRouter();
 
-  const importOffering = async (formData: SingleOfferingImportFormData) => {
-    if (invalid) return;
-
-    try {
-      // Read the file content
+  const importMutation = useManagedMutation<
+    any,
+    any,
+    SingleOfferingImportFormData
+  >({
+    mutationFn: async (formData) => {
       if (!formData.importFile) {
-        dispatch(showError(translate('Please select a file to import.')));
-        return;
+        throw new Error(translate('Please select a file to import.'));
       }
 
       const fileContent = await readFileAsText(formData.importFile);
@@ -100,27 +97,17 @@ export const SingleOfferingImportDialog = reduxForm<
         body: importParams,
       });
 
-      dispatch(showSuccess(translate('Offering imported successfully.')));
-
-      // Navigate to the imported offering if we have the response data
       if (response.data) {
         router.stateService.go('marketplace-offering-update', {
           offering_uuid: response.data.imported_offering_uuid,
           uuid: customer?.uuid,
         });
       }
-
-      if (refetch) {
-        refetch();
-      }
-
-      closeDialog();
-    } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to import offering.')),
-      );
-    }
-  };
+    },
+    successMessage: translate('Offering imported successfully.'),
+    errorMessage: translate('Unable to import offering.'),
+    refetch: refetch,
+  });
 
   const readFileAsText = (file: File): Promise<string> => {
     return new Promise((resolve, reject) => {
@@ -284,7 +271,9 @@ export const SingleOfferingImportDialog = reduxForm<
 
   return (
     <ImportErrorBoundary>
-      <form onSubmit={handleSubmit(importOffering)}>
+      <form
+        onSubmit={handleSubmit((values) => importMutation.mutateAsync(values))}
+      >
         <ModalDialog
           title={translate('Import offering')}
           subtitle={translate(

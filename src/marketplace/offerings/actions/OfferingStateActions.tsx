@@ -3,12 +3,10 @@ import {
   ArrowClockwiseIcon,
   PencilSimpleIcon,
   ProhibitIcon,
-  TrashIcon,
 } from '@phosphor-icons/react';
 import { useRouter } from '@uirouter/react';
 import type { MouseEvent } from 'react';
 import { Button, ButtonGroup, Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceProviderOfferingsActivate,
   marketplaceProviderOfferingsArchive,
@@ -21,12 +19,12 @@ import { ENV } from '@/core/config';
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { OFFERING_TYPE_CUSTOM_SCRIPTS } from '@/marketplace-script/constants';
-import { waitForConfirmation } from '@/modal/actions';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showError, showErrorResponse, showSuccess } from '@/store/notify';
+import { RemovalActionItem } from '@/resource/actions/RemovalActionItem';
+import { useNotify } from '@/store/notify';
 import { ActionButton } from '@/table/ActionButton';
 import { useUser } from '@/workspace/hooks';
 
@@ -87,7 +85,10 @@ export const OfferingStateActions = ({
     }
   };
 
-  const dispatch = useDispatch();
+  const { showError, showErrorResponse, showSuccess } = useNotify();
+
+  const { openDialog, closeDialog, confirm } = useModal();
+
   const user = useUser();
   const router = useRouter();
   const updateOfferingState = async (api) => {
@@ -96,12 +97,10 @@ export const OfferingStateActions = ({
       if (refreshOffering) {
         refreshOffering();
       }
-      dispatch(showSuccess(translate('Offering state has been updated.')));
-      dispatch(closeModalDialog());
+      showSuccess(translate('Offering state has been updated.'));
+      closeDialog();
     } catch (error) {
-      dispatch(
-        showErrorResponse(error, translate('Unable to update offering state.')),
-      );
+      showErrorResponse(error, translate('Unable to update offering state.'));
     }
   };
   const canManageOfferingLifecycle =
@@ -111,7 +110,7 @@ export const OfferingStateActions = ({
   const activate = () => {
     const errors = getActivationErrors(offering);
     if (errors.length > 0) {
-      errors.forEach((error) => dispatch(showError(error)));
+      errors.forEach((error) => showError(error));
       return;
     }
     if (canManageOfferingLifecycle) {
@@ -119,11 +118,9 @@ export const OfferingStateActions = ({
         marketplaceProviderOfferingsActivate({ path: { uuid: offering.uuid } }),
       );
     } else {
-      dispatch(
-        openModalDialog(RequestActionDialog, {
-          resolve: { offering, offeringRequestMode: 'publishing' },
-        }),
-      );
+      openDialog(RequestActionDialog, {
+        resolve: { offering, offeringRequestMode: 'publishing' },
+      });
     }
   };
   const setDraft = () => {
@@ -132,25 +129,21 @@ export const OfferingStateActions = ({
         marketplaceProviderOfferingsDraft({ path: { uuid: offering.uuid } }),
       );
     } else {
-      dispatch(
-        openModalDialog(RequestActionDialog, {
-          resolve: { offering, offeringRequestMode: 'editing' },
-        }),
-      );
+      openDialog(RequestActionDialog, {
+        resolve: { offering, offeringRequestMode: 'editing' },
+      });
     }
   };
   const pause = () => {
-    dispatch(
-      openModalDialog(PauseOfferingDialog, {
-        resolve: { offering, refreshOffering },
-      }),
-    );
+    openDialog(PauseOfferingDialog, {
+      resolve: { offering, refreshOffering },
+    });
   };
 
   const unpause = () => {
     const errors = getActivationErrors(offering);
     if (errors.length > 0) {
-      errors.forEach((error) => dispatch(showError(error)));
+      errors.forEach((error) => showError(error));
       return;
     }
     updateOfferingState(() =>
@@ -164,18 +157,15 @@ export const OfferingStateActions = ({
     );
 
   const openChangeAvailabilityDialog = () => {
-    dispatch(
-      openModalDialog(ChangeOfferingAvailabilityDialog, {
-        resolve: { offering, refetch: refreshOffering },
-        size: 'lg',
-      }),
-    );
+    openDialog(ChangeOfferingAvailabilityDialog, {
+      resolve: { offering, refetch: refreshOffering },
+      size: 'lg',
+    });
   };
 
   const handleDelete = async () => {
     try {
-      await waitForConfirmation(
-        dispatch,
+      await confirm(
         translate('Delete confirmation'),
         translate('Are you sure you want to delete offering {name}?', {
           name: offering.name,
@@ -189,24 +179,20 @@ export const OfferingStateActions = ({
       await marketplaceProviderOfferingsDestroy({
         path: { uuid: offering.uuid },
       });
-      dispatch(
-        showSuccess(
-          translate('Offering {name} deleted successfully.', {
-            name: offering.name,
-          }),
-        ),
+      showSuccess(
+        translate('Offering {name} deleted successfully.', {
+          name: offering.name,
+        }),
       );
       router.stateService.go('marketplace-vendor-offerings', {
         uuid: offering.customer_uuid,
       });
     } catch (error) {
-      dispatch(
-        showErrorResponse(
-          error,
-          translate('Error while deleting offering {name}.', {
-            name: offering.name,
-          }),
-        ),
+      showErrorResponse(
+        error,
+        translate('Error while deleting offering {name}.', {
+          name: offering.name,
+        }),
       );
     }
   };
@@ -306,12 +292,9 @@ export const OfferingStateActions = ({
         )}
         {showDeleteAction && <div className="separator my-2" />}
         {showDeleteAction && (
-          <ActionItem
+          <RemovalActionItem
             title={translate('Delete')}
             action={handleDelete}
-            iconNode={<TrashIcon weight="bold" />}
-            iconColor="danger"
-            className="text-danger"
             disabled={!!deletionRestricted}
             tooltip={
               deletionRestricted

@@ -1,5 +1,4 @@
-import { useCallback } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import {
   bookingOfferingsGoogleCalendarSync,
   bookingOfferingsShareGoogleCalendar,
@@ -10,89 +9,41 @@ import { OFFERING_TYPE_BOOKING } from '@/booking/constants';
 import { translate } from '@/i18n';
 import { isOfferingTypeSchedulable } from '@/marketplace/common/registry';
 import { ARCHIVED } from '@/marketplace/offerings/store/constants';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { useUser } from '@/workspace/hooks';
 import { isOwner as isOwnerSelector } from '@/workspace/selectors';
 
 import { ActionsDropdown } from '../../actions/ActionsDropdown';
 
 const useGoogleCalendarSync = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await bookingOfferingsGoogleCalendarSync({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Google Calendar has been synced successfully.'),
-          ),
-        );
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to sync Google Calendar.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
+  return useManagedMutation<any, any, string>({
+    mutationFn: (uuid) =>
+      bookingOfferingsGoogleCalendarSync({ path: { uuid } }),
+    successMessage: translate('Google Calendar has been synced successfully.'),
+    errorMessage: translate('Unable to sync Google Calendar.'),
+  });
 };
 
 const useGoogleCalendarPublish = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await bookingOfferingsShareGoogleCalendar({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Google Calendar has been published successfully.'),
-          ),
-        );
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to publish Google Calendar.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
+  return useManagedMutation<any, any, string>({
+    mutationFn: (uuid) =>
+      bookingOfferingsShareGoogleCalendar({ path: { uuid } }),
+    successMessage: translate(
+      'Google Calendar has been published successfully.',
+    ),
+    errorMessage: translate('Unable to publish Google Calendar.'),
+  });
 };
 
 const useGoogleCalendarUnpublish = () => {
-  const dispatch = useDispatch();
-
-  return useCallback(
-    async (uuid: string) => {
-      try {
-        await bookingOfferingsUnshareGoogleCalendar({ path: { uuid } });
-        dispatch(
-          showSuccess(
-            translate('Google Calendar has been unpublished successfully.'),
-          ),
-        );
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to unpublish Google Calendar.'),
-          ),
-        );
-      }
-    },
-    [dispatch],
-  );
+  return useManagedMutation<any, any, string>({
+    mutationFn: (uuid) =>
+      bookingOfferingsUnshareGoogleCalendar({ path: { uuid } }),
+    successMessage: translate(
+      'Google Calendar has been unpublished successfully.',
+    ),
+    errorMessage: translate('Unable to unpublish Google Calendar.'),
+  });
 };
 
 export const GoogleCalendarActions = ({ offering }) => {
@@ -112,16 +63,16 @@ export const GoogleCalendarActions = ({ offering }) => {
   const actions = [
     {
       label: translate('Sync with Google Calendar'),
-      handler: () => googleCalendarSync(offering.uuid),
+      handler: () => googleCalendarSync.mutate(offering.uuid),
     },
     {
       label: translate('Publish as Google Calendar'),
-      handler: () => googleCalendarPublish(offering.uuid),
+      handler: () => googleCalendarPublish.mutate(offering.uuid),
       visible: !offering.google_calendar_is_public,
     },
     {
       label: translate('Unpublish as Google Calendar'),
-      handler: () => googleCalendarUnpublish(offering.uuid),
+      handler: () => googleCalendarUnpublish.mutate(offering.uuid),
       visible: offering.google_calendar_is_public,
     },
   ];

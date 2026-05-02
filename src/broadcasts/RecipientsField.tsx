@@ -1,9 +1,8 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { BroadcastMessage } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { Field } from '@/resource/summary';
 
 import { RecipientsListDialog } from './RecipientsListDialog';
@@ -11,14 +10,12 @@ import { RecipientsListDialog } from './RecipientsListDialog';
 export const RecipientsField: FunctionComponent<{
   row: BroadcastMessage;
 }> = ({ row }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const openRecipientsList = () =>
-    dispatch(
-      openModalDialog(RecipientsListDialog, {
-        resolve: { query: row.query },
-        size: 'xl',
-      }),
-    );
+    openDialog(RecipientsListDialog, {
+      resolve: { query: row.query },
+      size: 'xl',
+    });
   return (
     <Field label={translate('Recipients')} labelCol={5} valueCol={7}>
       <p>

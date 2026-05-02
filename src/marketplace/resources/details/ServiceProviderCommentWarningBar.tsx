@@ -1,7 +1,6 @@
 import { useQuery } from '@tanstack/react-query';
 import { truncate } from 'lodash-es';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import {
   PublicOfferingDetails,
   marketplaceOfferingUsersList,
@@ -9,8 +8,8 @@ import {
 
 import { MINUTE } from '@/core/constants';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
-import { getUser } from '@/workspace/selectors';
+import { useModal } from '@/modal/actions';
+import { useUser } from '@/workspace/hooks';
 
 import { ResourceWarningBar } from './ResourceWarningBar';
 import { ServiceProviderCommentModal } from './ServiceProviderCommentModal';
@@ -22,8 +21,8 @@ interface ServiceProviderCommentWarningBarProps {
 export const ServiceProviderCommentWarningBar: FC<
   ServiceProviderCommentWarningBarProps
 > = ({ offering }) => {
-  const user = useSelector(getUser);
-  const dispatch = useDispatch();
+  const user = useUser();
+  const { openDialog } = useModal();
 
   const { data: offeringUser, isLoading } = useQuery({
     queryKey: ['fetchOfferingUserForComment', user?.uuid, offering?.uuid],
@@ -57,14 +56,12 @@ export const ServiceProviderCommentWarningBar: FC<
     : comment;
 
   const callback = () =>
-    dispatch(
-      openModalDialog(ServiceProviderCommentModal, {
-        dialogClassName: 'modal-dialog-centered',
-        comment: comment,
-        commentUrl: offeringUser.service_provider_comment_url,
-        size: 'sm',
-      }),
-    );
+    openDialog(ServiceProviderCommentModal, {
+      dialogClassName: 'modal-dialog-centered',
+      comment: comment,
+      commentUrl: offeringUser.service_provider_comment_url,
+      size: 'sm',
+    });
 
   return (
     <ResourceWarningBar>

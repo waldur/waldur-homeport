@@ -1,57 +1,43 @@
 import { XCircleIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { onboardingJustificationsReject } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const OnboardingJustificationReject: FunctionComponent<{
   row;
   refetch;
 }> = ({ row, refetch }) => {
-  const dispatch = useDispatch();
-
-  const callback = async () => {
-    try {
-      const staff_notes = await waitForConfirmation(
-        dispatch,
-        translate('Reject justification'),
-        translate(
-          'Are you sure you want to reject this onboarding justification?',
-        ),
-        {
-          showInput: true,
-          inputPlaceholder: translate('Staff notes'),
-          inputRequired: false,
-        },
-      );
-      await onboardingJustificationsReject({
+  const { mutate, isPending } = useManagedMutation<any, any, any>({
+    mutationFn: (staff_notes) =>
+      onboardingJustificationsReject({
         path: { uuid: row.uuid },
         body: { staff_notes: staff_notes.input },
-      });
-      await refetch();
-      dispatch(
-        showSuccess(translate('Onboarding justification has been rejected.')),
-      );
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          translate('Unable to reject onboarding justification.'),
-        ),
-      );
-    }
-  };
+      }),
+    confirmation: {
+      title: translate('Reject justification'),
+      body: translate(
+        'Are you sure you want to reject this onboarding justification?',
+      ),
+      options: {
+        showInput: true,
+        inputPlaceholder: translate('Staff notes'),
+        inputRequired: false,
+      },
+    },
+    successMessage: translate('Onboarding justification has been rejected.'),
+    errorMessage: translate('Unable to reject onboarding justification.'),
+    refetch,
+  });
 
-  const isDisabled = row.validation_decision !== 'pending';
+  const isDisabled = row.validation_decision !== 'pending' || isPending;
 
   return (
     <ActionItem
       title={translate('Reject')}
-      action={callback}
+      action={mutate}
       iconNode={<XCircleIcon weight="bold" />}
       iconColor="danger"
       className="text-danger"

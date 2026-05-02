@@ -18,7 +18,7 @@ import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { Role } from '@/permissions/types';
-import { useNotify } from '@/store/hooks';
+import { useNotify } from '@/store/notify';
 import { getCustomer, isStaff } from '@/workspace/selectors';
 
 import { AdvancedSettingsGroup } from './AdvancedSettingsGroup';

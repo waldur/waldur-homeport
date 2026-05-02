@@ -1,12 +1,11 @@
 import { MoneyIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 const MarkAsPaidDialog = lazyComponent(() =>
   import('./MarkAsPaidDialog').then((module) => ({
@@ -18,8 +17,8 @@ export const MarkAsPaidButton: FunctionComponent<{ row; refetch }> = ({
   row,
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const user = useSelector(getUser);
+  const { openDialog } = useModal();
+  const user = useUser();
   if (!user.is_staff) {
     return null;
   }
@@ -35,12 +34,10 @@ export const MarkAsPaidButton: FunctionComponent<{ row; refetch }> = ({
           : ''
       }
       action={() =>
-        dispatch(
-          openModalDialog(MarkAsPaidDialog, {
-            resolve: { invoice: row, refetch },
-            size: 'lg',
-          }),
-        )
+        openDialog(MarkAsPaidDialog, {
+          resolve: { invoice: row, refetch },
+          size: 'lg',
+        })
       }
     />
   );

@@ -1,7 +1,5 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 
 import { ExportFormat } from './exporters/types';
 import { TableState } from './types';
@@ -11,20 +9,18 @@ const ExportDialog = lazyComponent(() =>
 );
 
 export const useExportDialog = () => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     table: string,
     format: ExportFormat,
     ownProps?: Partial<TableState>,
   ) => {
-    dispatch(
-      openModalDialog(ExportDialog, {
-        resolve: {
-          table,
-          format,
-          ownProps,
-        },
-      }),
-    );
+    openDialog(ExportDialog, {
+      resolve: {
+        table,
+        format,
+        ownProps,
+      },
+    });
   };
 };

@@ -1,5 +1,4 @@
 import { useMemo } from 'react';
-import { useSelector } from 'react-redux';
 import { OrderDetails, PublicOfferingDetails } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
@@ -11,7 +10,7 @@ import {
   SUPPORT_OFFERING_TYPE,
 } from '@/support/constants';
 import { ActionsDropdownComponent } from '@/table/ActionsDropdown';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 import { CancelOrderButton } from '../details/CancelOrderButton';
 
@@ -30,7 +29,7 @@ export const OrderActionsButton = ({
   offering: PublicOfferingDetails;
   loadData;
 }) => {
-  const user = useSelector(getUser);
+  const user = useUser();
 
   // Hide provider actions for site agent offerings when display is disabled
   const hideProviderActions =

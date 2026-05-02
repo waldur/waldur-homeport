@@ -1,45 +1,28 @@
 import { CheckCircleIcon, XCircleIcon } from '@phosphor-icons/react';
-import { useMutation } from '@tanstack/react-query';
-import { useDispatch } from 'react-redux';
 import { marketplaceRemoteSynchronisationsPartialUpdate } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 
 import { RemoteSyncActionProps } from './types';
 
 export const RemoteSyncEnableAction = (props: RemoteSyncActionProps) => {
-  const dispatch = useDispatch();
-
-  const { mutate, isPending: isLoading } = useMutation({
-    mutationFn: async () => {
-      try {
-        await marketplaceRemoteSynchronisationsPartialUpdate({
-          path: { uuid: props.row.uuid },
-          body: {
-            is_active: !props.row.is_active,
-          },
-        });
-        dispatch(
-          showSuccess(
-            props.row.is_active
-              ? translate('Remote synchronization disabled')
-              : translate('Remote synchronization enabled'),
-          ),
-        );
-        props.refetch();
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            props.row.is_active
-              ? translate('Unable to disable remote synchronization')
-              : translate('Unable to enable remote synchronization'),
-          ),
-        );
-      }
-    },
+  const { mutate, isPending: isLoading } = useManagedMutation<any, any, void>({
+    mutationFn: () =>
+      marketplaceRemoteSynchronisationsPartialUpdate({
+        path: { uuid: props.row.uuid },
+        body: {
+          is_active: !props.row.is_active,
+        },
+      }),
+    successMessage: props.row.is_active
+      ? translate('Remote synchronization disabled')
+      : translate('Remote synchronization enabled'),
+    errorMessage: props.row.is_active
+      ? translate('Unable to disable remote synchronization')
+      : translate('Unable to enable remote synchronization'),
+    refetch: props.refetch,
   });
 
   return (

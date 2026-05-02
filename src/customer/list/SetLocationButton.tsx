@@ -6,8 +6,8 @@ import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
 import { translate } from '@/i18n';
 import { GeolocationPoint } from '@/map/types';
-import { closeModalDialog, openModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useModal } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { setCurrentCustomer } from '@/workspace/actions';
 import { getCustomer } from '@/workspace/selectors';
 import { Customer } from '@/workspace/types';
@@ -22,54 +22,50 @@ interface SetLocationButtonProps {
   customer: Customer;
 }
 
-interface SetLocationPayload {
-  uuid: string;
-  latitude: number;
-  longitude: number;
-}
-
 export const SetLocationButton: FC<SetLocationButtonProps> = ({ customer }) => {
   const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const currentCustomer = useSelector(getCustomer);
-  const setOrganizationLocation = async (payload: SetLocationPayload) => {
-    try {
-      const response = await customersPartialUpdate({
-        path: { uuid: payload.uuid },
+
+  const { mutateAsync: updateLocation } = useManagedMutation<
+    any,
+    any,
+    GeolocationPoint
+  >({
+    mutationFn: (formData) =>
+      customersPartialUpdate({
+        path: { uuid: customer.uuid },
         body: {
-          latitude: payload.latitude,
-          longitude: payload.longitude,
+          latitude: formData.latitude,
+          longitude: formData.longitude,
         },
-      });
-      dispatch(showSuccess(translate('Location has been saved successfully.')));
-      dispatch(closeModalDialog());
+      }),
+    successMessage: translate('Location has been saved successfully.'),
+    errorMessage: translate('Unable to save location.'),
+    onSuccess: (response) => {
       if (customer.uuid === currentCustomer?.uuid) {
         dispatch(setCurrentCustomer(response.data));
       }
-    } catch (error) {
-      dispatch(showErrorResponse(error, translate('Unable to save location.')));
-    }
-  };
+    },
+  });
 
   return (
     <CompactEditButton
       variant="secondary"
       onClick={() => {
-        dispatch(
-          openModalDialog(SetLocationDialog, {
-            resolve: {
-              location: {
-                latitude: customer.latitude,
-                longitude: customer.longitude,
-              },
-              setLocationFn: (formData: GeolocationPoint) =>
-                setOrganizationLocation({ uuid: customer.uuid, ...formData }),
-              label: translate('Location of {name} organization', {
-                name: customer.name,
-              }),
+        openDialog(SetLocationDialog, {
+          resolve: {
+            location: {
+              latitude: customer.latitude,
+              longitude: customer.longitude,
             },
-            size: 'lg',
-          }),
-        );
+            setLocationFn: updateLocation,
+            label: translate('Location of {name} organization', {
+              name: customer.name,
+            }),
+          },
+          size: 'lg',
+        });
       }}
     />
   );

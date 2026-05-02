@@ -1,25 +1,29 @@
 import { QueryClient, QueryClientProvider } from '@tanstack/react-query';
-import { render, screen } from '@testing-library/react';
+import { render, screen, waitFor } from '@testing-library/react';
 import { Provider } from 'react-redux';
 import configureStore from 'redux-mock-store';
 import { describe, it, expect, vi, beforeEach } from 'vitest';
+import { supportCommentsList } from 'waldur-js-client';
 
-import { useIssueComments } from './api';
 import { IssueCommentsContainer } from './IssueCommentsContainer';
 
-// Mock the API hook
-vi.mock('./api', () => ({
-  useIssueComments: vi.fn(),
-}));
+// Mock the API client
+vi.mock('waldur-js-client', async (importOriginal) => {
+  const actual = await importOriginal<typeof import('waldur-js-client')>();
+  return {
+    ...actual,
+    supportCommentsList: vi.fn(),
+  };
+});
 
 // Mock the child components
 vi.mock('./IssueCommentButton', () => ({
   IssueCommentButton: () => <button data-testid="add-comment-btn">Add</button>,
 }));
 
-vi.mock('@/marketplace/offerings/update/components/RefreshButton', () => ({
-  RefreshButton: ({ loading }: { loading: boolean }) => (
-    <button data-testid="reload-btn" disabled={loading}>
+vi.mock('@/marketplace/common/RefreshButton', () => ({
+  RefreshButton: ({ isLoading }: { isLoading: boolean }) => (
+    <button data-testid="reload-btn" disabled={isLoading}>
       Reload
     </button>
   ),
@@ -59,8 +63,18 @@ const mockIssue = {
 };
 
 const mockComments = [
-  { uuid: 'c1', author_name: 'User A', description: 'First comment' },
-  { uuid: 'c2', author_name: 'User B', description: 'Second comment' },
+  {
+    uuid: 'c1',
+    author_name: 'User A',
+    description: 'First comment',
+    created: '2024-01-15T10:00:00Z',
+  },
+  {
+    uuid: 'c2',
+    author_name: 'User B',
+    description: 'Second comment',
+    created: '2024-01-16T12:00:00Z',
+  },
 ];
 
 const renderComponent = (issue = mockIssue) => {
@@ -82,91 +96,57 @@ describe('IssueCommentsContainer', () => {
   });
 
   it('renders loading spinner when loading with no data', () => {
-    vi.mocked(useIssueComments).mockReturnValue({
-      data: undefined,
-      isLoading: true,
-      refetch: vi.fn(),
-    } as any);
+    vi.mocked(supportCommentsList).mockReturnValue(new Promise(() => {}));
 
     renderComponent();
 
     expect(screen.getByTestId('loading-spinner')).toBeInTheDocument();
   });
 
-  it('renders comments list when data is loaded', () => {
-    vi.mocked(useIssueComments).mockReturnValue({
+  it('renders comments list when data is loaded and sorts them', async () => {
+    vi.mocked(supportCommentsList).mockResolvedValue({
       data: mockComments,
-      isLoading: false,
-      refetch: vi.fn(),
     } as any);
 
     renderComponent();
 
-    expect(screen.getByTestId('comments-list')).toBeInTheDocument();
-    expect(screen.getAllByTestId('comment-item')).toHaveLength(2);
-    expect(screen.getByText('First comment')).toBeInTheDocument();
-    expect(screen.getByText('Second comment')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByTestId('comments-list')).toBeInTheDocument(),
+    );
+    const items = screen.getAllByTestId('comment-item');
+    expect(items).toHaveLength(2);
+    // Should be sorted by date descending (newest first: c2)
+    expect(items[0]).toHaveTextContent('Second comment');
+    expect(items[1]).toHaveTextContent('First comment');
   });
 
-  it('renders card with correct title', () => {
-    vi.mocked(useIssueComments).mockReturnValue({
-      data: [],
-      isLoading: false,
-      refetch: vi.fn(),
-    } as any);
+  it('renders card with correct title', async () => {
+    vi.mocked(supportCommentsList).mockResolvedValue({ data: [] } as any);
 
     renderComponent();
 
-    expect(screen.getByText('Comments')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByText('Comments')).toBeInTheDocument(),
+    );
   });
 
-  it('renders add comment button', () => {
-    vi.mocked(useIssueComments).mockReturnValue({
-      data: [],
-      isLoading: false,
-      refetch: vi.fn(),
-    } as any);
+  it('renders add comment button', async () => {
+    vi.mocked(supportCommentsList).mockResolvedValue({ data: [] } as any);
 
     renderComponent();
 
-    expect(screen.getByTestId('add-comment-btn')).toBeInTheDocument();
+    await waitFor(() =>
+      expect(screen.getByTestId('add-comment-btn')).toBeInTheDocument(),
+    );
   });
 
-  it('renders reload button', () => {
-    vi.mocked(useIssueComments).mockReturnValue({
-      data: [],
-      isLoading: false,
-      refetch: vi.fn(),
-    } as any);
+  it('renders reload button', async () => {
+    vi.mocked(supportCommentsList).mockResolvedValue({ data: [] } as any);
 
     renderComponent();
 
-    expect(screen.getByTestId('reload-btn')).toBeInTheDocument();
-  });
-
-  it('shows cached data while refetching', () => {
-    vi.mocked(useIssueComments).mockReturnValue({
-      data: mockComments,
-      isLoading: true,
-      refetch: vi.fn(),
-    } as any);
-
-    renderComponent();
-
-    // Should show comments, not loading spinner
-    expect(screen.queryByTestId('loading-spinner')).not.toBeInTheDocument();
-    expect(screen.getByTestId('comments-list')).toBeInTheDocument();
-  });
-
-  it('passes issueUrl to useIssueComments hook', () => {
-    vi.mocked(useIssueComments).mockReturnValue({
-      data: [],
-      isLoading: false,
-      refetch: vi.fn(),
-    } as any);
-
-    renderComponent();
-
-    expect(useIssueComments).toHaveBeenCalledWith(mockIssue.url);
+    await waitFor(() =>
+      expect(screen.getByTestId('reload-btn')).toBeInTheDocument(),
+    );
   });
 });

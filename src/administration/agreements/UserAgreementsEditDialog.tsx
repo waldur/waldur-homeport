@@ -1,15 +1,13 @@
 import { Form } from 'react-bootstrap';
 import { Field, Form as ReactFinalForm } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import { userAgreementsPartialUpdate } from 'waldur-js-client';
 
 import { ENV } from '@/core/config';
 import { SubmitButton } from '@/form';
 import MarkdownEditor from '@/form/MarkdownEditor';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface UserAgreementsEditDialogOwnProps {
   resolve: {
@@ -32,21 +30,19 @@ const getLanguageLabel = (code: string) => {
 export const UserAgreementsEditDialog = ({
   resolve,
 }: UserAgreementsEditDialogOwnProps) => {
-  const dispatch = useDispatch();
-
-  const onSubmit = async (formValues) => {
-    await userAgreementsPartialUpdate({
-      path: { uuid: formValues.uuid },
-      body: formValues,
-    });
-    await resolve.refetch();
-    dispatch(showSuccess(translate('User agreement was updated')));
-    dispatch(closeModalDialog());
-  };
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formValues) =>
+      userAgreementsPartialUpdate({
+        path: { uuid: formValues.uuid },
+        body: formValues,
+      }),
+    successMessage: translate('User agreement was updated'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <ReactFinalForm
-      onSubmit={onSubmit}
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={resolve.initialValues}
       render={({ handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>

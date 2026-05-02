@@ -1,4 +1,3 @@
-import { useMutation } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { change, reduxForm, Field } from 'redux-form';
@@ -12,9 +11,8 @@ import { FormContainer, SubmitButton } from '@/form';
 import { AsyncSelectField } from '@/form/AsyncSelectField';
 import { translate } from '@/i18n';
 import { publicOfferingsAutocomplete } from '@/marketplace/common/autocompletes';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import {
   MappingFormData,
@@ -40,12 +38,13 @@ const PureVendorOfferingMappingEditDialog = reduxForm<
   enableReinitialize: true,
 })(({ resolve, submitting, handleSubmit, initialValues }) => {
   const dispatch = useDispatch();
+
   const [selectedOfferingUuid, setSelectedOfferingUuid] = useState<
     string | null
   >(resolve.mapping.offering_uuid || null);
 
-  const { mutateAsync } = useMutation({
-    mutationFn: (data: MappingFormData) => {
+  const submitMutation = useManagedMutation<any, any, MappingFormData>({
+    mutationFn: (data) => {
       // Handle both object (from dropdown) and string (from creatable)
       const vendorName =
         typeof data.arrow_vendor_name === 'string'
@@ -61,6 +60,9 @@ const PureVendorOfferingMappingEditDialog = reduxForm<
         },
       });
     },
+    successMessage: translate('Vendor offering mapping updated.'),
+    errorMessage: translate('Unable to update vendor offering mapping.'),
+    refetch: resolve.refetch,
   });
 
   const loadOfferings = useCallback(
@@ -75,30 +77,13 @@ const PureVendorOfferingMappingEditDialog = reduxForm<
       // Clear plan when offering changes
       dispatch(change(FORM_ID, 'plan', null));
     },
-    [dispatch],
-  );
-
-  const onSubmit = useCallback(
-    async (formData: MappingFormData) => {
-      try {
-        await mutateAsync(formData);
-        dispatch(showSuccess(translate('Vendor offering mapping updated.')));
-        resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(
-          showErrorResponse(
-            error,
-            translate('Unable to update vendor offering mapping.'),
-          ),
-        );
-      }
-    },
-    [dispatch, mutateAsync, resolve],
+    [],
   );
 
   return (
-    <form onSubmit={handleSubmit(onSubmit)}>
+    <form
+      onSubmit={handleSubmit((values) => submitMutation.mutateAsync(values))}
+    >
       <ModalDialog
         title={translate('Edit vendor offering mapping')}
         footer={

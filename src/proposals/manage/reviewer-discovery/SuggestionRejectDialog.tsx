@@ -1,7 +1,6 @@
 import { FORM_ERROR } from 'final-form';
 import { useCallback } from 'react';
 import { Form, Field } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   reviewerSuggestionsReject,
   ReviewerSuggestion,
@@ -11,10 +10,10 @@ import { SubmitButton, TextField } from '@/form';
 import { FormContainer } from '@/form/FormContainer';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
-import { closeModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 interface SuggestionRejectDialogProps {
   resolve: {
@@ -30,7 +29,9 @@ interface FormValues {
 export const SuggestionRejectDialog = ({
   resolve,
 }: SuggestionRejectDialogProps) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse, showSuccess } = useNotify();
+
+  const { closeDialog } = useModal();
 
   const processRequest = useCallback(
     async (values: FormValues) => {
@@ -42,25 +43,21 @@ export const SuggestionRejectDialog = ({
           },
         });
         resolve.refetch();
-        dispatch(
-          showSuccess(
-            translate('Rejected suggestion for {name}.', {
-              name: resolve.suggestion.reviewer_name,
-            }),
-          ),
+        showSuccess(
+          translate('Rejected suggestion for {name}.', {
+            name: resolve.suggestion.reviewer_name,
+          }),
         );
-        dispatch(closeModalDialog());
+        closeDialog();
       } catch (e) {
-        dispatch(
-          showErrorResponse(e, translate('Unable to reject suggestion.')),
-        );
+        showErrorResponse(e, translate('Unable to reject suggestion.'));
         if (e.response && e.response.status === 400) {
           return { [FORM_ERROR]: e.response.data };
         }
         return { [FORM_ERROR]: translate('Unable to reject suggestion.') };
       }
     },
-    [resolve, dispatch],
+    [resolve],
   );
 
   return (

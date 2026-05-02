@@ -6,10 +6,9 @@ import { SubmitButton, TextField } from '@/form';
 import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ParsedAnswer } from '@/project/metadata/ParsedAnswer';
-import { useNotify } from '@/store/hooks';
 
 interface AnswerReviewDialogProps {
   resolve: {
@@ -23,26 +22,21 @@ interface AnswerReviewDialogProps {
 export const AnswerReviewDialog: FC<AnswerReviewDialogProps> = ({
   resolve,
 }) => {
-  const { showSuccess, showErrorResponse } = useNotify();
-  const { closeDialog } = useModal();
-
-  const onSubmit = async (formData: { comment }) => {
-    try {
-      await Promise.resolve({
+  const onSubmitMutation = useManagedMutation<any, any, { comment: string }>({
+    mutationFn: (formData) =>
+      Promise.resolve({
         path: { uuid: resolve.offeringUserUuid },
         body: { comment: formData.comment },
-      });
-
-      showSuccess(translate('Review submitted.'));
-      if (resolve.refetch) resolve.refetch();
-      closeDialog();
-    } catch (e) {
-      showErrorResponse(e, translate('Unable to submit review'));
-    }
-  };
+      }),
+    successMessage: translate('Review submitted.'),
+    errorMessage: translate('Unable to submit review'),
+    refetch: resolve.refetch,
+  });
 
   return (
-    <Form onSubmit={onSubmit}>
+    <Form<{ comment: string }>
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
+    >
       {({ invalid, handleSubmit, submitting }) => (
         <form onSubmit={handleSubmit}>
           <ModalDialog

@@ -1,10 +1,10 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import React from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { PermissionEnum } from '@/permissions/enums';
 import { hasPermission } from '@/permissions/hasPermission';
 import { ActionButton } from '@/table/ActionButton';
@@ -28,13 +28,11 @@ export const OfferingPermissionCreateButton: React.FC<{ fetch }> = ({
     permission: PermissionEnum.CREATE_OFFERING_PERMISSION,
     customerId: customer.uuid,
   });
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(OfferingPermissionCreateDialog, {
-        resolve: { refetch: fetch },
-      }),
-    );
+    openDialog(OfferingPermissionCreateDialog, {
+      resolve: { refetch: fetch },
+    });
   };
   return canCreatePermission ? (
     <ActionButton

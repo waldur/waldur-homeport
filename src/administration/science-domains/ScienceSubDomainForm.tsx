@@ -1,6 +1,5 @@
 import { PlusCircleIcon } from '@phosphor-icons/react';
 import { Field, Form } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   scienceSubDomainsCreate,
   scienceSubDomainsPartialUpdate,
@@ -10,58 +9,47 @@ import { required } from '@/core/validators';
 import { FormGroup, SubmitButton } from '@/form';
 import { StringField } from '@/form/StringField';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 export const ScienceSubDomainForm = ({ resolve }) => {
   const isEdit = Boolean(resolve.scienceSubDomain?.uuid);
-  const dispatch = useDispatch();
-
-  const onSubmit = async (values: { name: string; code?: string }) => {
-    try {
-      if (isEdit) {
-        await scienceSubDomainsPartialUpdate({
-          path: { uuid: resolve.scienceSubDomain.uuid },
-          body: {
-            name: values.name,
-            code: values.code,
-            domain: resolve.scienceSubDomain.domain,
-          },
-        });
-      } else {
-        await scienceSubDomainsCreate({
-          body: {
-            name: values.name,
-            code: values.code,
-            domain: resolve.domainUrl,
-          },
-        });
-      }
-      resolve.refetch();
-      dispatch(
-        showSuccess(
-          isEdit
-            ? translate('The science sub-domain has been updated.')
-            : translate('The science sub-domain has been created.'),
-        ),
-      );
-      dispatch(closeModalDialog());
-    } catch (e) {
-      dispatch(
-        showErrorResponse(
-          e,
-          isEdit
-            ? translate('Unable to update science sub-domain.')
-            : translate('Unable to create science sub-domain.'),
-        ),
-      );
-    }
-  };
+  const onSubmitMutation = useManagedMutation<
+    any,
+    any,
+    { name: string; code?: string }
+  >({
+    mutationFn: (values) =>
+      isEdit
+        ? scienceSubDomainsPartialUpdate({
+            path: { uuid: resolve.scienceSubDomain.uuid },
+            body: {
+              name: values.name,
+              code: values.code,
+              domain: resolve.scienceSubDomain.domain,
+            },
+          })
+        : scienceSubDomainsCreate({
+            body: {
+              name: values.name,
+              code: values.code,
+              domain: resolve.domainUrl,
+            },
+          }),
+    successMessage: isEdit
+      ? translate('The science sub-domain has been updated.')
+      : translate('The science sub-domain has been created.'),
+    errorMessage: isEdit
+      ? translate('Unable to update science sub-domain.')
+      : translate('Unable to create science sub-domain.'),
+    refetch: resolve.refetch,
+  });
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values: { name: string; code?: string }) =>
+        onSubmitMutation.mutateAsync(values)
+      }
       initialValues={
         resolve.scienceSubDomain
           ? {

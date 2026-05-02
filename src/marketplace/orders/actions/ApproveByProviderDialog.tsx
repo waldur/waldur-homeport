@@ -1,5 +1,5 @@
 import { CheckIcon } from '@phosphor-icons/react';
-import { useMutation, useQuery } from '@tanstack/react-query';
+import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
 import { Field, Form, useFormState } from 'react-final-form';
 import {
@@ -21,9 +21,8 @@ import {
 } from '@/marketplace/common/OptionsForm';
 import { OptionValue } from '@/marketplace/resources/options/OptionValue';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 interface ApproveByProviderDialogProps {
   resolve: {
@@ -75,9 +74,6 @@ const OptionRow: FC<{
 export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
   resolve,
 }) => {
-  const { showErrorResponse, showSuccess } = useNotify();
-  const { closeDialog } = useModal();
-
   // Determine if this order type supports options update
   const orderAttributes = resolve.order.attributes as Record<string, any>;
   const isOptionsUpdateOrder =
@@ -104,8 +100,12 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
   const hasOptions =
     isOptionsUpdateOrder && Boolean(resourceOptions?.order?.length);
 
-  const { mutate: approveOrder, isPending } = useMutation({
-    mutationFn: async (formData: { attributes?: Record<string, any> }) => {
+  const approveOrderMutation = useManagedMutation<
+    any,
+    any,
+    { attributes?: Record<string, any> }
+  >({
+    mutationFn: async (formData) => {
       const body: { attributes?: { new_options?: Record<string, any> } } = {};
       if (formData?.attributes && Object.keys(formData.attributes).length > 0) {
         body.attributes = { new_options: formData.attributes };
@@ -116,18 +116,13 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
         body: Object.keys(body).length > 0 ? body : undefined,
       });
     },
-    onSuccess: async () => {
-      showSuccess(translate('Order has been approved.'));
-      if (resolve.refetch) await resolve.refetch();
-      closeDialog();
-    },
-    onError: (error) => {
-      showErrorResponse(error, translate('Unable to approve order.'));
-    },
+    successMessage: translate('Order has been approved.'),
+    errorMessage: translate('Unable to approve order.'),
+    refetch: resolve.refetch,
   });
 
   const handleSubmit = (formData: { attributes?: Record<string, any> }) => {
-    approveOrder(formData);
+    approveOrderMutation.mutate(formData);
   };
 
   const hasUserSubmittedOptions = Object.keys(userSubmittedOptions).length > 0;
@@ -150,7 +145,7 @@ export const ApproveByProviderDialog: FC<ApproveByProviderDialogProps> = ({
                 <CloseDialogButton className="min-w-125px" />
                 <SubmitButton
                   disabled={offeringQuery.isLoading || !!offeringQuery.error}
-                  submitting={submitting || isPending}
+                  submitting={submitting || approveOrderMutation.isPending}
                   label={translate('Approve')}
                 />
               </>

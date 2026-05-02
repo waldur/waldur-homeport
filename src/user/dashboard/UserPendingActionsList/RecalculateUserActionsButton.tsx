@@ -1,45 +1,35 @@
 import { ArrowsClockwiseIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
 import { userActionsUpdateActions } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
-import { getUser } from '@/workspace/selectors';
+import { useUser } from '@/workspace/hooks';
 
 export const RecalculateUserActionsButton: FC<{ refetch?: () => void }> = ({
   refetch,
 }) => {
-  const dispatch = useDispatch();
-  const currentUser = useSelector(getUser);
+  const currentUser = useUser();
+
+  const recalculateMutation = useManagedMutation<any, any, void>({
+    mutationFn: () => userActionsUpdateActions(),
+    successMessage: translate(
+      'User actions have been recalculated successfully.',
+    ),
+    errorMessage: translate('Unable to recalculate user actions.'),
+    refetch,
+  });
 
   if (!currentUser?.is_staff) {
     return null;
   }
 
-  const onClick = async () => {
-    try {
-      await userActionsUpdateActions();
-      dispatch(
-        showSuccess(
-          translate('User actions have been recalculated successfully.'),
-        ),
-      );
-      if (refetch) {
-        refetch();
-      }
-    } catch (e) {
-      dispatch(
-        showErrorResponse(e, translate('Unable to recalculate user actions.')),
-      );
-    }
-  };
-
   return (
     <ActionItem
       title={translate('Recalculate user actions')}
-      action={onClick}
+      action={() => recalculateMutation.mutate()}
+      disabled={recalculateMutation.isPending}
       iconNode={<ArrowsClockwiseIcon weight="bold" />}
     />
   );

@@ -1,25 +1,17 @@
-import { CheckIcon, XIcon } from '@phosphor-icons/react';
-import { useMutation, useQueryClient } from '@tanstack/react-query';
 import { FC, useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { getFormValues } from 'redux-form';
 import { createSelector } from 'reselect';
-import {
-  CallReviewerPool,
-  callReviewerPoolsAccept,
-  callReviewerPoolsDecline,
-  callReviewerPoolsList,
-} from 'waldur-js-client';
+import { CallReviewerPool, callReviewerPoolsList } from 'waldur-js-client';
 
 import { formatDate, formatDateTime } from '@/core/dateUtils';
 import { translate } from '@/i18n';
-import { waitForConfirmation } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
 import { createFetcher } from '@/table/api';
-import { CompactActionButton } from '@/table/CompactActionButton';
 import Table from '@/table/Table';
 import { useTable } from '@/table/useTable';
 
+import { AcceptInvitationAction } from './AcceptInvitationAction';
+import { DeclineInvitationAction } from './DeclineInvitationAction';
 import {
   MyInvitationsFilter,
   MY_INVITATIONS_FILTER_FORM_ID,
@@ -34,95 +26,6 @@ type CallReviewerPoolExtended = CallReviewerPool & {
 };
 
 const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
-  const dispatch = useDispatch();
-  const queryClient = useQueryClient();
-
-  const acceptMutation = useMutation({
-    mutationFn: async () => {
-      await callReviewerPoolsAccept({
-        path: { uuid: row.uuid },
-        body: [], // Empty array for no COI declarations
-      });
-    },
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Invitation accepted.')));
-      queryClient.invalidateQueries({
-        queryKey: ['table', 'MyInvitationsTable'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['invitations-pending-count-tabs'],
-      });
-    },
-    onError: (error: any) => {
-      dispatch(
-        showErrorResponse(error, translate('Unable to accept invitation.')),
-      );
-    },
-  });
-
-  const declineMutation = useMutation({
-    mutationFn: async () => {
-      await callReviewerPoolsDecline({
-        path: { uuid: row.uuid },
-        body: { reason: translate('User declined') },
-      });
-    },
-    onSuccess: () => {
-      dispatch(showSuccess(translate('Invitation declined.')));
-      queryClient.invalidateQueries({
-        queryKey: ['table', 'MyInvitationsTable'],
-      });
-      queryClient.invalidateQueries({
-        queryKey: ['invitations-pending-count-tabs'],
-      });
-    },
-    onError: (error: any) => {
-      dispatch(
-        showErrorResponse(error, translate('Unable to decline invitation.')),
-      );
-    },
-  });
-
-  const handleAccept = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Accept invitation'),
-        translate(
-          'By accepting this invitation to review proposals for "{call}", you agree to:\n\n• Review assigned proposals within the specified deadlines\n• Maintain confidentiality of proposal contents\n• Declare any conflicts of interest',
-          { call: row.call_name },
-        ),
-        {
-          positiveButton: translate('Accept'),
-          positiveButtonVariant: 'primary',
-        },
-      );
-    } catch {
-      return;
-    }
-    acceptMutation.mutate();
-  };
-
-  const handleDecline = async () => {
-    try {
-      await waitForConfirmation(
-        dispatch,
-        translate('Decline invitation'),
-        translate(
-          'Are you sure you want to decline this invitation to review proposals for "{call}"?\n\nBy declining, you will not receive proposal assignments for this call. You can be re-invited later if needed.',
-          { call: row.call_name },
-        ),
-        {
-          positiveButton: translate('Decline'),
-          positiveButtonVariant: 'danger',
-        },
-      );
-    } catch {
-      return;
-    }
-    declineMutation.mutate();
-  };
-
   const isPending = row.invitation_status === 'pending';
 
   // Only show actions for pending invitations
@@ -132,20 +35,8 @@ const InvitationActions: FC<{ row: CallReviewerPoolExtended }> = ({ row }) => {
 
   return (
     <div className="d-flex gap-2">
-      <CompactActionButton
-        action={handleAccept}
-        title={translate('Accept')}
-        iconNode={<CheckIcon weight="bold" />}
-        variant="success"
-        pending={acceptMutation.isPending}
-      />
-      <CompactActionButton
-        action={handleDecline}
-        title={translate('Decline')}
-        iconNode={<XIcon weight="bold" />}
-        variant="outline-danger"
-        pending={declineMutation.isPending}
-      />
+      <AcceptInvitationAction row={row} />
+      <DeclineInvitationAction row={row} />
     </div>
   );
 };

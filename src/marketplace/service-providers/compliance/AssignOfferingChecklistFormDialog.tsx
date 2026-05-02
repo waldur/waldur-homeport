@@ -9,8 +9,7 @@ import {
 import { ProgressStep } from '@/core/ProgressSteps';
 import { WizardFormContainer } from '@/form/WizardFormContainer';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { ASSIGN_CHECKLIST_TO_OFFERINGS_FORM_ID } from '../constants';
 
@@ -40,35 +39,37 @@ interface OwnProps {
 }
 
 export const AssignOfferingChecklistFormDialog: FC<OwnProps> = (props) => {
-  const submitForm = useCallback(
-    async (
-      formData: { checklist: Checklist; offerings: ProviderOffering[] },
-      dispatch,
-      formProps,
-    ) => {
+  const assignMutation = useManagedMutation<
+    any,
+    any,
+    {
+      formData: { checklist: Checklist; offerings: ProviderOffering[] };
+      formProps: any;
+    }
+  >({
+    mutationFn: async (args) => {
+      const { formData, formProps } = args;
       if (!formData.checklist || !formData.offerings?.length) return;
-      try {
-        const promises = formData.offerings.map((offering) =>
-          marketplaceProviderOfferingsUpdateComplianceChecklist({
-            path: { uuid: offering.uuid },
-            body: { compliance_checklist: formData.checklist.uuid },
-          }),
-        );
-        await Promise.all(promises);
-
-        dispatch(
-          showSuccess(
-            translate('The checklist was assigned to the selected offerings'),
-          ),
-        );
-        formProps.destroy();
-        if (props.resolve.refetch) await props.resolve.refetch();
-        dispatch(closeModalDialog());
-      } catch (error) {
-        dispatch(showErrorResponse(error));
-      }
+      const promises = formData.offerings.map((offering) =>
+        marketplaceProviderOfferingsUpdateComplianceChecklist({
+          path: { uuid: offering.uuid },
+          body: { compliance_checklist: formData.checklist.uuid },
+        }),
+      );
+      await Promise.all(promises);
+      formProps.destroy();
     },
-    [props.resolve.refetch],
+    successMessage: translate(
+      'The checklist was assigned to the selected offerings',
+    ),
+    errorMessage: translate('Unable to assign checklist.'),
+    refetch: props.resolve.refetch,
+  });
+
+  const submitForm = useCallback(
+    (formData, _dispatch, formProps) =>
+      assignMutation.mutateAsync({ formData, formProps }),
+    [assignMutation],
   );
 
   return (

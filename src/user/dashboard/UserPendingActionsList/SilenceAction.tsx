@@ -1,47 +1,39 @@
 import { BellSlashIcon } from '@phosphor-icons/react';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import { UserAction, userActionsSilence } from 'waldur-js-client';
 
 import { translate } from '@/i18n';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionItem } from '@/resource/actions/ActionItem';
-import { showSuccess, showErrorResponse } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 
 export const SilenceAction: FC<{ row: UserAction; refetch?: () => void }> = ({
   row,
   refetch,
 }) => {
-  const dispatch = useDispatch();
+  const { showErrorResponse } = useNotify();
 
-  const handleSilence = async () => {
-    try {
-      await userActionsSilence({
-        path: { uuid: row.uuid as any },
-      });
-      dispatch(
-        showSuccess(translate('Action has been silenced successfully.')),
-      );
-      if (refetch) {
-        refetch();
-      }
-    } catch (e) {
+  const { mutate, isPending } = useManagedMutation<any, any, void>({
+    mutationFn: () => userActionsSilence({ path: { uuid: row.uuid as any } }),
+    successMessage: translate('Action has been silenced successfully.'),
+    refetch,
+    onError: (e: any) => {
       if (e.response?.status === 404) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Action not found or no longer available.'),
-          ),
+        showErrorResponse(
+          e,
+          translate('Action not found or no longer available.'),
         );
       } else {
-        dispatch(showErrorResponse(e, translate('Unable to silence action.')));
+        showErrorResponse(e, translate('Unable to silence action.'));
       }
-    }
-  };
+    },
+  });
 
   return (
     <ActionItem
       title={translate('Mute')}
-      action={handleSilence}
+      action={mutate}
+      disabled={isPending}
       iconNode={<BellSlashIcon weight="bold" />}
     />
   );

@@ -15,10 +15,10 @@ import { useSelector } from 'react-redux';
 import { Link } from '@/core/Link';
 import { translate } from '@/i18n';
 import { isDescendantOf } from '@/navigation/useTabs';
+import { useUser } from '@/workspace/hooks';
 import {
   getCustomer,
   getProject,
-  getUser,
   isStaffOrSupport,
 } from '@/workspace/selectors';
 
@@ -121,7 +121,7 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
   } = useContext(PermissionContext);
 
   const hasAllAccess = useSelector(isStaffOrSupport);
-  const user = useSelector(getUser);
+  const user = useUser();
   const project = useSelector(getProject);
   const customer = useSelector(getCustomer);
   const { state, params } = useCurrentStateAndParams();

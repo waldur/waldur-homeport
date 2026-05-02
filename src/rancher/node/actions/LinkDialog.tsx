@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { FC } from 'react';
-import { useDispatch } from 'react-redux';
 import {
   openstackInstancesList,
   rancherNodesLinkOpenstack,
@@ -9,15 +8,24 @@ import {
 import { getAllPages, MAX_PAGE_SIZE } from '@/core/api';
 import { UI_STALE_TIME } from '@/core/constants';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 
 export const LinkDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
+  const mutation = useManagedMutation<any, any, { instance: string }>({
+    mutationFn: (formData) =>
+      rancherNodesLinkOpenstack({
+        path: { uuid: resource.uuid },
+        body: formData,
+      }),
+
+    successMessage: translate('Instance has been linked.'),
+    errorMessage: translate('Unable to link instance.'),
+    refetch: refetch,
+  });
 
   const asyncState = useQuery({
     queryKey: ['openstackInstancesForLink', resource.project_uuid],
@@ -59,21 +67,7 @@ export const LinkDialog: FC<ActionDialogProps> = ({
     <ResourceActionDialog
       dialogTitle={translate('Link OpenStack Instance')}
       formFields={fields}
-      submitForm={async (formData) => {
-        try {
-          await rancherNodesLinkOpenstack({
-            path: { uuid: resource.uuid },
-            body: formData,
-          });
-          dispatch(showSuccess(translate('Instance has been linked.')));
-          dispatch(closeModalDialog());
-          if (refetch) {
-            await refetch();
-          }
-        } catch (e) {
-          dispatch(showErrorResponse(e, translate('Unable to link instance.')));
-        }
-      }}
+      submitForm={mutation.mutateAsync}
     />
   );
 };

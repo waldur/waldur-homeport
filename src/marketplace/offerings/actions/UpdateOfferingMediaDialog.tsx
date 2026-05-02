@@ -1,5 +1,4 @@
 import { FunctionComponent } from 'react';
-import { useDispatch } from 'react-redux';
 import { InjectedFormProps, reduxForm } from 'redux-form';
 import {
   marketplaceProviderOfferingsUpdateImage,
@@ -12,10 +11,9 @@ import { translate } from '@/i18n';
 import { UPDATE_OFFERING_MEDIA_FORM_ID } from '@/marketplace/offerings/actions/constants';
 import { ImageUploadField } from '@/marketplace/offerings/update/ImageUploadField';
 import { Offering } from '@/marketplace/types';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { showErrorResponse, showSuccess } from '@/store/notify';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { MediaType } from '../update/overview/types';
 
@@ -40,39 +38,34 @@ type PureUpdateOfferingMediaDialogProps = InjectedFormProps<
 const PureUpdateOfferingMediaDialog: FunctionComponent<
   PureUpdateOfferingMediaDialogProps
 > = (props) => {
-  const dispatch = useDispatch();
   const { mediaType, offering } = props.resolve;
 
-  const submitRequest = async (formData) => {
-    try {
+  const submitRequestMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
       if (mediaType === 'thumbnail') {
-        await marketplaceProviderOfferingsUpdateThumbnail({
+        return marketplaceProviderOfferingsUpdateThumbnail({
           path: { uuid: offering.uuid },
           body: { thumbnail: formData.images },
           ...formDataOptions,
         });
-        dispatch(showSuccess(translate('Logo has been updated successfully.')));
       } else {
-        await marketplaceProviderOfferingsUpdateImage({
+        return marketplaceProviderOfferingsUpdateImage({
           path: { uuid: offering.uuid },
           body: { image: formData.images },
           ...formDataOptions,
         });
-        dispatch(
-          showSuccess(translate('Image has been updated successfully.')),
-        );
       }
-
-      props.resolve.refetch();
-      dispatch(closeModalDialog());
-    } catch (error) {
-      const errorMessage =
-        mediaType === 'thumbnail'
-          ? translate('Unable to update logo.')
-          : translate('Unable to update image.');
-      dispatch(showErrorResponse(error, errorMessage));
-    }
-  };
+    },
+    successMessage:
+      mediaType === 'thumbnail'
+        ? translate('Logo has been updated successfully.')
+        : translate('Image has been updated successfully.'),
+    errorMessage:
+      mediaType === 'thumbnail'
+        ? translate('Unable to update logo.')
+        : translate('Unable to update image.'),
+    refetch: props.resolve.refetch,
+  });
 
   const mediaUrl =
     mediaType === 'thumbnail' ? offering.thumbnail : offering.image;
@@ -82,7 +75,11 @@ const PureUpdateOfferingMediaDialog: FunctionComponent<
       : translate('Update image');
 
   return (
-    <form onSubmit={props.handleSubmit(submitRequest)}>
+    <form
+      onSubmit={props.handleSubmit((values) =>
+        submitRequestMutation.mutateAsync(values),
+      )}
+    >
       <ModalDialog
         title={title}
         footer={

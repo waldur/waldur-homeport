@@ -5,11 +5,10 @@ import {
 } from '@phosphor-icons/react';
 import { FC, useCallback, useMemo } from 'react';
 import { Dropdown } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { Tip } from '@/core/Tooltip';
 import { translate } from '@/i18n';
-import { showSuccess } from '@/store/notify';
+import { useNotify } from '@/store/notify';
 import { CompactActionButton } from '@/table/CompactActionButton';
 
 import { getResourceAccessEndpoints, isSshFormat } from './utils';
@@ -32,7 +31,7 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
   resource,
   offering,
 }) => {
-  const dispatch = useDispatch();
+  const { showSuccess } = useNotify();
 
   const extendURLWithUsername = (url) => {
     const [protocol, restUrl] = url.split('://');
@@ -42,25 +41,22 @@ export const ResourceAccessButton: FC<ResourceAccessButtonProps> = ({
     }${port ? `:${port}` : ''}`;
   };
 
-  const copyText = useCallback(
-    (value) => {
-      if (isSshFormat(value) && resource.username) {
-        const [hostname, port] = value.split('://')[1].split(':');
-        const valueToCopy = `ssh ${resource.username}@${hostname}${
-          port ? ` -p ${port}` : ''
-        }`;
+  const copyText = useCallback((value) => {
+    if (isSshFormat(value) && resource.username) {
+      const [hostname, port] = value.split('://')[1].split(':');
+      const valueToCopy = `ssh ${resource.username}@${hostname}${
+        port ? ` -p ${port}` : ''
+      }`;
 
-        navigator.clipboard.writeText(valueToCopy).then(() => {
-          dispatch(showSuccess(translate('Text has been copied')));
-        });
-      } else {
-        navigator.clipboard.writeText(value).then(() => {
-          dispatch(showSuccess(translate('Text has been copied')));
-        });
-      }
-    },
-    [dispatch, resource.username],
-  );
+      navigator.clipboard.writeText(valueToCopy).then(() => {
+        showSuccess(translate('Text has been copied'));
+      });
+    } else {
+      navigator.clipboard.writeText(value).then(() => {
+        showSuccess(translate('Text has been copied'));
+      });
+    }
+  }, []);
 
   const endpoints = useMemo(
     () => getResourceAccessEndpoints(resource, offering),

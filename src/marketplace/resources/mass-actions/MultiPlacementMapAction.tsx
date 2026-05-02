@@ -1,10 +1,10 @@
 import { MapTrifoldIcon } from '@phosphor-icons/react';
 import { useMemo } from 'react';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { INSTANCE_TYPE } from '@/openstack/constants';
 import { ActionItem } from '@/resource/actions/ActionItem';
 import { isStaff as isStaffSelector } from '@/workspace/selectors';
@@ -16,7 +16,7 @@ const PlacementMapBatchDialog = lazyComponent(() =>
 );
 
 export const MultiPlacementMapAction = ({ rows }) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const isStaff = useSelector(isStaffSelector);
 
   const instances = useMemo(
@@ -25,12 +25,10 @@ export const MultiPlacementMapAction = ({ rows }) => {
   );
 
   const callback = () =>
-    dispatch(
-      openModalDialog(PlacementMapBatchDialog, {
-        resolve: { rows: instances },
-        size: 'xl',
-      }),
-    );
+    openDialog(PlacementMapBatchDialog, {
+      resolve: { rows: instances },
+      size: 'xl',
+    });
 
   if (!isStaff || instances.length === 0 || instances.length !== rows.length) {
     return null;

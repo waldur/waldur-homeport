@@ -1,8 +1,6 @@
-import { useDispatch } from 'react-redux';
-
 import { lazyComponent } from '@/core/lazyComponent';
 import { CompactEditButton } from '@/form/CompactEditButton';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { EditCallProps } from '@/proposals/types';
 
 const EditGeneralInfoDialog = lazyComponent(() =>
@@ -12,14 +10,12 @@ const EditGeneralInfoDialog = lazyComponent(() =>
 );
 
 export const EditGeneralInfoButton = (props: EditCallProps) => {
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   const callback = () => {
-    dispatch(
-      openModalDialog(EditGeneralInfoDialog, {
-        resolve: props,
-        size: 'lg',
-      }),
-    );
+    openDialog(EditGeneralInfoDialog, {
+      resolve: props,
+      size: 'lg',
+    });
   };
   return <CompactEditButton onClick={callback} variant="secondary" />;
 };

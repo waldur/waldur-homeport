@@ -1,11 +1,9 @@
-import { useQueryClient } from '@tanstack/react-query';
-import { useCallback } from 'react';
 import { Form, InputGroup } from 'react-bootstrap';
 import { Field, Form as FinalForm } from 'react-final-form';
-import { useDispatch } from 'react-redux';
 import {
   marketplaceOrdersUpdate,
   OrderDetails,
+  OrderUpdateRequest,
   PublicOfferingDetails,
 } from 'waldur-js-client';
 
@@ -16,10 +14,9 @@ import { translate } from '@/i18n';
 import { formatIntField, parseIntField } from '@/marketplace/common/utils';
 import { useOrderStartDateBounds } from '@/marketplace/deploy/steps/OrderStartDateField';
 import { getOfferingComponentValidator } from '@/marketplace/offerings/store/limits';
-import { closeModalDialog } from '@/modal/actions';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { ActionButton } from '@/table/ActionButton';
 
 interface EditOrderFieldDialogProps {
@@ -60,35 +57,30 @@ const LimitInput = (
 
 export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
   const { resolve } = props;
-  const dispatch = useDispatch();
-  const { showSuccess, showErrorResponse } = useNotify();
 
-  const queryClient = useQueryClient();
-
-  const onSubmit = useCallback(
-    async (formData) => {
-      try {
-        const payload: any = {};
-        if (resolve.name === 'start_date') {
-          payload.start_date = formData.start_date;
-        } else if (resolve.name === 'limits') {
-          payload.limits = formData.limits;
-        }
-        await marketplaceOrdersUpdate({
-          path: { uuid: resolve.order.uuid },
-          body: payload,
-        });
-        await queryClient.invalidateQueries({
-          queryKey: ['OrderDetails', resolve.order.uuid],
-        });
-        dispatch(showSuccess(translate('Order has been updated.')));
-        dispatch(closeModalDialog());
-      } catch (e) {
-        dispatch(showErrorResponse(e, translate('Unable to update order.')));
+  const updateMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
+      const payload: OrderUpdateRequest = {};
+      if (resolve.name === 'start_date') {
+        payload.start_date = formData.start_date;
+      } else if (resolve.name === 'limits') {
+        payload.limits = formData.limits;
       }
+      return marketplaceOrdersUpdate({
+        path: { uuid: resolve.order.uuid },
+        body: payload,
+      });
     },
-    [resolve, dispatch, showSuccess, showErrorResponse, queryClient],
-  );
+
+    successMessage: translate('Order has been updated.'),
+    errorMessage: translate('Unable to update order.'),
+
+    invalidateQueries: [
+      {
+        queryKey: ['OrderDetails', resolve.order.uuid],
+      },
+    ],
+  });
 
   const component = resolve.component
     ? resolve.offering.components.find((c) => c.type === resolve.component)
@@ -98,7 +90,7 @@ export const EditOrderFieldDialog = (props: EditOrderFieldDialogProps) => {
 
   return (
     <FinalForm
-      onSubmit={onSubmit}
+      onSubmit={(values) => updateMutation.mutateAsync(values)}
       initialValues={props.initialValues}
       render={({ handleSubmit, submitting, invalid }) => (
         <form onSubmit={handleSubmit}>

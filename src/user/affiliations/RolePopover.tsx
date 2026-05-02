@@ -1,11 +1,10 @@
 import { QuestionIcon } from '@phosphor-icons/react';
 import { Accordion, Card } from 'react-bootstrap';
-import { useDispatch } from 'react-redux';
 
 import { PermissionOptions } from '@/administration/roles/PermissionOptions';
 import { ENV } from '@/core/config';
 import { translate } from '@/i18n';
-import { openModalDialog } from '@/modal/actions';
+import { useModal } from '@/modal/actions';
 import { ModalDialog } from '@/modal/ModalDialog';
 import { DASH_ESCAPE_CODE } from '@/table/constants';
 
@@ -40,14 +39,14 @@ const RoleDetailsDialog = ({ role }) => (
 
 export const RolePopover = ({ roleName }) => {
   const role = ENV.roles.find((role) => role.name === roleName);
-  const dispatch = useDispatch();
+  const { openDialog } = useModal();
   return (
     <>
       {role?.description || role?.name || roleName}{' '}
       <QuestionIcon
         size={12}
         weight="bold"
-        onClick={() => dispatch(openModalDialog(RoleDetailsDialog, { role }))}
+        onClick={() => openDialog(RoleDetailsDialog, { role })}
       />
     </>
   );

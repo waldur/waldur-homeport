@@ -1,7 +1,7 @@
 import { useQuery } from '@tanstack/react-query';
-import { FC, useCallback, useMemo } from 'react';
+import { FC, useMemo } from 'react';
 import { Col, Form, Row } from 'react-bootstrap';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import { useToggle } from 'react-use';
 import { Field, formValueSelector } from 'redux-form';
 import { openstackPortsCreate, OpenStackSubNet } from 'waldur-js-client';
@@ -11,7 +11,7 @@ import { SHORT_STALE_TIME } from '@/core/constants';
 import { isMatchPattern, required } from '@/core/validators';
 import { FormGroup, SelectField } from '@/form';
 import { translate } from '@/i18n';
-import { closeModalDialog } from '@/modal/actions';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 import { loadNetworks, loadSubnets } from '@/openstack/api';
 import {
   CustomIpField,
@@ -24,7 +24,6 @@ import {
 import { RESOURCE_ACTION_FORM } from '@/resource/actions/constants';
 import { ResourceActionDialog } from '@/resource/actions/ResourceActionDialog';
 import { ActionDialogProps } from '@/resource/actions/types';
-import { showSuccess, showErrorResponse } from '@/store/notify';
 import { RootState } from '@/store/reducers';
 
 const MAC_ADDRESS_PATTERN = new RegExp(
@@ -102,7 +101,6 @@ export const FixedIPsField: FC<{
 export const CreatePortDialog: FC<ActionDialogProps> = ({
   resolve: { resource, refetch },
 }) => {
-  const dispatch = useDispatch();
   const network = useSelector(networkSelector);
 
   const {
@@ -148,8 +146,19 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
     [networks],
   );
 
-  const submitForm = useCallback(
-    async (formData) => {
+  const mutation = useManagedMutation<
+    any,
+    any,
+    {
+      name: string;
+      description?: string;
+      network: { url: string };
+      fixed_ips?: { subnet: { backend_id: string }; fixed_ip?: string };
+      mac_address?: string;
+      port_security_enabled?: boolean;
+    }
+  >({
+    mutationFn: (formData) => {
       let fixed_ips;
       if (formData.fixed_ips) {
         fixed_ips = [
@@ -162,31 +171,18 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
 
       const body = {
         ...formData,
+        network: formData.network?.url,
         fixed_ips,
         port_security_enabled: formData.port_security_enabled || false,
         target_tenant: resource.url,
       };
 
-      try {
-        await openstackPortsCreate({ body });
-        dispatch(
-          showSuccess(translate('OpenStack network port has been created.')),
-        );
-        dispatch(closeModalDialog());
-        if (refetch) {
-          await refetch();
-        }
-      } catch (e) {
-        dispatch(
-          showErrorResponse(
-            e,
-            translate('Unable to create OpenStack network port.'),
-          ),
-        );
-      }
+      return openstackPortsCreate({ body });
     },
-    [dispatch, refetch],
-  );
+    successMessage: translate('OpenStack network port has been created.'),
+    errorMessage: translate('Unable to create OpenStack network port.'),
+    refetch,
+  });
 
   return (
     <ResourceActionDialog
@@ -194,7 +190,7 @@ export const CreatePortDialog: FC<ActionDialogProps> = ({
       loading={isLoadingNetworks}
       error={errorNetworks}
       refetch={refetchNetworks}
-      submitForm={submitForm}
+      submitForm={mutation.mutateAsync}
       formFields={[
         createLatinNameField(),
         createDescriptionField(),

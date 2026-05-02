@@ -15,9 +15,8 @@ import { translate } from '@/i18n';
 import { FormGroup } from '@/marketplace/offerings/FormGroup';
 import { isExperimentalUiComponentsVisible } from '@/marketplace/utils';
 import { CloseDialogButton } from '@/modal/CloseDialogButton';
-import { useModal } from '@/modal/hooks';
 import { ModalDialog } from '@/modal/ModalDialog';
-import { useNotify } from '@/store/hooks';
+import { useManagedMutation } from '@/modal/useManagedMutation';
 
 import { checklistTypeOptions } from '../utils';
 
@@ -33,42 +32,34 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
   resolve: { checklistUuid, refetch },
   initialValues,
 }) => {
-  const { closeDialog } = useModal();
-  const { showSuccess, showErrorResponse } = useNotify();
   const isEdit = Boolean(checklistUuid);
 
-  const onSubmit = async (formData) => {
-    try {
+  const onSubmitMutation = useManagedMutation<any, any, any>({
+    mutationFn: (formData) => {
       const body: ChecklistRequest = {
         name: formData.name,
         description: formData.description,
         checklist_type: formData.checklist_type,
       };
       if (isEdit) {
-        await checklistsAdminPartialUpdate({
+        return checklistsAdminPartialUpdate({
           path: { uuid: checklistUuid },
           body,
         }).then((response) => response.data);
       } else {
-        await checklistsAdminCreate({ body }).then((response) => response.data);
+        return checklistsAdminCreate({ body }).then(
+          (response) => response.data,
+        );
       }
-
-      refetch();
-      showSuccess(
-        isEdit
-          ? translate('Checklist has been updated.')
-          : translate('Checklist has been added.'),
-      );
-      closeDialog();
-    } catch (e) {
-      showErrorResponse(
-        e,
-        isEdit
-          ? translate('Unable to update checklist.')
-          : translate('Unable to add checklist.'),
-      );
-    }
-  };
+    },
+    successMessage: isEdit
+      ? translate('Checklist has been updated.')
+      : translate('Checklist has been added.'),
+    errorMessage: isEdit
+      ? translate('Unable to update checklist.')
+      : translate('Unable to add checklist.'),
+    refetch,
+  });
 
   const showExperimentalUiComponents = isExperimentalUiComponentsVisible();
   const allowedChecklistTypeOptions = useMemo(
@@ -83,7 +74,7 @@ export const ChecklistFormDialog: FC<ChecklistFormDialogProps> = ({
 
   return (
     <Form
-      onSubmit={onSubmit}
+      onSubmit={(values) => onSubmitMutation.mutateAsync(values)}
       initialValues={initialValues}
       render={({ handleSubmit, submitting, pristine, invalid }) => (
         <form onSubmit={handleSubmit}>
