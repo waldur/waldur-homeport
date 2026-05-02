@@ -1,6 +1,5 @@
 import { useQuery } from '@tanstack/react-query';
 import { UIView, useCurrentStateAndParams } from '@uirouter/react';
-import { get } from 'lodash-es';
 import { useMemo } from 'react';
 import {
   marketplaceCategoriesRetrieve,
@@ -69,16 +68,6 @@ const UserAttributeConfigSection = lazyComponent(() =>
 const LexisLinkIntegrationSection = lazyComponent(() =>
   import('./update/integration/LexisLinkIntegrationSection').then((module) => ({
     default: module.LexisLinkIntegrationSection,
-  })),
-);
-const KeycloakIntegrationSection = lazyComponent(() =>
-  import('./keycloak/KeycloakIntegrationSection').then((module) => ({
-    default: module.KeycloakIntegrationSection,
-  })),
-);
-const KeycloakGroupsSection = lazyComponent(() =>
-  import('./keycloak/KeycloakGroupsSection').then((module) => ({
-    default: module.KeycloakGroupsSection,
   })),
 );
 const TosManagementSection = lazyComponent(() =>
@@ -169,7 +158,6 @@ const getTabs = (offering: Offering): PageBarTab[] => {
   const PluginOptionsForm = getPluginOptionsForm(offering.type);
   const provisioningConfigForm = getProvisioningConfigForm(offering.type);
 
-  // Always show integration tab — Keycloak integration is available for any offering type
   tabs.push({
     key: 'integration',
     title: (
@@ -222,20 +210,6 @@ const getTabs = (offering: Offering): PageBarTab[] => {
             key: 'lexis-link-integration',
             component: LexisLinkIntegrationSection,
             title: translate('LEXIS integration'),
-          }
-        : null,
-      get(offering, 'plugin_options.keycloak_enabled')
-        ? {
-            key: 'keycloak-integration',
-            component: KeycloakIntegrationSection,
-            title: translate('Keycloak settings'),
-          }
-        : null,
-      get(offering, 'plugin_options.keycloak_enabled')
-        ? {
-            key: 'keycloak-groups',
-            component: KeycloakGroupsSection,
-            title: translate('Keycloak groups'),
           }
         : null,
       provisioningConfigForm ||
