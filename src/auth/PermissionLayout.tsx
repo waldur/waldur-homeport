@@ -209,7 +209,9 @@ const PermissionLayout: FC<PropsWithChildren> = ({ children }) => {
         }
       } else if (
         user.permissions.filter((permission) =>
-          ['customer', 'project'].includes(permission.scope_type),
+          ['customer', 'project', 'resource', 'resource_project'].includes(
+            permission.scope_type,
+          ),
         ).length === 0 &&
         state.name === 'profile.details'
       ) {

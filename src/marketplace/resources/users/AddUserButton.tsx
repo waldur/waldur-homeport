@@ -1,11 +1,11 @@
-import { PlusCircleIcon } from '@phosphor-icons/react';
+import { UserPlusIcon } from '@phosphor-icons/react';
 import { FunctionComponent } from 'react';
 import { useDispatch } from 'react-redux';
 
 import { lazyComponent } from '@/core/lazyComponent';
 import { translate } from '@/i18n';
 import { openModalDialog } from '@/modal/actions';
-import { ActionButton } from '@/table/ActionButton';
+import { ActionItem } from '@/resource/actions/ActionItem';
 
 const AddUserDialog = lazyComponent(() =>
   import('./AddUserDialog').then((module) => ({
@@ -13,24 +13,49 @@ const AddUserDialog = lazyComponent(() =>
   })),
 );
 
-export const AddUserButton: FunctionComponent<{
-  resource;
+interface AddUserButtonProps {
+  scope: 'resource' | 'resource_project';
+  scopeUuid: string;
+  projectUuid: string;
   offering;
-  refetch;
-}> = ({ resource, offering, refetch }) => {
+  refetch();
+  /**
+   * When true, renders the action disabled with an explanatory tooltip
+   * (matches org `UserAddButton` behaviour for non-staff users).
+   */
+  disabled?: boolean;
+  tooltip?: string;
+}
+
+/**
+ * "Assign existing user" action. Renders as an `ActionItem` so it
+ * sits inside the Team toolbar's Add dropdown alongside Invite,
+ * matching the org-level Team page pattern.
+ */
+export const AddUserButton: FunctionComponent<AddUserButtonProps> = ({
+  scope,
+  scopeUuid,
+  projectUuid,
+  offering,
+  refetch,
+  disabled,
+  tooltip,
+}) => {
   const dispatch = useDispatch();
   const callback = () => {
     dispatch(
       openModalDialog(AddUserDialog, {
-        resolve: { resource, offering, refetch },
+        resolve: { scope, scopeUuid, projectUuid, offering, refetch },
       }),
     );
   };
   return (
-    <ActionButton
-      iconNode={<PlusCircleIcon weight="bold" />}
-      title={translate('Assign user')}
+    <ActionItem
+      iconNode={<UserPlusIcon weight="bold" />}
+      title={translate('Member')}
       action={callback}
+      disabled={disabled}
+      tooltip={tooltip}
     />
   );
 };

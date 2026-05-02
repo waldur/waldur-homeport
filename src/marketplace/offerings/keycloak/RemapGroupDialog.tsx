@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
-  marketplaceOfferingUserRolesList,
+  marketplaceOfferingRolesList,
   marketplaceResourcesList,
   OfferingKeycloakGroup,
   offeringKeycloakGroupsRemoteGroupsList,
@@ -79,11 +79,11 @@ export const RemapGroupDialog: FC<RemapGroupDialogProps> = ({ resolve }) => {
     queryKey: ['OfferingRoles', resolve.offering_uuid],
     queryFn: () =>
       getAllPages((page) =>
-        marketplaceOfferingUserRolesList({
+        marketplaceOfferingRolesList({
           query: {
             page,
             page_size: MAX_PAGE_SIZE,
-            offering_uuid: [resolve.offering_uuid],
+            offering_uuid: resolve.offering_uuid,
           },
         }),
       ),
@@ -92,7 +92,7 @@ export const RemapGroupDialog: FC<RemapGroupDialogProps> = ({ resolve }) => {
 
   const scopeTypes = useMemo(() => {
     if (!roles) return [];
-    return [...new Set(roles.map((r) => r.scope_type).filter(Boolean))];
+    return [...new Set(roles.map((r) => r.content_type).filter(Boolean))];
   }, [roles]);
 
   const save = useCallback(
@@ -208,7 +208,7 @@ export const RemapGroupDialog: FC<RemapGroupDialogProps> = ({ resolve }) => {
               />
             </FormGroup>
 
-            {scopeTypes.length > 0 && values?.role?.scope_type && (
+            {scopeTypes.length > 0 && values?.role?.content_type && (
               <FormGroup
                 label={translate('Scope ID')}
                 description={translate(

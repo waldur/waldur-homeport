@@ -38,6 +38,7 @@ import { ResourceBreadcrumbPopover } from './ResourceBreadcrumbPopover';
 import { ResourceDetailsHero } from './ResourceDetailsHero';
 import { ServiceProviderCommentWarningBar } from './ServiceProviderCommentWarningBar';
 import { TosConsentWarningBanner } from './TosConsentWarningBanner';
+import { useIsResourceProjectOnlyViewer } from './useIsResourceProjectOnlyViewer';
 
 const ResourceTeamDialog = lazyComponent(() =>
   import('./ResourceTeamDialog').then((module) => ({
@@ -137,6 +138,7 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
     }
   }, [resource, resourceState]);
 
+  const isRPOnly = useIsResourceProjectOnlyViewer(resource);
   const tabs = useMemo(
     () =>
       data
@@ -145,9 +147,10 @@ export const ResourceDetailsContainer: FunctionComponent<{}> = () => {
             resource,
             isStaff: user?.is_staff,
             isSupport: user?.is_support,
+            isRPOnly,
           })
         : [],
-    [resource, data, user?.is_staff, user?.is_support],
+    [resource, data, user?.is_staff, user?.is_support, isRPOnly],
   );
 
   useTitle(resource?.name);

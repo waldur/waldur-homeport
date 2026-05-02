@@ -113,6 +113,50 @@ export const states: StateDeclaration[] = [
   },
 
   {
+    name: 'admin-marketplace-offering-profiles',
+    url: 'offering-profiles/',
+    parent: 'admin-marketplace',
+    component: lazyComponent(() =>
+      import('@/marketplace/offerings/profiles/OfferingProfilesList').then(
+        (module) => ({
+          default: module.OfferingProfilesList,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Service profiles'),
+    },
+  },
+  {
+    name: 'admin-role-availabilities',
+    url: 'role-availabilities/',
+    parent: 'admin-configuration',
+    component: lazyComponent(() =>
+      import('./role-availabilities/RoleAvailabilitiesList').then((module) => ({
+        default: module.RoleAvailabilitiesList,
+      })),
+    ),
+    data: {
+      breadcrumb: () => translate('Role availabilities'),
+    },
+  },
+  {
+    name: 'admin-marketplace-offering-profile-detail',
+    url: 'offering-profiles/:uuid/',
+    parent: 'admin-marketplace',
+    component: lazyComponent(() =>
+      import('@/marketplace/offerings/profiles/OfferingProfileDetail').then(
+        (module) => ({
+          default: module.OfferingProfileDetail,
+        }),
+      ),
+    ),
+    data: {
+      breadcrumb: () => translate('Service profile'),
+    },
+  },
+
+  {
     name: 'admin-table-growth-settings',
     url: 'table-growth-settings/',
     parent: 'admin-system-management',

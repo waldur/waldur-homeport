@@ -3,11 +3,11 @@ import { useQuery } from '@tanstack/react-query';
 import { FC, useCallback, useMemo } from 'react';
 import { Field, Form } from 'react-final-form';
 import {
-  marketplaceOfferingUserRolesList,
+  marketplaceOfferingRolesList,
   marketplaceResourcesList,
   offeringKeycloakGroupsImportRemote,
   offeringKeycloakGroupsRemoteGroupsList,
-  OfferingUserRole,
+  OfferingRole,
   PublicOfferingDetails,
   RemoteGroup,
   Resource,
@@ -65,11 +65,11 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
     queryKey: ['OfferingRoles', resolve.offering.uuid],
     queryFn: () =>
       getAllPages((page) =>
-        marketplaceOfferingUserRolesList({
+        marketplaceOfferingRolesList({
           query: {
             page,
             page_size: MAX_PAGE_SIZE,
-            offering_uuid: [resolve.offering.uuid],
+            offering_uuid: resolve.offering.uuid,
           },
         }),
       ),
@@ -78,7 +78,7 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
 
   const scopeTypes = useMemo(() => {
     if (!roles) return [];
-    return [...new Set(roles.map((r) => r.scope_type).filter(Boolean))];
+    return [...new Set(roles.map((r) => r.content_type).filter(Boolean))];
   }, [roles]);
 
   const {
@@ -189,9 +189,11 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
                 component={SelectField as any}
                 isLoading={isLoadingRoles}
                 options={roles || []}
-                getOptionValue={(opt: OfferingUserRole) => opt.uuid}
-                getOptionLabel={(opt: OfferingUserRole) =>
-                  opt.scope_type ? `${opt.name} (${opt.scope_type})` : opt.name
+                getOptionValue={(opt: OfferingRole) => opt.uuid}
+                getOptionLabel={(opt: OfferingRole) =>
+                  opt.content_type
+                    ? `${opt.name} (${opt.content_type})`
+                    : opt.name
                 }
               />
             </FormGroup>
@@ -218,7 +220,7 @@ export const ImportRemoteGroupDialog: FC<ImportRemoteGroupDialogProps> = ({
               />
             </FormGroup>
 
-            {scopeTypes.length > 0 && values?.role?.scope_type && (
+            {scopeTypes.length > 0 && values?.role?.content_type && (
               <FormGroup
                 label={translate('Scope ID')}
                 description={translate(

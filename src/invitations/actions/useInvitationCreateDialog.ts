@@ -16,13 +16,18 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
 
   const defaultProject = useMemo(
     () =>
-      context.roleTypes.includes('project') &&
-      (context.project || context.customer.projects?.[0]),
+      context.roleTypes?.includes('project') &&
+      (context.project || context.customer?.projects?.[0]),
     [context],
   );
 
   // Enabling/disabling roles toggles their 'is_active' property; therefore, we filter based on that property
   const roles = useMemo(() => {
+    if (context.rolesOverride) {
+      // Scoped caller (e.g. resource invite) supplied a backend-filtered list;
+      // use it verbatim and skip ENV.roles + policy filtering.
+      return context.rolesOverride.filter((role) => role.is_active !== false);
+    }
     const _roles = context.roles
       ? ENV.roles.filter((role) => context.roles.includes(role.name))
       : ENV.roles.filter(
@@ -52,7 +57,7 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
         return row.role_project.project?.url ?? null;
       }
       if (row.role_project.role.content_type === 'customer') {
-        return context.customer.url;
+        return context.customer?.url ?? null;
       }
       return context.scope?.url ?? null;
     },
@@ -123,9 +128,9 @@ export const useInvitationCreateDialog = (context: InvitationContext) => {
           const promises = validRows.map((row) => {
             let scope;
             if (row.role_project.role.content_type === 'project') {
-              scope = row.role_project.project.url;
+              scope = row.role_project.project?.url;
             } else if (row.role_project.role.content_type === 'customer') {
-              scope = context.customer.url;
+              scope = context.customer?.url;
             } else if (context.scope) {
               scope = context.scope.url;
             }

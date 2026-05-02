@@ -123,6 +123,14 @@ const resourceCapabilitiesFields: OfferingEditField[] = [
     ),
   },
   {
+    label: translate('Enable resource projects'),
+    key: 'plugin_options.enable_resource_projects',
+    component: AwesomeCheckboxField,
+    description: translate(
+      'When enabled, a Projects tab is shown on resource detail pages, allowing management of sub-projects within a resource',
+    ),
+  },
+  {
     label: translate('Enable SLURM periodic usage policy'),
     key: 'plugin_options.slurm_periodic_policy_enabled',
     component: AwesomeCheckboxField,

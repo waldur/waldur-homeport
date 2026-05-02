@@ -3,7 +3,7 @@ import { useQuery } from '@tanstack/react-query';
 import { useCallback, useState } from 'react';
 import { useDispatch } from 'react-redux';
 import {
-  marketplaceOfferingUserRolesDestroy,
+  marketplaceOfferingRolesDestroy,
   OfferingKeycloakMembership,
   offeringKeycloakMembershipsList,
 } from 'waldur-js-client';
@@ -38,7 +38,7 @@ export const DeleteRoleDialog = ({
   const handleDelete = useCallback(async () => {
     setSubmitting(true);
     try {
-      await marketplaceOfferingUserRolesDestroy({ path: { uuid: row.uuid } });
+      await marketplaceOfferingRolesDestroy({ path: { uuid: row.uuid } });
       dispatch(showSuccess(translate('Role has been removed.')));
       if (refetch) await refetch();
       dispatch(closeModalDialog());

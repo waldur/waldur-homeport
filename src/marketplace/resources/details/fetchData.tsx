@@ -31,6 +31,7 @@ export const getResourceTabs = ({
   robotAccountsCount,
   isStaff,
   isSupport,
+  isRPOnly = false,
 }: {
   resource: Resource;
   offering: PublicOfferingDetails;
@@ -39,6 +40,7 @@ export const getResourceTabs = ({
   robotAccountsCount;
   isStaff: boolean;
   isSupport?: boolean;
+  isRPOnly?: boolean;
 }) => {
   // Generate tabs
   const tabs: PageBarTab<{
@@ -192,24 +194,40 @@ export const getResourceTabs = ({
     });
   }
 
-  if (offering.roles?.length > 0) {
-    const keycloakEnabled = (offering.plugin_options as any)?.keycloak_enabled;
+  if ((offering.plugin_options as any)?.enable_resource_projects) {
+    tabs.push({
+      key: 'team',
+      title: translate('Team'),
+      component: lazyComponent(() =>
+        import('@/marketplace/resources/users/ResourceTeamTab').then(
+          (module) => ({
+            default: module.ResourceTeamTab,
+          }),
+        ),
+      ),
+    });
+    tabs.push({
+      key: 'resource-projects',
+      title: translate('Resource projects'),
+      component: lazyComponent(() =>
+        import('@/marketplace/resources/projects/ResourceProjectsList').then(
+          (module) => ({
+            default: module.ResourceProjectsList,
+          }),
+        ),
+      ),
+    });
+  } else if ((offering.plugin_options as any)?.keycloak_enabled) {
     tabs.push({
       key: 'users',
       title: translate('Roles'),
-      component: keycloakEnabled
-        ? lazyComponent(() =>
-            import('@/marketplace/offerings/keycloak/OfferingKeycloakMembershipList').then(
-              (module) => ({
-                default: module.OfferingKeycloakMembershipList,
-              }),
-            ),
-          )
-        : lazyComponent(() =>
-            import('../users/ResourceUsersList').then((module) => ({
-              default: module.ResourceUsersList,
-            })),
-          ),
+      component: lazyComponent(() =>
+        import('@/marketplace/offerings/keycloak/OfferingKeycloakMembershipList').then(
+          (module) => ({
+            default: module.OfferingKeycloakMembershipList,
+          }),
+        ),
+      ),
     });
   }
 
@@ -311,6 +329,19 @@ export const getResourceTabs = ({
         })),
       ),
     });
+  }
+
+  if (isRPOnly) {
+    // ResourceProject-only viewers get a minimal subset: a way to land on the
+    // page (Getting started), navigate to "their" sub-project, and reach
+    // support. Everything else (quotas, usage, metadata, team, invitations,
+    // resource-type-specific dashboards) is hidden.
+    const RP_ONLY_TAB_KEYS = new Set([
+      'getting-started',
+      'resource-projects',
+      'support',
+    ]);
+    return tabs.filter((tab) => RP_ONLY_TAB_KEYS.has(tab.key));
   }
 
   return tabs;

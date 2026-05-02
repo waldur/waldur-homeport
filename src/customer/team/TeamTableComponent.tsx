@@ -1,4 +1,4 @@
-import { useMemo } from 'react';
+import { ReactNode, useMemo } from 'react';
 
 import Avatar from '@/core/Avatar';
 import { ENV } from '@/core/config';
@@ -20,9 +20,20 @@ export const renderRoleExpirationDate = (row) => {
 };
 
 interface TeamTableComponentProps<T> extends TableProps<T> {
-  context?: 'project' | 'organization';
+  context?: 'project' | 'organization' | 'resource_project';
   userFieldPrefix?: string;
   hideRole?: boolean;
+  /**
+   * Extra columns appended to the default Member/Email/Username/Role/Expiration
+   * set. Useful for surfacing context-specific data per scope.
+   */
+  extraColumns?: Column<T>[];
+  /**
+   * Optional small inline hint rendered next to the role (or in place of
+   * a missing role). The resource Team tab uses this to show
+   * "in N projects" for users who only have sub-project grants.
+   */
+  roleSuffix?: (row: T) => ReactNode;
 }
 
 interface GenericTeamMember extends Partial<GenericPermission> {
@@ -39,6 +50,8 @@ export const TeamTableComponent = <
   context,
   userFieldPrefix: prefix = '',
   hideRole,
+  extraColumns,
+  roleSuffix,
   ...props
 }: TeamTableComponentProps<T>) => {
   const getKey = (field) => (prefix + field) as keyof GenericTeamMember;
@@ -92,7 +105,15 @@ export const TeamTableComponent = <
               : context === 'project'
                 ? translate('Role in project')
                 : translate('Role'),
-          render: RoleField,
+          render: ({ row }) => {
+            const suffix = roleSuffix ? roleSuffix(row as T) : null;
+            return (
+              <span className="d-inline-flex align-items-center gap-2">
+                <RoleField row={row} />
+                {suffix && <span className="text-muted small">{suffix}</span>}
+              </span>
+            );
+          },
           className: 'w-25',
           filter:
             context === 'organization'
@@ -114,8 +135,9 @@ export const TeamTableComponent = <
           id: 'expiration_time',
           keys: ['expiration_time'],
         },
+        ...(extraColumns ?? []),
       ].filter(Boolean) as Column<T>[],
-    [context],
+    [context, extraColumns, roleSuffix],
   );
 
   return (
