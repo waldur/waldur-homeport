@@ -86,14 +86,6 @@ const networkFields: OfferingEditField[] = [
 // Operations fields
 const operationsFields: OfferingEditField[] = [
   {
-    label: translate('CPU allocation ratio'),
-    description: translate(
-      'CPU overcommit ratio. Effective vCPUs = physical vCPUs × ratio. Leave empty to use the cloud default.',
-    ),
-    key: 'service_attributes.cpu_allocation_ratio',
-    component: NumberField,
-  },
-  {
     label: translate('Allow live volume resize'),
     description: translate(
       'Allow live volume resize of system and data volumes.',
